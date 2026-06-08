@@ -1,0 +1,1343 @@
+[
+  {
+    "id": "TR-0001",
+    "title": "有人发热",
+    "category": "健康与医疗",
+    "trigger_keywords": [
+      "发热",
+      "发烧",
+      "体温高",
+      "高热",
+      "低烧"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "咳嗽发热照护",
+      "疑似传染症状分区",
+      "症状时间线记录",
+      "洗手关键时刻"
+    ],
+    "ai_prompt": "先确认年龄、持续时间、伴随症状，并给出隔离、补水、观察和记录建议。",
+    "suggested_actions": [
+      "固定休息区",
+      "个人水杯餐具",
+      "记录体温感、饮水、精神和呼吸",
+      "暂不参与厨房饮水和儿童照护"
+    ],
+    "follow_up": [
+      "4小时后询问状态",
+      "次日复查是否新增不适"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "持续追踪"
+  },
+  {
+    "id": "TR-0002",
+    "title": "腹泻或呕吐",
+    "category": "健康与医疗",
+    "trigger_keywords": [
+      "腹泻",
+      "拉肚子",
+      "呕吐",
+      "吐了",
+      "食物中毒",
+      "上吐下泻"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "腹泻呕吐隔离流程",
+      "症状时间线记录",
+      "饮水保护",
+      "洗手关键时刻",
+      "剩食安全处理"
+    ],
+    "ai_prompt": "优先判断是否多人同时出现、是否能喝水、尿量是否减少，并关联水源和食物记录。",
+    "suggested_actions": [
+      "隔离餐具和垃圾",
+      "记录次数、颜色、发热、饮水和尿量",
+      "暂停可疑剩食和水源",
+      "照护者处理后洗手"
+    ],
+    "follow_up": [
+      "2小时后追踪是否能饮水",
+      "晚间复查共同食物和水源"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "持续追踪"
+  },
+  {
+    "id": "TR-0003",
+    "title": "出血或外伤",
+    "category": "健康与医疗",
+    "trigger_keywords": [
+      "出血",
+      "流血",
+      "割伤",
+      "摔伤",
+      "伤口",
+      "划伤",
+      "撞伤"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "直接压迫止血",
+      "伤口清洁边界",
+      "急救角色演练",
+      "伤员转运信息卡"
+    ],
+    "ai_prompt": "优先判断出血量、部位、是否止住、是否有异物和意识变化。",
+    "suggested_actions": [
+      "先压迫止血",
+      "避免污染伤口",
+      "记录受伤时间和处理",
+      "污染工具单独处理"
+    ],
+    "follow_up": [
+      "30分钟后询问是否继续出血",
+      "次日观察感染迹象"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "持续追踪"
+  },
+  {
+    "id": "TR-0004",
+    "title": "呼吸困难或意识异常",
+    "category": "健康与医疗",
+    "trigger_keywords": [
+      "呼吸困难",
+      "喘不上气",
+      "意识不清",
+      "昏迷",
+      "嘴唇发紫",
+      "抽搐"
+    ],
+    "severity": "紧急",
+    "related_guides": [
+      "生命体征初查",
+      "中暑后恢复观察",
+      "低温后睡眠看护",
+      "伤员转运信息卡"
+    ],
+    "ai_prompt": "立即停止普通流程，优先判断呼吸、意识、环境危险和是否需要转移或求救。",
+    "suggested_actions": [
+      "停止其他任务",
+      "确认呼吸和意识",
+      "安排记录者和取物者",
+      "准备转运信息卡"
+    ],
+    "follow_up": [
+      "10分钟内再次确认状态",
+      "事件后完整记录"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "紧急提醒"
+  },
+  {
+    "id": "TR-0005",
+    "title": "伤口感染迹象",
+    "category": "健康与医疗",
+    "trigger_keywords": [
+      "红肿",
+      "化脓",
+      "伤口发热",
+      "流脓",
+      "伤口臭味"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "长期伤口观察",
+      "伤口清洁边界",
+      "药物与医疗物资管理"
+    ],
+    "ai_prompt": "提示复查伤口变化、清洁记录、是否发热，并建议减少污染接触。",
+    "suggested_actions": [
+      "记录红肿范围和时间",
+      "检查包扎是否潮湿污染",
+      "不要徒手触碰伤口"
+    ],
+    "follow_up": [
+      "次日复查伤口变化"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "复查提醒"
+  },
+  {
+    "id": "TR-0006",
+    "title": "饮用水不足",
+    "category": "水与食物",
+    "trigger_keywords": [
+      "水不多",
+      "缺水",
+      "饮用水快没了",
+      "只剩一桶水",
+      "没水",
+      "水不够",
+      "饮用水不够",
+      "水已经不够",
+      "不够2天",
+      "不够两天",
+      "撑不到2天",
+      "撑不到两天",
+      "只够2天",
+      "只够两天",
+      "不到2天",
+      "不到两天",
+      "水快用完",
+      "储水不足",
+      "饮用水不足"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "缺水时用途排序",
+      "紧急配水记录",
+      "备用水封存",
+      "高温缺水观察"
+    ],
+    "ai_prompt": "询问当前人数、可饮用水数量、天气和是否有病人，并给出配水和取水优先级。",
+    "suggested_actions": [
+      "立即统计当前可饮用水总量，并换算还能支撑几天",
+      "统计当前人数，以及儿童、老人、病人、重体力成员等优先用水对象",
+      "暂停洗衣、拖地、冲洗地面、浇灌植物等非必要耗水",
+      "保留关键洗手用水，优先用于如厕后、做饭前、取饮用水前和处理伤口前后",
+      "按饮用、用药、最低限度烹饪、关键卫生的顺序分配用水",
+      "检查备用水、瓶装水、已净化水和可安全处理的水源",
+      "建立紧急配水记录，每天固定时间复查剩余水量"
+    ],
+    "follow_up": [
+      "晚间复核剩余水量",
+      "次日提醒取水或净水"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "持续追踪"
+  },
+  {
+    "id": "TR-0007",
+    "title": "水源异常",
+    "category": "水与食物",
+    "trigger_keywords": [
+      "水有味道",
+      "水变色",
+      "油膜",
+      "水里有虫",
+      "水源污染",
+      "井水异常"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "水质异常初筛",
+      "取水点风险复核",
+      "洪水后饮水保护",
+      "饮用水分区储存"
+    ],
+    "ai_prompt": "提醒暂停入口使用，隔离可疑水，记录来源和异常类型。",
+    "suggested_actions": [
+      "停止直接饮用",
+      "贴待处理标签",
+      "检查同批水是否已使用",
+      "推荐备用水或重新净化"
+    ],
+    "follow_up": [
+      "2小时后确认是否有人饮用后不适",
+      "次日更新水源状态"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "持续追踪"
+  },
+  {
+    "id": "TR-0008",
+    "title": "食物变质或剩食可疑",
+    "category": "水与食物",
+    "trigger_keywords": [
+      "食物坏了",
+      "发酸",
+      "发霉",
+      "有异味",
+      "剩饭",
+      "罐头鼓包",
+      "黏滑"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "剩食安全处理",
+      "食物中毒观察",
+      "厨余气味控制",
+      "食物库存天数估算"
+    ],
+    "ai_prompt": "提示不要入口，隔离该批食物，记录来源和是否有人吃过。",
+    "suggested_actions": [
+      "停止食用可疑食物",
+      "记录谁吃过",
+      "处理厨余和气味",
+      "复查同类库存"
+    ],
+    "follow_up": [
+      "当天追踪是否有人腹泻呕吐"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "复查提醒"
+  },
+  {
+    "id": "TR-0009",
+    "title": "主食或蛋白库存不足",
+    "category": "水与食物",
+    "trigger_keywords": [
+      "米快没了",
+      "主食不足",
+      "没肉了",
+      "蛋白不够",
+      "粮食不够",
+      "油快没了"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "食物库存天数估算",
+      "基础配给线",
+      "蛋白来源分配",
+      "油脂节约和补充"
+    ],
+    "ai_prompt": "估算剩余天数，提醒配给线和营养缺口观察。",
+    "suggested_actions": [
+      "计算剩余天数",
+      "调整基础配给",
+      "照顾儿童老人病人和重体力成员",
+      "减少浪费"
+    ],
+    "follow_up": [
+      "每周重新估算库存天数"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "周期提醒"
+  },
+  {
+    "id": "TR-0010",
+    "title": "停电",
+    "category": "能源与设备",
+    "trigger_keywords": [
+      "停电",
+      "没电了",
+      "电断了",
+      "灯灭了",
+      "断电"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "停电后第一小时",
+      "低电量工作模式",
+      "低亮照明布置",
+      "充电优先级"
+    ],
+    "ai_prompt": "先提示人员停稳、低亮照明、火源检查和关键设备省电。",
+    "suggested_actions": [
+      "清点人员",
+      "检查火源和运行设备",
+      "启用低亮灯和纸质记录",
+      "进入低电量模式"
+    ],
+    "follow_up": [
+      "1小时后复查电量和照明",
+      "晚间提醒夜间路线"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "即时提醒"
+  },
+  {
+    "id": "TR-0011",
+    "title": "电池或移动电源异常",
+    "category": "能源与设备",
+    "trigger_keywords": [
+      "电池鼓包",
+      "充电宝发热",
+      "电池漏液",
+      "充电器有味道",
+      "冒烟",
+      "发烫"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "移动电源保管",
+      "电池轮换使用",
+      "火灾后电器停用",
+      "不熟悉设备不拆原则"
+    ],
+    "ai_prompt": "提醒立即停用、隔离、远离火源和入口物资，不要拆壳。",
+    "suggested_actions": [
+      "停止充放电",
+      "移到隔离位置",
+      "记录设备编号和异常",
+      "检查附近是否有燃料纸张"
+    ],
+    "follow_up": [
+      "当天复查是否继续发热或异味"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "紧急提醒"
+  },
+  {
+    "id": "TR-0012",
+    "title": "燃料不足",
+    "category": "能源与设备",
+    "trigger_keywords": [
+      "燃料快没了",
+      "煤气不多",
+      "木柴不够",
+      "气罐快空",
+      "没燃料"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "燃料节约使用",
+      "热食和冷食轮换",
+      "车辆燃料节约",
+      "低电量工作模式"
+    ],
+    "ai_prompt": "区分做饭、取暖、车辆或发电用途，并给出优先级。",
+    "suggested_actions": [
+      "暂停非必要开火",
+      "集中烹饪",
+      "保留应急燃料线",
+      "调整热食频率"
+    ],
+    "follow_up": [
+      "每日提醒燃料消耗记录"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "周期提醒"
+  },
+  {
+    "id": "TR-0013",
+    "title": "火灾或烟雾",
+    "category": "灾害与灾后",
+    "trigger_keywords": [
+      "着火",
+      "火灾",
+      "烟很大",
+      "烧焦味",
+      "冒烟",
+      "火光",
+      "火源失控"
+    ],
+    "severity": "紧急",
+    "related_guides": [
+      "火灾应对",
+      "烟尘进入室内处理",
+      "火灾后返回检查",
+      "火灾后电器停用"
+    ],
+    "ai_prompt": "立即提示撤离、停用火电、避免吸入烟尘，灾后再处理物资。",
+    "suggested_actions": [
+      "人员先离开危险区",
+      "关闭可控火源和电源",
+      "远离浓烟",
+      "灾后不要立刻返回翻物资"
+    ],
+    "follow_up": [
+      "事件后做火灾后返回检查和烟熏物资分拣"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "紧急提醒"
+  },
+  {
+    "id": "TR-0014",
+    "title": "洪水或污水倒灌",
+    "category": "灾害与灾后",
+    "trigger_keywords": [
+      "洪水",
+      "内涝",
+      "进水",
+      "污水倒灌",
+      "水淹了",
+      "下水道倒灌"
+    ],
+    "severity": "紧急",
+    "related_guides": [
+      "洪水后进入检查",
+      "污水接触物分级",
+      "洪水后饮水保护",
+      "霉菌初期控制"
+    ],
+    "ai_prompt": "提示避开触电和污水，饮水源重新评估，入口物资优先隔离。",
+    "suggested_actions": [
+      "避免进入积水电器区",
+      "污染物资分级",
+      "暂停可疑水源",
+      "检查霉菌和潮湿"
+    ],
+    "follow_up": [
+      "退水后提醒霉菌和水源复查"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "持续追踪"
+  },
+  {
+    "id": "TR-0015",
+    "title": "地震或强震感",
+    "category": "灾害与灾后",
+    "trigger_keywords": [
+      "地震",
+      "震了一下",
+      "余震",
+      "房子晃",
+      "墙裂了",
+      "东西掉了"
+    ],
+    "severity": "紧急",
+    "related_guides": [
+      "地震后室内快速检查",
+      "余震准备点",
+      "地震后通道清理",
+      "家具倾倒临时加固"
+    ],
+    "ai_prompt": "提示先穿鞋、检查人员、火电气和结构，再清理生命通道。",
+    "suggested_actions": [
+      "穿鞋防碎片",
+      "检查伤情",
+      "关闭可控火源和燃气",
+      "避开裂缝和重柜"
+    ],
+    "follow_up": [
+      "余震后重新检查结构和通道"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "紧急提醒"
+  },
+  {
+    "id": "TR-0016",
+    "title": "强风暴雨雷电",
+    "category": "灾害与灾后",
+    "trigger_keywords": [
+      "暴雨",
+      "台风",
+      "强风",
+      "雷电",
+      "风很大",
+      "雨很大",
+      "屋顶漏水"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "天气突变前兆",
+      "门窗缝隙保温",
+      "潮湿空气排出",
+      "洪水后进入检查"
+    ],
+    "ai_prompt": "提醒收回晾晒物、加固门窗、防水防潮、暂停非必要外出。",
+    "suggested_actions": [
+      "收回晾晒物",
+      "检查排水和漏水点",
+      "固定遮雨棚和物资",
+      "暂停远距离取水"
+    ],
+    "follow_up": [
+      "雨后检查积水、霉菌和储水污染"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "持续追踪"
+  },
+  {
+    "id": "TR-0017",
+    "title": "烟尘或空气污染进入室内",
+    "category": "灾害与灾后",
+    "trigger_keywords": [
+      "烟尘",
+      "灰尘很大",
+      "空气刺鼻",
+      "化学味",
+      "外面有烟",
+      "眼睛痛"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "烟尘进入室内处理",
+      "通风路径设计",
+      "异常气味外部来源",
+      "室内气味源排查"
+    ],
+    "ai_prompt": "区分内部源和外部源，提示关闭迎风面、转移人员、减少新烟源。",
+    "suggested_actions": [
+      "关闭迎风门窗",
+      "转移到污染少的房间",
+      "停止室内明火和油烟",
+      "记录风向和症状"
+    ],
+    "follow_up": [
+      "污染减弱后分段通风"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "持续追踪"
+  },
+  {
+    "id": "TR-0018",
+    "title": "极端寒冷",
+    "category": "灾害与灾后",
+    "trigger_keywords": [
+      "很冷",
+      "降温",
+      "寒潮",
+      "冻手",
+      "发抖",
+      "室内太冷"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "小空间集中保暖",
+      "无火保暖方法",
+      "睡眠保温检查",
+      "冻伤后复温观察"
+    ],
+    "ai_prompt": "提醒集中暖区、干燥衣物、睡眠保温和重点成员照护。",
+    "suggested_actions": [
+      "换干衣袜",
+      "集中到小空间",
+      "检查老人儿童病人",
+      "避免睡眠明火"
+    ],
+    "follow_up": [
+      "睡前保温检查",
+      "次日观察冻伤或咳嗽"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "周期提醒"
+  },
+  {
+    "id": "TR-0019",
+    "title": "极端高温",
+    "category": "灾害与灾后",
+    "trigger_keywords": [
+      "很热",
+      "中暑",
+      "热浪",
+      "出汗很多",
+      "头晕",
+      "晒得难受"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "高温时段任务调整",
+      "低水量降温",
+      "中暑后恢复观察",
+      "高温缺水观察"
+    ],
+    "ai_prompt": "提醒避开正午任务、补水、降温和重点成员观察。",
+    "suggested_actions": [
+      "调整任务到清晨或傍晚",
+      "少量多次补水",
+      "降低室内热量",
+      "观察重点成员"
+    ],
+    "follow_up": [
+      "晚间追踪头晕、尿少或失眠"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "持续追踪"
+  },
+  {
+    "id": "TR-0020",
+    "title": "陌生人靠近",
+    "category": "安全与突发",
+    "trigger_keywords": [
+      "陌生人",
+      "有人靠近",
+      "有人敲门",
+      "门口有人",
+      "有人跟着",
+      "可疑人员"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "陌生人接近记录",
+      "交易对象风险评估",
+      "生活光痕控制",
+      "夜间值守异常上报"
+    ],
+    "ai_prompt": "提醒不暴露核心区，不多人围门，记录事实并调整边界。",
+    "suggested_actions": [
+      "指定一人观察记录",
+      "儿童和物资远离入口",
+      "不透露仓库和档案",
+      "必要时提高风险等级"
+    ],
+    "follow_up": [
+      "晚间复盘是否反复出现"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "即时提醒"
+  },
+  {
+    "id": "TR-0021",
+    "title": "冲突或争吵升级",
+    "category": "安全与突发",
+    "trigger_keywords": [
+      "吵架",
+      "冲突",
+      "打起来",
+      "争抢",
+      "威胁",
+      "有人失控"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "冲突降级沟通",
+      "群体规则与秩序",
+      "事件复核三问",
+      "风险等级四档"
+    ],
+    "ai_prompt": "提示降低刺激、拉开距离、保护弱势成员和关键物资。",
+    "suggested_actions": [
+      "减少围观",
+      "让负责人介入",
+      "暂停争议物资发放",
+      "记录事实和触发点"
+    ],
+    "follow_up": [
+      "事件后做复盘三问"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "即时提醒"
+  },
+  {
+    "id": "TR-0022",
+    "title": "成员失联",
+    "category": "安全与突发",
+    "trigger_keywords": [
+      "失联",
+      "没回来",
+      "找不到人",
+      "走散",
+      "不见了",
+      "联系不上"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "失联人员最后位置记录",
+      "集合点三层规则",
+      "留言点安全规则",
+      "搜索小队出发规则"
+    ],
+    "ai_prompt": "先整理最后位置、时间、路线和携带物，避免全员盲目搜索。",
+    "suggested_actions": [
+      "记录最后位置和时间",
+      "检查留言点和任务记录",
+      "指定留守和搜索负责人",
+      "搜索队设定返回时间"
+    ],
+    "follow_up": [
+      "搜索结束后补记录和复盘"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "紧急提醒"
+  },
+  {
+    "id": "TR-0023",
+    "title": "夜间异常声音",
+    "category": "安全与突发",
+    "trigger_keywords": [
+      "脚步声",
+      "敲击声",
+      "玻璃碎了",
+      "有人喊",
+      "外面有声音",
+      "爆炸声"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "声音来源判断",
+      "夜间值守异常上报",
+      "夜间低噪行动",
+      "生活光痕控制"
+    ],
+    "ai_prompt": "提醒先记录方向和次数，不盲目开门或强光扫射。",
+    "suggested_actions": [
+      "保持安静",
+      "记录方向和次数",
+      "指定值守观察",
+      "不开门凑近查看"
+    ],
+    "follow_up": [
+      "早晨复盘是否重复出现"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "即时提醒"
+  },
+  {
+    "id": "TR-0024",
+    "title": "动物异常或虫害",
+    "category": "安全与突发",
+    "trigger_keywords": [
+      "老鼠",
+      "虫子",
+      "动物异常",
+      "死动物",
+      "苍蝇很多",
+      "蚊子很多"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "动物异常观察",
+      "储水点防蚊虫",
+      "厨余气味控制",
+      "垃圾痕迹隐藏"
+    ],
+    "ai_prompt": "提示检查厨余、储水、垃圾和死角，避免徒手接触。",
+    "suggested_actions": [
+      "清理厨余和垃圾点",
+      "检查储水容器盖子",
+      "死动物不徒手处理",
+      "记录异常位置"
+    ],
+    "follow_up": [
+      "三天后复查虫害是否减少"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "复查提醒"
+  },
+  {
+    "id": "TR-0025",
+    "title": "门窗或结构损坏",
+    "category": "安全与突发",
+    "trigger_keywords": [
+      "门坏了",
+      "窗破了",
+      "墙裂",
+      "屋顶漏",
+      "门锁坏",
+      "支撑断了"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "承重结构不乱改",
+      "门窗缝隙保温",
+      "防水临时修补",
+      "生活光痕控制"
+    ],
+    "ai_prompt": "先判断承重、撤离和外部暴露风险，再做临时修补。",
+    "suggested_actions": [
+      "标记危险区",
+      "不要乱拆承重结构",
+      "临时遮挡风雨和光痕",
+      "列入正式维修任务"
+    ],
+    "follow_up": [
+      "次日复查是否扩大"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "复查提醒"
+  },
+  {
+    "id": "TR-0026",
+    "title": "外出或交易计划",
+    "category": "安全与突发",
+    "trigger_keywords": [
+      "出去看看",
+      "外出",
+      "交易",
+      "换物资",
+      "去取东西",
+      "去找人"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "三分钟出门检查",
+      "交易对象风险评估",
+      "高风险任务双人制",
+      "路线安全重新评估"
+    ],
+    "ai_prompt": "提醒登记去向、路线、返回时间、携带物和不暴露信息。",
+    "suggested_actions": [
+      "登记目的和返回时间",
+      "两人同行优先",
+      "不带全部库存",
+      "回程避免暴露核心点"
+    ],
+    "follow_up": [
+      "超过返回时间触发失联检查"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "任务提醒"
+  },
+  {
+    "id": "TR-0027",
+    "title": "夜间行动",
+    "category": "安全与突发",
+    "trigger_keywords": [
+      "晚上出去",
+      "夜里去",
+      "摸黑",
+      "夜间行动",
+      "半夜上厕所",
+      "夜间取物"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "夜间行动前检查",
+      "夜间厕所路线",
+      "黑暗中找物规则",
+      "低亮照明布置"
+    ],
+    "ai_prompt": "提醒穿鞋、低亮照明、固定路线、不盲目开门、不翻乱物资。",
+    "suggested_actions": [
+      "穿鞋",
+      "带低亮灯和哨子",
+      "走固定路线",
+      "找物后复位"
+    ],
+    "follow_up": [
+      "次日调整夜间路线问题"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "即时提醒"
+  },
+  {
+    "id": "TR-0028",
+    "title": "儿童异常",
+    "category": "成员与照护",
+    "trigger_keywords": [
+      "孩子不舒服",
+      "儿童发热",
+      "孩子腹泻",
+      "孩子一直哭",
+      "孩子不吃饭"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "儿童安全教学",
+      "儿童食物优先规则",
+      "高温缺水观察",
+      "咳嗽发热照护"
+    ],
+    "ai_prompt": "优先询问饮水、体温感、排便、尿量、精神和是否误食。",
+    "suggested_actions": [
+      "照护者陪同",
+      "优先安全饮水和软食",
+      "记录尿量和精神",
+      "远离火源药品和陌生人"
+    ],
+    "follow_up": [
+      "2小时后追踪状态"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "持续追踪"
+  },
+  {
+    "id": "TR-0029",
+    "title": "老人或慢病成员异常",
+    "category": "成员与照护",
+    "trigger_keywords": [
+      "老人不舒服",
+      "慢病",
+      "血压",
+      "胸闷",
+      "头晕",
+      "老人摔倒",
+      "漏服药"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "老人和慢病成员教学",
+      "老人食物调整",
+      "个人药包管理",
+      "照护任务轮换"
+    ],
+    "ai_prompt": "询问用药、饮水、进食、摔倒、呼吸和意识状态。",
+    "suggested_actions": [
+      "检查个人药包",
+      "安排照护者",
+      "减少夜间独行",
+      "记录症状和用药"
+    ],
+    "follow_up": [
+      "晚间追踪状态和用药"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "持续追踪"
+  },
+  {
+    "id": "TR-0030",
+    "title": "照护者过劳",
+    "category": "成员与照护",
+    "trigger_keywords": [
+      "太累了",
+      "照护者撑不住",
+      "没人替",
+      "一直照顾",
+      "睡不着"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "照护者自我保护",
+      "照护任务轮换",
+      "轮值表建立"
+    ],
+    "ai_prompt": "提醒轮换、减少任务、记录照护压力。",
+    "suggested_actions": [
+      "安排备用照护者",
+      "减少非必要任务",
+      "让照护者休息进食",
+      "记录照护状态"
+    ],
+    "follow_up": [
+      "次日复查照护者恢复情况"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "复查提醒"
+  },
+  {
+    "id": "TR-0031",
+    "title": "室内异味或霉味",
+    "category": "环境与居住",
+    "trigger_keywords": [
+      "霉味",
+      "臭味",
+      "怪味",
+      "腐败味",
+      "燃气味",
+      "厕所味",
+      "化学味"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "室内气味源排查",
+      "潮湿空气排出",
+      "霉菌初期控制",
+      "厕所气味分区"
+    ],
+    "ai_prompt": "先判断是否燃气或化学危险，再排查厕所、垃圾、潮湿和外部来源。",
+    "suggested_actions": [
+      "燃气或化学味先远离火源",
+      "查找气味来源",
+      "加强通风或封堵外部污染",
+      "记录时间和位置"
+    ],
+    "follow_up": [
+      "次日复查是否复发"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "复查提醒"
+  },
+  {
+    "id": "TR-0032",
+    "title": "睡眠区潮湿或寒冷",
+    "category": "环境与居住",
+    "trigger_keywords": [
+      "床湿了",
+      "被子潮",
+      "睡眠区冷",
+      "墙角发霉",
+      "地面潮"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "睡眠区防潮",
+      "睡眠保温检查",
+      "小空间集中保暖",
+      "潮湿空气排出"
+    ],
+    "ai_prompt": "提醒离地离墙、通风晾晒、优先保护儿童老人病人。",
+    "suggested_actions": [
+      "检查被褥和墙角",
+      "加隔潮层",
+      "晾晒或轮换被褥",
+      "重点成员调到干燥位"
+    ],
+    "follow_up": [
+      "每周检查霉味和潮湿"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "周期提醒"
+  },
+  {
+    "id": "TR-0033",
+    "title": "厕所或垃圾区异常",
+    "category": "环境与居住",
+    "trigger_keywords": [
+      "厕所满了",
+      "垃圾臭",
+      "厨余臭",
+      "苍蝇",
+      "便盆打翻",
+      "灰水发臭"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "厕所气味分区",
+      "厨余气味控制",
+      "每周卫生清理日",
+      "灰水再利用边界"
+    ],
+    "ai_prompt": "提醒立即隔离污染、清理气味源、避免进入厨房饮水区。",
+    "suggested_actions": [
+      "处理满溢或打翻",
+      "盖好垃圾和厕所容器",
+      "清理厨余",
+      "洗手并记录污染范围"
+    ],
+    "follow_up": [
+      "晚间复查气味和虫害"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "即时提醒"
+  },
+  {
+    "id": "TR-0034",
+    "title": "关键库存低于底线",
+    "category": "库存与物资",
+    "trigger_keywords": [
+      "库存不足",
+      "快没了",
+      "药快没了",
+      "电池不够",
+      "胶带没了",
+      "口罩不够"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "每周物资盘点",
+      "胶带库存和用途分区",
+      "电池轮换使用",
+      "药箱纸质索引"
+    ],
+    "ai_prompt": "确认类别、剩余数量、最低线和替代方案。",
+    "suggested_actions": [
+      "标记低库存",
+      "限制非必要消耗",
+      "寻找替代方案",
+      "加入补充任务"
+    ],
+    "follow_up": [
+      "每周复查低库存清单"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "周期提醒"
+  },
+  {
+    "id": "TR-0035",
+    "title": "药品过期或药箱混乱",
+    "category": "库存与物资",
+    "trigger_keywords": [
+      "药过期",
+      "药找不到",
+      "药箱乱",
+      "拿错药",
+      "药品标签掉了"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "药品过期检查",
+      "药箱纸质索引",
+      "个人药包管理",
+      "成员档案应急读取"
+    ],
+    "ai_prompt": "提醒暂停不明药物使用，复核药名、归属、有效期和个人禁忌。",
+    "suggested_actions": [
+      "隔离不明药",
+      "更新药箱索引",
+      "检查个人药包",
+      "记录缺失和补充需求"
+    ],
+    "follow_up": [
+      "次日完成药箱整理"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "复查提醒"
+  },
+  {
+    "id": "TR-0036",
+    "title": "数据备份过旧或系统更新",
+    "category": "系统与数据",
+    "trigger_keywords": [
+      "备份",
+      "更新",
+      "改了数据",
+      "覆盖文件",
+      "系统升级",
+      "指南更新",
+      "数据库"
+    ],
+    "severity": "中",
+    "related_guides": [
+      "每月系统备份日",
+      "指南版本号规则",
+      "数据恢复演练",
+      "纸质记录补录规则"
+    ],
+    "ai_prompt": "提醒先备份、记录版本、验证可读取，再继续修改。",
+    "suggested_actions": [
+      "创建带日期备份",
+      "记录版本号和条目数",
+      "验证文件能打开",
+      "保留旧版回滚"
+    ],
+    "follow_up": [
+      "更新后做读取测试"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "即时提醒"
+  },
+  {
+    "id": "TR-0037",
+    "title": "成员档案访问",
+    "category": "系统与数据",
+    "trigger_keywords": [
+      "成员档案",
+      "证件",
+      "照片",
+      "医疗记录",
+      "口令",
+      "过敏记录"
+    ],
+    "severity": "高",
+    "related_guides": [
+      "成员档案权限分级",
+      "成员档案应急读取",
+      "成员照片更新规则",
+      "成员档案备份校验"
+    ],
+    "ai_prompt": "提醒口令权限、最小必要读取、加密备份和访问记录。",
+    "suggested_actions": [
+      "确认访问理由",
+      "只读取必要内容",
+      "记录访问时间和人员",
+      "敏感资料加密保存"
+    ],
+    "follow_up": [
+      "访问后关闭档案并检查备份"
+    ],
+    "should_log": true,
+    "should_create_task": false,
+    "reminder_type": "安全提醒"
+  },
+  {
+    "id": "TR-0038",
+    "title": "可疑信息或传言",
+    "category": "系统与数据",
+    "trigger_keywords": [
+      "听说",
+      "有人说",
+      "传言",
+      "消息不确定",
+      "网上说",
+      "邻居说"
+    ],
+    "severity": "低",
+    "related_guides": [
+      "决策前信息三源",
+      "外部观察日志",
+      "风险等级四档",
+      "异常解除确认"
+    ],
+    "ai_prompt": "提醒区分亲眼观察、记录数据和外部消息，不直接行动。",
+    "suggested_actions": [
+      "标记待确认",
+      "寻找第二来源",
+      "不要扩大传播",
+      "重大决策前三源核实"
+    ],
+    "follow_up": [
+      "次日确认或解除"
+    ],
+    "should_log": true,
+    "should_create_task": false,
+    "reminder_type": "判断提醒"
+  },
+  {
+    "id": "TR-0039",
+    "title": "需要演练或长期未演练",
+    "category": "演练与任务",
+    "trigger_keywords": [
+      "演练",
+      "练一下",
+      "很久没练",
+      "撤离演练",
+      "取水演练",
+      "数据恢复演练"
+    ],
+    "severity": "低",
+    "related_guides": [
+      "火灾撤离演练",
+      "取水路线演练",
+      "疾病隔离演练",
+      "数据恢复演练",
+      "演练后复盘表"
+    ],
+    "ai_prompt": "根据当前风险选择最小演练，不影响保命任务。",
+    "suggested_actions": [
+      "选择一种演练",
+      "设定范围和停止条件",
+      "演练后复盘问题",
+      "把改进写入任务"
+    ],
+    "follow_up": [
+      "一周后检查改进完成"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "任务提醒"
+  },
+  {
+    "id": "TR-0040",
+    "title": "规则反复被违反",
+    "category": "演练与任务",
+    "trigger_keywords": [
+      "又忘了",
+      "又乱放",
+      "又没记录",
+      "总是拿错",
+      "重复出错"
+    ],
+    "severity": "低",
+    "related_guides": [
+      "事件复核三问",
+      "长期任务搁置清单",
+      "知识卡转任务卡",
+      "五分钟技能教学"
+    ],
+    "ai_prompt": "不要只责备个人，而是触发复训、标签改进或流程简化。",
+    "suggested_actions": [
+      "记录重复错误",
+      "找流程原因",
+      "生成小任务卡",
+      "安排五分钟复训"
+    ],
+    "follow_up": [
+      "三天后复查是否改善"
+    ],
+    "should_log": true,
+    "should_create_task": true,
+    "reminder_type": "复查提醒"
+  }
+]

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>日记记录 - 壳中灯</title>
+
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+  <main class="shell">
+    <section class="hero compact-hero">
+      <p class="eyebrow">JOURNAL MODULE</p>
+      <h1>日记记录</h1>
+      <p class="subtitle">记录今天发生了什么。平时是生活日志，紧急时就是避难所黑匣子。</p>
+
+      <p id="journal-message" class="notice" style="display: none;"></p>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2>记录总览</h2>
+      </div>
+
+      <div class="summary-grid journal-summary-grid">
+        <button class="summary-card summary-action active" type="button" data-filter="all">
+          <span>全部记录</span>
+          <strong id="summary-total">0</strong>
+        </button>
+
+        <button class="summary-card summary-action" type="button" data-filter="日常记录">
+          <span>日常记录</span>
+          <strong id="summary-daily">0</strong>
+        </button>
+
+        <button class="summary-card summary-action" type="button" data-filter="应急事件">
+          <span>应急事件</span>
+          <strong id="summary-emergency">0</strong>
+        </button>
+
+        <button class="summary-card summary-action" type="button" data-filter="健康状况">
+          <span>健康状况</span>
+          <strong id="summary-health">0</strong>
+        </button>
+
+        <button class="summary-card summary-action" type="button" data-filter="物资变动">
+          <span>物资变动</span>
+          <strong id="summary-inventory">0</strong>
+        </button>
+      </div>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2 id="calendar-title">日记日历</h2>
+
+        <div class="calendar-actions">
+          <button id="toggle-calendar-button" class="small-button" type="button">折叠日历</button>
+          <button id="prev-month-button" class="small-button" type="button">上个月</button>
+          <button id="today-button" class="small-button" type="button">今天</button>
+          <button id="next-month-button" class="small-button" type="button">下个月</button>
+        </div>
+      </div>
+
+      <div id="calendar-body">
+        <div class="calendar-weekdays">
+          <span>一</span>
+          <span>二</span>
+          <span>三</span>
+          <span>四</span>
+          <span>五</span>
+          <span>六</span>
+          <span>日</span>
+        </div>
+
+        <div id="journal-calendar" class="calendar-grid"></div>
+      </div>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2 id="journal-list-title">当前记录：全部</h2>
+        <button id="clear-filter-button" class="small-button" type="button" style="display: none;">显示全部</button>
+      </div>
+
+      <div class="search-row">
+        <input
+          id="journal-search"
+          type="search"
+          placeholder="搜索标题、内容、类型，例如：体温 / 停电 / 补货 / 药品"
+        />
+        <button id="clear-search-button" class="small-button" type="button">清空搜索</button>
+      </div>
+
+      <div id="journal-result-info" class="result-info">正在读取记录...</div>
+
+      <div id="journal-list" class="item-list">
+        <p class="empty">正在读取记录...</p>
+      </div>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2>新增日记</h2>
+        <span class="section-hint">可以记生活，也可以记异常事件、身体状况和物资变化。</span>
+      </div>
+
+      <form id="journal-form" class="form-card">
+        <select name="entry_type" class="select-input">
+          <option value="日常记录">日常记录</option>
+          <option value="应急事件">应急事件</option>
+          <option value="健康状况">健康状况</option>
+          <option value="物资变动">物资变动</option>
+          <option value="系统记录">系统记录</option>
+        </select>
+
+        <input
+          name="title"
+          placeholder="标题，例如：整理客厅物资 / 停水记录 / 体温观察"
+        />
+
+        <textarea
+          name="content"
+          placeholder="内容，例如：今天整理了客厅柜子，新增矿泉水12瓶，编号 LB-00001 到 LB-00012。"
+          required
+        ></textarea>
+
+        <button type="submit">记录日记</button>
+      </form>
+    </section>
+
+    <p class="back-link">
+      <a href="/">← 返回首页</a>
+    </p>
+  </main>
+
+  <script>
+    const form = document.getElementById('journal-form');
+    const list = document.getElementById('journal-list');
+    const messageBox = document.getElementById('journal-message');
+
+    const summaryTotal = document.getElementById('summary-total');
+    const summaryDaily = document.getElementById('summary-daily');
+    const summaryEmergency = document.getElementById('summary-emergency');
+    const summaryHealth = document.getElementById('summary-health');
+    const summaryInventory = document.getElementById('summary-inventory');
+
+    const summaryActions = document.querySelectorAll('.summary-action');
+    const listTitle = document.getElementById('journal-list-title');
+    const clearFilterButton = document.getElementById('clear-filter-button');
+
+    const searchInput = document.getElementById('journal-search');
+    const clearSearchButton = document.getElementById('clear-search-button');
+    const resultInfo = document.getElementById('journal-result-info');
+
+    const calendarTitle = document.getElementById('calendar-title');
+    const calendarBody = document.getElementById('calendar-body');
+    const calendarGrid = document.getElementById('journal-calendar');
+    const toggleCalendarButton = document.getElementById('toggle-calendar-button');
+    const prevMonthButton = document.getElementById('prev-month-button');
+    const nextMonthButton = document.getElementById('next-month-button');
+    const todayButton = document.getElementById('today-button');
+
+    const pageSize = 10;
+
+    let currentEntries = [];
+    let currentFilter = 'all';
+    let currentSearch = '';
+    let currentPage = 1;
+
+    let selectedDate = '';
+    let calendarYear = new Date().getFullYear();
+    let calendarMonth = new Date().getMonth();
+    let calendarCollapsed = false;
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function showMessage(message, isError = false) {
+      messageBox.style.display = 'block';
+      messageBox.textContent = message;
+      messageBox.style.borderColor = isError
+        ? 'rgba(255, 123, 138, 0.42)'
+        : 'rgba(137, 204, 255, 0.18)';
+      messageBox.style.color = isError ? '#ffe0e6' : '#b7d2e8';
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    function pad2(value) {
+      return String(value).padStart(2, '0');
+    }
+
+    function toDateKey(value) {
+      if (!value) {
+        return '';
+      }
+
+      const raw = String(value).trim();
+
+      if (/^\d{4}-\d{2}-\d{2}/.test(raw)) {
+        return raw.slice(0, 10);
+      }
+
+      const date = new Date(raw);
+
+      if (Number.isNaN(date.getTime())) {
+        return '';
+      }
+
+      return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`;
+    }
+
+    function formatTime(value) {
+      if (!value) {
+        return '时间未知';
+      }
+
+      return String(value).replace('T', ' ');
+    }
+
+    function updateSummary(entries) {
+      summaryTotal.textContent = entries.length;
+      summaryDaily.textContent = entries.filter(item => item.entry_type === '日常记录').length;
+      summaryEmergency.textContent = entries.filter(item => item.entry_type === '应急事件').length;
+      summaryHealth.textContent = entries.filter(item => item.entry_type === '健康状况').length;
+      summaryInventory.textContent = entries.filter(item => item.entry_type === '物资变动').length;
+    }
+
+    function getCalendarSourceEntries() {
+      if (currentFilter === 'all') {
+        return currentEntries;
+      }
+
+      return currentEntries.filter(entry => entry.entry_type === currentFilter);
+    }
+
+    function getEntryCountByDate() {
+      return getCalendarSourceEntries().reduce((map, entry) => {
+        const key = toDateKey(entry.created_at);
+
+        if (!key) {
+          return map;
+        }
+
+        map[key] = (map[key] || 0) + 1;
+        return map;
+      }, {});
+    }
+
+    function renderCalendar() {
+      const monthLabel = `${calendarYear}年${calendarMonth + 1}月`;
+      const filterLabel = currentFilter === 'all' ? '全部记录' : currentFilter;
+      calendarTitle.textContent = `日记日历｜${monthLabel}｜${filterLabel}`;
+
+      const entryCountByDate = getEntryCountByDate();
+
+      const firstDay = new Date(calendarYear, calendarMonth, 1);
+      const lastDay = new Date(calendarYear, calendarMonth + 1, 0);
+      const totalDays = lastDay.getDate();
+
+      let startWeekday = firstDay.getDay();
+      startWeekday = startWeekday === 0 ? 7 : startWeekday;
+
+      const cells = [];
+
+      for (let i = 1; i < startWeekday; i += 1) {
+        cells.push('<div class="calendar-day empty-day"></div>');
+      }
+
+      const today = new Date();
+      const todayKey = `${today.getFullYear()}-${pad2(today.getMonth() + 1)}-${pad2(today.getDate())}`;
+
+      for (let day = 1; day <= totalDays; day += 1) {
+        const dateKey = `${calendarYear}-${pad2(calendarMonth + 1)}-${pad2(day)}`;
+        const count = entryCountByDate[dateKey] || 0;
+
+        const classes = [
+          'calendar-day',
+          count > 0 ? 'has-entry' : '',
+          dateKey === selectedDate ? 'selected' : '',
+          dateKey === todayKey ? 'today' : ''
+        ].filter(Boolean).join(' ');
+
+        cells.push(`
+          <button class="${classes}" type="button" data-date="${dateKey}">
+            <span class="calendar-number">${day}</span>
+            ${count > 0 ? `<span class="calendar-count">${count}条</span>` : ''}
+          </button>
+        `);
+      }
+
+      calendarGrid.innerHTML = cells.join('');
+    }
+
+    function updateCalendarCollapseUI() {
+      calendarBody.style.display = calendarCollapsed ? 'none' : 'block';
+      toggleCalendarButton.textContent = calendarCollapsed ? '展开日历' : '折叠日历';
+    }
+
+    function entryMatchesSearch(entry, keyword) {
+      if (!keyword) {
+        return true;
+      }
+
+      const haystack = [
+        entry.entry_type,
+        entry.title,
+        entry.content,
+        entry.created_at
+      ]
+        .map(value => String(value ?? '').toLowerCase())
+        .join(' ');
+
+      return haystack.includes(keyword.toLowerCase());
+    }
+
+    function getFilteredEntries() {
+      let result = currentEntries;
+
+      if (currentFilter !== 'all') {
+        result = result.filter(entry => entry.entry_type === currentFilter);
+      }
+
+      if (selectedDate) {
+        result = result.filter(entry => toDateKey(entry.created_at) === selectedDate);
+      }
+
+      return result.filter(entry => entryMatchesSearch(entry, currentSearch));
+    }
+
+    function getPagedItems(items) {
+      const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+      }
+
+      if (currentPage < 1) {
+        currentPage = 1;
+      }
+
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+
+      return {
+        totalPages,
+        start,
+        end,
+        items: items.slice(start, end)
+      };
+    }
+
+    function updateFilterUI() {
+      summaryActions.forEach(button => {
+        button.classList.toggle('active', button.dataset.filter === currentFilter);
+      });
+
+      let title = currentFilter === 'all'
+        ? '当前记录：全部'
+        : `当前记录：${currentFilter}`;
+
+      if (selectedDate) {
+        title += `｜${selectedDate}`;
+      }
+
+      listTitle.textContent = title;
+
+      clearFilterButton.style.display =
+        currentFilter === 'all' && !selectedDate
+          ? 'none'
+          : 'inline-flex';
+    }
+
+    function renderPagination(totalCount, totalPages, start, end) {
+      const safeStart = totalCount === 0 ? 0 : start + 1;
+      const safeEnd = Math.min(end, totalCount);
+
+      return `
+        <div class="pagination-bar">
+          <div class="pagination-info">
+            显示 ${safeStart}-${safeEnd} 条，共 ${totalCount} 条｜第 ${currentPage}/${totalPages} 页
+          </div>
+
+          <div class="pagination-buttons">
+            <button class="small-button page-button" type="button" data-page-action="prev" ${currentPage <= 1 ? 'disabled' : ''}>
+              上一页
+            </button>
+
+            <button class="small-button page-button" type="button" data-page-action="next" ${currentPage >= totalPages ? 'disabled' : ''}>
+              下一页
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderJournalList() {
+      updateFilterUI();
+      renderCalendar();
+      updateCalendarCollapseUI();
+
+      const entries = getFilteredEntries();
+      const paged = getPagedItems(entries);
+
+      if (!entries.length) {
+        resultInfo.textContent = currentSearch
+          ? `没有找到包含「${currentSearch}」的记录。`
+          : '没有符合条件的记录。';
+
+        list.innerHTML = '<p class="empty">还没有记录。</p>';
+        return;
+      }
+
+      resultInfo.textContent = currentSearch
+        ? `搜索「${currentSearch}」，找到 ${entries.length} 条记录。`
+        : `共 ${entries.length} 条记录。`;
+
+      list.innerHTML = paged.items.map(entry => {
+        const id = Number(entry.id);
+        const type = escapeHtml(entry.entry_type || '日常记录');
+        const title = escapeHtml(entry.title || '未命名记录');
+        const content = escapeHtml(entry.content || '');
+        const createdAt = escapeHtml(formatTime(entry.created_at));
+
+        return `
+          <article class="item-card journal-card">
+            <div>
+              <p class="item-code">${type}</p>
+              <h3>${title}</h3>
+              <p>${createdAt}</p>
+            </div>
+
+            <div>
+              <p class="journal-content">${content}</p>
+              <button
+                class="danger-button"
+                type="button"
+                data-id="${id}"
+                data-title="${title}"
+              >
+                删除
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('') + renderPagination(entries.length, paged.totalPages, paged.start, paged.end);
+    }
+
+    async function loadJournal() {
+      try {
+        const res = await fetch('/api/journal');
+
+        if (!res.ok) {
+          throw new Error(`读取失败：${res.status}`);
+        }
+
+        currentEntries = await res.json();
+
+        updateSummary(currentEntries);
+        renderJournalList();
+
+      } catch (error) {
+        console.error(error);
+        currentEntries = [];
+        updateSummary([]);
+        resultInfo.textContent = '记录读取失败。';
+        list.innerHTML = '<p class="empty">记录读取失败，请检查后端服务是否正常。</p>';
+      }
+    }
+
+    async function addJournal(payload) {
+      const res = await fetch('/api/journal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await res.json();
+
+      if (!res.ok || result.ok === false) {
+        throw new Error(result.message || '保存失败');
+      }
+
+      return result;
+    }
+
+    async function deleteJournal(id, title) {
+      const confirmed = confirm(`确定要删除「${title}」吗？`);
+
+      if (!confirmed) {
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/journal/${id}`, {
+          method: 'DELETE'
+        });
+
+        const result = await res.json();
+
+        if (!res.ok || result.ok === false) {
+          throw new Error(result.message || '删除失败');
+        }
+
+        showMessage('日记已删除。');
+        await loadJournal();
+
+      } catch (error) {
+        console.error(error);
+        showMessage(error.message || '删除失败，请检查后端服务。', true);
+      }
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+
+      const payload = {
+        entry_type: String(formData.get('entry_type') || '日常记录').trim(),
+        title: String(formData.get('title') || '').trim(),
+        content: String(formData.get('content') || '').trim()
+      };
+
+      if (!payload.content) {
+        showMessage('内容不能为空。', true);
+        return;
+      }
+
+      if (!payload.title) {
+        payload.title = payload.content.slice(0, 24);
+      }
+
+      try {
+        await addJournal(payload);
+
+        form.reset();
+        currentFilter = 'all';
+        currentSearch = '';
+        selectedDate = '';
+        currentPage = 1;
+        searchInput.value = '';
+
+        showMessage('日记已记录。');
+        await loadJournal();
+
+      } catch (error) {
+        console.error(error);
+        showMessage(error.message || '保存失败，请检查后端服务。', true);
+      }
+    });
+
+    list.addEventListener('click', (event) => {
+      const pageButton = event.target.closest('.page-button');
+
+      if (pageButton) {
+        const action = pageButton.dataset.pageAction;
+
+        if (action === 'prev') {
+          currentPage -= 1;
+        }
+
+        if (action === 'next') {
+          currentPage += 1;
+        }
+
+        renderJournalList();
+        return;
+      }
+
+      const deleteButton = event.target.closest('.danger-button');
+
+      if (!deleteButton) {
+        return;
+      }
+
+      const id = deleteButton.dataset.id;
+      const title = deleteButton.dataset.title || '这条记录';
+
+      deleteJournal(id, title);
+    });
+
+    calendarGrid.addEventListener('click', (event) => {
+      const dayButton = event.target.closest('.calendar-day');
+
+      if (!dayButton || !dayButton.dataset.date) {
+        return;
+      }
+
+      selectedDate = dayButton.dataset.date;
+      currentPage = 1;
+      renderJournalList();
+    });
+
+    summaryActions.forEach(button => {
+      button.addEventListener('click', () => {
+        currentFilter = button.dataset.filter || 'all';
+        selectedDate = '';
+        currentPage = 1;
+        renderJournalList();
+      });
+    });
+
+    clearFilterButton.addEventListener('click', () => {
+      currentFilter = 'all';
+      selectedDate = '';
+      currentPage = 1;
+      renderJournalList();
+    });
+
+    searchInput.addEventListener('input', () => {
+      currentSearch = searchInput.value.trim();
+      currentPage = 1;
+      renderJournalList();
+    });
+
+    clearSearchButton.addEventListener('click', () => {
+      currentSearch = '';
+      currentPage = 1;
+      searchInput.value = '';
+      renderJournalList();
+    });
+
+    toggleCalendarButton.addEventListener('click', () => {
+    calendarCollapsed = !calendarCollapsed;
+
+        if (calendarCollapsed) {
+            selectedDate = '';
+            currentPage = 1;
+            renderJournalList();
+            return;
+        }
+
+        updateCalendarCollapseUI();
+    });
+
+    prevMonthButton.addEventListener('click', () => {
+      calendarMonth -= 1;
+
+      if (calendarMonth < 0) {
+        calendarMonth = 11;
+        calendarYear -= 1;
+      }
+
+      renderCalendar();
+    });
+
+    nextMonthButton.addEventListener('click', () => {
+      calendarMonth += 1;
+
+      if (calendarMonth > 11) {
+        calendarMonth = 0;
+        calendarYear += 1;
+      }
+
+      renderCalendar();
+    });
+
+    todayButton.addEventListener('click', () => {
+      const today = new Date();
+
+      calendarYear = today.getFullYear();
+      calendarMonth = today.getMonth();
+      selectedDate = `${calendarYear}-${pad2(calendarMonth + 1)}-${pad2(today.getDate())}`;
+
+      currentPage = 1;
+      renderJournalList();
+    });
+
+    loadJournal();
+  </script>
+</body>
+</html>

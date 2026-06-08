@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# TTS generated files
+tts/output/
+*.wav
+
+# Large local TTS / AI models
+tts/voices/*.onnx
+tts/voices/*.onnx.json
+tts_engines/melotts/venv/
+tts_engines/**/__pycache__/
+
+# Ollama / local model data should not be committed
+ollama/
+models/
+
+# Temporary files
+tmp/
+temp/
+.cache/
+
+# Local AI / Ollama models
+ollama/
+models/
+ollama_models/
+*.gguf
+
+# Large local model / backup files
+g2pW/
+backups/
+*.dmg
+*.onnx
+*.gguf
+*.wav
+
+# Local AI / Ollama models
+ollama/
+models/
+ollama_models/
+
+# Python envs
+venv/
+.venv/
+tts_engines/melotts/venv/
+
+# Generated TTS
+tts/output/

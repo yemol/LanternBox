@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>壳中灯 · AI 助手</title>
+  <link rel="stylesheet" href="/static/style.css" />
+
+  <style>
+    /* =========================================================
+       LanternBox Assistant Page
+       应急模式 + 陪伴模式
+       ========================================================= */
+
+    .assistant-page {
+      width: min(1080px, 92vw);
+      margin: 0 auto;
+      padding: 56px 0 72px;
+    }
+
+    .assistant-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+        var(--panel);
+      box-shadow:
+        0 28px 90px var(--shadow),
+        0 0 50px rgba(104, 199, 255, 0.075),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .assistant-hero::before {
+      content: "";
+      position: absolute;
+      inset: -120px auto auto -120px;
+      width: 280px;
+      height: 280px;
+      border-radius: 999px;
+      background: rgba(104, 199, 255, 0.14);
+      filter: blur(8px);
+    }
+
+    .assistant-hero::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      bottom: -140px;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: rgba(29, 127, 191, 0.12);
+      filter: blur(10px);
+    }
+
+    .assistant-hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .assistant-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .assistant-title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .assistant-title-row h1 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: 0.06em;
+      color: var(--text-main);
+      text-shadow: 0 10px 36px rgba(104, 199, 255, 0.22);
+    }
+
+    .mode-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 6px 12px;
+      border: 1px solid rgba(104, 199, 255, 0.34);
+      border-radius: 999px;
+      color: var(--accent-bright);
+      background: rgba(104, 199, 255, 0.1);
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .assistant-subtitle {
+      margin: 14px 0 0;
+      max-width: 760px;
+      color: var(--text-soft);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: var(--accent-bright);
+      background: rgba(104, 199, 255, 0.08);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .back-home:hover {
+      border-color: var(--border-strong);
+      background: rgba(104, 199, 255, 0.16);
+      box-shadow: 0 0 26px var(--glow);
+    }
+
+    .assistant-layout {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .assistant-panel {
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025)),
+        var(--panel-glass);
+      box-shadow:
+        0 22px 70px rgba(0, 0, 0, 0.26),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .assistant-panel-header {
+      padding: 20px 22px;
+      border-bottom: 1px solid rgba(137, 204, 255, 0.14);
+      background: rgba(255, 255, 255, 0.035);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .assistant-panel-header h2 {
+      margin: 0;
+      font-size: 22px;
+      color: var(--text-main);
+    }
+
+    .assistant-panel-body {
+      padding: 22px;
+    }
+
+    .mode-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .mode-btn {
+      min-height: 74px;
+      padding: 14px 16px;
+      border-radius: 20px;
+      text-align: left;
+      font-size: 15px;
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .mode-btn strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text-main);
+      font-size: 17px;
+    }
+
+    .mode-btn span {
+      display: block;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .mode-btn.active {
+      border-color: var(--border-strong);
+      background: rgba(104, 199, 255, 0.18);
+      box-shadow:
+        0 0 0 3px rgba(104, 199, 255, 0.08),
+        0 0 34px var(--glow);
+    }
+
+    .mode-btn.active span {
+      color: var(--text-soft);
+    }
+
+    .mode-desc {
+      margin: 0 0 16px;
+      padding: 14px 16px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 18px;
+      color: var(--text-soft);
+      background: rgba(255, 255, 255, 0.045);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    #userInput {
+      min-height: 188px;
+      line-height: 1.75;
+    }
+
+    .quick-examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .example {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 11px;
+      border: 1px dashed rgba(104, 199, 255, 0.36);
+      border-radius: 999px;
+      color: var(--accent-bright);
+      background: rgba(255, 255, 255, 0.055);
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .example:hover {
+      border-color: var(--border-strong);
+      background: rgba(104, 199, 255, 0.12);
+    }
+
+    .action-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .assistant-primary,
+    .assistant-secondary {
+      min-height: 52px;
+      width: auto;
+      padding: 12px 18px;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .assistant-primary {
+      border-color: rgba(104, 199, 255, 0.56);
+      background:
+        linear-gradient(135deg, rgba(104, 199, 255, 0.28), rgba(29, 127, 191, 0.32));
+      color: #f4fbff;
+      box-shadow:
+        0 14px 34px rgba(0, 0, 0, 0.24),
+        0 0 30px rgba(104, 199, 255, 0.14);
+    }
+
+    .assistant-secondary {
+      color: var(--accent-bright);
+      background: rgba(104, 199, 255, 0.08);
+      box-shadow: none;
+    }
+
+    .assistant-hint {
+      margin-top: 14px;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .answer-box {
+      min-height: 260px;
+      padding: 18px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 20px;
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.055);
+      line-height: 1.85;
+      white-space: pre-wrap;
+    }
+
+    .answer-box.empty {
+      color: var(--text-muted);
+    }
+
+    .summary-grid-lite {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .summary-lite-card {
+      padding: 16px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .summary-lite-card span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .summary-lite-card strong {
+      display: block;
+      color: var(--text-main);
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 0.9s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from {
+        transform: scale(0.8);
+        opacity: 0.45;
+      }
+      to {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    .section-title {
+      margin: 22px 0 10px;
+      color: var(--accent-bright);
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .trigger-card,
+    .guide-card-mini {
+      padding: 14px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .trigger-card h3,
+    .guide-card-mini h3 {
+      margin: 0 0 8px;
+      color: var(--text-main);
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    .trigger-card p,
+    .guide-card-mini p {
+      margin: 4px 0;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .guide-card-mini {
+      cursor: pointer;
+    }
+
+    .guide-card-mini:hover {
+      border-color: var(--border-strong);
+      background: rgba(104, 199, 255, 0.1);
+      box-shadow: 0 0 26px rgba(104, 199, 255, 0.08);
+    }
+
+    .severity-badge {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #dff4ff;
+      background: rgba(104, 199, 255, 0.14);
+    }
+
+    .severity-emergency {
+      color: #ffdfe5;
+      background: rgba(255, 123, 138, 0.18);
+      border: 1px solid rgba(255, 123, 138, 0.34);
+    }
+
+    .severity-high {
+      color: #ffe8c9;
+      background: rgba(255, 159, 67, 0.18);
+      border: 1px solid rgba(255, 183, 92, 0.34);
+    }
+
+    .empty-text {
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ---------- Guide Modal ---------- */
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    .guide-modal.hidden {
+      display: none;
+    }
+
+    .guide-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+    }
+
+    .guide-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(3, 10, 20, 0.72);
+      backdrop-filter: blur(6px);
+    }
+
+    .guide-modal-card {
+      position: relative;
+      z-index: 1;
+      width: min(860px, 92vw);
+      max-height: 86vh;
+      margin: 7vh auto 0;
+      overflow: hidden;
+      border: 1px solid var(--border-strong);
+      border-radius: 26px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+        rgba(8, 22, 39, 0.96);
+      box-shadow:
+        0 32px 100px rgba(0, 0, 0, 0.48),
+        0 0 54px rgba(104, 199, 255, 0.12);
+    }
+
+    .guide-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 24px;
+      border-bottom: 1px solid rgba(137, 204, 255, 0.16);
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .guide-modal-id {
+      margin: 0 0 8px;
+      color: var(--accent-bright);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .guide-modal-header h2 {
+      margin: 0;
+      color: var(--text-main);
+      font-size: 28px;
+      line-height: 1.35;
+    }
+
+    .guide-modal-category {
+      margin: 10px 0 0;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .guide-modal-close {
+      flex: 0 0 auto;
+      min-height: 42px;
+      width: auto;
+      padding: 9px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      box-shadow: none;
+    }
+
+    .guide-modal-body {
+      max-height: calc(86vh - 112px);
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    .guide-modal-section {
+      margin-bottom: 16px;
+      padding: 16px 18px;
+      border: 1px solid rgba(137, 204, 255, 0.13);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.048);
+    }
+
+    .guide-modal-section h3 {
+      margin: 0 0 10px;
+      color: var(--accent-bright);
+      font-size: 18px;
+    }
+
+    .guide-modal-section p,
+    .guide-modal-section li {
+      color: var(--text-soft);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .guide-modal-section p {
+      margin: 0;
+    }
+
+    .guide-modal-section ul,
+    .guide-modal-section ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .guide-modal-section li + li {
+      margin-top: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .assistant-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .assistant-page {
+        width: min(94vw, 680px);
+        padding: 28px 0 44px;
+      }
+
+      .assistant-hero {
+        padding: 26px;
+        border-radius: 24px;
+      }
+
+      .assistant-header-row {
+        flex-direction: column;
+      }
+
+      .mode-row,
+      .summary-grid-lite {
+        grid-template-columns: 1fr;
+      }
+
+      .assistant-panel-body {
+        padding: 18px;
+      }
+
+      .guide-modal-card {
+        width: 94vw;
+        max-height: 90vh;
+        margin-top: 5vh;
+        border-radius: 22px;
+      }
+
+      .guide-modal-header {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .guide-modal-close {
+        width: 100%;
+      }
+
+      .guide-modal-body {
+        max-height: calc(90vh - 156px);
+        padding: 20px;
+      }
+    }
+
+
+    .voice-action-row {
+      margin-top: 10px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(137, 204, 255, 0.12);
+    }
+
+    .voice-action-row .assistant-secondary {
+      min-height: 44px;
+      font-size: 14px;
+    }
+
+    .ai-action-row .assistant-primary {
+      min-width: 180px;
+    }
+
+    .ai-action-row .assistant-secondary {
+      min-width: 96px;
+    }
+
+    .assistant-secondary.active {
+      border-color: var(--border-strong);
+      background: rgba(104, 199, 255, 0.18);
+      box-shadow: 0 0 24px rgba(104, 199, 255, 0.12);
+    }
+
+    .auto-speak-toggle {
+      border-color: rgba(137, 204, 255, 0.24);
+      color: var(--text-soft);
+      background: rgba(104, 199, 255, 0.06);
+    }
+
+    .auto-speak-toggle.active {
+      border-color: rgba(255, 176, 74, 0.78);
+      color: #fff2d8;
+      background:
+        linear-gradient(135deg, rgba(255, 164, 64, 0.34), rgba(255, 120, 42, 0.2));
+      box-shadow:
+        0 0 0 3px rgba(255, 164, 64, 0.08),
+        0 0 28px rgba(255, 164, 64, 0.24);
+    }
+
+    .auto-speak-toggle.active:hover {
+      border-color: rgba(255, 198, 104, 0.9);
+      background:
+        linear-gradient(135deg, rgba(255, 176, 74, 0.42), rgba(255, 128, 48, 0.28));
+      box-shadow:
+        0 0 0 3px rgba(255, 164, 64, 0.12),
+        0 0 34px rgba(255, 164, 64, 0.32);
+    }
+  </style>
+</head>
+
+<body>
+  <main class="assistant-page">
+    <section class="assistant-hero">
+      <div class="assistant-header-row">
+        <div>
+          <p class="eyebrow">LOCAL AI ASSISTANT</p>
+
+          <div class="assistant-title-row">
+            <h1>壳中灯 AI 助手</h1>
+            <span id="currentModeBadge" class="mode-badge">当前模式：应急模式</span>
+          </div>
+
+          <p id="assistantSubtitle" class="assistant-subtitle">
+            应急模式会优先调用本地触发规则和应急指南，帮助你在断网、断电、断水、灾害或低资源环境下做出判断。
+          </p>
+        </div>
+
+        <a class="back-home" href="/">返回总览</a>
+      </div>
+    </section>
+
+    <section class="assistant-layout">
+      <section class="assistant-panel">
+        <div class="assistant-panel-header">
+          <h2>描述你现在的情况</h2>
+        </div>
+
+        <div class="assistant-panel-body">
+          <div class="mode-row" id="modeRow">
+            <button class="mode-btn active" data-mode="emergency" type="button">
+              <strong>应急模式</strong>
+              <span>处理断供、灾害、伤病、资源不足和突发风险。</span>
+            </button>
+
+            <button class="mode-btn" data-mode="companion" type="button">
+              <strong>陪伴模式</strong>
+              <span>像日常朋友一样聊天，整理情绪、复盘思路、提醒休息。</span>
+            </button>
+          </div>
+
+          <p id="modeDesc" class="mode-desc">
+            当前是应急模式。请尽量说明“发生了什么、在哪里、涉及谁、还有多少物资或时间”。壳中灯会优先给出可执行建议。
+          </p>
+
+          <textarea
+            id="userInput"
+            placeholder="应急模式例子：水只剩一桶了，而且今天很热。&#10;应急模式例子：有人发烧，还一直咳嗽。&#10;陪伴模式例子：今天有点累，不太想继续干活了。&#10;陪伴模式例子：陪我整理一下今天的思路。"
+          ></textarea>
+
+          <div class="quick-examples" id="assistantExamples"></div>
+
+          <div class="action-row ai-action-row">
+            <button class="assistant-primary" id="askBtn" type="button">让壳中灯回应</button>
+            <button class="assistant-secondary" id="clearBtn" type="button">清空</button>
+          </div>
+
+          <div class="action-row voice-action-row">
+            <button class="assistant-secondary" id="speakBtn" type="button">朗读回应</button>
+            <button class="assistant-secondary" id="stopSpeakBtn" type="button">停止播放</button>
+            <button class="assistant-secondary auto-speak-toggle" id="autoSpeakBtn" type="button">自动朗读：关</button>
+          </div>
+
+          <div id="ttsStatus" class="assistant-hint">
+            语音播报：待命
+          </div>
+
+          <div id="assistantHint" class="assistant-hint">
+            应急模式会调取本地资料。陪伴模式会降低压力感，不会默认把每句话都变成任务和警报。
+          </div>
+        </div>
+      </section>
+
+      <section class="assistant-panel">
+        <div class="assistant-panel-header">
+          <h2>当前状态</h2>
+        </div>
+
+        <div class="assistant-panel-body">
+          <div class="summary-grid-lite">
+            <div class="summary-lite-card">
+              <span>当前模式</span>
+              <strong id="currentMode">应急模式</strong>
+            </div>
+            <div class="summary-lite-card">
+              <span>触发场景</span>
+              <strong id="triggerCount">0</strong>
+            </div>
+            <div class="summary-lite-card">
+              <span>最高等级</span>
+              <strong id="topSeverity">-</strong>
+            </div>
+            <div class="summary-lite-card">
+              <span>关联指南</span>
+              <strong id="guideCount">0</strong>
+            </div>
+          </div>
+
+          <p class="assistant-hint" id="modeSideHint">
+            当前模式适合处理资源不足、伤病、灾害、安全和设备异常。遇到紧急情况时，先做最小安全动作。
+          </p>
+        </div>
+      </section>
+
+      <section class="assistant-panel" style="grid-column: 1 / -1;">
+        <div class="assistant-panel-header">
+          <h2 id="answerTitle">壳中灯建议</h2>
+          <div id="loadingState"></div>
+        </div>
+
+        <div class="assistant-panel-body">
+          <div class="answer-box empty" id="answerBox">
+            等待输入情况。壳中灯会在这里给出回应。
+          </div>
+
+          <div id="referenceArea">
+            <div class="section-title">触发场景</div>
+            <div class="list" id="triggerList">
+              <div class="empty-text">暂无触发场景。</div>
+            </div>
+
+            <div class="section-title">关联指南</div>
+            <div class="list" id="guideList">
+              <div class="empty-text">暂无关联指南。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="guide-modal" class="guide-modal hidden">
+    <div class="guide-modal-backdrop" onclick="closeGuideModal()"></div>
+
+    <div class="guide-modal-card">
+      <div class="guide-modal-header">
+        <div>
+          <p id="guide-modal-id" class="guide-modal-id"></p>
+          <h2 id="guide-modal-title">指南标题</h2>
+          <p id="guide-modal-category" class="guide-modal-category"></p>
+        </div>
+        <button class="guide-modal-close" onclick="closeGuideModal()" type="button">关闭</button>
+      </div>
+
+      <div id="guide-modal-body" class="guide-modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+    const modeLabels = {
+      emergency: "应急模式",
+      companion: "陪伴模式"
+    };
+
+    const modeCopy = {
+      emergency: {
+        badge: "当前模式：应急模式",
+        subtitle: "应急模式会优先调用本地触发规则和应急指南，帮助你在断网、断电、断水、灾害或低资源环境下做出判断。",
+        desc: "当前是应急模式。请尽量说明“发生了什么、在哪里、涉及谁、还有多少物资或时间”。壳中灯会优先给出可执行建议。",
+        hint: "应急模式会调取本地资料，优先处理风险、物资、伤病、灾害和设备异常。",
+        sideHint: "当前模式适合处理资源不足、伤病、灾害、安全和设备异常。遇到紧急情况时，先做最小安全动作。",
+        answerTitle: "壳中灯建议",
+        placeholder: "应急模式例子：水只剩一桶了，而且今天很热。\n应急模式例子：有人发烧，还一直咳嗽。\n应急模式例子：晚上听到外面有脚步声。"
+      },
+      companion: {
+        badge: "当前模式：陪伴模式",
+        subtitle: "陪伴模式不会默认拉响警报。你可以把它当成一个低压力的日常朋友，用来聊天、复盘、整理情绪和思路。",
+        desc: "当前是陪伴模式。可以直接说你现在的感受、卡住的事情、今天发生了什么，壳中灯会先陪你整理，而不是马上变成任务清单。",
+        hint: "陪伴模式更适合日常聊天、情绪陪伴、思路整理和温和提醒。只有出现明显危险时，才会建议切回应急模式。",
+        sideHint: "当前模式适合低压力交流。你可以说“我有点累”“陪我复盘一下今天”“我不知道下一步先做什么”。",
+        answerTitle: "壳中灯回应",
+        placeholder: "陪伴模式例子：今天有点累，不太想继续干活了。\n陪伴模式例子：陪我整理一下今天的思路。\n陪伴模式例子：我有点焦虑，但说不清为什么。"
+      }
+    };
+
+    const modeExamples = {
+      emergency: [
+        "水只剩一桶了，而且今天很热",
+        "有人发烧，还一直咳嗽",
+        "晚上听到外面有脚步声"
+      ],
+      companion: [
+        "今天有点累，不太想继续干活了",
+        "陪我整理一下今天的思路",
+        "我有点焦虑，但说不清为什么"
+      ]
+    };
+
+    const CHAT_HISTORY_MAX_MESSAGES = 6;
+
+    let currentMode = "emergency";
+    let latestRelatedGuides = [];
+    let conversationHistory = [];
+    let currentAudio = null;
+    let currentAudioSource = null;
+    let isGeneratingSpeech = false;
+    let autoSpeakEnabled = false;
+    let audioUnlocked = false;
+    let audioContext = null;
+
+    const userInput = document.getElementById("userInput");
+    const askBtn = document.getElementById("askBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const answerBox = document.getElementById("answerBox");
+    const triggerList = document.getElementById("triggerList");
+    const guideList = document.getElementById("guideList");
+    const loadingState = document.getElementById("loadingState");
+    const currentModeEl = document.getElementById("currentMode");
+    const currentModeBadge = document.getElementById("currentModeBadge");
+    const assistantSubtitle = document.getElementById("assistantSubtitle");
+    const modeDesc = document.getElementById("modeDesc");
+    const assistantHint = document.getElementById("assistantHint");
+    const modeSideHint = document.getElementById("modeSideHint");
+    const answerTitle = document.getElementById("answerTitle");
+    const triggerCountEl = document.getElementById("triggerCount");
+    const topSeverityEl = document.getElementById("topSeverity");
+    const guideCountEl = document.getElementById("guideCount");
+    const speakBtn = document.getElementById("speakBtn");
+    const stopSpeakBtn = document.getElementById("stopSpeakBtn");
+    const ttsStatus = document.getElementById("ttsStatus");
+    const autoSpeakBtn = document.getElementById("autoSpeakBtn");
+
+    document.querySelectorAll(".mode-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        switchMode(btn.dataset.mode);
+      });
+    });
+
+
+    askBtn.addEventListener("click", askLanternBox);
+
+    clearBtn.addEventListener("click", clearAssistant);
+    speakBtn.addEventListener("click", speakCurrentAnswer);
+    stopSpeakBtn.addEventListener("click", stopSpeaking);
+    autoSpeakBtn.addEventListener("click", toggleAutoSpeak);
+
+    userInput.addEventListener("keydown", event => {
+      if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
+        askLanternBox();
+      }
+    });
+
+    function switchMode(mode) {
+      currentMode = mode;
+
+      document.querySelectorAll(".mode-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.mode === mode);
+      });
+
+      const copy = modeCopy[currentMode] || modeCopy.emergency;
+
+      currentModeEl.textContent = modeLabels[currentMode] || currentMode;
+      currentModeBadge.textContent = copy.badge;
+      assistantSubtitle.textContent = copy.subtitle;
+      modeDesc.textContent = copy.desc;
+      assistantHint.textContent = copy.hint;
+      modeSideHint.textContent = copy.sideHint;
+      answerTitle.textContent = copy.answerTitle;
+      userInput.placeholder = copy.placeholder;
+      renderModeExamples();
+
+      if (!answerBox.dataset.hasAnswer) {
+        answerBox.textContent = currentMode === "companion"
+          ? "可以随便说点什么。壳中灯会先听你说完，再帮你慢慢整理。"
+          : "等待输入情况。壳中灯会在这里给出建议。";
+      }
+    }
+
+    function renderModeExamples() {
+      const box = document.getElementById("assistantExamples");
+      if (!box) return;
+
+      const examples = modeExamples[currentMode] || modeExamples.emergency;
+
+      box.innerHTML = examples.map(text => `
+        <span class="example" onclick="useAssistantExample('${escapeJs(text)}')">
+          ${escapeHtml(text)}
+        </span>
+      `).join("");
+    }
+
+    function useAssistantExample(text) {
+      userInput.value = text;
+      userInput.focus();
+    }
+
+    function escapeJs(value) {
+      return String(value)
+        .replaceAll("\\", "\\\\")
+        .replaceAll("'", "\\'")
+        .replaceAll("\n", "\\n")
+        .replaceAll("\r", "");
+    }
+
+    async function askLanternBox() {
+    const message = userInput.value.trim();
+
+    if (!message) {
+        answerBox.textContent = currentMode === "companion"
+        ? "可以先说一句很简单的话，比如：今天有点累。"
+        : "请先描述一个情况，例如：有人发烧，还一直咳嗽。";
+        answerBox.classList.add("empty");
+        answerBox.dataset.hasAnswer = "";
+        return;
+    }
+
+    setLoading(true);
+
+    try {
+        const metaResponse = await fetch("/api/ai/advice", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            message,
+            mode: currentMode,
+            metadata_only: true,
+            history: conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES)
+        })
+        });
+
+        if (!metaResponse.ok) {
+        const errText = await metaResponse.text();
+        throw new Error(errText || "结构化信息请求失败");
+        }
+
+        const metaData = await metaResponse.json();
+
+        renderResult({
+        ...metaData,
+        answer: ""
+        });
+
+        answerBox.textContent = "";
+        answerBox.classList.remove("empty");
+        answerBox.dataset.hasAnswer = "true";
+
+        const streamResponse = await fetch("/api/ai/advice/stream", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            message,
+            mode: currentMode,
+            history: conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES)
+        })
+        });
+
+        if (!streamResponse.ok || !streamResponse.body) {
+        throw new Error("流式接口请求失败");
+        }
+
+        const reader = streamResponse.body.getReader();
+        const decoder = new TextDecoder("utf-8");
+
+        let fullText = "";
+
+        while (true) {
+        const { value, done } = await reader.read();
+
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        fullText += chunk;
+        answerBox.textContent = fullText;
+        answerBox.scrollTop = answerBox.scrollHeight;
+        }
+
+        if (!fullText.trim()) {
+        answerBox.textContent = metaData.answer || "没有返回内容。";
+        }
+
+        if (fullText.trim()) {
+          conversationHistory.push({
+            role: "user",
+            content: message
+          });
+
+          conversationHistory.push({
+            role: "assistant",
+            content: fullText.trim()
+          });
+
+          conversationHistory = conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES);
+
+          if (autoSpeakEnabled) {
+            if (audioUnlocked) {
+              await speakText(fullText.trim());
+            } else if (ttsStatus) {
+              ttsStatus.textContent = "语音播报：请先打开“自动朗读”";
+            }
+          }
+        }
+
+    } catch (error) {
+        console.error(error);
+        answerBox.textContent = "请求失败：请确认 FastAPI 后端正在运行，并且 /api/ai/advice 与 /api/ai/advice/stream 可用。";
+        answerBox.classList.add("empty");
+        answerBox.dataset.hasAnswer = "";
+    } finally {
+        setLoading(false);
+    }
+    }
+
+    function setLoading(isLoading) {
+      askBtn.disabled = isLoading;
+
+      if (isLoading) {
+        loadingState.innerHTML = '<span class="loading"><span class="dot"></span>壳中灯正在回应...</span>';
+        answerBox.textContent = currentMode === "companion"
+          ? "正在整理你的话，不急。"
+          : "正在读取本地资源并调用本地 AI...";
+        answerBox.classList.add("empty");
+        answerBox.dataset.hasAnswer = "";
+      } else {
+        loadingState.innerHTML = "";
+      }
+    }
+
+    function renderResult(data) {
+      answerBox.textContent = data.answer || "没有返回内容。";
+      answerBox.classList.remove("empty");
+      answerBox.dataset.hasAnswer = "true";
+
+      const triggers = data.matched_triggers || [];
+      const guides = data.related_guides || [];
+      latestRelatedGuides = guides;
+
+      triggerCountEl.textContent = triggers.length;
+      guideCountEl.textContent = guides.length;
+      topSeverityEl.textContent = getTopSeverity(triggers);
+
+      renderTriggers(triggers);
+      renderGuides(guides);
+    }
+
+    function clearAssistant() {
+      stopSpeaking();
+      userInput.value = "";
+      latestRelatedGuides = [];
+      conversationHistory = [];
+      answerBox.textContent = currentMode === "companion"
+        ? "可以随便说点什么。壳中灯会先听你说完，再帮你慢慢整理。"
+        : "等待输入情况。壳中灯会在这里给出建议。";
+      answerBox.classList.add("empty");
+      answerBox.dataset.hasAnswer = "";
+      triggerList.innerHTML = '<div class="empty-text">暂无触发场景。</div>';
+      guideList.innerHTML = '<div class="empty-text">暂无关联指南。</div>';
+      triggerCountEl.textContent = "0";
+      topSeverityEl.textContent = "-";
+      guideCountEl.textContent = "0";
+    }
+
+    function getTopSeverity(triggers) {
+      if (!triggers.length) return "-";
+
+      const order = {
+        "紧急": 4,
+        "高": 3,
+        "中": 2,
+        "低": 1
+      };
+
+      const sorted = [...triggers].sort((a, b) => {
+        return (order[b.severity] || 0) - (order[a.severity] || 0);
+      });
+
+      return sorted[0].severity || "-";
+    }
+
+    function renderTriggers(triggers) {
+      if (!triggers.length) {
+        triggerList.innerHTML = currentMode === "companion"
+          ? '<div class="empty-text">陪伴模式下通常不会显示触发场景，除非内容里出现明显风险。</div>'
+          : '<div class="empty-text">暂无触发场景。</div>';
+        return;
+      }
+
+      triggerList.innerHTML = triggers.map(trigger => {
+        const severity = trigger.severity || "低";
+        const severityClass = severity === "紧急"
+          ? "severity-emergency"
+          : severity === "高"
+            ? "severity-high"
+            : "";
+
+        return `
+          <article class="trigger-card">
+            <h3>
+              ${escapeHtml(trigger.title || "未命名触发")}
+              <span class="severity-badge ${severityClass}">${escapeHtml(severity)}</span>
+            </h3>
+            <p>分类：${escapeHtml(trigger.category || "-")}</p>
+            <p>提醒类型：${escapeHtml(trigger.reminder_type || "-")}</p>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function renderGuides(guides) {
+      if (!guides.length) {
+        guideList.innerHTML = currentMode === "companion"
+          ? '<div class="empty-text">陪伴模式下不一定需要引用指南。必要时，壳中灯会把相关资料放在这里。</div>'
+          : '<div class="empty-text">暂无关联指南。</div>';
+        return;
+      }
+
+      guideList.innerHTML = guides.map((guide, index) => {
+        return `
+          <article class="guide-card-mini" onclick="openGuideModal(${index})">
+            <h3>${escapeHtml(guide.title || "未命名指南")}</h3>
+            <p>分类：${escapeHtml(guide.category || "-")}</p>
+            <p>${escapeHtml(guide.scenario || guide.goal || "点击查看完整指南。")}</p>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function openGuideModal(index) {
+      const guide = latestRelatedGuides[index];
+
+      if (!guide) return;
+
+      const modal = document.getElementById("guide-modal");
+      const modalId = document.getElementById("guide-modal-id");
+      const modalTitle = document.getElementById("guide-modal-title");
+      const modalCategory = document.getElementById("guide-modal-category");
+      const modalBody = document.getElementById("guide-modal-body");
+
+      modalId.textContent = guide.id || "";
+      modalTitle.textContent = guide.title || "未命名指南";
+      modalCategory.textContent = guide.category_original
+        ? `${guide.category || ""} / 原分类：${guide.category_original}`
+        : (guide.category || "");
+
+      modalBody.innerHTML = `
+        ${renderGuideSection("适用场景", guide.scenario)}
+        ${renderGuideSection("目标", guide.goal)}
+        ${renderGuideList("需要工具", guide.tools)}
+        ${renderGuideList("操作步骤", guide.steps, true)}
+        ${renderGuideList("检查点", guide.check)}
+        ${renderGuideList("常见错误", guide.common_mistakes)}
+        ${renderGuideSection("备用方案", guide.fallback)}
+        ${renderGuideList("停止或升级处理", guide.stop_or_escalate)}
+        ${renderGuideSection("备注", guide.notes)}
+      `;
+
+      requestAnimationFrame(() => {
+        modalBody.scrollTop = 0;
+      });
+
+      modal.classList.remove("hidden");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeGuideModal() {
+      const modal = document.getElementById("guide-modal");
+      modal.classList.add("hidden");
+      document.body.classList.remove("modal-open");
+    }
+
+    function renderGuideSection(title, content) {
+      if (!content) return "";
+
+      return `
+        <section class="guide-modal-section">
+          <h3>${escapeHtml(title)}</h3>
+          <p>${escapeHtml(content)}</p>
+        </section>
+      `;
+    }
+
+    function renderGuideList(title, list, ordered = false) {
+      if (!Array.isArray(list) || list.length === 0) return "";
+
+      const tag = ordered ? "ol" : "ul";
+
+      return `
+        <section class="guide-modal-section">
+          <h3>${escapeHtml(title)}</h3>
+          <${tag}>
+            ${list.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
+          </${tag}>
+        </section>
+      `;
+    }
+
+    async function playAudioWithAudioContext(audioUrl) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+
+      if (!AudioContextClass) {
+        throw new Error("当前浏览器不支持 AudioContext");
+      }
+
+      if (!audioContext) {
+        audioContext = new AudioContextClass();
+      }
+
+      if (audioContext.state === "suspended") {
+        await audioContext.resume();
+      }
+
+      try {
+        const response = await fetch(audioUrl, {
+          cache: "no-store"
+        });
+
+        if (!response.ok) {
+          throw new Error("音频文件读取失败");
+        }
+
+        const arrayBuffer = await response.arrayBuffer();
+        const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+        stopSpeaking(false);
+
+        const source = audioContext.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(audioContext.destination);
+
+        currentAudioSource = source;
+
+        source.onended = () => {
+          if (currentAudioSource === source) {
+            currentAudioSource = null;
+          }
+
+          if (ttsStatus) {
+            ttsStatus.textContent = "语音播报：播放完成";
+          }
+        };
+
+        source.start(0);
+
+        if (ttsStatus) {
+          ttsStatus.textContent = "语音播报：正在播放";
+        }
+
+      } catch (error) {
+        console.error("AudioContext 播放失败，尝试使用 Audio 元素播放：", error);
+
+        stopSpeaking(false);
+
+        currentAudio = new Audio(audioUrl);
+
+        currentAudio.addEventListener("play", () => {
+          if (ttsStatus) {
+            ttsStatus.textContent = "语音播报：正在播放";
+          }
+        });
+
+        currentAudio.addEventListener("ended", () => {
+          if (ttsStatus) {
+            ttsStatus.textContent = "语音播报：播放完成";
+          }
+          currentAudio = null;
+        });
+
+        currentAudio.addEventListener("error", () => {
+          if (ttsStatus) {
+            ttsStatus.textContent = "语音播报：播放失败";
+          }
+          currentAudio = null;
+        });
+
+        await currentAudio.play();
+      }
+    }
+
+    async function unlockAudioForAutoSpeak() {
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+
+        if (!AudioContextClass) {
+          throw new Error("当前浏览器不支持 AudioContext");
+        }
+
+        if (!audioContext) {
+          audioContext = new AudioContextClass();
+        }
+
+        if (audioContext.state === "suspended") {
+          await audioContext.resume();
+        }
+
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        gainNode.gain.value = 0.0001;
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.03);
+
+        audioUnlocked = true;
+
+        if (ttsStatus) {
+          ttsStatus.textContent = "语音播报：自动朗读已启用";
+        }
+
+        return true;
+      } catch (error) {
+        console.error("unlockAudioForAutoSpeak failed:", error);
+        audioUnlocked = false;
+
+        if (ttsStatus) {
+          ttsStatus.textContent = "语音播报：启用失败，请先手动点击一次朗读回应";
+        }
+
+        alert("自动朗读启用失败：" + error.message);
+        return false;
+      }
+    }
+
+    async function toggleAutoSpeak() {
+      if (autoSpeakEnabled) {
+        autoSpeakEnabled = false;
+        autoSpeakBtn.textContent = "自动朗读：关";
+        autoSpeakBtn.classList.remove("active");
+
+        if (ttsStatus) {
+          ttsStatus.textContent = "语音播报：自动朗读已关闭";
+        }
+        return;
+      }
+
+      const unlocked = audioUnlocked || await unlockAudioForAutoSpeak();
+
+      if (!unlocked) {
+        autoSpeakEnabled = false;
+        autoSpeakBtn.textContent = "自动朗读：关";
+        autoSpeakBtn.classList.remove("active");
+        return;
+      }
+
+      autoSpeakEnabled = true;
+      autoSpeakBtn.textContent = "自动朗读：开";
+      autoSpeakBtn.classList.add("active");
+
+      if (ttsStatus) {
+        ttsStatus.textContent = "语音播报：自动朗读已开启";
+      }
+    }
+
+    async function speakText(text) {
+      if (isGeneratingSpeech) {
+        return;
+      }
+
+      text = String(text || "").trim();
+
+      if (!text) {
+        ttsStatus.textContent = "语音播报：没有可朗读的内容";
+        return;
+      }
+
+      const maxSpeakChars = 800;
+
+      if (text.length > maxSpeakChars) {
+        text = text.slice(0, maxSpeakChars) + "。";
+        ttsStatus.textContent = "语音播报：内容较长，本次只朗读前半部分";
+      } else {
+        ttsStatus.textContent = "语音播报：正在生成语音...";
+      }
+
+      isGeneratingSpeech = true;
+      speakBtn.disabled = true;
+      speakBtn.textContent = "生成语音中...";
+
+      try {
+        stopSpeaking(false);
+
+        const response = await fetch("/api/tts/speak", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            text,
+            mode: currentMode
+          })
+        });
+
+        if (!response.ok) {
+          const errText = await response.text();
+          throw new Error(errText || "语音生成失败");
+        }
+
+        const data = await response.json();
+
+        if (!data.audio_url) {
+          throw new Error("没有返回音频地址");
+        }
+
+        await playAudioWithAudioContext(data.audio_url);
+        audioUnlocked = true;
+
+      } catch (error) {
+        console.error(error);
+        ttsStatus.textContent = "语音播报：生成或播放失败";
+        alert("语音播报失败：" + error.message);
+      } finally {
+        isGeneratingSpeech = false;
+        speakBtn.disabled = false;
+        speakBtn.textContent = "朗读回应";
+      }
+    }
+
+    async function speakCurrentAnswer() {
+      const text = answerBox.textContent.trim();
+
+      if (!text || answerBox.classList.contains("empty")) {
+        ttsStatus.textContent = "语音播报：还没有可朗读的内容";
+        return;
+      }
+
+      await speakText(text);
+    }
+
+    function stopSpeaking(updateStatus = true) {
+      if (currentAudioSource) {
+        try {
+          currentAudioSource.stop();
+        } catch (error) {
+          console.warn("停止 AudioContext 播放失败：", error);
+        }
+        currentAudioSource = null;
+      }
+
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+      }
+
+      if (updateStatus && ttsStatus) {
+        ttsStatus.textContent = "语音播报：已停止";
+      }
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        closeGuideModal();
+      }
+    });
+
+    switchMode("emergency");
+  </script>
+</body>
+</html>

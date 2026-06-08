@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>壳中灯 · 应急指南库</title>
+  <link rel="stylesheet" href="/static/style.css" />
+
+  <style>
+    .emergency-page {
+      width: min(1080px, 92vw);
+      margin: 0 auto;
+      padding: 56px 0 72px;
+    }
+
+    /* 顶部标题区 */
+    .emergency-page .page-header {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 28px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+        var(--panel);
+      box-shadow:
+        0 28px 90px var(--shadow),
+        0 0 50px rgba(104, 199, 255, 0.075),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .emergency-page .page-title-wrap h1 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.08;
+      color: var(--text-main);
+      letter-spacing: 0.06em;
+      text-shadow: 0 10px 36px rgba(104, 199, 255, 0.22);
+    }
+
+    .emergency-page .page-title-wrap p {
+      margin: 12px 0 0;
+      color: var(--text-soft);
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    .emergency-page .back-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 104px;
+      height: 44px;
+      padding: 0 16px;
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--accent-bright);
+      border: 1px solid var(--border);
+      background: rgba(104, 199, 255, 0.08);
+      font-weight: 800;
+    }
+
+    .emergency-page .back-link:hover {
+      border-color: var(--border-strong);
+      background: rgba(104, 199, 255, 0.16);
+      box-shadow: 0 0 26px var(--glow);
+    }
+
+    /* 统计区 */
+    .emergency-page .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .emergency-page .summary-card {
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      background: var(--panel-soft);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .emergency-page .summary-label {
+      font-size: 13px;
+      color: rgba(216, 236, 255, 0.68);
+    }
+
+    .emergency-page .summary-value {
+      margin-top: 6px;
+      font-size: 26px;
+      font-weight: 800;
+      color: #f4f9ff;
+    }
+
+    /* 搜索和筛选 */
+    .emergency-page .control-panel {
+      display: grid;
+      grid-template-columns: 1.3fr 0.8fr 0.6fr;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding: 18px;
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025)),
+        var(--panel-glass);
+      border: 1px solid var(--border);
+      box-shadow:
+        0 18px 54px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .emergency-page .control-panel input,
+    .emergency-page .control-panel select {
+      width: 100%;
+      height: 44px;
+      box-sizing: border-box;
+      border-radius: 14px;
+      border: 1px solid rgba(116, 181, 255, 0.25);
+      background: rgba(2, 10, 24, 0.55);
+      color: #eef7ff;
+      padding: 0 14px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .emergency-page .control-panel input::placeholder {
+      color: rgba(224, 240, 255, 0.42);
+    }
+
+    .emergency-page .control-panel input:focus,
+    .emergency-page .control-panel select:focus {
+      border-color: rgba(142, 202, 255, 0.65);
+      box-shadow: 0 0 0 3px rgba(74, 163, 255, 0.12);
+    }
+
+    /* 顶部分类按钮 */
+    .emergency-page .category-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0 0 18px;
+    }
+
+    .emergency-page .category-pill {
+      border: 1px solid var(--border);
+      background: rgba(104, 199, 255, 0.08);
+      color: var(--text-soft);
+      border-radius: 999px;
+      padding: 8px 13px;
+      min-height: 38px;
+      font-size: 14px;
+      line-height: 1.2;
+      cursor: pointer;
+      font-weight: 800;
+      transition: 0.16s ease;
+      box-shadow: none;
+    }
+
+    .emergency-page .category-pill:hover {
+      background: rgba(37, 111, 208, 0.28);
+      transform: translateY(-1px);
+    }
+
+    .emergency-page .category-pill.active {
+      background: rgba(104, 199, 255, 0.22);
+      border-color: var(--border-strong);
+      color: #ffffff;
+      box-shadow: 0 0 24px rgba(104, 199, 255, 0.1);
+    }
+
+    /* 指南列表 */
+    .emergency-page .guide-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .emergency-page .guide-card {
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025)),
+        rgba(8, 22, 42, 0.88);
+      border: 1px solid rgba(137, 204, 255, 0.16);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow:
+        0 16px 44px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .emergency-page .deep-guide-card {
+      border-color: rgba(104, 199, 255, 0.28);
+      background:
+        linear-gradient(180deg, rgba(10, 32, 58, 0.94), rgba(7, 18, 36, 0.94));
+    }
+
+    /* 卡片头部 */
+    .emergency-page .guide-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .emergency-page .guide-card-main {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .emergency-page .guide-id {
+      font-size: 12px;
+      color: #7fb8ff;
+      letter-spacing: 0.08em;
+    }
+
+    /* 标题 + 分类标签同行 */
+    .emergency-page .guide-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .emergency-page .guide-title-row h3 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.35;
+      color: #f4f9ff;
+    }
+
+    .emergency-page .guide-category {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.2;
+      color: #d8ecff;
+      background: rgba(54, 137, 255, 0.22);
+      border: 1px solid rgba(108, 178, 255, 0.3);
+      white-space: nowrap;
+    }
+
+    /* 右侧按钮 */
+    .emergency-page .guide-card-actions {
+      display: flex;
+      align-items: flex-start;
+      flex-shrink: 0;
+    }
+
+    .emergency-page .guide-toggle-btn {
+      height: 34px;
+      min-width: 82px;
+      padding: 0 18px;
+      border-radius: 9px;
+      border: 1px solid rgba(255, 183, 92, 0.55);
+      background: linear-gradient(
+        180deg,
+        rgba(255, 159, 67, 0.96),
+        rgba(224, 112, 24, 0.96)
+      );
+      color: #fff8ed;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 6px 16px rgba(224, 112, 24, 0.22);
+      transition: 0.16s ease;
+    }
+
+    .emergency-page .guide-toggle-btn:hover {
+      background: linear-gradient(
+        180deg,
+        rgba(255, 178, 88, 1),
+        rgba(238, 126, 31, 1)
+      );
+      border-color: rgba(255, 207, 132, 0.72);
+      transform: translateY(-1px);
+    }
+
+    .emergency-page .guide-card.expanded .guide-toggle-btn {
+      border-color: rgba(116, 181, 255, 0.55);
+      background: linear-gradient(
+        180deg,
+        rgba(80, 168, 255, 0.95),
+        rgba(37, 111, 208, 0.95)
+      );
+      color: #eef8ff;
+      box-shadow: 0 6px 16px rgba(37, 111, 208, 0.24);
+    }
+
+    .emergency-page .guide-card.expanded .guide-toggle-btn:hover {
+      background: linear-gradient(
+        180deg,
+        rgba(112, 190, 255, 1),
+        rgba(48, 128, 225, 1)
+      );
+      border-color: rgba(154, 213, 255, 0.72);
+    }
+
+    /* 摘要 */
+    .emergency-page .guide-summary {
+      margin-top: 8px;
+      color: rgba(230, 244, 255, 0.72);
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    /* 折叠内容 */
+    .emergency-page .guide-detail {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .emergency-page .guide-card.expanded .guide-detail {
+      display: block;
+    }
+
+    /* 内容块 */
+    .emergency-page .guide-section {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .emergency-page .guide-section h4 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      color: #8dccff;
+    }
+
+    .emergency-page .guide-section p {
+      margin: 0;
+      color: #e7f2ff;
+      line-height: 1.75;
+      white-space: pre-wrap;
+    }
+
+    .emergency-page .guide-section ul,
+    .emergency-page .guide-section ol {
+      margin: 0;
+      padding-left: 22px;
+      color: #e7f2ff;
+      line-height: 1.75;
+    }
+
+    .emergency-page .guide-section li + li {
+      margin-top: 6px;
+    }
+
+    .emergency-page .guide-section ol li::marker {
+      color: #72baff;
+      font-weight: 700;
+    }
+
+    .emergency-page .guide-section ul li::marker {
+      color: #72baff;
+    }
+
+    /* 分页 */
+    .emergency-page .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .emergency-page .pagination button {
+      height: 40px;
+      padding: 0 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(116, 181, 255, 0.28);
+      background: rgba(37, 111, 208, 0.18);
+      color: #dceeff;
+      cursor: pointer;
+      transition: 0.16s ease;
+    }
+
+    .emergency-page .pagination button:hover:not(:disabled) {
+      background: rgba(60, 145, 255, 0.28);
+    }
+
+    .emergency-page .pagination button:disabled {
+      opacity: 0.38;
+      cursor: not-allowed;
+    }
+
+    .emergency-page .page-indicator {
+      color: rgba(230, 244, 255, 0.78);
+      font-size: 14px;
+    }
+
+    /* 空状态 / 错误状态 */
+    .emergency-page .empty-state,
+    .emergency-page .error-state {
+      padding: 28px;
+      border-radius: 20px;
+      text-align: center;
+      background: rgba(8, 22, 42, 0.72);
+      border: 1px solid rgba(104, 174, 255, 0.18);
+      color: rgba(230, 244, 255, 0.82);
+      line-height: 1.7;
+    }
+
+    .emergency-page .error-state strong {
+      color: #ffd4d4;
+    }
+
+    /* 响应式 */
+    @media (max-width: 880px) {
+      .emergency-page .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .emergency-page .control-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .emergency-page .page-header {
+        flex-direction: column;
+      }
+
+      .emergency-page .back-link {
+        width: fit-content;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .emergency-page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 18px;
+      }
+
+      .emergency-page .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .emergency-page .page-title-wrap h1 {
+        font-size: 25px;
+      }
+
+      .emergency-page .guide-card-header {
+        flex-direction: column;
+      }
+
+      .emergency-page .guide-card-actions {
+        width: 100%;
+      }
+
+      .emergency-page .guide-toggle-btn {
+        width: 100%;
+      }
+
+      .emergency-page .guide-title-row {
+        align-items: flex-start;
+      }
+
+      .emergency-page .guide-category {
+        width: fit-content;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <main class="page-shell  emergency-page">
+    <header class="page-header">
+      <div class="page-title-wrap">
+        <h1>应急指南库</h1>
+        <p>壳中灯的离线操作手册。不是喊口号，是尽量让每一条都能在断网、断电、无外援时照着做。</p>
+      </div>
+      <a class="back-link" href="/">返回总览</a>
+    </header>
+
+    <section class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-label">指南总数</div>
+        <div class="summary-value" id="totalCount">0</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">当前筛选</div>
+        <div class="summary-value" id="filteredCount">0</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">分类数量</div>
+        <div class="summary-value" id="categoryCount">0</div>
+      </div>
+    </section>
+
+    <section class="control-panel">
+      <input id="searchInput" type="search" placeholder="搜索标题、场景、步骤、工具、注意事项……" />
+      <select id="categorySelect">
+        <option value="">全部分类</option>
+      </select>
+      <select id="pageSizeSelect">
+        <option value="10" selected>每页 10 条</option>
+        <option value="20">每页 20 条</option>
+        <option value="50">每页 50 条</option>
+        <option value="9999">显示全部</option>
+      </select>
+    </section>
+
+    <section class="category-pills" id="categoryPills"></section>
+
+    <section id="guideList" class="guide-list">
+      <div class="empty-state">正在读取指南库……</div>
+    </section>
+
+    <nav class="pagination" id="pagination">
+      <button id="prevBtn">上一页</button>
+      <span class="page-indicator" id="pageIndicator">第 1 / 1 页</span>
+      <button id="nextBtn">下一页</button>
+    </nav>
+  </main>
+
+  <script>
+    let allGuides = [];
+    let filteredGuides = [];
+    let currentPage = 1;
+    let pageSize = 10;
+    let currentCategory = "";
+
+    const DATA_URLS = [
+      "/data/emergency_guides.json",
+      "/static/data/emergency_guides.json",
+      "/api/emergency_guides",
+      "/api/emergency"
+    ];
+
+    const guideList = document.getElementById("guideList");
+    const searchInput = document.getElementById("searchInput");
+    const categorySelect = document.getElementById("categorySelect");
+    const pageSizeSelect = document.getElementById("pageSizeSelect");
+    const categoryPills = document.getElementById("categoryPills");
+
+    const totalCount = document.getElementById("totalCount");
+    const filteredCount = document.getElementById("filteredCount");
+    const categoryCount = document.getElementById("categoryCount");
+
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const pageIndicator = document.getElementById("pageIndicator");
+
+    document.addEventListener("DOMContentLoaded", init);
+
+    async function init() {
+      bindEvents();
+      await loadGuides();
+    }
+
+    function bindEvents() {
+      searchInput.addEventListener("input", () => {
+        currentPage = 1;
+        applyFilters();
+      });
+
+      categorySelect.addEventListener("change", () => {
+        currentCategory = categorySelect.value;
+        currentPage = 1;
+        applyFilters();
+      });
+
+      pageSizeSelect.addEventListener("change", () => {
+        pageSize = Number(pageSizeSelect.value);
+        currentPage = 1;
+        render();
+      });
+
+      prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          render();
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        const totalPages = getTotalPages();
+        if (currentPage < totalPages) {
+          currentPage++;
+          render();
+        }
+      });
+    }
+
+    async function loadGuides() {
+      let lastError = null;
+
+      for (const url of DATA_URLS) {
+        try {
+          const res = await fetch(url, { cache: "no-store" });
+          if (!res.ok) {
+            lastError = new Error(`${url} 返回 ${res.status}`);
+            continue;
+          }
+
+          const data = await res.json();
+          const guides = normalizeGuideData(data);
+
+          if (Array.isArray(guides) && guides.length > 0) {
+            allGuides = guides;
+            setupCategories();
+            applyFilters();
+            return;
+          }
+
+          lastError = new Error(`${url} 没有读取到有效数组`);
+        } catch (err) {
+          lastError = err;
+        }
+      }
+
+      guideList.innerHTML = `
+        <div class="error-state">
+          <strong>指南库读取失败。</strong><br />
+          请确认 emergency_guides.json 已放在 data 目录，并且后端已开放静态读取。<br />
+          <small>${escapeHtml(lastError ? lastError.message : "未知错误")}</small>
+        </div>
+      `;
+      updateSummary();
+      updatePagination();
+    }
+
+    function normalizeGuideData(data) {
+      if (Array.isArray(data)) return data;
+      if (data && Array.isArray(data.guides)) return data.guides;
+      if (data && Array.isArray(data.items)) return data.items;
+      if (data && Array.isArray(data.data)) return data.data;
+      return [];
+    }
+
+    function setupCategories() {
+      const categories = getCategories();
+
+      categorySelect.innerHTML = `<option value="">全部分类</option>` +
+        categories.map(cat => `<option value="${escapeHtml(cat)}">${escapeHtml(cat)}</option>`).join("");
+
+      categoryPills.innerHTML = `
+        <button class="category-pill active" data-category="">全部</button>
+        ${categories.map(cat => `
+          <button class="category-pill" data-category="${escapeHtml(cat)}">${escapeHtml(cat)}</button>
+        `).join("")}
+      `;
+
+      categoryPills.querySelectorAll(".category-pill").forEach(btn => {
+        btn.addEventListener("click", () => {
+          currentCategory = btn.dataset.category || "";
+          categorySelect.value = currentCategory;
+          currentPage = 1;
+          updatePillActive();
+          applyFilters();
+        });
+      });
+    }
+
+    function getCategories() {
+      return [...new Set(allGuides.map(card => card.category || "未分类"))].sort((a, b) =>
+        String(a).localeCompare(String(b), "zh-Hans-CN")
+      );
+    }
+
+    function updatePillActive() {
+      categoryPills.querySelectorAll(".category-pill").forEach(btn => {
+        btn.classList.toggle("active", (btn.dataset.category || "") === currentCategory);
+      });
+    }
+
+    function applyFilters() {
+      const keyword = searchInput.value.trim().toLowerCase();
+
+      filteredGuides = allGuides.filter(card => {
+        const matchCategory = !currentCategory || (card.category || "未分类") === currentCategory;
+        if (!matchCategory) return false;
+
+        if (!keyword) return true;
+
+        const haystack = buildSearchText(card).toLowerCase();
+        return haystack.includes(keyword);
+      });
+
+      updatePillActive();
+      render();
+    }
+
+    function buildSearchText(card) {
+      const parts = [
+        card.id,
+        card.title,
+        card.category,
+        card.scenario,
+        card.goal,
+        card.fallback,
+        card.notes,
+        card.observe,
+        ...(card.tools || []),
+        ...(card.steps || []),
+        ...(card.check || []),
+        ...(card.common_mistakes || []),
+        ...(card.stop_or_escalate || []),
+        ...(card.do_first || []),
+        ...(card.avoid || []),
+        ...(card.items || [])
+      ];
+
+      return parts.filter(Boolean).join(" ");
+    }
+
+    function render() {
+      updateSummary();
+
+      if (filteredGuides.length === 0) {
+        guideList.innerHTML = `<div class="empty-state">没有找到符合条件的指南。</div>`;
+        updatePagination();
+        return;
+      }
+
+      const totalPages = getTotalPages();
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+      const pageItems = filteredGuides.slice(start, end);
+
+      guideList.innerHTML = pageItems.map(renderGuideCard).join("");
+      updatePagination();
+    }
+
+    function updateSummary() {
+      const categories = getCategories();
+      totalCount.textContent = allGuides.length;
+      filteredCount.textContent = filteredGuides.length || 0;
+      categoryCount.textContent = categories.length;
+    }
+
+    function getTotalPages() {
+      if (!filteredGuides.length) return 1;
+      return Math.max(1, Math.ceil(filteredGuides.length / pageSize));
+    }
+
+    function updatePagination() {
+      const totalPages = getTotalPages();
+      pageIndicator.textContent = `第 ${currentPage} / ${totalPages} 页`;
+      prevBtn.disabled = currentPage <= 1;
+      nextBtn.disabled = currentPage >= totalPages;
+    }
+
+    function isDeepCard(card) {
+      return Boolean(card.steps || card.goal || card.tools || card.check || card.common_mistakes || card.stop_or_escalate);
+    }
+
+    function renderGuideCard(card) {
+      const isDeep = isDeepCard(card);
+      const cardId = escapeHtml(card.id || "");
+      const safeTitle = escapeHtml(card.title || "未命名指南");
+      const safeCategory = escapeHtml(card.category || "未分类");
+      const summary = getGuideSummary(card);
+
+      if (isDeep) {
+        return `
+          <article class="guide-card deep-guide-card">
+            <div class="guide-card-header">
+              <div class="guide-card-main">
+                <div class="guide-id">${cardId}</div>
+
+                <div class="guide-title-row">
+                  <h3>${safeTitle}</h3>
+                  <span class="guide-category">${safeCategory}</span>
+                </div>
+
+                ${summary ? `<div class="guide-summary">${escapeHtml(summary)}</div>` : ""}
+              </div>
+
+              <div class="guide-card-actions">
+                <button class="guide-toggle-btn" type="button" onclick="toggleGuideCard(this)">
+                  展开
+                </button>
+              </div>
+            </div>
+
+            <div class="guide-detail">
+              ${renderTextBlock("适用场景", card.scenario)}
+              ${renderTextBlock("目标", card.goal)}
+              ${renderListBlock("需要工具", card.tools)}
+              ${renderListBlock("具体步骤", card.steps, true)}
+              ${renderListBlock("如何判断做对了", card.check)}
+              ${renderListBlock("常见错误", card.common_mistakes)}
+              ${renderTextBlock("没有工具时怎么办", card.fallback)}
+              ${renderListBlock("什么时候停止 / 升级处理", card.stop_or_escalate)}
+              ${renderTextBlock("补充说明", card.notes)}
+            </div>
+          </article>
+        `;
+      }
+
+      return `
+        <article class="guide-card">
+          <div class="guide-card-header">
+            <div class="guide-card-main">
+              <div class="guide-id">${cardId}</div>
+
+              <div class="guide-title-row">
+                <h3>${safeTitle}</h3>
+                <span class="guide-category">${safeCategory}</span>
+              </div>
+
+              ${summary ? `<div class="guide-summary">${escapeHtml(summary)}</div>` : ""}
+            </div>
+
+            <div class="guide-card-actions">
+              <button class="guide-toggle-btn" type="button" onclick="toggleGuideCard(this)">
+                展开
+              </button>
+            </div>
+          </div>
+
+          <div class="guide-detail">
+            ${renderTextBlock("适用场景", card.scenario)}
+            ${renderListBlock("先做什么", card.do_first)}
+            ${renderListBlock("不要做什么", card.avoid)}
+            ${renderListBlock("需要物品", card.items)}
+            ${renderTextBlock("观察重点", card.observe)}
+          </div>
+        </article>
+      `;
+    }
+
+    function renderTextBlock(label, value) {
+      if (!value) return "";
+      return `
+        <section class="guide-section">
+          <h4>${escapeHtml(label)}</h4>
+          <p>${escapeHtml(value)}</p>
+        </section>
+      `;
+    }
+
+    function renderListBlock(label, arr, ordered = false) {
+      if (!Array.isArray(arr) || arr.length === 0) return "";
+
+      const tag = ordered ? "ol" : "ul";
+      const items = arr
+        .map(item => `<li>${escapeHtml(item)}</li>`)
+        .join("");
+
+      return `
+        <section class="guide-section">
+          <h4>${escapeHtml(label)}</h4>
+          <${tag}>${items}</${tag}>
+        </section>
+      `;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function toggleGuideCard(button) {
+      const card = button.closest(".guide-card");
+      if (!card) return;
+
+      const isExpanded = card.classList.toggle("expanded");
+      button.textContent = isExpanded ? "收起" : "展开";
+    }
+
+    function getGuideSummary(card) {
+      if (card.goal) return card.goal;
+      if (card.scenario) return card.scenario;
+      if (card.observe) return card.observe;
+
+      if (Array.isArray(card.do_first) && card.do_first.length > 0) {
+        return card.do_first[0];
+      }
+
+      if (Array.isArray(card.steps) && card.steps.length > 0) {
+        return card.steps[0];
+      }
+
+      return "";
+    }
+  </script>
+</body>
+</html>
