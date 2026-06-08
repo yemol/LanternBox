@@ -1,5 +1,6 @@
 import json
 from typing import Any, Dict, List
+import re
 
 from .config import (
     DATA_DIR,
@@ -10,6 +11,7 @@ from .config import (
     GUIDES_CACHE,
     RESOURCE_CACHE_INFO,
     TRIGGERS_CACHE,
+    DOMAIN_NEGATIVE_KEYWORDS,
 )
 from .utils import get_severity_weight, read_json_file
 
@@ -248,13 +250,13 @@ def build_local_context(
                 f"触发场景：{trigger.get('title', '')}",
                 f"严重等级：{trigger.get('severity', '')}",
                 f"AI提示：{trigger.get('ai_prompt', '')}",
-                f"建议动作：{'；'.join(suggested_actions[:5])}",
+                f"建议动作：{'；'.join(suggested_actions[:10])}",
                 f"后续追踪：{'；'.join(follow_up[:3])}",
             ])
         )
 
     guide_blocks = []
-    for guide in related_guides[:5]:
+    for guide in related_guides[:10]:
         steps = guide.get("steps", [])
         stop_or_escalate = guide.get("stop_or_escalate", [])
 
@@ -264,7 +266,7 @@ def build_local_context(
                 f"分类：{guide.get('category', '')}",
                 f"适用场景：{guide.get('scenario', '')}",
                 f"目标：{guide.get('goal', '')}",
-                f"关键步骤：{'；'.join(steps[:5])}",
+                f"关键步骤：{'；'.join(steps[:10])}",
                 f"停止或升级：{'；'.join(stop_or_escalate[:3])}",
             ])
         )
@@ -311,20 +313,212 @@ def prepare_ai_context(user_message: str, mode: str) -> Dict[str, Any]:
     triggers = TRIGGERS_CACHE
 
     detected_domains = detect_domains(user_message)
-    matched_triggers = match_triggers(user_message, triggers)[:5]
+    matched_triggers = match_triggers(user_message, triggers)[:10]
 
     trigger_guides = find_related_guides(matched_triggers, guides)
     domain_guides = find_domain_fallback_guides(detected_domains, guides)
     keyword_guides = find_guides_by_domain_keywords(detected_domains, guides)
+    scored_guides = find_guides_by_message_and_domains(
+        message=user_message,
+        detected_domains=detected_domains,
+        guides=guides,
+    )
 
     related_guides = merge_guides(
         trigger_guides,
         domain_guides,
         keyword_guides,
-    )[:5]
+    )[:10]
+
+    print("detected_domains:", detected_domains)
+    print("trigger_guides:", [g.get("title") for g in trigger_guides])
+    print("domain_guides:", [g.get("title") for g in domain_guides])
+    print("scored_guides:", [(g.get("title"), g.get("_match_score")) for g in scored_guides[:10]])
 
     return {
         "detected_domains": detected_domains,
         "matched_triggers": matched_triggers,
         "related_guides": related_guides,
     }
+
+def build_guide_search_text(guide: Dict[str, Any]) -> str:
+    parts = [
+        guide.get("id", ""),
+        guide.get("title", ""),
+        guide.get("category", ""),
+        guide.get("category_original", ""),
+        guide.get("scenario", ""),
+        guide.get("goal", ""),
+        guide.get("fallback", ""),
+        guide.get("notes", ""),
+        guide.get("observe", ""),
+    ]
+
+    for key in [
+        "tools",
+        "steps",
+        "check",
+        "common_mistakes",
+        "stop_or_escalate",
+        "do_first",
+        "avoid",
+        "items",
+    ]:
+        value = guide.get(key)
+        if isinstance(value, list):
+            parts.extend(str(item) for item in value if item)
+        elif isinstance(value, str):
+            parts.append(value)
+
+    return " ".join(str(part) for part in parts if part)
+
+
+def score_guide_for_message(
+    guide: Dict[str, Any],
+    message: str,
+    detected_domains: List[str],
+) -> int:
+    score = 0
+
+    message = message.strip()
+    title = str(guide.get("title", ""))
+    category = str(guide.get("category", ""))
+    scenario = str(guide.get("scenario", ""))
+    goal = str(guide.get("goal", ""))
+    search_text = build_guide_search_text(guide)
+
+    # 用户原文直接命中标题，最高价值
+    if message and message in title:
+        score += 8
+
+    # 标题中的关键词出现在用户描述中
+    for token in extract_simple_keywords(title):
+        if token and token in message:
+            score += 5
+
+    # 用户描述里的关键词出现在指南标题、场景或目标中
+    for token in extract_simple_keywords(message):
+        if not token:
+            continue
+
+        if token in title:
+            score += 5
+        elif token in category:
+            score += 4
+        elif token in scenario or token in goal:
+            score += 3
+        elif token in search_text:
+            score += 1
+
+    # 领域关键词命中
+    for domain in detected_domains:
+        domain_keywords = DOMAIN_KEYWORDS.get(domain, [])
+
+        for keyword in domain_keywords:
+            if not keyword:
+                continue
+
+            if keyword in title:
+                score += 4
+            elif keyword in category:
+                score += 3
+            elif keyword in scenario or keyword in goal:
+                score += 2
+            elif keyword in search_text:
+                score += 1
+
+    return score
+
+
+def extract_simple_keywords(text: str) -> List[str]:
+    text = str(text or "").strip()
+
+    stop_words = {
+        "我", "你", "他", "她", "它", "我们", "你们", "他们",
+        "现在", "今天", "感觉", "好像", "有点", "一个", "一下",
+        "怎么", "怎么办", "需要", "可以", "应该", "是不是",
+        "了", "的", "吗", "呢", "吧", "啊",
+        "使用", "检查", "处理", "情况", "问题", "不足", "不多", "还有",
+        "当前", "相关", "指南", "操作", "步骤", "工具", "注意"
+    }
+
+    # 先按常见标点和空格切
+    raw_parts = re.split(r"[\s，。！？、；：,.!?;:（）()【】\[\]《》<>\"']+", text)
+
+    keywords = []
+
+    for part in raw_parts:
+        part = part.strip()
+        if not part or part in stop_words:
+            continue
+
+        # 太短的泛词跳过，但保留“水”“电”“药”这种关键字
+        if len(part) == 1 and part not in {"水", "电", "药", "火", "冷", "热"}:
+            continue
+
+        keywords.append(part)
+
+    return keywords[:20]
+
+def find_guides_by_message_and_domains(
+    message: str,
+    detected_domains: List[str],
+    guides: List[Dict[str, Any]],
+    min_score: int = 5,
+) -> List[Dict[str, Any]]:
+    scored_guides = []
+
+    for guide in guides:
+        if detected_domains and not guide_matches_any_domain(guide, detected_domains):
+            continue
+        if detected_domains and guide_has_negative_domain_keywords(guide, detected_domains):
+            continue
+
+        score = score_guide_for_message(
+            guide=guide,
+            message=message,
+            detected_domains=detected_domains,
+        )
+
+        if score >= min_score:
+            item = dict(guide)
+            item["_match_score"] = score
+            scored_guides.append(item)
+
+        scored_guides.sort(
+            key=lambda item: item.get("_match_score", 0),
+            reverse=True,
+        )
+
+    return scored_guides
+
+def guide_matches_any_domain(
+    guide: Dict[str, Any],
+    detected_domains: List[str],
+) -> bool:
+    if not detected_domains:
+        return True
+
+    search_text = build_guide_search_text(guide)
+
+    for domain in detected_domains:
+        keywords = DOMAIN_KEYWORDS.get(domain, [])
+
+        if any(keyword and keyword in search_text for keyword in keywords):
+            return True
+
+    return False
+
+
+def guide_has_negative_domain_keywords(
+    guide: Dict[str, Any],
+    detected_domains: List[str],
+) -> bool:
+    search_text = build_guide_search_text(guide)
+
+    for domain in detected_domains:
+        negative_keywords = DOMAIN_NEGATIVE_KEYWORDS.get(domain, [])
+        if any(keyword and keyword in search_text for keyword in negative_keywords):
+            return True
+
+    return False
