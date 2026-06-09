@@ -66,3 +66,25 @@ tts_engines/melotts/venv/
 
 # Generated TTS
 tts/output/
+
+
+# PocketBase
+pocketbase/pocketbase
+pocketbase/pb_data/
+pocketbase/pb_migrations/
+pocketbase/pb_hooks/
+
+# Offline libraries
+offline_libraries/
+*.zim
+
+# Wiki import media
+wiki_import/**/media/
+wiki_import/**/*_media/
+
+# Large media
+*.mp4
+*.mov
+*.mkv
+*.wav
+*.mp3

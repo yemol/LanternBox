@@ -33,7 +33,7 @@ def load_local_resources() -> None:
         "triggers_path": str(triggers_path),
     })
 
-    print("本地资源缓存已加载：", RESOURCE_CACHE_INFO)
+    # print("本地资源缓存已加载：", RESOURCE_CACHE_INFO)
 
 
 def detect_domains(text: str) -> List[str]:
@@ -330,10 +330,10 @@ def prepare_ai_context(user_message: str, mode: str) -> Dict[str, Any]:
         keyword_guides,
     )[:10]
 
-    print("detected_domains:", detected_domains)
-    print("trigger_guides:", [g.get("title") for g in trigger_guides])
-    print("domain_guides:", [g.get("title") for g in domain_guides])
-    print("scored_guides:", [(g.get("title"), g.get("_match_score")) for g in scored_guides[:10]])
+    # print("detected_domains:", detected_domains)
+    # print("trigger_guides:", [g.get("title") for g in trigger_guides])
+    # print("domain_guides:", [g.get("title") for g in domain_guides])
+    # print("scored_guides:", [(g.get("title"), g.get("_match_score")) for g in scored_guides[:10]])
 
     return {
         "detected_domains": detected_domains,
