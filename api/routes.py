@@ -30,6 +30,12 @@ from .resources import load_local_resources, prepare_ai_context, serialize_relat
 from .tts import cleanup_tts_output, run_melotts_tts, run_piper_tts
 from .utils import get_default_model_for_mode, get_tts_engine
 
+from .wiki import (
+    get_published_wiki_articles,
+    get_wiki_article_detail,
+    search_wiki_articles,
+)
+
 router = APIRouter()
 
 
@@ -387,4 +393,44 @@ def tts_speak(payload: TtsSpeakRequest):
         "engine": selected_engine,
         "audio_url": f"/tts_output/{output_filename}",
         "filename": output_filename,
+    }
+
+@router.get("/api/wiki/articles")
+def api_wiki_articles():
+    articles = get_published_wiki_articles(limit=50)
+
+    return {
+        "ok": True,
+        "total": len(articles),
+        "articles": articles,
+    }
+
+
+@router.get("/api/wiki/articles/{article_id}")
+def api_wiki_article_detail(article_id: str):
+    detail = get_wiki_article_detail(article_id)
+
+    if not detail:
+        return {
+            "ok": False,
+            "error": "Wiki 文章不存在或读取失败",
+        }
+
+    return {
+        "ok": True,
+        "article": detail["article"],
+        "media": detail["media"],
+    }
+
+
+@router.get("/api/wiki/search")
+def api_wiki_search(q: str = ""):
+    keyword = q.strip()
+    articles = search_wiki_articles(keyword, limit=20)
+
+    return {
+        "ok": True,
+        "query": keyword,
+        "total": len(articles),
+        "articles": articles,
     }

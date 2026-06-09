@@ -171,3 +171,12 @@ DEFAULT_TTS_ENGINE_BY_MODE = {
 }
 
 TTS_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+# -----------------------------
+# PocketBase / Wiki 配置
+# -----------------------------
+POCKETBASE_URL = "http://127.0.0.1:8090"
+POCKETBASE_WIKI_ARTICLES = "wiki_articles"
+POCKETBASE_WIKI_MEDIA = "wiki_media"
+POCKETBASE_WIKI_CATEGORIES = "wiki_categories"
