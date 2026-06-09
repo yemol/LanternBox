@@ -9,6 +9,7 @@
 # db.py：SQLite 连接与初始化
 # tts.py：TTS 生成与输出清理
 # routes.py：所有 HTTP 路由定义
+# wiki.py：PocketBase Wiki 数据访问与格式化
 # -----------------------------
 
 
