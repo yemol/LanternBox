@@ -34,6 +34,7 @@ from .wiki import (
     get_published_wiki_articles,
     get_wiki_article_detail,
     search_wiki_articles,
+    search_wiki_for_ai,
 )
 
 router = APIRouter()
@@ -266,6 +267,11 @@ def ai_advice(payload: AiAdviceRequest):
     if payload.metadata_only:
         answer = ""
     else:
+        related_wikis = search_wiki_for_ai(
+            payload.message,
+            detected_domains=context_data["detected_domains"],
+            limit=3,
+        )
         messages = build_ai_messages(
             user_message=user_message,
             mode=mode,
@@ -273,6 +279,7 @@ def ai_advice(payload: AiAdviceRequest):
             related_guides=related_guides,
             detected_domains=detected_domains,
             history=payload.history,
+            related_wikis=related_wikis,
         )
 
         try:
@@ -301,6 +308,7 @@ def ai_advice(payload: AiAdviceRequest):
             for t in matched_triggers
         ],
         "related_guides": serialize_related_guides(related_guides),
+        'related_wikis': related_wikis,
     }
 
 

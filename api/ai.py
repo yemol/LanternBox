@@ -5,6 +5,7 @@ from typing import Any, Dict, List, Optional
 from .config import SCENARIO_PROFILE
 from .resources import build_local_context
 from .utils import get_default_model_for_mode
+from .wiki import build_wiki_context_for_ai
 
 
 def call_ollama(messages: List[Dict[str, str]], model: str = "qwen2.5:3b") -> str:
@@ -141,8 +142,10 @@ def build_emergency_messages(
     related_guides: List[Dict[str, Any]],
     detected_domains: List[str],
     safe_history: List[Dict[str, str]],
+    related_wikis: Optional[List[Dict[str, Any]]] = None,
 ) -> List[Dict[str, str]]:
     context = build_local_context(matched_triggers, related_guides)
+    wiki_context = build_wiki_context_for_ai(related_wikis or [])
 
     system_prompt = f"""
 你是“壳中灯 LanternBox”的应急模式本地离线 AI 助手。
@@ -155,7 +158,7 @@ def build_emergency_messages(
 
 回答原则：
 1. 优先基于本地资料回答，包括触发规则、应急指南、库存、成员档案、地图、日志和百科。
-2. 当前阶段主要可用资料是 ai_triggers.json 和 emergency_guides.json。
+2. 当前阶段主要可用资料是 ai_triggers.json、emergency_guides.json 和本地精选 Wiki。
 3. 不要编造本地资料中没有的事实。
 4. 如果本地资料不足，可以给出通用安全建议，但必须说明这是基于一般原则。
 5. 回答要适合语音播报，句子不要太长。
@@ -217,6 +220,9 @@ def build_emergency_messages(
 关联的本地指南：
 {context['guide_text'] or '未找到明确关联指南。'}
 
+关联的本地精选 Wiki：
+{wiki_context or '未找到明确关联 Wiki。'}
+
 资料说明：
 如果没有命中精确触发规则，但存在关联的本地指南，请仍然优先使用这些本地指南回答。
 不要因为触发场景为空就转向普通城市客服式回答。
@@ -240,6 +246,7 @@ def build_ai_messages(
     related_guides: List[Dict[str, Any]],
     detected_domains: List[str],
     history: Optional[List[Any]] = None,
+    related_wikis: Optional[List[Dict[str, Any]]] = None,
 ) -> List[Dict[str, str]]:
     safe_history = build_safe_history(history)
 
@@ -255,6 +262,7 @@ def build_ai_messages(
         related_guides=related_guides,
         detected_domains=detected_domains,
         safe_history=safe_history,
+        related_wikis=related_wikis,
     )
 
 
