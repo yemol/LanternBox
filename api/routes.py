@@ -264,14 +264,15 @@ def ai_advice(payload: AiAdviceRequest):
     matched_triggers = context_data["matched_triggers"]
     related_guides = context_data["related_guides"]
 
+    related_wikis = search_wiki_for_ai(
+        payload.message,
+        detected_domains=context_data.get("detected_domains", []),
+        limit=3,
+    )
+
     if payload.metadata_only:
         answer = ""
     else:
-        related_wikis = search_wiki_for_ai(
-            payload.message,
-            detected_domains=context_data["detected_domains"],
-            limit=3,
-        )
         messages = build_ai_messages(
             user_message=user_message,
             mode=mode,
@@ -325,6 +326,13 @@ def ai_advice_stream(payload: AiAdviceRequest):
         raise HTTPException(status_code=400, detail="请提供需要 AI 判断的情况描述。")
 
     context_data = prepare_ai_context(user_message, mode)
+
+    related_wikis = search_wiki_for_ai(
+        payload.message,
+        detected_domains=context_data.get("detected_domains", []),
+        limit=3,
+    )
+
     messages = build_ai_messages(
         user_message=user_message,
         mode=mode,

@@ -309,7 +309,7 @@
 
     .summary-grid-lite {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 12px;
       margin-bottom: 16px;
     }
@@ -663,6 +663,112 @@
         0 0 0 3px rgba(255, 164, 64, 0.12),
         0 0 34px rgba(255, 164, 64, 0.32);
     }
+
+    .wiki-card-mini {
+      padding: 14px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.045);
+      cursor: pointer;
+    }
+
+    .wiki-card-mini:hover {
+      border-color: rgba(255, 176, 74, 0.46);
+      background: rgba(255, 176, 74, 0.08);
+      box-shadow: 0 0 26px rgba(255, 176, 74, 0.08);
+    }
+
+    .wiki-card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .wiki-card-head h3 {
+      margin: 0;
+      color: var(--text-main);
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    .wiki-card-mini p {
+      margin: 4px 0;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .wiki-source {
+      color: var(--text-muted) !important;
+      font-size: 13px !important;
+    }
+
+    .wiki-risk {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #dff4ff;
+      background: rgba(104, 199, 255, 0.14);
+      border: 1px solid rgba(104, 199, 255, 0.24);
+    }
+
+    .wiki-risk-caution {
+      color: #ffe8c9;
+      background: rgba(255, 159, 67, 0.18);
+      border-color: rgba(255, 183, 92, 0.34);
+    }
+
+    .wiki-risk-high {
+      color: #ffdfe5;
+      background: rgba(255, 123, 138, 0.18);
+      border-color: rgba(255, 123, 138, 0.34);
+    }
+
+    .wiki-markdown-body {
+      color: var(--text-soft);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .wiki-markdown-body h2,
+    .wiki-markdown-body h3,
+    .wiki-markdown-body h4 {
+      margin: 18px 0 8px;
+      color: var(--accent-bright);
+      line-height: 1.45;
+    }
+
+    .wiki-markdown-body h2 {
+      font-size: 21px;
+    }
+
+    .wiki-markdown-body h3 {
+      font-size: 18px;
+    }
+
+    .wiki-markdown-body h4 {
+      font-size: 16px;
+    }
+
+    .wiki-markdown-body p {
+      margin: 0 0 10px;
+    }
+
+    .wiki-markdown-body ul,
+    .wiki-markdown-body ol {
+      margin: 6px 0 12px;
+      padding-left: 24px;
+    }
+
+    .wiki-markdown-body li + li {
+      margin-top: 6px;
+    }
   </style>
 </head>
 
@@ -761,6 +867,10 @@
               <span>关联指南</span>
               <strong id="guideCount">0</strong>
             </div>
+            <div class="summary-lite-card">
+              <span>关联 Wiki</span>
+              <strong id="wikiCount">0</strong>
+            </div>
           </div>
 
           <p class="assistant-hint" id="modeSideHint">
@@ -789,6 +899,11 @@
             <div class="section-title">关联指南</div>
             <div class="list" id="guideList">
               <div class="empty-text">暂无关联指南。</div>
+            </div>
+
+            <div class="section-title">关联 Wiki</div>
+            <div class="list" id="wikiList">
+              <div class="empty-text">暂无关联 Wiki。</div>
             </div>
           </div>
         </div>
@@ -857,6 +972,7 @@
 
     let currentMode = "emergency";
     let latestRelatedGuides = [];
+    let latestRelatedWikis = [];
     let conversationHistory = [];
     let currentAudio = null;
     let currentAudioSource = null;
@@ -871,6 +987,7 @@
     const answerBox = document.getElementById("answerBox");
     const triggerList = document.getElementById("triggerList");
     const guideList = document.getElementById("guideList");
+    const wikiList = document.getElementById("wikiList");
     const loadingState = document.getElementById("loadingState");
     const currentModeEl = document.getElementById("currentMode");
     const currentModeBadge = document.getElementById("currentModeBadge");
@@ -882,6 +999,7 @@
     const triggerCountEl = document.getElementById("triggerCount");
     const topSeverityEl = document.getElementById("topSeverity");
     const guideCountEl = document.getElementById("guideCount");
+    const wikiCountEl = document.getElementById("wikiCount");
     const speakBtn = document.getElementById("speakBtn");
     const stopSpeakBtn = document.getElementById("stopSpeakBtn");
     const ttsStatus = document.getElementById("ttsStatus");
@@ -1093,20 +1211,26 @@
 
       const triggers = data.matched_triggers || [];
       const guides = data.related_guides || [];
+      const wikis = data.related_wikis || [];
+
       latestRelatedGuides = guides;
+      latestRelatedWikis = wikis;
 
       triggerCountEl.textContent = triggers.length;
       guideCountEl.textContent = guides.length;
+      wikiCountEl.textContent = wikis.length;
       topSeverityEl.textContent = getTopSeverity(triggers);
 
       renderTriggers(triggers);
       renderGuides(guides);
+      renderWikis(wikis);
     }
 
     function clearAssistant() {
       stopSpeaking();
       userInput.value = "";
       latestRelatedGuides = [];
+      latestRelatedWikis = [];
       conversationHistory = [];
       answerBox.textContent = currentMode === "companion"
         ? "可以随便说点什么。壳中灯会先听你说完，再帮你慢慢整理。"
@@ -1115,9 +1239,11 @@
       answerBox.dataset.hasAnswer = "";
       triggerList.innerHTML = '<div class="empty-text">暂无触发场景。</div>';
       guideList.innerHTML = '<div class="empty-text">暂无关联指南。</div>';
+      wikiList.innerHTML = '<div class="empty-text">暂无关联 Wiki。</div>';
       triggerCountEl.textContent = "0";
       topSeverityEl.textContent = "-";
       guideCountEl.textContent = "0";
+      wikiCountEl.textContent = "0";
     }
 
     function getTopSeverity(triggers) {
@@ -1185,6 +1311,35 @@
       }).join("");
     }
 
+    function renderWikis(wikis) {
+      if (!wikis.length) {
+        wikiList.innerHTML = currentMode === "companion"
+          ? '<div class="empty-text">陪伴模式下不一定需要引用 Wiki。必要时，壳中灯会把相关知识放在这里。</div>'
+          : '<div class="empty-text">暂无关联 Wiki。</div>';
+        return;
+      }
+
+      wikiList.innerHTML = wikis.map((wiki, index) => {
+        const riskLevel = wiki.risk_level || "normal";
+        const riskLabel = {
+          normal: "普通",
+          caution: "注意",
+          high: "高风险"
+        }[riskLevel] || riskLevel;
+
+        return `
+          <article class="wiki-card-mini" onclick="openWikiModal(${index})">
+            <div class="wiki-card-head">
+              <h3>${escapeHtml(wiki.title || "未命名 Wiki")}</h3>
+              <span class="wiki-risk wiki-risk-${escapeHtml(riskLevel)}">${escapeHtml(riskLabel)}</span>
+            </div>
+            <p>${escapeHtml(wiki.summary || "点击查看 Wiki 摘要。")}</p>
+            <p class="wiki-source">来源：${escapeHtml(wiki.source || "本地精选 Wiki")}</p>
+          </article>
+        `;
+      }).join("");
+    }
+
     function openGuideModal(index) {
       const guide = latestRelatedGuides[index];
 
@@ -1222,6 +1377,45 @@
       document.body.classList.add("modal-open");
     }
 
+    function openWikiModal(index) {
+      const wiki = latestRelatedWikis[index];
+
+      if (!wiki) return;
+
+      const modal = document.getElementById("guide-modal");
+      const modalId = document.getElementById("guide-modal-id");
+      const modalTitle = document.getElementById("guide-modal-title");
+      const modalCategory = document.getElementById("guide-modal-category");
+      const modalBody = document.getElementById("guide-modal-body");
+
+      const riskLevel = wiki.risk_level || "normal";
+      const source = wiki.source || "本地精选 Wiki";
+      const tags = wiki.tags || "";
+      const content = wiki.content || "暂无正文摘录。";
+
+      modalId.textContent = wiki.id ? `WIKI · ${wiki.id}` : "WIKI";
+      modalTitle.textContent = wiki.title || "未命名 Wiki";
+      modalCategory.textContent = `风险等级：${riskLevel} / 来源：${source}`;
+
+      modalBody.innerHTML = `
+        ${renderGuideSection("摘要", wiki.summary)}
+        ${renderGuideSection("标签", tags)}
+        <section class="guide-modal-section wiki-markdown-section">
+          <h3>正文摘录</h3>
+          <div class="wiki-markdown-body">
+            ${renderSimpleMarkdown(content)}
+          </div>
+        </section>
+      `;
+
+      requestAnimationFrame(() => {
+        modalBody.scrollTop = 0;
+      });
+
+      modal.classList.remove("hidden");
+      document.body.classList.add("modal-open");
+    }
+
     function closeGuideModal() {
       const modal = document.getElementById("guide-modal");
       modal.classList.add("hidden");
@@ -1231,10 +1425,12 @@
     function renderGuideSection(title, content) {
       if (!content) return "";
 
+      const safeContent = escapeHtml(content).replaceAll("\n", "<br>");
+
       return `
         <section class="guide-modal-section">
           <h3>${escapeHtml(title)}</h3>
-          <p>${escapeHtml(content)}</p>
+          <p>${safeContent}</p>
         </section>
       `;
     }
@@ -1507,6 +1703,78 @@
       if (updateStatus && ttsStatus) {
         ttsStatus.textContent = "语音播报：已停止";
       }
+    }
+
+    function renderSimpleMarkdown(text) {
+      const lines = String(text || "").split("\n");
+      let html = "";
+      let inUl = false;
+      let inOl = false;
+
+      function closeLists() {
+        if (inUl) {
+          html += "</ul>";
+          inUl = false;
+        }
+        if (inOl) {
+          html += "</ol>";
+          inOl = false;
+        }
+      }
+
+      lines.forEach(rawLine => {
+        const line = rawLine.trim();
+
+        if (!line) {
+          closeLists();
+          return;
+        }
+
+        if (line.startsWith("### ")) {
+          closeLists();
+          html += `<h4>${escapeHtml(line.slice(4))}</h4>`;
+          return;
+        }
+
+        if (line.startsWith("## ")) {
+          closeLists();
+          html += `<h3>${escapeHtml(line.slice(3))}</h3>`;
+          return;
+        }
+
+        if (line.startsWith("# ")) {
+          closeLists();
+          html += `<h2>${escapeHtml(line.slice(2))}</h2>`;
+          return;
+        }
+
+        if (line.startsWith("- ")) {
+          if (!inUl) {
+            closeLists();
+            html += "<ul>";
+            inUl = true;
+          }
+          html += `<li>${escapeHtml(line.slice(2))}</li>`;
+          return;
+        }
+
+        const orderedMatch = line.match(/^(\d+)[.、]\s*(.+)$/);
+        if (orderedMatch) {
+          if (!inOl) {
+            closeLists();
+            html += "<ol>";
+            inOl = true;
+          }
+          html += `<li>${escapeHtml(orderedMatch[2])}</li>`;
+          return;
+        }
+
+        closeLists();
+        html += `<p>${escapeHtml(line)}</p>`;
+      });
+
+      closeLists();
+      return html;
     }
 
     function escapeHtml(value) {

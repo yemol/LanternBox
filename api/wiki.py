@@ -210,8 +210,6 @@ def search_wiki_for_ai(
 
     wiki_filter = build_wiki_or_filter_for_terms(terms)
 
-    print("Wiki AI search terms:", terms)
-    print("Wiki AI filter:", wiki_filter)
 
     data = pocketbase_get_records(
         POCKETBASE_WIKI_ARTICLES,
@@ -365,7 +363,7 @@ def normalize_wiki_articles_for_ai(articles: List[dict]) -> List[dict]:
             "id": article.get("id"),
             "title": article.get("title", ""),
             "summary": article.get("summary", ""),
-            "content": trim_text(article.get("content", ""), 900),
+            "content": trim_text(article.get("content", ""), 3000),
             "tags": article.get("tags", ""),
             "risk_level": article.get("risk_level", "normal"),
             "source": article.get("source", ""),
