@@ -769,6 +769,74 @@
     .wiki-markdown-body li + li {
       margin-top: 6px;
     }
+
+    .wiki-media-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .wiki-media-item,
+    .wiki-media-file {
+      overflow: hidden;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .wiki-media-item img,
+    .wiki-media-item video {
+      display: block;
+      width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .wiki-media-item audio {
+      width: 100%;
+      padding: 12px;
+    }
+
+    .wiki-media-item figcaption,
+    .wiki-media-caption {
+      display: grid;
+      gap: 4px;
+      padding: 12px 14px;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .wiki-media-item figcaption strong,
+    .wiki-media-caption strong {
+      color: var(--text-main);
+    }
+
+    .wiki-media-item figcaption span,
+    .wiki-media-caption span {
+      color: var(--text-muted);
+    }
+
+    .wiki-media-file {
+      padding: 14px;
+    }
+
+    .wiki-media-file a {
+      color: var(--accent-bright);
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .wiki-media-file a:hover {
+      text-decoration: underline;
+    }
+
+    .wiki-media-file p {
+      margin: 8px 0 0;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
   </style>
 </head>
 
@@ -1377,7 +1445,7 @@
       document.body.classList.add("modal-open");
     }
 
-    function openWikiModal(index) {
+    async function openWikiModal(index) {
       const wiki = latestRelatedWikis[index];
 
       if (!wiki) return;
@@ -1388,32 +1456,143 @@
       const modalCategory = document.getElementById("guide-modal-category");
       const modalBody = document.getElementById("guide-modal-body");
 
-      const riskLevel = wiki.risk_level || "normal";
-      const source = wiki.source || "本地精选 Wiki";
-      const tags = wiki.tags || "";
-      const content = wiki.content || "暂无正文摘录。";
-
       modalId.textContent = wiki.id ? `WIKI · ${wiki.id}` : "WIKI";
       modalTitle.textContent = wiki.title || "未命名 Wiki";
-      modalCategory.textContent = `风险等级：${riskLevel} / 来源：${source}`;
-
+      modalCategory.textContent = "正在读取完整 Wiki 内容...";
       modalBody.innerHTML = `
-        ${renderGuideSection("摘要", wiki.summary)}
-        ${renderGuideSection("标签", tags)}
-        <section class="guide-modal-section wiki-markdown-section">
-          <h3>正文摘录</h3>
-          <div class="wiki-markdown-body">
-            ${renderSimpleMarkdown(content)}
-          </div>
+        <section class="guide-modal-section">
+          <h3>读取中</h3>
+          <p>正在从本地精选 Wiki 读取完整内容。</p>
         </section>
       `;
 
-      requestAnimationFrame(() => {
-        modalBody.scrollTop = 0;
-      });
-
       modal.classList.remove("hidden");
       document.body.classList.add("modal-open");
+
+      try {
+        const response = await fetch(`/api/wiki/articles/${encodeURIComponent(wiki.id)}`);
+
+        if (!response.ok) {
+          throw new Error("Wiki 详情读取失败");
+        }
+
+        const data = await response.json();
+
+        if (!data.ok || !data.article) {
+          throw new Error(data.error || "Wiki 文章不存在");
+        }
+
+        const article = data.article;
+        const media = Array.isArray(data.media) ? data.media : [];
+
+        const riskLevel = article.risk_level || wiki.risk_level || "normal";
+        const source = article.source || wiki.source || "本地精选 Wiki";
+        const tags = article.tags || wiki.tags || "";
+        const content = article.content || wiki.content || "暂无正文。";
+
+        modalId.textContent = article.id ? `WIKI · ${article.id}` : "WIKI";
+        modalTitle.textContent = article.title || wiki.title || "未命名 Wiki";
+        modalCategory.textContent = `风险等级：${riskLevel} / 来源：${source}`;
+
+        modalBody.innerHTML = `
+          ${renderGuideSection("摘要", article.summary || wiki.summary)}
+          ${renderGuideSection("标签", tags)}
+          <section class="guide-modal-section wiki-markdown-section">
+            <h3>正文</h3>
+            <div class="wiki-markdown-body">
+              ${renderSimpleMarkdown(content)}
+            </div>
+          </section>
+          ${renderWikiMedia(media)}
+        `;
+
+        requestAnimationFrame(() => {
+          modalBody.scrollTop = 0;
+        });
+
+      } catch (error) {
+        console.error(error);
+
+        modalCategory.textContent = "读取失败";
+        modalBody.innerHTML = `
+          <section class="guide-modal-section">
+            <h3>Wiki 详情读取失败</h3>
+            <p>${escapeHtml(error.message || "请确认后端和 PocketBase 正常运行。")}</p>
+          </section>
+        `;
+      }
+    }  
+
+    function renderWikiMedia(mediaList) {
+      if (!Array.isArray(mediaList) || !mediaList.length) {
+        return "";
+      }
+
+      const items = mediaList.map(media => {
+        const type = media.media_type || "document";
+        const title = escapeHtml(media.title || "未命名附件");
+        const desc = escapeHtml(media.description || "");
+        const url = media.file_url || "";
+
+        if (!url) return "";
+
+        if (type === "image" || type === "diagram") {
+          return `
+            <figure class="wiki-media-item">
+              <img src="${escapeHtml(url)}" alt="${title}" loading="lazy" />
+              <figcaption>
+                <strong>${title}</strong>
+                ${desc ? `<span>${desc}</span>` : ""}
+              </figcaption>
+            </figure>
+          `;
+        }
+
+        if (type === "video") {
+          return `
+            <div class="wiki-media-item">
+              <video controls preload="metadata">
+                <source src="${escapeHtml(url)}" />
+                当前浏览器不支持视频播放。
+              </video>
+              <div class="wiki-media-caption">
+                <strong>${title}</strong>
+                ${desc ? `<span>${desc}</span>` : ""}
+              </div>
+            </div>
+          `;
+        }
+
+        if (type === "audio") {
+          return `
+            <div class="wiki-media-item">
+              <audio controls preload="metadata" src="${escapeHtml(url)}"></audio>
+              <div class="wiki-media-caption">
+                <strong>${title}</strong>
+                ${desc ? `<span>${desc}</span>` : ""}
+              </div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="wiki-media-file">
+            <a href="${escapeHtml(url)}" target="_blank" rel="noopener">
+              ${title}
+            </a>
+            ${desc ? `<p>${desc}</p>` : ""}
+          </div>
+        `;
+      }).join("");
+
+      return `
+        <section class="guide-modal-section wiki-media-section">
+          <h3>媒体与附件</h3>
+          <div class="wiki-media-list">
+            ${items}
+          </div>
+        </section>
+      `;
     }
 
     function closeGuideModal() {
