@@ -282,42 +282,6 @@ h3 {
   margin-top: 14px;
 }
 
-.ai-related-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.ai-related-grid > div {
-  padding: 16px;
-  border: 1px solid rgba(137, 204, 255, 0.14);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.045);
-}
-
-.ai-related-grid strong {
-  display: block;
-  margin-bottom: 10px;
-  color: var(--accent-bright);
-  font-size: 15px;
-}
-
-.ai-related-grid p {
-  margin: 6px 0;
-  color: var(--text-soft);
-  line-height: 1.55;
-}
-
-.ai-related-grid span {
-  display: inline-flex;
-  margin-left: 6px;
-  padding: 2px 7px;
-  border-radius: 999px;
-  color: #dff4ff;
-  background: rgba(104, 199, 255, 0.14);
-  font-size: 12px;
-  font-weight: 800;
-}
 
 /* ---------- Home Grid ---------- */
 
@@ -618,9 +582,6 @@ textarea:focus {
     flex-direction: column;
   }
 
-  .ai-related-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 560px) {
@@ -867,19 +828,6 @@ textarea:focus {
   font-weight: 800;
 }
 
-.calendar-day.has-entry {
-  border-color: rgba(104, 199, 255, 0.36);
-  background: rgba(104, 199, 255, 0.1);
-}
-
-.calendar-day.selected {
-  border-color: var(--border-strong);
-  background: rgba(104, 199, 255, 0.22);
-  box-shadow:
-    0 0 0 3px rgba(104, 199, 255, 0.09),
-    0 0 34px var(--glow);
-}
-
 .calendar-day.today .calendar-number {
   color: var(--accent-bright);
 }
@@ -927,10 +875,6 @@ textarea:focus {
   }
 }
 
-.emergency-summary-grid {
-  grid-template-columns: repeat(4, 1fr);
-}
-
 .guide-card {
   padding: 18px;
   border: 1px solid rgba(137, 204, 255, 0.14);
@@ -963,69 +907,7 @@ textarea:focus {
   line-height: 1.65;
 }
 
-.guide-open-hint {
-  flex: 0 0 auto;
-  padding: 8px 12px;
-  border: 1px solid rgba(137, 204, 255, 0.18);
-  border-radius: 999px;
-  color: var(--accent-bright);
-  background: rgba(104, 199, 255, 0.08);
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.guide-card[open] .guide-open-hint {
-  color: #dff4ff;
-  background: rgba(104, 199, 255, 0.18);
-}
-
-.guide-card[open] .guide-open-hint::before {
-  content: "已";
-}
-
-.guide-body {
-  margin-top: 18px;
-  display: grid;
-  gap: 16px;
-  border-top: 1px solid rgba(137, 204, 255, 0.12);
-  padding-top: 18px;
-}
-
-.guide-body section {
-  padding: 16px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.045);
-}
-
-.guide-body h4 {
-  margin: 0 0 10px;
-  color: var(--accent-bright);
-  font-size: 16px;
-}
-
-.guide-body ol,
-.guide-body ul {
-  margin: 0;
-  padding-left: 22px;
-  color: var(--text-soft);
-  line-height: 1.75;
-}
-
-.guide-body li + li {
-  margin-top: 6px;
-}
-
-@media (max-width: 900px) {
-  .emergency-summary-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 680px) {
-  .emergency-summary-grid {
-    grid-template-columns: 1fr;
-  }
-
   .guide-card summary {
     align-items: flex-start;
     flex-direction: column;
@@ -1136,15 +1018,7 @@ textarea:focus {
   min-height: 52px;
 }
 
-.ai-home-result {
-  margin-top: 0;
-}
-
 /* ---------- Guide Modal ---------- */
-
-body.modal-open {
-  overflow: hidden;
-}
 
 .guide-modal.hidden {
   display: none;
@@ -1340,18 +1214,6 @@ body.modal-open {
 
 .guide-modal-header h2 {
   font-size: 28px;
-}
-
-.ai-assistant-link-button {
-  border-color: rgba(104, 199, 255, 0.42);
-  color: var(--accent-bright);
-  background: rgba(104, 199, 255, 0.1);
-}
-
-.ai-assistant-link-button:hover {
-  border-color: var(--border-strong);
-  background: rgba(104, 199, 255, 0.18);
-  box-shadow: 0 0 28px var(--glow);
 }
 
 .ai-title-row {
