@@ -12,9 +12,17 @@
 <body>
   <main class="shell">
     <section class="hero compact-hero">
-      <p class="eyebrow">INVENTORY MODULE</p>
-      <h1>物资库存</h1>
-      <p class="subtitle">先找得到，再谈活得好。编号、搜索、筛选和备份都在这里。</p>
+      <div class="page-header-row">
+        <div>
+          <p class="eyebrow">INVENTORY MODULE</p>
+          <h1>物资库存</h1>
+          <p class="subtitle">先找得到，再谈活得好。编号、搜索、筛选和备份都在这里。</p>
+        </div>
+
+        <div class="page-actions">
+          <a class="page-nav-button" href="/">返回总览</a>
+        </div>
+      </div>
 
       <p id="form-message" class="notice" style="display: none;"></p>
     </section>
@@ -113,10 +121,6 @@
         <button type="submit">记录物资</button>
       </form>
     </section>
-
-    <p class="back-link">
-      <a href="/">← 返回首页</a>
-    </p>
   </main>
 
   <script>
