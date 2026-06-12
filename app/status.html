@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>系统自检 - 壳中灯</title>
+
+  <link rel="stylesheet" href="/static/style.css" />
+
+  <style>
+    .status-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .check-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 18px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .check-card h3 {
+      margin: 0 0 8px;
+      color: var(--text-main);
+      font-size: 19px;
+      line-height: 1.4;
+    }
+
+    .check-card p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .check-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 88px;
+      min-height: 34px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(137, 204, 255, 0.22);
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.045);
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .check-badge.ok {
+      color: #dff4ff;
+      border-color: rgba(104, 199, 255, 0.38);
+      background: rgba(104, 199, 255, 0.14);
+    }
+
+    .check-badge.fail {
+      color: #ffdfe5;
+      border-color: rgba(255, 123, 138, 0.38);
+      background: rgba(255, 123, 138, 0.14);
+    }
+
+    .check-badge.loading {
+      color: #ffe8c9;
+      border-color: rgba(255, 183, 92, 0.34);
+      background: rgba(255, 159, 67, 0.12);
+    }
+
+    .status-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 760px) {
+      .check-card {
+        grid-template-columns: 1fr;
+      }
+
+      .check-badge {
+        justify-self: start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="shell">
+    <section class="hero compact-hero">
+      <div class="page-header-row">
+        <div>
+          <p class="eyebrow">SYSTEM CHECK</p>
+          <h1>系统自检</h1>
+          <p class="subtitle">检查壳中灯核心模块是否在线。先确认火苗，再继续添柴。</p>
+        </div>
+
+        <div class="page-actions">
+          <a class="page-nav-button" href="/">返回总览</a>
+          <a class="page-nav-button" href="/assistant.html">进入 AI 助手</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2>核心模块状态</h2>
+        <button class="small-button" type="button" onclick="runChecks()">重新自检</button>
+      </div>
+
+      <div id="status-grid" class="status-grid"></div>
+
+      <div class="status-actions">
+        <button class="small-button" type="button" onclick="location.href='/emergency'">查看应急指南</button>
+        <button class="small-button" type="button" onclick="location.href='/library.html'">查看离线资料库</button>
+        <button class="small-button" type="button" onclick="location.href='/inventory'">查看物资库存</button>
+        <button class="small-button" type="button" onclick="location.href='/journal'">查看日记记录</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const checks = [
+      {
+        id: "backend",
+        title: "FastAPI 后端",
+        url: "/api/status",
+        detail: "检查后端基础状态接口是否可访问。",
+        parse: data => data.message || "后端在线"
+      },
+      {
+        id: "emergency",
+        title: "应急指南接口",
+        url: "/api/emergency",
+        detail: "检查应急指南数据是否能正常读取。",
+        parse: data => {
+          const count = Array.isArray(data) ? data.length : 0;
+          return `可用，当前 ${count} 条指南`;
+        }
+      },
+      {
+        id: "inventory",
+        title: "物资库存接口",
+        url: "/api/inventory",
+        detail: "检查物资库存数据是否能正常读取。",
+        parse: data => {
+          const count = Array.isArray(data) ? data.length : 0;
+          return `可用，当前 ${count} 条物资`;
+        }
+      },
+      {
+        id: "journal",
+        title: "日记记录接口",
+        url: "/api/journal",
+        detail: "检查日记记录数据是否能正常读取。",
+        parse: data => {
+          const count = Array.isArray(data) ? data.length : 0;
+          return `可用，当前 ${count} 条记录`;
+        }
+      },
+      {
+        id: "wiki",
+        title: "精选 Wiki 接口",
+        url: "/api/wiki/articles",
+        detail: "检查 PocketBase 精选 Wiki 是否能通过后端读取。",
+        parse: data => {
+          const count = data.total ?? data.articles?.length ?? 0;
+          return `可用，当前 ${count} 篇 Wiki`;
+        }
+      }
+    ];
+
+    const statusGrid = document.getElementById("status-grid");
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderCheckCard(check, status = "loading", message = "等待检测") {
+      const badgeText = {
+        loading: "检测中",
+        ok: "正常",
+        fail: "异常"
+      }[status] || "未知";
+
+      return `
+        <article class="check-card" id="check-${escapeHtml(check.id)}">
+          <div>
+            <h3>${escapeHtml(check.title)}</h3>
+            <p>${escapeHtml(message || check.detail)}</p>
+          </div>
+          <span class="check-badge ${escapeHtml(status)}">${escapeHtml(badgeText)}</span>
+        </article>
+      `;
+    }
+
+    function updateCheckCard(check, status, message) {
+      const card = document.getElementById(`check-${check.id}`);
+      if (!card) return;
+
+      const badgeText = {
+        loading: "检测中",
+        ok: "正常",
+        fail: "异常"
+      }[status] || "未知";
+
+      card.querySelector("p").textContent = message;
+      const badge = card.querySelector(".check-badge");
+      badge.className = `check-badge ${status}`;
+      badge.textContent = badgeText;
+    }
+
+    async function runSingleCheck(check) {
+      updateCheckCard(check, "loading", "正在检测...");
+
+      try {
+        const response = await fetch(check.url, {
+          cache: "no-store"
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        const message = check.parse ? check.parse(data) : "可用";
+
+        updateCheckCard(check, "ok", message);
+
+      } catch (error) {
+        console.error(`${check.title} 自检失败：`, error);
+        updateCheckCard(check, "fail", `不可用：${error.message || "请求失败"}`);
+      }
+    }
+
+    async function runChecks() {
+      statusGrid.innerHTML = checks.map(check => {
+        return renderCheckCard(check, "loading", "等待检测");
+      }).join("");
+
+      for (const check of checks) {
+        await runSingleCheck(check);
+      }
+    }
+
+    runChecks();
+  </script>
+</body>
+</html>

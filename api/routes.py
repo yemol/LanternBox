@@ -357,6 +357,9 @@ def assistant_page():
 def library_page():
     return FileResponse(APP_DIR / "library.html")
 
+@router.get("/status.html")
+def status_page():
+    return FileResponse(APP_DIR / "status.html")
 
 @router.post("/api/resources/reload")
 def reload_resources():
