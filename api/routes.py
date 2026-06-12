@@ -4,6 +4,8 @@ import subprocess
 import uuid
 from datetime import datetime
 from typing import Any
+import urllib.request
+import urllib.error
 
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse, StreamingResponse
@@ -456,4 +458,210 @@ def api_wiki_search(q: str = ""):
         "query": keyword,
         "total": len(articles),
         "articles": articles,
+    }
+
+
+# 这里开始的都是自检用到的函数和借口
+def check_url(url: str, timeout: float = 2.0) -> dict:
+    try:
+        with urllib.request.urlopen(url, timeout=timeout) as response:
+            return {
+                "ok": True,
+                "status": response.status,
+                "message": "可连接"
+            }
+    except Exception as error:
+        return {
+            "ok": False,
+            "status": None,
+            "message": str(error)
+        }
+    
+@router.get("/api/system/check")
+def system_check():
+    checks = []
+
+    checks.append({
+        "id": "backend",
+        "title": "FastAPI 后端",
+        "ok": True,
+        "message": "后端服务在线"
+    })
+
+    try:
+        emergency_data = get_emergency_guides()
+        checks.append({
+            "id": "emergency",
+            "title": "应急指南",
+            "ok": True,
+            "message": f"可用，当前 {len(emergency_data)} 条指南"
+        })
+    except Exception as error:
+        checks.append({
+            "id": "emergency",
+            "title": "应急指南",
+            "ok": False,
+            "message": f"读取失败：{error}"
+        })
+
+    try:
+        inventory_items = list_inventory()
+        checks.append({
+            "id": "inventory",
+            "title": "物资库存",
+            "ok": True,
+            "message": f"可用，当前 {len(inventory_items)} 条物资"
+        })
+    except Exception as error:
+        checks.append({
+            "id": "inventory",
+            "title": "物资库存",
+            "ok": False,
+            "message": f"读取失败：{error}"
+        })
+
+    try:
+        journal_entries = list_journal()
+        checks.append({
+            "id": "journal",
+            "title": "日记记录",
+            "ok": True,
+            "message": f"可用，当前 {len(journal_entries)} 条记录"
+        })
+    except Exception as error:
+        checks.append({
+            "id": "journal",
+            "title": "日记记录",
+            "ok": False,
+            "message": f"读取失败：{error}"
+        })
+
+    try:
+        wiki_articles = get_published_wiki_articles(limit=50)
+        checks.append({
+            "id": "wiki",
+            "title": "精选 Wiki",
+            "ok": True,
+            "message": f"可用，当前 {len(wiki_articles)} 篇 Wiki"
+        })
+    except Exception as error:
+        checks.append({
+            "id": "wiki",
+            "title": "精选 Wiki",
+            "ok": False,
+            "message": f"读取失败：{error}"
+        })
+
+    ollama = check_url("http://127.0.0.1:11434/api/tags")
+    checks.append({
+        "id": "ollama",
+        "title": "Ollama 本地 AI",
+        "ok": ollama["ok"],
+        "message": "可用" if ollama["ok"] else f"不可用：{ollama['message']}"
+    })
+
+    checks.append({
+        "id": "tts",
+        "title": "TTS 语音模型",
+        "ok": PIPER_MODEL_PATH.exists(),
+        "message": "Piper 模型文件存在" if PIPER_MODEL_PATH.exists() else f"模型文件不存在：{PIPER_MODEL_PATH}"
+    })
+
+    checks.append({
+        "id": "tts_output",
+        "title": "TTS 输出目录",
+        "ok": TTS_OUTPUT_DIR.exists(),
+        "message": f"输出目录可用：{TTS_OUTPUT_DIR}" if TTS_OUTPUT_DIR.exists() else f"输出目录不存在：{TTS_OUTPUT_DIR}"
+    })
+
+    return {
+        "ok": all(item["ok"] for item in checks),
+        "checked_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "checks": checks
+    }
+    checks = []
+
+    checks.append({
+        "id": "backend",
+        "title": "FastAPI 后端",
+        "ok": True,
+        "message": "后端服务在线"
+    })
+
+    try:
+        emergency_data = load_emergency_guides()
+        checks.append({
+            "id": "emergency",
+            "title": "应急指南",
+            "ok": True,
+            "message": f"可用，当前 {len(emergency_data)} 条指南"
+        })
+    except Exception as error:
+        checks.append({
+            "id": "emergency",
+            "title": "应急指南",
+            "ok": False,
+            "message": f"读取失败：{error}"
+        })
+
+    try:
+        inventory_items = get_inventory_items()
+        checks.append({
+            "id": "inventory",
+            "title": "物资库存",
+            "ok": True,
+            "message": f"可用，当前 {len(inventory_items)} 条物资"
+        })
+    except Exception as error:
+        checks.append({
+            "id": "inventory",
+            "title": "物资库存",
+            "ok": False,
+            "message": f"读取失败：{error}"
+        })
+
+    try:
+        journal_entries = get_journal_entries()
+        checks.append({
+            "id": "journal",
+            "title": "日记记录",
+            "ok": True,
+            "message": f"可用，当前 {len(journal_entries)} 条记录"
+        })
+    except Exception as error:
+        checks.append({
+            "id": "journal",
+            "title": "日记记录",
+            "ok": False,
+            "message": f"读取失败：{error}"
+        })
+
+    try:
+        wiki_data = list_wiki_articles(limit=1)
+        total = wiki_data.get("total", 0)
+        checks.append({
+            "id": "wiki",
+            "title": "精选 Wiki",
+            "ok": True,
+            "message": f"可用，当前 {total} 篇 Wiki"
+        })
+    except Exception as error:
+        checks.append({
+            "id": "wiki",
+            "title": "精选 Wiki",
+            "ok": False,
+            "message": f"读取失败：{error}"
+        })
+
+    ollama = check_url("http://127.0.0.1:11434/api/tags")
+    checks.append({
+        "id": "ollama",
+        "title": "Ollama 本地 AI",
+        "ok": ollama["ok"],
+        "message": "可用" if ollama["ok"] else f"不可用：{ollama['message']}"
+    })
+
+    return {
+        "ok": all(item["ok"] for item in checks),
+        "checks": checks
     }

@@ -73,6 +73,20 @@
       background: rgba(255, 159, 67, 0.12);
     }
 
+    .system-check-summary {
+      margin-bottom: 14px;
+      padding: 16px 18px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.045);
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    .system-check-summary strong {
+      color: var(--text-main);
+    }
+
     .status-actions {
       margin-top: 18px;
       display: flex;
@@ -115,6 +129,10 @@
         <button class="small-button" type="button" onclick="runChecks()">重新自检</button>
       </div>
 
+      <div id="system-check-summary" class="system-check-summary">
+        正在等待系统自检报告。
+      </div>
+
       <div id="status-grid" class="status-grid"></div>
 
       <div class="status-actions">
@@ -127,57 +145,8 @@
   </main>
 
   <script>
-    const checks = [
-      {
-        id: "backend",
-        title: "FastAPI 后端",
-        url: "/api/status",
-        detail: "检查后端基础状态接口是否可访问。",
-        parse: data => data.message || "后端在线"
-      },
-      {
-        id: "emergency",
-        title: "应急指南接口",
-        url: "/api/emergency",
-        detail: "检查应急指南数据是否能正常读取。",
-        parse: data => {
-          const count = Array.isArray(data) ? data.length : 0;
-          return `可用，当前 ${count} 条指南`;
-        }
-      },
-      {
-        id: "inventory",
-        title: "物资库存接口",
-        url: "/api/inventory",
-        detail: "检查物资库存数据是否能正常读取。",
-        parse: data => {
-          const count = Array.isArray(data) ? data.length : 0;
-          return `可用，当前 ${count} 条物资`;
-        }
-      },
-      {
-        id: "journal",
-        title: "日记记录接口",
-        url: "/api/journal",
-        detail: "检查日记记录数据是否能正常读取。",
-        parse: data => {
-          const count = Array.isArray(data) ? data.length : 0;
-          return `可用，当前 ${count} 条记录`;
-        }
-      },
-      {
-        id: "wiki",
-        title: "精选 Wiki 接口",
-        url: "/api/wiki/articles",
-        detail: "检查 PocketBase 精选 Wiki 是否能通过后端读取。",
-        parse: data => {
-          const count = data.total ?? data.articles?.length ?? 0;
-          return `可用，当前 ${count} 篇 Wiki`;
-        }
-      }
-    ];
-
     const statusGrid = document.getElementById("status-grid");
+    const summaryBox = document.getElementById("system-check-summary");
 
     function escapeHtml(value) {
       return String(value ?? "")
@@ -188,45 +157,63 @@
         .replaceAll("'", "&#039;");
     }
 
-    function renderCheckCard(check, status = "loading", message = "等待检测") {
-      const badgeText = {
-        loading: "检测中",
-        ok: "正常",
-        fail: "异常"
-      }[status] || "未知";
+    function renderLoadingCard() {
+      return `
+        <article class="check-card">
+          <div>
+            <h3>系统自检</h3>
+            <p>正在读取后端统一体检报告...</p>
+          </div>
+          <span class="check-badge loading">检测中</span>
+        </article>
+      `;
+    }
+
+    function renderCheckCard(check) {
+      const status = check.ok ? "ok" : "fail";
+      const badgeText = check.ok ? "正常" : "异常";
 
       return `
-        <article class="check-card" id="check-${escapeHtml(check.id)}">
+        <article class="check-card" id="check-${escapeHtml(check.id || '')}">
           <div>
-            <h3>${escapeHtml(check.title)}</h3>
-            <p>${escapeHtml(message || check.detail)}</p>
+            <h3>${escapeHtml(check.title || "未命名模块")}</h3>
+            <p>${escapeHtml(check.message || "无状态信息")}</p>
           </div>
           <span class="check-badge ${escapeHtml(status)}">${escapeHtml(badgeText)}</span>
         </article>
       `;
     }
 
-    function updateCheckCard(check, status, message) {
-      const card = document.getElementById(`check-${check.id}`);
-      if (!card) return;
-
-      const badgeText = {
-        loading: "检测中",
-        ok: "正常",
-        fail: "异常"
-      }[status] || "未知";
-
-      card.querySelector("p").textContent = message;
-      const badge = card.querySelector(".check-badge");
-      badge.className = `check-badge ${status}`;
-      badge.textContent = badgeText;
+    function renderFailedReport(error) {
+      return `
+        <article class="check-card">
+          <div>
+            <h3>系统自检失败</h3>
+            <p>${escapeHtml(error.message || "无法读取 /api/system/check")}</p>
+          </div>
+          <span class="check-badge fail">异常</span>
+        </article>
+      `;
     }
 
-    async function runSingleCheck(check) {
-      updateCheckCard(check, "loading", "正在检测...");
+    function updateSummary(data, checks) {
+      const okCount = checks.filter(item => item.ok).length;
+      const failCount = checks.length - okCount;
+      const checkedAt = data.checked_at || "未知时间";
+
+      summaryBox.innerHTML = `
+        <strong>自检时间：</strong>${escapeHtml(checkedAt)}｜
+        <strong>正常：</strong>${escapeHtml(okCount)} 项｜
+        <strong>异常：</strong>${escapeHtml(failCount)} 项
+      `;
+    }
+
+    async function runChecks() {
+      summaryBox.textContent = "正在读取系统自检报告...";
+      statusGrid.innerHTML = renderLoadingCard();
 
       try {
-        const response = await fetch(check.url, {
+        const response = await fetch("/api/system/check", {
           cache: "no-store"
         });
 
@@ -235,23 +222,19 @@
         }
 
         const data = await response.json();
-        const message = check.parse ? check.parse(data) : "可用";
+        const checks = Array.isArray(data.checks) ? data.checks : [];
 
-        updateCheckCard(check, "ok", message);
+        if (!checks.length) {
+          throw new Error("后端没有返回检查项目");
+        }
+
+        updateSummary(data, checks);
+        statusGrid.innerHTML = checks.map(renderCheckCard).join("");
 
       } catch (error) {
-        console.error(`${check.title} 自检失败：`, error);
-        updateCheckCard(check, "fail", `不可用：${error.message || "请求失败"}`);
-      }
-    }
-
-    async function runChecks() {
-      statusGrid.innerHTML = checks.map(check => {
-        return renderCheckCard(check, "loading", "等待检测");
-      }).join("");
-
-      for (const check of checks) {
-        await runSingleCheck(check);
+        console.error("系统自检失败：", error);
+        summaryBox.innerHTML = "<strong>自检失败：</strong>无法读取后端统一体检报告。";
+        statusGrid.innerHTML = renderFailedReport(error);
       }
     }
 
