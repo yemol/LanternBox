@@ -11,7 +11,11 @@ LanternBox/
 └─ README.md           # 项目说明
 
 启动服务的命令：
+core服务
+source venv/bin/activate    （进入虚拟环境）
 uvicorn api.main:app --reload --host 127.0.0.1 --port 8787
+pocketbase
+./pocketbase serve --http=127.0.0.1:8090
 
 
 基本方案：

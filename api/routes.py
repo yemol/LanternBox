@@ -353,6 +353,10 @@ def ai_advice_stream(payload: AiAdviceRequest):
 def assistant_page():
     return FileResponse(APP_DIR / "assistant.html")
 
+@router.get("/library.html")
+def library_page():
+    return FileResponse(APP_DIR / "library.html")
+
 
 @router.post("/api/resources/reload")
 def reload_resources():

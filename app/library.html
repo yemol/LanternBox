@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>离线资料库 - 壳中灯 LanternBox</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    .library-hero {
+      margin-bottom: 20px;
+    }
+
+    .library-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .library-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .library-chip-button {
+      min-height: 42px;
+      padding: 10px 15px;
+      border-radius: 14px;
+      border: 1px solid rgba(137, 204, 255, 0.18);
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.045);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .library-chip-button:hover {
+      border-color: var(--border-strong);
+      background: rgba(104, 199, 255, 0.1);
+    }
+
+    .library-search-panel,
+    .library-section {
+      margin-top: 16px;
+      padding: 18px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .library-search-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .library-search-row input {
+      width: 100%;
+      min-height: 46px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(137, 204, 255, 0.18);
+      color: var(--text-main);
+      background: rgba(0, 0, 0, 0.18);
+      font-size: 15px;
+      outline: none;
+    }
+
+    .library-search-row input:focus {
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 3px rgba(104, 199, 255, 0.08);
+    }
+
+    .library-section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .library-section-title h2 {
+      margin: 0;
+      color: var(--text-main);
+      font-size: 22px;
+    }
+
+    .library-section-title span {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .wiki-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    .wiki-card {
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.045);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .wiki-card:hover {
+      border-color: var(--border-strong);
+      background: rgba(104, 199, 255, 0.1);
+    }
+
+    .wiki-card h3 {
+      margin: 0 0 8px;
+      color: var(--text-main);
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .wiki-card p {
+      margin: 0 0 10px;
+      color: var(--text-soft);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .wiki-card small {
+      display: block;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .library-grid-two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .library-info-card {
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .library-info-card h3 {
+      margin: 0 0 8px;
+      color: var(--text-main);
+      font-size: 18px;
+    }
+
+    .library-info-card p,
+    .library-info-card li {
+      color: var(--text-soft);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .library-info-card ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    .library-status-text {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .library-empty {
+      padding: 16px;
+      border: 1px dashed rgba(137, 204, 255, 0.18);
+      border-radius: 16px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.025);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .wiki-modal-body-text {
+      color: var(--text-soft);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .wiki-modal-body-text h2,
+    .wiki-modal-body-text h3,
+    .wiki-modal-body-text h4 {
+      margin: 18px 0 8px;
+      color: var(--accent-bright);
+      line-height: 1.45;
+    }
+
+    .wiki-modal-body-text p {
+      margin: 0 0 10px;
+    }
+
+    .wiki-modal-body-text ul,
+    .wiki-modal-body-text ol {
+      margin: 6px 0 12px;
+      padding-left: 24px;
+    }
+
+    .wiki-media-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .wiki-media-item,
+    .wiki-media-file {
+      overflow: hidden;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .wiki-media-item img,
+    .wiki-media-item video {
+      display: block;
+      width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .wiki-media-item audio {
+      width: 100%;
+      padding: 12px;
+    }
+
+    .wiki-media-item figcaption,
+    .wiki-media-caption {
+      display: grid;
+      gap: 4px;
+      padding: 12px 14px;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .wiki-media-file {
+      padding: 14px;
+    }
+
+    .wiki-media-file a {
+      color: var(--accent-bright);
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    @media (max-width: 900px) {
+      .library-search-row,
+      .library-grid-two {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .library-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero library-hero">
+      <div class="library-header-row">
+        <div>
+          <p class="eyebrow">OFFLINE LIBRARY</p>
+          <h1>离线资料库</h1>
+          <p class="subtitle">把精选 Wiki、离线大资料库和导入规范放在同一张书架上。</p>
+        </div>
+        <div class="library-header-actions">
+          <a class="page-nav-button" href="/">返回总览</a>
+          <a class="page-nav-button" href="/assistant.html">进入 AI 助手</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="library-search-panel">
+      <div class="library-section-title">
+        <h2>精选 Wiki 检索</h2>
+        <span id="wiki-count-label">准备读取本地 Wiki...</span>
+      </div>
+      <div class="library-search-row">
+        <input id="wiki-search-input" type="search" placeholder="搜索饮用水、移动电源、伤口、种植、维修..." />
+        <button class="library-chip-button" onclick="searchWiki()" type="button">搜索</button>
+        <button class="library-chip-button" onclick="loadWikiArticles()" type="button">显示全部</button>
+      </div>
+      <p id="wiki-status" class="library-status-text">精选 Wiki 来自 PocketBase，本页通过 FastAPI 读取。</p>
+    </section>
+
+    <section class="library-section">
+      <div class="library-section-title">
+        <h2>精选 Wiki</h2>
+        <span>已整理、可引用、适合 AI 关联的知识卡片</span>
+      </div>
+      <div id="wiki-list" class="wiki-grid">
+        <div class="library-empty">正在读取 Wiki 条目...</div>
+      </div>
+    </section>
+
+    <section class="library-section">
+      <div class="library-section-title">
+        <h2>Kiwix 离线大资料库</h2>
+        <span>预留入口，适合 Wikipedia / Appropedia / Wikibooks 等 ZIM 包</span>
+      </div>
+      <div class="library-grid-two">
+        <article class="library-info-card">
+          <h3>本地服务入口</h3>
+          <p>未来启动 Kiwix 后，可以把入口固定到本页。默认建议服务地址：</p>
+          <p><strong>http://127.0.0.1:8181</strong></p>
+          <button class="library-chip-button" onclick="window.open('http://127.0.0.1:8181', '_blank')" type="button">打开 Kiwix</button>
+        </article>
+        <article class="library-info-card">
+          <h3>推荐资料类型</h3>
+          <ul>
+            <li>百科通识：Wikipedia / Vikidia</li>
+            <li>实用技能：Appropedia / Wikibooks</li>
+            <li>技术资料：维修、农业、医疗基础、能源与通信</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="library-section">
+      <div class="library-section-title">
+        <h2>资料导入规范</h2>
+        <span>让知识库以后长大时不变成野草地</span>
+      </div>
+      <div class="library-grid-two">
+        <article class="library-info-card">
+          <h3>Wiki 文章</h3>
+          <ul>
+            <li>标题短而明确，方便检索。</li>
+            <li>摘要控制在 40 到 80 字，适合首页卡片显示。</li>
+            <li>正文按场景、步骤、注意事项、停止条件组织。</li>
+            <li>标签至少 3 个，来源必须填写。</li>
+          </ul>
+        </article>
+        <article class="library-info-card">
+          <h3>媒体附件</h3>
+          <ul>
+            <li>图片用于识别、结构、流程和关键部件。</li>
+            <li>视频用于演示动作，不替代文字步骤。</li>
+            <li>附件统一关联到 Wiki 文章，避免孤立文件。</li>
+            <li>高风险内容必须在正文中写清边界和停止条件。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <div id="guide-modal" class="guide-modal hidden">
+      <div class="guide-modal-backdrop" onclick="closeGuideModal()"></div>
+      <div class="guide-modal-card">
+        <div class="guide-modal-header">
+          <div>
+            <p id="guide-modal-id" class="guide-modal-id"></p>
+            <h2 id="guide-modal-title">Wiki 标题</h2>
+            <p id="guide-modal-category" class="guide-modal-category"></p>
+          </div>
+          <button class="guide-modal-close" onclick="closeGuideModal()">关闭</button>
+        </div>
+        <div id="guide-modal-body" class="guide-modal-body"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const wikiList = document.getElementById('wiki-list');
+    const wikiStatus = document.getElementById('wiki-status');
+    const wikiCountLabel = document.getElementById('wiki-count-label');
+    const wikiSearchInput = document.getElementById('wiki-search-input');
+
+    let latestWikiArticles = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadWikiArticles();
+    });
+
+    wikiSearchInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        searchWiki();
+      }
+    });
+
+    async function loadWikiArticles() {
+      wikiStatus.textContent = '正在读取精选 Wiki...';
+      wikiList.innerHTML = '<div class="library-empty">正在读取 Wiki 条目...</div>';
+      wikiSearchInput.value = '';
+
+      try {
+        const response = await fetch('/api/wiki/articles?limit=50');
+        if (!response.ok) throw new Error('Wiki 列表读取失败');
+        const data = await response.json();
+        if (!data.ok) throw new Error(data.error || 'Wiki 列表返回异常');
+        const articles = Array.isArray(data.articles) ? data.articles : [];
+        latestWikiArticles = articles;
+        renderWikiList(articles);
+        wikiStatus.textContent = '已显示全部精选 Wiki。';
+        wikiCountLabel.textContent = `共 ${articles.length} 条`;
+      } catch (error) {
+        console.error(error);
+        latestWikiArticles = [];
+        wikiList.innerHTML = '<div class="library-empty">Wiki 读取失败，请确认 FastAPI 与 PocketBase 正常运行。</div>';
+        wikiStatus.textContent = `读取失败：${error.message}`;
+        wikiCountLabel.textContent = '读取失败';
+      }
+    }
+
+    async function searchWiki() {
+      const keyword = wikiSearchInput.value.trim();
+      if (!keyword) {
+        loadWikiArticles();
+        return;
+      }
+
+      wikiStatus.textContent = `正在搜索：${keyword}`;
+      wikiList.innerHTML = '<div class="library-empty">正在搜索 Wiki...</div>';
+
+      try {
+        const response = await fetch(`/api/wiki/search?q=${encodeURIComponent(keyword)}&limit=50`);
+        if (!response.ok) throw new Error('Wiki 搜索失败');
+        const data = await response.json();
+        if (!data.ok) throw new Error(data.error || 'Wiki 搜索返回异常');
+        const articles = Array.isArray(data.articles) ? data.articles : [];
+        latestWikiArticles = articles;
+        renderWikiList(articles);
+        wikiStatus.textContent = `搜索完成：${keyword}`;
+        wikiCountLabel.textContent = `找到 ${articles.length} 条`;
+      } catch (error) {
+        console.error(error);
+        latestWikiArticles = [];
+        wikiList.innerHTML = '<div class="library-empty">搜索失败，请确认 Wiki 接口正常。</div>';
+        wikiStatus.textContent = `搜索失败：${error.message}`;
+        wikiCountLabel.textContent = '搜索失败';
+      }
+    }
+
+    function renderWikiList(articles) {
+      if (!Array.isArray(articles) || !articles.length) {
+        wikiList.innerHTML = '<div class="library-empty">没有找到 Wiki 条目。</div>';
+        return;
+      }
+
+      wikiList.innerHTML = articles.map((article, index) => `
+        <article class="wiki-card" onclick="openWikiArticle(${index})">
+          <h3>${escapeHtml(article.title || '未命名 Wiki')}</h3>
+          <p>${escapeHtml(article.summary || '暂无摘要。')}</p>
+          <small>${escapeHtml(article.source || '本地精选 Wiki')}</small>
+        </article>
+      `).join('');
+    }
+
+    async function openWikiArticle(index) {
+      const wiki = latestWikiArticles[index];
+      if (!wiki || !wiki.id) return;
+
+      const modal = document.getElementById('guide-modal');
+      const modalId = document.getElementById('guide-modal-id');
+      const modalTitle = document.getElementById('guide-modal-title');
+      const modalCategory = document.getElementById('guide-modal-category');
+      const modalBody = document.getElementById('guide-modal-body');
+
+      modalId.textContent = wiki.id ? `WIKI · ${wiki.id}` : 'WIKI';
+      modalTitle.textContent = wiki.title || '未命名 Wiki';
+      modalCategory.textContent = '正在读取完整 Wiki 内容...';
+      modalBody.innerHTML = `
+        <section class="guide-modal-section">
+          <h3>读取中</h3>
+          <p>正在从本地精选 Wiki 读取完整内容。</p>
+        </section>
+      `;
+
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+
+      try {
+        const response = await fetch(`/api/wiki/articles/${encodeURIComponent(wiki.id)}`);
+        if (!response.ok) throw new Error('Wiki 详情读取失败');
+        const data = await response.json();
+        if (!data.ok || !data.article) throw new Error(data.error || 'Wiki 文章不存在');
+
+        const article = data.article;
+        const media = Array.isArray(data.media) ? data.media : [];
+        const riskLevel = article.risk_level || wiki.risk_level || 'normal';
+        const source = article.source || wiki.source || '本地精选 Wiki';
+        const tags = article.tags || wiki.tags || '';
+        const content = article.content || wiki.content || '暂无正文。';
+
+        modalId.textContent = article.id ? `WIKI · ${article.id}` : 'WIKI';
+        modalTitle.textContent = article.title || wiki.title || '未命名 Wiki';
+        modalCategory.textContent = `风险等级：${riskLevel} / 来源：${source}`;
+        modalBody.innerHTML = `
+          ${renderGuideSection('摘要', article.summary || wiki.summary)}
+          ${renderGuideSection('标签', tags)}
+          <section class="guide-modal-section">
+            <h3>正文</h3>
+            <div class="wiki-modal-body-text">${renderSimpleMarkdown(content)}</div>
+          </section>
+          ${renderWikiMedia(media)}
+        `;
+
+        requestAnimationFrame(() => {
+          modalBody.scrollTop = 0;
+        });
+      } catch (error) {
+        console.error(error);
+        modalCategory.textContent = '读取失败';
+        modalBody.innerHTML = `
+          <section class="guide-modal-section">
+            <h3>Wiki 详情读取失败</h3>
+            <p>${escapeHtml(error.message || '请确认后端和 PocketBase 正常运行。')}</p>
+          </section>
+        `;
+      }
+    }
+
+    function closeGuideModal() {
+      const modal = document.getElementById('guide-modal');
+      modal.classList.add('hidden');
+      document.body.classList.remove('modal-open');
+    }
+
+    function renderGuideSection(title, content) {
+      if (!content) return '';
+      return `
+        <section class="guide-modal-section">
+          <h3>${escapeHtml(title)}</h3>
+          <p>${escapeHtml(content)}</p>
+        </section>
+      `;
+    }
+
+    function renderSimpleMarkdown(text) {
+      const lines = String(text || '').split('\n');
+      let html = '';
+      let inUl = false;
+      let inOl = false;
+
+      function closeLists() {
+        if (inUl) {
+          html += '</ul>';
+          inUl = false;
+        }
+        if (inOl) {
+          html += '</ol>';
+          inOl = false;
+        }
+      }
+
+      lines.forEach(rawLine => {
+        const line = rawLine.trim();
+        if (!line) {
+          closeLists();
+          return;
+        }
+        if (line.startsWith('### ')) {
+          closeLists();
+          html += `<h4>${escapeHtml(line.slice(4))}</h4>`;
+          return;
+        }
+        if (line.startsWith('## ')) {
+          closeLists();
+          html += `<h3>${escapeHtml(line.slice(3))}</h3>`;
+          return;
+        }
+        if (line.startsWith('# ')) {
+          closeLists();
+          html += `<h2>${escapeHtml(line.slice(2))}</h2>`;
+          return;
+        }
+        if (line.startsWith('- ')) {
+          if (!inUl) {
+            closeLists();
+            html += '<ul>';
+            inUl = true;
+          }
+          html += `<li>${escapeHtml(line.slice(2))}</li>`;
+          return;
+        }
+        const orderedMatch = line.match(/^(\d+)[.、]\s*(.+)$/);
+        if (orderedMatch) {
+          if (!inOl) {
+            closeLists();
+            html += '<ol>';
+            inOl = true;
+          }
+          html += `<li>${escapeHtml(orderedMatch[2])}</li>`;
+          return;
+        }
+        closeLists();
+        html += `<p>${escapeHtml(line)}</p>`;
+      });
+
+      closeLists();
+      return html;
+    }
+
+    function renderWikiMedia(mediaList) {
+      if (!Array.isArray(mediaList) || !mediaList.length) return '';
+      const items = mediaList.map(media => {
+        const type = media.media_type || 'document';
+        const title = escapeHtml(media.title || '未命名附件');
+        const desc = escapeHtml(media.description || '');
+        const url = media.file_url || '';
+        if (!url) return '';
+
+        if (type === 'image' || type === 'diagram') {
+          return `
+            <figure class="wiki-media-item">
+              <img src="${escapeHtml(url)}" alt="${title}" loading="lazy" />
+              <figcaption>
+                <strong>${title}</strong>
+                ${desc ? `<span>${desc}</span>` : ''}
+              </figcaption>
+            </figure>
+          `;
+        }
+
+        if (type === 'video') {
+          return `
+            <div class="wiki-media-item">
+              <video controls preload="metadata">
+                <source src="${escapeHtml(url)}" />
+                当前浏览器不支持视频播放。
+              </video>
+              <div class="wiki-media-caption">
+                <strong>${title}</strong>
+                ${desc ? `<span>${desc}</span>` : ''}
+              </div>
+            </div>
+          `;
+        }
+
+        if (type === 'audio') {
+          return `
+            <div class="wiki-media-item">
+              <audio controls preload="metadata" src="${escapeHtml(url)}"></audio>
+              <div class="wiki-media-caption">
+                <strong>${title}</strong>
+                ${desc ? `<span>${desc}</span>` : ''}
+              </div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="wiki-media-file">
+            <a href="${escapeHtml(url)}" target="_blank" rel="noopener">${title}</a>
+            ${desc ? `<p>${desc}</p>` : ''}
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <section class="guide-modal-section wiki-media-section">
+          <h3>媒体与附件</h3>
+          <div class="wiki-media-list">${items}</div>
+        </section>
+      `;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        closeGuideModal();
+      }
+    });
+  </script>
+</body>
+</html>
