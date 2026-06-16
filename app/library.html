@@ -266,6 +266,101 @@
       gap: 12px;
       flex-wrap: wrap;
     }
+
+    .wiki-category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .wiki-category-card {
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.045);
+      cursor: pointer;
+      text-align: left;
+      transition: 0.2s ease;
+    }
+
+    .wiki-category-card:hover {
+      border-color: var(--border-strong);
+      background: rgba(104, 199, 255, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .wiki-category-card h3 {
+      margin: 0 0 8px;
+      color: var(--text-main);
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .wiki-category-card p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .wiki-category-count {
+      display: inline-flex;
+      margin-top: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(104, 199, 255, 0.12);
+      color: var(--accent-bright);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .wiki-pager {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .wiki-page-info {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .library-chip-button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .wiki-title-pill {
+      min-height: 42px;
+      padding: 10px 14px;
+      border: 1px solid rgba(137, 204, 255, 0.16);
+      border-radius: 999px;
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.045);
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.4;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .wiki-title-pill:hover {
+      border-color: var(--border-strong);
+      background: rgba(104, 199, 255, 0.12);
+    }
+    
+    #wiki-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
   </style>
 </head>
 <body>
@@ -306,7 +401,24 @@
         <div class="library-empty">正在读取 Wiki 条目...</div>
       </div>
     </section>
+    <section class="library-section">
+      <div class="library-section-title">
+        <h2>分类浏览</h2>
+        <span id="wiki-category-count-label">正在读取分类...</span>
+      </div>
+      <div id="wiki-category-list" class="wiki-category-grid">
+        <div class="library-empty">正在读取 Wiki 分类...</div>
+      </div>
+    </section>
 
+    <section id="wiki-category-articles-section" class="library-section" style="display: none;">
+      <div class="library-section-title">
+        <h2 id="wiki-category-title">分类文章</h2>
+        <span id="wiki-category-articles-count">每页 10 篇</span>
+      </div>
+      <div id="wiki-category-articles" class="wiki-grid"></div>
+      <div id="wiki-category-pager" class="wiki-pager"></div>
+    </section>
     <section class="library-section">
       <div class="library-section-title">
         <h2>Kiwix 离线大资料库</h2>
@@ -379,10 +491,24 @@
     const wikiCountLabel = document.getElementById('wiki-count-label');
     const wikiSearchInput = document.getElementById('wiki-search-input');
 
+    const wikiCategoryList = document.getElementById('wiki-category-list');
+    const wikiCategoryCountLabel = document.getElementById('wiki-category-count-label');
+    const wikiCategoryArticlesSection = document.getElementById('wiki-category-articles-section');
+    const wikiCategoryTitle = document.getElementById('wiki-category-title');
+    const wikiCategoryArticlesCount = document.getElementById('wiki-category-articles-count');
+    const wikiCategoryArticles = document.getElementById('wiki-category-articles');
+    const wikiCategoryPager = document.getElementById('wiki-category-pager');
+
     let latestWikiArticles = [];
+    let latestCategoryArticles = [];
+    let currentCategoryId = null;
+    let currentCategoryName = '';
+    let currentCategoryPage = 1;
+    const CATEGORY_PER_PAGE = 10;
 
     document.addEventListener('DOMContentLoaded', () => {
       loadWikiArticles();
+      loadWikiCategories();
     });
 
     wikiSearchInput.addEventListener('keydown', event => {
@@ -403,7 +529,7 @@
         if (!data.ok) throw new Error(data.error || 'Wiki 列表返回异常');
         const articles = Array.isArray(data.articles) ? data.articles : [];
         latestWikiArticles = articles;
-        renderWikiList(articles);
+        renderFeaturedWikiList(articles);
         wikiStatus.textContent = '已显示全部精选 Wiki。';
         wikiCountLabel.textContent = `共 ${articles.length} 条`;
       } catch (error) {
@@ -523,6 +649,135 @@
       }
     }
 
+    async function loadWikiCategories() {
+      wikiCategoryList.innerHTML = '<div class="library-empty">正在读取 Wiki 分类...</div>';
+      wikiCategoryCountLabel.textContent = '正在读取分类...';
+
+      try {
+        const response = await fetch('/api/wiki/categories');
+        if (!response.ok) throw new Error('Wiki 分类读取失败');
+
+        const data = await response.json();
+        const categories = Array.isArray(data.items) ? data.items : [];
+
+        if (!categories.length) {
+          wikiCategoryList.innerHTML = '<div class="library-empty">还没有 Wiki 分类。</div>';
+          wikiCategoryCountLabel.textContent = '暂无分类';
+          return;
+        }
+
+        wikiCategoryList.innerHTML = categories.map(category => `
+          <article class="wiki-category-card"
+            onclick="loadCategoryArticles('${escapeHtml(category.id)}', '${escapeHtml(category.name || '未命名分类')}', 1)">
+            <h3>${escapeHtml(category.name || '未命名分类')}</h3>
+            <p>${escapeHtml(category.description || '暂无分类说明。')}</p>
+            <span class="wiki-category-count">点击查看文章</span>
+          </article>
+        `).join('');
+
+        wikiCategoryCountLabel.textContent = `共 ${categories.length} 个分类`;
+      } catch (error) {
+        console.error(error);
+        wikiCategoryList.innerHTML = '<div class="library-empty">分类读取失败，请确认后端接口正常。</div>';
+        wikiCategoryCountLabel.textContent = '读取失败';
+      }
+    }
+
+    async function loadCategoryArticles(categoryId, categoryName, page = 1) {
+      currentCategoryId = categoryId;
+      currentCategoryName = categoryName;
+      currentCategoryPage = page;
+
+      wikiCategoryArticlesSection.style.display = 'block';
+      wikiCategoryTitle.textContent = categoryName;
+      wikiCategoryArticlesCount.textContent = '正在读取分类文章...';
+      wikiCategoryArticles.innerHTML = '<div class="library-empty">正在读取分类文章...</div>';
+      wikiCategoryPager.innerHTML = '';
+
+      try {
+        const response = await fetch(
+          `/api/wiki/categories/${encodeURIComponent(categoryId)}/articles?page=${page}&per_page=${CATEGORY_PER_PAGE}`
+        );
+
+        if (!response.ok) throw new Error('分类文章读取失败');
+
+        const data = await response.json();
+        const articles = Array.isArray(data.items) ? data.items : [];
+
+        latestCategoryArticles = articles;
+
+        if (!articles.length) {
+          wikiCategoryArticles.innerHTML = '<div class="library-empty">这个分类下还没有已发布文章。</div>';
+          wikiCategoryArticlesCount.textContent = '暂无文章';
+          renderCategoryPager(data);
+          return;
+        }
+
+        wikiCategoryArticles.innerHTML = articles.map((article, index) => `
+          <article class="wiki-card" onclick="openCategoryWikiArticle(${index})">
+            <h3>${escapeHtml(article.title || '未命名 Wiki')}</h3>
+            <p>${escapeHtml(article.summary || '暂无摘要。')}</p>
+            <small>${escapeHtml(article.source || '本地精选 Wiki')}</small>
+          </article>
+        `).join('');
+
+        wikiCategoryArticlesCount.textContent = `第 ${data.page || page} 页 / 共 ${data.totalItems || articles.length} 篇`;
+        renderCategoryPager(data);
+
+        wikiCategoryArticlesSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      } catch (error) {
+        console.error(error);
+        latestCategoryArticles = [];
+        wikiCategoryArticles.innerHTML = '<div class="library-empty">分类文章读取失败，请确认接口正常。</div>';
+        wikiCategoryArticlesCount.textContent = '读取失败';
+        wikiCategoryPager.innerHTML = '';
+      }
+    }
+
+    function renderCategoryPager(data) {
+      const page = data.page || currentCategoryPage || 1;
+      const totalPages = data.totalPages || 1;
+      const totalItems = data.totalItems || 0;
+
+      if (totalPages <= 1) {
+        wikiCategoryPager.innerHTML = totalItems
+          ? `<span class="wiki-page-info">共 ${totalItems} 篇</span>`
+          : '';
+        return;
+      }
+
+      wikiCategoryPager.innerHTML = `
+        <button class="library-chip-button"
+          ${page <= 1 ? 'disabled' : ''}
+          onclick="loadCategoryArticles(currentCategoryId, currentCategoryName, ${page - 1})"
+          type="button">
+          上一页
+        </button>
+
+        <span class="wiki-page-info">
+          第 ${page} / ${totalPages} 页，共 ${totalItems} 篇
+        </span>
+
+        <button class="library-chip-button"
+          ${page >= totalPages ? 'disabled' : ''}
+          onclick="loadCategoryArticles(currentCategoryId, currentCategoryName, ${page + 1})"
+          type="button">
+          下一页
+        </button>
+      `;
+    }
+
+    function openCategoryWikiArticle(index) {
+      const wiki = latestCategoryArticles[index];
+      if (!wiki || !wiki.id) return;
+
+      latestWikiArticles = latestCategoryArticles;
+      openWikiArticle(index);
+    }
+
     function closeGuideModal() {
       const modal = document.getElementById('guide-modal');
       modal.classList.add('hidden');
@@ -537,6 +792,19 @@
           <p>${escapeHtml(content)}</p>
         </section>
       `;
+    }
+
+    function renderFeaturedWikiList(articles) {
+      if (!Array.isArray(articles) || !articles.length) {
+        wikiList.innerHTML = '<div class="library-empty">没有找到 Wiki 条目。</div>';
+        return;
+      }
+
+      wikiList.innerHTML = articles.map((article, index) => `
+        <button class="wiki-title-pill" onclick="openWikiArticle(${index})" type="button">
+          ${escapeHtml(article.title || '未命名 Wiki')}
+        </button>
+      `).join('');
     }
 
     function renderSimpleMarkdown(text) {
