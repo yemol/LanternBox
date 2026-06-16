@@ -37,6 +37,7 @@ from .wiki import (
     get_wiki_article_detail,
     search_wiki_articles,
     search_wiki_for_ai,
+    pb_get,
 )
 
 router = APIRouter()
@@ -665,3 +666,45 @@ def system_check():
         "ok": all(item["ok"] for item in checks),
         "checks": checks
     }
+
+@router.get("/api/wiki/categories")
+def get_wiki_categories():
+    params = {
+        "page": 1,
+        "perPage": 100,
+        "sort": "sort_order,name"
+    }
+
+    return pb_get("/api/collections/wiki_categories/records", params=params)
+
+
+@router.get("/api/wiki/categories/{category_id}/articles")
+def get_wiki_articles_by_category(
+    category_id: str,
+    page: int = 1,
+    per_page: int = 10
+):
+    page = max(page, 1)
+    per_page = min(max(per_page, 1), 50)
+
+    params = {
+        "page": page,
+        "perPage": per_page,
+        "sort": "title",
+        "filter": f'status = "published" && category = "{category_id}"'
+    }
+
+    return pb_get("/api/collections/wiki_articles/records", params=params)
+
+@router.get("/api/wiki/featured")
+def get_featured_wiki_articles(limit: int = 8):
+    limit = min(max(limit, 1), 20)
+
+    params = {
+        "page": 1,
+        "perPage": limit,
+        "sort": "-updated",
+        "filter": 'status = "published" && is_featured = true'
+    }
+
+    return pb_get("/api/collections/wiki_articles/records", params=params)

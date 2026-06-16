@@ -1,6 +1,9 @@
+import os
 import requests
 import re
 from typing import Any, Dict, Optional, List
+from fastapi import HTTPException
+from typing import Optional
 
 from .config import (
     POCKETBASE_URL,
@@ -23,6 +26,8 @@ WIKI_STOP_TERMS = {
     "可以", "需要", "应该", "感觉", "问题", "情况",
     "这个", "那个", "我们", "家里", "不多", "都有",
 }
+
+PB_URL = os.getenv("PB_URL", "http://127.0.0.1:8090")
 
 
 def pocketbase_get_records(collection: str, params: Optional[dict] = None) -> dict:
@@ -104,7 +109,7 @@ def get_published_wiki_articles(limit: int = 50) -> list[dict]:
             "page": 1,
             "perPage": limit,
             "sort": "-updated",
-            "filter": 'status = "published"',
+            "filter": 'status = "published" && is_featured = true',
         }
     )
 
@@ -370,3 +375,16 @@ def normalize_wiki_articles_for_ai(articles: List[dict]) -> List[dict]:
         })
 
     return results
+
+def pb_get(path: str, params: Optional[dict] = None):
+    url = f"{PB_URL}{path}"
+
+    try:
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        return response.json()
+    except requests.RequestException as exc:
+        raise HTTPException(
+            status_code=502,
+            detail=f"PocketBase 请求失败：{exc}"
+        )
