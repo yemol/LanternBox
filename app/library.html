@@ -18,11 +18,6 @@
       flex-wrap: wrap;
     }
 
-    .library-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
 
     .library-chip-button {
       min-height: 42px;
@@ -51,7 +46,7 @@
 
     .library-search-row {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto auto;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 10px;
       align-items: center;
     }
@@ -253,12 +248,6 @@
       text-decoration: none;
     }
 
-    @media (max-width: 900px) {
-      .library-search-row,
-      .library-grid-two {
-        grid-template-columns: 1fr;
-      }
-    }
 
     .library-header-actions {
       display: flex;
@@ -337,29 +326,11 @@
       transform: none;
     }
 
-    .wiki-title-pill {
-      min-height: 42px;
-      padding: 10px 14px;
-      border: 1px solid rgba(137, 204, 255, 0.16);
-      border-radius: 999px;
-      color: var(--text-main);
-      background: rgba(255, 255, 255, 0.045);
-      font-size: 15px;
-      font-weight: 900;
-      line-height: 1.4;
-      cursor: pointer;
-      text-align: left;
-    }
-
-    .wiki-title-pill:hover {
-      border-color: var(--border-strong);
-      background: rgba(104, 199, 255, 0.12);
-    }
-    
-    #wiki-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    @media (max-width: 900px) {
+      .library-search-row,
+      .library-grid-two {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -370,7 +341,7 @@
         <div>
           <p class="eyebrow">OFFLINE LIBRARY</p>
           <h1>离线资料库</h1>
-          <p class="subtitle">把精选 Wiki、离线大资料库和导入规范放在同一张书架上。</p>
+          <p class="subtitle">把本地 Wiki、分类浏览、离线大资料库和导入规范放在同一张书架上。</p>
         </div>
         <div class="library-header-actions">
           <a class="page-nav-button" href="/">返回总览</a>
@@ -381,26 +352,26 @@
 
     <section class="library-search-panel">
       <div class="library-section-title">
-        <h2>精选 Wiki 检索</h2>
+        <h2>本地 Wiki 检索</h2>
         <span id="wiki-count-label">准备读取本地 Wiki...</span>
       </div>
       <div class="library-search-row">
         <input id="wiki-search-input" type="search" placeholder="搜索饮用水、移动电源、伤口、种植、维修..." />
         <button class="library-chip-button" onclick="searchWiki()" type="button">搜索</button>
-        <button class="library-chip-button" onclick="loadWikiArticles()" type="button">显示全部</button>
       </div>
-      <p id="wiki-status" class="library-status-text">精选 Wiki 来自 PocketBase，本页通过 FastAPI 读取。</p>
+      <p id="wiki-status" class="library-status-text">本地 Wiki 来自 PocketBase，本页通过 FastAPI 读取。</p>
     </section>
 
-    <section class="library-section">
+    <section id="wiki-results-section" class="library-section">
       <div class="library-section-title">
-        <h2>精选 Wiki</h2>
-        <span>已整理、可引用、适合 AI 关联的知识卡片</span>
+        <h2 id="wiki-results-title">搜索结果</h2>
+        <span id="wiki-results-subtitle">输入关键词后显示匹配条目</span>
       </div>
       <div id="wiki-list" class="wiki-grid">
         <div class="library-empty">正在读取 Wiki 条目...</div>
       </div>
     </section>
+
     <section class="library-section">
       <div class="library-section-title">
         <h2>分类浏览</h2>
@@ -419,6 +390,7 @@
       <div id="wiki-category-articles" class="wiki-grid"></div>
       <div id="wiki-category-pager" class="wiki-pager"></div>
     </section>
+
     <section class="library-section">
       <div class="library-section-title">
         <h2>Kiwix 离线大资料库</h2>
@@ -490,6 +462,8 @@
     const wikiStatus = document.getElementById('wiki-status');
     const wikiCountLabel = document.getElementById('wiki-count-label');
     const wikiSearchInput = document.getElementById('wiki-search-input');
+    const wikiResultsTitle = document.getElementById('wiki-results-title');
+    const wikiResultsSubtitle = document.getElementById('wiki-results-subtitle');
 
     const wikiCategoryList = document.getElementById('wiki-category-list');
     const wikiCategoryCountLabel = document.getElementById('wiki-category-count-label');
@@ -507,7 +481,6 @@
     const CATEGORY_PER_PAGE = 10;
 
     document.addEventListener('DOMContentLoaded', () => {
-      loadWikiArticles();
       loadWikiCategories();
     });
 
@@ -517,39 +490,22 @@
       }
     });
 
-    async function loadWikiArticles() {
-      wikiStatus.textContent = '正在读取精选 Wiki...';
-      wikiList.innerHTML = '<div class="library-empty">正在读取 Wiki 条目...</div>';
-      wikiSearchInput.value = '';
-
-      try {
-        const response = await fetch('/api/wiki/articles?limit=50');
-        if (!response.ok) throw new Error('Wiki 列表读取失败');
-        const data = await response.json();
-        if (!data.ok) throw new Error(data.error || 'Wiki 列表返回异常');
-        const articles = Array.isArray(data.articles) ? data.articles : [];
-        latestWikiArticles = articles;
-        renderFeaturedWikiList(articles);
-        wikiStatus.textContent = '已显示全部精选 Wiki。';
-        wikiCountLabel.textContent = `共 ${articles.length} 条`;
-      } catch (error) {
-        console.error(error);
-        latestWikiArticles = [];
-        wikiList.innerHTML = '<div class="library-empty">Wiki 读取失败，请确认 FastAPI 与 PocketBase 正常运行。</div>';
-        wikiStatus.textContent = `读取失败：${error.message}`;
-        wikiCountLabel.textContent = '读取失败';
-      }
-    }
 
     async function searchWiki() {
       const keyword = wikiSearchInput.value.trim();
       if (!keyword) {
-        loadWikiArticles();
+        wikiStatus.textContent = '请输入关键词进行检索，或通过下方分类浏览 Wiki。';
+        wikiCountLabel.textContent = '等待搜索';
+        document.getElementById('wiki-results-section').style.display = 'none';
+        wikiList.innerHTML = '';
         return;
       }
 
       wikiStatus.textContent = `正在搜索：${keyword}`;
       wikiList.innerHTML = '<div class="library-empty">正在搜索 Wiki...</div>';
+      document.getElementById('wiki-results-section').style.display = 'block';
+      document.getElementById('wiki-results-title').textContent = '搜索结果';
+      document.getElementById('wiki-results-subtitle').textContent = `关键词：${keyword}`;
 
       try {
         const response = await fetch(`/api/wiki/search?q=${encodeURIComponent(keyword)}&limit=50`);
@@ -561,6 +517,8 @@
         renderWikiList(articles);
         wikiStatus.textContent = `搜索完成：${keyword}`;
         wikiCountLabel.textContent = `找到 ${articles.length} 条`;
+        wikiResultsTitle.textContent = '搜索结果';
+        wikiResultsSubtitle.textContent = `关键词：${keyword}`;
       } catch (error) {
         console.error(error);
         latestWikiArticles = [];
@@ -580,74 +538,11 @@
         <article class="wiki-card" onclick="openWikiArticle(${index})">
           <h3>${escapeHtml(article.title || '未命名 Wiki')}</h3>
           <p>${escapeHtml(article.summary || '暂无摘要。')}</p>
-          <small>${escapeHtml(article.source || '本地精选 Wiki')}</small>
+          <small>${escapeHtml(article.source || '本地 Wiki')}</small>
         </article>
       `).join('');
     }
 
-    async function openWikiArticle(index) {
-      const wiki = latestWikiArticles[index];
-      if (!wiki || !wiki.id) return;
-
-      const modal = document.getElementById('guide-modal');
-      const modalId = document.getElementById('guide-modal-id');
-      const modalTitle = document.getElementById('guide-modal-title');
-      const modalCategory = document.getElementById('guide-modal-category');
-      const modalBody = document.getElementById('guide-modal-body');
-
-      modalId.textContent = wiki.id ? `WIKI · ${wiki.id}` : 'WIKI';
-      modalTitle.textContent = wiki.title || '未命名 Wiki';
-      modalCategory.textContent = '正在读取完整 Wiki 内容...';
-      modalBody.innerHTML = `
-        <section class="guide-modal-section">
-          <h3>读取中</h3>
-          <p>正在从本地精选 Wiki 读取完整内容。</p>
-        </section>
-      `;
-
-      modal.classList.remove('hidden');
-      document.body.classList.add('modal-open');
-
-      try {
-        const response = await fetch(`/api/wiki/articles/${encodeURIComponent(wiki.id)}`);
-        if (!response.ok) throw new Error('Wiki 详情读取失败');
-        const data = await response.json();
-        if (!data.ok || !data.article) throw new Error(data.error || 'Wiki 文章不存在');
-
-        const article = data.article;
-        const media = Array.isArray(data.media) ? data.media : [];
-        const riskLevel = article.risk_level || wiki.risk_level || 'normal';
-        const source = article.source || wiki.source || '本地精选 Wiki';
-        const tags = article.tags || wiki.tags || '';
-        const content = article.content || wiki.content || '暂无正文。';
-
-        modalId.textContent = article.id ? `WIKI · ${article.id}` : 'WIKI';
-        modalTitle.textContent = article.title || wiki.title || '未命名 Wiki';
-        modalCategory.textContent = `风险等级：${riskLevel} / 来源：${source}`;
-        modalBody.innerHTML = `
-          ${renderGuideSection('摘要', article.summary || wiki.summary)}
-          ${renderGuideSection('标签', tags)}
-          <section class="guide-modal-section">
-            <h3>正文</h3>
-            <div class="wiki-modal-body-text">${renderSimpleMarkdown(content)}</div>
-          </section>
-          ${renderWikiMedia(media)}
-        `;
-
-        requestAnimationFrame(() => {
-          modalBody.scrollTop = 0;
-        });
-      } catch (error) {
-        console.error(error);
-        modalCategory.textContent = '读取失败';
-        modalBody.innerHTML = `
-          <section class="guide-modal-section">
-            <h3>Wiki 详情读取失败</h3>
-            <p>${escapeHtml(error.message || '请确认后端和 PocketBase 正常运行。')}</p>
-          </section>
-        `;
-      }
-    }
 
     async function loadWikiCategories() {
       wikiCategoryList.innerHTML = '<div class="library-empty">正在读取 Wiki 分类...</div>';
@@ -717,7 +612,7 @@
           <article class="wiki-card" onclick="openCategoryWikiArticle(${index})">
             <h3>${escapeHtml(article.title || '未命名 Wiki')}</h3>
             <p>${escapeHtml(article.summary || '暂无摘要。')}</p>
-            <small>${escapeHtml(article.source || '本地精选 Wiki')}</small>
+            <small>${escapeHtml(article.source || '本地 Wiki')}</small>
           </article>
         `).join('');
 
@@ -778,6 +673,70 @@
       openWikiArticle(index);
     }
 
+    async function openWikiArticle(index) {
+      const wiki = latestWikiArticles[index];
+      if (!wiki || !wiki.id) return;
+
+      const modal = document.getElementById('guide-modal');
+      const modalId = document.getElementById('guide-modal-id');
+      const modalTitle = document.getElementById('guide-modal-title');
+      const modalCategory = document.getElementById('guide-modal-category');
+      const modalBody = document.getElementById('guide-modal-body');
+
+      modalId.textContent = wiki.id ? `WIKI · ${wiki.id}` : 'WIKI';
+      modalTitle.textContent = wiki.title || '未命名 Wiki';
+      modalCategory.textContent = '正在读取完整 Wiki 内容...';
+      modalBody.innerHTML = `
+        <section class="guide-modal-section">
+          <h3>读取中</h3>
+          <p>正在从本地 Wiki 读取完整内容。</p>
+        </section>
+      `;
+
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+
+      try {
+        const response = await fetch(`/api/wiki/articles/${encodeURIComponent(wiki.id)}`);
+        if (!response.ok) throw new Error('Wiki 详情读取失败');
+        const data = await response.json();
+        if (!data.ok || !data.article) throw new Error(data.error || 'Wiki 文章不存在');
+
+        const article = data.article;
+        const media = Array.isArray(data.media) ? data.media : [];
+        const riskLevel = article.risk_level || wiki.risk_level || 'normal';
+        const source = article.source || wiki.source || '本地 Wiki';
+        const tags = article.tags || wiki.tags || '';
+        const content = article.content || wiki.content || '暂无正文。';
+
+        modalId.textContent = article.id ? `WIKI · ${article.id}` : 'WIKI';
+        modalTitle.textContent = article.title || wiki.title || '未命名 Wiki';
+        modalCategory.textContent = `风险等级：${riskLevel} / 来源：${source}`;
+        modalBody.innerHTML = `
+          ${renderGuideSection('摘要', article.summary || wiki.summary)}
+          ${renderGuideSection('标签', tags)}
+          <section class="guide-modal-section">
+            <h3>正文</h3>
+            <div class="wiki-modal-body-text">${renderSimpleMarkdown(content)}</div>
+          </section>
+          ${renderWikiMedia(media)}
+        `;
+
+        requestAnimationFrame(() => {
+          modalBody.scrollTop = 0;
+        });
+      } catch (error) {
+        console.error(error);
+        modalCategory.textContent = '读取失败';
+        modalBody.innerHTML = `
+          <section class="guide-modal-section">
+            <h3>Wiki 详情读取失败</h3>
+            <p>${escapeHtml(error.message || '请确认后端和 PocketBase 正常运行。')}</p>
+          </section>
+        `;
+      }
+    }
+
     function closeGuideModal() {
       const modal = document.getElementById('guide-modal');
       modal.classList.add('hidden');
@@ -792,19 +751,6 @@
           <p>${escapeHtml(content)}</p>
         </section>
       `;
-    }
-
-    function renderFeaturedWikiList(articles) {
-      if (!Array.isArray(articles) || !articles.length) {
-        wikiList.innerHTML = '<div class="library-empty">没有找到 Wiki 条目。</div>';
-        return;
-      }
-
-      wikiList.innerHTML = articles.map((article, index) => `
-        <button class="wiki-title-pill" onclick="openWikiArticle(${index})" type="button">
-          ${escapeHtml(article.title || '未命名 Wiki')}
-        </button>
-      `).join('');
     }
 
     function renderSimpleMarkdown(text) {

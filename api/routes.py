@@ -695,16 +695,3 @@ def get_wiki_articles_by_category(
     }
 
     return pb_get("/api/collections/wiki_articles/records", params=params)
-
-@router.get("/api/wiki/featured")
-def get_featured_wiki_articles(limit: int = 8):
-    limit = min(max(limit, 1), 20)
-
-    params = {
-        "page": 1,
-        "perPage": limit,
-        "sort": "-updated",
-        "filter": 'status = "published" && is_featured = true'
-    }
-
-    return pb_get("/api/collections/wiki_articles/records", params=params)

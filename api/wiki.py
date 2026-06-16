@@ -109,7 +109,7 @@ def get_published_wiki_articles(limit: int = 50) -> list[dict]:
             "page": 1,
             "perPage": limit,
             "sort": "-updated",
-            "filter": 'status = "published" && is_featured = true',
+            "filter": 'status = "published"',
         }
     )
 
