@@ -695,3 +695,7 @@ def get_wiki_articles_by_category(
     }
 
     return pb_get("/api/collections/wiki_articles/records", params=params)
+
+@router.get("/wiki-categories.html")
+def wiki_categories_page():
+    return FileResponse(APP_DIR / "wiki_categories.html")

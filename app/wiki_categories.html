@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>离线资料库 - 壳中灯 LanternBox</title>
+  <title>Wiki 分类预览 - 壳中灯 LanternBox</title>
   <link rel="stylesheet" href="/static/style.css" />
   <style>
 
@@ -116,6 +116,17 @@
     .wiki-media-file a { color: var(--accent-bright); font-weight: 900; text-decoration: none; }
     @media (max-width: 900px) { .library-search-row, .library-grid-two { grid-template-columns: 1fr; } }
 
+
+    .wiki-category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .wiki-category-card { min-width: 0; padding: 16px; border: 1px solid rgba(137, 204, 255, 0.14); border-radius: 18px; background: rgba(255, 255, 255, 0.045); cursor: pointer; text-align: left; transition: 0.2s ease; }
+    .wiki-category-card:hover { border-color: var(--border-strong); background: rgba(104, 199, 255, 0.1); transform: translateY(-1px); }
+    .wiki-category-card h3 { margin: 0 0 8px; color: var(--text-main); font-size: 18px; line-height: 1.45; }
+    .wiki-category-card p { margin: 0; color: var(--text-soft); font-size: 14px; line-height: 1.6; }
+    .wiki-category-count { display: inline-flex; margin-top: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(104, 199, 255, 0.12); color: var(--accent-bright); font-size: 12px; font-weight: 900; }
+    .wiki-pager { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .wiki-page-info { color: var(--text-muted); font-size: 14px; font-weight: 800; }
+
+    .library-search-row { grid-template-columns: minmax(0, 1fr) auto; }
   </style>
 </head>
 <body>
@@ -123,86 +134,34 @@
     <section class="hero library-hero">
       <div class="library-header-row">
         <div>
-          <p class="eyebrow">OFFLINE LIBRARY</p>
-          <h1>离线资料库</h1>
-          <p class="subtitle">搜索本地 Wiki；需要系统学习时，进入分类预览。</p>
+          <p class="eyebrow">WIKI CATEGORIES</p>
+          <h1>分类预览</h1>
+          <p class="subtitle">按主题浏览本地 Wiki，每个分类下分页显示文章。</p>
         </div>
         <div class="library-header-actions">
-          <a class="page-nav-button" href="/">返回总览</a>
+          <a class="page-nav-button" href="/library.html">返回资料库</a>
           <a class="page-nav-button" href="/assistant.html">进入 AI 助手</a>
         </div>
       </div>
     </section>
 
-    <section class="library-search-panel">
-      <div class="library-section-title">
-        <h2>本地 Wiki 检索</h2>
-        <span id="wiki-count-label">等待搜索</span>
-      </div>
-      <div class="library-search-row">
-        <input id="wiki-search-input" type="search" placeholder="搜索饮用水、移动电源、伤口、种植、维修..." />
-        <button class="library-chip-button" onclick="searchWiki()" type="button">搜索</button>
-        <button class="library-chip-button" onclick="location.href='/wiki-categories.html'" type="button">分类预览</button>
-      </div>
-      <p id="wiki-status" class="library-status-text">请输入关键词进行检索，或进入分类预览按主题浏览 Wiki。</p>
-    </section>
-
-    <section id="wiki-results-section" class="library-section" style="display: none;">
-      <div class="library-section-title">
-        <h2 id="wiki-results-title">搜索结果</h2>
-        <span id="wiki-results-subtitle">输入关键词后显示匹配条目</span>
-      </div>
-      <div id="wiki-list" class="wiki-grid"></div>
-    </section>
-
     <section class="library-section">
       <div class="library-section-title">
-        <h2>Kiwix 离线大资料库</h2>
-        <span>预留入口，适合 Wikipedia / Appropedia / Wikibooks 等 ZIM 包</span>
+        <h2>分类浏览</h2>
+        <span id="wiki-category-count-label">正在读取分类...</span>
       </div>
-      <div class="library-grid-two">
-        <article class="library-info-card">
-          <h3>本地服务入口</h3>
-          <p>未来启动 Kiwix 后，可以把入口固定到本页。默认建议服务地址：</p>
-          <p><strong>http://127.0.0.1:8181</strong></p>
-          <button class="library-chip-button" onclick="window.open('http://127.0.0.1:8181', '_blank')" type="button">打开 Kiwix</button>
-        </article>
-        <article class="library-info-card">
-          <h3>推荐资料类型</h3>
-          <ul>
-            <li>百科通识：Wikipedia / Vikidia</li>
-            <li>实用技能：Appropedia / Wikibooks</li>
-            <li>技术资料：维修、农业、医疗基础、能源与通信</li>
-          </ul>
-        </article>
+      <div id="wiki-category-list" class="wiki-category-grid">
+        <div class="library-empty">正在读取 Wiki 分类...</div>
       </div>
     </section>
 
-    <section class="library-section">
+    <section id="wiki-category-articles-section" class="library-section" style="display: none;">
       <div class="library-section-title">
-        <h2>资料导入规范</h2>
-        <span>维护 Markdown 原稿与 PocketBase 导入规则</span>
+        <h2 id="wiki-category-title">分类文章</h2>
+        <span id="wiki-category-articles-count">每页 10 篇</span>
       </div>
-      <div class="library-grid-two">
-        <article class="library-info-card">
-          <h3>Wiki 文章</h3>
-          <ul>
-            <li>标题短而明确，方便检索。</li>
-            <li>摘要控制在 40 到 80 字，适合卡片显示。</li>
-            <li>正文按场景、步骤、注意事项、停止条件组织。</li>
-            <li>标签至少 3 个，来源必须填写。</li>
-          </ul>
-        </article>
-        <article class="library-info-card">
-          <h3>媒体附件</h3>
-          <ul>
-            <li>图片用于识别、结构、流程和关键部件。</li>
-            <li>视频用于演示动作，不替代文字步骤。</li>
-            <li>附件统一关联到 Wiki 文章，避免孤立文件。</li>
-            <li>高风险内容必须在正文中写清边界和停止条件。</li>
-          </ul>
-        </article>
-      </div>
+      <div id="wiki-category-articles" class="wiki-grid"></div>
+      <div id="wiki-category-pager" class="wiki-pager"></div>
     </section>
 
 
@@ -224,52 +183,116 @@
   </main>
 
   <script>
-    const wikiList = document.getElementById('wiki-list');
-    const wikiStatus = document.getElementById('wiki-status');
-    const wikiCountLabel = document.getElementById('wiki-count-label');
-    const wikiSearchInput = document.getElementById('wiki-search-input');
-    const wikiResultsSection = document.getElementById('wiki-results-section');
-    const wikiResultsTitle = document.getElementById('wiki-results-title');
-    const wikiResultsSubtitle = document.getElementById('wiki-results-subtitle');
+    const wikiCategoryList = document.getElementById('wiki-category-list');
+    const wikiCategoryCountLabel = document.getElementById('wiki-category-count-label');
+    const wikiCategoryArticlesSection = document.getElementById('wiki-category-articles-section');
+    const wikiCategoryTitle = document.getElementById('wiki-category-title');
+    const wikiCategoryArticlesCount = document.getElementById('wiki-category-articles-count');
+    const wikiCategoryArticles = document.getElementById('wiki-category-articles');
+    const wikiCategoryPager = document.getElementById('wiki-category-pager');
 
-    wikiSearchInput.addEventListener('keydown', event => {
-      if (event.key === 'Enter') searchWiki();
+    let latestCategoryArticles = [];
+    let currentCategoryId = null;
+    let currentCategoryName = '';
+    let currentCategoryPage = 1;
+    const CATEGORY_PER_PAGE = 10;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadWikiCategories();
     });
 
-    async function searchWiki() {
-      const keyword = wikiSearchInput.value.trim();
-      if (!keyword) {
-        wikiStatus.textContent = '请输入关键词进行检索，或进入分类预览按主题浏览 Wiki。';
-        wikiCountLabel.textContent = '等待搜索';
-        wikiResultsSection.style.display = 'none';
-        wikiList.innerHTML = '';
+    async function loadWikiCategories() {
+      wikiCategoryList.innerHTML = '<div class="library-empty">正在读取 Wiki 分类...</div>';
+      wikiCategoryCountLabel.textContent = '正在读取分类...';
+
+      try {
+        const response = await fetch('/api/wiki/categories');
+        if (!response.ok) throw new Error('Wiki 分类读取失败');
+        const data = await response.json();
+        const categories = Array.isArray(data.items) ? data.items : [];
+
+        if (!categories.length) {
+          wikiCategoryList.innerHTML = '<div class="library-empty">还没有 Wiki 分类。</div>';
+          wikiCategoryCountLabel.textContent = '暂无分类';
+          return;
+        }
+
+        wikiCategoryList.innerHTML = categories.map(category => `
+          <article class="wiki-category-card" onclick="loadCategoryArticles('${escapeHtml(category.id)}', '${escapeHtml(category.name || '未命名分类')}', 1)">
+            <h3>${escapeHtml(category.name || '未命名分类')}</h3>
+            <p>${escapeHtml(category.description || '暂无分类说明。')}</p>
+            <span class="wiki-category-count">点击查看文章</span>
+          </article>
+        `).join('');
+
+        wikiCategoryCountLabel.textContent = `共 ${categories.length} 个分类`;
+      } catch (error) {
+        console.error(error);
+        wikiCategoryList.innerHTML = '<div class="library-empty">分类读取失败，请确认后端接口正常。</div>';
+        wikiCategoryCountLabel.textContent = '读取失败';
+      }
+    }
+
+    async function loadCategoryArticles(categoryId, categoryName, page = 1) {
+      currentCategoryId = categoryId;
+      currentCategoryName = categoryName;
+      currentCategoryPage = page;
+
+      wikiCategoryArticlesSection.style.display = 'block';
+      wikiCategoryTitle.textContent = categoryName;
+      wikiCategoryArticlesCount.textContent = '正在读取分类文章...';
+      wikiCategoryArticles.innerHTML = '<div class="library-empty">正在读取分类文章...</div>';
+      wikiCategoryPager.innerHTML = '';
+
+      try {
+        const response = await fetch(`/api/wiki/categories/${encodeURIComponent(categoryId)}/articles?page=${page}&per_page=${CATEGORY_PER_PAGE}`);
+        if (!response.ok) throw new Error('分类文章读取失败');
+        const data = await response.json();
+        const articles = Array.isArray(data.items) ? data.items : [];
+        latestCategoryArticles = articles;
+        latestWikiArticles = articles;
+
+        if (!articles.length) {
+          wikiCategoryArticles.innerHTML = '<div class="library-empty">这个分类下还没有已发布文章。</div>';
+          wikiCategoryArticlesCount.textContent = '暂无文章';
+          renderCategoryPager(data);
+          return;
+        }
+
+        renderWikiList(wikiCategoryArticles, articles, 'openCategoryWikiArticle');
+        wikiCategoryArticlesCount.textContent = `第 ${data.page || page} 页 / 共 ${data.totalItems || articles.length} 篇`;
+        renderCategoryPager(data);
+        wikiCategoryArticlesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (error) {
+        console.error(error);
+        latestCategoryArticles = [];
+        latestWikiArticles = [];
+        wikiCategoryArticles.innerHTML = '<div class="library-empty">分类文章读取失败，请确认接口正常。</div>';
+        wikiCategoryArticlesCount.textContent = '读取失败';
+        wikiCategoryPager.innerHTML = '';
+      }
+    }
+
+    function renderCategoryPager(data) {
+      const page = data.page || currentCategoryPage || 1;
+      const totalPages = data.totalPages || 1;
+      const totalItems = data.totalItems || 0;
+
+      if (totalPages <= 1) {
+        wikiCategoryPager.innerHTML = totalItems ? `<span class="wiki-page-info">共 ${totalItems} 篇</span>` : '';
         return;
       }
 
-      wikiStatus.textContent = `正在搜索：${keyword}`;
-      wikiCountLabel.textContent = '搜索中';
-      wikiResultsSection.style.display = 'block';
-      wikiResultsTitle.textContent = '搜索结果';
-      wikiResultsSubtitle.textContent = `关键词：${keyword}`;
-      wikiList.innerHTML = '<div class="library-empty">正在搜索 Wiki...</div>';
+      wikiCategoryPager.innerHTML = `
+        <button class="library-chip-button" ${page <= 1 ? 'disabled' : ''} onclick="loadCategoryArticles(currentCategoryId, currentCategoryName, ${page - 1})" type="button">上一页</button>
+        <span class="wiki-page-info">第 ${page} / ${totalPages} 页，共 ${totalItems} 篇</span>
+        <button class="library-chip-button" ${page >= totalPages ? 'disabled' : ''} onclick="loadCategoryArticles(currentCategoryId, currentCategoryName, ${page + 1})" type="button">下一页</button>
+      `;
+    }
 
-      try {
-        const response = await fetch(`/api/wiki/search?q=${encodeURIComponent(keyword)}&limit=50`);
-        if (!response.ok) throw new Error('Wiki 搜索失败');
-        const data = await response.json();
-        if (!data.ok) throw new Error(data.error || 'Wiki 搜索返回异常');
-        const articles = Array.isArray(data.articles) ? data.articles : [];
-        latestWikiArticles = articles;
-        renderWikiList(wikiList, articles, 'openWikiArticleFromList');
-        wikiStatus.textContent = `搜索完成：${keyword}`;
-        wikiCountLabel.textContent = `找到 ${articles.length} 条`;
-      } catch (error) {
-        console.error(error);
-        latestWikiArticles = [];
-        wikiList.innerHTML = '<div class="library-empty">搜索失败，请确认 Wiki 接口正常。</div>';
-        wikiStatus.textContent = `搜索失败：${error.message}`;
-        wikiCountLabel.textContent = '搜索失败';
-      }
+    function openCategoryWikiArticle(index) {
+      const wiki = latestCategoryArticles[index];
+      openWikiArticle(wiki);
     }
 
 
