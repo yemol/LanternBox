@@ -274,6 +274,7 @@
 
 
     let latestWikiArticles = [];
+    let currentWikiSpeechText = '';
     let currentWikiContent = '';
     let currentAudio = null;
     let currentAudioSource = null;
@@ -337,6 +338,7 @@
         const source = article.source || wiki.source || '本地 Wiki';
         const tags = article.tags || wiki.tags || '';
         const content = article.content || wiki.content || '暂无正文。';
+        currentWikiSpeechText = markdownToPlainText(content);
         currentWikiContent = content;
 
         modalId.textContent = article.id ? `WIKI · ${article.id}` : 'WIKI';
@@ -531,33 +533,109 @@
       let inOl = false;
 
       function closeLists() {
-        if (inUl) { html += '</ul>'; inUl = false; }
-        if (inOl) { html += '</ol>'; inOl = false; }
+        if (inUl) {
+          html += '</ul>';
+          inUl = false;
+        }
+        if (inOl) {
+          html += '</ol>';
+          inOl = false;
+        }
+      }
+
+      function renderInlineMarkdown(value) {
+        return escapeHtml(String(value || ''))
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/`(.+?)`/g, '<code>$1</code>');
       }
 
       lines.forEach(rawLine => {
         const line = rawLine.trim();
-        if (!line) { closeLists(); return; }
-        if (line.startsWith('### ')) { closeLists(); html += `<h4>${escapeHtml(line.slice(4))}</h4>`; return; }
-        if (line.startsWith('## ')) { closeLists(); html += `<h3>${escapeHtml(line.slice(3))}</h3>`; return; }
-        if (line.startsWith('# ')) { closeLists(); html += `<h2>${escapeHtml(line.slice(2))}</h2>`; return; }
-        if (line.startsWith('- ')) {
-          if (!inUl) { closeLists(); html += '<ul>'; inUl = true; }
-          html += `<li>${escapeHtml(line.slice(2))}</li>`;
+
+        if (!line) {
+          closeLists();
           return;
         }
-        const orderedMatch = line.match(/^(\d+)[.、]\s*(.+)$/);
+
+        if (/^---+$/.test(line)) {
+          closeLists();
+          html += '<hr />';
+          return;
+        }
+
+        if (line.startsWith('### ')) {
+          closeLists();
+          html += `<h4>${renderInlineMarkdown(line.slice(4).trim())}</h4>`;
+          return;
+        }
+
+        if (line.startsWith('## ')) {
+          closeLists();
+          html += `<h3>${renderInlineMarkdown(line.slice(3).trim())}</h3>`;
+          return;
+        }
+
+        if (line.startsWith('# ')) {
+          closeLists();
+          html += `<h2>${renderInlineMarkdown(line.slice(2).trim())}</h2>`;
+          return;
+        }
+
+        const unorderedMatch = line.match(/^[-*]\s+(.+)$/);
+        if (unorderedMatch) {
+          if (!inUl) {
+            closeLists();
+            html += '<ul>';
+            inUl = true;
+          }
+          html += `<li>${renderInlineMarkdown(unorderedMatch[1].trim())}</li>`;
+          return;
+        }
+
+        const orderedMatch = line.match(/^(\d+)[.、]\s+(.+)$/);
         if (orderedMatch) {
-          if (!inOl) { closeLists(); html += '<ol>'; inOl = true; }
-          html += `<li>${escapeHtml(orderedMatch[2])}</li>`;
+          if (!inOl) {
+            closeLists();
+            html += '<ol>';
+            inOl = true;
+          }
+
+          // Only render the item body inside <li>.
+          // The browser supplies numbering, so "1. 1 ..." will not appear.
+          html += `<li>${renderInlineMarkdown(orderedMatch[2].trim())}</li>`;
           return;
         }
+
         closeLists();
-        html += `<p>${escapeHtml(line)}</p>`;
+        html += `<p>${renderInlineMarkdown(line)}</p>`;
       });
 
       closeLists();
       return html;
+    }
+
+    function markdownToPlainText(markdown) {
+      return String(markdown || '')
+        .split('\n')
+        .map(line => {
+          let clean = line.trim();
+
+          if (!clean) return '';
+
+          clean = clean
+            .replace(/^#{1,6}\s+/, '')
+            .replace(/^[-*]\s+/, '')
+            .replace(/^\d+[.、]\s+/, '')
+            .replace(/\*\*(.+?)\*\*/g, '$1')
+            .replace(/\*(.+?)\*/g, '$1')
+            .replace(/`(.+?)`/g, '$1')
+            .replace(/\[(.*?)\]\((.*?)\)/g, '$1')
+            .replace(/<[^>]+>/g, '');
+
+          return clean;
+        })
+        .filter(Boolean)
+        .join('\n');
     }
 
     function renderWikiMedia(mediaList) {
