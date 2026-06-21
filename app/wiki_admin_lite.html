@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wiki 管理仪表盘 - 壳中灯 LanternBox</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    .admin-hero { margin-bottom: 20px; }
+    .admin-header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .admin-header-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .admin-section { margin-top: 16px; padding: 18px; border: 1px solid rgba(137, 204, 255, 0.14); border-radius: 22px; background: rgba(255, 255, 255, 0.045); }
+    .admin-section-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .admin-section-title h2 { margin: 0; color: var(--text-main); font-size: 22px; }
+    .admin-section-title span { color: var(--text-muted); font-size: 14px; }
+    .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .admin-button { min-height: 42px; padding: 10px 15px; border-radius: 14px; border: 1px solid rgba(137, 204, 255, 0.18); color: var(--text-main); background: rgba(255, 255, 255, 0.045); font-weight: 900; cursor: pointer; text-decoration: none; }
+    .admin-button:hover { border-color: var(--border-strong); background: rgba(104, 199, 255, 0.1); }
+    .admin-status { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin: 12px 0 0; }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+    .stat-card { padding: 16px; border: 1px solid rgba(137, 204, 255, 0.14); border-radius: 18px; background: rgba(255, 255, 255, 0.04); }
+    .stat-card strong { display: block; color: var(--accent-bright); font-size: 30px; line-height: 1.1; margin-bottom: 8px; }
+    .stat-card span { display: block; color: var(--text-soft); font-size: 14px; line-height: 1.5; }
+    .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .category-card, .audit-card { min-width: 0; padding: 16px; border: 1px solid rgba(137, 204, 255, 0.14); border-radius: 18px; background: rgba(255, 255, 255, 0.035); }
+    .category-card h3, .audit-card h3 { margin: 0 0 8px; color: var(--text-main); font-size: 17px; line-height: 1.45; }
+    .category-card p, .audit-card p { margin: 0; color: var(--text-soft); font-size: 14px; line-height: 1.65; }
+    .category-count { display: inline-flex; margin-top: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(104, 199, 255, 0.12); color: var(--accent-bright); font-size: 12px; font-weight: 900; }
+    .audit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+    .audit-list { display: grid; gap: 8px; margin-top: 10px; }
+    .audit-item { padding: 10px 12px; border-radius: 14px; background: rgba(0, 0, 0, 0.14); color: var(--text-soft); font-size: 14px; line-height: 1.55; }
+    .audit-item strong { display: block; color: var(--text-main); margin-bottom: 3px; }
+    .risk-line { display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(137, 204, 255, 0.1); color: var(--text-soft); font-size: 14px; }
+    .risk-line:last-child { border-bottom: 0; }
+    .empty-box { padding: 16px; border: 1px dashed rgba(137, 204, 255, 0.18); border-radius: 16px; color: var(--text-muted); background: rgba(255, 255, 255, 0.025); font-size: 15px; line-height: 1.6; }
+    @media (max-width: 900px) { .admin-section-title { align-items: flex-start; flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero admin-hero">
+      <div class="admin-header-row">
+        <div>
+          <p class="eyebrow">WIKI ADMIN LITE</p>
+          <h1>Wiki 管理仪表盘</h1>
+          <p class="subtitle">只读巡检页面，用来查看本地 Wiki 的数量、分类分布、风险等级和缺失字段。</p>
+        </div>
+        <div class="admin-header-actions">
+          <a class="page-nav-button" href="/library.html">返回资料库</a>
+          <a class="page-nav-button" href="/wiki-categories.html">分类预览</a>
+          <a class="page-nav-button" href="/">返回总览</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="admin-section">
+      <div class="admin-section-title">
+        <h2>巡检控制台</h2>
+        <span id="admin-last-updated">等待检查</span>
+      </div>
+      <p class="admin-status" id="admin-status">点击“开始巡检”，从本地 FastAPI 和 PocketBase 读取 Wiki 数据。</p>
+      <div class="admin-actions">
+        <button class="admin-button" onclick="runWikiAudit()" type="button">开始巡检</button>
+        <button class="admin-button" onclick="copyAuditSummary()" type="button">复制摘要</button>
+      </div>
+    </section>
+
+    <section class="admin-section">
+      <div class="admin-section-title">
+        <h2>总体概览</h2>
+        <span>只统计 published Wiki</span>
+      </div>
+      <div class="stat-grid">
+        <article class="stat-card"><strong id="stat-article-total">-</strong><span>已发布文章</span></article>
+        <article class="stat-card"><strong id="stat-category-total">-</strong><span>一级分类</span></article>
+        <article class="stat-card"><strong id="stat-missing-summary">-</strong><span>缺摘要</span></article>
+        <article class="stat-card"><strong id="stat-missing-source">-</strong><span>缺来源</span></article>
+        <article class="stat-card"><strong id="stat-missing-tags">-</strong><span>缺标签</span></article>
+      </div>
+    </section>
+
+    <section class="admin-section">
+      <div class="admin-section-title">
+        <h2>分类分布</h2>
+        <span id="category-summary">等待读取分类</span>
+      </div>
+      <div id="category-grid" class="category-grid"><div class="empty-box">尚未开始巡检。</div></div>
+    </section>
+
+    <section class="admin-section">
+      <div class="admin-section-title">
+        <h2>风险等级统计</h2>
+        <span>normal / caution / high</span>
+      </div>
+      <div id="risk-summary" class="audit-card"><p>尚未开始巡检。</p></div>
+    </section>
+
+    <section class="admin-section">
+      <div class="admin-section-title">
+        <h2>字段缺失检查</h2>
+        <span>用于发现需要补写的条目</span>
+      </div>
+      <div class="audit-grid">
+        <article class="audit-card"><h3>缺摘要</h3><div id="missing-summary-list" class="audit-list"><div class="empty-box">等待巡检。</div></div></article>
+        <article class="audit-card"><h3>缺来源</h3><div id="missing-source-list" class="audit-list"><div class="empty-box">等待巡检。</div></div></article>
+        <article class="audit-card"><h3>缺标签</h3><div id="missing-tags-list" class="audit-list"><div class="empty-box">等待巡检。</div></div></article>
+      </div>
+    </section>
+
+    <section class="admin-section">
+      <div class="admin-section-title">
+        <h2>最近文章</h2>
+        <span>按 updated / created 粗略排序</span>
+      </div>
+      <div id="recent-articles" class="audit-list"><div class="empty-box">等待巡检。</div></div>
+    </section>
+  </main>
+
+  <script>
+    let latestAudit = null;
+    document.addEventListener('DOMContentLoaded', () => { runWikiAudit(); });
+
+    async function runWikiAudit() {
+      setStatus('正在读取分类和文章...');
+      setText('admin-last-updated', '巡检中');
+      try {
+        const categoriesResponse = await fetch('/api/wiki/categories');
+        if (!categoriesResponse.ok) throw new Error('分类接口读取失败');
+        const categoriesData = await categoriesResponse.json();
+        const categories = Array.isArray(categoriesData.items) ? categoriesData.items : [];
+        const allArticles = [];
+        const categoryStats = [];
+        for (const category of categories) {
+          const articles = await fetchAllCategoryArticles(category);
+          allArticles.push(...articles);
+          categoryStats.push({
+            id: category.id,
+            name: category.name || '未命名分类',
+            slug: category.slug || '',
+            description: category.description || '',
+            sort_order: category.sort_order || 0,
+            count: articles.length
+          });
+        }
+        const uniqueArticles = dedupeArticles(allArticles);
+        const audit = buildAudit(categories, categoryStats, uniqueArticles);
+        latestAudit = audit;
+        renderAudit(audit);
+        setStatus(`巡检完成：${audit.totalArticles} 篇文章，${audit.totalCategories} 个分类。`);
+        setText('admin-last-updated', new Date().toLocaleString('zh-CN'));
+      } catch (error) {
+        console.error(error);
+        setStatus(`巡检失败：${error.message}`);
+        setText('admin-last-updated', '巡检失败');
+      }
+    }
+
+    async function fetchAllCategoryArticles(category) {
+      const items = [];
+      let page = 1;
+      let totalPages = 1;
+      do {
+        const response = await fetch(`/api/wiki/categories/${encodeURIComponent(category.id)}/articles?page=${page}&per_page=50`);
+        if (!response.ok) throw new Error(`分类文章读取失败：${category.name || category.id}`);
+        const data = await response.json();
+        const pageItems = Array.isArray(data.items) ? data.items : [];
+        items.push(...pageItems);
+        totalPages = data.totalPages || 1;
+        page += 1;
+      } while (page <= totalPages);
+      return items;
+    }
+
+    function dedupeArticles(articles) {
+      const map = new Map();
+      articles.forEach(article => { if (article && article.id) map.set(article.id, article); });
+      return Array.from(map.values());
+    }
+
+    function buildAudit(categories, categoryStats, articles) {
+      const riskStats = {};
+      const missingSummary = [];
+      const missingSource = [];
+      const missingTags = [];
+      articles.forEach(article => {
+        const risk = article.risk_level || 'normal';
+        riskStats[risk] = (riskStats[risk] || 0) + 1;
+        if (!String(article.summary || '').trim()) missingSummary.push(article);
+        if (!String(article.source || '').trim()) missingSource.push(article);
+        if (!normalizeTags(article.tags).length) missingTags.push(article);
+      });
+      const recentArticles = [...articles].sort((a, b) => {
+        const aTime = new Date(a.updated || a.created || 0).getTime();
+        const bTime = new Date(b.updated || b.created || 0).getTime();
+        return bTime - aTime;
+      }).slice(0, 12);
+      return { totalArticles: articles.length, totalCategories: categories.length, categoryStats, riskStats, missingSummary, missingSource, missingTags, recentArticles };
+    }
+
+    function renderAudit(audit) {
+      setText('stat-article-total', audit.totalArticles);
+      setText('stat-category-total', audit.totalCategories);
+      setText('stat-missing-summary', audit.missingSummary.length);
+      setText('stat-missing-source', audit.missingSource.length);
+      setText('stat-missing-tags', audit.missingTags.length);
+      renderCategoryStats(audit.categoryStats);
+      renderRiskStats(audit.riskStats);
+      renderArticleList('missing-summary-list', audit.missingSummary);
+      renderArticleList('missing-source-list', audit.missingSource);
+      renderArticleList('missing-tags-list', audit.missingTags);
+      renderArticleList('recent-articles', audit.recentArticles, true);
+      const avg = audit.categoryStats.length ? Math.round(audit.totalArticles / audit.categoryStats.length) : 0;
+      setText('category-summary', `共 ${audit.categoryStats.length} 个分类，平均每类 ${avg} 篇`);
+    }
+
+    function renderCategoryStats(stats) {
+      const container = document.getElementById('category-grid');
+      if (!stats.length) { container.innerHTML = '<div class="empty-box">暂无分类。</div>'; return; }
+      const sorted = [...stats].sort((a, b) => {
+        if (a.sort_order !== b.sort_order) return a.sort_order - b.sort_order;
+        return a.name.localeCompare(b.name, 'zh-CN');
+      });
+      container.innerHTML = sorted.map(category => `
+        <article class="category-card">
+          <h3>${escapeHtml(category.name)}</h3>
+          <p>${escapeHtml(category.description || '暂无分类说明。')}</p>
+          <span class="category-count">${category.count} 篇</span>
+        </article>
+      `).join('');
+    }
+
+    function renderRiskStats(stats) {
+      const container = document.getElementById('risk-summary');
+      const keys = Object.keys(stats);
+      if (!keys.length) { container.innerHTML = '<p>暂无风险等级数据。</p>'; return; }
+      const labels = { normal: 'normal：普通', caution: 'caution：注意', high: 'high：高风险' };
+      container.innerHTML = keys.sort().map(key => `
+        <div class="risk-line"><span>${escapeHtml(labels[key] || key)}</span><strong>${stats[key]} 篇</strong></div>
+      `).join('');
+    }
+
+    function renderArticleList(elementId, articles, showDate = false) {
+      const container = document.getElementById(elementId);
+      if (!articles.length) { container.innerHTML = '<div class="empty-box">没有发现问题。</div>'; return; }
+      container.innerHTML = articles.map(article => `
+        <div class="audit-item">
+          <strong>${escapeHtml(article.title || '未命名 Wiki')}</strong>
+          <span>${escapeHtml(article.slug || article.id || '')}</span>
+          ${showDate ? `<br><span>${escapeHtml(article.updated || article.created || '')}</span>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function normalizeTags(tags) {
+      if (Array.isArray(tags)) return tags.filter(Boolean);
+      return String(tags || '').split(/[,，、\s]+/).map(item => item.trim()).filter(Boolean);
+    }
+
+    async function copyAuditSummary() {
+      if (!latestAudit) { setStatus('还没有巡检结果，无法复制摘要。'); return; }
+      const lines = [
+        'Wiki 巡检摘要',
+        `文章总数：${latestAudit.totalArticles}`,
+        `分类总数：${latestAudit.totalCategories}`,
+        `缺摘要：${latestAudit.missingSummary.length}`,
+        `缺来源：${latestAudit.missingSource.length}`,
+        `缺标签：${latestAudit.missingTags.length}`,
+        '', '分类分布：',
+        ...latestAudit.categoryStats.map(item => `- ${item.name}：${item.count} 篇`),
+        '', '风险等级：',
+        ...Object.entries(latestAudit.riskStats).map(([key, value]) => `- ${key}：${value} 篇`)
+      ];
+      try { await navigator.clipboard.writeText(lines.join('\n')); setStatus('巡检摘要已复制。'); }
+      catch (error) { console.error(error); setStatus('复制失败，浏览器可能不允许剪贴板操作。'); }
+    }
+
+    function setStatus(message) { document.getElementById('admin-status').textContent = message; }
+    function setText(id, value) { document.getElementById(id).textContent = String(value); }
+    function escapeHtml(value) { return String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;'); }
+  </script>
+</body>
+</html>

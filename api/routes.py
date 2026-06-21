@@ -699,3 +699,7 @@ def get_wiki_articles_by_category(
 @router.get("/wiki-categories.html")
 def wiki_categories_page():
     return FileResponse(APP_DIR / "wiki_categories.html")
+
+@router.get("/wiki-admin-lite.html")
+def wiki_admin_lite_page():
+    return FileResponse(APP_DIR / "wiki_admin_lite.html")
