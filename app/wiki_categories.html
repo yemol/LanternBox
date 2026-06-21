@@ -44,10 +44,11 @@
     }
 
     .wiki-content-toolbar {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 14px;
+      display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
       padding: 18px 20px;
       border-bottom: 1px solid rgba(137, 204, 255, 0.16);
       background: rgba(255, 255, 255, 0.026);
@@ -69,12 +70,20 @@
       flex-wrap: wrap;
     }
 
+    .wiki-tts-actions .library-chip-button {
+      min-height: 38px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      box-shadow: none;
+    }
+
     .wiki-tts-status {
-      flex-basis: 100%;
       color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.55;
-      text-align: right;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.5;
+      white-space: nowrap;
     }
 
     .wiki-content-body {
@@ -95,8 +104,7 @@
 
     @media (max-width: 760px) {
       .wiki-content-toolbar {
-        grid-template-columns: 1fr;
-        align-items: start;
+        align-items: flex-start;
       }
 
       .wiki-tts-actions {
@@ -104,7 +112,7 @@
       }
 
       .wiki-tts-status {
-        text-align: left;
+        white-space: normal;
       }
     }
     .wiki-media-list { display: grid; gap: 14px; }
@@ -379,9 +387,9 @@
             <div class="wiki-content-toolbar">
               <h3>正文</h3>
               <div class="wiki-tts-actions">
-                <button id="wiki-tts-button" class="library-chip-button" onclick="speakCurrentWikiContent()" type="button">开始朗读</button>
+                <button id="wiki-tts-button" class="library-chip-button" onclick="speakCurrentWikiContent()" type="button">朗读正文</button>
                 <button class="library-chip-button" onclick="stopWikiSpeaking()" type="button">停止朗读</button>
-                <span id="wiki-tts-status" class="wiki-tts-status">使用本地 TTS 引擎朗读正文。</span>
+                <span id="wiki-tts-status" class="wiki-tts-status">朗读：待命</span>
               </div>
             </div>
             <div class="wiki-content-body">
@@ -445,18 +453,18 @@
       let speechText = stripMarkdownForSpeech(text);
 
       if (!speechText) {
-        if (status) status.textContent = '语音播报：没有可朗读的正文。';
+        if (status) status.textContent = '朗读：没有可朗读正文';
         return;
       }
 
       if (status) {
-        status.textContent = '语音播报：正在生成完整正文语音...';
+        status.textContent = '朗读：正在生成语音...';
       }
 
       isGeneratingSpeech = true;
       if (button) {
         button.disabled = true;
-        button.textContent = '生成语音中...';
+        button.textContent = '生成中...';
       }
 
       try {
@@ -479,13 +487,13 @@
         await playWikiAudio(data.audio_url);
       } catch (error) {
         console.error(error);
-        if (status) status.textContent = '语音播报：生成或播放失败。';
+        if (status) status.textContent = '朗读：生成失败';
         alert('语音播报失败：' + error.message);
       } finally {
         isGeneratingSpeech = false;
         if (button) {
           button.disabled = false;
-          button.textContent = '开始朗读';
+          button.textContent = '朗读正文';
         }
       }
     }
@@ -513,11 +521,11 @@
 
           source.onended = () => {
             if (currentAudioSource === source) currentAudioSource = null;
-            if (status) status.textContent = '语音播报：播放完成。';
+            if (status) status.textContent = '朗读：播放完成';
           };
 
           source.start(0);
-          if (status) status.textContent = '语音播报：正在播放。';
+          if (status) status.textContent = '朗读：正在播放';
           return;
         } catch (error) {
           console.warn('AudioContext 播放失败，改用 Audio 元素播放：', error);
@@ -526,9 +534,9 @@
 
       stopWikiSpeaking(false);
       currentAudio = new Audio(audioUrl);
-      currentAudio.addEventListener('play', () => { if (status) status.textContent = '语音播报：正在播放。'; });
-      currentAudio.addEventListener('ended', () => { if (status) status.textContent = '语音播报：播放完成。'; currentAudio = null; });
-      currentAudio.addEventListener('error', () => { if (status) status.textContent = '语音播报：播放失败。'; currentAudio = null; });
+      currentAudio.addEventListener('play', () => { if (status) status.textContent = '朗读：正在播放'; });
+      currentAudio.addEventListener('ended', () => { if (status) status.textContent = '朗读：播放完成'; currentAudio = null; });
+      currentAudio.addEventListener('error', () => { if (status) status.textContent = '朗读：播放失败'; currentAudio = null; });
       await currentAudio.play();
     }
 
@@ -546,7 +554,7 @@
 
       if (updateStatus) {
         const status = document.getElementById('wiki-tts-status');
-        if (status) status.textContent = '语音播报：已停止。';
+        if (status) status.textContent = '朗读：已停止';
       }
     }
 
