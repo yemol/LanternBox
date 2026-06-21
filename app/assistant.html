@@ -489,6 +489,7 @@
       font-size: 14px;
     }
 
+
     .guide-modal-close {
       flex: 0 0 auto;
       min-height: 42px;
@@ -513,6 +514,48 @@
       background: rgba(255, 255, 255, 0.048);
     }
 
+
+    .modal-content-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .modal-content-toolbar h3 {
+      margin: 0;
+      color: var(--accent-bright);
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .modal-content-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .modal-content-actions .assistant-secondary {
+      min-height: 38px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      box-shadow: none;
+    }
+
+
+    .modal-content-status {
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+
     .guide-modal-section h3 {
       margin: 0 0 10px;
       color: var(--accent-bright);
@@ -534,6 +577,25 @@
     .guide-modal-section ol {
       margin: 0;
       padding-left: 22px;
+    }
+
+
+    .guide-modal-subsection {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(137, 204, 255, 0.1);
+    }
+
+    .guide-modal-subsection:first-of-type {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .guide-modal-subsection h3 {
+      margin: 0 0 10px;
+      color: var(--accent-bright);
+      font-size: 18px;
     }
 
     .guide-modal-section li + li {
@@ -582,7 +644,8 @@
         padding: 20px;
       }
 
-      .guide-modal-close {
+  
+    .guide-modal-close {
         width: 100%;
       }
 
@@ -683,6 +746,47 @@
       color: var(--text-muted) !important;
       font-size: 13px !important;
     }
+
+    .wiki-reference-note {
+      margin: 0 0 12px;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .wiki-card-mini.reference-card {
+      border-color: rgba(104, 199, 255, 0.2);
+      background:
+        linear-gradient(135deg, rgba(104, 199, 255, 0.07), rgba(255, 255, 255, 0.035));
+    }
+
+    .wiki-card-mini.reference-card:hover {
+      border-color: var(--border-strong);
+      background:
+        linear-gradient(135deg, rgba(104, 199, 255, 0.12), rgba(255, 255, 255, 0.045));
+    }
+
+    .wiki-card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .wiki-card-action {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--accent-bright);
+      background: rgba(104, 199, 255, 0.1);
+      border: 1px solid rgba(104, 199, 255, 0.22);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
 
     .wiki-risk {
       flex: 0 0 auto;
@@ -810,6 +914,7 @@
       text-decoration: underline;
     }
 
+
     .wiki-media-file p {
       margin: 8px 0 0;
       color: var(--text-muted);
@@ -915,7 +1020,7 @@
               <strong id="guideCount">0</strong>
             </div>
             <div class="summary-lite-card">
-              <span>关联 Wiki</span>
+              <span>来源卡片</span>
               <strong id="wikiCount">0</strong>
             </div>
           </div>
@@ -948,9 +1053,9 @@
               <div class="empty-text">暂无关联指南。</div>
             </div>
 
-            <div class="section-title">关联 Wiki</div>
+            <div class="section-title">参考来源</div>
             <div class="list" id="wikiList">
-              <div class="empty-text">暂无关联 Wiki。</div>
+              <div class="empty-text">暂无参考来源。</div>
             </div>
           </div>
         </div>
@@ -1025,6 +1130,8 @@
     let currentAudioSource = null;
     let isGeneratingSpeech = false;
     let autoSpeakEnabled = false;
+    let currentModalSpeechText = '';
+    let isModalSpeaking = false;
     let audioUnlocked = false;
     let audioContext = null;
 
@@ -1286,7 +1393,7 @@
       answerBox.dataset.hasAnswer = "";
       triggerList.innerHTML = '<div class="empty-text">暂无触发场景。</div>';
       guideList.innerHTML = '<div class="empty-text">暂无关联指南。</div>';
-      wikiList.innerHTML = '<div class="empty-text">暂无关联 Wiki。</div>';
+      wikiList.innerHTML = '<div class="empty-text">暂无参考来源。</div>';
       triggerCountEl.textContent = "0";
       topSeverityEl.textContent = "-";
       guideCountEl.textContent = "0";
@@ -1361,12 +1468,18 @@
     function renderWikis(wikis) {
       if (!wikis.length) {
         wikiList.innerHTML = currentMode === "companion"
-          ? '<div class="empty-text">陪伴模式下不一定需要引用 Wiki。必要时，壳中灯会把相关知识放在这里。</div>'
-          : '<div class="empty-text">暂无关联 Wiki。</div>';
+          ? '<div class="empty-text">陪伴模式下不一定需要引用 Wiki。必要时，壳中灯会把相关知识来源放在这里。</div>'
+          : '<div class="empty-text">暂无参考来源。</div>';
         return;
       }
 
-      wikiList.innerHTML = wikis.map((wiki, index) => {
+      const intro = `
+        <p class="wiki-reference-note">
+          以下为本次回答关联到的本地 Wiki 来源。点击卡片或“查看原文”可打开完整条目。
+        </p>
+      `;
+
+      wikiList.innerHTML = intro + wikis.map((wiki, index) => {
         const riskLevel = wiki.risk_level || "normal";
         const riskLabel = {
           normal: "普通",
@@ -1375,13 +1488,16 @@
         }[riskLevel] || riskLevel;
 
         return `
-          <article class="wiki-card-mini" onclick="openWikiModal(${index})">
+          <article class="wiki-card-mini reference-card" onclick="openWikiModal(${index})">
             <div class="wiki-card-head">
               <h3>${escapeHtml(wiki.title || "未命名 Wiki")}</h3>
               <span class="wiki-risk wiki-risk-${escapeHtml(riskLevel)}">${escapeHtml(riskLabel)}</span>
             </div>
-            <p>${escapeHtml(wiki.summary || "点击查看 Wiki 摘要。")}</p>
-            <p class="wiki-source">来源：${escapeHtml(wiki.source || "本地精选 Wiki")}</p>
+            <p>${escapeHtml(wiki.summary || "暂无摘要。")}</p>
+            <p class="wiki-source">来源：${escapeHtml(wiki.source || "本地 Wiki")}</p>
+            <div class="wiki-card-actions">
+              <span class="wiki-card-action">查看原文</span>
+            </div>
           </article>
         `;
       }).join("");
@@ -1404,16 +1520,20 @@
         ? `${guide.category || ""} / 原分类：${guide.category_original}`
         : (guide.category || "");
 
+      currentModalSpeechText = buildGuideSpeechText(guide);
       modalBody.innerHTML = `
-        ${renderGuideSection("适用场景", guide.scenario)}
-        ${renderGuideSection("目标", guide.goal)}
-        ${renderGuideList("需要工具", guide.tools)}
-        ${renderGuideList("操作步骤", guide.steps, true)}
-        ${renderGuideList("检查点", guide.check)}
-        ${renderGuideList("常见错误", guide.common_mistakes)}
-        ${renderGuideSection("备用方案", guide.fallback)}
-        ${renderGuideList("停止或升级处理", guide.stop_or_escalate)}
-        ${renderGuideSection("备注", guide.notes)}
+        <section class="guide-modal-section">
+          ${renderModalContentToolbar("指南内容", "朗读指南")}
+          ${renderGuideSectionInner("适用场景", guide.scenario)}
+          ${renderGuideSectionInner("目标", guide.goal)}
+          ${renderGuideListInner("需要工具", guide.tools)}
+          ${renderGuideListInner("操作步骤", guide.steps, true)}
+          ${renderGuideListInner("检查点", guide.check)}
+          ${renderGuideListInner("常见错误", guide.common_mistakes)}
+          ${renderGuideSectionInner("备用方案", guide.fallback)}
+          ${renderGuideListInner("停止或升级处理", guide.stop_or_escalate)}
+          ${renderGuideSectionInner("备注", guide.notes)}
+        </section>
       `;
 
       requestAnimationFrame(() => {
@@ -1441,7 +1561,7 @@
       modalBody.innerHTML = `
         <section class="guide-modal-section">
           <h3>读取中</h3>
-          <p>正在从本地精选 Wiki 读取完整内容。</p>
+          <p>正在从本地 Wiki 读取完整内容。</p>
         </section>
       `;
 
@@ -1465,19 +1585,20 @@
         const media = Array.isArray(data.media) ? data.media : [];
 
         const riskLevel = article.risk_level || wiki.risk_level || "normal";
-        const source = article.source || wiki.source || "本地精选 Wiki";
+        const source = article.source || wiki.source || "本地 Wiki";
         const tags = article.tags || wiki.tags || "";
         const content = article.content || wiki.content || "暂无正文。";
-
+        currentModalSpeechText = markdownToPlainText(content);
+  
         modalId.textContent = article.id ? `WIKI · ${article.id}` : "WIKI";
         modalTitle.textContent = article.title || wiki.title || "未命名 Wiki";
-        modalCategory.textContent = `风险等级：${riskLevel} / 来源：${source}`;
+        modalCategory.innerHTML = `风险等级：${escapeHtml(riskLevel)}<br>来源：${escapeHtml(source)}`;
 
         modalBody.innerHTML = `
           ${renderGuideSection("摘要", article.summary || wiki.summary)}
           ${renderGuideSection("标签", tags)}
           <section class="guide-modal-section wiki-markdown-section">
-            <h3>正文</h3>
+            ${renderModalContentToolbar("正文", "朗读正文")}
             <div class="wiki-markdown-body">
               ${renderSimpleMarkdown(content)}
             </div>
@@ -1501,6 +1622,158 @@
         `;
       }
     }  
+
+
+    function renderModalContentToolbar(title, speakLabel) {
+      return `
+        <div class="modal-content-toolbar">
+          <h3>${escapeHtml(title || "正文")}</h3>
+          <div class="modal-content-actions">
+            <button id="modal-speak-button" class="assistant-secondary" onclick="speakCurrentModalContent()" type="button">${escapeHtml(speakLabel || "开始朗读")}</button>
+            <button class="assistant-secondary" onclick="stopModalSpeaking()" type="button">停止朗读</button>
+            <span id="modal-content-status" class="modal-content-status">朗读：待命</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderGuideSectionInner(title, content) {
+      if (!content) return "";
+
+      const safeContent = escapeHtml(content).replaceAll("\n", "<br>");
+
+      return `
+        <div class="guide-modal-subsection">
+          <h3>${escapeHtml(title)}</h3>
+          <p>${safeContent}</p>
+        </div>
+      `;
+    }
+
+    function renderGuideListInner(title, list, ordered = false) {
+      if (!Array.isArray(list) || list.length === 0) return "";
+
+      const tag = ordered ? "ol" : "ul";
+
+      return `
+        <div class="guide-modal-subsection">
+          <h3>${escapeHtml(title)}</h3>
+          <${tag}>
+            ${list.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
+          </${tag}>
+        </div>
+      `;
+    }
+
+    async function speakCurrentModalContent() {
+      const text = String(currentModalSpeechText || "").trim();
+
+      if (!text) {
+        updateModalTtsStatus("朗读：没有可朗读内容");
+        if (ttsStatus) ttsStatus.textContent = "语音播报：没有可朗读的弹窗内容";
+        return;
+      }
+
+      updateModalTtsStatus("朗读：正在生成语音...");
+      setModalSpeakLoading(true);
+
+      try {
+        isModalSpeaking = true;
+        await speakText(text);
+        updateModalTtsStatus("朗读：正在播放");
+      } catch (error) {
+        console.error(error);
+        updateModalTtsStatus("朗读：生成失败");
+      } finally {
+        setModalSpeakLoading(false);
+      }
+    }
+
+    function stopModalSpeaking() {
+      stopSpeaking();
+      isModalSpeaking = false;
+      updateModalTtsStatus("朗读：已停止");
+      setModalSpeakLoading(false);
+    }
+
+    function updateModalTtsStatus(message) {
+      const el = document.getElementById("modal-content-status");
+      if (el) {
+        el.textContent = message || "朗读：待命";
+      }
+    }
+
+    function setModalSpeakLoading(isLoading) {
+      const button = document.getElementById("modal-speak-button");
+      if (!button) return;
+
+      button.disabled = !!isLoading;
+      if (isLoading) {
+        button.textContent = "生成中...";
+      } else {
+        const title = button.closest(".modal-content-toolbar")?.querySelector("h3")?.textContent || "";
+        button.textContent = title.includes("指南") ? "朗读指南" : "朗读正文";
+      }
+    }
+
+    function buildGuideSpeechText(guide) {
+      const parts = [];
+
+      function addSection(title, value) {
+        if (!value) return;
+
+        if (Array.isArray(value)) {
+          if (!value.length) return;
+          parts.push(title);
+          value.forEach((item, index) => {
+            parts.push(`${index + 1}. ${item}`);
+          });
+          return;
+        }
+
+        const text = String(value || "").trim();
+        if (!text) return;
+        parts.push(title);
+        parts.push(text);
+      }
+
+      addSection("标题", guide.title);
+      addSection("适用场景", guide.scenario);
+      addSection("目标", guide.goal);
+      addSection("需要工具", guide.tools);
+      addSection("操作步骤", guide.steps);
+      addSection("检查点", guide.check);
+      addSection("常见错误", guide.common_mistakes);
+      addSection("备用方案", guide.fallback);
+      addSection("停止或升级处理", guide.stop_or_escalate);
+      addSection("备注", guide.notes);
+
+      return parts.join("\n");
+    }
+
+    function markdownToPlainText(markdown) {
+      return String(markdown || "")
+        .split("\n")
+        .map(line => {
+          let clean = line.trim();
+
+          if (!clean) return "";
+
+          clean = clean
+            .replace(/^#{1,6}\s+/, "")
+            .replace(/^[-*]\s+/, "")
+            .replace(/^\d+[.、]\s+/, "")
+            .replace(/\*\*(.+?)\*\*/g, "$1")
+            .replace(/\*(.+?)\*/g, "$1")
+            .replace(/`(.+?)`/g, "$1")
+            .replace(/\[(.*?)\]\((.*?)\)/g, "$1")
+            .replace(/<[^>]+>/g, "");
+
+          return clean;
+        })
+        .filter(Boolean)
+        .join("\n");
+    }
 
     function renderWikiMedia(mediaList) {
       if (!Array.isArray(mediaList) || !mediaList.length) {
@@ -1575,6 +1848,9 @@
     }
 
     function closeGuideModal() {
+      stopSpeaking();
+      isModalSpeaking = false;
+      currentModalSpeechText = "";
       const modal = document.getElementById("guide-modal");
       modal.classList.add("hidden");
       document.body.classList.remove("modal-open");
@@ -1650,6 +1926,14 @@
 
           if (ttsStatus) {
             ttsStatus.textContent = "语音播报：播放完成";
+          }
+          if (isModalSpeaking) {
+            updateModalTtsStatus("朗读：播放完成");
+            isModalSpeaking = false;
+          }
+          if (isModalSpeaking) {
+            updateModalTtsStatus("朗读：播放完成");
+            isModalSpeaking = false;
           }
         };
 
@@ -1779,14 +2063,7 @@
         return;
       }
 
-      const maxSpeakChars = 800;
-
-      if (text.length > maxSpeakChars) {
-        text = text.slice(0, maxSpeakChars) + "。";
-        ttsStatus.textContent = "语音播报：内容较长，本次只朗读前半部分";
-      } else {
-        ttsStatus.textContent = "语音播报：正在生成语音...";
-      }
+      ttsStatus.textContent = "语音播报：正在生成语音...";
 
       isGeneratingSpeech = true;
       speakBtn.disabled = true;
@@ -1860,6 +2137,11 @@
 
       if (updateStatus && ttsStatus) {
         ttsStatus.textContent = "语音播报：已停止";
+      }
+      if (updateStatus && isModalSpeaking) {
+        updateModalTtsStatus("朗读：已停止");
+        isModalSpeaking = false;
+        setModalSpeakLoading(false);
       }
     }
 
