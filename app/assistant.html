@@ -766,27 +766,6 @@
         linear-gradient(135deg, rgba(104, 199, 255, 0.12), rgba(255, 255, 255, 0.045));
     }
 
-    .wiki-card-actions {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .wiki-card-action {
-      display: inline-flex;
-      align-items: center;
-      min-height: 32px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      color: var(--accent-bright);
-      background: rgba(104, 199, 255, 0.1);
-      border: 1px solid rgba(104, 199, 255, 0.22);
-      font-size: 12px;
-      font-weight: 900;
-    }
-
 
     .wiki-risk {
       flex: 0 0 auto;
@@ -921,6 +900,32 @@
       font-size: 14px;
       line-height: 1.6;
     }
+
+    .reference-summary {
+      margin: 22px 0 10px;
+      padding: 14px 16px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 18px;
+      background: rgba(104, 199, 255, 0.07);
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .reference-summary.hidden {
+      display: none;
+    }
+
+    .reference-summary strong {
+      color: var(--accent-bright);
+    }
+
+    .reference-summary small {
+      display: block;
+      margin-top: 6px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
   </style>
 </head>
 
@@ -1042,20 +1047,24 @@
             等待输入情况。壳中灯会在这里给出回应。
           </div>
 
+          <div id="sourceSummary" class="reference-summary hidden">
+            等待本地资料引用结果。
+          </div>
+
           <div id="referenceArea">
             <div class="section-title">触发场景</div>
             <div class="list" id="triggerList">
               <div class="empty-text">暂无触发场景。</div>
             </div>
 
-            <div class="section-title">关联指南</div>
+            <div class="section-title">应急指南来源</div>
             <div class="list" id="guideList">
-              <div class="empty-text">暂无关联指南。</div>
+              <div class="empty-text">暂无应急指南来源。</div>
             </div>
 
-            <div class="section-title">参考来源</div>
+            <div class="section-title">本地 Wiki 来源</div>
             <div class="list" id="wikiList">
-              <div class="empty-text">暂无参考来源。</div>
+              <div class="empty-text">暂无本地 Wiki 来源。</div>
             </div>
           </div>
         </div>
@@ -1125,6 +1134,7 @@
     let currentMode = "emergency";
     let latestRelatedGuides = [];
     let latestRelatedWikis = [];
+    let latestUserMessage = '';
     let conversationHistory = [];
     let currentAudio = null;
     let currentAudioSource = null;
@@ -1142,6 +1152,7 @@
     const triggerList = document.getElementById("triggerList");
     const guideList = document.getElementById("guideList");
     const wikiList = document.getElementById("wikiList");
+    const sourceSummary = document.getElementById("sourceSummary");
     const loadingState = document.getElementById("loadingState");
     const currentModeEl = document.getElementById("currentMode");
     const currentModeBadge = document.getElementById("currentModeBadge");
@@ -1233,6 +1244,7 @@
 
     async function askLanternBox() {
     const message = userInput.value.trim();
+    latestUserMessage = message;
 
     if (!message) {
         answerBox.textContent = currentMode === "companion"
@@ -1376,6 +1388,7 @@
       topSeverityEl.textContent = getTopSeverity(triggers);
 
       renderTriggers(triggers);
+      renderSourceSummary(guides, wikis);
       renderGuides(guides);
       renderWikis(wikis);
     }
@@ -1392,8 +1405,12 @@
       answerBox.classList.add("empty");
       answerBox.dataset.hasAnswer = "";
       triggerList.innerHTML = '<div class="empty-text">暂无触发场景。</div>';
-      guideList.innerHTML = '<div class="empty-text">暂无关联指南。</div>';
-      wikiList.innerHTML = '<div class="empty-text">暂无参考来源。</div>';
+      guideList.innerHTML = '<div class="empty-text">暂无应急指南来源。</div>';
+      wikiList.innerHTML = '<div class="empty-text">暂无本地 Wiki 来源。</div>';
+      if (sourceSummary) {
+        sourceSummary.classList.add("hidden");
+        sourceSummary.innerHTML = "等待本地资料引用结果。";
+      }
       triggerCountEl.textContent = "0";
       topSeverityEl.textContent = "-";
       guideCountEl.textContent = "0";
@@ -1446,20 +1463,103 @@
       }).join("");
     }
 
+
+    function renderSourceSummary(guides, wikis) {
+      if (!sourceSummary) return;
+
+      const guideCount = Array.isArray(guides) ? guides.length : 0;
+      const wikiCount = Array.isArray(wikis) ? wikis.length : 0;
+      const total = guideCount + wikiCount;
+
+      if (!total) {
+        sourceSummary.classList.add("hidden");
+        sourceSummary.innerHTML = "本次回答未命中明确的本地资料来源。";
+        return;
+      }
+
+      sourceSummary.classList.remove("hidden");
+
+      const guideText = guideCount ? `${guideCount} 条应急指南` : "";
+      const wikiText = wikiCount ? `${wikiCount} 条本地 Wiki` : "";
+      const joined = [guideText, wikiText].filter(Boolean).join("，");
+
+      const topTitles = [
+        ...(guides || []).slice(0, 2).map(item => item.title).filter(Boolean),
+        ...(wikis || []).slice(0, 2).map(item => item.title).filter(Boolean)
+      ];
+
+      sourceSummary.innerHTML = `
+        <strong>本回答参考了 ${joined}。</strong>
+        <small>${topTitles.length ? `可优先查看：${escapeHtml(topTitles.join("、"))}` : "下方卡片可查看完整来源。"} </small>
+      `;
+    }
+
+    function buildReferenceReason(item) {
+      const userText = String(latestUserMessage || "").toLowerCase();
+      const candidates = [];
+
+      function pushWords(value) {
+        if (!value) return;
+
+        if (Array.isArray(value)) {
+          value.forEach(pushWords);
+          return;
+        }
+
+        String(value)
+          .split(/[,，、\s/]+/)
+          .map(word => word.trim())
+          .filter(word => word.length >= 2)
+          .forEach(word => candidates.push(word));
+      }
+
+      pushWords(item.title);
+      pushWords(item.category);
+      pushWords(item.tags);
+      pushWords(item.summary);
+      pushWords(item.scenario);
+      pushWords(item.goal);
+
+      const matched = [];
+      candidates.forEach(word => {
+        if (matched.length >= 4) return;
+        if (userText.includes(String(word).toLowerCase()) && !matched.includes(word)) {
+          matched.push(word);
+        }
+      });
+
+      if (matched.length) {
+        return `命中关键词：${matched.join("、")}`;
+      }
+
+      if (item.category) {
+        return `同属相关分类：${item.category}`;
+      }
+
+      if (item.risk_level && item.risk_level !== "normal") {
+        return `包含风险等级：${item.risk_level}`;
+      }
+
+      return "由本地检索与问题语义关联。";
+    }
+
     function renderGuides(guides) {
       if (!guides.length) {
         guideList.innerHTML = currentMode === "companion"
           ? '<div class="empty-text">陪伴模式下不一定需要引用指南。必要时，壳中灯会把相关资料放在这里。</div>'
-          : '<div class="empty-text">暂无关联指南。</div>';
+          : '<div class="empty-text">暂无应急指南来源。</div>';
         return;
       }
 
       guideList.innerHTML = guides.map((guide, index) => {
+        const reason = buildReferenceReason(guide);
+
         return `
-          <article class="guide-card-mini" onclick="openGuideModal(${index})">
+          <article class="guide-card-mini reference-card" onclick="openGuideModal(${index})">
             <h3>${escapeHtml(guide.title || "未命名指南")}</h3>
             <p>分类：${escapeHtml(guide.category || "-")}</p>
             <p>${escapeHtml(guide.scenario || guide.goal || "点击查看完整指南。")}</p>
+            <p class="reference-reason"><strong>关联原因：</strong>${escapeHtml(reason)}</p>
           </article>
         `;
       }).join("");
@@ -1469,13 +1569,13 @@
       if (!wikis.length) {
         wikiList.innerHTML = currentMode === "companion"
           ? '<div class="empty-text">陪伴模式下不一定需要引用 Wiki。必要时，壳中灯会把相关知识来源放在这里。</div>'
-          : '<div class="empty-text">暂无参考来源。</div>';
+          : '<div class="empty-text">暂无本地 Wiki 来源。</div>';
         return;
       }
 
       const intro = `
         <p class="wiki-reference-note">
-          以下为本次回答关联到的本地 Wiki 来源。点击卡片或“查看原文”可打开完整条目。
+          以下是本次回答关联到的本地 Wiki。点击卡片可查看完整原文。
         </p>
       `;
 
@@ -1487,6 +1587,8 @@
           high: "高风险"
         }[riskLevel] || riskLevel;
 
+        const reason = buildReferenceReason(wiki);
+
         return `
           <article class="wiki-card-mini reference-card" onclick="openWikiModal(${index})">
             <div class="wiki-card-head">
@@ -1495,9 +1597,7 @@
             </div>
             <p>${escapeHtml(wiki.summary || "暂无摘要。")}</p>
             <p class="wiki-source">来源：${escapeHtml(wiki.source || "本地 Wiki")}</p>
-            <div class="wiki-card-actions">
-              <span class="wiki-card-action">查看原文</span>
-            </div>
+            <p class="reference-reason"><strong>关联原因：</strong>${escapeHtml(reason)}</p>
           </article>
         `;
       }).join("");
