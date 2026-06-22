@@ -14,6 +14,7 @@ from .ai import (
     build_ai_messages,
     build_fallback_answer,
     call_ollama,
+    filter_and_rank_ai_references,
     stream_ollama,
 )
 from .config import (
@@ -269,9 +270,24 @@ def ai_advice(payload: AiAdviceRequest):
 
     related_wikis = search_wiki_for_ai(
         payload.message,
-        detected_domains=context_data.get("detected_domains", []),
-        limit=3,
+        detected_domains=detected_domains,
+        limit=6,
     )
+
+    ranked_references = filter_and_rank_ai_references(
+        user_message=user_message,
+        related_guides=related_guides,
+        related_wikis=related_wikis,
+        detected_domains=detected_domains,
+    )
+
+    # print("AI ADVICE DEBUG user_message:", user_message)
+    # print("AI ADVICE DEBUG detected_domains:", detected_domains)
+    # print("AI ADVICE DEBUG raw guides:", [g.get("title") for g in related_guides])
+    # print("AI ADVICE DEBUG filtered guides:", [g.get("title") for g in ranked_references["guides"]])
+
+    related_guides = ranked_references["guides"]
+    related_wikis = ranked_references["wikis"]
 
     if payload.metadata_only:
         answer = ""
@@ -330,19 +346,32 @@ def ai_advice_stream(payload: AiAdviceRequest):
 
     context_data = prepare_ai_context(user_message, mode)
 
+    detected_domains = context_data["detected_domains"]
+    related_guides = context_data["related_guides"]
+
     related_wikis = search_wiki_for_ai(
         payload.message,
-        detected_domains=context_data.get("detected_domains", []),
-        limit=3,
+        detected_domains=detected_domains,
+        limit=6,
     )
+
+    ranked_references = filter_and_rank_ai_references(
+        user_message=user_message,
+        related_guides=related_guides,
+        related_wikis=related_wikis,
+        detected_domains=detected_domains,
+    )
+    related_guides = ranked_references["guides"]
+    related_wikis = ranked_references["wikis"]
 
     messages = build_ai_messages(
         user_message=user_message,
         mode=mode,
         matched_triggers=context_data["matched_triggers"],
-        related_guides=context_data["related_guides"],
-        detected_domains=context_data["detected_domains"],
+        related_guides=related_guides,
+        detected_domains=detected_domains,
         history=payload.history,
+        related_wikis=related_wikis,
     )
 
     def event_generator():

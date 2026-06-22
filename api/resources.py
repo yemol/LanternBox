@@ -522,3 +522,345 @@ def guide_has_negative_domain_keywords(
             return True
 
     return False
+
+
+# -----------------------------------------------------------------------------
+# LanternBox resources v0.5
+# 结构化领域召回：召回阶段即使用 guide.domains / guide.keywords / guide.negative_keywords。
+# 目标：从源头减少错召回，而不是在 AI 回答阶段补锅。
+# -----------------------------------------------------------------------------
+
+SAFE_DOMAIN_KEYWORDS = {
+    "security": [
+        "安全", "风险", "威胁", "危险", "异响", "响动", "脚步", "脚步声",
+        "门外", "窗外", "外面", "门口", "院外", "夜间", "晚上", "黑夜",
+        "陌生人", "可疑", "担心", "害怕", "守夜", "警戒", "巡查", "观察",
+        "低暴露", "不要外出", "入侵", "暴露", "门窗",
+    ],
+    "medical": [
+        "发热", "发烧", "咳嗽", "腹泻", "呕吐", "伤口", "出血", "感染",
+        "疼痛", "昏迷", "抽搐", "冻伤", "烧伤", "烫伤", "脱水", "药品",
+        "病人", "老人", "儿童", "孕妇", "照护", "医疗",
+    ],
+    "water": [
+        "缺水", "停水", "饮用水", "储水", "净水", "水质", "水源", "取水",
+        "用水", "补水", "桶装水", "过滤", "煮沸", "消毒",
+    ],
+    "food": [
+        "食物", "主食", "粮食", "罐头", "剩饭", "剩食", "配给", "口粮",
+        "营养", "冰箱", "做饭", "烹饪", "热食", "冷食", "蛋白",
+        "库存天数", "留种", "种子", "种菜",
+    ],
+    "power": [
+        "停电", "断电", "电量", "低电量", "移动电源", "充电", "充电宝",
+        "太阳能", "照明", "手电", "电池", "发电机", "插线板",
+    ],
+    "hygiene": [
+        "卫生", "清洁", "洗手", "厕所", "桶厕", "排泄", "垃圾", "消毒",
+        "污染", "污水", "呕吐物", "腹泻污染", "苍蝇", "蚊虫",
+    ],
+    "tools": [
+        "工具", "维修", "修理", "固定", "加固", "胶带", "绳子", "螺丝刀",
+        "扳手", "基础工具箱", "破损", "替代制作",
+    ],
+    "comms": [
+        "通讯", "通信", "电台", "无线电", "对讲机", "短波", "lora",
+        "信号", "地图", "导航", "定位", "离线地图",
+    ],
+    "shelter": [
+        "避难", "庇护", "居住", "睡眠区", "房间", "帐篷", "保暖", "降温",
+        "通风", "门窗", "漏水", "住所",
+    ],
+    "evacuation": [
+        "撤离", "转移", "路线", "集合点", "离开", "返回", "撤高",
+        "背包", "撤离包", "伤病员撤离",
+    ],
+    "disaster": [
+        "地震", "洪水", "台风", "强风", "暴雨", "山洪", "火场", "火灾",
+        "化学污染", "空气污染", "灾后", "余震",
+    ],
+    "records": [
+        "记录", "日志", "备份", "档案", "清单", "登记", "巡检", "复查",
+    ],
+}
+
+DOMAIN_COMPATIBILITY = {
+    "security": {"security", "shelter", "tools", "comms", "power", "evacuation", "disaster"},
+    "medical": {"medical", "water", "hygiene", "food", "shelter"},
+    "water": {"water", "hygiene", "medical", "food", "disaster"},
+    "food": {"food", "water", "hygiene", "medical"},
+    "power": {"power", "tools", "comms", "shelter", "security"},
+    "hygiene": {"hygiene", "water", "medical", "shelter", "food"},
+    "tools": {"tools", "power", "shelter", "security", "comms"},
+    "comms": {"comms", "power", "security", "records", "evacuation"},
+    "shelter": {"shelter", "security", "power", "hygiene", "tools", "disaster"},
+    "evacuation": {"evacuation", "security", "medical", "shelter", "comms", "disaster"},
+    "disaster": {"disaster", "security", "shelter", "evacuation", "medical", "water", "power"},
+    "records": {"records", "comms"},
+}
+
+
+def _safe_text(value: Any) -> str:
+    if isinstance(value, list):
+        return " ".join(_safe_text(item) for item in value)
+    if isinstance(value, dict):
+        return " ".join(_safe_text(v) for v in value.values())
+    return str(value or "").lower().replace("\n", " ")
+
+
+def _safe_split_terms(text: str) -> List[str]:
+    terms = [
+        item.strip()
+        for item in re.split(r"[\s，。！？、；：,.!?;:（）()【】\[\]《》<>\"']+", str(text or ""))
+        if len(item.strip()) >= 2
+    ]
+
+    raw = _safe_text(text)
+    for words in SAFE_DOMAIN_KEYWORDS.values():
+        for word in words:
+            word = str(word).lower().strip()
+            if len(word) >= 2 and word in raw and word not in terms:
+                terms.append(word)
+
+    return terms[:30]
+
+
+def detect_domains(text: str) -> List[str]:
+    """结构化领域识别 v0.5：只看用户原话，不使用单字关键词。"""
+    clean_text = _safe_text(text)
+    if not clean_text:
+        return []
+
+    scores = {}
+    for domain, keywords in SAFE_DOMAIN_KEYWORDS.items():
+        score = 0
+        for keyword in keywords:
+            keyword = str(keyword).lower().strip()
+            if len(keyword) < 2:
+                continue
+            if keyword and keyword in clean_text:
+                score += 1
+        if score:
+            scores[domain] = score
+
+    return [
+        domain
+        for domain, _score in sorted(scores.items(), key=lambda pair: pair[1], reverse=True)
+    ]
+
+
+def guide_domains(guide: Dict[str, Any]) -> List[str]:
+    domains = guide.get("domains")
+    if isinstance(domains, list) and domains:
+        return [str(item).lower().strip() for item in domains if item]
+
+    text = build_guide_search_text(guide)
+    result = []
+    for domain, keywords in SAFE_DOMAIN_KEYWORDS.items():
+        if any(len(keyword) >= 2 and keyword in text for keyword in keywords):
+            result.append(domain)
+    return result
+
+
+def guide_compatible_with_domains(guide: Dict[str, Any], detected_domains: List[str]) -> bool:
+    if not detected_domains:
+        return True
+
+    domains = set(guide_domains(guide))
+    if not domains:
+        return False
+
+    for domain in detected_domains:
+        allowed = DOMAIN_COMPATIBILITY.get(domain, {domain})
+        if domains & allowed:
+            return True
+
+    return False
+
+
+def build_guide_search_text(guide: Dict[str, Any]) -> str:
+    fields = [
+        "id", "title", "category", "category_original", "scenario", "goal",
+        "fallback", "notes", "observe", "summary", "source",
+        "domains", "keywords", "negative_keywords", "situations",
+    ]
+
+    parts = [_safe_text(guide.get(key)) for key in fields]
+
+    for key in [
+        "tools", "steps", "check", "common_mistakes", "stop_or_escalate",
+        "do_first", "avoid", "items",
+    ]:
+        parts.append(_safe_text(guide.get(key)))
+
+    return " ".join(part for part in parts if part)
+
+
+def guide_has_negative_query_keywords(guide: Dict[str, Any], message: str) -> bool:
+    negative_keywords = guide.get("negative_keywords") or []
+    if not isinstance(negative_keywords, list):
+        return False
+
+    message_text = _safe_text(message)
+    return any(str(keyword).lower().strip() in message_text for keyword in negative_keywords if len(str(keyword).strip()) >= 2)
+
+
+def score_guide_for_message(
+    guide: Dict[str, Any],
+    message: str,
+    detected_domains: List[str],
+) -> int:
+    if detected_domains and not guide_compatible_with_domains(guide, detected_domains):
+        return -100
+
+    if guide_has_negative_query_keywords(guide, message):
+        return -100
+
+    score = 0
+    terms = _safe_split_terms(message)
+    search_text = build_guide_search_text(guide)
+
+    title = _safe_text(guide.get("title"))
+    category = _safe_text([guide.get("category"), guide.get("category_original")])
+    scenario_goal = _safe_text([guide.get("scenario"), guide.get("goal"), guide.get("summary")])
+    keywords_text = _safe_text(guide.get("keywords"))
+    guide_domain_text = _safe_text(guide.get("domains"))
+
+    for term in terms:
+        if term in title:
+            score += 10
+        elif term in keywords_text:
+            score += 8
+        elif term in category:
+            score += 5
+        elif term in scenario_goal:
+            score += 4
+        elif term in search_text:
+            score += 1
+
+    for domain in detected_domains:
+        if domain in guide_domain_text:
+            score += 6
+
+    return score
+
+
+def find_guides_by_message_and_domains(
+    message: str,
+    detected_domains: List[str],
+    guides: List[Dict[str, Any]],
+    min_score: int = 4,
+) -> List[Dict[str, Any]]:
+    scored_guides = []
+
+    for guide in guides:
+        score = score_guide_for_message(
+            guide=guide,
+            message=message,
+            detected_domains=detected_domains,
+        )
+
+        if score >= min_score:
+            item = dict(guide)
+            item["_match_score"] = score
+            scored_guides.append(item)
+
+    scored_guides.sort(
+        key=lambda item: item.get("_match_score", 0),
+        reverse=True,
+    )
+
+    return scored_guides
+
+
+def find_domain_fallback_guides(
+    domains: List[str],
+    guides: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    """只用结构化 domains 召回，不再用标题相似度猜测。"""
+    if not domains:
+        return []
+
+    result = []
+    seen_ids = set()
+
+    for guide in guides:
+        guide_id = guide.get("id") or guide.get("title")
+        if not guide_id or guide_id in seen_ids:
+            continue
+
+        if guide_compatible_with_domains(guide, domains):
+            result.append(guide)
+            seen_ids.add(guide_id)
+
+    return result
+
+
+def find_guides_by_domain_keywords(
+    domains: List[str],
+    guides: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    """结构化 domains 优先的轻量召回，避免全文宽匹配。"""
+    if not domains:
+        return []
+
+    result = []
+    for guide in guides:
+        if guide_compatible_with_domains(guide, domains):
+            item = dict(guide)
+            item["_domain_score"] = len(set(guide_domains(guide)) & set(domains))
+            result.append(item)
+
+    result.sort(key=lambda item: item.get("_domain_score", 0), reverse=True)
+    return result
+
+
+def prepare_ai_context(user_message: str, mode: str) -> Dict[str, Any]:
+    if mode == "companion":
+        return {
+            "detected_domains": [],
+            "matched_triggers": [],
+            "related_guides": [],
+        }
+
+    if not RESOURCE_CACHE_INFO.get("loaded"):
+        load_local_resources()
+
+    guides = GUIDES_CACHE
+    triggers = TRIGGERS_CACHE
+
+    detected_domains = detect_domains(user_message)
+    matched_triggers = match_triggers(user_message, triggers)[:10]
+
+    trigger_guides = [
+        guide for guide in find_related_guides(matched_triggers, guides)
+        if guide_compatible_with_domains(guide, detected_domains)
+    ]
+
+    scored_guides = find_guides_by_message_and_domains(
+        message=user_message,
+        detected_domains=detected_domains,
+        guides=guides,
+        min_score=4,
+    )
+
+    # 只有没有词面高相关结果时，才启用同领域兜底；兜底也只取少量。
+    domain_guides = []
+    if not scored_guides and detected_domains:
+        domain_guides = find_domain_fallback_guides(detected_domains, guides)[:6]
+
+    related_guides = merge_guides(
+        trigger_guides,
+        scored_guides,
+        domain_guides,
+    )[:10]
+
+    print("RESOURCE DEBUG detected_domains:", detected_domains)
+    print("RESOURCE DEBUG scored_guides:", [(g.get("title"), g.get("_match_score")) for g in scored_guides[:10]])
+    print("RESOURCE DEBUG related_guides:", [g.get("title") for g in related_guides])
+
+    return {
+        "detected_domains": detected_domains,
+        "matched_triggers": matched_triggers,
+        "related_guides": related_guides,
+    }
