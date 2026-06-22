@@ -1130,6 +1130,7 @@
     };
 
     const CHAT_HISTORY_MAX_MESSAGES = 6;
+    const MAX_REFERENCE_CARDS_PER_GROUP = 6;
 
     let currentMode = "emergency";
     let latestRelatedGuides = [];
@@ -1376,8 +1377,11 @@
       answerBox.dataset.hasAnswer = "true";
 
       const triggers = data.matched_triggers || [];
-      const guides = data.related_guides || [];
-      const wikis = data.related_wikis || [];
+      const rawGuides = data.related_guides || [];
+      const rawWikis = data.related_wikis || [];
+
+      const guides = sortAndLimitReferences(rawGuides, "guide", MAX_REFERENCE_CARDS_PER_GROUP);
+      const wikis = sortAndLimitReferences(rawWikis, "wiki", MAX_REFERENCE_CARDS_PER_GROUP);
 
       latestRelatedGuides = guides;
       latestRelatedWikis = wikis;
@@ -1388,7 +1392,7 @@
       topSeverityEl.textContent = getTopSeverity(triggers);
 
       renderTriggers(triggers);
-      renderSourceSummary(guides, wikis);
+      renderSourceSummary(guides, wikis, rawGuides.length, rawWikis.length);
       renderGuides(guides);
       renderWikis(wikis);
     }
@@ -1464,7 +1468,104 @@
     }
 
 
-    function renderSourceSummary(guides, wikis) {
+
+    function sortAndLimitReferences(items, type, limit) {
+      if (!Array.isArray(items) || !items.length) return [];
+
+      return [...items]
+        .map((item, index) => ({
+          item,
+          index,
+          score: scoreReference(item, type)
+        }))
+        .sort((a, b) => {
+          if (b.score !== a.score) return b.score - a.score;
+          return a.index - b.index;
+        })
+        .slice(0, limit)
+        .map(entry => ({
+          ...entry.item,
+          _reference_score: entry.score
+        }));
+    }
+
+    function scoreReference(item, type) {
+      const userTokens = tokenizeForReference(latestUserMessage);
+      const titleText = normalizeReferenceText(item.title);
+      const categoryText = normalizeReferenceText(item.category);
+      const tagText = normalizeReferenceText(item.tags);
+      const summaryText = normalizeReferenceText(item.summary || item.scenario || item.goal);
+      const bodyText = normalizeReferenceText([
+        item.title,
+        item.category,
+        item.tags,
+        item.summary,
+        item.scenario,
+        item.goal
+      ].filter(Boolean).join(" "));
+
+      let score = 0;
+
+      userTokens.forEach(token => {
+        if (!token) return;
+
+        if (titleText.includes(token)) score += 8;
+        if (tagText.includes(token)) score += 6;
+        if (categoryText.includes(token)) score += 4;
+        if (summaryText.includes(token)) score += 3;
+        if (bodyText.includes(token)) score += 1;
+      });
+
+      if (type === "wiki") score += 1;
+
+      const riskLevel = item.risk_level || "";
+      if (riskLevel === "high") score += 3;
+      if (riskLevel === "caution") score += 1;
+
+      if (item.severity === "紧急") score += 4;
+      if (item.severity === "高") score += 3;
+
+      return score;
+    }
+
+    function tokenizeForReference(text) {
+      const raw = normalizeReferenceText(text);
+      const tokens = [];
+
+      raw
+        .split(/[\s,，、。；;：:！!？?（）()【】\[\]「」"'“”‘’/\\]+/)
+        .map(item => item.trim())
+        .filter(Boolean)
+        .forEach(item => tokens.push(item));
+
+      const compactKeywords = [
+        "饮用水", "停水", "储水", "净水", "水质", "高温", "降温", "发热", "咳嗽",
+        "腹泻", "脱水", "伤口", "烧烫伤", "冻伤", "停电", "低电量", "照明",
+        "太阳能", "燃气", "火灾", "地图", "通讯", "lora", "备份", "食物",
+        "罐头", "冰箱", "厕所", "洗手", "垃圾", "避难", "安全", "记录"
+      ];
+
+      compactKeywords.forEach(keyword => {
+        if (raw.includes(keyword) && !tokens.includes(keyword)) {
+          tokens.push(keyword);
+        }
+      });
+
+      return [...new Set(tokens)].filter(token => token.length >= 2).slice(0, 16);
+    }
+
+    function normalizeReferenceText(value) {
+      if (Array.isArray(value)) {
+        return value.map(normalizeReferenceText).join(" ");
+      }
+
+      return String(value || "")
+        .toLowerCase()
+        .replace(/[^\u4e00-\u9fa5a-z0-9]+/g, " ")
+        .trim();
+    }
+
+    function renderSourceSummary(guides, wikis, rawGuideCount = 0, rawWikiCount = 0) {
       if (!sourceSummary) return;
 
       const guideCount = Array.isArray(guides) ? guides.length : 0;
@@ -1483,14 +1584,21 @@
       const wikiText = wikiCount ? `${wikiCount} 条本地 Wiki` : "";
       const joined = [guideText, wikiText].filter(Boolean).join("，");
 
+      const rawTotal = (rawGuideCount || guideCount) + (rawWikiCount || wikiCount);
+      const shownTotal = guideCount + wikiCount;
+      const hasFiltered = rawTotal > shownTotal;
+
       const topTitles = [
         ...(guides || []).slice(0, 2).map(item => item.title).filter(Boolean),
         ...(wikis || []).slice(0, 2).map(item => item.title).filter(Boolean)
       ];
 
       sourceSummary.innerHTML = `
-        <strong>本回答参考了 ${joined}。</strong>
-        <small>${topTitles.length ? `可优先查看：${escapeHtml(topTitles.join("、"))}` : "下方卡片可查看完整来源。"} </small>
+        <strong>本回答优先展示了 ${joined}。</strong>
+        <small>
+          ${topTitles.length ? `可优先查看：${escapeHtml(topTitles.join("、"))}` : "下方卡片可查看完整来源。"}
+          ${hasFiltered ? ` 已从 ${rawTotal} 条候选来源中按相关度筛选。` : ""}
+        </small>
       `;
     }
 
@@ -1530,6 +1638,10 @@
 
       if (matched.length) {
         return `命中关键词：${matched.join("、")}`;
+      }
+
+      if (item._reference_score && item._reference_score > 0) {
+        return `与当前问题相关度较高。`;
       }
 
       if (item.category) {
