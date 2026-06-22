@@ -855,9 +855,9 @@ def prepare_ai_context(user_message: str, mode: str) -> Dict[str, Any]:
         domain_guides,
     )[:10]
 
-    print("RESOURCE DEBUG detected_domains:", detected_domains)
-    print("RESOURCE DEBUG scored_guides:", [(g.get("title"), g.get("_match_score")) for g in scored_guides[:10]])
-    print("RESOURCE DEBUG related_guides:", [g.get("title") for g in related_guides])
+    # print("RESOURCE DEBUG detected_domains:", detected_domains)
+    # print("RESOURCE DEBUG scored_guides:", [(g.get("title"), g.get("_match_score")) for g in scored_guides[:10]])
+    # print("RESOURCE DEBUG related_guides:", [g.get("title") for g in related_guides])
 
     return {
         "detected_domains": detected_domains,
