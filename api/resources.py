@@ -737,6 +737,83 @@ QUERY_INTENT_RULES = [
         "priority": 98
     },
     {
+        "intent": "power_lighting_energy",
+        "domains": ["power", "tools", "shelter"],
+        "situations": ["power_outage", "night"],
+        "objects": ["flashlight", "power_bank", "battery", "lighting", "device"],
+        "must_any": ["停电", "断电", "手电", "头灯", "充电宝", "移动电源", "照明", "电量", "充电"],
+        "keywords": ["停电", "断电", "今晚", "夜间", "手电", "头灯", "充电宝", "移动电源", "照明", "低亮", "电量", "充电", "设备"],
+        "preferred_titles": ["设备充电优先级", "充电宝轮换", "固定低亮灯位", "低亮照明", "低电量工作模式", "大规模停电第一晚", "手电", "头灯"],
+        "bad_title_words": ["冰箱", "剩饭", "剩菜", "食物风险", "罐头", "防腐", "肉"],
+        "priority": 97
+    },
+    {
+        "intent": "night_toilet_safety",
+        "domains": ["hygiene", "security", "power", "medical"],
+        "situations": ["night", "toilet_route", "fall_risk"],
+        "objects": ["toilet", "lighting", "route"],
+        "must_any": ["厕所", "太黑", "摔倒", "晚上", "夜间"],
+        "keywords": ["晚上", "夜间", "厕所", "太黑", "摔倒", "路线", "照明", "低亮", "安全"],
+        "preferred_titles": ["夜间厕所路线", "低亮照明", "夜间行动安全", "老人夜间如厕"],
+        "bad_title_words": ["呕吐物", "腹泻污染", "剩饭", "冰箱"],
+        "priority": 95
+    },
+    {
+        "intent": "thermal_care_cold",
+        "domains": ["medical", "shelter", "power"],
+        "situations": ["cold_exposure", "hypothermia_watch", "night"],
+        "objects": ["elder", "clothes", "sleeping_area"],
+        "must_any": ["冷", "手脚冰凉", "保暖", "失温"],
+        "keywords": ["老人", "晚上", "冷", "手脚冰凉", "意识清楚", "保暖", "观察", "失温"],
+        "preferred_titles": ["失温", "睡眠保温检查", "室内保温", "小空间集中保暖", "极寒断电过夜"],
+        "bad_title_words": ["意识混乱", "药物提醒", "热夜睡眠", "可疑人员"],
+        "priority": 94
+    },
+    {
+        "intent": "medical_dehydration_diarrhea",
+        "domains": ["medical", "water", "hygiene"],
+        "situations": ["diarrhea", "dehydration"],
+        "objects": ["diarrhea", "patient", "drinking_water"],
+        "must_any": ["腹泻", "脱水", "喝不下", "水也喝不下"],
+        "keywords": ["腹泻", "一天", "喝不下", "防脱水", "脱水", "补液", "呕吐"],
+        "preferred_titles": ["腹泻脱水", "腹泻超过一天", "腹泻呕吐隔离", "补液"],
+        "bad_title_words": ["停水后的用水优先级", "门窗", "主食", "低电量"],
+        "priority": 93
+    },
+    {
+        "intent": "medical_fracture_fix",
+        "domains": ["medical", "tools"],
+        "situations": ["fracture", "temporary_fix"],
+        "objects": ["splint", "tools", "wound"],
+        "must_any": ["骨折", "夹板"],
+        "keywords": ["疑似骨折", "骨折", "夹板", "临时固定", "固定", "木板", "硬纸板"],
+        "preferred_titles": ["疑似骨折", "骨折固定", "木板和木棍再利用", "固定不复位"],
+        "bad_title_words": ["门窗临时加固", "门窗低暴露", "门窗静音"],
+        "priority": 94
+    },
+    {
+        "intent": "shelter_damp_mold",
+        "domains": ["shelter", "hygiene"],
+        "situations": ["damp", "mold"],
+        "objects": ["building", "clothes", "sleeping_area"],
+        "must_any": ["潮", "发霉", "霉", "墙角"],
+        "keywords": ["暴雨", "屋里", "潮", "墙角", "发霉", "水位没有上涨", "没有上涨", "防潮", "排湿"],
+        "preferred_titles": ["室内防潮防霉", "潮湿空气排出", "公共睡眠区卫生", "衣物污染隔离"],
+        "bad_title_words": ["洪水来临前", "暴雨山洪", "撤高", "是否撤离"],
+        "priority": 91
+    },
+    {
+        "intent": "power_water_electrical_safety",
+        "domains": ["power", "security", "tools"],
+        "situations": ["water_contact_electric", "power_restore"],
+        "objects": ["power_strip", "wire", "device"],
+        "must_any": ["插线板", "进过水", "进水", "恢复供电", "漏电"],
+        "keywords": ["插线板", "进过水", "进水", "恢复供电", "还能不能继续用", "电线", "漏电", "电器", "停用"],
+        "preferred_titles": ["电线和插线板安全检查", "漏电检查", "火灾后电器停用", "维修前断电断火断水"],
+        "bad_title_words": ["冰箱食物", "剩饭", "雨水收集", "主食"],
+        "priority": 96
+    },
+    {
         "intent": "food_safety_judgment",
         "domains": [
             "food",
@@ -1452,7 +1529,19 @@ SITUATION_WORDS = {
         "资源暴露",
         "物资",
         "暴露"
-    ]
+    ],
+    "toilet_route": ["夜间厕所", "厕所路线", "如厕", "太黑"],
+    "fall_risk": ["摔倒", "跌倒", "绊倒"],
+    "cold_exposure": ["冷", "手脚冰凉", "保暖", "寒冷"],
+    "hypothermia_watch": ["失温", "发抖", "手脚冰凉"],
+    "diarrhea": ["腹泻", "拉肚子"],
+    "dehydration": ["脱水", "喝不下", "水也喝不下", "尿少"],
+    "fracture": ["骨折", "夹板"],
+    "temporary_fix": ["临时固定", "固定", "夹板"],
+    "damp": ["潮", "潮湿", "屋里很潮"],
+    "mold": ["发霉", "霉", "墙角发霉"],
+    "water_contact_electric": ["进过水", "进水", "水泡", "漏电"],
+    "power_restore": ["恢复供电", "通电", "继续用"],
 }
 OBJECT_WORDS = {
     "fridge": [
@@ -1640,7 +1729,12 @@ OBJECT_WORDS = {
     "lighting": [
         "照明",
         "灯"
-    ]
+    ],
+    "sleeping_area": ["睡眠区", "床", "房间"],
+    "splint": ["夹板", "木板", "硬纸板"],
+    "power_strip": ["插线板", "插座"],
+    "wire": ["电线", "线缆"],
+    "device": ["设备", "电器"],
 }
 
 DOMAIN_KEYWORDS = {
@@ -1685,7 +1779,122 @@ def _match_concepts(text: str, rules: Dict[str, List[str]]) -> List[str]:
     return [key for key, words in rules.items() if _contains_any(text, words)]
 
 
+
+EXCLUSION_TOPIC_RULES = {
+    "fridge_food": {
+        "objects": ["冰箱", "冷藏", "冷冻", "冷柜", "冰柜"],
+        "resource_terms": ["冰箱", "冷藏", "冷冻", "冷柜", "冰柜", "冰箱食物", "食物处置", "剩饭", "剩菜", "食物风险", "食物防腐", "易坏食物", "肉", "熟食"],
+        "domains": ["food"],
+    },
+    "food_safety": {
+        "objects": ["食物", "吃的", "主食", "剩饭", "剩菜", "罐头", "肉", "做饭"],
+        "resource_terms": ["食物", "主食", "剩饭", "剩菜", "罐头", "肉", "食品", "防腐", "配给", "库存天数"],
+        "domains": ["food"],
+    },
+}
+
+EXCLUSION_CUE_WORDS = [
+    "先不管", "暂时不管", "先别管", "不用管", "不要管", "不考虑", "暂不考虑",
+    "不用考虑", "先不处理", "暂时不处理", "先放一边", "先不用", "先不要",
+    "别推荐", "不要推荐", "不用推荐", "排除",
+]
+
+
+def _nearby_has(text: str, left_words: List[str], right_words: List[str], window: int = 10) -> bool:
+    for left in left_words:
+        left = str(left or "").lower().strip()
+        if not left:
+            continue
+        start = 0
+        while True:
+            idx = text.find(left, start)
+            if idx < 0:
+                break
+            nearby = text[max(0, idx - window): idx + len(left) + window]
+            if _contains_any(nearby, right_words):
+                return True
+            start = idx + len(left)
+    return False
+
+
+def detect_excluded_topics(text: str) -> List[str]:
+    """识别用户明确暂缓/排除的主题。
+
+    这不是普通负面情绪识别，只处理“先不管 X / X 先不管 / 不考虑 X”这类
+    对召回结果有直接约束的表达。返回的是内部主题键，而不是展示文本。
+    """
+    text = _safe_text(text)
+    excluded: List[str] = []
+    if not text or not _contains_any(text, EXCLUSION_CUE_WORDS):
+        return excluded
+
+    for topic, rule in EXCLUSION_TOPIC_RULES.items():
+        objects = rule.get("objects", [])
+        if _nearby_has(text, EXCLUSION_CUE_WORDS, objects) or _nearby_has(text, objects, EXCLUSION_CUE_WORDS):
+            excluded.append(topic)
+
+    return _unique(excluded)
+
+
+def guide_matches_excluded_topic(guide: Dict[str, Any], excluded_topics: List[str]) -> bool:
+    if not excluded_topics:
+        return False
+
+    title = _safe_text(guide.get("title"))
+    core = guide_core_text(guide)
+    guide_domain_set = set(guide_domains(guide))
+
+    for topic in excluded_topics:
+        rule = EXCLUSION_TOPIC_RULES.get(topic, {})
+        resource_terms = rule.get("resource_terms", [])
+        topic_domains = set(rule.get("domains", []))
+
+        # 标题命中排除主题时直接剔除。
+        if _contains_any(title, resource_terms):
+            return True
+
+        # 领域也吻合、核心文本又命中排除主题时剔除。这样避免“步骤里偶然提到冰箱”被过度误杀。
+        if topic_domains and guide_domain_set & topic_domains and _contains_any(core, resource_terms):
+            return True
+
+    return False
+
 def _score_intent(text: str, rule: Dict[str, Any]) -> int:
+    intent = rule.get("intent")
+    excluded_topics = detect_excluded_topics(text)
+
+    # 语义否定与场景互斥：避免“关键词撞车”。
+    if intent == "food_safety_judgment":
+        if "fridge_food" in excluded_topics or "food_safety" in excluded_topics:
+            return 0
+        if _contains_any(text, ["手电", "头灯", "充电宝", "移动电源", "照明", "充电"]) and not _contains_any(text, ["肉", "剩饭", "剩菜", "熟食", "能不能吃", "变质", "鼓包", "冷藏", "冷冻", "冰箱"]):
+            return 0
+
+    if intent == "power_lighting_energy":
+        if _contains_any(text, ["冰箱", "肉", "剩饭", "剩菜", "能不能吃"]) and not _contains_any(text, ["手电", "头灯", "充电宝", "移动电源", "照明", "充电"]):
+            return 0
+
+    if intent == "security_suspicious_person":
+        # “物资变化/库存盘点”不是可疑人员接近，必须有接近/门外/人相关线索才进入安全意图。
+        if _contains_any(text, ["物资", "资源暴露"]) and not _contains_any(text, ["门外", "陌生人", "可疑", "靠近", "反复", "盯上", "停留", "人员", "人"]):
+            return 0
+
+    if intent == "shelter_disaster_evacuate":
+        if _contains_any(text, ["水位没有上涨", "水位没上涨", "没有上涨"]) and _contains_any(text, ["潮", "潮湿", "发霉", "墙角", "屋里"]):
+            return 0
+
+    if intent == "medical_elder_confusion":
+        if _contains_any(text, ["意识清楚"]) and not _contains_any(text, ["糊涂", "说话不清", "说话异常", "走路不稳", "意识混乱"]):
+            return 0
+
+    if intent == "hygiene_contamination":
+        if _contains_any(text, ["厕所"]) and _contains_any(text, ["晚上", "夜间", "太黑", "摔倒"]) and not _contains_any(text, ["污染", "呕吐", "腹泻", "不能冲水", "气味", "排泄"]):
+            return 0
+
+    if intent == "tools_security_repair":
+        if _contains_any(text, ["骨折", "夹板"]):
+            return 0
+
     if rule.get("must_any") and not _contains_any(text, rule.get("must_any", [])):
         return 0
 
@@ -1730,12 +1939,21 @@ def analyze_query(user_message: str) -> Dict[str, Any]:
                     domain_scores[domain] = domain_scores.get(domain, 0) + 1
         domains.extend([d for d, _s in sorted(domain_scores.items(), key=lambda pair: pair[1], reverse=True)])
 
+    excluded_topics = detect_excluded_topics(text)
+    clean_domains = _unique(domains)[:5]
+
+    # 如果某个领域只来自用户明确说“先不管”的对象，就不要让它参与主召回。
+    if "fridge_food" in excluded_topics or "food_safety" in excluded_topics:
+        if any(domain != "food" for domain in clean_domains):
+            clean_domains = [domain for domain in clean_domains if domain != "food"]
+
     return {
-        "domains": _unique(domains)[:5],
-        "intents": [item.get("intent") for item in matched[:4]],
+        "domains": clean_domains,
+        "intents": [item.get("intent") for item in matched[:6]],
         "situations": _match_concepts(text, SITUATION_WORDS),
         "objects": _match_concepts(text, OBJECT_WORDS),
-        "intent_rules": matched[:4],
+        "intent_rules": matched[:6],
+        "excluded_topics": excluded_topics,
     }
 
 
@@ -1853,6 +2071,9 @@ def score_guide_for_message(
 ) -> int:
     query_profile = query_profile or analyze_query(message)
     query_domains = query_profile.get("domains", detected_domains)
+
+    if guide_matches_excluded_topic(guide, query_profile.get("excluded_topics", [])):
+        return -100
 
     if query_domains and not guide_compatible_with_domains(guide, query_domains):
         return -100
@@ -1989,6 +2210,9 @@ def prepare_ai_context(user_message: str, mode: str) -> Dict[str, Any]:
     # 压过“停电 + 冰箱 + 剩饭”的食物安全指南。
     # 现在统一合并后按 _match_score 排序，再截断。
     related_guides = merge_guides(scored_guides, trigger_guides, domain_guides)
+    excluded_topics = query_profile.get("excluded_topics", [])
+    if excluded_topics:
+        related_guides = [guide for guide in related_guides if not guide_matches_excluded_topic(guide, excluded_topics)]
 
     related_guides.sort(
         key=lambda item: item.get("_match_score", item.get("_domain_score", 0)),

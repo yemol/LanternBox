@@ -44,6 +44,42 @@ from .wiki import (
 router = APIRouter()
 
 
+def filter_related_wikis_for_query(related_wikis, query_profile):
+    """v0.7：按 query intent 轻量过滤 Wiki 噪声。
+    这里只做标题级别收敛，不影响指南召回。
+    """
+    if not related_wikis:
+        return related_wikis
+
+    intents = set(query_profile.get("intents", []) if query_profile else [])
+
+    def title_of(item):
+        return str(item.get("title", ""))
+
+    if "medical_dehydration_diarrhea" in intents:
+        bad = ["停水后的用水优先级", "简易过滤", "煮沸饮水", "水质异常", "储水容器"]
+        return [
+            item for item in related_wikis
+            if not any(word in title_of(item) for word in bad)
+        ]
+
+    if "power_water_electrical_safety" in intents:
+        bad = ["冰箱食物", "食物变质", "干粮", "罐头", "雨水收集", "饮用水"]
+        return [
+            item for item in related_wikis
+            if not any(word in title_of(item) for word in bad)
+        ]
+
+    if "shelter_damp_mold" in intents:
+        bad = ["洪水", "撤离", "撤高", "干粮", "罐头"]
+        return [
+            item for item in related_wikis
+            if not any(word in title_of(item) for word in bad)
+        ]
+
+    return related_wikis
+
+
 @router.get("/")
 def home():
     return FileResponse(APP_DIR / "index.html")
@@ -270,9 +306,13 @@ def ai_advice(payload: AiAdviceRequest):
 
     related_wikis = search_wiki_for_ai(
         payload.message,
-        detected_domains=detected_domains,
+        detected_domains=context_data.get("detected_domains", []),
         limit=6,
     )
+
+    # print("AI ADVICE DEBUG user_message:", user_message)
+    # print("AI ADVICE DEBUG detected_domains:", detected_domains)
+    # print("AI ADVICE DEBUG raw guides:", [g.get("title") for g in related_guides])
 
     ranked_references = filter_and_rank_ai_references(
         user_message=user_message,
@@ -280,14 +320,14 @@ def ai_advice(payload: AiAdviceRequest):
         related_wikis=related_wikis,
         detected_domains=detected_domains,
     )
-
-    # print("AI ADVICE DEBUG user_message:", user_message)
-    # print("AI ADVICE DEBUG detected_domains:", detected_domains)
-    # print("AI ADVICE DEBUG raw guides:", [g.get("title") for g in related_guides])
-    # print("AI ADVICE DEBUG filtered guides:", [g.get("title") for g in ranked_references["guides"]])
-
     related_guides = ranked_references["guides"]
     related_wikis = ranked_references["wikis"]
+    related_wikis = filter_related_wikis_for_query(
+        related_wikis,
+        context_data.get("query_profile", {}),
+    )
+
+    # print("AI ADVICE DEBUG filtered guides:", [g.get("title") for g in related_guides])
 
     if payload.metadata_only:
         answer = ""
@@ -345,7 +385,6 @@ def ai_advice_stream(payload: AiAdviceRequest):
         raise HTTPException(status_code=400, detail="请提供需要 AI 判断的情况描述。")
 
     context_data = prepare_ai_context(user_message, mode)
-
     detected_domains = context_data["detected_domains"]
     related_guides = context_data["related_guides"]
 
@@ -363,6 +402,10 @@ def ai_advice_stream(payload: AiAdviceRequest):
     )
     related_guides = ranked_references["guides"]
     related_wikis = ranked_references["wikis"]
+    related_wikis = filter_related_wikis_for_query(
+        related_wikis,
+        context_data.get("query_profile", {}),
+    )
 
     messages = build_ai_messages(
         user_message=user_message,

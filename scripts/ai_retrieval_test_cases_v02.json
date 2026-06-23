@@ -1,0 +1,804 @@
+[
+  {
+    "id": "TC-001",
+    "domain": "security",
+    "query": "晚上外面有异响，我有点担心",
+    "expected_domains": [
+      "security"
+    ],
+    "should_include_any": [
+      "夜间外部异响",
+      "夜间守夜",
+      "门窗低暴露"
+    ],
+    "should_not_include_any": [
+      "主食",
+      "剩饭",
+      "蛋白",
+      "冰箱"
+    ]
+  },
+  {
+    "id": "TC-002",
+    "domain": "water",
+    "query": "现在停水了，家里只剩几桶水，应该怎么分配",
+    "expected_domains": [
+      "water"
+    ],
+    "should_include_any": [
+      "大规模停水",
+      "饮用水",
+      "容器分级",
+      "用水"
+    ],
+    "should_not_include_any": [
+      "异响",
+      "主食配给",
+      "发电机"
+    ]
+  },
+  {
+    "id": "TC-003",
+    "domain": "food",
+    "query": "停电后冰箱里的肉和剩饭还能不能吃",
+    "expected_domains": [
+      "food"
+    ],
+    "should_include_any": [
+      "停电后冰箱",
+      "剩饭处理",
+      "食物风险"
+    ],
+    "should_not_include_any": [
+      "夜间",
+      "门窗",
+      "骨折"
+    ]
+  },
+  {
+    "id": "TC-004",
+    "domain": "medical",
+    "query": "有人发烧还咳嗽，水也喝得少",
+    "expected_domains": [
+      "medical"
+    ],
+    "should_include_any": [
+      "发热",
+      "咳嗽",
+      "补水",
+      "病人"
+    ],
+    "should_not_include_any": [
+      "主食轮换",
+      "门窗",
+      "发电机"
+    ]
+  },
+  {
+    "id": "TC-005",
+    "domain": "power",
+    "query": "停电了，充电宝也快没电，今晚怎么安排照明",
+    "expected_domains": [
+      "power"
+    ],
+    "should_include_any": [
+      "大规模停电",
+      "充电宝",
+      "照明",
+      "电量"
+    ],
+    "should_not_include_any": [
+      "剩饭",
+      "伤口",
+      "异响"
+    ]
+  },
+  {
+    "id": "TC-006",
+    "domain": "hygiene",
+    "query": "有人呕吐腹泻，弄脏了地面和衣服，怎么处理",
+    "expected_domains": [
+      "hygiene",
+      "medical"
+    ],
+    "should_include_any": [
+      "呕吐物",
+      "腹泻污染",
+      "衣物污染",
+      "洗手"
+    ],
+    "should_not_include_any": [
+      "夜间",
+      "太阳能",
+      "主食"
+    ]
+  },
+  {
+    "id": "TC-007",
+    "domain": "shelter",
+    "query": "地震后墙上有裂缝，今晚还能睡在这里吗",
+    "expected_domains": [
+      "shelter"
+    ],
+    "should_include_any": [
+      "地震",
+      "余震",
+      "住所不可继续停留",
+      "撤离判断"
+    ],
+    "should_not_include_any": [
+      "剩饭",
+      "充电宝轮换",
+      "豆类"
+    ]
+  },
+  {
+    "id": "TC-008",
+    "domain": "comms",
+    "query": "出去巡查的人没回来，通信也不稳定，怎么约定信号",
+    "expected_domains": [
+      "comms",
+      "security"
+    ],
+    "should_include_any": [
+      "通信",
+      "信号",
+      "集合点",
+      "口令",
+      "求救"
+    ],
+    "should_not_include_any": [
+      "剩饭",
+      "冰箱",
+      "腹泻"
+    ]
+  },
+  {
+    "id": "TC-009",
+    "domain": "tools",
+    "query": "门锁有点松，想临时加固一下门窗",
+    "expected_domains": [
+      "tools",
+      "security"
+    ],
+    "should_include_any": [
+      "门窗",
+      "加固",
+      "工具",
+      "固定"
+    ],
+    "should_not_include_any": [
+      "主食",
+      "腹泻",
+      "净水"
+    ]
+  },
+  {
+    "id": "TC-010",
+    "domain": "planting",
+    "query": "豆子和种子不多了，哪些应该留种，哪些可以吃",
+    "expected_domains": [
+      "planting",
+      "food"
+    ],
+    "should_include_any": [
+      "留种",
+      "种子",
+      "发芽",
+      "食物"
+    ],
+    "should_not_include_any": [
+      "夜间",
+      "骨折",
+      "电线"
+    ]
+  },
+  {
+    "id": "TC-011",
+    "domain": "records",
+    "query": "现在物资和人员变化很多，应该怎么做记录",
+    "expected_domains": [
+      "records"
+    ],
+    "should_include_any": [
+      "记录",
+      "清单",
+      "日志",
+      "登记"
+    ],
+    "should_not_include_any": [
+      "剩饭",
+      "异响",
+      "骨折"
+    ]
+  },
+  {
+    "id": "TC-012",
+    "domain": "security",
+    "query": "有人在门外反复靠近，我们不确定是不是冲着物资来的",
+    "expected_domains": [
+      "security"
+    ],
+    "should_include_any": [
+      "可疑人员",
+      "资源暴露",
+      "门窗",
+      "不对峙"
+    ],
+    "should_not_include_any": [
+      "主食配给",
+      "剩饭",
+      "蛋白"
+    ]
+  },
+  {
+    "id": "TC-013",
+    "domain": "medical",
+    "query": "有人手被玻璃划破，出血还没有停",
+    "expected_domains": [
+      "medical"
+    ],
+    "should_include_any": [
+      "止血",
+      "伤口",
+      "出血",
+      "压迫"
+    ],
+    "should_not_include_any": [
+      "停电",
+      "主食",
+      "夜间"
+    ]
+  },
+  {
+    "id": "TC-014",
+    "domain": "water",
+    "query": "雨水收集了一桶，能不能直接喝",
+    "expected_domains": [
+      "water"
+    ],
+    "should_include_any": [
+      "雨水",
+      "过滤",
+      "消毒",
+      "煮沸"
+    ],
+    "should_not_include_any": [
+      "门外",
+      "骨折",
+      "配给"
+    ]
+  },
+  {
+    "id": "TC-015",
+    "domain": "power",
+    "query": "太阳能板在阴天能不能给设备充电",
+    "expected_domains": [
+      "power"
+    ],
+    "should_include_any": [
+      "太阳能",
+      "充电",
+      "充电宝",
+      "设备"
+    ],
+    "should_not_include_any": [
+      "腹泻",
+      "剩饭",
+      "异响"
+    ]
+  },
+  {
+    "id": "TC-016",
+    "domain": "shelter",
+    "query": "暴雨后水位上涨，我们要不要撤到高处",
+    "expected_domains": [
+      "shelter",
+      "water"
+    ],
+    "should_include_any": [
+      "洪水",
+      "撤高",
+      "水位",
+      "撤离"
+    ],
+    "should_not_include_any": [
+      "主食轮换",
+      "发热",
+      "充电宝"
+    ]
+  },
+  {
+    "id": "TC-017",
+    "domain": "hygiene",
+    "query": "厕所不能冲水了，多人共用怎么避免污染",
+    "expected_domains": [
+      "hygiene",
+      "water"
+    ],
+    "should_include_any": [
+      "厕所",
+      "桶厕",
+      "洗手",
+      "排泄"
+    ],
+    "should_not_include_any": [
+      "异响",
+      "太阳能",
+      "骨折"
+    ]
+  },
+  {
+    "id": "TC-018",
+    "domain": "food",
+    "query": "罐头有点鼓包，还能吃吗",
+    "expected_domains": [
+      "food"
+    ],
+    "should_include_any": [
+      "罐头",
+      "鼓包",
+      "食物风险"
+    ],
+    "should_not_include_any": [
+      "门窗",
+      "发电机",
+      "净水"
+    ]
+  },
+  {
+    "id": "TC-019",
+    "domain": "comms",
+    "query": "如果走散了，怎么留言和约定集合点",
+    "expected_domains": [
+      "comms",
+      "records",
+      "shelter"
+    ],
+    "should_include_any": [
+      "留言",
+      "集合点",
+      "变更",
+      "记录"
+    ],
+    "should_not_include_any": [
+      "剩饭",
+      "中暑",
+      "净水"
+    ]
+  },
+  {
+    "id": "TC-020",
+    "domain": "medical",
+    "query": "老人突然意识混乱，还走路不稳",
+    "expected_domains": [
+      "medical"
+    ],
+    "should_include_any": [
+      "老人",
+      "意识混乱",
+      "照护",
+      "观察"
+    ],
+    "should_not_include_any": [
+      "主食",
+      "夜间异响",
+      "太阳能"
+    ]
+  },
+  {
+    "id": "TC-021",
+    "domain": "food_power_disambiguation",
+    "query": "停电了，但是我主要想知道今晚做饭和剩菜怎么安排",
+    "expected_domains": [
+      "food",
+      "power"
+    ],
+    "should_include_any": [
+      "剩饭处理",
+      "剩食安全处理",
+      "停电后冰箱食物处置",
+      "食物风险判断"
+    ],
+    "should_not_include_any": [
+      "低亮照明",
+      "充电优先级",
+      "夜间外部异响",
+      "门窗低暴露"
+    ]
+  },
+  {
+    "id": "TC-022",
+    "domain": "power_food_disambiguation",
+    "query": "停电了，冰箱先不管，我要先安排手电和充电宝",
+    "expected_domains": [
+      "power"
+    ],
+    "should_include_any": [
+      "低亮照明",
+      "充电优先级",
+      "低电量工作模式",
+      "设备充电优先级"
+    ],
+    "should_not_include_any": [
+      "剩饭处理",
+      "停电后冰箱食物处置",
+      "食物风险判断",
+      "罐头检查"
+    ]
+  },
+  {
+    "id": "TC-023",
+    "domain": "security_hygiene_disambiguation",
+    "query": "晚上去厕所的路太黑，怕摔倒，怎么安排更安全",
+    "expected_domains": [
+      "security",
+      "hygiene",
+      "power"
+    ],
+    "should_include_any": [
+      "夜间厕所路线",
+      "低亮照明",
+      "夜间行动安全",
+      "老人夜间如厕"
+    ],
+    "should_not_include_any": [
+      "剩饭",
+      "冰箱",
+      "罐头",
+      "主食"
+    ]
+  },
+  {
+    "id": "TC-024",
+    "domain": "hygiene_security_disambiguation",
+    "query": "厕所气味越来越重，怎么处理才不会污染生活区",
+    "expected_domains": [
+      "hygiene"
+    ],
+    "should_include_any": [
+      "厕所气味分区",
+      "厕所替代方案",
+      "垃圾分区",
+      "应急洗手站"
+    ],
+    "should_not_include_any": [
+      "夜间外部异响",
+      "门窗低暴露",
+      "可疑人员",
+      "充电优先级"
+    ]
+  },
+  {
+    "id": "TC-025",
+    "domain": "disaster_shelter_disambiguation",
+    "query": "暴雨后屋里很潮，墙角发霉，但水位没有上涨",
+    "expected_domains": [
+      "shelter",
+      "hygiene"
+    ],
+    "should_include_any": [
+      "室内防潮防霉",
+      "潮湿空气排出",
+      "公共睡眠区卫生",
+      "衣物污染隔离"
+    ],
+    "should_not_include_any": [
+      "洪水来临前",
+      "暴雨山洪",
+      "撤高",
+      "集合点"
+    ]
+  },
+  {
+    "id": "TC-026",
+    "domain": "disaster_evacuation",
+    "query": "暴雨后外面水位上涨很快，低处已经进水了",
+    "expected_domains": [
+      "disaster",
+      "evacuation",
+      "water"
+    ],
+    "should_include_any": [
+      "洪水来临前",
+      "暴雨山洪",
+      "撤高",
+      "是否撤离判断"
+    ],
+    "should_not_include_any": [
+      "门窗缝隙保温",
+      "潮湿空气排出",
+      "食物开封",
+      "主食"
+    ]
+  },
+  {
+    "id": "TC-027",
+    "domain": "medical_temperature_disambiguation",
+    "query": "老人晚上觉得冷，手脚冰凉但意识清楚，怎么保暖观察",
+    "expected_domains": [
+      "medical",
+      "shelter"
+    ],
+    "should_include_any": [
+      "失温",
+      "睡眠保温检查",
+      "室内保温",
+      "小空间集中保暖"
+    ],
+    "should_not_include_any": [
+      "老人意识混乱",
+      "可疑人员",
+      "剩饭",
+      "罐头"
+    ]
+  },
+  {
+    "id": "TC-028",
+    "domain": "medical_elder_confusion",
+    "query": "老人突然糊涂，说话也不太清楚，走路不稳",
+    "expected_domains": [
+      "medical"
+    ],
+    "should_include_any": [
+      "老人意识混乱观察",
+      "症状时间线记录",
+      "家庭成员每日状态检查"
+    ],
+    "should_not_include_any": [
+      "睡眠保温",
+      "热夜睡眠",
+      "主食",
+      "太阳能"
+    ]
+  },
+  {
+    "id": "TC-029",
+    "domain": "records_inventory",
+    "query": "物资变化太快，怎么做库存盘点和每日记录",
+    "expected_domains": [
+      "records"
+    ],
+    "should_include_any": [
+      "库存盘点流程",
+      "紧急配水记录",
+      "最低库存线",
+      "记录"
+    ],
+    "should_not_include_any": [
+      "可疑人员接近",
+      "夜间外部异响",
+      "腹泻",
+      "低亮照明"
+    ]
+  },
+  {
+    "id": "TC-030",
+    "domain": "security_resource_exposure",
+    "query": "有人好像盯上了我们的物资，门外也有人停留",
+    "expected_domains": [
+      "security"
+    ],
+    "should_include_any": [
+      "可疑人员接近",
+      "资源暴露后的应对",
+      "门窗低暴露",
+      "夜间外部异响"
+    ],
+    "should_not_include_any": [
+      "库存盘点流程",
+      "主食配给",
+      "食物库存天数",
+      "剩饭"
+    ]
+  },
+  {
+    "id": "TC-031",
+    "domain": "water_medical_disambiguation",
+    "query": "有人腹泻一天了，水也喝不下去，怎么先防脱水",
+    "expected_domains": [
+      "medical",
+      "water"
+    ],
+    "should_include_any": [
+      "腹泻脱水",
+      "腹泻超过一天",
+      "腹泻呕吐隔离",
+      "补液"
+    ],
+    "should_not_include_any": [
+      "停水后的用水优先级",
+      "门窗低暴露",
+      "低电量",
+      "主食"
+    ]
+  },
+  {
+    "id": "TC-032",
+    "domain": "water_storage",
+    "query": "我们有几个桶装水和雨水桶，怎么区分饮用水和清洁水",
+    "expected_domains": [
+      "water",
+      "hygiene"
+    ],
+    "should_include_any": [
+      "饮用水容器分级",
+      "水源风险分级",
+      "灰水再利用",
+      "公共饮水点"
+    ],
+    "should_not_include_any": [
+      "夜间外部异响",
+      "充电优先级",
+      "骨折",
+      "主食配给"
+    ]
+  },
+  {
+    "id": "TC-033",
+    "domain": "comms_security_disambiguation",
+    "query": "外出小队要去巡查，怎么约定口令和返回时间",
+    "expected_domains": [
+      "comms",
+      "security",
+      "records"
+    ],
+    "should_include_any": [
+      "集合点三层规则",
+      "失联人员最后位置记录",
+      "留言点安全规则",
+      "共同值守规则"
+    ],
+    "should_not_include_any": [
+      "剩饭",
+      "冰箱",
+      "罐头",
+      "发热"
+    ]
+  },
+  {
+    "id": "TC-034",
+    "domain": "tools_medical_disambiguation",
+    "query": "有人疑似骨折，我们没有夹板，可以用什么临时固定",
+    "expected_domains": [
+      "medical",
+      "tools"
+    ],
+    "should_include_any": [
+      "疑似骨折",
+      "骨折固定",
+      "木板和木棍再利用",
+      "固定"
+    ],
+    "should_not_include_any": [
+      "门窗临时加固",
+      "主食",
+      "剩饭",
+      "充电"
+    ]
+  },
+  {
+    "id": "TC-035",
+    "domain": "tools_security_repair",
+    "query": "门窗被风吹松了，想用胶带和木板临时固定",
+    "expected_domains": [
+      "tools",
+      "shelter",
+      "security"
+    ],
+    "should_include_any": [
+      "门窗临时加固",
+      "胶带和扎带临时固定",
+      "木板和木棍再利用"
+    ],
+    "should_not_include_any": [
+      "疑似骨折",
+      "腹泻",
+      "剩饭",
+      "饮用水"
+    ]
+  },
+  {
+    "id": "TC-036",
+    "domain": "food_planting_disambiguation",
+    "query": "土豆和红薯快吃完了，是不是应该留一部分发芽种植",
+    "expected_domains": [
+      "food",
+      "planting"
+    ],
+    "should_include_any": [
+      "留种粮",
+      "种子发芽测试",
+      "阳台种菜",
+      "种子保存"
+    ],
+    "should_not_include_any": [
+      "停电后第一小时",
+      "门窗低暴露",
+      "腹泻",
+      "低亮照明"
+    ]
+  },
+  {
+    "id": "TC-037",
+    "domain": "food_inventory_disambiguation",
+    "query": "主食还有多少天能吃，怎么按人数和劳动量估算",
+    "expected_domains": [
+      "food",
+      "records"
+    ],
+    "should_include_any": [
+      "主食配给",
+      "食物库存天数估算",
+      "最低库存线",
+      "库存盘点"
+    ],
+    "should_not_include_any": [
+      "可疑人员接近",
+      "夜间外部异响",
+      "厕所",
+      "发热"
+    ]
+  },
+  {
+    "id": "TC-038",
+    "domain": "security_noise_non_food",
+    "query": "夜里听到门口有脚步声，但没有看到人",
+    "expected_domains": [
+      "security"
+    ],
+    "should_include_any": [
+      "夜间外部异响",
+      "门窗低暴露",
+      "夜间守夜",
+      "可疑人员接近"
+    ],
+    "should_not_include_any": [
+      "主食",
+      "剩饭",
+      "冰箱",
+      "罐头"
+    ]
+  },
+  {
+    "id": "TC-039",
+    "domain": "hygiene_food_disambiguation",
+    "query": "厨房处理过生肉，刀和砧板还能直接切熟食吗",
+    "expected_domains": [
+      "hygiene",
+      "food"
+    ],
+    "should_include_any": [
+      "厨房生熟分区",
+      "公共餐具编号",
+      "食物风险判断"
+    ],
+    "should_not_include_any": [
+      "门窗低暴露",
+      "低电量",
+      "集合点",
+      "骨折"
+    ]
+  },
+  {
+    "id": "TC-040",
+    "domain": "power_safety",
+    "query": "插线板进过水，恢复供电后还能不能继续用",
+    "expected_domains": [
+      "power",
+      "security"
+    ],
+    "should_include_any": [
+      "电线和插线板安全检查",
+      "台风或强风后",
+      "漏电",
+      "停电后第一小时"
+    ],
+    "should_not_include_any": [
+      "剩饭",
+      "主食",
+      "腹泻",
+      "雨水收集"
+    ]
+  }
+]

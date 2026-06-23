@@ -3,7 +3,7 @@ import requests
 from typing import Any, Dict, List, Optional, Tuple
 
 from .config import SCENARIO_PROFILE
-from .resources import build_local_context
+from .resources import build_local_context, detect_excluded_topics, guide_matches_excluded_topic
 from .utils import get_default_model_for_mode
 from .wiki import build_wiki_context_for_ai
 
@@ -352,6 +352,17 @@ def validate_reference_for_query(
     item_domains = infer_item_domains(item)
     lexical_score, matched_tokens = lexical_reference_score(user_message, item)
     compatible = domains_compatible(query_domains, item_domains)
+    excluded_topics = detect_excluded_topics(user_message)
+
+    if guide_matches_excluded_topic(item, excluded_topics):
+        return {
+            "accepted": False,
+            "score": -100,
+            "reason": f"用户已明确暂缓该主题：{','.join(excluded_topics)}。",
+            "query_domains": query_domains,
+            "item_domains": item_domains,
+            "matched_tokens": matched_tokens,
+        }
 
     # 硬门禁：用户问题已经有明确领域，而候选资料领域不兼容时，
     # 必须有非常强的词面命中才放行。否则一律过滤。
