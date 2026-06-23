@@ -5,6 +5,11 @@ LanternBox AI 来源召回测试脚本 v0.1
 1. 后端运行在 http://127.0.0.1:8787
 2. 将 ai_retrieval_test_cases_v01.json 放在脚本同目录
 3. python test_ai_retrieval_v01.py
+
+ai_retrieval_test_cases_v01.md 是测试用例的 Markdown 格式，ai_retrieval_test_cases_v01.json 是从 Markdown 转换来的 JSON 格式。每个测试用例包含：
+- query: 查询语句
+- should_include_any: 应该包含的关键词列表
+- should_not_include_any: 不应该包含的关键词列表
 """
 import json
 import urllib.request
