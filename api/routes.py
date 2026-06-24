@@ -14,6 +14,7 @@ from .ai import (
     build_ai_messages,
     build_fallback_answer,
     call_ollama,
+    sanitize_ai_answer,
     filter_and_rank_ai_references,
     rerank_candidates_with_local_ai,
     stream_ollama,
@@ -472,9 +473,10 @@ def ai_advice(payload: AiAdviceRequest):
 
         try:
             answer = call_ollama(messages=messages, model=model)
+            answer = sanitize_ai_answer(answer, mode)
         except Exception as e:
             print("Ollama 调用失败，返回本地规则建议：", e)
-            answer = build_fallback_answer(mode, matched_triggers, related_guides)
+            answer = sanitize_ai_answer(build_fallback_answer(mode, matched_triggers, related_guides), mode)
 
     return {
         "ok": True,
