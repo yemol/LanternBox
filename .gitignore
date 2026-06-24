@@ -10,6 +10,7 @@ venv/
 .venv/
 env/
 ENV/
+venv_old_libressl/
 
 # macOS
 .DS_Store

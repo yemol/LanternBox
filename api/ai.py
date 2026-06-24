@@ -3,7 +3,7 @@ import requests
 from typing import Any, Dict, List, Optional, Tuple
 
 from .config import SCENARIO_PROFILE
-from .resources import build_local_context, detect_excluded_topics, guide_matches_excluded_topic
+from .resources import build_local_context
 from .utils import get_default_model_for_mode
 from .wiki import build_wiki_context_for_ai
 
@@ -352,17 +352,6 @@ def validate_reference_for_query(
     item_domains = infer_item_domains(item)
     lexical_score, matched_tokens = lexical_reference_score(user_message, item)
     compatible = domains_compatible(query_domains, item_domains)
-    excluded_topics = detect_excluded_topics(user_message)
-
-    if guide_matches_excluded_topic(item, excluded_topics):
-        return {
-            "accepted": False,
-            "score": -100,
-            "reason": f"用户已明确暂缓该主题：{','.join(excluded_topics)}。",
-            "query_domains": query_domains,
-            "item_domains": item_domains,
-            "matched_tokens": matched_tokens,
-        }
 
     # 硬门禁：用户问题已经有明确领域，而候选资料领域不兼容时，
     # 必须有非常强的词面命中才放行。否则一律过滤。
@@ -677,3 +666,229 @@ def build_fallback_answer(
         "",
         f"建议查看指南：{'、'.join([g.get('title', '') for g in related_guides])}" if related_guides else "",
     ])
+
+
+# -----------------------------------------------------------------------------
+# LanternBox AI v0.6 Hybrid RAG 重排层
+# 目标：让本地 AI 参与候选来源过滤和重排，但由代码负责边界、校验和失败回退。
+# -----------------------------------------------------------------------------
+
+AI_RERANK_VERSION = "v0.6-ai-reranker-skeleton"
+
+
+def _safe_json_loads_from_text(text: str) -> Optional[Dict[str, Any]]:
+    """从模型输出中提取 JSON。失败返回 None，调用方必须回退规则排序。"""
+    if not text:
+        return None
+    content = str(text).strip()
+    candidates = [content]
+
+    start = content.find("{")
+    end = content.rfind("}")
+    if start >= 0 and end > start:
+        candidates.append(content[start:end + 1])
+
+    for item in candidates:
+        try:
+            data = json.loads(item)
+            if isinstance(data, dict):
+                return data
+        except Exception:
+            continue
+    return None
+
+
+def _candidate_for_prompt(candidate: Dict[str, Any]) -> Dict[str, Any]:
+    return {
+        "candidate_id": candidate.get("candidate_id"),
+        "source_type": candidate.get("source_type"),
+        "title": candidate.get("title"),
+        "summary": candidate.get("summary", "")[:220],
+        "score": candidate.get("score", 0),
+        "reason": candidate.get("reason", ""),
+        "hard_excluded": bool(candidate.get("hard_excluded")),
+        "excluded_reason": candidate.get("excluded_reason", ""),
+    }
+
+
+def build_ai_rerank_messages(
+    user_message: str,
+    candidates: List[Dict[str, Any]],
+    query_profile: Optional[Dict[str, Any]] = None,
+) -> List[Dict[str, str]]:
+    """要求本地模型只在候选池里选择来源，并输出结构化 JSON。"""
+    query_profile = query_profile or {}
+    compact_candidates = [_candidate_for_prompt(item) for item in candidates[:30]]
+
+    system_prompt = """
+你是 LanternBox 本地离线知识重排器，不是最终回答助手。
+你的任务是从候选来源中选择最适合当前问题的资料。
+必须遵守：
+1. 只能选择候选列表里存在的 candidate_id，不能编造来源。
+2. hard_excluded=true 的来源绝对不能选入 selected_candidate_ids。
+3. 用户明确说“先不管、暂时不考虑、不要处理”的主题必须放入 excluded，并说明原因。
+4. 应急指南 guide 通常优先于 wiki；wiki 优先于 kiwix；Kiwix 只作为背景资料。
+5. 输出必须是 JSON，不要输出解释性正文。
+"""
+
+    user_prompt = f"""
+用户问题：
+{user_message}
+
+规则解析结果：
+{json.dumps(query_profile, ensure_ascii=False)[:1600]}
+
+候选来源：
+{json.dumps(compact_candidates, ensure_ascii=False, indent=2)}
+
+请输出 JSON，格式如下：
+{{
+  "intent_summary": "一句话概括用户当前真正要处理的事",
+  "selected_candidate_ids": ["最多 6 个 candidate_id"],
+  "excluded": [
+    {{"candidate_id": "被排除的 candidate_id", "reason": "为什么当前不选"}}
+  ],
+  "answer_focus": ["回答应该聚焦的关键词"]
+}}
+"""
+
+    return [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt},
+    ]
+
+
+def validate_ai_rerank_result(
+    ai_result: Dict[str, Any],
+    candidates: List[Dict[str, Any]],
+    *,
+    max_selected: int = 6,
+) -> Dict[str, Any]:
+    by_id = {item.get("candidate_id"): item for item in candidates if item.get("candidate_id")}
+    selected_ids = []
+    rejected_ids = []
+
+    for candidate_id in ai_result.get("selected_candidate_ids", []) or []:
+        candidate_id = str(candidate_id or "").strip()
+        item = by_id.get(candidate_id)
+        if not item:
+            rejected_ids.append(candidate_id)
+            continue
+        if item.get("hard_excluded"):
+            rejected_ids.append(candidate_id)
+            continue
+        if candidate_id not in selected_ids:
+            selected_ids.append(candidate_id)
+        if len(selected_ids) >= max_selected:
+            break
+
+    selected = [by_id[candidate_id] for candidate_id in selected_ids]
+
+    # 如果模型没选出任何合法来源，调用方应回退规则排序。
+    valid = bool(selected)
+
+    excluded = []
+    for item in ai_result.get("excluded", []) or []:
+        if not isinstance(item, dict):
+            continue
+        candidate_id = str(item.get("candidate_id") or "").strip()
+        if candidate_id in by_id:
+            excluded.append({
+                "candidate_id": candidate_id,
+                "title": by_id[candidate_id].get("title"),
+                "reason": str(item.get("reason") or "")[:160],
+            })
+
+    return {
+        "valid": valid,
+        "version": AI_RERANK_VERSION,
+        "mode": "ai_rerank_validated" if valid else "ai_rerank_failed",
+        "intent_summary": str(ai_result.get("intent_summary") or "")[:220],
+        "answer_focus": [str(x)[:40] for x in (ai_result.get("answer_focus") or [])[:8]],
+        "selected_sources": selected,
+        "excluded_sources": excluded,
+        "rejected_candidate_ids": rejected_ids,
+    }
+
+
+def rule_rerank_candidates(candidates: List[Dict[str, Any]], *, max_selected: int = 6) -> Dict[str, Any]:
+    selected = [item for item in candidates if not item.get("hard_excluded")]
+    excluded = [item for item in candidates if item.get("hard_excluded")]
+    selected.sort(key=lambda item: (item.get("score", 0), -item.get("rank", 0)), reverse=True)
+    excluded.sort(key=lambda item: (item.get("score", 0), -item.get("rank", 0)), reverse=True)
+    return {
+        "valid": True,
+        "version": AI_RERANK_VERSION,
+        "mode": "rule_fallback",
+        "intent_summary": "规则回退排序",
+        "answer_focus": [],
+        "selected_sources": selected[:max_selected],
+        "excluded_sources": [
+            {
+                "candidate_id": item.get("candidate_id"),
+                "title": item.get("title"),
+                "reason": item.get("excluded_reason", "硬排除"),
+            }
+            for item in excluded[:8]
+        ],
+        "rejected_candidate_ids": [],
+    }
+
+
+def rerank_candidates_with_local_ai(
+    user_message: str,
+    candidates: List[Dict[str, Any]],
+    *,
+    query_profile: Optional[Dict[str, Any]] = None,
+    model: str = "qwen2.5:3b",
+    enable_ai_rerank: bool = False,
+    max_selected: int = 6,
+) -> Dict[str, Any]:
+    """AI 重排入口。
+
+    默认 enable_ai_rerank=False，确保当前系统行为稳定。
+    开启后：规则候选池 → 本地 AI JSON 重排 → 代码校验 → 失败回退规则排序。
+    """
+    if not candidates:
+        return rule_rerank_candidates([], max_selected=max_selected)
+
+    if not enable_ai_rerank:
+        result = rule_rerank_candidates(candidates, max_selected=max_selected)
+        result["mode"] = "rule_only_ai_rerank_disabled"
+        return result
+
+    try:
+        messages = build_ai_rerank_messages(user_message, candidates, query_profile=query_profile)
+        raw = call_ollama(messages, model=model)
+        parsed = _safe_json_loads_from_text(raw)
+        if not parsed:
+            fallback = rule_rerank_candidates(candidates, max_selected=max_selected)
+            fallback["mode"] = "rule_fallback_json_parse_failed"
+            fallback["raw_ai_output"] = str(raw or "")[:500]
+            return fallback
+
+        validated = validate_ai_rerank_result(parsed, candidates, max_selected=max_selected)
+        if not validated.get("valid"):
+            fallback = rule_rerank_candidates(candidates, max_selected=max_selected)
+            fallback["mode"] = "rule_fallback_no_valid_ai_selection"
+            fallback["ai_validation"] = validated
+            return fallback
+        return validated
+    except Exception as exc:
+        fallback = rule_rerank_candidates(candidates, max_selected=max_selected)
+        fallback["mode"] = "rule_fallback_ai_error"
+        fallback["error"] = str(exc)[:300]
+        return fallback
+
+
+def build_selected_sources_text(selected_sources: List[Dict[str, Any]]) -> str:
+    blocks = []
+    for item in selected_sources[:8]:
+        blocks.append("\n".join([
+            f"来源ID：{item.get('candidate_id', '')}",
+            f"来源类型：{item.get('source_label') or item.get('source_type', '')}",
+            f"标题：{item.get('title', '')}",
+            f"选择原因：{item.get('reason', '')}",
+            f"摘要：{item.get('summary', '')}",
+        ]))
+    return "\n\n".join(blocks)

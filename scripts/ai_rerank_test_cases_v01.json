@@ -1,0 +1,72 @@
+[
+  {
+    "id": "AR-001",
+    "query": "停电了，冰箱先不管，我要先安排手电和充电宝",
+    "expected_focus_any": ["照明", "充电", "充电宝", "手电"],
+    "should_select_any": ["设备充电优先级", "固定低亮灯位", "充电宝轮换", "大规模停电第一晚"],
+    "should_exclude_any": ["停电后冰箱食物处置"]
+  },
+  {
+    "id": "AR-002",
+    "query": "停电后冰箱里的肉和剩饭还能不能吃",
+    "expected_focus_any": ["冰箱", "剩饭", "食物", "能不能吃"],
+    "should_select_any": ["停电后冰箱食物处置", "剩饭处理", "食物风险判断"],
+    "should_exclude_any": ["低亮照明", "充电优先级"]
+  },
+  {
+    "id": "AR-003",
+    "query": "物资变化太快，怎么做库存盘点和每日记录",
+    "expected_focus_any": ["库存", "记录", "盘点"],
+    "should_select_any": ["库存盘点", "最低库存线", "记录", "物资编号"],
+    "should_exclude_any": ["可疑人员接近", "夜间外部异响"]
+  },
+  {
+    "id": "AR-004",
+    "query": "有人好像盯上了我们的物资，门外也有人停留",
+    "expected_focus_any": ["可疑人员", "资源暴露", "门窗"],
+    "should_select_any": ["可疑人员接近", "资源暴露后的应对", "门窗低暴露"],
+    "should_exclude_any": ["库存盘点流程", "主食配给"]
+  },
+  {
+    "id": "AR-005",
+    "query": "有人腹泻一天了，水也喝不下去，怎么先防脱水",
+    "expected_focus_any": ["腹泻", "脱水", "补液"],
+    "should_select_any": ["腹泻脱水", "腹泻超过一天", "补液"],
+    "should_exclude_any": ["停水后的用水优先级", "低电量"]
+  },
+  {
+    "id": "AR-006",
+    "query": "暴雨后屋里很潮，墙角发霉，但水位没有上涨",
+    "expected_focus_any": ["防潮", "发霉", "卫生"],
+    "should_select_any": ["室内防潮防霉", "潮湿空气排出", "公共睡眠区卫生"],
+    "should_exclude_any": ["洪水来临前", "暴雨山洪", "撤高"]
+  },
+  {
+    "id": "AR-007",
+    "query": "暴雨后外面水位上涨很快，低处已经进水了",
+    "expected_focus_any": ["洪水", "水位", "撤离", "撤高"],
+    "should_select_any": ["洪水来临前", "暴雨山洪", "是否撤离判断"],
+    "should_exclude_any": ["室内防潮防霉", "潮湿空气排出"]
+  },
+  {
+    "id": "AR-008",
+    "query": "有人疑似骨折，我们没有夹板，可以用什么临时固定",
+    "expected_focus_any": ["骨折", "夹板", "固定"],
+    "should_select_any": ["疑似骨折", "骨折固定", "木板和木棍再利用"],
+    "should_exclude_any": ["门窗临时加固", "充电"]
+  },
+  {
+    "id": "AR-009",
+    "query": "晚上去厕所的路太黑，怕摔倒，怎么安排更安全",
+    "expected_focus_any": ["夜间", "厕所", "照明", "摔倒"],
+    "should_select_any": ["夜间厕所路线", "低亮照明", "夜间行动安全"],
+    "should_exclude_any": ["剩饭", "冰箱", "罐头"]
+  },
+  {
+    "id": "AR-010",
+    "query": "插线板进过水，恢复供电后还能不能继续用",
+    "expected_focus_any": ["插线板", "进水", "漏电", "供电"],
+    "should_select_any": ["电线和插线板安全检查", "漏电", "停电后第一小时"],
+    "should_exclude_any": ["剩饭", "雨水收集"]
+  }
+]
