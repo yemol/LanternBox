@@ -293,6 +293,8 @@ def serialize_related_guides(related_guides: List[Dict[str, Any]]) -> List[Dict[
             "fallback": g.get("fallback"),
             "stop_or_escalate": g.get("stop_or_escalate", []),
             "notes": g.get("notes"),
+            "_ai_rerank_reason": g.get("_ai_rerank_reason"),
+            "_ai_rerank_mode": g.get("_ai_rerank_mode"),
         }
         for g in related_guides
     ]

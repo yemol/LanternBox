@@ -34,3 +34,10 @@ class TtsSpeakRequest(BaseModel):
     text: str
     mode: Optional[str] = "assistant"
     engine: Optional[str] = None
+
+
+class AiRuntimeSettingsUpdate(BaseModel):
+    ai_rerank_enabled: Optional[bool] = None
+    ai_rerank_model: Optional[str] = None
+    retrieval_mode: Optional[str] = None
+    show_retrieval_debug: Optional[bool] = None

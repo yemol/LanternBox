@@ -8,19 +8,33 @@ from .utils import get_default_model_for_mode
 from .wiki import build_wiki_context_for_ai
 
 
-def call_ollama(messages: List[Dict[str, str]], model: str = "qwen2.5:3b") -> str:
+def call_ollama(
+    messages: List[Dict[str, str]],
+    model: str = "qwen2.5:3b",
+    *,
+    force_json: bool = False,
+    temperature: float = 0.2,
+    num_predict: int = 700,
+) -> str:
     try:
+        payload = {
+            "model": model,
+            "messages": messages,
+            "stream": False,
+            "options": {
+                "temperature": temperature,
+                "num_predict": num_predict,
+            },
+        }
+
+        # Ollama 支持 format=json，可以显著降低“模型返回了说明文字而非 JSON”的概率。
+        # 只在重排这类结构化任务中开启，普通聊天不受影响。
+        if force_json:
+            payload["format"] = "json"
+
         response = requests.post(
             "http://127.0.0.1:11434/api/chat",
-            json={
-                "model": model,
-                "messages": messages,
-                "stream": False,
-                "options": {
-                    "temperature": 0.2,
-                    "num_predict": 700,
-                },
-            },
+            json=payload,
             timeout=120,
         )
         response.raise_for_status()
@@ -669,18 +683,60 @@ def build_fallback_answer(
 
 
 # -----------------------------------------------------------------------------
-# LanternBox AI v0.6 Hybrid RAG 重排层
+# LanternBox AI v0.6.1 Hybrid RAG 重排层
 # 目标：让本地 AI 参与候选来源过滤和重排，但由代码负责边界、校验和失败回退。
+# 特点：默认仍可纯规则运行；开启后要求 Ollama 输出结构化 JSON；任何异常都回退规则排序。
 # -----------------------------------------------------------------------------
 
-AI_RERANK_VERSION = "v0.6-ai-reranker-skeleton"
+AI_RERANK_VERSION = "v0.6.1-ai-reranker"
+AI_RERANK_ENV_NAME = "LANTERNBOX_AI_RERANK"
+AI_RERANK_MODEL_ENV_NAME = "LANTERNBOX_AI_RERANK_MODEL"
+AI_RERANK_MAX_CANDIDATES = 30
+AI_RERANK_MAX_SELECTED = 6
+AI_RERANK_MAX_EXCLUDED = 10
+
+
+def _env_truthy(value: Any) -> bool:
+    return str(value or "").strip().lower() in {"1", "true", "yes", "on", "y", "启用", "开启"}
+
+
+def should_enable_ai_rerank(enable_ai_rerank: Optional[bool] = None) -> bool:
+    """解析 AI 重排开关。
+
+    - 函数参数显式传 True/False 时优先；
+    - 未传时读取环境变量 LANTERNBOX_AI_RERANK；
+    - 默认关闭，保证低功耗和测试稳定。
+    """
+    if enable_ai_rerank is not None:
+        return bool(enable_ai_rerank)
+    try:
+        import os
+        return _env_truthy(os.getenv(AI_RERANK_ENV_NAME))
+    except Exception:
+        return False
+
+
+def get_ai_rerank_model(default: str = "qwen2.5:3b") -> str:
+    try:
+        import os
+        return os.getenv(AI_RERANK_MODEL_ENV_NAME, default) or default
+    except Exception:
+        return default
 
 
 def _safe_json_loads_from_text(text: str) -> Optional[Dict[str, Any]]:
     """从模型输出中提取 JSON。失败返回 None，调用方必须回退规则排序。"""
     if not text:
         return None
+
     content = str(text).strip()
+
+    # 兼容 ```json ... ``` 包裹。
+    if content.startswith("```"):
+        content = content.strip("`").strip()
+        if content.lower().startswith("json"):
+            content = content[4:].strip()
+
     candidates = [content]
 
     start = content.find("{")
@@ -702,10 +758,12 @@ def _candidate_for_prompt(candidate: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "candidate_id": candidate.get("candidate_id"),
         "source_type": candidate.get("source_type"),
+        "source_label": candidate.get("source_label") or candidate.get("source_type"),
         "title": candidate.get("title"),
-        "summary": candidate.get("summary", "")[:220],
+        "summary": str(candidate.get("summary", ""))[:260],
         "score": candidate.get("score", 0),
         "reason": candidate.get("reason", ""),
+        "matched_terms": candidate.get("matched_terms", [])[:8],
         "hard_excluded": bool(candidate.get("hard_excluded")),
         "excluded_reason": candidate.get("excluded_reason", ""),
     }
@@ -718,17 +776,21 @@ def build_ai_rerank_messages(
 ) -> List[Dict[str, str]]:
     """要求本地模型只在候选池里选择来源，并输出结构化 JSON。"""
     query_profile = query_profile or {}
-    compact_candidates = [_candidate_for_prompt(item) for item in candidates[:30]]
+    compact_candidates = [_candidate_for_prompt(item) for item in candidates[:AI_RERANK_MAX_CANDIDATES]]
 
     system_prompt = """
 你是 LanternBox 本地离线知识重排器，不是最终回答助手。
 你的任务是从候选来源中选择最适合当前问题的资料。
+
 必须遵守：
 1. 只能选择候选列表里存在的 candidate_id，不能编造来源。
 2. hard_excluded=true 的来源绝对不能选入 selected_candidate_ids。
-3. 用户明确说“先不管、暂时不考虑、不要处理”的主题必须放入 excluded，并说明原因。
+3. 用户明确说“先不管、暂时不考虑、不要处理”的主题，必须放入 excluded，并说明原因。
 4. 应急指南 guide 通常优先于 wiki；wiki 优先于 kiwix；Kiwix 只作为背景资料。
-5. 输出必须是 JSON，不要输出解释性正文。
+5. 如果两个来源都相关，优先选择更贴近“当前优先事项”的来源，而不是只看大场景关键词。
+6. 输出必须是一个合法 JSON object。
+7. 不要输出解释性正文，不要使用 Markdown 代码块，不要在 JSON 前后添加任何文字。
+8. JSON 中所有字符串必须使用英文双引号，不能使用单引号。
 """
 
     user_prompt = f"""
@@ -736,7 +798,7 @@ def build_ai_rerank_messages(
 {user_message}
 
 规则解析结果：
-{json.dumps(query_profile, ensure_ascii=False)[:1600]}
+{json.dumps(query_profile, ensure_ascii=False)[:1800]}
 
 候选来源：
 {json.dumps(compact_candidates, ensure_ascii=False, indent=2)}
@@ -745,11 +807,16 @@ def build_ai_rerank_messages(
 {{
   "intent_summary": "一句话概括用户当前真正要处理的事",
   "selected_candidate_ids": ["最多 6 个 candidate_id"],
+  "selected": [
+    {{"candidate_id": "被选中的 candidate_id", "reason": "为什么当前要用它"}}
+  ],
   "excluded": [
     {{"candidate_id": "被排除的 candidate_id", "reason": "为什么当前不选"}}
   ],
   "answer_focus": ["回答应该聚焦的关键词"]
 }}
+
+注意：selected_candidate_ids 和 selected 二选一即可；如果都输出，代码会合并校验。
 """
 
     return [
@@ -758,60 +825,119 @@ def build_ai_rerank_messages(
     ]
 
 
+def _extract_selected_entries(ai_result: Dict[str, Any]) -> List[Dict[str, str]]:
+    """兼容多种 JSON 字段名，降低本地小模型输出漂移影响。"""
+    entries: List[Dict[str, str]] = []
+
+    raw_ids = ai_result.get("selected_candidate_ids")
+    if raw_ids is None:
+        raw_ids = ai_result.get("selected_source_ids")
+    if raw_ids is None:
+        raw_ids = ai_result.get("selected_ids")
+
+    for item in raw_ids or []:
+        entries.append({"candidate_id": str(item or "").strip(), "reason": "AI 选择"})
+
+    raw_selected = ai_result.get("selected") or ai_result.get("selected_sources") or []
+    for item in raw_selected:
+        if isinstance(item, dict):
+            candidate_id = str(item.get("candidate_id") or item.get("id") or item.get("source_id") or "").strip()
+            reason = str(item.get("reason") or item.get("why") or "AI 选择")[:180]
+            entries.append({"candidate_id": candidate_id, "reason": reason})
+        else:
+            entries.append({"candidate_id": str(item or "").strip(), "reason": "AI 选择"})
+
+    return entries
+
+
+def _extract_excluded_entries(ai_result: Dict[str, Any]) -> List[Dict[str, str]]:
+    entries: List[Dict[str, str]] = []
+    raw_excluded = ai_result.get("excluded") or ai_result.get("excluded_sources") or ai_result.get("excluded_candidate_ids") or []
+    for item in raw_excluded:
+        if isinstance(item, dict):
+            candidate_id = str(item.get("candidate_id") or item.get("id") or item.get("source_id") or "").strip()
+            reason = str(item.get("reason") or item.get("why") or "AI 排除")[:180]
+            entries.append({"candidate_id": candidate_id, "reason": reason})
+        else:
+            entries.append({"candidate_id": str(item or "").strip(), "reason": "AI 排除"})
+    return entries
+
+
 def validate_ai_rerank_result(
     ai_result: Dict[str, Any],
     candidates: List[Dict[str, Any]],
     *,
-    max_selected: int = 6,
+    max_selected: int = AI_RERANK_MAX_SELECTED,
 ) -> Dict[str, Any]:
-    by_id = {item.get("candidate_id"): item for item in candidates if item.get("candidate_id")}
-    selected_ids = []
-    rejected_ids = []
+    by_id = {str(item.get("candidate_id")): item for item in candidates if item.get("candidate_id")}
+    selected_ids: List[str] = []
+    selected_reasons: Dict[str, str] = {}
+    rejected_ids: List[str] = []
 
-    for candidate_id in ai_result.get("selected_candidate_ids", []) or []:
-        candidate_id = str(candidate_id or "").strip()
+    for entry in _extract_selected_entries(ai_result):
+        candidate_id = str(entry.get("candidate_id") or "").strip()
         item = by_id.get(candidate_id)
-        if not item:
-            rejected_ids.append(candidate_id)
+        if not candidate_id or not item:
+            if candidate_id:
+                rejected_ids.append(candidate_id)
             continue
         if item.get("hard_excluded"):
             rejected_ids.append(candidate_id)
             continue
         if candidate_id not in selected_ids:
             selected_ids.append(candidate_id)
+            selected_reasons[candidate_id] = str(entry.get("reason") or "AI 选择")[:180]
         if len(selected_ids) >= max_selected:
             break
 
-    selected = [by_id[candidate_id] for candidate_id in selected_ids]
+    selected: List[Dict[str, Any]] = []
+    for candidate_id in selected_ids:
+        item = dict(by_id[candidate_id])
+        item["rerank_reason"] = selected_reasons.get(candidate_id, "AI 选择")
+        item["rerank_mode"] = "ai"
+        selected.append(item)
+
+    # 硬排除候选永远进入 excluded_sources，AI 额外排除理由可覆盖/补充。
+    excluded_by_id: Dict[str, Dict[str, Any]] = {}
+    for candidate in candidates:
+        if candidate.get("hard_excluded") and candidate.get("candidate_id"):
+            cid = str(candidate.get("candidate_id"))
+            excluded_by_id[cid] = {
+                "candidate_id": cid,
+                "source_type": candidate.get("source_type"),
+                "title": candidate.get("title"),
+                "reason": candidate.get("excluded_reason") or "硬排除",
+            }
+
+    for entry in _extract_excluded_entries(ai_result):
+        candidate_id = str(entry.get("candidate_id") or "").strip()
+        if candidate_id in by_id:
+            excluded_by_id[candidate_id] = {
+                "candidate_id": candidate_id,
+                "source_type": by_id[candidate_id].get("source_type"),
+                "title": by_id[candidate_id].get("title"),
+                "reason": str(entry.get("reason") or by_id[candidate_id].get("excluded_reason") or "AI 排除")[:180],
+            }
 
     # 如果模型没选出任何合法来源，调用方应回退规则排序。
     valid = bool(selected)
-
-    excluded = []
-    for item in ai_result.get("excluded", []) or []:
-        if not isinstance(item, dict):
-            continue
-        candidate_id = str(item.get("candidate_id") or "").strip()
-        if candidate_id in by_id:
-            excluded.append({
-                "candidate_id": candidate_id,
-                "title": by_id[candidate_id].get("title"),
-                "reason": str(item.get("reason") or "")[:160],
-            })
 
     return {
         "valid": valid,
         "version": AI_RERANK_VERSION,
         "mode": "ai_rerank_validated" if valid else "ai_rerank_failed",
-        "intent_summary": str(ai_result.get("intent_summary") or "")[:220],
-        "answer_focus": [str(x)[:40] for x in (ai_result.get("answer_focus") or [])[:8]],
+        "intent_summary": str(ai_result.get("intent_summary") or "")[:240],
+        "answer_focus": [str(x)[:50] for x in (ai_result.get("answer_focus") or [])[:8]],
         "selected_sources": selected,
-        "excluded_sources": excluded,
+        "excluded_sources": list(excluded_by_id.values())[:AI_RERANK_MAX_EXCLUDED],
         "rejected_candidate_ids": rejected_ids,
+        "selected_candidate_ids": [item.get("candidate_id") for item in selected if item.get("candidate_id")],
+        "fallback_reason": None,
+        "used_ai": valid,
     }
 
 
-def rule_rerank_candidates(candidates: List[Dict[str, Any]], *, max_selected: int = 6) -> Dict[str, Any]:
+def rule_rerank_candidates(candidates: List[Dict[str, Any]], *, max_selected: int = AI_RERANK_MAX_SELECTED) -> Dict[str, Any]:
     selected = [item for item in candidates if not item.get("hard_excluded")]
     excluded = [item for item in candidates if item.get("hard_excluded")]
     selected.sort(key=lambda item: (item.get("score", 0), -item.get("rank", 0)), reverse=True)
@@ -826,12 +952,16 @@ def rule_rerank_candidates(candidates: List[Dict[str, Any]], *, max_selected: in
         "excluded_sources": [
             {
                 "candidate_id": item.get("candidate_id"),
+                "source_type": item.get("source_type"),
                 "title": item.get("title"),
                 "reason": item.get("excluded_reason", "硬排除"),
             }
-            for item in excluded[:8]
+            for item in excluded[:AI_RERANK_MAX_EXCLUDED]
         ],
         "rejected_candidate_ids": [],
+        "selected_candidate_ids": [item.get("candidate_id") for item in selected[:max_selected] if item.get("candidate_id")],
+        "fallback_reason": "规则排序回退",
+        "used_ai": False,
     }
 
 
@@ -840,30 +970,74 @@ def rerank_candidates_with_local_ai(
     candidates: List[Dict[str, Any]],
     *,
     query_profile: Optional[Dict[str, Any]] = None,
-    model: str = "qwen2.5:3b",
-    enable_ai_rerank: bool = False,
-    max_selected: int = 6,
+    model: Optional[str] = None,
+    enable_ai_rerank: Optional[bool] = None,
+    max_selected: int = AI_RERANK_MAX_SELECTED,
 ) -> Dict[str, Any]:
     """AI 重排入口。
 
-    默认 enable_ai_rerank=False，确保当前系统行为稳定。
+    默认读取环境变量 LANTERNBOX_AI_RERANK；未开启时使用纯规则回退。
     开启后：规则候选池 → 本地 AI JSON 重排 → 代码校验 → 失败回退规则排序。
     """
     if not candidates:
-        return rule_rerank_candidates([], max_selected=max_selected)
+        result = rule_rerank_candidates([], max_selected=max_selected)
+        result["mode"] = "rule_fallback_no_candidates"
+        result["fallback_reason"] = "没有可供 AI 重排的候选来源，使用空规则结果。"
+        return result
 
-    if not enable_ai_rerank:
+    if not should_enable_ai_rerank(enable_ai_rerank):
         result = rule_rerank_candidates(candidates, max_selected=max_selected)
         result["mode"] = "rule_only_ai_rerank_disabled"
+        result["fallback_reason"] = "AI 检索增强未开启，使用规则排序。"
         return result
+
+    model = model or get_ai_rerank_model()
 
     try:
         messages = build_ai_rerank_messages(user_message, candidates, query_profile=query_profile)
-        raw = call_ollama(messages, model=model)
+        raw = call_ollama(
+            messages,
+            model=model,
+            force_json=True,
+            temperature=0.0,
+            num_predict=900,
+        )
         parsed = _safe_json_loads_from_text(raw)
+        if not parsed:
+            # 少数本地模型即使 format=json 也可能吐出残缺 JSON。
+            # 此处只做一次低成本修复请求：把原始输出整理成指定 JSON，不让它重新判断来源。
+            repair_messages = [
+                {
+                    "role": "system",
+                    "content": "你是 JSON 修复器。只输出一个合法 JSON object，不要解释，不要 Markdown。",
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        "把下面内容修复为合法 JSON object。字段尽量保留："
+                        "intent_summary, selected_candidate_ids, selected, excluded, answer_focus。\n\n"
+                        f"原始内容：\n{str(raw or '')[:1600]}"
+                    ),
+                },
+            ]
+            try:
+                repaired_raw = call_ollama(
+                    repair_messages,
+                    model=model,
+                    force_json=True,
+                    temperature=0.0,
+                    num_predict=700,
+                )
+                parsed = _safe_json_loads_from_text(repaired_raw)
+                if parsed:
+                    raw = repaired_raw
+            except Exception:
+                parsed = None
+
         if not parsed:
             fallback = rule_rerank_candidates(candidates, max_selected=max_selected)
             fallback["mode"] = "rule_fallback_json_parse_failed"
+            fallback["fallback_reason"] = "本地 AI 已返回内容，但不是可解析的 JSON，已回退到规则排序。"
             fallback["raw_ai_output"] = str(raw or "")[:500]
             return fallback
 
@@ -871,6 +1045,10 @@ def rerank_candidates_with_local_ai(
         if not validated.get("valid"):
             fallback = rule_rerank_candidates(candidates, max_selected=max_selected)
             fallback["mode"] = "rule_fallback_no_valid_ai_selection"
+            rejected = validated.get("rejected_candidate_ids") or []
+            fallback["fallback_reason"] = "本地 AI 没有选出合法来源，或选择了不存在/被硬排除的 candidate_id，已回退到规则排序。"
+            if rejected:
+                fallback["fallback_reason"] += f" 被拒绝的候选：{', '.join(map(str, rejected[:6]))}"
             fallback["ai_validation"] = validated
             return fallback
         return validated
@@ -878,8 +1056,48 @@ def rerank_candidates_with_local_ai(
         fallback = rule_rerank_candidates(candidates, max_selected=max_selected)
         fallback["mode"] = "rule_fallback_ai_error"
         fallback["error"] = str(exc)[:300]
+        fallback["fallback_reason"] = f"本地 AI 重排调用失败，已回退到规则排序：{str(exc)[:240]}"
         return fallback
 
+
+def get_candidate_raw_item_from_ai(candidate: Dict[str, Any]) -> Dict[str, Any]:
+    raw = candidate.get("raw")
+    return raw if isinstance(raw, dict) else candidate
+
+
+def apply_rerank_result_to_context(
+    context: Dict[str, Any],
+    rerank_result: Dict[str, Any],
+) -> Dict[str, Any]:
+    """把 AI/规则重排结果回写到 prepare_ai_context 的上下文结构中。
+
+    这个函数供后端路由调用。resources.py 不直接调用 ai.py，避免循环依赖。
+    """
+    updated = dict(context or {})
+    selected_sources = rerank_result.get("selected_sources", []) or []
+    excluded_sources = rerank_result.get("excluded_sources", []) or []
+
+    updated["selected_sources"] = selected_sources
+    updated["excluded_sources"] = excluded_sources
+    updated["related_guides"] = [
+        get_candidate_raw_item_from_ai(item)
+        for item in selected_sources
+        if item.get("source_type") == "guide"
+    ][:10]
+
+    decision = dict(updated.get("retrieval_decision") or {})
+    decision.update({
+        "version": AI_RERANK_VERSION,
+        "mode": rerank_result.get("mode"),
+        "used_ai": rerank_result.get("used_ai", False),
+        "intent_summary": rerank_result.get("intent_summary") or decision.get("intent_summary"),
+        "answer_focus": rerank_result.get("answer_focus", []),
+        "selected_count": len(selected_sources),
+        "excluded_count": len(excluded_sources),
+        "rejected_candidate_ids": rerank_result.get("rejected_candidate_ids", []),
+    })
+    updated["retrieval_decision"] = decision
+    return updated
 
 def build_selected_sources_text(selected_sources: List[Dict[str, Any]]) -> str:
     blocks = []

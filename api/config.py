@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -21,6 +22,68 @@ DEFAULT_MODELS = {
     "emergency": "qwen2.5:3b",
     "companion": "qwen3:8b",
 }
+
+
+
+# -----------------------------
+# Runtime AI retrieval settings
+# -----------------------------
+RUNTIME_SETTINGS_PATH = DATA_DIR / "runtime_settings.json"
+
+DEFAULT_RUNTIME_SETTINGS: Dict[str, Any] = {
+    "ai_rerank_enabled": False,
+    "ai_rerank_model": "qwen2.5:3b",
+    "retrieval_mode": "rule",
+    "show_retrieval_debug": True,
+}
+
+
+def _normalize_runtime_settings(raw: Dict[str, Any]) -> Dict[str, Any]:
+    settings = dict(DEFAULT_RUNTIME_SETTINGS)
+    if isinstance(raw, dict):
+        settings.update({k: v for k, v in raw.items() if k in DEFAULT_RUNTIME_SETTINGS})
+
+    settings["ai_rerank_enabled"] = bool(settings.get("ai_rerank_enabled"))
+    settings["show_retrieval_debug"] = bool(settings.get("show_retrieval_debug"))
+
+    model = str(settings.get("ai_rerank_model") or "").strip()
+    settings["ai_rerank_model"] = model or DEFAULT_RUNTIME_SETTINGS["ai_rerank_model"]
+
+    mode = str(settings.get("retrieval_mode") or "").strip()
+    if mode not in {"rule", "hybrid", "enhanced"}:
+        mode = "hybrid" if settings["ai_rerank_enabled"] else "rule"
+    settings["retrieval_mode"] = mode
+
+    return settings
+
+
+def load_runtime_settings() -> Dict[str, Any]:
+    if not RUNTIME_SETTINGS_PATH.exists():
+        return dict(DEFAULT_RUNTIME_SETTINGS)
+
+    try:
+        with open(RUNTIME_SETTINGS_PATH, "r", encoding="utf-8") as file:
+            raw = json.load(file)
+    except Exception:
+        return dict(DEFAULT_RUNTIME_SETTINGS)
+
+    return _normalize_runtime_settings(raw)
+
+
+def save_runtime_settings(settings: Dict[str, Any]) -> Dict[str, Any]:
+    normalized = _normalize_runtime_settings(settings)
+    DATA_DIR.mkdir(exist_ok=True)
+    with open(RUNTIME_SETTINGS_PATH, "w", encoding="utf-8") as file:
+        json.dump(normalized, file, ensure_ascii=False, indent=2)
+    return normalized
+
+
+def update_runtime_settings(patch: Dict[str, Any]) -> Dict[str, Any]:
+    current = load_runtime_settings()
+    if isinstance(patch, dict):
+        current.update({k: v for k, v in patch.items() if v is not None})
+    return save_runtime_settings(current)
+
 
 # Conversation memory settings
 CHAT_HISTORY_MAX_MESSAGES = 6
