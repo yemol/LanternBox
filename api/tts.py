@@ -1,5 +1,4 @@
 import json
-import os
 import time
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -12,30 +11,15 @@ from .config import (
     TTS_MAX_FILE_AGE_SECONDS,
     TTS_MAX_OUTPUT_FILES,
     TTS_OUTPUT_DIR,
-    VOICE_SERVICE_DEFAULT_URL,
     VOICE_SERVICE_TIMEOUT_SECONDS,
+    VOICE_SERVICE_URL,
 )
 
-
-VOICE_SERVICE_URL = os.getenv(
-    "LANTERNBOX_VOICE_SERVICE_URL",
-    VOICE_SERVICE_DEFAULT_URL,
-).rstrip("/")
 
 VOICE_TTS_ENDPOINT = f"{VOICE_SERVICE_URL}/api/voice/tts"
-VOICE_TIMEOUT_SECONDS = float(
-    os.getenv("LANTERNBOX_VOICE_TIMEOUT", str(VOICE_SERVICE_TIMEOUT_SECONDS))
-)
 
 
 def cleanup_tts_output() -> None:
-    """
-    清理主系统本地 TTS 缓存文件。
-
-    注意：
-    实际语音生成已经交给 voice_service。
-    这里保留缓存清理，是为了兼容主系统原有 /api/tts/speak 返回本地音频 URL 的流程。
-    """
     if not TTS_OUTPUT_DIR.exists():
         return
 
@@ -84,7 +68,7 @@ def _download_audio(audio_url: str, output_path: Path) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     try:
-        with urlopen(resolved_url, timeout=VOICE_TIMEOUT_SECONDS) as response:
+        with urlopen(resolved_url, timeout=VOICE_SERVICE_TIMEOUT_SECONDS) as response:
             audio_bytes = response.read()
     except HTTPError as error:
         raise HTTPException(
@@ -109,13 +93,6 @@ def _download_audio(audio_url: str, output_path: Path) -> None:
 
 
 def synthesize_tts_to_file(text: str, output_path: Path, mode: str = "default") -> None:
-    """
-    调用独立 Voice Service 生成语音，并把音频缓存到主系统指定位置。
-
-    主系统不再关心 Piper / MeloTTS / 模型路径。
-    后续语音服务迁移到外部硬件时，只需要设置：
-    LANTERNBOX_VOICE_SERVICE_URL=http://<voice-box-ip>:8790
-    """
     clean_text = (text or "").strip()
 
     if not clean_text:
@@ -134,7 +111,7 @@ def synthesize_tts_to_file(text: str, output_path: Path, mode: str = "default") 
     )
 
     try:
-        with urlopen(request, timeout=VOICE_TIMEOUT_SECONDS) as response:
+        with urlopen(request, timeout=VOICE_SERVICE_TIMEOUT_SECONDS) as response:
             raw_body = response.read().decode("utf-8", errors="replace")
     except HTTPError as error:
         raise HTTPException(
@@ -167,17 +144,3 @@ def synthesize_tts_to_file(text: str, output_path: Path, mode: str = "default") 
         )
 
     _download_audio(data.get("audio_url", ""), output_path)
-
-
-# 兼容旧代码调用名。
-# 后续确认 routes.py 已改为 synthesize_tts_to_file 后，可以删除这两个别名。
-def run_voice_service_tts(text: str, output_path: Path, mode: str = "default") -> None:
-    synthesize_tts_to_file(text=text, output_path=output_path, mode=mode)
-
-
-def run_piper_tts(text: str, output_path: Path) -> None:
-    synthesize_tts_to_file(text=text, output_path=output_path, mode="emergency")
-
-
-def run_melotts_tts(text: str, output_path: Path) -> None:
-    synthesize_tts_to_file(text=text, output_path=output_path, mode="companion")

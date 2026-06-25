@@ -26,7 +26,7 @@ from .config import (
     EMERGENCY_GUIDES_PATH,
     RESOURCE_CACHE_INFO,
     TTS_OUTPUT_DIR,
-    VOICE_SERVICE_DEFAULT_URL,
+    VOICE_SERVICE_URL,
     load_runtime_settings,
     update_runtime_settings,
 )
@@ -593,13 +593,7 @@ def resources_status():
 
 @router.post("/api/tts/speak")
 def tts_speak(payload: TtsSpeakRequest):
-    """
-    主系统 TTS 入口。
-
-    v0.7.2 起，Core 不再直接调用 Piper / MeloTTS，也不再按模式选择语音引擎。
-    这里仅把文本交给独立 Voice Service，并把返回音频缓存到 Core 的 /tts_output 中，
-    从而保持前端 audio_url 使用方式不变。
-    """
+    """把朗读请求转交给独立语音服务，并缓存生成的音频。"""
     text = (payload.text or "").strip()
 
     if not text:
@@ -622,7 +616,7 @@ def tts_speak(payload: TtsSpeakRequest):
         "engine": "voice_service",
         "audio_url": f"/tts_output/{output_filename}",
         "filename": output_filename,
-        "voice_service_url": VOICE_SERVICE_DEFAULT_URL,
+        "voice_service_url": VOICE_SERVICE_URL,
     }
 
 @router.get("/api/wiki/articles")
@@ -765,7 +759,7 @@ def system_check():
         "message": "可用" if ollama["ok"] else f"不可用：{ollama['message']}"
     })
 
-    voice_service = check_url(f"{VOICE_SERVICE_DEFAULT_URL}/api/voice/health")
+    voice_service = check_url(f"{VOICE_SERVICE_URL}/api/voice/health")
     checks.append({
         "id": "voice_service",
         "title": "独立语音服务",
@@ -785,93 +779,6 @@ def system_check():
         "checked_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "checks": checks
     }
-    checks = []
-
-    checks.append({
-        "id": "backend",
-        "title": "FastAPI 后端",
-        "ok": True,
-        "message": "后端服务在线"
-    })
-
-    try:
-        emergency_data = load_emergency_guides()
-        checks.append({
-            "id": "emergency",
-            "title": "应急指南",
-            "ok": True,
-            "message": f"可用，当前 {len(emergency_data)} 条指南"
-        })
-    except Exception as error:
-        checks.append({
-            "id": "emergency",
-            "title": "应急指南",
-            "ok": False,
-            "message": f"读取失败：{error}"
-        })
-
-    try:
-        inventory_items = get_inventory_items()
-        checks.append({
-            "id": "inventory",
-            "title": "物资库存",
-            "ok": True,
-            "message": f"可用，当前 {len(inventory_items)} 条物资"
-        })
-    except Exception as error:
-        checks.append({
-            "id": "inventory",
-            "title": "物资库存",
-            "ok": False,
-            "message": f"读取失败：{error}"
-        })
-
-    try:
-        journal_entries = get_journal_entries()
-        checks.append({
-            "id": "journal",
-            "title": "日记记录",
-            "ok": True,
-            "message": f"可用，当前 {len(journal_entries)} 条记录"
-        })
-    except Exception as error:
-        checks.append({
-            "id": "journal",
-            "title": "日记记录",
-            "ok": False,
-            "message": f"读取失败：{error}"
-        })
-
-    try:
-        wiki_data = list_wiki_articles(limit=1)
-        total = wiki_data.get("total", 0)
-        checks.append({
-            "id": "wiki",
-            "title": "精选 Wiki",
-            "ok": True,
-            "message": f"可用，当前 {total} 篇 Wiki"
-        })
-    except Exception as error:
-        checks.append({
-            "id": "wiki",
-            "title": "精选 Wiki",
-            "ok": False,
-            "message": f"读取失败：{error}"
-        })
-
-    ollama = check_url("http://127.0.0.1:11434/api/tags")
-    checks.append({
-        "id": "ollama",
-        "title": "Ollama 本地 AI",
-        "ok": ollama["ok"],
-        "message": "可用" if ollama["ok"] else f"不可用：{ollama['message']}"
-    })
-
-    return {
-        "ok": all(item["ok"] for item in checks),
-        "checks": checks
-    }
-
 @router.get("/api/wiki/categories")
 def get_wiki_categories():
     params = {

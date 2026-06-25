@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -215,18 +216,16 @@ DOMAIN_FALLBACK_GUIDES = {
 
 
 # -----------------------------
-# Voice / TTS proxy settings
+# Voice service settings
 # -----------------------------
-# v0.7.2 起，主系统不再直接耦合 Piper / MeloTTS。
-# 主系统只负责把 /api/tts/speak 请求代理到独立 voice_service。
-# 未来如果语音模块迁移到外部硬件，只需修改 LANTERNBOX_VOICE_SERVICE_URL。
 TTS_DIR = BASE_DIR / "tts"
 TTS_OUTPUT_DIR = TTS_DIR / "output"
 TTS_MAX_OUTPUT_FILES = 30
 TTS_MAX_FILE_AGE_SECONDS = 60 * 60 * 24
 
 VOICE_SERVICE_DEFAULT_URL = "http://127.0.0.1:8790"
-VOICE_SERVICE_TIMEOUT_SECONDS = 90
+VOICE_SERVICE_URL = os.getenv("LANTERNBOX_VOICE_SERVICE_URL", VOICE_SERVICE_DEFAULT_URL).rstrip("/")
+VOICE_SERVICE_TIMEOUT_SECONDS = int(os.getenv("LANTERNBOX_VOICE_TIMEOUT", "90"))
 
 TTS_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
