@@ -214,24 +214,19 @@ DOMAIN_FALLBACK_GUIDES = {
 
 
 
-# TTS constants
+# -----------------------------
+# Voice / TTS proxy settings
+# -----------------------------
+# v0.7.2 起，主系统不再直接耦合 Piper / MeloTTS。
+# 主系统只负责把 /api/tts/speak 请求代理到独立 voice_service。
+# 未来如果语音模块迁移到外部硬件，只需修改 LANTERNBOX_VOICE_SERVICE_URL。
 TTS_DIR = BASE_DIR / "tts"
-TTS_VOICES_DIR = TTS_DIR / "voices"
 TTS_OUTPUT_DIR = TTS_DIR / "output"
-PIPER_DEFAULT_VOICE = "zh_CN-huayan-medium.onnx"
-PIPER_MODEL_PATH = TTS_VOICES_DIR / PIPER_DEFAULT_VOICE
 TTS_MAX_OUTPUT_FILES = 30
 TTS_MAX_FILE_AGE_SECONDS = 60 * 60 * 24
 
-TTS_ENGINE = "melotts"
-MELOTTS_PYTHON_PATH = BASE_DIR / "tts_engines" / "melotts" / "venv" / "bin" / "python"
-MELOTTS_SCRIPT_PATH = BASE_DIR / "tts_engines" / "melotts" / "melotts_speak.py"
-MELOTTS_SPEED = 1.0
-
-DEFAULT_TTS_ENGINE_BY_MODE = {
-    "emergency": "piper",
-    "companion": "melotts",
-}
+VOICE_SERVICE_DEFAULT_URL = "http://127.0.0.1:8790"
+VOICE_SERVICE_TIMEOUT_SECONDS = 90
 
 TTS_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 

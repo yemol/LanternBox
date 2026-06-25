@@ -1,6 +1,5 @@
 import json
 import sqlite3
-import subprocess
 import uuid
 from datetime import datetime
 from typing import Any
@@ -25,17 +24,17 @@ from .config import (
     DB_PATH,
     EMERGENCY_GUIDES_FILE,
     EMERGENCY_GUIDES_PATH,
-    PIPER_MODEL_PATH,
     RESOURCE_CACHE_INFO,
     TTS_OUTPUT_DIR,
+    VOICE_SERVICE_DEFAULT_URL,
     load_runtime_settings,
     update_runtime_settings,
 )
 from .db import get_db_connection
 from .models import AiAdviceRequest, AiRuntimeSettingsUpdate, InventoryItem, JournalEntry, TtsSpeakRequest
 from .resources import load_local_resources, prepare_ai_context, serialize_related_guides
-from .tts import cleanup_tts_output, run_melotts_tts, run_piper_tts
-from .utils import get_default_model_for_mode, get_tts_engine
+from .tts import cleanup_tts_output, synthesize_tts_to_file
+from .utils import get_default_model_for_mode
 
 from .wiki import (
     get_published_wiki_articles,
@@ -594,16 +593,17 @@ def resources_status():
 
 @router.post("/api/tts/speak")
 def tts_speak(payload: TtsSpeakRequest):
-    text = payload.text.strip()
+    """
+    主系统 TTS 入口。
+
+    v0.7.2 起，Core 不再直接调用 Piper / MeloTTS，也不再按模式选择语音引擎。
+    这里仅把文本交给独立 Voice Service，并把返回音频缓存到 Core 的 /tts_output 中，
+    从而保持前端 audio_url 使用方式不变。
+    """
+    text = (payload.text or "").strip()
 
     if not text:
         raise HTTPException(status_code=400, detail="请提供需要朗读的文本。")
-
-    if not PIPER_MODEL_PATH.exists():
-        raise HTTPException(
-            status_code=500,
-            detail=f"Piper 语音模型不存在：{PIPER_MODEL_PATH}",
-        )
 
     TTS_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     cleanup_tts_output()
@@ -611,24 +611,18 @@ def tts_speak(payload: TtsSpeakRequest):
     output_filename = f"tts_{uuid.uuid4().hex}.wav"
     output_path = TTS_OUTPUT_DIR / output_filename
 
-    try:
-        selected_engine = get_tts_engine(payload.mode, payload.engine)
-
-        if selected_engine == "melotts":
-            run_melotts_tts(text, output_path)
-        else:
-            run_piper_tts(text, output_path)
-    except subprocess.CalledProcessError as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"TTS 生成语音失败：{e.stderr or e.stdout or str(e)}"
-        )
+    synthesize_tts_to_file(
+        text=text,
+        output_path=output_path,
+        mode=payload.mode or "default",
+    )
 
     return {
         "ok": True,
-        "engine": selected_engine,
+        "engine": "voice_service",
         "audio_url": f"/tts_output/{output_filename}",
         "filename": output_filename,
+        "voice_service_url": VOICE_SERVICE_DEFAULT_URL,
     }
 
 @router.get("/api/wiki/articles")
@@ -771,18 +765,19 @@ def system_check():
         "message": "可用" if ollama["ok"] else f"不可用：{ollama['message']}"
     })
 
+    voice_service = check_url(f"{VOICE_SERVICE_DEFAULT_URL}/api/voice/health")
     checks.append({
-        "id": "tts",
-        "title": "TTS 语音模型",
-        "ok": PIPER_MODEL_PATH.exists(),
-        "message": "Piper 模型文件存在" if PIPER_MODEL_PATH.exists() else f"模型文件不存在：{PIPER_MODEL_PATH}"
+        "id": "voice_service",
+        "title": "独立语音服务",
+        "ok": voice_service["ok"],
+        "message": "可用" if voice_service["ok"] else f"不可用：{voice_service['message']}"
     })
 
     checks.append({
         "id": "tts_output",
-        "title": "TTS 输出目录",
+        "title": "TTS 缓存目录",
         "ok": TTS_OUTPUT_DIR.exists(),
-        "message": f"输出目录可用：{TTS_OUTPUT_DIR}" if TTS_OUTPUT_DIR.exists() else f"输出目录不存在：{TTS_OUTPUT_DIR}"
+        "message": f"缓存目录可用：{TTS_OUTPUT_DIR}" if TTS_OUTPUT_DIR.exists() else f"缓存目录不存在：{TTS_OUTPUT_DIR}"
     })
 
     return {

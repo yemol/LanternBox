@@ -6,13 +6,12 @@ from .config import DEFAULT_MODELS
 
 
 def get_tts_engine(mode: str, engine: Optional[str] = None) -> str:
-    if engine in ["piper", "melotts"]:
-        return engine
-
-    return {
-        "emergency": "piper",
-        "companion": "melotts",
-    }.get(mode, "piper")
+    """
+    v0.7.2 起，主系统不再按模式切换 Piper / MeloTTS。
+    统一走独立 Voice Service，由 voice_service 内部管理实际语音引擎。
+    保留此函数仅用于兼容旧路由调用。
+    """
+    return "voice_service"
 
 
 def get_default_model_for_mode(mode: str) -> str:
