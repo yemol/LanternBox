@@ -89,3 +89,6 @@ wiki_import/**/*_media/
 *.mkv
 *.wav
 *.mp3
+
+# codeX docs folder 
+docs/
