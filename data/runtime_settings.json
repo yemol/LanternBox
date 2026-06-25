@@ -1,6 +1,6 @@
 {
-  "ai_rerank_enabled": false,
+  "ai_rerank_enabled": true,
   "ai_rerank_model": "qwen2.5:3b",
-  "retrieval_mode": "rule",
+  "retrieval_mode": "hybrid",
   "show_retrieval_debug": true
 }
