@@ -1139,6 +1139,42 @@
       display: none;
     }
 
+
+    /* ---------- Companion Mode Quiet UI ---------- */
+
+    body.companion-mode .companion-hide,
+    body.companion-mode #referenceArea,
+    body.companion-mode #sourceSummary,
+    body.companion-mode #retrievalDebugPanel {
+      display: none !important;
+    }
+
+    body.companion-mode .assistant-layout {
+      grid-template-columns: 1fr 0.72fr;
+    }
+
+    .companion-quiet-note {
+      margin: 14px 0 0;
+      padding: 14px 16px;
+      border: 1px solid rgba(137, 204, 255, 0.12);
+      border-radius: 18px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.035);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .companion-quiet-note.hidden {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      body.companion-mode .assistant-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
   </style>
 </head>
 
@@ -1229,19 +1265,19 @@
               <span>当前模式</span>
               <strong id="currentMode">应急模式</strong>
             </div>
-            <div class="summary-lite-card">
+            <div class="summary-lite-card companion-hide">
               <span>触发场景</span>
               <strong id="triggerCount">0</strong>
             </div>
-            <div class="summary-lite-card">
+            <div class="summary-lite-card companion-hide">
               <span>最高等级</span>
               <strong id="topSeverity">-</strong>
             </div>
-            <div class="summary-lite-card">
+            <div class="summary-lite-card companion-hide">
               <span>关联指南</span>
               <strong id="guideCount">0</strong>
             </div>
-            <div class="summary-lite-card">
+            <div class="summary-lite-card companion-hide">
               <span>来源卡片</span>
               <strong id="wikiCount">0</strong>
             </div>
@@ -1268,6 +1304,9 @@
             等待本地资料引用结果。
           </div>
 
+          <div id="companionQuietNote" class="companion-quiet-note hidden">
+            当前为陪伴模式：默认不展开应急检索、触发场景、指南来源、Wiki 来源和检索调试。若内容出现明显风险，壳中灯会提醒你切回应急处理。
+          </div>
 
           <div id="referenceArea">
             <div class="section-title">触发场景</div>
@@ -1389,6 +1428,7 @@
     const guideList = document.getElementById("guideList");
     const wikiList = document.getElementById("wikiList");
     const sourceSummary = document.getElementById("sourceSummary");
+    const companionQuietNote = document.getElementById("companionQuietNote");
     const retrievalDebugPanel = document.getElementById("retrievalDebugPanel");
     const retrievalDebugBadges = document.getElementById("retrievalDebugBadges");
     const retrievalDebugGrid = document.getElementById("retrievalDebugGrid");
@@ -1451,7 +1491,6 @@
         const data = await response.json();
         runtimeAiSettings = normalizeRuntimeSettings(data);
         updateAiRerankToggle();
-        refreshRetrievalDebugRuntimeState();
         refreshRetrievalDebugRuntimeState();
       } catch (error) {
         console.warn("读取 AI 检索设置失败，使用默认规则模式：", error);
@@ -1528,10 +1567,8 @@
           : "当前为规则召回模式：更快、更省电。点击后开启本地 AI 重排。"
       );
 
-      if (assistantHint && enabled) {
-        assistantHint.textContent = currentMode === "companion"
-          ? "陪伴模式已开启 AI 检索增强；必要时会用本地 AI 帮你重排相关来源。"
-          : "应急模式已开启 AI 检索增强；系统会先规则召回，再用本地 AI 重排候选来源。";
+      if (assistantHint && enabled && currentMode !== "companion") {
+        assistantHint.textContent = "应急模式已开启 AI 检索增强；系统会先规则召回，再用本地 AI 重排候选来源。";
       } else if (assistantHint) {
         assistantHint.textContent = (modeCopy[currentMode] || modeCopy.emergency).hint;
       }
@@ -1549,6 +1586,7 @@
 
     function switchMode(mode) {
       currentMode = mode;
+      document.body.classList.toggle("companion-mode", currentMode === "companion");
 
       document.querySelectorAll(".mode-btn").forEach(btn => {
         btn.classList.toggle("active", btn.dataset.mode === mode);
@@ -1566,12 +1604,47 @@
       userInput.placeholder = copy.placeholder;
       renderModeExamples();
       updateAiRerankToggle();
+      applyModeVisibility();
 
       if (!answerBox.dataset.hasAnswer) {
         answerBox.textContent = currentMode === "companion"
           ? "可以随便说点什么。壳中灯会先听你说完，再帮你慢慢整理。"
           : "等待输入情况。壳中灯会在这里给出建议。";
       }
+    }
+
+    function applyModeVisibility() {
+      const isCompanion = currentMode === "companion";
+
+      if (companionQuietNote) {
+        companionQuietNote.classList.toggle("hidden", !isCompanion);
+      }
+
+      if (isCompanion) {
+        clearCompanionReferenceUI();
+      }
+    }
+
+    function clearCompanionReferenceUI() {
+      latestRelatedGuides = [];
+      latestRelatedWikis = [];
+      latestRetrievalDebugData = null;
+
+      triggerCountEl.textContent = "-";
+      topSeverityEl.textContent = "-";
+      guideCountEl.textContent = "-";
+      wikiCountEl.textContent = "-";
+
+      triggerList.innerHTML = '<div class="empty-text">陪伴模式下默认不显示触发场景。</div>';
+      guideList.innerHTML = '<div class="empty-text">陪伴模式下默认不引用应急指南。</div>';
+      wikiList.innerHTML = '<div class="empty-text">陪伴模式下默认不引用 Wiki 来源。</div>';
+
+      if (sourceSummary) {
+        sourceSummary.classList.add("hidden");
+        sourceSummary.innerHTML = "陪伴模式未展开本地资料引用。";
+      }
+
+      clearRetrievalDebug();
     }
 
     function renderModeExamples() {
@@ -1615,6 +1688,11 @@
 
     setLoading(true);
 
+    if (currentMode === "companion") {
+        await askLanternBoxCompanion(message);
+        return;
+    }
+
     try {
         const metaResponse = await fetch("/api/ai/advice", {
         method: "POST",
@@ -1625,6 +1703,8 @@
             message,
             mode: currentMode,
             metadata_only: true,
+            skip_retrieval: false,
+            skip_emergency_references: false,
             history: conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES)
         })
         });
@@ -1653,6 +1733,8 @@
         body: JSON.stringify({
             message,
             mode: currentMode,
+            skip_retrieval: false,
+            skip_emergency_references: false,
             history: conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES)
         })
         });
@@ -1713,12 +1795,94 @@
     }
     }
 
+    async function askLanternBoxCompanion(message) {
+      try {
+        clearCompanionReferenceUI();
+
+        answerBox.textContent = "";
+        answerBox.classList.remove("empty");
+        answerBox.dataset.hasAnswer = "true";
+
+        const streamResponse = await fetch("/api/ai/advice/stream", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message,
+            mode: currentMode,
+            skip_retrieval: true,
+            skip_emergency_references: true,
+            history: conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES)
+          })
+        });
+
+        if (!streamResponse.ok || !streamResponse.body) {
+          throw new Error("流式接口请求失败");
+        }
+
+        const reader = streamResponse.body.getReader();
+        const decoder = new TextDecoder("utf-8");
+
+        let fullText = "";
+
+        while (true) {
+          const { value, done } = await reader.read();
+
+          if (done) break;
+
+          const chunk = decoder.decode(value, { stream: true });
+          fullText += chunk;
+          answerBox.textContent = fullText;
+          answerBox.scrollTop = answerBox.scrollHeight;
+        }
+
+        if (!fullText.trim()) {
+          answerBox.textContent = "我在。你可以慢慢说，不需要马上整理成任务。";
+        }
+
+        if (fullText.trim()) {
+          conversationHistory.push({
+            role: "user",
+            content: message
+          });
+
+          conversationHistory.push({
+            role: "assistant",
+            content: fullText.trim()
+          });
+
+          conversationHistory = conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES);
+
+          if (autoSpeakEnabled) {
+            if (audioUnlocked) {
+              await speakText(fullText.trim());
+            } else if (ttsStatus) {
+              ttsStatus.textContent = "语音播报：请先打开“自动朗读”";
+            }
+          }
+        }
+      } catch (error) {
+        console.error(error);
+        answerBox.textContent = "请求失败：请确认 FastAPI 后端正在运行，并且 /api/ai/advice/stream 可用。";
+        answerBox.classList.add("empty");
+        answerBox.dataset.hasAnswer = "";
+      } finally {
+        setLoading(false);
+      }
+    }
+
     function resetDynamicResultForNewAsk() {
       stopSpeaking(false);
 
       latestRelatedGuides = [];
       latestRelatedWikis = [];
       latestRetrievalDebugData = null;
+
+      if (currentMode === "companion") {
+        clearCompanionReferenceUI();
+        return;
+      }
 
       triggerCountEl.textContent = "0";
       topSeverityEl.textContent = "-";
@@ -1757,6 +1921,11 @@
       answerBox.textContent = data.answer || "没有返回内容。";
       answerBox.classList.remove("empty");
       answerBox.dataset.hasAnswer = "true";
+
+      if (currentMode === "companion") {
+        clearCompanionReferenceUI();
+        return;
+      }
 
       const triggers = data.matched_triggers || [];
       const rawGuides = data.related_guides || [];
@@ -1799,18 +1968,22 @@
         : "等待输入情况。壳中灯会在这里给出建议。";
       answerBox.classList.add("empty");
       answerBox.dataset.hasAnswer = "";
-      triggerList.innerHTML = '<div class="empty-text">暂无触发场景。</div>';
-      guideList.innerHTML = '<div class="empty-text">暂无应急指南来源。</div>';
-      wikiList.innerHTML = '<div class="empty-text">暂无本地 Wiki 来源。</div>';
-      if (sourceSummary) {
-        sourceSummary.classList.add("hidden");
-        sourceSummary.innerHTML = "等待本地资料引用结果。";
+      if (currentMode === "companion") {
+        clearCompanionReferenceUI();
+      } else {
+        triggerList.innerHTML = '<div class="empty-text">暂无触发场景。</div>';
+        guideList.innerHTML = '<div class="empty-text">暂无应急指南来源。</div>';
+        wikiList.innerHTML = '<div class="empty-text">暂无本地 Wiki 来源。</div>';
+        if (sourceSummary) {
+          sourceSummary.classList.add("hidden");
+          sourceSummary.innerHTML = "等待本地资料引用结果。";
+        }
+        clearRetrievalDebug();
+        triggerCountEl.textContent = "0";
+        topSeverityEl.textContent = "-";
+        guideCountEl.textContent = "0";
+        wikiCountEl.textContent = "0";
       }
-      clearRetrievalDebug();
-      triggerCountEl.textContent = "0";
-      topSeverityEl.textContent = "-";
-      guideCountEl.textContent = "0";
-      wikiCountEl.textContent = "0";
     }
 
     function getTopSeverity(triggers) {
@@ -1996,6 +2169,10 @@
 
     function renderRetrievalDebug(data, guides, wikis) {
       if (!retrievalDebugPanel) return;
+      if (currentMode === "companion") {
+        clearRetrievalDebug();
+        return;
+      }
 
       const settings = normalizeRuntimeSettings(data?.runtime_settings || runtimeAiSettings);
       const decision = data?.retrieval_decision || {};
@@ -2765,10 +2942,6 @@
 
           if (ttsStatus) {
             ttsStatus.textContent = "语音播报：播放完成";
-          }
-          if (isModalSpeaking) {
-            updateModalTtsStatus("朗读：播放完成");
-            isModalSpeaking = false;
           }
           if (isModalSpeaking) {
             updateModalTtsStatus("朗读：播放完成");

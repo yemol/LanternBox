@@ -36,8 +36,8 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
 
 DEFAULT_CASES_PATHS = [
-    SCRIPT_DIR / "ai_answer_test_cases_v070.json",
-    PROJECT_ROOT / "ai_answer_test_cases_v070.json",
+    SCRIPT_DIR / "ai_answer_test_cases_v071.json",
+    PROJECT_ROOT / "ai_answer_test_cases_v071.json",
 ]
 
 MODERN_DEPENDENCY_FORBIDDEN = [

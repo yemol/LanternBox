@@ -6,930 +6,363 @@
   <title>壳中灯 LanternBox</title>
   <link rel="stylesheet" href="/static/style.css" />
   <style>
-/* ---------- Home AI Voice Block ---------- */
+    /* ---------- Overview v0.7.2 ---------- */
 
-.ai-home-actions {
-  margin-bottom: 14px;
-}
+    .overview-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 22px;
+    }
 
-.ai-home-result {
-  margin-top: 0;
-}
+    .overview-title-card,
+    .overview-status-card,
+    .overview-ai-card,
+    .overview-shortcut-card {
+      border: 1px solid rgba(137, 204, 255, 0.16);
+      background: rgba(255, 255, 255, 0.055);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+      backdrop-filter: blur(14px);
+    }
 
-.home-ai-voice-block {
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(137, 204, 255, 0.14);
-}
+    .overview-title-card {
+      padding: 30px;
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at top left, rgba(64, 156, 255, 0.22), transparent 36%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 58, 138, 0.56));
+    }
 
-.home-ai-voice-actions {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 0;
-}
+    .overview-title-card h1 {
+      margin: 0;
+      color: var(--text-main);
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
 
-.home-ai-voice-actions .small-button {
-  min-height: 44px;
-  width: auto;
-  padding: 10px 16px;
-  border-radius: 14px;
-  font-size: 15px;
-  font-weight: 800;
-  box-shadow: none;
-}
+    .overview-title-card .subtitle {
+      max-width: 680px;
+      margin: 14px 0 0;
+      color: var(--text-soft);
+      font-size: 18px;
+      line-height: 1.75;
+    }
 
-.home-ai-voice-actions .small-button:disabled {
-  opacity: 0.58;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
+    .overview-status-card {
+      display: grid;
+      gap: 12px;
+      padding: 22px;
+      border-radius: 24px;
+    }
 
-.home-ai-tts-status {
-  margin-top: 12px;
-  padding: 8px 12px;
-  border: 1px solid rgba(137, 204, 255, 0.12);
-  border-radius: 13px;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.035);
-  font-size: 13px;
-  line-height: 1.5;
-}
+    .status-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 12px;
+      border: 1px solid rgba(137, 204, 255, 0.12);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.045);
+    }
 
-.ai-related-layout {
-  display: grid;
-  gap: 12px;
-}
+    .status-item span {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
 
-.ai-related-block {
-  min-width: 0;
-  padding: 16px;
-  border: 1px solid rgba(137, 204, 255, 0.14);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.045);
-}
+    .status-item strong {
+      color: var(--text-main);
+      font-size: 15px;
+      text-align: right;
+    }
 
-.ai-related-block > strong {
-  display: block;
-  margin-bottom: 12px;
-  color: var(--text-main);
-  font-size: 18px;
-  font-weight: 900;
-}
+    .version-pill {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      color: #dbeafe;
+      background: rgba(37, 99, 235, 0.42);
+      border: 1px solid rgba(147, 197, 253, 0.32);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+    }
 
-.ai-related-block p {
-  margin: 6px 0;
-  color: var(--text-soft);
-  font-size: 15px;
-  line-height: 1.65;
-}
+    .overview-ai-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 20px;
+      padding: 28px;
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.25), transparent 35%),
+        linear-gradient(135deg, rgba(37, 99, 235, 0.24), rgba(15, 23, 42, 0.72));
+    }
 
-.ai-related-full {
-  min-width: 0;
-}
+    .overview-ai-card h2 {
+      margin: 4px 0 10px;
+      color: var(--text-main);
+      font-size: clamp(26px, 4vw, 38px);
+      line-height: 1.15;
+    }
 
-.ai-related-bottom-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
+    .overview-ai-card p {
+      max-width: 760px;
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 16px;
+      line-height: 1.75;
+    }
 
-.ai-related-bottom-grid > div,
-.ai-related-full {
-  min-width: 0;
-}
+    .overview-ai-actions {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 12px;
+    }
 
+    .overview-ai-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+      min-height: 54px;
+      padding: 14px 24px;
+      border-radius: 18px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #2563eb, #0284c7);
+      box-shadow: 0 16px 34px rgba(37, 99, 235, 0.28);
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 900;
+      border: 1px solid rgba(191, 219, 254, 0.22);
+    }
 
-.wiki-markdown-body {
-  color: var(--text-soft);
-  font-size: 16px;
-  line-height: 1.85;
-}
+    .overview-ai-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.34);
+    }
 
-.wiki-markdown-body h2,
-.wiki-markdown-body h3,
-.wiki-markdown-body h4 {
-  margin: 18px 0 8px;
-  color: var(--accent-bright);
-  line-height: 1.45;
-}
+    .overview-shortcuts {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
 
-.wiki-markdown-body h2 {
-  font-size: 21px;
-}
+    .overview-shortcut-card {
+      display: grid;
+      gap: 8px;
+      min-height: 132px;
+      padding: 20px;
+      border-radius: 22px;
+      color: inherit;
+      text-align: left;
+      text-decoration: none;
+      cursor: pointer;
+    }
 
-.wiki-markdown-body h3 {
-  font-size: 18px;
-}
+    .overview-shortcut-card h3 {
+      margin: 0;
+      color: var(--text-main);
+      font-size: 20px;
+      line-height: 1.35;
+    }
 
-.wiki-markdown-body h4 {
-  font-size: 16px;
-}
+    .overview-shortcut-card p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 15px;
+      line-height: 1.65;
+    }
 
-.wiki-markdown-body p {
-  margin: 0 0 10px;
-}
+    .overview-shortcut-card:hover {
+      border-color: rgba(147, 197, 253, 0.42);
+      background: rgba(255, 255, 255, 0.075);
+      transform: translateY(-1px);
+    }
 
-.wiki-markdown-body ul,
-.wiki-markdown-body ol {
-  margin: 6px 0 12px;
-  padding-left: 24px;
-}
+    .overview-shortcut-card.placeholder {
+      cursor: default;
+      opacity: 0.82;
+    }
 
-.wiki-markdown-body li + li {
-  margin-top: 6px;
-}
+    .overview-shortcut-card.placeholder:hover {
+      transform: none;
+      border-color: rgba(137, 204, 255, 0.16);
+      background: rgba(255, 255, 255, 0.055);
+    }
 
-.wiki-media-list {
-  display: grid;
-  gap: 14px;
-}
+    @media (max-width: 900px) {
+      .overview-header {
+        grid-template-columns: 1fr;
+      }
 
-.wiki-media-item,
-.wiki-media-file {
-  overflow: hidden;
-  border: 1px solid rgba(137, 204, 255, 0.14);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.045);
-}
+      .overview-ai-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
 
-.wiki-media-item img,
-.wiki-media-item video {
-  display: block;
-  width: 100%;
-  max-height: 420px;
-  object-fit: contain;
-  background: rgba(0, 0, 0, 0.18);
-}
+      .overview-ai-actions,
+      .overview-ai-button {
+        width: 100%;
+      }
 
-.wiki-media-item audio {
-  width: 100%;
-  padding: 12px;
-}
+      .overview-shortcuts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
 
-.wiki-media-item figcaption,
-.wiki-media-caption {
-  display: grid;
-  gap: 4px;
-  padding: 12px 14px;
-  color: var(--text-soft);
-  font-size: 14px;
-  line-height: 1.6;
-}
+    @media (max-width: 560px) {
+      .overview-title-card,
+      .overview-status-card,
+      .overview-ai-card,
+      .overview-shortcut-card {
+        border-radius: 20px;
+      }
 
-.wiki-media-item figcaption strong,
-.wiki-media-caption strong {
-  color: var(--text-main);
-}
+      .overview-title-card,
+      .overview-ai-card {
+        padding: 22px;
+      }
 
-.wiki-media-file {
-  padding: 14px;
-}
+      .overview-shortcuts {
+        grid-template-columns: 1fr;
+      }
 
-.wiki-media-file a {
-  color: var(--accent-bright);
-  font-weight: 900;
-  text-decoration: none;
-}
+      .status-item {
+        align-items: flex-start;
+        flex-direction: column;
+      }
 
-.ai-guide-link small {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  margin-top: 7px;
-  color: var(--text-soft);
-  font-size: 16px;
-  line-height: 1.65;
-  overflow-wrap: break-word;
-  word-break: normal;
-  white-space: normal;
-}
-
-.ai-guide-link {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  text-align: left;
-  white-space: normal;
-}
-
-.ai-guide-link span {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  overflow-wrap: break-word;
-  word-break: normal;
-}
-
-@media (max-width: 760px) {
-  .ai-related-bottom-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-</style>
+      .status-item strong {
+        text-align: left;
+      }
+    }
+  </style>
 </head>
 <body>
   <main class="shell">
-    <section class="hero">
-      <p class="eyebrow">OFFLINE PERSONAL TERMINAL</p>
-      <h1>壳中灯</h1>
-      <p class="subtitle">断网之后，仍然亮着的那盏小灯。</p>
+    <section class="overview-header">
+      <div class="overview-title-card">
+        <p class="eyebrow">OFFLINE PERSONAL TERMINAL</p>
+        <h1>LanternBox / 壳中灯</h1>
+        <p class="subtitle">
+          断网之后，仍然亮着的那盏小灯。离线优先、本地知识库、本地 AI 与应急辅助的个人便携式系统。
+        </p>
+      </div>
 
-      <div class="status-card">
-        <div>
+      <div class="overview-status-card" aria-label="系统状态">
+        <div class="status-item">
           <span>系统状态</span>
           <strong id="system-status">检查中...</strong>
         </div>
-        <div>
+        <div class="status-item">
           <span>运行模式</span>
           <strong>离线优先</strong>
         </div>
-        <div>
-          <span>版本</span>
-          <strong>0.1.0</strong>
+        <div class="status-item">
+          <span>本地 AI</span>
+          <strong id="local-ai-status">集中控制</strong>
+        </div>
+        <div class="status-item">
+          <span>数据库</span>
+          <strong id="database-status">本地优先</strong>
+        </div>
+        <div class="status-item">
+          <span>当前版本</span>
+          <strong><span class="version-pill">v0.7.2 Overview Refactor</span></strong>
         </div>
       </div>
     </section>
 
-    <section class="ai-home-panel">
-      <div class="ai-home-header">
-        <div>
-          <p class="eyebrow">LOCAL AI ASSISTANT</p>
-          <div class="ai-title-row">
-            <h2>壳中灯 AI 助手</h2>
-            <span id="home-ai-mode-badge" class="ai-mode-badge">当前模式：应急</span>
-            <button class="action-chip-button" onclick="location.href='/assistant.html'" type="button">
-              进入完整助手
-            </button>
-          </div>
-          <p class="section-hint">
-            直接描述当前情况，本地 AI 会调用应急指南和触发规则，给出建议。
-          </p>
-        </div>
-        <span class="ai-status-badge">本地 AI</span>
+    <section class="overview-ai-card">
+      <div>
+        <p class="eyebrow">CORE FUNCTION</p>
+        <h2>AI 助手</h2>
+        <p>
+          应急问答、陪伴整理、知识检索、检索增强设置与来源调试都集中在 AI 助手页面。首页只保留核心入口，避免重复控制。
+        </p>
       </div>
 
-      <div class="ai-home-input-row">
-        <textarea
-          id="home-ai-input"
-          placeholder="例如：水只剩一桶了，而且今天很热。&#10;例如：有人发烧，还一直咳嗽。&#10;例如：晚上听到外面有脚步声。"
-        ></textarea>
+      <div class="overview-ai-actions">
+        <a class="overview-ai-button" href="/assistant.html">
+          进入 AI 助手
+        </a>
       </div>
-
-      <div class="ai-home-actions">
-        <button class="ai-main-button" onclick="askHomeAI()">给壳中灯提问</button>
-        <button class="ai-main-button ai-clear-button" onclick="clearHomeAI()">清空</button>
-      </div>
-
-      <div id="home-ai-result" class="ai-home-result empty">
-        等待输入情况。壳中灯会在这里给出初步建议。
-      </div>
-
-      <div id="home-ai-related" class="ai-home-related"></div>
-
-      <div class="home-ai-voice-block">
-        <div class="home-ai-voice-actions">
-          <button class="small-button" id="homeAiSpeakBtn" type="button">朗读回应</button>
-          <button class="small-button" id="homeAiStopSpeakBtn" type="button">停止播放</button>
-        </div>
-
-        <div id="homeAiTtsStatus" class="home-ai-tts-status">
-          语音播报：待命
-        </div>
-      </div>
-
-     
     </section>
 
-    <section class="grid">
-      <button onclick="location.href='/emergency'">应急指南</button>
-      <button>净水食物</button>
-      <button onclick="location.href='/inventory'">物资库存</button>
-      <button onclick="location.href='/journal'">日记记录</button>
-      <button onclick="location.href='/library.html'">离线资料库</button>
-      <button onclick="location.href='/status.html'">系统自检</button>
-    </section>
+    <section class="overview-shortcuts" aria-label="功能快捷入口">
+      <a class="overview-shortcut-card" href="/inventory">
+        <h3>物资库存</h3>
+        <p>查看库存、数量变化和物资状态，维持基础储备可见。</p>
+      </a>
 
-    <div id="guide-modal" class="guide-modal hidden">
-      <div class="guide-modal-backdrop" onclick="closeGuideModal()"></div>
+      <a class="overview-shortcut-card" href="/journal">
+        <h3>日常记录</h3>
+        <p>记录每日情况、观察事项、事件变化和后续复盘线索。</p>
+      </a>
 
-      <div class="guide-modal-card">
-        <div class="guide-modal-header">
-          <div>
-            <p id="guide-modal-id" class="guide-modal-id"></p>
-            <h2 id="guide-modal-title">指南标题</h2>
-            <p id="guide-modal-category" class="guide-modal-category"></p>
-          </div>
-          <button class="guide-modal-close" onclick="closeGuideModal()">关闭</button>
-        </div>
+      <a class="overview-shortcut-card" href="/emergency">
+        <h3>应急指南</h3>
+        <p>快速查看离线应急处置流程，优先支持无外部支援场景。</p>
+      </a>
 
-        <div id="guide-modal-body" class="guide-modal-body"></div>
+      <a class="overview-shortcut-card" href="/library.html">
+        <h3>Wiki 百科</h3>
+        <p>进入本地精选 Wiki 与离线资料库，查询工具、种植、维修和百科资料。</p>
+      </a>
+
+      <div class="overview-shortcut-card placeholder">
+        <h3>净水食物</h3>
+        <p>保留独立入口位，后续可接入净水、食物处理与饮水分配模块。</p>
       </div>
-    </div>
+
+      <a class="overview-shortcut-card" href="/status.html">
+        <h3>系统自检</h3>
+        <p>检查后端服务、数据库、模型与本地运行状态。</p>
+      </a>
+    </section>
   </main>
 
   <script>
-    // 这个部分都是AI语音TTS说需要的按钮设定
-    const homeAiSpeakBtn = document.getElementById("homeAiSpeakBtn");
-    const homeAiStopSpeakBtn = document.getElementById("homeAiStopSpeakBtn");
-    const homeAiTtsStatus = document.getElementById("homeAiTtsStatus");
-    homeAiSpeakBtn.addEventListener("click", speakHomeAiAnswer);
-    homeAiStopSpeakBtn.addEventListener("click", stopHomeAiSpeaking);
-
-
-    let homeCurrentAudio = null;
-    let homeIsGeneratingSpeech = false;
-
-    let latestHomeRelatedGuides = [];
-    let latestHomeRelatedWikis = [];
-    let latestRelatedGuides = [];
-    let latestRelatedWikis = [];
-
     fetch('/api/status')
       .then(res => res.json())
       .then(data => {
-        document.getElementById('system-status').textContent = data.message;
+        document.getElementById('system-status').textContent = data.message || '运行中';
       })
       .catch(() => {
         document.getElementById('system-status').textContent = '后端未连接';
       });
 
+    fetch('/api/settings/ai')
+      .then(res => res.json())
+      .then(data => {
+        if (!data || !data.ok || !data.settings) return;
 
-    async function askHomeAI() {
-      const input = document.getElementById('home-ai-input');
-      const result = document.getElementById('home-ai-result');
-      const related = document.getElementById('home-ai-related');
+        const settings = data.settings;
+        const localAiStatus = document.getElementById('local-ai-status');
+        const databaseStatus = document.getElementById('database-status');
 
-      const message = input.value.trim();
+        localAiStatus.textContent = settings.ai_rerank_enabled
+          ? `本地 AI 可用 · ${settings.ai_rerank_model || '默认模型'}`
+          : '本地 AI 重排关闭';
 
-      if (!message) {
-        result.textContent = '请先描述一个情况，例如：有人发烧，还一直咳嗽。';
-        result.classList.add('empty');
-        related.innerHTML = '';
-        return;
-      }
-
-      result.textContent = '壳中灯正在读取本地资源...';
-      result.classList.remove('empty');
-      related.innerHTML = '';
-
-      try {
-        // 第一步：只取结构化信息，不调用模型生成完整回答
-        const metaResponse = await fetch('/api/ai/advice', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            message,
-            mode: 'emergency',
-            metadata_only: true
-          })
-        });
-
-        if (!metaResponse.ok) {
-          const errText = await metaResponse.text();
-          throw new Error(errText || '结构化信息请求失败');
-        }
-
-        const metaData = await metaResponse.json();
-
-        const triggers = metaData.matched_triggers || [];
-        // 我们只需要显示5个关联指南，避免界面过于拥挤
-        const guides = metaData.related_guides || [];
-        const homeGuides = guides.slice(0, 5);     
-        // 我们只需要显示5个关联Wiki，避免界面过于拥挤
-        const wikis = metaData.related_wikis || [];
-        const homeWikis = wikis.slice(0, 5);
-
-        // 先显示触发场景和关联指南，还有wiki
-        related.innerHTML = `
-          <div class="ai-related-layout">
-            <div class="ai-related-block ai-related-full">
-              <strong>触发场景</strong>
-              ${
-                triggers.length
-                  ? triggers.map(item => `
-                    <p>${escapeHtml(item.title)} <span>${escapeHtml(item.severity || '')}</span></p>
-                  `).join('')
-                  : '<p>暂无明确触发场景</p>'
-              }
-            </div>
-
-            <div class="ai-related-bottom-grid">
-              <div class="ai-related-block">
-                <strong>关联指南</strong>
-                ${
-                  homeGuides.length
-                    ? homeGuides.map((item, index) => `
-                      <button class="ai-guide-link" onclick="openGuideModal(${index})">
-                        <span>${escapeHtml(item.title || '未命名指南')}</span>
-                        <small>${escapeHtml(item.category || '')}</small>
-                      </button>
-                    `).join('')
-                    : '<p>暂无关联指南</p>'
-                }
-              </div>
-
-              <div class="ai-related-block">
-                <strong>关联 Wiki</strong>
-                ${
-                  wikis.length
-                    ? wikis.map((item, index) => `
-                      <button class="ai-guide-link ai-wiki-link" onclick="openHomeWikiModal(${index})">
-                        <span>${escapeHtml(item.title || '未命名 Wiki')}</span>
-                        <small>${escapeHtml(item.summary || item.source || '本地精选 Wiki')}</small>
-                      </button>
-                    `).join('')
-                    : '<p>暂无关联 Wiki</p>'
-                }
-              </div>
-            </div>
-          </div>
-        `;
-
-        // 保存首页关联指南和wiki信息，供弹窗读取
-        latestRelatedGuides = homeGuides;
-        latestHomeRelatedGuides = homeGuides;
-        window.latestHomeRelatedGuides = homeGuides;
-
-        latestRelatedWikis = homeWikis;
-        latestHomeRelatedWikis = homeWikis;
-        window.latestHomeRelatedWikis = homeWikis;
-
-        // 第二步：调用流式接口，让回答逐步显示
-        result.textContent = '壳中灯正在回应...';
-
-        const streamResponse = await fetch('/api/ai/advice/stream', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            message,
-            mode: 'emergency'
-          })
-        });
-
-        if (!streamResponse.ok || !streamResponse.body) {
-          throw new Error('流式接口请求失败');
-        }
-
-        const reader = streamResponse.body.getReader();
-        const decoder = new TextDecoder('utf-8');
-
-        let fullText = '';
-
-        while (true) {
-          const { value, done } = await reader.read();
-
-          if (done) break;
-
-          const chunk = decoder.decode(value, { stream: true });
-          fullText += chunk;
-          result.textContent = fullText;
-
-          // 如果结果框很长，自动滚到最新内容
-          result.scrollTop = result.scrollHeight;
-        }
-
-        if (!fullText.trim()) {
-          result.textContent = metaData.answer || '没有返回内容。';
-        }
-
-      } catch (error) {
-        console.error(error);
-        result.textContent = '请求失败：请确认 FastAPI 后端正在运行，并且 /api/ai/advice 与 /api/ai/advice/stream 可用。';
-        result.classList.add('empty');
-        related.innerHTML = '';
-      }
-    }
-
-
-    function clearHomeAI() {
-      stopHomeAiSpeaking();
-      document.getElementById('home-ai-input').value = '';
-      document.getElementById('home-ai-result').textContent = '等待输入情况。壳中灯会在这里给出初步建议。';
-      document.getElementById('home-ai-result').classList.add('empty');
-      document.getElementById('home-ai-related').innerHTML = '';
-      latestRelatedGuides = [];
-      latestHomeRelatedGuides = [];
-      latestRelatedWikis = [];
-      latestHomeRelatedWikis = [];
-    }
-
-    function escapeHtml(value) {
-      return String(value)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
-    }
-
-    function openGuideModal(index) {
-      const guide = latestRelatedGuides[index];
-
-      if (!guide) return;
-
-      const modal = document.getElementById('guide-modal');
-      const modalId = document.getElementById('guide-modal-id');
-      const modalTitle = document.getElementById('guide-modal-title');
-      const modalCategory = document.getElementById('guide-modal-category');
-      const modalBody = document.getElementById('guide-modal-body');
-
-      modalId.textContent = guide.id || '';
-      modalTitle.textContent = guide.title || '未命名指南';
-      modalCategory.textContent = guide.category_original
-      ? `${guide.category} / 原分类：${guide.category_original}`
-      : (guide.category || '');
-
-      modalBody.innerHTML = `
-        ${renderGuideSection('适用场景', guide.scenario)}
-        ${renderGuideSection('目标', guide.goal)}
-        ${renderGuideList('需要工具', guide.tools)}
-        ${renderGuideList('操作步骤', guide.steps, true)}
-        ${renderGuideList('检查点', guide.check)}
-        ${renderGuideList('常见错误', guide.common_mistakes)}
-        ${renderGuideSection('备用方案', guide.fallback)}
-        ${renderGuideList('停止或升级处理', guide.stop_or_escalate)}
-        ${renderGuideSection('备注', guide.notes)}
-      `;
-      requestAnimationFrame(() => {
-        modalBody.scrollTop = 0;
+        databaseStatus.textContent = settings.retrieval_mode
+          ? `检索模式：${settings.retrieval_mode}`
+          : '本地优先';
+      })
+      .catch(() => {
+        document.getElementById('local-ai-status').textContent = 'AI 设置未读取';
+        document.getElementById('database-status').textContent = '本地优先';
       });
-
-      modal.classList.remove('hidden');
-      document.body.classList.add('modal-open');
-    }
-
-    function closeGuideModal() {
-      const modal = document.getElementById('guide-modal');
-      modal.classList.add('hidden');
-      document.body.classList.remove('modal-open');
-    }
-
-    function renderGuideSection(title, content) {
-      if (!content) return '';
-
-      return `
-        <section class="guide-modal-section">
-          <h3>${escapeHtml(title)}</h3>
-          <p>${escapeHtml(content)}</p>
-        </section>
-      `;
-    }
-
-    function renderGuideList(title, list, ordered = false) {
-      if (!Array.isArray(list) || list.length === 0) return '';
-
-      const tag = ordered ? 'ol' : 'ul';
-
-      return `
-        <section class="guide-modal-section">
-          <h3>${escapeHtml(title)}</h3>
-          <${tag}>
-            ${list.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
-          </${tag}>
-        </section>
-      `;
-    }
-
-    function renderSimpleMarkdown(text) {
-      const lines = String(text || '').split('\n');
-      let html = '';
-      let inUl = false;
-      let inOl = false;
-
-      function closeLists() {
-        if (inUl) {
-          html += '</ul>';
-          inUl = false;
-        }
-        if (inOl) {
-          html += '</ol>';
-          inOl = false;
-        }
-      }
-
-      lines.forEach(rawLine => {
-        const line = rawLine.trim();
-
-        if (!line) {
-          closeLists();
-          return;
-        }
-
-        if (line.startsWith('### ')) {
-          closeLists();
-          html += `<h4>${escapeHtml(line.slice(4))}</h4>`;
-          return;
-        }
-
-        if (line.startsWith('## ')) {
-          closeLists();
-          html += `<h3>${escapeHtml(line.slice(3))}</h3>`;
-          return;
-        }
-
-        if (line.startsWith('# ')) {
-          closeLists();
-          html += `<h2>${escapeHtml(line.slice(2))}</h2>`;
-          return;
-        }
-
-        if (line.startsWith('- ')) {
-          if (!inUl) {
-            closeLists();
-            html += '<ul>';
-            inUl = true;
-          }
-          html += `<li>${escapeHtml(line.slice(2))}</li>`;
-          return;
-        }
-
-        const orderedMatch = line.match(/^(\d+)[.、]\s*(.+)$/);
-        if (orderedMatch) {
-          if (!inOl) {
-            closeLists();
-            html += '<ol>';
-            inOl = true;
-          }
-          html += `<li>${escapeHtml(orderedMatch[2])}</li>`;
-          return;
-        }
-
-        closeLists();
-        html += `<p>${escapeHtml(line)}</p>`;
-      });
-
-      closeLists();
-      return html;
-    }
-
-    function renderWikiMedia(mediaList) {
-      if (!Array.isArray(mediaList) || !mediaList.length) {
-        return '';
-      }
-
-      const items = mediaList.map(media => {
-        const type = media.media_type || 'document';
-        const title = escapeHtml(media.title || '未命名附件');
-        const desc = escapeHtml(media.description || '');
-        const url = media.file_url || '';
-
-        if (!url) return '';
-
-        if (type === 'image' || type === 'diagram') {
-          return `
-            <figure class="wiki-media-item">
-              <img src="${escapeHtml(url)}" alt="${title}" loading="lazy" />
-              <figcaption>
-                <strong>${title}</strong>
-                ${desc ? `<span>${desc}</span>` : ''}
-              </figcaption>
-            </figure>
-          `;
-        }
-
-        if (type === 'video') {
-          return `
-            <div class="wiki-media-item">
-              <video controls preload="metadata">
-                <source src="${escapeHtml(url)}" />
-                当前浏览器不支持视频播放。
-              </video>
-              <div class="wiki-media-caption">
-                <strong>${title}</strong>
-                ${desc ? `<span>${desc}</span>` : ''}
-              </div>
-            </div>
-          `;
-        }
-
-        if (type === 'audio') {
-          return `
-            <div class="wiki-media-item">
-              <audio controls preload="metadata" src="${escapeHtml(url)}"></audio>
-              <div class="wiki-media-caption">
-                <strong>${title}</strong>
-                ${desc ? `<span>${desc}</span>` : ''}
-              </div>
-            </div>
-          `;
-        }
-
-        return `
-          <div class="wiki-media-file">
-            <a href="${escapeHtml(url)}" target="_blank" rel="noopener">
-              ${title}
-            </a>
-            ${desc ? `<p>${desc}</p>` : ''}
-          </div>
-        `;
-      }).join('');
-
-      return `
-        <section class="guide-modal-section wiki-media-section">
-          <h3>媒体与附件</h3>
-          <div class="wiki-media-list">
-            ${items}
-          </div>
-        </section>
-      `;
-    }
-
-    async function speakHomeAiAnswer() {
-      const result = document.getElementById("home-ai-result");
-      const text = result.textContent.trim();
-
-      if (!text || result.classList.contains("empty")) {
-        homeAiTtsStatus.textContent = "语音播报：还没有可朗读的内容";
-        return;
-      }
-
-      await speakHomeAiText(text);
-    }
-
-    async function speakHomeAiText(text) {
-      if (homeIsGeneratingSpeech) {
-        return;
-      }
-
-      text = String(text || "").trim();
-
-      if (!text) {
-        homeAiTtsStatus.textContent = "语音播报：没有可朗读的内容";
-        return;
-      }
-
-      // 首页建议更短，只读重点
-      const maxSpeakChars = 500;
-      if (text.length > maxSpeakChars) {
-        text = text.slice(0, maxSpeakChars) + "。";
-        homeAiTtsStatus.textContent = "语音播报：内容较长，本次只朗读前半部分";
-      } else {
-        homeAiTtsStatus.textContent = "语音播报：正在生成语音...";
-      }
-
-      homeIsGeneratingSpeech = true;
-      homeAiSpeakBtn.disabled = true;
-      homeAiSpeakBtn.textContent = "生成语音中...";
-
-      try {
-        stopHomeAiSpeaking(false);
-
-        const response = await fetch("/api/tts/speak", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            text,
-            mode: "emergency"
-          })
-        });
-
-        if (!response.ok) {
-          const errText = await response.text();
-          throw new Error(errText || "语音生成失败");
-        }
-
-        const data = await response.json();
-
-        if (!data.audio_url) {
-          throw new Error("没有返回音频地址");
-        }
-
-        homeCurrentAudio = new Audio(data.audio_url);
-        homeCurrentAudio.preload = "auto";
-
-        homeCurrentAudio.addEventListener("play", () => {
-          homeAiTtsStatus.textContent = "语音播报：正在播放";
-        });
-
-        homeCurrentAudio.addEventListener("ended", () => {
-          homeAiTtsStatus.textContent = "语音播报：播放完成";
-          homeCurrentAudio = null;
-        });
-
-        homeCurrentAudio.addEventListener("error", () => {
-          homeAiTtsStatus.textContent = "语音播报：播放失败";
-          homeCurrentAudio = null;
-        });
-
-        await homeCurrentAudio.play();
-
-      } catch (error) {
-        console.error(error);
-        homeAiTtsStatus.textContent = "语音播报：生成或播放失败";
-        alert("首页语音播报失败：" + error.message);
-      } finally {
-        homeIsGeneratingSpeech = false;
-        homeAiSpeakBtn.disabled = false;
-        homeAiSpeakBtn.textContent = "朗读回应";
-      }
-    }
-
-    function stopHomeAiSpeaking(updateStatus = true) {
-      if (homeCurrentAudio) {
-        homeCurrentAudio.pause();
-        homeCurrentAudio.currentTime = 0;
-        homeCurrentAudio = null;
-      }
-
-      if (updateStatus && homeAiTtsStatus) {
-        homeAiTtsStatus.textContent = "语音播报：已停止";
-      }
-    }
-
-    async function openHomeWikiModal(index) {
-      const wiki = latestHomeRelatedWikis[index] || latestRelatedWikis[index];
-
-      if (!wiki || !wiki.id) return;
-
-      const modal = document.getElementById('guide-modal');
-      const modalId = document.getElementById('guide-modal-id');
-      const modalTitle = document.getElementById('guide-modal-title');
-      const modalCategory = document.getElementById('guide-modal-category');
-      const modalBody = document.getElementById('guide-modal-body');
-
-      modalId.textContent = wiki.id ? `WIKI · ${wiki.id}` : 'WIKI';
-      modalTitle.textContent = wiki.title || '未命名 Wiki';
-      modalCategory.textContent = '正在读取完整 Wiki 内容...';
-      modalBody.innerHTML = `
-        <section class="guide-modal-section">
-          <h3>读取中</h3>
-          <p>正在从本地精选 Wiki 读取完整内容。</p>
-        </section>
-      `;
-
-      modal.classList.remove('hidden');
-      document.body.classList.add('modal-open');
-
-      try {
-        const response = await fetch(`/api/wiki/articles/${encodeURIComponent(wiki.id)}`);
-
-        if (!response.ok) {
-          throw new Error('Wiki 详情读取失败');
-        }
-
-        const data = await response.json();
-
-        if (!data.ok || !data.article) {
-          throw new Error(data.error || 'Wiki 文章不存在');
-        }
-
-        const article = data.article;
-        const media = Array.isArray(data.media) ? data.media : [];
-
-        const riskLevel = article.risk_level || wiki.risk_level || 'normal';
-        const source = article.source || wiki.source || '本地精选 Wiki';
-        const tags = article.tags || wiki.tags || '';
-        const content = article.content || wiki.content || '暂无正文。';
-
-        modalId.textContent = article.id ? `WIKI · ${article.id}` : 'WIKI';
-        modalTitle.textContent = article.title || wiki.title || '未命名 Wiki';
-        modalCategory.textContent = `风险等级：${riskLevel} / 来源：${source}`;
-
-        modalBody.innerHTML = `
-          ${renderGuideSection('摘要', article.summary || wiki.summary)}
-          ${renderGuideSection('标签', tags)}
-          <section class="guide-modal-section wiki-markdown-section">
-            <h3>正文</h3>
-            <div class="wiki-markdown-body">
-              ${renderSimpleMarkdown(content)}
-            </div>
-          </section>
-          ${renderWikiMedia(media)}
-        `;
-
-        requestAnimationFrame(() => {
-          modalBody.scrollTop = 0;
-        });
-
-      } catch (error) {
-        console.error(error);
-
-        modalCategory.textContent = '读取失败';
-        modalBody.innerHTML = `
-          <section class="guide-modal-section">
-            <h3>Wiki 详情读取失败</h3>
-            <p>${escapeHtml(error.message || '请确认后端和 PocketBase 正常运行。')}</p>
-          </section>
-        `;
-      }
-    }
-
-
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') {
-        closeGuideModal();
-      }
-    });
-</script>
+  </script>
 </body>
 </html>
