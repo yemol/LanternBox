@@ -1,5 +1,5 @@
 from typing import Any, Dict, List, Optional, Tuple
-
+from .safety import sanitize_ai_answer
 
 def build_fallback_answer(
     mode: str,
@@ -13,7 +13,7 @@ def build_fallback_answer(
     for trigger in matched_triggers:
         fallback_actions.extend(trigger.get("suggested_actions", []))
 
-    return "\n".join([
+    answer = "\n".join([
         "本地 AI 模型暂时没有响应。以下是根据本地触发规则生成的基础建议：",
         "",
         f"检测到：{'、'.join([t.get('title', '') + '（' + t.get('severity', '') + '）' for t in matched_triggers])}" if matched_triggers else "暂未匹配到明确触发场景。",
@@ -22,3 +22,5 @@ def build_fallback_answer(
         "",
         f"建议查看指南：{'、'.join([g.get('title', '') for g in related_guides])}" if related_guides else "",
     ])
+
+    return sanitize_ai_answer(answer, mode=mode)
