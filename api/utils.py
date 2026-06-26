@@ -2,11 +2,11 @@ import json
 from pathlib import Path
 from typing import Any
 
-from .config import DEFAULT_MODELS
+from .config import DEFAULT_MODELS, OLLAMA_MODEL
 
 
 def get_default_model_for_mode(mode: str) -> str:
-    return DEFAULT_MODELS.get(mode, "qwen2.5:3b")
+    return DEFAULT_MODELS.get(mode, OLLAMA_MODEL)
 
 
 def read_json_file(file_path: Path, fallback: Any):

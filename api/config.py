@@ -10,6 +10,31 @@ BACKUP_DIR = BASE_DIR / "backups"
 DB_PATH = DATA_DIR / "lanternbox.db"
 EMERGENCY_GUIDES_PATH = DATA_DIR / "emergency_guides.json"
 EMERGENCY_GUIDES_FILE = DATA_DIR / "emergency_guides.json"
+ENV_PATH = BASE_DIR / ".env"
+
+
+def load_env_file(path: Path = ENV_PATH) -> None:
+    if not path.exists():
+        return
+
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except Exception:
+        return
+
+    for line in lines:
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#") or "=" not in stripped:
+            continue
+
+        key, value = stripped.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key:
+            os.environ.setdefault(key, value)
+
+
+load_env_file()
 
 GUIDES_CACHE: List[Dict[str, Any]] = []
 TRIGGERS_CACHE: List[Dict[str, Any]] = []
@@ -19,9 +44,12 @@ RESOURCE_CACHE_INFO: Dict[str, Any] = {
     "loaded": False,
 }
 
+OLLAMA_BASE_URL = os.environ["OLLAMA_URL"].rstrip("/")
+OLLAMA_MODEL = os.environ["OLLAMA_MODEL"].strip()
+
 DEFAULT_MODELS = {
-    "emergency": "qwen2.5:3b",
-    "companion": "qwen3:8b",
+    "emergency": OLLAMA_MODEL,
+    "companion": OLLAMA_MODEL,
 }
 
 
@@ -33,7 +61,7 @@ RUNTIME_SETTINGS_PATH = DATA_DIR / "runtime_settings.json"
 
 DEFAULT_RUNTIME_SETTINGS: Dict[str, Any] = {
     "ai_rerank_enabled": False,
-    "ai_rerank_model": "qwen2.5:3b",
+    "ai_rerank_model": OLLAMA_MODEL,
     "retrieval_mode": "rule",
     "show_retrieval_debug": True,
 }
@@ -47,8 +75,7 @@ def _normalize_runtime_settings(raw: Dict[str, Any]) -> Dict[str, Any]:
     settings["ai_rerank_enabled"] = bool(settings.get("ai_rerank_enabled"))
     settings["show_retrieval_debug"] = bool(settings.get("show_retrieval_debug"))
 
-    model = str(settings.get("ai_rerank_model") or "").strip()
-    settings["ai_rerank_model"] = model or DEFAULT_RUNTIME_SETTINGS["ai_rerank_model"]
+    settings["ai_rerank_model"] = OLLAMA_MODEL
 
     mode = str(settings.get("retrieval_mode") or "").strip()
     if mode not in {"rule", "hybrid", "enhanced"}:

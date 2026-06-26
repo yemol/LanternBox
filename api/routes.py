@@ -24,8 +24,10 @@ from .config import (
     DB_PATH,
     EMERGENCY_GUIDES_FILE,
     EMERGENCY_GUIDES_PATH,
+    OLLAMA_BASE_URL,
     RESOURCE_CACHE_INFO,
     TTS_OUTPUT_DIR,
+    OLLAMA_MODEL,
     VOICE_SERVICE_URL,
     load_runtime_settings,
     update_runtime_settings,
@@ -91,7 +93,7 @@ def apply_ai_rerank_if_enabled(user_message, context_data, related_guides):
     """
     runtime_settings = load_runtime_settings()
     enable_ai_rerank = bool(runtime_settings.get("ai_rerank_enabled"))
-    rerank_model = runtime_settings.get("ai_rerank_model") or "qwen2.5:3b"
+    rerank_model = runtime_settings.get("ai_rerank_model") or OLLAMA_MODEL
 
     candidates = context_data.get("candidate_sources") or []
     rerank_result = rerank_candidates_with_local_ai(
@@ -416,7 +418,7 @@ def get_emergency_guides():
 def ai_advice(payload: AiAdviceRequest):
     user_message = payload.message.strip()
     mode = payload.mode or "emergency"
-    model = payload.model or get_default_model_for_mode(mode)
+    model = get_default_model_for_mode(mode)
 
     if mode not in {"emergency", "companion"}:
         mode = "emergency"
@@ -510,7 +512,7 @@ def ai_advice(payload: AiAdviceRequest):
 def ai_advice_stream(payload: AiAdviceRequest):
     user_message = payload.message.strip()
     mode = payload.mode or "emergency"
-    model = payload.model or get_default_model_for_mode(mode)
+    model = get_default_model_for_mode(mode)
 
     if mode not in {"emergency", "companion"}:
         mode = "emergency"
@@ -751,7 +753,7 @@ def system_check():
             "message": f"读取失败：{error}"
         })
 
-    ollama = check_url("http://127.0.0.1:11434/api/tags")
+    ollama = check_url(f"{OLLAMA_BASE_URL}/api/tags")
     checks.append({
         "id": "ollama",
         "title": "Ollama 本地 AI",

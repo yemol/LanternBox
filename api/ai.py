@@ -2,21 +2,21 @@ import json
 import requests
 from typing import Any, Dict, List, Optional, Tuple
 
-from .config import SCENARIO_PROFILE
+from .config import OLLAMA_BASE_URL, OLLAMA_MODEL, SCENARIO_PROFILE
 from .resources import build_local_context
 from .utils import get_default_model_for_mode
 from .wiki import build_wiki_context_for_ai
 
-
 def call_ollama(
     messages: List[Dict[str, str]],
-    model: str = "qwen2.5:3b",
+    model: Optional[str] = None,
     *,
     force_json: bool = False,
     temperature: float = 0.2,
     num_predict: int = 700,
 ) -> str:
     try:
+        model = model or OLLAMA_MODEL
         payload = {
             "model": model,
             "messages": messages,
@@ -33,7 +33,7 @@ def call_ollama(
             payload["format"] = "json"
 
         response = requests.post(
-            "http://127.0.0.1:11434/api/chat",
+            f"{OLLAMA_BASE_URL}/api/chat",
             json=payload,
             timeout=120,
         )
@@ -44,10 +44,11 @@ def call_ollama(
         raise RuntimeError(f"Ollama 调用失败：{e}")
 
 
-def stream_ollama(messages: List[Dict[str, str]], model: str = "qwen2.5:3b"):
+def stream_ollama(messages: List[Dict[str, str]], model: Optional[str] = None):
     try:
+        model = model or OLLAMA_MODEL
         response = requests.post(
-            "http://127.0.0.1:11434/api/chat",
+            f"{OLLAMA_BASE_URL}/api/chat",
             json={
                 "model": model,
                 "messages": messages,
@@ -762,12 +763,8 @@ def should_enable_ai_rerank(enable_ai_rerank: Optional[bool] = None) -> bool:
         return False
 
 
-def get_ai_rerank_model(default: str = "qwen2.5:3b") -> str:
-    try:
-        import os
-        return os.getenv(AI_RERANK_MODEL_ENV_NAME, default) or default
-    except Exception:
-        return default
+def get_ai_rerank_model() -> str:
+    return OLLAMA_MODEL
 
 
 def _safe_json_loads_from_text(text: str) -> Optional[Dict[str, Any]]:

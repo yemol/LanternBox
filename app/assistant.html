@@ -1410,7 +1410,7 @@
     let autoSpeakEnabled = false;
     let runtimeAiSettings = {
       ai_rerank_enabled: false,
-      ai_rerank_model: "qwen2.5:3b",
+      ai_rerank_model: "",
       retrieval_mode: "rule",
       show_retrieval_debug: true
     };
@@ -1503,7 +1503,7 @@
 
       return {
         ai_rerank_enabled: !!settings?.ai_rerank_enabled,
-        ai_rerank_model: settings?.ai_rerank_model || "qwen2.5:3b",
+        ai_rerank_model: settings?.ai_rerank_model || "",
         retrieval_mode: settings?.retrieval_mode || (settings?.ai_rerank_enabled ? "hybrid" : "rule"),
         show_retrieval_debug: settings?.show_retrieval_debug !== false
       };
@@ -1556,7 +1556,7 @@
 
       const enabled = !!runtimeAiSettings.ai_rerank_enabled;
       const modeText = enabled ? "检索增强：开" : "检索增强：关";
-      const modelText = runtimeAiSettings.ai_rerank_model || "qwen2.5:3b";
+      const modelText = runtimeAiSettings.ai_rerank_model || "环境变量模型";
       const retrievalMode = runtimeAiSettings.retrieval_mode || (enabled ? "hybrid" : "rule");
 
       aiRerankToggle.classList.toggle("active", enabled);
