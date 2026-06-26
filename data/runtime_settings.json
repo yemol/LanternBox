@@ -1,5 +1,0 @@
-{
-  "ai_rerank_enabled": false,
-  "retrieval_mode": "rule",
-  "show_retrieval_debug": true
-}
