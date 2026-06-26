@@ -55,10 +55,8 @@ backups/
 *.gguf
 *.wav
 
-# Local AI / Ollama models
-ollama/
-models/
-ollama_models/
+# Local AI / Ollama settings related files
+data/runtime_settings.json
 
 # Python envs
 venv/
@@ -90,5 +88,4 @@ wiki_import/**/*_media/
 *.wav
 *.mp3
 
-# codeX docs folder 
-docs/
+
