@@ -47,7 +47,7 @@ from .wiki import (
 )
 
 from .pipeline.schema import PipelineRequest
-from .pipeline.dispatcher import run_ai_pipeline
+from .pipeline.dispatcher import run_ai_pipeline, run_ai_stream_pipeline
 
 
 router = APIRouter()
@@ -562,15 +562,24 @@ def ai_advice_stream(payload: AiAdviceRequest):
     rerank_state = apply_ai_rerank_if_enabled(user_message, context_data, related_guides)
     related_guides = rerank_state["related_guides"]
 
-    messages = build_ai_messages(
-        user_message=user_message,
+    pipeline_request = PipelineRequest(
+        message=user_message,
         mode=mode,
+        history=payload.history,
         matched_triggers=context_data["matched_triggers"],
         related_guides=related_guides,
-        detected_domains=detected_domains,
-        history=payload.history,
         related_wikis=related_wikis,
+        detected_domains=detected_domains,
+        stream=True,
+        metadata={
+            "context_data": context_data,
+            "rerank_state": rerank_state,
+        },
     )
+
+    pipeline_stream = run_ai_stream_pipeline(pipeline_request)
+    messages = pipeline_stream["messages"]
+    pipeline_debug = pipeline_stream.get("debug", {})
 
     def event_generator():
         for chunk in stream_ollama(messages, model=model):

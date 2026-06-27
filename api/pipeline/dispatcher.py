@@ -2,6 +2,9 @@ from .schema import PipelineRequest, PipelineResult
 from .companion import run_companion_pipeline
 from .emergency import run_emergency_pipeline
 
+from .companion import run_companion_pipeline, run_companion_stream_pipeline
+from .emergency import run_emergency_pipeline, run_emergency_stream_pipeline
+
 
 def normalize_mode(mode: str) -> str:
     mode = (mode or "").strip().lower()
@@ -22,3 +25,12 @@ def run_ai_pipeline(request: PipelineRequest) -> PipelineResult:
         return run_companion_pipeline(request)
 
     return run_emergency_pipeline(request)
+
+
+def run_ai_stream_pipeline(request: PipelineRequest):
+    mode = normalize_mode(request.mode)
+
+    if mode == "companion":
+        return run_companion_stream_pipeline(request)
+
+    return run_emergency_stream_pipeline(request)

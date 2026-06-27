@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Any, Dict, List, Optional
+from typing import Any, Callable, Dict, Generator, List, Optional
 
 
 class PipelineRequest(BaseModel):
@@ -19,5 +19,10 @@ class PipelineRequest(BaseModel):
 class PipelineResult(BaseModel):
     mode: str
     answer: str = ""
+    messages: List[Dict[str, str]] = Field(default_factory=list)
+    debug: Dict[str, Any] = Field(default_factory=dict)
+
+class PipelineStreamResult(BaseModel):
+    mode: str
     messages: List[Dict[str, str]] = Field(default_factory=list)
     debug: Dict[str, Any] = Field(default_factory=dict)
