@@ -46,10 +46,12 @@ from .wiki import (
     pb_get,
 )
 
-from .pipeline.schema import PipelineRequest
 from .pipeline.dispatcher import run_ai_pipeline, run_ai_stream_pipeline
 from .pipeline.builder import build_pipeline_request
-
+from .pipeline.postprocess import (
+    build_ai_advice_response,
+    build_fallback_pipeline_result,
+)
 
 router = APIRouter()
 
@@ -468,7 +470,11 @@ def ai_advice(payload: AiAdviceRequest):
     pipeline_result = None
 
     if payload.metadata_only:
-        answer = ""
+        pipeline_result = build_fallback_pipeline_result(
+            mode=mode,
+            answer="",
+            reason="metadata_only",
+        )
     else:
         pipeline_request = build_pipeline_request(
             payload,
@@ -484,42 +490,26 @@ def ai_advice(payload: AiAdviceRequest):
         try:
             pipeline_result = run_ai_pipeline(pipeline_request)
             answer = sanitize_ai_answer(pipeline_result.answer, mode)
-        except Exception as e:
-            print("Pipeline 调用失败，返回本地规则建议：", e)
-            answer = sanitize_ai_answer(
-                build_fallback_answer(mode, matched_triggers, related_guides),
-                mode,
+        except Exception:
+            answer = build_fallback_answer(mode, matched_triggers, related_guides)
+
+            pipeline_result = build_fallback_pipeline_result(
+                mode=mode,
+                answer=answer,
+                reason="pipeline_error",
             )
 
 
-    return {
-        "ok": True,
-        "mode": mode,
-        "message": user_message,
-        "detected_domains": detected_domains,
-        "answer": answer,
-        "matched_triggers": [
-            {
-                "id": t.get("id"),
-                "title": t.get("title"),
-                "category": t.get("category"),
-                "severity": t.get("severity"),
-                "reminder_type": t.get("reminder_type"),
-                "matchScore": t.get("matchScore"),
-                "should_log": t.get("should_log"),
-                "should_create_task": t.get("should_create_task"),
-            }
-            for t in matched_triggers
-        ],
-        "related_guides": serialize_related_guides(related_guides),
-        "related_wikis": related_wikis,
-        "candidate_sources": context_data.get("candidate_sources", []),
-        "selected_sources": rerank_state.get("selected_sources", []),
-        "excluded_sources": rerank_state.get("excluded_sources", []),
-        "retrieval_decision": rerank_state.get("retrieval_decision", {}),
-        "pipeline": pipeline_result.debug if pipeline_result else {},
-        "runtime_settings": rerank_state.get("runtime_settings", {}),
-    }
+    return build_ai_advice_response(
+        result=pipeline_result,
+        mode=mode,
+        matched_triggers=matched_triggers,
+        related_guides=related_guides,
+        related_wikis=related_wikis,
+        detected_domains=detected_domains,
+        context_data=context_data,
+        rerank_state=rerank_state,
+    )
 
 
 @router.post("/api/ai/advice/stream")
