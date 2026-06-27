@@ -48,6 +48,7 @@ from .wiki import (
 
 from .pipeline.schema import PipelineRequest
 from .pipeline.dispatcher import run_ai_pipeline, run_ai_stream_pipeline
+from .pipeline.builder import build_pipeline_request
 
 
 router = APIRouter()
@@ -469,18 +470,15 @@ def ai_advice(payload: AiAdviceRequest):
     if payload.metadata_only:
         answer = ""
     else:
-        pipeline_request = PipelineRequest(
-            message=user_message,
-            mode=mode,
-            history=payload.history,
+        pipeline_request = build_pipeline_request(
+            payload,
+            stream=False,
             matched_triggers=matched_triggers,
             related_guides=related_guides,
             related_wikis=related_wikis,
             detected_domains=detected_domains,
-            metadata={
-                "context_data": context_data,
-                "rerank_state": rerank_state,
-            },
+            context_data=context_data,
+            rerank_state=rerank_state,
         )
 
         try:
@@ -562,19 +560,15 @@ def ai_advice_stream(payload: AiAdviceRequest):
     rerank_state = apply_ai_rerank_if_enabled(user_message, context_data, related_guides)
     related_guides = rerank_state["related_guides"]
 
-    pipeline_request = PipelineRequest(
-        message=user_message,
-        mode=mode,
-        history=payload.history,
+    pipeline_request = build_pipeline_request(
+        payload,
+        stream=True,
         matched_triggers=context_data["matched_triggers"],
         related_guides=related_guides,
         related_wikis=related_wikis,
         detected_domains=detected_domains,
-        stream=True,
-        metadata={
-            "context_data": context_data,
-            "rerank_state": rerank_state,
-        },
+        context_data=context_data,
+        rerank_state=rerank_state,
     )
 
     pipeline_stream = run_ai_stream_pipeline(pipeline_request)
