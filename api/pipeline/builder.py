@@ -1,6 +1,7 @@
 from typing import Any, Dict, List, Optional
 
 from .schema import PipelineRequest
+from .preload import prepare_pipeline_inputs
 
 
 
@@ -53,20 +54,28 @@ def build_pipeline_request(
     context_data: Optional[Dict[str, Any]] = None,
     rerank_state: Optional[Dict[str, Any]] = None,
 ) -> PipelineRequest:
-    user_message = str(getattr(payload, "message", "") or "").strip()
-    mode = str(getattr(payload, "mode", "emergency") or "emergency").strip()
+    prepared = prepare_pipeline_inputs(
+        user_message=getattr(payload, "message", ""),
+        mode=getattr(payload, "mode", "emergency"),
+        matched_triggers=matched_triggers,
+        related_guides=related_guides,
+        related_wikis=related_wikis,
+        detected_domains=detected_domains,
+        context_data=context_data,
+        rerank_state=rerank_state,
+    )
 
     return PipelineRequest(
-        message=user_message,
-        mode=mode,
+        message=prepared["message"],
+        mode=prepared["mode"],
         history=normalize_history_for_pipeline(getattr(payload, "history", [])),
-        matched_triggers=matched_triggers or [],
-        related_guides=related_guides or [],
-        related_wikis=related_wikis or [],
-        detected_domains=detected_domains or [],
+        matched_triggers=prepared["matched_triggers"],
+        related_guides=prepared["related_guides"],
+        related_wikis=prepared["related_wikis"],
+        detected_domains=prepared["detected_domains"],
         stream=stream,
         metadata={
-            "context_data": context_data or {},
-            "rerank_state": rerank_state or {},
+            "context_data": prepared["context_data"],
+            "rerank_state": prepared["rerank_state"],
         },
     )
