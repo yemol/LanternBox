@@ -46,6 +46,10 @@ from .wiki import (
     pb_get,
 )
 
+from .pipeline.schema import PipelineRequest
+from .pipeline.dispatcher import run_ai_pipeline
+
+
 router = APIRouter()
 
 
@@ -459,25 +463,36 @@ def ai_advice(payload: AiAdviceRequest):
 
     # print("AI ADVICE DEBUG filtered guides:", [g.get("title") for g in related_guides])
 
+
+    pipeline_result = None
+
     if payload.metadata_only:
         answer = ""
     else:
-        messages = build_ai_messages(
-            user_message=user_message,
+        pipeline_request = PipelineRequest(
+            message=user_message,
             mode=mode,
+            history=payload.history,
             matched_triggers=matched_triggers,
             related_guides=related_guides,
-            detected_domains=detected_domains,
-            history=payload.history,
             related_wikis=related_wikis,
+            detected_domains=detected_domains,
+            metadata={
+                "context_data": context_data,
+                "rerank_state": rerank_state,
+            },
         )
 
         try:
-            answer = call_ollama(messages=messages, model=model)
-            answer = sanitize_ai_answer(answer, mode)
+            pipeline_result = run_ai_pipeline(pipeline_request)
+            answer = sanitize_ai_answer(pipeline_result.answer, mode)
         except Exception as e:
-            print("Ollama 调用失败，返回本地规则建议：", e)
-            answer = sanitize_ai_answer(build_fallback_answer(mode, matched_triggers, related_guides), mode)
+            print("Pipeline 调用失败，返回本地规则建议：", e)
+            answer = sanitize_ai_answer(
+                build_fallback_answer(mode, matched_triggers, related_guides),
+                mode,
+            )
+
 
     return {
         "ok": True,
@@ -504,6 +519,7 @@ def ai_advice(payload: AiAdviceRequest):
         "selected_sources": rerank_state.get("selected_sources", []),
         "excluded_sources": rerank_state.get("excluded_sources", []),
         "retrieval_decision": rerank_state.get("retrieval_decision", {}),
+        "pipeline": pipeline_result.debug if pipeline_result else {},
         "runtime_settings": rerank_state.get("runtime_settings", {}),
     }
 
