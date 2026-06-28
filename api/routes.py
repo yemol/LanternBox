@@ -36,7 +36,7 @@ from .config import (
 
 from .db import get_db_connection
 from .models import AiAdviceRequest, AiRuntimeSettingsUpdate, InventoryItem, JournalEntry, TtsSpeakRequest
-from .resources import load_local_resources, prepare_ai_context, serialize_related_guides
+from .resources import load_local_resources, prepare_ai_context
 from .tts import cleanup_tts_output, synthesize_tts_to_file
 from .utils import get_default_model_for_mode
 
