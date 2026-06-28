@@ -71,14 +71,13 @@ api/services/guide_service.py
 ```text
 match_triggers
 find_related_guides
-serialize_related_guides
 guide_core_text
 guide_full_text
 guide_domains
 guide_compatible_with_domains
 ```
 
-Guide Service 不负责指南排序和候选池决策。
+Guide Service 已接管触发规则匹配、关联指南查找、指南文本规范化、领域兼容判断与基础指南结构处理。
 
 指南检索与打分属于：
 

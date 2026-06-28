@@ -1223,17 +1223,6 @@ def _score_intent(text: str, rule: Dict[str, Any]) -> int:
             score += 2
     return score
 
-def _text_term_score(text: Any, terms: List[str], weight: int = 1) -> int:
-    normalized = safe_text(text)
-    score = 0
-
-    for term in terms or []:
-        term = str(term or "").lower().strip()
-        if len(term) >= 2 and term in normalized:
-            score += weight
-
-    return score
-
 
 def _list_overlap_score(left: Any, right: Any, weight: int = 1) -> int:
     left_items = set(unique_list(left if isinstance(left, list) else [left]))
@@ -1277,14 +1266,6 @@ def analyze_query(user_message: str) -> Dict[str, Any]:
         "objects": _match_concepts(text, OBJECT_WORDS),
         "intent_rules": matched[:6],
     }
-
-
-def detect_domains(text: str) -> List[str]:
-    return analyze_query(text).get("domains", [])
-
-
-def build_guide_search_text(guide: Dict[str, Any]) -> str:
-    return guide_core_text(guide)
 
 
 def score_guide_for_message(
@@ -1373,16 +1354,4 @@ def find_domain_fallback_guides(domains: List[str], guides: List[Dict[str, Any]]
             seen.add(guide_id)
     return result
 
-
-def find_guides_by_domain_keywords(domains: List[str], guides: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    if not domains:
-        return []
-    result = []
-    for guide in guides:
-        if guide_compatible_with_domains(guide, domains):
-            item = dict(guide)
-            item["_domain_score"] = len(set(guide_domains(guide)) & set(domains))
-            result.append(item)
-    result.sort(key=lambda item: item.get("_domain_score", 0), reverse=True)
-    return result
 

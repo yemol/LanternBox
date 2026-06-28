@@ -185,29 +185,3 @@ Context Engine 对当前输入的结构化观察：
         {"role": "user", "content": user_prompt},
     ]
 
-def build_ai_messages(
-    user_message: str,
-    mode: str,
-    matched_triggers: List[Dict[str, Any]],
-    related_guides: List[Dict[str, Any]],
-    detected_domains: List[str],
-    history: Optional[List[Any]] = None,
-    related_wikis: Optional[List[Dict[str, Any]]] = None,
-) -> List[Dict[str, str]]:
-    safe_history = build_safe_history(history)
-
-    if mode == "companion":
-        return build_companion_messages(
-            user_message=user_message,
-            safe_history=safe_history,
-        )
-
-    return build_emergency_messages(
-        user_message=user_message,
-        matched_triggers=matched_triggers,
-        related_guides=related_guides,
-        detected_domains=detected_domains,
-        safe_history=safe_history,
-        related_wikis=related_wikis,
-    )
-

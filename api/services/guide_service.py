@@ -6,34 +6,6 @@ from ..utils import get_severity_weight, get_severity_weight, unique_list, safe_
 
 # 指南基础能力：触发规则、指南关联、指南文本、领域兼容
 
-def find_guides_for_triggers(
-    *,
-    triggers: List[Dict[str, Any]],
-    guide_items: List[Dict[str, Any]] | None = None,
-) -> List[Dict[str, Any]]:
-    """根据触发规则查找关联指南。
-
-    当前阶段仍然使用传入的 guide_items。
-    后续再接入正式数据源。
-    """
-    if not triggers or not guide_items:
-        return []
-
-    guide_ids = set()
-
-    for trigger in triggers:
-        for guide_id in trigger.get("guide_ids", []) or []:
-            guide_ids.add(str(guide_id))
-
-    if not guide_ids:
-        return []
-
-    return [
-        guide
-        for guide in guide_items
-        if str(guide.get("id", "")) in guide_ids
-    ]
-
 def match_triggers(input_text: str, triggers: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     text = (input_text or "").strip()
     if not text:
@@ -89,28 +61,6 @@ def find_related_guides(
             result.append(guide)
 
     return result
-
-def serialize_related_guides(related_guides: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    return [
-        {
-            "id": g.get("id"),
-            "title": g.get("title"),
-            "category": g.get("category"),
-            "category_original": g.get("category_original"),
-            "scenario": g.get("scenario"),
-            "goal": g.get("goal"),
-            "tools": g.get("tools", []),
-            "steps": g.get("steps", []),
-            "check": g.get("check", []),
-            "common_mistakes": g.get("common_mistakes", []),
-            "fallback": g.get("fallback"),
-            "stop_or_escalate": g.get("stop_or_escalate", []),
-            "notes": g.get("notes"),
-            "_ai_rerank_reason": g.get("_ai_rerank_reason"),
-            "_ai_rerank_mode": g.get("_ai_rerank_mode"),
-        }
-        for g in related_guides
-    ]
 
 def guide_core_text(guide: Dict[str, Any]) -> str:
     # 核心文本不包含 negative_keywords，避免负词反向污染正向召回。

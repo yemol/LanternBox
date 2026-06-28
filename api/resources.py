@@ -11,17 +11,14 @@ from .utils import read_json_file, safe_text, contains_any, unique_list
 
 from .services.guide_service import (
     match_triggers,
-    find_related_guides,
-    guide_domains,
+    find_related_guides
 )
 
 from .retrieval.guide import (
     analyze_query,
-    detect_domains,
     score_guide_for_message,
     find_guides_by_message_and_domains,
     find_domain_fallback_guides,
-    find_guides_by_domain_keywords,
     build_match_reason,
 )
 

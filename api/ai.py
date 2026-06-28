@@ -16,7 +16,6 @@
 from .llm.client import call_ollama, stream_ollama
 
 from .response.prompts import (
-    build_ai_messages,
     build_safe_history,
     build_companion_messages,
     build_emergency_messages,
@@ -26,7 +25,3 @@ from .response.fallback import build_fallback_answer
 
 from .retrieval.references import filter_and_rank_ai_references
 from .retrieval.reranker import rerank_candidates_with_local_ai
-from .retrieval.apply import (
-    apply_rerank_result_to_context,
-    build_selected_sources_text,
-)
