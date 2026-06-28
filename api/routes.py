@@ -9,6 +9,8 @@ import urllib.error
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse, StreamingResponse
 
+from .services.wiki_service import filter_related_wikis_for_query
+
 from .ai import (
     build_ai_messages,
     build_fallback_answer,
@@ -41,10 +43,14 @@ from .utils import get_default_model_for_mode
 from .wiki import (
     get_published_wiki_articles,
     get_wiki_article_detail,
-    search_wiki_articles,
-    search_wiki_for_ai,
     pb_get,
 )
+
+from .services.wiki_service import (
+    search_wiki_articles,
+    search_wiki_for_ai
+)
+
 
 from .pipeline.dispatcher import run_ai_pipeline, run_ai_stream_pipeline
 from .pipeline.builder import build_pipeline_request
@@ -55,41 +61,6 @@ from .pipeline.postprocess import (
 
 router = APIRouter()
 
-
-def filter_related_wikis_for_query(related_wikis, query_profile):
-    """v0.7：按 query intent 轻量过滤 Wiki 噪声。
-    这里只做标题级别收敛，不影响指南召回。
-    """
-    if not related_wikis:
-        return related_wikis
-
-    intents = set(query_profile.get("intents", []) if query_profile else [])
-
-    def title_of(item):
-        return str(item.get("title", ""))
-
-    if "medical_dehydration_diarrhea" in intents:
-        bad = ["停水后的用水优先级", "简易过滤", "煮沸饮水", "水质异常", "储水容器"]
-        return [
-            item for item in related_wikis
-            if not any(word in title_of(item) for word in bad)
-        ]
-
-    if "power_water_electrical_safety" in intents:
-        bad = ["冰箱食物", "食物变质", "干粮", "罐头", "雨水收集", "饮用水"]
-        return [
-            item for item in related_wikis
-            if not any(word in title_of(item) for word in bad)
-        ]
-
-    if "shelter_damp_mold" in intents:
-        bad = ["洪水", "撤离", "撤高", "干粮", "罐头"]
-        return [
-            item for item in related_wikis
-            if not any(word in title_of(item) for word in bad)
-        ]
-
-    return related_wikis
 
 
 def apply_ai_rerank_if_enabled(user_message, context_data, related_guides):
