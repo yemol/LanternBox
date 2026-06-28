@@ -178,7 +178,11 @@ QUERY_INTENT_RULES = [
         "priority": 96
     },
     {
-        "intent": "food_safety_judgment",
+        "intents": [
+            "food_shortage",
+            "food_rationing",
+            "resource_management"
+        ],
         "domains": [
             "food",
             "power"
@@ -1236,9 +1240,16 @@ def _list_overlap_score(left: Any, right: Any, weight: int = 1) -> int:
     return len(left_items & right_items) * weight
 
 
-def analyze_query(user_message: str) -> Dict[str, Any]:
+def analyze_query(
+    user_message: str,
+    analysis_context=None,
+) -> Dict[str, Any]:
     text = safe_text(user_message)
     matched = []
+    analysis_intents = []
+
+    if analysis_context:
+        analysis_intents = list(getattr(analysis_context, "intents", []))
 
     for rule in QUERY_INTENT_RULES:
         score = _score_intent(text, rule)
@@ -1261,32 +1272,79 @@ def analyze_query(user_message: str) -> Dict[str, Any]:
                     domain_scores[domain] = domain_scores.get(domain, 0) + 1
         domains.extend([d for d, _s in sorted(domain_scores.items(), key=lambda pair: pair[1], reverse=True)])
 
+    query_intents = unique_list(
+        analysis_intents +
+        [item.get("intent") for item in matched[:6]]
+    )    
+
     return {
         "domains": unique_list(domains)[:5],
-        "intents": [item.get("intent") for item in matched[:6]],
+        "intents": query_intents,
         "situations": _match_concepts(text, SITUATION_WORDS),
         "objects": _match_concepts(text, OBJECT_WORDS),
         "intent_rules": matched[:6],
     }
 
+def build_query_profile_from_strategy(
+    strategy: Dict[str, Any],
+    context=None,
+) -> Dict[str, Any]:
+
+    guide_filters = strategy.get("guide_filters", {})
+
+    return {
+        "domains": guide_filters.get("domains", []),
+        "intents": guide_filters.get("tasks", []),
+        "situations": guide_filters.get("situations", []),
+        "objects": guide_filters.get("objects", []),
+        "signals": strategy.get("signals", []),
+        "risks": strategy.get("risks", []),
+        "retrieval_plan": strategy.get("retrieval_plan", []),
+        "analysis": context,
+        "intent_rules": [],
+    }
 
 def score_guide_for_message(
     guide: Dict[str, Any],
     message: str,
     detected_domains: List[str],
-    query_profile: Dict[str, Any] = None,
+    strategy: Dict[str, Any],
 ) -> int:
-    query_profile = query_profile or analyze_query(message)
+    query_profile = build_query_profile_from_strategy(strategy)
     query_domains = query_profile.get("domains", detected_domains)
 
     if query_domains and not guide_compatible_with_domains(guide, query_domains):
         return -100
 
-    score = 0
-    score += _title_priority_score(guide, query_profile)
-    score += _list_overlap_score(query_profile.get("intents", []), guide.get("intents"), 34)
-    score += _list_overlap_score(query_profile.get("situations", []), guide.get("situations"), 18)
-    score += _list_overlap_score(query_profile.get("objects", []), guide.get("objects"), 14)
+    title_score = _title_priority_score(guide, query_profile)
+
+    intent_score = _list_overlap_score(
+        query_profile.get("intents", []),
+        guide.get("intents"),
+        34,
+    )
+
+    situation_score = _list_overlap_score(
+        query_profile.get("situations", []),
+        guide.get("situations"),
+        18,
+    )
+
+    object_score = _list_overlap_score(
+        query_profile.get("objects", []),
+        guide.get("objects"),
+        14,
+    )
+
+    term_score = _term_score(message, guide)
+
+    score = (
+        title_score
+        + intent_score
+        + situation_score
+        + object_score
+        + term_score
+    )
 
     guide_domain_set = set(guide_domains(guide))
     for index, domain in enumerate(query_domains):
@@ -1295,9 +1353,6 @@ def score_guide_for_message(
         elif guide_compatible_with_domains(guide, [domain]):
             score += 2
 
-    score += _term_score(message, guide)
-
-    # 强意图下，必须达到足够分数；这会清掉“同领域但题不对”的杂项。
     if query_profile.get("intents") and score < 22:
         return -100
 
@@ -1323,24 +1378,40 @@ def build_match_reason(guide: Dict[str, Any], query_profile: Dict[str, Any]) -> 
 
 def find_guides_by_message_and_domains(
     message: str,
-    detected_domains: List[str],
+    strategy: Dict[str, Any],
     guides: List[Dict[str, Any]],
     min_score: int = 8,
-    query_profile: Dict[str, Any] = None,
 ) -> List[Dict[str, Any]]:
-    query_profile = query_profile or analyze_query(message)
-    effective_min_score = max(min_score, 22 if query_profile.get("intents") else 8)
+    query_profile = build_query_profile_from_strategy(strategy)
+    detected_domains = query_profile["domains"]
+
+    effective_min_score = max(
+        min_score,
+        22 if query_profile.get("intents") else 8,
+    )
+
     scored = []
+
     for guide in guides:
-        score = score_guide_for_message(guide, message, detected_domains, query_profile=query_profile)
+        score = score_guide_for_message(
+            guide,
+            message,
+            detected_domains,
+            strategy=strategy,
+        )
+
         if score >= effective_min_score:
             item = dict(guide)
             item["_match_score"] = score
             item["_match_reason"] = build_match_reason(item, query_profile)
             scored.append(item)
-    scored.sort(key=lambda item: item.get("_match_score", 0), reverse=True)
-    return scored
 
+    scored.sort(
+        key=lambda item: item.get("_match_score", 0),
+        reverse=True,
+    )
+
+    return scored
 
 def find_domain_fallback_guides(domains: List[str], guides: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     if not domains:

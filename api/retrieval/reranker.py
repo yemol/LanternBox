@@ -21,6 +21,8 @@ from .context_boost import (
     apply_lantern_context_boost_to_candidates,
 )
 
+from .guide import build_query_profile_from_strategy
+
 from ..llm.client import call_ollama
 
 
@@ -288,23 +290,31 @@ def rule_rerank_candidates(candidates: List[Dict[str, Any]], *, max_selected: in
         "used_ai": False,
     }
 
-
 def rerank_candidates_with_local_ai(
     user_message: str,
     candidates: List[Dict[str, Any]],
     *,
-    query_profile: Optional[Dict[str, Any]] = None,
+    strategy: Optional[Dict[str, Any]] = None,
     model: Optional[str] = None,
     enable_ai_rerank: Optional[bool] = None,
     max_selected: int = AI_RERANK_MAX_SELECTED,
 ) -> Dict[str, Any]:
     """AI 重排入口。
 
-    默认读取环境变量 LANTERNBOX_AI_RERANK；未开启时使用纯规则回退。
-    开启后：规则候选池 → 本地 AI JSON 重排 → 代码校验 → 失败回退规则排序。
+    Retrieval v2:
+        Context -> Strategy -> AI Reranker
+
+    query_profile 不再由外部传入，而是在 Reranker 内部由 Strategy
+    转换得到，作为兼容层存在。
     """
+
     lantern_context = build_lantern_context_for_retrieval(user_message)
-    query_profile = merge_lantern_context_into_query_profile(query_profile, lantern_context)
+
+    query_profile = build_query_profile_from_strategy(strategy or {})
+    query_profile = merge_lantern_context_into_query_profile(
+        query_profile,
+        lantern_context,
+    )
 
     if not candidates:
         result = rule_rerank_candidates([], max_selected=max_selected)
@@ -313,10 +323,16 @@ def rerank_candidates_with_local_ai(
         result["lantern_context"] = lantern_context
         return result
 
-    candidates = apply_lantern_context_boost_to_candidates(candidates, lantern_context)
+    candidates = apply_lantern_context_boost_to_candidates(
+        candidates,
+        lantern_context,
+    )
 
     if not should_enable_ai_rerank(enable_ai_rerank):
-        result = rule_rerank_candidates(candidates, max_selected=max_selected)
+        result = rule_rerank_candidates(
+            candidates,
+            max_selected=max_selected,
+        )
         result["mode"] = "rule_only_ai_rerank_disabled"
         result["fallback_reason"] = "AI 检索增强未开启，使用规则排序。"
         result["lantern_context"] = lantern_context
@@ -325,7 +341,12 @@ def rerank_candidates_with_local_ai(
     model = model or get_ai_rerank_model()
 
     try:
-        messages = build_ai_rerank_messages(user_message, candidates, query_profile=query_profile)
+        messages = build_ai_rerank_messages(
+            user_message,
+            candidates,
+            query_profile=query_profile,
+        )
+
         raw = call_ollama(
             messages,
             model=model,
@@ -333,10 +354,10 @@ def rerank_candidates_with_local_ai(
             temperature=0.0,
             num_predict=900,
         )
+
         parsed = _safe_json_loads_from_text(raw)
+
         if not parsed:
-            # 少数本地模型即使 format=json 也可能吐出残缺 JSON。
-            # 此处只做一次低成本修复请求：把原始输出整理成指定 JSON，不让它重新判断来源。
             repair_messages = [
                 {
                     "role": "system",
@@ -345,12 +366,15 @@ def rerank_candidates_with_local_ai(
                 {
                     "role": "user",
                     "content": (
-                        "把下面内容修复为合法 JSON object。字段尽量保留："
-                        "intent_summary, selected_candidate_ids, selected, excluded, answer_focus。\n\n"
+                        "把下面内容修复为合法 JSON object。"
+                        "字段尽量保留："
+                        "intent_summary, selected_candidate_ids, "
+                        "selected, excluded, answer_focus。\n\n"
                         f"原始内容：\n{str(raw or '')[:1600]}"
                     ),
                 },
             ]
+
             try:
                 repaired_raw = call_ollama(
                     repair_messages,
@@ -359,37 +383,75 @@ def rerank_candidates_with_local_ai(
                     temperature=0.0,
                     num_predict=700,
                 )
+
                 parsed = _safe_json_loads_from_text(repaired_raw)
+
                 if parsed:
                     raw = repaired_raw
+
             except Exception:
                 parsed = None
 
         if not parsed:
-            fallback = rule_rerank_candidates(candidates, max_selected=max_selected)
+            fallback = rule_rerank_candidates(
+                candidates,
+                max_selected=max_selected,
+            )
+
             fallback["mode"] = "rule_fallback_json_parse_failed"
-            fallback["fallback_reason"] = "本地 AI 已返回内容，但不是可解析的 JSON，已回退到规则排序。"
+            fallback["fallback_reason"] = (
+                "本地 AI 已返回内容，但不是可解析的 JSON，"
+                "已回退到规则排序。"
+            )
             fallback["raw_ai_output"] = str(raw or "")[:500]
             fallback["lantern_context"] = lantern_context
             return fallback
 
-        validated = validate_ai_rerank_result(parsed, candidates, max_selected=max_selected)
+        validated = validate_ai_rerank_result(
+            parsed,
+            candidates,
+            max_selected=max_selected,
+        )
+
         if not validated.get("valid"):
-            fallback = rule_rerank_candidates(candidates, max_selected=max_selected)
+            fallback = rule_rerank_candidates(
+                candidates,
+                max_selected=max_selected,
+            )
+
             fallback["mode"] = "rule_fallback_no_valid_ai_selection"
+
             rejected = validated.get("rejected_candidate_ids") or []
-            fallback["fallback_reason"] = "本地 AI 没有选出合法来源，或选择了不存在/被硬排除的 candidate_id，已回退到规则排序。"
+
+            fallback["fallback_reason"] = (
+                "本地 AI 没有选出合法来源，"
+                "或选择了不存在/被硬排除的 candidate_id，"
+                "已回退到规则排序。"
+            )
+
             if rejected:
-                fallback["fallback_reason"] += f" 被拒绝的候选：{', '.join(map(str, rejected[:6]))}"
+                fallback["fallback_reason"] += (
+                    f" 被拒绝的候选：{', '.join(map(str, rejected[:6]))}"
+                )
+
             fallback["ai_validation"] = validated
             fallback["lantern_context"] = lantern_context
             return fallback
+
         validated["lantern_context"] = lantern_context
         return validated
+
     except Exception as exc:
-        fallback = rule_rerank_candidates(candidates, max_selected=max_selected)
+        fallback = rule_rerank_candidates(
+            candidates,
+            max_selected=max_selected,
+        )
+
         fallback["mode"] = "rule_fallback_ai_error"
         fallback["error"] = str(exc)[:300]
-        fallback["fallback_reason"] = f"本地 AI 重排调用失败，已回退到规则排序：{str(exc)[:240]}"
+        fallback["fallback_reason"] = (
+            f"本地 AI 重排调用失败，"
+            f"已回退到规则排序：{str(exc)[:240]}"
+        )
         fallback["lantern_context"] = lantern_context
         return fallback

@@ -8,6 +8,8 @@ from ..services.guide_service import (
     guide_domains,
 )
 
+from .guide import build_query_profile_from_strategy
+
 HYBRID_RAG_VERSION = "v0.6"
 SOURCE_PRIORITY = {
     "guide": 100,
@@ -210,7 +212,7 @@ def retrieve_kiwix_candidates(user_message: str, query_profile: Dict[str, Any], 
 def build_candidate_pool(
     *,
     user_message: str,
-    query_profile: Dict[str, Any],
+    strategy: Dict[str, Any] | None = None,
     guide_candidates: List[Dict[str, Any]],
     wiki_candidates: List[Dict[str, Any]] = None,
     inventory_candidates: List[Dict[str, Any]] = None,
@@ -218,6 +220,8 @@ def build_candidate_pool(
     include_kiwix: bool = False,
 ) -> List[Dict[str, Any]]:
     pool: List[Dict[str, Any]] = []
+
+    query_profile = build_query_profile_from_strategy(strategy or {})
 
     for index, guide in enumerate(guide_candidates or []):
         pool.append(build_candidate_source(
@@ -261,13 +265,16 @@ def build_candidate_pool(
 def build_retrieval_decision(
     *,
     user_message: str,
-    query_profile: Dict[str, Any],
+    strategy: Dict[str, Any],
     candidates: List[Dict[str, Any]],
     selected: List[Dict[str, Any]],
     excluded: List[Dict[str, Any]],
     mode: str = "rule",
 ) -> Dict[str, Any]:
     focus = []
+
+    query_profile = build_query_profile_from_strategy(strategy)
+
     if query_profile.get("intents"):
         focus.extend(query_profile.get("intents", [])[:3])
     if query_profile.get("objects"):

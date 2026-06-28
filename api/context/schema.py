@@ -22,3 +22,5 @@ class LanternContext(BaseModel):
 
     confidence: Dict[str, float] = Field(default_factory=dict)
     metadata: Dict[str, Any] = Field(default_factory=dict)
+
+    intents: List[str] = Field(default_factory=list)

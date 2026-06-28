@@ -22,6 +22,7 @@ from .retrieval.guide import (
     find_guides_by_message_and_domains,
     find_domain_fallback_guides,
     build_match_reason,
+    build_query_profile_from_strategy,
 )
 
 from .retrieval.runtime import (
@@ -33,7 +34,10 @@ from .retrieval.runtime import (
     get_candidate_raw_item,
     HYBRID_RAG_VERSION,
 )
+from .retrieval.strategy import build_retrieval_strategy
+from .retrieval.candidates import build_guide_candidates
 
+from .context.engine import analyze_context
 
 
 def load_local_resources() -> None:
@@ -52,24 +56,6 @@ def load_local_resources() -> None:
         "guides_path": str(guides_path),
         "triggers_path": str(triggers_path),
     })
-
-    
-
-def merge_guides(*guide_lists: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    result = []
-    seen_ids = set()
-
-    for guide_list in guide_lists:
-        for guide in guide_list:
-            guide_id = guide.get("id") or guide.get("title")
-
-            if not guide_id or guide_id in seen_ids:
-                continue
-
-            seen_ids.add(guide_id)
-            result.append(guide)
-
-    return result
 
 
 def build_local_context(
@@ -243,8 +229,6 @@ DOMAIN_KEYWORDS = {
 }
 
 
-
-
 SOURCE_PRIORITY = {
     "guide": 100,
     "wiki": 80,
@@ -265,11 +249,15 @@ SOURCE_TYPE_LABELS = {
 
 
 def prepare_ai_context(user_message: str, mode: str) -> Dict[str, Any]:
-    """v0.6 Hybrid RAG 版上下文准备。
+    context = analyze_context(user_message)
+    strategy = build_retrieval_strategy(context)
+    analysis_domains = context.domains
+    analysis_signals = context.signals
+    analysis_intents = context.intents
+    analysis_risks = context.risks
+    analysis_plan = context.retrieval_plan
 
-    兼容旧字段：detected_domains / matched_triggers / related_guides。
-    新增字段：candidate_sources / selected_sources / excluded_sources / retrieval_decision。
-    """
+
     if mode == "companion":
         return {
             "detected_domains": [],
@@ -288,38 +276,23 @@ def prepare_ai_context(user_message: str, mode: str) -> Dict[str, Any]:
     guides = GUIDES_CACHE
     triggers = TRIGGERS_CACHE
 
-    query_profile = analyze_query(user_message)
-    detected_domains = query_profile.get("domains", [])
+    strategy = build_retrieval_strategy(context)
+
+    query_profile = build_query_profile_from_strategy(strategy)
+
+    detected_domains = analysis_domains or query_profile.get("domains", [])
     matched_triggers = match_triggers(user_message, triggers)[:10]
 
-    trigger_guides = []
-    for guide in find_related_guides(matched_triggers, guides):
-        score = score_guide_for_message(guide, user_message, detected_domains, query_profile=query_profile)
-        if score >= 24:
-            item = dict(guide)
-            item["_match_score"] = score
-            item["_match_reason"] = build_match_reason(item, query_profile)
-            trigger_guides.append(item)
-
-    scored_guides = find_guides_by_message_and_domains(
-        message=user_message,
-        detected_domains=detected_domains,
+    guide_pool = build_guide_candidates(
+        strategy=strategy,
+        user_message=user_message,
         guides=guides,
-        min_score=8,
-        query_profile=query_profile,
+        matched_triggers=matched_triggers,
     )
-
-    domain_guides = []
-    if not scored_guides and detected_domains:
-        domain_guides = find_domain_fallback_guides(detected_domains, guides)[:4]
-
-    guide_pool = merge_guides(scored_guides, trigger_guides, domain_guides)
-    guide_pool.sort(key=lambda item: item.get("_match_score", item.get("_domain_score", 0)), reverse=True)
-    guide_pool = guide_pool[:16]
 
     candidates = build_candidate_pool(
         user_message=user_message,
-        query_profile=query_profile,
+        strategy=strategy,
         guide_candidates=guide_pool,
         wiki_candidates=[],
         include_kiwix=False,
@@ -341,7 +314,7 @@ def prepare_ai_context(user_message: str, mode: str) -> Dict[str, Any]:
 
     retrieval_decision = build_retrieval_decision(
         user_message=user_message,
-        query_profile=query_profile,
+        strategy=strategy,
         candidates=candidates,
         selected=selected_sources,
         excluded=excluded_sources,
