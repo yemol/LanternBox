@@ -4,13 +4,11 @@ import uuid
 from datetime import datetime
 from typing import Any
 import urllib.request
-import urllib.error
 
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse, StreamingResponse
 
 from .services.wiki_service import (
-    filter_related_wikis_for_query,
     get_wiki_categories_records,
     get_wiki_articles_by_category_records,
 )
@@ -36,7 +34,7 @@ from .config import (
 
 from .db import get_db_connection
 from .models import AiAdviceRequest, AiRuntimeSettingsUpdate, InventoryItem, JournalEntry, TtsSpeakRequest
-from .resources import load_local_resources, prepare_ai_context
+from .resources import load_local_resources
 from .tts import cleanup_tts_output, synthesize_tts_to_file
 from .utils import get_default_model_for_mode
 
@@ -46,8 +44,7 @@ from .wiki import (
 )
 
 from .services.wiki_service import (
-    search_wiki_articles,
-    search_wiki_for_ai
+    search_wiki_articles
 )
 
 
@@ -57,12 +54,10 @@ from .pipeline.postprocess import (
     build_ai_advice_response,
     build_fallback_pipeline_result,
 )
+from .pipeline.preload import prepare_ai_pipeline_context
 
-from .retrieval.apply import apply_ai_rerank_if_enabled
-from .retrieval.references import filter_and_rank_ai_references
-
+#挂起路由控制
 router = APIRouter()
-
 
 
 @router.get("/")
@@ -312,35 +307,17 @@ def ai_advice(payload: AiAdviceRequest):
     if not user_message:
         raise HTTPException(status_code=400, detail="请提供需要 AI 判断的情况描述。")
 
-    context_data = prepare_ai_context(user_message, mode)
-    detected_domains = context_data["detected_domains"]
-    matched_triggers = context_data["matched_triggers"]
-    related_guides = context_data["related_guides"]
-
-    related_wikis = search_wiki_for_ai(
-        payload.message,
-        detected_domains=context_data.get("detected_domains", []),
-        limit=6,
-    )
-
-    # print("AI ADVICE DEBUG user_message:", user_message)
-    # print("AI ADVICE DEBUG detected_domains:", detected_domains)
-    # print("AI ADVICE DEBUG raw guides:", [g.get("title") for g in related_guides])
-
-    ranked_references = filter_and_rank_ai_references(
+    prepared_ai = prepare_ai_pipeline_context(
         user_message=user_message,
-        related_guides=related_guides,
-        related_wikis=related_wikis,
-        detected_domains=detected_domains,
-    )
-    related_guides = ranked_references["guides"]
-    related_wikis = ranked_references["wikis"]
-    related_wikis = filter_related_wikis_for_query(
-        related_wikis,
-        context_data.get("query_profile", {}),
+        mode=mode,
     )
 
-    rerank_state = apply_ai_rerank_if_enabled(user_message, context_data, related_guides)
+    context_data = prepared_ai["context_data"]
+    detected_domains = prepared_ai["detected_domains"]
+    matched_triggers = prepared_ai["matched_triggers"]
+    related_guides = prepared_ai["related_guides"]
+    related_wikis = prepared_ai["related_wikis"]
+    rerank_state = prepared_ai["rerank_state"]
     related_guides = rerank_state["related_guides"]
 
     # print("AI ADVICE DEBUG filtered guides:", [g.get("title") for g in related_guides])
@@ -403,30 +380,17 @@ def ai_advice_stream(payload: AiAdviceRequest):
     if not user_message:
         raise HTTPException(status_code=400, detail="请提供需要 AI 判断的情况描述。")
 
-    context_data = prepare_ai_context(user_message, mode)
-    detected_domains = context_data["detected_domains"]
-    related_guides = context_data["related_guides"]
-
-    related_wikis = search_wiki_for_ai(
-        payload.message,
-        detected_domains=detected_domains,
-        limit=6,
-    )
-
-    ranked_references = filter_and_rank_ai_references(
+    prepared_ai = prepare_ai_pipeline_context(
         user_message=user_message,
-        related_guides=related_guides,
-        related_wikis=related_wikis,
-        detected_domains=detected_domains,
-    )
-    related_guides = ranked_references["guides"]
-    related_wikis = ranked_references["wikis"]
-    related_wikis = filter_related_wikis_for_query(
-        related_wikis,
-        context_data.get("query_profile", {}),
+        mode=mode,
     )
 
-    rerank_state = apply_ai_rerank_if_enabled(user_message, context_data, related_guides)
+    context_data = prepared_ai["context_data"]
+    detected_domains = prepared_ai["detected_domains"]
+    matched_triggers = prepared_ai["matched_triggers"]
+    related_guides = prepared_ai["related_guides"]
+    related_wikis = prepared_ai["related_wikis"]
+    rerank_state = prepared_ai["rerank_state"]
     related_guides = rerank_state["related_guides"]
 
     pipeline_request = build_pipeline_request(

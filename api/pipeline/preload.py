@@ -3,6 +3,14 @@ from typing import Any, Dict, List
 from ..retrieval.domains import detect_domains_from_text
 from .hooks import run_hooks
 
+from ..resources import prepare_ai_context
+from ..services.wiki_service import (
+    search_wiki_for_ai,
+    filter_related_wikis_for_query,
+)
+from ..retrieval.references import filter_and_rank_ai_references
+from ..retrieval.apply import apply_ai_rerank_if_enabled
+
 def prepare_pipeline_inputs(
     *,
     user_message: str,
@@ -59,3 +67,51 @@ def prepare_pipeline_inputs(
 
     return run_hooks("after_preload", prepared)
 
+def prepare_ai_pipeline_context(
+    *,
+    user_message: str,
+    mode: str,
+) -> Dict[str, Any]:
+    context_data = prepare_ai_context(user_message, mode)
+
+    detected_domains = context_data.get("detected_domains", [])
+    matched_triggers = context_data.get("matched_triggers", [])
+    related_guides = context_data.get("related_guides", [])
+
+    related_wikis = search_wiki_for_ai(
+        user_message,
+        detected_domains=detected_domains,
+        limit=6,
+    )
+
+    ranked_references = filter_and_rank_ai_references(
+        user_message=user_message,
+        related_guides=related_guides,
+        related_wikis=related_wikis,
+        detected_domains=detected_domains,
+    )
+
+    related_guides = ranked_references.get("guides", [])
+    related_wikis = ranked_references.get("wikis", [])
+
+    related_wikis = filter_related_wikis_for_query(
+        related_wikis,
+        context_data.get("query_profile", {}),
+    )
+
+    rerank_state = apply_ai_rerank_if_enabled(
+        user_message,
+        context_data,
+        related_guides,
+    )
+
+    related_guides = rerank_state.get("related_guides", related_guides)
+
+    return {
+        "context_data": context_data,
+        "detected_domains": detected_domains,
+        "matched_triggers": matched_triggers,
+        "related_guides": related_guides,
+        "related_wikis": related_wikis,
+        "rerank_state": rerank_state,
+    }
