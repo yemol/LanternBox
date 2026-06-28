@@ -1,3 +1,5 @@
+"""Prompt 构造模块。负责应急和陪伴模式的消息组织。"""
+
 import json
 import requests
 from typing import Any, Dict, List, Optional, Tuple
@@ -184,4 +186,3 @@ Context Engine 对当前输入的结构化观察：
         *safe_history,
         {"role": "user", "content": user_prompt},
     ]
-

@@ -1,3 +1,5 @@
+"""SQLite 数据库连接与初始化工具。负责本地结构化数据表创建。"""
+
 import sqlite3
 from .config import DB_PATH
 from .utils import make_item_code

@@ -1,3 +1,5 @@
+"""回答安全清洗。负责移除应急模式下不合适的外部依赖建议。"""
+
 
 
 FORBIDDEN_EXTERNAL_DEPENDENCY_TERMS = [

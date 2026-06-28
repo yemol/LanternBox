@@ -1,4 +1,6 @@
-from typing import Any, Dict, Optional, Optional
+"""Wiki 页面与详情辅助接口。AI 检索逻辑已迁移到 Wiki Service。"""
+
+from typing import Any, Dict, Optional
 
 from .config import (
     POCKETBASE_URL,

@@ -1,3 +1,5 @@
+"""FastAPI 请求与数据模型定义。负责 API 层输入输出结构。"""
+
 from typing import List, Optional
 from pydantic import BaseModel
 

@@ -1,3 +1,5 @@
+"""Context Engine 数据结构定义。描述 LanternContext 及其组成字段。"""
+
 from pydantic import BaseModel, Field
 from typing import Dict, List, Any
 

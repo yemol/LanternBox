@@ -1,3 +1,5 @@
+"""Wiki Service。负责 Wiki 查询、过滤、规范化和分类数据访问。"""
+
 import re
 from typing import Any, Dict, Optional, List
 

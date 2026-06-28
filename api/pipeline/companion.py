@@ -1,3 +1,5 @@
+"""陪伴模式 Pipeline。保持轻量对话，不走完整应急检索管线。"""
+
 from .schema import PipelineRequest, PipelineResult
 from ..response.prompts import build_safe_history, build_companion_messages
 from ..llm.client import call_ollama, stream_ollama

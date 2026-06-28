@@ -1,3 +1,5 @@
+"""Pipeline 响应后处理。将 PipelineResult 转换为 API JSON 响应。"""
+
 from typing import Any, Dict, List, Optional
 
 from .schema import PipelineResult

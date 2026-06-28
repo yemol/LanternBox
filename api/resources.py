@@ -1,3 +1,5 @@
+"""本地资源协调层。负责加载资源、合并指南并准备应急模式 AI 上下文。"""
+
 from typing import Any, Dict, List
 
 
@@ -33,7 +35,6 @@ from .retrieval.runtime import (
 )
 
 
-# 只保留资源加载、缓存、候选池、prepare_ai_context 协调
 
 def load_local_resources() -> None:
     guides_path = DATA_DIR / "emergency_guides.json"
@@ -52,8 +53,7 @@ def load_local_resources() -> None:
         "triggers_path": str(triggers_path),
     })
 
-    # print("本地资源缓存已加载：", RESOURCE_CACHE_INFO)
-
+    
 
 def merge_guides(*guide_lists: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     result = []
@@ -359,9 +359,3 @@ def prepare_ai_context(user_message: str, mode: str) -> Dict[str, Any]:
         "excluded_sources": excluded_sources,
         "retrieval_decision": retrieval_decision,
     }
-
-# -----------------------------------------------------------------------------
-# LanternBox resources v0.6.1 Hybrid RAG 微调
-# 修正：纯库存/记录问题不应把“物资”误判成资源暴露/可疑人员安全场景。
-# -----------------------------------------------------------------------------
-

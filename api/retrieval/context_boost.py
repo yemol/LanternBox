@@ -1,3 +1,5 @@
+"""Context Boost 过渡模块。将 Context Engine 输出转为检索加权信号。"""
+
 from typing import Any, Dict, List, Optional, Tuple
 from .query import normalize_reference_text
 from ..context.engine import analyze_context

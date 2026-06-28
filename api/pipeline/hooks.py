@@ -1,3 +1,5 @@
+"""Pipeline Hooks 扩展点。为未来 Memory、Vision、Sensor 等能力预留插槽。"""
+
 from typing import Any, Callable, Dict, List
 
 

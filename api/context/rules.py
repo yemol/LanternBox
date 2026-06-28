@@ -1,3 +1,5 @@
+"""Context Engine 规则库。负责输入性质、风险与需求的规则识别。"""
+
 from .schema import LanternContext
 
 

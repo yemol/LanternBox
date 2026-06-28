@@ -1,3 +1,5 @@
+"""Retrieval 应用层。根据运行时设置应用本地 AI 重排结果。"""
+
 
 from typing import Any, Dict, List, Optional, Tuple
 from .constants import AI_RERANK_VERSION
@@ -102,4 +104,3 @@ def apply_ai_rerank_if_enabled(user_message, context_data, related_guides):
         "retrieval_decision": retrieval_decision,
         "runtime_settings": runtime_settings,
     }
-

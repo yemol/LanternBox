@@ -1,3 +1,5 @@
+"""Pipeline 数据结构定义。包含 PipelineRequest 与 PipelineResult。"""
+
 from pydantic import BaseModel, Field
 from typing import Any, Callable, Dict, Generator, List, Optional
 

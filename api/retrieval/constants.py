@@ -1,3 +1,5 @@
+"""Retrieval 共享常量。放置跨检索模块复用的领域、兼容与重排常量。"""
+
 
 from typing import Any, Dict, List, Optional, Tuple
 

@@ -1,3 +1,5 @@
+"""Response 上下文块构造。将 LanternContext 转换为 Prompt 可读内容。"""
+
 from typing import Any, Dict
 
 from ..context.engine import analyze_context

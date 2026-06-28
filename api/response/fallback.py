@@ -1,3 +1,5 @@
+"""本地兜底回答构造。用于模型失败或 metadata_only 等降级场景。"""
+
 from typing import Any, Dict, List, Optional, Tuple
 from .safety import sanitize_ai_answer
 

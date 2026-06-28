@@ -1,4 +1,4 @@
-# 负责候选池、硬排除、Kiwix 占位、选择/排除来源、检索决策。
+"""Retrieval Runtime。负责候选池、硬排除、来源选择和检索决策。"""
 
 from typing import Any, Dict, List, Tuple
 
@@ -302,4 +302,3 @@ def build_retrieval_decision(
             for item in excluded[:8]
         ],
     }
-

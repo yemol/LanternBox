@@ -1,3 +1,5 @@
+"""PocketBase 统一访问客户端。集中封装 records 与 record 请求。"""
+
 import requests
 from typing import Any, Dict, Optional, List
 from .config import POCKETBASE_URL

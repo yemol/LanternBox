@@ -1,3 +1,5 @@
+"""Pipeline 请求构建器。将 API payload 规整为 PipelineRequest。"""
+
 from typing import Any, Dict, List, Optional
 
 from .schema import PipelineRequest

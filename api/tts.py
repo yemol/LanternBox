@@ -1,3 +1,5 @@
+"""语音合成客户端。负责调用独立语音服务并管理输出文件。"""
+
 import json
 import time
 from pathlib import Path

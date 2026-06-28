@@ -1,8 +1,10 @@
+"""Guide Service。负责触发规则、关联指南和指南基础文本能力。"""
+
 from typing import Any, Dict, List
 
 from ..config import DOMAIN_KEYWORDS
 from ..retrieval.constants import DOMAIN_COMPATIBILITY
-from ..utils import get_severity_weight, get_severity_weight, unique_list, safe_text, contains_any
+from ..utils import get_severity_weight, unique_list, safe_text, contains_any
 
 # 指南基础能力：触发规则、指南关联、指南文本、领域兼容
 

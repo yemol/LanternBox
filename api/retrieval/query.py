@@ -1,3 +1,5 @@
+"""查询文本处理模块。负责检索文本规范化、切词和 Context 词提取。"""
+
 from typing import Any, List
 
 from ..context.engine import analyze_context

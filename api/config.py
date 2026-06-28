@@ -1,3 +1,5 @@
+"""全局配置与运行时设置。只放路径、模型、端口、集合名和开关类配置。"""
+
 import json
 import os
 from pathlib import Path

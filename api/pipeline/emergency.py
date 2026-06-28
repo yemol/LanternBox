@@ -1,3 +1,5 @@
+"""应急模式 Pipeline。组织应急模式的 Response 与 LLM 调用。"""
+
 from .schema import PipelineRequest, PipelineResult
 from ..response.prompts import build_safe_history, build_emergency_messages
 from ..llm.client import call_ollama

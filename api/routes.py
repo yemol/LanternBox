@@ -1,3 +1,5 @@
+"""FastAPI 路由层。负责 HTTP 接口、请求校验和调用 Pipeline / Services。"""
+
 import json
 import sqlite3
 import uuid
@@ -56,7 +58,7 @@ from .pipeline.postprocess import (
 )
 from .pipeline.preload import prepare_ai_pipeline_context
 
-#挂起路由控制
+# 路由控制
 router = APIRouter()
 
 
@@ -320,8 +322,6 @@ def ai_advice(payload: AiAdviceRequest):
     rerank_state = prepared_ai["rerank_state"]
     related_guides = rerank_state["related_guides"]
 
-    # print("AI ADVICE DEBUG filtered guides:", [g.get("title") for g in related_guides])
-
 
     pipeline_result = None
 
@@ -514,7 +514,7 @@ def api_wiki_search(q: str = ""):
     }
 
 
-# 这里开始的都是自检用到的函数和借口
+# 自检接口
 def check_url(url: str, timeout: float = 2.0) -> dict:
     try:
         with urllib.request.urlopen(url, timeout=timeout) as response:

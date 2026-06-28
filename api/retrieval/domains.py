@@ -1,3 +1,5 @@
+"""领域识别与兼容判断。负责引用来源和用户查询的领域检测。"""
+
 from typing import Dict, List, Optional
 
 from ..context.engine import analyze_context

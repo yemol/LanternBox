@@ -1,3 +1,5 @@
+"""FastAPI 应用实例组装入口。负责注册路由和静态资源挂载。"""
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 

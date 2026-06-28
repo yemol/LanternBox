@@ -1,3 +1,5 @@
+"""引用来源排序模块。负责 Guide / Wiki 等资料的过滤与排序。"""
+
 from typing import Any, Dict, List, Optional, Tuple
 
 from .constants import (
@@ -201,4 +203,3 @@ def filter_and_rank_ai_references(
         "guides": process(related_guides, "guide", guide_limit, preserve_upstream_order=True),
         "wikis": process(related_wikis, "wiki", max_wikis, preserve_upstream_order=False),
     }
-

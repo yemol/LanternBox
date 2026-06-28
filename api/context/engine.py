@@ -1,3 +1,5 @@
+"""Context Engine 主入口。将用户输入解析为结构化 LanternContext。"""
+
 from .schema import LanternContext
 from .rules import apply_rule_signals
 

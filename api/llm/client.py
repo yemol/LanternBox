@@ -1,3 +1,5 @@
+"""LLM 客户端。只负责 Ollama 调用与流式输出，不承载业务逻辑。"""
+
 import json
 import requests
 from typing import Any, Dict, List, Optional, Tuple
@@ -77,4 +79,3 @@ def stream_ollama(messages: List[Dict[str, str]], model: Optional[str] = None):
                 continue
     except Exception as e:
         yield f"\n\n[本地 AI 流式输出失败：{e}]"
-

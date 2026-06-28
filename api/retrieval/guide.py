@@ -1,3 +1,5 @@
+"""指南检索模块。负责应急指南的意图分析、打分与召回。"""
+
 from typing import Any, Dict, List
 import re
 
@@ -1353,5 +1355,3 @@ def find_domain_fallback_guides(domains: List[str], guides: List[Dict[str, Any]]
             result.append(guide)
             seen.add(guide_id)
     return result
-
-

@@ -1,3 +1,5 @@
+"""通用工具函数。仅放跨模块复用的小型纯工具。"""
+
 import json
 from pathlib import Path
 from typing import Any, Iterable, List
@@ -59,4 +61,3 @@ def unique_list(items: Iterable[Any]) -> List[str]:
             result.append(value)
 
     return result
-

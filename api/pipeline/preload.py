@@ -1,3 +1,5 @@
+"""Pipeline 预加载。统一准备应急模式所需 Context、Guide、Wiki 与重排数据。"""
+
 from typing import Any, Dict, List
 
 from ..retrieval.domains import detect_domains_from_text

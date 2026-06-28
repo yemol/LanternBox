@@ -1,3 +1,5 @@
+"""本地 AI 重排模块。负责候选来源的 LLM 辅助选择与排除。"""
+
 from typing import Any, Dict, List, Optional, Tuple
 import json
 import os
