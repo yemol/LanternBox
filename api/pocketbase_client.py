@@ -2,20 +2,41 @@ import requests
 from typing import Any, Dict, Optional, List
 from .config import POCKETBASE_URL
 
+from typing import Any, Dict, Optional
+import requests
+from fastapi import HTTPException
 
-def pocketbase_get_records(collection: str, params: Optional[dict] = None) -> dict:
-    url = f"{POCKETBASE_URL}/api/collections/{collection}/records"
+from .config import POCKETBASE_URL
+
+
+def pb_get(path: str, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    url = f"{POCKETBASE_URL}{path}"
 
     try:
-        response = requests.get(url, params=params or {}, timeout=8)
+        response = requests.get(url, params=params or {}, timeout=10)
         response.raise_for_status()
         return response.json()
-    except Exception as e:
-        print(f"PocketBase 读取失败: {collection}", e)
-        return {
-            "page": 1,
-            "perPage": 0,
-            "totalItems": 0,
-            "totalPages": 0,
-            "items": []
-        }
+    except requests.RequestException as exc:
+        raise HTTPException(
+            status_code=502,
+            detail=f"PocketBase 请求失败：{exc}",
+        )
+
+
+def pocketbase_get_records(
+    collection: str,
+    params: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    return pb_get(
+        f"/api/collections/{collection}/records",
+        params=params,
+    )
+
+
+def pocketbase_get_record(
+    collection: str,
+    record_id: str,
+) -> Dict[str, Any]:
+    return pb_get(
+        f"/api/collections/{collection}/records/{record_id}",
+    )

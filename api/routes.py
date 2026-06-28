@@ -9,7 +9,11 @@ import urllib.error
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse, StreamingResponse
 
-from .services.wiki_service import filter_related_wikis_for_query
+from .services.wiki_service import (
+    filter_related_wikis_for_query,
+    get_wiki_categories_records,
+    get_wiki_articles_by_category_records,
+)
 
 from .ai import (
     build_fallback_answer,
@@ -27,6 +31,7 @@ from .config import (
     TTS_OUTPUT_DIR,
     VOICE_SERVICE_URL,
     load_runtime_settings,
+    update_runtime_settings,
 )
 
 from .db import get_db_connection
@@ -38,7 +43,6 @@ from .utils import get_default_model_for_mode
 from .wiki import (
     get_published_wiki_articles,
     get_wiki_article_detail,
-    pb_get,
 )
 
 from .services.wiki_service import (
@@ -665,34 +669,23 @@ def system_check():
         "checked_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "checks": checks
     }
+
 @router.get("/api/wiki/categories")
 def get_wiki_categories():
-    params = {
-        "page": 1,
-        "perPage": 100,
-        "sort": "sort_order,name"
-    }
-
-    return pb_get("/api/collections/wiki_categories/records", params=params)
+    return get_wiki_categories_records()
 
 
 @router.get("/api/wiki/categories/{category_id}/articles")
 def get_wiki_articles_by_category(
     category_id: str,
     page: int = 1,
-    per_page: int = 10
+    per_page: int = 10,
 ):
-    page = max(page, 1)
-    per_page = min(max(per_page, 1), 50)
-
-    params = {
-        "page": page,
-        "perPage": per_page,
-        "sort": "title",
-        "filter": f'status = "published" && category = "{category_id}"'
-    }
-
-    return pb_get("/api/collections/wiki_articles/records", params=params)
+    return get_wiki_articles_by_category_records(
+        category_id,
+        page=page,
+        per_page=per_page,
+    )
 
 @router.get("/wiki-categories.html")
 def wiki_categories_page():

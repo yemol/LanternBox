@@ -20,6 +20,12 @@ WIKI_STOP_TERMS = {
     "这个", "那个", "我们", "家里", "不多", "都有",
 }
 
+def trim_text(text: str, max_chars: int = 800) -> str:
+    text = (text or "").strip()
+    if len(text) <= max_chars:
+        return text
+    return text[:max_chars] + "……"
+
 def clean_wiki_search_term(term: str) -> str:
     term = (term or "").strip()
     term = re.sub(r"[，。！？、；：,.!?;:\s]+", "", term)
@@ -245,3 +251,36 @@ def build_wiki_or_filter_for_terms(terms: List[str]) -> str:
         return 'status="published"'
 
     return 'status="published" && (' + " || ".join(parts) + ")"
+
+def get_wiki_categories_records() -> Dict[str, Any]:
+    params = {
+        "page": 1,
+        "perPage": 100,
+        "sort": "sort_order,name",
+    }
+
+    return pocketbase_get_records(
+        "wiki_categories",
+        params=params,
+    )
+
+def get_wiki_articles_by_category_records(
+    category_id: str,
+    *,
+    page: int = 1,
+    per_page: int = 10,
+) -> Dict[str, Any]:
+    page = max(page, 1)
+    per_page = min(max(per_page, 1), 50)
+
+    params = {
+        "page": page,
+        "perPage": per_page,
+        "sort": "title",
+        "filter": f'status = "published" && category = "{category_id}"',
+    }
+
+    return pocketbase_get_records(
+        "wiki_articles",
+        params=params,
+    )
