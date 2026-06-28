@@ -6,34 +6,6 @@ from ..utils import get_severity_weight, get_severity_weight, unique_list, safe_
 
 # 指南基础能力：触发规则、指南关联、指南文本、领域兼容
 
-def match_triggers_for_message(
-    *,
-    message: str,
-    mode: str = "emergency",
-    trigger_items: List[Dict[str, Any]] | None = None,
-) -> List[Dict[str, Any]]:
-    """匹配用户输入对应的本地触发规则。
-
-    当前阶段：
-    - 先由 routes.py 传入 trigger_items
-    - 后续再由 service 自己读取数据源
-    """
-    if not trigger_items:
-        return []
-
-    text = str(message or "").lower()
-    results: List[Dict[str, Any]] = []
-
-    for item in trigger_items:
-        keywords = item.get("keywords", []) or []
-        if isinstance(keywords, str):
-            keywords = [keywords]
-
-        if any(str(keyword).lower() in text for keyword in keywords):
-            results.append(item)
-
-    return results
-
 def find_guides_for_triggers(
     *,
     triggers: List[Dict[str, Any]],
