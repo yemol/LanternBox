@@ -1,0 +1,25 @@
+{
+  "id": "food_001",
+  "enabled": true,
+  "category": "food",
+  "difficulty": "easy",
+  "question": "食物快吃完了",
+  "expect": {
+    "domains": [
+      "food",
+      "resource"
+    ],
+    "signals": [
+      "resource_low"
+    ],
+    "intents": [
+      "food_shortage"
+    ],
+    "top1": "食物短缺",
+    "top3": [
+      "食物短缺",
+      "口粮管理"
+    ]
+  },
+  "notes": "基础食物短缺"
+}

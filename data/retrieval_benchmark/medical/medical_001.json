@@ -1,0 +1,13 @@
+{
+  "id": "medical_001",
+  "enabled": true,
+  "category": "medical",
+  "difficulty": "easy",
+  "question": "老人一直发烧",
+  "expect": {
+    "domains": [
+      "medical"
+    ],
+    "top1": "咳嗽发热"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "medical_hypothermia",
+  "name": "失温",
+  "match": {
+    "all": [],
+    "any": [
+      "失温",
+      "发抖",
+      "手脚冰凉",
+      "全身发冷",
+      "淋雨后很冷",
+      "寒冷",
+      "体温低",
+      "停止发抖"
+    ],
+    "none": [
+      "游戏"
+    ]
+  },
+  "context": {
+    "domains": [
+      "medical",
+      "shelter"
+    ],
+    "signals": [
+      "hypothermia_watch",
+      "cold_exposure"
+    ],
+    "intents": [
+      "medical_hypothermia"
+    ],
+    "risks": [
+      "hypothermia"
+    ],
+    "observations": [
+      "可能存在低温暴露或失温风险"
+    ],
+    "needs": [
+      "干燥保温",
+      "缓慢复温",
+      "减少活动"
+    ],
+    "retrieval_plan": [],
+    "risk_level": "high",
+    "confidence": 0.92
+  },
+  "priority": 95
+}

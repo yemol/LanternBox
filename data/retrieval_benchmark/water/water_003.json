@@ -1,0 +1,13 @@
+{
+  "id": "water_003",
+  "enabled": true,
+  "category": "water",
+  "difficulty": "medium",
+  "question": "雨水能直接喝吗",
+  "expect": {
+    "domains": [
+      "water"
+    ],
+    "top1": "雨水收集"
+  }
+}

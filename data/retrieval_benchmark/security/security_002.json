@@ -1,0 +1,13 @@
+{
+  "id": "security_002",
+  "enabled": true,
+  "category": "security",
+  "difficulty": "medium",
+  "question": "晚上一直听见脚步声",
+  "expect": {
+    "domains": [
+      "security"
+    ],
+    "top1": "夜间外部异响"
+  }
+}

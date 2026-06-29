@@ -1,0 +1,17 @@
+{
+  "id": "water_002",
+  "enabled": true,
+  "category": "water",
+  "difficulty": "easy",
+  "question": "只剩一桶饮用水",
+  "expect": {
+    "domains": [
+      "water",
+      "resource"
+    ],
+    "intents": [
+      "water_shortage"
+    ],
+    "top1": "缺水时用途排序"
+  }
+}

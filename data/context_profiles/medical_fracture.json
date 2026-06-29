@@ -1,0 +1,46 @@
+{
+  "id": "medical_fracture",
+  "name": "骨折",
+  "match": {
+    "all": [],
+    "any": [
+      "骨折",
+      "疑似骨折",
+      "断骨",
+      "骨头断了",
+      "骨裂",
+      "不能站立",
+      "无法承重",
+      "夹板"
+    ],
+    "none": [
+      "游戏"
+    ]
+  },
+  "context": {
+    "domains": [
+      "medical"
+    ],
+    "signals": [
+      "fracture"
+    ],
+    "intents": [
+      "medical_fracture"
+    ],
+    "risks": [
+      "secondary_injury"
+    ],
+    "observations": [
+      "存在骨折可能"
+    ],
+    "needs": [
+      "固定",
+      "减少移动",
+      "持续观察远端循环"
+    ],
+    "retrieval_plan": [],
+    "risk_level": "high",
+    "confidence": 0.95
+  },
+  "priority": 100
+}

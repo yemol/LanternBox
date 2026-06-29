@@ -1,0 +1,13 @@
+{
+  "id": "disaster_001",
+  "enabled": true,
+  "category": "disaster",
+  "difficulty": "medium",
+  "question": "暴雨不停水位一直上涨",
+  "expect": {
+    "domains": [
+      "disaster"
+    ],
+    "top1": "洪水来临前"
+  }
+}

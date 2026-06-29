@@ -1,0 +1,47 @@
+{
+  "id": "inventory_change",
+  "name": "库存变化",
+  "match": {
+    "all": [],
+    "any": [
+      "库存",
+      "物资清单",
+      "物资变化",
+      "剩余物资",
+      "盘点",
+      "入库",
+      "出库",
+      "消耗记录"
+    ],
+    "none": [
+      "游戏"
+    ]
+  },
+  "context": {
+    "domains": [
+      "records",
+      "resource"
+    ],
+    "signals": [
+      "inventory_change"
+    ],
+    "intents": [
+      "inventory_change"
+    ],
+    "risks": [
+      "resource_miscalculation"
+    ],
+    "observations": [
+      "物资库存或消耗需要记录"
+    ],
+    "needs": [
+      "盘点",
+      "记录变化",
+      "估算剩余天数"
+    ],
+    "retrieval_plan": [],
+    "risk_level": "low",
+    "confidence": 0.88
+  },
+  "priority": 80
+}

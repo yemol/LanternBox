@@ -1,0 +1,47 @@
+{
+  "id": "medical_fever",
+  "name": "发热",
+  "match": {
+    "all": [],
+    "any": [
+      "发烧",
+      "发热",
+      "高烧",
+      "体温高",
+      "烧到",
+      "持续发烧",
+      "一直发烧",
+      "老人发烧"
+    ],
+    "none": [
+      "游戏",
+      "电影"
+    ]
+  },
+  "context": {
+    "domains": [
+      "medical"
+    ],
+    "signals": [
+      "fever"
+    ],
+    "intents": [
+      "medical_fever"
+    ],
+    "risks": [
+      "infection"
+    ],
+    "observations": [
+      "可能存在感染、炎症或热相关风险"
+    ],
+    "needs": [
+      "降温",
+      "补液",
+      "持续观察"
+    ],
+    "retrieval_plan": [],
+    "risk_level": "high",
+    "confidence": 0.95
+  },
+  "priority": 100
+}

@@ -1,0 +1,14 @@
+{
+  "id": "medical_002",
+  "enabled": true,
+  "category": "medical",
+  "difficulty": "easy",
+  "question": "一直腹泻还喝不下水",
+  "expect": {
+    "domains": [
+      "medical",
+      "water"
+    ],
+    "top1": "腹泻脱水"
+  }
+}

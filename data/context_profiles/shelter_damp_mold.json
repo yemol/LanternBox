@@ -1,0 +1,49 @@
+{
+  "id": "shelter_damp_mold",
+  "name": "潮湿发霉",
+  "match": {
+    "all": [],
+    "any": [
+      "屋里很潮",
+      "特别潮",
+      "潮湿",
+      "墙角发霉",
+      "发霉",
+      "霉味",
+      "墙面发霉",
+      "室内防潮"
+    ],
+    "none": [
+      "游戏",
+      "菜谱"
+    ]
+  },
+  "context": {
+    "domains": [
+      "shelter"
+    ],
+    "signals": [
+      "damp",
+      "mold"
+    ],
+    "intents": [
+      "shelter_damp_mold"
+    ],
+    "risks": [
+      "mold_exposure",
+      "respiratory_irritation"
+    ],
+    "observations": [
+      "居住空间潮湿或霉菌风险上升"
+    ],
+    "needs": [
+      "通风除湿",
+      "隔离霉变区域",
+      "保护睡眠区"
+    ],
+    "retrieval_plan": [],
+    "risk_level": "medium",
+    "confidence": 0.92
+  },
+  "priority": 93
+}

@@ -1,0 +1,13 @@
+{
+  "id": "medical_003",
+  "enabled": true,
+  "category": "medical",
+  "difficulty": "easy",
+  "question": "疑似骨折怎么办",
+  "expect": {
+    "domains": [
+      "medical"
+    ],
+    "top1": "骨折固定"
+  }
+}

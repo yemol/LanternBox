@@ -1,0 +1,13 @@
+{
+  "id": "power_001",
+  "enabled": true,
+  "category": "power",
+  "difficulty": "easy",
+  "question": "插线板泡过水还能继续用吗",
+  "expect": {
+    "domains": [
+      "power"
+    ],
+    "top1": "电线和插线板安全检查"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "boundary_002",
+  "enabled": true,
+  "category": "boundary",
+  "difficulty": "edge",
+  "question": "帮我推荐一个菜谱",
+  "expect": {
+    "domains": [],
+    "signals": [],
+    "intents": [],
+    "top1": null
+  },
+  "notes": "不能误判 food_shortage"
+}

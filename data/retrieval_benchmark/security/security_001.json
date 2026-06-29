@@ -1,0 +1,13 @@
+{
+  "id": "security_001",
+  "enabled": true,
+  "category": "security",
+  "difficulty": "easy",
+  "question": "门外一直有人走来走去",
+  "expect": {
+    "domains": [
+      "security"
+    ],
+    "top1": "可疑人员接近"
+  }
+}

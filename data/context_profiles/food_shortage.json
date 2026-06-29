@@ -1,0 +1,57 @@
+{
+  "id": "food_shortage",
+  "name": "食物短缺",
+  "match": {
+    "all": [],
+    "any": [
+      "断粮",
+      "粮食不足",
+      "没吃的",
+      "食物不够",
+      "没有食物",
+      "食物不足",
+      "吃完",
+      "快吃完",
+      "口粮",
+      "粮食快没了",
+      "只剩三天口粮",
+      "只剩两天口粮",
+      "只剩一天口粮"
+    ],
+    "none": [
+      "宠物",
+      "游戏",
+      "菜谱",
+      "宝可梦",
+      "Steam",
+      "Unity"
+    ]
+  },
+  "context": {
+    "domains": [
+      "food",
+      "resource"
+    ],
+    "signals": [
+      "resource_low"
+    ],
+    "intents": [
+      "food_shortage"
+    ],
+    "risks": [
+      "starvation"
+    ],
+    "observations": [
+      "食物资源可能不足"
+    ],
+    "needs": [
+      "口粮管理",
+      "寻找替代食物",
+      "降低体力消耗"
+    ],
+    "retrieval_plan": [],
+    "risk_level": "high",
+    "confidence": 0.94
+  },
+  "priority": 100
+}

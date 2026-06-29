@@ -1,0 +1,20 @@
+{
+  "id": "water_001",
+  "enabled": true,
+  "category": "water",
+  "difficulty": "easy",
+  "question": "停水了",
+  "expect": {
+    "domains": [
+      "water",
+      "resource"
+    ],
+    "signals": [
+      "water_shortage"
+    ],
+    "intents": [
+      "water_shortage"
+    ],
+    "top1": "大规模停水"
+  }
+}

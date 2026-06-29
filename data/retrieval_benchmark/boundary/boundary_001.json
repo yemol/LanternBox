@@ -1,0 +1,14 @@
+{
+  "id": "boundary_001",
+  "enabled": true,
+  "category": "boundary",
+  "difficulty": "edge",
+  "question": "今天天气真不错",
+  "expect": {
+    "domains": [],
+    "signals": [],
+    "intents": [],
+    "top1": null
+  },
+  "notes": "不得进入应急模式"
+}
