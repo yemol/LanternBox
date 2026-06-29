@@ -6,10 +6,6 @@ from .constants import AI_RERANK_VERSION
 from ..config import OLLAMA_MODEL, load_runtime_settings
 from .reranker import rerank_candidates_with_local_ai
 
-def get_candidate_raw_item_from_ai(candidate: Dict[str, Any]) -> Dict[str, Any]:
-    raw = candidate.get("raw")
-    return raw if isinstance(raw, dict) else candidate
-
 
 def apply_ai_rerank_if_enabled(user_message, context_data, related_guides):
     """根据运行时设置决定是否让本地 AI 重排候选来源。"""

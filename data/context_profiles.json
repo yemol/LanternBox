@@ -1,0 +1,117 @@
+[
+{
+  "id": "food_shortage",
+  "name": "食物短缺",
+
+  "match": {
+    "all": [],
+    "any": [
+      "断粮",
+      "粮食不足",
+      "没吃的",
+      "食物不够",
+      "没有食物",
+      "食物不足",
+      "吃完",
+      "快吃完"
+    ],
+    "none": [
+      "宠物",
+      "游戏",
+      "菜谱"
+    ]
+  },
+
+  "context": {
+    "domains": [
+      "food",
+      "resource"
+    ],
+    "signals": [
+      "resource_low"
+    ],
+    "intents": [
+      "food_shortage"
+    ],
+    "risks": [
+      "starvation"
+    ],
+    "observations": [
+      "食物资源可能不足"
+    ],
+    "needs": [
+      "口粮管理",
+      "寻找替代食物",
+      "降低体力消耗"
+    ],
+    "retrieval_plan": [
+      "guide.food_shortage",
+      "guide.rationing",
+      "guide.food_acquisition"
+    ],
+    "risk_level": "high",
+    "confidence": 0.92
+  },
+
+  "priority": 100
+},
+{
+  "id": "water_shortage",
+  "name": "水资源短缺",
+
+  "match": {
+    "all": [],
+    "any": [
+      "停水",
+      "断水",
+      "缺水",
+      "没水",
+      "没有水",
+      "饮用水不足",
+      "水快没了",
+      "水不够",
+      "储水不足",
+      "只剩一点水"
+    ],
+    "none": [
+      "宠物",
+      "游戏",
+      "菜谱"
+    ]
+  },
+
+  "context": {
+    "domains": [
+      "water",
+      "resource"
+    ],
+    "signals": [
+      "water_shortage"
+    ],
+    "intents": [
+      "water_shortage"
+    ],
+    "risks": [
+      "dehydration",
+      "water_depletion"
+    ],
+    "observations": [
+      "水资源可能不足"
+    ],
+    "needs": [
+      "节水策略",
+      "饮水优先级",
+      "寻找或净化水源"
+    ],
+    "retrieval_plan": [
+      "guide.water_rationing",
+      "guide.water_purification",
+      "guide.water_source"
+    ],
+    "risk_level": "high",
+    "confidence": 0.90
+  },
+
+  "priority": 98
+}
+]

@@ -38,6 +38,7 @@ def load_env_file(path: Path = ENV_PATH) -> None:
 
 load_env_file()
 
+CONTEXT_PROFILES_CACHE: List[Dict[str, Any]] = []
 GUIDES_CACHE: List[Dict[str, Any]] = []
 TRIGGERS_CACHE: List[Dict[str, Any]] = []
 RESOURCE_CACHE_INFO: Dict[str, Any] = {
@@ -45,6 +46,8 @@ RESOURCE_CACHE_INFO: Dict[str, Any] = {
     "ai_triggers_count": 0,
     "loaded": False,
 }
+GUIDE_TAXONOMY_CACHE = {}
+
 
 OLLAMA_BASE_URL = os.environ["OLLAMA_URL"].rstrip("/")
 OLLAMA_MODEL = os.environ["OLLAMA_MODEL"].strip()

@@ -13,10 +13,6 @@ Candidate Builder
 不负责 AI。
 不负责 Response。
 """
-
-from typing import Any
-
-
 from typing import Any
 
 from .guide import (
@@ -24,6 +20,7 @@ from .guide import (
     find_domain_fallback_guides,
     find_guides_by_message_and_domains,
     score_guide_for_message,
+    build_guide_query,
 )
 
 from ..services.guide_service import find_related_guides
@@ -53,21 +50,15 @@ def build_guide_candidates(
 ) -> list[dict[str, Any]]:
     trigger_guides = []
 
-    guide_filters = strategy.get("guide_filters", {})
-
-    detected_domains = guide_filters.get("domains", [])
-
-    query_profile = {
-        "domains": detected_domains,
-        "intents": guide_filters.get("tasks", []),
-    }
+    query_profile = build_guide_query(strategy)
+    detected_domains = query_profile.get("domains", [])
+    query_profile = build_guide_query(strategy)
 
     for guide in find_related_guides(matched_triggers, guides):
         score = score_guide_for_message(
-            guide,
-            user_message,
-            detected_domains,
-            strategy=strategy,
+                guide,
+                user_message,
+                strategy,
         )
 
         if score >= 24:

@@ -24,7 +24,3 @@ class PipelineResult(BaseModel):
     messages: List[Dict[str, str]] = Field(default_factory=list)
     debug: Dict[str, Any] = Field(default_factory=dict)
 
-class PipelineStreamResult(BaseModel):
-    mode: str
-    messages: List[Dict[str, str]] = Field(default_factory=list)
-    debug: Dict[str, Any] = Field(default_factory=dict)

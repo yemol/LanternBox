@@ -1,7 +1,7 @@
 """Context Engine 主入口。将用户输入解析为结构化 LanternContext。"""
 
 from .schema import LanternContext
-from .rules import apply_rule_signals
+from .rules import apply_context_profiles
 
 
 def dedupe(items: list[str]) -> list[str]:
@@ -20,7 +20,7 @@ def analyze_context(text: str, source: str = "text") -> LanternContext:
         input_text=text,
     )
 
-    context = apply_rule_signals(text, context)
+    context = apply_context_profiles(text, context)
 
     context.domains = dedupe(context.domains)
     context.signals = dedupe(context.signals)

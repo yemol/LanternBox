@@ -21,7 +21,7 @@ from .context_boost import (
     apply_lantern_context_boost_to_candidates,
 )
 
-from .guide import build_query_profile_from_strategy
+from .guide import build_guide_query
 
 from ..llm.client import call_ollama
 
@@ -310,7 +310,7 @@ def rerank_candidates_with_local_ai(
 
     lantern_context = build_lantern_context_for_retrieval(user_message)
 
-    query_profile = build_query_profile_from_strategy(strategy or {})
+    query_profile = build_guide_query(strategy or {})
     query_profile = merge_lantern_context_into_query_profile(
         query_profile,
         lantern_context,

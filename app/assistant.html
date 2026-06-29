@@ -2885,21 +2885,6 @@
       `;
     }
 
-    function renderGuideList(title, list, ordered = false) {
-      if (!Array.isArray(list) || list.length === 0) return "";
-
-      const tag = ordered ? "ol" : "ul";
-
-      return `
-        <section class="guide-modal-section">
-          <h3>${escapeHtml(title)}</h3>
-          <${tag}>
-            ${list.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
-          </${tag}>
-        </section>
-      `;
-    }
-
     async function playAudioWithAudioContext(audioUrl) {
       const AudioContextClass = window.AudioContext || window.webkitAudioContext;
 

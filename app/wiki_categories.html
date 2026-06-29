@@ -259,7 +259,6 @@
         const data = await response.json();
         const articles = Array.isArray(data.items) ? data.items : [];
         latestCategoryArticles = articles;
-        latestWikiArticles = articles;
 
         if (!articles.length) {
           wikiCategoryArticles.innerHTML = '<div class="library-empty">这个分类下还没有已发布文章。</div>';
@@ -275,7 +274,6 @@
       } catch (error) {
         console.error(error);
         latestCategoryArticles = [];
-        latestWikiArticles = [];
         wikiCategoryArticles.innerHTML = '<div class="library-empty">分类文章读取失败，请确认接口正常。</div>';
         wikiCategoryArticlesCount.textContent = '读取失败';
         wikiCategoryPager.innerHTML = '';
@@ -305,7 +303,6 @@
     }
 
 
-    let latestWikiArticles = [];
     let currentWikiSpeechText = '';
     let currentWikiContent = '';
     let currentAudio = null;
@@ -328,10 +325,6 @@
       `).join('');
     }
 
-    async function openWikiArticleFromList(index) {
-      const wiki = latestWikiArticles[index];
-      await openWikiArticle(wiki);
-    }
 
     async function openWikiArticle(wiki) {
       if (!wiki || !wiki.id) return;
