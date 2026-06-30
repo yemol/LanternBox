@@ -52,7 +52,11 @@ def build_guide_candidates(
 
     query_profile = build_guide_query(strategy)
     detected_domains = query_profile.get("domains", [])
-    query_profile = build_guide_query(strategy)
+
+    guide_retrieval_enabled = strategy.get("guide_retrieval_enabled", True)
+
+    if not guide_retrieval_enabled and not matched_triggers:
+        return []
 
     for guide in find_related_guides(matched_triggers, guides):
         score = score_guide_for_message(
@@ -77,10 +81,25 @@ def build_guide_candidates(
     domain_guides = []
 
     if not scored_guides and detected_domains:
-        domain_guides = find_domain_fallback_guides(
+        for guide in find_domain_fallback_guides(
             detected_domains,
             guides,
-        )[:4]
+        )[:8]:
+            score = score_guide_for_message(
+                guide,
+                user_message,
+                strategy,
+            )
+
+            if score < 0:
+                continue
+
+            item = dict(guide)
+            item["_match_score"] = score
+            item["_match_reason"] = build_match_reason(item, query_profile)
+            item["_candidate_source"] = "domain_fallback"
+            domain_guides.append(item)
+
 
     guide_pool = merge_guides(
         scored_guides,
@@ -89,10 +108,7 @@ def build_guide_candidates(
     )
 
     guide_pool.sort(
-        key=lambda item: item.get(
-            "_match_score",
-            item.get("_domain_score", 0),
-        ),
+        key=lambda item: item.get("_match_score", -100),
         reverse=True,
     )
 

@@ -15,6 +15,17 @@ Retrieval Strategy
 
 from typing import Any
 
+def should_retrieve_guides(context) -> bool:
+    return any(
+        [
+            getattr(context, "domains", None),
+            getattr(context, "intents", None),
+            getattr(context, "signals", None),
+            getattr(context, "risks", None),
+            getattr(context, "retrieval_plan", None),
+        ]
+    )
+
 
 def build_retrieval_strategy(context) -> dict[str, Any]:
     strategy = {
@@ -28,6 +39,7 @@ def build_retrieval_strategy(context) -> dict[str, Any]:
         "guide_filters": {},
         "wiki_filters": {},
         "inventory_filters": {},
+        "guide_retrieval_enabled": should_retrieve_guides(context),
     }
 
     # ---------- Guide ----------

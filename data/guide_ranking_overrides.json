@@ -1,0 +1,107 @@
+{
+  "DG-0001": {
+    "ranking_role": "fallback",
+    "guide_type": "safety_principle",
+    "primary_domain": "medical",
+    "primary_intent": "tools_security_repair"
+  },
+  "DG-0039": {
+    "ranking_role": "primary",
+    "guide_type": "assessment",
+    "primary_domain": "food",
+    "primary_intent": "food_safety_judgment",
+    "intents": [
+      "food_safety_judgment"
+    ],
+    "signals": [
+      "food_spoilage",
+      "contamination"
+    ],
+    "risks": [
+      "food_poisoning",
+      "diarrhea"
+    ]
+  },
+  "DG-0065": {
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "water",
+    "primary_intent": "water_shortage",
+    "intents": [
+      "water_shortage",
+      "water_rationing"
+    ],
+    "signals": [
+      "water_shortage"
+    ],
+    "risks": [
+      "dehydration",
+      "water_depletion"
+    ],
+    "top1_aliases": [
+      "大规模停水",
+      "大规模停水第一天"
+    ]
+  },
+  "DG-0176": {
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "shelter_damp_mold",
+    "intents": [
+      "shelter_damp_mold"
+    ],
+    "signals": [
+      "damp",
+      "mold"
+    ],
+    "risks": [
+      "mold_exposure",
+      "respiratory_irritation"
+    ],
+    "top1_aliases": [
+      "室内防潮防霉"
+    ]
+  },
+  "DG-0490": {
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "shelter_damp_mold",
+    "intents": [
+      "shelter_damp_mold"
+    ],
+    "signals": [
+      "damp",
+      "mold"
+    ],
+    "risks": [
+      "mold_exposure",
+      "respiratory_irritation"
+    ],
+    "top1_aliases": [
+      "霉菌初期控制"
+    ]
+  },
+  "DG-0021": {
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "medical_fever",
+    "intents": [
+      "medical_fever",
+      "medical_fever_respiratory"
+    ],
+    "signals": [
+      "fever"
+    ],
+    "risks": [
+      "infection",
+      "dehydration"
+    ],
+    "top1_aliases": [
+      "咳嗽发热",
+      "发热：降温、补水、记录"
+    ]
+  }
+}
