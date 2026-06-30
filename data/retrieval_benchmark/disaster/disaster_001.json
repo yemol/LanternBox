@@ -6,8 +6,18 @@
   "question": "暴雨不停水位一直上涨",
   "expect": {
     "domains": [
-      "disaster"
+      "disaster",
+      "water",
+      "resource"
     ],
-    "top1": "洪水来临前"
+    "intents": [
+      "disaster_flood",
+      "water_shortage"
+    ],
+    "top1": "洪水来临前",
+    "acceptable_top1": [
+      "洪水来临前：撤高和断电",
+      "暴雨山洪：远离沟谷和涵洞"
+    ]
   }
 }

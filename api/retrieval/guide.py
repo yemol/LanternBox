@@ -98,6 +98,66 @@ def build_guide_query(
     }
 
 
+def score_guide_metadata(
+    guide: Dict[str, Any],
+    query_profile: Dict[str, Any],
+) -> int:
+    """
+    根据 Guide 结构化元数据计算通用评分。
+
+    只在主意图、信号或风险明确命中时加较高分。
+    不因为同领域就把 primary guide 顶到前面，避免领域级通用指南压过具体指南。
+    """
+    score = 0
+
+    guide_signals = set(guide.get("signals") or [])
+    guide_risks = set(guide.get("risks") or [])
+    guide_intents = set(guide.get("intents") or [])
+    guide_domains = set(guide.get("domains") or [])
+
+    query_signals = set(query_profile.get("signals") or [])
+    query_risks = set(query_profile.get("risks") or [])
+    query_intents = set(query_profile.get("intents") or [])
+    query_domains = set(query_profile.get("domains") or [])
+
+    primary_intent = guide.get("primary_intent")
+    primary_domain = guide.get("primary_domain")
+    ranking_role = guide.get("ranking_role")
+
+    primary_intent_matched = bool(
+        primary_intent and primary_intent in query_intents
+    )
+
+    matched_signals = guide_signals & query_signals
+    matched_risks = guide_risks & query_risks
+    matched_intents = guide_intents & query_intents
+
+    if primary_intent_matched:
+        score += 18
+
+    if matched_signals:
+        score += 10 * len(matched_signals)
+
+    if matched_risks:
+        score += 5 * len(matched_risks)
+
+    # 主领域只能作为轻微辅助，不能单独把指南顶上去
+    if (
+        primary_domain
+        and primary_domain in query_domains
+        and (primary_intent_matched or matched_signals or matched_risks or matched_intents)
+    ):
+        score += 3
+
+    # primary 只能在已有明确匹配时加权，不能只靠同领域加权
+    if ranking_role == "primary" and (
+        primary_intent_matched or matched_signals or matched_risks
+    ):
+        score += 8
+
+    return score
+
+
 def score_guide_for_message(
     guide: Dict[str, Any],
     message: str,
@@ -138,6 +198,8 @@ def score_guide_for_message(
         + object_score
         + term_score
     )
+
+    score += score_guide_metadata(guide, query_profile)
 
     guide_domain_set = set(guide_domains(guide))
     for index, domain in enumerate(query_domains):

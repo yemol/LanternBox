@@ -24,6 +24,7 @@ from .guide import (
 )
 
 from ..services.guide_service import find_related_guides
+from api.retrieval.reranker import rerank_guide_candidates
 
 def merge_guides(*guide_lists):
     merged = []
@@ -112,4 +113,13 @@ def build_guide_candidates(
         reverse=True,
     )
 
-    return guide_pool[:16]
+    ranked_guides = guide_pool[:16]
+
+    ranked_guides = rerank_guide_candidates(
+        user_message=user_message,
+        strategy=strategy,
+        query_profile=query_profile,
+        candidates=ranked_guides,
+    )
+
+    return ranked_guides

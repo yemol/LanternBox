@@ -25,6 +25,35 @@ from .guide import build_guide_query
 
 from ..llm.client import call_ollama
 
+def _resolve_candidate_id(
+    candidate_id: str,
+    by_id: Dict[str, Dict[str, Any]],
+) -> Optional[str]:
+    """
+    解析 AI 返回的 candidate_id。
+
+    本地小模型有时会把 guide:DG-0065 输出成 DG-0065。
+    这里只做 ID 规范化，不按标题猜测，避免引入不稳定规则。
+    """
+    candidate_id = str(candidate_id or "").strip()
+
+    if not candidate_id:
+        return None
+
+    if candidate_id in by_id:
+        return candidate_id
+
+    guide_prefixed = f"guide:{candidate_id}"
+    if guide_prefixed in by_id:
+        return guide_prefixed
+
+    if candidate_id.startswith("guide:"):
+        unprefixed = candidate_id.removeprefix("guide:")
+        if unprefixed in by_id:
+            return unprefixed
+
+    return None
+
 
 def _env_truthy(value: Any) -> bool:
     return str(value or "").strip().lower() in {"1", "true", "yes", "on", "y", "启用", "开启"}
@@ -114,9 +143,13 @@ def build_ai_rerank_messages(
 3. 用户明确说“先不管、暂时不考虑、不要处理”的主题，必须放入 excluded，并说明原因。
 4. 应急指南 guide 通常优先于 wiki；wiki 优先于 kiwix；Kiwix 只作为背景资料。
 5. 如果两个来源都相关，优先选择更贴近“当前优先事项”的来源，而不是只看大场景关键词。
-6. 输出必须是一个合法 JSON object。
-7. 不要输出解释性正文，不要使用 Markdown 代码块，不要在 JSON 前后添加任何文字。
-8. JSON 中所有字符串必须使用英文双引号，不能使用单引号。
+6. 选择时优先匹配用户当前真正要处理的风险和行动目标，不要被单个物体词带偏。
+7. 如果用户描述的是资源余量不足、只剩少量水或食物，优先选择配给、用途排序、消耗控制、优先级分配类指南；不要优先选择容器清洁、工具维护、储存容器类指南。
+8. 如果用户描述的是暴雨、水位上涨、洪水风险，优先选择洪水、撤离、断电、避险类指南；不要优先选择停水、储水、日常用水类指南。
+9. 如果用户描述的是门外有人徘徊、接近、走来走去，优先选择可疑人员接近、观察、暴露控制类指南；不要仅因为发生在夜间就选择夜间异响类指南。
+10. 输出必须是一个合法 JSON object。
+11. 不要输出解释性正文，不要使用 Markdown 代码块，不要在 JSON 前后添加任何文字。
+12. JSON 中所有字符串必须使用英文双引号，不能使用单引号。
 """
 
     user_prompt = f"""
@@ -201,11 +234,13 @@ def validate_ai_rerank_result(
     rejected_ids: List[str] = []
 
     for entry in _extract_selected_entries(ai_result):
-        candidate_id = str(entry.get("candidate_id") or "").strip()
-        item = by_id.get(candidate_id)
-        if not candidate_id or not item:
-            if candidate_id:
-                rejected_ids.append(candidate_id)
+        raw_candidate_id = str(entry.get("candidate_id") or "").strip()
+        candidate_id = _resolve_candidate_id(raw_candidate_id, by_id)
+        item = by_id.get(candidate_id) if candidate_id else None
+
+        if not raw_candidate_id or not item:
+            if raw_candidate_id:
+                rejected_ids.append(raw_candidate_id)
             continue
         if item.get("hard_excluded"):
             rejected_ids.append(candidate_id)
@@ -455,3 +490,139 @@ def rerank_candidates_with_local_ai(
         )
         fallback["lantern_context"] = lantern_context
         return fallback
+    
+
+def _mark_guide_rule_rank(
+    candidates: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    if not candidates:
+        return candidates
+
+    rule_top1_title = candidates[0].get("title")
+
+    marked = []
+    for index, candidate in enumerate(candidates, start=1):
+        item = dict(candidate)
+        item["_rule_rank"] = index
+        item["_rule_top1_title"] = rule_top1_title
+        marked.append(item)
+
+    return marked
+
+
+def _guide_candidate_id(candidate: Dict[str, Any], index: int) -> str:
+    guide_id = candidate.get("id") or candidate.get("guide_id") or index
+    return f"guide:{guide_id}"
+
+
+def _guide_to_rerank_candidate(
+    candidate: Dict[str, Any],
+    index: int,
+) -> Dict[str, Any]:
+    candidate_id = _guide_candidate_id(candidate, index)
+
+    summary_parts = [
+        f"title={candidate.get('title')}",
+        f"scenario={candidate.get('scenario')}",
+        f"goal={candidate.get('goal')}",
+        f"notes={candidate.get('notes')}",
+        f"domains={candidate.get('domains') or []}",
+        f"intents={candidate.get('intents') or []}",
+        f"primary_domain={candidate.get('primary_domain')}",
+        f"primary_intent={candidate.get('primary_intent')}",
+        f"ranking_role={candidate.get('ranking_role')}",
+        f"guide_type={candidate.get('guide_type')}",
+        f"signals={candidate.get('signals') or []}",
+        f"risks={candidate.get('risks') or []}",
+    ]
+
+    return {
+        "candidate_id": candidate_id,
+        "source_type": "guide",
+        "source_label": "应急指南",
+        "title": candidate.get("title"),
+        "summary": "；".join(summary_parts),
+        "score": candidate.get("_match_score", 0),
+        "rank": index,
+        "reason": candidate.get("_match_reason", ""),
+        "matched_terms": (
+            candidate.get("keywords")
+            or candidate.get("top1_aliases")
+            or []
+        )[:8],
+        "hard_excluded": False,
+        "_guide_candidate": candidate,
+    }
+
+
+def rerank_guide_candidates(
+    *,
+    user_message: str,
+    strategy: Dict[str, Any],
+    query_profile: Dict[str, Any],
+    candidates: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    """
+    Guide candidates rerank hook.
+
+    v0.8.2:
+    - 记录规则排序结果
+    - enable_ai_rerank=False 时不改变顺序
+    - enable_ai_rerank=True 时复用现有本地 AI reranker
+    - AI 失败或输出无效时回退规则顺序
+    """
+    if not candidates:
+        return candidates
+
+    marked_candidates = _mark_guide_rule_rank(candidates)
+
+    if not should_enable_ai_rerank(strategy.get("enable_ai_rerank")):
+        return marked_candidates
+
+    rerank_candidates = [
+        _guide_to_rerank_candidate(candidate, index)
+        for index, candidate in enumerate(marked_candidates, start=1)
+    ]
+
+    by_candidate_id = {
+        item["candidate_id"]: item["_guide_candidate"]
+        for item in rerank_candidates
+    }
+
+    result = rerank_candidates_with_local_ai(
+        user_message,
+        rerank_candidates,
+        strategy=strategy,
+        enable_ai_rerank=True,
+        max_selected=len(rerank_candidates),
+    )
+
+    selected_ids = result.get("selected_candidate_ids") or []
+
+    ranked_guides = []
+    used_ids = set()
+
+    for candidate_id in selected_ids:
+        guide = by_candidate_id.get(candidate_id)
+        if not guide:
+            continue
+
+        item = dict(guide)
+        item["_guide_rerank_mode"] = result.get("mode")
+        item["_guide_rerank_used_ai"] = result.get("used_ai", False)
+        item["_guide_rerank_reason"] = "AI 重排选择"
+        ranked_guides.append(item)
+        used_ids.add(candidate_id)
+
+    for rerank_candidate in rerank_candidates:
+        candidate_id = rerank_candidate["candidate_id"]
+        if candidate_id in used_ids:
+            continue
+
+        guide = by_candidate_id[candidate_id]
+        item = dict(guide)
+        item["_guide_rerank_mode"] = result.get("mode")
+        item["_guide_rerank_used_ai"] = result.get("used_ai", False)
+        ranked_guides.append(item)
+
+    return ranked_guides

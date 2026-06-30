@@ -37,16 +37,12 @@
   "notes": "停电后的冰箱会从储藏工具变成腐败源。",
   "category_original": "食物获取",
   "domains": [
-    "water",
     "food",
-    "power",
-    "tools",
-    "security"
+    "power"
   ],
   "intents": [
     "food_safety_judgment",
-    "power_lighting_energy",
-    "tools_security_repair"
+    "power_outage"
   ],
   "situations": [
     "power_outage",
@@ -60,21 +56,16 @@
   ],
   "keywords": [
     "停电后冰箱食物处置",
-    "食物",
-    "冰箱",
-    "能不能吃",
     "停电",
-    "工具",
-    "power_outage",
-    "refrigeration_failure",
-    "food_spoilage",
-    "fridge",
-    "drinking_water",
-    "tools",
-    "food_safety_judgment",
-    "power_lighting_energy",
-    "tools_security_repair",
-    "食物保障"
+    "冰箱",
+    "冷冻室",
+    "冷藏",
+    "冰箱失效",
+    "食物还能不能吃",
+    "易坏食物",
+    "食物中毒",
+    "冷冻食物",
+    "冷藏食物"
   ],
   "negative_keywords": [
     "异响",
@@ -87,5 +78,23 @@
     "伤口",
     "主食配给",
     "夜间异响"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "food",
+  "primary_intent": "food_safety_judgment",
+  "signals": [
+    "food_spoilage",
+    "power_outage"
+  ],
+  "risks": [
+    "food_poisoning",
+    "diarrhea",
+    "refrigeration_failure"
+  ],
+  "top1_aliases": [
+    "停电后冰箱食物处置",
+    "冰箱食物处置",
+    "停电冰箱食物"
   ]
 }

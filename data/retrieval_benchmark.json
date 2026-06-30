@@ -51,9 +51,19 @@
       "question": "暴雨不停水位一直上涨",
       "expect": {
         "domains": [
-          "disaster"
+          "disaster",
+          "water",
+          "resource"
         ],
-        "top1": "洪水来临前"
+        "intents": [
+          "disaster_flood",
+          "water_shortage"
+        ],
+        "top1": "洪水来临前",
+        "acceptable_top1": [
+          "洪水来临前：撤高和断电",
+          "暴雨山洪：远离沟谷和涵洞"
+        ]
       }
     },
     {
@@ -128,6 +138,9 @@
         "domains": [
           "medical"
         ],
+        "intents": [
+          "medical_fever"
+        ],
         "top1": "咳嗽发热"
       }
     },
@@ -142,6 +155,9 @@
           "medical",
           "water"
         ],
+        "intents": [
+          "medical_diarrhea"
+        ],
         "top1": "腹泻脱水"
       }
     },
@@ -155,7 +171,13 @@
         "domains": [
           "medical"
         ],
-        "top1": "骨折固定"
+        "intents": [
+          "medical_fracture"
+        ],
+        "top1": "骨折固定",
+        "acceptable_top1": [
+          "疑似骨折：固定不复位"
+        ]
       }
     },
     {
@@ -167,6 +189,9 @@
       "expect": {
         "domains": [
           "power"
+        ],
+        "intents": [
+          "power_water_damage"
         ],
         "top1": "电线和插线板安全检查"
       }
@@ -181,7 +206,14 @@
         "domains": [
           "security"
         ],
-        "top1": "可疑人员接近"
+        "intents": [
+          "security_suspicious_person"
+        ],
+        "top1": "可疑人员接近",
+        "acceptable_top1": [
+          "陌生人接触距离",
+          "门口谈话规则"
+        ]
       }
     },
     {
@@ -194,7 +226,13 @@
         "domains": [
           "security"
         ],
-        "top1": "夜间外部异响"
+        "intents": [
+          "security_night_anomaly"
+        ],
+        "top1": "夜间外部异响",
+        "acceptable_top1": [
+          "夜间外部异响：先观察，不暴露"
+        ]
       }
     },
     {
@@ -206,6 +244,9 @@
       "expect": {
         "domains": [
           "shelter"
+        ],
+        "intents": [
+          "shelter_damp_mold"
         ],
         "top1": "室内防潮防霉"
       }
@@ -242,7 +283,7 @@
           "resource"
         ],
         "intents": [
-          "water_shortage"
+          "water_rationing"
         ],
         "top1": "缺水时用途排序"
       }
@@ -256,6 +297,9 @@
       "expect": {
         "domains": [
           "water"
+        ],
+        "intents": [
+          "water_treatment"
         ],
         "top1": "雨水收集"
       }

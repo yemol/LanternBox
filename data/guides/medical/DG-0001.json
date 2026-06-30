@@ -72,5 +72,9 @@
     "主食",
     "剩饭",
     "罐头鼓包"
-  ]
+  ],
+  "ranking_role": "fallback",
+  "guide_type": "safety_principle",
+  "primary_domain": "medical",
+  "primary_intent": "tools_security_repair"
 }

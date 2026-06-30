@@ -44,8 +44,7 @@
     "comms"
   ],
   "intents": [
-    "power_lighting_energy",
-    "hygiene_contamination"
+    "food_safety_judgment"
   ],
   "situations": [
     "power_outage",
@@ -85,5 +84,17 @@
     "伤口",
     "主食配给",
     "夜间异响"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "assessment",
+  "primary_domain": "food",
+  "primary_intent": "food_safety_judgment",
+  "signals": [
+    "food_spoilage",
+    "contamination"
+  ],
+  "risks": [
+    "food_poisoning",
+    "diarrhea"
   ]
 }

@@ -40,23 +40,23 @@
   "notes": "固定的目标是少动，不是把外形恢复漂亮。",
   "category_original": "急救处理",
   "domains": [
-    "medical",
-    "tools",
-    "security",
-    "shelter"
+    "medical"
   ],
   "intents": [
-    "tools_security_repair"
+    "medical_fracture"
   ],
   "situations": [],
   "objects": [],
   "keywords": [
     "疑似骨折",
+    "骨折固定",
     "固定不复位",
-    "固定",
-    "tools_security_repair",
-    "医疗急救",
-    "照护"
+    "无法承重",
+    "剧痛",
+    "肿胀",
+    "畸形",
+    "夹板",
+    "固定"
   ],
   "negative_keywords": [
     "主食配给",
@@ -66,5 +66,20 @@
     "主食",
     "剩饭",
     "罐头鼓包"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "medical",
+  "primary_intent": "medical_fracture",
+  "signals": [
+    "fracture"
+  ],
+  "risks": [
+    "secondary_injury"
+  ],
+  "top1_aliases": [
+    "骨折固定",
+    "疑似骨折",
+    "疑似骨折：固定不复位"
   ]
 }

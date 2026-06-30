@@ -8,6 +8,12 @@
     "domains": [
       "security"
     ],
-    "top1": "夜间外部异响"
+    "intents": [
+      "security_night_anomaly"
+    ],
+    "top1": "夜间外部异响",
+    "acceptable_top1": [
+      "夜间外部异响：先观察，不暴露"
+    ]
   }
 }

@@ -668,23 +668,23 @@
     "notes": "固定的目标是少动，不是把外形恢复漂亮。",
     "category_original": "急救处理",
     "domains": [
-      "medical",
-      "tools",
-      "security",
-      "shelter"
+      "medical"
     ],
     "intents": [
-      "tools_security_repair"
+      "medical_fracture"
     ],
     "situations": [],
     "objects": [],
     "keywords": [
       "疑似骨折",
+      "骨折固定",
       "固定不复位",
-      "固定",
-      "tools_security_repair",
-      "医疗急救",
-      "照护"
+      "无法承重",
+      "剧痛",
+      "肿胀",
+      "畸形",
+      "夹板",
+      "固定"
     ],
     "negative_keywords": [
       "主食配给",
@@ -694,6 +694,21 @@
       "主食",
       "剩饭",
       "罐头鼓包"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "medical_fracture",
+    "signals": [
+      "fracture"
+    ],
+    "risks": [
+      "secondary_injury"
+    ],
+    "top1_aliases": [
+      "骨折固定",
+      "疑似骨折",
+      "疑似骨折：固定不复位"
     ]
   },
   {
@@ -1431,11 +1446,10 @@
     "category_original": "急救处理",
     "domains": [
       "medical",
-      "hygiene",
       "water"
     ],
     "intents": [
-      "hygiene_contamination"
+      "medical_diarrhea"
     ],
     "situations": [
       "scarcity"
@@ -1447,16 +1461,16 @@
     ],
     "keywords": [
       "腹泻脱水",
-      "补液优先",
       "腹泻",
+      "拉肚子",
+      "喝不下水",
+      "补液",
+      "补液优先",
+      "口渴",
+      "尿少",
+      "乏力",
       "呕吐",
-      "scarcity",
-      "drinking_water",
-      "vomit",
-      "diarrhea",
-      "hygiene_contamination",
-      "医疗急救",
-      "照护"
+      "脱水"
     ],
     "negative_keywords": [
       "主食配给",
@@ -1466,6 +1480,22 @@
       "异响",
       "脚步声",
       "门外"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "medical_diarrhea",
+    "signals": [
+      "diarrhea",
+      "dehydration"
+    ],
+    "risks": [
+      "dehydration"
+    ],
+    "top1_aliases": [
+      "腹泻脱水",
+      "腹泻脱水：补液优先",
+      "腹泻补液"
     ]
   },
   {
@@ -3125,16 +3155,12 @@
     "notes": "停电后的冰箱会从储藏工具变成腐败源。",
     "category_original": "食物获取",
     "domains": [
-      "water",
       "food",
-      "power",
-      "tools",
-      "security"
+      "power"
     ],
     "intents": [
       "food_safety_judgment",
-      "power_lighting_energy",
-      "tools_security_repair"
+      "power_outage"
     ],
     "situations": [
       "power_outage",
@@ -3148,21 +3174,16 @@
     ],
     "keywords": [
       "停电后冰箱食物处置",
-      "食物",
-      "冰箱",
-      "能不能吃",
       "停电",
-      "工具",
-      "power_outage",
-      "refrigeration_failure",
-      "food_spoilage",
-      "fridge",
-      "drinking_water",
-      "tools",
-      "food_safety_judgment",
-      "power_lighting_energy",
-      "tools_security_repair",
-      "食物保障"
+      "冰箱",
+      "冷冻室",
+      "冷藏",
+      "冰箱失效",
+      "食物还能不能吃",
+      "易坏食物",
+      "食物中毒",
+      "冷冻食物",
+      "冷藏食物"
     ],
     "negative_keywords": [
       "异响",
@@ -3175,6 +3196,24 @@
       "伤口",
       "主食配给",
       "夜间异响"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "food",
+    "primary_intent": "food_safety_judgment",
+    "signals": [
+      "food_spoilage",
+      "power_outage"
+    ],
+    "risks": [
+      "food_poisoning",
+      "diarrhea",
+      "refrigeration_failure"
+    ],
+    "top1_aliases": [
+      "停电后冰箱食物处置",
+      "冰箱食物处置",
+      "停电冰箱食物"
     ]
   },
   {
@@ -4474,16 +4513,14 @@
     "category_original": "灾害专项",
     "domains": [
       "disaster",
-      "security",
       "evacuation",
       "shelter",
-      "power"
+      "power",
+      "security"
     ],
     "intents": [
-      "security_suspicious_person",
-      "shelter_disaster_evacuate",
-      "power_lighting_energy",
-      "records_inventory_people"
+      "disaster_flood",
+      "shelter_disaster_evacuate"
     ],
     "situations": [
       "power_outage",
@@ -4502,29 +4539,15 @@
     ],
     "keywords": [
       "洪水来临前",
-      "撤高和断电",
-      "洪水",
       "暴雨",
-      "水位",
-      "风险",
+      "水位上涨",
+      "河水上涨",
+      "城市内涝",
+      "低洼区域进水",
       "撤高",
-      "power_outage",
-      "flood",
-      "evacuation_decision",
-      "inventory_change",
-      "personnel_change",
-      "resource_exposure",
-      "drinking_water",
-      "inventory",
-      "people",
-      "person",
-      "supplies",
-      "security_suspicious_person",
-      "shelter_disaster_evacuate",
-      "power_lighting_energy",
-      "records_inventory_people",
-      "灾害应对",
-      "灾后恢复"
+      "断电",
+      "积水上涨",
+      "转移关键物资"
     ],
     "negative_keywords": [
       "主食",
@@ -4536,6 +4559,24 @@
       "伤口",
       "主食配给",
       "夜间异响"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "disaster",
+    "primary_intent": "disaster_flood",
+    "signals": [
+      "flood"
+    ],
+    "risks": [
+      "flooding",
+      "evacuation_needed",
+      "electric_shock"
+    ],
+    "top1_aliases": [
+      "洪水来临前",
+      "洪水来临前：撤高和断电",
+      "暴雨水位上涨",
+      "内涝撤高断电"
     ]
   },
   {
@@ -8746,6 +8787,7 @@
       "security"
     ],
     "intents": [
+      "power_water_damage",
       "power_lighting_energy"
     ],
     "situations": [
@@ -8757,15 +8799,24 @@
     ],
     "keywords": [
       "电线和插线板安全检查",
-      "照明",
-      "发电机",
-      "设备",
-      "安全",
-      "power_outage",
-      "temporary_repair",
-      "lighting",
-      "power_lighting_energy",
-      "能源照明"
+      "插线板泡过水",
+      "插线板进水",
+      "电线泡水",
+      "电线进水",
+      "电器进水",
+      "插头进水",
+      "地面潮湿",
+      "插线板放湿地上",
+      "泡过水还能继续用吗",
+      "泡过水还能用吗",
+      "不能继续用",
+      "触电",
+      "短路",
+      "火灾",
+      "焦味",
+      "冒烟",
+      "火花",
+      "线材发热"
     ],
     "negative_keywords": [
       "腹泻",
@@ -8776,7 +8827,28 @@
       "主食",
       "剩饭",
       "冰箱食物",
-      "罐头鼓包"
+      "罐头鼓包",
+      "洪水来临前",
+      "暴雨水位上涨",
+      "撤高",
+      "断电撤离"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "power_water_damage",
+    "signals": [
+      "water_contact_electric"
+    ],
+    "risks": [
+      "electric_shock",
+      "fire"
+    ],
+    "top1_aliases": [
+      "电线和插线板安全检查",
+      "插线板进水",
+      "插线板泡水",
+      "插线板泡过水"
     ]
   },
   {
@@ -36494,14 +36566,10 @@
     "category_original": "缺水优先级",
     "domains": [
       "water",
-      "food",
-      "security",
-      "hygiene"
+      "resource"
     ],
     "intents": [
-      "security_suspicious_person",
-      "water_rationing",
-      "water_treatment"
+      "water_rationing"
     ],
     "situations": [
       "water_outage",
@@ -36513,18 +36581,19 @@
     ],
     "keywords": [
       "缺水时用途排序",
-      "水源",
-      "净水",
-      "食物",
-      "可疑",
-      "water_outage",
-      "scarcity",
-      "suspicious_approach",
-      "drinking_water",
-      "security_suspicious_person",
+      "饮用水用途排序",
+      "只剩一桶饮用水",
+      "一桶饮用水",
+      "只剩少量水",
+      "饮用水不多",
+      "储水不足",
+      "水量紧张",
+      "用水优先级",
+      "配给",
+      "饮用优先",
+      "消耗控制",
       "water_rationing",
-      "water_treatment",
-      "食物保障"
+      "resource_low"
     ],
     "negative_keywords": [
       "异响",
@@ -36537,6 +36606,24 @@
       "冰箱食物",
       "罐头鼓包",
       "夜间异响"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "water",
+    "primary_intent": "water_rationing",
+    "signals": [
+      "resource_low",
+      "water_shortage"
+    ],
+    "risks": [
+      "dehydration",
+      "water_depletion"
+    ],
+    "top1_aliases": [
+      "缺水时用途排序",
+      "饮用水用途排序",
+      "用水优先级",
+      "水量紧张"
     ]
   },
   {
@@ -42646,8 +42733,7 @@
     ],
     "intents": [
       "security_night_anomaly",
-      "security_suspicious_person",
-      "records_inventory_people"
+      "security_suspicious_person"
     ],
     "situations": [
       "door_window_security",
@@ -42667,36 +42753,39 @@
     ],
     "keywords": [
       "夜间外部异响",
+      "晚上一直听见脚步声",
+      "脚步声",
+      "门外脚步声",
+      "窗外声音",
+      "外部异常声音",
+      "夜间异常声音",
       "先观察",
       "不暴露",
-      "异响",
-      "门外",
-      "窗外",
-      "夜间",
-      "安全",
-      "风险",
-      "住所",
-      "door_window_security",
-      "personnel_change",
-      "night",
-      "external_anomaly",
-      "suspicious_approach",
-      "resource_exposure",
-      "building",
-      "door",
-      "window",
-      "people",
-      "outside_noise",
-      "person",
-      "security_night_anomaly",
-      "security_suspicious_person",
-      "records_inventory_people"
+      "不要贸然外出"
     ],
     "negative_keywords": [
       "主食",
       "剩饭",
       "冰箱食物",
       "罐头鼓包"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "security",
+    "primary_intent": "security_night_anomaly",
+    "signals": [
+      "night",
+      "external_anomaly"
+    ],
+    "risks": [
+      "intrusion",
+      "panic_exposure"
+    ],
+    "top1_aliases": [
+      "夜间外部异响",
+      "夜间外部异响：先观察，不暴露",
+      "晚上脚步声",
+      "门外脚步声"
     ]
   },
   {
@@ -42905,13 +42994,10 @@
     "notes": "不对峙不是软弱，是把主动权留给自己。",
     "category_original": "安全与风险",
     "domains": [
-      "security",
-      "shelter",
-      "records"
+      "security"
     ],
     "intents": [
-      "security_suspicious_person",
-      "records_inventory_people"
+      "security_suspicious_person"
     ],
     "situations": [
       "inventory_change",
@@ -42930,28 +43016,44 @@
       "可疑人员接近",
       "不对峙",
       "先收缩",
-      "可疑",
-      "陌生人",
-      "安全",
-      "风险",
-      "住所",
-      "inventory_change",
-      "personnel_change",
-      "suspicious_approach",
-      "resource_exposure",
-      "building",
-      "inventory",
-      "people",
-      "person",
-      "supplies",
-      "security_suspicious_person",
-      "records_inventory_people"
+      "陌生人接近",
+      "可疑人员",
+      "反复试探",
+      "不明人员",
+      "靠近住所",
+      "靠近营地",
+      "靠近物资点",
+      "门外有人",
+      "门外一直有人",
+      "走来走去",
+      "徘徊",
+      "门口徘徊",
+      "外部人员接近",
+      "降低暴露",
+      "不要对峙"
     ],
     "negative_keywords": [
       "主食",
       "剩饭",
       "冰箱食物",
       "罐头鼓包"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "security",
+    "primary_intent": "security_suspicious_person",
+    "signals": [
+      "suspicious_approach"
+    ],
+    "risks": [
+      "intrusion",
+      "resource_exposure"
+    ],
+    "top1_aliases": [
+      "可疑人员接近",
+      "可疑人员接近：不对峙，先收缩",
+      "陌生人接近",
+      "门外有人徘徊"
     ]
   },
   {

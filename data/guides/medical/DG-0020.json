@@ -39,11 +39,10 @@
   "category_original": "急救处理",
   "domains": [
     "medical",
-    "hygiene",
     "water"
   ],
   "intents": [
-    "hygiene_contamination"
+    "medical_diarrhea"
   ],
   "situations": [
     "scarcity"
@@ -55,16 +54,16 @@
   ],
   "keywords": [
     "腹泻脱水",
-    "补液优先",
     "腹泻",
+    "拉肚子",
+    "喝不下水",
+    "补液",
+    "补液优先",
+    "口渴",
+    "尿少",
+    "乏力",
     "呕吐",
-    "scarcity",
-    "drinking_water",
-    "vomit",
-    "diarrhea",
-    "hygiene_contamination",
-    "医疗急救",
-    "照护"
+    "脱水"
   ],
   "negative_keywords": [
     "主食配给",
@@ -74,5 +73,21 @@
     "异响",
     "脚步声",
     "门外"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "medical",
+  "primary_intent": "medical_diarrhea",
+  "signals": [
+    "diarrhea",
+    "dehydration"
+  ],
+  "risks": [
+    "dehydration"
+  ],
+  "top1_aliases": [
+    "腹泻脱水",
+    "腹泻脱水：补液优先",
+    "腹泻补液"
   ]
 }

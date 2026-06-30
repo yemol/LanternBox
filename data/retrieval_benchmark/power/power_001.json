@@ -8,6 +8,9 @@
     "domains": [
       "power"
     ],
+    "intents": [
+      "power_water_damage"
+    ],
     "top1": "电线和插线板安全检查"
   }
 }

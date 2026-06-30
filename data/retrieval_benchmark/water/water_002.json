@@ -10,7 +10,7 @@
       "resource"
     ],
     "intents": [
-      "water_shortage"
+      "water_rationing"
     ],
     "top1": "缺水时用途排序"
   }

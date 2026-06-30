@@ -9,6 +9,9 @@
       "medical",
       "water"
     ],
+    "intents": [
+      "medical_diarrhea"
+    ],
     "top1": "腹泻脱水"
   }
 }

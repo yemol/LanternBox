@@ -43,6 +43,7 @@
     "water"
   ],
   "intents": [
+    "water_shortage",
     "water_rationing"
   ],
   "situations": [
@@ -64,5 +65,20 @@
     "异响",
     "脚步声",
     "门外"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "water_shortage",
+  "signals": [
+    "water_shortage"
+  ],
+  "risks": [
+    "dehydration",
+    "water_depletion"
+  ],
+  "top1_aliases": [
+    "大规模停水",
+    "大规模停水第一天"
   ]
 }

@@ -8,6 +8,13 @@
     "domains": [
       "security"
     ],
-    "top1": "可疑人员接近"
+    "intents": [
+      "security_suspicious_person"
+    ],
+    "top1": "可疑人员接近",
+    "acceptable_top1": [
+      "陌生人接触距离",
+      "门口谈话规则"
+    ]
   }
 }

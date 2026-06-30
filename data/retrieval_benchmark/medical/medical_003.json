@@ -8,6 +8,12 @@
     "domains": [
       "medical"
     ],
-    "top1": "骨折固定"
+    "intents": [
+      "medical_fracture"
+    ],
+    "top1": "骨折固定",
+    "acceptable_top1": [
+      "疑似骨折：固定不复位"
+    ]
   }
 }

@@ -48,8 +48,8 @@
     "water"
   ],
   "intents": [
-    "medical_fever_respiratory",
-    "records_inventory_people"
+    "medical_fever",
+    "medical_fever_respiratory"
   ],
   "situations": [
     "fever",
@@ -86,5 +86,20 @@
     "异响",
     "脚步声",
     "门外"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "medical",
+  "primary_intent": "medical_fever",
+  "signals": [
+    "fever"
+  ],
+  "risks": [
+    "infection",
+    "dehydration"
+  ],
+  "top1_aliases": [
+    "咳嗽发热",
+    "发热：降温、补水、记录"
   ]
 }

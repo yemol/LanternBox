@@ -46,8 +46,7 @@
   ],
   "intents": [
     "security_night_anomaly",
-    "security_suspicious_person",
-    "records_inventory_people"
+    "security_suspicious_person"
   ],
   "situations": [
     "door_window_security",
@@ -67,35 +66,38 @@
   ],
   "keywords": [
     "夜间外部异响",
+    "晚上一直听见脚步声",
+    "脚步声",
+    "门外脚步声",
+    "窗外声音",
+    "外部异常声音",
+    "夜间异常声音",
     "先观察",
     "不暴露",
-    "异响",
-    "门外",
-    "窗外",
-    "夜间",
-    "安全",
-    "风险",
-    "住所",
-    "door_window_security",
-    "personnel_change",
-    "night",
-    "external_anomaly",
-    "suspicious_approach",
-    "resource_exposure",
-    "building",
-    "door",
-    "window",
-    "people",
-    "outside_noise",
-    "person",
-    "security_night_anomaly",
-    "security_suspicious_person",
-    "records_inventory_people"
+    "不要贸然外出"
   ],
   "negative_keywords": [
     "主食",
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "security",
+  "primary_intent": "security_night_anomaly",
+  "signals": [
+    "night",
+    "external_anomaly"
+  ],
+  "risks": [
+    "intrusion",
+    "panic_exposure"
+  ],
+  "top1_aliases": [
+    "夜间外部异响",
+    "夜间外部异响：先观察，不暴露",
+    "晚上脚步声",
+    "门外脚步声"
   ]
 }

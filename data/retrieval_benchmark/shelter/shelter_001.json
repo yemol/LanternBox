@@ -8,6 +8,9 @@
     "domains": [
       "shelter"
     ],
+    "intents": [
+      "shelter_damp_mold"
+    ],
     "top1": "室内防潮防霉"
   }
 }

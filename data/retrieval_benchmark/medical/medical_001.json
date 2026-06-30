@@ -8,6 +8,9 @@
     "domains": [
       "medical"
     ],
+    "intents": [
+      "medical_fever"
+    ],
     "top1": "咳嗽发热"
   }
 }

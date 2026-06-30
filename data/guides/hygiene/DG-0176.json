@@ -43,8 +43,7 @@
     "security"
   ],
   "intents": [
-    "shelter_disaster_evacuate",
-    "tools_security_repair"
+    "shelter_damp_mold"
   ],
   "situations": [
     "flood",
@@ -84,5 +83,20 @@
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "shelter",
+  "primary_intent": "shelter_damp_mold",
+  "signals": [
+    "damp",
+    "mold"
+  ],
+  "risks": [
+    "mold_exposure",
+    "respiratory_irritation"
+  ],
+  "top1_aliases": [
+    "室内防潮防霉"
   ]
 }

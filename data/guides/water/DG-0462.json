@@ -36,14 +36,10 @@
   "category_original": "缺水优先级",
   "domains": [
     "water",
-    "food",
-    "security",
-    "hygiene"
+    "resource"
   ],
   "intents": [
-    "security_suspicious_person",
-    "water_rationing",
-    "water_treatment"
+    "water_rationing"
   ],
   "situations": [
     "water_outage",
@@ -55,18 +51,19 @@
   ],
   "keywords": [
     "缺水时用途排序",
-    "水源",
-    "净水",
-    "食物",
-    "可疑",
-    "water_outage",
-    "scarcity",
-    "suspicious_approach",
-    "drinking_water",
-    "security_suspicious_person",
+    "饮用水用途排序",
+    "只剩一桶饮用水",
+    "一桶饮用水",
+    "只剩少量水",
+    "饮用水不多",
+    "储水不足",
+    "水量紧张",
+    "用水优先级",
+    "配给",
+    "饮用优先",
+    "消耗控制",
     "water_rationing",
-    "water_treatment",
-    "食物保障"
+    "resource_low"
   ],
   "negative_keywords": [
     "异响",
@@ -79,5 +76,23 @@
     "冰箱食物",
     "罐头鼓包",
     "夜间异响"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "water_rationing",
+  "signals": [
+    "resource_low",
+    "water_shortage"
+  ],
+  "risks": [
+    "dehydration",
+    "water_depletion"
+  ],
+  "top1_aliases": [
+    "缺水时用途排序",
+    "饮用水用途排序",
+    "用水优先级",
+    "水量紧张"
   ]
 }

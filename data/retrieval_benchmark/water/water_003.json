@@ -8,6 +8,9 @@
     "domains": [
       "water"
     ],
+    "intents": [
+      "water_treatment"
+    ],
     "top1": "雨水收集"
   }
 }
