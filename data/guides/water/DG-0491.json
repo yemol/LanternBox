@@ -1,0 +1,78 @@
+{
+  "id": "DG-0491",
+  "title": "污水接触物分级",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "物品被洪水、厕所溢出、下水道倒灌或不明污水浸泡。",
+  "goal": "按污染等级决定清洁、降级或废弃。",
+  "tools": [
+    "隔离袋",
+    "标签",
+    "手套",
+    "记录本"
+  ],
+  "steps": [
+    "入口食物、开封药品、伤口用品被污水接触后不要继续使用。",
+    "硬质工具和金属件可隔离清洁后评估。",
+    "软布、纸类、泡棉、木质吸水物优先废弃或降级。",
+    "电子设备进污水后断电隔离，不开机。",
+    "所有污水接触物贴污染标签。",
+    "处理区域和干净区分开。",
+    "处理结果录入库存。"
+  ],
+  "check": [
+    "入口物资未保留。",
+    "污染物有标签。",
+    "干净区未混入污染物。"
+  ],
+  "common_mistakes": [
+    "污水泡过的罐头直接放厨房。",
+    "进水手机开机试。",
+    "污染衣物混入干衣。"
+  ],
+  "fallback": "无法判断时，按污染处理，不进入入口和睡眠用途。",
+  "stop_or_escalate": [
+    "污水接触药品、饮水容器、儿童用品时，必须优先处理和替换。"
+  ],
+  "notes": "污水泡过的物品，会把下水道带进屋里。",
+  "category_original": "洪水后清理与霉菌控制",
+  "domains": [
+    "water",
+    "disaster",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "flood"
+  ],
+  "objects": [
+    "drinking_water",
+    "toilet"
+  ],
+  "keywords": [
+    "污水接触物分级",
+    "洪水",
+    "contamination",
+    "flood",
+    "drinking_water",
+    "toilet",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

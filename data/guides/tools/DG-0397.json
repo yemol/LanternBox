@@ -1,0 +1,90 @@
+{
+  "id": "DG-0397",
+  "title": "离开房间前五项",
+  "category": "组织秩序与训练演练",
+  "scenario": "离开厨房、工具区、厕所区、药品区或工作区前。",
+  "goal": "避免留下火源、污染、锐器、漏水和散乱工具。",
+  "tools": [
+    "检查卡",
+    "低亮灯",
+    "手套"
+  ],
+  "steps": [
+    "看火：炉具、蜡烛、灰烬是否安全。",
+    "看水：水桶、灰水、漏水是否处理。",
+    "看锐器：刀、剪、针、玻璃是否收起。",
+    "看污染：垃圾、污布、厕所工具是否隔离。",
+    "看通道：地面是否有绊脚物。",
+    "确认后再离开。",
+    "发现问题立即处理，不把问题留给下一人。"
+  ],
+  "check": [
+    "火源安全。",
+    "锐器收起。",
+    "通道无障碍。"
+  ],
+  "common_mistakes": [
+    "做完饭直接走。",
+    "针线和刀具留桌上。",
+    "灰水桶满了没人管。"
+  ],
+  "fallback": "没有检查卡时，记住五个字：火、水、刀、污、路。",
+  "stop_or_escalate": [
+    "离开后出现火情、漏水、割伤、污染扩散时，强化该区域离开检查。"
+  ],
+  "notes": "离开前的五秒，常常能省掉晚上的五小时。",
+  "category_original": "检查清单与复核",
+  "domains": [
+    "tools",
+    "records",
+    "shelter",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "contamination",
+    "evacuation_decision",
+    "inventory_change",
+    "night"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "toilet",
+    "tools",
+    "inventory"
+  ],
+  "keywords": [
+    "离开房间前五项",
+    "工具",
+    "清单",
+    "房间",
+    "厕所",
+    "污染",
+    "contamination",
+    "evacuation_decision",
+    "inventory_change",
+    "night",
+    "drinking_water",
+    "medicine",
+    "toilet",
+    "tools",
+    "inventory",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物"
+  ]
+}

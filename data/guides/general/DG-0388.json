@@ -1,0 +1,78 @@
+{
+  "id": "DG-0388",
+  "title": "每周物资盘点",
+  "category": "组织秩序与训练演练",
+  "scenario": "食物、水、药品、电池、燃料、耗材不断消耗，容易账实不符。",
+  "goal": "每周用短时间复核关键物资，避免突然断供。",
+  "tools": [
+    "库存模块",
+    "纸质清单",
+    "标签",
+    "笔"
+  ],
+  "steps": [
+    "先盘点高风险物资：饮用水、主食、药品、燃料、电池、胶带、手套。",
+    "只抽查普通物资，不把整天耗在低价值清点上。",
+    "核对系统数量、实物数量和存放位置。",
+    "发现位置变化立即更新库存。",
+    "标记低于最低线的物资。",
+    "记录异常消耗原因。",
+    "盘点后发布补充、节约或替代计划。"
+  ],
+  "check": [
+    "关键物资账实一致。",
+    "低库存物资已标记。",
+    "位置变化已更新。"
+  ],
+  "common_mistakes": [
+    "只相信系统不看实物。",
+    "把一天都花在数小杂物。",
+    "发现缺口不写补救。"
+  ],
+  "fallback": "时间不足时，只盘点水、食物、药、燃料、电池五类。",
+  "stop_or_escalate": [
+    "药品、饮水、燃料账实不符时，暂停非必要取用并复核。"
+  ],
+  "notes": "库存不是仓库的回忆录，要和实物对得上。",
+  "category_original": "时间管理与周期任务",
+  "domains": [
+    "general",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "inventory",
+    "supplies",
+    "battery"
+  ],
+  "keywords": [
+    "每周物资盘点",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "medicine",
+    "inventory",
+    "supplies",
+    "battery",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "id": "DG-0520",
+  "title": "修补材料替代优先级",
+  "category": "工具维修与替代制作",
+  "scenario": "缺少胶带、针线、扎带、螺丝等正式修补材料。",
+  "goal": "按任务风险选择替代材料。",
+  "tools": [
+    "布条",
+    "绳子",
+    "铁丝",
+    "纸板",
+    "记录本"
+  ],
+  "steps": [
+    "先判断修补对象是否承重、入口、火源、电气或医疗相关。",
+    "低风险物品可用布条、绳子、夹子、纸板替代。",
+    "承重物品替代后必须测试。",
+    "电气和火源相关不使用不明替代材料硬修。",
+    "入口容器修补后一般降级，不继续装饮用水。",
+    "替代修补贴临时标签。",
+    "尽快列入正式维修清单。"
+  ],
+  "check": [
+    "对象风险已判断。",
+    "临时标签明确。",
+    "承重测试过。"
+  ],
+  "common_mistakes": [
+    "纸板补承重结构。",
+    "饮水桶补了继续喝。",
+    "电线随便用胶带之外材料缠。"
+  ],
+  "fallback": "不能安全替代时，停用该物品，寻找备用方案。",
+  "stop_or_escalate": [
+    "承重、电、火、饮水、医疗相关修补失败时，立即停用。"
+  ],
+  "notes": "替代修补的底线是别把小坏补成大祸。",
+  "category_original": "物资替代方案",
+  "domains": [
+    "security",
+    "tools",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "修补材料替代优先级",
+    "风险",
+    "工具",
+    "维修",
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

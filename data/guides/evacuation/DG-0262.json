@@ -1,0 +1,80 @@
+{
+  "id": "DG-0262",
+  "title": "搬运前热身和试重",
+  "category": "撤离交通与路线",
+  "scenario": "需要搬水、粮食、燃料、设备、箱子或伤员辅助物。",
+  "goal": "用试重减少拉伤、闪腰和掉落。",
+  "tools": [
+    "手套",
+    "防滑鞋",
+    "背包",
+    "记录本"
+  ],
+  "steps": [
+    "搬运前先看路线，再看物体，不急着下手。",
+    "用脚轻推或双手轻抬一角判断重量。",
+    "确认是否有尖锐边、漏液、松动盖子或不稳内容物。",
+    "戴手套，穿不滑的鞋。",
+    "先做短距离试搬，确认能否控制。",
+    "太重就拆分、两人搬或换工具。",
+    "搬运后记录不适和物品问题。"
+  ],
+  "check": [
+    "试重后再搬。",
+    "路线已看过。",
+    "过重物品被拆分或协作。"
+  ],
+  "common_mistakes": [
+    "看见箱子就硬抱。",
+    "腰部突然发力。",
+    "带漏液或尖锐物直接贴身搬。"
+  ],
+  "fallback": "无法判断重量时，一律按重物处理，先拆分或找人协助。",
+  "stop_or_escalate": [
+    "试搬时腰痛、手麻、物体晃动、液体泄漏时，停止搬运。"
+  ],
+  "notes": "很多搬运伤不是因为东西重，是因为开始得太突然。",
+  "category_original": "重物搬运安全",
+  "domains": [
+    "evacuation",
+    "power",
+    "security",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water",
+    "route"
+  ],
+  "keywords": [
+    "搬运前热身和试重",
+    "撤离",
+    "路线",
+    "设备",
+    "安全",
+    "evacuation_decision",
+    "drinking_water",
+    "route",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

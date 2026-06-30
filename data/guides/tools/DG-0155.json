@@ -1,0 +1,83 @@
+{
+  "id": "DG-0155",
+  "title": "简单缝补和布料修复",
+  "category": "工具维修与替代制作",
+  "scenario": "衣物、背包、帐篷、布袋、睡袋、遮挡布破损。",
+  "goal": "用简单缝补延长物资寿命。",
+  "tools": [
+    "针线",
+    "布片",
+    "剪刀",
+    "胶带",
+    "别针"
+  ],
+  "steps": [
+    "先清理破口周围污物，尽量保持干燥。",
+    "小破口用针线从破口两端向内缝合。",
+    "受力位置加一块补丁布，不只缝裂口边缘。",
+    "背包肩带、提手等受力处要多缝几道，并打结固定。",
+    "来不及缝时，先用胶带或别针临时固定，后续再补。",
+    "缝补后轻拉测试，不要直接装重物。"
+  ],
+  "check": [
+    "破口不继续扩大。",
+    "受力处有补丁或加固。",
+    "临时修复有后续处理计划。"
+  ],
+  "common_mistakes": [
+    "只缝破口最边缘。",
+    "湿布上直接贴胶带长期使用。",
+    "补完不测试就装重物。"
+  ],
+  "fallback": "没有针线时，用胶带、绳子、别针、扎带做临时修复。",
+  "stop_or_escalate": [
+    "承重背带、吊挂绳、关键遮雨布继续撕裂时，停止承重或更换。"
+  ],
+  "notes": "布料修复能节省大量库存，尤其是背包和防雨布。",
+  "category_original": "维修工具",
+  "domains": [
+    "tools",
+    "security",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "clothes",
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "简单缝补和布料修复",
+    "工具",
+    "维修",
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure",
+    "clothes",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

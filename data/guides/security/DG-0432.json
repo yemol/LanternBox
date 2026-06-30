@@ -1,0 +1,86 @@
+{
+  "id": "DG-0432",
+  "title": "陌生人接近记录",
+  "category": "库存资料与成员档案",
+  "scenario": "有人靠近门口、营地、取水路线、晾晒点、垃圾点或观察点。",
+  "goal": "记录接触情况，判断是否偶发、试探或持续关注。",
+  "tools": [
+    "记录本",
+    "低亮观察点",
+    "同伴"
+  ],
+  "steps": [
+    "先确保人员不站在门口硬对峙。",
+    "记录时间、人数、方向、特征和是否携带物品。",
+    "只记录事实，不给对方随意贴标签。",
+    "如果有对话，记录对方提出的需求和你方回应。",
+    "观察对方是否停留、窥探、绕行、尾随或反复出现。",
+    "同类接近多次出现时，在地图上标出位置。",
+    "把记录纳入晚间风险评估。"
+  ],
+  "check": [
+    "接近事件有时间地点。",
+    "事实和判断分开。",
+    "反复出现有地图标记。"
+  ],
+  "common_mistakes": [
+    "只凭印象说有人鬼鬼祟祟。",
+    "所有人挤门口看。",
+    "忘记记录对方方向。"
+  ],
+  "fallback": "没有时间工具时，用相对时间记录，例如晚饭前、第二班值守后。",
+  "stop_or_escalate": [
+    "陌生人试图闯入、尾随取水、靠近儿童或物资区时，升级边界规则。"
+  ],
+  "notes": "陌生人一次出现是事件，多次出现就是模式。",
+  "category_original": "外部观察",
+  "domains": [
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "contamination",
+    "inventory_change",
+    "personnel_change",
+    "suspicious_approach"
+  ],
+  "objects": [
+    "drinking_water",
+    "route",
+    "door",
+    "inventory",
+    "people",
+    "log",
+    "person"
+  ],
+  "keywords": [
+    "陌生人接近记录",
+    "陌生人",
+    "记录",
+    "contamination",
+    "inventory_change",
+    "personnel_change",
+    "suspicious_approach",
+    "drinking_water",
+    "route",
+    "door",
+    "inventory",
+    "people",
+    "log",
+    "person",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

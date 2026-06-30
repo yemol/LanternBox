@@ -1,0 +1,85 @@
+{
+  "id": "DG-0076",
+  "title": "离开前留言",
+  "category": "撤离交通与路线",
+  "scenario": "离开住所、营地、集合点或临时安全屋，需要给后来者信息。",
+  "goal": "减少后来者盲目寻找和重复进入危险区。",
+  "tools": [
+    "纸",
+    "笔",
+    "防水袋",
+    "胶带",
+    "地图"
+  ],
+  "steps": [
+    "写明日期、时间、离开人数、基本状态、去向和原因。",
+    "写下一次可能停留或集合的位置。",
+    "不要写完整库存、隐藏物资和敏感密码。",
+    "把纸条放在约定位置，例如门内侧、指定箱子下、防水袋里。",
+    "如果地点危险，写明不要进入的原因，比如燃气、坍塌、进水。",
+    "在自己的地图或日记里同步记录留言位置。"
+  ],
+  "check": [
+    "纸条有时间和去向。",
+    "信息足够找人但不过度暴露库存。",
+    "纸条不会被雨水立刻毁掉。"
+  ],
+  "common_mistakes": [
+    "只写“我们走了”。",
+    "暴露所有物资位置。",
+    "纸条贴在外面让陌生人先看到。"
+  ],
+  "fallback": "没有纸时，用硬纸板、布条、木片写简短信息。",
+  "stop_or_escalate": [
+    "外部有高风险人员徘徊时，不留下会暴露人员和物资的详细信息。"
+  ],
+  "notes": "好留言是断联时代的低技术路标。",
+  "category_original": "撤离与路线",
+  "domains": [
+    "evacuation",
+    "security",
+    "comms",
+    "shelter",
+    "disaster"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "signal_plan",
+    "temporary_repair"
+  ],
+  "objects": [
+    "building",
+    "route",
+    "meeting_point",
+    "message"
+  ],
+  "keywords": [
+    "离开前留言",
+    "撤离",
+    "路线",
+    "集合点",
+    "安全",
+    "留言",
+    "住所",
+    "evacuation_decision",
+    "signal_plan",
+    "temporary_repair",
+    "building",
+    "route",
+    "meeting_point",
+    "message",
+    "shelter_disaster_evacuate",
+    "comms_signal_meeting",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "id": "DG-0179",
+  "title": "每日天气记录",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "断网后无法可靠获取天气预报，需要靠本地观察安排取水、晾晒、撤离和种植。",
+  "goal": "建立简单天气记录，逐步判断天气变化。",
+  "tools": [
+    "记录本",
+    "温度计可选",
+    "风向标",
+    "雨量容器",
+    "笔"
+  ],
+  "steps": [
+    "每天固定时间记录天气，例如早晚各一次。",
+    "记录温度体感、云量、风向、风力、降雨、湿度感、能见度。",
+    "用简单符号表示晴、阴、雨、风、雾、雷。",
+    "记录当天任务影响，例如衣物是否晒干、路面是否积水。",
+    "连续记录三天以上，观察变化趋势。",
+    "把异常天气写入日记，用于复盘路线和物资消耗。"
+  ],
+  "check": [
+    "每天有记录。",
+    "能看出连续变化。",
+    "天气和任务影响有关联。"
+  ],
+  "common_mistakes": [
+    "只凭感觉说最近天气不好。",
+    "记录时间不固定。",
+    "只记下雨不记风和积水。"
+  ],
+  "fallback": "没有仪器时，用体感、旗子或布条观察风，用固定容器观察降雨多少。",
+  "stop_or_escalate": [
+    "连续强降雨、强风、异常高温低温、能见度下降时，调整任务安排。"
+  ],
+  "notes": "天气记录是离线时代的低配预报。",
+  "category_original": "天气与环境观察",
+  "domains": [
+    "disaster",
+    "records",
+    "planting",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "planting_seed_reserve",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "food_production"
+  ],
+  "objects": [
+    "drinking_water",
+    "log"
+  ],
+  "keywords": [
+    "每日天气记录",
+    "记录",
+    "种植",
+    "撤离",
+    "evacuation_decision",
+    "food_production",
+    "drinking_water",
+    "log",
+    "shelter_disaster_evacuate",
+    "planting_seed_reserve",
+    "records_inventory_people",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": []
+}

@@ -1,0 +1,75 @@
+{
+  "id": "DG-0180",
+  "title": "风向判断和用处",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "有烟尘、异味、火灾、化学污染、做饭烟、厕所气味或蚊虫。",
+  "goal": "用风向决定站位、营地布局和撤离方向。",
+  "tools": [
+    "布条",
+    "绳子",
+    "纸片",
+    "记录本"
+  ],
+  "steps": [
+    "在开阔处挂一条轻布条，观察它飘向哪里。",
+    "烟雾或异味出现时，判断风从哪里来、吹向哪里去。",
+    "厨房、厕所、垃圾点尽量布置在下风且远离睡眠和饮水区。",
+    "遇到化学味、浓烟、火灾时，优先向上风或侧风方向离开。",
+    "每天记录主要风向，观察是否固定。",
+    "风向变化时重新检查烟、臭味、灰尘是否进入核心区。"
+  ],
+  "check": [
+    "知道上风和下风方向。",
+    "污染源不直接吹向睡眠和饮水区。",
+    "撤离时不朝浓烟下风走。"
+  ],
+  "common_mistakes": [
+    "把厕所设在上风口。",
+    "闻到化学味还顺风走。",
+    "只看烟不看自身退路。"
+  ],
+  "fallback": "没有布条时，用纸片、草叶、灰尘飘动方向判断。",
+  "stop_or_escalate": [
+    "风把烟、臭味、灰尘持续吹进核心区时，调整区域布局。"
+  ],
+  "notes": "风向是看不见的地图箭头。",
+  "category_original": "天气与环境观察",
+  "domains": [
+    "disaster",
+    "comms",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "food_spoilage",
+    "contamination",
+    "evacuation_decision"
+  ],
+  "objects": [
+    "toilet"
+  ],
+  "keywords": [
+    "风向判断和用处",
+    "火灾",
+    "撤离",
+    "food_spoilage",
+    "contamination",
+    "evacuation_decision",
+    "toilet",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

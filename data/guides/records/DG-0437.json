@@ -1,0 +1,75 @@
+{
+  "id": "DG-0437",
+  "title": "天气突变前兆",
+  "category": "库存资料与成员档案",
+  "scenario": "气压、风向、云层、湿度、动物行为或远处雷声出现变化。",
+  "goal": "提前准备防雨、防风、防寒、防暑和物资保护。",
+  "tools": [
+    "天气记录",
+    "风向标",
+    "任务表",
+    "防水布"
+  ],
+  "steps": [
+    "每天固定时间观察风向、云量、温度、湿度和远处声音。",
+    "发现风突然变强、云层压低、闷热异常或远雷时，提高警惕。",
+    "提前收回晾晒物、固定遮雨棚、检查排水和电池。",
+    "把怕潮物资离地，盖好药品、纸质资料和种子。",
+    "外出任务评估是否提前返回或延期。",
+    "记录突变前兆和实际天气结果。",
+    "长期积累后调整本地天气判断。"
+  ],
+  "check": [
+    "天气变化有记录。",
+    "晾晒和怕潮物已处理。",
+    "外出任务已复核。"
+  ],
+  "common_mistakes": [
+    "等下雨了再收东西。",
+    "风大还撑大棚。",
+    "雷声后继续远行取水。"
+  ],
+  "fallback": "没有天气工具时，只记录肉眼可见变化和体感。",
+  "stop_or_escalate": [
+    "强风、暴雨、雷电、急降温、热浪前兆明显时，停止非必要外出。"
+  ],
+  "notes": "天气不会发通知，但会提前露出一点尾巴。",
+  "category_original": "外部观察",
+  "domains": [
+    "records",
+    "security"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "inventory",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "天气突变前兆",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "inventory",
+    "people",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

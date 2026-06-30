@@ -1,0 +1,98 @@
+{
+  "id": "DG-0210",
+  "title": "药品专用检查：有效期、状态、标签",
+  "category": "医疗急救与照护",
+  "scenario": "药品长期储存，和普通食品临期管理不同，还需要检查药片状态、标签、内包装和受潮污染。",
+  "goal": "把药品检查从普通临期物资中单独拆出来，避免过期、变质、标签不清的药进入正常药箱。",
+  "tools": [
+    "药品清单",
+    "标签纸",
+    "手套",
+    "待处理袋",
+    "记录本"
+  ],
+  "steps": [
+    "每月固定检查药箱，优先检查慢病药、儿童药、退烧止痛药、抗过敏药、消毒用品和外伤耗材。",
+    "先看有效期，再看包装是否破损、受潮、漏液、标签不清。",
+    "再看药品本体状态：药片是否变色、粉化、粘连，液体是否浑浊、分层、有异味。",
+    "状态异常的药品放入待处理区，贴上原因，不继续留在正常药区。",
+    "标签不清的药品不要凭记忆使用，先降级隔离。",
+    "药品清单中标记待补充、待处理或限制使用。",
+    "检查后写下日期、检查人和需要补充的项目。"
+  ],
+  "check": [
+    "药品检查不只看日期，也检查状态。",
+    "异常药品已经离开正常药区。",
+    "标签不清药品没有继续使用。",
+    "缺口已经进入补充清单。"
+  ],
+  "common_mistakes": [
+    "把药品当普通临期食品处理，只看日期不看状态。",
+    "药片变色或粘连还继续吃。",
+    "标签糊掉后凭经验猜。",
+    "待处理药品又被放回正常药箱。"
+  ],
+  "fallback": "没有药品清单时，先手写简版表：药名、数量、日期、状态。",
+  "stop_or_escalate": [
+    "慢病药、儿童药、退烧药、抗过敏药库存不足或状态异常时，优先处理。"
+  ],
+  "notes": "这条和库存里的临期物资不同，重点是药品状态和标签可靠性。",
+  "category_original": "药物与医疗物资管理",
+  "domains": [
+    "medical",
+    "security",
+    "food",
+    "power",
+    "hygiene"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "food_safety_judgment",
+    "hygiene_contamination",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "food_spoilage",
+    "contamination",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "medicine",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "药品专用检查",
+    "有效期",
+    "状态",
+    "标签",
+    "变质",
+    "污染",
+    "food_spoilage",
+    "contamination",
+    "inventory_change",
+    "resource_exposure",
+    "medicine",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "food_safety_judgment",
+    "hygiene_contamination",
+    "records_inventory_people",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

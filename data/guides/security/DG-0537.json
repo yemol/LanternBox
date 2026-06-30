@@ -1,0 +1,76 @@
+{
+  "id": "DG-0537",
+  "title": "火灾撤离演练",
+  "category": "组织秩序与训练演练",
+  "scenario": "住所或营地存在火源、蜡烛、燃料、厨房和电池。",
+  "goal": "让成员知道火灾时怎么离开、带什么、不带什么。",
+  "tools": [
+    "撤离路线图",
+    "口令",
+    "计时器"
+  ],
+  "steps": [
+    "设定火灾口令。",
+    "演练从睡眠区到出口路线。",
+    "规定只拿三件套和最近急救/成员卡，不回头翻大包。",
+    "儿童和老人由指定人员带出。",
+    "到集合点后点名。",
+    "演练后检查卡住点和照明。",
+    "更新火源附近清理规则。"
+  ],
+  "check": [
+    "口令明确。",
+    "到点后点名。",
+    "不回头取物。"
+  ],
+  "common_mistakes": [
+    "火灾时还收拾包。",
+    "儿童没人带。",
+    "集合后不点名。"
+  ],
+  "fallback": "不能全员演练时，先演练儿童、老人和夜间路线。",
+  "stop_or_escalate": [
+    "演练发现出口堵塞、灯找不到、成员不知口令时，立即整改。"
+  ],
+  "notes": "火灾演练练的不是跑，是不回头。",
+  "category_original": "风险演练专项",
+  "domains": [
+    "security",
+    "shelter",
+    "disaster",
+    "evacuation"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "personnel_change"
+  ],
+  "objects": [
+    "building",
+    "people",
+    "battery"
+  ],
+  "keywords": [
+    "火灾撤离演练",
+    "风险",
+    "住所",
+    "火灾",
+    "撤离",
+    "evacuation_decision",
+    "personnel_change",
+    "building",
+    "people",
+    "battery",
+    "shelter_disaster_evacuate",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

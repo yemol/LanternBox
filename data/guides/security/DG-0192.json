@@ -1,0 +1,88 @@
+{
+  "id": "DG-0192",
+  "title": "固定报平安时间",
+  "category": "通信信息与数据安全",
+  "scenario": "成员分散外出取水、交易、巡查、工作或寻找物资。",
+  "goal": "用固定时间降低失联后的判断成本。",
+  "tools": [
+    "钟表",
+    "纸质时间表",
+    "联络卡",
+    "记录本"
+  ],
+  "steps": [
+    "约定每天固定报平安时间，例如早上、傍晚各一次。",
+    "写清报平安方式：当面、纸条、无线电、短信、指定标记。",
+    "规定超时多久算异常，例如超过两小时未报需要启动查找或等待流程。",
+    "外出前写下去向、人员、预计返回时间和携带物资。",
+    "报平安时只说关键状态：人是否安全、位置、下一步、是否需要支援。",
+    "每次报平安由记录员写入日记或纸本。"
+  ],
+  "check": [
+    "有固定时间。",
+    "超时规则明确。",
+    "外出信息有记录。"
+  ],
+  "common_mistakes": [
+    "想到就报，想不到就算。",
+    "只说一切都好但不说位置。",
+    "没有超时判断标准。"
+  ],
+  "fallback": "没有通信设备时，使用固定留言点和固定更新时间。",
+  "stop_or_escalate": [
+    "外出成员超时、路线危险、天气恶化、有人伤病时，启动查找或备用集合流程。"
+  ],
+  "notes": "固定时间能把失联从恐慌变成流程。",
+  "category_original": "通信联络",
+  "domains": [
+    "security",
+    "tools",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "comms_signal_meeting",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "lost_contact",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "inventory",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "固定报平安时间",
+    "安全",
+    "固定",
+    "通信",
+    "lost_contact",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "drinking_water",
+    "inventory",
+    "people",
+    "supplies",
+    "security_suspicious_person",
+    "comms_signal_meeting",
+    "tools_security_repair",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

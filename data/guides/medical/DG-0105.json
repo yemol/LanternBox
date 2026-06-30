@@ -1,0 +1,80 @@
+{
+  "id": "DG-0105",
+  "title": "特殊人群撤离包",
+  "category": "医疗急救与照护",
+  "scenario": "儿童、老人、孕妇、慢病成员、行动不便者需要个性化撤离包。",
+  "goal": "让每个人的关键需求不被普通撤离包漏掉。",
+  "tools": [
+    "个人背包",
+    "药品",
+    "身份卡",
+    "卫生用品",
+    "标签",
+    "清单"
+  ],
+  "steps": [
+    "为每个特殊成员单独列清单。",
+    "老人包重点：药品、眼镜、助听器、电池、用药表、防滑鞋。",
+    "儿童包重点：身份卡、小食物、水、保暖、安抚物、哨子。",
+    "孕妇包重点：卫生用品、水、休息垫、医疗记录、宽松衣物。",
+    "慢病包重点：个人药、病史卡、过敏卡、稳定食物。",
+    "每月检查有效期、电池、衣物季节和重量。",
+    "包上写姓名或编号，指定负责人带走。"
+  ],
+  "check": [
+    "每个人的包不同。",
+    "慢病药和身份卡没有漏。",
+    "包能背或能被负责人拿走。"
+  ],
+  "common_mistakes": [
+    "所有人用完全相同的包。",
+    "个人药放公共包深处。",
+    "儿童包没有身份信息。"
+  ],
+  "fallback": "背不动时，把最关键物品做成胸包或小腰包，保证不离身。",
+  "stop_or_escalate": [
+    "撤离前发现药品过期、包太重、负责人不在时，立刻重整。"
+  ],
+  "notes": "公平不是每个人一样，而是每个人拿到自己需要的东西。",
+  "category_original": "特殊人群",
+  "domains": [
+    "medical",
+    "records",
+    "disaster",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "medical_elder_confusion",
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "elderly",
+    "evacuation_decision",
+    "personnel_change"
+  ],
+  "objects": [
+    "elder",
+    "people"
+  ],
+  "keywords": [
+    "特殊人群撤离包",
+    "老人",
+    "撤离",
+    "elderly",
+    "evacuation_decision",
+    "personnel_change",
+    "elder",
+    "people",
+    "medical_elder_confusion",
+    "shelter_disaster_evacuate",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响"
+  ]
+}

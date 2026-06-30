@@ -1,0 +1,91 @@
+{
+  "id": "DG-0166",
+  "title": "宠物走失预防",
+  "category": "种植养殖与采集",
+  "scenario": "撤离、开门交易、夜间混乱、搬运物资时宠物容易跑出。",
+  "goal": "降低宠物走失带来的情绪和人力消耗。",
+  "tools": [
+    "牵引绳",
+    "笼具",
+    "宠物信息卡",
+    "照片",
+    "固定绳"
+  ],
+  "steps": [
+    "给宠物准备信息卡，写名字、照片、特征、主人和饮食注意。",
+    "开门前先确认宠物位置。",
+    "撤离时指定一个人负责宠物，不让儿童单独牵大型宠物。",
+    "交易、争执、搬运时把宠物放入笼具或固定区域。",
+    "夜间不让宠物自由进出门口和污染区。",
+    "每天检查牵引绳、项圈、笼门是否牢固。"
+  ],
+  "check": [
+    "宠物有信息卡。",
+    "开门时宠物不在门边乱窜。",
+    "撤离时有负责人。"
+  ],
+  "common_mistakes": [
+    "宠物自由穿过门口谈话区。",
+    "儿童独自牵大型宠物。",
+    "撤离时才找笼子。"
+  ],
+  "fallback": "没有笼具时，用固定房间、绳索和家具形成临时安全区。",
+  "stop_or_escalate": [
+    "宠物受惊、攻击、冲向外部人群或污染区时，先固定再处理其他事。"
+  ],
+  "notes": "宠物走失会让队伍冒险回头找。",
+  "category_original": "动物与宠物",
+  "domains": [
+    "planting",
+    "security",
+    "disaster",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "security_night_anomaly",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "planting_seed_reserve",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "food_production",
+    "inventory_change",
+    "night",
+    "resource_exposure"
+  ],
+  "objects": [
+    "door",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "宠物走失预防",
+    "种植",
+    "夜间",
+    "撤离",
+    "evacuation_decision",
+    "food_production",
+    "inventory_change",
+    "night",
+    "resource_exposure",
+    "door",
+    "inventory",
+    "supplies",
+    "security_night_anomaly",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "planting_seed_reserve",
+    "records_inventory_people",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

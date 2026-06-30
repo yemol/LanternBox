@@ -1,0 +1,72 @@
+{
+  "id": "DG-0078",
+  "title": "转移中休息点",
+  "category": "撤离交通与路线",
+  "scenario": "长距离移动中需要停下喝水、整理队伍、检查脚和伤员。",
+  "goal": "安全休息，不让休息点变成新风险。",
+  "tools": [
+    "水",
+    "脚部用品",
+    "名单",
+    "手电",
+    "哨子"
+  ],
+  "steps": [
+    "选择开阔、可观察、有退路的位置。",
+    "避开桥下、沟底、危墙旁、玻璃幕墙下、积水边和冲突点。",
+    "人员靠拢，背包不离身。",
+    "短休只做四件事：补水、清点、检查脚、复查伤病员。",
+    "安排一人观察周围，不是所有人同时低头翻包。",
+    "离开前检查垃圾、物资和人数。"
+  ],
+  "check": [
+    "休息点有退路。",
+    "人数清点完成。",
+    "没有人把包散开放远。"
+  ],
+  "common_mistakes": [
+    "坐在桥下或低洼地。",
+    "所有人同时睡着。",
+    "休息时把关键包放远。"
+  ],
+  "fallback": "没有理想休息点时，缩短休息时间，先站立补水和清点，再继续走到更安全处。",
+  "stop_or_escalate": [
+    "周围出现冲突、动物靠近、水位上涨、落物风险或陌生人聚集时，立即结束休息。"
+  ],
+  "notes": "休息是为了继续走，不是把队伍摊开。",
+  "category_original": "撤离与路线",
+  "domains": [
+    "evacuation",
+    "security",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water",
+    "route"
+  ],
+  "keywords": [
+    "转移中休息点",
+    "撤离",
+    "路线",
+    "安全",
+    "风险",
+    "evacuation_decision",
+    "drinking_water",
+    "route",
+    "shelter_disaster_evacuate",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

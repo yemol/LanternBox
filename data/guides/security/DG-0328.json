@@ -1,0 +1,75 @@
+{
+  "id": "DG-0328",
+  "title": "背包重量分配",
+  "category": "个人装备与防护",
+  "scenario": "多人撤离、取水、搬运或外出时，需要分配背包重量。",
+  "goal": "按体力和任务合理分配，避免弱者过载。",
+  "tools": [
+    "背包",
+    "称重工具可选",
+    "任务表",
+    "记录本"
+  ],
+  "steps": [
+    "先列出必须携带物资，再按重量和重要性分组。",
+    "老人、儿童、病人和伤员只背个人轻量物品。",
+    "强体力成员背重物，但不能超过安全行动能力。",
+    "同类关键物资不要全放在一个人包里，避免丢失即全损。",
+    "左右重量尽量平衡，硬物不要顶背。",
+    "走一小段试背后再正式出发。",
+    "途中根据疲劳和伤痛重新分配重量。"
+  ],
+  "check": [
+    "弱势成员没有过载。",
+    "关键物资有分散。",
+    "试背后调整过。"
+  ],
+  "common_mistakes": [
+    "所有水都给一个人背。",
+    "儿童背过重包。",
+    "硬物顶背导致磨伤。"
+  ],
+  "fallback": "没有称重工具时，用能否稳定走十分钟作为粗略判断。",
+  "stop_or_escalate": [
+    "有人步态变形、腰背痛、气喘明显、摔倒风险增加时，立即减重。"
+  ],
+  "notes": "背包不是越满越有安全感，能走才有。",
+  "category_original": "个人装备管理",
+  "domains": [
+    "security",
+    "water",
+    "disaster",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "water_rationing",
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water"
+  ],
+  "keywords": [
+    "背包重量分配",
+    "安全",
+    "撤离",
+    "evacuation_decision",
+    "drinking_water",
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

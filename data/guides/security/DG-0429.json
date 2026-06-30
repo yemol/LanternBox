@@ -1,0 +1,75 @@
+{
+  "id": "DG-0429",
+  "title": "风险等级四档",
+  "category": "库存资料与成员档案",
+  "scenario": "外部环境和内部状态不断变化，需要决定是否外出、取水、转移或加强防护。",
+  "goal": "用统一等级减少情绪化判断。",
+  "tools": [
+    "风险表",
+    "公共板",
+    "记录本"
+  ],
+  "steps": [
+    "设定四档风险：正常、注意、警戒、停止。",
+    "正常表示任务可按计划执行。",
+    "注意表示有小变化，执行前复核路线和人员。",
+    "警戒表示只做必要任务，高风险任务双人制。",
+    "停止表示暂停外出、开火、交易或其他暴露行为。",
+    "每天晨间和晚间评估一次当前等级。",
+    "等级变化必须写明原因和生效时间。"
+  ],
+  "check": [
+    "四档含义清楚。",
+    "等级变化有原因。",
+    "任务按等级调整。"
+  ],
+  "common_mistakes": [
+    "每个人自己判断风险。",
+    "一紧张就全部停止。",
+    "风险升了但任务照旧。"
+  ],
+  "fallback": "不确定等级时，先按更高一档执行，等待确认后再下调。",
+  "stop_or_escalate": [
+    "出现人员受伤、路线冲突、火灾烟尘、饮水污染时，至少升到警戒。"
+  ],
+  "notes": "风险等级像天气预报，不保证安全，但能提醒你带伞。",
+  "category_original": "情报记录与风险评估",
+  "domains": [
+    "security",
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "inventory",
+    "people",
+    "log"
+  ],
+  "keywords": [
+    "风险等级四档",
+    "安全",
+    "风险",
+    "记录",
+    "inventory_change",
+    "personnel_change",
+    "drinking_water",
+    "inventory",
+    "people",
+    "log",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

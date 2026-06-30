@@ -1,0 +1,80 @@
+{
+  "id": "DG-0245",
+  "title": "水边采集风险",
+  "category": "种植养殖与采集",
+  "scenario": "想在河边、湖边、海边、池塘或洪水退去区域采集贝类、鱼虾、水草或植物。",
+  "goal": "避免污染水体带来的中毒、感染和寄生虫风险。",
+  "tools": [
+    "手套",
+    "袋子",
+    "记录本",
+    "安全水"
+  ],
+  "steps": [
+    "先判断水体来源，避开污水口、工业排水、死鱼漂浮、油膜、臭味区域。",
+    "洪水退去后的水边植物和贝类不作为安全食物。",
+    "采集物不要生吃，入口前必须充分清洗和加热。",
+    "可疑水体采集物不要进入公共锅。",
+    "接触水边淤泥后洗手，伤口不要接触污水。",
+    "记录采集地点和水体状态。"
+  ],
+  "check": [
+    "采集地点无明显污染。",
+    "采集物没有生吃。",
+    "水体状态有记录。"
+  ],
+  "common_mistakes": [
+    "洪水边捡东西吃。",
+    "看到贝类就大量采。",
+    "在臭水边洗菜。"
+  ],
+  "fallback": "水体可疑时，把采集目标改为非入口材料，例如漂浮木材或容器，但也要清洁。",
+  "stop_or_escalate": [
+    "水有油膜、死鱼、臭味、化学味、污水排放或食用后不适时，停止使用同地点食物。"
+  ],
+  "notes": "水边看起来有食物，也可能有整条河的污染。",
+  "category_original": "采集风险原则",
+  "domains": [
+    "security",
+    "planting",
+    "disaster",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "unsafe_water",
+    "contamination",
+    "flood",
+    "food_production"
+  ],
+  "objects": [
+    "drinking_water"
+  ],
+  "keywords": [
+    "水边采集风险",
+    "风险",
+    "种植",
+    "洪水",
+    "unsafe_water",
+    "contamination",
+    "flood",
+    "food_production",
+    "drinking_water",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

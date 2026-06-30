@@ -1,0 +1,86 @@
+{
+  "id": "DG-0402",
+  "title": "撤离小演练",
+  "category": "组织秩序与训练演练",
+  "scenario": "已经有撤离包、路线和集合点，但没有实际走过流程。",
+  "goal": "用低风险演练发现路线、背包和人员问题。",
+  "tools": [
+    "撤离包",
+    "路线图",
+    "计时器",
+    "记录本"
+  ],
+  "steps": [
+    "选择安全时段做一次短演练，不制造恐慌。",
+    "宣布演练范围，例如从睡眠区到门口集合点。",
+    "每个人拿自己的三件套和撤离包。",
+    "按真实路线走一遍，检查门、楼梯、照明、鞋和背包重量。",
+    "记录用时、卡住点、找不到的物品和人员反应。",
+    "演练后立即归位装备。",
+    "根据问题修改路线、包内物和集合规则。"
+  ],
+  "check": [
+    "每个人实际走过。",
+    "卡住点有记录。",
+    "演练后装备归位。"
+  ],
+  "common_mistakes": [
+    "只在纸上讨论撤离。",
+    "演练后包被拆散。",
+    "发现问题但不改。"
+  ],
+  "fallback": "人手少时，先演练一个人或一个家庭单位的路线。",
+  "stop_or_escalate": [
+    "演练引发恐慌、外部风险变化、楼梯异常时，立即停止演练。"
+  ],
+  "notes": "撤离路线不走一遍，就只是地图上的一条愿望。",
+  "category_original": "训练与演练",
+  "domains": [
+    "security",
+    "comms",
+    "disaster",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "signal_plan",
+    "personnel_change"
+  ],
+  "objects": [
+    "route",
+    "meeting_point",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "撤离小演练",
+    "风险",
+    "集合点",
+    "撤离",
+    "路线",
+    "evacuation_decision",
+    "signal_plan",
+    "personnel_change",
+    "route",
+    "meeting_point",
+    "people",
+    "person",
+    "shelter_disaster_evacuate",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

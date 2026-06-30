@@ -1,0 +1,93 @@
+{
+  "id": "DG-0127",
+  "title": "物资消耗异常预警",
+  "category": "库存资料与成员档案",
+  "scenario": "水、食物、药品、电池或燃料突然消耗变快。",
+  "goal": "找出原因，避免资源悄悄失控。",
+  "tools": [
+    "库存模块",
+    "日记模块",
+    "记录本",
+    "任务表"
+  ],
+  "steps": [
+    "对比最近三天或一周的消耗。",
+    "先查人数变化、天气变化、病人增加、任务增加。",
+    "再查泄漏、变质、误用、重复发放、忘记登记。",
+    "把异常写入日记，标明可能原因。",
+    "临时设置限制，例如饮水分级、电池只给关键设备、药品双人确认。",
+    "三天后复查限制是否有效。"
+  ],
+  "check": [
+    "异常原因有初步判断。",
+    "限制措施已执行。",
+    "后续消耗被复查。"
+  ],
+  "common_mistakes": [
+    "一发现少了就直接指责偷拿。",
+    "异常后还按旧计划消耗。",
+    "只改系统数字不查实物。"
+  ],
+  "fallback": "没有历史数据时，从今天开始固定记录，至少连续三天。",
+  "stop_or_escalate": [
+    "饮用水、慢病药、燃料异常下降时，立即进入关键物资保护模式。"
+  ],
+  "notes": "异常消耗是系统咳嗽，别只给它静音。",
+  "category_original": "库存系统联动",
+  "domains": [
+    "records",
+    "security",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "medical_fever_respiratory",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "respiratory_symptom",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "inventory",
+    "people",
+    "supplies",
+    "battery"
+  ],
+  "keywords": [
+    "物资消耗异常预警",
+    "咳嗽",
+    "respiratory_symptom",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "drinking_water",
+    "medicine",
+    "inventory",
+    "people",
+    "supplies",
+    "battery",
+    "security_suspicious_person",
+    "medical_fever_respiratory",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "主食配给",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

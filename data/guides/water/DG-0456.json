@@ -1,0 +1,72 @@
+{
+  "id": "DG-0456",
+  "title": "菜单重复厌食处理",
+  "category": "水与食物保障",
+  "scenario": "连续吃同类食物后成员食欲下降、抱怨增多或儿童拒食。",
+  "goal": "在库存有限下减少厌食，维持摄入。",
+  "tools": [
+    "菜单表",
+    "调味清单",
+    "食材库存"
+  ],
+  "steps": [
+    "记录最近七天主食和主要口味。",
+    "找出重复点，是口感、味道、温度还是外观。",
+    "在不增加太多消耗的情况下改变形态，例如粥、饼、汤、拌、糊。",
+    "少量轮换调味，不把调料一次用完。",
+    "把硬食改软、冷食改热、干食加汤。",
+    "儿童和病人先调整口感。",
+    "记录哪种变化有效。"
+  ],
+  "check": [
+    "七天菜单有记录。",
+    "调整不明显增加消耗。",
+    "重点成员摄入改善。"
+  ],
+  "common_mistakes": [
+    "厌食就多给零食。",
+    "为了换口味耗光调料。",
+    "抱怨出现后只责备成员。"
+  ],
+  "fallback": "材料极少时，改变水量、温度和形态也能缓解重复感。",
+  "stop_or_escalate": [
+    "多人摄入下降、儿童拒食、病人吃不下时，优先调整菜单。"
+  ],
+  "notes": "菜单单调会把胃口磨钝，稍微变形就能救回来一点。",
+  "category_original": "菜单轮换与烹饪节奏",
+  "domains": [
+    "water",
+    "food",
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "菜单重复厌食处理",
+    "食物",
+    "inventory_change",
+    "personnel_change",
+    "drinking_water",
+    "inventory",
+    "people",
+    "records_inventory_people",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

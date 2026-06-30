@@ -1,0 +1,90 @@
+{
+  "id": "DG-0439",
+  "title": "内部异常趋势表",
+  "category": "库存资料与成员档案",
+  "scenario": "团队内部出现腹泻、失眠、争吵、丢物、疲劳、工具损坏、耗材异常消耗。",
+  "goal": "发现趋势，而不是每次当成孤立事件。",
+  "tools": [
+    "记录本",
+    "趋势表",
+    "任务表"
+  ],
+  "steps": [
+    "选择五类内部指标：健康、卫生、物资、情绪、设备。",
+    "每天只记录明显异常，不写流水账。",
+    "连续两天出现同类问题就标记趋势。",
+    "趋势出现后找共同原因，例如水源、任务过载、睡眠不足、规则不清。",
+    "把趋势转成具体调整：换水源、减任务、清理、复训、补库存。",
+    "一周后看趋势是否下降。",
+    "不要把趋势直接归咎某一个人。"
+  ],
+  "check": [
+    "异常按类别记录。",
+    "连续问题被标记。",
+    "调整措施具体。"
+  ],
+  "common_mistakes": [
+    "每天抱怨但不记录。",
+    "腹泻多人出现还当个案。",
+    "所有问题都怪某个人。"
+  ],
+  "fallback": "没有表格时，用五个标题分段记录。",
+  "stop_or_escalate": [
+    "健康异常扩大、冲突频繁、关键物资异常消耗时，立即做专项复盘。"
+  ],
+  "notes": "一次异常是水滴，连续异常就是漏水。",
+  "category_original": "情报记录与风险评估",
+  "domains": [
+    "security",
+    "tools",
+    "records",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "diarrhea",
+    "tools",
+    "inventory",
+    "people",
+    "log"
+  ],
+  "keywords": [
+    "内部异常趋势表",
+    "风险",
+    "工具",
+    "记录",
+    "腹泻",
+    "inventory_change",
+    "personnel_change",
+    "drinking_water",
+    "diarrhea",
+    "tools",
+    "inventory",
+    "people",
+    "log",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给"
+  ]
+}

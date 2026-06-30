@@ -1,0 +1,85 @@
+{
+  "id": "DG-0301",
+  "title": "塑料瓶再利用",
+  "category": "工具维修与替代制作",
+  "scenario": "有大量饮料瓶、矿泉水瓶、洗涤剂瓶或其他塑料容器。",
+  "goal": "安全区分入口用途和非入口用途，避免误用污染容器。",
+  "tools": [
+    "塑料瓶",
+    "标签纸",
+    "剪刀",
+    "清洁水",
+    "记号笔"
+  ],
+  "steps": [
+    "先按来源分类：食品饮料瓶、清洁剂瓶、化学品瓶、不明来源瓶。",
+    "食品饮料瓶可在清洁后用于非长期饮水、分装非油性物资或做漏斗。",
+    "清洁剂、化学品、不明来源瓶不得用于饮水和食物。",
+    "剪开的塑料瓶可做小铲、漏斗、育苗罩、简易收纳杯。",
+    "所有再利用瓶必须贴用途标签，例如灰水、洗手水、种植、工具。",
+    "瓶口和瓶盖保持匹配，避免漏液。",
+    "出现异味、变形、发黏、裂口时停止使用。"
+  ],
+  "check": [
+    "入口和非入口瓶分开。",
+    "非饮用瓶有醒目标记。",
+    "化学品瓶没有装食物和水。"
+  ],
+  "common_mistakes": [
+    "把洗涤剂瓶装饮用水。",
+    "没有标签导致误喝。",
+    "旧瓶长期暴晒后继续装水。"
+  ],
+  "fallback": "无法确认来源的瓶子只用于工具、种植或非入口灰水。",
+  "stop_or_escalate": [
+    "有人误饮、瓶中有异味、容器变形或原装化学品残留时，立即停用并隔离。"
+  ],
+  "notes": "塑料瓶万能，但不是每个瓶都能回到餐桌。",
+  "category_original": "材料回收与再利用",
+  "domains": [
+    "security",
+    "tools",
+    "hygiene",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "contamination",
+    "temporary_repair"
+  ],
+  "objects": [
+    "drinking_water",
+    "tools"
+  ],
+  "keywords": [
+    "塑料瓶再利用",
+    "安全",
+    "工具",
+    "维修",
+    "污染",
+    "contamination",
+    "temporary_repair",
+    "drinking_water",
+    "tools",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

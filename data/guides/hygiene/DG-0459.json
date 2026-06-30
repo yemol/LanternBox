@@ -1,0 +1,85 @@
+{
+  "id": "DG-0459",
+  "title": "水容器清洗晾干",
+  "category": "水与食物保障",
+  "scenario": "水桶、水瓶、盆、储水袋或取水勺使用一段时间后需要清洁。",
+  "goal": "减少滑腻、异味、微生物污染和交叉污染。",
+  "tools": [
+    "清洁水",
+    "刷子",
+    "干净布",
+    "晾晒点",
+    "标签"
+  ],
+  "steps": [
+    "容器用完后倒空残水。",
+    "用清洁水刷洗内壁、盖子、把手和出水口。",
+    "不要用清污刷清洗饮用水容器。",
+    "清洗后倒扣晾干，避免盖上盖子闷湿。",
+    "晾干位置远离厕所、垃圾、灰水区和地面泥水。",
+    "发现桶内滑腻、异味或霉点时，降级或重新消毒。",
+    "清洗日期写入记录或标签。"
+  ],
+  "check": [
+    "饮水容器使用专用清洁工具。",
+    "清洗后倒扣晾干。",
+    "晾晒点干净。"
+  ],
+  "common_mistakes": [
+    "桶没干就盖上。",
+    "用厕所刷洗水桶。",
+    "只冲一下就装饮用水。"
+  ],
+  "fallback": "没有刷子时，用干净布、沙粒外袋摩擦或少量清洁材料辅助，但入口容器必须再彻底冲洗。",
+  "stop_or_escalate": [
+    "容器有霉味、油膜、滑腻、化学味时，不继续装饮用水。"
+  ],
+  "notes": "干净水住进脏桶，等于刚洗完澡钻进泥被窝。",
+  "category_original": "水容器卫生",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "water",
+    "food",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "water_treatment",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "food_spoilage",
+    "contamination"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket"
+  ],
+  "keywords": [
+    "水容器清洗晾干",
+    "污染",
+    "净水",
+    "水桶",
+    "食物",
+    "food_spoilage",
+    "contamination",
+    "drinking_water",
+    "bucket",
+    "water_rationing",
+    "water_treatment",
+    "hygiene_contamination",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "冰箱食物"
+  ]
+}

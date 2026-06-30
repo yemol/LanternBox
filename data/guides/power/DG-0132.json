@@ -1,0 +1,84 @@
+{
+  "id": "DG-0132",
+  "title": "资源暴露后的应对",
+  "category": "个人装备与防护",
+  "scenario": "外人看到了大量水、食物、药品、电力设备、发电机、太阳能板或仓库位置。",
+  "goal": "降低后续被索取、跟踪、偷盗或冲突的风险。",
+  "tools": [
+    "遮挡布",
+    "收纳箱",
+    "记录本",
+    "任务表"
+  ],
+  "steps": [
+    "立即停止继续公开搬运或展示物资。",
+    "把已暴露物资转移到不靠门窗的位置。",
+    "用布、箱子、柜门遮挡高价值物资。",
+    "短期内加强门口观察和值守。",
+    "对外只说有限信息，例如只剩一点日用，不说具体数量。",
+    "记录暴露时间、看到的人、暴露了什么和对方反应。",
+    "接下来几天注意是否有人反复靠近、询问或跟踪。"
+  ],
+  "check": [
+    "高价值物资已遮挡或转移。",
+    "有暴露记录。",
+    "门口观察加强。"
+  ],
+  "common_mistakes": [
+    "继续在外面清点物资。",
+    "当场争吵刺激对方。",
+    "完全忽略后续观察。"
+  ],
+  "fallback": "无法转移时，至少用普通杂物、布料、纸箱遮挡，降低可见度。",
+  "stop_or_escalate": [
+    "有人反复上门、尾随、试探门口、夜间靠近时，进入边界加强流程。"
+  ],
+  "notes": "资源暴露后，先降温，再转移，再观察。",
+  "category_original": "安全与边界",
+  "domains": [
+    "power",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "supplies"
+  ],
+  "keywords": [
+    "资源暴露后的应对",
+    "太阳能",
+    "发电机",
+    "设备",
+    "资源暴露",
+    "安全",
+    "风险",
+    "降温",
+    "resource_exposure",
+    "drinking_water",
+    "medicine",
+    "supplies",
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

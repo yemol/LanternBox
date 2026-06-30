@@ -1,0 +1,86 @@
+{
+  "id": "DG-0273",
+  "title": "数据最小化原则",
+  "category": "通信信息与数据安全",
+  "scenario": "准备记录成员、物资、路线、医疗、交易和备份信息。",
+  "goal": "只记录真正有用的信息，减少泄露后的伤害。",
+  "tools": [
+    "记录模板",
+    "字段清单",
+    "负责人"
+  ],
+  "steps": [
+    "每个模块先问：这个字段在应急中是否真的需要。",
+    "成员随身卡只写必要救助信息，不写完整证件图和全部家庭资料。",
+    "公开留言只写去向和时间，不写仓库、口令、隐藏物资。",
+    "交易记录只写必要对象和物品，不写高敏感成员信息。",
+    "普通日记避免记录完整证件号码、口令和精确隐藏点。",
+    "定期删除测试数据、重复照片和无用临时副本。",
+    "高敏感资料只保留清晰、必要、最新版本。"
+  ],
+  "check": [
+    "记录字段有用途。",
+    "公开材料不含高敏感信息。",
+    "临时副本被清理。"
+  ],
+  "common_mistakes": [
+    "什么都想记，最后泄露一整本。",
+    "测试照片长期保留。",
+    "公开留言写太细。"
+  ],
+  "fallback": "不确定要不要记录时，先记录到私密草稿，再决定是否进入正式库。",
+  "stop_or_escalate": [
+    "资料被外人看见、设备丢失、成员要求删除敏感记录时，立即减少保留范围。"
+  ],
+  "notes": "少记不是偷懒，是给未来少留危险。",
+  "category_original": "信息安全与数据保护",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "supplies"
+  ],
+  "keywords": [
+    "数据最小化原则",
+    "安全",
+    "通信",
+    "记录",
+    "路线",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "supplies",
+    "security_suspicious_person",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

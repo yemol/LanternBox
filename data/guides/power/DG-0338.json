@@ -1,0 +1,86 @@
+{
+  "id": "DG-0338",
+  "title": "移动电源保管",
+  "category": "能源照明与设备",
+  "scenario": "有充电宝、移动电源、电源站或备用电池包。",
+  "goal": "延长寿命，避免鼓包、进水、过热和关键时刻没电。",
+  "tools": [
+    "移动电源",
+    "防水袋",
+    "标签",
+    "记录本"
+  ],
+  "steps": [
+    "给每个移动电源贴编号，记录容量、接口和状态。",
+    "不要长期放在高温、潮湿、阳光直晒或重压位置。",
+    "不要和尖锐工具、燃料、水瓶混放。",
+    "使用后记录大致剩余电量。",
+    "定期补电，不等到完全耗尽长期存放。",
+    "发现鼓包、异味、发热、外壳破损时隔离。",
+    "转移时放在防水防压的位置。"
+  ],
+  "check": [
+    "移动电源有编号。",
+    "没有高温潮湿存放。",
+    "异常电源已隔离。"
+  ],
+  "common_mistakes": [
+    "充电宝丢在窗边暴晒。",
+    "和水瓶工具混放。",
+    "鼓包还继续充。"
+  ],
+  "fallback": "没有记录本时，用贴纸标记满、半、低三种状态。",
+  "stop_or_escalate": [
+    "移动电源鼓包、发热、进水、摔裂或无法正常充放电时，停止使用。"
+  ],
+  "notes": "移动电源像罐装电，怕热、怕水、怕挤。",
+  "category_original": "低电量策略",
+  "domains": [
+    "power",
+    "food"
+  ],
+  "intents": [
+    "food_safety_judgment",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "power_outage",
+    "food_spoilage"
+  ],
+  "objects": [
+    "canned_food",
+    "drinking_water",
+    "power_bank",
+    "battery",
+    "lighting"
+  ],
+  "keywords": [
+    "移动电源保管",
+    "电量",
+    "充电宝",
+    "照明",
+    "设备",
+    "power_outage",
+    "food_spoilage",
+    "canned_food",
+    "drinking_water",
+    "power_bank",
+    "battery",
+    "lighting",
+    "food_safety_judgment",
+    "power_lighting_energy",
+    "能源照明"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

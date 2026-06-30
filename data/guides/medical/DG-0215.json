@@ -1,0 +1,78 @@
+{
+  "id": "DG-0215",
+  "title": "误服药初步处理",
+  "category": "医疗急救与照护",
+  "scenario": "有人可能吃错药、重复服药、误食外用药，或儿童误服药片。",
+  "goal": "先保留信息和观察状态，避免继续误处理。",
+  "tools": [
+    "药盒",
+    "记录本",
+    "水",
+    "成员档案"
+  ],
+  "steps": [
+    "立刻停止继续服用任何可疑药品。",
+    "保留药盒、包装、剩余药片和服药记录，不要丢掉证据。",
+    "记录误服时间、药名、可能数量、服用者年龄体重和当前症状。",
+    "不要擅自催吐。",
+    "让服用者安静坐卧，观察意识、呼吸、呕吐、皮疹、心跳异常。",
+    "把相关药品收回药箱并重新检查分区和标签。"
+  ],
+  "check": [
+    "药品包装被保留。",
+    "误服时间和数量有记录。",
+    "没有继续乱给其他药。"
+  ],
+  "common_mistakes": [
+    "发现误服后把药盒扔掉。",
+    "马上强行催吐。",
+    "又给一堆药试图抵消。"
+  ],
+  "fallback": "没有准确数量时，记录最大可能数量和剩余数量。",
+  "stop_or_escalate": [
+    "意识异常、呼吸困难、抽搐、严重呕吐、儿童误服、误服外用或不明药时，立即升级处理。"
+  ],
+  "notes": "误服药时，信息比猜测更有用。",
+  "category_original": "药物与医疗物资管理",
+  "domains": [
+    "medical",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "medicine",
+    "inventory",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "误服药初步处理",
+    "inventory_change",
+    "resource_exposure",
+    "medicine",
+    "inventory",
+    "people",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

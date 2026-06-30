@@ -1,0 +1,100 @@
+{
+  "id": "DG-0519",
+  "title": "过滤材料替代边界",
+  "category": "工具维修与替代制作",
+  "scenario": "缺少正式滤芯，需要用布、砂、炭、纸等做预过滤。",
+  "goal": "明确预过滤只能去除颗粒，不能等同安全饮水。",
+  "tools": [
+    "布",
+    "砂石",
+    "炭",
+    "容器",
+    "标签"
+  ],
+  "steps": [
+    "先说明替代过滤只是预处理。",
+    "布料过滤可去除大颗粒，但不能杀菌。",
+    "砂石炭需要来源干净，不用化学污染材料。",
+    "过滤后的水仍需消毒或煮沸。",
+    "过滤装置标记为生水处理工具。",
+    "入口和非入口过滤材料分开。",
+    "过滤材料变臭、发黏或堵塞时更换。"
+  ],
+  "check": [
+    "知道预过滤不是消毒。",
+    "过滤后仍处理。",
+    "工具有生水标签。"
+  ],
+  "common_mistakes": [
+    "布滤一下就喝。",
+    "用不明炭灰过滤。",
+    "过滤器和饮用水工具混放。"
+  ],
+  "fallback": "材料不足时，至少沉淀加布滤，再进行消毒。",
+  "stop_or_escalate": [
+    "水有化学味、油膜、尸体污染时，不靠替代过滤入口。"
+  ],
+  "notes": "过滤能抓住泥沙，抓不住所有危险。",
+  "category_original": "物资替代方案",
+  "domains": [
+    "security",
+    "tools",
+    "shelter",
+    "water",
+    "hygiene"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "water_treatment",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "filter",
+    "building",
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "过滤材料替代边界",
+    "安全",
+    "工具",
+    "维修",
+    "住所",
+    "过滤",
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "filter",
+    "building",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "water_treatment",
+    "tools_security_repair",
+    "records_inventory_people",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给"
+  ]
+}

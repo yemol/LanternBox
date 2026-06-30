@@ -1,0 +1,87 @@
+{
+  "id": "DG-0023",
+  "title": "腹泻超过一天：补液、隔离、追溯",
+  "category": "医疗急救与照护",
+  "scenario": "腹泻持续超过一天，或多人同时腹泻。",
+  "goal": "先防脱水，再找出可疑水源或食物，阻断继续传播。",
+  "tools": [
+    "口服补液盐",
+    "安全水",
+    "个人餐具",
+    "记录本",
+    "肥皂"
+  ],
+  "steps": [
+    "记录开始时间、次数、是否发热、是否呕吐、是否血便。",
+    "优先少量多次补充安全水和口服补液盐。",
+    "患者使用单独杯子、餐具、毛巾；暂时不要处理公共食物。",
+    "检查过去 24 到 48 小时共同吃过的食物、喝过的水、接触过的水桶和餐具。",
+    "可疑食物和水源立刻停止使用，贴标签隔离。",
+    "记录尿量和精神状态；尿很少、眼窝凹陷、极度乏力要重点看护。"
+  ],
+  "check": [
+    "患者能持续喝下液体。",
+    "尿量没有继续明显减少。",
+    "可疑水食已被隔离。"
+  ],
+  "common_mistakes": [
+    "只吃止泻药不补液。",
+    "继续使用同一批可疑水。",
+    "患者还去做饭或分发食物。"
+  ],
+  "fallback": "没有口服补液盐时，用安全水和可靠比例的糖盐应急配制，但比例不能凭感觉乱放。",
+  "stop_or_escalate": [
+    "血便、高热、严重腹痛。",
+    "意识变差、尿很少、无法饮水。",
+    "多人同时发病且水源不明。"
+  ],
+  "notes": "腹泻不是个人小事，可能是水食系统故障。",
+  "category_original": "长期医疗观察",
+  "domains": [
+    "medical",
+    "security",
+    "hygiene",
+    "water"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "infection_control",
+    "suspicious_approach"
+  ],
+  "objects": [
+    "drinking_water",
+    "diarrhea"
+  ],
+  "keywords": [
+    "腹泻超过一天",
+    "补液",
+    "隔离",
+    "追溯",
+    "腹泻",
+    "可疑",
+    "水源",
+    "infection_control",
+    "suspicious_approach",
+    "drinking_water",
+    "diarrhea",
+    "security_suspicious_person",
+    "hygiene_contamination",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

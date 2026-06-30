@@ -1,0 +1,79 @@
+{
+  "id": "DG-0106",
+  "title": "照护者崩溃预警",
+  "category": "医疗急救与照护",
+  "scenario": "长期照顾病人、儿童、老人或失能成员的人开始疲惫、易怒、失眠、反应迟钝。",
+  "goal": "防止照护者倒下导致照护系统断裂。",
+  "tools": [
+    "任务板",
+    "休息表",
+    "替班名单",
+    "记录本"
+  ],
+  "steps": [
+    "每天观察照护者睡眠、进食、情绪和错误次数。",
+    "把照护任务拆成小块，不让一个人包全部。",
+    "设置固定替班时间，即使照护者说还能撑也要休息。",
+    "让照护者离开病人区域短暂休息、喝水、进食。",
+    "出现怒吼、发呆、漏药、手抖、哭泣、失眠时，减少其任务。",
+    "在短会中讨论任务，不把照护者的问题当作性格问题。"
+  ],
+  "check": [
+    "照护者有休息时段。",
+    "照护任务有替班。",
+    "错误和疲劳被记录。"
+  ],
+  "common_mistakes": [
+    "夸照护者能干然后继续压任务。",
+    "等崩溃后再换人。",
+    "把情绪爆发当作不负责任。"
+  ],
+  "fallback": "人手少时，至少让照护者每天有两段无人打扰的短休息。",
+  "stop_or_escalate": [
+    "照护者出现伤害自己或他人的冲动、严重失眠、频繁错误。"
+  ],
+  "notes": "照护者也是关键资源，需要维护。",
+  "category_original": "特殊人群",
+  "domains": [
+    "medical",
+    "water",
+    "records"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "medical_elder_confusion"
+  ],
+  "situations": [
+    "elderly",
+    "personnel_change"
+  ],
+  "objects": [
+    "patient",
+    "elder",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "照护者崩溃预警",
+    "老人",
+    "elderly",
+    "personnel_change",
+    "patient",
+    "elder",
+    "people",
+    "supplies",
+    "medical_fever_respiratory",
+    "medical_elder_confusion",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

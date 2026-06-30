@@ -1,0 +1,82 @@
+{
+  "id": "DG-0493",
+  "title": "地震后室内快速检查",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "地震、强震感、建筑摇晃或余震后，成员仍在室内。",
+  "goal": "快速识别坠落、火源、电气和结构风险。",
+  "tools": [
+    "鞋",
+    "手电",
+    "口罩",
+    "记录本"
+  ],
+  "steps": [
+    "先让人员穿鞋，避免玻璃和碎片。",
+    "检查人员是否受伤，再看环境。",
+    "关闭可控火源和燃气，远离变形电器。",
+    "观察墙体裂缝、天花板、柜体倾斜和掉落物。",
+    "不要站在玻璃、重柜、吊灯和破损墙体旁。",
+    "把危险区域临时标记。",
+    "准备余震时的安全位置和撤离路线。"
+  ],
+  "check": [
+    "人员已检查。",
+    "火源电器已处理。",
+    "危险区有标记。"
+  ],
+  "common_mistakes": [
+    "光脚下床。",
+    "先抢物资不看伤员。",
+    "站在破柜旁讨论。"
+  ],
+  "fallback": "光线不足时，用低亮手电照地面和头顶，不乱翻杂物。",
+  "stop_or_escalate": [
+    "结构异响、裂缝扩大、燃气味、严重伤员时，立即撤离或转入急救。"
+  ],
+  "notes": "地震后第一件事不是收拾，是确认头顶和脚下还靠得住。",
+  "category_original": "地震后检查与临时加固",
+  "domains": [
+    "disaster",
+    "security",
+    "tools",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "earthquake",
+    "structural_risk",
+    "temporary_repair",
+    "personnel_change"
+  ],
+  "objects": [
+    "building",
+    "people"
+  ],
+  "keywords": [
+    "地震后室内快速检查",
+    "地震",
+    "余震",
+    "风险",
+    "加固",
+    "earthquake",
+    "structural_risk",
+    "temporary_repair",
+    "personnel_change",
+    "building",
+    "people",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

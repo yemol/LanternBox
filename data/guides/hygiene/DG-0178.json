@@ -1,0 +1,82 @@
+{
+  "id": "DG-0178",
+  "title": "长期照明路线标记",
+  "category": "居住卫生与空间管理",
+  "scenario": "停电或低照度环境中需要夜间如厕、照护、值守和撤离。",
+  "goal": "用低耗方式标出关键路线，减少摔倒和迷路。",
+  "tools": [
+    "反光贴",
+    "胶带",
+    "低亮灯",
+    "荧光材料可选",
+    "记号笔"
+  ],
+  "steps": [
+    "先确定三条路线：床到厕所、床到出口、床到药箱。",
+    "清理路线上的水桶、绳子、工具和箱子。",
+    "在地面边缘、门框、台阶和转角贴反光或浅色标记。",
+    "低亮灯朝下照脚下，不直射窗外。",
+    "每晚睡前检查标记是否被遮挡。",
+    "新增障碍物时必须当天移开或标记。"
+  ],
+  "check": [
+    "关键路线能低亮识别。",
+    "通道没有绊脚物。",
+    "出口方向清楚。"
+  ],
+  "common_mistakes": [
+    "强光一直开着耗电。",
+    "路线标记被箱子挡住。",
+    "台阶没有标记。"
+  ],
+  "fallback": "没有反光贴时，用白纸条、浅色布条、粉笔线代替。",
+  "stop_or_escalate": [
+    "夜间跌倒、老人迷路、紧急撤离走错方向时，重新设计标记。"
+  ],
+  "notes": "夜间路线标记是便宜的防摔系统。",
+  "category_original": "长期居住与营地管理",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "power",
+    "disaster",
+    "evacuation"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "power_outage",
+    "evacuation_decision",
+    "night"
+  ],
+  "objects": [
+    "route",
+    "lighting"
+  ],
+  "keywords": [
+    "长期照明路线标记",
+    "停电",
+    "照明",
+    "撤离",
+    "路线",
+    "power_outage",
+    "evacuation_decision",
+    "night",
+    "route",
+    "lighting",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "腹泻",
+    "发热",
+    "伤口"
+  ]
+}

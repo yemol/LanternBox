@@ -1,0 +1,87 @@
+{
+  "id": "DG-0305",
+  "title": "简易漏斗制作",
+  "category": "工具维修与替代制作",
+  "scenario": "需要把水、粮食、豆类、沙土、燃料等转入小口容器。",
+  "goal": "用废瓶或纸板制作临时漏斗，减少洒漏和污染。",
+  "tools": [
+    "干净塑料瓶",
+    "剪刀",
+    "胶带",
+    "标签"
+  ],
+  "steps": [
+    "优先选择食品饮料瓶制作入口用途漏斗。",
+    "把瓶身剪开，保留瓶口作为漏斗口。",
+    "剪口边缘用胶带包一下，避免割手。",
+    "入口用途和非入口用途漏斗分开标记。",
+    "装燃料、灰水、清洁剂的漏斗不得再用于食物和饮水。",
+    "使用后清洗、晾干、按用途收纳。",
+    "发现裂口、异味或混用风险时停用。"
+  ],
+  "check": [
+    "漏斗用途有标签。",
+    "入口和非入口分开。",
+    "剪口不割手。"
+  ],
+  "common_mistakes": [
+    "用洗涤剂瓶做饮水漏斗。",
+    "一个漏斗什么都倒。",
+    "剪口锋利直接使用。"
+  ],
+  "fallback": "没有塑料瓶时，用干净纸板卷成一次性漏斗，用后丢弃或降级。",
+  "stop_or_escalate": [
+    "有人误用燃料漏斗装水，立即丢弃或改为非入口用途。"
+  ],
+  "notes": "漏斗小，但混用会把污染带进整桶水。",
+  "category_original": "简易制作与替代",
+  "domains": [
+    "tools",
+    "hygiene",
+    "medical",
+    "water",
+    "security"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "contamination",
+    "temporary_repair"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "tools",
+    "beans"
+  ],
+  "keywords": [
+    "简易漏斗制作",
+    "工具",
+    "维修",
+    "污染",
+    "contamination",
+    "temporary_repair",
+    "drinking_water",
+    "bucket",
+    "tools",
+    "beans",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "异响",
+    "脚步声",
+    "门外",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

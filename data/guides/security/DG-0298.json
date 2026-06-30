@@ -1,0 +1,83 @@
+{
+  "id": "DG-0298",
+  "title": "离队和返回规则",
+  "category": "库存资料与成员档案",
+  "scenario": "成员需要短期离开、寻找亲友、独自行动、转移到别处，或之后可能返回。",
+  "goal": "减少离队导致的物资、信息和安全混乱。",
+  "tools": [
+    "登记表",
+    "联络卡",
+    "物资清单",
+    "留言点规则"
+  ],
+  "steps": [
+    "离队前登记人员、时间、目的地、预计返回时间和携带物资。",
+    "说明是否保留其床位、物资份额和任务责任。",
+    "交接其负责的药品、工具、值守或档案工作。",
+    "给离队者一张联络卡和固定留言点规则。",
+    "如果返回，需要先在外部接触点说明状态，再进入核心区。",
+    "返回后记录其接触地点、健康状态和带回物资。",
+    "长期未归时，调整库存和任务分工。"
+  ],
+  "check": [
+    "离队有登记。",
+    "负责事项已交接。",
+    "返回有检查流程。"
+  ],
+  "common_mistakes": [
+    "人说走就走。",
+    "带走关键工具没人知道。",
+    "返回后直接进入核心区不说明情况。"
+  ],
+  "fallback": "情况紧急时，至少记录离队人员、方向、时间和携带关键物。",
+  "stop_or_escalate": [
+    "离队者带走关键物资、返回时有伤病、外部接触风险高时，必须复核。"
+  ],
+  "notes": "离开和回来都要有门，不然队伍会漏风。",
+  "category_original": "决策记录与责任交接",
+  "domains": [
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "door",
+    "inventory",
+    "people",
+    "log",
+    "supplies"
+  ],
+  "keywords": [
+    "离队和返回规则",
+    "安全",
+    "记录",
+    "evacuation_decision",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "door",
+    "inventory",
+    "people",
+    "log",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

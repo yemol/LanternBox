@@ -1,0 +1,80 @@
+{
+  "id": "DG-0510",
+  "title": "工具替代优先级",
+  "category": "工具维修与替代制作",
+  "scenario": "缺少专用工具，需要用其他物品替代。",
+  "goal": "避免替代工具伤人或损坏关键物资。",
+  "tools": [
+    "替代清单",
+    "记录本",
+    "手套"
+  ],
+  "steps": [
+    "先判断任务是否必须做。",
+    "优先使用低价值、低风险、可损耗材料替代。",
+    "不要用关键餐具、药品工具和高敏感设备做高风险替代。",
+    "承重、火源、电气、医疗任务不随意替代。",
+    "替代前小范围测试。",
+    "替代失败立即停止，不强行加力。",
+    "记录有效替代方案和失败方案。"
+  ],
+  "check": [
+    "任务必要性已判断。",
+    "替代物低风险。",
+    "有小测试。"
+  ],
+  "common_mistakes": [
+    "拿菜刀当撬棍。",
+    "用饮水桶垫重物。",
+    "替代失败还硬来。"
+  ],
+  "fallback": "没有安全替代时，暂停任务，改找其他方法。",
+  "stop_or_escalate": [
+    "替代涉及承重、电、火、医疗时，必须提高停止标准。"
+  ],
+  "notes": "替代不是瞎凑，是让物品临时客串，不能让它演爆炸戏。",
+  "category_original": "工具百科前置",
+  "domains": [
+    "tools",
+    "security",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "工具替代优先级",
+    "工具",
+    "维修",
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

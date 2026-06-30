@@ -1,0 +1,86 @@
+{
+  "id": "DG-0460",
+  "title": "取水工具专用",
+  "category": "水与食物保障",
+  "scenario": "饮用水桶需要勺子、杯子、龙头、软管或水瓢取水。",
+  "goal": "避免手、杯子和生水工具污染饮用水。",
+  "tools": [
+    "水勺",
+    "挂钩",
+    "标签",
+    "盖子"
+  ],
+  "steps": [
+    "为饮用水准备专用取水工具。",
+    "取水工具不接触口部、不放地上、不伸进生水桶。",
+    "工具用后挂在饮用水桶旁边的固定位置。",
+    "多人使用时，不能用个人杯子直接伸入桶内。",
+    "如果工具掉地、接触生水或被污染，先清洗处理再使用。",
+    "饮用水桶口尽量少开，取完立即盖上。",
+    "儿童取水需要成年人示范规则。"
+  ],
+  "check": [
+    "取水工具专用。",
+    "没有个人杯伸入水桶。",
+    "水桶口及时盖上。"
+  ],
+  "common_mistakes": [
+    "大家直接拿杯子舀。",
+    "水勺掉地捡起来继续用。",
+    "取水工具拿去舀灰水。"
+  ],
+  "fallback": "没有水勺时，用干净小瓶作为专用取水瓶，并贴上饮用水专用。",
+  "stop_or_escalate": [
+    "取水工具污染、多人腹泻、儿童误用工具时，立即复训净水和取水规则。"
+  ],
+  "notes": "饮用水桶不是公共汤锅，不能谁的杯子都进去游一圈。",
+  "category_original": "水容器卫生",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "water",
+    "food",
+    "tools"
+  ],
+  "intents": [
+    "water_rationing",
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "contamination"
+  ],
+  "objects": [
+    "cooked_food",
+    "drinking_water",
+    "bucket",
+    "tools"
+  ],
+  "keywords": [
+    "取水工具专用",
+    "污染",
+    "饮用水",
+    "水桶",
+    "食物",
+    "工具",
+    "contamination",
+    "cooked_food",
+    "drinking_water",
+    "bucket",
+    "tools",
+    "water_rationing",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

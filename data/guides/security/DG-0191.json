@@ -1,0 +1,87 @@
+{
+  "id": "DG-0191",
+  "title": "家庭联络卡",
+  "category": "通信信息与数据安全",
+  "scenario": "断网、手机没电、成员分散、儿童老人走失或照护者更换时。",
+  "goal": "让每个人身上都有最基本的身份和联络信息。",
+  "tools": [
+    "卡片",
+    "防水袋",
+    "笔",
+    "挂绳",
+    "照片可选"
+  ],
+  "steps": [
+    "为每个人准备一张小卡片，写姓名、家庭编号、主要联系人、备用联系人。",
+    "儿童、老人、慢病成员额外写集合点、过敏、常用药和照护注意事项。",
+    "卡片放在衣服内袋、胸包或挂绳里，不要只放在大背包深处。",
+    "卡片外层做防水处理，例如小防水袋、透明胶带或塑封。",
+    "每次集合点、联系人、用药信息变化后更新卡片。",
+    "撤离前检查每个人是否带卡。"
+  ],
+  "check": [
+    "每个人都有卡。",
+    "儿童老人卡片信息更完整。",
+    "卡片能防水且随身。"
+  ],
+  "common_mistakes": [
+    "只存在手机里。",
+    "卡片放在公共包里而不是个人身上。",
+    "信息改了但卡片不更新。"
+  ],
+  "fallback": "没有卡片时，用纸条写简版信息放入口袋，并用胶带包住防水。",
+  "stop_or_escalate": [
+    "成员分散、撤离、儿童老人外出前必须检查联络卡。"
+  ],
+  "notes": "联络卡是断网后的个人名片，也是走失后的回家线头。",
+  "category_original": "通信联络",
+  "domains": [
+    "security",
+    "comms",
+    "medical",
+    "records",
+    "power"
+  ],
+  "intents": [
+    "medical_elder_confusion",
+    "power_lighting_energy",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "power_outage",
+    "elderly",
+    "personnel_change"
+  ],
+  "objects": [
+    "elder",
+    "people"
+  ],
+  "keywords": [
+    "家庭联络卡",
+    "安全",
+    "通信",
+    "老人",
+    "power_outage",
+    "elderly",
+    "personnel_change",
+    "elder",
+    "people",
+    "medical_elder_confusion",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "主食配给",
+    "太阳能充电",
+    "夜间异响",
+    "腹泻",
+    "发热",
+    "伤口"
+  ]
+}

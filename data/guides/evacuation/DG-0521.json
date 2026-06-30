@@ -1,0 +1,70 @@
+{
+  "id": "DG-0521",
+  "title": "自行车日常检查",
+  "category": "撤离交通与路线",
+  "scenario": "自行车用于取水、外出、搬运或撤离。",
+  "goal": "保持基本可骑，避免半路故障。",
+  "tools": [
+    "打气筒",
+    "扳手",
+    "布",
+    "记录本"
+  ],
+  "steps": [
+    "出发前检查胎压、刹车、链条和车把。",
+    "检查轮胎是否扎入玻璃、钉子和裂纹。",
+    "刹车捏下后能有效减速。",
+    "链条太干或掉链先处理。",
+    "货物不要挂到影响车轮和刹车。",
+    "返回后擦掉泥水并记录异常。",
+    "每周检查螺丝松动和轮圈偏摆。"
+  ],
+  "check": [
+    "胎压正常。",
+    "刹车有效。",
+    "货物不干扰车轮。"
+  ],
+  "common_mistakes": [
+    "没刹车还骑。",
+    "水桶挂到轮子旁。",
+    "链条掉了继续硬踩。"
+  ],
+  "fallback": "没有打气筒时，减少载重和距离，优先保留自行车做短途。",
+  "stop_or_escalate": [
+    "刹车失效、车架裂纹、轮胎鼓包时，停止骑行。"
+  ],
+  "notes": "自行车是低调的骡子，也需要喂维护。",
+  "category_original": "车辆与自行车长期维护",
+  "domains": [
+    "evacuation",
+    "disaster",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water",
+    "route"
+  ],
+  "keywords": [
+    "自行车日常检查",
+    "撤离",
+    "路线",
+    "evacuation_decision",
+    "drinking_water",
+    "route",
+    "shelter_disaster_evacuate",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

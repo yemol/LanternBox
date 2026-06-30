@@ -1,0 +1,81 @@
+{
+  "id": "DG-0511",
+  "title": "工具维护周期表",
+  "category": "工具维修与替代制作",
+  "scenario": "刀、剪、锯、钳、手电、绳、胶带、小件库存需要定期维护。",
+  "goal": "把工具维护变成周期任务。",
+  "tools": [
+    "周期表",
+    "工具箱",
+    "记录本"
+  ],
+  "steps": [
+    "列出需要周期检查的工具。",
+    "按每日、每周、每月分级。",
+    "每日查归位和明显损坏。",
+    "每周查锈蚀、松动、耗材余量。",
+    "每月查替代方案和低库存补充。",
+    "维护完成后打勾。",
+    "发现问题转成维修任务卡。"
+  ],
+  "check": [
+    "周期清楚。",
+    "维护有记录。",
+    "问题变成任务卡。"
+  ],
+  "common_mistakes": [
+    "坏了才想起维护。",
+    "检查完不记录。",
+    "问题口头说完就忘。"
+  ],
+  "fallback": "工具少时，先维护刀剪、手电、绳、胶带四类。",
+  "stop_or_escalate": [
+    "关键工具连续故障、耗材低于底线时，立即专项盘点。"
+  ],
+  "notes": "工具维护表是工具的体检单。",
+  "category_original": "工具百科前置",
+  "domains": [
+    "power",
+    "tools",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "temporary_repair",
+    "inventory_change"
+  ],
+  "objects": [
+    "tools",
+    "inventory",
+    "flashlight"
+  ],
+  "keywords": [
+    "工具维护周期表",
+    "工具",
+    "维修",
+    "temporary_repair",
+    "inventory_change",
+    "tools",
+    "inventory",
+    "flashlight",
+    "power_lighting_energy",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

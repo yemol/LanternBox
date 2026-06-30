@@ -1,0 +1,90 @@
+{
+  "id": "DG-0330",
+  "title": "夜间行动前检查",
+  "category": "能源照明与设备",
+  "scenario": "夜间需要如厕、照护病人、取物、值守、转移或处理突发情况。",
+  "goal": "在行动前确认路线、照明和人员状态，减少摔倒和误入危险区。",
+  "tools": [
+    "手电",
+    "低亮灯",
+    "鞋",
+    "路线标记",
+    "哨子"
+  ],
+  "steps": [
+    "先判断夜间行动是否必要，能等到天亮的任务尽量延后。",
+    "行动前穿好鞋，不赤脚走动。",
+    "拿到低亮照明和哨子，确认灯能点亮。",
+    "先回忆路线：床到厕所、药箱、出口或病人位置。",
+    "照明尽量朝地面，不直射窗外和他人眼睛。",
+    "行动时一手保持可扶墙或扶栏杆，不双手抱满东西。",
+    "回来后把灯、鞋和哨子放回固定位置。"
+  ],
+  "check": [
+    "穿鞋后行动。",
+    "照明可用。",
+    "路线清楚。",
+    "灯具归位。"
+  ],
+  "common_mistakes": [
+    "赤脚摸黑走。",
+    "拿强光乱照窗外。",
+    "双手抱东西下楼。"
+  ],
+  "fallback": "没有手电时，使用固定低亮灯、反光标记或让同伴陪同。",
+  "stop_or_escalate": [
+    "地面积水、玻璃、浓烟、外部冲突、建筑损坏时，夜间非必要行动停止。"
+  ],
+  "notes": "夜间行动的第一原则不是快，是别把自己变成第二个事故。",
+  "category_original": "照明与夜间行动",
+  "domains": [
+    "power",
+    "medical",
+    "water",
+    "records"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "personnel_change",
+    "night"
+  ],
+  "objects": [
+    "patient",
+    "route",
+    "people",
+    "person",
+    "lighting"
+  ],
+  "keywords": [
+    "夜间行动前检查",
+    "照明",
+    "设备",
+    "personnel_change",
+    "night",
+    "patient",
+    "route",
+    "people",
+    "person",
+    "lighting",
+    "medical_fever_respiratory",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "能源照明"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "冰箱食物",
+    "太阳能充电",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

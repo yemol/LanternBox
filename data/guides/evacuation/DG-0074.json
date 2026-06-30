@@ -1,0 +1,83 @@
+{
+  "id": "DG-0074",
+  "title": "伤病员撤离方案",
+  "category": "撤离交通与路线",
+  "scenario": "队伍中有人无法正常步行，或骨折、失温、虚弱、老人行动慢。",
+  "goal": "让伤病员能安全移动，同时不拖垮照护者。",
+  "tools": [
+    "担架或门板",
+    "椅子",
+    "绳子",
+    "毛毯",
+    "夹板",
+    "名单"
+  ],
+  "steps": [
+    "先判断是否必须撤离；如果原地安全，先稳定伤情再移动。",
+    "明确伤病员类型：不能走、能短距离走、需要搀扶、需要抬。",
+    "选择路线时避开楼梯、碎石、积水、狭窄门和陡坡。",
+    "用担架、门板、椅子、轮椅或两人搀扶，不临时拖拽。",
+    "每移动一段就检查疼痛、意识、呼吸、体温和固定状态。",
+    "安排照护者轮换，避免抬人的人先耗尽。"
+  ],
+  "check": [
+    "伤处没有明显晃动。",
+    "照护者知道下一段路线。",
+    "移动后伤情复查了。"
+  ],
+  "common_mistakes": [
+    "到门口才想怎么搬。",
+    "用力拖拽伤者。",
+    "让伤病员走队尾硬撑。"
+  ],
+  "fallback": "没有担架时，用门板、结实桌板、毯子加两根杆做临时搬运工具。",
+  "stop_or_escalate": [
+    "移动导致意识变差、呼吸异常、大出血、固定失败时，停下重新处理。"
+  ],
+  "notes": "伤病员撤离是路线设计题，不只是体力题。",
+  "category_original": "撤离与路线",
+  "domains": [
+    "evacuation",
+    "security",
+    "disaster",
+    "shelter",
+    "medical"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "medical_elder_confusion"
+  ],
+  "situations": [
+    "elderly",
+    "evacuation_decision"
+  ],
+  "objects": [
+    "elder",
+    "route",
+    "people"
+  ],
+  "keywords": [
+    "伤病员撤离方案",
+    "撤离",
+    "路线",
+    "安全",
+    "老人",
+    "elderly",
+    "evacuation_decision",
+    "elder",
+    "route",
+    "people",
+    "shelter_disaster_evacuate",
+    "medical_elder_confusion",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "主食配给",
+    "太阳能充电",
+    "夜间异响"
+  ]
+}

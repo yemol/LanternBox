@@ -1,0 +1,90 @@
+{
+  "id": "DG-0417",
+  "title": "离线地图纸卡",
+  "category": "通信信息与数据安全",
+  "scenario": "设备没电、地图页面打不开或需要给外出人员携带路线。",
+  "goal": "用纸质小地图保留关键路线和风险点。",
+  "tools": [
+    "纸",
+    "笔",
+    "透明袋",
+    "地图资料"
+  ],
+  "steps": [
+    "画出住所、集合点、水源、备用路线、危险点和留言点。",
+    "用符号代替敏感名称，不写完整仓库位置。",
+    "标出方向和明显地标。",
+    "每条路线只画必要信息，不追求美观。",
+    "给外出人员携带副本，主卡留在核心区。",
+    "路线变化后在卡上写日期。",
+    "过期地图收回或销毁，避免误导。"
+  ],
+  "check": [
+    "地图有方向和地标。",
+    "敏感点用代号。",
+    "副本和主卡区分。"
+  ],
+  "common_mistakes": [
+    "画得太复杂。",
+    "把隐藏物资点完整标出。",
+    "路线改了还拿旧卡外出。"
+  ],
+  "fallback": "没有地图底图时，用手绘线条和地标建立可走路线卡。",
+  "stop_or_escalate": [
+    "外出人员迷路、路线暴露、危险点变化时，立即更新纸卡。"
+  ],
+  "notes": "纸地图不用开机，但会暴露，所以要画得够用又克制。",
+  "category_original": "纸质备份卡",
+  "domains": [
+    "power",
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "power_outage",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "route",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "离线地图纸卡",
+    "设备",
+    "安全",
+    "风险",
+    "通信",
+    "路线",
+    "power_outage",
+    "personnel_change",
+    "resource_exposure",
+    "route",
+    "people",
+    "person",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "id": "DG-0438",
+  "title": "路线安全重新评估",
+  "category": "库存资料与成员档案",
+  "scenario": "原路线曾经安全，但近期出现施工、积水、冲突、动物、陌生人、烟尘或塌方。",
+  "goal": "避免旧路线变成新陷阱。",
+  "tools": [
+    "地图",
+    "路线记录",
+    "观察日志",
+    "标记笔"
+  ],
+  "steps": [
+    "每周复查主要路线：取水、撤离、交易、垃圾、外出侦察。",
+    "查看最近观察日志中与路线相关的异常。",
+    "把危险点标在地图上，写明日期。",
+    "给路线标记状态：可用、谨慎、暂停、废弃。",
+    "暂停路线不要口头记忆，要在纸图和系统里同步标记。",
+    "安排备用路线，不等主路线完全失效。",
+    "重新启用路线前至少观察两次。"
+  ],
+  "check": [
+    "路线有状态标记。",
+    "暂停路线已同步。",
+    "备用路线存在。"
+  ],
+  "common_mistakes": [
+    "旧路线一直默认安全。",
+    "只在脑子里记危险点。",
+    "没有备用路线。"
+  ],
+  "fallback": "无法复查全部路线时，优先复查取水和撤离路线。",
+  "stop_or_escalate": [
+    "路线出现冲突、电线、塌方、污水、尾随风险时，立即暂停。"
+  ],
+  "notes": "路线会老化，安全性也会过期。",
+  "category_original": "情报记录与风险评估",
+  "domains": [
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "suspicious_approach"
+  ],
+  "objects": [
+    "drinking_water",
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "person"
+  ],
+  "keywords": [
+    "路线安全重新评估",
+    "陌生人",
+    "安全",
+    "风险",
+    "记录",
+    "inventory_change",
+    "personnel_change",
+    "suspicious_approach",
+    "drinking_water",
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "person",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

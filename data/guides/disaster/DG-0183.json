@@ -1,0 +1,75 @@
+{
+  "id": "DG-0183",
+  "title": "烟雾和异味记录",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "空气中出现烟味、焦味、化学味、腐败味或不明刺激味。",
+  "goal": "判断来源、方向和是否需要封闭或撤离。",
+  "tools": [
+    "记录本",
+    "布条风向标",
+    "口罩",
+    "手电"
+  ],
+  "steps": [
+    "先让人员减少暴露，儿童老人病人进入室内或上风处。",
+    "记录时间、气味类型、强度、风向和持续时间。",
+    "观察是否伴随烟雾、眼鼻刺激、动物异常、多人不适。",
+    "关闭门窗或改走上风路线。",
+    "不要靠近源头确认，不点火测试。",
+    "如果气味反复出现，绘制出现时间和风向。"
+  ],
+  "check": [
+    "气味出现时间和方向有记录。",
+    "人员减少暴露。",
+    "没有靠近源头冒险。"
+  ],
+  "common_mistakes": [
+    "闻到化学味还过去看。",
+    "用打火机测试气体。",
+    "只说臭，不记录方向和时间。"
+  ],
+  "fallback": "没有口罩时，用多层布短时遮挡，重点仍是远离和封闭。",
+  "stop_or_escalate": [
+    "呼吸困难、眼痛、头晕、多人恶心、动物死亡或浓烟时，立即撤离到上风处。"
+  ],
+  "notes": "气味是环境警报，不是好奇心邀请函。",
+  "category_original": "天气与环境观察",
+  "domains": [
+    "disaster",
+    "records",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "food_spoilage",
+    "unsafe_water",
+    "evacuation_decision"
+  ],
+  "objects": [
+    "log"
+  ],
+  "keywords": [
+    "烟雾和异味记录",
+    "记录",
+    "撤离",
+    "food_spoilage",
+    "unsafe_water",
+    "evacuation_decision",
+    "log",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

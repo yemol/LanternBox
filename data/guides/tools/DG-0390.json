@@ -1,0 +1,76 @@
+{
+  "id": "DG-0390",
+  "title": "每月系统备份日",
+  "category": "组织秩序与训练演练",
+  "scenario": "壳中灯中的日记、库存、成员档案、指南库和百科资料不断增加。",
+  "goal": "固定备份节奏，避免长期无备份或备份过旧。",
+  "tools": [
+    "备份盘",
+    "备份清单",
+    "加密工具",
+    "记录本"
+  ],
+  "steps": [
+    "选择每月固定日期作为备份日。",
+    "备份前确认当前数据能正常打开。",
+    "普通数据和高敏感数据分开处理，高敏感数据先加密。",
+    "导出备份后检查文件大小和日期。",
+    "随机打开一个普通备份文件或在测试目录验证。",
+    "记录备份文件名、位置、是否加密、是否验证。",
+    "把备份盘放回防水防压位置。"
+  ],
+  "check": [
+    "备份有日期。",
+    "高敏感数据已加密。",
+    "备份已验证。"
+  ],
+  "common_mistakes": [
+    "想起来才备份。",
+    "备份完不检查。",
+    "高敏感数据明文拷贝。"
+  ],
+  "fallback": "没有外部盘时，至少在本机生成一份带日期的压缩副本，但不能替代离机备份。",
+  "stop_or_escalate": [
+    "设备异常、系统升级、数据结构大改前，必须提前备份。"
+  ],
+  "notes": "备份日就是给系统做一次存档点。",
+  "category_original": "时间管理与周期任务",
+  "domains": [
+    "tools",
+    "records",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "inventory",
+    "people",
+    "lighting"
+  ],
+  "keywords": [
+    "每月系统备份日",
+    "固定",
+    "inventory_change",
+    "personnel_change",
+    "inventory",
+    "people",
+    "lighting",
+    "tools_security_repair",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

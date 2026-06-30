@@ -1,0 +1,75 @@
+{
+  "id": "DG-0424",
+  "title": "公共板信息上限",
+  "category": "通信信息与数据安全",
+  "scenario": "公共区域贴了太多规则、任务、地图、库存、提醒，成员反而不看。",
+  "goal": "控制公共信息数量，让真正重要的内容被看到。",
+  "tools": [
+    "公共板",
+    "便签",
+    "笔",
+    "标签"
+  ],
+  "steps": [
+    "把公共板分成今日任务、重要警示、轮值、临时信息四区。",
+    "每区只保留当前有效内容。",
+    "过期便签当天移除。",
+    "高敏感信息不贴公共板。",
+    "字体要大，远看能读。",
+    "颜色和符号保持一致，不每次换规则。",
+    "每天晚间清理公共板一次。"
+  ],
+  "check": [
+    "公共板不过载。",
+    "过期信息已移除。",
+    "高敏感信息未公开。"
+  ],
+  "common_mistakes": [
+    "墙上贴满没人看。",
+    "昨天的任务还挂着。",
+    "物资隐藏点写在公共板。"
+  ],
+  "fallback": "公共板太小时，只保留今日三件事和夜间值守。",
+  "stop_or_escalate": [
+    "成员看错旧信息、忽略重要警示或公共板暴露敏感信息时，立即清理。"
+  ],
+  "notes": "公共板像仪表盘，不是整本说明书。",
+  "category_original": "信息压缩与离线摘要",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "公共板信息上限",
+    "安全",
+    "通信",
+    "inventory_change",
+    "personnel_change",
+    "inventory",
+    "people",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

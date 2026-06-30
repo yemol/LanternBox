@@ -1,0 +1,81 @@
+{
+  "id": "DG-0185",
+  "title": "热浪前准备",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "连续高温、停电、通风差或水源紧张。",
+  "goal": "在最热时段前降低中暑和食物腐败风险。",
+  "tools": [
+    "遮阳布",
+    "水",
+    "补液盐",
+    "湿毛巾",
+    "温度计可选"
+  ],
+  "steps": [
+    "确定最凉快的房间或阴凉区，作为午间休息区。",
+    "上午提前完成取水、做饭、清理垃圾等体力任务。",
+    "窗户根据温度选择开关：外面更热时遮阳，早晚通风。",
+    "老人、儿童、孕妇、病人安排在通风阴凉处。",
+    "每个人准备固定饮水杯，少量多次补水。",
+    "冰箱或冷藏失效时，优先处理易坏食物。"
+  ],
+  "check": [
+    "重体力任务避开中午。",
+    "重点人群有阴凉位置。",
+    "饮水安排明确。"
+  ],
+  "common_mistakes": [
+    "正午搬重物。",
+    "把老人留在闷热小房间。",
+    "口渴到很厉害才喝水。"
+  ],
+  "fallback": "没有遮阳布时，用床单、纸板、衣物在窗边做遮挡。",
+  "stop_or_escalate": [
+    "意识混乱、停止出汗、皮肤灼热、抽搐、无法饮水时，按重症中暑处理。"
+  ],
+  "notes": "热浪不是一天热，是连续消耗。",
+  "category_original": "天气与环境观察",
+  "domains": [
+    "disaster",
+    "power",
+    "security",
+    "shelter",
+    "food"
+  ],
+  "intents": [
+    "food_safety_judgment",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "power_outage",
+    "food_spoilage"
+  ],
+  "objects": [
+    "drinking_water"
+  ],
+  "keywords": [
+    "热浪前准备",
+    "停电",
+    "风险",
+    "食物",
+    "power_outage",
+    "food_spoilage",
+    "drinking_water",
+    "food_safety_judgment",
+    "power_lighting_energy",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响"
+  ]
+}

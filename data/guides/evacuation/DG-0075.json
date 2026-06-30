@@ -1,0 +1,84 @@
+{
+  "id": "DG-0075",
+  "title": "携带物资取舍",
+  "category": "撤离交通与路线",
+  "scenario": "背包空间和体力有限，不知道带什么。",
+  "goal": "优先带能保命、保信息、保行动的物品。",
+  "tools": [
+    "背包",
+    "清单",
+    "秤可选",
+    "防水袋",
+    "标签"
+  ],
+  "steps": [
+    "先放个人药品、证件、眼镜、助听器、手机或终端数据备份。",
+    "再放水、高热量食物、照明、保暖、雨具、口罩、急救小包。",
+    "每个人背自己的关键物品，不把全部水或药集中在一个人身上。",
+    "重物靠近背部中上位置，尖锐物包好。",
+    "试背 5 到 10 分钟，走动、蹲起、转身，判断是否过重。",
+    "超过负重时，舍弃低热量重物、玻璃罐、大体积低价值物。"
+  ],
+  "check": [
+    "背包能背着走。",
+    "药、水、证件、照明没有漏。",
+    "重量没有集中到一个人身上。"
+  ],
+  "common_mistakes": [
+    "撤离包变搬家包。",
+    "背大量罐装玻璃瓶。",
+    "把慢病药放公共包里忘拿。"
+  ],
+  "fallback": "没有背包时，用布袋、床单包、购物袋分散携带，但双手至少留一只可扶可护。",
+  "stop_or_escalate": [
+    "背包导致摔倒、呼吸困难、伤病员无法移动时，立即减重。"
+  ],
+  "notes": "带不走的物资不等于没价值，可以隐藏或记录位置。",
+  "category_original": "撤离与路线",
+  "domains": [
+    "evacuation",
+    "records",
+    "security",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "route",
+    "inventory",
+    "log",
+    "supplies"
+  ],
+  "keywords": [
+    "携带物资取舍",
+    "撤离",
+    "路线",
+    "记录",
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure",
+    "route",
+    "inventory",
+    "log",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

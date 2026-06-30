@@ -1,0 +1,75 @@
+{
+  "id": "DG-0455",
+  "title": "食物情绪安抚餐",
+  "category": "水与食物保障",
+  "scenario": "长期紧张、低温、儿童哭闹、成员情绪低落或冲突后，需要一餐稳定情绪。",
+  "goal": "在不浪费库存的前提下，用食物恢复秩序和士气。",
+  "tools": [
+    "菜单表",
+    "少量调味",
+    "热饮或粥",
+    "记录本"
+  ],
+  "steps": [
+    "选择成本低但有安慰感的食物，例如热粥、热汤、甜味热饮或熟悉口味。",
+    "不动用关键储备做奢侈大餐。",
+    "优先给情绪低落、儿童、病人和夜间值守者。",
+    "用少量糖、盐、香料或油脂改善口感。",
+    "安排固定分享时间，避免私下争抢。",
+    "吃完后及时清理厨余和餐具。",
+    "记录哪些食物对稳定情绪有效。"
+  ],
+  "check": [
+    "没有动用关键储备。",
+    "分享规则清楚。",
+    "厨余已处理。"
+  ],
+  "common_mistakes": [
+    "情绪差就开珍贵罐头狂吃。",
+    "只给少数人偷偷吃。",
+    "安抚餐后垃圾味外泄。"
+  ],
+  "fallback": "库存紧张时，用热水、米汤或少量糖盐热饮作为最低安抚。",
+  "stop_or_escalate": [
+    "情绪崩溃、冲突升级、儿童持续哭闹时，可配合心理与组织卡处理。"
+  ],
+  "notes": "有时候一碗热汤不是饭，是把队伍重新缝一下。",
+  "category_original": "菜单轮换与烹饪节奏",
+  "domains": [
+    "water",
+    "food",
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "cooked_food",
+    "drinking_water",
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "食物情绪安抚餐",
+    "食物",
+    "inventory_change",
+    "personnel_change",
+    "cooked_food",
+    "drinking_water",
+    "inventory",
+    "people",
+    "records_inventory_people",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "id": "DG-0533",
+  "title": "生活四区划分",
+  "category": "居住卫生与空间管理",
+  "scenario": "长期居住空间里睡眠、厨房、厕所、仓储和工具混在一起。",
+  "goal": "建立基本分区，减少污染和混乱。",
+  "tools": [
+    "纸板",
+    "标签",
+    "布帘",
+    "记录本"
+  ],
+  "steps": [
+    "划分干净区、污染区、工具区、储物区。",
+    "厨房和饮水远离厕所、垃圾和污染衣物。",
+    "睡眠区保持干燥，减少工具和食物堆放。",
+    "入口设置缓冲区处理鞋、桶和外来物。",
+    "每区贴标签或图标。",
+    "新成员先讲分区规则。",
+    "每周检查是否串区。"
+  ],
+  "check": [
+    "四区清楚。",
+    "厨房远离污染区。",
+    "入口有缓冲。"
+  ],
+  "common_mistakes": [
+    "水桶放厕所旁。",
+    "工具堆床边。",
+    "外来物直接进厨房。"
+  ],
+  "fallback": "空间很小时，用箱子、布帘和地面线做微分区。",
+  "stop_or_escalate": [
+    "腹泻、异味、虫害、工具伤人频发时，重做分区。"
+  ],
+  "notes": "空间分区是把混乱按住，让它别到处串门。",
+  "category_original": "长期居住空间规划",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "tools",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "contamination"
+  ],
+  "objects": [
+    "toilet",
+    "door",
+    "tools"
+  ],
+  "keywords": [
+    "生活四区划分",
+    "厕所",
+    "污染",
+    "睡眠",
+    "工具",
+    "contamination",
+    "toilet",
+    "door",
+    "tools",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "id": "DG-0285",
+  "title": "关键物资双人确认",
+  "category": "组织秩序与训练演练",
+  "scenario": "饮用水、慢病药、燃料、发电设备、证件、加密备份等关键物资需要出入库。",
+  "goal": "防止误拿、误用、漏记和单人压力过大。",
+  "tools": [
+    "库存模块",
+    "记录本",
+    "编号标签",
+    "签名表"
+  ],
+  "steps": [
+    "确定哪些物资属于关键物资，例如水、药、燃料、电池、证件、成员档案备份。",
+    "关键物资取用时尽量两人在场，一人取用，一人记录。",
+    "记录编号、数量、用途、时间和取用人。",
+    "紧急情况可以先取用，但事后必须补记录。",
+    "发现数量不一致时，先查记录，不直接指责。",
+    "每天或每周复核关键物资余量。"
+  ],
+  "check": [
+    "关键物资有清单。",
+    "取用有记录。",
+    "异常先查记录。"
+  ],
+  "common_mistakes": [
+    "关键物资随手拿。",
+    "只相信记忆。",
+    "发现少了立刻吵架。"
+  ],
+  "fallback": "人手不足时，至少做到取用后立刻拍照或手写记录。",
+  "stop_or_escalate": [
+    "饮用水、药品、燃料、证件备份数量异常时，暂停非必要取用并盘点。"
+  ],
+  "notes": "关键物资不是不让用，是不能糊涂地用。",
+  "category_original": "群体规则与秩序",
+  "domains": [
+    "power",
+    "security",
+    "water",
+    "medical",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "water_rationing",
+    "medical_elder_confusion",
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "consciousness_change",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "关键物资双人确认",
+    "设备",
+    "饮用水",
+    "consciousness_change",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "medicine",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "water_rationing",
+    "medical_elder_confusion",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响"
+  ]
+}

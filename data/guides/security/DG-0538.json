@@ -1,0 +1,71 @@
+{
+  "id": "DG-0538",
+  "title": "数据恢复演练",
+  "category": "组织秩序与训练演练",
+  "scenario": "壳中灯、指南库、成员档案、库存数据依赖备份。",
+  "goal": "确认数据真的能恢复。",
+  "tools": [
+    "备份盘",
+    "测试目录",
+    "记录本"
+  ],
+  "steps": [
+    "选择普通数据做演练，不直接动主库。",
+    "从备份复制到测试目录。",
+    "打开指南库、库存或普通记录检查。",
+    "确认文件日期、条目数和内容可读。",
+    "高敏感数据只验证加密流程，不公开内容。",
+    "记录恢复耗时和问题。",
+    "发现失败立即重新备份。"
+  ],
+  "check": [
+    "使用测试目录。",
+    "文件可读。",
+    "恢复结果有记录。"
+  ],
+  "common_mistakes": [
+    "直接覆盖主库测试。",
+    "备份从不打开。",
+    "高敏感资料公开测试。"
+  ],
+  "fallback": "没有测试设备时，至少检查备份文件存在、大小、日期和口令。",
+  "stop_or_escalate": [
+    "备份无法读取、条目数不符、口令失败时，立即停止依赖该备份。"
+  ],
+  "notes": "备份不是存起来就完事，恢复成功才算买到保险。",
+  "category_original": "风险演练专项",
+  "domains": [
+    "security",
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "inventory",
+    "people",
+    "lighting"
+  ],
+  "keywords": [
+    "数据恢复演练",
+    "风险",
+    "inventory_change",
+    "personnel_change",
+    "inventory",
+    "people",
+    "lighting",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "DG-0344",
+  "title": "黑暗中人员清点",
+  "category": "居住卫生与空间管理",
+  "scenario": "夜间停电、突发声响、撤离准备、冲突或灾害后需要确认人员是否都在。",
+  "goal": "快速清点成员，避免误以为人都在。",
+  "tools": [
+    "名单",
+    "低亮灯",
+    "哨子",
+    "集合点"
+  ],
+  "steps": [
+    "使用固定集合口令或哨声，让成员到指定点。",
+    "按名单点名，不只看人数。",
+    "儿童、老人、病人由照护者回应并确认位置。",
+    "无人回应时先检查睡眠区、厕所路线和入口污染区。",
+    "清点结果写入记录本，特别是缺席、外出和值守人员。",
+    "不在未清点完时贸然转移全队。",
+    "清点后说明下一步：原地等待、撤离、继续睡眠或值守。"
+  ],
+  "check": [
+    "按名单清点。",
+    "重点人员位置明确。",
+    "清点后有下一步指令。"
+  ],
+  "common_mistakes": [
+    "只数人头不点名。",
+    "以为有人在睡觉就不查。",
+    "清点没完成就出发。"
+  ],
+  "fallback": "没有名单时，按家庭或小组单位逐一确认。",
+  "stop_or_escalate": [
+    "有人失联、儿童不见、外出人员未归时，启动搜索或留言流程。"
+  ],
+  "notes": "黑暗里最危险的错觉，是觉得大家都在。",
+  "category_original": "黑暗环境安全",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "power",
+    "security",
+    "disaster"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "power_outage",
+    "evacuation_decision",
+    "personnel_change",
+    "night"
+  ],
+  "objects": [
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "黑暗中人员清点",
+    "停电",
+    "夜间",
+    "安全",
+    "power_outage",
+    "evacuation_decision",
+    "personnel_change",
+    "night",
+    "people",
+    "person",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

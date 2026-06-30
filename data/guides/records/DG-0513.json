@@ -1,0 +1,86 @@
+{
+  "id": "DG-0513",
+  "title": "种子保存基础",
+  "category": "种植养殖与采集",
+  "scenario": "后续要建立种子档案，但当前已有种子、豆类或可播材料。",
+  "goal": "先保护种子活性和来源记录。",
+  "tools": [
+    "密封袋",
+    "标签",
+    "干燥剂可选",
+    "记录本"
+  ],
+  "steps": [
+    "把种子按品种或来源分袋。",
+    "标签写名称、来源、日期和是否可食用或仅播种。",
+    "保持干燥、阴凉、避光。",
+    "不要把种子和潮湿土、清洁剂、燃料放一起。",
+    "少量做发芽测试，不一次性全部播种。",
+    "发霉、虫蛀种子单独隔离。",
+    "记录每次使用数量和结果。"
+  ],
+  "check": [
+    "种子有标签。",
+    "干燥避光。",
+    "使用有记录。"
+  ],
+  "common_mistakes": [
+    "所有种子混袋。",
+    "种子放厨房潮湿处。",
+    "一次全播失败无备份。"
+  ],
+  "fallback": "没有密封袋时，用纸包加外层罐子临时保存。",
+  "stop_or_escalate": [
+    "种子发霉、虫害、来源不明混入食物时，立即重分。"
+  ],
+  "notes": "种子不是小颗粒库存，是未来食物的睡眠状态。",
+  "category_original": "种植前置与种子档案",
+  "domains": [
+    "records",
+    "planting",
+    "shelter",
+    "food",
+    "water"
+  ],
+  "intents": [
+    "planting_seed_reserve",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "seed_saving",
+    "food_production",
+    "inventory_change"
+  ],
+  "objects": [
+    "seed",
+    "beans",
+    "inventory",
+    "log"
+  ],
+  "keywords": [
+    "种子保存基础",
+    "记录",
+    "种子",
+    "种植",
+    "睡眠",
+    "食物",
+    "seed_saving",
+    "food_production",
+    "inventory_change",
+    "seed",
+    "beans",
+    "inventory",
+    "log",
+    "planting_seed_reserve",
+    "records_inventory_people",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

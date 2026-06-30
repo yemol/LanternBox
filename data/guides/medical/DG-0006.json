@@ -1,0 +1,85 @@
+{
+  "id": "DG-0006",
+  "title": "伤口感染：红肿热痛处理",
+  "category": "医疗急救与照护",
+  "scenario": "伤口数小时或数天后出现红肿、发热、疼痛加重、渗液或流脓。",
+  "goal": "识别感染趋势，减少污染和活动，防止继续恶化。",
+  "tools": [
+    "记号笔",
+    "纱布",
+    "安全清水",
+    "体温计",
+    "记录本"
+  ],
+  "steps": [
+    "洗手后打开敷料观察，不要挤压伤口。",
+    "用笔沿红肿最外缘画线，并写上日期和时间。",
+    "用安全清水清洁周围污染，换上干净敷料。",
+    "减少受伤部位活动，避免继续摩擦和泡水。",
+    "每天固定时间测体温，记录疼痛、渗液、红肿边界变化。",
+    "检查是否有红线沿肢体向上蔓延。"
+  ],
+  "check": [
+    "红肿边界没有继续扩大。",
+    "疼痛没有越来越重。",
+    "没有发热或意识变差。"
+  ],
+  "common_mistakes": [
+    "挤脓。",
+    "反复用脏手摸伤口。",
+    "用厚油膏把污染封住。",
+    "红肿扩大却不记录。"
+  ],
+  "fallback": "没有记号笔时，用纸记录红肿大小，或用干净线/胶带在皮肤旁边辅助比对。",
+  "stop_or_escalate": [
+    "发热。",
+    "红肿快速扩大。",
+    "出现红线向上蔓延。",
+    "伤者虚弱或意识变化。"
+  ],
+  "notes": "感染处理重在趋势观察，不是看一眼说没事。",
+  "category_original": "急救处理",
+  "domains": [
+    "medical",
+    "hygiene",
+    "tools",
+    "water"
+  ],
+  "intents": [
+    "medical_wound_bleeding",
+    "medical_fever_respiratory",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "fever",
+    "wound",
+    "contamination"
+  ],
+  "objects": [
+    "wound"
+  ],
+  "keywords": [
+    "伤口感染",
+    "红肿热痛处理",
+    "发热",
+    "伤口",
+    "污染",
+    "fever",
+    "wound",
+    "contamination",
+    "medical_wound_bleeding",
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

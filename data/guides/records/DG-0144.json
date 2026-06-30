@@ -1,0 +1,78 @@
+{
+  "id": "DG-0144",
+  "title": "家庭成员信息包",
+  "category": "库存资料与成员档案",
+  "scenario": "家庭或小队中有儿童、老人、慢病成员、孕妇或需要照护者。",
+  "goal": "让成员分散、失联或照护交接时仍能识别和照护。",
+  "tools": [
+    "照片",
+    "卡片",
+    "防水袋",
+    "笔",
+    "壳中灯"
+  ],
+  "steps": [
+    "为每个人准备一页信息：姓名、照片、年龄、重要病史、过敏、常用药、联系人。",
+    "儿童和老人准备随身简版卡。",
+    "慢病成员写清药名、用药时间、危险信号。",
+    "把完整信息包放防水袋，另存电子版到壳中灯资料目录。",
+    "敏感信息分级保存，随身卡只放必要内容。",
+    "每次药物、联系方式或集合点变化后更新。"
+  ],
+  "check": [
+    "每个人有信息页。",
+    "儿童老人有随身卡。",
+    "电子版和纸质版至少各一份。"
+  ],
+  "common_mistakes": [
+    "只存在手机通讯录。",
+    "儿童身上没有身份信息。",
+    "过敏和用药不写。"
+  ],
+  "fallback": "没有照片时，写清外貌特征、身高、衣着和明显标记。",
+  "stop_or_escalate": [
+    "成员分散、照护者更换、撤离前必须检查信息包。"
+  ],
+  "notes": "信息包是人的索引。",
+  "category_original": "证件与资料",
+  "domains": [
+    "records",
+    "medical"
+  ],
+  "intents": [
+    "medical_elder_confusion",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "elderly",
+    "lost_contact",
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "elder",
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "家庭成员信息包",
+    "老人",
+    "elderly",
+    "lost_contact",
+    "inventory_change",
+    "personnel_change",
+    "elder",
+    "inventory",
+    "people",
+    "medical_elder_confusion",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响"
+  ]
+}

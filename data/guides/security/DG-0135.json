@@ -1,0 +1,88 @@
+{
+  "id": "DG-0135",
+  "title": "争执升级前撤离",
+  "category": "个人装备与防护",
+  "scenario": "取水、排队、交易、门口谈话、分配物资时出现争执。",
+  "goal": "在冲突升级前脱离危险点。",
+  "tools": [
+    "同伴",
+    "哨子",
+    "背包",
+    "记录本"
+  ],
+  "steps": [
+    "先降低声音，不抢话，不贴近对方身体。",
+    "后退半步，保留离开路线。",
+    "用短句结束争议，例如现在先暂停，稍后再谈。",
+    "让同伴靠近但不包围对方。",
+    "不要在拥挤处继续争辩，不要争夺物品。",
+    "离开后记录争执原因、对象、地点和是否需要改变规则。"
+  ],
+  "check": [
+    "双方距离拉开。",
+    "没有继续争抢物品。",
+    "队伍能离开现场。"
+  ],
+  "common_mistakes": [
+    "为了面子争到底。",
+    "在水源边推搡。",
+    "用侮辱语言刺激对方。"
+  ],
+  "fallback": "如果无法说服，就放弃低价值物资，先保人离开。",
+  "stop_or_escalate": [
+    "对方携带危险物、多人围上来、有人开始推搡抢夺时，立即脱离。"
+  ],
+  "notes": "灾害环境里赢一场争吵，经常输掉一整天安全。",
+  "category_original": "安全与边界",
+  "domains": [
+    "security",
+    "water",
+    "disaster",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "door",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "争执升级前撤离",
+    "安全",
+    "撤离",
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "door",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "DG-0477",
+  "title": "病人垃圾处理",
+  "category": "医疗急救与照护",
+  "scenario": "病人产生纸巾、口罩、呕吐袋、污染布、药品包装和餐余。",
+  "goal": "防止病人垃圾污染公共垃圾和生活区。",
+  "tools": [
+    "密封袋",
+    "有盖桶",
+    "手套",
+    "标签"
+  ],
+  "steps": [
+    "给病人休息区设置专用垃圾袋或有盖桶。",
+    "污染纸巾、口罩、呕吐物包装放入专用容器。",
+    "垃圾袋不要敞开放在床边或厨房旁。",
+    "处理病人垃圾时戴手套或用工具夹取。",
+    "处理后洗手。",
+    "病人垃圾外运或集中处理时标记，不让儿童和宠物接触。",
+    "记录异常污染事件。"
+  ],
+  "check": [
+    "病人垃圾有专用容器。",
+    "处理后洗手。",
+    "儿童宠物不能接触。"
+  ],
+  "common_mistakes": [
+    "病人纸巾到处放。",
+    "病人垃圾和厨余混在一起。",
+    "处理后直接碰水杯。"
+  ],
+  "fallback": "没有专用袋时，用纸包加外层袋临时封装，并放固定角落。",
+  "stop_or_escalate": [
+    "垃圾有血液、粪便、呕吐物渗漏或发臭时，立即清理并消毒周边。"
+  ],
+  "notes": "病人垃圾不能当普通垃圾，它带着病程的小尾巴。",
+  "category_original": "隔离照护",
+  "domains": [
+    "medical",
+    "water",
+    "hygiene"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "infection_control"
+  ],
+  "objects": [
+    "patient",
+    "medicine",
+    "vomit"
+  ],
+  "keywords": [
+    "病人垃圾处理",
+    "呕吐",
+    "污染",
+    "垃圾",
+    "contamination",
+    "infection_control",
+    "patient",
+    "medicine",
+    "vomit",
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

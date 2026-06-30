@@ -1,0 +1,83 @@
+{
+  "id": "DG-0115",
+  "title": "壳中灯启动检查",
+  "category": "通信信息与数据安全",
+  "scenario": "每天第一次打开壳中灯，或断电、重启、更新数据后。",
+  "goal": "确认离线终端真的可用，不只是首页能打开。",
+  "tools": [
+    "电脑或主机",
+    "浏览器",
+    "电源",
+    "记录本"
+  ],
+  "steps": [
+    "打开壳中灯首页。",
+    "依次进入库存、日记、应急指南三个核心页面。",
+    "在库存或日记中查看已有数据是否能显示。",
+    "在应急指南中搜索一个关键词，例如 水、止血、撤离。",
+    "如果刚更新过数据，随机展开一条指南，确认具体步骤能显示。",
+    "记录最后一次正常检查日期。"
+  ],
+  "check": [
+    "首页可打开。",
+    "库存和日记数据可读。",
+    "应急指南能搜索和展开。"
+  ],
+  "common_mistakes": [
+    "只看首页就以为系统正常。",
+    "更新数据后不测试。",
+    "发现页面空白但不记录。"
+  ],
+  "fallback": "时间紧时，至少测试首页、应急指南搜索、库存读取。",
+  "stop_or_escalate": [
+    "页面无法打开、数据为空、保存失败、搜索无结果时，进入故障排查。"
+  ],
+  "notes": "壳中灯自己的健康检查，要像检查水和药一样固定。",
+  "category_original": "壳中灯自维护",
+  "domains": [
+    "security",
+    "tools",
+    "comms",
+    "power",
+    "records"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "power_outage"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "lighting"
+  ],
+  "keywords": [
+    "壳中灯启动检查",
+    "安全",
+    "固定",
+    "通信",
+    "power_outage",
+    "drinking_water",
+    "medicine",
+    "lighting",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "tools_security_repair",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

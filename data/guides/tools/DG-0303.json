@@ -1,0 +1,87 @@
+{
+  "id": "DG-0303",
+  "title": "金属罐和铁丝再利用",
+  "category": "工具维修与替代制作",
+  "scenario": "有罐头盒、金属盖、铁丝、衣架、金属片等材料。",
+  "goal": "用于固定、隔热、小工具和临时结构，同时避免割伤。",
+  "tools": [
+    "手套",
+    "钳子",
+    "锉刀可选",
+    "硬盒",
+    "标签"
+  ],
+  "steps": [
+    "处理金属材料时戴手套，先检查锋利边缘。",
+    "罐头盒边缘用钳子压平，或用布胶带包边。",
+    "金属罐可做非入口工具杯、小零件盒、炭灰容器或隔热垫。",
+    "铁丝和衣架可做挂钩、固定线、临时支架。",
+    "不要用有锈蚀、油污或化学残留的金属容器接触食物。",
+    "小金属件放入硬盒，避免散落扎脚。",
+    "使用后检查是否变形、断裂或露出尖端。"
+  ],
+  "check": [
+    "锋利边缘已处理。",
+    "小金属件集中收纳。",
+    "污染金属没有接触食物。"
+  ],
+  "common_mistakes": [
+    "徒手掰罐头边。",
+    "铁丝尖端裸露。",
+    "用不明金属罐煮食物。"
+  ],
+  "fallback": "没有钳子时，先不要处理锋利罐边，只保留完整罐作为收纳。",
+  "stop_or_escalate": [
+    "割伤、金属锈蚀严重、容器受热异味时，停止使用。"
+  ],
+  "notes": "金属材料结实，但每个边缘都可能咬人。",
+  "category_original": "材料回收与再利用",
+  "domains": [
+    "tools",
+    "food",
+    "power",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "food_safety_judgment",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "wound",
+    "structural_risk",
+    "temporary_repair"
+  ],
+  "objects": [
+    "canned_food",
+    "tools"
+  ],
+  "keywords": [
+    "金属罐和铁丝再利用",
+    "工具",
+    "固定",
+    "维修",
+    "罐头",
+    "wound",
+    "structural_risk",
+    "temporary_repair",
+    "canned_food",
+    "tools",
+    "food_safety_judgment",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

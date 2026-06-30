@@ -1,0 +1,100 @@
+{
+  "id": "DG-0114",
+  "title": "固定低亮灯位",
+  "category": "能源照明与设备",
+  "scenario": "停电夜间需要照看病人、上厕所、值守或撤离。",
+  "goal": "减少摔倒，同时避免强光暴露和耗电。",
+  "tools": [
+    "低亮灯",
+    "手电",
+    "反光贴",
+    "胶带",
+    "备用电池"
+  ],
+  "steps": [
+    "把主要通道、厕所路线、药箱位置和出口路线作为照明重点。",
+    "每个重点位置使用低亮、固定、朝下的光源。",
+    "不把强光直射窗外、门缝和远处。",
+    "床边照明固定位置，老人儿童伸手能摸到。",
+    "备用电池或备用灯放在同一位置。",
+    "每天睡前检查灯是否能亮。"
+  ],
+  "check": [
+    "厕所和出口路线能看清脚下。",
+    "光不直射窗外。",
+    "备用灯位置固定。"
+  ],
+  "common_mistakes": [
+    "手电随手乱放。",
+    "把强光灯放窗边。",
+    "用蜡烛无人看守照明。"
+  ],
+  "fallback": "没有低亮灯时，用手电罩布、反光贴、荧光标记减少摸黑移动。",
+  "stop_or_escalate": [
+    "有人夜间摔倒、灯具发热、蜡烛无人看守时，立即调整照明方案。"
+  ],
+  "notes": "夜间照明不是越亮越好，是够用、低耗、低暴露。 本卡侧重固定灯位和基础低亮布置；夜间行动路线与值守照明见“低亮照明布置”。",
+  "category_original": "能源与设备",
+  "domains": [
+    "power",
+    "security",
+    "tools",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "power_outage",
+    "evacuation_decision",
+    "night",
+    "resource_exposure"
+  ],
+  "objects": [
+    "patient",
+    "toilet",
+    "route",
+    "flashlight",
+    "lighting"
+  ],
+  "keywords": [
+    "固定低亮灯位",
+    "停电",
+    "照明",
+    "设备",
+    "夜间",
+    "固定",
+    "power_outage",
+    "evacuation_decision",
+    "night",
+    "resource_exposure",
+    "patient",
+    "toilet",
+    "route",
+    "flashlight",
+    "lighting",
+    "medical_fever_respiratory",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "能源照明"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "太阳能充电"
+  ]
+}

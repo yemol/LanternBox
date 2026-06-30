@@ -1,0 +1,89 @@
+{
+  "id": "DG-0536",
+  "title": "仓储离地离墙",
+  "category": "居住卫生与空间管理",
+  "scenario": "食物、药品、纸质资料、工具和衣物长期存放。",
+  "goal": "减少潮气、虫害和查找困难。",
+  "tools": [
+    "架子",
+    "纸板",
+    "标签",
+    "收纳箱"
+  ],
+  "steps": [
+    "关键物资离地保存。",
+    "食物和纸质资料不贴潮墙。",
+    "重物放低，轻物放高。",
+    "入口物资远离燃料和清污用品。",
+    "每箱贴编号、分类和日期。",
+    "每周检查墙角潮气和虫害。",
+    "移动位置后更新库存。"
+  ],
+  "check": [
+    "关键物资离地。",
+    "重物低放。",
+    "位置和库存一致。"
+  ],
+  "common_mistakes": [
+    "米袋直接贴地。",
+    "药品靠潮墙。",
+    "燃料和食物一箱放。"
+  ],
+  "fallback": "没有架子时，用纸板、木板、砖块或空箱垫高。",
+  "stop_or_escalate": [
+    "虫害、霉味、漏水、箱体变软时，立即转移物资。"
+  ],
+  "notes": "仓储不是堆高高，是让物资能活到被用那天。",
+  "category_original": "长期居住空间规划",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "tools",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "medicine",
+    "clothes",
+    "building",
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "仓储离地离墙",
+    "衣物",
+    "工具",
+    "inventory_change",
+    "resource_exposure",
+    "medicine",
+    "clothes",
+    "building",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

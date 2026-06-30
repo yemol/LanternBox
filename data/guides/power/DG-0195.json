@@ -1,0 +1,81 @@
+{
+  "id": "DG-0195",
+  "title": "无线电通话纪律",
+  "category": "通信信息与数据安全",
+  "scenario": "使用对讲机、短距离无线设备或其他离线通信工具。",
+  "goal": "提高通信效率，减少暴露和误解。",
+  "tools": [
+    "对讲机",
+    "电池",
+    "频道表",
+    "呼号表",
+    "记录本"
+  ],
+  "steps": [
+    "提前设定频道、备用频道和呼号。",
+    "通话前先听几秒，避免打断别人。",
+    "每次只说一件事：谁、在哪、状态、需要什么、下一步。",
+    "避免在开放频道说完整库存、人员脆弱点和精确敏感位置。",
+    "结束时确认对方收到，例如请复述地点或时间。",
+    "每天固定时间检查电量和频道。"
+  ],
+  "check": [
+    "频道和呼号清楚。",
+    "通话简短。",
+    "重要信息有复述确认。"
+  ],
+  "common_mistakes": [
+    "长时间闲聊耗电。",
+    "公开说仓库位置。",
+    "不确认对方是否听懂。"
+  ],
+  "fallback": "没有呼号表时，用简单编号代替真实姓名。",
+  "stop_or_escalate": [
+    "频道被陌生人干扰、有人冒充、通信内容泄露时，切换备用频道和简化信息。"
+  ],
+  "notes": "无线电不是聊天工具，是短句工具。",
+  "category_original": "通信联络",
+  "domains": [
+    "power",
+    "security",
+    "tools",
+    "comms",
+    "shelter"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "tools_security_repair",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "resource_exposure"
+  ],
+  "objects": [
+    "tools"
+  ],
+  "keywords": [
+    "无线电通话纪律",
+    "设备",
+    "安全",
+    "工具",
+    "通信",
+    "resource_exposure",
+    "tools",
+    "power_lighting_energy",
+    "tools_security_repair",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

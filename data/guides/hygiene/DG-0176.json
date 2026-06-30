@@ -1,0 +1,88 @@
+{
+  "id": "DG-0176",
+  "title": "室内防潮防霉",
+  "category": "居住卫生与空间管理",
+  "scenario": "雨季、洪水后、地下空间、长期关闭门窗或被褥潮湿。",
+  "goal": "减少霉味、呼吸刺激、衣物和食物损坏。",
+  "tools": [
+    "干布",
+    "晾晒绳",
+    "除湿材料可选",
+    "纸板",
+    "记录本"
+  ],
+  "steps": [
+    "先找湿气来源：漏水、地面返潮、衣物未干、通风不足。",
+    "把被褥、衣物、纸箱和食物离开潮湿地面。",
+    "天气允许时开窗通风，避免长时间闷住。",
+    "湿衣物集中晾晒，不堆在睡眠区。",
+    "发现霉点的纸箱、布料、食物分开处理。",
+    "每天检查墙角、床底、箱底和窗边。"
+  ],
+  "check": [
+    "睡眠区没有明显潮湿被褥。",
+    "食物不直接贴地。",
+    "霉味来源被定位。"
+  ],
+  "common_mistakes": [
+    "湿衣服堆床边。",
+    "食物纸箱放潮地上。",
+    "只喷香味掩盖霉味。"
+  ],
+  "fallback": "无法通风时，至少把湿物移出睡眠区，并用纸板、架子离地。",
+  "stop_or_escalate": [
+    "霉味严重、多人咳嗽、墙面大片发霉、食物受潮长霉时，重新布置空间。"
+  ],
+  "notes": "防潮不是舒服问题，是库存寿命问题。",
+  "category_original": "长期居住与营地管理",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "disaster",
+    "evacuation",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "flood",
+    "door_window_security",
+    "inventory_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "clothes",
+    "door",
+    "window",
+    "inventory"
+  ],
+  "keywords": [
+    "室内防潮防霉",
+    "衣物",
+    "洪水",
+    "门窗",
+    "flood",
+    "door_window_security",
+    "inventory_change",
+    "drinking_water",
+    "clothes",
+    "door",
+    "window",
+    "inventory",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

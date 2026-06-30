@@ -1,0 +1,79 @@
+{
+  "id": "DG-0267",
+  "title": "搬运任务轮换",
+  "category": "撤离交通与路线",
+  "scenario": "需要连续搬运水、粮食、柴火、设备或清理废物。",
+  "goal": "防止少数人过劳和受伤。",
+  "tools": [
+    "任务表",
+    "记录本",
+    "水",
+    "休息点"
+  ],
+  "steps": [
+    "把搬运任务拆成小轮次，每轮有开始和结束。",
+    "记录每个人搬运次数和重量大致等级。",
+    "重体力人员和轻任务人员轮换，例如搬运、观察、登记、清理路线。",
+    "安排固定补水和休息时间。",
+    "出现头晕、手麻、腰痛、脚泡的人转轻任务。",
+    "当天结束后记录谁过劳，第二天调整。"
+  ],
+  "check": [
+    "搬运有轮次。",
+    "有人负责记录。",
+    "不适人员转轻任务。"
+  ],
+  "common_mistakes": [
+    "能干的人一直干到倒。",
+    "没有休息点。",
+    "轻任务被认为没价值。"
+  ],
+  "fallback": "人手少时，缩短每轮时间，宁可多轮少量。",
+  "stop_or_escalate": [
+    "多人出现过劳、摔倒、争执或效率明显下降时，暂停并重新分工。"
+  ],
+  "notes": "搬运系统要保护最能干的人，因为他们最容易被用坏。",
+  "category_original": "重物搬运安全",
+  "domains": [
+    "evacuation",
+    "power",
+    "security",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water",
+    "route"
+  ],
+  "keywords": [
+    "搬运任务轮换",
+    "撤离",
+    "路线",
+    "设备",
+    "安全",
+    "evacuation_decision",
+    "drinking_water",
+    "route",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

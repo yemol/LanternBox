@@ -1,0 +1,85 @@
+{
+  "id": "DG-0156",
+  "title": "简易绳结固定",
+  "category": "工具维修与替代制作",
+  "scenario": "需要捆绑物资、固定防水布、晾晒衣物、做边界或临时牵引。",
+  "goal": "用简单可靠的绳结完成固定，避免一拉就散。",
+  "tools": [
+    "绳子",
+    "布条",
+    "手套",
+    "固定点"
+  ],
+  "steps": [
+    "先检查绳子是否磨损、霉烂、断股。",
+    "固定前确认固定点结实，不绑在松动门把、尖锐边缘或脆弱管线上。",
+    "普通捆绑用双结，拉紧后再加一个保险结。",
+    "防水布固定要留一点缓冲，不要拉到一阵风就撕裂。",
+    "绳子穿过尖锐边缘时，加布条垫住减少磨损。",
+    "固定后轻拉测试，再投入使用。"
+  ],
+  "check": [
+    "绳子没有明显破损。",
+    "固定点可靠。",
+    "拉动后不松脱。"
+  ],
+  "common_mistakes": [
+    "把绳子绑在尖锐边缘。",
+    "固定点本身会动。",
+    "只打一个松结就承重。"
+  ],
+  "fallback": "不会复杂绳结时，用最简单的双结加保险结，重点是测试。",
+  "stop_or_escalate": [
+    "用于吊人、承重救援、高处作业时，不使用未经训练的临时绳结。"
+  ],
+  "notes": "绳结不用花哨，可靠和可检查最重要。",
+  "category_original": "维修工具",
+  "domains": [
+    "tools",
+    "security",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "clothes",
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "简易绳结固定",
+    "工具",
+    "固定",
+    "维修",
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "clothes",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

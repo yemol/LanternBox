@@ -1,0 +1,85 @@
+{
+  "id": "DG-0062",
+  "title": "高温停电：中暑预防",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "高温天气停电，风扇、空调、冰箱不可用。",
+  "goal": "降低热伤害和食物腐败风险。",
+  "tools": [
+    "水",
+    "补液盐",
+    "湿毛巾",
+    "遮阳布",
+    "记录本"
+  ],
+  "steps": [
+    "关闭阳光直射窗户的窗帘或遮阳布，减少室内升温。",
+    "把重体力任务改到清晨或傍晚，中午只做轻任务。",
+    "老人、儿童、孕妇、病人安排在最通风阴凉的位置。",
+    "用湿毛巾擦颈部、腋下、腹股沟，配合通风降温。",
+    "少量多次喝安全水，有大量出汗时补充电解质或含盐食物。",
+    "冰箱少开门，优先处理易坏食物。",
+    "记录头晕、恶心、抽筋、尿少、意识变化。"
+  ],
+  "check": [
+    "中午重体力任务已暂停。",
+    "重点人群在阴凉处。",
+    "饮水和尿量有观察。"
+  ],
+  "common_mistakes": [
+    "正午搬水搬物。",
+    "一次猛灌大量水。",
+    "把老人儿童留在闷热小房间。"
+  ],
+  "fallback": "没有湿毛巾时，用衣物打湿擦拭皮肤，保持空气流动。",
+  "stop_or_escalate": [
+    "意识混乱、抽搐、停止出汗但皮肤灼热、无法饮水时，按重症中暑处理。"
+  ],
+  "notes": "高温断电时，时间表要跟着温度走。",
+  "category_original": "灾害专项",
+  "domains": [
+    "disaster",
+    "power",
+    "security",
+    "food"
+  ],
+  "intents": [
+    "food_safety_judgment",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "power_outage",
+    "refrigeration_failure",
+    "food_spoilage"
+  ],
+  "objects": [
+    "fridge"
+  ],
+  "keywords": [
+    "高温停电",
+    "中暑预防",
+    "停电",
+    "风险",
+    "食物",
+    "冰箱",
+    "power_outage",
+    "refrigeration_failure",
+    "food_spoilage",
+    "fridge",
+    "food_safety_judgment",
+    "power_lighting_energy",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响"
+  ]
+}

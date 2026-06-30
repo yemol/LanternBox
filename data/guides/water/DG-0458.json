@@ -1,0 +1,88 @@
+{
+  "id": "DG-0458",
+  "title": "储水先进先出",
+  "category": "水与食物保障",
+  "scenario": "多批次饮用水、净水、烧开水或瓶装水同时存在。",
+  "goal": "先用旧水，避免水长期放置变质或记录混乱。",
+  "tools": [
+    "日期标签",
+    "记录本",
+    "水桶编号",
+    "架子"
+  ],
+  "steps": [
+    "每批饮用水写上日期和来源。",
+    "储水区按旧水在前、新水在后的顺序摆放。",
+    "每天取水时优先使用日期最早且状态正常的饮用水。",
+    "发现无日期水，单独放入待确认区。",
+    "新取回的水不要直接倒入旧水桶混合。",
+    "每周检查旧水气味、颜色、沉淀和桶内状态。",
+    "用完一个桶后清洁晾干，再进入下一轮使用。"
+  ],
+  "check": [
+    "每批水有日期。",
+    "旧水优先使用。",
+    "新旧水未混倒。"
+  ],
+  "common_mistakes": [
+    "所有水倒进一个大桶。",
+    "没有日期靠记忆。",
+    "旧水一直压在后面。"
+  ],
+  "fallback": "没有空间排序时，用编号记录下一桶应该先用哪一桶。",
+  "stop_or_escalate": [
+    "旧水异味、变色、桶内滑腻或来源不明时，停止直接饮用。"
+  ],
+  "notes": "储水也要排队，不排队就会有水被遗忘在角落里变坏。",
+  "category_original": "储水与轮换",
+  "domains": [
+    "water",
+    "food",
+    "records",
+    "power",
+    "hygiene"
+  ],
+  "intents": [
+    "food_safety_judgment",
+    "water_rationing",
+    "water_treatment",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "food_spoilage"
+  ],
+  "objects": [
+    "drinking_water",
+    "boiling",
+    "log"
+  ],
+  "keywords": [
+    "储水先进先出",
+    "饮用水",
+    "净水",
+    "食物",
+    "变质",
+    "记录",
+    "food_spoilage",
+    "drinking_water",
+    "boiling",
+    "log",
+    "food_safety_judgment",
+    "water_rationing",
+    "water_treatment",
+    "records_inventory_people",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "id": "DG-0090",
+  "title": "蚊虫和苍蝇控制",
+  "category": "居住卫生与空间管理",
+  "scenario": "雨后、垃圾增多、厕所替代、食物暴露后蚊蝇增多。",
+  "goal": "减少叮咬、污染食物和传播疾病的机会。",
+  "tools": [
+    "纱网",
+    "垃圾袋",
+    "盖子",
+    "干土",
+    "长袖衣物"
+  ],
+  "steps": [
+    "先清理积水：桶底、盆、瓶盖、塑料布凹陷、排水沟。",
+    "食物加盖，熟食不敞开放。",
+    "垃圾密封，厨余不过夜敞口。",
+    "厕所或桶厕每次后用干土、灰土覆盖并盖好。",
+    "睡眠区使用纱网、长袖衣物或物理遮挡。",
+    "每天傍晚前检查一次新积水。"
+  ],
+  "check": [
+    "没有明显敞口积水。",
+    "食物和垃圾有盖。",
+    "睡眠区蚊虫减少。"
+  ],
+  "common_mistakes": [
+    "只打蚊子不清积水。",
+    "熟食敞开放。",
+    "厕所无遮盖。"
+  ],
+  "fallback": "没有纱网时，用薄布、旧蚊帐、透气衣物做临时罩。",
+  "stop_or_escalate": [
+    "蚊虫突然大量增加、多人发热皮疹、食物被苍蝇反复接触。"
+  ],
+  "notes": "虫害控制先控环境，再控虫。",
+  "category_original": "卫生防疫",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "security",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "resource_exposure"
+  ],
+  "objects": [
+    "toilet"
+  ],
+  "keywords": [
+    "蚊虫和苍蝇控制",
+    "厕所",
+    "污染",
+    "垃圾",
+    "contamination",
+    "resource_exposure",
+    "toilet",
+    "hygiene_contamination",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "DG-0264",
+  "title": "双人搬运口令",
+  "category": "撤离交通与路线",
+  "scenario": "两人或多人搬箱子、门板、担架、桶、家具或设备。",
+  "goal": "用统一口令避免一方先动导致掉落或伤人。",
+  "tools": [
+    "手套",
+    "口令负责人",
+    "路线清理工具"
+  ],
+  "steps": [
+    "先指定一个口令负责人。",
+    "搬前确认路线、放置点和中途停顿点。",
+    "统一口令：准备、起、走、停、放。",
+    "每次转弯、上台阶、过门槛前先停一下。",
+    "任何人觉得撑不住，可以喊停，其他人必须停。",
+    "放下时一起慢放，不突然松手。",
+    "搬完检查手脚挤压和物品损坏。"
+  ],
+  "check": [
+    "有口令负责人。",
+    "所有人知道停的口令。",
+    "转弯和台阶会提前停。"
+  ],
+  "common_mistakes": [
+    "大家同时乱喊。",
+    "一个人突然松手。",
+    "撑不住也硬扛。"
+  ],
+  "fallback": "没有经验时，先空手模拟一次路线。",
+  "stop_or_escalate": [
+    "有人手脚被压、物体倾斜、路线受阻时，立即停下重新调整。"
+  ],
+  "notes": "双人搬运最怕默契不存在却假装存在。",
+  "category_original": "重物搬运安全",
+  "domains": [
+    "evacuation",
+    "power",
+    "security",
+    "comms",
+    "disaster"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "signal_plan"
+  ],
+  "objects": [
+    "bucket",
+    "route",
+    "door"
+  ],
+  "keywords": [
+    "双人搬运口令",
+    "撤离",
+    "路线",
+    "设备",
+    "安全",
+    "口令",
+    "evacuation_decision",
+    "signal_plan",
+    "bucket",
+    "route",
+    "door",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "id": "DG-0197",
+  "title": "儿童老人定位规则",
+  "category": "通信信息与数据安全",
+  "scenario": "儿童、老人、认知混乱者、听力视力弱者在临时住所或撤离途中容易走失。",
+  "goal": "降低走失概率，走失后缩小搜索范围。",
+  "tools": [
+    "身份卡",
+    "颜色标记",
+    "哨子",
+    "名单",
+    "照片"
+  ],
+  "steps": [
+    "给儿童老人佩戴身份卡或放在衣物内袋。",
+    "使用醒目但不夸张的颜色标记，例如布条、帽子、包牌。",
+    "每次离开一个地点前清点儿童老人。",
+    "在营地内设定活动范围，不允许独自去水边、垃圾区、门口和交易点。",
+    "教会简单求助规则：原地停下、吹哨、找约定标记的人。",
+    "每天记录当天衣着，必要时拍照留档。"
+  ],
+  "check": [
+    "身份卡随身。",
+    "活动范围明确。",
+    "每次转移前后清点。"
+  ],
+  "common_mistakes": [
+    "所有人都以为别人看着。",
+    "儿童老人自由靠近门口和水边。",
+    "衣着变化不记录。"
+  ],
+  "fallback": "没有身份卡时，用纸条写简版信息放入口袋。",
+  "stop_or_escalate": [
+    "儿童老人失踪、夜间外出、认知混乱加重时，立即启动搜索流程。"
+  ],
+  "notes": "走失预防靠系统，不靠喊名字。",
+  "category_original": "通信联络",
+  "domains": [
+    "security",
+    "comms",
+    "shelter",
+    "disaster",
+    "evacuation"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "medical_elder_confusion",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "elderly",
+    "evacuation_decision",
+    "temporary_repair"
+  ],
+  "objects": [
+    "elder",
+    "building",
+    "people"
+  ],
+  "keywords": [
+    "儿童老人定位规则",
+    "安全",
+    "通信",
+    "住所",
+    "撤离",
+    "elderly",
+    "evacuation_decision",
+    "temporary_repair",
+    "elder",
+    "building",
+    "people",
+    "shelter_disaster_evacuate",
+    "medical_elder_confusion",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

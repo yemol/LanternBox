@@ -1,0 +1,71 @@
+{
+  "id": "DG-0201",
+  "title": "路线颜色标记",
+  "category": "撤离交通与路线",
+  "scenario": "需要在建筑、树林、营地、废墟周边或撤离路线上留下方向提示。",
+  "goal": "用统一标记减少迷路和误入危险区。",
+  "tools": [
+    "彩色布条",
+    "粉笔",
+    "胶带",
+    "记号笔",
+    "石头"
+  ],
+  "steps": [
+    "先约定颜色含义，例如绿色可通行，黄色谨慎，红色禁止。",
+    "在路口、转弯、危险点、集合点做标记。",
+    "标记要能被队友看见，但不要过度暴露隐藏物资。",
+    "同一条路线使用同一套规则，不临时乱换颜色。",
+    "每次返回时检查标记是否被风雨或他人移动。",
+    "路线废弃后清除或改为禁用标记。"
+  ],
+  "check": [
+    "颜色含义所有人都知道。",
+    "关键路口有标记。",
+    "废弃路线被处理。"
+  ],
+  "common_mistakes": [
+    "今天红色表示安全，明天红色表示危险。",
+    "标记太隐蔽队友看不到。",
+    "把隐藏仓库也标太明显。"
+  ],
+  "fallback": "没有彩色材料时，用箭头、划线数量、石头摆放方式代替。",
+  "stop_or_escalate": [
+    "标记被破坏、误导、外人跟随时，改用更低暴露方式。"
+  ],
+  "notes": "标记是给队友看的，不是给所有人看的。",
+  "category_original": "地图路线",
+  "domains": [
+    "evacuation",
+    "comms",
+    "disaster",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "building",
+    "route"
+  ],
+  "keywords": [
+    "路线颜色标记",
+    "撤离",
+    "路线",
+    "evacuation_decision",
+    "building",
+    "route",
+    "shelter_disaster_evacuate",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

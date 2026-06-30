@@ -1,0 +1,88 @@
+{
+  "id": "DG-0292",
+  "title": "传言核实流程",
+  "category": "组织秩序与训练演练",
+  "scenario": "有人带来消息：某处有物资、某路安全、某人危险、某水源污染或某地点要出事。",
+  "goal": "避免被未经核实的消息带偏决策。",
+  "tools": [
+    "记录本",
+    "地图",
+    "消息来源表"
+  ],
+  "steps": [
+    "先记录消息原文，不急着传播。",
+    "写下来源：亲眼看见、别人转述、听说、猜测。",
+    "标注时间和地点。",
+    "查是否有第二来源，最好是不同来源。",
+    "把消息分级：已确认、待确认、高风险需观察、暂不采信。",
+    "重大行动前不要只依赖单一传言。",
+    "事后记录消息是否准确，更新来源可信度。"
+  ],
+  "check": [
+    "消息来源和时间清楚。",
+    "没有未经核实就全员传播。",
+    "重大行动有复核。"
+  ],
+  "common_mistakes": [
+    "听到就当真。",
+    "把猜测说成事实。",
+    "传言引发恐慌后没人负责。"
+  ],
+  "fallback": "来不及核实时，按保守原则采取低风险预防，不做高风险行动。",
+  "stop_or_escalate": [
+    "传言导致恐慌、暴力、抢物资、撤离冲动时，立即暂停传播并核实。"
+  ],
+  "notes": "传言在灾害里跑得比人快，所以要给它拴绳。",
+  "category_original": "冲突降级与安全沟通",
+  "domains": [
+    "security",
+    "hygiene",
+    "medical",
+    "water",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "hygiene_contamination",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "contamination",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "传言核实流程",
+    "安全",
+    "污染",
+    "水源",
+    "contamination",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "hygiene_contamination",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

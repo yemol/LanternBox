@@ -1,0 +1,83 @@
+{
+  "id": "DG-0462",
+  "title": "缺水时用途排序",
+  "category": "水与食物保障",
+  "scenario": "储水不足、取水困难、净水速度慢或水源可疑。",
+  "goal": "按生存优先级分配水，不被低优先级消耗拖垮。",
+  "tools": [
+    "水量记录",
+    "任务表",
+    "成员名单"
+  ],
+  "steps": [
+    "先保障饮用和必要用药。",
+    "第二保障病人、儿童、老人和高温重体力成员。",
+    "第三保障最低限度烹饪和食品安全。",
+    "清洁用水优先手卫生、伤口周边和餐具关键清洁。",
+    "暂停洗衣、地面冲洗、非必要擦洗和高耗水烹饪。",
+    "把不同用途水量写在公共规则上。",
+    "每天复核水量和取水计划。"
+  ],
+  "check": [
+    "饮用和用药优先。",
+    "非必要耗水已暂停。",
+    "水量每日复核。"
+  ],
+  "common_mistakes": [
+    "缺水时还洗大件衣物。",
+    "用饮用水大量拖地。",
+    "儿童病人用水没有优先。"
+  ],
+  "fallback": "缺水严重时，启用口头宣布和专人管理，避免自由取用。",
+  "stop_or_escalate": [
+    "饮用水低于一天底线、多人脱水、取水路线中断时，进入紧急配水。"
+  ],
+  "notes": "缺水时，每一勺水都要有岗位。",
+  "category_original": "缺水优先级",
+  "domains": [
+    "water",
+    "food",
+    "security",
+    "hygiene"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "water_rationing",
+    "water_treatment"
+  ],
+  "situations": [
+    "water_outage",
+    "scarcity",
+    "suspicious_approach"
+  ],
+  "objects": [
+    "drinking_water"
+  ],
+  "keywords": [
+    "缺水时用途排序",
+    "水源",
+    "净水",
+    "食物",
+    "可疑",
+    "water_outage",
+    "scarcity",
+    "suspicious_approach",
+    "drinking_water",
+    "security_suspicious_person",
+    "water_rationing",
+    "water_treatment",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "DG-0254",
+  "title": "搬运后人员检查",
+  "category": "撤离交通与路线",
+  "scenario": "完成搬水、搬粮、撤离或重物转移后。",
+  "goal": "及时发现脱水、扭伤、擦伤、低血糖、过劳和情绪崩溃。",
+  "tools": [
+    "水",
+    "记录本",
+    "急救包",
+    "椅子或垫子"
+  ],
+  "steps": [
+    "先让搬运人员坐下或站稳，不立刻安排下一项重活。",
+    "询问头晕、胸闷、腰痛、膝痛、手麻、脚泡和恶心。",
+    "检查手掌、肩膀、脚跟、脚趾和腰背。",
+    "给出少量饮水和休息时间。",
+    "记录谁搬了什么、用了多久、出现什么不适。",
+    "下一轮搬运按状态调整重量和人员。",
+    "明显不适者转为轻任务或观察。"
+  ],
+  "check": [
+    "搬运后有休息和饮水。",
+    "不适人员被记录。",
+    "下一轮负重有调整。"
+  ],
+  "common_mistakes": [
+    "搬完马上继续重活。",
+    "有人说痛但被催快点。",
+    "不记录谁过劳。"
+  ],
+  "fallback": "时间紧时，至少检查头晕、胸闷、脚伤和手麻四项。",
+  "stop_or_escalate": [
+    "胸痛、呼吸困难、意识异常、持续呕吐、无法站立时，停止搬运并升级处理。"
+  ],
+  "notes": "人不是搬运工具，工具坏了还能修，人倒了会拖垮全队。",
+  "category_original": "交通与搬运",
+  "domains": [
+    "evacuation",
+    "tools",
+    "medical",
+    "hygiene",
+    "disaster"
+  ],
+  "intents": [
+    "medical_wound_bleeding",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "wound",
+    "bleeding",
+    "evacuation_decision",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "route",
+    "tools",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "搬运后人员检查",
+    "撤离",
+    "路线",
+    "工具",
+    "wound",
+    "bleeding",
+    "evacuation_decision",
+    "personnel_change",
+    "drinking_water",
+    "route",
+    "tools",
+    "people",
+    "person",
+    "medical_wound_bleeding",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响"
+  ]
+}

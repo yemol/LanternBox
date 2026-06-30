@@ -1,0 +1,93 @@
+{
+  "id": "DG-0208",
+  "title": "危险区域标记",
+  "category": "通信信息与数据安全",
+  "scenario": "出现坍塌、污水、电线、燃气、碎玻璃、动物尸体、病人隔离区等危险。",
+  "goal": "让后来者一眼知道不能进入或必须绕行。",
+  "tools": [
+    "红色布条",
+    "纸板",
+    "记号笔",
+    "绳子",
+    "石头"
+  ],
+  "steps": [
+    "先把危险区域临时围出边界。",
+    "标记写清危险原因，不只写危险两个字。",
+    "标记放在进入路径之前，而不是危险点里面。",
+    "儿童和老人能看懂的位置要更醒目。",
+    "夜间危险点加低亮或反光标记。",
+    "危险解除后撤掉或改写标记，避免信息过期。"
+  ],
+  "check": [
+    "标记在进入前可见。",
+    "写明原因。",
+    "边界不会被轻易踩进。"
+  ],
+  "common_mistakes": [
+    "标记太小。",
+    "只写禁止但不说明原因。",
+    "危险解除后不撤标记。"
+  ],
+  "fallback": "没有红色材料时，用交叉树枝、石头圈、纸板大字代替。",
+  "stop_or_escalate": [
+    "有人误入、标记被破坏、危险扩大时，升级为绳索封锁或改路线。"
+  ],
+  "notes": "危险标记是替后来者踩刹车。",
+  "category_original": "信号标记",
+  "domains": [
+    "power",
+    "security",
+    "comms",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "medical_wound_bleeding",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "contamination",
+    "infection_control",
+    "structural_risk",
+    "signal_plan"
+  ],
+  "objects": [
+    "drinking_water",
+    "patient",
+    "glass",
+    "signal"
+  ],
+  "keywords": [
+    "危险区域标记",
+    "安全",
+    "通信",
+    "信号",
+    "contamination",
+    "infection_control",
+    "structural_risk",
+    "signal_plan",
+    "drinking_water",
+    "patient",
+    "glass",
+    "signal",
+    "medical_fever_respiratory",
+    "medical_wound_bleeding",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "太阳能充电"
+  ]
+}

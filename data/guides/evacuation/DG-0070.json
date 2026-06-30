@@ -1,0 +1,89 @@
+{
+  "id": "DG-0070",
+  "title": "撤离前10分钟清单",
+  "category": "撤离交通与路线",
+  "scenario": "必须快速离开住所、营地或临时安全屋。",
+  "goal": "在最短时间内带走生命线，不被低价值物品拖住。",
+  "tools": [
+    "撤离包",
+    "药品",
+    "水",
+    "照明",
+    "证件",
+    "地图",
+    "纸条"
+  ],
+  "steps": [
+    "喊出撤离指令，先清点人员，确认儿童、老人、伤病员位置。",
+    "每人拿自己的撤离包；负责人拿公共药品、地图、照明和关键数据。",
+    "能安全关闭就关闭火源、燃气、水阀和重要电源；如果环境危险，不为了关闭设备冒险。",
+    "把去向、人数、时间写在约定位置，避免后来者盲目寻找。",
+    "按队伍顺序离开：熟路冷静者在前，儿童老人伤病员在中间，观察者在后。",
+    "离开后到第一个安全点再清点物资，不在门口翻包。"
+  ],
+  "check": [
+    "所有人都在队伍里。",
+    "药品、水、照明、证件、地图已带。",
+    "没有人为低价值物品返回。"
+  ],
+  "common_mistakes": [
+    "临时争论带什么。",
+    "把所有水交给一个人。",
+    "让儿童走队尾。",
+    "离开前不留任何信息。"
+  ],
+  "fallback": "没有完整撤离包时，优先水、药、照明、保暖、证件、地图。",
+  "stop_or_escalate": [
+    "建筑有坍塌、火灾、燃气、洪水、暴力风险时，不为物资停留。"
+  ],
+  "notes": "这条适合打印后贴在门内侧。",
+  "category_original": "撤离与路线",
+  "domains": [
+    "evacuation",
+    "security",
+    "records",
+    "shelter",
+    "disaster"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "temporary_repair",
+    "inventory_change"
+  ],
+  "objects": [
+    "building",
+    "route",
+    "door",
+    "inventory"
+  ],
+  "keywords": [
+    "撤离前10分钟清单",
+    "撤离",
+    "路线",
+    "安全",
+    "清单",
+    "住所",
+    "evacuation_decision",
+    "temporary_repair",
+    "inventory_change",
+    "building",
+    "route",
+    "door",
+    "inventory",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "DG-0327",
+  "title": "个人药包管理",
+  "category": "个人装备与防护",
+  "scenario": "成员有慢病药、过敏药、常用药、急救卡或特殊照护物品。",
+  "goal": "确保个人药品能快速找到，不被误用或遗失。",
+  "tools": [
+    "小药包",
+    "标签",
+    "成员档案",
+    "用药记录"
+  ],
+  "steps": [
+    "为需要用药的成员准备个人药包。",
+    "药包外写成员编号或姓名，不写过多病情细节。",
+    "药包内放当前周期药品、用药卡和过敏提示。",
+    "药包位置固定，照护者和本人都知道。",
+    "个人药包和公共药箱有记录关联。",
+    "每次补药或调整剂量后更新用药卡。",
+    "外出时按任务决定是否随身携带。"
+  ],
+  "check": [
+    "药包有成员归属。",
+    "用药卡清楚。",
+    "照护者知道位置。"
+  ],
+  "common_mistakes": [
+    "慢病药散放各处。",
+    "别人拿错个人药。",
+    "药包里药变了但用药卡没改。"
+  ],
+  "fallback": "没有专用药包时，用小袋或信封临时分装并贴编号。",
+  "stop_or_escalate": [
+    "药包丢失、漏服、重复服药或成员状态变化时，立即复核。"
+  ],
+  "notes": "个人药包是成员档案在现实中的小分身。",
+  "category_original": "个人装备管理",
+  "domains": [
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "personnel_change"
+  ],
+  "objects": [
+    "medicine",
+    "people"
+  ],
+  "keywords": [
+    "个人药包管理",
+    "personnel_change",
+    "medicine",
+    "people",
+    "records_inventory_people",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": []
+}

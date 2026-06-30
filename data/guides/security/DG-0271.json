@@ -1,0 +1,80 @@
+{
+  "id": "DG-0271",
+  "title": "普通记录和高敏感记录分离",
+  "category": "通信信息与数据安全",
+  "scenario": "日记、库存、指南、成员档案、证件、医疗记录都在同一套离线系统中。",
+  "goal": "防止普通功能误暴露高敏感信息。",
+  "tools": [
+    "目录结构",
+    "标签",
+    "访问规则",
+    "备份清单"
+  ],
+  "steps": [
+    "普通日记只记录事件，不写完整证件号码、口令和隐藏物资精确位置。",
+    "成员医疗和证件信息写入成员档案库，不写在普通日记里。",
+    "库存可记录物资位置，但隐藏物资和高价值物资可用简化位置或私密清单。",
+    "普通搜索不检索高敏感档案。",
+    "普通备份和高敏感备份分开命名、分开权限。",
+    "定期检查普通目录中是否混入证件、口令、医疗照片。",
+    "发现混入后移动到安全目录，并删除普通目录副本。"
+  ],
+  "check": [
+    "高敏感信息不在普通日记中。",
+    "普通搜索不暴露成员档案。",
+    "备份分层清楚。"
+  ],
+  "common_mistakes": [
+    "把口令写进日记。",
+    "把证件图放普通图片目录。",
+    "普通备份里混入成员档案。"
+  ],
+  "fallback": "系统功能没做好前，先靠目录和文件名分离。",
+  "stop_or_escalate": [
+    "普通页面出现成员证件、医疗图、口令提示时，立即停止使用并清理数据。"
+  ],
+  "notes": "系统越方便，越要防止方便地泄露。",
+  "category_original": "信息安全与数据保护",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "inventory",
+    "people",
+    "log"
+  ],
+  "keywords": [
+    "普通记录和高敏感记录分离",
+    "安全",
+    "通信",
+    "记录",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "inventory",
+    "people",
+    "log",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

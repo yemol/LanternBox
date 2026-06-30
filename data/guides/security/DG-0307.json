@@ -1,0 +1,87 @@
+{
+  "id": "DG-0307",
+  "title": "简易遮阳和遮雨棚",
+  "category": "工具维修与替代制作",
+  "scenario": "需要在门口、取水点、厨房外、种植区或休息点临时遮阳遮雨。",
+  "goal": "用布、塑料布和绳子搭建低风险遮挡。",
+  "tools": [
+    "防水布",
+    "床单",
+    "绳子",
+    "木棍",
+    "夹子",
+    "石头"
+  ],
+  "steps": [
+    "先确定遮挡目的：遮阳、挡雨、挡风还是保护物资。",
+    "选择牢固固定点，不绑在电线、松动窗框和危险结构上。",
+    "雨棚要有坡度，让水流向安全方向，不积在中间。",
+    "遮阳棚要留通风，不把人闷在下面。",
+    "固定绳不要横穿主要通道，必须穿过时加明显标记。",
+    "大风前收起或降低棚面，避免被风掀走。",
+    "雨后检查积水、松动和滴水方向。"
+  ],
+  "check": [
+    "固定点安全。",
+    "雨水能排走。",
+    "通道绳子有标记。"
+  ],
+  "common_mistakes": [
+    "棚面平铺积水。",
+    "绑在电线上。",
+    "大风中继续撑大棚。"
+  ],
+  "fallback": "材料不足时，优先给药品、干衣物、火源材料和睡眠点遮挡。",
+  "stop_or_escalate": [
+    "大风、雷雨、固定点松动、棚面积水下坠时，立即收起或重搭。"
+  ],
+  "notes": "棚子不是越大越好，风来了它会变帆。",
+  "category_original": "简易制作与替代",
+  "domains": [
+    "security",
+    "tools",
+    "planting",
+    "shelter",
+    "food"
+  ],
+  "intents": [
+    "tools_security_repair",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "temporary_repair",
+    "food_production"
+  ],
+  "objects": [
+    "drinking_water",
+    "door",
+    "tools"
+  ],
+  "keywords": [
+    "简易遮阳和遮雨棚",
+    "风险",
+    "工具",
+    "维修",
+    "种植",
+    "temporary_repair",
+    "food_production",
+    "drinking_water",
+    "door",
+    "tools",
+    "tools_security_repair",
+    "planting_seed_reserve",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

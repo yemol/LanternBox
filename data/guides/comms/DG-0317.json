@@ -1,0 +1,75 @@
+{
+  "id": "DG-0317",
+  "title": "鞋底和鞋面检查",
+  "category": "个人装备与防护",
+  "scenario": "鞋子长期用于取水、搬运、废墟、泥地或撤离路线。",
+  "goal": "提前发现开胶、磨穿、进水和防滑失效。",
+  "tools": [
+    "刷子",
+    "干布",
+    "胶带",
+    "针线可选",
+    "记录本"
+  ],
+  "steps": [
+    "每天或外出前检查鞋底是否磨平、裂开、扎入钉子或玻璃。",
+    "检查鞋面是否开线、开胶、破洞或进水。",
+    "清理鞋底泥沙和小石子，避免下一次磨脚。",
+    "湿鞋先塞纸、布或干草吸湿，再通风晾干，不直接靠明火烤。",
+    "轻微开胶可临时用胶带、绳线或绑带固定。",
+    "严重破损鞋降级为营地内短距离使用。",
+    "把鞋子状态写入个人装备清单。"
+  ],
+  "check": [
+    "鞋底无明显异物。",
+    "湿鞋已通风处理。",
+    "严重破损鞋已降级。"
+  ],
+  "common_mistakes": [
+    "鞋底扎钉不查。",
+    "湿鞋直接靠火烤变形。",
+    "开胶鞋继续远行。"
+  ],
+  "fallback": "没有备用鞋时，减少外出距离，并用布条、胶带、绳子临时固定破口。",
+  "stop_or_escalate": [
+    "鞋底穿透、鞋面大开口、鞋内有血迹或走路疼痛时，暂停远距离任务。"
+  ],
+  "notes": "鞋坏不是小问题，它会把地图上的短路变成长路。",
+  "category_original": "衣物鞋袜维护",
+  "domains": [
+    "comms",
+    "disaster",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water",
+    "clothes",
+    "route"
+  ],
+  "keywords": [
+    "鞋底和鞋面检查",
+    "撤离",
+    "路线",
+    "evacuation_decision",
+    "drinking_water",
+    "clothes",
+    "route",
+    "shelter_disaster_evacuate",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

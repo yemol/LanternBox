@@ -1,0 +1,82 @@
+{
+  "id": "DG-0339",
+  "title": "低电量工作模式",
+  "category": "能源照明与设备",
+  "scenario": "电量进入紧张阶段，照明、通信、记录和壳中灯都需要节约使用。",
+  "goal": "用制度延长关键设备可用时间。",
+  "tools": [
+    "电量记录表",
+    "低亮灯",
+    "纸质记录",
+    "任务表"
+  ],
+  "steps": [
+    "宣布进入低电量模式，说明哪些设备限制使用。",
+    "暂停娱乐、长时间照明和非必要拍摄。",
+    "壳中灯集中在固定时间开机查询或记录，不全天常亮。",
+    "夜间只保留路线低亮和必要值守灯。",
+    "普通记录先用纸质，集中录入电子系统。",
+    "通信设备按固定时间开机收发，不持续待机，除非有紧急任务。",
+    "每天复盘电量消耗，调整规则。"
+  ],
+  "check": [
+    "低电量规则已宣布。",
+    "非必要设备暂停。",
+    "壳中灯集中使用。"
+  ],
+  "common_mistakes": [
+    "每个人自己省自己的，结果关键设备没电。",
+    "手机长时间亮屏。",
+    "强光灯整夜开。"
+  ],
+  "fallback": "如果无法统一执行，把关键设备交由负责人统一管理。",
+  "stop_or_escalate": [
+    "关键通信、照明、医疗记录设备低于警戒线时，进一步收紧用电。"
+  ],
+  "notes": "低电量时，电不是用掉的，是被决策花掉的。",
+  "category_original": "低电量策略",
+  "domains": [
+    "power",
+    "comms",
+    "records",
+    "security",
+    "evacuation"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [],
+  "objects": [
+    "log",
+    "battery",
+    "lighting"
+  ],
+  "keywords": [
+    "低电量工作模式",
+    "电量",
+    "照明",
+    "设备",
+    "通信",
+    "记录",
+    "log",
+    "battery",
+    "lighting",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "能源照明"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

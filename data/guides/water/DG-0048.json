@@ -1,0 +1,91 @@
+{
+  "id": "DG-0048",
+  "title": "剩饭处理：出锅时间和再加热",
+  "category": "水与食物保障",
+  "scenario": "做饭后有剩饭剩菜，冷藏条件差。",
+  "goal": "降低剩饭引发腹泻和食物中毒风险。",
+  "tools": [
+    "饭盒",
+    "标签纸",
+    "锅",
+    "记录本"
+  ],
+  "steps": [
+    "出锅后立刻记录时间。",
+    "短时间内能吃完的分成小份，避免反复翻动一大锅。",
+    "没有冷藏时，不要把剩饭当长期储备。",
+    "再次食用前彻底加热，尤其是米饭、肉类和汤。",
+    "有异味、酸味、黏滑、起泡的剩饭放弃。",
+    "根据剩饭情况调整下一餐做饭量。"
+  ],
+  "check": [
+    "剩饭有出锅时间。",
+    "再次吃前已经充分加热。",
+    "可疑剩饭没有给脆弱成员。"
+  ],
+  "common_mistakes": [
+    "常温放到第二天随便吃。",
+    "新饭倒进旧饭混放。",
+    "给老人儿童吃可疑剩饭。"
+  ],
+  "fallback": "没有标签时，把剩饭放在固定“当天吃完区”，并在日记记录。",
+  "stop_or_escalate": [
+    "多人吃后腹泻。",
+    "剩饭有异味、黏滑、起泡。"
+  ],
+  "notes": "剩饭是高风险食物，不是稳定库存。",
+  "category_original": "食物获取",
+  "domains": [
+    "water",
+    "food",
+    "security",
+    "power",
+    "hygiene"
+  ],
+  "intents": [
+    "food_safety_judgment",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "refrigeration_failure",
+    "inventory_change"
+  ],
+  "objects": [
+    "fridge",
+    "leftovers",
+    "drinking_water",
+    "diarrhea",
+    "inventory"
+  ],
+  "keywords": [
+    "剩饭处理",
+    "出锅时间和再加热",
+    "食物",
+    "剩饭",
+    "剩菜",
+    "风险",
+    "腹泻",
+    "refrigeration_failure",
+    "inventory_change",
+    "fridge",
+    "leftovers",
+    "drinking_water",
+    "diarrhea",
+    "inventory",
+    "food_safety_judgment",
+    "hygiene_contamination",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "腹泻"
+  ]
+}

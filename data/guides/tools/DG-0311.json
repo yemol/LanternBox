@@ -1,0 +1,85 @@
+{
+  "id": "DG-0311",
+  "title": "不明来源容器处理",
+  "category": "工具维修与替代制作",
+  "scenario": "找到瓶子、桶、罐、箱子等容器，但不知道曾装过什么。",
+  "goal": "避免用未知污染容器储存饮水和食物。",
+  "tools": [
+    "手套",
+    "标签",
+    "隔离区",
+    "清洁水"
+  ],
+  "steps": [
+    "先闻气味，观察残留物、颜色、腐蚀痕迹和标签残片。",
+    "不明来源容器默认不用于饮水、食物和药品。",
+    "可以降级用于工具收纳、灰水、废物、种植外盆或非入口用途。",
+    "清洗后仍有异味、油膜、发黏或颜色残留的，继续隔离或废弃。",
+    "在容器上写明非饮用、非食物。",
+    "不要因为容器很大就冒险装饮用水。",
+    "记录容器来源和用途。"
+  ],
+  "check": [
+    "不明容器没有装入口物资。",
+    "容器贴了非饮用标签。",
+    "异味容器已隔离。"
+  ],
+  "common_mistakes": [
+    "捡到大桶就装水。",
+    "标签撕掉当干净。",
+    "不明容器放厨房里。"
+  ],
+  "fallback": "容器紧缺时，也只用于灰水、工具、种植和垃圾，不用于入口用途。",
+  "stop_or_escalate": [
+    "有人误饮、容器化学味强、接触后皮肤刺激时，立即停止使用。"
+  ],
+  "notes": "未知容器最大的危险，是它看起来很有用。",
+  "category_original": "废弃物筛选与降级使用",
+  "domains": [
+    "tools",
+    "hygiene",
+    "medical",
+    "water",
+    "security"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "contamination",
+    "temporary_repair"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "tools"
+  ],
+  "keywords": [
+    "不明来源容器处理",
+    "工具",
+    "维修",
+    "污染",
+    "contamination",
+    "temporary_repair",
+    "drinking_water",
+    "bucket",
+    "tools",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "异响",
+    "脚步声",
+    "门外",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

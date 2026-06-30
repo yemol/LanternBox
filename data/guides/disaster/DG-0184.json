@@ -1,0 +1,75 @@
+{
+  "id": "DG-0184",
+  "title": "寒潮前准备",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "低温、降雪、冻雨或连续寒冷即将到来。",
+  "goal": "提前保护人员、水、食物、设备和管线。",
+  "tools": [
+    "保暖衣物",
+    "毯子",
+    "纸板",
+    "热水瓶",
+    "胶带",
+    "水桶"
+  ],
+  "steps": [
+    "把睡眠区移到最避风、最小、最容易保暖的房间。",
+    "检查门窗缝隙，用布条、胶带或毛巾临时封堵。",
+    "饮用水和常用水放在室内，避免冻住。",
+    "电子设备、电池和药品离开极冷位置。",
+    "老人、儿童、病人准备额外保暖层。",
+    "提前完成取水、清洁和外部固定任务，减少寒潮中外出。"
+  ],
+  "check": [
+    "暖区确定。",
+    "水和药不在冰冷外部。",
+    "重点人群有额外保暖。"
+  ],
+  "common_mistakes": [
+    "寒潮中才外出取水。",
+    "电池放冷车里。",
+    "穿湿衣服睡觉。"
+  ],
+  "fallback": "保暖材料不足时，集中人员到小空间，用纸板、衣物和塑料布分层隔冷。",
+  "stop_or_escalate": [
+    "有人失温、管线冻裂、室内温度持续下降到危险水平时，调整居住区或集中保暖。"
+  ],
+  "notes": "寒潮前准备越早，燃料和体力花得越少。",
+  "category_original": "天气与环境观察",
+  "domains": [
+    "disaster",
+    "power",
+    "records"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "寒潮前准备",
+    "设备",
+    "personnel_change",
+    "drinking_water",
+    "people",
+    "person",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "id": "DG-0143",
+  "title": "证件防水备份",
+  "category": "库存资料与成员档案",
+  "scenario": "身份证件、户口、护照、房屋资料、保险、学历、车辆资料等需要保存。",
+  "goal": "让重要资料在水、火、转移和断网后仍可找回。",
+  "tools": [
+    "防水袋",
+    "复印件",
+    "扫描件",
+    "移动硬盘",
+    "标签"
+  ],
+  "steps": [
+    "把原件、复印件、电子扫描件分成三层保存。",
+    "原件放防水袋，随撤离包或重要资料包保存。",
+    "复印件放在另一处，避免和原件一起损失。",
+    "扫描件保存在离线硬盘或优盘里。",
+    "资料袋外写类别，不写过多敏感内容。",
+    "每次新增或变更证件后更新备份。"
+  ],
+  "check": [
+    "原件有防水保护。",
+    "复印件和原件不在同一处。",
+    "电子版能离线读取。"
+  ],
+  "common_mistakes": [
+    "所有证件都放一个包。",
+    "只存在云端。",
+    "资料受潮后不检查。"
+  ],
+  "fallback": "没有扫描设备时，用手机拍清晰照片后保存到离线设备，再准备纸质复印或手写摘要。",
+  "stop_or_escalate": [
+    "证件受潮、丢失、转移前、家庭成员变化时，立即重新备份。"
+  ],
+  "notes": "秩序恢复后，证件会重新变得很重要。",
+  "category_original": "证件与资料",
+  "domains": [
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "building",
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "证件防水备份",
+    "inventory_change",
+    "personnel_change",
+    "drinking_water",
+    "building",
+    "inventory",
+    "people",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": []
+}

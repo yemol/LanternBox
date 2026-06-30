@@ -1,0 +1,85 @@
+{
+  "id": "DG-0152",
+  "title": "漏水临时处理",
+  "category": "工具维修与替代制作",
+  "scenario": "水桶、水管、屋顶、窗边、容器或临时水路出现漏水。",
+  "goal": "先止损、导流、隔离，再决定是否维修。",
+  "tools": [
+    "桶盆",
+    "毛巾",
+    "胶带",
+    "塑料布",
+    "绳子",
+    "标签"
+  ],
+  "steps": [
+    "先判断漏水来源：屋顶、墙缝、管道、容器还是地面积水。",
+    "把饮用水、药品、电器和纸质资料移离漏水区域。",
+    "用桶盆接水，用毛巾或布条导流，避免水漫延。",
+    "小容器破损可先擦干后用胶带临时封堵。",
+    "屋顶或窗边漏水，用塑料布做导流，不要让水流向电源。",
+    "在漏水点贴标签并记录时间，观察是否扩大。",
+    "处理后检查地面湿滑和霉味。"
+  ],
+  "check": [
+    "关键物资远离漏水。",
+    "水没有流向电源。",
+    "漏水点有记录。"
+  ],
+  "common_mistakes": [
+    "先修漏点但不移开电器和药品。",
+    "漏水流到插线板旁不处理。",
+    "地面湿滑不标记。"
+  ],
+  "fallback": "没有胶带时，用布条、塑料袋、绳子和重物临时压住或导流。",
+  "stop_or_escalate": [
+    "漏水靠近电源、天花板下沉、墙体开裂、污水倒灌时，撤离或封锁区域。"
+  ],
+  "notes": "漏水处理第一步不是修，是止损。",
+  "category_original": "维修工具",
+  "domains": [
+    "tools",
+    "water",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "water_rationing",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "infection_control",
+    "temporary_repair"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "window",
+    "tools"
+  ],
+  "keywords": [
+    "漏水临时处理",
+    "工具",
+    "维修",
+    "水桶",
+    "infection_control",
+    "temporary_repair",
+    "drinking_water",
+    "bucket",
+    "window",
+    "tools",
+    "water_rationing",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

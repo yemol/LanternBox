@@ -1,0 +1,80 @@
+{
+  "id": "DG-0069",
+  "title": "住所不可继续停留的信号",
+  "category": "撤离交通与路线",
+  "scenario": "房屋、营地或临时安全屋状态恶化。",
+  "goal": "及时识别必须离开的边界线。",
+  "tools": [
+    "手电",
+    "口罩",
+    "应急包",
+    "纸条",
+    "地图"
+  ],
+  "steps": [
+    "检查结构：墙体大裂、天花板下沉、楼梯变形、门窗卡死。",
+    "检查火和气：烟、焦味、燃气味、余烬、插座冒火。",
+    "检查水：快速进水、污水倒灌、厕所无法使用且无法替代。",
+    "检查空气：刺鼻气味、浓烟、粉尘、多人眼鼻刺激。",
+    "检查外部：冲突逼近、陌生人反复试探、资源暴露后风险上升。",
+    "任一风险达到立即危险，就把人和关键包移出，别继续整理。"
+  ],
+  "check": [
+    "危险信号被写下。",
+    "关键人员和包已经靠近出口。",
+    "不再为了低价值物资停留。"
+  ],
+  "common_mistakes": [
+    "边裂边住。",
+    "燃气味里开灯检查。",
+    "水进屋还先搬家具。"
+  ],
+  "fallback": "来不及详细判断时，只问一句：再待 30 分钟会不会明显更危险？会，就准备走。",
+  "stop_or_escalate": [
+    "结构变形、燃气味、火灾、快速进水、化学气味、暴力威胁。"
+  ],
+  "notes": "有些地方不是修一修能住，是必须离开。",
+  "category_original": "撤离与路线",
+  "domains": [
+    "evacuation",
+    "security",
+    "comms",
+    "shelter",
+    "disaster"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "signal_plan",
+    "temporary_repair"
+  ],
+  "objects": [
+    "building",
+    "route",
+    "signal"
+  ],
+  "keywords": [
+    "住所不可继续停留的信号",
+    "撤离",
+    "路线",
+    "安全",
+    "信号",
+    "住所",
+    "evacuation_decision",
+    "signal_plan",
+    "temporary_repair",
+    "building",
+    "route",
+    "signal",
+    "shelter_disaster_evacuate",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "id": "DG-0159",
+  "title": "坏消息告知儿童",
+  "category": "组织秩序与训练演练",
+  "scenario": "需要告诉儿童停电、撤离、亲友失联、物资减少、环境变化等坏消息。",
+  "goal": "让儿童理解下一步，而不是被恐惧填满。",
+  "tools": [
+    "安静角落",
+    "水",
+    "熟悉物品",
+    "纸笔"
+  ],
+  "steps": [
+    "先把儿童带离争吵和危险现场。",
+    "用短句讲事实，不编恐怖细节，也不说明显假话。",
+    "先说下一步安排，例如我们现在去集合点、今晚睡这里。",
+    "允许儿童问问题，但不知道就说现在还不知道。",
+    "给儿童一个小任务，例如拿水杯、贴标签、数人数。",
+    "之后观察睡眠、食欲、沉默、哭闹和黏人情况。"
+  ],
+  "check": [
+    "儿童知道下一步。",
+    "没有长时间暴露在成人恐慌中。",
+    "有成年人持续陪伴。"
+  ],
+  "common_mistakes": [
+    "用吓唬让儿童听话。",
+    "说一切都没事但马上撤离。",
+    "让儿童反复听坏消息讨论。"
+  ],
+  "fallback": "如果没有时间解释，先给一句稳定指令：跟着我，拿好你的包，我们到安全点再说。",
+  "stop_or_escalate": [
+    "儿童持续不吃不喝、失眠、走失冲动强烈或出现自伤言语时，增加陪伴和减轻刺激。"
+  ],
+  "notes": "儿童需要的不是全部真相，而是可承受的事实和明确下一步。",
+  "category_original": "心理与组织",
+  "domains": [
+    "power",
+    "security",
+    "disaster",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "power_outage",
+    "evacuation_decision",
+    "lost_contact",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "inventory",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "坏消息告知儿童",
+    "停电",
+    "撤离",
+    "power_outage",
+    "evacuation_decision",
+    "lost_contact",
+    "inventory_change",
+    "resource_exposure",
+    "inventory",
+    "people",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

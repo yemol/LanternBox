@@ -1,0 +1,77 @@
+{
+  "id": "DG-0408",
+  "title": "老人和慢病成员教学",
+  "category": "组织秩序与训练演练",
+  "scenario": "老人、慢病成员或行动不便者需要知道自己的药、路线、求助和夜间安排。",
+  "goal": "让重点成员掌握自救和求助的最低信息。",
+  "tools": [
+    "个人药包",
+    "联络卡",
+    "低亮灯",
+    "路线标记"
+  ],
+  "steps": [
+    "确认其知道个人药包在哪里。",
+    "确认其知道夜间厕所路线和低亮灯位置。",
+    "教会使用哨子、呼叫方式或固定敲击信号。",
+    "说明哪些任务不要自己硬做，例如搬水、开火、夜间外出。",
+    "把用药时间和禁忌写成大字卡。",
+    "让照护者听本人复述一遍。",
+    "每周检查卡片是否还看得清、放得对。"
+  ],
+  "check": [
+    "知道药包位置。",
+    "知道求助方式。",
+    "用药卡可读。"
+  ],
+  "common_mistakes": [
+    "把药放公共箱深处。",
+    "老人不好意思求助。",
+    "小字卡片看不清。"
+  ],
+  "fallback": "视力差时，用颜色、触摸标记和固定位置代替小字。",
+  "stop_or_escalate": [
+    "漏服、跌倒、迷路、夜间独自外出时，立即调整照护和教学。"
+  ],
+  "notes": "重点成员不是被动照护对象，也需要掌握自己的小地图。",
+  "category_original": "新成员教学",
+  "domains": [
+    "comms",
+    "medical",
+    "records"
+  ],
+  "intents": [
+    "medical_elder_confusion"
+  ],
+  "situations": [
+    "elderly",
+    "personnel_change",
+    "night"
+  ],
+  "objects": [
+    "elder",
+    "medicine",
+    "route",
+    "people"
+  ],
+  "keywords": [
+    "老人和慢病成员教学",
+    "老人",
+    "elderly",
+    "personnel_change",
+    "night",
+    "elder",
+    "medicine",
+    "route",
+    "people",
+    "medical_elder_confusion",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响"
+  ]
+}

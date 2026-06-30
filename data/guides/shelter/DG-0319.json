@@ -1,0 +1,79 @@
+{
+  "id": "DG-0319",
+  "title": "衣物分层收纳",
+  "category": "个人装备与防护",
+  "scenario": "衣物数量有限，需要应对寒冷、潮湿、炎热、外出、睡眠和清污。",
+  "goal": "把衣物按用途分层管理，避免关键衣物被污染或找不到。",
+  "tools": [
+    "收纳袋",
+    "标签纸",
+    "干燥袋可选",
+    "记录本"
+  ],
+  "steps": [
+    "把衣物分成贴身层、保暖层、防风防雨层、工作脏衣层和睡眠干衣层。",
+    "睡眠干衣单独保存，不参与清污和取水任务。",
+    "外出工作衣靠近入口污染区，回到室内先脱下或隔离。",
+    "保暖层保持干燥，避免和湿衣混放。",
+    "每个成员至少知道自己的干衣袋在哪里。",
+    "换季或天气变化后重新调整衣物包。",
+    "衣物不足时优先保证儿童、老人、病人和夜间值守者。"
+  ],
+  "check": [
+    "睡眠干衣单独保存。",
+    "脏衣和干衣分开。",
+    "保暖层没有受潮。"
+  ],
+  "common_mistakes": [
+    "所有衣服堆在一起。",
+    "穿清污衣上床。",
+    "唯一保暖衣被雨淋湿后没有备用。"
+  ],
+  "fallback": "没有收纳袋时，用布包、纸箱、塑料袋分区，并贴标签。",
+  "stop_or_escalate": [
+    "多人受凉、衣物发霉、找不到干衣、污染衣混入睡眠区时，重新分区。"
+  ],
+  "notes": "衣物不是一堆布，是人体温度系统。",
+  "category_original": "衣物鞋袜维护",
+  "domains": [
+    "shelter",
+    "medical",
+    "water",
+    "hygiene"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "fever",
+    "contamination"
+  ],
+  "objects": [
+    "temperature",
+    "clothes"
+  ],
+  "keywords": [
+    "衣物分层收纳",
+    "睡眠",
+    "污染",
+    "衣物",
+    "fever",
+    "contamination",
+    "temperature",
+    "clothes",
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

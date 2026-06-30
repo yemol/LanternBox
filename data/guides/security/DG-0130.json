@@ -1,0 +1,79 @@
+{
+  "id": "DG-0130",
+  "title": "门口谈话规则",
+  "category": "个人装备与防护",
+  "scenario": "有人在门口请求帮助、交易、借物、找人或发生争执。",
+  "goal": "保持礼貌但不暴露核心区和完整物资。",
+  "tools": [
+    "门闩",
+    "记录本",
+    "同伴",
+    "低亮灯",
+    "隔离桌"
+  ],
+  "steps": [
+    "不开全门，先隔门、隔窗或在门外保持距离交流。",
+    "至少两人在场：一人说话，一人观察周围和后方。",
+    "不要在门口展示仓库、饮水桶、药箱和人数。",
+    "把谈话内容控制在具体问题：需要什么、能交换什么、何时离开。",
+    "无法判断时，不当场决定，让对方稍后再来或约定外部地点。",
+    "谈话结束后记录时间、人数、诉求、方向和是否反复出现。"
+  ],
+  "check": [
+    "门没有完全敞开。",
+    "有第二人观察。",
+    "没有暴露库存和核心区。",
+    "接触记录已写下。"
+  ],
+  "common_mistakes": [
+    "一个人开门谈很久。",
+    "在门口清点物资。",
+    "儿童围在门边看热闹。"
+  ],
+  "fallback": "没有安全门口时，把谈话点设置到核心区外，桌子或绳子作为间隔。",
+  "stop_or_escalate": [
+    "对方情绪失控、携带危险物、试图闯入、多人包围时，停止谈话并转入安全流程。"
+  ],
+  "notes": "门口是住所最薄的边界。",
+  "category_original": "安全与边界",
+  "domains": [
+    "security",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "building",
+    "door",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "门口谈话规则",
+    "安全",
+    "住所",
+    "inventory_change",
+    "resource_exposure",
+    "building",
+    "door",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

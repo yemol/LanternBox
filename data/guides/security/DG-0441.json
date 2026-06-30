@@ -1,0 +1,98 @@
+{
+  "id": "DG-0441",
+  "title": "异常解除确认",
+  "category": "库存资料与成员档案",
+  "scenario": "某个风险曾经存在，例如水源污染、路线冲突、烟尘、陌生人徘徊、疾病趋势。",
+  "goal": "防止风险消失后无人确认，也防止过早恢复正常。",
+  "tools": [
+    "记录本",
+    "地图",
+    "负责人名单"
+  ],
+  "steps": [
+    "先找到原始异常记录，确认风险是什么。",
+    "至少进行一次复查，必要时两次不同时间复查。",
+    "记录复查时间、观察者和结果。",
+    "确认风险解除后，更新地图、任务表和公共板。",
+    "如果只是暂时减弱，不写解除，写继续观察。",
+    "相关成员口头通知，避免有人仍按旧规则行动。",
+    "保留异常历史，作为未来判断参考。"
+  ],
+  "check": [
+    "解除有复查记录。",
+    "地图任务表已更新。",
+    "成员知道变化。"
+  ],
+  "common_mistakes": [
+    "风险好像没了就恢复路线。",
+    "公共板还贴旧警报。",
+    "解除后删除全部历史。"
+  ],
+  "fallback": "无法复查时，不解除，只降低为观察状态。",
+  "stop_or_escalate": [
+    "风险涉及水源、火灾、冲突、传染病时，解除必须更谨慎。"
+  ],
+  "notes": "解除风险也要有证据，不能靠天气变好后的心情。",
+  "category_original": "情报记录与风险评估",
+  "domains": [
+    "security",
+    "records",
+    "hygiene",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "hygiene_contamination",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "contamination",
+    "inventory_change",
+    "personnel_change",
+    "suspicious_approach"
+  ],
+  "objects": [
+    "drinking_water",
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "person"
+  ],
+  "keywords": [
+    "异常解除确认",
+    "陌生人",
+    "风险",
+    "记录",
+    "污染",
+    "水源",
+    "contamination",
+    "inventory_change",
+    "personnel_change",
+    "suspicious_approach",
+    "drinking_water",
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "person",
+    "security_suspicious_person",
+    "hygiene_contamination",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

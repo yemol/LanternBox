@@ -1,0 +1,72 @@
+{
+  "id": "DG-0131",
+  "title": "陌生人接触距离",
+  "category": "个人装备与防护",
+  "scenario": "在水源、交易点、路上或住所附近遇到陌生人。",
+  "goal": "在不激化对方的情况下保持距离和退路。",
+  "tools": [
+    "同伴",
+    "记录本",
+    "哨子",
+    "背包"
+  ],
+  "steps": [
+    "先停在能后退的位置，不让自己背靠墙、河边或死角。",
+    "保持一段对方不能突然伸手抓到背包的距离。",
+    "一人交流，一人观察周围和路线。",
+    "不主动透露完整人数、库存、住所内部和隐藏物资。",
+    "如果对方只是询问信息，回答简短事实，不展开个人情况。",
+    "离开后记录对方人数、方向、诉求和是否跟随。"
+  ],
+  "check": [
+    "有退路。",
+    "没有单人近距离接触。",
+    "没有透露核心库存和住所细节。"
+  ],
+  "common_mistakes": [
+    "为了显得友好靠太近。",
+    "单独跟对方去角落谈。",
+    "把背包放地上给对方看。"
+  ],
+  "fallback": "空间狭窄时，先拉开到开阔处再谈，不在门口和通道里纠缠。",
+  "stop_or_escalate": [
+    "对方逼近、绕后、抢包、威胁、跟踪或明显失控时，立即脱离。"
+  ],
+  "notes": "安全距离不是敌意，是给双方降温。",
+  "category_original": "安全与边界",
+  "domains": [
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person"
+  ],
+  "situations": [
+    "suspicious_approach"
+  ],
+  "objects": [
+    "drinking_water",
+    "building",
+    "person"
+  ],
+  "keywords": [
+    "陌生人接触距离",
+    "陌生人",
+    "安全",
+    "住所",
+    "降温",
+    "suspicious_approach",
+    "drinking_water",
+    "building",
+    "person",
+    "security_suspicious_person",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

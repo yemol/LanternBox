@@ -1,0 +1,79 @@
+{
+  "id": "DG-0498",
+  "title": "楼梯搬运协作",
+  "category": "医疗急救与照护",
+  "scenario": "伤员、老人、儿童或重物需要通过楼梯转移。",
+  "goal": "降低跌落、扭伤和二次伤害。",
+  "tools": [
+    "绳子",
+    "手套",
+    "照明",
+    "口令"
+  ],
+  "steps": [
+    "先清空楼梯杂物和湿滑点。",
+    "安排最有力者在下方承担主要重量。",
+    "指定一人喊口令，所有人按口令移动。",
+    "每几级停一次确认状态。",
+    "不要在楼梯上临时换手或争论。",
+    "伤员头部和脚部方向提前确定。",
+    "到达后记录搬运过程异常。"
+  ],
+  "check": [
+    "楼梯清空。",
+    "有统一口令。",
+    "下方有人承重。"
+  ],
+  "common_mistakes": [
+    "多人各喊各的。",
+    "楼梯上换人。",
+    "照明不足还硬搬。"
+  ],
+  "fallback": "人手不足时，分段移动，宁慢勿急。",
+  "stop_or_escalate": [
+    "楼梯破损、人员体力不足、伤员状态恶化时，停止搬运。"
+  ],
+  "notes": "楼梯搬运像多人划船，口令不齐就会翻。",
+  "category_original": "伤病转运与搬运协作",
+  "domains": [
+    "medical",
+    "comms",
+    "records",
+    "security",
+    "evacuation"
+  ],
+  "intents": [
+    "medical_elder_confusion",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "elderly",
+    "signal_plan"
+  ],
+  "objects": [
+    "elder",
+    "people"
+  ],
+  "keywords": [
+    "楼梯搬运协作",
+    "老人",
+    "口令",
+    "elderly",
+    "signal_plan",
+    "elder",
+    "people",
+    "medical_elder_confusion",
+    "comms_signal_meeting",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "id": "DG-0518",
+  "title": "保温材料替代",
+  "category": "工具维修与替代制作",
+  "scenario": "缺少睡袋、保温垫、窗帘、门帘或隔冷材料。",
+  "goal": "用现有材料降低热量流失。",
+  "tools": [
+    "纸板",
+    "旧衣物",
+    "塑料布",
+    "布料"
+  ],
+  "steps": [
+    "地面隔冷优先用纸板、衣物、背包和泡沫材料。",
+    "门窗缝用布条、毛巾、衣物堵风，但保留通风。",
+    "湿材料不用于贴身保暖。",
+    "塑料布可防风但要避免凝水贴身。",
+    "重点成员优先获得干燥保温层。",
+    "每日检查保温材料是否受潮发霉。",
+    "受潮材料晾干后再用。"
+  ],
+  "check": [
+    "地面有隔冷。",
+    "重点成员优先。",
+    "保温材料干燥。"
+  ],
+  "common_mistakes": [
+    "湿衣服当被子。",
+    "把通风完全封死。",
+    "塑料贴身睡出汗返冷。"
+  ],
+  "fallback": "材料很少时，优先脚部、背部、门缝和床下隔冷。",
+  "stop_or_escalate": [
+    "发抖、失温迹象、材料发霉、空气闷浊时，调整保温策略。"
+  ],
+  "notes": "保温替代靠层次，不靠乱堆。",
+  "category_original": "物资替代方案",
+  "domains": [
+    "tools",
+    "security",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "door",
+    "window",
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "保温材料替代",
+    "工具",
+    "维修",
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure",
+    "door",
+    "window",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

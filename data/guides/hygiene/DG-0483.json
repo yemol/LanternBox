@@ -1,0 +1,78 @@
+{
+  "id": "DG-0483",
+  "title": "饮食前公共区复核",
+  "category": "居住卫生与空间管理",
+  "scenario": "多人准备吃饭前，桌面、水桶、餐具、手部和厨余可能有污染。",
+  "goal": "饭前用短检查减少食源性和接触传播。",
+  "tools": [
+    "清洁布",
+    "洗手水",
+    "餐具标签",
+    "任务卡"
+  ],
+  "steps": [
+    "饭前先清理桌面和分餐区。",
+    "确认做饭者和分餐者已清洁手部。",
+    "确认餐具按个人或病人分开。",
+    "饮用水取水工具不接触个人杯口。",
+    "病人餐食单独分出，不在公共锅边咳嗽或交谈。",
+    "厨余桶有盖，远离分餐区。",
+    "饭后及时清洁桌面和工具。"
+  ],
+  "check": [
+    "分餐区清洁。",
+    "分餐者洗手。",
+    "病人餐具分开。"
+  ],
+  "common_mistakes": [
+    "边清污边分饭。",
+    "个人杯碰水勺。",
+    "病人站锅边咳嗽。"
+  ],
+  "fallback": "水少时，优先清洁手、分餐工具和桌面关键区域。",
+  "stop_or_escalate": [
+    "饭后多人腹泻、呕吐、餐具有混用时，立即复盘饭前流程。"
+  ],
+  "notes": "吃饭前这一分钟，是胃肠道的安检口。",
+  "category_original": "公共接触面管理",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "water",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "infection_control"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket"
+  ],
+  "keywords": [
+    "饮食前公共区复核",
+    "污染",
+    "水桶",
+    "contamination",
+    "infection_control",
+    "drinking_water",
+    "bucket",
+    "water_rationing",
+    "hygiene_contamination",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "异响",
+    "脚步声",
+    "门外",
+    "冰箱食物"
+  ]
+}

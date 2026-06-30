@@ -1,0 +1,75 @@
+{
+  "id": "DG-0425",
+  "title": "版本更新提示卡",
+  "category": "通信信息与数据安全",
+  "scenario": "指南库、纸质卡、规则表或库存编号更新后，成员可能还按旧版执行。",
+  "goal": "让重要更新被看见、被确认、被旧版替换。",
+  "tools": [
+    "更新卡",
+    "笔",
+    "旧版回收袋",
+    "记录本"
+  ],
+  "steps": [
+    "每次重大更新写一张提示卡，说明改了什么。",
+    "标明生效日期和负责人。",
+    "旧版纸卡立即回收或划掉作废。",
+    "公共板只保留最新提示，不多版并存。",
+    "关键变更必须口头通知相关成员。",
+    "让负责岗位成员确认已知晓。",
+    "一周后移除提示卡，改入正式规则。"
+  ],
+  "check": [
+    "旧版已回收。",
+    "生效日期明确。",
+    "相关成员知晓。"
+  ],
+  "common_mistakes": [
+    "新旧规则同时挂着。",
+    "更新了文件但没人知道。",
+    "旧纸卡继续使用。"
+  ],
+  "fallback": "来不及正式更新时，用红笔写临时更新并注明期限。",
+  "stop_or_escalate": [
+    "旧版导致误操作、药水火路线规则冲突时，立即统一版本。"
+  ],
+  "notes": "版本不统一，队伍就会像多人同时读不同剧本。",
+  "category_original": "信息压缩与离线摘要",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "版本更新提示卡",
+    "安全",
+    "通信",
+    "inventory_change",
+    "personnel_change",
+    "inventory",
+    "people",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

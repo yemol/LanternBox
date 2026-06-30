@@ -1,0 +1,91 @@
+{
+  "id": "DG-0266",
+  "title": "搬运路线清障",
+  "category": "撤离交通与路线",
+  "scenario": "准备搬运重物、伤员、设备或大量物资前。",
+  "goal": "先处理路线障碍，避免搬到一半卡住。",
+  "tools": [
+    "手电",
+    "手套",
+    "扫帚",
+    "箱子",
+    "标签"
+  ],
+  "steps": [
+    "从起点到终点走一遍空路线。",
+    "清除地面绳子、工具、水桶、碎玻璃、垃圾和松动物。",
+    "检查门宽、台阶、转角和低矮障碍。",
+    "湿滑地面先擦干或标记绕行。",
+    "夜间搬运增加低亮标记。",
+    "路线旁不要堆临时物资，避免变窄。",
+    "搬运后再次清理掉落物。"
+  ],
+  "check": [
+    "路线提前走过。",
+    "地面无明显绊脚物。",
+    "门口和转角可通过。"
+  ],
+  "common_mistakes": [
+    "抱着重物才发现过不去。",
+    "碎玻璃没清就搬。",
+    "搬运路线越堆越窄。"
+  ],
+  "fallback": "来不及完全清障时，至少清出一条单向通道并安排观察者提醒。",
+  "stop_or_escalate": [
+    "路线有坍塌、积水带电、浓烟、冲突风险时，不进行搬运。"
+  ],
+  "notes": "路线清障是搬运的一半。",
+  "category_original": "重物搬运安全",
+  "domains": [
+    "evacuation",
+    "power",
+    "security",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "route",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "搬运路线清障",
+    "撤离",
+    "路线",
+    "设备",
+    "安全",
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure",
+    "route",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

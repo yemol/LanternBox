@@ -1,0 +1,79 @@
+{
+  "id": "DG-0393",
+  "title": "照护任务轮换",
+  "category": "组织秩序与训练演练",
+  "scenario": "病人、老人、儿童、伤员、慢病成员或情绪崩溃者需要持续照护。",
+  "goal": "防止照护者过劳，也避免被照护者无人关注。",
+  "tools": [
+    "照护表",
+    "用药记录",
+    "水",
+    "休息安排"
+  ],
+  "steps": [
+    "列出被照护者的需求：喝水、用药、如厕、翻身、观察、安抚。",
+    "指定主照护者和备用照护者。",
+    "照护任务按时段轮换，避免一人全天承担。",
+    "交接时说明已做事项、未做事项、异常症状。",
+    "用药、体温、伤口、情绪变化必须记录。",
+    "照护者也要安排休息和进食。",
+    "每天复盘照护压力，必要时降低其他任务。"
+  ],
+  "check": [
+    "照护对象有人负责。",
+    "用药和异常有记录。",
+    "照护者有休息。"
+  ],
+  "common_mistakes": [
+    "默认家属一个人扛到底。",
+    "交接时只说没事。",
+    "照护者累到崩溃没人发现。"
+  ],
+  "fallback": "人手不足时，把照护任务拆成小项，让不同人短时协助。",
+  "stop_or_escalate": [
+    "照护对象恶化、照护者严重疲劳、用药记录混乱时，立即重新分工。"
+  ],
+  "notes": "照护是长期消耗战，不能只靠一个人的爱发电。",
+  "category_original": "轮值制度",
+  "domains": [
+    "general",
+    "medical",
+    "water",
+    "records"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "medical_elder_confusion"
+  ],
+  "situations": [
+    "elderly",
+    "personnel_change"
+  ],
+  "objects": [
+    "patient",
+    "elder",
+    "people"
+  ],
+  "keywords": [
+    "照护任务轮换",
+    "老人",
+    "elderly",
+    "personnel_change",
+    "patient",
+    "elder",
+    "people",
+    "medical_fever_respiratory",
+    "medical_elder_confusion",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

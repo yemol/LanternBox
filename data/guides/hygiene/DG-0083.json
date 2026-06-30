@@ -1,0 +1,88 @@
+{
+  "id": "DG-0083",
+  "title": "病人用品隔离：杯子、毛巾、餐具",
+  "category": "居住卫生与空间管理",
+  "scenario": "有人发热、腹泻、呕吐、咳嗽、皮疹或原因不明不适。",
+  "goal": "减少病原在家庭或小队内传播。",
+  "tools": [
+    "标签纸",
+    "专用杯碗",
+    "毛巾",
+    "收纳盒",
+    "记录本"
+  ],
+  "steps": [
+    "给病人分配固定杯子、碗筷、毛巾和垃圾袋。",
+    "所有用品贴上病人姓名或编号。",
+    "病人用品放在单独区域，不进入公共餐具区。",
+    "清洗时最后洗病人用品，清洗后晾干。",
+    "病人暂时不处理公共食物、不分发饮用水。",
+    "记录谁照护过病人，谁接触过污染物。"
+  ],
+  "check": [
+    "病人用品不会和公共用品混放。",
+    "病人不参与做饭分水。",
+    "照护接触有记录。"
+  ],
+  "common_mistakes": [
+    "病人杯子混进公共杯架。",
+    "大家共用毛巾。",
+    "病人退烧一点就立刻回厨房帮忙。"
+  ],
+  "fallback": "物品不足时，至少保证病人单独杯子和毛巾。",
+  "stop_or_escalate": [
+    "多人出现相同症状。",
+    "病人症状恶化或无法自理。"
+  ],
+  "notes": "用品隔离不是嫌弃病人，是保护整个小队。",
+  "category_original": "卫生防疫",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "fever",
+    "respiratory_symptom",
+    "infection_control"
+  ],
+  "objects": [
+    "patient",
+    "vomit",
+    "diarrhea"
+  ],
+  "keywords": [
+    "病人用品隔离",
+    "杯子",
+    "毛巾",
+    "餐具",
+    "腹泻",
+    "发热",
+    "咳嗽",
+    "呕吐",
+    "fever",
+    "respiratory_symptom",
+    "infection_control",
+    "patient",
+    "vomit",
+    "diarrhea",
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

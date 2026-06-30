@@ -1,0 +1,84 @@
+{
+  "id": "DG-0213",
+  "title": "药品借用登记",
+  "category": "医疗急救与照护",
+  "scenario": "邻居、队友或其他成员请求借药，或者团队内部药品临时调配。",
+  "goal": "避免关键药品流失、误用和责任不清。",
+  "tools": [
+    "药品清单",
+    "借用表",
+    "笔",
+    "标签"
+  ],
+  "steps": [
+    "先确认药品是否属于个人慢病药，个人慢病药原则上不外借。",
+    "确认对方知道药名、用途、禁忌和过敏风险。",
+    "只借出明确数量，不把整盒交走。",
+    "记录借用人、药品名称、数量、时间、原因和是否需要归还。",
+    "借出后立刻更新库存。",
+    "发现对方不清楚用途或想用药处理不明问题时，谨慎拒绝。"
+  ],
+  "check": [
+    "借出药品有记录。",
+    "慢病药没有随意外借。",
+    "库存同步更新。"
+  ],
+  "common_mistakes": [
+    "好心把整盒药给出去。",
+    "不知道对方过敏史就给药。",
+    "借出后忘记库存变化。"
+  ],
+  "fallback": "无法判断是否适合对方使用时，优先不借药，可提供非药物照护建议或让对方查看说明。",
+  "stop_or_escalate": [
+    "药品涉及儿童、孕妇、严重过敏、慢病或不明症状时，不轻易借出。"
+  ],
+  "notes": "药品不是普通物资，借出去的是风险。",
+  "category_original": "药物与医疗物资管理",
+  "domains": [
+    "medical",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "temporary_repair",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "medicine",
+    "inventory",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "药品借用登记",
+    "风险",
+    "登记",
+    "temporary_repair",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "medicine",
+    "inventory",
+    "people",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

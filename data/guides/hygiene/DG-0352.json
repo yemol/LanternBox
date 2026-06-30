@@ -1,0 +1,81 @@
+{
+  "id": "DG-0352",
+  "title": "厕所气味分区",
+  "category": "居住卫生与空间管理",
+  "scenario": "便盆、厕所桶、临时厕所或污染衣物产生气味。",
+  "goal": "控制气味向睡眠、饮食和入口区域扩散。",
+  "tools": [
+    "有盖桶",
+    "干土",
+    "灰",
+    "手套",
+    "标签"
+  ],
+  "steps": [
+    "厕所区远离厨房、饮水、睡眠和儿童活动区。",
+    "容器必须有盖，使用后及时盖上。",
+    "每次使用后可用干土、灰或吸附材料覆盖。",
+    "厕所工具专用，不进入厨房和饮水区。",
+    "每天固定时间清理或转移，不等气味明显才处理。",
+    "保持厕所区通风，但不让气味直接吹向核心区。",
+    "气味变化时检查是否满溢、漏液或覆盖材料不足。"
+  ],
+  "check": [
+    "厕所容器有盖。",
+    "覆盖材料可用。",
+    "厕所工具专用。"
+  ],
+  "common_mistakes": [
+    "便盆敞口。",
+    "厕所靠厨房。",
+    "清污工具回厨房用。"
+  ],
+  "fallback": "空间不足时，至少用布帘、盖子和固定容器建立最小厕所区。",
+  "stop_or_escalate": [
+    "厕所满溢、漏液、气味进入睡眠区、多人腹泻时，立即升级卫生处理。"
+  ],
+  "notes": "厕所气味控制好，营地就少一半崩溃感。",
+  "category_original": "气味与烟尘控制",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "temporary_repair"
+  ],
+  "objects": [
+    "bucket",
+    "clothes",
+    "toilet"
+  ],
+  "keywords": [
+    "厕所气味分区",
+    "厕所",
+    "污染",
+    "衣物",
+    "睡眠",
+    "contamination",
+    "temporary_repair",
+    "bucket",
+    "clothes",
+    "toilet",
+    "hygiene_contamination",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

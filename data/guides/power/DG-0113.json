@@ -1,0 +1,78 @@
+{
+  "id": "DG-0113",
+  "title": "手机省电模式",
+  "category": "能源照明与设备",
+  "scenario": "手机需要长期保留地图、资料、通信或照明功能，但充电不稳定。",
+  "goal": "延长手机可用时间，把它从娱乐设备改成应急工具。",
+  "tools": [
+    "手机",
+    "充电宝",
+    "纸质备份",
+    "记录本"
+  ],
+  "steps": [
+    "开启省电模式或低电量模式。",
+    "关闭不必要的无线功能、后台刷新、定位和高亮屏幕。",
+    "把离线地图、联系人、医疗信息提前保存到本地。",
+    "固定开机查看信息的时间，其余时间关机或飞行模式。",
+    "不要把手机长时间当手电，优先用低功耗手电。",
+    "每天记录手机剩余电量和计划用途。"
+  ],
+  "check": [
+    "手机电量下降速度变慢。",
+    "关键资料能离线打开。",
+    "不再长时间亮屏。"
+  ],
+  "common_mistakes": [
+    "无信号区一直搜网。",
+    "用手机刷娱乐消耗电量。",
+    "把手机当唯一照明。"
+  ],
+  "fallback": "没有充电宝时，把手机变成定时开机设备，不连续使用。",
+  "stop_or_escalate": [
+    "手机低于最低电量线时，只保留紧急通信和资料查询。"
+  ],
+  "notes": "手机的价值不是屏幕，而是它里面的离线信息。",
+  "category_original": "能源与设备",
+  "domains": [
+    "power",
+    "tools",
+    "comms",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "tools_security_repair"
+  ],
+  "situations": [],
+  "objects": [
+    "tools",
+    "lighting"
+  ],
+  "keywords": [
+    "手机省电模式",
+    "照明",
+    "设备",
+    "工具",
+    "通信",
+    "tools",
+    "lighting",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "tools_security_repair",
+    "能源照明"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

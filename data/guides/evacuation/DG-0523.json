@@ -1,0 +1,73 @@
+{
+  "id": "DG-0523",
+  "title": "车辆静置维护",
+  "category": "撤离交通与路线",
+  "scenario": "车辆长期不用但可能作为撤离或搬运工具。",
+  "goal": "避免电瓶亏电、轮胎损坏和关键时刻无法启动。",
+  "tools": [
+    "记录本",
+    "胎压工具可选",
+    "防尘布"
+  ],
+  "steps": [
+    "每周查看轮胎、漏油、异味和外部损坏。",
+    "车辆周围不要堆满杂物，保留开出路线。",
+    "电瓶状态定期检查，条件允许时短时维护充电。",
+    "燃料、钥匙和必要证件位置记录在安全处。",
+    "车内不要长期存放易腐食物和高敏感资料。",
+    "雨后检查车内是否进水。",
+    "每月做一次启动或替代状态检查。"
+  ],
+  "check": [
+    "开出路线清楚。",
+    "钥匙位置可靠。",
+    "车辆状态有记录。"
+  ],
+  "common_mistakes": [
+    "车辆被杂物堵死。",
+    "钥匙没人知道。",
+    "车里放重要资料发霉。"
+  ],
+  "fallback": "无法启动维护时，至少保持车辆周边通道和轮胎状态。",
+  "stop_or_escalate": [
+    "漏油、燃气味、电瓶异常、轮胎严重瘪气时，立即处理或降级预案。"
+  ],
+  "notes": "静置车辆不是雕像，它会悄悄坏掉。",
+  "category_original": "车辆与自行车长期维护",
+  "domains": [
+    "evacuation",
+    "tools",
+    "disaster",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "route",
+    "tools"
+  ],
+  "keywords": [
+    "车辆静置维护",
+    "撤离",
+    "路线",
+    "工具",
+    "evacuation_decision",
+    "route",
+    "tools",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

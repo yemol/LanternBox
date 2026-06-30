@@ -1,0 +1,71 @@
+{
+  "id": "DG-0056",
+  "title": "余震期生活空间调整",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "主震后几小时到几天内仍可能发生余震。",
+  "goal": "把临时生活区改成低坠落、易撤离、能快速反应的状态。",
+  "tools": [
+    "胶带",
+    "绳子",
+    "收纳箱",
+    "手电",
+    "应急包"
+  ],
+  "steps": [
+    "把睡眠区移离窗户、高柜、书架、吊灯和可能倒塌的墙边。",
+    "重物放低，玻璃、瓷器、工具等易碎尖锐物收进箱子。",
+    "保持门口、楼梯、通道、应急包位置畅通。",
+    "每个人的鞋、手电、外套和水放在睡眠点旁边。",
+    "约定余震发生时的动作：就近保护头颈，远离玻璃，不乱跑。",
+    "每天早晚复查裂缝、门窗变形、燃气味和水管漏水。"
+  ],
+  "check": [
+    "睡眠点上方没有重物。",
+    "通道没有箱子水桶绊脚。",
+    "每个人知道余震时怎么做。"
+  ],
+  "common_mistakes": [
+    "睡在窗边或高柜旁。",
+    "把应急包塞进柜子深处。",
+    "余震时所有人都往同一个狭窄出口挤。"
+  ],
+  "fallback": "空间太小时，至少把头部上方和出口路线清空。",
+  "stop_or_escalate": [
+    "余震后裂缝扩大、门打不开、燃气味、落物增加时，转入撤离判断。"
+  ],
+  "notes": "余震期的核心是把房间从“日常模式”改成“可逃生模式”。",
+  "category_original": "灾害专项",
+  "domains": [
+    "disaster",
+    "shelter",
+    "evacuation",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "earthquake",
+    "evacuation_decision",
+    "temporary_repair"
+  ],
+  "objects": [],
+  "keywords": [
+    "余震期生活空间调整",
+    "余震",
+    "房间",
+    "撤离",
+    "earthquake",
+    "evacuation_decision",
+    "temporary_repair",
+    "shelter_disaster_evacuate",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "DG-0025",
+  "title": "骨折固定后循环检查",
+  "category": "医疗急救与照护",
+  "scenario": "夹板、绷带固定后。",
+  "goal": "确认固定没有压坏血液循环和神经感觉。",
+  "tools": [
+    "记录本",
+    "手电",
+    "绷带备用",
+    "剪刀"
+  ],
+  "steps": [
+    "固定后立刻检查远端颜色、温度、感觉和活动。",
+    "让伤者轻轻动远端手指或脚趾，确认不是完全麻木。",
+    "每隔一段时间复查一次，尤其前几个小时。",
+    "如果肿胀增加，检查绷带是否过紧。",
+    "远端发紫、发白、冰冷或麻木时，适当放松外层固定。",
+    "记录每次检查结果。"
+  ],
+  "check": [
+    "远端颜色接近正常。",
+    "有温度。",
+    "能感觉触碰。",
+    "疼痛没有因固定越来越重。"
+  ],
+  "common_mistakes": [
+    "绑完就不管。",
+    "把夹板绑在伤口正上方。",
+    "远端麻木还说忍一忍。"
+  ],
+  "fallback": "没有剪刀时，预留绷带结方便解开，不要打死结。",
+  "stop_or_escalate": [
+    "远端持续发紫发冷。",
+    "麻木无感觉。",
+    "疼痛剧烈加重。"
+  ],
+  "notes": "固定是为了保护，不是为了勒住。",
+  "category_original": "长期医疗观察",
+  "domains": [
+    "medical",
+    "tools",
+    "hygiene",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "medical_wound_bleeding",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "bleeding"
+  ],
+  "objects": [
+    "bandage"
+  ],
+  "keywords": [
+    "骨折固定后循环检查",
+    "固定",
+    "bleeding",
+    "bandage",
+    "medical_wound_bleeding",
+    "tools_security_repair",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

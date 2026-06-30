@@ -1,0 +1,88 @@
+{
+  "id": "DG-0502",
+  "title": "集合点三层规则",
+  "category": "撤离交通与路线",
+  "scenario": "队伍可能分散，需要约定集合点。",
+  "goal": "用主集合点、备用点和最终留言点减少混乱。",
+  "tools": [
+    "地图",
+    "纸卡",
+    "标记笔"
+  ],
+  "steps": [
+    "设定主集合点，距离近、易到达、风险低。",
+    "设定备用集合点，主点不可用时启用。",
+    "设定最终留言点，用于留下纸条或符号。",
+    "每个成员随身卡写集合点代号。",
+    "演练一次从住所到集合点路线。",
+    "集合点不放高价值物资。",
+    "风险变化后更新集合点。"
+  ],
+  "check": [
+    "三层点位明确。",
+    "成员知道代号。",
+    "演练过路线。"
+  ],
+  "common_mistakes": [
+    "只有一个集合点。",
+    "集合点就是仓库。",
+    "路线变化后不更新。"
+  ],
+  "fallback": "条件有限时，至少设主点和留言点。",
+  "stop_or_escalate": [
+    "主点暴露、路线封闭、成员走散时，立即启用备用点。"
+  ],
+  "notes": "集合点不是地图钉子，是队伍散开后的磁铁。",
+  "category_original": "失联人员寻找与集合",
+  "domains": [
+    "evacuation",
+    "comms",
+    "disaster",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "lost_contact",
+    "signal_plan",
+    "personnel_change"
+  ],
+  "objects": [
+    "route",
+    "meeting_point",
+    "message",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "集合点三层规则",
+    "撤离",
+    "路线",
+    "集合点",
+    "留言",
+    "evacuation_decision",
+    "lost_contact",
+    "signal_plan",
+    "personnel_change",
+    "route",
+    "meeting_point",
+    "message",
+    "people",
+    "person",
+    "shelter_disaster_evacuate",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

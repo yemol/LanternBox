@@ -1,0 +1,90 @@
+{
+  "id": "DG-0542",
+  "title": "门窗低暴露检查",
+  "category": "安全与风险",
+  "scenario": "怀疑门窗、楼道、院门或住所边界存在异常，但不确定是否有人靠近。",
+  "goal": "在尽量不暴露室内人员位置的情况下完成基础检查。",
+  "tools": [
+    "低亮手电",
+    "胶带",
+    "绳子",
+    "记录本",
+    "简易障碍物"
+  ],
+  "steps": [
+    "先从室内安全角度观察，不把脸贴到窗户或猫眼上太久。",
+    "使用低亮度照明照脚下和室内，不把光柱打向外部远处。",
+    "检查门锁、门缝、窗扣、窗帘、临时遮挡和通道是否完整。",
+    "把容易发出响声的物品移离门口，避免误判。",
+    "在门窗后方布置简单提醒物，例如轻物、绳结或纸条，用于发现是否被移动。",
+    "记录检查时间和发现，不反复开门确认。"
+  ],
+  "check": [
+    "门窗状态已确认。",
+    "检查过程中没有暴露人员位置。",
+    "异常点有记录和复查时间。"
+  ],
+  "common_mistakes": [
+    "直接开门看楼道。",
+    "多人同时围到门口。",
+    "用手机闪光灯照外面。",
+    "检查后忘记恢复遮挡。"
+  ],
+  "fallback": "没有工具时，至少保证门窗关闭、遮挡完整、人员远离开口位置。",
+  "stop_or_escalate": [
+    "门窗有被撬动痕迹。",
+    "外部有多人停留或试探。",
+    "遮挡物被移动或声音持续靠近。"
+  ],
+  "notes": "低暴露检查的目标是确认边界，不是对外侦察。",
+  "category_original": "安全与风险",
+  "domains": [
+    "security",
+    "shelter",
+    "tools",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "door_window_security",
+    "personnel_change",
+    "suspicious_approach",
+    "resource_exposure"
+  ],
+  "objects": [
+    "building",
+    "door",
+    "window",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "门窗低暴露检查",
+    "门窗",
+    "安全",
+    "风险",
+    "住所",
+    "door_window_security",
+    "personnel_change",
+    "suspicious_approach",
+    "resource_exposure",
+    "building",
+    "door",
+    "window",
+    "people",
+    "person",
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

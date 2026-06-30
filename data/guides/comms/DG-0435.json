@@ -1,0 +1,99 @@
+{
+  "id": "DG-0435",
+  "title": "声音来源判断",
+  "category": "库存资料与成员档案",
+  "scenario": "夜间或安静环境中听到敲击、呼喊、脚步、车辆、爆炸、动物叫、玻璃破裂声。",
+  "goal": "通过记录声音方向和规律，避免误判和盲目外出。",
+  "tools": [
+    "记录本",
+    "值守表",
+    "低亮灯"
+  ],
+  "steps": [
+    "先让人员保持安静，不立刻冲出去看。",
+    "记录声音类型、次数、方向、持续时间和间隔。",
+    "询问其他值守者是否也听到，避免个人错觉。",
+    "不要用强光照射外部寻找来源。",
+    "如果声音靠近，通知负责人并加强入口观察。",
+    "如果声音远离，只记录并继续观察。",
+    "多次同类声音出现时在地图上标出方向。"
+  ],
+  "check": [
+    "声音有方向和次数记录。",
+    "没有盲目外出。",
+    "多人确认过。"
+  ],
+  "common_mistakes": [
+    "听到动静马上开门。",
+    "强光扫外面。",
+    "只说好像有声不记细节。"
+  ],
+  "fallback": "一个人无法判断时，叫醒指定值守者，不惊动所有人。",
+  "stop_or_escalate": [
+    "声音伴随求救、冲突、破门、火灾或路线威胁时，升级值守和边界。"
+  ],
+  "notes": "声音像雾里的影子，要先描轮廓，再决定靠不靠近。",
+  "category_original": "异常信号判断",
+  "domains": [
+    "comms",
+    "records",
+    "security",
+    "medical",
+    "hygiene"
+  ],
+  "intents": [
+    "security_night_anomaly",
+    "security_suspicious_person",
+    "medical_wound_bleeding",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "signal_plan",
+    "inventory_change",
+    "personnel_change",
+    "night",
+    "external_anomaly",
+    "suspicious_approach"
+  ],
+  "objects": [
+    "glass",
+    "signal",
+    "inventory",
+    "people",
+    "log",
+    "outside_noise"
+  ],
+  "keywords": [
+    "声音来源判断",
+    "信号",
+    "记录",
+    "夜间",
+    "signal_plan",
+    "inventory_change",
+    "personnel_change",
+    "night",
+    "external_anomaly",
+    "suspicious_approach",
+    "glass",
+    "signal",
+    "inventory",
+    "people",
+    "log",
+    "outside_noise",
+    "security_night_anomaly",
+    "security_suspicious_person",
+    "medical_wound_bleeding",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "主食配给",
+    "太阳能充电",
+    "夜间异响"
+  ]
+}

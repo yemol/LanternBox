@@ -1,0 +1,66 @@
+{
+  "id": "DG-0126",
+  "title": "库存盘点流程",
+  "category": "库存资料与成员档案",
+  "scenario": "库存记录和实物数量可能不一致。",
+  "goal": "定期让系统数字回到现实。",
+  "tools": [
+    "库存模块",
+    "记录本",
+    "标签",
+    "笔",
+    "收纳箱"
+  ],
+  "steps": [
+    "按分类盘点，不要一次把所有箱子全倒出来。",
+    "先盘点关键类：水、主食、药品、电池、燃料。",
+    "每件物资按编号、名称、数量、位置核对。",
+    "发现多出、少了、过期、损坏、位置变化都记录。",
+    "系统里立即修改，不要想着等会儿再改。",
+    "盘点结束写日期和负责人。"
+  ],
+  "check": [
+    "关键物资数量准确。",
+    "位置能对应实物。",
+    "异常有记录。"
+  ],
+  "common_mistakes": [
+    "只看系统不看实物。",
+    "翻出来后不放回固定位置。",
+    "盘点发现问题但不更新。"
+  ],
+  "fallback": "时间不足时，先盘点最低库存线附近的物资。",
+  "stop_or_escalate": [
+    "药品、水、燃料数量差异明显时，暂停相关非必要使用并查原因。"
+  ],
+  "notes": "库存系统不是账面游戏，是现实仓库的影子。",
+  "category_original": "库存系统联动",
+  "domains": [
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "inventory",
+    "people",
+    "log"
+  ],
+  "keywords": [
+    "库存盘点流程",
+    "记录",
+    "inventory_change",
+    "personnel_change",
+    "inventory",
+    "people",
+    "log",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": []
+}

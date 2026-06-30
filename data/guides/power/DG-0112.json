@@ -1,0 +1,81 @@
+{
+  "id": "DG-0112",
+  "title": "电池漏液处理",
+  "category": "能源照明与设备",
+  "scenario": "干电池、手电、收音机或电池盒出现漏液、白色粉末、腐蚀。",
+  "goal": "保护皮肤和设备，防止好电池被污染。",
+  "tools": [
+    "手套",
+    "密封袋",
+    "棉签",
+    "干布",
+    "标签纸"
+  ],
+  "steps": [
+    "戴手套，不徒手触碰漏液和粉末。",
+    "取出漏液电池，放入密封袋，贴上问题电池标签。",
+    "检查电池仓腐蚀程度，用干布或棉签轻轻清理。",
+    "清理后放在通风处晾干。",
+    "确认设备没有继续发热、短路或异味后，再尝试新电池。",
+    "把同一批存放的电池全部检查一遍。"
+  ],
+  "check": [
+    "漏液电池已隔离。",
+    "电池仓已清理并干燥。",
+    "好电池没有和漏液电池混放。"
+  ],
+  "common_mistakes": [
+    "徒手摸漏液。",
+    "漏液电池擦一擦继续用。",
+    "把漏液电池和好电池放一起。"
+  ],
+  "fallback": "没有手套时，用塑料袋套手处理，处理后洗手。",
+  "stop_or_escalate": [
+    "皮肤或眼睛接触漏液、设备发热、冒烟、腐蚀严重时停止使用。"
+  ],
+  "notes": "电池漏液是小事故，但会悄悄毁掉关键设备。",
+  "category_original": "能源与设备",
+  "domains": [
+    "power",
+    "hygiene",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination"
+  ],
+  "objects": [
+    "flashlight",
+    "battery",
+    "lighting"
+  ],
+  "keywords": [
+    "电池漏液处理",
+    "照明",
+    "设备",
+    "污染",
+    "contamination",
+    "flashlight",
+    "battery",
+    "lighting",
+    "power_lighting_energy",
+    "hygiene_contamination",
+    "能源照明"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "太阳能充电",
+    "冰箱食物",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

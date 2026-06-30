@@ -1,0 +1,85 @@
+{
+  "id": "DG-0265",
+  "title": "水桶搬运防伤",
+  "category": "撤离交通与路线",
+  "scenario": "搬运水桶、水壶、大瓶水或其他液体容器。",
+  "goal": "减少手腕、肩膀、腰背受伤和洒水污染。",
+  "tools": [
+    "水桶",
+    "扁担可选",
+    "背架可选",
+    "手套",
+    "盖子"
+  ],
+  "steps": [
+    "不要把容器装到满到晃出，留一点空间。",
+    "有盖就盖，减少洒漏和污染。",
+    "左右手尽量重量平衡，避免单侧长期负重。",
+    "长距离优先用背负、推车或扁担，不用手腕硬提。",
+    "走楼梯和湿滑地面时减少装水量。",
+    "中途休息把桶放稳，不放路中央。",
+    "返回后擦干桶外部再进清洁区。"
+  ],
+  "check": [
+    "水没有装到过满。",
+    "左右负重平衡。",
+    "桶外部进入清洁区前已处理。"
+  ],
+  "common_mistakes": [
+    "单手长距离提满桶。",
+    "水洒楼梯不清理。",
+    "桶盖脏污接触饮用水口。"
+  ],
+  "fallback": "没有盖子时，用干净布或塑料遮挡口部，但不要让遮挡物掉入水中。",
+  "stop_or_escalate": [
+    "手腕疼、肩颈痛、腰痛、滑倒或水污染时，调整搬运方式。"
+  ],
+  "notes": "水桶不是越满越划算，摔一次就全亏。",
+  "category_original": "重物搬运安全",
+  "domains": [
+    "evacuation",
+    "security",
+    "water",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "route"
+  ],
+  "keywords": [
+    "水桶搬运防伤",
+    "撤离",
+    "路线",
+    "安全",
+    "水桶",
+    "contamination",
+    "evacuation_decision",
+    "drinking_water",
+    "bucket",
+    "route",
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "id": "DG-0540",
+  "title": "疾病隔离演练",
+  "category": "组织秩序与训练演练",
+  "scenario": "多人共住但没有实际操作过隔离分区、病人餐具和清洁流程。",
+  "goal": "让成员知道疑似病人出现后怎么分区。",
+  "tools": [
+    "口罩",
+    "个人餐具",
+    "布帘",
+    "任务卡"
+  ],
+  "steps": [
+    "设定一个模拟病人位置。",
+    "演练个人餐具、水杯、垃圾袋和照护者分配。",
+    "演练公共接触面清洁。",
+    "演练饭前如何给病人分餐。",
+    "演练症状记录表填写。",
+    "复盘哪里缺物资或标记。",
+    "演练后所有物资归位。"
+  ],
+  "check": [
+    "隔离点明确。",
+    "照护者明确。",
+    "记录表会填。"
+  ],
+  "common_mistakes": [
+    "真有人病了才想分区。",
+    "病人餐具找不到。",
+    "演练后用品散乱。"
+  ],
+  "fallback": "空间小的话，演练布帘和固定用品分离即可。",
+  "stop_or_escalate": [
+    "演练发现无法隔离、餐具不足、清洁工具混用时，立即补齐规则。"
+  ],
+  "notes": "隔离演练不是吓人，是提前给混乱画格子。",
+  "category_original": "风险演练专项",
+  "domains": [
+    "security",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory"
+  ],
+  "situations": [
+    "infection_control",
+    "personnel_change"
+  ],
+  "objects": [
+    "patient",
+    "people"
+  ],
+  "keywords": [
+    "疾病隔离演练",
+    "风险",
+    "infection_control",
+    "personnel_change",
+    "patient",
+    "people",
+    "medical_fever_respiratory",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "主食配给",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

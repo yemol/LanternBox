@@ -1,0 +1,91 @@
+{
+  "id": "DG-0469",
+  "title": "储水点防蚊虫",
+  "category": "水与食物保障",
+  "scenario": "水桶、盆、雨水收集容器、灰水桶或种植水盘可能滋生蚊虫。",
+  "goal": "减少蚊虫繁殖和饮水污染。",
+  "tools": [
+    "盖子",
+    "纱网",
+    "橡皮筋",
+    "记录本"
+  ],
+  "steps": [
+    "所有储水容器尽量加盖。",
+    "无法加盖的容器用纱网或布覆盖并固定。",
+    "每两到三天检查积水点，包括桶盖凹陷、盆底、植物托盘。",
+    "灰水不长时间存放。",
+    "雨后倒掉不需要的积水。",
+    "饮用水容器发现虫卵或虫子时停止使用并清洗。",
+    "检查结果写入卫生或水务记录。"
+  ],
+  "check": [
+    "容器有盖或网。",
+    "积水点定期检查。",
+    "灰水未久放。"
+  ],
+  "common_mistakes": [
+    "雨水桶敞口。",
+    "植物托盘长期积水。",
+    "看到虫子捞掉继续喝。"
+  ],
+  "fallback": "没有纱网时，用干净布、透气袋或临时盖板遮挡。",
+  "stop_or_escalate": [
+    "蚊虫明显增加、饮用水见虫、多人被叮咬严重时，升级清理积水。"
+  ],
+  "notes": "蚊子喜欢免费水坑，别替它们开旅馆。",
+  "category_original": "储水与轮换",
+  "domains": [
+    "water",
+    "food",
+    "planting",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "water_treatment",
+    "hygiene_contamination",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "unsafe_water",
+    "contamination",
+    "food_production"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "rainwater"
+  ],
+  "keywords": [
+    "储水点防蚊虫",
+    "雨水",
+    "水桶",
+    "食物",
+    "种植",
+    "污染",
+    "unsafe_water",
+    "contamination",
+    "food_production",
+    "drinking_water",
+    "bucket",
+    "rainwater",
+    "water_rationing",
+    "water_treatment",
+    "hygiene_contamination",
+    "planting_seed_reserve",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物"
+  ]
+}

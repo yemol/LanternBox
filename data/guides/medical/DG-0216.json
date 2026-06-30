@@ -1,0 +1,80 @@
+{
+  "id": "DG-0216",
+  "title": "药箱访问规则",
+  "category": "医疗急救与照护",
+  "scenario": "多人共住、儿童在场、外人来访或药品紧张。",
+  "goal": "保护关键药品，同时保证需要时能快速取用。",
+  "tools": [
+    "药箱",
+    "锁具可选",
+    "访问清单",
+    "标签",
+    "记录本"
+  ],
+  "steps": [
+    "药箱放在干燥、避光、儿童拿不到的位置。",
+    "慢病药、强风险药品、儿童药和急救耗材分区管理。",
+    "指定药箱负责人和备用负责人。",
+    "非负责人取药必须记录，急救情况除外。",
+    "儿童不能自由打开药箱。",
+    "药箱不要放在外人能直接看到的位置。",
+    "每天或每周检查药箱封闭和数量变化。"
+  ],
+  "check": [
+    "药箱位置固定。",
+    "负责人明确。",
+    "儿童无法随意拿药。"
+  ],
+  "common_mistakes": [
+    "药箱放在门口显眼处。",
+    "所有人随意翻药。",
+    "药品紧张时没有访问规则。"
+  ],
+  "fallback": "没有锁具时，用高处、内柜、布帘遮挡和访问记录降低风险。",
+  "stop_or_escalate": [
+    "药品被翻动、数量异常、儿童接触、外人询问药品库存时，立即加强管理。"
+  ],
+  "notes": "药箱既要能救急，也要不能随便被打开。",
+  "category_original": "药物与医疗物资管理",
+  "domains": [
+    "medical",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "medicine",
+    "inventory",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "药箱访问规则",
+    "inventory_change",
+    "resource_exposure",
+    "medicine",
+    "inventory",
+    "people",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

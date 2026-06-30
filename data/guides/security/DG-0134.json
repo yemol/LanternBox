@@ -1,0 +1,87 @@
+{
+  "id": "DG-0134",
+  "title": "夜间值守异常上报",
+  "category": "个人装备与防护",
+  "scenario": "夜间需要观察门口、火源、病人、水位、动物或外部动静。",
+  "goal": "让值守可持续，不靠一个人硬撑。",
+  "tools": [
+    "手电",
+    "值守表",
+    "哨子",
+    "记录本",
+    "保暖衣物"
+  ],
+  "steps": [
+    "写明值守时间段、观察重点和叫醒条件。",
+    "交接时说明上一班看到的异常、未完成事项和设备位置。",
+    "值守者只观察和预警，不单独处理冲突或深入危险区。",
+    "每班准备水、保暖衣物和低亮灯。",
+    "值守中记录时间、声音、人员、动物、水位或天气变化。",
+    "到点必须交接，疲劳者不继续硬撑。"
+  ],
+  "check": [
+    "值守表清楚。",
+    "交接有异常说明。",
+    "值守者不单独离开核心区。"
+  ],
+  "common_mistakes": [
+    "一个人连续熬整夜。",
+    "值守者发现异常自己追出去。",
+    "交接只说没事但不记录。"
+  ],
+  "fallback": "人手不足时，缩短值守任务，只观察最关键风险，例如火源和门口。",
+  "stop_or_escalate": [
+    "值守者困到打瞌睡、外部冲突、火源异常、水位上涨、病人恶化时，立即叫醒负责人。"
+  ],
+  "notes": "值守是预警系统，不是英雄岗位。 本卡侧重夜间异常发现后的上报和安全边界；完整交接流程见“夜间值守交接”。",
+  "category_original": "安全与边界",
+  "domains": [
+    "security",
+    "medical",
+    "water",
+    "disaster",
+    "evacuation"
+  ],
+  "intents": [
+    "security_night_anomaly",
+    "medical_fever_respiratory",
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "flood",
+    "night"
+  ],
+  "objects": [
+    "drinking_water",
+    "patient",
+    "door"
+  ],
+  "keywords": [
+    "夜间值守异常上报",
+    "夜间",
+    "安全",
+    "水位",
+    "flood",
+    "night",
+    "drinking_water",
+    "patient",
+    "door",
+    "security_night_anomaly",
+    "medical_fever_respiratory",
+    "shelter_disaster_evacuate",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "主食配给",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

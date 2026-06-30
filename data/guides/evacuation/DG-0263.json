@@ -1,0 +1,90 @@
+{
+  "id": "DG-0263",
+  "title": "正确抬举姿势",
+  "category": "撤离交通与路线",
+  "scenario": "需要从地面抬起水桶、箱子、粮袋、工具箱等重物。",
+  "goal": "减少腰背损伤。",
+  "tools": [
+    "手套",
+    "防滑鞋",
+    "背包或推车可选"
+  ],
+  "steps": [
+    "靠近物体站稳，双脚分开。",
+    "弯曲膝盖和髋部，尽量不要弯腰远距离去够。",
+    "背部保持相对直，双手抓牢。",
+    "用腿发力起身，不靠腰猛拉。",
+    "物体靠近身体，不伸直手臂远提。",
+    "转身时移动脚，不扭腰。",
+    "放下时同样屈膝，慢慢放稳。"
+  ],
+  "check": [
+    "物体贴近身体。",
+    "起身主要用腿。",
+    "转身时脚跟着动。"
+  ],
+  "common_mistakes": [
+    "弯腰远距离硬拽。",
+    "抱着重物扭腰。",
+    "手臂伸直提重物。"
+  ],
+  "fallback": "姿势无法保证时，说明物体太重或位置太差，先换搬运方法。",
+  "stop_or_escalate": [
+    "腰背突然刺痛、腿麻、手滑、物体失控时，停止搬运。"
+  ],
+  "notes": "重物要靠近身体，离身体越远，腰越倒霉。",
+  "category_original": "重物搬运安全",
+  "domains": [
+    "evacuation",
+    "security",
+    "tools",
+    "water",
+    "disaster"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "suspicious_approach"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "floor",
+    "route",
+    "tools"
+  ],
+  "keywords": [
+    "正确抬举姿势",
+    "撤离",
+    "路线",
+    "安全",
+    "工具",
+    "水桶",
+    "evacuation_decision",
+    "suspicious_approach",
+    "drinking_water",
+    "bucket",
+    "floor",
+    "route",
+    "tools",
+    "security_suspicious_person",
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

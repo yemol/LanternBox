@@ -1,0 +1,93 @@
+{
+  "id": "DG-0431",
+  "title": "交易对象风险评估",
+  "category": "库存资料与成员档案",
+  "scenario": "需要与陌生人、邻居或其他小组交换水、食物、药品、工具或信息。",
+  "goal": "降低被骗、被跟踪、暴露库存和冲突风险。",
+  "tools": [
+    "交易清单",
+    "记录本",
+    "见证人",
+    "中立地点"
+  ],
+  "steps": [
+    "交易前写清要换什么、最多给多少、不能透露什么。",
+    "优先选择开阔、有退路、离核心区远的交易点。",
+    "不带全部库存，只带本次交易物。",
+    "至少两人参与，一人沟通，一人观察周围。",
+    "不展示药箱、仓库位置、成员档案和完整路线。",
+    "交易后记录对方特征、交换内容、态度和风险。",
+    "如果对方试探库存或跟随路线，立刻更换路径和规则。"
+  ],
+  "check": [
+    "交易物资限量。",
+    "地点有退路。",
+    "交易后有记录。"
+  ],
+  "common_mistakes": [
+    "把人带到仓库谈。",
+    "带太多物资炫底牌。",
+    "交易完原路回核心点。"
+  ],
+  "fallback": "必须单人交易时，缩小交易量并选择更安全的公开位置。",
+  "stop_or_escalate": [
+    "对方威胁、尾随、套问隐藏物资、要求进入核心区时，停止交易。"
+  ],
+  "notes": "交易不是买卖，是把风险也一起放上秤。",
+  "category_original": "情报记录与风险评估",
+  "domains": [
+    "security",
+    "tools",
+    "records",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "suspicious_approach",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "tools",
+    "inventory",
+    "people",
+    "log",
+    "person"
+  ],
+  "keywords": [
+    "交易对象风险评估",
+    "陌生人",
+    "风险",
+    "工具",
+    "记录",
+    "inventory_change",
+    "personnel_change",
+    "suspicious_approach",
+    "resource_exposure",
+    "drinking_water",
+    "medicine",
+    "tools",
+    "inventory",
+    "people",
+    "log",
+    "person",
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

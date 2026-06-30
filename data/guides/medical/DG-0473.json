@@ -1,0 +1,77 @@
+{
+  "id": "DG-0473",
+  "title": "咳嗽发热照护",
+  "category": "医疗急救与照护",
+  "scenario": "成员咳嗽、发热、喉痛、流涕、乏力，可能影响多人。",
+  "goal": "减少飞沫传播，并稳定观察病情。",
+  "tools": [
+    "口罩",
+    "个人杯",
+    "薄被",
+    "记录本",
+    "通风口"
+  ],
+  "steps": [
+    "患者尽量待在固定休息区。",
+    "患者和照护者近距离接触时使用口罩或布遮挡。",
+    "咳嗽时用纸巾、布或肘部遮挡，不对着他人和食物。",
+    "保持适度通风，避免冷风直吹患者。",
+    "患者使用独立水杯和餐具。",
+    "记录发热时间、咳嗽变化、呼吸、精神和饮水。",
+    "症状明显期间不参与厨房、饮水和儿童照护。"
+  ],
+  "check": [
+    "患者用品分开。",
+    "咳嗽有遮挡。",
+    "有通风但不直吹。"
+  ],
+  "common_mistakes": [
+    "发热者继续值守吹冷风。",
+    "对着食物咳嗽。",
+    "共用水杯。"
+  ],
+  "fallback": "口罩不足时，至少保持距离、固定位置、咳嗽遮挡和个人用品分开。",
+  "stop_or_escalate": [
+    "呼吸困难、嘴唇发紫、意识异常、高热不退或老人儿童明显变差时，立即升级医疗处理。"
+  ],
+  "notes": "咳嗽发热要照护，也要给其他人留一圈空气护城河。",
+  "category_original": "隔离照护",
+  "domains": [
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory"
+  ],
+  "situations": [
+    "fever",
+    "respiratory_symptom",
+    "infection_control",
+    "personnel_change"
+  ],
+  "objects": [
+    "people"
+  ],
+  "keywords": [
+    "咳嗽发热照护",
+    "发热",
+    "咳嗽",
+    "fever",
+    "respiratory_symptom",
+    "infection_control",
+    "personnel_change",
+    "people",
+    "medical_fever_respiratory",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "id": "DG-0207",
+  "title": "地面箭头标记",
+  "category": "通信信息与数据安全",
+  "scenario": "需要给后续成员指示方向、绕开危险或标出集合点。",
+  "goal": "用不依赖电子设备的方式留下路线提示。",
+  "tools": [
+    "粉笔",
+    "石头",
+    "树枝",
+    "胶带",
+    "记号笔"
+  ],
+  "steps": [
+    "先约定箭头含义：方向、危险绕行、集合点、禁止进入。",
+    "箭头画在不易被踩掉但能看见的位置。",
+    "危险区域旁写原因或使用红色禁止标记。",
+    "不要把箭头直接引向隐藏仓库和敏感位置。",
+    "雨天优先用石头、树枝或胶带，不只靠粉笔。",
+    "路线变更后清除旧箭头或改成禁用。"
+  ],
+  "check": [
+    "箭头含义统一。",
+    "关键路口有提示。",
+    "旧标记被处理。"
+  ],
+  "common_mistakes": [
+    "随手画箭头导致误导。",
+    "箭头把陌生人引到核心区。",
+    "危险点只画箭头不写原因。"
+  ],
+  "fallback": "没有工具时，用石头堆、树枝方向、划痕做临时标记。",
+  "stop_or_escalate": [
+    "发现外人跟随标记、标记被改动、路线变危险时，停止使用公开箭头。"
+  ],
+  "notes": "箭头越简单，越要规则统一。",
+  "category_original": "信号标记",
+  "domains": [
+    "power",
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "signal_plan",
+    "personnel_change"
+  ],
+  "objects": [
+    "floor",
+    "route",
+    "signal",
+    "meeting_point",
+    "people"
+  ],
+  "keywords": [
+    "地面箭头标记",
+    "设备",
+    "安全",
+    "通信",
+    "信号",
+    "集合点",
+    "路线",
+    "signal_plan",
+    "personnel_change",
+    "floor",
+    "route",
+    "signal",
+    "meeting_point",
+    "people",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

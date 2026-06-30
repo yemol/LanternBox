@@ -1,0 +1,91 @@
+{
+  "id": "DG-0190",
+  "title": "夏季食物防腐",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "高温、停电、冰箱失效，熟食、肉蛋奶、剩饭容易腐败。",
+  "goal": "减少食物中毒和浪费。",
+  "tools": [
+    "标签纸",
+    "锅",
+    "通风架",
+    "遮阳布",
+    "记录本"
+  ],
+  "steps": [
+    "少做多餐，减少剩饭。",
+    "出锅时间写在容器上。",
+    "熟食尽量放在阴凉通风处，不放阳光下。",
+    "肉、蛋、奶、海鲜、熟饭优先吃，不当长期储备。",
+    "再次食用前彻底加热。",
+    "有异味、黏滑、起泡、变色的食物放弃。"
+  ],
+  "check": [
+    "剩饭有时间标签。",
+    "易坏食物优先处理。",
+    "可疑食物没有给儿童老人吃。"
+  ],
+  "common_mistakes": [
+    "一大锅饭常温放一整天。",
+    "用重口味掩盖变质。",
+    "把新熟食倒进旧剩饭里。"
+  ],
+  "fallback": "没有标签时，用固定“当天吃完区”并写入日记。",
+  "stop_or_escalate": [
+    "多人腹泻、呕吐、食物异味明显时，停止食用同批食物。"
+  ],
+  "notes": "夏天食物变坏比人的判断快。",
+  "category_original": "季节与保暖防暑",
+  "domains": [
+    "disaster",
+    "power",
+    "shelter",
+    "food"
+  ],
+  "intents": [
+    "food_safety_judgment",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "power_outage",
+    "refrigeration_failure",
+    "food_spoilage"
+  ],
+  "objects": [
+    "fridge",
+    "meat",
+    "leftovers",
+    "cooked_food"
+  ],
+  "keywords": [
+    "夏季食物防腐",
+    "停电",
+    "保暖",
+    "食物",
+    "冰箱",
+    "剩饭",
+    "肉",
+    "power_outage",
+    "refrigeration_failure",
+    "food_spoilage",
+    "fridge",
+    "meat",
+    "leftovers",
+    "cooked_food",
+    "food_safety_judgment",
+    "power_lighting_energy",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

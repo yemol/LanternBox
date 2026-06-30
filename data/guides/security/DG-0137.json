@@ -1,0 +1,87 @@
+{
+  "id": "DG-0137",
+  "title": "物资交换前检查",
+  "category": "组织秩序与训练演练",
+  "scenario": "准备和邻居、小队或陌生人交换食物、水、药品、工具或燃料。",
+  "goal": "守住底线，不把危险物资换回核心系统。",
+  "tools": [
+    "交换清单",
+    "手套",
+    "记录本",
+    "隔离箱",
+    "同伴"
+  ],
+  "steps": [
+    "先列出自己能交换的上限，不带完整库存。",
+    "明确自己最需要什么，不临场被话术带偏。",
+    "检查对方物品：包装、异味、污染、破损、有效期、是否能实际使用。",
+    "药品、入口食物和水源要更保守，标签不明则不换或只降级使用。",
+    "交换时至少两人在场，一人交易，一人观察。",
+    "交换后记录时间、对象、物品、数量和异常。"
+  ],
+  "check": [
+    "只带计划交换量。",
+    "换回物资已检查。",
+    "交易记录完整。"
+  ],
+  "common_mistakes": [
+    "带完整库存去现场。",
+    "换标签不明药品。",
+    "因为对方催促临时加码。"
+  ],
+  "fallback": "不确定物品安全时，先换低风险物资，不换入口物资和药品。",
+  "stop_or_escalate": [
+    "对方拒绝检查、强行接近、交换地点不安全、物品明显污染时，取消交易。"
+  ],
+  "notes": "交换前设底线，交换中才不会被情绪绑架。",
+  "category_original": "社区与交换",
+  "domains": [
+    "security",
+    "tools",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "suspicious_approach",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "tools",
+    "inventory",
+    "person",
+    "supplies"
+  ],
+  "keywords": [
+    "物资交换前检查",
+    "陌生人",
+    "工具",
+    "inventory_change",
+    "suspicious_approach",
+    "resource_exposure",
+    "drinking_water",
+    "medicine",
+    "tools",
+    "inventory",
+    "person",
+    "supplies",
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

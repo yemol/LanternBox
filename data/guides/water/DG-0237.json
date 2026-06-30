@@ -1,0 +1,92 @@
+{
+  "id": "DG-0237",
+  "title": "小型家禽隔离新成员",
+  "category": "种植养殖与采集",
+  "scenario": "新获得鸡鸭兔等小动物，准备加入原有饲养区。",
+  "goal": "避免疾病、寄生虫和攻击行为直接进入原群体。",
+  "tools": [
+    "临时笼具",
+    "水盆",
+    "饲料盆",
+    "记录本",
+    "手套"
+  ],
+  "steps": [
+    "新动物先单独放置一段时间，不直接混入原群体。",
+    "观察食欲、精神、粪便、呼吸、皮肤和羽毛状态。",
+    "新动物使用单独水盆和饲料盆。",
+    "照料顺序先照顾原有健康动物，再照顾新动物，最后洗手。",
+    "记录来源、日期、症状和接触人员。",
+    "确认状态稳定后，再逐步靠近原群体观察反应。"
+  ],
+  "check": [
+    "新动物没有直接混群。",
+    "水盆饲料盆分开。",
+    "观察记录存在。"
+  ],
+  "common_mistakes": [
+    "新动物一来就混进去。",
+    "病弱动物和健康动物共用水盆。",
+    "不记录来源。"
+  ],
+  "fallback": "没有笼具时，用绳网、箱子、围栏临时隔出观察区。",
+  "stop_or_escalate": [
+    "新动物腹泻、精神差、异常死亡、攻击严重时，不混群并加强清洁。"
+  ],
+  "notes": "小动物也是活体物资，进入系统前要观察。",
+  "category_original": "水产与小型养殖",
+  "domains": [
+    "water",
+    "planting",
+    "security",
+    "food",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "planting_seed_reserve",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "infection_control",
+    "food_production",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "inventory",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "小型家禽隔离新成员",
+    "种植",
+    "infection_control",
+    "food_production",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "drinking_water",
+    "inventory",
+    "people",
+    "supplies",
+    "security_suspicious_person",
+    "planting_seed_reserve",
+    "records_inventory_people",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "窗外",
+    "夜间可疑"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "DG-0440",
+  "title": "决策前信息三源",
+  "category": "库存资料与成员档案",
+  "scenario": "准备做重大决定，例如撤离、接纳新人、换水源、交易、停用路线、动用储备。",
+  "goal": "重大决策前尽量避免只靠单一消息。",
+  "tools": [
+    "观察日志",
+    "地图",
+    "记录本",
+    "成员反馈"
+  ],
+  "steps": [
+    "先找第一源：自己观察或可靠成员直接观察。",
+    "再找第二源：记录数据，例如库存、路线、天气、健康趋势。",
+    "最后找第三源：外部消息、邻居反馈或传言。",
+    "三源不一致时，标记不确定点。",
+    "决策时写明依据来自哪些源。",
+    "紧急情况下可以少于三源，但要按保守方案执行。",
+    "事后复核哪一源最准确，更新可信度。"
+  ],
+  "check": [
+    "重大决策有依据。",
+    "不确定点被标记。",
+    "事后复核来源。"
+  ],
+  "common_mistakes": [
+    "听一个消息就全队行动。",
+    "只相信感觉。",
+    "不记录为什么决定。"
+  ],
+  "fallback": "没有三源时，至少区分亲眼所见和听说。",
+  "stop_or_escalate": [
+    "决策涉及撤离、药品、饮水、外部接触时，不应只靠传言。"
+  ],
+  "notes": "三源不是拖延，是给决定加三条腿。",
+  "category_original": "情报记录与风险评估",
+  "domains": [
+    "security",
+    "records",
+    "disaster",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "route",
+    "inventory",
+    "people",
+    "log"
+  ],
+  "keywords": [
+    "决策前信息三源",
+    "风险",
+    "记录",
+    "撤离",
+    "路线",
+    "evacuation_decision",
+    "inventory_change",
+    "personnel_change",
+    "drinking_water",
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "DG-0177",
+  "title": "长期垃圾点维护",
+  "category": "居住卫生与空间管理",
+  "scenario": "避难时间变长，垃圾不能每天外运。",
+  "goal": "控制臭味、鼠虫、污染和人员接触。",
+  "tools": [
+    "垃圾袋",
+    "硬盒",
+    "干土",
+    "石灰可选",
+    "标签",
+    "手套"
+  ],
+  "steps": [
+    "垃圾点选在下风处，远离饮水、厨房和睡眠区。",
+    "普通垃圾、污染垃圾、尖锐垃圾分开。",
+    "厨余尽量小袋密封，不敞口过夜。",
+    "污染垃圾贴标签，儿童和宠物不能接触。",
+    "垃圾袋到一定程度就封口，不压到破裂。",
+    "每天检查鼠迹、苍蝇、臭液外漏和袋体破损。"
+  ],
+  "check": [
+    "垃圾远离核心区。",
+    "污染垃圾和尖锐垃圾分开。",
+    "没有臭液流向通道。"
+  ],
+  "common_mistakes": [
+    "垃圾点靠厨房。",
+    "破玻璃混进软袋。",
+    "厨余敞口吸引动物。"
+  ],
+  "fallback": "没有垃圾袋时，用桶、箱子、坑位或硬容器分区，重点是加盖和标记。",
+  "stop_or_escalate": [
+    "虫害爆发、动物翻垃圾、臭液外流、儿童接触污染垃圾时，立即重建垃圾点。"
+  ],
+  "notes": "垃圾点会长大，越早立规矩越省力。",
+  "category_original": "长期居住与营地管理",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "medical",
+    "water",
+    "records"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "contamination",
+    "personnel_change"
+  ],
+  "objects": [
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "长期垃圾点维护",
+    "污染",
+    "垃圾",
+    "contamination",
+    "personnel_change",
+    "people",
+    "person",
+    "hygiene_contamination",
+    "records_inventory_people",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

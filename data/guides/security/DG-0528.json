@@ -1,0 +1,76 @@
+{
+  "id": "DG-0528",
+  "title": "失效内容标记",
+  "category": "通信信息与数据安全",
+  "scenario": "某些指南因系统更新、物资变化、规则调整或错误发现而不再适用。",
+  "goal": "让旧内容退出使用而不是继续误导。",
+  "tools": [
+    "失效表",
+    "标签",
+    "记录本"
+  ],
+  "steps": [
+    "发现不适用内容先标记待复核。",
+    "确认失效后写明原因：重复、错误、过浅、已被替代。",
+    "不要直接静默删除，先保留失效记录。",
+    "如果有替代指南，写出替代标题。",
+    "合并时排除失效内容。",
+    "每月检查待复核列表。",
+    "重大失效内容通知相关成员。"
+  ],
+  "check": [
+    "失效原因清楚。",
+    "有替代标题。",
+    "待复核会清理。"
+  ],
+  "common_mistakes": [
+    "发现错误直接忘了。",
+    "旧卡还在系统里。",
+    "替代关系不写。"
+  ],
+  "fallback": "系统不支持失效字段时，先用标题前缀或独立记录表管理。",
+  "stop_or_escalate": [
+    "失效内容导致误操作时，立即从主库移除并通知。"
+  ],
+  "notes": "旧知识不退场，新知识就会和它打架。",
+  "category_original": "数据库维护与搜索优化",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "失效内容标记",
+    "安全",
+    "通信",
+    "inventory_change",
+    "resource_exposure",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

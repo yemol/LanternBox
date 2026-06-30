@@ -1,0 +1,72 @@
+{
+  "id": "DG-0296",
+  "title": "负责人交接",
+  "category": "库存资料与成员档案",
+  "scenario": "值守、药箱、库存、火源、成员档案、取水路线或备份盘需要换负责人。",
+  "goal": "避免责任断档和信息丢失。",
+  "tools": [
+    "交接清单",
+    "记录本",
+    "钥匙或口令提示",
+    "库存清单"
+  ],
+  "steps": [
+    "交接前列出负责范围：物资、人员、文件、工具、风险点。",
+    "上一负责人说明当前状态、异常问题和未完成任务。",
+    "双方一起检查关键物资或资料位置。",
+    "涉及口令或敏感资料时，只交接必要提示和访问规则。",
+    "写下交接时间、双方姓名或编号。",
+    "新负责人复述一次关键事项。",
+    "交接后通知相关成员找谁处理。"
+  ],
+  "check": [
+    "负责范围清楚。",
+    "异常和未完成事项已说明。",
+    "新负责人能复述。"
+  ],
+  "common_mistakes": [
+    "口头一句你管吧。",
+    "钥匙给了但不说风险。",
+    "敏感口令随便散发。"
+  ],
+  "fallback": "时间紧时，至少交接位置、数量、风险和下一步任务。",
+  "stop_or_escalate": [
+    "负责人受伤、外出、情绪崩溃、失联时，立即启动备用负责人。"
+  ],
+  "notes": "交接不是换名字，是转移一整串上下文。",
+  "category_original": "决策记录与责任交接",
+  "domains": [
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "route",
+    "inventory",
+    "people",
+    "log"
+  ],
+  "keywords": [
+    "负责人交接",
+    "记录",
+    "inventory_change",
+    "personnel_change",
+    "drinking_water",
+    "medicine",
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": []
+}

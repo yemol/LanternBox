@@ -1,0 +1,83 @@
+{
+  "id": "DG-0202",
+  "title": "道路风险分级",
+  "category": "撤离交通与路线",
+  "scenario": "需要判断一条路能否通行，尤其是洪水后、地震后、夜间或陌生区域。",
+  "goal": "把道路分成可走、谨慎、禁行三类。",
+  "tools": [
+    "地图",
+    "记录本",
+    "标记笔",
+    "手电"
+  ],
+  "steps": [
+    "绿色可走：路面稳定、无明显积水、无冲突、可回头。",
+    "黄色谨慎：有碎玻璃、轻微积水、绕行障碍、视线差，需要慢行。",
+    "红色禁行：急流、坍塌、断桥、浓烟、化学味、暴力风险、地下空间进水。",
+    "把颜色标到地图上，并写明日期。",
+    "路线状态每天复查，不把昨天安全当今天安全。",
+    "队伍移动前只选择绿色或经过评估的黄色路线。"
+  ],
+  "check": [
+    "路线有分级。",
+    "红色路线不会被普通任务使用。",
+    "地图日期清楚。"
+  ],
+  "common_mistakes": [
+    "看着近就走。",
+    "夜间走黄色未知路。",
+    "红色路线没有标注原因。"
+  ],
+  "fallback": "没有彩笔时，用符号代替：圈、三角、叉。",
+  "stop_or_escalate": [
+    "路线发生水位上涨、烟雾、冲突、坍塌、动物聚集时，立即升为红色。"
+  ],
+  "notes": "路线不是固定资产，是会变脸的地形。",
+  "category_original": "地图路线",
+  "domains": [
+    "evacuation",
+    "security",
+    "tools",
+    "comms",
+    "disaster"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "earthquake",
+    "flood",
+    "evacuation_decision",
+    "night"
+  ],
+  "objects": [
+    "drinking_water",
+    "route"
+  ],
+  "keywords": [
+    "道路风险分级",
+    "撤离",
+    "路线",
+    "夜间",
+    "风险",
+    "固定",
+    "地震",
+    "洪水",
+    "earthquake",
+    "flood",
+    "evacuation_decision",
+    "night",
+    "drinking_water",
+    "route",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

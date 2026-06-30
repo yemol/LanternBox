@@ -1,0 +1,83 @@
+{
+  "id": "DG-0280",
+  "title": "口令遗失应对",
+  "category": "通信信息与数据安全",
+  "scenario": "忘记成员档案、备份盘、加密文件或设备口令。",
+  "goal": "在不破坏数据的前提下寻找恢复路径。",
+  "tools": [
+    "口令提示",
+    "资料交接清单",
+    "备份记录",
+    "负责人名单"
+  ],
+  "steps": [
+    "先停止反复乱试，避免触发锁定或覆盖数据。",
+    "查找密封口令提示、资料交接清单和备份记录。",
+    "询问指定备用负责人，不向无关人员透露细节。",
+    "检查是否存在旧设备、旧备份或纸质简版资料。",
+    "如果无法解锁，先保留加密文件，不删除。",
+    "记录遗失时间、可能原因和已尝试方法。",
+    "恢复后重新设计口令和提示规则。"
+  ],
+  "check": [
+    "没有反复乱试。",
+    "加密文件被保留。",
+    "找过提示和备用负责人。"
+  ],
+  "common_mistakes": [
+    "忘了就删文件重来。",
+    "到处问口令导致泄露。",
+    "乱改文件名和内容。"
+  ],
+  "fallback": "完全无法恢复时，使用纸质备份和旧版本重建最关键资料。",
+  "stop_or_escalate": [
+    "唯一成员档案无法打开、无纸质备份、撤离前急需资料时，优先重建基础信息卡。"
+  ],
+  "notes": "口令丢失时，先保住文件，再找路。",
+  "category_original": "口令与敏感资料管理",
+  "domains": [
+    "power",
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "signal_plan",
+    "personnel_change"
+  ],
+  "objects": [
+    "people"
+  ],
+  "keywords": [
+    "口令遗失应对",
+    "设备",
+    "安全",
+    "通信",
+    "口令",
+    "signal_plan",
+    "personnel_change",
+    "people",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

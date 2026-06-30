@@ -1,0 +1,64 @@
+{
+  "id": "DG-0161",
+  "title": "冲突后修复关系",
+  "category": "组织秩序与训练演练",
+  "scenario": "团队内因分配、任务、恐惧、误会发生争吵后。",
+  "goal": "防止一次争吵变成长久裂缝。",
+  "tools": [
+    "记录本",
+    "安静位置",
+    "任务板"
+  ],
+  "steps": [
+    "先等双方冷静，不在情绪最高点复盘。",
+    "只复盘具体事件，不给人贴标签。",
+    "每个人说三个点：发生了什么、自己需要什么、下次怎么做。",
+    "把能制度化的部分写成规则，例如借物登记、取水排班。",
+    "确认是否需要道歉、补偿或调整任务。",
+    "之后观察同类冲突是否减少。"
+  ],
+  "check": [
+    "争议转化成规则。",
+    "没有继续人身攻击。",
+    "下次处理办法写下来了。"
+  ],
+  "common_mistakes": [
+    "把复盘变审判。",
+    "只要求弱势一方让步。",
+    "吵完当没发生但规则不改。"
+  ],
+  "fallback": "如果双方暂时不能谈，先安排不同任务区，避免继续摩擦。",
+  "stop_or_escalate": [
+    "出现威胁、暴力、抢夺关键物资时，优先安全隔离，再谈修复。"
+  ],
+  "notes": "关系修复不是温情戏，是系统维护。",
+  "category_original": "心理与组织",
+  "domains": [
+    "general",
+    "water",
+    "disaster",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "water_rationing",
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "structural_risk"
+  ],
+  "objects": [],
+  "keywords": [
+    "冲突后修复关系",
+    "structural_risk",
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

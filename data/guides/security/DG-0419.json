@@ -1,0 +1,80 @@
+{
+  "id": "DG-0419",
+  "title": "低识字图形标记",
+  "category": "通信信息与数据安全",
+  "scenario": "儿童、老人、外国成员、紧张状态下的人或低识字成员看不懂长文字。",
+  "goal": "用图形和颜色辅助理解关键区域和禁令。",
+  "tools": [
+    "图标贴纸",
+    "彩笔",
+    "纸板",
+    "胶带"
+  ],
+  "steps": [
+    "为水、药、火、厕所、出口、禁止进入、危险工具设计简单图标。",
+    "同一图标只表示一种意思，不反复变化。",
+    "危险区域使用醒目边框和简单图案。",
+    "图标旁可配一个短词，例如水、药、火。",
+    "教成员逐一认识图标，不靠他们猜。",
+    "图标脱落或模糊时及时更换。",
+    "高敏感区域不用图标暴露具体内容，可用限制符号。"
+  ],
+  "check": [
+    "图标含义固定。",
+    "成员认识图标。",
+    "危险区域醒目。"
+  ],
+  "common_mistakes": [
+    "一个颜色代表很多意思。",
+    "图标画得太抽象。",
+    "没教过就以为大家懂。"
+  ],
+  "fallback": "没有彩笔时，用形状区分，例如圆圈水、三角危险、方框出口。",
+  "stop_or_escalate": [
+    "误入危险区、误拿药水、儿童看不懂标记时，立即重新设计标记。"
+  ],
+  "notes": "图形标记是给紧张大脑开的旁路。",
+  "category_original": "低技术使用",
+  "domains": [
+    "security",
+    "comms",
+    "medical",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "medical_elder_confusion",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "elderly",
+    "personnel_change"
+  ],
+  "objects": [
+    "elder",
+    "people"
+  ],
+  "keywords": [
+    "低识字图形标记",
+    "安全",
+    "通信",
+    "老人",
+    "elderly",
+    "personnel_change",
+    "elder",
+    "people",
+    "medical_elder_confusion",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "主食配给",
+    "太阳能充电",
+    "夜间异响"
+  ]
+}

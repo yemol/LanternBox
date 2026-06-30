@@ -1,0 +1,68 @@
+{
+  "id": "DG-0291",
+  "title": "高压沟通短句",
+  "category": "组织秩序与训练演练",
+  "scenario": "门口谈判、排队、取水、冲突现场或陌生人接触中，情绪很高。",
+  "goal": "用短句表达边界，避免越说越乱。",
+  "tools": [
+    "口令卡",
+    "同伴",
+    "记录本"
+  ],
+  "steps": [
+    "只说一件事，不解释一长串背景。",
+    "使用短句：现在不能进来、我们只能交换这些、请退后一步、稍后再谈。",
+    "不使用侮辱、挑衅、嘲笑和威胁语言。",
+    "重复同一句边界，不被对方带入争论。",
+    "让同伴观察周围，不让自己陷入单线对话。",
+    "结束后记录对方反应和后续风险。"
+  ],
+  "check": [
+    "语言短而清楚。",
+    "没有挑衅。",
+    "有同伴观察。"
+  ],
+  "common_mistakes": [
+    "越解释越暴露库存。",
+    "用讽刺激怒对方。",
+    "一个人被围着问到慌。"
+  ],
+  "fallback": "说不清时，先暂停对话，退回门内或约定稍后回复。",
+  "stop_or_escalate": [
+    "对方逼近、辱骂、威胁、试图闯入时，停止沟通并加强边界。"
+  ],
+  "notes": "高压场景里，长篇解释经常变成漏洞。",
+  "category_original": "冲突降级与安全沟通",
+  "domains": [
+    "security"
+  ],
+  "intents": [
+    "security_suspicious_person"
+  ],
+  "situations": [
+    "suspicious_approach"
+  ],
+  "objects": [
+    "drinking_water",
+    "door",
+    "person"
+  ],
+  "keywords": [
+    "高压沟通短句",
+    "陌生人",
+    "安全",
+    "suspicious_approach",
+    "drinking_water",
+    "door",
+    "person",
+    "security_suspicious_person",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

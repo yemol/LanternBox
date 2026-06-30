@@ -1,0 +1,72 @@
+{
+  "id": "DG-0073",
+  "title": "夜间不撤离原则",
+  "category": "撤离交通与路线",
+  "scenario": "天黑后想离开，但外部情况不明。",
+  "goal": "避免夜间移动带来的迷路、摔倒、冲突和失散。",
+  "tools": [
+    "低亮灯",
+    "头灯",
+    "哨子",
+    "地图",
+    "保暖衣物"
+  ],
+  "steps": [
+    "先判断是否有立即生命危险：火、燃气、坍塌、洪水、暴力逼近。",
+    "没有立即危险时，优先原地加固，等天亮再走。",
+    "必须夜间撤离时，只走熟路，不探索新路线。",
+    "每人带低亮照明，光只照脚下，不直射远处和窗户。",
+    "队伍缩短间距，儿童老人伤病员走中间。",
+    "减少负重，只带生命线物资。"
+  ],
+  "check": [
+    "确认为什么夜走。",
+    "路线熟悉。",
+    "每个人有照明或被照护。",
+    "队伍没有拉长。"
+  ],
+  "common_mistakes": [
+    "为了低价值物资夜间转移。",
+    "摸黑下楼。",
+    "夜间进陌生小路、地下空间或废墟。"
+  ],
+  "fallback": "没有照明时，除非原地更危险，否则不要移动。",
+  "stop_or_escalate": [
+    "外部枪声、洪水、浓烟、坍塌、暴力风险不明时，不盲目外出。"
+  ],
+  "notes": "夜路会把小错误放大成事故。",
+  "category_original": "撤离与路线",
+  "domains": [
+    "evacuation",
+    "disaster",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "night"
+  ],
+  "objects": [
+    "route"
+  ],
+  "keywords": [
+    "夜间不撤离原则",
+    "撤离",
+    "路线",
+    "夜间",
+    "evacuation_decision",
+    "night",
+    "route",
+    "shelter_disaster_evacuate",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

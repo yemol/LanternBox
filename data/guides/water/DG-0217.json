@@ -1,0 +1,85 @@
+{
+  "id": "DG-0217",
+  "title": "燃料分区存放",
+  "category": "水与食物保障",
+  "scenario": "储存燃气罐、酒精、汽油、柴油、柴火、炭、固体燃料或引火材料。",
+  "goal": "降低火灾、泄漏、误用和儿童接触风险。",
+  "tools": [
+    "标签纸",
+    "收纳箱",
+    "通风位置",
+    "灭火材料",
+    "记录本"
+  ],
+  "steps": [
+    "按燃料类型分开：气罐、液体燃料、固体燃料、引火材料。",
+    "燃料远离火源、厨房台面、睡眠区、儿童活动区和药品区。",
+    "液体燃料容器必须有清晰标签，不能用饮料瓶伪装存放。",
+    "燃气罐立放，避免高温暴晒和重压。",
+    "柴火和炭保持干燥，但不堆在明火旁。",
+    "在库存系统记录燃料类型、数量、位置和风险说明。",
+    "每周检查泄漏、异味、锈蚀、鼓胀和容器破损。"
+  ],
+  "check": [
+    "燃料分类存放。",
+    "容器标签清楚。",
+    "燃料远离火源和儿童。"
+  ],
+  "common_mistakes": [
+    "汽油装饮料瓶。",
+    "气罐放阳光暴晒处。",
+    "柴火堆在炉边。"
+  ],
+  "fallback": "空间不足时，至少把液体燃料和气罐移出睡眠区，并加醒目标记。",
+  "stop_or_escalate": [
+    "闻到燃气味、液体泄漏、容器鼓胀、锈蚀严重时，立即隔离并停止使用。"
+  ],
+  "notes": "燃料是能量，也是脾气很差的物资。",
+  "category_original": "火源燃料与烹饪安全",
+  "domains": [
+    "water",
+    "food",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "inventory",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "燃料分区存放",
+    "食物",
+    "安全",
+    "风险",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "inventory",
+    "people",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

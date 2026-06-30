@@ -1,0 +1,73 @@
+{
+  "id": "DG-0426",
+  "title": "离线资料包目录",
+  "category": "通信信息与数据安全",
+  "scenario": "纸质卡、地图、成员卡、药箱索引、备份说明越来越多，容易找不到。",
+  "goal": "给纸质资料建立目录和存放结构。",
+  "tools": [
+    "文件袋",
+    "目录页",
+    "标签纸",
+    "防水袋"
+  ],
+  "steps": [
+    "把纸质资料分成生命线、成员、地图、药品、库存、备份、规则七类。",
+    "每类放入独立文件袋或夹层。",
+    "目录页写清每类位置和更新日期。",
+    "高敏感成员资料放入密封袋，和普通资料分开。",
+    "每次新增纸卡都登记到目录。",
+    "每月检查纸卡是否潮湿、过期、缺页。",
+    "撤离时按优先级带走生命线、成员、地图和药品索引。"
+  ],
+  "check": [
+    "资料分类清楚。",
+    "目录有日期。",
+    "高敏感资料分开。"
+  ],
+  "common_mistakes": [
+    "所有纸塞一个袋。",
+    "找药箱索引用十分钟。",
+    "成员资料和普通规则混放。"
+  ],
+  "fallback": "没有文件袋时，用信封、纸夹、布包和颜色标记分组。",
+  "stop_or_escalate": [
+    "资料受潮、缺页、外人接触、高敏感资料混放时，立即重整。"
+  ],
+  "notes": "纸质资料也需要自己的小图书馆。",
+  "category_original": "纸质备份卡",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "structural_risk",
+    "personnel_change"
+  ],
+  "objects": [
+    "medicine",
+    "people"
+  ],
+  "keywords": [
+    "离线资料包目录",
+    "安全",
+    "通信",
+    "structural_risk",
+    "personnel_change",
+    "medicine",
+    "people",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

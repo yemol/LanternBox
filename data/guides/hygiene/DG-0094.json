@@ -1,0 +1,79 @@
+{
+  "id": "DG-0094",
+  "title": "口罩重复使用和降级",
+  "category": "居住卫生与空间管理",
+  "scenario": "口罩不足，但有粉尘、烟尘、病人照护或清洁任务。",
+  "goal": "把口罩按风险和状态分级使用，避免交叉污染。",
+  "tools": [
+    "纸袋或透气袋",
+    "标签",
+    "晾放处",
+    "备用口罩"
+  ],
+  "steps": [
+    "给每个人的口罩单独标记，不共用。",
+    "湿了、脏了、有异味、破损或呼吸阻力明显增加的口罩降级或丢弃。",
+    "医疗照护、粉尘清理、普通外出分开管理，不把高污染口罩带入厨房和睡眠区。",
+    "暂时不用的口罩放在透气袋中晾放，不塞进潮湿口袋。",
+    "戴脱口罩前后清洁双手。",
+    "记录口罩库存和高风险任务消耗。"
+  ],
+  "check": [
+    "口罩个人专用。",
+    "高污染口罩不进清洁区。",
+    "破损潮湿口罩已降级。"
+  ],
+  "common_mistakes": [
+    "多人共用口罩。",
+    "湿口罩反复戴。",
+    "清理呕吐物的口罩又去做饭。"
+  ],
+  "fallback": "口罩不足时，优先给照护病人、粉尘清理、外出人员使用。",
+  "stop_or_escalate": [
+    "口罩接触呕吐物、血液、化学品或洪水污染后，不再作为普通口罩使用。"
+  ],
+  "notes": "口罩不是护身符，状态和用途分级很重要。",
+  "category_original": "卫生防疫",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "security",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "scarcity",
+    "contamination"
+  ],
+  "objects": [
+    "patient"
+  ],
+  "keywords": [
+    "口罩重复使用和降级",
+    "污染",
+    "风险",
+    "scarcity",
+    "contamination",
+    "patient",
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

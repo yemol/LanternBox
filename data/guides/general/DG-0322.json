@@ -1,0 +1,77 @@
+{
+  "id": "DG-0322",
+  "title": "口罩复用边界",
+  "category": "个人装备与防护",
+  "scenario": "口罩库存有限，需要在粉尘、烟雾、清污、病人照护、寒冷风沙中使用。",
+  "goal": "区分可短时复用和必须丢弃的情况。",
+  "tools": [
+    "口罩",
+    "纸袋",
+    "标签",
+    "记录本"
+  ],
+  "steps": [
+    "给每个人的口罩单独标记，不混用。",
+    "普通防尘或保暖用途的口罩可短时晾干后复用。",
+    "接触血液、呕吐物、污水、明显病人飞沫或化学刺激后的口罩不复用。",
+    "口罩潮湿、变形、有异味、呼吸阻力明显增加时停止使用。",
+    "复用口罩放入透气纸袋，不放密闭潮湿袋。",
+    "不要把口罩挂在厨房、饮水区和床头乱放。",
+    "口罩短缺时优先给清污、照护病人、粉尘维修人员。"
+  ],
+  "check": [
+    "口罩个人专用。",
+    "污染口罩未复用。",
+    "复用口罩干燥存放。"
+  ],
+  "common_mistakes": [
+    "全家混用口罩。",
+    "湿口罩塞塑料袋。",
+    "接触污物后晾一晾继续用。"
+  ],
+  "fallback": "没有口罩时，用多层干净布短时遮挡粉尘，但不能替代高风险防护。",
+  "stop_or_escalate": [
+    "呼吸困难、口罩污染严重、化学味刺激、病人照护风险高时，停止低等级复用。"
+  ],
+  "notes": "口罩可以省，但不能省到把污染贴回脸上。",
+  "category_original": "防护用品复用边界",
+  "domains": [
+    "general",
+    "medical",
+    "water",
+    "hygiene"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "inventory_change"
+  ],
+  "objects": [
+    "patient",
+    "inventory"
+  ],
+  "keywords": [
+    "口罩复用边界",
+    "污染",
+    "contamination",
+    "inventory_change",
+    "patient",
+    "inventory",
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "DG-0482",
+  "title": "共享工具污染处理",
+  "category": "居住卫生与空间管理",
+  "scenario": "工具被病人、清污任务、动物处理、厕所区或外部污物接触。",
+  "goal": "防止工具把污染带回公共区。",
+  "tools": [
+    "手套",
+    "清洁布",
+    "标签",
+    "隔离盒"
+  ],
+  "steps": [
+    "污染工具先放入待清洁区，不直接回工具箱。",
+    "记录工具名称和污染来源。",
+    "能清洁的工具清理后晾干，再归位。",
+    "不能清洁或有渗透污染的软材料降级或丢弃。",
+    "清污工具和厨房工具永久分开。",
+    "处理工具的人完成后洗手。",
+    "同一工具反复污染时考虑重新分配用途。"
+  ],
+  "check": [
+    "污染工具未回普通箱。",
+    "污染来源有记录。",
+    "清污和厨房工具分开。"
+  ],
+  "common_mistakes": [
+    "厕所用过的剪刀擦擦又回工具箱。",
+    "污染布袋继续装食物。",
+    "没人知道工具碰过什么。"
+  ],
+  "fallback": "没有隔离盒时，用袋子或纸包临时标记待清洁。",
+  "stop_or_escalate": [
+    "工具接触血液、粪便、呕吐物、化学品后，必须专项处理。"
+  ],
+  "notes": "工具会帮人干活，也会帮污染搬家。",
+  "category_original": "公共接触面管理",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "tools",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "contamination"
+  ],
+  "objects": [
+    "patient",
+    "toilet",
+    "tools"
+  ],
+  "keywords": [
+    "共享工具污染处理",
+    "厕所",
+    "污染",
+    "工具",
+    "contamination",
+    "patient",
+    "toilet",
+    "tools",
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "DG-0200",
+  "title": "路线侦察小队规则",
+  "category": "撤离交通与路线",
+  "scenario": "需要探路、确认水源、寻找通行路线或查看危险点。",
+  "goal": "降低侦察时失联、受伤和把风险带回核心区的可能。",
+  "tools": [
+    "地图",
+    "哨子",
+    "手电",
+    "水",
+    "记录本",
+    "防护用品"
+  ],
+  "steps": [
+    "侦察前写明目的、路线、最远点和最晚返回时间。",
+    "至少两人同行，一人观察路线，一人记录和看后方。",
+    "不进入高风险封闭空间、地下通道、废墟深处和冲突点。",
+    "发现资源只记录，不当场大量搬运，避免超重和暴露。",
+    "每到关键路口做简单标记，但不留下敏感信息。",
+    "返回后先汇报人员状态，再汇报路线和资源。"
+  ],
+  "check": [
+    "有最晚返回时间。",
+    "没有单人深入未知区。",
+    "发现资源后没有盲目搬空。"
+  ],
+  "common_mistakes": [
+    "边探路边搬重物。",
+    "临时改路不留信息。",
+    "为了好奇进入危险建筑。"
+  ],
+  "fallback": "人手不足时缩短侦察范围，只查看可视路线和第一处关键点。",
+  "stop_or_escalate": [
+    "发现化学味、暴力风险、坍塌、洪水、尸体或动物聚集时，停止深入并返回。"
+  ],
+  "notes": "侦察是眼睛，不是搬运队。",
+  "category_original": "地图路线",
+  "domains": [
+    "evacuation",
+    "security",
+    "comms",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "lost_contact"
+  ],
+  "objects": [
+    "drinking_water",
+    "route"
+  ],
+  "keywords": [
+    "路线侦察小队规则",
+    "撤离",
+    "路线",
+    "风险",
+    "evacuation_decision",
+    "lost_contact",
+    "drinking_water",
+    "route",
+    "shelter_disaster_evacuate",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

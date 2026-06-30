@@ -1,0 +1,82 @@
+{
+  "id": "DG-0515",
+  "title": "容器种植分区",
+  "category": "种植养殖与采集",
+  "scenario": "室内、阳台、屋顶或营地用盆、桶、瓶子种植。",
+  "goal": "让种植不污染饮水、睡眠和通道。",
+  "tools": [
+    "容器",
+    "托盘",
+    "标签",
+    "土壤"
+  ],
+  "steps": [
+    "种植区远离饮用水和药品。",
+    "容器底部有排水或托盘，避免污水流入生活区。",
+    "每个容器贴品种、播种日期和浇水记录。",
+    "不使用不明化学容器直接种入口植物。",
+    "土壤、肥料和工具单独收纳。",
+    "虫害植物及时隔离。",
+    "收获前确认没有被污水或化学品污染。"
+  ],
+  "check": [
+    "种植区分开。",
+    "容器有标签。",
+    "排水不污染生活区。"
+  ],
+  "common_mistakes": [
+    "饮水桶旁边堆湿土。",
+    "洗涤剂桶直接种菜。",
+    "虫害盆放全部植物中间。"
+  ],
+  "fallback": "空间小的话，用托盘和垂直架减少污染范围。",
+  "stop_or_escalate": [
+    "种植水流入厨房、虫害扩散、土壤异味时，立即调整分区。"
+  ],
+  "notes": "种植是食物系统，不该变成泥水系统。",
+  "category_original": "种植前置与种子档案",
+  "domains": [
+    "records",
+    "planting",
+    "shelter",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "contamination",
+    "seed_saving",
+    "food_production"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "seed"
+  ],
+  "keywords": [
+    "容器种植分区",
+    "种子",
+    "种植",
+    "睡眠",
+    "污染",
+    "contamination",
+    "seed_saving",
+    "food_production",
+    "drinking_water",
+    "bucket",
+    "seed",
+    "hygiene_contamination",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物"
+  ]
+}

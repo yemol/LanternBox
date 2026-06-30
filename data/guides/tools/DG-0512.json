@@ -1,0 +1,76 @@
+{
+  "id": "DG-0512",
+  "title": "危险工具权限",
+  "category": "工具维修与替代制作",
+  "scenario": "有刀斧、锯、电气工具、燃气工具、承重工具或尖锐拆解工具。",
+  "goal": "防止无经验人员越级使用。",
+  "tools": [
+    "权限表",
+    "标签",
+    "工具箱锁或绳结"
+  ],
+  "steps": [
+    "列出危险工具。",
+    "给每个工具标记可独立使用、需协助、禁止使用人员。",
+    "新成员先从低风险工具开始。",
+    "儿童不得接触危险工具。",
+    "使用前确认任务、地点和归位时间。",
+    "使用后负责人检查工具状态。",
+    "违规使用记录并调整权限。"
+  ],
+  "check": [
+    "危险工具有权限。",
+    "儿童不能接触。",
+    "使用后检查。"
+  ],
+  "common_mistakes": [
+    "谁拿到谁用。",
+    "不会用也修电器。",
+    "斧头随手放角落。"
+  ],
+  "fallback": "没有锁时，把危险工具放高处或负责人区域，并做明显标记。",
+  "stop_or_escalate": [
+    "出现割伤、工具丢失、误拆设备时，收紧权限。"
+  ],
+  "notes": "危险工具不是公共玩具，是需要许可的钥匙。",
+  "category_original": "工具百科前置",
+  "domains": [
+    "tools",
+    "security",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "temporary_repair",
+    "personnel_change"
+  ],
+  "objects": [
+    "tools",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "危险工具权限",
+    "工具",
+    "维修",
+    "temporary_repair",
+    "personnel_change",
+    "tools",
+    "people",
+    "person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

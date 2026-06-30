@@ -1,0 +1,84 @@
+{
+  "id": "DG-0466",
+  "title": "水质异常初筛",
+  "category": "水与食物保障",
+  "scenario": "储水或取回水出现颜色、气味、沉淀、漂浮物、油膜或味道变化。",
+  "goal": "先筛掉明显不安全水，不让可疑水直接入口。",
+  "tools": [
+    "透明杯",
+    "记录本",
+    "标签",
+    "滤布"
+  ],
+  "steps": [
+    "取少量水到透明杯中观察颜色和悬浮物。",
+    "闻气味，不深吸刺激性气体。",
+    "观察是否有油膜、泡沫、死虫、沉淀或霉味。",
+    "可疑水贴待处理标签并隔离。",
+    "不要为了不浪费而直接入口。",
+    "记录来源、日期和异常类型。",
+    "根据异常决定过滤、消毒、降级或废弃。"
+  ],
+  "check": [
+    "异常水已隔离。",
+    "来源和异常有记录。",
+    "没有直接饮用。"
+  ],
+  "common_mistakes": [
+    "水有怪味还烧开喝。",
+    "异常水和好水放一起。",
+    "不记录来源下次继续取。"
+  ],
+  "fallback": "无法判断时，按不安全水处理，只用于非入口低风险用途或废弃。",
+  "stop_or_escalate": [
+    "化学味、油膜、死动物污染、强烈刺激味时，不作为饮用水处理。"
+  ],
+  "notes": "水看起来透明，不等于它已经通过考试。",
+  "category_original": "储水与轮换",
+  "domains": [
+    "water",
+    "food",
+    "security",
+    "hygiene",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "water_rationing",
+    "water_treatment",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "unsafe_water",
+    "suspicious_approach"
+  ],
+  "objects": [
+    "drinking_water"
+  ],
+  "keywords": [
+    "水质异常初筛",
+    "食物",
+    "可疑",
+    "安全",
+    "unsafe_water",
+    "suspicious_approach",
+    "drinking_water",
+    "security_suspicious_person",
+    "water_rationing",
+    "water_treatment",
+    "records_inventory_people",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响"
+  ]
+}

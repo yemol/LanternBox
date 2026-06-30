@@ -1,0 +1,96 @@
+{
+  "id": "DG-0283",
+  "title": "数据泄露初步处理",
+  "category": "通信信息与数据安全",
+  "scenario": "发现成员档案、证件、医疗记录、口令、备份盘或隐藏物资信息可能被外人看到或拿走。",
+  "goal": "先判断范围，再止损，不盲目恐慌。",
+  "tools": [
+    "记录本",
+    "资料清单",
+    "备份清单",
+    "负责人名单"
+  ],
+  "steps": [
+    "先记录发现时间、泄露类型、可能接触者和涉及资料。",
+    "判断泄露的是普通资料、敏感资料还是高敏感资料。",
+    "如果口令可能泄露，立即更换相关口令。",
+    "如果备份盘丢失，确认是否加密，并检查最近备份是否仍在。",
+    "如果成员证件或医疗资料泄露，通知相关成员并调整访问规则。",
+    "如果隐藏物资位置泄露，考虑转移或加强边界。",
+    "事件处理后复盘泄露原因，修改流程。"
+  ],
+  "check": [
+    "泄露范围被记录。",
+    "相关口令已更换。",
+    "高风险位置已调整。"
+  ],
+  "common_mistakes": [
+    "只说完蛋了但不查范围。",
+    "口令泄露后继续用。",
+    "物资位置暴露后不转移。"
+  ],
+  "fallback": "信息不足时，先按较高风险处理，保护人员和关键物资。",
+  "stop_or_escalate": [
+    "设备丢失、备份盘未加密、成员证件外泄、隐藏物资被外人掌握时，立即升级处理。"
+  ],
+  "notes": "泄露处理不是找谁背锅，先止血。",
+  "category_original": "口令与敏感资料管理",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "medical",
+    "hygiene"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "medical_wound_bleeding",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "bleeding",
+    "signal_plan",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "inventory",
+    "people",
+    "log",
+    "supplies"
+  ],
+  "keywords": [
+    "数据泄露初步处理",
+    "安全",
+    "通信",
+    "口令",
+    "记录",
+    "止血",
+    "bleeding",
+    "signal_plan",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "inventory",
+    "people",
+    "log",
+    "supplies",
+    "security_suspicious_person",
+    "medical_wound_bleeding",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "主食配给",
+    "太阳能充电",
+    "夜间异响"
+  ]
+}

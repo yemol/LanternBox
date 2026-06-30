@@ -1,0 +1,68 @@
+{
+  "id": "DG-0145",
+  "title": "医疗记录备份",
+  "category": "库存资料与成员档案",
+  "scenario": "有人有慢病、手术史、过敏史、长期用药、怀孕或特殊照护需求。",
+  "goal": "让用药和照护不依赖单个人记忆。",
+  "tools": [
+    "药品清单",
+    "病史摘要",
+    "防水袋",
+    "离线存储",
+    "笔"
+  ],
+  "steps": [
+    "整理每个人的疾病、手术史、过敏、长期用药、禁忌。",
+    "把药盒照片、说明书重点、剂量和服用时间记录下来。",
+    "纸质简版放药箱，完整版本放资料包。",
+    "电子版保存到壳中灯和离线存储设备。",
+    "每次更换药物后更新日期。",
+    "照护者交接时必须看这份记录。"
+  ],
+  "check": [
+    "药名、用途、时间、过敏写清楚。",
+    "药箱里有简版记录。",
+    "电子版能离线打开。"
+  ],
+  "common_mistakes": [
+    "只记药盒颜色。",
+    "丢掉说明书。",
+    "换药后不更新。"
+  ],
+  "fallback": "不知道药名时，先拍照保存包装、药片外观和说明文字，再补全信息。",
+  "stop_or_escalate": [
+    "吃错药、重复用药、漏服慢病药、出现过敏反应时，立即复核记录。"
+  ],
+  "notes": "医疗记录是药箱的说明书。",
+  "category_original": "证件与资料",
+  "domains": [
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "medicine",
+    "inventory",
+    "people",
+    "log"
+  ],
+  "keywords": [
+    "医疗记录备份",
+    "记录",
+    "inventory_change",
+    "personnel_change",
+    "medicine",
+    "inventory",
+    "people",
+    "log",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": []
+}

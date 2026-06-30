@@ -1,0 +1,71 @@
+{
+  "id": "DG-0411",
+  "title": "演练后复盘表",
+  "category": "组织秩序与训练演练",
+  "scenario": "完成撤离、取水、急救、夜间找物、备份恢复等演练后。",
+  "goal": "把演练发现的问题转化为改进。",
+  "tools": [
+    "复盘表",
+    "记录本",
+    "任务表"
+  ],
+  "steps": [
+    "演练结束后立即写下时间、参与人员和演练内容。",
+    "记录完成情况：成功、卡住、超时、找不到、误操作。",
+    "每个问题只写一个具体改进，不写空话。",
+    "把改进分配到负责人和完成日期。",
+    "不责怪慢的人，先看流程和工具是否合理。",
+    "一周内检查改进是否完成。",
+    "下一次演练只重点测试上次问题。"
+  ],
+  "check": [
+    "问题有具体改进。",
+    "负责人和日期明确。",
+    "下次演练能追踪。"
+  ],
+  "common_mistakes": [
+    "演练完说挺好的就结束。",
+    "复盘变成批评大会。",
+    "改进没有负责人。"
+  ],
+  "fallback": "时间紧时，至少写三个问题和三个改动。",
+  "stop_or_escalate": [
+    "演练暴露严重安全风险时，暂停相关真实任务，先改流程。"
+  ],
+  "notes": "演练的价值不在演得漂亮，而在把漏洞捞出来。",
+  "category_original": "训练与演练",
+  "domains": [
+    "general",
+    "disaster",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "night"
+  ],
+  "objects": [
+    "drinking_water"
+  ],
+  "keywords": [
+    "演练后复盘表",
+    "撤离",
+    "夜间",
+    "evacuation_decision",
+    "night",
+    "drinking_water",
+    "shelter_disaster_evacuate",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

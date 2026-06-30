@@ -1,0 +1,71 @@
+{
+  "id": "DG-0188",
+  "title": "防晒和晒伤处理",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "高温、强日照、户外取水、排队、撤离或屋顶作业。",
+  "goal": "减少晒伤、脱水和中暑。",
+  "tools": [
+    "帽子",
+    "长袖衣物",
+    "水",
+    "湿毛巾",
+    "遮阳布"
+  ],
+  "steps": [
+    "尽量把户外任务安排在清晨或傍晚。",
+    "穿轻薄长袖、戴帽子，减少皮肤直接暴露。",
+    "每隔一段时间到阴凉处休息，少量多次饮水。",
+    "皮肤发红发痛后停止继续暴晒。",
+    "晒伤处用凉水湿敷，不涂刺激性偏方。",
+    "晒后观察水泡、发热、头晕和恶心。"
+  ],
+  "check": [
+    "户外任务避开最热时段。",
+    "头颈和手臂有遮挡。",
+    "晒伤后停止暴晒。"
+  ],
+  "common_mistakes": [
+    "赤膊长时间搬水。",
+    "晒伤后继续暴晒。",
+    "用刺激性东西涂晒伤皮肤。"
+  ],
+  "fallback": "没有帽子时，用衣物、毛巾、纸板做临时遮阳。",
+  "stop_or_escalate": [
+    "大面积水泡、发热、意识混乱、严重头晕恶心时，转入中暑和烧伤观察。"
+  ],
+  "notes": "防晒是省水，也是省药。",
+  "category_original": "季节与保暖防暑",
+  "domains": [
+    "disaster",
+    "shelter",
+    "evacuation",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine"
+  ],
+  "keywords": [
+    "防晒和晒伤处理",
+    "保暖",
+    "撤离",
+    "evacuation_decision",
+    "drinking_water",
+    "medicine",
+    "shelter_disaster_evacuate",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

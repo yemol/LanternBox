@@ -1,0 +1,72 @@
+{
+  "id": "DG-0199",
+  "title": "手绘区域草图",
+  "category": "撤离交通与路线",
+  "scenario": "没有地图、进入新地点、临时营地或建筑内部需要快速记录布局。",
+  "goal": "用简图标出关键点和危险点。",
+  "tools": [
+    "纸",
+    "笔",
+    "指南针可选",
+    "胶带"
+  ],
+  "steps": [
+    "先画一个大概方向，标出北或主要参照物。",
+    "画出入口、出口、楼梯、厕所、水源、厨房、睡眠区。",
+    "标出危险点：玻璃、坍塌、积水、电线、污染区、动物入口。",
+    "标出禁止进入区和儿童活动范围。",
+    "写上日期和绘图人。",
+    "把草图贴在公共位置，并给新成员说明。"
+  ],
+  "check": [
+    "入口出口清楚。",
+    "危险点被标出。",
+    "草图有日期。"
+  ],
+  "common_mistakes": [
+    "追求画得漂亮而漏掉危险点。",
+    "只画自己懂的图。",
+    "不标方向。"
+  ],
+  "fallback": "时间很紧时，只画入口、出口、集合点、危险点四类。",
+  "stop_or_escalate": [
+    "营地布局改变、危险点增加、人员走错路线时，重画草图。"
+  ],
+  "notes": "草图不是艺术，是让别人不撞墙。",
+  "category_original": "地图路线",
+  "domains": [
+    "evacuation",
+    "comms",
+    "records",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "temporary_repair"
+  ],
+  "objects": [
+    "building",
+    "route",
+    "log"
+  ],
+  "keywords": [
+    "手绘区域草图",
+    "撤离",
+    "路线",
+    "记录",
+    "evacuation_decision",
+    "temporary_repair",
+    "building",
+    "route",
+    "log",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": []
+}

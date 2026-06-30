@@ -1,0 +1,78 @@
+{
+  "id": "DG-0345",
+  "title": "夜间低噪行动",
+  "category": "居住卫生与空间管理",
+  "scenario": "夜间需要如厕、照护、取物、值守或转移，但环境安静，声音容易传远。",
+  "goal": "降低脚步声、碰撞声和交谈声，避免惊扰成员或暴露位置。",
+  "tools": [
+    "软底鞋",
+    "低亮灯",
+    "收纳标记",
+    "布条"
+  ],
+  "steps": [
+    "夜间行动前先穿软底鞋或防滑鞋，不拖鞋啪嗒响。",
+    "只走固定路线，路线提前清除罐子、工具、塑料袋和玻璃。",
+    "开关门先扶住门把，慢开慢关，不让门自然弹回。",
+    "取物时只打开目标箱，不翻动多个硬盒。",
+    "交谈改用短句和低声，不隔房间喊人。",
+    "金属工具、锅具、水桶夜间放到不易碰到的位置。",
+    "行动结束后恢复物品位置，避免下一次被踢到。"
+  ],
+  "check": [
+    "夜间路线无易响物。",
+    "门窗能轻开轻关。",
+    "没有隔屋喊话。"
+  ],
+  "common_mistakes": [
+    "拖鞋大声走动。",
+    "摸黑踢到水桶。",
+    "找一个东西翻一堆硬盒。"
+  ],
+  "fallback": "没有软底鞋时，用布条包裹鞋底或减少夜间行动次数。",
+  "stop_or_escalate": [
+    "外部人员靠近、儿童睡眠被频繁惊醒、夜间碰撞声多时，重新整理夜间路线。"
+  ],
+  "notes": "黑夜里的小声音，会被安静放大。",
+  "category_original": "声音与噪声管理",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "security_night_anomaly"
+  ],
+  "situations": [
+    "personnel_change",
+    "night",
+    "external_anomaly",
+    "resource_exposure"
+  ],
+  "objects": [
+    "people",
+    "outside_noise"
+  ],
+  "keywords": [
+    "夜间低噪行动",
+    "夜间",
+    "personnel_change",
+    "night",
+    "external_anomaly",
+    "resource_exposure",
+    "people",
+    "outside_noise",
+    "security_night_anomaly",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "guide_count": 544,
+  "folders": {
+    "comms": 6,
+    "disaster": 46,
+    "evacuation": 47,
+    "food": 10,
+    "general": 20,
+    "hygiene": 53,
+    "medical": 66,
+    "planting": 4,
+    "power": 55,
+    "records": 25,
+    "security": 105,
+    "shelter": 2,
+    "tools": 35,
+    "water": 70
+  },
+  "duplicate_ids": [],
+  "duplicate_titles": [],
+  "missing_required": {}
+}

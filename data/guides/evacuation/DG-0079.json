@@ -1,0 +1,84 @@
+{
+  "id": "DG-0079",
+  "title": "撤离后回取物资判断",
+  "category": "撤离交通与路线",
+  "scenario": "离开后想返回原住所、仓库或营地取剩余物资。",
+  "goal": "判断回取是否值得冒险。",
+  "tools": [
+    "清单",
+    "手电",
+    "手套",
+    "背包",
+    "同伴"
+  ],
+  "steps": [
+    "先问三个问题：原地点风险是否下降？要取的东西是否关键？有没有替代品？",
+    "只在白天、两人以上、路线明确时返回。",
+    "提前写好目标清单，只取清单物，不临时翻找。",
+    "限定停留时间，到点就走。",
+    "外面留一人观察，进入者保持通信或约定信号。",
+    "取回物资后先隔离检查，尤其是被水、烟、动物、陌生人接触过的物资。"
+  ],
+  "check": [
+    "返回目标明确。",
+    "有人在外观察。",
+    "没有为了低价值物品长时间停留。"
+  ],
+  "common_mistakes": [
+    "单人回危险区。",
+    "回去后开始整理整个屋子。",
+    "为了情绪价值物品冒险。"
+  ],
+  "fallback": "如果必须取药或证件但环境危险，考虑是否有其他备份或替代路线。",
+  "stop_or_escalate": [
+    "原地点有火、燃气、坍塌、洪水、冲突、化学污染时，不返回。"
+  ],
+  "notes": "回取物资是一次任务，不是回家。",
+  "category_original": "撤离与路线",
+  "domains": [
+    "evacuation",
+    "shelter",
+    "security",
+    "disaster",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "building",
+    "route",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "撤离后回取物资判断",
+    "撤离",
+    "路线",
+    "住所",
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure",
+    "building",
+    "route",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

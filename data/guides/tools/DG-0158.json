@@ -1,0 +1,64 @@
+{
+  "id": "DG-0158",
+  "title": "任务分工板",
+  "category": "组织秩序与训练演练",
+  "scenario": "取水、做饭、照护、值守、清洁、维修、记录等任务容易混乱。",
+  "goal": "让每个人知道自己负责什么，减少重复和漏项。",
+  "tools": [
+    "纸板",
+    "笔",
+    "胶带",
+    "任务卡",
+    "计时器"
+  ],
+  "steps": [
+    "把任务分成固定类：水、食物、卫生、照护、安全、维修、记录。",
+    "每个任务写负责人和完成时间。",
+    "危险任务标明需要两人同行。",
+    "完成后在任务板上打勾或写延期原因。",
+    "新任务不要只口头说，必须写上去。",
+    "每天短会时复盘任务板。"
+  ],
+  "check": [
+    "每个关键任务有负责人。",
+    "危险任务不会单人执行。",
+    "完成和延期能看见。"
+  ],
+  "common_mistakes": [
+    "大家都以为别人做了。",
+    "任务板只写任务不写负责人。",
+    "临时任务不记录。"
+  ],
+  "fallback": "没有纸板时，用墙面、纸张、笔记本或日记模块替代。",
+  "stop_or_escalate": [
+    "取水、用药、值守、照护任务漏掉时，立即调整任务板优先级。"
+  ],
+  "notes": "没有分工的团队，会把体力浪费在互相等待里。",
+  "category_original": "心理与组织",
+  "domains": [
+    "tools",
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "temporary_repair"
+  ],
+  "objects": [
+    "drinking_water",
+    "log"
+  ],
+  "keywords": [
+    "任务分工板",
+    "维修",
+    "记录",
+    "temporary_repair",
+    "drinking_water",
+    "log",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": []
+}

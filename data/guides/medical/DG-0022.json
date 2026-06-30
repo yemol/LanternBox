@@ -1,0 +1,77 @@
+{
+  "id": "DG-0022",
+  "title": "伤口三日观察表",
+  "category": "医疗急救与照护",
+  "scenario": "任何较深割伤、擦伤、咬伤或污染伤。",
+  "goal": "用三天趋势判断伤口是在恢复还是恶化。",
+  "tools": [
+    "记录本",
+    "记号笔",
+    "体温计",
+    "纱布"
+  ],
+  "steps": [
+    "每天固定时间观察伤口。",
+    "记录红肿范围、疼痛程度、渗液颜色、气味、体温。",
+    "用笔在皮肤上标记红肿外缘，并写日期时间。",
+    "更换被汗水、污水、血液污染的敷料。",
+    "减少受伤部位活动，避免泡水和摩擦。",
+    "第三天复盘：红肿是否缩小、疼痛是否下降、渗液是否减少。"
+  ],
+  "check": [
+    "红肿边界不扩大。",
+    "疼痛下降。",
+    "没有发热或脓液异味。"
+  ],
+  "common_mistakes": [
+    "只凭感觉说好多了。",
+    "挤压流脓区域。",
+    "敷料湿了还继续用。",
+    "没有记录边界。"
+  ],
+  "fallback": "没有记号笔时，用纸画示意图记录大小。",
+  "stop_or_escalate": [
+    "红肿快速扩大。",
+    "出现红线向上蔓延。",
+    "发热、寒战、意识变差。"
+  ],
+  "notes": "三日观察是发现感染趋势的低技术方法。",
+  "category_original": "长期医疗观察",
+  "domains": [
+    "medical",
+    "hygiene",
+    "tools",
+    "water"
+  ],
+  "intents": [
+    "medical_wound_bleeding",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "wound",
+    "contamination"
+  ],
+  "objects": [
+    "wound"
+  ],
+  "keywords": [
+    "伤口三日观察表",
+    "伤口",
+    "污染",
+    "wound",
+    "contamination",
+    "medical_wound_bleeding",
+    "hygiene_contamination",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

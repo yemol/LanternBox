@@ -1,0 +1,67 @@
+{
+  "id": "DG-0522",
+  "title": "车辆燃料节约",
+  "category": "撤离交通与路线",
+  "scenario": "汽车、摩托或发电相关车辆燃料有限。",
+  "goal": "把燃料用于高价值任务，避免日常浪费。",
+  "tools": [
+    "燃料记录",
+    "任务表",
+    "地图"
+  ],
+  "steps": [
+    "记录当前燃料量和预计可用距离。",
+    "只给撤离、伤病转运、大量物资搬运等高价值任务用车。",
+    "合并路线，一次完成多个任务。",
+    "避免长时间怠速。",
+    "车内保留最低应急燃料线。",
+    "每次用车记录里程、用途和消耗。",
+    "燃料低于底线时停止非必要用车。"
+  ],
+  "check": [
+    "燃料有记录。",
+    "任务合并。",
+    "保留底线。"
+  ],
+  "common_mistakes": [
+    "小事也开车。",
+    "怠速取暖很久。",
+    "油快没了还不记录。"
+  ],
+  "fallback": "燃料紧张时，优先自行车、步行和手推车。",
+  "stop_or_escalate": [
+    "伤病转运需求、撤离风险升高、燃料泄漏时，立即重排用车计划。"
+  ],
+  "notes": "燃料不是方便，是移动能力的存款。",
+  "category_original": "车辆与自行车长期维护",
+  "domains": [
+    "evacuation",
+    "disaster",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "route"
+  ],
+  "keywords": [
+    "车辆燃料节约",
+    "撤离",
+    "路线",
+    "evacuation_decision",
+    "route",
+    "shelter_disaster_evacuate",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

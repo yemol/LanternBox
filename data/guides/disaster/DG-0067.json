@@ -1,0 +1,71 @@
+{
+  "id": "DG-0067",
+  "title": "暴雨山洪：远离沟谷和涵洞",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "山区、郊外、河谷、桥下、涵洞或低洼地遇到强降雨。",
+  "goal": "在山洪到来前离开水流路径。",
+  "tools": [
+    "雨衣",
+    "手电",
+    "哨子",
+    "绳子",
+    "地图"
+  ],
+  "steps": [
+    "听到上游轰鸣、水声突然变大、看到泥水、树枝、石块滚动时，立刻移动。",
+    "不要沿水流方向跑，向两侧高地转移。",
+    "远离河道、沟谷、桥洞、涵洞、地下通道和低洼停车场。",
+    "清点人员，儿童老人和行动慢的人走中间。",
+    "不要返回捡包或拍照。",
+    "到高处后观察水位变化，再决定是否继续撤离。"
+  ],
+  "check": [
+    "人员已离开沟谷低处。",
+    "没有人涉水过急流。",
+    "队伍没有分散。"
+  ],
+  "common_mistakes": [
+    "在桥下避雨。",
+    "穿越看似不深的急流。",
+    "返回拿被水冲走的物品。"
+  ],
+  "fallback": "没有地图时，遵循简单原则：离水流路径越远、越高越好。",
+  "stop_or_escalate": [
+    "水位快速上涨、泥石流声、地面震动、道路被水切断时，继续向高处撤离。"
+  ],
+  "notes": "山洪是速度型灾害，犹豫会被水追上。",
+  "category_original": "灾害专项",
+  "domains": [
+    "disaster",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "flood",
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water"
+  ],
+  "keywords": [
+    "暴雨山洪",
+    "远离沟谷和涵洞",
+    "暴雨",
+    "flood",
+    "evacuation_decision",
+    "drinking_water",
+    "shelter_disaster_evacuate",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

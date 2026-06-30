@@ -1,0 +1,82 @@
+{
+  "id": "DG-0295",
+  "title": "任务失败复盘",
+  "category": "库存资料与成员档案",
+  "scenario": "取水失败、搬运失败、路线错误、物资损坏、冲突升级或照护遗漏。",
+  "goal": "把失败转化为规则和流程，不只责怪个人。",
+  "tools": [
+    "记录本",
+    "任务表",
+    "相关物资",
+    "地图"
+  ],
+  "steps": [
+    "先确认人员安全和物资损失。",
+    "记录失败发生的时间、地点、任务和参与者。",
+    "只描述事实，不先给人贴标签。",
+    "找出原因：信息不足、工具不足、路线问题、体力过载、规则不清、天气变化。",
+    "写下下次怎么改：换路线、减重、加工具、改规则、增加记录。",
+    "把改动写回任务表或规则表。",
+    "一段时间后检查同类失败是否减少。"
+  ],
+  "check": [
+    "失败原因不是只归咎个人。",
+    "有具体改进措施。",
+    "改动写回规则或任务表。"
+  ],
+  "common_mistakes": [
+    "失败后只骂人。",
+    "同样错误反复发生。",
+    "复盘变成翻旧账。"
+  ],
+  "fallback": "情绪太高时，先做事实记录，等冷却后再分析原因。",
+  "stop_or_escalate": [
+    "失败导致伤亡、关键物资损失、路线暴露时，升级为重大事件复盘。"
+  ],
+  "notes": "失败如果不复盘，就会换个时间再来一次。",
+  "category_original": "决策记录与责任交接",
+  "domains": [
+    "records",
+    "security"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "supplies"
+  ],
+  "keywords": [
+    "任务失败复盘",
+    "记录",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "drinking_water",
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

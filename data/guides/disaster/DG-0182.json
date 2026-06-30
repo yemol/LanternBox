@@ -1,0 +1,83 @@
+{
+  "id": "DG-0182",
+  "title": "大风前固定清单",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "台风、强风、沙尘、山口风或暴雨前阵风增强。",
+  "goal": "减少飞散物、坠物和破窗风险。",
+  "tools": [
+    "绳子",
+    "胶带",
+    "收纳箱",
+    "剪刀",
+    "手套"
+  ],
+  "steps": [
+    "收回阳台、窗边、屋顶、门口的轻物和尖锐物。",
+    "固定防水布、太阳能板、晾衣绳和临时棚。",
+    "窗边移走玻璃瓶、工具、硬盒和高处重物。",
+    "门窗能关就关，破窗提前覆盖。",
+    "外部垃圾袋、空桶和纸箱加重或移入室内。",
+    "风后检查固定物是否松动，不急着站到高处查看。"
+  ],
+  "check": [
+    "轻物已收回。",
+    "高处物品不易坠落。",
+    "防水布和设备固定稳定。"
+  ],
+  "common_mistakes": [
+    "强风中临时爬高固定。",
+    "太阳能板放风口不收。",
+    "窗边堆硬物。"
+  ],
+  "fallback": "绳子不足时，优先固定可能伤人的物品和关键防水布。",
+  "stop_or_escalate": [
+    "风力持续增强、建筑外部物体飞散、窗户变形时，人员远离窗边。"
+  ],
+  "notes": "大风会把普通杂物变成飞行工具。",
+  "category_original": "天气与环境观察",
+  "domains": [
+    "disaster",
+    "security",
+    "tools",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "flood",
+    "inventory_change"
+  ],
+  "objects": [
+    "window",
+    "tools",
+    "inventory"
+  ],
+  "keywords": [
+    "大风前固定清单",
+    "暴雨",
+    "风险",
+    "工具",
+    "固定",
+    "清单",
+    "flood",
+    "inventory_change",
+    "window",
+    "tools",
+    "inventory",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "DG-0243",
+  "title": "可疑植物留样",
+  "category": "种植养殖与采集",
+  "scenario": "有人已经采集或误食不确定植物、果实、蘑菇或种子。",
+  "goal": "保留识别线索，减少后续判断困难。",
+  "tools": [
+    "袋子",
+    "标签纸",
+    "手套",
+    "记录本"
+  ],
+  "steps": [
+    "把同一批可疑食物单独装袋。",
+    "贴标签写采集地点、时间、采集者和食用者。",
+    "保留一部分完整样本，包括叶、果、茎、根或蘑菇整体。",
+    "不要把样本和安全食物混放。",
+    "记录食用量、时间和症状。",
+    "如果多人食用，分别记录每个人症状。"
+  ],
+  "check": [
+    "样本被保留。",
+    "地点和时间清楚。",
+    "可疑食物没有混入公共食物。"
+  ],
+  "common_mistakes": [
+    "吃完后把样本全丢。",
+    "只记得大概是个野菜。",
+    "多人症状混在一起不分。"
+  ],
+  "fallback": "没有袋子时，用纸包、叶片包或容器单独隔离，并写上标记。",
+  "stop_or_escalate": [
+    "出现呕吐、腹泻、意识异常、麻木、呼吸困难时，立即按食物中毒处理。"
+  ],
+  "notes": "可疑食物留样，是给后续判断留下证据。",
+  "category_original": "采集风险原则",
+  "domains": [
+    "security",
+    "planting",
+    "food",
+    "water"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "seed_saving",
+    "food_production",
+    "suspicious_approach"
+  ],
+  "objects": [
+    "seed"
+  ],
+  "keywords": [
+    "可疑植物留样",
+    "可疑",
+    "风险",
+    "种子",
+    "种植",
+    "食物",
+    "seed_saving",
+    "food_production",
+    "suspicious_approach",
+    "seed",
+    "security_suspicious_person",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

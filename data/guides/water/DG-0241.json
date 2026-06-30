@@ -1,0 +1,72 @@
+{
+  "id": "DG-0241",
+  "title": "动物饲料库存线",
+  "category": "种植养殖与采集",
+  "scenario": "家禽、宠物、小动物或水产需要持续饲料。",
+  "goal": "避免动物饲料突然断供，并防止饲料受潮发霉。",
+  "tools": [
+    "库存模块",
+    "标签纸",
+    "密封桶",
+    "记录本"
+  ],
+  "steps": [
+    "统计每种动物每天大约消耗多少饲料。",
+    "设置最低库存线，例如低于七天或十四天就警戒。",
+    "饲料放在干燥、有盖、防鼠的位置。",
+    "开封饲料写日期，优先使用开封袋。",
+    "受潮、发霉、有异味的饲料隔离，不继续喂。",
+    "每天记录异常消耗，例如动物增多、浪费、被鼠偷吃。",
+    "饲料不足时，提前调整饲养规模或寻找替代。"
+  ],
+  "check": [
+    "知道饲料还能撑几天。",
+    "饲料防潮防鼠。",
+    "开封饲料有日期。"
+  ],
+  "common_mistakes": [
+    "饲料袋敞口放地上。",
+    "发霉饲料继续喂。",
+    "等饲料没了才想替代。"
+  ],
+  "fallback": "没有密封桶时，用厚袋加箱子临时防潮防鼠。",
+  "stop_or_escalate": [
+    "饲料低于最低线、发霉、被鼠咬、动物吃后腹泻时，立即调整。"
+  ],
+  "notes": "动物饲料也是库存，不是杂物。",
+  "category_original": "水产与小型养殖",
+  "domains": [
+    "water",
+    "planting",
+    "food"
+  ],
+  "intents": [
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "food_production",
+    "inventory_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "inventory"
+  ],
+  "keywords": [
+    "动物饲料库存线",
+    "种植",
+    "food_production",
+    "inventory_change",
+    "drinking_water",
+    "inventory",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

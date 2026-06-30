@@ -1,0 +1,79 @@
+{
+  "id": "DG-0481",
+  "title": "临时隔离解除",
+  "category": "医疗急救与照护",
+  "scenario": "病人症状好转后，需要判断是否恢复公共活动。",
+  "goal": "避免过早解除导致再次传播，也避免长期不必要隔离。",
+  "tools": [
+    "症状记录",
+    "清洁用品",
+    "任务表"
+  ],
+  "steps": [
+    "先确认主要症状是否明显缓解。",
+    "腹泻呕吐者至少观察一段时间无新发作后再恢复公共活动。",
+    "咳嗽发热者恢复前先减少厨房、饮水和儿童照护任务。",
+    "隔离区被褥、餐具、垃圾和接触面清洁后再恢复使用。",
+    "解除隔离当天记录日期和原因。",
+    "恢复任务从低风险任务开始。",
+    "若症状复发，重新进入隔离流程。"
+  ],
+  "check": [
+    "解除有记录。",
+    "隔离区已清洁。",
+    "恢复任务从低风险开始。"
+  ],
+  "common_mistakes": [
+    "刚不吐就去做饭。",
+    "病人床位不清洁就给别人用。",
+    "解除后症状复发不记录。"
+  ],
+  "fallback": "不确定时，先延长观察，并只恢复低风险活动。",
+  "stop_or_escalate": [
+    "症状反复、多人新增症状、病人仍虚弱时，不解除或只部分解除。"
+  ],
+  "notes": "解除隔离也要慢慢开门，不是一脚踹开。",
+  "category_original": "隔离照护",
+  "domains": [
+    "medical",
+    "water",
+    "tools",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "infection_control",
+    "temporary_repair"
+  ],
+  "objects": [
+    "patient",
+    "door"
+  ],
+  "keywords": [
+    "临时隔离解除",
+    "infection_control",
+    "temporary_repair",
+    "patient",
+    "door",
+    "medical_fever_respiratory",
+    "tools_security_repair",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

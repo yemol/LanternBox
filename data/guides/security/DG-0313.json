@@ -1,0 +1,94 @@
+{
+  "id": "DG-0313",
+  "title": "污染材料隔离箱",
+  "category": "工具维修与替代制作",
+  "scenario": "出现带血布料、接触污水材料、可疑包装、动物咬过物、化学味材料。",
+  "goal": "在决定清洗、降级或丢弃前先隔离。",
+  "tools": [
+    "隔离箱",
+    "手套",
+    "标签纸",
+    "记录本"
+  ],
+  "steps": [
+    "设置一个固定污染材料箱。",
+    "污染材料进入箱前先装袋或包裹，避免滴漏。",
+    "标签写明污染原因和日期。",
+    "污染箱远离食物、饮水、睡眠区和儿童活动区。",
+    "处理污染材料时戴手套，处理后洗手。",
+    "定期决定清洗、降级或废弃，不长期堆积。",
+    "污染箱满或发臭时立即处理。"
+  ],
+  "check": [
+    "污染材料有固定箱。",
+    "污染原因有标签。",
+    "污染箱远离核心区。"
+  ],
+  "common_mistakes": [
+    "污染材料先随手放桌上。",
+    "污染箱放厨房旁。",
+    "长期不处理变臭源。"
+  ],
+  "fallback": "没有箱子时，用厚袋或桶临时隔离，并贴醒目标记。",
+  "stop_or_escalate": [
+    "污染材料渗漏、发臭、长虫、儿童接触时，立即封闭并处理。"
+  ],
+  "notes": "隔离箱是给犹豫材料的临时牢房。",
+  "category_original": "废弃物筛选与降级使用",
+  "domains": [
+    "security",
+    "tools",
+    "hygiene",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "unsafe_water",
+    "bleeding",
+    "contamination",
+    "infection_control",
+    "temporary_repair",
+    "suspicious_approach"
+  ],
+  "objects": [
+    "drinking_water",
+    "tools"
+  ],
+  "keywords": [
+    "污染材料隔离箱",
+    "可疑",
+    "工具",
+    "维修",
+    "污染",
+    "unsafe_water",
+    "bleeding",
+    "contamination",
+    "infection_control",
+    "temporary_repair",
+    "suspicious_approach",
+    "drinking_water",
+    "tools",
+    "security_suspicious_person",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "DG-0030",
+  "title": "浑浊水处理：沉淀、过滤、煮沸",
+  "category": "水与食物保障",
+  "scenario": "水里有泥沙、悬浮物、叶片、虫子，但没有明显油膜、化学味或强烈异味。",
+  "goal": "把浑浊水处理成相对安全的应急饮用水。",
+  "tools": [
+    "两个容器",
+    "滤布或干净衣物",
+    "锅和燃料",
+    "标签纸",
+    "记录本"
+  ],
+  "steps": [
+    "先判断水源：如果有油膜、化学味、农药味、工业污染嫌疑，降级为非饮用，不要靠煮沸解决。",
+    "把水倒进容器静置，让泥沙沉到底部。",
+    "不要晃动容器，从上层慢慢舀出较清的水。",
+    "用多层干净布过滤可见杂质。布用后要清洗并晾干，不要和医疗布混用。",
+    "过滤后的水再煮沸；水完全沸腾后继续加热一段时间，然后盖好冷却。",
+    "倒入干净有盖容器，贴上来源、处理方式和日期。"
+  ],
+  "check": [
+    "水没有明显泥沙漂浮。",
+    "容器有盖，标签清楚。",
+    "处理后没有混回脏桶。"
+  ],
+  "common_mistakes": [
+    "把沉淀当消毒。",
+    "过滤后直接喝。",
+    "把净水倒进原来的脏桶。",
+    "处理化学污染水后饮用。"
+  ],
+  "fallback": "没有锅时，优先寻找更安全水源；有可靠无香型含氯消毒剂时，可按说明处理，但仍要先过滤浑浊物。",
+  "stop_or_escalate": [
+    "多人饮用后腹泻。",
+    "水有化学味、油膜、强烈异味。",
+    "容器或滤布被污染。"
+  ],
+  "notes": "水处理流程最怕脏净交叉污染。",
+  "category_original": "饮水与水源",
+  "domains": [
+    "water",
+    "food",
+    "security",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "water_treatment",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "food_spoilage",
+    "unsafe_water",
+    "contamination"
+  ],
+  "objects": [
+    "drinking_water",
+    "filter",
+    "boiling"
+  ],
+  "keywords": [
+    "浑浊水处理",
+    "沉淀",
+    "过滤",
+    "煮沸",
+    "饮用水",
+    "水源",
+    "食物",
+    "安全",
+    "污染",
+    "food_spoilage",
+    "unsafe_water",
+    "contamination",
+    "drinking_water",
+    "filter",
+    "boiling",
+    "water_rationing",
+    "water_treatment",
+    "hygiene_contamination",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响"
+  ]
+}

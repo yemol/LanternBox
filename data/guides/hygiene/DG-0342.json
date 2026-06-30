@@ -1,0 +1,91 @@
+{
+  "id": "DG-0342",
+  "title": "停电后第一小时",
+  "category": "居住卫生与空间管理",
+  "scenario": "突然停电、照明消失、通信中断或外部环境变暗。",
+  "goal": "在第一小时内稳定人员、照明、火源和关键设备。",
+  "tools": [
+    "手电",
+    "低亮灯",
+    "任务表",
+    "电量记录",
+    "哨子"
+  ],
+  "steps": [
+    "先让所有人停在原地或坐下，避免慌乱走动。",
+    "打开一盏低亮灯，确认人员位置和是否有人受伤。",
+    "检查火源、炉具、蜡烛、燃气和正在运行的设备。",
+    "确认儿童、老人、病人身边有照护者。",
+    "分配照明：公共低亮灯、值守灯、备用灯。",
+    "关闭非必要用电设备，保存电量。",
+    "记录停电时间，并进入低电量或夜间规则。"
+  ],
+  "check": [
+    "人员已清点。",
+    "火源已检查。",
+    "备用灯未被乱用。",
+    "停电时间已记录。"
+  ],
+  "common_mistakes": [
+    "所有人立刻到处找东西。",
+    "多盏灯同时打开。",
+    "忘记检查正在烧的炉具。"
+  ],
+  "fallback": "没有灯时，先用声音集合人员，再让固定位置的人取备用灯。",
+  "stop_or_escalate": [
+    "停电伴随火灾、地震、洪水、浓烟、外部冲突时，转入对应灾害流程。"
+  ],
+  "notes": "停电第一小时，是把黑暗从混乱变成流程的时间。",
+  "category_original": "黑暗环境安全",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "power",
+    "security",
+    "comms"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "power_outage",
+    "personnel_change"
+  ],
+  "objects": [
+    "people",
+    "person",
+    "lighting"
+  ],
+  "keywords": [
+    "停电后第一小时",
+    "停电",
+    "照明",
+    "设备",
+    "安全",
+    "通信",
+    "power_outage",
+    "personnel_change",
+    "people",
+    "person",
+    "lighting",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

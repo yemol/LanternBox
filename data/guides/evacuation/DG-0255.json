@@ -1,0 +1,77 @@
+{
+  "id": "DG-0255",
+  "title": "自行车出发前检查",
+  "category": "撤离交通与路线",
+  "scenario": "使用自行车取水、侦察、送信、搬轻物或撤离。",
+  "goal": "避免半路爆胎、刹不住或链条掉落。",
+  "tools": [
+    "自行车",
+    "打气筒",
+    "手电",
+    "简单工具",
+    "记录本"
+  ],
+  "steps": [
+    "检查轮胎是否明显漏气、裂口或扎入异物。",
+    "捏刹车，确认前后刹能有效减速。",
+    "转动踏板，检查链条是否卡顿、掉链或太干。",
+    "检查车把、坐垫、货架是否松动。",
+    "夜间或低光环境检查灯和反光标记。",
+    "出发前登记路线、目的、预计返回时间。",
+    "回来后记录车辆问题和路线风险。"
+  ],
+  "check": [
+    "轮胎有气。",
+    "刹车有效。",
+    "路线和返回时间已登记。"
+  ],
+  "common_mistakes": [
+    "没刹车也骑。",
+    "轮胎软塌还载重。",
+    "夜间无灯出发。"
+  ],
+  "fallback": "没有工具时，限制骑行距离和负重，只做短途安全路线。",
+  "stop_or_escalate": [
+    "刹车失灵、轮胎裂开、车把松动、链条频繁掉落时，停止使用。"
+  ],
+  "notes": "自行车是低耗移动工具，但坏车会把小路变事故现场。",
+  "category_original": "车辆与自行车应急",
+  "domains": [
+    "evacuation",
+    "tools",
+    "disaster",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water",
+    "route",
+    "tools"
+  ],
+  "keywords": [
+    "自行车出发前检查",
+    "撤离",
+    "路线",
+    "工具",
+    "evacuation_decision",
+    "drinking_water",
+    "route",
+    "tools",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

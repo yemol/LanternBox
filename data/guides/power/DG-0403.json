@@ -1,0 +1,74 @@
+{
+  "id": "DG-0403",
+  "title": "夜间找物演练",
+  "category": "组织秩序与训练演练",
+  "scenario": "停电或夜间需要找药、灯、鞋、外出包、急救包，但大家不熟位置。",
+  "goal": "让成员在低亮环境中找到关键物品。",
+  "tools": [
+    "低亮灯",
+    "关键物资",
+    "计时器",
+    "记录本"
+  ],
+  "steps": [
+    "先选三种关键物品：手电、急救包、个人药包或外出包。",
+    "在安全低亮环境中进行，不完全黑暗开始。",
+    "让成员从睡眠位置出发找到物品。",
+    "记录找物时间、走错点和碰撞点。",
+    "调整标签、归位点和路线。",
+    "重点训练儿童、老人、照护者和夜间值守者。",
+    "演练后复位所有物品。"
+  ],
+  "check": [
+    "成员能找到关键物。",
+    "碰撞点已处理。",
+    "物品已复位。"
+  ],
+  "common_mistakes": [
+    "平时放得乱，演练时才临时摆好。",
+    "演练后不复位。",
+    "完全黑暗中硬练导致摔倒。"
+  ],
+  "fallback": "没有低亮灯时，先用白天闭眼触摸记忆归位点，再做低亮演练。",
+  "stop_or_escalate": [
+    "演练中摔倒、恐慌、找不到药品时，停止并改进环境。"
+  ],
+  "notes": "黑暗不会等人翻说明书。",
+  "category_original": "训练与演练",
+  "domains": [
+    "power"
+  ],
+  "intents": [
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "power_outage",
+    "personnel_change",
+    "night"
+  ],
+  "objects": [
+    "medicine",
+    "people",
+    "lighting"
+  ],
+  "keywords": [
+    "夜间找物演练",
+    "停电",
+    "power_outage",
+    "personnel_change",
+    "night",
+    "medicine",
+    "people",
+    "lighting",
+    "power_lighting_energy",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

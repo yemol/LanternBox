@@ -1,0 +1,82 @@
+{
+  "id": "DG-0389",
+  "title": "每周卫生清理日",
+  "category": "组织秩序与训练演练",
+  "scenario": "多人居住后，垃圾、灰水、厕所、湿衣、动物区和厨余会逐渐积累。",
+  "goal": "把卫生任务固定到周期里，防止环境慢慢变坏。",
+  "tools": [
+    "任务表",
+    "手套",
+    "垃圾袋",
+    "清洁水",
+    "记录本"
+  ],
+  "steps": [
+    "列出本周必须清理区域：厕所、垃圾、厨房、睡眠区、动物区、入口污染区。",
+    "分配人员和工具，不让清污工具进入厨房。",
+    "先处理会发臭、招虫、污染饮水的点。",
+    "清理后检查是否有漏液、霉斑、虫害和积水。",
+    "污染物处理后洗手或更换手套。",
+    "记录本周最严重的卫生问题。",
+    "根据问题调整下周清理频率。"
+  ],
+  "check": [
+    "厕所和厨余已处理。",
+    "污染工具没有进厨房。",
+    "霉斑虫害有记录。"
+  ],
+  "common_mistakes": [
+    "只扫看得见的地面。",
+    "清污手套拿去洗碗。",
+    "厕所等臭了才处理。"
+  ],
+  "fallback": "人手少时，优先厕所、厨余、饮水周边、睡眠区四项。",
+  "stop_or_escalate": [
+    "多人腹泻、臭味持续、虫害爆发、饮水区被污染时，立即升级清理。"
+  ],
+  "notes": "卫生问题不是突然爆炸，它先悄悄发酵。",
+  "category_original": "时间管理与周期任务",
+  "domains": [
+    "tools",
+    "hygiene",
+    "medical",
+    "water",
+    "security"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "contamination"
+  ],
+  "objects": [
+    "drinking_water",
+    "toilet"
+  ],
+  "keywords": [
+    "每周卫生清理日",
+    "固定",
+    "厕所",
+    "垃圾",
+    "contamination",
+    "drinking_water",
+    "toilet",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "异响",
+    "脚步声",
+    "门外",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

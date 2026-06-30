@@ -1,0 +1,80 @@
+{
+  "id": "DG-0211",
+  "title": "抗过敏药和过敏记录",
+  "category": "医疗急救与照护",
+  "scenario": "有人有食物、药物、昆虫叮咬、粉尘、花粉或不明过敏史。",
+  "goal": "让过敏风险能被提前识别，避免重复接触。",
+  "tools": [
+    "成员档案",
+    "药品清单",
+    "过敏卡",
+    "记录本"
+  ],
+  "steps": [
+    "在成员档案中写清每个人已知过敏源。",
+    "把抗过敏药单独分区，标记适用成员和注意事项。",
+    "每次过敏发作记录时间、可能诱因、症状、用药和结果。",
+    "食物分配前查看过敏卡。",
+    "不明药品或来源不明食物不要先给有过敏史成员尝试。",
+    "出现过敏后，把可疑食物、药物或环境隔离标记。"
+  ],
+  "check": [
+    "每个过敏成员有过敏记录。",
+    "抗过敏药位置明确。",
+    "可疑诱因被记录或隔离。"
+  ],
+  "common_mistakes": [
+    "记得有人过敏但不知道过敏什么。",
+    "过敏后只吃药不追踪诱因。",
+    "让过敏史成员先试吃新食物。"
+  ],
+  "fallback": "没有正式成员档案时，先写纸质过敏卡随身携带。",
+  "stop_or_escalate": [
+    "呼吸困难、面唇舌肿胀、意识异常、全身风团快速扩散时，按严重过敏处理。"
+  ],
+  "notes": "过敏管理不是只备药，更要避免下一次踩同一个坑。",
+  "category_original": "药物与医疗物资管理",
+  "domains": [
+    "medical",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "medicine",
+    "inventory",
+    "log",
+    "supplies"
+  ],
+  "keywords": [
+    "抗过敏药和过敏记录",
+    "风险",
+    "记录",
+    "inventory_change",
+    "resource_exposure",
+    "medicine",
+    "inventory",
+    "log",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

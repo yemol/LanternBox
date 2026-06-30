@@ -1,0 +1,89 @@
+{
+  "id": "DG-0261",
+  "title": "道路被堵时搬运策略",
+  "category": "撤离交通与路线",
+  "scenario": "车辆无法通过，路被堵、桥断、积水、废墟、拥堵或冲突阻断。",
+  "goal": "从车辆运输切换到人力或小工具搬运。",
+  "tools": [
+    "背包",
+    "推车",
+    "地图",
+    "标签",
+    "防水袋"
+  ],
+  "steps": [
+    "先判断车辆是否安全停放，不要停在通道中央或危险边缘。",
+    "把车内物资分成必须带、可回取、放弃三类。",
+    "优先带水、药、证件、照明、通信、保暖和关键工具。",
+    "重物拆分，小包装贴标签。",
+    "选择人力可通过的备用路线。",
+    "留下车辆位置和状态记录，但不在显眼处写完整物资。",
+    "到达安全点后更新库存位置。"
+  ],
+  "check": [
+    "车内关键物资已分类。",
+    "人力搬运量可承受。",
+    "备用路线明确。"
+  ],
+  "common_mistakes": [
+    "车走不了还一直堵路等待。",
+    "临时乱翻车内物资。",
+    "把所有东西都背到走不动。"
+  ],
+  "fallback": "没有推车时，优先用背包和床单包转移最关键物资。",
+  "stop_or_escalate": [
+    "路线冲突、洪水上涨、人员过载、车辆处于危险位置时，优先人员离开。"
+  ],
+  "notes": "车辆停下时，物资系统要立刻换挡。",
+  "category_original": "车辆与自行车应急",
+  "domains": [
+    "evacuation",
+    "tools",
+    "security",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "route",
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "道路被堵时搬运策略",
+    "撤离",
+    "路线",
+    "工具",
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "route",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

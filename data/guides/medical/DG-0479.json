@@ -1,0 +1,84 @@
+{
+  "id": "DG-0479",
+  "title": "共睡空间传播控制",
+  "category": "医疗急救与照护",
+  "scenario": "多人同睡一间、小空间保暖、夜间通风差，疾病容易传播。",
+  "goal": "在保暖和隔离之间取得最低安全平衡。",
+  "tools": [
+    "床单",
+    "布帘",
+    "低亮灯",
+    "通风口",
+    "记录本"
+  ],
+  "steps": [
+    "病人和健康成员尽量错开头部方向。",
+    "患者靠近可控通风侧，但避免冷风直吹。",
+    "使用布帘或床单形成简单隔断。",
+    "个人被褥和枕头不混用。",
+    "夜间咳嗽严重者旁边不安排儿童、老人或慢病成员。",
+    "早晨晾晒或通风被褥。",
+    "记录夜间咳嗽、发热和睡眠情况。"
+  ],
+  "check": [
+    "头部方向有错开。",
+    "被褥不混用。",
+    "重点成员远离咳嗽者。"
+  ],
+  "common_mistakes": [
+    "全员头挨头睡。",
+    "病人被褥和儿童混用。",
+    "完全封闭不通风。"
+  ],
+  "fallback": "空间极小无法分开时，至少固定病人位置和用品，并增加通风时段。",
+  "stop_or_escalate": [
+    "多人陆续发热咳嗽、夜间呼吸不适、空气闷浊时，重新安排睡眠区。"
+  ],
+  "notes": "共睡时，空气也是公共物资。",
+  "category_original": "疾病传播控制",
+  "domains": [
+    "medical",
+    "security",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "infection_control",
+    "inventory_change",
+    "night",
+    "resource_exposure"
+  ],
+  "objects": [
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "共睡空间传播控制",
+    "夜间",
+    "安全",
+    "保暖",
+    "infection_control",
+    "inventory_change",
+    "night",
+    "resource_exposure",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

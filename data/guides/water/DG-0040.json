@@ -1,0 +1,91 @@
+{
+  "id": "DG-0040",
+  "title": "停电后冰箱食物处置",
+  "category": "水与食物保障",
+  "scenario": "停电后冰箱和冷冻室失效，不确定食物还能不能吃。",
+  "goal": "优先处理易坏食物，避免食物中毒。",
+  "tools": [
+    "记录本",
+    "温度计可选",
+    "垃圾袋",
+    "锅"
+  ],
+  "steps": [
+    "记录停电开始时间，不要频繁开冰箱门。",
+    "先处理冷藏区易坏食物：熟食、肉、奶、蛋、海鲜、切开的水果。",
+    "短时间内能吃的，优先彻底加热后食用。",
+    "冷冻区尽量保持关闭，延长低温时间。",
+    "有异味、黏滑、变色或温度明显升高的肉奶熟食，直接放弃。",
+    "把决定丢弃和优先食用的食物写入库存或日记。"
+  ],
+  "check": [
+    "冰箱门没有被反复打开。",
+    "易坏食物被优先处理。",
+    "可疑食物没有给脆弱成员吃。"
+  ],
+  "common_mistakes": [
+    "停电后一直开门翻找。",
+    "把可疑肉类煮煮给老人孩子吃。",
+    "新鲜食物和已变质食物混放。"
+  ],
+  "fallback": "没有温度计时，根据停电时间、触感、冰晶状态、气味和食物种类保守判断。",
+  "stop_or_escalate": [
+    "食物有腐败味。",
+    "多人吃后腹泻。",
+    "包装胀气或液体外漏。"
+  ],
+  "notes": "停电后的冰箱会从储藏工具变成腐败源。",
+  "category_original": "食物获取",
+  "domains": [
+    "water",
+    "food",
+    "power",
+    "tools",
+    "security"
+  ],
+  "intents": [
+    "food_safety_judgment",
+    "power_lighting_energy",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "power_outage",
+    "refrigeration_failure",
+    "food_spoilage"
+  ],
+  "objects": [
+    "fridge",
+    "drinking_water",
+    "tools"
+  ],
+  "keywords": [
+    "停电后冰箱食物处置",
+    "食物",
+    "冰箱",
+    "能不能吃",
+    "停电",
+    "工具",
+    "power_outage",
+    "refrigeration_failure",
+    "food_spoilage",
+    "fridge",
+    "drinking_water",
+    "tools",
+    "food_safety_judgment",
+    "power_lighting_energy",
+    "tools_security_repair",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

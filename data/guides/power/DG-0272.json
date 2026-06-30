@@ -1,0 +1,87 @@
+{
+  "id": "DG-0272",
+  "title": "设备外借和维修前清理",
+  "category": "通信信息与数据安全",
+  "scenario": "电脑、移动硬盘、优盘、手机或壳中灯终端需要交给别人检查、维修或临时使用。",
+  "goal": "避免维修和外借过程中泄露成员档案、证件和备份数据。",
+  "tools": [
+    "备份盘",
+    "加密工具",
+    "清单",
+    "记录本"
+  ],
+  "steps": [
+    "先确认是否真的需要外借或维修，能否只描述问题。",
+    "备份重要数据，确认备份可读。",
+    "退出成员档案库、锁定高敏感模块。",
+    "移除或加密高敏感资料盘，不把证件和成员档案留在设备明面上。",
+    "清理普通桌面、下载目录和临时文件中的证件照片、口令提示。",
+    "记录设备交给谁、时间、原因和取回时间。",
+    "取回后检查文件、登录状态和异常改动。"
+  ],
+  "check": [
+    "高敏感资料已移除或加密。",
+    "设备交接有记录。",
+    "取回后有检查。"
+  ],
+  "common_mistakes": [
+    "直接把整机交出去。",
+    "桌面上放着证件照片。",
+    "维修回来不检查文件变化。"
+  ],
+  "fallback": "无法清理时，不交出设备；改用截图、手写报错或备份副本排查。",
+  "stop_or_escalate": [
+    "设备丢失、无法取回、被复制风险高时，按数据泄露处理。"
+  ],
+  "notes": "维修设备前，要先维修暴露面。",
+  "category_original": "信息安全与数据保护",
+  "domains": [
+    "power",
+    "security",
+    "tools",
+    "comms",
+    "records"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "temporary_repair",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "people",
+    "lighting"
+  ],
+  "keywords": [
+    "设备外借和维修前清理",
+    "设备",
+    "安全",
+    "维修",
+    "通信",
+    "temporary_repair",
+    "personnel_change",
+    "resource_exposure",
+    "people",
+    "lighting",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

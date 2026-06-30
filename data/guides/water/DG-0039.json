@@ -1,0 +1,89 @@
+{
+  "id": "DG-0039",
+  "title": "食物风险判断：四个放弃信号",
+  "category": "水与食物保障",
+  "scenario": "停电、受潮、过期、被水泡或来源不明的食物。",
+  "goal": "快速判断哪些食物不能冒险吃。",
+  "tools": [
+    "手套",
+    "垃圾袋",
+    "标签纸",
+    "记录本"
+  ],
+  "steps": [
+    "先看包装：胀包、破损、漏液、锈蚀严重、标签不明的单独隔离。",
+    "再闻气味：腐败味、酸败味、霉味、刺鼻化学味都不要入口。",
+    "再看状态：发霉、黏滑、变色、虫蛀严重、被鼠咬过的高风险。",
+    "判断接触史：被洪水、污水、动物尸体附近水泡过的开封食物直接放弃。",
+    "可疑食物用红色标签隔离，不放回公共食物区。",
+    "记录丢弃原因，方便追查储存问题。"
+  ],
+  "check": [
+    "可疑食物没有混入正常食物。",
+    "高风险食物已隔离或处理。",
+    "丢弃原因有记录。"
+  ],
+  "common_mistakes": [
+    "把霉点切掉继续吃高风险食品。",
+    "用重口味调料掩盖腐败。",
+    "让儿童老人先试吃。"
+  ],
+  "fallback": "粮食紧张时也不要用明显腐败食物赌运气，可降级为堆肥的也要远离入口区。",
+  "stop_or_escalate": [
+    "多人吃后腹泻。",
+    "食物有化学味。",
+    "罐头严重鼓包或喷液。"
+  ],
+  "notes": "灾后腹泻会消耗水、药和体力，别用一顿食物换三天崩盘。",
+  "category_original": "食物获取",
+  "domains": [
+    "water",
+    "food",
+    "power",
+    "security",
+    "comms"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "power_outage",
+    "signal_plan"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "diarrhea",
+    "signal"
+  ],
+  "keywords": [
+    "食物风险判断",
+    "四个放弃信号",
+    "食物",
+    "停电",
+    "风险",
+    "信号",
+    "power_outage",
+    "signal_plan",
+    "drinking_water",
+    "medicine",
+    "diarrhea",
+    "signal",
+    "power_lighting_energy",
+    "hygiene_contamination",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

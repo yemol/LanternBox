@@ -1,0 +1,92 @@
+{
+  "id": "DG-0306",
+  "title": "简易晾晒绳",
+  "category": "工具维修与替代制作",
+  "scenario": "衣物、布料、草药、种子、湿鞋垫或被褥需要晾干。",
+  "goal": "用安全方式建立晾晒点，避免绊倒、坠落和污染。",
+  "tools": [
+    "绳子",
+    "布条",
+    "夹子可选",
+    "支撑点",
+    "标签"
+  ],
+  "steps": [
+    "选择通风、不过度暴露、远离厕所和垃圾点的位置。",
+    "支撑点必须牢固，不绑在松动管线、电线、危险门窗上。",
+    "绳子高度不要正好卡在人脖子或儿童脸部位置。",
+    "重物分散挂，不把湿被褥全部压在一根细绳上。",
+    "夜间通道上的晾晒绳要标记，防止绊倒。",
+    "入口污染区的衣物和干净衣物分开晾。",
+    "晾干后及时收回，避免返潮。"
+  ],
+  "check": [
+    "支撑点牢固。",
+    "晾晒点远离污染源。",
+    "通道绳子有标记。"
+  ],
+  "common_mistakes": [
+    "绳子横穿主通道不标记。",
+    "湿衣服滴水到食物区。",
+    "污染衣物和干净衣物混晒。"
+  ],
+  "fallback": "没有绳子时，用杆子、椅背、门框临时晾晒，但避免堵住出口。",
+  "stop_or_escalate": [
+    "绳子松脱、人员绊倒、衣物发霉或滴水进电器区时，重新布置。"
+  ],
+  "notes": "晾晒是防霉系统的一部分，不只是洗衣服的结尾。",
+  "category_original": "简易制作与替代",
+  "domains": [
+    "security",
+    "tools",
+    "planting",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "tools_security_repair",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "contamination",
+    "temporary_repair",
+    "seed_saving"
+  ],
+  "objects": [
+    "medicine",
+    "clothes",
+    "tools",
+    "seed"
+  ],
+  "keywords": [
+    "简易晾晒绳",
+    "安全",
+    "工具",
+    "维修",
+    "种子",
+    "污染",
+    "衣物",
+    "contamination",
+    "temporary_repair",
+    "seed_saving",
+    "medicine",
+    "clothes",
+    "tools",
+    "seed",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "planting_seed_reserve",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给"
+  ]
+}

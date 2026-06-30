@@ -1,0 +1,84 @@
+{
+  "id": "DG-0433",
+  "title": "动物异常观察",
+  "category": "库存资料与成员档案",
+  "scenario": "鸟类、老鼠、狗、猫、昆虫、家禽或野生动物出现异常行为。",
+  "goal": "通过动物变化发现食物残渣、污染、天气、疾病或外部扰动。",
+  "tools": [
+    "记录本",
+    "地图",
+    "手套"
+  ],
+  "steps": [
+    "记录异常类型，例如大量聚集、突然消失、异常叫声、翻垃圾、死亡。",
+    "检查附近是否有厨余、死动物、污水、破袋、粮食泄漏。",
+    "动物靠近水源时检查水源污染风险。",
+    "家养动物异常时检查饮水、饲料、粪便和精神状态。",
+    "发现死动物不要徒手接触，先隔离观察。",
+    "把动物异常位置标在地图上。",
+    "连续异常时提高卫生和边界检查频率。"
+  ],
+  "check": [
+    "异常有位置记录。",
+    "没有徒手接触死动物。",
+    "检查过食物和水源。"
+  ],
+  "common_mistakes": [
+    "动物翻垃圾只赶走不查原因。",
+    "徒手捡死鼠。",
+    "家禽异常不记录。"
+  ],
+  "fallback": "无法处理动物来源时，先清理食物残渣和封闭垃圾点。",
+  "stop_or_escalate": [
+    "大量死动物、动物攻击性增强、动物接触饮水区时，立即升级卫生防疫。"
+  ],
+  "notes": "动物不会写报告，但会把环境问题演给你看。",
+  "category_original": "异常信号判断",
+  "domains": [
+    "comms",
+    "records",
+    "hygiene",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "contamination",
+    "signal_plan",
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "signal",
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "动物异常观察",
+    "信号",
+    "污染",
+    "contamination",
+    "signal_plan",
+    "inventory_change",
+    "personnel_change",
+    "signal",
+    "inventory",
+    "people",
+    "hygiene_contamination",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

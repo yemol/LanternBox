@@ -1,0 +1,89 @@
+{
+  "id": "DG-0033",
+  "title": "煮沸净水：省燃料做法",
+  "category": "水与食物保障",
+  "scenario": "有锅和燃料，需要把可处理水变成饮用水，但燃料有限。",
+  "goal": "用较少燃料完成可靠煮水。",
+  "tools": [
+    "锅",
+    "锅盖",
+    "燃料",
+    "滤布",
+    "保温瓶或干净水桶"
+  ],
+  "steps": [
+    "先沉淀并过滤浑浊水，减少煮沸时间和锅底泥沙。",
+    "集中煮一锅水，不要每杯单独煮。",
+    "全程盖锅盖，减少热量散失。",
+    "等水完全沸腾后继续加热一段时间。",
+    "煮好后不要敞口冷却太久，盖好放凉。",
+    "倒入干净容器或保温瓶，贴煮沸时间。"
+  ],
+  "check": [
+    "水确实达到完全沸腾。",
+    "冷却和储存时没有被脏勺、脏手污染。",
+    "煮水燃料消耗有记录。"
+  ],
+  "common_mistakes": [
+    "只把水烧热没烧开。",
+    "煮好后倒回脏桶。",
+    "开盖反复看导致耗燃料。"
+  ],
+  "fallback": "燃料特别少时，优先煮饮用水和婴幼儿、病人用水，清洁水不全部煮。",
+  "stop_or_escalate": [
+    "水源疑似化学污染。",
+    "锅内有化学残留。",
+    "多人饮用后腹泻。"
+  ],
+  "notes": "煮沸主要处理微生物风险，不解决化学污染。",
+  "category_original": "饮水与水源",
+  "domains": [
+    "water",
+    "food",
+    "security",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "water_treatment",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination"
+  ],
+  "objects": [
+    "drinking_water",
+    "boiling"
+  ],
+  "keywords": [
+    "煮沸净水",
+    "省燃料做法",
+    "饮用水",
+    "水源",
+    "净水",
+    "煮沸",
+    "食物",
+    "风险",
+    "污染",
+    "contamination",
+    "drinking_water",
+    "boiling",
+    "water_rationing",
+    "water_treatment",
+    "hygiene_contamination",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响"
+  ]
+}

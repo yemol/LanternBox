@@ -1,0 +1,85 @@
+{
+  "id": "DG-0230",
+  "title": "豆芽安全生产",
+  "category": "种植养殖与采集",
+  "scenario": "有绿豆、黄豆、豌豆等豆类，想快速获得新鲜食物。",
+  "goal": "用低土壤依赖方式生产豆芽，同时控制腐败和污染。",
+  "tools": [
+    "豆类",
+    "干净容器",
+    "纱布",
+    "安全水",
+    "沥水架"
+  ],
+  "steps": [
+    "挑出霉豆、虫蛀豆、异味豆。",
+    "用安全水清洗并浸泡豆子。",
+    "浸泡后倒掉水，把豆放入能沥水的容器。",
+    "每天用安全水冲洗并彻底沥干，避免长期泡水。",
+    "放在阴凉通风处，避免暴晒和闷热。",
+    "闻到酸臭、发黏、发霉时整批放弃。",
+    "食用前充分清洗，脆弱成员更建议加热后食用。"
+  ],
+  "check": [
+    "豆芽无酸臭、无黏滑、无霉点。",
+    "每天冲洗并沥干。",
+    "容器清洁。"
+  ],
+  "common_mistakes": [
+    "豆子一直泡在水里。",
+    "发臭后洗洗继续吃。",
+    "用不安全水冲洗入口食物。"
+  ],
+  "fallback": "没有沥水容器时，用纱布、筛子、干净布袋临时制作沥水结构。",
+  "stop_or_escalate": [
+    "豆芽发黏、酸臭、霉点、多人食后腹泻时，整批丢弃并清洗容器。"
+  ],
+  "notes": "豆芽来得快，坏得也快。",
+  "category_original": "种植与长期食物生产",
+  "domains": [
+    "food",
+    "security",
+    "planting",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "food_spoilage",
+    "contamination",
+    "food_production"
+  ],
+  "objects": [
+    "beans"
+  ],
+  "keywords": [
+    "豆芽安全生产",
+    "食物",
+    "安全",
+    "种植",
+    "污染",
+    "food_spoilage",
+    "contamination",
+    "food_production",
+    "beans",
+    "hygiene_contamination",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响"
+  ]
+}

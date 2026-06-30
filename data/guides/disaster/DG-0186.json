@@ -1,0 +1,82 @@
+{
+  "id": "DG-0186",
+  "title": "衣物分层保暖",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "寒冷、断电、夜间值守、撤离或淋雨后需要保暖。",
+  "goal": "用有限衣物提高保暖效率，减少失温。",
+  "tools": [
+    "内层衣物",
+    "保暖层",
+    "防风层",
+    "干袜子",
+    "帽子"
+  ],
+  "steps": [
+    "内层保持干燥，湿衣物尽快换掉。",
+    "中间用毛衣、抓绒、棉衣或多层衣物保温。",
+    "外层用防风、防雨材料减少热量被风带走。",
+    "重点保护头、颈、手、脚和躯干。",
+    "睡觉前换干袜，脚冷会明显影响睡眠。",
+    "活动时避免出太多汗，出汗后及时调整衣物。"
+  ],
+  "check": [
+    "衣物干燥。",
+    "有内层、保暖层、防风层。",
+    "手脚和头颈被保护。"
+  ],
+  "common_mistakes": [
+    "穿湿衣服硬睡。",
+    "只加厚上衣不管脚。",
+    "活动到大汗后在冷风里停住。"
+  ],
+  "fallback": "衣物不足时，用纸板、塑料布、干草、毯子和背包增加隔冷层。",
+  "stop_or_escalate": [
+    "发抖停止但意识迟钝、皮肤冰冷、行动变慢时，按失温处理。"
+  ],
+  "notes": "保暖不是单纯穿厚，是保持干燥和挡风。",
+  "category_original": "季节与保暖防暑",
+  "domains": [
+    "disaster",
+    "shelter",
+    "evacuation",
+    "security",
+    "power"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "power_outage",
+    "evacuation_decision",
+    "night"
+  ],
+  "objects": [
+    "clothes"
+  ],
+  "keywords": [
+    "衣物分层保暖",
+    "保暖",
+    "撤离",
+    "夜间",
+    "power_outage",
+    "evacuation_decision",
+    "night",
+    "clothes",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

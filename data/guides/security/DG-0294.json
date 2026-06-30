@@ -1,0 +1,93 @@
+{
+  "id": "DG-0294",
+  "title": "共同决定记录表",
+  "category": "库存资料与成员档案",
+  "scenario": "团队决定撤离、接纳成员、分配物资、改变路线、使用燃料或暴露资源。",
+  "goal": "让重大决定有记录，减少事后互相指责。",
+  "tools": [
+    "记录本",
+    "签名或确认符号",
+    "任务表"
+  ],
+  "steps": [
+    "写下决定时间、地点和参与人员。",
+    "写清要解决的问题。",
+    "列出最终决定和没有采纳的主要备选方案。",
+    "写下决定理由和主要风险。",
+    "写明执行负责人、执行时间和复查时间。",
+    "参与者用签名、编号或口头确认方式表示知情。",
+    "复查时记录结果和是否需要调整。"
+  ],
+  "check": [
+    "决定有时间和人员。",
+    "理由和风险写清楚。",
+    "负责人明确。"
+  ],
+  "common_mistakes": [
+    "重大决定只靠谁嗓门大。",
+    "事后没人承认。",
+    "没有复查时间。"
+  ],
+  "fallback": "来不及完整记录时，至少写问题、决定、负责人和时间。",
+  "stop_or_escalate": [
+    "决定涉及撤离、药品、燃料、成员安全时，必须留下记录。"
+  ],
+  "notes": "记录不是官样文章，是给恐慌后的记忆校准。",
+  "category_original": "决策记录与责任交接",
+  "domains": [
+    "security",
+    "records",
+    "water",
+    "disaster",
+    "evacuation"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "supplies"
+  ],
+  "keywords": [
+    "共同决定记录表",
+    "记录",
+    "撤离",
+    "路线",
+    "evacuation_decision",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "supplies",
+    "security_suspicious_person",
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

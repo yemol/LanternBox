@@ -1,0 +1,80 @@
+{
+  "id": "DG-0404",
+  "title": "净水流程教学",
+  "category": "组织秩序与训练演练",
+  "scenario": "团队中只有少数人会区分沉淀、过滤、消毒、储存和饮用水分区。",
+  "goal": "让更多成员掌握净水基本流程和禁忌。",
+  "tools": [
+    "水桶",
+    "过滤材料",
+    "标签",
+    "记录本"
+  ],
+  "steps": [
+    "先讲清四步：取水、预处理、消毒、储存。",
+    "展示饮用水桶、灰水桶、生水桶的区别。",
+    "让学习者亲手贴标签或摆放容器。",
+    "强调不能把生水勺伸进饮用水桶。",
+    "演示一次小批量净水流程。",
+    "让学习者复述哪个容器能喝、哪个不能喝。",
+    "记录谁已经通过净水教学。"
+  ],
+  "check": [
+    "能区分生水和饮用水。",
+    "能复述禁忌。",
+    "亲手操作过标签或容器。"
+  ],
+  "common_mistakes": [
+    "只告诉大家水烧开就行。",
+    "容器不贴标签。",
+    "生水和熟水工具混用。"
+  ],
+  "fallback": "条件不足时，先教容器分区和禁止混用，这是最低底线。",
+  "stop_or_escalate": [
+    "出现腹泻、水桶混用、标签脱落时，立即复训净水流程。"
+  ],
+  "notes": "净水最怕不是不会煮，是干净和脏又混回一起。",
+  "category_original": "训练与演练",
+  "domains": [
+    "general",
+    "water",
+    "hygiene"
+  ],
+  "intents": [
+    "water_rationing",
+    "water_treatment"
+  ],
+  "situations": [
+    "infection_control",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "filter",
+    "people"
+  ],
+  "keywords": [
+    "净水流程教学",
+    "饮用水",
+    "净水",
+    "过滤",
+    "消毒",
+    "infection_control",
+    "personnel_change",
+    "drinking_water",
+    "filter",
+    "people",
+    "water_rationing",
+    "water_treatment",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给"
+  ]
+}

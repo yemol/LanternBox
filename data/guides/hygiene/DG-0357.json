@@ -1,0 +1,81 @@
+{
+  "id": "DG-0357",
+  "title": "晾晒痕迹控制",
+  "category": "居住卫生与空间管理",
+  "scenario": "衣物、雨衣、被褥、鞋子、食物、草药、种子晾晒会暴露人数和生活状态。",
+  "goal": "在保持干燥的同时减少外部可见信息。",
+  "tools": [
+    "晾晒绳",
+    "遮挡布",
+    "夹子",
+    "记录本"
+  ],
+  "steps": [
+    "晾晒点优先放在内侧、背风通风处，不直接面向道路。",
+    "大量衣物不要长时间挂在明显外立面。",
+    "儿童衣物、制服、证件袋等能暴露人员信息的物品内侧晾晒。",
+    "湿鞋和污染衣物与干净衣物分开。",
+    "夜间收回明显晾晒物，避免被外部灯光照到。",
+    "种子和食物晾晒要防动物和虫，不只考虑隐蔽。",
+    "记录哪处晾晒最容易被看见，后续调整。"
+  ],
+  "check": [
+    "晾晒点不直接暴露。",
+    "敏感衣物内侧晾晒。",
+    "夜间明显物已收回。"
+  ],
+  "common_mistakes": [
+    "整排衣物挂临街窗外。",
+    "成员数量通过衣物一眼看出。",
+    "污染衣和干净衣混晒。"
+  ],
+  "fallback": "没有隐蔽晾晒点时，用室内通风、分批晾晒和遮挡布降低暴露。",
+  "stop_or_escalate": [
+    "外部人员关注晾晒点、物品丢失、动物翻动时，改变晾晒位置。"
+  ],
+  "notes": "晾晒是必要的，但别让衣服替你做人口普查。",
+  "category_original": "隐蔽生活痕迹",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "security",
+    "planting",
+    "medical"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "seed_saving",
+    "resource_exposure"
+  ],
+  "objects": [
+    "medicine",
+    "clothes",
+    "seed"
+  ],
+  "keywords": [
+    "晾晒痕迹控制",
+    "衣物",
+    "种子",
+    "seed_saving",
+    "resource_exposure",
+    "medicine",
+    "clothes",
+    "seed",
+    "hygiene_contamination",
+    "planting_seed_reserve",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

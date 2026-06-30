@@ -1,0 +1,109 @@
+{
+  "id": "DG-0308",
+  "title": "简易保温箱",
+  "category": "工具维修与替代制作",
+  "scenario": "需要短时间保护热食、温水、药品、种子或怕冷物资。",
+  "goal": "用箱子和隔热材料减少温度变化。",
+  "tools": [
+    "纸箱",
+    "布料",
+    "泡沫板可选",
+    "塑料袋",
+    "标签"
+  ],
+  "steps": [
+    "选择干燥、完整的箱子。",
+    "内层用干净布、纸板、泡沫或衣物做隔热层。",
+    "热食和入口物资先用干净容器密封，再放入保温箱。",
+    "药品和食物不要混放，避免污染和拿错。",
+    "外面贴标签写内容和时间。",
+    "保温箱远离火源、潮湿地面和儿童翻动区。",
+    "使用后晾干，避免箱内霉味。"
+  ],
+  "check": [
+    "箱子干燥。",
+    "入口物资有密封容器。",
+    "标签写清内容和时间。"
+  ],
+  "common_mistakes": [
+    "热锅直接放纸箱烧坏。",
+    "药品和饭菜混在一起。",
+    "箱内潮湿发霉继续用。"
+  ],
+  "fallback": "没有纸箱时，用背包、毯子、衣物包裹做短时保温。",
+  "stop_or_escalate": [
+    "箱内有异味、受潮、食物变质、药品受热时，停止使用并清理。"
+  ],
+  "notes": "保温箱不是冰箱，只是拖慢温度变化的小洞穴。",
+  "category_original": "简易制作与替代",
+  "domains": [
+    "tools",
+    "planting",
+    "security",
+    "food",
+    "power"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "food_safety_judgment",
+    "tools_security_repair",
+    "planting_seed_reserve",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "refrigeration_failure",
+    "temporary_repair",
+    "seed_saving",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "fridge",
+    "cooked_food",
+    "drinking_water",
+    "medicine",
+    "tools",
+    "seed",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "简易保温箱",
+    "工具",
+    "维修",
+    "种子",
+    "冰箱",
+    "refrigeration_failure",
+    "temporary_repair",
+    "seed_saving",
+    "inventory_change",
+    "resource_exposure",
+    "fridge",
+    "cooked_food",
+    "drinking_water",
+    "medicine",
+    "tools",
+    "seed",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "food_safety_judgment",
+    "tools_security_repair",
+    "planting_seed_reserve",
+    "records_inventory_people",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "腹泻"
+  ]
+}

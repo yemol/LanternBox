@@ -1,0 +1,86 @@
+{
+  "id": "DG-0128",
+  "title": "撤离前库存导出",
+  "category": "库存资料与成员档案",
+  "scenario": "准备离开住所或长期营地，可能无法带走全部物资。",
+  "goal": "带走关键库存信息，知道留下、隐藏、带走了什么。",
+  "tools": [
+    "壳中灯",
+    "优盘",
+    "纸笔",
+    "防水袋",
+    "地图"
+  ],
+  "steps": [
+    "在壳中灯中导出或复制当前库存数据。",
+    "手写一份关键物资简表：水、药、食物、燃料、工具、备份位置。",
+    "把物资分成三类：带走、隐藏、放弃。",
+    "隐藏物资只写在私密清单，不放在公开留言里。",
+    "纸质清单放入防水袋，电子版放入优盘或移动硬盘。",
+    "到新地点后根据清单更新库存状态。"
+  ],
+  "check": [
+    "带走清单和隐藏清单分开。",
+    "纸质和电子至少有一种可用。",
+    "到新地点后能更新库存。"
+  ],
+  "common_mistakes": [
+    "撤离后才想起库存位置。",
+    "公开纸条写完整隐藏物资。",
+    "只存在电脑里但电脑没电。"
+  ],
+  "fallback": "来不及导出时，手写关键物资和位置，优先药、水、食物、燃料。",
+  "stop_or_escalate": [
+    "撤离非常紧急时，不为导出库存延误人员离开。"
+  ],
+  "notes": "库存信息本身也是物资。",
+  "category_original": "库存系统联动",
+  "domains": [
+    "records",
+    "shelter",
+    "security",
+    "disaster",
+    "evacuation"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "building",
+    "inventory",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "撤离前库存导出",
+    "住所",
+    "撤离",
+    "evacuation_decision",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "building",
+    "inventory",
+    "people",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

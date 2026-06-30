@@ -1,0 +1,73 @@
+{
+  "id": "DG-0146",
+  "title": "重要密码离线保存",
+  "category": "库存资料与成员档案",
+  "scenario": "设备、硬盘、资料库、账户、加密文件需要密码，但可能断网或主要维护者不在。",
+  "goal": "避免资料和设备因为忘记密码而无法使用。",
+  "tools": [
+    "密码提示纸",
+    "信封",
+    "防水袋",
+    "可信成员名单",
+    "记录本"
+  ],
+  "steps": [
+    "列出真正关键的密码：设备登录、资料盘、壳中灯主机、重要文件。",
+    "不要把所有完整密码明文贴在设备上。",
+    "使用密码提示、分段保存或密封信封方式降低泄露风险。",
+    "指定至少一名可信成员知道密码提示放在哪里。",
+    "资料更新或密码更改后同步更新纸质提示。",
+    "把密码资料放入防水且不显眼的位置。"
+  ],
+  "check": [
+    "关键密码有离线找回方式。",
+    "不是所有密码明文暴露。",
+    "可信成员知道位置。"
+  ],
+  "common_mistakes": [
+    "只存在联网密码管理器。",
+    "完整密码贴在电脑外壳。",
+    "改密码后纸质提示不更新。"
+  ],
+  "fallback": "如果密码必须明文保存，至少密封、分开放置，并限制知道位置的人。",
+  "stop_or_escalate": [
+    "主要维护者外出、设备转移、重装系统、资料加密前必须检查密码备份。"
+  ],
+  "notes": "密码丢了，知识库会变成一块安静的砖。",
+  "category_original": "证件与资料",
+  "domains": [
+    "power",
+    "records"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "重要密码离线保存",
+    "设备",
+    "inventory_change",
+    "personnel_change",
+    "inventory",
+    "people",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

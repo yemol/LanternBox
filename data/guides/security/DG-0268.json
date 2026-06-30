@@ -1,0 +1,87 @@
+{
+  "id": "DG-0268",
+  "title": "敏感资料分级",
+  "category": "通信信息与数据安全",
+  "scenario": "壳中灯中存在普通记录、库存、成员档案、医疗记录、证件照片、备份盘和口令提示。",
+  "goal": "把资料按敏感程度分级，避免所有东西都同等暴露。",
+  "tools": [
+    "标签纸",
+    "资料清单",
+    "记录本",
+    "收纳袋"
+  ],
+  "steps": [
+    "先把资料分成公开、内部、敏感、高敏感四级。",
+    "公开资料包括普通应急指南、工具说明、非个人化百科。",
+    "内部资料包括库存数量、路线记录、一般日记。",
+    "敏感资料包括成员联系方式、医疗记录、家庭安排、具体物资位置。",
+    "高敏感资料包括证件照片、完整成员档案、口令提示、加密备份密钥。",
+    "给纸质资料袋和电子目录写清敏感等级。",
+    "高敏感资料默认不出现在普通页面、普通搜索和公共清单里。"
+  ],
+  "check": [
+    "资料已经分级。",
+    "高敏感资料没有混在普通目录。",
+    "纸质资料袋有等级标记。"
+  ],
+  "common_mistakes": [
+    "所有资料随便放一起。",
+    "证件照片和普通图片混放。",
+    "把库存隐藏位置写在公开纸条上。"
+  ],
+  "fallback": "来不及完整分级时，先把证件、医疗、口令、成员档案单独归为高敏感。",
+  "stop_or_escalate": [
+    "发现外人接触过资料、资料丢失、备份盘不见时，立即重新评估敏感资料暴露范围。"
+  ],
+  "notes": "资料分级是安全的第一道门。",
+  "category_original": "信息安全与数据保护",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "signal_plan",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "door",
+    "inventory",
+    "people",
+    "log",
+    "lighting"
+  ],
+  "keywords": [
+    "敏感资料分级",
+    "安全",
+    "通信",
+    "口令",
+    "记录",
+    "signal_plan",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "door",
+    "inventory",
+    "people",
+    "log",
+    "lighting",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

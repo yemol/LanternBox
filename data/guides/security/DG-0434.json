@@ -1,0 +1,90 @@
+{
+  "id": "DG-0434",
+  "title": "烟火位置判断",
+  "category": "库存资料与成员档案",
+  "scenario": "远处看到烟、火光、爆炸光、异常亮光或夜间持续闪光。",
+  "goal": "判断是否影响风向、路线、暴露和撤离准备。",
+  "tools": [
+    "地图",
+    "记录本",
+    "风向标",
+    "低亮灯"
+  ],
+  "steps": [
+    "记录看到的方向、高度、颜色、持续时间和是否移动。",
+    "判断风向是否把烟尘吹向住所或路线。",
+    "不要多人到窗口围观，指定一人观察即可。",
+    "在地图上标出大致方位，不必冒险靠近确认。",
+    "检查该方向是否关联水源、仓库、路线或熟人地点。",
+    "如果烟尘靠近，准备封缝、口罩、转移或停用相关路线。",
+    "后续每隔固定时间记录变化。"
+  ],
+  "check": [
+    "方向和时间已记录。",
+    "风向已判断。",
+    "没有多人暴露观察。"
+  ],
+  "common_mistakes": [
+    "看见烟就跑去凑近。",
+    "所有人开窗围观。",
+    "只说那边着火了，不记方向。"
+  ],
+  "fallback": "无法判断方向时，用固定地标辅助描述，例如楼后、河对岸、东侧大路。",
+  "stop_or_escalate": [
+    "烟尘进入室内、火势靠近、路线被影响时，立即转入烟尘或撤离流程。"
+  ],
+  "notes": "烟火是远方的警报，别把自己变成下一处火光。",
+  "category_original": "异常信号判断",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "disaster",
+    "evacuation"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "signal_plan",
+    "inventory_change",
+    "personnel_change",
+    "night",
+    "resource_exposure"
+  ],
+  "objects": [
+    "route",
+    "signal",
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "烟火位置判断",
+    "夜间",
+    "信号",
+    "撤离",
+    "路线",
+    "evacuation_decision",
+    "signal_plan",
+    "inventory_change",
+    "personnel_change",
+    "night",
+    "resource_exposure",
+    "route",
+    "signal",
+    "inventory",
+    "people",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

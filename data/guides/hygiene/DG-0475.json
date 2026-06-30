@@ -1,0 +1,89 @@
+{
+  "id": "DG-0475",
+  "title": "公共接触面清洁表",
+  "category": "居住卫生与空间管理",
+  "scenario": "门把手、水桶盖、药箱、灯开关、工具把手、桌面被多人频繁接触。",
+  "goal": "固定清洁高频接触点，降低传播和污染。",
+  "tools": [
+    "清洁布",
+    "清洁水",
+    "手套",
+    "任务表"
+  ],
+  "steps": [
+    "列出高频接触点：门把手、水桶盖、药箱、厕所桶盖、灯开关、工具把手。",
+    "每天至少一次清洁高频接触点。",
+    "病人接触过的区域单独加强清洁。",
+    "清洁布按厨房、厕所、公共区分开，不混用。",
+    "清洁后让表面自然干燥或用干净布擦干。",
+    "清洁完成后在任务表打勾。",
+    "发现多人发病时提高清洁频率。"
+  ],
+  "check": [
+    "高频点有清单。",
+    "清洁布分区。",
+    "清洁有记录。"
+  ],
+  "common_mistakes": [
+    "只扫地不擦把手。",
+    "厕所布擦餐桌。",
+    "病人摸过的东西没人处理。"
+  ],
+  "fallback": "水和清洁剂不足时，优先清洁水桶盖、厕所相关、餐桌和药箱。",
+  "stop_or_escalate": [
+    "接触面有呕吐物、粪污、血液或化学污染时，立即专项处理。"
+  ],
+  "notes": "传播常常不走正门，它喜欢搭门把手的便车。",
+  "category_original": "公共接触面管理",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "tools",
+    "water",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "contamination"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "medicine",
+    "door",
+    "tools",
+    "lighting"
+  ],
+  "keywords": [
+    "公共接触面清洁表",
+    "污染",
+    "工具",
+    "固定",
+    "水桶",
+    "contamination",
+    "drinking_water",
+    "bucket",
+    "medicine",
+    "door",
+    "tools",
+    "lighting",
+    "water_rationing",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "异响",
+    "脚步声",
+    "门外",
+    "冰箱食物"
+  ]
+}

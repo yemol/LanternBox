@@ -1,0 +1,84 @@
+{
+  "id": "DG-0036",
+  "title": "公共饮水点：倒水不伸手",
+  "category": "水与食物保障",
+  "scenario": "多人共用饮用水桶或水壶。",
+  "goal": "让多人取水时不污染整桶净水。",
+  "tools": [
+    "带盖水桶",
+    "专用水勺或龙头",
+    "标签",
+    "洗手用品"
+  ],
+  "steps": [
+    "饮用水桶放在固定饮水区，远离厕所、垃圾、伤口处理区。",
+    "指定专用水勺，水勺不用来舀脏水、洗手水或饭汤。",
+    "更好的方式是用带龙头容器，让水流出来，而不是伸勺进去。",
+    "所有人用自己的杯子接水，不共用瓶口。",
+    "每天清洁桶口、龙头和水勺。",
+    "发现有人把手、杯子或脏勺伸入桶内，整桶水降级处理。"
+  ],
+  "check": [
+    "取水时没有手伸进桶。",
+    "水勺专用且干净。",
+    "饮水区不靠近污染区。"
+  ],
+  "common_mistakes": [
+    "多人对着同一瓶口喝。",
+    "盖子放地上。",
+    "用同一勺处理脏水和净水。"
+  ],
+  "fallback": "没有龙头桶时，用专用水勺，但水勺要挂起晾干。",
+  "stop_or_escalate": [
+    "桶内出现异味、虫子、漂浮物。",
+    "有人误把清洁水倒入饮水桶。"
+  ],
+  "notes": "净水最常见的失败点是处理后污染。",
+  "category_original": "饮水与水源",
+  "domains": [
+    "water",
+    "food",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "water_treatment",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket"
+  ],
+  "keywords": [
+    "公共饮水点",
+    "倒水不伸手",
+    "饮用水",
+    "水源",
+    "净水",
+    "水桶",
+    "食物",
+    "污染",
+    "contamination",
+    "drinking_water",
+    "bucket",
+    "water_rationing",
+    "water_treatment",
+    "hygiene_contamination",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物"
+  ]
+}

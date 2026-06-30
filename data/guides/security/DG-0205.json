@@ -1,0 +1,78 @@
+{
+  "id": "DG-0205",
+  "title": "敲击求救信号",
+  "category": "通信信息与数据安全",
+  "scenario": "被困在房间、废墟、车内、地下空间或视线受阻位置。",
+  "goal": "用节奏信号吸引附近人员注意。",
+  "tools": [
+    "金属物",
+    "硬物",
+    "手电可选"
+  ],
+  "steps": [
+    "先确认敲击不会造成结构继续坍塌。",
+    "选择能传声的物体，例如管道、金属门、墙体坚硬处。",
+    "使用固定节奏，例如连续三下，停顿，再三下。",
+    "保存体力，不要一直乱敲。",
+    "听到回应后，继续用同样节奏确认位置。",
+    "如果有手电，在听到靠近时配合闪光。"
+  ],
+  "check": [
+    "信号有固定节奏。",
+    "没有盲目耗尽体力。",
+    "能回应外部声音。"
+  ],
+  "common_mistakes": [
+    "一直乱喊乱敲。",
+    "敲击不稳定结构。",
+    "听到外部声音后反而换信号。"
+  ],
+  "fallback": "没有硬物时，用脚跟、石头、瓶子或工具柄敲击。",
+  "stop_or_escalate": [
+    "空气变差、受伤加重、结构异响时，减少动作并等待外部定位。"
+  ],
+  "notes": "求救信号要重复、简单、能识别。",
+  "category_original": "信号标记",
+  "domains": [
+    "security",
+    "comms",
+    "shelter",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "signal_plan",
+    "personnel_change"
+  ],
+  "objects": [
+    "signal",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "敲击求救信号",
+    "安全",
+    "通信",
+    "信号",
+    "房间",
+    "signal_plan",
+    "personnel_change",
+    "signal",
+    "people",
+    "person",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "id": "DG-0181",
+  "title": "雷雨前准备",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "看到乌云快速堆积、雷声、强风、气压变化或远处闪电。",
+  "goal": "在雷雨前保护人员、设备和物资。",
+  "tools": [
+    "塑料布",
+    "绳子",
+    "防水袋",
+    "手电",
+    "收纳箱"
+  ],
+  "steps": [
+    "先把晾晒衣物、纸质资料、药品、电子设备收回。",
+    "检查屋顶、窗边、帐篷、防水布和排水沟。",
+    "远离孤立大树、金属高杆、水边和开阔高地。",
+    "把充电线和不必要电器断开，避免雷雨时乱插拔。",
+    "把应急灯、水和鞋放在固定位置。",
+    "雷雨期间暂停高处作业、涉水和外出取物。"
+  ],
+  "check": [
+    "关键物资已防水。",
+    "人员离开高风险位置。",
+    "排水点没有明显堵塞。"
+  ],
+  "common_mistakes": [
+    "雷雨中上屋顶修东西。",
+    "站在树下避雨。",
+    "电子设备放窗边淋水。"
+  ],
+  "fallback": "来不及全面收拾时，优先保护药品、证件、电子设备、干衣物和睡眠区。",
+  "stop_or_escalate": [
+    "雷声近、积水快速增加、强风掀动屋顶或防水布时，转入室内避险。"
+  ],
+  "notes": "雷雨前十分钟，比雷雨中一小时更好用。",
+  "category_original": "天气与环境观察",
+  "domains": [
+    "disaster",
+    "power",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "inventory",
+    "people",
+    "person",
+    "supplies"
+  ],
+  "keywords": [
+    "雷雨前准备",
+    "设备",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "inventory",
+    "people",
+    "person",
+    "supplies",
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

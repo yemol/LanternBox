@@ -1,0 +1,87 @@
+{
+  "id": "DG-0240",
+  "title": "小型鱼缸或水桶养殖风险",
+  "category": "种植养殖与采集",
+  "scenario": "想用桶、缸、小池养鱼、螺或其他水生食物来源。",
+  "goal": "先控制水质和卫生风险，避免变成臭水和蚊虫源。",
+  "tools": [
+    "水桶或缸",
+    "网罩",
+    "水质观察记录",
+    "饲料",
+    "换水工具"
+  ],
+  "steps": [
+    "容器远离饮用水区和睡眠区。",
+    "水体必须有遮盖或网罩，避免蚊虫繁殖和儿童跌入。",
+    "不要过度投喂，剩饵会迅速腐败。",
+    "每天观察水味、颜色、动物浮头、死亡和蚊虫。",
+    "死鱼死螺及时捞出，工具专用。",
+    "换水不要倒向饮水点、厨房和儿童活动区。",
+    "记录投喂和死亡情况。"
+  ],
+  "check": [
+    "水体不发臭。",
+    "没有蚊虫大量滋生。",
+    "死体及时处理。"
+  ],
+  "common_mistakes": [
+    "把养殖桶放厨房旁。",
+    "过量投喂。",
+    "死鱼泡在水里不捞。"
+  ],
+  "fallback": "没有稳定水源和管理时间时，不建议开始水桶养殖。",
+  "stop_or_escalate": [
+    "水体发臭、动物大量死亡、蚊虫爆发、儿童接触风险增加时，停止养殖并清理。"
+  ],
+  "notes": "小型水产不是免费食物，它先是一个水质管理任务。",
+  "category_original": "水产与小型养殖",
+  "domains": [
+    "water",
+    "security",
+    "planting",
+    "hygiene",
+    "food"
+  ],
+  "intents": [
+    "water_rationing",
+    "water_treatment",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "unsafe_water",
+    "food_production"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket"
+  ],
+  "keywords": [
+    "小型鱼缸或水桶养殖风险",
+    "水桶",
+    "风险",
+    "种植",
+    "食物",
+    "unsafe_water",
+    "food_production",
+    "drinking_water",
+    "bucket",
+    "water_rationing",
+    "water_treatment",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给"
+  ]
+}

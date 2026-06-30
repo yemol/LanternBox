@@ -1,0 +1,86 @@
+{
+  "id": "DG-0428",
+  "title": "外部观察日志",
+  "category": "库存资料与成员档案",
+  "scenario": "避难点周边出现人员流动、车辆、烟火、动物、噪声、光线、气味或天气变化。",
+  "goal": "把外部变化记录成可比较的信息，而不是只靠感觉。",
+  "tools": [
+    "记录本",
+    "时间工具",
+    "地图",
+    "笔"
+  ],
+  "steps": [
+    "每次观察都写下时间、地点和观察者。",
+    "记录看到的事实，例如人数、方向、车辆、烟、声音、气味，不先写结论。",
+    "把不确定内容标为待确认。",
+    "同一异常连续出现时，记录频率和变化。",
+    "观察点不要长期暴露在窗边、门口或高处明显位置。",
+    "每天晚间汇总一次外部观察，判断是否影响路线、取水或值守。",
+    "确认过期的风险也要标记为已缓解。"
+  ],
+  "check": [
+    "记录有时间和观察者。",
+    "事实和猜测分开。",
+    "每天有汇总。"
+  ],
+  "common_mistakes": [
+    "只写感觉外面不对劲。",
+    "把猜测当事实传播。",
+    "长期趴窗观察暴露位置。"
+  ],
+  "fallback": "没有记录本时，用纸条按时间顺序夹在一起。",
+  "stop_or_escalate": [
+    "观察到火灾、冲突、人员聚集、污染扩散或路线被封时，立即通知负责人。"
+  ],
+  "notes": "观察日志是给外部世界做体温表。",
+  "category_original": "外部观察",
+  "domains": [
+    "records",
+    "shelter",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "fever",
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "temperature",
+    "inventory",
+    "people",
+    "log",
+    "person"
+  ],
+  "keywords": [
+    "外部观察日志",
+    "记录",
+    "日志",
+    "fever",
+    "inventory_change",
+    "personnel_change",
+    "temperature",
+    "inventory",
+    "people",
+    "log",
+    "person",
+    "medical_fever_respiratory",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

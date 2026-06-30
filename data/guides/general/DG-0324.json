@@ -1,0 +1,77 @@
+{
+  "id": "DG-0324",
+  "title": "个人外出包检查",
+  "category": "个人装备与防护",
+  "scenario": "成员需要外出取水、交易、侦察、送信、搬运或短途撤离。",
+  "goal": "让每个人带齐最低行动装备，不依赖临时翻找。",
+  "tools": [
+    "背包",
+    "清单",
+    "水",
+    "手电",
+    "联络卡",
+    "哨子"
+  ],
+  "steps": [
+    "外出前按清单检查：水、联络卡、照明、哨子、简单急救、遮雨、个人药。",
+    "根据任务加入工具、地图、记录本、防护手套或容器。",
+    "背包重量控制在本人能安全行走的范围内。",
+    "高敏感资料不随普通外出包携带，除非任务必须。",
+    "外出包内物品固定位置，黑暗中能摸到手电和哨子。",
+    "返回后补回消耗品，晾干潮湿物。",
+    "每周做一次外出包复查。"
+  ],
+  "check": [
+    "外出包有基础物资。",
+    "手电和哨子容易拿到。",
+    "返回后补回消耗品。"
+  ],
+  "common_mistakes": [
+    "出门前临时乱翻。",
+    "包太重影响行动。",
+    "用完急救用品不补。"
+  ],
+  "fallback": "没有完整背包时，用腰包、布袋或口袋分装最低物资。",
+  "stop_or_escalate": [
+    "外出包缺水、缺光源、缺联络卡时，不执行非紧急外出。"
+  ],
+  "notes": "外出包不是装得多，是关键时刻不用找。",
+  "category_original": "个人装备管理",
+  "domains": [
+    "general",
+    "disaster",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "temporary_repair",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "people"
+  ],
+  "keywords": [
+    "个人外出包检查",
+    "撤离",
+    "evacuation_decision",
+    "temporary_repair",
+    "personnel_change",
+    "drinking_water",
+    "people",
+    "shelter_disaster_evacuate",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

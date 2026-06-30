@@ -1,0 +1,79 @@
+{
+  "id": "DG-0239",
+  "title": "兔子或小动物粪便管理",
+  "category": "种植养殖与采集",
+  "scenario": "饲养兔子、鸡鸭、宠物或其他小动物，粪便开始堆积。",
+  "goal": "减少臭味、苍蝇、病原和饮食区污染。",
+  "tools": [
+    "铲子",
+    "手套",
+    "垫料",
+    "垃圾袋",
+    "堆肥区可选"
+  ],
+  "steps": [
+    "动物区远离厨房、饮水点和睡眠区。",
+    "每天清理明显粪便和湿垫料。",
+    "干粪和垫料可视情况进入专门堆肥区，但不和人类厕所混放。",
+    "病弱动物粪便单独处理，不进入普通堆肥。",
+    "清理工具固定在动物区，不回厨房使用。",
+    "清理后洗手，鞋底必要时清洁。"
+  ],
+  "check": [
+    "动物区和饮食区分开。",
+    "清理工具专用。",
+    "病弱动物粪便没有混入普通堆肥。"
+  ],
+  "common_mistakes": [
+    "动物粪便堆在取水路线旁。",
+    "铲粪工具回厨房用。",
+    "病弱动物粪便直接堆肥种菜。"
+  ],
+  "fallback": "没有垫料时，用干草、碎纸板、干叶临时吸湿。",
+  "stop_or_escalate": [
+    "臭味严重、苍蝇爆发、动物腹泻、多人肠胃不适时，重做动物区卫生。"
+  ],
+  "notes": "养殖收益很小的时候，卫生成本反而更要算清楚。",
+  "category_original": "水产与小型养殖",
+  "domains": [
+    "water",
+    "planting",
+    "hygiene",
+    "medical",
+    "food"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "contamination",
+    "food_production"
+  ],
+  "objects": [
+    "drinking_water"
+  ],
+  "keywords": [
+    "兔子或小动物粪便管理",
+    "种植",
+    "污染",
+    "contamination",
+    "food_production",
+    "drinking_water",
+    "hygiene_contamination",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "窗外",
+    "夜间可疑"
+  ]
+}

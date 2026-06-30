@@ -1,0 +1,88 @@
+{
+  "id": "DG-0147",
+  "title": "灾后损失记录",
+  "category": "库存资料与成员档案",
+  "scenario": "房屋、设备、物资、农具、车辆或个人物品因灾害损坏。",
+  "goal": "为恢复秩序后的报备、保险、重建和追踪提供证据。",
+  "tools": [
+    "相机或手机",
+    "记录本",
+    "标签",
+    "资料袋"
+  ],
+  "steps": [
+    "在安全前提下拍摄损坏物品和现场，不为拍照进入危险区。",
+    "记录日期、地点、损坏原因和物品名称。",
+    "保留关键凭证、购买记录、编号和库存记录。",
+    "把照片和文字按日期整理。",
+    "纸质记录和电子记录各保留一份。",
+    "如果物资被丢弃，记录丢弃原因和处理方式。"
+  ],
+  "check": [
+    "损失有照片或文字记录。",
+    "日期和地点清楚。",
+    "危险区没有为了拍照进入。"
+  ],
+  "common_mistakes": [
+    "灾后只靠回忆。",
+    "随手删照片。",
+    "把关键凭证当垃圾丢掉。"
+  ],
+  "fallback": "没有拍照设备时，用文字画简图，记录编号和位置。",
+  "stop_or_escalate": [
+    "结构危险、火灾余烬、洪水污染未处理时，不为记录进入现场。"
+  ],
+  "notes": "记录不是矫情，灾后重建会用得上。",
+  "category_original": "证件与资料",
+  "domains": [
+    "power",
+    "records",
+    "security"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "building",
+    "inventory",
+    "people",
+    "log",
+    "supplies"
+  ],
+  "keywords": [
+    "灾后损失记录",
+    "设备",
+    "记录",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "building",
+    "inventory",
+    "people",
+    "log",
+    "supplies",
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

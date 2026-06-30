@@ -1,0 +1,72 @@
+{
+  "id": "DG-0187",
+  "title": "湿冷天气脚部保护",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "雨天、洪水后、泥地、长距离步行或鞋袜潮湿。",
+  "goal": "减少水泡、冻伤、感染和行走能力下降。",
+  "tools": [
+    "干袜子",
+    "塑料袋",
+    "鞋垫",
+    "毛巾",
+    "脚粉可选"
+  ],
+  "steps": [
+    "每天检查脚底、脚趾缝、脚跟和脚踝。",
+    "湿袜尽快换下，挂起晾干。",
+    "没有防水鞋时，可用塑料袋短时间隔水，但要防闷湿。",
+    "睡前让脚干燥，必要时垫高。",
+    "水泡不要随意撕皮，保持清洁覆盖。",
+    "鞋子进水后清理泥沙，避免磨脚。"
+  ],
+  "check": [
+    "脚部每天检查。",
+    "睡前脚是干的。",
+    "水泡和破皮被覆盖。"
+  ],
+  "common_mistakes": [
+    "湿袜穿一整天再睡。",
+    "水泡撕破继续走。",
+    "鞋里泥沙不清理。"
+  ],
+  "fallback": "干袜不足时，轮换两双袜子，一双穿一双晾。",
+  "stop_or_escalate": [
+    "脚部红肿热痛、流脓、持续麻木、发黑或无法行走时，停止长距离移动。"
+  ],
+  "notes": "脚坏了，路线再好也走不完。",
+  "category_original": "季节与保暖防暑",
+  "domains": [
+    "disaster",
+    "shelter",
+    "evacuation",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "flood"
+  ],
+  "objects": [
+    "drinking_water",
+    "route"
+  ],
+  "keywords": [
+    "湿冷天气脚部保护",
+    "洪水",
+    "保暖",
+    "路线",
+    "flood",
+    "drinking_water",
+    "route",
+    "shelter_disaster_evacuate",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

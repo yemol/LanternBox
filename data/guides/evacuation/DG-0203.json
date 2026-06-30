@@ -1,0 +1,75 @@
+{
+  "id": "DG-0203",
+  "title": "返回路线保障",
+  "category": "撤离交通与路线",
+  "scenario": "外出取水、侦察、交易、维修后必须安全返回。",
+  "goal": "防止只规划去程、不规划返程。",
+  "tools": [
+    "地图",
+    "水",
+    "照明",
+    "时间表",
+    "记录本"
+  ],
+  "steps": [
+    "出发前确定返程路线和备用返程路线。",
+    "把水、体力和电量按返程保留底线分配。",
+    "不在去程耗尽全部照明、电池和体力。",
+    "每到岔路记录方向，必要时做低暴露标记。",
+    "遇到路线变危险时，不硬闯，转备用路线或原地等待。",
+    "返回后记录实际用时和风险点。"
+  ],
+  "check": [
+    "有返程路线。",
+    "保留返程水和照明。",
+    "实际用时被记录。"
+  ],
+  "common_mistakes": [
+    "只想着到达目的地。",
+    "去程搬太多导致返程走不动。",
+    "返程才发现没有灯。"
+  ],
+  "fallback": "如果返程资源不足，缩短任务范围，先返回安全点。",
+  "stop_or_escalate": [
+    "天气恶化、天黑、成员受伤、负重过高时，停止继续深入并优先返程。"
+  ],
+  "notes": "活着回来，任务才算完成。",
+  "category_original": "地图路线",
+  "domains": [
+    "evacuation",
+    "security",
+    "tools",
+    "comms",
+    "disaster"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "temporary_repair"
+  ],
+  "objects": [
+    "drinking_water",
+    "route"
+  ],
+  "keywords": [
+    "返回路线保障",
+    "撤离",
+    "路线",
+    "安全",
+    "维修",
+    "evacuation_decision",
+    "temporary_repair",
+    "drinking_water",
+    "route",
+    "shelter_disaster_evacuate",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

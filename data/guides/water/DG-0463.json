@@ -1,0 +1,84 @@
+{
+  "id": "DG-0463",
+  "title": "紧急配水记录",
+  "category": "水与食物保障",
+  "scenario": "饮用水低于安全线，需要按人分配。",
+  "goal": "确保配水公平、可追踪，并优先保护高风险成员。",
+  "tools": [
+    "量杯",
+    "成员名单",
+    "记录本",
+    "水桶"
+  ],
+  "steps": [
+    "确认当前可饮用水总量。",
+    "列出成员和特殊需求：儿童、老人、病人、孕产、重体力。",
+    "设定下一次取水前的基础配水量。",
+    "每次配水使用固定量杯或容器。",
+    "发放时记录时间、人员和数量。",
+    "不在记录外私自加水，特殊加水必须写原因。",
+    "每次取水成功后重新调整配水线。"
+  ],
+  "check": [
+    "总水量清楚。",
+    "每人配水有记录。",
+    "特殊需求有说明。"
+  ],
+  "common_mistakes": [
+    "凭感觉倒水。",
+    "熟人多拿。",
+    "特殊加水不记录引发争吵。"
+  ],
+  "fallback": "没有量杯时，用同一只碗或瓶子作为临时单位。",
+  "stop_or_escalate": [
+    "有人出现明显脱水、意识异常、持续腹泻或高热时，立即优先医疗用水。"
+  ],
+  "notes": "配水记录不是冷冰冰，是防止口渴把队伍撕开。",
+  "category_original": "缺水优先级",
+  "domains": [
+    "water",
+    "food",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "water_rationing",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "water_outage",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "people",
+    "log"
+  ],
+  "keywords": [
+    "紧急配水记录",
+    "饮用水",
+    "食物",
+    "安全",
+    "风险",
+    "记录",
+    "water_outage",
+    "personnel_change",
+    "drinking_water",
+    "people",
+    "log",
+    "water_rationing",
+    "records_inventory_people",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "id": "DG-0279",
+  "title": "口令设置规则",
+  "category": "通信信息与数据安全",
+  "scenario": "需要给成员档案、加密备份、设备登录或高敏感资料设置口令。",
+  "goal": "让口令既能记住，又不容易被猜到。",
+  "tools": [
+    "口令提示纸",
+    "信封",
+    "记录本"
+  ],
+  "steps": [
+    "不要使用生日、姓名、手机号、门牌号、常见词作为口令。",
+    "口令应足够长，可以使用一句自己能记住的短句组合。",
+    "不同高敏感位置不要全部用同一个口令。",
+    "不要把完整口令写在设备外壳、桌面文件或普通日记里。",
+    "可以保存口令提示，但提示不能让外人直接猜出答案。",
+    "设置后立刻测试能否解锁。",
+    "更换口令后同步更新密封提示。"
+  ],
+  "check": [
+    "口令足够长。",
+    "完整口令没有明文外露。",
+    "更换后能解锁。"
+  ],
+  "common_mistakes": [
+    "用生日当口令。",
+    "所有模块一个口令。",
+    "把口令贴在电脑旁。"
+  ],
+  "fallback": "记忆压力大时，使用长短句加个人规则，而不是短数字。",
+  "stop_or_escalate": [
+    "怀疑口令泄露、设备外借、成员离开访问范围时，立即更换口令。"
+  ],
+  "notes": "口令不是门帘，是门锁。",
+  "category_original": "口令与敏感资料管理",
+  "domains": [
+    "power",
+    "security",
+    "tools",
+    "comms",
+    "records"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "signal_plan",
+    "door_window_security",
+    "personnel_change"
+  ],
+  "objects": [
+    "door",
+    "lock",
+    "people"
+  ],
+  "keywords": [
+    "口令设置规则",
+    "设备",
+    "安全",
+    "门锁",
+    "通信",
+    "口令",
+    "signal_plan",
+    "door_window_security",
+    "personnel_change",
+    "door",
+    "lock",
+    "people",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "tools_security_repair",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

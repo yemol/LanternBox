@@ -1,0 +1,80 @@
+{
+  "id": "DG-0373",
+  "title": "工具防锈防潮",
+  "category": "工具维修与替代制作",
+  "scenario": "雨季、潮湿、洪水后或室内结露，金属工具容易生锈。",
+  "goal": "延长工具寿命，避免卡死、断裂和割伤。",
+  "tools": [
+    "干布",
+    "油脂少量可选",
+    "防水袋",
+    "干燥材料",
+    "标签"
+  ],
+  "steps": [
+    "使用后擦干工具，尤其是刀口、钳口、螺丝刀头和锯齿。",
+    "潮湿工具不要直接放回密闭箱，先通风晾干。",
+    "轻微锈迹及时擦除，必要时少量上油保护。",
+    "工具箱底部垫纸板或干布，吸收少量潮气。",
+    "不同清洁程度工具分区，污水工具先清理再归位。",
+    "每周检查工具箱是否潮湿、霉味或有锈粉。",
+    "洪水或污水接触后的工具单独清洗、干燥和标记。"
+  ],
+  "check": [
+    "工具干燥后收纳。",
+    "工具箱无明显潮气。",
+    "锈迹能及时发现。"
+  ],
+  "common_mistakes": [
+    "湿工具直接封箱。",
+    "锈刀继续处理食物。",
+    "污水工具回到干净工具区。"
+  ],
+  "fallback": "没有防锈油时，至少保持干燥、通风和隔离地面潮气。",
+  "stop_or_escalate": [
+    "工具卡死、锈蚀严重、刀刃崩口、钳口松动时，停止高风险使用。"
+  ],
+  "notes": "锈不是突然坏掉，是工具慢慢发出的求救声。",
+  "category_original": "工具维护与耗材",
+  "domains": [
+    "tools",
+    "disaster",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "wound",
+    "flood",
+    "temporary_repair"
+  ],
+  "objects": [
+    "drinking_water",
+    "tools"
+  ],
+  "keywords": [
+    "工具防锈防潮",
+    "工具",
+    "维修",
+    "洪水",
+    "wound",
+    "flood",
+    "temporary_repair",
+    "drinking_water",
+    "tools",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

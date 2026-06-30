@@ -1,0 +1,88 @@
+{
+  "id": "DG-0340",
+  "title": "黑暗中找物规则",
+  "category": "居住卫生与空间管理",
+  "scenario": "夜间或停电时需要找药、手电、鞋、水、工具或证件。",
+  "goal": "避免翻乱系统、撞伤和误拿。",
+  "tools": [
+    "低亮灯",
+    "固定收纳点",
+    "标签",
+    "触摸标记"
+  ],
+  "steps": [
+    "先停下想清楚目标，不边走边翻。",
+    "使用低亮灯照地面和标签，不强光扫全屋。",
+    "只打开目标收纳区，不翻无关箱子。",
+    "物品取出后立刻关闭箱盖，避免绊倒。",
+    "找不到时叫醒负责人或查看清单，不乱移动所有物资。",
+    "找到后把被移动的物品复位。",
+    "次日补充标签或调整归位点，避免下次继续找。"
+  ],
+  "check": [
+    "只翻目标区域。",
+    "找完有复位。",
+    "找不到时不乱拆系统。"
+  ],
+  "common_mistakes": [
+    "摸黑到处翻箱。",
+    "找一个东西弄乱一整屋。",
+    "拿错药或工具。"
+  ],
+  "fallback": "没有标签时，用触摸标记、绳结或固定位置帮助夜间识别。",
+  "stop_or_escalate": [
+    "夜间找药、燃料、锐器时无法确认身份或用途，必须开灯复核。"
+  ],
+  "notes": "黑暗中找东西，最怕把秩序也一起翻出来。",
+  "category_original": "黑暗环境安全",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "power",
+    "security",
+    "tools"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "power_outage",
+    "night"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "tools",
+    "flashlight"
+  ],
+  "keywords": [
+    "黑暗中找物规则",
+    "停电",
+    "夜间",
+    "安全",
+    "工具",
+    "power_outage",
+    "night",
+    "drinking_water",
+    "medicine",
+    "tools",
+    "flashlight",
+    "power_lighting_energy",
+    "tools_security_repair",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

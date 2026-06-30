@@ -1,0 +1,74 @@
+{
+  "id": "DG-0530",
+  "title": "成员档案应急读取",
+  "category": "库存资料与成员档案",
+  "scenario": "成员昏迷、走失、转运或无法表达，需要读取关键资料。",
+  "goal": "在紧急情况下快速获取必要信息，同时不过度暴露隐私。",
+  "tools": [
+    "应急口令",
+    "成员卡",
+    "档案系统",
+    "记录本"
+  ],
+  "steps": [
+    "先判断是否确实需要读取档案。",
+    "优先读取最低必要内容：过敏、慢病、用药、紧急联系人。",
+    "不打开与当前事件无关的证件和私人资料。",
+    "读取后记录时间、读取人和原因。",
+    "现场只口头传达必要信息。",
+    "事件结束后关闭档案并检查访问记录。",
+    "如误读或过度读取，记录并复盘。"
+  ],
+  "check": [
+    "只读必要信息。",
+    "访问有记录。",
+    "事件后关闭档案。"
+  ],
+  "common_mistakes": [
+    "一出事就翻全部资料。",
+    "读完不关。",
+    "把证件信息公开说。"
+  ],
+  "fallback": "电子系统打不开时，使用成员随身信息卡和密封纸质资料。",
+  "stop_or_escalate": [
+    "过敏、用药、身份确认、转运需要时，可启动应急读取。"
+  ],
+  "notes": "应急读取像开急救箱，只拿救命用的东西。",
+  "category_original": "成员信息登记前置",
+  "domains": [
+    "security",
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "consciousness_change",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "成员档案应急读取",
+    "登记",
+    "consciousness_change",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "inventory",
+    "people",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

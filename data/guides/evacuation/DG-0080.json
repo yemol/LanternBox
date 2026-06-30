@@ -1,0 +1,83 @@
+{
+  "id": "DG-0080",
+  "title": "集合点变更规则",
+  "category": "撤离交通与路线",
+  "scenario": "原集合点被封锁、淹没、不安全或无法到达。",
+  "goal": "让分散成员能理解新去向，减少互相错过。",
+  "tools": [
+    "地图",
+    "纸条",
+    "防水袋",
+    "笔",
+    "约定标记"
+  ],
+  "steps": [
+    "出发前就设定主集合点和两个备用集合点。",
+    "如果主集合点不可用，转移到备用点时留下变更信息。",
+    "纸条写明日期、时间、转移人数、去向、原因和等待时长。",
+    "纸条放在约定隐蔽位置，不贴在容易暴露的外墙。",
+    "到备用点后等待预先约定时间，再决定是否继续转移。",
+    "每次变更都在地图和日记中同步记录。"
+  ],
+  "check": [
+    "有主点和备用点。",
+    "变更信息有时间和方向。",
+    "成员知道等待规则。"
+  ],
+  "common_mistakes": [
+    "临时换点不留信息。",
+    "集合点只告诉成年人不告诉儿童。",
+    "所有备用点都选在同一风险区域。"
+  ],
+  "fallback": "没有纸条时，用约定标记加箭头和时间简写，但要提前训练。",
+  "stop_or_escalate": [
+    "集合点附近出现冲突、洪水、火灾、坍塌、暴露风险时，启用备用点。"
+  ],
+  "notes": "集合点不是一个点，是一套规则。",
+  "category_original": "撤离与路线",
+  "domains": [
+    "evacuation",
+    "security",
+    "comms",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "signal_plan",
+    "personnel_change"
+  ],
+  "objects": [
+    "route",
+    "meeting_point",
+    "lock",
+    "people"
+  ],
+  "keywords": [
+    "集合点变更规则",
+    "撤离",
+    "路线",
+    "集合点",
+    "安全",
+    "evacuation_decision",
+    "signal_plan",
+    "personnel_change",
+    "route",
+    "meeting_point",
+    "lock",
+    "people",
+    "shelter_disaster_evacuate",
+    "comms_signal_meeting",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

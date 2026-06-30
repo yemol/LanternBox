@@ -1,0 +1,90 @@
+{
+  "id": "DG-0335",
+  "title": "夜间值守照明",
+  "category": "能源照明与设备",
+  "scenario": "夜间有人负责入口、火源、病人、水位、动物或外部动静观察。",
+  "goal": "让值守者看得见关键点，同时不浪费电和暴露位置。",
+  "tools": [
+    "低亮灯",
+    "手电",
+    "遮光布",
+    "值守表",
+    "哨子"
+  ],
+  "steps": [
+    "值守点只保留低亮环境光，强光手电作为短时检查工具。",
+    "灯光朝地面或墙面反射，不直接照向外部。",
+    "手电使用前先遮挡，再短暂打开确认。",
+    "值守者知道备用灯和哨子位置。",
+    "每班交接时确认灯具电量和异常情况。",
+    "发现外部人员靠近时，先关闭非必要灯光，观察再决定。",
+    "值守结束后把灯具归位并记录电量。"
+  ],
+  "check": [
+    "值守点低亮可见。",
+    "强光只短时使用。",
+    "交接检查电量。"
+  ],
+  "common_mistakes": [
+    "值守时开大灯一整夜。",
+    "强光扫射外部。",
+    "交接不管灯还有多少电。"
+  ],
+  "fallback": "没有低亮灯时，用遮光布包手电，露出很小一部分光。",
+  "stop_or_escalate": [
+    "外部人员跟随灯光、灯具快没电、值守者看不清关键风险时，调整方案。"
+  ],
+  "notes": "值守灯光要像猫眼，不要像舞台灯。",
+  "category_original": "照明与夜间行动",
+  "domains": [
+    "power",
+    "security",
+    "medical",
+    "water",
+    "disaster"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "flood",
+    "night",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "patient",
+    "lighting"
+  ],
+  "keywords": [
+    "夜间值守照明",
+    "照明",
+    "设备",
+    "夜间",
+    "水位",
+    "flood",
+    "night",
+    "resource_exposure",
+    "drinking_water",
+    "patient",
+    "lighting",
+    "medical_fever_respiratory",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "能源照明"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "太阳能充电"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "id": "DG-0170",
+  "title": "动物尸体处理",
+  "category": "种植养殖与采集",
+  "scenario": "住所、营地、水源附近发现死鼠、死鸟、宠物尸体或其他动物尸体。",
+  "goal": "减少腐败、虫害、污染水源和接触风险。",
+  "tools": [
+    "手套",
+    "口罩",
+    "铲子",
+    "垃圾袋",
+    "石灰或干土可选",
+    "记录本"
+  ],
+  "steps": [
+    "先让儿童和宠物远离。",
+    "戴手套和口罩，不徒手触碰尸体。",
+    "用铲子、硬纸板或工具把尸体放入袋中。",
+    "尸体接触过的地面用干土、石灰或清洁方式处理。",
+    "处理位置远离饮水点、厨房和睡眠区。",
+    "处理后洗手，工具单独清洗或隔离。",
+    "记录发现位置和可能污染范围。"
+  ],
+  "check": [
+    "尸体已移离生活区。",
+    "处理者有防护。",
+    "接触区域已清理或标记。"
+  ],
+  "common_mistakes": [
+    "徒手拿动物尸体。",
+    "把尸体丢在水源附近。",
+    "工具处理后直接回厨房用。"
+  ],
+  "fallback": "没有袋子时，用深埋方式处理，但必须远离水源和菜地。",
+  "stop_or_escalate": [
+    "尸体数量异常、靠近水源、伴随大量虫害或多人出现不适时，封锁相关区域。"
+  ],
+  "notes": "动物尸体处理要快，但不能脏手快。",
+  "category_original": "动物与宠物",
+  "domains": [
+    "security",
+    "planting",
+    "shelter",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "food_spoilage",
+    "unsafe_water",
+    "contamination",
+    "food_production"
+  ],
+  "objects": [
+    "drinking_water",
+    "building"
+  ],
+  "keywords": [
+    "动物尸体处理",
+    "风险",
+    "种植",
+    "住所",
+    "污染",
+    "food_spoilage",
+    "unsafe_water",
+    "contamination",
+    "food_production",
+    "drinking_water",
+    "building",
+    "hygiene_contamination",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给"
+  ]
+}

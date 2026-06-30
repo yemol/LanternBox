@@ -1,0 +1,87 @@
+{
+  "id": "DG-0471",
+  "title": "疑似传染症状分区",
+  "category": "医疗急救与照护",
+  "scenario": "有人出现发热、咳嗽、腹泻、呕吐、皮疹、眼红或不明乏力。",
+  "goal": "先把可能传播风险分区，避免全员暴露。",
+  "tools": [
+    "口罩",
+    "记录本",
+    "隔离角",
+    "个人水杯",
+    "手套"
+  ],
+  "steps": [
+    "发现症状后先记录时间、症状和接触人员。",
+    "给疑似成员安排固定休息位置，尽量远离厨房、饮水和儿童活动区。",
+    "疑似成员使用独立水杯、餐具和毛巾。",
+    "照护者固定，不频繁更换多人接触。",
+    "症状未明确前，减少其参与做饭、取水和分配物资。",
+    "每天记录体温感、精神、进食、排便、咳嗽或皮疹变化。",
+    "症状消退后再逐步恢复公共活动。"
+  ],
+  "check": [
+    "疑似成员位置固定。",
+    "个人用品分开。",
+    "症状有记录。"
+  ],
+  "common_mistakes": [
+    "发热还继续给大家做饭。",
+    "共用杯子毛巾。",
+    "只说没事不记录变化。"
+  ],
+  "fallback": "空间不足时，用布帘、固定床位和个人用品分离建立最低隔离。",
+  "stop_or_escalate": [
+    "高热、持续呕吐腹泻、呼吸困难、意识异常或多人相继发病时，立即升级处理。"
+  ],
+  "notes": "疑似不是定罪，是先给传播踩刹车。",
+  "category_original": "疾病传播控制",
+  "domains": [
+    "medical",
+    "security",
+    "water",
+    "hygiene"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "fever",
+    "respiratory_symptom",
+    "resource_exposure"
+  ],
+  "objects": [
+    "vomit",
+    "diarrhea"
+  ],
+  "keywords": [
+    "疑似传染症状分区",
+    "发热",
+    "咳嗽",
+    "腹泻",
+    "呕吐",
+    "风险",
+    "fever",
+    "respiratory_symptom",
+    "resource_exposure",
+    "vomit",
+    "diarrhea",
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

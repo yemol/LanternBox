@@ -1,0 +1,87 @@
+{
+  "id": "DG-0427",
+  "title": "低电量阅读方案",
+  "category": "通信信息与数据安全",
+  "scenario": "电量不足但仍需要查指南、地图、成员记录或任务表。",
+  "goal": "减少屏幕耗电，把查询集中化。",
+  "tools": [
+    "纸质索引",
+    "低亮模式",
+    "记录本",
+    "壳中灯"
+  ],
+  "steps": [
+    "先查纸质索引，看是否必须开设备。",
+    "设备开机后一次性查多个问题，不反复开关。",
+    "屏幕调低亮度，缩短亮屏时间。",
+    "查到答案后用纸记下执行步骤。",
+    "多人问题集中给一个操作员查询。",
+    "查询结束后关闭屏幕或设备。",
+    "把频繁查询内容转成纸质卡。"
+  ],
+  "check": [
+    "先查纸质索引。",
+    "集中查询。",
+    "查后写纸本。"
+  ],
+  "common_mistakes": [
+    "每个人轮流点亮屏幕。",
+    "查完不记录又反复查。",
+    "低电量还长时间浏览。"
+  ],
+  "fallback": "设备完全没电时，启用纸质生命线卡、地图卡和药箱索引。",
+  "stop_or_escalate": [
+    "电量低于警戒线且无充电来源时，停止非保命查询。"
+  ],
+  "notes": "低电量时，屏幕每亮一次都要带着任务回来。",
+  "category_original": "低技术使用",
+  "domains": [
+    "power",
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "scarcity",
+    "personnel_change"
+  ],
+  "objects": [
+    "people",
+    "log",
+    "battery"
+  ],
+  "keywords": [
+    "低电量阅读方案",
+    "电量",
+    "安全",
+    "通信",
+    "记录",
+    "scarcity",
+    "personnel_change",
+    "people",
+    "log",
+    "battery",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

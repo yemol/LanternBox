@@ -1,0 +1,79 @@
+{
+  "id": "DG-0238",
+  "title": "动物饮水分区",
+  "category": "种植养殖与采集",
+  "scenario": "饲养宠物、家禽、兔子或其他小动物时，需要安排饮水。",
+  "goal": "避免动物饮水污染人类饮水系统。",
+  "tools": [
+    "动物水盆",
+    "标签",
+    "刷子",
+    "灰水桶",
+    "记录本"
+  ],
+  "steps": [
+    "动物水盆和人类饮水容器完全分开。",
+    "水盆放在动物区，不放厨房和人类饮水区。",
+    "每天清洗水盆，倒掉脏水。",
+    "动物不能直接从公共饮水桶喝水。",
+    "水源紧张时，也要先倒入动物盆，而不是让动物接触主水桶。",
+    "记录动物饮水异常，例如突然不喝或喝很多。"
+  ],
+  "check": [
+    "动物水盆独立。",
+    "人类饮水桶不被动物接触。",
+    "水盆定期清洗。"
+  ],
+  "common_mistakes": [
+    "宠物直接舔公共水桶。",
+    "动物水盆放厨房台边。",
+    "脏水盆一直加新水。"
+  ],
+  "fallback": "没有专用水盆时，用固定旧碗或容器，但必须贴动物专用。",
+  "stop_or_escalate": [
+    "动物腹泻、饮水异常、水盆发臭或污染人类饮水区时，重新设置分区。"
+  ],
+  "notes": "动物饮水一旦和人类饮水混线，卫生系统会被拖乱。",
+  "category_original": "水产与小型养殖",
+  "domains": [
+    "water",
+    "planting",
+    "hygiene",
+    "medical",
+    "food"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "contamination",
+    "food_production"
+  ],
+  "objects": [
+    "drinking_water"
+  ],
+  "keywords": [
+    "动物饮水分区",
+    "种植",
+    "污染",
+    "contamination",
+    "food_production",
+    "drinking_water",
+    "hygiene_contamination",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "窗外",
+    "夜间可疑"
+  ]
+}

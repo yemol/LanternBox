@@ -1,0 +1,74 @@
+{
+  "id": "DG-0163",
+  "title": "长期绝望感处理",
+  "category": "组织秩序与训练演练",
+  "scenario": "有人持续说没希望、什么都不想做、睡不好、吃不下或放弃任务。",
+  "goal": "用日常结构把人从空洞里拉回来一点。",
+  "tools": [
+    "任务卡",
+    "水",
+    "食物",
+    "同伴",
+    "记录本"
+  ],
+  "steps": [
+    "先确认是否有自伤或伤害他人的明确表达。",
+    "把任务缩小到十分钟内能完成的小事。",
+    "安排固定作息：喝水、吃饭、清洁、休息、短会。",
+    "让其和可信成员结伴，不长时间单独待在黑暗角落。",
+    "减少持续坏消息输入。",
+    "每天记录睡眠、进食、饮水和参与任务情况。"
+  ],
+  "check": [
+    "能完成小任务。",
+    "基本饮水和进食没有中断。",
+    "有人结伴观察。"
+  ],
+  "common_mistakes": [
+    "逼对方立刻振作。",
+    "让其单独承担夜间值守。",
+    "不断灌输坏消息和责备。"
+  ],
+  "fallback": "人手紧张时，也安排最小任务，例如整理标签、递水、记录时间。",
+  "stop_or_escalate": [
+    "明确自伤言语、拒绝饮水进食、意识混乱、攻击行为时，进入重点看护。"
+  ],
+  "notes": "长期生存里，心理结构也是物资。",
+  "category_original": "心理与组织",
+  "domains": [
+    "general",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "structural_risk",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "长期绝望感处理",
+    "structural_risk",
+    "inventory_change",
+    "resource_exposure",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

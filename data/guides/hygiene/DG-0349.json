@@ -1,0 +1,84 @@
+{
+  "id": "DG-0349",
+  "title": "水声和容器声控制",
+  "category": "居住卫生与空间管理",
+  "scenario": "夜间倒水、取水、洗手、移动水桶或处理灰水容易产生明显声响。",
+  "goal": "减少水桶碰撞、倒水哗响和夜间惊扰。",
+  "tools": [
+    "水勺",
+    "软垫",
+    "有盖水桶",
+    "低亮灯"
+  ],
+  "steps": [
+    "夜间取水优先用水勺，不直接抬大桶倒水。",
+    "水桶下面垫布、纸板或橡胶，减少碰地声。",
+    "桶盖轻放，不把盖子扔到地上。",
+    "取水点周围不堆金属盆和硬塑料空桶。",
+    "倒水时让水沿容器壁流下，减少哗声。",
+    "灰水桶和饮水桶分开放，避免摸黑拿错。",
+    "夜间取水后检查地面是否有水渍。"
+  ],
+  "check": [
+    "水桶有垫。",
+    "夜间用水勺。",
+    "灰水和饮水容器分开。"
+  ],
+  "common_mistakes": [
+    "抱桶猛倒。",
+    "桶盖掉地上。",
+    "摸黑拿错灰水桶。"
+  ],
+  "fallback": "没有水勺时，用小杯或瓶子慢慢取水。",
+  "stop_or_escalate": [
+    "水声引发外部注意、地面湿滑、容器混淆时，重整取水点。"
+  ],
+  "notes": "水很安静，但容器不一定。",
+  "category_original": "声音与噪声管理",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "security",
+    "water"
+  ],
+  "intents": [
+    "security_night_anomaly",
+    "water_rationing"
+  ],
+  "situations": [
+    "infection_control",
+    "night"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "outside_noise"
+  ],
+  "keywords": [
+    "水声和容器声控制",
+    "洗手",
+    "夜间",
+    "水桶",
+    "infection_control",
+    "night",
+    "drinking_water",
+    "bucket",
+    "outside_noise",
+    "security_night_anomaly",
+    "water_rationing",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "id": "DG-0361",
+  "title": "睡眠保温检查",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "低温夜晚、老人儿童睡觉、病人照护或临时营地过夜。",
+  "goal": "防止夜间受凉、失温、被褥潮湿和火源事故。",
+  "tools": [
+    "干袜",
+    "毯子",
+    "低亮灯",
+    "水",
+    "记录本"
+  ],
+  "steps": [
+    "睡前确认每个人有干袜、保暖层和隔冷垫。",
+    "检查被褥是否潮湿，潮湿被褥先更换或加隔离层。",
+    "热源、蜡烛、炭火和炉具不得在睡眠时无人看守。",
+    "鞋、手电、水、个人药放在伸手可及位置。",
+    "老人、儿童、病人睡前询问冷不冷、是否需要如厕。",
+    "夜间值守者观察重点成员是否踢被、出汗后受凉或异常安静。",
+    "早晨记录谁受凉、咳嗽或睡眠差，调整下一晚安排。"
+  ],
+  "check": [
+    "睡眠区无明火。",
+    "每个人有隔冷层。",
+    "重点成员睡前检查过。"
+  ],
+  "common_mistakes": [
+    "点蜡烛睡觉。",
+    "潮被褥继续用。",
+    "老人夜间如厕无人照看。"
+  ],
+  "fallback": "被褥不足时，优先给重点人群，其他成员增加衣物和纸板隔冷。",
+  "stop_or_escalate": [
+    "夜间出现意识异常、持续发抖、呼吸困难、跌倒或烫伤时，立即处理。"
+  ],
+  "notes": "夜晚是温度最会偷袭的时候。",
+  "category_original": "寒冷取暖与保温",
+  "domains": [
+    "disaster",
+    "shelter",
+    "medical",
+    "water",
+    "records"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "medical_elder_confusion"
+  ],
+  "situations": [
+    "elderly",
+    "temporary_repair",
+    "night"
+  ],
+  "objects": [
+    "patient",
+    "elder",
+    "people"
+  ],
+  "keywords": [
+    "睡眠保温检查",
+    "睡眠",
+    "老人",
+    "elderly",
+    "temporary_repair",
+    "night",
+    "patient",
+    "elder",
+    "people",
+    "medical_fever_respiratory",
+    "medical_elder_confusion",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

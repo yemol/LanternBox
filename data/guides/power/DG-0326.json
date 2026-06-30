@@ -1,0 +1,86 @@
+{
+  "id": "DG-0326",
+  "title": "每日随身三件套",
+  "category": "个人装备与防护",
+  "scenario": "停电、夜间、临时撤离、余震、火灾、冲突或突发集合时，需要快速行动。",
+  "goal": "让每个人随身保留最低生存三件套。",
+  "tools": [
+    "小包",
+    "哨子",
+    "手电",
+    "联络卡",
+    "水可选"
+  ],
+  "steps": [
+    "确定本小队的每日随身三件套：联络卡、哨子、低亮照明。",
+    "儿童、老人和慢病成员额外加入个人药或照护卡。",
+    "睡觉时三件套放在伸手可及的位置。",
+    "白天移动时三件套随身或放在固定小包中。",
+    "每天晚上检查照明是否可用，哨子是否在，联络卡是否干燥。",
+    "不要把三件套随手借出后不归还。",
+    "撤离演练时先摸到三件套再拿大包。"
+  ],
+  "check": [
+    "联络卡在身边。",
+    "哨子能找到。",
+    "照明可用。"
+  ],
+  "common_mistakes": [
+    "手电在公共箱里找不到。",
+    "儿童没有联络卡。",
+    "哨子被当玩具吹完乱丢。"
+  ],
+  "fallback": "没有手电时，用反光标记、低亮灯或备用电池组合替代。",
+  "stop_or_escalate": [
+    "夜间找不到成员、突然撤离、儿童走失风险增加时，立即强化三件套规则。"
+  ],
+  "notes": "三件套是最小号的撤离包。",
+  "category_original": "个人装备管理",
+  "domains": [
+    "power",
+    "disaster",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "power_outage",
+    "earthquake",
+    "evacuation_decision",
+    "temporary_repair",
+    "night"
+  ],
+  "objects": [],
+  "keywords": [
+    "每日随身三件套",
+    "停电",
+    "火灾",
+    "余震",
+    "撤离",
+    "夜间",
+    "power_outage",
+    "earthquake",
+    "evacuation_decision",
+    "temporary_repair",
+    "night",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "id": "DG-0334",
+  "title": "夜间厕所路线",
+  "category": "居住卫生与空间管理",
+  "scenario": "停电、低温、病人照护或多人共住时，夜间如厕频繁。",
+  "goal": "减少夜间摔倒、走错、污染和惊扰。",
+  "tools": [
+    "低亮灯",
+    "鞋",
+    "便盆或厕所桶",
+    "路线标记",
+    "手套"
+  ],
+  "steps": [
+    "固定床到厕所或便盆的路线，不临时改变障碍物位置。",
+    "路线地面清空水桶、绳子、工具和箱子。",
+    "睡前把鞋放在脚边同一位置。",
+    "厕所区设置低亮标记，但不强光照窗外。",
+    "便盆或厕所桶有盖，并远离饮食区。",
+    "病人、老人和儿童夜间如厕安排陪同或近距离便盆。",
+    "早晨清理路线和厕所区，避免夜间残留污染。"
+  ],
+  "check": [
+    "路线清空。",
+    "鞋在脚边。",
+    "厕所容器有盖。",
+    "重点人群有照护。"
+  ],
+  "common_mistakes": [
+    "夜间摸黑跨水桶。",
+    "便盆放厨房旁。",
+    "老人独自走远路如厕。"
+  ],
+  "fallback": "没有低亮灯时，用浅色布条、反光贴或固定触摸路线辅助。",
+  "stop_or_escalate": [
+    "夜间摔倒、便盆打翻、污染进入睡眠区时，立即重整厕所路线。"
+  ],
+  "notes": "夜间厕所路线做不好，一次摔倒就能拖慢全队。",
+  "category_original": "黑暗环境安全",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "power",
+    "security",
+    "medical"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "power_outage",
+    "contamination",
+    "night"
+  ],
+  "objects": [
+    "patient",
+    "toilet",
+    "route"
+  ],
+  "keywords": [
+    "夜间厕所路线",
+    "厕所",
+    "污染",
+    "停电",
+    "夜间",
+    "安全",
+    "power_outage",
+    "contamination",
+    "night",
+    "patient",
+    "toilet",
+    "route",
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "power_lighting_energy",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

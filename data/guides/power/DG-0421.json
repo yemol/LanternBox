@@ -1,0 +1,85 @@
+{
+  "id": "DG-0421",
+  "title": "纸质记录补录规则",
+  "category": "通信信息与数据安全",
+  "scenario": "停电、系统故障或外出期间先用纸记录，之后需要补回壳中灯。",
+  "goal": "避免纸质记录和电子系统脱节。",
+  "tools": [
+    "纸质记录本",
+    "壳中灯",
+    "笔",
+    "补录清单"
+  ],
+  "steps": [
+    "纸质记录统一写日期和时间段。",
+    "每条记录标明类型：库存、日记、医疗、路线、任务、异常。",
+    "设备恢复后由负责人集中补录。",
+    "补录时保留纸本原始记录，不立刻丢弃。",
+    "无法确定的内容标记为待确认，不编造。",
+    "补录完成后在纸本上画勾并写补录日期。",
+    "高敏感纸本补录后按敏感资料规则保存或销毁。"
+  ],
+  "check": [
+    "纸本有日期。",
+    "补录有勾选。",
+    "不确定内容没有编造。"
+  ],
+  "common_mistakes": [
+    "纸本无日期。",
+    "系统恢复后凭记忆乱补。",
+    "补录完直接丢掉敏感纸本。"
+  ],
+  "fallback": "纸本太乱时，先按日期重排，再补录关键项目。",
+  "stop_or_escalate": [
+    "医疗、药品、库存和路线纸本缺失时，优先补录并复核。"
+  ],
+  "notes": "纸是临时缓存，补录才算入库。",
+  "category_original": "低技术使用",
+  "domains": [
+    "power",
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "power_outage",
+    "temporary_repair"
+  ],
+  "objects": [
+    "log",
+    "lighting"
+  ],
+  "keywords": [
+    "纸质记录补录规则",
+    "停电",
+    "安全",
+    "通信",
+    "记录",
+    "power_outage",
+    "temporary_repair",
+    "log",
+    "lighting",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

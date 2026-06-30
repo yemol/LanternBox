@@ -1,0 +1,106 @@
+{
+  "id": "DG-0057",
+  "title": "洪水来临前：撤高和断电",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "暴雨、河水上涨、城市内涝、低洼区域开始进水。",
+  "goal": "在水位危险前，把人员、关键物资和电力风险处理好。",
+  "tools": [
+    "防水袋",
+    "应急包",
+    "手电",
+    "绳子",
+    "水位标记",
+    "鞋"
+  ],
+  "steps": [
+    "先判断水位上涨速度，在墙上或固定物上做水位标记。",
+    "人员优先向高处转移，儿童、老人、孕妇和行动不便者先走。",
+    "把药品、证件、照明、通讯设备、壳中灯 数据备份、饮用水放入防水袋。",
+    "能安全操作时，关闭低处电源和燃气，拔掉地面附近电器。",
+    "不要去地下室、地下车库、涵洞和低洼路口抢救物品。",
+    "把饮用水和食物移到高处，防止被污水浸泡。",
+    "写下当前水位、人员位置和下一步撤离方向。"
+  ],
+  "check": [
+    "人员已经离开低处。",
+    "关键包在高处或随身。",
+    "低处电器不再继续通电。",
+    "水位变化有记录。"
+  ],
+  "common_mistakes": [
+    "涉水去地下车库搬东西。",
+    "把电器继续放地面运行。",
+    "等水进门才开始收拾。"
+  ],
+  "fallback": "来不及整理时，只拿人、药、照明、证件、防水包和少量水食。",
+  "stop_or_escalate": [
+    "水位快速上涨、门外急流、下水道倒灌、低处带电风险、建筑进水加深时，立即向更高处撤离。"
+  ],
+  "notes": "洪水前几十分钟最值钱，别把它花在抢救低价值物品上。",
+  "category_original": "灾害专项",
+  "domains": [
+    "disaster",
+    "security",
+    "evacuation",
+    "shelter",
+    "power"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "power_outage",
+    "flood",
+    "evacuation_decision",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "inventory",
+    "people",
+    "person",
+    "supplies"
+  ],
+  "keywords": [
+    "洪水来临前",
+    "撤高和断电",
+    "洪水",
+    "暴雨",
+    "水位",
+    "风险",
+    "撤高",
+    "power_outage",
+    "flood",
+    "evacuation_decision",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "drinking_water",
+    "inventory",
+    "people",
+    "person",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

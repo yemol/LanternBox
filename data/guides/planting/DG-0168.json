@@ -1,0 +1,90 @@
+{
+  "id": "DG-0168",
+  "title": "家禽饮水和粪便管理",
+  "category": "种植养殖与采集",
+  "scenario": "有鸡鸭等小型家禽，或临时饲养用于蛋和肉。",
+  "goal": "让家禽成为资源，而不是污染源。",
+  "tools": [
+    "水槽",
+    "饲料容器",
+    "手套",
+    "垫料",
+    "小铲",
+    "围栏"
+  ],
+  "steps": [
+    "家禽饮水容器和人类饮水容器完全分开。",
+    "围栏远离厨房、饮水点、睡眠区和儿童活动区。",
+    "粪便每天集中清理或覆盖，避免苍蝇大量滋生。",
+    "病弱家禽单独隔离观察。",
+    "捡蛋后洗手，蛋壳明显污染的单独处理。",
+    "清理家禽区后更换或清洗鞋底和手。"
+  ],
+  "check": [
+    "家禽区和人类饮食区分开。",
+    "粪便不堆在取水路线旁。",
+    "病弱家禽不混群。"
+  ],
+  "common_mistakes": [
+    "家禽自由进入厨房。",
+    "徒手清粪后直接做饭。",
+    "家禽饮水槽和人类水桶混用。"
+  ],
+  "fallback": "没有围栏时，用绳子、箱子、木板临时划出家禽区。",
+  "stop_or_escalate": [
+    "家禽大量死亡、异常腹泻、多人腹泻或儿童接触粪便时，立即加强隔离。"
+  ],
+  "notes": "家禽是资源，也是病原和虫害入口。",
+  "category_original": "动物与宠物",
+  "domains": [
+    "planting",
+    "food",
+    "power",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "food_safety_judgment",
+    "hygiene_contamination",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "contamination",
+    "temporary_repair",
+    "food_production"
+  ],
+  "objects": [
+    "meat",
+    "drinking_water",
+    "supplies"
+  ],
+  "keywords": [
+    "家禽饮水和粪便管理",
+    "种植",
+    "肉",
+    "污染",
+    "contamination",
+    "temporary_repair",
+    "food_production",
+    "meat",
+    "drinking_water",
+    "supplies",
+    "food_safety_judgment",
+    "hygiene_contamination",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

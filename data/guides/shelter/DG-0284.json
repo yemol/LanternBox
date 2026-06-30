@@ -1,0 +1,74 @@
+{
+  "id": "DG-0284",
+  "title": "临时共同规则表",
+  "category": "组织秩序与训练演练",
+  "scenario": "多人共同避难、共用物资、共住一处或临时组成小队。",
+  "goal": "用少量明确规则减少争吵、误会和资源失控。",
+  "tools": [
+    "纸板",
+    "笔",
+    "胶带",
+    "记录本"
+  ],
+  "steps": [
+    "先列出最容易引发冲突的事项：水、食物、药、值守、取水、外出、垃圾、火源。",
+    "每项只写一条最关键规则，例如饮用水不得私自倒入非饮水桶。",
+    "规则写在公共位置，所有成员都能看到。",
+    "规则必须包含负责人和违规后的处理方式。",
+    "每天短会时只调整必要规则，不频繁大改。",
+    "新成员加入时先讲规则，再参与任务。",
+    "规则改变后写下日期和原因。"
+  ],
+  "check": [
+    "规则数量不多但清楚。",
+    "所有成员知道水、火、药、外出规则。",
+    "规则变更有日期。"
+  ],
+  "common_mistakes": [
+    "规则只口头说。",
+    "一口气写几十条没人看。",
+    "违规后临时按情绪处理。"
+  ],
+  "fallback": "没有纸板时，用记录本第一页作为共同规则页，并每天口头复述一次。",
+  "stop_or_escalate": [
+    "因同类问题反复争吵、物资异常消耗、值守缺席时，必须重新整理规则。"
+  ],
+  "notes": "规则不是为了管人，是为了减少每件小事都重新吵一遍。",
+  "category_original": "群体规则与秩序",
+  "domains": [
+    "shelter",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "临时共同规则表",
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

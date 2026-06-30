@@ -1,171 +1,6 @@
 {
   "version": "1.0.0",
-  "description": "LanternBox Retrieval Benchmark",
   "cases": [
-    {
-      "id": "food_001",
-      "enabled": true,
-      "category": "food",
-      "difficulty": "easy",
-      "question": "食物快吃完了",
-      "expect": {
-        "domains": ["food", "resource"],
-        "signals": ["resource_low"],
-        "intents": ["food_shortage"],
-        "top1": "食物短缺",
-        "top3": ["食物短缺", "口粮管理"]
-      },
-      "notes": "基础食物短缺"
-    },
-    {
-      "id": "food_002",
-      "enabled": true,
-      "category": "food",
-      "difficulty": "easy",
-      "question": "只剩三天口粮了",
-      "expect": {
-        "domains": ["food", "resource"],
-        "intents": ["food_shortage"],
-        "top1": "口粮管理"
-      },
-      "notes": "口粮配给"
-    },
-    {
-      "id": "food_003",
-      "enabled": true,
-      "category": "food",
-      "difficulty": "medium",
-      "question": "冰箱停电三天里面的肉还能吃吗",
-      "expect": {
-        "domains": ["food"],
-        "top1": "停电后冰箱食物处置"
-      },
-      "notes": "停电食物"
-    },
-    {
-      "id": "water_001",
-      "enabled": true,
-      "category": "water",
-      "difficulty": "easy",
-      "question": "停水了",
-      "expect": {
-        "domains": ["water", "resource"],
-        "signals": ["water_shortage"],
-        "intents": ["water_shortage"],
-        "top1": "大规模停水"
-      }
-    },
-    {
-      "id": "water_002",
-      "enabled": true,
-      "category": "water",
-      "difficulty": "easy",
-      "question": "只剩一桶饮用水",
-      "expect": {
-        "domains": ["water", "resource"],
-        "intents": ["water_shortage"],
-        "top1": "缺水时用途排序"
-      }
-    },
-    {
-      "id": "water_003",
-      "enabled": true,
-      "category": "water",
-      "difficulty": "medium",
-      "question": "雨水能直接喝吗",
-      "expect": {
-        "domains": ["water"],
-        "top1": "雨水收集"
-      }
-    },
-    {
-      "id": "medical_001",
-      "enabled": true,
-      "category": "medical",
-      "difficulty": "easy",
-      "question": "老人一直发烧",
-      "expect": {
-        "domains": ["medical"],
-        "top1": "咳嗽发热"
-      }
-    },
-    {
-      "id": "medical_002",
-      "enabled": true,
-      "category": "medical",
-      "difficulty": "easy",
-      "question": "一直腹泻还喝不下水",
-      "expect": {
-        "domains": ["medical", "water"],
-        "top1": "腹泻脱水"
-      }
-    },
-    {
-      "id": "medical_003",
-      "enabled": true,
-      "category": "medical",
-      "difficulty": "easy",
-      "question": "疑似骨折怎么办",
-      "expect": {
-        "domains": ["medical"],
-        "top1": "骨折固定"
-      }
-    },
-    {
-      "id": "security_001",
-      "enabled": true,
-      "category": "security",
-      "difficulty": "easy",
-      "question": "门外一直有人走来走去",
-      "expect": {
-        "domains": ["security"],
-        "top1": "可疑人员接近"
-      }
-    },
-    {
-      "id": "security_002",
-      "enabled": true,
-      "category": "security",
-      "difficulty": "medium",
-      "question": "晚上一直听见脚步声",
-      "expect": {
-        "domains": ["security"],
-        "top1": "夜间外部异响"
-      }
-    },
-    {
-      "id": "power_001",
-      "enabled": true,
-      "category": "power",
-      "difficulty": "easy",
-      "question": "插线板泡过水还能继续用吗",
-      "expect": {
-        "domains": ["power"],
-        "top1": "电线和插线板安全检查"
-      }
-    },
-    {
-      "id": "shelter_001",
-      "enabled": true,
-      "category": "shelter",
-      "difficulty": "easy",
-      "question": "屋里特别潮墙角开始发霉",
-      "expect": {
-        "domains": ["shelter"],
-        "top1": "室内防潮防霉"
-      }
-    },
-    {
-      "id": "disaster_001",
-      "enabled": true,
-      "category": "disaster",
-      "difficulty": "medium",
-      "question": "暴雨不停水位一直上涨",
-      "expect": {
-        "domains": ["disaster"],
-        "top1": "洪水来临前"
-      }
-    },
     {
       "id": "boundary_001",
       "enabled": true,
@@ -207,6 +42,223 @@
         "top1": null
       },
       "notes": "不能误判生存食物"
+    },
+    {
+      "id": "disaster_001",
+      "enabled": true,
+      "category": "disaster",
+      "difficulty": "medium",
+      "question": "暴雨不停水位一直上涨",
+      "expect": {
+        "domains": [
+          "disaster"
+        ],
+        "top1": "洪水来临前"
+      }
+    },
+    {
+      "id": "food_001",
+      "enabled": true,
+      "category": "food",
+      "difficulty": "easy",
+      "question": "食物快吃完了",
+      "expect": {
+        "domains": [
+          "food",
+          "resource"
+        ],
+        "signals": [
+          "resource_low"
+        ],
+        "intents": [
+          "food_shortage"
+        ],
+        "top1": "食物短缺",
+        "top3": [
+          "食物短缺",
+          "口粮管理"
+        ]
+      },
+      "notes": "基础食物短缺"
+    },
+    {
+      "id": "food_002",
+      "enabled": true,
+      "category": "food",
+      "difficulty": "easy",
+      "question": "只剩三天口粮了",
+      "expect": {
+        "domains": [
+          "food",
+          "resource"
+        ],
+        "intents": [
+          "food_shortage"
+        ],
+        "top1": "口粮管理"
+      },
+      "notes": "口粮配给"
+    },
+    {
+      "id": "food_003",
+      "enabled": true,
+      "category": "food",
+      "difficulty": "medium",
+      "question": "冰箱停电三天里面的肉还能吃吗",
+      "expect": {
+        "domains": [
+          "food",
+          "power"
+        ],
+        "intents": [
+          "food_safety_judgment",
+          "power_outage"
+        ],
+        "top1": "停电后冰箱食物处置"
+      },
+      "notes": "停电食物"
+    },
+    {
+      "id": "medical_001",
+      "enabled": true,
+      "category": "medical",
+      "difficulty": "easy",
+      "question": "老人一直发烧",
+      "expect": {
+        "domains": [
+          "medical"
+        ],
+        "top1": "咳嗽发热"
+      }
+    },
+    {
+      "id": "medical_002",
+      "enabled": true,
+      "category": "medical",
+      "difficulty": "easy",
+      "question": "一直腹泻还喝不下水",
+      "expect": {
+        "domains": [
+          "medical",
+          "water"
+        ],
+        "top1": "腹泻脱水"
+      }
+    },
+    {
+      "id": "medical_003",
+      "enabled": true,
+      "category": "medical",
+      "difficulty": "easy",
+      "question": "疑似骨折怎么办",
+      "expect": {
+        "domains": [
+          "medical"
+        ],
+        "top1": "骨折固定"
+      }
+    },
+    {
+      "id": "power_001",
+      "enabled": true,
+      "category": "power",
+      "difficulty": "easy",
+      "question": "插线板泡过水还能继续用吗",
+      "expect": {
+        "domains": [
+          "power"
+        ],
+        "top1": "电线和插线板安全检查"
+      }
+    },
+    {
+      "id": "security_001",
+      "enabled": true,
+      "category": "security",
+      "difficulty": "easy",
+      "question": "门外一直有人走来走去",
+      "expect": {
+        "domains": [
+          "security"
+        ],
+        "top1": "可疑人员接近"
+      }
+    },
+    {
+      "id": "security_002",
+      "enabled": true,
+      "category": "security",
+      "difficulty": "medium",
+      "question": "晚上一直听见脚步声",
+      "expect": {
+        "domains": [
+          "security"
+        ],
+        "top1": "夜间外部异响"
+      }
+    },
+    {
+      "id": "shelter_001",
+      "enabled": true,
+      "category": "shelter",
+      "difficulty": "easy",
+      "question": "屋里特别潮墙角开始发霉",
+      "expect": {
+        "domains": [
+          "shelter"
+        ],
+        "top1": "室内防潮防霉"
+      }
+    },
+    {
+      "id": "water_001",
+      "enabled": true,
+      "category": "water",
+      "difficulty": "easy",
+      "question": "停水了",
+      "expect": {
+        "domains": [
+          "water",
+          "resource"
+        ],
+        "signals": [
+          "water_shortage"
+        ],
+        "intents": [
+          "water_shortage"
+        ],
+        "top1": "大规模停水"
+      }
+    },
+    {
+      "id": "water_002",
+      "enabled": true,
+      "category": "water",
+      "difficulty": "easy",
+      "question": "只剩一桶饮用水",
+      "expect": {
+        "domains": [
+          "water",
+          "resource"
+        ],
+        "intents": [
+          "water_shortage"
+        ],
+        "top1": "缺水时用途排序"
+      }
+    },
+    {
+      "id": "water_003",
+      "enabled": true,
+      "category": "water",
+      "difficulty": "medium",
+      "question": "雨水能直接喝吗",
+      "expect": {
+        "domains": [
+          "water"
+        ],
+        "top1": "雨水收集"
+      }
     }
   ]
 }

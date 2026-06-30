@@ -1,0 +1,82 @@
+{
+  "id": "DG-0414",
+  "title": "一页生命线卡",
+  "category": "通信信息与数据安全",
+  "scenario": "设备没电、系统打不开、成员慌乱或新成员不熟壳中灯时，需要最小化关键信息。",
+  "goal": "把最重要的求生流程压缩到一页纸上。",
+  "tools": [
+    "纸",
+    "笔",
+    "防水袋",
+    "胶带"
+  ],
+  "steps": [
+    "只写最关键项目：集合点、饮水位置、药箱位置、火源关闭、夜间灯位置、紧急口令。",
+    "每项写成短句，不写长篇解释。",
+    "使用大字和编号，老人和儿童也能看清。",
+    "卡片放在固定位置，例如出口内侧、药箱旁或公共规则板。",
+    "高敏感信息不写完整，只写代号或负责人。",
+    "每次系统重大更新后检查卡片是否过期。",
+    "卡片放入防水袋或用透明袋保护。"
+  ],
+  "check": [
+    "字够大。",
+    "内容不超过一页。",
+    "高敏感信息没有完整暴露。"
+  ],
+  "common_mistakes": [
+    "把整本指南抄到一页上。",
+    "写太小没人看清。",
+    "把完整口令和隐藏物资位置写上去。"
+  ],
+  "fallback": "来不及整理时，先写水、药、火、出口、灯五项。",
+  "stop_or_escalate": [
+    "卡片过期、丢失、被外人看到或成员看不懂时，立即重做。"
+  ],
+  "notes": "一页生命线卡不是百科，是黑暗里能抓住的绳头。",
+  "category_original": "纸质备份卡",
+  "domains": [
+    "power",
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "power_outage",
+    "personnel_change"
+  ],
+  "objects": [
+    "people",
+    "lighting"
+  ],
+  "keywords": [
+    "一页生命线卡",
+    "设备",
+    "安全",
+    "通信",
+    "power_outage",
+    "personnel_change",
+    "people",
+    "lighting",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

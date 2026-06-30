@@ -1,0 +1,89 @@
+{
+  "id": "DG-0084",
+  "title": "厨房生熟分区",
+  "category": "居住卫生与空间管理",
+  "scenario": "处理肉、鱼、蛋、野外获得食物或可疑食材时。",
+  "goal": "避免生食污染熟食和餐具。",
+  "tools": [
+    "两块砧板或替代板",
+    "刀",
+    "盆",
+    "标签",
+    "肥皂"
+  ],
+  "steps": [
+    "把厨房分成生食区和熟食区。",
+    "生肉、生鱼、未清洗蔬菜只在生食区处理。",
+    "熟食、干粮、餐具只放熟食区。",
+    "处理生食后，刀、板、手都要清洗后才能碰熟食。",
+    "如果只有一把刀和一块板，顺序先处理熟食，再处理生食。",
+    "做饭结束后清洁台面、刀具、砧板和手。"
+  ],
+  "check": [
+    "生食工具没有直接接触熟食。",
+    "熟食放在干净区域。",
+    "处理生食后洗手。"
+  ],
+  "common_mistakes": [
+    "用切生肉的刀切熟食。",
+    "把熟食放回装过生肉的盆。",
+    "厨房抹布擦完生食区又擦餐具。"
+  ],
+  "fallback": "没有砧板时，用可清洗硬板、干净平盘或临时一次性纸板分区。",
+  "stop_or_escalate": [
+    "多人饭后腹泻、呕吐。",
+    "生食工具接触了熟食且无法重新加热。"
+  ],
+  "notes": "厨房分区比复杂烹饪更重要。",
+  "category_original": "卫生防疫",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "security",
+    "food",
+    "power"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "food_safety_judgment",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "infection_control",
+    "suspicious_approach"
+  ],
+  "objects": [
+    "meat",
+    "cooked_food"
+  ],
+  "keywords": [
+    "厨房生熟分区",
+    "污染",
+    "可疑",
+    "食物",
+    "肉",
+    "contamination",
+    "infection_control",
+    "suspicious_approach",
+    "meat",
+    "cooked_food",
+    "security_suspicious_person",
+    "food_safety_judgment",
+    "hygiene_contamination",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "id": "DG-0027",
+  "title": "老人意识混乱观察",
+  "category": "医疗急救与照护",
+  "scenario": "老人突然糊涂、嗜睡、烦躁、说话异常或不像平时。",
+  "goal": "把意识变化当作身体异常信号处理。",
+  "tools": [
+    "体温计",
+    "水杯",
+    "药品清单",
+    "记录本"
+  ],
+  "steps": [
+    "记录开始时间和表现：糊涂、嗜睡、烦躁、说胡话、走路不稳。",
+    "检查是否发热、脱水、低血糖、跌倒、断药或新药反应。",
+    "让老人坐下或躺在安全位置，避免单独行动。",
+    "检查饮水、尿量、进食和最近用药。",
+    "保持熟悉的人照护，减少围观和刺激。",
+    "每隔一段时间复查意识是否恢复或恶化。"
+  ],
+  "check": [
+    "老人不再单独行动。",
+    "可能诱因已被逐项检查。",
+    "饮水、体温、用药有记录。"
+  ],
+  "common_mistakes": [
+    "当作脾气不好。",
+    "随意加镇静药。",
+    "让其独自上下楼或外出。"
+  ],
+  "fallback": "没有血糖仪时，至少检查是否长时间没吃、出汗手抖、极度虚弱。",
+  "stop_or_escalate": [
+    "单侧无力。",
+    "说话含糊。",
+    "持续嗜睡叫不醒。",
+    "高热或严重脱水。"
+  ],
+  "notes": "老人意识变化常常是身体问题的警报。",
+  "category_original": "长期医疗观察",
+  "domains": [
+    "medical",
+    "comms",
+    "records"
+  ],
+  "intents": [
+    "medical_elder_confusion",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "elderly",
+    "consciousness_change",
+    "signal_plan"
+  ],
+  "objects": [
+    "elder",
+    "signal",
+    "people"
+  ],
+  "keywords": [
+    "老人意识混乱观察",
+    "老人",
+    "意识混乱",
+    "信号",
+    "elderly",
+    "consciousness_change",
+    "signal_plan",
+    "elder",
+    "signal",
+    "people",
+    "medical_elder_confusion",
+    "records_inventory_people",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响"
+  ]
+}

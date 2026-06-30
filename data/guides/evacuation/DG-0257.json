@@ -1,0 +1,80 @@
+{
+  "id": "DG-0257",
+  "title": "轮胎漏气临时处理",
+  "category": "撤离交通与路线",
+  "scenario": "自行车、推车、拖车或车辆轮胎漏气，影响搬运或撤离。",
+  "goal": "判断能否短距离处理，避免彻底损坏轮胎和人员滞留。",
+  "tools": [
+    "打气筒",
+    "补胎片可选",
+    "水盆可选",
+    "工具",
+    "记录本"
+  ],
+  "steps": [
+    "先判断是慢漏还是快速漏气。",
+    "检查外胎是否有钉子、玻璃、铁丝等异物。",
+    "能补胎时，先标记漏点，再按补胎材料说明处理。",
+    "没有补胎材料时，短距离可打足气后低速返回，但不要载重过高。",
+    "快速漏气或外胎裂开时，不继续骑行或重载。",
+    "记录漏气轮子和位置，回到安全点后优先维修。",
+    "搬运任务改为分批或换工具。"
+  ],
+  "check": [
+    "漏气速度已判断。",
+    "异物已检查。",
+    "没有高负重硬骑。"
+  ],
+  "common_mistakes": [
+    "轮胎瘪了还载水。",
+    "不找异物直接补。",
+    "外胎裂开还继续骑。"
+  ],
+  "fallback": "没有补胎条件时，把车辆降级为推行或暂停使用。",
+  "stop_or_escalate": [
+    "快速漏气、外胎爆裂、轮圈变形、刹车受影响时，停止骑行。"
+  ],
+  "notes": "漏气不是小事，载重时会变成摔倒。",
+  "category_original": "车辆与自行车应急",
+  "domains": [
+    "evacuation",
+    "disaster",
+    "shelter",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "temporary_repair",
+    "personnel_change"
+  ],
+  "objects": [
+    "route",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "轮胎漏气临时处理",
+    "撤离",
+    "路线",
+    "evacuation_decision",
+    "temporary_repair",
+    "personnel_change",
+    "route",
+    "people",
+    "person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

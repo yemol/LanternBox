@@ -1,0 +1,77 @@
+{
+  "id": "DG-0539",
+  "title": "取水路线演练",
+  "category": "组织秩序与训练演练",
+  "scenario": "主水源和备用水源存在，但成员没有实际走过。",
+  "goal": "发现路线、容器、队形和风险问题。",
+  "tools": [
+    "空桶",
+    "路线图",
+    "计时器",
+    "记录本"
+  ],
+  "steps": [
+    "先用空桶或少量水演练，不直接满载。",
+    "按真实路线走到水源或模拟点。",
+    "记录时间、危险点、休息点和通信盲区。",
+    "测试两人搬运或推车方案。",
+    "返回后评估体力和容器问题。",
+    "更新地图和取水任务卡。",
+    "正式取水前复核风险等级。"
+  ],
+  "check": [
+    "路线走过。",
+    "危险点记录。",
+    "搬运方案测试。"
+  ],
+  "common_mistakes": [
+    "第一次就满桶远行。",
+    "路线只在纸上看。",
+    "返回后不更新地图。"
+  ],
+  "fallback": "不能到真实水源时，先演练到中途关键点。",
+  "stop_or_escalate": [
+    "演练中摔倒、路线暴露、体力不足时，暂停正式取水计划。"
+  ],
+  "notes": "取水路线演练，是让水桶先空着替人探路。",
+  "category_original": "风险演练专项",
+  "domains": [
+    "security",
+    "water"
+  ],
+  "intents": [
+    "water_rationing"
+  ],
+  "situations": [
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "route",
+    "people"
+  ],
+  "keywords": [
+    "取水路线演练",
+    "风险",
+    "水源",
+    "水桶",
+    "personnel_change",
+    "drinking_water",
+    "bucket",
+    "route",
+    "people",
+    "water_rationing",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

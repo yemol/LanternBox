@@ -1,0 +1,81 @@
+{
+  "id": "DG-0494",
+  "title": "余震准备点",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "主震后仍可能有余震，成员需要临时等待和休息。",
+  "goal": "建立余震时能快速躲避或撤离的点位。",
+  "tools": [
+    "垫子",
+    "鞋",
+    "手电",
+    "哨子",
+    "水"
+  ],
+  "steps": [
+    "选择远离玻璃、重柜、吊灯和破裂墙面的等待点。",
+    "每人鞋、手电、哨子放在手边。",
+    "通往出口的路线保持清空。",
+    "不要在受损墙体旁睡觉。",
+    "儿童、老人、病人安排在易协助的位置。",
+    "每次余震后重新检查掉落物和裂缝。",
+    "夜间保持低亮路径。"
+  ],
+  "check": [
+    "等待点安全。",
+    "出口路线清空。",
+    "重点成员易协助。"
+  ],
+  "common_mistakes": [
+    "睡在玻璃窗下。",
+    "鞋子散落找不到。",
+    "余震后不复查。"
+  ],
+  "fallback": "空间不足时，至少避开高柜、玻璃和明显裂缝。",
+  "stop_or_escalate": [
+    "余震后结构加速损坏、门窗变形、无法开门时，立即转移。"
+  ],
+  "notes": "余震像回马枪，准备点就是盾牌。",
+  "category_original": "地震后检查与临时加固",
+  "domains": [
+    "disaster",
+    "tools",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "earthquake",
+    "evacuation_decision",
+    "temporary_repair",
+    "personnel_change"
+  ],
+  "objects": [
+    "people"
+  ],
+  "keywords": [
+    "余震准备点",
+    "地震",
+    "余震",
+    "加固",
+    "撤离",
+    "earthquake",
+    "evacuation_decision",
+    "temporary_repair",
+    "personnel_change",
+    "people",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "id": "DG-0354",
+  "title": "生活光痕控制",
+  "category": "居住卫生与空间管理",
+  "scenario": "夜间灯光、屏幕、火光或反光材料可能从窗户、门缝、帐篷边露出。",
+  "goal": "减少外部通过光线判断人员和物资位置。",
+  "tools": [
+    "遮光布",
+    "胶带",
+    "低亮灯",
+    "纸板"
+  ],
+  "steps": [
+    "夜间检查窗户、门缝和帐篷边是否漏光。",
+    "用遮光布、纸板或厚衣物遮挡明显光源方向。",
+    "室内灯光尽量朝下，不直射窗户。",
+    "手机、电脑、壳中灯屏幕降低亮度并避开窗口。",
+    "开门前先降低或关闭背后强光。",
+    "反光物、镜子、金属片不要正对外部光源。",
+    "每天夜间值守时从外侧可观察范围检查一次漏光。"
+  ],
+  "check": [
+    "窗门漏光已遮挡。",
+    "屏幕亮度降低。",
+    "开门前处理背光。"
+  ],
+  "common_mistakes": [
+    "晚上窗边开强光。",
+    "屏幕正对窗户。",
+    "门一开屋里像灯箱。"
+  ],
+  "fallback": "没有遮光布时，用深色衣物、纸板、箱子或家具临时遮挡。",
+  "stop_or_escalate": [
+    "外部人员注意到灯光、需要隐蔽、冲突风险增加时，立即进入低光模式。"
+  ],
+  "notes": "光不只是照明，也是在黑暗里递名片。",
+  "category_original": "隐蔽生活痕迹",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "power",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_night_anomaly",
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "night",
+    "resource_exposure"
+  ],
+  "objects": [
+    "door",
+    "window",
+    "inventory",
+    "people",
+    "person",
+    "supplies",
+    "lighting"
+  ],
+  "keywords": [
+    "生活光痕控制",
+    "照明",
+    "夜间",
+    "inventory_change",
+    "personnel_change",
+    "night",
+    "resource_exposure",
+    "door",
+    "window",
+    "inventory",
+    "people",
+    "person",
+    "supplies",
+    "lighting",
+    "security_night_anomaly",
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

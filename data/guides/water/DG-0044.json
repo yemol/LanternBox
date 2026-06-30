@@ -1,0 +1,83 @@
+{
+  "id": "DG-0044",
+  "title": "晒干保存：切薄、防虫、彻底干",
+  "category": "水与食物保障",
+  "scenario": "需要保存蔬菜、水果、肉类或香草，但没有冷藏。",
+  "goal": "通过脱水延长保存时间。",
+  "tools": [
+    "刀",
+    "晒网或干净布",
+    "纱网",
+    "密封袋",
+    "标签纸"
+  ],
+  "steps": [
+    "选择新鲜未腐败食材，坏掉的不要拿来晒。",
+    "清洗后尽量擦干表面水分。",
+    "切薄片，越厚越难干透。",
+    "放在通风、日照好、远离灰尘和动物的位置。",
+    "用纱网防虫，不让苍蝇直接接触。",
+    "完全干燥后再密封，写日期；如果还软湿，不要密封。"
+  ],
+  "check": [
+    "食材内部也干，不只是表面干。",
+    "没有虫卵、霉点、腐败味。",
+    "密封袋里没有水汽凝结。"
+  ],
+  "common_mistakes": [
+    "半干就密封。",
+    "用已经变质的食物晒干。",
+    "在烟尘或垃圾旁晾晒。"
+  ],
+  "fallback": "阴雨天可改小批量、靠通风和低温干燥，宁可慢不要闷。",
+  "stop_or_escalate": [
+    "晒干后出现霉味、黏滑、虫卵。",
+    "肉类内部仍湿且放置时间长。"
+  ],
+  "notes": "晒干不是把腐败暂停，而是要在腐败前把水分降下来。",
+  "category_original": "食物获取",
+  "domains": [
+    "water",
+    "food",
+    "power"
+  ],
+  "intents": [
+    "food_safety_judgment"
+  ],
+  "situations": [
+    "refrigeration_failure",
+    "food_spoilage"
+  ],
+  "objects": [
+    "fridge",
+    "meat",
+    "drinking_water"
+  ],
+  "keywords": [
+    "晒干保存",
+    "切薄",
+    "防虫",
+    "彻底干",
+    "食物",
+    "肉",
+    "refrigeration_failure",
+    "food_spoilage",
+    "fridge",
+    "meat",
+    "drinking_water",
+    "food_safety_judgment",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "id": "DG-0193",
+  "title": "固定留言点",
+  "category": "通信信息与数据安全",
+  "scenario": "断网、成员分散、集合点变化或临时撤离，需要给后来者留信息。",
+  "goal": "让消息能被指定人员找到，又不暴露过多敏感内容。",
+  "tools": [
+    "纸条",
+    "防水袋",
+    "胶带",
+    "记号笔",
+    "约定标记"
+  ],
+  "steps": [
+    "提前设定一个主留言点和一个备用留言点。",
+    "留言点要容易找到但不直接暴露核心仓库和人员位置。",
+    "纸条写日期、时间、人数、去向、状态和下一次可能更新点。",
+    "不要写完整库存、密码、隐藏物资和精确敏感位置。",
+    "纸条放入防水袋或用胶带保护，避免雨水毁掉。",
+    "离开留言点后，在自己的记录本里写下留言内容和位置。"
+  ],
+  "check": [
+    "留言点事先约定。",
+    "纸条有时间和去向。",
+    "没有暴露敏感库存。"
+  ],
+  "common_mistakes": [
+    "临时乱贴纸条。",
+    "写一堆敏感物资位置。",
+    "纸条放在会被雨淋的位置。"
+  ],
+  "fallback": "没有纸时，用约定符号加日期简写，但必须提前训练。",
+  "stop_or_escalate": [
+    "外部人员频繁接近留言点、留言被破坏或被陌生人利用时，更换留言点。"
+  ],
+  "notes": "留言点是离线通信的小邮箱。",
+  "category_original": "通信联络",
+  "domains": [
+    "security",
+    "tools",
+    "comms",
+    "disaster",
+    "evacuation"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "comms_signal_meeting",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "signal_plan",
+    "temporary_repair",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "meeting_point",
+    "message",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "固定留言点",
+    "安全",
+    "固定",
+    "通信",
+    "集合点",
+    "留言",
+    "撤离",
+    "evacuation_decision",
+    "signal_plan",
+    "temporary_repair",
+    "personnel_change",
+    "resource_exposure",
+    "meeting_point",
+    "message",
+    "people",
+    "person",
+    "shelter_disaster_evacuate",
+    "comms_signal_meeting",
+    "tools_security_repair",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

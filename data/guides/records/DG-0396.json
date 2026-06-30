@@ -1,0 +1,65 @@
+{
+  "id": "DG-0396",
+  "title": "三分钟出门检查",
+  "category": "组织秩序与训练演练",
+  "scenario": "突发需要短时间外出、查看情况、取物或协助他人。",
+  "goal": "用最短检查避免空手、失联或回不来。",
+  "tools": [
+    "联络卡",
+    "哨子",
+    "手电",
+    "水",
+    "鞋"
+  ],
+  "steps": [
+    "先穿鞋，不穿拖鞋和赤脚出门。",
+    "带联络卡、哨子和低亮照明。",
+    "确认目的地和预计返回时间。",
+    "告诉至少一名成员去哪里。",
+    "根据距离带少量水或防护手套。",
+    "门口回头确认火源、电源和儿童老人无人失控。",
+    "返回后报平安并记录异常。"
+  ],
+  "check": [
+    "穿鞋。",
+    "有人知道去向。",
+    "有照明和哨子。"
+  ],
+  "common_mistakes": [
+    "听到动静直接冲出去。",
+    "谁也不知道去了哪里。",
+    "夜间不带灯。"
+  ],
+  "fallback": "真的来不及时，至少喊出去向并带哨子。",
+  "stop_or_escalate": [
+    "外部冲突、浓烟、洪水、电线、建筑损坏时，不做临时好奇外出。"
+  ],
+  "notes": "三分钟检查，是把冲动拴上一根细绳。",
+  "category_original": "检查清单与复核",
+  "domains": [
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "lost_contact",
+    "inventory_change"
+  ],
+  "objects": [
+    "door",
+    "inventory"
+  ],
+  "keywords": [
+    "三分钟出门检查",
+    "清单",
+    "lost_contact",
+    "inventory_change",
+    "door",
+    "inventory",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": []
+}

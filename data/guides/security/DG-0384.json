@@ -1,0 +1,82 @@
+{
+  "id": "DG-0384",
+  "title": "承重结构不乱改",
+  "category": "工具维修与替代制作",
+  "scenario": "想拆门、拆墙板、移动重柜、改床架、拆楼梯扶手或支撑木料。",
+  "goal": "避免破坏承重、坠落、防护和撤离安全。",
+  "tools": [
+    "记录本",
+    "相机",
+    "标记笔",
+    "支撑物"
+  ],
+  "steps": [
+    "先判断该结构是否可能承重、支撑、防坠落或保障撤离。",
+    "看不懂结构时，不拆不锯不砸。",
+    "拍照记录结构原状。",
+    "临时需要移动重物时，先找替代支撑或减少负重。",
+    "楼梯扶手、门框、支撑柱、屋顶梁、床架关键承重件不随意拆。",
+    "拆下材料再利用前确认不会影响原位置安全。",
+    "改动后观察是否有倾斜、异响、裂缝和晃动。"
+  ],
+  "check": [
+    "承重可能性已判断。",
+    "不懂结构未拆。",
+    "改动后有观察。"
+  ],
+  "common_mistakes": [
+    "为了取木板拆扶手。",
+    "锯掉看起来碍事的支撑。",
+    "拆完不检查晃动。"
+  ],
+  "fallback": "需要材料时，优先拆非承重废弃家具和独立物件。",
+  "stop_or_escalate": [
+    "结构异响、裂缝扩大、门窗变形、楼梯晃动时，停止改动并远离。"
+  ],
+  "notes": "不是所有木板都只是木板，有些是房子在咬牙撑着。",
+  "category_original": "维修安全边界",
+  "domains": [
+    "security",
+    "tools",
+    "disaster",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "structural_risk",
+    "evacuation_decision",
+    "temporary_repair"
+  ],
+  "objects": [
+    "building",
+    "door",
+    "tools"
+  ],
+  "keywords": [
+    "承重结构不乱改",
+    "安全",
+    "工具",
+    "维修",
+    "撤离",
+    "structural_risk",
+    "evacuation_decision",
+    "temporary_repair",
+    "building",
+    "door",
+    "tools",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

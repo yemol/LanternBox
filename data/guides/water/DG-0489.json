@@ -1,0 +1,80 @@
+{
+  "id": "DG-0489",
+  "title": "洪水后进入检查",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "洪水、内涝、管道爆裂或污水倒灌后，需要返回室内。",
+  "goal": "避免触电、跌落、污染和结构风险。",
+  "tools": [
+    "长靴",
+    "手套",
+    "木棍",
+    "口罩",
+    "记录本"
+  ],
+  "steps": [
+    "进入前观察水位、墙体裂缝、异味和漂浮物。",
+    "确认电源风险，未知状态下不踏入积水接触电器。",
+    "用木棍探路，防止坑洞、玻璃和松动物。",
+    "不要让儿童、老人和宠物先进。",
+    "只走必要路线，避免翻动污水浸泡物。",
+    "记录积水高度和污染区域。",
+    "进入后先通风，不急着整理所有物品。"
+  ],
+  "check": [
+    "电源风险已考虑。",
+    "污染区有记录。",
+    "重点成员未进入。"
+  ],
+  "common_mistakes": [
+    "穿拖鞋进污水。",
+    "积水里摸插座。",
+    "让儿童进去找东西。"
+  ],
+  "fallback": "必须进入取药时，两人同行，走最短路线，回来清洗鞋和手。",
+  "stop_or_escalate": [
+    "电线入水、燃气味、墙体变形、污水倒灌严重时，停止进入。"
+  ],
+  "notes": "洪水退了，危险不一定退。",
+  "category_original": "洪水后清理与霉菌控制",
+  "domains": [
+    "water",
+    "disaster",
+    "security",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "flood",
+    "structural_risk"
+  ],
+  "objects": [
+    "drinking_water"
+  ],
+  "keywords": [
+    "洪水后进入检查",
+    "洪水",
+    "风险",
+    "contamination",
+    "flood",
+    "structural_risk",
+    "drinking_water",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

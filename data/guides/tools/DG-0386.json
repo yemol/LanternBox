@@ -1,0 +1,82 @@
+{
+  "id": "DG-0386",
+  "title": "每日晨间检查",
+  "category": "组织秩序与训练演练",
+  "scenario": "每天早晨醒来后，需要快速确认人员、天气、物资和当日任务。",
+  "goal": "用固定晨检让一天从可控状态开始。",
+  "tools": [
+    "记录本",
+    "任务表",
+    "天气观察点",
+    "库存简表"
+  ],
+  "steps": [
+    "清点人员状态，确认是否有人发热、受伤、失眠或情绪异常。",
+    "观察天气、温度、风向、积水、烟尘或外部异常。",
+    "检查饮水、食物、药品、燃料、照明的最低余量。",
+    "回顾夜间值守记录和异常事件。",
+    "列出当天三件最重要任务，不塞满任务表。",
+    "指定任务负责人和完成时间。",
+    "晨检结束后把结果写入日常记录。"
+  ],
+  "check": [
+    "人员状态已确认。",
+    "关键物资余量已看过。",
+    "当天重点任务不超过三件。"
+  ],
+  "common_mistakes": [
+    "一醒来就各干各的。",
+    "任务表塞满十几件。",
+    "夜间异常没人看。"
+  ],
+  "fallback": "没有记录本时，用纸条写当天三件事，贴在公共位置。",
+  "stop_or_escalate": [
+    "人员异常、饮水低于底线、外部风险变化时，先处理风险再安排普通任务。"
+  ],
+  "notes": "晨检不是仪式，是把睡醒后的混乱压成一张小纸。",
+  "category_original": "时间管理与周期任务",
+  "domains": [
+    "tools",
+    "security",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "inventory",
+    "people",
+    "person",
+    "supplies"
+  ],
+  "keywords": [
+    "每日晨间检查",
+    "固定",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "inventory",
+    "people",
+    "person",
+    "supplies",
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "id": "DG-0341",
+  "title": "黑暗中锐器管控",
+  "category": "居住卫生与空间管理",
+  "scenario": "停电或夜间环境中有刀具、剪刀、玻璃、铁丝、针、工具等锐器。",
+  "goal": "避免夜间割伤、踩伤和误拿。",
+  "tools": [
+    "硬盒",
+    "标签",
+    "低亮灯",
+    "手套"
+  ],
+  "steps": [
+    "所有锐器夜间前归入固定硬盒或工具区。",
+    "床边、通道、厕所路线和儿童区不得放锐器。",
+    "破玻璃、针、刀片放入硬盒并贴尖锐物标签。",
+    "夜间需要用刀或剪刀时，必须使用低亮照明。",
+    "用完后立即收回，不放在地面或床上。",
+    "清晨检查通道是否有掉落小锐器。",
+    "发现锐器丢失时暂停儿童活动，先找回。"
+  ],
+  "check": [
+    "锐器有固定硬盒。",
+    "通道无尖锐物。",
+    "夜间用锐器有照明。"
+  ],
+  "common_mistakes": [
+    "剪刀放床上。",
+    "玻璃碎片晚上再说。",
+    "摸黑找刀。"
+  ],
+  "fallback": "没有硬盒时，用厚纸板、罐子、瓶子或包布临时集中。",
+  "stop_or_escalate": [
+    "夜间割伤、儿童接触、锐器丢失时，立即全区清点。"
+  ],
+  "notes": "黑暗会让小刀变成埋伏。",
+  "category_original": "黑暗环境安全",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "power",
+    "security",
+    "tools"
+  ],
+  "intents": [
+    "medical_wound_bleeding",
+    "power_lighting_energy",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "power_outage",
+    "wound",
+    "night"
+  ],
+  "objects": [
+    "glass",
+    "tools"
+  ],
+  "keywords": [
+    "黑暗中锐器管控",
+    "停电",
+    "夜间",
+    "安全",
+    "工具",
+    "power_outage",
+    "wound",
+    "night",
+    "glass",
+    "tools",
+    "medical_wound_bleeding",
+    "power_lighting_energy",
+    "tools_security_repair",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

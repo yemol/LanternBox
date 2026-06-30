@@ -1,0 +1,75 @@
+{
+  "id": "DG-0362",
+  "title": "门窗缝隙保温",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "冷风从门缝、窗缝、墙缝、破窗或临时棚边进入。",
+  "goal": "减少冷风直吹和热量流失。",
+  "tools": [
+    "布条",
+    "胶带",
+    "纸板",
+    "塑料布",
+    "剪刀"
+  ],
+  "steps": [
+    "先用手背或薄纸找出冷风进入点。",
+    "用布条、毛巾、旧衣物塞住门底和大缝。",
+    "破窗用纸板加塑料布临时覆盖。",
+    "不要封死全部通风点，保留可控通风。",
+    "门口保温材料不能挡住快速撤离。",
+    "每天检查是否被风吹开、受潮或发霉。",
+    "白天通风后及时恢复保温层。"
+  ],
+  "check": [
+    "冷风直吹减少。",
+    "撤离门没有被封死。",
+    "保温材料干燥。"
+  ],
+  "common_mistakes": [
+    "为了保暖把门封到打不开。",
+    "塑料布覆盖后积水发霉。",
+    "完全不通风。"
+  ],
+  "fallback": "材料不足时，优先处理睡眠区门缝和床边直吹点。",
+  "stop_or_escalate": [
+    "多人头晕、空气浑浊、燃烧废气无法排出时，立即恢复通风。"
+  ],
+  "notes": "堵风不是封棺材，保温和通风要同时活着。",
+  "category_original": "寒冷取暖与保温",
+  "domains": [
+    "disaster",
+    "shelter",
+    "tools",
+    "security"
+  ],
+  "intents": [
+    "tools_security_repair"
+  ],
+  "situations": [
+    "temporary_repair",
+    "door_window_security"
+  ],
+  "objects": [
+    "building",
+    "door",
+    "window"
+  ],
+  "keywords": [
+    "门窗缝隙保温",
+    "门窗",
+    "temporary_repair",
+    "door_window_security",
+    "building",
+    "door",
+    "window",
+    "tools_security_repair",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

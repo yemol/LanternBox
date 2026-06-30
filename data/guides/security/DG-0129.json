@@ -1,0 +1,79 @@
+{
+  "id": "DG-0129",
+  "title": "营地边界标记",
+  "category": "个人装备与防护",
+  "scenario": "建立临时住所、避难房间、院落或野外营地后，需要区分活动范围、污染区和禁入区。",
+  "goal": "让所有人知道哪里能去、哪里不能去，减少误入、污染和冲突。",
+  "tools": [
+    "绳子",
+    "布条",
+    "纸板",
+    "记号笔",
+    "石头或箱子"
+  ],
+  "steps": [
+    "先确定核心区：睡眠区、饮水区、食物区、医疗区。",
+    "再确定风险区：垃圾区、厕所区、污染衣物区、燃料区、危险结构区。",
+    "用绳子、布条、箱子或石头把边界做出来。",
+    "在禁入区写清原因，例如污染区、燃料区、坠物区、病人区。",
+    "让儿童、老人和新成员走一遍边界，确认能看懂。",
+    "每天检查边界是否被风、水、动物或人移动。"
+  ],
+  "check": [
+    "核心区和污染区分开。",
+    "禁入区有标记和原因。",
+    "儿童知道不能进入的位置。"
+  ],
+  "common_mistakes": [
+    "只口头说不要去。",
+    "用尖锐危险物做边界。",
+    "污染区和饮水区太近。"
+  ],
+  "fallback": "没有绳子时，用家具、箱子、石头、粉笔线或布条建立临时边界。",
+  "stop_or_escalate": [
+    "有人误入污染区、儿童靠近燃料区、边界被破坏或冲突频繁发生时，重新布置边界。"
+  ],
+  "notes": "边界不是墙，是让规则可见。",
+  "category_original": "安全与边界",
+  "domains": [
+    "security",
+    "shelter",
+    "disaster",
+    "evacuation",
+    "hygiene"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "temporary_repair"
+  ],
+  "objects": [
+    "building"
+  ],
+  "keywords": [
+    "营地边界标记",
+    "安全",
+    "住所",
+    "房间",
+    "污染",
+    "contamination",
+    "temporary_repair",
+    "building",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给"
+  ]
+}

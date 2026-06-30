@@ -1,0 +1,88 @@
+{
+  "id": "DG-0413",
+  "title": "低风险试错区",
+  "category": "组织秩序与训练演练",
+  "scenario": "成员需要学习打结、修补、净水容器分区、工具归位、种植育苗等技能。",
+  "goal": "用低风险区域练习，避免在正式系统上试错。",
+  "tools": [
+    "练习材料",
+    "标记区",
+    "记录本",
+    "旧材料"
+  ],
+  "steps": [
+    "划出低风险练习区，不使用关键物资和高敏感资料。",
+    "练习用旧绳、旧布、破容器、废纸板等材料。",
+    "明确练习和正式物资不能混放。",
+    "练习完成后整理材料，能回收的回收。",
+    "记录谁练了什么、是否能进入正式任务。",
+    "失败结果不进入正式系统，例如错误标签不贴到真水桶上。",
+    "高风险技能只做模拟，不接真电、真火、真药。"
+  ],
+  "check": [
+    "练习材料和正式物资分开。",
+    "失败不会影响正式系统。",
+    "练习后有记录。"
+  ],
+  "common_mistakes": [
+    "拿正式药品练分类。",
+    "在真实电路上练手。",
+    "练习垃圾留一地。"
+  ],
+  "fallback": "空间不足时，用一个箱子作为移动练习区。",
+  "stop_or_escalate": [
+    "练习影响饮水、药品、火源、证件或工具安全时，立即停止。"
+  ],
+  "notes": "试错需要地方，不能拿生命线当草稿纸。",
+  "category_original": "训练与演练",
+  "domains": [
+    "security",
+    "tools",
+    "planting",
+    "water",
+    "hygiene"
+  ],
+  "intents": [
+    "water_treatment",
+    "tools_security_repair",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "food_production",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "tools",
+    "people"
+  ],
+  "keywords": [
+    "低风险试错区",
+    "风险",
+    "工具",
+    "种植",
+    "净水",
+    "food_production",
+    "personnel_change",
+    "drinking_water",
+    "tools",
+    "people",
+    "water_treatment",
+    "tools_security_repair",
+    "planting_seed_reserve",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "id": "DG-0256",
+  "title": "自行车载物规则",
+  "category": "撤离交通与路线",
+  "scenario": "用自行车运水、食物、工具、药品、柴火或其他物资。",
+  "goal": "减少翻车、失衡和物资掉落。",
+  "tools": [
+    "绑带",
+    "绳子",
+    "货架",
+    "背包",
+    "布盖"
+  ],
+  "steps": [
+    "先确认车架、货架和轮胎能承受重量。",
+    "重物尽量放低、放中间，左右重量平衡。",
+    "不用手拎大袋骑车，容易卷入车轮或影响转向。",
+    "用绳子或绑带固定物资，检查不会碰到车轮和链条。",
+    "易碎、药品、电子设备加缓冲和防水。",
+    "试骑一小段，确认刹车和转向正常再上路。",
+    "载重时降低速度，不走陡坡和复杂路。"
+  ],
+  "check": [
+    "重量左右平衡。",
+    "物资不会碰轮子。",
+    "试骑后再出发。"
+  ],
+  "common_mistakes": [
+    "车把挂满袋子。",
+    "水桶晃动不固定。",
+    "载重后还高速下坡。"
+  ],
+  "fallback": "没有货架时，优先背包携带轻物，重物分批运。",
+  "stop_or_escalate": [
+    "转向困难、刹不住、物资碰轮、车架异响时，立即减重。"
+  ],
+  "notes": "自行车载物的敌人不是距离，是失衡。",
+  "category_original": "车辆与自行车应急",
+  "domains": [
+    "evacuation",
+    "tools",
+    "security",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "route",
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "自行车载物规则",
+    "撤离",
+    "路线",
+    "工具",
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "medicine",
+    "route",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

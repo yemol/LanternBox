@@ -1,0 +1,87 @@
+{
+  "id": "DG-0436",
+  "title": "异常气味外部来源",
+  "category": "库存资料与成员档案",
+  "scenario": "闻到烟味、腐败味、化学味、燃气味、尸臭、污水味或强烈食物味。",
+  "goal": "判断气味是内部问题还是外部风险。",
+  "tools": [
+    "记录本",
+    "布条风向标",
+    "口罩",
+    "手电"
+  ],
+  "steps": [
+    "先判断是否有燃气味或化学刺激，有则远离火源并通风或撤离。",
+    "检查内部常见源：厨房、厕所、垃圾、动物区、灰水、湿衣。",
+    "如果内部未发现，观察风向和外部来源方向。",
+    "记录气味出现时间、强度、方向和持续时间。",
+    "不要用香味覆盖未知气味。",
+    "气味持续时调整通风路线，避免吹入睡眠区。",
+    "多次出现同一气味时在地图上标记可能来源。"
+  ],
+  "check": [
+    "内部源已排查。",
+    "风向已记录。",
+    "没有用香味掩盖。"
+  ],
+  "common_mistakes": [
+    "闻到怪味继续点火。",
+    "只喷香不查源。",
+    "不记录气味方向。"
+  ],
+  "fallback": "无法确认来源时，先按外部污染处理，减少通风并观察人员反应。",
+  "stop_or_escalate": [
+    "化学味、燃气味、腐败味伴随头晕恶心时，立即撤离或封锁区域。"
+  ],
+  "notes": "气味是看不见的线索，鼻子先发现，记录本再确认。",
+  "category_original": "异常信号判断",
+  "domains": [
+    "security",
+    "comms",
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "food_spoilage",
+    "unsafe_water",
+    "contamination",
+    "signal_plan",
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "signal",
+    "inventory",
+    "people",
+    "log"
+  ],
+  "keywords": [
+    "异常气味外部来源",
+    "风险",
+    "信号",
+    "记录",
+    "food_spoilage",
+    "unsafe_water",
+    "contamination",
+    "signal_plan",
+    "inventory_change",
+    "personnel_change",
+    "drinking_water",
+    "signal",
+    "inventory",
+    "people",
+    "log",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

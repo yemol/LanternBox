@@ -1,0 +1,94 @@
+{
+  "id": "DG-0486",
+  "title": "烟熏物资分拣",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "火灾后衣物、食物、药品、纸质资料、工具和电子设备被烟熏。",
+  "goal": "区分可清洁、可降级和必须废弃的物资。",
+  "tools": [
+    "手套",
+    "口罩",
+    "隔离箱",
+    "标签",
+    "记录本"
+  ],
+  "steps": [
+    "先把烟熏物资移到通风处，不放回干净区。",
+    "入口食物、开封药品、婴幼儿用品和伤口用品被烟熏后优先废弃或隔离。",
+    "金属工具可清洁除烟灰后降级或继续使用。",
+    "布料反复清洗晾晒后仍有强烈焦味则降级。",
+    "纸质资料可拍照备份后隔离保存。",
+    "所有烟熏物贴上待处理标签。",
+    "处理结果写入库存记录。"
+  ],
+  "check": [
+    "入口物资已隔离。",
+    "烟熏物没有回干净区。",
+    "处理结果有记录。"
+  ],
+  "common_mistakes": [
+    "烟熏食物擦擦继续吃。",
+    "焦味衣物直接放床上。",
+    "烟熏药品混回药箱。"
+  ],
+  "fallback": "来不及分拣时，先按入口、贴身、工具、资料四类分开。",
+  "stop_or_escalate": [
+    "强烈化学味、塑料燃烧味、药品受热、食物包装变形时，禁止入口使用。"
+  ],
+  "notes": "烟熏不是灰尘问题，很多东西是被烟重新标记了风险等级。",
+  "category_original": "火灾后处理与烟熏恢复",
+  "domains": [
+    "disaster",
+    "power",
+    "security",
+    "tools",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "medicine",
+    "clothes",
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "烟熏物资分拣",
+    "火灾",
+    "设备",
+    "风险",
+    "工具",
+    "inventory_change",
+    "resource_exposure",
+    "medicine",
+    "clothes",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "tools_security_repair",
+    "records_inventory_people",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

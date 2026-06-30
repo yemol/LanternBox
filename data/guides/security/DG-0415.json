@@ -1,0 +1,76 @@
+{
+  "id": "DG-0415",
+  "title": "成员随身信息卡",
+  "category": "通信信息与数据安全",
+  "scenario": "成员可能走散、昏迷、无法表达、需要照护或临时转移。",
+  "goal": "让每个人带有最低必要身份和照护信息。",
+  "tools": [
+    "小卡片",
+    "防水袋",
+    "挂绳",
+    "笔"
+  ],
+  "steps": [
+    "每张卡写成员姓名或编号、照护联系人、重要过敏、慢病提示、常用药位置。",
+    "不要写完整证件号、完整住址和高敏感档案位置。",
+    "儿童卡片写照护者、集合点代号和求助短句。",
+    "老人和慢病成员卡片字体加大。",
+    "卡片放在外出包、衣袋或挂绳位置。",
+    "每月检查内容是否更新。",
+    "卡片破损、受潮或字迹模糊时更换。"
+  ],
+  "check": [
+    "每人有卡。",
+    "过敏和慢病提示清楚。",
+    "卡片不暴露过多隐私。"
+  ],
+  "common_mistakes": [
+    "把完整证件资料写在随身卡上。",
+    "儿童没有照护者信息。",
+    "药物变化后卡片没更新。"
+  ],
+  "fallback": "没有防水袋时，用胶带覆膜或小塑料袋包住。",
+  "stop_or_escalate": [
+    "成员外出、撤离、夜间值守前发现无卡时，先补卡或指定陪同。"
+  ],
+  "notes": "随身卡要够救命，但不能变成隐私泄露包。",
+  "category_original": "纸质备份卡",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "consciousness_change",
+    "lost_contact",
+    "temporary_repair",
+    "personnel_change"
+  ],
+  "objects": [
+    "people"
+  ],
+  "keywords": [
+    "成员随身信息卡",
+    "安全",
+    "通信",
+    "走散",
+    "consciousness_change",
+    "lost_contact",
+    "temporary_repair",
+    "personnel_change",
+    "people",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

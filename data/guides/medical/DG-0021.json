@@ -1,0 +1,90 @@
+{
+  "id": "DG-0021",
+  "title": "发热：降温、补水、记录",
+  "category": "医疗急救与照护",
+  "scenario": "体温升高、畏寒、出汗、乏力。",
+  "goal": "控制体温负担，记录趋势，发现危险信号。",
+  "tools": [
+    "体温计",
+    "水",
+    "退热药说明书",
+    "记录本",
+    "轻薄衣物"
+  ],
+  "steps": [
+    "测量体温并记录时间。",
+    "让患者休息，保持通风，穿轻薄衣物。",
+    "少量多次补水，观察尿量。",
+    "按说明书使用适合的退热药，确认没有重复成分。",
+    "每隔一段时间复测体温，并记录伴随症状：咳嗽、腹泻、皮疹、疼痛、意识变化。",
+    "个人杯子、毛巾、餐具分开。"
+  ],
+  "check": [
+    "体温趋势可追踪。",
+    "患者能喝水和排尿。",
+    "没有意识异常或呼吸困难。"
+  ],
+  "common_mistakes": [
+    "酒精擦浴。",
+    "多种感冒药退烧药叠加。",
+    "给儿童使用成人药硬减量。",
+    "只看体温不看精神状态。"
+  ],
+  "fallback": "没有体温计时，记录触感、出汗、畏寒、精神状态和尿量，但要尽快补齐体温计。",
+  "stop_or_escalate": [
+    "持续高热。",
+    "意识异常。",
+    "呼吸困难。",
+    "皮疹快速扩散。",
+    "儿童抽搐。"
+  ],
+  "notes": "发热不是只追求降到正常，更要找趋势和危险信号。",
+  "category_original": "急救处理",
+  "domains": [
+    "medical",
+    "comms",
+    "records",
+    "shelter",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "fever",
+    "signal_plan"
+  ],
+  "objects": [
+    "drinking_water",
+    "temperature",
+    "signal",
+    "log"
+  ],
+  "keywords": [
+    "发热",
+    "降温",
+    "补水",
+    "记录",
+    "信号",
+    "fever",
+    "signal_plan",
+    "drinking_water",
+    "temperature",
+    "signal",
+    "log",
+    "medical_fever_respiratory",
+    "records_inventory_people",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

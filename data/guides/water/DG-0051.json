@@ -1,0 +1,81 @@
+{
+  "id": "DG-0051",
+  "title": "留种粮：吃掉之前先分出来",
+  "category": "水与食物保障",
+  "scenario": "有豆类、玉米、土豆、红薯、种子等可能用于种植的食物。",
+  "goal": "避免把未来生产能力全部吃掉。",
+  "tools": [
+    "密封袋",
+    "标签纸",
+    "干燥剂",
+    "小盒",
+    "记录本"
+  ],
+  "steps": [
+    "先识别哪些食物有种植价值：豆类、完整谷粒、土豆、红薯、种子。",
+    "把可播种部分单独分出，标为“留种，不食用”。",
+    "保持干燥、阴凉、避光。",
+    "记录来源、日期、品种和数量。",
+    "只拿少量做发芽测试，不把全部种子泡掉。",
+    "每月检查霉变、虫害和受潮。"
+  ],
+  "check": [
+    "留种部分和食用部分分开。",
+    "标签清楚。",
+    "没有受潮发霉。"
+  ],
+  "common_mistakes": [
+    "把全部种子粮煮掉。",
+    "种子和普通粮混放。",
+    "用污染水浸泡全部种子测试。"
+  ],
+  "fallback": "没有专用袋时，用干净瓶子或小盒分装，但要通风防潮。",
+  "stop_or_escalate": [
+    "种子发霉、长虫、发芽率极低。"
+  ],
+  "notes": "留种粮是未来，不是普通库存。",
+  "category_original": "食物获取",
+  "domains": [
+    "water",
+    "food",
+    "planting"
+  ],
+  "intents": [
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "seed_saving",
+    "food_production",
+    "inventory_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "seed",
+    "beans",
+    "inventory"
+  ],
+  "keywords": [
+    "留种粮",
+    "吃掉之前先分出来",
+    "食物",
+    "留种",
+    "种子",
+    "种植",
+    "seed_saving",
+    "food_production",
+    "inventory_change",
+    "drinking_water",
+    "seed",
+    "beans",
+    "inventory",
+    "planting_seed_reserve",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

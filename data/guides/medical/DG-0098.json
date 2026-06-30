@@ -1,0 +1,97 @@
+{
+  "id": "DG-0098",
+  "title": "老人夜间如厕防跌倒",
+  "category": "医疗急救与照护",
+  "scenario": "停电、地面杂乱、老人夜间起身上厕所。",
+  "goal": "降低夜间跌倒、骨折和迷路风险。",
+  "tools": [
+    "低亮灯",
+    "防滑鞋",
+    "便桶",
+    "手杖",
+    "清障箱"
+  ],
+  "steps": [
+    "睡前清理床到厕所或便桶的路线。",
+    "床边固定放低亮灯、鞋、水和手杖。",
+    "优先使用床边便桶或近距离厕所，减少夜间走楼梯。",
+    "地面不放水桶、绳子、工具和背包。",
+    "需要时安排陪同，尤其是头晕、发热、服药后。",
+    "第二天记录夜间起身次数，判断是否需要调整饮水和照护。"
+  ],
+  "check": [
+    "路线无绊倒物。",
+    "老人能摸到灯和鞋。",
+    "不需要摸黑走楼梯。"
+  ],
+  "common_mistakes": [
+    "让老人摸黑自己去厕所。",
+    "便桶放太远或容易踢翻。",
+    "水桶堆在床边通道。"
+  ],
+  "fallback": "没有夜灯时，用手电固定在床边，按钮朝上，确保老人会用。",
+  "stop_or_escalate": [
+    "跌倒、头晕、意识混乱、夜间频繁起身且虚弱。"
+  ],
+  "notes": "老人跌倒一次，可能让整个小队资源结构崩掉。",
+  "category_original": "特殊人群",
+  "domains": [
+    "medical",
+    "power",
+    "security",
+    "records",
+    "hygiene"
+  ],
+  "intents": [
+    "medical_elder_confusion",
+    "hygiene_contamination",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "power_outage",
+    "elderly",
+    "structural_risk",
+    "night"
+  ],
+  "objects": [
+    "elder",
+    "floor",
+    "toilet",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "老人夜间如厕防跌倒",
+    "老人",
+    "停电",
+    "夜间",
+    "风险",
+    "厕所",
+    "power_outage",
+    "elderly",
+    "structural_risk",
+    "night",
+    "elder",
+    "floor",
+    "toilet",
+    "people",
+    "supplies",
+    "medical_elder_confusion",
+    "hygiene_contamination",
+    "power_lighting_energy",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

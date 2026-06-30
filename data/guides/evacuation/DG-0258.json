@@ -1,0 +1,78 @@
+{
+  "id": "DG-0258",
+  "title": "车内应急包",
+  "category": "撤离交通与路线",
+  "scenario": "有汽车、电动车、三轮车或常用交通工具。",
+  "goal": "让车辆不仅能移动，也能短时间支持避难。",
+  "tools": [
+    "背包",
+    "水",
+    "手电",
+    "急救包",
+    "毯子",
+    "工具",
+    "纸质地图"
+  ],
+  "steps": [
+    "车内准备独立应急包，不完全依赖家中库存。",
+    "包内至少有水、少量食物、手电、急救用品、保暖毯、口罩、手套。",
+    "加入纸质地图、联络卡、备用充电线和简单工具。",
+    "药品和易受热物品不要长期放在高温车内。",
+    "每月检查水、食物、电池和工具状态。",
+    "车辆换人使用时说明应急包位置。",
+    "不要把车内应急包当日常杂物包。"
+  ],
+  "check": [
+    "应急包位置固定。",
+    "基础物资齐全。",
+    "高温敏感物没有长期闷车。"
+  ],
+  "common_mistakes": [
+    "车里只有杂物没有应急包。",
+    "药品长期暴晒。",
+    "拿了手电不放回。"
+  ],
+  "fallback": "没有完整背包时，先放水、手电、急救小包、纸质地图和保暖物。",
+  "stop_or_escalate": [
+    "车辆用于撤离、远途取水、夜间外出前必须检查应急包。"
+  ],
+  "notes": "车不是安全屋，但可以是一段路上的小仓库。",
+  "category_original": "车辆与自行车应急",
+  "domains": [
+    "evacuation",
+    "security",
+    "tools",
+    "shelter",
+    "disaster"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "route",
+    "tools"
+  ],
+  "keywords": [
+    "车内应急包",
+    "撤离",
+    "路线",
+    "安全",
+    "工具",
+    "evacuation_decision",
+    "route",
+    "tools",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "DG-0232",
+  "title": "种子库存管理",
+  "category": "种植养殖与采集",
+  "scenario": "储备了菜种、豆类、谷物种子或采集到的种子。",
+  "goal": "让种子不被吃光、泡坏、混乱或失去发芽价值。",
+  "tools": [
+    "密封袋",
+    "标签纸",
+    "干燥剂可选",
+    "小盒",
+    "记录本"
+  ],
+  "steps": [
+    "把可食用粮和留种种子分开保存。",
+    "每袋写清作物、来源、日期、数量和是否做过发芽测试。",
+    "种子放在阴凉、干燥、避光处。",
+    "不要频繁打开大袋，分成小包降低受潮风险。",
+    "每隔一段时间取少量做发芽测试。",
+    "发芽率低的种子标记为优先播种或降级。",
+    "不要把全部种子一次拿去泡发或播种。"
+  ],
+  "check": [
+    "留种和食用分开。",
+    "种子袋有标签。",
+    "种子干燥避光。"
+  ],
+  "common_mistakes": [
+    "种子和粮食混在一起被煮掉。",
+    "标签缺失不知道是什么。",
+    "一次测试泡掉全部种子。"
+  ],
+  "fallback": "没有密封袋时，用干净瓶子、小盒或纸包再放入干燥容器。",
+  "stop_or_escalate": [
+    "种子发霉、虫害、严重受潮或发芽率持续很低时，重新评估种植计划。"
+  ],
+  "notes": "种子是未来的食物，不是今天的零食。",
+  "category_original": "种植与长期食物生产",
+  "domains": [
+    "food",
+    "planting",
+    "water"
+  ],
+  "intents": [
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "seed_saving",
+    "food_production",
+    "inventory_change"
+  ],
+  "objects": [
+    "seed",
+    "beans",
+    "inventory"
+  ],
+  "keywords": [
+    "种子库存管理",
+    "食物",
+    "种子",
+    "发芽",
+    "种植",
+    "seed_saving",
+    "food_production",
+    "inventory_change",
+    "seed",
+    "beans",
+    "inventory",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

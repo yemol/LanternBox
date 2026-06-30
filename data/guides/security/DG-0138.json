@@ -1,0 +1,86 @@
+{
+  "id": "DG-0138",
+  "title": "交换地点选择",
+  "category": "组织秩序与训练演练",
+  "scenario": "需要和其他人见面交换物资、信息或工具。",
+  "goal": "选择可观察、可离开、不会暴露核心住所的位置。",
+  "tools": [
+    "地图",
+    "同伴",
+    "背包",
+    "记录本"
+  ],
+  "steps": [
+    "不要在自家核心储备区交易。",
+    "选择白天、开阔、有退路、可被同伴观察的位置。",
+    "避开地下空间、死胡同、桥下、废墟、冲突点和低洼积水区。",
+    "提前约定时间和交换范围，避免长时间等待。",
+    "只携带计划交换物，不带完整库存。",
+    "交易结束后不要直接带对方回住所。"
+  ],
+  "check": [
+    "交易点不暴露仓库。",
+    "有退路。",
+    "至少两人同行。"
+  ],
+  "common_mistakes": [
+    "夜间单独赴约。",
+    "在门口或仓库旁交易。",
+    "交易后让陌生人跟回核心区。"
+  ],
+  "fallback": "没有理想地点时，选择离住所有距离、能快速离开的外部点。",
+  "stop_or_escalate": [
+    "对方临时要求换地点、人数突然增加、有人绕后或跟踪时，取消或撤离。"
+  ],
+  "notes": "交易地点决定风险上限。",
+  "category_original": "社区与交换",
+  "domains": [
+    "security",
+    "tools",
+    "shelter",
+    "disaster",
+    "evacuation"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "building",
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "交换地点选择",
+    "风险",
+    "工具",
+    "住所",
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure",
+    "building",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

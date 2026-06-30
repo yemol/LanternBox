@@ -1,0 +1,72 @@
+{
+  "id": "DG-0250",
+  "title": "临时担架搬运",
+  "category": "撤离交通与路线",
+  "scenario": "有人无法行走，需要从危险区、楼道、房间或野外短距离转移。",
+  "goal": "用临时担架减少拖拽和二次伤害。",
+  "tools": [
+    "门板或结实木板",
+    "毯子",
+    "绳子",
+    "两根杆",
+    "手套"
+  ],
+  "steps": [
+    "先判断是否必须移动；如果原地更安全，先稳定伤情。",
+    "选择结实、平整、足够长的材料，例如门板、桌板、木板或两根杆加毯子。",
+    "把担架放到伤者旁边，不要远距离拖拽伤者过去。",
+    "移动前固定明显伤处，保护头颈和躯干。",
+    "至少两人同步抬，最好一人负责口令。",
+    "移动路线先清空障碍物和湿滑点。",
+    "每移动一段就停下检查呼吸、意识、疼痛和固定状态。"
+  ],
+  "check": [
+    "担架材料稳固。",
+    "伤者没有被直接拖拽。",
+    "路线已清理。"
+  ],
+  "common_mistakes": [
+    "用薄布直接拖人。",
+    "多人各走各的不同步。",
+    "不检查伤处就搬。"
+  ],
+  "fallback": "没有担架材料时，用两人搀扶、椅子搬运或毯子短距离拖移，但要尽量保护头颈和伤处。",
+  "stop_or_escalate": [
+    "移动后意识变差、呼吸异常、大出血、疼痛剧增时，停止移动并重新处理。"
+  ],
+  "notes": "担架的重点是同步和稳定，不是快。",
+  "category_original": "交通与搬运",
+  "domains": [
+    "evacuation",
+    "shelter",
+    "disaster",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "temporary_repair"
+  ],
+  "objects": [
+    "route"
+  ],
+  "keywords": [
+    "临时担架搬运",
+    "撤离",
+    "路线",
+    "房间",
+    "evacuation_decision",
+    "temporary_repair",
+    "route",
+    "shelter_disaster_evacuate",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "id": "DG-0228",
+  "title": "容器种植排水",
+  "category": "种植养殖与采集",
+  "scenario": "用桶、盆、泡沫箱、塑料箱、旧锅、木箱在阳台或室内外种菜。",
+  "goal": "避免积水烂根、滋生蚊虫和污染居住区。",
+  "tools": [
+    "容器",
+    "钉子或刀具",
+    "石子或碎瓦",
+    "土",
+    "标签"
+  ],
+  "steps": [
+    "检查容器底部是否有排水孔，没有就先打孔。",
+    "底部垫少量石子、碎瓦或粗枝，帮助排水。",
+    "容器下面放托盘或放在可排水位置，避免污水流到睡眠和食物区。",
+    "填土不要压得过实，保持透气。",
+    "第一次浇透水后，观察是否能顺利排出多余水。",
+    "贴标签写作物、播种日期、土源和浇水记录。",
+    "雨季把容器移到不积水的位置。"
+  ],
+  "check": [
+    "容器有排水孔。",
+    "浇水后不长期积水。",
+    "种植水不流向饮水和厨房区。"
+  ],
+  "common_mistakes": [
+    "无孔容器直接种。",
+    "天天浇到泥浆。",
+    "种植托盘积水养蚊子。"
+  ],
+  "fallback": "无法打孔时，把该容器改做短期育苗或收纳，不做长期种植盆。",
+  "stop_or_escalate": [
+    "植物根部发臭、叶片黄萎、盆底积水长虫时，立即改善排水。"
+  ],
+  "notes": "容器种植失败最多不是缺水，而是水出不去。",
+  "category_original": "种植与长期食物生产",
+  "domains": [
+    "food",
+    "planting",
+    "water",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "hygiene_contamination",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "water_outage",
+    "contamination",
+    "food_production"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket"
+  ],
+  "keywords": [
+    "容器种植排水",
+    "食物",
+    "种植",
+    "污染",
+    "water_outage",
+    "contamination",
+    "food_production",
+    "drinking_water",
+    "bucket",
+    "water_rationing",
+    "hygiene_contamination",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物"
+  ]
+}

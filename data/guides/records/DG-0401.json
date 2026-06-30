@@ -1,0 +1,76 @@
+{
+  "id": "DG-0401",
+  "title": "五分钟技能教学",
+  "category": "组织秩序与训练演练",
+  "scenario": "需要快速教会某人一个简单但关键的操作，例如关阀、找药、开低亮灯、取水登记。",
+  "goal": "用短时间让成员掌握最低可执行步骤。",
+  "tools": [
+    "示范物品",
+    "步骤卡",
+    "记录本"
+  ],
+  "steps": [
+    "只教一个动作，不同时讲一堆背景。",
+    "先示范一次，让对方看完整流程。",
+    "再让对方照做一次，你在旁边纠错。",
+    "让对方复述关键禁忌，例如不能混用灰水桶。",
+    "把步骤写成三到五条短句。",
+    "确认对方能独立完成一次。",
+    "记录已经教过谁和是否需要复训。"
+  ],
+  "check": [
+    "对方亲手做过。",
+    "关键禁忌能复述。",
+    "步骤不超过五条。"
+  ],
+  "common_mistakes": [
+    "讲十分钟理论但没让对方做。",
+    "一次教太多。",
+    "对方点头就算会了。"
+  ],
+  "fallback": "没有步骤卡时，用口头三句法：先做什么、别做什么、做完放哪里。",
+  "stop_or_escalate": [
+    "教学对象紧张、误操作、涉及高风险设备时，停止独立操作，改为协助。"
+  ],
+  "notes": "会，不是听懂了，是手做过。",
+  "category_original": "技能分级与传授",
+  "domains": [
+    "records",
+    "power"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "people",
+    "flashlight",
+    "lighting"
+  ],
+  "keywords": [
+    "五分钟技能教学",
+    "登记",
+    "personnel_change",
+    "drinking_water",
+    "medicine",
+    "people",
+    "flashlight",
+    "lighting",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

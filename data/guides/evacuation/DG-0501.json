@@ -1,0 +1,88 @@
+{
+  "id": "DG-0501",
+  "title": "失联人员最后位置记录",
+  "category": "撤离交通与路线",
+  "scenario": "成员没有按时返回、夜间不在位置、外出后失联。",
+  "goal": "快速整理最后已知信息，避免盲目寻找。",
+  "tools": [
+    "记录本",
+    "地图",
+    "成员名单"
+  ],
+  "steps": [
+    "先记录发现失联的时间。",
+    "写下最后见到的位置、时间、同行者和携带物。",
+    "检查是否有离队登记、留言点、任务记录。",
+    "在地图上标出可能路线和危险点。",
+    "询问相关成员，不展开责备。",
+    "指定寻找负责人和留守负责人。",
+    "所有信息集中在一页，不让消息散落。"
+  ],
+  "check": [
+    "最后位置清楚。",
+    "可能路线已标。",
+    "寻找和留守负责人明确。"
+  ],
+  "common_mistakes": [
+    "大家分头乱找。",
+    "没人留守。",
+    "只说刚才还在。"
+  ],
+  "fallback": "没有地图时，用文字写明方向、地标和可能目的地。",
+  "stop_or_escalate": [
+    "儿童、病人、夜间、恶劣天气、外部冲突中失联时，立即升级搜索。"
+  ],
+  "notes": "寻找之前，先把最后一盏灯点亮。",
+  "category_original": "失联人员寻找与集合",
+  "domains": [
+    "evacuation",
+    "records",
+    "disaster",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "lost_contact",
+    "personnel_change",
+    "night"
+  ],
+  "objects": [
+    "route",
+    "people",
+    "log",
+    "person",
+    "lighting"
+  ],
+  "keywords": [
+    "失联人员最后位置记录",
+    "撤离",
+    "路线",
+    "记录",
+    "夜间",
+    "evacuation_decision",
+    "lost_contact",
+    "personnel_change",
+    "night",
+    "route",
+    "people",
+    "log",
+    "person",
+    "lighting",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

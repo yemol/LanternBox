@@ -1,0 +1,84 @@
+{
+  "id": "DG-0464",
+  "title": "灰水再利用边界",
+  "category": "水与食物保障",
+  "scenario": "洗手、洗菜、洗衣或擦洗后的水还可能用于非入口用途。",
+  "goal": "安全再利用灰水，同时避免污染饮用和食物系统。",
+  "tools": [
+    "灰水桶",
+    "标签",
+    "手套",
+    "记录本"
+  ],
+  "steps": [
+    "把灰水单独收集，容器贴清灰水或不可饮用。",
+    "轻度灰水可用于冲厕、湿润地面降尘或部分清洁。",
+    "含油、血、粪便、化学品、呕吐物的水不进入普通灰水再利用。",
+    "灰水不得用于清洗餐具最后一道、饮水容器和入口食材。",
+    "灰水桶远离饮用水桶和厨房。",
+    "灰水存放不宜过久，避免发臭招虫。",
+    "灰水用途和处理时间写入记录。"
+  ],
+  "check": [
+    "灰水标签清楚。",
+    "入口用途未使用灰水。",
+    "污染灰水单独处理。"
+  ],
+  "common_mistakes": [
+    "灰水拿去洗水杯。",
+    "灰水桶和饮水桶放一起。",
+    "灰水放到发臭。"
+  ],
+  "fallback": "无法分类时，灰水只用于冲厕或倒入指定污水点。",
+  "stop_or_escalate": [
+    "有人误饮、灰水进入厨房、灰水发臭长虫时，停止再利用并清理。"
+  ],
+  "notes": "灰水可以再上岗，但不能升职回饮用水。",
+  "category_original": "缺水优先级",
+  "domains": [
+    "water",
+    "food",
+    "security",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "water_outage",
+    "contamination",
+    "infection_control"
+  ],
+  "objects": [
+    "drinking_water"
+  ],
+  "keywords": [
+    "灰水再利用边界",
+    "饮用水",
+    "食物",
+    "安全",
+    "洗手",
+    "污染",
+    "water_outage",
+    "contamination",
+    "infection_control",
+    "drinking_water",
+    "water_rationing",
+    "hygiene_contamination",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响"
+  ]
+}

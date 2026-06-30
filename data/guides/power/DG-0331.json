@@ -1,0 +1,92 @@
+{
+  "id": "DG-0331",
+  "title": "低亮照明布置",
+  "category": "能源照明与设备",
+  "scenario": "停电后需要在睡眠区、厕所、药箱、出口、楼梯和通道设置最低照明。",
+  "goal": "用少量光线保证基本行动，同时节省电量和降低暴露。",
+  "tools": [
+    "低亮灯",
+    "反光贴",
+    "浅色布条",
+    "胶带"
+  ],
+  "steps": [
+    "先标出三条关键路线：床到厕所、床到出口、床到药箱。",
+    "每条路线只放必要的低亮光源，不追求全屋明亮。",
+    "灯尽量朝下照脚下，不直射窗外。",
+    "楼梯、门槛、转角和水桶旁加反光或浅色标记。",
+    "睡眠区保留一个随手可触的位置放低亮灯。",
+    "每天睡前检查灯是否在位、电量是否足够。",
+    "不需要时关闭移动灯，只保留关键路径标记。"
+  ],
+  "check": [
+    "关键路线可识别。",
+    "灯光不直射窗外。",
+    "睡前检查过灯位。"
+  ],
+  "common_mistakes": [
+    "整屋开强光耗电。",
+    "灯放太远摸不到。",
+    "楼梯和门槛没有标记。"
+  ],
+  "fallback": "没有低亮灯时，用遮光布包住手电，或用浅色纸条反光标记路线。",
+  "stop_or_escalate": [
+    "夜间跌倒、老人迷路、外部人员注意到灯光时，重新调整灯位和亮度。"
+  ],
+  "notes": "低亮不是寒酸，是把电量切成薄片慢慢吃。",
+  "category_original": "照明与夜间行动",
+  "domains": [
+    "power",
+    "security",
+    "shelter",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "power_outage",
+    "night",
+    "resource_exposure"
+  ],
+  "objects": [
+    "medicine",
+    "toilet",
+    "battery",
+    "lighting"
+  ],
+  "keywords": [
+    "低亮照明布置",
+    "停电",
+    "电量",
+    "照明",
+    "设备",
+    "夜间",
+    "睡眠",
+    "厕所",
+    "power_outage",
+    "night",
+    "resource_exposure",
+    "medicine",
+    "toilet",
+    "battery",
+    "lighting",
+    "power_lighting_energy",
+    "hygiene_contamination",
+    "能源照明"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "太阳能充电"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "id": "DG-0125",
+  "title": "临期物资处理",
+  "category": "库存资料与成员档案",
+  "scenario": "食品、药品、电池、消毒用品有有效期或开封时间。",
+  "goal": "让快到期物资进入计划消耗，不烂在箱底。",
+  "tools": [
+    "库存模块",
+    "标签纸",
+    "收纳箱",
+    "菜单表"
+  ],
+  "steps": [
+    "每月筛选一次临期物资。",
+    "把临期食品移入优先消耗区。",
+    "临期药品单独标记，不和正常药混放。",
+    "电池和消毒用品也检查日期和状态。",
+    "围绕临期食品安排菜单，避免同时开很多新包。",
+    "处理后更新库存数量和位置。"
+  ],
+  "check": [
+    "临期物资能被快速找到。",
+    "优先消耗区和长期储备区分开。",
+    "处理后库存已更新。"
+  ],
+  "common_mistakes": [
+    "临期物资继续压箱底。",
+    "过期药混在正常药里。",
+    "只看食品不看电池和消毒用品。"
+  ],
+  "fallback": "没有系统筛选功能时，用纸质临期清单贴在仓库门内。",
+  "stop_or_escalate": [
+    "药品过期、变色、受潮、包装破损时不要当正常药使用。"
+  ],
+  "notes": "临期管理是把损耗变成计划。",
+  "category_original": "库存系统联动",
+  "domains": [
+    "records",
+    "security",
+    "water",
+    "hygiene"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "water_treatment",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "infection_control",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "medicine",
+    "inventory",
+    "people",
+    "supplies",
+    "battery"
+  ],
+  "keywords": [
+    "临期物资处理",
+    "消毒",
+    "infection_control",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "medicine",
+    "inventory",
+    "people",
+    "supplies",
+    "battery",
+    "security_suspicious_person",
+    "water_treatment",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给"
+  ]
+}

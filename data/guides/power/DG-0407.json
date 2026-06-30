@@ -1,0 +1,100 @@
+{
+  "id": "DG-0407",
+  "title": "儿童安全教学",
+  "category": "组织秩序与训练演练",
+  "scenario": "儿童生活在停电、火源、工具、药品、厕所桶、陌生人接触等风险中。",
+  "goal": "让儿童记住少量关键禁令和求助方法。",
+  "tools": [
+    "图卡",
+    "哨子",
+    "低亮灯",
+    "安全角"
+  ],
+  "steps": [
+    "只教少量规则：不碰火、不碰药、不碰刀、不独自出门、不喝没标记的水。",
+    "教儿童知道自己的安全角、照护者和哨子位置。",
+    "用图卡或动作演示，不讲复杂理论。",
+    "每天用游戏方式复述一遍。",
+    "教会迷路或害怕时停在原地喊照护者或吹哨。",
+    "不让儿童承担守门、谈判、取水等成人任务。",
+    "记录儿童最容易忘的规则。"
+  ],
+  "check": [
+    "儿童知道安全角。",
+    "能说出不碰火药刀。",
+    "知道找谁求助。"
+  ],
+  "common_mistakes": [
+    "用恐吓替代教学。",
+    "给儿童讲太多规则。",
+    "让儿童去门口看情况。"
+  ],
+  "fallback": "没有图卡时，用固定短句和手势重复。",
+  "stop_or_escalate": [
+    "儿童靠近火源、药品、锐器或独自离开核心区时，立即重新教学和调整环境。"
+  ],
+  "notes": "儿童规则要少，但要像钉子一样钉牢。",
+  "category_original": "新成员教学",
+  "domains": [
+    "power",
+    "security",
+    "tools",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "power_outage",
+    "personnel_change",
+    "suspicious_approach"
+  ],
+  "objects": [
+    "bucket",
+    "medicine",
+    "toilet",
+    "tools",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "儿童安全教学",
+    "停电",
+    "陌生人",
+    "安全",
+    "风险",
+    "工具",
+    "厕所",
+    "power_outage",
+    "personnel_change",
+    "suspicious_approach",
+    "bucket",
+    "medicine",
+    "toilet",
+    "tools",
+    "people",
+    "person",
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "太阳能充电"
+  ]
+}

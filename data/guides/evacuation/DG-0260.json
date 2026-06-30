@@ -1,0 +1,93 @@
+{
+  "id": "DG-0260",
+  "title": "车辆作为临时避难点",
+  "category": "撤离交通与路线",
+  "scenario": "短时间需要在车内避雨、避风、过夜、照护病人或等待天亮。",
+  "goal": "利用车辆保护人员，同时避免窒息、低温、高温和暴露风险。",
+  "tools": [
+    "毯子",
+    "水",
+    "通风缝",
+    "遮阳物",
+    "手电"
+  ],
+  "steps": [
+    "先确认车辆位置安全，不在洪水低洼、落石、树下、冲突点或封闭车库内。",
+    "车内过夜要留意通风，不在封闭空间长时间怠速。",
+    "寒冷时用衣物和毯子保暖，不依赖长时间发动机取暖。",
+    "高温时优先遮阳和通风，儿童和宠物不能单独留车内。",
+    "车窗遮挡要兼顾隐私和通风。",
+    "车内垃圾、食物和排泄物及时处理。",
+    "记录车辆位置和人员状态。"
+  ],
+  "check": [
+    "车辆停在安全位置。",
+    "没有长时间封闭怠速。",
+    "儿童宠物不单独留车内。"
+  ],
+  "common_mistakes": [
+    "在车库内开车取暖。",
+    "高温把人留车里。",
+    "车停低洼处过夜。"
+  ],
+  "fallback": "不能安全使用车辆时，改为寻找建筑遮蔽或临时帐篷。",
+  "stop_or_escalate": [
+    "车内闷热、头晕、洪水上涨、外部冲突靠近、车辆被困时，立即转移。"
+  ],
+  "notes": "车辆能挡风雨，但也能变成密闭盒子。",
+  "category_original": "车辆与自行车应急",
+  "domains": [
+    "evacuation",
+    "security",
+    "shelter",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "temporary_repair",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "patient",
+    "route",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "车辆作为临时避难点",
+    "撤离",
+    "路线",
+    "风险",
+    "evacuation_decision",
+    "temporary_repair",
+    "personnel_change",
+    "resource_exposure",
+    "patient",
+    "route",
+    "people",
+    "person",
+    "medical_fever_respiratory",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "主食配给",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

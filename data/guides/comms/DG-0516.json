@@ -1,0 +1,77 @@
+{
+  "id": "DG-0516",
+  "title": "种植档案字段",
+  "category": "种植养殖与采集",
+  "scenario": "后续系统需要记录种子分类、方法、批次和经验。",
+  "goal": "先定义种植档案核心字段，方便系统开发。",
+  "tools": [
+    "字段清单",
+    "记录本",
+    "标签"
+  ],
+  "steps": [
+    "每种种子记录名称、来源、取得日期、保存方式。",
+    "每个批次记录播种日期、容器、土壤、光照、浇水。",
+    "记录发芽日期、移栽日期、收获日期。",
+    "记录失败原因和改进。",
+    "记录是否适合当前环境。",
+    "记录是否留种成功。",
+    "字段不要过多，先保证长期能坚持。"
+  ],
+  "check": [
+    "核心字段明确。",
+    "批次和种子能关联。",
+    "失败原因可记录。"
+  ],
+  "common_mistakes": [
+    "只写种了菜。",
+    "种子和批次混成一条。",
+    "字段太多没人填。"
+  ],
+  "fallback": "系统未完成前，先用纸质表格记录这些字段。",
+  "stop_or_escalate": [
+    "种植数据丢失、批次混乱、无法追溯种子来源时，重新整理档案。"
+  ],
+  "notes": "种植档案不是农业论文，是下一次不踩同坑的地图。",
+  "category_original": "种植前置与种子档案",
+  "domains": [
+    "comms",
+    "records",
+    "planting",
+    "food",
+    "water"
+  ],
+  "intents": [
+    "planting_seed_reserve",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "seed_saving",
+    "food_production"
+  ],
+  "objects": [
+    "seed",
+    "log"
+  ],
+  "keywords": [
+    "种植档案字段",
+    "记录",
+    "种子",
+    "种植",
+    "seed_saving",
+    "food_production",
+    "seed",
+    "log",
+    "planting_seed_reserve",
+    "records_inventory_people",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

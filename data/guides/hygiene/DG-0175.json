@@ -1,0 +1,77 @@
+{
+  "id": "DG-0175",
+  "title": "营地排水沟",
+  "category": "居住卫生与空间管理",
+  "scenario": "雨水、洗手水、洗衣水或漏水在营地附近积聚。",
+  "goal": "让水离开睡眠、食物和通道区域，减少泥泞、蚊虫和霉味。",
+  "tools": [
+    "铲子",
+    "木棍",
+    "石头",
+    "手套",
+    "标签"
+  ],
+  "steps": [
+    "先观察水往哪里流，找到最低点和积水点。",
+    "不要把水导向饮水区、厨房、睡眠区或邻居核心区。",
+    "挖浅沟或摆石头，让水流向安全低处。",
+    "沟边不要太陡，避免夜间绊倒。",
+    "在通道处用木板、石头或临时桥跨过水沟。",
+    "雨后检查沟是否堵塞、塌陷或倒灌。"
+  ],
+  "check": [
+    "积水离开睡眠区。",
+    "水没有流向饮水和厨房。",
+    "通道不被水沟切断。"
+  ],
+  "common_mistakes": [
+    "把污水导向饮水点。",
+    "水沟穿过儿童活动区。",
+    "雨后不检查堵塞。"
+  ],
+  "fallback": "没有铲子时，用木棍、石头、箱板做表面导流。",
+  "stop_or_escalate": [
+    "水带有粪便、化学味、油污，或倒灌进室内时，立即封锁并重做排水。"
+  ],
+  "notes": "排水做得好，营地会少一半臭味和虫子。",
+  "category_original": "长期居住与营地管理",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "water"
+  ],
+  "intents": [
+    "water_treatment"
+  ],
+  "situations": [
+    "unsafe_water",
+    "infection_control",
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water",
+    "rainwater"
+  ],
+  "keywords": [
+    "营地排水沟",
+    "洗手",
+    "睡眠",
+    "雨水",
+    "unsafe_water",
+    "infection_control",
+    "evacuation_decision",
+    "drinking_water",
+    "rainwater",
+    "water_treatment",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

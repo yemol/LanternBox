@@ -1,0 +1,86 @@
+{
+  "id": "DG-0045",
+  "title": "盐腌保存：盐量、容器、复查",
+  "category": "水与食物保障",
+  "scenario": "没有冷藏，想用盐保存肉、鱼或蔬菜。",
+  "goal": "降低腐败速度，但不把盐腌当永久安全。",
+  "tools": [
+    "盐",
+    "干净容器",
+    "刀",
+    "标签纸",
+    "重物"
+  ],
+  "steps": [
+    "只选新鲜食材，已经有异味或黏滑的不要腌。",
+    "切成小块或薄片，让盐能接触到内部。",
+    "容器洗净晾干。",
+    "盐要均匀覆盖食材表面，必要时用重物压住。",
+    "放在阴凉处，写上日期。",
+    "每天检查气味、颜色、黏滑、气泡和霉斑。"
+  ],
+  "check": [
+    "没有腐败味。",
+    "表面不黏滑。",
+    "容器干净且日期清楚。"
+  ],
+  "common_mistakes": [
+    "象征性撒一点盐就长期存放。",
+    "腌已经变质的肉。",
+    "腌好后放高温暴晒。"
+  ],
+  "fallback": "盐不足时，不要做长期腌制，改为当天煮熟或小批量晒干。",
+  "stop_or_escalate": [
+    "出现恶臭、明显黏滑、异常气泡、大面积霉斑。"
+  ],
+  "notes": "盐腌能降低风险，但不能逆转腐败。",
+  "category_original": "食物获取",
+  "domains": [
+    "water",
+    "food",
+    "security",
+    "records",
+    "power"
+  ],
+  "intents": [
+    "food_safety_judgment"
+  ],
+  "situations": [
+    "refrigeration_failure",
+    "food_spoilage"
+  ],
+  "objects": [
+    "fridge",
+    "meat",
+    "drinking_water"
+  ],
+  "keywords": [
+    "盐腌保存",
+    "盐量",
+    "容器",
+    "复查",
+    "食物",
+    "肉",
+    "安全",
+    "风险",
+    "refrigeration_failure",
+    "food_spoilage",
+    "fridge",
+    "meat",
+    "drinking_water",
+    "food_safety_judgment",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "腹泻"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "id": "DG-0162",
+  "title": "团队重大决定投票",
+  "category": "组织秩序与训练演练",
+  "scenario": "是否撤离、是否接纳新人、是否共享物资、是否返回取物等重大决定。",
+  "goal": "让高风险决定有流程，不靠嗓门大的人拍板。",
+  "tools": [
+    "投票纸",
+    "记录本",
+    "任务板",
+    "规则卡"
+  ],
+  "steps": [
+    "先定义要决定的问题，不能模糊。",
+    "列出可选方案，至少包括不行动或延期复查。",
+    "每个方案写下收益、风险、需要资源和失败后果。",
+    "让受影响成员都能表达意见。",
+    "投票或共识决定后，记录结果和执行负责人。",
+    "约定复查时间，条件变化时可以重开讨论。"
+  ],
+  "check": [
+    "问题清楚。",
+    "方案有风险说明。",
+    "结果和负责人被记录。"
+  ],
+  "common_mistakes": [
+    "边吵边决定。",
+    "强势者直接拍板。",
+    "决定后没人负责执行。"
+  ],
+  "fallback": "人数少时也要写下决定理由，避免事后互相怪罪。",
+  "stop_or_escalate": [
+    "决定涉及立即生命危险时，现场负责人可先执行紧急避险，事后复盘。"
+  ],
+  "notes": "重大决定需要流程，因为记忆会被恐惧改写。",
+  "category_original": "心理与组织",
+  "domains": [
+    "security",
+    "disaster",
+    "evacuation",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "door",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "团队重大决定投票",
+    "风险",
+    "撤离",
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure",
+    "door",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "DG-0531",
+  "title": "成员照片更新规则",
+  "category": "库存资料与成员档案",
+  "scenario": "成员档案需要照片用于识别、走失寻找和转运。",
+  "goal": "保持照片可识别且不滥用。",
+  "tools": [
+    "相机",
+    "档案系统",
+    "备份规则"
+  ],
+  "steps": [
+    "拍摄清晰正面照片，光线足够。",
+    "儿童和老人照片定期更新。",
+    "照片与成员编号绑定。",
+    "不要把照片放入公共指南或普通备份。",
+    "照片备份进入加密高敏感资料。",
+    "成员外貌明显变化时更新。",
+    "更新后删除或归档旧照片。"
+  ],
+  "check": [
+    "照片清晰。",
+    "照片加密保存。",
+    "编号对应正确。"
+  ],
+  "common_mistakes": [
+    "照片模糊。",
+    "照片混进普通文件夹。",
+    "成员变化后不更新。"
+  ],
+  "fallback": "没有相机时，记录明显特征作为临时替代。",
+  "stop_or_escalate": [
+    "走失、转运、身份核对需要时，照片必须能快速找到。"
+  ],
+  "notes": "照片不是纪念，是紧急识别工具。",
+  "category_original": "成员信息登记前置",
+  "domains": [
+    "tools",
+    "records",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "tools",
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "成员照片更新规则",
+    "工具",
+    "登记",
+    "inventory_change",
+    "personnel_change",
+    "tools",
+    "inventory",
+    "people",
+    "tools_security_repair",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

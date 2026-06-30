@@ -1,0 +1,80 @@
+{
+  "id": "DG-0259",
+  "title": "车辆燃油和电量管理",
+  "category": "撤离交通与路线",
+  "scenario": "使用汽车、摩托、电动车或其他交通工具，燃油或电量有限。",
+  "goal": "避免关键时刻车辆无法启动或无法返回。",
+  "tools": [
+    "记录本",
+    "油量表或电量表",
+    "地图",
+    "充电线"
+  ],
+  "steps": [
+    "每天或每次任务前记录燃油或电量。",
+    "设置最低线，例如低于一半或指定里程时不做非必要出行。",
+    "出发前计算往返距离，不只计算去程。",
+    "避免长时间怠速取暖、照明或充电。",
+    "电动车尽量在安全时段补电，不等到极低电量。",
+    "燃油储存要远离火源并清楚标记。",
+    "返回后记录实际消耗，修正后续判断。"
+  ],
+  "check": [
+    "出发前知道剩余里程。",
+    "保留返程燃油或电量。",
+    "非必要出行被限制。"
+  ],
+  "common_mistakes": [
+    "只看去程够不够。",
+    "怠速浪费燃油。",
+    "电量很低还临时绕路。"
+  ],
+  "fallback": "无法准确估算时，把可用距离按保守值计算，留出返程余量。",
+  "stop_or_escalate": [
+    "油量或电量低于最低线、路线不明、天气恶化时，取消非必要出行。"
+  ],
+  "notes": "车辆最重要的不是能出发，是能回来。",
+  "category_original": "车辆与自行车应急",
+  "domains": [
+    "evacuation",
+    "power",
+    "tools",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "route",
+    "tools",
+    "battery"
+  ],
+  "keywords": [
+    "车辆燃油和电量管理",
+    "撤离",
+    "路线",
+    "电量",
+    "工具",
+    "evacuation_decision",
+    "route",
+    "tools",
+    "battery",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "tools_security_repair",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

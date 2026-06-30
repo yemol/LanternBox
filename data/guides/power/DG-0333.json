@@ -1,0 +1,80 @@
+{
+  "id": "DG-0333",
+  "title": "头灯使用规则",
+  "category": "能源照明与设备",
+  "scenario": "夜间维修、包扎、搬运、清污、做饭或双手需要工作的场景。",
+  "goal": "让头灯释放双手，同时避免刺眼和暴露。",
+  "tools": [
+    "头灯",
+    "备用电池",
+    "遮光布",
+    "标签"
+  ],
+  "steps": [
+    "使用前确认头灯固定带不松脱。",
+    "近距离工作使用低亮档，不直接照同伴眼睛。",
+    "对话时低头或关闭头灯，避免让对方短暂失明。",
+    "户外使用时避免长时间面向窗外、道路或陌生人方向。",
+    "头灯用完关机，防止包内误触耗电。",
+    "备用电池和头灯放在同一装备区。",
+    "潮湿后拆下电池或打开晾干，避免腐蚀。"
+  ],
+  "check": [
+    "头灯固定稳定。",
+    "近距离使用低亮档。",
+    "用完关机归位。"
+  ],
+  "common_mistakes": [
+    "头灯直射同伴眼睛。",
+    "强光长时间照外面。",
+    "放包里误触亮一夜。"
+  ],
+  "fallback": "没有头灯时，把小手电固定在胸前、帽檐或肩带上，但不要影响活动。",
+  "stop_or_escalate": [
+    "头灯进水、发热、闪烁、电池漏液时，停止使用并检查。"
+  ],
+  "notes": "头灯是夜里的第三只手，但也可能变成额头上的小灯塔。",
+  "category_original": "照明与夜间行动",
+  "domains": [
+    "power",
+    "security",
+    "tools"
+  ],
+  "intents": [
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "temporary_repair",
+    "night",
+    "resource_exposure"
+  ],
+  "objects": [
+    "flashlight",
+    "lighting"
+  ],
+  "keywords": [
+    "头灯使用规则",
+    "照明",
+    "设备",
+    "夜间",
+    "维修",
+    "temporary_repair",
+    "night",
+    "resource_exposure",
+    "flashlight",
+    "lighting",
+    "power_lighting_energy",
+    "能源照明"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

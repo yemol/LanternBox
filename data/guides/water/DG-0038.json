@@ -1,0 +1,87 @@
+{
+  "id": "DG-0038",
+  "title": "灰水再利用：能用，但不能误饮",
+  "category": "水与食物保障",
+  "scenario": "洗菜、洗手、简单冲洗后的相对低污染水还想二次利用。",
+  "goal": "节省饮用水，同时避免灰水进入入口系统。",
+  "tools": [
+    "灰水桶",
+    "标签纸",
+    "筛网",
+    "手套",
+    "记录本"
+  ],
+  "steps": [
+    "把灰水和饮用水容器完全分开，灰水桶写上“不可饮用”。",
+    "只收集低污染灰水，比如洗手、洗菜、简单冲洗水。",
+    "含油、含排泄物、呕吐物、血液、化学清洁剂的水不要进入普通灰水桶。",
+    "灰水用于冲厕所、降尘、浇非入口植物或清洗地面。",
+    "当天尽量用完，不要长期敞口存放。",
+    "使用灰水后洗手，避免接触伤口和餐具。"
+  ],
+  "check": [
+    "灰水桶标签醒目。",
+    "灰水没有进入饮水区。",
+    "没有长期敞口发臭。"
+  ],
+  "common_mistakes": [
+    "用灰水洗餐具。",
+    "用含油灰水浇叶菜。",
+    "把灰水桶和饮水桶放一起。"
+  ],
+  "fallback": "没有专用桶时，用固定旧盆，但必须做明显标记。",
+  "stop_or_escalate": [
+    "灰水发臭、长虫、含化学品或排泄物。",
+    "有人误饮灰水。"
+  ],
+  "notes": "灰水是清洁资源，不是饮用水储备。",
+  "category_original": "饮水与水源",
+  "domains": [
+    "water",
+    "food",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "unsafe_water",
+    "contamination",
+    "infection_control"
+  ],
+  "objects": [
+    "drinking_water",
+    "supplies"
+  ],
+  "keywords": [
+    "灰水再利用",
+    "能用",
+    "但不能误饮",
+    "饮用水",
+    "水源",
+    "食物",
+    "洗手",
+    "污染",
+    "unsafe_water",
+    "contamination",
+    "infection_control",
+    "drinking_water",
+    "supplies",
+    "water_rationing",
+    "hygiene_contamination",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物"
+  ]
+}

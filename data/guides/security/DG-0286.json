@@ -1,0 +1,88 @@
+{
+  "id": "DG-0286",
+  "title": "新成员接纳流程",
+  "category": "组织秩序与训练演练",
+  "scenario": "有人请求加入住所、营地、互助小组或临时队伍。",
+  "goal": "降低安全、卫生、物资和信任风险。",
+  "tools": [
+    "记录本",
+    "临时观察区",
+    "规则表",
+    "任务表"
+  ],
+  "steps": [
+    "先在核心区外沟通，不直接带入仓库和睡眠区。",
+    "询问基本情况：人数、健康状态、随身物资、技能、紧急需求。",
+    "说明现有规则，尤其是水、火、药、外出和隐私资料规则。",
+    "设置观察期，新成员先参与低风险任务。",
+    "不立刻开放高敏感区域、成员档案、药箱和隐藏物资位置。",
+    "记录接纳时间、成员情况、分配任务和观察结果。",
+    "观察期结束后再决定是否扩大权限。"
+  ],
+  "check": [
+    "新成员没有直接进入核心区。",
+    "规则已说明。",
+    "观察期和任务明确。"
+  ],
+  "common_mistakes": [
+    "一时心软直接带进仓库。",
+    "不说明规则就让对方自由行动。",
+    "新成员马上接触药箱和证件资料。"
+  ],
+  "fallback": "无法接纳时，也可以提供有限帮助，例如水、路线信息或外部临时点，但不开放核心区。",
+  "stop_or_escalate": [
+    "对方拒绝规则、隐瞒人数、试探仓库、威胁或煽动冲突时，停止接纳。"
+  ],
+  "notes": "接纳不是开门瞬间完成的事，而是一个观察流程。",
+  "category_original": "群体规则与秩序",
+  "domains": [
+    "security",
+    "shelter",
+    "tools",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "temporary_repair",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "building",
+    "door",
+    "inventory",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "新成员接纳流程",
+    "安全",
+    "风险",
+    "住所",
+    "temporary_repair",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "building",
+    "door",
+    "inventory",
+    "people",
+    "supplies",
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

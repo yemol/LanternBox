@@ -1,0 +1,81 @@
+{
+  "id": "DG-0141",
+  "title": "共享水源协定",
+  "category": "组织秩序与训练演练",
+  "scenario": "多个家庭、小队或邻居共用井、雨水点、溪流、蓄水池或临时水站。",
+  "goal": "保护水源长期可用，避免污染和争抢。",
+  "tools": [
+    "规则牌",
+    "绳子",
+    "记录本",
+    "水桶标签",
+    "公告板"
+  ],
+  "steps": [
+    "划分取水区、洗涤区、排泄禁区和垃圾禁区。",
+    "规定取水时段、每次取水上限或排队规则。",
+    "水桶必须标记用途，脏桶不能伸进取水点。",
+    "任何污染事件必须公开记录，例如腹泻、死鼠、污水流入。",
+    "共同维护水源周边路径、遮盖和排水。",
+    "争议不在水边吵，转移到规则讨论点处理。"
+  ],
+  "check": [
+    "取水、洗涤、排泄区域分开。",
+    "污染事件能被报告。",
+    "排队和取水规则可见。"
+  ],
+  "common_mistakes": [
+    "在取水点洗衣洗伤口。",
+    "私自改变水源用途。",
+    "隐瞒污染事实。"
+  ],
+  "fallback": "没有规则牌时，用石头、绳子和口头集合说明临时建立规则。",
+  "stop_or_escalate": [
+    "水源被污染、争抢推搡、多人腹泻、动物尸体进入水源时，暂停饮用并重建规则。"
+  ],
+  "notes": "共享水源靠规则活着，不靠运气活着。",
+  "category_original": "社区与交换",
+  "domains": [
+    "general",
+    "water",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "water_treatment",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "unsafe_water",
+    "contamination",
+    "temporary_repair"
+  ],
+  "objects": [
+    "drinking_water",
+    "rainwater"
+  ],
+  "keywords": [
+    "共享水源协定",
+    "水源",
+    "雨水",
+    "污染",
+    "unsafe_water",
+    "contamination",
+    "temporary_repair",
+    "drinking_water",
+    "rainwater",
+    "water_treatment",
+    "hygiene_contamination",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物"
+  ]
+}

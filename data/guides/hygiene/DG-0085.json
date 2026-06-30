@@ -1,0 +1,84 @@
+{
+  "id": "DG-0085",
+  "title": "厕所替代方案：桶厕和灰土覆盖",
+  "category": "居住卫生与空间管理",
+  "scenario": "停水、厕所损坏、户外营地或无法正常冲厕。",
+  "goal": "建立可持续排泄系统，避免污染饮水和生活区。",
+  "tools": [
+    "带盖桶",
+    "垃圾袋",
+    "灰土/木屑/干土",
+    "手套",
+    "标签",
+    "洗手点"
+  ],
+  "steps": [
+    "选择远离饮水、厨房、睡眠区的位置，尽量通风且可遮挡。",
+    "桶内套厚垃圾袋，旁边放灰土、木屑或干土。",
+    "每次使用后覆盖一层灰土或干土，减少气味和苍蝇。",
+    "桶盖保持关闭，儿童不能玩。",
+    "达到半满到三分之二时封袋处理，不要装到满溢。",
+    "处理后必须洗手，厕所旁设置简易洗手点。",
+    "记录厕所位置和更换时间，避免污染区扩大。"
+  ],
+  "check": [
+    "厕所区远离饮水和厨房。",
+    "每次后有覆盖物。",
+    "处理后能洗手。"
+  ],
+  "common_mistakes": [
+    "把桶厕放厨房旁。",
+    "装满到溢出才处理。",
+    "没有覆盖物导致苍蝇和气味扩散。"
+  ],
+  "fallback": "没有带盖桶时，用固定坑位加遮挡，但必须远离水源并覆盖。",
+  "stop_or_escalate": [
+    "排泄物外漏、多人腹泻、厕所区进水或靠近饮水点时，立即迁移或重建。"
+  ],
+  "notes": "厕所系统做不好，饮水系统很快会被拖下水。",
+  "category_original": "卫生防疫",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "water",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "water_outage",
+    "contamination"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "toilet"
+  ],
+  "keywords": [
+    "厕所替代方案",
+    "桶厕和灰土覆盖",
+    "厕所",
+    "污染",
+    "停水",
+    "water_outage",
+    "contamination",
+    "drinking_water",
+    "bucket",
+    "toilet",
+    "water_rationing",
+    "hygiene_contamination",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "异响",
+    "脚步声",
+    "门外",
+    "冰箱食物"
+  ]
+}

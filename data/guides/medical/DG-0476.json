@@ -1,0 +1,79 @@
+{
+  "id": "DG-0476",
+  "title": "洗手关键时刻",
+  "category": "医疗急救与照护",
+  "scenario": "水和清洁物资有限，无法频繁完整洗手。",
+  "goal": "把洗手资源集中在最关键的传播节点。",
+  "tools": [
+    "洗手水",
+    "肥皂少量",
+    "擦手布",
+    "提示卡"
+  ],
+  "steps": [
+    "明确必须洗手的时刻：如厕后、处理呕吐粪便后、做饭前、取饮用水前、处理伤口前后。",
+    "手部明显脏污时优先用水洗。",
+    "洗手水和饮用水分开管理。",
+    "擦手布个人化或按区域分开。",
+    "儿童和照护者重点提醒。",
+    "无法完整洗手时，至少清洁指尖、掌心、指缝和手腕。",
+    "每天检查洗手点是否还有水和清洁材料。"
+  ],
+  "check": [
+    "关键时刻有洗手。",
+    "擦手布不混用。",
+    "洗手点有水。"
+  ],
+  "common_mistakes": [
+    "只在手看起来脏时才洗。",
+    "厕所出来直接拿食物。",
+    "多人共用湿毛巾擦手。"
+  ],
+  "fallback": "水极少时，用少量水分段清洗关键部位，并减少高风险接触。",
+  "stop_or_escalate": [
+    "多人腹泻、伤口感染、食物污染时，立即提高洗手优先级。"
+  ],
+  "notes": "洗手不是洁癖，是在传播链上砍一刀。",
+  "category_original": "疾病传播控制",
+  "domains": [
+    "medical",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "infection_control",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "洗手关键时刻",
+    "infection_control",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

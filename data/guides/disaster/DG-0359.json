@@ -1,0 +1,81 @@
+{
+  "id": "DG-0359",
+  "title": "小空间集中保暖",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "寒潮、停电、燃料不足或夜间温度快速下降时，整间房无法保暖。",
+  "goal": "把人员集中到更小空间，减少热量流失。",
+  "tools": [
+    "毯子",
+    "纸板",
+    "门帘",
+    "胶带",
+    "温度计可选"
+  ],
+  "steps": [
+    "选择最小、最避风、离厕所和水源较近的房间作为暖区。",
+    "关闭不使用房间的门，减少热量扩散。",
+    "用毯子、床单或厚衣物遮挡门缝和窗缝，但不要封死必要通风。",
+    "地面铺纸板、垫子或衣物，避免直接接触冷地面。",
+    "老人、儿童、病人安排在暖区内侧，远离门窗。",
+    "夜间减少进出次数，出入后立刻恢复门帘。",
+    "每天检查是否有潮气、缺氧、异味或过度闷热。"
+  ],
+  "check": [
+    "暖区小且避风。",
+    "地面有隔冷层。",
+    "重点人群在内侧。"
+  ],
+  "common_mistakes": [
+    "整屋平均取暖。",
+    "把通风完全封死。",
+    "老人睡在门口冷风位。"
+  ],
+  "fallback": "没有独立房间时，用床单、纸板和家具围出一个低矮保暖角。",
+  "stop_or_escalate": [
+    "多人头晕、空气浑浊、凝露严重、温度继续下降时，调整通风和保暖方式。"
+  ],
+  "notes": "取暖不是把世界变热，而是先守住一小块能睡觉的地方。",
+  "category_original": "寒冷取暖与保温",
+  "domains": [
+    "disaster",
+    "power",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "power_outage",
+    "scarcity",
+    "personnel_change",
+    "night"
+  ],
+  "objects": [
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "小空间集中保暖",
+    "停电",
+    "保暖",
+    "power_outage",
+    "scarcity",
+    "personnel_change",
+    "night",
+    "people",
+    "person",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

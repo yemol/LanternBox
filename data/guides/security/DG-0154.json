@@ -1,0 +1,82 @@
+{
+  "id": "DG-0154",
+  "title": "刀具和锐器管理",
+  "category": "工具维修与替代制作",
+  "scenario": "有美工刀、菜刀、剪刀、锯、破玻璃、针、刀片等锐器。",
+  "goal": "减少割伤、误拿和儿童接触风险。",
+  "tools": [
+    "刀套",
+    "硬盒",
+    "标签",
+    "手套",
+    "收纳箱"
+  ],
+  "steps": [
+    "把所有刀具和锐器集中到固定位置。",
+    "刀刃加套，剪刀合拢，锯片用布或纸板包住。",
+    "破玻璃、刀片、针等放入硬盒，贴尖锐物标签。",
+    "儿童不能自由接触锐器区。",
+    "使用后立刻清洁、擦干、归位。",
+    "钝刀和破损刀具贴标签，避免用力过大造成意外。"
+  ],
+  "check": [
+    "锐器有固定区。",
+    "刀刃不裸露。",
+    "尖锐垃圾进入硬盒。"
+  ],
+  "common_mistakes": [
+    "刀具散在床边、地上和食物袋里。",
+    "破玻璃直接扔软垃圾袋。",
+    "钝刀继续硬切。"
+  ],
+  "fallback": "没有刀套时，用厚纸板、布条和胶带做临时刀套。",
+  "stop_or_escalate": [
+    "有人被割伤、儿童接触锐器、刀具丢失时，立即重新清点和收纳。"
+  ],
+  "notes": "锐器好用，也很会偷袭。",
+  "category_original": "维修工具",
+  "domains": [
+    "security",
+    "tools",
+    "medical",
+    "hygiene",
+    "shelter"
+  ],
+  "intents": [
+    "medical_wound_bleeding",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "wound",
+    "temporary_repair"
+  ],
+  "objects": [
+    "glass",
+    "tools",
+    "people"
+  ],
+  "keywords": [
+    "刀具和锐器管理",
+    "风险",
+    "工具",
+    "维修",
+    "wound",
+    "temporary_repair",
+    "glass",
+    "tools",
+    "people",
+    "medical_wound_bleeding",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "主食配给",
+    "太阳能充电",
+    "夜间异响"
+  ]
+}

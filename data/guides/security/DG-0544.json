@@ -1,0 +1,90 @@
+{
+  "id": "DG-0544",
+  "title": "可疑人员接近：不对峙，先收缩",
+  "category": "安全与风险",
+  "scenario": "发现陌生人、可疑人员、反复试探者或不明人员靠近住所、营地、物资点。",
+  "goal": "优先降低暴露和冲突风险，保护人员和关键物资。",
+  "tools": [
+    "低亮灯",
+    "通讯设备",
+    "哨子",
+    "记录本",
+    "撤离包"
+  ],
+  "steps": [
+    "先让人员收缩到安全区域，儿童、老人、伤病员远离门窗。",
+    "不要单人出去质问，也不要展示物资、人数和设备。",
+    "关闭明显暴露的灯光和声音，保留必要低亮照明。",
+    "记录人数、方向、停留时间、行为和是否重复出现。",
+    "准备撤离包和备用路线，但不急于打开门或外出。",
+    "如必须沟通，保持距离、短句、低信息量，不透露库存和人员结构。"
+  ],
+  "check": [
+    "人员已远离开口位置。",
+    "没有单人外出对峙。",
+    "物资和人数没有被主动暴露。"
+  ],
+  "common_mistakes": [
+    "直接开门争辩。",
+    "展示武器或大量物资激化局面。",
+    "让好奇成员围观窗口。",
+    "把全部信息告诉陌生人。"
+  ],
+  "fallback": "无法判断对方意图时，按低暴露原则处理，先保护人员，再判断是否转移。",
+  "stop_or_escalate": [
+    "对方试图进入。",
+    "多人包围或反复试探。",
+    "出现威胁、破坏、跟踪或堵住撤离路线。"
+  ],
+  "notes": "不对峙不是软弱，是把主动权留给自己。",
+  "category_original": "安全与风险",
+  "domains": [
+    "security",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "suspicious_approach",
+    "resource_exposure"
+  ],
+  "objects": [
+    "building",
+    "inventory",
+    "people",
+    "person",
+    "supplies"
+  ],
+  "keywords": [
+    "可疑人员接近",
+    "不对峙",
+    "先收缩",
+    "可疑",
+    "陌生人",
+    "安全",
+    "风险",
+    "住所",
+    "inventory_change",
+    "personnel_change",
+    "suspicious_approach",
+    "resource_exposure",
+    "building",
+    "inventory",
+    "people",
+    "person",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "id": "DG-0509",
+  "title": "工具用途说明卡",
+  "category": "工具维修与替代制作",
+  "scenario": "工具种类变多，新成员或儿童不知道用途和禁忌。",
+  "goal": "给工具建立简单说明，减少误用。",
+  "tools": [
+    "标签",
+    "说明卡",
+    "工具箱"
+  ],
+  "steps": [
+    "为高频工具写用途、禁止用途和归位点。",
+    "每张卡不超过三条。",
+    "锐器和电气工具加危险标记。",
+    "说明卡贴在工具箱内侧或工具架旁。",
+    "新成员使用前先看说明并示范。",
+    "工具用途变化后更新卡片。",
+    "损坏工具标记停用，不只靠口头提醒。"
+  ],
+  "check": [
+    "用途和禁忌清楚。",
+    "危险工具有标记。",
+    "损坏工具停用。"
+  ],
+  "common_mistakes": [
+    "锯子拿去撬东西。",
+    "儿童拿尖锐工具玩。",
+    "说明卡和实际位置不一致。"
+  ],
+  "fallback": "没有卡片时，用颜色贴和口头三句法说明。",
+  "stop_or_escalate": [
+    "工具被反复误用、出现伤人或损坏时，立即重做说明和权限。"
+  ],
+  "notes": "工具说明卡是给手的路标。",
+  "category_original": "工具百科前置",
+  "domains": [
+    "tools",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "tools_security_repair"
+  ],
+  "situations": [
+    "temporary_repair",
+    "personnel_change"
+  ],
+  "objects": [
+    "tools",
+    "people"
+  ],
+  "keywords": [
+    "工具用途说明卡",
+    "工具",
+    "维修",
+    "temporary_repair",
+    "personnel_change",
+    "tools",
+    "people",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

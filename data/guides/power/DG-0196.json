@@ -1,0 +1,84 @@
+{
+  "id": "DG-0196",
+  "title": "无通信外出规则",
+  "category": "通信信息与数据安全",
+  "scenario": "没有手机信号、对讲机、电量或可靠通信时必须外出。",
+  "goal": "让外出行为可追踪，不让人消失在空白里。",
+  "tools": [
+    "外出登记表",
+    "地图",
+    "联络卡",
+    "哨子",
+    "手表"
+  ],
+  "steps": [
+    "出发前登记外出人员、方向、路线、目的、预计返回时间。",
+    "至少两人同行，除非任务极短且路线完全安全。",
+    "指定最晚返回时间，超时触发等待、观察或查找。",
+    "每个人带联络卡、水、照明和基本防护。",
+    "只走登记路线，不临时改路；必须改路时在固定留言点留信息。",
+    "返回后立刻登记实际路线、发现和消耗。"
+  ],
+  "check": [
+    "外出前有登记。",
+    "有最晚返回时间。",
+    "返回后有记录。"
+  ],
+  "common_mistakes": [
+    "口头说一声就走。",
+    "一个人去陌生路线。",
+    "临时改变路线不留信息。"
+  ],
+  "fallback": "必须单人短途时，限制距离和时间，并让值守者持续观察。",
+  "stop_or_escalate": [
+    "天气变坏、路线受阻、超时未归、外部冲突时，启动查找或等待流程。"
+  ],
+  "notes": "没有通信时，登记就是通信的替身。",
+  "category_original": "通信联络",
+  "domains": [
+    "power",
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "signal_plan"
+  ],
+  "objects": [
+    "signal",
+    "battery"
+  ],
+  "keywords": [
+    "无通信外出规则",
+    "电量",
+    "安全",
+    "通信",
+    "信号",
+    "登记",
+    "signal_plan",
+    "signal",
+    "battery",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

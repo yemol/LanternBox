@@ -1,0 +1,72 @@
+{
+  "id": "DG-0300",
+  "title": "纸板的应急用途",
+  "category": "工具维修与替代制作",
+  "scenario": "有纸箱、厚纸板、包装板或废纸，需要临时用于生活和维修。",
+  "goal": "把纸板用于隔冷、标记、收纳、遮挡和临时垫高。",
+  "tools": [
+    "纸板",
+    "剪刀",
+    "胶带",
+    "记号笔"
+  ],
+  "steps": [
+    "先挑选干燥、无油污、无霉味的纸板。",
+    "厚纸板可用于地面隔冷、临时睡垫底层、物资垫高。",
+    "干净纸板可做标签板、区域标记、路线提示。",
+    "纸板箱可做轻物收纳，但不要长期装潮湿物和重物。",
+    "纸板可短时间遮挡窗缝或破洞，但要远离火源。",
+    "使用过的纸板标记用途，不把污染纸板拿去接触食物。",
+    "纸板受潮变软、发霉或有虫后立即降级处理。"
+  ],
+  "check": [
+    "纸板干燥。",
+    "远离火源。",
+    "污染纸板不接触食物。"
+  ],
+  "common_mistakes": [
+    "湿纸板垫食物。",
+    "纸板靠近炉具。",
+    "发霉纸箱继续装衣物。"
+  ],
+  "fallback": "纸板不足时，优先用于睡眠隔冷、物资离地和明显标记。",
+  "stop_or_escalate": [
+    "纸板发霉、靠近火源、吸水变软导致物资倒塌时，停止使用。"
+  ],
+  "notes": "纸板是最便宜的结构材料，但怕水、怕火、怕霉。",
+  "category_original": "材料回收与再利用",
+  "domains": [
+    "tools",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "tools_security_repair"
+  ],
+  "situations": [
+    "structural_risk",
+    "temporary_repair"
+  ],
+  "objects": [
+    "drinking_water",
+    "tools"
+  ],
+  "keywords": [
+    "纸板的应急用途",
+    "工具",
+    "维修",
+    "structural_risk",
+    "temporary_repair",
+    "drinking_water",
+    "tools",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

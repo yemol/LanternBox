@@ -1,0 +1,76 @@
+{
+  "id": "DG-0169",
+  "title": "不明动物接触原则",
+  "category": "种植养殖与采集",
+  "scenario": "遇到野狗、鼠、蝙蝠、猴子、蛇、行为异常猫狗或不明动物尸体。",
+  "goal": "避免咬伤、抓伤、污染和引来更多动物。",
+  "tools": [
+    "手套",
+    "长棍",
+    "垃圾袋",
+    "记录本",
+    "围挡"
+  ],
+  "steps": [
+    "保持距离，不投喂，不围观，不试图徒手抓。",
+    "保护食物、垃圾和水源，避免动物反复回来。",
+    "儿童和宠物远离不明动物。",
+    "发现动物尸体时，戴手套，用工具和袋子处理，不徒手接触。",
+    "被咬抓后立即按伤口流程清洗并记录动物特征。",
+    "记录动物出现时间、方向、数量和是否反复出现。"
+  ],
+  "check": [
+    "没人徒手接触。",
+    "食物和垃圾已加盖。",
+    "咬抓伤有记录。"
+  ],
+  "common_mistakes": [
+    "投喂野狗野猫。",
+    "让儿童靠近拍照。",
+    "徒手处理死鼠或蝙蝠。"
+  ],
+  "fallback": "无法处理尸体时，先围挡和标记，避免踩踏和儿童接触。",
+  "stop_or_escalate": [
+    "动物攻击、咬伤、成群靠近、尸体靠近水源时，立即加强边界和卫生处理。"
+  ],
+  "notes": "不明动物带来的不是剧情，是咬伤和污染。",
+  "category_original": "动物与宠物",
+  "domains": [
+    "planting",
+    "hygiene",
+    "medical",
+    "water",
+    "food"
+  ],
+  "intents": [
+    "hygiene_contamination",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "contamination",
+    "food_production"
+  ],
+  "objects": [],
+  "keywords": [
+    "不明动物接触原则",
+    "种植",
+    "污染",
+    "contamination",
+    "food_production",
+    "hygiene_contamination",
+    "planting_seed_reserve",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

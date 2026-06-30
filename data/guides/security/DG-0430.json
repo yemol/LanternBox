@@ -1,0 +1,93 @@
+{
+  "id": "DG-0430",
+  "title": "取水点风险复核",
+  "category": "库存资料与成员档案",
+  "scenario": "水源可能因人员聚集、污染、动物尸体、洪水、冲突或路线变化而不再安全。",
+  "goal": "每次取水前复核水源和路线状态。",
+  "tools": [
+    "水桶",
+    "地图",
+    "记录本",
+    "防护手套"
+  ],
+  "steps": [
+    "出发前查看最近一次取水记录和异常。",
+    "观察路线是否有新增障碍、冲突点、积水、电线或陌生聚集。",
+    "到达水源后先观察颜色、气味、漂浮物、死鱼虫、油膜和周边活动。",
+    "不要在明显污染或争抢状态下取水。",
+    "取水量和路线变化写入记录。",
+    "返回后报告水源是否仍可用。",
+    "水源状态变化时更新地图和取水规则。"
+  ],
+  "check": [
+    "出发前看过记录。",
+    "水源状态已观察。",
+    "返回后更新。"
+  ],
+  "common_mistakes": [
+    "一直用同一个水源不复核。",
+    "看到油膜还取。",
+    "路线变危险不记录。"
+  ],
+  "fallback": "主水源可疑时，减少取水量并启用备用水源或储备水。",
+  "stop_or_escalate": [
+    "水源有化学味、死鱼、冲突、尸体、污水进入时，停止取水。"
+  ],
+  "notes": "水源不是永久资产，它每天都要重新通过面试。",
+  "category_original": "情报记录与风险评估",
+  "domains": [
+    "security",
+    "records",
+    "disaster",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "contamination",
+    "flood",
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "person"
+  ],
+  "keywords": [
+    "取水点风险复核",
+    "安全",
+    "风险",
+    "记录",
+    "洪水",
+    "路线",
+    "contamination",
+    "flood",
+    "inventory_change",
+    "personnel_change",
+    "drinking_water",
+    "route",
+    "inventory",
+    "people",
+    "log",
+    "person",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

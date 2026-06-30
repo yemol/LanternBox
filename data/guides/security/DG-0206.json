@@ -1,0 +1,83 @@
+{
+  "id": "DG-0206",
+  "title": "夜间低暴露灯光信号",
+  "category": "通信信息与数据安全",
+  "scenario": "夜间需要给队友指路、确认位置或求助，但不想大范围暴露。",
+  "goal": "用短促、定向、低亮的灯光传递信息。",
+  "tools": [
+    "手电",
+    "遮光布",
+    "规则卡"
+  ],
+  "steps": [
+    "提前约定灯光信号：一闪回应，三闪集合，连续短闪求助。",
+    "用手或布遮住手电，只让光朝队友方向。",
+    "不要长时间照向天空、窗外或陌生人方向。",
+    "信号后立刻关闭灯光，等待回应。",
+    "儿童使用灯光信号要有成年人监督。",
+    "每晚检查手电位置和电量。"
+  ],
+  "check": [
+    "信号短促。",
+    "光线有方向。",
+    "没有长时间暴露位置。"
+  ],
+  "common_mistakes": [
+    "用强光扫射四周。",
+    "站在窗边一直亮灯。",
+    "每个人信号含义不同。"
+  ],
+  "fallback": "没有手电时，用反光物、低亮灯或遮挡后的手机灯临时代替。",
+  "stop_or_escalate": [
+    "外部有人跟踪灯光、冲突靠近、位置敏感时，停止灯光信号改用固定留言点。"
+  ],
+  "notes": "夜间灯光是一把小刀，能照路，也能暴露你。",
+  "category_original": "信号标记",
+  "domains": [
+    "security",
+    "comms",
+    "power",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "signal_plan",
+    "night",
+    "resource_exposure"
+  ],
+  "objects": [
+    "signal",
+    "lighting"
+  ],
+  "keywords": [
+    "夜间低暴露灯光信号",
+    "夜间",
+    "安全",
+    "通信",
+    "信号",
+    "signal_plan",
+    "night",
+    "resource_exposure",
+    "signal",
+    "lighting",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响"
+  ]
+}

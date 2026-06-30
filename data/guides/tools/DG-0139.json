@@ -1,0 +1,99 @@
+{
+  "id": "DG-0139",
+  "title": "交换后物品隔离",
+  "category": "组织秩序与训练演练",
+  "scenario": "从外部换来食物、容器、衣物、工具、药品或水。",
+  "goal": "防止污染、虫害、错误标签进入原有系统。",
+  "tools": [
+    "隔离箱",
+    "标签纸",
+    "手套",
+    "清洁用品",
+    "记录本"
+  ],
+  "steps": [
+    "换回物资先放到隔离区，不直接进入仓库或厨房。",
+    "检查外包装、气味、破损、虫害、鼠咬、液体泄漏。",
+    "能清洁外表的先清洁，入口物品更谨慎。",
+    "水和食物不与原有安全库存混合。",
+    "工具和衣物检查尖锐、油污、血迹、化学味。",
+    "确认安全后再入库，并记录来源。"
+  ],
+  "check": [
+    "换回物资先隔离。",
+    "没有直接混进饮水和食物区。",
+    "来源和检查结果已记录。"
+  ],
+  "common_mistakes": [
+    "换来就直接倒进米缸或水桶。",
+    "儿童先打开翻看。",
+    "未知药品混进药箱。"
+  ],
+  "fallback": "空间不足时，用一个固定角落或箱子作为外来物资观察区。",
+  "stop_or_escalate": [
+    "物资有异味、虫害、化学污染、血迹、鼠咬或标签不明时，不进入核心库存。"
+  ],
+  "notes": "外来物资先隔离，是保护原有系统。",
+  "category_original": "社区与交换",
+  "domains": [
+    "tools",
+    "security",
+    "hygiene",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "contamination",
+    "infection_control",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "clothes",
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "交换后物品隔离",
+    "工具",
+    "污染",
+    "衣物",
+    "contamination",
+    "infection_control",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "medicine",
+    "clothes",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

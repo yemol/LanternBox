@@ -1,0 +1,75 @@
+{
+  "id": "DG-0423",
+  "title": "长指南压缩成三步",
+  "category": "通信信息与数据安全",
+  "scenario": "某条指南很长，现场人员无法完整阅读。",
+  "goal": "把长内容压缩成三步执行版。",
+  "tools": [
+    "指南卡",
+    "纸",
+    "笔",
+    "标签"
+  ],
+  "steps": [
+    "先读完整指南，找出真正必须按顺序做的动作。",
+    "把动作压缩成三步：先稳定、再处理、后记录。",
+    "每步不超过一句短句。",
+    "保留一条最重要禁忌。",
+    "把三步卡贴在相关物资旁，例如药箱、水桶、工具箱。",
+    "定期对照原指南检查是否漏掉关键风险。",
+    "现场处理后再查完整指南补细节。"
+  ],
+  "check": [
+    "三步顺序清楚。",
+    "有一条禁忌。",
+    "贴在相关位置。"
+  ],
+  "common_mistakes": [
+    "把复杂内容压成空话。",
+    "只保留操作不保留禁忌。",
+    "三步卡和原指南矛盾。"
+  ],
+  "fallback": "不确定怎么压缩时，先写停止危险、完成动作、记录复查三步。",
+  "stop_or_escalate": [
+    "三步卡导致误操作或遗漏高风险条件时，立即停用并重写。"
+  ],
+  "notes": "三步卡不是替代指南，是紧急时的门把手。",
+  "category_original": "信息压缩与离线摘要",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "personnel_change"
+  ],
+  "objects": [
+    "door",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "长指南压缩成三步",
+    "安全",
+    "通信",
+    "personnel_change",
+    "door",
+    "people",
+    "person",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "id": "DG-0061",
+  "title": "极寒断电过夜",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "低温环境断电，无法正常供暖，夜间即将到来。",
+  "goal": "减少失温风险，保护老人、儿童、病人和设备。",
+  "tools": [
+    "干衣物",
+    "毯子",
+    "睡袋",
+    "纸板",
+    "热水袋",
+    "低亮灯"
+  ],
+  "steps": [
+    "把人员集中到较小、避风、少窗的房间，减少热量流失。",
+    "用毛巾、衣物、胶带临时封堵门窗缝隙，但保留基本通风。",
+    "每个人换掉湿衣物，穿多层干衣，重点保护头、颈、手、脚。",
+    "地面铺纸板、垫子、衣物，避免直接睡冷地面。",
+    "睡前准备安全热水袋，用布包裹，放在躯干附近，不直接贴皮肤。",
+    "安排夜间观察老人、儿童和病人，看是否发抖停止、意识迟钝、皮肤冰冷。",
+    "禁止在密闭空间烧炭、烧柴取暖。"
+  ],
+  "check": [
+    "人员集中在暖区。",
+    "湿衣已换掉。",
+    "地面隔冷。",
+    "没有密闭燃烧。"
+  ],
+  "common_mistakes": [
+    "用炭火在密闭房间取暖。",
+    "穿湿袜睡觉。",
+    "老人儿童单独睡最冷房间。"
+  ],
+  "fallback": "没有热水袋时，用装热水的密封瓶外包毛巾代替，先测试是否漏水。",
+  "stop_or_escalate": [
+    "意识迟钝、停止发抖、无法行走、呼吸异常时，按失温高风险处理。"
+  ],
+  "notes": "极寒里最危险的取暖方式，往往看起来最温暖。",
+  "category_original": "灾害专项",
+  "domains": [
+    "disaster",
+    "power",
+    "security",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "medical_elder_confusion",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "power_outage",
+    "elderly",
+    "night"
+  ],
+  "objects": [
+    "patient",
+    "elder",
+    "people"
+  ],
+  "keywords": [
+    "极寒断电过夜",
+    "设备",
+    "夜间",
+    "风险",
+    "老人",
+    "power_outage",
+    "elderly",
+    "night",
+    "patient",
+    "elder",
+    "people",
+    "medical_fever_respiratory",
+    "medical_elder_confusion",
+    "power_lighting_energy",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "太阳能充电"
+  ]
+}

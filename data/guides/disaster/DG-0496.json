@@ -1,0 +1,82 @@
+{
+  "id": "DG-0496",
+  "title": "地震后通道清理",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "地震后出口、楼梯、厕所路线、药箱路线被杂物堵塞。",
+  "goal": "优先恢复救命路线，而不是全面整理。",
+  "tools": [
+    "手套",
+    "鞋",
+    "手电",
+    "箱子",
+    "记录本"
+  ],
+  "steps": [
+    "先清理出口路线。",
+    "第二清理药箱和急救路线。",
+    "第三清理厕所和饮水路线。",
+    "玻璃、陶瓷、金属碎片放入硬盒。",
+    "重物不要单人硬搬。",
+    "清理时保留余震撤退方向。",
+    "通道恢复后标记仍危险区域。"
+  ],
+  "check": [
+    "出口路线先清。",
+    "尖锐碎片有硬盒。",
+    "危险区有标记。"
+  ],
+  "common_mistakes": [
+    "先整理卧室小东西。",
+    "徒手捡玻璃。",
+    "清理时把自己堵在里面。"
+  ],
+  "fallback": "人手少时，只清出一条可通行生命线，不追求干净。",
+  "stop_or_escalate": [
+    "通道受结构压迫、楼梯裂缝、重物不稳时，停止清理并改路线。"
+  ],
+  "notes": "灾后清理不是大扫除，是先挖出生命通道。",
+  "category_original": "地震后检查与临时加固",
+  "domains": [
+    "disaster",
+    "tools",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "earthquake",
+    "temporary_repair"
+  ],
+  "objects": [
+    "medicine",
+    "toilet",
+    "route"
+  ],
+  "keywords": [
+    "地震后通道清理",
+    "地震",
+    "加固",
+    "路线",
+    "earthquake",
+    "temporary_repair",
+    "medicine",
+    "toilet",
+    "route",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

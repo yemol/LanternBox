@@ -1,0 +1,92 @@
+{
+  "id": "DG-0088",
+  "title": "衣物污染隔离",
+  "category": "居住卫生与空间管理",
+  "scenario": "外出、清污、照护病人后衣物沾泥水、血液、呕吐物、排泄物或不明液体。",
+  "goal": "防止污染衣物把风险带进睡眠区、厨房和饮水区。",
+  "tools": [
+    "污染衣物袋",
+    "标签",
+    "手套",
+    "肥皂",
+    "晾晒绳"
+  ],
+  "steps": [
+    "在入口或污染区脱下外层污染衣物。",
+    "把污染面向内卷，放入单独袋子或盆里。",
+    "贴标签写明污染类型和日期。",
+    "照护者洗手后再进入清洁区。",
+    "能洗时单独清洗，优先用肥皂和安全水；洗后充分晾干。",
+    "洗衣废水按污染灰水处理，不倒入饮水点附近。"
+  ],
+  "check": [
+    "污染衣物没有进入床铺和厨房。",
+    "袋子有标签。",
+    "处理者洗手。"
+  ],
+  "common_mistakes": [
+    "穿污染衣物躺床。",
+    "污染衣物和儿童衣物混放。",
+    "洗衣废水倒在取水点旁。"
+  ],
+  "fallback": "没有袋子时，固定一个污染盆或污染角落，并用布盖住。",
+  "stop_or_escalate": [
+    "污染物来自化学品、血液、大量排泄物或洪水，且无法清洁时，考虑丢弃或长期隔离。"
+  ],
+  "notes": "入口隔离做得好，室内清洁压力会小很多。",
+  "category_original": "卫生防疫",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "security",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "bleeding",
+    "contamination",
+    "infection_control"
+  ],
+  "objects": [
+    "drinking_water",
+    "patient",
+    "vomit",
+    "clothes"
+  ],
+  "keywords": [
+    "衣物污染隔离",
+    "污染",
+    "呕吐物",
+    "衣物",
+    "睡眠",
+    "风险",
+    "呕吐",
+    "bleeding",
+    "contamination",
+    "infection_control",
+    "drinking_water",
+    "patient",
+    "vomit",
+    "clothes",
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

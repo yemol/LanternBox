@@ -1,0 +1,77 @@
+{
+  "id": "DG-0514",
+  "title": "育苗失败记录",
+  "category": "种植养殖与采集",
+  "scenario": "播种后不发芽、烂根、徒长、被虫吃或移栽死亡。",
+  "goal": "把失败变成下一轮可用经验。",
+  "tools": [
+    "种植记录",
+    "标签",
+    "照片可选"
+  ],
+  "steps": [
+    "记录种子来源和播种日期。",
+    "记录容器、土壤、浇水、光照和温度。",
+    "失败后不要立刻丢弃全部痕迹，先观察原因。",
+    "区分未发芽、发芽后死亡、移栽失败、虫害。",
+    "写下下一次只改一个变量。",
+    "保留少量种子做第二轮测试。",
+    "把成功和失败都进入种子档案。"
+  ],
+  "check": [
+    "失败原因分类。",
+    "下一轮变量明确。",
+    "没有一次用光种子。"
+  ],
+  "common_mistakes": [
+    "失败就怪种子。",
+    "每次同时改很多条件。",
+    "不记录导致反复失败。"
+  ],
+  "fallback": "记录工具不足时，用日期加三句话记录。",
+  "stop_or_escalate": [
+    "同批连续失败、发霉扩散、虫害进入食物区时，停止该批并清理。"
+  ],
+  "notes": "种植失败不是废话，它是土里寄来的反馈。",
+  "category_original": "种植前置与种子档案",
+  "domains": [
+    "records",
+    "planting",
+    "food",
+    "water"
+  ],
+  "intents": [
+    "planting_seed_reserve",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "seed_saving",
+    "food_production"
+  ],
+  "objects": [
+    "seed",
+    "log"
+  ],
+  "keywords": [
+    "育苗失败记录",
+    "记录",
+    "种子",
+    "发芽",
+    "种植",
+    "seed_saving",
+    "food_production",
+    "seed",
+    "log",
+    "planting_seed_reserve",
+    "records_inventory_people",
+    "种植养殖",
+    "采集"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑"
+  ]
+}

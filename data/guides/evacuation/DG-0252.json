@@ -1,0 +1,86 @@
+{
+  "id": "DG-0252",
+  "title": "推车和拖车使用",
+  "category": "撤离交通与路线",
+  "scenario": "有手推车、购物车、板车、儿童车、行李车或临时拖车。",
+  "goal": "提高搬运效率，同时避免翻车和暴露。",
+  "tools": [
+    "推车",
+    "绳子",
+    "布盖",
+    "标签",
+    "修理工具"
+  ],
+  "steps": [
+    "先检查轮子、轴、把手、刹车和承重结构。",
+    "重物放低、放中间，轻物放上方。",
+    "用绳子固定物资，避免颠簸掉落。",
+    "不要堆到遮挡视线。",
+    "路线优先选择平整路面，避开碎石、陡坡、积水和窄桥。",
+    "高价值物资用布盖住，不在路上公开展示。",
+    "使用后检查轮子是否缠线、松动或损坏。"
+  ],
+  "check": [
+    "推车结构可用。",
+    "物资固定。",
+    "视线不被遮挡。"
+  ],
+  "common_mistakes": [
+    "重物堆太高翻车。",
+    "高价值物资敞开展示。",
+    "用坏轮子的车硬拖。"
+  ],
+  "fallback": "没有推车时，用背包分批、床单拖运或简易滑板，但要降低重量。",
+  "stop_or_escalate": [
+    "推车失控、轮子脱落、路线变陡、外部人员开始关注物资时，暂停搬运。"
+  ],
+  "notes": "推车让人省力，也会让物资更显眼。",
+  "category_original": "交通与搬运",
+  "domains": [
+    "evacuation",
+    "security",
+    "disaster",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "route",
+    "inventory",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "推车和拖车使用",
+    "撤离",
+    "路线",
+    "evacuation_decision",
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure",
+    "route",
+    "inventory",
+    "people",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

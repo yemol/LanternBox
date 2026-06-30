@@ -1,0 +1,81 @@
+{
+  "id": "DG-0504",
+  "title": "搜索小队出发规则",
+  "category": "撤离交通与路线",
+  "scenario": "需要外出寻找失联成员。",
+  "goal": "避免寻找者也失联。",
+  "tools": [
+    "地图",
+    "哨子",
+    "联络卡",
+    "水",
+    "记录本"
+  ],
+  "steps": [
+    "搜索前确定搜索范围和最晚返回时间。",
+    "至少两人一组，留一人负责守点。",
+    "带水、照明、哨子、急救和路线卡。",
+    "不追进明显危险区域。",
+    "到达每个关键点记录时间和发现。",
+    "未找到也按时返回汇报。",
+    "根据结果决定是否扩大搜索。"
+  ],
+  "check": [
+    "搜索范围明确。",
+    "有最晚返回时间。",
+    "有人留守。"
+  ],
+  "common_mistakes": [
+    "所有人都冲出去找。",
+    "没有返回时间。",
+    "越找越远没人知道。"
+  ],
+  "fallback": "人手不足时，先查最近路线和留言点，不贸然远行。",
+  "stop_or_escalate": [
+    "天气恶化、外部冲突、搜索者疲劳或夜间不明环境时，暂停扩大搜索。"
+  ],
+  "notes": "搜索不是勇敢乱跑，是把风险绑上线。",
+  "category_original": "失联人员寻找与集合",
+  "domains": [
+    "evacuation",
+    "security",
+    "disaster",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "lost_contact",
+    "personnel_change"
+  ],
+  "objects": [
+    "route",
+    "people",
+    "person"
+  ],
+  "keywords": [
+    "搜索小队出发规则",
+    "撤离",
+    "路线",
+    "风险",
+    "evacuation_decision",
+    "lost_contact",
+    "personnel_change",
+    "route",
+    "people",
+    "person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

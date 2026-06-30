@@ -1,0 +1,90 @@
+{
+  "id": "DG-0355",
+  "title": "垃圾痕迹隐藏",
+  "category": "居住卫生与空间管理",
+  "scenario": "垃圾、包装、罐头、瓶子、烟灰、食物残渣可能暴露人数、物资和生活规律。",
+  "goal": "减少垃圾透露信息和吸引动物虫害。",
+  "tools": [
+    "垃圾袋",
+    "硬盒",
+    "干土",
+    "标签",
+    "手套"
+  ],
+  "steps": [
+    "食物包装不要直接散落在门口、窗口和路线旁。",
+    "罐头、瓶子和包装压缩或集中处理。",
+    "带有品牌、药名、成员信息、地址的包装单独销毁或遮盖。",
+    "垃圾点远离核心入口，不形成明显生活轨迹。",
+    "厨余和普通垃圾分开，减少动物翻找。",
+    "外出丢弃垃圾时不沿固定路线撒落。",
+    "定期检查周边是否有被风吹走的包装。"
+  ],
+  "check": [
+    "垃圾集中。",
+    "敏感包装已处理。",
+    "入口周围无明显生活垃圾。"
+  ],
+  "common_mistakes": [
+    "药盒和证件包装直接丢外面。",
+    "罐头堆暴露食物储备。",
+    "垃圾一路掉一路。"
+  ],
+  "fallback": "无法外运时，先压缩、加盖、分区，避免扩散。",
+  "stop_or_escalate": [
+    "外人翻找垃圾、动物聚集、敏感信息外露时，立即清理和转移垃圾点。"
+  ],
+  "notes": "垃圾会说话，而且通常比人诚实。",
+  "category_original": "隐蔽生活痕迹",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "security",
+    "food",
+    "power"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "food_safety_judgment",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "contamination",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "canned_food",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "垃圾痕迹隐藏",
+    "垃圾",
+    "食物",
+    "罐头",
+    "contamination",
+    "inventory_change",
+    "resource_exposure",
+    "canned_food",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "food_safety_judgment",
+    "records_inventory_people",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "DG-0251",
+  "title": "楼梯搬运规则",
+  "category": "撤离交通与路线",
+  "scenario": "需要在楼梯间搬水、粮食、伤员、设备或撤离包。",
+  "goal": "减少楼梯摔倒和连锁受伤。",
+  "tools": [
+    "手电",
+    "背包",
+    "绳子",
+    "防滑鞋",
+    "手套"
+  ],
+  "steps": [
+    "先检查楼梯是否有裂缝、积水、碎玻璃、杂物和照明问题。",
+    "重物尽量背在背上或贴近身体，不遮挡脚下视线。",
+    "一段楼梯只让一名重负重者通过，其他人保持距离。",
+    "上下楼不要抢速度，转角处先停一下。",
+    "老人、儿童、伤病员走中间，有人前后照护。",
+    "楼梯中不要停下翻包或争论。",
+    "搬运结束后清理掉落物和水渍。"
+  ],
+  "check": [
+    "楼梯通道清空。",
+    "重物不遮挡视线。",
+    "人员保持间距。"
+  ],
+  "common_mistakes": [
+    "多人挤在楼梯上抢行。",
+    "抱大箱子看不到脚。",
+    "水洒了不清理。"
+  ],
+  "fallback": "没有照明时，不搬重物上下楼，除非原地危险更高。",
+  "stop_or_escalate": [
+    "楼梯变形、扶手松动、持续余震、浓烟、积水带电风险时，停止使用楼梯。"
+  ],
+  "notes": "楼梯是撤离通道，不是仓库和争吵点。",
+  "category_original": "交通与搬运",
+  "domains": [
+    "evacuation",
+    "power",
+    "disaster",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water",
+    "route",
+    "lock"
+  ],
+  "keywords": [
+    "楼梯搬运规则",
+    "撤离",
+    "路线",
+    "设备",
+    "evacuation_decision",
+    "drinking_water",
+    "route",
+    "lock",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

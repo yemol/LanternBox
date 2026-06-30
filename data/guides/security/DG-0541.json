@@ -1,0 +1,101 @@
+{
+  "id": "DG-0541",
+  "title": "夜间外部异响：先观察，不暴露",
+  "category": "安全与风险",
+  "scenario": "夜间听到门外、窗外、院外、楼道或住所周边有异常声音、脚步声、碰撞声或反复响动。",
+  "goal": "在不暴露人员位置的前提下判断风险，避免贸然外出确认。",
+  "tools": [
+    "低亮手电",
+    "纸笔或记录终端",
+    "门窗检查清单",
+    "哨子",
+    "通讯设备"
+  ],
+  "steps": [
+    "先让人员停止说话和走动，保持室内低声、低光，不立刻开大灯。",
+    "确认儿童、老人、伤病员在远离门窗的位置。",
+    "不要直接开门、探头、拉开窗帘或用强光照向外部。",
+    "用室内安全位置听 1 到 3 分钟，记录声音方向、次数、间隔、是否靠近、是否有人声。",
+    "检查门锁、窗扣、遮挡物和撤离通道，但动作要轻。",
+    "安排一人观察，一人准备照明和应急包，其他人保持安静。",
+    "如果声音远离且不再出现，继续低暴露观察并记录复查时间。"
+  ],
+  "check": [
+    "没有人贸然外出。",
+    "门窗和人员位置已确认。",
+    "声音方向、次数和时间有记录。"
+  ],
+  "common_mistakes": [
+    "立刻开门查看。",
+    "用强光照向外面暴露位置。",
+    "所有人一起挤到窗边。",
+    "大声讨论让外部知道室内人数。"
+  ],
+  "fallback": "没有照明时，优先保持原地安静和人员集中，不做摸黑外出检查。",
+  "stop_or_escalate": [
+    "声音持续靠近门窗。",
+    "出现撬门、破窗、多人脚步、明确威胁或呼救。",
+    "门窗被触碰或遮挡被移动。"
+  ],
+  "notes": "夜间异常声音的第一原则是低暴露。确认情况不等于走出去看。",
+  "category_original": "安全与风险",
+  "domains": [
+    "security",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_night_anomaly",
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "door_window_security",
+    "personnel_change",
+    "night",
+    "external_anomaly",
+    "suspicious_approach",
+    "resource_exposure"
+  ],
+  "objects": [
+    "building",
+    "door",
+    "window",
+    "people",
+    "outside_noise",
+    "person"
+  ],
+  "keywords": [
+    "夜间外部异响",
+    "先观察",
+    "不暴露",
+    "异响",
+    "门外",
+    "窗外",
+    "夜间",
+    "安全",
+    "风险",
+    "住所",
+    "door_window_security",
+    "personnel_change",
+    "night",
+    "external_anomaly",
+    "suspicious_approach",
+    "resource_exposure",
+    "building",
+    "door",
+    "window",
+    "people",
+    "outside_noise",
+    "person",
+    "security_night_anomaly",
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

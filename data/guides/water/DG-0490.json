@@ -1,0 +1,90 @@
+{
+  "id": "DG-0490",
+  "title": "霉菌初期控制",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "墙角、纸箱、衣物、木板、被褥或食物区出现潮湿和霉味。",
+  "goal": "尽早控制霉菌扩散，保护呼吸和物资。",
+  "tools": [
+    "口罩",
+    "手套",
+    "干布",
+    "垃圾袋",
+    "通风工具"
+  ],
+  "steps": [
+    "先找潮湿来源：漏水、积水、湿衣、返潮墙面。",
+    "发霉纸箱、食物包装和软材料先隔离。",
+    "处理霉物时戴口罩和手套，避免抖动扬尘。",
+    "可清洁硬表面擦洗后通风干燥。",
+    "发霉严重的被褥、枕头和入口材料优先废弃或降级。",
+    "食物和纸质资料离地离墙。",
+    "记录霉点位置并每天复查。"
+  ],
+  "check": [
+    "潮湿来源已找。",
+    "霉物已隔离。",
+    "食物资料离地离墙。"
+  ],
+  "common_mistakes": [
+    "闻到霉味只喷香。",
+    "发霉纸箱继续装食物。",
+    "处理霉物时抖得到处都是。"
+  ],
+  "fallback": "没有清洁剂时，先隔离、干燥、通风和移开关键物资。",
+  "stop_or_escalate": [
+    "霉斑扩大、多人咳嗽、哮喘样不适、食物受潮时，升级防潮处理。"
+  ],
+  "notes": "霉菌是慢速火灾，烧的是呼吸和库存。",
+  "category_original": "洪水后清理与霉菌控制",
+  "domains": [
+    "water",
+    "disaster",
+    "security",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "flood",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "clothes",
+    "building",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "霉菌初期控制",
+    "洪水",
+    "火灾",
+    "flood",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "clothes",
+    "building",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

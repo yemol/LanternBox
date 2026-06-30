@@ -1,0 +1,79 @@
+{
+  "id": "DG-0312",
+  "title": "破损容器二次用途",
+  "category": "工具维修与替代制作",
+  "scenario": "水桶、盆、瓶、箱子、锅、收纳盒破裂、漏水、缺盖或变形。",
+  "goal": "把破损容器降级成合适用途，减少浪费。",
+  "tools": [
+    "标签纸",
+    "胶带",
+    "剪刀",
+    "记录本"
+  ],
+  "steps": [
+    "先判断破损类型：漏水、裂缝、缺盖、变形、污染。",
+    "漏水容器不再用于饮水储存，可改为工具盒、种植盆、垃圾桶。",
+    "缺盖容器不用于长期储水和食物，可用于短时搬运或分类收纳。",
+    "裂口锋利的容器先包边或剪平。",
+    "容器降级后贴新用途标签。",
+    "不要把已降级容器混回饮水和食物区。",
+    "破损继续扩大时再降级或废弃。"
+  ],
+  "check": [
+    "破损容器已降级。",
+    "新用途有标签。",
+    "没有混回入口区。"
+  ],
+  "common_mistakes": [
+    "漏水桶继续装饮用水。",
+    "裂口割手不处理。",
+    "旧用途标签还贴着导致误用。"
+  ],
+  "fallback": "无法判断安全时，改为非入口用途或直接废弃。",
+  "stop_or_escalate": [
+    "容器破裂导致污染、割伤、漏燃料或物资损坏时，停止使用。"
+  ],
+  "notes": "容器坏了不等于没用，但不能假装没坏。",
+  "category_original": "废弃物筛选与降级使用",
+  "domains": [
+    "tools",
+    "water",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "water_rationing",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "temporary_repair"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "tools"
+  ],
+  "keywords": [
+    "破损容器二次用途",
+    "工具",
+    "维修",
+    "水桶",
+    "temporary_repair",
+    "drinking_water",
+    "bucket",
+    "tools",
+    "water_rationing",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

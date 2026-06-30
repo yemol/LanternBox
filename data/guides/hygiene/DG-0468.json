@@ -1,0 +1,88 @@
+{
+  "id": "DG-0468",
+  "title": "水桶搬运后处理",
+  "category": "水与食物保障",
+  "scenario": "水桶从外部水源、楼下、雨中或污泥路带回住所。",
+  "goal": "防止桶外污染进入饮水区。",
+  "tools": [
+    "干布",
+    "刷子",
+    "入口垫",
+    "记录本"
+  ],
+  "steps": [
+    "水桶进核心区前先停在入口处理点。",
+    "擦掉桶外泥水、污渍和底部脏物。",
+    "检查桶盖是否松动、桶口是否被手或外物污染。",
+    "外部污染严重的桶先放待处理区，不直接进饮水区。",
+    "搬运者洗手或更换手套后再处理饮用水。",
+    "记录本次水源和路线异常。",
+    "处理点的污布单独清洗或降级。"
+  ],
+  "check": [
+    "桶外已擦净。",
+    "严重污染桶未进饮水区。",
+    "搬运者处理前清洁双手。"
+  ],
+  "common_mistakes": [
+    "水桶直接放厨房。",
+    "桶底泥水滴进清洁区。",
+    "搬运手套又去摸饮用水口。"
+  ],
+  "fallback": "没有入口处理点时，在门口固定一块布或垫子作为临时处理区。",
+  "stop_or_escalate": [
+    "桶口污染、路线经过污水、桶内疑似进脏物时，重新净化或降级用途。"
+  ],
+  "notes": "水桶不是只看里面，外面也会把脏东西背回来。",
+  "category_original": "水容器卫生",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "water",
+    "food",
+    "security"
+  ],
+  "intents": [
+    "security_night_anomaly",
+    "water_rationing",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "external_anomaly"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "building"
+  ],
+  "keywords": [
+    "水桶搬运后处理",
+    "污染",
+    "住所",
+    "水源",
+    "水桶",
+    "食物",
+    "contamination",
+    "external_anomaly",
+    "drinking_water",
+    "bucket",
+    "building",
+    "security_night_anomaly",
+    "water_rationing",
+    "hygiene_contamination",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "DG-0416",
+  "title": "药箱纸质索引",
+  "category": "通信信息与数据安全",
+  "scenario": "药箱内容多、成员紧张或设备打不开时，不知道药在哪一格。",
+  "goal": "用纸质索引快速定位药品类别和禁忌。",
+  "tools": [
+    "纸",
+    "标签",
+    "笔",
+    "药箱"
+  ],
+  "steps": [
+    "按药箱分区写索引：退烧止痛、外伤、消毒、过敏、慢病、儿童、耗材。",
+    "每区只写类别、位置和负责人，不写复杂用药教程。",
+    "慢病药和个人药写成员编号，不混写。",
+    "过敏禁忌用醒目标记。",
+    "索引贴在药箱内侧或旁边，防水保存。",
+    "每次药品调整后修改索引日期。",
+    "过期索引用线划掉或重写，不让新旧并存。"
+  ],
+  "check": [
+    "索引和药箱分区一致。",
+    "个人药归属清楚。",
+    "索引有日期。"
+  ],
+  "common_mistakes": [
+    "药换位置但索引不改。",
+    "所有药名堆在一张纸上。",
+    "新旧索引同时贴着。"
+  ],
+  "fallback": "没有完整索引时，先给外伤、过敏、慢病三类贴大标签。",
+  "stop_or_escalate": [
+    "拿错药、找不到过敏药、索引与实物不符时，立即重整药箱。"
+  ],
+  "notes": "药箱索引是给紧张时的大脑减负。",
+  "category_original": "纸质备份卡",
+  "domains": [
+    "power",
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "personnel_change"
+  ],
+  "objects": [
+    "medicine",
+    "people"
+  ],
+  "keywords": [
+    "药箱纸质索引",
+    "设备",
+    "安全",
+    "通信",
+    "personnel_change",
+    "medicine",
+    "people",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

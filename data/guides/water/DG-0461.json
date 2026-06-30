@@ -1,0 +1,88 @@
+{
+  "id": "DG-0461",
+  "title": "雨水临时收集",
+  "category": "水与食物保障",
+  "scenario": "下雨时需要收集非饮用或后续净化用水。",
+  "goal": "安全收集雨水，避免屋面污染和容器混淆。",
+  "tools": [
+    "防水布",
+    "干净桶",
+    "滤布",
+    "标签",
+    "绳子"
+  ],
+  "steps": [
+    "雨开始后先让最初几分钟冲掉表面灰尘，不急着收集第一波水。",
+    "选择相对干净的防水布或收集面，避开油污屋面、鸟粪集中处和化学材料表面。",
+    "收集容器贴上生水或待处理水标签。",
+    "用布或网拦住树叶和大颗粒。",
+    "收集后盖好，避免蚊虫进入。",
+    "雨水入口前仍需过滤和消毒，不直接当安全饮用水。",
+    "记录雨水来源、日期和用途。"
+  ],
+  "check": [
+    "雨水标为待处理。",
+    "容器有盖。",
+    "没有直接饮用。"
+  ],
+  "common_mistakes": [
+    "接第一波脏水直接喝。",
+    "用不明化学布接水。",
+    "雨水桶不贴标签。"
+  ],
+  "fallback": "只能收集少量时，优先用于清洗、冲厕或净化后饮用。",
+  "stop_or_escalate": [
+    "雨水有异味、颜色异常、收集面有化学污染时，不作为饮用来源。"
+  ],
+  "notes": "雨水是天上掉下来的机会，但落地前会路过很多脏东西。",
+  "category_original": "储水与轮换",
+  "domains": [
+    "water",
+    "food",
+    "security",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "water_treatment",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "unsafe_water",
+    "contamination",
+    "temporary_repair"
+  ],
+  "objects": [
+    "drinking_water",
+    "rainwater"
+  ],
+  "keywords": [
+    "雨水临时收集",
+    "雨水",
+    "食物",
+    "安全",
+    "污染",
+    "unsafe_water",
+    "contamination",
+    "temporary_repair",
+    "drinking_water",
+    "rainwater",
+    "water_rationing",
+    "water_treatment",
+    "hygiene_contamination",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响"
+  ]
+}

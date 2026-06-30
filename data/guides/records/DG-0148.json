@@ -1,0 +1,79 @@
+{
+  "id": "DG-0148",
+  "title": "资料交接清单",
+  "category": "库存资料与成员档案",
+  "scenario": "家庭或小队需要把证件、医疗、库存、路线、密码提示交给可信成员。",
+  "goal": "避免唯一知情人离开或出事后，系统失灵。",
+  "tools": [
+    "纸质清单",
+    "防水袋",
+    "笔",
+    "壳中灯"
+  ],
+  "steps": [
+    "列出资料类别：证件、医疗记录、药品清单、库存导出、地图、集合点、密码提示、备份盘位置。",
+    "给每类资料写存放位置，不一定写完整敏感内容。",
+    "指定至少两名可信成员知道清单位置。",
+    "每次转移或备份后更新日期。",
+    "交接时双方确认哪些能公开，哪些只给负责人看。",
+    "把清单放入防水袋，另存一份电子版到离线存储。"
+  ],
+  "check": [
+    "至少两人知道关键资料位置。",
+    "清单有日期。",
+    "敏感信息没有完全裸露。"
+  ],
+  "common_mistakes": [
+    "所有信息只在一个人脑子里。",
+    "把完整密码明文散发。",
+    "资料位置变了但清单不更新。"
+  ],
+  "fallback": "没有打印条件时，手写简版也比没有强。",
+  "stop_or_escalate": [
+    "主要负责人外出、受伤、失联前必须交接。"
+  ],
+  "notes": "资料交接是组织韧性的一部分。",
+  "category_original": "证件与资料",
+  "domains": [
+    "records",
+    "disaster",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "route",
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "资料交接清单",
+    "清单",
+    "路线",
+    "evacuation_decision",
+    "inventory_change",
+    "personnel_change",
+    "route",
+    "inventory",
+    "people",
+    "shelter_disaster_evacuate",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

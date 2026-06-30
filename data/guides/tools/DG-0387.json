@@ -1,0 +1,87 @@
+{
+  "id": "DG-0387",
+  "title": "每日晚间收束",
+  "category": "组织秩序与训练演练",
+  "scenario": "一天结束前，工具、火源、药品、人员、记录和路线可能处于混乱状态。",
+  "goal": "用晚间收束降低夜间事故和第二天混乱。",
+  "tools": [
+    "低亮灯",
+    "任务表",
+    "工具箱",
+    "记录本"
+  ],
+  "steps": [
+    "检查所有人员是否回到指定区域，外出人员是否登记。",
+    "确认火源、炉具、蜡烛、燃料和电器处于安全状态。",
+    "把手电、哨子、急救包、工具、外出包归位。",
+    "检查夜间厕所路线和出口路线是否清空。",
+    "补写当天重要事件、库存变化和异常。",
+    "安排夜间值守和重点照护。",
+    "睡前确认每个人知道低亮灯、鞋、哨子位置。"
+  ],
+  "check": [
+    "火源关闭。",
+    "关键装备归位。",
+    "夜间路线清空。",
+    "值守安排明确。"
+  ],
+  "common_mistakes": [
+    "干到累了直接睡。",
+    "火源无人复查。",
+    "工具散在地上过夜。"
+  ],
+  "fallback": "人手少时，至少检查火源、路线、照明、人员四项。",
+  "stop_or_escalate": [
+    "夜间值守无人、火源未确认、外出人员未归时，不进入睡眠状态。"
+  ],
+  "notes": "晚间收束是给黑夜上锁。",
+  "category_original": "时间管理与周期任务",
+  "domains": [
+    "tools",
+    "records",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "personnel_change",
+    "night"
+  ],
+  "objects": [
+    "medicine",
+    "route",
+    "lock",
+    "tools",
+    "people",
+    "log",
+    "person"
+  ],
+  "keywords": [
+    "每日晚间收束",
+    "工具",
+    "记录",
+    "夜间",
+    "personnel_change",
+    "night",
+    "medicine",
+    "route",
+    "lock",
+    "tools",
+    "people",
+    "log",
+    "person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

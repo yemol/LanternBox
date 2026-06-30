@@ -1,0 +1,92 @@
+{
+  "id": "DG-0058",
+  "title": "洪水退去后：别急着回家吃东西",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "洪水或内涝退去后，室内、街道、物资、家具被污水浸泡。",
+  "goal": "避免退水后的感染、触电和食物中毒。",
+  "tools": [
+    "厚底鞋",
+    "手套",
+    "口罩",
+    "垃圾袋",
+    "消毒用品",
+    "记录本"
+  ],
+  "steps": [
+    "进入前先看电线、插座、燃气味、结构裂缝和地面坑洞。",
+    "穿厚底鞋、手套、口罩，不赤脚进淤泥。",
+    "被洪水浸泡过的开封食品、纸包装食品、药品和婴儿用品先隔离，通常不要入口使用。",
+    "未开封且外壳可清洁的硬包装物品，先清泥，再清洗，再消毒外表。",
+    "清理顺序：先开通撤离路线，再处理饮水点、食物区、睡眠区，最后清理杂物。",
+    "所有接触污水的人洗手，伤口接触污水后按污染伤口处理。",
+    "记录哪些区域被水泡过，哪些物品丢弃，哪些需要复查。"
+  ],
+  "check": [
+    "没有人赤脚清淤。",
+    "被污染食物和药品没有混回正常库存。",
+    "饮水和食物区优先清理。"
+  ],
+  "common_mistakes": [
+    "水退了就直接回屋吃剩余食物。",
+    "徒手清理污水和死鼠。",
+    "把被洪水泡过的药继续当正常药。"
+  ],
+  "fallback": "清洁用品不足时，先清理人会接触的路线、饮水区、食物区和睡眠区。",
+  "stop_or_escalate": [
+    "闻到燃气味、看到电线进水、结构不稳、多人腹泻或伤口红肿时，暂停进入或使用相关区域。"
+  ],
+  "notes": "洪水退去不是结束，退水后的污染才刚开始登场。",
+  "category_original": "灾害专项",
+  "domains": [
+    "disaster",
+    "security",
+    "evacuation",
+    "shelter",
+    "hygiene"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "contamination",
+    "flood",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "洪水退去后",
+    "别急着回家吃东西",
+    "洪水",
+    "污染",
+    "contamination",
+    "flood",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "records_inventory_people",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给"
+  ]
+}

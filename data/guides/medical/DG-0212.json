@@ -1,0 +1,96 @@
+{
+  "id": "DG-0212",
+  "title": "外伤耗材消耗记录",
+  "category": "医疗急救与照护",
+  "scenario": "纱布、绷带、胶布、手套、消毒用品、敷料等急救耗材在伤口处理、清污和照护中持续消耗。",
+  "goal": "让外伤耗材从普通库存里单独被监控，避免真正需要包扎时才发现用完。",
+  "tools": [
+    "急救箱",
+    "库存模块",
+    "记录本",
+    "标签纸"
+  ],
+  "steps": [
+    "把外伤耗材按类别摆放：手套、纱布、绷带、胶布、消毒用品、敷料。",
+    "为手套、纱布、胶布、消毒用品设置最低库存线。",
+    "每次处理伤口后记录用了哪些耗材和数量。",
+    "污染或开封后失去清洁状态的耗材要降级，不放回清洁区。",
+    "急救箱中保留一小份不可随意挪用的底线耗材。",
+    "每周检查急救箱完整度，并同步库存数量。",
+    "大量消耗后，在日记中记录原因，例如多人擦伤、清污、洪水后伤口。"
+  ],
+  "check": [
+    "急救箱内有底线耗材。",
+    "消耗记录能对应到事件。",
+    "污染耗材没有混回清洁区。",
+    "库存系统数量同步更新。"
+  ],
+  "common_mistakes": [
+    "处理伤口随手拿，用完不记。",
+    "开封污染的纱布放回干净区。",
+    "急救箱被拿去装杂物。"
+  ],
+  "fallback": "没有系统记录时，在急救箱盖内贴纸质消耗表。",
+  "stop_or_escalate": [
+    "手套、纱布、胶布、消毒用品低于底线时，限制非必要使用并寻找替代方案。"
+  ],
+  "notes": "这条和普通库存盘点不同，重点是外伤耗材的清洁状态和最低可救急数量。",
+  "category_original": "药物与医疗物资管理",
+  "domains": [
+    "medical",
+    "records",
+    "security",
+    "hygiene",
+    "tools"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "medical_wound_bleeding",
+    "water_treatment",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "wound",
+    "infection_control",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "wound",
+    "bandage",
+    "medicine",
+    "inventory",
+    "log",
+    "supplies"
+  ],
+  "keywords": [
+    "外伤耗材消耗记录",
+    "伤口",
+    "记录",
+    "消毒",
+    "wound",
+    "infection_control",
+    "inventory_change",
+    "resource_exposure",
+    "bandage",
+    "medicine",
+    "inventory",
+    "log",
+    "supplies",
+    "security_suspicious_person",
+    "medical_wound_bleeding",
+    "water_treatment",
+    "records_inventory_people",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

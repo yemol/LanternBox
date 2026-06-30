@@ -1,0 +1,88 @@
+{
+  "id": "DG-0046",
+  "title": "烟熏肉鱼：小块、低温、干燥",
+  "category": "水与食物保障",
+  "scenario": "有肉或鱼，想在无冷藏条件下延长保存。",
+  "goal": "用烟和干燥降低腐败风险。",
+  "tools": [
+    "刀",
+    "火源",
+    "架子",
+    "木材",
+    "纱网",
+    "盐可选"
+  ],
+  "steps": [
+    "处理前先去除内脏、血污和明显污染。",
+    "把肉鱼切成薄片或小块。",
+    "可先少量盐腌，帮助脱水。",
+    "搭架子让食材离火源有距离，主要接受烟和热风，不是直接烤焦。",
+    "持续低温烟熏和干燥，直到内部也明显变干。",
+    "完成后冷却，放入防虫容器，写日期。"
+  ],
+  "check": [
+    "外部和内部都干。",
+    "没有腐败味。",
+    "储存时不出水汽。"
+  ],
+  "common_mistakes": [
+    "外焦内湿就收起来。",
+    "用有毒塑料、涂漆木材生烟。",
+    "烟熏已经变质的肉。"
+  ],
+  "fallback": "没有稳定烟熏条件时，少量煮熟当天吃，不要强行做长期保存。",
+  "stop_or_escalate": [
+    "有腐败味、黏滑、发霉。",
+    "食用后腹泻或呕吐。"
+  ],
+  "notes": "烟熏食品仍然需要复查，不能当永久安全。",
+  "category_original": "食物获取",
+  "domains": [
+    "water",
+    "food",
+    "security",
+    "records",
+    "power"
+  ],
+  "intents": [
+    "food_safety_judgment"
+  ],
+  "situations": [
+    "refrigeration_failure",
+    "food_spoilage"
+  ],
+  "objects": [
+    "fridge",
+    "meat",
+    "drinking_water"
+  ],
+  "keywords": [
+    "烟熏肉鱼",
+    "小块",
+    "低温",
+    "干燥",
+    "食物",
+    "肉",
+    "安全",
+    "风险",
+    "refrigeration_failure",
+    "food_spoilage",
+    "fridge",
+    "meat",
+    "drinking_water",
+    "food_safety_judgment",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "腹泻"
+  ]
+}

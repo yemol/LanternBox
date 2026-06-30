@@ -1,0 +1,79 @@
+{
+  "id": "DG-0492",
+  "title": "洪水后饮水保护",
+  "category": "灾害应对与灾后恢复",
+  "scenario": "洪水后原水源、井水、管线水或储水容器可能被污染。",
+  "goal": "避免把洪水污染带入口中。",
+  "tools": [
+    "水桶",
+    "标签",
+    "过滤材料",
+    "记录本"
+  ],
+  "steps": [
+    "洪水后暂停直接饮用不明水源。",
+    "检查储水容器是否进水、浮起、倒伏或盖子松动。",
+    "原有饮用水若桶口被污染，先隔离。",
+    "新取水必须重新过滤和消毒。",
+    "洪水附近水源记录为高风险，不只看清澈程度。",
+    "饮水容器外壁清洁后再进入干净区。",
+    "记录可用安全水数量和下一次取水计划。"
+  ],
+  "check": [
+    "不直接饮用洪水后水源。",
+    "储水容器已检查。",
+    "安全水数量有记录。"
+  ],
+  "common_mistakes": [
+    "洪水退了就用井水。",
+    "桶外污泥带进厨房。",
+    "水清就当安全。"
+  ],
+  "fallback": "安全水不足时，启用备用水封存和紧急配水。",
+  "stop_or_escalate": [
+    "水有油膜、化学味、尸体污染、污水倒灌时，不作为饮用水来源。"
+  ],
+  "notes": "洪水会把远处的脏东西送到你杯子旁边。",
+  "category_original": "洪水后清理与霉菌控制",
+  "domains": [
+    "water",
+    "disaster",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "flood"
+  ],
+  "objects": [
+    "drinking_water"
+  ],
+  "keywords": [
+    "洪水后饮水保护",
+    "水源",
+    "洪水",
+    "contamination",
+    "flood",
+    "drinking_water",
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "灾害应对",
+    "灾后恢复"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

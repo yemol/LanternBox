@@ -1,0 +1,80 @@
+{
+  "id": "DG-0346",
+  "title": "门窗静音处理",
+  "category": "居住卫生与空间管理",
+  "scenario": "门、窗、柜门、抽屉、铁门、栅栏在开合时发出明显响声。",
+  "goal": "减少日常出入和值守时的噪声。",
+  "tools": [
+    "布条",
+    "胶带",
+    "油脂可选",
+    "纸板",
+    "记录本"
+  ],
+  "steps": [
+    "先找出主要响声来源：合页、门缝、门碰、锁舌、地面摩擦。",
+    "门碰处贴布条、纸板或胶带，减少撞击声。",
+    "合页干涩时少量润滑，但不要让油滴到地面导致打滑。",
+    "柜门和抽屉内放软布，避免硬物撞击。",
+    "夜间常用门窗优先处理。",
+    "处理后开关测试，确认不会卡住逃生通道。",
+    "记录哪些门窗仍有异响，后续维修。"
+  ],
+  "check": [
+    "主要门窗已测试。",
+    "静音材料不影响开关。",
+    "逃生通道不卡住。"
+  ],
+  "common_mistakes": [
+    "为了静音把门封死。",
+    "润滑油滴在地上。",
+    "只处理外门不处理夜间常用柜门。"
+  ],
+  "fallback": "没有胶带时，用布条塞垫，但必须能快速取下。",
+  "stop_or_escalate": [
+    "门窗无法打开、逃生口受阻、门锁卡住时，立即撤掉静音材料。"
+  ],
+  "notes": "门可以安静，但不能变成打不开的墙。",
+  "category_original": "声音与噪声管理",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "security",
+    "tools"
+  ],
+  "intents": [
+    "security_night_anomaly",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "door_window_security"
+  ],
+  "objects": [
+    "building",
+    "door",
+    "window",
+    "outside_noise"
+  ],
+  "keywords": [
+    "门窗静音处理",
+    "门窗",
+    "door_window_security",
+    "building",
+    "door",
+    "window",
+    "outside_noise",
+    "security_night_anomaly",
+    "tools_security_repair",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

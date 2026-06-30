@@ -1,0 +1,79 @@
+{
+  "id": "DG-0248",
+  "title": "取水搬运路线",
+  "category": "撤离交通与路线",
+  "scenario": "需要从水源、楼下、邻居、井边、河边或临时水站搬水回住所。",
+  "goal": "减少摔倒、洒水、过度疲劳和路线暴露。",
+  "tools": [
+    "水桶",
+    "背包",
+    "扁担或推车可选",
+    "地图",
+    "记录本"
+  ],
+  "steps": [
+    "先确认水源到住所的路线，避开楼梯破损、积水、电线、冲突点和狭窄死角。",
+    "按最弱成员的体力决定每次搬水量，不把桶装到走不动。",
+    "优先使用有盖容器，减少污染和洒漏。",
+    "路线中设置一个中途休息点，休息点要开阔、有退路。",
+    "两人同行时，一人负责观察路线，一人负责搬运节奏。",
+    "返回后记录取水量、用时、路线风险和水源状态。",
+    "水桶放入饮水区前，先擦干外部泥水。"
+  ],
+  "check": [
+    "路线安全点已确认。",
+    "水桶有盖或保护。",
+    "搬运量没有超过体力。",
+    "取水记录完整。"
+  ],
+  "common_mistakes": [
+    "一口气装太满。",
+    "夜间单人搬水。",
+    "水桶外部带泥直接进饮水区。"
+  ],
+  "fallback": "没有有盖水桶时，用干净布、塑料袋或盖板临时遮盖，但不能让遮盖物接触水面。",
+  "stop_or_escalate": [
+    "路线出现冲突、急流、电线、人员摔倒或水源污染时，暂停该路线。"
+  ],
+  "notes": "水很重，搬水路线比水源距离更重要。",
+  "category_original": "交通与搬运",
+  "domains": [
+    "evacuation",
+    "security",
+    "shelter",
+    "disaster"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "temporary_repair",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "building",
+    "route"
+  ],
+  "keywords": [
+    "取水搬运路线",
+    "撤离",
+    "路线",
+    "住所",
+    "evacuation_decision",
+    "temporary_repair",
+    "resource_exposure",
+    "drinking_water",
+    "building",
+    "route",
+    "shelter_disaster_evacuate",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

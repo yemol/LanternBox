@@ -1,0 +1,85 @@
+{
+  "id": "DG-0081",
+  "title": "应急洗手站：少水也要能洗手",
+  "category": "居住卫生与空间管理",
+  "scenario": "停水、多人共住、做饭、处理伤口或如厕后需要洗手。",
+  "goal": "建立一个固定洗手点，减少肠胃病和伤口感染。",
+  "tools": [
+    "带龙头水桶或水瓶",
+    "肥皂",
+    "接水盆",
+    "毛巾或晾手区",
+    "标签"
+  ],
+  "steps": [
+    "选择离厨房近、但不贴着食物和饮水桶的位置。",
+    "准备一个干净水容器，最好能通过小孔、龙头或倾倒控制出水量。",
+    "旁边固定放肥皂，肥皂不放在污水里泡着。",
+    "下方放接水盆，接到的水作为灰水处理，不回倒饮用水桶。",
+    "贴一张规则：做饭前、吃饭前、如厕后、处理伤口前后、处理垃圾后必须洗手。",
+    "每天清理接水盆，补充洗手水，检查肥皂是否还在。"
+  ],
+  "check": [
+    "洗手水和饮用水分开。",
+    "肥皂固定在洗手点。",
+    "灰水没有回到饮水区。"
+  ],
+  "common_mistakes": [
+    "用饮用水桶口直接洗手。",
+    "肥皂泡在脏水里。",
+    "洗手点离厕所太近或离厨房太远导致没人用。"
+  ],
+  "fallback": "没有带龙头水桶时，可用瓶盖扎小孔做简易滴水瓶。",
+  "stop_or_escalate": [
+    "多人腹泻、呕吐、伤口感染增加时，立即复查洗手流程。"
+  ],
+  "notes": "美国疾病控制与预防中心 的应急个人卫生建议强调在灾后保持手卫生和保护开放伤口，洗手站是低技术但高价值设施。",
+  "category_original": "卫生防疫",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "tools",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_wound_bleeding",
+    "water_rationing",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "water_outage",
+    "wound",
+    "infection_control"
+  ],
+  "objects": [
+    "drinking_water",
+    "wound"
+  ],
+  "keywords": [
+    "应急洗手站",
+    "少水也要能洗手",
+    "洗手",
+    "固定",
+    "伤口",
+    "停水",
+    "water_outage",
+    "wound",
+    "infection_control",
+    "drinking_water",
+    "medical_wound_bleeding",
+    "water_rationing",
+    "tools_security_repair",
+    "居住卫生",
+    "空间管理"
+  ],
+  "negative_keywords": [
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "DG-0124",
+  "title": "最低库存线设置",
+  "category": "库存资料与成员档案",
+  "scenario": "想知道哪些物资低于危险线。",
+  "goal": "建立水、食物、药品、电池、燃料等关键物资的警戒线。",
+  "tools": [
+    "库存模块",
+    "记录本",
+    "标签",
+    "计算器"
+  ],
+  "steps": [
+    "列出关键物资：饮用水、主食、常用药、慢病药、电池、燃料、照明、卫生用品。",
+    "按人数估算最低天数，例如至少三天、七天或十四天。",
+    "为每一类写最低库存数量。",
+    "在库存系统备注里写最低线。",
+    "低于最低线时，标记为优先补充或限制使用。",
+    "每周复核一次，人数或季节变化时重新计算。"
+  ],
+  "check": [
+    "每类关键物资有最低线。",
+    "低于最低线的物资能被看见。",
+    "消耗限制有依据。"
+  ],
+  "common_mistakes": [
+    "把最低线当作可以用完的余额。",
+    "所有物资用同一个最低数量。",
+    "人数变化后不更新。"
+  ],
+  "fallback": "不会精确计算时，先用粗略天数管理，再根据实际消耗修正。",
+  "stop_or_escalate": [
+    "饮用水、慢病药、照明电池低于最低线时，立即限制非必要使用。"
+  ],
+  "notes": "最低库存线是系统警报，不是装饰数字。",
+  "category_original": "库存系统联动",
+  "domains": [
+    "security",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "inventory",
+    "people",
+    "supplies",
+    "battery"
+  ],
+  "keywords": [
+    "最低库存线设置",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "drinking_water",
+    "medicine",
+    "inventory",
+    "people",
+    "supplies",
+    "battery",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

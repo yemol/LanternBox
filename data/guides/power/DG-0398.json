@@ -1,0 +1,82 @@
+{
+  "id": "DG-0398",
+  "title": "事件复核三问",
+  "category": "组织秩序与训练演练",
+  "scenario": "发生摔倒、冲突、物资异常、路线错误、设备故障或病情变化后。",
+  "goal": "用简单三问把事件变成改进，而不是只留下情绪。",
+  "tools": [
+    "记录本",
+    "事件时间线",
+    "任务表"
+  ],
+  "steps": [
+    "先问发生了什么，只写事实。",
+    "再问为什么会发生，找流程、工具、信息、体力和环境原因。",
+    "最后问下次改什么，写进任务表、规则或库存。",
+    "不要在复核开始就讨论谁最有错。",
+    "有多名见证人时分别记录，不强行统一。",
+    "复核结论要能执行，例如加标记、换路线、改值班。",
+    "一周后检查同类事件是否减少。"
+  ],
+  "check": [
+    "事实、原因、改进都有记录。",
+    "改进能执行。",
+    "没有只变成骂人。"
+  ],
+  "common_mistakes": [
+    "复核变成审判。",
+    "只写以后注意。",
+    "没有任何规则更新。"
+  ],
+  "fallback": "情绪太高时，先只写事实，冷却后再做原因和改进。",
+  "stop_or_escalate": [
+    "事件涉及伤亡、关键物资损失、外部暴露时，必须完整复核。"
+  ],
+  "notes": "复核不是为了赢争论，是为了别让同一块石头绊倒两次。",
+  "category_original": "检查清单与复核",
+  "domains": [
+    "power",
+    "records",
+    "security"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "route",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "事件复核三问",
+    "设备",
+    "清单",
+    "inventory_change",
+    "resource_exposure",
+    "route",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "power_lighting_energy",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

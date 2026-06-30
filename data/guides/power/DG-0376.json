@@ -1,0 +1,89 @@
+{
+  "id": "DG-0376",
+  "title": "螺丝钉钉子小件库存",
+  "category": "工具维修与替代制作",
+  "scenario": "维修家具、门窗、工具、设备、木板、支架时需要螺丝、钉子、垫片、卡扣等小件。",
+  "goal": "避免小件丢失和型号混乱。",
+  "tools": [
+    "小盒",
+    "标签纸",
+    "磁铁可选",
+    "记录本"
+  ],
+  "steps": [
+    "把小件按类型分开：螺丝、钉子、垫片、螺母、卡扣、弹簧。",
+    "不同长度螺丝分开放，不混成一盒。",
+    "拆下来的专用小件单独装袋，写来源设备。",
+    "小件盒放在儿童拿不到的位置。",
+    "维修前准备临时零件盒，避免边拆边丢。",
+    "每次使用后记录明显低库存的小件。",
+    "生锈、弯曲、滑丝的小件降级或丢弃。"
+  ],
+  "check": [
+    "小件按类型分开。",
+    "专用小件有来源标签。",
+    "儿童不能接触。"
+  ],
+  "common_mistakes": [
+    "所有螺丝倒一盒。",
+    "拆下来的弹簧随手放。",
+    "滑丝螺丝继续强拧。"
+  ],
+  "fallback": "没有小盒时，用瓶盖、纸包、信封或分格纸板临时分类。",
+  "stop_or_escalate": [
+    "关键维修缺少小件、螺丝混乱导致装错时，暂停并重新分类。"
+  ],
+  "notes": "小件最会失踪，必须给它们小房间。",
+  "category_original": "工具维护与耗材",
+  "domains": [
+    "power",
+    "tools",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "temporary_repair",
+    "door_window_security",
+    "inventory_change"
+  ],
+  "objects": [
+    "door",
+    "window",
+    "tools",
+    "inventory"
+  ],
+  "keywords": [
+    "螺丝钉钉子小件库存",
+    "设备",
+    "工具",
+    "维修",
+    "房间",
+    "门窗",
+    "temporary_repair",
+    "door_window_security",
+    "inventory_change",
+    "door",
+    "window",
+    "tools",
+    "inventory",
+    "power_lighting_energy",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "id": "DG-0077",
+  "title": "到达新地点第一小时",
+  "category": "撤离交通与路线",
+  "scenario": "刚到临时安全屋、新营地、新房间或集合点。",
+  "goal": "把陌生地点快速变成可管理空间。",
+  "tools": [
+    "手电",
+    "口罩",
+    "记录本",
+    "标签",
+    "急救包"
+  ],
+  "steps": [
+    "先清点人员，检查伤病、缺水、失温和恐慌。",
+    "再检查环境：出口、结构、火源、燃气味、积水、电线、玻璃、动物痕迹。",
+    "划分四个区域：睡眠区、食物饮水区、污染垃圾区、厕所或排泄区。",
+    "把通道和出口清空，不把包堆在门口。",
+    "设定第一晚规则：谁值守、哪里取水、哪里不能进、怎么上厕所。",
+    "把新地点名称、位置、风险点写入日记或地图。"
+  ],
+  "check": [
+    "人员已清点。",
+    "出口和通道畅通。",
+    "食物饮水区远离污染区。",
+    "规则已经说清楚。"
+  ],
+  "common_mistakes": [
+    "刚到就分散搜东西。",
+    "先做饭但没检查燃气和空气。",
+    "把垃圾和饮水放在一起。"
+  ],
+  "fallback": "如果太累，至少先完成：清点人员、检查出口、划分饮水和污染区。",
+  "stop_or_escalate": [
+    "发现燃气味、结构危险、污水、动物尸体、暴力风险时，重新选择地点。"
+  ],
+  "notes": "新地点第一小时是建秩序，不是开箱寻宝。",
+  "category_original": "撤离与路线",
+  "domains": [
+    "evacuation",
+    "security",
+    "comms",
+    "shelter",
+    "disaster"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "signal_plan",
+    "temporary_repair"
+  ],
+  "objects": [
+    "route",
+    "meeting_point"
+  ],
+  "keywords": [
+    "到达新地点第一小时",
+    "撤离",
+    "路线",
+    "集合点",
+    "安全",
+    "房间",
+    "evacuation_decision",
+    "signal_plan",
+    "temporary_repair",
+    "route",
+    "meeting_point",
+    "shelter_disaster_evacuate",
+    "comms_signal_meeting",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

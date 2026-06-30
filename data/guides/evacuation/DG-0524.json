@@ -1,0 +1,89 @@
+{
+  "id": "DG-0524",
+  "title": "搬运车与推车维护",
+  "category": "撤离交通与路线",
+  "scenario": "手推车、小拖车、购物车或板车用于搬水和物资。",
+  "goal": "保持搬运工具稳定、安全、可控。",
+  "tools": [
+    "扳手",
+    "绳子",
+    "布",
+    "记录本"
+  ],
+  "steps": [
+    "检查轮子是否松动、卡石子或裂开。",
+    "检查把手和承重板是否松动。",
+    "装货前先试推空车。",
+    "重物放低并固定，不堆高遮挡视线。",
+    "下坡和楼梯附近不要单人硬推重载。",
+    "使用后清理泥水，记录损坏。",
+    "每周检查绳子、绑带和轮轴。"
+  ],
+  "check": [
+    "轮子正常。",
+    "重物低放固定。",
+    "使用后记录损坏。"
+  ],
+  "common_mistakes": [
+    "堆太高看不到路。",
+    "下坡重车单人推。",
+    "轮子松了继续用。"
+  ],
+  "fallback": "推车坏了时，改用分批背负或两人抬，不强推。",
+  "stop_or_escalate": [
+    "轮子脱落、把手裂开、货物滑落伤人时，停用维修。"
+  ],
+  "notes": "推车省力，但失控时也很会放大重量。",
+  "category_original": "车辆与自行车长期维护",
+  "domains": [
+    "evacuation",
+    "security",
+    "tools",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "route",
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "搬运车与推车维护",
+    "撤离",
+    "路线",
+    "安全",
+    "工具",
+    "evacuation_decision",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "route",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "tools_security_repair",
+    "records_inventory_people",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "id": "DG-0253",
+  "title": "搬运中途休息点",
+  "category": "撤离交通与路线",
+  "scenario": "搬水、搬粮、搬设备或伤员转移途中需要休息。",
+  "goal": "让休息不变成暴露、丢失或受伤点。",
+  "tools": [
+    "地图",
+    "水",
+    "背包",
+    "记录本",
+    "哨子"
+  ],
+  "steps": [
+    "休息点选择开阔、可观察、有退路的位置。",
+    "避开桥下、墙边、废墟旁、低洼积水和冲突点。",
+    "物资放在身体近处，不摊开太大范围。",
+    "休息时只做补水、清点、调整负重和检查脚部。",
+    "安排一人观察周围，不是所有人同时低头翻包。",
+    "离开前检查人数、物资和垃圾。"
+  ],
+  "check": [
+    "休息点有退路。",
+    "物资不离身。",
+    "离开前完成清点。"
+  ],
+  "common_mistakes": [
+    "坐在危险墙边休息。",
+    "物资摊一地。",
+    "所有人同时睡着或低头。"
+  ],
+  "fallback": "没有理想休息点时，缩短停留时间，只站立补水和调整背包。",
+  "stop_or_escalate": [
+    "陌生人靠近、动物聚集、天气变坏、有人虚脱时，结束休息并转移。"
+  ],
+  "notes": "休息点是暂停键，不是拆包键。",
+  "category_original": "交通与搬运",
+  "domains": [
+    "evacuation",
+    "power",
+    "security",
+    "disaster",
+    "shelter"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "route"
+  ],
+  "keywords": [
+    "搬运中途休息点",
+    "撤离",
+    "路线",
+    "设备",
+    "evacuation_decision",
+    "resource_exposure",
+    "drinking_water",
+    "route",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

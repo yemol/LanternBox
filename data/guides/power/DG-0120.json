@@ -1,0 +1,81 @@
+{
+  "id": "DG-0120",
+  "title": "断电前安全关闭",
+  "category": "通信信息与数据安全",
+  "scenario": "电量即将耗尽、需要拔电转移、雷雨前关机或设备不稳定。",
+  "goal": "避免数据损坏和硬盘错误。",
+  "tools": [
+    "电脑",
+    "外接硬盘",
+    "电源",
+    "记录本"
+  ],
+  "steps": [
+    "停止正在编辑和保存的操作。",
+    "确认库存、日记、指南更新已经完成保存。",
+    "如果时间允许，复制 数据 文件夹到备份位置。",
+    "安全弹出外接硬盘或优盘。",
+    "正常关闭服务或关闭电脑。",
+    "关机后再拔掉电源和硬盘。",
+    "记录关机时间和是否完成备份。"
+  ],
+  "check": [
+    "没有正在写入的文件。",
+    "外接盘已安全弹出。",
+    "设备已正常关机。"
+  ],
+  "common_mistakes": [
+    "保存中直接拔硬盘。",
+    "低电量时继续大文件复制。",
+    "系统卡住就频繁强制断电。"
+  ],
+  "fallback": "来不及完整备份时，优先保存当前文件并安全弹出外接盘。",
+  "stop_or_escalate": [
+    "硬盘异常断开、文件复制中断、系统提示磁盘错误时，停止写入并备份能读出的数据。"
+  ],
+  "notes": "安全关闭是在保护未来的自己。",
+  "category_original": "壳中灯自维护",
+  "domains": [
+    "power",
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "power_outage"
+  ],
+  "objects": [
+    "battery",
+    "lighting"
+  ],
+  "keywords": [
+    "断电前安全关闭",
+    "电量",
+    "设备",
+    "安全",
+    "通信",
+    "power_outage",
+    "battery",
+    "lighting",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "id": "DG-0122",
+  "title": "壳中灯设备低功耗运行",
+  "category": "通信信息与数据安全",
+  "scenario": "使用 小型苹果电脑、苹果笔记本电脑 或其他电脑长时间运行壳中灯，但电力有限。",
+  "goal": "降低耗电和发热，延长可用时间。",
+  "tools": [
+    "电脑",
+    "电源",
+    "散热空间",
+    "记录本"
+  ],
+  "steps": [
+    "关闭不必要程序、同步服务、娱乐软件和高耗电后台。",
+    "降低屏幕亮度，固定使用时段，不用时关闭屏幕。",
+    "只在查询、记录、备份时启动壳中灯，不需要全天满负载运行。",
+    "保持设备通风，不把电脑压在毯子和衣物下。",
+    "定时备份后进入睡眠或关机。",
+    "记录每天开机时长和用途。"
+  ],
+  "check": [
+    "设备不发烫。",
+    "不用时能休眠或关机。",
+    "开机用途明确。"
+  ],
+  "common_mistakes": [
+    "让电脑整天亮屏。",
+    "边低电量边大规模复制。",
+    "设备放在厚布里散热不良。"
+  ],
+  "fallback": "如果只有少量电，改为每天固定两次开机查询和记录。",
+  "stop_or_escalate": [
+    "设备过热、风扇异常、电池鼓包、频繁死机时停止长时间运行。"
+  ],
+  "notes": "低功耗运行是让灯慢慢亮，不是一次烧尽。",
+  "category_original": "壳中灯自维护",
+  "domains": [
+    "power",
+    "security",
+    "comms",
+    "medical",
+    "water"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "power_lighting_energy",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "fever"
+  ],
+  "objects": [
+    "lighting"
+  ],
+  "keywords": [
+    "壳中灯设备低功耗运行",
+    "设备",
+    "安全",
+    "通信",
+    "发热",
+    "fever",
+    "lighting",
+    "medical_fever_respiratory",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "太阳能充电"
+  ]
+}

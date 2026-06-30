@@ -1,0 +1,63 @@
+{
+  "id": "DG-0532",
+  "title": "成员档案备份校验",
+  "category": "库存资料与成员档案",
+  "scenario": "成员资料很重要，备份损坏或无法解密会造成严重后果。",
+  "goal": "确认成员档案备份可用且仍受保护。",
+  "tools": [
+    "加密备份",
+    "校验清单",
+    "备用设备"
+  ],
+  "steps": [
+    "每月检查成员档案是否能正常打开。",
+    "验证加密备份能被正确解密。",
+    "只在安全环境下测试，不在公共区域展示资料。",
+    "检查照片、医疗记录、证件和联系人是否齐全。",
+    "记录备份日期、位置和验证结果。",
+    "发现口令错误或文件损坏，立即重新备份。",
+    "旧备份按敏感资料规则保存或销毁。"
+  ],
+  "check": [
+    "备份可解密。",
+    "资料齐全。",
+    "验证有记录。"
+  ],
+  "common_mistakes": [
+    "只备份不测试。",
+    "测试时让旁人看到证件。",
+    "旧备份乱丢。"
+  ],
+  "fallback": "没有备用设备时，至少检查文件存在、大小和口令记录。",
+  "stop_or_escalate": [
+    "无法解密、文件损坏、备份盘丢失时，立即重新建立备份。"
+  ],
+  "notes": "成员档案备份不能只当护身符，要真的能打开。",
+  "category_original": "成员信息登记前置",
+  "domains": [
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "成员档案备份校验",
+    "登记",
+    "inventory_change",
+    "personnel_change",
+    "inventory",
+    "people",
+    "records_inventory_people",
+    "库存资料",
+    "成员档案"
+  ],
+  "negative_keywords": []
+}

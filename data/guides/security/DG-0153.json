@@ -1,0 +1,88 @@
+{
+  "id": "DG-0153",
+  "title": "门窗临时加固",
+  "category": "工具维修与替代制作",
+  "scenario": "强风、破窗、门锁损坏、夜间安全边界薄弱。",
+  "goal": "让门窗在短期内更稳、更不容易误开和进水进风。",
+  "tools": [
+    "木板",
+    "绳子",
+    "胶带",
+    "楔子",
+    "螺丝刀",
+    "布条"
+  ],
+  "steps": [
+    "先检查门窗是否还能正常开关，保留至少一个安全出口。",
+    "破窗先清理边缘玻璃，戴手套，避免割伤。",
+    "用木板、纸板、塑料板覆盖破洞，外层防雨，内层固定。",
+    "门松动时用楔子或家具挡住，但不能堵死唯一出口。",
+    "风大时移走窗边重物，避免二次飞散。",
+    "加固后写下哪个出口可用，所有成员都要知道。"
+  ],
+  "check": [
+    "破口被覆盖。",
+    "至少一个出口保持可用。",
+    "儿童不会碰到玻璃边缘。"
+  ],
+  "common_mistakes": [
+    "把所有出口都堵死。",
+    "徒手清玻璃。",
+    "只贴薄胶带抵抗强风。"
+  ],
+  "fallback": "没有木板时，用厚纸板、箱板、塑料箱盖、桌面板临时覆盖。",
+  "stop_or_escalate": [
+    "门窗变形严重、墙体裂开、外部坠物持续时，不把房间当安全区。"
+  ],
+  "notes": "加固不是封死，出口永远要留下。",
+  "category_original": "维修工具",
+  "domains": [
+    "security",
+    "tools",
+    "shelter"
+  ],
+  "intents": [
+    "security_night_anomaly",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "temporary_repair",
+    "door_window_security",
+    "night"
+  ],
+  "objects": [
+    "drinking_water",
+    "door",
+    "window",
+    "lock",
+    "tools"
+  ],
+  "keywords": [
+    "门窗临时加固",
+    "夜间",
+    "门窗",
+    "安全",
+    "工具",
+    "加固",
+    "门锁",
+    "维修",
+    "temporary_repair",
+    "door_window_security",
+    "night",
+    "drinking_water",
+    "door",
+    "window",
+    "lock",
+    "tools",
+    "security_night_anomaly",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

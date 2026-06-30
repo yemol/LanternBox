@@ -1,0 +1,72 @@
+{
+  "id": "DG-0422",
+  "title": "关键信息朗读制度",
+  "category": "通信信息与数据安全",
+  "scenario": "成员疲劳、低识字、视力差或紧张时，纸面规则没人认真看。",
+  "goal": "通过固定朗读让关键规则进入所有人耳朵。",
+  "tools": [
+    "规则卡",
+    "低亮灯",
+    "记录本"
+  ],
+  "steps": [
+    "每天晨间或晚间选三条最重要规则朗读。",
+    "优先朗读当日风险相关内容，例如高温、取水、火源、夜间路线。",
+    "朗读后让成员提问，不展开长会。",
+    "儿童和老人听到后用自己的话复述一句。",
+    "规则变更当天必须朗读。",
+    "朗读内容不要包含完整口令和高敏感位置。",
+    "记录当天朗读主题。"
+  ],
+  "check": [
+    "当天关键规则已朗读。",
+    "重点成员能复述。",
+    "敏感内容未公开朗读。"
+  ],
+  "common_mistakes": [
+    "规则贴墙上就以为大家会看。",
+    "朗读变成长篇训话。",
+    "公开读出口令。"
+  ],
+  "fallback": "人手少时，只朗读水、火、药、出口四类变化。",
+  "stop_or_escalate": [
+    "反复违反同一规则、成员看不清或看不懂规则时，提高朗读频率。"
+  ],
+  "notes": "重要信息不能只躺在纸上，要进耳朵里巡逻。",
+  "category_original": "信息压缩与离线摘要",
+  "domains": [
+    "security",
+    "tools",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "comms_signal_meeting",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "personnel_change"
+  ],
+  "objects": [
+    "people"
+  ],
+  "keywords": [
+    "关键信息朗读制度",
+    "安全",
+    "固定",
+    "通信",
+    "personnel_change",
+    "people",
+    "comms_signal_meeting",
+    "tools_security_repair",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

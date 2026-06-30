@@ -1,0 +1,82 @@
+{
+  "id": "DG-0478",
+  "title": "照护者自我保护",
+  "category": "医疗急救与照护",
+  "scenario": "照护病人、处理污染物、协助如厕、清理呕吐物或换洗衣物。",
+  "goal": "保护照护者不成为下一个病人。",
+  "tools": [
+    "手套",
+    "口罩",
+    "围裙或旧衣",
+    "洗手水",
+    "记录本"
+  ],
+  "steps": [
+    "照护前准备手套、口罩或替代遮挡。",
+    "照护时避免摸脸、揉眼和吃东西。",
+    "污染任务和做饭任务不要由同一人连续执行，必须间隔清洁。",
+    "照护后洗手，污染外衣单独放置或晾晒清洗。",
+    "照护者每天记录自身症状和疲劳。",
+    "安排备用照护者轮换，避免过劳。",
+    "照护者不适时立即减少接触任务。"
+  ],
+  "check": [
+    "照护前有防护。",
+    "照护后洗手。",
+    "照护者有轮换。"
+  ],
+  "common_mistakes": [
+    "照护完直接做饭。",
+    "戴手套还摸脸。",
+    "照护者累病了没人替。"
+  ],
+  "fallback": "防护用品不足时，至少固定照护者、洗手、换外层衣和减少接触。",
+  "stop_or_escalate": [
+    "照护者发热、腹泻、咳嗽、头晕或过劳时，立即调整照护安排。"
+  ],
+  "notes": "照护者倒下，整个系统会少一根柱子。",
+  "category_original": "隔离照护",
+  "domains": [
+    "medical",
+    "water",
+    "hygiene"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "infection_control"
+  ],
+  "objects": [
+    "patient",
+    "vomit",
+    "clothes"
+  ],
+  "keywords": [
+    "照护者自我保护",
+    "呕吐",
+    "污染",
+    "呕吐物",
+    "衣物",
+    "contamination",
+    "infection_control",
+    "patient",
+    "vomit",
+    "clothes",
+    "medical_fever_respiratory",
+    "hygiene_contamination",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

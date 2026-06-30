@@ -1,0 +1,75 @@
+{
+  "id": "DG-0274",
+  "title": "加密备份导出流程",
+  "category": "通信信息与数据安全",
+  "scenario": "需要把成员档案、库存、日记、指南库或整个数据目录复制到外部盘。",
+  "goal": "确保备份可恢复，同时避免备份本身变成泄露源。",
+  "tools": [
+    "外部硬盘或优盘",
+    "加密工具",
+    "备份清单",
+    "标签纸"
+  ],
+  "steps": [
+    "备份前确认哪些是普通数据，哪些是高敏感数据。",
+    "普通指南库可以单独备份，高敏感成员档案必须加密后备份。",
+    "备份文件名写日期和版本，但不要写完整成员姓名、证件号和敏感内容。",
+    "导出后在外部盘上确认文件存在且大小正常。",
+    "随机打开或验证备份文件，确认不是空文件或损坏文件。",
+    "把备份盘贴编号并记录存放位置。",
+    "备份完成后安全弹出外部盘。"
+  ],
+  "check": [
+    "高敏感备份已加密。",
+    "备份文件有日期版本。",
+    "备份可读或可验证。"
+  ],
+  "common_mistakes": [
+    "把成员档案明文复制到优盘。",
+    "只看复制完成不验证。",
+    "备份文件名暴露证件内容。"
+  ],
+  "fallback": "没有加密能力时，不导出高敏感数据，只备份普通指南和非敏感资料。",
+  "stop_or_escalate": [
+    "备份失败、文件大小异常、外部盘报错时，停止覆盖旧备份并重新检查。"
+  ],
+  "notes": "备份是第二条命，但不加密的备份也是第二个漏洞。",
+  "category_original": "备份与恢复",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "comms_signal_meeting",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change"
+  ],
+  "objects": [
+    "inventory",
+    "people"
+  ],
+  "keywords": [
+    "加密备份导出流程",
+    "安全",
+    "通信",
+    "inventory_change",
+    "personnel_change",
+    "inventory",
+    "people",
+    "comms_signal_meeting",
+    "records_inventory_people",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

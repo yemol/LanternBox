@@ -1,0 +1,88 @@
+{
+  "id": "DG-0500",
+  "title": "儿童老人转移队形",
+  "category": "医疗急救与照护",
+  "scenario": "撤离或转移时有儿童、老人、病人和行动慢成员。",
+  "goal": "防止队伍断裂、走失和弱者掉队。",
+  "tools": [
+    "队形表",
+    "联络卡",
+    "哨子",
+    "牵引绳可选"
+  ],
+  "steps": [
+    "把弱势成员安排在队伍中段，不放最后。",
+    "每名儿童或老人指定陪同行动者。",
+    "队首负责路线，队尾负责确认无人掉队。",
+    "行进中定时停下点名。",
+    "不让儿童独自拿关键物资。",
+    "队伍遇到分叉或障碍时先集合再决定。",
+    "到达后立即清点人员。"
+  ],
+  "check": [
+    "每名弱势成员有陪同。",
+    "队首队尾明确。",
+    "到达后清点。"
+  ],
+  "common_mistakes": [
+    "老人走最后没人看。",
+    "儿童自己跑前面。",
+    "分叉点边走边决定。"
+  ],
+  "fallback": "人数少时，用手牵、绳结或固定距离保持队形。",
+  "stop_or_escalate": [
+    "人员掉队、儿童哭闹、老人呼吸困难时，立即停队调整。"
+  ],
+  "notes": "队伍速度不是看最快的人，是看最慢的人能不能安全到。",
+  "category_original": "伤病转运与搬运协作",
+  "domains": [
+    "medical",
+    "security",
+    "water",
+    "records",
+    "disaster"
+  ],
+  "intents": [
+    "medical_fever_respiratory",
+    "medical_elder_confusion",
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "elderly",
+    "evacuation_decision",
+    "personnel_change"
+  ],
+  "objects": [
+    "patient",
+    "elder",
+    "people"
+  ],
+  "keywords": [
+    "儿童老人转移队形",
+    "老人",
+    "安全",
+    "elderly",
+    "evacuation_decision",
+    "personnel_change",
+    "patient",
+    "elder",
+    "people",
+    "medical_fever_respiratory",
+    "medical_elder_confusion",
+    "shelter_disaster_evacuate",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

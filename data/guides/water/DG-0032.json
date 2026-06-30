@@ -1,0 +1,97 @@
+{
+  "id": "DG-0032",
+  "title": "雨水收集：初期弃流、导流、储存",
+  "category": "水与食物保障",
+  "scenario": "下雨时想用屋顶、防水布、雨衣或塑料布收集水。",
+  "goal": "尽量提高收集量，同时减少屋面灰尘、鸟粪和虫子污染。",
+  "tools": [
+    "防水布或屋顶导流",
+    "水桶",
+    "滤网或纱布",
+    "绳子",
+    "标签纸"
+  ],
+  "steps": [
+    "先选收集面：越干净越好，避开明显发霉、鸟粪多、化学材料味重的表面。",
+    "下雨开始的第一段水先不要接入饮用水桶，让它冲掉灰尘和鸟粪。",
+    "把防水布搭成斜面，最低点对准容器；布面拉紧，避免积水塌陷。",
+    "容器口加滤网或纱布，挡住叶片和虫子。",
+    "雨停后立刻盖好容器，贴上日期和来源。",
+    "饮用前仍要过滤和消毒，不要把雨水等同于净水。"
+  ],
+  "check": [
+    "水没有直接流过脏地面。",
+    "容器有盖。",
+    "标签写清雨水和日期。"
+  ],
+  "common_mistakes": [
+    "接第一股屋顶水直接饮用。",
+    "容器敞口过夜。",
+    "用有强烈塑料味或化学味的布收饮用水。"
+  ],
+  "fallback": "没有防水布时，可用干净雨衣、塑料袋剪开、屋檐导流临时收集。",
+  "stop_or_escalate": [
+    "雨水有明显异味。",
+    "屋顶被烟尘、化学品或动物尸体污染。",
+    "收集容器内出现虫卵或腐败味。"
+  ],
+  "notes": "雨水通常比洪水安全，但仍不是免处理饮用水。",
+  "category_original": "饮水与水源",
+  "domains": [
+    "water",
+    "food",
+    "security",
+    "hygiene",
+    "disaster"
+  ],
+  "intents": [
+    "water_rationing",
+    "water_treatment",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "unsafe_water",
+    "contamination",
+    "flood"
+  ],
+  "objects": [
+    "drinking_water",
+    "rainwater"
+  ],
+  "keywords": [
+    "雨水收集",
+    "初期弃流",
+    "导流",
+    "储存",
+    "饮用水",
+    "水源",
+    "雨水",
+    "食物",
+    "安全",
+    "污染",
+    "洪水",
+    "unsafe_water",
+    "contamination",
+    "flood",
+    "drinking_water",
+    "rainwater",
+    "water_rationing",
+    "water_treatment",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "夜间异响"
+  ]
+}

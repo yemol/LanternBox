@@ -1,0 +1,77 @@
+{
+  "id": "DG-0099",
+  "title": "行动不便者转移路线",
+  "category": "医疗急救与照护",
+  "scenario": "有轮椅、拐杖、伤病员、孕妇或行动慢的人需要转移。",
+  "goal": "按最慢成员设计路线，而不是按健康成员设计路线。",
+  "tools": [
+    "路线图",
+    "轮椅或拐杖",
+    "担架",
+    "绳子",
+    "手电"
+  ],
+  "steps": [
+    "先检查门宽、楼梯、坡道、积水、碎石和障碍物。",
+    "把路线分成几段，每段设置休息点。",
+    "安排至少两名协助者，一人负责身体稳定，一人负责路线和物品。",
+    "先空手试走或试推关键路段。",
+    "转移时让行动不便者走队伍中间，不走队尾。",
+    "每段结束后检查疲劳、疼痛、呼吸和情绪。"
+  ],
+  "check": [
+    "路线已经按最慢成员测试。",
+    "有协助者明确分工。",
+    "没有把行动不便者甩在后面。"
+  ],
+  "common_mistakes": [
+    "到楼梯口才发现轮椅过不去。",
+    "让行动慢的人走队尾。",
+    "所有人只按年轻人速度走。"
+  ],
+  "fallback": "没有轮椅时，用结实椅子、门板、担架或两人搀扶，但不要拖拽。",
+  "stop_or_escalate": [
+    "路线被洪水、火灾、坍塌、冲突切断时，立即改路线或暂停。"
+  ],
+  "notes": "特殊人群不是撤离拖累，而是路线设计基准。",
+  "category_original": "特殊人群",
+  "domains": [
+    "medical",
+    "disaster",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "personnel_change"
+  ],
+  "objects": [
+    "route",
+    "people"
+  ],
+  "keywords": [
+    "行动不便者转移路线",
+    "撤离",
+    "路线",
+    "evacuation_decision",
+    "personnel_change",
+    "route",
+    "people",
+    "shelter_disaster_evacuate",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

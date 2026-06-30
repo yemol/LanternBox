@@ -1,0 +1,72 @@
+{
+  "id": "DG-0316",
+  "title": "袜子轮换和干燥",
+  "category": "个人装备与防护",
+  "scenario": "长时间步行、取水、搬运、潮湿天气或撤离途中，袜子容易湿透、磨脚和发臭。",
+  "goal": "保持脚部干燥，减少水泡、脚气、冻伤和感染。",
+  "tools": [
+    "干袜子",
+    "晾晒绳",
+    "夹子",
+    "记录本",
+    "塑料袋可选"
+  ],
+  "steps": [
+    "每个人至少区分正在穿、正在晾、备用三类袜子。",
+    "湿袜子不要塞在背包深处，先拧干再挂到通风处。",
+    "睡觉前尽量换干袜，湿袜不要穿着入睡。",
+    "脚汗多的人优先安排袜子轮换。",
+    "袜子破洞处会磨脚，发现后缝补或降级为擦拭布。",
+    "连续行走时，每次休息检查脚趾缝、脚跟和袜子褶皱。",
+    "袜子短缺时，优先保证老人、儿童、伤脚人员和外出人员。"
+  ],
+  "check": [
+    "睡前有干袜。",
+    "湿袜正在晾，不在包里闷着。",
+    "破袜没有继续长距离穿。"
+  ],
+  "common_mistakes": [
+    "湿袜穿一整夜。",
+    "袜子揉成一团放包里发臭。",
+    "破洞袜继续徒步。"
+  ],
+  "fallback": "没有足够袜子时，用干净布条临时包脚，但要保持平整，避免褶皱磨伤。",
+  "stop_or_escalate": [
+    "脚部红肿、破皮、化脓、麻木或水泡扩大时，停止长距离行走并处理。"
+  ],
+  "notes": "袜子是脚的第一层护甲，干燥比厚度更重要。",
+  "category_original": "衣物鞋袜维护",
+  "domains": [
+    "general",
+    "disaster",
+    "evacuation",
+    "shelter",
+    "security"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water",
+    "clothes"
+  ],
+  "keywords": [
+    "袜子轮换和干燥",
+    "撤离",
+    "evacuation_decision",
+    "drinking_water",
+    "clothes",
+    "shelter_disaster_evacuate",
+    "个人装备",
+    "防护"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

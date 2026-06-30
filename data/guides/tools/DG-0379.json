@@ -1,0 +1,90 @@
+{
+  "id": "DG-0379",
+  "title": "容器裂缝临时封堵",
+  "category": "工具维修与替代制作",
+  "scenario": "水桶、盆、箱子、灰水桶、种植容器出现裂缝或小漏。",
+  "goal": "判断是否能临时使用，并避免入口污染。",
+  "tools": [
+    "胶带",
+    "塑料片",
+    "绳子",
+    "布条",
+    "标签"
+  ],
+  "steps": [
+    "先确认容器用途，如果用于饮用水或食物，裂缝后一般降级。",
+    "倒空容器并擦干裂缝周围。",
+    "从外侧贴胶带或塑料片，内侧根据用途决定是否接触内容物。",
+    "用绳子或布条加压固定补片。",
+    "装少量水测试漏点，不直接装满。",
+    "贴上降级用途标签，例如灰水、工具、种植。",
+    "裂缝扩大或异味出现时停止使用。"
+  ],
+  "check": [
+    "入口容器已降级。",
+    "补后小水量测试。",
+    "新用途标签清楚。"
+  ],
+  "common_mistakes": [
+    "裂缝水桶继续装饮用水。",
+    "没测试直接装满。",
+    "旧标签还写饮用水。"
+  ],
+  "fallback": "无法封堵时，把容器改成收纳、种植外盆或废弃。",
+  "stop_or_escalate": [
+    "裂缝导致饮水污染、漏燃料、漏污水时，立即停用并处理污染范围。"
+  ],
+  "notes": "容器能补，不代表还能承担原来的责任。",
+  "category_original": "简易修补材料",
+  "domains": [
+    "tools",
+    "planting",
+    "water",
+    "disaster",
+    "evacuation"
+  ],
+  "intents": [
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "planting_seed_reserve"
+  ],
+  "situations": [
+    "contamination",
+    "structural_risk",
+    "temporary_repair",
+    "food_production"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "tools"
+  ],
+  "keywords": [
+    "容器裂缝临时封堵",
+    "工具",
+    "维修",
+    "种植",
+    "水桶",
+    "contamination",
+    "structural_risk",
+    "temporary_repair",
+    "food_production",
+    "drinking_water",
+    "bucket",
+    "tools",
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "planting_seed_reserve",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

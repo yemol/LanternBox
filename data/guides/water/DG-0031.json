@@ -1,0 +1,89 @@
+{
+  "id": "DG-0031",
+  "title": "饮用水容器分级：饮用、烹饪、清洁",
+  "category": "水与食物保障",
+  "scenario": "家里或营地有多个水桶、水瓶、水袋，来源和用途不同。",
+  "goal": "避免误饮脏水，减少交叉污染。",
+  "tools": [
+    "标签纸",
+    "记号笔",
+    "不同颜色胶带",
+    "记录本"
+  ],
+  "steps": [
+    "把容器分成三类：饮用水、烹饪水、清洁水。",
+    "饮用水容器只装处理过的水，贴醒目的蓝色或绿色标签。",
+    "清洁水、灰水、雨水初收集水用不同标签，写上“不可直接饮用”。",
+    "每个容器写清来源、日期、是否煮沸或消毒、负责人。",
+    "固定取水工具：饮用水只用专用杯或龙头倒出，不把手伸进去。",
+    "每天检查标签是否脱落，水是否有异味、沉淀、虫子。"
+  ],
+  "check": [
+    "每个水桶一眼能看出用途。",
+    "无标签水不会出现在饮水区。",
+    "饮用水桶保持加盖。"
+  ],
+  "common_mistakes": [
+    "靠记忆区分水。",
+    "饮用桶和洗手桶混用。",
+    "用饮料瓶装危险液体却不写标签。"
+  ],
+  "fallback": "没有标签纸时，用绳结、颜色布条、刻痕或固定摆放位置区分。",
+  "stop_or_escalate": [
+    "有人误饮。",
+    "桶口被污染。",
+    "水桶出现异味、虫子、沉淀。"
+  ],
+  "notes": "这条应该和库存编号系统联动。",
+  "category_original": "饮水与水源",
+  "domains": [
+    "water",
+    "food",
+    "records",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "water_rationing",
+    "hygiene_contamination"
+  ],
+  "situations": [
+    "contamination",
+    "inventory_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "bucket",
+    "inventory"
+  ],
+  "keywords": [
+    "饮用水容器分级",
+    "饮用",
+    "烹饪",
+    "清洁",
+    "饮用水",
+    "水源",
+    "水桶",
+    "食物",
+    "污染",
+    "contamination",
+    "inventory_change",
+    "drinking_water",
+    "bucket",
+    "inventory",
+    "water_rationing",
+    "hygiene_contamination",
+    "食物保障"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "窗外",
+    "夜间可疑",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物"
+  ]
+}

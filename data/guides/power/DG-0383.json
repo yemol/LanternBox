@@ -1,0 +1,85 @@
+{
+  "id": "DG-0383",
+  "title": "维修前断电断火断水",
+  "category": "工具维修与替代制作",
+  "scenario": "准备修理电器、灯具、插座、水管、炉具、燃气设备、泵或潮湿设备。",
+  "goal": "先断开危险源，减少触电、烫伤、漏水和火灾。",
+  "tools": [
+    "开关标记",
+    "手套",
+    "干布",
+    "标签",
+    "记录本"
+  ],
+  "steps": [
+    "修电器前先关闭电源或拔掉插头。",
+    "修水管前关闭可控水源或排空局部水。",
+    "修炉具和燃气相关物品前关闭阀门并通风。",
+    "等待高温部件冷却后再接触。",
+    "在开关或阀门处挂上维修中标记，避免别人误开。",
+    "维修区域保持干燥，脚下不站在水里修电。",
+    "维修完成后逐步恢复电、水、火，边恢复边观察。"
+  ],
+  "check": [
+    "电水火源已断开。",
+    "维修中有标记。",
+    "恢复时逐步测试。"
+  ],
+  "common_mistakes": [
+    "带电拧线。",
+    "阀门没关就拆。",
+    "别人不知道维修中又打开开关。"
+  ],
+  "fallback": "无法确认是否断开时，不进行维修，只做隔离和标记。",
+  "stop_or_escalate": [
+    "触电感、燃气味、漏水扩大、部件过热时，立即停止维修。"
+  ],
+  "notes": "维修前的断开动作，是给自己留命。",
+  "category_original": "维修安全边界",
+  "domains": [
+    "power",
+    "security",
+    "tools",
+    "shelter"
+  ],
+  "intents": [
+    "power_lighting_energy",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "power_outage",
+    "temporary_repair"
+  ],
+  "objects": [
+    "drinking_water",
+    "tools",
+    "lighting"
+  ],
+  "keywords": [
+    "维修前断电断火断水",
+    "设备",
+    "安全",
+    "工具",
+    "维修",
+    "power_outage",
+    "temporary_repair",
+    "drinking_water",
+    "tools",
+    "lighting",
+    "power_lighting_energy",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

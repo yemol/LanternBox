@@ -1,0 +1,89 @@
+{
+  "id": "DG-0302",
+  "title": "布料和旧衣物再利用",
+  "category": "工具维修与替代制作",
+  "scenario": "旧衣物、毛巾、床单、窗帘、布袋破损或不再适合穿用。",
+  "goal": "把布料转化为保暖、包扎外层、过滤前处理、遮挡和修补材料。",
+  "tools": [
+    "剪刀",
+    "针线",
+    "收纳袋",
+    "标签"
+  ],
+  "steps": [
+    "先按干净程度分类：干净布、工作布、污染布。",
+    "干净布可用于保暖、包裹、遮挡、临时枕垫和非伤口外层保护。",
+    "工作布可用于擦工具、垫手、绑扎、包裹尖锐物。",
+    "污染布单独放，不进入睡眠和食物区。",
+    "床单可剪成长布条，用于捆扎、固定、防风帘或隐私帘。",
+    "布料使用后及时晾干，防止霉味。",
+    "有血迹、化学污染、腐败味的布不要再用于人员接触。"
+  ],
+  "check": [
+    "布料按干净程度分类。",
+    "污染布没有混入干净区。",
+    "布料保持干燥。"
+  ],
+  "common_mistakes": [
+    "用擦油布包食物。",
+    "血污布继续做枕垫。",
+    "湿布堆在角落发霉。"
+  ],
+  "fallback": "布料不足时，优先保留干净大块布和结实长布条。",
+  "stop_or_escalate": [
+    "布料发霉、异味强、接触后皮肤刺激时，停止贴身使用。"
+  ],
+  "notes": "旧衣物不是垃圾，是柔软版工具箱。",
+  "category_original": "材料回收与再利用",
+  "domains": [
+    "tools",
+    "shelter",
+    "water",
+    "hygiene",
+    "medical"
+  ],
+  "intents": [
+    "water_treatment",
+    "hygiene_contamination",
+    "tools_security_repair"
+  ],
+  "situations": [
+    "contamination",
+    "temporary_repair"
+  ],
+  "objects": [
+    "filter",
+    "clothes",
+    "window",
+    "tools"
+  ],
+  "keywords": [
+    "布料和旧衣物再利用",
+    "工具",
+    "维修",
+    "保暖",
+    "过滤",
+    "衣物",
+    "垃圾",
+    "contamination",
+    "temporary_repair",
+    "filter",
+    "clothes",
+    "window",
+    "tools",
+    "water_treatment",
+    "hygiene_contamination",
+    "tools_security_repair",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "异响",
+    "脚步声",
+    "门外",
+    "夜间异响",
+    "太阳能充电",
+    "主食配给",
+    "冰箱食物"
+  ]
+}

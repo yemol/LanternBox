@@ -1,0 +1,89 @@
+{
+  "id": "DG-0072",
+  "title": "撤离队伍顺序",
+  "category": "撤离交通与路线",
+  "scenario": "多人一起移动，有儿童、老人、孕妇、伤病员或负重成员。",
+  "goal": "减少走散、摔倒和队伍断裂。",
+  "tools": [
+    "名单",
+    "哨子",
+    "手电",
+    "反光标记",
+    "绳子可选"
+  ],
+  "steps": [
+    "出发前按人分组，明确谁看护谁。",
+    "最熟路且冷静的人走前方，但不要离队太远。",
+    "儿童、老人、孕妇、伤病员走中间。",
+    "后方安排观察者，负责确认没人掉队和物品遗落。",
+    "每到路口、转弯、障碍点和休息点，清点人数。",
+    "约定停下信号和求助信号。"
+  ],
+  "check": [
+    "没人走单人队尾。",
+    "每段路后人数一致。",
+    "最慢成员没有被催到摔倒。"
+  ],
+  "common_mistakes": [
+    "让儿童走最后。",
+    "前队走太快把后队甩掉。",
+    "每个人都以为别人照顾老人。"
+  ],
+  "fallback": "人少时至少两两结伴，儿童和行动不便者不单独成组。",
+  "stop_or_escalate": [
+    "有人失踪、摔倒、恐慌、路线被切断时，停止前进并重新清点。"
+  ],
+  "notes": "撤离队伍不是跑步比赛，是把所有人带到下一个安全点。",
+  "category_original": "撤离与路线",
+  "domains": [
+    "evacuation",
+    "security",
+    "disaster",
+    "shelter",
+    "medical"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "medical_elder_confusion",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "elderly",
+    "evacuation_decision",
+    "lost_contact",
+    "personnel_change"
+  ],
+  "objects": [
+    "elder",
+    "route",
+    "people"
+  ],
+  "keywords": [
+    "撤离队伍顺序",
+    "撤离",
+    "路线",
+    "走散",
+    "安全",
+    "老人",
+    "elderly",
+    "evacuation_decision",
+    "lost_contact",
+    "personnel_change",
+    "elder",
+    "route",
+    "people",
+    "shelter_disaster_evacuate",
+    "medical_elder_confusion",
+    "comms_signal_meeting",
+    "撤离交通"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "主食配给",
+    "太阳能充电",
+    "夜间异响"
+  ]
+}

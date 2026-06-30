@@ -1,0 +1,77 @@
+{
+  "id": "DG-0406",
+  "title": "新成员三日教学",
+  "category": "组织秩序与训练演练",
+  "scenario": "新成员加入避难点、家庭组或互助队伍，对规则和物资位置不熟。",
+  "goal": "用三天完成最低安全教学，不让新成员直接进入复杂系统。",
+  "tools": [
+    "规则表",
+    "任务表",
+    "导师名单",
+    "记录本"
+  ],
+  "steps": [
+    "第一天只教核心规则：水、火、药、厕所、出口、不能进入的区域。",
+    "第二天教基础任务：取水记录、垃圾分区、工具归位、低亮灯位置。",
+    "第三天安排一次低风险实际任务，由导师陪同完成。",
+    "每天结束询问新成员不懂和担心的地方。",
+    "不在前三天开放高敏感资料、药箱深层和隐藏物资位置。",
+    "完成三日教学后再分配固定职责。",
+    "记录教学结果和仍需观察事项。"
+  ],
+  "check": [
+    "核心规则已讲。",
+    "导师陪同过一次任务。",
+    "高敏感区域未开放。"
+  ],
+  "common_mistakes": [
+    "新成员一来就随便翻。",
+    "一次灌输太多规则。",
+    "没有导师，出错才骂。"
+  ],
+  "fallback": "如果人手不足，至少安排一名固定问询对象，避免新成员到处问敏感信息。",
+  "stop_or_escalate": [
+    "新成员拒绝规则、反复接近限制区域、造成污染或冲突时，暂停权限。"
+  ],
+  "notes": "新成员不是插件，插上就能用，得先装驱动。",
+  "category_original": "新成员教学",
+  "domains": [
+    "security",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "inventory",
+    "people",
+    "supplies"
+  ],
+  "keywords": [
+    "新成员三日教学",
+    "安全",
+    "inventory_change",
+    "personnel_change",
+    "resource_exposure",
+    "inventory",
+    "people",
+    "supplies",
+    "security_suspicious_person",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

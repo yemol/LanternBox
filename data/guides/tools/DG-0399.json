@@ -1,0 +1,88 @@
+{
+  "id": "DG-0399",
+  "title": "长期任务搁置清单",
+  "category": "组织秩序与训练演练",
+  "scenario": "有很多不紧急但重要的事，例如修工具、补标签、做备份、整理百科、准备种植记录。",
+  "goal": "让长期任务不被日常杂务吞掉。",
+  "tools": [
+    "长期任务本",
+    "标签",
+    "月度计划"
+  ],
+  "steps": [
+    "建立长期任务清单，单独区别于每日任务。",
+    "每项写清目标、下一步、需要材料和负责人。",
+    "不要把长期任务写成巨大口号，拆成可执行小步。",
+    "每周选择一到两项推进，不和保命任务抢资源。",
+    "完成小步骤就打勾，保留进展记录。",
+    "任务失去意义时标记取消，不让清单堆成负担。",
+    "月底复盘哪些长期任务值得继续。"
+  ],
+  "check": [
+    "长期任务有下一步。",
+    "每周推进少量。",
+    "过期任务会取消。"
+  ],
+  "common_mistakes": [
+    "长期任务只写做百科这种大词。",
+    "每天都被急事打断后彻底忘记。",
+    "清单永远增加不减少。"
+  ],
+  "fallback": "没有专门本子时，在日记里固定每周一页写长期任务。",
+  "stop_or_escalate": [
+    "长期任务影响保命任务、资源不足或负责人过劳时，主动延期。"
+  ],
+  "notes": "长期任务像种子，不能天天挖出来看，但也不能忘了浇水。",
+  "category_original": "检查清单与复核",
+  "domains": [
+    "tools",
+    "records",
+    "planting",
+    "security",
+    "shelter"
+  ],
+  "intents": [
+    "tools_security_repair",
+    "planting_seed_reserve",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "seed_saving",
+    "food_production",
+    "inventory_change"
+  ],
+  "objects": [
+    "drinking_water",
+    "tools",
+    "seed",
+    "inventory",
+    "log"
+  ],
+  "keywords": [
+    "长期任务搁置清单",
+    "工具",
+    "记录",
+    "清单",
+    "种子",
+    "种植",
+    "seed_saving",
+    "food_production",
+    "inventory_change",
+    "drinking_water",
+    "tools",
+    "seed",
+    "inventory",
+    "log",
+    "tools_security_repair",
+    "planting_seed_reserve",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

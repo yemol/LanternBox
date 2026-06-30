@@ -1,0 +1,80 @@
+{
+  "id": "DG-0101",
+  "title": "孕妇休息和风险观察",
+  "category": "医疗急救与照护",
+  "scenario": "孕妇处于断供、撤离、长期避难或高温寒冷环境。",
+  "goal": "减少过劳和危险信号被忽视。",
+  "tools": [
+    "休息垫",
+    "水",
+    "记录本",
+    "卫生用品",
+    "联系人卡"
+  ],
+  "steps": [
+    "把孕妇从重体力、搬水、夜间值守、清污和高温暴露任务中移出。",
+    "优先保证饮水、厕所可达、睡眠和清洁卫生用品。",
+    "安排靠近厕所、通风、安静的位置。",
+    "每天记录腹痛、出血、持续头晕、严重水肿、胎动明显变化等异常。",
+    "撤离时让孕妇走队伍中间，减少拥挤推搡。",
+    "避免随意使用草药、未知药物和来源不明补品。"
+  ],
+  "check": [
+    "孕妇不承担高风险任务。",
+    "饮水、厕所、休息位置明确。",
+    "异常情况有记录。"
+  ],
+  "common_mistakes": [
+    "把孕妇当普通劳动力搬重物。",
+    "为了避嫌不记录异常。",
+    "随便用不明草药安胎。"
+  ],
+  "fallback": "资源紧张时，优先保障饮水、休息和卫生用品，而不是额外复杂补品。",
+  "stop_or_escalate": [
+    "出血、剧烈腹痛、持续头晕、意识异常、严重外伤。"
+  ],
+  "notes": "孕妇不是不能行动，而是不能被错误分配。",
+  "category_original": "特殊人群",
+  "domains": [
+    "medical",
+    "security",
+    "comms",
+    "shelter",
+    "water"
+  ],
+  "intents": [
+    "water_rationing",
+    "shelter_disaster_evacuate"
+  ],
+  "situations": [
+    "evacuation_decision",
+    "signal_plan"
+  ],
+  "objects": [
+    "signal"
+  ],
+  "keywords": [
+    "孕妇休息和风险观察",
+    "风险",
+    "信号",
+    "evacuation_decision",
+    "signal_plan",
+    "signal",
+    "water_rationing",
+    "shelter_disaster_evacuate",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包",
+    "异响",
+    "脚步声",
+    "门外"
+  ]
+}

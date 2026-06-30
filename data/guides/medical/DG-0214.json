@@ -1,0 +1,91 @@
+{
+  "id": "DG-0214",
+  "title": "药品受潮处理",
+  "category": "医疗急救与照护",
+  "scenario": "药箱进水、受潮、洪水后、冷凝水或湿气导致药品包装变软。",
+  "goal": "判断药品能否继续保留，避免污染药品进入正常区。",
+  "tools": [
+    "手套",
+    "干布",
+    "待处理袋",
+    "标签纸",
+    "记录本"
+  ],
+  "steps": [
+    "先把药箱移到干燥处，戴手套处理。",
+    "检查外包装是否湿透、药片是否粘连、变色、粉化、异味。",
+    "纸盒受潮但内包装完好的药品，擦干外层并标记观察。",
+    "内包装破损、药片变形、液体浑浊、标签不清的药品放入待处理区。",
+    "受潮药品不要用高温烘烤。",
+    "记录受潮原因和涉及药品数量。",
+    "重新布置药品存放位置，加入防潮层。"
+  ],
+  "check": [
+    "受潮药品已分级。",
+    "异常药品不在正常药区。",
+    "受潮原因已处理。"
+  ],
+  "common_mistakes": [
+    "药片晒干继续吃。",
+    "标签糊掉还凭印象使用。",
+    "湿药和正常药混放。"
+  ],
+  "fallback": "如果无法判断，宁可降级到待处理区，等待后续确认。",
+  "stop_or_escalate": [
+    "慢病药大量受潮、标签丢失、药品变色异味时，立即更新库存风险。"
+  ],
+  "notes": "药品最怕水，水会把确定性洗掉。",
+  "category_original": "药物与医疗物资管理",
+  "domains": [
+    "medical",
+    "security",
+    "disaster",
+    "evacuation",
+    "shelter"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "contamination",
+    "flood",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "drinking_water",
+    "medicine",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "药品受潮处理",
+    "洪水",
+    "contamination",
+    "flood",
+    "inventory_change",
+    "resource_exposure",
+    "drinking_water",
+    "medicine",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "shelter_disaster_evacuate",
+    "hygiene_contamination",
+    "records_inventory_people",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

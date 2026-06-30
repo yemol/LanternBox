@@ -1,0 +1,84 @@
+{
+  "id": "DG-0095",
+  "title": "儿童走失预防：先设计环境",
+  "category": "医疗急救与照护",
+  "scenario": "撤离、排队、取水、交易、停电时儿童容易走失。",
+  "goal": "让儿童在混乱中更不容易离队，走失后也更容易被找回。",
+  "tools": [
+    "身份卡",
+    "挂绳",
+    "照片",
+    "集合点图示",
+    "哨子"
+  ],
+  "steps": [
+    "给儿童准备身份卡，写姓名、监护人、集合点、重要病史或过敏。",
+    "出门前指定一个成年人只负责这个儿童，不同时承担交易、搬运、谈判。",
+    "教儿童三个规则：看不到大人就原地停下；不要跟陌生人走；吹哨或找约定标志的人。",
+    "在队伍中让儿童走中间，不走队尾。",
+    "集合点用儿童能理解的描述，比如“大蓝门旁边”，不要只说复杂地名。",
+    "每天出发前拍一张儿童当天衣着照片，方便描述。"
+  ],
+  "check": [
+    "儿童身上有身份卡。",
+    "儿童知道停下和集合点。",
+    "成年人明确谁负责儿童。"
+  ],
+  "common_mistakes": [
+    "所有大人都以为别人看着。",
+    "让儿童自由走队尾。",
+    "集合点描述儿童听不懂。"
+  ],
+  "fallback": "没有身份卡时，用纸条放入口袋，并在衣物内侧写监护人信息。",
+  "stop_or_escalate": [
+    "混乱人群、夜间、冲突、洪水边、废墟边，儿童必须一对一看护。"
+  ],
+  "notes": "儿童安全靠流程，不靠喊一句别乱跑。",
+  "category_original": "特殊人群",
+  "domains": [
+    "medical",
+    "power",
+    "security",
+    "disaster",
+    "evacuation"
+  ],
+  "intents": [
+    "shelter_disaster_evacuate",
+    "power_lighting_energy"
+  ],
+  "situations": [
+    "power_outage",
+    "evacuation_decision"
+  ],
+  "objects": [
+    "drinking_water",
+    "people"
+  ],
+  "keywords": [
+    "儿童走失预防",
+    "先设计环境",
+    "停电",
+    "安全",
+    "撤离",
+    "power_outage",
+    "evacuation_decision",
+    "drinking_water",
+    "people",
+    "shelter_disaster_evacuate",
+    "power_lighting_energy",
+    "医疗急救",
+    "照护"
+  ],
+  "negative_keywords": [
+    "主食配给",
+    "冰箱食物",
+    "太阳能充电",
+    "夜间异响",
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食",
+    "剩饭",
+    "罐头鼓包"
+  ]
+}

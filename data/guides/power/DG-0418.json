@@ -1,0 +1,88 @@
+{
+  "id": "DG-0418",
+  "title": "设备无法使用时流程",
+  "category": "通信信息与数据安全",
+  "scenario": "壳中灯没电、屏幕坏、系统打不开、老人儿童不会操作或负责人不在。",
+  "goal": "让团队能在无设备状态下继续运转。",
+  "tools": [
+    "纸质生命线卡",
+    "记录本",
+    "笔",
+    "公共板"
+  ],
+  "steps": [
+    "先取出一页生命线卡和纸质任务表。",
+    "按照纸质规则维持水、药、火、厕所、值守五项。",
+    "新事件先记在纸本上，不等系统恢复。",
+    "库存取用先写纸条记录编号、数量和用途。",
+    "成员档案只使用纸质随身卡和密封资料袋。",
+    "设备恢复后由负责人集中补录。",
+    "如果设备长期不可用，进入纸质模式轮值。"
+  ],
+  "check": [
+    "纸质记录已启用。",
+    "五项核心任务不断档。",
+    "恢复后有补录来源。"
+  ],
+  "common_mistakes": [
+    "设备打不开就什么都不记。",
+    "纸条乱飞找不到。",
+    "系统恢复后凭记忆补录。"
+  ],
+  "fallback": "没有公共板时，把纸本放在固定位置，所有人只往同一本记录。",
+  "stop_or_escalate": [
+    "设备损坏伴随数据丢失、备份不可用时，立即启用纸质备份体系。"
+  ],
+  "notes": "离线终端再强，也要有纸这条退路。",
+  "category_original": "低技术使用",
+  "domains": [
+    "power",
+    "security",
+    "comms",
+    "medical",
+    "records"
+  ],
+  "intents": [
+    "medical_elder_confusion",
+    "power_lighting_energy",
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "power_outage",
+    "elderly"
+  ],
+  "objects": [
+    "elder",
+    "people",
+    "lighting"
+  ],
+  "keywords": [
+    "设备无法使用时流程",
+    "设备",
+    "安全",
+    "通信",
+    "老人",
+    "power_outage",
+    "elderly",
+    "elder",
+    "people",
+    "lighting",
+    "medical_elder_confusion",
+    "power_lighting_energy",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "腹泻",
+    "发热",
+    "伤口",
+    "主食配给",
+    "夜间异响",
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包",
+    "太阳能充电"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "DG-0204",
+  "title": "哨子信号规则",
+  "category": "通信信息与数据安全",
+  "scenario": "需要在黑暗、废墟、树林、嘈杂环境或成员分散时快速发出信号。",
+  "goal": "用简单哨声传递求助、集合和停止信息。",
+  "tools": [
+    "哨子",
+    "规则卡",
+    "挂绳"
+  ],
+  "steps": [
+    "给儿童、老人、外出成员和值守者优先配哨子。",
+    "约定三种信号：一短为回应，三短为集合，连续急促为求助。",
+    "所有成员练习一次，确认能听懂。",
+    "哨子挂在胸前或包带上，不放背包深处。",
+    "非紧急不乱吹，避免信号疲劳。",
+    "听到求助信号时，先确认方向和人数，再行动。"
+  ],
+  "check": [
+    "信号规则简单。",
+    "关键成员有哨子。",
+    "所有人知道连续急促代表求助。"
+  ],
+  "common_mistakes": [
+    "每个人自己编信号。",
+    "儿童拿哨子当玩具乱吹。",
+    "哨子放在找不到的位置。"
+  ],
+  "fallback": "没有哨子时，用敲击金属、拍手或喊固定口令替代。",
+  "stop_or_escalate": [
+    "听到求助信号但方向不明时，先集合队伍，再按搜索流程处理。"
+  ],
+  "notes": "哨子比喊叫省力，也更穿透。",
+  "category_original": "信号标记",
+  "domains": [
+    "security",
+    "comms",
+    "records",
+    "evacuation"
+  ],
+  "intents": [
+    "comms_signal_meeting"
+  ],
+  "situations": [
+    "signal_plan",
+    "personnel_change"
+  ],
+  "objects": [
+    "signal",
+    "people"
+  ],
+  "keywords": [
+    "哨子信号规则",
+    "安全",
+    "通信",
+    "信号",
+    "signal_plan",
+    "personnel_change",
+    "signal",
+    "people",
+    "comms_signal_meeting",
+    "通信信息",
+    "数据安全"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}

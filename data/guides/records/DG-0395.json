@@ -1,0 +1,61 @@
+{
+  "id": "DG-0395",
+  "title": "任务优先级三层",
+  "category": "组织秩序与训练演练",
+  "scenario": "每天任务很多，容易什么都想做，最后关键任务没完成。",
+  "goal": "把任务分为保命、维持、改善三层。",
+  "tools": [
+    "任务表",
+    "笔",
+    "公共板"
+  ],
+  "steps": [
+    "把任务分成三层：保命任务、维持任务、改善任务。",
+    "保命任务包括饮水、药品、火源安全、伤病、撤离风险。",
+    "维持任务包括做饭、清洁、值守、库存、照护。",
+    "改善任务包括整理、美化、扩展、长期建设。",
+    "每天先完成保命任务，再安排维持任务。",
+    "改善任务只能在前两层稳定后做。",
+    "晚间复盘哪些任务被错误提前。"
+  ],
+  "check": [
+    "当天保命任务已优先。",
+    "改善任务没有挤掉饮水药品。",
+    "任务层级清楚。"
+  ],
+  "common_mistakes": [
+    "先做顺手小事。",
+    "忙着整理美化忘了补水。",
+    "所有任务都标紧急。"
+  ],
+  "fallback": "时间极少时，只保留保命任务清单。",
+  "stop_or_escalate": [
+    "饮水、药品、人员安全、火源安全未完成时，暂停改善类任务。"
+  ],
+  "notes": "任务不是越多越勤奋，顺序错了就是忙着掉血。",
+  "category_original": "检查清单与复核",
+  "domains": [
+    "records"
+  ],
+  "intents": [
+    "records_inventory_people"
+  ],
+  "situations": [
+    "bleeding",
+    "inventory_change"
+  ],
+  "objects": [
+    "inventory"
+  ],
+  "keywords": [
+    "任务优先级三层",
+    "清单",
+    "bleeding",
+    "inventory_change",
+    "inventory",
+    "records_inventory_people",
+    "组织秩序",
+    "训练演练"
+  ],
+  "negative_keywords": []
+}

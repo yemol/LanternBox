@@ -1,0 +1,84 @@
+{
+  "id": "DG-0517",
+  "title": "清洁材料替代",
+  "category": "工具维修与替代制作",
+  "scenario": "清洁剂、纸巾、抹布、刷子不足。",
+  "goal": "用低风险替代材料维持最低清洁。",
+  "tools": [
+    "布料",
+    "热水",
+    "灰或砂可选",
+    "刷子替代物"
+  ],
+  "steps": [
+    "先区分入口清洁、厕所清洁、工具清洁。",
+    "旧衣物剪成分区抹布并标记。",
+    "热水优先用于餐具、病人用品和饮水相关。",
+    "砂、灰等粗糙材料只用于非入口硬物，之后必须冲净。",
+    "厕所清洁替代物不得回到厨房。",
+    "抹布用后晾干，防止霉味。",
+    "记录最有效替代方案。"
+  ],
+  "check": [
+    "抹布分区。",
+    "入口清洁优先。",
+    "厕所替代物不回厨房。"
+  ],
+  "common_mistakes": [
+    "一块布擦全屋。",
+    "用灰擦餐具后不冲。",
+    "湿布团起来发霉。"
+  ],
+  "fallback": "材料不足时，优先手、餐具、水桶、厕所四处。",
+  "stop_or_escalate": [
+    "多人腹泻、清洁布发臭、入口物污染时，立即重整清洁分区。"
+  ],
+  "notes": "替代清洁不是随便擦，是把有限干净用在刀刃上。",
+  "category_original": "物资替代方案",
+  "domains": [
+    "security",
+    "tools",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people"
+  ],
+  "situations": [
+    "scarcity",
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure"
+  ],
+  "objects": [
+    "tools",
+    "inventory",
+    "supplies"
+  ],
+  "keywords": [
+    "清洁材料替代",
+    "风险",
+    "工具",
+    "维修",
+    "scarcity",
+    "temporary_repair",
+    "inventory_change",
+    "resource_exposure",
+    "tools",
+    "inventory",
+    "supplies",
+    "security_suspicious_person",
+    "tools_security_repair",
+    "records_inventory_people",
+    "工具维修",
+    "替代制作"
+  ],
+  "negative_keywords": [
+    "主食",
+    "剩饭",
+    "冰箱食物",
+    "罐头鼓包"
+  ]
+}
