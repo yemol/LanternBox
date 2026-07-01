@@ -47,12 +47,15 @@ PLANNER_SYSTEM_PROMPT = """
 2. core_terms 用于后续候选排序，因此必须精确。
 3. core_terms 必须是中文具体词，不要输出英文词，除非用户原文就是英文。
 4. core_terms 不要超过 8 个。
-5. core_terms 必须尽量使用独立短词，不要把多个概念粘成一个长词。
+5. core_terms 必须使用独立关键词数组，每个元素只能是一个独立词或一个不可拆的固定名词。
 6. 不要输出抽象词，例如：方案、方法、措施、管理、评估、标准、判断、风险、原因、处理、步骤、知识、安全、检查。
 7. 不要输出“安全检查”“风险判断”“应急响应”这类泛词。
 8. 应优先输出资料标题、标签、正文中可能直接出现的词。
 9. 如果用户问题包含地点、对象、状态、动作，应尽量拆开保留。
 10. 如果一个词包含多个含义，应拆成多个独立词。
+11. core_terms 的每个元素不得包含空格，例如不要输出“饼干 分配”“米 分配”，应拆为“饼干”“米”“分配”。
+12. core_terms 不要输出“使用”“安全”“检查”“判断”这类过泛抽象词，除非和具体对象组合后仍是资料库常见固定词；优先保留具体对象和直接风险词。
+13. 对“能不能”“可不可以”“还能用吗”类问题，必须保留具体对象和风险词，例如“插线板”“进水”“漏电”“禁止通电”，不要只输出“使用”“安全”。
 
 核心词补充规则：
 1. core_terms 不要使用过泛的单字词，例如“水”“电”“火”“药”。应改为更具体的资料词，例如“饮用水”“缺水”“漏电”“火灾”“常用药”。
@@ -72,6 +75,8 @@ PLANNER_SYSTEM_PROMPT = """
 8. query 和 keywords 必须使用中文检索词，不要输出英文词，除非用户原文就是英文。
 9. query 里要包含核心对象词，不要只写处置类词。
 10. 对空间、时间、异常状态类问题，要保留地点词、时间词、异常词和行动词。
+11. keywords 数组中的每个元素不得包含空格；如果想到“对象 + 动作”，拆成两个元素，例如“饼干”“分配”。
+12. 如果用户问“还能用吗/能不能用/可不可以”，keywords 应同时包含对象、异常状态、禁止动作或风险词，例如“延长线”“雨水”“漏电”“禁止通电”。
 
 检索词转换原则：
 - 不要写：“资源管理”
@@ -190,6 +195,23 @@ def _fallback_plan_payload(
     }
 
 
+def _split_terms(value: Any) -> list[str]:
+    parts = re.split(r"[\s，。！？、,.!?；;：:\-_/]+", str(value or "").strip())
+    return [part.strip() for part in parts if part.strip()]
+
+
+def _normalize_terms(value: Any, limit: int | None = None) -> list[str]:
+    values = value if isinstance(value, list) else [value]
+    result: list[str] = []
+
+    for item in values:
+        for term in _split_terms(item):
+            if term not in result:
+                result.append(term)
+
+    return result[:limit] if limit else result
+
+
 def _normalize_plan_payload(data: Dict[str, Any]) -> Dict[str, Any]:
     """Normalize planner JSON shape before Pydantic validation."""
     if not isinstance(data.get("needs"), list):
@@ -223,15 +245,15 @@ def _normalize_plan_payload(data: Dict[str, Any]) -> Dict[str, Any]:
                 "source_type": item.get("source_type") or "guide",
                 "purpose": str(item.get("purpose") or ""),
                 "query": str(item.get("query") or ""),
-                "categories": [str(x) for x in categories],
-                "keywords": [str(x) for x in keywords],
+                "categories": _normalize_terms(categories),
+                "keywords": _normalize_terms(keywords),
                 "limit": int(item.get("limit") or 8),
             }
         )
 
     data["source_plan"] = normalized_source_plan
-    data["core_terms"] = [str(x) for x in data.get("core_terms") or [] if str(x).strip()][:8]
-    data["needs"] = [str(x) for x in data.get("needs") or [] if str(x).strip()]
+    data["core_terms"] = _normalize_terms(data.get("core_terms") or [], limit=8)
+    data["needs"] = [str(x).strip() for x in data.get("needs") or [] if str(x).strip()]
 
     return data
 
