@@ -44,7 +44,13 @@ def call_ollama(
         raise RuntimeError(f"Ollama 调用失败：{e}")
 
 
-def stream_ollama(messages: List[Dict[str, str]], model: Optional[str] = None):
+def stream_ollama(
+    messages: List[Dict[str, str]],
+    model: Optional[str] = None,
+    *,
+    temperature: float = 0.2,
+    num_predict: int = 4000,
+):
     try:
         model = model or OLLAMA_MODEL
         response = requests.post(
@@ -54,8 +60,8 @@ def stream_ollama(messages: List[Dict[str, str]], model: Optional[str] = None):
                 "messages": messages,
                 "stream": True,
                 "options": {
-                    "temperature": 0.2,
-                    "num_predict": 700,
+                    "temperature": temperature,
+                    "num_predict": num_predict,
                 },
             },
             timeout=120,
