@@ -4,6 +4,7 @@
 """
 
 import json
+import re
 from typing import Any, Dict
 
 from .schemas import RetrievalPlan
@@ -145,6 +146,50 @@ def _extract_json(text: str) -> Dict[str, Any]:
     return json.loads(text)
 
 
+def _fallback_plan_payload(
+    user_message: str,
+    raw_output: str = "",
+    error: str = "",
+) -> Dict[str, Any]:
+    terms = [
+        item
+        for item in re.split(r"[\s，。！？、,.!?；;：:\-_/]+", user_message.strip())
+        if item
+    ]
+    query = " ".join(terms[:8]) or user_message.strip()
+    keywords = terms[:8] or [user_message.strip()]
+
+    return {
+        "scenario_summary": user_message.strip()[:80] or "用户请求本地资料协助",
+        "urgency": "unknown",
+        "needs": ["检索本地应急指南和 Wiki 资料"],
+        "core_terms": keywords,
+        "source_plan": [
+            {
+                "source_type": "guide",
+                "purpose": "查找可执行操作指南",
+                "query": query,
+                "categories": [],
+                "keywords": keywords,
+                "limit": 8,
+            },
+            {
+                "source_type": "wiki",
+                "purpose": "查找背景知识、判断标准和补充说明",
+                "query": query,
+                "categories": [],
+                "keywords": keywords,
+                "limit": 8,
+            },
+        ],
+        "raw": {
+            "fallback": True,
+            "planner_error": error,
+            "planner_raw_output": raw_output,
+        },
+    }
+
+
 def _normalize_plan_payload(data: Dict[str, Any]) -> Dict[str, Any]:
     """Normalize planner JSON shape before Pydantic validation."""
     if not isinstance(data.get("needs"), list):
@@ -208,8 +253,20 @@ def build_retrieval_plan(user_message: str) -> RetrievalPlan:
         num_predict=1200,
     )
 
-    data = _extract_json(content)
+    try:
+        data = _extract_json(content)
+    except Exception as exc:
+        data = _fallback_plan_payload(
+            user_message=user_message,
+            raw_output=content,
+            error=str(exc),
+        )
+
+    existing_raw = data.get("raw") if isinstance(data.get("raw"), dict) else {}
     data = _normalize_plan_payload(data)
-    data["raw"] = data.copy()
+    data["raw"] = {
+        **existing_raw,
+        **{key: value for key, value in data.items() if key != "raw"},
+    }
 
     return RetrievalPlan.model_validate(data)
