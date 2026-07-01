@@ -1,7 +1,10 @@
-"""本地资源协调层。负责加载资源、合并指南并准备应急模式 AI 上下文。"""
+"""本地资源协调层。
+
+Retrieval v2 迁移后，本文件只负责加载本地基础资料缓存，以及把
+v2 选中的指南整理成 Prompt 可读文本。
+"""
 
 from typing import Any, Dict, List
-
 
 from .config import (
     DATA_DIR,
@@ -11,53 +14,26 @@ from .config import (
     CONTEXT_PROFILES_CACHE,
     GUIDE_TAXONOMY_CACHE,
 )
-from .utils import read_json_file, safe_text, contains_any, unique_list
-
-from .services.guide_service import (
-    match_triggers,
-)
-
-from .retrieval.guide import (
-    build_guide_query,
-)
-
-from .retrieval.runtime import (
-    build_candidate_pool,
-    build_retrieval_decision,
-    HYBRID_RAG_VERSION,
-)
-
-from .retrieval.exclusions import (
-    detect_explicit_exclusions,
-    apply_hard_exclusions_to_candidates,
-    split_selected_and_excluded_candidates,
-)
-
-from .retrieval.candidate_source import (
-    get_candidate_raw_item,
-)
-
-from .retrieval.strategy import build_retrieval_strategy
-from .retrieval.candidates import build_guide_candidates
-
-from .context.engine import analyze_context
+from .utils import read_json_file
 
 
 def load_local_resources() -> None:
+    """Load local guide / trigger data into memory.
+
+    旧 context_profiles / guide_taxonomy 已不再参与 AI 主检索。
+    这里清空对应缓存，避免旧规则数据被误用。
+    """
     guides_path = DATA_DIR / "emergency_guides.json"
     triggers_path = DATA_DIR / "ai_triggers.json"
-    context_profiles_path = DATA_DIR / "context_profiles.json"
-    guide_taxonomy_path = DATA_DIR / "guide_taxonomy.json"
 
     GUIDES_CACHE.clear()
     GUIDES_CACHE.extend(read_json_file(guides_path, []))
+
     TRIGGERS_CACHE.clear()
     TRIGGERS_CACHE.extend(read_json_file(triggers_path, []))
+
     CONTEXT_PROFILES_CACHE.clear()
-    CONTEXT_PROFILES_CACHE.extend(read_json_file(context_profiles_path, []))
     GUIDE_TAXONOMY_CACHE.clear()
-    GUIDE_TAXONOMY_CACHE.update(read_json_file(guide_taxonomy_path,{},)
-    )
 
     RESOURCE_CACHE_INFO.update({
         "emergency_guides_count": len(GUIDES_CACHE),
@@ -65,7 +41,8 @@ def load_local_resources() -> None:
         "loaded": True,
         "guides_path": str(guides_path),
         "triggers_path": str(triggers_path),
-        "context_profiles_count": len(CONTEXT_PROFILES_CACHE),
+        "context_profiles_count": 0,
+        "retrieval_engine": "retrieval_v2_ai_orchestrated",
     })
 
 
@@ -73,6 +50,11 @@ def build_local_context(
     matched_triggers: List[Dict[str, Any]],
     related_guides: List[Dict[str, Any]],
 ) -> Dict[str, str]:
+    """Build prompt context from selected local guides.
+
+    matched_triggers 目前由 v2 主流程置空保留兼容；真正的证据来自
+    related_guides / related_wikis。
+    """
     trigger_blocks = []
 
     for trigger in matched_triggers[:3]:
@@ -93,6 +75,7 @@ def build_local_context(
     for guide in related_guides[:10]:
         steps = guide.get("steps", [])
         stop_or_escalate = guide.get("stop_or_escalate", [])
+        retrieval_reason = (guide.get("_retrieval_v2") or {}).get("reason", "")
 
         guide_blocks.append(
             "\n".join([
@@ -100,6 +83,7 @@ def build_local_context(
                 f"分类：{guide.get('category', '')}",
                 f"适用场景：{guide.get('scenario', '')}",
                 f"目标：{guide.get('goal', '')}",
+                f"选择理由：{retrieval_reason}",
                 f"关键步骤：{'；'.join(steps[:10])}",
                 f"停止或升级：{'；'.join(stop_or_escalate[:3])}",
             ])
@@ -112,86 +96,11 @@ def build_local_context(
 
 
 def prepare_ai_context(user_message: str, mode: str) -> Dict[str, Any]:
-    context = analyze_context(user_message)
-    strategy = build_retrieval_strategy(context)
-    analysis_domains = context.domains
-    analysis_signals = context.signals
-    analysis_intents = context.intents
-    analysis_risks = context.risks
-    analysis_plan = context.retrieval_plan
+    """Deprecated compatibility wrapper.
 
+    AI 主流程已经迁移到 api.pipeline.preload.prepare_ai_pipeline_context。
+    保留此函数只为旧调用点不崩溃，不再执行旧检索。
+    """
+    from .pipeline.preload import prepare_ai_pipeline_context
 
-    if mode == "companion":
-        return {
-            "detected_domains": [],
-            "matched_triggers": [],
-            "related_guides": [],
-            "query_profile": {},
-            "candidate_sources": [],
-            "selected_sources": [],
-            "excluded_sources": [],
-            "retrieval_decision": {"version": HYBRID_RAG_VERSION, "mode": "companion"},
-        }
-
-    if not RESOURCE_CACHE_INFO.get("loaded"):
-        load_local_resources()
-
-    guides = GUIDES_CACHE
-    triggers = TRIGGERS_CACHE
-
-    strategy = build_retrieval_strategy(context)
-
-    query_profile = build_guide_query(strategy)
-
-    detected_domains = analysis_domains or query_profile.get("domains", [])
-    matched_triggers = match_triggers(user_message, triggers)[:10]
-
-    guide_pool = build_guide_candidates(
-        strategy=strategy,
-        user_message=user_message,
-        guides=guides,
-        matched_triggers=matched_triggers,
-    )
-
-    candidates = build_candidate_pool(
-        user_message=user_message,
-        strategy=strategy,
-        guide_candidates=guide_pool,
-        wiki_candidates=[],
-        include_kiwix=False,
-    )
-
-    exclusions = detect_explicit_exclusions(user_message)
-    candidates = apply_hard_exclusions_to_candidates(candidates, exclusions)
-    split = split_selected_and_excluded_candidates(candidates, max_selected=12)
-
-    selected_sources = split["selected"]
-    excluded_sources = split["excluded"]
-
-    # 兼容旧逻辑：related_guides 仍然返回 guide 的 raw，并保持最多 10 条。
-    related_guides = [
-        get_candidate_raw_item(item)
-        for item in selected_sources
-        if item.get("source_type") == "guide"
-    ][:10]
-
-    retrieval_decision = build_retrieval_decision(
-        user_message=user_message,
-        strategy=strategy,
-        candidates=candidates,
-        selected=selected_sources,
-        excluded=excluded_sources,
-        mode="rule_candidate_pool",
-    )
-    retrieval_decision["explicit_exclusions"] = exclusions
-
-    return {
-        "detected_domains": detected_domains,
-        "matched_triggers": matched_triggers,
-        "related_guides": related_guides,
-        "query_profile": query_profile,
-        "candidate_sources": candidates,
-        "selected_sources": selected_sources,
-        "excluded_sources": excluded_sources,
-        "retrieval_decision": retrieval_decision,
-    }
+    return prepare_ai_pipeline_context(user_message=user_message, mode=mode)

@@ -7,8 +7,6 @@ from typing import Any, Dict, List, Optional, Tuple
 from ..resources import build_local_context
 from ..utils import get_default_model_for_mode
 from ..wiki import build_wiki_context_for_ai
-from ..context.engine import analyze_context
-from .context_blocks import build_lantern_context, format_lantern_context_for_prompt
 from ..config import OLLAMA_BASE_URL, OLLAMA_MODEL, SCENARIO_PROFILE
 
 def build_safe_history(
@@ -89,8 +87,6 @@ def build_emergency_messages(
 ) -> List[Dict[str, str]]:
     context = build_local_context(matched_triggers, related_guides)
     wiki_context = build_wiki_context_for_ai(related_wikis or [])
-    lantern_context = build_lantern_context(user_message)
-    lantern_context_text = format_lantern_context_for_prompt(lantern_context)
 
     system_prompt = f"""
 你是“壳中灯 LanternBox”的应急模式本地离线 AI 助手。
@@ -159,8 +155,7 @@ def build_emergency_messages(
 检测到的问题领域：
 {', '.join(detected_domains) if detected_domains else '未识别到明确领域'}
 
-Context Engine 对当前输入的结构化观察：
-{lantern_context_text}
+Retrieval v2 对当前输入的结构化检索计划由接口 debug 提供，回答时以本地指南和 Wiki 证据为准。
 
 匹配到的本地触发场景：
 {context['trigger_text'] or '未命中精确触发规则。'}

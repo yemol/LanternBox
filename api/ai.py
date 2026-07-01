@@ -10,5 +10,3 @@ from .response.prompts import (
 from .response.safety import sanitize_ai_answer
 from .response.fallback import build_fallback_answer
 
-from .retrieval.references import filter_and_rank_ai_references
-from .retrieval.reranker import rerank_candidates_with_local_ai

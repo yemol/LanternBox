@@ -1,41 +1,75 @@
-"""Pipeline 预加载。统一准备应急模式所需 Context、Guide、Wiki 与重排数据。"""
+"""Pipeline 预加载。
 
-from typing import Any, Dict, List
+Retrieval v2 是当前 AI 助手主检索入口：
+用户问题 -> AI Planner -> Source Fetchers -> AI Selector -> selected_evidence。
 
-from ..retrieval.domains import detect_domains_from_text
+本文件不再调用旧 rule-first context / legacy rerank 逻辑。
+"""
+
+from typing import Any, Dict, List, Tuple
+
 from .hooks import run_hooks
+from ..retrieval_v2.orchestrator import run_retrieval_v2
 
-from ..resources import prepare_ai_context
-from ..services.wiki_service import (
-    search_wiki_for_ai,
-    filter_related_wikis_for_query,
-)
-from ..retrieval.references import filter_and_rank_ai_references
-from ..retrieval.apply import apply_ai_rerank_if_enabled
 
-def build_wiki_query_profile(
-    context_data: Dict[str, Any],
-    detected_domains: List[str],
-) -> Dict[str, Any]:
-    """从 Context 结果中构造 Wiki 检索需要的轻量 query profile。"""
+def _model_dump(value: Any) -> Any:
+    """Return a plain JSON-serializable dict/list when possible."""
+    if hasattr(value, "model_dump"):
+        return value.model_dump()
+    return value
 
-    context_data = context_data or {}
 
-    query_profile = context_data.get("query_profile")
-    if isinstance(query_profile, dict):
-        return {
-            "domains": query_profile.get("domains", []) or detected_domains or [],
-            "intents": query_profile.get("intents", []) or [],
-            "signals": query_profile.get("signals", []) or [],
-            "risks": query_profile.get("risks", []) or [],
-        }
+def _evidence_raw(item: Any, reason: str = "") -> Dict[str, Any]:
+    """Convert v2 EvidenceCandidate to the legacy raw shape expected by prompts/pages.
 
-    return {
-        "domains": context_data.get("detected_domains", []) or detected_domains or [],
-        "intents": context_data.get("intents", []) or [],
-        "signals": context_data.get("signals", []) or [],
-        "risks": context_data.get("risks", []) or [],
+    这里不做语义判断，只把 v2 统一证据对象展开成旧前端/Prompt 能读取的 dict。
+    """
+    raw = dict(getattr(item, "raw", None) or {})
+
+    raw.setdefault("id", getattr(item, "id", ""))
+    raw.setdefault("title", getattr(item, "title", ""))
+    raw.setdefault("summary", getattr(item, "summary", ""))
+    raw.setdefault("category", getattr(item, "category", ""))
+    raw.setdefault("tags", getattr(item, "tags", []) or [])
+    raw.setdefault("snippet", getattr(item, "snippet", ""))
+
+    raw["_retrieval_v2"] = {
+        "source_type": getattr(item, "source_type", ""),
+        "id": getattr(item, "id", ""),
+        "title": getattr(item, "title", ""),
+        "reason": reason,
     }
+
+    return raw
+
+
+def _split_selected_evidence(retrieval_v2_result: Any) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+    """Split selected v2 evidence into related_guides and related_wikis."""
+    selection = getattr(retrieval_v2_result, "selection", None)
+    selected = getattr(selection, "selected", []) or []
+
+    reason_by_key = {
+        (getattr(item, "source_type", ""), getattr(item, "id", "")): getattr(item, "reason", "")
+        for item in selected
+    }
+
+    related_guides: List[Dict[str, Any]] = []
+    related_wikis: List[Dict[str, Any]] = []
+
+    for item in getattr(retrieval_v2_result, "selected_evidence", []) or []:
+        source_type = getattr(item, "source_type", "")
+        item_id = getattr(item, "id", "")
+        reason = reason_by_key.get((source_type, item_id), "")
+
+        raw = _evidence_raw(item, reason=reason)
+
+        if source_type == "guide":
+            related_guides.append(raw)
+        elif source_type == "wiki":
+            related_wikis.append(raw)
+
+    return related_guides, related_wikis
+
 
 def prepare_pipeline_inputs(
     *,
@@ -46,13 +80,11 @@ def prepare_pipeline_inputs(
     related_wikis: List[Dict[str, Any]] | None = None,
     detected_domains: List[str] | None = None,
     context_data: Dict[str, Any] | None = None,
-    rerank_state: Dict[str, Any] | None = None,
+    retrieval_v2: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
-    """准备 PipelineRequest 所需的业务输入。
+    """Prepare normalized PipelineRequest inputs.
 
-    当前阶段 routes.py 仍然负责实际查询本地触发规则、指南和 Wiki。
-    preload 先负责统一兜底、规整和补全。
-    后续再逐步把实际查询逻辑搬进这里或专门的 service。
+    This function is now a generic normalization hook layer. It does not run old retrieval.
     """
 
     hook_input = run_hooks("before_preload", {
@@ -63,87 +95,77 @@ def prepare_pipeline_inputs(
         "related_wikis": related_wikis,
         "detected_domains": detected_domains,
         "context_data": context_data,
-        "rerank_state": rerank_state,
+        "retrieval_v2": retrieval_v2,
     })
 
-    user_message = hook_input.get("user_message", user_message)
-    mode = hook_input.get("mode", mode)
-    matched_triggers = hook_input.get("matched_triggers", matched_triggers)
-    related_guides = hook_input.get("related_guides", related_guides)
-    related_wikis = hook_input.get("related_wikis", related_wikis)
-    detected_domains = hook_input.get("detected_domains", detected_domains)
-    context_data = hook_input.get("context_data", context_data)
-    rerank_state = hook_input.get("rerank_state", rerank_state)
-
-    normalized_message = str(user_message or "").strip()
-    normalized_mode = str(mode or "emergency").strip() or "emergency"
-
-    final_detected_domains = detected_domains or detect_domains_from_text(normalized_message)
+    normalized_message = str(hook_input.get("user_message", user_message) or "").strip()
+    normalized_mode = str(hook_input.get("mode", mode) or "emergency").strip() or "emergency"
 
     prepared = {
         "message": normalized_message,
         "mode": normalized_mode,
-        "matched_triggers": matched_triggers or [],
-        "related_guides": related_guides or [],
-        "related_wikis": related_wikis or [],
-        "detected_domains": final_detected_domains or [],
-        "context_data": context_data or {},
-        "rerank_state": rerank_state or {},
+        "matched_triggers": hook_input.get("matched_triggers", matched_triggers) or [],
+        "related_guides": hook_input.get("related_guides", related_guides) or [],
+        "related_wikis": hook_input.get("related_wikis", related_wikis) or [],
+        "detected_domains": hook_input.get("detected_domains", detected_domains) or [],
+        "context_data": hook_input.get("context_data", context_data) or {},
+        "retrieval_v2": hook_input.get("retrieval_v2", retrieval_v2) or {},
     }
 
     return run_hooks("after_preload", prepared)
+
 
 def prepare_ai_pipeline_context(
     *,
     user_message: str,
     mode: str,
 ) -> Dict[str, Any]:
-    context_data = prepare_ai_context(user_message, mode)
+    """Build AI pipeline context using Retrieval v2 only."""
 
-    detected_domains = context_data.get("detected_domains", [])
-    matched_triggers = context_data.get("matched_triggers", [])
-    related_guides = context_data.get("related_guides", [])
+    normalized_message = str(user_message or "").strip()
+    normalized_mode = str(mode or "emergency").strip() or "emergency"
 
-    wiki_query_profile = build_wiki_query_profile(
-        context_data=context_data,
-        detected_domains=detected_domains,
-    )
+    retrieval_v2_result = run_retrieval_v2(normalized_message)
+    retrieval_v2 = retrieval_v2_result.model_dump()
 
-    related_wikis = search_wiki_for_ai(
-        user_message,
-        detected_domains=detected_domains,
-        query_profile=wiki_query_profile,
-        limit=5,
-    )
+    related_guides, related_wikis = _split_selected_evidence(retrieval_v2_result)
 
-    ranked_references = filter_and_rank_ai_references(
-        user_message=user_message,
+    plan = retrieval_v2_result.plan
+    core_terms = list(getattr(plan, "core_terms", []) or [])
+
+    context_data: Dict[str, Any] = {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "mode": normalized_mode,
+        "matched_triggers": [],
+        "related_guides": related_guides,
+        "related_wikis": related_wikis,
+        "core_terms": core_terms,
+        "source_plan": [
+            item.model_dump() if hasattr(item, "model_dump") else item
+            for item in getattr(plan, "source_plan", []) or []
+        ],
+        "retrieval_v2": retrieval_v2,
+    }
+
+    # v2 不再使用旧 domain detector。这里保留字段，避免下游结构断裂。
+    detected_domains: List[str] = []
+
+    prepared = prepare_pipeline_inputs(
+        user_message=normalized_message,
+        mode=normalized_mode,
+        matched_triggers=[],
         related_guides=related_guides,
         related_wikis=related_wikis,
         detected_domains=detected_domains,
+        context_data=context_data,
+        retrieval_v2=retrieval_v2,
     )
-
-    related_guides = ranked_references.get("guides", [])
-    related_wikis = ranked_references.get("wikis", [])
-
-    related_wikis = filter_related_wikis_for_query(
-        related_wikis,
-        wiki_query_profile,
-    )
-
-    rerank_state = apply_ai_rerank_if_enabled(
-        user_message,
-        context_data,
-        related_guides,
-    )
-
-    related_guides = rerank_state.get("related_guides", related_guides)
 
     return {
-        "context_data": context_data,
-        "detected_domains": detected_domains,
-        "matched_triggers": matched_triggers,
-        "related_guides": related_guides,
-        "related_wikis": related_wikis,
-        "rerank_state": rerank_state,
+        "context_data": prepared["context_data"],
+        "detected_domains": prepared["detected_domains"],
+        "matched_triggers": prepared["matched_triggers"],
+        "related_guides": prepared["related_guides"],
+        "related_wikis": prepared["related_wikis"],
+        "retrieval_v2": prepared["retrieval_v2"],
     }

@@ -15,7 +15,7 @@ def build_ai_advice_response(
     related_wikis: Optional[List[Dict[str, Any]]] = None,
     detected_domains: Optional[List[str]] = None,
     context_data: Optional[Dict[str, Any]] = None,
-    rerank_state: Optional[Dict[str, Any]] = None,
+    retrieval_v2: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """把 PipelineResult 转换成 /api/ai/advice 的 JSON 响应。"""
 
@@ -27,7 +27,7 @@ def build_ai_advice_response(
         "related_wikis": related_wikis or [],
         "detected_domains": detected_domains or [],
         "context_data": context_data or {},
-        "rerank_state": rerank_state or {},
+        "retrieval_v2": retrieval_v2 or {},
         "pipeline": result.debug or {},
     }
 

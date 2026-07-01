@@ -54,7 +54,7 @@ def build_pipeline_request(
     related_wikis: Optional[List[Dict[str, Any]]] = None,
     detected_domains: Optional[List[str]] = None,
     context_data: Optional[Dict[str, Any]] = None,
-    rerank_state: Optional[Dict[str, Any]] = None,
+    retrieval_v2: Optional[Dict[str, Any]] = None,
 ) -> PipelineRequest:
     prepared = prepare_pipeline_inputs(
         user_message=getattr(payload, "message", ""),
@@ -64,7 +64,7 @@ def build_pipeline_request(
         related_wikis=related_wikis,
         detected_domains=detected_domains,
         context_data=context_data,
-        rerank_state=rerank_state,
+        retrieval_v2=retrieval_v2,
     )
 
     return PipelineRequest(
@@ -75,9 +75,10 @@ def build_pipeline_request(
         related_guides=prepared["related_guides"],
         related_wikis=prepared["related_wikis"],
         detected_domains=prepared["detected_domains"],
+        retrieval_v2=prepared["retrieval_v2"],
         stream=stream,
         metadata={
             "context_data": prepared["context_data"],
-            "rerank_state": prepared["rerank_state"],
+            "retrieval_v2": prepared["retrieval_v2"],
         },
     )

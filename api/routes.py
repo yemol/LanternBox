@@ -91,10 +91,8 @@ def get_ai_runtime_settings():
         "ok": True,
         "settings": settings,
         "description": {
-            "ai_rerank_enabled": "是否启用本地 AI 对候选来源进行重排",
-            "ai_rerank_model": "用于重排的 Ollama 模型",
-            "retrieval_mode": "rule=规则召回，hybrid=规则召回+AI重排，enhanced=预留增强模式",
-            "show_retrieval_debug": "是否在接口返回中显示检索判断、选中来源和排除来源",
+            "retrieval_engine": "当前主检索引擎为 retrieval_v2_ai_orchestrated",
+            "show_retrieval_debug": "是否在接口返回中显示 v2 检索计划、候选来源和选中证据",
         },
     }
 
@@ -319,9 +317,7 @@ def ai_advice(payload: AiAdviceRequest):
     matched_triggers = prepared_ai["matched_triggers"]
     related_guides = prepared_ai["related_guides"]
     related_wikis = prepared_ai["related_wikis"]
-    rerank_state = prepared_ai["rerank_state"]
-    related_guides = rerank_state["related_guides"]
-
+    retrieval_v2 = prepared_ai["retrieval_v2"]
 
     pipeline_result = None
 
@@ -340,7 +336,7 @@ def ai_advice(payload: AiAdviceRequest):
             related_wikis=related_wikis,
             detected_domains=detected_domains,
             context_data=context_data,
-            rerank_state=rerank_state,
+            retrieval_v2=retrieval_v2,
         )
 
         try:
@@ -364,7 +360,7 @@ def ai_advice(payload: AiAdviceRequest):
         related_wikis=related_wikis,
         detected_domains=detected_domains,
         context_data=context_data,
-        rerank_state=rerank_state,
+        retrieval_v2=retrieval_v2,
     )
 
 
@@ -390,19 +386,21 @@ def ai_advice_stream(payload: AiAdviceRequest):
     matched_triggers = prepared_ai["matched_triggers"]
     related_guides = prepared_ai["related_guides"]
     related_wikis = prepared_ai["related_wikis"]
-    rerank_state = prepared_ai["rerank_state"]
-    related_guides = rerank_state["related_guides"]
+    retrieval_v2 = prepared_ai["retrieval_v2"]
 
     pipeline_request = build_pipeline_request(
         payload,
         stream=True,
-        matched_triggers=context_data["matched_triggers"],
+        matched_triggers=matched_triggers,
         related_guides=related_guides,
         related_wikis=related_wikis,
         detected_domains=detected_domains,
         context_data=context_data,
-        rerank_state=rerank_state,
+        retrieval_v2=retrieval_v2,
     )
+
+    pipeline_request.retrieval_v2 = retrieval_v2
+    pipeline_request.metadata["retrieval_v2"] = retrieval_v2
 
     pipeline_stream = run_ai_stream_pipeline(pipeline_request)
     messages = pipeline_stream["messages"]

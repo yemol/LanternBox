@@ -1,12 +1,14 @@
-"""Guide Service。负责触发规则、关联指南和指南基础文本能力。"""
+"""Guide Service。
+
+Retrieval v2 迁移后，本文件只保留基础指南/触发规则工具。
+不再依赖旧 retrieval constants / domain compatibility。
+"""
 
 from typing import Any, Dict, List
 
 from ..config import DOMAIN_KEYWORDS
-from ..retrieval.constants import DOMAIN_COMPATIBILITY
 from ..utils import get_severity_weight, unique_list, safe_text, contains_any
 
-# 指南基础能力：触发规则、指南关联、指南文本、领域兼容
 
 def match_triggers(input_text: str, triggers: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     text = (input_text or "").strip()
@@ -41,6 +43,7 @@ def match_triggers(input_text: str, triggers: List[Dict[str, Any]]) -> List[Dict
 
     return matched
 
+
 def find_related_guides(
     matched_triggers: List[Dict[str, Any]],
     guides: List[Dict[str, Any]],
@@ -64,8 +67,8 @@ def find_related_guides(
 
     return result
 
+
 def guide_core_text(guide: Dict[str, Any]) -> str:
-    # 核心文本不包含 negative_keywords，避免负词反向污染正向召回。
     fields = [
         "id", "title", "category", "category_original", "scenario", "goal",
         "fallback", "notes", "summary", "source", "domains", "keywords",
@@ -73,11 +76,13 @@ def guide_core_text(guide: Dict[str, Any]) -> str:
     ]
     return " ".join(safe_text(guide.get(key)) for key in fields)
 
+
 def guide_full_text(guide: Dict[str, Any]) -> str:
     parts = [guide_core_text(guide)]
     for key in ["tools", "steps", "check", "common_mistakes", "stop_or_escalate", "do_first", "avoid", "items"]:
         parts.append(safe_text(guide.get(key)))
     return " ".join(parts)
+
 
 def guide_domains(guide: Dict[str, Any]) -> List[str]:
     domains = guide.get("domains")
@@ -91,12 +96,14 @@ def guide_domains(guide: Dict[str, Any]) -> List[str]:
             result.append(domain)
     return result or ["general"]
 
+
 def guide_compatible_with_domains(guide: Dict[str, Any], detected_domains: List[str]) -> bool:
+    """Compatibility check retained as a permissive helper.
+
+    v2 不再使用旧领域兼容过滤；如果旧工具调用此函数，保持基础兼容。
+    只做直接领域交集判断，避免旧规则重新影响主流程。
+    """
     if not detected_domains:
         return True
     guide_set = set(guide_domains(guide))
-    for domain in detected_domains:
-        allowed = DOMAIN_COMPATIBILITY.get(domain, {domain})
-        if guide_set & allowed:
-            return True
-    return False
+    return bool(guide_set & set(detected_domains))

@@ -15,8 +15,9 @@ def run_emergency_pipeline(request: PipelineRequest) -> PipelineResult:
         messages=messages,
         debug={
             "pipeline": "emergency",
-            "modules": ["context", "retrieval", "response", "llm"],
-            "planner": "not_enabled",
+            "modules": ["retrieval_v2", "response", "llm"],
+            "planner": "ai_orchestrated",
+            "retrieval_v2": request.retrieval_v2,
         },
     )
 
@@ -40,7 +41,8 @@ def run_emergency_stream_pipeline(request: PipelineRequest):
         "messages": messages,
         "debug": {
             "pipeline": "emergency",
-            "modules": ["context", "retrieval", "response", "llm"],
-            "planner": "not_enabled",
+            "modules": ["retrieval_v2", "response", "llm"],
+            "planner": "ai_orchestrated",
+            "retrieval_v2": request.retrieval_v2,
         },
     }
