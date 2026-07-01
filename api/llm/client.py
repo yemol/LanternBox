@@ -13,7 +13,7 @@ def call_ollama(
     *,
     force_json: bool = False,
     temperature: float = 0.2,
-    num_predict: int = 700,
+    num_predict: int = 4000,
 ) -> str:
     try:
         model = model or OLLAMA_MODEL

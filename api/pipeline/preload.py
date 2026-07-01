@@ -13,6 +13,30 @@ from ..services.wiki_service import (
 from ..retrieval.references import filter_and_rank_ai_references
 from ..retrieval.apply import apply_ai_rerank_if_enabled
 
+def build_wiki_query_profile(
+    context_data: Dict[str, Any],
+    detected_domains: List[str],
+) -> Dict[str, Any]:
+    """从 Context 结果中构造 Wiki 检索需要的轻量 query profile。"""
+
+    context_data = context_data or {}
+
+    query_profile = context_data.get("query_profile")
+    if isinstance(query_profile, dict):
+        return {
+            "domains": query_profile.get("domains", []) or detected_domains or [],
+            "intents": query_profile.get("intents", []) or [],
+            "signals": query_profile.get("signals", []) or [],
+            "risks": query_profile.get("risks", []) or [],
+        }
+
+    return {
+        "domains": context_data.get("detected_domains", []) or detected_domains or [],
+        "intents": context_data.get("intents", []) or [],
+        "signals": context_data.get("signals", []) or [],
+        "risks": context_data.get("risks", []) or [],
+    }
+
 def prepare_pipeline_inputs(
     *,
     user_message: str,
@@ -80,10 +104,16 @@ def prepare_ai_pipeline_context(
     matched_triggers = context_data.get("matched_triggers", [])
     related_guides = context_data.get("related_guides", [])
 
+    wiki_query_profile = build_wiki_query_profile(
+        context_data=context_data,
+        detected_domains=detected_domains,
+    )
+
     related_wikis = search_wiki_for_ai(
         user_message,
         detected_domains=detected_domains,
-        limit=6,
+        query_profile=wiki_query_profile,
+        limit=5,
     )
 
     ranked_references = filter_and_rank_ai_references(
@@ -98,7 +128,7 @@ def prepare_ai_pipeline_context(
 
     related_wikis = filter_related_wikis_for_query(
         related_wikis,
-        context_data.get("query_profile", {}),
+        wiki_query_profile,
     )
 
     rerank_state = apply_ai_rerank_if_enabled(

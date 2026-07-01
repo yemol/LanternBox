@@ -75,6 +75,55 @@ def should_enable_ai_rerank(enable_ai_rerank: Optional[bool] = None) -> bool:
         return False
 
 
+def should_skip_ai_guide_rerank(
+    candidates: List[Dict[str, Any]],
+    query_profile: Dict[str, Any],
+) -> bool:
+    """
+    判断是否跳过 Guide AI rerank。
+
+    原则：
+    - 规则 Top1 已经明显命中主意图 / 信号 / 风险时，不让 AI 改排序。
+    - AI rerank 只处理规则低置信或候选纠结场景。
+    """
+    if not candidates:
+        return True
+
+    top1 = candidates[0]
+    top1_score = top1.get("_match_score", 0) or 0
+
+    query_intents = set(query_profile.get("intents") or [])
+    query_signals = set(query_profile.get("signals") or [])
+    query_risks = set(query_profile.get("risks") or [])
+
+    guide_intents = set(top1.get("intents") or [])
+    guide_signals = set(top1.get("signals") or [])
+    guide_risks = set(top1.get("risks") or [])
+
+    primary_intent = top1.get("primary_intent")
+
+    primary_intent_matched = bool(
+        primary_intent and primary_intent in query_intents
+    )
+    intent_matched = bool(guide_intents & query_intents)
+    signal_matched = bool(guide_signals & query_signals)
+    risk_matched = bool(guide_risks & query_risks)
+
+    strong_metadata_match = (
+        primary_intent_matched
+        or signal_matched
+        or risk_matched
+    )
+
+    if top1_score >= 100 and strong_metadata_match:
+        return True
+
+    if top1_score >= 90 and intent_matched and strong_metadata_match:
+        return True
+
+    return False
+
+
 def get_ai_rerank_model() -> str:
     return os.getenv(AI_RERANK_MODEL_ENV_NAME) or OLLAMA_MODEL
 
@@ -579,6 +628,18 @@ def rerank_guide_candidates(
     if not should_enable_ai_rerank(strategy.get("enable_ai_rerank")):
         return marked_candidates
 
+    query_profile = build_guide_query(strategy)
+    if should_skip_ai_guide_rerank(candidates, query_profile):
+        return [
+            {
+                **candidate,
+                "_guide_rerank_mode": "rule_high_confidence_skip_ai",
+                "_guide_rerank_used_ai": False,
+                "_guide_rerank_reason": "规则高置信保底",
+            }
+            for candidate in candidates
+    ]
+
     rerank_candidates = [
         _guide_to_rerank_candidate(candidate, index)
         for index, candidate in enumerate(marked_candidates, start=1)
@@ -602,15 +663,20 @@ def rerank_guide_candidates(
     ranked_guides = []
     used_ids = set()
 
+    used_ai = result.get("used_ai", False)
+    rerank_mode = result.get("mode")
+
     for candidate_id in selected_ids:
         guide = by_candidate_id.get(candidate_id)
         if not guide:
             continue
 
         item = dict(guide)
-        item["_guide_rerank_mode"] = result.get("mode")
-        item["_guide_rerank_used_ai"] = result.get("used_ai", False)
-        item["_guide_rerank_reason"] = "AI 重排选择"
+        item["_guide_rerank_mode"] = rerank_mode
+        item["_guide_rerank_used_ai"] = used_ai
+        item["_guide_rerank_reason"] = (
+            "AI 重排选择" if used_ai else "规则保底选择"
+        )
         ranked_guides.append(item)
         used_ids.add(candidate_id)
 
@@ -621,8 +687,11 @@ def rerank_guide_candidates(
 
         guide = by_candidate_id[candidate_id]
         item = dict(guide)
-        item["_guide_rerank_mode"] = result.get("mode")
-        item["_guide_rerank_used_ai"] = result.get("used_ai", False)
+        item["_guide_rerank_mode"] = rerank_mode
+        item["_guide_rerank_used_ai"] = used_ai
+        item["_guide_rerank_reason"] = (
+            "规则补充来源" if used_ai else "规则保底补充"
+        )
         ranked_guides.append(item)
 
     return ranked_guides

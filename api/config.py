@@ -13,6 +13,9 @@ DB_PATH = DATA_DIR / "lanternbox.db"
 EMERGENCY_GUIDES_PATH = DATA_DIR / "emergency_guides.json"
 EMERGENCY_GUIDES_FILE = DATA_DIR / "emergency_guides.json"
 ENV_PATH = BASE_DIR / ".env"
+WIKI_DOMAIN_TERMS_FILE = DATA_DIR / "wiki_domain_terms.json"
+WIKI_RETRIEVAL_PROFILES_FILE = DATA_DIR / "wiki_retrieval_profiles.json"
+WIKI_STOP_TERMS_FILE = DATA_DIR / "wiki_stop_terms.json"
 
 
 def load_env_file(path: Path = ENV_PATH) -> None:
