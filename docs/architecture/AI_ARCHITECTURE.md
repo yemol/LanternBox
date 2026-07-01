@@ -323,10 +323,8 @@ api/resources.py
 
 - 本地资源加载
 - Resource Cache
-- Local Context
-- `prepare_ai_context()` 协调
 
-Resources 不再承担 Guide Service、Wiki Service、Retrieval Runtime、Prompt、LLM 等职责。
+Resources 不再承担 Guide Service、Wiki Service、Retrieval Runtime、Prompt、上下文拼装、LLM 等职责。
 
 ---
 

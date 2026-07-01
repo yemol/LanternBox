@@ -59,13 +59,10 @@ Last Updated: 2026-06-28
 
 ```text
 load_local_resources
-merge_guides
-build_local_context
-prepare_ai_context
 Resource Cache
 ```
 
-`resources.py` 是资源协调层，不再承载 Guide、Wiki、Retrieval Runtime、Prompt 或 LLM 逻辑。
+`resources.py` 只保留本地资源缓存加载，不再承载 Guide、Wiki、Retrieval Runtime、Prompt、上下文拼装或 LLM 逻辑。
 
 ---
 

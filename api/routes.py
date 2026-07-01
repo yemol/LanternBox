@@ -4,7 +4,6 @@ import json
 import sqlite3
 import uuid
 from datetime import datetime
-from typing import Any
 import urllib.request
 
 from fastapi import APIRouter, HTTPException
@@ -13,13 +12,9 @@ from fastapi.responses import FileResponse, StreamingResponse
 from .services.wiki_service import (
     get_wiki_categories_records,
     get_wiki_articles_by_category_records,
+    search_wiki_articles,
 )
 
-from .ai import (
-    build_fallback_answer,
-    sanitize_ai_answer,
-    stream_ollama,
-)
 from .config import (
     APP_DIR,
     BACKUP_DIR,
@@ -45,11 +40,6 @@ from .wiki import (
     get_wiki_article_detail,
 )
 
-from .services.wiki_service import (
-    search_wiki_articles
-)
-
-
 from .pipeline.dispatcher import run_ai_pipeline, run_ai_stream_pipeline
 from .pipeline.builder import build_pipeline_request
 from .pipeline.postprocess import (
@@ -57,6 +47,9 @@ from .pipeline.postprocess import (
     build_fallback_pipeline_result,
 )
 from .pipeline.preload import prepare_ai_pipeline_context
+from .llm.client import stream_ollama
+from .response.fallback import build_fallback_answer
+from .response.safety import sanitize_ai_answer
 
 # 路由控制
 router = APIRouter()
@@ -299,8 +292,6 @@ def get_emergency_guides():
 def ai_advice(payload: AiAdviceRequest):
     user_message = payload.message.strip()
     mode = payload.mode or "emergency"
-    model = get_default_model_for_mode(mode)
-
     if mode not in {"emergency", "companion"}:
         mode = "emergency"
 
@@ -368,8 +359,6 @@ def ai_advice(payload: AiAdviceRequest):
 def ai_advice_stream(payload: AiAdviceRequest):
     user_message = payload.message.strip()
     mode = payload.mode or "emergency"
-    model = get_default_model_for_mode(mode)
-
     if mode not in {"emergency", "companion"}:
         mode = "emergency"
 
@@ -404,9 +393,8 @@ def ai_advice_stream(payload: AiAdviceRequest):
 
     pipeline_stream = run_ai_stream_pipeline(pipeline_request)
     messages = pipeline_stream["messages"]
-    pipeline_debug = pipeline_stream.get("debug", {})
-
     def event_generator():
+        model = get_default_model_for_mode(mode)
         for chunk in stream_ollama(messages, model=model):
             yield chunk
 

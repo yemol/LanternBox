@@ -98,57 +98,6 @@
       white-space: nowrap;
     }
 
-    .ai-rerank-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 32px;
-      padding: 6px 12px;
-      border: 1px solid rgba(137, 204, 255, 0.22);
-      border-radius: 999px;
-      color: var(--text-soft);
-      background: rgba(255, 255, 255, 0.055);
-      font-size: 13px;
-      font-weight: 900;
-      white-space: nowrap;
-      box-shadow: none;
-      cursor: pointer;
-    }
-
-    .ai-rerank-toggle:hover {
-      border-color: rgba(104, 199, 255, 0.48);
-      background: rgba(104, 199, 255, 0.1);
-    }
-
-    .ai-rerank-toggle.active {
-      border-color: rgba(255, 176, 74, 0.72);
-      color: #fff2d8;
-      background:
-        linear-gradient(135deg, rgba(255, 164, 64, 0.28), rgba(255, 120, 42, 0.16));
-      box-shadow:
-        0 0 0 3px rgba(255, 164, 64, 0.07),
-        0 0 26px rgba(255, 164, 64, 0.18);
-    }
-
-    .ai-rerank-toggle.saving {
-      opacity: 0.68;
-      cursor: wait;
-    }
-
-    .ai-rerank-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(137, 204, 255, 0.48);
-      box-shadow: 0 0 10px rgba(104, 199, 255, 0.12);
-    }
-
-    .ai-rerank-toggle.active .ai-rerank-dot {
-      background: #ffb04a;
-      box-shadow: 0 0 16px rgba(255, 176, 74, 0.45);
-    }
-
-
     .assistant-subtitle {
       margin: 14px 0 0;
       max-width: 760px;
@@ -1188,14 +1137,10 @@
           <div class="assistant-title-row">
             <h1>壳中灯 AI 助手</h1>
             <span id="currentModeBadge" class="mode-badge">当前模式：应急模式</span>
-            <button id="aiRerankToggle" class="ai-rerank-toggle" type="button" title="规则召回模式：更快、更省电。开启后会使用本地 AI 对候选来源进行重排。">
-              <span class="ai-rerank-dot" aria-hidden="true"></span>
-              <span id="aiRerankToggleText">检索增强：关</span>
-            </button>
           </div>
 
           <p id="assistantSubtitle" class="assistant-subtitle">
-            应急模式会优先调用本地触发规则和应急指南，帮助你在断网、断电、断水、灾害或低资源环境下做出判断。
+            应急模式会通过 Retrieval v2 读取本地指南与 Wiki，帮助你在断网、断电、断水、灾害或低资源环境下做出判断。
           </p>
         </div>
 
@@ -1249,7 +1194,7 @@
           </div>
 
           <div id="assistantHint" class="assistant-hint">
-            应急模式会调取本地资料。陪伴模式会降低压力感，不会默认把每句话都变成任务和警报。
+            应急模式会自动启用 Retrieval v2 本地增强检索。陪伴模式会降低压力感，不会默认把每句话都变成任务和警报。
           </div>
         </div>
       </section>
@@ -1305,7 +1250,7 @@
           </div>
 
           <div id="companionQuietNote" class="companion-quiet-note hidden">
-            当前为陪伴模式：默认不展开应急检索、触发场景、指南来源、Wiki 来源和检索调试。若内容出现明显风险，壳中灯会提醒你切回应急处理。
+            当前为陪伴模式：默认不展开应急检索、指南来源、Wiki 来源和 Retrieval v2 调试。若内容出现明显风险，壳中灯会提醒你切回应急处理。
           </div>
 
           <div id="referenceArea">
@@ -1326,7 +1271,7 @@
           </div>
           <div id="retrievalDebugPanel" class="retrieval-debug-panel hidden">
             <div class="retrieval-debug-head">
-              <h3>检索过程（调试）</h3>
+              <h3>Retrieval v2 检索过程</h3>
               <div class="retrieval-debug-badges" id="retrievalDebugBadges"></div>
             </div>
             <div class="retrieval-debug-grid" id="retrievalDebugGrid"></div>
@@ -1364,9 +1309,9 @@
     const modeCopy = {
       emergency: {
         badge: "当前模式：应急模式",
-        subtitle: "应急模式会优先调用本地触发规则和应急指南，帮助你在断网、断电、断水、灾害或低资源环境下做出判断。",
+        subtitle: "应急模式会通过 Retrieval v2 读取本地指南与 Wiki，帮助你在断网、断电、断水、灾害或低资源环境下做出判断。",
         desc: "当前是应急模式。请尽量说明“发生了什么、在哪里、涉及谁、还有多少物资或时间”。壳中灯会优先给出可执行建议。",
-        hint: "应急模式会调取本地资料，优先处理风险、物资、伤病、灾害和设备异常。",
+        hint: "应急模式会自动使用 Retrieval v2 检索本地资料，优先处理风险、物资、伤病、灾害和设备异常。",
         sideHint: "当前模式适合处理资源不足、伤病、灾害、安全和设备异常。遇到紧急情况时，先做最小安全动作。",
         answerTitle: "壳中灯建议",
         placeholder: "应急模式例子：水只剩一桶了，而且今天很热。\n应急模式例子：有人发烧，还一直咳嗽。\n应急模式例子：晚上听到外面有脚步声。"
@@ -1408,12 +1353,6 @@
     let currentAudioSource = null;
     let isGeneratingSpeech = false;
     let autoSpeakEnabled = false;
-    let runtimeAiSettings = {
-      ai_rerank_enabled: false,
-      ai_rerank_model: "",
-      retrieval_mode: "rule",
-      show_retrieval_debug: true
-    };
     let retrievalDebugDetailsExpanded = false;
     let currentModalSpeechText = '';
     let isModalSpeaking = false;
@@ -1449,8 +1388,6 @@
     const stopSpeakBtn = document.getElementById("stopSpeakBtn");
     const ttsStatus = document.getElementById("ttsStatus");
     const autoSpeakBtn = document.getElementById("autoSpeakBtn");
-    const aiRerankToggle = document.getElementById("aiRerankToggle");
-    const aiRerankToggleText = document.getElementById("aiRerankToggleText");
 
     document.querySelectorAll(".mode-btn").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -1465,9 +1402,6 @@
     speakBtn.addEventListener("click", speakCurrentAnswer);
     stopSpeakBtn.addEventListener("click", stopSpeaking);
     autoSpeakBtn.addEventListener("click", toggleAutoSpeak);
-    if (aiRerankToggle) {
-      aiRerankToggle.addEventListener("click", toggleAiRerank);
-    }
 
     userInput.addEventListener("keydown", event => {
       if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
@@ -1475,114 +1409,6 @@
       }
     });
 
-
-    async function loadAiRuntimeSettings() {
-      if (!aiRerankToggle) return;
-
-      try {
-        const response = await fetch("/api/settings/ai", {
-          cache: "no-store"
-        });
-
-        if (!response.ok) {
-          throw new Error("AI 检索设置读取失败");
-        }
-
-        const data = await response.json();
-        runtimeAiSettings = normalizeRuntimeSettings(data);
-        updateAiRerankToggle();
-        refreshRetrievalDebugRuntimeState();
-      } catch (error) {
-        console.warn("读取 AI 检索设置失败，使用默认规则模式：", error);
-        updateAiRerankToggle("设置读取失败，当前按规则模式显示");
-      }
-    }
-
-    function normalizeRuntimeSettings(data) {
-      const settings = data && data.settings ? data.settings : data;
-
-      return {
-        ai_rerank_enabled: !!settings?.ai_rerank_enabled,
-        ai_rerank_model: settings?.ai_rerank_model || "",
-        retrieval_mode: settings?.retrieval_mode || (settings?.ai_rerank_enabled ? "hybrid" : "rule"),
-        show_retrieval_debug: settings?.show_retrieval_debug !== false
-      };
-    }
-
-    async function toggleAiRerank() {
-      if (!aiRerankToggle) return;
-
-      const nextEnabled = !runtimeAiSettings.ai_rerank_enabled;
-      const previousSettings = { ...runtimeAiSettings };
-
-      aiRerankToggle.disabled = true;
-      aiRerankToggle.classList.add("saving");
-      updateAiRerankToggle(nextEnabled ? "正在开启检索增强..." : "正在关闭检索增强...");
-
-      try {
-        const response = await fetch("/api/settings/ai", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            ai_rerank_enabled: nextEnabled,
-            retrieval_mode: nextEnabled ? "hybrid" : "rule"
-          })
-        });
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(errorText || "AI 检索设置保存失败");
-        }
-
-        const data = await response.json();
-        runtimeAiSettings = normalizeRuntimeSettings(data);
-        updateAiRerankToggle();
-      } catch (error) {
-        console.error(error);
-        runtimeAiSettings = previousSettings;
-        updateAiRerankToggle("设置保存失败，已恢复原状态");
-        refreshRetrievalDebugRuntimeState();
-        alert("AI 检索增强设置保存失败：" + error.message);
-      } finally {
-        aiRerankToggle.disabled = false;
-        aiRerankToggle.classList.remove("saving");
-      }
-    }
-
-    function updateAiRerankToggle(statusText) {
-      if (!aiRerankToggle || !aiRerankToggleText) return;
-
-      const enabled = !!runtimeAiSettings.ai_rerank_enabled;
-      const modeText = enabled ? "检索增强：开" : "检索增强：关";
-      const modelText = runtimeAiSettings.ai_rerank_model || "环境变量模型";
-      const retrievalMode = runtimeAiSettings.retrieval_mode || (enabled ? "hybrid" : "rule");
-
-      aiRerankToggle.classList.toggle("active", enabled);
-      aiRerankToggleText.textContent = modeText;
-      aiRerankToggle.title = statusText || (
-        enabled
-          ? `已开启本地 AI 重排。模式：${retrievalMode}，模型：${modelText}。下一次提问生效。`
-          : "当前为规则召回模式：更快、更省电。点击后开启本地 AI 重排。"
-      );
-
-      if (assistantHint && enabled && currentMode !== "companion") {
-        assistantHint.textContent = "应急模式已开启 AI 检索增强；系统会先规则召回，再用本地 AI 重排候选来源。";
-      } else if (assistantHint) {
-        assistantHint.textContent = (modeCopy[currentMode] || modeCopy.emergency).hint;
-      }
-    }
-
-    function refreshRetrievalDebugRuntimeState() {
-      if (!retrievalDebugPanel || retrievalDebugPanel.classList.contains("hidden")) return;
-
-      const baseData = latestRetrievalDebugData || {};
-      renderRetrievalDebug({
-        ...baseData,
-        runtime_settings: runtimeAiSettings
-      }, latestRelatedGuides, latestRelatedWikis);
-    }
 
     function switchMode(mode) {
       currentMode = mode;
@@ -1603,7 +1429,6 @@
       answerTitle.textContent = copy.answerTitle;
       userInput.placeholder = copy.placeholder;
       renderModeExamples();
-      updateAiRerankToggle();
       applyModeVisibility();
 
       if (!answerBox.dataset.hasAnswer) {
@@ -1931,11 +1756,6 @@
       const rawGuides = data.related_guides || [];
       const rawWikis = data.related_wikis || [];
 
-      if (data.runtime_settings) {
-        runtimeAiSettings = normalizeRuntimeSettings(data.runtime_settings);
-        updateAiRerankToggle();
-      }
-
       latestRetrievalDebugData = data;
 
       const guides = prepareReferencesForDisplay(rawGuides, "guide", MAX_REFERENCE_CARDS_PER_GROUP, data);
@@ -2033,130 +1853,16 @@
     }
 
 
-    function shouldPreserveBackendReferenceOrder(data) {
-      const settings = data?.runtime_settings || {};
-      const decision = data?.retrieval_decision || {};
-      const rerankResult = decision?.rerank_result || {};
-
-      return Boolean(
-        settings.ai_rerank_enabled ||
-        data?.selected_sources?.length ||
-        rerankResult.mode === "ai_rerank" ||
-        rerankResult.mode === "rule_fallback"
-      );
-    }
-
     function prepareReferencesForDisplay(items, type, limit, data) {
       if (!Array.isArray(items) || !items.length) return [];
 
-      if (shouldPreserveBackendReferenceOrder(data)) {
-        return items.slice(0, limit).map((item, index) => ({
-          ...item,
-          _reference_score: typeof item._reference_score === "number" ? item._reference_score : Math.max(1, limit - index)
-        }));
-      }
-
-      return sortAndLimitReferences(items, type, limit);
+      // Retrieval v2 后端已经完成证据选择与排序。
+      // 前端只负责展示，不再二次打分重排。
+      return items.slice(0, limit).map((item, index) => ({
+        ...item,
+        _reference_score: typeof item._reference_score === "number" ? item._reference_score : Math.max(1, limit - index)
+      }));
     }
-
-
-    function sortAndLimitReferences(items, type, limit) {
-      if (!Array.isArray(items) || !items.length) return [];
-
-      return [...items]
-        .map((item, index) => ({
-          item,
-          index,
-          score: scoreReference(item, type)
-        }))
-        .sort((a, b) => {
-          if (b.score !== a.score) return b.score - a.score;
-          return a.index - b.index;
-        })
-        .slice(0, limit)
-        .map(entry => ({
-          ...entry.item,
-          _reference_score: entry.score
-        }));
-    }
-
-    function scoreReference(item, type) {
-      const userTokens = tokenizeForReference(latestUserMessage);
-      const titleText = normalizeReferenceText(item.title);
-      const categoryText = normalizeReferenceText(item.category);
-      const tagText = normalizeReferenceText(item.tags);
-      const summaryText = normalizeReferenceText(item.summary || item.scenario || item.goal);
-      const bodyText = normalizeReferenceText([
-        item.title,
-        item.category,
-        item.tags,
-        item.summary,
-        item.scenario,
-        item.goal
-      ].filter(Boolean).join(" "));
-
-      let score = 0;
-
-      userTokens.forEach(token => {
-        if (!token) return;
-
-        if (titleText.includes(token)) score += 8;
-        if (tagText.includes(token)) score += 6;
-        if (categoryText.includes(token)) score += 4;
-        if (summaryText.includes(token)) score += 3;
-        if (bodyText.includes(token)) score += 1;
-      });
-
-      if (type === "wiki") score += 1;
-
-      const riskLevel = item.risk_level || "";
-      if (riskLevel === "high") score += 3;
-      if (riskLevel === "caution") score += 1;
-
-      if (item.severity === "紧急") score += 4;
-      if (item.severity === "高") score += 3;
-
-      return score;
-    }
-
-    function tokenizeForReference(text) {
-      const raw = normalizeReferenceText(text);
-      const tokens = [];
-
-      raw
-        .split(/[\s,，、。；;：:！!？?（）()【】\[\]「」"'“”‘’/\\]+/)
-        .map(item => item.trim())
-        .filter(Boolean)
-        .forEach(item => tokens.push(item));
-
-      const compactKeywords = [
-        "饮用水", "停水", "储水", "净水", "水质", "高温", "降温", "发热", "咳嗽",
-        "腹泻", "脱水", "伤口", "烧烫伤", "冻伤", "停电", "低电量", "照明",
-        "太阳能", "燃气", "火灾", "地图", "通讯", "lora", "备份", "食物",
-        "罐头", "冰箱", "厕所", "洗手", "垃圾", "避难", "安全", "记录"
-      ];
-
-      compactKeywords.forEach(keyword => {
-        if (raw.includes(keyword) && !tokens.includes(keyword)) {
-          tokens.push(keyword);
-        }
-      });
-
-      return [...new Set(tokens)].filter(token => token.length >= 2).slice(0, 16);
-    }
-
-    function normalizeReferenceText(value) {
-      if (Array.isArray(value)) {
-        return value.map(normalizeReferenceText).join(" ");
-      }
-
-      return String(value || "")
-        .toLowerCase()
-        .replace(/[^\u4e00-\u9fa5a-z0-9]+/g, " ")
-        .trim();
-    }
-
-
 
     function clearRetrievalDebug() {
       if (!retrievalDebugPanel) return;
@@ -2174,105 +1880,89 @@
         return;
       }
 
-      const settings = normalizeRuntimeSettings(data?.runtime_settings || runtimeAiSettings);
-      const decision = data?.retrieval_decision || {};
-      const rerankResult = decision?.rerank_result || data?.rerank_result || {};
-      const candidateSources = Array.isArray(data?.candidate_sources) ? data.candidate_sources : [];
-      const selectedSources = Array.isArray(data?.selected_sources) ? data.selected_sources : [];
-      const excludedSources = Array.isArray(data?.excluded_sources) ? data.excluded_sources : [];
-
-      if (!settings.show_retrieval_debug && !candidateSources.length && !selectedSources.length && !excludedSources.length && !Object.keys(decision).length) {
+      const retrieval = normalizeRetrievalV2Debug(data);
+      if (!retrieval) {
         clearRetrievalDebug();
         return;
       }
 
       retrievalDebugPanel.classList.remove("hidden");
 
-      const rerankMode = String(rerankResult.mode || decision.mode || decision.retrieval_mode || settings.retrieval_mode || "rule");
-      const fallbackReason = rerankResult.fallback_reason || rerankResult.error || decision.fallback_reason || decision.error || decision.reason || "";
-      const aiEnabled = Boolean(settings.ai_rerank_enabled);
-
-      // 严格区分三件事：
-      // 1. aiEnabled：界面开关是否开启。
-      // 2. attemptedAi：本次请求是否尝试进入 AI 重排通道。
-      // 3. usedAi：本地 AI 是否真正成功产出并通过校验。
-      // 注意：mode 里可能出现 rule_only_ai_rerank_disabled，这里面虽然有 ai_rerank 字样，
-      // 但它代表“AI 重排关闭”，不能据此判断 AI 已介入。
-      const attemptedAi = aiEnabled && !rerankMode.includes("disabled");
-      const usedAi = aiEnabled && Boolean(rerankResult.used_ai || decision.used_ai);
-      const isFallback = aiEnabled && (rerankMode.includes("fallback") || Boolean(fallbackReason));
-
-      const modeLabel = aiEnabled
-        ? (isFallback ? "检索增强：已开启，当前回退" : usedAi ? "检索增强：AI 重排" : "检索增强：已开启，等待验证")
-        : "检索增强：关闭";
-
-      const modeBadgeClass = !aiEnabled ? "off" : isFallback ? "warn" : "";
-      const fallbackBadge = isFallback
-        ? `<span class="retrieval-debug-badge warn">规则回退</span>`
-        : "";
+      const plan = retrieval.plan || {};
+      const selection = retrieval.selection || {};
+      const candidates = Array.isArray(retrieval.candidates) ? retrieval.candidates : [];
+      const selectedEvidence = Array.isArray(retrieval.selected_evidence) ? retrieval.selected_evidence : [];
+      const sourcePlan = Array.isArray(plan.source_plan) ? plan.source_plan : [];
+      const coreTerms = normalizeDebugList(plan.core_terms);
+      const needs = normalizeDebugList(plan.needs);
+      const answerFocus = normalizeDebugList(selection.answer_focus);
+      const candidateTypes = buildCandidateTypeStats(retrieval, candidates);
+      const selectedCount = selectedEvidence.length || (Array.isArray(guides) ? guides.length : 0) + (Array.isArray(wikis) ? wikis.length : 0);
 
       if (retrievalDebugBadges) {
         retrievalDebugBadges.innerHTML = `
-          <span class="retrieval-debug-badge ${modeBadgeClass}">${escapeHtml(modeLabel)}</span>
-          <span class="retrieval-debug-badge">设置模式：${escapeHtml(settings.retrieval_mode || "rule")}</span>
-          <span class="retrieval-debug-badge">重排结果：${escapeHtml(rerankMode || "rule")}</span>
-          ${fallbackBadge}
+          <span class="retrieval-debug-badge">v2 已接管</span>
+          <span class="retrieval-debug-badge">引擎：${escapeHtml(retrieval.engine || "retrieval_v2_ai_orchestrated")}</span>
+          <span class="retrieval-debug-badge">证据：${escapeHtml(String(selectedCount || 0))}</span>
         `;
       }
-
-      const intentSummary = decision.intent_summary || rerankResult.intent_summary || data?.intent_summary || inferIntentSummary(data, guides, wikis);
-      const answerFocus = normalizeDebugList(decision.answer_focus || rerankResult.answer_focus || data?.answer_focus);
-      const selectedCount = selectedSources.length || (Array.isArray(guides) ? guides.length : 0) + (Array.isArray(wikis) ? wikis.length : 0);
-      const excludedCount = excludedSources.length;
-      const candidateCount = candidateSources.length || selectedCount + excludedCount;
 
       if (retrievalDebugGrid) {
         retrievalDebugGrid.innerHTML = `
           <div class="retrieval-debug-cell">
-            <span>当前判断</span>
-            <strong>${escapeHtml(intentSummary || "暂无明确判断")}</strong>
+            <span>场景理解</span>
+            <strong>${escapeHtml(plan.scenario_summary || "暂无场景摘要")}</strong>
           </div>
           <div class="retrieval-debug-cell">
-            <span>候选来源</span>
-            <strong>${escapeHtml(String(candidateCount || "-"))}</strong>
+            <span>紧急程度</span>
+            <strong>${escapeHtml(plan.urgency || "unknown")}</strong>
           </div>
           <div class="retrieval-debug-cell">
-            <span>选中来源</span>
-            <strong>${escapeHtml(String(selectedCount || "-"))}</strong>
+            <span>核心词</span>
+            <strong>${escapeHtml(coreTerms.length ? coreTerms.join(" / ") : "-")}</strong>
           </div>
           <div class="retrieval-debug-cell">
-            <span>排除来源</span>
-            <strong>${escapeHtml(String(excludedCount || 0))}</strong>
+            <span>需求判断</span>
+            <strong>${escapeHtml(needs.length ? needs.join(" / ") : "-")}</strong>
           </div>
           <div class="retrieval-debug-cell">
-            <span>AI 开关</span>
-            <strong>${aiEnabled ? "开" : "关"}</strong>
+            <span>候选统计</span>
+            <strong>${escapeHtml(formatCandidateTypeStats(candidateTypes))}</strong>
           </div>
           <div class="retrieval-debug-cell">
-            <span>AI 是否实际介入</span>
-            <strong>${usedAi ? "是" : isFallback || attemptedAi ? "曾尝试，未成功" : "否"}</strong>
+            <span>检索计划</span>
+            <strong>${escapeHtml(String(sourcePlan.length || 0))} 个来源计划</strong>
           </div>
         `;
       }
 
-      const selectedHtml = renderDebugSourceList(selectedSources.length ? selectedSources : [...(guides || []), ...(wikis || [])].slice(0, 6), "暂无选中来源。", true);
-      const excludedHtml = renderDebugSourceList(excludedSources, "暂无被排除来源。", false);
       const focusHtml = answerFocus.length
         ? `<div class="retrieval-debug-section"><h4>回答重点</h4><div class="retrieval-debug-list">${answerFocus.map(item => `<div class="retrieval-debug-item">${escapeHtml(item)}</div>`).join("")}</div></div>`
         : "";
-      const fallbackDisplayReason = fallbackReason || (isFallback ? "后端标记为规则回退，但未返回具体原因。请查看后端终端日志或 rerank_result.error。" : "");
 
-      const fallbackHtml = fallbackDisplayReason
-        ? `<div class="retrieval-debug-section"><h4>回退原因</h4><div class="retrieval-debug-item">${escapeHtml(fallbackDisplayReason)}</div></div>`
-        : "";
+      const planHtml = sourcePlan.length
+        ? `<div class="retrieval-debug-section"><h4>检索计划</h4><div class="retrieval-debug-list">${sourcePlan.map(item => renderSourcePlanItem(item)).join("")}</div></div>`
+        : `<div class="retrieval-debug-section"><h4>检索计划</h4><div class="retrieval-debug-empty">暂无检索计划。</div></div>`;
+
+      const selectedHtml = renderDebugSourceList(
+        selectedEvidence.length ? selectedEvidence : [...(guides || []), ...(wikis || [])].slice(0, 6),
+        "暂无选中证据。",
+        true
+      );
+
+      const excludedHtml = renderDebugSourceList(
+        Array.isArray(selection.excluded) ? selection.excluded : [],
+        "暂无被排除证据。",
+        false
+      );
 
       if (retrievalDebugDetails) {
-        const detailButtonText = retrievalDebugDetailsExpanded ? "收起来源明细" : "展开来源明细";
+        const detailButtonText = retrievalDebugDetailsExpanded ? "收起证据明细" : "展开证据明细";
         const detailHiddenClass = retrievalDebugDetailsExpanded ? "" : " hidden";
 
         retrievalDebugDetails.innerHTML = `
           ${focusHtml}
-          ${fallbackHtml}
+          ${planHtml}
           <div class="retrieval-debug-toggle-row">
             <button class="retrieval-debug-toggle" type="button" onclick="toggleRetrievalDebugDetails()">
               ${detailButtonText}
@@ -2280,16 +1970,84 @@
           </div>
           <div id="retrievalDebugSourceDetails" class="retrieval-debug-collapsible${detailHiddenClass}">
             <div class="retrieval-debug-section">
-              <h4>选中来源</h4>
+              <h4>最终选中证据</h4>
               <div class="retrieval-debug-list">${selectedHtml}</div>
             </div>
             <div class="retrieval-debug-section">
-              <h4>排除来源</h4>
+              <h4>排除证据</h4>
               <div class="retrieval-debug-list">${excludedHtml}</div>
             </div>
           </div>
         `;
       }
+    }
+
+    function normalizeRetrievalV2Debug(data) {
+      const retrieval = data?.retrieval_v2 || data?.debug?.retrieval_v2 || data?.pipeline?.retrieval_v2 || null;
+
+      if (!retrieval || typeof retrieval !== "object") {
+        return null;
+      }
+
+      return retrieval;
+    }
+
+    function buildCandidateTypeStats(retrieval, candidates) {
+      const direct = retrieval?.debug?.candidate_types || retrieval?.candidate_types;
+      if (direct && typeof direct === "object" && !Array.isArray(direct)) {
+        return direct;
+      }
+
+      const stats = {};
+      (Array.isArray(candidates) ? candidates : []).forEach(item => {
+        const type = item?.source_type || "unknown";
+        stats[type] = (stats[type] || 0) + 1;
+      });
+
+      return stats;
+    }
+
+    function formatCandidateTypeStats(stats) {
+      if (!stats || typeof stats !== "object" || !Object.keys(stats).length) {
+        return "-";
+      }
+
+      return Object.entries(stats)
+        .map(([key, value]) => `${sourceTypeLabel(key)} ${value}`)
+        .join(" / ");
+    }
+
+    function renderSourcePlanItem(item) {
+      const type = sourceTypeLabel(item?.source_type || "-");
+      const query = item?.query || "";
+      const purpose = item?.purpose || "";
+      const keywords = normalizeDebugList(item?.keywords);
+      const limit = item?.limit || "";
+
+      return `
+        <div class="retrieval-debug-item">
+          <strong>${escapeHtml(type)}</strong>
+          ${purpose ? `<br><span>目的：${escapeHtml(purpose)}</span>` : ""}
+          ${query ? `<br><span>查询：${escapeHtml(query)}</span>` : ""}
+          ${keywords.length ? `<br><span>关键词：${escapeHtml(keywords.join(" / "))}</span>` : ""}
+          ${limit ? `<br><span>数量上限：${escapeHtml(String(limit))}</span>` : ""}
+        </div>
+      `;
+    }
+
+    function sourceTypeLabel(type) {
+      const labels = {
+        guide: "指南",
+        wiki: "Wiki",
+        kiwix: "Kiwix",
+        log: "记录",
+        inventory: "物资",
+        sensor: "传感器",
+        map: "地图",
+        unknown: "未知"
+      };
+
+      return labels[type] || type || "未知";
     }
 
     function toggleRetrievalDebugDetails() {
@@ -2302,7 +2060,7 @@
 
       const button = document.querySelector(".retrieval-debug-toggle");
       if (button) {
-        button.textContent = retrievalDebugDetailsExpanded ? "收起来源明细" : "展开来源明细";
+        button.textContent = retrievalDebugDetailsExpanded ? "收起证据明细" : "展开证据明细";
       }
     }
 
@@ -2342,10 +2100,11 @@
         const reason = source.reason || (showReason ? buildReferenceReason(source.raw || item) : "");
         const reasonText = reason ? `<br><span>${escapeHtml(reason)}</span>` : "";
         const idText = source.id ? ` <span>${escapeHtml(source.id)}</span>` : "";
+        const typeText = source.typeLabel ? ` <span>${escapeHtml(source.typeLabel)}</span>` : "";
 
         return `
           <div class="retrieval-debug-item">
-            <strong>${escapeHtml(source.title || "未命名来源")}</strong>${idText}${reasonText}
+            <strong>${escapeHtml(source.title || "未命名来源")}</strong>${typeText}${idText}${reasonText}
           </div>
         `;
       }).join("");
@@ -2356,13 +2115,26 @@
         return { title: String(item || ""), id: "", reason: "", raw: item };
       }
 
-      const nested = item.source || item.item || item.candidate || null;
+      const retrieval = normalizeRetrievalV2Debug(latestRetrievalDebugData || {});
+      const candidates = Array.isArray(retrieval?.candidates) ? retrieval.candidates : [];
+      const selectedEvidence = Array.isArray(retrieval?.selected_evidence) ? retrieval.selected_evidence : [];
+
+      const nested = item.source || item.item || item.candidate || item.raw || null;
       const base = nested && typeof nested === "object" ? nested : item;
       const id = item.candidate_id || item.source_id || item.id || base.candidate_id || base.source_id || base.id || "";
-      const title = item.title || base.title || item.name || base.name || id || "未命名来源";
-      const reason = item.reason || item.exclude_reason || item.selection_reason || base.reason || base.exclude_reason || "";
+      const sourceType = item.source_type || base.source_type || "";
+      const matched = [...selectedEvidence, ...candidates].find(candidate => {
+        if (!candidate || typeof candidate !== "object") return false;
+        const sameId = String(candidate.id || "") === String(id || "");
+        const sameType = !sourceType || !candidate.source_type || candidate.source_type === sourceType;
+        return sameId && sameType;
+      }) || {};
 
-      return { title, id, reason, raw: base };
+      const title = item.title || base.title || matched.title || item.name || base.name || id || "未命名来源";
+      const reason = item.reason || item.exclude_reason || item.selection_reason || base.reason || base.exclude_reason || matched.reason || "";
+      const typeLabel = sourceType ? sourceTypeLabel(sourceType) : "";
+
+      return { title, id, reason, sourceType, typeLabel, raw: { ...matched, ...base } };
     }
 
     function renderSourceSummary(guides, wikis, rawGuideCount = 0, rawWikiCount = 0) {
@@ -2403,8 +2175,8 @@
     }
 
     function buildReferenceReason(item) {
-      if (item && item._ai_rerank_reason) {
-        return `AI 重排选择：${item._ai_rerank_reason}`;
+      if (item && item._retrieval_v2_reason) {
+        return `Retrieval v2 选择：${item._retrieval_v2_reason}`;
       }
 
       const userText = String(latestUserMessage || "").toLowerCase();
@@ -3230,7 +3002,6 @@
     });
 
     switchMode("emergency");
-    loadAiRuntimeSettings();
   </script>
 </body>
 </html>

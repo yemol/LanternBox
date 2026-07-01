@@ -82,37 +82,3 @@ def get_wiki_article_detail(article_id: str) -> Optional[dict]:
         "article": article,
         "media": media_items,
     }
-
-
-def build_wiki_context_for_ai(wiki_articles: list[dict]) -> str:
-    if not wiki_articles:
-        return ""
-
-    blocks = []
-
-    for index, article in enumerate(wiki_articles, start=1):
-        blocks.append(
-            "\n".join([
-                f"【Wiki {index}】{article.get('title', '')}",
-                f"摘要：{article.get('summary', '')}",
-                f"风险等级：{article.get('risk_level', 'normal')}",
-                f"标签：{article.get('tags', '')}",
-                f"来源：{article.get('source', '')}",
-                f"正文摘录：{article.get('content', '')}",
-            ])
-        )
-
-    return "\n\n".join(blocks)
-
-
-    url = f"{PB_URL}{path}"
-
-    try:
-        response = requests.get(url, params=params, timeout=10)
-        response.raise_for_status()
-        return response.json()
-    except requests.RequestException as exc:
-        raise HTTPException(
-            status_code=502,
-            detail=f"PocketBase 请求失败：{exc}"
-        )

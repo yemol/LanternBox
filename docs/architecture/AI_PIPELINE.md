@@ -89,10 +89,7 @@ api/pipeline/preload.py
 职责：
 
 - 组织 AI 预处理流程
-- 调用 `prepare_ai_context()`
-- 查询 Wiki Service
-- 调用 Reference Ranking
-- 应用 AI Rerank
+- 调用 Retrieval v2 Orchestrator
 - 生成 PipelineRequest 所需业务输入
 
 当前 Preload 已接管原本散落在 routes.py 中的 AI 预处理逻辑。

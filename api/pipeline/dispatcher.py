@@ -1,9 +1,6 @@
 """Pipeline 调度器。根据 mode 分发到对应 Pipeline。"""
 
 from .schema import PipelineRequest, PipelineResult
-from .companion import run_companion_pipeline
-from .emergency import run_emergency_pipeline
-
 from .companion import run_companion_pipeline, run_companion_stream_pipeline
 from .emergency import run_emergency_pipeline, run_emergency_stream_pipeline
 from .hooks import run_hooks
