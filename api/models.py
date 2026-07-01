@@ -40,7 +40,5 @@ class TtsSpeakRequest(BaseModel):
 
 
 class AiRuntimeSettingsUpdate(BaseModel):
-    ai_rerank_enabled: Optional[bool] = None
-    ai_rerank_model: Optional[str] = None
-    retrieval_mode: Optional[str] = None
+    retrieval_v2_model: Optional[str] = None
     show_retrieval_debug: Optional[bool] = None

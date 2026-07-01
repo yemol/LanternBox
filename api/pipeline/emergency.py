@@ -26,7 +26,6 @@ def build_emergency_pipeline_messages(request: PipelineRequest) -> list[dict[str
 
     return build_emergency_messages(
         user_message=request.message,
-        matched_triggers=request.matched_triggers,
         related_guides=request.related_guides,
         detected_domains=request.detected_domains,
         safe_history=safe_history,

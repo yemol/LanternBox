@@ -1,7 +1,6 @@
 """Prompt 构造模块。负责应急和陪伴模式的消息组织。
 
-Retrieval v2 之后，本模块不再让旧 trigger / context 逻辑主导回答。
-应急模式回答以 selected_evidence 映射出的 related_guides / related_wikis 为证据底座。
+应急模式回答以 Retrieval v2 selected_evidence 映射出的 related_guides / related_wikis 为证据底座。
 """
 
 from typing import Any, Dict, List, Optional
@@ -177,7 +176,6 @@ def build_companion_messages(
 
 def build_emergency_messages(
     user_message: str,
-    matched_triggers: List[Dict[str, Any]],
     related_guides: List[Dict[str, Any]],
     detected_domains: List[str],
     safe_history: List[Dict[str, str]],
@@ -186,8 +184,7 @@ def build_emergency_messages(
 ) -> List[Dict[str, str]]:
     """构造应急模式消息。
 
-    参数名保留旧接口兼容，但 Retrieval v2 之后：
-    - matched_triggers 不再主导回答。
+    Retrieval v2 之后：
     - detected_domains 只作为弱提示。
     - related_guides / related_wikis 应来自 Retrieval v2 selected_evidence。
     """

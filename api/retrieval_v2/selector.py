@@ -178,7 +178,7 @@ def select_evidence_with_ai(
     candidates: List[EvidenceCandidate],
 ) -> EvidenceSelection:
     settings = load_runtime_settings()
-    model = settings.get("ai_rerank_model") or OLLAMA_MODEL
+    model = settings.get("retrieval_v2_model") or OLLAMA_MODEL
 
     payload = {
         "user_message": user_message,

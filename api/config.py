@@ -68,9 +68,7 @@ DEFAULT_MODELS = {
 RUNTIME_SETTINGS_PATH = DATA_DIR / "runtime_settings.json"
 
 DEFAULT_RUNTIME_SETTINGS: Dict[str, Any] = {
-    "ai_rerank_enabled": False,
-    "ai_rerank_model": OLLAMA_MODEL,
-    "retrieval_mode": "rule",
+    "retrieval_v2_model": OLLAMA_MODEL,
     "show_retrieval_debug": True,
 }
 
@@ -80,15 +78,9 @@ def _normalize_runtime_settings(raw: Dict[str, Any]) -> Dict[str, Any]:
     if isinstance(raw, dict):
         settings.update({k: v for k, v in raw.items() if k in DEFAULT_RUNTIME_SETTINGS})
 
-    settings["ai_rerank_enabled"] = bool(settings.get("ai_rerank_enabled"))
     settings["show_retrieval_debug"] = bool(settings.get("show_retrieval_debug"))
 
-    settings["ai_rerank_model"] = OLLAMA_MODEL
-
-    mode = str(settings.get("retrieval_mode") or "").strip()
-    if mode not in {"rule", "hybrid", "enhanced"}:
-        mode = "hybrid" if settings["ai_rerank_enabled"] else "rule"
-    settings["retrieval_mode"] = mode
+    settings["retrieval_v2_model"] = OLLAMA_MODEL
 
     return settings
 

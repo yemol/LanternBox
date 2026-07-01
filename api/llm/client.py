@@ -28,7 +28,7 @@ def call_ollama(
         }
 
         # Ollama 支持 format=json，可以显著降低“模型返回了说明文字而非 JSON”的概率。
-        # 只在重排这类结构化任务中开启，普通聊天不受影响。
+        # 只在 Retrieval v2 的结构化规划和证据选择中开启，普通聊天不受影响。
         if force_json:
             payload["format"] = "json"
 

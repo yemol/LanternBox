@@ -349,13 +349,9 @@
         const localAiStatus = document.getElementById('local-ai-status');
         const databaseStatus = document.getElementById('database-status');
 
-        localAiStatus.textContent = settings.ai_rerank_enabled
-          ? `本地 AI 可用 · ${settings.ai_rerank_model || '默认模型'}`
-          : '本地 AI 重排关闭';
+        localAiStatus.textContent = `本地 AI 可用 · ${settings.retrieval_v2_model || '默认模型'}`;
 
-        databaseStatus.textContent = settings.retrieval_mode
-          ? `检索模式：${settings.retrieval_mode}`
-          : '本地优先';
+        databaseStatus.textContent = 'Retrieval v2 本地证据链';
       })
       .catch(() => {
         document.getElementById('local-ai-status').textContent = 'AI 设置未读取';

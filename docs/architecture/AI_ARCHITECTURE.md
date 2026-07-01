@@ -68,33 +68,30 @@ Team Mode：未来成员 / 权限 / 加密管线
 
 ## 四、各层职责
 
-### 1. Context Engine
+### 1. Retrieval v2 Planner
 
 位置：
 
 ```text
-api/context/
+api/retrieval_v2/
 ```
 
 职责：
 
 - 理解用户输入
-- 识别场景
-- 识别风险
-- 识别领域
-- 提取观察信息
-- 生成结构化 Lantern Context
+- 生成资料源检索计划
+- 提取核心词和需求
+- 组织候选资料
+- 选择最终证据
 
 主入口：
 
 ```python
-analyze_context()
+run_retrieval_v2()
 ```
 
-Context Engine 不负责：
+Retrieval v2 不负责：
 
-- 检索资料
-- 排序资料
 - 拼 Prompt
 - 调用 LLM
 - 输出自然语言回答
@@ -236,7 +233,6 @@ api/response/
 ```text
 response/
 ├── prompts.py
-├── context_blocks.py
 ├── safety.py
 └── fallback.py
 ```
@@ -339,8 +335,7 @@ pipeline → retrieval
 pipeline → response
 pipeline → llm
 retrieval → services
-retrieval → context
-response → context_blocks / safety / fallback
+response → prompts / safety / fallback
 services → pocketbase_client / files / local data
 ```
 

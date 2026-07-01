@@ -238,7 +238,7 @@ def _normalize_plan_payload(data: Dict[str, Any]) -> Dict[str, Any]:
 
 def build_retrieval_plan(user_message: str) -> RetrievalPlan:
     settings = load_runtime_settings()
-    model = settings.get("ai_rerank_model") or OLLAMA_MODEL
+    model = settings.get("retrieval_v2_model") or OLLAMA_MODEL
 
     messages = [
         {"role": "system", "content": PLANNER_SYSTEM_PROMPT},

@@ -10,7 +10,6 @@ def build_ai_advice_response(
     *,
     result: PipelineResult,
     mode: str,
-    matched_triggers: Optional[List[Dict[str, Any]]] = None,
     related_guides: Optional[List[Dict[str, Any]]] = None,
     related_wikis: Optional[List[Dict[str, Any]]] = None,
     detected_domains: Optional[List[str]] = None,
@@ -22,7 +21,7 @@ def build_ai_advice_response(
     return {
         "answer": result.answer,
         "mode": mode,
-        "matched_triggers": matched_triggers or [],
+        "matched_triggers": [],
         "related_guides": related_guides or [],
         "related_wikis": related_wikis or [],
         "detected_domains": detected_domains or [],

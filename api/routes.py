@@ -4,6 +4,7 @@ import json
 import sqlite3
 import uuid
 from datetime import datetime
+from typing import Any
 import urllib.request
 
 from fastapi import APIRouter, HTTPException
@@ -55,6 +56,22 @@ from .response.safety import sanitize_ai_answer
 router = APIRouter()
 
 
+def build_empty_ai_context(mode: str) -> dict[str, Any]:
+    return {
+        "context_data": {
+            "engine": "companion_light" if mode == "companion" else "retrieval_v2_ai_orchestrated",
+            "mode": mode,
+            "related_guides": [],
+            "related_wikis": [],
+            "retrieval_v2": {},
+        },
+        "detected_domains": [],
+        "related_guides": [],
+        "related_wikis": [],
+        "retrieval_v2": {},
+    }
+
+
 @router.get("/")
 def home():
     return FileResponse(APP_DIR / "index.html")
@@ -86,6 +103,7 @@ def get_ai_runtime_settings():
         "description": {
             "retrieval_engine": "当前主检索引擎为 retrieval_v2_ai_orchestrated",
             "show_retrieval_debug": "是否在接口返回中显示 v2 检索计划、候选来源和选中证据",
+            "retrieval_v2_model": "Retrieval v2 规划和证据选择使用的本地模型",
         },
     }
 
@@ -298,16 +316,18 @@ def ai_advice(payload: AiAdviceRequest):
     if not user_message:
         raise HTTPException(status_code=400, detail="请提供需要 AI 判断的情况描述。")
 
-    prepared_ai = prepare_ai_pipeline_context(
-        user_message=user_message,
-        mode=mode,
-        history=payload.history,
-        conversation_summary=payload.conversation_summary or "",
-    )
+    if mode == "companion":
+        prepared_ai = build_empty_ai_context(mode)
+    else:
+        prepared_ai = prepare_ai_pipeline_context(
+            user_message=user_message,
+            mode=mode,
+            history=payload.history,
+            conversation_summary=payload.conversation_summary or "",
+        )
 
     context_data = prepared_ai["context_data"]
     detected_domains = prepared_ai["detected_domains"]
-    matched_triggers = prepared_ai["matched_triggers"]
     related_guides = prepared_ai["related_guides"]
     related_wikis = prepared_ai["related_wikis"]
     retrieval_v2 = prepared_ai["retrieval_v2"]
@@ -324,7 +344,6 @@ def ai_advice(payload: AiAdviceRequest):
         pipeline_request = build_pipeline_request(
             payload,
             stream=False,
-            matched_triggers=matched_triggers,
             related_guides=related_guides,
             related_wikis=related_wikis,
             detected_domains=detected_domains,
@@ -336,7 +355,7 @@ def ai_advice(payload: AiAdviceRequest):
             pipeline_result = run_ai_pipeline(pipeline_request)
             answer = sanitize_ai_answer(pipeline_result.answer, mode)
         except Exception:
-            answer = build_fallback_answer(mode, matched_triggers, related_guides)
+            answer = build_fallback_answer(mode, related_guides)
 
             pipeline_result = build_fallback_pipeline_result(
                 mode=mode,
@@ -348,7 +367,6 @@ def ai_advice(payload: AiAdviceRequest):
     return build_ai_advice_response(
         result=pipeline_result,
         mode=mode,
-        matched_triggers=matched_triggers,
         related_guides=related_guides,
         related_wikis=related_wikis,
         detected_domains=detected_domains,
@@ -367,16 +385,18 @@ def ai_advice_stream(payload: AiAdviceRequest):
     if not user_message:
         raise HTTPException(status_code=400, detail="请提供需要 AI 判断的情况描述。")
 
-    prepared_ai = prepare_ai_pipeline_context(
-        user_message=user_message,
-        mode=mode,
-        history=payload.history,
-        conversation_summary=payload.conversation_summary or "",
-    )
+    if mode == "companion":
+        prepared_ai = build_empty_ai_context(mode)
+    else:
+        prepared_ai = prepare_ai_pipeline_context(
+            user_message=user_message,
+            mode=mode,
+            history=payload.history,
+            conversation_summary=payload.conversation_summary or "",
+        )
 
     context_data = prepared_ai["context_data"]
     detected_domains = prepared_ai["detected_domains"]
-    matched_triggers = prepared_ai["matched_triggers"]
     related_guides = prepared_ai["related_guides"]
     related_wikis = prepared_ai["related_wikis"]
     retrieval_v2 = prepared_ai["retrieval_v2"]
@@ -384,7 +404,6 @@ def ai_advice_stream(payload: AiAdviceRequest):
     pipeline_request = build_pipeline_request(
         payload,
         stream=True,
-        matched_triggers=matched_triggers,
         related_guides=related_guides,
         related_wikis=related_wikis,
         detected_domains=detected_domains,

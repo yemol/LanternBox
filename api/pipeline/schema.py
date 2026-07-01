@@ -10,12 +10,11 @@ class PipelineRequest(BaseModel):
     history: List[Dict[str, str]] = Field(default_factory=list)
     conversation_summary: str = ""
 
-    matched_triggers: List[Dict[str, Any]] = Field(default_factory=list)
     related_guides: List[Dict[str, Any]] = Field(default_factory=list)
     related_wikis: List[Dict[str, Any]] = Field(default_factory=list)
     detected_domains: List[str] = Field(default_factory=list)
 
-    # Retrieval v2 debug/evidence package. Old rerank state is removed from schema.
+    # Retrieval v2 debug/evidence package.
     retrieval_v2: Dict[str, Any] = Field(default_factory=dict)
 
     stream: bool = False

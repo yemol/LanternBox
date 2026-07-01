@@ -355,7 +355,7 @@
       gap: 10px;
     }
 
-    .trigger-card,
+    .evidence-plan-card,
     .guide-card-mini {
       padding: 14px;
       border: 1px solid rgba(137, 204, 255, 0.14);
@@ -363,7 +363,7 @@
       background: rgba(255, 255, 255, 0.045);
     }
 
-    .trigger-card h3,
+    .evidence-plan-card h3,
     .guide-card-mini h3 {
       margin: 0 0 8px;
       color: var(--text-main);
@@ -371,7 +371,7 @@
       line-height: 1.45;
     }
 
-    .trigger-card p,
+    .evidence-plan-card p,
     .guide-card-mini p {
       margin: 4px 0;
       color: var(--text-soft);
@@ -1211,8 +1211,8 @@
               <strong id="currentMode">应急模式</strong>
             </div>
             <div class="summary-lite-card companion-hide">
-              <span>触发场景</span>
-              <strong id="triggerCount">0</strong>
+              <span>检索计划</span>
+              <strong id="evidencePlanCount">0</strong>
             </div>
             <div class="summary-lite-card companion-hide">
               <span>最高等级</span>
@@ -1254,9 +1254,9 @@
           </div>
 
           <div id="referenceArea">
-            <div class="section-title">触发场景</div>
-            <div class="list" id="triggerList">
-              <div class="empty-text">暂无触发场景。</div>
+            <div class="section-title">Retrieval v2 检索计划</div>
+            <div class="list" id="evidencePlanList">
+              <div class="empty-text">暂无检索计划。</div>
             </div>
 
             <div class="section-title">应急指南来源</div>
@@ -1365,7 +1365,7 @@
     const askBtn = document.getElementById("askBtn");
     const clearBtn = document.getElementById("clearBtn");
     const answerBox = document.getElementById("answerBox");
-    const triggerList = document.getElementById("triggerList");
+    const evidencePlanList = document.getElementById("evidencePlanList");
     const guideList = document.getElementById("guideList");
     const wikiList = document.getElementById("wikiList");
     const sourceSummary = document.getElementById("sourceSummary");
@@ -1382,7 +1382,7 @@
     const assistantHint = document.getElementById("assistantHint");
     const modeSideHint = document.getElementById("modeSideHint");
     const answerTitle = document.getElementById("answerTitle");
-    const triggerCountEl = document.getElementById("triggerCount");
+    const evidencePlanCountEl = document.getElementById("evidencePlanCount");
     const topSeverityEl = document.getElementById("topSeverity");
     const guideCountEl = document.getElementById("guideCount");
     const wikiCountEl = document.getElementById("wikiCount");
@@ -1457,12 +1457,12 @@
       latestRelatedWikis = [];
       latestRetrievalDebugData = null;
 
-      triggerCountEl.textContent = "-";
+      evidencePlanCountEl.textContent = "-";
       topSeverityEl.textContent = "-";
       guideCountEl.textContent = "-";
       wikiCountEl.textContent = "-";
 
-      triggerList.innerHTML = '<div class="empty-text">陪伴模式下默认不显示触发场景。</div>';
+      evidencePlanList.innerHTML = '<div class="empty-text">陪伴模式下默认不展开 Retrieval v2 检索计划。</div>';
       guideList.innerHTML = '<div class="empty-text">陪伴模式下默认不引用应急指南。</div>';
       wikiList.innerHTML = '<div class="empty-text">陪伴模式下默认不引用 Wiki 来源。</div>';
 
@@ -1741,12 +1741,12 @@
         return;
       }
 
-      triggerCountEl.textContent = "0";
+      evidencePlanCountEl.textContent = "0";
       topSeverityEl.textContent = "-";
       guideCountEl.textContent = "0";
       wikiCountEl.textContent = "0";
 
-      triggerList.innerHTML = '<div class="empty-text">正在重新分析触发场景...</div>';
+      evidencePlanList.innerHTML = '<div class="empty-text">正在生成 Retrieval v2 检索计划...</div>';
       guideList.innerHTML = '<div class="empty-text">正在重新检索应急指南来源...</div>';
       wikiList.innerHTML = '<div class="empty-text">正在重新检索本地 Wiki 来源...</div>';
 
@@ -1784,7 +1784,8 @@
         return;
       }
 
-      const triggers = data.matched_triggers || [];
+      const retrieval = normalizeRetrievalV2Debug(data);
+      const sourcePlan = Array.isArray(retrieval?.plan?.source_plan) ? retrieval.plan.source_plan : [];
       const rawGuides = data.related_guides || [];
       const rawWikis = data.related_wikis || [];
 
@@ -1796,12 +1797,12 @@
       latestRelatedGuides = guides;
       latestRelatedWikis = wikis;
 
-      triggerCountEl.textContent = triggers.length;
+      evidencePlanCountEl.textContent = sourcePlan.length;
       guideCountEl.textContent = guides.length;
       wikiCountEl.textContent = wikis.length;
-      topSeverityEl.textContent = getTopSeverity(triggers);
+      topSeverityEl.textContent = retrieval?.plan?.urgency || "-";
 
-      renderTriggers(triggers);
+      renderEvidencePlan(sourcePlan, retrieval?.plan || {});
       renderSourceSummary(guides, wikis, rawGuides.length, rawWikis.length);
       renderRetrievalDebug(data, guides, wikis);
       renderGuides(guides);
@@ -1824,7 +1825,7 @@
       if (currentMode === "companion") {
         clearCompanionReferenceUI();
       } else {
-        triggerList.innerHTML = '<div class="empty-text">暂无触发场景。</div>';
+        evidencePlanList.innerHTML = '<div class="empty-text">暂无检索计划。</div>';
         guideList.innerHTML = '<div class="empty-text">暂无应急指南来源。</div>';
         wikiList.innerHTML = '<div class="empty-text">暂无本地 Wiki 来源。</div>';
         if (sourceSummary) {
@@ -1832,54 +1833,36 @@
           sourceSummary.innerHTML = "等待本地资料引用结果。";
         }
         clearRetrievalDebug();
-        triggerCountEl.textContent = "0";
+        evidencePlanCountEl.textContent = "0";
         topSeverityEl.textContent = "-";
         guideCountEl.textContent = "0";
         wikiCountEl.textContent = "0";
       }
     }
 
-    function getTopSeverity(triggers) {
-      if (!triggers.length) return "-";
-
-      const order = {
-        "紧急": 4,
-        "高": 3,
-        "中": 2,
-        "低": 1
-      };
-
-      const sorted = [...triggers].sort((a, b) => {
-        return (order[b.severity] || 0) - (order[a.severity] || 0);
-      });
-
-      return sorted[0].severity || "-";
-    }
-
-    function renderTriggers(triggers) {
-      if (!triggers.length) {
-        triggerList.innerHTML = currentMode === "companion"
-          ? '<div class="empty-text">陪伴模式下通常不会显示触发场景，除非内容里出现明显风险。</div>'
-          : '<div class="empty-text">暂无触发场景。</div>';
+    function renderEvidencePlan(sourcePlan, plan) {
+      if (!sourcePlan.length) {
+        evidencePlanList.innerHTML = currentMode === "companion"
+          ? '<div class="empty-text">陪伴模式下通常不会展开 Retrieval v2 检索计划。</div>'
+          : '<div class="empty-text">暂无检索计划。</div>';
         return;
       }
 
-      triggerList.innerHTML = triggers.map(trigger => {
-        const severity = trigger.severity || "低";
-        const severityClass = severity === "紧急"
-          ? "severity-emergency"
-          : severity === "高"
-            ? "severity-high"
-            : "";
+      const scenario = plan?.scenario_summary || "";
 
+      evidencePlanList.innerHTML = sourcePlan.map(item => {
+        const sourceType = sourceTypeLabel(item?.source_type || "-");
+        const keywords = normalizeDebugList(item?.keywords);
         return `
-          <article class="trigger-card">
+          <article class="evidence-plan-card">
             <h3>
-              ${escapeHtml(trigger.title || "未命名触发")}
-              <span class="severity-badge ${severityClass}">${escapeHtml(severity)}</span>
+              ${escapeHtml(sourceType)}
+              <span class="severity-badge">${escapeHtml(item?.limit ? `${item.limit} 条` : "v2")}</span>
             </h3>
-            <p>分类：${escapeHtml(trigger.category || "-")}</p>
-            <p>提醒类型：${escapeHtml(trigger.reminder_type || "-")}</p>
+            ${scenario ? `<p>场景：${escapeHtml(scenario)}</p>` : ""}
+            <p>目的：${escapeHtml(item?.purpose || "-")}</p>
+            <p>查询：${escapeHtml(item?.query || "-")}</p>
+            ${keywords.length ? `<p>关键词：${escapeHtml(keywords.join(" / "))}</p>` : ""}
           </article>
         `;
       }).join("");
@@ -1890,7 +1873,8 @@
       if (!Array.isArray(items) || !items.length) return [];
 
       // Retrieval v2 后端已经完成证据选择与排序。
-      // 前端只负责展示，不再二次打分重排。
+      // Retrieval v2 后端已经完成证据选择。
+      // 前端只负责展示。
       return items.slice(0, limit).map((item, index) => ({
         ...item,
         _reference_score: typeof item._reference_score === "number" ? item._reference_score : Math.max(1, limit - index)
@@ -2098,17 +2082,16 @@
     }
 
     function inferIntentSummary(data, guides, wikis) {
-      const triggers = Array.isArray(data?.matched_triggers) ? data.matched_triggers : [];
-      const triggerTitle = triggers[0]?.title;
       const topSource = (guides && guides[0]?.title) || (wikis && wikis[0]?.title) || "";
+      const scenario = normalizeRetrievalV2Debug(data)?.plan?.scenario_summary || "";
 
-      if (triggerTitle && topSource) {
-        return `${triggerTitle}，优先参考：${topSource}`;
+      if (scenario && topSource) {
+        return `${scenario}，优先参考：${topSource}`;
       }
 
-      if (triggerTitle) return triggerTitle;
+      if (scenario) return scenario;
       if (topSource) return `优先参考：${topSource}`;
-      return "规则召回已完成，未返回额外判断摘要。";
+      return "Retrieval v2 已完成，未返回额外判断摘要。";
     }
 
     function normalizeDebugList(value) {

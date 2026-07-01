@@ -49,7 +49,6 @@ def build_pipeline_request(
     payload: Any,
     *,
     stream: bool = False,
-    matched_triggers: Optional[List[Dict[str, Any]]] = None,
     related_guides: Optional[List[Dict[str, Any]]] = None,
     related_wikis: Optional[List[Dict[str, Any]]] = None,
     detected_domains: Optional[List[str]] = None,
@@ -59,7 +58,6 @@ def build_pipeline_request(
     prepared = prepare_pipeline_inputs(
         user_message=getattr(payload, "message", ""),
         mode=getattr(payload, "mode", "emergency"),
-        matched_triggers=matched_triggers,
         related_guides=related_guides,
         related_wikis=related_wikis,
         detected_domains=detected_domains,
@@ -72,7 +70,6 @@ def build_pipeline_request(
         mode=prepared["mode"],
         history=normalize_history_for_pipeline(getattr(payload, "history", [])),
         conversation_summary=str(getattr(payload, "conversation_summary", "") or "").strip()[:1800],
-        matched_triggers=prepared["matched_triggers"],
         related_guides=prepared["related_guides"],
         related_wikis=prepared["related_wikis"],
         detected_domains=prepared["detected_domains"],

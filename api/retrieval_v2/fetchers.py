@@ -135,7 +135,7 @@ def fetch_guide_candidates(
         score += _score_text_match(keywords, terms) * 3
         score += _score_text_match(scenario, terms) * 2
 
-        # core_terms 由 AI Planner 输出。代码只将其作为高权重排序信号。
+        # core_terms 由 AI Planner 输出。代码只将其作为高权重选择信号。
         score += _score_text_match(text, core) * 3
         score += _score_text_match(title, core) * 8
         score += _score_text_match(keywords, core) * 5

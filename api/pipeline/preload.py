@@ -3,7 +3,7 @@
 Retrieval v2 是当前 AI 助手主检索入口：
 用户问题 -> AI Planner -> Source Fetchers -> AI Selector -> selected_evidence。
 
-本文件不再调用旧 rule-first context / legacy rerank 逻辑。
+本文件只组织 Retrieval v2 的上下文预处理，不承载旧检索链路。
 """
 
 from typing import Any, Dict, List, Tuple
@@ -124,7 +124,6 @@ def prepare_pipeline_inputs(
     *,
     user_message: str,
     mode: str,
-    matched_triggers: List[Dict[str, Any]] | None = None,
     related_guides: List[Dict[str, Any]] | None = None,
     related_wikis: List[Dict[str, Any]] | None = None,
     detected_domains: List[str] | None = None,
@@ -139,7 +138,6 @@ def prepare_pipeline_inputs(
     hook_input = run_hooks("before_preload", {
         "user_message": user_message,
         "mode": mode,
-        "matched_triggers": matched_triggers,
         "related_guides": related_guides,
         "related_wikis": related_wikis,
         "detected_domains": detected_domains,
@@ -153,7 +151,6 @@ def prepare_pipeline_inputs(
     prepared = {
         "message": normalized_message,
         "mode": normalized_mode,
-        "matched_triggers": hook_input.get("matched_triggers", matched_triggers) or [],
         "related_guides": hook_input.get("related_guides", related_guides) or [],
         "related_wikis": hook_input.get("related_wikis", related_wikis) or [],
         "detected_domains": hook_input.get("detected_domains", detected_domains) or [],
@@ -192,7 +189,6 @@ def prepare_ai_pipeline_context(
     context_data: Dict[str, Any] = {
         "engine": "retrieval_v2_ai_orchestrated",
         "mode": normalized_mode,
-        "matched_triggers": [],
         "related_guides": related_guides,
         "related_wikis": related_wikis,
         "core_terms": core_terms,
@@ -211,7 +207,6 @@ def prepare_ai_pipeline_context(
     prepared = prepare_pipeline_inputs(
         user_message=normalized_message,
         mode=normalized_mode,
-        matched_triggers=[],
         related_guides=related_guides,
         related_wikis=related_wikis,
         detected_domains=detected_domains,
@@ -222,7 +217,6 @@ def prepare_ai_pipeline_context(
     return {
         "context_data": prepared["context_data"],
         "detected_domains": prepared["detected_domains"],
-        "matched_triggers": prepared["matched_triggers"],
         "related_guides": prepared["related_guides"],
         "related_wikis": prepared["related_wikis"],
         "retrieval_v2": prepared["retrieval_v2"],
