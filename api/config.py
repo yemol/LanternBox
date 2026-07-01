@@ -122,8 +122,9 @@ def update_runtime_settings(patch: Dict[str, Any]) -> Dict[str, Any]:
 
 
 # Conversation memory settings
-CHAT_HISTORY_MAX_MESSAGES = 6
-CHAT_HISTORY_MAX_CHARS_PER_MESSAGE = 600
+CHAT_HISTORY_MAX_MESSAGES = 10
+CHAT_HISTORY_MAX_CHARS_PER_MESSAGE = 900
+CHAT_SUMMARY_MAX_CHARS = 1800
 
 DATA_DIR.mkdir(exist_ok=True)
 BACKUP_DIR.mkdir(exist_ok=True)

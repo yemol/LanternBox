@@ -15,6 +15,7 @@ class AiAdviceRequest(BaseModel):
     model: Optional[str] = None
     metadata_only: Optional[bool] = False
     history: Optional[List[ChatHistoryItem]] = None
+    conversation_summary: Optional[str] = ""
 
 
 class InventoryItem(BaseModel):

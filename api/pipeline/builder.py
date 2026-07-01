@@ -71,6 +71,7 @@ def build_pipeline_request(
         message=prepared["message"],
         mode=prepared["mode"],
         history=normalize_history_for_pipeline(getattr(payload, "history", [])),
+        conversation_summary=str(getattr(payload, "conversation_summary", "") or "").strip()[:1800],
         matched_triggers=prepared["matched_triggers"],
         related_guides=prepared["related_guides"],
         related_wikis=prepared["related_wikis"],

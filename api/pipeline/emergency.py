@@ -30,6 +30,7 @@ def build_emergency_pipeline_messages(request: PipelineRequest) -> list[dict[str
         related_guides=request.related_guides,
         detected_domains=request.detected_domains,
         safe_history=safe_history,
+        conversation_summary=request.conversation_summary,
         related_wikis=request.related_wikis,
     )
 

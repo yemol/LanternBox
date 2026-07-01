@@ -71,6 +71,55 @@ def _split_selected_evidence(retrieval_v2_result: Any) -> Tuple[List[Dict[str, A
     return related_guides, related_wikis
 
 
+def _history_context_for_retrieval(history: List[Any] | None, limit: int = 4) -> str:
+    user_messages: List[str] = []
+
+    for item in history or []:
+        if isinstance(item, dict):
+            role = item.get("role")
+            content = item.get("content")
+        else:
+            role = getattr(item, "role", None)
+            content = getattr(item, "content", None)
+
+        if role != "user":
+            continue
+
+        text = str(content or "").strip()
+        if text:
+            user_messages.append(text[:220])
+
+    recent = user_messages[-limit:]
+    if not recent:
+        return ""
+
+    return "\n".join(f"- {text}" for text in recent)
+
+
+def _build_retrieval_query(
+    *,
+    user_message: str,
+    conversation_summary: str = "",
+    history: List[Any] | None = None,
+) -> str:
+    summary = str(conversation_summary or "").strip()[:900]
+    recent_user_context = _history_context_for_retrieval(history)
+
+    if not summary and not recent_user_context:
+        return user_message
+
+    return "\n".join([
+        "当前问题：",
+        user_message,
+        "",
+        "会话摘要：",
+        summary or "暂无",
+        "",
+        "最近用户提到：",
+        recent_user_context or "暂无",
+    ])
+
+
 def prepare_pipeline_inputs(
     *,
     user_message: str,
@@ -119,13 +168,20 @@ def prepare_ai_pipeline_context(
     *,
     user_message: str,
     mode: str,
+    history: List[Any] | None = None,
+    conversation_summary: str = "",
 ) -> Dict[str, Any]:
     """Build AI pipeline context using Retrieval v2 only."""
 
     normalized_message = str(user_message or "").strip()
     normalized_mode = str(mode or "emergency").strip() or "emergency"
+    retrieval_query = _build_retrieval_query(
+        user_message=normalized_message,
+        conversation_summary=conversation_summary,
+        history=history,
+    )
 
-    retrieval_v2_result = run_retrieval_v2(normalized_message)
+    retrieval_v2_result = run_retrieval_v2(retrieval_query)
     retrieval_v2 = retrieval_v2_result.model_dump()
 
     related_guides, related_wikis = _split_selected_evidence(retrieval_v2_result)
@@ -140,6 +196,8 @@ def prepare_ai_pipeline_context(
         "related_guides": related_guides,
         "related_wikis": related_wikis,
         "core_terms": core_terms,
+        "conversation_summary": str(conversation_summary or "").strip()[:1800],
+        "retrieval_query": retrieval_query,
         "source_plan": [
             item.model_dump() if hasattr(item, "model_dump") else item
             for item in getattr(plan, "source_plan", []) or []

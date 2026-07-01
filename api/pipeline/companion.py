@@ -11,6 +11,7 @@ def run_companion_pipeline(request: PipelineRequest) -> PipelineResult:
     messages = build_companion_messages(
         user_message=request.message,
         safe_history=safe_history,
+        conversation_summary=request.conversation_summary,
     )
 
     answer = call_ollama(messages)
@@ -31,6 +32,7 @@ def build_companion_pipeline_messages(request: PipelineRequest) -> list[dict[str
     return build_companion_messages(
         user_message=request.message,
         safe_history=safe_history,
+        conversation_summary=request.conversation_summary,
     )
 
 

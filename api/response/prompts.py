@@ -11,8 +11,8 @@ from ..config import SCENARIO_PROFILE
 
 def build_safe_history(
     history: Optional[List[Any]] = None,
-    max_messages: int = 6,
-    max_chars_per_message: int = 600,
+    max_messages: int = 10,
+    max_chars_per_message: int = 900,
 ) -> List[Dict[str, str]]:
     safe_history: List[Dict[str, str]] = []
 
@@ -36,6 +36,13 @@ def build_safe_history(
         })
 
     return safe_history
+
+
+def _format_conversation_summary(summary: str) -> str:
+    text = str(summary or "").strip()
+    if not text:
+        return ""
+    return text[:1800]
 
 
 def _clean_text(value: Any, limit: int = 900) -> str:
@@ -124,6 +131,7 @@ def _format_wiki_evidence(related_wikis: List[Dict[str, Any]], limit: int = 4) -
 def build_companion_messages(
     user_message: str,
     safe_history: List[Dict[str, str]],
+    conversation_summary: str = "",
 ) -> List[Dict[str, str]]:
     system_prompt = """
 你是“壳中灯 LanternBox”的陪伴模式 AI。
@@ -144,8 +152,13 @@ def build_companion_messages(
 10. 可以参考对话历史，但以用户最后一句话为主。
 """
 
+    summary_text = _format_conversation_summary(conversation_summary)
+
     user_prompt = f"""
 /no_think
+
+会话摘要：
+{summary_text or '暂无。'}
 
 用户说：
 {user_message}
@@ -168,6 +181,7 @@ def build_emergency_messages(
     related_guides: List[Dict[str, Any]],
     detected_domains: List[str],
     safe_history: List[Dict[str, str]],
+    conversation_summary: str = "",
     related_wikis: Optional[List[Dict[str, Any]]] = None,
 ) -> List[Dict[str, str]]:
     """构造应急模式消息。
@@ -180,6 +194,7 @@ def build_emergency_messages(
     guide_evidence = _format_guide_evidence(related_guides or [])
     wiki_evidence = _format_wiki_evidence(related_wikis or [])
     domain_text = "、".join(detected_domains or []) if detected_domains else "未提供"
+    summary_text = _format_conversation_summary(conversation_summary)
 
     has_local_evidence = bool(guide_evidence or wiki_evidence)
 
@@ -240,6 +255,9 @@ def build_emergency_messages(
 {user_message}
 
 当前模式：应急模式
+
+会话摘要：
+{summary_text or '暂无。'}
 
 系统场景设定：
 {SCENARIO_PROFILE}

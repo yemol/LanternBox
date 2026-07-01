@@ -301,6 +301,8 @@ def ai_advice(payload: AiAdviceRequest):
     prepared_ai = prepare_ai_pipeline_context(
         user_message=user_message,
         mode=mode,
+        history=payload.history,
+        conversation_summary=payload.conversation_summary or "",
     )
 
     context_data = prepared_ai["context_data"]
@@ -368,6 +370,8 @@ def ai_advice_stream(payload: AiAdviceRequest):
     prepared_ai = prepare_ai_pipeline_context(
         user_message=user_message,
         mode=mode,
+        history=payload.history,
+        conversation_summary=payload.conversation_summary or "",
     )
 
     context_data = prepared_ai["context_data"]

@@ -1340,7 +1340,8 @@
       ]
     };
 
-    const CHAT_HISTORY_MAX_MESSAGES = 6;
+    const CHAT_HISTORY_MAX_MESSAGES = 10;
+    const CHAT_SUMMARY_MAX_CHARS = 1600;
     const MAX_REFERENCE_CARDS_PER_GROUP = 6;
 
     let currentMode = "emergency";
@@ -1349,6 +1350,7 @@
     let latestRetrievalDebugData = null;
     let latestUserMessage = '';
     let conversationHistory = [];
+    let conversationSummary = "";
     let currentAudio = null;
     let currentAudioSource = null;
     let isGeneratingSpeech = false;
@@ -1498,6 +1500,53 @@
         .replaceAll("\r", "");
     }
 
+    function compactTextForMemory(value, limit = 420) {
+      return String(value || "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, limit);
+    }
+
+    function appendToConversationSummary(messages) {
+      const lines = messages
+        .map(item => {
+          const role = item.role === "assistant" ? "助手" : "用户";
+          const content = compactTextForMemory(item.content);
+          return content ? `${role}：${content}` : "";
+        })
+        .filter(Boolean);
+
+      if (!lines.length) return;
+
+      conversationSummary = [conversationSummary, ...lines]
+        .filter(Boolean)
+        .join("\n")
+        .slice(-CHAT_SUMMARY_MAX_CHARS);
+    }
+
+    function compactConversationHistory() {
+      if (conversationHistory.length <= CHAT_HISTORY_MAX_MESSAGES) return;
+
+      const overflowCount = conversationHistory.length - CHAT_HISTORY_MAX_MESSAGES;
+      const overflow = conversationHistory.slice(0, overflowCount);
+      appendToConversationSummary(overflow);
+      conversationHistory = conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES);
+    }
+
+    function rememberConversationTurn(message, answer) {
+      conversationHistory.push({
+        role: "user",
+        content: message
+      });
+
+      conversationHistory.push({
+        role: "assistant",
+        content: answer
+      });
+
+      compactConversationHistory();
+    }
+
     async function askLanternBox() {
     const message = userInput.value.trim();
     latestUserMessage = message;
@@ -1530,6 +1579,7 @@
             metadata_only: true,
             skip_retrieval: false,
             skip_emergency_references: false,
+            conversation_summary: conversationSummary,
             history: conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES)
         })
         });
@@ -1560,6 +1610,7 @@
             mode: currentMode,
             skip_retrieval: false,
             skip_emergency_references: false,
+            conversation_summary: conversationSummary,
             history: conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES)
         })
         });
@@ -1589,17 +1640,7 @@
         }
 
         if (fullText.trim()) {
-          conversationHistory.push({
-            role: "user",
-            content: message
-          });
-
-          conversationHistory.push({
-            role: "assistant",
-            content: fullText.trim()
-          });
-
-          conversationHistory = conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES);
+          rememberConversationTurn(message, fullText.trim());
 
           if (autoSpeakEnabled) {
             if (audioUnlocked) {
@@ -1638,6 +1679,7 @@
             mode: currentMode,
             skip_retrieval: true,
             skip_emergency_references: true,
+            conversation_summary: conversationSummary,
             history: conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES)
           })
         });
@@ -1667,17 +1709,7 @@
         }
 
         if (fullText.trim()) {
-          conversationHistory.push({
-            role: "user",
-            content: message
-          });
-
-          conversationHistory.push({
-            role: "assistant",
-            content: fullText.trim()
-          });
-
-          conversationHistory = conversationHistory.slice(-CHAT_HISTORY_MAX_MESSAGES);
+          rememberConversationTurn(message, fullText.trim());
 
           if (autoSpeakEnabled) {
             if (audioUnlocked) {
@@ -1783,6 +1815,7 @@
       latestRelatedWikis = [];
       latestRetrievalDebugData = null;
       conversationHistory = [];
+      conversationSummary = "";
       answerBox.textContent = currentMode === "companion"
         ? "可以随便说点什么。壳中灯会先听你说完，再帮你慢慢整理。"
         : "等待输入情况。壳中灯会在这里给出建议。";
