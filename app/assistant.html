@@ -927,16 +927,110 @@
       line-height: 1.55;
     }
 
+    .actual-results-panel,
+    .v2-diagnostics-panel {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 22px;
+    }
+
+    .actual-results-panel {
+      border: 1px solid rgba(116, 232, 185, 0.22);
+      background:
+        linear-gradient(135deg, rgba(116, 232, 185, 0.07), rgba(255, 255, 255, 0.035));
+    }
+
+    .actual-results-panel .section-title {
+      color: #bfffe1;
+    }
+
+    .v2-diagnostics-panel {
+      border: 1px dashed rgba(137, 204, 255, 0.24);
+      background:
+        linear-gradient(135deg, rgba(104, 199, 255, 0.055), rgba(255, 255, 255, 0.025));
+    }
+
+    .v2-diagnostics-panel.hidden {
+      display: none;
+    }
+
+    .v2-diagnostics-panel .evidence-plan-card,
+    .v2-diagnostics-panel .retrieval-debug-item,
+    .v2-diagnostics-panel .retrieval-debug-cell {
+      border-color: rgba(137, 204, 255, 0.12);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .v2-diagnostics-panel .evidence-plan-card {
+      border-radius: 13px;
+      padding: 10px;
+    }
+
+    .result-panel-head,
+    .v2-panel-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .result-panel-head h3,
+    .v2-panel-head h3 {
+      margin: 0;
+      color: var(--text-main);
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    .result-panel-note,
+    .v2-panel-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .result-panel-note {
+      border: 1px solid rgba(116, 232, 185, 0.28);
+      color: #dfffee;
+      background: rgba(116, 232, 185, 0.09);
+    }
+
+    .v2-panel-label {
+      border: 1px solid rgba(104, 199, 255, 0.28);
+      color: var(--accent-bright);
+      background: rgba(104, 199, 255, 0.08);
+    }
+
+    .v2-panel-block {
+      padding: 16px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 20px;
+      background:
+        linear-gradient(135deg, rgba(104, 199, 255, 0.07), rgba(255, 255, 255, 0.035));
+      color: var(--text-soft);
+    }
+
+    .v2-panel-block + .retrieval-debug-panel {
+      margin-top: 12px;
+    }
+
 
     /* ---------- Retrieval Debug Panel ---------- */
 
     .retrieval-debug-panel {
-      margin: 16px 0 18px;
+      margin: 0;
       padding: 16px;
-      border: 1px solid rgba(137, 204, 255, 0.16);
+      border: 1px solid rgba(137, 204, 255, 0.14);
       border-radius: 20px;
       background:
-        linear-gradient(135deg, rgba(104, 199, 255, 0.08), rgba(255, 255, 255, 0.035));
+        linear-gradient(135deg, rgba(104, 199, 255, 0.07), rgba(255, 255, 255, 0.035));
       color: var(--text-soft);
     }
 
@@ -955,7 +1049,7 @@
 
     .retrieval-debug-head h3 {
       margin: 0;
-      color: var(--accent-bright);
+      color: var(--text-main);
       font-size: 17px;
       line-height: 1.45;
     }
@@ -1092,9 +1186,8 @@
     /* ---------- Companion Mode Quiet UI ---------- */
 
     body.companion-mode .companion-hide,
-    body.companion-mode #referenceArea,
-    body.companion-mode #sourceSummary,
-    body.companion-mode #retrievalDebugPanel {
+    body.companion-mode #actualResultsPanel,
+    body.companion-mode #v2DiagnosticsPanel {
       display: none !important;
     }
 
@@ -1245,37 +1338,52 @@
             等待输入情况。壳中灯会在这里给出回应。
           </div>
 
-          <div id="sourceSummary" class="reference-summary hidden">
-            等待本地资料引用结果。
-          </div>
-
           <div id="companionQuietNote" class="companion-quiet-note hidden">
             当前为陪伴模式：默认不展开应急检索、指南来源、Wiki 来源和 Retrieval v2 调试。若内容出现明显风险，壳中灯会提醒你切回应急处理。
           </div>
 
-          <div id="referenceArea">
-            <div class="section-title">Retrieval v2 检索计划</div>
-            <div class="list" id="evidencePlanList">
-              <div class="empty-text">暂无检索计划。</div>
+          <div id="actualResultsPanel" class="actual-results-panel">
+            <div class="result-panel-head">
+              <h3>关联知识点</h3>
+              <span class="result-panel-note">本次回答参考</span>
             </div>
 
-            <div class="section-title">应急指南来源</div>
-            <div class="list" id="guideList">
-              <div class="empty-text">暂无应急指南来源。</div>
+            <div id="sourceSummary" class="reference-summary hidden">
+              等待本地资料引用结果。
             </div>
 
-            <div class="section-title">本地 Wiki 来源</div>
-            <div class="list" id="wikiList">
-              <div class="empty-text">暂无本地 Wiki 来源。</div>
+            <div id="referenceArea">
+              <div class="section-title">应急指南来源</div>
+              <div class="list" id="guideList">
+                <div class="empty-text">暂无应急指南来源。</div>
+              </div>
+
+              <div class="section-title">本地 Wiki 来源</div>
+              <div class="list" id="wikiList">
+                <div class="empty-text">暂无本地 Wiki 来源。</div>
+              </div>
             </div>
           </div>
-          <div id="retrievalDebugPanel" class="retrieval-debug-panel hidden">
-            <div class="retrieval-debug-head">
-              <h3>Retrieval v2 检索过程</h3>
-              <div class="retrieval-debug-badges" id="retrievalDebugBadges"></div>
+
+          <div id="v2DiagnosticsPanel" class="v2-diagnostics-panel hidden">
+            <div class="v2-panel-block">
+              <div class="v2-panel-head">
+                <h3>Retrieval v2 检索计划</h3>
+                <span class="v2-panel-label">调试信息 · 计划</span>
+              </div>
+              <div class="list" id="evidencePlanList">
+                <div class="empty-text">暂无检索计划。</div>
+              </div>
             </div>
-            <div class="retrieval-debug-grid" id="retrievalDebugGrid"></div>
-            <div id="retrievalDebugDetails"></div>
+
+            <div id="retrievalDebugPanel" class="retrieval-debug-panel hidden">
+              <div class="retrieval-debug-head">
+                <h3>Retrieval v2 检索过程</h3>
+                <div class="retrieval-debug-badges" id="retrievalDebugBadges"></div>
+              </div>
+              <div class="retrieval-debug-grid" id="retrievalDebugGrid"></div>
+              <div id="retrievalDebugDetails"></div>
+            </div>
           </div>
 
         </div>
@@ -1370,6 +1478,7 @@
     const wikiList = document.getElementById("wikiList");
     const sourceSummary = document.getElementById("sourceSummary");
     const companionQuietNote = document.getElementById("companionQuietNote");
+    const v2DiagnosticsPanel = document.getElementById("v2DiagnosticsPanel");
     const retrievalDebugPanel = document.getElementById("retrievalDebugPanel");
     const retrievalDebugBadges = document.getElementById("retrievalDebugBadges");
     const retrievalDebugGrid = document.getElementById("retrievalDebugGrid");
@@ -1883,7 +1992,9 @@
 
     function clearRetrievalDebug() {
       if (!retrievalDebugPanel) return;
+      if (v2DiagnosticsPanel) v2DiagnosticsPanel.classList.add("hidden");
       retrievalDebugPanel.classList.add("hidden");
+      if (evidencePlanList) evidencePlanList.innerHTML = '<div class="empty-text">暂无检索计划。</div>';
       if (retrievalDebugBadges) retrievalDebugBadges.innerHTML = "";
       if (retrievalDebugGrid) retrievalDebugGrid.innerHTML = "";
       if (retrievalDebugDetails) retrievalDebugDetails.innerHTML = "";
@@ -1903,6 +2014,7 @@
         return;
       }
 
+      if (v2DiagnosticsPanel) v2DiagnosticsPanel.classList.remove("hidden");
       retrievalDebugPanel.classList.remove("hidden");
 
       const plan = retrieval.plan || {};
