@@ -1,0 +1,5802 @@
+[
+  {
+    "id": "WIKI-P0-WATER-001",
+    "title": "饮用水最低需求和缺水信号",
+    "category": "水",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“饮用水最低需求和缺水信号”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "水",
+      "饮用水最低需求和缺水信号",
+      "饮用水最低需",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "饮用水最低需求和缺水信号用于解释水场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0551",
+        "DG-0552",
+        "DG-0553"
+      ]
+    },
+    "guide_links": [
+      "DG-0551",
+      "DG-0552",
+      "DG-0553"
+    ],
+    "kiwix_topics": [
+      "饮用水最低需求和缺水信号",
+      "水",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-water-001",
+    "pocketbase_category": "水与卫生",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-WATER-002",
+    "title": "煮沸和过滤的区别",
+    "category": "水",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“煮沸和过滤的区别”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "水",
+      "煮沸和过滤的区别",
+      "煮沸和过滤的",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "煮沸和过滤的区别用于解释水场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0551",
+        "DG-0552",
+        "DG-0553"
+      ]
+    },
+    "guide_links": [
+      "DG-0551",
+      "DG-0552",
+      "DG-0553"
+    ],
+    "kiwix_topics": [
+      "煮沸和过滤的区别",
+      "水",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-water-002",
+    "pocketbase_category": "水与卫生",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-WATER-003",
+    "title": "可疑水源禁用边界",
+    "category": "水",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“可疑水源禁用边界”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "水",
+      "可疑水源禁用边界",
+      "可疑水源禁用",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "可疑水源禁用边界用于解释水场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0551",
+        "DG-0552",
+        "DG-0553"
+      ]
+    },
+    "guide_links": [
+      "DG-0551",
+      "DG-0552",
+      "DG-0553"
+    ],
+    "kiwix_topics": [
+      "可疑水源禁用边界",
+      "水",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-water-003",
+    "pocketbase_category": "水与卫生",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-WATER-004",
+    "title": "储水容器污染风险",
+    "category": "水",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“储水容器污染风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "水",
+      "储水容器污染风险",
+      "储水容器污染",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "储水容器污染风险用于解释水场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0551",
+        "DG-0552",
+        "DG-0553"
+      ]
+    },
+    "guide_links": [
+      "DG-0551",
+      "DG-0552",
+      "DG-0553"
+    ],
+    "kiwix_topics": [
+      "储水容器污染风险",
+      "水",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-water-004",
+    "pocketbase_category": "水与卫生",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-WATER-005",
+    "title": "高温下脱水和补水判断",
+    "category": "水",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“高温下脱水和补水判断”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "水",
+      "高温下脱水和补水判断",
+      "高温下脱水和",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "高温下脱水和补水判断用于解释水场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0551",
+        "DG-0552",
+        "DG-0553"
+      ]
+    },
+    "guide_links": [
+      "DG-0551",
+      "DG-0552",
+      "DG-0553"
+    ],
+    "kiwix_topics": [
+      "高温下脱水和补水判断",
+      "水",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-water-005",
+    "pocketbase_category": "水与卫生",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-WATER-006",
+    "title": "停水初期为什么要抢收容器",
+    "category": "水",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“停水初期为什么要抢收容器”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "水",
+      "停水初期要抢收容器",
+      "停水初期为什",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "停水初期为什么要抢收容器用于解释水场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0551",
+        "DG-0552",
+        "DG-0553"
+      ]
+    },
+    "guide_links": [
+      "DG-0551",
+      "DG-0552",
+      "DG-0553"
+    ],
+    "kiwix_topics": [
+      "停水初期为什么要抢收容器",
+      "水",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-water-006",
+    "pocketbase_category": "水与卫生",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-WATER-007",
+    "title": "饮用水与清洁水分级",
+    "category": "水",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“饮用水与清洁水分级”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "水",
+      "饮用水与清洁水分级",
+      "饮用水与清洁",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "饮用水与清洁水分级用于解释水场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0551",
+        "DG-0552",
+        "DG-0553"
+      ]
+    },
+    "guide_links": [
+      "DG-0551",
+      "DG-0552",
+      "DG-0553"
+    ],
+    "kiwix_topics": [
+      "饮用水与清洁水分级",
+      "水",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-water-007",
+    "pocketbase_category": "水与卫生",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-WATER-008",
+    "title": "浑浊异味油膜的水质判断",
+    "category": "水",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“浑浊异味油膜的水质判断”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "水",
+      "浑浊异味油膜的水质判断",
+      "浑浊异味油膜",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "浑浊异味油膜的水质判断用于解释水场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0551",
+        "DG-0552",
+        "DG-0553"
+      ]
+    },
+    "guide_links": [
+      "DG-0551",
+      "DG-0552",
+      "DG-0553"
+    ],
+    "kiwix_topics": [
+      "浑浊异味油膜的水质判断",
+      "水",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-water-008",
+    "pocketbase_category": "水与卫生",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-WATER-009",
+    "title": "少水卫生与入口风险",
+    "category": "水",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“少水卫生与入口风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "水",
+      "少水卫生与入口风险",
+      "少水卫生与入",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "少水卫生与入口风险用于解释水场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0551",
+        "DG-0552",
+        "DG-0553"
+      ]
+    },
+    "guide_links": [
+      "DG-0551",
+      "DG-0552",
+      "DG-0553"
+    ],
+    "kiwix_topics": [
+      "少水卫生与入口风险",
+      "水",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-water-009",
+    "pocketbase_category": "水与卫生",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-WATER-010",
+    "title": "长期储水轮换原则",
+    "category": "水",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“长期储水轮换原则”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "水",
+      "长期储水轮换原则",
+      "长期储水轮换",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "长期储水轮换原则用于解释水场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0551",
+        "DG-0552",
+        "DG-0553"
+      ]
+    },
+    "guide_links": [
+      "DG-0551",
+      "DG-0552",
+      "DG-0553"
+    ],
+    "kiwix_topics": [
+      "长期储水轮换原则",
+      "水",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-water-010",
+    "pocketbase_category": "水与卫生",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FOOD-001",
+    "title": "基础热量和主食配给",
+    "category": "食物",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“基础热量和主食配给”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "食物",
+      "基础热量和主食配给",
+      "基础热量和主",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "基础热量和主食配给用于解释食物场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0596",
+        "DG-0597",
+        "DG-0598"
+      ]
+    },
+    "guide_links": [
+      "DG-0596",
+      "DG-0597",
+      "DG-0598"
+    ],
+    "kiwix_topics": [
+      "基础热量和主食配给",
+      "食物",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-food-001",
+    "pocketbase_category": "食物与营养",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FOOD-002",
+    "title": "食物腐败的常见信号",
+    "category": "食物",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“食物腐败的常见信号”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "食物",
+      "食物腐败的常见信号",
+      "食物腐败的常",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "食物腐败的常见信号用于解释食物场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0596",
+        "DG-0597",
+        "DG-0598"
+      ]
+    },
+    "guide_links": [
+      "DG-0596",
+      "DG-0597",
+      "DG-0598"
+    ],
+    "kiwix_topics": [
+      "食物腐败的常见信号",
+      "食物",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-food-002",
+    "pocketbase_category": "食物与营养",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FOOD-003",
+    "title": "停电后冷藏食品风险",
+    "category": "食物",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“停电后冷藏食品风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "食物",
+      "停电后冷藏食品风险",
+      "停电后冷藏食",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "停电后冷藏食品风险用于解释食物场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0596",
+        "DG-0597",
+        "DG-0598"
+      ]
+    },
+    "guide_links": [
+      "DG-0596",
+      "DG-0597",
+      "DG-0598"
+    ],
+    "kiwix_topics": [
+      "停电后冷藏食品风险",
+      "食物",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-food-003",
+    "pocketbase_category": "食物与营养",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FOOD-004",
+    "title": "罐头鼓包为什么禁食",
+    "category": "食物",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“罐头鼓包为什么禁食”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "食物",
+      "罐头鼓包禁食",
+      "罐头鼓包为什",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "罐头鼓包为什么禁食用于解释食物场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0596",
+        "DG-0597",
+        "DG-0598"
+      ]
+    },
+    "guide_links": [
+      "DG-0596",
+      "DG-0597",
+      "DG-0598"
+    ],
+    "kiwix_topics": [
+      "罐头鼓包为什么禁食",
+      "食物",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-food-004",
+    "pocketbase_category": "食物与营养",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FOOD-005",
+    "title": "低体力消耗与食物消耗",
+    "category": "食物",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“低体力消耗与食物消耗”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "食物",
+      "低体力消耗与食物消耗",
+      "低体力消耗与",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "低体力消耗与食物消耗用于解释食物场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0596",
+        "DG-0597",
+        "DG-0598"
+      ]
+    },
+    "guide_links": [
+      "DG-0596",
+      "DG-0597",
+      "DG-0598"
+    ],
+    "kiwix_topics": [
+      "低体力消耗与食物消耗",
+      "食物",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-food-005",
+    "pocketbase_category": "食物与营养",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FOOD-006",
+    "title": "儿童老人食物优先级",
+    "category": "食物",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“儿童老人食物优先级”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "食物",
+      "儿童老人食物优先级",
+      "儿童老人食物",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "儿童老人食物优先级用于解释食物场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0596",
+        "DG-0597",
+        "DG-0598"
+      ]
+    },
+    "guide_links": [
+      "DG-0596",
+      "DG-0597",
+      "DG-0598"
+    ],
+    "kiwix_topics": [
+      "儿童老人食物优先级",
+      "食物",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-food-006",
+    "pocketbase_category": "食物与营养",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FOOD-007",
+    "title": "蛋白质不足的风险",
+    "category": "食物",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“蛋白质不足的风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "食物",
+      "蛋白质不足的风险",
+      "蛋白质不足的",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "蛋白质不足的风险用于解释食物场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0596",
+        "DG-0597",
+        "DG-0598"
+      ]
+    },
+    "guide_links": [
+      "DG-0596",
+      "DG-0597",
+      "DG-0598"
+    ],
+    "kiwix_topics": [
+      "蛋白质不足的风险",
+      "食物",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-food-007",
+    "pocketbase_category": "食物与营养",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FOOD-008",
+    "title": "剩饭复热和重复加热边界",
+    "category": "食物",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“剩饭复热和重复加热边界”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "食物",
+      "剩饭复热和重复加热边界",
+      "剩饭复热和重",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "剩饭复热和重复加热边界用于解释食物场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0596",
+        "DG-0597",
+        "DG-0598"
+      ]
+    },
+    "guide_links": [
+      "DG-0596",
+      "DG-0597",
+      "DG-0598"
+    ],
+    "kiwix_topics": [
+      "剩饭复热和重复加热边界",
+      "食物",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-food-008",
+    "pocketbase_category": "食物与营养",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FOOD-009",
+    "title": "食物残渣与虫害关系",
+    "category": "食物",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“食物残渣与虫害关系”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "食物",
+      "食物残渣与虫害关系",
+      "食物残渣与虫",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "食物残渣与虫害关系用于解释食物场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0596",
+        "DG-0597",
+        "DG-0598"
+      ]
+    },
+    "guide_links": [
+      "DG-0596",
+      "DG-0597",
+      "DG-0598"
+    ],
+    "kiwix_topics": [
+      "食物残渣与虫害关系",
+      "食物",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-food-009",
+    "pocketbase_category": "食物与营养",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FOOD-010",
+    "title": "饥饿压力下的分配误区",
+    "category": "食物",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“饥饿压力下的分配误区”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "食物",
+      "饥饿压力下的分配误区",
+      "饥饿压力下的",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "饥饿压力下的分配误区用于解释食物场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0596",
+        "DG-0597",
+        "DG-0598"
+      ]
+    },
+    "guide_links": [
+      "DG-0596",
+      "DG-0597",
+      "DG-0598"
+    ],
+    "kiwix_topics": [
+      "饥饿压力下的分配误区",
+      "食物",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-food-010",
+    "pocketbase_category": "食物与营养",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-MEDICAL-001",
+    "title": "直接压迫止血原理",
+    "category": "医疗急救",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“直接压迫止血原理”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "医疗急救",
+      "直接压迫止血原理",
+      "直接压迫止血",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "直接压迫止血原理用于解释医疗急救场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0556",
+        "DG-0557",
+        "DG-0558"
+      ]
+    },
+    "guide_links": [
+      "DG-0556",
+      "DG-0557",
+      "DG-0558"
+    ],
+    "kiwix_topics": [
+      "直接压迫止血原理",
+      "医疗急救",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-medical-001",
+    "pocketbase_category": "医疗与照护",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-MEDICAL-002",
+    "title": "伤口感染的早期信号",
+    "category": "医疗急救",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“伤口感染的早期信号”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "医疗急救",
+      "伤口感染的早期信号",
+      "伤口感染的早",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "伤口感染的早期信号用于解释医疗急救场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0556",
+        "DG-0557",
+        "DG-0558"
+      ]
+    },
+    "guide_links": [
+      "DG-0556",
+      "DG-0557",
+      "DG-0558"
+    ],
+    "kiwix_topics": [
+      "伤口感染的早期信号",
+      "医疗急救",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-medical-002",
+    "pocketbase_category": "医疗与照护",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-MEDICAL-003",
+    "title": "发热记录为什么重要",
+    "category": "医疗急救",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“发热记录为什么重要”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "医疗急救",
+      "发热记录重要",
+      "发热记录为什",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "发热记录为什么重要用于解释医疗急救场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0556",
+        "DG-0557",
+        "DG-0558"
+      ]
+    },
+    "guide_links": [
+      "DG-0556",
+      "DG-0557",
+      "DG-0558"
+    ],
+    "kiwix_topics": [
+      "发热记录为什么重要",
+      "医疗急救",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-medical-003",
+    "pocketbase_category": "医疗与照护",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-MEDICAL-004",
+    "title": "腹泻脱水分级判断",
+    "category": "医疗急救",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“腹泻脱水分级判断”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "医疗急救",
+      "腹泻脱水分级判断",
+      "腹泻脱水分级",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "腹泻脱水分级判断用于解释医疗急救场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0556",
+        "DG-0557",
+        "DG-0558"
+      ]
+    },
+    "guide_links": [
+      "DG-0556",
+      "DG-0557",
+      "DG-0558"
+    ],
+    "kiwix_topics": [
+      "腹泻脱水分级判断",
+      "医疗急救",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-medical-004",
+    "pocketbase_category": "医疗与照护",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-MEDICAL-005",
+    "title": "烧烫伤冷却原理",
+    "category": "医疗急救",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“烧烫伤冷却原理”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "医疗急救",
+      "烧烫伤冷却原理",
+      "烧烫伤冷却原",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "烧烫伤冷却原理用于解释医疗急救场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0556",
+        "DG-0557",
+        "DG-0558"
+      ]
+    },
+    "guide_links": [
+      "DG-0556",
+      "DG-0557",
+      "DG-0558"
+    ],
+    "kiwix_topics": [
+      "烧烫伤冷却原理",
+      "医疗急救",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-medical-005",
+    "pocketbase_category": "医疗与照护",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-MEDICAL-006",
+    "title": "清洁水不足时的伤口边界",
+    "category": "医疗急救",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“清洁水不足时的伤口边界”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "医疗急救",
+      "清洁水不足时的伤口边界",
+      "清洁水不足时",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "清洁水不足时的伤口边界用于解释医疗急救场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0556",
+        "DG-0557",
+        "DG-0558"
+      ]
+    },
+    "guide_links": [
+      "DG-0556",
+      "DG-0557",
+      "DG-0558"
+    ],
+    "kiwix_topics": [
+      "清洁水不足时的伤口边界",
+      "医疗急救",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-medical-006",
+    "pocketbase_category": "医疗与照护",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-MEDICAL-007",
+    "title": "儿童发热危险信号",
+    "category": "医疗急救",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“儿童发热危险信号”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "医疗急救",
+      "儿童发热危险信号",
+      "儿童发热危险",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "儿童发热危险信号用于解释医疗急救场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0556",
+        "DG-0557",
+        "DG-0558"
+      ]
+    },
+    "guide_links": [
+      "DG-0556",
+      "DG-0557",
+      "DG-0558"
+    ],
+    "kiwix_topics": [
+      "儿童发热危险信号",
+      "医疗急救",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-medical-007",
+    "pocketbase_category": "医疗与照护",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-MEDICAL-008",
+    "title": "药品不足时的记录原则",
+    "category": "医疗急救",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“药品不足时的记录原则”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "医疗急救",
+      "药品不足时的记录原则",
+      "药品不足时的",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "药品不足时的记录原则用于解释医疗急救场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0556",
+        "DG-0557",
+        "DG-0558"
+      ]
+    },
+    "guide_links": [
+      "DG-0556",
+      "DG-0557",
+      "DG-0558"
+    ],
+    "kiwix_topics": [
+      "药品不足时的记录原则",
+      "医疗急救",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-medical-008",
+    "pocketbase_category": "医疗与照护",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-MEDICAL-009",
+    "title": "污染伤口和破伤风风险",
+    "category": "医疗急救",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“污染伤口和破伤风风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "医疗急救",
+      "污染伤口和破伤风风险",
+      "污染伤口和破",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "污染伤口和破伤风风险用于解释医疗急救场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0556",
+        "DG-0557",
+        "DG-0558"
+      ]
+    },
+    "guide_links": [
+      "DG-0556",
+      "DG-0557",
+      "DG-0558"
+    ],
+    "kiwix_topics": [
+      "污染伤口和破伤风风险",
+      "医疗急救",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-medical-009",
+    "pocketbase_category": "医疗与照护",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-MEDICAL-010",
+    "title": "照护者手卫生与交叉感染",
+    "category": "医疗急救",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“照护者手卫生与交叉感染”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "医疗急救",
+      "照护者手卫生与交叉感染",
+      "照护者手卫生",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "照护者手卫生与交叉感染用于解释医疗急救场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0556",
+        "DG-0557",
+        "DG-0558"
+      ]
+    },
+    "guide_links": [
+      "DG-0556",
+      "DG-0557",
+      "DG-0558"
+    ],
+    "kiwix_topics": [
+      "照护者手卫生与交叉感染",
+      "医疗急救",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-medical-010",
+    "pocketbase_category": "医疗与照护",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-POWER-001",
+    "title": "电池容量和功耗基础",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“电池容量和功耗基础”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "能源",
+      "电池容量和功耗基础",
+      "电池容量和功",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "电池容量和功耗基础用于解释能源场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0561",
+        "DG-0562",
+        "DG-0563"
+      ]
+    },
+    "guide_links": [
+      "DG-0561",
+      "DG-0562",
+      "DG-0563"
+    ],
+    "kiwix_topics": [
+      "电池容量和功耗基础",
+      "能源",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-power-001",
+    "pocketbase_category": "电力与设备",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-POWER-002",
+    "title": "手机省电为什么优先短信",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“手机省电为什么优先短信”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "能源",
+      "手机省电优先短信",
+      "手机省电为什",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "手机省电为什么优先短信用于解释能源场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0561",
+        "DG-0562",
+        "DG-0563"
+      ]
+    },
+    "guide_links": [
+      "DG-0561",
+      "DG-0562",
+      "DG-0563"
+    ],
+    "kiwix_topics": [
+      "手机省电为什么优先短信",
+      "能源",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-power-002",
+    "pocketbase_category": "电力与设备",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-POWER-003",
+    "title": "移动电源安全边界",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“移动电源安全边界”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "能源",
+      "移动电源安全边界",
+      "移动电源安全",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "移动电源安全边界用于解释能源场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0561",
+        "DG-0562",
+        "DG-0563"
+      ]
+    },
+    "guide_links": [
+      "DG-0561",
+      "DG-0562",
+      "DG-0563"
+    ],
+    "kiwix_topics": [
+      "移动电源安全边界",
+      "能源",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-power-003",
+    "pocketbase_category": "电力与设备",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-POWER-004",
+    "title": "太阳能充电的光照因素",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“太阳能充电的光照因素”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "能源",
+      "太阳能充电的光照因素",
+      "太阳能充电的",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "太阳能充电的光照因素用于解释能源场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0561",
+        "DG-0562",
+        "DG-0563"
+      ]
+    },
+    "guide_links": [
+      "DG-0561",
+      "DG-0562",
+      "DG-0563"
+    ],
+    "kiwix_topics": [
+      "太阳能充电的光照因素",
+      "能源",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-power-004",
+    "pocketbase_category": "电力与设备",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-POWER-005",
+    "title": "低亮照明和夜间安全",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“低亮照明和夜间安全”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "能源",
+      "低亮照明和夜间安全",
+      "低亮照明和夜",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "低亮照明和夜间安全用于解释能源场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0561",
+        "DG-0562",
+        "DG-0563"
+      ]
+    },
+    "guide_links": [
+      "DG-0561",
+      "DG-0562",
+      "DG-0563"
+    ],
+    "kiwix_topics": [
+      "低亮照明和夜间安全",
+      "能源",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-power-005",
+    "pocketbase_category": "电力与设备",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-POWER-006",
+    "title": "锂电池鼓包发热风险",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“锂电池鼓包发热风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "能源",
+      "锂电池鼓包发热风险",
+      "锂电池鼓包发",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "锂电池鼓包发热风险用于解释能源场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0561",
+        "DG-0562",
+        "DG-0563"
+      ]
+    },
+    "guide_links": [
+      "DG-0561",
+      "DG-0562",
+      "DG-0563"
+    ],
+    "kiwix_topics": [
+      "锂电池鼓包发热风险",
+      "能源",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-power-006",
+    "pocketbase_category": "电力与设备",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-POWER-007",
+    "title": "充电线接口接触不良风险",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“充电线接口接触不良风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "能源",
+      "充电线接口接触不良风险",
+      "充电线接口接",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "充电线接口接触不良风险用于解释能源场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0561",
+        "DG-0562",
+        "DG-0563"
+      ]
+    },
+    "guide_links": [
+      "DG-0561",
+      "DG-0562",
+      "DG-0563"
+    ],
+    "kiwix_topics": [
+      "充电线接口接触不良风险",
+      "能源",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-power-007",
+    "pocketbase_category": "电力与设备",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-POWER-008",
+    "title": "停电后的关键设备分级",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“停电后的关键设备分级”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "能源",
+      "停电后的关键设备分级",
+      "停电后的关键",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "停电后的关键设备分级用于解释能源场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0561",
+        "DG-0562",
+        "DG-0563"
+      ]
+    },
+    "guide_links": [
+      "DG-0561",
+      "DG-0562",
+      "DG-0563"
+    ],
+    "kiwix_topics": [
+      "停电后的关键设备分级",
+      "能源",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-power-008",
+    "pocketbase_category": "电力与设备",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-POWER-009",
+    "title": "夜间照明对暴露的影响",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“夜间照明对暴露的影响”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "能源",
+      "夜间照明对暴露的影响",
+      "夜间照明对暴",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "夜间照明对暴露的影响用于解释能源场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0561",
+        "DG-0562",
+        "DG-0563"
+      ]
+    },
+    "guide_links": [
+      "DG-0561",
+      "DG-0562",
+      "DG-0563"
+    ],
+    "kiwix_topics": [
+      "夜间照明对暴露的影响",
+      "能源",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-power-009",
+    "pocketbase_category": "电力与设备",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-POWER-010",
+    "title": "低温高温对电池影响",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“低温高温对电池影响”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "能源",
+      "低温高温对电池影响",
+      "低温高温对电",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "低温高温对电池影响用于解释能源场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0561",
+        "DG-0562",
+        "DG-0563"
+      ]
+    },
+    "guide_links": [
+      "DG-0561",
+      "DG-0562",
+      "DG-0563"
+    ],
+    "kiwix_topics": [
+      "低温高温对电池影响",
+      "能源",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-power-010",
+    "pocketbase_category": "电力与设备",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-REPAIR-001",
+    "title": "潮湿电器为什么危险",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“潮湿电器为什么危险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "潮湿电器危险",
+      "潮湿电器为什",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "潮湿电器为什么危险用于解释维修 / 制作 / 替代 / 拆解再利用场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0566",
+        "DG-0567",
+        "DG-0568"
+      ]
+    },
+    "guide_links": [
+      "DG-0566",
+      "DG-0567",
+      "DG-0568"
+    ],
+    "kiwix_topics": [
+      "潮湿电器为什么危险",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-repair-001",
+    "pocketbase_category": "工具与维修",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-REPAIR-002",
+    "title": "漏电和短路基础",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“漏电和短路基础”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "漏电和短路基础",
+      "漏电和短路基",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "漏电和短路基础用于解释维修 / 制作 / 替代 / 拆解再利用场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0566",
+        "DG-0567",
+        "DG-0568"
+      ]
+    },
+    "guide_links": [
+      "DG-0566",
+      "DG-0567",
+      "DG-0568"
+    ],
+    "kiwix_topics": [
+      "漏电和短路基础",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-repair-002",
+    "pocketbase_category": "工具与维修",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-REPAIR-003",
+    "title": "临时绝缘材料的边界",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“临时绝缘材料的边界”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "临时绝缘材料的边界",
+      "临时绝缘材料",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "临时绝缘材料的边界用于解释维修 / 制作 / 替代 / 拆解再利用场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0566",
+        "DG-0567",
+        "DG-0568"
+      ]
+    },
+    "guide_links": [
+      "DG-0566",
+      "DG-0567",
+      "DG-0568"
+    ],
+    "kiwix_topics": [
+      "临时绝缘材料的边界",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-repair-003",
+    "pocketbase_category": "工具与维修",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-REPAIR-004",
+    "title": "容器裂缝和饮用水污染",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“容器裂缝和饮用水污染”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "容器裂缝和饮用水污染",
+      "容器裂缝和饮",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "容器裂缝和饮用水污染用于解释维修 / 制作 / 替代 / 拆解再利用场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0566",
+        "DG-0567",
+        "DG-0568"
+      ]
+    },
+    "guide_links": [
+      "DG-0566",
+      "DG-0567",
+      "DG-0568"
+    ],
+    "kiwix_topics": [
+      "容器裂缝和饮用水污染",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-repair-004",
+    "pocketbase_category": "工具与维修",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-REPAIR-005",
+    "title": "门窗临时加固的受力边界",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“门窗临时加固的受力边界”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "门窗临时加固的受力边界",
+      "门窗临时加固",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "门窗临时加固的受力边界用于解释维修 / 制作 / 替代 / 拆解再利用场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0566",
+        "DG-0567",
+        "DG-0568"
+      ]
+    },
+    "guide_links": [
+      "DG-0566",
+      "DG-0567",
+      "DG-0568"
+    ],
+    "kiwix_topics": [
+      "门窗临时加固的受力边界",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-repair-005",
+    "pocketbase_category": "工具与维修",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-REPAIR-006",
+    "title": "胶带扎带绳索的用途限制",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“胶带扎带绳索的用途限制”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "胶带扎带绳索的用途限制",
+      "胶带扎带绳索",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "胶带扎带绳索的用途限制用于解释维修 / 制作 / 替代 / 拆解再利用场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0566",
+        "DG-0567",
+        "DG-0568"
+      ]
+    },
+    "guide_links": [
+      "DG-0566",
+      "DG-0567",
+      "DG-0568"
+    ],
+    "kiwix_topics": [
+      "胶带扎带绳索的用途限制",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-repair-006",
+    "pocketbase_category": "工具与维修",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-REPAIR-007",
+    "title": "鞋袜破损和脚部伤害",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“鞋袜破损和脚部伤害”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "鞋袜破损和脚部伤害",
+      "鞋袜破损和脚",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "鞋袜破损和脚部伤害用于解释维修 / 制作 / 替代 / 拆解再利用场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0566",
+        "DG-0567",
+        "DG-0568"
+      ]
+    },
+    "guide_links": [
+      "DG-0566",
+      "DG-0567",
+      "DG-0568"
+    ],
+    "kiwix_topics": [
+      "鞋袜破损和脚部伤害",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-repair-007",
+    "pocketbase_category": "工具与维修",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-REPAIR-008",
+    "title": "拆解再利用前的停用判断",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“拆解再利用前的停用判断”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "拆解再利用前的停用判断",
+      "拆解再利用前",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "拆解再利用前的停用判断用于解释维修 / 制作 / 替代 / 拆解再利用场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0566",
+        "DG-0567",
+        "DG-0568"
+      ]
+    },
+    "guide_links": [
+      "DG-0566",
+      "DG-0567",
+      "DG-0568"
+    ],
+    "kiwix_topics": [
+      "拆解再利用前的停用判断",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-repair-008",
+    "pocketbase_category": "工具与维修",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-REPAIR-009",
+    "title": "塑料布和防水层原理",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“塑料布和防水层原理”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "塑料布和防水层原理",
+      "塑料布和防水",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "塑料布和防水层原理用于解释维修 / 制作 / 替代 / 拆解再利用场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0566",
+        "DG-0567",
+        "DG-0568"
+      ]
+    },
+    "guide_links": [
+      "DG-0566",
+      "DG-0567",
+      "DG-0568"
+    ],
+    "kiwix_topics": [
+      "塑料布和防水层原理",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-repair-009",
+    "pocketbase_category": "工具与维修",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-REPAIR-010",
+    "title": "维修时的割伤和火源风险",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“维修时的割伤和火源风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "维修时的割伤和火源风险",
+      "维修时的割伤",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "维修时的割伤和火源风险用于解释维修 / 制作 / 替代 / 拆解再利用场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0566",
+        "DG-0567",
+        "DG-0568"
+      ]
+    },
+    "guide_links": [
+      "DG-0566",
+      "DG-0567",
+      "DG-0568"
+    ],
+    "kiwix_topics": [
+      "维修时的割伤和火源风险",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-repair-010",
+    "pocketbase_category": "工具与维修",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-HYGIENE-001",
+    "title": "粪口传播基础",
+    "category": "卫生",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“粪口传播基础”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "卫生",
+      "粪口传播基础",
+      "粪口传播基础",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "粪口传播基础用于解释卫生场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0571",
+        "DG-0572",
+        "DG-0573"
+      ]
+    },
+    "guide_links": [
+      "DG-0571",
+      "DG-0572",
+      "DG-0573"
+    ],
+    "kiwix_topics": [
+      "粪口传播基础",
+      "卫生",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-hygiene-001",
+    "pocketbase_category": "卫生与清洁",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-HYGIENE-002",
+    "title": "临时厕所为什么要覆盖",
+    "category": "卫生",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“临时厕所为什么要覆盖”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "卫生",
+      "临时厕所要覆盖",
+      "临时厕所为什",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "临时厕所为什么要覆盖用于解释卫生场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0571",
+        "DG-0572",
+        "DG-0573"
+      ]
+    },
+    "guide_links": [
+      "DG-0571",
+      "DG-0572",
+      "DG-0573"
+    ],
+    "kiwix_topics": [
+      "临时厕所为什么要覆盖",
+      "卫生",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-hygiene-002",
+    "pocketbase_category": "卫生与清洁",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-HYGIENE-003",
+    "title": "少水洗手的关键时刻",
+    "category": "卫生",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“少水洗手的关键时刻”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "卫生",
+      "少水洗手的关键时刻",
+      "少水洗手的关",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "少水洗手的关键时刻用于解释卫生场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0571",
+        "DG-0572",
+        "DG-0573"
+      ]
+    },
+    "guide_links": [
+      "DG-0571",
+      "DG-0572",
+      "DG-0573"
+    ],
+    "kiwix_topics": [
+      "少水洗手的关键时刻",
+      "卫生",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-hygiene-003",
+    "pocketbase_category": "卫生与清洁",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-HYGIENE-004",
+    "title": "湿垃圾腐败和虫害",
+    "category": "卫生",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“湿垃圾腐败和虫害”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "卫生",
+      "湿垃圾腐败和虫害",
+      "湿垃圾腐败和",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "湿垃圾腐败和虫害用于解释卫生场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0571",
+        "DG-0572",
+        "DG-0573"
+      ]
+    },
+    "guide_links": [
+      "DG-0571",
+      "DG-0572",
+      "DG-0573"
+    ],
+    "kiwix_topics": [
+      "湿垃圾腐败和虫害",
+      "卫生",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-hygiene-004",
+    "pocketbase_category": "卫生与清洁",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-HYGIENE-005",
+    "title": "呕吐物粪便污染路径",
+    "category": "卫生",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“呕吐物粪便污染路径”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "卫生",
+      "呕吐物粪便污染路径",
+      "呕吐物粪便污",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "呕吐物粪便污染路径用于解释卫生场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0571",
+        "DG-0572",
+        "DG-0573"
+      ]
+    },
+    "guide_links": [
+      "DG-0571",
+      "DG-0572",
+      "DG-0573"
+    ],
+    "kiwix_topics": [
+      "呕吐物粪便污染路径",
+      "卫生",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-hygiene-005",
+    "pocketbase_category": "卫生与清洁",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-HYGIENE-006",
+    "title": "室内霉味和潮湿风险",
+    "category": "卫生",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“室内霉味和潮湿风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "卫生",
+      "室内霉味和潮湿风险",
+      "室内霉味和潮",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "室内霉味和潮湿风险用于解释卫生场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0571",
+        "DG-0572",
+        "DG-0573"
+      ]
+    },
+    "guide_links": [
+      "DG-0571",
+      "DG-0572",
+      "DG-0573"
+    ],
+    "kiwix_topics": [
+      "室内霉味和潮湿风险",
+      "卫生",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-hygiene-006",
+    "pocketbase_category": "卫生与清洁",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-HYGIENE-007",
+    "title": "干湿垃圾分离原理",
+    "category": "卫生",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“干湿垃圾分离原理”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "卫生",
+      "干湿垃圾分离原理",
+      "干湿垃圾分离",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "干湿垃圾分离原理用于解释卫生场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0571",
+        "DG-0572",
+        "DG-0573"
+      ]
+    },
+    "guide_links": [
+      "DG-0571",
+      "DG-0572",
+      "DG-0573"
+    ],
+    "kiwix_topics": [
+      "干湿垃圾分离原理",
+      "卫生",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-hygiene-007",
+    "pocketbase_category": "卫生与清洁",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-HYGIENE-008",
+    "title": "清洁和消毒的区别",
+    "category": "卫生",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“清洁和消毒的区别”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "卫生",
+      "清洁和消毒的区别",
+      "清洁和消毒的",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "清洁和消毒的区别用于解释卫生场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0571",
+        "DG-0572",
+        "DG-0573"
+      ]
+    },
+    "guide_links": [
+      "DG-0571",
+      "DG-0572",
+      "DG-0573"
+    ],
+    "kiwix_topics": [
+      "清洁和消毒的区别",
+      "卫生",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-hygiene-008",
+    "pocketbase_category": "卫生与清洁",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-HYGIENE-009",
+    "title": "污染区和清洁区边界",
+    "category": "卫生",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“污染区和清洁区边界”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "卫生",
+      "污染区和清洁区边界",
+      "污染区和清洁",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "污染区和清洁区边界用于解释卫生场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0571",
+        "DG-0572",
+        "DG-0573"
+      ]
+    },
+    "guide_links": [
+      "DG-0571",
+      "DG-0572",
+      "DG-0573"
+    ],
+    "kiwix_topics": [
+      "污染区和清洁区边界",
+      "卫生",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-hygiene-009",
+    "pocketbase_category": "卫生与清洁",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-HYGIENE-010",
+    "title": "异味掩盖的常见误区",
+    "category": "卫生",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“异味掩盖的常见误区”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "卫生",
+      "异味掩盖的常见误区",
+      "异味掩盖的常",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "异味掩盖的常见误区用于解释卫生场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0571",
+        "DG-0572",
+        "DG-0573"
+      ]
+    },
+    "guide_links": [
+      "DG-0571",
+      "DG-0572",
+      "DG-0573"
+    ],
+    "kiwix_topics": [
+      "异味掩盖的常见误区",
+      "卫生",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-hygiene-010",
+    "pocketbase_category": "卫生与清洁",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-SECURITY-001",
+    "title": "夜间异响的观察原则",
+    "category": "安全",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“夜间异响的观察原则”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "安全",
+      "夜间异响的观察原则",
+      "夜间异响的观",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "夜间异响的观察原则用于解释安全场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0576",
+        "DG-0577",
+        "DG-0578"
+      ]
+    },
+    "guide_links": [
+      "DG-0576",
+      "DG-0577",
+      "DG-0578"
+    ],
+    "kiwix_topics": [
+      "夜间异响的观察原则",
+      "安全",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-security-001",
+    "pocketbase_category": "安全与风险",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-SECURITY-002",
+    "title": "低暴露为什么重要",
+    "category": "安全",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“低暴露为什么重要”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "安全",
+      "低暴露重要",
+      "低暴露为什么",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "低暴露为什么重要用于解释安全场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0576",
+        "DG-0577",
+        "DG-0578"
+      ]
+    },
+    "guide_links": [
+      "DG-0576",
+      "DG-0577",
+      "DG-0578"
+    ],
+    "kiwix_topics": [
+      "低暴露为什么重要",
+      "安全",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-security-002",
+    "pocketbase_category": "安全与风险",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-SECURITY-003",
+    "title": "洪水前断电原因",
+    "category": "安全",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“洪水前断电原因”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "安全",
+      "洪水前断电原因",
+      "洪水前断电原",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "洪水前断电原因用于解释安全场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0576",
+        "DG-0577",
+        "DG-0578"
+      ]
+    },
+    "guide_links": [
+      "DG-0576",
+      "DG-0577",
+      "DG-0578"
+    ],
+    "kiwix_topics": [
+      "洪水前断电原因",
+      "安全",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-security-003",
+    "pocketbase_category": "安全与风险",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-SECURITY-004",
+    "title": "小火处理和撤离边界",
+    "category": "安全",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“小火处理和撤离边界”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "安全",
+      "小火处理和撤离边界",
+      "小火处理和撤",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "小火处理和撤离边界用于解释安全场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0576",
+        "DG-0577",
+        "DG-0578"
+      ]
+    },
+    "guide_links": [
+      "DG-0576",
+      "DG-0577",
+      "DG-0578"
+    ],
+    "kiwix_topics": [
+      "小火处理和撤离边界",
+      "安全",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-security-004",
+    "pocketbase_category": "安全与风险",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-SECURITY-005",
+    "title": "门窗受损的暴露风险",
+    "category": "安全",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“门窗受损的暴露风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "安全",
+      "门窗受损的暴露风险",
+      "门窗受损的暴",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "门窗受损的暴露风险用于解释安全场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0576",
+        "DG-0577",
+        "DG-0578"
+      ]
+    },
+    "guide_links": [
+      "DG-0576",
+      "DG-0577",
+      "DG-0578"
+    ],
+    "kiwix_topics": [
+      "门窗受损的暴露风险",
+      "安全",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-security-005",
+    "pocketbase_category": "安全与风险",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-SECURITY-006",
+    "title": "燃气泄漏火花风险",
+    "category": "安全",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“燃气泄漏火花风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "安全",
+      "燃气泄漏火花风险",
+      "燃气泄漏火花",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "燃气泄漏火花风险用于解释安全场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0576",
+        "DG-0577",
+        "DG-0578"
+      ]
+    },
+    "guide_links": [
+      "DG-0576",
+      "DG-0577",
+      "DG-0578"
+    ],
+    "kiwix_topics": [
+      "燃气泄漏火花风险",
+      "安全",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-security-006",
+    "pocketbase_category": "安全与风险",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-SECURITY-007",
+    "title": "陌生接触的信息最小化",
+    "category": "安全",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“陌生接触的信息最小化”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "安全",
+      "陌生接触的信息最小化",
+      "陌生接触的信",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "陌生接触的信息最小化用于解释安全场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0576",
+        "DG-0577",
+        "DG-0578"
+      ]
+    },
+    "guide_links": [
+      "DG-0576",
+      "DG-0577",
+      "DG-0578"
+    ],
+    "kiwix_topics": [
+      "陌生接触的信息最小化",
+      "安全",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-security-007",
+    "pocketbase_category": "安全与风险",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-SECURITY-008",
+    "title": "外出风险和返回时间",
+    "category": "安全",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“外出风险和返回时间”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "安全",
+      "外出风险和返回时间",
+      "外出风险和返",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "外出风险和返回时间用于解释安全场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0576",
+        "DG-0577",
+        "DG-0578"
+      ]
+    },
+    "guide_links": [
+      "DG-0576",
+      "DG-0577",
+      "DG-0578"
+    ],
+    "kiwix_topics": [
+      "外出风险和返回时间",
+      "安全",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-security-008",
+    "pocketbase_category": "安全与风险",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-SECURITY-009",
+    "title": "冲突降温的基本原则",
+    "category": "安全",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“冲突降温的基本原则”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "安全",
+      "冲突降温的基本原则",
+      "冲突降温的基",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "冲突降温的基本原则用于解释安全场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0576",
+        "DG-0577",
+        "DG-0578"
+      ]
+    },
+    "guide_links": [
+      "DG-0576",
+      "DG-0577",
+      "DG-0578"
+    ],
+    "kiwix_topics": [
+      "冲突降温的基本原则",
+      "安全",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-security-009",
+    "pocketbase_category": "安全与风险",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-SECURITY-010",
+    "title": "安全记录的复盘价值",
+    "category": "安全",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“安全记录的复盘价值”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "安全",
+      "安全记录的复盘价值",
+      "安全记录的复",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "安全记录的复盘价值用于解释安全场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0576",
+        "DG-0577",
+        "DG-0578"
+      ]
+    },
+    "guide_links": [
+      "DG-0576",
+      "DG-0577",
+      "DG-0578"
+    ],
+    "kiwix_topics": [
+      "安全记录的复盘价值",
+      "安全",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-security-010",
+    "pocketbase_category": "安全与风险",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-COMMS-001",
+    "title": "断网后的集合点原则",
+    "category": "通讯",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“断网后的集合点原则”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "通讯",
+      "断网后的集合点原则",
+      "断网后的集合",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "断网后的集合点原则用于解释通讯场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0581",
+        "DG-0582",
+        "DG-0583"
+      ]
+    },
+    "guide_links": [
+      "DG-0581",
+      "DG-0582",
+      "DG-0583"
+    ],
+    "kiwix_topics": [
+      "断网后的集合点原则",
+      "通讯",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-comms-001",
+    "pocketbase_category": "通讯与地图",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-COMMS-002",
+    "title": "短信电话和耗电差异",
+    "category": "通讯",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“短信电话和耗电差异”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "通讯",
+      "短信电话和耗电差异",
+      "短信电话和耗",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "短信电话和耗电差异用于解释通讯场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0581",
+        "DG-0582",
+        "DG-0583"
+      ]
+    },
+    "guide_links": [
+      "DG-0581",
+      "DG-0582",
+      "DG-0583"
+    ],
+    "kiwix_topics": [
+      "短信电话和耗电差异",
+      "通讯",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-comms-002",
+    "pocketbase_category": "通讯与地图",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-COMMS-003",
+    "title": "固定开机窗口的作用",
+    "category": "通讯",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“固定开机窗口的作用”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "通讯",
+      "固定开机窗口的作用",
+      "固定开机窗口",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "固定开机窗口的作用用于解释通讯场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0581",
+        "DG-0582",
+        "DG-0583"
+      ]
+    },
+    "guide_links": [
+      "DG-0581",
+      "DG-0582",
+      "DG-0583"
+    ],
+    "kiwix_topics": [
+      "固定开机窗口的作用",
+      "通讯",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-comms-003",
+    "pocketbase_category": "通讯与地图",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-COMMS-004",
+    "title": "纸条留言的信息格式",
+    "category": "通讯",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“纸条留言的信息格式”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "通讯",
+      "纸条留言的信息格式",
+      "纸条留言的信",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "纸条留言的信息格式用于解释通讯场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0581",
+        "DG-0582",
+        "DG-0583"
+      ]
+    },
+    "guide_links": [
+      "DG-0581",
+      "DG-0582",
+      "DG-0583"
+    ],
+    "kiwix_topics": [
+      "纸条留言的信息格式",
+      "通讯",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-comms-004",
+    "pocketbase_category": "通讯与地图",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-COMMS-005",
+    "title": "近距离信号的误解风险",
+    "category": "通讯",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“近距离信号的误解风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "通讯",
+      "近距离信号的误解风险",
+      "近距离信号的",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "近距离信号的误解风险用于解释通讯场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0581",
+        "DG-0582",
+        "DG-0583"
+      ]
+    },
+    "guide_links": [
+      "DG-0581",
+      "DG-0582",
+      "DG-0583"
+    ],
+    "kiwix_topics": [
+      "近距离信号的误解风险",
+      "通讯",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-comms-005",
+    "pocketbase_category": "通讯与地图",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-COMMS-006",
+    "title": "离线联系人表为什么重要",
+    "category": "通讯",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“离线联系人表为什么重要”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "通讯",
+      "离线联系人表重要",
+      "离线联系人表",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "离线联系人表为什么重要用于解释通讯场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0581",
+        "DG-0582",
+        "DG-0583"
+      ]
+    },
+    "guide_links": [
+      "DG-0581",
+      "DG-0582",
+      "DG-0583"
+    ],
+    "kiwix_topics": [
+      "离线联系人表为什么重要",
+      "通讯",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-comms-006",
+    "pocketbase_category": "通讯与地图",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-COMMS-007",
+    "title": "手机没信号的常见原因",
+    "category": "通讯",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“手机没信号的常见原因”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "通讯",
+      "手机没信号的常见原因",
+      "手机没信号的",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "手机没信号的常见原因用于解释通讯场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0581",
+        "DG-0582",
+        "DG-0583"
+      ]
+    },
+    "guide_links": [
+      "DG-0581",
+      "DG-0582",
+      "DG-0583"
+    ],
+    "kiwix_topics": [
+      "手机没信号的常见原因",
+      "通讯",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-comms-007",
+    "pocketbase_category": "通讯与地图",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-COMMS-008",
+    "title": "分开行动记录的价值",
+    "category": "通讯",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“分开行动记录的价值”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "通讯",
+      "分开行动记录的价值",
+      "分开行动记录",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "分开行动记录的价值用于解释通讯场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0581",
+        "DG-0582",
+        "DG-0583"
+      ]
+    },
+    "guide_links": [
+      "DG-0581",
+      "DG-0582",
+      "DG-0583"
+    ],
+    "kiwix_topics": [
+      "分开行动记录的价值",
+      "通讯",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-comms-008",
+    "pocketbase_category": "通讯与地图",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-COMMS-009",
+    "title": "低电量通信优先级",
+    "category": "通讯",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“低电量通信优先级”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "通讯",
+      "低电量通信优先级",
+      "低电量通信优",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "低电量通信优先级用于解释通讯场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0581",
+        "DG-0582",
+        "DG-0583"
+      ]
+    },
+    "guide_links": [
+      "DG-0581",
+      "DG-0582",
+      "DG-0583"
+    ],
+    "kiwix_topics": [
+      "低电量通信优先级",
+      "通讯",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-comms-009",
+    "pocketbase_category": "通讯与地图",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-COMMS-010",
+    "title": "通讯计划和团队信任",
+    "category": "通讯",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“通讯计划和团队信任”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "通讯",
+      "通讯计划和团队信任",
+      "通讯计划和团",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "通讯计划和团队信任用于解释通讯场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0581",
+        "DG-0582",
+        "DG-0583"
+      ]
+    },
+    "guide_links": [
+      "DG-0581",
+      "DG-0582",
+      "DG-0583"
+    ],
+    "kiwix_topics": [
+      "通讯计划和团队信任",
+      "通讯",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-comms-010",
+    "pocketbase_category": "通讯与地图",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-EVACUATION-001",
+    "title": "撤离包不是搬家包",
+    "category": "避难转移",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“撤离包不是搬家包”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "避难转移",
+      "撤离包不是搬家包",
+      "撤离包不是搬",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "撤离包不是搬家包用于解释避难转移场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0586",
+        "DG-0587",
+        "DG-0588"
+      ]
+    },
+    "guide_links": [
+      "DG-0586",
+      "DG-0587",
+      "DG-0588"
+    ],
+    "kiwix_topics": [
+      "撤离包不是搬家包",
+      "避难转移",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-evacuation-001",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-EVACUATION-002",
+    "title": "负重和行动速度关系",
+    "category": "避难转移",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“负重和行动速度关系”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "避难转移",
+      "负重和行动速度关系",
+      "负重和行动速",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "负重和行动速度关系用于解释避难转移场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0586",
+        "DG-0587",
+        "DG-0588"
+      ]
+    },
+    "guide_links": [
+      "DG-0586",
+      "DG-0587",
+      "DG-0588"
+    ],
+    "kiwix_topics": [
+      "负重和行动速度关系",
+      "避难转移",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-evacuation-002",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-EVACUATION-003",
+    "title": "证件药品防水备份",
+    "category": "避难转移",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“证件药品防水备份”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "避难转移",
+      "证件药品防水备份",
+      "证件药品防水",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "证件药品防水备份用于解释避难转移场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0586",
+        "DG-0587",
+        "DG-0588"
+      ]
+    },
+    "guide_links": [
+      "DG-0586",
+      "DG-0587",
+      "DG-0588"
+    ],
+    "kiwix_topics": [
+      "证件药品防水备份",
+      "避难转移",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-evacuation-003",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-EVACUATION-004",
+    "title": "集合点和备用集合点",
+    "category": "避难转移",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“集合点和备用集合点”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "避难转移",
+      "集合点和备用集合点",
+      "集合点和备用",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "集合点和备用集合点用于解释避难转移场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0586",
+        "DG-0587",
+        "DG-0588"
+      ]
+    },
+    "guide_links": [
+      "DG-0586",
+      "DG-0587",
+      "DG-0588"
+    ],
+    "kiwix_topics": [
+      "集合点和备用集合点",
+      "避难转移",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-evacuation-004",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-EVACUATION-005",
+    "title": "临时避难空间分区",
+    "category": "避难转移",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“临时避难空间分区”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "避难转移",
+      "临时避难空间分区",
+      "临时避难空间",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "临时避难空间分区用于解释避难转移场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0586",
+        "DG-0587",
+        "DG-0588"
+      ]
+    },
+    "guide_links": [
+      "DG-0586",
+      "DG-0587",
+      "DG-0588"
+    ],
+    "kiwix_topics": [
+      "临时避难空间分区",
+      "避难转移",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-evacuation-005",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-EVACUATION-006",
+    "title": "探路和路线标记原则",
+    "category": "避难转移",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“探路和路线标记原则”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "避难转移",
+      "探路和路线标记原则",
+      "探路和路线标",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "探路和路线标记原则用于解释避难转移场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0586",
+        "DG-0587",
+        "DG-0588"
+      ]
+    },
+    "guide_links": [
+      "DG-0586",
+      "DG-0587",
+      "DG-0588"
+    ],
+    "kiwix_topics": [
+      "探路和路线标记原则",
+      "避难转移",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-evacuation-006",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-EVACUATION-007",
+    "title": "放弃物资的保人优先",
+    "category": "避难转移",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“放弃物资的保人优先”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "避难转移",
+      "放弃物资的保人优先",
+      "放弃物资的保",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "放弃物资的保人优先用于解释避难转移场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0586",
+        "DG-0587",
+        "DG-0588"
+      ]
+    },
+    "guide_links": [
+      "DG-0586",
+      "DG-0587",
+      "DG-0588"
+    ],
+    "kiwix_topics": [
+      "放弃物资的保人优先",
+      "避难转移",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-evacuation-007",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-EVACUATION-008",
+    "title": "洪水转移的时间窗口",
+    "category": "避难转移",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“洪水转移的时间窗口”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "避难转移",
+      "洪水转移的时间窗口",
+      "洪水转移的时",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "洪水转移的时间窗口用于解释避难转移场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0586",
+        "DG-0587",
+        "DG-0588"
+      ]
+    },
+    "guide_links": [
+      "DG-0586",
+      "DG-0587",
+      "DG-0588"
+    ],
+    "kiwix_topics": [
+      "洪水转移的时间窗口",
+      "避难转移",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-evacuation-008",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-EVACUATION-009",
+    "title": "儿童老人转移风险",
+    "category": "避难转移",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“儿童老人转移风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "避难转移",
+      "儿童老人转移风险",
+      "儿童老人转移",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "儿童老人转移风险用于解释避难转移场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0586",
+        "DG-0587",
+        "DG-0588"
+      ]
+    },
+    "guide_links": [
+      "DG-0586",
+      "DG-0587",
+      "DG-0588"
+    ],
+    "kiwix_topics": [
+      "儿童老人转移风险",
+      "避难转移",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-evacuation-009",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-EVACUATION-010",
+    "title": "撤离后的复盘记录",
+    "category": "避难转移",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“撤离后的复盘记录”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "避难转移",
+      "撤离后的复盘记录",
+      "撤离后的复盘",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "撤离后的复盘记录用于解释避难转移场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0586",
+        "DG-0587",
+        "DG-0588"
+      ]
+    },
+    "guide_links": [
+      "DG-0586",
+      "DG-0587",
+      "DG-0588"
+    ],
+    "kiwix_topics": [
+      "撤离后的复盘记录",
+      "避难转移",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-evacuation-010",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FIRE-001",
+    "title": "一氧化碳为什么危险",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“一氧化碳为什么危险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "一氧化碳危险",
+      "一氧化碳为什",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "一氧化碳为什么危险用于解释火源 / 保温 / 通风 / 一氧化碳风险场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0591",
+        "DG-0592",
+        "DG-0593"
+      ]
+    },
+    "guide_links": [
+      "DG-0591",
+      "DG-0592",
+      "DG-0593"
+    ],
+    "kiwix_topics": [
+      "一氧化碳为什么危险",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-fire-001",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FIRE-002",
+    "title": "燃烧和通风关系",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“燃烧和通风关系”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "燃烧和通风关系",
+      "燃烧和通风关",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "燃烧和通风关系用于解释火源 / 保温 / 通风 / 一氧化碳风险场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0591",
+        "DG-0592",
+        "DG-0593"
+      ]
+    },
+    "guide_links": [
+      "DG-0591",
+      "DG-0592",
+      "DG-0593"
+    ],
+    "kiwix_topics": [
+      "燃烧和通风关系",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-fire-002",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FIRE-003",
+    "title": "蜡烛火灾风险",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“蜡烛火灾风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "蜡烛火灾风险",
+      "蜡烛火灾风险",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "蜡烛火灾风险用于解释火源 / 保温 / 通风 / 一氧化碳风险场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0591",
+        "DG-0592",
+        "DG-0593"
+      ]
+    },
+    "guide_links": [
+      "DG-0591",
+      "DG-0592",
+      "DG-0593"
+    ],
+    "kiwix_topics": [
+      "蜡烛火灾风险",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-fire-003",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FIRE-004",
+    "title": "酒精炉燃料和倾倒风险",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“酒精炉燃料和倾倒风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "酒精炉燃料和倾倒风险",
+      "酒精炉燃料和",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "酒精炉燃料和倾倒风险用于解释火源 / 保温 / 通风 / 一氧化碳风险场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0591",
+        "DG-0592",
+        "DG-0593"
+      ]
+    },
+    "guide_links": [
+      "DG-0591",
+      "DG-0592",
+      "DG-0593"
+    ],
+    "kiwix_topics": [
+      "酒精炉燃料和倾倒风险",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-fire-004",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FIRE-005",
+    "title": "低温失温基础",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“低温失温基础”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "低温失温基础",
+      "低温失温基础",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "低温失温基础用于解释火源 / 保温 / 通风 / 一氧化碳风险场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0591",
+        "DG-0592",
+        "DG-0593"
+      ]
+    },
+    "guide_links": [
+      "DG-0591",
+      "DG-0592",
+      "DG-0593"
+    ],
+    "kiwix_topics": [
+      "低温失温基础",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-fire-005",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FIRE-006",
+    "title": "衣物分层保温原理",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“衣物分层保温原理”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "衣物分层保温原理",
+      "衣物分层保温",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "衣物分层保温原理用于解释火源 / 保温 / 通风 / 一氧化碳风险场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0591",
+        "DG-0592",
+        "DG-0593"
+      ]
+    },
+    "guide_links": [
+      "DG-0591",
+      "DG-0592",
+      "DG-0593"
+    ],
+    "kiwix_topics": [
+      "衣物分层保温原理",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-fire-006",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FIRE-007",
+    "title": "烟雾吸入和撤离边界",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“烟雾吸入和撤离边界”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "烟雾吸入和撤离边界",
+      "烟雾吸入和撤",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "烟雾吸入和撤离边界用于解释火源 / 保温 / 通风 / 一氧化碳风险场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0591",
+        "DG-0592",
+        "DG-0593"
+      ]
+    },
+    "guide_links": [
+      "DG-0591",
+      "DG-0592",
+      "DG-0593"
+    ],
+    "kiwix_topics": [
+      "烟雾吸入和撤离边界",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-fire-007",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FIRE-008",
+    "title": "室内取暖的禁用场景",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "risk_level": "high",
+    "summary": "解释“室内取暖的禁用场景”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "室内取暖的禁用场景",
+      "室内取暖的禁",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "室内取暖的禁用场景用于解释火源 / 保温 / 通风 / 一氧化碳风险场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0591",
+        "DG-0592",
+        "DG-0593"
+      ]
+    },
+    "guide_links": [
+      "DG-0591",
+      "DG-0592",
+      "DG-0593"
+    ],
+    "kiwix_topics": [
+      "室内取暖的禁用场景",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-fire-008",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FIRE-009",
+    "title": "明火照明的睡前风险",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“明火照明的睡前风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "明火照明的睡前风险",
+      "明火照明的睡",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "明火照明的睡前风险用于解释火源 / 保温 / 通风 / 一氧化碳风险场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0591",
+        "DG-0592",
+        "DG-0593"
+      ]
+    },
+    "guide_links": [
+      "DG-0591",
+      "DG-0592",
+      "DG-0593"
+    ],
+    "kiwix_topics": [
+      "明火照明的睡前风险",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-fire-009",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  },
+  {
+    "id": "WIKI-P0-FIRE-010",
+    "title": "潮湿寒冷对体温的影响",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "risk_level": "caution",
+    "summary": "解释“潮湿寒冷对体温的影响”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。",
+    "keywords": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "潮湿寒冷对体温的影响",
+      "潮湿寒冷对体",
+      "P0",
+      "长期生存"
+    ],
+    "content": {
+      "principle": [
+        "潮湿寒冷对体温的影响用于解释火源 / 保温 / 通风 / 一氧化碳风险场景中的核心风险和判断依据。",
+        "先理解风险来源，再选择对应 Guide 行动卡。",
+        "高风险情况下，本地 Guide 的停止线优先于广域背景知识。"
+      ],
+      "judgement": [
+        "看对象、状态、时间、人员脆弱性和环境变化。",
+        "出现持续恶化、污染扩散、人员意识异常、火水电烟等信号时按高风险处理。",
+        "无法确认安全时选择保守方案，不用尝试证明可用。"
+      ],
+      "boundaries": [
+        "Wiki 只解释判断，不替代现场行动卡。",
+        "条件不足时优先降低暴露、减少消耗和保护人员。",
+        "Kiwix/ZIM 后续只作为背景补充，不覆盖本地 Guide。"
+      ],
+      "common_mistakes": [
+        "只凭感觉判断，不记录时间和变化。",
+        "为了节省资源忽略停止线。",
+        "把低风险经验套用到污染、火源、电力或伤病场景。"
+      ],
+      "guide_links": [
+        "DG-0591",
+        "DG-0592",
+        "DG-0593"
+      ]
+    },
+    "guide_links": [
+      "DG-0591",
+      "DG-0592",
+      "DG-0593"
+    ],
+    "kiwix_topics": [
+      "潮湿寒冷对体温的影响",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "Emergency preparedness",
+      "Survival skills"
+    ],
+    "source": "LanternBox internal curated knowledge",
+    "last_reviewed": "2026-07-01",
+    "slug": "p0-fire-010",
+    "pocketbase_category": "居住与避难",
+    "status": "published"
+  }
+]

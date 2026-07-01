@@ -29538,7 +29538,17 @@
       "敲击",
       "出发时间",
       "方向",
-      "目的地"
+      "目的地",
+      "网络断了",
+      "网络也断了",
+      "家人联系",
+      "保持通讯计划",
+      "怎么和家人保持通讯计划",
+      "手机无信号",
+      "无信号",
+      "固定开机窗口",
+      "纸条留言",
+      "下次联系时间"
     ],
     "negative_keywords": [
       "插线板",
@@ -29554,7 +29564,10 @@
       "断网通讯计划",
       "手机没信号",
       "家庭通讯计划",
-      "集合约定"
+      "集合约定",
+      "手机没信号网络也断了",
+      "怎么和家人保持通讯计划",
+      "断网后联系家人"
     ]
   },
   {
@@ -29630,6 +29643,2969 @@
       "食物残渣发臭",
       "垃圾防虫",
       "垃圾异味管理"
+    ]
+  },
+  {
+    "id": "DG-0551",
+    "title": "饮用水只够一天：用途排序和配给",
+    "category": "水与食物保障",
+    "category_original": "水与食物保障",
+    "domains": [
+      "water"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "water_p0"
+    ],
+    "objects": [
+      "饮用水",
+      "只够一天",
+      "配给",
+      "用水优先级",
+      "缺水"
+    ],
+    "signals": [
+      "配给",
+      "用水优先级",
+      "缺水",
+      "水量紧张"
+    ],
+    "risks": [
+      "用药",
+      "高温",
+      "消耗控制"
+    ],
+    "keywords": [
+      "饮用水",
+      "只够一天",
+      "配给",
+      "用水优先级",
+      "缺水",
+      "水量紧张",
+      "用药",
+      "高温",
+      "消耗控制",
+      "饮用水只够一天：用途排序和配给",
+      "水与食物保障",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "water",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "饮用水只够一天：用途排序和配给",
+      "饮用水",
+      "只够一天",
+      "配给",
+      "用水优先级"
+    ]
+  },
+  {
+    "id": "DG-0552",
+    "title": "停水后第一小时：容器收集和分区",
+    "category": "水与食物保障",
+    "category_original": "水与食物保障",
+    "domains": [
+      "water"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "water_p0"
+    ],
+    "objects": [
+      "停水",
+      "第一小时",
+      "容器",
+      "收集",
+      "分区"
+    ],
+    "signals": [
+      "容器",
+      "收集",
+      "分区",
+      "饮用水"
+    ],
+    "risks": [
+      "清洁水",
+      "冲厕",
+      "标记"
+    ],
+    "keywords": [
+      "停水",
+      "第一小时",
+      "容器",
+      "收集",
+      "分区",
+      "饮用水",
+      "清洁水",
+      "冲厕",
+      "标记",
+      "停水后第一小时：容器收集和分区",
+      "水与食物保障",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "water",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "停水后第一小时：容器收集和分区",
+      "停水",
+      "第一小时",
+      "容器",
+      "收集"
+    ]
+  },
+  {
+    "id": "DG-0553",
+    "title": "可疑水源：过滤、煮沸和禁用判断",
+    "category": "水与食物保障",
+    "category_original": "水与食物保障",
+    "domains": [
+      "water"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "water_p0"
+    ],
+    "objects": [
+      "可疑水源",
+      "过滤",
+      "煮沸",
+      "禁用",
+      "浑浊"
+    ],
+    "signals": [
+      "煮沸",
+      "禁用",
+      "浑浊",
+      "异味"
+    ],
+    "risks": [
+      "油膜",
+      "化学污染",
+      "水质"
+    ],
+    "keywords": [
+      "可疑水源",
+      "过滤",
+      "煮沸",
+      "禁用",
+      "浑浊",
+      "异味",
+      "油膜",
+      "化学污染",
+      "水质",
+      "可疑水源：过滤、煮沸和禁用判断",
+      "水与食物保障",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "water",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "可疑水源：过滤、煮沸和禁用判断",
+      "可疑水源",
+      "过滤",
+      "煮沸",
+      "禁用"
+    ]
+  },
+  {
+    "id": "DG-0554",
+    "title": "高温缺水：补水、降温和观察",
+    "category": "水与食物保障",
+    "category_original": "水与食物保障",
+    "domains": [
+      "water"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "water_p0"
+    ],
+    "objects": [
+      "高温",
+      "缺水",
+      "补水",
+      "降温",
+      "脱水"
+    ],
+    "signals": [
+      "补水",
+      "降温",
+      "脱水",
+      "老人"
+    ],
+    "risks": [
+      "出汗",
+      "观察",
+      "热伤害"
+    ],
+    "keywords": [
+      "高温",
+      "缺水",
+      "补水",
+      "降温",
+      "脱水",
+      "老人",
+      "出汗",
+      "观察",
+      "热伤害",
+      "高温缺水：补水、降温和观察",
+      "水与食物保障",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "water",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "高温缺水：补水、降温和观察",
+      "高温",
+      "缺水",
+      "补水",
+      "降温"
+    ]
+  },
+  {
+    "id": "DG-0555",
+    "title": "储水容器污染：清洗、降级和报废判断",
+    "category": "水与食物保障",
+    "category_original": "水与食物保障",
+    "domains": [
+      "water"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "water_p0"
+    ],
+    "objects": [
+      "储水容器",
+      "污染",
+      "清洗",
+      "降级",
+      "报废"
+    ],
+    "signals": [
+      "清洗",
+      "降级",
+      "报废",
+      "异味"
+    ],
+    "risks": [
+      "霉点",
+      "油污",
+      "饮用水"
+    ],
+    "keywords": [
+      "储水容器",
+      "污染",
+      "清洗",
+      "降级",
+      "报废",
+      "异味",
+      "霉点",
+      "油污",
+      "饮用水",
+      "储水容器污染：清洗、降级和报废判断",
+      "水与食物保障",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "water",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "储水容器污染：清洗、降级和报废判断",
+      "储水容器",
+      "污染",
+      "清洗",
+      "降级"
+    ]
+  },
+  {
+    "id": "DG-0556",
+    "title": "直接压迫止血：从出血到固定",
+    "category": "医疗与照护",
+    "category_original": "医疗与照护",
+    "domains": [
+      "medical"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "medical_p0"
+    ],
+    "objects": [
+      "止血",
+      "直接压迫",
+      "出血",
+      "敷料",
+      "绷带"
+    ],
+    "signals": [
+      "出血",
+      "敷料",
+      "绷带",
+      "伤口"
+    ],
+    "risks": [
+      "伤口",
+      "固定",
+      "急救"
+    ],
+    "keywords": [
+      "止血",
+      "直接压迫",
+      "出血",
+      "敷料",
+      "绷带",
+      "伤口",
+      "固定",
+      "急救",
+      "直接压迫止血：从出血到固定",
+      "医疗与照护",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "直接压迫止血：从出血到固定",
+      "止血",
+      "直接压迫",
+      "出血",
+      "敷料"
+    ]
+  },
+  {
+    "id": "DG-0557",
+    "title": "小伤口清洁与覆盖",
+    "category": "医疗与照护",
+    "category_original": "医疗与照护",
+    "domains": [
+      "medical"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "medical_p0"
+    ],
+    "objects": [
+      "小伤口",
+      "清洁",
+      "覆盖",
+      "感染",
+      "擦伤"
+    ],
+    "signals": [
+      "覆盖",
+      "感染",
+      "擦伤",
+      "割伤"
+    ],
+    "risks": [
+      "割伤",
+      "敷料",
+      "红肿"
+    ],
+    "keywords": [
+      "小伤口",
+      "清洁",
+      "覆盖",
+      "感染",
+      "擦伤",
+      "割伤",
+      "敷料",
+      "红肿",
+      "小伤口清洁与覆盖",
+      "医疗与照护",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "小伤口清洁与覆盖",
+      "小伤口",
+      "清洁",
+      "覆盖",
+      "感染"
+    ]
+  },
+  {
+    "id": "DG-0558",
+    "title": "发热观察、补水和记录",
+    "category": "医疗与照护",
+    "category_original": "医疗与照护",
+    "domains": [
+      "medical"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "medical_p0"
+    ],
+    "objects": [
+      "发热",
+      "补水",
+      "记录",
+      "体温",
+      "观察"
+    ],
+    "signals": [
+      "记录",
+      "体温",
+      "观察",
+      "咳嗽"
+    ],
+    "risks": [
+      "咳嗽",
+      "尿量",
+      "精神状态"
+    ],
+    "keywords": [
+      "发热",
+      "补水",
+      "记录",
+      "体温",
+      "观察",
+      "咳嗽",
+      "尿量",
+      "精神状态",
+      "发热观察、补水和记录",
+      "医疗与照护",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "发热观察、补水和记录",
+      "发热",
+      "补水",
+      "记录",
+      "体温"
+    ]
+  },
+  {
+    "id": "DG-0559",
+    "title": "腹泻与脱水观察",
+    "category": "医疗与照护",
+    "category_original": "医疗与照护",
+    "domains": [
+      "medical"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "medical_p0"
+    ],
+    "objects": [
+      "腹泻",
+      "脱水",
+      "呕吐",
+      "补液",
+      "尿量"
+    ],
+    "signals": [
+      "呕吐",
+      "补液",
+      "尿量",
+      "食物中毒"
+    ],
+    "risks": [
+      "食物中毒",
+      "隔离",
+      "粪便"
+    ],
+    "keywords": [
+      "腹泻",
+      "脱水",
+      "呕吐",
+      "补液",
+      "尿量",
+      "食物中毒",
+      "隔离",
+      "粪便",
+      "腹泻与脱水观察",
+      "医疗与照护",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "腹泻与脱水观察",
+      "腹泻",
+      "脱水",
+      "呕吐",
+      "补液"
+    ]
+  },
+  {
+    "id": "DG-0560",
+    "title": "烧烫伤冷却与覆盖",
+    "category": "医疗与照护",
+    "category_original": "医疗与照护",
+    "domains": [
+      "medical"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "medical_p0"
+    ],
+    "objects": [
+      "烧烫伤",
+      "冷却",
+      "覆盖",
+      "水泡",
+      "热水"
+    ],
+    "signals": [
+      "覆盖",
+      "水泡",
+      "热水",
+      "火焰"
+    ],
+    "risks": [
+      "火焰",
+      "烫伤",
+      "感染"
+    ],
+    "keywords": [
+      "烧烫伤",
+      "冷却",
+      "覆盖",
+      "水泡",
+      "热水",
+      "火焰",
+      "烫伤",
+      "感染",
+      "烧烫伤冷却与覆盖",
+      "医疗与照护",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "烧烫伤冷却与覆盖",
+      "烧烫伤",
+      "冷却",
+      "覆盖",
+      "水泡"
+    ]
+  },
+  {
+    "id": "DG-0561",
+    "title": "手机低电量：保通信模式",
+    "category": "能源照明与设备",
+    "category_original": "能源照明与设备",
+    "domains": [
+      "power"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "power_p0"
+    ],
+    "objects": [
+      "手机低电量",
+      "省电",
+      "保通信",
+      "固定时间",
+      "短信"
+    ],
+    "signals": [
+      "保通信",
+      "固定时间",
+      "短信",
+      "电话"
+    ],
+    "risks": [
+      "电话",
+      "飞行模式",
+      "联系人"
+    ],
+    "keywords": [
+      "手机低电量",
+      "省电",
+      "保通信",
+      "固定时间",
+      "短信",
+      "电话",
+      "飞行模式",
+      "联系人",
+      "手机低电量：保通信模式",
+      "能源照明与设备",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "手机低电量：保通信模式",
+      "手机低电量",
+      "省电",
+      "保通信",
+      "固定时间"
+    ]
+  },
+  {
+    "id": "DG-0562",
+    "title": "电池不足：照明分级使用",
+    "category": "能源照明与设备",
+    "category_original": "能源照明与设备",
+    "domains": [
+      "power"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "power_p0"
+    ],
+    "objects": [
+      "电池不足",
+      "照明",
+      "低亮",
+      "手电",
+      "头灯"
+    ],
+    "signals": [
+      "低亮",
+      "手电",
+      "头灯",
+      "分级"
+    ],
+    "risks": [
+      "分级",
+      "夜间",
+      "电量"
+    ],
+    "keywords": [
+      "电池不足",
+      "照明",
+      "低亮",
+      "手电",
+      "头灯",
+      "分级",
+      "夜间",
+      "电量",
+      "电池不足：照明分级使用",
+      "能源照明与设备",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "电池不足：照明分级使用",
+      "电池不足",
+      "照明",
+      "低亮",
+      "手电"
+    ]
+  },
+  {
+    "id": "DG-0563",
+    "title": "移动电源：关键设备优先级",
+    "category": "能源照明与设备",
+    "category_original": "能源照明与设备",
+    "domains": [
+      "power"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "power_p0"
+    ],
+    "objects": [
+      "移动电源",
+      "充电宝",
+      "关键设备",
+      "优先级",
+      "手机"
+    ],
+    "signals": [
+      "关键设备",
+      "优先级",
+      "手机",
+      "照明"
+    ],
+    "risks": [
+      "照明",
+      "电量",
+      "充电记录"
+    ],
+    "keywords": [
+      "移动电源",
+      "充电宝",
+      "关键设备",
+      "优先级",
+      "手机",
+      "照明",
+      "电量",
+      "充电记录",
+      "移动电源：关键设备优先级",
+      "能源照明与设备",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "移动电源：关键设备优先级",
+      "移动电源",
+      "充电宝",
+      "关键设备",
+      "优先级"
+    ]
+  },
+  {
+    "id": "DG-0564",
+    "title": "太阳能充电：排程和保护",
+    "category": "能源照明与设备",
+    "category_original": "能源照明与设备",
+    "domains": [
+      "power"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "power_p0"
+    ],
+    "objects": [
+      "太阳能充电",
+      "太阳能板",
+      "排程",
+      "移动电源",
+      "防水"
+    ],
+    "signals": [
+      "排程",
+      "移动电源",
+      "防水",
+      "暴晒"
+    ],
+    "risks": [
+      "暴晒",
+      "充电保护",
+      "光照"
+    ],
+    "keywords": [
+      "太阳能充电",
+      "太阳能板",
+      "排程",
+      "移动电源",
+      "防水",
+      "暴晒",
+      "充电保护",
+      "光照",
+      "太阳能充电：排程和保护",
+      "能源照明与设备",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "太阳能充电：排程和保护",
+      "太阳能充电",
+      "太阳能板",
+      "排程",
+      "移动电源"
+    ]
+  },
+  {
+    "id": "DG-0565",
+    "title": "停电夜间：低亮照明布置",
+    "category": "能源照明与设备",
+    "category_original": "能源照明与设备",
+    "domains": [
+      "power"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "power_p0"
+    ],
+    "objects": [
+      "停电",
+      "夜间",
+      "低亮照明",
+      "路线",
+      "跌倒"
+    ],
+    "signals": [
+      "低亮照明",
+      "路线",
+      "跌倒",
+      "手电"
+    ],
+    "risks": [
+      "手电",
+      "反光",
+      "照明布置"
+    ],
+    "keywords": [
+      "停电",
+      "夜间",
+      "低亮照明",
+      "路线",
+      "跌倒",
+      "手电",
+      "反光",
+      "照明布置",
+      "停电夜间：低亮照明布置",
+      "能源照明与设备",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "停电夜间：低亮照明布置",
+      "停电",
+      "夜间",
+      "低亮照明",
+      "路线"
+    ]
+  },
+  {
+    "id": "DG-0566",
+    "title": "插线板和延长线进水后：隔离复核卡",
+    "category": "工具维修与替代",
+    "category_original": "工具维修与替代",
+    "domains": [
+      "repair"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "repair_p0"
+    ],
+    "objects": [
+      "插线板",
+      "延长线",
+      "进水",
+      "隔离",
+      "禁用"
+    ],
+    "signals": [
+      "进水",
+      "隔离",
+      "禁用",
+      "禁止通电"
+    ],
+    "risks": [
+      "禁止通电",
+      "报废",
+      "备用插排"
+    ],
+    "keywords": [
+      "插线板",
+      "延长线",
+      "进水",
+      "隔离",
+      "禁用",
+      "禁止通电",
+      "报废",
+      "备用插排",
+      "插线板和延长线进水后：隔离复核卡",
+      "工具维修与替代",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "插线板和延长线进水后：隔离复核卡",
+      "插线板",
+      "延长线",
+      "进水",
+      "隔离"
+    ]
+  },
+  {
+    "id": "DG-0567",
+    "title": "电线破皮：临时绝缘和停用判断",
+    "category": "工具维修与替代",
+    "category_original": "工具维修与替代",
+    "domains": [
+      "repair"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "repair_p0"
+    ],
+    "objects": [
+      "电线破皮",
+      "绝缘",
+      "停用",
+      "低压",
+      "市电"
+    ],
+    "signals": [
+      "停用",
+      "低压",
+      "市电",
+      "漏电"
+    ],
+    "risks": [
+      "漏电",
+      "短路",
+      "胶带"
+    ],
+    "keywords": [
+      "电线破皮",
+      "绝缘",
+      "停用",
+      "低压",
+      "市电",
+      "漏电",
+      "短路",
+      "胶带",
+      "电线破皮：临时绝缘和停用判断",
+      "工具维修与替代",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "电线破皮：临时绝缘和停用判断",
+      "电线破皮",
+      "绝缘",
+      "停用",
+      "低压"
+    ]
+  },
+  {
+    "id": "DG-0568",
+    "title": "水桶漏水：临时修补与降级用途",
+    "category": "工具维修与替代",
+    "category_original": "工具维修与替代",
+    "domains": [
+      "repair"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "repair_p0"
+    ],
+    "objects": [
+      "水桶漏水",
+      "容器修补",
+      "降级用途",
+      "饮用水",
+      "裂缝"
+    ],
+    "signals": [
+      "降级用途",
+      "饮用水",
+      "裂缝",
+      "胶带"
+    ],
+    "risks": [
+      "胶带",
+      "报废",
+      "储水"
+    ],
+    "keywords": [
+      "水桶漏水",
+      "容器修补",
+      "降级用途",
+      "饮用水",
+      "裂缝",
+      "胶带",
+      "报废",
+      "储水",
+      "水桶漏水：临时修补与降级用途",
+      "工具维修与替代",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "水桶漏水：临时修补与降级用途",
+      "水桶漏水",
+      "容器修补",
+      "降级用途",
+      "饮用水"
+    ]
+  },
+  {
+    "id": "DG-0569",
+    "title": "门窗松动：临时加固",
+    "category": "工具维修与替代",
+    "category_original": "工具维修与替代",
+    "domains": [
+      "repair"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "repair_p0"
+    ],
+    "objects": [
+      "门窗松动",
+      "临时加固",
+      "防风",
+      "防雨",
+      "低暴露"
+    ],
+    "signals": [
+      "防风",
+      "防雨",
+      "低暴露",
+      "玻璃"
+    ],
+    "risks": [
+      "玻璃",
+      "木条",
+      "绳子"
+    ],
+    "keywords": [
+      "门窗松动",
+      "临时加固",
+      "防风",
+      "防雨",
+      "低暴露",
+      "玻璃",
+      "木条",
+      "绳子",
+      "门窗松动：临时加固",
+      "工具维修与替代",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "门窗松动：临时加固",
+      "门窗松动",
+      "临时加固",
+      "防风",
+      "防雨"
+    ]
+  },
+  {
+    "id": "DG-0570",
+    "title": "背包雨衣鞋破损：临时修补",
+    "category": "工具维修与替代",
+    "category_original": "工具维修与替代",
+    "domains": [
+      "repair"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "repair_p0"
+    ],
+    "objects": [
+      "背包破损",
+      "雨衣破损",
+      "鞋破损",
+      "修补",
+      "防水"
+    ],
+    "signals": [
+      "鞋破损",
+      "修补",
+      "防水",
+      "承重"
+    ],
+    "risks": [
+      "承重",
+      "鞋袜",
+      "转移"
+    ],
+    "keywords": [
+      "背包破损",
+      "雨衣破损",
+      "鞋破损",
+      "修补",
+      "防水",
+      "承重",
+      "鞋袜",
+      "转移",
+      "背包雨衣鞋破损：临时修补",
+      "工具维修与替代",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "背包雨衣鞋破损：临时修补",
+      "背包破损",
+      "雨衣破损",
+      "鞋破损",
+      "修补"
+    ]
+  },
+  {
+    "id": "DG-0571",
+    "title": "厕所不能冲水：桶厕和覆盖材料",
+    "category": "卫生与清洁",
+    "category_original": "卫生与清洁",
+    "domains": [
+      "hygiene"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "hygiene_p0"
+    ],
+    "objects": [
+      "厕所不能冲水",
+      "桶厕",
+      "覆盖材料",
+      "灰土",
+      "粪便"
+    ],
+    "signals": [
+      "覆盖材料",
+      "灰土",
+      "粪便",
+      "停水"
+    ],
+    "risks": [
+      "停水",
+      "临时厕所",
+      "卫生"
+    ],
+    "keywords": [
+      "厕所不能冲水",
+      "桶厕",
+      "覆盖材料",
+      "灰土",
+      "粪便",
+      "停水",
+      "临时厕所",
+      "卫生",
+      "厕所不能冲水：桶厕和覆盖材料",
+      "卫生与清洁",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "厕所不能冲水：桶厕和覆盖材料",
+      "厕所不能冲水",
+      "桶厕",
+      "覆盖材料",
+      "灰土"
+    ]
+  },
+  {
+    "id": "DG-0572",
+    "title": "洗手用水不足：替代清洁流程",
+    "category": "卫生与清洁",
+    "category_original": "卫生与清洁",
+    "domains": [
+      "hygiene"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "hygiene_p0"
+    ],
+    "objects": [
+      "洗手用水不足",
+      "替代清洁",
+      "手卫生",
+      "少水",
+      "湿巾"
+    ],
+    "signals": [
+      "手卫生",
+      "少水",
+      "湿巾",
+      "肥皂"
+    ],
+    "risks": [
+      "肥皂",
+      "伤口",
+      "食物"
+    ],
+    "keywords": [
+      "洗手用水不足",
+      "替代清洁",
+      "手卫生",
+      "少水",
+      "湿巾",
+      "肥皂",
+      "伤口",
+      "食物",
+      "洗手用水不足：替代清洁流程",
+      "卫生与清洁",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "洗手用水不足：替代清洁流程",
+      "洗手用水不足",
+      "替代清洁",
+      "手卫生",
+      "少水"
+    ]
+  },
+  {
+    "id": "DG-0573",
+    "title": "湿垃圾和食物残渣：密封分离",
+    "category": "卫生与清洁",
+    "category_original": "卫生与清洁",
+    "domains": [
+      "hygiene"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "hygiene_p0"
+    ],
+    "objects": [
+      "湿垃圾",
+      "食物残渣",
+      "密封",
+      "干湿分离",
+      "防虫"
+    ],
+    "signals": [
+      "密封",
+      "干湿分离",
+      "防虫",
+      "异味"
+    ],
+    "risks": [
+      "异味",
+      "厨余",
+      "垃圾"
+    ],
+    "keywords": [
+      "湿垃圾",
+      "食物残渣",
+      "密封",
+      "干湿分离",
+      "防虫",
+      "异味",
+      "厨余",
+      "垃圾",
+      "湿垃圾和食物残渣：密封分离",
+      "卫生与清洁",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "湿垃圾和食物残渣：密封分离",
+      "湿垃圾",
+      "食物残渣",
+      "密封",
+      "干湿分离"
+    ]
+  },
+  {
+    "id": "DG-0574",
+    "title": "呕吐物和粪便污染：隔离清洁",
+    "category": "卫生与清洁",
+    "category_original": "卫生与清洁",
+    "domains": [
+      "hygiene"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "hygiene_p0"
+    ],
+    "objects": [
+      "呕吐物",
+      "粪便污染",
+      "隔离",
+      "清洁",
+      "腹泻"
+    ],
+    "signals": [
+      "隔离",
+      "清洁",
+      "腹泻",
+      "污染区"
+    ],
+    "risks": [
+      "污染区",
+      "密封",
+      "手套"
+    ],
+    "keywords": [
+      "呕吐物",
+      "粪便污染",
+      "隔离",
+      "清洁",
+      "腹泻",
+      "污染区",
+      "密封",
+      "手套",
+      "呕吐物和粪便污染：隔离清洁",
+      "卫生与清洁",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "呕吐物和粪便污染：隔离清洁",
+      "呕吐物",
+      "粪便污染",
+      "隔离",
+      "清洁"
+    ]
+  },
+  {
+    "id": "DG-0575",
+    "title": "室内异味和霉味：通风干燥判断",
+    "category": "卫生与清洁",
+    "category_original": "卫生与清洁",
+    "domains": [
+      "hygiene"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "hygiene_p0"
+    ],
+    "objects": [
+      "室内异味",
+      "霉味",
+      "通风",
+      "干燥",
+      "污染判断"
+    ],
+    "signals": [
+      "通风",
+      "干燥",
+      "污染判断",
+      "腐败"
+    ],
+    "risks": [
+      "腐败",
+      "潮湿",
+      "气味"
+    ],
+    "keywords": [
+      "室内异味",
+      "霉味",
+      "通风",
+      "干燥",
+      "污染判断",
+      "腐败",
+      "潮湿",
+      "气味",
+      "室内异味和霉味：通风干燥判断",
+      "卫生与清洁",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "室内异味和霉味：通风干燥判断",
+      "室内异味",
+      "霉味",
+      "通风",
+      "干燥"
+    ]
+  },
+  {
+    "id": "DG-0576",
+    "title": "燃气味或疑似泄漏：低暴露撤离卡",
+    "category": "安全与风险",
+    "category_original": "安全与风险",
+    "domains": [
+      "security"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "security_p0"
+    ],
+    "objects": [
+      "燃气味",
+      "泄漏",
+      "不要点火",
+      "禁止明火",
+      "开关电器"
+    ],
+    "signals": [
+      "不要点火",
+      "禁止明火",
+      "开关电器",
+      "蜡烛"
+    ],
+    "risks": [
+      "蜡烛",
+      "酒精炉",
+      "撤离"
+    ],
+    "keywords": [
+      "燃气味",
+      "泄漏",
+      "不要点火",
+      "禁止明火",
+      "开关电器",
+      "蜡烛",
+      "酒精炉",
+      "撤离",
+      "燃气味或疑似泄漏：低暴露撤离卡",
+      "安全与风险",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "security",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "燃气味或疑似泄漏：低暴露撤离卡",
+      "燃气味",
+      "泄漏",
+      "不要点火",
+      "禁止明火"
+    ]
+  },
+  {
+    "id": "DG-0577",
+    "title": "夜间外部异响：观察与记录",
+    "category": "安全与风险",
+    "category_original": "安全与风险",
+    "domains": [
+      "security"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "security_p0"
+    ],
+    "objects": [
+      "夜间",
+      "外部异响",
+      "门外",
+      "敲门",
+      "观察"
+    ],
+    "signals": [
+      "门外",
+      "敲门",
+      "观察",
+      "不暴露"
+    ],
+    "risks": [
+      "不暴露",
+      "低声说话",
+      "记录"
+    ],
+    "keywords": [
+      "夜间",
+      "外部异响",
+      "门外",
+      "敲门",
+      "观察",
+      "不暴露",
+      "低声说话",
+      "记录",
+      "夜间外部异响：观察与记录",
+      "安全与风险",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "security",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "夜间外部异响：观察与记录",
+      "夜间",
+      "外部异响",
+      "门外",
+      "敲门"
+    ]
+  },
+  {
+    "id": "DG-0578",
+    "title": "洪水来临前：撤高断电复核",
+    "category": "安全与风险",
+    "category_original": "安全与风险",
+    "domains": [
+      "security"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "security_p0"
+    ],
+    "objects": [
+      "洪水",
+      "暴雨",
+      "水位上涨",
+      "撤高",
+      "断电"
+    ],
+    "signals": [
+      "水位上涨",
+      "撤高",
+      "断电",
+      "积水"
+    ],
+    "risks": [
+      "积水",
+      "触电",
+      "转移"
+    ],
+    "keywords": [
+      "洪水",
+      "暴雨",
+      "水位上涨",
+      "撤高",
+      "断电",
+      "积水",
+      "触电",
+      "转移",
+      "洪水来临前：撤高断电复核",
+      "安全与风险",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "security",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "洪水来临前：撤高断电复核",
+      "洪水",
+      "暴雨",
+      "水位上涨",
+      "撤高"
+    ]
+  },
+  {
+    "id": "DG-0579",
+    "title": "火灾初期：撤离优先和小火边界",
+    "category": "安全与风险",
+    "category_original": "安全与风险",
+    "domains": [
+      "security"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "security_p0"
+    ],
+    "objects": [
+      "火灾初期",
+      "小火",
+      "撤离优先",
+      "浓烟",
+      "电器火"
+    ],
+    "signals": [
+      "撤离优先",
+      "浓烟",
+      "电器火",
+      "灭火边界"
+    ],
+    "risks": [
+      "灭火边界",
+      "焦味",
+      "复燃"
+    ],
+    "keywords": [
+      "火灾初期",
+      "小火",
+      "撤离优先",
+      "浓烟",
+      "电器火",
+      "灭火边界",
+      "焦味",
+      "复燃",
+      "火灾初期：撤离优先和小火边界",
+      "安全与风险",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "security",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "火灾初期：撤离优先和小火边界",
+      "火灾初期",
+      "小火",
+      "撤离优先",
+      "浓烟"
+    ]
+  },
+  {
+    "id": "DG-0580",
+    "title": "门窗受损：临时加固与低暴露",
+    "category": "安全与风险",
+    "category_original": "安全与风险",
+    "domains": [
+      "security"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "security_p0"
+    ],
+    "objects": [
+      "门窗受损",
+      "临时加固",
+      "低暴露",
+      "遮挡",
+      "玻璃"
+    ],
+    "signals": [
+      "低暴露",
+      "遮挡",
+      "玻璃",
+      "防雨"
+    ],
+    "risks": [
+      "防雨",
+      "防风",
+      "安全"
+    ],
+    "keywords": [
+      "门窗受损",
+      "临时加固",
+      "低暴露",
+      "遮挡",
+      "玻璃",
+      "防雨",
+      "防风",
+      "安全",
+      "门窗受损：临时加固与低暴露",
+      "安全与风险",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "security",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "门窗受损：临时加固与低暴露",
+      "门窗受损",
+      "临时加固",
+      "低暴露",
+      "遮挡"
+    ]
+  },
+  {
+    "id": "DG-0581",
+    "title": "手机没信号网络断了：家庭通讯计划和集合留言",
+    "category": "通讯与记录",
+    "category_original": "通讯与记录",
+    "domains": [
+      "comms"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "comms_p0"
+    ],
+    "objects": [
+      "手机没信号",
+      "网络断了",
+      "家人",
+      "通讯计划",
+      "集合点"
+    ],
+    "signals": [
+      "断网",
+      "断信号",
+      "失联",
+      "分开行动",
+      "无法联系"
+    ],
+    "risks": [
+      "失联",
+      "盲目寻找",
+      "电量耗尽"
+    ],
+    "keywords": [
+      "手机没信号",
+      "网络断了",
+      "断网",
+      "断信号",
+      "家人联系",
+      "保持通讯计划",
+      "家庭通讯计划",
+      "通讯计划",
+      "集合点",
+      "备用集合点",
+      "纸条留言",
+      "留言",
+      "固定开机",
+      "下次联系时间",
+      "分开行动",
+      "预计返回时间",
+      "失联",
+      "手机没信号网络也断了",
+      "怎么和家人保持通讯计划"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "手机没信号网络断了",
+      "断网断信号家庭通讯计划",
+      "怎么和家人保持通讯计划",
+      "家庭通讯计划",
+      "集合点留言"
+    ]
+  },
+  {
+    "id": "DG-0582",
+    "title": "手机低电量：固定时间开机联系",
+    "category": "通讯与记录",
+    "category_original": "通讯与记录",
+    "domains": [
+      "comms"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "comms_p0"
+    ],
+    "objects": [
+      "手机低电量",
+      "固定时间",
+      "开机联系",
+      "短信",
+      "位置"
+    ],
+    "signals": [
+      "开机联系",
+      "短信",
+      "位置",
+      "下次开机"
+    ],
+    "risks": [
+      "下次开机",
+      "省电",
+      "家人"
+    ],
+    "keywords": [
+      "手机低电量",
+      "固定时间",
+      "开机联系",
+      "短信",
+      "位置",
+      "下次开机",
+      "省电",
+      "家人",
+      "手机低电量：固定时间开机联系",
+      "通讯与记录",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "手机低电量：固定时间开机联系",
+      "手机低电量",
+      "固定时间",
+      "开机联系",
+      "短信"
+    ]
+  },
+  {
+    "id": "DG-0583",
+    "title": "近距离信号：哨子灯光敲击约定",
+    "category": "通讯与记录",
+    "category_original": "通讯与记录",
+    "domains": [
+      "comms"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "comms_p0"
+    ],
+    "objects": [
+      "近距离信号",
+      "哨子",
+      "灯光",
+      "敲击",
+      "约定"
+    ],
+    "signals": [
+      "灯光",
+      "敲击",
+      "约定",
+      "集合"
+    ],
+    "risks": [
+      "集合",
+      "危险信号",
+      "低暴露"
+    ],
+    "keywords": [
+      "近距离信号",
+      "哨子",
+      "灯光",
+      "敲击",
+      "约定",
+      "集合",
+      "危险信号",
+      "低暴露",
+      "近距离信号：哨子灯光敲击约定",
+      "通讯与记录",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "近距离信号：哨子灯光敲击约定",
+      "近距离信号",
+      "哨子",
+      "灯光",
+      "敲击"
+    ]
+  },
+  {
+    "id": "DG-0584",
+    "title": "纸条留言：位置格式和防水",
+    "category": "通讯与记录",
+    "category_original": "通讯与记录",
+    "domains": [
+      "comms"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "comms_p0"
+    ],
+    "objects": [
+      "纸条留言",
+      "留言位置",
+      "防水",
+      "时间",
+      "方向"
+    ],
+    "signals": [
+      "防水",
+      "时间",
+      "方向",
+      "目的地"
+    ],
+    "risks": [
+      "目的地",
+      "返回时间",
+      "离线通讯"
+    ],
+    "keywords": [
+      "纸条留言",
+      "留言位置",
+      "防水",
+      "时间",
+      "方向",
+      "目的地",
+      "返回时间",
+      "离线通讯",
+      "纸条留言：位置格式和防水",
+      "通讯与记录",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "纸条留言：位置格式和防水",
+      "纸条留言",
+      "留言位置",
+      "防水",
+      "时间"
+    ]
+  },
+  {
+    "id": "DG-0585",
+    "title": "分开行动前：时间方向目的地记录",
+    "category": "通讯与记录",
+    "category_original": "通讯与记录",
+    "domains": [
+      "comms"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "comms_p0"
+    ],
+    "objects": [
+      "分开行动",
+      "出发时间",
+      "方向",
+      "目的地",
+      "返回时间"
+    ],
+    "signals": [
+      "方向",
+      "目的地",
+      "返回时间",
+      "记录"
+    ],
+    "risks": [
+      "记录",
+      "探路",
+      "失联"
+    ],
+    "keywords": [
+      "分开行动",
+      "出发时间",
+      "方向",
+      "目的地",
+      "返回时间",
+      "记录",
+      "探路",
+      "失联",
+      "分开行动前：时间方向目的地记录",
+      "通讯与记录",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "分开行动前：时间方向目的地记录",
+      "分开行动",
+      "出发时间",
+      "方向",
+      "目的地"
+    ]
+  },
+  {
+    "id": "DG-0586",
+    "title": "转移避难前一晚：撤离包复核",
+    "category": "撤离交通与路线",
+    "category_original": "撤离交通与路线",
+    "domains": [
+      "evacuation"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "evacuation_p0"
+    ],
+    "objects": [
+      "转移避难",
+      "撤离包",
+      "随身物品",
+      "证件",
+      "药品"
+    ],
+    "signals": [
+      "随身物品",
+      "证件",
+      "药品",
+      "集合点"
+    ],
+    "risks": [
+      "集合点",
+      "充电宝",
+      "手电"
+    ],
+    "keywords": [
+      "转移避难",
+      "撤离包",
+      "随身物品",
+      "证件",
+      "药品",
+      "集合点",
+      "充电宝",
+      "手电",
+      "转移避难前一晚：撤离包复核",
+      "撤离交通与路线",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "evacuation",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "转移避难前一晚：撤离包复核",
+      "转移避难",
+      "撤离包",
+      "随身物品",
+      "证件"
+    ]
+  },
+  {
+    "id": "DG-0587",
+    "title": "必须转移时：水食物药品证件优先级",
+    "category": "撤离交通与路线",
+    "category_original": "撤离交通与路线",
+    "domains": [
+      "evacuation"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "evacuation_p0"
+    ],
+    "objects": [
+      "必须转移",
+      "水",
+      "食物",
+      "药品",
+      "证件"
+    ],
+    "signals": [
+      "食物",
+      "药品",
+      "证件",
+      "优先级"
+    ],
+    "risks": [
+      "优先级",
+      "随身",
+      "放弃物资"
+    ],
+    "keywords": [
+      "必须转移",
+      "水",
+      "食物",
+      "药品",
+      "证件",
+      "优先级",
+      "随身",
+      "放弃物资",
+      "必须转移时：水食物药品证件优先级",
+      "撤离交通与路线",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "evacuation",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "必须转移时：水食物药品证件优先级",
+      "必须转移",
+      "水",
+      "食物",
+      "药品"
+    ]
+  },
+  {
+    "id": "DG-0588",
+    "title": "临时避难空间：睡眠物资污染区划分",
+    "category": "撤离交通与路线",
+    "category_original": "撤离交通与路线",
+    "domains": [
+      "evacuation"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "evacuation_p0"
+    ],
+    "objects": [
+      "临时避难",
+      "睡眠区",
+      "物资区",
+      "污染区",
+      "空间分区"
+    ],
+    "signals": [
+      "物资区",
+      "污染区",
+      "空间分区",
+      "通道"
+    ],
+    "risks": [
+      "通道",
+      "交叉污染",
+      "避难点"
+    ],
+    "keywords": [
+      "临时避难",
+      "睡眠区",
+      "物资区",
+      "污染区",
+      "空间分区",
+      "通道",
+      "交叉污染",
+      "避难点",
+      "临时避难空间：睡眠物资污染区划分",
+      "撤离交通与路线",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "evacuation",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "临时避难空间：睡眠物资污染区划分",
+      "临时避难",
+      "睡眠区",
+      "物资区",
+      "污染区"
+    ]
+  },
+  {
+    "id": "DG-0589",
+    "title": "外出探路：返回时间和路线标记",
+    "category": "撤离交通与路线",
+    "category_original": "撤离交通与路线",
+    "domains": [
+      "evacuation"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "evacuation_p0"
+    ],
+    "objects": [
+      "外出探路",
+      "返回时间",
+      "路线标记",
+      "方向",
+      "目的地"
+    ],
+    "signals": [
+      "路线标记",
+      "方向",
+      "目的地",
+      "双人同行"
+    ],
+    "risks": [
+      "双人同行",
+      "风险",
+      "转移路线"
+    ],
+    "keywords": [
+      "外出探路",
+      "返回时间",
+      "路线标记",
+      "方向",
+      "目的地",
+      "双人同行",
+      "风险",
+      "转移路线",
+      "外出探路：返回时间和路线标记",
+      "撤离交通与路线",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "evacuation",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "外出探路：返回时间和路线标记",
+      "外出探路",
+      "返回时间",
+      "路线标记",
+      "方向"
+    ]
+  },
+  {
+    "id": "DG-0590",
+    "title": "放弃物资：保人优先判断",
+    "category": "撤离交通与路线",
+    "category_original": "撤离交通与路线",
+    "domains": [
+      "evacuation"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "evacuation_p0"
+    ],
+    "objects": [
+      "放弃物资",
+      "保人优先",
+      "减重",
+      "撤离",
+      "水"
+    ],
+    "signals": [
+      "减重",
+      "撤离",
+      "水",
+      "药品"
+    ],
+    "risks": [
+      "药品",
+      "证件",
+      "沉重物"
+    ],
+    "keywords": [
+      "放弃物资",
+      "保人优先",
+      "减重",
+      "撤离",
+      "水",
+      "药品",
+      "证件",
+      "沉重物",
+      "放弃物资：保人优先判断",
+      "撤离交通与路线",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "evacuation",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "放弃物资：保人优先判断",
+      "放弃物资",
+      "保人优先",
+      "减重",
+      "撤离"
+    ]
+  },
+  {
+    "id": "DG-0591",
+    "title": "室内取暖：通风和一氧化碳风险",
+    "category": "火源保温与通风",
+    "category_original": "火源保温与通风",
+    "domains": [
+      "shelter"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "shelter_p0"
+    ],
+    "objects": [
+      "室内取暖",
+      "通风",
+      "一氧化碳",
+      "保温",
+      "炭火"
+    ],
+    "signals": [
+      "一氧化碳",
+      "保温",
+      "炭火",
+      "炉具"
+    ],
+    "risks": [
+      "炉具",
+      "低温",
+      "头晕"
+    ],
+    "keywords": [
+      "室内取暖",
+      "通风",
+      "一氧化碳",
+      "保温",
+      "炭火",
+      "炉具",
+      "低温",
+      "头晕",
+      "室内取暖：通风和一氧化碳风险",
+      "火源保温与通风",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "室内取暖：通风和一氧化碳风险",
+      "室内取暖",
+      "通风",
+      "一氧化碳",
+      "保温"
+    ]
+  },
+  {
+    "id": "DG-0592",
+    "title": "蜡烛照明：防火间距和停止条件",
+    "category": "火源保温与通风",
+    "category_original": "火源保温与通风",
+    "domains": [
+      "shelter"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "shelter_p0"
+    ],
+    "objects": [
+      "蜡烛",
+      "照明",
+      "防火间距",
+      "停止条件",
+      "停电"
+    ],
+    "signals": [
+      "防火间距",
+      "停止条件",
+      "停电",
+      "明火"
+    ],
+    "risks": [
+      "明火",
+      "睡前",
+      "可燃物"
+    ],
+    "keywords": [
+      "蜡烛",
+      "照明",
+      "防火间距",
+      "停止条件",
+      "停电",
+      "明火",
+      "睡前",
+      "可燃物",
+      "蜡烛照明：防火间距和停止条件",
+      "火源保温与通风",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "蜡烛照明：防火间距和停止条件",
+      "蜡烛",
+      "照明",
+      "防火间距",
+      "停止条件"
+    ]
+  },
+  {
+    "id": "DG-0593",
+    "title": "酒精炉使用：通风防倾倒和禁用场景",
+    "category": "火源保温与通风",
+    "category_original": "火源保温与通风",
+    "domains": [
+      "shelter"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "shelter_p0"
+    ],
+    "objects": [
+      "酒精炉",
+      "通风",
+      "防倾倒",
+      "禁用",
+      "燃料"
+    ],
+    "signals": [
+      "防倾倒",
+      "禁用",
+      "燃料",
+      "明火"
+    ],
+    "risks": [
+      "明火",
+      "加热",
+      "烹饪"
+    ],
+    "keywords": [
+      "酒精炉",
+      "通风",
+      "防倾倒",
+      "禁用",
+      "燃料",
+      "明火",
+      "加热",
+      "烹饪",
+      "酒精炉使用：通风防倾倒和禁用场景",
+      "火源保温与通风",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "酒精炉使用：通风防倾倒和禁用场景",
+      "酒精炉",
+      "通风",
+      "防倾倒",
+      "禁用"
+    ]
+  },
+  {
+    "id": "DG-0594",
+    "title": "潮湿寒冷：衣物分层和睡眠保温",
+    "category": "火源保温与通风",
+    "category_original": "火源保温与通风",
+    "domains": [
+      "shelter"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "shelter_p0"
+    ],
+    "objects": [
+      "潮湿寒冷",
+      "衣物分层",
+      "睡眠保温",
+      "失温",
+      "湿衣"
+    ],
+    "signals": [
+      "睡眠保温",
+      "失温",
+      "湿衣",
+      "脚部"
+    ],
+    "risks": [
+      "脚部",
+      "保暖",
+      "地面隔离"
+    ],
+    "keywords": [
+      "潮湿寒冷",
+      "衣物分层",
+      "睡眠保温",
+      "失温",
+      "湿衣",
+      "脚部",
+      "保暖",
+      "地面隔离",
+      "潮湿寒冷：衣物分层和睡眠保温",
+      "火源保温与通风",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "潮湿寒冷：衣物分层和睡眠保温",
+      "潮湿寒冷",
+      "衣物分层",
+      "睡眠保温",
+      "失温"
+    ]
+  },
+  {
+    "id": "DG-0595",
+    "title": "烟雾进入室内：封堵通风和撤离判断",
+    "category": "火源保温与通风",
+    "category_original": "火源保温与通风",
+    "domains": [
+      "shelter"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "shelter_p0"
+    ],
+    "objects": [
+      "烟雾",
+      "室内",
+      "封堵",
+      "通风",
+      "撤离"
+    ],
+    "signals": [
+      "封堵",
+      "通风",
+      "撤离",
+      "一氧化碳"
+    ],
+    "risks": [
+      "一氧化碳",
+      "火灾",
+      "呼吸"
+    ],
+    "keywords": [
+      "烟雾",
+      "室内",
+      "封堵",
+      "通风",
+      "撤离",
+      "一氧化碳",
+      "火灾",
+      "呼吸",
+      "烟雾进入室内：封堵通风和撤离判断",
+      "火源保温与通风",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "烟雾进入室内：封堵通风和撤离判断",
+      "烟雾",
+      "室内",
+      "封堵",
+      "通风"
+    ]
+  },
+  {
+    "id": "DG-0596",
+    "title": "食物只够三天：基础配给",
+    "category": "水与食物保障",
+    "category_original": "水与食物保障",
+    "domains": [
+      "food"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "food_p0"
+    ],
+    "objects": [
+      "食物只够三天",
+      "口粮",
+      "配给",
+      "库存",
+      "主食"
+    ],
+    "signals": [
+      "配给",
+      "库存",
+      "主食",
+      "三天"
+    ],
+    "risks": [
+      "三天",
+      "消耗控制",
+      "食物不足"
+    ],
+    "keywords": [
+      "食物只够三天",
+      "口粮",
+      "配给",
+      "库存",
+      "主食",
+      "三天",
+      "消耗控制",
+      "食物不足",
+      "食物只够三天：基础配给",
+      "水与食物保障",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "food",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "食物只够三天：基础配给",
+      "食物只够三天",
+      "口粮",
+      "配给",
+      "库存"
+    ]
+  },
+  {
+    "id": "DG-0597",
+    "title": "无电冰箱后：食物优先食用顺序",
+    "category": "水与食物保障",
+    "category_original": "水与食物保障",
+    "domains": [
+      "food"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "food_p0"
+    ],
+    "objects": [
+      "停电",
+      "冰箱",
+      "无电冰箱",
+      "优先食用",
+      "易变质"
+    ],
+    "signals": [
+      "无电冰箱",
+      "优先食用",
+      "易变质",
+      "食物中毒"
+    ],
+    "risks": [
+      "食物中毒",
+      "冷藏",
+      "熟食"
+    ],
+    "keywords": [
+      "停电",
+      "冰箱",
+      "无电冰箱",
+      "优先食用",
+      "易变质",
+      "食物中毒",
+      "冷藏",
+      "熟食",
+      "无电冰箱后：食物优先食用顺序",
+      "水与食物保障",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "food",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "无电冰箱后：食物优先食用顺序",
+      "停电",
+      "冰箱",
+      "无电冰箱",
+      "优先食用"
+    ]
+  },
+  {
+    "id": "DG-0598",
+    "title": "罐头鼓包或异味：禁食判断",
+    "category": "水与食物保障",
+    "category_original": "水与食物保障",
+    "domains": [
+      "food"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "food_p0"
+    ],
+    "objects": [
+      "罐头",
+      "鼓包",
+      "异味",
+      "禁食",
+      "喷液"
+    ],
+    "signals": [
+      "异味",
+      "禁食",
+      "喷液",
+      "锈蚀"
+    ],
+    "risks": [
+      "锈蚀",
+      "真空包装",
+      "食物中毒"
+    ],
+    "keywords": [
+      "罐头",
+      "鼓包",
+      "异味",
+      "禁食",
+      "喷液",
+      "锈蚀",
+      "真空包装",
+      "食物中毒",
+      "罐头鼓包或异味：禁食判断",
+      "水与食物保障",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "food",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "罐头鼓包或异味：禁食判断",
+      "罐头",
+      "鼓包",
+      "异味",
+      "禁食"
+    ]
+  },
+  {
+    "id": "DG-0599",
+    "title": "主食不足：低体力消耗配给",
+    "category": "水与食物保障",
+    "category_original": "水与食物保障",
+    "domains": [
+      "food"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "food_p0"
+    ],
+    "objects": [
+      "主食不足",
+      "米",
+      "面",
+      "饼干",
+      "低体力"
+    ],
+    "signals": [
+      "面",
+      "饼干",
+      "低体力",
+      "配给"
+    ],
+    "risks": [
+      "配给",
+      "消耗",
+      "优先级"
+    ],
+    "keywords": [
+      "主食不足",
+      "米",
+      "面",
+      "饼干",
+      "低体力",
+      "配给",
+      "消耗",
+      "优先级",
+      "主食不足：低体力消耗配给",
+      "水与食物保障",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "food",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "主食不足：低体力消耗配给",
+      "主食不足",
+      "米",
+      "面",
+      "饼干"
+    ]
+  },
+  {
+    "id": "DG-0600",
+    "title": "食物残渣处理：防虫防臭和卫生",
+    "category": "水与食物保障",
+    "category_original": "水与食物保障",
+    "domains": [
+      "food"
+    ],
+    "intents": [
+      "p0_action_card"
+    ],
+    "situations": [
+      "food_p0"
+    ],
+    "objects": [
+      "食物残渣",
+      "湿垃圾",
+      "防虫",
+      "防臭",
+      "密封"
+    ],
+    "signals": [
+      "防虫",
+      "防臭",
+      "密封",
+      "干湿分离"
+    ],
+    "risks": [
+      "干湿分离",
+      "异味",
+      "卫生"
+    ],
+    "keywords": [
+      "食物残渣",
+      "湿垃圾",
+      "防虫",
+      "防臭",
+      "密封",
+      "干湿分离",
+      "异味",
+      "卫生",
+      "食物残渣处理：防虫防臭和卫生",
+      "水与食物保障",
+      "P0",
+      "长期生存"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "food",
+    "primary_intent": "p0_action_card",
+    "top1_aliases": [
+      "食物残渣处理：防虫防臭和卫生",
+      "食物残渣",
+      "湿垃圾",
+      "防虫",
+      "防臭"
     ]
   }
 ]

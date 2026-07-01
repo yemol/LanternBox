@@ -1,4 +1,3 @@
-import argparse
 import sys
 from pathlib import Path
 
@@ -32,74 +31,77 @@ QUESTIONS = [
 ]
 
 
-def candidate_type_counts(candidates):
-    counts = {}
-    for item in candidates:
-        counts[item.source_type] = counts.get(item.source_type, 0) + 1
-    return counts
+def selected_guides(result):
+    return [
+        item
+        for item in result.selected_evidence
+        if item.source_type == "guide"
+    ]
 
 
-def print_source_plan(source_plan):
-    for item in source_plan:
-        print(
-            "  -",
-            item.source_type,
-            "| query:",
-            item.query,
-            "| keywords:",
-            item.keywords,
-            "| limit:",
-            item.limit,
-        )
+def stability_score(core_terms, guides):
+    return int(bool(core_terms)) + int(bool(guides))
 
 
-def print_selected_evidence(selected_evidence):
-    if not selected_evidence:
+def print_result(question, result):
+    core_terms = getattr(result.plan, "core_terms", []) or []
+    guides = selected_guides(result)
+    score = stability_score(core_terms, guides)
+
+    print("=" * 80)
+    print("question:", question)
+    print("core_terms:", core_terms)
+    print("selected guides:")
+    if guides:
+        for item in guides:
+            print("  -", item.id, item.title)
+    else:
         print("  - none")
-        return
-
-    for item in selected_evidence:
-        print("  -", item.source_type, item.id, item.title)
-
-
-def print_full_result(question, result):
-    print("=" * 80)
-    print("question:", question)
-    print("scenario_summary:", result.plan.scenario_summary)
-    print("core_terms:", getattr(result.plan, "core_terms", []))
-    print("source_plan:")
-    print_source_plan(result.plan.source_plan)
-    print("candidate count:", len(result.candidates))
-    print("candidate types:", candidate_type_counts(result.candidates))
-    print("selected evidence:")
-    print_selected_evidence(result.selected_evidence)
+    print("score:", f"{score}/2")
     print()
 
+    return {
+        "question": question,
+        "score": score,
+        "core_terms_empty": not bool(core_terms),
+        "no_guide_selected": not bool(guides),
+    }
 
-def print_compact_result(question, result):
+
+def print_summary(rows):
+    core_terms_empty = [
+        item["question"]
+        for item in rows
+        if item["core_terms_empty"]
+    ]
+    no_guide_selected = [
+        item["question"]
+        for item in rows
+        if item["no_guide_selected"]
+    ]
+    total_score = sum(item["score"] for item in rows)
+    max_score = len(rows) * 2
+
     print("=" * 80)
-    print("question:", question)
-    print("core_terms:", getattr(result.plan, "core_terms", []))
-    print("selected evidence:")
-    print_selected_evidence(result.selected_evidence)
-    print()
+    print("summary")
+    print("cases:", len(rows))
+    print("total_score:", f"{total_score}/{max_score}")
+    print("average_score:", f"{(total_score / len(rows)):.2f}/2" if rows else "0.00/2")
+    print("core_terms_empty_count:", len(core_terms_empty))
+    for question in core_terms_empty:
+        print("  -", question)
+    print("no_guide_selected_count:", len(no_guide_selected))
+    for question in no_guide_selected:
+        print("  -", question)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run Retrieval v2 scenario checks.")
-    parser.add_argument(
-        "--compact",
-        action="store_true",
-        help="Only print question, core_terms, and selected evidence.",
-    )
-    args = parser.parse_args()
-
+    rows = []
     for question in QUESTIONS:
         result = run_retrieval_v2(question)
-        if args.compact:
-            print_compact_result(question, result)
-        else:
-            print_full_result(question, result)
+        rows.append(print_result(question, result))
+
+    print_summary(rows)
 
 
 if __name__ == "__main__":
