@@ -191,12 +191,22 @@
       box-shadow:
         0 16px 44px rgba(0, 0, 0, 0.22),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      transition: 0.16s ease;
     }
 
     .emergency-page .deep-guide-card {
       border-color: rgba(104, 199, 255, 0.28);
       background:
         linear-gradient(180deg, rgba(10, 32, 58, 0.94), rgba(7, 18, 36, 0.94));
+    }
+
+    .emergency-page .guide-card:hover {
+      border-color: var(--border-strong);
+      background:
+        linear-gradient(135deg, rgba(104, 199, 255, 0.12), rgba(255, 255, 255, 0.03)),
+        rgba(8, 22, 42, 0.92);
+      transform: translateY(-1px);
     }
 
     /* 卡片头部 */
@@ -249,122 +259,12 @@
       white-space: nowrap;
     }
 
-    /* 右侧按钮 */
-    .emergency-page .guide-card-actions {
-      display: flex;
-      align-items: flex-start;
-      flex-shrink: 0;
-    }
-
-    .emergency-page .guide-toggle-btn {
-      height: 34px;
-      min-width: 82px;
-      padding: 0 18px;
-      border-radius: 9px;
-      border: 1px solid rgba(255, 183, 92, 0.55);
-      background: linear-gradient(
-        180deg,
-        rgba(255, 159, 67, 0.96),
-        rgba(224, 112, 24, 0.96)
-      );
-      color: #fff8ed;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 700;
-      white-space: nowrap;
-      box-shadow: 0 6px 16px rgba(224, 112, 24, 0.22);
-      transition: 0.16s ease;
-    }
-
-    .emergency-page .guide-toggle-btn:hover {
-      background: linear-gradient(
-        180deg,
-        rgba(255, 178, 88, 1),
-        rgba(238, 126, 31, 1)
-      );
-      border-color: rgba(255, 207, 132, 0.72);
-      transform: translateY(-1px);
-    }
-
-    .emergency-page .guide-card.expanded .guide-toggle-btn {
-      border-color: rgba(116, 181, 255, 0.55);
-      background: linear-gradient(
-        180deg,
-        rgba(80, 168, 255, 0.95),
-        rgba(37, 111, 208, 0.95)
-      );
-      color: #eef8ff;
-      box-shadow: 0 6px 16px rgba(37, 111, 208, 0.24);
-    }
-
-    .emergency-page .guide-card.expanded .guide-toggle-btn:hover {
-      background: linear-gradient(
-        180deg,
-        rgba(112, 190, 255, 1),
-        rgba(48, 128, 225, 1)
-      );
-      border-color: rgba(154, 213, 255, 0.72);
-    }
-
     /* 摘要 */
     .emergency-page .guide-summary {
       margin-top: 8px;
       color: rgba(230, 244, 255, 0.72);
       line-height: 1.65;
       font-size: 14px;
-    }
-
-    /* 折叠内容 */
-    .emergency-page .guide-detail {
-      display: none;
-      margin-top: 10px;
-    }
-
-    .emergency-page .guide-card.expanded .guide-detail {
-      display: block;
-    }
-
-    /* 内容块 */
-    .emergency-page .guide-section {
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.045);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .emergency-page .guide-section h4 {
-      margin: 0 0 8px;
-      font-size: 15px;
-      color: #8dccff;
-    }
-
-    .emergency-page .guide-section p {
-      margin: 0;
-      color: #e7f2ff;
-      line-height: 1.75;
-      white-space: pre-wrap;
-    }
-
-    .emergency-page .guide-section ul,
-    .emergency-page .guide-section ol {
-      margin: 0;
-      padding-left: 22px;
-      color: #e7f2ff;
-      line-height: 1.75;
-    }
-
-    .emergency-page .guide-section li + li {
-      margin-top: 6px;
-    }
-
-    .emergency-page .guide-section ol li::marker {
-      color: #72baff;
-      font-weight: 700;
-    }
-
-    .emergency-page .guide-section ul li::marker {
-      color: #72baff;
     }
 
     /* 分页 */
@@ -454,14 +354,6 @@
         flex-direction: column;
       }
 
-      .emergency-page .guide-card-actions {
-        width: 100%;
-      }
-
-      .emergency-page .guide-toggle-btn {
-        width: 100%;
-      }
-
       .emergency-page .guide-title-row {
         align-items: flex-start;
       }
@@ -523,6 +415,21 @@
       <span class="page-indicator" id="pageIndicator">第 1 / 1 页</span>
       <button id="nextBtn">下一页</button>
     </nav>
+
+    <div id="guide-modal" class="guide-modal hidden">
+      <div class="guide-modal-backdrop" onclick="closeGuideModal()"></div>
+      <div class="guide-modal-card">
+        <div class="guide-modal-header">
+          <div>
+            <p id="guide-modal-id" class="guide-modal-id"></p>
+            <h2 id="guide-modal-title">指南标题</h2>
+            <p id="guide-modal-category" class="guide-modal-category"></p>
+          </div>
+          <button class="guide-modal-close" onclick="closeGuideModal()" type="button">关闭</button>
+        </div>
+        <div id="guide-modal-body" class="guide-modal-body"></div>
+      </div>
+    </div>
   </main>
 
   <script>
@@ -729,7 +636,7 @@
       const end = start + pageSize;
       const pageItems = filteredGuides.slice(start, end);
 
-      guideList.innerHTML = pageItems.map(renderGuideCard).join("");
+      guideList.innerHTML = pageItems.map((card, index) => renderGuideCard(card, start + index)).join("");
       updatePagination();
     }
 
@@ -756,7 +663,7 @@
       return Boolean(card.steps || card.goal || card.tools || card.check || card.common_mistakes || card.stop_or_escalate);
     }
 
-    function renderGuideCard(card) {
+    function renderGuideCard(card, index) {
       const isDeep = isDeepCard(card);
       const cardId = escapeHtml(card.id || "");
       const safeTitle = escapeHtml(card.title || "未命名指南");
@@ -765,7 +672,7 @@
 
       if (isDeep) {
         return `
-          <article class="guide-card deep-guide-card">
+          <article class="guide-card deep-guide-card" onclick="openGuideModalByIndex(${index})">
             <div class="guide-card-header">
               <div class="guide-card-main">
                 <div class="guide-id">${cardId}</div>
@@ -778,30 +685,13 @@
                 ${summary ? `<div class="guide-summary">${escapeHtml(summary)}</div>` : ""}
               </div>
 
-              <div class="guide-card-actions">
-                <button class="guide-toggle-btn" type="button" onclick="toggleGuideCard(this)">
-                  展开
-                </button>
-              </div>
-            </div>
-
-            <div class="guide-detail">
-              ${renderTextBlock("适用场景", card.scenario)}
-              ${renderTextBlock("目标", card.goal)}
-              ${renderListBlock("需要工具", card.tools)}
-              ${renderListBlock("具体步骤", card.steps, true)}
-              ${renderListBlock("如何判断做对了", card.check)}
-              ${renderListBlock("常见错误", card.common_mistakes)}
-              ${renderTextBlock("没有工具时怎么办", card.fallback)}
-              ${renderListBlock("什么时候停止 / 升级处理", card.stop_or_escalate)}
-              ${renderTextBlock("补充说明", card.notes)}
             </div>
           </article>
         `;
       }
 
       return `
-        <article class="guide-card">
+        <article class="guide-card" onclick="openGuideModalByIndex(${index})">
           <div class="guide-card-header">
             <div class="guide-card-main">
               <div class="guide-id">${cardId}</div>
@@ -814,35 +704,70 @@
               ${summary ? `<div class="guide-summary">${escapeHtml(summary)}</div>` : ""}
             </div>
 
-            <div class="guide-card-actions">
-              <button class="guide-toggle-btn" type="button" onclick="toggleGuideCard(this)">
-                展开
-              </button>
-            </div>
-          </div>
-
-          <div class="guide-detail">
-            ${renderTextBlock("适用场景", card.scenario)}
-            ${renderListBlock("先做什么", card.do_first)}
-            ${renderListBlock("不要做什么", card.avoid)}
-            ${renderListBlock("需要物品", card.items)}
-            ${renderTextBlock("观察重点", card.observe)}
           </div>
         </article>
       `;
     }
 
-    function renderTextBlock(label, value) {
+    function openGuideModalByIndex(index) {
+      const guide = filteredGuides[index];
+      if (!guide) return;
+      openGuideModal(guide);
+    }
+
+    function openGuideModal(guide) {
+      const modal = document.getElementById("guide-modal");
+      const modalId = document.getElementById("guide-modal-id");
+      const modalTitle = document.getElementById("guide-modal-title");
+      const modalCategory = document.getElementById("guide-modal-category");
+      const modalBody = document.getElementById("guide-modal-body");
+
+      modalId.textContent = guide.id ? `GUIDE · ${guide.id}` : "GUIDE";
+      modalTitle.textContent = guide.title || "未命名指南";
+      modalCategory.textContent = [
+        guide.category || "未分类",
+        guide.priority ? `优先级：${guide.priority}` : "",
+        guide.risk_level ? `风险：${guide.risk_level}` : ""
+      ].filter(Boolean).join(" · ");
+
+      modalBody.innerHTML = `
+        ${renderModalTextBlock("适用场景", guide.scenario)}
+        ${renderModalTextBlock("目标", guide.goal)}
+        ${renderModalListBlock("需要工具", guide.tools)}
+        ${renderModalListBlock("具体步骤", guide.steps, true)}
+        ${renderModalListBlock("如何判断做对了", guide.check)}
+        ${renderModalListBlock("常见错误", guide.common_mistakes)}
+        ${renderModalTextBlock("没有工具时怎么办", guide.fallback)}
+        ${renderModalListBlock("什么时候停止 / 升级处理", guide.stop_or_escalate)}
+        ${renderModalListBlock("先做什么", guide.do_first)}
+        ${renderModalListBlock("不要做什么", guide.avoid)}
+        ${renderModalListBlock("需要物品", guide.items)}
+        ${renderModalTextBlock("观察重点", guide.observe)}
+        ${renderModalTextBlock("补充说明", guide.notes)}
+      `;
+
+      modal.classList.remove("hidden");
+      document.body.classList.add("modal-open");
+      requestAnimationFrame(() => { modalBody.scrollTop = 0; });
+    }
+
+    function closeGuideModal() {
+      const modal = document.getElementById("guide-modal");
+      modal.classList.add("hidden");
+      document.body.classList.remove("modal-open");
+    }
+
+    function renderModalTextBlock(label, value) {
       if (!value) return "";
       return `
-        <section class="guide-section">
-          <h4>${escapeHtml(label)}</h4>
+        <section class="guide-modal-section">
+          <h3>${escapeHtml(label)}</h3>
           <p>${escapeHtml(value)}</p>
         </section>
       `;
     }
 
-    function renderListBlock(label, arr, ordered = false) {
+    function renderModalListBlock(label, arr, ordered = false) {
       if (!Array.isArray(arr) || arr.length === 0) return "";
 
       const tag = ordered ? "ol" : "ul";
@@ -851,8 +776,8 @@
         .join("");
 
       return `
-        <section class="guide-section">
-          <h4>${escapeHtml(label)}</h4>
+        <section class="guide-modal-section">
+          <h3>${escapeHtml(label)}</h3>
           <${tag}>${items}</${tag}>
         </section>
       `;
@@ -865,14 +790,6 @@
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
-    }
-
-    function toggleGuideCard(button) {
-      const card = button.closest(".guide-card");
-      if (!card) return;
-
-      const isExpanded = card.classList.toggle("expanded");
-      button.textContent = isExpanded ? "收起" : "展开";
     }
 
     function getGuideSummary(card) {
@@ -890,6 +807,10 @@
 
       return "";
     }
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeGuideModal();
+    });
   </script>
 </body>
 </html>
