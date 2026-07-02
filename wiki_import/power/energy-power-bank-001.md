@@ -2,6 +2,7 @@
 title: 移动电源安全边界
 slug: energy-power-bank-001
 category: 能源
+priority: P0
 summary: 安排电量分配、设备检查和停用记录；中风险条目，受潮、发热或鼓包时隔离停用。
 tags: 能源, 移动电源安全边界, 移动电源安全, P0, 长期生存
 risk_level: caution

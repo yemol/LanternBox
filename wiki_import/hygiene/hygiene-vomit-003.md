@@ -2,6 +2,7 @@
 title: 呕吐物粪便污染路径
 slug: hygiene-vomit-003
 category: 污染控制 / 隔离 / 清洁分区
+priority: P0
 summary: 按飞溅、手部、衣物和地面路径清理呕吐物；高风险条目，清理者不直接进入做饭照护。
 tags: 卫生, 呕吐物粪便污染路径, 呕吐物粪便污, P0, 长期生存
 risk_level: high

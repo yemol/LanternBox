@@ -2,6 +2,7 @@
 title: 蛋白质不足的风险
 slug: food-protein-002
 category: 食物
+priority: P0
 summary: 提示单调饮食下蛋白、盐分和体力下降风险；中风险条目，优先选择低风险蛋白来源而非冒险取食。
 tags: 食物, 蛋白质不足的风险, 蛋白质不足的, P0, 长期生存
 risk_level: caution

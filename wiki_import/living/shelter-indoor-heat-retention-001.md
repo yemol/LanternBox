@@ -2,6 +2,7 @@
 title: 室内保温基础
 slug: shelter-indoor-heat-retention-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
+priority: P0
 summary: 封堵冷风、集中活动和分层保温；中风险条目，警惕燃烧取暖的一氧化碳风险。
 tags: 保温, 低温, 停电, 避难, 室内, 取暖安全
 risk_level: caution

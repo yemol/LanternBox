@@ -2,6 +2,7 @@
 title: 水质异常判断
 slug: water-abnormal-quality-check-001
 category: 水
+priority: P0
 summary: 用颜色、气味、浑浊、油膜和来源记录做基础筛查；中风险条目，异常水先隔离，不直接并入饮用储备。
 tags: 饮用水, 水质, 异味, 浑浊, 污染, 储水
 risk_level: caution

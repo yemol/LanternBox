@@ -2,6 +2,7 @@
 title: 探路和路线标记原则
 slug: shelter-route-scouting-002
 category: 避难转移
+priority: P0
 summary: 规划空间分区、通道、污染隔离和夜间检查；中风险条目，结构、烟水或人员风险升高时撤离或调整。
 tags: 避难转移, 探路和路线标记原则, 探路和路线标, P0, 长期生存
 risk_level: caution

@@ -2,6 +2,7 @@
 title: 断网后的集合点原则
 slug: communication-offline-communication-002
 category: 通讯
+priority: P0
 summary: 设置主集合点、备用点和等待时长；中风险条目，设备失效时按集合点行动，并记录责任人、时间和复查结果。
 tags: 通讯, 断网后的集合点原则, 断网后的集合, P0, 长期生存
 risk_level: caution

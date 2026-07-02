@@ -2,6 +2,7 @@
 title: 异味掩盖的常见误区
 slug: hygiene-odor-003
 category: 卫生
+priority: P0
 summary: 划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
 tags: 卫生, 异味掩盖的常见误区, 异味掩盖的常, P0, 长期生存
 risk_level: caution

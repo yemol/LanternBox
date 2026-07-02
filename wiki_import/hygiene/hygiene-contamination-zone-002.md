@@ -2,6 +2,7 @@
 title: 污染区和清洁区边界
 slug: hygiene-contamination-zone-002
 category: 污染控制 / 隔离 / 清洁分区
+priority: P0
 summary: 划分清洁区、污染区和处理顺序；高风险条目，污染来源不清或人员不适时升级。
 tags: 卫生, 污染区和清洁区边界, 污染区和清洁, P0, 长期生存
 risk_level: high

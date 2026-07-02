@@ -2,6 +2,7 @@
 title: 离线地图包管理
 slug: communication-offline-map-package-001
 category: 通讯
+priority: P2
 summary: 管理地图区域、版本、设备分发和定期检查；过期地图不作为唯一路线依据，并记录责任人、时间和复查结果。
 tags: 离线地图, 导航, 地图包, 备份, 定位, 通讯
 risk_level: normal

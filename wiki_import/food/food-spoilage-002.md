@@ -2,6 +2,7 @@
 title: 食物腐败的常见信号
 slug: food-spoilage-002
 category: 食物
+priority: P0
 summary: 用气味、黏滑、颜色和内脏污染判断食物是否变质；中风险条目，腐败动物性食物不入口。
 tags: 食物, 食物腐败的常见信号, 食物腐败的常, P0, 长期生存
 risk_level: caution

@@ -2,6 +2,7 @@
 title: 低暴露为什么重要
 slug: safety-low-profile-002
 category: 安全
+priority: P0
 summary: 控制暴露、接触、路线和冲突边界；中风险条目，人员安全受威胁时放弃物资和任务。
 tags: 安全, 低暴露重要, 低暴露为什么, P0, 长期生存
 risk_level: caution

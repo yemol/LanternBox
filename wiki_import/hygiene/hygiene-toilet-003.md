@@ -2,6 +2,7 @@
 title: 临时厕所为什么要覆盖
 slug: hygiene-toilet-003
 category: 卫生
+priority: P0
 summary: 划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
 tags: 卫生, 临时厕所要覆盖, 临时厕所为什, P0, 长期生存
 risk_level: caution

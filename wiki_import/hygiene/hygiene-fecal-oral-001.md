@@ -2,6 +2,7 @@
 title: 粪口传播基础
 slug: hygiene-fecal-oral-001
 category: 污染控制 / 隔离 / 清洁分区
+priority: P0
 summary: 阻断粪便、手、餐具、食物和饮水之间的路径；中风险条目，手卫生失败时不处理入口食物。
 tags: 卫生, 粪口传播基础, P0, 长期生存
 risk_level: caution

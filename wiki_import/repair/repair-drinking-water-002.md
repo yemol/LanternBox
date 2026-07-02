@@ -2,6 +2,7 @@
 title: 容器裂缝和饮用水污染
 slug: repair-drinking-water-002
 category: 维修 / 制作 / 替代 / 拆解再利用
+priority: P0
 summary: 把裂缝容器从饮用水用途降级；高风险条目，裂缝藏污或漏水时不装饮水，并记录责任人、时间和复查结果。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 容器裂缝和饮用水污染, 容器裂缝和饮, P0, 长期生存
 risk_level: high

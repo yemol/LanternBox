@@ -2,6 +2,7 @@
 title: 食物残渣与虫害关系
 slug: food-food-waste-002
 category: 食物
+priority: P0
 summary: 及时密封残渣，隔离虫害、气味和动物接触；中风险条目，不要让残渣靠近食物、水源和睡眠区。
 tags: 食物, 食物残渣与虫害关系, 食物残渣与虫, P0, 长期生存
 risk_level: caution

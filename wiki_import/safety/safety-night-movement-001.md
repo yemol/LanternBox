@@ -2,6 +2,7 @@
 title: 夜间行动安全
 slug: safety-night-movement-001
 category: 安全
+priority: P0
 summary: 比较照明、暴露、跌倒和收益；中风险条目，收益不明确时不做夜间外出，并记录责任人、时间和复查结果。
 tags: 夜间行动, 停电, 照明, 跌倒, 安全, 避难
 risk_level: caution

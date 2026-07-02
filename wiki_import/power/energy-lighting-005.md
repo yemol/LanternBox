@@ -2,6 +2,7 @@
 title: 夜间照明对暴露的影响
 slug: energy-lighting-005
 category: 能源
+priority: P0
 summary: 安排电量分配、设备检查和停用记录；中风险条目，受潮、发热或鼓包时隔离停用。
 tags: 能源, 夜间照明对暴露的影响, 夜间照明对暴, P0, 长期生存
 risk_level: caution

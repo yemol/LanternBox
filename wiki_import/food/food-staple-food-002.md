@@ -2,6 +2,7 @@
 title: 基础热量和主食配给
 slug: food-staple-food-002
 category: 食物
+priority: P0
 summary: 用主食余量决定体力任务强度和配给节奏；中风险条目，主食不足时减少搬运、外出和高耗活动。
 tags: 食物, 基础热量和主食配给, 基础热量和主, P0, 长期生存
 risk_level: caution

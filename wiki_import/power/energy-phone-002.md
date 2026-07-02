@@ -2,6 +2,7 @@
 title: 手机省电为什么优先短信
 slug: energy-phone-002
 category: 能源
+priority: P0
 summary: 安排电量分配、设备检查和停用记录；中风险条目，受潮、发热或鼓包时隔离停用。
 tags: 能源, 手机省电优先短信, 手机省电为什, P0, 长期生存
 risk_level: caution

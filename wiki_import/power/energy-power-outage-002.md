@@ -2,6 +2,7 @@
 title: 停电后的关键设备分级
 slug: energy-power-outage-002
 category: 能源
+priority: P0
 summary: 盘点电源、分级设备并安排开机窗口；中风险条目，关闭非必要设备和后台消耗。
 tags: 能源, 停电后的关键设备分级, 停电后的关键, P0, 长期生存
 risk_level: caution

@@ -2,6 +2,7 @@
   "id": "DG-0504",
   "title": "搜索小队出发规则",
   "category": "撤离交通与路线",
+  "priority": "P0",
   "scenario": "需要外出寻找失联成员。",
   "goal": "避免寻找者也失联。",
   "tools": [

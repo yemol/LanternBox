@@ -2,6 +2,7 @@
 title: 锂电池鼓包发热风险
 slug: energy-fever-003
 category: 能源
+priority: P0
 summary: 记录体温感受、精神状态、尿量和伴随症状；中风险条目，皮疹、意识变化、持续恶化或儿童危险信号需升级。
 tags: 能源, 锂电池鼓包发热风险, 锂电池鼓包发, P0, 长期生存
 risk_level: caution

@@ -2,6 +2,7 @@
 title: 衣物分层保温原理
 slug: fire-insulation-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
+priority: P0
 summary: 控制火源、通风、燃料和睡前复查；中风险条目，烟味、燃气味或人员不适时停止用火。
 tags: 火源 / 保温 / 通风 / 一氧化碳风险, 衣物分层保温原理, 衣物分层保温, P0, 长期生存
 risk_level: caution

@@ -2,6 +2,7 @@
 title: 食物变质判断
 slug: food-spoilage-check-001
 category: 食物
+priority: P0
 summary: 明确库存、加工、保存和弃用顺序；中风险条目，包装破损、变质或来源不清时停止食用。
 tags: 食物, 变质, 停电, 食品安全, 异味, 罐头
 risk_level: caution

@@ -2,6 +2,7 @@
 title: 鼻出血基础处理
 slug: medical-minor-nosebleed-care-001
 category: 医疗急救
+priority: P0
 summary: 整理观察、清洁、保护和复查步骤；症状恶化或无法判断时停止普通处理，并记录责任人、时间和复查结果。
 tags: 鼻出血, 止血, 急救, 观察, 医疗照护
 risk_level: normal

@@ -2,6 +2,7 @@
 title: 罐头鼓包为什么禁食
 slug: food-canned-food-003
 category: 食物
+priority: P0
 summary: 把鼓包、漏液、异味和喷溅作为禁食信号，并安排干粮罐头先开先用、标签轮换和配给天数估算；中风险条目，可疑罐头直接弃用，不用加热尝试。
 tags: 食物, 罐头鼓包禁食, 罐头鼓包为什, P0, 长期生存
 risk_level: caution

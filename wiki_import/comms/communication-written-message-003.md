@@ -2,6 +2,7 @@
 title: 纸条留言的信息格式
 slug: communication-written-message-003
 category: 通讯
+priority: P0
 summary: 写清时间、去向、人数、下一步和签名；中风险条目，敏感信息不留在暴露点。
 tags: 通讯, 纸条留言的信息格式, 纸条留言的信, P0, 长期生存
 risk_level: caution

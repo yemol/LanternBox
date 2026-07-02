@@ -2,6 +2,7 @@
 title: 烹饪燃料基础管理
 slug: food-cooking-fuel-management-001
 category: 食物
+priority: P1
 summary: 明确库存、加工、保存和弃用顺序；高风险条目，包装破损、变质或来源不清时停止食用。
 tags: 燃料, 烹饪, 卡式炉, 酒精炉, 防火, 通风
 risk_level: high

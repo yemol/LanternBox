@@ -2,6 +2,7 @@
 title: 小火处理和撤离边界
 slug: safety-fire-response-002
 category: 安全
+priority: P0
 summary: 先确认出口，再判断是否能短时处理初起小火；高风险条目，烟多、蔓延或出口受威胁时撤离。
 tags: 安全, 小火处理和撤离边界, 小火处理和撤, P0, 长期生存
 risk_level: high

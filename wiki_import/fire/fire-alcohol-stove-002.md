@@ -2,6 +2,7 @@
 title: 酒精炉燃料和倾倒风险
 slug: fire-alcohol-stove-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
+priority: P0
 summary: 控制炉体稳定、燃料距离和热炉加燃料风险；中风险条目，火未灭或炉体未冷却不补燃料。
 tags: 火源 / 保温 / 通风 / 一氧化碳风险, 酒精炉燃料和倾倒风险, 酒精炉燃料和, P0, 长期生存
 risk_level: caution

@@ -2,6 +2,7 @@
 title: 少水洗手的关键时刻
 slug: hygiene-handwashing-003
 category: 卫生
+priority: P0
 summary: 保留餐前、如厕后、伤口前后的手卫生；中风险条目，入口污染风险高于省水。
 tags: 卫生, 少水洗手的关键时刻, 少水洗手的关, P0, 长期生存
 risk_level: caution
