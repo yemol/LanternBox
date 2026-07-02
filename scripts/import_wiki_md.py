@@ -4,7 +4,7 @@
 LanternBox Wiki Markdown importer v0.1
 
 用法：
-  python scripts/import_wiki_md.py wiki_import/medical/basic-wound-cleaning-and-observation.md
+  python scripts/import_wiki_md.py wiki_import/medical/medical-wound-cleaning-observation-001.md
   python scripts/import_wiki_md.py wiki_import
 
 环境变量：

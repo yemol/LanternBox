@@ -32607,5 +32607,5505 @@
       "防虫",
       "防臭"
     ]
+  },
+  {
+    "id": "DG-0601",
+    "title": "夜间取水前的路线和容器检查",
+    "category": "水",
+    "category_original": "水",
+    "domains": [
+      "water"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "water_long_term"
+    ],
+    "objects": [
+      "水",
+      "水",
+      "夜间取水前的路线和容器检查",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "夜间取水前的路线和容器检查",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "水",
+      "水",
+      "夜间取水前的路线和容器检查",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "夜间取水前的路线和容器检查",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "water",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "夜间取水前的路线和容器检查",
+      "夜间取水前的路线和容器检查",
+      "水",
+      "夜间取水前的路线和容器检查"
+    ]
+  },
+  {
+    "id": "DG-0602",
+    "title": "洪水后取水点禁用判断",
+    "category": "水",
+    "category_original": "水",
+    "domains": [
+      "water"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "water_long_term"
+    ],
+    "objects": [
+      "水",
+      "水",
+      "洪水后取水点禁用判断",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "洪水后取水点禁用判断",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "水",
+      "水",
+      "洪水后取水点禁用判断",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "洪水后取水点禁用判断",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "water",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "洪水后取水点禁用判断",
+      "洪水后取水点禁用判断",
+      "水",
+      "洪水后取水点禁用判断"
+    ]
+  },
+  {
+    "id": "DG-0603",
+    "title": "多人共用饮用水领取表",
+    "category": "水",
+    "category_original": "水",
+    "domains": [
+      "water"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "water_long_term"
+    ],
+    "objects": [
+      "水",
+      "水",
+      "多人共用饮用水领取表",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "多人共用饮用水领取表",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "水",
+      "水",
+      "多人共用饮用水领取表",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "多人共用饮用水领取表",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "water",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "多人共用饮用水领取表",
+      "多人共用饮用水领取表",
+      "水",
+      "多人共用饮用水领取表"
+    ]
+  },
+  {
+    "id": "DG-0604",
+    "title": "水桶异味后的降级处理",
+    "category": "水",
+    "category_original": "水",
+    "domains": [
+      "water"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "water_long_term"
+    ],
+    "objects": [
+      "水",
+      "水",
+      "水桶异味后的降级处理",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "水桶异味后的降级处理",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "水",
+      "水",
+      "水桶异味后的降级处理",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "水桶异味后的降级处理",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "water",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "水桶异味后的降级处理",
+      "水桶异味后的降级处理",
+      "水",
+      "水桶异味后的降级处理"
+    ]
+  },
+  {
+    "id": "DG-0605",
+    "title": "少水洗手和饮用水保留",
+    "category": "水",
+    "category_original": "水",
+    "domains": [
+      "water"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "water_long_term"
+    ],
+    "objects": [
+      "水",
+      "水",
+      "少水洗手和饮用水保留",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "少水洗手和饮用水保留",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "水",
+      "水",
+      "少水洗手和饮用水保留",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "少水洗手和饮用水保留",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "water",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "少水洗手和饮用水保留",
+      "少水洗手和饮用水保留",
+      "水",
+      "少水洗手和饮用水保留"
+    ]
+  },
+  {
+    "id": "DG-0606",
+    "title": "干粮和罐头三天配给表",
+    "category": "食物",
+    "category_original": "食物",
+    "domains": [
+      "food"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "food_long_term"
+    ],
+    "objects": [
+      "食物",
+      "食物",
+      "干粮和罐头三天配给表",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "干粮和罐头三天配给表",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "食物",
+      "食物",
+      "干粮和罐头三天配给表",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "干粮和罐头三天配给表",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "food",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "干粮和罐头三天配给表",
+      "干粮和罐头三天配给表",
+      "食物",
+      "干粮和罐头三天配给表"
+    ]
+  },
+  {
+    "id": "DG-0607",
+    "title": "剩饭过夜无冷藏禁食判断",
+    "category": "食物",
+    "category_original": "食物",
+    "domains": [
+      "food"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "food_long_term"
+    ],
+    "objects": [
+      "食物",
+      "食物",
+      "剩饭过夜无冷藏禁食判断",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "剩饭过夜无冷藏禁食判断",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "食物",
+      "食物",
+      "剩饭过夜无冷藏禁食判断",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "剩饭过夜无冷藏禁食判断",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "food",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "剩饭过夜无冷藏禁食判断",
+      "剩饭过夜无冷藏禁食判断",
+      "食物",
+      "剩饭过夜无冷藏禁食判断"
+    ]
+  },
+  {
+    "id": "DG-0608",
+    "title": "霉变粮食和坚果停用",
+    "category": "食物",
+    "category_original": "食物",
+    "domains": [
+      "food"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "food_long_term"
+    ],
+    "objects": [
+      "食物",
+      "食物",
+      "霉变粮食和坚果停用",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "霉变粮食和坚果停用",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "食物",
+      "食物",
+      "霉变粮食和坚果停用",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "霉变粮食和坚果停用",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "food",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "霉变粮食和坚果停用",
+      "霉变粮食和坚果停用",
+      "食物",
+      "霉变粮食和坚果停用"
+    ]
+  },
+  {
+    "id": "DG-0609",
+    "title": "多人食物分发和争议暂停",
+    "category": "食物",
+    "category_original": "食物",
+    "domains": [
+      "food"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "food_long_term"
+    ],
+    "objects": [
+      "食物",
+      "食物",
+      "多人食物分发和争议暂停",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "多人食物分发和争议暂停",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "食物",
+      "食物",
+      "多人食物分发和争议暂停",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "多人食物分发和争议暂停",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "food",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "多人食物分发和争议暂停",
+      "多人食物分发和争议暂停",
+      "食物",
+      "多人食物分发和争议暂停"
+    ]
+  },
+  {
+    "id": "DG-0610",
+    "title": "动物性食物彻底加热和记录",
+    "category": "食物",
+    "category_original": "食物",
+    "domains": [
+      "food"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "food_long_term"
+    ],
+    "objects": [
+      "食物",
+      "食物",
+      "动物性食物彻底加热和记录",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "动物性食物彻底加热和记录",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "食物",
+      "食物",
+      "动物性食物彻底加热和记录",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "动物性食物彻底加热和记录",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "food",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "动物性食物彻底加热和记录",
+      "动物性食物彻底加热和记录",
+      "食物",
+      "动物性食物彻底加热和记录"
+    ]
+  },
+  {
+    "id": "DG-0611",
+    "title": "儿童发热咳嗽观察卡",
+    "category": "医疗急救",
+    "category_original": "医疗急救",
+    "domains": [
+      "medical"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "medical_long_term"
+    ],
+    "objects": [
+      "医疗",
+      "医疗急救",
+      "儿童发热咳嗽观察卡",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "儿童发热咳嗽观察卡",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "医疗",
+      "医疗急救",
+      "儿童发热咳嗽观察卡",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "儿童发热咳嗽观察卡",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "儿童发热咳嗽观察卡",
+      "儿童发热咳嗽观察卡",
+      "医疗",
+      "儿童发热咳嗽观察卡"
+    ]
+  },
+  {
+    "id": "DG-0612",
+    "title": "小伤口少水清洁卡",
+    "category": "医疗急救",
+    "category_original": "医疗急救",
+    "domains": [
+      "medical"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "medical_long_term"
+    ],
+    "objects": [
+      "医疗",
+      "医疗急救",
+      "小伤口少水清洁卡",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "小伤口少水清洁卡",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "医疗",
+      "医疗急救",
+      "小伤口少水清洁卡",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "小伤口少水清洁卡",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "小伤口少水清洁卡",
+      "小伤口少水清洁卡",
+      "医疗",
+      "小伤口少水清洁卡"
+    ]
+  },
+  {
+    "id": "DG-0613",
+    "title": "鼻出血不仰头处理",
+    "category": "医疗急救",
+    "category_original": "医疗急救",
+    "domains": [
+      "medical"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "medical_long_term"
+    ],
+    "objects": [
+      "医疗",
+      "医疗急救",
+      "鼻出血不仰头处理",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "鼻出血不仰头处理",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "医疗",
+      "医疗急救",
+      "鼻出血不仰头处理",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "鼻出血不仰头处理",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "鼻出血不仰头处理",
+      "鼻出血不仰头处理",
+      "医疗",
+      "鼻出血不仰头处理"
+    ]
+  },
+  {
+    "id": "DG-0614",
+    "title": "扭伤后转移固定",
+    "category": "医疗急救",
+    "category_original": "医疗急救",
+    "domains": [
+      "medical"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "medical_long_term"
+    ],
+    "objects": [
+      "医疗",
+      "医疗急救",
+      "扭伤后转移固定",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "扭伤后转移固定",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "医疗",
+      "医疗急救",
+      "扭伤后转移固定",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "扭伤后转移固定",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "扭伤后转移固定",
+      "扭伤后转移固定",
+      "医疗",
+      "扭伤后转移固定"
+    ]
+  },
+  {
+    "id": "DG-0615",
+    "title": "照护者处理呕吐物后防交叉感染",
+    "category": "医疗急救",
+    "category_original": "医疗急救",
+    "domains": [
+      "medical"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "medical_long_term"
+    ],
+    "objects": [
+      "医疗",
+      "医疗急救",
+      "照护者处理呕吐物后防交叉感染",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "照护者处理呕吐物后防交叉感染",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "医疗",
+      "医疗急救",
+      "照护者处理呕吐物后防交叉感染",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "照护者处理呕吐物后防交叉感染",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "照护者处理呕吐物后防交叉感染",
+      "照护者处理呕吐物后防交叉感染",
+      "医疗",
+      "照护者处理呕吐物后防交叉感染"
+    ]
+  },
+  {
+    "id": "DG-0616",
+    "title": "充电宝鼓包发热停用隔离",
+    "category": "能源",
+    "category_original": "能源",
+    "domains": [
+      "power"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "power_long_term"
+    ],
+    "objects": [
+      "能源",
+      "能源",
+      "充电宝鼓包发热停用隔离",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "充电宝鼓包发热停用隔离",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "能源",
+      "能源",
+      "充电宝鼓包发热停用隔离",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "充电宝鼓包发热停用隔离",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "充电宝鼓包发热停用隔离",
+      "充电宝鼓包发热停用隔离",
+      "能源",
+      "充电宝鼓包发热停用隔离"
+    ]
+  },
+  {
+    "id": "DG-0617",
+    "title": "太阳能充电白天排程",
+    "category": "能源",
+    "category_original": "能源",
+    "domains": [
+      "power"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "power_long_term"
+    ],
+    "objects": [
+      "能源",
+      "能源",
+      "太阳能充电白天排程",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "太阳能充电白天排程",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "能源",
+      "能源",
+      "太阳能充电白天排程",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "太阳能充电白天排程",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "太阳能充电白天排程",
+      "太阳能充电白天排程",
+      "能源",
+      "太阳能充电白天排程"
+    ]
+  },
+  {
+    "id": "DG-0618",
+    "title": "电池混放后的编号轮换",
+    "category": "能源",
+    "category_original": "能源",
+    "domains": [
+      "power"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "power_long_term"
+    ],
+    "objects": [
+      "能源",
+      "能源",
+      "电池混放后的编号轮换",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "电池混放后的编号轮换",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "能源",
+      "能源",
+      "电池混放后的编号轮换",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "电池混放后的编号轮换",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "电池混放后的编号轮换",
+      "电池混放后的编号轮换",
+      "能源",
+      "电池混放后的编号轮换"
+    ]
+  },
+  {
+    "id": "DG-0619",
+    "title": "负载过大时断开排序",
+    "category": "能源",
+    "category_original": "能源",
+    "domains": [
+      "power"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "power_long_term"
+    ],
+    "objects": [
+      "能源",
+      "能源",
+      "负载过大时断开排序",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "负载过大时断开排序",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "能源",
+      "能源",
+      "负载过大时断开排序",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "负载过大时断开排序",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "负载过大时断开排序",
+      "负载过大时断开排序",
+      "能源",
+      "负载过大时断开排序"
+    ]
+  },
+  {
+    "id": "DG-0620",
+    "title": "接口潮湿和线头保护",
+    "category": "能源",
+    "category_original": "能源",
+    "domains": [
+      "power"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "power_long_term"
+    ],
+    "objects": [
+      "能源",
+      "能源",
+      "接口潮湿和线头保护",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "接口潮湿和线头保护",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "能源",
+      "能源",
+      "接口潮湿和线头保护",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "接口潮湿和线头保护",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "接口潮湿和线头保护",
+      "接口潮湿和线头保护",
+      "能源",
+      "接口潮湿和线头保护"
+    ]
+  },
+  {
+    "id": "DG-0621",
+    "title": "门窗松动低噪加固",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "category_original": "维修 / 制作 / 替代 / 拆解再利用",
+    "domains": [
+      "repair"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "repair_long_term"
+    ],
+    "objects": [
+      "维修",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "门窗松动低噪加固",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "门窗松动低噪加固",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "维修",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "门窗松动低噪加固",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "门窗松动低噪加固",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "门窗松动低噪加固",
+      "门窗松动低噪加固",
+      "维修",
+      "门窗松动低噪加固"
+    ]
+  },
+  {
+    "id": "DG-0622",
+    "title": "鞋底开裂转移前修补",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "category_original": "维修 / 制作 / 替代 / 拆解再利用",
+    "domains": [
+      "repair"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "repair_long_term"
+    ],
+    "objects": [
+      "维修",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "鞋底开裂转移前修补",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "鞋底开裂转移前修补",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "维修",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "鞋底开裂转移前修补",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "鞋底开裂转移前修补",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "鞋底开裂转移前修补",
+      "鞋底开裂转移前修补",
+      "维修",
+      "鞋底开裂转移前修补"
+    ]
+  },
+  {
+    "id": "DG-0623",
+    "title": "水管滴漏临时接水降级",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "category_original": "维修 / 制作 / 替代 / 拆解再利用",
+    "domains": [
+      "repair"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "repair_long_term"
+    ],
+    "objects": [
+      "维修",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "水管滴漏临时接水降级",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "水管滴漏临时接水降级",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "维修",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "水管滴漏临时接水降级",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "水管滴漏临时接水降级",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "水管滴漏临时接水降级",
+      "水管滴漏临时接水降级",
+      "维修",
+      "水管滴漏临时接水降级"
+    ]
+  },
+  {
+    "id": "DG-0624",
+    "title": "工具生锈清洁和封存",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "category_original": "维修 / 制作 / 替代 / 拆解再利用",
+    "domains": [
+      "repair"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "repair_long_term"
+    ],
+    "objects": [
+      "维修",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "工具生锈清洁和封存",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "工具生锈清洁和封存",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "维修",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "工具生锈清洁和封存",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "工具生锈清洁和封存",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "工具生锈清洁和封存",
+      "工具生锈清洁和封存",
+      "维修",
+      "工具生锈清洁和封存"
+    ]
+  },
+  {
+    "id": "DG-0625",
+    "title": "拆解旧物前割伤防护",
+    "category": "维修 / 制作 / 替代 / 拆解再利用",
+    "category_original": "维修 / 制作 / 替代 / 拆解再利用",
+    "domains": [
+      "repair"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "repair_long_term"
+    ],
+    "objects": [
+      "维修",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "拆解旧物前割伤防护",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "拆解旧物前割伤防护",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "维修",
+      "维修 / 制作 / 替代 / 拆解再利用",
+      "拆解旧物前割伤防护",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "拆解旧物前割伤防护",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "拆解旧物前割伤防护",
+      "拆解旧物前割伤防护",
+      "维修",
+      "拆解旧物前割伤防护"
+    ]
+  },
+  {
+    "id": "DG-0626",
+    "title": "桶厕满袋封存和更换",
+    "category": "卫生",
+    "category_original": "卫生",
+    "domains": [
+      "hygiene"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "hygiene_long_term"
+    ],
+    "objects": [
+      "卫生",
+      "卫生",
+      "桶厕满袋封存和更换",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "桶厕满袋封存和更换",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "卫生",
+      "卫生",
+      "桶厕满袋封存和更换",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "桶厕满袋封存和更换",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "桶厕满袋封存和更换",
+      "桶厕满袋封存和更换",
+      "卫生",
+      "桶厕满袋封存和更换"
+    ]
+  },
+  {
+    "id": "DG-0627",
+    "title": "垃圾渗漏后的地面清理",
+    "category": "卫生",
+    "category_original": "卫生",
+    "domains": [
+      "hygiene"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "hygiene_long_term"
+    ],
+    "objects": [
+      "卫生",
+      "卫生",
+      "垃圾渗漏后的地面清理",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "垃圾渗漏后的地面清理",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "卫生",
+      "卫生",
+      "垃圾渗漏后的地面清理",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "垃圾渗漏后的地面清理",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "垃圾渗漏后的地面清理",
+      "垃圾渗漏后的地面清理",
+      "卫生",
+      "垃圾渗漏后的地面清理"
+    ]
+  },
+  {
+    "id": "DG-0628",
+    "title": "霉味衣物和睡眠区分离",
+    "category": "卫生",
+    "category_original": "卫生",
+    "domains": [
+      "hygiene"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "hygiene_long_term"
+    ],
+    "objects": [
+      "卫生",
+      "卫生",
+      "霉味衣物和睡眠区分离",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "霉味衣物和睡眠区分离",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "卫生",
+      "卫生",
+      "霉味衣物和睡眠区分离",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "霉味衣物和睡眠区分离",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "霉味衣物和睡眠区分离",
+      "霉味衣物和睡眠区分离",
+      "卫生",
+      "霉味衣物和睡眠区分离"
+    ]
+  },
+  {
+    "id": "DG-0629",
+    "title": "防鼠食物高处封存",
+    "category": "卫生",
+    "category_original": "卫生",
+    "domains": [
+      "hygiene"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "hygiene_long_term"
+    ],
+    "objects": [
+      "卫生",
+      "卫生",
+      "防鼠食物高处封存",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "防鼠食物高处封存",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "卫生",
+      "卫生",
+      "防鼠食物高处封存",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "防鼠食物高处封存",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "防鼠食物高处封存",
+      "防鼠食物高处封存",
+      "卫生",
+      "防鼠食物高处封存"
+    ]
+  },
+  {
+    "id": "DG-0630",
+    "title": "少水餐具清洁顺序",
+    "category": "卫生",
+    "category_original": "卫生",
+    "domains": [
+      "hygiene"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "hygiene_long_term"
+    ],
+    "objects": [
+      "卫生",
+      "卫生",
+      "少水餐具清洁顺序",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "少水餐具清洁顺序",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "卫生",
+      "卫生",
+      "少水餐具清洁顺序",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "少水餐具清洁顺序",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "少水餐具清洁顺序",
+      "少水餐具清洁顺序",
+      "卫生",
+      "少水餐具清洁顺序"
+    ]
+  },
+  {
+    "id": "DG-0631",
+    "title": "陌生人交换物资低暴露流程",
+    "category": "安全",
+    "category_original": "安全",
+    "domains": [
+      "security"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "security_long_term"
+    ],
+    "objects": [
+      "安全",
+      "安全",
+      "陌生人交换物资低暴露流程",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "陌生人交换物资低暴露流程",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "安全",
+      "安全",
+      "陌生人交换物资低暴露流程",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "陌生人交换物资低暴露流程",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "security",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "陌生人交换物资低暴露流程",
+      "陌生人交换物资低暴露流程",
+      "安全",
+      "陌生人交换物资低暴露流程"
+    ]
+  },
+  {
+    "id": "DG-0632",
+    "title": "门口玻璃碎裂隔离",
+    "category": "安全",
+    "category_original": "安全",
+    "domains": [
+      "security"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "security_long_term"
+    ],
+    "objects": [
+      "安全",
+      "安全",
+      "门口玻璃碎裂隔离",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "门口玻璃碎裂隔离",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "安全",
+      "安全",
+      "门口玻璃碎裂隔离",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "门口玻璃碎裂隔离",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "security",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "门口玻璃碎裂隔离",
+      "门口玻璃碎裂隔离",
+      "安全",
+      "门口玻璃碎裂隔离"
+    ]
+  },
+  {
+    "id": "DG-0633",
+    "title": "物资分配冲突暂停",
+    "category": "安全",
+    "category_original": "安全",
+    "domains": [
+      "security"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "security_long_term"
+    ],
+    "objects": [
+      "安全",
+      "安全",
+      "物资分配冲突暂停",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "物资分配冲突暂停",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "安全",
+      "安全",
+      "物资分配冲突暂停",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "物资分配冲突暂停",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "security",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "物资分配冲突暂停",
+      "物资分配冲突暂停",
+      "安全",
+      "物资分配冲突暂停"
+    ]
+  },
+  {
+    "id": "DG-0634",
+    "title": "夜间低亮厕所路线",
+    "category": "安全",
+    "category_original": "安全",
+    "domains": [
+      "security"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "security_long_term"
+    ],
+    "objects": [
+      "安全",
+      "安全",
+      "夜间低亮厕所路线",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "夜间低亮厕所路线",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "安全",
+      "安全",
+      "夜间低亮厕所路线",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "夜间低亮厕所路线",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "security",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "夜间低亮厕所路线",
+      "夜间低亮厕所路线",
+      "安全",
+      "夜间低亮厕所路线"
+    ]
+  },
+  {
+    "id": "DG-0635",
+    "title": "外出找水双人返回规则",
+    "category": "安全",
+    "category_original": "安全",
+    "domains": [
+      "security"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "security_long_term"
+    ],
+    "objects": [
+      "安全",
+      "安全",
+      "外出找水双人返回规则",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "外出找水双人返回规则",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "安全",
+      "安全",
+      "外出找水双人返回规则",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "外出找水双人返回规则",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "security",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "外出找水双人返回规则",
+      "外出找水双人返回规则",
+      "安全",
+      "外出找水双人返回规则"
+    ]
+  },
+  {
+    "id": "DG-0636",
+    "title": "断网家庭固定开机窗口",
+    "category": "通讯",
+    "category_original": "通讯",
+    "domains": [
+      "comms"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "comms_long_term"
+    ],
+    "objects": [
+      "通讯",
+      "通讯",
+      "断网家庭固定开机窗口",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "断网家庭固定开机窗口",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "通讯",
+      "通讯",
+      "断网家庭固定开机窗口",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "断网家庭固定开机窗口",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "断网家庭固定开机窗口",
+      "断网家庭固定开机窗口",
+      "通讯",
+      "断网家庭固定开机窗口"
+    ]
+  },
+  {
+    "id": "DG-0637",
+    "title": "纸条留言点每日复核",
+    "category": "通讯",
+    "category_original": "通讯",
+    "domains": [
+      "comms"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "comms_long_term"
+    ],
+    "objects": [
+      "通讯",
+      "通讯",
+      "纸条留言点每日复核",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "纸条留言点每日复核",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "通讯",
+      "通讯",
+      "纸条留言点每日复核",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "纸条留言点每日复核",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "纸条留言点每日复核",
+      "纸条留言点每日复核",
+      "通讯",
+      "纸条留言点每日复核"
+    ]
+  },
+  {
+    "id": "DG-0638",
+    "title": "近距离灯光信号三条规则",
+    "category": "通讯",
+    "category_original": "通讯",
+    "domains": [
+      "comms"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "comms_long_term"
+    ],
+    "objects": [
+      "通讯",
+      "通讯",
+      "近距离灯光信号三条规则",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "近距离灯光信号三条规则",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "通讯",
+      "通讯",
+      "近距离灯光信号三条规则",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "近距离灯光信号三条规则",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "近距离灯光信号三条规则",
+      "近距离灯光信号三条规则",
+      "通讯",
+      "近距离灯光信号三条规则"
+    ]
+  },
+  {
+    "id": "DG-0639",
+    "title": "LoRa 节点每日状态记录",
+    "category": "通讯",
+    "category_original": "通讯",
+    "domains": [
+      "comms"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "comms_long_term"
+    ],
+    "objects": [
+      "通讯",
+      "通讯",
+      "LoRa 节点每日状态记录",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "LoRa 节点每日状态记录",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "通讯",
+      "通讯",
+      "LoRa 节点每日状态记录",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "LoRa 节点每日状态记录",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "LoRa 节点每日状态记录",
+      "LoRa 节点每日状态记录",
+      "通讯",
+      "LoRa 节点每日状态记录"
+    ]
+  },
+  {
+    "id": "DG-0640",
+    "title": "短波收听时段和信息记录",
+    "category": "通讯",
+    "category_original": "通讯",
+    "domains": [
+      "comms"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "comms_long_term"
+    ],
+    "objects": [
+      "通讯",
+      "通讯",
+      "短波收听时段和信息记录",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "短波收听时段和信息记录",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "通讯",
+      "通讯",
+      "短波收听时段和信息记录",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "短波收听时段和信息记录",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "短波收听时段和信息记录",
+      "短波收听时段和信息记录",
+      "通讯",
+      "短波收听时段和信息记录"
+    ]
+  },
+  {
+    "id": "DG-0641",
+    "title": "撤离前背包减重复核",
+    "category": "避难转移",
+    "category_original": "避难转移",
+    "domains": [
+      "evacuation"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "evacuation_long_term"
+    ],
+    "objects": [
+      "撤离",
+      "避难转移",
+      "撤离前背包减重复核",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "撤离前背包减重复核",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "撤离",
+      "避难转移",
+      "撤离前背包减重复核",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "撤离前背包减重复核",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "evacuation",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "撤离前背包减重复核",
+      "撤离前背包减重复核",
+      "撤离",
+      "撤离前背包减重复核"
+    ]
+  },
+  {
+    "id": "DG-0642",
+    "title": "集合点失效后的备用点",
+    "category": "避难转移",
+    "category_original": "避难转移",
+    "domains": [
+      "evacuation"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "evacuation_long_term"
+    ],
+    "objects": [
+      "撤离",
+      "避难转移",
+      "集合点失效后的备用点",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "集合点失效后的备用点",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "撤离",
+      "避难转移",
+      "集合点失效后的备用点",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "集合点失效后的备用点",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "evacuation",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "集合点失效后的备用点",
+      "集合点失效后的备用点",
+      "撤离",
+      "集合点失效后的备用点"
+    ]
+  },
+  {
+    "id": "DG-0643",
+    "title": "探路超时后的留守规则",
+    "category": "避难转移",
+    "category_original": "避难转移",
+    "domains": [
+      "evacuation"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "evacuation_long_term"
+    ],
+    "objects": [
+      "撤离",
+      "避难转移",
+      "探路超时后的留守规则",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "探路超时后的留守规则",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "撤离",
+      "避难转移",
+      "探路超时后的留守规则",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "探路超时后的留守规则",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "evacuation",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "探路超时后的留守规则",
+      "探路超时后的留守规则",
+      "撤离",
+      "探路超时后的留守规则"
+    ]
+  },
+  {
+    "id": "DG-0644",
+    "title": "返回住所前风险检查",
+    "category": "避难转移",
+    "category_original": "避难转移",
+    "domains": [
+      "evacuation"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "evacuation_long_term"
+    ],
+    "objects": [
+      "撤离",
+      "避难转移",
+      "返回住所前风险检查",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "返回住所前风险检查",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "撤离",
+      "避难转移",
+      "返回住所前风险检查",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "返回住所前风险检查",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "evacuation",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "返回住所前风险检查",
+      "返回住所前风险检查",
+      "撤离",
+      "返回住所前风险检查"
+    ]
+  },
+  {
+    "id": "DG-0645",
+    "title": "临时避难点一房四区划分",
+    "category": "避难转移",
+    "category_original": "避难转移",
+    "domains": [
+      "evacuation"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "evacuation_long_term"
+    ],
+    "objects": [
+      "撤离",
+      "避难转移",
+      "临时避难点一房四区划分",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "临时避难点一房四区划分",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "撤离",
+      "避难转移",
+      "临时避难点一房四区划分",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "临时避难点一房四区划分",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "evacuation",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "临时避难点一房四区划分",
+      "临时避难点一房四区划分",
+      "撤离",
+      "临时避难点一房四区划分"
+    ]
+  },
+  {
+    "id": "DG-0646",
+    "title": "室内取暖睡前火源复查",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "domains": [
+      "fire"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "fire_long_term"
+    ],
+    "objects": [
+      "火源",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "室内取暖睡前火源复查",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "室内取暖睡前火源复查",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "火源",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "室内取暖睡前火源复查",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "室内取暖睡前火源复查",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "fire",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "室内取暖睡前火源复查",
+      "室内取暖睡前火源复查",
+      "火源",
+      "室内取暖睡前火源复查"
+    ]
+  },
+  {
+    "id": "DG-0647",
+    "title": "外部烟味进入封堵判断",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "domains": [
+      "fire"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "fire_long_term"
+    ],
+    "objects": [
+      "火源",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "外部烟味进入封堵判断",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "外部烟味进入封堵判断",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "火源",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "外部烟味进入封堵判断",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "外部烟味进入封堵判断",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "fire",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "外部烟味进入封堵判断",
+      "外部烟味进入封堵判断",
+      "火源",
+      "外部烟味进入封堵判断"
+    ]
+  },
+  {
+    "id": "DG-0648",
+    "title": "酒精炉加燃料前冷却检查",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "domains": [
+      "fire"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "fire_long_term"
+    ],
+    "objects": [
+      "火源",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "酒精炉加燃料前冷却检查",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "酒精炉加燃料前冷却检查",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "火源",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "酒精炉加燃料前冷却检查",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "酒精炉加燃料前冷却检查",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "fire",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "酒精炉加燃料前冷却检查",
+      "酒精炉加燃料前冷却检查",
+      "火源",
+      "酒精炉加燃料前冷却检查"
+    ]
+  },
+  {
+    "id": "DG-0649",
+    "title": "蜡烛照明无人看守禁用",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "domains": [
+      "fire"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "fire_long_term"
+    ],
+    "objects": [
+      "火源",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "蜡烛照明无人看守禁用",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "蜡烛照明无人看守禁用",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "火源",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "蜡烛照明无人看守禁用",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "蜡烛照明无人看守禁用",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "fire",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "蜡烛照明无人看守禁用",
+      "蜡烛照明无人看守禁用",
+      "火源",
+      "蜡烛照明无人看守禁用"
+    ]
+  },
+  {
+    "id": "DG-0650",
+    "title": "低温夜间脚部保温",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "domains": [
+      "fire"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "fire_long_term"
+    ],
+    "objects": [
+      "火源",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "低温夜间脚部保温",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "低温夜间脚部保温",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "火源",
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "低温夜间脚部保温",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "低温夜间脚部保温",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "fire",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "低温夜间脚部保温",
+      "低温夜间脚部保温",
+      "火源",
+      "低温夜间脚部保温"
+    ]
+  },
+  {
+    "id": "DG-0651",
+    "title": "湿袜更换和脚部检查",
+    "category": "衣物 / 鞋袜 / 体温防护",
+    "category_original": "衣物 / 鞋袜 / 体温防护",
+    "domains": [
+      "clothing"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "clothing_long_term"
+    ],
+    "objects": [
+      "衣物",
+      "衣物 / 鞋袜 / 体温防护",
+      "湿袜更换和脚部检查",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "湿袜更换和脚部检查",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "衣物",
+      "衣物 / 鞋袜 / 体温防护",
+      "湿袜更换和脚部检查",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "湿袜更换和脚部检查",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "clothing",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "湿袜更换和脚部检查",
+      "湿袜更换和脚部检查",
+      "衣物",
+      "湿袜更换和脚部检查"
+    ]
+  },
+  {
+    "id": "DG-0652",
+    "title": "雨衣破洞临时补片",
+    "category": "衣物 / 鞋袜 / 体温防护",
+    "category_original": "衣物 / 鞋袜 / 体温防护",
+    "domains": [
+      "clothing"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "clothing_long_term"
+    ],
+    "objects": [
+      "衣物",
+      "衣物 / 鞋袜 / 体温防护",
+      "雨衣破洞临时补片",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "雨衣破洞临时补片",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "衣物",
+      "衣物 / 鞋袜 / 体温防护",
+      "雨衣破洞临时补片",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "雨衣破洞临时补片",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "clothing",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "雨衣破洞临时补片",
+      "雨衣破洞临时补片",
+      "衣物",
+      "雨衣破洞临时补片"
+    ]
+  },
+  {
+    "id": "DG-0653",
+    "title": "高温外出防晒和补水",
+    "category": "衣物 / 鞋袜 / 体温防护",
+    "category_original": "衣物 / 鞋袜 / 体温防护",
+    "domains": [
+      "clothing"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "clothing_long_term"
+    ],
+    "objects": [
+      "衣物",
+      "衣物 / 鞋袜 / 体温防护",
+      "高温外出防晒和补水",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "高温外出防晒和补水",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "衣物",
+      "衣物 / 鞋袜 / 体温防护",
+      "高温外出防晒和补水",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "高温外出防晒和补水",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "clothing",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "高温外出防晒和补水",
+      "高温外出防晒和补水",
+      "衣物",
+      "高温外出防晒和补水"
+    ]
+  },
+  {
+    "id": "DG-0654",
+    "title": "低温睡前分层穿衣",
+    "category": "衣物 / 鞋袜 / 体温防护",
+    "category_original": "衣物 / 鞋袜 / 体温防护",
+    "domains": [
+      "clothing"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "clothing_long_term"
+    ],
+    "objects": [
+      "衣物",
+      "衣物 / 鞋袜 / 体温防护",
+      "低温睡前分层穿衣",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "低温睡前分层穿衣",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "衣物",
+      "衣物 / 鞋袜 / 体温防护",
+      "低温睡前分层穿衣",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "低温睡前分层穿衣",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "clothing",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "低温睡前分层穿衣",
+      "低温睡前分层穿衣",
+      "衣物",
+      "低温睡前分层穿衣"
+    ]
+  },
+  {
+    "id": "DG-0655",
+    "title": "鞋底脱胶后的降级使用",
+    "category": "衣物 / 鞋袜 / 体温防护",
+    "category_original": "衣物 / 鞋袜 / 体温防护",
+    "domains": [
+      "clothing"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "clothing_long_term"
+    ],
+    "objects": [
+      "衣物",
+      "衣物 / 鞋袜 / 体温防护",
+      "鞋底脱胶后的降级使用",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "鞋底脱胶后的降级使用",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "衣物",
+      "衣物 / 鞋袜 / 体温防护",
+      "鞋底脱胶后的降级使用",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "鞋底脱胶后的降级使用",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "clothing",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "鞋底脱胶后的降级使用",
+      "鞋底脱胶后的降级使用",
+      "衣物",
+      "鞋底脱胶后的降级使用"
+    ]
+  },
+  {
+    "id": "DG-0656",
+    "title": "入口缓冲区鞋物分离",
+    "category": "庇护空间分区",
+    "category_original": "庇护空间分区",
+    "domains": [
+      "shelter"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_long_term"
+    ],
+    "objects": [
+      "庇护空间",
+      "庇护空间分区",
+      "入口缓冲区鞋物分离",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "入口缓冲区鞋物分离",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "庇护空间",
+      "庇护空间分区",
+      "入口缓冲区鞋物分离",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "入口缓冲区鞋物分离",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "入口缓冲区鞋物分离",
+      "入口缓冲区鞋物分离",
+      "庇护空间",
+      "入口缓冲区鞋物分离"
+    ]
+  },
+  {
+    "id": "DG-0657",
+    "title": "睡眠区远离污染区复核",
+    "category": "庇护空间分区",
+    "category_original": "庇护空间分区",
+    "domains": [
+      "shelter"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_long_term"
+    ],
+    "objects": [
+      "庇护空间",
+      "庇护空间分区",
+      "睡眠区远离污染区复核",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "睡眠区远离污染区复核",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "庇护空间",
+      "庇护空间分区",
+      "睡眠区远离污染区复核",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "睡眠区远离污染区复核",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "睡眠区远离污染区复核",
+      "睡眠区远离污染区复核",
+      "庇护空间",
+      "睡眠区远离污染区复核"
+    ]
+  },
+  {
+    "id": "DG-0658",
+    "title": "火源区周边清空",
+    "category": "庇护空间分区",
+    "category_original": "庇护空间分区",
+    "domains": [
+      "shelter"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_long_term"
+    ],
+    "objects": [
+      "庇护空间",
+      "庇护空间分区",
+      "火源区周边清空",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "火源区周边清空",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "庇护空间",
+      "庇护空间分区",
+      "火源区周边清空",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "火源区周边清空",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "火源区周边清空",
+      "火源区周边清空",
+      "庇护空间",
+      "火源区周边清空"
+    ]
+  },
+  {
+    "id": "DG-0659",
+    "title": "物资区高处防潮摆放",
+    "category": "庇护空间分区",
+    "category_original": "庇护空间分区",
+    "domains": [
+      "shelter"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_long_term"
+    ],
+    "objects": [
+      "庇护空间",
+      "庇护空间分区",
+      "物资区高处防潮摆放",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "物资区高处防潮摆放",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "庇护空间",
+      "庇护空间分区",
+      "物资区高处防潮摆放",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "物资区高处防潮摆放",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "物资区高处防潮摆放",
+      "物资区高处防潮摆放",
+      "庇护空间",
+      "物资区高处防潮摆放"
+    ]
+  },
+  {
+    "id": "DG-0660",
+    "title": "夜间通道清障标记",
+    "category": "庇护空间分区",
+    "category_original": "庇护空间分区",
+    "domains": [
+      "shelter"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_long_term"
+    ],
+    "objects": [
+      "庇护空间",
+      "庇护空间分区",
+      "夜间通道清障标记",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "夜间通道清障标记",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "庇护空间",
+      "庇护空间分区",
+      "夜间通道清障标记",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "夜间通道清障标记",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "夜间通道清障标记",
+      "夜间通道清障标记",
+      "庇护空间",
+      "夜间通道清障标记"
+    ]
+  },
+  {
+    "id": "DG-0661",
+    "title": "血液污染物双层封存",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "domains": [
+      "contamination"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "contamination_long_term"
+    ],
+    "objects": [
+      "污染控制",
+      "污染控制 / 隔离 / 清洁分区",
+      "血液污染物双层封存",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "血液污染物双层封存",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "污染控制",
+      "污染控制 / 隔离 / 清洁分区",
+      "血液污染物双层封存",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "血液污染物双层封存",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "contamination",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "血液污染物双层封存",
+      "血液污染物双层封存",
+      "污染控制",
+      "血液污染物双层封存"
+    ]
+  },
+  {
+    "id": "DG-0662",
+    "title": "呕吐物清理后手卫生",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "domains": [
+      "contamination"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "contamination_long_term"
+    ],
+    "objects": [
+      "污染控制",
+      "污染控制 / 隔离 / 清洁分区",
+      "呕吐物清理后手卫生",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "呕吐物清理后手卫生",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "污染控制",
+      "污染控制 / 隔离 / 清洁分区",
+      "呕吐物清理后手卫生",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "呕吐物清理后手卫生",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "contamination",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "呕吐物清理后手卫生",
+      "呕吐物清理后手卫生",
+      "污染控制",
+      "呕吐物清理后手卫生"
+    ]
+  },
+  {
+    "id": "DG-0663",
+    "title": "污水进屋后的污染线",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "domains": [
+      "contamination"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "contamination_long_term"
+    ],
+    "objects": [
+      "污染控制",
+      "污染控制 / 隔离 / 清洁分区",
+      "污水进屋后的污染线",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "污水进屋后的污染线",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "污染控制",
+      "污染控制 / 隔离 / 清洁分区",
+      "污水进屋后的污染线",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "污水进屋后的污染线",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "contamination",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "污水进屋后的污染线",
+      "污水进屋后的污染线",
+      "污染控制",
+      "污水进屋后的污染线"
+    ]
+  },
+  {
+    "id": "DG-0664",
+    "title": "动物尸体远离水食物",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "domains": [
+      "contamination"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "contamination_long_term"
+    ],
+    "objects": [
+      "污染控制",
+      "污染控制 / 隔离 / 清洁分区",
+      "动物尸体远离水食物",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "动物尸体远离水食物",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "污染控制",
+      "污染控制 / 隔离 / 清洁分区",
+      "动物尸体远离水食物",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "动物尸体远离水食物",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "contamination",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "动物尸体远离水食物",
+      "动物尸体远离水食物",
+      "污染控制",
+      "动物尸体远离水食物"
+    ]
+  },
+  {
+    "id": "DG-0665",
+    "title": "化学味容器禁用隔离",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "domains": [
+      "contamination"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "contamination_long_term"
+    ],
+    "objects": [
+      "污染控制",
+      "污染控制 / 隔离 / 清洁分区",
+      "化学味容器禁用隔离",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "化学味容器禁用隔离",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "污染控制",
+      "污染控制 / 隔离 / 清洁分区",
+      "化学味容器禁用隔离",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "化学味容器禁用隔离",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "contamination",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "化学味容器禁用隔离",
+      "化学味容器禁用隔离",
+      "污染控制",
+      "化学味容器禁用隔离"
+    ]
+  },
+  {
+    "id": "DG-0666",
+    "title": "外出找资源停止线",
+    "category": "风险决策",
+    "category_original": "风险决策",
+    "domains": [
+      "risk_decision"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "risk_decision_long_term"
+    ],
+    "objects": [
+      "风险决策",
+      "风险决策",
+      "外出找资源停止线",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "外出找资源停止线",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "风险决策",
+      "风险决策",
+      "外出找资源停止线",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "外出找资源停止线",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "risk_decision",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "外出找资源停止线",
+      "外出找资源停止线",
+      "风险决策",
+      "外出找资源停止线"
+    ]
+  },
+  {
+    "id": "DG-0667",
+    "title": "维修失败三次后停用",
+    "category": "风险决策",
+    "category_original": "风险决策",
+    "domains": [
+      "risk_decision"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "risk_decision_long_term"
+    ],
+    "objects": [
+      "风险决策",
+      "风险决策",
+      "维修失败三次后停用",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "维修失败三次后停用",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "风险决策",
+      "风险决策",
+      "维修失败三次后停用",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "维修失败三次后停用",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "risk_decision",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "维修失败三次后停用",
+      "维修失败三次后停用",
+      "风险决策",
+      "维修失败三次后停用"
+    ]
+  },
+  {
+    "id": "DG-0668",
+    "title": "食物可疑时放弃判断",
+    "category": "风险决策",
+    "category_original": "风险决策",
+    "domains": [
+      "risk_decision"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "risk_decision_long_term"
+    ],
+    "objects": [
+      "风险决策",
+      "风险决策",
+      "食物可疑时放弃判断",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "食物可疑时放弃判断",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "风险决策",
+      "风险决策",
+      "食物可疑时放弃判断",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "食物可疑时放弃判断",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "risk_decision",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "食物可疑时放弃判断",
+      "食物可疑时放弃判断",
+      "风险决策",
+      "食物可疑时放弃判断"
+    ]
+  },
+  {
+    "id": "DG-0669",
+    "title": "转移负重过高减物",
+    "category": "风险决策",
+    "category_original": "风险决策",
+    "domains": [
+      "risk_decision"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "risk_decision_long_term"
+    ],
+    "objects": [
+      "风险决策",
+      "风险决策",
+      "转移负重过高减物",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "转移负重过高减物",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "风险决策",
+      "风险决策",
+      "转移负重过高减物",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "转移负重过高减物",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "risk_decision",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "转移负重过高减物",
+      "转移负重过高减物",
+      "风险决策",
+      "转移负重过高减物"
+    ]
+  },
+  {
+    "id": "DG-0670",
+    "title": "分组行动前留守规则",
+    "category": "风险决策",
+    "category_original": "风险决策",
+    "domains": [
+      "risk_decision"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "risk_decision_long_term"
+    ],
+    "objects": [
+      "风险决策",
+      "风险决策",
+      "分组行动前留守规则",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "分组行动前留守规则",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "风险决策",
+      "风险决策",
+      "分组行动前留守规则",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "分组行动前留守规则",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "risk_decision",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "分组行动前留守规则",
+      "分组行动前留守规则",
+      "风险决策",
+      "分组行动前留守规则"
+    ]
+  },
+  {
+    "id": "DG-0671",
+    "title": "种子干燥封存",
+    "category": "种植",
+    "category_original": "种植",
+    "domains": [
+      "planting"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "planting_long_term"
+    ],
+    "objects": [
+      "种植",
+      "种植",
+      "种子干燥封存",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "种子干燥封存",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "种植",
+      "种植",
+      "种子干燥封存",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "种子干燥封存",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "种子干燥封存",
+      "种子干燥封存",
+      "种植",
+      "种子干燥封存"
+    ]
+  },
+  {
+    "id": "DG-0672",
+    "title": "芽苗菜每日冲洗",
+    "category": "种植",
+    "category_original": "种植",
+    "domains": [
+      "planting"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "planting_long_term"
+    ],
+    "objects": [
+      "种植",
+      "种植",
+      "芽苗菜每日冲洗",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "芽苗菜每日冲洗",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "种植",
+      "种植",
+      "芽苗菜每日冲洗",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "芽苗菜每日冲洗",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "芽苗菜每日冲洗",
+      "芽苗菜每日冲洗",
+      "种植",
+      "芽苗菜每日冲洗"
+    ]
+  },
+  {
+    "id": "DG-0673",
+    "title": "容器种植排水孔检查",
+    "category": "种植",
+    "category_original": "种植",
+    "domains": [
+      "planting"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "planting_long_term"
+    ],
+    "objects": [
+      "种植",
+      "种植",
+      "容器种植排水孔检查",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "容器种植排水孔检查",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "种植",
+      "种植",
+      "容器种植排水孔检查",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "容器种植排水孔检查",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "容器种植排水孔检查",
+      "容器种植排水孔检查",
+      "种植",
+      "容器种植排水孔检查"
+    ]
+  },
+  {
+    "id": "DG-0674",
+    "title": "少水覆盖浇灌",
+    "category": "种植",
+    "category_original": "种植",
+    "domains": [
+      "planting"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "planting_long_term"
+    ],
+    "objects": [
+      "种植",
+      "种植",
+      "少水覆盖浇灌",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "少水覆盖浇灌",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "种植",
+      "种植",
+      "少水覆盖浇灌",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "少水覆盖浇灌",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "少水覆盖浇灌",
+      "少水覆盖浇灌",
+      "种植",
+      "少水覆盖浇灌"
+    ]
+  },
+  {
+    "id": "DG-0675",
+    "title": "采收后留种标记",
+    "category": "种植",
+    "category_original": "种植",
+    "domains": [
+      "planting"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "planting_long_term"
+    ],
+    "objects": [
+      "种植",
+      "种植",
+      "采收后留种标记",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "采收后留种标记",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "种植",
+      "种植",
+      "采收后留种标记",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "采收后留种标记",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "采收后留种标记",
+      "采收后留种标记",
+      "种植",
+      "采收后留种标记"
+    ]
+  },
+  {
+    "id": "DG-0676",
+    "title": "小动物饮水遮阴",
+    "category": "小规模养殖",
+    "category_original": "小规模养殖",
+    "domains": [
+      "livestock"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "livestock_long_term"
+    ],
+    "objects": [
+      "养殖",
+      "小规模养殖",
+      "小动物饮水遮阴",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "小动物饮水遮阴",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "养殖",
+      "小规模养殖",
+      "小动物饮水遮阴",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "小动物饮水遮阴",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "livestock",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "小动物饮水遮阴",
+      "小动物饮水遮阴",
+      "养殖",
+      "小动物饮水遮阴"
+    ]
+  },
+  {
+    "id": "DG-0677",
+    "title": "饲料霉变停用",
+    "category": "小规模养殖",
+    "category_original": "小规模养殖",
+    "domains": [
+      "livestock"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "livestock_long_term"
+    ],
+    "objects": [
+      "养殖",
+      "小规模养殖",
+      "饲料霉变停用",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "饲料霉变停用",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "养殖",
+      "小规模养殖",
+      "饲料霉变停用",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "饲料霉变停用",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "livestock",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "饲料霉变停用",
+      "饲料霉变停用",
+      "养殖",
+      "饲料霉变停用"
+    ]
+  },
+  {
+    "id": "DG-0678",
+    "title": "粪便远离水源",
+    "category": "小规模养殖",
+    "category_original": "小规模养殖",
+    "domains": [
+      "livestock"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "livestock_long_term"
+    ],
+    "objects": [
+      "养殖",
+      "小规模养殖",
+      "粪便远离水源",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "粪便远离水源",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "养殖",
+      "小规模养殖",
+      "粪便远离水源",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "粪便远离水源",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "livestock",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "粪便远离水源",
+      "粪便远离水源",
+      "养殖",
+      "粪便远离水源"
+    ]
+  },
+  {
+    "id": "DG-0679",
+    "title": "动物逃逸后停止追赶边界",
+    "category": "小规模养殖",
+    "category_original": "小规模养殖",
+    "domains": [
+      "livestock"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "livestock_long_term"
+    ],
+    "objects": [
+      "养殖",
+      "小规模养殖",
+      "动物逃逸后停止追赶边界",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "动物逃逸后停止追赶边界",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "养殖",
+      "小规模养殖",
+      "动物逃逸后停止追赶边界",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "动物逃逸后停止追赶边界",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "livestock",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "动物逃逸后停止追赶边界",
+      "动物逃逸后停止追赶边界",
+      "养殖",
+      "动物逃逸后停止追赶边界"
+    ]
+  },
+  {
+    "id": "DG-0680",
+    "title": "病死动物隔离不食用",
+    "category": "小规模养殖",
+    "category_original": "小规模养殖",
+    "domains": [
+      "livestock"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "livestock_long_term"
+    ],
+    "objects": [
+      "养殖",
+      "小规模养殖",
+      "病死动物隔离不食用",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "病死动物隔离不食用",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "养殖",
+      "小规模养殖",
+      "病死动物隔离不食用",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "病死动物隔离不食用",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "livestock",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "病死动物隔离不食用",
+      "病死动物隔离不食用",
+      "养殖",
+      "病死动物隔离不食用"
+    ]
+  },
+  {
+    "id": "DG-0681",
+    "title": "未知植物不入口",
+    "category": "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+    "category_original": "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+    "domains": [
+      "wild_food"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "wild_food_long_term"
+    ],
+    "objects": [
+      "野外食物",
+      "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+      "未知植物不入口",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "未知植物不入口",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "野外食物",
+      "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+      "未知植物不入口",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "未知植物不入口",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "wild_food",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "未知植物不入口",
+      "未知植物不入口",
+      "野外食物",
+      "未知植物不入口"
+    ]
+  },
+  {
+    "id": "DG-0682",
+    "title": "捕鱼后清洗去内脏",
+    "category": "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+    "category_original": "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+    "domains": [
+      "wild_food"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "wild_food_long_term"
+    ],
+    "objects": [
+      "野外食物",
+      "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+      "捕鱼后清洗去内脏",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "捕鱼后清洗去内脏",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "野外食物",
+      "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+      "捕鱼后清洗去内脏",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "捕鱼后清洗去内脏",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "wild_food",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "捕鱼后清洗去内脏",
+      "捕鱼后清洗去内脏",
+      "野外食物",
+      "捕鱼后清洗去内脏"
+    ]
+  },
+  {
+    "id": "DG-0683",
+    "title": "病死动物禁食隔离",
+    "category": "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+    "category_original": "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+    "domains": [
+      "wild_food"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "wild_food_long_term"
+    ],
+    "objects": [
+      "野外食物",
+      "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+      "病死动物禁食隔离",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "病死动物禁食隔离",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "野外食物",
+      "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+      "病死动物禁食隔离",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "病死动物禁食隔离",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "wild_food",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "病死动物禁食隔离",
+      "病死动物禁食隔离",
+      "野外食物",
+      "病死动物禁食隔离"
+    ]
+  },
+  {
+    "id": "DG-0684",
+    "title": "诱捕误伤风险检查",
+    "category": "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+    "category_original": "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+    "domains": [
+      "wild_food"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "wild_food_long_term"
+    ],
+    "objects": [
+      "野外食物",
+      "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+      "诱捕误伤风险检查",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "诱捕误伤风险检查",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "野外食物",
+      "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+      "诱捕误伤风险检查",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "诱捕误伤风险检查",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "wild_food",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "诱捕误伤风险检查",
+      "诱捕误伤风险检查",
+      "野外食物",
+      "诱捕误伤风险检查"
+    ]
+  },
+  {
+    "id": "DG-0685",
+    "title": "动物性食物彻底加热",
+    "category": "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+    "category_original": "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+    "domains": [
+      "wild_food"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "wild_food_long_term"
+    ],
+    "objects": [
+      "野外食物",
+      "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+      "动物性食物彻底加热",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "动物性食物彻底加热",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "野外食物",
+      "野外食物获取 / 狩猎捕捞 / 动物蛋白补充",
+      "动物性食物彻底加热",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "动物性食物彻底加热",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "wild_food",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "动物性食物彻底加热",
+      "动物性食物彻底加热",
+      "野外食物",
+      "动物性食物彻底加热"
+    ]
+  },
+  {
+    "id": "DG-0686",
+    "title": "夜间轮值交接表",
+    "category": "团队轮值与任务管理",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "team"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "team_long_term"
+    ],
+    "objects": [
+      "团队管理",
+      "团队轮值与任务管理",
+      "夜间轮值交接表",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "夜间轮值交接表",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "团队管理",
+      "团队轮值与任务管理",
+      "夜间轮值交接表",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "夜间轮值交接表",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "team",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "夜间轮值交接表",
+      "夜间轮值交接表",
+      "团队管理",
+      "夜间轮值交接表"
+    ]
+  },
+  {
+    "id": "DG-0687",
+    "title": "外出登记和归队检查",
+    "category": "团队轮值与任务管理",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "team"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "team_long_term"
+    ],
+    "objects": [
+      "团队管理",
+      "团队轮值与任务管理",
+      "外出登记和归队检查",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "外出登记和归队检查",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "团队管理",
+      "团队轮值与任务管理",
+      "外出登记和归队检查",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "外出登记和归队检查",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "team",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "外出登记和归队检查",
+      "外出登记和归队检查",
+      "团队管理",
+      "外出登记和归队检查"
+    ]
+  },
+  {
+    "id": "DG-0688",
+    "title": "照护任务双人备份",
+    "category": "团队轮值与任务管理",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "team"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "team_long_term"
+    ],
+    "objects": [
+      "团队管理",
+      "团队轮值与任务管理",
+      "照护任务双人备份",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "照护任务双人备份",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "团队管理",
+      "团队轮值与任务管理",
+      "照护任务双人备份",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "照护任务双人备份",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "team",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "照护任务双人备份",
+      "照护任务双人备份",
+      "团队管理",
+      "照护任务双人备份"
+    ]
+  },
+  {
+    "id": "DG-0689",
+    "title": "疲劳成员停止高风险任务",
+    "category": "团队轮值与任务管理",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "team"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "team_long_term"
+    ],
+    "objects": [
+      "团队管理",
+      "团队轮值与任务管理",
+      "疲劳成员停止高风险任务",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "疲劳成员停止高风险任务",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "团队管理",
+      "团队轮值与任务管理",
+      "疲劳成员停止高风险任务",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "疲劳成员停止高风险任务",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "team",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "疲劳成员停止高风险任务",
+      "疲劳成员停止高风险任务",
+      "团队管理",
+      "疲劳成员停止高风险任务"
+    ]
+  },
+  {
+    "id": "DG-0690",
+    "title": "每日十分钟团队复盘",
+    "category": "团队轮值与任务管理",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "team"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "team_long_term"
+    ],
+    "objects": [
+      "团队管理",
+      "团队轮值与任务管理",
+      "每日十分钟团队复盘",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "每日十分钟团队复盘",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "团队管理",
+      "团队轮值与任务管理",
+      "每日十分钟团队复盘",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "每日十分钟团队复盘",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "team",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "每日十分钟团队复盘",
+      "每日十分钟团队复盘",
+      "团队管理",
+      "每日十分钟团队复盘"
+    ]
+  },
+  {
+    "id": "DG-0691",
+    "title": "争吵升级前暂停口令",
+    "category": "心理韧性与冲突降温",
+    "category_original": "心理韧性与冲突降温",
+    "domains": [
+      "psychology"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "psychology_long_term"
+    ],
+    "objects": [
+      "心理韧性",
+      "心理韧性与冲突降温",
+      "争吵升级前暂停口令",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "争吵升级前暂停口令",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "心理韧性",
+      "心理韧性与冲突降温",
+      "争吵升级前暂停口令",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "争吵升级前暂停口令",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "psychology",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "争吵升级前暂停口令",
+      "争吵升级前暂停口令",
+      "心理韧性",
+      "争吵升级前暂停口令"
+    ]
+  },
+  {
+    "id": "DG-0692",
+    "title": "儿童恐慌安抚三步",
+    "category": "心理韧性与冲突降温",
+    "category_original": "心理韧性与冲突降温",
+    "domains": [
+      "psychology"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "psychology_long_term"
+    ],
+    "objects": [
+      "心理韧性",
+      "心理韧性与冲突降温",
+      "儿童恐慌安抚三步",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "儿童恐慌安抚三步",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "心理韧性",
+      "心理韧性与冲突降温",
+      "儿童恐慌安抚三步",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "儿童恐慌安抚三步",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "psychology",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "儿童恐慌安抚三步",
+      "儿童恐慌安抚三步",
+      "心理韧性",
+      "儿童恐慌安抚三步"
+    ]
+  },
+  {
+    "id": "DG-0693",
+    "title": "老人焦虑信息同步",
+    "category": "心理韧性与冲突降温",
+    "category_original": "心理韧性与冲突降温",
+    "domains": [
+      "psychology"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "psychology_long_term"
+    ],
+    "objects": [
+      "心理韧性",
+      "心理韧性与冲突降温",
+      "老人焦虑信息同步",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "老人焦虑信息同步",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "心理韧性",
+      "心理韧性与冲突降温",
+      "老人焦虑信息同步",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "老人焦虑信息同步",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "psychology",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "老人焦虑信息同步",
+      "老人焦虑信息同步",
+      "心理韧性",
+      "老人焦虑信息同步"
+    ]
+  },
+  {
+    "id": "DG-0694",
+    "title": "坏消息统一口径",
+    "category": "心理韧性与冲突降温",
+    "category_original": "心理韧性与冲突降温",
+    "domains": [
+      "psychology"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "psychology_long_term"
+    ],
+    "objects": [
+      "心理韧性",
+      "心理韧性与冲突降温",
+      "坏消息统一口径",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "坏消息统一口径",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "心理韧性",
+      "心理韧性与冲突降温",
+      "坏消息统一口径",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "坏消息统一口径",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "psychology",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "坏消息统一口径",
+      "坏消息统一口径",
+      "心理韧性",
+      "坏消息统一口径"
+    ]
+  },
+  {
+    "id": "DG-0695",
+    "title": "照护者疲劳替换",
+    "category": "心理韧性与冲突降温",
+    "category_original": "心理韧性与冲突降温",
+    "domains": [
+      "psychology"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "psychology_long_term"
+    ],
+    "objects": [
+      "心理韧性",
+      "心理韧性与冲突降温",
+      "照护者疲劳替换",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "照护者疲劳替换",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "心理韧性",
+      "心理韧性与冲突降温",
+      "照护者疲劳替换",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "照护者疲劳替换",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "psychology",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "照护者疲劳替换",
+      "照护者疲劳替换",
+      "心理韧性",
+      "照护者疲劳替换"
+    ]
+  },
+  {
+    "id": "DG-0696",
+    "title": "物资交换不暴露库存",
+    "category": "外部接触与物资交换风险",
+    "category_original": "外部接触与物资交换风险",
+    "domains": [
+      "external_contact"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "external_contact_long_term"
+    ],
+    "objects": [
+      "外部接触",
+      "外部接触与物资交换风险",
+      "物资交换不暴露库存",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "物资交换不暴露库存",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "外部接触",
+      "外部接触与物资交换风险",
+      "物资交换不暴露库存",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "物资交换不暴露库存",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "external_contact",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "物资交换不暴露库存",
+      "物资交换不暴露库存",
+      "外部接触",
+      "物资交换不暴露库存"
+    ]
+  },
+  {
+    "id": "DG-0697",
+    "title": "交换地点不选住所核心区",
+    "category": "外部接触与物资交换风险",
+    "category_original": "外部接触与物资交换风险",
+    "domains": [
+      "external_contact"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "external_contact_long_term"
+    ],
+    "objects": [
+      "外部接触",
+      "外部接触与物资交换风险",
+      "交换地点不选住所核心区",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "交换地点不选住所核心区",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "外部接触",
+      "外部接触与物资交换风险",
+      "交换地点不选住所核心区",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "交换地点不选住所核心区",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "external_contact",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "交换地点不选住所核心区",
+      "交换地点不选住所核心区",
+      "外部接触",
+      "交换地点不选住所核心区"
+    ]
+  },
+  {
+    "id": "DG-0698",
+    "title": "陌生人求助边界回应",
+    "category": "外部接触与物资交换风险",
+    "category_original": "外部接触与物资交换风险",
+    "domains": [
+      "external_contact"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "external_contact_long_term"
+    ],
+    "objects": [
+      "外部接触",
+      "外部接触与物资交换风险",
+      "陌生人求助边界回应",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "陌生人求助边界回应",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "外部接触",
+      "外部接触与物资交换风险",
+      "陌生人求助边界回应",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "陌生人求助边界回应",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "external_contact",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "陌生人求助边界回应",
+      "陌生人求助边界回应",
+      "外部接触",
+      "陌生人求助边界回应"
+    ]
+  },
+  {
+    "id": "DG-0699",
+    "title": "交换物品隔离检查",
+    "category": "外部接触与物资交换风险",
+    "category_original": "外部接触与物资交换风险",
+    "domains": [
+      "external_contact"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "external_contact_long_term"
+    ],
+    "objects": [
+      "外部接触",
+      "外部接触与物资交换风险",
+      "交换物品隔离检查",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "交换物品隔离检查",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "外部接触",
+      "外部接触与物资交换风险",
+      "交换物品隔离检查",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "交换物品隔离检查",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "external_contact",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "交换物品隔离检查",
+      "交换物品隔离检查",
+      "外部接触",
+      "交换物品隔离检查"
+    ]
+  },
+  {
+    "id": "DG-0700",
+    "title": "外部消息交叉验证记录",
+    "category": "外部接触与物资交换风险",
+    "category_original": "外部接触与物资交换风险",
+    "domains": [
+      "external_contact"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "external_contact_long_term"
+    ],
+    "objects": [
+      "外部接触",
+      "外部接触与物资交换风险",
+      "外部消息交叉验证记录",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "外部消息交叉验证记录",
+      "长期断供",
+      "小团队",
+      "行动卡"
+    ],
+    "risks": [
+      "resource_depletion",
+      "contamination",
+      "injury_or_exposure"
+    ],
+    "keywords": [
+      "外部接触",
+      "外部接触与物资交换风险",
+      "外部消息交叉验证记录",
+      "长期断供",
+      "小团队",
+      "行动卡",
+      "外部消息交叉验证记录",
+      "停止线",
+      "降级处理"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "external_contact",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "外部消息交叉验证记录",
+      "外部消息交叉验证记录",
+      "外部接触",
+      "外部消息交叉验证记录"
+    ]
   }
 ]

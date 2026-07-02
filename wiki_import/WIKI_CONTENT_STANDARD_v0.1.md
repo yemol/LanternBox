@@ -7,8 +7,8 @@
 ```markdown
 ---
 title: 伤口清洁与观察基础
-slug: basic-wound-cleaning-and-observation
-category: 医疗与照护
+slug: medical-wound-cleaning-observation-001
+category: 医疗急救
 summary: 介绍小型割伤、擦伤和浅表伤口的基础清洁、覆盖和观察方法。
 tags: 伤口, 清洁, 急救
 risk_level: caution
@@ -26,7 +26,7 @@ source: CDC；Mayo Clinic
 字段要求：
 
 - title：短、明确、可检索。
-- slug：唯一标识，用于导入时判断新建或更新。
+- slug：唯一标识，按 `SLUG_NAMING_RULES.md` 使用 `<domain>-<topic>-<sequence>` 格式，用于导入时判断新建或更新。
 - category：必须与 PocketBase 的 wiki_categories.name 一致。
 - summary：40 到 80 字左右，适合列表和卡片显示。
 - tags：中文关键词，逗号分隔，至少 3 个。
