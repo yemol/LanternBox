@@ -4,7 +4,7 @@ slug: medical-chronic-disease-001
 category: 医疗急救
 priority: P0
 risk_level: high
-summary: 慢病药断供的风险观察：观察断药后的症状变化和日常功能下降；高风险条目，头晕、胸痛、意识异常等信号需停止高风险任务。
+summary: 观察断药后的症状变化和日常功能下降；高风险条目，头晕、胸痛、意识异常等信号需停止高风险任务。
 tags: 医疗, 医疗急救, 慢病药断供的风险观察, 长期断供, 小团队, 离线生存
 guide_links: DG-0611, DG-0612, DG-0613
 kiwix_topics: 慢病药断供的风险观察, 医疗急救, Emergency preparedness, Survival skills, Public health

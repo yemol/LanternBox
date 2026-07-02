@@ -4,7 +4,7 @@ slug: organization-review-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 团队复盘的时间点：区分事实、情绪和改进动作进行短复盘；中风险条目，不把复盘变成追责。
+summary: 区分事实、情绪和改进动作进行短复盘；中风险条目，不把复盘变成追责，并记录责任人、时间和复查结果。
 tags: 团队管理, 团队轮值与任务管理, 团队复盘的时间点, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 团队复盘的时间点, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

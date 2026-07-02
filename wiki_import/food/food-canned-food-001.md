@@ -4,7 +4,7 @@ slug: food-canned-food-001
 category: 食物
 priority: P0
 risk_level: high
-summary: 干粮和罐头三天配给原则：安排干粮罐头先开先用、标签轮换和配给天数估算，并估算干粮、主食和罐头能覆盖的天数；高风险条目，包装破损、锈蚀漏液或鼓包时停止食用。
+summary: 安排干粮罐头先开先用、标签轮换和配给天数估算，并估算干粮、主食和罐头能覆盖的天数；高风险条目，包装破损、锈蚀漏液或鼓包时停止食用。
 tags: 食物, 干粮和罐头三天配给原则, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 干粮和罐头三天配给原则, 食物, Emergency preparedness, Survival skills, Off-grid living

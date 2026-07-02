@@ -4,7 +4,7 @@ slug: shelter-contamination-zone-002
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 一间房划分睡眠食物污染区：在一间房内划出睡眠、食物、污染和通道区；中风险条目，分区混乱时暂停新增任务。
+summary: 在一间房内划出睡眠、食物、污染和通道区；中风险条目，分区混乱时暂停新增任务。
 tags: 庇护空间, 庇护空间分区, 一间房划分睡眠食物污染区, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 一间房划分睡眠食物污染区, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

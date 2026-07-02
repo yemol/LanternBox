@@ -4,7 +4,7 @@ slug: organization-sleep-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 值守和睡眠的轮换平衡：平衡夜间值守、补觉和白天任务；中风险条目，缺眠者不做高风险岗位。
+summary: 平衡夜间值守、补觉和白天任务；中风险条目，缺眠者不做高风险岗位，并记录责任人、时间和复查结果。
 tags: 团队管理, 团队轮值与任务管理, 值守和睡眠的轮换平衡, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 值守和睡眠的轮换平衡, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

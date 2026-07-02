@@ -4,7 +4,7 @@ slug: water-water-shortage-001
 category: 水
 priority: P0
 risk_level: high
-summary: 缺水时饮用烹饪清洁的分级：安排取水、处理、储存和饮用分区；高风险条目，水源异常或容器污染时先隔离。
+summary: 安排取水、处理、储存和饮用分区；高风险条目，水源异常或容器污染时先隔离。
 tags: 水, 缺水时饮用烹饪清洁的分级, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 缺水时饮用烹饪清洁的分级, 水, Emergency preparedness, Survival skills, Public health

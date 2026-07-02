@@ -4,7 +4,7 @@ slug: repair-footwear-repair-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 鞋袜修补与脚部伤害关系：判断鞋袜修补是否能保护脚部继续行动；高风险条目，修不好就缩短路线。
+summary: 判断鞋袜修补是否能保护脚部继续行动；高风险条目，修不好就缩短路线，并记录责任人、时间和复查结果。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 鞋袜修补与脚部伤害关系, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 鞋袜修补与脚部伤害关系, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

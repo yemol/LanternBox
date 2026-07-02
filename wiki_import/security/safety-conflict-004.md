@@ -2,7 +2,7 @@
 title: 冲突降温的基本原则
 slug: safety-conflict-004
 category: 外部接触与物资交换风险
-summary: 冲突降温的基本原则：控制暴露、接触、路线和冲突边界；中风险条目，人员安全受威胁时放弃物资和任务。
+summary: 控制暴露、接触、路线和冲突边界；中风险条目，人员安全受威胁时放弃物资和任务。
 tags: 安全, 冲突降温的基本原则, 冲突降温的基, P0, 长期生存
 risk_level: caution
 status: published

@@ -4,7 +4,7 @@ slug: psychology-grief-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 哀伤和失去物品的反应：允许失物或失去带来的哀伤反应，并安排恢复任务；中风险条目，不让哀伤者独自执行高风险任务。
+summary: 允许失物或失去带来的哀伤反应，并安排恢复任务；中风险条目，不让哀伤者独自执行高风险任务。
 tags: 心理韧性, 心理韧性与冲突降温, 哀伤和失去物品的反应, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 哀伤和失去物品的反应, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

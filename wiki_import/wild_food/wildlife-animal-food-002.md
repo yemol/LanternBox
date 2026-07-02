@@ -4,7 +4,7 @@ slug: wildlife-animal-food-002
 category: 野外食物获取 / 狩猎捕捞 / 动物蛋白补充
 priority: P1
 risk_level: high
-summary: 动物性食物保存边界：关注野外动物性食物的保存时间、容器和虫蝇接触；高风险条目，无冷藏或异味时当天弃用。
+summary: 关注野外动物性食物的保存时间、容器和虫蝇接触；高风险条目，无冷藏或异味时当天弃用。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 动物性食物保存边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0681, DG-0682, DG-0683
 kiwix_topics: 动物性食物保存边界, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living

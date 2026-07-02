@@ -4,7 +4,7 @@ slug: food-hunger-001
 category: 食物
 priority: P0
 risk_level: high
-summary: 饥饿压力下分配冲突的常见误区：把分配冲突写成库存、体力和优先级问题；高风险条目，不要在争吵中临时改变配给规则。
+summary: 把分配冲突写成库存、体力和优先级问题；高风险条目，不要在争吵中临时改变配给规则。
 tags: 食物, 饥饿压力下分配冲突的常见误区, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 饥饿压力下分配冲突的常见误区, 食物, Emergency preparedness, Survival skills, Off-grid living

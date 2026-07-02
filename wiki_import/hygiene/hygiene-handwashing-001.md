@@ -4,7 +4,7 @@ slug: hygiene-handwashing-001
 category: 卫生
 priority: P0
 risk_level: high
-summary: 少水洗手的替代流程原理：保留餐前、如厕后、伤口前后的手卫生；高风险条目，入口污染风险高于省水。
+summary: 保留餐前、如厕后、伤口前后的手卫生；高风险条目，入口污染风险高于省水。
 tags: 卫生, 少水洗手的替代流程原理, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 少水洗手的替代流程原理, 卫生, Emergency preparedness, Survival skills, Public health

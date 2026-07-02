@@ -4,7 +4,7 @@ slug: fire-smoke-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 烟气倒灌的观察信号：控制火源、通风、燃料和睡前复查；高风险条目，烟味、燃气味或人员不适时停止用火。
+summary: 控制火源、通风、燃料和睡前复查；高风险条目，烟味、燃气味或人员不适时停止用火。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 烟气倒灌的观察信号, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 烟气倒灌的观察信号, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

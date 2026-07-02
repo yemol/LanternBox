@@ -4,7 +4,7 @@ slug: agriculture-seedling-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 育苗失败的常见原因：评估水、饲料、清洁人力和污染边界；中风险条目，收益低于卫生与安全成本时退出或缩小。
+summary: 评估水、饲料、清洁人力和污染边界；中风险条目，收益低于卫生与安全成本时退出或缩小。
 tags: 种植, 育苗失败的常见原因, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 育苗失败的常见原因, 种植, Emergency preparedness, Survival skills, Off-grid living

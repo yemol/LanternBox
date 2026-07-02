@@ -4,7 +4,7 @@ slug: shelter-route-scouting-001
 category: 避难转移
 priority: P0
 risk_level: high
-summary: 探路返回时间为什么重要：规定探路路线、标记、返回时间和复查人；高风险条目，探路超时要触发留守动作。
+summary: 规定探路路线、标记、返回时间和复查人；高风险条目，探路超时要触发留守动作。
 tags: 撤离, 避难转移, 探路返回时间为什么重要, 长期断供, 小团队, 离线生存
 guide_links: DG-0641, DG-0642, DG-0643
 kiwix_topics: 探路返回时间为什么重要, 避难转移, Emergency preparedness, Survival skills, Off-grid living

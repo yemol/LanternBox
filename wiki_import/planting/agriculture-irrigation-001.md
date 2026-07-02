@@ -4,7 +4,7 @@ slug: agriculture-irrigation-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 少水灌溉的土壤覆盖：用覆盖、少量多次和根部浇水减少蒸发；中风险条目，饮水紧张时种植让位于人员用水。
+summary: 用覆盖、少量多次和根部浇水减少蒸发；中风险条目，饮水紧张时种植让位于人员用水。
 tags: 种植, 少水灌溉的土壤覆盖, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 少水灌溉的土壤覆盖, 种植, Emergency preparedness, Survival skills, Off-grid living

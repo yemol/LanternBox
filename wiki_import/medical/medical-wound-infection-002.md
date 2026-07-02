@@ -2,7 +2,7 @@
 title: 伤口感染的早期信号
 slug: medical-wound-infection-002
 category: 医疗急救
-summary: 伤口感染的早期信号：区分清洁、覆盖、污染来源和感染早期信号；高风险条目，红肿热痛加重、脓液或污染伤口需停止拖延。
+summary: 区分清洁、覆盖、污染来源和感染早期信号；高风险条目，红肿热痛加重、脓液或污染伤口需停止拖延。
 tags: 医疗急救, 伤口感染的早期信号, 伤口感染的早, P0, 长期生存
 risk_level: high
 status: published

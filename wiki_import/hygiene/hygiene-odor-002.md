@@ -4,7 +4,7 @@ slug: hygiene-odor-002
 category: 卫生
 priority: P0
 risk_level: high
-summary: 室内异味来源的分类判断：按垃圾、厕所、霉味、动物和化学气味分类排查；高风险条目，不要用香味掩盖危险来源。
+summary: 按垃圾、厕所、霉味、动物和化学气味分类排查；高风险条目，不要用香味掩盖危险来源。
 tags: 卫生, 室内异味来源的分类判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 室内异味来源的分类判断, 卫生, Emergency preparedness, Survival skills, Public health

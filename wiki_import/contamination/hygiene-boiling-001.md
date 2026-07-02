@@ -4,7 +4,7 @@ slug: hygiene-boiling-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 化学污染不能靠煮沸解决：区分微生物和化学风险，提醒煮沸不能去除重金属、油污或可疑化学物；高风险条目，发现来源不明或异味油膜时停止饮用。
+summary: 区分微生物和化学风险，提醒煮沸不能去除重金属、油污或可疑化学物；高风险条目，发现来源不明或异味油膜时停止饮用。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 化学污染不能靠煮沸解决, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 化学污染不能靠煮沸解决, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

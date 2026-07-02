@@ -4,7 +4,7 @@ slug: agriculture-seed-saving-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 留种时避免混杂和潮湿：避免留种混杂、潮湿和未标记批次；中风险条目，发霉或来源不明种子不作主力。
+summary: 避免留种混杂、潮湿和未标记批次；中风险条目，发霉或来源不明种子不作主力。
 tags: 种植, 留种时避免混杂和潮湿, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 留种时避免混杂和潮湿, 种植, Emergency preparedness, Survival skills, Off-grid living

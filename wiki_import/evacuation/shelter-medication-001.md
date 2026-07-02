@@ -4,7 +4,7 @@ slug: shelter-medication-001
 category: 避难转移
 priority: P0
 risk_level: high
-summary: 证件药品防水备份原则：记录药品余量、用途、分配人和下一次复查；高风险条目，来源不明、过期破损或剂量不清时不要随意使用。
+summary: 记录药品余量、用途、分配人和下一次复查；高风险条目，来源不明、过期破损或剂量不清时不要随意使用。
 tags: 撤离, 避难转移, 证件药品防水备份原则, 长期断供, 小团队, 离线生存
 guide_links: DG-0641, DG-0642, DG-0643
 kiwix_topics: 证件药品防水备份原则, 避难转移, Emergency preparedness, Survival skills, Off-grid living

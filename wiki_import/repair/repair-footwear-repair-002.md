@@ -2,7 +2,7 @@
 title: 鞋袜破损和脚部伤害
 slug: repair-footwear-repair-002
 category: 维修 / 制作 / 替代 / 拆解再利用
-summary: 鞋袜破损和脚部伤害：判断修补是否能恢复最低功能；中风险条目，承重、带电或锋利风险不明时停止。
+summary: 判断修补是否能恢复最低功能；中风险条目，承重、带电或锋利风险不明时停止。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 鞋袜破损和脚部伤害, 鞋袜破损和脚, P0, 长期生存
 risk_level: caution
 status: published

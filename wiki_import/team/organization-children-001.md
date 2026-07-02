@@ -4,7 +4,7 @@ slug: organization-children-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 儿童老人照护责任人：给儿童老人和病弱者指定主责与备用人；中风险条目，责任人离开必须交接。
+summary: 给儿童老人和病弱者指定主责与备用人；中风险条目，责任人离开必须交接，并记录责任人、时间和复查结果。
 tags: 团队管理, 团队轮值与任务管理, 儿童老人照护责任人, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 儿童老人照护责任人, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

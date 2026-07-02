@@ -4,7 +4,7 @@ slug: repair-bag-repair-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 背包肩带和鞋底破损的承重风险：评估抓地、承重、进水和脚底受伤风险；高风险条目，无法稳定行走时停止转移或改轻负重。
+summary: 评估抓地、承重、进水和脚底受伤风险；高风险条目，无法稳定行走时停止转移或改轻负重。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 背包肩带和鞋底破损的承重风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 背包肩带和鞋底破损的承重风险, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

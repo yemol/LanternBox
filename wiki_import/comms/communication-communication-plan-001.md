@@ -2,7 +2,7 @@
 title: 通讯计划和团队信任
 slug: communication-communication-plan-001
 category: 通讯
-summary: 通讯计划和团队信任：明确谁发消息、何时开机、失败后去哪里；中风险条目，计划不清时不要临时分头行动。
+summary: 明确谁发消息、何时开机、失败后去哪里；中风险条目，计划不清时不要临时分头行动。
 tags: 通讯, 通讯计划和团队信任, 通讯计划和团, P0, 长期生存
 risk_level: caution
 status: published

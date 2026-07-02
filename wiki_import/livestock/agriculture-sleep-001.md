@@ -4,7 +4,7 @@ slug: agriculture-sleep-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 饲养区和睡眠区距离：评估水、饲料、清洁人力和污染边界；中风险条目，收益低于卫生与安全成本时退出或缩小。
+summary: 评估水、饲料、清洁人力和污染边界；中风险条目，收益低于卫生与安全成本时退出或缩小。
 tags: 养殖, 小规模养殖, 饲养区和睡眠区距离, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 饲养区和睡眠区距离, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

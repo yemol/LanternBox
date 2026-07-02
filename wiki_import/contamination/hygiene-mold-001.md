@@ -4,7 +4,7 @@ slug: hygiene-mold-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 霉菌污染物的处理边界：识别霉味、潮湿源和可丢弃物；高风险条目，霉菌污染不带入睡眠和食物区。
+summary: 识别霉味、潮湿源和可丢弃物；高风险条目，霉菌污染不带入睡眠和食物区，并记录责任人、时间和复查结果。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 霉菌污染物的处理边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 霉菌污染物的处理边界, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

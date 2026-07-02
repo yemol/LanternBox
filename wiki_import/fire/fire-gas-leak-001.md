@@ -4,7 +4,7 @@ slug: fire-gas-leak-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 明火照明和燃气味禁忌：禁止明火照明和反复开关电器查漏；高风险条目，气味未消散前不恢复用火。
+summary: 禁止明火照明和反复开关电器查漏；高风险条目，气味未消散前不恢复用火，并记录责任人、时间和复查结果。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 明火照明和燃气味禁忌, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 明火照明和燃气味禁忌, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

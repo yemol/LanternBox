@@ -4,7 +4,7 @@ slug: wildlife-ration-integration-001
 category: 野外食物获取 / 狩猎捕捞 / 动物蛋白补充
 priority: P1
 risk_level: high
-summary: 野外食物和现有口粮配合：把野外食物作为补充而非替代现有配给；高风险条目，来源不稳时不改变主口粮计划。
+summary: 把野外食物作为补充而非替代现有配给；高风险条目，来源不稳时不改变主口粮计划。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 野外食物和现有口粮配合, 长期断供, 小团队, 离线生存
 guide_links: DG-0681, DG-0682, DG-0683
 kiwix_topics: 野外食物和现有口粮配合, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living

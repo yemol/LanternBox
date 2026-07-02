@@ -4,7 +4,7 @@ slug: shelter-space-review-001
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 空间复盘和每日调整：区分事实、情绪和改进动作进行短复盘；中风险条目，不把复盘变成追责。
+summary: 区分事实、情绪和改进动作进行短复盘；中风险条目，不把复盘变成追责，并记录责任人、时间和复查结果。
 tags: 庇护空间, 庇护空间分区, 空间复盘和每日调整, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 空间复盘和每日调整, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

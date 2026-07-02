@@ -4,7 +4,7 @@ slug: agriculture-young-animals-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 幼崽和病弱动物观察：观察幼崽和病弱动物的进食、保温、排泄和活动；中风险条目，持续虚弱时减少扰动并隔离。
+summary: 观察幼崽和病弱动物的进食、保温、排泄和活动；中风险条目，持续虚弱时减少扰动并隔离。
 tags: 养殖, 小规模养殖, 幼崽和病弱动物观察, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 幼崽和病弱动物观察, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: fire-alcohol-stove-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 酒精炉倾倒和加燃料风险：控制炉体稳定、燃料距离和热炉加燃料风险；高风险条目，火未灭或炉体未冷却不补燃料。
+summary: 控制炉体稳定、燃料距离和热炉加燃料风险；高风险条目，火未灭或炉体未冷却不补燃料。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 酒精炉倾倒和加燃料风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 酒精炉倾倒和加燃料风险, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

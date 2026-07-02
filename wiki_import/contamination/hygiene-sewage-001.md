@@ -4,7 +4,7 @@ slug: hygiene-sewage-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 污水进入室内后的分区：把污水进入点、流向和可接触物分区记录；高风险条目，污水接触物未处理前降级。
+summary: 把污水进入点、流向和可接触物分区记录；高风险条目，污水接触物未处理前降级。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 污水进入室内后的分区, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 污水进入室内后的分区, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

@@ -4,7 +4,7 @@ slug: communication-communication-power-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 通信设备防水和防摔：保护通信设备接口、外壳和备用袋；中风险条目，进水或摔伤后先停用检查。
+summary: 保护通信设备接口、外壳和备用袋；中风险条目，进水或摔伤后先停用检查，并记录责任人、时间和复查结果。
 tags: 通讯, 通信设备防水和防摔, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 通信设备防水和防摔, 通讯, Emergency preparedness, Survival skills, Off-grid living

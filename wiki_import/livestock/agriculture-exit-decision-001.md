@@ -4,7 +4,7 @@ slug: agriculture-exit-decision-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 小规模养殖的退出判断：用水、饲料、清洁人力、病弱动物和邻里压力决定是否退出；中风险条目，系统不可持续时缩小或停止养殖。
+summary: 用水、饲料、清洁人力、病弱动物和邻里压力决定是否退出；中风险条目，系统不可持续时缩小或停止养殖。
 tags: 养殖, 小规模养殖, 小规模养殖的退出判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 小规模养殖的退出判断, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: water-water-source-001
 category: 水
 priority: P0
 risk_level: high
-summary: 临时取水来源的风险分级：评估路线体力、安全成本和水源污染可能；高风险条目，路线超时、人员疲劳或水质异常时停止取水。
+summary: 评估路线体力、安全成本和水源污染可能；高风险条目，路线超时、人员疲劳或水质异常时停止取水。
 tags: 水, 临时取水来源的风险分级, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 临时取水来源的风险分级, 水, Emergency preparedness, Survival skills, Public health

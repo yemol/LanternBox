@@ -4,7 +4,7 @@ slug: food-food-waste-001
 category: 食物
 priority: P0
 risk_level: high
-summary: 食物残渣为什么会招虫和发臭：及时密封残渣，隔离虫害、气味和动物接触；高风险条目，不要让残渣靠近食物、水源和睡眠区。
+summary: 及时密封残渣，隔离虫害、气味和动物接触；高风险条目，不要让残渣靠近食物、水源和睡眠区。
 tags: 食物, 食物残渣为什么会招虫和发臭, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 食物残渣为什么会招虫和发臭, 食物, Emergency preparedness, Survival skills, Off-grid living

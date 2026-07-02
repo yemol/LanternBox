@@ -4,7 +4,7 @@ slug: shelter-shelter-knowledge-002
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 湿衣湿鞋放置位置：要求贴身湿衣离开皮肤，睡前保持干燥保温层；中风险条目，寒冷、发抖或湿被褥时停止普通睡眠安排。
+summary: 要求贴身湿衣离开皮肤，睡前保持干燥保温层；中风险条目，寒冷、发抖或湿被褥时停止普通睡眠安排。
 tags: 庇护空间, 庇护空间分区, 湿衣湿鞋放置位置, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 湿衣湿鞋放置位置, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

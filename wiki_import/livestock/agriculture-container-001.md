@@ -4,7 +4,7 @@ slug: agriculture-container-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 动物饮水容器清洁：清洗动物饮水容器并远离人用水和粪便；中风险条目，容器长绿、粪污或异味时更换。
+summary: 清洗动物饮水容器并远离人用水和粪便；中风险条目，容器长绿、粪污或异味时更换。
 tags: 养殖, 小规模养殖, 动物饮水容器清洁, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 动物饮水容器清洁, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: agriculture-mold-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 饲料霉变和动物健康：检查饲料霉味、结块和动物食后异常；中风险条目，霉变饲料不继续投喂。
+summary: 检查饲料霉味、结块和动物食后异常；中风险条目，霉变饲料不继续投喂，并记录责任人、时间和复查结果。
 tags: 养殖, 小规模养殖, 饲料霉变和动物健康, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 饲料霉变和动物健康, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

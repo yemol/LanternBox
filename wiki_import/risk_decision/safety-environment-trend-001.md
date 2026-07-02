@@ -4,7 +4,7 @@ slug: safety-environment-trend-001
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 环境恶化速度如何记录：记录水位、烟味、噪声、人流和结构变化速度；高风险条目，恶化加快时提前撤离或降级。
+summary: 记录水位、烟味、噪声、人流和结构变化速度；高风险条目，恶化加快时提前撤离或降级。
 tags: 风险决策, 环境恶化速度如何记录, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 环境恶化速度如何记录, 风险决策, Emergency preparedness, Survival skills, Off-grid living

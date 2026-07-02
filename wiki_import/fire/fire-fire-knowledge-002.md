@@ -4,7 +4,7 @@ slug: fire-fire-knowledge-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 睡前火源复查的意义：按火源、燃料、电源、通风和出口做睡前复查；高风险条目，不靠口头记忆代替签名检查。
+summary: 按火源、燃料、电源、通风和出口做睡前复查；高风险条目，不靠口头记忆代替签名检查。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 睡前火源复查的意义, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 睡前火源复查的意义, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

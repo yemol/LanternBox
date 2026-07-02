@@ -4,7 +4,7 @@ slug: shelter-zone-marking-001
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 小空间分区的标记方法：用标记把小空间分成睡眠、食物、污染和工具区；中风险条目，标记失效时重新整理。
+summary: 用标记把小空间分成睡眠、食物、污染和工具区；中风险条目，标记失效时重新整理。
 tags: 庇护空间, 庇护空间分区, 小空间分区的标记方法, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 小空间分区的标记方法, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

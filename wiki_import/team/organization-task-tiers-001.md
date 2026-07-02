@@ -4,7 +4,7 @@ slug: organization-task-tiers-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 任务三层保命维持改善：把任务分为保命、维持、改善三层；中风险条目，资源紧张时暂停改善任务。
+summary: 把任务分为保命、维持、改善三层；中风险条目，资源紧张时暂停改善任务，并记录责任人、时间和复查结果。
 tags: 团队管理, 团队轮值与任务管理, 任务三层保命维持改善, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 任务三层保命维持改善, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

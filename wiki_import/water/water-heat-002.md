@@ -2,7 +2,7 @@
 title: 高温下脱水和补水判断
 slug: water-heat-002
 category: 水
-summary: 高温下脱水和补水判断：安排取水、处理、储存和饮用分区；高风险条目，水源异常或容器污染时先隔离。
+summary: 安排取水、处理、储存和饮用分区；高风险条目，水源异常或容器污染时先隔离。
 tags: 水, 高温下脱水和补水判断, 高温下脱水和, P0, 长期生存
 risk_level: high
 status: published

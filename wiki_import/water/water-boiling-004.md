@@ -2,7 +2,7 @@
 title: 煮沸和过滤的区别
 slug: water-boiling-004
 category: 水
-summary: 煮沸和过滤的区别：说明沉淀、过滤和煮沸的先后顺序；中风险条目，水源有化学污染或容器不洁时不作为饮用水。
+summary: 说明沉淀、过滤和煮沸的先后顺序；中风险条目，水源有化学污染或容器不洁时不作为饮用水。
 tags: 水, 煮沸和过滤的区别, 煮沸和过滤的, P0, 长期生存
 risk_level: caution
 status: published

@@ -4,7 +4,7 @@ slug: communication-sms-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 短信电话和即时消息的可靠性差异：比较短信、电话和即时消息的耗电与可靠性；中风险条目，弱网时优先短文本。
+summary: 比较短信、电话和即时消息的耗电与可靠性；中风险条目，弱网时优先短文本。
 tags: 通讯, 短信电话和即时消息的可靠性差异, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 短信电话和即时消息的可靠性差异, 通讯, Emergency preparedness, Survival skills, Off-grid living

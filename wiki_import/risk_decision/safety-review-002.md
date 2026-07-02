@@ -4,7 +4,7 @@ slug: safety-review-002
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 复盘如何改进下一次决策：区分事实、情绪和改进动作进行短复盘；高风险条目，不把复盘变成追责。
+summary: 区分事实、情绪和改进动作进行短复盘；高风险条目，不把复盘变成追责，并记录责任人、时间和复查结果。
 tags: 风险决策, 复盘如何改进下一次决策, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 复盘如何改进下一次决策, 风险决策, Emergency preparedness, Survival skills, Off-grid living

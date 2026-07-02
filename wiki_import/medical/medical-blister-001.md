@@ -4,7 +4,7 @@ slug: medical-blister-001
 category: 医疗急救
 priority: P0
 risk_level: high
-summary: 水泡和粘连衣物的处理边界：判断脚部水泡是否影响行走，安排清洁覆盖、换袜和缩短路线；高风险条目，破损感染、疼痛加重或鞋袜潮湿时停止长距离移动。
+summary: 判断脚部水泡是否影响行走，安排清洁覆盖、换袜和缩短路线；高风险条目，破损感染、疼痛加重或鞋袜潮湿时停止长距离移动。
 tags: 医疗, 医疗急救, 水泡和粘连衣物的处理边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0611, DG-0612, DG-0613
 kiwix_topics: 水泡和粘连衣物的处理边界, 医疗急救, Emergency preparedness, Survival skills, Public health

@@ -4,7 +4,7 @@ slug: water-water-knowledge-001
 category: 水
 priority: P0
 risk_level: high
-summary: 可疑水源从饮用降级为清洁用水：把可疑水从饮用降级为清洁或冲洗用途；高风险条目，污染类型不明时不入口。
+summary: 把可疑水从饮用降级为清洁或冲洗用途；高风险条目，污染类型不明时不入口。
 tags: 水, 可疑水源从饮用降级为清洁用水, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 可疑水源从饮用降级为清洁用水, 水, Emergency preparedness, Survival skills, Public health

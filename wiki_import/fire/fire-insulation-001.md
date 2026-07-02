@@ -4,7 +4,7 @@ slug: fire-insulation-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 潮湿寒冷下脚部保温：处理湿袜、脚趾麻木和鞋内积水；高风险条目，脚部破损或麻木时停止长距离移动。
+summary: 处理湿袜、脚趾麻木和鞋内积水；高风险条目，脚部破损或麻木时停止长距离移动。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 潮湿寒冷下脚部保温, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 潮湿寒冷下脚部保温, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

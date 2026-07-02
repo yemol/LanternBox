@@ -4,7 +4,7 @@ slug: safety-electric-shock-001
 category: 安全
 priority: P0
 risk_level: high
-summary: 漏电风险中的水和金属接触：先断电、隔离潮湿电器和可疑线材；高风险条目，不通电测试短路设备。
+summary: 先断电、隔离潮湿电器和可疑线材；高风险条目，不通电测试短路设备，并记录责任人、时间和复查结果。
 tags: 安全, 漏电风险中的水和金属接触, 长期断供, 小团队, 离线生存
 guide_links: DG-0631, DG-0632, DG-0633
 kiwix_topics: 漏电风险中的水和金属接触, 安全, Emergency preparedness, Survival skills, Off-grid living

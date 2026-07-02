@@ -4,7 +4,7 @@ slug: agriculture-cold-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 低温下小动物保暖：检查幼弱动物保温、饮水和垫料干燥；中风险条目，低温造成病弱或耗水耗料过高时调整。
+summary: 检查幼弱动物保温、饮水和垫料干燥；中风险条目，低温造成病弱或耗水耗料过高时调整。
 tags: 养殖, 小规模养殖, 低温下小动物保暖, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 低温下小动物保暖, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

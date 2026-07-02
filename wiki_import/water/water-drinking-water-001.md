@@ -4,7 +4,7 @@ slug: water-drinking-water-001
 category: 水
 priority: P0
 risk_level: high
-summary: 多人共用饮用水的消耗率判断：按人数、天气和活动量估算饮用水消耗；高风险条目，消耗异常时调整配给。
+summary: 按人数、天气和活动量估算饮用水消耗；高风险条目，消耗异常时调整配给，并记录责任人、时间和复查结果。
 tags: 水, 多人共用饮用水的消耗率判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 多人共用饮用水的消耗率判断, 水, Emergency preparedness, Survival skills, Public health

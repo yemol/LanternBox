@@ -2,7 +2,7 @@
 title: 干湿垃圾分离原理
 slug: hygiene-wet-waste-003
 category: 卫生
-summary: 干湿垃圾分离原理：划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
+summary: 划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
 tags: 卫生, 干湿垃圾分离原理, 干湿垃圾分离, P0, 长期生存
 risk_level: caution
 status: published

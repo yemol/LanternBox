@@ -4,7 +4,7 @@ slug: repair-tool-maintenance-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 工具生锈和潮湿维护：检查借用、归还、破损和责任人记录；高风险条目，锋利或带电工具不口头交接。
+summary: 检查借用、归还、破损和责任人记录；高风险条目，锋利或带电工具不口头交接。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 工具生锈和潮湿维护, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 工具生锈和潮湿维护, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

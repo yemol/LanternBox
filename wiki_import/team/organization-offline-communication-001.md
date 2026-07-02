@@ -4,7 +4,7 @@ slug: organization-offline-communication-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 任务看板在断网环境中作用：用离线看板显示今日任务、异常、外出和库存警戒；中风险条目，过期任务及时清除。
+summary: 用离线看板显示今日任务、异常、外出和库存警戒；中风险条目，过期任务及时清除。
 tags: 团队管理, 团队轮值与任务管理, 任务看板在断网环境中作用, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 任务看板在断网环境中作用, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

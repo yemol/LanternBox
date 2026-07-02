@@ -4,7 +4,7 @@ slug: food-food-knowledge-002
 category: 食物
 priority: P0
 risk_level: high
-summary: 不可食残渣和可食剩余的分界：把可食剩余和不可食残渣分开存放与处理；高风险条目，残渣招虫发臭时远离食物区。
+summary: 把可食剩余和不可食残渣分开存放与处理；高风险条目，残渣招虫发臭时远离食物区。
 tags: 食物, 不可食残渣和可食剩余的分界, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 不可食残渣和可食剩余的分界, 食物, Emergency preparedness, Survival skills, Off-grid living

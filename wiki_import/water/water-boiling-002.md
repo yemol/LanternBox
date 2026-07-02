@@ -4,7 +4,7 @@ slug: water-boiling-002
 category: 水
 priority: P0
 risk_level: high
-summary: 浑浊水沉淀过滤煮沸的顺序：说明沉淀、过滤和煮沸的先后顺序，并先做沉淀和粗滤；高风险条目，水源有化学污染或容器不洁时不作为饮用水。
+summary: 说明沉淀、过滤和煮沸的先后顺序，并先做沉淀和粗滤；高风险条目，水源有化学污染或容器不洁时不作为饮用水。
 tags: 水, 浑浊水沉淀过滤煮沸的顺序, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 浑浊水沉淀过滤煮沸的顺序, 水, Emergency preparedness, Survival skills, Public health

@@ -2,7 +2,7 @@
 title: 发热观察与记录
 slug: medical-fever-observation-record-001
 category: 医疗急救
-summary: 发热观察与记录：记录体温感受、精神状态、尿量和伴随症状；中风险条目，皮疹、意识变化、持续恶化或儿童危险信号需升级。
+summary: 记录体温感受、精神状态、尿量和伴随症状；中风险条目，皮疹、意识变化、持续恶化或儿童危险信号需升级。
 tags: 发热, 体温, 健康记录, 补水, 医疗观察, 感染
 risk_level: caution
 status: published

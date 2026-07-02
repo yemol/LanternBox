@@ -4,7 +4,7 @@ slug: food-children-001
 category: 食物
 priority: P0
 risk_level: high
-summary: 儿童老人食物优先级判断：优先分配安全、易消化、低污染风险食物；高风险条目，不要让高风险剩饭和可疑来源食物给儿童老人。
+summary: 优先分配安全、易消化、低污染风险食物；高风险条目，不要让高风险剩饭和可疑来源食物给儿童老人。
 tags: 食物, 儿童老人食物优先级判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 儿童老人食物优先级判断, 食物, Emergency preparedness, Survival skills, Off-grid living

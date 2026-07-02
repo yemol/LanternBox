@@ -4,7 +4,7 @@ slug: energy-lighting-001
 category: 能源
 priority: P0
 risk_level: high
-summary: 低亮照明为什么更安全省电：用低亮、固定点和反光减少耗电与跌倒；高风险条目，不要完全摸黑处理热物和工具。
+summary: 用低亮、固定点和反光减少耗电与跌倒；高风险条目，不要完全摸黑处理热物和工具。
 tags: 能源, 低亮照明为什么更安全省电, 长期断供, 小团队, 离线生存
 guide_links: DG-0616, DG-0617, DG-0618
 kiwix_topics: 低亮照明为什么更安全省电, 能源, Emergency preparedness, Survival skills, Off-grid living

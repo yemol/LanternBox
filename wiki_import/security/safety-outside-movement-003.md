@@ -2,7 +2,7 @@
 title: 外出风险和返回时间
 slug: safety-outside-movement-003
 category: 安全
-summary: 外出风险和返回时间：控制暴露、接触、路线和冲突边界；中风险条目，人员安全受威胁时放弃物资和任务。
+summary: 控制暴露、接触、路线和冲突边界；中风险条目，人员安全受威胁时放弃物资和任务。
 tags: 安全, 外出风险和返回时间, 外出风险和返, P0, 长期生存
 risk_level: caution
 status: published

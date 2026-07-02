@@ -4,7 +4,7 @@ slug: fire-cold-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 热水瓶和低温保温边界：用布套隔开热水瓶并检查漏水烫伤；高风险条目，漏水或过烫时不进睡眠区。
+summary: 用布套隔开热水瓶并检查漏水烫伤；高风险条目，漏水或过烫时不进睡眠区，并记录责任人、时间和复查结果。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 热水瓶和低温保温边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 热水瓶和低温保温边界, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

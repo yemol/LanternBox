@@ -4,7 +4,7 @@ slug: safety-children-001
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 暴露儿童老人信息的风险：把儿童老人位置、健康和照护需求从外部沟通中剥离；高风险条目，不要把脆弱成员作为求助或交换筹码。
+summary: 把儿童老人位置、健康和照护需求从外部沟通中剥离；高风险条目，不要把脆弱成员作为求助或交换筹码。
 tags: 外部接触, 外部接触与物资交换风险, 暴露儿童老人信息的风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 暴露儿童老人信息的风险, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: organization-separated-movement-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 队伍分开行动的留守规则：外出前写清人员、路线、目的和返回时间；中风险条目，信息最小集不完整时不分队。
+summary: 外出前写清人员、路线、目的和返回时间；中风险条目，信息最小集不完整时不分队。
 tags: 团队管理, 团队轮值与任务管理, 队伍分开行动的留守规则, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 队伍分开行动的留守规则, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

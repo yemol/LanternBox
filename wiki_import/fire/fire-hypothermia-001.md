@@ -4,7 +4,7 @@ slug: fire-hypothermia-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 失温早期信号和保温层：识别发抖、动作变慢、说话含糊和湿冷风险；高风险条目，意识异常或停止发抖时停止普通任务。
+summary: 识别发抖、动作变慢、说话含糊和湿冷风险；高风险条目，意识异常或停止发抖时停止普通任务。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 失温早期信号和保温层, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 失温早期信号和保温层, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

@@ -2,7 +2,7 @@
 title: 烧烫伤初步处理与观察
 slug: medical-burn-first-aid-001
 category: 医疗急救
-summary: 烧烫伤初步处理与观察：优先冷却、覆盖和隔离污染物，避免涂抹不明材料；中风险条目，面积大、深部伤或意识异常时停止普通处理。
+summary: 优先冷却、覆盖和隔离污染物，避免涂抹不明材料；中风险条目，面积大、深部伤或意识异常时停止普通处理。
 tags: 烧伤, 烫伤, 急救, 冷却, 医疗观察, 伤口
 risk_level: caution
 status: published

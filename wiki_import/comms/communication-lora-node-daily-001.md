@@ -2,7 +2,7 @@
 title: LoRa 节点每日状态检查
 slug: communication-lora-node-daily-001
 category: 通讯
-summary: LoRa 节点每日状态检查：检查节点电量、天线、编号和收发测试；异常节点先标记再复查。
+summary: 检查节点电量、天线、编号和收发测试；异常节点先标记再复查，并记录责任人、时间和复查结果。
 tags: LoRa, 通讯, 节点, 每日检查, 天线, 电量
 risk_level: normal
 status: published

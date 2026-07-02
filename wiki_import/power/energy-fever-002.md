@@ -4,7 +4,7 @@ slug: energy-fever-002
 category: 能源
 priority: P0
 risk_level: high
-summary: 负载过大导致发热和跳闸：减少负载、分时充电并观察跳闸发热，并记录体温感受、精神状态、尿量和伴随症状；高风险条目，不绕过保护装置强行重启。
+summary: 减少负载、分时充电并观察跳闸发热，并记录体温感受、精神状态、尿量和伴随症状；高风险条目，不绕过保护装置强行重启。
 tags: 能源, 负载过大导致发热和跳闸, 长期断供, 小团队, 离线生存
 guide_links: DG-0616, DG-0617, DG-0618
 kiwix_topics: 负载过大导致发热和跳闸, 能源, Emergency preparedness, Survival skills, Off-grid living

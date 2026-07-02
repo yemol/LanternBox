@@ -4,7 +4,7 @@ slug: hygiene-children-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 儿童接触污染物的防护：阻断儿童接触污水、垃圾、尸体和清洁剂；高风险条目，接触后先清洁再回到活动区。
+summary: 阻断儿童接触污水、垃圾、尸体和清洁剂；高风险条目，接触后先清洁再回到活动区。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 儿童接触污染物的防护, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 儿童接触污染物的防护, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

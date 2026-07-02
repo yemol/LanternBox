@@ -4,7 +4,7 @@ slug: clothing-insulation-002
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 睡眠保温中的地面隔离：用垫层、纸板或背包减少睡眠时从地面失热；中风险条目，地面潮湿或人员发冷时重新布置睡眠区。
+summary: 用垫层、纸板或背包减少睡眠时从地面失热；中风险条目，地面潮湿或人员发冷时重新布置睡眠区。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 睡眠保温中的地面隔离, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 睡眠保温中的地面隔离, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

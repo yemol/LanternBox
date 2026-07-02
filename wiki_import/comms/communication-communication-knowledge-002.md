@@ -4,7 +4,7 @@ slug: communication-communication-knowledge-002
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 电量和通信窗口的协调：把通信窗口和电量预算绑定；中风险条目，不要弱信号长时间搜索耗电。
+summary: 把通信窗口和电量预算绑定；中风险条目，不要弱信号长时间搜索耗电，并记录责任人、时间和复查结果。
 tags: 通讯, 电量和通信窗口的协调, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 电量和通信窗口的协调, 通讯, Emergency preparedness, Survival skills, Off-grid living

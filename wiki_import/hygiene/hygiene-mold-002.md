@@ -4,7 +4,7 @@ slug: hygiene-mold-002
 category: 卫生
 priority: P0
 risk_level: high
-summary: 霉菌潮湿和呼吸刺激风险：识别霉味、潮湿源和可丢弃物；高风险条目，霉菌污染不带入睡眠和食物区。
+summary: 识别霉味、潮湿源和可丢弃物；高风险条目，霉菌污染不带入睡眠和食物区，并记录责任人、时间和复查结果。
 tags: 卫生, 霉菌潮湿和呼吸刺激风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 霉菌潮湿和呼吸刺激风险, 卫生, Emergency preparedness, Survival skills, Public health

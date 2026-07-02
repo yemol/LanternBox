@@ -2,7 +2,7 @@
 title: 停水后的用水优先级
 slug: water-priority-outage-001
 category: 水
-summary: 停水后的用水优先级：安排取水、处理、储存和饮用分区；中风险条目，水源异常或容器污染时先隔离。
+summary: 安排取水、处理、储存和饮用分区；中风险条目，水源异常或容器污染时先隔离。
 tags: 停水, 用水优先级, 饮用水, 清洁水, 卫生, 储水
 risk_level: caution
 status: published

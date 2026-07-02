@@ -4,7 +4,7 @@ slug: communication-written-message-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 纸条留言的时间去向格式：写清时间、去向、人数、下一步和签名；中风险条目，敏感信息不留在暴露点。
+summary: 写清时间、去向、人数、下一步和签名；中风险条目，敏感信息不留在暴露点。
 tags: 通讯, 纸条留言的时间去向格式, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 纸条留言的时间去向格式, 通讯, Emergency preparedness, Survival skills, Off-grid living

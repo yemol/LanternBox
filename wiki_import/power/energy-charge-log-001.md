@@ -4,7 +4,7 @@ slug: energy-charge-log-001
 category: 能源
 priority: P0
 risk_level: high
-summary: 充放电记录的必要性：记录设备编号、起止电量、来源和用途；高风险条目，异常发热或中断要标记停用。
+summary: 记录设备编号、起止电量、来源和用途；高风险条目，异常发热或中断要标记停用。
 tags: 能源, 充放电记录的必要性, 长期断供, 小团队, 离线生存
 guide_links: DG-0616, DG-0617, DG-0618
 kiwix_topics: 充放电记录的必要性, 能源, Emergency preparedness, Survival skills, Off-grid living

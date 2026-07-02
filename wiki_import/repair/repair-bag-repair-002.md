@@ -4,7 +4,7 @@ slug: repair-bag-repair-002
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 雨衣和背包防水修补判断：判断雨衣、背包破口和临时防水层是否够用；高风险条目，修补失败时降级装非关键物。
+summary: 判断雨衣、背包破口和临时防水层是否够用；高风险条目，修补失败时降级装非关键物。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 雨衣和背包防水修补判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 雨衣和背包防水修补判断, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

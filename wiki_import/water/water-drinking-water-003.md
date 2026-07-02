@@ -2,7 +2,7 @@
 title: 饮用水与清洁水分级
 slug: water-drinking-water-003
 category: 水
-summary: 饮用水与清洁水分级：把饮用水、清洁水和冲洗水分开标记；中风险条目，不同等级不混用。
+summary: 把饮用水、清洁水和冲洗水分开标记；中风险条目，不同等级不混用，并记录责任人、时间和复查结果。
 tags: 水, 饮用水与清洁水分级, 饮用水与清洁, P0, 长期生存
 risk_level: caution
 status: published

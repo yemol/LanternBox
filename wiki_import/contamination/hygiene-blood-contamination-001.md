@@ -4,7 +4,7 @@ slug: hygiene-blood-contamination-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 血液污染的接触风险：分开血液接触物、清洁工具和处理人员；高风险条目，皮肤破损或污染不明时升级防护。
+summary: 分开血液接触物、清洁工具和处理人员；高风险条目，皮肤破损或污染不明时升级防护。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 血液污染的接触风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 血液污染的接触风险, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

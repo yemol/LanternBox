@@ -2,7 +2,7 @@
 title: 潮湿电器为什么危险
 slug: repair-repair-knowledge-002
 category: 维修 / 制作 / 替代 / 拆解再利用
-summary: 潮湿电器为什么危险：识别受潮电器的短路、腐蚀和触电风险；高风险条目，不烘烤或通电验证。
+summary: 识别受潮电器的短路、腐蚀和触电风险；高风险条目，不烘烤或通电验证，并记录责任人、时间和复查结果。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 潮湿电器危险, 潮湿电器为什, P0, 长期生存
 risk_level: high
 status: published

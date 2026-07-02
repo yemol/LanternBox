@@ -4,7 +4,7 @@ slug: agriculture-leafy-greens-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 叶菜和根菜周期差异：比较叶菜和根菜的周期、热量价值和用水需求；中风险条目，不要高估短周期叶菜的饱腹作用。
+summary: 比较叶菜和根菜的周期、热量价值和用水需求；中风险条目，不要高估短周期叶菜的饱腹作用。
 tags: 种植, 叶菜和根菜周期差异, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 叶菜和根菜周期差异, 种植, Emergency preparedness, Survival skills, Off-grid living

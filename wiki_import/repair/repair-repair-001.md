@@ -4,7 +4,7 @@ slug: repair-repair-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 修补失败后的降级用途：把修补失败物品降级为非关键用途；高风险条目，不让失败修补继续承担关键任务。
+summary: 把修补失败物品降级为非关键用途；高风险条目，不让失败修补继续承担关键任务。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 修补失败后的降级用途, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 修补失败后的降级用途, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: hygiene-sleep-001
 category: 卫生
 priority: P0
 risk_level: high
-summary: 卫生区动线和睡眠区距离：让厕所、垃圾、清洁和睡眠区形成单向动线；高风险条目，污染动线穿过睡眠区时重排。
+summary: 让厕所、垃圾、清洁和睡眠区形成单向动线；高风险条目，污染动线穿过睡眠区时重排。
 tags: 卫生, 卫生区动线和睡眠区距离, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 卫生区动线和睡眠区距离, 卫生, Emergency preparedness, Survival skills, Public health

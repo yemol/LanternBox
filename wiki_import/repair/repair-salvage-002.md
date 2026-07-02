@@ -2,7 +2,7 @@
 title: 拆解再利用前的停用判断
 slug: repair-salvage-002
 category: 维修 / 制作 / 替代 / 拆解再利用
-summary: 拆解再利用前的停用判断：判断修补是否能恢复最低功能；中风险条目，承重、带电或锋利风险不明时停止。
+summary: 判断修补是否能恢复最低功能；中风险条目，承重、带电或锋利风险不明时停止。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 拆解再利用前的停用判断, 拆解再利用前, P0, 长期生存
 risk_level: caution
 status: published

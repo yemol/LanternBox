@@ -4,7 +4,7 @@ slug: safety-review-001
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 交换后复盘和物资清点：区分事实、情绪和改进动作进行短复盘；高风险条目，不把复盘变成追责。
+summary: 区分事实、情绪和改进动作进行短复盘；高风险条目，不把复盘变成追责，并记录责任人、时间和复查结果。
 tags: 外部接触, 外部接触与物资交换风险, 交换后复盘和物资清点, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 交换后复盘和物资清点, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

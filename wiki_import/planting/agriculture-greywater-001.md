@@ -4,7 +4,7 @@ slug: agriculture-greywater-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 灰水浇灌的适用边界：区分洗菜水、洗涤水和污染灰水的浇灌边界；中风险条目，含油、化学品或粪污的水不浇可食部位。
+summary: 区分洗菜水、洗涤水和污染灰水的浇灌边界；中风险条目，含油、化学品或粪污的水不浇可食部位。
 tags: 种植, 灰水浇灌的适用边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 灰水浇灌的适用边界, 种植, Emergency preparedness, Survival skills, Off-grid living

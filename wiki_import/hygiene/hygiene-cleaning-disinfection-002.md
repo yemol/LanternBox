@@ -2,7 +2,7 @@
 title: 清洁和消毒的区别
 slug: hygiene-cleaning-disinfection-002
 category: 卫生
-summary: 清洁和消毒的区别：划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
+summary: 划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
 tags: 卫生, 清洁和消毒的区别, 清洁和消毒的, P0, 长期生存
 risk_level: caution
 status: published

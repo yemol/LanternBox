@@ -4,7 +4,7 @@ slug: hygiene-waste-003
 category: 卫生
 priority: P0
 risk_level: high
-summary: 污染垃圾袋渗漏风险：二次密封污染垃圾并远离水食物；高风险条目，袋体破损或渗漏时立即换袋。
+summary: 二次密封污染垃圾并远离水食物；高风险条目，袋体破损或渗漏时立即换袋，并记录责任人、时间和复查结果。
 tags: 卫生, 污染垃圾袋渗漏风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 污染垃圾袋渗漏风险, 卫生, Emergency preparedness, Survival skills, Public health

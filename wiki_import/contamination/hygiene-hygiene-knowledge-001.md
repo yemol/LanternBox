@@ -4,7 +4,7 @@ slug: hygiene-hygiene-knowledge-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 处理污染物后的手部清洁：在处理污染物、食物、伤口和如厕后安排手清洁；高风险条目，少水时也要保留关键时刻。
+summary: 在处理污染物、食物、伤口和如厕后安排手清洁；高风险条目，少水时也要保留关键时刻。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 处理污染物后的手部清洁, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 处理污染物后的手部清洁, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

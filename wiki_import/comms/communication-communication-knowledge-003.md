@@ -4,7 +4,7 @@ slug: communication-communication-knowledge-003
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 纸质地图和联系人联动：把纸质地图、联系人和会合点联动备份；中风险条目，不要只依赖手机地图。
+summary: 把纸质地图、联系人和会合点联动备份；中风险条目，不要只依赖手机地图，并记录责任人、时间和复查结果。
 tags: 通讯, 纸质地图和联系人联动, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 纸质地图和联系人联动, 通讯, Emergency preparedness, Survival skills, Off-grid living

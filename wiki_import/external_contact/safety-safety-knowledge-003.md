@@ -4,7 +4,7 @@ slug: safety-safety-knowledge-003
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 真假信息的交叉验证：交叉核对来源、时间、地点和可观察事实；高风险条目，未经复核的信息不改变撤离或配给。
+summary: 交叉核对来源、时间、地点和可观察事实；高风险条目，未经复核的信息不改变撤离或配给。
 tags: 外部接触, 外部接触与物资交换风险, 真假信息的交叉验证, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 真假信息的交叉验证, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

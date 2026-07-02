@@ -4,7 +4,7 @@ slug: hygiene-handwashing-002
 category: 卫生
 priority: P0
 risk_level: high
-summary: 清理后洗手替代方法：划分清洁区、污染区和处理顺序；高风险条目，污染来源不清或人员不适时升级。
+summary: 划分清洁区、污染区和处理顺序；高风险条目，污染来源不清或人员不适时升级。
 tags: 卫生, 清理后洗手替代方法, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 清理后洗手替代方法, 卫生, Emergency preparedness, Survival skills, Public health

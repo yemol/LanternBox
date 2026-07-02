@@ -4,7 +4,7 @@ slug: wildlife-hand-hygiene-001
 category: 野外食物获取 / 狩猎捕捞 / 动物蛋白补充
 priority: P1
 risk_level: high
-summary: 处理动物后手卫生：处理动物后先清洁双手、刀具和容器，再接触水食物；高风险条目，缺少清洁条件时不处理入口食物。
+summary: 处理动物后先清洁双手、刀具和容器，再接触水食物；高风险条目，缺少清洁条件时不处理入口食物。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 处理动物后手卫生, 长期断供, 小团队, 离线生存
 guide_links: DG-0681, DG-0682, DG-0683
 kiwix_topics: 处理动物后手卫生, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living

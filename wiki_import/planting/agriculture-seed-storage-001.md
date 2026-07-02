@@ -4,7 +4,7 @@ slug: agriculture-seed-storage-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 种子保存的干燥和温度：控制种子干燥、温度、标签和优先级；中风险条目，受潮发霉或虫害时隔离。
+summary: 控制种子干燥、温度、标签和优先级；中风险条目，受潮发霉或虫害时隔离，并记录责任人、时间和复查结果。
 tags: 种植, 种子保存的干燥和温度, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 种子保存的干燥和温度, 种植, Emergency preparedness, Survival skills, Off-grid living

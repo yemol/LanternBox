@@ -4,7 +4,7 @@ slug: energy-solar-charging-002
 category: 能源
 priority: P0
 risk_level: high
-summary: 太阳能板防水和线头保护：按光照、角度、温度和接口防水安排补电；高风险条目，输出低或进水风险高时转节电。
+summary: 按光照、角度、温度和接口防水安排补电；高风险条目，输出低或进水风险高时转节电。
 tags: 能源, 太阳能板防水和线头保护, 长期断供, 小团队, 离线生存
 guide_links: DG-0616, DG-0617, DG-0618
 kiwix_topics: 太阳能板防水和线头保护, 能源, Emergency preparedness, Survival skills, Off-grid living

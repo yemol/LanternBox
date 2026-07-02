@@ -4,7 +4,7 @@ slug: communication-contact-window-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 固定开机窗口节省电量的原理：固定开机时间以节省电量并降低错过消息；中风险条目，窗口外保持关机或低耗。
+summary: 固定开机时间以节省电量并降低错过消息；中风险条目，窗口外保持关机或低耗。
 tags: 通讯, 固定开机窗口节省电量的原理, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 固定开机窗口节省电量的原理, 通讯, Emergency preparedness, Survival skills, Off-grid living

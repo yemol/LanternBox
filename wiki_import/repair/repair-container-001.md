@@ -4,7 +4,7 @@ slug: repair-container-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 容器裂缝为什么不能装饮水：把裂缝容器从饮用水用途降级；高风险条目，裂缝藏污或漏水时不装饮水。
+summary: 把裂缝容器从饮用水用途降级；高风险条目，裂缝藏污或漏水时不装饮水，并记录责任人、时间和复查结果。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 容器裂缝为什么不能装饮水, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 容器裂缝为什么不能装饮水, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

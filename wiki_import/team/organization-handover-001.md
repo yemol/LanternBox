@@ -4,7 +4,7 @@ slug: organization-handover-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 交接记录防止遗漏：交接已做、未做、异常、下一步和物资位置；中风险条目，不要只说都好了。
+summary: 交接已做、未做、异常、下一步和物资位置；中风险条目，不要只说都好了，并记录责任人、时间和复查结果。
 tags: 团队管理, 团队轮值与任务管理, 交接记录防止遗漏, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 交接记录防止遗漏, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

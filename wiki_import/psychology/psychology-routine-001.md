@@ -4,7 +4,7 @@ slug: psychology-routine-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 团队仪式感和稳定感：用固定短会、清洁、感谢或收尾动作维持稳定感；中风险条目，仪式不挤占保命任务。
+summary: 用固定短会、清洁、感谢或收尾动作维持稳定感；中风险条目，仪式不挤占保命任务。
 tags: 心理韧性, 心理韧性与冲突降温, 团队仪式感和稳定感, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 团队仪式感和稳定感, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

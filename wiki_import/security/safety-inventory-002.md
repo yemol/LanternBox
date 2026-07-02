@@ -4,7 +4,7 @@ slug: safety-inventory-002
 category: 安全
 priority: P0
 risk_level: high
-summary: 陌生求助和库存暴露风险：控制暴露、接触、路线和冲突边界；高风险条目，人员安全受威胁时放弃物资和任务。
+summary: 控制暴露、接触、路线和冲突边界；高风险条目，人员安全受威胁时放弃物资和任务。
 tags: 安全, 陌生求助和库存暴露风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0631, DG-0632, DG-0633
 kiwix_topics: 陌生求助和库存暴露风险, 安全, Emergency preparedness, Survival skills, Off-grid living

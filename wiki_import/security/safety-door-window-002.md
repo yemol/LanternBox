@@ -2,7 +2,7 @@
 title: 门窗受损的暴露风险
 slug: safety-door-window-002
 category: 安全
-summary: 门窗受损的暴露风险：控制暴露、接触、路线和冲突边界；中风险条目，人员安全受威胁时放弃物资和任务。
+summary: 控制暴露、接触、路线和冲突边界；中风险条目，人员安全受威胁时放弃物资和任务。
 tags: 安全, 门窗受损的暴露风险, 门窗受损的暴, P0, 长期生存
 risk_level: caution
 status: published

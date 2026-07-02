@@ -4,7 +4,7 @@ slug: hygiene-odor-001
 category: 卫生
 priority: P0
 risk_level: high
-summary: 桶厕覆盖材料为什么能降异味：用覆盖材料、密封和固定位置降低异味虫害；高风险条目，桶厕不靠近水源和食物区。
+summary: 用覆盖材料、密封和固定位置降低异味虫害；高风险条目，桶厕不靠近水源和食物区。
 tags: 卫生, 桶厕覆盖材料为什么能降异味, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 桶厕覆盖材料为什么能降异味, 卫生, Emergency preparedness, Survival skills, Public health

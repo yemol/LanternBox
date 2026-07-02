@@ -2,7 +2,7 @@
 title: 烧烫伤冷却原理
 slug: medical-burn-care-002
 category: 医疗急救
-summary: 烧烫伤冷却原理：优先冷却、覆盖和隔离污染物，避免涂抹不明材料；中风险条目，面积大、深部伤或意识异常时停止普通处理。
+summary: 优先冷却、覆盖和隔离污染物，避免涂抹不明材料；中风险条目，面积大、深部伤或意识异常时停止普通处理。
 tags: 医疗急救, 烧烫伤冷却原理, 烧烫伤冷却原, P0, 长期生存
 risk_level: caution
 status: published

@@ -4,7 +4,7 @@ slug: shelter-shelter-knowledge-001
 category: 避难转移
 priority: P0
 risk_level: high
-summary: 队伍分组和照护责任：规划空间分区、通道、污染隔离和夜间检查；高风险条目，结构、烟水或人员风险升高时撤离或调整。
+summary: 规划空间分区、通道、污染隔离和夜间检查；高风险条目，结构、烟水或人员风险升高时撤离或调整。
 tags: 撤离, 避难转移, 队伍分组和照护责任, 长期断供, 小团队, 离线生存
 guide_links: DG-0641, DG-0642, DG-0643
 kiwix_topics: 队伍分组和照护责任, 避难转移, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: hygiene-toilet-001
 category: 卫生
 priority: P0
 risk_level: high
-summary: 厕所区为什么要远离水食物：固定厕所位置、覆盖材料和清洁责任人；高风险条目，厕所不靠近水源、厨房或儿童区。
+summary: 固定厕所位置、覆盖材料和清洁责任人；高风险条目，厕所不靠近水源、厨房或儿童区。
 tags: 卫生, 厕所区为什么要远离水食物, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 厕所区为什么要远离水食物, 卫生, Emergency preparedness, Survival skills, Public health

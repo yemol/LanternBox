@@ -4,7 +4,7 @@ slug: hygiene-pest-control-001
 category: 卫生
 priority: P0
 risk_level: high
-summary: 防虫防鼠和食物储存关系：把食物密封、残渣清走并堵住进入路径；高风险条目，虫鼠出现时先查食物和垃圾。
+summary: 把食物密封、残渣清走并堵住进入路径；高风险条目，虫鼠出现时先查食物和垃圾。
 tags: 卫生, 防虫防鼠和食物储存关系, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 防虫防鼠和食物储存关系, 卫生, Emergency preparedness, Survival skills, Public health

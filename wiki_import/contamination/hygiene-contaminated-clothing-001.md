@@ -4,7 +4,7 @@ slug: hygiene-contaminated-clothing-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 污染衣物和普通衣物分开：把污染衣物单独脱放、标记、清洗或降级；高风险条目，不要和普通衣物同袋存放。
+summary: 把污染衣物单独脱放、标记、清洗或降级；高风险条目，不要和普通衣物同袋存放。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 污染衣物和普通衣物分开, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 污染衣物和普通衣物分开, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

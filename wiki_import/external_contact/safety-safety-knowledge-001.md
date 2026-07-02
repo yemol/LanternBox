@@ -4,7 +4,7 @@ slug: safety-safety-knowledge-001
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 交换地点为什么不选核心住所：选择远离核心住所、可撤离、可观察的交换点；高风险条目，不把陌生人带到睡眠区或库存区。
+summary: 选择远离核心住所、可撤离、可观察的交换点；高风险条目，不把陌生人带到睡眠区或库存区。
 tags: 外部接触, 外部接触与物资交换风险, 交换地点为什么不选核心住所, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 交换地点为什么不选核心住所, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

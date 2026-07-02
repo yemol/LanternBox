@@ -4,7 +4,7 @@ slug: water-water-quality-001
 category: 水
 priority: P0
 risk_level: high
-summary: 水质记录表应该记录什么：用颜色、气味、浑浊、油膜和来源记录做基础筛查；高风险条目，异常水先隔离，不直接并入饮用储备。
+summary: 用颜色、气味、浑浊、油膜和来源记录做基础筛查；高风险条目，异常水先隔离，不直接并入饮用储备。
 tags: 水, 水质记录表应该记录什么, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 水质记录表应该记录什么, 水, Emergency preparedness, Survival skills, Public health

@@ -4,7 +4,7 @@ slug: hygiene-shared-items-001
 category: 卫生
 priority: P0
 risk_level: high
-summary: 多人共用毛巾和餐具风险：分开毛巾、餐具和个人清洁用品；高风险条目，病人或污染接触后不共用。
+summary: 分开毛巾、餐具和个人清洁用品；高风险条目，病人或污染接触后不共用，并记录责任人、时间和复查结果。
 tags: 卫生, 多人共用毛巾和餐具风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 多人共用毛巾和餐具风险, 卫生, Emergency preparedness, Survival skills, Public health

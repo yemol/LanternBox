@@ -4,7 +4,7 @@ slug: agriculture-ventilation-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 高温下小动物遮阴通风：在排烟排湿和保温之间保留可控空气交换；中风险条目，人员不适时停止燃烧而非关窗硬撑。
+summary: 在排烟排湿和保温之间保留可控空气交换；中风险条目，人员不适时停止燃烧而非关窗硬撑。
 tags: 养殖, 小规模养殖, 高温下小动物遮阴通风, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 高温下小动物遮阴通风, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

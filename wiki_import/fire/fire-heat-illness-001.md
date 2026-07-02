@@ -4,7 +4,7 @@ slug: fire-heat-illness-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 中暑和高温环境判断：把人移到阴凉处，降温、补水并观察意识；高风险条目，意识异常或持续恶化时停止任务。
+summary: 把人移到阴凉处，降温、补水并观察意识；高风险条目，意识异常或持续恶化时停止任务。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 中暑和高温环境判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 中暑和高温环境判断, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

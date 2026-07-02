@@ -4,7 +4,7 @@ slug: safety-abandon-home-001
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 放弃住所后的记录：记录离开时间、原因、带走物和不可返回风险；高风险条目，不要为物资返回已失控住所。
+summary: 记录离开时间、原因、带走物和不可返回风险；高风险条目，不要为物资返回已失控住所。
 tags: 风险决策, 放弃住所后的记录, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 放弃住所后的记录, 风险决策, Emergency preparedness, Survival skills, Off-grid living

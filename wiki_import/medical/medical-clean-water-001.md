@@ -4,7 +4,7 @@ slug: medical-clean-water-001
 category: 医疗急救
 priority: P0
 risk_level: high
-summary: 小伤口清洁水不足时的边界：区分清洁、覆盖、污染来源和感染早期信号；高风险条目，红肿热痛加重、脓液或污染伤口需停止拖延。
+summary: 区分清洁、覆盖、污染来源和感染早期信号；高风险条目，红肿热痛加重、脓液或污染伤口需停止拖延。
 tags: 医疗, 医疗急救, 小伤口清洁水不足时的边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0611, DG-0612, DG-0613
 kiwix_topics: 小伤口清洁水不足时的边界, 医疗急救, Emergency preparedness, Survival skills, Public health

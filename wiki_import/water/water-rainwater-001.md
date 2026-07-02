@@ -4,7 +4,7 @@ slug: water-rainwater-001
 category: 水
 priority: P0
 risk_level: high
-summary: 雨水收集的容器与污染边界：用干净容器、初期弃流和盖子收集雨水；高风险条目，屋面污染不清时不饮用。
+summary: 用干净容器、初期弃流和盖子收集雨水；高风险条目，屋面污染不清时不饮用。
 tags: 水, 雨水收集的容器与污染边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 雨水收集的容器与污染边界, 水, Emergency preparedness, Survival skills, Public health

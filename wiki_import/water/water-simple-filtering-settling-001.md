@@ -2,7 +2,7 @@
 title: 简易过滤与沉淀
 slug: water-simple-filtering-settling-001
 category: 水
-summary: 简易过滤与沉淀：说明过滤只能去除部分颗粒和异物；中风险条目，过滤不能替代煮沸或消毒。
+summary: 说明过滤只能去除部分颗粒和异物；中风险条目，过滤不能替代煮沸或消毒，并记录责任人、时间和复查结果。
 tags: 饮用水, 过滤, 沉淀, 浑浊, 纱布, 活性炭, 煮沸
 risk_level: caution
 status: published

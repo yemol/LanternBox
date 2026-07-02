@@ -4,7 +4,7 @@ slug: clothing-insulation-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 分层穿衣的排汗保温原理：区分贴身排汗、中层保温和外层防风防雨；中风险条目，出汗变湿或外层漏水时及时调整。
+summary: 区分贴身排汗、中层保温和外层防风防雨；中风险条目，出汗变湿或外层漏水时及时调整。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 分层穿衣的排汗保温原理, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 分层穿衣的排汗保温原理, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

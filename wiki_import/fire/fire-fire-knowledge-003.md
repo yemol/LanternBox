@@ -4,7 +4,7 @@ slug: fire-fire-knowledge-003
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 炉具锅具稳定性判断：检查炉具平稳、锅柄方向和热水搬运路线；高风险条目，不稳或通道拥挤时停止加热。
+summary: 检查炉具平稳、锅柄方向和热水搬运路线；高风险条目，不稳或通道拥挤时停止加热。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 炉具锅具稳定性判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 炉具锅具稳定性判断, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: safety-safety-knowledge-005
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 价值评估和不公平交换风险：比较物资价值、稀缺性和交换后风险；高风险条目，不为短期收益暴露长期库存。
+summary: 比较物资价值、稀缺性和交换后风险；高风险条目，不为短期收益暴露长期库存。
 tags: 外部接触, 外部接触与物资交换风险, 价值评估和不公平交换风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 价值评估和不公平交换风险, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

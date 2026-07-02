@@ -4,7 +4,7 @@ slug: fire-carbon-monoxide-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 一氧化碳无色无味为什么危险：提醒燃烧取暖时通风、症状观察和睡眠禁忌；高风险条目，头痛恶心嗜睡时立即停止燃烧。
+summary: 提醒燃烧取暖时通风、症状观察和睡眠禁忌；高风险条目，头痛恶心嗜睡时立即停止燃烧。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 一氧化碳无色无味为什么危险, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 一氧化碳无色无味为什么危险, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

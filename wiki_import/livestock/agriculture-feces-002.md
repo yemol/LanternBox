@@ -4,7 +4,7 @@ slug: agriculture-feces-002
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 粪便堆放和虫害：控制粪便与水源、厨房、睡眠区和虫害的距离；中风险条目，无法清理或虫害加重时停止扩养。
+summary: 控制粪便与水源、厨房、睡眠区和虫害的距离；中风险条目，无法清理或虫害加重时停止扩养。
 tags: 养殖, 小规模养殖, 粪便堆放和虫害, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 粪便堆放和虫害, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

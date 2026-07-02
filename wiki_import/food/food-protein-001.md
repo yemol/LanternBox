@@ -4,7 +4,7 @@ slug: food-protein-001
 category: 食物
 priority: P0
 risk_level: high
-summary: 单调饮食下盐分和蛋白风险：明确库存、加工、保存和弃用顺序；高风险条目，包装破损、变质或来源不清时停止食用。
+summary: 明确库存、加工、保存和弃用顺序；高风险条目，包装破损、变质或来源不清时停止食用。
 tags: 食物, 单调饮食下盐分和蛋白风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 单调饮食下盐分和蛋白风险, 食物, Emergency preparedness, Survival skills, Off-grid living

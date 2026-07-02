@@ -4,7 +4,7 @@ slug: water-heat-001
 category: 水
 priority: P0
 risk_level: high
-summary: 高温缺水时脱水信号识别：观察尿量、口渴、精神状态和皮肤干燥；高风险条目，儿童老人脱水信号需更保守。
+summary: 观察尿量、口渴、精神状态和皮肤干燥；高风险条目，儿童老人脱水信号需更保守。
 tags: 水, 高温缺水时脱水信号识别, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 高温缺水时脱水信号识别, 水, Emergency preparedness, Survival skills, Public health

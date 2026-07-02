@@ -4,7 +4,7 @@ slug: clothing-odor-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 衣物异味霉味的污染判断：用霉味、潮湿、污渍和接触史判断衣物是否污染；中风险条目，不要把可疑衣物带入睡眠区。
+summary: 用霉味、潮湿、污渍和接触史判断衣物是否污染；中风险条目，不要把可疑衣物带入睡眠区。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 衣物异味霉味的污染判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 衣物异味霉味的污染判断, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

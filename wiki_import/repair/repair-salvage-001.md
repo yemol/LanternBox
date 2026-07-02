@@ -4,7 +4,7 @@ slug: repair-salvage-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 拆解旧物前的割伤和污染风险：检查割伤、污染、弹簧和残余电量风险；高风险条目，不在儿童或食物区拆解。
+summary: 检查割伤、污染、弹簧和残余电量风险；高风险条目，不在儿童或食物区拆解。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 拆解旧物前的割伤和污染风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 拆解旧物前的割伤和污染风险, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

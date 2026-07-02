@@ -2,7 +2,7 @@
 title: Core 设备断电前处理
 slug: energy-core-shutdown-loss-001
 category: 能源
-summary: Core 设备断电前处理：安排电量分配、设备检查和停用记录；中风险条目，受潮、发热或鼓包时隔离停用。
+summary: 安排电量分配、设备检查和停用记录；中风险条目，受潮、发热或鼓包时隔离停用。
 tags: Core, 断电, 关机, 备份, PocketBase, 数据安全
 risk_level: caution
 status: published

@@ -2,7 +2,7 @@
 title: 低体力消耗与食物消耗
 slug: food-food-knowledge-004
 category: 食物
-summary: 低体力消耗与食物消耗：明确库存、加工、保存和弃用顺序；中风险条目，包装破损、变质或来源不清时停止食用。
+summary: 明确库存、加工、保存和弃用顺序；中风险条目，包装破损、变质或来源不清时停止食用。
 tags: 食物, 低体力消耗与食物消耗, 低体力消耗与, P0, 长期生存
 risk_level: caution
 status: published

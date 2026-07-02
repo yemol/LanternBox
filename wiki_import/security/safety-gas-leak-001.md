@@ -4,7 +4,7 @@ slug: safety-gas-leak-001
 category: 安全
 priority: P0
 risk_level: high
-summary: 燃气味和开关电器的火花风险：禁止明火照明和反复开关电器查漏；高风险条目，气味未消散前不恢复用火。
+summary: 禁止明火照明和反复开关电器查漏；高风险条目，气味未消散前不恢复用火，并记录责任人、时间和复查结果。
 tags: 安全, 燃气味和开关电器的火花风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0631, DG-0632, DG-0633
 kiwix_topics: 燃气味和开关电器的火花风险, 安全, Emergency preparedness, Survival skills, Off-grid living

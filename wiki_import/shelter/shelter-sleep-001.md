@@ -4,7 +4,7 @@ slug: shelter-sleep-001
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 多人睡眠的噪声和照护：管理噪声、照护、保温和夜间起身路线；中风险条目，睡眠不足会影响值守。
+summary: 管理噪声、照护、保温和夜间起身路线；中风险条目，睡眠不足会影响值守，并记录责任人、时间和复查结果。
 tags: 庇护空间, 庇护空间分区, 多人睡眠的噪声和照护, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 多人睡眠的噪声和照护, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

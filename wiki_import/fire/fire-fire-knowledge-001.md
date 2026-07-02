@@ -4,7 +4,7 @@ slug: fire-fire-knowledge-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 外部烟味进入室内的封堵判断：判断烟从门窗缝隙或通风口进入并封堵；高风险条目，烟浓、门热或人员不适时撤离。
+summary: 判断烟从门窗缝隙或通风口进入并封堵；高风险条目，烟浓、门热或人员不适时撤离。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 外部烟味进入室内的封堵判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 外部烟味进入室内的封堵判断, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

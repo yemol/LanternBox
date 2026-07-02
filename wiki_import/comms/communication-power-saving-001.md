@@ -2,7 +2,7 @@
 title: 低电量通信优先级
 slug: communication-power-saving-001
 category: 通讯
-summary: 低电量通信优先级：优先短信、短消息和关键联系人；中风险条目，不刷新闻视频消耗最后电量。
+summary: 优先短信、短消息和关键联系人；中风险条目，不刷新闻视频消耗最后电量，并记录责任人、时间和复查结果。
 tags: 通讯, 低电量通信优先级, 低电量通信优, P0, 长期生存
 risk_level: caution
 status: published

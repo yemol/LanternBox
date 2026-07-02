@@ -2,7 +2,7 @@
 title: 低温失温基础
 slug: fire-hypothermia-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
-summary: 低温失温基础：识别发抖、动作变慢、说话含糊和湿冷风险；中风险条目，意识异常或停止发抖时停止普通任务。
+summary: 识别发抖、动作变慢、说话含糊和湿冷风险；中风险条目，意识异常或停止发抖时停止普通任务。
 tags: 火源 / 保温 / 通风 / 一氧化碳风险, 低温失温基础, P0, 长期生存
 risk_level: caution
 status: published

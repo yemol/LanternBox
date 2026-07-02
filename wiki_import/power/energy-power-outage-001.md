@@ -4,7 +4,7 @@ slug: energy-power-outage-001
 category: 能源
 priority: P0
 risk_level: high
-summary: 断电后第一小时能源盘点：安排电量分配、设备检查和停用记录；高风险条目，受潮、发热或鼓包时隔离停用。
+summary: 安排电量分配、设备检查和停用记录；高风险条目，受潮、发热或鼓包时隔离停用。
 tags: 能源, 断电后第一小时能源盘点, 长期断供, 小团队, 离线生存
 guide_links: DG-0616, DG-0617, DG-0618
 kiwix_topics: 断电后第一小时能源盘点, 能源, Emergency preparedness, Survival skills, Off-grid living

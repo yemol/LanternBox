@@ -4,7 +4,7 @@ slug: safety-safety-knowledge-008
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 见面时间和返回时间记录：记录见面、返回和复查时间；高风险条目，超时规则不清时不安排接触。
+summary: 记录见面、返回、复查时间和留守人；高风险条目，超时规则不清时不安排接触。
 tags: 外部接触, 外部接触与物资交换风险, 见面时间和返回时间记录, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 见面时间和返回时间记录, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

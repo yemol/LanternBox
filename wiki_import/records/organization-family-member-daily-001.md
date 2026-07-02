@@ -2,7 +2,7 @@
 title: 家庭成员每日状态检查
 slug: organization-family-member-daily-001
 category: 医疗急救
-summary: 家庭成员每日状态检查：明确责任人、交接字段、任务层级和复盘时间；疲劳、冲突或遗漏出现时暂停重排。
+summary: 明确责任人、交接字段、任务层级和复盘时间；疲劳、冲突或遗漏出现时暂停重排。
 tags: 成员状态, 健康观察, 每日检查, 家庭, 情绪, 饮水
 risk_level: normal
 status: published

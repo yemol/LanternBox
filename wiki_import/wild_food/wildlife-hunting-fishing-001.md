@@ -4,7 +4,7 @@ slug: wildlife-hunting-fishing-001
 category: 野外食物获取 / 狩猎捕捞 / 动物蛋白补充
 priority: P1
 risk_level: high
-summary: 狩猎捕捞法规和许可意识：提醒狩猎捕捞要考虑许可、边界、人道和冲突风险；高风险条目，不把违法高风险行为当作常规口粮来源。
+summary: 提醒狩猎捕捞要考虑许可、边界、人道和冲突风险；高风险条目，不把违法高风险行为当作常规口粮来源。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 狩猎捕捞法规和许可意识, 长期断供, 小团队, 离线生存
 guide_links: DG-0681, DG-0682, DG-0683
 kiwix_topics: 狩猎捕捞法规和许可意识, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living

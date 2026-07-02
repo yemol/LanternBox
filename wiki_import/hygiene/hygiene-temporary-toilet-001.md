@@ -2,7 +2,7 @@
 title: 临时厕所基础
 slug: hygiene-temporary-toilet-001
 category: 卫生
-summary: 临时厕所基础：划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
+summary: 划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
 tags: 临时厕所, 停水, 排泄物, 卫生, 垃圾袋, 避难
 risk_level: caution
 status: published

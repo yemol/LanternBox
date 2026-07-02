@@ -4,7 +4,7 @@ slug: safety-conservative-decision-001
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 不确定信息下的保守决策：在信息不足时选择可逆、低暴露、低消耗方案；高风险条目，不要用乐观假设消耗关键资源。
+summary: 在信息不足时选择可逆、低暴露、低消耗方案；高风险条目，不要用乐观假设消耗关键资源。
 tags: 风险决策, 不确定信息下的保守决策, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 不确定信息下的保守决策, 风险决策, Emergency preparedness, Survival skills, Off-grid living

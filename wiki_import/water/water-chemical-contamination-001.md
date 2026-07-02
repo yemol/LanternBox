@@ -4,7 +4,7 @@ slug: water-chemical-contamination-001
 category: 水
 priority: P0
 risk_level: high
-summary: 油膜异味和化学污染的禁用判断：区分微生物和化学风险，提醒煮沸不能去除重金属、油污或可疑化学物；高风险条目，发现来源不明或异味油膜时停止饮用。
+summary: 区分微生物和化学风险，提醒煮沸不能去除重金属、油污或可疑化学物；高风险条目，发现来源不明或异味油膜时停止饮用。
 tags: 水, 油膜异味和化学污染的禁用判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 油膜异味和化学污染的禁用判断, 水, Emergency preparedness, Survival skills, Public health

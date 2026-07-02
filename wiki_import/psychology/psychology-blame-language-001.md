@@ -4,7 +4,7 @@ slug: psychology-blame-language-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 高压下避免责备语言：把责备句改成事实、影响和下一步请求；中风险条目，冲突升高时暂停任务。
+summary: 把责备句改成事实、影响和下一步请求；中风险条目，冲突升高时暂停任务，并记录责任人、时间和复查结果。
 tags: 心理韧性, 心理韧性与冲突降温, 高压下避免责备语言, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 高压下避免责备语言, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

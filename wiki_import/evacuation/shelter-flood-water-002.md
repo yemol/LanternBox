@@ -2,7 +2,7 @@
 title: 洪水转移的时间窗口
 slug: shelter-flood-water-002
 category: 避难转移
-summary: 洪水转移的时间窗口：记录水位上涨、路线变化和转移窗口；高风险条目，不要等到水流变急再行动。
+summary: 记录水位上涨、路线变化和转移窗口；高风险条目，不要等到水流变急再行动。
 tags: 避难转移, 洪水转移的时间窗口, 洪水转移的时, P0, 长期生存
 risk_level: high
 status: published

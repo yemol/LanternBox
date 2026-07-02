@@ -4,7 +4,7 @@ slug: repair-tape-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 胶带扎带绳索的强度限制：区分固定、临修、标记和线材整理用途；高风险条目，不把胶带当长期承重修复。
+summary: 区分固定、临修、标记和线材整理用途；高风险条目，不把胶带当长期承重修复。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 胶带扎带绳索的强度限制, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 胶带扎带绳索的强度限制, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

@@ -2,7 +2,7 @@
 title: 通讯设备每日检查
 slug: communication-device-daily-check-001
 category: 通讯
-summary: 通讯设备每日检查：安排消息格式、开机窗口和备用联系路径；通信失败时不盲目外出寻找。
+summary: 安排消息格式、开机窗口和备用联系路径；通信失败时不盲目外出寻找，并记录责任人、时间和复查结果。
 tags: 通讯, 对讲机, LoRa, 短波电台, 手机, 每日检查
 risk_level: normal
 status: published

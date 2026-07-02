@@ -4,7 +4,7 @@ slug: clothing-gloves-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 手套在清理和维修中的作用：区分清理、维修、防割和污染隔离时需要的手部防护；中风险条目，手套破损或污染后不要跨区使用。
+summary: 区分清理、维修、防割和污染隔离时需要的手部防护；中风险条目，手套破损或污染后不要跨区使用。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 手套在清理和维修中的作用, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 手套在清理和维修中的作用, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

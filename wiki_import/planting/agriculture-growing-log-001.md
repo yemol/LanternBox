@@ -4,7 +4,7 @@ slug: agriculture-growing-log-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 种植记录的字段：记录播种、浇水、光照、虫害和采收结果；中风险条目，连续失败时调整作物或停止投入。
+summary: 记录播种、浇水、光照、虫害和采收结果；中风险条目，连续失败时调整作物或停止投入。
 tags: 种植, 种植记录的字段, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 种植记录的字段, 种植, Emergency preparedness, Survival skills, Off-grid living

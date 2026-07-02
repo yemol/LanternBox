@@ -4,7 +4,7 @@ slug: agriculture-soil-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 土壤污染和可食作物风险：判断土壤来源、化学污染和可食作物接触；中风险条目，污染土不种入口作物。
+summary: 判断土壤来源、化学污染和可食作物接触；中风险条目，污染土不种入口作物。
 tags: 种植, 土壤污染和可食作物风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 土壤污染和可食作物风险, 种植, Emergency preparedness, Survival skills, Off-grid living

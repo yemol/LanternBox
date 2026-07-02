@@ -4,7 +4,7 @@ slug: food-food-knowledge-001
 category: 食物
 priority: P0
 risk_level: high
-summary: 即食食品和需煮食品的排序：区分即食、需煮、已开封和需冷藏食物的使用顺序；高风险条目，先吃最容易变质但仍安全的食物。
+summary: 区分即食、需煮、已开封和需冷藏食物的使用顺序；高风险条目，先吃最容易变质但仍安全的食物。
 tags: 食物, 即食食品和需煮食品的排序, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 即食食品和需煮食品的排序, 食物, Emergency preparedness, Survival skills, Off-grid living

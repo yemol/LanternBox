@@ -4,7 +4,7 @@ slug: food-food-poisoning-001
 category: 食物
 priority: P0
 risk_level: high
-summary: 多人共餐时食物中毒追溯：记录同餐人员、食物批次、发作时间和症状；高风险条目，多人腹泻呕吐时停止同批食物。
+summary: 记录同餐人员、食物批次、发作时间和症状；高风险条目，多人腹泻呕吐时停止同批食物。
 tags: 食物, 多人共餐时食物中毒追溯, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 多人共餐时食物中毒追溯, 食物, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: medical-burn-care-001
 category: 医疗急救
 priority: P0
 risk_level: high
-summary: 烧烫伤冷却为什么要优先：优先冷却、覆盖和隔离污染物，避免涂抹不明材料；高风险条目，面积大、深部伤或意识异常时停止普通处理。
+summary: 优先冷却、覆盖和隔离污染物，避免涂抹不明材料；高风险条目，面积大、深部伤或意识异常时停止普通处理。
 tags: 医疗, 医疗急救, 烧烫伤冷却为什么要优先, 长期断供, 小团队, 离线生存
 guide_links: DG-0611, DG-0612, DG-0613
 kiwix_topics: 烧烫伤冷却为什么要优先, 医疗急救, Emergency preparedness, Survival skills, Public health

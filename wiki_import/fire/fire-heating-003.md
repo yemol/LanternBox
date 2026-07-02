@@ -4,7 +4,7 @@ slug: fire-heating-003
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 室内取暖替代方案：优先使用衣物分层、隔潮和热水瓶等非燃烧方式；高风险条目，禁用条件出现时取消燃烧取暖。
+summary: 优先使用衣物分层、隔潮和热水瓶等非燃烧方式；高风险条目，禁用条件出现时取消燃烧取暖。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 室内取暖替代方案, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 室内取暖替代方案, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

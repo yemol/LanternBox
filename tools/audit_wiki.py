@@ -317,6 +317,11 @@ def check_metadata(articles: list[Article], category_names: set[str]) -> list[di
             length = len(article.summary)
             if length < 35 or length > 110:
                 issues.append({"level": "warning", "file": rel, "issue": f"summary 长度偏离 40-80 字左右：{length} 字"})
+            if article.title and (
+                article.summary.startswith(article.title + "：")
+                or article.summary.startswith(article.title + ":")
+            ):
+                issues.append({"level": "warning", "file": rel, "issue": "summary 不应重复 title 开头"})
             for term in SUMMARY_TEMPLATE_TERMS:
                 if term in article.summary:
                     issues.append({"level": "warning", "file": rel, "issue": f"summary 含模板化描述：{term}"})

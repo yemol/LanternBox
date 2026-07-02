@@ -4,7 +4,7 @@ slug: psychology-emotion-log-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 情绪记录和风险决策：把情绪触发点和风险决策分开记录；中风险条目，不在情绪高峰做不可逆决定。
+summary: 把情绪触发点和风险决策分开记录；中风险条目，不在情绪高峰做不可逆决定。
 tags: 心理韧性, 心理韧性与冲突降温, 情绪记录和风险决策, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 情绪记录和风险决策, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: clothing-cold-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 低温中活动和休息穿衣差异：检查干湿、保温、鞋袜和修补状态；中风险条目，破损、湿冷或麻木时降低行动强度。
+summary: 检查干湿、保温、鞋袜和修补状态；中风险条目，破损、湿冷或麻木时降低行动强度。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 低温中活动和休息穿衣差异, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 低温中活动和休息穿衣差异, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

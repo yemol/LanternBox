@@ -4,7 +4,7 @@ slug: medical-sprain-001
 category: 医疗急救
 priority: P0
 risk_level: high
-summary: 扭伤固定和转移负重风险：按人员体力和路线难度分配重量；高风险条目，负重拖慢撤离时舍弃物资。
+summary: 按人员体力和路线难度分配重量；高风险条目，负重拖慢撤离时舍弃物资，并记录责任人、时间和复查结果。
 tags: 医疗, 医疗急救, 扭伤固定和转移负重风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0611, DG-0612, DG-0613
 kiwix_topics: 扭伤固定和转移负重风险, 医疗急救, Emergency preparedness, Survival skills, Public health

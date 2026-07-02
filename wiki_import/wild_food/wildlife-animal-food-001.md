@@ -4,7 +4,7 @@ slug: wildlife-animal-food-001
 category: 野外食物获取 / 狩猎捕捞 / 动物蛋白补充
 priority: P1
 risk_level: high
-summary: 动物性食物必须彻底加热：强调动物性野外食物必须煮熟煮透并分开生熟工具；高风险条目，无法彻底加热时不入口。
+summary: 强调动物性野外食物必须煮熟煮透并分开生熟工具；高风险条目，无法彻底加热时不入口。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 动物性食物必须彻底加热, 长期断供, 小团队, 离线生存
 guide_links: DG-0681, DG-0682, DG-0683
 kiwix_topics: 动物性食物必须彻底加热, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living

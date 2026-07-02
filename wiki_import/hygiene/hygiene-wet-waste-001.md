@@ -4,7 +4,7 @@ slug: hygiene-wet-waste-001
 category: 卫生
 priority: P0
 risk_level: high
-summary: 湿垃圾腐败和虫害滋生条件：用气味、黏滑、颜色和内脏污染判断食物是否变质；高风险条目，腐败动物性食物不入口。
+summary: 用气味、黏滑、颜色和内脏污染判断食物是否变质；高风险条目，腐败动物性食物不入口。
 tags: 卫生, 湿垃圾腐败和虫害滋生条件, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 湿垃圾腐败和虫害滋生条件, 卫生, Emergency preparedness, Survival skills, Public health

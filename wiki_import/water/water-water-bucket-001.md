@@ -4,7 +4,7 @@ slug: water-water-bucket-001
 category: 水
 priority: P0
 risk_level: high
-summary: 水桶和开口容器的二次污染：给水桶和开口容器加盖、取水勺和标签；高风险条目，手伸入会造成二次污染。
+summary: 给水桶和开口容器加盖、取水勺和标签；高风险条目，手伸入会造成二次污染。
 tags: 水, 水桶和开口容器的二次污染, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 水桶和开口容器的二次污染, 水, Emergency preparedness, Survival skills, Public health

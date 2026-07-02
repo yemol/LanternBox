@@ -4,7 +4,7 @@ slug: hygiene-cleaning-sequence-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 清理顺序从干净到污染：按干净到污染、高处到低处、入口到污染源清理；高风险条目，不要把污染工具带回清洁区。
+summary: 按干净到污染、高处到低处、入口到污染源清理；高风险条目，不要把污染工具带回清洁区。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 清理顺序从干净到污染, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 清理顺序从干净到污染, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

@@ -4,7 +4,7 @@ slug: agriculture-animal-feed-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 饲料短缺时的替代边界：比较替代饲料、动物健康和人用口粮冲突；中风险条目，饲料不足连续出现时缩小养殖规模。
+summary: 比较替代饲料、动物健康和人用口粮冲突；中风险条目，饲料不足连续出现时缩小养殖规模。
 tags: 养殖, 小规模养殖, 饲料短缺时的替代边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 饲料短缺时的替代边界, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

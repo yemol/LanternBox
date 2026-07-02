@@ -4,7 +4,7 @@ slug: safety-shelter-in-place-001
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 双人接触和留守规则：安排一人接触一人留守观察与记录；高风险条目，不让单人带走唯一通信或关键物资。
+summary: 安排一人接触一人留守观察与记录；高风险条目，不让单人带走唯一通信或关键物资。
 tags: 外部接触, 外部接触与物资交换风险, 双人接触和留守规则, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 双人接触和留守规则, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

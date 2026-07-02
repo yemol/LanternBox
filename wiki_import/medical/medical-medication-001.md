@@ -4,7 +4,7 @@ slug: medical-medication-001
 category: 医疗急救
 priority: P0
 risk_level: high
-summary: 药品不足时记录和分配原则：记录药品余量、用途、分配人和下一次复查；高风险条目，来源不明、过期破损或剂量不清时不要随意使用。
+summary: 记录药品余量、用途、分配人和下一次复查；高风险条目，来源不明、过期破损或剂量不清时不要随意使用。
 tags: 医疗, 医疗急救, 药品不足时记录和分配原则, 长期断供, 小团队, 离线生存
 guide_links: DG-0611, DG-0612, DG-0613
 kiwix_topics: 药品不足时记录和分配原则, 医疗急救, Emergency preparedness, Survival skills, Public health

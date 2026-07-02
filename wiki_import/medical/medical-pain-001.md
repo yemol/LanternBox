@@ -4,7 +4,7 @@ slug: medical-pain-001
 category: 医疗急救
 priority: P0
 risk_level: high
-summary: 儿童老人疼痛表达不清的风险：整理观察、清洁、保护和复查步骤；高风险条目，症状恶化或无法判断时停止普通处理。
+summary: 整理观察、清洁、保护和复查步骤；高风险条目，症状恶化或无法判断时停止普通处理。
 tags: 医疗, 医疗急救, 儿童老人疼痛表达不清的风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0611, DG-0612, DG-0613
 kiwix_topics: 儿童老人疼痛表达不清的风险, 医疗急救, Emergency preparedness, Survival skills, Public health

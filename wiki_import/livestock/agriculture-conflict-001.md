@@ -4,7 +4,7 @@ slug: agriculture-conflict-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 邻里冲突和安全边界：记录噪声气味、边界接触和沟通事实；中风险条目，冲突升级时停止扩大养殖。
+summary: 记录噪声气味、边界接触和沟通事实；中风险条目，冲突升级时停止扩大养殖。
 tags: 养殖, 小规模养殖, 邻里冲突和安全边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 邻里冲突和安全边界, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

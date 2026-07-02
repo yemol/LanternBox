@@ -4,7 +4,7 @@ slug: safety-tool-maintenance-001
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 借工具和归还记录：检查借用、归还、破损和责任人记录；高风险条目，锋利或带电工具不口头交接。
+summary: 检查借用、归还、破损和责任人记录；高风险条目，锋利或带电工具不口头交接。
 tags: 外部接触, 外部接触与物资交换风险, 借工具和归还记录, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 借工具和归还记录, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

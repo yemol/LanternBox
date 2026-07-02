@@ -4,7 +4,7 @@ slug: hygiene-feces-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 动物粪便和虫害风险：控制粪便与水源、厨房、睡眠区和虫害的距离；高风险条目，无法清理或虫害加重时停止扩养。
+summary: 控制粪便与水源、厨房、睡眠区和虫害的距离；高风险条目，无法清理或虫害加重时停止扩养。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 动物粪便和虫害风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 动物粪便和虫害风险, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

@@ -4,7 +4,7 @@ slug: psychology-filtering-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 儿童老人坏消息过滤：为儿童老人筛选必要事实和可执行下一步，并安排先给事实、再给影响、最后给下一步的沟通顺序；中风险条目，不转交无法处理的信息压力。
+summary: 为儿童老人筛选必要事实和可执行下一步，并安排先给事实、再给影响、最后给下一步的沟通顺序；中风险条目，不转交无法处理的信息压力。
 tags: 心理韧性, 心理韧性与冲突降温, 儿童老人坏消息过滤, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 儿童老人坏消息过滤, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

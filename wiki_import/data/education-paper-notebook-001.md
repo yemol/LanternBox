@@ -2,7 +2,7 @@
 title: 纸质记录本使用规范
 slug: education-paper-notebook-001
 category: 团队轮值与任务管理
-summary: 纸质记录本使用规范：用纸本记录事件、物资、健康、风险和决策；不要让关键记录只留在设备里。
+summary: 用纸本记录事件、物资、健康、风险和决策；不要让关键记录只留在设备里，复查结果需交接。
 tags: 纸质记录, 日记, 备份, 记录规范, 事件记录, 离线系统
 risk_level: normal
 status: published

@@ -4,7 +4,7 @@ slug: hygiene-container-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 化学品气味和容器禁用判断：识别容器异味、残留和误装风险；高风险条目，有化学气味的容器不装饮水食物。
+summary: 识别容器异味、残留和误装风险；高风险条目，有化学气味的容器不装饮水食物。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 化学品气味和容器禁用判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 化学品气味和容器禁用判断, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

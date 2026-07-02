@@ -2,7 +2,7 @@
 title: 剩饭复热和重复加热边界
 slug: food-leftovers-001
 category: 食物
-summary: 剩饭复热和重复加热边界：限制剩饭保存、复热次数和多人共食范围；中风险条目，无冷藏或反复复热后应弃用。
+summary: 限制剩饭保存、复热次数和多人共食范围；中风险条目，无冷藏或反复复热后应弃用。
 tags: 食物, 剩饭复热和重复加热边界, 剩饭复热和重, P0, 长期生存
 risk_level: caution
 status: published

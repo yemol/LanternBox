@@ -2,7 +2,7 @@
 title: 发热记录为什么重要
 slug: medical-fever-004
 category: 医疗急救
-summary: 发热记录为什么重要：记录体温感受、精神状态、尿量和伴随症状；中风险条目，皮疹、意识变化、持续恶化或儿童危险信号需升级。
+summary: 记录体温感受、精神状态、尿量和伴随症状；中风险条目，皮疹、意识变化、持续恶化或儿童危险信号需升级。
 tags: 医疗急救, 发热记录重要, 发热记录为什, P0, 长期生存
 risk_level: caution
 status: published

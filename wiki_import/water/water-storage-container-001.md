@@ -4,7 +4,7 @@ slug: water-storage-container-001
 category: 水
 priority: P0
 risk_level: high
-summary: 储水容器材质和残留风险：安排容器清洁、标记、轮换和饮用/非饮用分区；高风险条目，水桶污染、漏水或来源不清时停止并隔离。
+summary: 安排容器清洁、标记、轮换和饮用/非饮用分区；高风险条目，水桶污染、漏水或来源不清时停止并隔离。
 tags: 水, 储水容器材质和残留风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 储水容器材质和残留风险, 水, Emergency preparedness, Survival skills, Public health

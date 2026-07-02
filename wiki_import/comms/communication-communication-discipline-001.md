@@ -4,7 +4,7 @@ slug: communication-communication-discipline-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 断供期间通信纪律：限定开机窗口、消息格式和联系人顺序；中风险条目，不反复刷新网络耗电。
+summary: 限定开机窗口、消息格式和联系人顺序；中风险条目，不反复刷新网络耗电，并记录责任人、时间和复查结果。
 tags: 通讯, 断供期间通信纪律, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 断供期间通信纪律, 通讯, Emergency preparedness, Survival skills, Off-grid living

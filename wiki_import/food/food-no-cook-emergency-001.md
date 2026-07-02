@@ -2,7 +2,7 @@
 title: 免烹饪应急餐配置
 slug: food-no-cook-emergency-001
 category: 食物
-summary: 免烹饪应急餐配置：明确库存、加工、保存和弃用顺序；包装破损、变质或来源不清时停止食用。
+summary: 明确库存、加工、保存和弃用顺序；包装破损、变质或来源不清时停止食用，并记录责任人、时间和复查结果。
 tags: 应急餐, 免烹饪, 干粮, 罐头, 停电, 食物储备
 risk_level: normal
 status: published

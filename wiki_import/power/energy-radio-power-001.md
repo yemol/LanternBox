@@ -4,7 +4,7 @@ slug: energy-radio-power-001
 category: 能源
 priority: P0
 risk_level: high
-summary: 收音机和通信设备供电排序：给收音机和手机安排固定供电与收听窗口；高风险条目，不把广播当背景声耗电。
+summary: 给收音机和手机安排固定供电与收听窗口；高风险条目，不把广播当背景声耗电。
 tags: 能源, 收音机和通信设备供电排序, 长期断供, 小团队, 离线生存
 guide_links: DG-0616, DG-0617, DG-0618
 kiwix_topics: 收音机和通信设备供电排序, 能源, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: shelter-evacuation-002
 category: 避难转移
 priority: P0
 risk_level: high
-summary: 撤离路线和备用路线比较：比较主路线、备用路线、阻断点和会合点；高风险条目，路线失效时按备用方案。
+summary: 比较主路线、备用路线、阻断点和会合点；高风险条目，路线失效时按备用方案。
 tags: 撤离, 避难转移, 撤离路线和备用路线比较, 长期断供, 小团队, 离线生存
 guide_links: DG-0641, DG-0642, DG-0643
 kiwix_topics: 撤离路线和备用路线比较, 避难转移, Emergency preparedness, Survival skills, Off-grid living

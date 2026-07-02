@@ -4,7 +4,7 @@ slug: fire-candle-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 蜡烛照明的防火距离：要求固定烛台、清空可燃物并短时看管；高风险条目，睡前或无人时必须熄灭。
+summary: 要求固定烛台、清空可燃物并短时看管；高风险条目，睡前或无人时必须熄灭。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 蜡烛照明的防火距离, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 蜡烛照明的防火距离, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

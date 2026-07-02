@@ -4,7 +4,7 @@ slug: repair-load-limit-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 材料替代时的承重停止线：测试替代材料承重、受潮和变形信号；高风险条目，承重不明不支撑人员。
+summary: 测试替代材料承重、受潮和变形信号；高风险条目，承重不明不支撑人员，并记录责任人、时间和复查结果。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 材料替代时的承重停止线, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 材料替代时的承重停止线, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

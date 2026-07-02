@@ -4,7 +4,7 @@ slug: communication-whistle-signal-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 近距离哨子灯光敲击信号边界：给近距离信号规定次数、方向和含义；中风险条目，不把生活照明当求助信号。
+summary: 给近距离信号规定次数、方向和含义；中风险条目，不把生活照明当求助信号。
 tags: 通讯, 近距离哨子灯光敲击信号边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 近距离哨子灯光敲击信号边界, 通讯, Emergency preparedness, Survival skills, Off-grid living

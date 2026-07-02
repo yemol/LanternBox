@@ -4,7 +4,7 @@ slug: hygiene-hand-hygiene-001
 category: 卫生
 priority: P0
 risk_level: high
-summary: 粪口传播和手卫生关键时刻：阻断粪便、手、餐具、食物和饮水之间的路径；高风险条目，手卫生失败时不处理入口食物。
+summary: 阻断粪便、手、餐具、食物和饮水之间的路径；高风险条目，手卫生失败时不处理入口食物。
 tags: 卫生, 粪口传播和手卫生关键时刻, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 粪口传播和手卫生关键时刻, 卫生, Emergency preparedness, Survival skills, Public health

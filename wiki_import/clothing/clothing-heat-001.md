@@ -4,7 +4,7 @@ slug: clothing-heat-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 防晒和高温暴露风险：安排遮阳、衣物覆盖、休息和补水窗口；中风险条目，头晕恶心或皮肤灼痛时停止暴晒任务。
+summary: 安排遮阳、衣物覆盖、休息和补水窗口；中风险条目，头晕恶心或皮肤灼痛时停止暴晒任务。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 防晒和高温暴露风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 防晒和高温暴露风险, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

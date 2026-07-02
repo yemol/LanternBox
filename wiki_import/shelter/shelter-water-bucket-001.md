@@ -4,7 +4,7 @@ slug: shelter-water-bucket-001
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 水桶放置和踢翻风险：把水桶放在不挡路、不易踢翻的位置；中风险条目，开口容器要防二次污染。
+summary: 把水桶放在不挡路、不易踢翻的位置；中风险条目，开口容器要防二次污染，并记录责任人、时间和复查结果。
 tags: 庇护空间, 庇护空间分区, 水桶放置和踢翻风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 水桶放置和踢翻风险, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

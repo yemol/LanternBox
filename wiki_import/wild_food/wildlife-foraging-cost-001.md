@@ -4,7 +4,7 @@ slug: wildlife-foraging-cost-001
 category: 野外食物获取 / 狩猎捕捞 / 动物蛋白补充
 priority: P1
 risk_level: high
-summary: 野外取食的体力成本：计算取食的体力、时间、受伤和暴露成本；高风险条目，收益小于消耗时停止外出取食。
+summary: 计算取食的体力、时间、受伤和暴露成本；高风险条目，收益小于消耗时停止外出取食。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 野外取食的体力成本, 长期断供, 小团队, 离线生存
 guide_links: DG-0681, DG-0682, DG-0683
 kiwix_topics: 野外取食的体力成本, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living

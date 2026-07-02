@@ -4,7 +4,7 @@ slug: hygiene-vomit-002
 category: 卫生
 priority: P0
 risk_level: high
-summary: 呕吐物清理中的传播路径：按飞溅、手部、衣物和地面路径清理呕吐物；高风险条目，清理者不直接进入做饭照护。
+summary: 按飞溅、手部、衣物和地面路径清理呕吐物；高风险条目，清理者不直接进入做饭照护。
 tags: 卫生, 呕吐物清理中的传播路径, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 呕吐物清理中的传播路径, 卫生, Emergency preparedness, Survival skills, Public health

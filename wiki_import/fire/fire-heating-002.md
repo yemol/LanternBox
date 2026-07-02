@@ -4,7 +4,7 @@ slug: fire-heating-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 炭火取暖的密闭空间禁忌：把炭火、余烬和密闭空间列为一氧化碳高风险；高风险条目，炭火不进睡眠区。
+summary: 把炭火、余烬和密闭空间列为一氧化碳高风险；高风险条目，炭火不进睡眠区。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 炭火取暖的密闭空间禁忌, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 炭火取暖的密闭空间禁忌, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

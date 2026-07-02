@@ -4,7 +4,7 @@ slug: agriculture-bite-risk-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 动物咬伤和抓伤感染：把抓咬伤清洁、隔离动物和感染观察连起来；中风险条目，红肿热痛或动物异常时升级。
+summary: 把抓咬伤清洁、隔离动物和感染观察连起来；中风险条目，红肿热痛或动物异常时升级。
 tags: 养殖, 小规模养殖, 动物咬伤和抓伤感染, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 动物咬伤和抓伤感染, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: agriculture-animal-feed-002
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 养殖记录和饲料消耗：记录饲料、水、清洁、动物状态和消耗变化；中风险条目，异常消耗或病弱个体需复查。
+summary: 记录饲料、水、清洁、动物状态和消耗变化；中风险条目，异常消耗或病弱个体需复查。
 tags: 养殖, 小规模养殖, 养殖记录和饲料消耗, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 养殖记录和饲料消耗, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

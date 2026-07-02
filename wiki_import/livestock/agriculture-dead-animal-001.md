@@ -4,7 +4,7 @@ slug: agriculture-dead-animal-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 病死动物为什么不能食用：把死因不明、病弱异常和腐败动物列为禁食对象；中风险条目，不要处理后再尝试入口。
+summary: 把死因不明、病弱异常和腐败动物列为禁食对象；中风险条目，不要处理后再尝试入口。
 tags: 养殖, 小规模养殖, 病死动物为什么不能食用, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 病死动物为什么不能食用, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

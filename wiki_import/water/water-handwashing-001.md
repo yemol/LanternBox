@@ -4,7 +4,7 @@ slug: water-handwashing-001
 category: 水
 priority: P0
 risk_level: high
-summary: 少水洗手与入口污染关系：保留餐前、如厕后、伤口前后的手卫生；高风险条目，入口污染风险高于省水。
+summary: 保留餐前、如厕后、伤口前后的手卫生；高风险条目，入口污染风险高于省水。
 tags: 水, 少水洗手与入口污染关系, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 少水洗手与入口污染关系, 水, Emergency preparedness, Survival skills, Public health

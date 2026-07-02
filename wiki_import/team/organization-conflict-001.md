@@ -4,7 +4,7 @@ slug: organization-conflict-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 冲突时暂停任务的规则：冲突出现时暂停火源、外出和分配等高风险任务；中风险条目，冷静前不做不可逆决定。
+summary: 冲突出现时暂停火源、外出和分配等高风险任务；中风险条目，冷静前不做不可逆决定。
 tags: 团队管理, 团队轮值与任务管理, 冲突时暂停任务的规则, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 冲突时暂停任务的规则, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

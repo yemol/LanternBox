@@ -4,7 +4,7 @@ slug: clothing-wet-shoes-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 鞋子进水后的干燥优先级：先处理鞋内积水、鞋垫和脚部干燥，再决定是否继续走；中风险条目，鞋底失效或脚部麻木时缩短路线。
+summary: 先处理鞋内积水、鞋垫和脚部干燥，再决定是否继续走；中风险条目，鞋底失效或脚部麻木时缩短路线。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 鞋子进水后的干燥优先级, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 鞋子进水后的干燥优先级, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

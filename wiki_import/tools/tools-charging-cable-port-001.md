@@ -2,7 +2,7 @@
 title: 充电线与接口检查
 slug: tools-charging-cable-port-001
 category: 维修 / 制作 / 替代 / 拆解再利用
-summary: 充电线与接口检查：检查破皮、发热、接触不良和接口松动；露铜焦味或发热时停用线材。
+summary: 检查破皮、发热、接触不良和接口松动；露铜焦味或发热时停用线材，并记录责任人、时间和复查结果。
 tags: 充电线, USB, 接口, 维修, 电源, 设备检查
 risk_level: normal
 status: published

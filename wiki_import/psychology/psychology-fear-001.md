@@ -4,7 +4,7 @@ slug: psychology-fear-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 恐惧不等于错误判断：承认恐惧信号并用事实复核行动计划；中风险条目，不要把害怕等同于判断错误。
+summary: 承认恐惧信号并用事实复核行动计划；中风险条目，不要把害怕等同于判断错误。
 tags: 心理韧性, 心理韧性与冲突降温, 恐惧不等于错误判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 恐惧不等于错误判断, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

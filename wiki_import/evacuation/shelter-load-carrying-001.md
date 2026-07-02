@@ -4,7 +4,7 @@ slug: shelter-load-carrying-001
 category: 避难转移
 priority: P0
 risk_level: high
-summary: 负重和行动速度的关系：按人员体力和路线难度分配重量；高风险条目，负重拖慢撤离时舍弃物资。
+summary: 按人员体力和路线难度分配重量；高风险条目，负重拖慢撤离时舍弃物资，并记录责任人、时间和复查结果。
 tags: 撤离, 避难转移, 负重和行动速度的关系, 长期断供, 小团队, 离线生存
 guide_links: DG-0641, DG-0642, DG-0643
 kiwix_topics: 负重和行动速度的关系, 避难转移, Emergency preparedness, Survival skills, Off-grid living

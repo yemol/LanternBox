@@ -4,7 +4,7 @@ slug: wildlife-protein-001
 category: 野外食物获取 / 狩猎捕捞 / 动物蛋白补充
 priority: P1
 risk_level: high
-summary: 替代蛋白优先于高风险捕猎：优先比较豆类、罐头和现有口粮等低风险蛋白；高风险条目，不要为少量蛋白承担高风险捕猎。
+summary: 优先比较豆类、罐头和现有口粮等低风险蛋白；高风险条目，不要为少量蛋白承担高风险捕猎。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 替代蛋白优先于高风险捕猎, 长期断供, 小团队, 离线生存
 guide_links: DG-0681, DG-0682, DG-0683
 kiwix_topics: 替代蛋白优先于高风险捕猎, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living

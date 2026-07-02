@@ -4,7 +4,7 @@ slug: communication-communication-knowledge-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 消息内容为什么要短而明确：把消息压缩为地点、人数、状态、需求和下次窗口；中风险条目，避免长篇解释占用电量。
+summary: 把消息压缩为地点、人数、状态、需求和下次窗口；中风险条目，避免长篇解释占用电量。
 tags: 通讯, 消息内容为什么要短而明确, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 消息内容为什么要短而明确, 通讯, Emergency preparedness, Survival skills, Off-grid living

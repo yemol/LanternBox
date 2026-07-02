@@ -4,7 +4,7 @@ slug: shelter-waste-001
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 垃圾区不应靠近水源：要求食物保存点远离垃圾、污水和动物处理区；中风险条目，接触污染后先隔离再决定是否弃用。
+summary: 要求食物保存点远离垃圾、污水和动物处理区；中风险条目，接触污染后先隔离再决定是否弃用。
 tags: 庇护空间, 庇护空间分区, 垃圾区不应靠近水源, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 垃圾区不应靠近水源, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

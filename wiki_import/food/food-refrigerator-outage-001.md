@@ -2,7 +2,7 @@
 title: 停电期间冰箱食物处理
 slug: food-refrigerator-outage-001
 category: 食物
-summary: 停电期间冰箱食物处理：盘点电源、分级设备并安排开机窗口；中风险条目，关闭非必要设备和后台消耗。
+summary: 盘点电源、分级设备并安排开机窗口；中风险条目，关闭非必要设备和后台消耗。
 tags: 停电, 冰箱, 食品安全, 冷冻, 食物变质, 厨房
 risk_level: caution
 status: published

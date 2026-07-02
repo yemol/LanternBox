@@ -4,7 +4,7 @@ slug: communication-communication-knowledge-004
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 近距离信号误解风险：区分哨声、灯光、敲击和口头信号含义；中风险条目，信号未约定时容易误解。
+summary: 区分哨声、灯光、敲击和口头信号含义；中风险条目，信号未约定时容易误解。
 tags: 通讯, 近距离信号误解风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 近距离信号误解风险, 通讯, Emergency preparedness, Survival skills, Off-grid living

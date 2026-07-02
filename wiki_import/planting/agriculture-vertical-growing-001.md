@@ -4,7 +4,7 @@ slug: agriculture-vertical-growing-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 小空间立体种植边界：评估立体架的承重、光照、取水和跌落风险；中风险条目，不稳定或遮光严重时降级。
+summary: 评估立体架的承重、光照、取水和跌落风险；中风险条目，不稳定或遮光严重时降级。
 tags: 种植, 小空间立体种植边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 小空间立体种植边界, 种植, Emergency preparedness, Survival skills, Off-grid living

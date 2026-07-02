@@ -2,7 +2,7 @@
 title: 饮用水储存基础
 slug: water-drinking-storage-001
 category: 水
-summary: 饮用水储存基础：安排取水、处理、储存和饮用分区；中风险条目，水源异常或容器污染时先隔离。
+summary: 安排取水、处理、储存和饮用分区；中风险条目，水源异常或容器污染时先隔离。
 tags: 饮用水, 储水, 停水, 容器, 卫生
 risk_level: caution
 status: published

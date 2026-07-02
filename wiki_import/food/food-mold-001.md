@@ -4,7 +4,7 @@ slug: food-mold-001
 category: 食物
 priority: P0
 risk_level: high
-summary: 霉变粮食和坚果的禁用边界：识别霉斑、异味、结块和受潮坚果风险，并检查饲料霉味、结块和动物食后异常；高风险条目，霉变食物不靠挑拣或加热恢复。
+summary: 识别霉斑、异味、结块和受潮坚果风险，并检查饲料霉味、结块和动物食后异常；高风险条目，霉变食物不靠挑拣或加热恢复。
 tags: 食物, 霉变粮食和坚果的禁用边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 霉变粮食和坚果的禁用边界, 食物, Emergency preparedness, Survival skills, Off-grid living

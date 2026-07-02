@@ -4,7 +4,7 @@ slug: wildlife-trapping-001
 category: 野外食物获取 / 狩猎捕捞 / 动物蛋白补充
 priority: P1
 risk_level: high
-summary: 诱捕误伤和法律人道边界：通过分工、视线、工具方向和禁入区降低误伤，并明确诱捕的误伤、法律、人道和看管边界；高风险条目，人员混行或疲劳时停止捕猎捕捞。
+summary: 通过分工、视线、工具方向和禁入区降低误伤，并明确诱捕的误伤、法律、人道和看管边界；高风险条目，人员混行或疲劳时停止捕猎捕捞。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 诱捕误伤和法律人道边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0681, DG-0682, DG-0683
 kiwix_topics: 诱捕误伤和法律人道边界, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: communication-communication-failure-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 通信失败时避免盲目寻找：用约定窗口、备用地点和纸质留言替代盲目寻找；中风险条目，不要单人外出找人。
+summary: 用约定窗口、备用地点和纸质留言替代盲目寻找；中风险条目，不要单人外出找人。
 tags: 通讯, 通信失败时避免盲目寻找, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 通信失败时避免盲目寻找, 通讯, Emergency preparedness, Survival skills, Off-grid living

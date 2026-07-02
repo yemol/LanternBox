@@ -4,7 +4,7 @@ slug: safety-children-002
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 儿童老人作为决策约束：控制暴露、接触、路线和冲突边界；高风险条目，人员安全受威胁时放弃物资和任务。
+summary: 控制暴露、接触、路线和冲突边界；高风险条目，人员安全受威胁时放弃物资和任务。
 tags: 风险决策, 儿童老人作为决策约束, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 儿童老人作为决策约束, 风险决策, Emergency preparedness, Survival skills, Off-grid living

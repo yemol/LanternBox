@@ -4,7 +4,7 @@ slug: safety-evacuation-001
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 冲突苗头的撤离边界：识别争执升级、围观和路线受阻信号；高风险条目，苗头扩大时先撤离而非继续谈判。
+summary: 识别争执升级、围观和路线受阻信号；高风险条目，苗头扩大时先撤离而非继续谈判。
 tags: 外部接触, 外部接触与物资交换风险, 冲突苗头的撤离边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 冲突苗头的撤离边界, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

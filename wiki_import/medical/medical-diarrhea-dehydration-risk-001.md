@@ -2,7 +2,7 @@
 title: 腹泻与脱水风险观察
 slug: medical-diarrhea-dehydration-risk-001
 category: 医疗急救
-summary: 腹泻与脱水风险观察：整理观察、清洁、保护和复查步骤；中风险条目，症状恶化或无法判断时停止普通处理。
+summary: 整理观察、清洁、保护和复查步骤；中风险条目，症状恶化或无法判断时停止普通处理。
 tags: 腹泻, 脱水, 补液, 健康记录, 饮水, 医疗观察
 risk_level: caution
 status: published

@@ -4,7 +4,7 @@ slug: energy-energy-knowledge-001
 category: 能源
 priority: P0
 risk_level: high
-summary: 小功率设备优先级判断：按通信、照明、记录和照护价值排序用电；高风险条目，不让娱乐设备消耗关键电量。
+summary: 按通信、照明、记录和照护价值排序用电；高风险条目，不让娱乐设备消耗关键电量。
 tags: 能源, 小功率设备优先级判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0616, DG-0617, DG-0618
 kiwix_topics: 小功率设备优先级判断, 能源, Emergency preparedness, Survival skills, Off-grid living

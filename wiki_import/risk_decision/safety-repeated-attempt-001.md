@@ -4,7 +4,7 @@ slug: safety-repeated-attempt-001
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 尝试一次和反复尝试的区别：区分一次测试和持续消耗资源的重复尝试；高风险条目，连续失败时停止并复盘。
+summary: 区分一次测试和持续消耗资源的重复尝试；高风险条目，连续失败时停止并复盘。
 tags: 风险决策, 尝试一次和反复尝试的区别, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 尝试一次和反复尝试的区别, 风险决策, Emergency preparedness, Survival skills, Off-grid living

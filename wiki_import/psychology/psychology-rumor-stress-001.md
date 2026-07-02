@@ -4,7 +4,7 @@ slug: psychology-rumor-stress-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 谣言和不确定信息压力：把不确定信息标记来源、时间和可信度；中风险条目，未复核消息不改变计划。
+summary: 把不确定信息标记来源、时间和可信度；中风险条目，未复核消息不改变计划。
 tags: 心理韧性, 心理韧性与冲突降温, 谣言和不确定信息压力, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 谣言和不确定信息压力, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

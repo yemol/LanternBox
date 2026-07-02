@@ -4,7 +4,7 @@ slug: psychology-breathing-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 短时呼吸和身体放松：用短时呼吸、放松肩颈和离开刺激点降低激动；中风险条目，不能替代医疗或安全处置。
+summary: 用短时呼吸、放松肩颈和离开刺激点降低激动；中风险条目，不能替代医疗或安全处置。
 tags: 心理韧性, 心理韧性与冲突降温, 短时呼吸和身体放松, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 短时呼吸和身体放松, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

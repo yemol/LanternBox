@@ -2,7 +2,7 @@
 title: 直接压迫止血原理
 slug: medical-bleeding-control-002
 category: 医疗急救
-summary: 直接压迫止血原理：强调持续压迫、减少频繁查看和记录出血变化；中风险条目，出血不止或意识异常时停止普通处理并升级。
+summary: 强调持续压迫、减少频繁查看和记录出血变化；中风险条目，出血不止或意识异常时停止普通处理并升级。
 tags: 医疗急救, 直接压迫止血原理, 直接压迫止血, P0, 长期生存
 risk_level: caution
 status: published

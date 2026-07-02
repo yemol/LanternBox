@@ -4,7 +4,7 @@ slug: clothing-blister-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 脚部水泡和长距离转移：判断脚部水泡是否影响行走，安排清洁覆盖、换袜和缩短路线；中风险条目，破损感染、疼痛加重或鞋袜潮湿时停止长距离移动。
+summary: 判断脚部水泡是否影响行走，安排清洁覆盖、换袜和缩短路线；中风险条目，破损感染、疼痛加重或鞋袜潮湿时停止长距离移动。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 脚部水泡和长距离转移, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 脚部水泡和长距离转移, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

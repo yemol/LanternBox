@@ -4,7 +4,7 @@ slug: communication-shortwave-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 短波接收和应急广播基础：安排收听频率、时间、记录和电量；中风险条目，不长时间无目的开机。
+summary: 安排收听频率、时间、记录和电量；中风险条目，不长时间无目的开机，复查结果需交接。
 tags: 通讯, 短波接收和应急广播基础, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 短波接收和应急广播基础, 通讯, Emergency preparedness, Survival skills, Off-grid living
