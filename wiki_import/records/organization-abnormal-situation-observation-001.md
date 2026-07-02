@@ -2,7 +2,7 @@
 title: 异常情况观察记录
 slug: organization-abnormal-situation-observation-001
 category: 团队轮值与任务管理
-summary: 介绍在外部环境、设备、人员、气味、声音、水电或卫生出现异常时，如何用统一格式记录观察事实、时间、地点、判断和后续动作。
+summary: 异常情况观察记录：明确责任人、交接字段、任务层级和复盘时间；疲劳、冲突或遗漏出现时暂停重排。
 tags: 异常记录, 风险观察, 日记, 事件, 观察, 决策
 risk_level: normal
 status: published

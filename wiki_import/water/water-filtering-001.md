@@ -4,7 +4,7 @@ slug: water-filtering-001
 category: 水
 priority: P0
 risk_level: high
-summary: 解释“简易过滤材料的作用和边界”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 简易过滤材料的作用和边界：说明过滤只能去除部分颗粒和异物；高风险条目，过滤不能替代煮沸或消毒。
 tags: 水, 简易过滤材料的作用和边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 简易过滤材料的作用和边界, 水, Emergency preparedness, Survival skills, Public health

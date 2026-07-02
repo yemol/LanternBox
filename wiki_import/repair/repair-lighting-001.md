@@ -4,7 +4,7 @@ slug: repair-lighting-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 解释“维修现场照明和低噪要求”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 维修现场照明和低噪要求：保证维修点低亮可见、工具有序和噪声可控；高风险条目，看不清时不做精细维修。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 维修现场照明和低噪要求, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 维修现场照明和低噪要求, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

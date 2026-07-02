@@ -2,7 +2,7 @@
 title: 停电后的关键设备分级
 slug: energy-power-outage-002
 category: 能源
-summary: 解释“停电后的关键设备分级”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 停电后的关键设备分级：盘点电源、分级设备并安排开机窗口；中风险条目，关闭非必要设备和后台消耗。
 tags: 能源, 停电后的关键设备分级, 停电后的关键, P0, 长期生存
 risk_level: caution
 status: published

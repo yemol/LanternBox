@@ -2,7 +2,7 @@
 title: 临时避难空间整理
 slug: shelter-temporary-space-organization-001
 category: 庇护空间分区
-summary: 介绍在停电、灾害、隔离或长期居家避难时，如何整理一个安全、可持续、便于取物和记录的临时避难空间。
+summary: 临时避难空间整理：规划空间分区、通道、污染隔离和夜间检查；结构、烟水或人员风险升高时撤离或调整。
 tags: 避难空间, 居住, 物资, 安全, 临时整理, Core
 risk_level: normal
 status: published

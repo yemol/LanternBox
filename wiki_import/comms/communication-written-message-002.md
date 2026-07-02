@@ -4,7 +4,7 @@ slug: communication-written-message-002
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 解释“留言点暴露和隐私边界”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 留言点暴露和隐私边界：选择隐蔽、固定、可复查的留言点；中风险条目，留言点不暴露住所路线。
 tags: 通讯, 留言点暴露和隐私边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 留言点暴露和隐私边界, 通讯, Emergency preparedness, Survival skills, Off-grid living

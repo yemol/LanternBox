@@ -2,7 +2,7 @@
 title: 低亮照明和夜间安全
 slug: energy-lighting-004
 category: 能源
-summary: 解释“低亮照明和夜间安全”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 低亮照明和夜间安全：用低亮、固定点和反光减少耗电与跌倒；中风险条目，不要完全摸黑处理热物和工具。
 tags: 能源, 低亮照明和夜间安全, 低亮照明和夜, P0, 长期生存
 risk_level: caution
 status: published

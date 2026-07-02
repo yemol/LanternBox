@@ -4,7 +4,7 @@ slug: clothing-wet-socks-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 解释“湿袜和脚部破损风险”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 湿袜和脚部破损风险：把湿袜、脚部破损和换袜轮换连在一起检查；中风险条目，脚麻、破皮或无干袜时降低路线和负重。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 湿袜和脚部破损风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 湿袜和脚部破损风险, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

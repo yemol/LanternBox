@@ -2,7 +2,7 @@
 title: 决策记录基础
 slug: organization-decision-log-001
 category: 团队轮值与任务管理
-summary: 介绍在应急、避难、系统维护或团队协作中，如何记录关键决策的背景、选项、理由、负责人和复查时间。
+summary: 决策记录基础：明确责任人、交接字段、任务层级和复盘时间；疲劳、冲突或遗漏出现时暂停重排。
 tags: 决策记录, 日志, 团队协作, 复盘, 风险, Core
 risk_level: normal
 status: published

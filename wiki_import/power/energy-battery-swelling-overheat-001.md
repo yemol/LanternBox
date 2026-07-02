@@ -2,7 +2,7 @@
 title: 电池发热鼓包处理
 slug: energy-battery-swelling-overheat-001
 category: 能源
-summary: 介绍手机、移动电源、锂电池设备出现发热、鼓包、异味、漏液等异常时的基础处置原则和停止使用条件。
+summary: 电池发热鼓包处理：记录体温感受、精神状态、尿量和伴随症状；高风险条目，皮疹、意识变化、持续恶化或儿童危险信号需升级。
 tags: 电池, 鼓包, 发热, 移动电源, 锂电池, 安全
 risk_level: high
 status: published

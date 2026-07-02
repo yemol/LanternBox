@@ -4,7 +4,7 @@ slug: water-flood-water-002
 category: 水
 priority: P0
 risk_level: high
-summary: 解释“洪水后井水和地下室积水风险”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 洪水后井水和地下室积水风险：安排取水、处理、储存和饮用分区；高风险条目，水源异常或容器污染时先隔离。
 tags: 水, 洪水后井水和地下室积水风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 洪水后井水和地下室积水风险, 水, Emergency preparedness, Survival skills, Public health

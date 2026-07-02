@@ -2,7 +2,7 @@
 title: 蜡烛火灾风险
 slug: fire-candle-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
-summary: 解释“蜡烛火灾风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 蜡烛火灾风险：要求固定烛台、清空可燃物并短时看管；高风险条目，睡前或无人时必须熄灭。
 tags: 火源 / 保温 / 通风 / 一氧化碳风险, 蜡烛火灾风险, P0, 长期生存
 risk_level: high
 status: published

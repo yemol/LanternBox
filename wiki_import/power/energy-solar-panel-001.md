@@ -2,7 +2,7 @@
 title: 太阳能板基础使用
 slug: energy-solar-panel-001
 category: 能源
-summary: 介绍便携太阳能板在离网场景中的基础摆放、连接、充电优先级和安全注意事项。
+summary: 太阳能板基础使用：按光照、角度、温度和接口防水安排补电；输出低或进水风险高时转节电。
 tags: 太阳能, 充电, 电力, 移动电源, 离网, 能源
 risk_level: normal
 status: published

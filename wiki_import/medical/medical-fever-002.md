@@ -4,7 +4,7 @@ slug: medical-fever-002
 category: 医疗急救
 priority: P0
 risk_level: high
-summary: 解释“儿童发热咳嗽的观察重点”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 儿童发热咳嗽的观察重点：记录体温感受、精神状态、尿量和伴随症状；高风险条目，皮疹、意识变化、持续恶化或儿童危险信号需升级。
 tags: 医疗, 医疗急救, 儿童发热咳嗽的观察重点, 长期断供, 小团队, 离线生存
 guide_links: DG-0611, DG-0612, DG-0613
 kiwix_topics: 儿童发热咳嗽的观察重点, 医疗急救, Emergency preparedness, Survival skills, Public health

@@ -4,7 +4,7 @@ slug: wildlife-edible-insects-001
 category: 野外食物获取 / 狩猎捕捞 / 动物蛋白补充
 priority: P1
 risk_level: high
-summary: 解释“昆虫食用的卫生和过敏风险”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 昆虫食用的卫生和过敏风险：检查昆虫来源、污染接触、过敏史和充分加热；高风险条目，不认识或有过敏风险时不入口。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 昆虫食用的卫生和过敏风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0681, DG-0682, DG-0683
 kiwix_topics: 昆虫食用的卫生和过敏风险, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living

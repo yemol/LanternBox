@@ -2,7 +2,7 @@
 title: 烹饪燃料基础管理
 slug: food-cooking-fuel-management-001
 category: 食物
-summary: 介绍卡式炉气罐、酒精燃料、固体燃料等应急烹饪燃料的储存、使用优先级和安全边界。
+summary: 烹饪燃料基础管理：明确库存、加工、保存和弃用顺序；高风险条目，包装破损、变质或来源不清时停止食用。
 tags: 燃料, 烹饪, 卡式炉, 酒精炉, 防火, 通风
 risk_level: high
 status: published

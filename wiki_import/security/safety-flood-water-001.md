@@ -2,7 +2,7 @@
 title: 洪水前断电原因
 slug: safety-flood-water-001
 category: 安全
-summary: 解释“洪水前断电原因”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 洪水前断电原因：控制暴露、接触、路线和冲突边界；高风险条目，人员安全受威胁时放弃物资和任务。
 tags: 安全, 洪水前断电原因, 洪水前断电原, P0, 长期生存
 risk_level: high
 status: published

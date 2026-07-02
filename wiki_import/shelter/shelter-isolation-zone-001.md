@@ -4,7 +4,7 @@ slug: shelter-isolation-zone-001
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 解释“病人隔离区的最小条件”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 病人隔离区的最小条件：给病人隔离区安排通风、用品和照护边界；中风险条目，不要与厨房睡眠区混用。
 tags: 庇护空间, 庇护空间分区, 病人隔离区的最小条件, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 病人隔离区的最小条件, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

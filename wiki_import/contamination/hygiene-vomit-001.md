@@ -4,7 +4,7 @@ slug: hygiene-vomit-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 解释“粪便和呕吐物隔离边界”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 粪便和呕吐物隔离边界：按飞溅、手部、衣物和地面路径清理呕吐物；高风险条目，清理者不直接进入做饭照护。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 粪便和呕吐物隔离边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 粪便和呕吐物隔离边界, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

@@ -4,7 +4,7 @@ slug: safety-night-safety-001
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 解释“夜间行动是否值得的判断”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 夜间行动是否值得的判断：比较照明、暴露、跌倒和收益；高风险条目，收益不明确时不做夜间外出。
 tags: 风险决策, 夜间行动是否值得的判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 夜间行动是否值得的判断, 风险决策, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: psychology-quiet-rotation-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 解释“独处轮换和情绪恢复”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 独处轮换和情绪恢复：安排短时独处、安静角和交接规则帮助恢复；中风险条目，不让独处变成失联。
 tags: 心理韧性, 心理韧性与冲突降温, 独处轮换和情绪恢复, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 独处轮换和情绪恢复, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

@@ -2,7 +2,7 @@
 title: 饮用水储存基础
 slug: water-drinking-storage-001
 category: 水
-summary: 介绍短期断水或外部供水不稳定时的饮用水储存原则，包括储水数量、容器选择、存放位置、轮换检查和污染风险提醒。
+summary: 饮用水储存基础：安排取水、处理、储存和饮用分区；中风险条目，水源异常或容器污染时先隔离。
 tags: 饮用水, 储水, 停水, 容器, 卫生
 risk_level: caution
 status: published

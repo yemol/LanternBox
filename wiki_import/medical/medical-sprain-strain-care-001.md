@@ -2,7 +2,7 @@
 title: 扭伤拉伤基础处理
 slug: medical-sprain-strain-care-001
 category: 医疗急救
-summary: 介绍轻度扭伤、拉伤后的休息、冷敷、加压、抬高、观察和停止自行处理条件，帮助减少二次损伤。
+summary: 扭伤拉伤基础处理：整理观察、清洁、保护和复查步骤；中风险条目，症状恶化或无法判断时停止普通处理。
 tags: 扭伤, 拉伤, 关节, 冷敷, 医疗观察, 急救
 risk_level: caution
 status: published

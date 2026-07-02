@@ -2,7 +2,7 @@
 title: 常用药储存检查
 slug: medical-medication-storage-check-001
 category: 医疗急救
-summary: 介绍家庭常用药的储存、标签、有效期、避光防潮和高风险停用条件，避免误服、过期和受潮失效。
+summary: 常用药储存检查：整理观察、清洁、保护和复查步骤；中风险条目，症状恶化或无法判断时停止普通处理。
 tags: 药品, 储存, 有效期, 医疗, 家庭药箱, 记录
 risk_level: caution
 status: published

@@ -4,7 +4,7 @@ slug: safety-conflict-001
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 解释“拒绝交换的低冲突说法”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 拒绝交换的低冲突说法：用短句说明无法交换并保留退路；高风险条目，不要解释库存或引发对方讨价还价。
 tags: 外部接触, 外部接触与物资交换风险, 拒绝交换的低冲突说法, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 拒绝交换的低冲突说法, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

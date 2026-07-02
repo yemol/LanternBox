@@ -4,7 +4,7 @@ slug: psychology-closed-space-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 解释“长期封闭环境中的边界”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 长期封闭环境中的边界：安排空间边界、安静轮换和冲突暂停规则；中风险条目，封闭压力影响安全任务时调整。
 tags: 心理韧性, 心理韧性与冲突降温, 长期封闭环境中的边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 长期封闭环境中的边界, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

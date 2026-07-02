@@ -2,7 +2,7 @@
 title: 水质异常判断
 slug: water-abnormal-quality-check-001
 category: 水
-summary: 介绍在断水、临时取水或储水使用前，对饮用水进行基础观察和风险判断的方法，帮助识别浑浊、异味、颜色异常和污染迹象。
+summary: 水质异常判断：用颜色、气味、浑浊、油膜和来源记录做基础筛查；中风险条目，异常水先隔离，不直接并入饮用储备。
 tags: 饮用水, 水质, 异味, 浑浊, 污染, 储水
 risk_level: caution
 status: published

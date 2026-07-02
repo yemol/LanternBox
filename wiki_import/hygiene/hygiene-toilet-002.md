@@ -4,7 +4,7 @@ slug: hygiene-toilet-002
 category: 卫生
 priority: P0
 risk_level: high
-summary: 解释“厕所不能冲水时的风险分级”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 厕所不能冲水时的风险分级：划分清洁区、污染区和处理顺序；高风险条目，污染来源不清或人员不适时升级。
 tags: 卫生, 厕所不能冲水时的风险分级, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 厕所不能冲水时的风险分级, 卫生, Emergency preparedness, Survival skills, Public health

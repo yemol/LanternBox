@@ -4,7 +4,7 @@ slug: shelter-return-home-001
 category: 避难转移
 priority: P0
 risk_level: high
-summary: 解释“返回原住所的风险判断”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 返回原住所的风险判断：检查结构、气味、水电和外部风险后再返回；高风险条目，不为取物冒险返回。
 tags: 撤离, 避难转移, 返回原住所的风险判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0641, DG-0642, DG-0643
 kiwix_topics: 返回原住所的风险判断, 避难转移, Emergency preparedness, Survival skills, Off-grid living

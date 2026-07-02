@@ -4,7 +4,7 @@ slug: agriculture-container-002
 category: 种植
 priority: P1
 risk_level: caution
-summary: 解释“容器种植的排水和光照”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 容器种植的排水和光照：检查容器排水、光照、根系空间和污染来源；中风险条目，积水霉味或污染容器需停用。
 tags: 种植, 容器种植的排水和光照, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 容器种植的排水和光照, 种植, Emergency preparedness, Survival skills, Off-grid living

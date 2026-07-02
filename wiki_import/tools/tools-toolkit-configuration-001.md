@@ -2,7 +2,7 @@
 title: 小工具包基础配置
 slug: tools-toolkit-configuration-001
 category: 维修 / 制作 / 替代 / 拆解再利用
-summary: 介绍家庭和离线系统中小工具包的基础配置，包括切割、固定、测量、照明、防护、清洁和常用维修耗材。
+summary: 小工具包基础配置：配置切割、固定、测量、照明、防护和清洁工具，并检查借用、归还、破损和责任人记录；缺件时标记替代品。
 tags: 工具包, 维修, 工具, 螺丝刀, 胶带, 扎带, 手套
 risk_level: normal
 status: published

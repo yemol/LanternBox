@@ -4,7 +4,7 @@ slug: safety-buddy-rule-001
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 解释“高风险任务的双人规则”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 高风险任务的双人规则：给高风险任务安排执行人和复核人；高风险条目，单人疲劳或信息不明时暂停任务。
 tags: 风险决策, 高风险任务的双人规则, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 高风险任务的双人规则, 风险决策, Emergency preparedness, Survival skills, Off-grid living

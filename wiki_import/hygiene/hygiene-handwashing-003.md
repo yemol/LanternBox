@@ -2,7 +2,7 @@
 title: 少水洗手的关键时刻
 slug: hygiene-handwashing-003
 category: 卫生
-summary: 解释“少水洗手的关键时刻”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 少水洗手的关键时刻：保留餐前、如厕后、伤口前后的手卫生；中风险条目，入口污染风险高于省水。
 tags: 卫生, 少水洗手的关键时刻, 少水洗手的关, P0, 长期生存
 risk_level: caution
 status: published

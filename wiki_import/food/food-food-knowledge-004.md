@@ -2,7 +2,7 @@
 title: 低体力消耗与食物消耗
 slug: food-food-knowledge-004
 category: 食物
-summary: 解释“低体力消耗与食物消耗”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 低体力消耗与食物消耗：明确库存、加工、保存和弃用顺序；中风险条目，包装破损、变质或来源不清时停止食用。
 tags: 食物, 低体力消耗与食物消耗, 低体力消耗与, P0, 长期生存
 risk_level: caution
 status: published

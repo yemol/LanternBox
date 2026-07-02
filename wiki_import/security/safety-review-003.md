@@ -2,7 +2,7 @@
 title: 安全记录的复盘价值
 slug: safety-review-003
 category: 风险决策
-summary: 解释“安全记录的复盘价值”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 安全记录的复盘价值：区分事实、情绪和改进动作进行短复盘；中风险条目，不把复盘变成追责。
 tags: 安全, 安全记录的复盘价值, 安全记录的复, P0, 长期生存
 risk_level: caution
 status: published

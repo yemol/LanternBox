@@ -4,7 +4,7 @@ slug: agriculture-animal-food-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 解释“动物性食物处理卫生”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 动物性食物处理卫生：分开宰杀、清洗、烹饪和餐具区域；中风险条目，污染路径不清时不入口。
 tags: 养殖, 小规模养殖, 动物性食物处理卫生, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 动物性食物处理卫生, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

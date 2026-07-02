@@ -4,7 +4,7 @@ slug: wildlife-review-001
 category: 野外食物获取 / 狩猎捕捞 / 动物蛋白补充
 priority: P1
 risk_level: high
-summary: 解释“野外食物记录和复盘”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 野外食物记录和复盘：区分事实、情绪和改进动作进行短复盘；高风险条目，不把复盘变成追责。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 野外食物记录和复盘, 长期断供, 小团队, 离线生存
 guide_links: DG-0681, DG-0682, DG-0683
 kiwix_topics: 野外食物记录和复盘, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living

@@ -2,7 +2,7 @@
 title: 冻伤风险观察
 slug: medical-cold-injury-frostbite-001
 category: 医疗急救
-summary: 介绍低温环境中手指、脚趾、耳朵、鼻尖等部位的冻伤风险观察、基础保暖和停止自行处理条件。
+summary: 冻伤风险观察：识别麻木、变白变硬、疼痛变化和复温后的异常；中风险条目，不要继续暴露或剧烈摩擦疑似冻伤部位。
 tags: 冻伤, 低温, 保温, 医疗观察, 手脚, 冬季
 risk_level: caution
 status: published

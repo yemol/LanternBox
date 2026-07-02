@@ -4,7 +4,7 @@ slug: psychology-conflict-cooling-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 解释“资源分配争吵的降温方法”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 资源分配争吵的降温方法：用暂停、复述事实和分开角色降低资源争吵；中风险条目，不在争吵中分配物资。
 tags: 心理韧性, 心理韧性与冲突降温, 资源分配争吵的降温方法, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 资源分配争吵的降温方法, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

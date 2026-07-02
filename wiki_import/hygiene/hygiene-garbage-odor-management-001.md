@@ -2,7 +2,7 @@
 title: 垃圾与异味管理
 slug: hygiene-garbage-odor-management-001
 category: 卫生
-summary: 介绍停水、停电、避难或垃圾清运不稳定时，如何分类、密封、隔离和记录垃圾，减少异味、虫害和疾病风险。
+summary: 垃圾与异味管理：划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
 tags: 垃圾, 异味, 卫生, 虫害, 停水, 避难
 risk_level: caution
 status: published

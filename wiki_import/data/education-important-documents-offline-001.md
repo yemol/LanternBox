@@ -2,7 +2,7 @@
 title: 重要文件离线备份
 slug: education-important-documents-offline-001
 category: 团队轮值与任务管理
-summary: 介绍身份证件、医疗信息、联系人、资产资料和关键说明的离线备份原则，强调加密、纸质副本、最小必要信息和访问权限。
+summary: 重要文件离线备份：备份证件、医疗信息、联系人和关键说明；中风险条目，敏感信息只保留最小必要访问。
 tags: 重要文件, 证件, 离线备份, 加密, 纸质副本, 成员资料
 risk_level: caution
 status: published

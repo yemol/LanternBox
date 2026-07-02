@@ -4,7 +4,7 @@ slug: repair-door-window-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 解释“门窗松动的受力和低暴露加固”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 门窗松动的受力和低暴露加固：检查受力点、缝隙、噪声和低暴露加固方式；高风险条目，结构不稳时不强撑。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 门窗松动的受力和低暴露加固, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 门窗松动的受力和低暴露加固, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

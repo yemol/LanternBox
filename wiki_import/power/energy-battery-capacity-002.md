@@ -2,7 +2,7 @@
 title: 电池容量和功耗基础
 slug: energy-battery-capacity-002
 category: 能源
-summary: 解释“电池容量和功耗基础”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 电池容量和功耗基础：用实际耗电、低温和老化修正可用时间；中风险条目，关键设备低于预警线时启动节电。
 tags: 能源, 电池容量和功耗基础, 电池容量和功, P0, 长期生存
 risk_level: caution
 status: published

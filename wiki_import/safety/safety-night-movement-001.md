@@ -2,7 +2,7 @@
 title: 夜间行动安全
 slug: safety-night-movement-001
 category: 安全
-summary: 介绍停电、低照度或避难空间中夜间行动的安全原则，包括照明、路线、障碍物、鞋具、通讯和跌倒风险。
+summary: 夜间行动安全：比较照明、暴露、跌倒和收益；中风险条目，收益不明确时不做夜间外出。
 tags: 夜间行动, 停电, 照明, 跌倒, 安全, 避难
 risk_level: caution
 status: published

@@ -4,7 +4,7 @@ slug: safety-barter-002
 category: 安全
 priority: P0
 risk_level: high
-summary: 解释“物资交换前的对象风险判断”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 物资交换前的对象风险判断：控制交换对象、地点、物品隔离和回程复盘；高风险条目，对方身份、物品来源或路线不清时取消。
 tags: 安全, 物资交换前的对象风险判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0631, DG-0632, DG-0633
 kiwix_topics: 物资交换前的对象风险判断, 安全, Emergency preparedness, Survival skills, Off-grid living

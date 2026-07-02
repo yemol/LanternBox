@@ -4,7 +4,7 @@ slug: clothing-wet-clothing-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 解释“湿衣服不能贴身睡觉的原因”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 湿衣服不能贴身睡觉的原因：要求贴身湿衣离开皮肤，睡前保持干燥保温层；中风险条目，寒冷、发抖或湿被褥时停止普通睡眠安排。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 湿衣服不能贴身睡觉的原因, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 湿衣服不能贴身睡觉的原因, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

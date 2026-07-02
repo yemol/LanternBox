@@ -4,7 +4,7 @@ slug: safety-safety-knowledge-009
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 解释“长期互助关系的信任边界”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 长期互助关系的信任边界：把长期互助建立在小额、可复盘、可退出的规则上；高风险条目，不要一次性交出关键资源或路线。
 tags: 外部接触, 外部接触与物资交换风险, 长期互助关系的信任边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 长期互助关系的信任边界, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

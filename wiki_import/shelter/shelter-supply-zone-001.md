@@ -4,7 +4,7 @@ slug: shelter-supply-zone-001
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 解释“物资区盘点和取用动线”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 物资区盘点和取用动线：固定物资区盘点、取用动线和责任人；中风险条目，物资不随手搬动。
 tags: 庇护空间, 庇护空间分区, 物资区盘点和取用动线, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 物资区盘点和取用动线, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

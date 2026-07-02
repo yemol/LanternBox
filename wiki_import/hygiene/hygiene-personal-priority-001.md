@@ -2,7 +2,7 @@
 title: 基础个人卫生优先级
 slug: hygiene-personal-priority-001
 category: 卫生
-summary: 介绍停水、资源不足或避难期间，个人卫生的优先级排序，优先保障手卫生、如厕卫生、伤口卫生和餐前清洁。
+summary: 基础个人卫生优先级：把手、口腔、伤口、如厕和睡眠清洁排序；中风险条目，水少时优先入口和伤口相关卫生。
 tags: 个人卫生, 洗手, 停水, 如厕, 感染预防, 清洁
 risk_level: caution
 status: published

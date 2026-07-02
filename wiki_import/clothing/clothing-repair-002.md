@@ -4,7 +4,7 @@ slug: clothing-repair-002
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 解释“衣物修补材料选择”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 衣物修补材料选择：按保温、防雨、承重和污染隔离选择针线、胶带或替代布料；中风险条目，修补不能恢复关键功能时降级使用。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 衣物修补材料选择, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 衣物修补材料选择, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

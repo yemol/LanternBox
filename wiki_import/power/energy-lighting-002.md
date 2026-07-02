@@ -4,7 +4,7 @@ slug: energy-lighting-002
 category: 能源
 priority: P0
 risk_level: high
-summary: 解释“照明分区和夜间跌倒风险”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 照明分区和夜间跌倒风险：按通道、操作点、危险区和睡眠区分配照明；高风险条目，灯具被借走后要复位。
 tags: 能源, 照明分区和夜间跌倒风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0616, DG-0617, DG-0618
 kiwix_topics: 照明分区和夜间跌倒风险, 能源, Emergency preparedness, Survival skills, Off-grid living

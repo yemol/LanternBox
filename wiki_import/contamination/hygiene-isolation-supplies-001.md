@@ -4,7 +4,7 @@ slug: hygiene-isolation-supplies-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 解释“隔离用品不足时的替代”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 隔离用品不足时的替代：把手套、袋子、布料等隔离用品分级使用；高风险条目，用品不足时先保护高风险接触。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 隔离用品不足时的替代, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 隔离用品不足时的替代, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

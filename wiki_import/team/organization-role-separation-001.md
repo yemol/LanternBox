@@ -4,7 +4,7 @@ slug: organization-role-separation-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 解释“清洁做饭照护不可混岗边界”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 清洁做饭照护不可混岗边界：分开清洁、做饭、照护和库存角色；中风险条目，污染任务后不得直接做饭照护。
 tags: 团队管理, 团队轮值与任务管理, 清洁做饭照护不可混岗边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 清洁做饭照护不可混岗边界, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: safety-safety-knowledge-006
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 解释“邻里互助和安全距离”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 邻里互助和安全距离：设定互助范围、交付方式和安全距离；高风险条目，互助不等于开放住所和库存。
 tags: 外部接触, 外部接触与物资交换风险, 邻里互助和安全距离, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 邻里互助和安全距离, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: agriculture-harvest-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 解释“采收后如何延长保存”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 采收后如何延长保存：安排采收后清洁、分装、阴凉保存和尽快食用；中风险条目，腐烂虫害或污染接触时弃用。
 tags: 种植, 采收后如何延长保存, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 采收后如何延长保存, 种植, Emergency preparedness, Survival skills, Off-grid living

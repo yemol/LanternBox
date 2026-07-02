@@ -2,7 +2,7 @@
 title: 明火照明的睡前风险
 slug: fire-open-flame-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
-summary: 解释“明火照明的睡前风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 明火照明的睡前风险：控制火源、通风、燃料和睡前复查；中风险条目，烟味、燃气味或人员不适时停止用火。
 tags: 火源 / 保温 / 通风 / 一氧化碳风险, 明火照明的睡前风险, 明火照明的睡, P0, 长期生存
 risk_level: caution
 status: published

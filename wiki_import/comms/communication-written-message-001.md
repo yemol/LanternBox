@@ -4,7 +4,7 @@ slug: communication-written-message-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 解释“纸条留言的时间去向格式”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 纸条留言的时间去向格式：写清时间、去向、人数、下一步和签名；中风险条目，敏感信息不留在暴露点。
 tags: 通讯, 纸条留言的时间去向格式, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 纸条留言的时间去向格式, 通讯, Emergency preparedness, Survival skills, Off-grid living

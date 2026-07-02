@@ -2,7 +2,7 @@
 title: 家庭成员每日状态检查
 slug: organization-family-member-daily-001
 category: 医疗急救
-summary: 介绍在避难、停电、疾病观察或压力较高时，对家庭成员进行每日基础状态检查的方法，包括饮水、进食、睡眠、情绪、体温和行动能力。
+summary: 家庭成员每日状态检查：明确责任人、交接字段、任务层级和复盘时间；疲劳、冲突或遗漏出现时暂停重排。
 tags: 成员状态, 健康观察, 每日检查, 家庭, 情绪, 饮水
 risk_level: normal
 status: published

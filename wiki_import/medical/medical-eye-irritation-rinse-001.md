@@ -2,7 +2,7 @@
 title: 眼部异物与刺激基础处理
 slug: medical-eye-irritation-rinse-001
 category: 医疗急救
-summary: 介绍灰尘、烟雾、轻微异物或刺激物进入眼睛后的基础冲洗和观察方法，并明确化学品、穿透伤和视力异常的停止条件。
+summary: 眼部异物与刺激基础处理：整理观察、清洁、保护和复查步骤；中风险条目，症状恶化或无法判断时停止普通处理。
 tags: 眼睛, 异物, 冲洗, 烟雾, 化学品, 急救
 risk_level: caution
 status: published

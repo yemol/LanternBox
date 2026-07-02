@@ -2,7 +2,7 @@
 title: 照护者手卫生与交叉感染
 slug: medical-cross-infection-002
 category: 医疗急救
-summary: 解释“照护者手卫生与交叉感染”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 照护者手卫生与交叉感染：处理动物后先清洁双手、刀具和容器，再接触水食物；高风险条目，缺少清洁条件时不处理入口食物。
 tags: 医疗急救, 照护者手卫生与交叉感染, 照护者手卫生, P0, 长期生存
 risk_level: high
 status: published

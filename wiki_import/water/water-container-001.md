@@ -2,7 +2,7 @@
 title: 停水初期为什么要抢收容器
 slug: water-container-001
 category: 水
-summary: 解释“停水初期为什么要抢收容器”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 停水初期为什么要抢收容器：尽早收集现有干净容器和管道余水；中风险条目，容器先清洁再储水。
 tags: 水, 停水初期要抢收容器, 停水初期为什, P0, 长期生存
 risk_level: caution
 status: published

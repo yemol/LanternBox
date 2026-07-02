@@ -4,7 +4,7 @@ slug: food-refrigeration-002
 category: 食物
 priority: P0
 risk_level: high
-summary: 解释“剩饭过夜没有冷藏的风险判断”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 剩饭过夜没有冷藏的风险判断：按停电时间、温度、开门次数和食物类型处理冰箱食物，并限制剩饭保存、复热次数和多人共食范围；高风险条目，肉类熟食可疑时不要保存到下一餐。
 tags: 食物, 剩饭过夜没有冷藏的风险判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 剩饭过夜没有冷藏的风险判断, 食物, Emergency preparedness, Survival skills, Off-grid living

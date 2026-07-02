@@ -2,7 +2,7 @@
 title: 临时绝缘材料的边界
 slug: repair-temporary-insulation-001
 category: 维修 / 制作 / 替代 / 拆解再利用
-summary: 解释“临时绝缘材料的边界”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 临时绝缘材料的边界：判断修补是否能恢复最低功能；中风险条目，承重、带电或锋利风险不明时停止。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 临时绝缘材料的边界, 临时绝缘材料, P0, 长期生存
 risk_level: caution
 status: published

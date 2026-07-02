@@ -4,7 +4,7 @@ slug: food-staple-food-001
 category: 食物
 priority: P0
 risk_level: high
-summary: 解释“主食不足时体力任务为什么要减少”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 主食不足时体力任务为什么要减少：用主食余量决定体力任务强度和配给节奏；高风险条目，主食不足时减少搬运、外出和高耗活动。
 tags: 食物, 主食不足时体力任务为什么要减少, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 主食不足时体力任务为什么要减少, 食物, Emergency preparedness, Survival skills, Off-grid living

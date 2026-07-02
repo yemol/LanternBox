@@ -4,7 +4,7 @@ slug: organization-rationing-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 解释“照护任务如何分配给多人”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 照护任务如何分配给多人：把饮水、进食、清洁、陪伴和夜查分班；中风险条目，大家都看着不等于有人负责。
 tags: 团队管理, 团队轮值与任务管理, 照护任务如何分配给多人, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 照护任务如何分配给多人, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

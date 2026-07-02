@@ -2,7 +2,7 @@
 title: 停电期间冰箱食物处理
 slug: food-refrigerator-outage-001
 category: 食物
-summary: 介绍停电时冰箱和冷冻室食物的基础处理原则，包括少开门、温度判断、优先食用和可疑食物丢弃。
+summary: 停电期间冰箱食物处理：盘点电源、分级设备并安排开机窗口；中风险条目，关闭非必要设备和后台消耗。
 tags: 停电, 冰箱, 食品安全, 冷冻, 食物变质, 厨房
 risk_level: caution
 status: published

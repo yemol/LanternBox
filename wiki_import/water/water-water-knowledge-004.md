@@ -2,7 +2,7 @@
 title: 少水卫生与入口风险
 slug: water-water-knowledge-004
 category: 水
-summary: 解释“少水卫生与入口风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 少水卫生与入口风险：安排取水、处理、储存和饮用分区；中风险条目，水源异常或容器污染时先隔离。
 tags: 水, 少水卫生与入口风险, 少水卫生与入, P0, 长期生存
 risk_level: caution
 status: published

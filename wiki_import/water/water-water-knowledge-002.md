@@ -4,7 +4,7 @@ slug: water-water-knowledge-002
 category: 水
 priority: P0
 risk_level: high
-summary: 解释“断供期间水源选择的保守原则”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 断供期间水源选择的保守原则：选择来源可观察、污染少、取水成本低的水源；高风险条目，保守原则优先于便利。
 tags: 水, 断供期间水源选择的保守原则, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 断供期间水源选择的保守原则, 水, Emergency preparedness, Survival skills, Public health

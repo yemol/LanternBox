@@ -2,7 +2,7 @@
 title: 短信电话和耗电差异
 slug: communication-sms-002
 category: 通讯
-summary: 解释“短信电话和耗电差异”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 短信电话和耗电差异：比较短信、电话和即时消息的耗电与可靠性；中风险条目，弱网时优先短文本。
 tags: 通讯, 短信电话和耗电差异, 短信电话和耗, P0, 长期生存
 risk_level: caution
 status: published

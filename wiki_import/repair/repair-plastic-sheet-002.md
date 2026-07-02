@@ -2,7 +2,7 @@
 title: 塑料布和防水层原理
 slug: repair-plastic-sheet-002
 category: 维修 / 制作 / 替代 / 拆解再利用
-summary: 解释“塑料布和防水层原理”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 塑料布和防水层原理：用塑料布临时挡雨、隔潮和覆盖；中风险条目，积水、风掀或遮挡通风时调整。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 塑料布和防水层原理, 塑料布和防水, P0, 长期生存
 risk_level: caution
 status: published

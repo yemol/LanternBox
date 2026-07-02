@@ -4,7 +4,7 @@ slug: organization-night-safety-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 解释“夜间轮值表的疲劳边界”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 夜间轮值表的疲劳边界：限制夜班任务、时长和接班方式；中风险条目，打瞌睡时必须换班。
 tags: 团队管理, 团队轮值与任务管理, 夜间轮值表的疲劳边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 夜间轮值表的疲劳边界, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

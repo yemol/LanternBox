@@ -4,7 +4,7 @@ slug: hygiene-contamination-zone-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 解释“清洁区污染区的标记原则”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 清洁区污染区的标记原则：用标记和动线分开清洁区与污染区；高风险条目，跨区前必须处理手、鞋和工具。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 清洁区污染区的标记原则, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 清洁区污染区的标记原则, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

@@ -2,7 +2,7 @@
 title: 低电量任务排程
 slug: energy-task-scheduling-001
 category: 能源
-summary: 介绍 Core、终端和移动设备在低电量状态下如何安排任务优先级，优先保障通讯、记录、照明、数据保存和必要检索。
+summary: 低电量任务排程用于安排电量分配、设备检查和停用记录；受潮、发热或鼓包时隔离停用，并留下交接记录。
 tags: 低电量, 任务排程, Core, 电力, 节能, 离线系统
 risk_level: normal
 status: published

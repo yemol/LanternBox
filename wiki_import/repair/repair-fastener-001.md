@@ -4,7 +4,7 @@ slug: repair-fastener-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 解释“螺丝钉钉子回收和分类”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 螺丝钉钉子回收和分类：回收固定件时分类、去锈和包覆尖端；高风险条目，弯曲或锈蚀件不承重。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 螺丝钉钉子回收和分类, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 螺丝钉钉子回收和分类, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

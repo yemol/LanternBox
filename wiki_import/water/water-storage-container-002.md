@@ -2,7 +2,7 @@
 title: 储水容器污染风险
 slug: water-storage-container-002
 category: 水
-summary: 解释“储水容器污染风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 储水容器污染风险：安排容器清洁、标记、轮换和饮用/非饮用分区；高风险条目，水桶污染、漏水或来源不清时停止并隔离。
 tags: 水, 储水容器污染风险, 储水容器污染, P0, 长期生存
 risk_level: high
 status: published

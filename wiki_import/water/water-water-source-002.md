@@ -4,7 +4,7 @@ slug: water-water-source-002
 category: 水
 priority: P0
 risk_level: high
-summary: 解释“取水路线的体力和安全成本”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 取水路线的体力和安全成本：评估路线体力、安全成本和水源污染可能；高风险条目，路线超时、人员疲劳或水质异常时停止取水。
 tags: 水, 取水路线的体力和安全成本, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 取水路线的体力和安全成本, 水, Emergency preparedness, Survival skills, Public health

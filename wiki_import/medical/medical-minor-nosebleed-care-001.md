@@ -2,7 +2,7 @@
 title: 鼻出血基础处理
 slug: medical-minor-nosebleed-care-001
 category: 医疗急救
-summary: 介绍轻微鼻出血时的坐姿、按压、观察和停止条件，避免仰头、吞血和反复刺激鼻腔。
+summary: 鼻出血基础处理：整理观察、清洁、保护和复查步骤；症状恶化或无法判断时停止普通处理。
 tags: 鼻出血, 止血, 急救, 观察, 医疗照护
 risk_level: normal
 status: published

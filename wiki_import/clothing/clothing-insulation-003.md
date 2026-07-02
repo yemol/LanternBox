@@ -4,7 +4,7 @@ slug: clothing-insulation-003
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 解释“头颈手脚为什么优先保温”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 头颈手脚为什么优先保温：把头颈、手部和脚部列为低温检查重点；中风险条目，麻木、变色或动作变慢时停止外出。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 头颈手脚为什么优先保温, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 头颈手脚为什么优先保温, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

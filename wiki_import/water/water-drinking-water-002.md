@@ -2,7 +2,7 @@
 title: 饮用水最低需求和缺水信号
 slug: water-drinking-water-002
 category: 水
-summary: 解释“饮用水最低需求和缺水信号”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 饮用水最低需求和缺水信号：估算每人最低饮水需求和缺水信号；中风险条目，少喝硬撑会削弱判断。
 tags: 水, 饮用水最低需求和缺水信号, 饮用水最低需, P0, 长期生存
 risk_level: caution
 status: published

@@ -4,7 +4,7 @@ slug: fire-fire-response-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 解释“火灾小火处理的停止线”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 火灾小火处理的停止线：先确认出口，再判断是否能短时处理初起小火；高风险条目，烟多、蔓延或出口受威胁时撤离。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 火灾小火处理的停止线, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 火灾小火处理的停止线, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

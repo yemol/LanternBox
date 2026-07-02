@@ -4,7 +4,7 @@ slug: organization-return-check-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 解释“归队检查为什么要固定流程”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 归队检查为什么要固定流程：归队先点名、查伤、查污染和交接路线；中风险条目，不要直接进入厨房睡眠区。
 tags: 团队管理, 团队轮值与任务管理, 归队检查为什么要固定流程, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 归队检查为什么要固定流程, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

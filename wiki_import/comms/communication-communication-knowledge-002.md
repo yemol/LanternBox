@@ -4,7 +4,7 @@ slug: communication-communication-knowledge-002
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 解释“电量和通信窗口的协调”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 电量和通信窗口的协调：把通信窗口和电量预算绑定；中风险条目，不要弱信号长时间搜索耗电。
 tags: 通讯, 电量和通信窗口的协调, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 电量和通信窗口的协调, 通讯, Emergency preparedness, Survival skills, Off-grid living

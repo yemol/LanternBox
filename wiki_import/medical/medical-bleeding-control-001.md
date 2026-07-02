@@ -4,7 +4,7 @@ slug: medical-bleeding-control-001
 category: 医疗急救
 priority: P0
 risk_level: high
-summary: 解释“直接压迫止血为什么不能频繁查看”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 直接压迫止血为什么不能频繁查看：强调持续压迫、减少频繁查看和记录出血变化；高风险条目，出血不止或意识异常时停止普通处理并升级。
 tags: 医疗, 医疗急救, 直接压迫止血为什么不能频繁查看, 长期断供, 小团队, 离线生存
 guide_links: DG-0611, DG-0612, DG-0613
 kiwix_topics: 直接压迫止血为什么不能频繁查看, 医疗急救, Emergency preparedness, Survival skills, Public health

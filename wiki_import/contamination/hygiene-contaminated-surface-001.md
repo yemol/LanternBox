@@ -4,7 +4,7 @@ slug: hygiene-contaminated-surface-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 解释“食物接触污染表面的判断”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 食物接触污染表面的判断：判断食物接触面是否被污水、血液或垃圾污染；高风险条目，接触面未清洁前不放食物。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 食物接触污染表面的判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 食物接触污染表面的判断, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health

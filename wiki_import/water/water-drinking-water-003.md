@@ -2,7 +2,7 @@
 title: 饮用水与清洁水分级
 slug: water-drinking-water-003
 category: 水
-summary: 解释“饮用水与清洁水分级”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 饮用水与清洁水分级：把饮用水、清洁水和冲洗水分开标记；中风险条目，不同等级不混用。
 tags: 水, 饮用水与清洁水分级, 饮用水与清洁, P0, 长期生存
 risk_level: caution
 status: published

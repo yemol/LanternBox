@@ -2,7 +2,7 @@
 title: 移动电源低电量使用优先级
 slug: energy-bank-battery-priority-001
 category: 能源
-summary: 介绍断电或外出低电量场景下，手机和移动电源的使用优先级，帮助优先保障通讯、照明、定位和核心信息访问。
+summary: 移动电源低电量使用优先级：安排电量分配、设备检查和停用记录；受潮、发热或鼓包时隔离停用。
 tags: 移动电源, 低电量, 手机, 充电, 断电, 通讯, 照明
 risk_level: normal
 status: published

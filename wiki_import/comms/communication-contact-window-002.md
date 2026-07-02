@@ -2,7 +2,7 @@
 title: 固定开机窗口的作用
 slug: communication-contact-window-002
 category: 通讯
-summary: 解释“固定开机窗口的作用”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 固定开机窗口的作用：固定开机时间以节省电量并降低错过消息；中风险条目，窗口外保持关机或低耗。
 tags: 通讯, 固定开机窗口的作用, 固定开机窗口, P0, 长期生存
 risk_level: caution
 status: published

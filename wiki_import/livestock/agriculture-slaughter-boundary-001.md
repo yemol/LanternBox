@@ -4,7 +4,7 @@ slug: agriculture-slaughter-boundary-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 解释“宰杀处理的卫生和法律边界”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 宰杀处理的卫生和法律边界：强调卫生分区、工具清洁和法律伦理边界；中风险条目，无法分开污染区或确认健康时不处理入口。
 tags: 养殖, 小规模养殖, 宰杀处理的卫生和法律边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 宰杀处理的卫生和法律边界, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

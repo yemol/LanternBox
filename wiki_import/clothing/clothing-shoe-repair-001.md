@@ -4,7 +4,7 @@ slug: clothing-shoe-repair-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 解释“鞋底破损的转移风险”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 鞋底破损的转移风险：评估抓地、承重、进水和脚底受伤风险；中风险条目，无法稳定行走时停止转移或改轻负重。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 鞋底破损的转移风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 鞋底破损的转移风险, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

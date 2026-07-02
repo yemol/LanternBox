@@ -4,7 +4,7 @@ slug: communication-lora-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 解释“LoRa 节点适合传什么信息”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: LoRa 节点适合传什么信息：检查节点电量、天线、编号和收发测试；中风险条目，异常节点先标记再复查。
 tags: 通讯, LoRa 节点适合传什么信息, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: LoRa 节点适合传什么信息, 通讯, Emergency preparedness, Survival skills, Off-grid living

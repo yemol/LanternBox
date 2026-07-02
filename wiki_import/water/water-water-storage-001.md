@@ -4,7 +4,7 @@ slug: water-water-storage-001
 category: 水
 priority: P0
 risk_level: high
-summary: 解释“长期储水的轮换和标记原则”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 长期储水的轮换和标记原则：安排容器清洁、标记、轮换和饮用/非饮用分区；高风险条目，水桶污染、漏水或来源不清时停止并隔离。
 tags: 水, 长期储水的轮换和标记原则, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 长期储水的轮换和标记原则, 水, Emergency preparedness, Survival skills, Public health

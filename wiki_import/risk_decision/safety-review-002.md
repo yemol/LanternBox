@@ -4,7 +4,7 @@ slug: safety-review-002
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 解释“复盘如何改进下一次决策”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 复盘如何改进下一次决策：区分事实、情绪和改进动作进行短复盘；高风险条目，不把复盘变成追责。
 tags: 风险决策, 复盘如何改进下一次决策, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 复盘如何改进下一次决策, 风险决策, Emergency preparedness, Survival skills, Off-grid living

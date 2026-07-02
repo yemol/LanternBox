@@ -2,7 +2,7 @@
 title: 手机省电为什么优先短信
 slug: energy-phone-002
 category: 能源
-summary: 解释“手机省电为什么优先短信”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 手机省电为什么优先短信：安排电量分配、设备检查和停用记录；中风险条目，受潮、发热或鼓包时隔离停用。
 tags: 能源, 手机省电优先短信, 手机省电为什, P0, 长期生存
 risk_level: caution
 status: published

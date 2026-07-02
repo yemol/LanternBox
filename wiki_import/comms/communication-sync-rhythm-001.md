@@ -4,7 +4,7 @@ slug: communication-sync-rhythm-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 解释“多人团队信息同步节奏”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 多人团队信息同步节奏：固定短会和任务板更新时间；中风险条目，不同步会造成重复外出和遗漏。
 tags: 通讯, 多人团队信息同步节奏, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 多人团队信息同步节奏, 通讯, Emergency preparedness, Survival skills, Off-grid living

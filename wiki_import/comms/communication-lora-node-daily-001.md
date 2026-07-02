@@ -2,7 +2,7 @@
 title: LoRa 节点每日状态检查
 slug: communication-lora-node-daily-001
 category: 通讯
-summary: 介绍 LoRa 节点在离线通信网络中的每日基础检查，包括电量、天线、时间、节点编号、收发测试和异常记录。
+summary: LoRa 节点每日状态检查：检查节点电量、天线、编号和收发测试；异常节点先标记再复查。
 tags: LoRa, 通讯, 节点, 每日检查, 天线, 电量
 risk_level: normal
 status: published

@@ -2,7 +2,7 @@
 title: 高温天气降温基础
 slug: shelter-hot-weather-cooling-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
-summary: 介绍高温、停电或空调不可用时的基础降温方法，包括避开热源、补水、通风、湿毛巾降温和中暑危险信号。
+summary: 高温天气降温基础：安排阴凉、通风、补水和减少热源；中风险条目，中暑信号出现时停止任务。
 tags: 高温, 降温, 中暑, 补水, 通风, 停电
 risk_level: caution
 status: published

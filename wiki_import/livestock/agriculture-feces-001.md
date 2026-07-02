@@ -4,7 +4,7 @@ slug: agriculture-feces-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 解释“动物粪便和水源距离”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 动物粪便和水源距离：控制粪便与水源、厨房、睡眠区和虫害的距离；中风险条目，无法清理或虫害加重时停止扩养。
 tags: 养殖, 小规模养殖, 动物粪便和水源距离, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 动物粪便和水源距离, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: medical-wound-infection-001
 category: 医疗急救
 priority: P0
 risk_level: high
-summary: 解释“少水环境下手卫生和伤口感染”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 少水环境下手卫生和伤口感染：处理动物后先清洁双手、刀具和容器，再接触水食物，并区分清洁、覆盖、污染来源和感染早期信号；高风险条目，缺少清洁条件时不处理入口食物。
 tags: 医疗, 医疗急救, 少水环境下手卫生和伤口感染, 长期断供, 小团队, 离线生存
 guide_links: DG-0611, DG-0612, DG-0613
 kiwix_topics: 少水环境下手卫生和伤口感染, 医疗急救, Emergency preparedness, Survival skills, Public health

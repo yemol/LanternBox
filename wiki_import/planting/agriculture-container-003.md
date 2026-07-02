@@ -4,7 +4,7 @@ slug: agriculture-container-003
 category: 种植
 priority: P1
 risk_level: caution
-summary: 解释“工具容器清洁和交叉污染”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 工具容器清洁和交叉污染：检查借用、归还、破损和责任人记录；中风险条目，锋利或带电工具不口头交接。
 tags: 种植, 工具容器清洁和交叉污染, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 工具容器清洁和交叉污染, 种植, Emergency preparedness, Survival skills, Off-grid living

@@ -2,7 +2,7 @@
 title: 纸条留言的信息格式
 slug: communication-written-message-003
 category: 通讯
-summary: 解释“纸条留言的信息格式”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 纸条留言的信息格式：写清时间、去向、人数、下一步和签名；中风险条目，敏感信息不留在暴露点。
 tags: 通讯, 纸条留言的信息格式, 纸条留言的信, P0, 长期生存
 risk_level: caution
 status: published

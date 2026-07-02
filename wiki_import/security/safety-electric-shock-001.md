@@ -4,7 +4,7 @@ slug: safety-electric-shock-001
 category: 安全
 priority: P0
 risk_level: high
-summary: 解释“漏电风险中的水和金属接触”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 漏电风险中的水和金属接触：先断电、隔离潮湿电器和可疑线材；高风险条目，不通电测试短路设备。
 tags: 安全, 漏电风险中的水和金属接触, 长期断供, 小团队, 离线生存
 guide_links: DG-0631, DG-0632, DG-0633
 kiwix_topics: 漏电风险中的水和金属接触, 安全, Emergency preparedness, Survival skills, Off-grid living

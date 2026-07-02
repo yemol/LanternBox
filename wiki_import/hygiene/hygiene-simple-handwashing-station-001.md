@@ -2,7 +2,7 @@
 title: 简易洗手点设置
 slug: hygiene-simple-handwashing-station-001
 category: 卫生
-summary: 介绍停水、避难或户外场景下，如何设置一个低耗水、可持续、方便成员使用的简易洗手点。
+summary: 简易洗手点设置：设置水、接水容器、擦手物和污水去向；中风险条目，洗手点不能污染饮用水。
 tags: 洗手, 卫生, 停水, 避难, 肥皂, 感染预防
 risk_level: caution
 status: published

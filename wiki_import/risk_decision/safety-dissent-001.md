@@ -4,7 +4,7 @@ slug: safety-dissent-001
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 解释“团队决策中的反对意见”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 团队决策中的反对意见：记录少数反对点和复查条件；高风险条目，不把不同意见当作拖延或破坏。
 tags: 风险决策, 团队决策中的反对意见, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 团队决策中的反对意见, 风险决策, Emergency preparedness, Survival skills, Off-grid living

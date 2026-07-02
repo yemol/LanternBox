@@ -2,7 +2,7 @@
 title: 太阳能充电的光照因素
 slug: energy-solar-charging-003
 category: 能源
-summary: 解释“太阳能充电的光照因素”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 太阳能充电的光照因素：按光照、角度、温度和接口防水安排补电；中风险条目，输出低或进水风险高时转节电。
 tags: 能源, 太阳能充电的光照因素, 太阳能充电的, P0, 长期生存
 risk_level: caution
 status: published

@@ -4,7 +4,7 @@ slug: wildlife-children-001
 category: 野外食物获取 / 狩猎捕捞 / 动物蛋白补充
 priority: P1
 risk_level: high
-summary: 解释“鱼刺骨头和儿童风险”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 鱼刺骨头和儿童风险：提醒儿童食用鱼肉前检查鱼刺、骨头和小块吞咽风险；高风险条目，无法细查时不给儿童老人食用。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 鱼刺骨头和儿童风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0681, DG-0682, DG-0683
 kiwix_topics: 鱼刺骨头和儿童风险, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living

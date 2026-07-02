@@ -4,7 +4,7 @@ slug: repair-sharp-metal-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 解释“金属边缘防割和包覆原则”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 金属边缘防割和包覆原则：包覆锐边、毛刺和切割后的金属片；高风险条目，裸露锐边不进入通道。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 金属边缘防割和包覆原则, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 金属边缘防割和包覆原则, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

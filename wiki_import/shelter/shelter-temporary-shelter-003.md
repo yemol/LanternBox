@@ -4,7 +4,7 @@ slug: shelter-temporary-shelter-003
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 解释“临时避难点地面潮湿风险”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 临时避难点地面潮湿风险：检查地面、遮蔽、污染源、出口和人员密度；中风险条目，不满足最低条件就继续寻找。
 tags: 庇护空间, 庇护空间分区, 临时避难点地面潮湿风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 临时避难点地面潮湿风险, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

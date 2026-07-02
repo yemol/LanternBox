@@ -2,7 +2,7 @@
 title: 低电量通信优先级
 slug: communication-power-saving-001
 category: 通讯
-summary: 解释“低电量通信优先级”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 低电量通信优先级：优先短信、短消息和关键联系人；中风险条目，不刷新闻视频消耗最后电量。
 tags: 通讯, 低电量通信优先级, 低电量通信优, P0, 长期生存
 risk_level: caution
 status: published

@@ -2,7 +2,7 @@
 title: 食物变质判断
 slug: food-spoilage-check-001
 category: 食物
-summary: 介绍在停电、储存条件不稳定或食物来源不明时，如何通过外观、气味、包装、温度和储存时间判断食物是否存在变质风险。
+summary: 食物变质判断：明确库存、加工、保存和弃用顺序；中风险条目，包装破损、变质或来源不清时停止食用。
 tags: 食物, 变质, 停电, 食品安全, 异味, 罐头
 risk_level: caution
 status: published

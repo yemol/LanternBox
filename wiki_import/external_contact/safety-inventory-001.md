@@ -4,7 +4,7 @@ slug: safety-inventory-001
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 解释“不暴露库存的沟通原则”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 不暴露库存的沟通原则：用模糊库存口径回应外部询问；高风险条目，不要展示储备位置、数量和补给节奏。
 tags: 外部接触, 外部接触与物资交换风险, 不暴露库存的沟通原则, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 不暴露库存的沟通原则, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

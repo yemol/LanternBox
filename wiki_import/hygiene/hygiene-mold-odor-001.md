@@ -2,7 +2,7 @@
 title: 室内霉味和潮湿风险
 slug: hygiene-mold-odor-001
 category: 卫生
-summary: 解释“室内霉味和潮湿风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 室内霉味和潮湿风险：划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
 tags: 卫生, 室内霉味和潮湿风险, 室内霉味和潮, P0, 长期生存
 risk_level: caution
 status: published

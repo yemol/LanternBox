@@ -4,7 +4,7 @@ slug: clothing-repair-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 解释“雨具破损的临时修补边界”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 雨具破损的临时修补边界：判断破口位置、雨量和修补材料是否能短时挡水；中风险条目，贴身层被淋湿时停止暴露并换干层。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 雨具破损的临时修补边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 雨具破损的临时修补边界, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living

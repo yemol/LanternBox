@@ -2,7 +2,7 @@
 title: 小型初起火灾应对
 slug: safety-small-initial-response-001
 category: 安全
-summary: 介绍发现小型初起火灾时的判断、报警、撤离、断电和灭火器使用边界，强调人员安全优先。
+summary: 小型初起火灾应对：控制暴露、接触、路线和冲突边界；高风险条目，人员安全受威胁时放弃物资和任务。
 tags: 火灾, 灭火器, 撤离, 断电, 安全, 初起火灾
 risk_level: high
 status: published

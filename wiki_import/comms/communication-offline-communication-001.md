@@ -4,7 +4,7 @@ slug: communication-offline-communication-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 解释“断网后集合点为什么比设备重要”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 断网后集合点为什么比设备重要：设置主集合点、备用点和等待时长；中风险条目，设备失效时按集合点行动。
 tags: 通讯, 断网后集合点为什么比设备重要, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 断网后集合点为什么比设备重要, 通讯, Emergency preparedness, Survival skills, Off-grid living

@@ -2,7 +2,7 @@
 title: 小火处理和撤离边界
 slug: safety-fire-response-002
 category: 安全
-summary: 解释“小火处理和撤离边界”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 小火处理和撤离边界：先确认出口，再判断是否能短时处理初起小火；高风险条目，烟多、蔓延或出口受威胁时撤离。
 tags: 安全, 小火处理和撤离边界, 小火处理和撤, P0, 长期生存
 risk_level: high
 status: published

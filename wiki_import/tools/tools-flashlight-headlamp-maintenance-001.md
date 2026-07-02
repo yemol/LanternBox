@@ -2,7 +2,7 @@
 title: 手电与头灯维护
 slug: tools-flashlight-headlamp-maintenance-001
 category: 维修 / 制作 / 替代 / 拆解再利用
-summary: 介绍手电、头灯和小型照明设备的日常检查、清洁、储存和故障排查方法，确保停电或夜间行动时可用。
+summary: 手电与头灯维护用于检查照明设备电池、开关、镜片和备用位置；夜间行动前先确认可用，并留下交接记录。
 tags: 手电, 头灯, 照明, 电池, 维护, 夜间行动
 risk_level: normal
 status: published

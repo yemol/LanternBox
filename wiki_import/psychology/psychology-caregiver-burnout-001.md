@@ -4,7 +4,7 @@ slug: psychology-caregiver-burnout-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 解释“照护者耗竭的早期信号”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 照护者耗竭的早期信号：观察照护者失眠、易怒、失误和身体疲劳；中风险条目，出现耗竭时换班并减少任务。
 tags: 心理韧性, 心理韧性与冲突降温, 照护者耗竭的早期信号, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 照护者耗竭的早期信号, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

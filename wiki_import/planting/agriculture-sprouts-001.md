@@ -4,7 +4,7 @@ slug: agriculture-sprouts-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 解释“芽苗菜为什么适合短周期补充”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 芽苗菜为什么适合短周期补充：说明芽苗菜短周期、少空间但高卫生要求；中风险条目，异味霉滑或水不洁时弃用。
 tags: 种植, 芽苗菜为什么适合短周期补充, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 芽苗菜为什么适合短周期补充, 种植, Emergency preparedness, Survival skills, Off-grid living

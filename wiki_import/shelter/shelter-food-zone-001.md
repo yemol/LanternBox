@@ -4,7 +4,7 @@ slug: shelter-food-zone-001
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 解释“食物区为什么要高处干燥”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 食物区为什么要高处干燥：把食物区设在高处、干燥、远离垃圾和水汽；中风险条目，受潮或虫害时转移。
 tags: 庇护空间, 庇护空间分区, 食物区为什么要高处干燥, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 食物区为什么要高处干燥, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

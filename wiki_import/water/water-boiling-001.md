@@ -2,7 +2,7 @@
 title: 煮沸饮水基础
 slug: water-boiling-001
 category: 水
-summary: 介绍在水源存在微生物风险时，通过煮沸降低饮用风险的基础方法、保存方式和不适用情况。
+summary: 煮沸饮水基础：说明沉淀、过滤和煮沸的先后顺序；中风险条目，水源有化学污染或容器不洁时不作为饮用水。
 tags: 饮用水, 煮沸, 消毒, 水源, 微生物, 停水
 risk_level: caution
 status: published

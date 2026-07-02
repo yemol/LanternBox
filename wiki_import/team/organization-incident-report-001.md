@@ -4,7 +4,7 @@ slug: organization-incident-report-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 解释“异常事件上报格式”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 异常事件上报格式：按时间、地点、人员、影响和后续动作记录事件；中风险条目，未解决风险不能关闭。
 tags: 团队管理, 团队轮值与任务管理, 异常事件上报格式, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 异常事件上报格式, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

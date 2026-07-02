@@ -2,7 +2,7 @@
 title: 容器裂缝和饮用水污染
 slug: repair-drinking-water-002
 category: 维修 / 制作 / 替代 / 拆解再利用
-summary: 解释“容器裂缝和饮用水污染”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 容器裂缝和饮用水污染：把裂缝容器从饮用水用途降级；高风险条目，裂缝藏污或漏水时不装饮水。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 容器裂缝和饮用水污染, 容器裂缝和饮, P0, 长期生存
 risk_level: high
 status: published

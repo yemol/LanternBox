@@ -2,7 +2,7 @@
 title: 低暴露为什么重要
 slug: safety-low-profile-002
 category: 安全
-summary: 解释“低暴露为什么重要”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 低暴露为什么重要：控制暴露、接触、路线和冲突边界；中风险条目，人员安全受威胁时放弃物资和任务。
 tags: 安全, 低暴露重要, 低暴露为什么, P0, 长期生存
 risk_level: caution
 status: published

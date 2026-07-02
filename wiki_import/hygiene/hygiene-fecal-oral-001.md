@@ -2,7 +2,7 @@
 title: 粪口传播基础
 slug: hygiene-fecal-oral-001
 category: 污染控制 / 隔离 / 清洁分区
-summary: 解释“粪口传播基础”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 粪口传播基础：阻断粪便、手、餐具、食物和饮水之间的路径；中风险条目，手卫生失败时不处理入口食物。
 tags: 卫生, 粪口传播基础, P0, 长期生存
 risk_level: caution
 status: published

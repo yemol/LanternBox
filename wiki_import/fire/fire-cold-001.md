@@ -4,7 +4,7 @@ slug: fire-cold-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 解释“热水瓶和低温保温边界”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 热水瓶和低温保温边界：用布套隔开热水瓶并检查漏水烫伤；高风险条目，漏水或过烫时不进睡眠区。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 热水瓶和低温保温边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 热水瓶和低温保温边界, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living

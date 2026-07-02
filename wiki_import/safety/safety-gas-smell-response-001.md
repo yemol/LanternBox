@@ -2,7 +2,7 @@
 title: 燃气异味基础应对
 slug: safety-gas-smell-response-001
 category: 安全
-summary: 介绍发现疑似燃气异味时的基础处置原则，包括不开关电器、不点火、通风、撤离和停止自行处理条件。
+summary: 燃气异味基础应对：控制暴露、接触、路线和冲突边界；高风险条目，人员安全受威胁时放弃物资和任务。
 tags: 燃气, 异味, 泄漏, 撤离, 安全, 厨房
 risk_level: high
 status: published

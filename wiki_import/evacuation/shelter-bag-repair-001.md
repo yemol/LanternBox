@@ -4,7 +4,7 @@ slug: shelter-bag-repair-001
 category: 避难转移
 priority: P0
 risk_level: high
-summary: 解释“背包分散携带的理由”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 背包分散携带的理由：规划空间分区、通道、污染隔离和夜间检查；高风险条目，结构、烟水或人员风险升高时撤离或调整。
 tags: 撤离, 避难转移, 背包分散携带的理由, 长期断供, 小团队, 离线生存
 guide_links: DG-0641, DG-0642, DG-0643
 kiwix_topics: 背包分散携带的理由, 避难转移, Emergency preparedness, Survival skills, Off-grid living

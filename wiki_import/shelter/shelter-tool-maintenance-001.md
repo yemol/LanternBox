@@ -4,7 +4,7 @@ slug: shelter-tool-maintenance-001
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 解释“清洁区和工具区分离”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 清洁区和工具区分离：检查借用、归还、破损和责任人记录；中风险条目，锋利或带电工具不口头交接。
 tags: 庇护空间, 庇护空间分区, 清洁区和工具区分离, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 清洁区和工具区分离, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

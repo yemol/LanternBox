@@ -4,7 +4,7 @@ slug: shelter-entry-risk-001
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 解释“窗边和门口的暴露边界”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 窗边和门口的暴露边界：控制窗边门口暴露、观察和撤离通道；中风险条目，不在暴露位置堆放物资。
 tags: 庇护空间, 庇护空间分区, 窗边和门口的暴露边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 窗边和门口的暴露边界, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

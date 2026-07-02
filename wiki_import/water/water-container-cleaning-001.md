@@ -2,7 +2,7 @@
 title: 储水容器清洁基础
 slug: water-container-cleaning-001
 category: 水
-summary: 介绍饮用水储存容器在使用前的清洗、消毒、标记和停用条件，降低储水二次污染风险。
+summary: 储水容器清洁基础：安排容器清洁、标记、轮换和饮用/非饮用分区；中风险条目，水桶污染、漏水或来源不清时停止并隔离。
 tags: 储水, 容器, 清洁, 消毒, 饮用水, 卫生
 risk_level: caution
 status: published

@@ -4,7 +4,7 @@ slug: food-spoilage-001
 category: 食物
 priority: P0
 risk_level: high
-summary: 解释“动物性食物腐败和寄生虫风险”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 动物性食物腐败和寄生虫风险：用气味、黏滑、颜色和内脏污染判断食物是否变质；高风险条目，腐败动物性食物不入口。
 tags: 食物, 动物性食物腐败和寄生虫风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 动物性食物腐败和寄生虫风险, 食物, Emergency preparedness, Survival skills, Off-grid living

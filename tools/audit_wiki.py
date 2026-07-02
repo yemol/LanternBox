@@ -68,6 +68,12 @@ EXTERNAL_DEPENDENCY_TERMS = [
     "前往医院",
 ]
 ABSOLUTE_TERMS = ["万无一失", "一定有效", "绝对安全", "完全安全", "保证安全"]
+SUMMARY_TEMPLATE_TERMS = [
+    "原理、判断边界与常见误区",
+    "原理、判断边界和常见误区",
+    "供 Guide 行动卡和后续 Kiwix/ZIM 检索使用",
+    "帮助选择对应 Guide 行动卡",
+]
 PLACEHOLDER_TERMS = [
     "原文未单列准备材料",
     "原文未单列替代方案",
@@ -311,6 +317,9 @@ def check_metadata(articles: list[Article], category_names: set[str]) -> list[di
             length = len(article.summary)
             if length < 35 or length > 110:
                 issues.append({"level": "warning", "file": rel, "issue": f"summary 长度偏离 40-80 字左右：{length} 字"})
+            for term in SUMMARY_TEMPLATE_TERMS:
+                if term in article.summary:
+                    issues.append({"level": "warning", "file": rel, "issue": f"summary 含模板化描述：{term}"})
 
         if article.meta.get("tags") and len(split_tags(article.meta["tags"])) < 3:
             issues.append({"level": "error", "file": rel, "issue": "tags 少于 3 个"})

@@ -2,7 +2,7 @@
 title: 离线地图包管理
 slug: communication-offline-map-package-001
 category: 通讯
-summary: 介绍离线地图包的下载、区域划分、版本记录、设备分发和定期检查，确保断网后仍能进行基础定位和路线判断。
+summary: 离线地图包管理：管理地图区域、版本、设备分发和定期检查；过期地图不作为唯一路线依据。
 tags: 离线地图, 导航, 地图包, 备份, 定位, 通讯
 risk_level: normal
 status: published

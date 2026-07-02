@@ -2,7 +2,7 @@
 title: 断网后的集合点原则
 slug: communication-offline-communication-002
 category: 通讯
-summary: 解释“断网后的集合点原则”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 断网后的集合点原则：设置主集合点、备用点和等待时长；中风险条目，设备失效时按集合点行动。
 tags: 通讯, 断网后的集合点原则, 断网后的集合, P0, 长期生存
 risk_level: caution
 status: published

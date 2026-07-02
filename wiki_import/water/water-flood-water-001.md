@@ -4,7 +4,7 @@ slug: water-flood-water-001
 category: 水
 priority: P0
 risk_level: high
-summary: 解释“洪水后水源为什么不能直接饮用”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 洪水后水源为什么不能直接饮用：把洪水后水源视为高污染风险；高风险条目，不直接饮用井水或积水。
 tags: 水, 洪水后水源为什么不能直接饮用, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 洪水后水源为什么不能直接饮用, 水, Emergency preparedness, Survival skills, Public health

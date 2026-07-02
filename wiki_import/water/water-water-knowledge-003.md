@@ -2,7 +2,7 @@
 title: 可疑水源禁用边界
 slug: water-water-knowledge-003
 category: 水
-summary: 解释“可疑水源禁用边界”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 可疑水源禁用边界：把可疑水从饮用降级为清洁或冲洗用途；高风险条目，污染类型不明时不入口。
 tags: 水, 可疑水源禁用边界, 可疑水源禁用, P0, 长期生存
 risk_level: high
 status: published

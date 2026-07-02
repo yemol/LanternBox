@@ -4,7 +4,7 @@ slug: repair-plastic-sheet-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 risk_level: high
-summary: 解释“塑料布防水层的使用边界”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 塑料布防水层的使用边界：用塑料布临时挡雨、隔潮和覆盖；高风险条目，积水、风掀或遮挡通风时调整。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 塑料布防水层的使用边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0621, DG-0622, DG-0623
 kiwix_topics: 塑料布防水层的使用边界, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: shelter-temporary-shelter-001
 category: 避难转移
 priority: P0
 risk_level: high
-summary: 解释“临时避难点选择的最低条件”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 临时避难点选择的最低条件：检查地面、遮蔽、污染源、出口和人员密度；高风险条目，不满足最低条件就继续寻找。
 tags: 撤离, 避难转移, 临时避难点选择的最低条件, 长期断供, 小团队, 离线生存
 guide_links: DG-0641, DG-0642, DG-0643
 kiwix_topics: 临时避难点选择的最低条件, 避难转移, Emergency preparedness, Survival skills, Off-grid living

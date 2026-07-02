@@ -4,7 +4,7 @@ slug: psychology-conflict-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 解释“冲突升级前的身体信号”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 冲突升级前的身体信号：观察抢话、发抖、心跳快和动作急躁等冲突前兆；中风险条目，升级前先暂停高风险任务。
 tags: 心理韧性, 心理韧性与冲突降温, 冲突升级前的身体信号, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 冲突升级前的身体信号, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

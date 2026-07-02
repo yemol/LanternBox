@@ -4,7 +4,7 @@ slug: shelter-meeting-point-001
 category: 避难转移
 priority: P0
 risk_level: high
-summary: 解释“集合点和备用集合点设置”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 集合点和备用集合点设置：设置主集合点、备用点、等待时间和留言方式；高风险条目，集合点暴露或不可达时切换。
 tags: 撤离, 避难转移, 集合点和备用集合点设置, 长期断供, 小团队, 离线生存
 guide_links: DG-0641, DG-0642, DG-0643
 kiwix_topics: 集合点和备用集合点设置, 避难转移, Emergency preparedness, Survival skills, Off-grid living

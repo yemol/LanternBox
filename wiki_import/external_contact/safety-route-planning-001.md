@@ -4,7 +4,7 @@ slug: safety-route-planning-001
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 解释“陌生路线邀请为什么谨慎”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 陌生路线邀请为什么谨慎：核对邀请来源、路线目的和返回窗口；高风险条目，不跟随陌生人进入不可控路线。
 tags: 外部接触, 外部接触与物资交换风险, 陌生路线邀请为什么谨慎, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 陌生路线邀请为什么谨慎, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

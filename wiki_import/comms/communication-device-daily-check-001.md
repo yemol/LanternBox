@@ -2,7 +2,7 @@
 title: 通讯设备每日检查
 slug: communication-device-daily-check-001
 category: 通讯
-summary: 介绍手机、对讲设备、LoRa 终端、短波电台和 Field Terminal 等通讯设备的每日检查项目，确保电量、时间、频道、线材和记录状态可用。
+summary: 通讯设备每日检查：安排消息格式、开机窗口和备用联系路径；通信失败时不盲目外出寻找。
 tags: 通讯, 对讲机, LoRa, 短波电台, 手机, 每日检查
 risk_level: normal
 status: published

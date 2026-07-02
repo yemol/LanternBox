@@ -2,7 +2,7 @@
 title: 异味掩盖的常见误区
 slug: hygiene-odor-003
 category: 卫生
-summary: 解释“异味掩盖的常见误区”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 异味掩盖的常见误区：划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
 tags: 卫生, 异味掩盖的常见误区, 异味掩盖的常, P0, 长期生存
 risk_level: caution
 status: published

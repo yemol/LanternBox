@@ -2,7 +2,7 @@
 title: 分开行动记录的价值
 slug: communication-separated-movement-002
 category: 通讯
-summary: 解释“分开行动记录的价值”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 分开行动记录的价值：外出前写清人员、路线、目的和返回时间；中风险条目，信息最小集不完整时不分队。
 tags: 通讯, 分开行动记录的价值, 分开行动记录, P0, 长期生存
 risk_level: caution
 status: published

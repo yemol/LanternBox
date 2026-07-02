@@ -2,7 +2,7 @@
 title: 伤口清洁与观察基础
 slug: medical-wound-cleaning-observation-001
 category: 医疗急救
-summary: 介绍小型割伤、擦伤和浅表伤口的基础清洁、覆盖和观察方法，重点是减少污染、识别感染迹象，并明确需要停止自行处理的情况。
+summary: 伤口清洁与观察基础：区分清洁、覆盖、污染来源和感染早期信号；中风险条目，红肿热痛加重、脓液或污染伤口需停止拖延。
 tags: 伤口, 清洁, 急救, 感染, 纱布, 碘伏, 医疗观察
 risk_level: caution
 status: published

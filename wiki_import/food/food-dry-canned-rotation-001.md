@@ -2,7 +2,7 @@
 title: 干粮与罐头轮换
 slug: food-dry-canned-rotation-001
 category: 食物
-summary: 介绍干粮、罐头和长期储备食品的轮换原则，包括标签、先进先出、定期检查、受潮防虫和到期前消耗。
+summary: 干粮与罐头轮换：安排干粮罐头先开先用、标签轮换和配给天数估算，并估算干粮、主食和罐头能覆盖的天数；包装破损、锈蚀漏液或鼓包时停止食用。
 tags: 干粮, 罐头, 食物储备, 轮换, 保质期, 防潮
 risk_level: normal
 status: published

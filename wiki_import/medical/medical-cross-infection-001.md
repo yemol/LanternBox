@@ -4,7 +4,7 @@ slug: medical-cross-infection-001
 category: 医疗急救
 priority: P0
 risk_level: high
-summary: 解释“照护者交叉感染的关键时刻”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 照护者交叉感染的关键时刻：整理观察、清洁、保护和复查步骤；高风险条目，症状恶化或无法判断时停止普通处理。
 tags: 医疗, 医疗急救, 照护者交叉感染的关键时刻, 长期断供, 小团队, 离线生存
 guide_links: DG-0611, DG-0612, DG-0613
 kiwix_topics: 照护者交叉感染的关键时刻, 医疗急救, Emergency preparedness, Survival skills, Public health

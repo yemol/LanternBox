@@ -4,7 +4,7 @@ slug: agriculture-escape-risk-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 解释“动物逃逸和人员受伤风险”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 动物逃逸和人员受伤风险：检查围挡、门缝、抓咬和追赶受伤风险；中风险条目，逃逸会伤人或引发冲突时停止放养。
 tags: 养殖, 小规模养殖, 动物逃逸和人员受伤风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 动物逃逸和人员受伤风险, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

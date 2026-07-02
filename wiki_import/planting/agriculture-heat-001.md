@@ -4,7 +4,7 @@ slug: agriculture-heat-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 解释“高温低温对幼苗影响”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 高温低温对幼苗影响：观察幼苗徒长、烂根、晒伤、缺水和温度冲击；中风险条目，反复失败时改作物或减少投入。
 tags: 种植, 高温低温对幼苗影响, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 高温低温对幼苗影响, 种植, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: safety-safety-knowledge-007
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 解释“外部消息不立刻改变计划”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 外部消息不立刻改变计划：把外部消息先记录来源和可信度；高风险条目，不要因单条消息立刻改变计划。
 tags: 外部接触, 外部接触与物资交换风险, 外部消息不立刻改变计划, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 外部消息不立刻改变计划, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living

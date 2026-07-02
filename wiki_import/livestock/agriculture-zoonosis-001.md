@@ -4,7 +4,7 @@ slug: agriculture-zoonosis-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 解释“人畜共患病基础风险”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 人畜共患病基础风险：提醒粪便、咬抓、呼吸道和食物接触带来的跨种风险；中风险条目，人员症状或动物异常时隔离。
 tags: 养殖, 小规模养殖, 人畜共患病基础风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 人畜共患病基础风险, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

@@ -4,7 +4,7 @@ slug: energy-charging-cable-001
 category: 能源
 priority: P0
 risk_level: high
-summary: 解释“充电线破皮和接触不良风险”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 充电线破皮和接触不良风险：检查破皮、发热、接触不良和接口松动；高风险条目，露铜焦味或发热时停用线材。
 tags: 能源, 充电线破皮和接触不良风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0616, DG-0617, DG-0618
 kiwix_topics: 充电线破皮和接触不良风险, 能源, Emergency preparedness, Survival skills, Off-grid living

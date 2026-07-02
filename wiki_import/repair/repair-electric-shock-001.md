@@ -2,7 +2,7 @@
 title: 漏电和短路基础
 slug: repair-electric-shock-001
 category: 维修 / 制作 / 替代 / 拆解再利用
-summary: 解释“漏电和短路基础”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 漏电和短路基础：先断电、隔离潮湿电器和可疑线材；高风险条目，不通电测试短路设备。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 漏电和短路基础, 漏电和短路基, P0, 长期生存
 risk_level: high
 status: published

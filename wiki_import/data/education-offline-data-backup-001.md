@@ -2,7 +2,7 @@
 title: 离线资料备份基础
 slug: education-offline-data-backup-001
 category: 团队轮值与任务管理
-summary: 介绍离线系统中资料备份的基础原则，包括多副本、异介质、校验、冷备份和恢复演练，减少数据损坏或设备故障带来的知识丢失。
+summary: 离线资料备份基础用于使用多副本、异介质、校验和恢复演练；未验证备份不算可用，并留下交接记录。
 tags: 数据备份, 离线资料, 冷备份, 硬盘, 校验, 恢复
 risk_level: normal
 status: published

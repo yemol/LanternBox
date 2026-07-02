@@ -4,7 +4,7 @@ slug: agriculture-small-livestock-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 解释“小动物饮水为什么优先”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 小动物饮水为什么优先：评估水、饲料、清洁人力和污染边界；中风险条目，收益低于卫生与安全成本时退出或缩小。
 tags: 养殖, 小规模养殖, 小动物饮水为什么优先, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 小动物饮水为什么优先, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living

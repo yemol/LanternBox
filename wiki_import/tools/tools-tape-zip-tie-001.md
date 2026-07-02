@@ -2,7 +2,7 @@
 title: 胶带与扎带应急用途
 slug: tools-tape-zip-tie-001
 category: 维修 / 制作 / 替代 / 拆解再利用
-summary: 介绍胶带、布基胶带、电工胶带和扎带在固定、临时修补、整理线材、标记物品和应急维护中的常见用途与限制。
+summary: 胶带与扎带应急用途：区分固定、临修、标记和线材整理用途；不把胶带当长期承重修复。
 tags: 胶带, 扎带, 修补, 固定, 工具, 应急
 risk_level: normal
 status: published

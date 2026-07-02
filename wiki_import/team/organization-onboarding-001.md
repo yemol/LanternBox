@@ -4,7 +4,7 @@ slug: organization-onboarding-001
 category: 团队轮值与任务管理
 priority: P1
 risk_level: caution
-summary: 解释“新成员加入的信息交接”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 新成员加入的信息交接：给新成员说明禁区、规则、责任人和低风险首任务；中风险条目，不要立刻安排高风险任务。
 tags: 团队管理, 团队轮值与任务管理, 新成员加入的信息交接, 长期断供, 小团队, 离线生存
 guide_links: DG-0686, DG-0687, DG-0688
 kiwix_topics: 新成员加入的信息交接, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living

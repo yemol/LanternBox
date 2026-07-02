@@ -2,7 +2,7 @@
 title: 离线联系人表为什么重要
 slug: communication-contact-list-002
 category: 通讯
-summary: 解释“离线联系人表为什么重要”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 离线联系人表为什么重要：记录姓名、关系、位置、备用方式和备注；中风险条目，联系人不只存在手机里。
 tags: 通讯, 离线联系人表重要, 离线联系人表, P0, 长期生存
 risk_level: caution
 status: published

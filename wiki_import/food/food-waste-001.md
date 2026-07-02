@@ -4,7 +4,7 @@ slug: food-waste-001
 category: 食物
 priority: P0
 risk_level: high
-summary: 解释“保存食物为什么要远离垃圾区”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 保存食物为什么要远离垃圾区：要求食物保存点远离垃圾、污水和动物处理区；高风险条目，接触污染后先隔离再决定是否弃用。
 tags: 食物, 保存食物为什么要远离垃圾区, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 保存食物为什么要远离垃圾区, 食物, Emergency preparedness, Survival skills, Off-grid living

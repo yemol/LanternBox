@@ -2,7 +2,7 @@
 title: 停电后冷藏食品风险
 slug: food-refrigeration-003
 category: 食物
-summary: 解释“停电后冷藏食品风险”在长期离线生存中的原理、判断边界和常见误区，帮助选择对应 Guide 行动卡。
+summary: 停电后冷藏食品风险：按停电时间、温度、开门次数和食物类型处理冰箱食物，并盘点电源、分级设备并安排开机窗口；中风险条目，肉类熟食可疑时不要保存到下一餐。
 tags: 食物, 停电后冷藏食品风险, 停电后冷藏食, P0, 长期生存
 risk_level: caution
 status: published

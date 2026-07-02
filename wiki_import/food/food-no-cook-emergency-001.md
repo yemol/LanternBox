@@ -2,7 +2,7 @@
 title: 免烹饪应急餐配置
 slug: food-no-cook-emergency-001
 category: 食物
-summary: 介绍停电、无法生火、燃料不足或需要快速撤离时，如何配置免烹饪应急餐，保障热量、蛋白质和饮水需求。
+summary: 免烹饪应急餐配置：明确库存、加工、保存和弃用顺序；包装破损、变质或来源不清时停止食用。
 tags: 应急餐, 免烹饪, 干粮, 罐头, 停电, 食物储备
 risk_level: normal
 status: published

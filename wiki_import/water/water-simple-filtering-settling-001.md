@@ -2,7 +2,7 @@
 title: 简易过滤与沉淀
 slug: water-simple-filtering-settling-001
 category: 水
-summary: 介绍在水中存在泥沙、悬浮物或轻微浑浊时，使用静置沉淀和简易过滤降低杂质的方法，并强调过滤不等于消毒。
+summary: 简易过滤与沉淀：说明过滤只能去除部分颗粒和异物；中风险条目，过滤不能替代煮沸或消毒。
 tags: 饮用水, 过滤, 沉淀, 浑浊, 纱布, 活性炭, 煮沸
 risk_level: caution
 status: published

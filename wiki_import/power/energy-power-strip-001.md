@@ -4,7 +4,7 @@ slug: energy-power-strip-001
 category: 能源
 priority: P0
 risk_level: high
-summary: 解释“插线板进水后不能通电测试”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 插线板进水后不能通电测试：先切断电源、停用标记并检查连接设备；高风险条目，不插小设备试电。
 tags: 能源, 插线板进水后不能通电测试, 长期断供, 小团队, 离线生存
 guide_links: DG-0616, DG-0617, DG-0618
 kiwix_topics: 插线板进水后不能通电测试, 能源, Emergency preparedness, Survival skills, Off-grid living

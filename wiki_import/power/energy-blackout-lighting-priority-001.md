@@ -2,7 +2,7 @@
 title: 停电照明优先级
 slug: energy-blackout-lighting-priority-001
 category: 能源
-summary: 介绍停电或夜间低电量场景下，照明设备的使用优先级、亮度控制、备用方案和安全风险，帮助延长照明时间。
+summary: 停电照明优先级用于盘点电源、分级设备并安排开机窗口；关闭非必要设备和后台消耗，并留下交接记录。
 tags: 停电, 照明, 手电, 头灯, 应急灯, 电量管理
 risk_level: normal
 status: published

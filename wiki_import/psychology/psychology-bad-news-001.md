@@ -4,7 +4,7 @@ slug: psychology-bad-news-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 解释“坏消息沟通的顺序”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 坏消息沟通的顺序：安排先给事实、再给影响、最后给下一步的沟通顺序；中风险条目，不要一次压给儿童老人全部细节。
 tags: 心理韧性, 心理韧性与冲突降温, 坏消息沟通的顺序, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 坏消息沟通的顺序, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living

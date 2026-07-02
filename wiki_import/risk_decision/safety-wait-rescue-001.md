@@ -4,7 +4,7 @@ slug: safety-wait-rescue-001
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 解释“等待救援和主动转移比较”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 等待救援和主动转移比较：控制暴露、接触、路线和冲突边界；高风险条目，人员安全受威胁时放弃物资和任务。
 tags: 风险决策, 等待救援和主动转移比较, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 等待救援和主动转移比较, 风险决策, Emergency preparedness, Survival skills, Off-grid living

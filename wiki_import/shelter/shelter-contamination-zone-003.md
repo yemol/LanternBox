@@ -4,7 +4,7 @@ slug: shelter-contamination-zone-003
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 解释“污染区和睡眠区距离”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 污染区和睡眠区距离：规划空间分区、通道、污染隔离和夜间检查；中风险条目，结构、烟水或人员风险升高时撤离或调整。
 tags: 庇护空间, 庇护空间分区, 污染区和睡眠区距离, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 污染区和睡眠区距离, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living

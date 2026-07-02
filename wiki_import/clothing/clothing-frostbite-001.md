@@ -4,7 +4,7 @@ slug: clothing-frostbite-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 解释“冻伤早期皮肤信号”在长期断供和小团队自持场景中的原理、判断边界与常见误区，供 Guide 行动卡和后续 Kiwix/ZIM 检索使用。
+summary: 冻伤早期皮肤信号：识别麻木、变白变硬、疼痛变化和复温后的异常；中风险条目，不要继续暴露或剧烈摩擦疑似冻伤部位。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 冻伤早期皮肤信号, 长期断供, 小团队, 离线生存
 guide_links: DG-0651, DG-0652, DG-0653
 kiwix_topics: 冻伤早期皮肤信号, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living
