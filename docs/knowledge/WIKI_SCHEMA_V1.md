@@ -10,7 +10,7 @@ Wiki 是 LanternBox 的“精选结构化知识条目”。它回答的是：为
 - `priority`：知识优先级，建议使用 `P0`、`P1`、`P2`。
 - `risk_level`：风险等级，例如 `low`、`medium`、`high`、`critical`。
 - `summary`：一段短摘要，说明这条知识解决什么判断问题。
-- `keywords`：检索关键词数组，覆盖术语、口语、风险词和别名。
+- `tags`：检索标签数组，覆盖术语、口语、风险词和别名。
 - `content`：结构化正文，建议包含原理、判断标准、边界、误区和示例。
 - `guide_links`：关联 Guide ID，用于从知识跳转到行动卡。
 - `kiwix_topics`：建议关联的 Kiwix/ZIM 主题，用于广域背景扩展。
@@ -35,7 +35,7 @@ Wiki 是 LanternBox 的“精选结构化知识条目”。它回答的是：为
   "priority": "P0",
   "risk_level": "high",
   "summary": "插线板、排插和延长线进水后，即使外表变干，内部金属件和绝缘材料仍可能残留水分、锈蚀或污染，继续通电会增加漏电、短路、发热和火灾风险。",
-  "keywords": [
+  "tags": [
     "插线板",
     "排插",
     "延长线",
@@ -81,4 +81,3 @@ Wiki 是 LanternBox 的“精选结构化知识条目”。它回答的是：为
   "last_reviewed": "2026-07-01"
 }
 ```
-
