@@ -30005,65 +30005,6 @@
     ]
   },
   {
-    "id": "DG-0557",
-    "title": "小伤口清洁与覆盖",
-    "category": "医疗与照护",
-    "category_original": "医疗与照护",
-    "domains": [
-      "medical"
-    ],
-    "intents": [
-      "p0_action_card"
-    ],
-    "situations": [
-      "medical_p0"
-    ],
-    "objects": [
-      "小伤口",
-      "清洁",
-      "覆盖",
-      "感染",
-      "擦伤"
-    ],
-    "signals": [
-      "覆盖",
-      "感染",
-      "擦伤",
-      "割伤"
-    ],
-    "risks": [
-      "割伤",
-      "敷料",
-      "红肿"
-    ],
-    "keywords": [
-      "小伤口",
-      "清洁",
-      "覆盖",
-      "感染",
-      "擦伤",
-      "割伤",
-      "敷料",
-      "红肿",
-      "小伤口清洁与覆盖",
-      "医疗与照护",
-      "P0",
-      "长期生存"
-    ],
-    "negative_keywords": [],
-    "ranking_role": "primary",
-    "guide_type": "procedure",
-    "primary_domain": "medical",
-    "primary_intent": "p0_action_card",
-    "top1_aliases": [
-      "小伤口清洁与覆盖",
-      "小伤口",
-      "清洁",
-      "覆盖",
-      "感染"
-    ]
-  },
-  {
     "id": "DG-0558",
     "title": "发热观察、补水和记录",
     "category": "医疗与照护",
