@@ -86,6 +86,33 @@ a {
   color: var(--accent-bright);
 }
 
+/* ---------- Brand ---------- */
+
+.brand-logo-horizontal {
+  display: block;
+  width: min(560px, 100%);
+  height: auto;
+}
+
+.brand-title {
+  display: flex;
+  align-items: center;
+  gap: 0.18em;
+}
+
+.brand-mark-inline {
+  flex: 0 0 auto;
+  display: block;
+  width: 1.15em;
+  height: 1.15em;
+  min-width: 36px;
+  min-height: 36px;
+  max-width: 64px;
+  max-height: 64px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 14px rgba(245, 166, 35, 0.22));
+}
+
 /* ---------- Layout ---------- */
 
 .shell {
@@ -138,6 +165,7 @@ a {
 }
 
 .eyebrow {
+  display: block;
   margin: 0 0 12px;
   color: var(--accent-bright);
   letter-spacing: 0.18em;
@@ -544,6 +572,10 @@ textarea:focus {
     padding: 28px 0 44px;
   }
 
+  .brand-logo-horizontal {
+    width: min(340px, 100%);
+  }
+
   .hero {
     padding: 26px;
     border-radius: 24px;
@@ -720,6 +752,14 @@ textarea:focus {
 .compact-hero {
   padding-top: 30px;
   padding-bottom: 30px;
+}
+
+.compact-hero .page-header-row h1.brand-title,
+.library-header-row h1.brand-title,
+.admin-header-row h1.brand-title {
+  font-size: clamp(42px, 5vw, 56px);
+  line-height: 1.08;
+  letter-spacing: 0.04em;
 }
 
 .section-hint {
