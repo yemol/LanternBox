@@ -197,6 +197,7 @@ def select_evidence_with_ai(
         force_json=True,
         temperature=0.1,
         num_predict=1800,
+        timeout=(5, 120),
     )
 
     try:

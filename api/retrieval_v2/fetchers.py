@@ -1,6 +1,8 @@
 """Source fetchers for Retrieval v2."""
 
 import json
+import math
+import re
 from pathlib import Path
 from typing import Any, Iterable, List
 
@@ -9,6 +11,38 @@ from .schemas import EvidenceCandidate, SourcePlanItem
 
 ROOT = Path(__file__).resolve().parents[2]
 EMERGENCY_GUIDES_FILE = ROOT / "data" / "emergency_guides.json"
+
+WEAK_USER_TERM_SUBSTRINGS = {
+    "怎么",
+    "怎么办",
+    "能不能",
+    "可不可以",
+    "是不是",
+    "有没有",
+    "应该",
+    "哪些",
+    "什么",
+    "一下",
+    "这个",
+    "那个",
+    "今天",
+    "明天",
+    "今晚",
+    "家里",
+    "有人",
+    "大家",
+    "处理",
+    "规则",
+    "已经",
+    "我该",
+    "要先",
+    "不能",
+    "继续",
+    "能喝",
+    "想",
+}
+
+WEAK_USER_TERM_CHARS = set("的了和也还又该要在到吗我你他她它已都很先么经续")
 
 
 def _split_search_terms(value: Any) -> List[str]:
@@ -55,6 +89,29 @@ def _as_tags(value: Any) -> List[str]:
     return []
 
 
+def _is_weak_user_term(term: str) -> bool:
+    term = str(term or "").strip()
+    if not term:
+        return True
+    if any(stop in term for stop in WEAK_USER_TERM_SUBSTRINGS):
+        return True
+
+    weak_count = sum(1 for char in term if char in WEAK_USER_TERM_CHARS)
+    score = min(len(term), 4) - weak_count
+    if term[0] in WEAK_USER_TERM_CHARS:
+        score -= 3
+    if term[-1] in WEAK_USER_TERM_CHARS:
+        score -= 3
+    if weak_count == 0:
+        score += 4
+
+    return score <= 0
+
+
+def _searchable_message_text(text: str) -> str:
+    return re.sub(r"[^\u4e00-\u9fffA-Za-z0-9]+", "", str(text or ""))
+
+
 def _score_text_match(text: str, terms: Iterable[str]) -> int:
     text = str(text or "")
     score = 0
@@ -63,6 +120,27 @@ def _score_text_match(text: str, terms: Iterable[str]) -> int:
         if term and term in text:
             score += 1
     return score
+
+
+def _char_ngrams(text: str, sizes: tuple[int, ...] = (2, 3, 4), limit: int = 48) -> List[str]:
+    text = _searchable_message_text(text)
+    terms: List[str] = []
+
+    for size in sizes:
+        if len(text) < size:
+            continue
+        for index in range(0, len(text) - size + 1):
+            term = text[index:index + size]
+            if not re.search(r"[\u4e00-\u9fff]", term):
+                continue
+            if _is_weak_user_term(term):
+                continue
+            if term not in terms:
+                terms.append(term)
+            if len(terms) >= limit:
+                return terms
+
+    return terms
 
 
 def _clean_terms(terms: Iterable[str], limit: int = 40) -> List[str]:
@@ -76,6 +154,133 @@ def _clean_terms(terms: Iterable[str], limit: int = 40) -> List[str]:
         if term not in cleaned:
             cleaned.append(term)
     return cleaned[:limit]
+
+
+def _guide_field_texts(guide: dict[str, Any]) -> dict[str, str]:
+    return {
+        "aliases": _as_text(guide.get("top1_aliases")),
+        "title": _as_text(guide.get("title")),
+        "keywords": _as_text(guide.get("keywords")),
+        "scenario": _as_text(guide.get("scenario")),
+        "goal": _as_text(guide.get("goal")),
+        "category": _as_text(guide.get("category")),
+        "metadata": " ".join([
+            _as_text(guide.get("domains")),
+            _as_text(guide.get("intents")),
+            _as_text(guide.get("objects")),
+            _as_text(guide.get("signals")),
+        ]),
+        "body": " ".join([
+            _as_text(guide.get("steps")),
+            _as_text(guide.get("check")),
+            _as_text(guide.get("common_mistakes")),
+            _as_text(guide.get("fallback")),
+            _as_text(guide.get("stop_or_escalate")),
+            _as_text(guide.get("notes")),
+        ]),
+    }
+
+
+def _negative_text(guide: dict[str, Any]) -> str:
+    return _as_text(guide.get("negative_keywords"))
+
+
+def _has_absence_context(text: str, term: str) -> bool:
+    text = str(text or "")
+    term = str(term or "")
+    if not text or not term:
+        return False
+
+    for match in re.finditer(re.escape(term), text):
+        prefix = text[max(0, match.start() - 5):match.start()]
+        if any(marker in prefix for marker in ("没有", "无明显", "无", "未见", "不是")):
+            return True
+
+    return False
+
+
+def _term_idf(terms: List[str], guides: list[dict[str, Any]]) -> dict[str, float]:
+    total = len(guides) or 1
+    document_frequency = {term: 0 for term in terms}
+
+    for guide in guides:
+        text = " ".join(_guide_field_texts(guide).values())
+        for term in terms:
+            if term in text:
+                document_frequency[term] += 1
+
+    return {
+        term: math.log((total + 1) / (count + 1)) + 1
+        for term, count in document_frequency.items()
+    }
+
+
+def _weighted_guide_score(
+    guide: dict[str, Any],
+    *,
+    terms: List[str],
+    core_terms: List[str],
+    user_terms: List[str],
+    idf: dict[str, float],
+) -> float:
+    fields = _guide_field_texts(guide)
+    field_weights = {
+        "aliases": 10.0,
+        "title": 9.0,
+        "keywords": 6.0,
+        "scenario": 3.0,
+        "goal": 2.0,
+        "category": 1.5,
+        "metadata": 1.0,
+        "body": 0.75,
+    }
+    score = 0.0
+    negative_text = _negative_text(guide)
+
+    weighted_terms = [
+        (term, 1.0)
+        for term in terms
+    ] + [
+        (term, 1.8)
+        for term in core_terms
+    ] + [
+        (term, 1.2)
+        for term in user_terms
+    ]
+
+    seen: set[tuple[str, float]] = set()
+    for term, term_weight in weighted_terms:
+        term = str(term or "").strip()
+        if len(term) < 2:
+            continue
+
+        key = (term, term_weight)
+        if key in seen:
+            continue
+        seen.add(key)
+
+        term_idf = idf.get(term, 1.0)
+        if len(term) <= 2:
+            term_idf *= 0.75
+
+        if negative_text and term in negative_text:
+            score -= 4.0 * term_weight * term_idf
+
+        for field, text in fields.items():
+            if term not in text:
+                continue
+            if field in {"scenario", "body"} and _has_absence_context(text, term):
+                score -= 0.5 * field_weights[field] * term_weight * term_idf
+                continue
+
+            score += field_weights[field] * term_weight * term_idf
+
+            if text == term:
+                score += field_weights[field] * term_weight * term_idf
+            elif field in {"title", "keywords"} and len(term) >= 3:
+                score += 0.5 * field_weights[field] * term_weight * term_idf
+
+    return score
 
 
 def _plan_terms(plan: SourcePlanItem) -> List[str]:
@@ -107,39 +312,21 @@ def fetch_guide_candidates(
     guides = _load_json(EMERGENCY_GUIDES_FILE, [])
     terms = _plan_terms(plan)
     core = _core_terms(core_terms)
+    user_terms = _clean_terms(_char_ngrams(user_message), limit=48)
+    all_terms = _clean_terms([*terms, *core, *user_terms], limit=96)
+    idf = _term_idf(all_terms, guides)
     limit = plan.limit or 8
 
     scored = []
 
     for guide in guides:
-        title = _as_text(guide.get("title"))
-        category = _as_text(guide.get("category"))
-        scenario = _as_text(guide.get("scenario"))
-        goal = _as_text(guide.get("goal"))
-        keywords = _as_text(guide.get("keywords"))
-        domains = _as_text(guide.get("domains"))
-        intents = _as_text(guide.get("intents"))
-
-        text = " ".join([
-            title,
-            category,
-            scenario,
-            goal,
-            keywords,
-            domains,
-            intents,
-        ])
-
-        score = _score_text_match(text, terms)
-        score += _score_text_match(title, terms) * 5
-        score += _score_text_match(keywords, terms) * 3
-        score += _score_text_match(scenario, terms) * 2
-
-        # core_terms 由 AI Planner 输出。代码只将其作为高权重选择信号。
-        score += _score_text_match(text, core) * 3
-        score += _score_text_match(title, core) * 8
-        score += _score_text_match(keywords, core) * 5
-        score += _score_text_match(scenario, core) * 3
+        score = _weighted_guide_score(
+            guide,
+            terms=terms,
+            core_terms=core,
+            user_terms=user_terms,
+            idf=idf,
+        )
 
         if score <= 0:
             continue

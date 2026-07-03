@@ -83,7 +83,14 @@
     "contamination",
     "injury_or_exposure"
   ],
-  "negative_keywords": [],
+  "negative_keywords": [
+    "伤口越来越红",
+    "红肿扩大",
+    "伤口发热",
+    "发热",
+    "感染迹象",
+    "停止普通处理"
+  ],
   "ranking_role": "primary",
   "guide_type": "procedure",
   "primary_domain": "medical",

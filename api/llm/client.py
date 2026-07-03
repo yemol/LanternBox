@@ -7,6 +7,9 @@ from typing import Any, Dict, List, Optional, Tuple
 from ..config import OLLAMA_BASE_URL, OLLAMA_MODEL, SCENARIO_PROFILE
 
 
+RequestTimeout = float | Tuple[float, float]
+
+
 def call_ollama(
     messages: List[Dict[str, str]],
     model: Optional[str] = None,
@@ -14,6 +17,7 @@ def call_ollama(
     force_json: bool = False,
     temperature: float = 0.2,
     num_predict: int = 4000,
+    timeout: RequestTimeout = 120,
 ) -> str:
     try:
         model = model or OLLAMA_MODEL
@@ -35,7 +39,7 @@ def call_ollama(
         response = requests.post(
             f"{OLLAMA_BASE_URL}/api/chat",
             json=payload,
-            timeout=120,
+            timeout=timeout,
         )
         response.raise_for_status()
         data = response.json()

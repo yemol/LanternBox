@@ -5,11 +5,73 @@
 
 import json
 import re
+from pathlib import Path
 from typing import Any, Dict
 
 from .schemas import RetrievalPlan
 from ..config import OLLAMA_MODEL, load_runtime_settings
 from ..llm.client import call_ollama
+
+
+ROOT = Path(__file__).resolve().parents[2]
+EMERGENCY_GUIDES_FILE = ROOT / "data" / "emergency_guides.json"
+
+FALLBACK_STOP_TERMS = {
+    "怎么",
+    "怎么办",
+    "应该",
+    "能不能",
+    "可不可以",
+    "是不是",
+    "有没有",
+    "什么",
+    "哪些",
+    "一下",
+    "这个",
+    "那个",
+    "今天",
+    "明天",
+    "今晚",
+    "家里",
+    "有人",
+    "大家",
+    "需要",
+    "处理",
+    "风险",
+    "安全",
+    "资料",
+    "东西",
+    "规则",
+}
+
+FALLBACK_STOP_SUBSTRINGS = {
+    "怎么",
+    "怎么办",
+    "能不能",
+    "可不可以",
+    "是不是",
+    "有没有",
+    "应该",
+    "哪些",
+    "什么",
+    "一下",
+    "这个",
+    "那个",
+    "家里",
+    "有人",
+    "大家",
+    "处理",
+    "规则",
+    "已经",
+    "我该",
+    "要先",
+    "不能",
+    "继续",
+    "能喝",
+    "想",
+}
+
+FALLBACK_WEAK_CHARS = set("的了和也还又该要在到吗我你他她它已都很先么经续")
 
 
 PLANNER_SYSTEM_PROMPT = """
@@ -156,13 +218,8 @@ def _fallback_plan_payload(
     raw_output: str = "",
     error: str = "",
 ) -> Dict[str, Any]:
-    terms = [
-        item
-        for item in re.split(r"[\s，。！？、,.!?；;：:\-_/]+", user_message.strip())
-        if item
-    ]
-    query = " ".join(terms[:8]) or user_message.strip()
-    keywords = terms[:8] or [user_message.strip()]
+    keywords = _fallback_terms_from_message(user_message)
+    query = " ".join(keywords[:12]) or user_message.strip()
 
     return {
         "scenario_summary": user_message.strip()[:80] or "用户请求本地资料协助",
@@ -193,6 +250,260 @@ def _fallback_plan_payload(
             "planner_raw_output": raw_output,
         },
     }
+
+
+def _load_fallback_guides() -> list[dict[str, Any]]:
+    try:
+        if not EMERGENCY_GUIDES_FILE.exists():
+            return []
+        data = json.loads(EMERGENCY_GUIDES_FILE.read_text(encoding="utf-8"))
+        return data if isinstance(data, list) else []
+    except Exception:
+        return []
+
+
+def _fallback_candidate_terms(value: Any) -> list[str]:
+    terms: list[str] = []
+
+    values = value if isinstance(value, list) else [value]
+    for item in values:
+        for term in _split_terms(item):
+            if len(term) < 2:
+                continue
+            if len(term) > 14:
+                continue
+            if _is_fallback_stop_term(term, include_substrings=True):
+                continue
+            if term not in terms:
+                terms.append(term)
+
+    return terms
+
+
+def _is_fallback_stop_term(term: str, *, include_substrings: bool = False) -> bool:
+    term = str(term or "").strip()
+    if not term:
+        return True
+    if term in FALLBACK_STOP_TERMS:
+        return True
+    if include_substrings and any(stop in term for stop in FALLBACK_STOP_SUBSTRINGS):
+        return True
+    return False
+
+
+def _fallback_ngram_score(term: str) -> int:
+    term = str(term or "").strip()
+    if _is_fallback_stop_term(term, include_substrings=True):
+        return -100
+
+    score = min(len(term), 4)
+    weak_count = sum(1 for char in term if char in FALLBACK_WEAK_CHARS)
+    score -= weak_count
+
+    if term and term[0] in FALLBACK_WEAK_CHARS:
+        score -= 3
+    if term and term[-1] in FALLBACK_WEAK_CHARS:
+        score -= 3
+    if weak_count == 0:
+        score += 4
+    if len(term) >= 3:
+        score += 1
+
+    return score
+
+
+def _fallback_ngrams(text: str, limit: int = 12) -> list[str]:
+    chunks = [
+        item
+        for item in re.split(r"[\s，。！？、,.!?；;：:\-_/]+", text.strip())
+        if item
+    ]
+    terms: list[str] = []
+
+    for chunk in chunks:
+        if 2 <= len(chunk) <= 8 and not _is_fallback_stop_term(chunk, include_substrings=True):
+            terms.append(chunk)
+
+        for size in (2, 3, 4):
+            for index in range(0, max(len(chunk) - size + 1, 0)):
+                term = chunk[index:index + size]
+                if _is_fallback_stop_term(term, include_substrings=True):
+                    continue
+                if re.search(r"[\u4e00-\u9fff]", term) and term not in terms:
+                    terms.append(term)
+
+    ranked = [
+        (score, index, term)
+        for index, term in enumerate(terms)
+        if (score := _fallback_ngram_score(term)) > 0
+    ]
+    ranked.sort(key=lambda item: (-item[0], item[1]))
+
+    return [term for _, _, term in ranked[:limit]]
+
+
+def _char_ngrams(text: str, sizes: tuple[int, ...] = (2, 3, 4)) -> set[str]:
+    clean_text = re.sub(r"[^\u4e00-\u9fffA-Za-z0-9]+", "", str(text or ""))
+    grams: set[str] = set()
+
+    for size in sizes:
+        if len(clean_text) < size:
+            continue
+        for index in range(0, len(clean_text) - size + 1):
+            gram = clean_text[index:index + size]
+            if re.search(r"[\u4e00-\u9fff]", gram):
+                grams.add(gram)
+
+    return grams
+
+
+def _fallback_term_score(term: str, message: str, message_grams: set[str]) -> int:
+    if _is_fallback_stop_term(term, include_substrings=True):
+        return 0
+
+    score = 0
+    if term in message:
+        score += 40 + min(len(term), 12)
+
+    term_grams = _char_ngrams(term)
+    overlap = term_grams & message_grams
+    if overlap:
+        score += len(overlap) * 4
+        score += min(len(term), 12)
+
+    return score
+
+
+def _guide_fallback_score_fields(guide: dict[str, Any]) -> list[Any]:
+    return [
+        guide.get("title"),
+        guide.get("category"),
+        guide.get("scenario"),
+        guide.get("goal"),
+        guide.get("keywords"),
+        guide.get("top1_aliases"),
+        guide.get("objects"),
+        guide.get("signals"),
+        guide.get("domains"),
+    ]
+
+
+def _guide_fallback_term_fields(guide: dict[str, Any]) -> list[Any]:
+    return [
+        guide.get("title"),
+        guide.get("category"),
+        guide.get("keywords"),
+        guide.get("top1_aliases"),
+        guide.get("objects"),
+        guide.get("signals"),
+    ]
+
+
+def _score_fallback_guide(
+    guide: dict[str, Any],
+    message: str,
+    message_grams: set[str],
+) -> tuple[int, list[str]]:
+    terms: list[str] = []
+    score_terms: list[str] = []
+    scored_output_terms: list[tuple[int, str]] = []
+
+    for field in _guide_fallback_score_fields(guide):
+        for term in _fallback_candidate_terms(field):
+            if term not in score_terms:
+                score_terms.append(term)
+
+    for field in _guide_fallback_term_fields(guide):
+        for term in _fallback_candidate_terms(field):
+            if term not in terms:
+                terms.append(term)
+
+    scored_terms: list[tuple[int, str]] = []
+    for term in score_terms:
+        score = _fallback_term_score(term, message, message_grams)
+        if score:
+            scored_terms.append((score, term))
+
+    for term in terms:
+        score = _fallback_term_score(term, message, message_grams)
+        if score >= 30:
+            scored_output_terms.append((score, term))
+
+    scored_terms.sort(key=lambda item: (-item[0], item[1]))
+    scored_output_terms.sort(key=lambda item: (-item[0], item[1]))
+    guide_score = sum(score for score, _ in scored_terms[:8])
+
+    title = str(guide.get("title") or "")
+    category = str(guide.get("category") or "")
+    guide_score += _fallback_term_score(title, message, message_grams) * 2
+    guide_score += _fallback_term_score(category, message, message_grams)
+
+    return guide_score, [term for _, term in scored_output_terms[:8]]
+
+
+def _fallback_terms_from_message(user_message: str, limit: int = 12) -> list[str]:
+    message = str(user_message or "").strip()
+    if not message:
+        return ["本地资料"]
+
+    message_grams = _char_ngrams(message)
+    scored_guides: list[tuple[int, list[str]]] = []
+
+    for guide in _load_fallback_guides():
+        score, guide_terms = _score_fallback_guide(guide, message, message_grams)
+        if score:
+            scored_guides.append((score, guide_terms))
+
+    message_terms = _fallback_ngrams(message)
+    terms: list[str] = message_terms[:4]
+    for _, guide_terms in sorted(scored_guides, key=lambda item: -item[0])[:5]:
+        for term in guide_terms:
+            if term not in terms:
+                terms.append(term)
+            if len(terms) >= limit:
+                break
+        if len(terms) >= limit:
+            break
+
+    for term in message_terms:
+        if term not in terms:
+            terms.append(term)
+
+    return terms[:limit] or [message[:20]]
+
+
+def _has_source_type(source_plan: list[dict[str, Any]], source_type: str) -> bool:
+    return any(item.get("source_type") == source_type for item in source_plan)
+
+
+def _merge_missing_fallback_plan(data: Dict[str, Any], fallback: Dict[str, Any]) -> Dict[str, Any]:
+    if not data.get("core_terms"):
+        data["core_terms"] = list(fallback.get("core_terms") or [])
+
+    source_plan = data.get("source_plan") if isinstance(data.get("source_plan"), list) else []
+    fallback_source_plan = fallback.get("source_plan") or []
+
+    if not source_plan:
+        data["source_plan"] = fallback_source_plan
+        return data
+
+    for item in source_plan:
+        if not isinstance(item, dict):
+            continue
+        if not item.get("query"):
+            item["query"] = fallback_source_plan[0].get("query", "") if fallback_source_plan else ""
+        if not item.get("keywords"):
+            item["keywords"] = list(data.get("core_terms") or [])
+
+    for source_type in ("guide", "wiki"):
+        if not _has_source_type(source_plan, source_type):
+            for fallback_item in fallback_source_plan:
+                if fallback_item.get("source_type") == source_type:
+                    source_plan.append(fallback_item)
+                    break
+
+    data["source_plan"] = source_plan
+    return data
 
 
 def _split_terms(value: Any) -> list[str]:
@@ -267,27 +578,49 @@ def build_retrieval_plan(user_message: str) -> RetrievalPlan:
         {"role": "user", "content": user_message},
     ]
 
-    content = call_ollama(
-        messages=messages,
-        model=model,
-        force_json=True,
-        temperature=0.1,
-        num_predict=1200,
-    )
-
     try:
-        data = _extract_json(content)
+        content = call_ollama(
+            messages=messages,
+            model=model,
+            force_json=True,
+            temperature=0.1,
+            num_predict=1200,
+            timeout=(5, 120),
+        )
     except Exception as exc:
+        content = ""
         data = _fallback_plan_payload(
             user_message=user_message,
-            raw_output=content,
+            raw_output="",
             error=str(exc),
         )
+    else:
+        try:
+            data = _extract_json(content)
+        except Exception as exc:
+            data = _fallback_plan_payload(
+                user_message=user_message,
+                raw_output=content,
+                error=str(exc),
+            )
+
+    fallback_reason = ""
 
     existing_raw = data.get("raw") if isinstance(data.get("raw"), dict) else {}
     data = _normalize_plan_payload(data)
+
+    if not data.get("core_terms") or not data.get("source_plan"):
+        fallback_reason = "empty_planner_plan"
+        fallback = _fallback_plan_payload(
+            user_message=user_message,
+            raw_output=content,
+            error=fallback_reason,
+        )
+        data = _merge_missing_fallback_plan(data, fallback)
+
     data["raw"] = {
         **existing_raw,
+        **({"fallback_reason": fallback_reason} if fallback_reason else {}),
         **{key: value for key, value in data.items() if key != "raw"},
     }
 

@@ -4,7 +4,7 @@ from typing import Dict, List, Tuple
 
 from .fetchers import fetch_candidates_from_plan
 from .planner import build_retrieval_plan
-from .schemas import EvidenceCandidate, EvidenceSelection, RetrievalDebug, RetrievalPlan, RetrievalV2Result
+from .schemas import EvidenceCandidate, EvidenceSelection, RetrievalDebug, RetrievalPlan, RetrievalV2Result, SelectedEvidence
 from .selector import select_evidence_with_ai
 
 
@@ -46,6 +46,37 @@ def _candidate_type_counts(candidates: List[EvidenceCandidate]) -> Dict[str, int
         source_type = getattr(item, "source_type", "unknown")
         counts[source_type] = counts.get(source_type, 0) + 1
     return counts
+
+
+def _fallback_selection_from_candidates(
+    candidates: List[EvidenceCandidate],
+    *,
+    error: str = "",
+    stage: str = "selector",
+) -> EvidenceSelection:
+    selected = []
+
+    for candidate in candidates:
+        if candidate.source_type == "guide":
+            selected.append(candidate)
+            break
+
+    if not selected and candidates:
+        selected.append(candidates[0])
+
+    return EvidenceSelection(
+        selected=[
+            SelectedEvidence(
+                source_type=item.source_type,
+                id=item.id,
+                reason="AI 选择器不可用，保留本地最高相关候选作为兜底。",
+            )
+            for item in selected
+        ],
+        excluded=[],
+        answer_focus=["优先参考本地最高相关行动指南"],
+        raw={"fallback": True, "error": error, "stage": stage},
+    )
 
 
 def _debug_payload(
@@ -116,16 +147,13 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
     except Exception as exc:
         return _empty_result(user_message, error=str(exc), stage="planner")
 
-    # 只做结构合并，不做语义理解：needs/core_terms 由 AI 产生，代码只是传给 fetcher。
+    # 只做结构合并，不做语义理解：core_terms 由 AI 产生，代码只是传给 fetcher。
+    # needs 是回答关注点，不是检索词；把它混入 keywords 会让“资料/方案”等泛词污染排序。
     try:
         plan.core_terms = list(plan.core_terms or [])
 
         for item in plan.source_plan:
             merged_keywords = list(item.keywords or [])
-
-            for need in plan.needs:
-                if need not in merged_keywords:
-                    merged_keywords.append(need)
 
             for core_term in plan.core_terms:
                 if core_term not in merged_keywords:
@@ -162,11 +190,10 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
             candidates=candidates,
         )
     except Exception as exc:
-        selection = EvidenceSelection(
-            selected=[],
-            excluded=[],
-            answer_focus=[],
-            raw={"fallback": True, "error": str(exc), "stage": "selector"},
+        selection = _fallback_selection_from_candidates(
+            candidates,
+            error=str(exc),
+            stage="selector",
         )
 
     selected_evidence = _validate_selected(candidates, selection.selected)

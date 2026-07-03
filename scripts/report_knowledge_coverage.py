@@ -23,6 +23,59 @@ PRIORITIES = ("P0", "P1", "P2")
 UNKNOWN_PRIORITY = "UNKNOWN"
 UNKNOWN_LIST_LIMIT = 80
 
+CANONICAL_GUIDE_CATEGORIES = (
+    # P0
+    "水与食物保障",
+    "医疗急救与照护",
+    "能源照明与设备",
+    "工具维修与替代制作",
+    "居住卫生与空间管理",
+    "安全与风险",
+    "通信信息与数据安全",
+    "撤离交通与路线",
+    "灾害应对与灾后恢复",
+    "个人装备与防护",
+    # P1
+    "种植养殖与采集",
+    "组织秩序与训练演练",
+    "外部接触与交换风险",
+    "心理韧性与冲突降温",
+    # P2
+    "库存资料与成员档案",
+    "地图地形与环境监测",
+    "信息保存与长期重建",
+)
+
+CANONICAL_GUIDE_CATEGORY_SET = set(CANONICAL_GUIDE_CATEGORIES)
+
+GUIDE_CATEGORY_ALIASES = {
+    "水": "水与食物保障",
+    "食物": "水与食物保障",
+    "食物获取与口粮管理": "水与食物保障",
+    "医疗急救": "医疗急救与照护",
+    "医疗与照护": "医疗急救与照护",
+    "能源": "能源照明与设备",
+    "工具维修与替代": "工具维修与替代制作",
+    "维修 / 制作 / 替代 / 拆解再利用": "工具维修与替代制作",
+    "卫生": "居住卫生与空间管理",
+    "卫生与清洁": "居住卫生与空间管理",
+    "庇护空间分区": "居住卫生与空间管理",
+    "污染控制 / 隔离 / 清洁分区": "居住卫生与空间管理",
+    "火源保温与通风": "居住卫生与空间管理",
+    "火源 / 保温 / 通风 / 一氧化碳风险": "居住卫生与空间管理",
+    "安全": "安全与风险",
+    "通讯": "通信信息与数据安全",
+    "通讯与记录": "通信信息与数据安全",
+    "通信与信息": "通信信息与数据安全",
+    "避难转移": "撤离交通与路线",
+    "衣物 / 鞋袜 / 体温防护": "个人装备与防护",
+    "种植": "种植养殖与采集",
+    "小规模养殖": "种植养殖与采集",
+    "野外食物获取 / 狩猎捕捞 / 动物蛋白补充": "种植养殖与采集",
+    "团队轮值与任务管理": "组织秩序与训练演练",
+    "外部接触与物资交换风险": "外部接触与交换风险",
+}
+
 
 def iter_json_files(path: Path) -> Iterable[Path]:
     return sorted(path.glob("**/*.json"))
@@ -34,6 +87,14 @@ def iter_wiki_files(path: Path) -> Iterable[Path]:
 
 def status(count: int, threshold: int) -> str:
     return "LOW" if count < threshold else "OK"
+
+
+def canonical_guide_category(category: str, priority: str) -> str:
+    if category == "风险决策":
+        return "安全与风险" if priority == "P0" else "组织秩序与训练演练"
+    if category in CANONICAL_GUIDE_CATEGORY_SET:
+        return category
+    return GUIDE_CATEGORY_ALIASES.get(category, category)
 
 
 def guide_directory(path: Path) -> str:
@@ -87,6 +148,7 @@ def load_guides() -> tuple[list[dict[str, str]], list[str]]:
                 "path": str(path.relative_to(ROOT)),
                 "directory": guide_directory(path),
                 "category": category,
+                "canonical_category": canonical_guide_category(category, priority),
                 "priority": priority,
             }
         )
@@ -218,6 +280,7 @@ def main() -> None:
     wikis = load_wikis()
 
     guide_by_category = Counter(record["category"] for record in guides)
+    canonical_guide_by_category = Counter(record["canonical_category"] for record in guides)
     guide_by_directory = Counter(record["directory"] for record in guides)
     wiki_by_directory = Counter(record["directory"] for record in wikis)
 
@@ -226,7 +289,12 @@ def main() -> None:
     print(f"Guide JSON files: {len(guides)}")
     print(f"Wiki Markdown files: {len(wikis)}")
 
-    print_counter_table("Guide coverage by category", guide_by_category, GUIDE_LOW_THRESHOLD)
+    print_counter_table("Raw Guide category coverage", guide_by_category, GUIDE_LOW_THRESHOLD)
+    print_counter_table(
+        "Canonical Guide category coverage",
+        canonical_guide_by_category,
+        GUIDE_LOW_THRESHOLD,
+    )
     print_counter_table("Guide coverage by directory", guide_by_directory, GUIDE_LOW_THRESHOLD)
     print_counter_table("Wiki coverage by top-level directory", wiki_by_directory, WIKI_LOW_THRESHOLD)
 
@@ -234,9 +302,15 @@ def main() -> None:
     wiki_priority_totals = print_priority_distribution("Wiki priority distribution", wikis)
 
     guide_priority_lows = print_priority_coverage(
-        "P0 / P1 / P2 Guide coverage by category",
+        "P0 / P1 / P2 Raw Guide coverage by category",
         guides,
         "category",
+        GUIDE_LOW_THRESHOLD,
+    )
+    canonical_guide_priority_lows = print_priority_coverage(
+        "P0 / P1 / P2 Canonical Guide coverage by category",
+        guides,
+        "canonical_category",
         GUIDE_LOW_THRESHOLD,
     )
     wiki_priority_lows = print_priority_coverage(
@@ -247,18 +321,29 @@ def main() -> None:
     )
 
     low_guides = summarize_low_items("Guide", guide_by_category, GUIDE_LOW_THRESHOLD)
+    canonical_low_guides = summarize_low_items(
+        "Canonical Guide",
+        canonical_guide_by_category,
+        GUIDE_LOW_THRESHOLD,
+    )
     low_wikis = summarize_low_items("Wiki", wiki_by_directory, WIKI_LOW_THRESHOLD)
 
     print_unknown_files("UNKNOWN Guide priority files", guides)
     print_unknown_files("UNKNOWN Wiki priority files", wikis)
-    print_low_list("LOW Guide categories", low_guides)
+    print_low_list("Raw LOW Guide categories", low_guides)
+    print_low_list("Canonical LOW Guide categories", canonical_low_guides)
     print_low_list("LOW Wiki directories", low_wikis)
 
     print("\n## Summary")
     print(f"- Guides total: {len(guides)}")
     print(f"- Wiki entries total: {len(wikis)}")
-    print(f"- Guide categories: {len(guide_by_category)}")
-    print(f"- Guide categories LOW (<{GUIDE_LOW_THRESHOLD}): {len(low_guides)}")
+    print(f"- Raw Guide categories: {len(guide_by_category)}")
+    print(f"- Raw Guide categories LOW (<{GUIDE_LOW_THRESHOLD}): {len(low_guides)}")
+    print(f"- Canonical Guide categories: {len(canonical_guide_by_category)}")
+    print(
+        f"- Canonical Guide categories LOW (<{GUIDE_LOW_THRESHOLD}): "
+        f"{len(canonical_low_guides)}"
+    )
     print(f"- Wiki directories: {len(wiki_by_directory)}")
     print(f"- Wiki directories LOW (<{WIKI_LOW_THRESHOLD}): {len(low_wikis)}")
     for priority in PRIORITIES:
@@ -268,7 +353,8 @@ def main() -> None:
         wiki_priority_status = "LOW" if wiki_total == 0 else "OK"
         print(
             f"- {priority} Guide total: {guide_total} ({guide_priority_status}); "
-            f"LOW fields: {len(guide_priority_lows.get(priority, []))}"
+            f"raw LOW fields: {len(guide_priority_lows.get(priority, []))}; "
+            f"canonical LOW fields: {len(canonical_guide_priority_lows.get(priority, []))}"
         )
         print(
             f"- {priority} Wiki total: {wiki_total} ({wiki_priority_status}); "
@@ -280,7 +366,9 @@ def main() -> None:
         print(f"- UNKNOWN Wiki priority total: {wiki_priority_totals[UNKNOWN_PRIORITY]}")
 
     if low_guides:
-        print(f"- LOW Guide categories: {', '.join(low_guides)}")
+        print(f"- Raw LOW Guide categories: {', '.join(low_guides)}")
+    if canonical_low_guides:
+        print(f"- Canonical LOW Guide categories: {', '.join(canonical_low_guides)}")
     if low_wikis:
         print(f"- LOW Wiki directories: {', '.join(low_wikis)}")
     if guide_warnings:
