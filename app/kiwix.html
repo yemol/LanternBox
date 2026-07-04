@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kiwix 离线资料 - 壳中灯 LanternBox</title>
+  <link rel="icon" href="/static/assets/brand/lanternbox-icon-original.png" type="image/png" />
+  <link rel="stylesheet" href="/static/style.css?v=brand-logo-webp-1" />
+  <style>
+    .kiwix-hero { margin-bottom: 18px; }
+    .kiwix-header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .kiwix-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .kiwix-button { min-height: 42px; padding: 10px 15px; border-radius: 14px; border: 1px solid rgba(137, 204, 255, 0.18); color: var(--text-main); background: rgba(255, 255, 255, 0.045); font-weight: 900; cursor: pointer; }
+    .kiwix-button:hover { border-color: var(--border-strong); background: rgba(104, 199, 255, 0.1); }
+    .kiwix-panel { margin-top: 16px; padding: 18px; border: 1px solid rgba(137, 204, 255, 0.14); border-radius: 22px; background: rgba(255, 255, 255, 0.045); }
+    .kiwix-search-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; }
+    .kiwix-search-row input { width: 100%; min-height: 46px; padding: 11px 14px; border-radius: 14px; border: 1px solid rgba(137, 204, 255, 0.18); color: var(--text-main); background: rgba(0, 0, 0, 0.18); font-size: 15px; outline: none; }
+    .kiwix-search-row input:focus { border-color: var(--border-strong); box-shadow: 0 0 0 3px rgba(104, 199, 255, 0.08); }
+    .kiwix-status { margin: 12px 0 0; color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+    .kiwix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+    .kiwix-card { min-width: 0; padding: 16px; border: 1px solid rgba(137, 204, 255, 0.14); border-radius: 18px; background: rgba(255, 255, 255, 0.045); }
+    .kiwix-card h3 { margin: 0 0 8px; color: var(--text-main); font-size: 18px; line-height: 1.45; }
+    .kiwix-card p { margin: 0 0 10px; color: var(--text-soft); font-size: 15px; line-height: 1.65; }
+    .kiwix-card small { display: block; color: var(--text-muted); font-size: 13px; line-height: 1.5; }
+    .kiwix-empty { padding: 16px; border: 1px dashed rgba(137, 204, 255, 0.18); border-radius: 16px; color: var(--text-muted); background: rgba(255, 255, 255, 0.025); font-size: 15px; line-height: 1.6; }
+    @media (max-width: 760px) { .kiwix-search-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero kiwix-hero">
+      <div class="kiwix-header-row">
+        <div>
+          <p class="eyebrow">OFFLINE ZIM</p>
+          <h1 class="brand-title"><img class="brand-mark-inline" src="/static/assets/brand/lanternbox-icon-original.webp" alt="" />Kiwix 离线资料</h1>
+          <p class="subtitle">搜索本地 ZIM 文件和 LanternBox Kiwix 增强索引。</p>
+        </div>
+        <div class="kiwix-actions">
+          <a class="page-nav-button" href="/library.html">返回资料库</a>
+          <a class="page-nav-button" href="/assistant.html">进入 AI 助手</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="kiwix-panel">
+      <div class="kiwix-search-row">
+        <input id="kiwix-search-input" type="search" placeholder="搜索 United States、water、medicine、energy..." />
+        <button class="kiwix-button" onclick="searchKiwix()" type="button">搜索</button>
+      </div>
+      <p id="kiwix-status" class="kiwix-status">正在检查本地 ZIM 状态...</p>
+    </section>
+
+    <section class="kiwix-panel">
+      <div id="kiwix-results" class="kiwix-grid">
+        <div class="kiwix-empty">输入关键词后显示 Kiwix 查询结果。</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const input = document.getElementById("kiwix-search-input");
+    const statusEl = document.getElementById("kiwix-status");
+    const resultsEl = document.getElementById("kiwix-results");
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function sourceLabel(source) {
+      if (source === "kiwix_zim") return "ZIM";
+      if (source === "wiki_import") return "Wiki Import";
+      if (source === "guide_keyword_index") return "Guide Index";
+      return source || "Kiwix";
+    }
+
+    async function loadStatus() {
+      try {
+        const response = await fetch("/api/kiwix/status");
+        const data = await response.json();
+        const names = (data.zim_files || []).map((item) => item.name).join(" / ");
+        statusEl.textContent = data.zim_available ? `ZIM 已就绪：${names}` : "未发现本地 ZIM 文件。";
+      } catch (error) {
+        statusEl.textContent = `Kiwix 状态读取失败：${error.message}`;
+      }
+    }
+
+    async function searchKiwix() {
+      const query = input.value.trim();
+      if (!query) {
+        resultsEl.innerHTML = '<div class="kiwix-empty">请输入关键词。</div>';
+        return;
+      }
+
+      statusEl.textContent = "正在查询 Kiwix...";
+      resultsEl.innerHTML = '<div class="kiwix-empty">查询中...</div>';
+
+      try {
+        const response = await fetch(`/api/kiwix/search?q=${encodeURIComponent(query)}`);
+        const data = await response.json();
+        const results = data.results || [];
+        statusEl.textContent = `查询完成：${results.length} 条结果`;
+
+        if (!results.length) {
+          resultsEl.innerHTML = '<div class="kiwix-empty">没有匹配结果。</div>';
+          return;
+        }
+
+        resultsEl.innerHTML = results.map((item) => `
+          <article class="kiwix-card">
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.snippet)}</p>
+            <small>${escapeHtml(sourceLabel(item.source))} · confidence ${escapeHtml(item.relevance_score ?? "")}</small>
+            ${item.url ? `<small>${escapeHtml(item.url)}</small>` : ""}
+          </article>
+        `).join("");
+      } catch (error) {
+        statusEl.textContent = `查询失败：${error.message}`;
+        resultsEl.innerHTML = '<div class="kiwix-empty">Kiwix 查询失败。</div>';
+      }
+    }
+
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") searchKiwix();
+    });
+
+    loadStatus();
+  </script>
+</body>
+</html>

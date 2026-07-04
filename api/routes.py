@@ -51,6 +51,7 @@ from .pipeline.preload import prepare_ai_pipeline_context
 from .llm.client import stream_ollama
 from .response.fallback import build_fallback_answer
 from .response.safety import sanitize_ai_answer
+from .kiwix.zim_client import DEFAULT_ZIM_DIR, search as search_zim
 
 # 路由控制
 router = APIRouter()
@@ -432,6 +433,10 @@ def assistant_page():
 def library_page():
     return FileResponse(APP_DIR / "library.html")
 
+@router.get("/kiwix.html")
+def kiwix_page():
+    return FileResponse(APP_DIR / "kiwix.html")
+
 @router.get("/status.html")
 def status_page():
     return FileResponse(APP_DIR / "status.html")
@@ -520,6 +525,48 @@ def api_wiki_search(q: str = ""):
         "query": keyword,
         "total": len(articles),
         "articles": articles,
+    }
+
+
+@router.get("/api/kiwix/status")
+def api_kiwix_status():
+    zim_files = sorted(DEFAULT_ZIM_DIR.glob("*.zim")) if DEFAULT_ZIM_DIR.exists() else []
+
+    return {
+        "ok": True,
+        "zim_available": bool(zim_files),
+        "zim_files": [
+            {
+                "name": path.name,
+                "size_bytes": path.stat().st_size,
+            }
+            for path in zim_files
+        ],
+    }
+
+
+@router.get("/api/kiwix/search")
+def api_kiwix_search(q: str = ""):
+    keyword = q.strip()
+    zim_hits = search_zim(keyword, limit=8) if keyword else []
+    results = [
+        {
+            "title": item.get("title", ""),
+            "snippet": item.get("snippet", ""),
+            "source": "kiwix_zim",
+            "relevance_score": item.get("score", 0.0),
+            "topics": [],
+            "url": item.get("url"),
+            "content_type": "kiwix",
+        }
+        for item in zim_hits
+    ]
+
+    return {
+        "ok": True,
+        "query": keyword,
+        "total": len(results),
+        "results": results,
     }
 
 

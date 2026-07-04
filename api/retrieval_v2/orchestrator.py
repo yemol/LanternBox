@@ -1,11 +1,17 @@
 """Retrieval v2 orchestrator."""
 
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
+
+from pydantic import Field
 
 from .fetchers import fetch_candidates_from_plan
 from .planner import build_retrieval_plan
 from .schemas import EvidenceCandidate, EvidenceSelection, RetrievalDebug, RetrievalPlan, RetrievalV2Result, SelectedEvidence
 from .selector import select_evidence_with_ai
+
+
+class RetrievalV2ResultWithKiwix(RetrievalV2Result):
+    kiwix_explanations: List[Dict[str, object]] = Field(default_factory=list)
 
 
 def _candidate_key(candidate: EvidenceCandidate) -> Tuple[str, str]:
@@ -82,8 +88,8 @@ def _fallback_selection_from_candidates(
 def _debug_payload(
     *,
     plan: RetrievalPlan,
-    candidates: List[EvidenceCandidate] | None = None,
-    selected_evidence: List[EvidenceCandidate] | None = None,
+    candidates: Optional[List[EvidenceCandidate]] = None,
+    selected_evidence: Optional[List[EvidenceCandidate]] = None,
     ok: bool = True,
     error: str = "",
     stage: str = "",
@@ -104,6 +110,25 @@ def _debug_payload(
     )
 
 
+def _result_payload(
+    *,
+    plan: RetrievalPlan,
+    candidates: Optional[List[EvidenceCandidate]] = None,
+    selection: EvidenceSelection,
+    selected_evidence: Optional[List[EvidenceCandidate]] = None,
+    debug: RetrievalDebug,
+    kiwix_explanations: Optional[List[Dict[str, object]]] = None,
+) -> RetrievalV2ResultWithKiwix:
+    return RetrievalV2ResultWithKiwix(
+        plan=plan,
+        candidates=candidates or [],
+        selection=selection,
+        selected_evidence=selected_evidence or [],
+        debug=debug,
+        kiwix_explanations=kiwix_explanations or [],
+    )
+
+
 def _empty_result(user_message: str, *, error: str = "", stage: str = "") -> RetrievalV2Result:
     plan = RetrievalPlan(
         scenario_summary=str(user_message or "").strip()[:80],
@@ -118,7 +143,7 @@ def _empty_result(user_message: str, *, error: str = "", stage: str = "") -> Ret
         },
     )
 
-    return RetrievalV2Result(
+    return _result_payload(
         plan=plan,
         candidates=[],
         selection=EvidenceSelection(
@@ -138,7 +163,117 @@ def _empty_result(user_message: str, *, error: str = "", stage: str = "") -> Ret
             error=error,
             stage=stage,
         ),
+        kiwix_explanations=[],
     )
+
+
+def _selected_by_type(selected_evidence: List[EvidenceCandidate], source_type: str) -> List[EvidenceCandidate]:
+    return [
+        item
+        for item in selected_evidence or []
+        if item.source_type == source_type
+    ]
+
+
+def _router_is_high(plan: RetrievalPlan) -> bool:
+    raw = plan.raw if isinstance(plan.raw, dict) else {}
+    values = [
+        raw.get("router"),
+        raw.get("router_level"),
+        raw.get("route_level"),
+        raw.get("routing_level"),
+        raw.get("urgency"),
+        plan.urgency,
+    ]
+
+    return any(str(value or "").strip().upper() == "HIGH" for value in values)
+
+
+def _kiwix_context_for_item(
+    item: EvidenceCandidate,
+    plan: RetrievalPlan,
+) -> Dict[str, object]:
+    raw = item.raw if isinstance(item.raw, dict) else {}
+    keywords = raw.get("keywords") or raw.get("tags") or item.tags
+
+    return {
+        "core_terms": list(plan.core_terms or []),
+        "keywords": keywords,
+        "topics": [
+            item.title,
+            item.category,
+            *list(item.tags or []),
+        ],
+    }
+
+
+def _build_kiwix_explanations(
+    *,
+    plan: RetrievalPlan,
+    selected_evidence: List[EvidenceCandidate],
+    limit_per_item: int = 1,
+    max_total: int = 6,
+) -> List[Dict[str, object]]:
+    selected_guides = _selected_by_type(selected_evidence, "guide")
+    selected_wikis = _selected_by_type(selected_evidence, "wiki")
+
+    if not _router_is_high(plan):
+        return []
+    if not selected_guides or not selected_wikis:
+        return []
+
+    try:
+        from api.kiwix.orchestrator import run_kiwix_query
+    except Exception:
+        return []
+
+    explanations: List[Dict[str, object]] = []
+    seen = set()
+
+    for item in [*selected_guides, *selected_wikis]:
+        query = " ".join([
+            item.title,
+            item.category,
+            " ".join(list(item.tags or [])[:6]),
+        ]).strip()
+
+        try:
+            results = run_kiwix_query(query, _kiwix_context_for_item(item, plan))
+        except Exception:
+            results = []
+
+        added_for_item = 0
+        for result in results or []:
+            title = str(getattr(result, "title", "") or "").strip()
+            snippet = str(getattr(result, "snippet", "") or "").strip()
+            source = str(getattr(result, "source", "") or "").strip()
+            confidence = float(getattr(result, "relevance_score", 0.0) or 0.0)
+
+            if not title or not snippet:
+                continue
+
+            key = (item.id, title, source)
+            if key in seen:
+                continue
+            seen.add(key)
+
+            explanations.append(
+                {
+                    "title": title,
+                    "snippet": snippet,
+                    "source": source,
+                    "related_to": item.id,
+                    "confidence": max(0.0, min(confidence, 1.0)),
+                }
+            )
+            added_for_item += 1
+
+            if added_for_item >= limit_per_item:
+                break
+            if len(explanations) >= max_total:
+                return explanations
+
+    return explanations[:max_total]
 
 
 def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
@@ -170,7 +305,7 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
             core_terms=plan.core_terms,
         )
     except Exception as exc:
-        return RetrievalV2Result(
+        return _result_payload(
             plan=plan,
             candidates=[],
             selection=EvidenceSelection(
@@ -181,6 +316,7 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
             ),
             selected_evidence=[],
             debug=_debug_payload(plan=plan, ok=False, error=str(exc), stage="fetch"),
+            kiwix_explanations=[],
         )
 
     try:
@@ -197,8 +333,12 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
         )
 
     selected_evidence = _validate_selected(candidates, selection.selected)
+    kiwix_explanations = _build_kiwix_explanations(
+        plan=plan,
+        selected_evidence=selected_evidence,
+    )
 
-    return RetrievalV2Result(
+    return _result_payload(
         plan=plan,
         candidates=candidates,
         selection=selection,
@@ -211,4 +351,5 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
             error=str(selection.raw.get("error", "")) if isinstance(selection.raw, dict) else "",
             stage=str(selection.raw.get("stage", "")) if isinstance(selection.raw, dict) else "",
         ),
+        kiwix_explanations=kiwix_explanations,
     )
