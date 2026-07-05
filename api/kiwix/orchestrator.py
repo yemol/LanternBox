@@ -8,23 +8,18 @@ from typing import Dict, List
 if __package__ in (None, ""):
     sys.path.append(str(Path(__file__).resolve().parents[2]))
 
-from api.kiwix.client import KiwixClient
-from api.kiwix.fetcher import fetch_mock_kiwix_results
+from api.kiwix.fetcher import query_for_ai, query_for_lookup
 from api.kiwix.schema import KiwixResult
 
 
 def run_kiwix_query(query: str, context: Dict) -> List[KiwixResult]:
-    """Run a stable local-only Kiwix query.
+    """Compatibility wrapper for the AI-safe Kiwix decision channel."""
+    return query_for_ai(query=query, context=context)
 
-    The real Kiwix client boundary is present but intentionally unused for now:
-    this version does not read ZIM files and does not call external services.
-    """
-    client = KiwixClient()
-    zim_results = client.search(query, context)
-    if zim_results:
-        return zim_results
 
-    return fetch_mock_kiwix_results(query=query, context=context)
+def run_kiwix_lookup(query: str, context: Dict) -> List[KiwixResult]:
+    """Human lookup wrapper that can surface lookup/support ZIM sources."""
+    return query_for_lookup(query=query, context=context)
 
 
 if __name__ == "__main__":

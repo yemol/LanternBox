@@ -1,0 +1,274 @@
+[
+  {
+    "filename": "arduino.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "arduino",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "bicycles.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "bicycles",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "cooking.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "cooking",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "diy.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "diy",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "earthscience.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "earthscience",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "electronics.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "electronics",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "engineering.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "engineering",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "gardening.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "gardening",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "gis.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "gis",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "ham.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "ham",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "mechanics.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "mechanics",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "outdoors.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "outdoors",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "raspberrypi.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "raspberrypi",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  },
+  {
+    "filename": "wikipedia_en_100_mini_2026-04.zim",
+    "language": "en",
+    "topic": "mini",
+    "variant": "mini",
+    "role": "fallback",
+    "usage_policy": "fallback_only"
+  },
+  {
+    "filename": "wikipedia_zh_all_maxi_2026-05.zim",
+    "language": "zh",
+    "topic": "all",
+    "variant": "maxi",
+    "role": "lookup",
+    "usage_policy": "lookup_only"
+  },
+  {
+    "filename": "wikipedia_zh_all_nopic_2026-05.zim",
+    "language": "zh",
+    "topic": "all",
+    "variant": "nopic",
+    "role": "decision",
+    "usage_policy": "ai_retrieval_allowed"
+  },
+  {
+    "filename": "wikipedia_zh_chemistry_maxi_2026-06.zim",
+    "language": "zh",
+    "topic": "chemistry",
+    "variant": "maxi",
+    "role": "lookup",
+    "usage_policy": "lookup_only"
+  },
+  {
+    "filename": "wikipedia_zh_chemistry_nopic_2026-06.zim",
+    "language": "zh",
+    "topic": "chemistry",
+    "variant": "nopic",
+    "role": "decision",
+    "usage_policy": "ai_retrieval_allowed"
+  },
+  {
+    "filename": "wikipedia_zh_computer_maxi_2026-06.zim",
+    "language": "zh",
+    "topic": "computer",
+    "variant": "maxi",
+    "role": "lookup",
+    "usage_policy": "lookup_only"
+  },
+  {
+    "filename": "wikipedia_zh_computer_nopic_2026-06.zim",
+    "language": "zh",
+    "topic": "computer",
+    "variant": "nopic",
+    "role": "decision",
+    "usage_policy": "ai_retrieval_allowed"
+  },
+  {
+    "filename": "wikipedia_zh_geography_maxi_2026-06.zim",
+    "language": "zh",
+    "topic": "geography",
+    "variant": "maxi",
+    "role": "lookup",
+    "usage_policy": "lookup_only"
+  },
+  {
+    "filename": "wikipedia_zh_geography_nopic_2026-06.zim",
+    "language": "zh",
+    "topic": "geography",
+    "variant": "nopic",
+    "role": "decision",
+    "usage_policy": "ai_retrieval_allowed"
+  },
+  {
+    "filename": "wikipedia_zh_history_maxi_2026-06.zim",
+    "language": "zh",
+    "topic": "history",
+    "variant": "maxi",
+    "role": "lookup",
+    "usage_policy": "lookup_only"
+  },
+  {
+    "filename": "wikipedia_zh_history_nopic_2026-06.zim",
+    "language": "zh",
+    "topic": "history",
+    "variant": "nopic",
+    "role": "decision",
+    "usage_policy": "ai_retrieval_allowed"
+  },
+  {
+    "filename": "wikipedia_zh_mathematics_maxi_2026-06.zim",
+    "language": "zh",
+    "topic": "mathematics",
+    "variant": "maxi",
+    "role": "lookup",
+    "usage_policy": "lookup_only"
+  },
+  {
+    "filename": "wikipedia_zh_mathematics_nopic_2026-06.zim",
+    "language": "zh",
+    "topic": "mathematics",
+    "variant": "nopic",
+    "role": "decision",
+    "usage_policy": "ai_retrieval_allowed"
+  },
+  {
+    "filename": "wikipedia_zh_medicine_maxi_2026-06.zim",
+    "language": "zh",
+    "topic": "medicine",
+    "variant": "maxi",
+    "role": "lookup",
+    "usage_policy": "lookup_only"
+  },
+  {
+    "filename": "wikipedia_zh_medicine_nopic_2026-06.zim",
+    "language": "zh",
+    "topic": "medicine",
+    "variant": "nopic",
+    "role": "decision",
+    "usage_policy": "ai_retrieval_allowed"
+  },
+  {
+    "filename": "wikipedia_zh_molcell_maxi_2026-06.zim",
+    "language": "zh",
+    "topic": "molcell",
+    "variant": "maxi",
+    "role": "lookup",
+    "usage_policy": "lookup_only"
+  },
+  {
+    "filename": "wikipedia_zh_molcell_nopic_2026-06.zim",
+    "language": "zh",
+    "topic": "molcell",
+    "variant": "nopic",
+    "role": "decision",
+    "usage_policy": "ai_retrieval_allowed"
+  },
+  {
+    "filename": "wikipedia_zh_physics_maxi_2026-06.zim",
+    "language": "zh",
+    "topic": "physics",
+    "variant": "maxi",
+    "role": "lookup",
+    "usage_policy": "lookup_only"
+  },
+  {
+    "filename": "wikipedia_zh_physics_nopic_2026-06.zim",
+    "language": "zh",
+    "topic": "physics",
+    "variant": "nopic",
+    "role": "decision",
+    "usage_policy": "ai_retrieval_allowed"
+  },
+  {
+    "filename": "wiktionary_en_simple_all_nopic_2026-04.zim",
+    "language": "en",
+    "topic": "wiktionary",
+    "variant": "nopic",
+    "role": "support",
+    "usage_policy": "language_support_only"
+  },
+  {
+    "filename": "woodworking.stackexchange.com_en_all_2026-02.zim",
+    "language": "en",
+    "topic": "woodworking",
+    "variant": "all",
+    "role": "support",
+    "usage_policy": "background_support_only"
+  }
+]

@@ -51,7 +51,8 @@ from .pipeline.preload import prepare_ai_pipeline_context
 from .llm.client import stream_ollama
 from .response.fallback import build_fallback_answer
 from .response.safety import sanitize_ai_answer
-from .kiwix.zim_client import DEFAULT_ZIM_DIR, search as search_zim
+from .kiwix.fetcher import query_for_lookup as query_kiwix_for_lookup
+from .kiwix.zim_client import DEFAULT_MANIFEST_PATH, DEFAULT_ZIM_DIR, get_zim_manifest
 
 # 路由控制
 router = APIRouter()
@@ -531,14 +532,21 @@ def api_wiki_search(q: str = ""):
 @router.get("/api/kiwix/status")
 def api_kiwix_status():
     zim_files = sorted(DEFAULT_ZIM_DIR.glob("*.zim")) if DEFAULT_ZIM_DIR.exists() else []
+    manifest_entries = {item.get("filename"): item for item in get_zim_manifest()}
 
     return {
         "ok": True,
         "zim_available": bool(zim_files),
+        "manifest_available": DEFAULT_MANIFEST_PATH.exists(),
         "zim_files": [
             {
                 "name": path.name,
                 "size_bytes": path.stat().st_size,
+                "language": manifest_entries.get(path.name, {}).get("language"),
+                "topic": manifest_entries.get(path.name, {}).get("topic"),
+                "variant": manifest_entries.get(path.name, {}).get("variant"),
+                "role": manifest_entries.get(path.name, {}).get("role"),
+                "usage_policy": manifest_entries.get(path.name, {}).get("usage_policy"),
             }
             for path in zim_files
         ],
@@ -548,16 +556,22 @@ def api_kiwix_status():
 @router.get("/api/kiwix/search")
 def api_kiwix_search(q: str = ""):
     keyword = q.strip()
-    zim_hits = search_zim(keyword, limit=8) if keyword else []
+    zim_hits = query_kiwix_for_lookup(keyword, limit=8) if keyword else []
     results = [
         {
-            "title": item.get("title", ""),
-            "snippet": item.get("snippet", ""),
-            "source": "kiwix_zim",
-            "relevance_score": item.get("score", 0.0),
-            "topics": [],
-            "url": item.get("url"),
-            "content_type": "kiwix",
+            "title": item.title,
+            "snippet": item.snippet,
+            "source": item.source,
+            "relevance_score": item.relevance_score,
+            "topics": item.topics,
+            "url": item.url,
+            "zim_filename": item.zim_filename,
+            "language": item.language,
+            "role": item.role,
+            "usage_policy": item.usage_policy,
+            "matched_terms": item.matched_terms,
+            "matched_terms_count": item.matched_terms_count,
+            "content_type": item.content_type,
         }
         for item in zim_hits
     ]

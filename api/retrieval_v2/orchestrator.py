@@ -223,7 +223,7 @@ def _build_kiwix_explanations(
         return []
 
     try:
-        from api.kiwix.orchestrator import run_kiwix_query
+        from api.kiwix.fetcher import query_for_ai
     except Exception:
         return []
 
@@ -238,7 +238,7 @@ def _build_kiwix_explanations(
         ]).strip()
 
         try:
-            results = run_kiwix_query(query, _kiwix_context_for_item(item, plan))
+            results = query_for_ai(query, context=_kiwix_context_for_item(item, plan), limit=limit_per_item)
         except Exception:
             results = []
 

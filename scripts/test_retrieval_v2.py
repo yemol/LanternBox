@@ -1,7 +1,14 @@
+import os
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+VENV_PYTHON = ROOT / "venv" / "bin" / "python"
+
+if not os.environ.get("LANTERNBOX_RETRIEVAL_V2_VENV") and VENV_PYTHON.exists():
+    os.environ["LANTERNBOX_RETRIEVAL_V2_VENV"] = "1"
+    os.execv(str(VENV_PYTHON), [str(VENV_PYTHON), *sys.argv])
+
 sys.path.insert(0, str(ROOT))
 
 from api.retrieval_v2.orchestrator import run_retrieval_v2

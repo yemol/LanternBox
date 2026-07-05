@@ -234,6 +234,14 @@ def _score_record(record: Dict[str, Any], terms: Iterable[str]) -> Tuple[float, 
 
 
 def classify_kiwix_domain(query: str, terms: List[str]) -> str:
+    try:
+        from api.kiwix.zim_client import classify_query_domain
+
+        domains = classify_query_domain(" ".join([str(query or ""), *[str(term or "") for term in terms]]))
+        return domains[0] if domains else "general"
+    except Exception:
+        pass
+
     text = " ".join([str(query or ""), *[str(term or "") for term in terms]]).lower()
 
     if any(term in text for term in LANGUAGE_TERMS):
@@ -294,13 +302,14 @@ def fetch_mock_kiwix_results(
                     relevance_score=round(relevance_score, 4),
                     topics=record["topics"][:10],
                     url=record.get("url"),
+                    matched_terms=matched_terms,
                 ),
             )
         )
 
     scored.sort(key=lambda item: (-item[0], item[1], item[2]))
     local_results = [result for _, _, _, result in scored[:limit]]
-    zim_results = _fetch_zim_results(query=query, terms=terms, limit=5)
+    zim_results = _fetch_zim_results(query=query, terms=terms, limit=5, channel="ai")
 
     merged: List[Tuple[float, str, str, KiwixResult]] = []
     seen = set()
@@ -315,26 +324,58 @@ def fetch_mock_kiwix_results(
     return [result for _, _, _, result in merged[:limit]]
 
 
-def _fetch_zim_results(query: str, terms: List[str], limit: int = 5) -> List[KiwixResult]:
+def query_for_ai(
+    query: str,
+    context: Optional[Dict] = None,
+    limit: int = 5,
+) -> List[KiwixResult]:
+    """Query the ZIM decision channel for Retrieval v2 background only."""
+    terms = extract_core_terms(query, context)
+    return _fetch_zim_results(query=query, terms=terms, limit=limit, channel="ai")
+
+
+def query_for_lookup(
+    query: str,
+    context: Optional[Dict] = None,
+    limit: int = 8,
+) -> List[KiwixResult]:
+    """Query the human lookup channel, including lookup/support language sources."""
+    terms = extract_core_terms(query, context)
+    return _fetch_zim_results(query=query, terms=terms, limit=limit, channel="lookup")
+
+
+def _fetch_zim_results(
+    query: str,
+    terms: List[str],
+    limit: int = 5,
+    channel: str = "ai",
+) -> List[KiwixResult]:
     try:
-        from api.kiwix.zim_client import search as search_zim
+        from api.kiwix.zim_client import query_for_ai as query_zim_for_ai
+        from api.kiwix.zim_client import query_for_lookup as query_zim_for_lookup
+        from api.kiwix.zim_client import classify_query_domain
+        from api.kiwix.zim_client import extract_query_core_terms as extract_zim_core_terms
     except Exception:
         return []
 
     queries: List[str] = []
-    for item in [query, *terms]:
+    for item in [query, *extract_zim_core_terms(query)]:
         item = str(item or "").strip()
         if item and item not in queries:
             queries.append(item)
 
     results: List[KiwixResult] = []
     seen = set()
-    domain = classify_kiwix_domain(query, terms)
-    routed_sources = _zim_sources_for_domain(domain)
+    domains = classify_query_domain(" ".join([str(query or ""), *[str(term or "") for term in terms]]))
+    domain = domains[0] if domains else classify_kiwix_domain(query, terms)
 
     for item in queries[:8]:
         try:
-            zim_hits = search_zim(item, limit=limit, sources=routed_sources)
+            zim_hits = (
+                query_zim_for_lookup(item, limit=limit)
+                if channel == "lookup"
+                else query_zim_for_ai(item, limit=limit)
+            )
         except Exception:
             zim_hits = []
 
@@ -355,8 +396,14 @@ def _fetch_zim_results(query: str, terms: List[str], limit: int = 5) -> List[Kiw
                     source="kiwix_zim",
                     snippet=snippet,
                     relevance_score=float(hit.get("score") or 0.0),
-                    topics=[domain, zim_source],
+                    topics=[*domains, zim_source],
                     url=hit.get("url"),
+                    zim_filename=hit.get("zim_filename"),
+                    language=hit.get("language"),
+                    role=hit.get("role"),
+                    usage_policy=hit.get("usage_policy"),
+                    matched_terms=hit.get("matched_terms") or [],
+                    matched_terms_count=int(hit.get("matched_terms_count") or 0),
                 )
             )
 

@@ -17,6 +17,7 @@
     .kiwix-search-row input { width: 100%; min-height: 46px; padding: 11px 14px; border-radius: 14px; border: 1px solid rgba(137, 204, 255, 0.18); color: var(--text-main); background: rgba(0, 0, 0, 0.18); font-size: 15px; outline: none; }
     .kiwix-search-row input:focus { border-color: var(--border-strong); box-shadow: 0 0 0 3px rgba(104, 199, 255, 0.08); }
     .kiwix-status { margin: 12px 0 0; color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+    .kiwix-policy-note { margin: 10px 0 0; color: var(--text-soft); font-size: 13px; line-height: 1.6; }
     .kiwix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
     .kiwix-card { min-width: 0; padding: 16px; border: 1px solid rgba(137, 204, 255, 0.14); border-radius: 18px; background: rgba(255, 255, 255, 0.045); }
     .kiwix-card h3 { margin: 0 0 8px; color: var(--text-main); font-size: 18px; line-height: 1.45; }
@@ -48,6 +49,7 @@
         <button class="kiwix-button" onclick="searchKiwix()" type="button">搜索</button>
       </div>
       <p id="kiwix-status" class="kiwix-status">正在检查本地 ZIM 状态...</p>
+      <p class="kiwix-policy-note">lookup_only 不参与 AI 决策；background_support_only 仅为补充资料。</p>
     </section>
 
     <section class="kiwix-panel">
@@ -76,6 +78,15 @@
       if (source === "wiki_import") return "Wiki Import";
       if (source === "guide_keyword_index") return "Guide Index";
       return source || "Kiwix";
+    }
+
+    function metaLine(item) {
+      return [
+        item.zim_filename,
+        item.language,
+        item.role,
+        item.usage_policy,
+      ].filter(Boolean).join(" · ");
     }
 
     async function loadStatus() {
@@ -115,6 +126,7 @@
             <h3>${escapeHtml(item.title)}</h3>
             <p>${escapeHtml(item.snippet)}</p>
             <small>${escapeHtml(sourceLabel(item.source))} · confidence ${escapeHtml(item.relevance_score ?? "")}</small>
+            <small>${escapeHtml(metaLine(item))}</small>
             ${item.url ? `<small>${escapeHtml(item.url)}</small>` : ""}
           </article>
         `).join("");
