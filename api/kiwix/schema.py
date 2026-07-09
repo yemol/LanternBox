@@ -16,6 +16,7 @@ class KiwixResult:
     language: Optional[str] = None
     role: Optional[str] = None
     usage_policy: Optional[str] = None
+    article_path: Optional[str] = None
     matched_terms: List[str] = field(default_factory=list)
     matched_terms_count: int = 0
     content_type: str = "kiwix"
@@ -29,6 +30,7 @@ class KiwixResult:
         object.__setattr__(self, "language", str(self.language).strip() if self.language else None)
         object.__setattr__(self, "role", str(self.role).strip() if self.role else None)
         object.__setattr__(self, "usage_policy", str(self.usage_policy).strip() if self.usage_policy else None)
+        object.__setattr__(self, "article_path", str(self.article_path).strip() if self.article_path else None)
         object.__setattr__(self, "content_type", "kiwix")
 
         score = float(self.relevance_score or 0.0)

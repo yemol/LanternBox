@@ -8,7 +8,7 @@ from typing import Any
 import urllib.request
 
 from fastapi import APIRouter, HTTPException
-from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.responses import FileResponse, Response, StreamingResponse
 
 from .services.wiki_service import (
     get_wiki_categories_records,
@@ -52,7 +52,13 @@ from .llm.client import stream_ollama
 from .response.fallback import build_fallback_answer
 from .response.safety import sanitize_ai_answer
 from .kiwix.fetcher import query_for_lookup as query_kiwix_for_lookup
-from .kiwix.zim_client import DEFAULT_MANIFEST_PATH, DEFAULT_ZIM_DIR, get_zim_manifest
+from .kiwix.zim_client import (
+    DEFAULT_MANIFEST_PATH,
+    DEFAULT_ZIM_DIR,
+    get_article as get_zim_article,
+    get_resource as get_zim_resource,
+    get_zim_manifest,
+)
 
 # 路由控制
 router = APIRouter()
@@ -533,23 +539,46 @@ def api_wiki_search(q: str = ""):
 def api_kiwix_status():
     zim_files = sorted(DEFAULT_ZIM_DIR.glob("*.zim")) if DEFAULT_ZIM_DIR.exists() else []
     manifest_entries = {item.get("filename"): item for item in get_zim_manifest()}
+    normalized_files = [
+        {
+            "name": path.name,
+            "size_bytes": path.stat().st_size,
+            "language": manifest_entries.get(path.name, {}).get("language"),
+            "topic": manifest_entries.get(path.name, {}).get("topic"),
+            "variant": manifest_entries.get(path.name, {}).get("variant"),
+            "role": manifest_entries.get(path.name, {}).get("role"),
+            "usage_policy": manifest_entries.get(path.name, {}).get("usage_policy"),
+        }
+        for path in zim_files
+    ]
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for item in normalized_files:
+        key = " / ".join(
+            part
+            for part in [
+                item.get("role") or "unknown",
+                item.get("language") or "unknown",
+                item.get("variant") or "unknown",
+            ]
+            if part
+        )
+        groups.setdefault(key, []).append(item)
 
     return {
         "ok": True,
         "zim_available": bool(zim_files),
         "manifest_available": DEFAULT_MANIFEST_PATH.exists(),
-        "zim_files": [
-            {
-                "name": path.name,
-                "size_bytes": path.stat().st_size,
-                "language": manifest_entries.get(path.name, {}).get("language"),
-                "topic": manifest_entries.get(path.name, {}).get("topic"),
-                "variant": manifest_entries.get(path.name, {}).get("variant"),
-                "role": manifest_entries.get(path.name, {}).get("role"),
-                "usage_policy": manifest_entries.get(path.name, {}).get("usage_policy"),
-            }
-            for path in zim_files
-        ],
+        "summary": {
+            "total": len(normalized_files),
+            "decision": sum(1 for item in normalized_files if item.get("role") == "decision"),
+            "lookup": sum(1 for item in normalized_files if item.get("role") == "lookup"),
+            "support": sum(1 for item in normalized_files if item.get("role") == "support"),
+            "fallback": sum(1 for item in normalized_files if item.get("role") == "fallback"),
+            "zh": sum(1 for item in normalized_files if item.get("language") == "zh"),
+            "en": sum(1 for item in normalized_files if item.get("language") == "en"),
+        },
+        "groups": groups,
+        "zim_files": normalized_files,
     }
 
 
@@ -569,6 +598,7 @@ def api_kiwix_search(q: str = ""):
             "language": item.language,
             "role": item.role,
             "usage_policy": item.usage_policy,
+            "article_path": item.article_path,
             "matched_terms": item.matched_terms,
             "matched_terms_count": item.matched_terms_count,
             "content_type": item.content_type,
@@ -582,6 +612,48 @@ def api_kiwix_search(q: str = ""):
         "total": len(results),
         "results": results,
     }
+
+
+@router.get("/api/kiwix/article")
+def api_kiwix_article(source: str = "", path: str = "", title: str = ""):
+    source = source.strip()
+    article_key = (path or title).strip()
+    if not source or not article_key:
+        raise HTTPException(status_code=400, detail="缺少 ZIM 来源或文章路径")
+
+    article = get_zim_article(article_key, source=source)
+    if not article:
+        raise HTTPException(status_code=404, detail="未能打开该 ZIM 文章")
+
+    return {
+        "ok": True,
+        "source": source,
+        "title": article.get("title"),
+        "path": article.get("path"),
+        "url": article.get("url"),
+        "content_type": article.get("content_type") or "text/html",
+        "html": article.get("html") or "",
+        "text": article.get("text") or article.get("content") or "",
+        # Backward-compatible alias for any old frontend/AI caller still reading content.
+        "content": article.get("text") or article.get("content") or "",
+    }
+
+
+@router.get("/api/kiwix/resource")
+def api_kiwix_resource(source: str = "", path: str = ""):
+    source = source.strip()
+    resource_path = path.strip()
+    if not source or not resource_path:
+        raise HTTPException(status_code=400, detail="缺少 ZIM 来源或资源路径")
+
+    resource = get_zim_resource(resource_path, source=source)
+    if not resource:
+        raise HTTPException(status_code=404, detail="未能打开该 ZIM 资源")
+
+    return Response(
+        content=resource.get("content") or b"",
+        media_type=resource.get("content_type") or "application/octet-stream",
+    )
 
 
 # 自检接口

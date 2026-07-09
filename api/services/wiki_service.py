@@ -326,7 +326,7 @@ def search_wiki_articles(keyword: str, limit: int = 20) -> list[dict]:
     if not keyword:
         return []
 
-    safe_keyword = keyword.replace('"', '\"')
+    safe_keyword = keyword.replace("\\", "\\\\").replace('"', '\\"')
 
     data = pocketbase_get_records(
         POCKETBASE_WIKI_ARTICLES,
@@ -485,7 +485,7 @@ def build_wiki_or_filter_for_terms(terms: List[str]) -> str:
     parts = []
 
     for term in terms:
-        safe_term = term.replace('"', '\"')
+        safe_term = term.replace("\\", "\\\\").replace('"', '\\"')
 
         parts.append(
             "("

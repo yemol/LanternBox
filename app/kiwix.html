@@ -18,13 +18,91 @@
     .kiwix-search-row input:focus { border-color: var(--border-strong); box-shadow: 0 0 0 3px rgba(104, 199, 255, 0.08); }
     .kiwix-status { margin: 12px 0 0; color: var(--text-muted); font-size: 14px; line-height: 1.6; }
     .kiwix-policy-note { margin: 10px 0 0; color: var(--text-soft); font-size: 13px; line-height: 1.6; }
+    .kiwix-summary { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .kiwix-chip { padding: 6px 9px; border: 1px solid rgba(137, 204, 255, 0.16); border-radius: 999px; color: var(--text-soft); background: rgba(255, 255, 255, 0.04); font-size: 13px; font-weight: 800; }
+    .kiwix-source-details { margin-top: 12px; color: var(--text-soft); font-size: 13px; line-height: 1.65; }
+    .kiwix-source-details summary { cursor: pointer; color: var(--text-main); font-weight: 900; }
+    .kiwix-source-group { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(137, 204, 255, 0.1); }
+    .kiwix-source-group strong { display: block; margin-bottom: 4px; color: var(--text-main); }
+    .kiwix-source-list { margin: 0; padding-left: 18px; }
+    .kiwix-source-list li { margin: 2px 0; overflow-wrap: anywhere; }
     .kiwix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
     .kiwix-card { min-width: 0; padding: 16px; border: 1px solid rgba(137, 204, 255, 0.14); border-radius: 18px; background: rgba(255, 255, 255, 0.045); }
     .kiwix-card h3 { margin: 0 0 8px; color: var(--text-main); font-size: 18px; line-height: 1.45; }
     .kiwix-card p { margin: 0 0 10px; color: var(--text-soft); font-size: 15px; line-height: 1.65; }
     .kiwix-card small { display: block; color: var(--text-muted); font-size: 13px; line-height: 1.5; }
+    .kiwix-card { cursor: pointer; transition: border-color 0.16s ease, background 0.16s ease, transform 0.16s ease; }
+    .kiwix-card:hover { border-color: var(--border-strong); background: rgba(104, 199, 255, 0.08); transform: translateY(-1px); }
+    .kiwix-card.is-disabled { cursor: default; opacity: 0.62; }
+    .kiwix-card.is-disabled:hover { border-color: rgba(137, 204, 255, 0.14); background: rgba(255, 255, 255, 0.045); transform: none; }
+    .kiwix-card-action-hint { margin-top: 12px; color: var(--text-muted); font-size: 13px; font-weight: 800; }
+    .kiwix-modal { position: fixed; inset: 0; z-index: 80; display: none; align-items: center; justify-content: center; padding: 22px; background: rgba(0, 0, 0, 0.62); backdrop-filter: blur(8px); }
+    .kiwix-modal.is-open { display: flex; }
+    .kiwix-modal-card { width: min(1180px, 100%); height: min(90vh, 960px); max-height: min(90vh, 960px); display: flex; flex-direction: column; border: 1px solid rgba(137, 204, 255, 0.2); border-radius: 24px; background: rgba(9, 18, 31, 0.96); box-shadow: 0 24px 80px rgba(0, 0, 0, 0.46); overflow: hidden; }
+    .kiwix-reader-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 18px 20px; border-bottom: 1px solid rgba(137, 204, 255, 0.12); background: rgba(255, 255, 255, 0.035); }
+    .kiwix-reader-title { margin: 0; color: var(--text-main); font-size: 21px; line-height: 1.35; }
+    .kiwix-reader-meta { margin-top: 6px; color: var(--text-muted); font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+    .kiwix-reader-shell { display: flex; flex-direction: column; min-height: 0; height: 100%; }
+    .kiwix-reader-stack { flex: 1; min-height: 0; display: grid; grid-template-rows: minmax(0, 1fr); }
+    .kiwix-reader-stack.has-linked { grid-template-rows: minmax(220px, 1fr) minmax(220px, 0.9fr); }
+    .kiwix-reader-pane { min-height: 0; display: flex; flex-direction: column; border-top: 1px solid rgba(137, 204, 255, 0.12); }
+    .kiwix-reader-pane:first-child { border-top: 0; }
+    .kiwix-pane-header { flex: 0 0 auto; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 12px 18px; border-bottom: 1px solid rgba(137, 204, 255, 0.1); background: rgba(255, 255, 255, 0.025); }
+    .kiwix-pane-header.is-linked { border-bottom-color: rgba(255, 190, 104, 0.24); background: rgba(255, 190, 104, 0.08); }
+    .kiwix-pane-label { margin: 0 0 4px; color: var(--accent-bright); font-size: 12px; line-height: 1.3; font-weight: 900; letter-spacing: 0; }
+    .kiwix-pane-header.is-linked .kiwix-pane-label { color: #ffd28a; }
+    .kiwix-pane-title { margin: 0; color: var(--text-main); font-size: 18px; line-height: 1.35; }
+    .kiwix-pane-meta { margin-top: 4px; color: var(--text-muted); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+    .kiwix-pane-header.is-linked .kiwix-pane-meta { color: rgba(255, 225, 178, 0.74); }
+    .kiwix-pane-button { flex: 0 0 auto; min-height: 32px; padding: 6px 10px; border-radius: 10px; border: 1px solid rgba(137, 204, 255, 0.18); color: var(--text-main); background: rgba(104, 199, 255, 0.08); font-size: 12px; font-weight: 900; cursor: pointer; }
+    .kiwix-pane-button:hover { border-color: var(--border-strong); background: rgba(104, 199, 255, 0.14); }
+    .kiwix-pane-header.is-linked .kiwix-pane-button { border-color: rgba(255, 210, 138, 0.32); color: #ffe1b2; background: rgba(255, 190, 104, 0.12); }
+    .kiwix-pane-header.is-linked .kiwix-pane-button:hover { border-color: rgba(255, 210, 138, 0.62); background: rgba(255, 190, 104, 0.2); }
+    .kiwix-reader-content { min-height: 0; overflow: auto; padding: 18px 22px 24px; color: var(--text-soft); font-family: inherit; font-size: 15px; line-height: 1.86; }
+    .kiwix-article-body { max-width: 880px; margin: 0 auto; }
+    .kiwix-article-body > *:first-child { margin-top: 0; }
+    .kiwix-article-body > *:last-child { margin-bottom: 0; }
+    .kiwix-reader-content h1,
+    .kiwix-reader-content h2,
+    .kiwix-reader-content h3 { color: var(--text-main); line-height: 1.38; margin: 1.1em 0 0.45em; }
+    .kiwix-reader-content h1 { font-size: 25px; }
+    .kiwix-reader-content h2 { font-size: 21px; padding-top: 0.65em; border-top: 1px solid rgba(137, 204, 255, 0.1); }
+    .kiwix-reader-content h2:first-child { padding-top: 0; border-top: 0; }
+    .kiwix-reader-content h3 { font-size: 18px; }
+    .kiwix-reader-content p { margin: 0.9em 0; text-align: left; }
+    .kiwix-reader-content p + p { margin-top: 0.95em; }
+    .kiwix-reader-content ul,
+    .kiwix-reader-content ol { margin: 0.72em 0; padding-left: 1.35em; }
+    .kiwix-reader-content li { margin: 0.34em 0; }
+    .kiwix-reader-content pre { white-space: pre-wrap; overflow-wrap: anywhere; padding: 12px; border-radius: 14px; background: rgba(0, 0, 0, 0.24); border: 1px solid rgba(137, 204, 255, 0.1); }
+    .kiwix-reader-content code { overflow-wrap: anywhere; }
+    .kiwix-reader-content table { width: 100%; border-collapse: collapse; margin: 1em 0; display: block; overflow-x: auto; }
+    .kiwix-reader-content th,
+    .kiwix-reader-content td { padding: 8px 10px; border: 1px solid rgba(137, 204, 255, 0.12); vertical-align: top; }
+    .kiwix-reader-content a { color: var(--text-main); text-decoration: underline; text-underline-offset: 3px; }
+    .kiwix-reader-content img { max-width: 100%; height: auto; border-radius: 12px; cursor: zoom-in; }
+    .kiwix-close-button { flex: 0 0 auto; min-height: 36px; padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(137, 204, 255, 0.18); color: var(--text-main); background: rgba(104, 199, 255, 0.08); font-weight: 900; cursor: pointer; }
+    .kiwix-close-button:hover { border-color: var(--border-strong); background: rgba(104, 199, 255, 0.14); }
+    .kiwix-image-viewer { position: fixed; inset: 0; z-index: 120; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(8px); }
+    .kiwix-image-viewer.is-open { display: flex; }
+    .kiwix-image-viewer-card { width: min(1180px, 100%); height: min(92vh, 920px); display: flex; flex-direction: column; gap: 10px; align-items: stretch; }
+    .kiwix-image-toolbar { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .kiwix-image-zoom-button { min-height: 34px; min-width: 42px; padding: 7px 10px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.2); color: var(--text-main); background: rgba(9, 18, 31, 0.84); font-size: 13px; font-weight: 900; cursor: pointer; }
+    .kiwix-image-zoom-button:hover { border-color: rgba(255, 210, 138, 0.55); background: rgba(255, 190, 104, 0.12); }
+    .kiwix-image-stage { flex: 1; min-height: 0; overflow: auto; display: flex; align-items: flex-start; justify-content: center; padding: 10px; border-radius: 14px; background: rgba(0, 0, 0, 0.18); }
+    .kiwix-image-viewer img { display: block; max-width: none; max-height: none; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5); background: rgba(255, 255, 255, 0.04); }
+    .kiwix-image-viewer-caption { color: var(--text-soft); font-size: 13px; line-height: 1.5; text-align: center; }
+    .kiwix-image-viewer-close { position: absolute; top: 18px; right: 18px; min-height: 36px; padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2); color: var(--text-main); background: rgba(9, 18, 31, 0.84); font-weight: 900; cursor: pointer; }
     .kiwix-empty { padding: 16px; border: 1px dashed rgba(137, 204, 255, 0.18); border-radius: 16px; color: var(--text-muted); background: rgba(255, 255, 255, 0.025); font-size: 15px; line-height: 1.6; }
-    @media (max-width: 760px) { .kiwix-search-row { grid-template-columns: 1fr; } }
+    @media (max-width: 760px) {
+      .kiwix-search-row { grid-template-columns: 1fr; }
+      .kiwix-modal { padding: 10px; }
+      .kiwix-modal-card { height: 92vh; }
+      .kiwix-reader-stack.has-linked { grid-template-rows: minmax(180px, 1fr) minmax(180px, 0.9fr); }
+      .kiwix-reader-title { font-size: 18px; }
+      .kiwix-pane-title { font-size: 16px; }
+      .kiwix-reader-content { padding: 14px 16px 18px; }
+    }
   </style>
 </head>
 <body>
@@ -45,10 +123,12 @@
 
     <section class="kiwix-panel">
       <div class="kiwix-search-row">
-        <input id="kiwix-search-input" type="search" placeholder="搜索 United States、water、medicine、energy..." />
+        <input id="kiwix-search-input" type="search" placeholder="搜索 饮用水异味、伤口感染、Arduino 传感器、短波天线..." />
         <button class="kiwix-button" onclick="searchKiwix()" type="button">搜索</button>
       </div>
       <p id="kiwix-status" class="kiwix-status">正在检查本地 ZIM 状态...</p>
+      <div id="kiwix-source-summary" class="kiwix-summary"></div>
+      <div id="kiwix-source-details"></div>
       <p class="kiwix-policy-note">lookup_only 不参与 AI 决策；background_support_only 仅为补充资料。</p>
     </section>
 
@@ -59,10 +139,47 @@
     </section>
   </main>
 
+  <div id="kiwix-reader-modal" class="kiwix-modal" role="dialog" aria-modal="true" aria-labelledby="kiwix-reader-title">
+    <div class="kiwix-modal-card">
+      <div id="kiwix-reader" class="kiwix-reader-shell">
+        <div class="kiwix-empty">正在打开文章...</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="kiwix-image-viewer" class="kiwix-image-viewer" role="dialog" aria-modal="true" aria-label="图片放大查看">
+    <button class="kiwix-image-viewer-close" onclick="closeImageViewer()" type="button">关闭</button>
+    <div class="kiwix-image-viewer-card">
+      <div class="kiwix-image-toolbar">
+        <button class="kiwix-image-zoom-button" onclick="changeImageZoom(-0.25)" type="button">-</button>
+        <button class="kiwix-image-zoom-button" onclick="setImageZoom(1)" type="button">1x</button>
+        <button class="kiwix-image-zoom-button" onclick="setImageZoom(2)" type="button">2x</button>
+        <button class="kiwix-image-zoom-button" onclick="setImageZoom(3)" type="button">3x</button>
+        <button class="kiwix-image-zoom-button" onclick="changeImageZoom(0.25)" type="button">+</button>
+        <span id="kiwix-image-zoom-label" class="kiwix-image-viewer-caption">2x</span>
+      </div>
+      <div id="kiwix-image-stage" class="kiwix-image-stage">
+        <img id="kiwix-image-viewer-img" alt="" />
+      </div>
+      <div id="kiwix-image-viewer-caption" class="kiwix-image-viewer-caption"></div>
+    </div>
+  </div>
+
   <script>
     const input = document.getElementById("kiwix-search-input");
     const statusEl = document.getElementById("kiwix-status");
+    const sourceSummaryEl = document.getElementById("kiwix-source-summary");
+    const sourceDetailsEl = document.getElementById("kiwix-source-details");
     const resultsEl = document.getElementById("kiwix-results");
+    const readerEl = document.getElementById("kiwix-reader");
+    const readerModalEl = document.getElementById("kiwix-reader-modal");
+    const imageViewerEl = document.getElementById("kiwix-image-viewer");
+    const imageStageEl = document.getElementById("kiwix-image-stage");
+    const imageViewerImgEl = document.getElementById("kiwix-image-viewer-img");
+    const imageViewerCaptionEl = document.getElementById("kiwix-image-viewer-caption");
+    const imageZoomLabelEl = document.getElementById("kiwix-image-zoom-label");
+    let currentResults = [];
+    let currentImageZoom = 2;
 
     function escapeHtml(value) {
       return String(value || "")
@@ -71,6 +188,177 @@
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+    }
+
+    function decodeBasicEntities(value) {
+      const textarea = document.createElement("textarea");
+      textarea.innerHTML = String(value || "");
+      return textarea.value;
+    }
+
+    function stripRepeatedLeadingTitle(text, title) {
+      let value = String(text || "").trim();
+      const cleanTitle = String(title || "").trim();
+      if (!value || !cleanTitle) return value;
+
+      // 很多 ZIM 纯文本抽取会变成“标题 标题 标题 正文”。这里先把开头重复标题剥掉。
+      const escapedTitle = cleanTitle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      value = value.replace(new RegExp(`^(?:${escapedTitle}\\s*){2,}`, "i"), `${cleanTitle}\n\n`);
+      return value;
+    }
+
+    function looksLikeHtml(value) {
+      return /<\/?(p|h1|h2|h3|ul|ol|li|table|pre|blockquote|section|article|div|br)\b/i.test(value);
+    }
+
+    function cleanupWikipediaPlainText(text, title = "") {
+      let value = decodeBasicEntities(text)
+        .replace(/\r\n?/g, "\n")
+        .replace(/\u00a0/g, " ")
+        .replace(/[ \t]+/g, " ")
+        .trim();
+
+      const cleanTitle = String(title || "").trim();
+
+      // 1）去掉 Wikipedia 文章开头的信息框纯文本。Kiwix 的 text 提取经常把 infobox 压到正文前面。
+      // 优先从“标题 + 引用编号 + （英文名...）”这种真正正文开头开始。
+      if (cleanTitle) {
+        const escapedTitle = cleanTitle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const introPattern = new RegExp(`${escapedTitle}\\s*(?:\\[\\s*\\d+(?:\\.\\d+)?\\s*\\]\\s*){1,6}[（(]`);
+        const introMatch = value.match(introPattern);
+        if (introMatch && introMatch.index > 24 && introMatch.index < 1800) {
+          value = value.slice(introMatch.index).trim();
+        }
+      }
+
+      // 2）离线阅读默认不把参考文献、导航模板、规范控制一起塞进正文。
+      // 这些内容在 Wikipedia 纯文本抽取里会变成巨大的“尾巴”，阅读体验会被拖成渔网。
+      const tailMarkers = [
+        "参考文獻", "參考文獻", "参考资料", "參考資料", "外部連結", "外部链接",
+        "參見", "参见", "规范控制数据库", "規範控制資料庫", "This article is issued from Wikipedia"
+      ];
+      let cutIndex = -1;
+      for (const marker of tailMarkers) {
+        const idx = value.indexOf(marker);
+        if (idx > 300 && (cutIndex === -1 || idx < cutIndex)) cutIndex = idx;
+      }
+      if (cutIndex > 0) value = value.slice(0, cutIndex).trim();
+
+      // 3）去掉正文中的引用编号。保留医学/技术正文，减少 [ 5 ] [ 8 ] 的噪声。
+      value = value
+        .replace(/\[\s*\d+(?:\.\d+)?\s*\]/g, "")
+        .replace(/\s+([，。！？；：、）】》])/g, "$1")
+        .replace(/([（【《])\s+/g, "$1")
+        .replace(/[ \t]{2,}/g, " ")
+        .trim();
+
+      // 4）把常见百科小标题从一整行里“捞”出来。后端不给结构时，前端做保守复原。
+      const headings = [
+        "体征和症状", "體徵和症狀", "症状", "症狀", "病因", "病理學", "病理学", "診斷", "诊断", "分類", "分类",
+        "兒童", "儿童", "老年人", "性", "導尿", "导尿", "其他", "鑑別診斷", "鉴别诊断", "預防", "预防",
+        "藥物治療", "药物治疗", "替代性療法", "替代性疗法", "治療", "治疗", "無症狀菌尿症", "无症状菌尿症",
+        "無併發症", "无并发症", "併發性", "并发性", "腎盂腎炎", "肾盂肾炎", "流行病學", "流行病学",
+        "社會和文化", "社会和文化", "歷史", "历史", "懷孕期間", "怀孕期间"
+      ];
+      const escapedHeadings = headings
+        .sort((a, b) => b.length - a.length)
+        .map((heading) => heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+      const headingPattern = new RegExp(`(^|[。！？；;]\s+|\\n+)(${escapedHeadings.join("|")})(?=\\s+[^，。！？；:：]{1,40})`, "g");
+      value = value.replace(headingPattern, (match, prefix, heading) => {
+        const safePrefix = prefix && prefix.trim() ? prefix.trim() + "\n\n" : "";
+        return `${safePrefix}## ${heading}\n`;
+      });
+
+      // 标题如果被误放进正文第一段，删掉一次。
+      if (cleanTitle) {
+        const titlePattern = new RegExp(`^${cleanTitle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s+`);
+        value = value.replace(titlePattern, "");
+      }
+
+      return value.replace(/\n{3,}/g, "\n\n").trim();
+    }
+
+    function splitLongPlainText(text) {
+      const normalized = cleanupWikipediaPlainText(text)
+        .replace(/\n{3,}/g, "\n\n")
+        .trim();
+
+      if (!normalized) return [];
+
+      // 原本就有段落或我们已经恢复出小标题时，尊重段落。
+      const explicitBlocks = normalized.split(/\n{2,}/).map((block) => block.trim()).filter(Boolean);
+      if (explicitBlocks.length > 1) return explicitBlocks;
+
+      // 没有段落时，按中文/英文句号做保守分段。不是完美复原，但能把“文本砖墙”拆成可读资料卡。
+      const sentences = normalized
+        .replace(/([。！？!?])\s*/g, "$1\n")
+        .split(/\n+/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+
+      if (sentences.length <= 1) {
+        const chunks = [];
+        let rest = normalized;
+        while (rest.length > 0) {
+          chunks.push(rest.slice(0, 260));
+          rest = rest.slice(260).trim();
+        }
+        return chunks;
+      }
+
+      const blocks = [];
+      let current = "";
+      for (const sentence of sentences) {
+        const next = current ? `${current} ${sentence}` : sentence;
+        if (next.length >= 230 && current) {
+          blocks.push(current);
+          current = sentence;
+        } else {
+          current = next;
+        }
+      }
+      if (current) blocks.push(current);
+      return blocks;
+    }
+
+    function renderPlainBlock(block) {
+      const lines = block.split(/\n/).map((line) => line.trim()).filter(Boolean);
+      if (!lines.length) return "";
+
+      if (lines.length === 1) {
+        const line = lines[0];
+        if (line.startsWith("### ")) return `<h3>${escapeHtml(line.slice(4))}</h3>`;
+        if (line.startsWith("## ")) return `<h2>${escapeHtml(line.slice(3))}</h2>`;
+        if (line.length <= 42 && !/[。！？.!?]$/.test(line)) return `<h3>${escapeHtml(line)}</h3>`;
+        return `<p>${escapeHtml(line)}</p>`;
+      }
+
+      if (lines[0].startsWith("## ")) {
+        const heading = `<h2>${escapeHtml(lines[0].slice(3))}</h2>`;
+        const body = lines.slice(1).map((line) => `<p>${escapeHtml(line)}</p>`).join("");
+        return heading + body;
+      }
+
+      const isList = lines.every((line) => /^([*•-]|\d+[.)、])\s+/.test(line));
+      if (isList) {
+        return `<ul>${lines.map((line) => `<li>${escapeHtml(line.replace(/^([*•-]|\d+[.)、])\s+/, ""))}</li>`).join("")}</ul>`;
+      }
+
+      return lines.map((line) => `<p>${escapeHtml(line)}</p>`).join("");
+    }
+
+    function renderArticleContent(content, title = "") {
+      let raw = stripRepeatedLeadingTitle(String(content || "").trim(), title);
+      if (!raw) return '<div class="kiwix-article-body"><p>这篇资料没有可显示的正文。</p></div>';
+
+      // 后端若已经返回 HTML，保留结构，让 ZIM 文章不再被压成纯文本。
+      if (looksLikeHtml(raw)) {
+        return `<div class="kiwix-article-body">${raw}</div>`;
+      }
+
+      raw = cleanupWikipediaPlainText(raw, title);
+      const blocks = splitLongPlainText(raw);
+      return `<div class="kiwix-article-body">${blocks.map(renderPlainBlock).join("")}</div>`;
     }
 
     function sourceLabel(source) {
@@ -89,12 +377,45 @@
       ].filter(Boolean).join(" · ");
     }
 
+    function sourceKey(item) {
+      return String(item.zim_filename || "").replace(/\.zim$/i, "");
+    }
+
+    function renderStatus(data) {
+      const summary = data.summary || {};
+      statusEl.textContent = data.zim_available
+        ? `ZIM 已就绪：共 ${summary.total || 0} 个离线包`
+        : "未发现本地 ZIM 文件。";
+
+      sourceSummaryEl.innerHTML = [
+        ["中文决策源", summary.decision],
+        ["查阅源", summary.lookup],
+        ["英文支持源", summary.support],
+        ["兜底源", summary.fallback],
+        ["中文", summary.zh],
+        ["英文", summary.en],
+      ].map(([label, value]) => `<span class="kiwix-chip">${escapeHtml(label)} ${escapeHtml(value ?? 0)}</span>`).join("");
+
+      const groups = data.groups || {};
+      const groupHtml = Object.entries(groups).map(([name, files]) => `
+        <div class="kiwix-source-group">
+          <strong>${escapeHtml(name)} · ${escapeHtml(files.length)} 个</strong>
+          <ul class="kiwix-source-list">
+            ${files.map((item) => `<li>${escapeHtml(item.topic || "unknown")} · ${escapeHtml(item.name)}</li>`).join("")}
+          </ul>
+        </div>
+      `).join("");
+
+      sourceDetailsEl.innerHTML = groupHtml
+        ? `<details class="kiwix-source-details"><summary>查看 ZIM 来源清单</summary>${groupHtml}</details>`
+        : "";
+    }
+
     async function loadStatus() {
       try {
         const response = await fetch("/api/kiwix/status");
         const data = await response.json();
-        const names = (data.zim_files || []).map((item) => item.name).join(" / ");
-        statusEl.textContent = data.zim_available ? `ZIM 已就绪：${names}` : "未发现本地 ZIM 文件。";
+        renderStatus(data);
       } catch (error) {
         statusEl.textContent = `Kiwix 状态读取失败：${error.message}`;
       }
@@ -109,11 +430,13 @@
 
       statusEl.textContent = "正在查询 Kiwix...";
       resultsEl.innerHTML = '<div class="kiwix-empty">查询中...</div>';
+      closeArticle();
 
       try {
         const response = await fetch(`/api/kiwix/search?q=${encodeURIComponent(query)}`);
         const data = await response.json();
         const results = data.results || [];
+        currentResults = results;
         statusEl.textContent = `查询完成：${results.length} 条结果`;
 
         if (!results.length) {
@@ -121,20 +444,225 @@
           return;
         }
 
-        resultsEl.innerHTML = results.map((item) => `
-          <article class="kiwix-card">
-            <h3>${escapeHtml(item.title)}</h3>
-            <p>${escapeHtml(item.snippet)}</p>
-            <small>${escapeHtml(sourceLabel(item.source))} · confidence ${escapeHtml(item.relevance_score ?? "")}</small>
-            <small>${escapeHtml(metaLine(item))}</small>
-            ${item.url ? `<small>${escapeHtml(item.url)}</small>` : ""}
-          </article>
-        `).join("");
+        resultsEl.innerHTML = results.map((item, index) => {
+          const canOpen = item.article_path && item.zim_filename;
+          return `
+            <article class="kiwix-card ${canOpen ? "" : "is-disabled"}" ${canOpen ? `onclick="openArticle(${index})" tabindex="0" role="button" aria-label="打开 ${escapeHtml(item.title)}"` : ""}>
+              <h3>${escapeHtml(item.title)}</h3>
+              <p>${escapeHtml(item.snippet)}</p>
+              <small>${escapeHtml(sourceLabel(item.source))} · confidence ${escapeHtml(item.relevance_score ?? "")}</small>
+              <small>${escapeHtml(metaLine(item))}</small>
+              ${item.matched_terms?.length ? `<small>命中：${escapeHtml(item.matched_terms.join("、"))}</small>` : ""}
+              <div class="kiwix-card-action-hint">${canOpen ? "点击卡片查看内容" : "暂无可打开正文"}</div>
+            </article>
+          `;
+        }).join("");
       } catch (error) {
         statusEl.textContent = `查询失败：${error.message}`;
         resultsEl.innerHTML = '<div class="kiwix-empty">Kiwix 查询失败。</div>';
       }
     }
+
+    async function openArticle(index) {
+      const item = currentResults[index];
+      if (!item || !item.article_path || !item.zim_filename) return;
+
+      const source = sourceKey(item);
+      await openPrimaryArticle(source, item.article_path, item.title);
+    }
+
+    function articleShellHtml() {
+      return `
+        <div class="kiwix-reader-header">
+          <div>
+            <h2 id="kiwix-reader-title" class="kiwix-reader-title">Kiwix 阅读</h2>
+            <div class="kiwix-reader-meta">点击正文链接时，下方会打开关联条目。</div>
+          </div>
+          <button class="kiwix-close-button" onclick="closeArticle()" type="button">关闭</button>
+        </div>
+        <div id="kiwix-reader-stack" class="kiwix-reader-stack">
+          <section id="kiwix-primary-pane" class="kiwix-reader-pane"></section>
+        </div>
+      `;
+    }
+
+    function paneHtml(data, source, articlePath, label, options = {}) {
+      const canClose = Boolean(options.canClose);
+      const hideHeader = Boolean(options.hideHeader);
+      const showTitle = options.showTitle !== false;
+      const isLinked = Boolean(options.isLinked);
+      const title = data.title || articlePath || "未命名条目";
+      const body = data.html || `<p>${escapeHtml(data.text || data.content || "这篇资料没有可显示的正文。")}</p>`;
+      if (hideHeader) {
+        return `<div class="kiwix-reader-content"><div class="kiwix-article-body">${body}</div></div>`;
+      }
+      return `
+        <div class="kiwix-pane-header ${isLinked ? "is-linked" : ""}">
+          <div>
+            <p class="kiwix-pane-label">${escapeHtml(label)}</p>
+            ${showTitle ? `<h3 class="kiwix-pane-title">${escapeHtml(title)}</h3>` : ""}
+            <div class="kiwix-pane-meta">${escapeHtml(source)} · ${escapeHtml(data.path || articlePath)}</div>
+          </div>
+          ${canClose ? '<button class="kiwix-pane-button" onclick="closeLinkedPane()" type="button">收起</button>' : ""}
+        </div>
+        <div class="kiwix-reader-content"><div class="kiwix-article-body">${body}</div></div>
+      `;
+    }
+
+    function setReaderTitle(title, source, articlePath) {
+      const titleEl = document.getElementById("kiwix-reader-title");
+      const metaEl = readerEl.querySelector(".kiwix-reader-header .kiwix-reader-meta");
+      if (titleEl) titleEl.textContent = title || "Kiwix 阅读";
+      if (metaEl) metaEl.textContent = `${source || "ZIM"} · ${articlePath || ""}`;
+    }
+
+    async function fetchArticle(source, articlePath) {
+      const response = await fetch(`/api/kiwix/article?source=${encodeURIComponent(source)}&path=${encodeURIComponent(articlePath)}`);
+      const data = await response.json();
+      if (!response.ok || !data.ok) {
+        throw new Error(data.detail || "文章读取失败");
+      }
+      return data;
+    }
+
+    async function openPrimaryArticle(source, articlePath, fallbackTitle = "") {
+      if (!source || !articlePath) return;
+
+      readerModalEl.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      readerEl.innerHTML = articleShellHtml();
+      const primaryPane = document.getElementById("kiwix-primary-pane");
+      primaryPane.innerHTML = '<div class="kiwix-reader-content"><div class="kiwix-empty">正在打开文章...</div></div>';
+
+      try {
+        const data = await fetchArticle(source, articlePath);
+        setReaderTitle(data.title || fallbackTitle || articlePath, source, data.path || articlePath);
+        primaryPane.innerHTML = paneHtml(data, source, articlePath, "原条目", { hideHeader: true });
+      } catch (error) {
+        setReaderTitle("文章打开失败", source, articlePath);
+        primaryPane.innerHTML = `<div class="kiwix-reader-content"><div class="kiwix-empty">打开失败：${escapeHtml(error.message)}</div></div>`;
+      }
+    }
+
+    async function openLinkedArticle(source, articlePath, fallbackTitle = "") {
+      if (!source || !articlePath) return;
+
+      const stack = document.getElementById("kiwix-reader-stack");
+      if (!stack) {
+        await openPrimaryArticle(source, articlePath, fallbackTitle);
+        return;
+      }
+
+      stack.classList.add("has-linked");
+      let linkedPane = document.getElementById("kiwix-linked-pane");
+      if (!linkedPane) {
+        linkedPane = document.createElement("section");
+        linkedPane.id = "kiwix-linked-pane";
+        linkedPane.className = "kiwix-reader-pane";
+        stack.appendChild(linkedPane);
+      }
+      linkedPane.innerHTML = '<div class="kiwix-reader-content"><div class="kiwix-empty">正在打开关联条目...</div></div>';
+
+      try {
+        const data = await fetchArticle(source, articlePath);
+        linkedPane.innerHTML = paneHtml(data, source, articlePath, "链接条目", { canClose: true, isLinked: true });
+      } catch (error) {
+        linkedPane.innerHTML = `<div class="kiwix-reader-content"><div class="kiwix-empty">打开失败：${escapeHtml(error.message)}</div></div>`;
+      }
+    }
+
+    function closeLinkedPane() {
+      const stack = document.getElementById("kiwix-reader-stack");
+      const linkedPane = document.getElementById("kiwix-linked-pane");
+      if (linkedPane) linkedPane.remove();
+      if (stack) stack.classList.remove("has-linked");
+    }
+
+    readerEl.addEventListener("click", async (event) => {
+      const image = event.target.closest(".kiwix-reader-content img");
+      if (image) {
+        event.preventDefault();
+        event.stopPropagation();
+        openImageViewer(image.currentSrc || image.src, image.alt || image.title || "");
+        return;
+      }
+
+      const link = event.target.closest("a[data-kiwix-path]");
+      if (!link) return;
+
+      event.preventDefault();
+      const source = link.dataset.kiwixSource || "";
+      const articlePath = link.dataset.kiwixPath || "";
+      await openLinkedArticle(source, articlePath, link.textContent || articlePath);
+    });
+
+    function closeArticle() {
+      readerModalEl.classList.remove("is-open");
+      readerEl.innerHTML = '<div class="kiwix-empty">正在打开文章...</div>';
+      document.body.style.overflow = "";
+      closeImageViewer();
+    }
+
+    function openImageViewer(src, caption = "") {
+      if (!src) return;
+      currentImageZoom = 2;
+      imageViewerImgEl.src = src;
+      imageViewerImgEl.alt = caption;
+      imageViewerCaptionEl.textContent = caption;
+      imageViewerEl.classList.add("is-open");
+      applyImageZoom();
+    }
+
+    function closeImageViewer() {
+      imageViewerEl.classList.remove("is-open");
+      imageViewerImgEl.removeAttribute("src");
+      imageViewerImgEl.removeAttribute("style");
+      imageViewerCaptionEl.textContent = "";
+    }
+
+    function applyImageZoom() {
+      const naturalWidth = imageViewerImgEl.naturalWidth || 0;
+      const naturalHeight = imageViewerImgEl.naturalHeight || 0;
+      imageZoomLabelEl.textContent = `${currentImageZoom.toFixed(2).replace(/\.00$/, "").replace(/0$/, "")}x`;
+      if (!naturalWidth || !naturalHeight) return;
+
+      imageViewerImgEl.style.width = `${Math.round(naturalWidth * currentImageZoom)}px`;
+      imageViewerImgEl.style.height = `${Math.round(naturalHeight * currentImageZoom)}px`;
+      requestAnimationFrame(() => {
+        imageStageEl.scrollLeft = Math.max(0, (imageStageEl.scrollWidth - imageStageEl.clientWidth) / 2);
+        imageStageEl.scrollTop = 0;
+      });
+    }
+
+    function setImageZoom(zoom) {
+      currentImageZoom = Math.min(6, Math.max(0.5, Number(zoom) || 2));
+      applyImageZoom();
+    }
+
+    function changeImageZoom(delta) {
+      setImageZoom(currentImageZoom + delta);
+    }
+
+    imageViewerImgEl.addEventListener("load", applyImageZoom);
+
+    readerModalEl.addEventListener("click", (event) => {
+      if (event.target === readerModalEl) closeArticle();
+    });
+
+    imageViewerEl.addEventListener("click", (event) => {
+      if (event.target === imageViewerEl) closeImageViewer();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && imageViewerEl.classList.contains("is-open")) {
+        closeImageViewer();
+        return;
+      }
+      if (event.key === "Escape" && readerModalEl.classList.contains("is-open")) closeArticle();
+      if ((event.key === "Enter" || event.key === " ") && document.activeElement?.classList?.contains("kiwix-card")) {
+        document.activeElement.click();
+      }
+    });
 
     input.addEventListener("keydown", (event) => {
       if (event.key === "Enter") searchKiwix();

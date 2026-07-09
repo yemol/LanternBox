@@ -1,10 +1,25 @@
 """Local ZIM reader with manifest-based role and channel filtering."""
 
 import json
+import mimetypes
+import posixpath
 import re
-from html import unescape
+from html import escape, unescape
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
+from urllib.parse import quote, unquote, urlsplit
+
+try:
+    from bs4 import BeautifulSoup
+    from bs4 import NavigableString
+except Exception:  # BeautifulSoup is optional at import time; article cleaning falls back to plain text.
+    BeautifulSoup = None  # type: ignore
+    NavigableString = None  # type: ignore
+
+try:
+    from opencc import OpenCC
+except Exception:
+    OpenCC = None  # type: ignore
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -25,6 +40,7 @@ ZIM_WEIGHTS = {
 
 zim_sources: Dict[str, Path] = {}
 zim_client_cache: Dict[str, Any] = {}
+opencc_converter = OpenCC("t2s") if OpenCC else None
 
 DOMAIN_KEYWORDS: Dict[str, List[str]] = {
     "water": [
@@ -155,8 +171,385 @@ def _strip_html(value: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+def _to_simplified(value: Any) -> str:
+    text = str(value or "")
+    if not text or opencc_converter is None:
+        return text
+    return opencc_converter.convert(text)
+
+
+def _simplify_soup_content(node: Any) -> None:
+    if BeautifulSoup is None or NavigableString is None:
+        return
+
+    for text_node in list(node.find_all(string=True)):
+        parent_name = str(getattr(text_node.parent, "name", "") or "").lower()
+        if parent_name in {"script", "style", "code", "pre"}:
+            continue
+        simplified = _to_simplified(str(text_node))
+        if simplified != str(text_node):
+            text_node.replace_with(NavigableString(simplified))
+
+    for tag in list(node.find_all(True)):
+        for attr in ("alt", "title"):
+            if tag.has_attr(attr):
+                tag[attr] = _to_simplified(tag.get(attr, ""))
+
+
+ARTICLE_DROP_SELECTORS = [
+    "script", "style", "noscript", "template", "svg",
+    "header", "footer", "nav",
+    ".mw-editsection", ".mw-jump-link", ".printfooter",
+    ".metadata", ".noprint", ".catlinks", ".navbox", ".vertical-navbox",
+    ".authority-control", ".ambox", ".sistersitebox",
+    ".reference", ".references", ".reflist", ".refbegin",
+    "ol.references", "div.reflist", "sup.reference",
+    "table.infobox", "table.sidebar", "table.navbox",
+]
+
+ARTICLE_BODY_SELECTORS = [
+    "main article",
+    "article",
+    "main",
+    "#mw-content-text .mw-parser-output",
+    "#mw-content-text",
+    ".mw-parser-output",
+    "#content",
+    "body",
+]
+
+ARTICLE_ALLOWED_TAGS = {
+    "article", "section", "h1", "h2", "h3", "h4", "p", "br",
+    "ul", "ol", "li", "strong", "b", "em", "i", "code", "pre",
+    "blockquote", "table", "thead", "tbody", "tr", "th", "td", "caption",
+    "figure", "figcaption", "img", "a", "span", "div",
+}
+
+ARTICLE_ALLOWED_ATTRS = {
+    "a": {"href", "title"},
+    "img": {"src", "alt", "title", "width", "height"},
+    "th": {"colspan", "rowspan"},
+    "td": {"colspan", "rowspan"},
+}
+
+ARTICLE_STOP_HEADINGS = {
+    "参考文献", "參考文獻", "参考资料", "參考資料", "注释", "註釋", "脚注", "來源",
+    "外部链接", "外部連結", "参见", "參見", "延伸阅读", "延伸閱讀",
+    "相关条目", "相關條目", "规范控制", "规范控制数据库", "權威控制", "权威控制",
+}
+
+ARTICLE_DROP_HEADING_PATTERNS = [
+    re.compile(r"^(参考|參考|注释|註釋|脚注|來源|外部|参见|參見|延伸|相关|相關|规范|權威)"),
+]
+
+
+def _normalize_article_text(value: str) -> str:
+    text = unescape(str(value or ""))
+    text = _to_simplified(text)
+    text = text.replace("\xa0", " ")
+    text = re.sub(r"\[\s*编辑\s*\]", "", text)
+    text = re.sub(r"\[\s*編輯\s*\]", "", text)
+    text = re.sub(r"\[\s*\d+(?:\.\d+)?\s*\]", "", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def _drop_following_heading(heading: Any) -> None:
+    """Remove a stop heading and following siblings until the next same-or-higher heading."""
+    try:
+        level = int(str(heading.name)[1]) if str(heading.name).startswith("h") else 2
+    except Exception:
+        level = 2
+
+    current = heading.next_sibling
+    heading.decompose()
+    while current is not None:
+        next_node = current.next_sibling
+        name = getattr(current, "name", "") or ""
+        if re.fullmatch(r"h[1-6]", str(name)):
+            try:
+                next_level = int(str(name)[1])
+            except Exception:
+                next_level = 6
+            if next_level <= level:
+                break
+        try:
+            current.decompose()
+        except Exception:
+            try:
+                current.extract()
+            except Exception:
+                pass
+        current = next_node
+
+
+def _is_stop_heading(text: str) -> bool:
+    text = re.sub(r"\s+", "", str(text or "")).strip("：:")
+    if not text:
+        return False
+    if text in ARTICLE_STOP_HEADINGS:
+        return True
+    return any(pattern.search(text) for pattern in ARTICLE_DROP_HEADING_PATTERNS)
+
+
+def _safe_internal_href(href: str) -> str:
+    href = str(href or "").strip()
+    if not href:
+        return ""
+    if href.startswith("#"):
+        return href
+    if href.startswith(("A/", "I/", "-/", "../", "./")):
+        return href
+    if re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", href):
+        # Do not allow javascript/data/http links inside the offline article reader.
+        return ""
+    return href
+
+
+def _split_reference(value: str) -> tuple[str, str]:
+    value = str(value or "").strip()
+    if not value:
+        return "", ""
+
+    split = urlsplit(value)
+    path = split.path or value.split("#", 1)[0].split("?", 1)[0]
+    return path, split.fragment or ""
+
+
+def _resolve_zim_path(value: str, base_path: str = "") -> str:
+    path, _ = _split_reference(value)
+    path = unescape(unquote(path)).strip()
+    if not path:
+        return ""
+
+    path = path.replace("\\", "/")
+    while path.startswith("/"):
+        path = path[1:]
+
+    if path.startswith("./"):
+        path = path[2:]
+
+    if path.startswith("../"):
+        base_dir = posixpath.dirname(str(base_path or "").replace("\\", "/"))
+        path = posixpath.normpath(posixpath.join(base_dir, path))
+    else:
+        path = posixpath.normpath(path)
+
+    return "" if path in {"", "."} else path
+
+
+def _api_resource_url(source_name: str, resource_path: str) -> str:
+    return (
+        f"/api/kiwix/resource?source={quote(str(source_name or ''), safe='')}"
+        f"&path={quote(str(resource_path or ''), safe='')}"
+    )
+
+
+def _api_article_url(source_name: str, article_path: str) -> str:
+    return (
+        f"/api/kiwix/article?source={quote(str(source_name or ''), safe='')}"
+        f"&path={quote(str(article_path or ''), safe='')}"
+    )
+
+
+def _rewrite_zim_references(node: Any, source_name: str, base_path: str) -> None:
+    for tag in list(node.find_all("img")):
+        raw_src = str(
+            tag.get("src")
+            or tag.get("data-src")
+            or tag.get("data-original")
+            or tag.get("data-file")
+            or ""
+        ).strip()
+        if not raw_src:
+            tag.decompose()
+            continue
+
+        src_path = _resolve_zim_path(raw_src, base_path=base_path)
+        if not src_path:
+            tag.decompose()
+            continue
+
+        tag["src"] = _api_resource_url(source_name, src_path)
+        tag["loading"] = "lazy"
+
+    for tag in list(node.find_all("a")):
+        raw_href = str(tag.get("href") or "").strip()
+        if not raw_href or raw_href.startswith("#"):
+            if tag.has_attr("href"):
+                del tag["href"]
+            continue
+
+        if re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", raw_href):
+            if tag.has_attr("href"):
+                del tag["href"]
+            continue
+
+        article_path = _resolve_zim_path(raw_href, base_path=base_path)
+        _, fragment = _split_reference(raw_href)
+        if not article_path:
+            if tag.has_attr("href"):
+                del tag["href"]
+            continue
+
+        tag["href"] = _api_article_url(source_name, article_path)
+        tag["class"] = "kiwix-internal-link"
+        tag["data-kiwix-source"] = source_name
+        tag["data-kiwix-path"] = article_path
+        if fragment:
+            tag["data-kiwix-fragment"] = fragment
+
+
+def _sanitize_article_node(node: Any) -> None:
+    for tag in list(node.find_all(True)):
+        name = str(tag.name or "").lower()
+        if name not in ARTICLE_ALLOWED_TAGS:
+            tag.unwrap()
+            continue
+
+        if name == "img":
+            src = str(
+                tag.get("src")
+                or tag.get("data-src")
+                or tag.get("data-original")
+                or tag.get("data-file")
+                or ""
+            ).strip()
+            if src:
+                tag["src"] = src
+
+        allowed = ARTICLE_ALLOWED_ATTRS.get(name, set())
+        for attr in list(tag.attrs):
+            if attr not in allowed:
+                del tag.attrs[attr]
+
+        if name == "a":
+            href = _safe_internal_href(tag.get("href", ""))
+            if href:
+                tag["href"] = href
+            elif tag.has_attr("href"):
+                del tag["href"]
+
+        if name == "img":
+            src = str(tag.get("src") or "").strip()
+            if not src or re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", src):
+                tag.decompose()
+
+
+def _remove_empty_article_nodes(node: Any) -> None:
+    """Remove empty wrappers left after Wikipedia/Kiwix cleanup."""
+    removable_tags = {"a", "span", "div", "section", "p", "figure"}
+
+    changed = True
+    while changed:
+        changed = False
+        for tag in list(node.find_all(removable_tags)):
+            has_text = bool(tag.get_text(" ", strip=True))
+            has_structural_child = bool(tag.find([
+                "img", "table", "ul", "ol", "li",
+                "p", "h1", "h2", "h3", "h4", "pre", "code", "blockquote",
+            ]))
+            if not has_text and not has_structural_child:
+                tag.decompose()
+                changed = True
+
+
+def _unwrap_layout_wrappers(node: Any) -> None:
+    """Flatten non-semantic wrappers so the reader starts with real article blocks."""
+    for tag in list(node.find_all(["span", "div"])):
+        # After sanitizing, div/span attributes are already removed. If they only
+        # serve layout/template purposes, unwrap them and keep their children.
+        if not tag.attrs:
+            tag.unwrap()
+
+
+def _drop_leading_non_content_nodes(node: Any) -> None:
+    """Remove leftover anchors/empty strings before the first meaningful block."""
+    meaningful_tags = {"p", "h2", "h3", "h4", "ul", "ol", "table", "figure", "blockquote", "pre"}
+
+    for child in list(node.children):
+        name = str(getattr(child, "name", "") or "").lower()
+        if name in meaningful_tags and getattr(child, "get_text", lambda *a, **k: "")(" ", strip=True):
+            break
+
+        text = child.get_text(" ", strip=True) if hasattr(child, "get_text") else str(child).strip()
+        if not text:
+            try:
+                child.decompose()
+            except Exception:
+                try:
+                    child.extract()
+                except Exception:
+                    pass
+            continue
+
+        # If the first textual node is meaningful raw text, keep it.
+        break
+
+
+def _postprocess_article_body(body: Any) -> None:
+    _remove_empty_article_nodes(body)
+    _unwrap_layout_wrappers(body)
+    _remove_empty_article_nodes(body)
+    _drop_leading_non_content_nodes(body)
+
+
+def _select_article_body(soup: Any) -> Any:
+    for selector in ARTICLE_BODY_SELECTORS:
+        found = soup.select_one(selector)
+        if found:
+            return found
+    return soup
+
+
+def _clean_html_article(raw_html: str, source_name: str = "", article_path: str = "") -> Dict[str, str]:
+    """Return reader-safe article HTML plus normalized text from a ZIM HTML item."""
+    if BeautifulSoup is None:
+        text = _strip_html(raw_html)
+        return {
+            "html": f"<article class=\"kiwix-article\"><p>{escape(_to_simplified(unescape(text)))}</p></article>",
+            "text": _normalize_article_text(text),
+            "content_type": "text/plain",
+        }
+
+    soup = BeautifulSoup(raw_html or "", "html.parser")
+
+    for selector in ARTICLE_DROP_SELECTORS:
+        for tag in list(soup.select(selector)):
+            tag.decompose()
+
+    body = _select_article_body(soup)
+
+    # Remove reference/navigation sections at the source instead of guessing in the browser.
+    for heading in list(body.find_all(re.compile(r"^h[1-6]$"))):
+        if _is_stop_heading(heading.get_text(" ", strip=True)):
+            _drop_following_heading(heading)
+
+    # Wikipedia pages often carry a duplicated page title in h1; the modal already owns the title.
+    for h1 in list(body.find_all("h1")):
+        h1.decompose()
+
+    _sanitize_article_node(body)
+    _postprocess_article_body(body)
+    _simplify_soup_content(body)
+    _rewrite_zim_references(body, source_name=source_name, base_path=article_path)
+
+    # Convert cleaned content into an explicit article contract for the frontend.
+    html = "".join(str(child) for child in body.children).strip()
+    if not html:
+        html = "<p></p>"
+    html = f'<article class="kiwix-article">{html}</article>'
+
+    text = _normalize_article_text(body.get_text(" ", strip=True))
+    return {
+        "html": html,
+        "text": text,
+        "content_type": "text/html",
+    }
+
+
 def _compact_text(value: Any) -> str:
-    return re.sub(r"[^\u4e00-\u9fffA-Za-z0-9]+", "", str(value or "")).lower()
+    return re.sub(r"[^\u4e00-\u9fffA-Za-z0-9]+", "", _to_simplified(str(value or ""))).lower()
 
 
 def _unique(items: Iterable[str]) -> List[str]:
@@ -656,6 +1049,7 @@ class ZimClient:
                 "source": "kiwix_zim",
                 "zim_source": self.source_name,
                 "url": article.get("url"),
+                "article_path": article.get("path"),
                 "raw_score": round(raw_score, 4),
                 "score": round(float(relevance["score"]), 4),
                 "matched_terms": relevance["matched_terms"],
@@ -686,11 +1080,15 @@ class ZimClient:
         if not title:
             return None
 
-        candidates = [
+        decoded_title = unquote(title)
+        normalized_title = _resolve_zim_path(decoded_title) or decoded_title
+        candidates = _unique([
             title,
-            title.replace(" ", "_"),
-            title.replace("_", " "),
-        ]
+            decoded_title,
+            normalized_title,
+            normalized_title.replace(" ", "_"),
+            normalized_title.replace("_", " "),
+        ])
 
         entry = None
         for candidate in candidates:
@@ -711,17 +1109,70 @@ class ZimClient:
 
         try:
             item = entry.get_item()
-            content = bytes(item.content).decode("utf-8", errors="ignore")
+            raw_html = bytes(item.content).decode("utf-8", errors="ignore")
+            path = str(item.path or getattr(entry, "path", "") or title)
+            cleaned = _clean_html_article(
+                raw_html,
+                source_name=self.source_name,
+                article_path=path,
+            )
             return {
-                "title": str(item.title or entry.title or title),
-                "content": _strip_html(content),
-                "url": f"zim://{self.source_name}/{item.path}",
+                "title": _to_simplified(str(item.title or entry.title or title)),
+                "html": cleaned["html"],
+                "text": cleaned["text"],
+                "content": cleaned["text"],  # Backward-compatible alias for old callers.
+                "raw_html": raw_html,
+                "content_type": cleaned["content_type"],
+                "path": path,
+                "url": f"zim://{self.source_name}/{path}",
+            }
+        except Exception:
+            return None
+
+    def get_resource(self, resource_path: str) -> Optional[Dict[str, Any]]:
+        if not self.archive:
+            return None
+
+        normalized_path = _resolve_zim_path(resource_path)
+        if not normalized_path:
+            return None
+
+        candidates = _unique([
+            resource_path,
+            normalized_path,
+            f"./{normalized_path}",
+            unquote(resource_path),
+            unquote(normalized_path),
+        ])
+
+        entry = None
+        for candidate in candidates:
+            try:
+                entry = self.archive.get_entry_by_path(candidate)
+                break
+            except Exception:
+                pass
+
+        if not entry:
+            return None
+
+        try:
+            item = entry.get_item()
+            content = bytes(item.content)
+            path = str(item.path or getattr(entry, "path", "") or normalized_path)
+            content_type = str(getattr(item, "mimetype", "") or "").strip()
+            if not content_type:
+                content_type = mimetypes.guess_type(path)[0] or "application/octet-stream"
+            return {
+                "content": content,
+                "content_type": content_type,
+                "path": path,
             }
         except Exception:
             return None
 
     def extract_snippet(self, content: str, limit: int = 360) -> str:
-        text = re.sub(r"\s+", " ", str(content or "")).strip()
+        text = re.sub(r"\s+", " ", _to_simplified(str(content or ""))).strip()
         return text[:limit]
 
 
@@ -844,21 +1295,49 @@ def query_for_lookup(query: str, limit: int = 8) -> List[Dict]:
 
 
 def get_article(title: str, file_path: Optional[str] = None, source: Optional[str] = None) -> Optional[Dict]:
+    metadata = None
     if source and not file_path:
         if not zim_sources:
             refresh_zim_sources()
         path = zim_sources.get(source)
+        metadata_by_source = {_source_key(entry): entry for entry in get_zim_manifest()}
+        metadata = metadata_by_source.get(source)
     else:
         path = Path(file_path) if file_path else _default_zim_file()
 
     if not path:
         return None
 
-    metadata = _manifest_entry_from_path(path)
-    client = ZimClient(source_name=source or _source_key(metadata), metadata=metadata)
-    if not client.load_zim(str(path)):
-        return None
+    metadata = metadata or _manifest_entry_from_path(path)
+    client = _client_for_entry(metadata) if metadata.get("filename") else None
+    if not client:
+        client = ZimClient(source_name=source or _source_key(metadata), metadata=metadata)
+        if not client.load_zim(str(path)):
+            return None
     return client.get_article(title)
+
+
+def get_resource(resource_path: str, file_path: Optional[str] = None, source: Optional[str] = None) -> Optional[Dict[str, Any]]:
+    metadata = None
+    if source and not file_path:
+        if not zim_sources:
+            refresh_zim_sources()
+        path = zim_sources.get(source)
+        metadata_by_source = {_source_key(entry): entry for entry in get_zim_manifest()}
+        metadata = metadata_by_source.get(source)
+    else:
+        path = Path(file_path) if file_path else _default_zim_file()
+
+    if not path:
+        return None
+
+    metadata = metadata or _manifest_entry_from_path(path)
+    client = _client_for_entry(metadata) if metadata.get("filename") else None
+    if not client:
+        client = ZimClient(source_name=source or _source_key(metadata), metadata=metadata)
+        if not client.load_zim(str(path)):
+            return None
+    return client.get_resource(resource_path)
 
 
 def extract_snippet(content: str, limit: int = 360) -> str:

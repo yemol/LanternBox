@@ -402,6 +402,7 @@ def _fetch_zim_results(
                     language=hit.get("language"),
                     role=hit.get("role"),
                     usage_policy=hit.get("usage_policy"),
+                    article_path=hit.get("article_path"),
                     matched_terms=hit.get("matched_terms") or [],
                     matched_terms_count=int(hit.get("matched_terms_count") or 0),
                 )
