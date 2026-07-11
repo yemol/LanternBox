@@ -603,6 +603,260 @@
       margin-top: 6px;
     }
 
+    .assistant-kiwix-shell {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      height: min(62vh, 720px);
+      padding: 0;
+      overflow: hidden;
+      background: rgba(4, 13, 26, 0.4);
+    }
+
+    .assistant-kiwix-stack {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr);
+    }
+
+    .assistant-kiwix-stack.has-linked {
+      grid-template-rows: minmax(180px, 1fr) minmax(180px, 0.9fr);
+    }
+
+    .assistant-kiwix-pane {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid rgba(137, 204, 255, 0.12);
+    }
+
+    .assistant-kiwix-pane:first-child {
+      border-top: 0;
+    }
+
+    .assistant-kiwix-pane-header {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(137, 204, 255, 0.1);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .assistant-kiwix-pane-header.is-linked {
+      border-bottom-color: rgba(255, 190, 104, 0.24);
+      background: rgba(255, 190, 104, 0.08);
+    }
+
+    .assistant-kiwix-pane-label {
+      margin: 0 0 4px;
+      color: var(--accent-bright);
+      font-size: 12px;
+      line-height: 1.3;
+      font-weight: 900;
+    }
+
+    .assistant-kiwix-pane-header.is-linked .assistant-kiwix-pane-label {
+      color: #ffd28a;
+    }
+
+    .assistant-kiwix-pane-title {
+      margin: 0;
+      color: var(--text-main);
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .assistant-kiwix-pane-meta {
+      margin-top: 4px;
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .assistant-kiwix-pane-header.is-linked .assistant-kiwix-pane-meta {
+      color: rgba(255, 225, 178, 0.74);
+    }
+
+    .assistant-kiwix-pane-button {
+      flex: 0 0 auto;
+      min-height: 32px;
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 210, 138, 0.32);
+      color: #ffe1b2;
+      background: rgba(255, 190, 104, 0.12);
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .assistant-kiwix-pane-button:hover {
+      border-color: rgba(255, 210, 138, 0.62);
+      background: rgba(255, 190, 104, 0.2);
+    }
+
+    .assistant-kiwix-reader-content {
+      min-height: 0;
+      overflow: auto;
+      padding: 18px 20px 22px;
+      color: var(--text-soft);
+      font-size: 15px;
+      line-height: 1.86;
+    }
+
+    .assistant-kiwix-article-body {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .assistant-kiwix-reader-content h1,
+    .assistant-kiwix-reader-content h2,
+    .assistant-kiwix-reader-content h3 {
+      color: var(--text-main);
+      line-height: 1.38;
+      margin: 1.1em 0 0.45em;
+    }
+
+    .assistant-kiwix-reader-content h1 { font-size: 25px; }
+    .assistant-kiwix-reader-content h2 {
+      font-size: 21px;
+      padding-top: 0.65em;
+      border-top: 1px solid rgba(137, 204, 255, 0.1);
+    }
+    .assistant-kiwix-reader-content h2:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+    .assistant-kiwix-reader-content h3 { font-size: 18px; }
+    .assistant-kiwix-reader-content p { margin: 0.9em 0; text-align: left; }
+    .assistant-kiwix-reader-content ul,
+    .assistant-kiwix-reader-content ol { margin: 0.72em 0; padding-left: 1.35em; }
+    .assistant-kiwix-reader-content li { margin: 0.34em 0; }
+    .assistant-kiwix-reader-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+      display: block;
+      overflow-x: auto;
+    }
+    .assistant-kiwix-reader-content th,
+    .assistant-kiwix-reader-content td {
+      padding: 8px 10px;
+      border: 1px solid rgba(137, 204, 255, 0.12);
+      vertical-align: top;
+    }
+    .assistant-kiwix-reader-content a {
+      color: var(--text-main);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .assistant-kiwix-reader-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      cursor: zoom-in;
+    }
+
+    .assistant-image-viewer {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(8px);
+    }
+
+    .assistant-image-viewer.is-open {
+      display: flex;
+    }
+
+    .assistant-image-viewer-card {
+      width: min(1180px, 100%);
+      height: min(92vh, 920px);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .assistant-image-toolbar {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .assistant-image-zoom-button {
+      min-height: 34px;
+      min-width: 42px;
+      padding: 7px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-main);
+      background: rgba(9, 18, 31, 0.84);
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .assistant-image-zoom-button:hover {
+      border-color: rgba(255, 210, 138, 0.55);
+      background: rgba(255, 190, 104, 0.12);
+    }
+
+    .assistant-image-stage {
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 10px;
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .assistant-image-viewer img {
+      display: block;
+      max-width: none;
+      max-height: none;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .assistant-image-viewer-caption {
+      color: var(--text-soft);
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .assistant-image-viewer-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      min-height: 36px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-main);
+      background: rgba(9, 18, 31, 0.84);
+      font-weight: 900;
+      cursor: pointer;
+    }
+
     @media (max-width: 900px) {
       .assistant-layout {
         grid-template-columns: 1fr;
@@ -1363,6 +1617,11 @@
               <div class="list" id="wikiList">
                 <div class="empty-text">暂无本地 Wiki 来源。</div>
               </div>
+
+              <div class="section-title">Kiwix / ZIM 来源</div>
+              <div class="list" id="kiwixList">
+                <div class="empty-text">暂无 Kiwix / ZIM 来源。</div>
+              </div>
             </div>
           </div>
 
@@ -1406,6 +1665,24 @@
       </div>
 
       <div id="guide-modal-body" class="guide-modal-body"></div>
+    </div>
+  </div>
+
+  <div id="assistant-image-viewer" class="assistant-image-viewer" role="dialog" aria-modal="true" aria-label="图片放大查看">
+    <button class="assistant-image-viewer-close" onclick="closeAssistantImageViewer()" type="button">关闭</button>
+    <div class="assistant-image-viewer-card">
+      <div class="assistant-image-toolbar">
+        <button class="assistant-image-zoom-button" onclick="changeAssistantImageZoom(-0.25)" type="button">-</button>
+        <button class="assistant-image-zoom-button" onclick="setAssistantImageZoom(1)" type="button">1x</button>
+        <button class="assistant-image-zoom-button" onclick="setAssistantImageZoom(2)" type="button">2x</button>
+        <button class="assistant-image-zoom-button" onclick="setAssistantImageZoom(3)" type="button">3x</button>
+        <button class="assistant-image-zoom-button" onclick="changeAssistantImageZoom(0.25)" type="button">+</button>
+        <span id="assistant-image-zoom-label" class="assistant-image-viewer-caption">2x</span>
+      </div>
+      <div id="assistant-image-stage" class="assistant-image-stage">
+        <img id="assistant-image-viewer-img" alt="" />
+      </div>
+      <div id="assistant-image-viewer-caption" class="assistant-image-viewer-caption"></div>
     </div>
   </div>
 
@@ -1456,6 +1733,7 @@
     let currentMode = "emergency";
     let latestRelatedGuides = [];
     let latestRelatedWikis = [];
+    let latestRelatedKiwix = [];
     let latestRetrievalDebugData = null;
     let latestUserMessage = '';
     let conversationHistory = [];
@@ -1466,6 +1744,8 @@
     let autoSpeakEnabled = false;
     let retrievalDebugDetailsExpanded = false;
     let currentModalSpeechText = '';
+    let assistantImageZoom = 2;
+    let currentAssistantKiwixSource = "";
     let isModalSpeaking = false;
     let audioUnlocked = false;
     let audioContext = null;
@@ -1477,6 +1757,12 @@
     const evidencePlanList = document.getElementById("evidencePlanList");
     const guideList = document.getElementById("guideList");
     const wikiList = document.getElementById("wikiList");
+    const kiwixList = document.getElementById("kiwixList");
+    const assistantImageViewerEl = document.getElementById("assistant-image-viewer");
+    const assistantImageStageEl = document.getElementById("assistant-image-stage");
+    const assistantImageViewerImgEl = document.getElementById("assistant-image-viewer-img");
+    const assistantImageViewerCaptionEl = document.getElementById("assistant-image-viewer-caption");
+    const assistantImageZoomLabelEl = document.getElementById("assistant-image-zoom-label");
     const sourceSummary = document.getElementById("sourceSummary");
     const companionQuietNote = document.getElementById("companionQuietNote");
     const v2DiagnosticsPanel = document.getElementById("v2DiagnosticsPanel");
@@ -1565,6 +1851,7 @@
     function clearCompanionReferenceUI() {
       latestRelatedGuides = [];
       latestRelatedWikis = [];
+      latestRelatedKiwix = [];
       latestRetrievalDebugData = null;
 
       evidencePlanCountEl.textContent = "-";
@@ -1575,6 +1862,9 @@
       evidencePlanList.innerHTML = '<div class="empty-text">陪伴模式下默认不展开 Retrieval v2 检索计划。</div>';
       guideList.innerHTML = '<div class="empty-text">陪伴模式下默认不引用应急指南。</div>';
       wikiList.innerHTML = '<div class="empty-text">陪伴模式下默认不引用 Wiki 来源。</div>';
+      if (kiwixList) {
+        kiwixList.innerHTML = '<div class="empty-text">陪伴模式下默认不引用 Kiwix / ZIM 来源。</div>';
+      }
 
       if (sourceSummary) {
         sourceSummary.classList.add("hidden");
@@ -1844,6 +2134,7 @@
 
       latestRelatedGuides = [];
       latestRelatedWikis = [];
+      latestRelatedKiwix = [];
       latestRetrievalDebugData = null;
 
       if (currentMode === "companion") {
@@ -1859,6 +2150,9 @@
       evidencePlanList.innerHTML = '<div class="empty-text">正在生成 Retrieval v2 检索计划...</div>';
       guideList.innerHTML = '<div class="empty-text">正在重新检索应急指南来源...</div>';
       wikiList.innerHTML = '<div class="empty-text">正在重新检索本地 Wiki 来源...</div>';
+      if (kiwixList) {
+        kiwixList.innerHTML = '<div class="empty-text">正在重新检索 Kiwix / ZIM 来源...</div>';
+      }
 
       if (sourceSummary) {
         sourceSummary.classList.remove("hidden");
@@ -1898,25 +2192,29 @@
       const sourcePlan = Array.isArray(retrieval?.plan?.source_plan) ? retrieval.plan.source_plan : [];
       const rawGuides = data.related_guides || [];
       const rawWikis = data.related_wikis || [];
+      const rawKiwix = normalizeKiwixSources(data);
 
       latestRetrievalDebugData = data;
 
       const guides = prepareReferencesForDisplay(rawGuides, "guide", MAX_REFERENCE_CARDS_PER_GROUP, data);
       const wikis = prepareReferencesForDisplay(rawWikis, "wiki", MAX_REFERENCE_CARDS_PER_GROUP, data);
+      const kiwix = prepareReferencesForDisplay(rawKiwix, "kiwix", MAX_REFERENCE_CARDS_PER_GROUP, data);
 
       latestRelatedGuides = guides;
       latestRelatedWikis = wikis;
+      latestRelatedKiwix = kiwix;
 
       evidencePlanCountEl.textContent = sourcePlan.length;
       guideCountEl.textContent = guides.length;
-      wikiCountEl.textContent = wikis.length;
+      wikiCountEl.textContent = wikis.length + kiwix.length;
       topSeverityEl.textContent = retrieval?.plan?.urgency || "-";
 
       renderEvidencePlan(sourcePlan, retrieval?.plan || {});
-      renderSourceSummary(guides, wikis, rawGuides.length, rawWikis.length);
-      renderRetrievalDebug(data, guides, wikis);
+      renderSourceSummary(guides, wikis, kiwix, rawGuides.length, rawWikis.length, rawKiwix.length);
+      renderRetrievalDebug(data, guides, wikis, kiwix);
       renderGuides(guides);
       renderWikis(wikis);
+      renderKiwix(kiwix);
     }
 
     function clearAssistant() {
@@ -1924,6 +2222,7 @@
       userInput.value = "";
       latestRelatedGuides = [];
       latestRelatedWikis = [];
+      latestRelatedKiwix = [];
       latestRetrievalDebugData = null;
       conversationHistory = [];
       conversationSummary = "";
@@ -1938,6 +2237,9 @@
         evidencePlanList.innerHTML = '<div class="empty-text">暂无检索计划。</div>';
         guideList.innerHTML = '<div class="empty-text">暂无应急指南来源。</div>';
         wikiList.innerHTML = '<div class="empty-text">暂无本地 Wiki 来源。</div>';
+        if (kiwixList) {
+          kiwixList.innerHTML = '<div class="empty-text">暂无 Kiwix / ZIM 来源。</div>';
+        }
         if (sourceSummary) {
           sourceSummary.classList.add("hidden");
           sourceSummary.innerHTML = "等待本地资料引用结果。";
@@ -1991,6 +2293,39 @@
       }));
     }
 
+    function normalizeKiwixSources(data) {
+      const direct = Array.isArray(data?.related_kiwix) ? data.related_kiwix : [];
+      const topSelected = Array.isArray(data?.selected_sources) ? data.selected_sources : [];
+      const retrieval = normalizeRetrievalV2Debug(data);
+      const retrievalSelected = Array.isArray(retrieval?.selected_sources) ? retrieval.selected_sources : [];
+      const selectedEvidence = Array.isArray(retrieval?.selected_evidence) ? retrieval.selected_evidence : [];
+
+      const merged = [
+        ...direct,
+        ...topSelected.filter(item => item?.source_type === "kiwix"),
+        ...retrievalSelected.filter(item => item?.source_type === "kiwix"),
+        ...selectedEvidence.filter(item => item?.source_type === "kiwix").map(item => ({ ...item.raw, ...item })),
+      ];
+
+      const seen = new Set();
+      return merged
+        .filter(item => item && typeof item === "object")
+        .map(item => {
+          const raw = item.raw && typeof item.raw === "object" ? item.raw : {};
+          return { ...raw, ...item, source_type: "kiwix" };
+        })
+        .filter(item => {
+          const key = [
+            item.id || item.source_id || "",
+            item.zim_filename || item.source || "",
+            item.article_path || item.path || item.title || "",
+          ].join("::");
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+    }
+
     function clearRetrievalDebug() {
       if (!retrievalDebugPanel) return;
       if (v2DiagnosticsPanel) v2DiagnosticsPanel.classList.add("hidden");
@@ -2002,7 +2337,7 @@
       retrievalDebugDetailsExpanded = false;
     }
 
-    function renderRetrievalDebug(data, guides, wikis) {
+    function renderRetrievalDebug(data, guides, wikis, kiwix) {
       if (!retrievalDebugPanel) return;
       if (currentMode === "companion") {
         clearRetrievalDebug();
@@ -2027,7 +2362,10 @@
       const needs = normalizeDebugList(plan.needs);
       const answerFocus = normalizeDebugList(selection.answer_focus);
       const candidateTypes = buildCandidateTypeStats(retrieval, candidates);
-      const selectedCount = selectedEvidence.length || (Array.isArray(guides) ? guides.length : 0) + (Array.isArray(wikis) ? wikis.length : 0);
+      const selectedCount = selectedEvidence.length
+        || (Array.isArray(guides) ? guides.length : 0)
+        + (Array.isArray(wikis) ? wikis.length : 0)
+        + (Array.isArray(kiwix) ? kiwix.length : 0);
 
       if (retrievalDebugBadges) {
         retrievalDebugBadges.innerHTML = `
@@ -2073,9 +2411,13 @@
       const planHtml = sourcePlan.length
         ? `<div class="retrieval-debug-section"><h4>检索计划</h4><div class="retrieval-debug-list">${sourcePlan.map(item => renderSourcePlanItem(item)).join("")}</div></div>`
         : `<div class="retrieval-debug-section"><h4>检索计划</h4><div class="retrieval-debug-empty">暂无检索计划。</div></div>`;
+      const knowledgeGapNote = retrieval?.retrieval_decision?.knowledge_gap_note || "";
+      const knowledgeGapHtml = knowledgeGapNote
+        ? `<div class="retrieval-debug-section"><h4>知识缺口提示</h4><div class="retrieval-debug-item">${escapeHtml(knowledgeGapNote)}</div></div>`
+        : "";
 
       const selectedHtml = renderDebugSourceList(
-        selectedEvidence.length ? selectedEvidence : [...(guides || []), ...(wikis || [])].slice(0, 6),
+        selectedEvidence.length ? selectedEvidence : [...(guides || []), ...(wikis || []), ...(kiwix || [])].slice(0, 8),
         "暂无选中证据。",
         true
       );
@@ -2093,6 +2435,7 @@
         retrievalDebugDetails.innerHTML = `
           ${focusHtml}
           ${planHtml}
+          ${knowledgeGapHtml}
           <div class="retrieval-debug-toggle-row">
             <button class="retrieval-debug-toggle" type="button" onclick="toggleRetrievalDebugDetails()">
               ${detailButtonText}
@@ -2266,12 +2609,13 @@
       return { title, id, reason, sourceType, typeLabel, raw: { ...matched, ...base } };
     }
 
-    function renderSourceSummary(guides, wikis, rawGuideCount = 0, rawWikiCount = 0) {
+    function renderSourceSummary(guides, wikis, kiwix, rawGuideCount = 0, rawWikiCount = 0, rawKiwixCount = 0) {
       if (!sourceSummary) return;
 
       const guideCount = Array.isArray(guides) ? guides.length : 0;
       const wikiCount = Array.isArray(wikis) ? wikis.length : 0;
-      const total = guideCount + wikiCount;
+      const kiwixCount = Array.isArray(kiwix) ? kiwix.length : 0;
+      const total = guideCount + wikiCount + kiwixCount;
 
       if (!total) {
         sourceSummary.classList.add("hidden");
@@ -2283,15 +2627,17 @@
 
       const guideText = guideCount ? `${guideCount} 条应急指南` : "";
       const wikiText = wikiCount ? `${wikiCount} 条本地 Wiki` : "";
-      const joined = [guideText, wikiText].filter(Boolean).join("，");
+      const kiwixText = kiwixCount ? `${kiwixCount} 条 Kiwix / ZIM` : "";
+      const joined = [guideText, wikiText, kiwixText].filter(Boolean).join("，");
 
-      const rawTotal = (rawGuideCount || guideCount) + (rawWikiCount || wikiCount);
-      const shownTotal = guideCount + wikiCount;
+      const rawTotal = (rawGuideCount || guideCount) + (rawWikiCount || wikiCount) + (rawKiwixCount || kiwixCount);
+      const shownTotal = guideCount + wikiCount + kiwixCount;
       const hasFiltered = rawTotal > shownTotal;
 
       const topTitles = [
         ...(guides || []).slice(0, 2).map(item => item.title).filter(Boolean),
-        ...(wikis || []).slice(0, 2).map(item => item.title).filter(Boolean)
+        ...(wikis || []).slice(0, 2).map(item => item.title).filter(Boolean),
+        ...(kiwix || []).slice(0, 2).map(item => item.title).filter(Boolean)
       ];
 
       sourceSummary.innerHTML = `
@@ -2414,6 +2760,51 @@
             </div>
             <p>${escapeHtml(wiki.summary || "暂无摘要。")}</p>
             <p class="wiki-source">来源：${escapeHtml(wiki.source || "本地 Wiki")}</p>
+            <p class="reference-reason"><strong>关联原因：</strong>${escapeHtml(reason)}</p>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function kiwixSourceKey(item) {
+      return String(item?.zim_filename || item?.zim_source || item?.source || "")
+        .replace(/\.zim$/i, "");
+    }
+
+    function kiwixArticlePath(item) {
+      return String(item?.article_path || item?.path || item?.title || "").trim();
+    }
+
+    function renderKiwix(kiwixItems) {
+      if (!kiwixList) return;
+
+      if (!kiwixItems.length) {
+        kiwixList.innerHTML = currentMode === "companion"
+          ? '<div class="empty-text">陪伴模式下默认不引用 Kiwix / ZIM 来源。</div>'
+          : '<div class="empty-text">暂无 Kiwix / ZIM 来源。</div>';
+        return;
+      }
+
+      const intro = `
+        <p class="wiki-reference-note">
+          以下是本次回答关联到的 Kiwix / ZIM 离线百科资料。点击卡片可查看条目内容。
+        </p>
+      `;
+
+      kiwixList.innerHTML = intro + kiwixItems.map((item, index) => {
+        const source = item.zim_filename || item.source || "Kiwix / ZIM";
+        const policy = item.usage_policy || item.source_role || item.role || "background";
+        const snippet = item.snippet || item.summary || item.content || "暂无摘要。";
+        const reason = buildReferenceReason(item);
+
+        return `
+          <article class="wiki-card-mini reference-card" onclick="openKiwixModal(${index})">
+            <div class="wiki-card-head">
+              <h3>${escapeHtml(item.title || "未命名 ZIM 条目")}</h3>
+              <span class="wiki-risk wiki-risk-normal">ZIM</span>
+            </div>
+            <p>${escapeHtml(snippet)}</p>
+            <p class="wiki-source">来源：${escapeHtml(source)} · ${escapeHtml(policy)}</p>
             <p class="reference-reason"><strong>关联原因：</strong>${escapeHtml(reason)}</p>
           </article>
         `;
@@ -2606,6 +2997,141 @@
       }
     }
 
+    function assistantKiwixReaderHtml() {
+      return `
+        <section class="guide-modal-section assistant-kiwix-shell">
+          <div id="assistant-kiwix-stack" class="assistant-kiwix-stack">
+            <section id="assistant-kiwix-primary-pane" class="assistant-kiwix-pane"></section>
+          </div>
+        </section>
+      `;
+    }
+
+    function assistantKiwixPaneHtml(data, source, articlePath, label, options = {}) {
+      const canClose = Boolean(options.canClose);
+      const isLinked = Boolean(options.isLinked);
+      const hideHeader = Boolean(options.hideHeader);
+      const title = data.title || articlePath || "未命名条目";
+      const body = data.html || `<p>${escapeHtml(data.text || data.content || "这篇资料没有可显示的正文。")}</p>`;
+      const content = `<div class="assistant-kiwix-reader-content"><div class="assistant-kiwix-article-body">${body}</div></div>`;
+
+      if (hideHeader) return content;
+
+      return `
+        <div class="assistant-kiwix-pane-header ${isLinked ? "is-linked" : ""}">
+          <div>
+            <p class="assistant-kiwix-pane-label">${escapeHtml(label)}</p>
+            <h3 class="assistant-kiwix-pane-title">${escapeHtml(title)}</h3>
+            <div class="assistant-kiwix-pane-meta">${escapeHtml(source)} · ${escapeHtml(data.path || articlePath)}</div>
+          </div>
+          ${canClose ? '<button class="assistant-kiwix-pane-button" onclick="closeAssistantKiwixLinkedPane()" type="button">收起</button>' : ""}
+        </div>
+        ${content}
+      `;
+    }
+
+    async function fetchKiwixArticle(source, articlePath) {
+      const response = await fetch(`/api/kiwix/article?source=${encodeURIComponent(source)}&path=${encodeURIComponent(articlePath)}`);
+      const data = await response.json();
+      if (!response.ok || !data.ok) {
+        throw new Error(data.detail || "ZIM 条目读取失败");
+      }
+      return data;
+    }
+
+    async function openAssistantKiwixLinkedArticle(source, articlePath, fallbackTitle = "") {
+      if (!source || !articlePath) return;
+
+      const stack = document.getElementById("assistant-kiwix-stack");
+      if (!stack) return;
+
+      stack.classList.add("has-linked");
+      let linkedPane = document.getElementById("assistant-kiwix-linked-pane");
+      if (!linkedPane) {
+        linkedPane = document.createElement("section");
+        linkedPane.id = "assistant-kiwix-linked-pane";
+        linkedPane.className = "assistant-kiwix-pane";
+        stack.appendChild(linkedPane);
+      }
+
+      linkedPane.innerHTML = '<div class="assistant-kiwix-reader-content"><p>正在打开关联条目...</p></div>';
+
+      try {
+        const data = await fetchKiwixArticle(source, articlePath);
+        linkedPane.innerHTML = assistantKiwixPaneHtml(data, source, articlePath, "链接条目", { canClose: true, isLinked: true });
+      } catch (error) {
+        linkedPane.innerHTML = `<div class="assistant-kiwix-reader-content"><p>打开失败：${escapeHtml(error.message)}</p></div>`;
+      }
+    }
+
+    function closeAssistantKiwixLinkedPane() {
+      const stack = document.getElementById("assistant-kiwix-stack");
+      const linkedPane = document.getElementById("assistant-kiwix-linked-pane");
+      if (linkedPane) linkedPane.remove();
+      if (stack) stack.classList.remove("has-linked");
+    }
+
+    async function openKiwixModal(index) {
+      const item = latestRelatedKiwix[index];
+      if (!item) return;
+
+      const modal = document.getElementById("guide-modal");
+      const modalId = document.getElementById("guide-modal-id");
+      const modalTitle = document.getElementById("guide-modal-title");
+      const modalCategory = document.getElementById("guide-modal-category");
+      const modalBody = document.getElementById("guide-modal-body");
+      const source = kiwixSourceKey(item);
+      const articlePath = kiwixArticlePath(item);
+      currentAssistantKiwixSource = source;
+
+      modalId.textContent = "KIWIX / ZIM";
+      modalTitle.textContent = item.title || articlePath || "ZIM 条目";
+      modalCategory.textContent = source || "正在读取 ZIM 条目...";
+      modalBody.innerHTML = assistantKiwixReaderHtml();
+
+      modal.classList.remove("hidden");
+      document.body.classList.add("modal-open");
+
+      const primaryPane = document.getElementById("assistant-kiwix-primary-pane");
+      if (primaryPane) {
+        primaryPane.innerHTML = '<div class="assistant-kiwix-reader-content"><p>正在从本地 ZIM 读取条目内容。</p></div>';
+      }
+
+      if (!source || !articlePath) {
+        modalCategory.textContent = "缺少 ZIM 来源或路径";
+        if (primaryPane) {
+          primaryPane.innerHTML = `<div class="assistant-kiwix-reader-content"><p>${escapeHtml(item.snippet || item.summary || "该来源缺少可打开的 ZIM 路径。")}</p></div>`;
+        }
+        return;
+      }
+
+      try {
+        const data = await fetchKiwixArticle(source, articlePath);
+        currentModalSpeechText = data.text || data.content || item.snippet || "";
+        modalId.textContent = data.path ? `KIWIX · ${data.path}` : "KIWIX / ZIM";
+        modalTitle.textContent = data.title || item.title || articlePath;
+        modalCategory.innerHTML = `来源：${escapeHtml(source)}<br>使用策略：${escapeHtml(item.usage_policy || item.source_role || item.role || "background")}`;
+        if (primaryPane) {
+          primaryPane.innerHTML = assistantKiwixPaneHtml(data, source, articlePath, "原条目", { hideHeader: true });
+        }
+
+        requestAnimationFrame(() => {
+          modalBody.scrollTop = 0;
+        });
+      } catch (error) {
+        console.error(error);
+        modalCategory.textContent = "读取失败";
+        if (primaryPane) {
+          primaryPane.innerHTML = `
+            <div class="assistant-kiwix-reader-content">
+              <p>无法读取 ZIM 条目：${escapeHtml(error.message || "ZIM 条目读取失败。")}</p>
+              <p>${escapeHtml(item.snippet || item.summary || "")}</p>
+            </div>
+          `;
+        }
+      }
+    }
+
     function stopModalSpeaking() {
       stopSpeaking();
       isModalSpeaking = false;
@@ -2764,10 +3290,58 @@
       `;
     }
 
+    function openAssistantImageViewer(src, caption = "") {
+      if (!src || !assistantImageViewerEl || !assistantImageViewerImgEl) return;
+      assistantImageZoom = 2;
+      assistantImageViewerImgEl.src = src;
+      assistantImageViewerImgEl.alt = caption;
+      if (assistantImageViewerCaptionEl) assistantImageViewerCaptionEl.textContent = caption;
+      assistantImageViewerEl.classList.add("is-open");
+      applyAssistantImageZoom();
+    }
+
+    function closeAssistantImageViewer() {
+      if (!assistantImageViewerEl || !assistantImageViewerImgEl) return;
+      assistantImageViewerEl.classList.remove("is-open");
+      assistantImageViewerImgEl.removeAttribute("src");
+      assistantImageViewerImgEl.removeAttribute("style");
+      if (assistantImageViewerCaptionEl) assistantImageViewerCaptionEl.textContent = "";
+    }
+
+    function applyAssistantImageZoom() {
+      if (!assistantImageViewerImgEl) return;
+      const naturalWidth = assistantImageViewerImgEl.naturalWidth || 0;
+      const naturalHeight = assistantImageViewerImgEl.naturalHeight || 0;
+      if (assistantImageZoomLabelEl) {
+        assistantImageZoomLabelEl.textContent = `${assistantImageZoom.toFixed(2).replace(/\.00$/, "").replace(/0$/, "")}x`;
+      }
+      if (!naturalWidth || !naturalHeight) return;
+
+      assistantImageViewerImgEl.style.width = `${Math.round(naturalWidth * assistantImageZoom)}px`;
+      assistantImageViewerImgEl.style.height = `${Math.round(naturalHeight * assistantImageZoom)}px`;
+      requestAnimationFrame(() => {
+        if (!assistantImageStageEl) return;
+        assistantImageStageEl.scrollLeft = Math.max(0, (assistantImageStageEl.scrollWidth - assistantImageStageEl.clientWidth) / 2);
+        assistantImageStageEl.scrollTop = 0;
+      });
+    }
+
+    function setAssistantImageZoom(zoom) {
+      assistantImageZoom = Math.min(6, Math.max(0.5, Number(zoom) || 2));
+      applyAssistantImageZoom();
+    }
+
+    function changeAssistantImageZoom(delta) {
+      setAssistantImageZoom(assistantImageZoom + delta);
+    }
+
     function closeGuideModal() {
       stopSpeaking();
       isModalSpeaking = false;
       currentModalSpeechText = "";
+      currentAssistantKiwixSource = "";
+      closeAssistantImageViewer();
+      closeAssistantKiwixLinkedPane();
       const modal = document.getElementById("guide-modal");
       modal.classList.add("hidden");
       document.body.classList.remove("modal-open");
@@ -3124,8 +3698,43 @@
         .replaceAll("'", "&#039;");
     }
 
+    const guideModalBodyEl = document.getElementById("guide-modal-body");
+    if (guideModalBodyEl) {
+      guideModalBodyEl.addEventListener("click", async event => {
+        const image = event.target.closest(".assistant-kiwix-reader-content img");
+        if (image) {
+          event.preventDefault();
+          event.stopPropagation();
+          openAssistantImageViewer(image.currentSrc || image.src, image.alt || image.title || "");
+          return;
+        }
+
+        const link = event.target.closest("a[data-kiwix-path]");
+        if (!link) return;
+
+        event.preventDefault();
+        const source = link.dataset.kiwixSource || currentAssistantKiwixSource || "";
+        const articlePath = link.dataset.kiwixPath || "";
+        await openAssistantKiwixLinkedArticle(source, articlePath, link.textContent || articlePath);
+      });
+    }
+
+    if (assistantImageViewerImgEl) {
+      assistantImageViewerImgEl.addEventListener("load", applyAssistantImageZoom);
+    }
+
+    if (assistantImageViewerEl) {
+      assistantImageViewerEl.addEventListener("click", event => {
+        if (event.target === assistantImageViewerEl) closeAssistantImageViewer();
+      });
+    }
+
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
+        if (assistantImageViewerEl?.classList?.contains("is-open")) {
+          closeAssistantImageViewer();
+          return;
+        }
         closeGuideModal();
       }
     });
