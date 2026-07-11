@@ -18,6 +18,11 @@ extern bool imuHeadingReady;
 extern void useChineseFont12();
 extern void useChineseFont16();
 extern void useAsciiFont();
+extern void updateDeviceStatus();
+extern void returnToHomeFromModule();
+extern int batteryLevel;
+extern unsigned long getCurrentEpoch();
+extern void epochToTimeString(unsigned long epoch, char* buffer, size_t bufferSize);
 
 // ---------- Local constants ----------
 static const int MAX_NAV_POINTS = 40;
@@ -52,8 +57,7 @@ enum NavPage {
   NAV_PAGE_SESSIONS,
   NAV_PAGE_OVERVIEW,
   NAV_PAGE_MAP,
-  NAV_PAGE_COMPASS,
-  NAV_PAGE_HELP
+  NAV_PAGE_COMPASS
 };
 
 enum NavTargetType {
@@ -77,7 +81,6 @@ static double baseLat = 0.0;
 static double baseLon = 0.0;
 
 static NavPage navPage = NAV_PAGE_SESSIONS;
-static NavPage navPreviousPage = NAV_PAGE_SESSIONS;
 static NavTargetType navTargetType = TARGET_NONE;
 static int navTargetIndex = -1;
 
@@ -424,7 +427,14 @@ void openSelectedSession() {
 
   selectedSessionId = navSessions[navSelectedSessionIndex].id;
   loadPointsForSelectedSession();
-  navPage = NAV_PAGE_OVERVIEW;
+
+  // Terminal workflow: selecting a track should immediately open the map.
+  // The detail/overview page remains available through O.
+  if (navPointCount > 0 || baseLoaded) {
+    navPage = NAV_PAGE_MAP;
+  } else {
+    navPage = NAV_PAGE_OVERVIEW;
+  }
 }
 
 void navReloadTrackData() {
@@ -569,144 +579,202 @@ bool getTarget(double& lat, double& lon, String& label) {
 }
 
 // ---------- Drawing helpers ----------
-void navHeader(const String& title) {
-  canvas.fillRect(0, 0, canvas.width(), 20, BLACK);
+
+static const uint16_t NAV_CARD_GREEN = 0x07E0;
+
+
+String formatCoord(double value);
+String shortText(const String& text, int maxLen);
+
+void navPathCard(int x, int y, int w, int h, const String& title, const String& value, bool highlight) {
+  uint16_t fill = highlight ? NAV_CARD_GREEN : 0x03A0;
+  canvas.fillRoundRect(x, y, w, h, 3, fill);
 
   useChineseFont12();
+  canvas.setTextColor(BLACK, fill);
+  canvas.setCursor(x + 6, y + 5);
+  canvas.print(title);
+
+  if (value.length() > 8) useChineseFont12();
+  else useAsciiFont();
+
+  canvas.setTextColor(BLACK, fill);
+  canvas.setCursor(x + 6, y + 20);
+  canvas.print(value);
+
+  useAsciiFont();
+}
+
+void navHeader(const String& title) {
+  updateDeviceStatus();
+
+  char timeText[12];
+  epochToTimeString(getCurrentEpoch(), timeText, sizeof(timeText));
+  String hhmm = String(timeText).substring(0, 5);
+
+  canvas.fillRect(0, 0, canvas.width(), 22, BLACK);
+
+  useChineseFont16();
   canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(7, 4);
+  canvas.setCursor(8, 4);
   canvas.print(title);
 
   useAsciiFont();
-  canvas.setTextColor(gnssFix ? GREEN : ORANGE, BLACK);
-  canvas.setCursor(144, 5);
-  canvas.print(gnssFix ? "FIX" : "NOFIX");
+  canvas.setTextColor(sdReady ? GREEN : DARKGREY, BLACK);
+  canvas.setCursor(136, 5);
+  canvas.print("SD");
+
+  canvas.setTextColor(gnssFix ? GREEN : DARKGREY, BLACK);
+  canvas.setCursor(162, 5);
+  canvas.print("GNSS");
 
   canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(190, 5);
-  canvas.print("S:");
-  canvas.print(gnssSatellites >= 0 ? String(gnssSatellites) : "--");
+  canvas.setCursor(204, 5);
+  canvas.print(hhmm);
 
-  canvas.drawLine(0, 20, canvas.width(), 20, WHITE);
+  // No header separator line on navigation list/dashboard pages.
 }
 
 void navFooter(const String& hint) {
-  canvas.drawLine(0, 122, canvas.width(), 122, WHITE);
-  useChineseFont12();
-  canvas.setTextColor(DARKGREY, BLACK);
-  canvas.setCursor(4, 124);
+  char timeText[12];
+  epochToTimeString(getCurrentEpoch(), timeText, sizeof(timeText));
+  String hhmm = String(timeText).substring(0, 5);
+
+  canvas.drawLine(0, 112, canvas.width(), 112, WHITE);
+
+  useAsciiFont();
+  canvas.setTextColor(WHITE, BLACK);
+
+  canvas.setCursor(8, 116);
   canvas.print(hint);
+
+  canvas.setCursor(198, 116);
+  canvas.print(hhmm);
 }
 
 void drawSessionList() {
-  navHeader("选择轨迹");
+  navHeader("轨迹列表");
 
   if (!sdReady) {
-    useChineseFont12();
-    canvas.setTextColor(ORANGE, BLACK);
-    canvas.setCursor(52, 58);
-    canvas.print("SD不可用");
-    navFooter("R刷新  ESC返回");
+    navPathCard(10, 42, 220, 36, "状态", "SD不可用", false);
+    navFooter("H Help | Enter Nav");
     return;
   }
 
   if (navSessionCount <= 0) {
-    useChineseFont12();
-    canvas.setTextColor(ORANGE, BLACK);
-    canvas.setCursor(42, 58);
-    canvas.print("暂无轨迹记录");
-    navFooter("R刷新  ESC返回");
+    navPathCard(10, 42, 220, 36, "轨迹", "暂无记录，R刷新", false);
+    navFooter("H Help");
     return;
   }
 
-  useChineseFont12();
-  canvas.setTextColor(DARKGREY, BLACK);
-  canvas.setCursor(8, 25);
-  canvas.print("更新时间倒序");
+  int first = navSelectedSessionIndex - 1;
+  if (first < 0) first = 0;
+  if (first > navSessionCount - 3) first = navSessionCount - 3;
+  if (first < 0) first = 0;
 
-  int maxRows = 4;
-  int start = 0;
-  if (navSelectedSessionIndex >= maxRows) start = navSelectedSessionIndex - maxRows + 1;
-
-  for (int row = 0; row < maxRows; row++) {
-    int idx = start + row;
+  for (int row = 0; row < 3; row++) {
+    int idx = first + row;
     if (idx >= navSessionCount) break;
 
-    int y = 42 + row * 19;
+    NavSession& s = navSessions[idx];
     bool selected = idx == navSelectedSessionIndex;
+    uint16_t fill = selected ? WHITE : 0x03A0;
+    uint16_t text = selected ? BLACK : WHITE;
+    int y = 30 + row * 24;
 
-    if (selected) canvas.fillRoundRect(6, y - 2, 228, 17, 3, 0x4208);
+    canvas.fillRoundRect(10, y, 220, 18, 3, fill);
 
     useAsciiFont();
-    canvas.setTextColor(selected ? GREEN : WHITE, selected ? 0x4208 : BLACK);
-    canvas.setCursor(10, y);
+    canvas.setTextColor(text, fill);
+
+    canvas.setCursor(15, y + 5);
     canvas.print(selected ? ">" : " ");
     canvas.print(idx + 1);
 
-    canvas.setCursor(28, y);
-    canvas.print(shortText(navSessions[idx].id, 10));
+    canvas.setCursor(42, y + 5);
+    canvas.print(shortText(s.id, 9));
 
-    canvas.setCursor(108, y);
-    canvas.print(shortText(navSessions[idx].lastDate, 10));
+    canvas.setCursor(116, y + 5);
+    canvas.print("P:");
+    canvas.print(s.count);
 
-    canvas.setCursor(184, y);
-    canvas.print(navSessions[idx].lastTime.length() >= 5 ? navSessions[idx].lastTime.substring(0, 5) : navSessions[idx].lastTime);
-
-    canvas.setCursor(220, y);
-    canvas.print(navSessions[idx].count);
+    canvas.setCursor(168, y + 5);
+    canvas.print(shortText(s.lastTime, 5));
   }
 
-  navFooter("<>选轨迹  Enter打开");
-}
-
-void drawOverview() {
-  navHeader("轨迹总览");
-
-  useChineseFont12();
-  canvas.setTextColor(DARKGREY, BLACK);
-  canvas.setCursor(8, 26);
-  canvas.print("当前会话");
+  canvas.drawLine(0, 106, canvas.width(), 106, WHITE);
 
   useAsciiFont();
   canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(8, 42);
-  canvas.print(shortText(selectedSessionId, 18));
+  canvas.setCursor(8, 116);
+  canvas.print("H Help");
 
-  canvas.setCursor(8, 60);
-  canvas.print("POINTS ");
-  canvas.print(navPointCount);
+  canvas.setCursor(82, 112);
+  canvas.print("Enter Map");
 
-  canvas.setCursor(8, 76);
-  canvas.print("BASE   ");
-  canvas.print(baseLoaded ? "YES" : "NO");
+  canvas.setCursor(190, 112);
+  canvas.print(navSelectedSessionIndex + 1);
+  canvas.print("/");
+  canvas.print(navSessionCount);
+}
 
-  canvas.setCursor(8, 92);
-  canvas.print("TARGET ");
-  double tLat, tLon;
-  String label;
-  if (getTarget(tLat, tLon, label)) canvas.print(label);
-  else canvas.print("--");
+void drawOverview() {
+  navHeader("轨迹点");
 
-  if (navPointCount > 0) {
-    NavPoint& p = navPoints[navSelectedIndex];
-    canvas.setCursor(124, 42);
-    canvas.print("SEL ");
-    canvas.print(navSelectedIndex + 1);
-    canvas.print("/");
-    canvas.print(navPointCount);
-
-    canvas.setCursor(124, 60);
-    canvas.print("SEQ ");
-    canvas.print(p.seq);
-
-    canvas.setCursor(124, 76);
-    canvas.print(shortText(p.date, 10));
-
-    canvas.setCursor(124, 92);
-    canvas.print(p.time);
+  if (navPointCount <= 0) {
+    navPathCard(10, 42, 220, 36, "路径点", "暂无数据，L返回列表", false);
+    navFooter("H Help");
+    return;
   }
 
-  navFooter("L列表  M地图  N指南  B基地");
+  int first = navSelectedIndex - 1;
+  if (first < 0) first = 0;
+  if (first > navPointCount - 3) first = navPointCount - 3;
+  if (first < 0) first = 0;
+
+  for (int row = 0; row < 3; row++) {
+    int idx = first + row;
+    if (idx >= navPointCount) break;
+
+    NavPoint& p = navPoints[idx];
+    bool selected = idx == navSelectedIndex;
+    uint16_t fill = selected ? WHITE : 0x03A0;
+    uint16_t text = selected ? BLACK : WHITE;
+    int y = 30 + row * 24;
+
+    canvas.fillRoundRect(10, y, 220, 18, 3, fill);
+
+    useAsciiFont();
+    canvas.setTextColor(text, fill);
+
+    canvas.setCursor(15, y + 5);
+    canvas.print(selected ? ">" : " ");
+    canvas.print(idx + 1);
+
+    canvas.setCursor(52, y + 5);
+    canvas.print(shortText(p.time, 5));
+
+    canvas.setCursor(102, y + 5);
+    canvas.print(formatCoord(p.lat));
+
+    canvas.setCursor(170, y + 5);
+    canvas.print(formatCoord(p.lon));
+  }
+
+  canvas.drawLine(0, 106, canvas.width(), 106, WHITE);
+
+  useAsciiFont();
+  canvas.setTextColor(WHITE, BLACK);
+  canvas.setCursor(8, 116);
+  canvas.print("H Help");
+
+  canvas.setCursor(82, 112);
+  canvas.print("H Help");
+
+  canvas.setCursor(190, 112);
+  canvas.print(navSelectedIndex + 1);
+  canvas.print("/");
+  canvas.print(navPointCount);
 }
 
 void drawMapPoint(double lat, double lon, double minLat, double maxLat, double minLon, double maxLon, int x, int y, int w, int h, uint16_t color, int r = 2) {
@@ -772,7 +840,7 @@ void drawRelativeMap() {
   int x = 8;
   int y = 27;
   int w = 150;
-  int h = 88;
+  int h = 80;
 
   canvas.drawRect(x, y, w, h, DARKGREY);
 
@@ -781,7 +849,7 @@ void drawRelativeMap() {
     canvas.setTextColor(ORANGE, BLACK);
     canvas.setCursor(36, 60);
     canvas.print("暂无轨迹");
-    navFooter("L列表  R刷新  ESC返回");
+    navFooter("H Help");
     return;
   }
 
@@ -866,7 +934,7 @@ void drawRelativeMap() {
     canvas.print(formatCoord(sp.lon));
   }
 
-  navFooter("<>选点 B基地 N导航 H说明");
+  navFooter("H Help | Enter Nav");
 }
 
 void drawCompassArrow(int cx, int cy, int radius, double bearing) {
@@ -905,7 +973,7 @@ void drawCompassNav() {
     canvas.setTextColor(ORANGE, BLACK);
     canvas.setCursor(52, 58);
     canvas.print("未选择目标");
-    navFooter("<>选点  B基地  L列表  M地图  H说明");
+    navFooter("H Help");
     return;
   }
 
@@ -914,7 +982,7 @@ void drawCompassNav() {
     canvas.setTextColor(ORANGE, BLACK);
     canvas.setCursor(46, 58);
     canvas.print("等待当前位置");
-    navFooter("<>选点  B基地  L列表  M地图  H说明");
+    navFooter("H Help");
     return;
   }
 
@@ -977,7 +1045,7 @@ void drawCompassNav() {
     canvas.print("N-UP ONLY");
   }
 
-  navFooter("<>选点  B基地  L列表  M地图  H说明");
+  navFooter("H Help");
 }
 
 void drawNavHelp() {
@@ -1009,6 +1077,14 @@ bool navIsLeft(const String& key) {
 
 bool navIsRight(const String& key) {
   return key == "/" || key == "[RIGHT]" || key == "RIGHT";
+}
+
+
+bool navIsEsc(const String& key) {
+  return key.indexOf("[ESC]") >= 0 ||
+         key.indexOf("[DEL]") >= 0 ||
+         key == "`" ||
+         key == "ESC";
 }
 
 bool navIsEnter(const String& key) {
@@ -1045,18 +1121,31 @@ void openNavHelp(HelpType type) {
 }
 
 void handleNavKey(const String& key) {
+  if (navIsEsc(key)) {
+    returnToHomeFromModule();
+    return;
+  }
+
   if (navPage == NAV_PAGE_SESSIONS && navIsEnter(key)) {
     openSelectedSession();
-  } else if (navKeyHasLetter(key, 'h', 'H') &&
-             (navPage == NAV_PAGE_MAP || navPage == NAV_PAGE_COMPASS)) {
+  } else if (navKeyHasLetter(key, 'h', 'H')) {
     if (navPage == NAV_PAGE_MAP) {
       openNavHelp(HELP_NAV_MAP);
-    } else {
+    } else if (navPage == NAV_PAGE_COMPASS) {
       openNavHelp(HELP_NAV_COMPASS);
+    } else {
+      openNavHelp(HELP_NAVIGATION);
     }
     return;
-  } else if (navPage == NAV_PAGE_HELP) {
-    if (navIsEnter(key)) navPage = navPreviousPage;
+    } else if (navPage == NAV_PAGE_MAP && navIsEnter(key)) {
+    if (navPointCount > 0) {
+      navTargetType = TARGET_POINT;
+      navTargetIndex = navSelectedIndex;
+    } else if (baseLoaded) {
+      navTargetType = TARGET_BASE;
+      navTargetIndex = -1;
+    }
+    navPage = NAV_PAGE_COMPASS;
   } else if (navKeyHasLetter(key, 'r', 'R')) {
     navReloadTrackData();
   } else if (navKeyHasLetter(key, 'l', 'L')) {

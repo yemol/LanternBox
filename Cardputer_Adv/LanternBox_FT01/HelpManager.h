@@ -11,7 +11,8 @@ enum HelpType {
   HELP_DEVICE,
   HELP_TASK,
   HELP_KNOWLEDGE,
-  HELP_COMMUNICATION
+  HELP_COMMUNICATION,
+  HELP_AUDIO
 };
 
 void showHelp(HelpType type);

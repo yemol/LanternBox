@@ -80,6 +80,9 @@ void showHelp(HelpType type) {
     canvas.setTextColor(WHITE, BLACK);
     canvas.setCursor(110, 86);
     canvas.print("白点目标");
+
+    canvas.setCursor(8, 104);
+    canvas.print("Enter 导航");
   }
   else if (type == HELP_NAV_COMPASS) {
     canvas.setCursor(8, 32);
@@ -93,19 +96,47 @@ void showHelp(HelpType type) {
     canvas.print("距离和方向");
 
     canvas.setCursor(8, 86);
-    canvas.print("B 选择基地目标");
+    canvas.print("B 基地 | <> 选点");
   }
   else if (type == HELP_NAVIGATION) {
     canvas.setCursor(8, 32);
     canvas.setTextColor(WHITE, BLACK);
     canvas.print("导航模块");
+
+    canvas.setCursor(8, 50);
+    canvas.print("< > 选择 | Enter 地图");
+
+    canvas.setCursor(8, 68);
+    canvas.print("R 刷新 | L 列表");
+
+    canvas.setCursor(8, 86);
+    canvas.print("M 地图 | N 指南");
   }
   else if (type == HELP_DEVICE) {
     canvas.setCursor(8, 32);
-    canvas.print("设备状态");
+    canvas.print("设备页");
 
     canvas.setCursor(8, 50);
-    canvas.print("查看电量 SD GNSS");
+    canvas.print("< > 翻页");
+
+    canvas.setCursor(8, 68);
+    canvas.print("R 刷新检测");
+
+    canvas.setCursor(8, 86);
+    canvas.print("ESC 返回主页");
+  }
+  else if (type == HELP_AUDIO) {
+    canvas.setCursor(8, 32);
+    canvas.print("语音日志");
+
+    canvas.setCursor(8, 50);
+    canvas.print("P/Enter  播放");
+
+    canvas.setCursor(8, 68);
+    canvas.print("R 录音 | S 保存 | A 刷新");
+
+    canvas.setCursor(8, 86);
+    canvas.print("B 删除 | U/D 音量");
   }
   else {
     canvas.setCursor(8, 32);
@@ -117,11 +148,8 @@ void showHelp(HelpType type) {
 }
 
 void handleHelpManagerKey(const String& key) {
-  if (key.indexOf("[DEL]") >= 0 ||
-      key.indexOf("[ESC]") >= 0 ||
-      key == "`") {
-    return;
-  }
+  // Help pages are controlled by the parent screen.
+  // Do not swallow ESC here.
 }
 
 

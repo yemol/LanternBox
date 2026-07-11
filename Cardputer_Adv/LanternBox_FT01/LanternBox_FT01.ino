@@ -5,6 +5,7 @@
 #include "UiNavigation.h"
 #include "HelpManager.h"
 #include "UiLog.h"
+#include "AudioLogger.h"
 
 /*
   LanternBox Field Terminal
@@ -44,11 +45,17 @@
 #define LOCAL_TIMEZONE_OFFSET_SECONDS 28800
 static const char* LOCAL_TIMEZONE_TEXT = "UTC+8";
 
-const char* VERSION = "v0.1.9i";
+const char* VERSION = "v0.3.3-cleanup-audit";
+
+// Serial debug switches.
+// Keep raw NMEA off by default, otherwise useful logs are buried.
+static const bool DEBUG_NMEA_RAW = false;
+static const bool DEBUG_GNSS_SUMMARY = true;
 static const char* DEVICE_ID = "FT-01";
 
 M5Canvas canvas(&M5Cardputer.Display);
 HardwareSerial GNSS(1);
+AudioLogger audioLogger;
 
 m5::imu_data_t imuData;
 double imuHeadingDeg = 0.0;
@@ -62,6 +69,7 @@ enum AppScreen {
   SCREEN_RECORDER,
   SCREEN_LOG,
   SCREEN_NAV,
+  SCREEN_DEVICE,
   SCREEN_HELP,
   SCREEN_PLACEHOLDER
 };
@@ -77,10 +85,10 @@ struct MenuItem {
 MenuItem menuItems[] = {
   {"路径", "LOG"},
   {"日志", "LOGS"},
-  {"状态", "STAT"},
+  {"导航", "NAV"},
   {"同步", "SYNC"},
   {"设置", "SET"},
-  {"导航", "NAV"},
+  {"状态", "STAT"},
   {"设备", "DEV"},
   {"关于", "INFO"}
 };
@@ -96,6 +104,8 @@ String placeholderTitle = "";
 String lastKeyText = "--";
 
 bool helpJustOpened = false;
+int devicePage = 0;
+const int DEVICE_PAGE_COUNT = 3;
 
 // ---------- Time ----------
 unsigned long baseEpoch = 0;
@@ -129,6 +139,8 @@ double gnssLat = 0.0;
 double gnssLon = 0.0;
 String gnssUtcTime = "--";
 String gnssUtcDate = "--";
+unsigned long lastGnssSummaryLogMs = 0;
+bool lastGnssSummaryFix = false;
 String gnssLastSentence = "--";
 unsigned long gnssLastNmeaMillis = 0;
 unsigned long gnssLastFixMillis = 0;
@@ -157,17 +169,218 @@ bool appendLineToFile(const char* path, const String& line);
 bool appendFieldEvent(const String& eventType, const String& note);
 bool writeStorageTestEvent();
 void initGNSS();
+
+void logGnssSummaryIfNeeded() {
+  if (!DEBUG_GNSS_SUMMARY) return;
+
+  unsigned long now = millis();
+
+  // Log immediately on FIX/NOFIX transition, otherwise only every 10 seconds.
+  bool changed = (gnssFix != lastGnssSummaryFix);
+  if (!changed && now - lastGnssSummaryLogMs < 10000) {
+    return;
+  }
+
+  lastGnssSummaryLogMs = now;
+  lastGnssSummaryFix = gnssFix;
+
+  Serial.print("[GNSS] ");
+  Serial.print(gnssFix ? "FIX" : "NOFIX");
+  Serial.print(" sats=");
+  Serial.print(gnssSatellites);
+
+  if (gnssFix) {
+    Serial.print(" lat=");
+    Serial.print(gnssLat, 6);
+    Serial.print(" lon=");
+    Serial.print(gnssLon, 6);
+  }
+
+  Serial.print(" utc=");
+  Serial.print(gnssUtcTime);
+  Serial.print(" date=");
+  Serial.println(gnssUtcDate);
+}
+
 void readGnssStream();
 void drawCurrentScreen();
+
+
+// ---------- Forward declarations used by Device page ----------
+void updateDeviceStatus();
+String formatDouble6(double value);
+bool initSD();
+void initGNSS();
+bool keyHasLetter(const String& key, char lower, char upper);
+bool isEscKey(const String& key);
+bool isLeftKey(const String& key);
+bool isRightKey(const String& key);
+void drawHomeScreen();
+void openHelpPage(HelpType type, AppScreen returnPage);
+
+String shortDeviceId() {
+  String id = String(DEVICE_ID);
+  if (id.length() <= 8) return id;
+  return id.substring(0, 8);
+}
+
+String shortVersionText() {
+  String v = String(VERSION);
+  if (v.length() <= 12) return v;
+  return v.substring(0, 12);
+}
+
+String uptimeText() {
+  unsigned long sec = millis() / 1000UL;
+  unsigned long h = sec / 3600UL;
+  unsigned long m = (sec % 3600UL) / 60UL;
+  unsigned long s = sec % 60UL;
+
+  char buf[16];
+  if (h > 0) snprintf(buf, sizeof(buf), "%luh%02lum", h, m);
+  else snprintf(buf, sizeof(buf), "%lum%02lus", m, s);
+  return String(buf);
+}
+
+void drawDeviceHeader(const String& title) {
+  updateDeviceStatus();
+
+  char timeText[12];
+  epochToTimeString(getCurrentEpoch(), timeText, sizeof(timeText));
+  String hhmm = String(timeText).substring(0, 5);
+
+  canvas.fillRect(0, 0, canvas.width(), 22, BLACK);
+
+  useChineseFont16();
+  canvas.setTextColor(WHITE, BLACK);
+  canvas.setCursor(8, 4);
+  canvas.print(title);
+
+  useAsciiFont();
+  canvas.setTextColor(sdReady ? GREEN : DARKGREY, BLACK);
+  canvas.setCursor(136, 5);
+  canvas.print("SD");
+
+  canvas.setTextColor(gnssFix ? GREEN : DARKGREY, BLACK);
+  canvas.setCursor(162, 5);
+  canvas.print("GNSS");
+
+  canvas.setTextColor(WHITE, BLACK);
+  canvas.setCursor(204, 5);
+  canvas.print(hhmm);
+}
+
+void drawDeviceRow(int y, const String& label, const String& value, uint16_t color = WHITE) {
+  useChineseFont12();
+  canvas.setTextColor(LIGHTGREY, BLACK);
+  canvas.setCursor(10, y);
+  canvas.print(label);
+
+  useAsciiFont();
+  canvas.setTextColor(color, BLACK);
+  canvas.setCursor(84, y + 1);
+  canvas.print(value);
+}
+
+void drawDeviceFooter() {
+  canvas.drawLine(0, 112, canvas.width(), 112, WHITE);
+
+  useAsciiFont();
+  canvas.setTextColor(WHITE, BLACK);
+  canvas.setCursor(8, 116);
+  canvas.print("< > Page | R Refresh | H Help");
+
+  canvas.setCursor(202, 116);
+  canvas.print(devicePage + 1);
+  canvas.print("/");
+  canvas.print(DEVICE_PAGE_COUNT);
+}
+
+void drawDeviceScreen() {
+  updateDeviceStatus();
+
+  canvas.fillSprite(BLACK);
+
+  if (devicePage == 0) {
+    drawDeviceHeader("设备 核心");
+
+    char timeText[12];
+    epochToTimeString(getCurrentEpoch(), timeText, sizeof(timeText));
+
+    String batt = batteryLevel >= 0 ? String(batteryLevel) + "%" : "--";
+    String volt = batteryVoltage > 0 ? String(batteryVoltage) + "mV" : "--";
+
+    drawDeviceRow(32, "设备", String("FT-01 ") + shortDeviceId(), GREEN);
+    drawDeviceRow(48, "版本", String(VERSION));
+    drawDeviceRow(64, "运行", uptimeText());
+    drawDeviceRow(80, "时间", String(timeText) + " UTC+8");
+    drawDeviceRow(96, "电源", batt + " " + volt, batteryLevel <= 20 ? ORANGE : WHITE);
+  } else if (devicePage == 1) {
+    drawDeviceHeader("设备 存储");
+
+    String gnss = gnssFix ? "FIX" : (gnssNmeaSeen ? "NOFIX" : "NONE");
+    String coord = gnssFix ? formatDouble6(gnssLat) + "," + formatDouble6(gnssLon) : "--";
+
+    drawDeviceRow(32, "SD", sdStatusText + " " + sdTypeText, sdReady ? GREEN : ORANGE);
+    drawDeviceRow(48, "容量", sdSizeText);
+    drawDeviceRow(64, "写入", lastWriteStatus, lastWriteStatus.indexOf("OK") >= 0 || lastWriteStatus == "READY" ? GREEN : ORANGE);
+    drawDeviceRow(80, "GNSS", gnss + " SAT:" + String(gnssSatellites), gnssFix ? GREEN : ORANGE);
+    drawDeviceRow(96, "坐标", coord);
+  } else {
+    drawDeviceHeader("设备 模块");
+
+    drawDeviceRow(32, "日志", "OK", GREEN);
+    drawDeviceRow(48, "导航", "UI TEST", ORANGE);
+    drawDeviceRow(64, "路径", String(pathPointCount) + " pts");
+    drawDeviceRow(80, "音频", "OK", GREEN);
+    drawDeviceRow(96, "LoRa", "未接入", DARKGREY);
+  }
+
+  drawDeviceFooter();
+  canvas.pushSprite(0, 0);
+}
+
+
 void drawHomeScreen();
 void drawStatusScreen();
+void drawDeviceScreen();
 void drawRecorderScreen();
 void drawHelpScreen();
 void drawHelpManager();
 void drawLogScreen();
 void handleLogKey(const String& key);
+void handleDeviceKey(const String& key);
+void audioLogStart();
+void audioLogStop();
+void audioLogPlay();
+void audioLogStopPlayback();
+
+void audioLogStopPlayback() {
+  audioLogger.stopPlayback();
+  drawLogScreen();
+}
+
+void audioLogGainUp();
+void audioLogGainDown();
+void audioLogListRefresh();
+void audioLogListMove(int delta);
+void audioLogListPlaySelected();
+bool audioLogDeleteSelected();
+String audioLogSelectedFileName();
+String audioLogSelectedFilePath();
+String audioLogListFileNameAt(int index);
+String audioLogListFilePathAt(int index);
+int audioLogListCount();
+int audioLogListIndex();
+const char* audioLogStateText();
+String audioLogLastFile();
+uint32_t audioLogSamples();
+uint32_t audioLogDropped();
+int audioLogGainX10();
+bool audioLogIsBusy();
 void openHelpPage(HelpType type, AppScreen returnPage);
 void updateDeviceStatus();
+void openLogHelp();
 
 // ---------- Font helpers ----------
 void useChineseFont16() {
@@ -417,17 +630,17 @@ void prepareSharedSpiBusForSD() {
   pinMode(LORA_NSS_PIN, OUTPUT);
   digitalWrite(LORA_NSS_PIN, HIGH);
 
-  pinMode(SD_SPI_CS_PIN, OUTPUT);
-  digitalWrite(SD_SPI_CS_PIN, HIGH);
-
   pinMode(LORA_RST_PIN, OUTPUT);
   digitalWrite(LORA_RST_PIN, HIGH);
+
+  pinMode(SD_SPI_CS_PIN, OUTPUT);
+  digitalWrite(SD_SPI_CS_PIN, HIGH);
 
   pinMode(LORA_IRQ_PIN, INPUT);
   pinMode(LORA_BUSY_PIN, INPUT);
 
   delay(20);
-  Serial.println("[SPI] shared bus prepared: LoRa NSS high, SD CS high");
+  Serial.println("[SPI] shared bus prepared: LoRa NSS high, LoRa RST high, SD CS high");
 }
 
 String formatBytes(uint64_t bytes) {
@@ -477,6 +690,7 @@ bool ensureLanternDirs() {
   if (!ensureDir("/lanternbox/logs")) return false;
   if (!ensureDir("/lanternbox/tracks")) return false;
   if (!ensureDir("/lanternbox/sessions")) return false;
+  if (!ensureDir("/lanternbox/audio")) return false;
   return true;
 }
 
@@ -783,9 +997,7 @@ void handleNmeaLine(const String& line) {
   gnssNmeaSeen = true;
   gnssLastNmeaMillis = millis();
   gnssLastSentence = line.substring(0, min((int)line.length(), 22));
-
-  Serial.print("[NMEA] ");
-  Serial.println(line);
+      // raw NMEA disabled
 
   if (line.startsWith("$GNGGA") || line.startsWith("$GPGGA") || line.startsWith("$BDGGA")) {
     parseGGA(line);
@@ -795,6 +1007,9 @@ void handleNmeaLine(const String& line) {
     gnssStatusText = "NMEA OK";
   }
 }
+
+
+// duplicate logGnssSummaryIfNeeded removed in v0.2.5a
 
 void readGnssStream() {
   while (GNSS.available()) {
@@ -1060,15 +1275,15 @@ void drawTitle() {
   useChineseFont16();
   canvas.setTextColor(GREEN, BLACK);
   canvas.setCursor(8, 24);
-  canvas.print("壳中灯");
+  canvas.print("FT-01");
 
   useAsciiFont();
   canvas.setTextColor(DARKGREY, BLACK);
-  canvas.setCursor(78, 30);
-  canvas.print(DEVICE_ID);
+  canvas.setCursor(62, 30);
+  canvas.print(shortDeviceId());
 
-  canvas.setCursor(148, 30);
-  canvas.print(VERSION);
+  canvas.setCursor(126, 30);
+  canvas.print(shortVersionText());
 }
 
 void drawCard(int slot, int itemIndex, bool selected) {
@@ -1393,9 +1608,145 @@ void drawCurrentScreen() {
   else if (currentScreen == SCREEN_RECORDER) drawRecorderScreen();
   else if (currentScreen == SCREEN_LOG) drawLogScreen();
   else if (currentScreen == SCREEN_NAV) drawNavScreen();
+  else if (currentScreen == SCREEN_DEVICE) drawDeviceScreen();
   else if (currentScreen == SCREEN_HELP) drawHelpManager();
   else drawPlaceholderScreen();
 }
+
+
+// ---------- Audio Logger bridge ----------
+void audioLogStart() {
+  if (!sdReady) {
+    lastAction = "NO SD";
+    lastWriteStatus = "AUDIO NO SD";
+    Serial.println("[AUDIO] start blocked: SD not ready");
+    drawLogScreen();
+    return;
+  }
+
+  ensureSessionStarted("audio");
+
+  AudioLoggerGnssSnapshot snap;
+  snap.fix = gnssFix;
+  snap.satellites = gnssSatellites;
+  snap.lat = gnssLat;
+  snap.lon = gnssLon;
+  snap.utcTime = gnssUtcTime;
+  snap.utcDate = gnssUtcDate;
+
+  bool ok = audioLogger.startRecord(
+    currentSessionId,
+    snap,
+    currentDeviceDateText(),
+    currentDeviceTimeText()
+  );
+
+  lastAction = ok ? "AUDIO REC" : "AUDIO FAIL";
+  lastWriteStatus = ok ? "AUDIO REC" : "AUDIO BUSY";
+  drawLogScreen();
+}
+
+void audioLogStop() {
+  bool ok = audioLogger.stopRecord();
+
+  lastAction = ok ? "AUDIO SAVED" : "AUDIO STOP FAIL";
+  lastWriteStatus = ok ? "AUDIO SAVED" : "AUDIO FAIL";
+}
+
+void audioLogPlay() {
+  bool ok = audioLogger.playLatest();
+
+  lastAction = ok ? "AUDIO PLAY" : "PLAY FAIL";
+  lastWriteStatus = ok ? "AUDIO PLAY" : "PLAY FAIL";
+  drawLogScreen();
+}
+
+void audioLogGainUp() {
+  audioLogger.gainUp();
+  lastAction = "GAIN UP";
+  drawLogScreen();
+}
+
+void audioLogGainDown() {
+  audioLogger.gainDown();
+  lastAction = "GAIN DOWN";
+  drawLogScreen();
+}
+
+void audioLogListRefresh() {
+  audioLogger.refreshList();
+  lastAction = "LIST REFRESH";
+}
+
+void audioLogListMove(int delta) {
+  audioLogger.moveSelection(delta);
+  drawLogScreen();
+}
+
+void audioLogListPlaySelected() {
+  bool ok = audioLogger.playSelected();
+  lastAction = ok ? "PLAY SELECT" : "PLAY FAIL";
+  lastWriteStatus = ok ? "PLAY SELECT" : "PLAY FAIL";
+  drawLogScreen();
+}
+
+String audioLogSelectedFileName() {
+  return audioLogger.selectedFileName();
+}
+
+String audioLogSelectedFilePath() {
+  return audioLogger.selectedFilePath();
+}
+
+String audioLogListFileNameAt(int index) {
+  return audioLogger.listFileNameAt(index);
+}
+
+String audioLogListFilePathAt(int index) {
+  return audioLogger.listFilePathAt(index);
+}
+
+int audioLogListCount() {
+  return audioLogger.listCount();
+}
+
+int audioLogListIndex() {
+  return audioLogger.listIndex();
+}
+
+bool audioLogDeleteSelected() {
+  bool ok = audioLogger.deleteSelected();
+
+  lastAction = ok ? "AUDIO DELETE" : "DELETE FAIL";
+  lastWriteStatus = ok ? "AUDIO DELETE" : "DELETE FAIL";
+
+  return ok;
+}
+
+const char* audioLogStateText() {
+  return audioLogger.stateText();
+}
+
+String audioLogLastFile() {
+  return audioLogger.lastFile();
+}
+
+uint32_t audioLogSamples() {
+  return audioLogger.samples();
+}
+
+uint32_t audioLogDropped() {
+  return audioLogger.droppedChunks();
+}
+
+int audioLogGainX10() {
+  return audioLogger.gainX10();
+}
+
+bool audioLogIsBusy() {
+  return audioLogger.isBusy();
+}
+
 
 // ---------- Menu movement ----------
 void ensureSelectedVisible() {
@@ -1520,6 +1871,7 @@ void confirmSelection() {
 
   if (strcmp(menuItems[selectedIndex].titleEn, "LOGS") == 0) {
     currentScreen = SCREEN_LOG;
+    audioLogListRefresh();
     drawLogScreen();
     return;
   }
@@ -1531,12 +1883,27 @@ void confirmSelection() {
     return;
   }
 
+  if (strcmp(menuItems[selectedIndex].titleEn, "DEV") == 0) {
+    currentScreen = SCREEN_DEVICE;
+    devicePage = 0;
+    drawDeviceScreen();
+    return;
+  }
+
   placeholderTitle = menuItems[selectedIndex].titleCn;
   currentScreen = SCREEN_PLACEHOLDER;
   drawPlaceholderScreen();
 }
 
 
+
+
+void openLogHelp() {
+  previousScreen = SCREEN_LOG;
+  currentScreen = SCREEN_HELP;
+  helpJustOpened = false;
+  showHelp(HELP_AUDIO);
+}
 
 void returnToHomeFromModule() {
   currentScreen = SCREEN_HOME;
@@ -1601,6 +1968,33 @@ void handleStatusKey(const String& key) {
 
   drawStatusScreen();
 }
+
+
+void handleDeviceKey(const String& key) {
+  if (isEscKey(key) || key == "[DEL]") {
+    currentScreen = SCREEN_HOME;
+    drawHomeScreen();
+    return;
+  }
+
+  if (isLeftKey(key)) {
+    devicePage--;
+    if (devicePage < 0) devicePage = DEVICE_PAGE_COUNT - 1;
+  } else if (isRightKey(key)) {
+    devicePage++;
+    if (devicePage >= DEVICE_PAGE_COUNT) devicePage = 0;
+  } else if (keyHasLetter(key, 'r', 'R')) {
+    updateDeviceStatus();
+    if (!sdReady) initSD();
+    initGNSS();
+  } else if (keyHasLetter(key, 'h', 'H')) {
+    openHelpPage(HELP_DEVICE, SCREEN_DEVICE);
+    return;
+  }
+
+  drawDeviceScreen();
+}
+
 
 void handleRecorderKey(const String& key) {
   if (isEscKey(key) || key == "[DEL]") {
@@ -1711,6 +2105,7 @@ void handleKey(const String& key) {
   else if (currentScreen == SCREEN_RECORDER) handleRecorderKey(key);
   else if (currentScreen == SCREEN_LOG) handleLogKey(key);
   else if (currentScreen == SCREEN_NAV) handleNavKeyWrapper(key);
+  else if (currentScreen == SCREEN_DEVICE) handleDeviceKey(key);
   else if (currentScreen == SCREEN_HELP) handleHelpKey(key);
   else handlePlaceholderKey(key);
 }
@@ -1757,6 +2152,7 @@ void setup() {
 
   initSD();
   initGNSS();
+  audioLogger.begin();
 
   drawHomeScreen();
 }
@@ -1791,6 +2187,8 @@ void loop() {
   M5Cardputer.update();
 
   readGnssStream();
+  logGnssSummaryIfNeeded();
+  audioLogger.update();
   updateIMUHeading();
   autoTrackTick();
 
