@@ -1,6 +1,6 @@
 """Prompt 构造模块。负责应急和陪伴模式的消息组织。
 
-应急模式回答以 Retrieval v2 selected_evidence 映射出的 related_guides / related_wikis 为证据底座。
+应急模式回答以 Retrieval v2 selected_evidence 映射出的 related_guides / related_wikis / related_kiwix 为证据底座。
 """
 
 from typing import Any, Dict, List, Optional
@@ -127,6 +127,41 @@ def _format_wiki_evidence(related_wikis: List[Dict[str, Any]], limit: int = 4) -
     return "\n\n".join(blocks)
 
 
+def _format_kiwix_evidence(related_kiwix: List[Dict[str, Any]], limit: int = 3) -> str:
+    """把 Retrieval v2 选中的 Kiwix/ZIM 转成回答层背景证据文本。"""
+    blocks: List[str] = []
+
+    for index, item in enumerate((related_kiwix or [])[:limit], start=1):
+        title = _clean_text(item.get("title") or item.get("name"), 120)
+        zim_filename = _clean_text(item.get("zim_filename") or item.get("source"), 160)
+        article_path = _clean_text(item.get("article_path") or item.get("path"), 180)
+        usage_policy = _clean_text(item.get("usage_policy"), 80)
+        source_role = _clean_text(item.get("source_role") or item.get("role"), 80)
+        snippet = _clean_text(
+            item.get("snippet")
+            or item.get("summary")
+            or item.get("content")
+            or item.get("text"),
+            900,
+        )
+
+        lines = [f"【Kiwix/ZIM 背景 {index}】{title or '未命名条目'}"]
+        if zim_filename:
+            lines.append(f"ZIM：{zim_filename}")
+        if article_path:
+            lines.append(f"路径：{article_path}")
+        if usage_policy:
+            lines.append(f"使用策略：{usage_policy}")
+        if source_role:
+            lines.append(f"资料角色：{source_role}")
+        if snippet:
+            lines.append(f"内容：{snippet}")
+
+        blocks.append("\n".join(lines))
+
+    return "\n\n".join(blocks)
+
+
 def build_companion_messages(
     user_message: str,
     safe_history: List[Dict[str, str]],
@@ -181,19 +216,21 @@ def build_emergency_messages(
     safe_history: List[Dict[str, str]],
     conversation_summary: str = "",
     related_wikis: Optional[List[Dict[str, Any]]] = None,
+    related_kiwix: Optional[List[Dict[str, Any]]] = None,
 ) -> List[Dict[str, str]]:
     """构造应急模式消息。
 
     Retrieval v2 之后：
     - detected_domains 只作为弱提示。
-    - related_guides / related_wikis 应来自 Retrieval v2 selected_evidence。
+    - related_guides / related_wikis / related_kiwix 应来自 Retrieval v2 selected_evidence。
     """
     guide_evidence = _format_guide_evidence(related_guides or [])
     wiki_evidence = _format_wiki_evidence(related_wikis or [])
+    kiwix_evidence = _format_kiwix_evidence(related_kiwix or [])
     domain_text = "、".join(detected_domains or []) if detected_domains else "未提供"
     summary_text = _format_conversation_summary(conversation_summary)
 
-    has_local_evidence = bool(guide_evidence or wiki_evidence)
+    has_local_evidence = bool(guide_evidence or wiki_evidence or kiwix_evidence)
 
     system_prompt = """
 你是“壳中灯 LanternBox”的应急模式本地离线 AI 助手。
@@ -207,9 +244,12 @@ def build_emergency_messages(
 证据使用规则：
 1. 本次回答的主要依据是 Retrieval v2 已选中的本地指南和 Wiki 证据。
 2. 指南优先用于行动步骤，Wiki 用于背景知识、判断标准和注意事项。
-3. 不要编造证据中没有的具体数字、药物剂量、设备参数、地点、库存或成员状态。
-4. 如果本地证据不足，可以给出通用安全原则，但必须说明“本地资料不足，以下按一般安全原则处理”。
-5. 不要让用户自己再去查资料。你要把已选证据转成可执行动作。
+3. Kiwix / ZIM 是离线百科和背景资料，只能用于术语解释、原理说明和补充背景，不能替代指南行动步骤。
+4. 如果 Guide 与 Kiwix 内容冲突，行动建议以 Guide 为先；Kiwix 不得压过高置信 Guide。
+5. lookup_only 或 background_support_only 的 Kiwix 资料不得作为决策主依据。
+6. 不要编造证据中没有的具体数字、药物剂量、设备参数、地点、库存或成员状态。
+7. 如果本地证据不足，可以给出通用安全原则，但必须说明“本地资料不足，以下按一般安全原则处理”。
+8. 不要让用户自己再去查资料。你要把已选证据转成可执行动作。
 
 回答边界：
 1. 不要把问题自动理解成普通家庭维修或城市客服问题。
@@ -242,7 +282,7 @@ def build_emergency_messages(
 五、需要追问的信息
 如果信息不足，最多追问 1 到 3 个关键问题。
 
-不要在回答正文里重复列出“参考资料标题”。页面下方会单独展示关联指南和 Wiki。
+不要在回答正文里重复列出“参考资料标题”。页面下方会单独展示关联指南、Wiki 和 Kiwix 来源。
 """
 
     user_prompt = f"""
@@ -268,10 +308,13 @@ Retrieval v2 已选中的本地指南证据：
 Retrieval v2 已选中的本地 Wiki 证据：
 {wiki_evidence or '未选中明确 Wiki 证据。'}
 
+Retrieval v2 已选中的 Kiwix / ZIM 背景资料：
+{kiwix_evidence or '未选中 Kiwix / ZIM 背景资料。'}
+
 证据状态：
 {'已获得本地证据，请优先基于上述证据回答。' if has_local_evidence else '本地资料不足，请明确说明资料不足，并按一般安全原则给出保守建议。'}
 
-请基于以上 Retrieval v2 证据，给出壳中灯 AI 的应急建议。
+请基于以上 Retrieval v2 证据，给出壳中灯 AI 的应急建议。Kiwix / ZIM 只能用于背景解释，不能替代 Guide 的行动建议。
 不要在正文末尾重复列出参考资料。
 """
 

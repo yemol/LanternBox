@@ -64,6 +64,13 @@ from .kiwix.zim_client import (
 router = APIRouter()
 
 
+def _normalize_kiwix_source(source: str) -> str:
+    source = str(source or "").strip()
+    if source.lower().endswith(".zim"):
+        return source[:-4]
+    return source
+
+
 def build_empty_ai_context(mode: str) -> dict[str, Any]:
     return {
         "context_data": {
@@ -71,11 +78,13 @@ def build_empty_ai_context(mode: str) -> dict[str, Any]:
             "mode": mode,
             "related_guides": [],
             "related_wikis": [],
+            "related_kiwix": [],
             "retrieval_v2": {},
         },
         "detected_domains": [],
         "related_guides": [],
         "related_wikis": [],
+        "related_kiwix": [],
         "retrieval_v2": {},
     }
 
@@ -338,6 +347,7 @@ def ai_advice(payload: AiAdviceRequest):
     detected_domains = prepared_ai["detected_domains"]
     related_guides = prepared_ai["related_guides"]
     related_wikis = prepared_ai["related_wikis"]
+    related_kiwix = prepared_ai.get("related_kiwix", [])
     retrieval_v2 = prepared_ai["retrieval_v2"]
 
     pipeline_result = None
@@ -354,6 +364,7 @@ def ai_advice(payload: AiAdviceRequest):
             stream=False,
             related_guides=related_guides,
             related_wikis=related_wikis,
+            related_kiwix=related_kiwix,
             detected_domains=detected_domains,
             context_data=context_data,
             retrieval_v2=retrieval_v2,
@@ -377,6 +388,7 @@ def ai_advice(payload: AiAdviceRequest):
         mode=mode,
         related_guides=related_guides,
         related_wikis=related_wikis,
+        related_kiwix=related_kiwix,
         detected_domains=detected_domains,
         context_data=context_data,
         retrieval_v2=retrieval_v2,
@@ -407,6 +419,7 @@ def ai_advice_stream(payload: AiAdviceRequest):
     detected_domains = prepared_ai["detected_domains"]
     related_guides = prepared_ai["related_guides"]
     related_wikis = prepared_ai["related_wikis"]
+    related_kiwix = prepared_ai.get("related_kiwix", [])
     retrieval_v2 = prepared_ai["retrieval_v2"]
 
     pipeline_request = build_pipeline_request(
@@ -414,6 +427,7 @@ def ai_advice_stream(payload: AiAdviceRequest):
         stream=True,
         related_guides=related_guides,
         related_wikis=related_wikis,
+        related_kiwix=related_kiwix,
         detected_domains=detected_domains,
         context_data=context_data,
         retrieval_v2=retrieval_v2,
@@ -616,7 +630,7 @@ def api_kiwix_search(q: str = ""):
 
 @router.get("/api/kiwix/article")
 def api_kiwix_article(source: str = "", path: str = "", title: str = ""):
-    source = source.strip()
+    source = _normalize_kiwix_source(source)
     article_key = (path or title).strip()
     if not source or not article_key:
         raise HTTPException(status_code=400, detail="缺少 ZIM 来源或文章路径")
@@ -641,7 +655,7 @@ def api_kiwix_article(source: str = "", path: str = "", title: str = ""):
 
 @router.get("/api/kiwix/resource")
 def api_kiwix_resource(source: str = "", path: str = ""):
-    source = source.strip()
+    source = _normalize_kiwix_source(source)
     resource_path = path.strip()
     if not source or not resource_path:
         raise HTTPException(status_code=400, detail="缺少 ZIM 来源或资源路径")
@@ -654,6 +668,11 @@ def api_kiwix_resource(source: str = "", path: str = ""):
         content=resource.get("content") or b"",
         media_type=resource.get("content_type") or "application/octet-stream",
     )
+
+
+@router.get("/api/kiwix/asset")
+def api_kiwix_asset(source: str = "", path: str = ""):
+    return api_kiwix_resource(source=source, path=path)
 
 
 # 自检接口

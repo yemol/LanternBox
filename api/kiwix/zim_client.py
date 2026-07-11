@@ -9,6 +9,8 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 from urllib.parse import quote, unquote, urlsplit
 
+from api.retrieval_v2.policy import policy_float, policy_int, policy_map, policy_set, policy_str_list, policy_string
+
 try:
     from bs4 import BeautifulSoup
     from bs4 import NavigableString
@@ -26,142 +28,45 @@ ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_ZIM_DIR = ROOT / "data" / "kiwix" / "zim"
 DEFAULT_MANIFEST_PATH = ROOT / "data" / "kiwix" / "zim_manifest.json"
 
-AI_RETRIEVAL_POLICY = "ai_retrieval_allowed"
-LOOKUP_POLICIES = {"lookup_only", "background_support_only", "language_support_only", AI_RETRIEVAL_POLICY}
-FALLBACK_POLICY = "fallback_only"
+ROLE_TO_POLICY = policy_map("kiwix", "usage_policy", "role_to_policy")
+AI_RETRIEVAL_POLICY = str(ROLE_TO_POLICY.get("decision", ""))
+LOOKUP_POLICIES = {
+    *policy_set("kiwix", "usage_policy", "not_selectable"),
+    *policy_set("kiwix", "usage_policy", "background_selectable"),
+}
+FALLBACK_POLICY = str(ROLE_TO_POLICY.get("fallback", ""))
 LOOKUP_SEARCH_POLICIES = {*LOOKUP_POLICIES, FALLBACK_POLICY}
 
-ZIM_WEIGHTS = {
-    "decision": 0.8,
-    "lookup": 0.7,
-    "support": 0.55,
-    "fallback": 0.35,
-}
+ZIM_WEIGHTS = policy_map("zim", "weights_by_role")
 
 zim_sources: Dict[str, Path] = {}
 zim_client_cache: Dict[str, Any] = {}
 opencc_converter = OpenCC("t2s") if OpenCC else None
+s2t_converter = OpenCC("s2t") if OpenCC else None
+
+
+def _policy_for_role(role: str) -> str:
+    return str(ROLE_TO_POLICY.get(role, ""))
 
 DOMAIN_KEYWORDS: Dict[str, List[str]] = {
-    "water": [
-        "water", "drinking water", "wastewater", "filter", "filtration", "disinfect",
-        "水", "饮用水", "污水", "过滤", "消毒", "异味", "净水", "水源", "水质", "漂白剂",
-    ],
-    "food": [
-        "food", "cook", "mold", "spoil", "粮", "食物", "食品", "发霉", "霉变", "腐败", "变质",
-        "罐头", "做饭", "烹饪",
-    ],
-    "medical": [
-        "medical", "medicine", "health", "fever", "wound", "infection", "bleeding", "diarrhea",
-        "dehydration", "first aid", "伤口", "红肿", "发热", "发烧", "感染", "出血", "腹泻", "脱水",
-        "急救", "医疗", "药", "烧伤",
-    ],
-    "power": [
-        "battery", "voltage", "current", "solar", "charge", "电池", "锂电池", "鼓包", "插线板",
-        "充电", "电线", "太阳能", "电压", "电流", "电源", "短路", "漏电",
-    ],
-    "repair": [
-        "repair", "fix", "leak", "wood", "brake", "修理", "维修", "木工", "螺丝", "胶带",
-        "材料", "漏水", "自行车", "刹车", "失灵", "木板", "受潮",
-    ],
-    "tools": [
-        "tool", "tools", "screw", "tape", "工具", "螺丝刀", "扳手", "胶带", "材料", "接线",
-    ],
-    "communication": [
-        "radio", "antenna", "lora", "shortwave", "ham", "无线电", "对讲机", "LoRa", "lora",
-        "天线", "短波", "电台", "通信",
-    ],
-    "geography": [
-        "map", "route", "flood", "terrain", "地形", "洪水", "地图", "路线", "水位", "坡度",
-        "地势", "风险", "地理",
-    ],
-    "chemistry": [
-        "chemistry", "bleach", "acid", "alkali", "pollutant", "化学", "消毒剂", "漂白", "漂白剂",
-        "酸碱", "污染物", "氯", "酒精",
-    ],
-    "physics": [
-        "physics", "voltage", "current", "heat", "pressure", "物理", "电压", "电流", "热量",
-        "压力", "温度", "能量",
-    ],
-    "computer": [
-        "computer", "raspberry", "arduino", "sensor", "电脑", "树莓派", "Arduino", "arduino",
-        "传感器", "接线", "单片机",
-    ],
-    "biology": [
-        "biology", "cell", "fungus", "mold", "生物", "细胞", "真菌", "霉菌", "发霉", "病虫害",
-    ],
-    "agriculture": [
-        "agriculture", "soil", "garden", "plant", "种植", "土壤", "病虫害", "园艺", "潮湿",
-        "堆肥", "育苗",
-    ],
-    "outdoor": [
-        "outdoor", "camp", "hike", "fire", "野外", "露营", "徒步", "装备", "生火", "庇护",
-    ],
+    str(domain): [str(item) for item in keywords]
+    for domain, keywords in policy_map("zim", "domain_keywords").items()
+    if isinstance(keywords, list)
 }
-
 DOMAIN_AI_TOPICS: Dict[str, List[str]] = {
-    "medical": ["medicine"],
-    "chemistry": ["chemistry"],
-    "physics": ["physics"],
-    "power": ["physics", "chemistry"],
-    "computer": ["computer"],
-    "geography": ["geography"],
-    "biology": ["molcell"],
-    "water": ["chemistry", "medicine", "geography"],
-    "food": ["medicine", "molcell"],
-    "agriculture": ["molcell", "geography"],
-    "communication": ["physics"],
-    "repair": ["physics"],
-    "tools": ["physics"],
-    "outdoor": ["geography"],
+    str(domain): [str(item) for item in topics]
+    for domain, topics in policy_map("zim", "domain_ai_topics").items()
+    if isinstance(topics, list)
 }
-
 DOMAIN_STACKEXCHANGE_TOPICS: Dict[str, List[str]] = {
-    "water": ["earthscience", "diy", "outdoors", "cooking"],
-    "food": ["cooking", "outdoors"],
-    "power": ["electronics", "engineering", "diy"],
-    "repair": ["diy", "woodworking", "mechanics", "bicycles", "engineering"],
-    "tools": ["diy", "woodworking", "mechanics", "bicycles"],
-    "communication": ["ham", "electronics"],
-    "geography": ["earthscience", "gis", "outdoors"],
-    "computer": ["arduino", "raspberrypi", "electronics"],
-    "agriculture": ["gardening"],
-    "outdoor": ["outdoors", "diy"],
-    "physics": ["physics", "electronics", "engineering"],
-    "chemistry": ["cooking", "diy"],
-    "biology": ["gardening"],
+    str(domain): [str(item) for item in topics]
+    for domain, topics in policy_map("zim", "domain_stackexchange_topics").items()
+    if isinstance(topics, list)
 }
-
-DOMAIN_PRIORITY = [
-    "medical",
-    "power",
-    "computer",
-    "communication",
-    "geography",
-    "chemistry",
-    "water",
-    "food",
-    "repair",
-    "tools",
-    "biology",
-    "agriculture",
-    "outdoor",
-    "physics",
-]
-QUERY_STOP_TERMS = {
-    "怎么", "怎么办", "什么", "哪些", "一下", "这个", "那个", "应该", "可以", "不能",
-    "需要", "如果", "还能", "如何", "判断", "检查", "基础",
-}
-GENERIC_CORE_TERMS = {
-    "水", "water", "食物", "food", "能源", "energy", "医疗", "medical", "工具", "tools",
-    "风险", "基础",
-}
-UNRELATED_TITLE_PATTERNS = [
-    "案件", "法院", "判决", "诉", "电影", "电视剧", "香水", "体育", "足球", "篮球", "棒球",
-    "赛季", "球员", "演员", "歌手", "名人", "专辑", "歌曲", "列表",
-    "court", "case", "supreme", "film", "movie", "perfume", "fragrance", "sport",
-    "football", "basketball", "baseball", "player", "actor", "actress", "singer", "album",
-]
+DOMAIN_PRIORITY = policy_str_list("zim", "domain_priority")
+QUERY_STOP_TERMS = policy_set("term_filter", "query_stop_terms")
+GENERIC_CORE_TERMS = policy_set("term_filter", "generic_core_terms")
+UNRELATED_TITLE_PATTERNS = policy_str_list("term_filter", "unrelated_title_patterns")
 
 
 def _strip_html(value: str) -> str:
@@ -176,6 +81,13 @@ def _to_simplified(value: Any) -> str:
     if not text or opencc_converter is None:
         return text
     return opencc_converter.convert(text)
+
+
+def _to_traditional(value: Any) -> str:
+    text = str(value or "")
+    if not text or s2t_converter is None:
+        return text
+    return s2t_converter.convert(text)
 
 
 def _simplify_soup_content(node: Any) -> None:
@@ -552,6 +464,10 @@ def _compact_text(value: Any) -> str:
     return re.sub(r"[^\u4e00-\u9fffA-Za-z0-9]+", "", _to_simplified(str(value or ""))).lower()
 
 
+def _is_cjk_term(term: str) -> bool:
+    return bool(re.fullmatch(r"[\u4e00-\u9fff]+", str(term or "")))
+
+
 def _unique(items: Iterable[str]) -> List[str]:
     values: List[str] = []
     for item in items:
@@ -570,6 +486,22 @@ def _text_contains(text: str, term: str) -> bool:
         return _compact_text(term) in _compact_text(text)
 
     return term.lower() in str(text or "").lower()
+
+
+def _is_domain_keyword(term: str) -> bool:
+    term = str(term or "").strip()
+    if not term:
+        return False
+    return any(_text_contains(term, keyword) and _text_contains(keyword, term) for keywords in DOMAIN_KEYWORDS.values() for keyword in keywords)
+
+
+def _is_direct_lookup_term(term: str) -> bool:
+    compact = _compact_text(term)
+    if len(compact) < policy_int(("zim", "search_scoring", "direct_lookup_min_chars"), 2):
+        return False
+    if len(compact) <= 2 and not _is_domain_keyword(term):
+        return False
+    return True
 
 
 def classify_query_domain(query: str) -> List[str]:
@@ -596,11 +528,10 @@ def extract_query_core_terms(query: str, limit: int = 18) -> List[str]:
                 terms.append(keyword)
 
     for token in re.findall(r"[A-Za-z0-9][A-Za-z0-9_+-]{1,}", text):
+        if token.lower() in QUERY_STOP_TERMS:
+            continue
         if token not in terms:
             terms.append(token)
-
-    if terms:
-        return terms[:limit]
 
     compact = _compact_text(text)
     for size in (4, 3, 2):
@@ -608,7 +539,7 @@ def extract_query_core_terms(query: str, limit: int = 18) -> List[str]:
             continue
         for index in range(0, len(compact) - size + 1):
             term = compact[index:index + size]
-            if not re.search(r"[\u4e00-\u9fff]", term):
+            if not _is_cjk_term(term):
                 continue
             if term in QUERY_STOP_TERMS or any(stop in term for stop in QUERY_STOP_TERMS):
                 continue
@@ -637,10 +568,10 @@ def _matched_core_terms(query: str, title: str, snippet: str) -> Dict[str, List[
 def _unrelated_penalty(title: str) -> float:
     text = str(title or "")
     if re.search(r"[^预]案$", text):
-        return 0.2
+        return policy_float(("zim", "search_scoring", "unrelated_title_penalty"), 1.0)
     lowered = str(title or "").lower()
     if any(pattern.lower() in lowered for pattern in UNRELATED_TITLE_PATTERNS):
-        return 0.2
+        return policy_float(("zim", "search_scoring", "unrelated_title_penalty"), 1.0)
     return 1.0
 
 
@@ -650,6 +581,7 @@ def _score_relevant_hit(
     snippet: str,
     raw_score: float,
     zim_weight: float,
+    match_type: str = "search",
 ) -> Optional[Dict[str, Any]]:
     matches = _matched_core_terms(query, title, snippet)
     matched_terms = matches["matched_terms"]
@@ -658,15 +590,39 @@ def _score_relevant_hit(
 
     title_matches = matches["title_matches"]
     snippet_matches = matches["snippet_matches"]
+    specific_terms = [
+        term
+        for term in matches["terms"]
+        if len(_compact_text(term)) >= policy_int(("zim", "search_scoring", "required_specific_match_min_chars"), 3)
+    ]
+    compact_title = _compact_text(title)
+    direct_component_match = (
+        match_type == "direct"
+        and any(compact_title == _compact_text(term) for term in title_matches)
+    )
+    if specific_terms and not any(term in matched_terms for term in specific_terms) and not direct_component_match:
+        return None
+
     if matched_terms and all(term in GENERIC_CORE_TERMS for term in matched_terms) and not title_matches:
         return None
 
-    title_score = min(0.52, len(title_matches) * 0.18)
-    snippet_score = min(0.28, len(snippet_matches) * 0.08)
-    base_score = max(0.0, min(1.0, raw_score * zim_weight)) * 0.25
+    title_score = min(
+        policy_float(("zim", "search_scoring", "title_match_cap"), 0.0),
+        len(title_matches) * policy_float(("zim", "search_scoring", "title_match_weight"), 0.0),
+    )
+    snippet_score = min(
+        policy_float(("zim", "search_scoring", "snippet_match_cap"), 0.0),
+        len(snippet_matches) * policy_float(("zim", "search_scoring", "snippet_match_weight"), 0.0),
+    )
+    base_score = max(0.0, min(1.0, raw_score * zim_weight)) * policy_float(("zim", "search_scoring", "raw_score_weight"), 0.0)
     score = (title_score + snippet_score + base_score) * _unrelated_penalty(title)
 
-    if score < 0.08:
+    if any(compact_title == _compact_text(term) for term in matched_terms):
+        score += policy_float(("zim", "search_scoring", "exact_title_boost"), 0.0)
+    elif any(_compact_text(term) and _compact_text(term) in compact_title for term in matched_terms):
+        score += policy_float(("zim", "search_scoring", "title_contains_boost"), 0.0)
+
+    if score < policy_float(("zim", "search_scoring", "minimum_relevance"), 0.0):
         return None
 
     return {
@@ -719,7 +675,7 @@ def _manifest_entry_from_path(path: Path) -> Dict[str, str]:
             "topic": _topic_from_stackexchange(lower),
             "variant": "all",
             "role": "support",
-            "usage_policy": "background_support_only",
+            "usage_policy": _policy_for_role("support"),
         }
 
     if lower.startswith("wiktionary_en_"):
@@ -729,7 +685,7 @@ def _manifest_entry_from_path(path: Path) -> Dict[str, str]:
             "topic": "wiktionary",
             "variant": "nopic" if "_nopic_" in lower else "all",
             "role": "support",
-            "usage_policy": "language_support_only",
+            "usage_policy": policy_string(("kiwix", "usage_policy", "language_support_policy"), _policy_for_role("support")),
         }
 
     if "_mini_" in lower:
@@ -754,7 +710,7 @@ def _manifest_entry_from_path(path: Path) -> Dict[str, str]:
             "topic": topic,
             "variant": variant,
             "role": "decision" if is_decision else "lookup",
-            "usage_policy": AI_RETRIEVAL_POLICY if is_decision else "lookup_only",
+            "usage_policy": AI_RETRIEVAL_POLICY if is_decision else _policy_for_role("lookup"),
         }
 
     return {
@@ -763,7 +719,7 @@ def _manifest_entry_from_path(path: Path) -> Dict[str, str]:
         "topic": "all",
         "variant": "all",
         "role": "support",
-        "usage_policy": "background_support_only",
+        "usage_policy": _policy_for_role("support"),
     }
 
 
@@ -878,7 +834,7 @@ def _rank_lookup_entry(entry: Dict[str, str], domains: List[str]) -> Optional[in
         return 1 * 100 + related_topics.index(topic)
     if language == "zh" and topic == "all" and variant in {"maxi", "nopic"}:
         return 2 * 100 + (0 if variant == "maxi" else 1)
-    if language == "en" and topic in stack_topics and policy == "background_support_only":
+    if language == "en" and topic in stack_topics and policy in policy_set("kiwix", "usage_policy", "background_selectable"):
         return 3 * 100 + stack_topics.index(topic)
     if topic == "wiktionary" and policy == "language_support_only":
         return 4 * 100
@@ -952,15 +908,10 @@ def refresh_zim_sources() -> Dict[str, Path]:
 
 def _source_weight(source: str, metadata: Optional[Dict[str, Any]] = None) -> float:
     role = str((metadata or {}).get("role") or "").strip()
+    default_weight = float(ZIM_WEIGHTS.get("default", 1.0) or 1.0)
     if role:
-        return ZIM_WEIGHTS.get(role, ZIM_WEIGHTS["support"])
-
-    source = str(source or "").lower()
-    if "medicine" in source or "medical" in source:
-        return ZIM_WEIGHTS["decision"]
-    if "wiktionary" in source:
-        return ZIM_WEIGHTS["support"]
-    return ZIM_WEIGHTS["decision"]
+        return float(ZIM_WEIGHTS.get(role, default_weight) or default_weight)
+    return default_weight
 
 
 class ZimClient:
@@ -1010,17 +961,46 @@ class ZimClient:
         if not query:
             return []
 
+        results = []
+        seen = set()
+        direct_terms = [
+            term
+            for term in extract_query_core_terms(query, limit=policy_int(("zim", "search_scoring", "direct_lookup_probe_limit"), 6))
+            if _is_direct_lookup_term(term)
+        ]
+
+        for term in direct_terms:
+            article = self.get_article(term)
+            if not article:
+                continue
+
+            path = str(article.get("path") or article.get("title") or "")
+            if path in seen:
+                continue
+
+            direct_result = self._result_from_article(
+                query=query,
+                article=article,
+                raw_score=policy_float(("zim", "search_scoring", "direct_lookup_raw_score"), 1.0),
+                match_type="direct",
+            )
+            if not direct_result:
+                continue
+
+            seen.add(path)
+            results.append(direct_result)
+            if len(results) >= limit:
+                return results
+
         try:
             from libzim.search import Query
 
             search = self.searcher.search(Query().set_query(query))
             estimated = max(int(search.getEstimatedMatches() or 0), 1)
-            paths = list(search.getResults(0, limit * 3))
+            multiplier = policy_int(("zim", "search_scoring", "search_result_multiplier"), 1)
+            paths = list(search.getResults(0, limit * multiplier))
         except Exception:
-            return []
-
-        results = []
-        seen = set()
+            return results
 
         for rank, path in enumerate(paths, start=1):
             if path in seen:
@@ -1031,46 +1011,73 @@ class ZimClient:
             if not article:
                 continue
 
-            raw_score = max(0.05, min(1.0, 1.0 - ((rank - 1) / max(estimated, limit, 1))))
-            snippet = self.extract_snippet(article["content"])
-            relevance = _score_relevant_hit(
-                query=query,
-                title=article["title"],
-                snippet=snippet,
-                raw_score=raw_score,
-                zim_weight=self.zim_weight,
+            raw_score = max(
+                policy_float(("zim", "search_scoring", "path_multiplier_min"), 0.0),
+                min(
+                    policy_float(("zim", "search_scoring", "path_multiplier_max"), 1.0),
+                    1.0 - ((rank - 1) / max(estimated, limit, 1)),
+                ),
             )
-            if not relevance:
+            result = self._result_from_article(
+                query=query,
+                raw_score=raw_score,
+                article=article,
+                match_type="search",
+            )
+            if not result:
                 continue
 
-            result = {
-                "title": article["title"],
-                "snippet": snippet,
-                "source": "kiwix_zim",
-                "zim_source": self.source_name,
-                "url": article.get("url"),
-                "article_path": article.get("path"),
-                "raw_score": round(raw_score, 4),
-                "score": round(float(relevance["score"]), 4),
-                "matched_terms": relevance["matched_terms"],
-                "matched_terms_count": relevance["matched_terms_count"],
-            }
-            result.update(
-                {
-                    "zim_filename": self.metadata.get("filename"),
-                    "language": self.metadata.get("language"),
-                    "topic": self.metadata.get("topic"),
-                    "variant": self.metadata.get("variant"),
-                    "role": self.metadata.get("role"),
-                    "usage_policy": self.metadata.get("usage_policy"),
-                }
-            )
             results.append(result)
 
             if len(results) >= limit:
                 break
 
         return results
+
+    def _result_from_article(
+        self,
+        *,
+        query: str,
+        article: Dict[str, Any],
+        raw_score: float,
+        match_type: str = "search",
+    ) -> Optional[Dict[str, Any]]:
+        snippet = self.extract_snippet(article["content"])
+        relevance = _score_relevant_hit(
+            query=query,
+            title=article["title"],
+            snippet=snippet,
+            raw_score=raw_score,
+            zim_weight=self.zim_weight,
+            match_type=match_type,
+        )
+        if not relevance:
+            return None
+
+        result = {
+            "title": article["title"],
+            "snippet": snippet,
+            "source": "kiwix_zim",
+            "zim_source": self.source_name,
+            "url": article.get("url"),
+            "article_path": article.get("path"),
+            "raw_score": round(raw_score, 4),
+            "score": round(float(relevance["score"]), 4),
+            "matched_terms": relevance["matched_terms"],
+            "matched_terms_count": relevance["matched_terms_count"],
+            "match_type": match_type,
+        }
+        result.update(
+            {
+                "zim_filename": self.metadata.get("filename"),
+                "language": self.metadata.get("language"),
+                "topic": self.metadata.get("topic"),
+                "variant": self.metadata.get("variant"),
+                "role": self.metadata.get("role"),
+                "usage_policy": self.metadata.get("usage_policy"),
+            }
+        )
+        return result
 
     def get_article(self, title: str) -> Optional[Dict]:
         if not self.archive:
@@ -1086,8 +1093,13 @@ class ZimClient:
             title,
             decoded_title,
             normalized_title,
+            _to_traditional(title),
+            _to_traditional(decoded_title),
+            _to_traditional(normalized_title),
             normalized_title.replace(" ", "_"),
             normalized_title.replace("_", " "),
+            _to_traditional(normalized_title).replace(" ", "_"),
+            _to_traditional(normalized_title).replace("_", " "),
         ])
 
         entry = None
@@ -1241,6 +1253,7 @@ def _search_entries(query: str, entries: List[Dict[str, str]], limit: int) -> Li
     merged.sort(
         key=lambda item: (
             int(item.get("_source_rank") or 0),
+            0 if item.get("match_type") == "direct" else 1,
             -float(item.get("score") or 0.0),
             str(item.get("usage_policy") or ""),
             str(item.get("zim_filename") or ""),

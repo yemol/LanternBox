@@ -8,6 +8,7 @@ import re
 from pathlib import Path
 from typing import Any, Dict
 
+from .policy import policy_set, policy_string
 from .schemas import RetrievalPlan
 from ..config import OLLAMA_MODEL, load_runtime_settings
 from ..llm.client import call_ollama
@@ -16,62 +17,9 @@ from ..llm.client import call_ollama
 ROOT = Path(__file__).resolve().parents[2]
 EMERGENCY_GUIDES_FILE = ROOT / "data" / "emergency_guides.json"
 
-FALLBACK_STOP_TERMS = {
-    "怎么",
-    "怎么办",
-    "应该",
-    "能不能",
-    "可不可以",
-    "是不是",
-    "有没有",
-    "什么",
-    "哪些",
-    "一下",
-    "这个",
-    "那个",
-    "今天",
-    "明天",
-    "今晚",
-    "家里",
-    "有人",
-    "大家",
-    "需要",
-    "处理",
-    "风险",
-    "安全",
-    "资料",
-    "东西",
-    "规则",
-}
-
-FALLBACK_STOP_SUBSTRINGS = {
-    "怎么",
-    "怎么办",
-    "能不能",
-    "可不可以",
-    "是不是",
-    "有没有",
-    "应该",
-    "哪些",
-    "什么",
-    "一下",
-    "这个",
-    "那个",
-    "家里",
-    "有人",
-    "大家",
-    "处理",
-    "规则",
-    "已经",
-    "我该",
-    "要先",
-    "不能",
-    "继续",
-    "能喝",
-    "想",
-}
-
-FALLBACK_WEAK_CHARS = set("的了和也还又该要在到吗我你他她它已都很先么经续")
+FALLBACK_STOP_TERMS = policy_set("term_filter", "query_stop_terms")
+FALLBACK_STOP_SUBSTRINGS = policy_set("term_filter", "weak_user_term_substrings")
+FALLBACK_WEAK_CHARS = set(policy_string(("term_filter", "weak_user_term_chars"), ""))
 
 
 PLANNER_SYSTEM_PROMPT = """
@@ -90,7 +38,7 @@ PLANNER_SYSTEM_PROMPT = """
 当前可用资料源：
 - guide：本地应急指南，适合操作步骤、应急流程、优先级和立即行动。
 - wiki：本地精选 Wiki，适合背景知识、判断标准、风险解释、物品用途、维护方法和概念说明。
-- kiwix：大型离线百科，当前暂未接入，但可以在计划中预留。
+- kiwix：大型离线百科和 ZIM 资料，适合扩展知识、百科查阅、术语解释、医学/技术背景补充。
 - log：用户日志，当前暂未接入。
 - inventory：物资库存，当前暂未接入。
 - sensor：传感器数据，当前暂未接入。
@@ -102,7 +50,8 @@ PLANNER_SYSTEM_PROMPT = """
 3. wiki 用于查找背景知识、判断标准、风险解释、物品用途、维护方法和补充说明。
 4. 除非用户问题明显只需要闲聊或不需要资料，否则不要只规划 guide。
 5. 如果用户问题涉及多个风险，应为主要风险规划 guide，并为关键判断点规划 wiki。
-6. 如果某个资料源当前暂未接入，可以只在确实必要时预留，不要滥用。
+6. Kiwix 已接入，但不要滥用。只有在用户明确询问定义、百科、背景、解释、医学/技术细节，或 Guide/Wiki 可能不足时规划 kiwix。
+7. Kiwix 是背景资料层，不是应急行动卡的替代品。应急场景中必须仍然优先规划 guide；需要解释判断边界时规划 wiki；需要百科背景时才补充 kiwix。
 
 核心词要求：
 1. core_terms 是用户问题中的核心对象、核心风险、核心动作词。

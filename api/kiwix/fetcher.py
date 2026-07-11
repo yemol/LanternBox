@@ -6,39 +6,14 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 from api.kiwix.schema import KiwixResult
+from api.retrieval_v2.policy import policy_float, policy_int, policy_set, policy_string
 
 
 ROOT = Path(__file__).resolve().parents[2]
 GUIDE_INDEX_FILE = ROOT / "data" / "guide_index.json"
 WIKI_IMPORT_DIR = ROOT / "wiki_import"
 
-STOP_TERMS = {
-    "怎么",
-    "怎么办",
-    "什么",
-    "哪些",
-    "一下",
-    "这个",
-    "那个",
-    "应该",
-    "可以",
-    "不能",
-    "需要",
-    "如果",
-}
-WEAK_CHARS = set("的了和也还又该要在到吗我你他她它已都很先么")
-MEDICAL_TERMS = {
-    "medical", "medicine", "health", "disease", "fever", "wound", "infection",
-    "first aid", "hospital", "doctor", "药", "医疗", "发热", "伤口", "感染", "腹泻", "急救",
-}
-BIOLOGY_TERMS = {
-    "biology", "plant", "animal", "enzyme", "cell", "gene", "species", "taxonomy",
-    "botany", "植物", "动物", "细胞", "基因", "酶", "物种", "生物",
-}
-LANGUAGE_TERMS = {
-    "dictionary", "word", "meaning", "definition", "translate", "language",
-    "词典", "字典", "翻译", "释义", "定义", "语言",
-}
+STOP_TERMS = policy_set("term_filter", "query_stop_terms")
 
 
 def _as_list(value: Any) -> List[str]:
@@ -58,6 +33,26 @@ def _compact_text(value: Any) -> str:
     return re.sub(r"[^\u4e00-\u9fffA-Za-z0-9]+", "", str(value or ""))
 
 
+def _is_cjk_term(term: str) -> bool:
+    return bool(re.fullmatch(r"[\u4e00-\u9fff]+", str(term or "")))
+
+
+def _is_valid_search_term(term: str) -> bool:
+    compact = _compact_text(term).lower()
+    if not compact:
+        return False
+
+    has_cjk = bool(re.search(r"[\u4e00-\u9fff]", compact))
+    has_latin = bool(re.search(r"[a-z]", compact))
+    if has_cjk and has_latin:
+        return False
+
+    if has_latin and len(compact) < policy_int(("zim", "search_scoring", "latin_token_min_chars"), 3):
+        return False
+
+    return True
+
+
 def _is_weak_term(term: str) -> bool:
     term = str(term or "").strip()
     if len(term) < 2:
@@ -67,7 +62,8 @@ def _is_weak_term(term: str) -> bool:
     if any(stop in term for stop in STOP_TERMS):
         return True
 
-    weak_count = sum(1 for char in term if char in WEAK_CHARS)
+    weak_chars = set(policy_string(("term_filter", "weak_user_term_chars"), ""))
+    weak_count = sum(1 for char in term if char in weak_chars)
     return weak_count >= len(term)
 
 
@@ -78,12 +74,16 @@ def extract_core_terms(query: str, context: Optional[Dict] = None, limit: int = 
 
     for key in ("core_terms", "keywords", "topics"):
         for item in _as_list(context.get(key)):
-            if len(item) >= 2 and not _is_weak_term(item) and item not in terms:
+            if len(item) >= 2 and _is_valid_search_term(item) and not _is_weak_term(item) and item not in terms:
                 terms.append(item)
 
     query_text = str(query or "")
     for token in re.findall(r"[A-Za-z0-9][A-Za-z0-9_-]{1,}", query_text):
         token = token.strip()
+        if token.lower() in STOP_TERMS:
+            continue
+        if not _is_valid_search_term(token):
+            continue
         if token and token not in terms:
             terms.append(token)
 
@@ -93,7 +93,7 @@ def extract_core_terms(query: str, context: Optional[Dict] = None, limit: int = 
             continue
         for index in range(0, len(compact) - size + 1):
             term = compact[index:index + size]
-            if not re.search(r"[\u4e00-\u9fff]", term):
+            if not _is_cjk_term(term):
                 continue
             if _is_weak_term(term):
                 continue
@@ -242,26 +242,63 @@ def classify_kiwix_domain(query: str, terms: List[str]) -> str:
     except Exception:
         pass
 
-    text = " ".join([str(query or ""), *[str(term or "") for term in terms]]).lower()
-
-    if any(term in text for term in LANGUAGE_TERMS):
-        return "language"
-    if any(term in text for term in MEDICAL_TERMS):
-        return "medical"
-    if any(term in text for term in BIOLOGY_TERMS):
-        return "biology"
-
     return "general"
 
 
 def _zim_sources_for_domain(domain: str) -> List[str]:
-    if domain == "medical":
-        return ["medical", "wiki"]
-    if domain == "biology":
-        return ["medical", "wiki"]
-    if domain == "language":
-        return ["dictionary", "wiki"]
-    return ["wiki"]
+    return [domain] if domain and domain != "general" else []
+
+
+def _is_anchor_term(term: str) -> bool:
+    term = str(term or "").strip()
+    if not term:
+        return False
+    if not _is_valid_search_term(term):
+        return False
+    compact = _compact_text(term)
+    if len(compact) < policy_int(("zim", "search_scoring", "anchor_term_min_chars"), 2):
+        return False
+    return not _is_weak_term(term)
+
+
+def _hit_matches_anchor(hit: Dict[str, Any], anchors: List[str]) -> bool:
+    if not anchors:
+        return True
+
+    text = _compact_text(" ".join([
+        str(hit.get("title") or ""),
+        str(hit.get("snippet") or ""),
+        " ".join(str(term or "") for term in hit.get("matched_terms") or []),
+    ])).lower()
+
+    return any(_compact_text(anchor).lower() in text for anchor in anchors)
+
+
+def _result_matches_anchor(result: KiwixResult, anchors: List[str]) -> bool:
+    if not anchors:
+        return True
+
+    text = _compact_text(" ".join([
+        result.title,
+        result.snippet,
+        result.article_path or "",
+        " ".join(result.matched_terms or []),
+    ])).lower()
+
+    return any(_compact_text(anchor).lower() in text for anchor in anchors)
+
+
+def _result_anchor_order(result: KiwixResult, anchors: List[str]) -> int:
+    text = _compact_text(" ".join([
+        result.title,
+        result.article_path or "",
+        " ".join(result.matched_terms or []),
+    ])).lower()
+
+    for index, anchor in enumerate(anchors or []):
+        if _compact_text(anchor).lower() in text:
+            return index
+    return len(anchors or [])
 
 
 def fetch_mock_kiwix_results(
@@ -286,7 +323,10 @@ def fetch_mock_kiwix_results(
             continue
         seen.add(key)
 
-        max_score = max(8.0, len(terms) * 4.0)
+        max_score = max(
+            policy_float(("kiwix", "search", "local_score_baseline"), 1.0),
+            len(terms) * policy_float(("kiwix", "search", "local_score_term_multiplier"), 1.0),
+        )
         relevance_score = min(score / max_score, 1.0)
         snippet = record["snippet"] or f"Local Kiwix stub keyword match: {', '.join(matched_terms[:5])}"
 
@@ -298,7 +338,7 @@ def fetch_mock_kiwix_results(
                 KiwixResult(
                     title=record["title"],
                     source=record["source"],
-                    snippet=snippet[:360],
+                    snippet=snippet[:policy_int(("kiwix", "search", "snippet_chars"), 360)],
                     relevance_score=round(relevance_score, 4),
                     topics=record["topics"][:10],
                     url=record.get("url"),
@@ -309,7 +349,12 @@ def fetch_mock_kiwix_results(
 
     scored.sort(key=lambda item: (-item[0], item[1], item[2]))
     local_results = [result for _, _, _, result in scored[:limit]]
-    zim_results = _fetch_zim_results(query=query, terms=terms, limit=5, channel="ai")
+    zim_results = _fetch_zim_results(
+        query=query,
+        terms=terms,
+        limit=policy_int(("kiwix", "search", "zim_result_merge_limit"), 5),
+        channel="ai",
+    )
 
     merged: List[Tuple[float, str, str, KiwixResult]] = []
     seen = set()
@@ -358,18 +403,21 @@ def _fetch_zim_results(
     except Exception:
         return []
 
-    queries: List[str] = []
-    for item in [query, *extract_zim_core_terms(query)]:
-        item = str(item or "").strip()
-        if item and item not in queries:
-            queries.append(item)
-
-    results: List[KiwixResult] = []
-    seen = set()
+    results_by_key: Dict[Tuple[str, str], KiwixResult] = {}
     domains = classify_query_domain(" ".join([str(query or ""), *[str(term or "") for term in terms]]))
     domain = domains[0] if domains else classify_kiwix_domain(query, terms)
+    anchor_terms = []
+    for term in terms:
+        if _is_anchor_term(term) and term not in anchor_terms:
+            anchor_terms.append(term)
 
-    for item in queries[:8]:
+    queries: List[str] = []
+    for item in [*anchor_terms, query, *terms, *extract_zim_core_terms(query)]:
+        item = str(item or "").strip()
+        if item and _is_valid_search_term(item) and item not in queries:
+            queries.append(item)
+
+    for item in queries[:policy_int(("kiwix", "search", "query_probe_limit"), 8)]:
         try:
             zim_hits = (
                 query_zim_for_lookup(item, limit=limit)
@@ -384,31 +432,58 @@ def _fetch_zim_results(
             snippet = str(hit.get("snippet") or "").strip()
             if not title or not snippet:
                 continue
+            if not _hit_matches_anchor(hit, anchor_terms):
+                continue
 
             zim_source = str(hit.get("zim_source") or "wiki")
             key = ("kiwix_zim", zim_source, title)
-            if key in seen:
-                continue
-            seen.add(key)
-            results.append(
-                KiwixResult(
-                    title=title,
-                    source="kiwix_zim",
-                    snippet=snippet,
-                    relevance_score=float(hit.get("score") or 0.0),
-                    topics=[*domains, zim_source],
-                    url=hit.get("url"),
-                    zim_filename=hit.get("zim_filename"),
-                    language=hit.get("language"),
-                    role=hit.get("role"),
-                    usage_policy=hit.get("usage_policy"),
-                    article_path=hit.get("article_path"),
-                    matched_terms=hit.get("matched_terms") or [],
-                    matched_terms_count=int(hit.get("matched_terms_count") or 0),
-                )
+            candidate = KiwixResult(
+                title=title,
+                source="kiwix_zim",
+                snippet=snippet,
+                relevance_score=float(hit.get("score") or 0.0),
+                topics=[*domains, zim_source],
+                url=hit.get("url"),
+                zim_filename=hit.get("zim_filename"),
+                language=hit.get("language"),
+                role=hit.get("role"),
+                usage_policy=hit.get("usage_policy"),
+                article_path=hit.get("article_path"),
+                matched_terms=hit.get("matched_terms") or [],
+                matched_terms_count=int(hit.get("matched_terms_count") or 0),
+                match_type=str(hit.get("match_type") or ""),
             )
+            previous = results_by_key.get(key)
+            if (
+                not previous
+                or candidate.matched_terms_count > previous.matched_terms_count
+                or (
+                    candidate.matched_terms_count == previous.matched_terms_count
+                    and candidate.relevance_score > previous.relevance_score
+                )
+            ):
+                results_by_key[key] = candidate
 
-            if len(results) >= limit:
-                return results
-
-    return results
+    results = list(results_by_key.values())
+    direct_anchors = [
+        result.title
+        for result in results
+        if result.match_type == "direct" and _is_anchor_term(result.title)
+    ]
+    if direct_anchors:
+        results = [
+            result
+            for result in results
+            if result.match_type == "direct" or _result_matches_anchor(result, direct_anchors)
+        ]
+    results.sort(
+        key=lambda item: (
+            0 if item.match_type == "direct" else 1,
+            _result_anchor_order(item, anchor_terms),
+            -item.matched_terms_count,
+            -item.relevance_score,
+            item.source,
+            item.title,
+        )
+    )
+    return results[:limit]

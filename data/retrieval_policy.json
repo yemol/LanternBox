@@ -1,0 +1,638 @@
+{
+  "source_labels": {
+    "guide": "guide",
+    "wiki": "wiki",
+    "kiwix": "Kiwix / ZIM"
+  },
+  "source_priority": {
+    "guide": 0,
+    "wiki": 1,
+    "kiwix": 3,
+    "default": 9
+  },
+  "primary_source_types": [
+    "guide",
+    "wiki"
+  ],
+  "language": {
+    "preferred": "zh",
+    "non_preferred_penalty": 1
+  },
+  "retrieval": {
+    "kiwix_fallback_primary_candidate_threshold": 2,
+    "kiwix_plan_limit": 4,
+    "kiwix_plan_keyword_limit": 8,
+    "kiwix_plan_query_chars": 80,
+    "selector_candidate_limit": 16,
+    "selector_max_selected": 4,
+    "selector_fallback_count": 3
+  },
+  "kiwix": {
+    "explicit_aliases": [
+      "zim",
+      "kiwix",
+      "离线百科",
+      "查百科"
+    ],
+    "trigger_terms": [
+      "是什么",
+      "什么是",
+      "解释",
+      "解释一下",
+      "区别",
+      "定义",
+      "百科",
+      "资料",
+      "背景",
+      "原理",
+      "机制",
+      "医学",
+      "技术",
+      "术语",
+      "离线百科",
+      "查zim",
+      "查 ZIM",
+      "Kiwix",
+      "kiwix",
+      "ZIM",
+      "zim"
+    ],
+    "intent_hints": [
+      "百科",
+      "解释",
+      "学习",
+      "背景",
+      "definition",
+      "lookup"
+    ],
+    "selection_reason_explicit": "用户明确要求查询 ZIM，补充选中 Kiwix / ZIM 背景资料。",
+    "answer_focus_explicit": "补充 Kiwix / ZIM 背景资料",
+    "decision": {
+      "kiwix_role": "background_knowledge",
+      "guide_priority": "guide_first_for_actions"
+    },
+    "usage_policy": {
+      "role_to_policy": {
+        "lookup": "lookup_only",
+        "fallback": "fallback_only",
+        "support": "background_support_only",
+        "decision": "ai_retrieval_allowed"
+      },
+      "language_support_policy": "language_support_only",
+      "policy_rank": {
+        "ai_retrieval_allowed": 0,
+        "background_support_only": 1,
+        "lookup_only": 2,
+        "language_support_only": 2,
+        "fallback_only": 3,
+        "fallback": 3,
+        "default": 1
+      },
+      "source_priority_rank": {
+        "ai_retrieval_allowed": 2,
+        "background_support_only": 3,
+        "lookup_only": 4,
+        "language_support_only": 4,
+        "fallback_only": 5,
+        "fallback": 5,
+        "default": 3
+      },
+      "not_selectable": {
+        "lookup_only": "usage_policy_lookup_only",
+        "language_support_only": "usage_policy_lookup_only"
+      },
+      "fallback_excluded_when_primary_selected": {
+        "fallback_only": "fallback_lower_priority_than_guide_wiki",
+        "fallback": "fallback_lower_priority_than_guide_wiki"
+      },
+      "background_selectable": [
+        "background_support_only",
+        "ai_retrieval_allowed"
+      ]
+    },
+    "query_stop_substrings": [
+      "帮我",
+      "查一下",
+      "查询",
+      "在zim",
+      "zim",
+      "kiwix",
+      "是什么",
+      "什么是",
+      "解释一下"
+    ],
+    "search": {
+      "limit_min": 1,
+      "limit_max": 8,
+      "query_probe_limit": 8,
+      "zim_result_merge_limit": 5,
+      "local_score_baseline": 8.0,
+      "local_score_term_multiplier": 4.0,
+      "snippet_chars": 360
+    }
+  },
+  "term_filter": {
+    "weak_user_term_substrings": [
+      "怎么",
+      "怎么办",
+      "能不能",
+      "可不可以",
+      "是不是",
+      "有没有",
+      "应该",
+      "哪些",
+      "什么",
+      "一下",
+      "这个",
+      "那个",
+      "今天",
+      "明天",
+      "今晚",
+      "家里",
+      "有人",
+      "大家",
+      "处理",
+      "规则",
+      "已经",
+      "我该",
+      "要先",
+      "不能",
+      "继续",
+      "能喝",
+      "想"
+    ],
+    "weak_user_term_chars": "的了和也还又该要在到吗我你他她它已都很先么经续",
+    "query_stop_terms": [
+      "怎么",
+      "怎么办",
+      "什么",
+      "哪些",
+      "一下",
+      "这个",
+      "那个",
+      "应该",
+      "可以",
+      "不能",
+      "需要",
+      "如果",
+      "还能",
+      "如何",
+      "判断",
+      "检查",
+      "基础",
+      "帮我",
+      "查询",
+      "查一下",
+      "查",
+      "是什么",
+      "zim",
+      "kiwix"
+    ],
+    "generic_core_terms": [
+      "水",
+      "water",
+      "食物",
+      "food",
+      "能源",
+      "energy",
+      "医疗",
+      "medical",
+      "工具",
+      "tools",
+      "风险",
+      "基础"
+    ],
+    "unrelated_title_patterns": [
+      "案件",
+      "法院",
+      "判决",
+      "诉",
+      "电影",
+      "电视剧",
+      "香水",
+      "体育",
+      "足球",
+      "篮球",
+      "棒球",
+      "赛季",
+      "球员",
+      "演员",
+      "歌手",
+      "名人",
+      "专辑",
+      "歌曲",
+      "列表",
+      "court",
+      "case",
+      "supreme",
+      "film",
+      "movie",
+      "perfume",
+      "fragrance",
+      "sport",
+      "football",
+      "basketball",
+      "baseball",
+      "player",
+      "actor",
+      "actress",
+      "singer",
+      "album"
+    ]
+  },
+  "guide_scoring": {
+    "field_weights": {
+      "aliases": 10.0,
+      "title": 9.0,
+      "keywords": 6.0,
+      "scenario": 3.0,
+      "goal": 2.0,
+      "category": 1.5,
+      "metadata": 1.0,
+      "body": 0.75
+    },
+    "core_term_multiplier": 1.8,
+    "user_term_multiplier": 1.2,
+    "short_term_idf_multiplier": 0.75,
+    "negative_keyword_penalty": 4.0,
+    "absence_context_penalty_multiplier": 0.5,
+    "exact_field_match_bonus_multiplier": 1.0,
+    "title_keyword_partial_bonus_multiplier": 0.5
+  },
+  "zim": {
+    "weights_by_role": {
+      "decision": 0.8,
+      "lookup": 0.7,
+      "support": 0.55,
+      "fallback": 0.35,
+      "default": 0.55
+    },
+    "domain_priority": [
+      "medical",
+      "power",
+      "computer",
+      "communication",
+      "geography",
+      "chemistry",
+      "water",
+      "food",
+      "repair",
+      "tools",
+      "biology",
+      "agriculture",
+      "outdoor",
+      "physics"
+    ],
+    "domain_keywords": {
+      "water": [
+        "water",
+        "drinking water",
+        "wastewater",
+        "filter",
+        "filtration",
+        "disinfect",
+        "水",
+        "饮用水",
+        "污水",
+        "过滤",
+        "消毒",
+        "异味",
+        "净水",
+        "水源",
+        "水质",
+        "漂白剂"
+      ],
+      "food": [
+        "food",
+        "cook",
+        "mold",
+        "spoil",
+        "粮",
+        "食物",
+        "食品",
+        "发霉",
+        "霉变",
+        "腐败",
+        "变质",
+        "罐头",
+        "做饭",
+        "烹饪"
+      ],
+      "medical": [
+        "medical",
+        "medicine",
+        "health",
+        "fever",
+        "wound",
+        "infection",
+        "bleeding",
+        "diarrhea",
+        "dehydration",
+        "first aid",
+        "伤口",
+        "红肿",
+        "发热",
+        "发烧",
+        "感染",
+        "出血",
+        "腹泻",
+        "脱水",
+        "急救",
+        "医疗",
+        "药",
+        "烧伤"
+      ],
+      "power": [
+        "battery",
+        "voltage",
+        "current",
+        "solar",
+        "charge",
+        "电池",
+        "锂电池",
+        "鼓包",
+        "插线板",
+        "充电",
+        "电线",
+        "太阳能",
+        "电压",
+        "电流",
+        "电源",
+        "短路",
+        "漏电"
+      ],
+      "repair": [
+        "repair",
+        "fix",
+        "leak",
+        "wood",
+        "brake",
+        "修理",
+        "维修",
+        "木工",
+        "螺丝",
+        "胶带",
+        "材料",
+        "漏水",
+        "自行车",
+        "刹车",
+        "失灵",
+        "木板",
+        "受潮"
+      ],
+      "tools": [
+        "tool",
+        "tools",
+        "screw",
+        "tape",
+        "工具",
+        "螺丝刀",
+        "扳手",
+        "胶带",
+        "材料",
+        "接线"
+      ],
+      "communication": [
+        "radio",
+        "antenna",
+        "lora",
+        "shortwave",
+        "ham",
+        "无线电",
+        "对讲机",
+        "LoRa",
+        "lora",
+        "天线",
+        "短波",
+        "电台",
+        "通信"
+      ],
+      "geography": [
+        "map",
+        "route",
+        "flood",
+        "terrain",
+        "地形",
+        "洪水",
+        "地图",
+        "路线",
+        "水位",
+        "坡度",
+        "地势",
+        "风险",
+        "地理"
+      ],
+      "chemistry": [
+        "chemistry",
+        "bleach",
+        "acid",
+        "alkali",
+        "pollutant",
+        "化学",
+        "消毒剂",
+        "漂白",
+        "漂白剂",
+        "酸碱",
+        "污染物",
+        "氯",
+        "酒精"
+      ],
+      "physics": [
+        "physics",
+        "voltage",
+        "current",
+        "heat",
+        "pressure",
+        "物理",
+        "电压",
+        "电流",
+        "热量",
+        "压力",
+        "温度",
+        "能量"
+      ],
+      "computer": [
+        "computer",
+        "raspberry",
+        "arduino",
+        "sensor",
+        "电脑",
+        "树莓派",
+        "Arduino",
+        "arduino",
+        "传感器",
+        "接线",
+        "单片机"
+      ],
+      "biology": [
+        "biology",
+        "cell",
+        "fungus",
+        "mold",
+        "生物",
+        "细胞",
+        "真菌",
+        "霉菌",
+        "发霉",
+        "病虫害"
+      ],
+      "agriculture": [
+        "agriculture",
+        "soil",
+        "garden",
+        "plant",
+        "种植",
+        "土壤",
+        "病虫害",
+        "园艺",
+        "潮湿",
+        "堆肥",
+        "育苗"
+      ],
+      "outdoor": [
+        "outdoor",
+        "camp",
+        "hike",
+        "fire",
+        "野外",
+        "露营",
+        "徒步",
+        "装备",
+        "生火",
+        "庇护"
+      ]
+    },
+    "domain_ai_topics": {
+      "medical": [
+        "medicine"
+      ],
+      "chemistry": [
+        "chemistry"
+      ],
+      "physics": [
+        "physics"
+      ],
+      "power": [
+        "physics",
+        "chemistry"
+      ],
+      "computer": [
+        "computer"
+      ],
+      "geography": [
+        "geography"
+      ],
+      "biology": [
+        "molcell"
+      ],
+      "water": [
+        "chemistry",
+        "medicine",
+        "geography"
+      ],
+      "food": [
+        "medicine",
+        "molcell"
+      ],
+      "agriculture": [
+        "molcell",
+        "geography"
+      ],
+      "communication": [
+        "physics"
+      ],
+      "repair": [
+        "physics"
+      ],
+      "tools": [
+        "physics"
+      ],
+      "outdoor": [
+        "geography"
+      ]
+    },
+    "domain_stackexchange_topics": {
+      "water": [
+        "earthscience",
+        "diy",
+        "outdoors",
+        "cooking"
+      ],
+      "food": [
+        "cooking",
+        "outdoors"
+      ],
+      "power": [
+        "electronics",
+        "engineering",
+        "diy"
+      ],
+      "repair": [
+        "diy",
+        "woodworking",
+        "mechanics",
+        "bicycles",
+        "engineering"
+      ],
+      "tools": [
+        "diy",
+        "woodworking",
+        "mechanics",
+        "bicycles"
+      ],
+      "communication": [
+        "ham",
+        "electronics"
+      ],
+      "geography": [
+        "earthscience",
+        "gis",
+        "outdoors"
+      ],
+      "computer": [
+        "arduino",
+        "raspberrypi",
+        "electronics"
+      ],
+      "agriculture": [
+        "gardening"
+      ],
+      "outdoor": [
+        "outdoors",
+        "diy"
+      ],
+      "physics": [
+        "physics",
+        "electronics",
+        "engineering"
+      ],
+      "chemistry": [
+        "cooking",
+        "diy"
+      ],
+      "biology": [
+        "gardening"
+      ]
+    },
+    "search_scoring": {
+      "title_match_cap": 0.52,
+      "title_match_weight": 0.18,
+      "snippet_match_cap": 0.28,
+      "snippet_match_weight": 0.08,
+      "raw_score_weight": 0.25,
+      "exact_title_boost": 0.32,
+      "title_contains_boost": 0.16,
+      "minimum_relevance": 0.08,
+      "unrelated_title_penalty": 0.2,
+      "path_multiplier_min": 0.05,
+      "path_multiplier_max": 1.0,
+      "search_result_multiplier": 3,
+      "direct_lookup_probe_limit": 6,
+      "direct_lookup_min_chars": 2,
+      "direct_lookup_raw_score": 1.0,
+      "anchor_term_min_chars": 2,
+      "required_specific_match_min_chars": 3,
+      "latin_token_min_chars": 3
+    }
+  }
+}

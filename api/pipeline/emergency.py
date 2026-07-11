@@ -31,6 +31,7 @@ def build_emergency_pipeline_messages(request: PipelineRequest) -> list[dict[str
         safe_history=safe_history,
         conversation_summary=request.conversation_summary,
         related_wikis=request.related_wikis,
+        related_kiwix=request.related_kiwix,
     )
 
 def run_emergency_stream_pipeline(request: PipelineRequest):

@@ -146,3 +146,6 @@ class RetrievalV2Result(BaseModel):
     selection: EvidenceSelection
     selected_evidence: List[EvidenceCandidate] = Field(default_factory=list)
     debug: RetrievalDebug = Field(default_factory=RetrievalDebug)
+    selected_sources: List[Dict[str, Any]] = Field(default_factory=list)
+    excluded_sources: List[Dict[str, Any]] = Field(default_factory=list)
+    retrieval_decision: Dict[str, Any] = Field(default_factory=dict)

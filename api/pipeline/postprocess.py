@@ -12,11 +12,13 @@ def build_ai_advice_response(
     mode: str,
     related_guides: Optional[List[Dict[str, Any]]] = None,
     related_wikis: Optional[List[Dict[str, Any]]] = None,
+    related_kiwix: Optional[List[Dict[str, Any]]] = None,
     detected_domains: Optional[List[str]] = None,
     context_data: Optional[Dict[str, Any]] = None,
     retrieval_v2: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """把 PipelineResult 转换成 /api/ai/advice 的 JSON 响应。"""
+    retrieval_payload = retrieval_v2 or {}
 
     return {
         "answer": result.answer,
@@ -24,9 +26,13 @@ def build_ai_advice_response(
         "matched_triggers": [],
         "related_guides": related_guides or [],
         "related_wikis": related_wikis or [],
+        "related_kiwix": related_kiwix or [],
         "detected_domains": detected_domains or [],
         "context_data": context_data or {},
-        "retrieval_v2": retrieval_v2 or {},
+        "retrieval_v2": retrieval_payload,
+        "selected_sources": retrieval_payload.get("selected_sources", []),
+        "excluded_sources": retrieval_payload.get("excluded_sources", []),
+        "retrieval_decision": retrieval_payload.get("retrieval_decision", {}),
         "pipeline": result.debug or {},
     }
 

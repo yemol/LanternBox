@@ -12,6 +12,7 @@ class PipelineRequest(BaseModel):
 
     related_guides: List[Dict[str, Any]] = Field(default_factory=list)
     related_wikis: List[Dict[str, Any]] = Field(default_factory=list)
+    related_kiwix: List[Dict[str, Any]] = Field(default_factory=list)
     detected_domains: List[str] = Field(default_factory=list)
 
     # Retrieval v2 debug/evidence package.

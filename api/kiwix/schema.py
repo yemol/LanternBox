@@ -19,6 +19,7 @@ class KiwixResult:
     article_path: Optional[str] = None
     matched_terms: List[str] = field(default_factory=list)
     matched_terms_count: int = 0
+    match_type: str = ""
     content_type: str = "kiwix"
 
     def __post_init__(self) -> None:
@@ -31,6 +32,7 @@ class KiwixResult:
         object.__setattr__(self, "role", str(self.role).strip() if self.role else None)
         object.__setattr__(self, "usage_policy", str(self.usage_policy).strip() if self.usage_policy else None)
         object.__setattr__(self, "article_path", str(self.article_path).strip() if self.article_path else None)
+        object.__setattr__(self, "match_type", str(self.match_type or "").strip())
         object.__setattr__(self, "content_type", "kiwix")
 
         score = float(self.relevance_score or 0.0)

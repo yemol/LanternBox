@@ -43,8 +43,8 @@ def _evidence_raw(item: Any, reason: str = "") -> Dict[str, Any]:
     return raw
 
 
-def _split_selected_evidence(retrieval_v2_result: Any) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
-    """Split selected v2 evidence into related_guides and related_wikis."""
+def _split_selected_evidence(retrieval_v2_result: Any) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], List[Dict[str, Any]]]:
+    """Split selected v2 evidence into related_guides, related_wikis and related_kiwix."""
     selection = getattr(retrieval_v2_result, "selection", None)
     selected = getattr(selection, "selected", []) or []
 
@@ -55,6 +55,7 @@ def _split_selected_evidence(retrieval_v2_result: Any) -> Tuple[List[Dict[str, A
 
     related_guides: List[Dict[str, Any]] = []
     related_wikis: List[Dict[str, Any]] = []
+    related_kiwix: List[Dict[str, Any]] = []
 
     for item in getattr(retrieval_v2_result, "selected_evidence", []) or []:
         source_type = getattr(item, "source_type", "")
@@ -67,8 +68,10 @@ def _split_selected_evidence(retrieval_v2_result: Any) -> Tuple[List[Dict[str, A
             related_guides.append(raw)
         elif source_type == "wiki":
             related_wikis.append(raw)
+        elif source_type == "kiwix":
+            related_kiwix.append(raw)
 
-    return related_guides, related_wikis
+    return related_guides, related_wikis, related_kiwix
 
 
 def _history_context_for_retrieval(history: List[Any] | None, limit: int = 4) -> str:
@@ -126,6 +129,7 @@ def prepare_pipeline_inputs(
     mode: str,
     related_guides: List[Dict[str, Any]] | None = None,
     related_wikis: List[Dict[str, Any]] | None = None,
+    related_kiwix: List[Dict[str, Any]] | None = None,
     detected_domains: List[str] | None = None,
     context_data: Dict[str, Any] | None = None,
     retrieval_v2: Dict[str, Any] | None = None,
@@ -140,6 +144,7 @@ def prepare_pipeline_inputs(
         "mode": mode,
         "related_guides": related_guides,
         "related_wikis": related_wikis,
+        "related_kiwix": related_kiwix,
         "detected_domains": detected_domains,
         "context_data": context_data,
         "retrieval_v2": retrieval_v2,
@@ -153,6 +158,7 @@ def prepare_pipeline_inputs(
         "mode": normalized_mode,
         "related_guides": hook_input.get("related_guides", related_guides) or [],
         "related_wikis": hook_input.get("related_wikis", related_wikis) or [],
+        "related_kiwix": hook_input.get("related_kiwix", related_kiwix) or [],
         "detected_domains": hook_input.get("detected_domains", detected_domains) or [],
         "context_data": hook_input.get("context_data", context_data) or {},
         "retrieval_v2": hook_input.get("retrieval_v2", retrieval_v2) or {},
@@ -181,7 +187,7 @@ def prepare_ai_pipeline_context(
     retrieval_v2_result = run_retrieval_v2(retrieval_query)
     retrieval_v2 = retrieval_v2_result.model_dump()
 
-    related_guides, related_wikis = _split_selected_evidence(retrieval_v2_result)
+    related_guides, related_wikis, related_kiwix = _split_selected_evidence(retrieval_v2_result)
 
     plan = retrieval_v2_result.plan
     core_terms = list(getattr(plan, "core_terms", []) or [])
@@ -191,6 +197,7 @@ def prepare_ai_pipeline_context(
         "mode": normalized_mode,
         "related_guides": related_guides,
         "related_wikis": related_wikis,
+        "related_kiwix": related_kiwix,
         "core_terms": core_terms,
         "conversation_summary": str(conversation_summary or "").strip()[:1800],
         "retrieval_query": retrieval_query,
@@ -209,6 +216,7 @@ def prepare_ai_pipeline_context(
         mode=normalized_mode,
         related_guides=related_guides,
         related_wikis=related_wikis,
+        related_kiwix=related_kiwix,
         detected_domains=detected_domains,
         context_data=context_data,
         retrieval_v2=retrieval_v2,
@@ -219,5 +227,6 @@ def prepare_ai_pipeline_context(
         "detected_domains": prepared["detected_domains"],
         "related_guides": prepared["related_guides"],
         "related_wikis": prepared["related_wikis"],
+        "related_kiwix": prepared["related_kiwix"],
         "retrieval_v2": prepared["retrieval_v2"],
     }
