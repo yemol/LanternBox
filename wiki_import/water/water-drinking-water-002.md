@@ -5,11 +5,11 @@ category: 水
 priority: P0
 summary: 估算每人最低饮水需求和缺水信号；中风险条目，少喝硬撑会削弱判断，并记录责任人、时间和复查结果。
 tags: 水, 饮用水最低需求和缺水信号, 饮用水最低需, P0, 长期生存
+guide_links: DG-0551
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 饮用水最低需求和缺水信号
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录每人饮水、尿量、症状、任务强度、调整和取水计划。
+
+## 对应 Guide
+
+- DG-0551｜饮用水只够一天：用途排序和配给｜使用时机：饮用水只够一天、水量紧张或取水不确定，需要马上控制消耗。

@@ -6,13 +6,12 @@ priority: P1
 risk_level: high
 summary: 只暴露交换所需的数量、时间和地点信息；高风险条目，不透露住所、库存、人员结构和长期计划。
 tags: 外部接触, 外部接触与物资交换风险, 物资交换前的信息最小化, 长期断供, 小团队, 离线生存
-guide_links: DG-0696, DG-0697, DG-0698
+guide_links: DG-0696, DG-0697, DG-0698, DG-0699, DG-0700
 kiwix_topics: 物资交换前的信息最小化, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 物资交换前的信息最小化
 
 ## 用途
@@ -64,9 +63,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0696
-- DG-0697
-- DG-0698
+- DG-0696｜物资交换不暴露库存｜使用时机：和外部交换物资时展示库存会增加被索取或被盯上的风险。
+- DG-0697｜交换地点不选住所核心区｜使用时机：交换地点靠近住所会暴露路线、人数和储物位置。
+- DG-0698｜陌生人求助边界回应｜使用时机：陌生人求助可能真实也可能带来风险，需要有边界地回应。
+- DG-0699｜交换物品隔离检查｜使用时机：外部交换来的物品可能有污染、虫害、定位风险或缺件。
+- DG-0700｜外部消息交叉验证记录｜使用时机：外部消息可能夸大、过期或被误传，直接行动会带来风险。
 
 ## Kiwix/ZIM 可继续查询
 

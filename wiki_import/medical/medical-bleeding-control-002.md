@@ -5,11 +5,11 @@ category: 医疗急救
 priority: P0
 summary: 强调持续压迫、减少频繁查看和记录出血变化；中风险条目，出血不止或意识异常时停止普通处理并升级。
 tags: 医疗急救, 直接压迫止血原理, 直接压迫止血, P0, 长期生存
+guide_links: DG-0556
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 直接压迫止血原理
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录时间、地点、参与人、剩余物资、异常信号、已采取动作和下一次复查时间。 医疗类条目还应记录症状开始时间、体温或观察指标、处理动作和复查结果。
+
+## 对应 Guide
+
+- DG-0556｜直接压迫止血：从出血到固定｜使用时机：直接压迫止血：从出血到固定相关场景出现，外部支援不确定，需要立刻用本地资源处理。

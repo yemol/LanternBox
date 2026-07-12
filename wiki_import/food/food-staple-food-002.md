@@ -5,11 +5,11 @@ category: 食物
 priority: P0
 summary: 用主食余量决定体力任务强度和配给节奏；中风险条目，主食不足时减少搬运、外出和高耗活动。
 tags: 食物, 基础热量和主食配给, 基础热量和主, P0, 长期生存
+guide_links: DG-0596, DG-0599
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 基础热量和主食配给
 
 ## 独立边界矩阵
@@ -79,3 +79,8 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录热量批次、开封/烹饪时间、保存位置、食用人员、弃用原因和剩余天数修正。
+
+## 对应 Guide
+
+- DG-0596｜食物只够三天：基础配给｜使用时机：食物库存只够约三天，后续补给不确定。
+- DG-0599｜主食不足：低体力消耗配给｜使用时机：米、面、饼干等主食不足，同时需要维持多天。

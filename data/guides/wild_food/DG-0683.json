@@ -49,8 +49,25 @@
     "有人接触尸体后出现不适时记录并隔离观察。"
   ],
   "related_wiki": [
-    "wildlife-unknown-plants-001",
+    "wildlife-animal-food-001",
+    "wildlife-animal-food-002",
+    "wildlife-children-001",
+    "wildlife-collection-site-001",
+    "wildlife-dead-animal-001",
+    "wildlife-do-not-eat-001",
+    "wildlife-drowning-risk-001",
+    "wildlife-edible-insects-001",
     "wildlife-fishing-001",
+    "wildlife-foraging-cost-001",
+    "wildlife-hand-hygiene-001",
+    "wildlife-hunting-fishing-001",
+    "wildlife-misinjury-risk-001",
+    "wildlife-protein-001",
+    "wildlife-ration-integration-001",
+    "wildlife-review-001",
+    "wildlife-spoilage-001",
+    "wildlife-trapping-001",
+    "wildlife-unknown-plants-001",
     "wildlife-water-quality-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
@@ -92,5 +109,6 @@
     "病死动物禁食隔离",
     "野外食物",
     "病死动物禁食隔离"
-  ]
+  ],
+  "risk_level": "caution"
 }

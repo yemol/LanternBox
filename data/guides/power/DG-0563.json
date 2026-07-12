@@ -34,7 +34,12 @@
   "stop_or_escalate": [
     "移动电源发热、鼓包、异味、进水或无法稳定输出时，停止使用并隔离。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "energy-bank-battery-priority-001",
+    "energy-lithium-battery-safety-index-001",
+    "energy-power-outage-002",
+    "energy-swollen-lithium-battery-stop-use-001"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "能源照明与设备",
   "domains": [
@@ -89,5 +94,6 @@
     "充电宝",
     "关键设备",
     "优先级"
-  ]
+  ],
+  "risk_level": "caution"
 }

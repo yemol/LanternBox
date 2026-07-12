@@ -30,7 +30,9 @@
     "演练时覆盖正式数据。",
     "只恢复文件不打开页面检查。"
   ],
-  "fallback": "没有备用设备时，至少恢复到单独测试文件夹，不碰正式目录。",
+  "fallback": [
+    "没有备用设备时，至少恢复到单独测试文件夹，不碰正式目录。"
+  ],
   "stop_or_escalate": [
     "恢复失败、口令不对、附件缺失、页面无法读取时，立即修复备份流程。"
   ],
@@ -60,5 +62,10 @@
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
-  ]
+  ],
+  "related_wiki": [
+    "education-offline-data-backup-001",
+    "general-paper-digital-dual-backup-001"
+  ],
+  "risk_level": "normal"
 }

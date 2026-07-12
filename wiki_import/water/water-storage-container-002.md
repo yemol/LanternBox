@@ -5,11 +5,11 @@ category: 水
 priority: P0
 summary: 安排容器清洁、标记、轮换和饮用/非饮用分区；高风险条目，水桶污染、漏水或来源不清时停止并隔离。
 tags: 水, 储水容器污染风险, 储水容器污染, P0, 长期生存
+guide_links: DG-0555
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 储水容器污染风险
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录容器位置、取水工具、污染事件、清洁动作和复查。
+
+## 对应 Guide
+
+- DG-0555｜储水容器污染：清洗、降级和报废判断｜使用时机：储水桶、水瓶、锅盆出现异味、霉点、油污或曾装过不明液体。

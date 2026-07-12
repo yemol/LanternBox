@@ -1,0 +1,95 @@
+{
+  "id": "DG-0808",
+  "title": "先用多层布做简易过滤",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "水里有可见杂质，想先把大颗粒挡掉。",
+  "goal": "先把水中的大颗粒和可见杂质去掉，降低后续处理难度。",
+  "keywords": [
+    "水",
+    "过滤",
+    "简易过滤",
+    "饮水安全",
+    "行动卡",
+    "DG-0614",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "干净布",
+    "容器",
+    "小口瓶",
+    "标签"
+  ],
+  "steps": [
+    "先把干净布铺在容器口上。",
+    "先把水缓慢倒入布上，让大颗粒留在布上。",
+    "先把滤过后的水转入干净容器。",
+    "先观察过滤后水是否仍有异味或颜色异常。",
+    "先把过滤后的水标记为“已过滤，待检”。"
+  ],
+  "check": [
+    "滤布已准备。",
+    "大颗粒已被挡住。",
+    "滤后水已重新容器保存。"
+  ],
+  "common_mistakes": [
+    "用脏布过滤。",
+    "让过滤水重新接触脏容器。",
+    "把“过滤过”当成“安全”。"
+  ],
+  "fallback": [
+    "布不够时先用多层干净纱布或衣物。",
+    "过滤后仍有异常时先停用。"
+  ],
+  "stop_or_escalate": [
+    "过滤后仍有强烈异味或污染痕迹时停止继续使用。",
+    "高风险水不要硬做后续处理。"
+  ],
+  "related_wiki": [
+    "water-clarity-judgement-013",
+    "water-filter-use-027",
+    "water-sediment-removal-031"
+  ],
+  "notes": "过滤只能去掉一部分杂质，不是最终安全证明。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先用多层布做简易过滤",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先用多层布做简易过滤",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先用多层布做简易过滤",
+    "先用多层布做简易过滤",
+    "水",
+    "先用多层布做简易过滤"
+  ],
+  "risk_level": "caution"
+}

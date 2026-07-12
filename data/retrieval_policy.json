@@ -25,7 +25,8 @@
     "kiwix_plan_query_chars": 80,
     "selector_candidate_limit": 16,
     "selector_max_selected": 4,
-    "selector_fallback_count": 3
+    "selector_fallback_count": 3,
+    "related_wiki_max_selected": 6
   },
   "kiwix": {
     "explicit_aliases": [
@@ -121,6 +122,16 @@
       "什么是",
       "解释一下"
     ],
+    "semantic_profiles": [
+      {
+        "name": "gas_safety",
+        "trigger_any": ["燃气", "煤气", "天然气", "可燃气体"],
+        "required_any": ["泄漏", "爆燃", "气体安全", "一氧化碳", "通风", "明火", "中毒", "燃烧", "可燃气体"],
+        "blocked_any": ["机动车组", "列车", "机车", "汽车", "车辆", "人物", "传记", "地名", "公司", "机构", "历史事件"],
+        "blocked_title_patterns": ["^\\d{4}年.*(?:事故|事件)$", "^\\d{4}年.*[·・].*(?:事故|事件)$"],
+        "excluded_reason": "kiwix_domain_anchor_mismatch:gas_safety"
+      }
+    ],
     "search": {
       "limit_min": 1,
       "limit_max": 8,
@@ -201,6 +212,17 @@
       "tools",
       "风险",
       "基础"
+    ],
+    "abstract_core_terms": [
+      "判断",
+      "安全",
+      "使用",
+      "安全使用",
+      "记录方法",
+      "交接流程",
+      "消耗标准",
+      "处理方法",
+      "判断标准"
     ],
     "unrelated_title_patterns": [
       "案件",

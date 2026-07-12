@@ -5,11 +5,11 @@ category: 水
 priority: P0
 summary: 安排容器清洁、标记、轮换和饮用/非饮用分区；中风险条目，水桶污染、漏水或来源不清时停止并隔离。
 tags: 储水, 容器, 清洁, 消毒, 饮用水, 卫生
+guide_links: DG-0813
 risk_level: caution
 status: published
 source: CDC Emergency Water Supply；壳中灯本地水储备规则
 ---
-
 # 储水容器清洁基础
 
 ## 用途
@@ -130,7 +130,7 @@ source: CDC Emergency Water Supply；壳中灯本地水储备规则
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+没有食品级容器时，把可疑容器仅用于非饮用水，并清楚标记；没有刷子时用少量清洁水反复摇洗瓶口、盖子和内壁。曾装过燃油、农药、清洁剂或有持续异味的容器，不用于饮用水。
 
 ## 记录建议
 
@@ -141,3 +141,7 @@ source: CDC Emergency Water Supply；壳中灯本地水储备规则
 LB-WAT-CAN-0001 食品级储水桶 10L 已清洁 2026-06
 
 水是生命线，容器就是水的外壳。外壳脏了，里面再清也会变成问题。
+
+## 对应 Guide
+
+- DG-0813｜先清洁储水容器再装水｜使用时机：容器长期使用，怀疑里面有残留或异味。

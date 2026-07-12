@@ -4,7 +4,7 @@ slug: agriculture-bite-risk-001
 category: 小规模养殖
 priority: P1
 risk_level: caution
-summary: 把抓咬伤清洁、隔离动物和感染观察连起来；中风险条目，红肿热痛或动物异常时升级。
+summary: 用于动物咬伤和抓伤感染的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 养殖, 小规模养殖, 动物咬伤和抓伤感染, 长期断供, 小团队, 离线生存
 guide_links: DG-0676, DG-0677, DG-0678
 kiwix_topics: 动物咬伤和抓伤感染, 小规模养殖, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 动物咬伤和抓伤感染
 
 ## 独立边界矩阵
@@ -85,9 +84,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0676
-- DG-0677
-- DG-0678
+- DG-0676｜小动物饮水遮阴｜使用时机：小动物在高温或封闭环境中饮水和遮阴不足，容易迅速衰弱。
+- DG-0677｜饲料霉变停用｜使用时机：饲料出现霉味、结块或虫害，继续投喂会造成动物生病并污染圈舍。
+- DG-0678｜粪便远离水源｜使用时机：圈舍粪便靠近水源或取水路线，可能污染饮水、吸引虫鼠并传播疾病。
 
 ## Kiwix/ZIM 可继续查询
 

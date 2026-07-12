@@ -49,9 +49,10 @@
     "逃逸源无法修补时，暂停继续养殖或转移笼舍。"
   ],
   "related_wiki": [
-    "agriculture-small-livestock-001",
     "agriculture-animal-feed-001",
-    "agriculture-feces-001"
+    "agriculture-feces-001",
+    "agriculture-small-livestock-001",
+    "agriculture-small-livestock-index-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "小规模养殖",
@@ -92,5 +93,6 @@
     "动物逃逸后停止追赶边界",
     "养殖",
     "动物逃逸后停止追赶边界"
-  ]
+  ],
+  "risk_level": "caution"
 }

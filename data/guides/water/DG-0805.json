@@ -1,0 +1,94 @@
+{
+  "id": "DG-0805",
+  "title": "先判断水是否有异味",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "水看起来还行，但细闻有异常味道。",
+  "goal": "先把有异味的水从可用区移走，避免误用。",
+  "keywords": [
+    "水",
+    "异味",
+    "饮水安全",
+    "判断",
+    "行动卡",
+    "DG-0611",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "小口瓶",
+    "标签",
+    "纸笔"
+  ],
+  "steps": [
+    "先闻一下水是否有腐败味、化学味或其他异常气味。",
+    "先检查是否同时伴有浑浊、颜色异常或沉淀。",
+    "先把有异味的水单独标记。",
+    "先把有异味的水移出饮用区。",
+    "先记录异味类型和发现时间。"
+  ],
+  "check": [
+    "异味已确认。",
+    "水已从饮用区移开。",
+    "记录已写下。"
+  ],
+  "common_mistakes": [
+    "因为水“看起来还行”就继续用。",
+    "把有味水和干净水放一起。",
+    "没有记录异味来源。"
+  ],
+  "fallback": [
+    "异味轻微时先留作待检，不要直接喝。",
+    "有多种异常时直接停用。"
+  ],
+  "stop_or_escalate": [
+    "异味明显且伴随不适时停止使用。",
+    "高风险人群不应继续尝试。"
+  ],
+  "related_wiki": [
+    "water-chemical-risk-011",
+    "water-microbial-risk-012",
+    "water-odor-judgement-014"
+  ],
+  "notes": "异味是现场最实用的快速判断线索之一。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先判断水是否有异味",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先判断水是否有异味",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先判断水是否有异味",
+    "先判断水是否有异味",
+    "水",
+    "先判断水是否有异味"
+  ],
+  "risk_level": "caution"
+}

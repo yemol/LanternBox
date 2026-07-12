@@ -49,9 +49,26 @@
     "排水改造会割伤或损坏容器承重时，换低风险容器。"
   ],
   "related_wiki": [
+    "agriculture-compost-001",
+    "agriculture-container-002",
+    "agriculture-container-003",
+    "agriculture-edible-parts-001",
+    "agriculture-expectation-001",
+    "agriculture-greywater-001",
+    "agriculture-growing-log-001",
+    "agriculture-harvest-001",
+    "agriculture-heat-001",
+    "agriculture-irrigation-001",
+    "agriculture-leafy-greens-001",
+    "agriculture-light-001",
+    "agriculture-plant-pests-001",
+    "agriculture-seed-saving-001",
     "agriculture-seed-storage-001",
+    "agriculture-seed-storage-002",
+    "agriculture-seedling-001",
+    "agriculture-soil-001",
     "agriculture-sprouts-001",
-    "agriculture-container-002"
+    "agriculture-vertical-growing-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "种植",
@@ -92,5 +109,6 @@
     "容器种植排水孔检查",
     "种植",
     "容器种植排水孔检查"
-  ]
+  ],
+  "risk_level": "caution"
 }

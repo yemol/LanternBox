@@ -33,7 +33,10 @@
   "stop_or_escalate": [
     "明显虚弱、站立头晕、儿童持续哭闹或主食低于一天时，重新评估转移、交换或求援。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "food-food-knowledge-004",
+    "food-staple-food-002"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "水与食物保障",
   "domains": [
@@ -88,5 +91,6 @@
     "米",
     "面",
     "饼干"
-  ]
+  ],
+  "risk_level": "caution"
 }

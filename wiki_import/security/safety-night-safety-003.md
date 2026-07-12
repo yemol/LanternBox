@@ -3,13 +3,13 @@ title: 夜间异响的观察原则
 slug: safety-night-safety-003
 category: 安全
 priority: P0
-summary: 控制暴露、接触、路线和冲突边界；中风险条目，人员安全受威胁时放弃物资和任务。
+summary: 用于夜间异响的观察原则的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 安全, 夜间异响的观察原则, 夜间异响的观, P0, 长期生存
+guide_links: DG-0577
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 夜间异响的观察原则
 
 ## 用途
@@ -60,9 +60,7 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0631
-- DG-0632
-- DG-0633
+- DG-0577｜夜间外部异响：观察与记录｜使用时机：夜间外部异响：观察与记录相关场景出现，外部支援不确定，需要立刻用本地资源处理。
 
 ## Kiwix/ZIM 可继续查询
 

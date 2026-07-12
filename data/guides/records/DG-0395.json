@@ -29,7 +29,9 @@
     "忙着整理美化忘了补水。",
     "所有任务都标紧急。"
   ],
-  "fallback": "时间极少时，只保留保命任务清单。",
+  "fallback": [
+    "时间极少时，只保留保命任务清单。"
+  ],
   "stop_or_escalate": [
     "饮水、药品、人员安全、火源安全未完成时，暂停改善类任务。"
   ],
@@ -58,5 +60,7 @@
     "组织秩序",
     "训练演练"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [],
+  "risk_level": "normal"
 }

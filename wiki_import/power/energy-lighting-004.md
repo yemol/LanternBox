@@ -3,13 +3,13 @@ title: 低亮照明和夜间安全
 slug: energy-lighting-004
 category: 能源
 priority: P0
-summary: 用低亮、固定点和反光减少耗电与跌倒；中风险条目，不要完全摸黑处理热物和工具。
+summary: 用于低亮照明和夜间安全的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 能源, 低亮照明和夜间安全, 低亮照明和夜, P0, 长期生存
+guide_links: DG-0565
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 低亮照明和夜间安全
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录夜间任务、使用灯具、异常跌碰和需要白天处理的事项。
+
+## 对应 Guide
+
+- DG-0565｜停电夜间：低亮照明布置｜使用时机：停电夜间：低亮照明布置相关场景出现，外部支援不确定，需要立刻用本地资源处理。

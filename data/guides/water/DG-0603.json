@@ -49,9 +49,20 @@
     "连续两次低于最低饮水储备线时，启动节水和补水决策。"
   ],
   "related_wiki": [
-    "water-water-source-001",
+    "food-rationing-priority-001",
+    "food-spoilage-boundary-001",
+    "water-boiling-002",
+    "water-boiling-003",
+    "water-chemical-contamination-001",
+    "water-drinking-water-001",
+    "water-filtering-001",
+    "water-flood-water-001",
+    "water-flood-water-002",
+    "water-handwashing-001",
+    "water-heat-001",
     "water-rainwater-001",
-    "water-flood-water-001"
+    "water-storage-container-001",
+    "water-usage-logging-040"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "水",
@@ -92,5 +103,6 @@
     "多人共用饮用水领取表",
     "水",
     "多人共用饮用水领取表"
-  ]
+  ],
+  "risk_level": "caution"
 }

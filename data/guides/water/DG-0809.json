@@ -1,0 +1,95 @@
+{
+  "id": "DG-0809",
+  "title": "先用砂石和布做简易滤层",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "水里颗粒多，想用简单材料把水先滤净。",
+  "goal": "先用可找到的材料把粗颗粒和泥沙去掉。",
+  "keywords": [
+    "水",
+    "砂石",
+    "过滤",
+    "饮水安全",
+    "行动卡",
+    "DG-0615",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "布",
+    "砂石",
+    "容器",
+    "小口瓶"
+  ],
+  "steps": [
+    "先把干净布铺在容器口。",
+    "先在布上加一层细沙和一层粗沙。",
+    "先把水缓慢倒入滤层中。",
+    "先把滤后水收进干净容器。",
+    "先把滤后水重新标记和观察。"
+  ],
+  "check": [
+    "滤层已准备。",
+    "颗粒已被分离。",
+    "滤后水已转入干净容器。"
+  ],
+  "common_mistakes": [
+    "用脏沙石过滤。",
+    "过滤后直接当饮用水。",
+    "滤层不稳定导致水流太快。"
+  ],
+  "fallback": [
+    "没有砂石时先用多层布。",
+    "滤后仍可疑时继续待检。"
+  ],
+  "stop_or_escalate": [
+    "过滤后仍有明显异味、油污或颜色异常时停止使用。",
+    "不要把滤后水当绝对安全。"
+  ],
+  "related_wiki": [
+    "water-clarity-judgement-013",
+    "water-filter-use-027",
+    "water-sediment-removal-031"
+  ],
+  "notes": "土砂滤层能降低杂质，但不能替代后续处理。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先用砂石和布做简易滤层",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先用砂石和布做简易滤层",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先用砂石和布做简易滤层",
+    "先用砂石和布做简易滤层",
+    "水",
+    "先用砂石和布做简易滤层"
+  ],
+  "risk_level": "caution"
+}

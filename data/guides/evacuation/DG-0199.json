@@ -29,7 +29,9 @@
     "只画自己懂的图。",
     "不标方向。"
   ],
-  "fallback": "时间很紧时，只画入口、出口、集合点、危险点四类。",
+  "fallback": [
+    "时间很紧时，只画入口、出口、集合点、危险点四类。"
+  ],
   "stop_or_escalate": [
     "营地布局改变、危险点增加、人员走错路线时，重画草图。"
   ],
@@ -69,5 +71,7 @@
     "records_inventory_people",
     "撤离交通"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [],
+  "risk_level": "caution"
 }

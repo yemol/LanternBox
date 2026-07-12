@@ -5,11 +5,11 @@ category: 水
 priority: P0
 summary: 说明沉淀、过滤和煮沸的先后顺序；中风险条目，水源有化学污染或容器不洁时不作为饮用水。
 tags: 水, 煮沸和过滤的区别, 煮沸和过滤的, P0, 长期生存
+guide_links: DG-0553
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 煮沸和过滤的区别
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录水源、是否过滤、是否煮沸/消毒、容器和用途。
+
+## 对应 Guide
+
+- DG-0553｜可疑水源：过滤、煮沸和禁用判断｜使用时机：雨水、河水、井水、桶底水或洪水后水源不确定。

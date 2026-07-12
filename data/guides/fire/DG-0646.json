@@ -49,9 +49,26 @@
     "无人能保持清醒值守时，不保留燃烧火源。"
   ],
   "related_wiki": [
+    "fire-alcohol-stove-001",
+    "fire-candle-001",
     "fire-carbon-monoxide-001",
+    "fire-cold-001",
+    "fire-fire-knowledge-001",
+    "fire-fire-knowledge-002",
+    "fire-fire-knowledge-003",
+    "fire-fire-response-001",
+    "fire-gas-leak-001",
+    "fire-heat-illness-001",
     "fire-heating-001",
-    "fire-candle-001"
+    "fire-heating-002",
+    "fire-heating-003",
+    "fire-hypothermia-001",
+    "fire-insulation-001",
+    "fire-open-flame-001",
+    "fire-sleep-001",
+    "fire-smoke-001",
+    "fire-smoke-002",
+    "fire-ventilation-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
@@ -92,5 +109,6 @@
     "室内取暖睡前火源复查",
     "火源",
     "室内取暖睡前火源复查"
-  ]
+  ],
+  "risk_level": "caution"
 }

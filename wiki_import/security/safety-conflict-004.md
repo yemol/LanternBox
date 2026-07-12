@@ -3,13 +3,13 @@ title: 冲突降温的基本原则
 slug: safety-conflict-004
 category: 外部接触与物资交换风险
 priority: P1
-summary: 控制暴露、接触、路线和冲突边界；中风险条目，人员安全受威胁时放弃物资和任务。
+summary: 用于冲突降温的基本原则的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 安全, 冲突降温的基本原则, 冲突降温的基, P0, 长期生存
+guide_links: DG-0633
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 冲突降温的基本原则
 
 ## 用途
@@ -60,9 +60,7 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0631
-- DG-0632
-- DG-0633
+- DG-0633｜物资分配冲突暂停｜使用时机：物资分配时出现情绪升级或互相指责，继续讨论会增加冲突风险。
 
 ## Kiwix/ZIM 可继续查询
 

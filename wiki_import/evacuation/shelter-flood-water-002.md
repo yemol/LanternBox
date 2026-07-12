@@ -3,13 +3,13 @@ title: 洪水转移的时间窗口
 slug: shelter-flood-water-002
 category: 避难转移
 priority: P0
-summary: 记录水位上涨、路线变化和转移窗口；高风险条目，不要等到水流变急再行动。
+summary: 用于洪水转移的时间窗口的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 避难转移, 洪水转移的时间窗口, 洪水转移的时, P0, 长期生存
+guide_links: DG-0578
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 洪水转移的时间窗口
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录窗口开始、截止时间、水位变化、路线选择、停止线和最终行动。
+
+## 对应 Guide
+
+- DG-0578｜洪水来临前：撤高断电复核｜使用时机：洪水来临前：撤高断电复核相关场景出现，外部支援不确定，需要立刻用本地资源处理。

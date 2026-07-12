@@ -4,7 +4,7 @@ slug: food-food-poisoning-001
 category: 食物
 priority: P0
 risk_level: high
-summary: 记录同餐人员、食物批次、发作时间和症状；高风险条目，多人腹泻呕吐时停止同批食物。
+summary: 用于多人共餐时食物中毒追溯的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 食物, 多人共餐时食物中毒追溯, 长期断供, 小团队, 离线生存
 guide_links: DG-0606, DG-0607, DG-0608
 kiwix_topics: 多人共餐时食物中毒追溯, 食物, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 多人共餐时食物中毒追溯
 
 ## 独立边界矩阵
@@ -85,9 +84,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0606
-- DG-0607
-- DG-0608
+- DG-0606｜干粮和罐头三天配给表｜使用时机：只剩干粮和罐头，需要把未来三天的口粮先算清楚，避免第一天消耗过快。
+- DG-0607｜剩饭过夜无冷藏禁食判断｜使用时机：剩饭在无冷藏条件下过夜，外观可能正常但细菌风险已经上升。
+- DG-0608｜霉变粮食和坚果停用｜使用时机：粮食或坚果出现霉斑、霉味、结块或虫蛀，局部去除不能可靠排除毒素风险。
 
 ## Kiwix/ZIM 可继续查询
 

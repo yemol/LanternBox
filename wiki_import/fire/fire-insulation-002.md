@@ -3,13 +3,13 @@ title: 衣物分层保温原理
 slug: fire-insulation-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
-summary: 控制火源、通风、燃料和睡前复查；中风险条目，烟味、燃气味或人员不适时停止用火。
+summary: 用于衣物分层保温原理的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 火源 / 保温 / 通风 / 一氧化碳风险, 衣物分层保温原理, 衣物分层保温, P0, 长期生存
+guide_links: DG-0594
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 衣物分层保温原理
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录穿着层次、湿衣位置、人员冷热点和调整时间。
+
+## 对应 Guide
+
+- DG-0594｜潮湿寒冷：衣物分层和睡眠保温｜使用时机：潮湿寒冷：衣物分层和睡眠保温相关场景出现，外部支援不确定，需要立刻用本地资源处理。

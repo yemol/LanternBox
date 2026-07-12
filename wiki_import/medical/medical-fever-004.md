@@ -5,11 +5,11 @@ category: 医疗急救
 priority: P0
 summary: 记录体温感受、精神状态、尿量和伴随症状；中风险条目，皮疹、意识变化、持续恶化或儿童危险信号需升级。
 tags: 医疗急救, 发热记录重要, 发热记录为什, P0, 长期生存
+guide_links: DG-0558
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 发热记录为什么重要
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录字段包括时间、体温/热感、饮水、尿量、精神、伴随症状、处理动作和下一次复查。
+
+## 对应 Guide
+
+- DG-0558｜发热观察、补水和记录｜使用时机：发热观察、补水和记录相关场景出现，外部支援不确定，需要立刻用本地资源处理。

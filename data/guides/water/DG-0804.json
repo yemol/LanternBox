@@ -1,0 +1,95 @@
+{
+  "id": "DG-0804",
+  "title": "先判断水是否浑浊",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "取回来的水看起来不清楚，不知道是正常悬浮物还是污染。",
+  "goal": "先判断浑浊水是否还能继续做进一步处理。",
+  "keywords": [
+    "水",
+    "浑浊",
+    "饮水安全",
+    "判断",
+    "行动卡",
+    "DG-0610",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "小口瓶",
+    "布",
+    "纸笔",
+    "标签"
+  ],
+  "steps": [
+    "先观察水是否有明显悬浮物、沉淀或浑浊。",
+    "先看水是否有异味或颜色异常。",
+    "先判断浑浊是否出现在污染源附近。",
+    "先把高度可疑的水单独标记。",
+    "先决定是先处理、待检还是停用。"
+  ],
+  "check": [
+    "浑浊现象已记录。",
+    "异味和颜色已检查。",
+    "处理决策已写下。"
+  ],
+  "common_mistakes": [
+    "把任何浑浊水都当成可饮用。",
+    "只看沉淀，不看来源。",
+    "没有把可疑水隔离。"
+  ],
+  "fallback": [
+    "可疑程度低时先静置后再看。",
+    "无法判断时先按待检处理。"
+  ],
+  "stop_or_escalate": [
+    "浑浊伴随异味或污染痕迹时停止继续使用。",
+    "高风险人群不要冒险。"
+  ],
+  "related_wiki": [
+    "water-clarity-judgement-013",
+    "water-sediment-removal-031",
+    "water-source-judgement-002"
+  ],
+  "notes": "浑浊不是结论，先判断再处理。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先判断水是否浑浊",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先判断水是否浑浊",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先判断水是否浑浊",
+    "先判断水是否浑浊",
+    "水",
+    "先判断水是否浑浊"
+  ],
+  "risk_level": "caution"
+}

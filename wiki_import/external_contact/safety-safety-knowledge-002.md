@@ -4,7 +4,7 @@ slug: safety-safety-knowledge-002
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 把交换物品先隔离、检查、清洁再入库；高风险条目，来源不清或污染可疑时降级处理。
+summary: 用于交换物品的污染隔离的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 外部接触, 外部接触与物资交换风险, 交换物品的污染隔离, 长期断供, 小团队, 离线生存
 guide_links: DG-0696, DG-0697, DG-0698
 kiwix_topics: 交换物品的污染隔离, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 交换物品的污染隔离
 
 ## 用途
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0696
-- DG-0697
-- DG-0698
+- DG-0696｜物资交换不暴露库存｜使用时机：和外部交换物资时展示库存会增加被索取或被盯上的风险。
+- DG-0697｜交换地点不选住所核心区｜使用时机：交换地点靠近住所会暴露路线、人数和储物位置。
+- DG-0698｜陌生人求助边界回应｜使用时机：陌生人求助可能真实也可能带来风险，需要有边界地回应。
 
 ## Kiwix/ZIM 可继续查询
 

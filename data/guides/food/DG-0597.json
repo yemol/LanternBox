@@ -34,7 +34,11 @@
   "stop_or_escalate": [
     "食物有腐败味、黏液、霉斑、鼓包喷液或食用后多人不适时，立即停止食用同批食物。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "food-post-flood-food-high-risk-001",
+    "food-refrigeration-003",
+    "food-refrigerator-outage-001"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "水与食物保障",
   "domains": [
@@ -89,5 +93,6 @@
     "冰箱",
     "无电冰箱",
     "优先食用"
-  ]
+  ],
+  "risk_level": "high"
 }

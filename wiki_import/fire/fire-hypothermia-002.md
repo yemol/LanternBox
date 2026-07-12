@@ -5,11 +5,11 @@ category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 summary: 识别发抖、动作变慢、说话含糊和湿冷风险；中风险条目，意识异常或停止发抖时停止普通任务。
 tags: 火源 / 保温 / 通风 / 一氧化碳风险, 低温失温基础, P0, 长期生存
+guide_links: DG-0018
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 低温失温基础
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录症状、衣物干湿、睡眠位置、复查人和是否停止任务。
+
+## 对应 Guide
+
+- DG-0018｜失温：保温、干燥、缓慢复温｜使用时机：寒冷、淋雨、长时间暴露后发抖、迟钝、皮肤冰冷。

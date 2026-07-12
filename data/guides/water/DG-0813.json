@@ -1,0 +1,96 @@
+{
+  "id": "DG-0813",
+  "title": "先清洁储水容器再装水",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "容器长期使用，怀疑里面有残留或异味。",
+  "goal": "先把容器清干净，避免二次污染。",
+  "keywords": [
+    "水",
+    "容器清洁",
+    "储存",
+    "饮水安全",
+    "行动卡",
+    "DG-0619",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "清水",
+    "布",
+    "容器",
+    "标签"
+  ],
+  "steps": [
+    "先把容器里的旧水和残留物清空。",
+    "先用清水和布把内壁和口部清理。",
+    "先让容器自然晾干。",
+    "先检查是否有裂痕、异味或污垢。",
+    "先重新装水前给容器贴好标签。"
+  ],
+  "check": [
+    "容器已清空。",
+    "内壁已清理。",
+    "容器状态已检查。"
+  ],
+  "common_mistakes": [
+    "只冲一下就直接装水。",
+    "用有异味的容器。",
+    "没有检查裂痕。"
+  ],
+  "fallback": [
+    "无法彻底清洁时直接换容器。",
+    "容器老化严重时先停用。"
+  ],
+  "stop_or_escalate": [
+    "容器有裂痕或异味明显时停止使用。",
+    "高风险场景下不要冒险。"
+  ],
+  "related_wiki": [
+    "water-bucket-cleaning-026",
+    "water-container-cleaning-001",
+    "water-container-cleaning-003",
+    "water-container-labeling-004"
+  ],
+  "notes": "很多污染不是水本身造成的，而是容器造成的。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先清洁储水容器再装水",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先清洁储水容器再装水",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先清洁储水容器再装水",
+    "先清洁储水容器再装水",
+    "水",
+    "先清洁储水容器再装水"
+  ],
+  "risk_level": "caution"
+}

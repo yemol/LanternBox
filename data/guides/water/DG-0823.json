@@ -1,0 +1,95 @@
+{
+  "id": "DG-0823",
+  "title": "先在缺水时收缩用水范围",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "储水明显不足，需要先压缩非必要用水。",
+  "goal": "先把有限水资源优先给最必要用途。",
+  "keywords": [
+    "水",
+    "缺水",
+    "节约",
+    "饮水安全",
+    "行动卡",
+    "DG-0629",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "标签",
+    "纸笔",
+    "小口瓶"
+  ],
+  "steps": [
+    "先列出必须保留的用途。",
+    "先把非必要用水停掉。",
+    "先把清洁和娱乐型用水压缩。",
+    "先把剩余水按优先级重新分配。",
+    "先记录每次收缩的原因。"
+  ],
+  "check": [
+    "优先级已列出。",
+    "非必要用水已停掉。",
+    "记录已完成。"
+  ],
+  "common_mistakes": [
+    "继续按平常习惯使用。",
+    "没有重设优先级。",
+    "没有记录变化。"
+  ],
+  "fallback": [
+    "水量极低时先保留饮用和照护。",
+    "非必要用途暂停。"
+  ],
+  "stop_or_escalate": [
+    "水量进一步下降时停止非必要操作。",
+    "必要时升级为更严格节水。"
+  ],
+  "related_wiki": [
+    "water-day-check-022",
+    "water-quantity-estimate-021",
+    "water-rationing-priority-001",
+    "water-shortage-response-041"
+  ],
+  "notes": "缺水时先压缩范围，而不是继续平均消耗。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先在缺水时收缩用水范围",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先在缺水时收缩用水范围",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先在缺水时收缩用水范围",
+    "先在缺水时收缩用水范围",
+    "水",
+    "先在缺水时收缩用水范围"
+  ],
+  "risk_level": "caution"
+}

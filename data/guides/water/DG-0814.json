@@ -1,0 +1,94 @@
+{
+  "id": "DG-0814",
+  "title": "先给储水容器贴标签和编号",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "多个容器同时使用，容易混淆内容和日期。",
+  "goal": "先让每个容器的用途和状态一目了然。",
+  "keywords": [
+    "水",
+    "标签",
+    "储存",
+    "饮水安全",
+    "行动卡",
+    "DG-0620",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "标签",
+    "纸笔",
+    "笔记本"
+  ],
+  "steps": [
+    "先给每个容器写上用途：饮用、待检、清洁、烹饪。",
+    "先写上日期和编号。",
+    "先把容器编号和记录表对应。",
+    "先把高优先级容器放在显眼位置。",
+    "先每次取水后更新状态。"
+  ],
+  "check": [
+    "每个容器都有用途。",
+    "日期和编号已写。",
+    "记录表已对应。"
+  ],
+  "common_mistakes": [
+    "只标一个“水”字。",
+    "编号和记录不一致。",
+    "状态更新不及时。"
+  ],
+  "fallback": [
+    "没有标签时先用不同颜色布条。",
+    "没有纸笔时先用刻痕或编号。"
+  ],
+  "stop_or_escalate": [
+    "标签缺失导致误用增多时重做标记。",
+    "混用频繁时重新分区。"
+  ],
+  "related_wiki": [
+    "water-container-labeling-004",
+    "water-discharging-016",
+    "water-emergency-division-043"
+  ],
+  "notes": "标签不是多余工作，而是避免误用的简单工具。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先给储水容器贴标签和编号",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先给储水容器贴标签和编号",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先给储水容器贴标签和编号",
+    "先给储水容器贴标签和编号",
+    "水",
+    "先给储水容器贴标签和编号"
+  ],
+  "risk_level": "caution"
+}

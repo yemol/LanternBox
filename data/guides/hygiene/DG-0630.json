@@ -50,9 +50,9 @@
     "饮用水低于最低线时，停止非必要餐具清洗，改用个人固定餐具。"
   ],
   "related_wiki": [
-    "hygiene-odor-001",
     "hygiene-hand-hygiene-001",
-    "hygiene-handwashing-001"
+    "hygiene-handwashing-001",
+    "hygiene-odor-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "卫生",
@@ -93,5 +93,6 @@
     "少水餐具清洁顺序",
     "卫生",
     "少水餐具清洁顺序"
-  ]
+  ],
+  "risk_level": "caution"
 }

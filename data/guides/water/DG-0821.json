@@ -1,0 +1,95 @@
+{
+  "id": "DG-0821",
+  "title": "先处理高温下的补水和休息",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "高温环境下人会快速脱水，必须先保护体力。",
+  "goal": "先在高温下把补水和休息安排好，避免继续恶化。",
+  "keywords": [
+    "水",
+    "高温",
+    "补水",
+    "脱水",
+    "行动卡",
+    "DG-0627",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "小口瓶",
+    "布",
+    "标签",
+    "纸笔"
+  ],
+  "steps": [
+    "先把人员移到阴凉处。",
+    "先少量补水，不要一次喝太多。",
+    "先观察是否有头晕、虚弱或心慌。",
+    "先暂停高强度活动。",
+    "先把补水情况记录下来。"
+  ],
+  "check": [
+    "人员已转移到阴凉处。",
+    "补水已少量进行。",
+    "状态已观察。"
+  ],
+  "common_mistakes": [
+    "继续高强度活动。",
+    "一次喝太多。",
+    "只靠口渴感判断。"
+  ],
+  "fallback": [
+    "如果不清楚是否恢复，就先继续休息。",
+    "高风险人群优先保护。"
+  ],
+  "stop_or_escalate": [
+    "出现明显虚弱、心慌或意识模糊时停止继续行动。",
+    "必要时升级为更高风险处理。"
+  ],
+  "related_wiki": [
+    "water-drinking-priority-017",
+    "water-heat-illness-047",
+    "water-heat-weather-036"
+  ],
+  "notes": "高温下补水和休息不是顺序问题，而是同时处理。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先处理高温下的补水和休息",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先处理高温下的补水和休息",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先处理高温下的补水和休息",
+    "先处理高温下的补水和休息",
+    "水",
+    "先处理高温下的补水和休息"
+  ],
+  "risk_level": "caution"
+}

@@ -3,13 +3,13 @@ title: 饮用水储存基础
 slug: water-drinking-storage-001
 category: 水
 priority: P0
-summary: 安排取水、处理、储存和饮用分区；中风险条目，水源异常或容器污染时先隔离。
+summary: 用于饮用水储存基础的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 饮用水, 储水, 停水, 容器, 卫生
+guide_links: DG-0457
 risk_level: caution
 status: published
 source: CDC Emergency Water Supply；Ready.gov Water
 ---
-
 # 饮用水储存基础
 
 ## 用途
@@ -144,7 +144,7 @@ source: CDC Emergency Water Supply；Ready.gov Water
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+容器不足时，优先保留未开封瓶装水、食品级小容器和可密封饮水壶；把清洁、冲洗、降温用水另行标记。储水不足时减少清洗和耗水任务，优先保障饮用、基础烹饪和医疗照护。
 
 ## 记录建议
 
@@ -157,3 +157,7 @@ source: CDC Emergency Water Supply；Ready.gov Water
 LB-WAT-0001 饮用水 5L 客厅柜下层 2026-06
 
 储水准备应从小规模开始，不必一次完成。先做到 3 天，再逐步扩展到 7 天或更长周期。
+
+## 对应 Guide
+
+- DG-0457｜饮用水分区储存｜使用时机：取回或净化后的水需要在住所、营地或车辆中储存。

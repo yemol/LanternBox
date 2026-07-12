@@ -30,7 +30,9 @@
     "鼓包电池继续充。",
     "烧焦插座继续用。"
   ],
-  "fallback": "必须用电时，选择未受影响的备用设备和独立电源。",
+  "fallback": [
+    "必须用电时，选择未受影响的备用设备和独立电源。"
+  ],
   "stop_or_escalate": [
     "电器冒烟、发热、异味、火花、漏电感时，立即断开并隔离。"
   ],
@@ -51,5 +53,7 @@
     "灾害应对",
     "灾后恢复"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [],
+  "risk_level": "high"
 }

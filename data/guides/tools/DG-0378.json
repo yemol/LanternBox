@@ -31,7 +31,9 @@
     "补片刚好盖住洞没有余量。",
     "修补点靠近炉具。"
   ],
-  "fallback": "没有胶带时，用塑料片加绳扎、夹子或压条临时遮挡。",
+  "fallback": [
+    "没有胶带时，用塑料片加绳扎、夹子或压条临时遮挡。"
+  ],
   "stop_or_escalate": [
     "漏水进入药品、证件、电器、睡眠区时，优先转移物资而不是只补洞。"
   ],
@@ -79,5 +81,11 @@
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
-  ]
+  ],
+  "related_wiki": [
+    "repair-plastic-sheet-002",
+    "repair-simple-sealing-001",
+    "repair-waterproof-layer-maintenance-001"
+  ],
+  "risk_level": "caution"
 }

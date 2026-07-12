@@ -34,7 +34,9 @@
   "stop_or_escalate": [
     "夜间跌倒、照明完全耗尽或必须外出时，重新分配电池并停止非必要夜间行动。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "energy-battery-capacity-002"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "能源照明与设备",
   "domains": [
@@ -98,5 +100,6 @@
     "照明",
     "低亮",
     "手电"
-  ]
+  ],
+  "risk_level": "caution"
 }

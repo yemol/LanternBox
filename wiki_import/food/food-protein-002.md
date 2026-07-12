@@ -5,11 +5,11 @@ category: 食物
 priority: P0
 summary: 提示单调饮食下蛋白、盐分和体力下降风险；中风险条目，优先选择低风险蛋白来源而非冒险取食。
 tags: 食物, 蛋白质不足的风险, 蛋白质不足的, P0, 长期生存
+guide_links: DG-0445
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 蛋白质不足的风险
 
 ## 独立边界矩阵
@@ -79,3 +79,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录蛋白质不足批次、开封/烹饪时间、保存位置、食用人员、弃用原因和剩余天数修正。
+
+## 对应 Guide
+
+- DG-0445｜蛋白来源分配｜使用时机：肉罐头、鱼干、蛋、豆类、坚果、奶粉、动物养殖或采集蛋白数量有限。

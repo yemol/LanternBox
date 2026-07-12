@@ -35,7 +35,10 @@
   "stop_or_escalate": [
     "容器有化学味、油膜、裂缝、霉味无法去除或来源不明时，停止用于饮用水。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "water-chemical-container-no-drinking-water-001",
+    "water-storage-container-002"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "水与食物保障",
   "domains": [
@@ -100,5 +103,6 @@
     "装过清洁剂",
     "清洗后装饮用水",
     "化学品容器"
-  ]
+  ],
+  "risk_level": "caution"
 }

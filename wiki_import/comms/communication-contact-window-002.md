@@ -3,13 +3,13 @@ title: 固定开机窗口的作用
 slug: communication-contact-window-002
 category: 通讯
 priority: P0
-summary: 固定开机时间以节省电量并降低错过消息；中风险条目，窗口外保持关机或低耗。
+summary: 用于固定开机窗口的作用的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 通讯, 固定开机窗口的作用, 固定开机窗口, P0, 长期生存
+guide_links: DG-0636
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 固定开机窗口的作用
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录每个窗口负责人、目标联系人、结果、下一动作和是否触发失联流程。
+
+## 对应 Guide
+
+- DG-0636｜断网家庭固定开机窗口｜使用时机：断网后家庭成员仍有少量电量设备，需要固定开机窗口而不是全天等待消息。

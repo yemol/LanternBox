@@ -31,7 +31,9 @@
     "徒手接触血液、污水或不明液体。",
     "忽略头顶坠物和脚下玻璃。"
   ],
-  "fallback": "没有手套时用塑料袋套手；没有绳子时用椅子、箱子、背包划边界。",
+  "fallback": [
+    "没有手套时用塑料袋套手；没有绳子时用椅子、箱子、背包划边界。"
+  ],
   "stop_or_escalate": [
     "现场仍在燃烧、漏气、带电、坍塌或有持续暴力风险时，不进入。"
   ],
@@ -77,5 +79,7 @@
   "ranking_role": "fallback",
   "guide_type": "safety_principle",
   "primary_domain": "medical",
-  "primary_intent": "tools_security_repair"
+  "primary_intent": "tools_security_repair",
+  "related_wiki": [],
+  "risk_level": "caution"
 }

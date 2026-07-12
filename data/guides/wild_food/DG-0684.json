@@ -49,8 +49,8 @@
     "天黑或天气恶化导致无法复查时提前撤除。"
   ],
   "related_wiki": [
-    "wildlife-unknown-plants-001",
     "wildlife-fishing-001",
+    "wildlife-unknown-plants-001",
     "wildlife-water-quality-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
@@ -92,5 +92,6 @@
     "诱捕误伤风险检查",
     "野外食物",
     "诱捕误伤风险检查"
-  ]
+  ],
+  "risk_level": "caution"
 }

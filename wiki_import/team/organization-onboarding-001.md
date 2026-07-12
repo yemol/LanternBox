@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 新成员加入的信息交接
 
 ## 用途
@@ -65,9 +64,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0686
-- DG-0687
-- DG-0688
+- DG-0686｜夜间轮值交接表｜使用时机：夜间需要轮值守夜、照护或火源检查，交接不清会漏任务。
+- DG-0687｜外出登记和归队检查｜使用时机：成员外出执行任务，如果没有登记和归队检查，容易失联或带回污染。
+- DG-0688｜照护任务双人备份｜使用时机：病人、儿童或老人照护只靠一人，疲劳或外出时会断档。
 
 ## Kiwix/ZIM 可继续查询
 

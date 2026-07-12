@@ -34,7 +34,10 @@
   "stop_or_escalate": [
     "设备发烫、鼓包、进水、焦味或接口松动打火时，立即停止充电。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "energy-solar-charging-003",
+    "energy-solar-system-basics-index-001"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "能源照明与设备",
   "domains": [
@@ -89,5 +92,6 @@
     "太阳能板",
     "排程",
     "移动电源"
-  ]
+  ],
+  "risk_level": "caution"
 }

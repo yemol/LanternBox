@@ -30,7 +30,9 @@
     "异常水和好水放一起。",
     "不记录来源下次继续取。"
   ],
-  "fallback": "无法判断时，按不安全水处理，只用于非入口低风险用途或废弃。",
+  "fallback": [
+    "无法判断时，按不安全水处理，只用于非入口低风险用途或废弃。"
+  ],
   "stop_or_escalate": [
     "化学味、油膜、死动物污染、强烈刺激味时，不作为饮用水处理。"
   ],
@@ -97,5 +99,13 @@
     "冰箱食物",
     "罐头鼓包",
     "夜间异响"
-  ]
+  ],
+  "related_wiki": [
+    "water-abnormal-quality-check-001",
+    "water-drinking-water-microbial-risk-index-001",
+    "water-recovery-check-042",
+    "water-sampling-check-039",
+    "water-unverified-water-no-direct-drink-001"
+  ],
+  "risk_level": "caution"
 }

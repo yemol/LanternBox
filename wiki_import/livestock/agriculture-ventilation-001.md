@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 高温下小动物遮阴通风
 
 ## 独立边界矩阵
@@ -85,9 +84,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0676
-- DG-0677
-- DG-0678
+- DG-0676｜小动物饮水遮阴｜使用时机：小动物在高温或封闭环境中饮水和遮阴不足，容易迅速衰弱。
+- DG-0677｜饲料霉变停用｜使用时机：饲料出现霉味、结块或虫害，继续投喂会造成动物生病并污染圈舍。
+- DG-0678｜粪便远离水源｜使用时机：圈舍粪便靠近水源或取水路线，可能污染饮水、吸引虫鼠并传播疾病。
 
 ## Kiwix/ZIM 可继续查询
 

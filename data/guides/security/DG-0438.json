@@ -1,7 +1,7 @@
 {
   "id": "DG-0438",
   "title": "路线安全重新评估",
-  "category": "库存资料与成员档案",
+  "category": "撤离交通与路线",
   "priority": "P2",
   "scenario": "原路线曾经安全，但近期出现施工、积水、冲突、动物、陌生人、烟尘或塌方。",
   "goal": "避免旧路线变成新陷阱。",
@@ -30,7 +30,9 @@
     "只在脑子里记危险点。",
     "没有备用路线。"
   ],
-  "fallback": "无法复查全部路线时，优先复查取水和撤离路线。",
+  "fallback": [
+    "无法复查全部路线时，优先复查取水和撤离路线。"
+  ],
   "stop_or_escalate": [
     "路线出现冲突、电线、塌方、污水、尾随风险时，立即暂停。"
   ],
@@ -38,7 +40,9 @@
   "category_original": "情报记录与风险评估",
   "domains": [
     "security",
-    "records"
+    "records",
+    "evacuation",
+    "disaster"
   ],
   "intents": [
     "security_suspicious_person",
@@ -82,5 +86,11 @@
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
-  ]
+  ],
+  "related_wiki": [
+    "navigation-danger-zone-marking-001",
+    "navigation-environment-change-review-001",
+    "navigation-route-difficulty-record-001"
+  ],
+  "risk_level": "caution"
 }

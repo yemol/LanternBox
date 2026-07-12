@@ -31,7 +31,9 @@
     "把净水倒进原来的脏桶。",
     "处理化学污染水后饮用。"
   ],
-  "fallback": "没有锅时，优先寻找更安全水源；有可靠无香型含氯消毒剂时，可按说明处理，但仍要先过滤浑浊物。",
+  "fallback": [
+    "没有锅时，优先寻找更安全水源；有可靠无香型含氯消毒剂时，可按说明处理，但仍要先过滤浑浊物。"
+  ],
   "stop_or_escalate": [
     "多人饮用后腹泻。",
     "水有化学味、油膜、强烈异味。",
@@ -93,5 +95,13 @@
     "冰箱食物",
     "罐头鼓包",
     "夜间异响"
-  ]
+  ],
+  "related_wiki": [
+    "water-drinking-water-microbial-risk-index-001",
+    "water-sediment-removal-031",
+    "water-simple-filter-material-index-001",
+    "water-simple-filtering-settling-001",
+    "water-unverified-water-no-direct-drink-001"
+  ],
+  "risk_level": "high"
 }

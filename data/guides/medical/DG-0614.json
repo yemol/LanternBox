@@ -51,6 +51,7 @@
   "related_wiki": [
     "medical-bleeding-control-001",
     "medical-clean-water-001",
+    "medical-sprain-strain-care-001",
     "medical-wound-care-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
@@ -92,5 +93,6 @@
     "扭伤后转移固定",
     "医疗",
     "扭伤后转移固定"
-  ]
+  ],
+  "risk_level": "caution"
 }

@@ -30,7 +30,9 @@
     "燃气味还点火查。",
     "只清表面不查死角。"
   ],
-  "fallback": "找不到来源时，先加强通风并隔离最可疑区域。",
+  "fallback": [
+    "找不到来源时，先加强通风并隔离最可疑区域。"
+  ],
   "stop_or_escalate": [
     "燃气味、化学味、腐败味伴随多人不适时，立即撤离或封锁区域。"
   ],
@@ -52,5 +54,7 @@
     "灾害应对",
     "灾后恢复"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [],
+  "risk_level": "caution"
 }

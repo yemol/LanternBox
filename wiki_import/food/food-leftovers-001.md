@@ -3,13 +3,13 @@ title: 剩饭复热和重复加热边界
 slug: food-leftovers-001
 category: 食物
 priority: P0
-summary: 限制剩饭保存、复热次数和多人共食范围；中风险条目，无冷藏或反复复热后应弃用。
+summary: 用于剩饭复热和重复加热边界的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 食物, 剩饭复热和重复加热边界, 剩饭复热和重, P0, 长期生存
+guide_links: DG-0607
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 剩饭复热和重复加热边界
 
 ## 独立边界矩阵
@@ -79,3 +79,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录剩饭复热批次、开封/烹饪时间、保存位置、食用人员、弃用原因和剩余天数修正。
+
+## 对应 Guide
+
+- DG-0607｜剩饭过夜无冷藏禁食判断｜使用时机：剩饭在无冷藏条件下过夜，外观可能正常但细菌风险已经上升。

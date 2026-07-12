@@ -50,9 +50,9 @@
     "睡眠区地面返潮时，先加垫层或移动睡位。"
   ],
   "related_wiki": [
+    "fire-candle-001",
     "fire-carbon-monoxide-001",
-    "fire-heating-001",
-    "fire-candle-001"
+    "fire-heating-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
@@ -93,5 +93,6 @@
     "低温夜间脚部保温",
     "火源",
     "低温夜间脚部保温"
-  ]
+  ],
+  "risk_level": "caution"
 }

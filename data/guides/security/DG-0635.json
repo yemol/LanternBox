@@ -50,8 +50,9 @@
     "超过最晚返回时间时，留守方按预案复核，不派单人盲目追出。"
   ],
   "related_wiki": [
-    "safety-night-safety-002",
     "safety-low-profile-001",
+    "safety-night-movement-no-solo-001",
+    "safety-night-safety-002",
     "safety-stranger-contact-002"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
@@ -93,5 +94,6 @@
     "外出找水双人返回规则",
     "安全",
     "外出找水双人返回规则"
-  ]
+  ],
+  "risk_level": "caution"
 }

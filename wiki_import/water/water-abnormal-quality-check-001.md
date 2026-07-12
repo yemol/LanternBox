@@ -5,11 +5,11 @@ category: 水
 priority: P0
 summary: 用颜色、气味、浑浊、油膜和来源记录做基础筛查；中风险条目，异常水先隔离，不直接并入饮用储备。
 tags: 饮用水, 水质, 异味, 浑浊, 污染, 储水
+guide_links: DG-0466
 risk_level: caution
 status: published
 source: CDC Emergency Water Supply；Ready.gov Water
 ---
-
 # 水质异常判断
 
 ## 用途
@@ -24,7 +24,7 @@ source: CDC Emergency Water Supply；Ready.gov Water
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备透明容器、标签、铅笔、清洁取样杯、遮盖物、分区位置和观察记录。最低条件是能在不入口品尝的前提下观察颜色、浑浊、沉淀、油膜、异味和来源。
 
 ## 操作步骤
 
@@ -156,7 +156,7 @@ source: CDC Emergency Water Supply；Ready.gov Water
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+没有检测工具时，按颜色、异味、油膜、沉淀、来源和容器历史保守分级；无法排除化学污染、粪污、洪水或油污时降级为非饮用水并隔离。缺少替代水源时优先寻找已封存饮用水，不用可疑水入口。
 
 ## 记录建议
 
@@ -167,3 +167,7 @@ source: CDC Emergency Water Supply；Ready.gov Water
 建议记录：水源位置、取得时间、颜色、气味、是否沉淀、是否过滤、是否煮沸、最终用途。
 
 水质判断不是一次性结论。环境变化、容器污染和储存时间都会改变水的风险等级。
+
+## 对应 Guide
+
+- DG-0466｜水质异常初筛｜使用时机：储水或取回水出现颜色、气味、沉淀、漂浮物、油膜或味道变化。

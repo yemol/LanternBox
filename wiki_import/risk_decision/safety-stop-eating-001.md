@@ -4,15 +4,14 @@ slug: safety-stop-eating-001
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 控制暴露、接触、路线和冲突边界；高风险条目，人员安全受威胁时放弃物资和任务。
+summary: 用于停止食用的四类信号的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 风险决策, 停止食用的四类信号, 长期断供, 小团队, 离线生存
-guide_links: DG-0666, DG-0667, DG-0668
+guide_links: DG-0666, DG-0667, DG-0668, DG-0669, DG-0670
 kiwix_topics: 停止食用的四类信号, 风险决策, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 停止食用的四类信号
 
 ## 用途
@@ -55,7 +54,7 @@ source: LanternBox internal curated knowledge
 
 ## 替代方案
 
-资源紧张时，也只能把可疑食物隔离等待复核；不能入口的食物可视情况转为非入口用途或废弃。
+资源紧张时，也只能把可疑食物隔离等待复核；不能入口的食物只能在清楚标记后转为非入口用途，无法隔离时废弃。
 
 ## 记录建议
 
@@ -63,9 +62,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0666
-- DG-0667
-- DG-0668
+- DG-0666｜外出找资源停止线｜使用时机：外出找资源时诱惑不断增加，需要预设停止线。
+- DG-0667｜维修失败三次后停用｜使用时机：同一维修反复失败，继续尝试可能扩大损坏。
+- DG-0668｜食物可疑时放弃判断｜使用时机：食物外观、来源或气味可疑，需要决定放弃。
+- DG-0669｜转移负重过高减物｜使用时机：转移时负重过高影响速度和安全，需要减物。
+- DG-0670｜分组行动前留守规则｜使用时机：团队分组行动前留守规则不清，容易失联。
 
 ## Kiwix/ZIM 可继续查询
 

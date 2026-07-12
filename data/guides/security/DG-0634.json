@@ -49,8 +49,10 @@
     "光线暴露引发外部关注时，关闭光源并回到室内安全点。"
   ],
   "related_wiki": [
-    "safety-night-safety-002",
     "safety-low-profile-001",
+    "safety-night-movement-001",
+    "safety-night-movement-no-solo-001",
+    "safety-night-safety-002",
     "safety-stranger-contact-002"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
@@ -92,5 +94,6 @@
     "夜间低亮厕所路线",
     "安全",
     "夜间低亮厕所路线"
-  ]
+  ],
+  "risk_level": "caution"
 }

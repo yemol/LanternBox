@@ -6,13 +6,12 @@ priority: P0
 risk_level: high
 summary: 只暴露交换所需的数量、时间和地点信息；高风险条目，不透露住所、库存、人员结构和长期计划。
 tags: 安全, 陌生人接触的信息最小化, 长期断供, 小团队, 离线生存
-guide_links: DG-0631, DG-0632, DG-0633
+guide_links: DG-0631, DG-0632, DG-0633, DG-0634, DG-0635, DG-0701
 kiwix_topics: 陌生人接触的信息最小化, 安全, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 陌生人接触的信息最小化
 
 ## 用途
@@ -63,9 +62,12 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0631
-- DG-0632
-- DG-0633
+- DG-0631｜陌生人交换物资低暴露流程｜使用时机：需要和陌生人交换物资，但不能暴露库存、成员结构和住所核心位置。
+- DG-0632｜门口玻璃碎裂隔离｜使用时机：门口玻璃碎裂，既有割伤风险，也可能暴露室内情况。
+- DG-0633｜物资分配冲突暂停｜使用时机：物资分配时出现情绪升级或互相指责，继续讨论会增加冲突风险。
+- DG-0634｜夜间低亮厕所路线｜使用时机：夜间需要去厕所或取物，但亮光和路线障碍可能暴露位置或造成摔倒。
+- DG-0635｜外出找水双人返回规则｜使用时机：外出找水需要两人同行，但目标、时间和返回规则不清会增加失踪和暴露风险。
+- DG-0701｜陌生人靠近营地低暴露应对｜使用时机：陌生人接近住所、营地、临时据点或物资点，团队需要回应但不能暴露人数、库存和入口。
 
 ## Kiwix/ZIM 可继续查询
 

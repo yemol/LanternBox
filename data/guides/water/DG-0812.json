@@ -1,0 +1,97 @@
+{
+  "id": "DG-0812",
+  "title": "先把水按用途分区储存",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "一批水同时要用于饮用、照护、烹饪和清洁。",
+  "goal": "先把水按用途区分，减少误用和浪费。",
+  "keywords": [
+    "水",
+    "分区",
+    "储存",
+    "饮水安全",
+    "行动卡",
+    "DG-0618",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "标签",
+    "容器",
+    "纸笔",
+    "布"
+  ],
+  "steps": [
+    "先把饮用水、清洁水、烹饪水和待检水分开。",
+    "先给每类水写上清楚标签。",
+    "先把高优先级水放在更容易取到的位置。",
+    "先把不同类别水的容器分开存放。",
+    "先每次取水后更新标签和记录。"
+  ],
+  "check": [
+    "分区已完成。",
+    "标签已清楚。",
+    "高优先级水已明确。"
+  ],
+  "common_mistakes": [
+    "把所有水混在一起。",
+    "标签不清导致误用。",
+    "没有复核。"
+  ],
+  "fallback": [
+    "没有多容器时先用不同位置和标识。",
+    "优先级不足时先把高风险人群优先保留。"
+  ],
+  "stop_or_escalate": [
+    "分区混乱、标签缺失或误用增多时重新分区。",
+    "水不足时先压缩非必要用途。"
+  ],
+  "related_wiki": [
+    "water-bucket-setup-024",
+    "water-container-labeling-004",
+    "water-discharging-016",
+    "water-emergency-division-043",
+    "water-storage-location-006"
+  ],
+  "notes": "分区不是形式，而是现场防误用的第一道门。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先把水按用途分区储存",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先把水按用途分区储存",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先把水按用途分区储存",
+    "先把水按用途分区储存",
+    "水",
+    "先把水按用途分区储存"
+  ],
+  "risk_level": "caution"
+}

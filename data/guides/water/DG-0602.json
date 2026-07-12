@@ -50,9 +50,20 @@
     "所有近端水点都禁用时，进入转移取水或求援决策，不继续试饮。"
   ],
   "related_wiki": [
-    "water-water-source-001",
+    "food-rationing-priority-001",
+    "food-spoilage-boundary-001",
+    "water-boiling-002",
+    "water-boiling-003",
+    "water-chemical-contamination-001",
+    "water-drinking-water-001",
+    "water-filtering-001",
+    "water-flood-risk-049",
+    "water-flood-water-001",
+    "water-flood-water-002",
+    "water-handwashing-001",
+    "water-heat-001",
     "water-rainwater-001",
-    "water-flood-water-001"
+    "water-storage-container-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "水",
@@ -93,5 +104,6 @@
     "洪水后取水点禁用判断",
     "水",
     "洪水后取水点禁用判断"
-  ]
+  ],
+  "risk_level": "high"
 }

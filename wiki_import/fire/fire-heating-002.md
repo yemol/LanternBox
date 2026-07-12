@@ -4,7 +4,7 @@ slug: fire-heating-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 risk_level: high
-summary: 把炭火、余烬和密闭空间列为一氧化碳高风险；高风险条目，炭火不进睡眠区。
+summary: 用于炭火取暖的密闭空间禁忌的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 火源, 火源 / 保温 / 通风 / 一氧化碳风险, 炭火取暖的密闭空间禁忌, 长期断供, 小团队, 离线生存
 guide_links: DG-0646, DG-0647, DG-0648
 kiwix_topics: 炭火取暖的密闭空间禁忌, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 炭火取暖的密闭空间禁忌
 
 ## 用途
@@ -65,9 +64,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0646
-- DG-0647
-- DG-0648
+- DG-0646｜室内取暖睡前火源复查｜使用时机：室内取暖后准备睡觉，残火、热灰和通风不足可能在夜间造成危险。
+- DG-0647｜外部烟味进入封堵判断｜使用时机：外部烟味进入住所，可能来自火灾、焚烧或邻近污染，需要判断封堵还是撤离。
+- DG-0648｜酒精炉加燃料前冷却检查｜使用时机：酒精炉需要加燃料，但炉体或周围仍热，直接加注可能引燃。
 
 ## Kiwix/ZIM 可继续查询
 

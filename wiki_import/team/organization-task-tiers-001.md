@@ -6,13 +6,12 @@ priority: P1
 risk_level: caution
 summary: 把任务分为保命、维持、改善三层；中风险条目，资源紧张时暂停改善任务，并记录责任人、时间和复查结果。
 tags: 团队管理, 团队轮值与任务管理, 任务三层保命维持改善, 长期断供, 小团队, 离线生存
-guide_links: DG-0686, DG-0687, DG-0688
+guide_links: DG-0686, DG-0687, DG-0688, DG-0727
 kiwix_topics: 任务三层保命维持改善, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 任务三层保命维持改善
 
 ## 用途
@@ -65,9 +64,10 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0686
-- DG-0687
-- DG-0688
+- DG-0686｜夜间轮值交接表｜使用时机：夜间需要轮值守夜、照护或火源检查，交接不清会漏任务。
+- DG-0687｜外出登记和归队检查｜使用时机：成员外出执行任务，如果没有登记和归队检查，容易失联或带回污染。
+- DG-0688｜照护任务双人备份｜使用时机：病人、儿童或老人照护只靠一人，疲劳或外出时会断档。
+- DG-0727｜短期可完成任务恢复秩序｜使用时机：团队因为压力、等待或失败陷入无事可做、互相抱怨或混乱。
 
 ## Kiwix/ZIM 可继续查询
 

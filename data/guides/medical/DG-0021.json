@@ -31,7 +31,9 @@
     "给儿童使用成人药硬减量。",
     "只看体温不看精神状态。"
   ],
-  "fallback": "没有体温计时，记录触感、出汗、畏寒、精神状态和尿量，但要尽快补齐体温计。",
+  "fallback": [
+    "没有体温计时，记录触感、出汗、畏寒、精神状态和尿量，但要尽快补齐体温计。"
+  ],
   "stop_or_escalate": [
     "持续高热。",
     "意识异常。",
@@ -116,5 +118,11 @@
     "孩子发热咳嗽",
     "儿童发热咳嗽",
     "发热：降温、补水、记录"
-  ]
+  ],
+  "related_wiki": [
+    "medical-child-elder-dehydration-risk-001",
+    "medical-common-infectious-disease-index-001",
+    "medical-high-fever-consciousness-risk-001"
+  ],
+  "risk_level": "caution"
 }

@@ -3,13 +3,13 @@ title: 腹泻与脱水风险观察
 slug: medical-diarrhea-dehydration-risk-001
 category: 医疗急救
 priority: P0
-summary: 整理观察、清洁、保护和复查步骤；中风险条目，症状恶化或无法判断时停止普通处理。
+summary: 用于腹泻与脱水风险观察的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 腹泻, 脱水, 补液, 健康记录, 饮水, 医疗观察
+guide_links: DG-0559
 risk_level: caution
 status: published
 source: CDC Diarrhea；WHO Oral Rehydration；Mayo Clinic Diarrhea
 ---
-
 # 腹泻与脱水风险观察
 
 ## 用途
@@ -24,7 +24,7 @@ source: CDC Diarrhea；WHO Oral Rehydration；Mayo Clinic Diarrhea
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备清洁饮水、口服补液用品或已知安全的补水方案、杯子、尿量和次数记录、手卫生用品、专用厕所路径、废弃袋和成员观察表。最低条件是能记录腹泻次数、饮水量、尿色、精神状态和是否呕吐。
 
 ## 操作步骤
 
@@ -171,3 +171,7 @@ source: CDC Diarrhea；WHO Oral Rehydration；Mayo Clinic Diarrhea
 同时检查最近饮用水来源、最近食物来源、是否多人吃了同样食物、是否有停水或水质异常、厕所和洗手条件是否足够。
 
 腹泻管理的关键不是立刻压住症状，而是防止脱水、识别污染来源、避免扩散。
+
+## 对应 Guide
+
+- DG-0559｜腹泻与脱水观察｜使用时机：腹泻与脱水观察相关场景出现，外部支援不确定，需要立刻用本地资源处理。

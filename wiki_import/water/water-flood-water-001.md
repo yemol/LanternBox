@@ -6,13 +6,12 @@ priority: P0
 risk_level: high
 summary: 把洪水后水源视为高污染风险；高风险条目，不直接饮用井水或积水，并记录责任人、时间和复查结果。
 tags: 水, 洪水后水源为什么不能直接饮用, 长期断供, 小团队, 离线生存
-guide_links: DG-0601, DG-0602, DG-0603
+guide_links: DG-0601, DG-0602, DG-0603, DG-0604, DG-0605
 kiwix_topics: 洪水后水源为什么不能直接饮用, 水, Emergency preparedness, Survival skills, Public health
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 洪水后水源为什么不能直接饮用
 
 ## 用途
@@ -64,9 +63,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0601
-- DG-0602
-- DG-0603
+- DG-0601｜夜间取水前的路线和容器检查｜使用时机：夜间必须外出取水，但路线照明不足、地面状态不明，取水人员需要先确认往返路径和容器状态。
+- DG-0602｜洪水后取水点禁用判断｜使用时机：洪水退去后附近水点看似可用，但水体可能混入污水、燃油、动物尸体或化学残留。
+- DG-0603｜多人共用饮用水领取表｜使用时机：多人共用饮用水，领取过程如果没有记录，容易出现重复领取、漏发和争执。
+- DG-0604｜水桶异味后的降级处理｜使用时机：水桶出现异味，可能来自旧油污、霉菌、清洁剂残留或长时间封存，需要立即降级处理。
+- DG-0605｜少水洗手和饮用水保留｜使用时机：储水不足时仍需要洗手，但不应把可饮用水大量消耗在低优先级清洁上。
 
 ## Kiwix/ZIM 可继续查询
 

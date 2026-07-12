@@ -6,13 +6,12 @@ priority: P1
 risk_level: caution
 summary: 区分事实、情绪和改进动作进行短复盘；中风险条目，不把复盘变成追责，并记录责任人、时间和复查结果。
 tags: 心理韧性, 心理韧性与冲突降温, 复盘时区分事实和情绪, 长期断供, 小团队, 离线生存
-guide_links: DG-0691, DG-0692, DG-0693
+guide_links: DG-0691, DG-0692, DG-0693, DG-0729
 kiwix_topics: 复盘时区分事实和情绪, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 复盘时区分事实和情绪
 
 ## 独立边界矩阵
@@ -85,9 +84,10 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0691
-- DG-0692
-- DG-0693
+- DG-0691｜争吵升级前暂停口令｜使用时机：争吵开始升温时，如果没有共同暂停信号，会进入互相攻击。
+- DG-0692｜儿童恐慌安抚三步｜使用时机：儿童因声响、黑暗、转移或疾病恐慌，需要简单稳定的安抚流程。
+- DG-0693｜老人焦虑信息同步｜使用时机：老人反复询问消息或担心拖累团队，需要固定信息同步而不是随时解释。
+- DG-0729｜失败后复盘不指责｜使用时机：路线失败、物资损坏、工具丢失或判断错误后，团队开始寻找责任人。
 
 ## Kiwix/ZIM 可继续查询
 

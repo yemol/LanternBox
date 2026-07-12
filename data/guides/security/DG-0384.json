@@ -30,7 +30,9 @@
     "锯掉看起来碍事的支撑。",
     "拆完不检查晃动。"
   ],
-  "fallback": "需要材料时，优先拆非承重废弃家具和独立物件。",
+  "fallback": [
+    "需要材料时，优先拆非承重废弃家具和独立物件。"
+  ],
   "stop_or_escalate": [
     "结构异响、裂缝扩大、门窗变形、楼梯晃动时，停止改动并远离。"
   ],
@@ -79,5 +81,10 @@
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
-  ]
+  ],
+  "related_wiki": [
+    "repair-fixing-and-support-001",
+    "repair-rope-load-limit-001"
+  ],
+  "risk_level": "high"
 }

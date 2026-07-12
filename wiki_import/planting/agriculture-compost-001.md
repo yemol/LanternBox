@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 堆肥成熟和病原风险
 
 ## 独立边界矩阵
@@ -85,9 +84,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0671
-- DG-0672
-- DG-0673
+- DG-0671｜种子干燥封存｜使用时机：种子需要长期留存，但环境潮湿或温差大，可能提前发霉、虫蛀或失去发芽力。
+- DG-0672｜芽苗菜每日冲洗｜使用时机：芽苗菜作为短期新鲜食物来源，但每日冲洗不当会发臭、腐烂或引起胃肠问题。
+- DG-0673｜容器种植排水孔检查｜使用时机：容器种植没有排水孔，浇水后容易烂根、发臭和滋生虫害。
 
 ## Kiwix/ZIM 可继续查询
 

@@ -50,8 +50,30 @@
     "隔离区附近有燃料、儿童或无法通风时，立即重新划出安全边界。"
   ],
   "related_wiki": [
+    "energy-battery-001",
+    "energy-battery-002",
+    "energy-battery-003",
     "energy-battery-capacity-001",
-    "energy-fever-001"
+    "energy-battery-swelling-overheat-001",
+    "energy-charge-log-001",
+    "energy-charging-cable-001",
+    "energy-device-port-001",
+    "energy-energy-knowledge-001",
+    "energy-fever-001",
+    "energy-fever-002",
+    "energy-fever-003",
+    "energy-heat-001",
+    "energy-lighting-001",
+    "energy-lighting-002",
+    "energy-lighting-003",
+    "energy-lithium-battery-safety-index-001",
+    "energy-power-bank-001",
+    "energy-power-outage-001",
+    "energy-power-strip-001",
+    "energy-radio-power-001",
+    "energy-solar-charging-001",
+    "energy-solar-charging-002",
+    "energy-swollen-lithium-battery-stop-use-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "能源",
@@ -92,5 +114,6 @@
     "充电宝鼓包发热停用隔离",
     "能源",
     "充电宝鼓包发热停用隔离"
-  ]
+  ],
+  "risk_level": "critical"
 }

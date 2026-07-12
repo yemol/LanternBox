@@ -3,6 +3,7 @@
 import json
 import math
 import re
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Iterable, List
 
@@ -12,6 +13,24 @@ from .schemas import EvidenceCandidate, SourcePlanItem
 
 ROOT = Path(__file__).resolve().parents[2]
 EMERGENCY_GUIDES_FILE = ROOT / "data" / "emergency_guides.json"
+QUERY_PROFILES_FILE = ROOT / "data" / "retrieval_query_profiles.json"
+
+
+@lru_cache(maxsize=1)
+def _load_query_profiles() -> list[dict[str, Any]]:
+    data = _load_json(QUERY_PROFILES_FILE, {})
+    return data.get("profiles", []) if isinstance(data, dict) else []
+
+
+def _matching_query_profiles(user_message: str) -> list[dict[str, Any]]:
+    text = str(user_message or "")
+    matched = []
+    for profile in _load_query_profiles():
+        triggers = [str(item) for item in profile.get("trigger_any", []) if str(item)]
+        hit_count = sum(term in text for term in triggers)
+        if hit_count >= int(profile.get("min_trigger_matches", 1) or 1):
+            matched.append(profile)
+    return matched
 
 def _split_search_terms(value: Any) -> List[str]:
     """Split AI-provided search terms into stable tokens.
@@ -283,11 +302,23 @@ def _plan_terms(plan: SourcePlanItem) -> List[str]:
     return _clean_terms(raw_terms, limit=40)
 
 
-def _core_terms(core_terms: List[str] | None) -> List[str]:
+def normalize_core_terms(core_terms: List[str] | None) -> List[str]:
     raw_terms: List[str] = []
+    blocked = {
+        *policy_set("term_filter", "query_stop_terms"),
+        *policy_set("term_filter", "generic_core_terms"),
+        *policy_set("term_filter", "abstract_core_terms"),
+    }
     for item in core_terms or []:
-        raw_terms.extend(_split_search_terms(item))
+        raw_terms.extend(
+            term for term in _split_search_terms(item)
+            if term not in blocked
+        )
     return _clean_terms(raw_terms, limit=16)
+
+
+def _core_terms(core_terms: List[str] | None) -> List[str]:
+    return normalize_core_terms(core_terms)
 
 
 def fetch_guide_candidates(
@@ -298,8 +329,13 @@ def fetch_guide_candidates(
     guides = _load_json(EMERGENCY_GUIDES_FILE, [])
     terms = _plan_terms(plan)
     core = _core_terms(core_terms)
+    query_profiles = _matching_query_profiles(user_message)
+    profile_aliases = _clean_terms(
+        [alias for profile in query_profiles for alias in profile.get("aliases", [])],
+        limit=48,
+    )
     user_terms = _clean_terms(_char_ngrams(user_message), limit=48)
-    all_terms = _clean_terms([*terms, *core, *user_terms], limit=96)
+    all_terms = _clean_terms([*terms, *core, *profile_aliases, *user_terms], limit=128)
     idf = _term_idf(all_terms, guides)
     limit = plan.limit or 8
 
@@ -308,11 +344,27 @@ def fetch_guide_candidates(
     for guide in guides:
         score = _weighted_guide_score(
             guide,
-            terms=terms,
+            terms=[*terms, *profile_aliases],
             core_terms=core,
             user_terms=user_terms,
             idf=idf,
         )
+
+        guide_domains = set(_as_tags(guide.get("domains")))
+        guide_text = " ".join(_guide_field_texts(guide).values())
+        for profile in query_profiles:
+            target_domains = set(str(item) for item in profile.get("target_domains", []))
+            if guide_domains & target_domains:
+                score += float(profile.get("domain_boost", 0) or 0)
+            elif target_domains:
+                score -= float(profile.get("domain_mismatch_penalty", 0) or 0)
+            if any(str(alias) in str(guide.get("title") or "") for alias in profile.get("aliases", [])):
+                score += float(profile.get("title_alias_boost", 0) or 0)
+            unless_context = [str(item) for item in profile.get("negative_unless_context", [])]
+            if unless_context and any(term in user_message for term in unless_context):
+                continue
+            if any(str(term) in guide_text for term in profile.get("negative_terms", [])):
+                score -= float(profile.get("negative_penalty", 0) or 0)
 
         if score <= 0:
             continue
@@ -323,6 +375,15 @@ def fetch_guide_candidates(
 
     results: List[EvidenceCandidate] = []
     for _, guide in scored[:limit]:
+        guide_payload = dict(guide)
+        matched_profile_names = [str(profile.get("name") or "") for profile in query_profiles]
+        target_match = any(
+            set(_as_tags(guide.get("domains"))) & set(str(item) for item in profile.get("target_domains", []))
+            for profile in query_profiles
+        )
+        if matched_profile_names:
+            guide_payload["retrieval_query_profiles"] = matched_profile_names
+            guide_payload["retrieval_profile_target_match"] = target_match
         results.append(
             EvidenceCandidate(
                 source_type="guide",
@@ -332,7 +393,7 @@ def fetch_guide_candidates(
                 category=str(guide.get("category") or ""),
                 tags=_as_tags(guide.get("keywords"))[:8],
                 snippet=str(guide.get("scenario") or ""),
-                raw=guide,
+                raw=guide_payload,
             )
         )
 
@@ -424,7 +485,14 @@ def fetch_wiki_candidates(
                 category=str(article.get("category") or ""),
                 tags=tags,
                 snippet=content[:300],
-                raw=article,
+                raw={
+                    **article,
+                    "source_role": "independent_support",
+                    "source_reason": "independent_wiki_search",
+                    "metadata": {
+                        "record_id": article.get("record_id") or article.get("pocketbase_id") or "",
+                    },
+                },
             )
 
             scored.append((score, candidate))
@@ -433,6 +501,57 @@ def fetch_wiki_candidates(
     scored.sort(key=lambda item: item[0], reverse=True)
 
     return [candidate for _, candidate in scored[:limit]]
+
+
+def fetch_related_wiki_candidates(selected_guides: List[EvidenceCandidate]) -> List[EvidenceCandidate]:
+    """Expand selected Guide relations into canonical Wiki evidence."""
+    from api.services.wiki_service import get_wiki_articles_by_slugs_for_ai
+
+    links_by_slug: dict[str, list[EvidenceCandidate]] = {}
+    ordered_slugs: list[str] = []
+    for guide in selected_guides or []:
+        raw = guide.raw if isinstance(guide.raw, dict) else {}
+        for slug in _as_tags(raw.get("related_wiki")):
+            if slug not in links_by_slug:
+                links_by_slug[slug] = []
+                ordered_slugs.append(slug)
+            links_by_slug[slug].append(guide)
+
+    articles = get_wiki_articles_by_slugs_for_ai(ordered_slugs)
+    results: List[EvidenceCandidate] = []
+    for article in articles:
+        slug = str(article.get("slug") or article.get("id") or "").strip()
+        linked_guides = links_by_slug.get(slug, [])
+        if not slug or not linked_guides:
+            continue
+        guide_ids = [guide.id for guide in linked_guides]
+        guide_titles = [guide.title for guide in linked_guides]
+        raw = {
+            **article,
+            "id": slug,
+            "slug": slug,
+            "source_role": "guide_support",
+            "source_reason": "guide_related_wiki",
+            "linked_guide_id": guide_ids[0],
+            "linked_guide_title": guide_titles[0],
+            "linked_guide_ids": guide_ids,
+            "linked_guide_titles": guide_titles,
+            "guide_links": list(dict.fromkeys([*article.get("guide_links", []), *guide_ids])),
+            "metadata": {
+                "record_id": article.get("record_id") or article.get("pocketbase_id") or "",
+            },
+        }
+        results.append(EvidenceCandidate(
+            source_type="wiki",
+            id=slug,
+            title=str(article.get("title") or ""),
+            summary=str(article.get("summary") or "")[:300],
+            category=str(article.get("category") or ""),
+            tags=_as_tags(article.get("tags"))[:8],
+            snippet=str(article.get("content") or article.get("summary") or "")[:300],
+            raw=raw,
+        ))
+    return results
 
 
 def _kiwix_candidate_id(result: Any) -> str:
@@ -628,6 +747,39 @@ def _filter_kiwix_candidates_by_direct_anchor(
     ]
 
 
+def apply_kiwix_semantic_policy(
+    candidates: List[EvidenceCandidate],
+    user_message: str,
+) -> List[EvidenceCandidate]:
+    """Annotate semantically invalid Kiwix candidates without hiding traceability."""
+    text = str(user_message or "")
+    profiles = policy_map("kiwix").get("semantic_profiles", [])
+    active = [
+        profile for profile in profiles
+        if any(str(term) in text for term in profile.get("trigger_any", []))
+    ]
+    if not active:
+        return candidates
+
+    for candidate in candidates:
+        raw = candidate.raw if isinstance(candidate.raw, dict) else {}
+        candidate_text = " ".join([candidate.title, candidate.summary, candidate.snippet])
+        reasons = []
+        for profile in active:
+            required = [str(term) for term in profile.get("required_any", [])]
+            blocked = [str(term) for term in profile.get("blocked_any", [])]
+            blocked_patterns = [str(pattern) for pattern in profile.get("blocked_title_patterns", [])]
+            title_blocked = any(term in candidate.title for term in blocked) or any(
+                re.search(pattern, candidate.title) for pattern in blocked_patterns
+            )
+            if title_blocked or not any(term in candidate_text for term in required):
+                reasons.append(str(profile.get("excluded_reason") or "kiwix_domain_anchor_mismatch"))
+        if reasons:
+            raw["semantic_excluded_reason"] = ";".join(dict.fromkeys(reasons))
+            candidate.raw = raw
+    return candidates
+
+
 def fetch_kiwix_candidates(
     plan: SourcePlanItem,
     user_message: str = "",
@@ -700,6 +852,7 @@ def fetch_kiwix_candidates(
         )
 
     candidates = _filter_kiwix_candidates_by_direct_anchor(candidates, focus_terms)
+    candidates = apply_kiwix_semantic_policy(candidates, user_message)
     return _sort_kiwix_candidates(candidates, focus_terms)[:limit]
 
 

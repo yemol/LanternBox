@@ -3,13 +3,13 @@ title: 高温下脱水和补水判断
 slug: water-heat-002
 category: 水
 priority: P0
-summary: 安排取水、处理、储存和饮用分区；高风险条目，水源异常或容器污染时先隔离。
+summary: 用于高温下脱水和补水判断的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 水, 高温下脱水和补水判断, 高温下脱水和, P0, 长期生存
+guide_links: DG-0554
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 高温下脱水和补水判断
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录任务、饮水、休息、尿量、症状、停工决定和恢复情况。
+
+## 对应 Guide
+
+- DG-0554｜高温缺水：补水、降温和观察｜使用时机：天气闷热、高温、出汗多，同时饮用水不足。

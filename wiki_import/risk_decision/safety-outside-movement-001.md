@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 外出寻找资源的停止线
 
 ## 用途
@@ -63,9 +62,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0666
-- DG-0667
-- DG-0668
+- DG-0666｜外出找资源停止线｜使用时机：外出找资源时诱惑不断增加，需要预设停止线。
+- DG-0667｜维修失败三次后停用｜使用时机：同一维修反复失败，继续尝试可能扩大损坏。
+- DG-0668｜食物可疑时放弃判断｜使用时机：食物外观、来源或气味可疑，需要决定放弃。
 
 ## Kiwix/ZIM 可继续查询
 

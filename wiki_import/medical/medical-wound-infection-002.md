@@ -5,11 +5,11 @@ category: 医疗急救
 priority: P0
 summary: 区分清洁、覆盖、污染来源和感染早期信号；高风险条目，红肿热痛加重、脓液或污染伤口需停止拖延。
 tags: 医疗急救, 伤口感染的早期信号, 伤口感染的早, P0, 长期生存
+guide_links: DG-0006
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 伤口感染的早期信号
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录红肿范围、疼痛、渗液、气味、体温/热感、覆盖物状态和停止条件。
+
+## 对应 Guide
+
+- DG-0006｜伤口感染：红肿热痛处理｜使用时机：伤口数小时或数天后出现红肿、发热、疼痛加重、渗液或流脓。

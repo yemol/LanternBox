@@ -13,10 +13,31 @@ REQUIRED_FIELDS = [
     "id",
     "title",
     "category",
+    "domains",
+    "priority",
     "scenario",
     "goal",
+    "keywords",
+    "tools",
     "steps",
+    "check",
+    "common_mistakes",
+    "fallback",
+    "stop_or_escalate",
+    "risk_level",
 ]
+LIST_FIELDS = [
+    "domains",
+    "keywords",
+    "tools",
+    "steps",
+    "check",
+    "common_mistakes",
+    "fallback",
+    "stop_or_escalate",
+]
+ALLOWED_PRIORITIES = {"P0", "P1", "P2"}
+ALLOWED_RISK_LEVELS = {"normal", "caution", "high", "critical"}
 
 def load_overrides():
     if not OVERRIDES.exists():
@@ -52,8 +73,17 @@ def load_guides():
         guide = json.loads(file.read_text(encoding="utf-8"))
 
         for field in REQUIRED_FIELDS:
-            if field not in guide:
-                raise ValueError(f"{file} 缺少字段：{field}")
+            if field not in guide or guide.get(field) in (None, "", []):
+                raise ValueError(f"{file} 缺少或字段为空：{field}")
+
+        for field in LIST_FIELDS:
+            if not isinstance(guide.get(field), list):
+                raise ValueError(f"{file} 字段必须为数组：{field}")
+
+        if guide["priority"] not in ALLOWED_PRIORITIES:
+            raise ValueError(f"{file} priority 非法：{guide['priority']}")
+        if guide["risk_level"] not in ALLOWED_RISK_LEVELS:
+            raise ValueError(f"{file} risk_level 非法：{guide['risk_level']}")
 
         guide = apply_overrides(guide, overrides)
 
@@ -80,6 +110,7 @@ def build_index(guides):
                 "title": guide.get("title"),
                 "category": guide.get("category"),
                 "category_original": guide.get("category_original"),
+                "risk_level": guide.get("risk_level"),
                 "domains": guide.get("domains", []),
                 "intents": guide.get("intents", []),
                 "situations": guide.get("situations", []),

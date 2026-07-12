@@ -4,15 +4,14 @@ slug: hygiene-vomit-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 按飞溅、手部、衣物和地面路径清理呕吐物；高风险条目，清理者不直接进入做饭照护。
+summary: 用于粪便和呕吐物隔离边界的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 粪便和呕吐物隔离边界, 长期断供, 小团队, 离线生存
-guide_links: DG-0661, DG-0662, DG-0663
+guide_links: DG-0661, DG-0662, DG-0663, DG-0664, DG-0665
 kiwix_topics: 粪便和呕吐物隔离边界, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 粪便和呕吐物隔离边界
 
 ## 用途
@@ -64,9 +63,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0661
-- DG-0662
-- DG-0663
+- DG-0661｜血液污染物双层封存｜使用时机：出现血液污染布料或垃圾，需要双层封存。
+- DG-0662｜呕吐物清理后手卫生｜使用时机：清理呕吐物后需要恢复手卫生和清洁边界。
+- DG-0663｜污水进屋后的污染线｜使用时机：污水进入住所后边界不清，需要划污染线。
+- DG-0664｜动物尸体远离水食物｜使用时机：发现动物尸体靠近住所或水食物区，需要隔离。
+- DG-0665｜化学味容器禁用隔离｜使用时机：容器有化学味但外观完好，需要禁用隔离。
 
 ## Kiwix/ZIM 可继续查询
 

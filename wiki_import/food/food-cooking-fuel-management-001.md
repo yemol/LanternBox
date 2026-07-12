@@ -3,13 +3,13 @@ title: 烹饪燃料基础管理
 slug: food-cooking-fuel-management-001
 category: 食物
 priority: P1
-summary: 明确库存、加工、保存和弃用顺序；高风险条目，包装破损、变质或来源不清时停止食用。
+summary: 用于烹饪燃料基础管理的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 燃料, 烹饪, 卡式炉, 酒精炉, 防火, 通风
+guide_links: DG-0220
 risk_level: high
 status: published
 source: Ready.gov Home Fires；壳中灯能源与消防安全规则
 ---
-
 # 烹饪燃料基础管理
 
 ## 独立边界矩阵
@@ -79,3 +79,7 @@ source: Ready.gov Home Fires；壳中灯能源与消防安全规则
 ## 记录建议
 
 记录烹饪燃料批次、开封/烹饪时间、保存位置、食用人员、弃用原因和剩余天数修正。
+
+## 对应 Guide
+
+- DG-0220｜省燃料做饭｜使用时机：燃料有限，但需要长期煮水、煮饭和处理食物。

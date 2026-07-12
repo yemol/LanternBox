@@ -1,0 +1,95 @@
+{
+  "id": "DG-0803",
+  "title": "先判断管道水是否可直接使用",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "管道恢复供水后，水看起来有流量，但水质和管道状态仍可能有问题。",
+  "goal": "先判断管道水是否适合短期饮用或储存。",
+  "keywords": [
+    "水",
+    "管道",
+    "饮水安全",
+    "恢复供水",
+    "行动卡",
+    "DG-0609",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "小口瓶",
+    "标签",
+    "布",
+    "纸笔"
+  ],
+  "steps": [
+    "先确认水流是否稳定。",
+    "先观察出水时是否有异味、浑浊或颜色异常。",
+    "先把第一批水先留作待检。",
+    "先把新水和旧储水分开。",
+    "先记录何时恢复、是否异常。"
+  ],
+  "check": [
+    "水流已确认。",
+    "异常现象已观察。",
+    "新旧水已分开。"
+  ],
+  "common_mistakes": [
+    "恢复后马上把旧储水和新水混用。",
+    "把第一批水当饮用水。",
+    "没记录供水恢复状态。"
+  ],
+  "fallback": [
+    "水质不明时先用作清洁或停用。",
+    "夜间恢复时先观察再决定。"
+  ],
+  "stop_or_escalate": [
+    "水流中有异味、浑浊或杂质时停止直接使用。",
+    "高风险人群应延后使用。"
+  ],
+  "related_wiki": [
+    "water-recovery-check-042",
+    "water-source-judgement-002",
+    "water-unknown-source-010"
+  ],
+  "notes": "恢复供水不等于水立刻可放心饮用。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先判断管道水是否可直接使用",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先判断管道水是否可直接使用",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先判断管道水是否可直接使用",
+    "先判断管道水是否可直接使用",
+    "水",
+    "先判断管道水是否可直接使用"
+  ],
+  "risk_level": "caution"
+}

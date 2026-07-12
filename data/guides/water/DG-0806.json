@@ -1,0 +1,94 @@
+{
+  "id": "DG-0806",
+  "title": "先判断水是否颜色异常",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "水颜色和常规情况不同，怀疑被污染或变质。",
+  "goal": "先把颜色异常的水从饮用水库存中隔离。",
+  "keywords": [
+    "水",
+    "颜色异常",
+    "饮水安全",
+    "判断",
+    "行动卡",
+    "DG-0612",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "小口瓶",
+    "标签",
+    "纸笔"
+  ],
+  "steps": [
+    "先观察水是否呈现黑、黄、绿、棕或不自然颜色。",
+    "先看颜色是否伴随异味、沉淀或漂浮物。",
+    "先把怀疑的水单独标记。",
+    "先不要把它和清洁水、饮用水混用。",
+    "先记录颜色异常现象。"
+  ],
+  "check": [
+    "颜色异常已确认。",
+    "水已单独标记。",
+    "记录已完成。"
+  ],
+  "common_mistakes": [
+    "只因为颜色不深就继续用。",
+    "把颜色异常水和干净水混放。",
+    "不记录现象。"
+  ],
+  "fallback": [
+    "颜色轻微时先待检。",
+    "颜色明显异常时直接停用。"
+  ],
+  "stop_or_escalate": [
+    "颜色异常伴随异味或污迹时停止使用。",
+    "不能确定时先按非饮用处理。"
+  ],
+  "related_wiki": [
+    "water-color-judgement-015",
+    "water-source-judgement-002",
+    "water-unknown-source-010"
+  ],
+  "notes": "颜色异常通常是风险信号，不要忽视。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先判断水是否颜色异常",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先判断水是否颜色异常",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先判断水是否颜色异常",
+    "先判断水是否颜色异常",
+    "水",
+    "先判断水是否颜色异常"
+  ],
+  "risk_level": "caution"
+}

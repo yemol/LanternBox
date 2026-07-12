@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 手套在清理和维修中的作用
 
 ## 独立边界矩阵
@@ -85,9 +84,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0651
-- DG-0652
-- DG-0653
+- DG-0651｜湿袜更换和脚部检查｜使用时机：长时间行走后袜子潮湿，需要换袜并检查脚部损伤。
+- DG-0652｜雨衣破洞临时补片｜使用时机：雨衣破洞导致躯干或背包进水，需要临时补片。
+- DG-0653｜高温外出防晒和补水｜使用时机：高温外出任务容易晒伤和脱水，需要出发前限制暴露。
 
 ## Kiwix/ZIM 可继续查询
 

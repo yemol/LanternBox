@@ -5,11 +5,11 @@ category: 能源
 priority: P0
 summary: 记录体温感受、精神状态、尿量和伴随症状；中风险条目，皮疹、意识变化、持续恶化或儿童危险信号需升级。
 tags: 能源, 锂电池鼓包发热风险, 锂电池鼓包发, P0, 长期生存
+guide_links: DG-0616
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 锂电池鼓包发热风险
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录发现部位、对比对象、停用时间、接替设备和复查人。
+
+## 对应 Guide
+
+- DG-0616｜充电宝鼓包发热停用隔离｜使用时机：充电宝或电池包出现鼓包、发热、异味或外壳开裂，继续使用可能引发火灾和有毒烟气。

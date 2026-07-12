@@ -3,13 +3,13 @@ title: 简易洗手点设置
 slug: hygiene-simple-handwashing-station-001
 category: 卫生
 priority: P0
-summary: 设置水、接水容器、擦手物和污水去向；中风险条目，洗手点不能污染饮用水。
+summary: 用于简易洗手点设置的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 洗手, 卫生, 停水, 避难, 肥皂, 感染预防
+guide_links: DG-0081
 risk_level: caution
 status: published
 source: CDC Handwashing；CDC Water Sanitation Hygiene Emergency Resources
 ---
-
 # 简易洗手点设置
 
 ## 用途
@@ -113,7 +113,7 @@ source: CDC Handwashing；CDC Water Sanitation Hygiene Emergency Resources
 - 洗完手用脏毛巾擦。
 - 污水流到饮水区。
 - 洗手点设置太远，成员懒得用。
-- 有腹泻成员后不加强手卫生。
+- 有腹泻成员后不增加洗手频率和污染物隔离。
 
 ### 停止条件
 
@@ -129,7 +129,7 @@ source: CDC Handwashing；CDC Water Sanitation Hygiene Emergency Resources
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+没有水龙头时，用带小孔的瓶子、壶或两人倒水法形成流动水；水量不足时优先保障如厕后、处理食物前和处理伤口前的手卫生。没有肥皂时先用清洁水充分揉搓冲洗，并把餐具、伤口用品和污染物分开。
 
 ## 记录建议
 
@@ -138,3 +138,7 @@ source: CDC Handwashing；CDC Water Sanitation Hygiene Emergency Resources
 壳中灯系统中，洗手点可记录为“避难空间配置”。
 
 手卫生是最便宜的防线。资源不足时，越要把这条防线做得简单、固定、人人看得见。
+
+## 对应 Guide
+
+- DG-0081｜应急洗手站：少水也要能洗手｜使用时机：停水、多人共住、做饭、处理伤口或如厕后需要洗手。

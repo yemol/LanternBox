@@ -49,9 +49,9 @@
     "留种与食物需求冲突时，先保留少量核心种源。"
   ],
   "related_wiki": [
+    "agriculture-container-002",
     "agriculture-seed-storage-001",
-    "agriculture-sprouts-001",
-    "agriculture-container-002"
+    "agriculture-sprouts-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "种植",
@@ -92,5 +92,6 @@
     "采收后留种标记",
     "种植",
     "采收后留种标记"
-  ]
+  ],
+  "risk_level": "caution"
 }

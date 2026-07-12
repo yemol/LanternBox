@@ -34,7 +34,9 @@
   "stop_or_escalate": [
     "电量低于 5%、成员分散或外出未归时，优先一次性发送位置、计划和下次开机时间。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "energy-phone-002"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "能源照明与设备",
   "domains": [
@@ -89,5 +91,6 @@
     "省电",
     "保通信",
     "固定时间"
-  ]
+  ],
+  "risk_level": "caution"
 }

@@ -3,13 +3,13 @@ title: 门窗受损的暴露风险
 slug: safety-door-window-002
 category: 安全
 priority: P0
-summary: 控制暴露、接触、路线和冲突边界；中风险条目，人员安全受威胁时放弃物资和任务。
+summary: 用于门窗受损的暴露风险的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 安全, 门窗受损的暴露风险, 门窗受损的暴, P0, 长期生存
+guide_links: DG-0580
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 门窗受损的暴露风险
 
 ## 用途
@@ -60,9 +60,7 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0631
-- DG-0632
-- DG-0633
+- DG-0580｜门窗受损：临时加固与低暴露｜使用时机：门窗受损：临时加固与低暴露相关场景出现，外部支援不确定，需要立刻用本地资源处理。
 
 ## Kiwix/ZIM 可继续查询
 

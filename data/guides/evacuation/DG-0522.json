@@ -29,7 +29,9 @@
     "怠速取暖很久。",
     "油快没了还不记录。"
   ],
-  "fallback": "燃料紧张时，优先自行车、步行和手推车。",
+  "fallback": [
+    "燃料紧张时，优先自行车、步行和手推车。"
+  ],
   "stop_or_escalate": [
     "伤病转运需求、撤离风险升高、燃料泄漏时，立即重排用车计划。"
   ],
@@ -64,5 +66,10 @@
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
-  ]
+  ],
+  "related_wiki": [
+    "navigation-map-scale-001",
+    "navigation-route-difficulty-record-001"
+  ],
+  "risk_level": "normal"
 }

@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 干货罐头轮换和先开先用
 
 ## 独立边界矩阵
@@ -85,9 +84,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0606
-- DG-0607
-- DG-0608
+- DG-0606｜干粮和罐头三天配给表｜使用时机：只剩干粮和罐头，需要把未来三天的口粮先算清楚，避免第一天消耗过快。
+- DG-0607｜剩饭过夜无冷藏禁食判断｜使用时机：剩饭在无冷藏条件下过夜，外观可能正常但细菌风险已经上升。
+- DG-0608｜霉变粮食和坚果停用｜使用时机：粮食或坚果出现霉斑、霉味、结块或虫蛀，局部去除不能可靠排除毒素风险。
 
 ## Kiwix/ZIM 可继续查询
 

@@ -51,6 +51,14 @@ def _clean_text(value: Any, limit: int = 900) -> str:
     return text[:limit]
 
 
+def _format_field(value: Any, limit: int = 1200) -> str:
+    if isinstance(value, list):
+        text = "\n".join(f"- {str(item).strip()}" for item in value if str(item).strip())
+    else:
+        text = str(value or "").strip()
+    return text[:limit]
+
+
 def _format_guide_evidence(related_guides: List[Dict[str, Any]], limit: int = 6) -> str:
     """把 Retrieval v2 选中的 guide 转成回答层证据文本。
 
@@ -59,32 +67,37 @@ def _format_guide_evidence(related_guides: List[Dict[str, Any]], limit: int = 6)
     blocks: List[str] = []
 
     for index, guide in enumerate((related_guides or [])[:limit], start=1):
+        guide_id = _clean_text(guide.get("id"), 40)
         title = _clean_text(guide.get("title") or guide.get("name"), 120)
-        category = _clean_text(guide.get("category"), 80)
-        summary = _clean_text(guide.get("summary") or guide.get("description"), 500)
-        content = _clean_text(
-            guide.get("content")
-            or guide.get("body")
-            or guide.get("text")
-            or guide.get("steps")
-            or guide.get("snippet"),
-            900,
-        )
-        tags = guide.get("tags") or []
-        if isinstance(tags, list):
-            tag_text = "、".join(str(tag) for tag in tags[:8] if str(tag).strip())
-        else:
-            tag_text = str(tags or "").strip()
-
-        lines = [f"【指南 {index}】{title or '未命名指南'}"]
-        if category:
-            lines.append(f"分类：{category}")
-        if tag_text:
-            lines.append(f"标签：{tag_text}")
-        if summary:
-            lines.append(f"摘要：{summary}")
-        if content:
-            lines.append(f"内容：{content}")
+        risk_level = _clean_text(guide.get("risk_level"), 20) or "normal"
+        lines = [f"【指南 {index}】{guide_id} {title or '未命名指南'}"]
+        fields = [
+            ("分类", guide.get("category"), 100),
+            ("领域", guide.get("domains"), 180),
+            ("优先级", guide.get("priority"), 20),
+            ("风险等级", risk_level, 20),
+            ("场景", guide.get("scenario"), 500),
+            ("目标", guide.get("goal"), 500),
+            ("工具材料", guide.get("tools"), 800),
+        ]
+        # High-risk boundaries are placed before actions so the model sees them first.
+        if risk_level in {"high", "critical"}:
+            fields.extend([
+                ("停止与升级边界（优先输出）", guide.get("stop_or_escalate"), 1200),
+                ("判断标准", guide.get("check"), 1200),
+            ])
+        fields.extend([
+            ("操作步骤", guide.get("steps"), 1600),
+            ("判断标准", guide.get("check") if risk_level not in {"high", "critical"} else None, 1200),
+            ("常见错误", guide.get("common_mistakes"), 1000),
+            ("本地降级方案", guide.get("fallback"), 1200),
+            ("停止条件", guide.get("stop_or_escalate") if risk_level not in {"high", "critical"} else None, 1200),
+            ("对应 Wiki slug", guide.get("related_wiki"), 800),
+        ])
+        for label, value, field_limit in fields:
+            rendered = _format_field(value, field_limit)
+            if rendered:
+                lines.append(f"{label}：\n{rendered}")
 
         blocks.append("\n".join(lines))
 
@@ -112,7 +125,14 @@ def _format_wiki_evidence(related_wikis: List[Dict[str, Any]], limit: int = 4) -
         else:
             tag_text = str(tags or "").strip()
 
-        lines = [f"【Wiki {index}】{title or '未命名条目'}"]
+        slug = _clean_text(wiki.get("slug") or wiki.get("id"), 160)
+        source_reason = _clean_text(wiki.get("source_reason"), 80)
+        linked_guide_id = _clean_text(wiki.get("linked_guide_id"), 40)
+        lines = [f"【Wiki {index}】{slug} {title or '未命名条目'}"]
+        if source_reason:
+            lines.append(f"证据来源：{source_reason}")
+        if linked_guide_id:
+            lines.append(f"对应 Guide：{linked_guide_id}")
         if category:
             lines.append(f"分类：{category}")
         if tag_text:
@@ -231,6 +251,24 @@ def build_emergency_messages(
     summary_text = _format_conversation_summary(conversation_summary)
 
     has_local_evidence = bool(guide_evidence or wiki_evidence or kiwix_evidence)
+    risk_order = {"normal": 0, "caution": 1, "high": 2, "critical": 3}
+    highest_risk = max(
+        (str(item.get("risk_level") or "normal") for item in related_guides or []),
+        key=lambda value: risk_order.get(value, 0),
+        default="normal",
+    )
+    if highest_risk in {"high", "critical"}:
+        risk_directive = (
+            f"最高 Guide 风险等级为 {highest_risk}。回答开头必须先写立即停止/禁止动作，"
+            "随后写隔离、撤离、停用、不入口、不通电或不可继续等适用边界；"
+            "再使用 check 给出可观察判断标准，使用 steps 给出本地行动，使用 fallback 给出缺资源降级方案，"
+            "最后写记录与复查。不得先解释背景。"
+        )
+    else:
+        risk_directive = (
+            f"最高 Guide 风险等级为 {highest_risk}。使用 check 作为判断标准，fallback 作为本地降级方案，"
+            "stop_or_escalate 作为停止条件。"
+        )
 
     system_prompt = """
 你是“壳中灯 LanternBox”的应急模式本地离线 AI 助手。
@@ -250,6 +288,8 @@ def build_emergency_messages(
 6. 不要编造证据中没有的具体数字、药物剂量、设备参数、地点、库存或成员状态。
 7. 如果本地证据不足，可以给出通用安全原则，但必须说明“本地资料不足，以下按一般安全原则处理”。
 8. 不要让用户自己再去查资料。你要把已选证据转成可执行动作。
+9. Guide 的 risk_level、check、fallback、stop_or_escalate 是回答约束，不得遗漏或让模型自行猜测。
+10. related_wiki 只补充判断依据和边界，不得替代 Guide 行动步骤。
 
 回答边界：
 1. 不要把问题自动理解成普通家庭维修或城市客服问题。
@@ -265,7 +305,7 @@ def build_emergency_messages(
 4. 缺水时，饮用、用药、病人照护、儿童老人照护和最低限度烹饪优先于一般清洁。
 
 回答格式：
-请按下面结构回答，控制在 600 字以内，适合语音播报：
+请按下面结构回答，控制在 700 字以内，适合语音播报。每个部分都必须出现：
 
 一、当前判断
 用 1 到 3 句话判断风险等级和问题性质。
@@ -276,10 +316,13 @@ def build_emergency_messages(
 三、不要做什么
 列出容易造成风险的错误做法。
 
-四、接下来观察什么
-列出需要记录和复查的指标。
+四、本地降级方案
+必须使用 Guide fallback，说明缺工具、缺电、缺水、缺人手或无法执行首选方案时怎么做。
 
-五、需要追问的信息
+五、接下来观察和记录什么
+必须使用 Guide check，列出可观察指标、记录项和复查时机。
+
+六、需要追问的信息
 如果信息不足，最多追问 1 到 3 个关键问题。
 
 不要在回答正文里重复列出“参考资料标题”。页面下方会单独展示关联指南、Wiki 和 Kiwix 来源。
@@ -313,6 +356,9 @@ Retrieval v2 已选中的 Kiwix / ZIM 背景资料：
 
 证据状态：
 {'已获得本地证据，请优先基于上述证据回答。' if has_local_evidence else '本地资料不足，请明确说明资料不足，并按一般安全原则给出保守建议。'}
+
+风险结构硬约束：
+{risk_directive}
 
 请基于以上 Retrieval v2 证据，给出壳中灯 AI 的应急建议。Kiwix / ZIM 只能用于背景解释，不能替代 Guide 的行动建议。
 不要在正文末尾重复列出参考资料。

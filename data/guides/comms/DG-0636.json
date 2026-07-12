@@ -49,9 +49,27 @@
     "设备发热或电量快速下降时暂停使用并检查电源。"
   ],
   "related_wiki": [
-    "communication-offline-communication-001",
+    "communication-communication-discipline-001",
+    "communication-communication-failure-001",
+    "communication-communication-knowledge-001",
+    "communication-communication-knowledge-002",
+    "communication-communication-knowledge-003",
+    "communication-communication-knowledge-004",
+    "communication-communication-power-001",
+    "communication-contact-list-001",
     "communication-contact-window-001",
-    "communication-sms-001"
+    "communication-contact-window-002",
+    "communication-lora-001",
+    "communication-meeting-point-001",
+    "communication-offline-communication-001",
+    "communication-phone-001",
+    "communication-separated-movement-001",
+    "communication-shortwave-001",
+    "communication-sms-001",
+    "communication-sync-rhythm-001",
+    "communication-whistle-signal-001",
+    "communication-written-message-001",
+    "communication-written-message-002"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "通讯",
@@ -92,5 +110,6 @@
     "断网家庭固定开机窗口",
     "通讯",
     "断网家庭固定开机窗口"
-  ]
+  ],
+  "risk_level": "caution"
 }

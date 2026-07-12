@@ -5,11 +5,11 @@ category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 summary: 优先使用衣物分层、隔潮和热水瓶等非燃烧方式；高风险条目，禁用条件出现时取消燃烧取暖。
 tags: 火源 / 保温 / 通风 / 一氧化碳风险, 室内取暖的禁用场景, 室内取暖的禁, P0, 长期生存
+guide_links: DG-0591
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 室内取暖的禁用场景
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录禁用原因、替代方案、告知对象、夜间检查和未解决问题。
+
+## 对应 Guide
+
+- DG-0591｜室内取暖：通风和一氧化碳风险｜使用时机：室内取暖：通风和一氧化碳风险相关场景出现，外部支援不确定，需要立刻用本地资源处理。

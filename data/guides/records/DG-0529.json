@@ -30,7 +30,9 @@
     "证件照随便看。",
     "访问不留记录。"
   ],
-  "fallback": "系统未完成时，用密封文件袋和纸质权限表临时管理。",
+  "fallback": [
+    "系统未完成时，用密封文件袋和纸质权限表临时管理。"
+  ],
   "stop_or_escalate": [
     "口令泄露、设备丢失、成员资料被误看时，立即更换口令和备份。"
   ],
@@ -64,5 +66,7 @@
     "库存资料",
     "成员档案"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [],
+  "risk_level": "normal"
 }

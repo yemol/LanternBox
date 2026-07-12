@@ -53,8 +53,7 @@
     "有人试图靠近储藏区。"
   ],
   "related_wiki": [
-    "外部接触与交换风险",
-    "外部接触记录"
+    "safety-stranger-contact-inventory-exposure-001"
   ],
   "notes": "长期断供和小团队场景下的非对抗行动卡；重点是低暴露、边界、记录、照护和降温。",
   "domains": [
@@ -94,5 +93,6 @@
     "不暴露库存",
     "库存安全",
     "交换边界"
-  ]
+  ],
+  "risk_level": "caution"
 }

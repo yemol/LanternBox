@@ -50,9 +50,10 @@
     "饮用水容器不足到影响最低储备时，启动取水或容器替代方案。"
   ],
   "related_wiki": [
-    "water-water-source-001",
-    "water-rainwater-001",
-    "water-flood-water-001"
+    "water-chemical-container-no-drinking-water-001",
+    "water-flood-water-001",
+    "water-odor-judgement-014",
+    "water-rainwater-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "水",
@@ -93,5 +94,6 @@
     "水桶异味后的降级处理",
     "水",
     "水桶异味后的降级处理"
-  ]
+  ],
+  "risk_level": "caution"
 }

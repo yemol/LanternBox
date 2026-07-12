@@ -6,13 +6,12 @@ priority: P1
 risk_level: high
 summary: 区分事实、情绪和改进动作进行短复盘；高风险条目，不把复盘变成追责，并记录责任人、时间和复查结果。
 tags: 外部接触, 外部接触与物资交换风险, 交换后复盘和物资清点, 长期断供, 小团队, 离线生存
-guide_links: DG-0696, DG-0697, DG-0698
+guide_links: DG-0696, DG-0697, DG-0698, DG-0706, DG-0709
 kiwix_topics: 交换后复盘和物资清点, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 交换后复盘和物资清点
 
 ## 用途
@@ -63,9 +62,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0696
-- DG-0697
-- DG-0698
+- DG-0696｜物资交换不暴露库存｜使用时机：和外部交换物资时展示库存会增加被索取或被盯上的风险。
+- DG-0697｜交换地点不选住所核心区｜使用时机：交换地点靠近住所会暴露路线、人数和储物位置。
+- DG-0698｜陌生人求助边界回应｜使用时机：陌生人求助可能真实也可能带来风险，需要有边界地回应。
+- DG-0706｜交换内容记录｜使用时机：和外部对象完成物资、工具、信息或服务交换后，需要留下可复核记录。
+- DG-0709｜接触后风险复盘｜使用时机：完成外部接触后，团队需要判断是否泄露信息、引入污染或形成后续压力。
 
 ## Kiwix/ZIM 可继续查询
 

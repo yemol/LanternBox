@@ -36,7 +36,11 @@
   "stop_or_escalate": [
     "多人出现口渴、尿量明显减少、头晕或饮用水低于半天时，进入紧急配水并重新评估是否转移或寻找水源。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "water-drinking-priority-017",
+    "water-drinking-water-002",
+    "water-rationing-priority-001"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "水与食物保障",
   "domains": [
@@ -92,5 +96,6 @@
     "只够一天",
     "配给",
     "用水优先级"
-  ]
+  ],
+  "risk_level": "caution"
 }

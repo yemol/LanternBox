@@ -4,7 +4,7 @@ slug: safety-evacuation-002
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 比较主路线、备用路线、阻断点和会合点；高风险条目，路线失效时按备用方案。
+summary: 用于撤离路线失效后的备选的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 风险决策, 撤离路线失效后的备选, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 撤离路线失效后的备选, 风险决策, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 撤离路线失效后的备选
 
 ## 用途
@@ -63,9 +62,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0666
-- DG-0667
-- DG-0668
+- DG-0666｜外出找资源停止线｜使用时机：外出找资源时诱惑不断增加，需要预设停止线。
+- DG-0667｜维修失败三次后停用｜使用时机：同一维修反复失败，继续尝试可能扩大损坏。
+- DG-0668｜食物可疑时放弃判断｜使用时机：食物外观、来源或气味可疑，需要决定放弃。
 
 ## Kiwix/ZIM 可继续查询
 

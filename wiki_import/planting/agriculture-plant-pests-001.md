@@ -4,7 +4,7 @@ slug: agriculture-plant-pests-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 早期观察叶片、虫卵、霉斑和传播路径；中风险条目，病虫扩散时隔离受影响容器。
+summary: 用于病虫害早期观察的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 种植, 病虫害早期观察, 长期断供, 小团队, 离线生存
 guide_links: DG-0671, DG-0672, DG-0673
 kiwix_topics: 病虫害早期观察, 种植, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 病虫害早期观察
 
 ## 独立边界矩阵
@@ -85,9 +84,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0671
-- DG-0672
-- DG-0673
+- DG-0671｜种子干燥封存｜使用时机：种子需要长期留存，但环境潮湿或温差大，可能提前发霉、虫蛀或失去发芽力。
+- DG-0672｜芽苗菜每日冲洗｜使用时机：芽苗菜作为短期新鲜食物来源，但每日冲洗不当会发臭、腐烂或引起胃肠问题。
+- DG-0673｜容器种植排水孔检查｜使用时机：容器种植没有排水孔，浇水后容易烂根、发臭和滋生虫害。
 
 ## Kiwix/ZIM 可继续查询
 

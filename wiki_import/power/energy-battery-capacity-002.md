@@ -3,13 +3,13 @@ title: 电池容量和功耗基础
 slug: energy-battery-capacity-002
 category: 能源
 priority: P0
-summary: 用实际耗电、低温和老化修正可用时间；中风险条目，关键设备低于预警线时启动节电。
+summary: 用于电池容量和功耗基础的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 能源, 电池容量和功耗基础, 电池容量和功, P0, 长期生存
+guide_links: DG-0562
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 电池容量和功耗基础
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录设备名、任务类型、开始/结束电量、运行分钟数和估算剩余次数。
+
+## 对应 Guide
+
+- DG-0562｜电池不足：照明分级使用｜使用时机：电池不足：照明分级使用相关场景出现，外部支援不确定，需要立刻用本地资源处理。

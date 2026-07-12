@@ -33,7 +33,10 @@
   "stop_or_escalate": [
     "多人乏力、头晕、争抢食物或库存低于一天时，进入紧急配给并停止非必要体力任务。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "food-no-cook-emergency-001",
+    "food-staple-food-002"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "水与食物保障",
   "domains": [
@@ -88,5 +91,6 @@
     "口粮",
     "配给",
     "库存"
-  ]
+  ],
+  "risk_level": "caution"
 }

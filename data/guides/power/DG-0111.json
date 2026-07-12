@@ -30,7 +30,9 @@
     "破损线继续带大功率电器。",
     "插线板放湿地上。"
   ],
-  "fallback": "线材不足时，优先保障低功率关键设备，不为方便乱接。",
+  "fallback": [
+    "线材不足时，优先保障低功率关键设备，不为方便乱接。"
+  ],
   "stop_or_escalate": [
     "焦味、冒烟、火花、线材发热、触电感时立即断电并隔离。"
   ],
@@ -111,5 +113,10 @@
     "地面积水",
     "插线板泡水",
     "插线板泡过水"
-  ]
+  ],
+  "related_wiki": [
+    "energy-basic-electrical-safety-index-001",
+    "energy-water-damaged-electrical-no-power-001"
+  ],
+  "risk_level": "high"
 }

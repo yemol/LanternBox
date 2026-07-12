@@ -35,7 +35,11 @@
   "stop_or_escalate": [
     "意识模糊、停止出汗、持续呕吐、无法饮水或体温异常升高时，立即进入降温和求援优先。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "medical-child-elder-dehydration-risk-001",
+    "water-heat-002",
+    "water-heat-illness-047"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "水与食物保障",
   "domains": [
@@ -91,5 +95,6 @@
     "缺水",
     "补水",
     "降温"
-  ]
+  ],
+  "risk_level": "caution"
 }

@@ -1,0 +1,95 @@
+{
+  "id": "DG-0800",
+  "title": "先找到可用水源的方向",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "找水时不知道先看哪里，容易在不安全区域浪费时间。",
+  "goal": "先找到一个可接近、可判断、可安全取水的水源点。",
+  "keywords": [
+    "水",
+    "找水",
+    "饮水安全",
+    "短时断供",
+    "行动卡",
+    "DG-0606",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "纸笔",
+    "标签",
+    "手电",
+    "小口瓶"
+  ],
+  "steps": [
+    "在地图或纸上标出已知低处、植被带、汇水方向和返回点。",
+    "从高处观察地形、动物活动和可能的污染源，不直接进入低洼地。",
+    "确认退路、地形稳定、无明显污染源且至少一人留守记录后再接近。",
+    "到达候选点先观察颜色、气味、油膜和周边排污痕迹，只取样不直接饮用。",
+    "记录位置、路线、时间和待处理方式后按原路返回。"
+  ],
+  "check": [
+    "找水路线已确认。",
+    "可疑点和可用点已分开。",
+    "取样观察已完成。"
+  ],
+  "common_mistakes": [
+    "只看“看起来有水”，不看能不能安全取。",
+    "把多个水源点混在一起。",
+    "没有记录路线。"
+  ],
+  "fallback": [
+    "没有明显水源时先找容器和雨水收集点。",
+    "环境危险时先暂停，改换低风险路线。"
+  ],
+  "stop_or_escalate": [
+    "地面危险、冲突、暴露风险过高时停止继续找水。",
+    "无法安全返回时先撤离并记录。"
+  ],
+  "related_wiki": [
+    "water-route-planning-037",
+    "water-safe-collection-007",
+    "water-source-identification-001"
+  ],
+  "notes": "短时间找水也要先确认退路、稳定地形、明显污染源和留守记录，再决定是否接近候选水点。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先找到可用水源的方向",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先找到可用水源的方向",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先找到可用水源的方向",
+    "先找到可用水源的方向",
+    "水",
+    "先找到可用水源的方向"
+  ],
+  "risk_level": "caution"
+}

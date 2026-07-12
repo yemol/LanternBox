@@ -1,0 +1,213 @@
+[
+  {
+    "id": "water_odor",
+    "question": "河水有异味还能喝吗？",
+    "domain": "water",
+    "guides": [
+      "DG-0805",
+      "DG-0466",
+      "DG-0553"
+    ]
+  },
+  {
+    "id": "water_unknown",
+    "question": "找到一个不明水源，怎么判断能不能用？",
+    "domain": "water",
+    "guides": [
+      "DG-0029",
+      "DG-0553",
+      "DG-0430"
+    ]
+  },
+  {
+    "id": "water_boiled",
+    "question": "煮沸后的水是不是一定能喝？",
+    "domain": "water",
+    "guides": [
+      "DG-0553",
+      "DG-0033",
+      "DG-0810"
+    ]
+  },
+  {
+    "id": "medical_wound",
+    "question": "伤口红肿发热怎么办？",
+    "domain": "medical",
+    "guides": [
+      "DG-0006",
+      "DG-0022"
+    ]
+  },
+  {
+    "id": "medical_child_diarrhea",
+    "question": "小孩腹泻一天了，怎么判断是不是脱水？",
+    "domain": "medical",
+    "guides": [
+      "DG-0559",
+      "DG-0020"
+    ]
+  },
+  {
+    "id": "medical_burn",
+    "question": "烫伤后第一步怎么处理？",
+    "domain": "medical",
+    "guides": [
+      "DG-0560",
+      "DG-0007"
+    ]
+  },
+  {
+    "id": "power_wet_strip",
+    "question": "插线板进水了还能不能晒干继续用？",
+    "domain": "power",
+    "guides": [
+      "DG-0546",
+      "DG-0566",
+      "DG-0111"
+    ]
+  },
+  {
+    "id": "power_swollen_battery",
+    "question": "充电宝鼓包发热怎么办？",
+    "domain": "power",
+    "guides": [
+      "DG-0616"
+    ]
+  },
+  {
+    "id": "power_solar",
+    "question": "太阳能板输出不稳定怎么排查？",
+    "domain": "power",
+    "guides": [
+      "DG-0109",
+      "DG-0564",
+      "DG-0617"
+    ]
+  },
+  {
+    "id": "fire_gas",
+    "question": "房间里有燃气味能不能开灯？",
+    "domain": "fire",
+    "guides": [
+      "DG-0547",
+      "DG-0576"
+    ]
+  },
+  {
+    "id": "fire_co",
+    "question": "室内用炉子取暖怎么避免一氧化碳？",
+    "domain": "fire",
+    "guides": [
+      "DG-0591",
+      "DG-0646"
+    ]
+  },
+  {
+    "id": "fire_small",
+    "question": "小火刚烧起来要不要先灭？",
+    "domain": "fire",
+    "guides": [
+      "DG-0579"
+    ]
+  },
+  {
+    "id": "nav_solo",
+    "question": "没有通信的时候能不能一个人出去探路？",
+    "domain": "navigation",
+    "guides": [
+      "DG-0196",
+      "DG-0589",
+      "DG-0670"
+    ]
+  },
+  {
+    "id": "nav_night",
+    "question": "夜间必须外出时怎么设返回规则？",
+    "domain": "navigation",
+    "guides": [
+      "DG-0589",
+      "DG-0196",
+      "DG-0330"
+    ]
+  },
+  {
+    "id": "nav_flood",
+    "question": "洪水后路线怎么判断还能不能走？",
+    "domain": "navigation",
+    "guides": [
+      "DG-0202",
+      "DG-0438",
+      "DG-0489"
+    ]
+  },
+  {
+    "id": "repair_bucket",
+    "question": "水桶漏了怎么临时修？",
+    "domain": "repair",
+    "guides": [
+      "DG-0568"
+    ]
+  },
+  {
+    "id": "repair_wire",
+    "question": "电线外皮破了能不能胶带缠一下继续用？",
+    "domain": "repair",
+    "guides": [
+      "DG-0567"
+    ]
+  },
+  {
+    "id": "repair_rope",
+    "question": "绳子还能不能承重怎么判断？",
+    "domain": "repair",
+    "guides": [
+      "DG-0384",
+      "DG-0156",
+      "DG-0375"
+    ]
+  },
+  {
+    "id": "records_consumption",
+    "question": "物资消耗怎么记录才方便交接？",
+    "domain": "records",
+    "guides": [
+      "DG-0127",
+      "DG-0126",
+      "DG-0148",
+      "DG-0296"
+    ]
+  },
+  {
+    "id": "team_disagreement",
+    "question": "队员对风险判断不一致怎么办？",
+    "domain": "security",
+    "guides": [
+      "DG-0294",
+      "DG-0429",
+      "DG-0691",
+      "DG-0722"
+    ]
+  },
+  {
+    "id": "records_backup",
+    "question": "重要资料怎么做纸电双备份？",
+    "domain": "records",
+    "guides": [
+      "DG-0276",
+      "DG-0278",
+      "DG-0390",
+      "DG-0426",
+      "DG-0275"
+    ]
+  },
+  {
+    "id": "kiwix_control",
+    "question": "房间里有燃气味，先按本地应急行动处理，再用 Kiwix 解释为什么不能开灯。",
+    "domain": "fire",
+    "guides": [
+      "DG-0547",
+      "DG-0576"
+    ],
+    "expect_kiwix": true
+  }
+]

@@ -76,6 +76,11 @@ def _build_local_where(collection: str, filter_text: str) -> tuple[str, list[Any
         args.append(status)
 
     if collection == "wiki_articles":
+        slugs = _extract_filter_values(filter_text, "slug")
+        if slugs:
+            clauses.append("(" + " or ".join("slug = ?" for _ in slugs) + ")")
+            args.extend(slugs)
+
         for category in _extract_filter_values(filter_text, "category"):
             clauses.append("category = ?")
             args.append(category)

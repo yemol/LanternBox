@@ -5,11 +5,11 @@ category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 summary: 先断电、隔离潮湿电器和可疑线材；高风险条目，不通电测试短路设备，并记录责任人、时间和复查结果。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 漏电和短路基础, 漏电和短路基, P0, 长期生存
+guide_links: DG-0566, DG-0567
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 漏电和短路基础
 
 ## 用途
@@ -58,3 +58,8 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录设备、异常现象、断电状态、隔离位置、接触人员和复查决定。
+
+## 对应 Guide
+
+- DG-0566｜插线板和延长线进水后：隔离复核卡｜使用时机：插线板和延长线进水后：隔离复核卡相关场景出现，外部支援不确定，需要立刻用本地资源处理。
+- DG-0567｜电线破皮：临时绝缘和停用判断｜使用时机：电线破皮：临时绝缘和停用判断相关场景出现，外部支援不确定，需要立刻用本地资源处理。

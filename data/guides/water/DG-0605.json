@@ -49,9 +49,9 @@
     "清洁水和污染水混放无法区分时，暂停入口用途并重新标记容器。"
   ],
   "related_wiki": [
-    "water-water-source-001",
-    "water-rainwater-001",
-    "water-flood-water-001"
+    "water-flood-water-001",
+    "water-priority-outage-001",
+    "water-rainwater-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "水",
@@ -92,5 +92,6 @@
     "少水洗手和饮用水保留",
     "水",
     "少水洗手和饮用水保留"
-  ]
+  ],
+  "risk_level": "caution"
 }

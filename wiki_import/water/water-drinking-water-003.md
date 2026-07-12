@@ -5,11 +5,11 @@ category: 水
 priority: P0
 summary: 把饮用水、清洁水和冲洗水分开标记；中风险条目，不同等级不混用，并记录责任人、时间和复查结果。
 tags: 水, 饮用水与清洁水分级, 饮用水与清洁, P0, 长期生存
+guide_links: DG-0031
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 饮用水与清洁水分级
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录容器编号、等级、用途、取用规则、误用事件和更正。
+
+## 对应 Guide
+
+- DG-0031｜饮用水容器分级：饮用、烹饪、清洁｜使用时机：家里或营地有多个水桶、水瓶、水袋，来源和用途不同。

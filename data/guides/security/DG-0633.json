@@ -49,9 +49,29 @@
     "同一问题反复出现时，重设分配规则和见证机制。"
   ],
   "related_wiki": [
-    "safety-night-safety-002",
+    "fire-small-fire-stop-001",
+    "safety-barter-002",
+    "safety-buddy-system-001",
+    "safety-children-003",
+    "safety-conflict-002",
+    "safety-conflict-003",
+    "safety-conflict-004",
+    "safety-door-window-001",
+    "safety-electric-shock-001",
+    "safety-entry-risk-001",
+    "safety-fire-response-001",
+    "safety-gas-leak-001",
+    "safety-hand-signals-001",
+    "safety-inventory-002",
     "safety-low-profile-001",
-    "safety-stranger-contact-002"
+    "safety-night-safety-002",
+    "safety-night-watch-001",
+    "safety-outside-movement-002",
+    "safety-safety-knowledge-010",
+    "safety-safety-review-001",
+    "safety-stranger-contact-002",
+    "safety-toilet-001",
+    "safety-unknown-smell-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "安全",
@@ -92,5 +112,6 @@
     "物资分配冲突暂停",
     "安全",
     "物资分配冲突暂停"
-  ]
+  ],
+  "risk_level": "high"
 }

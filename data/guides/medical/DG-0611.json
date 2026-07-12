@@ -51,8 +51,28 @@
   ],
   "related_wiki": [
     "medical-bleeding-control-001",
+    "medical-blister-001",
+    "medical-burn-care-001",
+    "medical-chronic-disease-001",
     "medical-clean-water-001",
-    "medical-wound-care-001"
+    "medical-common-infectious-disease-index-001",
+    "medical-cross-infection-001",
+    "medical-dehydration-001",
+    "medical-dehydration-002",
+    "medical-fever-001",
+    "medical-fever-002",
+    "medical-fever-003",
+    "medical-fever-005",
+    "medical-heat-activity-stop-001",
+    "medical-medical-record-001",
+    "medical-medication-001",
+    "medical-nosebleed-001",
+    "medical-oral-rehydration-001",
+    "medical-pain-001",
+    "medical-sprain-001",
+    "medical-wound-care-001",
+    "medical-wound-care-002",
+    "medical-wound-infection-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "医疗急救",
@@ -93,5 +113,6 @@
     "儿童发热咳嗽观察卡",
     "医疗",
     "儿童发热咳嗽观察卡"
-  ]
+  ],
+  "risk_level": "caution"
 }

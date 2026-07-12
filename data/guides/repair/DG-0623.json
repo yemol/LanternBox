@@ -50,8 +50,25 @@
     "地面持续湿滑影响通行时，改设绕行路线。"
   ],
   "related_wiki": [
+    "repair-bag-repair-001",
+    "repair-bag-repair-002",
+    "repair-container-001",
+    "repair-door-window-001",
+    "repair-drinking-water-001",
+    "repair-fastener-001",
+    "repair-footwear-repair-001",
+    "repair-knot-001",
+    "repair-lighting-001",
+    "repair-load-limit-001",
+    "repair-plastic-sheet-001",
     "repair-power-outage-001",
-    "repair-drinking-water-001"
+    "repair-repair-001",
+    "repair-repair-knowledge-001",
+    "repair-salvage-001",
+    "repair-sharp-metal-001",
+    "repair-tape-001",
+    "repair-tool-maintenance-001",
+    "repair-wood-support-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "维修 / 制作 / 替代 / 拆解再利用",
@@ -92,5 +109,6 @@
     "水管滴漏临时接水降级",
     "维修",
     "水管滴漏临时接水降级"
-  ]
+  ],
+  "risk_level": "caution"
 }

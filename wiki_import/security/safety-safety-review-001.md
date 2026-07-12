@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 安全复盘记录的价值
 
 ## 用途
@@ -63,9 +62,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0631
-- DG-0632
-- DG-0633
+- DG-0631｜陌生人交换物资低暴露流程｜使用时机：需要和陌生人交换物资，但不能暴露库存、成员结构和住所核心位置。
+- DG-0632｜门口玻璃碎裂隔离｜使用时机：门口玻璃碎裂，既有割伤风险，也可能暴露室内情况。
+- DG-0633｜物资分配冲突暂停｜使用时机：物资分配时出现情绪升级或互相指责，继续讨论会增加冲突风险。
 
 ## Kiwix/ZIM 可继续查询
 

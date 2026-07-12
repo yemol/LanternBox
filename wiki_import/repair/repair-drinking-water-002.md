@@ -5,11 +5,11 @@ category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 summary: 把裂缝容器从饮用水用途降级；高风险条目，裂缝藏污或漏水时不装饮水，并记录责任人、时间和复查结果。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 容器裂缝和饮用水污染, 容器裂缝和饮, P0, 长期生存
+guide_links: DG-0568
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 容器裂缝和饮用水污染
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录裂缝位置、污染接触、降级决定、标签和后续用途。
+
+## 对应 Guide
+
+- DG-0568｜水桶漏水：临时修补与降级用途｜使用时机：水桶漏水：临时修补与降级用途相关场景出现，外部支援不确定，需要立刻用本地资源处理。

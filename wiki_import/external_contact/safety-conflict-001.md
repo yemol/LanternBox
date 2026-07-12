@@ -4,15 +4,14 @@ slug: safety-conflict-001
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 用短句说明无法交换并保留退路；高风险条目，不要解释库存或引发对方讨价还价。
+summary: 用于拒绝交换的低冲突说法的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 外部接触, 外部接触与物资交换风险, 拒绝交换的低冲突说法, 长期断供, 小团队, 离线生存
-guide_links: DG-0696, DG-0697, DG-0698
+guide_links: DG-0696, DG-0697, DG-0698, DG-0708
 kiwix_topics: 拒绝交换的低冲突说法, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 拒绝交换的低冲突说法
 
 ## 用途
@@ -63,9 +62,10 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0696
-- DG-0697
-- DG-0698
+- DG-0696｜物资交换不暴露库存｜使用时机：和外部交换物资时展示库存会增加被索取或被盯上的风险。
+- DG-0697｜交换地点不选住所核心区｜使用时机：交换地点靠近住所会暴露路线、人数和储物位置。
+- DG-0698｜陌生人求助边界回应｜使用时机：陌生人求助可能真实也可能带来风险，需要有边界地回应。
+- DG-0708｜拒绝不安全交换｜使用时机：对方提出进入驻地、查看库存、交换关键药品、夜间见面或条件突然变化。
 
 ## Kiwix/ZIM 可继续查询
 

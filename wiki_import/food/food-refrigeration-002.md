@@ -6,13 +6,12 @@ priority: P0
 risk_level: high
 summary: 按停电时间、温度、开门次数和食物类型处理冰箱食物，并限制剩饭保存、复热次数和多人共食范围；高风险条目，肉类熟食可疑时不要保存到下一餐。
 tags: 食物, 剩饭过夜没有冷藏的风险判断, 长期断供, 小团队, 离线生存
-guide_links: DG-0606, DG-0607, DG-0608
+guide_links: DG-0606, DG-0607, DG-0608, DG-0609, DG-0610
 kiwix_topics: 剩饭过夜没有冷藏的风险判断, 食物, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 剩饭过夜没有冷藏的风险判断
 
 ## 独立边界矩阵
@@ -85,9 +84,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0606
-- DG-0607
-- DG-0608
+- DG-0606｜干粮和罐头三天配给表｜使用时机：只剩干粮和罐头，需要把未来三天的口粮先算清楚，避免第一天消耗过快。
+- DG-0607｜剩饭过夜无冷藏禁食判断｜使用时机：剩饭在无冷藏条件下过夜，外观可能正常但细菌风险已经上升。
+- DG-0608｜霉变粮食和坚果停用｜使用时机：粮食或坚果出现霉斑、霉味、结块或虫蛀，局部去除不能可靠排除毒素风险。
+- DG-0609｜多人食物分发和争议暂停｜使用时机：多人分发食物时出现质疑、插队或份额争议，若继续发放可能升级为冲突。
+- DG-0610｜动物性食物彻底加热和记录｜使用时机：动物性食物来源不稳定，可能来自捕捞、交换或临期库存，必须彻底加热并记录批次。
 
 ## Kiwix/ZIM 可继续查询
 

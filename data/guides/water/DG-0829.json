@@ -1,0 +1,90 @@
+{
+  "id": "DG-0829",
+  "title": "先把饮水异常情况及时上报和记录",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "水看起来有变化，但没人记录，也没人把情况及时告诉下一位负责的人。",
+  "goal": "先让异常情况被发现、上报和记录，避免后续误用。",
+  "keywords": [
+    "水",
+    "异常上报",
+    "饮水安全",
+    "记录",
+    "行动卡"
+  ],
+  "tools": [
+    "纸笔",
+    "标签",
+    "小口瓶"
+  ],
+  "steps": [
+    "先把异常现象写成一句明确的描述。",
+    "先标记异常水的容器和位置。",
+    "先把异常时间、现象和责任人记录下来。",
+    "先让下一位负责人看到记录。",
+    "先在下一次取水前复查一次。"
+  ],
+  "check": [
+    "异常现象已描述。",
+    "责任人已写清。",
+    "下一位负责人已知晓。"
+  ],
+  "common_mistakes": [
+    "只口头说，不写。",
+    "异常没有被标在容器上。",
+    "记录没有传给下一位责任人。"
+  ],
+  "fallback": [
+    "没有纸笔时先用口头通知并在容器上做标记。",
+    "异常不确定时先按待检处理。"
+  ],
+  "stop_or_escalate": [
+    "异常扩大或持续时停止使用该批水。",
+    "多人都无法判断时升级为更保守处理。"
+  ],
+  "related_wiki": [
+    "water-clarity-judgement-013",
+    "water-odor-judgement-014",
+    "water-unknown-source-010"
+  ],
+  "notes": "记录不是形式，而是后续判断的基础。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "异常上报",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "异常上报",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先把饮水异常情况及时上报和记录",
+    "异常上报",
+    "水",
+    "先把饮水异常情况及时上报和记录"
+  ],
+  "risk_level": "caution"
+}

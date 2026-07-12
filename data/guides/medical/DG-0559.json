@@ -34,7 +34,10 @@
   "stop_or_escalate": [
     "血便、持续高热、明显脱水、尿很少、意识差、婴幼儿或老人腹泻加重时，升级求援。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "medical-child-elder-dehydration-risk-001",
+    "medical-diarrhea-dehydration-risk-001"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "医疗与照护",
   "domains": [
@@ -89,5 +92,6 @@
     "脱水",
     "呕吐",
     "补液"
-  ]
+  ],
+  "risk_level": "caution"
 }

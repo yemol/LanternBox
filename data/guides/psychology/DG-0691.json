@@ -49,9 +49,26 @@
     "情况超出原计划时，由负责人重新复核，而不是个人临时决定。"
   ],
   "related_wiki": [
-    "psychology-panic-001",
+    "psychology-bad-news-001",
+    "psychology-blame-language-001",
+    "psychology-breathing-001",
+    "psychology-caregiver-burnout-001",
+    "psychology-child-task-001",
     "psychology-children-001",
-    "psychology-elder-anxiety-001"
+    "psychology-closed-space-001",
+    "psychology-conflict-001",
+    "psychology-conflict-cooling-001",
+    "psychology-elder-anxiety-001",
+    "psychology-emotion-log-001",
+    "psychology-fear-001",
+    "psychology-filtering-001",
+    "psychology-grief-001",
+    "psychology-panic-001",
+    "psychology-quiet-rotation-001",
+    "psychology-review-001",
+    "psychology-routine-001",
+    "psychology-rumor-stress-001",
+    "psychology-sleep-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "心理韧性与冲突降温",
@@ -92,5 +109,6 @@
     "争吵升级前暂停口令",
     "心理韧性",
     "争吵升级前暂停口令"
-  ]
+  ],
+  "risk_level": "caution"
 }

@@ -3,13 +3,13 @@ title: 鞋袜破损和脚部伤害
 slug: repair-footwear-repair-002
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
-summary: 判断修补是否能恢复最低功能；中风险条目，承重、带电或锋利风险不明时停止。
+summary: 用于鞋袜破损和脚部伤害的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 鞋袜破损和脚部伤害, 鞋袜破损和脚, P0, 长期生存
+guide_links: DG-0622
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 鞋袜破损和脚部伤害
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录脚部检查、破损点、修补材料、继续行走限制和复查结果。
+
+## 对应 Guide
+
+- DG-0622｜鞋底开裂转移前修补｜使用时机：转移前鞋底开裂，继续行走可能进水、绊倒或磨伤脚部。

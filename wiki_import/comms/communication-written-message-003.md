@@ -3,13 +3,13 @@ title: 纸条留言的信息格式
 slug: communication-written-message-003
 category: 通讯
 priority: P0
-summary: 写清时间、去向、人数、下一步和签名；中风险条目，敏感信息不留在暴露点。
+summary: 用于纸条留言的信息格式的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 通讯, 纸条留言的信息格式, 纸条留言的信, P0, 长期生存
+guide_links: DG-0584
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 纸条留言的信息格式
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录模板版本、常用地点编号、冲突留言案例和格式修订原因。
+
+## 对应 Guide
+
+- DG-0584｜纸条留言：位置格式和防水｜使用时机：纸条留言：位置格式和防水相关场景出现，外部支援不确定，需要立刻用本地资源处理。

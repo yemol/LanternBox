@@ -30,7 +30,9 @@
     "别人拿错个人药。",
     "药包里药变了但用药卡没改。"
   ],
-  "fallback": "没有专用药包时，用小袋或信封临时分装并贴编号。",
+  "fallback": [
+    "没有专用药包时，用小袋或信封临时分装并贴编号。"
+  ],
   "stop_or_escalate": [
     "药包丢失、漏服、重复服药或成员状态变化时，立即复核。"
   ],
@@ -58,5 +60,7 @@
     "个人装备",
     "防护"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [],
+  "risk_level": "caution"
 }

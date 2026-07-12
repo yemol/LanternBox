@@ -34,7 +34,9 @@
   "stop_or_escalate": [
     "出现大量虫害、渗液、腐败液接触食物或多人腹泻时，升级为污染区处理。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "food-food-waste-002"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "水与食物保障",
   "domains": [
@@ -89,5 +91,6 @@
     "湿垃圾",
     "防虫",
     "防臭"
-  ]
+  ],
+  "risk_level": "caution"
 }

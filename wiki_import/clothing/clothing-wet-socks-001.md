@@ -6,13 +6,12 @@ priority: P0
 risk_level: caution
 summary: 把湿袜、脚部破损和换袜轮换连在一起检查；中风险条目，脚麻、破皮或无干袜时降低路线和负重。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 湿袜和脚部破损风险, 长期断供, 小团队, 离线生存
-guide_links: DG-0651, DG-0652, DG-0653
+guide_links: DG-0651, DG-0652, DG-0653, DG-0654, DG-0655
 kiwix_topics: 湿袜和脚部破损风险, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 湿袜和脚部破损风险
 
 ## 独立边界矩阵
@@ -85,9 +84,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0651
-- DG-0652
-- DG-0653
+- DG-0651｜湿袜更换和脚部检查｜使用时机：长时间行走后袜子潮湿，需要换袜并检查脚部损伤。
+- DG-0652｜雨衣破洞临时补片｜使用时机：雨衣破洞导致躯干或背包进水，需要临时补片。
+- DG-0653｜高温外出防晒和补水｜使用时机：高温外出任务容易晒伤和脱水，需要出发前限制暴露。
+- DG-0654｜低温睡前分层穿衣｜使用时机：夜间低温但衣物有限，需要睡前分层而不出汗受潮。
+- DG-0655｜鞋底脱胶后的降级使用｜使用时机：鞋底脱胶但暂时没有替换鞋，需要判断短用或停用。
 
 ## Kiwix/ZIM 可继续查询
 

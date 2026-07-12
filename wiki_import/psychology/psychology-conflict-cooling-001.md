@@ -4,15 +4,14 @@ slug: psychology-conflict-cooling-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 用暂停、复述事实和分开角色降低资源争吵；中风险条目，不在争吵中分配物资。
+summary: 用于资源分配争吵的降温方法的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 心理韧性, 心理韧性与冲突降温, 资源分配争吵的降温方法, 长期断供, 小团队, 离线生存
-guide_links: DG-0691, DG-0692, DG-0693
+guide_links: DG-0691, DG-0692, DG-0693, DG-0718, DG-0722
 kiwix_topics: 资源分配争吵的降温方法, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 资源分配争吵的降温方法
 
 ## 独立边界矩阵
@@ -85,9 +84,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0691
-- DG-0692
-- DG-0693
+- DG-0691｜争吵升级前暂停口令｜使用时机：争吵开始升温时，如果没有共同暂停信号，会进入互相攻击。
+- DG-0692｜儿童恐慌安抚三步｜使用时机：儿童因声响、黑暗、转移或疾病恐慌，需要简单稳定的安抚流程。
+- DG-0693｜老人焦虑信息同步｜使用时机：老人反复询问消息或担心拖累团队，需要固定信息同步而不是随时解释。
+- DG-0718｜睡眠不足争执降温｜使用时机：连续守夜、噪声、寒冷或压力导致成员因小事争吵。
+- DG-0722｜两人争执升级降温｜使用时机：两名成员围绕任务、配给、照护或责任开始提高音量、贴近身体或翻旧账。
 
 ## Kiwix/ZIM 可继续查询
 

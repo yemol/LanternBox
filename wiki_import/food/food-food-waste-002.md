@@ -5,11 +5,11 @@ category: 食物
 priority: P0
 summary: 及时密封残渣，隔离虫害、气味和动物接触；中风险条目，不要让残渣靠近食物、水源和睡眠区。
 tags: 食物, 食物残渣与虫害关系, 食物残渣与虫, P0, 长期生存
+guide_links: DG-0600
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 食物残渣与虫害关系
 
 ## 独立边界矩阵
@@ -79,3 +79,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录食物残渣批次、开封/烹饪时间、保存位置、食用人员、弃用原因和剩余天数修正。
+
+## 对应 Guide
+
+- DG-0600｜食物残渣处理：防虫防臭和卫生｜使用时机：饭后残渣、果皮、骨头或变质食物无法及时外运。

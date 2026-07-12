@@ -30,7 +30,9 @@
     "熟人多拿。",
     "特殊加水不记录引发争吵。"
   ],
-  "fallback": "没有量杯时，用同一只碗或瓶子作为临时单位。",
+  "fallback": [
+    "没有量杯时，用同一只碗或瓶子作为临时单位。"
+  ],
   "stop_or_escalate": [
     "有人出现明显脱水、意识异常、持续腹泻或高热时，立即优先医疗用水。"
   ],
@@ -81,5 +83,11 @@
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
-  ]
+  ],
+  "related_wiki": [
+    "water-day-check-022",
+    "water-usage-log-023",
+    "water-usage-logging-040"
+  ],
+  "risk_level": "caution"
 }

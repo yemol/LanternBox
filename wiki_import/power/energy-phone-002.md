@@ -3,13 +3,13 @@ title: 手机省电为什么优先短信
 slug: energy-phone-002
 category: 能源
 priority: P0
-summary: 安排电量分配、设备检查和停用记录；中风险条目，受潮、发热或鼓包时隔离停用。
+summary: 用于手机省电为什么优先短信的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 能源, 手机省电优先短信, 手机省电为什, P0, 长期生存
+guide_links: DG-0561
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 手机省电为什么优先短信
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录开机时间、发送对象、消息摘要、剩余电量和下一窗口。
+
+## 对应 Guide
+
+- DG-0561｜手机低电量：保通信模式｜使用时机：手机低电量：保通信模式相关场景出现，外部支援不确定，需要立刻用本地资源处理。

@@ -3,13 +3,13 @@ title: 室内保温基础
 slug: shelter-indoor-heat-retention-001
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
-summary: 封堵冷风、集中活动和分层保温；中风险条目，警惕燃烧取暖的一氧化碳风险。
+summary: 用于室内保温基础的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 保温, 低温, 停电, 避难, 室内, 取暖安全
+guide_links: DG-0362
 risk_level: caution
 status: published
 source: Ready.gov Winter Weather；CDC Keep Warm During Winter Weather
 ---
-
 # 室内保温基础
 
 ## 用途
@@ -24,7 +24,7 @@ source: Ready.gov Winter Weather；CDC Keep Warm During Winter Weather
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备干燥内层衣物、袜子、帽子、毯子、地面隔冷材料、门窗挡风物、夜间照明、通风提醒标记和成员保温检查表。最低条件是先保持身体和睡眠区域干燥，再缩小保温范围。
 
 ## 操作步骤
 
@@ -66,7 +66,7 @@ source: Ready.gov Winter Weather；CDC Keep Warm During Winter Weather
 - 内层保持干燥
 - 中层保暖
 - 外层挡风
-- 头部、颈部、手脚加强保温
+- 重点保护头部、颈部、手脚并保持干燥
 
 袜子和帽子很重要。湿衣物应尽快更换。
 
@@ -132,7 +132,7 @@ source: Ready.gov Winter Weather；CDC Keep Warm During Winter Weather
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+没有取暖设备时，缩小睡眠区域，叠加干燥衣物、帽子、袜子、毯子和地面隔冷层；缺少毯子时用衣物、纸板、泡沫或背包垫高隔冷。通风状态不清时不使用室内燃烧取暖。
 
 ## 记录建议
 
@@ -148,3 +148,7 @@ source: Ready.gov Winter Weather；CDC Keep Warm During Winter Weather
 - 异常情况
 
 低温中最重要的不是“房间暖不暖”，而是每个人是否持续保持清醒、干燥和可行动。
+
+## 对应 Guide
+
+- DG-0362｜门窗缝隙保温｜使用时机：冷风从门缝、窗缝、墙缝、破窗或临时棚边进入。

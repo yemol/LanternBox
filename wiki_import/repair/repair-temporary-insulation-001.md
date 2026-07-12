@@ -3,13 +3,13 @@ title: 临时绝缘材料的边界
 slug: repair-temporary-insulation-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
-summary: 判断修补是否能恢复最低功能；中风险条目，承重、带电或锋利风险不明时停止。
+summary: 用于临时绝缘材料的边界的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 临时绝缘材料的边界, 临时绝缘材料, P0, 长期生存
+guide_links: DG-0567
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 临时绝缘材料的边界
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录线材位置、问题、停用状态、替代方案和复查决定。
+
+## 对应 Guide
+
+- DG-0567｜电线破皮：临时绝缘和停用判断｜使用时机：电线破皮：临时绝缘和停用判断相关场景出现，外部支援不确定，需要立刻用本地资源处理。

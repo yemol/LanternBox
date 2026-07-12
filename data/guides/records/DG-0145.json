@@ -30,7 +30,9 @@
     "丢掉说明书。",
     "换药后不更新。"
   ],
-  "fallback": "不知道药名时，先拍照保存包装、药片外观和说明文字，再补全信息。",
+  "fallback": [
+    "不知道药名时，先拍照保存包装、药片外观和说明文字，再补全信息。"
+  ],
   "stop_or_escalate": [
     "吃错药、重复用药、漏服慢病药、出现过敏反应时，立即复核记录。"
   ],
@@ -65,5 +67,9 @@
     "库存资料",
     "成员档案"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [
+    "general-medical-record-archive-001"
+  ],
+  "risk_level": "normal"
 }

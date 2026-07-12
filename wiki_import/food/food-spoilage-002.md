@@ -3,13 +3,13 @@ title: 食物腐败的常见信号
 slug: food-spoilage-002
 category: 食物
 priority: P0
-summary: 用气味、黏滑、颜色和内脏污染判断食物是否变质；中风险条目，腐败动物性食物不入口。
+summary: 用于食物腐败的常见信号的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 食物, 食物腐败的常见信号, 食物腐败的常, P0, 长期生存
+guide_links: DG-0598, DG-0607, DG-0608
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 食物腐败的常见信号
 
 ## 独立边界矩阵
@@ -79,3 +79,9 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录食物腐败批次、开封/烹饪时间、保存位置、食用人员、弃用原因和剩余天数修正。
+
+## 对应 Guide
+
+- DG-0598｜罐头鼓包或异味：禁食判断｜使用时机：罐头、真空包装或密封食品出现鼓包、漏液、异味或锈蚀。
+- DG-0607｜剩饭过夜无冷藏禁食判断｜使用时机：剩饭在无冷藏条件下过夜，外观可能正常但细菌风险已经上升。
+- DG-0608｜霉变粮食和坚果停用｜使用时机：粮食或坚果出现霉斑、霉味、结块或虫蛀，局部去除不能可靠排除毒素风险。

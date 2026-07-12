@@ -51,8 +51,26 @@
   ],
   "related_wiki": [
     "food-canned-food-001",
+    "food-canned-food-002",
+    "food-children-001",
+    "food-cooking-001",
+    "food-food-knowledge-001",
+    "food-food-knowledge-002",
+    "food-food-knowledge-003",
+    "food-food-poisoning-001",
+    "food-food-waste-001",
+    "food-hunger-001",
+    "food-inventory-001",
+    "food-mold-001",
+    "food-package-damage-001",
+    "food-protein-001",
     "food-refrigeration-001",
-    "food-refrigeration-002"
+    "food-refrigeration-002",
+    "food-spoilage-001",
+    "food-spoilage-002",
+    "food-spoilage-check-001",
+    "food-staple-food-001",
+    "food-waste-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "食物",
@@ -93,5 +111,6 @@
     "霉变粮食和坚果停用",
     "食物",
     "霉变粮食和坚果停用"
-  ]
+  ],
+  "risk_level": "high"
 }

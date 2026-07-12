@@ -4,15 +4,14 @@ slug: energy-battery-capacity-001
 category: 能源
 priority: P0
 risk_level: high
-summary: 用实际耗电、低温和老化修正可用时间；高风险条目，关键设备低于预警线时启动节电。
+summary: 用于电池容量和实际可用时间的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 能源, 电池容量和实际可用时间, 长期断供, 小团队, 离线生存
-guide_links: DG-0616, DG-0617, DG-0618
+guide_links: DG-0616, DG-0617, DG-0618, DG-0619, DG-0620
 kiwix_topics: 电池容量和实际可用时间, 能源, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 电池容量和实际可用时间
 
 ## 用途
@@ -65,9 +64,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0616
-- DG-0617
-- DG-0618
+- DG-0616｜充电宝鼓包发热停用隔离｜使用时机：充电宝或电池包出现鼓包、发热、异味或外壳开裂，继续使用可能引发火灾和有毒烟气。
+- DG-0617｜太阳能充电白天排程｜使用时机：太阳能板白天可用但设备多，若随意插拔会浪费日照并造成关键设备没电。
+- DG-0618｜电池混放后的编号轮换｜使用时机：不同新旧、品牌和电量的电池被混放，容易造成误用、漏液和关键设备失效。
+- DG-0619｜负载过大时断开排序｜使用时机：同一电源同时接入太多设备，出现变暗、发热、断续或异味，需要按顺序断开负载。
+- DG-0620｜接口潮湿和线头保护｜使用时机：接口潮湿、线头裸露或线缆外皮破损，继续通电会带来短路、触电和设备损坏风险。
 
 ## Kiwix/ZIM 可继续查询
 

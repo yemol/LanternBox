@@ -6,13 +6,12 @@ priority: P0
 risk_level: high
 summary: 强调持续压迫、减少频繁查看和记录出血变化；高风险条目，出血不止或意识异常时停止普通处理并升级。
 tags: 医疗, 医疗急救, 直接压迫止血为什么不能频繁查看, 长期断供, 小团队, 离线生存
-guide_links: DG-0611, DG-0612, DG-0613
+guide_links: DG-0611, DG-0612, DG-0613, DG-0614, DG-0615
 kiwix_topics: 直接压迫止血为什么不能频繁查看, 医疗急救, Emergency preparedness, Survival skills, Public health
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 直接压迫止血为什么不能频繁查看
 
 ## 用途
@@ -64,9 +63,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0611
-- DG-0612
-- DG-0613
+- DG-0611｜儿童发热咳嗽观察卡｜使用时机：儿童出现发热和咳嗽，外部医疗不稳定，需要家庭先做观察、隔离和危险信号记录。
+- DG-0612｜小伤口少水清洁卡｜使用时机：小伤口需要清洁，但干净水有限，不能为了彻底冲洗耗尽饮用水。
+- DG-0613｜鼻出血不仰头处理｜使用时机：成员鼻出血时常本能仰头，可能导致吞血、呛咳和误判出血量。
+- DG-0614｜扭伤后转移固定｜使用时机：成员扭伤后仍需要移动或转移，若硬撑行走可能加重损伤。
+- DG-0615｜照护者处理呕吐物后防交叉感染｜使用时机：照护者清理呕吐物后若流程混乱，容易把污染带到食物、水和睡眠区。
 
 ## Kiwix/ZIM 可继续查询
 

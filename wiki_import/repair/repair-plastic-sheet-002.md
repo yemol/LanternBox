@@ -3,13 +3,13 @@ title: 塑料布和防水层原理
 slug: repair-plastic-sheet-002
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
-summary: 用塑料布临时挡雨、隔潮和覆盖；中风险条目，积水、风掀或遮挡通风时调整。
+summary: 用于塑料布和防水层原理的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 塑料布和防水层原理, 塑料布和防水, P0, 长期生存
+guide_links: DG-0378
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 塑料布和防水层原理
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录用途、固定方式、导水方向、检查周期和失效信号。
+
+## 对应 Guide
+
+- DG-0378｜防水临时修补｜使用时机：雨衣、防水布、帐篷、桶盖、袋子、窗缝出现小破洞或漏水。

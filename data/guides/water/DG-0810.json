@@ -1,0 +1,96 @@
+{
+  "id": "DG-0810",
+  "title": "先把水煮沸后再储存",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "水源不明或可疑，但有火源时想先做基本处理。",
+  "goal": "先用煮沸把常见微生物风险降到更低。",
+  "keywords": [
+    "水",
+    "煮沸",
+    "饮水安全",
+    "消毒",
+    "行动卡",
+    "DG-0616",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "锅",
+    "火源",
+    "干净容器",
+    "布"
+  ],
+  "steps": [
+    "先把水倒进干净容器或锅内。",
+    "先让水烧到沸腾并维持一段时间。",
+    "先把热水转入干净容器。",
+    "先把处理后的水密封并标记。",
+    "先在使用前再观察一次。"
+  ],
+  "check": [
+    "水已煮沸。",
+    "热水已转入干净容器。",
+    "容器已标记。"
+  ],
+  "common_mistakes": [
+    "只烧到热，不烧到沸。",
+    "煮沸后又接触脏容器。",
+    "把处理后水和原水混放。"
+  ],
+  "fallback": [
+    "没有干净容器时先用干净锅并尽快转移。",
+    "有明显化学污染时不要用煮沸代替判断。"
+  ],
+  "stop_or_escalate": [
+    "水源有明显化学污染时停止用煮沸替代处理。",
+    "高风险人群不要冒险。"
+  ],
+  "related_wiki": [
+    "water-boiling-boundary-028",
+    "water-boiling-sequence-029",
+    "water-disinfection-boundary-030",
+    "water-microbial-risk-012"
+  ],
+  "notes": "煮沸适合降低微生物风险，但不等于所有水都安全。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先把水煮沸后再储存",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先把水煮沸后再储存",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先把水煮沸后再储存",
+    "先把水煮沸后再储存",
+    "水",
+    "先把水煮沸后再储存"
+  ],
+  "risk_level": "high"
+}

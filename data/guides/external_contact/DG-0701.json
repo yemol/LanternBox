@@ -54,8 +54,9 @@
     "儿童老人位置可能被看见。"
   ],
   "related_wiki": [
-    "外部接触与交换风险",
-    "外部接触记录"
+    "safety-stranger-contact-001",
+    "safety-stranger-contact-002",
+    "safety-stranger-contact-inventory-exposure-001"
   ],
   "notes": "长期断供和小团队场景下的非对抗行动卡；重点是低暴露、边界、记录、照护和降温。",
   "domains": [
@@ -95,5 +96,6 @@
     "陌生人",
     "靠近营地",
     "低暴露"
-  ]
+  ],
+  "risk_level": "high"
 }

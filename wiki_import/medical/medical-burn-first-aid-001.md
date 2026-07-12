@@ -5,11 +5,11 @@ category: 医疗急救
 priority: P0
 summary: 优先冷却、覆盖和隔离污染物，避免涂抹不明材料；中风险条目，面积大、深部伤或意识异常时停止普通处理。
 tags: 烧伤, 烫伤, 急救, 冷却, 医疗观察, 伤口
+guide_links: DG-0560
 risk_level: caution
 status: published
 source: American Red Cross Burns First Aid；Mayo Clinic Burns
 ---
-
 # 烧烫伤初步处理与观察
 
 ## 用途
@@ -24,7 +24,7 @@ source: American Red Cross Burns First Aid；Mayo Clinic Burns
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备清洁冷水、干净布或敷料、计时方式、手套或隔离袋、松散覆盖物、废弃袋和观察记录。最低条件是能持续冷却烧烫伤区域、避免污染创面，并记录疼痛、起泡、面积和时间变化。
 
 ## 操作步骤
 
@@ -123,7 +123,7 @@ source: American Red Cross Burns First Aid；Mayo Clinic Burns
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+没有流动水时，用确认清洁的冷水反复轻柔冲淋或浸泡；没有敷料时，用干净不掉絮布料松散覆盖。没有把握的药膏、油脂和粉末不要涂在创面上；冷却后继续记录疼痛、起泡、面积和污染情况。
 
 ## 记录建议
 
@@ -132,3 +132,7 @@ source: American Red Cross Burns First Aid；Mayo Clinic Burns
 壳中灯系统中，烧烫伤应记录进日记模块，类型选择“健康状况”。
 
 小烧烫伤的关键是及时冷却、干净覆盖、持续观察。不要让偏方变成第二次伤害。
+
+## 对应 Guide
+
+- DG-0560｜烧烫伤冷却与覆盖｜使用时机：烧烫伤冷却与覆盖相关场景出现，外部支援不确定，需要立刻用本地资源处理。

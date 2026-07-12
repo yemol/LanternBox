@@ -31,7 +31,9 @@
     "谁也不知道去了哪里。",
     "夜间不带灯。"
   ],
-  "fallback": "真的来不及时，至少喊出去向并带哨子。",
+  "fallback": [
+    "真的来不及时，至少喊出去向并带哨子。"
+  ],
   "stop_or_escalate": [
     "外部冲突、浓烟、洪水、电线、建筑损坏时，不做临时好奇外出。"
   ],
@@ -62,5 +64,7 @@
     "组织秩序",
     "训练演练"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [],
+  "risk_level": "caution"
 }

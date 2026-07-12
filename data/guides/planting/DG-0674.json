@@ -49,9 +49,9 @@
     "饮用水低于最低线时，暂停非关键浇灌。"
   ],
   "related_wiki": [
+    "agriculture-container-002",
     "agriculture-seed-storage-001",
-    "agriculture-sprouts-001",
-    "agriculture-container-002"
+    "agriculture-sprouts-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "种植",
@@ -92,5 +92,6 @@
     "少水覆盖浇灌",
     "种植",
     "少水覆盖浇灌"
-  ]
+  ],
+  "risk_level": "caution"
 }

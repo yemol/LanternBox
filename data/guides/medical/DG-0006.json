@@ -31,7 +31,9 @@
     "用厚油膏把污染封住。",
     "红肿扩大却不记录。"
   ],
-  "fallback": "没有记号笔时，用纸记录红肿大小，或用干净线/胶带在皮肤旁边辅助比对。",
+  "fallback": [
+    "没有记号笔时，用纸记录红肿大小，或用干净线/胶带在皮肤旁边辅助比对。"
+  ],
   "stop_or_escalate": [
     "发热。",
     "红肿快速扩大。",
@@ -96,5 +98,11 @@
     "异响",
     "脚步声",
     "门外"
-  ]
+  ],
+  "related_wiki": [
+    "medical-deep-wound-infection-risk-001",
+    "medical-trauma-complication-index-001",
+    "medical-wound-infection-002"
+  ],
+  "risk_level": "high"
 }

@@ -3,13 +3,13 @@ title: 移动电源安全边界
 slug: energy-power-bank-001
 category: 能源
 priority: P0
-summary: 安排电量分配、设备检查和停用记录；中风险条目，受潮、发热或鼓包时隔离停用。
+summary: 用于移动电源安全边界的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 能源, 移动电源安全边界, 移动电源安全, P0, 长期生存
+guide_links: DG-0338, DG-0616
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 移动电源安全边界
 
 ## 用途
@@ -59,3 +59,8 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录编号、用途、起止电量、放置位置、异常检查和保管人。
+
+## 对应 Guide
+
+- DG-0338｜移动电源保管｜使用时机：有充电宝、移动电源、电源站或备用电池包。
+- DG-0616｜充电宝鼓包发热停用隔离｜使用时机：充电宝或电池包出现鼓包、发热、异味或外壳开裂，继续使用可能引发火灾和有毒烟气。

@@ -3,13 +3,13 @@ title: 蜡烛火灾风险
 slug: fire-candle-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
-summary: 要求固定烛台、清空可燃物并短时看管；高风险条目，睡前或无人时必须熄灭。
+summary: 用于蜡烛火灾风险的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 火源 / 保温 / 通风 / 一氧化碳风险, 蜡烛火灾风险, P0, 长期生存
+guide_links: DG-0649
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 蜡烛火灾风险
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录使用原因、持续时长、熄灭方式、险情和替代灯安排。
+
+## 对应 Guide
+
+- DG-0649｜蜡烛照明无人看守禁用｜使用时机：蜡烛用于照明，但无人看守时可能被风、儿童或物资碰倒。

@@ -29,7 +29,9 @@
     "只记得大概是个野菜。",
     "多人症状混在一起不分。"
   ],
-  "fallback": "没有袋子时，用纸包、叶片包或容器单独隔离，并写上标记。",
+  "fallback": [
+    "没有袋子时，用纸包、叶片包或容器单独隔离，并写上标记。"
+  ],
   "stop_or_escalate": [
     "出现呕吐、腹泻、意识异常、麻木、呼吸困难时，立即按食物中毒处理。"
   ],
@@ -79,5 +81,12 @@
     "门外",
     "窗外",
     "夜间可疑"
-  ]
+  ],
+  "related_wiki": [
+    "wildlife-edible-plant-risk-index-001",
+    "wildlife-mushroom-high-risk-index-001",
+    "wildlife-toxic-plant-risk-index-001",
+    "wildlife-unknown-mushroom-no-eat-001"
+  ],
+  "risk_level": "high"
 }

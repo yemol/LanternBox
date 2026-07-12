@@ -3,13 +3,13 @@ title: 停电期间冰箱食物处理
 slug: food-refrigerator-outage-001
 category: 食物
 priority: P0
-summary: 盘点电源、分级设备并安排开机窗口；中风险条目，关闭非必要设备和后台消耗。
+summary: 用于停电期间冰箱食物处理的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 停电, 冰箱, 食品安全, 冷冻, 食物变质, 厨房
+guide_links: DG-0597
 risk_level: caution
 status: published
 source: Ready.gov Power Outages；USDA Food Safety During Power Outages
 ---
-
 # 停电期间冰箱食物处理
 
 ## 独立边界矩阵
@@ -79,3 +79,7 @@ source: Ready.gov Power Outages；USDA Food Safety During Power Outages
 ## 记录建议
 
 记录停电期间冰箱食物批次、开封/烹饪时间、保存位置、食用人员、弃用原因和剩余天数修正。
+
+## 对应 Guide
+
+- DG-0597｜无电冰箱后：食物优先食用顺序｜使用时机：停电后冰箱或冷柜无法维持低温。

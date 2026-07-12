@@ -1,0 +1,44 @@
+{
+  "profiles": [
+    {
+      "name": "rope_load",
+      "trigger_any": ["绳子", "绳索", "承重", "拉力", "吊挂", "固定点", "绳结", "受力", "负载"],
+      "min_trigger_matches": 2,
+      "aliases": ["绳子", "绳索", "承重", "拉力", "吊挂", "固定点", "断裂", "磨损", "绳结", "受力", "负载"],
+      "target_domains": ["repair", "tools"],
+      "domain_boost": 18,
+      "domain_mismatch_penalty": 80
+    },
+    {
+      "name": "inventory_consumption",
+      "trigger_any": ["物资消耗", "库存消耗", "消耗记录", "领用", "剩余量", "交接", "盘点", "出入库", "物资记录"],
+      "min_trigger_matches": 1,
+      "aliases": ["物资消耗", "库存消耗", "消耗记录", "领用", "剩余量", "交接", "盘点", "出入库", "物资记录"],
+      "target_domains": ["records", "data", "inventory", "organization"],
+      "domain_boost": 18,
+      "domain_mismatch_penalty": 80,
+      "negative_terms": ["外伤耗材", "医疗耗材"],
+      "negative_penalty": 35,
+      "negative_unless_context": ["伤口", "医疗", "急救", "敷料", "绷带"]
+    },
+    {
+      "name": "team_risk_disagreement",
+      "trigger_any": ["意见不一致", "风险判断不一致", "分歧", "共同决定", "复述确认", "决策记录", "风险分级", "队员不同意", "无法达成一致"],
+      "min_trigger_matches": 1,
+      "aliases": ["意见不一致", "风险判断不一致", "分歧", "共同决定", "复述确认", "决策记录", "风险分级", "队员不同意", "无法达成一致"],
+      "target_domains": ["team", "risk_decision", "organization", "safety", "security", "psychology"],
+      "domain_boost": 16,
+      "domain_mismatch_penalty": 50,
+      "title_alias_boost": 20
+    },
+    {
+      "name": "boiling_boundary",
+      "trigger_any": ["煮沸", "烧开", "开水", "煮开以后", "煮沸后"],
+      "min_trigger_matches": 1,
+      "aliases": ["煮沸", "烧开", "开水", "能不能喝", "化学污染", "异味", "油膜", "浑浊", "煮开以后", "煮沸后是否安全"],
+      "target_domains": ["water"],
+      "domain_boost": 20,
+      "domain_mismatch_penalty": 80
+    }
+  ]
+}

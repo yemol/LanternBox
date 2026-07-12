@@ -4,15 +4,14 @@ slug: safety-shelter-in-place-001
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 安排一人接触一人留守观察与记录；高风险条目，不让单人带走唯一通信或关键物资。
+summary: 用于双人接触和留守规则的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 外部接触, 外部接触与物资交换风险, 双人接触和留守规则, 长期断供, 小团队, 离线生存
-guide_links: DG-0696, DG-0697, DG-0698
+guide_links: DG-0696, DG-0697, DG-0698, DG-0705
 kiwix_topics: 双人接触和留守规则, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 双人接触和留守规则
 
 ## 用途
@@ -63,9 +62,10 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0696
-- DG-0697
-- DG-0698
+- DG-0696｜物资交换不暴露库存｜使用时机：和外部交换物资时展示库存会增加被索取或被盯上的风险。
+- DG-0697｜交换地点不选住所核心区｜使用时机：交换地点靠近住所会暴露路线、人数和储物位置。
+- DG-0698｜陌生人求助边界回应｜使用时机：陌生人求助可能真实也可能带来风险，需要有边界地回应。
+- DG-0705｜交换期间留守人员安排｜使用时机：部分成员外出接触或交换，驻地仍有人员、物资和脆弱成员需要保护。
 
 ## Kiwix/ZIM 可继续查询
 

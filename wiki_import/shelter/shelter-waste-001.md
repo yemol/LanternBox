@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 垃圾区不应靠近水源
 
 ## 用途
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0656
-- DG-0657
-- DG-0658
+- DG-0656｜入口缓冲区鞋物分离｜使用时机：入口带入泥水和污染物，需要设置鞋物缓冲区。
+- DG-0657｜睡眠区远离污染区复核｜使用时机：睡眠区靠近垃圾、病人或潮湿角落，需要重新复核位置。
+- DG-0658｜火源区周边清空｜使用时机：火源周边堆放杂物，需要清空安全半径。
 
 ## Kiwix/ZIM 可继续查询
 

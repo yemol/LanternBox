@@ -31,7 +31,9 @@
     "备用灯被拿去玩。",
     "电池型号不记。"
   ],
-  "fallback": "灯具少时，至少区分日常低亮灯和紧急备用灯。",
+  "fallback": [
+    "灯具少时，至少区分日常低亮灯和紧急备用灯。"
+  ],
   "stop_or_escalate": [
     "所有灯具电量下降、强光频繁暴露位置、夜间找不到备用灯时，重做分级。"
   ],
@@ -76,5 +78,9 @@
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
-  ]
+  ],
+  "related_wiki": [
+    "tools-flashlight-headlamp-maintenance-001"
+  ],
+  "risk_level": "normal"
 }

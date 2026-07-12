@@ -3,13 +3,13 @@ title: 夜间照明对暴露的影响
 slug: energy-lighting-005
 category: 能源
 priority: P0
-summary: 安排电量分配、设备检查和停用记录；中风险条目，受潮、发热或鼓包时隔离停用。
+summary: 用于夜间照明对暴露的影响的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 能源, 夜间照明对暴露的影响, 夜间照明对暴, P0, 长期生存
+guide_links: DG-0335
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 夜间照明对暴露的影响
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录漏光点、遮挡措施、开灯窗口、外出回灯情况和复查日期。
+
+## 对应 Guide
+
+- DG-0335｜夜间值守照明｜使用时机：夜间有人负责入口、火源、病人、水位、动物或外部动静观察。

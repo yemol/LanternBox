@@ -5,11 +5,11 @@ category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
 summary: 识别受潮电器的短路、腐蚀和触电风险；高风险条目，不烘烤或通电验证，并记录责任人、时间和复查结果。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 潮湿电器危险, 潮湿电器为什, P0, 长期生存
+guide_links: DG-0566
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 潮湿电器为什么危险
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录受潮来源、时间、设备、是否通电、异常信号、隔离位置和复查。
+
+## 对应 Guide
+
+- DG-0566｜插线板和延长线进水后：隔离复核卡｜使用时机：插线板和延长线进水后：隔离复核卡相关场景出现，外部支援不确定，需要立刻用本地资源处理。

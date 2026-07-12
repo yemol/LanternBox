@@ -1,0 +1,90 @@
+{
+  "id": "DG-0826",
+  "title": "先用水壶和小瓶做点滴分发",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "大容器太大、太脏、太容易被误用，团队需要更精细的分发方式。",
+  "goal": "先用小水壶和小瓶把水分成可控份额，减少污染和浪费。",
+  "keywords": [
+    "水",
+    "水壶",
+    "小瓶",
+    "饮水安全",
+    "行动卡"
+  ],
+  "tools": [
+    "小瓶",
+    "水壶",
+    "标签"
+  ],
+  "steps": [
+    "先把每次分发的份额定成一个小单位。",
+    "先用干净小瓶或水壶盛出每份水。",
+    "先把每份水标记为“当次分发”。",
+    "先按人分配，而不是让人自己直接从大桶取水。",
+    "先在分发后把大容器重新封好。"
+  ],
+  "check": [
+    "每次份额已定。",
+    "小瓶或水壶已清洁。",
+    "大容器已重新封好。"
+  ],
+  "common_mistakes": [
+    "大桶开着让人自己取。",
+    "用脏小瓶分发。",
+    "分发后没有盖好容器。"
+  ],
+  "fallback": [
+    "没有小瓶时先用干净杯子分发。",
+    "水量不足时先减少每次份额。"
+  ],
+  "stop_or_escalate": [
+    "分发工具脏污或混乱时停止使用。",
+    "容器被误碰后先停用并重置。"
+  ],
+  "related_wiki": [
+    "water-bottle-rotation-048",
+    "water-container-labeling-004",
+    "water-drinking-priority-017"
+  ],
+  "notes": "小份额分发比大桶直接取水更容易控风险。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "水壶",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "水壶",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先用水壶和小瓶做点滴分发",
+    "小瓶",
+    "水",
+    "先用水壶和小瓶做点滴分发"
+  ],
+  "risk_level": "caution"
+}

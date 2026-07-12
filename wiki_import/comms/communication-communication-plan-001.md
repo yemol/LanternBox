@@ -3,13 +3,13 @@ title: 通讯计划和团队信任
 slug: communication-communication-plan-001
 category: 通讯
 priority: P1
-summary: 明确谁发消息、何时开机、失败后去哪里；中风险条目，计划不清时不要临时分头行动。
+summary: 用于通讯计划和团队信任的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 通讯, 通讯计划和团队信任, 通讯计划和团, P0, 长期生存
+guide_links: DG-0549
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 通讯计划和团队信任
 
 ## 用途
@@ -35,7 +35,7 @@ source: LanternBox internal curated knowledge
 1. 共同确认核心规则：窗口时间、集合点、等待时限、留言格式和谁有决策权。
 2. 每个外出任务都写明出发、目的、路线、返回、备用行动。
 3. 留守者按计划等待，不在未到时限前不断改变安排。
-4. 失联后按流程执行，事后复盘流程是否合理，而不是只追责个人。
+4. 失联后按流程执行，事后复盘流程是否可执行，而不是只追责个人。
 5. 计划变更必须通知所有受影响成员，并更新纸质版本。
 
 ## 判断标准
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录计划版本、参与确认成员、变更原因、失联事件和复盘改动。
+
+## 对应 Guide
+
+- DG-0549｜断网断信号：家庭通讯计划和集合约定｜使用时机：手机没信号、网络中断、家人失联、队伍分开行动或无法稳定联系时。

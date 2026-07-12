@@ -5,11 +5,11 @@ category: 通讯
 priority: P0
 summary: 设置主集合点、备用点和等待时长；中风险条目，设备失效时按集合点行动，并记录责任人、时间和复查结果。
 tags: 通讯, 断网后的集合点原则, 断网后的集合, P0, 长期生存
+guide_links: DG-0549
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 断网后的集合点原则
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录候选点评分、放弃原因、路线版本、成员确认情况和演练结果。
+
+## 对应 Guide
+
+- DG-0549｜断网断信号：家庭通讯计划和集合约定｜使用时机：手机没信号、网络中断、家人失联、队伍分开行动或无法稳定联系时。

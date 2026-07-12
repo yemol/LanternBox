@@ -50,9 +50,27 @@
     "撤离路线有烟时，改用备用路线，不穿过浓烟取物。"
   ],
   "related_wiki": [
+    "fire-alcohol-stove-001",
+    "fire-candle-001",
     "fire-carbon-monoxide-001",
+    "fire-cold-001",
+    "fire-fire-knowledge-001",
+    "fire-fire-knowledge-002",
+    "fire-fire-knowledge-003",
+    "fire-fire-response-001",
+    "fire-gas-leak-001",
+    "fire-heat-illness-001",
     "fire-heating-001",
-    "fire-candle-001"
+    "fire-heating-002",
+    "fire-heating-003",
+    "fire-hypothermia-001",
+    "fire-insulation-001",
+    "fire-open-flame-001",
+    "fire-sleep-001",
+    "fire-smoke-001",
+    "fire-smoke-002",
+    "fire-ventilation-001",
+    "navigation-weather-observation-basics-index-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
@@ -93,5 +111,6 @@
     "外部烟味进入封堵判断",
     "火源",
     "外部烟味进入封堵判断"
-  ]
+  ],
+  "risk_level": "high"
 }

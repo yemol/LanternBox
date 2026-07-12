@@ -4,7 +4,7 @@ slug: safety-dissent-001
 category: 风险决策
 priority: P0
 risk_level: high
-summary: 记录少数反对点、依据和复查条件；高风险条目，不把不同意见当作拖延或破坏。
+summary: 用于团队决策中的反对意见的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 风险决策, 团队决策中的反对意见, 长期断供, 小团队, 离线生存
 guide_links: DG-0666, DG-0667, DG-0668
 kiwix_topics: 团队决策中的反对意见, 风险决策, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 团队决策中的反对意见
 
 ## 用途
@@ -63,9 +62,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0666
-- DG-0667
-- DG-0668
+- DG-0666｜外出找资源停止线｜使用时机：外出找资源时诱惑不断增加，需要预设停止线。
+- DG-0667｜维修失败三次后停用｜使用时机：同一维修反复失败，继续尝试可能扩大损坏。
+- DG-0668｜食物可疑时放弃判断｜使用时机：食物外观、来源或气味可疑，需要决定放弃。
 
 ## Kiwix/ZIM 可继续查询
 

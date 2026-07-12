@@ -4,7 +4,7 @@ slug: energy-energy-knowledge-001
 category: 能源
 priority: P0
 risk_level: high
-summary: 按通信、照明、记录和照护价值排序用电；高风险条目，不让娱乐设备消耗关键电量。
+summary: 用于小功率设备优先级判断的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 能源, 小功率设备优先级判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0616, DG-0617, DG-0618
 kiwix_topics: 小功率设备优先级判断, 能源, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 小功率设备优先级判断
 
 ## 用途
@@ -65,9 +64,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0616
-- DG-0617
-- DG-0618
+- DG-0616｜充电宝鼓包发热停用隔离｜使用时机：充电宝或电池包出现鼓包、发热、异味或外壳开裂，继续使用可能引发火灾和有毒烟气。
+- DG-0617｜太阳能充电白天排程｜使用时机：太阳能板白天可用但设备多，若随意插拔会浪费日照并造成关键设备没电。
+- DG-0618｜电池混放后的编号轮换｜使用时机：不同新旧、品牌和电量的电池被混放，容易造成误用、漏液和关键设备失效。
 
 ## Kiwix/ZIM 可继续查询
 

@@ -5,11 +5,11 @@ category: 食物
 priority: P0
 summary: 把鼓包、漏液、异味和喷溅作为禁食信号，并安排干粮罐头先开先用、标签轮换和配给天数估算；中风险条目，可疑罐头直接弃用，不用加热尝试。
 tags: 食物, 罐头鼓包禁食, 罐头鼓包为什, P0, 长期生存
+guide_links: DG-0598
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 罐头鼓包为什么禁食
 
 ## 独立边界矩阵
@@ -79,3 +79,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录罐头鼓包批次、开封/烹饪时间、保存位置、食用人员、弃用原因和剩余天数修正。
+
+## 对应 Guide
+
+- DG-0598｜罐头鼓包或异味：禁食判断｜使用时机：罐头、真空包装或密封食品出现鼓包、漏液、异味或锈蚀。

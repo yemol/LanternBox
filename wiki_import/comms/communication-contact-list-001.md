@@ -4,7 +4,7 @@ slug: communication-contact-list-001
 category: 通讯
 priority: P0
 risk_level: caution
-summary: 记录姓名、关系、位置、备用方式和备注；中风险条目，联系人不只存在手机里。
+summary: 用于离线联系人表的必要字段的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 通讯, 离线联系人表的必要字段, 长期断供, 小团队, 离线生存
 guide_links: DG-0636, DG-0637, DG-0638
 kiwix_topics: 离线联系人表的必要字段, 通讯, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 离线联系人表的必要字段
 
 ## 用途
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0636
-- DG-0637
-- DG-0638
+- DG-0636｜断网家庭固定开机窗口｜使用时机：断网后家庭成员仍有少量电量设备，需要固定开机窗口而不是全天等待消息。
+- DG-0637｜纸条留言点每日复核｜使用时机：电子通信不稳定，成员需要依靠固定纸条留言点传递去向和需求。
+- DG-0638｜近距离灯光信号三条规则｜使用时机：近距离需要用灯光联系，但复杂信号容易误解，也可能暴露位置。
 
 ## Kiwix/ZIM 可继续查询
 

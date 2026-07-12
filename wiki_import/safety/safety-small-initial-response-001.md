@@ -3,13 +3,13 @@ title: 小型初起火灾应对
 slug: safety-small-initial-response-001
 category: 安全
 priority: P0
-summary: 控制暴露、接触、路线和冲突边界；高风险条目，人员安全受威胁时放弃物资和任务。
+summary: 用于小型初起火灾应对的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 火灾, 灭火器, 撤离, 断电, 安全, 初起火灾
+guide_links: DG-0579
 risk_level: high
 status: published
 source: Ready.gov Home Fires；American Red Cross Fire Safety
 ---
-
 # 小型初起火灾应对
 
 ## 用途
@@ -24,7 +24,7 @@ source: Ready.gov Home Fires；American Red Cross Fire Safety
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备逃生路线、灭火器或沙土/锅盖等适用材料、照明、手套、成员分工和复查记录。最低条件是先确认火很小、出口在背后、烟不浓，并能立即停止尝试和撤离。
 
 ## 操作步骤
 
@@ -138,7 +138,7 @@ source: Ready.gov Home Fires；American Red Cross Fire Safety
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+没有合适灭火器时，只对极小、刚开始、无浓烟且出口明确的非电气非油类火源使用锅盖、沙土或隔绝空气方法。火势扩大、烟变浓、燃烧物不明、电池冒烟或出口受阻时，立即停止尝试并撤离到安全边界。
 
 ## 记录建议
 
@@ -147,3 +147,7 @@ source: Ready.gov Home Fires；American Red Cross Fire Safety
 壳中灯系统中，火灾风险应记录为“高风险事件”。
 
 初起火灾处理的关键不是勇敢，而是判断何时必须撤。
+
+## 对应 Guide
+
+- DG-0579｜火灾初期：撤离优先和小火边界｜使用时机：火灾初期：撤离优先和小火边界相关场景出现，外部支援不确定，需要立刻用本地资源处理。

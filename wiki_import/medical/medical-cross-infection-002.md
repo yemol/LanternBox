@@ -5,11 +5,11 @@ category: 医疗急救
 priority: P0
 summary: 处理动物后先清洁双手、刀具和容器，再接触水食物；高风险条目，缺少清洁条件时不处理入口食物。
 tags: 医疗急救, 照护者手卫生与交叉感染, 照护者手卫生, P0, 长期生存
+guide_links: DG-0615
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 照护者手卫生与交叉感染
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录照护任务、手卫生节点、手套破损、体液接触和任务调整。
+
+## 对应 Guide
+
+- DG-0615｜照护者处理呕吐物后防交叉感染｜使用时机：照护者清理呕吐物后若流程混乱，容易把污染带到食物、水和睡眠区。

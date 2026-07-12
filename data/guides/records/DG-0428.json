@@ -30,7 +30,9 @@
     "把猜测当事实传播。",
     "长期趴窗观察暴露位置。"
   ],
-  "fallback": "没有记录本时，用纸条按时间顺序夹在一起。",
+  "fallback": [
+    "没有记录本时，用纸条按时间顺序夹在一起。"
+  ],
   "stop_or_escalate": [
     "观察到火灾、冲突、人员聚集、污染扩散或路线被封时，立即通知负责人。"
   ],
@@ -83,5 +85,9 @@
     "异响",
     "脚步声",
     "门外"
-  ]
+  ],
+  "related_wiki": [
+    "organization-abnormal-situation-observation-001"
+  ],
+  "risk_level": "normal"
 }

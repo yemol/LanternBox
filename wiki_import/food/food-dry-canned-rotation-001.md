@@ -5,11 +5,11 @@ category: 食物
 priority: P0
 summary: 安排干粮罐头先开先用、标签轮换和配给天数估算，并估算干粮、主食和罐头能覆盖的天数；包装破损、锈蚀漏液或鼓包时停止食用。
 tags: 干粮, 罐头, 食物储备, 轮换, 保质期, 防潮
+guide_links: DG-0606
 risk_level: normal
 status: published
 source: Ready.gov Food；USDA Food Safety；壳中灯库存规则
 ---
-
 # 干粮与罐头轮换
 
 ## 独立边界矩阵
@@ -78,3 +78,7 @@ source: Ready.gov Food；USDA Food Safety；壳中灯库存规则
 ## 记录建议
 
 记录干粮批次、开封/烹饪时间、保存位置、食用人员、弃用原因和剩余天数修正。
+
+## 对应 Guide
+
+- DG-0606｜干粮和罐头三天配给表｜使用时机：只剩干粮和罐头，需要把未来三天的口粮先算清楚，避免第一天消耗过快。

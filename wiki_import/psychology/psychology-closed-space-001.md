@@ -4,7 +4,7 @@ slug: psychology-closed-space-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 安排空间边界、安静轮换和冲突暂停规则；中风险条目，封闭压力影响安全任务时调整。
+summary: 用于长期封闭环境中的边界的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 心理韧性, 心理韧性与冲突降温, 长期封闭环境中的边界, 长期断供, 小团队, 离线生存
 guide_links: DG-0691, DG-0692, DG-0693
 kiwix_topics: 长期封闭环境中的边界, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 长期封闭环境中的边界
 
 ## 独立边界矩阵
@@ -85,9 +84,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0691
-- DG-0692
-- DG-0693
+- DG-0691｜争吵升级前暂停口令｜使用时机：争吵开始升温时，如果没有共同暂停信号，会进入互相攻击。
+- DG-0692｜儿童恐慌安抚三步｜使用时机：儿童因声响、黑暗、转移或疾病恐慌，需要简单稳定的安抚流程。
+- DG-0693｜老人焦虑信息同步｜使用时机：老人反复询问消息或担心拖累团队，需要固定信息同步而不是随时解释。
 
 ## Kiwix/ZIM 可继续查询
 

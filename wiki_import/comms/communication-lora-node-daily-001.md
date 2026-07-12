@@ -5,11 +5,11 @@ category: 通讯
 priority: P0
 summary: 检查节点电量、天线、编号和收发测试；异常节点先标记再复查，并记录责任人、时间和复查结果。
 tags: LoRa, 通讯, 节点, 每日检查, 天线, 电量
+guide_links: DG-0639
 risk_level: normal
 status: published
 source: 壳中灯 LanternBox Protocol v0.1；常见 LoRa 设备使用说明
 ---
-
 # LoRa 节点每日状态检查
 
 ## 用途
@@ -127,7 +127,7 @@ source: 壳中灯 LanternBox Protocol v0.1；常见 LoRa 设备使用说明
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+节点不可用时，降级为固定时间窗口、纸质留言点、近距离哨声或手势确认；缺电时减少测试频率，只保留关键报平安和位置确认。身份或加密状态不清时先隔离节点，不让未知设备进入通信链路。
 
 ## 记录建议
 
@@ -136,3 +136,7 @@ source: 壳中灯 LanternBox Protocol v0.1；常见 LoRa 设备使用说明
 壳中灯通信原则要求：Core、Field Terminal、Study Terminal、Sensor Node 之间的通信都必须端到端加密。
 
 LoRa 是慢信使，不是大水管。它的价值在于低功耗、远距离、可验证。
+
+## 对应 Guide
+
+- DG-0639｜LoRa 节点每日状态记录｜使用时机：LoRa 节点用于低功耗通信，但节点状态不记录会导致失联后无法定位问题。

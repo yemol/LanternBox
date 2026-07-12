@@ -50,9 +50,11 @@
     "成员疲劳无法看守时停止使用蜡烛。"
   ],
   "related_wiki": [
+    "fire-candle-001",
+    "fire-candle-002",
     "fire-carbon-monoxide-001",
     "fire-heating-001",
-    "fire-candle-001"
+    "fire-open-flame-002"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
@@ -93,5 +95,6 @@
     "蜡烛照明无人看守禁用",
     "火源",
     "蜡烛照明无人看守禁用"
-  ]
+  ],
+  "risk_level": "high"
 }

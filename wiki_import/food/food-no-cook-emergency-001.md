@@ -5,11 +5,11 @@ category: 食物
 priority: P0
 summary: 明确库存、加工、保存和弃用顺序；包装破损、变质或来源不清时停止食用，并记录责任人、时间和复查结果。
 tags: 应急餐, 免烹饪, 干粮, 罐头, 停电, 食物储备
+guide_links: DG-0596
 risk_level: normal
 status: published
 source: Ready.gov Food；壳中灯食物储备规则
 ---
-
 # 免烹饪应急餐配置
 
 ## 独立边界矩阵
@@ -78,3 +78,7 @@ source: Ready.gov Food；壳中灯食物储备规则
 ## 记录建议
 
 记录免烹饪应急餐配置批次、开封/烹饪时间、保存位置、食用人员、弃用原因和剩余天数修正。
+
+## 对应 Guide
+
+- DG-0596｜食物只够三天：基础配给｜使用时机：食物库存只够约三天，后续补给不确定。

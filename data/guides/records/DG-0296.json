@@ -30,7 +30,9 @@
     "钥匙给了但不说风险。",
     "敏感口令随便散发。"
   ],
-  "fallback": "时间紧时，至少交接位置、数量、风险和下一步任务。",
+  "fallback": [
+    "时间紧时，至少交接位置、数量、风险和下一步任务。"
+  ],
   "stop_or_escalate": [
     "负责人受伤、外出、情绪崩溃、失联时，立即启动备用负责人。"
   ],
@@ -69,5 +71,9 @@
     "库存资料",
     "成员档案"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [
+    "general-small-team-handoff-001"
+  ],
+  "risk_level": "normal"
 }

@@ -4,15 +4,14 @@ slug: hygiene-odor-001
 category: 卫生
 priority: P0
 risk_level: high
-summary: 用覆盖材料、密封和固定位置降低异味虫害；高风险条目，桶厕不靠近水源和食物区。
+summary: 用于桶厕覆盖材料为什么能降异味的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 卫生, 桶厕覆盖材料为什么能降异味, 长期断供, 小团队, 离线生存
-guide_links: DG-0626, DG-0627, DG-0628
+guide_links: DG-0626, DG-0627, DG-0628, DG-0629, DG-0630
 kiwix_topics: 桶厕覆盖材料为什么能降异味, 卫生, Emergency preparedness, Survival skills, Public health
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 桶厕覆盖材料为什么能降异味
 
 ## 用途
@@ -64,9 +63,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0626
-- DG-0627
-- DG-0628
+- DG-0626｜桶厕满袋封存和更换｜使用时机：桶厕或临时排泄袋接近满载，需要封存更换，避免外溢污染居住区。
+- DG-0627｜垃圾渗漏后的地面清理｜使用时机：垃圾袋渗漏到地面，可能把腐败液体、尖锐物和病原带入通道。
+- DG-0628｜霉味衣物和睡眠区分离｜使用时机：衣物有霉味或潮味，若直接带入睡眠区会增加呼吸不适和交叉污染。
+- DG-0629｜防鼠食物高处封存｜使用时机：发现鼠迹或食物包装被咬，需要立即把食物高处封存并切断吸引源。
+- DG-0630｜少水餐具清洁顺序｜使用时机：清洁餐具的水很少，需要安排顺序，避免把最脏餐具污染所有水。
 
 ## Kiwix/ZIM 可继续查询
 

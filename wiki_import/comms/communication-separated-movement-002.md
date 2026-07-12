@@ -3,13 +3,13 @@ title: 分开行动记录的价值
 slug: communication-separated-movement-002
 category: 通讯
 priority: P0
-summary: 外出前写清人员、路线、目的和返回时间；中风险条目，信息最小集不完整时不分队。
+summary: 用于分开行动记录的价值的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 通讯, 分开行动记录的价值, 分开行动记录, P0, 长期生存
+guide_links: DG-0585
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 分开行动记录的价值
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录行动编号、人员、路线、目的、窗口、结果、异常和后续调整。
+
+## 对应 Guide
+
+- DG-0585｜分开行动前：时间方向目的地记录｜使用时机：分开行动前：时间方向目的地记录相关场景出现，外部支援不确定，需要立刻用本地资源处理。

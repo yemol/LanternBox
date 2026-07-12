@@ -50,8 +50,25 @@
   ],
   "related_wiki": [
     "safety-barter-001",
+    "safety-children-001",
+    "safety-conflict-001",
+    "safety-evacuation-001",
+    "safety-inventory-001",
+    "safety-medication-001",
+    "safety-review-001",
+    "safety-route-planning-001",
     "safety-safety-knowledge-001",
-    "safety-stranger-contact-001"
+    "safety-safety-knowledge-002",
+    "safety-safety-knowledge-003",
+    "safety-safety-knowledge-004",
+    "safety-safety-knowledge-005",
+    "safety-safety-knowledge-006",
+    "safety-safety-knowledge-007",
+    "safety-safety-knowledge-008",
+    "safety-safety-knowledge-009",
+    "safety-shelter-in-place-001",
+    "safety-stranger-contact-001",
+    "safety-tool-maintenance-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "外部接触与物资交换风险",
@@ -92,5 +109,6 @@
     "物资交换不暴露库存",
     "外部接触",
     "物资交换不暴露库存"
-  ]
+  ],
+  "risk_level": "caution"
 }

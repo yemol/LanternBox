@@ -6,13 +6,12 @@ priority: P1
 risk_level: caution
 summary: 限制夜班任务、时长和接班方式；中风险条目，打瞌睡时必须换班，并记录责任人、时间和复查结果。
 tags: 团队管理, 团队轮值与任务管理, 夜间轮值表的疲劳边界, 长期断供, 小团队, 离线生存
-guide_links: DG-0686, DG-0687, DG-0688
+guide_links: DG-0686, DG-0687, DG-0688, DG-0689, DG-0690
 kiwix_topics: 夜间轮值表的疲劳边界, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 夜间轮值表的疲劳边界
 
 ## 用途
@@ -65,9 +64,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0686
-- DG-0687
-- DG-0688
+- DG-0686｜夜间轮值交接表｜使用时机：夜间需要轮值守夜、照护或火源检查，交接不清会漏任务。
+- DG-0687｜外出登记和归队检查｜使用时机：成员外出执行任务，如果没有登记和归队检查，容易失联或带回污染。
+- DG-0688｜照护任务双人备份｜使用时机：病人、儿童或老人照护只靠一人，疲劳或外出时会断档。
+- DG-0689｜疲劳成员停止高风险任务｜使用时机：成员疲劳时继续执行修理、外出、火源或搬运任务，风险会快速上升。
+- DG-0690｜每日十分钟团队复盘｜使用时机：团队忙乱多日后，问题会重复出现，需要短复盘但不能开成长会。
 
 ## Kiwix/ZIM 可继续查询
 

@@ -29,7 +29,9 @@
     "腹泻多人出现还当个案。",
     "所有问题都怪某个人。"
   ],
-  "fallback": "没有表格时，用五个标题分段记录。",
+  "fallback": [
+    "没有表格时，用五个标题分段记录。"
+  ],
   "stop_or_escalate": [
     "健康异常扩大、冲突频繁、关键物资异常消耗时，立即做专项复盘。"
   ],
@@ -87,5 +89,9 @@
     "夜间异响",
     "太阳能充电",
     "主食配给"
-  ]
+  ],
+  "related_wiki": [
+    "organization-abnormal-situation-observation-001"
+  ],
+  "risk_level": "normal"
 }

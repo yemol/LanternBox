@@ -1,0 +1,95 @@
+{
+  "id": "DG-0820",
+  "title": "先给病人和照护人员留更安全的水",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "病人和照护人员需要水量和水质都更高。",
+  "goal": "先把更安全的水留给病人和照护人员。",
+  "keywords": [
+    "水",
+    "病人",
+    "照护",
+    "饮水安全",
+    "行动卡",
+    "DG-0626",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "小口瓶",
+    "标签",
+    "纸笔",
+    "布"
+  ],
+  "steps": [
+    "先确认病人和照护人员的用水需求。",
+    "先把更安全的水单独标记。",
+    "先把药物用水、伤口处理水和普通水分开。",
+    "先让责任人记录使用量。",
+    "先如果水不确定就先暂停。"
+  ],
+  "check": [
+    "照护需求已确认。",
+    "水已单独标记。",
+    "记录已更新。"
+  ],
+  "common_mistakes": [
+    "把药物和普通水混用。",
+    "照护用水被普通用水挤占。",
+    "没有明确责任人。"
+  ],
+  "fallback": [
+    "水不足时先保留最关键的照护用途。",
+    "不确定时先用更安全的替代。"
+  ],
+  "stop_or_escalate": [
+    "病人出现明显不适时停止继续使用该水。",
+    "必要时提升照护优先级。"
+  ],
+  "related_wiki": [
+    "water-drinking-priority-017",
+    "water-medical-priority-020",
+    "water-patient-priority-045"
+  ],
+  "notes": "照护用水的优先级要高于普通清洁或临时补水。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先给病人和照护人员留更安全的水",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先给病人和照护人员留更安全的水",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先给病人和照护人员留更安全的水",
+    "先给病人和照护人员留更安全的水",
+    "水",
+    "先给病人和照护人员留更安全的水"
+  ],
+  "risk_level": "caution"
+}

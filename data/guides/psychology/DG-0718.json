@@ -53,8 +53,8 @@
     "关键照护无人接手。"
   ],
   "related_wiki": [
-    "心理韧性与冲突降温",
-    "压力下的团队协作"
+    "psychology-conflict-cooling-001",
+    "psychology-sleep-001"
   ],
   "notes": "长期断供和小团队场景下的非对抗行动卡；重点是低暴露、边界、记录、照护和降温。",
   "domains": [
@@ -94,5 +94,6 @@
     "睡眠不足",
     "争执",
     "疲劳"
-  ]
+  ],
+  "risk_level": "caution"
 }

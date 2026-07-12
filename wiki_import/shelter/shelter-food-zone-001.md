@@ -4,15 +4,14 @@ slug: shelter-food-zone-001
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 把食物区设在高处、干燥、远离垃圾和水汽；中风险条目，受潮或虫害时转移。
+summary: 用于食物区为什么要高处干燥的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 庇护空间, 庇护空间分区, 食物区为什么要高处干燥, 长期断供, 小团队, 离线生存
-guide_links: DG-0656, DG-0657, DG-0658
+guide_links: DG-0656, DG-0657, DG-0658, DG-0659, DG-0660
 kiwix_topics: 食物区为什么要高处干燥, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 食物区为什么要高处干燥
 
 ## 用途
@@ -64,9 +63,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0656
-- DG-0657
-- DG-0658
+- DG-0656｜入口缓冲区鞋物分离｜使用时机：入口带入泥水和污染物，需要设置鞋物缓冲区。
+- DG-0657｜睡眠区远离污染区复核｜使用时机：睡眠区靠近垃圾、病人或潮湿角落，需要重新复核位置。
+- DG-0658｜火源区周边清空｜使用时机：火源周边堆放杂物，需要清空安全半径。
+- DG-0659｜物资区高处防潮摆放｜使用时机：物资贴地堆放受潮，需要高处和分层摆放。
+- DG-0660｜夜间通道清障标记｜使用时机：夜间通道被物资占用，需要清障并做低亮标记。
 
 ## Kiwix/ZIM 可继续查询
 

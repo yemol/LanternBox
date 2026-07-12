@@ -31,7 +31,9 @@
     "远处备份多年不更新。",
     "备份盘没有标签。"
   ],
-  "fallback": "资源有限时，至少做到主设备一份、外部盘一份。",
+  "fallback": [
+    "资源有限时，至少做到主设备一份、外部盘一份。"
+  ],
   "stop_or_escalate": [
     "主设备异常、外部盘损坏、搬迁撤离前，必须立即检查备份位置。"
   ],
@@ -73,5 +75,10 @@
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
-  ]
+  ],
+  "related_wiki": [
+    "general-multiple-copies-001",
+    "general-paper-digital-dual-backup-001"
+  ],
+  "risk_level": "normal"
 }

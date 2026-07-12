@@ -3,13 +3,13 @@ title: 临时厕所为什么要覆盖
 slug: hygiene-toilet-003
 category: 卫生
 priority: P0
-summary: 划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
+summary: 用于临时厕所为什么要覆盖的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 卫生, 临时厕所要覆盖, 临时厕所为什, P0, 长期生存
+guide_links: DG-0571
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 临时厕所为什么要覆盖
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录覆盖材料余量、桶厕容量、转移时间和异味虫害变化。
+
+## 对应 Guide
+
+- DG-0571｜厕所不能冲水：桶厕和覆盖材料｜使用时机：厕所不能冲水：桶厕和覆盖材料相关场景出现，外部支援不确定，需要立刻用本地资源处理。

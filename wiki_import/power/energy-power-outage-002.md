@@ -3,13 +3,13 @@ title: 停电后的关键设备分级
 slug: energy-power-outage-002
 category: 能源
 priority: P0
-summary: 盘点电源、分级设备并安排开机窗口；中风险条目，关闭非必要设备和后台消耗。
+summary: 用于停电后的关键设备分级的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 能源, 停电后的关键设备分级, 停电后的关键, P0, 长期生存
+guide_links: DG-0563
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 停电后的关键设备分级
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录分级理由、设备编号、使用窗口、降级决定和复盘时间。
+
+## 对应 Guide
+
+- DG-0563｜移动电源：关键设备优先级｜使用时机：移动电源：关键设备优先级相关场景出现，外部支援不确定，需要立刻用本地资源处理。

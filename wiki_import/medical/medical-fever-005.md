@@ -5,11 +5,11 @@ category: 医疗急救
 priority: P0
 summary: 记录体温感受、精神状态、尿量和伴随症状；高风险条目，皮疹、意识变化、持续恶化或儿童危险信号需升级。
 tags: 医疗急救, 儿童发热危险信号, 儿童发热危险, P0, 长期生存
+guide_links: DG-0611
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 儿童发热危险信号
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录年龄、发热时间、精神反应、呼吸、饮水尿量、皮疹、呕吐腹泻和升级信号。
+
+## 对应 Guide
+
+- DG-0611｜儿童发热咳嗽观察卡｜使用时机：儿童出现发热和咳嗽，外部医疗不稳定，需要家庭先做观察、隔离和危险信号记录。

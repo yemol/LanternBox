@@ -31,7 +31,9 @@
     "墙角发霉不处理。",
     "食物纸箱贴潮墙。"
   ],
-  "fallback": "无法通风时，减少室内晾晒量，优先晾干被褥和袜子。",
+  "fallback": [
+    "无法通风时，减少室内晾晒量，优先晾干被褥和袜子。"
+  ],
   "stop_or_escalate": [
     "霉味严重、墙面霉斑、多人咳嗽、食物受潮时，升级防潮处理。"
   ],
@@ -51,5 +53,7 @@
     "灾害应对",
     "灾后恢复"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [],
+  "risk_level": "caution"
 }

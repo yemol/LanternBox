@@ -49,9 +49,26 @@
     "储存点持续潮湿时迁移全部饲料。"
   ],
   "related_wiki": [
-    "agriculture-small-livestock-001",
     "agriculture-animal-feed-001",
-    "agriculture-feces-001"
+    "agriculture-animal-feed-002",
+    "agriculture-animal-food-001",
+    "agriculture-bite-risk-001",
+    "agriculture-cold-001",
+    "agriculture-conflict-001",
+    "agriculture-container-001",
+    "agriculture-dead-animal-001",
+    "agriculture-escape-risk-001",
+    "agriculture-exit-decision-001",
+    "agriculture-feces-001",
+    "agriculture-feces-002",
+    "agriculture-mold-001",
+    "agriculture-odor-noise-001",
+    "agriculture-slaughter-boundary-001",
+    "agriculture-sleep-001",
+    "agriculture-small-livestock-001",
+    "agriculture-ventilation-001",
+    "agriculture-young-animals-001",
+    "agriculture-zoonosis-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "小规模养殖",
@@ -92,5 +109,6 @@
     "饲料霉变停用",
     "养殖",
     "饲料霉变停用"
-  ]
+  ],
+  "risk_level": "high"
 }

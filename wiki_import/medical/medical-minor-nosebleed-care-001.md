@@ -5,11 +5,11 @@ category: 医疗急救
 priority: P0
 summary: 整理观察、清洁、保护和复查步骤；症状恶化或无法判断时停止普通处理，并记录责任人、时间和复查结果。
 tags: 鼻出血, 止血, 急救, 观察, 医疗照护
+guide_links: DG-0613
 risk_level: normal
 status: published
 source: Mayo Clinic Nosebleeds；American Red Cross Bleeding First Aid
 ---
-
 # 鼻出血基础处理
 
 ## 用途
@@ -24,7 +24,7 @@ source: Mayo Clinic Nosebleeds；American Red Cross Bleeding First Aid
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备干净纸巾或布、计时方式、坐位、手套或隔离袋、废弃袋、饮水记录和复发记录。最低条件是能让人员坐稳、头部略前倾、持续按压并记录开始和停止时间。
 
 ## 操作步骤
 
@@ -113,7 +113,7 @@ source: Mayo Clinic Nosebleeds；American Red Cross Bleeding First Aid
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+没有纸巾时，用干净布料接血并保持持续按压；没有计时工具时由旁人按固定呼吸次数或记录开始时间。反复出血、按压后仍不止、伴随头面部外伤或出现明显虚弱时，停止按普通鼻出血处理并记录异常。
 
 ## 记录建议
 
@@ -122,3 +122,7 @@ source: Mayo Clinic Nosebleeds；American Red Cross Bleeding First Aid
 壳中灯系统中，反复鼻出血可记录进日记模块，类型选择“健康状况”。
 
 鼻出血多数不复杂，但处理方式错了，小问题也会拖成混乱现场。
+
+## 对应 Guide
+
+- DG-0613｜鼻出血不仰头处理｜使用时机：成员鼻出血时常本能仰头，可能导致吞血、呛咳和误判出血量。

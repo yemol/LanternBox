@@ -5,11 +5,11 @@ category: 能源
 priority: P0
 summary: 停电照明优先级用于盘点电源、分级设备并安排开机窗口；关闭非必要设备和后台消耗，并留下交接记录。
 tags: 停电, 照明, 手电, 头灯, 应急灯, 电量管理
+guide_links: DG-0565
 risk_level: normal
 status: published
 source: Ready.gov Power Outages；壳中灯本地经验规则
 ---
-
 # 停电照明优先级
 
 ## 用途
@@ -57,3 +57,7 @@ source: Ready.gov Power Outages；壳中灯本地经验规则
 ## 记录建议
 
 记录点位、灯具编号、亮度档位、负责班次和电池剩余。
+
+## 对应 Guide
+
+- DG-0565｜停电夜间：低亮照明布置｜使用时机：停电夜间：低亮照明布置相关场景出现，外部支援不确定，需要立刻用本地资源处理。

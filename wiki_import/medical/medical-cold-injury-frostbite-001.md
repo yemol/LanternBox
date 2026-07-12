@@ -5,11 +5,11 @@ category: 医疗急救
 priority: P0
 summary: 识别麻木、变白变硬、疼痛变化和复温后的异常；中风险条目，不要继续暴露或剧烈摩擦疑似冻伤部位。
 tags: 冻伤, 低温, 保温, 医疗观察, 手脚, 冬季
+guide_links: DG-0019, DG-0505
 risk_level: caution
 status: published
 source: American Red Cross Cold-Related Emergencies；CDC Winter Weather
 ---
-
 # 冻伤风险观察
 
 ## 用途
@@ -31,7 +31,7 @@ source: American Red Cross Cold-Related Emergencies；CDC Winter Weather
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备干燥衣物、毯子、避风位置、宽松覆盖物、手脚状态记录、备用袜套或手套和温和复温环境。最低条件是先停止继续受冷，移除湿物，保护受冻部位不被揉搓和再次受压。
 
 ## 操作步骤
 
@@ -135,7 +135,7 @@ source: American Red Cross Cold-Related Emergencies；CDC Winter Weather
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+没有温暖房间时，先挡风、换干衣物、包裹保温并减少继续行走；不要揉搓、火烤或贴近高热源。若复温后可能再次受冻，先保持干燥保护和固定，避免反复冻融造成更重损伤。
 
 ## 记录建议
 
@@ -144,3 +144,8 @@ source: American Red Cross Cold-Related Emergencies；CDC Winter Weather
 壳中灯系统中，低温相关记录应关联“室内保温基础”和“家庭成员每日状态检查”。
 
 冻伤不是只有极地才会出现。湿、风、疲劳和低温叠加时，普通夜晚也会变成咬人的冷铁。
+
+## 对应 Guide
+
+- DG-0019｜冻伤：保护不揉搓｜使用时机：手指、脚趾、耳朵、鼻尖苍白、麻木、冰冷。
+- DG-0505｜冻伤后复温观察｜使用时机：手指、脚趾、耳朵、鼻尖在低温后麻木、苍白、刺痛或变硬。

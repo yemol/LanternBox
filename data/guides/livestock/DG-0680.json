@@ -49,9 +49,11 @@
     "污染接近饮水区时停止该水点入口用途。"
   ],
   "related_wiki": [
-    "agriculture-small-livestock-001",
     "agriculture-animal-feed-001",
-    "agriculture-feces-001"
+    "agriculture-dead-sick-animal-no-eat-001",
+    "agriculture-feces-001",
+    "agriculture-small-livestock-001",
+    "agriculture-small-livestock-index-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "小规模养殖",
@@ -92,5 +94,6 @@
     "病死动物隔离不食用",
     "养殖",
     "病死动物隔离不食用"
-  ]
+  ],
+  "risk_level": "high"
 }

@@ -3,13 +3,13 @@ title: 呕吐物粪便污染路径
 slug: hygiene-vomit-003
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
-summary: 按飞溅、手部、衣物和地面路径清理呕吐物；高风险条目，清理者不直接进入做饭照护。
+summary: 用于呕吐物粪便污染路径的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 卫生, 呕吐物粪便污染路径, 呕吐物粪便污, P0, 长期生存
+guide_links: DG-0574
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 呕吐物粪便污染路径
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录病人、症状时间、共用水食物、照护者、厕所使用和清洁调整。
+
+## 对应 Guide
+
+- DG-0574｜呕吐物和粪便污染：隔离清洁｜使用时机：呕吐物和粪便污染：隔离清洁相关场景出现，外部支援不确定，需要立刻用本地资源处理。

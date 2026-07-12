@@ -3,13 +3,13 @@ title: 低暴露为什么重要
 slug: safety-low-profile-002
 category: 安全
 priority: P0
-summary: 控制暴露、接触、路线和冲突边界；中风险条目，人员安全受威胁时放弃物资和任务。
+summary: 用于低暴露为什么重要的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 安全, 低暴露重要, 低暴露为什么, P0, 长期生存
+guide_links: DG-0544
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 低暴露为什么重要
 
 ## 用途
@@ -60,9 +60,7 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0631
-- DG-0632
-- DG-0633
+- DG-0544｜可疑人员接近：不对峙，先收缩｜使用时机：发现陌生人、可疑人员、反复试探者或不明人员靠近住所、营地、物资点。
 
 ## Kiwix/ZIM 可继续查询
 

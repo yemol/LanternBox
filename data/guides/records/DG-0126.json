@@ -30,7 +30,9 @@
     "翻出来后不放回固定位置。",
     "盘点发现问题但不更新。"
   ],
-  "fallback": "时间不足时，先盘点最低库存线附近的物资。",
+  "fallback": [
+    "时间不足时，先盘点最低库存线附近的物资。"
+  ],
   "stop_or_escalate": [
     "药品、水、燃料数量差异明显时，暂停相关非必要使用并查原因。"
   ],
@@ -63,5 +65,7 @@
     "库存资料",
     "成员档案"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [],
+  "risk_level": "normal"
 }

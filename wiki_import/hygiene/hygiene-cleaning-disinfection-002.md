@@ -3,13 +3,13 @@ title: 清洁和消毒的区别
 slug: hygiene-cleaning-disinfection-002
 category: 卫生
 priority: P0
-summary: 划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
+summary: 用于清洁和消毒的区别的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 卫生, 清洁和消毒的区别, 清洁和消毒的, P0, 长期生存
+guide_links: DG-0475
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 清洁和消毒的区别
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录处理表面、清洁步骤、是否消毒、使用材料、负责人和恢复使用时间。
+
+## 对应 Guide
+
+- DG-0475｜公共接触面清洁表｜使用时机：门把手、水桶盖、药箱、灯开关、工具把手、桌面被多人频繁接触。

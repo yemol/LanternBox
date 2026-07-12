@@ -5,11 +5,11 @@ category: 通讯
 priority: P0
 summary: 优先短信、短消息和关键联系人；中风险条目，不刷新闻视频消耗最后电量，并记录责任人、时间和复查结果。
 tags: 通讯, 低电量通信优先级, 低电量通信优, P0, 长期生存
+guide_links: DG-0582
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 低电量通信优先级
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录电量安全线、已发消息、推迟消息、充电来源和剩余可用窗口。
+
+## 对应 Guide
+
+- DG-0582｜手机低电量：固定时间开机联系｜使用时机：手机低电量：固定时间开机联系相关场景出现，外部支援不确定，需要立刻用本地资源处理。

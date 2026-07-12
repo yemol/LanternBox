@@ -3,13 +3,13 @@ title: 污染区和清洁区边界
 slug: hygiene-contamination-zone-002
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
-summary: 划分清洁区、污染区和处理顺序；高风险条目，污染来源不清或人员不适时升级。
+summary: 用于污染区和清洁区边界的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 卫生, 污染区和清洁区边界, 污染区和清洁, P0, 长期生存
+guide_links: DG-0173
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 污染区和清洁区边界
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录分区图、过渡点位置、每日边界问题和调整原因。
+
+## 对应 Guide
+
+- DG-0173｜入口污染区设置｜使用时机：外出取水、清污、交易、巡查后会把泥水、灰尘、病原或虫子带回室内。

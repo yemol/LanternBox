@@ -50,8 +50,10 @@
     "照护者防护不足且污染范围扩大时，暂停非必要清理，先补足隔离边界。"
   ],
   "related_wiki": [
+    "hygiene-fecal-contamination-water-separation-001",
     "medical-bleeding-control-001",
     "medical-clean-water-001",
+    "medical-cross-infection-002",
     "medical-wound-care-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
@@ -93,5 +95,6 @@
     "照护者处理呕吐物后防交叉感染",
     "医疗",
     "照护者处理呕吐物后防交叉感染"
-  ]
+  ],
+  "risk_level": "high"
 }

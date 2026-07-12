@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 孩子参与简单任务的价值
 
 ## 独立边界矩阵
@@ -85,9 +84,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0691
-- DG-0692
-- DG-0693
+- DG-0691｜争吵升级前暂停口令｜使用时机：争吵开始升温时，如果没有共同暂停信号，会进入互相攻击。
+- DG-0692｜儿童恐慌安抚三步｜使用时机：儿童因声响、黑暗、转移或疾病恐慌，需要简单稳定的安抚流程。
+- DG-0693｜老人焦虑信息同步｜使用时机：老人反复询问消息或担心拖累团队，需要固定信息同步而不是随时解释。
 
 ## Kiwix/ZIM 可继续查询
 

@@ -20,13 +20,16 @@ from typing import Any, Iterable
 
 ROOT = Path(__file__).resolve().parent.parent
 GUIDE_DIR = ROOT / "data" / "guides"
+WIKI_DIR = ROOT / "wiki_import"
 DEFAULT_REPORT = ROOT / "docs" / "knowledge" / f"guide_audit_{date.today().isoformat()}.md"
 
 REQUIRED_FIELDS = [
     "id",
     "title",
     "category",
+    "domains",
     "priority",
+    "risk_level",
     "scenario",
     "goal",
     "keywords",
@@ -38,9 +41,21 @@ REQUIRED_FIELDS = [
     "stop_or_escalate",
     "notes",
 ]
-LIST_FIELDS = ["keywords", "tools", "steps", "check", "common_mistakes", "stop_or_escalate"]
+LIST_FIELDS = ["domains", "keywords", "tools", "steps", "check", "common_mistakes", "fallback", "stop_or_escalate"]
 ALLOWED_PRIORITIES = {"P0", "P1", "P2"}
+ALLOWED_RISK_LEVELS = {"normal", "caution", "high", "critical"}
 ID_RE = re.compile(r"^DG-\d{4}$")
+GUIDE_ID_RE = re.compile(r"DG-\d{4}")
+HIGH_RISK_BOUNDARY_RE = re.compile(
+    r"停止|停用|禁用|禁止|不要|不得|不能|不可|隔离|撤离|离开|远离|放弃|"
+    r"不进入|不继续|不饮用|不食用|不接触|不通电|切断|暂停|求援|升级|报废|退出|结束"
+)
+HIGH_RISK_SIGNAL_RE = re.compile(
+    r"呼吸困难|意识异常|意识不清|叫不醒|抽搐|大量出血|持续高热|单侧无力|说话含糊|"
+    r"火花|焦味|爆燃|浓烟|异味|油膜|污水|外溢|裂开|开裂|围堵|逼近|疼痛加重|"
+    r"持续呕吐|血便|尿很少|无法饮水|头晕苍白|环境恶化|风险扩大"
+    r"|自伤|伤人|严重绝望|拒食|连续失眠"
+)
 ABSOLUTE_TERMS = ["万无一失", "一定有效", "绝对安全", "完全安全", "保证安全"]
 EXTERNAL_DEPENDENCY_TERMS = [
     "联系物业",
@@ -205,6 +220,49 @@ def issue_external_dependency(content: str, term: str, title: str) -> bool:
     return False
 
 
+def issue_absolute_expression(content: str, term: str) -> bool:
+    negated_patterns = [
+        rf"(?:不|无法|不能|不要|并非|不代表)\s*.{{0,10}}{re.escape(term)}",
+        rf"不要.{{0,12}}当.{{0,4}}{re.escape(term)}",
+    ]
+    for raw_line in content.splitlines():
+        line = raw_line.strip()
+        if term not in line:
+            continue
+        if any(re.search(pattern, line) for pattern in negated_patterns):
+            continue
+        return True
+    return False
+
+
+def load_wiki_links() -> tuple[set[str], set[tuple[str, str]], list[dict[str, str]]]:
+    slugs: set[str] = set()
+    pairs: set[tuple[str, str]] = set()
+    issues: list[dict[str, str]] = []
+
+    for path in sorted(WIKI_DIR.glob("*/*.md")):
+        rel = str(path.relative_to(ROOT))
+        text = path.read_text(encoding="utf-8")
+        parts = text.split("---", 2)
+        if len(parts) != 3:
+            issues.append({"level": "error", "file": rel, "issue": "Wiki frontmatter 无法解析"})
+            continue
+        meta: dict[str, str] = {}
+        for line in parts[1].splitlines():
+            if ":" not in line:
+                continue
+            key, value = line.split(":", 1)
+            meta[key.strip()] = value.strip()
+        slug = meta.get("slug", "")
+        if not slug:
+            issues.append({"level": "error", "file": rel, "issue": "Wiki 缺少 slug，无法校验 Guide 关联"})
+            continue
+        slugs.add(slug)
+        for guide_id in GUIDE_ID_RE.findall(meta.get("guide_links", "")):
+            pairs.add((slug, guide_id))
+    return slugs, pairs, issues
+
+
 def check_metadata(guides: list[Guide], parse_issues: list[dict[str, str]]) -> list[dict[str, str]]:
     issues = list(parse_issues)
     id_counts = Counter(guide.guide_id for guide in guides if guide.guide_id)
@@ -231,6 +289,10 @@ def check_metadata(guides: list[Guide], parse_issues: list[dict[str, str]]) -> l
         if guide.priority and guide.priority not in ALLOWED_PRIORITIES:
             issues.append({"level": "error", "file": rel, "issue": f"priority 非法：{guide.priority}"})
 
+        risk_level = str(guide.data.get("risk_level", ""))
+        if risk_level and risk_level not in ALLOWED_RISK_LEVELS:
+            issues.append({"level": "error", "file": rel, "issue": f"risk_level 非法：{risk_level}"})
+
         for field in LIST_FIELDS:
             value = guide.data.get(field)
             if not isinstance(value, list):
@@ -244,6 +306,25 @@ def check_metadata(guides: list[Guide], parse_issues: list[dict[str, str]]) -> l
             issues.append({"level": "warning", "file": rel, "issue": "check 少于 2 项"})
         if len(as_list(guide.data.get("stop_or_escalate"))) < 1:
             issues.append({"level": "error", "file": rel, "issue": "stop_or_escalate 为空"})
+        if not isinstance(guide.data.get("fallback"), list) or not as_list(guide.data.get("fallback")):
+            issues.append({"level": "error", "file": rel, "issue": "fallback 必须为非空数组"})
+        if "related_wiki" not in guide.data or not isinstance(guide.data.get("related_wiki"), list):
+            issues.append({"level": "error", "file": rel, "issue": "related_wiki 必须存在且为数组"})
+
+        if risk_level in {"caution", "high", "critical"} and not as_list(guide.data.get("stop_or_escalate")):
+            issues.append({"level": "error", "file": rel, "issue": f"{risk_level} Guide 缺少 stop_or_escalate"})
+        if risk_level in {"high", "critical"}:
+            boundary_text = "\n".join(
+                text_value(guide.data.get(field, ""))
+                for field in ["title", "steps", "common_mistakes", "fallback", "stop_or_escalate"]
+            )
+            stop_text = text_value(guide.data.get("stop_or_escalate", ""))
+            if not HIGH_RISK_BOUNDARY_RE.search(boundary_text) and not HIGH_RISK_SIGNAL_RE.search(stop_text):
+                issues.append({
+                    "level": "error",
+                    "file": rel,
+                    "issue": f"{risk_level} Guide 缺少明确停止、禁用、隔离、撤离或升级边界",
+                })
 
     return issues
 
@@ -262,7 +343,7 @@ def check_content(guides: list[Guide]) -> list[dict[str, str]]:
             issues.append({"level": "warning", "file": rel, "issue": f"正文较长，可能需要拆分：{compact_len} 字"})
 
         for term in ABSOLUTE_TERMS:
-            if term in content:
+            if issue_absolute_expression(content, term):
                 issues.append({"level": "warning", "file": rel, "issue": f"含绝对化表达：{term}"})
 
         for term in EXTERNAL_DEPENDENCY_TERMS:
@@ -276,6 +357,51 @@ def check_content(guides: list[Guide]) -> list[dict[str, str]]:
         title_mentions = content.count(guide.title) if guide.title else 0
         if title_mentions >= 5:
             issues.append({"level": "advisory", "file": rel, "issue": f"标题短语在正文中重复较多：{title_mentions} 次"})
+
+    return issues
+
+
+def check_wiki_relations(guides: list[Guide]) -> list[dict[str, str]]:
+    wiki_slugs, forward_pairs, issues = load_wiki_links()
+    guide_ids = {guide.guide_id for guide in guides if guide.guide_id}
+    reverse_pairs: set[tuple[str, str]] = set()
+
+    for slug, guide_id in sorted(forward_pairs):
+        if guide_id not in guide_ids:
+            issues.append({
+                "level": "error",
+                "file": f"Wiki {slug}",
+                "issue": f"guide_links 指向不存在 Guide：{guide_id}",
+            })
+
+    for guide in guides:
+        rel = str(guide.path.relative_to(ROOT))
+        related = guide.data.get("related_wiki", [])
+        if not isinstance(related, list):
+            continue
+        for raw_slug in related:
+            slug = str(raw_slug).strip()
+            if slug not in wiki_slugs:
+                issues.append({
+                    "level": "error",
+                    "file": rel,
+                    "issue": f"related_wiki 指向不存在 Wiki slug：{slug}",
+                })
+                continue
+            reverse_pairs.add((slug, guide.guide_id))
+
+    for slug, guide_id in sorted(forward_pairs - reverse_pairs):
+        issues.append({
+            "level": "error",
+            "file": f"Wiki {slug}",
+            "issue": f"Guide-Wiki 非对称：Wiki 引用 {guide_id}，Guide 未反向引用 Wiki",
+        })
+    for slug, guide_id in sorted(reverse_pairs - forward_pairs):
+        issues.append({
+            "level": "error",
+            "file": f"Guide {guide_id}",
+            "issue": f"Guide-Wiki 非对称：Guide 引用 {slug}，Wiki 未反向引用 Guide",
+        })
 
     return issues
 
@@ -390,8 +516,9 @@ def render_report(
     metadata_issues: list[dict[str, str]],
     content_issues: list[dict[str, str]],
     overlap_issues: list[dict[str, str]],
+    relation_issues: list[dict[str, str]],
 ) -> str:
-    all_issues = metadata_issues + content_issues + overlap_issues
+    all_issues = metadata_issues + content_issues + overlap_issues + relation_issues
     errors = [issue for issue in all_issues if issue["level"] == "error"]
     warnings = [issue for issue in all_issues if issue["level"] == "warning"]
     advisories = [issue for issue in all_issues if issue["level"] == "advisory"]
@@ -432,6 +559,14 @@ def render_report(
         lines.append(f"|{priority}|{count}|")
 
     lines.append("")
+    lines.append("## Risk Level 分布")
+    lines.append("|risk_level|数量|")
+    lines.append("|---|---:|")
+    for risk_level in ["normal", "caution", "high", "critical"]:
+        count = sum(1 for guide in guides if guide.data.get("risk_level") == risk_level)
+        lines.append(f"|{risk_level}|{count}|")
+
+    lines.append("")
     lines.append("## 结构检查")
     metadata_errors = [issue for issue in metadata_issues if issue["level"] == "error"]
     metadata_warnings = [issue for issue in metadata_issues if issue["level"] == "warning"]
@@ -461,6 +596,13 @@ def render_report(
     else:
         lines.extend(render_issue_table(overlap_blocking, limit=160))
 
+    lines.append("")
+    lines.append("## Guide-Wiki 关联检查")
+    if not relation_issues:
+        lines.append("- 通过：related_wiki 均为真实 Wiki slug，Guide-Wiki 前后向关系完全对称。")
+    else:
+        lines.extend(render_issue_table(relation_issues, limit=160))
+
     return "\n".join(lines) + "\n"
 
 
@@ -473,12 +615,13 @@ def main() -> int:
     metadata_issues = check_metadata(guides, parse_issues)
     content_issues = check_content(guides)
     overlap_issues = find_overlap(guides)
+    relation_issues = check_wiki_relations(guides)
 
-    report = render_report(guides, metadata_issues, content_issues, overlap_issues)
+    report = render_report(guides, metadata_issues, content_issues, overlap_issues, relation_issues)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(report, encoding="utf-8")
 
-    all_issues = metadata_issues + content_issues + overlap_issues
+    all_issues = metadata_issues + content_issues + overlap_issues + relation_issues
     errors = sum(1 for issue in all_issues if issue["level"] == "error")
     warnings = sum(1 for issue in all_issues if issue["level"] == "warning")
     advisories = sum(1 for issue in all_issues if issue["level"] == "advisory")

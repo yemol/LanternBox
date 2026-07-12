@@ -30,7 +30,9 @@
     "没有负责人。",
     "知识看完就算完成。"
   ],
-  "fallback": "不会拆时，先问：十分钟内能做哪一步。",
+  "fallback": [
+    "不会拆时，先问：十分钟内能做哪一步。"
+  ],
   "stop_or_escalate": [
     "知识卡涉及火源、电、医疗高风险时，先拆成安全检查任务。"
   ],
@@ -53,5 +55,9 @@
     "组织秩序",
     "训练演练"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [
+    "general-knowledge-card-archive-001"
+  ],
+  "risk_level": "normal"
 }

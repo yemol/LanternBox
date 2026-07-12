@@ -4,7 +4,7 @@ from typing import Dict, List, Optional, Tuple
 
 from pydantic import Field
 
-from .fetchers import fetch_candidates_from_plan
+from .fetchers import fetch_candidates_from_plan, fetch_related_wiki_candidates, normalize_core_terms
 from .policy import policy_int, policy_map, policy_set, policy_str_list, policy_string
 from .planner import build_retrieval_plan
 from .schemas import EvidenceCandidate, EvidenceSelection, RetrievalDebug, RetrievalPlan, RetrievalV2Result, SelectedEvidence, SourcePlanItem
@@ -281,6 +281,20 @@ def _source_card(
             "open_url": raw.get("open_url", ""),
             "metadata": raw.get("metadata", {}),
         })
+    elif source_type == "wiki":
+        metadata = raw.get("metadata") if isinstance(raw.get("metadata"), dict) else {}
+        card.update({
+            "slug": raw.get("slug") or candidate.id,
+            "category": raw.get("category") or candidate.category,
+            "risk_level": raw.get("risk_level", "normal"),
+            "guide_links": raw.get("guide_links", []),
+            "record_id": raw.get("record_id") or raw.get("pocketbase_id") or metadata.get("record_id", ""),
+            "source_role": raw.get("source_role", ""),
+            "source_reason": raw.get("source_reason", ""),
+            "linked_guide_id": raw.get("linked_guide_id", ""),
+            "linked_guide_title": raw.get("linked_guide_title", ""),
+            "metadata": metadata,
+        })
 
     return card
 
@@ -304,6 +318,13 @@ def _kiwix_usage_policy(candidate: EvidenceCandidate) -> str:
 def _candidate_priority(candidate: EvidenceCandidate) -> tuple[int, float]:
     source_priorities = policy_map("source_priority")
     default_rank = int(source_priorities.get("default", 9))
+    if candidate.source_type == "wiki":
+        raw = candidate.raw if isinstance(candidate.raw, dict) else {}
+        if raw.get("source_reason") == "guide_related_wiki":
+            return (int(source_priorities.get("wiki", default_rank)), 0.0)
+        return (int(source_priorities.get("wiki", default_rank)) + 1, 0.0)
+    if candidate.source_type == "guide" and isinstance(candidate.raw, dict) and candidate.raw.get("retrieval_profile_target_match"):
+        return (-1, 0.0)
     if candidate.source_type != "kiwix":
         return (int(source_priorities.get(candidate.source_type, default_rank)), 0.0)
     if candidate.source_type == "kiwix":
@@ -332,7 +353,8 @@ def _best_selectable_kiwix(candidates: List[EvidenceCandidate]) -> Optional[Evid
     preferred = [
         item
         for item in kiwix_candidates
-        if _kiwix_usage_policy(item) not in policy_set("kiwix", "usage_policy", "not_selectable")
+        if not (isinstance(item.raw, dict) and item.raw.get("semantic_excluded_reason"))
+        and _kiwix_usage_policy(item) not in policy_set("kiwix", "usage_policy", "not_selectable")
         and _kiwix_usage_policy(item) not in policy_set("kiwix", "usage_policy", "fallback_excluded_when_primary_selected")
     ]
     if preferred:
@@ -340,7 +362,8 @@ def _best_selectable_kiwix(candidates: List[EvidenceCandidate]) -> Optional[Evid
     background = [
         item
         for item in kiwix_candidates
-        if _kiwix_usage_policy(item) in policy_set("kiwix", "usage_policy", "background_selectable")
+        if not (isinstance(item.raw, dict) and item.raw.get("semantic_excluded_reason"))
+        and _kiwix_usage_policy(item) in policy_set("kiwix", "usage_policy", "background_selectable")
     ]
     if background:
         return background[0]
@@ -387,6 +410,44 @@ def _ensure_explicit_kiwix_selected(
     return selected_evidence, selection
 
 
+def _ensure_planned_guide_selected(
+    *,
+    plan: RetrievalPlan,
+    candidates: List[EvidenceCandidate],
+    selected_evidence: List[EvidenceCandidate],
+    selection: EvidenceSelection,
+) -> tuple[List[EvidenceCandidate], EvidenceSelection]:
+    """Honor the planner's Guide source contract for actionable questions."""
+    if not _has_source_plan(plan, "guide"):
+        return selected_evidence, selection
+    profile_guides = [
+        item for item in candidates
+        if item.source_type == "guide"
+        and isinstance(item.raw, dict)
+        and item.raw.get("retrieval_profile_target_match")
+    ]
+    if profile_guides and any(
+        item.source_type == "guide"
+        and isinstance(item.raw, dict)
+        and item.raw.get("retrieval_profile_target_match")
+        for item in selected_evidence
+    ):
+        return selected_evidence, selection
+    if not profile_guides and any(item.source_type == "guide" for item in selected_evidence):
+        return selected_evidence, selection
+    guide = profile_guides[0] if profile_guides else next((item for item in candidates if item.source_type == "guide"), None)
+    if not guide:
+        return selected_evidence, selection
+
+    selected_evidence.append(guide)
+    selection.selected.append(SelectedEvidence(
+        source_type="guide",
+        id=guide.id,
+        reason="Planner 已请求行动 Guide，保留最高相关 Guide 以满足来源契约。",
+    ))
+    return selected_evidence, selection
+
+
 def _apply_usage_policy(
     *,
     selection: EvidenceSelection,
@@ -407,6 +468,10 @@ def _apply_usage_policy(
             continue
 
         usage_policy = _kiwix_usage_policy(item)
+        semantic_reason = (item.raw or {}).get("semantic_excluded_reason") if isinstance(item.raw, dict) else ""
+        if semantic_reason:
+            policy_excluded.append(SelectedEvidence(source_type="kiwix", id=item.id, reason=str(semantic_reason)))
+            continue
         if usage_policy in non_selectable:
             policy_excluded.append(SelectedEvidence(source_type="kiwix", id=item.id, reason=str(non_selectable.get(usage_policy, ""))))
             continue
@@ -422,7 +487,10 @@ def _apply_usage_policy(
         if _candidate_key(candidate) in selected_keys:
             continue
         usage_policy = _kiwix_usage_policy(candidate)
-        if usage_policy in non_selectable:
+        semantic_reason = (candidate.raw or {}).get("semantic_excluded_reason") if isinstance(candidate.raw, dict) else ""
+        if semantic_reason:
+            policy_excluded.append(SelectedEvidence(source_type="kiwix", id=candidate.id, reason=str(semantic_reason)))
+        elif usage_policy in non_selectable:
             policy_excluded.append(SelectedEvidence(source_type="kiwix", id=candidate.id, reason=str(non_selectable.get(usage_policy, ""))))
         elif usage_policy in fallback_exclusions and has_selected_primary:
             policy_excluded.append(SelectedEvidence(source_type="kiwix", id=candidate.id, reason=str(fallback_exclusions.get(usage_policy, ""))))
@@ -460,6 +528,83 @@ def _knowledge_gap_note(
     if "kiwix" in selected_types and "wiki" not in selected_types:
         return "当前回答使用了 Kiwix/ZIM 作为背景补充，建议补强本地 Wiki 以提高判断解释能力。"
     return ""
+
+
+def _expand_selected_guide_wikis(
+    *,
+    candidates: List[EvidenceCandidate],
+    selected_evidence: List[EvidenceCandidate],
+    selection: EvidenceSelection,
+) -> tuple[List[EvidenceCandidate], List[EvidenceCandidate], EvidenceSelection]:
+    """Expand selected Guide relations before response evidence is assembled."""
+    selected_guides = _selected_by_type(selected_evidence, "guide")
+    if not selected_guides:
+        return candidates, selected_evidence, selection
+
+    related_candidates = fetch_related_wiki_candidates(selected_guides)
+    if not related_candidates:
+        return candidates, selected_evidence, selection
+
+    # Relation-backed Wiki wins identity collisions with independent search results.
+    candidates = _dedupe_candidates([*related_candidates, *candidates])
+    related_by_key = {_candidate_key(item): item for item in related_candidates}
+    selected_evidence = [
+        related_by_key.get(_candidate_key(item), item)
+        for item in selected_evidence
+    ]
+    max_selected = policy_int(("retrieval", "related_wiki_max_selected"), 6)
+    selected_related: List[EvidenceCandidate] = []
+    seen = set()
+
+    # Every selected Guide gets one support Wiki before additional links are filled.
+    for guide in selected_guides:
+        for candidate in related_candidates:
+            raw = candidate.raw if isinstance(candidate.raw, dict) else {}
+            linked_ids = raw.get("linked_guide_ids") or [raw.get("linked_guide_id")]
+            if guide.id not in linked_ids or candidate.id in seen:
+                continue
+            selected_related.append(candidate)
+            seen.add(candidate.id)
+            break
+
+    for candidate in related_candidates:
+        if len(selected_related) >= max_selected:
+            break
+        if candidate.id not in seen:
+            selected_related.append(candidate)
+            seen.add(candidate.id)
+
+    existing_keys = {_candidate_key(item) for item in selected_evidence}
+    for candidate in selected_related:
+        if _candidate_key(candidate) not in existing_keys:
+            selected_evidence.append(candidate)
+            selection.selected.append(SelectedEvidence(
+                source_type="wiki",
+                id=candidate.id,
+                reason="Guide related_wiki 确定性关联证据。",
+            ))
+
+    excluded_keys = {(item.source_type, item.id) for item in selection.excluded}
+    for candidate in related_candidates:
+        if candidate.id in seen or ("wiki", candidate.id) in excluded_keys:
+            continue
+        selection.excluded.append(SelectedEvidence(
+            source_type="wiki",
+            id=candidate.id,
+            reason="guide_related_wiki_limit",
+        ))
+
+    selected_evidence = sorted(_dedupe_candidates(selected_evidence), key=_candidate_priority)
+    reason_map = _selection_reason_map(selection.selected)
+    selection.selected = [
+        SelectedEvidence(
+            source_type=item.source_type,
+            id=item.id,
+            reason=reason_map.get(_candidate_key(item), ""),
+        )
+        for item in selected_evidence
+    ]
+    return candidates, selected_evidence, selection
 
 
 def _build_source_outputs(
@@ -621,7 +766,7 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
     # 只做结构合并，不做语义理解：core_terms 由 AI 产生，代码只是传给 fetcher。
     # needs 是回答关注点，不是检索词；把它混入 keywords 会让“资料/方案”等泛词污染排序。
     try:
-        plan.core_terms = list(plan.core_terms or [])
+        plan.core_terms = normalize_core_terms(plan.core_terms)
 
         for item in plan.source_plan:
             merged_keywords = list(item.keywords or [])
@@ -685,6 +830,12 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
         )
 
     selected_evidence = _validate_selected(candidates, selection.selected)
+    selected_evidence, selection = _ensure_planned_guide_selected(
+        plan=plan,
+        candidates=candidates,
+        selected_evidence=selected_evidence,
+        selection=selection,
+    )
     selected_evidence, selection = _ensure_explicit_kiwix_selected(
         user_message=user_message,
         plan=plan,
@@ -697,6 +848,16 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
         candidates=candidates,
         selected_evidence=selected_evidence,
     )
+    try:
+        candidates, selected_evidence, selection = _expand_selected_guide_wikis(
+            candidates=candidates,
+            selected_evidence=selected_evidence,
+            selection=selection,
+        )
+    except Exception as exc:
+        raw = selection.raw if isinstance(selection.raw, dict) else {}
+        raw["related_wiki_expansion_error"] = str(exc)
+        selection.raw = raw
     kiwix_explanations = _build_kiwix_explanations(
         plan=plan,
         selected_evidence=selected_evidence,

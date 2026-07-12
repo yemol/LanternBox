@@ -31,7 +31,9 @@
     "阀门没关就拆。",
     "别人不知道维修中又打开开关。"
   ],
-  "fallback": "无法确认是否断开时，不进行维修，只做隔离和标记。",
+  "fallback": [
+    "无法确认是否断开时，不进行维修，只做隔离和标记。"
+  ],
   "stop_or_escalate": [
     "触电感、燃气味、漏水扩大、部件过热时，立即停止维修。"
   ],
@@ -82,5 +84,12 @@
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
-  ]
+  ],
+  "related_wiki": [
+    "repair-basic-knots-index-001",
+    "repair-common-material-properties-index-001",
+    "repair-metal-corrosion-index-001",
+    "repair-wood-preservation-index-001"
+  ],
+  "risk_level": "caution"
 }

@@ -4,7 +4,7 @@ slug: hygiene-contamination-zone-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 用标记和动线分开清洁区与污染区；高风险条目，跨区前必须处理手、鞋和工具。
+summary: 用于清洁区污染区的标记原则的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 清洁区污染区的标记原则, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 清洁区污染区的标记原则, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 清洁区污染区的标记原则
 
 ## 用途
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0661
-- DG-0662
-- DG-0663
+- DG-0661｜血液污染物双层封存｜使用时机：出现血液污染布料或垃圾，需要双层封存。
+- DG-0662｜呕吐物清理后手卫生｜使用时机：清理呕吐物后需要恢复手卫生和清洁边界。
+- DG-0663｜污水进屋后的污染线｜使用时机：污水进入住所后边界不清，需要划污染线。
 
 ## Kiwix/ZIM 可继续查询
 

@@ -34,7 +34,11 @@
   "stop_or_escalate": [
     "意识不清、呼吸困难、持续抽搐、不能饮水、婴幼儿高热、皮疹伴精神差或发热持续加重时，优先求援。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "medical-fever-004",
+    "medical-fever-observation-record-001",
+    "medical-high-fever-consciousness-risk-001"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "医疗与照护",
   "domains": [
@@ -89,5 +93,6 @@
     "补水",
     "记录",
     "体温"
-  ]
+  ],
+  "risk_level": "high"
 }

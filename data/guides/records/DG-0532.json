@@ -29,7 +29,9 @@
     "测试时让旁人看到证件。",
     "旧备份乱丢。"
   ],
-  "fallback": "没有备用设备时，至少检查文件存在、大小和口令记录。",
+  "fallback": [
+    "没有备用设备时，至少检查文件存在、大小和口令记录。"
+  ],
   "stop_or_escalate": [
     "无法解密、文件损坏、备份盘丢失时，立即重新建立备份。"
   ],
@@ -60,5 +62,9 @@
     "库存资料",
     "成员档案"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [
+    "general-member-info-backup-001"
+  ],
+  "risk_level": "normal"
 }

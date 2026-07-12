@@ -4,7 +4,7 @@ slug: hygiene-pest-control-001
 category: 卫生
 priority: P0
 risk_level: high
-summary: 把食物密封、残渣清走并堵住进入路径；高风险条目，虫鼠出现时先查食物和垃圾。
+summary: 用于防虫防鼠和食物储存关系的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 卫生, 防虫防鼠和食物储存关系, 长期断供, 小团队, 离线生存
 guide_links: DG-0626, DG-0627, DG-0628
 kiwix_topics: 防虫防鼠和食物储存关系, 卫生, Emergency preparedness, Survival skills, Public health
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 防虫防鼠和食物储存关系
 
 ## 用途
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0626
-- DG-0627
-- DG-0628
+- DG-0626｜桶厕满袋封存和更换｜使用时机：桶厕或临时排泄袋接近满载，需要封存更换，避免外溢污染居住区。
+- DG-0627｜垃圾渗漏后的地面清理｜使用时机：垃圾袋渗漏到地面，可能把腐败液体、尖锐物和病原带入通道。
+- DG-0628｜霉味衣物和睡眠区分离｜使用时机：衣物有霉味或潮味，若直接带入睡眠区会增加呼吸不适和交叉污染。
 
 ## Kiwix/ZIM 可继续查询
 

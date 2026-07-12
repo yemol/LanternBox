@@ -49,9 +49,26 @@
     "情况超出原计划时，由负责人重新复核，而不是个人临时决定。"
   ],
   "related_wiki": [
+    "organization-children-001",
+    "organization-conflict-001",
+    "organization-fatigue-001",
+    "organization-handover-001",
+    "organization-incident-report-001",
+    "organization-inventory-001",
+    "organization-morale-001",
     "organization-night-safety-001",
+    "organization-offline-communication-001",
+    "organization-onboarding-001",
     "organization-outside-movement-001",
-    "organization-return-check-001"
+    "organization-rationing-001",
+    "organization-return-check-001",
+    "organization-review-001",
+    "organization-role-separation-001",
+    "organization-separated-movement-001",
+    "organization-skill-redundancy-001",
+    "organization-sleep-001",
+    "organization-sync-rhythm-001",
+    "organization-task-tiers-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "团队轮值与任务管理",
@@ -92,5 +109,6 @@
     "外出登记和归队检查",
     "团队管理",
     "外出登记和归队检查"
-  ]
+  ],
+  "risk_level": "caution"
 }

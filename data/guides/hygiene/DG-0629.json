@@ -50,9 +50,9 @@
     "鼠害进入睡眠区时，重新划分睡眠和食物区。"
   ],
   "related_wiki": [
-    "hygiene-odor-001",
     "hygiene-hand-hygiene-001",
-    "hygiene-handwashing-001"
+    "hygiene-handwashing-001",
+    "hygiene-odor-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "卫生",
@@ -93,5 +93,6 @@
     "防鼠食物高处封存",
     "卫生",
     "防鼠食物高处封存"
-  ]
+  ],
+  "risk_level": "caution"
 }

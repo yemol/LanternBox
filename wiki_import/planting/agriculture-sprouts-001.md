@@ -4,15 +4,14 @@ slug: agriculture-sprouts-001
 category: 种植
 priority: P1
 risk_level: caution
-summary: 说明芽苗菜短周期、少空间但高卫生要求；中风险条目，异味霉滑或水不洁时弃用。
+summary: 用于芽苗菜为什么适合短周期补充的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 种植, 芽苗菜为什么适合短周期补充, 长期断供, 小团队, 离线生存
-guide_links: DG-0671, DG-0672, DG-0673
+guide_links: DG-0671, DG-0672, DG-0673, DG-0674, DG-0675
 kiwix_topics: 芽苗菜为什么适合短周期补充, 种植, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 芽苗菜为什么适合短周期补充
 
 ## 独立边界矩阵
@@ -85,9 +84,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0671
-- DG-0672
-- DG-0673
+- DG-0671｜种子干燥封存｜使用时机：种子需要长期留存，但环境潮湿或温差大，可能提前发霉、虫蛀或失去发芽力。
+- DG-0672｜芽苗菜每日冲洗｜使用时机：芽苗菜作为短期新鲜食物来源，但每日冲洗不当会发臭、腐烂或引起胃肠问题。
+- DG-0673｜容器种植排水孔检查｜使用时机：容器种植没有排水孔，浇水后容易烂根、发臭和滋生虫害。
+- DG-0674｜少水覆盖浇灌｜使用时机：水量不足但仍要维持少量作物，裸露土面会快速失水。
+- DG-0675｜采收后留种标记｜使用时机：采收后需要留种，但成熟度、来源和混杂不记录会让下一季种植失败。
 
 ## Kiwix/ZIM 可继续查询
 

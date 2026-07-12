@@ -6,13 +6,12 @@ priority: P0
 risk_level: high
 summary: 控制交换对象、地点、物品隔离和回程复盘；高风险条目，对方身份、物品来源或路线不清时取消。
 tags: 安全, 物资交换前的对象风险判断, 长期断供, 小团队, 离线生存
-guide_links: DG-0631, DG-0632, DG-0633
+guide_links: DG-0631, DG-0632, DG-0633, DG-0702
 kiwix_topics: 物资交换前的对象风险判断, 安全, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 物资交换前的对象风险判断
 
 ## 用途
@@ -63,9 +62,10 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0631
-- DG-0632
-- DG-0633
+- DG-0631｜陌生人交换物资低暴露流程｜使用时机：需要和陌生人交换物资，但不能暴露库存、成员结构和住所核心位置。
+- DG-0632｜门口玻璃碎裂隔离｜使用时机：门口玻璃碎裂，既有割伤风险，也可能暴露室内情况。
+- DG-0633｜物资分配冲突暂停｜使用时机：物资分配时出现情绪升级或互相指责，继续讨论会增加冲突风险。
+- DG-0702｜物资交换前风险评估｜使用时机：准备和外部人员交换水、食物、工具、药品或信息，但不确定对方可靠程度。
 
 ## Kiwix/ZIM 可继续查询
 

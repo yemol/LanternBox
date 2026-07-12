@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 材料替代时的承重停止线
 
 ## 用途
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0621
-- DG-0622
-- DG-0623
+- DG-0621｜门窗松动低噪加固｜使用时机：门窗松动但不能制造过大声响，需要在夜间或低暴露状态下临时加固入口。
+- DG-0622｜鞋底开裂转移前修补｜使用时机：转移前鞋底开裂，继续行走可能进水、绊倒或磨伤脚部。
+- DG-0623｜水管滴漏临时接水降级｜使用时机：水管滴漏但暂时无法完整维修，需要先接水、减压和保护周围物资。
 
 ## Kiwix/ZIM 可继续查询
 

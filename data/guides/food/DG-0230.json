@@ -31,7 +31,9 @@
     "发臭后洗洗继续吃。",
     "用不安全水冲洗入口食物。"
   ],
-  "fallback": "没有沥水容器时，用纱布、筛子、干净布袋临时制作沥水结构。",
+  "fallback": [
+    "没有沥水容器时，用纱布、筛子、干净布袋临时制作沥水结构。"
+  ],
   "stop_or_escalate": [
     "豆芽发黏、酸臭、霉点、多人食后腹泻时，整批丢弃并清洗容器。"
   ],
@@ -82,5 +84,10 @@
     "冰箱食物",
     "罐头鼓包",
     "夜间异响"
-  ]
+  ],
+  "related_wiki": [
+    "agriculture-small-garden-pest-index-001",
+    "agriculture-soil-fertility-basics-index-001"
+  ],
+  "risk_level": "caution"
 }

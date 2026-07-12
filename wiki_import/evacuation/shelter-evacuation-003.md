@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 撤离后物资复盘记录
 
 ## 用途
@@ -44,7 +43,7 @@ source: LanternBox internal curated knowledge
 ## 判断标准
 
 - 复盘能说明缺什么、重什么、坏什么、下次怎么改。
-- 关键物品位置更清楚，重量更合理。
+- 关键物品位置更清楚，重量能被指定成员背负。
 - 成员知道自己的包调整点。
 
 ## 风险提示
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0641
-- DG-0642
-- DG-0643
+- DG-0641｜撤离前背包减重复核｜使用时机：撤离前背包过重且物品重复，需要在出发前快速减重，避免拖慢队伍。
+- DG-0642｜集合点失效后的备用点｜使用时机：原集合点被封锁、积水、人员聚集或视线暴露，需要启用备用点。
+- DG-0643｜探路超时后的留守规则｜使用时机：探路成员外出超过约定时间未返回，留守组需要判断等待、撤回还是转移。
 
 ## Kiwix/ZIM 可继续查询
 

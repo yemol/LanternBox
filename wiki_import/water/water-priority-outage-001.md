@@ -3,13 +3,13 @@ title: 停水后的用水优先级
 slug: water-priority-outage-001
 category: 水
 priority: P0
-summary: 安排取水、处理、储存和饮用分区；中风险条目，水源异常或容器污染时先隔离。
+summary: 用于停水后的用水优先级的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 停水, 用水优先级, 饮用水, 清洁水, 卫生, 储水
+guide_links: DG-0552, DG-0605
 risk_level: caution
 status: published
 source: Ready.gov Water；CDC Emergency Water Supply
 ---
-
 # 停水后的用水优先级
 
 ## 用途
@@ -24,7 +24,7 @@ source: Ready.gov Water；CDC Emergency Water Supply
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备饮用水清单、非饮用水清单、容器标签、每日分配表、成员特殊需求记录、清洁水替代容器和复查时间。最低条件是能区分入口用水、清洁用水和冲洗用水。
 
 ## 操作步骤
 
@@ -131,7 +131,7 @@ source: Ready.gov Water；CDC Emergency Water Supply
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+饮用水不足时，暂停洗衣、冲洗地面和非必要清洁，把灰水或非饮用水用于冲厕、降尘或工具初洗；清洁水不足时保留手卫生和伤口清洁。任何来源不明的水先标记非饮用，不进入烹饪和照护流程。
 
 ## 记录建议
 
@@ -142,3 +142,8 @@ source: Ready.gov Water；CDC Emergency Water Supply
 推荐记录格式：日期、人数、饮用水剩余量、清洁水剩余量、非饮用水剩余量、今日异常、明日调整。
 
 停水期间最重要的不是把水藏起来，而是让每一升水都有明确任务。
+
+## 对应 Guide
+
+- DG-0552｜停水后第一小时：容器收集和分区｜使用时机：刚停水或水压异常，仍可能有少量余水或可收集水。
+- DG-0605｜少水洗手和饮用水保留｜使用时机：储水不足时仍需要洗手，但不应把可饮用水大量消耗在低优先级清洁上。

@@ -1,0 +1,92 @@
+{
+  "id": "DG-0827",
+  "title": "先在水源附近设一个临时取水点",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "水源已经找到，但现场缺少一个清楚的取水位置，大家会乱走乱碰。",
+  "goal": "先把取水动作固定在一个干净、可控的临时点上。",
+  "keywords": [
+    "水",
+    "取水点",
+    "饮水安全",
+    "现场组织",
+    "行动卡"
+  ],
+  "tools": [
+    "标签",
+    "布",
+    "容器",
+    "纸笔"
+  ],
+  "steps": [
+    "先把取水点选在相对干净、平整、可通行的位置。",
+    "先用布或标记物把范围圈出来。",
+    "先把取水容器和待装容器分开摆放。",
+    "先把“取水区”和“待检区”分开。",
+    "先每次取水后把场地清理一遍。"
+  ],
+  "check": [
+    "取水点已固定。",
+    "取水区和待检区已分开。",
+    "场地已清理。"
+  ],
+  "common_mistakes": [
+    "取水点随意变化。",
+    "把待检水和已处理水混在一起。",
+    "没有清理现场。"
+  ],
+  "fallback": [
+    "没有足够空间时先把水容器分批放置。",
+    "场地太脏时先改为更远但更干净的点。"
+  ],
+  "stop_or_escalate": [
+    "取水点周围出现明显污染时暂停使用。",
+    "现场混乱导致误用时重新规划取水点。"
+  ],
+  "related_wiki": [
+    "water-container-labeling-004",
+    "water-safe-collection-007",
+    "water-source-judgement-002",
+    "water-storage-location-006"
+  ],
+  "notes": "有了固定取水点，误用和污染会明显减少。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "取水点",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "取水点",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先在水源附近设一个临时取水点",
+    "取水点",
+    "水",
+    "先在水源附近设一个临时取水点"
+  ],
+  "risk_level": "caution"
+}

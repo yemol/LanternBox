@@ -4,15 +4,14 @@ slug: safety-stranger-contact-001
 category: 外部接触与物资交换风险
 priority: P1
 risk_level: high
-summary: 区分真实需求、靠近意图和团队承受能力；高风险条目，先保护核心住所和脆弱成员。
+summary: 用于陌生人求助的边界判断的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 外部接触, 外部接触与物资交换风险, 陌生人求助的边界判断, 长期断供, 小团队, 离线生存
-guide_links: DG-0696, DG-0697, DG-0698
+guide_links: DG-0696, DG-0697, DG-0698, DG-0699, DG-0700, DG-0701, DG-0712
 kiwix_topics: 陌生人求助的边界判断, 外部接触与物资交换风险, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 陌生人求助的边界判断
 
 ## 用途
@@ -64,9 +63,13 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0696
-- DG-0697
-- DG-0698
+- DG-0696｜物资交换不暴露库存｜使用时机：和外部交换物资时展示库存会增加被索取或被盯上的风险。
+- DG-0697｜交换地点不选住所核心区｜使用时机：交换地点靠近住所会暴露路线、人数和储物位置。
+- DG-0698｜陌生人求助边界回应｜使用时机：陌生人求助可能真实也可能带来风险，需要有边界地回应。
+- DG-0699｜交换物品隔离检查｜使用时机：外部交换来的物品可能有污染、虫害、定位风险或缺件。
+- DG-0700｜外部消息交叉验证记录｜使用时机：外部消息可能夸大、过期或被误传，直接行动会带来风险。
+- DG-0701｜陌生人靠近营地低暴露应对｜使用时机：陌生人接近住所、营地、临时据点或物资点，团队需要回应但不能暴露人数、库存和入口。
+- DG-0712｜设置外部接触边界｜使用时机：团队可能反复遇到问路、借物、交换、求助或共同巡查请求。
 
 ## Kiwix/ZIM 可继续查询
 

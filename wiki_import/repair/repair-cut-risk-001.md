@@ -3,13 +3,13 @@ title: 维修时的割伤和火源风险
 slug: repair-cut-risk-001
 category: 维修 / 制作 / 替代 / 拆解再利用
 priority: P0
-summary: 判断修补是否能恢复最低功能；中风险条目，承重、带电或锋利风险不明时停止。
+summary: 用于维修时的割伤和火源风险的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 维修 / 制作 / 替代 / 拆解再利用, 维修时的割伤和火源风险, 维修时的割伤, P0, 长期生存
+guide_links: DG-0625
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 维修时的割伤和火源风险
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录工具、材料、风险点、割伤事件、火源使用和清理结果。
+
+## 对应 Guide
+
+- DG-0625｜拆解旧物前割伤防护｜使用时机：需要拆解旧物取零件，但材料可能有锐边、弹性件、玻璃和残留污染。

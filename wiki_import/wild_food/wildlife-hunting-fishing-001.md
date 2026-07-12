@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 狩猎捕捞法规和许可意识
 
 ## 独立边界矩阵
@@ -85,9 +84,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0681
-- DG-0682
-- DG-0683
+- DG-0681｜未知植物不入口｜使用时机：发现未知植物或浆果，饥饿时容易尝试入口。
+- DG-0682｜捕鱼后清洗去内脏｜使用时机：捕到鱼后需要处理，但水源、刀具和内脏污染可能影响食用安全。
+- DG-0683｜病死动物禁食隔离｜使用时机：发现病死动物，可能看似可取得肉源，但病因不明。
 
 ## Kiwix/ZIM 可继续查询
 

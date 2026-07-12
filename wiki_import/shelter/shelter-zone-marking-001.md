@@ -4,7 +4,7 @@ slug: shelter-zone-marking-001
 category: 庇护空间分区
 priority: P0
 risk_level: caution
-summary: 用标记把小空间分成睡眠、食物、污染和工具区；中风险条目，标记失效时重新整理。
+summary: 用于小空间分区的标记方法的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 庇护空间, 庇护空间分区, 小空间分区的标记方法, 长期断供, 小团队, 离线生存
 guide_links: DG-0656, DG-0657, DG-0658
 kiwix_topics: 小空间分区的标记方法, 庇护空间分区, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 小空间分区的标记方法
 
 ## 用途
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0656
-- DG-0657
-- DG-0658
+- DG-0656｜入口缓冲区鞋物分离｜使用时机：入口带入泥水和污染物，需要设置鞋物缓冲区。
+- DG-0657｜睡眠区远离污染区复核｜使用时机：睡眠区靠近垃圾、病人或潮湿角落，需要重新复核位置。
+- DG-0658｜火源区周边清空｜使用时机：火源周边堆放杂物，需要清空安全半径。
 
 ## Kiwix/ZIM 可继续查询
 

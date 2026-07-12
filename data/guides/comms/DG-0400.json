@@ -30,7 +30,9 @@
     "关键技能只有一个人掌握。",
     "把不会当成丢脸。"
   ],
-  "fallback": "人数少时，先列急救、净水、火源、库存、通信五类。",
+  "fallback": [
+    "人数少时，先列急救、净水、火源、库存、通信五类。"
+  ],
   "stop_or_escalate": [
     "负责人受伤或离开后无人会关键任务时，立即优先补训。"
   ],
@@ -62,5 +64,7 @@
     "组织秩序",
     "训练演练"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [],
+  "risk_level": "normal"
 }

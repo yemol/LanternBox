@@ -36,7 +36,11 @@
   "stop_or_escalate": [
     "水出现油膜、化学味、明显粪污或容器无法清洗时，不作为饮用水处理。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "hygiene-fecal-contamination-water-separation-001",
+    "water-container-001",
+    "water-priority-outage-001"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "水与食物保障",
   "domains": [
@@ -92,5 +96,6 @@
     "第一小时",
     "容器",
     "收集"
-  ]
+  ],
+  "risk_level": "caution"
 }

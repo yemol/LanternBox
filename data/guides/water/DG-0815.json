@@ -1,0 +1,94 @@
+{
+  "id": "DG-0815",
+  "title": "先做储水轮换和复查",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "储水已经放了一段时间，不知道还不能不能继续用。",
+  "goal": "先用简单轮换规则判断哪些水还可用。",
+  "keywords": [
+    "水",
+    "轮换",
+    "储存",
+    "饮水安全",
+    "行动卡",
+    "DG-0621",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "标签",
+    "纸笔",
+    "容器"
+  ],
+  "steps": [
+    "先确认每个容器的存放日期。",
+    "先检查水是否有异味、变色或容器变形。",
+    "先把时间长、状态差的水单独标记。",
+    "先把新水和旧水分开。",
+    "先把轮换结果写进记录。"
+  ],
+  "check": [
+    "存放日期已确认。",
+    "异常情况已检查。",
+    "轮换记录已写。"
+  ],
+  "common_mistakes": [
+    "只看容器外观，不问日期。",
+    "把旧水和新水混放。",
+    "没有记录轮换。"
+  ],
+  "fallback": [
+    "状态不明时先做待检处理。",
+    "水量不足时先优先保留高风险人群水。"
+  ],
+  "stop_or_escalate": [
+    "容器发胀、漏水或异味明显时停用。",
+    "储水太少时重新分配优先级。"
+  ],
+  "related_wiki": [
+    "water-bottle-rotation-048",
+    "water-recovery-check-042",
+    "water-storage-rotation-005"
+  ],
+  "notes": "轮换并不是为了麻烦，而是为了减少误用。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先做储水轮换和复查",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先做储水轮换和复查",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先做储水轮换和复查",
+    "先做储水轮换和复查",
+    "水",
+    "先做储水轮换和复查"
+  ],
+  "risk_level": "caution"
+}

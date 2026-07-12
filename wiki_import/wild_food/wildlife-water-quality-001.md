@@ -6,13 +6,12 @@ priority: P1
 risk_level: high
 summary: 用颜色、气味、浑浊、油膜和来源记录做基础筛查，并把贝类水产与水质、藻类、污水和保存时间绑定判断；高风险条目，异常水先隔离，不直接并入饮用储备。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 贝类水产和水质污染关系, 长期断供, 小团队, 离线生存
-guide_links: DG-0681, DG-0682, DG-0683
+guide_links: DG-0681, DG-0682, DG-0683, DG-0684, DG-0685
 kiwix_topics: 贝类水产和水质污染关系, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 贝类水产和水质污染关系
 
 ## 独立边界矩阵
@@ -85,9 +84,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0681
-- DG-0682
-- DG-0683
+- DG-0681｜未知植物不入口｜使用时机：发现未知植物或浆果，饥饿时容易尝试入口。
+- DG-0682｜捕鱼后清洗去内脏｜使用时机：捕到鱼后需要处理，但水源、刀具和内脏污染可能影响食用安全。
+- DG-0683｜病死动物禁食隔离｜使用时机：发现病死动物，可能看似可取得肉源，但病因不明。
+- DG-0684｜诱捕误伤风险检查｜使用时机：使用诱捕装置获取动物蛋白，装置可能误伤成员、儿童或非目标动物。
+- DG-0685｜动物性食物彻底加热｜使用时机：野外获得动物性食物后，来源和寄生风险不明，需要彻底加热。
 
 ## Kiwix/ZIM 可继续查询
 

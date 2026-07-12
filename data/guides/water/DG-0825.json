@@ -1,0 +1,90 @@
+{
+  "id": "DG-0825",
+  "title": "先把饮水分发安排成固定时段",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "多人同时去取水，导致争抢、浪费和水桶被污染。",
+  "goal": "先让饮水分发按固定时段进行，减少混乱和误用。",
+  "keywords": [
+    "水",
+    "分发时段",
+    "饮水安全",
+    "组织",
+    "行动卡"
+  ],
+  "tools": [
+    "纸笔",
+    "标签",
+    "水壶"
+  ],
+  "steps": [
+    "先把取水时段固定成几个短窗口，不要随意开放。",
+    "先让一个人负责发水，避免多人同时碰容器。",
+    "先把每人取水量写明，减少争抢。",
+    "先把时间表贴在取水点，所有人都按同一节奏。",
+    "先在每次发水后清点剩余量。"
+  ],
+  "check": [
+    "固定时段已设定。",
+    "发水责任人已明确。",
+    "每次发水后已清点。"
+  ],
+  "common_mistakes": [
+    "谁都能随时去拿。",
+    "发水时没有责任人。",
+    "没有把时间表告知所有人。"
+  ],
+  "fallback": [
+    "没有人负责时先缩短时段并集中发水。",
+    "水量不足时先把发水时段改为更少更短。"
+  ],
+  "stop_or_escalate": [
+    "发水混乱、争抢加重时停止自由取水。",
+    "人群拥挤风险上升时改为一人一桶或一人一小瓶。"
+  ],
+  "related_wiki": [
+    "water-container-labeling-004",
+    "water-drinking-priority-017",
+    "water-shortage-response-041"
+  ],
+  "notes": "固定时段是把混乱变成秩序的最简单方法。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "分发时段",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "分发时段",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先把饮水分发安排成固定时段",
+    "分发时段",
+    "水",
+    "先把饮水分发安排成固定时段"
+  ],
+  "risk_level": "caution"
+}

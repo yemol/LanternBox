@@ -3,13 +3,13 @@ title: 扭伤拉伤基础处理
 slug: medical-sprain-strain-care-001
 category: 医疗急救
 priority: P0
-summary: 整理观察、清洁、保护和复查步骤；中风险条目，症状恶化或无法判断时停止普通处理。
+summary: 用于扭伤拉伤基础处理的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 扭伤, 拉伤, 关节, 冷敷, 医疗观察, 急救
+guide_links: DG-0614
 risk_level: caution
 status: published
 source: Mayo Clinic Sprain First Aid；American Red Cross Muscle Bone and Joint Injuries
 ---
-
 # 扭伤拉伤基础处理
 
 ## 用途
@@ -24,7 +24,7 @@ source: Mayo Clinic Sprain First Aid；American Red Cross Muscle Bone and Joint 
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备弹性绷带或干净布条、冷敷物或冷水瓶、抬高垫、固定标记、疼痛和肿胀记录、照明和辅助行走工具。最低条件是能停止负重、保护受伤部位并复查疼痛、肿胀、颜色和活动能力。
 
 ## 操作步骤
 
@@ -131,7 +131,7 @@ source: Mayo Clinic Sprain First Aid；American Red Cross Muscle Bone and Joint 
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+没有弹性绷带时，用干净布条做宽松支撑，定时检查脚趾或手指颜色、温度和麻木感；没有冷敷物时，用冷水浸湿布料短时冷敷。无法站立、明显变形、麻木加重或疼痛快速上升时停止继续负重。
 
 ## 记录建议
 
@@ -140,3 +140,7 @@ source: Mayo Clinic Sprain First Aid；American Red Cross Muscle Bone and Joint 
 壳中灯系统中，扭伤拉伤应记录进日记模块，类型选择“健康状况”。
 
 轻度扭伤不是小事。它会决定一个人后续几天是否还能搬水、巡查和照护他人。
+
+## 对应 Guide
+
+- DG-0614｜扭伤后转移固定｜使用时机：成员扭伤后仍需要移动或转移，若硬撑行走可能加重损伤。

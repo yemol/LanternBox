@@ -3,13 +3,13 @@ title: 室内霉味和潮湿风险
 slug: hygiene-mold-odor-001
 category: 卫生
 priority: P0
-summary: 划分清洁区、污染区和处理顺序；中风险条目，污染来源不清或人员不适时升级。
+summary: 用于室内霉味和潮湿风险的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 卫生, 室内霉味和潮湿风险, 室内霉味和潮, P0, 长期生存
+guide_links: DG-0575
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 室内霉味和潮湿风险
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录气味位置、可疑湿源、移动物品、通风时段和气味变化。
+
+## 对应 Guide
+
+- DG-0575｜室内异味和霉味：通风干燥判断｜使用时机：室内异味和霉味：通风干燥判断相关场景出现，外部支援不确定，需要立刻用本地资源处理。

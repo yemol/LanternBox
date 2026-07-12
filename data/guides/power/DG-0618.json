@@ -50,8 +50,25 @@
     "关键设备连续掉电时，重新检查电池组和负载优先级。"
   ],
   "related_wiki": [
+    "energy-battery-001",
+    "energy-battery-002",
+    "energy-battery-003",
     "energy-battery-capacity-001",
-    "energy-fever-001"
+    "energy-charge-log-001",
+    "energy-charging-cable-001",
+    "energy-device-port-001",
+    "energy-energy-knowledge-001",
+    "energy-fever-001",
+    "energy-fever-002",
+    "energy-heat-001",
+    "energy-lighting-001",
+    "energy-lighting-002",
+    "energy-lighting-003",
+    "energy-power-outage-001",
+    "energy-power-strip-001",
+    "energy-radio-power-001",
+    "energy-solar-charging-001",
+    "energy-solar-charging-002"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "能源",
@@ -92,5 +109,6 @@
     "电池混放后的编号轮换",
     "能源",
     "电池混放后的编号轮换"
-  ]
+  ],
+  "risk_level": "caution"
 }

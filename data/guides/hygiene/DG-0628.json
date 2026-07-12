@@ -50,9 +50,25 @@
     "睡眠区本身返潮时，优先迁移床铺或增加隔离垫层。"
   ],
   "related_wiki": [
-    "hygiene-odor-001",
     "hygiene-hand-hygiene-001",
-    "hygiene-handwashing-001"
+    "hygiene-handwashing-001",
+    "hygiene-handwashing-002",
+    "hygiene-hygiene-knowledge-002",
+    "hygiene-hygiene-knowledge-003",
+    "hygiene-hygiene-knowledge-004",
+    "hygiene-mold-002",
+    "hygiene-odor-001",
+    "hygiene-odor-002",
+    "hygiene-pest-control-001",
+    "hygiene-shared-items-001",
+    "hygiene-sleep-001",
+    "hygiene-toilet-001",
+    "hygiene-toilet-002",
+    "hygiene-vomit-002",
+    "hygiene-waste-002",
+    "hygiene-waste-003",
+    "hygiene-waste-004",
+    "hygiene-wet-waste-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "卫生",
@@ -93,5 +109,6 @@
     "霉味衣物和睡眠区分离",
     "卫生",
     "霉味衣物和睡眠区分离"
-  ]
+  ],
+  "risk_level": "caution"
 }

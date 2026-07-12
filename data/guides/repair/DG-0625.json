@@ -50,8 +50,11 @@
     "发生割伤后，立即停止取材并处理伤口污染。"
   ],
   "related_wiki": [
+    "repair-cut-risk-001",
+    "repair-drinking-water-001",
     "repair-power-outage-001",
-    "repair-drinking-water-001"
+    "repair-salvage-002",
+    "repair-salvaged-parts-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "维修 / 制作 / 替代 / 拆解再利用",
@@ -92,5 +95,6 @@
     "拆解旧物前割伤防护",
     "维修",
     "拆解旧物前割伤防护"
-  ]
+  ],
+  "risk_level": "caution"
 }

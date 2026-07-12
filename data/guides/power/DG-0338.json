@@ -30,7 +30,9 @@
     "和水瓶工具混放。",
     "鼓包还继续充。"
   ],
-  "fallback": "没有记录本时，用贴纸标记满、半、低三种状态。",
+  "fallback": [
+    "没有记录本时，用贴纸标记满、半、低三种状态。"
+  ],
   "stop_or_escalate": [
     "移动电源鼓包、发热、进水、摔裂或无法正常充放电时，停止使用。"
   ],
@@ -83,5 +85,10 @@
     "门外",
     "窗外",
     "夜间可疑"
-  ]
+  ],
+  "related_wiki": [
+    "energy-lithium-battery-safety-index-001",
+    "energy-power-bank-001"
+  ],
+  "risk_level": "caution"
 }

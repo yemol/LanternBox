@@ -4,15 +4,14 @@ slug: clothing-insulation-001
 category: 衣物 / 鞋袜 / 体温防护
 priority: P0
 risk_level: caution
-summary: 区分贴身排汗、中层保温和外层防风防雨；中风险条目，出汗变湿或外层漏水时及时调整。
+summary: 用于分层穿衣的排汗保温原理的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 衣物, 衣物 / 鞋袜 / 体温防护, 分层穿衣的排汗保温原理, 长期断供, 小团队, 离线生存
-guide_links: DG-0651, DG-0652, DG-0653
+guide_links: DG-0651, DG-0652, DG-0653, DG-0654, DG-0655
 kiwix_topics: 分层穿衣的排汗保温原理, 衣物 / 鞋袜 / 体温防护, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 分层穿衣的排汗保温原理
 
 ## 独立边界矩阵
@@ -85,9 +84,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0651
-- DG-0652
-- DG-0653
+- DG-0651｜湿袜更换和脚部检查｜使用时机：长时间行走后袜子潮湿，需要换袜并检查脚部损伤。
+- DG-0652｜雨衣破洞临时补片｜使用时机：雨衣破洞导致躯干或背包进水，需要临时补片。
+- DG-0653｜高温外出防晒和补水｜使用时机：高温外出任务容易晒伤和脱水，需要出发前限制暴露。
+- DG-0654｜低温睡前分层穿衣｜使用时机：夜间低温但衣物有限，需要睡前分层而不出汗受潮。
+- DG-0655｜鞋底脱胶后的降级使用｜使用时机：鞋底脱胶但暂时没有替换鞋，需要判断短用或停用。
 
 ## Kiwix/ZIM 可继续查询
 

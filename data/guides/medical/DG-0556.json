@@ -35,7 +35,10 @@
   "stop_or_escalate": [
     "喷射性出血、压迫 10 分钟仍大量出血、伤口很深、异物嵌入或伤者意识异常时，保持压迫并升级求援。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "medical-bleeding-control-002",
+    "medical-trauma-complication-index-001"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "医疗与照护",
   "domains": [
@@ -90,5 +93,6 @@
     "直接压迫",
     "出血",
     "敷料"
-  ]
+  ],
+  "risk_level": "caution"
 }

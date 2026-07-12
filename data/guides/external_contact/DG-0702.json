@@ -53,8 +53,8 @@
     "交换条件突然变化或出现施压。"
   ],
   "related_wiki": [
-    "外部接触与交换风险",
-    "外部接触记录"
+    "safety-barter-002",
+    "safety-stranger-contact-inventory-exposure-001"
   ],
   "notes": "长期断供和小团队场景下的非对抗行动卡；重点是低暴露、边界、记录、照护和降温。",
   "domains": [
@@ -94,5 +94,6 @@
     "物资交换",
     "风险评估",
     "对方可信"
-  ]
+  ],
+  "risk_level": "high"
 }

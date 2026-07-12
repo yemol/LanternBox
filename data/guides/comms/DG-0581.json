@@ -34,7 +34,9 @@
   "stop_or_escalate": [
     "成员超过约定返回时间、天气恶化、路线风险升高或外出人员失联时，停止盲目寻找，按备用集合点和留守规则行动。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "communication-radio-communication-basics-index-001"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "通讯与记录",
   "domains": [
@@ -97,5 +99,6 @@
     "怎么和家人保持通讯计划",
     "家庭通讯计划",
     "集合点留言"
-  ]
+  ],
+  "risk_level": "normal"
 }

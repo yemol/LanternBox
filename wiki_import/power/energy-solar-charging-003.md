@@ -3,13 +3,13 @@ title: 太阳能充电的光照因素
 slug: energy-solar-charging-003
 category: 能源
 priority: P0
-summary: 按光照、角度、温度和接口防水安排补电；中风险条目，输出低或进水风险高时转节电。
+summary: 用于太阳能充电的光照因素的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 能源, 太阳能充电的光照因素, 太阳能充电的, P0, 长期生存
+guide_links: DG-0564
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 太阳能充电的光照因素
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录时间段、天气、摆放位置、实测增量和是否继续的决定。
+
+## 对应 Guide
+
+- DG-0564｜太阳能充电：排程和保护｜使用时机：太阳能充电：排程和保护相关场景出现，外部支援不确定，需要立刻用本地资源处理。

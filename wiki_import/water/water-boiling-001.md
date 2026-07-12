@@ -5,11 +5,11 @@ category: 水
 priority: P0
 summary: 说明沉淀、过滤和煮沸的先后顺序；中风险条目，水源有化学污染或容器不洁时不作为饮用水。
 tags: 饮用水, 煮沸, 消毒, 水源, 微生物, 停水
+guide_links: DG-0033
 risk_level: caution
 status: published
 source: CDC Emergency Water Supply；Ready.gov Water
 ---
-
 # 煮沸饮水基础
 
 ## 用途
@@ -24,7 +24,7 @@ source: CDC Emergency Water Supply；Ready.gov Water
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备可加热容器、燃料或炉具、盖子、清洁储水容器、取水勺、计时方式、标签和记录纸。最低条件是能把待煮水、已煮水和非饮用水分开，避免煮沸后再次污染。
 
 ## 操作步骤
 
@@ -118,7 +118,7 @@ source: CDC Emergency Water Supply；Ready.gov Water
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+缺少燃料时，先保留已确认安全的瓶装水或储水作为入口用水，把未处理水标记为非饮用；不能确认化学污染时，煮沸也不作为入口方案。没有干净容器时，煮沸水不得倒回原污染容器。
 
 ## 记录建议
 
@@ -127,3 +127,7 @@ source: CDC Emergency Water Supply；Ready.gov Water
 壳中灯系统中，可记录每批煮沸水：原始水源、预处理方式、煮沸时间、保存容器、保存位置、处理人、是否已饮用完。
 
 煮沸饮水是一种基础、可靠但不万能的方法。判断污染类型比单纯加热更重要。
+
+## 对应 Guide
+
+- DG-0033｜煮沸净水：省燃料做法｜使用时机：有锅和燃料，需要把可处理水变成饮用水，但燃料有限。

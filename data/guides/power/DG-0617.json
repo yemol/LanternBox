@@ -50,8 +50,26 @@
     "连续两天无法满足关键设备电量时，调整通信开机窗口和夜间照明规则。"
   ],
   "related_wiki": [
+    "energy-battery-001",
+    "energy-battery-002",
+    "energy-battery-003",
     "energy-battery-capacity-001",
-    "energy-fever-001"
+    "energy-charge-log-001",
+    "energy-charging-cable-001",
+    "energy-device-port-001",
+    "energy-energy-knowledge-001",
+    "energy-fever-001",
+    "energy-fever-002",
+    "energy-heat-001",
+    "energy-lighting-001",
+    "energy-lighting-002",
+    "energy-lighting-003",
+    "energy-power-outage-001",
+    "energy-power-strip-001",
+    "energy-radio-power-001",
+    "energy-solar-charging-001",
+    "energy-solar-charging-002",
+    "energy-solar-system-basics-index-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "能源",
@@ -92,5 +110,6 @@
     "太阳能充电白天排程",
     "能源",
     "太阳能充电白天排程"
-  ]
+  ],
+  "risk_level": "caution"
 }

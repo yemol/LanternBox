@@ -4,7 +4,7 @@ slug: safety-buddy-system-001
 category: 安全
 priority: P0
 risk_level: high
-summary: 控制暴露、接触、路线和冲突边界；高风险条目，人员安全受威胁时放弃物资和任务。
+summary: 用于双人行动和返回时间的意义的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 安全, 双人行动和返回时间的意义, 长期断供, 小团队, 离线生存
 guide_links: DG-0631, DG-0632, DG-0633
 kiwix_topics: 双人行动和返回时间的意义, 安全, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 双人行动和返回时间的意义
 
 ## 用途
@@ -63,9 +62,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0631
-- DG-0632
-- DG-0633
+- DG-0631｜陌生人交换物资低暴露流程｜使用时机：需要和陌生人交换物资，但不能暴露库存、成员结构和住所核心位置。
+- DG-0632｜门口玻璃碎裂隔离｜使用时机：门口玻璃碎裂，既有割伤风险，也可能暴露室内情况。
+- DG-0633｜物资分配冲突暂停｜使用时机：物资分配时出现情绪升级或互相指责，继续讨论会增加冲突风险。
 
 ## Kiwix/ZIM 可继续查询
 

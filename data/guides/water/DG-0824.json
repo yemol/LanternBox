@@ -1,0 +1,90 @@
+{
+  "id": "DG-0824",
+  "title": "先按人和天数做饮水配额",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "水量有限时，团队不知道应该按多少量分配饮用水。",
+  "goal": "先把可用饮水按人数和天数做简单配额，避免一开始就用太快。",
+  "keywords": [
+    "水",
+    "饮水配额",
+    "饮水安全",
+    "节约",
+    "行动卡"
+  ],
+  "tools": [
+    "纸笔",
+    "标签",
+    "小口瓶"
+  ],
+  "steps": [
+    "先把参与人数和预计停水天数记下来。",
+    "先把每人每天的最低饮水量写成一个明确数字。",
+    "先把总量和每个人的配额对上，避免“看起来够用”却实际超用。",
+    "先把配额写在取水点附近，方便所有人按同一标准。",
+    "先每天复核一次，水少时就立即缩减到最低配额。"
+  ],
+  "check": [
+    "人数和天数已写清。",
+    "每人配额已明确。",
+    "取水点附近有配额提示。"
+  ],
+  "common_mistakes": [
+    "只凭感觉分水。",
+    "一开始就把每人配额定得太高。",
+    "没有每天复核。"
+  ],
+  "fallback": [
+    "水量不足时先按最低配额，先保留儿童、老人和病人。",
+    "没有计算器时先用最简单的除法估算。"
+  ],
+  "stop_or_escalate": [
+    "配额一再被超用时停止自由取水并重新分配。",
+    "出现明显脱水症状时立即提高优先级。"
+  ],
+  "related_wiki": [
+    "water-drinking-priority-017",
+    "water-quantity-estimate-021",
+    "water-shortage-response-041"
+  ],
+  "notes": "简单配额比复杂计划更适合紧急现场。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "饮水配额",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "饮水配额",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先按人和天数做饮水配额",
+    "饮水配额",
+    "水",
+    "先按人和天数做饮水配额"
+  ],
+  "risk_level": "caution"
+}

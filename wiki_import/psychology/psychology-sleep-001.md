@@ -6,13 +6,12 @@ priority: P1
 risk_level: caution
 summary: 保护连续睡眠、降低夜间噪声和任务打扰；中风险条目，缺眠者不做火源外出等高风险任务。
 tags: 心理韧性, 心理韧性与冲突降温, 长期压力下睡眠保护, 长期断供, 小团队, 离线生存
-guide_links: DG-0691, DG-0692, DG-0693
+guide_links: DG-0691, DG-0692, DG-0693, DG-0718
 kiwix_topics: 长期压力下睡眠保护, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 长期压力下睡眠保护
 
 ## 独立边界矩阵
@@ -85,9 +84,10 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0691
-- DG-0692
-- DG-0693
+- DG-0691｜争吵升级前暂停口令｜使用时机：争吵开始升温时，如果没有共同暂停信号，会进入互相攻击。
+- DG-0692｜儿童恐慌安抚三步｜使用时机：儿童因声响、黑暗、转移或疾病恐慌，需要简单稳定的安抚流程。
+- DG-0693｜老人焦虑信息同步｜使用时机：老人反复询问消息或担心拖累团队，需要固定信息同步而不是随时解释。
+- DG-0718｜睡眠不足争执降温｜使用时机：连续守夜、噪声、寒冷或压力导致成员因小事争吵。
 
 ## Kiwix/ZIM 可继续查询
 

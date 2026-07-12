@@ -1,0 +1,95 @@
+{
+  "id": "DG-0801",
+  "title": "先确认雨水收集点是否可用",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "雨水收集点看起来可用，但收集面、容器和雨量条件可能不合格。",
+  "goal": "先判断雨水是否值得收集和后续使用。",
+  "keywords": [
+    "水",
+    "雨水",
+    "饮水安全",
+    "收集",
+    "行动卡",
+    "DG-0607",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "布",
+    "小口瓶",
+    "标签",
+    "手电"
+  ],
+  "steps": [
+    "先确认收集面是否干净，是否有灰尘、油污或落叶。",
+    "先把第一场雨水留作待检，别直接用。",
+    "先看容器是否干净、密封且能防尘。",
+    "先取样观察颜色、气味和沉淀。",
+    "先把收集好的水标记为可用、待检或停用。"
+  ],
+  "check": [
+    "收集面已检查。",
+    "容器已清洁。",
+    "样本已观察。"
+  ],
+  "common_mistakes": [
+    "用不洁收集面接雨水。",
+    "把第一场雨水当饮用水。",
+    "没有给水做标记。"
+  ],
+  "fallback": [
+    "收集面不洁时就先用作清洁水或停用。",
+    "没有干净容器时先暂缓收集。"
+  ],
+  "stop_or_escalate": [
+    "收集点附近有污染源时停止使用。",
+    "发现明显异味或油污时直接停用。"
+  ],
+  "related_wiki": [
+    "water-clarity-judgement-013",
+    "water-rain-collection-008",
+    "water-unknown-source-010"
+  ],
+  "notes": "雨水收集点允许短期补水，但需要先判断污染风险。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先确认雨水收集点是否可用",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先确认雨水收集点是否可用",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先确认雨水收集点是否可用",
+    "先确认雨水收集点是否可用",
+    "水",
+    "先确认雨水收集点是否可用"
+  ],
+  "risk_level": "caution"
+}

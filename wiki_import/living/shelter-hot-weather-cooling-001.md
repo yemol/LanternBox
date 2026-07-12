@@ -5,11 +5,11 @@ category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
 summary: 安排阴凉、通风、补水和减少热源；中风险条目，中暑信号出现时停止任务，并记录责任人、时间和复查结果。
 tags: 高温, 降温, 中暑, 补水, 通风, 停电
+guide_links: DG-0062
 risk_level: caution
 status: published
 source: CDC Extreme Heat；Ready.gov Extreme Heat
 ---
-
 # 高温天气降温基础
 
 ## 用途
@@ -24,7 +24,7 @@ source: CDC Extreme Heat；Ready.gov Extreme Heat
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备遮光布或窗帘、饮用水记录、湿毛巾、轻薄衣物、通风路线、休息时段表、成员状态记录和老人儿童重点观察名单。最低条件是能建立阴凉点、减少活动量并记录头晕、尿色、出汗和意识变化。
 
 ## 操作步骤
 
@@ -122,7 +122,7 @@ source: CDC Extreme Heat；Ready.gov Extreme Heat
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+缺电时用遮光、交叉通风、湿毛巾、减少活动和错峰劳动降温；缺水时停止非必要清洗，优先保障饮水和高风险成员降温。无法降低室内热负荷时，把人员转移到阴凉低层或通风点并缩短停留时间。
 
 ## 记录建议
 
@@ -138,3 +138,7 @@ source: CDC Extreme Heat；Ready.gov Extreme Heat
 - 活动安排
 
 高温管理的关键不是追求凉快，而是避免体温和脱水悄悄越线。
+
+## 对应 Guide
+
+- DG-0062｜高温停电：中暑预防｜使用时机：高温天气停电，风扇、空调、冰箱不可用。

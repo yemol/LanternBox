@@ -4,15 +4,14 @@ slug: psychology-emotion-log-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 把情绪触发点和风险决策分开记录；中风险条目，不在情绪高峰做不可逆决定。
+summary: 用于情绪记录和风险决策的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 心理韧性, 心理韧性与冲突降温, 情绪记录和风险决策, 长期断供, 小团队, 离线生存
-guide_links: DG-0691, DG-0692, DG-0693
+guide_links: DG-0691, DG-0692, DG-0693, DG-0726
 kiwix_topics: 情绪记录和风险决策, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 情绪记录和风险决策
 
 ## 独立边界矩阵
@@ -85,9 +84,10 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0691
-- DG-0692
-- DG-0693
+- DG-0691｜争吵升级前暂停口令｜使用时机：争吵开始升温时，如果没有共同暂停信号，会进入互相攻击。
+- DG-0692｜儿童恐慌安抚三步｜使用时机：儿童因声响、黑暗、转移或疾病恐慌，需要简单稳定的安抚流程。
+- DG-0693｜老人焦虑信息同步｜使用时机：老人反复询问消息或担心拖累团队，需要固定信息同步而不是随时解释。
+- DG-0726｜长期压力下防止决策崩坏｜使用时机：连续坏消息、缺水缺食、睡眠不足或争执后，团队开始做极端或频繁变化的决定。
 
 ## Kiwix/ZIM 可继续查询
 

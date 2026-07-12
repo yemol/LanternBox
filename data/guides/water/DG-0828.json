@@ -1,0 +1,91 @@
+{
+  "id": "DG-0828",
+  "title": "先在取水点做简单污染隔离带",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "取水点旁边容易被脚步、灰尘和污物污染，水却还是在同一位置被取。",
+  "goal": "先用最简单的方式把取水点和污染源隔开。",
+  "keywords": [
+    "水",
+    "污染隔离",
+    "饮水安全",
+    "现场防护",
+    "行动卡"
+  ],
+  "tools": [
+    "布",
+    "标签",
+    "容器"
+  ],
+  "steps": [
+    "先用布或标记物把取水区和周边活动区分开。",
+    "先让所有人从一个方向靠近取水点。",
+    "先把取水容器放在更干净的侧面。",
+    "先把污染源和水源之间至少留出一个明显隔离区。",
+    "先每次完工后把隔离带重新检查一遍。"
+  ],
+  "check": [
+    "隔离带已建立。",
+    "通行方向已单一化。",
+    "污染源和取水区已分开。"
+  ],
+  "common_mistakes": [
+    "让人从多个方向穿过。",
+    "没有把污染源和取水方位分清。",
+    "隔离带不稳定。"
+  ],
+  "fallback": [
+    "没有布时先用石头、木板或脚印标记。",
+    "场地太小时先减少人流并缩小取水点。"
+  ],
+  "stop_or_escalate": [
+    "隔离带被踩踏后暂停取水并重建。",
+    "污染明显扩散时先撤离该点。"
+  ],
+  "related_wiki": [
+    "water-bucket-cover-025",
+    "water-contamination-separation-033",
+    "water-safe-collection-007",
+    "water-storage-location-006"
+  ],
+  "notes": "简单的隔离带比复杂流程更适合现场。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "污染隔离",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "污染隔离",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先在取水点做简单污染隔离带",
+    "污染隔离",
+    "水",
+    "先在取水点做简单污染隔离带"
+  ],
+  "risk_level": "caution"
+}

@@ -29,7 +29,9 @@
     "强行灌水。",
     "一群人围着劝。"
   ],
-  "fallback": "没有安静空间时，至少转到墙边或角落，减少刺激源。",
+  "fallback": [
+    "没有安静空间时，至少转到墙边或角落，减少刺激源。"
+  ],
   "stop_or_escalate": [
     "对方胸痛、昏厥、持续意识混乱、攻击自己或他人时，按医疗和安全流程处理。"
   ],
@@ -46,5 +48,7 @@
     "组织秩序",
     "训练演练"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [],
+  "risk_level": "caution"
 }

@@ -4,15 +4,14 @@ slug: psychology-elder-anxiety-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 给老人保留可选择的小任务和固定信息窗口；中风险条目，不让焦虑反复打断关键任务。
+summary: 用于老人焦虑和控制感的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 心理韧性, 心理韧性与冲突降温, 老人焦虑和控制感, 长期断供, 小团队, 离线生存
-guide_links: DG-0691, DG-0692, DG-0693
+guide_links: DG-0691, DG-0692, DG-0693, DG-0694, DG-0695, DG-0720
 kiwix_topics: 老人焦虑和控制感, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 老人焦虑和控制感
 
 ## 独立边界矩阵
@@ -85,9 +84,12 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0691
-- DG-0692
-- DG-0693
+- DG-0691｜争吵升级前暂停口令｜使用时机：争吵开始升温时，如果没有共同暂停信号，会进入互相攻击。
+- DG-0692｜儿童恐慌安抚三步｜使用时机：儿童因声响、黑暗、转移或疾病恐慌，需要简单稳定的安抚流程。
+- DG-0693｜老人焦虑信息同步｜使用时机：老人反复询问消息或担心拖累团队，需要固定信息同步而不是随时解释。
+- DG-0694｜坏消息统一口径｜使用时机：坏消息如果由多人随意传播，会造成恐慌、误解和互相责怪。
+- DG-0695｜照护者疲劳替换｜使用时机：长期照护者疲劳后容易出错、发火或忽略手卫生。
+- DG-0720｜老人焦虑反复询问照护｜使用时机：老人反复询问消息、亲人、药物、撤离时间或物资是否够。
 
 ## Kiwix/ZIM 可继续查询
 

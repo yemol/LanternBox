@@ -1,0 +1,95 @@
+{
+  "id": "DG-0802",
+  "title": "先判断井口水是否可安全使用",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "井口附近看起来有水，但周边环境可能污染水源。",
+  "goal": "先判断井水是否值得取用、储存和饮用。",
+  "keywords": [
+    "水",
+    "井水",
+    "饮水安全",
+    "判断",
+    "行动卡",
+    "DG-0608",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "小口瓶",
+    "布",
+    "标签",
+    "手电"
+  ],
+  "steps": [
+    "先确认井口是否有盖、是否有裂缝、是否被踩踏。",
+    "先观察井水是否有异常气味、浑浊或漂浮物。",
+    "先确认井周是否有污水、排水沟、化肥或动物活动。",
+    "先取样观察后再决定用途。",
+    "先把可疑井水标记为待检或停用。"
+  ],
+  "check": [
+    "井口状态已检查。",
+    "周边污染源已排查。",
+    "样本已观察。"
+  ],
+  "common_mistakes": [
+    "只看井口有没有水，不看周边污染。",
+    "把可疑井水直接喝。",
+    "把井水与清水混放。"
+  ],
+  "fallback": [
+    "环境不清时先作为待检水处理。",
+    "没有取样工具时先不使用。"
+  ],
+  "stop_or_escalate": [
+    "井周有污水或异味时停止使用。",
+    "水样异常明显时直接停用。"
+  ],
+  "related_wiki": [
+    "water-chemical-risk-011",
+    "water-microbial-risk-012",
+    "water-well-safety-009"
+  ],
+  "notes": "井水不一定安全，先做现场判断再决定。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先判断井口水是否可安全使用",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先判断井口水是否可安全使用",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先判断井口水是否可安全使用",
+    "先判断井口水是否可安全使用",
+    "水",
+    "先判断井口水是否可安全使用"
+  ],
+  "risk_level": "caution"
+}

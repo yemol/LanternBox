@@ -1,0 +1,95 @@
+{
+  "id": "DG-0811",
+  "title": "先用消毒剂处理可疑水",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "没有足够火源或过滤条件时，需要用消毒剂处理水。",
+  "goal": "先用可控的消毒方式处理可疑水。",
+  "keywords": [
+    "水",
+    "消毒",
+    "饮水安全",
+    "处理",
+    "行动卡",
+    "DG-0617",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "消毒剂",
+    "干净容器",
+    "纸笔",
+    "标签"
+  ],
+  "steps": [
+    "先确认消毒剂种类和使用说明。",
+    "先把水倒入干净容器。",
+    "先按说明加足量消毒剂。",
+    "先保持规定接触时间。",
+    "先把处理后的水标记为“已消毒，待用”。"
+  ],
+  "check": [
+    "剂量已确认。",
+    "接触时间已完成。",
+    "处理后水已标记。"
+  ],
+  "common_mistakes": [
+    "用不确定剂量。",
+    "只做一半处理。",
+    "把处理后水和原水混放。"
+  ],
+  "fallback": [
+    "剂量不确定时先停用，不要猜。",
+    "水源明显化学污染时不要用消毒替代判断。"
+  ],
+  "stop_or_escalate": [
+    "无法确认使用说明时停止处理。",
+    "处理后仍有异常味道或颜色时停用。"
+  ],
+  "related_wiki": [
+    "water-boiling-boundary-028",
+    "water-disinfection-boundary-030",
+    "water-unknown-source-010"
+  ],
+  "notes": "消毒剂必须按说明使用，不能靠猜。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先用消毒剂处理可疑水",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先用消毒剂处理可疑水",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先用消毒剂处理可疑水",
+    "先用消毒剂处理可疑水",
+    "水",
+    "先用消毒剂处理可疑水"
+  ],
+  "risk_level": "caution"
+}

@@ -4,7 +4,7 @@ slug: wildlife-spoilage-001
 category: 野外食物获取 / 狩猎捕捞 / 动物蛋白补充
 priority: P1
 risk_level: high
-summary: 用气味、黏滑、颜色和内脏污染判断食物是否变质；高风险条目，腐败动物性食物不入口。
+summary: 用于腐败气味和内脏污染判断的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 野外食物, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, 腐败气味和内脏污染判断, 长期断供, 小团队, 离线生存
 guide_links: DG-0681, DG-0682, DG-0683
 kiwix_topics: 腐败气味和内脏污染判断, 野外食物获取 / 狩猎捕捞 / 动物蛋白补充, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 腐败气味和内脏污染判断
 
 ## 独立边界矩阵
@@ -85,9 +84,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0681
-- DG-0682
-- DG-0683
+- DG-0681｜未知植物不入口｜使用时机：发现未知植物或浆果，饥饿时容易尝试入口。
+- DG-0682｜捕鱼后清洗去内脏｜使用时机：捕到鱼后需要处理，但水源、刀具和内脏污染可能影响食用安全。
+- DG-0683｜病死动物禁食隔离｜使用时机：发现病死动物，可能看似可取得肉源，但病因不明。
 
 ## Kiwix/ZIM 可继续查询
 

@@ -35,7 +35,9 @@
     "留言没有时间和去向。",
     "只有一个人知道集合点。"
   ],
-  "fallback": "纸笔不足时，用明显但不暴露的固定符号标记位置，并尽快补写详细信息。",
+  "fallback": [
+    "纸笔不足时，用明显但不暴露的固定符号标记位置，并尽快补写详细信息。"
+  ],
   "stop_or_escalate": [
     "有人超过约定等待时间仍未出现，按预先约定转入备用点或记录失联信息，不临时冲动搜索高风险区域。"
   ],
@@ -127,5 +129,10 @@
     "手机没信号网络也断了",
     "怎么和家人保持通讯计划",
     "断网后联系家人"
-  ]
+  ],
+  "related_wiki": [
+    "communication-communication-plan-001",
+    "communication-offline-communication-002"
+  ],
+  "risk_level": "caution"
 }

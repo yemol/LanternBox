@@ -5,11 +5,11 @@ category: 食物
 priority: P0
 summary: 按停电时间、温度、开门次数和食物类型处理冰箱食物，并盘点电源、分级设备并安排开机窗口；中风险条目，肉类熟食可疑时不要保存到下一餐。
 tags: 食物, 停电后冷藏食品风险, 停电后冷藏食, P0, 长期生存
+guide_links: DG-0597
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 停电后冷藏食品风险
 
 ## 独立边界矩阵
@@ -79,3 +79,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录停电批次、开封/烹饪时间、保存位置、食用人员、弃用原因和剩余天数修正。
+
+## 对应 Guide
+
+- DG-0597｜无电冰箱后：食物优先食用顺序｜使用时机：停电后冰箱或冷柜无法维持低温。

@@ -3,13 +3,13 @@ title: 洪水前断电原因
 slug: safety-flood-water-001
 category: 安全
 priority: P0
-summary: 控制暴露、接触、路线和冲突边界；高风险条目，人员安全受威胁时放弃物资和任务。
+summary: 用于洪水前断电原因的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 安全, 洪水前断电原因, 洪水前断电原, P0, 长期生存
+guide_links: DG-0578
 risk_level: high
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 洪水前断电原因
 
 ## 用途
@@ -60,9 +60,7 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0631
-- DG-0632
-- DG-0633
+- DG-0578｜洪水来临前：撤高断电复核｜使用时机：洪水来临前：撤高断电复核相关场景出现，外部支援不确定，需要立刻用本地资源处理。
 
 ## Kiwix/ZIM 可继续查询
 

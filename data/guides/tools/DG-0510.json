@@ -29,7 +29,9 @@
     "用饮水桶垫重物。",
     "替代失败还硬来。"
   ],
-  "fallback": "没有安全替代时，暂停任务，改找其他方法。",
+  "fallback": [
+    "没有安全替代时，暂停任务，改找其他方法。"
+  ],
   "stop_or_escalate": [
     "替代涉及承重、电、火、医疗时，必须提高停止标准。"
   ],
@@ -77,5 +79,9 @@
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
-  ]
+  ],
+  "related_wiki": [
+    "repair-temporary-substitute-part-001"
+  ],
+  "risk_level": "normal"
 }

@@ -634,7 +634,7 @@ def render_report(
     if pb_issues:
         lines.extend(render_issue_table(pb_issues, limit=120))
     else:
-        lines.append("- 通过：520 个 Markdown slug 与 PocketBase wiki_articles 一一对应，标题、分类、摘要、标签、风险等级、状态、来源和正文均一致。")
+        lines.append(f"- 通过：{len(articles)} 个 Markdown slug 与 PocketBase wiki_articles 一一对应，标题、分类、摘要、标签、风险等级、状态、来源和正文均一致。")
     lines.append("")
 
     lines.append("## 重复与范围重叠")

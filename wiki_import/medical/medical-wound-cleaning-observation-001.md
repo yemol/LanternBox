@@ -5,11 +5,11 @@ category: 医疗急救
 priority: P0
 summary: 区分清洁、覆盖、污染来源和感染早期信号；中风险条目，红肿热痛加重、脓液或污染伤口需停止拖延。
 tags: 伤口, 清洁, 急救, 感染, 纱布, 碘伏, 医疗观察
+guide_links: DG-0612
 risk_level: caution
 status: published
 source: CDC Emergency Wound Care after a Natural Disaster；Mayo Clinic Cuts and Scrapes First Aid
 ---
-
 # 伤口清洁与观察基础
 
 ## 用途
@@ -26,7 +26,7 @@ source: CDC Emergency Wound Care after a Natural Disaster；Mayo Clinic Cuts and
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备清洁水或生理盐水、肥皂用于洗手、干净敷料或布、手套或隔离袋、废弃袋、照明、固定覆盖材料和伤口观察记录。最低条件是能清洁双手、减少污物进入伤口，并记录红肿热痛、渗液和疼痛变化。
 
 ## 操作步骤
 
@@ -148,7 +148,7 @@ source: CDC Emergency Wound Care after a Natural Disaster；Mayo Clinic Cuts and
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+没有无菌敷料时，用干净、干燥、不掉絮布料临时覆盖；没有清洁水时先覆盖保护，避免用污水冲洗。伤口出现红肿热痛扩大、脓液、异味、发热或疼痛加重时，停止普通清洁并隔离污染物、记录变化。
 
 ## 记录建议
 
@@ -175,3 +175,7 @@ source: CDC Emergency Wound Care after a Natural Disaster；Mayo Clinic Cuts and
 - 清洁镊子
 - 体温计
 - 记录本或日记模块
+
+## 对应 Guide
+
+- DG-0612｜小伤口少水清洁卡｜使用时机：小伤口需要清洁，但干净水有限，不能为了彻底冲洗耗尽饮用水。

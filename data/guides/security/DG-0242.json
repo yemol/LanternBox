@@ -30,7 +30,9 @@
     "蘑菇不认识也煮一煮试。",
     "路边污染区采野菜。"
   ],
-  "fallback": "没有可靠识别能力时，把采集重点转向水源、燃料、材料，而不是入口食物。",
+  "fallback": [
+    "没有可靠识别能力时，把采集重点转向水源、燃料、材料，而不是入口食物。"
+  ],
   "stop_or_escalate": [
     "食用后恶心、呕吐、腹泻、头晕、麻木、幻觉时，保留样本并按中毒处理。"
   ],
@@ -71,5 +73,12 @@
     "门外",
     "窗外",
     "夜间可疑"
-  ]
+  ],
+  "related_wiki": [
+    "wildlife-edible-plant-risk-index-001",
+    "wildlife-mushroom-high-risk-index-001",
+    "wildlife-toxic-plant-risk-index-001",
+    "wildlife-unknown-mushroom-no-eat-001"
+  ],
+  "risk_level": "high"
 }

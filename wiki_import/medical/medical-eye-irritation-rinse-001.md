@@ -3,13 +3,13 @@ title: 眼部异物与刺激基础处理
 slug: medical-eye-irritation-rinse-001
 category: 医疗急救
 priority: P0
-summary: 整理观察、清洁、保护和复查步骤；中风险条目，症状恶化或无法判断时停止普通处理。
+summary: 用于眼部异物与刺激基础处理的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 眼睛, 异物, 冲洗, 烟雾, 化学品, 急救
+guide_links: DG-0012
 risk_level: caution
 status: published
 source: Mayo Clinic Eye Injury First Aid；American Red Cross Eye Injuries
 ---
-
 # 眼部异物与刺激基础处理
 
 ## 用途
@@ -24,7 +24,7 @@ source: Mayo Clinic Eye Injury First Aid；American Red Cross Eye Injuries
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备清洁流动水或生理盐水、干净杯子或冲洗容器、毛巾、手卫生用品、计时方式、光源和记录纸。最低条件是能用清洁水持续冲洗，并避免揉眼、脏布擦眼和共用污染毛巾。
 
 ## 操作步骤
 
@@ -124,7 +124,7 @@ source: Mayo Clinic Eye Injury First Aid；American Red Cross Eye Injuries
 
 ## 替代方案
 
-原文未单列替代方案；本次不新增处置建议。
+没有生理盐水时，用确认清洁的流动水持续冲洗；没有冲洗杯时，用干净容器从内眼角向外侧缓慢倒水。不要用脏布擦眼、揉眼或共用毛巾；冲洗后仍疼痛、视物异常或异物嵌入时停止普通处理并保护眼部。
 
 ## 记录建议
 
@@ -139,3 +139,7 @@ source: Mayo Clinic Eye Injury First Aid；American Red Cross Eye Injuries
 - 护目镜
 
 眼睛不是能硬扛的器官。看不清时，很多系统都等于瞬间掉线。
+
+## 对应 Guide
+
+- DG-0012｜异物入眼：冲洗不揉｜使用时机：灰尘、沙粒、小虫、烟尘进入眼睛。

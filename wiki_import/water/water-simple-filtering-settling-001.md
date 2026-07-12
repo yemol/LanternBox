@@ -5,11 +5,11 @@ category: 水
 priority: P0
 summary: 说明过滤只能去除部分颗粒和异物；中风险条目，过滤不能替代煮沸或消毒，并记录责任人、时间和复查结果。
 tags: 饮用水, 过滤, 沉淀, 浑浊, 纱布, 活性炭, 煮沸
+guide_links: DG-0030
 risk_level: caution
 status: published
 source: CDC Emergency Water Supply；WHO Household Water Treatment and Safe Storage
 ---
-
 # 简易过滤与沉淀
 
 ## 用途
@@ -24,7 +24,7 @@ source: CDC Emergency Water Supply；WHO Household Water Treatment and Safe Stor
 
 ## 准备材料
 
-原文未单列准备材料；执行前按下方操作步骤准备所需物品。
+准备沉淀容器、干净过滤布或可用滤材、第二个清洁容器、盖子、标签、后续煮沸条件和处理记录。最低条件是能把“已沉淀/已过滤”和“可饮用”分开标记。
 
 ## 操作步骤
 
@@ -138,3 +138,7 @@ source: CDC Emergency Water Supply；WHO Household Water Treatment and Safe Stor
 壳中灯系统中，可以把水处理流程记录为：原始水源、是否沉淀、是否过滤、是否煮沸、最终用途、处理人、处理时间。
 
 简易过滤是“降低杂质”的步骤，不是安全饮水的最后一步。
+
+## 对应 Guide
+
+- DG-0030｜浑浊水处理：沉淀、过滤、煮沸｜使用时机：水里有泥沙、悬浮物、叶片、虫子，但没有明显油膜、化学味或强烈异味。

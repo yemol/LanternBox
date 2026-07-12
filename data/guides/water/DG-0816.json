@@ -1,0 +1,95 @@
+{
+  "id": "DG-0816",
+  "title": "先防止容器口被灰尘和昆虫污染",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "储水桶或容器口暴露在外，容易被污染。",
+  "goal": "先把容器口封好，减少二次污染。",
+  "keywords": [
+    "水",
+    "容器口",
+    "防污染",
+    "储存",
+    "行动卡",
+    "DG-0622",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "布",
+    "盖子",
+    "标签",
+    "容器"
+  ],
+  "steps": [
+    "先把容器口盖严。",
+    "先用布或盖子挡住灰尘和昆虫。",
+    "先避免容器口靠近地面。",
+    "先把容器放在干燥、清洁的位置。",
+    "先每次取水后重新盖好。"
+  ],
+  "check": [
+    "容器口已封好。",
+    "灰尘和昆虫已被挡住。",
+    "取水后已重新封好。"
+  ],
+  "common_mistakes": [
+    "容器口开着。",
+    "用破损盖子。",
+    "取水后不及时盖。"
+  ],
+  "fallback": [
+    "没有盖子时先用干净布覆盖。",
+    "高风环境时先加固定。"
+  ],
+  "stop_or_escalate": [
+    "容器口被污染后先停用并清洁。",
+    "如果无法封好就先换容器。"
+  ],
+  "related_wiki": [
+    "water-bucket-cover-025",
+    "water-bucket-setup-024",
+    "water-storage-location-006"
+  ],
+  "notes": "容器口污染往往比水本身更容易被忽略。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先防止容器口被灰尘和昆虫污染",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先防止容器口被灰尘和昆虫污染",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先防止容器口被灰尘和昆虫污染",
+    "先防止容器口被灰尘和昆虫污染",
+    "水",
+    "先防止容器口被灰尘和昆虫污染"
+  ],
+  "risk_level": "caution"
+}

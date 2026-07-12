@@ -3,13 +3,13 @@ title: 短信电话和耗电差异
 slug: communication-sms-002
 category: 通讯
 priority: P0
-summary: 比较短信、电话和即时消息的耗电与可靠性；中风险条目，弱网时优先短文本。
+summary: 用于短信电话和耗电差异的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 通讯, 短信电话和耗电差异, 短信电话和耗, P0, 长期生存
+guide_links: DG-0582
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 短信电话和耗电差异
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录各方式使用时长、电量变化、送达情况和下一次省电策略。
+
+## 对应 Guide
+
+- DG-0582｜手机低电量：固定时间开机联系｜使用时机：手机低电量：固定时间开机联系相关场景出现，外部支援不确定，需要立刻用本地资源处理。

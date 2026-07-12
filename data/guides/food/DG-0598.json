@@ -33,7 +33,11 @@
   "stop_or_escalate": [
     "多人腹泻、呕吐、视物模糊、吞咽困难或疑似中毒时，停止同批食物并优先补水和求援。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "food-canned-food-003",
+    "food-spoilage-002",
+    "food-spoilage-check-001"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "水与食物保障",
   "domains": [
@@ -88,5 +92,6 @@
     "鼓包",
     "异味",
     "禁食"
-  ]
+  ],
+  "risk_level": "caution"
 }

@@ -4,7 +4,7 @@ slug: hygiene-children-001
 category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 risk_level: high
-summary: 阻断儿童接触污水、垃圾、尸体和清洁剂；高风险条目，接触后先清洁再回到活动区。
+summary: 用于儿童接触污染物的防护的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 儿童接触污染物的防护, 长期断供, 小团队, 离线生存
 guide_links: DG-0661, DG-0662, DG-0663
 kiwix_topics: 儿童接触污染物的防护, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 儿童接触污染物的防护
 
 ## 用途
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0661
-- DG-0662
-- DG-0663
+- DG-0661｜血液污染物双层封存｜使用时机：出现血液污染布料或垃圾，需要双层封存。
+- DG-0662｜呕吐物清理后手卫生｜使用时机：清理呕吐物后需要恢复手卫生和清洁边界。
+- DG-0663｜污水进屋后的污染线｜使用时机：污水进入住所后边界不清，需要划污染线。
 
 ## Kiwix/ZIM 可继续查询
 

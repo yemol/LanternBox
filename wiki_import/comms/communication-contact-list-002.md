@@ -3,13 +3,13 @@ title: 离线联系人表为什么重要
 slug: communication-contact-list-002
 category: 通讯
 priority: P0
-summary: 记录姓名、关系、位置、备用方式和备注；中风险条目，联系人不只存在手机里。
+summary: 用于离线联系人表为什么重要的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 通讯, 离线联系人表重要, 离线联系人表, P0, 长期生存
+guide_links: DG-0191
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 离线联系人表为什么重要
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录联系人来源、同意范围、用途分级、更新人和最后验证日期。
+
+## 对应 Guide
+
+- DG-0191｜家庭联络卡｜使用时机：断网、手机没电、成员分散、儿童老人走失或照护者更换时。

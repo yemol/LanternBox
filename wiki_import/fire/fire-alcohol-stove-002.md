@@ -3,13 +3,13 @@ title: 酒精炉燃料和倾倒风险
 slug: fire-alcohol-stove-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
-summary: 控制炉体稳定、燃料距离和热炉加燃料风险；中风险条目，火未灭或炉体未冷却不补燃料。
+summary: 用于酒精炉燃料和倾倒风险的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 火源 / 保温 / 通风 / 一氧化碳风险, 酒精炉燃料和倾倒风险, 酒精炉燃料和, P0, 长期生存
+guide_links: DG-0648
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 酒精炉燃料和倾倒风险
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录燃料剩余、分装瓶编号、使用点、回收人和泄漏检查。
+
+## 对应 Guide
+
+- DG-0648｜酒精炉加燃料前冷却检查｜使用时机：酒精炉需要加燃料，但炉体或周围仍热，直接加注可能引燃。

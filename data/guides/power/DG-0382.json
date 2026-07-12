@@ -30,7 +30,9 @@
     "燃气味设备还反复点火。",
     "电池鼓包还拆壳。"
   ],
-  "fallback": "必须处理时，只做断电、隔离、通风、标记和转移这些低风险动作。",
+  "fallback": [
+    "必须处理时，只做断电、隔离、通风、标记和转移这些低风险动作。"
+  ],
   "stop_or_escalate": [
     "燃气味、烧焦味、漏液、鼓包、冒烟、结构开裂时，立即隔离并停用。"
   ],
@@ -81,5 +83,11 @@
     "剩饭",
     "冰箱食物",
     "罐头鼓包"
-  ]
+  ],
+  "related_wiki": [
+    "repair-common-material-properties-index-001",
+    "repair-metal-corrosion-index-001",
+    "repair-wood-preservation-index-001"
+  ],
+  "risk_level": "normal"
 }

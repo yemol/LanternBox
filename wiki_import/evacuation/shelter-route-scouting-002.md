@@ -5,11 +5,11 @@ category: 避难转移
 priority: P0
 summary: 规划空间分区、通道、污染隔离和夜间检查；中风险条目，结构、烟水或人员风险升高时撤离或调整。
 tags: 避难转移, 探路和路线标记原则, 探路和路线标, P0, 长期生存
+guide_links: DG-0589
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 探路和路线标记原则
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录标记规则、使用位置、清除时间、误读案例和修订。
+
+## 对应 Guide
+
+- DG-0589｜外出探路：返回时间和路线标记｜使用时机：外出探路：返回时间和路线标记相关场景出现，外部支援不确定，需要立刻用本地资源处理。

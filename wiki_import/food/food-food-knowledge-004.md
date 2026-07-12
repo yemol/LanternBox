@@ -3,13 +3,13 @@ title: 低体力消耗与食物消耗
 slug: food-food-knowledge-004
 category: 食物
 priority: P0
-summary: 明确库存、加工、保存和弃用顺序；中风险条目，包装破损、变质或来源不清时停止食用。
+summary: 用于低体力消耗与食物消耗的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 食物, 低体力消耗与食物消耗, 低体力消耗与, P0, 长期生存
+guide_links: DG-0599
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 低体力消耗与食物消耗
 
 ## 独立边界矩阵
@@ -79,3 +79,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录低体力消耗批次、开封/烹饪时间、保存位置、食用人员、弃用原因和剩余天数修正。
+
+## 对应 Guide
+
+- DG-0599｜主食不足：低体力消耗配给｜使用时机：米、面、饼干等主食不足，同时需要维持多天。

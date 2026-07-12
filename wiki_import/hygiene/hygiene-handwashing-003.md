@@ -3,13 +3,13 @@ title: 少水洗手的关键时刻
 slug: hygiene-handwashing-003
 category: 卫生
 priority: P0
-summary: 保留餐前、如厕后、伤口前后的手卫生；中风险条目，入口污染风险高于省水。
+summary: 用于少水洗手的关键时刻的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 卫生, 少水洗手的关键时刻, 少水洗手的关, P0, 长期生存
+guide_links: DG-0572
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 少水洗手的关键时刻
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录每日手卫生用水量、关键岗位是否执行、跳过原因和症状变化。
+
+## 对应 Guide
+
+- DG-0572｜洗手用水不足：替代清洁流程｜使用时机：洗手用水不足：替代清洁流程相关场景出现，外部支援不确定，需要立刻用本地资源处理。

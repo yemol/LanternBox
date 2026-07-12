@@ -30,7 +30,9 @@
     "只存在云端。",
     "资料受潮后不检查。"
   ],
-  "fallback": "没有扫描设备时，用手机拍清晰照片后保存到离线设备，再准备纸质复印或手写摘要。",
+  "fallback": [
+    "没有扫描设备时，用手机拍清晰照片后保存到离线设备，再准备纸质复印或手写摘要。"
+  ],
   "stop_or_escalate": [
     "证件受潮、丢失、转移前、家庭成员变化时，立即重新备份。"
   ],
@@ -64,5 +66,10 @@
     "库存资料",
     "成员档案"
   ],
-  "negative_keywords": []
+  "negative_keywords": [],
+  "related_wiki": [
+    "education-important-documents-offline-001",
+    "general-important-documents-copy-001"
+  ],
+  "risk_level": "caution"
 }

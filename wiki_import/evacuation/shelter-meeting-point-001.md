@@ -4,7 +4,7 @@ slug: shelter-meeting-point-001
 category: 避难转移
 priority: P0
 risk_level: high
-summary: 设置主集合点、备用点、等待时间和留言方式；高风险条目，集合点暴露或不可达时切换。
+summary: 用于集合点和备用集合点设置的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 撤离, 避难转移, 集合点和备用集合点设置, 长期断供, 小团队, 离线生存
 guide_links: DG-0641, DG-0642, DG-0643
 kiwix_topics: 集合点和备用集合点设置, 避难转移, Emergency preparedness, Survival skills, Off-grid living
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 集合点和备用集合点设置
 
 ## 用途
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0641
-- DG-0642
-- DG-0643
+- DG-0641｜撤离前背包减重复核｜使用时机：撤离前背包过重且物品重复，需要在出发前快速减重，避免拖慢队伍。
+- DG-0642｜集合点失效后的备用点｜使用时机：原集合点被封锁、积水、人员聚集或视线暴露，需要启用备用点。
+- DG-0643｜探路超时后的留守规则｜使用时机：探路成员外出超过约定时间未返回，留守组需要判断等待、撤回还是转移。
 
 ## Kiwix/ZIM 可继续查询
 

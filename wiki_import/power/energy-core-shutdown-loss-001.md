@@ -3,13 +3,13 @@ title: Core 设备断电前处理
 slug: energy-core-shutdown-loss-001
 category: 能源
 priority: P2
-summary: 安排电量分配、设备检查和停用记录；中风险条目，受潮、发热或鼓包时隔离停用。
+summary: 用于Core 设备断电前处理的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: Core, 断电, 关机, 备份, PocketBase, 数据安全
+guide_links: DG-0120
 risk_level: caution
 status: published
 source: 壳中灯 Core 运维规则；常见计算机安全关机与备份原则
 ---
-
 # Core 设备断电前处理
 
 ## 用途
@@ -59,3 +59,7 @@ source: 壳中灯 Core 运维规则；常见计算机安全关机与备份原则
 ## 记录建议
 
 记录关机时间、剩余电量、已保存内容、未完成任务和下次开机条件。
+
+## 对应 Guide
+
+- DG-0120｜断电前安全关闭｜使用时机：电量即将耗尽、需要拔电转移、雷雨前关机或设备不稳定。

@@ -5,11 +5,11 @@ category: 医疗急救
 priority: P0
 summary: 优先冷却、覆盖和隔离污染物，避免涂抹不明材料；中风险条目，面积大、深部伤或意识异常时停止普通处理。
 tags: 医疗急救, 烧烫伤冷却原理, 烧烫伤冷却原, P0, 长期生存
+guide_links: DG-0560
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 烧烫伤冷却原理
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录冷却条件、持续时间、伤者体温感受、创面变化和后续复查。
+
+## 对应 Guide
+
+- DG-0560｜烧烫伤冷却与覆盖｜使用时机：烧烫伤冷却与覆盖相关场景出现，外部支援不确定，需要立刻用本地资源处理。

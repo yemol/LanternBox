@@ -30,7 +30,9 @@
     "水培水长时间不换。",
     "把发霉土豆种进入口食物区。"
   ],
-  "fallback": "没有土时，先做短期水培葱蒜，重点补充风味和士气。",
+  "fallback": [
+    "没有土时，先做短期水培葱蒜，重点补充风味和士气。"
+  ],
   "stop_or_escalate": [
     "水培发臭、长虫、根部发黑腐烂时，停止并清洗容器。"
   ],
@@ -67,5 +69,10 @@
     "门外",
     "窗外",
     "夜间可疑"
-  ]
+  ],
+  "related_wiki": [
+    "agriculture-small-garden-pest-index-001",
+    "agriculture-soil-fertility-basics-index-001"
+  ],
+  "risk_level": "caution"
 }

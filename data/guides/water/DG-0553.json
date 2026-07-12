@@ -35,7 +35,16 @@
   "stop_or_escalate": [
     "饮用后出现呕吐、腹泻、头晕，或水源疑似化学污染时，停止使用该水源。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "water-boiling-004",
+    "water-chemical-risk-011",
+    "water-drinking-water-microbial-risk-index-001",
+    "water-filter-use-027",
+    "water-simple-filter-material-index-001",
+    "water-unknown-source-001",
+    "water-unknown-source-010",
+    "water-unverified-water-no-direct-drink-001"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "水与食物保障",
   "domains": [
@@ -102,5 +111,6 @@
     "油膜怪味",
     "水有塑料味",
     "煮开能喝吗"
-  ]
+  ],
+  "risk_level": "high"
 }

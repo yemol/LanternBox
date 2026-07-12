@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 室内取暖替代方案
 
 ## 用途
@@ -65,9 +64,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0646
-- DG-0647
-- DG-0648
+- DG-0646｜室内取暖睡前火源复查｜使用时机：室内取暖后准备睡觉，残火、热灰和通风不足可能在夜间造成危险。
+- DG-0647｜外部烟味进入封堵判断｜使用时机：外部烟味进入住所，可能来自火灾、焚烧或邻近污染，需要判断封堵还是撤离。
+- DG-0648｜酒精炉加燃料前冷却检查｜使用时机：酒精炉需要加燃料，但炉体或周围仍热，直接加注可能引燃。
 
 ## Kiwix/ZIM 可继续查询
 

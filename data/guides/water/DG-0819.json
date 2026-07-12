@@ -1,0 +1,94 @@
+{
+  "id": "DG-0819",
+  "title": "先给老人留更稳妥的饮水",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "老人更容易脱水和受水质影响，需要更稳妥的饮水安排。",
+  "goal": "先把更稳定的水和更清楚的记录留给老人。",
+  "keywords": [
+    "水",
+    "老人",
+    "饮水安全",
+    "特殊情况",
+    "行动卡",
+    "DG-0625",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "小口瓶",
+    "标签",
+    "纸笔"
+  ],
+  "steps": [
+    "先把老人饮水单独标记。",
+    "先给老人使用已确认的干净水。",
+    "先把老人饮水与普通清洁水分开。",
+    "先让照护人记录使用量和异常。",
+    "先如果水不确定就暂停使用。"
+  ],
+  "check": [
+    "老人水已单独标记。",
+    "水已确认。",
+    "照护记录已更新。"
+  ],
+  "common_mistakes": [
+    "老人和普通人员共用一桶。",
+    "只依赖感觉判断。",
+    "没有记录。"
+  ],
+  "fallback": [
+    "水量不足时先保留最安全的一部分。",
+    "水源可疑时先停用。"
+  ],
+  "stop_or_escalate": [
+    "出现脱水或明显不适时停止继续使用。",
+    "必要时重新分配优先级。"
+  ],
+  "related_wiki": [
+    "water-children-priority-044",
+    "water-drinking-priority-017",
+    "water-heat-illness-047"
+  ],
+  "notes": "老人通常需要更稳妥而不是更快的饮水安排。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先给老人留更稳妥的饮水",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先给老人留更稳妥的饮水",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先给老人留更稳妥的饮水",
+    "先给老人留更稳妥的饮水",
+    "水",
+    "先给老人留更稳妥的饮水"
+  ],
+  "risk_level": "caution"
+}

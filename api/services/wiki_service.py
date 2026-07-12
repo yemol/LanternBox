@@ -355,7 +355,10 @@ def normalize_wiki_articles_for_ai(articles: List[dict]) -> List[dict]:
 
     for article in articles:
         results.append({
-            "id": article.get("id"),
+            "id": article.get("slug") or article.get("id"),
+            "slug": article.get("slug", ""),
+            "record_id": article.get("id", ""),
+            "pocketbase_id": article.get("id", ""),
             "title": article.get("title", ""),
             "summary": article.get("summary", ""),
             "content": trim_text(article.get("content", ""), 3000),
@@ -368,6 +371,7 @@ def normalize_wiki_articles_for_ai(articles: List[dict]) -> List[dict]:
             "wiki_type": article.get("wiki_type", ""),
             "ranking_role": article.get("ranking_role", ""),
             "risk_level": article.get("risk_level", "normal"),
+            "guide_links": ensure_list(article.get("guide_links")),
             "source": article.get("source", ""),
         })
 
@@ -390,12 +394,38 @@ def normalize_wiki_article(item: Dict[str, Any]) -> Dict[str, Any]:
         "wiki_type": item.get("wiki_type", ""),
         "ranking_role": item.get("ranking_role", ""),
         "risk_level": item.get("risk_level", "normal"),
+        "guide_links": ensure_list(item.get("guide_links")),
         "status": item.get("status", ""),
         "source": item.get("source", ""),
         "updated_note": item.get("updated_note", ""),
         "created": item.get("created", ""),
         "updated": item.get("updated", ""),
     }
+
+
+def get_wiki_articles_by_slugs_for_ai(slugs: List[str]) -> List[dict]:
+    """Load canonical Wiki records by slug while preserving AI evidence identity."""
+    ordered = [str(slug).strip() for slug in slugs if str(slug).strip()]
+    ordered = list(dict.fromkeys(ordered))
+    if not ordered:
+        return []
+
+    safe = [slug.replace("\\", "\\\\").replace('"', '\\"') for slug in ordered]
+    slug_filter = " || ".join(f'slug = "{slug}"' for slug in safe)
+    data = pocketbase_get_records(
+        POCKETBASE_WIKI_ARTICLES,
+        params={
+            "page": 1,
+            "perPage": len(ordered),
+            "filter": f'status = "published" && ({slug_filter})',
+        },
+    )
+    by_slug = {
+        str(item.get("slug") or ""): normalize_wiki_article(item)
+        for item in data.get("items", [])
+        if str(item.get("slug") or "")
+    }
+    return normalize_wiki_articles_for_ai([by_slug[slug] for slug in ordered if slug in by_slug])
 
 
 def build_wiki_search_terms(

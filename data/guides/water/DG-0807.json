@@ -1,0 +1,95 @@
+{
+  "id": "DG-0807",
+  "title": "先判断水是否被污水接触",
+  "category": "水",
+  "priority": "P0",
+  "scenario": "水源附近有污水、排水沟、积水或回流风险。",
+  "goal": "先把可能被污水污染的水从饮用链路中移走。",
+  "keywords": [
+    "水",
+    "污水",
+    "污染风险",
+    "饮水安全",
+    "行动卡",
+    "DG-0613",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "tools": [
+    "标签",
+    "布",
+    "小口瓶",
+    "纸笔"
+  ],
+  "steps": [
+    "先确认水源是否位于污水、排水沟或积水附近。",
+    "先判断是否存在回流、渗透或地面污染。",
+    "先把可疑水单独标记。",
+    "先把它和清洁水、饮用水分开。",
+    "先记录污染来源和发现时间。"
+  ],
+  "check": [
+    "污染源已确认。",
+    "可疑水已隔离。",
+    "记录已完成。"
+  ],
+  "common_mistakes": [
+    "只看水面，不看周边环境。",
+    "把受污染水和清水放一起。",
+    "没有做标记。"
+  ],
+  "fallback": [
+    "污染线索不强时先待检。",
+    "如果不能确认，就先按非饮用处理。"
+  ],
+  "stop_or_escalate": [
+    "污水污染痕迹明显时停止使用。",
+    "无法隔离时先停用整批水。"
+  ],
+  "related_wiki": [
+    "water-contamination-separation-033",
+    "water-flood-risk-049",
+    "water-source-judgement-002"
+  ],
+  "notes": "污水接触不一定看得见，先保守判断。",
+  "category_original": "水",
+  "domains": [
+    "water"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "water_long_term"
+  ],
+  "objects": [
+    "水",
+    "先判断水是否被污水接触",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "先判断水是否被污水接触",
+    "长期断供",
+    "小团队",
+    "行动卡"
+  ],
+  "risks": [
+    "resource_depletion",
+    "contamination",
+    "injury_or_exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "water",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "先判断水是否被污水接触",
+    "先判断水是否被污水接触",
+    "水",
+    "先判断水是否被污水接触"
+  ],
+  "risk_level": "high"
+}

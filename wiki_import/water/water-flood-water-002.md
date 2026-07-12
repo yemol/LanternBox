@@ -4,7 +4,7 @@ slug: water-flood-water-002
 category: 水
 priority: P0
 risk_level: high
-summary: 安排取水、处理、储存和饮用分区；高风险条目，水源异常或容器污染时先隔离。
+summary: 用于洪水后井水和地下室积水风险的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 水, 洪水后井水和地下室积水风险, 长期断供, 小团队, 离线生存
 guide_links: DG-0601, DG-0602, DG-0603
 kiwix_topics: 洪水后井水和地下室积水风险, 水, Emergency preparedness, Survival skills, Public health
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 洪水后井水和地下室积水风险
 
 ## 用途
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0601
-- DG-0602
-- DG-0603
+- DG-0601｜夜间取水前的路线和容器检查｜使用时机：夜间必须外出取水，但路线照明不足、地面状态不明，取水人员需要先确认往返路径和容器状态。
+- DG-0602｜洪水后取水点禁用判断｜使用时机：洪水退去后附近水点看似可用，但水体可能混入污水、燃油、动物尸体或化学残留。
+- DG-0603｜多人共用饮用水领取表｜使用时机：多人共用饮用水，领取过程如果没有记录，容易出现重复领取、漏发和争执。
 
 ## Kiwix/ZIM 可继续查询
 

@@ -5,11 +5,11 @@ category: 污染控制 / 隔离 / 清洁分区
 priority: P0
 summary: 阻断粪便、手、餐具、食物和饮水之间的路径；中风险条目，手卫生失败时不处理入口食物。
 tags: 卫生, 粪口传播基础, P0, 长期生存
+guide_links: DG-0574
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 粪口传播基础
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录如厕清理时间、洗手物资消耗、腹泻呕吐成员、共同接触物和调整措施。
+
+## 对应 Guide
+
+- DG-0574｜呕吐物和粪便污染：隔离清洁｜使用时机：呕吐物和粪便污染：隔离清洁相关场景出现，外部支援不确定，需要立刻用本地资源处理。

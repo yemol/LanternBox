@@ -5,11 +5,11 @@ category: 水
 priority: P0
 summary: 尽早收集现有干净容器和管道余水；中风险条目，容器先清洁再储水，并记录责任人、时间和复查结果。
 tags: 水, 停水初期要抢收容器, 停水初期为什, P0, 长期生存
+guide_links: DG-0552
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 停水初期为什么要抢收容器
 
 ## 用途
@@ -58,3 +58,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录容器数量、来源、用途、清洁状态、标签和停用。
+
+## 对应 Guide
+
+- DG-0552｜停水后第一小时：容器收集和分区｜使用时机：刚停水或水压异常，仍可能有少量余水或可收集水。

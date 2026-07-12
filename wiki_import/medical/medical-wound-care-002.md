@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 污染伤口和破伤风风险概念
 
 ## 用途
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0611
-- DG-0612
-- DG-0613
+- DG-0611｜儿童发热咳嗽观察卡｜使用时机：儿童出现发热和咳嗽，外部医疗不稳定，需要家庭先做观察、隔离和危险信号记录。
+- DG-0612｜小伤口少水清洁卡｜使用时机：小伤口需要清洁，但干净水有限，不能为了彻底冲洗耗尽饮用水。
+- DG-0613｜鼻出血不仰头处理｜使用时机：成员鼻出血时常本能仰头，可能导致吞血、呛咳和误判出血量。
 
 ## Kiwix/ZIM 可继续查询
 

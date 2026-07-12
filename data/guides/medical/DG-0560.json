@@ -34,7 +34,11 @@
   "stop_or_escalate": [
     "面积较大、面部会阴手脚、深色焦皮、吸入烟雾、儿童老人或疼痛异常时，升级求援。"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "medical-burn-care-002",
+    "medical-burn-first-aid-001",
+    "medical-trauma-complication-index-001"
+  ],
   "notes": "P0 长期生存能力库第一批扩容行动卡。",
   "category_original": "医疗与照护",
   "domains": [
@@ -89,5 +93,6 @@
     "冷却",
     "覆盖",
     "水泡"
-  ]
+  ],
+  "risk_level": "high"
 }

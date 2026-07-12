@@ -4,15 +4,14 @@ slug: psychology-routine-001
 category: 心理韧性与冲突降温
 priority: P1
 risk_level: caution
-summary: 用固定短会、清洁、感谢或收尾动作维持稳定感；中风险条目，仪式不挤占保命任务。
+summary: 用于团队仪式感和稳定感的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 心理韧性, 心理韧性与冲突降温, 团队仪式感和稳定感, 长期断供, 小团队, 离线生存
-guide_links: DG-0691, DG-0692, DG-0693
+guide_links: DG-0691, DG-0692, DG-0693, DG-0717
 kiwix_topics: 团队仪式感和稳定感, 心理韧性与冲突降温, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 团队仪式感和稳定感
 
 ## 独立边界矩阵
@@ -85,9 +84,10 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0691
-- DG-0692
-- DG-0693
+- DG-0691｜争吵升级前暂停口令｜使用时机：争吵开始升温时，如果没有共同暂停信号，会进入互相攻击。
+- DG-0692｜儿童恐慌安抚三步｜使用时机：儿童因声响、黑暗、转移或疾病恐慌，需要简单稳定的安抚流程。
+- DG-0693｜老人焦虑信息同步｜使用时机：老人反复询问消息或担心拖累团队，需要固定信息同步而不是随时解释。
+- DG-0717｜长期断供下安排日常节奏｜使用时机：停电、断网、断水或补给不稳定持续多日，成员开始失去时间感和秩序。
 
 ## Kiwix/ZIM 可继续查询
 

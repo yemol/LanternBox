@@ -50,8 +50,10 @@
     "连续两次测试失败时，不再把它作为关键联络路径。"
   ],
   "related_wiki": [
-    "communication-offline-communication-001",
     "communication-contact-window-001",
+    "communication-device-daily-check-001",
+    "communication-lora-node-daily-001",
+    "communication-offline-communication-001",
     "communication-sms-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
@@ -93,5 +95,6 @@
     "LoRa 节点每日状态记录",
     "通讯",
     "LoRa 节点每日状态记录"
-  ]
+  ],
+  "risk_level": "caution"
 }

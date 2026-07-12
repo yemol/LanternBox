@@ -51,7 +51,8 @@
   ],
   "related_wiki": [
     "energy-battery-capacity-001",
-    "energy-fever-001"
+    "energy-fever-001",
+    "tools-charging-cable-port-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "能源",
@@ -92,5 +93,6 @@
     "接口潮湿和线头保护",
     "能源",
     "接口潮湿和线头保护"
-  ]
+  ],
+  "risk_level": "high"
 }

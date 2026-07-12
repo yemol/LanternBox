@@ -6,13 +6,12 @@ priority: P0
 risk_level: high
 summary: 维修前先断电、停用、标记和交接；高风险条目，带电风险不明时不拆修，并记录责任人、时间和复查结果。
 tags: 维修, 维修 / 制作 / 替代 / 拆解再利用, 临时维修前为什么先断电停用, 长期断供, 小团队, 离线生存
-guide_links: DG-0621, DG-0622, DG-0623
+guide_links: DG-0621, DG-0622, DG-0623, DG-0624, DG-0625
 kiwix_topics: 临时维修前为什么先断电停用, 维修 / 制作 / 替代 / 拆解再利用, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 临时维修前为什么先断电停用
 
 ## 用途
@@ -64,9 +63,11 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0621
-- DG-0622
-- DG-0623
+- DG-0621｜门窗松动低噪加固｜使用时机：门窗松动但不能制造过大声响，需要在夜间或低暴露状态下临时加固入口。
+- DG-0622｜鞋底开裂转移前修补｜使用时机：转移前鞋底开裂，继续行走可能进水、绊倒或磨伤脚部。
+- DG-0623｜水管滴漏临时接水降级｜使用时机：水管滴漏但暂时无法完整维修，需要先接水、减压和保护周围物资。
+- DG-0624｜工具生锈清洁和封存｜使用时机：工具受潮生锈，若直接用于维修或食物处理，会降低可靠性并增加割伤风险。
+- DG-0625｜拆解旧物前割伤防护｜使用时机：需要拆解旧物取零件，但材料可能有锐边、弹性件、玻璃和残留污染。
 
 ## Kiwix/ZIM 可继续查询
 

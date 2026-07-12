@@ -5,11 +5,11 @@ category: 风险决策
 priority: P0
 summary: 区分事实、情绪和改进动作进行短复盘；中风险条目，不把复盘变成追责，并记录责任人、时间和复查结果。
 tags: 安全, 安全记录的复盘价值, 安全记录的复, P0, 长期生存
+guide_links: DG-0543
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 安全记录的复盘价值
 
 ## 用途
@@ -41,7 +41,7 @@ source: LanternBox internal curated knowledge
 ## 判断标准
 
 - 复盘能产生具体规则和责任人，说明有效。
-- 只写“注意安全”，说明复盘不足。
+- 只写“下次小心”，说明复盘不足。
 - 同类事件重复出现，说明规则没有进入日常流程。
 
 ## 风险提示
@@ -60,9 +60,7 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0631
-- DG-0632
-- DG-0633
+- DG-0543｜夜间守夜与异常记录｜使用时机：夜间外部情况不明，需要持续观察但人员体力有限。
 
 ## Kiwix/ZIM 可继续查询
 

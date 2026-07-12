@@ -3,13 +3,13 @@ title: 明火照明的睡前风险
 slug: fire-open-flame-002
 category: 火源 / 保温 / 通风 / 一氧化碳风险
 priority: P0
-summary: 控制火源、通风、燃料和睡前复查；中风险条目，烟味、燃气味或人员不适时停止用火。
+summary: 用于明火照明的睡前风险的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 火源 / 保温 / 通风 / 一氧化碳风险, 明火照明的睡前风险, 明火照明的睡, P0, 长期生存
+guide_links: DG-0649
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 明火照明的睡前风险
 
 ## 用途
@@ -59,3 +59,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录明火类型、熄灭时间、复核人、替代照明和遗漏点。
+
+## 对应 Guide
+
+- DG-0649｜蜡烛照明无人看守禁用｜使用时机：蜡烛用于照明，但无人看守时可能被风、儿童或物资碰倒。

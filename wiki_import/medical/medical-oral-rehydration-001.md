@@ -4,7 +4,7 @@ slug: medical-oral-rehydration-001
 category: 医疗急救
 priority: P0
 risk_level: high
-summary: 整理观察、清洁、保护和复查步骤；高风险条目，症状恶化或无法判断时停止普通处理。
+summary: 用于补液盐和普通饮水的差异的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 医疗, 医疗急救, 补液盐和普通饮水的差异, 长期断供, 小团队, 离线生存
 guide_links: DG-0611, DG-0612, DG-0613
 kiwix_topics: 补液盐和普通饮水的差异, 医疗急救, Emergency preparedness, Survival skills, Public health
@@ -12,7 +12,6 @@ last_reviewed: 2026-07-02
 status: published
 source: LanternBox internal curated knowledge
 ---
-
 # 补液盐和普通饮水的差异
 
 ## 用途
@@ -64,9 +63,9 @@ source: LanternBox internal curated knowledge
 
 ## 对应 Guide
 
-- DG-0611
-- DG-0612
-- DG-0613
+- DG-0611｜儿童发热咳嗽观察卡｜使用时机：儿童出现发热和咳嗽，外部医疗不稳定，需要家庭先做观察、隔离和危险信号记录。
+- DG-0612｜小伤口少水清洁卡｜使用时机：小伤口需要清洁，但干净水有限，不能为了彻底冲洗耗尽饮用水。
+- DG-0613｜鼻出血不仰头处理｜使用时机：成员鼻出血时常本能仰头，可能导致吞血、呛咳和误判出血量。
 
 ## Kiwix/ZIM 可继续查询
 
