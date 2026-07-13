@@ -6,7 +6,7 @@ priority: P1
 risk_level: high
 summary: 用于临时支架、架板和挂架投入使用前检查三角支撑、晃动、压痕和失效后果。
 tags: 维修, 支架, 受力检查, 倒塌, 临时结构
-guide_links:
+guide_links: DG-0833
 kiwix_topics: bracket, support, temporary structure
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录支架位置、允许载荷描述、测试物、连接点状态、禁放物和复查时间。
+
+## 对应 Guide
+
+- DG-0833 固定点失效判断

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "tools_repair_rope_wear_load",
+    "question": "这根旧绳有几段磨毛发白，还有一处像被火烫过，今天能不能继续拿来吊水桶或拉重物？",
+    "expected_wiki": [
+      "repair-rope-full-length-inspection-001",
+      "repair-knot-slip-check-001"
+    ],
+    "focus_terms": ["全长", "割伤", "烧焦", "局部变细", "禁承重", "降级"],
+    "risk": "high"
+  },
+  {
+    "id": "tools_repair_anchor_loose",
+    "question": "棚布绑在墙角固定点上会晃，拉紧时还有咔咔响，这个点还能继续绑东西吗？",
+    "expected_wiki": [
+      "repair-anchor-point-failure-check-001",
+      "repair-simple-bracket-load-check-001"
+    ],
+    "focus_terms": ["晃动", "裂缝", "拔出", "异响", "禁承重", "换固定点"],
+    "risk": "high"
+  },
+  {
+    "id": "tools_repair_wire_jacket_tape",
+    "question": "延长线外皮破了，能看到里面颜色不一样的线，能不能先缠胶带继续给设备通电？",
+    "expected_wiki": [
+      "repair-wire-jacket-damage-stop-001"
+    ],
+    "focus_terms": ["露铜", "发热", "烧焦", "潮湿", "停用", "不可通电"],
+    "risk": "high"
+  },
+  {
+    "id": "tools_repair_cracked_bucket_water",
+    "question": "塑料桶侧面裂了一条小缝，装水后会慢慢渗，还能不能继续当储水桶用？",
+    "expected_wiki": [
+      "repair-cracked-container-leak-control-001",
+      "repair-plastic-bucket-crack-load-reduction-001"
+    ],
+    "focus_terms": ["裂缝位置", "减载", "非饮用", "降级", "渗漏", "复查"],
+    "risk": "caution"
+  },
+  {
+    "id": "tools_repair_saw_board_fixture",
+    "question": "要手锯一块木板，但没有工作台，锯之前怎么把板子固定住才不容易滑和夹锯？",
+    "expected_wiki": [
+      "repair-saw-cut-support-001",
+      "repair-temporary-clamp-fixture-001"
+    ],
+    "focus_terms": ["夹持", "支撑", "切割线", "手的位置", "防滑", "停手"],
+    "risk": "caution"
+  },
+  {
+    "id": "tools_repair_blade_chip_continue",
+    "question": "美工刀刀片有个崩口，切纸板时会卡一下，这种刀片还能继续用吗？",
+    "expected_wiki": [
+      "repair-blade-dull-chip-check-001",
+      "repair-knife-use-storage-001"
+    ],
+    "focus_terms": ["崩口", "裂纹", "卡顿", "换刀", "降级", "收纳"],
+    "risk": "high"
+  },
+  {
+    "id": "tools_repair_used_fastener_reuse",
+    "question": "拆下来的旧螺丝和旧钉子有点锈，有的头也花了，哪些还能复用，哪些不能再用在承重位置？",
+    "expected_wiki": [
+      "repair-used-screw-nail-reuse-check-001",
+      "repair-fastener-washer-storage-001"
+    ],
+    "focus_terms": ["弯曲", "锈蚀", "滑牙", "承重禁用", "分类", "保存"],
+    "risk": "caution"
+  },
+  {
+    "id": "tools_repair_zip_tie_load",
+    "question": "扎带够多的话，能不能临时拿来吊住一小袋工具或固定一根会受力的杆子？",
+    "expected_wiki": [
+      "repair-zip-tie-light-duty-boundary-001",
+      "repair-tool-substitute-risk-check-001"
+    ],
+    "focus_terms": ["轻载", "临时固定", "紫外", "不可吊挂", "复查", "替代"],
+    "risk": "high"
+  },
+  {
+    "id": "tools_repair_glue_not_holding",
+    "question": "两块塑料片用胶水粘了又开，表面还有灰和水汽，重新粘之前要怎么处理，粘不住怎么办？",
+    "expected_wiki": [
+      "repair-glue-surface-prep-001",
+      "repair-fabric-tape-tear-reinforcement-001"
+    ],
+    "focus_terms": ["清洁", "干燥", "粗化", "压紧", "固化", "降级"],
+    "risk": "caution"
+  },
+  {
+    "id": "tools_repair_tool_handover",
+    "question": "小组里工具经常借出去，回来才发现钳子松了、刀片缺口了，借用和损坏应该怎么交接记录？",
+    "expected_wiki": [
+      "repair-tool-id-handover-log-001",
+      "repair-tool-borrow-return-log-001",
+      "repair-wear-tool-life-log-001"
+    ],
+    "focus_terms": ["编号", "借出人", "归还状态", "损坏位置", "禁用标签", "复查时间"],
+    "risk": "normal"
+  }
+]

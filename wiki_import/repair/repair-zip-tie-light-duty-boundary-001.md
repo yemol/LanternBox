@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于扎带固定线束、轻物和临时扣具时判断受力、老化和割手风险，避免把扎带当承重件。
 tags: 维修, 扎带, 临时固定, 轻载, 老化
-guide_links:
+guide_links: DG-0151
 kiwix_topics: cable tie, temporary fastening, zip tie
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录扎带用途、数量、受力方向、复查时间和是否需要替换为正式连接。
+
+## 对应 Guide
+
+- DG-0151 胶带和扎带临时固定

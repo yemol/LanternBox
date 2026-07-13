@@ -42455,5 +42455,151 @@
       "擦伤菜短存",
       "一筐发霉"
     ]
+  },
+  {
+    "id": "DG-0833",
+    "title": "固定点失效判断",
+    "category": "工具维修与替代制作",
+    "category_original": "维修工具",
+    "risk_level": "high",
+    "domains": [
+      "tools",
+      "security",
+      "shelter",
+      "repair"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "structural_risk"
+    ],
+    "objects": [
+      "tools",
+      "building",
+      "shelter"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "固定点失效判断",
+      "固定点",
+      "挂点",
+      "绑点",
+      "松动",
+      "异响",
+      "裂缝",
+      "承重",
+      "禁承重",
+      "工具维修",
+      "替代制作"
+    ],
+    "negative_keywords": [
+      "固定开机",
+      "通信窗口",
+      "固定时间",
+      "断网"
+    ],
+    "ranking_role": null,
+    "guide_type": null,
+    "primary_domain": null,
+    "primary_intent": null,
+    "top1_aliases": []
+  },
+  {
+    "id": "DG-0834",
+    "title": "锯切前固定与支撑",
+    "category": "工具维修与替代制作",
+    "category_original": "维修工具",
+    "risk_level": "high",
+    "domains": [
+      "tools",
+      "security",
+      "repair"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "structural_risk"
+    ],
+    "objects": [
+      "tools",
+      "building"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "锯切前固定与支撑",
+      "手锯",
+      "木板",
+      "切割线",
+      "夹具",
+      "夹锯",
+      "防滑",
+      "支撑",
+      "手的位置",
+      "工具维修"
+    ],
+    "negative_keywords": [
+      "固定开机",
+      "通信窗口",
+      "固定时间",
+      "断网"
+    ],
+    "ranking_role": null,
+    "guide_type": null,
+    "primary_domain": null,
+    "primary_intent": null,
+    "top1_aliases": []
+  },
+  {
+    "id": "DG-0835",
+    "title": "胶水粘接前表面处理",
+    "category": "工具维修与替代制作",
+    "category_original": "维修工具",
+    "risk_level": "caution",
+    "domains": [
+      "tools",
+      "repair"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair"
+    ],
+    "objects": [
+      "tools",
+      "supplies"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "胶水粘接前表面处理",
+      "胶水",
+      "粘接",
+      "塑料片",
+      "表面",
+      "灰尘",
+      "水汽",
+      "干燥",
+      "粗化",
+      "固化",
+      "工具维修"
+    ],
+    "negative_keywords": [
+      "留种粮",
+      "种子",
+      "主食",
+      "粮食"
+    ],
+    "ranking_role": null,
+    "guide_type": null,
+    "primary_domain": null,
+    "primary_intent": null,
+    "top1_aliases": []
   }
 ]

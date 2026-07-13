@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于判断刀片、锯齿和剪刃变钝、卷刃或崩口后的降级和停用，减少打滑割伤。
 tags: 维修, 刀片, 崩口, 变钝, 割伤风险
-guide_links:
+guide_links: DG-0154
 kiwix_topics: blade maintenance, dull blade, chipped edge
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录刀片编号、更换时间、崩口原因、剩余备用数量和禁用位置。
+
+## 对应 Guide
+
+- DG-0154 刀具和锐器管理

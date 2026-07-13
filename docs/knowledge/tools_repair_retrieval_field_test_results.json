@@ -1,0 +1,1997 @@
+{
+  "generated_at": "2026-07-13T17:59:14.325461+00:00",
+  "cases": [
+    {
+      "id": "tools_repair_rope_wear_load",
+      "question": "这根旧绳有几段磨毛发白，还有一处像被火烫过，今天能不能继续拿来吊水桶或拉重物？",
+      "expected_wiki": [
+        "repair-rope-full-length-inspection-001",
+        "repair-knot-slip-check-001"
+      ],
+      "focus_terms": [
+        "全长",
+        "割伤",
+        "烧焦",
+        "局部变细",
+        "禁承重",
+        "降级"
+      ],
+      "risk": "high",
+      "guides_selected": [
+        {
+          "id": "DG-0156",
+          "title": "简易绳结固定",
+          "risk_level": "normal"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-knot-slip-check-001",
+          "title": "绳结固定和滑脱检查"
+        },
+        {
+          "slug": "repair-rope-full-length-inspection-001",
+          "title": "绳索承重前检查"
+        },
+        {
+          "slug": "repair-rope-load-limit-001",
+          "title": "绳索承重"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-knot-slip-check-001",
+        "repair-rope-full-length-inspection-001",
+        "repair-rope-load-limit-001"
+      ],
+      "kiwix_selected": [],
+      "expected_wiki_hit": true,
+      "batch4h_wiki_hit": true,
+      "correct_domain_hit": true,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "focus_term_hits": [
+        "全长",
+        "割伤",
+        "烧焦",
+        "局部变细",
+        "禁承重",
+        "降级"
+      ],
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "answer_generated": false,
+      "answer_error": "",
+      "answer": "",
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 4,
+          "guide": 8,
+          "kiwix": 4
+        },
+        "candidate_count": 16,
+        "selected_count": 4,
+        "source_plan_count": 3,
+        "core_terms": [
+          "这根旧绳",
+          "根旧绳有",
+          "旧绳有几",
+          "绳有几段",
+          "水桶",
+          "有几段磨",
+          "几段磨毛",
+          "段磨毛发"
+        ],
+        "ok": false,
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "stage": "selector"
+      },
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0156",
+          "id": "DG-0156",
+          "title": "简易绳结固定",
+          "label": "guide",
+          "summary": "用简单可靠的绳结完成固定，避免一拉就散。",
+          "snippet": "需要捆绑物资、固定防水布、晾晒衣物、做边界或临时牵引。",
+          "reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "selection_reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "retrieval_query_profiles": [
+            "repair_rope_load"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 80.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:42",
+            "profile_candidate_anchor_boost:38:绳子,绳结,磨损,断股"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-knot-slip-check-001",
+          "id": "repair-knot-slip-check-001",
+          "title": "绳结固定和滑脱检查",
+          "label": "wiki",
+          "summary": "用于绳结打好后的尾绳、受力方向和滑脱复查，避免临时固定在震动、风和牵拉中松开。",
+          "snippet": "# 绳结固定和滑脱检查\n\n## 用途\n\n在固定防水布、捆扎物资、晾晒衣物、限位门窗和做临时牵引后，检查绳结是否会沿固定点滑脱或在受力后自行松开。\n\n## 适用场景\n\n适用于低载、低高度、失效后可及时发现的绳结固定。不适用于人员保护、高处吊挂、救援牵引和关键承重。\n\n## 准备材料\n\n最低条件是绳索、固定点、布垫、标签和记录纸。条件允许时准备备用绳、护角、双固定点和不同颜色尾绳标记。\n\n## 操作步骤\n\n1. 先确认绳结受力方向，绳结必须在受力后越拉越紧或至少不翻转。\n2. 留出足够尾绳，尾绳太短先重打，不靠胶带补救。\n3. 固定点有锐边时加布垫，绳子不要直接贴着金属毛刺。\n4. 低力拉紧三次，",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_rope_load"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 80.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:38:绳子,绳结,磨损,断股"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-knot-slip-check-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0156"
+          ],
+          "record_id": "r0246c5bfac4aec",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0156",
+          "linked_guide_title": "简易绳结固定",
+          "metadata": {
+            "record_id": "r0246c5bfac4aec"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-rope-full-length-inspection-001",
+          "id": "repair-rope-full-length-inspection-001",
+          "title": "绳索承重前检查",
+          "label": "wiki",
+          "summary": "用于绳索牵拉、吊挂和固定前逐段摸查割伤、烧焦、变细和滑脱风险，明确降级用途。",
+          "snippet": "# 绳索承重前检查\n\n## 用途\n\n在用绳索拖拉物资、固定防水布、吊挂轻物或限制门窗前，逐段判断这根绳能否承担本次用途，避免把旧绳误用于承重。\n\n## 适用场景\n\n适用于低高度、轻载、失效后果可控的牵拉和固定。不适用于人员悬吊、救援、攀爬、头顶重物、高处吊装或无法估计负载的任务。\n\n## 准备材料\n\n最低条件是绳索、手套、标签、记录纸和低位测试空间。条件允许时准备护角、备用绳、布套和禁承重标记。\n\n## 操作步骤\n\n1. 把绳索从一端到另一端摸一遍，不只看外层干净程度。\n2. 找硬结、发白、割伤、烧焦、局部变细、外皮松散、霉味和旧结压痕。\n3. 检查两端、结点附近和接触锐边的位置，这些位置优先",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_rope_load"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 80.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:38:绳子,绳结,磨损,断股"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-rope-full-length-inspection-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0156"
+          ],
+          "record_id": "rb09eb1079b4ebb",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0156",
+          "linked_guide_title": "简易绳结固定",
+          "metadata": {
+            "record_id": "rb09eb1079b4ebb"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-rope-load-limit-001",
+          "id": "repair-rope-load-limit-001",
+          "title": "绳索承重",
+          "label": "wiki",
+          "summary": "用于绳索承重的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 绳索承重\n\n## 用途\n\n用于判断绳索、绑带、晾衣绳、拖拽绳和固定绳能否承担当前负载，避免把老化、潮湿、打结或磨损绳索用于人员、重物或关键固定。\n\n## 适用场景\n\n适用于低高度、轻载、可观察的捆扎、拖拽和临时固定。不适用于人员承重、高处悬挂、救援吊拉、关键承重、磨损来源不明或受过冲击载荷的绳索。\n\n## 准备材料\n\n最低条件是绳索、标记物、记录纸和可做低力测试的安全空间。条件允许时准备护角、备用绳、手套、固定点保护和负载标记。\n\n## 操作步骤\n\n1. 先确认绳索用途、预计负载、固定点和失效后果。\n2. 沿全长检查磨毛、割痕、硬结、霉味、潮湿、变色、熔痕和打结处。\n3. 检查固定点边缘是",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_rope_load"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 80.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:38:绳子,绳结,磨损,断股"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-rope-load-limit-001",
+          "category": "recc4b80e1196f8",
+          "risk_level": "normal",
+          "guide_links": [
+            "DG-0156"
+          ],
+          "record_id": "ra74908fa5315ec",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0156",
+          "linked_guide_title": "简易绳结固定",
+          "metadata": {
+            "record_id": "ra74908fa5315ec"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "tools_repair_anchor_loose",
+      "question": "棚布绑在墙角固定点上会晃，拉紧时还有咔咔响，这个点还能继续绑东西吗？",
+      "expected_wiki": [
+        "repair-anchor-point-failure-check-001",
+        "repair-simple-bracket-load-check-001"
+      ],
+      "focus_terms": [
+        "晃动",
+        "裂缝",
+        "拔出",
+        "异响",
+        "禁承重",
+        "换固定点"
+      ],
+      "risk": "high",
+      "guides_selected": [
+        {
+          "id": "DG-0833",
+          "title": "固定点失效判断",
+          "risk_level": "high"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-anchor-point-failure-check-001",
+          "title": "固定点失效判断"
+        },
+        {
+          "slug": "repair-simple-bracket-load-check-001",
+          "title": "简易支架受力检查"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-anchor-point-failure-check-001",
+        "repair-simple-bracket-load-check-001"
+      ],
+      "kiwix_selected": [],
+      "expected_wiki_hit": true,
+      "batch4h_wiki_hit": true,
+      "correct_domain_hit": true,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "focus_term_hits": [
+        "晃动",
+        "裂缝",
+        "异响"
+      ],
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "answer_generated": false,
+      "answer_error": "",
+      "answer": "",
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 8,
+          "guide": 8,
+          "kiwix": 4
+        },
+        "candidate_count": 20,
+        "selected_count": 3,
+        "source_plan_count": 3,
+        "core_terms": [
+          "墙角固定",
+          "角固定点",
+          "固定点上",
+          "定点上会",
+          "固定点",
+          "固定",
+          "点上会晃",
+          "有咔咔响"
+        ],
+        "ok": false,
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "stage": "selector"
+      },
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0833",
+          "id": "DG-0833",
+          "title": "固定点失效判断",
+          "label": "guide",
+          "summary": "先卸载或减小拉力，判断固定点是否还能低载使用，避免继续承重造成拉脱、倒塌或伤人。",
+          "snippet": "棚布、绳索、支架或临时挂点受力时，固定点出现晃动、裂纹、拔出、异响或松动。",
+          "reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "selection_reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "retrieval_query_profiles": [
+            "repair_anchor_fastening"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 78.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:42",
+            "profile_candidate_anchor_boost:36:固定点,挂点,绑点,松动"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-anchor-point-failure-check-001",
+          "id": "repair-anchor-point-failure-check-001",
+          "title": "固定点失效判断",
+          "label": "wiki",
+          "summary": "用于判断门把、栏杆、钉子、管线和家具是否能作为固定点，避免拉脱、倒塌和管线破坏。",
+          "snippet": "# 固定点失效判断\n\n## 用途\n\n在绑绳、拉布、固定门窗、悬挂轻物或牵引物资前，判断固定点本身是否会被拉松、掰断或带出墙体。\n\n## 适用场景\n\n适用于低载临时固定和限位。不适用于人体保护、吊装、救援牵引、结构支撑和不明管线附近的受力固定。\n\n## 准备材料\n\n最低条件是手电、标记笔、布垫和记录纸。条件允许时准备备用固定点、护角、木楔、宽带和低载测试物。\n\n## 操作步骤\n\n1. 先判断失效后果：会不会砸人、堵门、拉断管线或损坏饮水容器。\n2. 观察固定点周围是否有裂缝、锈蚀、松动、变形、潮湿、虫蛀和旧修补。\n3. 用手向预计受力方向轻推轻拉，观察是否有位移、异响或粉尘掉落。\n4. 锐边固定",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_anchor_fastening"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 78.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:固定点,挂点,绑点,松动"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-anchor-point-failure-check-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0833"
+          ],
+          "record_id": "r0ca32fc69ea5cf",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0833",
+          "linked_guide_title": "固定点失效判断",
+          "metadata": {
+            "record_id": "r0ca32fc69ea5cf"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-simple-bracket-load-check-001",
+          "id": "repair-simple-bracket-load-check-001",
+          "title": "简易支架受力检查",
+          "label": "wiki",
+          "summary": "用于临时支架、架板和挂架投入使用前检查三角支撑、晃动、压痕和失效后果。",
+          "snippet": "# 简易支架受力检查\n\n## 用途\n\n检查用木板、绳、铁丝、旧家具和金属片搭出的临时支架，确认它只能承受什么重量、在哪个方向容易倒。\n\n## 适用场景\n\n适用于轻物收纳、晾晒、工具临放和临时遮挡。不适用于人员踩踏、睡眠平台、头顶重物、火源设备和药品饮水关键架。\n\n## 准备材料\n\n最低条件是支架、标记笔、低重量测试物、记录纸和清空的倒落区。条件允许时准备三角撑、宽垫片、绳带限位和备用支撑。\n\n## 操作步骤\n\n1. 确认支架的重心、支撑脚、连接点和失效后会落向哪里。\n2. 检查连接处是否有裂纹、滑移、锈蚀、绳带勒痕和螺丝松动。\n3. 从低重量开始放置，观察压痕、晃动、弯曲和异响。\n4. 对高窄",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_anchor_fastening"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 78.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:固定点,挂点,绑点,松动"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-simple-bracket-load-check-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0833"
+          ],
+          "record_id": "r00c86d612c83bc",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0833",
+          "linked_guide_title": "固定点失效判断",
+          "metadata": {
+            "record_id": "r00c86d612c83bc"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "tools_repair_wire_jacket_tape",
+      "question": "延长线外皮破了，能看到里面颜色不一样的线，能不能先缠胶带继续给设备通电？",
+      "expected_wiki": [
+        "repair-wire-jacket-damage-stop-001"
+      ],
+      "focus_terms": [
+        "露铜",
+        "发热",
+        "烧焦",
+        "潮湿",
+        "停用",
+        "不可通电"
+      ],
+      "risk": "high",
+      "guides_selected": [
+        {
+          "id": "DG-0567",
+          "title": "电线破皮：临时绝缘和停用判断",
+          "risk_level": "high"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-common-material-properties-index-001",
+          "title": "常见材料性质索引"
+        },
+        {
+          "slug": "repair-electric-shock-001",
+          "title": "漏电和短路基础"
+        },
+        {
+          "slug": "repair-temporary-insulation-001",
+          "title": "临时绝缘材料的边界"
+        },
+        {
+          "slug": "repair-wire-jacket-damage-stop-001",
+          "title": "电线外皮破损停用边界"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-common-material-properties-index-001",
+        "repair-electric-shock-001",
+        "repair-temporary-insulation-001",
+        "repair-wire-jacket-damage-stop-001"
+      ],
+      "kiwix_selected": [],
+      "expected_wiki_hit": true,
+      "batch4h_wiki_hit": true,
+      "correct_domain_hit": true,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "focus_term_hits": [
+        "露铜",
+        "发热",
+        "潮湿",
+        "停用"
+      ],
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "answer_generated": false,
+      "answer_error": "",
+      "answer": "",
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 9,
+          "guide": 8,
+          "kiwix": 4
+        },
+        "candidate_count": 21,
+        "selected_count": 5,
+        "source_plan_count": 3,
+        "core_terms": [
+          "延长线外",
+          "长线外皮",
+          "线外皮破",
+          "里面颜色",
+          "延长线",
+          "胶带",
+          "充电线外皮破",
+          "设备"
+        ],
+        "ok": false,
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "stage": "selector"
+      },
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0567",
+          "id": "DG-0567",
+          "title": "电线破皮：临时绝缘和停用判断",
+          "label": "guide",
+          "summary": "判断只能做外层防磨还是必须彻底停用。",
+          "snippet": "电线外皮破损，可能露铜、短路或触电。",
+          "reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "selection_reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "retrieval_query_profiles": [
+            "repair_wire_damage"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 76.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:40",
+            "profile_candidate_anchor_boost:36:电线,外皮破损,露铜,胶带"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-common-material-properties-index-001",
+          "id": "repair-common-material-properties-index-001",
+          "title": "常见材料性质索引",
+          "label": "wiki",
+          "summary": "用于常见材料性质索引的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 常见材料性质索引\n\n## 用途\n\n用于在选择木材、金属、塑料、布料、绳索或胶带作为替代材料前，帮助使用者判断应查强度、耐湿、耐热、老化、污染还是承重边界，并转入具体维修 Wiki。\n\n## 适用场景\n\n适用于材料替代、临时修补、拆解回收、固定支撑、密封和降级使用前的查询。不需要用于已经有原配件、低风险外观标记或材料只作废弃处理的情况。\n\n## 准备材料\n\n需要输入材料种类、来源、原接触物、当前用途、是否受力、是否接触饮水/食物/医疗/电力/火源、已有损伤和使用时间。\n\n## 操作步骤\n\n1. 明确当前材料要解决固定、密封、遮挡、承重、隔热、绝缘还是容器修补问题。\n2. 先查具体操作 Wik",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_wire_damage"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 76.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:电线,外皮破损,露铜,胶带"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-common-material-properties-index-001",
+          "category": "recc4b80e1196f8",
+          "risk_level": "normal",
+          "guide_links": [
+            "DG-0567"
+          ],
+          "record_id": "r3333758ecb7c00",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0567",
+          "linked_guide_title": "电线破皮：临时绝缘和停用判断",
+          "metadata": {
+            "record_id": "r3333758ecb7c00"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-electric-shock-001",
+          "id": "repair-electric-shock-001",
+          "title": "漏电和短路基础",
+          "label": "wiki",
+          "summary": "先断电、隔离潮湿电器和可疑线材；高风险条目，不通电测试短路设备，并记录责任人、时间和复查结果。",
+          "snippet": "# 漏电和短路基础\n\n## 用途\n\n用于识别漏电和短路的基础风险，明确普通成员只做停用、隔离、记录，不做带电维修。\n\n## 适用场景\n\n- 设备进水、插头发热、线皮破损、异味、火花、跳闸或触碰麻手。\n- 断供后使用移动电源、临时灯、旧线材和潮湿设备。\n- 不适用于带电拆修、配电箱维修、电池包拆解或燃气电器联修。\n\n## 准备材料\n\n- 停用标签\n- 干燥隔离区\n- 绝缘外壳容器\n- 记录纸\n- 备用照明\n\n## 操作步骤\n\n1. 发现发热、火花、焦味、麻手或进水，先停止使用并远离。\n2. 在可安全做到时断开电源，手湿或站在水中时不触碰。\n3. 把设备、线材和电源分开隔离，贴上停用标签。\n4. ",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_wire_damage"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 76.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:电线,外皮破损,露铜,胶带"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-electric-shock-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0567"
+          ],
+          "record_id": "r92204ee6b4795d",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0567",
+          "linked_guide_title": "电线破皮：临时绝缘和停用判断",
+          "metadata": {
+            "record_id": "r92204ee6b4795d"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-temporary-insulation-001",
+          "id": "repair-temporary-insulation-001",
+          "title": "临时绝缘材料的边界",
+          "label": "wiki",
+          "summary": "用于临时绝缘材料的边界的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 临时绝缘材料的边界\n\n## 用途\n\n用于临时绝缘材料的边界说明，避免把胶带、布、塑料片误当作可靠电气安全措施。\n\n## 适用场景\n\n- 线皮磨损、接头外露、潮湿设备或临时电源附近需要隔离。\n- 成员想用胶带、布、塑料包住继续使用。\n- 不适用于带电维修、破损电线继续供电、潮湿电器复用或电池包处理。\n\n## 准备材料\n\n- 停用标签\n- 隔离盒\n- 胶带/塑料作标记用\n- 备用线材\n- 记录纸\n\n## 操作步骤\n\n1. 先停用相关线材和设备，能安全断电则断电。\n2. 临时材料只用于标记、固定距离或防误触，不作为恢复供电依据。\n3. 把可疑线材从通道、床铺、纸张和潮湿地面移开。\n4. 检查是否",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_wire_damage"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 76.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:电线,外皮破损,露铜,胶带"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-temporary-insulation-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0567"
+          ],
+          "record_id": "rd4278fcc2413ec",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0567",
+          "linked_guide_title": "电线破皮：临时绝缘和停用判断",
+          "metadata": {
+            "record_id": "rd4278fcc2413ec"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-wire-jacket-damage-stop-001",
+          "id": "repair-wire-jacket-damage-stop-001",
+          "title": "电线外皮破损停用边界",
+          "label": "wiki",
+          "summary": "用于电线、充电线和延长线外皮破损后的停用判断，避免露铜、发热、短路和触电。",
+          "snippet": "# 电线外皮破损停用边界\n\n## 用途\n\n判断充电线、电源线、延长线和低压设备线外皮磨破后是否必须停用，避免把临时包裹误当成恢复供电。\n\n## 适用场景\n\n适用于断电状态下的外观检查、隔离和记录。不适用于带电修补、市电高负载继续使用、潮湿地面、发热线材和露铜线芯。\n\n## 准备材料\n\n最低条件是断电标记、手电、隔离盒、标签和记录纸。条件允许时准备合格备用线、绝缘材料和非导电垫。\n\n## 操作步骤\n\n1. 先断开电源和负载，把线材移离水、金属、纸张、床铺和儿童活动区。\n2. 检查破损处是否露铜、焦黑、发热、发硬、变扁、进水或有刺鼻味。\n3. 仅外层轻微磨花且无导体外露时，标记位置并低负载复查。\n",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_wire_damage"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 76.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:电线,外皮破损,露铜,胶带"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-wire-jacket-damage-stop-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0567"
+          ],
+          "record_id": "r63ea13bb451f55",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0567",
+          "linked_guide_title": "电线破皮：临时绝缘和停用判断",
+          "metadata": {
+            "record_id": "r63ea13bb451f55"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "tools_repair_cracked_bucket_water",
+      "question": "塑料桶侧面裂了一条小缝，装水后会慢慢渗，还能不能继续当储水桶用？",
+      "expected_wiki": [
+        "repair-cracked-container-leak-control-001",
+        "repair-plastic-bucket-crack-load-reduction-001"
+      ],
+      "focus_terms": [
+        "裂缝位置",
+        "减载",
+        "非饮用",
+        "降级",
+        "渗漏",
+        "复查"
+      ],
+      "risk": "caution",
+      "guides_selected": [
+        {
+          "id": "DG-0568",
+          "title": "水桶漏水：临时修补与降级用途",
+          "risk_level": "high"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-container-repair-material-001",
+          "title": "容器修补材料"
+        },
+        {
+          "slug": "repair-drinking-water-002",
+          "title": "容器裂缝和饮用水污染"
+        },
+        {
+          "slug": "repair-cracked-container-leak-control-001",
+          "title": "破裂容器临时止漏"
+        },
+        {
+          "slug": "repair-plastic-bucket-crack-load-reduction-001",
+          "title": "塑料桶裂缝减载使用"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-container-repair-material-001",
+        "repair-cracked-container-leak-control-001",
+        "repair-drinking-water-002",
+        "repair-plastic-bucket-crack-load-reduction-001"
+      ],
+      "kiwix_selected": [],
+      "expected_wiki_hit": true,
+      "batch4h_wiki_hit": true,
+      "correct_domain_hit": true,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "focus_term_hits": [
+        "裂缝位置",
+        "减载",
+        "非饮用",
+        "降级",
+        "渗漏",
+        "复查"
+      ],
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "answer_generated": false,
+      "answer_error": "",
+      "answer": "",
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 5,
+          "guide": 8,
+          "kiwix": 4
+        },
+        "candidate_count": 17,
+        "selected_count": 5,
+        "source_plan_count": 3,
+        "core_terms": [
+          "塑料桶侧",
+          "料桶侧面",
+          "桶侧面裂",
+          "一条小缝",
+          "水桶",
+          "装水后会慢慢渗",
+          "装水后会",
+          "水后会慢"
+        ],
+        "ok": false,
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "stage": "selector"
+      },
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0568",
+          "id": "DG-0568",
+          "title": "水桶漏水：临时修补与降级用途",
+          "label": "guide",
+          "summary": "止漏并用静置测试确认；无法证明洁净时只作非饮用容器。",
+          "snippet": "水桶漏水，需要决定修补后用于饮水还是降级为非饮用用途。",
+          "reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "selection_reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。"
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-container-repair-material-001",
+          "id": "repair-container-repair-material-001",
+          "title": "容器修补材料",
+          "label": "wiki",
+          "summary": "用于容器修补材料的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 容器修补材料\n\n## 用途\n\n用于在水桶、储物盒、食物容器或工具盒出现裂缝、孔洞、接缝渗漏时，选择临时修补材料并判断该容器还能承担什么用途。最终要决定继续使用、降级为非入口/非承重用途，还是停用隔离。\n\n## 适用场景\n\n适用于低压、低温、非承重容器的小破损、短裂缝和边缘渗漏。不适用于承压容器、燃料容器、化学品容器、饮用水直接接触面污染不明、热液体容器或结构已经变形的容器。\n\n## 准备材料\n\n最低条件是干布、清洁水、标记物、记录纸和可隔离容器的区域。条件允许时准备同材质补片、布片、胶带、扎带、绳、针线、夹具、木片或薄金属片。\n\n## 操作步骤\n\n1. 先清空容器，确认原来盛放物是否涉及饮",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "slug": "repair-container-repair-material-001",
+          "category": "recc4b80e1196f8",
+          "risk_level": "normal",
+          "guide_links": [
+            "DG-0568"
+          ],
+          "record_id": "r177168644ee24a",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0568",
+          "linked_guide_title": "水桶漏水：临时修补与降级用途",
+          "metadata": {
+            "record_id": "r177168644ee24a"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-drinking-water-002",
+          "id": "repair-drinking-water-002",
+          "title": "容器裂缝和饮用水污染",
+          "label": "wiki",
+          "summary": "把裂缝容器从饮用水用途降级；高风险条目，裂缝藏污或漏水时不装饮水，并记录责任人、时间和复查结果。",
+          "snippet": "# 容器裂缝和饮用水污染\n\n## 用途\n\n用于解释容器裂缝如何带来饮用水污染风险，特别是裂缝藏污、渗漏和外部接触进入内腔。\n\n## 适用场景\n\n- 容器裂缝细小但反复潮湿、夹层发霉、盖口无法密封。\n- 容器放在厕所、垃圾、污水或地面附近。\n- 不适用于继续把裂缝容器作为干净饮水储备。\n\n## 准备材料\n\n- 手电\n- 清洁布\n- 标签\n- 替代容器\n- 隔离箱\n\n## 操作步骤\n\n1. 检查裂缝是否贯通、是否藏污、是否靠近口部或底部。\n2. 把裂缝容器从饮水区移走，贴上待判定或非饮用。\n3. 外壁接触过污染地面时，不在饮水区内擦洗。\n4. 裂缝容器即使不明显漏，也不用于长期储饮用水。\n5. 把",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "slug": "repair-drinking-water-002",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0568"
+          ],
+          "record_id": "r0fb5f68f34b967",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0568",
+          "linked_guide_title": "水桶漏水：临时修补与降级用途",
+          "metadata": {
+            "record_id": "r0fb5f68f34b967"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-cracked-container-leak-control-001",
+          "id": "repair-cracked-container-leak-control-001",
+          "title": "破裂容器临时止漏",
+          "label": "wiki",
+          "summary": "用于水桶、盆、箱和灰水容器破裂后的止漏、降级和污染边界判断，避免误装饮用水。",
+          "snippet": "# 破裂容器临时止漏\n\n## 用途\n\n处理水桶、盆、箱、塑料瓶和种植容器的裂缝漏水，先止损、导流和降级，避免把已破裂容器继续当饮用水容器。\n\n## 适用场景\n\n适用于非饮用用途、灰水、种植、工具收纳和短距离转运。不适用于饮用水长期储存、食物、药品、燃料和化学品容器。\n\n## 准备材料\n\n最低条件是干布、胶带或塑料片、绳带、接水盆和标签。条件允许时准备食品级备用容器、夹子和外套桶。\n\n## 操作步骤\n\n1. 立即把容器移离电源、食物、药品和睡眠区，先接住正在漏出的液体。\n2. 确认原用途，凡是饮用水和食物接触容器，裂后默认降级。\n3. 倒空并擦干外侧，从外侧贴补片或用绳带压住裂口。\n4. 低水位",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "slug": "repair-cracked-container-leak-control-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0568"
+          ],
+          "record_id": "r7ef3f049f65c2d",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0568",
+          "linked_guide_title": "水桶漏水：临时修补与降级用途",
+          "metadata": {
+            "record_id": "r7ef3f049f65c2d"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-plastic-bucket-crack-load-reduction-001",
+          "id": "repair-plastic-bucket-crack-load-reduction-001",
+          "title": "塑料桶裂缝减载使用",
+          "label": "wiki",
+          "summary": "用于塑料桶、盆和箱出现裂缝后降低装载量、改变用途和安排复查，避免提手断裂与漏液。",
+          "snippet": "# 塑料桶裂缝减载使用\n\n## 用途\n\n塑料桶出现小裂缝但暂时还需要使用时，明确减载、降级和搬运限制，防止提起时裂开、漏水污染或割伤。\n\n## 适用场景\n\n适用于灰水、工具、种植、干物临放和外套容器。不适用于饮用水、食物、药品、燃料、热水和长距离满载搬运。\n\n## 准备材料\n\n最低条件是标签、胶带或布条、接水盆和记录纸。条件允许时准备外套桶、补片、绳带托底和备用容器。\n\n## 操作步骤\n\n1. 标出裂缝两端，确认是否在底部、提手根部或转角。\n2. 将原装载量降到三分之一或更低，先做静置漏水测试。\n3. 提手附近有裂纹时不再提手搬运，改为托底或固定位置使用。\n4. 外侧补片只用于减缓漏水，不恢复",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "slug": "repair-plastic-bucket-crack-load-reduction-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0568"
+          ],
+          "record_id": "r15ad298dbcd3b5",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0568",
+          "linked_guide_title": "水桶漏水：临时修补与降级用途",
+          "metadata": {
+            "record_id": "r15ad298dbcd3b5"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "tools_repair_saw_board_fixture",
+      "question": "要手锯一块木板，但没有工作台，锯之前怎么把板子固定住才不容易滑和夹锯？",
+      "expected_wiki": [
+        "repair-saw-cut-support-001",
+        "repair-temporary-clamp-fixture-001"
+      ],
+      "focus_terms": [
+        "夹持",
+        "支撑",
+        "切割线",
+        "手的位置",
+        "防滑",
+        "停手"
+      ],
+      "risk": "caution",
+      "guides_selected": [
+        {
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑",
+          "risk_level": "high"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-saw-cut-support-001",
+          "title": "锯切前固定与支撑"
+        },
+        {
+          "slug": "repair-temporary-clamp-fixture-001",
+          "title": "简易夹具和临时固定"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-saw-cut-support-001",
+        "repair-temporary-clamp-fixture-001"
+      ],
+      "kiwix_selected": [],
+      "expected_wiki_hit": true,
+      "batch4h_wiki_hit": true,
+      "correct_domain_hit": true,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "focus_term_hits": [
+        "夹持",
+        "支撑",
+        "防滑"
+      ],
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "answer_generated": false,
+      "answer_error": "",
+      "answer": "",
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 8,
+          "guide": 8,
+          "kiwix": 4
+        },
+        "candidate_count": 20,
+        "selected_count": 3,
+        "source_plan_count": 3,
+        "core_terms": [
+          "手锯一块",
+          "锯一块木",
+          "一块木板",
+          "但没有工作台",
+          "夹锯",
+          "手锯",
+          "木板",
+          "固定"
+        ],
+        "ok": false,
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "stage": "selector"
+      },
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0834",
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑",
+          "label": "guide",
+          "summary": "在锯切前让材料稳定、切割线清楚、手远离危险方向，避免滑动、夹锯和落料伤人。",
+          "snippet": "没有标准工作台时，需要手锯木板、板条或小木料，必须先固定和支撑。",
+          "reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "selection_reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "retrieval_query_profiles": [
+            "repair_cutting_fixture"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 78.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:42",
+            "profile_candidate_anchor_boost:36:锯切,手锯,木板,支撑"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-saw-cut-support-001",
+          "id": "repair-saw-cut-support-001",
+          "title": "锯切前固定与支撑",
+          "label": "wiki",
+          "summary": "用于锯木板、塑料管和薄金属前布置支撑，避免夹锯、弹跳、切口崩裂和材料砸落。",
+          "snippet": "# 锯切前固定与支撑\n\n## 用途\n\n在锯切木板、木棍、塑料管、薄板或废旧家具前，先建立材料支撑和切口空间，减少锯片卡住、材料弹起和切下端砸人。\n\n## 适用场景\n\n适用于手锯、钢锯和小型手动锯。不适用于承重结构、带电线缆附近、含玻璃或不明弹簧件的材料，也不适用于无法固定的大件悬空切割。\n\n## 准备材料\n\n最低条件是锯、两处支撑、垫木、标记笔和清空的落料区。条件允许时准备夹具、护目镜、手套和收集毛刺的容器。\n\n## 操作步骤\n\n1. 标出切线，确认切断后哪一端会下落、旋转或夹住锯片。\n2. 在切线两侧放支撑，切口下方留出锯片活动空间。\n3. 用夹具、绳带或重物压住材料，手不得放在切线延长方向",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_cutting_fixture"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 78.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:锯切,手锯,木板,支撑"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-saw-cut-support-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0834"
+          ],
+          "record_id": "r2472eacc3b612f",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0834",
+          "linked_guide_title": "锯切前固定与支撑",
+          "metadata": {
+            "record_id": "r2472eacc3b612f"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-temporary-clamp-fixture-001",
+          "id": "repair-temporary-clamp-fixture-001",
+          "title": "简易夹具和临时固定",
+          "label": "wiki",
+          "summary": "用于缺少专业夹具时用绳带、木块和重物临时固定材料，避免手扶加工和固定点滑移。",
+          "snippet": "# 简易夹具和临时固定\n\n## 用途\n\n在切割、打孔、胶粘、绑扎和打磨前，用低资源方式把材料固定住，减少一只手扶材料、一只手用工具造成的滑移和割伤。\n\n## 适用场景\n\n适用于低力加工、小件定位、胶水固化和临时压紧。不适用于人员承重、弹性件释放、带电设备、玻璃破片和高力撬动。\n\n## 准备材料\n\n最低条件是木块、绳子或布条、重物、纸板垫和标记笔。条件允许时准备 C 形夹、橡胶垫、楔子和工作板。\n\n## 操作步骤\n\n1. 判断材料需要防滑、防转、防翘还是保持角度，不同目标分开固定。\n2. 在材料和压紧物之间垫布或纸板，避免夹出深压痕。\n3. 用两处以上固定点限制移动，绳带绕过锐边时加护垫。\n4.",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_cutting_fixture"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 78.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:锯切,手锯,木板,支撑"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-temporary-clamp-fixture-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0834"
+          ],
+          "record_id": "r225eb593e07585",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0834",
+          "linked_guide_title": "锯切前固定与支撑",
+          "metadata": {
+            "record_id": "r225eb593e07585"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "tools_repair_blade_chip_continue",
+      "question": "美工刀刀片有个崩口，切纸板时会卡一下，这种刀片还能继续用吗？",
+      "expected_wiki": [
+        "repair-blade-dull-chip-check-001",
+        "repair-knife-use-storage-001"
+      ],
+      "focus_terms": [
+        "崩口",
+        "裂纹",
+        "卡顿",
+        "换刀",
+        "降级",
+        "收纳"
+      ],
+      "risk": "high",
+      "guides_selected": [
+        {
+          "id": "DG-0154",
+          "title": "刀具和锐器管理",
+          "risk_level": "caution"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-blade-dull-chip-check-001",
+          "title": "刀片变钝与崩口判断"
+        },
+        {
+          "slug": "repair-knife-use-storage-001",
+          "title": "刀具安全使用和收纳"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-blade-dull-chip-check-001",
+        "repair-knife-use-storage-001"
+      ],
+      "kiwix_selected": [],
+      "expected_wiki_hit": true,
+      "batch4h_wiki_hit": true,
+      "correct_domain_hit": true,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "focus_term_hits": [
+        "崩口",
+        "裂纹",
+        "换刀",
+        "降级",
+        "收纳"
+      ],
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "answer_generated": false,
+      "answer_error": "",
+      "answer": "",
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 2,
+          "guide": 8,
+          "kiwix": 1
+        },
+        "candidate_count": 11,
+        "selected_count": 3,
+        "source_plan_count": 3,
+        "core_terms": [
+          "美工刀刀",
+          "工刀刀片",
+          "刀刀片有",
+          "刀片有个",
+          "片有个崩",
+          "有个崩口",
+          "切纸板时",
+          "纸板时会"
+        ],
+        "ok": false,
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "stage": "selector"
+      },
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0154",
+          "id": "DG-0154",
+          "title": "刀具和锐器管理",
+          "label": "guide",
+          "summary": "减少割伤、误拿和儿童接触风险。",
+          "snippet": "有美工刀、菜刀、剪刀、锯、破玻璃、针、刀片等锐器。",
+          "reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "selection_reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "retrieval_query_profiles": [
+            "repair_blade_damage"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 78.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:42",
+            "profile_candidate_anchor_boost:36:刀片,美工刀,收纳"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-blade-dull-chip-check-001",
+          "id": "repair-blade-dull-chip-check-001",
+          "title": "刀片变钝与崩口判断",
+          "label": "wiki",
+          "summary": "用于判断刀片、锯齿和剪刃变钝、卷刃或崩口后的降级和停用，减少打滑割伤。",
+          "snippet": "# 刀片变钝与崩口判断\n\n## 用途\n\n在切绳、裁布、削木、开箱和拆解前判断刀片、剪刀和锯齿是否变钝或崩口，避免用更大力气造成打滑。\n\n## 适用场景\n\n适用于美工刀、小刀、剪刀、锯片和可替换刀片。不适用于带电材料、玻璃、硬金属和需要专业磨刃的工具。\n\n## 准备材料\n\n最低条件是照明、废纸、干布、刀套和废刀片盒。条件允许时准备磨石、备用刀片、手套和放大镜。\n\n## 操作步骤\n\n1. 观察刃口是否反光、卷边、缺口、锈斑、裂纹和松动。\n2. 用废纸或软绳做低力测试，不用手指试刃。\n3. 发现需要明显加力、切口毛糙或刀片跳动时停止本任务。\n4. 可磨工具先清洁再轻磨，薄美工刀片有崩口时直接换片或报",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_blade_damage"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 78.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:刀片,美工刀,收纳"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-blade-dull-chip-check-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0154"
+          ],
+          "record_id": "r1a944dae6e2860",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0154",
+          "linked_guide_title": "刀具和锐器管理",
+          "metadata": {
+            "record_id": "r1a944dae6e2860"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-knife-use-storage-001",
+          "id": "repair-knife-use-storage-001",
+          "title": "刀具安全使用和收纳",
+          "label": "wiki",
+          "summary": "用于刀具切割前后的握持、走刀、递交和收纳边界，减少割伤、误触和夜间工具混乱。",
+          "snippet": "# 刀具安全使用和收纳\n\n## 用途\n\n规范小刀、美工刀、菜刀、剪刀和替代刀片在维修中的使用方式，特别是切绳、裁布、削木楔、开包装和处理胶带时的停止线。\n\n## 适用场景\n\n适用于室内工作台、工具区和临时外出包。不适用于疲劳、争执、光线不足、地面摇晃、身边有儿童伸手或需要切割带电材料的场景。\n\n## 准备材料\n\n最低条件是刀具、垫板、照明、废料盒和刀套。条件允许时准备防割手套、夹具、备用刀片和红色禁用标签。\n\n## 操作步骤\n\n1. 清空切割线前方和身体方向，刀锋不朝向手掌、大腿、他人或装水容器。\n2. 小件材料先压在垫板上，能夹住就夹住，不用手指悬空捏住切。\n3. 用短行程多次切，不用一次猛",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_blade_damage"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 78.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:刀片,美工刀,收纳"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-knife-use-storage-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0154"
+          ],
+          "record_id": "r00d9d6b2934bbb",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0154",
+          "linked_guide_title": "刀具和锐器管理",
+          "metadata": {
+            "record_id": "r00d9d6b2934bbb"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "tools_repair_used_fastener_reuse",
+      "question": "拆下来的旧螺丝和旧钉子有点锈，有的头也花了，哪些还能复用，哪些不能再用在承重位置？",
+      "expected_wiki": [
+        "repair-used-screw-nail-reuse-check-001",
+        "repair-fastener-washer-storage-001"
+      ],
+      "focus_terms": [
+        "弯曲",
+        "锈蚀",
+        "滑牙",
+        "承重禁用",
+        "分类",
+        "保存"
+      ],
+      "risk": "caution",
+      "guides_selected": [
+        {
+          "id": "DG-0376",
+          "title": "螺丝钉钉子小件库存",
+          "risk_level": "normal"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-fastener-washer-storage-001",
+          "title": "螺丝钉垫片分类保存"
+        },
+        {
+          "slug": "repair-screws-and-nuts-001",
+          "title": "螺丝和螺母"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-fastener-washer-storage-001",
+        "repair-screws-and-nuts-001"
+      ],
+      "kiwix_selected": [],
+      "expected_wiki_hit": true,
+      "batch4h_wiki_hit": true,
+      "correct_domain_hit": true,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "focus_term_hits": [
+        "弯曲",
+        "锈蚀",
+        "滑牙",
+        "分类",
+        "保存"
+      ],
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "answer_generated": false,
+      "answer_error": "",
+      "answer": "",
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 10,
+          "guide": 8,
+          "kiwix": 4
+        },
+        "candidate_count": 22,
+        "selected_count": 3,
+        "source_plan_count": 3,
+        "core_terms": [
+          "旧钉子有",
+          "钉子有点",
+          "子有点锈",
+          "承重位置",
+          "承重",
+          "拆下来",
+          "旧螺丝",
+          "旧钉子"
+        ],
+        "ok": false,
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "stage": "selector"
+      },
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0376",
+          "id": "DG-0376",
+          "title": "螺丝钉钉子小件库存",
+          "label": "guide",
+          "summary": "避免小件丢失和型号混乱。",
+          "snippet": "维修家具、门窗、工具、设备、木板、支架时需要螺丝、钉子、垫片、卡扣等小件。",
+          "reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "selection_reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "retrieval_query_profiles": [
+            "repair_fastener_reuse"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 76.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:40",
+            "profile_candidate_anchor_boost:36:弯曲,生锈,垫片,降级"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-fastener-washer-storage-001",
+          "id": "repair-fastener-washer-storage-001",
+          "title": "螺丝钉垫片分类保存",
+          "label": "wiki",
+          "summary": "用于把螺丝、钉子、螺母和垫片按规格与用途保存，减少小件丢失和错误复用。",
+          "snippet": "# 螺丝钉垫片分类保存\n\n## 用途\n\n建立螺丝、钉子、螺母、垫片和小扣件的分类保存方式，让维修时能快速找到可用规格并避免错误混用。\n\n## 适用场景\n\n适用于拆解后小件回收、维修包整理、门窗家具和工具箱补件。不适用于锈蚀污染件直接回可用盒。\n\n## 准备材料\n\n最低条件是小盒、纸袋、标签、磁铁和记录纸。条件允许时准备透明分格盒、样品板和尺寸对照卡。\n\n## 操作步骤\n\n1. 先剔除弯曲、滑牙、深锈、尖端断裂和污染件。\n2. 按螺丝、钉子、螺母、垫片、特殊件分盒。\n3. 每盒再按长度或粗细分小袋，放入一件样品贴在袋外。\n4. 写明来源和可用范围，例如“轻载木板”“门窗小件”。\n5. 取用后记录",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_fastener_reuse"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 76.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:弯曲,生锈,垫片,降级"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-fastener-washer-storage-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "normal",
+          "guide_links": [
+            "DG-0376"
+          ],
+          "record_id": "r501df6a442fddf",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0376",
+          "linked_guide_title": "螺丝钉钉子小件库存",
+          "metadata": {
+            "record_id": "r501df6a442fddf"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-screws-and-nuts-001",
+          "id": "repair-screws-and-nuts-001",
+          "title": "螺丝和螺母",
+          "label": "wiki",
+          "summary": "用于螺丝和螺母的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 螺丝和螺母\n\n## 用途\n\n用于检查、回收、配对和使用螺丝螺母，判断紧固件是否能继续固定物品，避免滑牙、锈蚀、错配和过度拧紧造成失效。\n\n## 适用场景\n\n适用于低风险工具、家具、容器、支架和轻载固定。不适用于关键承重、电力端子、燃气设备、车辆关键部位或规格无法确认但失效后果严重的场景。\n\n## 准备材料\n\n最低条件是螺丝、螺母、合适工具、容器、标签和记录纸。条件允许时准备垫片、备用件、除锈刷、润滑油、分格盒和低力测试材料。\n\n## 操作步骤\n\n1. 先确认螺丝螺母尺寸、螺纹方向、长度和原用途。\n2. 检查锈蚀、滑牙、弯曲、头部崩坏、螺母裂纹和垫片缺失。\n3. 用手先轻旋几圈确认匹配，不顺",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_fastener_reuse"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 76.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:弯曲,生锈,垫片,降级"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-screws-and-nuts-001",
+          "category": "recc4b80e1196f8",
+          "risk_level": "normal",
+          "guide_links": [
+            "DG-0376"
+          ],
+          "record_id": "r227e161f939b24",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0376",
+          "linked_guide_title": "螺丝钉钉子小件库存",
+          "metadata": {
+            "record_id": "r227e161f939b24"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "tools_repair_zip_tie_load",
+      "question": "扎带够多的话，能不能临时拿来吊住一小袋工具或固定一根会受力的杆子？",
+      "expected_wiki": [
+        "repair-zip-tie-light-duty-boundary-001",
+        "repair-tool-substitute-risk-check-001"
+      ],
+      "focus_terms": [
+        "轻载",
+        "临时固定",
+        "紫外",
+        "不可吊挂",
+        "复查",
+        "替代"
+      ],
+      "risk": "high",
+      "guides_selected": [
+        {
+          "id": "DG-0151",
+          "title": "胶带和扎带临时固定",
+          "risk_level": "caution"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-basic-knots-index-001",
+          "title": "基础绳结索引"
+        },
+        {
+          "slug": "repair-zip-tie-light-duty-boundary-001",
+          "title": "扎带临时固定边界"
+        },
+        {
+          "slug": "repair-tool-substitute-risk-check-001",
+          "title": "工具替代品风险判断"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-basic-knots-index-001",
+        "repair-tool-substitute-risk-check-001",
+        "repair-zip-tie-light-duty-boundary-001"
+      ],
+      "kiwix_selected": [],
+      "expected_wiki_hit": true,
+      "batch4h_wiki_hit": true,
+      "correct_domain_hit": true,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "focus_term_hits": [
+        "轻载",
+        "临时固定",
+        "复查",
+        "替代"
+      ],
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "answer_generated": false,
+      "answer_error": "",
+      "answer": "",
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 10,
+          "guide": 8,
+          "kiwix": 4
+        },
+        "candidate_count": 22,
+        "selected_count": 4,
+        "source_plan_count": 3,
+        "core_terms": [
+          "扎带够多",
+          "能临时拿",
+          "临时拿来",
+          "时拿来吊",
+          "固定",
+          "拿来吊住",
+          "来吊住一"
+        ],
+        "ok": false,
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "stage": "selector"
+      },
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0151",
+          "id": "DG-0151",
+          "title": "胶带和扎带临时固定",
+          "label": "guide",
+          "summary": "用胶带和扎带做临时修复，但不把临时方案当永久安全。",
+          "snippet": "管线、门窗、背包、工具柄、帐篷、遮挡布需要临时固定。",
+          "reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "selection_reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。"
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-basic-knots-index-001",
+          "id": "repair-basic-knots-index-001",
+          "title": "基础绳结索引",
+          "label": "wiki",
+          "summary": "用于基础绳结索引的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 基础绳结索引\n\n## 用途\n\n用于在需要捆扎、晾晒、固定、拖拽轻物或临时维修时，帮助使用者判断应查哪类绳结、绳索承重、扎带边界还是固定与支撑条目。\n\n## 适用场景\n\n适用于低载、可复查、失效后果可控的绳结选择。不需要用于没有绳材、只需普通标签固定，或任务涉及人员悬吊、攀爬、救援承重和关键结构承重的情况。\n\n## 准备材料\n\n需要输入绳材、磨损情况、粗细、湿滑程度、受力方向、是否需要快速解开、负载重量和固定点状态。最低条件是绳索状态、用途和失效后果。\n\n## 操作步骤\n\n1. 明确绳结任务是捆扎、连接、收紧、固定、晾晒还是临时拖拽。\n2. 先查具体 Wiki：绳索承重、固定与支撑、扎带用途",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "slug": "repair-basic-knots-index-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0151"
+          ],
+          "record_id": "rb7f7daa79eaa7b",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0151",
+          "linked_guide_title": "胶带和扎带临时固定",
+          "metadata": {
+            "record_id": "rb7f7daa79eaa7b"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-zip-tie-light-duty-boundary-001",
+          "id": "repair-zip-tie-light-duty-boundary-001",
+          "title": "扎带临时固定边界",
+          "label": "wiki",
+          "summary": "用于扎带固定线束、轻物和临时扣具时判断受力、老化和割手风险，避免把扎带当承重件。",
+          "snippet": "# 扎带临时固定边界\n\n## 用途\n\n明确扎带适合整理线束、固定轻物、临时闭合和标记，不适合承重、吊挂、长期户外暴晒和关键扣具替代。\n\n## 适用场景\n\n适用于线束收拢、布片定位、轻小物件限位和标签固定。不适用于背包肩带、人员负重、门窗主要加固、热源附近和饮水容器内部。\n\n## 准备材料\n\n最低条件是扎带、剪刀或钳子、布垫和标签。条件允许时准备不同长度扎带、可重复扎带和边缘包覆材料。\n\n## 操作步骤\n\n1. 判断扎带承担的是整理、限位还是受力，涉及承重先换方案。\n2. 绑在锐边、管线和软塑料上时垫布，避免勒出切痕。\n3. 收紧到不滑动即可，不把材料勒到发白、变形或压扁。\n4. 剪掉尾端后处理",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "slug": "repair-zip-tie-light-duty-boundary-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0151"
+          ],
+          "record_id": "ra145984bd24500",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0151",
+          "linked_guide_title": "胶带和扎带临时固定",
+          "metadata": {
+            "record_id": "ra145984bd24500"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-tool-substitute-risk-check-001",
+          "id": "repair-tool-substitute-risk-check-001",
+          "title": "工具替代品风险判断",
+          "label": "wiki",
+          "summary": "用于缺少专用工具时判断替代物是否会断裂、打滑、导电或损坏关键物资，决定降级或停工。",
+          "snippet": "# 工具替代品风险判断\n\n## 用途\n\n在没有扳手、夹具、刀具、钻头或专用清洁工具时，判断替代物是否能低风险完成任务，避免用脆弱、导电或污染物品硬替。\n\n## 适用场景\n\n适用于低力、非关键、可复查任务。不适用于承重、电气、火源、医疗、饮用水、人员撤离和唯一关键设备维修。\n\n## 准备材料\n\n最低条件是候选替代物、标签、记录纸和备用方案。条件允许时准备垫片、绳带、夹具和原工具用途说明卡。\n\n## 操作步骤\n\n1. 写清原工具要完成的动作：夹紧、切割、旋转、支撑、导向还是清洁。\n2. 检查替代物是否会碎裂、打滑、导电、吸水、污染或损坏被修物。\n3. 只做低力短时测试，测试失败立即停，不逐步加大蛮",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "slug": "repair-tool-substitute-risk-check-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0151"
+          ],
+          "record_id": "rfb94640fc1fb74",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0151",
+          "linked_guide_title": "胶带和扎带临时固定",
+          "metadata": {
+            "record_id": "rfb94640fc1fb74"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "tools_repair_glue_not_holding",
+      "question": "两块塑料片用胶水粘了又开，表面还有灰和水汽，重新粘之前要怎么处理，粘不住怎么办？",
+      "expected_wiki": [
+        "repair-glue-surface-prep-001",
+        "repair-fabric-tape-tear-reinforcement-001"
+      ],
+      "focus_terms": [
+        "清洁",
+        "干燥",
+        "粗化",
+        "压紧",
+        "固化",
+        "降级"
+      ],
+      "risk": "caution",
+      "guides_selected": [
+        {
+          "id": "DG-0835",
+          "title": "胶水粘接前表面处理",
+          "risk_level": "caution"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-glue-surface-prep-001",
+          "title": "胶水粘接前表面处理"
+        },
+        {
+          "slug": "repair-fabric-tape-tear-reinforcement-001",
+          "title": "布料和胶带加固撕裂口"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-fabric-tape-tear-reinforcement-001",
+        "repair-glue-surface-prep-001"
+      ],
+      "kiwix_selected": [],
+      "expected_wiki_hit": true,
+      "batch4h_wiki_hit": true,
+      "correct_domain_hit": true,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "focus_term_hits": [
+        "清洁",
+        "干燥",
+        "粗化",
+        "压紧",
+        "固化",
+        "降级"
+      ],
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "answer_generated": false,
+      "answer_error": "",
+      "answer": "",
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 2,
+          "guide": 8,
+          "kiwix": 4
+        },
+        "candidate_count": 14,
+        "selected_count": 3,
+        "source_plan_count": 3,
+        "core_terms": [
+          "两块塑料",
+          "块塑料片",
+          "塑料片用",
+          "料片用胶",
+          "塑料片",
+          "水汽",
+          "胶水",
+          "表面"
+        ],
+        "ok": false,
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "stage": "selector"
+      },
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0835",
+          "id": "DG-0835",
+          "title": "胶水粘接前表面处理",
+          "label": "guide",
+          "summary": "先清洁、干燥、粗化并试粘，判断是否继续胶粘，或降级为绑扎、缝补和胶带加固。",
+          "snippet": "塑料、布料或轻质材料用胶水粘接失败，表面有灰、水汽或油污，需要重新处理粘接面。",
+          "reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "selection_reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "retrieval_query_profiles": [
+            "repair_glue_surface"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 80.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:42",
+            "profile_candidate_anchor_boost:38:胶水,粘接,表面处理,灰尘"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-glue-surface-prep-001",
+          "id": "repair-glue-surface-prep-001",
+          "title": "胶水粘接前表面处理",
+          "label": "wiki",
+          "summary": "用于胶水粘接前清洁、干燥、粗化和压紧表面，避免未固化、脱胶和误用于承重。",
+          "snippet": "# 胶水粘接前表面处理\n\n## 用途\n\n在用胶水修补塑料片、木片、布料、标签和非关键小件前，处理表面状态，让粘接不被灰尘、油、水和旧胶层破坏。\n\n## 适用场景\n\n适用于低载、非入口、可等待固化的小修补。不适用于承重、饮用水内壁、电气绝缘、火源附近和必须立即受力的连接。\n\n## 准备材料\n\n最低条件是胶水、干布、砂纸或粗布、夹具或重物、标签和记录纸。条件允许时准备酒精棉、补片和计时器。\n\n## 操作步骤\n\n1. 先确认材料能否被该胶水粘住，未知材料先做小片测试。\n2. 去掉水、油、粉尘、旧胶皮和松散碎屑。\n3. 光滑表面轻微粗化，擦净粉屑后再上胶。\n4. 胶层薄而均匀，压合后保持位置，不在固化",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_glue_surface"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 80.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:38:胶水,粘接,表面处理,灰尘"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-glue-surface-prep-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0835"
+          ],
+          "record_id": "rf871cc61724337",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0835",
+          "linked_guide_title": "胶水粘接前表面处理",
+          "metadata": {
+            "record_id": "rf871cc61724337"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-fabric-tape-tear-reinforcement-001",
+          "id": "repair-fabric-tape-tear-reinforcement-001",
+          "title": "布料和胶带加固撕裂口",
+          "label": "wiki",
+          "summary": "用于雨布、背包、衣物和袋子撕裂后用布片与胶带分散拉力，避免裂口继续延伸。",
+          "snippet": "# 布料和胶带加固撕裂口\n\n## 用途\n\n修补雨布、背包、衣物、袋子、帘布和防尘布的撕裂口，用补片分散拉力，而不是只把裂缝边缘粘在一起。\n\n## 适用场景\n\n适用于遮挡、防尘、轻载袋和短期防水。不适用于背包主肩带、担架布、吊挂带、承重绳套和长期暴雨防水。\n\n## 准备材料\n\n最低条件是干布片、胶带、剪刀、针线或绳线和标记笔。条件允许时准备同材质补片、夹子和防水胶带。\n\n## 操作步骤\n\n1. 先剪掉松散线头，确认裂口两端是否继续撕开。\n2. 在裂口两端各加一个小横向止裂点，可缝几针或贴小补片。\n3. 补片面积覆盖裂口四周至少两指宽，边角剪圆。\n4. 受力方向用布片或线缝分散，胶带只负责贴合和防",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "repair_glue_surface"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 80.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:38:胶水,粘接,表面处理,灰尘"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-fabric-tape-tear-reinforcement-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0835"
+          ],
+          "record_id": "r61885bc1264e67",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0835",
+          "linked_guide_title": "胶水粘接前表面处理",
+          "metadata": {
+            "record_id": "r61885bc1264e67"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "tools_repair_tool_handover",
+      "question": "小组里工具经常借出去，回来才发现钳子松了、刀片缺口了，借用和损坏应该怎么交接记录？",
+      "expected_wiki": [
+        "repair-tool-id-handover-log-001",
+        "repair-tool-borrow-return-log-001",
+        "repair-wear-tool-life-log-001"
+      ],
+      "focus_terms": [
+        "编号",
+        "借出人",
+        "归还状态",
+        "损坏位置",
+        "禁用标签",
+        "复查时间"
+      ],
+      "risk": "normal",
+      "guides_selected": [
+        {
+          "id": "DG-0150",
+          "title": "工具借用和归还",
+          "risk_level": "caution"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-tool-borrow-return-log-001",
+          "title": "工具借用归还记录"
+        },
+        {
+          "slug": "repair-tool-id-handover-log-001",
+          "title": "手工具编号和交接记录"
+        },
+        {
+          "slug": "repair-wear-tool-life-log-001",
+          "title": "易损工具寿命记录"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-tool-borrow-return-log-001",
+        "repair-tool-id-handover-log-001",
+        "repair-wear-tool-life-log-001"
+      ],
+      "kiwix_selected": [],
+      "expected_wiki_hit": true,
+      "batch4h_wiki_hit": true,
+      "correct_domain_hit": true,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "focus_term_hits": [
+        "编号",
+        "归还状态"
+      ],
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "answer_generated": false,
+      "answer_error": "",
+      "answer": "",
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 3,
+          "guide": 8,
+          "kiwix": 4
+        },
+        "candidate_count": 15,
+        "selected_count": 4,
+        "source_plan_count": 3,
+        "core_terms": [
+          "小组里工",
+          "组里工具",
+          "常借出去",
+          "回来才发",
+          "记录",
+          "来才发现",
+          "才发现钳"
+        ],
+        "ok": false,
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "stage": "selector"
+      },
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0150",
+          "id": "DG-0150",
+          "title": "工具借用和归还",
+          "label": "guide",
+          "summary": "让关键工具可追踪，避免需要时找不到。",
+          "snippet": "多人共用工具，容易丢失、损坏或不知道谁拿走了。",
+          "reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "selection_reason": "AI 选择器不可用，保留本地最高相关候选作为兜底。",
+          "retrieval_query_profiles": [
+            "inventory_consumption",
+            "repair_tool_handover"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": -4.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_mismatch_penalty:80",
+            "profile_domain_boost:40",
+            "profile_candidate_anchor_boost:36:工具借用,工具编号,借用,归还"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-tool-borrow-return-log-001",
+          "id": "repair-tool-borrow-return-log-001",
+          "title": "工具借用归还记录",
+          "label": "wiki",
+          "summary": "用于团队内部工具借出、归还和状态复核，防止刀具、钳子、胶带和照明工具丢失。",
+          "snippet": "# 工具借用归还记录\n\n## 用途\n\n记录团队内部谁拿走了什么工具、做什么、何时归还、归还时是否损坏，保证关键维修能力可追踪。\n\n## 适用场景\n\n适用于多人共用工具箱、外出维修、夜间值守携带和临时借给相邻小组。不适用于外部高风险交换决策本身。\n\n## 准备材料\n\n最低条件是工具编号、借用表、笔和归还检查点。条件允许时准备工具影子板、借用牌和禁借清单。\n\n## 操作步骤\n\n1. 借出前写工具编号、借用人、用途、取出时间和预计归还时间。\n2. 唯一关键工具、危险工具和待修工具默认不借，除非负责人批准。\n3. 归还时检查缺件、裂纹、锈蚀、污染、刀片状态和电量。\n4. 异常工具放入待修区，不直接回到",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "inventory_consumption",
+            "repair_tool_handover"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": -4.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_mismatch_penalty:80",
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:工具借用,工具编号,借用,归还"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-tool-borrow-return-log-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "normal",
+          "guide_links": [
+            "DG-0150"
+          ],
+          "record_id": "r33fa4a046a49c5",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0150",
+          "linked_guide_title": "工具借用和归还",
+          "metadata": {
+            "record_id": "r33fa4a046a49c5"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-tool-id-handover-log-001",
+          "id": "repair-tool-id-handover-log-001",
+          "title": "手工具编号和交接记录",
+          "label": "wiki",
+          "summary": "用于给常用手工具编号、登记位置和交接状态，避免长期断供时关键工具丢失或重复采购。",
+          "snippet": "# 手工具编号和交接记录\n\n## 用途\n\n让刀、钳、螺丝刀、锯、手电、扳手和手钻有固定编号、存放点和责任记录，减少“用完找不到”的维修中断。\n\n## 适用场景\n\n适用于多人共用工具、外出携带、借用归还和工具箱重整。不适用于外部交换风险判断和危险工具权限审批。\n\n## 准备材料\n\n最低条件是标签、记号笔、记录纸和工具清单。条件允许时准备耐磨标签、分格盒、照片或手绘工具轮廓。\n\n## 操作步骤\n\n1. 按工具类别编号，例如 LB-TOL-PLI-001 表示第一把钳子。\n2. 在工具和存放位都写编号，尖锐工具标签不贴在握持受力处。\n3. 建立借用栏：借用人、用途、取出时间、预计归还和归还检查。\n4",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "inventory_consumption",
+            "repair_tool_handover"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": -4.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_mismatch_penalty:80",
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:工具借用,工具编号,借用,归还"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-tool-id-handover-log-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "normal",
+          "guide_links": [
+            "DG-0150"
+          ],
+          "record_id": "r9c7c73e9811aff",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0150",
+          "linked_guide_title": "工具借用和归还",
+          "metadata": {
+            "record_id": "r9c7c73e9811aff"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "repair-wear-tool-life-log-001",
+          "id": "repair-wear-tool-life-log-001",
+          "title": "易损工具寿命记录",
+          "label": "wiki",
+          "summary": "用于记录刀片、砂纸、锯片、胶带和钻头的消耗速度，提前发现备用耗材不足。",
+          "snippet": "# 易损工具寿命记录\n\n## 用途\n\n记录刀片、锯片、砂纸、钻头、胶带、扎带、针线和刷子的使用次数、失效原因和剩余数量，避免耗材突然用尽。\n\n## 适用场景\n\n适用于长期维修、废料拆解、批量修补和多人共用工具。不适用于一次性临时借用后不再管理的外来物。\n\n## 准备材料\n\n最低条件是清单、笔、编号和存放盒。条件允许时准备分格库存盒、损坏样品袋和月度统计页。\n\n## 操作步骤\n\n1. 列出最容易消耗的工具和材料，写初始数量。\n2. 每次更换刀片、锯片、钻头或用完胶带时记录日期和任务。\n3. 写失效信号：变钝、崩口、断裂、失粘、磨光、弯曲。\n4. 低于最低库存线时标记“限制使用”，优先保留关键任务",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "inventory_consumption",
+            "repair_tool_handover"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": -4.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_mismatch_penalty:80",
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:36:工具借用,工具编号,借用,归还"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "repair-wear-tool-life-log-001",
+          "category": "re2f1e7ea2de973",
+          "risk_level": "normal",
+          "guide_links": [
+            "DG-0150"
+          ],
+          "record_id": "refcef416e78cc4",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0150",
+          "linked_guide_title": "工具借用和归还",
+          "metadata": {
+            "record_id": "refcef416e78cc4"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    }
+  ],
+  "summary": {
+    "total": 10,
+    "pass": 10,
+    "partial": 0,
+    "fail": 0,
+    "batch4h_hit_rate": "100.0%",
+    "guide_hit_rate": "100.0%",
+    "guide_wiki_precise_rate": "100.0%",
+    "high_caution_safety_rate": "100.0%",
+    "fallback_rate": "100.0%",
+    "record_rate": "100.0%",
+    "external_violations": 0,
+    "kiwix_overrides": 0,
+    "target_met": {
+      "pass_gte_70": true,
+      "fail_eq_0": true,
+      "batch4h_hit_gte_80": true,
+      "high_caution_safety_eq_100": true,
+      "external_eq_0": true,
+      "kiwix_override_eq_0": true
+    }
+  }
+}

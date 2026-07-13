@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于胶水粘接前清洁、干燥、粗化和压紧表面，避免未固化、脱胶和误用于承重。
 tags: 维修, 胶水, 粘接, 表面处理, 固化
-guide_links:
+guide_links: DG-0835
 kiwix_topics: adhesive, surface preparation, repair glue
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录胶水类型、材料、粘接面积、固化开始时间、可复查时间和限制用途。
+
+## 对应 Guide
+
+- DG-0835 胶水粘接前表面处理

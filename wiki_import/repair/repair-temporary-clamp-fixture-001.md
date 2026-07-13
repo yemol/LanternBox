@@ -6,7 +6,7 @@ priority: P0
 risk_level: caution
 summary: 用于缺少专业夹具时用绳带、木块和重物临时固定材料，避免手扶加工和固定点滑移。
 tags: 维修, 夹具, 临时固定, 木块, 绳带
-guide_links:
+guide_links: DG-0834
 kiwix_topics: clamp, workholding, repair jig
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录临时夹具做法、使用材料、可承受动作、是否留下压痕和需要改进的位置。
+
+## 对应 Guide
+
+- DG-0834 锯切前固定与支撑

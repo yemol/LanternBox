@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于水桶、盆、箱和灰水容器破裂后的止漏、降级和污染边界判断，避免误装饮用水。
 tags: 维修, 容器, 止漏, 破裂, 饮用水边界
-guide_links: DG-0379
+guide_links: DG-0379, DG-0568
 kiwix_topics: container repair, leak control, water container
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,8 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录容器编号、原用途、降级用途、裂缝位置、止漏时间、静置测试结果和责任人。
+
+## 对应 Guide
+
+- DG-0379 容器裂缝临时封堵
+- DG-0568 水桶漏水：临时修补与降级用途

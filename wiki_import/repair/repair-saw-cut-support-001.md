@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于锯木板、塑料管和薄金属前布置支撑，避免夹锯、弹跳、切口崩裂和材料砸落。
 tags: 维修, 锯切, 支撑, 固定, 夹锯
-guide_links:
+guide_links: DG-0834
 kiwix_topics: sawing, workholding, hand saw safety
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录切割材料来源、切下尺寸、发现的裂纹、剩余边料用途和锯片状态。
+
+## 对应 Guide
+
+- DG-0834 锯切前固定与支撑

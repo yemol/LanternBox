@@ -82,6 +82,9 @@
     "太阳能充电",
     "夜间异响"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "repair-blade-dull-chip-check-001",
+    "repair-knife-use-storage-001"
+  ],
   "risk_level": "caution"
 }

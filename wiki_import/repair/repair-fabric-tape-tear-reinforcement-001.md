@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于雨布、背包、衣物和袋子撕裂后用布片与胶带分散拉力，避免裂口继续延伸。
 tags: 维修, 布料, 胶带, 撕裂口, 加固
-guide_links:
+guide_links: DG-0835
 kiwix_topics: fabric repair, tear reinforcement, tape patch
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录裂口位置、补片材料、允许用途、是否防水、复查时间和责任人。
+
+## 对应 Guide
+
+- DG-0835 胶水粘接前表面处理

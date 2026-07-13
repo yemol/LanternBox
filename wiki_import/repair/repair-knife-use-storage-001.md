@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于刀具切割前后的握持、走刀、递交和收纳边界，减少割伤、误触和夜间工具混乱。
 tags: 维修, 刀具, 切割, 收纳, 割伤风险
-guide_links:
+guide_links: DG-0154
 kiwix_topics: knife safety, cutting tools, hand tool storage
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录刀具编号、刀片更换时间、崩口位置、禁用原因、借用人和归还状态。
+
+## 对应 Guide
+
+- DG-0154 刀具和锐器管理

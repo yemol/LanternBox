@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于判断门把、栏杆、钉子、管线和家具是否能作为固定点，避免拉脱、倒塌和管线破坏。
 tags: 维修, 固定点, 失效判断, 承重, 拉脱
-guide_links:
+guide_links: DG-0833
 kiwix_topics: anchor point, load, temporary fixing
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录固定点位置、允许用途、禁用方向、测试结果、垫片材料和复查时间。
+
+## 对应 Guide
+
+- DG-0833 固定点失效判断

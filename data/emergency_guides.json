@@ -12801,7 +12801,8 @@
     ],
     "related_wiki": [
       "repair-tool-borrow-return-log-001",
-      "repair-tool-id-handover-log-001"
+      "repair-tool-id-handover-log-001",
+      "repair-wear-tool-life-log-001"
     ],
     "risk_level": "caution"
   },
@@ -12891,7 +12892,9 @@
       "带电"
     ],
     "related_wiki": [
-      "repair-basic-knots-index-001"
+      "repair-basic-knots-index-001",
+      "repair-zip-tie-light-duty-boundary-001",
+      "repair-tool-substitute-risk-check-001"
     ],
     "risk_level": "caution"
   },
@@ -13162,7 +13165,10 @@
       "太阳能充电",
       "夜间异响"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "repair-blade-dull-chip-check-001",
+      "repair-knife-use-storage-001"
+    ],
     "risk_level": "caution"
   },
   {
@@ -48534,7 +48540,9 @@
     ],
     "related_wiki": [
       "repair-container-repair-material-001",
-      "repair-drinking-water-002"
+      "repair-drinking-water-002",
+      "repair-cracked-container-leak-control-001",
+      "repair-plastic-bucket-crack-load-reduction-001"
     ],
     "notes": "记录补片材料、测试时长和限定用途。",
     "category_original": "工具维修与替代",
@@ -68605,6 +68613,250 @@
       "潮菜防霉",
       "擦伤菜短存",
       "一筐发霉"
+    ],
+    "risk_level": "caution"
+  },
+  {
+    "id": "DG-0833",
+    "title": "固定点失效判断",
+    "category": "工具维修与替代制作",
+    "priority": "P0",
+    "scenario": "棚布、绳索、支架或临时挂点受力时，固定点出现晃动、裂纹、拔出、异响或松动。",
+    "goal": "先卸载或减小拉力，判断固定点是否还能低载使用，避免继续承重造成拉脱、倒塌或伤人。",
+    "tools": [
+      "手电",
+      "标记笔",
+      "布垫",
+      "备用固定点",
+      "记录纸"
+    ],
+    "steps": [
+      "先卸载或减小拉力，不在绳子拉紧时继续检查固定点。",
+      "检查固定点周围是否有裂缝、松动、拔出、异响、变形、锈蚀、潮湿或粉尘掉落。",
+      "用手沿预计受力方向轻推轻拉，观察固定点是否位移、转动或带动墙角材料开裂。",
+      "发现异常时换到新的固定点，或把受力分散到两个以上低位固定点。",
+      "只能低载使用时贴上限制标签，写明不得吊挂、不得牵拉重物和复查时间。"
+    ],
+    "check": [
+      "固定点轻拉无位移、无异响，周围裂缝没有扩大。",
+      "受力方向清楚，绳子不压锐边，失效后不会砸人或堵门。",
+      "禁承重或低载限制已经标记。"
+    ],
+    "common_mistakes": [
+      "固定点已经晃动还继续拉紧测试。",
+      "把松门把、细钉子和不明管线当主要承重点。",
+      "只看绳结牢不牢，不看墙角、挂钩和支架本身。"
+    ],
+    "fallback": [
+      "没有可靠固定点时，把任务降级为轻载标记、地面限位或临时遮挡。",
+      "必须固定时降低负载、分散受力、增加地面支撑，或暂停该固定方案。"
+    ],
+    "stop_or_escalate": [
+      "出现裂缝扩大、固定点拔出、持续异响、墙体掉粉、支架变形或任务涉及人员和头顶物时，立即停用该固定点。",
+      "无法判断固定点背后是否有电线、燃气管或水管时，不在该点继续受力。"
+    ],
+    "notes": "记录位置、用途、估计负载、异常信号、处理人和复查时间。",
+    "category_original": "维修工具",
+    "domains": [
+      "tools",
+      "security",
+      "shelter",
+      "repair"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "structural_risk"
+    ],
+    "objects": [
+      "tools",
+      "building",
+      "shelter"
+    ],
+    "keywords": [
+      "固定点失效判断",
+      "固定点",
+      "挂点",
+      "绑点",
+      "松动",
+      "异响",
+      "裂缝",
+      "承重",
+      "禁承重",
+      "工具维修",
+      "替代制作"
+    ],
+    "negative_keywords": [
+      "固定开机",
+      "通信窗口",
+      "固定时间",
+      "断网"
+    ],
+    "related_wiki": [
+      "repair-anchor-point-failure-check-001",
+      "repair-simple-bracket-load-check-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0834",
+    "title": "锯切前固定与支撑",
+    "category": "工具维修与替代制作",
+    "priority": "P0",
+    "scenario": "没有标准工作台时，需要手锯木板、板条或小木料，必须先固定和支撑。",
+    "goal": "在锯切前让材料稳定、切割线清楚、手远离危险方向，避免滑动、夹锯和落料伤人。",
+    "tools": [
+      "手锯",
+      "垫木",
+      "绳带",
+      "重物",
+      "标记笔"
+    ],
+    "steps": [
+      "锯前先把材料放稳，标出切割线和落料方向。",
+      "在切割线两侧布置支撑，切口下方留出锯片行程，避免切到地面或硬物。",
+      "用夹具、绳带或重物压住材料；重物只能压低风险材料，不能压到会滚动或弹起的位置。",
+      "手不得放在切割线前方、锯片延长线和落料区，先轻锯出导槽再继续。",
+      "出现夹锯、材料跳动、支撑松动、裂纹扩大或手必须靠近切线时停手。"
+    ],
+    "check": [
+      "材料低力推拉不滑动，切割线两侧都有支撑。",
+      "手、腿和旁人不在锯片前进方向和落料区。",
+      "夹锯或支撑松动时有明确停手方案。"
+    ],
+    "common_mistakes": [
+      "一只手扶木板一只手锯。",
+      "只支撑一侧，切到最后材料突然下坠。",
+      "用身体重量猛压锯片解决夹锯。"
+    ],
+    "fallback": [
+      "没有稳定支撑时改用短切、先打浅槽、换更小材料或暂停切割。",
+      "缺夹具时用两处绳带、木楔和低矮重物辅助，但必须先做低力推拉测试。"
+    ],
+    "stop_or_escalate": [
+      "材料无法固定、锯片持续夹住、支撑变形、切线附近有带电线缆或需要悬空手扶时，立即停止锯切。",
+      "疲劳、光线不足或旁人无法离开落料区时，不继续切割。"
+    ],
+    "notes": "记录材料、支撑方式、夹锯或跳动异常、锯片状态和复查时间。",
+    "category_original": "维修工具",
+    "domains": [
+      "tools",
+      "security",
+      "repair"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "structural_risk"
+    ],
+    "objects": [
+      "tools",
+      "building"
+    ],
+    "keywords": [
+      "锯切前固定与支撑",
+      "手锯",
+      "木板",
+      "切割线",
+      "夹具",
+      "夹锯",
+      "防滑",
+      "支撑",
+      "手的位置",
+      "工具维修"
+    ],
+    "negative_keywords": [
+      "固定开机",
+      "通信窗口",
+      "固定时间",
+      "断网"
+    ],
+    "related_wiki": [
+      "repair-saw-cut-support-001",
+      "repair-temporary-clamp-fixture-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0835",
+    "title": "胶水粘接前表面处理",
+    "category": "工具维修与替代制作",
+    "priority": "P0",
+    "scenario": "塑料、布料或轻质材料用胶水粘接失败，表面有灰、水汽或油污，需要重新处理粘接面。",
+    "goal": "先清洁、干燥、粗化并试粘，判断是否继续胶粘，或降级为绑扎、缝补和胶带加固。",
+    "tools": [
+      "干布",
+      "砂纸或粗布",
+      "胶水",
+      "夹具或重物",
+      "标签"
+    ],
+    "steps": [
+      "先清除粘接面的灰尘、水汽、油污、旧胶皮和松散碎屑。",
+      "确认表面完全干燥；潮湿材料先晾干，不在水汽未散时上胶。",
+      "光滑塑料或硬片先小范围粗化，再擦净粉屑。",
+      "在边角做小面积试粘，确认胶水不会起皮、滑移或腐蚀材料。",
+      "薄涂后压紧并等待固化，固化前不反复掰开查看。"
+    ],
+    "check": [
+      "表面干燥清洁，压合后不滑移，固化后边缘不翘。",
+      "失败原因已记录，承重或潮湿用途已降级。"
+    ],
+    "common_mistakes": [
+      "灰尘和水汽未清理就直接上胶。",
+      "胶层涂太厚，未固化就受力。",
+      "把胶水粘接用于承重、入口容器内壁或电气绝缘。"
+    ],
+    "fallback": [
+      "再次开胶、承重件或潮湿环境中，降级为绑扎、缝补、补片和胶带加固。",
+      "缺胶水时用布条、绳线、夹子或机械固定，明确只是临时低载。"
+    ],
+    "stop_or_escalate": [
+      "粘接件需要承重、接触饮用水或食物、靠近热源或电气绝缘时，不用普通胶水恢复原用途。",
+      "试粘后材料发黏、变形、起泡或有强烈异味时，停止使用该胶水。"
+    ],
+    "notes": "记录材料、胶种、表面状态、压紧时间、失败原因和复查时间。",
+    "category_original": "维修工具",
+    "domains": [
+      "tools",
+      "repair"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair"
+    ],
+    "objects": [
+      "tools",
+      "supplies"
+    ],
+    "keywords": [
+      "胶水粘接前表面处理",
+      "胶水",
+      "粘接",
+      "塑料片",
+      "表面",
+      "灰尘",
+      "水汽",
+      "干燥",
+      "粗化",
+      "固化",
+      "工具维修"
+    ],
+    "negative_keywords": [
+      "留种粮",
+      "种子",
+      "主食",
+      "粮食"
+    ],
+    "related_wiki": [
+      "repair-glue-surface-prep-001",
+      "repair-fabric-tape-tear-reinforcement-001"
     ],
     "risk_level": "caution"
   }

@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于塑料桶、盆和箱出现裂缝后降低装载量、改变用途和安排复查，避免提手断裂与漏液。
 tags: 维修, 塑料桶, 裂缝, 减载, 容器降级
-guide_links: DG-0379
+guide_links: DG-0379, DG-0568
 kiwix_topics: plastic bucket crack, container downgrade, repair
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,8 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录容器编号、降级用途、最大装载线、裂缝标记时间和复查结果。
+
+## 对应 Guide
+
+- DG-0379 容器裂缝临时封堵
+- DG-0568 水桶漏水：临时修补与降级用途

@@ -6,7 +6,7 @@ priority: P1
 risk_level: high
 summary: 用于缺少专用工具时判断替代物是否会断裂、打滑、导电或损坏关键物资，决定降级或停工。
 tags: 维修, 工具替代, 风险判断, 降级, 停工
-guide_links: DG-0510
+guide_links: DG-0510, DG-0151
 kiwix_topics: improvised tools, tool substitution, repair safety
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,8 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录缺少的工具、替代物、允许动作、失败信号、责任人和是否需要补充正式工具。
+
+## 对应 Guide
+
+- DG-0151 胶带和扎带临时固定
+- DG-0510 缺工具时的替代风险判断

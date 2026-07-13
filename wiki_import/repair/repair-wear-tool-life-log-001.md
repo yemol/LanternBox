@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用于记录刀片、砂纸、锯片、胶带和钻头的消耗速度，提前发现备用耗材不足。
 tags: 维修, 易损工具, 寿命记录, 耗材, 库存
-guide_links:
+guide_links: DG-0150
 kiwix_topics: consumable tools, maintenance log, inventory
 last_reviewed: 2026-07-13
 status: published
@@ -51,3 +51,7 @@ source: LanternBox internal curated knowledge
 ## 记录建议
 
 记录耗材编号、启用时间、失效时间、使用任务、失效信号、剩余数量和限制用途。
+
+## 对应 Guide
+
+- DG-0150 工具借用和归还

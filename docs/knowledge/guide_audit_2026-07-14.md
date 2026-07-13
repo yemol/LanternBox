@@ -6,7 +6,7 @@
 - 未发现 canonical clone 重复组。
 
 ## 覆盖范围
-- Guide JSON：762
+- Guide JSON：765
 - 目录数：24
 - 分类数：41
 
@@ -20,7 +20,7 @@
 |hygiene|64|
 |evacuation|58|
 |disaster|46|
-|tools|40|
+|tools|43|
 |records|25|
 |food|21|
 |external_contact|20|
@@ -41,7 +41,7 @@
 ## Priority 分布
 |priority|数量|
 |---|---:|
-|P0|554|
+|P0|557|
 |P1|141|
 |P2|67|
 
@@ -49,8 +49,8 @@
 |risk_level|数量|
 |---|---:|
 |normal|108|
-|caution|571|
-|high|69|
+|caution|572|
+|high|71|
 |critical|14|
 
 ## 结构检查
