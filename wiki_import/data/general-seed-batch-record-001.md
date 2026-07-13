@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用于种子批次记录的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 种子批次记录, 信息保存与长期重建, P2, 长期重建, 离线知识, 记录, 判断
-guide_links: DG-0516
+guide_links: DG-0516, DG-0053
 kiwix_topics: 种子批次记录, Offline backup, Records management, Knowledge management
 last_reviewed: 2026-07-03
 status: published
@@ -57,3 +57,4 @@ source: LanternBox internal curated knowledge
 ## 对应 Guide
 
 - DG-0516｜种植档案字段｜使用时机：后续系统需要记录种子分类、方法、批次和经验。
+- DG-0053｜种子发芽测试：先测一小撮｜使用时机：不确定种子是否还能种，或者储存时间较长。

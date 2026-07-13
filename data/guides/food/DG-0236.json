@@ -80,6 +80,11 @@
     "冰箱食物",
     "罐头鼓包"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "agriculture-improvised-nursery-tray-001",
+    "agriculture-seedling-transplant-001",
+    "agriculture-shade-heat-protection-001",
+    "agriculture-sowing-depth-spacing-001"
+  ],
   "risk_level": "normal"
 }

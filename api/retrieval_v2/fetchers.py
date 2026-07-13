@@ -26,11 +26,98 @@ def _matching_query_profiles(user_message: str) -> list[dict[str, Any]]:
     text = str(user_message or "")
     matched = []
     for profile in _load_query_profiles():
+        object_triggers = [str(item) for item in profile.get("object_triggers", []) if str(item)]
+        state_triggers = [str(item) for item in profile.get("state_triggers", []) if str(item)]
+        if object_triggers or state_triggers:
+            object_match = bool(object_triggers) and any(term in text for term in object_triggers)
+            state_match = bool(state_triggers) and any(term in text for term in state_triggers)
+            if object_match and state_match:
+                matched.append(profile)
+            continue
         triggers = [str(item) for item in profile.get("trigger_any", []) if str(item)]
         hit_count = sum(term in text for term in triggers)
         if hit_count >= int(profile.get("min_trigger_matches", 1) or 1):
             matched.append(profile)
     return matched
+
+
+def _profile_adjustment(
+    profile: dict[str, Any],
+    *,
+    domains: set[str],
+    slug_domain: str = "",
+    category: str = "",
+    text: str = "",
+    anchor_text: str = "",
+    user_message: str = "",
+) -> tuple[float, bool, list[str]]:
+    target_domains = {str(item) for item in profile.get("target_domains", [])}
+    target_slug_domains = {str(item) for item in profile.get("target_slug_domains", [])}
+    target_categories = {str(item) for item in profile.get("target_categories", [])}
+    target_match = (
+        bool(domains & target_domains)
+        or bool(slug_domain and slug_domain in target_slug_domains)
+        or bool(category and category in target_categories)
+    )
+    adjustment = 0.0
+    reasons: list[str] = []
+
+    if target_match:
+        boost = float(profile.get("domain_boost", 0) or 0)
+        adjustment += boost
+        if boost:
+            reasons.append(f"profile_domain_boost:{boost:g}")
+    elif target_domains or target_slug_domains or target_categories:
+        unless_context = [str(item) for item in profile.get("mismatch_unless_context", [])]
+        if not any(term in user_message for term in unless_context):
+            penalty = float(profile.get("domain_mismatch_penalty", 0) or 0)
+            adjustment -= penalty
+            if penalty:
+                reasons.append(f"profile_domain_mismatch_penalty:{penalty:g}")
+
+    negative_terms = [str(item) for item in profile.get("negative_terms", [])]
+    negative_unless = [str(item) for item in profile.get("negative_unless_context", [])]
+    if negative_terms and not any(term in user_message for term in negative_unless):
+        matched_negative = [term for term in negative_terms if term in text]
+        if matched_negative:
+            penalty = float(profile.get("negative_penalty", 0) or 0)
+            adjustment -= penalty
+            if penalty:
+                reasons.append(
+                    "profile_negative_penalty:"
+                    + f"{penalty:g}:"
+                    + ",".join(matched_negative[:4])
+                )
+
+    anchor_terms = [str(item) for item in profile.get("candidate_anchor_terms", [])]
+    if anchor_terms:
+        candidate_anchor_text = anchor_text or text
+        matched_anchors = [term for term in anchor_terms if term in candidate_anchor_text]
+        if matched_anchors:
+            boost = float(profile.get("candidate_anchor_boost", 0) or 0)
+            adjustment += boost
+            if boost:
+                reasons.append(
+                    "profile_candidate_anchor_boost:"
+                    + f"{boost:g}:"
+                    + ",".join(matched_anchors[:4])
+                )
+        else:
+            penalty = float(profile.get("candidate_anchor_miss_penalty", 0) or 0)
+            adjustment -= penalty
+            if penalty:
+                reasons.append(f"profile_candidate_anchor_miss_penalty:{penalty:g}")
+
+    return adjustment, target_match, reasons
+
+
+def _profile_fit_tier(target_match: bool, reasons: list[str]) -> int:
+    anchor_match = any(reason.startswith("profile_candidate_anchor_boost:") for reason in reasons)
+    if target_match and anchor_match:
+        return 2
+    if target_match or anchor_match:
+        return 1
+    return 0
 
 def _split_search_terms(value: Any) -> List[str]:
     """Split AI-provided search terms into stable tokens.
@@ -195,6 +282,19 @@ def _guide_field_texts(guide: dict[str, Any]) -> dict[str, str]:
     }
 
 
+def _guide_profile_anchor_text(guide: dict[str, Any]) -> str:
+    """Text that describes what the Guide actively handles, excluding incidental mistakes/notes."""
+    return " ".join([
+        _as_text(guide.get("title")),
+        _as_text(guide.get("keywords")),
+        _as_text(guide.get("scenario")),
+        _as_text(guide.get("goal")),
+        _as_text(guide.get("tools")),
+        _as_text(guide.get("steps")),
+        _as_text(guide.get("check")),
+    ])
+
+
 def _negative_text(guide: dict[str, Any]) -> str:
     return _as_text(guide.get("negative_keywords"))
 
@@ -352,38 +452,59 @@ def fetch_guide_candidates(
 
         guide_domains = set(_as_tags(guide.get("domains")))
         guide_text = " ".join(_guide_field_texts(guide).values())
+        profile_reasons: list[str] = []
+        profile_target_match = False
+        profile_fit_tier = 0
         for profile in query_profiles:
-            target_domains = set(str(item) for item in profile.get("target_domains", []))
-            if guide_domains & target_domains:
-                score += float(profile.get("domain_boost", 0) or 0)
-            elif target_domains:
-                score -= float(profile.get("domain_mismatch_penalty", 0) or 0)
+            adjustment, target_match, reasons = _profile_adjustment(
+                profile,
+                domains=guide_domains,
+                text=guide_text,
+                anchor_text=_guide_profile_anchor_text(guide),
+                user_message=user_message,
+            )
+            score += adjustment
+            profile_target_match = profile_target_match or target_match
+            profile_reasons.extend(reasons)
+            profile_fit_tier = max(profile_fit_tier, _profile_fit_tier(target_match, reasons))
             if any(str(alias) in str(guide.get("title") or "") for alias in profile.get("aliases", [])):
-                score += float(profile.get("title_alias_boost", 0) or 0)
-            unless_context = [str(item) for item in profile.get("negative_unless_context", [])]
-            if unless_context and any(term in user_message for term in unless_context):
-                continue
-            if any(str(term) in guide_text for term in profile.get("negative_terms", [])):
-                score -= float(profile.get("negative_penalty", 0) or 0)
+                title_boost = float(profile.get("title_alias_boost", 0) or 0)
+                score += title_boost
+                if title_boost:
+                    profile_reasons.append(f"profile_title_alias_boost:{title_boost:g}")
 
         if score <= 0:
             continue
 
-        scored.append((score, guide))
+        scored.append((profile_fit_tier, score, guide))
 
-    scored.sort(key=lambda item: item[0], reverse=True)
+    scored.sort(key=lambda item: (item[0], item[1]), reverse=True)
 
     results: List[EvidenceCandidate] = []
-    for _, guide in scored[:limit]:
+    for _, _, guide in scored[:limit]:
         guide_payload = dict(guide)
         matched_profile_names = [str(profile.get("name") or "") for profile in query_profiles]
-        target_match = any(
-            set(_as_tags(guide.get("domains"))) & set(str(item) for item in profile.get("target_domains", []))
-            for profile in query_profiles
-        )
         if matched_profile_names:
+            guide_domains = set(_as_tags(guide.get("domains")))
+            guide_text = " ".join(_guide_field_texts(guide).values())
+            adjustments = [
+                _profile_adjustment(
+                    profile,
+                    domains=guide_domains,
+                    text=guide_text,
+                    anchor_text=_guide_profile_anchor_text(guide),
+                    user_message=user_message,
+                )
+                for profile in query_profiles
+            ]
             guide_payload["retrieval_query_profiles"] = matched_profile_names
-            guide_payload["retrieval_profile_target_match"] = target_match
+            guide_payload["retrieval_profile_target_match"] = any(item[1] for item in adjustments)
+            guide_payload["retrieval_profile_adjustment"] = sum(item[0] for item in adjustments)
+            guide_payload["retrieval_profile_reasons"] = [reason for item in adjustments for reason in item[2]]
+            guide_payload["retrieval_profile_fit_tier"] = max(
+                (_profile_fit_tier(item[1], item[2]) for item in adjustments),
+                default=0,
+            )
         results.append(
             EvidenceCandidate(
                 source_type="guide",
@@ -410,19 +531,25 @@ def fetch_wiki_candidates(
     limit = plan.limit or 8
     terms = _plan_terms(plan)
     core = _core_terms(core_terms)
+    query_profiles = _matching_query_profiles(user_message)
+    profile_aliases = _clean_terms(
+        [alias for profile in query_profiles for alias in profile.get("aliases", [])],
+        limit=48,
+    )
+    matched_profile_names = [str(profile.get("name") or "") for profile in query_profiles]
 
     queries: List[str] = []
 
     if plan.query:
         queries.append(plan.query)
 
-    # Use planner terms and core_terms as additional search probes.
-    for term in terms + core:
+    # Profile aliases are semantic normalization probes shared with Guide retrieval.
+    for term in [*profile_aliases, *terms, *core]:
         if term not in queries:
             queries.append(term)
 
     seen = set()
-    scored: List[tuple[int, EvidenceCandidate]] = []
+    scored: List[tuple[int, float, EvidenceCandidate]] = []
 
     for query in queries[:12]:
         query = str(query or "").strip()
@@ -469,17 +596,40 @@ def fetch_wiki_candidates(
                 content[:500],
             ])
 
-            score = _score_text_match(match_text, terms)
-            score += _score_text_match(title, terms) * 2
+            scoring_terms = [*terms, *profile_aliases]
+            score = _score_text_match(match_text, scoring_terms)
+            score += _score_text_match(title, scoring_terms) * 2
             score += _score_text_match(match_text, core) * 2
             score += _score_text_match(title, core) * 4
+
+            slug = str(article.get("slug") or article_id)
+            slug_domain = slug.split("-", 1)[0] if "-" in slug else slug
+            article_domains = set(_as_tags(article.get("domains")))
+            profile_reasons: list[str] = []
+            profile_target_match = False
+            profile_adjustment = 0.0
+            profile_fit_tier = 0
+            for profile in query_profiles:
+                adjustment, target_match, reasons = _profile_adjustment(
+                    profile,
+                    domains=article_domains,
+                    slug_domain=slug_domain,
+                    category=str(article.get("category") or ""),
+                    text=match_text,
+                    user_message=user_message,
+                )
+                score += adjustment
+                profile_adjustment += adjustment
+                profile_target_match = profile_target_match or target_match
+                profile_reasons.extend(reasons)
+                profile_fit_tier = max(profile_fit_tier, _profile_fit_tier(target_match, reasons))
 
             if score <= 0:
                 continue
 
             candidate = EvidenceCandidate(
                 source_type="wiki",
-                id=article_id,
+                id=slug,
                 title=title,
                 summary=content[:300],
                 category=str(article.get("category") or ""),
@@ -489,18 +639,23 @@ def fetch_wiki_candidates(
                     **article,
                     "source_role": "independent_support",
                     "source_reason": "independent_wiki_search",
+                    "retrieval_query_profiles": matched_profile_names,
+                    "retrieval_profile_target_match": profile_target_match,
+                    "retrieval_profile_adjustment": profile_adjustment,
+                    "retrieval_profile_reasons": profile_reasons,
+                    "retrieval_profile_fit_tier": profile_fit_tier,
                     "metadata": {
                         "record_id": article.get("record_id") or article.get("pocketbase_id") or "",
                     },
                 },
             )
 
-            scored.append((score, candidate))
+            scored.append((profile_fit_tier, score, candidate))
             seen.add(key)
 
-    scored.sort(key=lambda item: item[0], reverse=True)
+    scored.sort(key=lambda item: (item[0], item[1]), reverse=True)
 
-    return [candidate for _, candidate in scored[:limit]]
+    return [candidate for _, _, candidate in scored[:limit]]
 
 
 def fetch_related_wiki_candidates(selected_guides: List[EvidenceCandidate]) -> List[EvidenceCandidate]:
@@ -526,6 +681,18 @@ def fetch_related_wiki_candidates(selected_guides: List[EvidenceCandidate]) -> L
             continue
         guide_ids = [guide.id for guide in linked_guides]
         guide_titles = [guide.title for guide in linked_guides]
+        profile_names = list(dict.fromkeys(
+            str(name)
+            for guide in linked_guides
+            for name in (guide.raw or {}).get("retrieval_query_profiles", [])
+            if str(name)
+        ))
+        profile_reasons = list(dict.fromkeys(
+            f"inherited_from_guide:{reason}"
+            for guide in linked_guides
+            for reason in (guide.raw or {}).get("retrieval_profile_reasons", [])
+            if str(reason)
+        ))
         raw = {
             **article,
             "id": slug,
@@ -537,6 +704,20 @@ def fetch_related_wiki_candidates(selected_guides: List[EvidenceCandidate]) -> L
             "linked_guide_ids": guide_ids,
             "linked_guide_titles": guide_titles,
             "guide_links": list(dict.fromkeys([*article.get("guide_links", []), *guide_ids])),
+            "retrieval_query_profiles": profile_names,
+            "retrieval_profile_target_match": any(
+                bool((guide.raw or {}).get("retrieval_profile_target_match"))
+                for guide in linked_guides
+            ),
+            "retrieval_profile_adjustment": max(
+                [float((guide.raw or {}).get("retrieval_profile_adjustment", 0) or 0) for guide in linked_guides],
+                default=0,
+            ),
+            "retrieval_profile_reasons": profile_reasons,
+            "retrieval_profile_fit_tier": max(
+                [int((guide.raw or {}).get("retrieval_profile_fit_tier", 0) or 0) for guide in linked_guides],
+                default=0,
+            ),
             "metadata": {
                 "record_id": article.get("record_id") or article.get("pocketbase_id") or "",
             },

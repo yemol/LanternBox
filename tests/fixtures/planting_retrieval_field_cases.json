@@ -1,0 +1,199 @@
+[
+  {
+    "id": "planting_seed_no_germination",
+    "question": "上个月留的一袋菜种播下去一周还没动静，剩下的种子不多，下一步怎么判断，能不能把整袋都补播？",
+    "expected_wikis": [
+      "agriculture-seed-germination-test-001",
+      "general-seed-batch-record-001"
+    ],
+    "expected_guides": [
+      "DG-0232",
+      "DG-0053"
+    ],
+    "focus_terms": [
+      "小样",
+      "发芽",
+      "批次",
+      "记录",
+      "整批"
+    ],
+    "risk_boundary_required": true
+  },
+  {
+    "id": "planting_rain_waterlogging",
+    "question": "昨晚大雨后菜地到中午还有积水，几盆菜叶也开始发黄。我该先排水还是继续浇，哪些迹象说明这块地暂时不能再种？",
+    "expected_wikis": [
+      "agriculture-post-rain-garden-review-001",
+      "agriculture-soil-drainage-test-001",
+      "agriculture-root-rot-warning-001"
+    ],
+    "expected_guides": [
+      "DG-0234"
+    ],
+    "focus_terms": [
+      "积水",
+      "排水",
+      "根腐",
+      "停水",
+      "污染",
+      "异味"
+    ],
+    "risk_boundary_required": true
+  },
+  {
+    "id": "planting_sewage_near_plot",
+    "question": "桶厕旁边有粪水顺着坡流到菜地边缘，菜还没采。我现在该怎么划区，哪些菜和土要停止使用，之后怎么留下禁用记录？",
+    "expected_wikis": [
+      "agriculture-manure-growing-zone-separation-001",
+      "agriculture-contaminated-plot-ban-record-001"
+    ],
+    "expected_guides": [
+      "DG-0678",
+      "DG-0227"
+    ],
+    "focus_terms": [
+      "隔离",
+      "禁用",
+      "停止",
+      "粪污",
+      "边界",
+      "记录"
+    ],
+    "risk_boundary_required": true
+  },
+  {
+    "id": "planting_wood_ash",
+    "question": "灶里攒了一桶灰，有些来自木柴，有些可能烧过旧木板。能不能撒到菜地当肥料，怎么先做小范围判断？",
+    "expected_wikis": [
+      "agriculture-wood-ash-fertilizer-boundary-001"
+    ],
+    "expected_guides": [],
+    "focus_terms": [
+      "来源",
+      "旧木板",
+      "禁用",
+      "小范围",
+      "对照",
+      "草木灰"
+    ],
+    "risk_boundary_required": true
+  },
+  {
+    "id": "planting_low_water_priority",
+    "question": "储水只够维持几天，菜园里有刚移的苗、正在结果的菜和还没开花的老株，应该先浇谁，怎样少用水又不把根闷坏？",
+    "expected_wikis": [
+      "agriculture-low-water-irrigation-priority-001",
+      "agriculture-mulch-material-safety-001"
+    ],
+    "expected_guides": [
+      "DG-0674"
+    ],
+    "focus_terms": [
+      "幼苗",
+      "结果",
+      "优先",
+      "覆盖",
+      "根区",
+      "积水"
+    ],
+    "risk_boundary_required": true
+  },
+  {
+    "id": "planting_wilted_seedlings",
+    "question": "昨天刚移栽的幼苗今天中午全蔫了，土摸着还有点湿。现在要不要猛浇水，怎么遮阴和判断是否还在缓苗？",
+    "expected_wikis": [
+      "agriculture-shade-heat-protection-001",
+      "agriculture-seedling-transplant-001"
+    ],
+    "expected_guides": [
+      "DG-0236"
+    ],
+    "focus_terms": [
+      "遮阴",
+      "缓苗",
+      "清晨",
+      "土湿",
+      "移栽",
+      "停止"
+    ],
+    "risk_boundary_required": true
+  },
+  {
+    "id": "planting_leaf_spots",
+    "question": "两盆菜的叶背出现白斑，旁边的菜暂时正常。是马上全拔掉，还是先隔开观察？剪下来的叶子和剪刀怎么处理？",
+    "expected_wikis": [
+      "agriculture-crop-disease-isolation-001",
+      "agriculture-diseased-residue-separation-001"
+    ],
+    "expected_guides": [],
+    "focus_terms": [
+      "隔离",
+      "叶背",
+      "工具",
+      "病残体",
+      "堆肥",
+      "观察"
+    ],
+    "risk_boundary_required": true
+  },
+  {
+    "id": "planting_safe_site",
+    "question": "院子里有靠墙、靠水桶和靠动物圈的三小块空地，想开一个菜园。怎么比较光照、排水和污染风险，哪类位置直接不用？",
+    "expected_wikis": [
+      "agriculture-garden-site-selection-001",
+      "agriculture-contaminated-plot-ban-record-001"
+    ],
+    "expected_guides": [
+      "DG-0227"
+    ],
+    "focus_terms": [
+      "光照",
+      "排水",
+      "污染",
+      "粪污",
+      "禁用",
+      "水源"
+    ],
+    "risk_boundary_required": true
+  },
+  {
+    "id": "planting_harvest_storage",
+    "question": "刚收下来的叶菜和根菜有的擦伤、有的还带潮气，怎么分出能马上吃、能短存和应该隔离的，避免一筐一起发霉？",
+    "expected_wikis": [
+      "agriculture-harvest-maturity-check-001",
+      "agriculture-harvest-001"
+    ],
+    "expected_guides": [],
+    "focus_terms": [
+      "成熟",
+      "破损",
+      "潮湿",
+      "分开",
+      "霉",
+      "隔离"
+    ],
+    "risk_boundary_required": false,
+    "knowledge_gap_candidate": "缺少独立的 agriculture-post-harvest-mold-prevention Wiki；现有 agriculture-harvest-001 可作为相邻依据。"
+  },
+  {
+    "id": "planting_failure_review",
+    "question": "同一批苗有的没发芽、有的移栽后三天死了，天气和浇水记录也不完整。怎么复盘才知道下一批只该改哪一项？",
+    "expected_wikis": [
+      "agriculture-planting-failure-review-001",
+      "agriculture-growing-record-handover-001"
+    ],
+    "expected_guides": [
+      "DG-0514"
+    ],
+    "focus_terms": [
+      "时间",
+      "天气",
+      "水量",
+      "病虫",
+      "土壤",
+      "批次",
+      "只改"
+    ],
+    "risk_boundary_required": false
+  }
+]

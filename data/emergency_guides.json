@@ -4568,7 +4568,10 @@
       "窗外",
       "夜间可疑"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "agriculture-seed-germination-test-001",
+      "general-seed-batch-record-001"
+    ],
     "risk_level": "caution"
   },
   {
@@ -19270,7 +19273,10 @@
       "罐头鼓包",
       "夜间异响"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "agriculture-contaminated-plot-ban-record-001",
+      "agriculture-garden-site-selection-001"
+    ],
     "risk_level": "caution"
   },
   {
@@ -19441,6 +19447,7 @@
       "夜间可疑"
     ],
     "related_wiki": [
+      "agriculture-seasonal-planting-plan-001",
       "agriculture-small-garden-pest-index-001"
     ],
     "risk_level": "caution"
@@ -19699,6 +19706,8 @@
       "夜间可疑"
     ],
     "related_wiki": [
+      "agriculture-planting-inventory-link-001",
+      "agriculture-seed-germination-test-001",
       "agriculture-soil-fertility-basics-index-001"
     ],
     "risk_level": "normal"
@@ -19775,7 +19784,9 @@
       "窗外",
       "夜间可疑"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "agriculture-manual-pest-removal-001"
+    ],
     "risk_level": "caution"
   },
   {
@@ -19850,7 +19861,11 @@
       "窗外",
       "夜间可疑"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "agriculture-post-rain-garden-review-001",
+      "agriculture-root-rot-warning-001",
+      "agriculture-soil-drainage-test-001"
+    ],
     "risk_level": "normal"
   },
   {
@@ -19923,7 +19938,9 @@
       "窗外",
       "夜间可疑"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "agriculture-compost-pile-setup-001"
+    ],
     "risk_level": "caution"
   },
   {
@@ -20008,7 +20025,12 @@
       "冰箱食物",
       "罐头鼓包"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "agriculture-improvised-nursery-tray-001",
+      "agriculture-seedling-transplant-001",
+      "agriculture-shade-heat-protection-001",
+      "agriculture-sowing-depth-spacing-001"
+    ],
     "risk_level": "normal"
   },
   {
@@ -43609,7 +43631,9 @@
       "窗外",
       "夜间可疑"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "agriculture-planting-failure-review-001"
+    ],
     "risk_level": "normal"
   },
   {
@@ -59326,6 +59350,7 @@
       "agriculture-leafy-greens-001",
       "agriculture-light-001",
       "agriculture-plant-pests-001",
+      "agriculture-seed-exchange-quarantine-001",
       "agriculture-seed-saving-001",
       "agriculture-seed-storage-001",
       "agriculture-seed-storage-002",
@@ -59656,6 +59681,8 @@
     ],
     "related_wiki": [
       "agriculture-container-002",
+      "agriculture-low-water-irrigation-priority-001",
+      "agriculture-mulch-material-safety-001",
       "agriculture-seed-storage-001",
       "agriculture-sprouts-001"
     ],
@@ -59753,6 +59780,7 @@
     ],
     "related_wiki": [
       "agriculture-container-002",
+      "agriculture-seed-selection-for-saving-001",
       "agriculture-seed-storage-001",
       "agriculture-sprouts-001"
     ],
@@ -60089,6 +60117,7 @@
       "agriculture-exit-decision-001",
       "agriculture-feces-001",
       "agriculture-feces-002",
+      "agriculture-manure-growing-zone-separation-001",
       "agriculture-mold-001",
       "agriculture-odor-noise-001",
       "agriculture-slaughter-boundary-001",
@@ -68243,6 +68272,320 @@
       "异常上报",
       "水",
       "先把饮水异常情况及时上报和记录"
+    ],
+    "risk_level": "caution"
+  },
+  {
+    "id": "DG-0830",
+    "title": "草木灰来源审查和禁用",
+    "category": "种植",
+    "domains": [
+      "planting",
+      "food"
+    ],
+    "priority": "P0",
+    "scenario": "现有灰可能混有漆木、防腐木、煤、垃圾或不明燃料，需要决定能否用于食用作物。",
+    "goal": "在灰进入菜地前排除不明燃料和有毒残留，只对来源明确的干净木柴灰做小样试用。",
+    "keywords": [
+      "草木灰",
+      "灶灰",
+      "柴灰",
+      "炉灰",
+      "旧木板灰",
+      "灰肥",
+      "来源不明",
+      "漆木",
+      "防腐木",
+      "垃圾焚烧灰",
+      "禁止施用",
+      "小样试用"
+    ],
+    "tools": [
+      "来源标签",
+      "小勺",
+      "手部隔离层",
+      "记录纸",
+      "小样试验区标记"
+    ],
+    "steps": [
+      "先问清灰的燃料来源和焚烧日期；无法确认来源时立即标为禁用批。",
+      "检查是否烧过旧木板、油漆木、防腐木、塑料、垃圾、煤或不明材料；任一命中都不用于食用作物。",
+      "只对来源明确的未上漆、未防腐干净木柴灰继续检查，确认灰已完全冷却且无金属、玻璃和异味杂物。",
+      "在远离主菜地和茎根的一个小样区薄撒极少量，混入表土，立即标记批次、日期和用量。",
+      "保留未施灰对照区，七天内每日检查叶缘焦黄、土表变白结壳、异味和发芽差异。",
+      "只在来源记录完整、小样与对照无异常时保留试验结果，不直接扩大到整个主菜地。"
+    ],
+    "check": [
+      "灰来源可追踪。",
+      "不含漆木、防腐木、煤、塑料或垃圾焚烧灰。",
+      "小样区有位置和用量标记。",
+      "七天对照无烧苗、结壳和异味。"
+    ],
+    "common_mistakes": [
+      "把所有灰都当成草木灰。",
+      "只看灰的颜色而不追问燃料。",
+      "不做对照就撒入主菜地。",
+      "把湿灰或浓灰水直接浇到茎根。"
+    ],
+    "fallback": [
+      "来源无法确认时，将灰封存标为非种植用，菜地改用已腐熟堆肥或暂不施肥。",
+      "没有多余地块时，在单独小容器中做试验，不使用主种子和主菜地。"
+    ],
+    "stop_or_escalate": [
+      "来源不明或混有旧木板、油漆木、防腐木、煤、塑料、垃圾时禁用于食用作物。",
+      "出现烧苗、土表异常变白结壳、刺鼻异味或批次混杂时停止试用并隔离灰料。"
+    ],
+    "related_wiki": [
+      "agriculture-wood-ash-fertilizer-boundary-001"
+    ],
+    "notes": "草木灰的第一判断是燃料来源，不用小样试验为来源不明的灰解除禁用。",
+    "intents": [
+      "planting_wood_ash_safety"
+    ],
+    "objects": [
+      "草木灰",
+      "灶灰",
+      "柴灰",
+      "旧木板灰",
+      "食用作物"
+    ],
+    "signals": [
+      "来源不明",
+      "漆木",
+      "防腐木",
+      "烧苗",
+      "异味"
+    ],
+    "risks": [
+      "contamination",
+      "crop_damage"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "planting_wood_ash_safety",
+    "top1_aliases": [
+      "草木灰",
+      "灶灰能不能当肥",
+      "旧木板灰",
+      "灰肥禁用"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0831",
+    "title": "作物病害隔离与工具分流",
+    "category": "种植",
+    "domains": [
+      "planting",
+      "food",
+      "hygiene"
+    ],
+    "priority": "P0",
+    "scenario": "少量作物出现叶斑、霉层、软腐或异常萎蔞，其他植株暂时正常。",
+    "goal": "在症状跨株扩散前分开植株、浇水、工具和病残体路线。",
+    "keywords": [
+      "菜叶白斑",
+      "叶斑",
+      "叶背",
+      "病叶",
+      "霉层",
+      "软腐",
+      "隔开观察",
+      "病害隔离",
+      "剪刀分流",
+      "工具分流",
+      "病残体",
+      "不入堆肥"
+    ],
+    "tools": [
+      "隔离标签",
+      "可分流的剪刀或折断工具",
+      "手部隔离层",
+      "病残体容器",
+      "记录纸"
+    ],
+    "steps": [
+      "先从健康区向可疑区查看，标出首发植株、症状位置和当日边界。",
+      "把可移动病盆放到浇水不回流的边缘位置；地栽株用标记划出独立操作区。",
+      "剪刀、手套、托盘和收集容器只用于可疑区，未清洁干燥前不接触健康植株。",
+      "先处理健康株，最后处理可疑株；只去除能完整摘下的病叶，不为清空症状而大幅拉伤主茎。",
+      "病叶、软腐部分和带虫卵残体直接放入标记容器，不放入普通堆肥或留在畦边。",
+      "连续三天在同一位置比较斑点边界、新株症状、茎基硬度和异味，每次复查后记录工具。"
+    ],
+    "check": [
+      "可疑株或可疑区有明显标记。",
+      "浇水不从可疑区回流到健康区。",
+      "病害工具和容器与健康区分开。",
+      "病残体未进入普通堆肥。",
+      "三天扩散边界有记录。"
+    ],
+    "common_mistakes": [
+      "先碰病株再处理健康株。",
+      "病害剪刀未清洁就跨区使用。",
+      "把病叶丢进低温普通堆肥。",
+      "看到黄叶就拔掉所有植株，不先排除缺水、积水和日灼。"
+    ],
+    "fallback": [
+      "无额外空间时，在种植区最边缘设可疑区，用独立托盘阻断浇水回流。",
+      "缺少剪刀时，只摘除能完整分离的叶片；无法不伤茎时保持隔离而不强行切除。"
+    ],
+    "stop_or_escalate": [
+      "症状扩大到多株或跨越隔离边界时，停止移苗、分苗和共用工具。",
+      "出现软腐出水、明显恶臭或病残体液体流入其他根区时，停止采食和混放，隔离整区。"
+    ],
+    "related_wiki": [
+      "agriculture-crop-disease-isolation-001",
+      "agriculture-diseased-residue-separation-001"
+    ],
+    "notes": "这张卡处理可疑传播路线，不用外观直接诊断具体病原。",
+    "intents": [
+      "planting_crop_disease_isolation"
+    ],
+    "objects": [
+      "菜叶",
+      "作物",
+      "植株",
+      "病叶",
+      "剪刀",
+      "病残体"
+    ],
+    "signals": [
+      "叶斑",
+      "白斑",
+      "叶背霉层",
+      "软腐",
+      "异常萎蔞",
+      "恶臭"
+    ],
+    "risks": [
+      "crop_disease_spread",
+      "contamination"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "planting_crop_disease_isolation",
+    "top1_aliases": [
+      "菜叶病斑",
+      "叶背白斑",
+      "病害隔离",
+      "剪刀分流",
+      "病残体不入堆肥"
+    ],
+    "risk_level": "caution"
+  },
+  {
+    "id": "DG-0832",
+    "title": "采收后分级防霉",
+    "category": "种植",
+    "domains": [
+      "planting",
+      "food",
+      "hygiene"
+    ],
+    "priority": "P0",
+    "scenario": "刚采收的叶菜、根菜或果实有擦伤、潮气或局部霉变，需要分出立即食用、短存和隔离批。",
+    "goal": "在收获物混筐前完成破损、潮湿、完整和霉变分级，防止局部腐烂扩散到整批。",
+    "keywords": [
+      "刚收下",
+      "采收后",
+      "叶菜",
+      "根菜",
+      "擦伤",
+      "潮气",
+      "一筐发霉",
+      "采后分级",
+      "防霉",
+      "通风",
+      "短存",
+      "隔离",
+      "禁止入库"
+    ],
+    "tools": [
+      "干净篮筐或浅盆",
+      "干净垫层",
+      "通风架或架高木条",
+      "隔离容器",
+      "批次标签",
+      "记录纸"
+    ],
+    "steps": [
+      "采收物到达后立即摊开，先挑出有霉点、酸臭、软烂出水或污水接触痕的批次，放入标记隔离容器。",
+      "把擦伤、裂口、压伤但无霉无异味的批次分出，标为优先短期食用，不进入长时间短存区。",
+      "将潮湿但未破损的批次单层摊开通风，翻动一次去除表面水，不用密闭袋晾干。",
+      "把完整、干爽、无异味的批次放入干净通风容器短存，不装满容器。",
+      "叶菜与带土根菜分容器放置，不把湿叶菜压在根菜下方，也不把擦伤批混入完整批。",
+      "记录批次、分级、短存位置和下次复查时间，每日检查底层湿斑、新霉点、异味和软烂出水。"
+    ],
+    "check": [
+      "霉变、破损、潮湿和完整干爽批已分开。",
+      "叶菜和带土根菜未混筐。",
+      "潮湿批已单层通风且表面不再持续返潮。",
+      "容器和批次标签可读。",
+      "每日复查有时间和结果。"
+    ],
+    "common_mistakes": [
+      "把一个霉变叶片从中间挑出后继续整筐密闭存放。",
+      "把擦伤批和完整批混放。",
+      "湿菜直接装入密闭袋。",
+      "只检查表层，不翻看容器底部。",
+      "为减少损失把霉变叶菜混给其他成员。"
+    ],
+    "fallback": [
+      "缺少篮筐时，用洗净晾干的浅盆、硬纸板盒或编织袋，但不使用有霉味的旧容器。",
+      "阴雨无通风架时，用干净木条架高并缩小每个容器的存放量，增加复查频率。",
+      "没有干布时，用无涂层纸、干净草编垫或自然通风去除表面水。"
+    ],
+    "stop_or_escalate": [
+      "霉点扩大、出现酸臭或腐败味、软烂出水或通风后仍持续返潮时，停止该批入库并隔离整个容器。",
+      "收获物接触污水、不明化学品或容器有霉味时，禁止混入可食批，容器清洗晾干前停用。"
+    ],
+    "related_wiki": [
+      "agriculture-harvest-maturity-check-001",
+      "agriculture-post-harvest-mold-prevention-001"
+    ],
+    "notes": "采后分级的顺序是先隔离明显腐败，再处理破损和潮湿，最后才把完整干爽批放入短存。",
+    "intents": [
+      "planting_post_harvest_storage"
+    ],
+    "objects": [
+      "叶菜",
+      "根菜",
+      "果实",
+      "收获物",
+      "短存容器"
+    ],
+    "signals": [
+      "擦伤",
+      "潮气",
+      "霉点",
+      "酸臭",
+      "软烂出水",
+      "返潮"
+    ],
+    "risks": [
+      "food_spoilage",
+      "mold_spread",
+      "contamination"
+    ],
+    "negative_keywords": [
+      "轮播",
+      "播种计划",
+      "种子交换"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "planting_post_harvest_storage",
+    "top1_aliases": [
+      "刚收下的菜",
+      "采后分级",
+      "潮菜防霉",
+      "擦伤菜短存",
+      "一筐发霉"
     ],
     "risk_level": "caution"
   }

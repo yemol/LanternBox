@@ -42268,5 +42268,192 @@
       "水",
       "先把饮水异常情况及时上报和记录"
     ]
+  },
+  {
+    "id": "DG-0830",
+    "title": "草木灰来源审查和禁用",
+    "category": "种植",
+    "category_original": null,
+    "risk_level": "high",
+    "domains": [
+      "planting",
+      "food"
+    ],
+    "intents": [
+      "planting_wood_ash_safety"
+    ],
+    "situations": [],
+    "objects": [
+      "草木灰",
+      "灶灰",
+      "柴灰",
+      "旧木板灰",
+      "食用作物"
+    ],
+    "signals": [
+      "来源不明",
+      "漆木",
+      "防腐木",
+      "烧苗",
+      "异味"
+    ],
+    "risks": [
+      "contamination",
+      "crop_damage"
+    ],
+    "keywords": [
+      "草木灰",
+      "灶灰",
+      "柴灰",
+      "炉灰",
+      "旧木板灰",
+      "灰肥",
+      "来源不明",
+      "漆木",
+      "防腐木",
+      "垃圾焚烧灰",
+      "禁止施用",
+      "小样试用"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "planting_wood_ash_safety",
+    "top1_aliases": [
+      "草木灰",
+      "灶灰能不能当肥",
+      "旧木板灰",
+      "灰肥禁用"
+    ]
+  },
+  {
+    "id": "DG-0831",
+    "title": "作物病害隔离与工具分流",
+    "category": "种植",
+    "category_original": null,
+    "risk_level": "caution",
+    "domains": [
+      "planting",
+      "food",
+      "hygiene"
+    ],
+    "intents": [
+      "planting_crop_disease_isolation"
+    ],
+    "situations": [],
+    "objects": [
+      "菜叶",
+      "作物",
+      "植株",
+      "病叶",
+      "剪刀",
+      "病残体"
+    ],
+    "signals": [
+      "叶斑",
+      "白斑",
+      "叶背霉层",
+      "软腐",
+      "异常萎蔞",
+      "恶臭"
+    ],
+    "risks": [
+      "crop_disease_spread",
+      "contamination"
+    ],
+    "keywords": [
+      "菜叶白斑",
+      "叶斑",
+      "叶背",
+      "病叶",
+      "霉层",
+      "软腐",
+      "隔开观察",
+      "病害隔离",
+      "剪刀分流",
+      "工具分流",
+      "病残体",
+      "不入堆肥"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "planting_crop_disease_isolation",
+    "top1_aliases": [
+      "菜叶病斑",
+      "叶背白斑",
+      "病害隔离",
+      "剪刀分流",
+      "病残体不入堆肥"
+    ]
+  },
+  {
+    "id": "DG-0832",
+    "title": "采收后分级防霉",
+    "category": "种植",
+    "category_original": null,
+    "risk_level": "caution",
+    "domains": [
+      "planting",
+      "food",
+      "hygiene"
+    ],
+    "intents": [
+      "planting_post_harvest_storage"
+    ],
+    "situations": [],
+    "objects": [
+      "叶菜",
+      "根菜",
+      "果实",
+      "收获物",
+      "短存容器"
+    ],
+    "signals": [
+      "擦伤",
+      "潮气",
+      "霉点",
+      "酸臭",
+      "软烂出水",
+      "返潮"
+    ],
+    "risks": [
+      "food_spoilage",
+      "mold_spread",
+      "contamination"
+    ],
+    "keywords": [
+      "刚收下",
+      "采收后",
+      "叶菜",
+      "根菜",
+      "擦伤",
+      "潮气",
+      "一筐发霉",
+      "采后分级",
+      "防霉",
+      "通风",
+      "短存",
+      "隔离",
+      "禁止入库"
+    ],
+    "negative_keywords": [
+      "轮播",
+      "播种计划",
+      "种子交换"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "planting_post_harvest_storage",
+    "top1_aliases": [
+      "刚收下的菜",
+      "采后分级",
+      "潮菜防霉",
+      "擦伤菜短存",
+      "一筐发霉"
+    ]
   }
 ]

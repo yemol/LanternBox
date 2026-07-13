@@ -264,6 +264,14 @@ def _source_card(
         "reason": reason,
         "selection_reason": reason,
     }
+    if raw.get("retrieval_query_profiles"):
+        card.update({
+            "retrieval_query_profiles": raw.get("retrieval_query_profiles", []),
+            "retrieval_profile_target_match": raw.get("retrieval_profile_target_match", False),
+            "retrieval_profile_adjustment": raw.get("retrieval_profile_adjustment", 0),
+            "retrieval_profile_reasons": raw.get("retrieval_profile_reasons", []),
+            "retrieval_profile_fit_tier": raw.get("retrieval_profile_fit_tier", 0),
+        })
 
     if excluded_reason:
         card["excluded_reason"] = excluded_reason

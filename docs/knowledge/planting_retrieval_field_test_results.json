@@ -1,0 +1,2888 @@
+{
+  "cases": [
+    {
+      "id": "planting_seed_no_germination",
+      "question": "上个月留的一袋菜种播下去一周还没动静，剩下的种子不多，下一步怎么判断，能不能把整袋都补播？",
+      "expected_wikis": [
+        "agriculture-seed-germination-test-001",
+        "general-seed-batch-record-001"
+      ],
+      "expected_guides": [
+        "DG-0232",
+        "DG-0053"
+      ],
+      "focus_terms": [
+        "小样",
+        "发芽",
+        "批次",
+        "记录",
+        "整批"
+      ],
+      "risk_boundary_required": true,
+      "expected_wiki_hits": [
+        "agriculture-seed-germination-test-001"
+      ],
+      "batch4a_wiki_hits": [
+        "agriculture-seed-germination-test-001"
+      ],
+      "batch4a_wiki_hit": true,
+      "domain_hit": true,
+      "action_term_hits": [
+        "发芽",
+        "批次",
+        "记录"
+      ],
+      "action_used": true,
+      "guide_hit": false,
+      "guide_wiki_combo": true,
+      "has_stop_condition": true,
+      "has_fallback": true,
+      "has_record_advice": true,
+      "external_dependencies": [],
+      "dangerous_advice": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "guides_selected": [
+        {
+          "id": "DG-0514",
+          "title": "育苗失败记录",
+          "risk_level": "normal"
+        },
+        {
+          "id": "DG-0236",
+          "title": "简易育苗流程",
+          "risk_level": "normal"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-planting-failure-review-001",
+          "title": "种植失败现场复盘"
+        },
+        {
+          "slug": "agriculture-improvised-nursery-tray-001",
+          "title": "简易育苗盘替代制作"
+        },
+        {
+          "slug": "agriculture-seedling-transplant-001",
+          "title": "幼苗移栽和缓苗检查"
+        },
+        {
+          "slug": "agriculture-shade-heat-protection-001",
+          "title": "幼苗遮阴与日灼防护"
+        },
+        {
+          "slug": "agriculture-sowing-depth-spacing-001",
+          "title": "播种深度与间距小样设置"
+        },
+        {
+          "slug": "agriculture-seed-germination-test-001",
+          "title": "种子发芽率小样测试"
+        }
+      ],
+      "kiwix_selected": [],
+      "answer": "一、当前判断  \n种子播后一周未发芽，可能因土壤湿度、温度、种子活性或播种深度不当导致。剩余种子量少，需优先排查原因，避免盲目补播浪费资源。\n\n二、马上做什么  \n1. 检查原播种容器土壤状态：是否过干/过湿，是否有板结或异味。  \n2. 保留部分种子（约1/3）分批补播：用小容器按DG-0236方法，每格少量播种并贴标签。  \n3. 观察原播种区是否有虫害或病菌：检查土壤是否有霉斑、种子是否被虫蛀。  \n4. 记录当前日期和环境条件：包括温度、光照强度及土壤湿度。  \n\n三、不要做什么  \n1. 避免一次性补播整袋种子：可能因同一问题（如土壤条件）导致再次失败。  \n2. 不要增加浇水频率：过量水分会导致种子腐烂或土壤板结。  \n3. 不要移栽未发芽的种子：徒长或烂根会浪费资源。  \n\n四、本地降级方案  \n若无小容器，用干净瓶盖扎孔作简易洒水器，按DG-0236步骤分批播种。若土壤已板结，可轻刮表层后补播，但避免深翻扰动种子。  \n\n五、接下来观察和记录什么  \n1. 每日记录补播区土壤湿度（干/微潮/湿）及温度变化。  \n2. 观察3天内是否有新芽破土，记录发芽时间线。  \n3. 检查原播种区是否有霉变或虫害扩散，记录异常区域。  \n4. 若补播后仍无进展，3天后停止原批次并隔离土壤。  \n\n六、需要追问的信息  \n1. 种子是否已过保质期？  \n2. 原播种土壤是否有明显板结或异味？  \n3. 播种时是否覆盖过厚的土层？",
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0514",
+          "id": "DG-0514",
+          "title": "育苗失败记录",
+          "label": "guide",
+          "summary": "把失败变成下一轮可用经验。",
+          "snippet": "播种后不发芽、烂根、徒长、被虫吃或移栽死亡。",
+          "reason": "直接涉及育苗失败后的补播操作步骤",
+          "selection_reason": "直接涉及育苗失败后的补播操作步骤",
+          "retrieval_query_profiles": [
+            "planting_seed_germination"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 66.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:36",
+            "profile_candidate_anchor_boost:30:种子,发芽"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "guide",
+          "source_id": "DG-0236",
+          "id": "DG-0236",
+          "title": "简易育苗流程",
+          "label": "guide",
+          "summary": "先育苗再移栽，减少种子浪费。",
+          "snippet": "种子有限，希望提高发芽和成苗概率。",
+          "reason": "包含分批播种的补播实施方法",
+          "selection_reason": "包含分批播种的补播实施方法",
+          "retrieval_query_profiles": [
+            "planting_seed_germination"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 66.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:36",
+            "profile_candidate_anchor_boost:30:种子,发芽"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-planting-failure-review-001",
+          "id": "agriculture-planting-failure-review-001",
+          "title": "种植失败现场复盘",
+          "label": "wiki",
+          "summary": "用种子、土、水、光、温度和病虫证据复盘未发芽或死苗，为下一批只改一个条件。",
+          "snippet": "# 种植失败现场复盘\n\n## 用途\n\n在种子不发芽、幼苗徒长、烂根或移栽死亡后，用现场证据选出最可能的失败环节并设计小样重试。\n\n## 适用场景\n\n- 适用于同批发芽率低、幼苗集中死亡、移栽后三天未恢复或产量明显下降。\n- 不用于在化学污染、污水倒灌或病害快速扩散时立即重播；这些情况先停用或隔离。\n\n## 准备材料\n\n- 原批次标签\n- 发芽和浇水记录\n- 失败样本\n- 纸和笔\n- 少量重试种子\n\n## 操作步骤\n\n1. 保留几个失败样本和原容器，先拍照或画下根、茎、叶和土面状态。\n2. 按时间写出播种、首次出苗、浇水、高温低温、移栽和首次异常，不凭印象调整顺序。\n3. 检查未发芽种子是干瘪、",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_seed_germination"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 66.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:36",
+            "inherited_from_guide:profile_candidate_anchor_boost:30:种子,发芽"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-planting-failure-review-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "normal",
+          "guide_links": [
+            "DG-0514"
+          ],
+          "record_id": "fdbaa03085dbf1a",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0514",
+          "linked_guide_title": "育苗失败记录",
+          "metadata": {
+            "record_id": "fdbaa03085dbf1a"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-improvised-nursery-tray-001",
+          "id": "agriculture-improvised-nursery-tray-001",
+          "title": "简易育苗盘替代制作",
+          "label": "wiki",
+          "summary": "用浅盒、纸杯或分格容器制作可排水、可标记和可起苗的小批量育苗盘。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "# 简易育苗盘替代制作\n\n## 用途\n\n用浅盒、纸杯或分格容器制作可排水、可标记和可起苗的小批量育苗盘。\n\n## 适用场景\n\n- 适用于小菜园、容器种植或育苗区对该主题进行首次操作和定期复查。\n- 不适用于已出现不明化学污染、粪污倒灌或无法辨认材料来源的情况。\n\n## 准备材料\n\n- 现场编号标记\n- 少量干净工具\n- 记录纸和笔\n- 必要时的手部隔离层\n\n## 操作步骤\n\n1. 只选未装化学品、无油味且能清洗的浅容器，底部每格开排水孔。\n2. 在盘底加能接余水的托层，确保育苗格不泡在托盘水中。\n3. 每格装入松散微潮基质，播种后在容器边缘写作物、批次和日期。\n4. 抬起盘子做一次倾斜和排水测",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_seed_germination"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 66.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:36",
+            "inherited_from_guide:profile_candidate_anchor_boost:30:种子,发芽"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-improvised-nursery-tray-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0236"
+          ],
+          "record_id": "d8167794095f0eb",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0236",
+          "linked_guide_title": "简易育苗流程",
+          "metadata": {
+            "record_id": "d8167794095f0eb"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-seedling-transplant-001",
+          "id": "agriculture-seedling-transplant-001",
+          "title": "幼苗移栽和缓苗检查",
+          "label": "wiki",
+          "summary": "在幼苗根团成形后完成起苗、定植、遮阴和缓苗复查，减少断根、倒伏和移栽后失水。",
+          "snippet": "# 幼苗移栽和缓苗检查\n\n## 用途\n\n把已达移栽状态的幼苗从育苗容器移到种植位，并用三天观察决定继续保留或重播。\n\n## 适用场景\n\n- 适用于幼苗已有 2–4 片真叶、根系能带住少量基质且种植位已排水。\n- 不适用于茎基发黑、根部酸臭、虫害正在扩大或移栽地仍积水的情况。\n\n## 准备材料\n\n- 种植孔位\n- 小铲或勺\n- 少量水\n- 遮阴物\n- 标签\n\n## 操作步骤\n\n1. 提前一天让育苗介质保持微潮，不在泥水状态起苗。\n2. 选阴天或傍晚，先挖好定植孔并倒少量水润湿孔底。\n3. 捏住根团周围介质而不拉茎叶，连根团取出，断根过多的苗单独标记。\n4. 按原生长深度放入孔中，回填后轻压四周，",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_seed_germination"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 66.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:36",
+            "inherited_from_guide:profile_candidate_anchor_boost:30:种子,发芽"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-seedling-transplant-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0236"
+          ],
+          "record_id": "0e5d12e1cab3753",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0236",
+          "linked_guide_title": "简易育苗流程",
+          "metadata": {
+            "record_id": "0e5d12e1cab3753"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-shade-heat-protection-001",
+          "id": "agriculture-shade-heat-protection-001",
+          "title": "幼苗遮阴与日灼防护",
+          "label": "wiki",
+          "summary": "在连续高温或突然强光时用通风遮阴和清晨复查区分日灼与缺水，减少盲目加水。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "# 幼苗遮阴与日灼防护\n\n## 用途\n\n在连续高温或突然强光时用通风遮阴和清晨复查区分日灼与缺水，减少盲目加水。\n\n## 适用场景\n\n- 适用于小菜园、容器种植或育苗区对该主题进行首次操作和定期复查。\n- 不适用于已出现不明化学污染、粪污倒灌或无法辨认材料来源的情况。\n\n## 准备材料\n\n- 现场编号标记\n- 少量干净工具\n- 记录纸和笔\n- 必要时的手部隔离层\n\n## 操作步骤\n\n1. 先在清晨看叶片是否挺立；清晨正常、正午下垂多为热应激，不立即大水灌根。\n2. 用浅色布、稀疏枝叶或网在向阳侧架起遮阴，与叶面留一手宽通风层。\n3. 保留早晨光，遮住午后最强时段，傍晚检查遮阴物是否阻断通风。\n",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_seed_germination"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 66.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:36",
+            "inherited_from_guide:profile_candidate_anchor_boost:30:种子,发芽"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-shade-heat-protection-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0236"
+          ],
+          "record_id": "2dee829779cf8d8",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0236",
+          "linked_guide_title": "简易育苗流程",
+          "metadata": {
+            "record_id": "2dee829779cf8d8"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-sowing-depth-spacing-001",
+          "id": "agriculture-sowing-depth-spacing-001",
+          "title": "播种深度与间距小样设置",
+          "label": "wiki",
+          "summary": "用两种深度和固定标记小样播种，避免种子过深缺氧或过密后幼苗竞争。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "# 播种深度与间距小样设置\n\n## 用途\n\n用两种深度和固定标记小样播种，避免种子过深缺氧或过密后幼苗竞争。\n\n## 适用场景\n\n- 适用于小菜园、容器种植或育苗区对该主题进行首次操作和定期复查。\n- 不适用于已出现不明化学污染、粪污倒灌或无法辨认材料来源的情况。\n\n## 准备材料\n\n- 现场编号标记\n- 少量干净工具\n- 记录纸和笔\n- 必要时的手部隔离层\n\n## 操作步骤\n\n1. 把同批种子分两小组，小粒种子一组薄覆土、一组覆土约一粒种子厚。\n2. 用手指或带刻度木片划出播种行，同行留出可夹取间苗的空隙。\n3. 播后用细水润湿，不用大水把种子冲到一起。\n4. 每日记录两组首次出苗时间和出苗",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_seed_germination"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 66.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:36",
+            "inherited_from_guide:profile_candidate_anchor_boost:30:种子,发芽"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-sowing-depth-spacing-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0236"
+          ],
+          "record_id": "fdcc1500e8ea4b4",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0236",
+          "linked_guide_title": "简易育苗流程",
+          "metadata": {
+            "record_id": "fdcc1500e8ea4b4"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-seed-germination-test-001",
+          "id": "agriculture-seed-germination-test-001",
+          "title": "种子发芽率小样测试",
+          "label": "wiki",
+          "summary": "用少量种子在播种前测出发芽比例，避免把有限容器、土和水耗在已失活的批次上。",
+          "snippet": "用少量种子在播种前测出发芽比例，避免把有限容器、土和水耗在已失活的批次上。",
+          "reason": "提供种子发芽率测试方法用于补播决策",
+          "selection_reason": "提供种子发芽率测试方法用于补播决策",
+          "retrieval_query_profiles": [
+            "planting_seed_germination"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 66.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:36",
+            "profile_candidate_anchor_boost:30:种子,发芽,批次,小样"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-seed-germination-test-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [],
+          "record_id": "8fad480aa2b8998",
+          "source_role": "independent_support",
+          "source_reason": "independent_wiki_search",
+          "linked_guide_id": "",
+          "linked_guide_title": "",
+          "metadata": {
+            "record_id": "8fad480aa2b8998"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 11,
+          "guide": 8
+        },
+        "candidate_count": 19,
+        "selected_count": 8,
+        "source_plan_count": 2,
+        "core_terms": [
+          "菜种",
+          "种子",
+          "发芽",
+          "补播",
+          "剩余种子"
+        ],
+        "ok": true,
+        "error": "",
+        "stage": ""
+      }
+    },
+    {
+      "id": "planting_rain_waterlogging",
+      "question": "昨晚大雨后菜地到中午还有积水，几盆菜叶也开始发黄。我该先排水还是继续浇，哪些迹象说明这块地暂时不能再种？",
+      "expected_wikis": [
+        "agriculture-post-rain-garden-review-001",
+        "agriculture-soil-drainage-test-001",
+        "agriculture-root-rot-warning-001"
+      ],
+      "expected_guides": [
+        "DG-0234"
+      ],
+      "focus_terms": [
+        "积水",
+        "排水",
+        "根腐",
+        "停水",
+        "污染",
+        "异味"
+      ],
+      "risk_boundary_required": true,
+      "expected_wiki_hits": [
+        "agriculture-post-rain-garden-review-001",
+        "agriculture-root-rot-warning-001",
+        "agriculture-soil-drainage-test-001"
+      ],
+      "batch4a_wiki_hits": [
+        "agriculture-post-rain-garden-review-001",
+        "agriculture-root-rot-warning-001",
+        "agriculture-soil-drainage-test-001"
+      ],
+      "batch4a_wiki_hit": true,
+      "domain_hit": true,
+      "action_term_hits": [
+        "积水",
+        "排水",
+        "停水",
+        "异味"
+      ],
+      "action_used": true,
+      "guide_hit": true,
+      "guide_wiki_combo": true,
+      "has_stop_condition": true,
+      "has_fallback": true,
+      "has_record_advice": true,
+      "external_dependencies": [],
+      "dangerous_advice": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "guides_selected": [
+        {
+          "id": "DG-0234",
+          "title": "雨季种植防烂根",
+          "risk_level": "normal"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-root-rot-warning-001",
+          "title": "根腐与停水判断"
+        },
+        {
+          "slug": "agriculture-post-rain-garden-review-001",
+          "title": "雨后菜地排水与污染复查"
+        },
+        {
+          "slug": "agriculture-soil-drainage-test-001",
+          "title": "种植地排水下渗测试"
+        }
+      ],
+      "kiwix_selected": [],
+      "answer": "一、当前判断  \n菜地积水与叶片发黄可能由根部腐烂或土壤排水不良引起，需优先排水并检查根部状态，避免烂根风险。  \n\n二、马上做什么  \n1. 清理盆底托盘积水，用木板或石头垫高容器防止底部泡水。  \n2. 停止浇水，用手指触摸土壤判断湿度，仅在土壤微潮时少量补水。  \n3. 检查茎基是否软黑、根部是否褐黑粘软，剪除腐烂叶片降低霉菌扩散。  \n4. 标记积水严重的容器，调整位置远离回流路线。  \n\n三、不要做什么  \n1. 雨后继续天天浇水，避免土壤长期泥浆状。  \n2. 忽略根部异味，导致腐烂扩散至其他植株。  \n3. 直接移除整株而不检查根部，浪费种子和土壤资源。  \n\n四、本地降级方案  \n若无法排水，用挖排水槽或临时遮雨布减少积水；缺工具时用干净勺子清理托盘，确保排水孔通畅。  \n\n五、接下来观察和记录什么  \n1. 记录停水后24小时土壤是否干爽，根部是否恢复浅色弹性。  \n2. 观察茎基是否收缩、土壤是否有酸臭味或沟泥味。  \n3. 每日复查积水边界是否缩小，记录异常区域编号。  \n\n六、需要追问的信息  \n1. 积水是否持续超过24小时？  \n2. 根部是否有明显褐黑腐烂或异味？  \n3. 是否有粪污或垃圾水倒灌的迹象？",
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0234",
+          "id": "DG-0234",
+          "title": "雨季种植防烂根",
+          "label": "guide",
+          "summary": "减少积水导致的烂根和霉菌。",
+          "snippet": "连续降雨、潮湿、容器积水，植物叶黄、倒伏或根部发臭。",
+          "reason": "直接关联积水导致的烂根和叶片发黄症状",
+          "selection_reason": "直接关联积水导致的烂根和叶片发黄症状",
+          "retrieval_query_profiles": [
+            "planting_rain_waterlogging"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 82.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:42",
+            "profile_candidate_anchor_boost:40:连续降雨,雨季种植,植物叶黄,倒伏"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-root-rot-warning-001",
+          "id": "agriculture-root-rot-warning-001",
+          "title": "根腐与停水判断",
+          "label": "wiki",
+          "summary": "用土味、茎基、根色和排水表现区分暂时萎蔞与根腐，及时停水并隔离腐烂植株。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "# 根腐与停水判断\n\n## 用途\n\n用土味、茎基、根色和排水表现区分暂时萎蔞与根腐，及时停水并隔离腐烂植株。\n\n## 适用场景\n\n- 适用于小菜园、容器种植或育苗区对该主题进行首次操作和定期复查。\n- 不适用于已出现不明化学污染、粪污倒灌或无法辨认材料来源的情况。\n\n## 准备材料\n\n- 现场编号标记\n- 少量干净工具\n- 记录纸和笔\n- 必要时的手部隔离层\n\n## 操作步骤\n\n1. 先在清晨观察叶片，若土仍湿而叶仍下垂，就不立即补水。\n2. 闻根区是否有酸臭或沟泥味，轻压茎基检查是否软黑。\n3. 从容器边缘取一小段根观察：新根应浅色有弹性，腐根常褐黑且表皮易脱。\n4. 立即停水、打通排水孔并",
+          "reason": "提供根腐判断标准和停水决策依据",
+          "selection_reason": "提供根腐判断标准和停水决策依据",
+          "retrieval_query_profiles": [
+            "planting_rain_waterlogging"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 82.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:40:连续降雨,雨季种植,植物叶黄,倒伏"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-root-rot-warning-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0234"
+          ],
+          "record_id": "a31300c462d3e43",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0234",
+          "linked_guide_title": "雨季种植防烂根",
+          "metadata": {
+            "record_id": "a31300c462d3e43"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-post-rain-garden-review-001",
+          "id": "agriculture-post-rain-garden-review-001",
+          "title": "雨后菜地排水与污染复查",
+          "label": "wiki",
+          "summary": "在强降雨后按水流、积水、倒伏、粪污和根腐信号复查菜地，决定排水、隔离或禁止采收。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "# 雨后菜地排水与污染复查\n\n## 用途\n\n在强降雨后按水流、积水、倒伏、粪污和根腐信号复查菜地，决定排水、隔离或禁止采收。\n\n## 适用场景\n\n- 适用于小菜园、容器种植或育苗区对该主题进行首次操作和定期复查。\n- 不适用于已出现不明化学污染、粪污倒灌或无法辨认材料来源的情况。\n\n## 准备材料\n\n- 现场编号标记\n- 少量干净工具\n- 记录纸和笔\n- 必要时的手部隔离层\n\n## 操作步骤\n\n1. 从上风和高处先看水流来源，不立即踏入不明积水。\n2. 标出被厕所、粪污、垃圾或燃料区来水淹过的地块，暂停采收和移土。\n3. 打通无污染区的明沟和容器排水孔，用支杆扶正未断裂的倒伏株。\n4. 雨停后",
+          "reason": "包含雨后排水决策和污染复查流程",
+          "selection_reason": "包含雨后排水决策和污染复查流程",
+          "retrieval_query_profiles": [
+            "planting_rain_waterlogging"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 82.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:40:连续降雨,雨季种植,植物叶黄,倒伏"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-post-rain-garden-review-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0234"
+          ],
+          "record_id": "d02d89ac1979529",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0234",
+          "linked_guide_title": "雨季种植防烂根",
+          "metadata": {
+            "record_id": "d02d89ac1979529"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-soil-drainage-test-001",
+          "id": "agriculture-soil-drainage-test-001",
+          "title": "种植地排水下渗测试",
+          "label": "wiki",
+          "summary": "用小坑和定量水观察土壤下渗与积水，在播种前识别烂根、冲刷和污水外溢风险。",
+          "snippet": "# 种植地排水下渗测试\n\n## 用途\n\n确认种植点在浇水或降雨后能否排出多余水，并决定是原地种、起垄还是改用容器。\n\n## 适用场景\n\n- 适用于新地块、板结土、低洼点和雨后曾积水的种植区。\n- 不适用于疑似污染地、地下线路不明或挖坑会破坏屋顶防水层的位置。\n\n## 准备材料\n\n- 小铲或木棍\n- 同一容器的水\n- 计时工具\n- 标记物\n\n## 操作步骤\n\n1. 在不同高度取两个点，各挖手掌宽、约一手掌深的小坑。\n2. 先倒入少量水湿润坑壁，等明显水面消失后再开始正式测试。\n3. 两坑倒入相同深度的水，记录开始时间、半小时后和一小时后的剩余水深。\n4. 观察水是向下渗、沿表面外流还是从低处回涌",
+          "reason": "提供土壤排水测试方法和烂根风险识别",
+          "selection_reason": "提供土壤排水测试方法和烂根风险识别",
+          "retrieval_query_profiles": [
+            "planting_rain_waterlogging"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 82.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:40:连续降雨,雨季种植,植物叶黄,倒伏"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-soil-drainage-test-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0234"
+          ],
+          "record_id": "e6700a0042b6a82",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0234",
+          "linked_guide_title": "雨季种植防烂根",
+          "metadata": {
+            "record_id": "e6700a0042b6a82"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 3,
+          "guide": 8
+        },
+        "candidate_count": 11,
+        "selected_count": 4,
+        "source_plan_count": 2,
+        "core_terms": [
+          "积水",
+          "菜地",
+          "排水",
+          "浇灌",
+          "菜叶",
+          "发黄",
+          "土壤含水",
+          "根系健康"
+        ],
+        "ok": true,
+        "error": "",
+        "stage": ""
+      }
+    },
+    {
+      "id": "planting_sewage_near_plot",
+      "question": "桶厕旁边有粪水顺着坡流到菜地边缘，菜还没采。我现在该怎么划区，哪些菜和土要停止使用，之后怎么留下禁用记录？",
+      "expected_wikis": [
+        "agriculture-manure-growing-zone-separation-001",
+        "agriculture-contaminated-plot-ban-record-001"
+      ],
+      "expected_guides": [
+        "DG-0678",
+        "DG-0227"
+      ],
+      "focus_terms": [
+        "隔离",
+        "禁用",
+        "停止",
+        "粪污",
+        "边界",
+        "记录"
+      ],
+      "risk_boundary_required": true,
+      "expected_wiki_hits": [
+        "agriculture-contaminated-plot-ban-record-001"
+      ],
+      "batch4a_wiki_hits": [
+        "agriculture-contaminated-plot-ban-record-001"
+      ],
+      "batch4a_wiki_hit": true,
+      "domain_hit": true,
+      "action_term_hits": [
+        "隔离",
+        "禁用",
+        "边界",
+        "记录"
+      ],
+      "action_used": true,
+      "guide_hit": false,
+      "guide_wiki_combo": true,
+      "has_stop_condition": true,
+      "has_fallback": true,
+      "has_record_advice": true,
+      "external_dependencies": [],
+      "dangerous_advice": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "guides_selected": [
+        {
+          "id": "DG-0588",
+          "title": "临时避难空间：睡眠物资污染区划分",
+          "risk_level": "normal"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "shelter-temporary-space-organization-001",
+          "title": "临时避难空间整理"
+        },
+        {
+          "slug": "agriculture-contaminated-plot-ban-record-001",
+          "title": "污染地块禁用记录"
+        }
+      ],
+      "kiwix_selected": [],
+      "answer": "一、当前判断  \n粪水流入菜地边缘属于污染扩散风险，需立即划区隔离，防止污染扩散至未采收区域。根据指南，污染区与清洁区需物理分隔，避免交叉污染。\n\n二、马上做什么  \n1. 用绳带或粉笔在粪水流向末端画出污染区边界，向外延伸1米作为缓冲带。  \n2. 在缓冲带边缘放置“禁止取土/禁止种食物”标记（可用容器编号或手写标签）。  \n3. 将未采收的菜地分为“污染区”（靠近粪水处）和“待检区”（缓冲带外），用不同颜色布料或容器分隔。  \n4. 记录禁用区域编号、设置日期及污染来源（如桶厕位置），用纸笔写在显眼处。  \n\n三、不要做什么  \n1. 不要直接用手接触粪水或污染土壤，避免污染扩散。  \n2. 不要将未采收的菜混入清洁区，防止误用污染作物。  \n3. 不要清理粪水，避免扩大污染范围。  \n\n四、本地降级方案  \n若无标记工具，用不同方向摆放容器形成边界，口头交接禁用区域编号，并在夜间用手电照射边界线。若缓冲带被破坏，立即扩大禁用区并重新标记。  \n\n五、接下来观察和记录什么  \n1. 每日检查缓冲带是否被破坏，记录粪水流向变化。  \n2. 观察禁用区域是否有新污染痕迹（如异味、油膜）。  \n3. 记录下次复查时间（建议每3天一次），并标记天气变化后是否需扩大禁用区。  \n\n六、需要追问的信息  \n1. 菜地具体位置及周边是否有其他污染源？  \n2. 是否有可用的容器或绳带作为标记工具？  \n3. 污染区域是否已出现异味或异常颜色？",
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0588",
+          "id": "DG-0588",
+          "title": "临时避难空间：睡眠物资污染区划分",
+          "label": "guide",
+          "summary": "用最少标记建立清洁睡眠区、物资区、污染区和通道。",
+          "snippet": "多人进入临时避难空间，需要避免睡眠、物资和污染活动相互穿插。",
+          "reason": "Planner 已请求行动 Guide，保留最高相关 Guide 以满足来源契约。",
+          "selection_reason": "Planner 已请求行动 Guide，保留最高相关 Guide 以满足来源契约。"
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "shelter-temporary-space-organization-001",
+          "id": "shelter-temporary-space-organization-001",
+          "title": "临时避难空间整理",
+          "label": "wiki",
+          "summary": "用于临时避难空间整理的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 临时避难空间整理\n\n## 用途\n\n介绍在停电、灾害、隔离或长期居家避难时，如何整理一个安全、可持续、便于取物和记录的临时避难空间。\n\n## 适用场景\n\n适用于停电、台风、暴雨、隔离、供水供电不稳定、外部风险增加或需要集中生活的场景。\n\n这篇内容用于把混乱房间整理成可居住、可行动、可记录的临时避难空间。\n\n## 准备材料\n\n准备简易平面图、分区标签、箱子或袋子、清洁/污染标记、通道清理工具、照明、成员物品清单和交接记录。最低条件是能分出饮水食物、睡眠、污染物、工具和出口通道。\n\n## 操作步骤\n\n### 核心原则\n\n1. 空间先保安全，再保舒适。\n2. 通道必须保持清楚。\n3. 物资要按用途",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "slug": "shelter-temporary-space-organization-001",
+          "category": "refcf30b2c73312",
+          "risk_level": "normal",
+          "guide_links": [
+            "DG-0588"
+          ],
+          "record_id": "19di5nptw7ynllb",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0588",
+          "linked_guide_title": "临时避难空间：睡眠物资污染区划分",
+          "metadata": {
+            "record_id": "19di5nptw7ynllb"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-contaminated-plot-ban-record-001",
+          "id": "agriculture-contaminated-plot-ban-record-001",
+          "title": "污染地块禁用记录",
+          "label": "wiki",
+          "summary": "用地图、现场双重标记和污染来源记录锁定禁种边界，防止交班后误把可疑土用于入口作物。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "用地图、现场双重标记和污染来源记录锁定禁种边界，防止交班后误把可疑土用于入口作物。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "reason": "直接提供污染地块禁用记录方法，包含地图标记、污染来源记录和交接记录要求",
+          "selection_reason": "直接提供污染地块禁用记录方法，包含地图标记、污染来源记录和交接记录要求",
+          "slug": "agriculture-contaminated-plot-ban-record-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "high",
+          "guide_links": [],
+          "record_id": "87187061928f4fb",
+          "source_role": "independent_support",
+          "source_reason": "independent_wiki_search",
+          "linked_guide_id": "",
+          "linked_guide_title": "",
+          "metadata": {
+            "record_id": "87187061928f4fb"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 9,
+          "guide": 8
+        },
+        "candidate_count": 17,
+        "selected_count": 3,
+        "source_plan_count": 2,
+        "core_terms": [
+          "粪水",
+          "菜地",
+          "污染",
+          "划区",
+          "禁用记录",
+          "土壤污染",
+          "隔离区",
+          "作物判定"
+        ],
+        "ok": true,
+        "error": "",
+        "stage": ""
+      }
+    },
+    {
+      "id": "planting_wood_ash",
+      "question": "灶里攒了一桶灰，有些来自木柴，有些可能烧过旧木板。能不能撒到菜地当肥料，怎么先做小范围判断？",
+      "expected_wikis": [
+        "agriculture-wood-ash-fertilizer-boundary-001"
+      ],
+      "expected_guides": [],
+      "focus_terms": [
+        "来源",
+        "旧木板",
+        "禁用",
+        "小范围",
+        "对照",
+        "草木灰"
+      ],
+      "risk_boundary_required": true,
+      "expected_wiki_hits": [
+        "agriculture-wood-ash-fertilizer-boundary-001"
+      ],
+      "batch4a_wiki_hits": [
+        "agriculture-wood-ash-fertilizer-boundary-001"
+      ],
+      "batch4a_wiki_hit": true,
+      "domain_hit": true,
+      "action_term_hits": [
+        "来源",
+        "旧木板",
+        "对照"
+      ],
+      "action_used": true,
+      "guide_hit": false,
+      "guide_wiki_combo": true,
+      "has_stop_condition": true,
+      "has_fallback": true,
+      "has_record_advice": true,
+      "external_dependencies": [],
+      "dangerous_advice": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "guides_selected": [
+        {
+          "id": "DG-0830",
+          "title": "草木灰来源审查和禁用",
+          "risk_level": "high"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-wood-ash-fertilizer-boundary-001",
+          "title": "草木灰施用禁用边界"
+        }
+      ],
+      "kiwix_selected": [],
+      "answer": "一、当前判断  \n灰可能混有旧木板、防腐木或煤灰，存在毒残留风险，**禁止直接用于食用作物**，需先做小样测试排除危险。\n\n二、马上做什么  \n1. **隔离灰料**：将灰分装密封，标注“来源不明”并远离菜地存放。  \n2. **追问来源**：确认灰是否仅来自干净木柴，是否烧过旧木板、煤或塑料。  \n3. **小样测试**：在无风处取极少量灰，戴手套混入表土（避开茎根），标记日期和用量。  \n4. **对照观察**：保留未施灰区，七天内检查叶缘焦黄、土表结壳或异味。  \n\n三、不要做什么  \n1. **直接撒入主菜地**：可能污染健康作物，引发烧苗或毒残留。  \n2. **制作浓灰水**：湿灰液易刺激皮肤，且可能溶解重金属。  \n3. **忽略异味或杂物**：灰中若有塑料、玻璃或金属残留，立即停止使用。  \n\n四、本地降级方案  \n若无法确认来源，**封存灰料**，改用已腐熟堆肥或暂停施肥。若无测试地块，可用小容器做试验，不接触主种子。  \n\n五、接下来观察和记录什么  \n1. **测试区变化**：每日记录叶缘焦黄、土表结壳、发芽差异。  \n2. **灰料状态**：检查是否有异味、金属碎片或未燃尽残渣。  \n3. **复查时间**：七天后根据对照区结果决定是否扩大使用。  \n\n六、需要追问的信息  \n1. 灰是否仅来自干净木柴？是否烧过旧木板、煤或塑料？  \n2. 灰是否完全冷却？是否有金属、玻璃或异味残留？  \n3. 是否有手部隔离工具或记录纸？",
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0830",
+          "id": "DG-0830",
+          "title": "草木灰来源审查和禁用",
+          "label": "guide",
+          "summary": "在灰进入菜地前排除不明燃料和有毒残留，只对来源明确的干净木柴灰做小样试用。",
+          "snippet": "现有灰可能混有漆木、防腐木、煤、垃圾或不明燃料，需要决定能否用于食用作物。",
+          "reason": "直接涉及灶灰来源审查和禁用规则，明确说明需排除不明燃料和有毒残留",
+          "selection_reason": "直接涉及灶灰来源审查和禁用规则，明确说明需排除不明燃料和有毒残留",
+          "retrieval_query_profiles": [
+            "planting_wood_ash"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 68.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:38",
+            "profile_candidate_anchor_boost:30:草木灰,灰肥,漆木,防腐木"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-wood-ash-fertilizer-boundary-001",
+          "id": "agriculture-wood-ash-fertilizer-boundary-001",
+          "title": "草木灰施用禁用边界",
+          "label": "wiki",
+          "summary": "在使用少量纯草木灰前排除煤灰、垃圾焚烧灰、湿灰液和过量接触根叶的风险。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "# 草木灰施用禁用边界\n\n## 用途\n\n在使用少量纯草木灰前排除煤灰、垃圾焚烧灰、湿灰液和过量接触根叶的风险。\n\n## 适用场景\n\n- 适用于小菜园、容器种植或育苗区对该主题进行首次操作和定期复查。\n- 不适用于已出现不明化学污染、粪污倒灌或无法辨认材料来源的情况。\n\n## 准备材料\n\n- 现场编号标记\n- 少量干净工具\n- 记录纸和笔\n- 必要时的手部隔离层\n\n## 操作步骤\n\n1. 确认灰只来自未上漆、未防腐的干净木材或植物，不收煤、垃圾、塑料和板材焚烧灰。\n2. 灰完全冷却后戴手部隔离层，在无风时取极少量，不制作浓灰水。\n3. 先在远离茎根的一个小测试区薄撒，混入表土后标记日期和用量。\n",
+          "reason": "提供草木灰施用禁用边界，包含风险排除方法和离线种植决策支持",
+          "selection_reason": "提供草木灰施用禁用边界，包含风险排除方法和离线种植决策支持",
+          "retrieval_query_profiles": [
+            "planting_wood_ash"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 68.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:38",
+            "inherited_from_guide:profile_candidate_anchor_boost:30:草木灰,灰肥,漆木,防腐木"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-wood-ash-fertilizer-boundary-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0830"
+          ],
+          "record_id": "1c234d64746b7dd",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0830",
+          "linked_guide_title": "草木灰来源审查和禁用",
+          "metadata": {
+            "record_id": "1c234d64746b7dd"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 1,
+          "guide": 6
+        },
+        "candidate_count": 7,
+        "selected_count": 2,
+        "source_plan_count": 2,
+        "core_terms": [
+          "灰烬",
+          "木柴",
+          "旧木板",
+          "肥料",
+          "土壤测试",
+          "pH值"
+        ],
+        "ok": true,
+        "error": "",
+        "stage": ""
+      }
+    },
+    {
+      "id": "planting_low_water_priority",
+      "question": "储水只够维持几天，菜园里有刚移的苗、正在结果的菜和还没开花的老株，应该先浇谁，怎样少用水又不把根闷坏？",
+      "expected_wikis": [
+        "agriculture-low-water-irrigation-priority-001",
+        "agriculture-mulch-material-safety-001"
+      ],
+      "expected_guides": [
+        "DG-0674"
+      ],
+      "focus_terms": [
+        "幼苗",
+        "结果",
+        "优先",
+        "覆盖",
+        "根区",
+        "积水"
+      ],
+      "risk_boundary_required": true,
+      "expected_wiki_hits": [
+        "agriculture-low-water-irrigation-priority-001",
+        "agriculture-mulch-material-safety-001"
+      ],
+      "batch4a_wiki_hits": [
+        "agriculture-low-water-irrigation-priority-001",
+        "agriculture-mulch-material-safety-001"
+      ],
+      "batch4a_wiki_hit": true,
+      "domain_hit": true,
+      "action_term_hits": [
+        "幼苗",
+        "结果",
+        "优先",
+        "覆盖",
+        "积水"
+      ],
+      "action_used": true,
+      "guide_hit": true,
+      "guide_wiki_combo": true,
+      "has_stop_condition": true,
+      "has_fallback": true,
+      "has_record_advice": true,
+      "external_dependencies": [],
+      "dangerous_advice": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "guides_selected": [
+        {
+          "id": "DG-0674",
+          "title": "少水覆盖浇灌",
+          "risk_level": "caution"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-low-water-irrigation-priority-001",
+          "title": "低水量作物浇灌排序"
+        },
+        {
+          "slug": "agriculture-container-002",
+          "title": "容器种植的排水和光照"
+        },
+        {
+          "slug": "agriculture-mulch-material-safety-001",
+          "title": "土面覆盖物污染边界"
+        },
+        {
+          "slug": "agriculture-seed-storage-001",
+          "title": "种子保存的干燥和温度"
+        },
+        {
+          "slug": "agriculture-sprouts-001",
+          "title": "芽苗菜为什么适合短周期补充"
+        },
+        {
+          "slug": "agriculture-irrigation-001",
+          "title": "少水灌溉的土壤覆盖"
+        }
+      ],
+      "kiwix_selected": [],
+      "answer": "一、当前判断  \n储水不足需优先保护高价值作物，刚移苗和未开花株耗水高但产出低，正在结果的菜应优先浇灌，同时需避免根部闷湿引发腐烂。\n\n二、马上做什么  \n1. 用小瓶在结果菜根部缓慢浇灌，观察水是否渗入土中（避免直接浇在叶片）。  \n2. 用干草或纸板覆盖结果菜土面，留出茎基2指宽空隙，减少蒸发。  \n3. 停止浇灌刚移苗和未开花株，仅保留少量水用于关键清洁（如如厕后）。  \n4. 每日清晨检查结果菜叶片是否挺立，萎蔫则补充少量水。  \n\n三、不要做什么  \n1. 不要正午浇水，高温加剧蒸发浪费。  \n2. 不要覆盖物紧贴茎基，易导致茎腐烂。  \n3. 不要平均分水，优先结果菜和临近收获株。  \n\n四、本地降级方案  \n- 覆盖材料不足时，先覆盖结果菜区域，用现有材料做最小覆盖。  \n- 水量极低时，保留结果菜和多年生老株，放弃低价值幼苗。  \n\n五、接下来观察和记录什么  \n1. 记录每日浇灌水量、结果菜叶片恢复状态。  \n2. 观察覆盖层底部是否发酸臭或出现白色绒毛（霉变）。  \n3. 检查结果菜根部是否持续湿润，避免积水。  \n\n六、需要追问的信息  \n1. 储水具体剩余量（如5升）？  \n2. 是否有可用的干净容器或覆盖材料？  \n3. 结果菜是否已接近采收（如番茄已着色）？",
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0674",
+          "id": "DG-0674",
+          "title": "少水覆盖浇灌",
+          "label": "guide",
+          "summary": "通过覆盖和定点浇灌减少蒸发，把水用在根区。",
+          "snippet": "水量不足但仍要维持少量作物，裸露土面会快速失水。",
+          "reason": "直接关联少水覆盖浇灌根区",
+          "selection_reason": "直接关联少水覆盖浇灌根区",
+          "retrieval_query_profiles": [
+            "planting_low_water"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 75.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:40",
+            "profile_candidate_anchor_boost:35:少水,浇灌,根区"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-low-water-irrigation-priority-001",
+          "id": "agriculture-low-water-irrigation-priority-001",
+          "title": "低水量作物浇灌排序",
+          "label": "wiki",
+          "summary": "在可用水不足时按生育阶段、植株状态和食物价值排序，保住最接近成活或收获的作物。",
+          "snippet": "# 低水量作物浇灌排序\n\n## 用途\n\n把有限的非饮用安全浇灌水分给最能保留食物产出和种子的植株，并明确暂停哪些区。\n\n## 适用场景\n\n- 适用于储水下降、运水受限、连续高温或浇水容器减少时。\n- 不用于把带油、盐、洗涤剂泡沫或粪污的水分给入口作物。\n\n## 准备材料\n\n- 当日可用浇灌水量\n- 容器或分水瓢\n- 作物清单\n- 铅笔和标记\n\n## 操作步骤\n\n1. 先扣除人员饮水、做饭和基本清洁用水，只对剩余的安全水做浇灌分配。\n2. 把作物分为刚移栽幼苗、正在开花结实、接近收获、留种植株和可暂停区。\n3. 清晨检查叶片是否恢复挺立，仅对清晨仍下垂或根区一指节深已干的高优先植株补水。\n4. ",
+          "reason": "明确说明低水量浇灌排序原则",
+          "selection_reason": "明确说明低水量浇灌排序原则",
+          "retrieval_query_profiles": [
+            "planting_low_water"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 75.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:少水,浇灌,根区"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-low-water-irrigation-priority-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0674"
+          ],
+          "record_id": "04eaa2ee8351bf7",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0674",
+          "linked_guide_title": "少水覆盖浇灌",
+          "metadata": {
+            "record_id": "04eaa2ee8351bf7"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-container-002",
+          "id": "agriculture-container-002",
+          "title": "容器种植的排水和光照",
+          "label": "wiki",
+          "summary": "用于容器种植的排水和光照的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 容器种植的排水和光照\n\n## 独立边界矩阵\n\n- 拆分词一：容器、器种、种植、植的、的排、排水、水和、和光、光照。\n- 拆分词二：容器种、器种植、种植的、植的排、的排水、排水和、水和光、和光照、容器种植。\n- 本条的对象不是泛泛种植，而是容器对水、光、容器、土壤、种子和可食部位的具体影响。\n- 与养殖条目的分界：器种只评估植物、容器、土壤和灌溉，不处理动物饲料、粪便和逃逸。\n- 与食物条目的分界：种植在采收前看污染和投入，采收后保存和配给才转入食物条目。\n- 与卫生条目的分界：植的一旦涉及污水、霉味、病原和厨房污染，先按污染边界停止入口。\n- 本条排除项：不把的排并入泛泛提醒；若现场只出现",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_low_water"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 75.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:少水,浇灌,根区"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-container-002",
+          "category": "re7091afdf0a2db",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0674"
+          ],
+          "record_id": "ra209c3ba23ca5f",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0674",
+          "linked_guide_title": "少水覆盖浇灌",
+          "metadata": {
+            "record_id": "ra209c3ba23ca5f"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-mulch-material-safety-001",
+          "id": "agriculture-mulch-material-safety-001",
+          "title": "土面覆盖物污染边界",
+          "label": "wiki",
+          "summary": "在用干草、落叶或纸板保水前排除病残体、化学污染和紧贴茎基引起的腐烂。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "# 土面覆盖物污染边界\n\n## 用途\n\n在用干草、落叶或纸板保水前排除病残体、化学污染和紧贴茎基引起的腐烂。\n\n## 适用场景\n\n- 适用于小菜园、容器种植或育苗区对该主题进行首次操作和定期复查。\n- 不适用于已出现不明化学污染、粪污倒灌或无法辨认材料来源的情况。\n\n## 准备材料\n\n- 现场编号标记\n- 少量干净工具\n- 记录纸和笔\n- 必要时的手部隔离层\n\n## 操作步骤\n\n1. 把覆盖候选物摊开，挑出霉斑、虫卵、病叶、塑料、光滑涂层纸和有刺鼻印刷味的材料。\n2. 确认干草和落叶来源未接触粪污、油污或路边不明粉尘。\n3. 覆盖层从茎基向外留两指宽空隙，厚度以仍能看到少量土表为起点。\n4. ",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_low_water"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 75.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:少水,浇灌,根区"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-mulch-material-safety-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0674"
+          ],
+          "record_id": "9ede32da4c93180",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0674",
+          "linked_guide_title": "少水覆盖浇灌",
+          "metadata": {
+            "record_id": "9ede32da4c93180"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-seed-storage-001",
+          "id": "agriculture-seed-storage-001",
+          "title": "种子保存的干燥和温度",
+          "label": "wiki",
+          "summary": "控制种子干燥、温度、标签和优先级；中风险条目，受潮发霉或虫害时隔离，并记录责任人、时间和复查结果。",
+          "snippet": "# 种子保存的干燥和温度\n\n## 独立边界矩阵\n\n- 拆分词一：种子、子保、保存、存的、的干、干燥、燥和、和温、温度。\n- 拆分词二：种子保、子保存、保存的、存的干、的干燥、干燥和、燥和温、和温度、种子保存。\n- 本条的对象不是泛泛种植，而是种子对水、光、容器、土壤、种子和可食部位的具体影响。\n- 与养殖条目的分界：子保只评估植物、容器、土壤和灌溉，不处理动物饲料、粪便和逃逸。\n- 与食物条目的分界：保存在采收前看污染和投入，采收后保存和配给才转入食物条目。\n- 与卫生条目的分界：存的一旦涉及污水、霉味、病原和厨房污染，先按污染边界停止入口。\n- 本条排除项：不把的干并入泛泛提醒；若现场只出现",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_low_water"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 75.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:少水,浇灌,根区"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-seed-storage-001",
+          "category": "re7091afdf0a2db",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0674"
+          ],
+          "record_id": "r8da2b0e71554d4",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0674",
+          "linked_guide_title": "少水覆盖浇灌",
+          "metadata": {
+            "record_id": "r8da2b0e71554d4"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-sprouts-001",
+          "id": "agriculture-sprouts-001",
+          "title": "芽苗菜为什么适合短周期补充",
+          "label": "wiki",
+          "summary": "用于芽苗菜为什么适合短周期补充的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 芽苗菜为什么适合短周期补充\n\n## 独立边界矩阵\n\n- 拆分词一：适合短周期补充、芽苗、苗菜、菜为、为什、什么、么适、适合、合短。\n- 拆分词二：短周、周期、期补、补充、芽苗菜、苗菜为、菜为什、为什么、什么适。\n- 本条的对象不是泛泛种植，而是适合短周期补充对水、光、容器、土壤、种子和可食部位的具体影响。\n- 与养殖条目的分界：芽苗只评估植物、容器、土壤和灌溉，不处理动物饲料、粪便和逃逸。\n- 与食物条目的分界：苗菜在采收前看污染和投入，采收后保存和配给才转入食物条目。\n- 与卫生条目的分界：菜为一旦涉及污水、霉味、病原和厨房污染，先按污染边界停止入口。\n- 本条排除项：不把为什并入泛泛提",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_low_water"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 75.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:少水,浇灌,根区"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-sprouts-001",
+          "category": "re7091afdf0a2db",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0674"
+          ],
+          "record_id": "r992d07bcaac469",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0674",
+          "linked_guide_title": "少水覆盖浇灌",
+          "metadata": {
+            "record_id": "r992d07bcaac469"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-irrigation-001",
+          "id": "agriculture-irrigation-001",
+          "title": "少水灌溉的土壤覆盖",
+          "label": "wiki",
+          "summary": "用于少水灌溉的土壤覆盖的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "用于少水灌溉的土壤覆盖的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "reason": "提供土壤覆盖减少蒸发方案",
+          "selection_reason": "提供土壤覆盖减少蒸发方案",
+          "retrieval_query_profiles": [
+            "planting_low_water"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 75.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:40",
+            "profile_candidate_anchor_boost:35:少水"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-irrigation-001",
+          "category": "re7091afdf0a2db",
+          "risk_level": "caution",
+          "guide_links": [],
+          "record_id": "rbc8481f2d607ef",
+          "source_role": "independent_support",
+          "source_reason": "independent_wiki_search",
+          "linked_guide_id": "",
+          "linked_guide_title": "",
+          "metadata": {
+            "record_id": "rbc8481f2d607ef"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 7,
+          "guide": 4
+        },
+        "candidate_count": 11,
+        "selected_count": 7,
+        "source_plan_count": 3,
+        "core_terms": [
+          "储水只够维持几天",
+          "储水只够",
+          "水只够维",
+          "只够维持",
+          "够维持几",
+          "维持几天",
+          "菜园里有",
+          "园里有刚"
+        ],
+        "ok": true,
+        "error": "",
+        "stage": ""
+      }
+    },
+    {
+      "id": "planting_wilted_seedlings",
+      "question": "昨天刚移栽的幼苗今天中午全蔫了，土摸着还有点湿。现在要不要猛浇水，怎么遮阴和判断是否还在缓苗？",
+      "expected_wikis": [
+        "agriculture-shade-heat-protection-001",
+        "agriculture-seedling-transplant-001"
+      ],
+      "expected_guides": [
+        "DG-0236"
+      ],
+      "focus_terms": [
+        "遮阴",
+        "缓苗",
+        "清晨",
+        "土湿",
+        "移栽",
+        "停止"
+      ],
+      "risk_boundary_required": true,
+      "expected_wiki_hits": [
+        "agriculture-seedling-transplant-001",
+        "agriculture-shade-heat-protection-001"
+      ],
+      "batch4a_wiki_hits": [
+        "agriculture-seedling-transplant-001",
+        "agriculture-shade-heat-protection-001"
+      ],
+      "batch4a_wiki_hit": true,
+      "domain_hit": true,
+      "action_term_hits": [
+        "遮阴",
+        "缓苗",
+        "清晨",
+        "移栽",
+        "停止"
+      ],
+      "action_used": true,
+      "guide_hit": true,
+      "guide_wiki_combo": true,
+      "has_stop_condition": true,
+      "has_fallback": true,
+      "has_record_advice": true,
+      "external_dependencies": [],
+      "dangerous_advice": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "guides_selected": [
+        {
+          "id": "DG-0236",
+          "title": "简易育苗流程",
+          "risk_level": "normal"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-seedling-transplant-001",
+          "title": "幼苗移栽和缓苗检查"
+        },
+        {
+          "slug": "agriculture-shade-heat-protection-001",
+          "title": "幼苗遮阴与日灼防护"
+        },
+        {
+          "slug": "agriculture-improvised-nursery-tray-001",
+          "title": "简易育苗盘替代制作"
+        },
+        {
+          "slug": "agriculture-sowing-depth-spacing-001",
+          "title": "播种深度与间距小样设置"
+        }
+      ],
+      "kiwix_selected": [],
+      "answer": "一、当前判断  \n幼苗移栽后出现萎蔫，但土壤仍湿润，可能因缓苗期失水或高温暴晒导致。需优先排查遮阴不足和水分管理不当，而非直接猛浇水。\n\n二、马上做什么  \n1. 用浅色布或枝叶在向阳侧架起遮阴，保留早晨光照，遮挡午后强光。  \n2. 检查清晨叶片是否挺立，若清晨正常、正午下垂，先不立即浇水，优先通风降温。  \n3. 用干草或纸张覆盖地面，降低土壤蒸发，避免根系失水。  \n4. 若土壤过湿，暂停浇水，挖开土层检查根部是否腐烂或酸臭（Wiki 1 停止条件）。  \n\n三、不要做什么  \n1. 避免正午浇水，防止根部缺氧。  \n2. 不要直接暴晒或移除遮阴物，加剧热应激。  \n3. 不要一次性大量浇水，可能加重根部腐烂风险。  \n\n四、本地降级方案  \n若无遮阴物，用空容器倒扣或纸筒简易遮挡；若无水，仅保留根区微湿，用干草吸水保湿（Wiki 2 替代方案）。  \n\n五、接下来观察和记录什么  \n1. 每日清晨检查叶片是否恢复挺立，记录是否出新叶（Wiki 1 判断标准）。  \n2. 观察茎基是否稳固，有无黑腐或收缩（Wiki 1 异常信号）。  \n3. 记录土壤湿度变化，若持续泥泞或干裂，调整遮阴和补水频率。  \n\n六、需要追问的信息  \n1. 移栽时是否在阴天或傍晚？  \n2. 土壤是否曾积水或出现酸臭味？  \n3. 幼苗是否有明显倒伏或根部腐烂？",
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0236",
+          "id": "DG-0236",
+          "title": "简易育苗流程",
+          "label": "guide",
+          "summary": "先育苗再移栽，减少种子浪费。",
+          "snippet": "种子有限，希望提高发芽和成苗概率。",
+          "reason": "Planner 已请求行动 Guide，保留最高相关 Guide 以满足来源契约。",
+          "selection_reason": "Planner 已请求行动 Guide，保留最高相关 Guide 以满足来源契约。",
+          "retrieval_query_profiles": [
+            "planting_seedling_heat"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 75.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:40",
+            "profile_candidate_anchor_boost:35:遮阴"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-seedling-transplant-001",
+          "id": "agriculture-seedling-transplant-001",
+          "title": "幼苗移栽和缓苗检查",
+          "label": "wiki",
+          "summary": "在幼苗根团成形后完成起苗、定植、遮阴和缓苗复查，减少断根、倒伏和移栽后失水。",
+          "snippet": "# 幼苗移栽和缓苗检查\n\n## 用途\n\n把已达移栽状态的幼苗从育苗容器移到种植位，并用三天观察决定继续保留或重播。\n\n## 适用场景\n\n- 适用于幼苗已有 2–4 片真叶、根系能带住少量基质且种植位已排水。\n- 不适用于茎基发黑、根部酸臭、虫害正在扩大或移栽地仍积水的情况。\n\n## 准备材料\n\n- 种植孔位\n- 小铲或勺\n- 少量水\n- 遮阴物\n- 标签\n\n## 操作步骤\n\n1. 提前一天让育苗介质保持微潮，不在泥水状态起苗。\n2. 选阴天或傍晚，先挖好定植孔并倒少量水润湿孔底。\n3. 捏住根团周围介质而不拉茎叶，连根团取出，断根过多的苗单独标记。\n4. 按原生长深度放入孔中，回填后轻压四周，",
+          "reason": "直接涉及移栽缓苗期遮阴和失水防护",
+          "selection_reason": "直接涉及移栽缓苗期遮阴和失水防护",
+          "retrieval_query_profiles": [
+            "planting_seedling_heat"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 75.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:遮阴"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-seedling-transplant-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0236"
+          ],
+          "record_id": "0e5d12e1cab3753",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0236",
+          "linked_guide_title": "简易育苗流程",
+          "metadata": {
+            "record_id": "0e5d12e1cab3753"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-shade-heat-protection-001",
+          "id": "agriculture-shade-heat-protection-001",
+          "title": "幼苗遮阴与日灼防护",
+          "label": "wiki",
+          "summary": "在连续高温或突然强光时用通风遮阴和清晨复查区分日灼与缺水，减少盲目加水。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "# 幼苗遮阴与日灼防护\n\n## 用途\n\n在连续高温或突然强光时用通风遮阴和清晨复查区分日灼与缺水，减少盲目加水。\n\n## 适用场景\n\n- 适用于小菜园、容器种植或育苗区对该主题进行首次操作和定期复查。\n- 不适用于已出现不明化学污染、粪污倒灌或无法辨认材料来源的情况。\n\n## 准备材料\n\n- 现场编号标记\n- 少量干净工具\n- 记录纸和笔\n- 必要时的手部隔离层\n\n## 操作步骤\n\n1. 先在清晨看叶片是否挺立；清晨正常、正午下垂多为热应激，不立即大水灌根。\n2. 用浅色布、稀疏枝叶或网在向阳侧架起遮阴，与叶面留一手宽通风层。\n3. 保留早晨光，遮住午后最强时段，傍晚检查遮阴物是否阻断通风。\n",
+          "reason": "提供高温下遮阴与日灼防护的观察方法",
+          "selection_reason": "提供高温下遮阴与日灼防护的观察方法",
+          "retrieval_query_profiles": [
+            "planting_seedling_heat"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 75.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:遮阴"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-shade-heat-protection-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0236"
+          ],
+          "record_id": "2dee829779cf8d8",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0236",
+          "linked_guide_title": "简易育苗流程",
+          "metadata": {
+            "record_id": "2dee829779cf8d8"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-improvised-nursery-tray-001",
+          "id": "agriculture-improvised-nursery-tray-001",
+          "title": "简易育苗盘替代制作",
+          "label": "wiki",
+          "summary": "用浅盒、纸杯或分格容器制作可排水、可标记和可起苗的小批量育苗盘。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "# 简易育苗盘替代制作\n\n## 用途\n\n用浅盒、纸杯或分格容器制作可排水、可标记和可起苗的小批量育苗盘。\n\n## 适用场景\n\n- 适用于小菜园、容器种植或育苗区对该主题进行首次操作和定期复查。\n- 不适用于已出现不明化学污染、粪污倒灌或无法辨认材料来源的情况。\n\n## 准备材料\n\n- 现场编号标记\n- 少量干净工具\n- 记录纸和笔\n- 必要时的手部隔离层\n\n## 操作步骤\n\n1. 只选未装化学品、无油味且能清洗的浅容器，底部每格开排水孔。\n2. 在盘底加能接余水的托层，确保育苗格不泡在托盘水中。\n3. 每格装入松散微潮基质，播种后在容器边缘写作物、批次和日期。\n4. 抬起盘子做一次倾斜和排水测",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_seedling_heat"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 75.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:遮阴"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-improvised-nursery-tray-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0236"
+          ],
+          "record_id": "d8167794095f0eb",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0236",
+          "linked_guide_title": "简易育苗流程",
+          "metadata": {
+            "record_id": "d8167794095f0eb"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-sowing-depth-spacing-001",
+          "id": "agriculture-sowing-depth-spacing-001",
+          "title": "播种深度与间距小样设置",
+          "label": "wiki",
+          "summary": "用两种深度和固定标记小样播种，避免种子过深缺氧或过密后幼苗竞争。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "# 播种深度与间距小样设置\n\n## 用途\n\n用两种深度和固定标记小样播种，避免种子过深缺氧或过密后幼苗竞争。\n\n## 适用场景\n\n- 适用于小菜园、容器种植或育苗区对该主题进行首次操作和定期复查。\n- 不适用于已出现不明化学污染、粪污倒灌或无法辨认材料来源的情况。\n\n## 准备材料\n\n- 现场编号标记\n- 少量干净工具\n- 记录纸和笔\n- 必要时的手部隔离层\n\n## 操作步骤\n\n1. 把同批种子分两小组，小粒种子一组薄覆土、一组覆土约一粒种子厚。\n2. 用手指或带刻度木片划出播种行，同行留出可夹取间苗的空隙。\n3. 播后用细水润湿，不用大水把种子冲到一起。\n4. 每日记录两组首次出苗时间和出苗",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_seedling_heat"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 75.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:40",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:遮阴"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-sowing-depth-spacing-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0236"
+          ],
+          "record_id": "fdcc1500e8ea4b4",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0236",
+          "linked_guide_title": "简易育苗流程",
+          "metadata": {
+            "record_id": "fdcc1500e8ea4b4"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 5,
+          "guide": 8
+        },
+        "candidate_count": 13,
+        "selected_count": 5,
+        "source_plan_count": 2,
+        "core_terms": [
+          "幼苗",
+          "移栽",
+          "浇水",
+          "遮阴",
+          "缓苗"
+        ],
+        "ok": true,
+        "error": "",
+        "stage": ""
+      }
+    },
+    {
+      "id": "planting_leaf_spots",
+      "question": "两盆菜的叶背出现白斑，旁边的菜暂时正常。是马上全拔掉，还是先隔开观察？剪下来的叶子和剪刀怎么处理？",
+      "expected_wikis": [
+        "agriculture-crop-disease-isolation-001",
+        "agriculture-diseased-residue-separation-001"
+      ],
+      "expected_guides": [],
+      "focus_terms": [
+        "隔离",
+        "叶背",
+        "工具",
+        "病残体",
+        "堆肥",
+        "观察"
+      ],
+      "risk_boundary_required": true,
+      "expected_wiki_hits": [
+        "agriculture-crop-disease-isolation-001",
+        "agriculture-diseased-residue-separation-001"
+      ],
+      "batch4a_wiki_hits": [
+        "agriculture-crop-disease-isolation-001",
+        "agriculture-diseased-residue-separation-001"
+      ],
+      "batch4a_wiki_hit": true,
+      "domain_hit": true,
+      "action_term_hits": [
+        "隔离",
+        "工具",
+        "堆肥",
+        "观察"
+      ],
+      "action_used": true,
+      "guide_hit": false,
+      "guide_wiki_combo": true,
+      "has_stop_condition": true,
+      "has_fallback": true,
+      "has_record_advice": true,
+      "external_dependencies": [],
+      "dangerous_advice": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "guides_selected": [
+        {
+          "id": "DG-0831",
+          "title": "作物病害隔离与工具分流",
+          "risk_level": "caution"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-crop-disease-isolation-001",
+          "title": "作物病害隔离和工具分流"
+        },
+        {
+          "slug": "agriculture-diseased-residue-separation-001",
+          "title": "病害作物残体分流"
+        }
+      ],
+      "kiwix_selected": [],
+      "answer": "一、当前判断  \n白斑可能为病害初期，但周边菜暂正常，风险等级为 caution（需谨慎隔离观察），优先排查是否为虫害或环境应激，而非直接拔除。\n\n二、马上做什么  \n1. 用隔离标签标记病株，将两盆移至种植区边缘（浇水不回流的位置）。  \n2. 用专用剪刀剪除病叶，放入标记容器（如密封袋），避免接触健康植株。  \n3. 用清洁干燥的工具处理健康株，最后再处理病株，工具使用后彻底清洁。  \n4. 记录发病日期、位置及症状轮廓，每日固定时间复查斑点边界变化。  \n\n三、不要做什么  \n1. 不要先碰病株再处理健康株，避免机械传播。  \n2. 不要将病叶丢进普通堆肥或留在畦边，防止病原体残留。  \n3. 不要直接拔除整株，先排除缺水、日灼等非病害因素。  \n\n四、本地降级方案  \n若无隔离空间，用托盘阻断浇水回流，并在种植区最边缘设可疑区。缺剪刀时仅摘除能完整分离的病叶，避免伤茎，保持隔离状态。  \n\n五、接下来观察和记录什么  \n1. 每日记录斑点是否扩大、新株是否出现同类症状。  \n2. 检查茎基硬度（是否变软）及异味（是否腐烂）。  \n3. 观察工具清洁状态，确保未混用。  \n4. 3天后对比扩散边界，判断是否需扩大隔离区。  \n\n六、需要追问的信息  \n1. 是否有其他植株出现类似白斑？  \n2. 病叶是否伴随软腐、异味或虫卵？  \n3. 附近是否有积水或虫害高发区域？",
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0831",
+          "id": "DG-0831",
+          "title": "作物病害隔离与工具分流",
+          "label": "guide",
+          "summary": "在症状跨株扩散前分开植株、浇水、工具和病残体路线。",
+          "snippet": "少量作物出现叶斑、霉层、软腐或异常萎蔞，其他植株暂时正常。",
+          "reason": "直接关联菜叶白斑病害隔离处理",
+          "selection_reason": "直接关联菜叶白斑病害隔离处理"
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-crop-disease-isolation-001",
+          "id": "agriculture-crop-disease-isolation-001",
+          "title": "作物病害隔离和工具分流",
+          "label": "wiki",
+          "summary": "在叶斑、霉层、软腐或不明萎蔞出现时隔离植株和工具，减少浇水、触摸与残体带来的扩散。",
+          "snippet": "# 作物病害隔离和工具分流\n\n## 用途\n\n把可疑植株从健康作物的浇水、触摸和工具路线中分开，并用连续观察判断是否可恢复。\n\n## 适用场景\n\n- 适用于少量植株出现不明斑点、白粉、叶缘水渍、茎部软腐或异常萎蔞。\n- 不用于把所有黄叶都当传染病；先排除缺水、积水、日灼和移栽应激。\n\n## 准备材料\n\n- 隔离标签\n- 专用剪刀或折断工具\n- 接残体的袋或盒\n- 清洁水\n- 记录纸\n\n## 操作步骤\n\n1. 从健康区向可疑区逐株查看，记录首发位置、叶片面积和茎根症状。\n2. 可移动容器放到下风且浇水不回流的位置；地栽株用标记划出独立操作区。\n3. 先处理健康植株，最后处理可疑株，可疑区工具未清洁",
+          "reason": "明确说明作物病害隔离措施",
+          "selection_reason": "明确说明作物病害隔离措施",
+          "slug": "agriculture-crop-disease-isolation-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0831"
+          ],
+          "record_id": "4c8cfe515a6e1db",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0831",
+          "linked_guide_title": "作物病害隔离与工具分流",
+          "metadata": {
+            "record_id": "4c8cfe515a6e1db"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-diseased-residue-separation-001",
+          "id": "agriculture-diseased-residue-separation-001",
+          "title": "病害作物残体分流",
+          "label": "wiki",
+          "summary": "将有霉层、软腐、虫卵和不明斑点的作物残体从覆盖物、堆肥和健康土中分出。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "# 病害作物残体分流\n\n## 用途\n\n将有霉层、软腐、虫卵和不明斑点的作物残体从覆盖物、堆肥和健康土中分出。\n\n## 适用场景\n\n- 适用于小菜园、容器种植或育苗区对该主题进行首次操作和定期复查。\n- 不适用于已出现不明化学污染、粪污倒灌或无法辨认材料来源的情况。\n\n## 准备材料\n\n- 现场编号标记\n- 少量干净工具\n- 记录纸和笔\n- 必要时的手部隔离层\n\n## 操作步骤\n\n1. 在剪除前准备带盖容器，先收集健康残体，最后处理有霉、软腐和虫卵的部分。\n2. 病残体不在地面拖行或抖落，剪下后直接进入标记容器。\n3. 清点受影响植株和残体体积，将该区工具清洁干燥后再带回健康区。\n4. 残体密封",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "slug": "agriculture-diseased-residue-separation-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0831"
+          ],
+          "record_id": "89ce1f6abb8159d",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0831",
+          "linked_guide_title": "作物病害隔离与工具分流",
+          "metadata": {
+            "record_id": "89ce1f6abb8159d"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 9,
+          "guide": 8
+        },
+        "candidate_count": 17,
+        "selected_count": 3,
+        "source_plan_count": 2,
+        "core_terms": [
+          "叶背",
+          "白斑",
+          "病虫害",
+          "隔离",
+          "处理"
+        ],
+        "ok": true,
+        "error": "",
+        "stage": ""
+      }
+    },
+    {
+      "id": "planting_safe_site",
+      "question": "院子里有靠墙、靠水桶和靠动物圈的三小块空地，想开一个菜园。怎么比较光照、排水和污染风险，哪类位置直接不用？",
+      "expected_wikis": [
+        "agriculture-garden-site-selection-001",
+        "agriculture-contaminated-plot-ban-record-001"
+      ],
+      "expected_guides": [
+        "DG-0227"
+      ],
+      "focus_terms": [
+        "光照",
+        "排水",
+        "污染",
+        "粪污",
+        "禁用",
+        "水源"
+      ],
+      "risk_boundary_required": true,
+      "expected_wiki_hits": [
+        "agriculture-garden-site-selection-001"
+      ],
+      "batch4a_wiki_hits": [
+        "agriculture-garden-site-selection-001"
+      ],
+      "batch4a_wiki_hit": true,
+      "domain_hit": true,
+      "action_term_hits": [
+        "光照",
+        "排水",
+        "污染",
+        "水源"
+      ],
+      "action_used": true,
+      "guide_hit": false,
+      "guide_wiki_combo": false,
+      "has_stop_condition": true,
+      "has_fallback": true,
+      "has_record_advice": true,
+      "external_dependencies": [],
+      "dangerous_advice": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "guides_selected": [
+        {
+          "id": "DG-0174",
+          "title": "临时厨房位置选择",
+          "risk_level": "caution"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-garden-site-selection-001",
+          "title": "小菜园选址复核"
+        }
+      ],
+      "kiwix_selected": [],
+      "answer": "一、当前判断  \n靠动物圈位置存在污染风险，直接排除；靠墙和水桶位置需进一步评估光照、排水及污染情况，但需优先排查动物圈的粪便污染隐患。\n\n二、马上做什么  \n1. 检查动物圈区域是否有粪便、污水或动物活动痕迹，标记为污染区。  \n2. 用木棍探查靠墙位置土壤表层，观察是否有玻璃、金属等异常物质。  \n3. 在靠水桶位置倒水测试排水方向，确保不流向饮水区或低洼积水点。  \n4. 记录三个位置的日照时段，避开热墙反射强烈或全日昏暗区域。  \n\n三、不要做什么  \n1. 避免在动物圈附近直接种入口作物，防止粪便污染土壤。  \n2. 不要忽略雨后排水观察，仅凭晴天判断可能漏掉积水风险。  \n3. 不要将动物圈与菜园边界混淆，需明确隔离污染区。  \n\n四、本地降级方案  \n若无测量工具，用固定时点影子边缘判断光照，靠墙位置若无明显遮挡可临时试种，但需用隔离容器种植，并定期检查土壤异味和积水。  \n\n五、接下来观察和记录什么  \n1. 记录动物圈区域粪便处理情况及污水流向，3天内复查。  \n2. 观察靠水桶位置雨后排水是否持续积水，24小时内确认。  \n3. 每日记录靠墙位置日照时段，对比早中晚光照稳定性。  \n\n六、需要追问的信息  \n1. 动物圈是否有粪便处理措施？  \n2. 水桶是否作为饮用水源？  \n3. 靠墙位置是否有遮挡物影响光照？",
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0174",
+          "id": "DG-0174",
+          "title": "临时厨房位置选择",
+          "label": "guide",
+          "summary": "让厨房远离污染和火灾风险，同时方便取水和清洁。",
+          "snippet": "需要长期做饭、烧水或处理食物。",
+          "reason": "Planner 已请求行动 Guide，保留最高相关 Guide 以满足来源契约。",
+          "selection_reason": "Planner 已请求行动 Guide，保留最高相关 Guide 以满足来源契约。"
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-garden-site-selection-001",
+          "id": "agriculture-garden-site-selection-001",
+          "title": "小菜园选址复核",
+          "label": "wiki",
+          "summary": "用光照、排水、污染、取水和通行条件筛选可食作物地块，避免入土后才发现场地不可用。",
+          "snippet": "用光照、排水、污染、取水和通行条件筛选可食作物地块，避免入土后才发现场地不可用。",
+          "reason": "直接涉及光照排水污染评估的选址复核标准",
+          "selection_reason": "直接涉及光照排水污染评估的选址复核标准",
+          "slug": "agriculture-garden-site-selection-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "high",
+          "guide_links": [],
+          "record_id": "a81884984aeb19e",
+          "source_role": "independent_support",
+          "source_reason": "independent_wiki_search",
+          "linked_guide_id": "",
+          "linked_guide_title": "",
+          "metadata": {
+            "record_id": "a81884984aeb19e"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "guide": 8,
+          "wiki": 8
+        },
+        "candidate_count": 16,
+        "selected_count": 2,
+        "source_plan_count": 2,
+        "core_terms": [
+          "靠墙",
+          "水桶",
+          "动物圈",
+          "光照",
+          "排水",
+          "污染",
+          "位置选择"
+        ],
+        "ok": true,
+        "error": "",
+        "stage": ""
+      }
+    },
+    {
+      "id": "planting_harvest_storage",
+      "question": "刚收下来的叶菜和根菜有的擦伤、有的还带潮气，怎么分出能马上吃、能短存和应该隔离的，避免一筐一起发霉？",
+      "expected_wikis": [
+        "agriculture-harvest-maturity-check-001",
+        "agriculture-harvest-001"
+      ],
+      "expected_guides": [],
+      "focus_terms": [
+        "成熟",
+        "破损",
+        "潮湿",
+        "分开",
+        "霉",
+        "隔离"
+      ],
+      "risk_boundary_required": false,
+      "knowledge_gap_candidate": "缺少独立的 agriculture-post-harvest-mold-prevention Wiki；现有 agriculture-harvest-001 可作为相邻依据。",
+      "expected_wiki_hits": [
+        "agriculture-harvest-maturity-check-001"
+      ],
+      "batch4a_wiki_hits": [
+        "agriculture-harvest-maturity-check-001"
+      ],
+      "batch4a_wiki_hit": true,
+      "domain_hit": true,
+      "action_term_hits": [
+        "破损",
+        "潮湿",
+        "霉",
+        "隔离"
+      ],
+      "action_used": true,
+      "guide_hit": false,
+      "guide_wiki_combo": true,
+      "has_stop_condition": true,
+      "has_fallback": true,
+      "has_record_advice": true,
+      "external_dependencies": [],
+      "dangerous_advice": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "guides_selected": [
+        {
+          "id": "DG-0832",
+          "title": "采收后分级防霉",
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0608",
+          "title": "霉变粮食和坚果停用",
+          "risk_level": "high"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-post-harvest-mold-prevention-001",
+          "title": "采收后分级与防霉隔离"
+        },
+        {
+          "slug": "agriculture-harvest-maturity-check-001",
+          "title": "小规模作物采收成熟判断"
+        },
+        {
+          "slug": "food-canned-food-001",
+          "title": "干粮和罐头三天配给原则"
+        },
+        {
+          "slug": "food-canned-food-002",
+          "title": "干货罐头轮换和先开先用"
+        },
+        {
+          "slug": "food-children-001",
+          "title": "儿童老人食物优先级判断"
+        },
+        {
+          "slug": "food-cooking-001",
+          "title": "低燃料烹饪对食物安全的影响"
+        }
+      ],
+      "kiwix_selected": [],
+      "answer": "一、当前判断  \n叶菜和根菜存在擦伤、潮气，需立即分拣防霉。霉变、破损、潮湿批次混放会加速发霉，优先隔离高风险批次，避免污染整筐。\n\n二、马上做什么  \n1. 摊开所有蔬菜，先挑出有霉点、酸臭、软烂出水或污水接触痕的批次，放入标记隔离容器。  \n2. 将擦伤但无霉无异味的批次单独标为“优先短期食用”，不与其他批次混放。  \n3. 潮湿但未破损的蔬菜单层摊开通风，翻动一次去除表面水，避免密闭袋晾干。  \n4. 完整干爽的蔬菜放入干净通风容器短存，容器不装满留出空隙。  \n5. 叶菜与带土根菜分容器放置，避免湿叶菜压在根菜下方。  \n\n三、不要做什么  \n1. 不要将霉变叶片挑出后继续整筐密闭存放。  \n2. 不要将擦伤批与完整批混放。  \n3. 不要直接将湿菜装入密闭袋。  \n4. 不要只检查表层，忽略容器底部湿斑。  \n\n四、本地降级方案  \n- 缺篮筐时用洗净晾干的浅盆或硬纸板盒替代，禁用有霉味旧容器。  \n- 无通风架时用干净木条架高蔬菜，缩小容器存放量并增加复查频率。  \n- 没有干布时用无涂层纸、草编垫或自然通风去除表面水。  \n\n五、接下来观察和记录什么  \n1. 每日固定时间检查容器底部和边角，记录新霉点、湿斑、酸臭或软烂出水。  \n2. 记录各批次短存位置、复查时间及处理结果。  \n3. 观察潮湿批次是否持续返潮，通风后是否仍留水渍。  \n\n六、需要追问的信息  \n1. 是否有霉变或酸臭味的蔬菜已混入其他批次？  \n2. 当前存放位置是否通风，地面是否潮湿？  \n3. 是否有可用的干净容器或通风架？",
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0832",
+          "id": "DG-0832",
+          "title": "采收后分级防霉",
+          "label": "guide",
+          "summary": "在收获物混筐前完成破损、潮湿、完整和霉变分级，防止局部腐烂扩散到整批。",
+          "snippet": "刚采收的叶菜、根菜或果实有擦伤、潮气或局部霉变，需要分出立即食用、短存和隔离批。",
+          "reason": "明确说明蔬菜分级防霉措施",
+          "selection_reason": "明确说明蔬菜分级防霉措施",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:42",
+            "profile_candidate_anchor_boost:35:采收,收获物,短存,防霉"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "guide",
+          "source_id": "DG-0608",
+          "id": "DG-0608",
+          "title": "霉变粮食和坚果停用",
+          "label": "guide",
+          "summary": "快速停用霉变批次，保护剩余干粮不被交叉污染。",
+          "snippet": "粮食或坚果出现霉斑、霉味、结块或虫蛀，局部去除不能可靠排除毒素风险。",
+          "reason": "包含霉变蔬菜处理规范",
+          "selection_reason": "包含霉变蔬菜处理规范",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "profile_domain_boost:42",
+            "profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-post-harvest-mold-prevention-001",
+          "id": "agriculture-post-harvest-mold-prevention-001",
+          "title": "采收后分级与防霉隔离",
+          "label": "wiki",
+          "summary": "用破损、潮湿、霉点和异味将采收物分为立即食用、通风短存和隔离批，防止一件损坏扩散到整筐。",
+          "snippet": "# 采收后分级与防霉隔离\n\n## 用途\n\n用于采收后立即分出霉变、破损、潮湿和完整干爽批，决定哪些立即食用、哪些可短存、哪些必须隔离，避免一件软烂使整筐食物发霉。\n\n## 适用场景\n\n- 适用于叶菜、根菜和果实刚采收、表面带泥带潮、部分擦伤，需要短存或分批食用时。\n- 不适用于已明显腐烂、发酸发臭、霉层向外扩散或接触污水和不明化学污染的批次入库。\n\n## 准备材料\n\n- 干净篮筐、盆或带通风孔的箱子\n- 干净垫布、无涂层纸或编织垫层\n- 通风架、绳网或架高木条\n- 隔离容器和明显标签\n- 记录纸和笔\n\n## 操作步骤\n\n1. 在通风、避雨且远离生肉和垃圾的位置摊开收获物，不把新收的菜直接堆在地",
+          "reason": "提供蔬菜分类储存防霉标准",
+          "selection_reason": "提供蔬菜分类储存防霉标准",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:采收,收获物,短存,防霉"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-post-harvest-mold-prevention-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0832"
+          ],
+          "record_id": "14f8d29a15d2e46",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0832",
+          "linked_guide_title": "采收后分级防霉",
+          "metadata": {
+            "record_id": "14f8d29a15d2e46"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-harvest-maturity-check-001",
+          "id": "agriculture-harvest-maturity-check-001",
+          "title": "小规模作物采收成熟判断",
+          "label": "wiki",
+          "summary": "用大小、色泽、硬度和单果试采决定分批收获，避免过早损失可食量或过熟腐败。条目提供可观察检查和交接记录，支持离线种植决策。",
+          "snippet": "# 小规模作物采收成熟判断\n\n## 用途\n\n用大小、色泽、硬度和单果试采决定分批收获，避免过早损失可食量或过熟腐败。\n\n## 适用场景\n\n- 适用于小菜园、容器种植或育苗区对该主题进行首次操作和定期复查。\n- 不适用于已出现不明化学污染、粪污倒灌或无法辨认材料来源的情况。\n\n## 准备材料\n\n- 现场编号标记\n- 少量干净工具\n- 记录纸和笔\n- 必要时的手部隔离层\n\n## 操作步骤\n\n1. 先对照同批作物的播种或开花日期，选上、中、下三个位置各一个样本。\n2. 检查可食部分是否达到该批的常见大小、颜色是否均匀，表面是否无裂口和软腐。\n3. 只采一个试吃样本，切开看内部是否实心、无异味和无虫道",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:采收,收获物,短存,防霉"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "agriculture-harvest-maturity-check-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "normal",
+          "guide_links": [
+            "DG-0832"
+          ],
+          "record_id": "dcb7a2a54ff7074",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0832",
+          "linked_guide_title": "采收后分级防霉",
+          "metadata": {
+            "record_id": "dcb7a2a54ff7074"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-canned-food-001",
+          "id": "food-canned-food-001",
+          "title": "干粮和罐头三天配给原则",
+          "label": "wiki",
+          "summary": "安排干粮罐头先开先用、标签轮换和配给天数估算，并估算干粮、主食和罐头能覆盖的天数；高风险条目，包装破损、锈蚀漏液或鼓包时停止食用。",
+          "snippet": "# 干粮和罐头三天配给原则\n\n## 独立边界矩阵\n\n- 拆分词一：罐头三天配给、干粮、粮和、和罐、罐头、头三、三天、天配、配给。\n- 拆分词二：给原、原则、干粮和、粮和罐、和罐头、罐头三、头三天、三天配、天配给。\n- 本条的对象不是所有吃饭安排，而是罐头三天配给在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：干粮若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：粮和一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：和罐造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把罐",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "food-canned-food-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "ra5ab114fe067fe",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "ra5ab114fe067fe"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-canned-food-002",
+          "id": "food-canned-food-002",
+          "title": "干货罐头轮换和先开先用",
+          "label": "wiki",
+          "summary": "安排干粮罐头先开先用、标签轮换和配给天数估算；高风险条目，包装破损、锈蚀漏液或鼓包时停止食用。",
+          "snippet": "# 干货罐头轮换和先开先用\n\n## 独立边界矩阵\n\n- 拆分词一：干货罐头轮换、干货、货罐、罐头、头轮、轮换、换和、和先、先开。\n- 拆分词二：开先、先用、干货罐、货罐头、罐头轮、头轮换、轮换和、换和先、和先开。\n- 本条的对象不是所有吃饭安排，而是干货罐头轮换在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：干货若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：货罐一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：罐头造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把头",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "food-canned-food-002",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r117eeec2eeac16",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r117eeec2eeac16"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-children-001",
+          "id": "food-children-001",
+          "title": "儿童老人食物优先级判断",
+          "label": "wiki",
+          "summary": "优先分配安全、易消化、低污染风险食物；高风险条目，不要让高风险剩饭和可疑来源食物给儿童老人。",
+          "snippet": "# 儿童老人食物优先级判断\n\n## 独立边界矩阵\n\n- 拆分词一：儿童老人食物、儿童、童老、老人、人食、食物、物优、优先、先级。\n- 拆分词二：级判、判断、儿童老、童老人、老人食、人食物、食物优、物优先、优先级。\n- 本条的对象不是所有吃饭安排，而是儿童老人食物在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：儿童若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：童老一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：老人造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把人",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "food-children-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r0d1d7ec738fd3b",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r0d1d7ec738fd3b"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-cooking-001",
+          "id": "food-cooking-001",
+          "title": "低燃料烹饪对食物安全的影响",
+          "label": "wiki",
+          "summary": "选择能一次煮透、少复热、少剩余的食物组合；高风险条目，燃料不足时不要半熟保存动物性食物。",
+          "snippet": "# 低燃料烹饪对食物安全的影响\n\n## 独立边界矩阵\n\n- 拆分词一：低燃料烹饪、低燃、燃料、料烹、烹饪、饪对、对食、食物、物安。\n- 拆分词二：安全、全的、的影、影响、低燃料、燃料烹、料烹饪、烹饪对、饪对食。\n- 本条的对象不是所有吃饭安排，而是低燃料烹饪在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：低燃若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：燃料一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：料烹造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把烹饪并",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "slug": "food-cooking-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r5e2c8adf758da0",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r5e2c8adf758da0"
+          }
+        }
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "wiki",
+          "source_id": "food-food-knowledge-001",
+          "id": "food-food-knowledge-001",
+          "title": "即食食品和需煮食品的排序",
+          "label": "wiki",
+          "summary": "区分即食、需煮、已开封和需冷藏食物的使用顺序；高风险条目，先吃最容易变质但仍安全的食物。",
+          "snippet": "# 即食食品和需煮食品的排序\n\n## 独立边界矩阵\n\n- 拆分词一：即食、食食、食品、品和、和需、需煮、煮食、品的、的排。\n- 拆分词二：排序、即食食、食食品、食品和、品和需、和需煮、需煮食、煮食品、食品的。\n- 本条的对象不是所有吃饭安排，而是即食在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：食食若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：食品一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：品和造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把和需并入泛泛提",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-food-knowledge-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r3af7a897c36815",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r3af7a897c36815"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-food-knowledge-002",
+          "id": "food-food-knowledge-002",
+          "title": "不可食残渣和可食剩余的分界",
+          "label": "wiki",
+          "summary": "用于不可食残渣和可食剩余的分界的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 不可食残渣和可食剩余的分界\n\n## 独立边界矩阵\n\n- 拆分词一：不可食残渣、不可、可食、食残、残渣、渣和、和可、食剩、剩余。\n- 拆分词二：余的、的分、分界、不可食、可食残、食残渣、残渣和、渣和可、和可食。\n- 本条的对象不是所有吃饭安排，而是不可食残渣在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：不可若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：可食一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：食残造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把残渣",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-food-knowledge-002",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r8b7f23598a158e",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r8b7f23598a158e"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-food-knowledge-003",
+          "id": "food-food-knowledge-003",
+          "title": "断供期间食物心理安慰与纪律",
+          "label": "wiki",
+          "summary": "用于断供期间食物心理安慰与纪律的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 断供期间食物心理安慰与纪律\n\n## 独立边界矩阵\n\n- 拆分词一：断供期间食物心理安慰、断供、供期、期间、间食、食物、物心、心理、理安。\n- 拆分词二：安慰、慰与、与纪、纪律、断供期、供期间、期间食、间食物、食物心。\n- 本条的对象不是所有吃饭安排，而是断供期间食物心理安慰在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：断供若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：供期一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：期间造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-food-knowledge-003",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r684eba281d91f5",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r684eba281d91f5"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-food-poisoning-001",
+          "id": "food-food-poisoning-001",
+          "title": "多人共餐时食物中毒追溯",
+          "label": "wiki",
+          "summary": "用于多人共餐时食物中毒追溯的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 多人共餐时食物中毒追溯\n\n## 独立边界矩阵\n\n- 拆分词一：多人、人共、共餐、餐时、时食、食物、物中、中毒、毒追。\n- 拆分词二：追溯、多人共、人共餐、共餐时、餐时食、时食物、食物中、物中毒、中毒追。\n- 本条的对象不是所有吃饭安排，而是多人在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：人共若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：共餐一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：餐时造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把时食并入泛泛提醒",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-food-poisoning-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r9b8b2def7893be",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r9b8b2def7893be"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-food-waste-001",
+          "id": "food-food-waste-001",
+          "title": "食物残渣为什么会招虫和发臭",
+          "label": "wiki",
+          "summary": "及时密封残渣，隔离虫害、气味和动物接触；高风险条目，不要让残渣靠近食物、水源和睡眠区。",
+          "snippet": "# 食物残渣为什么会招虫和发臭\n\n## 独立边界矩阵\n\n- 拆分词一：食物、物残、残渣、渣为、为什、什么、么会、会招、招虫。\n- 拆分词二：虫和、和发、发臭、食物残、物残渣、残渣为、渣为什、为什么、什么会。\n- 本条的对象不是所有吃饭安排，而是食物在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：物残若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：残渣一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：渣为造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把为什并入泛泛提醒",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-food-waste-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r77f59e9a5c15e7",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r77f59e9a5c15e7"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-hunger-001",
+          "id": "food-hunger-001",
+          "title": "饥饿压力下分配冲突的常见误区",
+          "label": "wiki",
+          "summary": "用于饥饿压力下分配冲突的常见误区的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 饥饿压力下分配冲突的常见误区\n\n## 独立边界矩阵\n\n- 拆分词一：饥饿、饿压、压力、力下、下分、分配、配冲、冲突、突的。\n- 拆分词二：的常、常见、见误、误区、饥饿压、饿压力、压力下、力下分、下分配。\n- 本条的对象不是所有吃饭安排，而是饥饿在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：饿压若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：压力一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：力下造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把下分并入泛泛提醒",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-hunger-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r08233f88fe84b7",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r08233f88fe84b7"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-inventory-001",
+          "id": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源",
+          "label": "wiki",
+          "summary": "用人数、餐次、热量和损耗修正食物可用天数；高风险条目，发现误差扩大时降低体力任务和消耗。",
+          "snippet": "# 食物库存天数估算的误差来源\n\n## 独立边界矩阵\n\n- 拆分词一：食物库存天数估算、食物、物库、库存、存天、天数、数估、估算、算的。\n- 拆分词二：的误、误差、差来、来源、食物库、物库存、库存天、存天数、天数估。\n- 本条的对象不是所有吃饭安排，而是食物库存天数估算在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：食物若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：物库一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：库存造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-inventory-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r1e0ee16bdb2910",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r1e0ee16bdb2910"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-mold-001",
+          "id": "food-mold-001",
+          "title": "霉变粮食和坚果的禁用边界",
+          "label": "wiki",
+          "summary": "识别霉斑、异味、结块和受潮坚果风险，并检查饲料霉味、结块和动物食后异常；高风险条目，霉变食物不靠挑拣或加热恢复。",
+          "snippet": "# 霉变粮食和坚果的禁用边界\n\n## 独立边界矩阵\n\n- 拆分词一：霉变、变粮、粮食、食和、和坚、坚果、果的、的禁、禁用。\n- 拆分词二：用边、边界、霉变粮、变粮食、粮食和、食和坚、和坚果、坚果的、果的禁。\n- 本条的对象不是所有吃饭安排，而是霉变在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：变粮若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：粮食一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：食和造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把和坚并入泛泛提醒",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-mold-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "rcc1e7cccb31d98",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "rcc1e7cccb31d98"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-package-damage-001",
+          "id": "food-package-damage-001",
+          "title": "食品包装破损后的污染判断",
+          "label": "wiki",
+          "summary": "用于食品包装破损后的污染判断的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 食品包装破损后的污染判断\n\n## 独立边界矩阵\n\n- 拆分词一：食品包装破损、食品、品包、包装、装破、破损、损后、后的、的污。\n- 拆分词二：污染、染判、判断、食品包、品包装、包装破、装破损、破损后、损后的。\n- 本条的对象不是所有吃饭安排，而是食品包装破损在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：食品若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：品包一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：包装造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把装",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-package-damage-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "rd519ca9448020d",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "rd519ca9448020d"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-protein-001",
+          "id": "food-protein-001",
+          "title": "单调饮食下盐分和蛋白风险",
+          "label": "wiki",
+          "summary": "用于单调饮食下盐分和蛋白风险的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 单调饮食下盐分和蛋白风险\n\n## 独立边界矩阵\n\n- 拆分词一：单调、调饮、饮食、食下、下盐、盐分、分和、和蛋、蛋白。\n- 拆分词二：白风、风险、单调饮、调饮食、饮食下、食下盐、下盐分、盐分和、分和蛋。\n- 本条的对象不是所有吃饭安排，而是单调在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：调饮若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：饮食一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：食下造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把下盐并入泛泛提醒",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-protein-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "rf3da736c1ac1fa",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "rf3da736c1ac1fa"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-refrigeration-001",
+          "id": "food-refrigeration-001",
+          "title": "无电冰箱后肉类和熟食风险",
+          "label": "wiki",
+          "summary": "用于无电冰箱后肉类和熟食风险的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 无电冰箱后肉类和熟食风险\n\n## 独立边界矩阵\n\n- 拆分词一：无电、电冰、冰箱、箱后、后肉、肉类、类和、和熟、熟食。\n- 拆分词二：食风、风险、无电冰、电冰箱、冰箱后、箱后肉、后肉类、肉类和、类和熟。\n- 本条的对象不是所有吃饭安排，而是无电在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：电冰若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：冰箱一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：箱后造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把后肉并入泛泛提醒",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-refrigeration-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "red20046abc1f00",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "red20046abc1f00"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-refrigeration-002",
+          "id": "food-refrigeration-002",
+          "title": "剩饭过夜没有冷藏的风险判断",
+          "label": "wiki",
+          "summary": "按停电时间、温度、开门次数和食物类型处理冰箱食物，并限制剩饭保存、复热次数和多人共食范围；高风险条目，肉类熟食可疑时不要保存到下一餐。",
+          "snippet": "# 剩饭过夜没有冷藏的风险判断\n\n## 独立边界矩阵\n\n- 拆分词一：剩饭过夜没有冷藏、剩饭、饭过、过夜、夜没、没有、有冷、冷藏、藏的。\n- 拆分词二：的风、风险、险判、判断、剩饭过、饭过夜、过夜没、夜没有、没有冷。\n- 本条的对象不是所有吃饭安排，而是剩饭过夜没有冷藏在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：剩饭若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：饭过一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：过夜造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-refrigeration-002",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "rf31a4b25e4edce",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "rf31a4b25e4edce"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-spoilage-001",
+          "id": "food-spoilage-001",
+          "title": "动物性食物腐败和寄生虫风险",
+          "label": "wiki",
+          "summary": "用于动物性食物腐败和寄生虫风险的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 动物性食物腐败和寄生虫风险\n\n## 独立边界矩阵\n\n- 拆分词一：动物性食物腐败、动物、物性、性食、食物、物腐、腐败、败和、和寄。\n- 拆分词二：寄生、生虫、虫风、风险、动物性、物性食、性食物、食物腐、物腐败。\n- 本条的对象不是所有吃饭安排，而是动物性食物腐败在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：动物若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：物性一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：性食造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-spoilage-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r705110befe3d7d",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r705110befe3d7d"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-spoilage-002",
+          "id": "food-spoilage-002",
+          "title": "食物腐败的常见信号",
+          "label": "wiki",
+          "summary": "用于食物腐败的常见信号的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 食物腐败的常见信号\n\n## 独立边界矩阵\n\n- 拆分词一：食物、物腐、腐败、败的、的常、常见、见信、信号、食物腐。\n- 拆分词二：物腐败、腐败的、败的常、的常见、常见信、见信号、食物腐败、物腐败的、腐败的常。\n- 本条的对象不是所有吃饭安排，而是食物在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：物腐若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：腐败一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：败的造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把的常并入泛",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-spoilage-002",
+          "category": "rc17e7af533adee",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r1d06ad90891468",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r1d06ad90891468"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-spoilage-check-001",
+          "id": "food-spoilage-check-001",
+          "title": "食物变质判断",
+          "label": "wiki",
+          "summary": "用于食物变质判断的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。",
+          "snippet": "# 食物变质判断\n\n## 独立边界矩阵\n\n- 拆分词一：食物、物变、变质、质判、判断、食物变、物变质、变质判、质判断。\n- 拆分词二：食物变质、物变质判、变质判断、变质判断、变质判断、变质判断、变质判断、变质判断、变质判断。\n- 本条的对象不是所有吃饭安排，而是食物在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：物变若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：变质一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：质判造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-spoilage-check-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "caution",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "agwz2l0e7cbs6r1",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "agwz2l0e7cbs6r1"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-staple-food-001",
+          "id": "food-staple-food-001",
+          "title": "主食不足时体力任务为什么要减少",
+          "label": "wiki",
+          "summary": "用主食余量决定体力任务强度和配给节奏；高风险条目，主食不足时减少搬运、外出和高耗活动。",
+          "snippet": "# 主食不足时体力任务为什么要减少\n\n## 独立边界矩阵\n\n- 拆分词一：主食、食不、不足、足时、时体、体力、力任、任务、务为。\n- 拆分词二：为什、什么、么要、要减、减少、主食不、食不足、不足时、足时体。\n- 本条的对象不是所有吃饭安排，而是主食在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：食不若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：不足一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：足时造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把时体并入泛泛提醒",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-staple-food-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r43366ae0487e39",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r43366ae0487e39"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "food-waste-001",
+          "id": "food-waste-001",
+          "title": "保存食物为什么要远离垃圾区",
+          "label": "wiki",
+          "summary": "要求食物保存点远离垃圾、污水和动物处理区；高风险条目，接触污染后先隔离再决定是否弃用。",
+          "snippet": "# 保存食物为什么要远离垃圾区\n\n## 独立边界矩阵\n\n- 拆分词一：要远离垃圾区、保存、存食、食物、物为、为什、什么、么要、要远。\n- 拆分词二：远离、离垃、垃圾、圾区、保存食、存食物、食物为、物为什、为什么。\n- 本条的对象不是所有吃饭安排，而是要远离垃圾区在库存、开封、保存、烹饪、弃用和食后追溯中的位置。\n- 与野外食物的分界：保存若来源来自采集捕捞，先确认来源和处理；进入厨房后才按本条配给。\n- 与卫生条目的分界：存食一旦接触垃圾区、污水、未洗餐具或动物处理区，先判污染再谈节约。\n- 与心理纪律的分界：食物造成饥饿焦虑时仍按禁食线执行，不用情绪压力改写食物安全。\n- 本条排除项：不把物",
+          "reason": "",
+          "selection_reason": "",
+          "retrieval_query_profiles": [
+            "planting_post_harvest"
+          ],
+          "retrieval_profile_target_match": true,
+          "retrieval_profile_adjustment": 77.0,
+          "retrieval_profile_reasons": [
+            "inherited_from_guide:profile_domain_boost:42",
+            "inherited_from_guide:profile_candidate_anchor_boost:35:霉变"
+          ],
+          "retrieval_profile_fit_tier": 2,
+          "excluded_reason": "guide_related_wiki_limit",
+          "slug": "food-waste-001",
+          "category": "rc17e7af533adee",
+          "risk_level": "high",
+          "guide_links": [
+            "DG-0608"
+          ],
+          "record_id": "r6f28a2b644aec2",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0608",
+          "linked_guide_title": "霉变粮食和坚果停用",
+          "metadata": {
+            "record_id": "r6f28a2b644aec2"
+          }
+        }
+      ],
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 28,
+          "guide": 8
+        },
+        "candidate_count": 36,
+        "selected_count": 8,
+        "source_plan_count": 2,
+        "core_terms": [
+          "叶菜",
+          "根菜",
+          "擦伤",
+          "潮气",
+          "发霉",
+          "储存",
+          "隔离"
+        ],
+        "ok": true,
+        "error": "",
+        "stage": ""
+      }
+    },
+    {
+      "id": "planting_failure_review",
+      "question": "同一批苗有的没发芽、有的移栽后三天死了，天气和浇水记录也不完整。怎么复盘才知道下一批只该改哪一项？",
+      "expected_wikis": [
+        "agriculture-planting-failure-review-001",
+        "agriculture-growing-record-handover-001"
+      ],
+      "expected_guides": [
+        "DG-0514"
+      ],
+      "focus_terms": [
+        "时间",
+        "天气",
+        "水量",
+        "病虫",
+        "土壤",
+        "批次",
+        "只改"
+      ],
+      "risk_boundary_required": false,
+      "expected_wiki_hits": [
+        "agriculture-planting-failure-review-001"
+      ],
+      "batch4a_wiki_hits": [
+        "agriculture-planting-failure-review-001"
+      ],
+      "batch4a_wiki_hit": true,
+      "domain_hit": true,
+      "action_term_hits": [
+        "时间",
+        "天气",
+        "病虫",
+        "土壤",
+        "批次",
+        "只改"
+      ],
+      "action_used": true,
+      "guide_hit": true,
+      "guide_wiki_combo": true,
+      "has_stop_condition": true,
+      "has_fallback": true,
+      "has_record_advice": true,
+      "external_dependencies": [],
+      "dangerous_advice": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "guides_selected": [
+        {
+          "id": "DG-0514",
+          "title": "育苗失败记录",
+          "risk_level": "normal"
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-planting-failure-review-001",
+          "title": "种植失败现场复盘"
+        },
+        {
+          "slug": "agriculture-seedling-transplant-001",
+          "title": "幼苗移栽和缓苗检查"
+        },
+        {
+          "slug": "agriculture-heat-001",
+          "title": "高温低温对幼苗影响"
+        }
+      ],
+      "kiwix_selected": [],
+      "answer": "一、当前判断  \n同批苗出现不发芽和移栽死亡，可能因种子活性、水分、温度、光照、排水或病虫害单一因素导致，需通过现场证据锁定主因，避免同时改多项条件浪费资源。\n\n二、马上做什么  \n1. 保留3株失败样本和原容器，拍照记录根茎叶状态及土壤表面。  \n2. 用纸笔按时间顺序写下播种、浇水、移栽和异常发生时间（如“第2天浇水过量”）。  \n3. 检查未发芽种子是否干瘪/腐烂/被虫吃，死苗根部是否褐黑软腐。  \n4. 区分未发芽、发芽后死亡、移栽损伤三类，分别标记。  \n5. 用少量种子重试，只改一个变量（如仅调整浇水频率），其他条件保持一致。  \n\n三、不要做什么  \n1. 不要丢弃全部痕迹，需保留样本供后续分析。  \n2. 不要同时改土、水、光等多条件，无法判断有效变量。  \n3. 不要直接归咎种子，需排查环境因素（如高温/积水）。  \n\n四、本地降级方案  \n若无记录工具，用容器编号+日期+三句话描述（如“2023-10-05 移栽后根部腐烂”）。  \n\n五、接下来观察和记录什么  \n1. 记录发芽率、根部颜色变化（白/褐/黑）、叶片萎蔫时间。  \n2. 每天早晚检查土壤湿度和移栽苗茎基是否发黑。  \n3. 3天后复查重试批次，对比对照组是否出现相同问题。  \n\n六、需要追问的信息  \n1. 种子来源（是否同一批次？是否受潮？）  \n2. 移栽时根团是否完整？是否有明显断根？  \n3. 移栽后是否连续浇水？天气是否有持续高温或暴雨？",
+      "selected_sources": [
+        {
+          "source_type": "guide",
+          "source_id": "DG-0514",
+          "id": "DG-0514",
+          "title": "育苗失败记录",
+          "label": "guide",
+          "summary": "把失败变成下一轮可用经验。",
+          "snippet": "播种后不发芽、烂根、徒长、被虫吃或移栽死亡。",
+          "reason": "直接关联幼苗发芽失败和移栽死亡案例，包含失败原因分析与改进记录",
+          "selection_reason": "直接关联幼苗发芽失败和移栽死亡案例，包含失败原因分析与改进记录"
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-planting-failure-review-001",
+          "id": "agriculture-planting-failure-review-001",
+          "title": "种植失败现场复盘",
+          "label": "wiki",
+          "summary": "用种子、土、水、光、温度和病虫证据复盘未发芽或死苗，为下一批只改一个条件。",
+          "snippet": "# 种植失败现场复盘\n\n## 用途\n\n在种子不发芽、幼苗徒长、烂根或移栽死亡后，用现场证据选出最可能的失败环节并设计小样重试。\n\n## 适用场景\n\n- 适用于同批发芽率低、幼苗集中死亡、移栽后三天未恢复或产量明显下降。\n- 不用于在化学污染、污水倒灌或病害快速扩散时立即重播；这些情况先停用或隔离。\n\n## 准备材料\n\n- 原批次标签\n- 发芽和浇水记录\n- 失败样本\n- 纸和笔\n- 少量重试种子\n\n## 操作步骤\n\n1. 保留几个失败样本和原容器，先拍照或画下根、茎、叶和土面状态。\n2. 按时间写出播种、首次出苗、浇水、高温低温、移栽和首次异常，不凭印象调整顺序。\n3. 检查未发芽种子是干瘪、",
+          "reason": "Guide related_wiki 确定性关联证据。",
+          "selection_reason": "Guide related_wiki 确定性关联证据。",
+          "slug": "agriculture-planting-failure-review-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "normal",
+          "guide_links": [
+            "DG-0514"
+          ],
+          "record_id": "fdbaa03085dbf1a",
+          "source_role": "guide_support",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0514",
+          "linked_guide_title": "育苗失败记录",
+          "metadata": {
+            "record_id": "fdbaa03085dbf1a"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-seedling-transplant-001",
+          "id": "agriculture-seedling-transplant-001",
+          "title": "幼苗移栽和缓苗检查",
+          "label": "wiki",
+          "summary": "在幼苗根团成形后完成起苗、定植、遮阴和缓苗复查，减少断根、倒伏和移栽后失水。",
+          "snippet": "在幼苗根团成形后完成起苗、定植、遮阴和缓苗复查，减少断根、倒伏和移栽后失水。",
+          "reason": "提供移栽缓苗检查标准流程，包含遮阴防失水等关键操作",
+          "selection_reason": "提供移栽缓苗检查标准流程，包含遮阴防失水等关键操作",
+          "slug": "agriculture-seedling-transplant-001",
+          "category": "1xp4ebdyo3rn8fd",
+          "risk_level": "caution",
+          "guide_links": [],
+          "record_id": "0e5d12e1cab3753",
+          "source_role": "independent_support",
+          "source_reason": "independent_wiki_search",
+          "linked_guide_id": "",
+          "linked_guide_title": "",
+          "metadata": {
+            "record_id": "0e5d12e1cab3753"
+          }
+        },
+        {
+          "source_type": "wiki",
+          "source_id": "agriculture-heat-001",
+          "id": "agriculture-heat-001",
+          "title": "高温低温对幼苗影响",
+          "label": "wiki",
+          "summary": "观察幼苗徒长、烂根、晒伤、缺水和温度冲击；中风险条目，反复失败时改作物或减少投入。",
+          "snippet": "观察幼苗徒长、烂根、晒伤、缺水和温度冲击；中风险条目，反复失败时改作物或减少投入。",
+          "reason": "关联温度冲击对幼苗影响，补充天气异常导致死亡的判断标准",
+          "selection_reason": "关联温度冲击对幼苗影响，补充天气异常导致死亡的判断标准",
+          "slug": "agriculture-heat-001",
+          "category": "re7091afdf0a2db",
+          "risk_level": "caution",
+          "guide_links": [],
+          "record_id": "r588c43e4d56daa",
+          "source_role": "independent_support",
+          "source_reason": "independent_wiki_search",
+          "linked_guide_id": "",
+          "linked_guide_title": "",
+          "metadata": {
+            "record_id": "r588c43e4d56daa"
+          }
+        }
+      ],
+      "excluded_sources": [],
+      "retrieval_debug": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "candidate_types": {
+          "wiki": 9,
+          "guide": 8
+        },
+        "candidate_count": 17,
+        "selected_count": 4,
+        "source_plan_count": 2,
+        "core_terms": [
+          "幼苗",
+          "发芽失败",
+          "移栽死亡",
+          "浇水不足",
+          "天气异常",
+          "复盘分析",
+          "改进措施"
+        ],
+        "ok": true,
+        "error": "",
+        "stage": ""
+      }
+    }
+  ]
+}

@@ -158,6 +158,14 @@ def _candidate_for_prompt(candidate: EvidenceCandidate) -> Dict[str, Any]:
         "tags": candidate.tags[:8],
         "snippet": candidate.snippet[:260],
     }
+    if raw.get("retrieval_query_profiles"):
+        payload.update({
+            "retrieval_query_profiles": raw.get("retrieval_query_profiles"),
+            "retrieval_profile_target_match": raw.get("retrieval_profile_target_match", False),
+            "retrieval_profile_adjustment": raw.get("retrieval_profile_adjustment", 0),
+            "retrieval_profile_reasons": raw.get("retrieval_profile_reasons", []),
+            "retrieval_profile_fit_tier": raw.get("retrieval_profile_fit_tier", 0),
+        })
     if candidate.source_type == "kiwix":
         payload.update({
             "usage_policy": raw.get("usage_policy", ""),
