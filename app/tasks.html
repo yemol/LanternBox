@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>任务管理 - 壳中灯</title>
+
+  <link rel="icon" href="/static/assets/brand/lanternbox-icon-original.png" type="image/png" />
+  <link rel="stylesheet" href="/static/style.css?v=brand-logo-webp-1" />
+
+  <style>
+    .task-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .task-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.065);
+    }
+
+    .task-card h3 {
+      margin: 0 0 8px;
+      color: var(--text-main);
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .task-card p {
+      margin: 4px 0;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .task-card.active {
+      border-color: var(--border-strong);
+      background: rgba(104, 199, 255, 0.12);
+      box-shadow: 0 0 0 3px rgba(104, 199, 255, 0.08);
+    }
+
+    .task-card[data-task-id] {
+      cursor: pointer;
+    }
+
+    .task-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 16px;
+      margin-top: 12px;
+    }
+
+    .task-fields p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    .task-fields strong {
+      color: var(--text-main);
+      font-weight: 800;
+    }
+
+    .task-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .task-form-grid .wide-field {
+      grid-column: 1 / -1;
+    }
+
+    .field-label {
+      display: grid;
+      gap: 8px;
+      color: var(--text-soft);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .field-label span {
+      color: var(--text-soft);
+    }
+
+    select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 15px 16px;
+      background: rgba(255, 255, 255, 0.075);
+      color: var(--text-main);
+      font-size: 16px;
+      outline: none;
+    }
+
+    select[multiple] {
+      min-height: 128px;
+    }
+
+    select:focus {
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 3px rgba(104, 199, 255, 0.12);
+    }
+
+    .tag-readonly-input {
+      cursor: default;
+    }
+
+    .tag-button-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag-button {
+      width: auto;
+      min-height: 40px;
+      padding: 8px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(137, 204, 255, 0.24);
+      background: rgba(255, 255, 255, 0.075);
+      color: var(--text-soft);
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: none;
+    }
+
+    .tag-button:hover,
+    .tag-button.active {
+      border-color: rgba(255, 183, 92, 0.72);
+      background: rgba(255, 159, 67, 0.22);
+      color: var(--text-main);
+      box-shadow: 0 0 18px rgba(255, 159, 67, 0.16);
+    }
+
+    .task-detail-box {
+      display: grid;
+      gap: 12px;
+    }
+
+    .task-filter-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+      margin-bottom: 14px;
+      align-items: end;
+    }
+
+    .task-list-toolbar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: nowrap;
+    }
+
+    .task-pagination {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .task-pagination .small-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      height: 48px;
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: 1;
+    }
+
+    .task-page-info {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      min-width: 128px;
+      margin: 0;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .task-page-size {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-height: 48px;
+      color: var(--text-soft);
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .task-page-size select {
+      width: auto;
+      height: 48px;
+      min-width: 88px;
+      padding: 0 36px 0 14px;
+      border-radius: 14px;
+      font-size: 15px;
+      line-height: 48px;
+    }
+
+    .task-json {
+      margin: 0;
+      padding: 14px;
+      overflow-x: auto;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 16px;
+      color: var(--text-soft);
+      background: rgba(0, 0, 0, 0.18);
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    .task-footer-note {
+      margin-top: 18px;
+    }
+
+    .task-page .page-actions {
+      flex: 0 0 auto;
+      flex-wrap: nowrap;
+    }
+
+    .task-page .page-nav-button {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 760px) {
+      .task-card,
+      .task-fields,
+      .task-form-grid,
+      .task-filter-row {
+        grid-template-columns: 1fr;
+      }
+
+      .task-list-toolbar {
+        width: 100%;
+      }
+
+      .task-list-toolbar .small-button {
+        flex: 1 1 0;
+      }
+
+      .task-pagination {
+        align-items: stretch;
+        justify-content: stretch;
+      }
+
+      .task-pagination .small-button,
+      .task-page-size {
+        flex: 1 1 120px;
+      }
+
+      .task-page-info {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="shell task-page">
+    <section class="hero compact-hero">
+      <div class="page-header-row">
+        <div>
+          <p class="eyebrow">任务调度</p>
+          <h1 class="brand-title"><img class="brand-mark-inline" src="/static/assets/brand/lanternbox-icon-original.webp" alt="" />任务管理</h1>
+          <p class="subtitle">
+            创建、查看和分派 Core 任务，并预览终端可拉取的任务列表。
+          </p>
+        </div>
+
+        <div class="page-actions">
+          <a class="page-nav-button" href="/">返回总览</a>
+          <a class="page-nav-button" href="/terminals.html">终端设备</a>
+        </div>
+      </div>
+
+      <p id="task-message" class="notice" style="display: none;"></p>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2>任务列表</h2>
+        <div class="task-list-toolbar">
+          <button id="refresh-button" class="small-button" type="button">刷新任务</button>
+          <button id="clear-filter-button" class="small-button" type="button">显示全部</button>
+        </div>
+      </div>
+
+      <div class="task-filter-row">
+        <label class="field-label">
+          <span>按分派终端筛选</span>
+          <select id="assigned-filter">
+            <option value="all">全部任务</option>
+            <option value="unassigned">未分派</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="task-result-info" class="result-info">正在读取任务...</div>
+
+      <div id="task-list" class="task-grid">
+        <p class="empty">正在读取任务...</p>
+      </div>
+
+      <div class="task-pagination" aria-label="任务分页">
+        <button id="prev-page-button" class="small-button" type="button">上一页</button>
+        <span id="task-page-info" class="result-info task-page-info">第 1 / 1 页</span>
+        <label class="task-page-size">
+          <span>每页</span>
+          <select id="task-page-size">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+          </select>
+        </label>
+        <button id="next-page-button" class="small-button" type="button">下一页</button>
+      </div>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2>创建任务</h2>
+        <span class="section-hint">分派终端和标签均从预设项中选择。</span>
+      </div>
+
+      <form id="task-form" class="form-card">
+        <div class="task-form-grid">
+          <label class="field-label wide-field">
+            <span>标题 *</span>
+            <input name="title" placeholder="例如：检查东侧水源点" required />
+          </label>
+
+          <label class="field-label wide-field">
+            <span>描述</span>
+            <textarea name="description" placeholder="任务背景、现场目标、注意事项"></textarea>
+          </label>
+
+          <label class="field-label">
+            <span>优先级</span>
+            <select name="priority">
+              <option value="normal">普通</option>
+              <option value="low">低</option>
+              <option value="high">高</option>
+              <option value="critical">紧急</option>
+            </select>
+          </label>
+
+          <label class="field-label">
+            <span>分派给</span>
+            <select id="create-assigned-to" name="assigned_to"></select>
+          </label>
+
+          <label class="field-label wide-field">
+            <span>目标提示</span>
+            <input name="target_hint" placeholder="例如：东侧桥下" />
+          </label>
+
+          <label class="field-label">
+            <span>目标纬度</span>
+            <input name="target_lat" type="number" step="0.000001" placeholder="例如：31.123456" />
+          </label>
+
+          <label class="field-label">
+            <span>目标经度</span>
+            <input name="target_lon" type="number" step="0.000001" placeholder="例如：121.123456" />
+          </label>
+
+          <div class="field-label wide-field">
+            <span>标签</span>
+            <input id="task-tags-display" class="tag-readonly-input" readonly placeholder="尚未选择标签" />
+            <div id="task-tag-buttons" class="tag-button-grid" aria-label="可使用标签">
+              <button class="tag-button" type="button" data-tag="水源巡查">水源巡查</button>
+              <button class="tag-button" type="button" data-tag="路线侦察">路线侦察</button>
+              <button class="tag-button" type="button" data-tag="安全检查">安全检查</button>
+              <button class="tag-button" type="button" data-tag="设备维护">设备维护</button>
+              <button class="tag-button" type="button" data-tag="物资补给">物资补给</button>
+              <button class="tag-button" type="button" data-tag="医疗协助">医疗协助</button>
+              <button class="tag-button" type="button" data-tag="环境记录">环境记录</button>
+              <button class="tag-button" type="button" data-tag="样本采集">样本采集</button>
+              <button class="tag-button" type="button" data-tag="训练演练">训练演练</button>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit">创建任务</button>
+      </form>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2>终端拉取预览</h2>
+        <button id="pull-button" class="small-button" type="button">预览所选终端可拉取任务</button>
+      </div>
+
+      <div class="search-row">
+        <select id="pull-device-id"></select>
+        <button id="clear-pull-button" class="small-button" type="button">恢复默认</button>
+      </div>
+
+      <div id="pull-result-info" class="result-info">选择一个受信任终端后，可预览它调用拉取接口时会收到的任务。</div>
+      <div id="pull-list" class="task-grid">
+        <p class="empty">暂无预览结果</p>
+      </div>
+    </section>
+
+    <section class="notice task-footer-note">
+      Task UI v0.2：仅用于 Core 端任务创建、分派、状态查看和终端拉取预览；状态回传由终端侧完成；不包含终端同步、任务离线执行、地图导航或多成员权限。
+    </section>
+  </main>
+
+  <div id="task-modal" class="guide-modal hidden" role="dialog" aria-modal="true" aria-labelledby="task-modal-title">
+    <div class="guide-modal-backdrop" onclick="closeTaskModal()"></div>
+    <div class="guide-modal-card">
+      <div class="guide-modal-header">
+        <div>
+          <p id="task-modal-id" class="guide-modal-id"></p>
+          <h2 id="task-modal-title">任务详情</h2>
+          <p id="task-modal-meta" class="guide-modal-category"></p>
+        </div>
+        <button class="guide-modal-close" onclick="closeTaskModal()" type="button">关闭</button>
+      </div>
+      <div id="task-modal-body" class="guide-modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+    const taskList = document.getElementById('task-list');
+    const taskResultInfo = document.getElementById('task-result-info');
+    const taskForm = document.getElementById('task-form');
+    const taskMessage = document.getElementById('task-message');
+    const refreshButton = document.getElementById('refresh-button');
+    const assignedFilter = document.getElementById('assigned-filter');
+    const clearFilterButton = document.getElementById('clear-filter-button');
+    const prevPageButton = document.getElementById('prev-page-button');
+    const nextPageButton = document.getElementById('next-page-button');
+    const taskPageInfo = document.getElementById('task-page-info');
+    const taskPageSize = document.getElementById('task-page-size');
+    const createAssignedTo = document.getElementById('create-assigned-to');
+    const taskTagsDisplay = document.getElementById('task-tags-display');
+    const taskTagButtons = document.getElementById('task-tag-buttons');
+    const pullButton = document.getElementById('pull-button');
+    const pullDeviceId = document.getElementById('pull-device-id');
+    const clearPullButton = document.getElementById('clear-pull-button');
+    const pullResultInfo = document.getElementById('pull-result-info');
+    const pullList = document.getElementById('pull-list');
+    const taskModal = document.getElementById('task-modal');
+    const taskModalId = document.getElementById('task-modal-id');
+    const taskModalTitle = document.getElementById('task-modal-title');
+    const taskModalMeta = document.getElementById('task-modal-meta');
+    const taskModalBody = document.getElementById('task-modal-body');
+
+    let currentTasks = [];
+    let currentTerminals = [];
+    let selectedTaskId = '';
+    let selectedTask = null;
+    let currentPage = 1;
+    let selectedTaskTags = [];
+
+    const statusLabels = {
+      open: '未分派',
+      assigned: '已分派',
+      in_progress: '进行中',
+      blocked: '受阻',
+      done: '完成',
+      cancelled: '取消'
+    };
+
+    const priorityLabels = {
+      low: '低',
+      normal: '普通',
+      high: '高',
+      critical: '紧急'
+    };
+
+    const tagLabels = {
+      water: '水源巡查',
+      scout: '路线侦察',
+      safety: '安全检查',
+      maintenance: '设备维护',
+      supply: '物资补给',
+      medical: '医疗协助',
+      environment: '环境记录',
+      sample: '样本采集',
+      training: '训练演练',
+      ui: '界面验证',
+      task: '任务验证'
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function showMessage(message, isError = false) {
+      taskMessage.style.display = 'block';
+      taskMessage.textContent = message;
+      taskMessage.style.borderColor = isError
+        ? 'rgba(255, 123, 138, 0.42)'
+        : 'rgba(137, 204, 255, 0.18)';
+      taskMessage.style.color = isError ? '#ffe0e6' : '#b7d2e8';
+    }
+
+    function formatList(items) {
+      return Array.isArray(items) && items.length ? items.join('，') : '未填写';
+    }
+
+    function formatTags(items) {
+      if (!Array.isArray(items) || !items.length) {
+        return '未填写';
+      }
+
+      return items.map(tag => tagLabels[tag] || tag).join('，');
+    }
+
+    function selectedSingleValue(selectEl) {
+      return selectEl.value ? [selectEl.value] : [];
+    }
+
+    function renderSelectedTaskTags() {
+      taskTagsDisplay.value = selectedTaskTags.join('，');
+      taskTagButtons.querySelectorAll('.tag-button').forEach(button => {
+        const selected = selectedTaskTags.includes(button.dataset.tag);
+        button.classList.toggle('active', selected);
+        button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      });
+    }
+
+    function toggleTaskTag(tag) {
+      if (!tag) {
+        return;
+      }
+
+      selectedTaskTags = selectedTaskTags.includes(tag)
+        ? selectedTaskTags.filter(item => item !== tag)
+        : [...selectedTaskTags, tag];
+      renderSelectedTaskTags();
+    }
+
+    function statusLabel(status) {
+      return statusLabels[status] || status || '未知';
+    }
+
+    function priorityLabel(priority) {
+      return priorityLabels[priority] || priority || '未知';
+    }
+
+    async function readError(response, fallback) {
+      try {
+        const result = await response.json();
+        return result.detail || result.message || result.error || fallback;
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function formatDeviceName(name) {
+      const text = String(name ?? '').trim();
+      const nameMap = {
+        'FT-01 Field Terminal': 'FT-01 野外终端',
+        'Field Terminal': '野外终端',
+        'Study Terminal': '学习终端',
+        'Sensor Node': '传感器节点'
+      };
+      return nameMap[text] || text;
+    }
+
+    function terminalLabel(device) {
+      const displayName = formatDeviceName(device.name);
+      const name = displayName ? `｜${displayName}` : '';
+      const trusted = device.trusted ? '已信任' : '未信任';
+      return `${device.device_id}${name}｜${trusted}`;
+    }
+
+    function terminalById(deviceId) {
+      return currentTerminals.find(device => device.device_id === deviceId);
+    }
+
+    function trustedTerminals() {
+      return currentTerminals.filter(device => Boolean(device.trusted));
+    }
+
+    function defaultTrustedDeviceId() {
+      const devices = trustedTerminals();
+      const preferred = devices.find(device => device.device_id === 'FT01-0001');
+      return (preferred || devices[0] || {}).device_id || '';
+    }
+
+    function formatAssignedDevices(items) {
+      if (!Array.isArray(items) || !items.length) {
+        return '未分派';
+      }
+
+      return items.map(deviceId => {
+        const device = terminalById(deviceId);
+        if (!device) {
+          return `${deviceId}（未登记）`;
+        }
+
+        const displayName = formatDeviceName(device.name);
+        return displayName ? `${deviceId}｜${displayName}` : deviceId;
+      }).join('，');
+    }
+
+    async function loadTerminals() {
+      try {
+        const response = await fetch('/api/terminals', { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error(await readError(response, `终端读取失败：${response.status}`));
+        }
+        const terminals = await response.json();
+        currentTerminals = Array.isArray(terminals) ? terminals : [];
+        renderTerminalControls();
+      } catch (error) {
+        console.error(error);
+        currentTerminals = [];
+        renderTerminalControls();
+        showMessage(error.message || '终端列表读取失败，任务分派选择不可用。', true);
+      }
+    }
+
+    function renderTerminalControls() {
+      const allTerminalOptions = currentTerminals.map(device => `
+        <option value="${escapeHtml(device.device_id)}">${escapeHtml(terminalLabel(device))}</option>
+      `).join('');
+      const trustedTerminalOptions = trustedTerminals().map(device => `
+        <option value="${escapeHtml(device.device_id)}">${escapeHtml(terminalLabel(device))}</option>
+      `).join('');
+      const defaultDeviceId = defaultTrustedDeviceId();
+
+      createAssignedTo.innerHTML = `
+        <option value="">未分派</option>
+        ${trustedTerminalOptions || '<option value="" disabled>暂无受信任终端</option>'}
+      `;
+
+      assignedFilter.innerHTML = `
+        <option value="all">全部任务</option>
+        <option value="unassigned">未分派</option>
+        ${allTerminalOptions}
+      `;
+
+      pullDeviceId.innerHTML = trustedTerminalOptions || '<option value="" disabled>暂无受信任终端</option>';
+      pullDeviceId.value = defaultDeviceId;
+      pullDeviceId.disabled = !defaultDeviceId;
+      pullButton.disabled = !defaultDeviceId;
+      clearPullButton.disabled = !defaultDeviceId;
+    }
+
+    function buildTarget(formData) {
+      const hint = String(formData.get('target_hint') || '').trim();
+      const latText = String(formData.get('target_lat') || '').trim();
+      const lonText = String(formData.get('target_lon') || '').trim();
+      const target = {};
+
+      if (hint) {
+        target.hint = hint;
+      }
+
+      if (latText || lonText) {
+        target.type = 'geo';
+      }
+
+      if (latText) {
+        target.lat = Number(latText);
+      }
+
+      if (lonText) {
+        target.lon = Number(lonText);
+      }
+
+      return target;
+    }
+
+    function filteredTasks() {
+      const filter = assignedFilter.value || 'all';
+      if (filter === 'all') {
+        return currentTasks;
+      }
+      if (filter === 'unassigned') {
+        return currentTasks.filter(task => !Array.isArray(task.assigned_to) || task.assigned_to.length === 0);
+      }
+      return currentTasks.filter(task => Array.isArray(task.assigned_to) && task.assigned_to.includes(filter));
+    }
+
+    function pageSize() {
+      return Number(taskPageSize.value) || 10;
+    }
+
+    function paginateTasks(tasks) {
+      const size = pageSize();
+      const totalPages = Math.max(1, Math.ceil(tasks.length / size));
+      currentPage = Math.min(Math.max(currentPage, 1), totalPages);
+      const start = (currentPage - 1) * size;
+      return {
+        items: tasks.slice(start, start + size),
+        size,
+        totalPages
+      };
+    }
+
+    function renderPagination(totalItems, totalPages) {
+      const hasItems = totalItems > 0;
+      prevPageButton.disabled = !hasItems || currentPage <= 1;
+      nextPageButton.disabled = !hasItems || currentPage >= totalPages;
+      taskPageInfo.textContent = hasItems
+        ? `第 ${currentPage} / ${totalPages} 页`
+        : '第 0 / 0 页';
+    }
+
+    function renderTaskCards(tasks, targetElement, allowDetail = true) {
+      if (!tasks.length) {
+        targetElement.innerHTML = '<p class="empty">暂无任务</p>';
+        return;
+      }
+
+      targetElement.innerHTML = tasks.map(task => {
+        const activeClass = task.task_id === selectedTaskId ? ' active' : '';
+        const detailAttribute = allowDetail ? ` data-task-id="${escapeHtml(task.task_id)}"` : '';
+        return `
+          <article class="task-card${activeClass}"${detailAttribute}>
+            <p class="item-code">${escapeHtml(task.task_id)}</p>
+            <h3>${escapeHtml(task.title || '未命名任务')}</h3>
+            <div class="task-fields">
+              <p><strong>状态：</strong>${escapeHtml(statusLabel(task.status))}</p>
+              <p><strong>优先级：</strong>${escapeHtml(priorityLabel(task.priority))}</p>
+              <p><strong>分派给：</strong>${escapeHtml(formatAssignedDevices(task.assigned_to))}</p>
+              <p><strong>版本：</strong>${escapeHtml(task.revision)}</p>
+              <p><strong>更新时间：</strong>${escapeHtml(task.updated_at || '未记录')}</p>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    async function loadTasks() {
+      taskResultInfo.textContent = '正在读取任务...';
+      taskList.innerHTML = '<p class="empty">正在读取任务...</p>';
+
+      try {
+        const response = await fetch('/api/tasks', { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error(await readError(response, `读取失败：${response.status}`));
+        }
+
+        const tasks = await response.json();
+        currentTasks = Array.isArray(tasks) ? tasks : [];
+        renderTaskList();
+      } catch (error) {
+        console.error(error);
+        currentTasks = [];
+        taskResultInfo.textContent = '任务读取失败。';
+        taskList.innerHTML = `<p class="empty">API 请求失败：${escapeHtml(error.message || '请检查后端服务')}</p>`;
+        showMessage(error.message || 'API 请求失败，请检查后端服务。', true);
+      }
+    }
+
+    function renderTaskList() {
+      const tasks = filteredTasks();
+      const page = paginateTasks(tasks);
+      const filter = assignedFilter.value || 'all';
+      const filterText = filter === 'all'
+        ? '全部'
+        : filter === 'unassigned'
+          ? '未分派'
+          : terminalLabel(terminalById(filter) || { device_id: filter, name: '', trusted: false });
+      const pageStart = tasks.length ? (currentPage - 1) * page.size + 1 : 0;
+      const pageEnd = tasks.length ? pageStart + page.items.length - 1 : 0;
+      taskResultInfo.textContent = `当前显示 ${pageStart}-${pageEnd} / ${tasks.length} 个筛选结果，共 ${currentTasks.length} 个任务。筛选：${filterText}`;
+      renderTaskCards(page.items, taskList, true);
+      renderPagination(tasks.length, page.totalPages);
+    }
+
+    async function createTask(payload) {
+      const response = await fetch('/api/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(await readError(response, `创建失败：${response.status}`));
+      }
+
+      return response.json();
+    }
+
+    async function loadTaskDetail(taskId) {
+      const response = await fetch(`/api/tasks/${encodeURIComponent(taskId)}`, {
+        cache: 'no-store'
+      });
+
+      if (!response.ok) {
+        throw new Error(await readError(response, `读取详情失败：${response.status}`));
+      }
+
+      selectedTask = await response.json();
+      selectedTaskId = selectedTask.task_id;
+      renderTaskList();
+      renderDetail(selectedTask);
+    }
+
+    function renderDetail(task) {
+      taskModalId.textContent = task.task_id;
+      taskModalTitle.textContent = task.title || '未命名任务';
+      taskModalMeta.textContent = `状态：${statusLabel(task.status)}｜优先级：${priorityLabel(task.priority)}｜版本：${task.revision}`;
+      taskModalBody.innerHTML = `
+        <section class="guide-modal-section">
+            <p class="item-code">${escapeHtml(task.task_id)}</p>
+            <p>${escapeHtml(task.description || '无描述')}</p>
+            <div class="task-fields">
+              <p><strong>状态：</strong>${escapeHtml(statusLabel(task.status))}</p>
+              <p><strong>优先级：</strong>${escapeHtml(priorityLabel(task.priority))}</p>
+              <p><strong>分派给：</strong>${escapeHtml(formatAssignedDevices(task.assigned_to))}</p>
+              <p><strong>版本：</strong>${escapeHtml(task.revision)}</p>
+              <p><strong>标签：</strong>${escapeHtml(formatTags(task.tags))}</p>
+              <p><strong>创建时间：</strong>${escapeHtml(task.created_at || '未记录')}</p>
+              <p><strong>更新时间：</strong>${escapeHtml(task.updated_at || '未记录')}</p>
+            </div>
+            <p><strong>目标：</strong></p>
+            <pre class="task-json">${escapeHtml(JSON.stringify(task.target || {}, null, 2))}</pre>
+        </section>
+
+        <form id="assign-form" class="form-card guide-modal-section">
+          <label class="field-label">
+            <span>重新分派给</span>
+            <select id="modal-assigned-to" name="assigned_to">
+              ${renderTerminalOptions(task.assigned_to || [])}
+            </select>
+          </label>
+          <button type="submit">重新分派</button>
+        </form>
+      `;
+      openTaskModal();
+    }
+
+    function renderTerminalOptions(selectedIds = []) {
+      const devices = trustedTerminals();
+      if (!devices.length) {
+        return '<option value="">未分派</option><option value="" disabled>暂无受信任终端</option>';
+      }
+      const unassignedSelected = selectedIds.length === 0 ? 'selected' : '';
+      const terminalOptions = devices.map(device => `
+        <option value="${escapeHtml(device.device_id)}" ${selectedIds.includes(device.device_id) ? 'selected' : ''}>
+          ${escapeHtml(terminalLabel(device))}
+        </option>
+      `).join('');
+      return `<option value="" ${unassignedSelected}>未分派</option>${terminalOptions}`;
+    }
+
+    function openTaskModal() {
+      taskModal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      requestAnimationFrame(() => {
+        taskModalBody.scrollTop = 0;
+      });
+    }
+
+    function closeTaskModal() {
+      taskModal.classList.add('hidden');
+      document.body.classList.remove('modal-open');
+    }
+
+    async function assignTask(taskId, assignedTo) {
+      const response = await fetch(`/api/tasks/${encodeURIComponent(taskId)}/assign`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ assigned_to: assignedTo })
+      });
+
+      if (!response.ok) {
+        throw new Error(await readError(response, `分派失败：${response.status}`));
+      }
+
+      return response.json();
+    }
+
+    async function loadPullPreview() {
+      const deviceId = pullDeviceId.value || defaultTrustedDeviceId();
+      if (!deviceId) {
+        pullResultInfo.textContent = '暂无受信任终端，无法预览待拉取任务。';
+        pullList.innerHTML = '<p class="empty">暂无预览结果</p>';
+        showMessage('暂无受信任终端，请先在终端设备页面设置信任状态。', true);
+        return;
+      }
+
+      pullDeviceId.value = deviceId;
+      pullResultInfo.textContent = '正在读取终端待拉取任务...';
+      pullList.innerHTML = '<p class="empty">正在读取...</p>';
+
+      try {
+        const response = await fetch(`/api/tasks/pull/${encodeURIComponent(deviceId)}`, {
+          cache: 'no-store'
+        });
+
+        if (!response.ok) {
+          throw new Error(await readError(response, `拉取预览失败：${response.status}`));
+        }
+
+        const result = await response.json();
+        const tasks = Array.isArray(result.tasks)
+          ? result.tasks.map(task => ({
+              ...task,
+              assigned_to: Array.isArray(task.assigned_to) ? task.assigned_to : [deviceId]
+            }))
+          : [];
+        pullResultInfo.textContent = `${deviceId} 当前可拉取 ${tasks.length} 个任务。`;
+        renderTaskCards(tasks, pullList, false);
+      } catch (error) {
+        console.error(error);
+        pullResultInfo.textContent = '终端拉取预览失败。';
+        pullList.innerHTML = `<p class="empty">API 请求失败：${escapeHtml(error.message || '请检查设备状态')}</p>`;
+        showMessage(error.message || '终端拉取预览失败。', true);
+      }
+    }
+
+    taskForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(taskForm);
+      const title = String(formData.get('title') || '').trim();
+
+      if (!title) {
+        showMessage('标题不能为空。', true);
+        return;
+      }
+
+      const target = buildTarget(formData);
+      const payload = {
+        title,
+        description: String(formData.get('description') || '').trim(),
+        priority: String(formData.get('priority') || 'normal').trim(),
+        assigned_to: selectedSingleValue(createAssignedTo),
+        target,
+        tags: selectedTaskTags
+      };
+
+      try {
+        const task = await createTask(payload);
+        showMessage(`任务已创建：${task.task_id}`);
+        taskForm.reset();
+        selectedTaskTags = [];
+        renderSelectedTaskTags();
+        await loadTasks();
+        await loadTaskDetail(task.task_id);
+      } catch (error) {
+        console.error(error);
+        showMessage(error.message || '任务创建失败。', true);
+      }
+    });
+
+    taskList.addEventListener('click', async (event) => {
+      const target = event.target.closest('[data-task-id]');
+      if (!target) {
+        return;
+      }
+
+      try {
+        await loadTaskDetail(target.dataset.taskId);
+      } catch (error) {
+        console.error(error);
+        showMessage(error.message || '任务详情读取失败。', true);
+      }
+    });
+
+    taskTagButtons.addEventListener('click', (event) => {
+      const button = event.target.closest('.tag-button');
+      if (!button) {
+        return;
+      }
+
+      toggleTaskTag(button.dataset.tag);
+    });
+
+    taskModalBody.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (!selectedTaskId) {
+        showMessage('请先选择任务。', true);
+        return;
+      }
+
+      const form = event.target;
+
+      try {
+        if (form.id === 'assign-form') {
+          const assignedTo = selectedSingleValue(form.querySelector('select[name="assigned_to"]'));
+          await assignTask(selectedTaskId, assignedTo);
+          showMessage('任务已重新分派。');
+        }
+
+        await loadTasks();
+        await loadTaskDetail(selectedTaskId);
+      } catch (error) {
+        console.error(error);
+        showMessage(error.message || '任务更新失败。', true);
+      }
+    });
+
+    refreshButton.addEventListener('click', loadTasks);
+    assignedFilter.addEventListener('change', () => {
+      currentPage = 1;
+      renderTaskList();
+    });
+    clearFilterButton.addEventListener('click', () => {
+      assignedFilter.value = 'all';
+      currentPage = 1;
+      renderTaskList();
+    });
+    prevPageButton.addEventListener('click', () => {
+      currentPage -= 1;
+      renderTaskList();
+    });
+    nextPageButton.addEventListener('click', () => {
+      currentPage += 1;
+      renderTaskList();
+    });
+    taskPageSize.addEventListener('change', () => {
+      currentPage = 1;
+      renderTaskList();
+    });
+    pullButton.addEventListener('click', loadPullPreview);
+    clearPullButton.addEventListener('click', () => {
+      pullDeviceId.value = defaultTrustedDeviceId();
+    });
+
+    window.closeTaskModal = closeTaskModal;
+
+    renderSelectedTaskTags();
+    loadTerminals().then(loadTasks);
+  </script>
+</body>
+</html>

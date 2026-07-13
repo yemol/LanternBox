@@ -64,6 +64,71 @@ def init_db():
         """
     )
 
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS terminal_devices (
+            device_id TEXT PRIMARY KEY,
+            name TEXT,
+            role TEXT,
+            status TEXT,
+            trusted INTEGER,
+            created_at TEXT,
+            last_seen_at TEXT,
+            last_sync_at TEXT,
+            firmware_version TEXT,
+            notes TEXT
+        )
+        """
+    )
+
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS terminal_tasks (
+            task_id TEXT PRIMARY KEY,
+            title TEXT,
+            description TEXT,
+            priority TEXT,
+            status TEXT,
+            assigned_to TEXT,
+            created_at TEXT,
+            updated_at TEXT,
+            revision INTEGER,
+            target_json TEXT,
+            tags_json TEXT,
+            created_by TEXT
+        )
+        """
+    )
+
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS task_events (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            task_id TEXT,
+            event_type TEXT,
+            payload_json TEXT,
+            created_at TEXT
+        )
+        """
+    )
+
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS task_reports (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            task_id TEXT,
+            device_id TEXT,
+            status TEXT,
+            note TEXT,
+            device_date TEXT,
+            device_time TEXT,
+            lat REAL,
+            lon REAL,
+            created_at TEXT
+        )
+        """
+    )
+
     if not column_exists(conn, "inventory", "item_code"):
         conn.execute("ALTER TABLE inventory ADD COLUMN item_code TEXT")
 

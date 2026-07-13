@@ -462,6 +462,14 @@ def kiwix_page():
 def status_page():
     return FileResponse(APP_DIR / "status.html")
 
+@router.get("/terminals.html")
+def terminals_page():
+    return FileResponse(APP_DIR / "terminals.html")
+
+@router.get("/tasks.html")
+def tasks_page():
+    return FileResponse(APP_DIR / "tasks.html")
+
 @router.post("/api/resources/reload")
 def reload_resources():
     load_local_resources()

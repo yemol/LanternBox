@@ -91,3 +91,5 @@ wiki_import/**/*_media/
 *.wav
 *.mp3
 
+data/terminal_sync/
+data/terminal_sync/archive/

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>终端设备管理 - 壳中灯</title>
+
+  <link rel="icon" href="/static/assets/brand/lanternbox-icon-original.png" type="image/png" />
+  <link rel="stylesheet" href="/static/style.css?v=brand-logo-webp-1" />
+
+  <style>
+    .terminal-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .terminal-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid rgba(137, 204, 255, 0.14);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.065);
+    }
+
+    .terminal-card h3 {
+      margin: 0 0 8px;
+      color: var(--text-main);
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .terminal-card p {
+      margin: 4px 0;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .terminal-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 16px;
+      margin-top: 12px;
+    }
+
+    .terminal-fields p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 14px;
+    }
+
+    .terminal-fields strong {
+      color: var(--text-main);
+      font-weight: 800;
+    }
+
+    .terminal-actions {
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      min-width: 132px;
+    }
+
+    .terminal-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid rgba(137, 204, 255, 0.28);
+      border-radius: 999px;
+      color: var(--accent-bright);
+      background: rgba(104, 199, 255, 0.1);
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .terminal-badge.untrusted {
+      color: #ffe0e6;
+      border-color: var(--danger-border);
+      background: var(--danger-bg);
+    }
+
+    .terminal-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .terminal-form-grid .wide-field {
+      grid-column: 1 / -1;
+    }
+
+    .field-label {
+      display: grid;
+      gap: 8px;
+      color: var(--text-soft);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .field-label span {
+      color: var(--text-soft);
+    }
+
+    select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 15px 16px;
+      background: rgba(255, 255, 255, 0.075);
+      color: var(--text-main);
+      font-size: 16px;
+      outline: none;
+    }
+
+    select:focus {
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 3px rgba(104, 199, 255, 0.12);
+    }
+
+    .terminal-footer-note {
+      margin-top: 18px;
+    }
+
+    .terminal-page .page-actions {
+      flex: 0 0 auto;
+      flex-wrap: nowrap;
+    }
+
+    .terminal-page .page-nav-button {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 760px) {
+      .terminal-card,
+      .terminal-fields,
+      .terminal-form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .terminal-actions {
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="shell terminal-page">
+    <section class="hero compact-hero">
+      <div class="page-header-row">
+        <div>
+          <p class="eyebrow">终端登记</p>
+          <h1 class="brand-title"><img class="brand-mark-inline" src="/static/assets/brand/lanternbox-icon-original.webp" alt="" />终端设备管理</h1>
+          <p class="subtitle">
+            用于登记、查看和信任野外终端、学习终端、传感器节点等设备。本页仅管理设备登记状态，不执行数据同步。
+          </p>
+        </div>
+
+        <div class="page-actions">
+          <a class="page-nav-button" href="/">返回总览</a>
+          <a class="page-nav-button" href="/status.html">系统自检</a>
+        </div>
+      </div>
+
+      <p id="terminal-message" class="notice" style="display: none;"></p>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2>已登记设备</h2>
+        <button id="refresh-button" class="small-button" type="button">刷新列表</button>
+      </div>
+
+      <div id="terminal-result-info" class="result-info">正在读取终端设备...</div>
+
+      <div id="terminal-list" class="terminal-grid">
+        <p class="empty">正在读取终端设备...</p>
+      </div>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2>注册终端设备</h2>
+        <span class="section-hint">重复提交同一设备 ID 会更新登记信息，不覆盖首次创建时间。</span>
+      </div>
+
+      <form id="terminal-form" class="form-card">
+        <div class="terminal-form-grid">
+          <label class="field-label">
+            <span>设备 ID *</span>
+            <input name="device_id" placeholder="例如：FT01-0001" required />
+          </label>
+
+          <label class="field-label">
+            <span>设备名称</span>
+            <input name="name" placeholder="例如：FT-01 野外终端" />
+          </label>
+
+          <label class="field-label">
+            <span>设备角色 *</span>
+            <select name="role" required>
+              <option value="field_terminal">野外终端</option>
+              <option value="study_terminal">学习终端</option>
+              <option value="sensor_node">传感器节点</option>
+              <option value="core">核心主机</option>
+              <option value="unknown">未知设备</option>
+            </select>
+          </label>
+
+          <label class="field-label">
+            <span>固件版本</span>
+            <input name="firmware_version" placeholder="例如：v0.4.0" />
+          </label>
+
+          <label class="field-label wide-field">
+            <span>备注</span>
+            <textarea name="notes" placeholder="设备位置、用途、维护记录或人工审批备注"></textarea>
+          </label>
+        </div>
+
+        <button type="submit">登记 / 更新设备</button>
+      </form>
+    </section>
+
+    <section class="notice terminal-footer-note">
+      当前版本仅用于终端登记与信任状态管理。设备同步、任务下发、加密握手和数据传输将在后续版本实现。
+    </section>
+  </main>
+
+  <script>
+    const terminalList = document.getElementById('terminal-list');
+    const resultInfo = document.getElementById('terminal-result-info');
+    const terminalForm = document.getElementById('terminal-form');
+    const terminalMessage = document.getElementById('terminal-message');
+    const refreshButton = document.getElementById('refresh-button');
+
+    let currentDevices = [];
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function showMessage(message, isError = false) {
+      terminalMessage.style.display = 'block';
+      terminalMessage.textContent = message;
+      terminalMessage.style.borderColor = isError
+        ? 'rgba(255, 123, 138, 0.42)'
+        : 'rgba(137, 204, 255, 0.18)';
+      terminalMessage.style.color = isError ? '#ffe0e6' : '#b7d2e8';
+    }
+
+    function formatValue(value, fallback = '未填写') {
+      const text = String(value ?? '').trim();
+      return text || fallback;
+    }
+
+    function formatSyncTime(value) {
+      return formatValue(value, '尚未同步');
+    }
+
+    function formatRole(role) {
+      const roleMap = {
+        field_terminal: '野外终端',
+        study_terminal: '学习终端',
+        sensor_node: '传感器节点',
+        core: '核心主机',
+        unknown: '未知设备'
+      };
+      return roleMap[role] || formatValue(role);
+    }
+
+    function formatStatus(status) {
+      const statusMap = {
+        active: '运行中',
+        inactive: '未启用',
+        disabled: '已停用'
+      };
+      return statusMap[status] || formatValue(status);
+    }
+
+    function formatDeviceName(name) {
+      const text = String(name ?? '').trim();
+      const nameMap = {
+        'FT-01 Field Terminal': 'FT-01 野外终端',
+        'Field Terminal': '野外终端',
+        'Study Terminal': '学习终端',
+        'Sensor Node': '传感器节点'
+      };
+      return nameMap[text] || text || '未命名终端';
+    }
+
+    async function readError(response, fallback) {
+      try {
+        const result = await response.json();
+        return result.detail || result.message || result.error || fallback;
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function renderEmpty() {
+      resultInfo.textContent = '当前 0 台终端设备。';
+      terminalList.innerHTML = '<p class="empty">尚未登记终端设备</p>';
+    }
+
+    function renderDevices(devices) {
+      if (!devices.length) {
+        renderEmpty();
+        return;
+      }
+
+      resultInfo.textContent = `当前 ${devices.length} 台终端设备。`;
+      terminalList.innerHTML = devices.map(device => {
+        const trusted = Boolean(device.trusted);
+        const trustedText = trusted ? '已信任' : '未信任';
+        const buttonText = trusted ? '取消信任' : '设为信任';
+        const nextTrusted = trusted ? 'false' : 'true';
+
+        return `
+          <article class="terminal-card">
+            <div>
+              <p class="item-code">${escapeHtml(device.device_id)}</p>
+              <h3>${escapeHtml(formatDeviceName(device.name))}</h3>
+              <span class="terminal-badge ${trusted ? '' : 'untrusted'}">${escapeHtml(trustedText)}</span>
+
+              <div class="terminal-fields">
+                <p><strong>设备角色：</strong>${escapeHtml(formatRole(device.role))}</p>
+                <p><strong>运行状态：</strong>${escapeHtml(formatStatus(device.status))}</p>
+                <p><strong>信任状态：</strong>${escapeHtml(trustedText)}</p>
+                <p><strong>固件版本：</strong>${escapeHtml(formatValue(device.firmware_version))}</p>
+                <p><strong>首次登记：</strong>${escapeHtml(formatValue(device.created_at))}</p>
+                <p><strong>最近上线：</strong>${escapeHtml(formatValue(device.last_seen_at))}</p>
+                <p><strong>最近同步：</strong>${escapeHtml(formatSyncTime(device.last_sync_at))}</p>
+                <p><strong>备注：</strong>${escapeHtml(formatValue(device.notes))}</p>
+              </div>
+            </div>
+
+            <div class="terminal-actions">
+              <button
+                class="small-button"
+                type="button"
+                data-device-id="${escapeHtml(device.device_id)}"
+                data-next-trusted="${nextTrusted}"
+              >
+                ${escapeHtml(buttonText)}
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    async function loadTerminals() {
+      resultInfo.textContent = '正在读取终端设备...';
+      terminalList.innerHTML = '<p class="empty">正在读取终端设备...</p>';
+
+      try {
+        const response = await fetch('/api/terminals', {
+          cache: 'no-store'
+        });
+
+        if (!response.ok) {
+          throw new Error(await readError(response, `读取失败：${response.status}`));
+        }
+
+        const devices = await response.json();
+        currentDevices = Array.isArray(devices) ? devices : [];
+        renderDevices(currentDevices);
+      } catch (error) {
+        console.error(error);
+        currentDevices = [];
+        resultInfo.textContent = '终端设备读取失败。';
+        terminalList.innerHTML = `<p class="empty">API 请求失败：${escapeHtml(error.message || '请检查后端服务')}</p>`;
+        showMessage(error.message || 'API 请求失败，请检查后端服务。', true);
+      }
+    }
+
+    async function registerTerminal(payload, existedBefore) {
+      const response = await fetch('/api/terminals/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(await readError(response, `登记失败：${response.status}`));
+      }
+
+      const result = await response.json();
+
+      if (!result.ok) {
+        throw new Error(result.message || result.error || '登记失败');
+      }
+
+      showMessage(existedBefore
+        ? `设备 ID 已存在，已更新登记信息：${payload.device_id}`
+        : `终端设备已登记：${payload.device_id}`
+      );
+    }
+
+    async function setTrust(deviceId, trusted) {
+      const response = await fetch(`/api/terminals/${encodeURIComponent(deviceId)}/trust`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ trusted })
+      });
+
+      if (!response.ok) {
+        throw new Error(await readError(response, `信任状态更新失败：${response.status}`));
+      }
+
+      const result = await response.json();
+
+      if (!result.ok) {
+        throw new Error(result.message || result.error || '信任状态更新失败');
+      }
+
+      showMessage(`${deviceId} 已${trusted ? '设为信任' : '取消信任'}。`);
+    }
+
+    terminalForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(terminalForm);
+      const payload = {
+        device_id: String(formData.get('device_id') || '').trim(),
+        name: String(formData.get('name') || '').trim(),
+        role: String(formData.get('role') || '').trim(),
+        firmware_version: String(formData.get('firmware_version') || '').trim(),
+        notes: String(formData.get('notes') || '').trim()
+      };
+
+      if (!payload.device_id) {
+        showMessage('设备 ID 为空，请填写终端设备 ID。', true);
+        return;
+      }
+
+      if (!payload.role) {
+        showMessage('设备角色为空，请选择终端角色。', true);
+        return;
+      }
+
+      const existedBefore = currentDevices.some(device => device.device_id === payload.device_id);
+
+      try {
+        await registerTerminal(payload, existedBefore);
+        terminalForm.reset();
+        await loadTerminals();
+      } catch (error) {
+        console.error(error);
+        showMessage(error.message || '后端返回错误，登记失败。', true);
+      }
+    });
+
+    terminalList.addEventListener('click', async (event) => {
+      const button = event.target.closest('button[data-device-id]');
+
+      if (!button) {
+        return;
+      }
+
+      const deviceId = button.dataset.deviceId;
+      const trusted = button.dataset.nextTrusted === 'true';
+
+      button.disabled = true;
+      button.textContent = '处理中...';
+
+      try {
+        await setTrust(deviceId, trusted);
+        await loadTerminals();
+      } catch (error) {
+        console.error(error);
+        showMessage(error.message || '后端返回错误，信任状态更新失败。', true);
+        await loadTerminals();
+      }
+    });
+
+    refreshButton.addEventListener('click', () => {
+      loadTerminals();
+    });
+
+    loadTerminals();
+  </script>
+</body>
+</html>
