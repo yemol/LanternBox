@@ -15,6 +15,11 @@ from .services.wiki_service import (
     get_wiki_articles_by_category_records,
     search_wiki_articles,
 )
+from .services.journal_service import (
+    create_journal_entry,
+    delete_journal_entry,
+    list_journal_entries,
+)
 
 from .config import (
     APP_DIR,
@@ -239,53 +244,28 @@ def journal_page():
 
 @router.get("/api/journal")
 def list_journal():
-    conn = get_db_connection()
-    rows = conn.execute("SELECT * FROM journal ORDER BY id DESC").fetchall()
-    conn.close()
-    return [dict(row) for row in rows]
+    return list_journal_entries()
 
 
 @router.post("/api/journal")
 def add_journal(entry: JournalEntry):
-    created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    conn = get_db_connection()
-    cursor = conn.execute(
-        """
-        INSERT INTO journal
-        (entry_type, title, content, created_at)
-        VALUES (?, ?, ?, ?)
-        """,
-        (
-            entry.entry_type,
-            entry.title,
-            entry.content,
-            created_at,
-        ),
+    journal_entry = create_journal_entry(
+        entry_type=entry.entry_type,
+        title=entry.title,
+        content=entry.content,
     )
-    conn.commit()
-    new_id = cursor.lastrowid
-    conn.close()
 
     return {
         "ok": True,
-        "id": new_id,
-        "created_at": created_at,
+        "id": journal_entry["id"],
+        "created_at": journal_entry["created_at"],
         "message": "日记已记录。",
     }
 
 
 @router.delete("/api/journal/{entry_id}")
 def delete_journal(entry_id: int):
-    conn = get_db_connection()
-    cursor = conn.execute(
-        "DELETE FROM journal WHERE id = ?",
-        (entry_id,),
-    )
-    conn.commit()
-    deleted_count = cursor.rowcount
-    conn.close()
-
-    if deleted_count == 0:
+    if not delete_journal_entry(entry_id):
         return {
             "ok": False,
             "message": "没有找到这条日记记录。",

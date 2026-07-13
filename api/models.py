@@ -159,3 +159,32 @@ class TerminalSyncUploadRecordsResponse(BaseModel):
     imported: int
     skipped_duplicate: int
     ack: bool
+
+
+class TerminalSyncUploadAudioResponse(BaseModel):
+    ok: bool
+    audio_id: str
+    size: int
+    status: str
+    imported: bool
+    duplicate: bool
+    conflict: bool = False
+    path: str = ""
+    ack: bool
+
+
+class TerminalSyncCommitRequest(BaseModel):
+    device_id: str
+    sync_session_id: str
+    clear_request: bool = False
+    acked: dict[str, Any] = {}
+    summary: dict[str, Any] = {}
+
+
+class TerminalSyncCommitResponse(BaseModel):
+    ok: bool
+    sync_session_id: str
+    commit: str
+    terminal_may_clear: dict[str, Any]
+    committed_at: str
+    ack: bool
