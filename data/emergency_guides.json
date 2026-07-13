@@ -12799,7 +12799,10 @@
       "冰箱食物",
       "罐头鼓包"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "repair-tool-borrow-return-log-001",
+      "repair-tool-id-handover-log-001"
+    ],
     "risk_level": "caution"
   },
   {
@@ -13340,6 +13343,8 @@
       "罐头鼓包"
     ],
     "related_wiki": [
+      "repair-knot-slip-check-001",
+      "repair-rope-full-length-inspection-001",
       "repair-rope-load-limit-001"
     ],
     "risk_level": "normal"
@@ -25805,7 +25810,10 @@
       "主食配给",
       "夜间异响"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "repair-thin-metal-patch-reinforcement-001",
+      "repair-wire-binding-temporary-001"
+    ],
     "risk_level": "caution"
   },
   {
@@ -25885,6 +25893,7 @@
       "罐头鼓包"
     ],
     "related_wiki": [
+      "repair-wet-wood-strength-check-001",
       "repair-wood-basic-properties-001"
     ],
     "risk_level": "normal"
@@ -31706,7 +31715,8 @@
       "罐头鼓包"
     ],
     "related_wiki": [
-      "repair-hand-tool-care-001"
+      "repair-hand-tool-care-001",
+      "repair-tool-clean-rust-prevention-001"
     ],
     "risk_level": "normal"
   },
@@ -31785,6 +31795,8 @@
       "罐头鼓包"
     ],
     "related_wiki": [
+      "repair-rope-tape-consumption-log-001",
+      "repair-tape-temporary-patch-boundary-001",
       "repair-tape-types-001",
       "tools-tape-zip-tie-001"
     ],
@@ -31863,6 +31875,7 @@
       "罐头鼓包"
     ],
     "related_wiki": [
+      "repair-rope-tape-consumption-log-001",
       "repair-zip-tie-boundary-001",
       "tools-tape-zip-tie-001"
     ],
@@ -31960,6 +31973,7 @@
       "罐头鼓包"
     ],
     "related_wiki": [
+      "repair-fastener-washer-storage-001",
       "repair-screws-and-nuts-001"
     ],
     "risk_level": "normal"
@@ -32225,7 +32239,9 @@
       "门外"
     ],
     "related_wiki": [
-      "repair-container-repair-material-001"
+      "repair-container-repair-material-001",
+      "repair-cracked-container-leak-control-001",
+      "repair-plastic-bucket-crack-load-reduction-001"
     ],
     "risk_level": "normal"
   },
@@ -43290,7 +43306,8 @@
       "罐头鼓包"
     ],
     "related_wiki": [
-      "repair-temporary-substitute-part-001"
+      "repair-temporary-substitute-part-001",
+      "repair-tool-substitute-risk-check-001"
     ],
     "risk_level": "normal"
   },
@@ -48406,7 +48423,8 @@
     "related_wiki": [
       "repair-common-material-properties-index-001",
       "repair-electric-shock-001",
-      "repair-temporary-insulation-001"
+      "repair-temporary-insulation-001",
+      "repair-wire-jacket-damage-stop-001"
     ],
     "notes": "记录修补位置、负载和复查时间。",
     "category_original": "工具维修与替代",
@@ -54292,7 +54310,8 @@
       "repair-drinking-water-001",
       "repair-hand-tool-care-001",
       "repair-metal-corrosion-001",
-      "repair-power-outage-001"
+      "repair-power-outage-001",
+      "repair-tool-clean-rust-prevention-001"
     ],
     "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
     "category_original": "维修 / 制作 / 替代 / 拆解再利用",

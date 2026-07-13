@@ -91,7 +91,9 @@
     "门外"
   ],
   "related_wiki": [
-    "repair-container-repair-material-001"
+    "repair-container-repair-material-001",
+    "repair-cracked-container-leak-control-001",
+    "repair-plastic-bucket-crack-load-reduction-001"
   ],
   "risk_level": "normal"
 }

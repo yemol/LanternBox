@@ -67,6 +67,9 @@
     "冰箱食物",
     "罐头鼓包"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "repair-tool-borrow-return-log-001",
+    "repair-tool-id-handover-log-001"
+  ],
   "risk_level": "caution"
 }

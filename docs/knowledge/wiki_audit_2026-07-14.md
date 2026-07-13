@@ -1,4 +1,4 @@
-# Wiki Audit Report (2026-07-13)
+# Wiki Audit Report (2026-07-14)
 
 ## 结论
 - 未发现阻断级问题：slug 唯一性、必填字段、分类引用、Markdown 与 PocketBase 内容一致性均通过。

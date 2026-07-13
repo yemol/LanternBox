@@ -87,6 +87,9 @@
     "主食配给",
     "夜间异响"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "repair-thin-metal-patch-reinforcement-001",
+    "repair-wire-binding-temporary-001"
+  ],
   "risk_level": "caution"
 }
