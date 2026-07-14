@@ -69246,5 +69246,273 @@
       "repair-damaged-tool-report-isolation-001"
     ],
     "risk_level": "high"
+  },
+  {
+    "id": "DG-0841",
+    "title": "电池异常隔离",
+    "category": "能源",
+    "priority": "P0",
+    "scenario": "电池、移动电源或电池盒出现鼓包、漏液、腐蚀、摔裂、发热、异味，或电池类型、新旧、容量不一致但有人想继续使用。",
+    "goal": "把异常电池从可用区移出，避免混用、反充、短路、漏液污染和火灾风险。",
+    "tools": [
+      "停用标签",
+      "隔离盒",
+      "记录纸",
+      "铅笔",
+      "手套或纸片",
+      "硬质放置面"
+    ],
+    "steps": [
+      "先停止充电、放电和装入设备，不再按键测试电量。",
+      "检查鼓包、漏液、白粉、腐蚀、摔裂、异味、发热和异常掉电。",
+      "把异常电池或移动电源移到远离床铺、纸张、布料、燃料和儿童的位置。",
+      "在设备或容器上写明禁用原因，例如漏液、受摔、类型不明或发热。",
+      "复查同一批电池和同一设备电池仓，确认没有混用、腐蚀和误放回可用区。"
+    ],
+    "check": [
+      "异常电池已离开可用区。",
+      "禁用标签能被下一位使用者看到。",
+      "同批电池和设备电池仓已检查。",
+      "记录中能找到编号、异常位置和复查人。"
+    ],
+    "common_mistakes": [
+      "把漏液电池擦一擦继续用。",
+      "把不同新旧、不同类型电池混在一个设备里。",
+      "摔过的移动电源继续给关键设备供电。",
+      "只口头提醒，没有贴禁用标签。"
+    ],
+    "fallback": [
+      "没有隔离盒时，把异常电池放在硬质空旷位置并用纸条标记。",
+      "电量不足时减少非必要设备，不拼接不匹配电池。",
+      "缺手套时用纸片、袋子或夹具移动漏液电池，不直接接触。"
+    ],
+    "stop_or_escalate": [
+      "鼓包、冒烟、刺鼻味、快速升温、漏液扩散或外壳开裂时，停止搬动并扩大隔离范围。",
+      "有人已接触漏液、眼口不适或皮肤刺痛时，停止使用污染物并记录接触情况。",
+      "禁用电池去向不明时，暂停相关设备使用并重新清点。"
+    ],
+    "related_wiki": [
+      "energy-battery-parallel-series-boundary-001",
+      "energy-battery-chemistry-mix-stop-001",
+      "energy-battery-leak-corrosion-isolation-001",
+      "energy-damaged-power-bank-quarantine-001",
+      "energy-battery-storage-temperature-boundary-001"
+    ],
+    "notes": "本行动卡只处理离线环境中的现场隔离和记录，不包含电芯拆解、修复或改装。",
+    "category_original": "能源",
+    "domains": [
+      "power",
+      "security",
+      "records"
+    ],
+    "intents": [
+      "energy_safety_boundary"
+    ],
+    "situations": [
+      "power_safety",
+      "battery_abnormal"
+    ],
+    "objects": [
+      "电池",
+      "移动电源",
+      "电池盒"
+    ],
+    "keywords": [
+      "电池异常",
+      "移动电源",
+      "漏液",
+      "腐蚀",
+      "鼓包",
+      "受摔",
+      "混用",
+      "禁用标签",
+      "隔离"
+    ],
+    "negative_keywords": [
+      "电芯焊接",
+      "BMS改装"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0842",
+    "title": "低压设备异常停用",
+    "category": "能源",
+    "priority": "P0",
+    "scenario": "USB 灯、移动电源、太阳能小板、收音机、对讲机或低压供电线出现发热、异味、火花、掉电、潮湿、接头松动或反复重启。",
+    "goal": "先断开并隔离异常低压设备，避免短路、过热、关键设备损坏和充电区起火。",
+    "tools": [
+      "停用标签",
+      "记录纸",
+      "铅笔",
+      "干燥隔离位置",
+      "替代低功耗设备",
+      "耐热容器"
+    ],
+    "steps": [
+      "先断开负载，再断开电源输入，不按键反复测试。",
+      "检查线缆、接口、外壳和电池仓是否发热、变色、潮湿、腐蚀或有异味。",
+      "把异常设备移出充电区、睡眠区、布料、纸张和燃料附近。",
+      "贴上停用标签，写明异常位置和发现时间。",
+      "把关键任务转移到确认正常的低功耗设备，并减少非必要用电。"
+    ],
+    "check": [
+      "异常设备已断开输入和负载。",
+      "接口、线缆和外壳异常已记录。",
+      "设备已离开可燃物和公共充电区。",
+      "关键通信、照明或记录任务已有替代方案。"
+    ],
+    "common_mistakes": [
+      "换一根线继续试。",
+      "用手压住松动接口继续充电。",
+      "把受潮低压设备接到唯一移动电源上验证。",
+      "发热后反复重启。"
+    ],
+    "fallback": [
+      "没有替代设备时，改用纸质记录、固定短期开机和低亮照明。",
+      "没有耐热容器时，放在砖石、金属盘或空旷干燥地面上。",
+      "电量不足时先削减非关键任务，不降低停用边界。"
+    ],
+    "stop_or_escalate": [
+      "冒烟、火花、焦味、烫手、线皮变软、接口变黑或设备鼓包时，立即停用并隔离。",
+      "潮湿、腐蚀或无法确认内部干燥时，不通电测试。",
+      "异常设备曾连接关键设备时，复查被连接设备并记录。"
+    ],
+    "related_wiki": [
+      "energy-low-voltage-system-stop-boundary-001",
+      "energy-dc-polarity-reverse-check-001",
+      "energy-short-circuit-warning-signs-001",
+      "energy-wire-heating-load-limit-001",
+      "energy-loose-connector-stop-use-001",
+      "energy-wet-low-voltage-device-no-test-001",
+      "energy-device-smell-heat-no-restart-001"
+    ],
+    "notes": "低压设备异常时，优先停止、隔离和记录。本卡不指导带电维修。",
+    "category_original": "能源",
+    "domains": [
+      "power",
+      "security",
+      "tools",
+      "records"
+    ],
+    "intents": [
+      "energy_safety_boundary"
+    ],
+    "situations": [
+      "power_safety",
+      "low_voltage_fault"
+    ],
+    "objects": [
+      "USB设备",
+      "移动电源",
+      "太阳能板",
+      "低压线缆"
+    ],
+    "keywords": [
+      "低压设备",
+      "发热",
+      "异味",
+      "火花",
+      "掉电",
+      "接头松动",
+      "潮湿",
+      "停用"
+    ],
+    "negative_keywords": [
+      "市电配电",
+      "墙内线路"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0843",
+    "title": "未知电源安全判断",
+    "category": "能源",
+    "priority": "P0",
+    "scenario": "发现旧适配器、未知充电器、临时线缆、极性不明接口、保护件缺失或需要布置集中充电区。",
+    "goal": "在接入关键设备前确认电压、极性、保护、绝缘和充电环境；无法确认时停用并改用低风险方案。",
+    "tools": [
+      "标签",
+      "记录纸",
+      "铅笔",
+      "绝缘胶带",
+      "已知安全线材",
+      "硬质充电面"
+    ],
+    "steps": [
+      "先读标签和接口标记，确认输出电压、电流、极性和用途。",
+      "参数不明、接口不合、极性不清或保护件缺失时，贴停用标签，不接关键设备。",
+      "临时接线前断电检查裸线、潮湿、腐蚀、绝缘和固定状态。",
+      "集中充电时远离床铺、纸张、布料、燃料和出口，并写下负责人。",
+      "发现发热、焦味、啸叫、火花、线缆变软或设备异常掉电时，立即断开并隔离。"
+    ],
+    "check": [
+      "未知电源没有接入关键设备。",
+      "电压、极性和接口状态已记录。",
+      "临时线缆没有裸露铜线、潮湿和拉扯。",
+      "充电区远离可燃物并有人负责复查。"
+    ],
+    "common_mistakes": [
+      "接口能插上就直接给手机或 Core 供电。",
+      "用铁丝或锡纸替代保险丝。",
+      "带电缠胶带或用手压住线头。",
+      "把多个设备堆在床边无人充电。"
+    ],
+    "fallback": [
+      "参数不明时改用已登记电源或暂停该设备。",
+      "缺绝缘材料时不接临时线。",
+      "缺负责人时只保留白天有人看守的关键充电。"
+    ],
+    "stop_or_escalate": [
+      "电压不明、极性不明、保护件缺失、接口发热、适配器啸叫或线缆露铜时停止使用。",
+      "出现火花、焦味、冒烟、鼓包或人员无法看守时，停止充电并隔离。",
+      "临时接线位于潮湿地面、通道、睡眠区或儿童可触及位置时，不通电。"
+    ],
+    "related_wiki": [
+      "energy-dc-polarity-reverse-check-001",
+      "energy-fuse-protection-no-bypass-001",
+      "energy-temporary-wiring-precheck-001",
+      "energy-unattended-charging-stop-boundary-001",
+      "energy-charging-zone-fire-isolation-001",
+      "repair-power-cable-temporary-insulation-boundary-001",
+      "energy-unknown-adapter-stop-use-001"
+    ],
+    "notes": "本卡只做未知电源、临时接线和充电环境的安全判断，不包含电源改装。",
+    "category_original": "能源",
+    "domains": [
+      "power",
+      "security",
+      "repair",
+      "records"
+    ],
+    "intents": [
+      "energy_safety_boundary"
+    ],
+    "situations": [
+      "power_safety",
+      "temporary_wiring",
+      "charging_zone"
+    ],
+    "objects": [
+      "适配器",
+      "充电器",
+      "临时线缆",
+      "充电区"
+    ],
+    "keywords": [
+      "未知电源",
+      "适配器",
+      "充电器",
+      "极性",
+      "临时接线",
+      "保险丝",
+      "集中充电",
+      "停用"
+    ],
+    "negative_keywords": [
+      "快充协议",
+      "电源改装"
+    ],
+    "risk_level": "high"
   }
 ]

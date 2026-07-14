@@ -1,0 +1,90 @@
+{
+  "id": "DG-0842",
+  "title": "低压设备异常停用",
+  "category": "能源",
+  "priority": "P0",
+  "scenario": "USB 灯、移动电源、太阳能小板、收音机、对讲机或低压供电线出现发热、异味、火花、掉电、潮湿、接头松动或反复重启。",
+  "goal": "先断开并隔离异常低压设备，避免短路、过热、关键设备损坏和充电区起火。",
+  "tools": [
+    "停用标签",
+    "记录纸",
+    "铅笔",
+    "干燥隔离位置",
+    "替代低功耗设备",
+    "耐热容器"
+  ],
+  "steps": [
+    "先断开负载，再断开电源输入，不按键反复测试。",
+    "检查线缆、接口、外壳和电池仓是否发热、变色、潮湿、腐蚀或有异味。",
+    "把异常设备移出充电区、睡眠区、布料、纸张和燃料附近。",
+    "贴上停用标签，写明异常位置和发现时间。",
+    "把关键任务转移到确认正常的低功耗设备，并减少非必要用电。"
+  ],
+  "check": [
+    "异常设备已断开输入和负载。",
+    "接口、线缆和外壳异常已记录。",
+    "设备已离开可燃物和公共充电区。",
+    "关键通信、照明或记录任务已有替代方案。"
+  ],
+  "common_mistakes": [
+    "换一根线继续试。",
+    "用手压住松动接口继续充电。",
+    "把受潮低压设备接到唯一移动电源上验证。",
+    "发热后反复重启。"
+  ],
+  "fallback": [
+    "没有替代设备时，改用纸质记录、固定短期开机和低亮照明。",
+    "没有耐热容器时，放在砖石、金属盘或空旷干燥地面上。",
+    "电量不足时先削减非关键任务，不降低停用边界。"
+  ],
+  "stop_or_escalate": [
+    "冒烟、火花、焦味、烫手、线皮变软、接口变黑或设备鼓包时，立即停用并隔离。",
+    "潮湿、腐蚀或无法确认内部干燥时，不通电测试。",
+    "异常设备曾连接关键设备时，复查被连接设备并记录。"
+  ],
+  "related_wiki": [
+    "energy-low-voltage-system-stop-boundary-001",
+    "energy-dc-polarity-reverse-check-001",
+    "energy-short-circuit-warning-signs-001",
+    "energy-wire-heating-load-limit-001",
+    "energy-loose-connector-stop-use-001",
+    "energy-wet-low-voltage-device-no-test-001",
+    "energy-device-smell-heat-no-restart-001"
+  ],
+  "notes": "低压设备异常时，优先停止、隔离和记录。本卡不指导带电维修。",
+  "category_original": "能源",
+  "domains": [
+    "power",
+    "security",
+    "tools",
+    "records"
+  ],
+  "intents": [
+    "energy_safety_boundary"
+  ],
+  "situations": [
+    "power_safety",
+    "low_voltage_fault"
+  ],
+  "objects": [
+    "USB设备",
+    "移动电源",
+    "太阳能板",
+    "低压线缆"
+  ],
+  "keywords": [
+    "低压设备",
+    "发热",
+    "异味",
+    "火花",
+    "掉电",
+    "接头松动",
+    "潮湿",
+    "停用"
+  ],
+  "negative_keywords": [
+    "市电配电",
+    "墙内线路"
+  ],
+  "risk_level": "high"
+}

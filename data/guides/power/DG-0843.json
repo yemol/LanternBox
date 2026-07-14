@@ -1,0 +1,91 @@
+{
+  "id": "DG-0843",
+  "title": "未知电源安全判断",
+  "category": "能源",
+  "priority": "P0",
+  "scenario": "发现旧适配器、未知充电器、临时线缆、极性不明接口、保护件缺失或需要布置集中充电区。",
+  "goal": "在接入关键设备前确认电压、极性、保护、绝缘和充电环境；无法确认时停用并改用低风险方案。",
+  "tools": [
+    "标签",
+    "记录纸",
+    "铅笔",
+    "绝缘胶带",
+    "已知安全线材",
+    "硬质充电面"
+  ],
+  "steps": [
+    "先读标签和接口标记，确认输出电压、电流、极性和用途。",
+    "参数不明、接口不合、极性不清或保护件缺失时，贴停用标签，不接关键设备。",
+    "临时接线前断电检查裸线、潮湿、腐蚀、绝缘和固定状态。",
+    "集中充电时远离床铺、纸张、布料、燃料和出口，并写下负责人。",
+    "发现发热、焦味、啸叫、火花、线缆变软或设备异常掉电时，立即断开并隔离。"
+  ],
+  "check": [
+    "未知电源没有接入关键设备。",
+    "电压、极性和接口状态已记录。",
+    "临时线缆没有裸露铜线、潮湿和拉扯。",
+    "充电区远离可燃物并有人负责复查。"
+  ],
+  "common_mistakes": [
+    "接口能插上就直接给手机或 Core 供电。",
+    "用铁丝或锡纸替代保险丝。",
+    "带电缠胶带或用手压住线头。",
+    "把多个设备堆在床边无人充电。"
+  ],
+  "fallback": [
+    "参数不明时改用已登记电源或暂停该设备。",
+    "缺绝缘材料时不接临时线。",
+    "缺负责人时只保留白天有人看守的关键充电。"
+  ],
+  "stop_or_escalate": [
+    "电压不明、极性不明、保护件缺失、接口发热、适配器啸叫或线缆露铜时停止使用。",
+    "出现火花、焦味、冒烟、鼓包或人员无法看守时，停止充电并隔离。",
+    "临时接线位于潮湿地面、通道、睡眠区或儿童可触及位置时，不通电。"
+  ],
+  "related_wiki": [
+    "energy-dc-polarity-reverse-check-001",
+    "energy-fuse-protection-no-bypass-001",
+    "energy-temporary-wiring-precheck-001",
+    "energy-unattended-charging-stop-boundary-001",
+    "energy-charging-zone-fire-isolation-001",
+    "repair-power-cable-temporary-insulation-boundary-001",
+    "energy-unknown-adapter-stop-use-001"
+  ],
+  "notes": "本卡只做未知电源、临时接线和充电环境的安全判断，不包含电源改装。",
+  "category_original": "能源",
+  "domains": [
+    "power",
+    "security",
+    "repair",
+    "records"
+  ],
+  "intents": [
+    "energy_safety_boundary"
+  ],
+  "situations": [
+    "power_safety",
+    "temporary_wiring",
+    "charging_zone"
+  ],
+  "objects": [
+    "适配器",
+    "充电器",
+    "临时线缆",
+    "充电区"
+  ],
+  "keywords": [
+    "未知电源",
+    "适配器",
+    "充电器",
+    "极性",
+    "临时接线",
+    "保险丝",
+    "集中充电",
+    "停用"
+  ],
+  "negative_keywords": [
+    "快充协议",
+    "电源改装"
+  ],
+  "risk_level": "high"
+}

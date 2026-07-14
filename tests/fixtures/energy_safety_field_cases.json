@@ -1,0 +1,86 @@
+[
+  {
+    "id": "energy_battery_power_bank_swollen",
+    "question": "移动电源鼓起来了还能不能继续充？",
+    "expected_guides": ["DG-0841"],
+    "expected_wiki": ["energy-damaged-power-bank-quarantine-001", "energy-battery-storage-temperature-boundary-001"],
+    "focus_terms": ["鼓包", "停止", "隔离", "禁用", "记录"],
+    "risk": "high"
+  },
+  {
+    "id": "energy_spare_battery_hot_after_storage",
+    "question": "备用电池放了半年，现在发热还有必要测试吗？",
+    "expected_guides": ["DG-0841"],
+    "expected_wiki": ["energy-battery-storage-temperature-boundary-001", "energy-battery-leak-corrosion-isolation-001"],
+    "focus_terms": ["发热", "停用", "隔离", "复查", "记录"],
+    "risk": "high"
+  },
+  {
+    "id": "energy_battery_leak_handling",
+    "question": "电池漏液了怎么处理？",
+    "expected_guides": ["DG-0841"],
+    "expected_wiki": ["energy-battery-leak-corrosion-isolation-001"],
+    "focus_terms": ["漏液", "腐蚀", "隔离", "不要徒手", "记录"],
+    "risk": "high"
+  },
+  {
+    "id": "energy_usb_device_overheating",
+    "question": "USB设备突然发烫还能继续用吗？",
+    "expected_guides": ["DG-0842"],
+    "expected_wiki": ["energy-low-voltage-system-stop-boundary-001", "energy-device-smell-heat-no-restart-001"],
+    "focus_terms": ["USB", "发烫", "停止", "断开", "隔离"],
+    "risk": "high"
+  },
+  {
+    "id": "energy_wire_getting_hot_after_wiring",
+    "question": "接线后线越来越热，是不是功率不够？",
+    "expected_guides": ["DG-0842"],
+    "expected_wiki": ["energy-wire-heating-load-limit-001", "energy-short-circuit-warning-signs-001"],
+    "focus_terms": ["线缆发热", "负载", "减载", "停止", "断开"],
+    "risk": "high"
+  },
+  {
+    "id": "energy_red_black_reverse_polarity",
+    "question": "红黑线接反会怎么样？",
+    "expected_guides": ["DG-0842"],
+    "expected_wiki": ["energy-dc-polarity-reverse-check-001"],
+    "focus_terms": ["红黑线", "接反", "极性", "停止", "不接关键设备"],
+    "risk": "high"
+  },
+  {
+    "id": "energy_unknown_old_charger_voltage",
+    "question": "找到一个旧充电器，不知道是多少伏，可以试一下吗？",
+    "expected_guides": ["DG-0843"],
+    "expected_wiki": ["energy-unknown-adapter-stop-use-001", "energy-dc-polarity-reverse-check-001"],
+    "focus_terms": ["旧充电器", "电压不明", "停用", "不要试插", "记录"],
+    "risk": "high"
+  },
+  {
+    "id": "energy_unknown_matching_port",
+    "question": "这个接口能插进去，但是不知道是不是匹配，可以通电看看吗？",
+    "expected_guides": ["DG-0843"],
+    "expected_wiki": ["energy-unknown-adapter-stop-use-001", "energy-loose-connector-stop-use-001"],
+    "focus_terms": ["接口", "匹配", "通电", "停止", "关键设备"],
+    "risk": "high"
+  },
+  {
+    "id": "energy_three_day_blackout_charge_priority",
+    "question": "停电三天，应该优先给什么设备充电？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "focus_terms": ["停电", "优先", "关键设备", "充电", "记录"],
+    "risk": "caution",
+    "observation": true,
+    "observation_note": "长期能源 P1 尚未实现；观察是否错误命中通信或设备维护。"
+  },
+  {
+    "id": "energy_cloudy_solar_panel",
+    "question": "太阳能板今天阴天，还有必要展开吗？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "focus_terms": ["太阳能", "阴天", "降级", "低功耗", "记录"],
+    "risk": "caution",
+    "observation": true,
+    "observation_note": "太阳能 P1 尚未实现；观察现有太阳能 evidence。"
+  }
+]

@@ -42814,5 +42814,146 @@
     "primary_domain": null,
     "primary_intent": null,
     "top1_aliases": []
+  },
+  {
+    "id": "DG-0841",
+    "title": "电池异常隔离",
+    "category": "能源",
+    "category_original": "能源",
+    "risk_level": "high",
+    "domains": [
+      "power",
+      "security",
+      "records"
+    ],
+    "intents": [
+      "energy_safety_boundary"
+    ],
+    "situations": [
+      "power_safety",
+      "battery_abnormal"
+    ],
+    "objects": [
+      "电池",
+      "移动电源",
+      "电池盒"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "电池异常",
+      "移动电源",
+      "漏液",
+      "腐蚀",
+      "鼓包",
+      "受摔",
+      "混用",
+      "禁用标签",
+      "隔离"
+    ],
+    "negative_keywords": [
+      "电芯焊接",
+      "BMS改装"
+    ],
+    "ranking_role": null,
+    "guide_type": null,
+    "primary_domain": null,
+    "primary_intent": null,
+    "top1_aliases": []
+  },
+  {
+    "id": "DG-0842",
+    "title": "低压设备异常停用",
+    "category": "能源",
+    "category_original": "能源",
+    "risk_level": "high",
+    "domains": [
+      "power",
+      "security",
+      "tools",
+      "records"
+    ],
+    "intents": [
+      "energy_safety_boundary"
+    ],
+    "situations": [
+      "power_safety",
+      "low_voltage_fault"
+    ],
+    "objects": [
+      "USB设备",
+      "移动电源",
+      "太阳能板",
+      "低压线缆"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "低压设备",
+      "发热",
+      "异味",
+      "火花",
+      "掉电",
+      "接头松动",
+      "潮湿",
+      "停用"
+    ],
+    "negative_keywords": [
+      "市电配电",
+      "墙内线路"
+    ],
+    "ranking_role": null,
+    "guide_type": null,
+    "primary_domain": null,
+    "primary_intent": null,
+    "top1_aliases": []
+  },
+  {
+    "id": "DG-0843",
+    "title": "未知电源安全判断",
+    "category": "能源",
+    "category_original": "能源",
+    "risk_level": "high",
+    "domains": [
+      "power",
+      "security",
+      "repair",
+      "records"
+    ],
+    "intents": [
+      "energy_safety_boundary"
+    ],
+    "situations": [
+      "power_safety",
+      "temporary_wiring",
+      "charging_zone"
+    ],
+    "objects": [
+      "适配器",
+      "充电器",
+      "临时线缆",
+      "充电区"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "未知电源",
+      "适配器",
+      "充电器",
+      "极性",
+      "临时接线",
+      "保险丝",
+      "集中充电",
+      "停用"
+    ],
+    "negative_keywords": [
+      "快充协议",
+      "电源改装"
+    ],
+    "ranking_role": null,
+    "guide_type": null,
+    "primary_domain": null,
+    "primary_intent": null,
+    "top1_aliases": []
   }
 ]
