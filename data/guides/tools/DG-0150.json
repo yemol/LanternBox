@@ -70,7 +70,13 @@
   "related_wiki": [
     "repair-tool-borrow-return-log-001",
     "repair-tool-id-handover-log-001",
-    "repair-wear-tool-life-log-001"
+    "repair-wear-tool-life-log-001",
+    "repair-knife-saw-use-log-001",
+    "repair-pre-task-tool-count-001",
+    "repair-post-task-tool-count-001",
+    "repair-lost-tool-site-recheck-001",
+    "repair-frequent-tool-quick-access-zone-001",
+    "repair-tool-zone-low-consumable-restock-log-001"
   ],
   "risk_level": "caution"
 }

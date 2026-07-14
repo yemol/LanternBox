@@ -42601,5 +42601,218 @@
     "primary_domain": null,
     "primary_intent": null,
     "top1_aliases": []
+  },
+  {
+    "id": "DG-0836",
+    "title": "低光维修停止线",
+    "category": "工具维修与替代制作",
+    "category_original": "维修工具",
+    "risk_level": "high",
+    "domains": [
+      "tools",
+      "repair",
+      "security"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "resource_exposure"
+    ],
+    "objects": [
+      "tools",
+      "lighting"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "低光维修停止线",
+      "照明不足",
+      "停止线",
+      "刀口",
+      "锯线",
+      "钻孔点",
+      "工具维修"
+    ],
+    "negative_keywords": [
+      "夜间路线",
+      "低亮通信",
+      "固定开机"
+    ],
+    "ranking_role": null,
+    "guide_type": null,
+    "primary_domain": null,
+    "primary_intent": null,
+    "top1_aliases": []
+  },
+  {
+    "id": "DG-0837",
+    "title": "危险工具临时隔离",
+    "category": "工具维修与替代制作",
+    "category_original": "维修工具",
+    "risk_level": "high",
+    "domains": [
+      "tools",
+      "repair",
+      "security"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "inventory_change"
+    ],
+    "objects": [
+      "tools"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "危险工具临时隔离",
+      "危险工具",
+      "隔离",
+      "禁用标签",
+      "刀具",
+      "锯",
+      "手钻"
+    ],
+    "negative_keywords": [
+      "外部借用",
+      "在线购买"
+    ],
+    "ranking_role": null,
+    "guide_type": null,
+    "primary_domain": null,
+    "primary_intent": null,
+    "top1_aliases": []
+  },
+  {
+    "id": "DG-0838",
+    "title": "儿童远离工具区",
+    "category": "工具维修与替代制作",
+    "category_original": "维修工具",
+    "risk_level": "high",
+    "domains": [
+      "tools",
+      "repair",
+      "security",
+      "organization"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "resource_exposure"
+    ],
+    "objects": [
+      "tools",
+      "children"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "儿童远离工具区",
+      "儿童",
+      "工具区",
+      "边界",
+      "看护人",
+      "清场"
+    ],
+    "negative_keywords": [
+      "儿童发热",
+      "儿童脱水"
+    ],
+    "ranking_role": null,
+    "guide_type": null,
+    "primary_domain": null,
+    "primary_intent": null,
+    "top1_aliases": []
+  },
+  {
+    "id": "DG-0839",
+    "title": "刀锯作业前清场",
+    "category": "工具维修与替代制作",
+    "category_original": "维修工具",
+    "risk_level": "high",
+    "domains": [
+      "tools",
+      "repair",
+      "security"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "structural_risk"
+    ],
+    "objects": [
+      "tools",
+      "building"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "刀锯作业前清场",
+      "刀具",
+      "锯",
+      "清场",
+      "切割线",
+      "落料区"
+    ],
+    "negative_keywords": [
+      "路线清场",
+      "人群疏散"
+    ],
+    "ranking_role": null,
+    "guide_type": null,
+    "primary_domain": null,
+    "primary_intent": null,
+    "top1_aliases": []
+  },
+  {
+    "id": "DG-0840",
+    "title": "工具破损后禁用标签",
+    "category": "工具维修与替代制作",
+    "category_original": "维修工具",
+    "risk_level": "high",
+    "domains": [
+      "tools",
+      "repair",
+      "security",
+      "records"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "inventory_change"
+    ],
+    "objects": [
+      "tools"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "工具破损后禁用标签",
+      "禁用标签",
+      "破损工具",
+      "待修",
+      "隔离",
+      "工具记录"
+    ],
+    "negative_keywords": [
+      "药品禁用",
+      "食物变质"
+    ],
+    "ranking_role": null,
+    "guide_type": null,
+    "primary_domain": null,
+    "primary_intent": null,
+    "top1_aliases": []
   }
 ]

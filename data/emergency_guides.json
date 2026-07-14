@@ -12802,7 +12802,13 @@
     "related_wiki": [
       "repair-tool-borrow-return-log-001",
       "repair-tool-id-handover-log-001",
-      "repair-wear-tool-life-log-001"
+      "repair-wear-tool-life-log-001",
+      "repair-knife-saw-use-log-001",
+      "repair-pre-task-tool-count-001",
+      "repair-post-task-tool-count-001",
+      "repair-lost-tool-site-recheck-001",
+      "repair-frequent-tool-quick-access-zone-001",
+      "repair-tool-zone-low-consumable-restock-log-001"
     ],
     "risk_level": "caution"
   },
@@ -68859,5 +68865,386 @@
       "repair-fabric-tape-tear-reinforcement-001"
     ],
     "risk_level": "caution"
+  },
+  {
+    "id": "DG-0836",
+    "title": "低光维修停止线",
+    "category": "工具维修与替代制作",
+    "priority": "P0",
+    "scenario": "维修时照明变暗，已经看不清刀口、锯线、钻孔点、电线颜色或裂缝边缘。",
+    "goal": "在低光条件下及时停止切割、钻孔和通电维修，把任务降级为清点、分类和贴标签。",
+    "tools": [
+      "手电",
+      "备用灯",
+      "停止标签",
+      "记录纸",
+      "浅色布"
+    ],
+    "steps": [
+      "先让正在切割、钻孔、剥线和通电维修的人停手，工具放到桌面内侧或收回刀套。",
+      "检查能否看清刀口、锯线、钻孔点、裂缝边缘、电线颜色和手指位置。",
+      "看不清任一关键点时，贴低光停止标签，不继续做会产生锋利边、孔洞、火花或承重变化的动作。",
+      "把任务降级为清点工具、分类材料、贴禁用标签、搬移无锋利边材料和记录待复查事项。",
+      "照明恢复后由负责人复查工具、材料和未完成步骤，再决定是否继续。"
+    ],
+    "check": [
+      "关键线条和边缘能被持续看清，而不是偶尔照到。",
+      "刀具、锯、手钻和电线已经放到不会被误碰的位置。",
+      "低光暂停事项有记录和复查人。"
+    ],
+    "common_mistakes": [
+      "用手机屏幕余光继续切割。",
+      "只让拿工具的人看见，旁人和落料区仍在暗处。",
+      "照明闪烁时继续钻孔或剥线。"
+    ],
+    "fallback": [
+      "没有足够照明时，只做无锋利边材料搬移、工具点数、标签更新和纸面计划。",
+      "只有一盏灯时，优先照亮地面通道和工具收纳点，不做切割和钻孔。"
+    ],
+    "stop_or_escalate": [
+      "看不清刀口、锯线、钻孔点、电线颜色、裂缝边缘或手指位置时，立即停止高风险维修。",
+      "出现疲劳、争执、儿童靠近或照明闪烁时，不恢复切割、钻孔和通电维修。"
+    ],
+    "notes": "记录停止时间、照明问题、未完成工具、负责人和复查时间。",
+    "category_original": "维修工具",
+    "domains": [
+      "tools",
+      "repair",
+      "security"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "resource_exposure"
+    ],
+    "objects": [
+      "tools",
+      "lighting"
+    ],
+    "keywords": [
+      "低光维修停止线",
+      "照明不足",
+      "停止线",
+      "刀口",
+      "锯线",
+      "钻孔点",
+      "工具维修"
+    ],
+    "negative_keywords": [
+      "夜间路线",
+      "低亮通信",
+      "固定开机"
+    ],
+    "related_wiki": [
+      "repair-low-light-stop-line-001",
+      "repair-low-light-repair-downgrade-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0837",
+    "title": "危险工具临时隔离",
+    "category": "工具维修与替代制作",
+    "priority": "P0",
+    "scenario": "刀具、锯、手钻、锋利金属片或破损工具暂时无人使用，旁边有人通行或有儿童靠近。",
+    "goal": "把危险工具从可误拿、可踩到、可碰落的位置移出，贴清状态，防止割伤、刺伤和误用。",
+    "tools": [
+      "隔离盒",
+      "布条",
+      "红色标签",
+      "绳带",
+      "记录纸"
+    ],
+    "steps": [
+      "先停止当前传递和借用，把刀具合刃、锯齿朝内、手钻断开动力或卸下钻头。",
+      "把危险工具放入隔离盒或高处内侧，不放在地面、椅面边缘和通道上。",
+      "按可用、待修、禁用三类贴标签，破损和不明状态工具不得回到常用区。",
+      "划出一臂距离的临时边界，非操作人员不得伸手拿取。",
+      "记录工具编号、隔离原因、处理人和复查时间。"
+    ],
+    "check": [
+      "刀口、锯齿、钻头和尖锐边不朝向通道。",
+      "危险工具不能被儿童或路过人员直接摸到。",
+      "标签能说明可用、待修或禁用状态。"
+    ],
+    "common_mistakes": [
+      "把刀和锯临时放在桌沿。",
+      "破损工具只口头提醒，没有标签和隔离。",
+      "隔离盒里混放可用和禁用工具。"
+    ],
+    "fallback": [
+      "没有盒子时，用厚布包住锋利端并用绳带捆紧，再放到指定角落。",
+      "缺标签时，用纸条写状态绑在握柄上，不靠记忆区分。"
+    ],
+    "stop_or_escalate": [
+      "危险工具去向不明、禁用标签脱落、儿童进入边界或有人受伤时，停止维修并清点全场工具。",
+      "无法确认工具状态时，按禁用处理，不借出、不继续用。"
+    ],
+    "notes": "记录隔离工具编号、状态、损坏位置、隔离时间、责任人和解除隔离条件。",
+    "category_original": "维修工具",
+    "domains": [
+      "tools",
+      "repair",
+      "security"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "inventory_change"
+    ],
+    "objects": [
+      "tools"
+    ],
+    "keywords": [
+      "危险工具临时隔离",
+      "危险工具",
+      "隔离",
+      "禁用标签",
+      "刀具",
+      "锯",
+      "手钻"
+    ],
+    "negative_keywords": [
+      "外部借用",
+      "在线购买"
+    ],
+    "related_wiki": [
+      "repair-dangerous-tool-temporary-isolation-001",
+      "repair-dangerous-tool-borrow-permission-001",
+      "repair-sharp-blunt-tool-zone-storage-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0838",
+    "title": "儿童远离工具区",
+    "category": "工具维修与替代制作",
+    "priority": "P0",
+    "scenario": "住所或临时营地里正在维修、拆解或清点工具，儿童、老人或非操作人员可能靠近工具半径。",
+    "goal": "用可见边界和责任人把儿童与刀具、锯、钻头、钉子和碎片隔开。",
+    "tools": [
+      "绳带",
+      "纸卡",
+      "椅子",
+      "箱子",
+      "标记笔",
+      "记录纸"
+    ],
+    "steps": [
+      "先指定一名看护或边界提醒人，操作人员不能同时负责看儿童。",
+      "用绳带、椅子或箱子划出工具半径，边界外也要避开落料方向。",
+      "把刀具、锯、手钻、钉子和碎片放在儿童伸手不到的位置。",
+      "儿童进入边界、伸手拿工具或追逐经过时，立即停手并收起危险工具。",
+      "维修结束后清点地面碎片、钉子、刀片和工具数量，再解除边界。"
+    ],
+    "check": [
+      "儿童不能跨过边界直接碰到工具或材料。",
+      "看护人清楚谁在维修、哪里不能靠近、何时解除。",
+      "地面没有遗留钉子、刀片、尖木屑和线缆。"
+    ],
+    "common_mistakes": [
+      "只口头说不要靠近，没有可见边界。",
+      "让拿刀具的人同时照看儿童。",
+      "维修结束后没查地面碎片。"
+    ],
+    "fallback": [
+      "没有绳带时，用椅子、箱子、浅色布和纸卡做边界。",
+      "缺看护人时，暂停刀锯和手钻任务，只做工具清点和材料分类。"
+    ],
+    "stop_or_escalate": [
+      "儿童进入工具半径、看护人离开、工具数量对不上或地面有锐器未清除时，不继续维修。",
+      "照明不足、人员拥挤或边界无法维持时，停止危险工具作业。"
+    ],
+    "notes": "记录边界位置、看护人、维修负责人、工具清点结果和解除边界时间。",
+    "category_original": "维修工具",
+    "domains": [
+      "tools",
+      "repair",
+      "security",
+      "organization"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "resource_exposure"
+    ],
+    "objects": [
+      "tools",
+      "children"
+    ],
+    "keywords": [
+      "儿童远离工具区",
+      "儿童",
+      "工具区",
+      "边界",
+      "看护人",
+      "清场"
+    ],
+    "negative_keywords": [
+      "儿童发热",
+      "儿童脱水"
+    ],
+    "related_wiki": [
+      "repair-children-away-tool-zone-001",
+      "repair-child-nonoperator-safety-card-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0839",
+    "title": "刀锯作业前清场",
+    "category": "工具维修与替代制作",
+    "priority": "P0",
+    "scenario": "准备使用刀、锯、剪刀或替代刀片处理木板、绳带、塑料和布料，周围有人、杂物或落料方向不清。",
+    "goal": "在走刀、锯线和落料区前清出安全空间，避免割伤、绊倒和材料砸落。",
+    "tools": [
+      "标记笔",
+      "绳带",
+      "纸卡",
+      "废料盒",
+      "垫板"
+    ],
+    "steps": [
+      "标出刀口方向、锯线、落料区和手的位置，先让旁人离开这些方向。",
+      "清走地面线缆、钉子、碎片、水迹和会滚动的小件。",
+      "把材料放在垫板或支撑上，不能让手、腿或旁人站在切割线前方。",
+      "确认废料盒和工具回收点在手边，切下来的尖角立即收起。",
+      "出现旁人进入、材料滑动、照明不足或手必须靠近切线时停手。"
+    ],
+    "check": [
+      "切割线前方和落料区无人。",
+      "材料稳定，地面无碎片、钉子、线缆和水迹。",
+      "刀具和锯具使用后有固定回收点。"
+    ],
+    "common_mistakes": [
+      "边聊天边切割，旁人站在刀口前方。",
+      "切下尖角和刀片随手放在地上。",
+      "用膝盖、脚或手掌当支撑。"
+    ],
+    "fallback": [
+      "空间不足时改成短料加工、分段处理或暂停切割。",
+      "没有废料盒时，用纸袋、罐子或布包临时收集尖角和刀片。"
+    ],
+    "stop_or_escalate": [
+      "旁人无法离开切割方向、地面有绊倒物、材料无法固定或光线不足时，停止刀锯作业。",
+      "出现刀片崩口、锯齿脱落、材料弹跳或人员被划伤时，收起工具并复查现场。"
+    ],
+    "notes": "记录作业材料、清场负责人、异常碎片、刀锯状态和复查时间。",
+    "category_original": "维修工具",
+    "domains": [
+      "tools",
+      "repair",
+      "security"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "structural_risk"
+    ],
+    "objects": [
+      "tools",
+      "building"
+    ],
+    "keywords": [
+      "刀锯作业前清场",
+      "刀具",
+      "锯",
+      "清场",
+      "切割线",
+      "落料区"
+    ],
+    "negative_keywords": [
+      "路线清场",
+      "人群疏散"
+    ],
+    "related_wiki": [
+      "repair-knife-saw-clear-zone-001",
+      "repair-bystander-position-boundary-001",
+      "repair-floor-clutter-trip-check-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0840",
+    "title": "工具破损后禁用标签",
+    "category": "工具维修与替代制作",
+    "priority": "P0",
+    "scenario": "工具出现裂纹、松动、缺口、异响、弯曲、发热、烧焦或不明损坏，可能被别人继续拿去用。",
+    "goal": "把破损工具立即从可用区移出，用禁用标签和记录阻止误用。",
+    "tools": [
+      "红色标签",
+      "绳带",
+      "隔离盒",
+      "记录纸",
+      "标记笔"
+    ],
+    "steps": [
+      "发现破损后先停用，不再做第二次加力测试。",
+      "在工具握柄或收纳袋上写禁用原因，例如裂纹、缺口、松动、异响或发热。",
+      "把工具放入待修或报废区，不放回常用工具箱。",
+      "记录工具编号、损坏位置、发现人、最后使用任务和复查时间。",
+      "只有复查人确认风险消除后，才允许去掉禁用标签。"
+    ],
+    "check": [
+      "标签能从取用方向看到，且不会在搬动时脱落。",
+      "常用区没有混入待修、禁用和状态不明工具。",
+      "记录中能追到损坏位置和责任复查人。"
+    ],
+    "common_mistakes": [
+      "把破损工具口头说一下又放回箱子。",
+      "标签只写坏了，没有写具体损坏位置。",
+      "为了赶工继续使用有裂纹或异响的工具。"
+    ],
+    "fallback": [
+      "缺红色标签时，用纸条加绳带绑在握柄上，并把工具放入单独容器。",
+      "缺负责人时，按禁用处理，不做修复尝试。"
+    ],
+    "stop_or_escalate": [
+      "刀片裂纹、锯齿脱落、手钻夹头松动、电线发热、钳口开裂或工具发出异响时，立即禁用。",
+      "禁用标签脱落、工具去向不明或有人继续借用时，暂停相关维修并重新清点。"
+    ],
+    "notes": "记录工具编号、禁用原因、隔离位置、发现人、复查人和解除禁用条件。",
+    "category_original": "维修工具",
+    "domains": [
+      "tools",
+      "repair",
+      "security",
+      "records"
+    ],
+    "intents": [
+      "tools_security_repair"
+    ],
+    "situations": [
+      "temporary_repair",
+      "inventory_change"
+    ],
+    "objects": [
+      "tools"
+    ],
+    "keywords": [
+      "工具破损后禁用标签",
+      "禁用标签",
+      "破损工具",
+      "待修",
+      "隔离",
+      "工具记录"
+    ],
+    "negative_keywords": [
+      "药品禁用",
+      "食物变质"
+    ],
+    "related_wiki": [
+      "repair-damaged-tool-disable-tag-001",
+      "repair-damaged-tool-report-isolation-001"
+    ],
+    "risk_level": "high"
   }
 ]

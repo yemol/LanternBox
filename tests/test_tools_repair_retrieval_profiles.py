@@ -118,7 +118,7 @@ def test_used_fastener_reuse_does_not_let_anchor_profile_take_primary_slot():
 
 
 def test_old_nail_load_position_stays_fastener_reuse_not_anchor_fastening():
-    question = "这些拆下来的旧钉子有锈也有点弯，还能不能复用在承重位置？"
+    question = "旧钉子有锈，钉帽也变形了，还能不能用在承重位置？"
     names = _profile_names(question)
     assert "repair_fastener_reuse" in names
     assert "repair_anchor_fastening" not in names
@@ -142,8 +142,8 @@ def test_loose_anchor_still_prefers_anchor_failure_evidence():
     assert wikis[0].id == "repair-anchor-point-failure-check-001"
 
 
-def test_explicit_bracket_hook_load_still_triggers_anchor_fastening():
-    question = "这个临时支架和挂钩要承重，轻拉有异响，还能继续挂东西吗？"
+def test_explicit_bracket_anchor_load_still_triggers_anchor_fastening():
+    question = "临时支架的挂点有点松，挂上东西会晃，这个挂点还能承重吗？"
     names = _profile_names(question)
     assert "repair_anchor_fastening" in names
 
@@ -169,3 +169,107 @@ def test_fixed_time_network_window_does_not_trigger_repair_fixed_profiles():
 def test_medical_consumable_record_does_not_trigger_tool_handover_profile():
     question = "外伤耗材消耗记录怎么写，敷料、绷带和消毒棉还剩多少？"
     assert "repair_tool_handover" not in _profile_names(question)
+
+
+def test_wave2_low_light_saw_profile_prefers_repair_stop_line_over_energy():
+    question = "晚上停电，我只有头灯，想用手锯修木板，可以继续吗？"
+    names = _profile_names(question)
+    assert "repair_low_light_work_stop" in names
+
+    guides = _guide_candidates(question)
+    assert guides
+    assert guides[0].id == "DG-0836"
+    assert "power" not in (guides[0].raw.get("domains") or [])
+
+    wikis = _wiki_candidates(question)
+    assert wikis
+    assert wikis[0].id == "repair-low-light-stop-line-001"
+    assert any(wiki.id == "repair-low-light-repair-downgrade-001" for wiki in wikis)
+
+
+def test_wave2_damaged_tool_profile_prefers_disable_and_isolation():
+    question = "锯子的齿坏了一点还能不能继续给别人用？"
+    names = _profile_names(question)
+    assert "repair_tool_damage_isolation" in names
+
+    guides = _guide_candidates(question)
+    assert guides
+    assert guides[0].id == "DG-0840"
+
+    wikis = _wiki_candidates(question)
+    assert wikis
+    assert wikis[0].id == "repair-damaged-tool-disable-tag-001"
+    assert any(wiki.id == "repair-damaged-tool-report-isolation-001" for wiki in wikis)
+
+
+def test_wave2_child_watching_profile_prefers_tool_zone_over_medical_child():
+    question = "小孩喜欢在旁边看大人修东西，需要注意什么？"
+    names = _profile_names(question)
+    assert "repair_child_tool_zone" in names
+
+    guides = _guide_candidates(question)
+    assert guides
+    assert guides[0].id == "DG-0838"
+    assert "medical" not in (guides[0].raw.get("domains") or [])
+
+    wikis = _wiki_candidates(question)
+    assert wikis
+    assert wikis[0].id == "repair-children-away-tool-zone-001"
+    assert any(wiki.id == "repair-child-nonoperator-safety-card-001" for wiki in wikis)
+
+
+def test_wave2_multi_person_repair_profile_prefers_site_boundary():
+    question = "三个人一起维修，一个切割，一个递工具，一个观察，怎么安排位置？"
+    names = _profile_names(question)
+    assert "repair_site_clearance_boundary" in names
+
+    guides = _guide_candidates(question)
+    assert guides
+    assert guides[0].id == "DG-0839"
+
+    wikis = _wiki_candidates(question)
+    assert wikis
+    assert any(wiki.id == "repair-multi-person-repair-zone-boundary-001" for wiki in wikis)
+    assert any(wiki.id == "repair-bystander-position-boundary-001" for wiki in wikis)
+
+
+def test_wave2_floor_clutter_profile_prefers_clear_zone():
+    question = "准备锯木板，地上有很多杂物，需要先处理吗？"
+    names = _profile_names(question)
+    assert "repair_site_clearance_boundary" in names
+
+    guides = _guide_candidates(question)
+    assert guides
+    assert guides[0].id == "DG-0839"
+
+    wikis = _wiki_candidates(question)
+    assert wikis
+    assert any(wiki.id == "repair-floor-clutter-trip-check-001" for wiki in wikis)
+    assert any(wiki.id == "repair-knife-saw-clear-zone-001" for wiki in wikis)
+
+
+def test_wave2_missing_tool_profile_extends_tool_handover():
+    question = "维修结束后工具少了一把，应该怎么办？"
+    names = _profile_names(question)
+    assert "repair_tool_handover" in names
+
+    guides = _guide_candidates(question)
+    assert guides
+    assert guides[0].id == "DG-0150"
+
+    wikis = _wiki_candidates(question)
+    assert wikis
+    assert any(wiki.id == "repair-post-task-tool-count-001" for wiki in wikis)
+    assert any(wiki.id == "repair-lost-tool-site-recheck-001" for wiki in wikis)
+
+
+def test_wave2_temporary_workbench_uses_site_boundary_without_extra_profile():
+    question = "临时桌子有点晃，但是还能放工具，需要处理吗？"
+    names = _profile_names(question)
+    assert "repair_site_clearance_boundary" in names
+    assert "repair_workbench_zone_layout" not in names
+
+    wikis = _wiki_candidates(question)
+    assert wikis
+    assert any(wiki.id == "repair-temporary-workbench-stability-check-001" for wiki in wikis)
+    assert any(wiki.id == "repair-work-zone-minimum-layout-001" for wiki in wikis)

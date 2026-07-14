@@ -1,0 +1,4786 @@
+{
+  "generated_at": "2026-07-14T05:57:27.502336+00:00",
+  "cases": [
+    {
+      "id": "wave2_low_light_headlamp_saw",
+      "question": "晚上停电，我只有头灯，想用手锯修木板，可以继续吗？",
+      "expected_guides": [
+        "DG-0836"
+      ],
+      "expected_wiki": [
+        "repair-low-light-stop-line-001",
+        "repair-low-light-repair-downgrade-001"
+      ],
+      "focus_terms": [
+        "低光",
+        "停止",
+        "锯线",
+        "降级",
+        "复查"
+      ],
+      "risk": "high",
+      "profiles": [
+        "repair_low_light_work_stop",
+        "repair_site_clearance_boundary"
+      ],
+      "domains": [
+        "repair",
+        "security",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0621",
+          "title": "门窗松动低噪加固",
+          "risk_level": "caution",
+          "domains": [
+            "repair"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-low-light-stop-line-001",
+          "title": "低光维修停止线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-low-light-repair-downgrade-001",
+          "title": "维修时照明不足的降级方案",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-bag-repair-001",
+          "title": "背包肩带和鞋底破损的承重风险",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线"
+        },
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "id": "DG-0621",
+          "title": "门窗松动低噪加固"
+        },
+        {
+          "id": "DG-0030",
+          "title": "浑浊水处理：沉淀、过滤、煮沸"
+        },
+        {
+          "id": "DG-0151",
+          "title": "胶带和扎带临时固定"
+        },
+        {
+          "id": "DG-0243",
+          "title": "可疑植物留样"
+        },
+        {
+          "id": "DG-0308",
+          "title": "简易保温箱"
+        },
+        {
+          "id": "DG-0323",
+          "title": "护目和面部防护替代"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-low-light-stop-line-001",
+          "title": "低光维修停止线"
+        },
+        {
+          "slug": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界"
+        },
+        {
+          "slug": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场"
+        },
+        {
+          "slug": "repair-low-light-repair-downgrade-001",
+          "title": "维修时照明不足的降级方案"
+        },
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置"
+        },
+        {
+          "slug": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-bag-repair-001",
+        "repair-bag-repair-002",
+        "repair-bystander-position-boundary-001",
+        "repair-container-001",
+        "repair-door-window-001",
+        "repair-door-window-002",
+        "repair-drinking-water-001",
+        "repair-fastener-001",
+        "repair-floor-clutter-trip-check-001",
+        "repair-footwear-repair-001",
+        "repair-knife-saw-clear-zone-001",
+        "repair-knot-001",
+        "repair-lighting-001",
+        "repair-load-limit-001",
+        "repair-low-light-repair-downgrade-001",
+        "repair-low-light-stop-line-001",
+        "repair-plastic-sheet-001",
+        "repair-power-outage-001",
+        "repair-repair-001",
+        "repair-repair-knowledge-001",
+        "repair-salvage-001",
+        "repair-sharp-metal-001",
+        "repair-tape-001",
+        "repair-tool-maintenance-001",
+        "repair-wood-support-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0030",
+          "title": "浑浊水处理：沉淀、过滤、煮沸",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0151",
+          "title": "胶带和扎带临时固定",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0243",
+          "title": "可疑植物留样",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0308",
+          "title": "简易保温箱",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0323",
+          "title": "护目和面部防护替代",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_low_light_small_cut",
+      "question": "光线很暗但是只是切一点点，会不会没关系？",
+      "expected_guides": [
+        "DG-0836"
+      ],
+      "expected_wiki": [
+        "repair-low-light-stop-line-001",
+        "repair-low-light-repair-downgrade-001"
+      ],
+      "focus_terms": [
+        "看不清",
+        "停止",
+        "切割",
+        "降级",
+        "标签"
+      ],
+      "risk": "high",
+      "profiles": [],
+      "domains": [
+        "external_contact",
+        "power",
+        "security"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断",
+          "risk_level": "high",
+          "domains": [
+            "power",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0714",
+          "title": "管理多次接触对象",
+          "risk_level": "caution",
+          "domains": [
+            "external_contact"
+          ]
+        },
+        {
+          "id": "DG-0709",
+          "title": "接触后风险复盘",
+          "risk_level": "caution",
+          "domains": [
+            "external_contact"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "energy-basic-electrical-safety-index-001",
+          "title": "基础电学安全索引",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-water-damaged-electrical-no-power-001",
+          "title": "电器进水后禁止通电",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "safety-safety-knowledge-009",
+          "title": "长期互助关系的信任边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "safety-review-001",
+          "title": "交换后复盘和物资清点",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "safety-safety-knowledge-004",
+          "title": "外部接触后的去污和记录",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断"
+        },
+        {
+          "id": "DG-0714",
+          "title": "管理多次接触对象"
+        },
+        {
+          "id": "DG-0709",
+          "title": "接触后风险复盘"
+        },
+        {
+          "id": "DG-0161",
+          "title": "冲突后修复关系"
+        },
+        {
+          "id": "DG-0428",
+          "title": "外部观察日志"
+        },
+        {
+          "id": "DG-0140",
+          "title": "互助但不合仓原则"
+        },
+        {
+          "id": "DG-0465",
+          "title": "高温缺水观察"
+        },
+        {
+          "id": "DG-0586",
+          "title": "转移避难前一晚：撤离包复核"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "energy-basic-electrical-safety-index-001",
+        "energy-water-damaged-electrical-no-power-001",
+        "safety-review-001",
+        "safety-safety-knowledge-004",
+        "safety-safety-knowledge-009"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0161",
+          "title": "冲突后修复关系",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0428",
+          "title": "外部观察日志",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0140",
+          "title": "互助但不合仓原则",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0465",
+          "title": "高温缺水观察",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0586",
+          "title": "转移避难前一晚：撤离包复核",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": false,
+      "wiki_hit": false,
+      "guide_wiki_precise": false,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "partial",
+      "failure_reasons": [
+        "未命中预期 Guide",
+        "未命中预期 Wiki"
+      ],
+      "root_cause_classification": [
+        "Wiki 不可召回",
+        "query profile 缺失"
+      ]
+    },
+    {
+      "id": "wave2_damaged_saw_to_lend",
+      "question": "锯子的齿坏了一点还能不能继续给别人用？",
+      "expected_guides": [
+        "DG-0840"
+      ],
+      "expected_wiki": [
+        "repair-damaged-tool-disable-tag-001",
+        "repair-damaged-tool-report-isolation-001"
+      ],
+      "focus_terms": [
+        "禁用",
+        "损坏",
+        "隔离",
+        "复查",
+        "标签"
+      ],
+      "risk": "high",
+      "profiles": [
+        "repair_tool_damage_isolation"
+      ],
+      "domains": [
+        "comms",
+        "power",
+        "records",
+        "repair",
+        "security",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0272",
+          "title": "设备外借和维修前清理",
+          "risk_level": "caution",
+          "domains": [
+            "power",
+            "security",
+            "tools",
+            "comms",
+            "records"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-damaged-tool-disable-tag-001",
+          "title": "工具破损后禁用标签",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-damaged-tool-report-isolation-001",
+          "title": "工具损坏上报和隔离",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-dangerous-tool-temporary-isolation-001",
+          "title": "危险工具临时隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-sharp-blunt-tool-zone-storage-001",
+          "title": "锐器和钝器分区存放",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-low-light-repair-downgrade-001",
+          "title": "维修时照明不足的降级方案",
+          "risk_level": "high",
+          "source_reason": "independent_wiki_search"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签"
+        },
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "id": "DG-0272",
+          "title": "设备外借和维修前清理"
+        },
+        {
+          "id": "DG-0047",
+          "title": "罐头检查：鼓包、喷液、锈蚀"
+        },
+        {
+          "id": "DG-0111",
+          "title": "电线和插线板安全检查"
+        },
+        {
+          "id": "DG-0481",
+          "title": "临时隔离解除"
+        },
+        {
+          "id": "DG-0547",
+          "title": "燃气味或疑似泄漏：禁止明火与先撤离"
+        },
+        {
+          "id": "DG-0126",
+          "title": "库存盘点流程"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-damaged-tool-disable-tag-001",
+          "title": "工具破损后禁用标签"
+        },
+        {
+          "slug": "repair-damaged-tool-report-isolation-001",
+          "title": "工具损坏上报和隔离"
+        },
+        {
+          "slug": "repair-dangerous-tool-temporary-isolation-001",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "slug": "repair-low-light-repair-downgrade-001",
+          "title": "维修时照明不足的降级方案"
+        },
+        {
+          "slug": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限"
+        },
+        {
+          "slug": "repair-post-task-tool-count-001",
+          "title": "维修任务结束后工具清点"
+        },
+        {
+          "slug": "repair-new-member-tool-safety-training-log-001",
+          "title": "新成员工具安全培训记录"
+        },
+        {
+          "slug": "repair-tool-zone-daily-inspection-sheet-001",
+          "title": "工具区每日巡检表"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-damaged-tool-disable-tag-001",
+        "repair-damaged-tool-report-isolation-001",
+        "repair-dangerous-tool-borrow-permission-001",
+        "repair-dangerous-tool-temporary-isolation-001",
+        "repair-sharp-blunt-tool-zone-storage-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0047",
+          "title": "罐头检查：鼓包、喷液、锈蚀",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0111",
+          "title": "电线和插线板安全检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0481",
+          "title": "临时隔离解除",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0547",
+          "title": "燃气味或疑似泄漏：禁止明火与先撤离",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0126",
+          "title": "库存盘点流程",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-post-task-tool-count-001",
+          "title": "维修任务结束后工具清点",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-new-member-tool-safety-training-log-001",
+          "title": "新成员工具安全培训记录",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-tool-zone-daily-inspection-sheet-001",
+          "title": "工具区每日巡检表",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_borrowed_tool_found_damaged",
+      "question": "有人借走工具后发现损坏，应该怎么处理？",
+      "expected_guides": [
+        "DG-0837",
+        "DG-0840"
+      ],
+      "expected_wiki": [
+        "repair-dangerous-tool-temporary-isolation-001",
+        "repair-damaged-tool-report-isolation-001"
+      ],
+      "focus_terms": [
+        "隔离",
+        "禁用",
+        "记录",
+        "复查",
+        "借用"
+      ],
+      "risk": "caution",
+      "profiles": [
+        "repair_tool_damage_isolation",
+        "repair_tool_handover"
+      ],
+      "domains": [
+        "records",
+        "repair",
+        "security",
+        "shelter",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0150",
+          "title": "工具借用和归还",
+          "risk_level": "caution",
+          "domains": [
+            "tools",
+            "security",
+            "shelter"
+          ]
+        },
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-damaged-tool-disable-tag-001",
+          "title": "工具破损后禁用标签",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-damaged-tool-report-isolation-001",
+          "title": "工具损坏上报和隔离",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-tool-borrow-return-log-001",
+          "title": "工具借用归还记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-tool-id-handover-log-001",
+          "title": "手工具编号和交接记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-wear-tool-life-log-001",
+          "title": "易损工具寿命记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-knife-saw-use-log-001",
+          "title": "刀具锯具使用登记",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签"
+        },
+        {
+          "id": "DG-0150",
+          "title": "工具借用和归还"
+        },
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "id": "DG-0510",
+          "title": "工具替代优先级"
+        },
+        {
+          "id": "DG-0509",
+          "title": "工具用途说明卡"
+        },
+        {
+          "id": "DG-0838",
+          "title": "儿童远离工具区"
+        },
+        {
+          "id": "DG-0511",
+          "title": "工具维护周期表"
+        },
+        {
+          "id": "DG-0482",
+          "title": "共享工具污染处理"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-damaged-tool-disable-tag-001",
+          "title": "工具破损后禁用标签"
+        },
+        {
+          "slug": "repair-damaged-tool-report-isolation-001",
+          "title": "工具损坏上报和隔离"
+        },
+        {
+          "slug": "repair-dangerous-tool-temporary-isolation-001",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "slug": "repair-post-task-tool-count-001",
+          "title": "维修任务结束后工具清点"
+        },
+        {
+          "slug": "repair-lost-tool-site-recheck-001",
+          "title": "工具遗失后的现场复查"
+        },
+        {
+          "slug": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限"
+        },
+        {
+          "slug": "repair-new-member-tool-safety-training-log-001",
+          "title": "新成员工具安全培训记录"
+        },
+        {
+          "slug": "repair-tool-zone-daily-inspection-sheet-001",
+          "title": "工具区每日巡检表"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-damaged-tool-disable-tag-001",
+        "repair-damaged-tool-report-isolation-001",
+        "repair-dangerous-tool-borrow-permission-001",
+        "repair-dangerous-tool-temporary-isolation-001",
+        "repair-frequent-tool-quick-access-zone-001",
+        "repair-knife-saw-use-log-001",
+        "repair-lost-tool-site-recheck-001",
+        "repair-post-task-tool-count-001",
+        "repair-pre-task-tool-count-001",
+        "repair-sharp-blunt-tool-zone-storage-001",
+        "repair-tool-borrow-return-log-001",
+        "repair-tool-id-handover-log-001",
+        "repair-tool-zone-low-consumable-restock-log-001",
+        "repair-wear-tool-life-log-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0510",
+          "title": "工具替代优先级",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0509",
+          "title": "工具用途说明卡",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0838",
+          "title": "儿童远离工具区",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0511",
+          "title": "工具维护周期表",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0482",
+          "title": "共享工具污染处理",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-dangerous-tool-temporary-isolation-001",
+          "title": "危险工具临时隔离",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-post-task-tool-count-001",
+          "title": "维修任务结束后工具清点",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-lost-tool-site-recheck-001",
+          "title": "工具遗失后的现场复查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-new-member-tool-safety-training-log-001",
+          "title": "新成员工具安全培训记录",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-tool-zone-daily-inspection-sheet-001",
+          "title": "工具区每日巡检表",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_child_watching_repair",
+      "question": "小孩喜欢在旁边看大人修东西，需要注意什么？",
+      "expected_guides": [
+        "DG-0838"
+      ],
+      "expected_wiki": [
+        "repair-children-away-tool-zone-001",
+        "repair-child-nonoperator-safety-card-001"
+      ],
+      "focus_terms": [
+        "儿童",
+        "边界",
+        "看护",
+        "停手",
+        "清点"
+      ],
+      "risk": "high",
+      "profiles": [
+        "repair_child_tool_zone"
+      ],
+      "domains": [
+        "disaster",
+        "evacuation",
+        "medical",
+        "organization",
+        "power",
+        "repair",
+        "security",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0838",
+          "title": "儿童远离工具区",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security",
+            "organization"
+          ]
+        },
+        {
+          "id": "DG-0095",
+          "title": "儿童走失预防：先设计环境",
+          "risk_level": "caution",
+          "domains": [
+            "medical",
+            "power",
+            "security",
+            "disaster",
+            "evacuation"
+          ]
+        },
+        {
+          "id": "DG-0343",
+          "title": "蜡烛使用边界",
+          "risk_level": "caution",
+          "domains": [
+            "power",
+            "security"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-children-away-tool-zone-001",
+          "title": "儿童远离工具区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-child-nonoperator-safety-card-001",
+          "title": "儿童和非操作人员安全提示卡",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置",
+          "risk_level": "caution",
+          "source_reason": "independent_wiki_search"
+        },
+        {
+          "slug": "repair-frequent-tool-quick-access-zone-001",
+          "title": "常用工具快速取用区",
+          "risk_level": "normal",
+          "source_reason": "independent_wiki_search"
+        },
+        {
+          "slug": "repair-tool-zone-daily-inspection-sheet-001",
+          "title": "工具区每日巡检表",
+          "risk_level": "normal",
+          "source_reason": "independent_wiki_search"
+        },
+        {
+          "slug": "repair-repair-zone-incident-review-log-001",
+          "title": "维修区事故复盘记录",
+          "risk_level": "normal",
+          "source_reason": "independent_wiki_search"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0838",
+          "title": "儿童远离工具区"
+        },
+        {
+          "id": "DG-0095",
+          "title": "儿童走失预防：先设计环境"
+        },
+        {
+          "id": "DG-0343",
+          "title": "蜡烛使用边界"
+        },
+        {
+          "id": "DG-0166",
+          "title": "宠物走失预防"
+        },
+        {
+          "id": "DG-0191",
+          "title": "家庭联络卡"
+        },
+        {
+          "id": "DG-0223",
+          "title": "灰烬处理"
+        },
+        {
+          "id": "DG-0409",
+          "title": "工具安全教学"
+        },
+        {
+          "id": "DG-0416",
+          "title": "药箱纸质索引"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-children-away-tool-zone-001",
+          "title": "儿童远离工具区"
+        },
+        {
+          "slug": "repair-child-nonoperator-safety-card-001",
+          "title": "儿童和非操作人员安全提示卡"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置"
+        },
+        {
+          "slug": "repair-frequent-tool-quick-access-zone-001",
+          "title": "常用工具快速取用区"
+        },
+        {
+          "slug": "repair-tool-zone-daily-inspection-sheet-001",
+          "title": "工具区每日巡检表"
+        },
+        {
+          "slug": "repair-repair-zone-incident-review-log-001",
+          "title": "维修区事故复盘记录"
+        },
+        {
+          "slug": "repair-tool-zone-low-consumable-restock-log-001",
+          "title": "工具区低耗材补给记录"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-child-nonoperator-safety-card-001",
+        "repair-children-away-tool-zone-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0166",
+          "title": "宠物走失预防",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0191",
+          "title": "家庭联络卡",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0223",
+          "title": "灰烬处理",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0409",
+          "title": "工具安全教学",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0416",
+          "title": "药箱纸质索引",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-tool-zone-low-consumable-restock-log-001",
+          "title": "工具区低耗材补给记录",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_bystander_handing_tools",
+      "question": "维修时有人站在旁边帮忙递工具，可以吗？",
+      "expected_guides": [
+        "DG-0839"
+      ],
+      "expected_wiki": [
+        "repair-bystander-position-boundary-001",
+        "repair-knife-saw-clear-zone-001"
+      ],
+      "focus_terms": [
+        "旁人",
+        "站位",
+        "边界",
+        "停止",
+        "递工具"
+      ],
+      "risk": "caution",
+      "profiles": [
+        "repair_site_clearance_boundary"
+      ],
+      "domains": [
+        "repair",
+        "security",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存",
+          "risk_level": "caution",
+          "domains": [
+            "repair"
+          ]
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-drinking-water-001",
+          "title": "水桶漏水和饮用水容器降级",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-hand-tool-care-001",
+          "title": "手工具保养",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-metal-corrosion-001",
+          "title": "金属锈蚀",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存"
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线"
+        },
+        {
+          "id": "DG-0373",
+          "title": "工具防锈防潮"
+        },
+        {
+          "id": "DG-0625",
+          "title": "拆解旧物前割伤防护"
+        },
+        {
+          "id": "DG-0838",
+          "title": "儿童远离工具区"
+        },
+        {
+          "id": "DG-0621",
+          "title": "门窗松动低噪加固"
+        },
+        {
+          "id": "DG-0381",
+          "title": "刀具临时磨利与停用"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界"
+        },
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置"
+        },
+        {
+          "slug": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查"
+        },
+        {
+          "slug": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查"
+        },
+        {
+          "slug": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-bystander-position-boundary-001",
+        "repair-drinking-water-001",
+        "repair-floor-clutter-trip-check-001",
+        "repair-hand-tool-care-001",
+        "repair-knife-saw-clear-zone-001",
+        "repair-low-light-repair-downgrade-001",
+        "repair-low-light-stop-line-001",
+        "repair-metal-corrosion-001",
+        "repair-power-outage-001",
+        "repair-tool-clean-rust-prevention-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0373",
+          "title": "工具防锈防潮",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0625",
+          "title": "拆解旧物前割伤防护",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0838",
+          "title": "儿童远离工具区",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0621",
+          "title": "门窗松动低噪加固",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0381",
+          "title": "刀具临时磨利与停用",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_saw_floor_clutter",
+      "question": "准备锯木板，地上有很多杂物，需要先处理吗？",
+      "expected_guides": [
+        "DG-0839"
+      ],
+      "expected_wiki": [
+        "repair-floor-clutter-trip-check-001",
+        "repair-knife-saw-clear-zone-001"
+      ],
+      "focus_terms": [
+        "地面",
+        "杂物",
+        "绊倒",
+        "清场",
+        "停止"
+      ],
+      "risk": "caution",
+      "profiles": [
+        "repair_site_clearance_boundary"
+      ],
+      "domains": [
+        "repair",
+        "security",
+        "shelter",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "security",
+            "repair"
+          ]
+        },
+        {
+          "id": "DG-0304",
+          "title": "木板和木棍再利用",
+          "risk_level": "normal",
+          "domains": [
+            "tools",
+            "security",
+            "shelter"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-saw-cut-support-001",
+          "title": "锯切前固定与支撑",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-temporary-clamp-fixture-001",
+          "title": "简易夹具和临时固定",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-wet-wood-strength-check-001",
+          "title": "木料受潮后强度判断",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑"
+        },
+        {
+          "id": "DG-0304",
+          "title": "木板和木棍再利用"
+        },
+        {
+          "id": "DG-0625",
+          "title": "拆解旧物前割伤防护"
+        },
+        {
+          "id": "DG-0174",
+          "title": "临时厨房位置选择"
+        },
+        {
+          "id": "DG-0030",
+          "title": "浑浊水处理：沉淀、过滤、煮沸"
+        },
+        {
+          "id": "DG-0074",
+          "title": "伤病员撤离方案"
+        },
+        {
+          "id": "DG-0084",
+          "title": "厨房生熟分区"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界"
+        },
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置"
+        },
+        {
+          "slug": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查"
+        },
+        {
+          "slug": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查"
+        },
+        {
+          "slug": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-bystander-position-boundary-001",
+        "repair-floor-clutter-trip-check-001",
+        "repair-knife-saw-clear-zone-001",
+        "repair-saw-cut-support-001",
+        "repair-temporary-clamp-fixture-001",
+        "repair-wet-wood-strength-check-001",
+        "repair-wood-basic-properties-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0625",
+          "title": "拆解旧物前割伤防护",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0174",
+          "title": "临时厨房位置选择",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0030",
+          "title": "浑浊水处理：沉淀、过滤、煮沸",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0074",
+          "title": "伤病员撤离方案",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0084",
+          "title": "厨房生熟分区",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_one_saws_one_holds",
+      "question": "一个人锯，一个人在旁边扶木板安全吗？",
+      "expected_guides": [
+        "DG-0839",
+        "DG-0834"
+      ],
+      "expected_wiki": [
+        "repair-bystander-position-boundary-001",
+        "repair-knife-saw-clear-zone-001",
+        "repair-saw-cut-support-001"
+      ],
+      "focus_terms": [
+        "旁人",
+        "切割线",
+        "落料",
+        "停止",
+        "支撑"
+      ],
+      "risk": "high",
+      "profiles": [
+        "repair_site_clearance_boundary"
+      ],
+      "domains": [
+        "repair",
+        "security",
+        "shelter",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0304",
+          "title": "木板和木棍再利用",
+          "risk_level": "normal",
+          "domains": [
+            "tools",
+            "security",
+            "shelter"
+          ]
+        },
+        {
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "security",
+            "repair"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-wet-wood-strength-check-001",
+          "title": "木料受潮后强度判断",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-wood-basic-properties-001",
+          "title": "木材基础性质",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-saw-cut-support-001",
+          "title": "锯切前固定与支撑",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "id": "DG-0304",
+          "title": "木板和木棍再利用"
+        },
+        {
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑"
+        },
+        {
+          "id": "DG-0635",
+          "title": "外出找水双人返回规则"
+        },
+        {
+          "id": "DG-0535",
+          "title": "厨房最小安全线"
+        },
+        {
+          "id": "DG-0320",
+          "title": "雨衣和防水层维护"
+        },
+        {
+          "id": "DG-0323",
+          "title": "护目和面部防护替代"
+        },
+        {
+          "id": "DG-0416",
+          "title": "药箱纸质索引"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界"
+        },
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置"
+        },
+        {
+          "slug": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查"
+        },
+        {
+          "slug": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查"
+        },
+        {
+          "slug": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-bystander-position-boundary-001",
+        "repair-floor-clutter-trip-check-001",
+        "repair-knife-saw-clear-zone-001",
+        "repair-saw-cut-support-001",
+        "repair-temporary-clamp-fixture-001",
+        "repair-wet-wood-strength-check-001",
+        "repair-wood-basic-properties-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0635",
+          "title": "外出找水双人返回规则",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0535",
+          "title": "厨房最小安全线",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0320",
+          "title": "雨衣和防水层维护",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0323",
+          "title": "护目和面部防护替代",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0416",
+          "title": "药箱纸质索引",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_no_workbench_platform",
+      "question": "没有工作台，临时拿几块木板搭个平台维修可以吗？",
+      "expected_guides": [],
+      "expected_wiki": [
+        "repair-temporary-workbench-stability-check-001",
+        "repair-manual-repair-workbench-setup-001"
+      ],
+      "focus_terms": [
+        "工作台",
+        "晃动",
+        "支撑",
+        "低载",
+        "复查"
+      ],
+      "risk": "caution",
+      "profiles": [
+        "repair_cutting_fixture",
+        "repair_site_clearance_boundary"
+      ],
+      "domains": [
+        "repair",
+        "security",
+        "shelter",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "security",
+            "repair"
+          ]
+        },
+        {
+          "id": "DG-0304",
+          "title": "木板和木棍再利用",
+          "risk_level": "normal",
+          "domains": [
+            "tools",
+            "security",
+            "shelter"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-saw-cut-support-001",
+          "title": "锯切前固定与支撑",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-temporary-clamp-fixture-001",
+          "title": "简易夹具和临时固定",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-wet-wood-strength-check-001",
+          "title": "木料受潮后强度判断",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑"
+        },
+        {
+          "id": "DG-0304",
+          "title": "木板和木棍再利用"
+        },
+        {
+          "id": "DG-0569",
+          "title": "门窗松动：临时加固"
+        },
+        {
+          "id": "DG-0384",
+          "title": "承重结构不乱改"
+        },
+        {
+          "id": "DG-0623",
+          "title": "水管滴漏临时接水降级"
+        },
+        {
+          "id": "DG-0568",
+          "title": "水桶漏水：临时修补与降级用途"
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界"
+        },
+        {
+          "slug": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界"
+        },
+        {
+          "slug": "repair-knife-use-storage-001",
+          "title": "刀具安全使用和收纳"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查"
+        },
+        {
+          "slug": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场"
+        },
+        {
+          "slug": "repair-low-light-stop-line-001",
+          "title": "低光维修停止线"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-bystander-position-boundary-001",
+        "repair-floor-clutter-trip-check-001",
+        "repair-knife-saw-clear-zone-001",
+        "repair-saw-cut-support-001",
+        "repair-temporary-clamp-fixture-001",
+        "repair-wet-wood-strength-check-001",
+        "repair-wood-basic-properties-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0569",
+          "title": "门窗松动：临时加固",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0384",
+          "title": "承重结构不乱改",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0623",
+          "title": "水管滴漏临时接水降级",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0568",
+          "title": "水桶漏水：临时修补与降级用途",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-knife-use-storage-001",
+          "title": "刀具安全使用和收纳",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-low-light-stop-line-001",
+          "title": "低光维修停止线",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": false,
+      "guide_wiki_precise": false,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "partial",
+      "failure_reasons": [
+        "未命中预期 Wiki"
+      ],
+      "root_cause_classification": [
+        "Wiki 不可召回"
+      ]
+    },
+    {
+      "id": "wave2_wobbly_table_tools",
+      "question": "临时桌子有点晃，但是还能放工具，需要处理吗？",
+      "expected_guides": [],
+      "expected_wiki": [
+        "repair-temporary-workbench-stability-check-001",
+        "repair-work-zone-minimum-layout-001"
+      ],
+      "focus_terms": [
+        "晃动",
+        "桌沿",
+        "工具",
+        "停止",
+        "记录"
+      ],
+      "risk": "caution",
+      "profiles": [
+        "repair_site_clearance_boundary"
+      ],
+      "domains": [
+        "repair",
+        "security",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0569",
+          "title": "门窗松动：临时加固",
+          "risk_level": "normal",
+          "domains": [
+            "repair"
+          ]
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存",
+          "risk_level": "caution",
+          "domains": [
+            "repair"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-fixing-and-support-001",
+          "title": "固定与支撑",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-drinking-water-001",
+          "title": "水桶漏水和饮用水容器降级",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-hand-tool-care-001",
+          "title": "手工具保养",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "id": "DG-0569",
+          "title": "门窗松动：临时加固"
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存"
+        },
+        {
+          "id": "DG-0568",
+          "title": "水桶漏水：临时修补与降级用途"
+        },
+        {
+          "id": "DG-0151",
+          "title": "胶带和扎带临时固定"
+        },
+        {
+          "id": "DG-0580",
+          "title": "门窗受损：临时加固与低暴露"
+        },
+        {
+          "id": "DG-0838",
+          "title": "儿童远离工具区"
+        },
+        {
+          "id": "DG-0381",
+          "title": "刀具临时磨利与停用"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界"
+        },
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置"
+        },
+        {
+          "slug": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查"
+        },
+        {
+          "slug": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查"
+        },
+        {
+          "slug": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-bystander-position-boundary-001",
+        "repair-drinking-water-001",
+        "repair-fixing-and-support-001",
+        "repair-floor-clutter-trip-check-001",
+        "repair-hand-tool-care-001",
+        "repair-knife-saw-clear-zone-001",
+        "repair-metal-corrosion-001",
+        "repair-power-outage-001",
+        "repair-tool-clean-rust-prevention-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0568",
+          "title": "水桶漏水：临时修补与降级用途",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0151",
+          "title": "胶带和扎带临时固定",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0580",
+          "title": "门窗受损：临时加固与低暴露",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0838",
+          "title": "儿童远离工具区",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0381",
+          "title": "刀具临时磨利与停用",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": false,
+      "guide_wiki_precise": false,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "partial",
+      "failure_reasons": [
+        "未命中预期 Wiki"
+      ],
+      "root_cause_classification": [
+        "Selector 排序问题"
+      ]
+    },
+    {
+      "id": "wave2_three_person_positions",
+      "question": "三个人一起维修，一个切割，一个递工具，一个观察，怎么安排位置？",
+      "expected_guides": [],
+      "expected_wiki": [
+        "repair-multi-person-repair-zone-boundary-001",
+        "repair-bystander-position-boundary-001"
+      ],
+      "focus_terms": [
+        "分区",
+        "递工具",
+        "旁人",
+        "停止",
+        "负责人"
+      ],
+      "risk": "caution",
+      "profiles": [
+        "repair_site_clearance_boundary"
+      ],
+      "domains": [
+        "repair",
+        "security",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存",
+          "risk_level": "caution",
+          "domains": [
+            "repair"
+          ]
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-drinking-water-001",
+          "title": "水桶漏水和饮用水容器降级",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-hand-tool-care-001",
+          "title": "手工具保养",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-metal-corrosion-001",
+          "title": "金属锈蚀",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存"
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线"
+        },
+        {
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑"
+        },
+        {
+          "id": "DG-0381",
+          "title": "刀具临时磨利与停用"
+        },
+        {
+          "id": "DG-0373",
+          "title": "工具防锈防潮"
+        },
+        {
+          "id": "DG-0621",
+          "title": "门窗松动低噪加固"
+        },
+        {
+          "id": "DG-0838",
+          "title": "儿童远离工具区"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界"
+        },
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置"
+        },
+        {
+          "slug": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查"
+        },
+        {
+          "slug": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查"
+        },
+        {
+          "slug": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-bystander-position-boundary-001",
+        "repair-drinking-water-001",
+        "repair-floor-clutter-trip-check-001",
+        "repair-hand-tool-care-001",
+        "repair-knife-saw-clear-zone-001",
+        "repair-low-light-repair-downgrade-001",
+        "repair-low-light-stop-line-001",
+        "repair-metal-corrosion-001",
+        "repair-power-outage-001",
+        "repair-tool-clean-rust-prevention-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0381",
+          "title": "刀具临时磨利与停用",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0373",
+          "title": "工具防锈防潮",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0621",
+          "title": "门窗松动低噪加固",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0838",
+          "title": "儿童远离工具区",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_people_pass_repair_site",
+      "question": "维修现场有人经过，需要停止吗？",
+      "expected_guides": [
+        "DG-0839"
+      ],
+      "expected_wiki": [
+        "repair-bystander-position-boundary-001",
+        "repair-floor-clutter-trip-check-001"
+      ],
+      "focus_terms": [
+        "旁人",
+        "边界",
+        "通道",
+        "停止",
+        "复查"
+      ],
+      "risk": "caution",
+      "profiles": [
+        "repair_site_clearance_boundary"
+      ],
+      "domains": [
+        "repair",
+        "security",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存",
+          "risk_level": "caution",
+          "domains": [
+            "repair"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-low-light-stop-line-001",
+          "title": "低光维修停止线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-low-light-repair-downgrade-001",
+          "title": "维修时照明不足的降级方案",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-drinking-water-001",
+          "title": "水桶漏水和饮用水容器降级",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线"
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存"
+        },
+        {
+          "id": "DG-0621",
+          "title": "门窗松动低噪加固"
+        },
+        {
+          "id": "DG-0625",
+          "title": "拆解旧物前割伤防护"
+        },
+        {
+          "id": "DG-0381",
+          "title": "刀具临时磨利与停用"
+        },
+        {
+          "id": "DG-0151",
+          "title": "胶带和扎带临时固定"
+        },
+        {
+          "id": "DG-0374",
+          "title": "胶带库存和用途分区"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界"
+        },
+        {
+          "slug": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界"
+        },
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置"
+        },
+        {
+          "slug": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查"
+        },
+        {
+          "slug": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险"
+        },
+        {
+          "slug": "repair-low-light-stop-line-001",
+          "title": "低光维修停止线"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-bystander-position-boundary-001",
+        "repair-drinking-water-001",
+        "repair-floor-clutter-trip-check-001",
+        "repair-hand-tool-care-001",
+        "repair-knife-saw-clear-zone-001",
+        "repair-low-light-repair-downgrade-001",
+        "repair-low-light-stop-line-001",
+        "repair-metal-corrosion-001",
+        "repair-power-outage-001",
+        "repair-tool-clean-rust-prevention-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0621",
+          "title": "门窗松动低噪加固",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0625",
+          "title": "拆解旧物前割伤防护",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0381",
+          "title": "刀具临时磨利与停用",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0151",
+          "title": "胶带和扎带临时固定",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0374",
+          "title": "胶带库存和用途分区",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_missing_tool_after_repair",
+      "question": "维修结束后工具少了一把，应该怎么办？",
+      "expected_guides": [
+        "DG-0150"
+      ],
+      "expected_wiki": [
+        "repair-post-task-tool-count-001",
+        "repair-lost-tool-site-recheck-001"
+      ],
+      "focus_terms": [
+        "清点",
+        "缺失",
+        "复查",
+        "记录",
+        "工具编号"
+      ],
+      "risk": "caution",
+      "profiles": [
+        "repair_tool_handover"
+      ],
+      "domains": [
+        "records",
+        "repair",
+        "security",
+        "shelter",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0150",
+          "title": "工具借用和归还",
+          "risk_level": "caution",
+          "domains": [
+            "tools",
+            "security",
+            "shelter"
+          ]
+        },
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存",
+          "risk_level": "caution",
+          "domains": [
+            "repair"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-tool-borrow-return-log-001",
+          "title": "工具借用归还记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-tool-id-handover-log-001",
+          "title": "手工具编号和交接记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-wear-tool-life-log-001",
+          "title": "易损工具寿命记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-knife-saw-use-log-001",
+          "title": "刀具锯具使用登记",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-pre-task-tool-count-001",
+          "title": "维修任务开始前工具点数",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-post-task-tool-count-001",
+          "title": "维修任务结束后工具清点",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0150",
+          "title": "工具借用和归还"
+        },
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签"
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存"
+        },
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "id": "DG-0838",
+          "title": "儿童远离工具区"
+        },
+        {
+          "id": "DG-0309",
+          "title": "临时小零件盒"
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线"
+        },
+        {
+          "id": "DG-0385",
+          "title": "维修失败止损"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-tool-borrow-return-log-001",
+          "title": "工具借用归还记录"
+        },
+        {
+          "slug": "repair-post-task-tool-count-001",
+          "title": "维修任务结束后工具清点"
+        },
+        {
+          "slug": "repair-lost-tool-site-recheck-001",
+          "title": "工具遗失后的现场复查"
+        },
+        {
+          "slug": "repair-wear-tool-life-log-001",
+          "title": "易损工具寿命记录"
+        },
+        {
+          "slug": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限"
+        },
+        {
+          "slug": "repair-tool-id-handover-log-001",
+          "title": "手工具编号和交接记录"
+        },
+        {
+          "slug": "repair-damaged-tool-disable-tag-001",
+          "title": "工具破损后禁用标签"
+        },
+        {
+          "slug": "repair-new-member-tool-safety-training-log-001",
+          "title": "新成员工具安全培训记录"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-damaged-tool-disable-tag-001",
+        "repair-damaged-tool-report-isolation-001",
+        "repair-drinking-water-001",
+        "repair-frequent-tool-quick-access-zone-001",
+        "repair-hand-tool-care-001",
+        "repair-knife-saw-use-log-001",
+        "repair-lost-tool-site-recheck-001",
+        "repair-metal-corrosion-001",
+        "repair-post-task-tool-count-001",
+        "repair-power-outage-001",
+        "repair-pre-task-tool-count-001",
+        "repair-tool-borrow-return-log-001",
+        "repair-tool-clean-rust-prevention-001",
+        "repair-tool-id-handover-log-001",
+        "repair-tool-zone-low-consumable-restock-log-001",
+        "repair-wear-tool-life-log-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0837",
+          "title": "危险工具临时隔离",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0838",
+          "title": "儿童远离工具区",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0309",
+          "title": "临时小零件盒",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0836",
+          "title": "低光维修停止线",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0385",
+          "title": "维修失败止损",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-lost-tool-site-recheck-001",
+          "title": "工具遗失后的现场复查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-damaged-tool-disable-tag-001",
+          "title": "工具破损后禁用标签",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-new-member-tool-safety-training-log-001",
+          "title": "新成员工具安全培训记录",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_new_member_dangerous_tool",
+      "question": "新成员第一次使用危险工具，需要怎么管理？",
+      "expected_guides": [
+        "DG-0837"
+      ],
+      "expected_wiki": [
+        "repair-dangerous-tool-borrow-permission-001",
+        "repair-new-member-tool-safety-training-log-001"
+      ],
+      "focus_terms": [
+        "权限",
+        "培训",
+        "停止条件",
+        "负责人",
+        "记录"
+      ],
+      "risk": "caution",
+      "profiles": [],
+      "domains": [
+        "records",
+        "repair",
+        "security",
+        "shelter",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0512",
+          "title": "危险工具权限",
+          "risk_level": "caution",
+          "domains": [
+            "tools",
+            "security",
+            "shelter",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0406",
+          "title": "新成员三日教学",
+          "risk_level": "normal",
+          "domains": [
+            "security",
+            "shelter",
+            "records"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-dangerous-tool-temporary-isolation-001",
+          "title": "危险工具临时隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-sharp-blunt-tool-zone-storage-001",
+          "title": "锐器和钝器分区存放",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "id": "DG-0512",
+          "title": "危险工具权限"
+        },
+        {
+          "id": "DG-0406",
+          "title": "新成员三日教学"
+        },
+        {
+          "id": "DG-0286",
+          "title": "新成员接纳流程"
+        },
+        {
+          "id": "DG-0237",
+          "title": "小型家禽隔离新成员"
+        },
+        {
+          "id": "DG-0509",
+          "title": "工具用途说明卡"
+        },
+        {
+          "id": "DG-0689",
+          "title": "疲劳成员停止高风险任务"
+        },
+        {
+          "id": "DG-0552",
+          "title": "停水后第一小时：容器收集和分区"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "repair-dangerous-tool-borrow-permission-001",
+        "repair-dangerous-tool-temporary-isolation-001",
+        "repair-sharp-blunt-tool-zone-storage-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0286",
+          "title": "新成员接纳流程",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0237",
+          "title": "小型家禽隔离新成员",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0509",
+          "title": "工具用途说明卡",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0689",
+          "title": "疲劳成员停止高风险任务",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0552",
+          "title": "停水后第一小时：容器收集和分区",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_mixed_repair_materials",
+      "question": "不同维修材料全部堆在一起，会有什么问题？",
+      "expected_guides": [],
+      "expected_wiki": [
+        "repair-mixed-repair-material-risk-001",
+        "repair-work-zone-minimum-layout-001"
+      ],
+      "focus_terms": [
+        "混放",
+        "污染",
+        "锋利",
+        "隔离",
+        "记录"
+      ],
+      "risk": "caution",
+      "profiles": [
+        "repair_site_clearance_boundary"
+      ],
+      "domains": [
+        "records",
+        "repair",
+        "security",
+        "shelter",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0517",
+          "title": "清洁材料替代",
+          "risk_level": "caution",
+          "domains": [
+            "security",
+            "tools",
+            "shelter",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-low-light-stop-line-001",
+          "title": "低光维修停止线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-low-light-repair-downgrade-001",
+          "title": "维修时照明不足的降级方案",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险",
+          "risk_level": "caution",
+          "source_reason": "independent_wiki_search"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "id": "DG-0517",
+          "title": "清洁材料替代"
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线"
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存"
+        },
+        {
+          "id": "DG-0625",
+          "title": "拆解旧物前割伤防护"
+        },
+        {
+          "id": "DG-0621",
+          "title": "门窗松动低噪加固"
+        },
+        {
+          "id": "DG-0381",
+          "title": "刀具临时磨利与停用"
+        },
+        {
+          "id": "DG-0308",
+          "title": "简易保温箱"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险"
+        },
+        {
+          "slug": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界"
+        },
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置"
+        },
+        {
+          "slug": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查"
+        },
+        {
+          "slug": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-bystander-position-boundary-001",
+        "repair-floor-clutter-trip-check-001",
+        "repair-knife-saw-clear-zone-001",
+        "repair-low-light-repair-downgrade-001",
+        "repair-low-light-stop-line-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0625",
+          "title": "拆解旧物前割伤防护",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0621",
+          "title": "门窗松动低噪加固",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0381",
+          "title": "刀具临时磨利与停用",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0308",
+          "title": "简易保温箱",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": false,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_screws_blades_small_parts",
+      "question": "螺丝、刀片、小零件放一起容易丢，怎么办？",
+      "expected_guides": [
+        "DG-0837",
+        "DG-0150"
+      ],
+      "expected_wiki": [
+        "repair-sharp-blunt-tool-zone-storage-001",
+        "repair-fastener-washer-storage-001",
+        "repair-frequent-tool-quick-access-zone-001"
+      ],
+      "focus_terms": [
+        "分区",
+        "锐器",
+        "编号",
+        "记录",
+        "复查"
+      ],
+      "risk": "caution",
+      "profiles": [],
+      "domains": [
+        "comms",
+        "power",
+        "security",
+        "shelter",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0309",
+          "title": "临时小零件盒",
+          "risk_level": "caution",
+          "domains": [
+            "power",
+            "tools",
+            "security",
+            "shelter"
+          ]
+        },
+        {
+          "id": "DG-0376",
+          "title": "螺丝钉钉子小件库存",
+          "risk_level": "normal",
+          "domains": [
+            "power",
+            "tools",
+            "shelter",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0372",
+          "title": "常用工具每日归位",
+          "risk_level": "caution",
+          "domains": [
+            "power",
+            "tools",
+            "comms",
+            "security",
+            "shelter"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-fastener-washer-storage-001",
+          "title": "螺丝钉垫片分类保存",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-screws-and-nuts-001",
+          "title": "螺丝和螺母",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-screwdriver-camout-protection-001",
+          "title": "螺丝刀打滑与螺丝头保护",
+          "risk_level": "caution",
+          "source_reason": "independent_wiki_search"
+        },
+        {
+          "slug": "repair-blade-dull-chip-check-001",
+          "title": "刀片变钝与崩口判断",
+          "risk_level": "high",
+          "source_reason": "independent_wiki_search"
+        },
+        {
+          "slug": "repair-used-screw-nail-reuse-check-001",
+          "title": "旧螺丝和旧钉子复用检查",
+          "risk_level": "caution",
+          "source_reason": "independent_wiki_search"
+        },
+        {
+          "slug": "repair-fastener-001",
+          "title": "螺丝钉钉子回收和分类",
+          "risk_level": "high",
+          "source_reason": "independent_wiki_search"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0309",
+          "title": "临时小零件盒"
+        },
+        {
+          "id": "DG-0376",
+          "title": "螺丝钉钉子小件库存"
+        },
+        {
+          "id": "DG-0372",
+          "title": "常用工具每日归位"
+        },
+        {
+          "id": "DG-0409",
+          "title": "工具安全教学"
+        },
+        {
+          "id": "DG-0150",
+          "title": "工具借用和归还"
+        },
+        {
+          "id": "DG-0625",
+          "title": "拆解旧物前割伤防护"
+        },
+        {
+          "id": "DG-0347",
+          "title": "工具噪声控制"
+        },
+        {
+          "id": "DG-0154",
+          "title": "刀具和锐器管理"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-screwdriver-camout-protection-001",
+          "title": "螺丝刀打滑与螺丝头保护"
+        },
+        {
+          "slug": "repair-blade-dull-chip-check-001",
+          "title": "刀片变钝与崩口判断"
+        },
+        {
+          "slug": "repair-used-screw-nail-reuse-check-001",
+          "title": "旧螺丝和旧钉子复用检查"
+        },
+        {
+          "slug": "repair-fastener-washer-storage-001",
+          "title": "螺丝钉垫片分类保存"
+        },
+        {
+          "slug": "repair-fastener-001",
+          "title": "螺丝钉钉子回收和分类"
+        },
+        {
+          "slug": "repair-post-task-tool-count-001",
+          "title": "维修任务结束后工具清点"
+        },
+        {
+          "slug": "repair-sharp-blunt-tool-zone-storage-001",
+          "title": "锐器和钝器分区存放"
+        },
+        {
+          "slug": "repair-tool-zone-low-consumable-restock-log-001",
+          "title": "工具区低耗材补给记录"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-fastener-washer-storage-001",
+        "repair-screws-and-nuts-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0409",
+          "title": "工具安全教学",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0150",
+          "title": "工具借用和归还",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0625",
+          "title": "拆解旧物前割伤防护",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0347",
+          "title": "工具噪声控制",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0154",
+          "title": "刀具和锐器管理",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-post-task-tool-count-001",
+          "title": "维修任务结束后工具清点",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-sharp-blunt-tool-zone-storage-001",
+          "title": "锐器和钝器分区存放",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-tool-zone-low-consumable-restock-log-001",
+          "title": "工具区低耗材补给记录",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": false,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "partial",
+      "failure_reasons": [
+        "未命中预期 Guide"
+      ],
+      "root_cause_classification": [
+        "Selector 排序问题"
+      ]
+    },
+    {
+      "id": "wave2_no_light_no_workbench",
+      "question": "没有照明，也没有工作台，现在只能简单处理怎么办？",
+      "expected_guides": [
+        "DG-0836"
+      ],
+      "expected_wiki": [
+        "repair-low-light-repair-downgrade-001",
+        "repair-manual-repair-workbench-setup-001"
+      ],
+      "focus_terms": [
+        "停止",
+        "降级",
+        "清点",
+        "标签",
+        "记录"
+      ],
+      "risk": "high",
+      "profiles": [
+        "repair_cutting_fixture",
+        "repair_low_light_work_stop",
+        "repair_site_clearance_boundary"
+      ],
+      "domains": [
+        "repair",
+        "security",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "security",
+            "repair"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-low-light-stop-line-001",
+          "title": "低光维修停止线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-low-light-repair-downgrade-001",
+          "title": "维修时照明不足的降级方案",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-saw-cut-support-001",
+          "title": "锯切前固定与支撑",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线"
+        },
+        {
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑"
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存"
+        },
+        {
+          "id": "DG-0625",
+          "title": "拆解旧物前割伤防护"
+        },
+        {
+          "id": "DG-0838",
+          "title": "儿童远离工具区"
+        },
+        {
+          "id": "DG-0151",
+          "title": "胶带和扎带临时固定"
+        },
+        {
+          "id": "DG-0308",
+          "title": "简易保温箱"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界"
+        },
+        {
+          "slug": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界"
+        },
+        {
+          "slug": "repair-low-light-stop-line-001",
+          "title": "低光维修停止线"
+        },
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-bystander-position-boundary-001",
+        "repair-floor-clutter-trip-check-001",
+        "repair-knife-saw-clear-zone-001",
+        "repair-low-light-repair-downgrade-001",
+        "repair-low-light-stop-line-001",
+        "repair-saw-cut-support-001",
+        "repair-temporary-clamp-fixture-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0625",
+          "title": "拆解旧物前割伤防护",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0838",
+          "title": "儿童远离工具区",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0151",
+          "title": "胶带和扎带临时固定",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0308",
+          "title": "简易保温箱",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_damaged_tool_temporary_use",
+      "question": "破损工具如果只是临时用一下，会不会有问题？",
+      "expected_guides": [
+        "DG-0840"
+      ],
+      "expected_wiki": [
+        "repair-damaged-tool-disable-tag-001",
+        "repair-damaged-tool-report-isolation-001"
+      ],
+      "focus_terms": [
+        "停用",
+        "禁用",
+        "隔离",
+        "复查",
+        "标签"
+      ],
+      "risk": "high",
+      "profiles": [
+        "repair_tool_damage_isolation"
+      ],
+      "domains": [
+        "power",
+        "records",
+        "repair",
+        "security",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断",
+          "risk_level": "high",
+          "domains": [
+            "power",
+            "security"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-damaged-tool-disable-tag-001",
+          "title": "工具破损后禁用标签",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-damaged-tool-report-isolation-001",
+          "title": "工具损坏上报和隔离",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-dangerous-tool-temporary-isolation-001",
+          "title": "危险工具临时隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-sharp-blunt-tool-zone-storage-001",
+          "title": "锐器和钝器分区存放",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-basic-electrical-safety-index-001",
+          "title": "基础电学安全索引",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签"
+        },
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断"
+        },
+        {
+          "id": "DG-0567",
+          "title": "电线破皮：临时绝缘和停用判断"
+        },
+        {
+          "id": "DG-0149",
+          "title": "基础工具箱配置"
+        },
+        {
+          "id": "DG-0152",
+          "title": "漏水临时处理"
+        },
+        {
+          "id": "DG-0153",
+          "title": "门窗临时加固"
+        },
+        {
+          "id": "DG-0379",
+          "title": "容器裂缝临时封堵"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-damaged-tool-disable-tag-001",
+          "title": "工具破损后禁用标签"
+        },
+        {
+          "slug": "repair-dangerous-tool-temporary-isolation-001",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "slug": "repair-damaged-tool-report-isolation-001",
+          "title": "工具损坏上报和隔离"
+        },
+        {
+          "slug": "repair-low-light-repair-downgrade-001",
+          "title": "维修时照明不足的降级方案"
+        },
+        {
+          "slug": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限"
+        },
+        {
+          "slug": "repair-post-task-tool-count-001",
+          "title": "维修任务结束后工具清点"
+        },
+        {
+          "slug": "repair-new-member-tool-safety-training-log-001",
+          "title": "新成员工具安全培训记录"
+        },
+        {
+          "slug": "repair-tool-zone-daily-inspection-sheet-001",
+          "title": "工具区每日巡检表"
+        }
+      ],
+      "guide_related_wiki": [
+        "energy-basic-electrical-safety-index-001",
+        "energy-water-damaged-electrical-no-power-001",
+        "repair-damaged-tool-disable-tag-001",
+        "repair-damaged-tool-report-isolation-001",
+        "repair-dangerous-tool-borrow-permission-001",
+        "repair-dangerous-tool-temporary-isolation-001",
+        "repair-sharp-blunt-tool-zone-storage-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0567",
+          "title": "电线破皮：临时绝缘和停用判断",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0149",
+          "title": "基础工具箱配置",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0152",
+          "title": "漏水临时处理",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0153",
+          "title": "门窗临时加固",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0379",
+          "title": "容器裂缝临时封堵",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-low-light-repair-downgrade-001",
+          "title": "维修时照明不足的降级方案",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-post-task-tool-count-001",
+          "title": "维修任务结束后工具清点",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-new-member-tool-safety-training-log-001",
+          "title": "新成员工具安全培训记录",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-tool-zone-daily-inspection-sheet-001",
+          "title": "工具区每日巡检表",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_child_playing_nearby",
+      "question": "孩子不碰工具，只是在附近玩，可以吗？",
+      "expected_guides": [
+        "DG-0838"
+      ],
+      "expected_wiki": [
+        "repair-children-away-tool-zone-001",
+        "repair-child-nonoperator-safety-card-001"
+      ],
+      "focus_terms": [
+        "儿童",
+        "工具半径",
+        "边界",
+        "停手",
+        "看护"
+      ],
+      "risk": "high",
+      "profiles": [
+        "repair_child_tool_zone"
+      ],
+      "domains": [
+        "organization",
+        "repair",
+        "security",
+        "shelter",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0838",
+          "title": "儿童远离工具区",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security",
+            "organization"
+          ]
+        },
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0509",
+          "title": "工具用途说明卡",
+          "risk_level": "normal",
+          "domains": [
+            "tools",
+            "security",
+            "shelter"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-children-away-tool-zone-001",
+          "title": "儿童远离工具区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-child-nonoperator-safety-card-001",
+          "title": "儿童和非操作人员安全提示卡",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-dangerous-tool-temporary-isolation-001",
+          "title": "危险工具临时隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-sharp-blunt-tool-zone-storage-001",
+          "title": "锐器和钝器分区存放",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置",
+          "risk_level": "caution",
+          "source_reason": "independent_wiki_search"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0838",
+          "title": "儿童远离工具区"
+        },
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "id": "DG-0509",
+          "title": "工具用途说明卡"
+        },
+        {
+          "id": "DG-0512",
+          "title": "危险工具权限"
+        },
+        {
+          "id": "DG-0409",
+          "title": "工具安全教学"
+        },
+        {
+          "id": "DG-0460",
+          "title": "取水工具专用"
+        },
+        {
+          "id": "DG-0471",
+          "title": "疑似传染症状分区"
+        },
+        {
+          "id": "DG-0397",
+          "title": "离开房间前五项"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-children-away-tool-zone-001",
+          "title": "儿童远离工具区"
+        },
+        {
+          "slug": "repair-child-nonoperator-safety-card-001",
+          "title": "儿童和非操作人员安全提示卡"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置"
+        },
+        {
+          "slug": "repair-frequent-tool-quick-access-zone-001",
+          "title": "常用工具快速取用区"
+        },
+        {
+          "slug": "repair-tool-zone-daily-inspection-sheet-001",
+          "title": "工具区每日巡检表"
+        },
+        {
+          "slug": "repair-repair-zone-incident-review-log-001",
+          "title": "维修区事故复盘记录"
+        },
+        {
+          "slug": "repair-tool-zone-low-consumable-restock-log-001",
+          "title": "工具区低耗材补给记录"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-child-nonoperator-safety-card-001",
+        "repair-children-away-tool-zone-001",
+        "repair-dangerous-tool-borrow-permission-001",
+        "repair-dangerous-tool-temporary-isolation-001",
+        "repair-sharp-blunt-tool-zone-storage-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0512",
+          "title": "危险工具权限",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0409",
+          "title": "工具安全教学",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0460",
+          "title": "取水工具专用",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0471",
+          "title": "疑似传染症状分区",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0397",
+          "title": "离开房间前五项",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-frequent-tool-quick-access-zone-001",
+          "title": "常用工具快速取用区",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-tool-zone-daily-inspection-sheet-001",
+          "title": "工具区每日巡检表",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-repair-zone-incident-review-log-001",
+          "title": "维修区事故复盘记录",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-tool-zone-low-consumable-restock-log-001",
+          "title": "工具区低耗材补给记录",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "wave2_uncertain_tool_urgent_task",
+      "question": "维修过程中发现工具状态不确定，但是任务很急怎么办？",
+      "expected_guides": [
+        "DG-0840",
+        "DG-0837"
+      ],
+      "expected_wiki": [
+        "repair-damaged-tool-disable-tag-001",
+        "repair-dangerous-tool-temporary-isolation-001"
+      ],
+      "focus_terms": [
+        "状态不明",
+        "禁用",
+        "隔离",
+        "停止",
+        "复查"
+      ],
+      "risk": "high",
+      "profiles": [
+        "repair_tool_damage_isolation"
+      ],
+      "domains": [
+        "comms",
+        "power",
+        "records",
+        "repair",
+        "security",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离",
+          "risk_level": "high",
+          "domains": [
+            "tools",
+            "repair",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0272",
+          "title": "设备外借和维修前清理",
+          "risk_level": "caution",
+          "domains": [
+            "power",
+            "security",
+            "tools",
+            "comms",
+            "records"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-damaged-tool-disable-tag-001",
+          "title": "工具破损后禁用标签",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-damaged-tool-report-isolation-001",
+          "title": "工具损坏上报和隔离",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-dangerous-tool-temporary-isolation-001",
+          "title": "危险工具临时隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-sharp-blunt-tool-zone-storage-001",
+          "title": "锐器和钝器分区存放",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-low-light-repair-downgrade-001",
+          "title": "维修时照明不足的降级方案",
+          "risk_level": "high",
+          "source_reason": "independent_wiki_search"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签"
+        },
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "id": "DG-0272",
+          "title": "设备外借和维修前清理"
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线"
+        },
+        {
+          "id": "DG-0512",
+          "title": "危险工具权限"
+        },
+        {
+          "id": "DG-0385",
+          "title": "维修失败止损"
+        },
+        {
+          "id": "DG-0511",
+          "title": "工具维护周期表"
+        },
+        {
+          "id": "DG-0510",
+          "title": "工具替代优先级"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-damaged-tool-disable-tag-001",
+          "title": "工具破损后禁用标签"
+        },
+        {
+          "slug": "repair-dangerous-tool-temporary-isolation-001",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "slug": "repair-damaged-tool-report-isolation-001",
+          "title": "工具损坏上报和隔离"
+        },
+        {
+          "slug": "repair-low-light-repair-downgrade-001",
+          "title": "维修时照明不足的降级方案"
+        },
+        {
+          "slug": "repair-post-task-tool-count-001",
+          "title": "维修任务结束后工具清点"
+        },
+        {
+          "slug": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限"
+        },
+        {
+          "slug": "repair-new-member-tool-safety-training-log-001",
+          "title": "新成员工具安全培训记录"
+        },
+        {
+          "slug": "repair-tool-zone-daily-inspection-sheet-001",
+          "title": "工具区每日巡检表"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-damaged-tool-disable-tag-001",
+        "repair-damaged-tool-report-isolation-001",
+        "repair-dangerous-tool-borrow-permission-001",
+        "repair-dangerous-tool-temporary-isolation-001",
+        "repair-sharp-blunt-tool-zone-storage-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0836",
+          "title": "低光维修停止线",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0512",
+          "title": "危险工具权限",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0385",
+          "title": "维修失败止损",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0511",
+          "title": "工具维护周期表",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0510",
+          "title": "工具替代优先级",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-post-task-tool-count-001",
+          "title": "维修任务结束后工具清点",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-new-member-tool-safety-training-log-001",
+          "title": "新成员工具安全培训记录",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "repair-tool-zone-daily-inspection-sheet-001",
+          "title": "工具区每日巡检表",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "correct_domain_hit": true,
+      "cross_domain_competition": false,
+      "has_stop_condition": true,
+      "has_fallback_or_downgrade": true,
+      "has_record_or_recheck": true,
+      "external_dependencies": [],
+      "kiwix_override": false,
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    }
+  ],
+  "summary": {
+    "total": 20,
+    "pass": 16,
+    "partial": 4,
+    "fail": 0,
+    "guide_hit_rate": "87.5%",
+    "wiki_hit_rate": "85.0%",
+    "guide_wiki_precise_rate": "80.0%",
+    "high_caution_safety_rate": "100.0%",
+    "fallback_rate": "100.0%",
+    "record_rate": "100.0%",
+    "external_violations": 0,
+    "kiwix_overrides": 0,
+    "cross_domain_competitions": 0,
+    "target_met": {
+      "pass_gte_18": false,
+      "partial_lte_2": false,
+      "fail_eq_0": true,
+      "guide_hit_gte_90": false,
+      "wiki_hit_gte_80": true,
+      "safety_eq_100": true,
+      "fallback_eq_100": true,
+      "record_eq_100": true,
+      "external_eq_0": true,
+      "kiwix_eq_0": true
+    }
+  }
+}

@@ -6,8 +6,8 @@
 - 未发现正文完全重复或 title+summary 完全重复。
 
 ## 覆盖范围
-- Markdown wiki 条目：733
-- PocketBase wiki_articles：733
+- Markdown wiki 条目：763
+- PocketBase wiki_articles：763
 - PocketBase wiki_categories：24
 - data/lanternbox.db 表：inventory, journal, sqlite_sequence, task_events, task_reports, terminal_devices, terminal_tasks
 - 说明：`data/lanternbox.db` 不承载 wiki；当前 wiki 数据库为 `pocketbase/pb_data/data.db`。
@@ -28,7 +28,7 @@
 |navigation|22|
 |organization|23|
 |psychology|20|
-|repair|92|
+|repair|122|
 |safety|75|
 |shelter|44|
 |tools|4|
@@ -54,7 +54,7 @@
 |火源 / 保温 / 通风 / 一氧化碳风险|32|
 |种植|22|
 |种植与食物生产|31|
-|维修 / 制作 / 替代 / 拆解再利用|73|
+|维修 / 制作 / 替代 / 拆解再利用|103|
 |能源|40|
 |衣物 / 鞋袜 / 体温防护|20|
 |通讯|32|
@@ -70,7 +70,7 @@
 - 通过：每篇条目均覆盖用途、操作、判断标准、风险提示；中高风险条目均含停止条件或不适用边界；未发现外部依赖或绝对化表达。
 
 ## 文件与数据库一致性
-- 通过：733 个 Markdown slug 与 PocketBase wiki_articles 一一对应，标题、分类、摘要、标签、风险等级、状态、来源和正文均一致。
+- 通过：763 个 Markdown slug 与 PocketBase wiki_articles 一一对应，标题、分类、摘要、标签、风险等级、状态、来源和正文均一致。
 
 ## 重复与范围重叠
 - 通过：未发现 slug 重复、正文完全重复、title+summary 完全重复或同 domain 高相似条目。

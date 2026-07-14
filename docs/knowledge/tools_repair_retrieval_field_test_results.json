@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T17:59:14.325461+00:00",
+  "generated_at": "2026-07-14T02:42:19.771310+00:00",
   "cases": [
     {
       "id": "tools_repair_rope_wear_load",
@@ -84,7 +84,7 @@
           "段磨毛发"
         ],
         "ok": false,
-        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.17', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.17', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
         "stage": "selector"
       },
       "selected_sources": [
@@ -295,7 +295,7 @@
           "有咔咔响"
         ],
         "ok": false,
-        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.17', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.17', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
         "stage": "selector"
       },
       "selected_sources": [
@@ -481,7 +481,7 @@
           "设备"
         ],
         "ok": false,
-        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.17', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.17', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
         "stage": "selector"
       },
       "selected_sources": [
@@ -740,7 +740,7 @@
           "水后会慢"
         ],
         "ok": false,
-        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.17', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.17', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
         "stage": "selector"
       },
       "selected_sources": [
@@ -936,7 +936,7 @@
           "固定"
         ],
         "ok": false,
-        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.17', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.17', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
         "stage": "selector"
       },
       "selected_sources": [
@@ -1114,7 +1114,7 @@
           "纸板时会"
         ],
         "ok": false,
-        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.17', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.17', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
         "stage": "selector"
       },
       "selected_sources": [
@@ -1292,7 +1292,7 @@
           "旧钉子"
         ],
         "ok": false,
-        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.17', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.17', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
         "stage": "selector"
       },
       "selected_sources": [
@@ -1473,7 +1473,7 @@
           "来吊住一"
         ],
         "ok": false,
-        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.17', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.17', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
         "stage": "selector"
       },
       "selected_sources": [
@@ -1647,7 +1647,7 @@
           "表面"
         ],
         "ok": false,
-        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.17', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.17', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
         "stage": "selector"
       },
       "selected_sources": [
@@ -1827,7 +1827,7 @@
           "才发现钳"
         ],
         "ok": false,
-        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.70', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.70', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
+        "error": "Ollama 调用失败：HTTPConnectionPool(host='192.168.71.17', port=11434): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='192.168.71.17', port=11434): Failed to establish a new connection: [Errno 1] Operation not permitted\"))",
         "stage": "selector"
       },
       "selected_sources": [

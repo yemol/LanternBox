@@ -1,0 +1,162 @@
+[
+  {
+    "id": "wave2_low_light_headlamp_saw",
+    "question": "晚上停电，我只有头灯，想用手锯修木板，可以继续吗？",
+    "expected_guides": ["DG-0836"],
+    "expected_wiki": ["repair-low-light-stop-line-001", "repair-low-light-repair-downgrade-001"],
+    "focus_terms": ["低光", "停止", "锯线", "降级", "复查"],
+    "risk": "high"
+  },
+  {
+    "id": "wave2_low_light_small_cut",
+    "question": "光线很暗但是只是切一点点，会不会没关系？",
+    "expected_guides": ["DG-0836"],
+    "expected_wiki": ["repair-low-light-stop-line-001", "repair-low-light-repair-downgrade-001"],
+    "focus_terms": ["看不清", "停止", "切割", "降级", "标签"],
+    "risk": "high"
+  },
+  {
+    "id": "wave2_damaged_saw_to_lend",
+    "question": "锯子的齿坏了一点还能不能继续给别人用？",
+    "expected_guides": ["DG-0840"],
+    "expected_wiki": ["repair-damaged-tool-disable-tag-001", "repair-damaged-tool-report-isolation-001"],
+    "focus_terms": ["禁用", "损坏", "隔离", "复查", "标签"],
+    "risk": "high"
+  },
+  {
+    "id": "wave2_borrowed_tool_found_damaged",
+    "question": "有人借走工具后发现损坏，应该怎么处理？",
+    "expected_guides": ["DG-0837", "DG-0840"],
+    "expected_wiki": ["repair-dangerous-tool-temporary-isolation-001", "repair-damaged-tool-report-isolation-001"],
+    "focus_terms": ["隔离", "禁用", "记录", "复查", "借用"],
+    "risk": "caution"
+  },
+  {
+    "id": "wave2_child_watching_repair",
+    "question": "小孩喜欢在旁边看大人修东西，需要注意什么？",
+    "expected_guides": ["DG-0838"],
+    "expected_wiki": ["repair-children-away-tool-zone-001", "repair-child-nonoperator-safety-card-001"],
+    "focus_terms": ["儿童", "边界", "看护", "停手", "清点"],
+    "risk": "high"
+  },
+  {
+    "id": "wave2_bystander_handing_tools",
+    "question": "维修时有人站在旁边帮忙递工具，可以吗？",
+    "expected_guides": ["DG-0839"],
+    "expected_wiki": ["repair-bystander-position-boundary-001", "repair-knife-saw-clear-zone-001"],
+    "focus_terms": ["旁人", "站位", "边界", "停止", "递工具"],
+    "risk": "caution"
+  },
+  {
+    "id": "wave2_saw_floor_clutter",
+    "question": "准备锯木板，地上有很多杂物，需要先处理吗？",
+    "expected_guides": ["DG-0839"],
+    "expected_wiki": ["repair-floor-clutter-trip-check-001", "repair-knife-saw-clear-zone-001"],
+    "focus_terms": ["地面", "杂物", "绊倒", "清场", "停止"],
+    "risk": "caution"
+  },
+  {
+    "id": "wave2_one_saws_one_holds",
+    "question": "一个人锯，一个人在旁边扶木板安全吗？",
+    "expected_guides": ["DG-0839", "DG-0834"],
+    "expected_wiki": ["repair-bystander-position-boundary-001", "repair-knife-saw-clear-zone-001", "repair-saw-cut-support-001"],
+    "focus_terms": ["旁人", "切割线", "落料", "停止", "支撑"],
+    "risk": "high"
+  },
+  {
+    "id": "wave2_no_workbench_platform",
+    "question": "没有工作台，临时拿几块木板搭个平台维修可以吗？",
+    "expected_guides": [],
+    "expected_wiki": ["repair-temporary-workbench-stability-check-001", "repair-manual-repair-workbench-setup-001"],
+    "focus_terms": ["工作台", "晃动", "支撑", "低载", "复查"],
+    "risk": "caution"
+  },
+  {
+    "id": "wave2_wobbly_table_tools",
+    "question": "临时桌子有点晃，但是还能放工具，需要处理吗？",
+    "expected_guides": [],
+    "expected_wiki": ["repair-temporary-workbench-stability-check-001", "repair-work-zone-minimum-layout-001"],
+    "focus_terms": ["晃动", "桌沿", "工具", "停止", "记录"],
+    "risk": "caution"
+  },
+  {
+    "id": "wave2_three_person_positions",
+    "question": "三个人一起维修，一个切割，一个递工具，一个观察，怎么安排位置？",
+    "expected_guides": [],
+    "expected_wiki": ["repair-multi-person-repair-zone-boundary-001", "repair-bystander-position-boundary-001"],
+    "focus_terms": ["分区", "递工具", "旁人", "停止", "负责人"],
+    "risk": "caution"
+  },
+  {
+    "id": "wave2_people_pass_repair_site",
+    "question": "维修现场有人经过，需要停止吗？",
+    "expected_guides": ["DG-0839"],
+    "expected_wiki": ["repair-bystander-position-boundary-001", "repair-floor-clutter-trip-check-001"],
+    "focus_terms": ["旁人", "边界", "通道", "停止", "复查"],
+    "risk": "caution"
+  },
+  {
+    "id": "wave2_missing_tool_after_repair",
+    "question": "维修结束后工具少了一把，应该怎么办？",
+    "expected_guides": ["DG-0150"],
+    "expected_wiki": ["repair-post-task-tool-count-001", "repair-lost-tool-site-recheck-001"],
+    "focus_terms": ["清点", "缺失", "复查", "记录", "工具编号"],
+    "risk": "caution"
+  },
+  {
+    "id": "wave2_new_member_dangerous_tool",
+    "question": "新成员第一次使用危险工具，需要怎么管理？",
+    "expected_guides": ["DG-0837"],
+    "expected_wiki": ["repair-dangerous-tool-borrow-permission-001", "repair-new-member-tool-safety-training-log-001"],
+    "focus_terms": ["权限", "培训", "停止条件", "负责人", "记录"],
+    "risk": "caution"
+  },
+  {
+    "id": "wave2_mixed_repair_materials",
+    "question": "不同维修材料全部堆在一起，会有什么问题？",
+    "expected_guides": [],
+    "expected_wiki": ["repair-mixed-repair-material-risk-001", "repair-work-zone-minimum-layout-001"],
+    "focus_terms": ["混放", "污染", "锋利", "隔离", "记录"],
+    "risk": "caution"
+  },
+  {
+    "id": "wave2_screws_blades_small_parts",
+    "question": "螺丝、刀片、小零件放一起容易丢，怎么办？",
+    "expected_guides": ["DG-0837", "DG-0150"],
+    "expected_wiki": ["repair-sharp-blunt-tool-zone-storage-001", "repair-fastener-washer-storage-001", "repair-frequent-tool-quick-access-zone-001"],
+    "focus_terms": ["分区", "锐器", "编号", "记录", "复查"],
+    "risk": "caution"
+  },
+  {
+    "id": "wave2_no_light_no_workbench",
+    "question": "没有照明，也没有工作台，现在只能简单处理怎么办？",
+    "expected_guides": ["DG-0836"],
+    "expected_wiki": ["repair-low-light-repair-downgrade-001", "repair-manual-repair-workbench-setup-001"],
+    "focus_terms": ["停止", "降级", "清点", "标签", "记录"],
+    "risk": "high"
+  },
+  {
+    "id": "wave2_damaged_tool_temporary_use",
+    "question": "破损工具如果只是临时用一下，会不会有问题？",
+    "expected_guides": ["DG-0840"],
+    "expected_wiki": ["repair-damaged-tool-disable-tag-001", "repair-damaged-tool-report-isolation-001"],
+    "focus_terms": ["停用", "禁用", "隔离", "复查", "标签"],
+    "risk": "high"
+  },
+  {
+    "id": "wave2_child_playing_nearby",
+    "question": "孩子不碰工具，只是在附近玩，可以吗？",
+    "expected_guides": ["DG-0838"],
+    "expected_wiki": ["repair-children-away-tool-zone-001", "repair-child-nonoperator-safety-card-001"],
+    "focus_terms": ["儿童", "工具半径", "边界", "停手", "看护"],
+    "risk": "high"
+  },
+  {
+    "id": "wave2_uncertain_tool_urgent_task",
+    "question": "维修过程中发现工具状态不确定，但是任务很急怎么办？",
+    "expected_guides": ["DG-0840", "DG-0837"],
+    "expected_wiki": ["repair-damaged-tool-disable-tag-001", "repair-dangerous-tool-temporary-isolation-001"],
+    "focus_terms": ["状态不明", "禁用", "隔离", "停止", "复查"],
+    "risk": "high"
+  }
+]
