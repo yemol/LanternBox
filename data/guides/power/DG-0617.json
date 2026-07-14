@@ -50,6 +50,10 @@
     "连续两天无法满足关键设备电量时，调整通信开机窗口和夜间照明规则。"
   ],
   "related_wiki": [
+    "energy-solar-daytime-charge-schedule-001",
+    "energy-cloudy-solar-downgrade-001",
+    "energy-solar-charge-target-selection-001",
+    "energy-solar-weather-pattern-log-001",
     "energy-battery-001",
     "energy-battery-002",
     "energy-battery-003",

@@ -71,6 +71,9 @@
     "主食配给",
     "夜间异响"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "energy-backup-battery-rotation-ledger-001",
+    "energy-battery-aging-capacity-note-001"
+  ],
   "risk_level": "caution"
 }

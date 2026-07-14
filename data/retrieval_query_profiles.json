@@ -2,245 +2,1134 @@
   "profiles": [
     {
       "name": "rope_load",
-      "trigger_any": ["绳子", "绳索", "承重", "拉力", "吊挂", "固定点", "绳结", "受力", "负载"],
+      "trigger_any": [
+        "绳子",
+        "绳索",
+        "承重",
+        "拉力",
+        "吊挂",
+        "固定点",
+        "绳结",
+        "受力",
+        "负载"
+      ],
       "min_trigger_matches": 2,
-      "aliases": ["绳子", "绳索", "承重", "拉力", "吊挂", "固定点", "断裂", "磨损", "绳结", "受力", "负载"],
-      "target_domains": ["repair", "tools"],
+      "aliases": [
+        "绳子",
+        "绳索",
+        "承重",
+        "拉力",
+        "吊挂",
+        "固定点",
+        "断裂",
+        "磨损",
+        "绳结",
+        "受力",
+        "负载"
+      ],
+      "target_domains": [
+        "repair",
+        "tools"
+      ],
       "domain_boost": 18,
       "domain_mismatch_penalty": 80
     },
     {
       "name": "inventory_consumption",
-      "trigger_any": ["物资消耗", "库存消耗", "消耗记录", "领用", "剩余量", "交接", "盘点", "出入库", "物资记录"],
+      "trigger_any": [
+        "物资消耗",
+        "库存消耗",
+        "消耗记录",
+        "领用",
+        "剩余量",
+        "交接",
+        "盘点",
+        "出入库",
+        "物资记录"
+      ],
       "min_trigger_matches": 1,
-      "aliases": ["物资消耗", "库存消耗", "消耗记录", "领用", "剩余量", "交接", "盘点", "出入库", "物资记录"],
-      "target_domains": ["records", "data", "inventory", "organization"],
+      "aliases": [
+        "物资消耗",
+        "库存消耗",
+        "消耗记录",
+        "领用",
+        "剩余量",
+        "交接",
+        "盘点",
+        "出入库",
+        "物资记录"
+      ],
+      "target_domains": [
+        "records",
+        "data",
+        "inventory",
+        "organization"
+      ],
       "domain_boost": 18,
       "domain_mismatch_penalty": 80,
-      "negative_terms": ["外伤耗材", "医疗耗材"],
+      "negative_terms": [
+        "外伤耗材",
+        "医疗耗材"
+      ],
       "negative_penalty": 35,
-      "negative_unless_context": ["伤口", "医疗", "急救", "敷料", "绷带"]
+      "negative_unless_context": [
+        "伤口",
+        "医疗",
+        "急救",
+        "敷料",
+        "绷带"
+      ]
     },
     {
       "name": "repair_anchor_fastening",
-      "object_triggers": ["固定点", "墙角", "支架", "挂点", "绑点", "棚布", "膨胀螺丝", "挂钩"],
-      "state_triggers": ["晃", "松动", "咔咔响", "裂", "拔出", "拉紧", "继续绑", "承重", "受力"],
-      "aliases": ["固定点失效", "绑点松动", "挂点晃动", "支架受力检查", "墙角固定", "拉紧异响", "不能继续承重", "换固定点"],
-      "target_domains": ["repair", "tools", "safety"],
-      "target_slug_domains": ["repair"],
-      "target_categories": ["维修 / 制作 / 替代 / 拆解再利用", "工具维修与替代制作", "工具维修与替代"],
-      "candidate_anchor_terms": ["固定点", "挂点", "绑点", "松动", "咔咔响", "裂缝", "拔出", "受力", "禁承重", "换固定点"],
+      "object_triggers": [
+        "固定点",
+        "墙角",
+        "支架",
+        "挂点",
+        "绑点",
+        "棚布",
+        "膨胀螺丝",
+        "挂钩"
+      ],
+      "state_triggers": [
+        "晃",
+        "松动",
+        "咔咔响",
+        "裂",
+        "拔出",
+        "拉紧",
+        "继续绑",
+        "承重",
+        "受力"
+      ],
+      "aliases": [
+        "固定点失效",
+        "绑点松动",
+        "挂点晃动",
+        "支架受力检查",
+        "墙角固定",
+        "拉紧异响",
+        "不能继续承重",
+        "换固定点"
+      ],
+      "target_domains": [
+        "repair",
+        "tools",
+        "safety"
+      ],
+      "target_slug_domains": [
+        "repair"
+      ],
+      "target_categories": [
+        "维修 / 制作 / 替代 / 拆解再利用",
+        "工具维修与替代制作",
+        "工具维修与替代"
+      ],
+      "candidate_anchor_terms": [
+        "固定点",
+        "挂点",
+        "绑点",
+        "松动",
+        "咔咔响",
+        "裂缝",
+        "拔出",
+        "受力",
+        "禁承重",
+        "换固定点"
+      ],
       "candidate_anchor_boost": 36,
       "candidate_anchor_miss_penalty": 90,
       "domain_boost": 42,
       "domain_mismatch_penalty": 120,
       "title_alias_boost": 26,
-      "mismatch_unless_context": ["固定开机", "通信窗口", "开机窗口", "固定时间", "断网"]
+      "mismatch_unless_context": [
+        "固定开机",
+        "通信窗口",
+        "开机窗口",
+        "固定时间",
+        "断网"
+      ]
     },
     {
       "name": "repair_cutting_fixture",
-      "object_triggers": ["锯", "手锯", "木板", "板子", "切割线", "夹具", "工作台"],
-      "state_triggers": ["固定住", "夹锯", "滑", "支撑", "没有工作台", "手的位置", "切割前", "防滑"],
-      "aliases": ["锯切前固定", "木板支撑", "防夹锯", "临时夹具", "切割线两侧支撑", "手锯防滑", "锯前停手条件"],
-      "target_domains": ["repair", "tools", "safety"],
-      "target_slug_domains": ["repair"],
-      "target_categories": ["维修 / 制作 / 替代 / 拆解再利用", "工具维修与替代制作", "工具维修与替代"],
-      "candidate_anchor_terms": ["锯切", "手锯", "木板", "支撑", "夹具", "夹锯", "防滑", "切割线", "手的位置"],
+      "object_triggers": [
+        "锯",
+        "手锯",
+        "木板",
+        "板子",
+        "切割线",
+        "夹具",
+        "工作台"
+      ],
+      "state_triggers": [
+        "固定住",
+        "夹锯",
+        "滑",
+        "支撑",
+        "没有工作台",
+        "手的位置",
+        "切割前",
+        "防滑"
+      ],
+      "aliases": [
+        "锯切前固定",
+        "木板支撑",
+        "防夹锯",
+        "临时夹具",
+        "切割线两侧支撑",
+        "手锯防滑",
+        "锯前停手条件"
+      ],
+      "target_domains": [
+        "repair",
+        "tools",
+        "safety"
+      ],
+      "target_slug_domains": [
+        "repair"
+      ],
+      "target_categories": [
+        "维修 / 制作 / 替代 / 拆解再利用",
+        "工具维修与替代制作",
+        "工具维修与替代"
+      ],
+      "candidate_anchor_terms": [
+        "锯切",
+        "手锯",
+        "木板",
+        "支撑",
+        "夹具",
+        "夹锯",
+        "防滑",
+        "切割线",
+        "手的位置"
+      ],
       "candidate_anchor_boost": 36,
       "candidate_anchor_miss_penalty": 90,
       "domain_boost": 42,
       "domain_mismatch_penalty": 120,
       "title_alias_boost": 28,
-      "mismatch_unless_context": ["固定开机", "通信窗口", "固定时间", "断网"]
+      "mismatch_unless_context": [
+        "固定开机",
+        "通信窗口",
+        "固定时间",
+        "断网"
+      ]
     },
     {
       "name": "repair_glue_surface",
-      "object_triggers": ["胶水", "胶", "塑料片", "粘接面", "表面", "粘接"],
-      "state_triggers": ["粘不住", "又开", "灰", "水汽", "重新粘", "干燥", "粗化", "压紧", "固化"],
-      "aliases": ["胶水粘接前表面处理", "粘接面清洁", "表面干燥", "粗化处理", "压紧固化", "胶水失效", "胶粘失败降级"],
-      "target_domains": ["repair", "tools", "material"],
-      "target_slug_domains": ["repair"],
-      "target_categories": ["维修 / 制作 / 替代 / 拆解再利用", "工具维修与替代制作", "工具维修与替代"],
-      "candidate_anchor_terms": ["胶水", "粘接", "表面处理", "灰尘", "水汽", "干燥", "粗化", "固化", "粘不住"],
+      "object_triggers": [
+        "胶水",
+        "胶",
+        "塑料片",
+        "粘接面",
+        "表面",
+        "粘接"
+      ],
+      "state_triggers": [
+        "粘不住",
+        "又开",
+        "灰",
+        "水汽",
+        "重新粘",
+        "干燥",
+        "粗化",
+        "压紧",
+        "固化"
+      ],
+      "aliases": [
+        "胶水粘接前表面处理",
+        "粘接面清洁",
+        "表面干燥",
+        "粗化处理",
+        "压紧固化",
+        "胶水失效",
+        "胶粘失败降级"
+      ],
+      "target_domains": [
+        "repair",
+        "tools",
+        "material"
+      ],
+      "target_slug_domains": [
+        "repair"
+      ],
+      "target_categories": [
+        "维修 / 制作 / 替代 / 拆解再利用",
+        "工具维修与替代制作",
+        "工具维修与替代"
+      ],
+      "candidate_anchor_terms": [
+        "胶水",
+        "粘接",
+        "表面处理",
+        "灰尘",
+        "水汽",
+        "干燥",
+        "粗化",
+        "固化",
+        "粘不住"
+      ],
       "candidate_anchor_boost": 38,
       "candidate_anchor_miss_penalty": 95,
       "domain_boost": 42,
       "domain_mismatch_penalty": 125,
       "title_alias_boost": 30,
-      "mismatch_unless_context": ["留种粮", "种子", "主食", "粮食"]
+      "mismatch_unless_context": [
+        "留种粮",
+        "种子",
+        "主食",
+        "粮食"
+      ]
     },
     {
       "name": "repair_low_light_work_stop",
-      "object_triggers": ["维修", "修东西", "工具", "木板", "锯", "手锯", "切割", "钻孔", "工作台"],
-      "state_triggers": ["低光", "夜晚", "晚上", "停电", "光线很暗", "看不清", "照明不足", "没有照明", "头灯", "手电不足", "只能简单处理"],
-      "aliases": ["低光维修停止线", "低光维修降级", "照明不足停止切割", "看不清刀口", "看不清锯线", "看不清钻孔点", "夜间维修停手", "停电维修停止线", "只做清点分类贴标签"],
-      "target_domains": ["repair", "tools", "safety", "security"],
-      "target_slug_domains": ["repair"],
-      "target_categories": ["维修 / 制作 / 替代 / 拆解再利用", "工具维修与替代制作", "工具维修与替代"],
-      "candidate_anchor_terms": ["低光维修", "低光维修停止线", "照明不足", "看不清", "锯线", "刀口", "钻孔点", "停止切割", "降级", "清点", "贴标签"],
+      "object_triggers": [
+        "维修",
+        "修东西",
+        "工具",
+        "木板",
+        "锯",
+        "手锯",
+        "切割",
+        "钻孔",
+        "工作台"
+      ],
+      "state_triggers": [
+        "低光",
+        "夜晚",
+        "晚上",
+        "停电",
+        "光线很暗",
+        "看不清",
+        "照明不足",
+        "没有照明",
+        "头灯",
+        "手电不足",
+        "只能简单处理"
+      ],
+      "aliases": [
+        "低光维修停止线",
+        "低光维修降级",
+        "照明不足停止切割",
+        "看不清刀口",
+        "看不清锯线",
+        "看不清钻孔点",
+        "夜间维修停手",
+        "停电维修停止线",
+        "只做清点分类贴标签"
+      ],
+      "target_domains": [
+        "repair",
+        "tools",
+        "safety",
+        "security"
+      ],
+      "target_slug_domains": [
+        "repair"
+      ],
+      "target_categories": [
+        "维修 / 制作 / 替代 / 拆解再利用",
+        "工具维修与替代制作",
+        "工具维修与替代"
+      ],
+      "candidate_anchor_terms": [
+        "低光维修",
+        "低光维修停止线",
+        "照明不足",
+        "看不清",
+        "锯线",
+        "刀口",
+        "钻孔点",
+        "停止切割",
+        "降级",
+        "清点",
+        "贴标签"
+      ],
       "candidate_anchor_boost": 46,
       "candidate_anchor_miss_penalty": 100,
       "domain_boost": 46,
       "domain_mismatch_penalty": 135,
       "title_alias_boost": 70,
-      "mismatch_unless_context": ["电池容量", "照明分级", "食物", "冰箱", "电量"]
+      "mismatch_unless_context": [
+        "电池容量",
+        "照明分级",
+        "食物",
+        "冰箱",
+        "电量"
+      ]
     },
     {
       "name": "repair_tool_damage_isolation",
-      "object_triggers": ["刀", "锯", "锯子", "钳", "钳子", "工具", "危险工具"],
-      "state_triggers": ["损坏", "坏", "裂", "断", "缺口", "磨损", "异常", "不确定", "状态不明", "继续使用", "给别人用", "借给别人", "临时使用", "临时用一下", "还能不能用", "任务很急"],
-      "aliases": ["工具破损后禁用标签", "工具损坏上报和隔离", "危险工具临时隔离", "破损工具停用", "状态不明先隔离", "损坏工具禁止借出", "临时使用破损工具禁用", "贴禁用标签"],
-      "target_domains": ["repair", "tools", "safety", "security", "records"],
-      "target_slug_domains": ["repair"],
-      "target_categories": ["维修 / 制作 / 替代 / 拆解再利用", "工具维修与替代制作", "工具维修与替代"],
-      "candidate_anchor_terms": ["工具破损", "破损工具", "损坏", "禁用标签", "停用", "隔离", "上报", "危险工具", "状态不明", "临时使用", "禁止借出"],
+      "object_triggers": [
+        "刀",
+        "锯",
+        "锯子",
+        "钳",
+        "钳子",
+        "工具",
+        "危险工具"
+      ],
+      "state_triggers": [
+        "损坏",
+        "坏",
+        "裂",
+        "断",
+        "缺口",
+        "磨损",
+        "异常",
+        "不确定",
+        "状态不明",
+        "继续使用",
+        "给别人用",
+        "借给别人",
+        "临时使用",
+        "临时用一下",
+        "还能不能用",
+        "任务很急"
+      ],
+      "aliases": [
+        "工具破损后禁用标签",
+        "工具损坏上报和隔离",
+        "危险工具临时隔离",
+        "破损工具停用",
+        "状态不明先隔离",
+        "损坏工具禁止借出",
+        "临时使用破损工具禁用",
+        "贴禁用标签"
+      ],
+      "target_domains": [
+        "repair",
+        "tools",
+        "safety",
+        "security",
+        "records"
+      ],
+      "target_slug_domains": [
+        "repair"
+      ],
+      "target_categories": [
+        "维修 / 制作 / 替代 / 拆解再利用",
+        "工具维修与替代制作",
+        "工具维修与替代"
+      ],
+      "candidate_anchor_terms": [
+        "工具破损",
+        "破损工具",
+        "损坏",
+        "禁用标签",
+        "停用",
+        "隔离",
+        "上报",
+        "危险工具",
+        "状态不明",
+        "临时使用",
+        "禁止借出"
+      ],
       "candidate_anchor_boost": 46,
       "candidate_anchor_miss_penalty": 95,
       "domain_boost": 46,
       "domain_mismatch_penalty": 125,
       "title_alias_boost": 70,
-      "mismatch_unless_context": ["外伤耗材", "医疗耗材", "工具寿命"]
+      "mismatch_unless_context": [
+        "外伤耗材",
+        "医疗耗材",
+        "工具寿命"
+      ]
     },
     {
       "name": "repair_site_clearance_boundary",
-      "object_triggers": ["维修区域", "维修现场", "工作区", "地面", "地上", "旁人", "有人", "三个人", "一个人", "多人", "工作台", "临时桌子", "桌子", "木板", "木板平台", "维修材料", "材料"],
-      "state_triggers": ["杂物", "经过", "旁边", "扶", "递工具", "多人", "切割", "锯", "维修", "晃", "晃动", "搭个平台", "没有工作台", "堆在一起", "混放", "放工具", "安排位置", "观察"],
-      "aliases": ["多人同时维修的分区边界", "刀锯作业前清场", "维修现场旁人站位边界", "地面杂物绊倒风险检查", "多人维修分区边界", "临时工作台稳定性检查", "维修工作区最小布置", "材料混放风险", "旁人离开切割线", "有人经过先停手"],
-      "target_domains": ["repair", "tools", "safety", "security", "organization"],
-      "target_slug_domains": ["repair"],
-      "target_categories": ["维修 / 制作 / 替代 / 拆解再利用", "工具维修与替代制作", "工具维修与替代"],
-      "candidate_anchor_terms": ["多人同时维修", "多人维修", "清场", "刀锯", "切割", "地面杂物", "旁人", "站位", "分区", "工作区", "工作台", "临时桌子", "晃动", "混放", "维修材料"],
+      "object_triggers": [
+        "维修区域",
+        "维修现场",
+        "工作区",
+        "地面",
+        "地上",
+        "旁人",
+        "有人",
+        "三个人",
+        "一个人",
+        "多人",
+        "工作台",
+        "临时桌子",
+        "桌子",
+        "木板",
+        "木板平台",
+        "维修材料",
+        "材料"
+      ],
+      "state_triggers": [
+        "杂物",
+        "经过",
+        "旁边",
+        "扶",
+        "递工具",
+        "多人",
+        "切割",
+        "锯",
+        "维修",
+        "晃",
+        "晃动",
+        "搭个平台",
+        "没有工作台",
+        "堆在一起",
+        "混放",
+        "放工具",
+        "安排位置",
+        "观察"
+      ],
+      "aliases": [
+        "多人同时维修的分区边界",
+        "刀锯作业前清场",
+        "维修现场旁人站位边界",
+        "地面杂物绊倒风险检查",
+        "多人维修分区边界",
+        "临时工作台稳定性检查",
+        "维修工作区最小布置",
+        "材料混放风险",
+        "旁人离开切割线",
+        "有人经过先停手"
+      ],
+      "target_domains": [
+        "repair",
+        "tools",
+        "safety",
+        "security",
+        "organization"
+      ],
+      "target_slug_domains": [
+        "repair"
+      ],
+      "target_categories": [
+        "维修 / 制作 / 替代 / 拆解再利用",
+        "工具维修与替代制作",
+        "工具维修与替代"
+      ],
+      "candidate_anchor_terms": [
+        "多人同时维修",
+        "多人维修",
+        "清场",
+        "刀锯",
+        "切割",
+        "地面杂物",
+        "旁人",
+        "站位",
+        "分区",
+        "工作区",
+        "工作台",
+        "临时桌子",
+        "晃动",
+        "混放",
+        "维修材料"
+      ],
       "candidate_anchor_boost": 44,
       "candidate_anchor_miss_penalty": 95,
       "domain_boost": 44,
       "domain_mismatch_penalty": 125,
       "title_alias_boost": 62,
-      "mismatch_unless_context": ["恐慌", "撤离", "洪水", "心理", "食物"]
+      "mismatch_unless_context": [
+        "恐慌",
+        "撤离",
+        "洪水",
+        "心理",
+        "食物"
+      ]
     },
     {
       "name": "repair_child_tool_zone",
-      "object_triggers": ["儿童", "孩子", "小孩", "非操作人员"],
-      "state_triggers": ["旁边看", "附近玩", "观看维修", "看大人修", "修东西", "工具", "维修", "旁边", "附近"],
-      "aliases": ["儿童远离工具区", "儿童和非操作人员安全提示卡", "工具区儿童隔离", "孩子远离维修半径", "非操作人员离开工具区", "看护儿童不要旁观维修"],
-      "target_domains": ["repair", "tools", "safety", "security", "organization"],
-      "target_slug_domains": ["repair"],
-      "target_categories": ["维修 / 制作 / 替代 / 拆解再利用", "工具维修与替代制作", "工具维修与替代"],
-      "candidate_anchor_terms": ["儿童远离", "工具区", "非操作人员", "儿童", "孩子", "小孩", "维修半径", "看护", "安全提示卡"],
+      "object_triggers": [
+        "儿童",
+        "孩子",
+        "小孩",
+        "非操作人员"
+      ],
+      "state_triggers": [
+        "旁边看",
+        "附近玩",
+        "观看维修",
+        "看大人修",
+        "修东西",
+        "工具",
+        "维修",
+        "旁边",
+        "附近"
+      ],
+      "aliases": [
+        "儿童远离工具区",
+        "儿童和非操作人员安全提示卡",
+        "工具区儿童隔离",
+        "孩子远离维修半径",
+        "非操作人员离开工具区",
+        "看护儿童不要旁观维修"
+      ],
+      "target_domains": [
+        "repair",
+        "tools",
+        "safety",
+        "security",
+        "organization"
+      ],
+      "target_slug_domains": [
+        "repair"
+      ],
+      "target_categories": [
+        "维修 / 制作 / 替代 / 拆解再利用",
+        "工具维修与替代制作",
+        "工具维修与替代"
+      ],
+      "candidate_anchor_terms": [
+        "儿童远离",
+        "工具区",
+        "非操作人员",
+        "儿童",
+        "孩子",
+        "小孩",
+        "维修半径",
+        "看护",
+        "安全提示卡"
+      ],
       "candidate_anchor_boost": 48,
       "candidate_anchor_miss_penalty": 105,
       "domain_boost": 46,
       "domain_mismatch_penalty": 140,
       "title_alias_boost": 72,
-      "mismatch_unless_context": ["脱水", "发热", "腹泻", "食物", "家庭关系"]
+      "mismatch_unless_context": [
+        "脱水",
+        "发热",
+        "腹泻",
+        "食物",
+        "家庭关系"
+      ]
     },
     {
       "name": "repair_tool_handover",
-      "object_triggers": ["工具", "钳子", "刀片", "手工具", "工具编号", "借用工具"],
-      "state_triggers": ["借用", "归还", "损坏", "松了", "缺口", "交接", "记录", "禁用标签", "回来才发现", "工具少了", "少了一把", "找不到", "结束后", "清点", "数量不对", "遗失", "归还检查"],
-      "aliases": ["工具借用和归还", "工具借用", "工具归还", "工具借用归还", "工具损坏交接", "工具编号", "禁用标签", "归还检查", "易损工具寿命记录", "损坏位置记录", "工具复查", "维修任务结束后工具清点", "工具遗失后的现场复查", "工具数量对不上", "清点缺失"],
-      "target_domains": ["repair", "records", "tools"],
-      "target_slug_domains": ["repair"],
-      "target_categories": ["维修 / 制作 / 替代 / 拆解再利用", "工具维修与替代制作", "工具维修与替代"],
-      "candidate_anchor_terms": ["工具借用", "工具归还", "工具编号", "借用", "归还", "钳子", "刀片", "工具", "损坏", "禁用标签", "待修标签", "寿命记录", "借出人", "工具清点", "工具少了", "清点对不上", "遗失", "现场复查", "归还检查"],
+      "object_triggers": [
+        "工具",
+        "钳子",
+        "刀片",
+        "手工具",
+        "工具编号",
+        "借用工具"
+      ],
+      "state_triggers": [
+        "借用",
+        "归还",
+        "损坏",
+        "松了",
+        "缺口",
+        "交接",
+        "记录",
+        "禁用标签",
+        "回来才发现",
+        "工具少了",
+        "少了一把",
+        "找不到",
+        "结束后",
+        "清点",
+        "数量不对",
+        "遗失",
+        "归还检查"
+      ],
+      "aliases": [
+        "工具借用和归还",
+        "工具借用",
+        "工具归还",
+        "工具借用归还",
+        "工具损坏交接",
+        "工具编号",
+        "禁用标签",
+        "归还检查",
+        "易损工具寿命记录",
+        "损坏位置记录",
+        "工具复查",
+        "维修任务结束后工具清点",
+        "工具遗失后的现场复查",
+        "工具数量对不上",
+        "清点缺失"
+      ],
+      "target_domains": [
+        "repair",
+        "records",
+        "tools"
+      ],
+      "target_slug_domains": [
+        "repair"
+      ],
+      "target_categories": [
+        "维修 / 制作 / 替代 / 拆解再利用",
+        "工具维修与替代制作",
+        "工具维修与替代"
+      ],
+      "candidate_anchor_terms": [
+        "工具借用",
+        "工具归还",
+        "工具编号",
+        "借用",
+        "归还",
+        "钳子",
+        "刀片",
+        "工具",
+        "损坏",
+        "禁用标签",
+        "待修标签",
+        "寿命记录",
+        "借出人",
+        "工具清点",
+        "工具少了",
+        "清点对不上",
+        "遗失",
+        "现场复查",
+        "归还检查"
+      ],
       "candidate_anchor_boost": 36,
       "candidate_anchor_miss_penalty": 85,
       "domain_boost": 40,
       "domain_mismatch_penalty": 110,
       "title_alias_boost": 60,
-      "mismatch_unless_context": ["外伤耗材", "医疗耗材", "敷料", "绷带", "消毒棉", "药品"],
-      "negative_terms": ["外伤耗材", "医疗耗材", "敷料", "绷带", "消毒棉", "药品"],
+      "mismatch_unless_context": [
+        "外伤耗材",
+        "医疗耗材",
+        "敷料",
+        "绷带",
+        "消毒棉",
+        "药品"
+      ],
+      "negative_terms": [
+        "外伤耗材",
+        "医疗耗材",
+        "敷料",
+        "绷带",
+        "消毒棉",
+        "药品"
+      ],
       "negative_penalty": 55,
-      "negative_unless_context": ["工具", "钳子", "刀片", "手工具"]
+      "negative_unless_context": [
+        "工具",
+        "钳子",
+        "刀片",
+        "手工具"
+      ]
     },
     {
       "name": "repair_rope_load",
-      "object_triggers": ["绳", "绳索", "绳子", "绳结", "固定绳"],
-      "state_triggers": ["磨损", "磨毛", "发白", "烧焦", "烫过", "变细", "承重", "吊", "拉重物", "滑脱"],
-      "aliases": ["绳索承重前检查", "绳子承重前检查", "绳结固定", "绳结滑脱检查", "绳子全长摸查", "全长摸查", "磨损绳停用", "磨毛发白", "烧焦绳", "烫过的绳", "断股绳", "霉烂绳", "局部变细", "禁承重", "降级为捆扎", "轻拉测试"],
-      "target_domains": ["repair", "tools", "safety"],
-      "target_slug_domains": ["repair"],
-      "target_categories": ["维修 / 制作 / 替代 / 拆解再利用", "工具维修与替代制作", "工具维修与替代"],
-      "candidate_anchor_terms": ["绳子", "绳索", "绳结", "磨损", "磨毛", "发白", "烧焦", "烫过", "断股", "霉烂", "局部变细", "全长检查", "全长摸查", "轻拉测试", "滑脱", "禁承重", "降级捆扎"],
+      "object_triggers": [
+        "绳",
+        "绳索",
+        "绳子",
+        "绳结",
+        "固定绳"
+      ],
+      "state_triggers": [
+        "磨损",
+        "磨毛",
+        "发白",
+        "烧焦",
+        "烫过",
+        "变细",
+        "承重",
+        "吊",
+        "拉重物",
+        "滑脱"
+      ],
+      "aliases": [
+        "绳索承重前检查",
+        "绳子承重前检查",
+        "绳结固定",
+        "绳结滑脱检查",
+        "绳子全长摸查",
+        "全长摸查",
+        "磨损绳停用",
+        "磨毛发白",
+        "烧焦绳",
+        "烫过的绳",
+        "断股绳",
+        "霉烂绳",
+        "局部变细",
+        "禁承重",
+        "降级为捆扎",
+        "轻拉测试"
+      ],
+      "target_domains": [
+        "repair",
+        "tools",
+        "safety"
+      ],
+      "target_slug_domains": [
+        "repair"
+      ],
+      "target_categories": [
+        "维修 / 制作 / 替代 / 拆解再利用",
+        "工具维修与替代制作",
+        "工具维修与替代"
+      ],
+      "candidate_anchor_terms": [
+        "绳子",
+        "绳索",
+        "绳结",
+        "磨损",
+        "磨毛",
+        "发白",
+        "烧焦",
+        "烫过",
+        "断股",
+        "霉烂",
+        "局部变细",
+        "全长检查",
+        "全长摸查",
+        "轻拉测试",
+        "滑脱",
+        "禁承重",
+        "降级捆扎"
+      ],
       "candidate_anchor_boost": 38,
       "candidate_anchor_miss_penalty": 90,
       "domain_boost": 42,
       "domain_mismatch_penalty": 115,
       "title_alias_boost": 70,
-      "mismatch_unless_context": ["水桶漏水", "容器裂缝", "储水桶破裂"]
+      "mismatch_unless_context": [
+        "水桶漏水",
+        "容器裂缝",
+        "储水桶破裂"
+      ]
     },
     {
       "name": "repair_wire_damage",
-      "object_triggers": ["电线", "延长线", "插线板线", "线皮", "外皮", "铜线", "内芯"],
-      "state_triggers": ["破", "露线", "露铜", "胶带", "通电", "发热", "烧焦", "潮湿"],
-      "aliases": ["电线外皮破损", "线皮破损停用", "露铜禁用", "不可通电", "临时绝缘边界", "胶带不能替代绝缘", "发热烧焦停用"],
-      "target_domains": ["repair", "energy", "safety"],
-      "target_slug_domains": ["repair", "energy"],
-      "target_categories": ["维修 / 制作 / 替代 / 拆解再利用", "能源与电力", "能源照明与设备"],
-      "candidate_anchor_terms": ["电线", "外皮破损", "线皮", "露铜", "通电", "胶带", "停用", "发热", "烧焦"],
+      "object_triggers": [
+        "电线",
+        "延长线",
+        "插线板线",
+        "线皮",
+        "外皮",
+        "铜线",
+        "内芯"
+      ],
+      "state_triggers": [
+        "破",
+        "露线",
+        "露铜",
+        "胶带",
+        "通电",
+        "发热",
+        "烧焦",
+        "潮湿"
+      ],
+      "aliases": [
+        "电线外皮破损",
+        "线皮破损停用",
+        "露铜禁用",
+        "不可通电",
+        "临时绝缘边界",
+        "胶带不能替代绝缘",
+        "发热烧焦停用"
+      ],
+      "target_domains": [
+        "repair",
+        "energy",
+        "safety"
+      ],
+      "target_slug_domains": [
+        "repair",
+        "energy"
+      ],
+      "target_categories": [
+        "维修 / 制作 / 替代 / 拆解再利用",
+        "能源与电力",
+        "能源照明与设备"
+      ],
+      "candidate_anchor_terms": [
+        "电线",
+        "外皮破损",
+        "线皮",
+        "露铜",
+        "通电",
+        "胶带",
+        "停用",
+        "发热",
+        "烧焦"
+      ],
       "candidate_anchor_boost": 36,
       "candidate_anchor_miss_penalty": 90,
       "domain_boost": 40,
       "domain_mismatch_penalty": 110,
       "title_alias_boost": 28,
-      "mismatch_unless_context": ["进水", "泡水", "插线板进水", "电器进水"]
+      "mismatch_unless_context": [
+        "进水",
+        "泡水",
+        "插线板进水",
+        "电器进水"
+      ]
     },
     {
       "name": "energy_battery_abnormal_isolation",
-      "object_triggers": ["电池", "备用电池", "移动电源", "充电宝", "电池盒"],
-      "state_triggers": ["鼓包", "鼓起来", "胀", "发热", "烫", "漏液", "腐蚀", "异味", "放久", "放了半年", "存放半年", "继续充", "继续用", "测试", "还能不能用"],
-      "aliases": ["电池异常隔离", "移动电源鼓包隔离", "充电宝鼓包停用", "电池漏液隔离", "电池腐蚀隔离", "备用电池发热停用", "电池存放温度边界", "受摔移动电源隔离", "不继续充电", "不按键测试电量"],
-      "target_domains": ["power"],
-      "target_slug_domains": ["energy"],
-      "target_categories": ["能源", "能源与电力", "能源照明与设备"],
-      "candidate_anchor_terms": ["电池异常", "异常电池", "禁用标签", "可用区", "同一批电池", "同批电池", "受摔", "摔裂", "隔离观察", "存放温度", "漏液和腐蚀隔离"],
+      "object_triggers": [
+        "电池",
+        "备用电池",
+        "移动电源",
+        "充电宝",
+        "电池盒"
+      ],
+      "state_triggers": [
+        "鼓包",
+        "鼓起来",
+        "胀",
+        "发热",
+        "烫",
+        "漏液",
+        "腐蚀",
+        "异味",
+        "放久",
+        "放了半年",
+        "存放半年",
+        "继续充",
+        "继续用",
+        "测试",
+        "还能不能用"
+      ],
+      "aliases": [
+        "电池异常隔离",
+        "移动电源鼓包隔离",
+        "充电宝鼓包停用",
+        "电池漏液隔离",
+        "电池腐蚀隔离",
+        "备用电池发热停用",
+        "电池存放温度边界",
+        "受摔移动电源隔离",
+        "不继续充电",
+        "不按键测试电量"
+      ],
+      "target_domains": [
+        "power"
+      ],
+      "target_slug_domains": [
+        "energy"
+      ],
+      "target_categories": [
+        "能源",
+        "能源与电力",
+        "能源照明与设备"
+      ],
+      "candidate_anchor_terms": [
+        "电池异常",
+        "异常电池",
+        "禁用标签",
+        "可用区",
+        "同一批电池",
+        "同批电池",
+        "受摔",
+        "摔裂",
+        "隔离观察",
+        "存放温度",
+        "漏液和腐蚀隔离"
+      ],
       "candidate_anchor_boost": 58,
       "candidate_anchor_miss_penalty": 115,
       "domain_boost": 48,
       "domain_mismatch_penalty": 135,
       "title_alias_boost": 420,
-      "mismatch_unless_context": ["儿童发热", "发热咳嗽", "伤口发热", "人体发热", "体温"]
+      "mismatch_unless_context": [
+        "儿童发热",
+        "发热咳嗽",
+        "伤口发热",
+        "人体发热",
+        "体温"
+      ]
     },
     {
       "name": "energy_low_voltage_fault_stop",
-      "object_triggers": ["USB", "低压设备", "设备", "电线", "线缆", "接线", "红黑线"],
-      "state_triggers": ["发热", "越来越热", "发烫", "异味", "火花", "短路", "接反", "反接", "继续用", "通电", "测试"],
-      "aliases": ["低压设备异常停用", "低压直流系统停用边界", "USB设备发热停用", "线缆发热负载过大", "短路前兆立即断开", "设备异味发热不反复重启", "直流正负极接反检查", "红黑线接反", "不通电测试"],
-      "target_domains": ["power"],
-      "target_slug_domains": ["energy"],
-      "target_categories": ["能源", "能源与电力", "能源照明与设备"],
-      "candidate_anchor_terms": ["低压设备", "低压", "USB", "异味", "火花", "短路", "线缆发热", "接线", "红黑线", "接反", "反接", "停用", "断开"],
+      "object_triggers": [
+        "USB",
+        "低压设备",
+        "设备",
+        "电线",
+        "线缆",
+        "接线",
+        "红黑线"
+      ],
+      "state_triggers": [
+        "发热",
+        "越来越热",
+        "发烫",
+        "异味",
+        "火花",
+        "短路",
+        "接反",
+        "反接",
+        "继续用",
+        "通电",
+        "测试"
+      ],
+      "aliases": [
+        "低压设备异常停用",
+        "低压直流系统停用边界",
+        "USB设备发热停用",
+        "线缆发热负载过大",
+        "短路前兆立即断开",
+        "设备异味发热不反复重启",
+        "直流正负极接反检查",
+        "红黑线接反",
+        "不通电测试"
+      ],
+      "target_domains": [
+        "power"
+      ],
+      "target_slug_domains": [
+        "energy"
+      ],
+      "target_categories": [
+        "能源",
+        "能源与电力",
+        "能源照明与设备"
+      ],
+      "candidate_anchor_terms": [
+        "低压设备",
+        "低压",
+        "USB",
+        "异味",
+        "火花",
+        "短路",
+        "线缆发热",
+        "接线",
+        "红黑线",
+        "接反",
+        "反接",
+        "停用",
+        "断开"
+      ],
       "candidate_anchor_boost": 60,
       "candidate_anchor_miss_penalty": 120,
       "domain_boost": 50,
       "domain_mismatch_penalty": 145,
       "title_alias_boost": 190,
-      "mismatch_unless_context": ["伤口", "红肿热痛", "人体", "儿童发热", "咳嗽", "感冒", "发烧"]
+      "mismatch_unless_context": [
+        "伤口",
+        "红肿热痛",
+        "人体",
+        "儿童发热",
+        "咳嗽",
+        "感冒",
+        "发烧"
+      ]
     },
     {
       "name": "energy_unknown_power_adapter_match",
-      "object_triggers": ["旧充电器", "适配器", "接口", "插头", "电源", "线缆"],
-      "state_triggers": ["参数未知", "不知道多少伏", "不知道匹配", "能插进去", "极性未知", "试一下", "通电看看", "能不能用"],
-      "aliases": ["未知电源安全判断", "未知电源适配器停用判断", "旧充电器电压不明", "接口参数不明", "接口能插不代表匹配", "极性不明停用", "临时接线前检查", "保险丝不可绕过", "电源接头松动停用边界"],
-      "target_domains": ["power"],
-      "target_slug_domains": ["energy", "repair"],
-      "target_categories": ["能源", "能源与电力", "能源照明与设备", "维修 / 制作 / 替代 / 拆解再利用"],
-      "candidate_anchor_terms": ["未知电源", "适配器", "充电器", "旧充电器", "参数不明", "电压", "极性", "临时接线", "保护件", "停用"],
+      "object_triggers": [
+        "旧充电器",
+        "适配器",
+        "接口",
+        "插头",
+        "电源",
+        "线缆"
+      ],
+      "state_triggers": [
+        "参数未知",
+        "不知道多少伏",
+        "不知道匹配",
+        "能插进去",
+        "极性未知",
+        "试一下",
+        "通电看看",
+        "能不能用"
+      ],
+      "aliases": [
+        "未知电源安全判断",
+        "未知电源适配器停用判断",
+        "旧充电器电压不明",
+        "接口参数不明",
+        "接口能插不代表匹配",
+        "极性不明停用",
+        "临时接线前检查",
+        "保险丝不可绕过",
+        "电源接头松动停用边界"
+      ],
+      "target_domains": [
+        "power"
+      ],
+      "target_slug_domains": [
+        "energy",
+        "repair"
+      ],
+      "target_categories": [
+        "能源",
+        "能源与电力",
+        "能源照明与设备",
+        "维修 / 制作 / 替代 / 拆解再利用"
+      ],
+      "candidate_anchor_terms": [
+        "未知电源",
+        "适配器",
+        "充电器",
+        "旧充电器",
+        "参数不明",
+        "电压",
+        "极性",
+        "临时接线",
+        "保护件",
+        "停用"
+      ],
       "candidate_anchor_boost": 58,
       "candidate_anchor_miss_penalty": 115,
       "domain_boost": 48,
       "domain_mismatch_penalty": 135,
       "title_alias_boost": 180,
-      "mismatch_unless_context": ["饮用水", "浑浊水", "水源", "撤离路线", "路线"]
+      "mismatch_unless_context": [
+        "饮用水",
+        "浑浊水",
+        "水源",
+        "撤离路线",
+        "路线"
+      ]
     },
     {
       "name": "repair_blade_damage",
-      "object_triggers": ["刀", "刀片", "美工刀", "刀刃", "崩口"],
-      "state_triggers": ["卡", "继续用", "变钝", "裂", "切纸板", "收纳", "换刀"],
-      "aliases": ["刀片崩口判断", "刀刃变钝", "卡刀", "崩口停用", "换刀边界", "刀具收纳", "裂纹禁用"],
-      "target_domains": ["repair", "tools", "safety"],
-      "target_slug_domains": ["repair"],
-      "target_categories": ["维修 / 制作 / 替代 / 拆解再利用", "工具维修与替代制作", "工具维修与替代"],
-      "candidate_anchor_terms": ["刀片", "美工刀", "崩口", "变钝", "卡顿", "换刀", "收纳", "禁用"],
+      "object_triggers": [
+        "刀",
+        "刀片",
+        "美工刀",
+        "刀刃",
+        "崩口"
+      ],
+      "state_triggers": [
+        "卡",
+        "继续用",
+        "变钝",
+        "裂",
+        "切纸板",
+        "收纳",
+        "换刀"
+      ],
+      "aliases": [
+        "刀片崩口判断",
+        "刀刃变钝",
+        "卡刀",
+        "崩口停用",
+        "换刀边界",
+        "刀具收纳",
+        "裂纹禁用"
+      ],
+      "target_domains": [
+        "repair",
+        "tools",
+        "safety"
+      ],
+      "target_slug_domains": [
+        "repair"
+      ],
+      "target_categories": [
+        "维修 / 制作 / 替代 / 拆解再利用",
+        "工具维修与替代制作",
+        "工具维修与替代"
+      ],
+      "candidate_anchor_terms": [
+        "刀片",
+        "美工刀",
+        "崩口",
+        "变钝",
+        "卡顿",
+        "换刀",
+        "收纳",
+        "禁用"
+      ],
       "candidate_anchor_boost": 36,
       "candidate_anchor_miss_penalty": 80,
       "domain_boost": 42,
@@ -249,13 +1138,67 @@
     },
     {
       "name": "repair_fastener_reuse",
-      "object_triggers": ["螺丝", "钉子", "垫片", "螺丝头", "钉帽", "紧固件"],
-      "state_triggers": ["旧", "拆下", "复用", "锈", "花了", "滑牙", "弯曲", "承重位置"],
-      "aliases": ["旧螺丝复用", "旧钉子复用", "紧固件复用检查", "螺丝头花了", "钉帽变形", "滑牙禁用", "弯曲禁用", "锈蚀降级", "承重位置禁用", "旧紧固件复用边界", "螺丝钉分类保存"],
-      "target_domains": ["repair", "tools", "safety"],
-      "target_slug_domains": ["repair"],
-      "target_categories": ["维修 / 制作 / 替代 / 拆解再利用", "工具维修与替代制作", "工具维修与替代"],
-      "candidate_anchor_terms": ["旧螺丝", "旧钉子", "螺丝头", "钉帽", "头花了", "滑牙", "弯曲", "锈蚀", "生锈", "复用检查", "承重位置", "紧固件", "垫片", "禁用", "降级"],
+      "object_triggers": [
+        "螺丝",
+        "钉子",
+        "垫片",
+        "螺丝头",
+        "钉帽",
+        "紧固件"
+      ],
+      "state_triggers": [
+        "旧",
+        "拆下",
+        "复用",
+        "锈",
+        "花了",
+        "滑牙",
+        "弯曲",
+        "承重位置"
+      ],
+      "aliases": [
+        "旧螺丝复用",
+        "旧钉子复用",
+        "紧固件复用检查",
+        "螺丝头花了",
+        "钉帽变形",
+        "滑牙禁用",
+        "弯曲禁用",
+        "锈蚀降级",
+        "承重位置禁用",
+        "旧紧固件复用边界",
+        "螺丝钉分类保存"
+      ],
+      "target_domains": [
+        "repair",
+        "tools",
+        "safety"
+      ],
+      "target_slug_domains": [
+        "repair"
+      ],
+      "target_categories": [
+        "维修 / 制作 / 替代 / 拆解再利用",
+        "工具维修与替代制作",
+        "工具维修与替代"
+      ],
+      "candidate_anchor_terms": [
+        "旧螺丝",
+        "旧钉子",
+        "螺丝头",
+        "钉帽",
+        "头花了",
+        "滑牙",
+        "弯曲",
+        "锈蚀",
+        "生锈",
+        "复用检查",
+        "承重位置",
+        "紧固件",
+        "垫片",
+        "禁用",
+        "降级"
+      ],
       "candidate_anchor_boost": 36,
       "candidate_anchor_miss_penalty": 85,
       "domain_boost": 40,
@@ -264,32 +1207,112 @@
     },
     {
       "name": "team_risk_disagreement",
-      "trigger_any": ["意见不一致", "风险判断不一致", "分歧", "共同决定", "复述确认", "决策记录", "风险分级", "队员不同意", "无法达成一致"],
+      "trigger_any": [
+        "意见不一致",
+        "风险判断不一致",
+        "分歧",
+        "共同决定",
+        "复述确认",
+        "决策记录",
+        "风险分级",
+        "队员不同意",
+        "无法达成一致"
+      ],
       "min_trigger_matches": 1,
-      "aliases": ["意见不一致", "风险判断不一致", "分歧", "共同决定", "复述确认", "决策记录", "风险分级", "队员不同意", "无法达成一致"],
-      "target_domains": ["team", "risk_decision", "organization", "safety", "security", "psychology"],
+      "aliases": [
+        "意见不一致",
+        "风险判断不一致",
+        "分歧",
+        "共同决定",
+        "复述确认",
+        "决策记录",
+        "风险分级",
+        "队员不同意",
+        "无法达成一致"
+      ],
+      "target_domains": [
+        "team",
+        "risk_decision",
+        "organization",
+        "safety",
+        "security",
+        "psychology"
+      ],
       "domain_boost": 16,
       "domain_mismatch_penalty": 50,
       "title_alias_boost": 20
     },
     {
       "name": "boiling_boundary",
-      "trigger_any": ["煮沸", "烧开", "开水", "煮开以后", "煮沸后"],
+      "trigger_any": [
+        "煮沸",
+        "烧开",
+        "开水",
+        "煮开以后",
+        "煮沸后"
+      ],
       "min_trigger_matches": 1,
-      "aliases": ["煮沸", "烧开", "开水", "能不能喝", "化学污染", "异味", "油膜", "浑浊", "煮开以后", "煮沸后是否安全"],
-      "target_domains": ["water"],
+      "aliases": [
+        "煮沸",
+        "烧开",
+        "开水",
+        "能不能喝",
+        "化学污染",
+        "异味",
+        "油膜",
+        "浑浊",
+        "煮开以后",
+        "煮沸后是否安全"
+      ],
+      "target_domains": [
+        "water"
+      ],
       "domain_boost": 20,
       "domain_mismatch_penalty": 80
     },
     {
       "name": "planting_seed_germination",
-      "object_triggers": ["种子", "菜种", "留种", "批次"],
-      "state_triggers": ["不发芽", "没动静", "补播", "发芽率", "小样测试"],
-      "aliases": ["种子发芽", "发芽率", "小样", "小样测试", "批次记录", "不整批播", "先测一小撮"],
-      "target_domains": ["planting", "food", "records"],
-      "target_slug_domains": ["agriculture", "general"],
-      "target_categories": ["种植与食物生产"],
-      "candidate_anchor_terms": ["种子", "发芽", "批次", "小样", "补播"],
+      "object_triggers": [
+        "种子",
+        "菜种",
+        "留种",
+        "批次"
+      ],
+      "state_triggers": [
+        "不发芽",
+        "没动静",
+        "补播",
+        "发芽率",
+        "小样测试"
+      ],
+      "aliases": [
+        "种子发芽",
+        "发芽率",
+        "小样",
+        "小样测试",
+        "批次记录",
+        "不整批播",
+        "先测一小撮"
+      ],
+      "target_domains": [
+        "planting",
+        "food",
+        "records"
+      ],
+      "target_slug_domains": [
+        "agriculture",
+        "general"
+      ],
+      "target_categories": [
+        "种植与食物生产"
+      ],
+      "candidate_anchor_terms": [
+        "种子",
+        "发芽",
+        "批次",
+        "小样",
+        "补播"
+      ],
       "candidate_anchor_boost": 30,
       "candidate_anchor_miss_penalty": 70,
       "domain_boost": 36,
@@ -298,13 +1321,50 @@
     },
     {
       "name": "planting_wood_ash",
-      "object_triggers": ["草木灰", "灶灰", "柴灰", "炉灰", "旧木板灰", "灰"],
-      "state_triggers": ["当肥", "能不能撒", "小范围", "来源", "禁用", "菜地", "肥料"],
-      "aliases": ["草木灰", "灰肥", "碱性肥", "漆木", "防腐木", "垃圾焚烧灰", "旧木板灰"],
-      "target_domains": ["planting", "food"],
-      "target_slug_domains": ["agriculture"],
-      "target_categories": ["种植与食物生产"],
-      "candidate_anchor_terms": ["草木灰", "灰肥", "漆木", "防腐木", "焚烧灰", "旧木板灰"],
+      "object_triggers": [
+        "草木灰",
+        "灶灰",
+        "柴灰",
+        "炉灰",
+        "旧木板灰",
+        "灰"
+      ],
+      "state_triggers": [
+        "当肥",
+        "能不能撒",
+        "小范围",
+        "来源",
+        "禁用",
+        "菜地",
+        "肥料"
+      ],
+      "aliases": [
+        "草木灰",
+        "灰肥",
+        "碱性肥",
+        "漆木",
+        "防腐木",
+        "垃圾焚烧灰",
+        "旧木板灰"
+      ],
+      "target_domains": [
+        "planting",
+        "food"
+      ],
+      "target_slug_domains": [
+        "agriculture"
+      ],
+      "target_categories": [
+        "种植与食物生产"
+      ],
+      "candidate_anchor_terms": [
+        "草木灰",
+        "灰肥",
+        "漆木",
+        "防腐木",
+        "焚烧灰",
+        "旧木板灰"
+      ],
       "candidate_anchor_boost": 30,
       "candidate_anchor_miss_penalty": 70,
       "domain_boost": 38,
@@ -313,85 +1373,634 @@
     },
     {
       "name": "planting_low_water",
-      "object_triggers": ["菜园", "作物", "幼苗", "刚移苗", "结果期", "留种株", "菜地"],
-      "state_triggers": ["缺水", "少水浇灌", "先浇谁", "根闷坏", "覆盖保湿", "储水只够"],
-      "aliases": ["浇灌排序", "根区", "幼苗优先", "结果优先", "覆盖保湿", "少水灌溉", "不闷根"],
-      "target_domains": ["planting", "food"],
-      "target_slug_domains": ["agriculture"],
-      "target_categories": ["种植与食物生产"],
-      "candidate_anchor_terms": ["少水", "浇灌", "根区", "覆盖保湿", "根闷", "幼苗优先", "结果优先"],
+      "object_triggers": [
+        "菜园",
+        "作物",
+        "幼苗",
+        "刚移苗",
+        "结果期",
+        "留种株",
+        "菜地"
+      ],
+      "state_triggers": [
+        "缺水",
+        "少水浇灌",
+        "先浇谁",
+        "根闷坏",
+        "覆盖保湿",
+        "储水只够"
+      ],
+      "aliases": [
+        "浇灌排序",
+        "根区",
+        "幼苗优先",
+        "结果优先",
+        "覆盖保湿",
+        "少水灌溉",
+        "不闷根"
+      ],
+      "target_domains": [
+        "planting",
+        "food"
+      ],
+      "target_slug_domains": [
+        "agriculture"
+      ],
+      "target_categories": [
+        "种植与食物生产"
+      ],
+      "candidate_anchor_terms": [
+        "少水",
+        "浇灌",
+        "根区",
+        "覆盖保湿",
+        "根闷",
+        "幼苗优先",
+        "结果优先"
+      ],
       "candidate_anchor_boost": 35,
       "candidate_anchor_miss_penalty": 500,
       "domain_boost": 40,
       "domain_mismatch_penalty": 50,
       "title_alias_boost": 24,
-      "mismatch_unless_context": ["饮用水", "喝水", "饮水", "用药", "脱水"]
+      "mismatch_unless_context": [
+        "饮用水",
+        "喝水",
+        "饮水",
+        "用药",
+        "脱水"
+      ]
     },
     {
       "name": "planting_seedling_heat",
-      "object_triggers": ["幼苗", "苗", "移栽", "缓苗"],
-      "state_triggers": ["晒蔫", "蔫了", "遮阴", "日灼", "土还湿", "不要猛浇", "中午"],
-      "aliases": ["缓苗", "日灼", "清晨恢复", "逐步增光", "移栽后萎蔫", "土还湿"],
-      "target_domains": ["planting", "food"],
-      "target_slug_domains": ["agriculture"],
-      "target_categories": ["种植与食物生产"],
-      "candidate_anchor_terms": ["缓苗", "日灼", "逐步增光", "遮阴", "晒蔫", "萎蔫"],
+      "object_triggers": [
+        "幼苗",
+        "苗",
+        "移栽",
+        "缓苗"
+      ],
+      "state_triggers": [
+        "晒蔫",
+        "蔫了",
+        "遮阴",
+        "日灼",
+        "土还湿",
+        "不要猛浇",
+        "中午"
+      ],
+      "aliases": [
+        "缓苗",
+        "日灼",
+        "清晨恢复",
+        "逐步增光",
+        "移栽后萎蔫",
+        "土还湿"
+      ],
+      "target_domains": [
+        "planting",
+        "food"
+      ],
+      "target_slug_domains": [
+        "agriculture"
+      ],
+      "target_categories": [
+        "种植与食物生产"
+      ],
+      "candidate_anchor_terms": [
+        "缓苗",
+        "日灼",
+        "逐步增光",
+        "遮阴",
+        "晒蔫",
+        "萎蔫"
+      ],
       "candidate_anchor_boost": 35,
       "candidate_anchor_miss_penalty": 80,
       "domain_boost": 40,
       "domain_mismatch_penalty": 180,
       "title_alias_boost": 24,
-      "mismatch_unless_context": ["动物", "家禽", "饲料", "小动物", "养殖"]
+      "mismatch_unless_context": [
+        "动物",
+        "家禽",
+        "饲料",
+        "小动物",
+        "养殖"
+      ]
     },
     {
       "name": "planting_crop_disease",
-      "object_triggers": ["菜叶", "作物", "植株", "苗"],
-      "state_triggers": ["叶斑", "白斑", "叶背", "病叶", "剪刀处理", "病残体", "隔开观察", "霉层", "软腐"],
-      "aliases": ["病害隔离", "工具分流", "病残体", "不入堆肥", "扩散边界", "剪刀分流", "叶斑隔离"],
-      "target_domains": ["planting", "food", "hygiene"],
-      "target_slug_domains": ["agriculture"],
-      "target_categories": ["种植与食物生产"],
-      "candidate_anchor_terms": ["作物", "菜叶", "病叶", "叶斑", "病残体", "病害", "工具分流"],
+      "object_triggers": [
+        "菜叶",
+        "作物",
+        "植株",
+        "苗"
+      ],
+      "state_triggers": [
+        "叶斑",
+        "白斑",
+        "叶背",
+        "病叶",
+        "剪刀处理",
+        "病残体",
+        "隔开观察",
+        "霉层",
+        "软腐"
+      ],
+      "aliases": [
+        "病害隔离",
+        "工具分流",
+        "病残体",
+        "不入堆肥",
+        "扩散边界",
+        "剪刀分流",
+        "叶斑隔离"
+      ],
+      "target_domains": [
+        "planting",
+        "food",
+        "hygiene"
+      ],
+      "target_slug_domains": [
+        "agriculture"
+      ],
+      "target_categories": [
+        "种植与食物生产"
+      ],
+      "candidate_anchor_terms": [
+        "作物",
+        "菜叶",
+        "病叶",
+        "叶斑",
+        "病残体",
+        "病害",
+        "工具分流"
+      ],
       "candidate_anchor_boost": 35,
       "candidate_anchor_miss_penalty": 80,
       "domain_boost": 42,
       "domain_mismatch_penalty": 55,
       "title_alias_boost": 28,
-      "mismatch_unless_context": ["水源", "饮用", "水桶", "水处理", "可疑水"]
+      "mismatch_unless_context": [
+        "水源",
+        "饮用",
+        "水桶",
+        "水处理",
+        "可疑水"
+      ]
     },
     {
       "name": "planting_post_harvest",
-      "object_triggers": ["刚收下", "采收后", "叶菜", "根菜", "收获物", "收下来的菜"],
-      "state_triggers": ["擦伤", "潮气", "发霉", "短存", "分级", "隔离", "一筐", "霉变"],
-      "aliases": ["采后分级", "防霉", "通风", "晾干", "破损优先吃", "禁止入库", "短存隔离"],
-      "target_domains": ["planting", "food", "hygiene"],
-      "target_slug_domains": ["agriculture"],
-      "target_categories": ["种植与食物生产"],
-      "candidate_anchor_terms": ["采收", "收获物", "短存", "防霉", "霉变", "叶菜", "根菜", "分级"],
+      "object_triggers": [
+        "刚收下",
+        "采收后",
+        "叶菜",
+        "根菜",
+        "收获物",
+        "收下来的菜"
+      ],
+      "state_triggers": [
+        "擦伤",
+        "潮气",
+        "发霉",
+        "短存",
+        "分级",
+        "隔离",
+        "一筐",
+        "霉变"
+      ],
+      "aliases": [
+        "采后分级",
+        "防霉",
+        "通风",
+        "晾干",
+        "破损优先吃",
+        "禁止入库",
+        "短存隔离"
+      ],
+      "target_domains": [
+        "planting",
+        "food",
+        "hygiene"
+      ],
+      "target_slug_domains": [
+        "agriculture"
+      ],
+      "target_categories": [
+        "种植与食物生产"
+      ],
+      "candidate_anchor_terms": [
+        "采收",
+        "收获物",
+        "短存",
+        "防霉",
+        "霉变",
+        "叶菜",
+        "根菜",
+        "分级"
+      ],
       "candidate_anchor_boost": 35,
       "candidate_anchor_miss_penalty": 80,
       "domain_boost": 42,
       "domain_mismatch_penalty": 52,
       "title_alias_boost": 28,
-      "negative_terms": ["轮播", "播种计划", "种子交换"],
+      "negative_terms": [
+        "轮播",
+        "播种计划",
+        "种子交换"
+      ],
       "negative_penalty": 55,
-      "negative_unless_context": ["播种", "下一季", "留种"]
+      "negative_unless_context": [
+        "播种",
+        "下一季",
+        "留种"
+      ]
     },
     {
       "name": "planting_rain_waterlogging",
-      "object_triggers": ["菜地", "地块", "种植地", "作物", "菜叶", "幼苗", "苗", "根区"],
-      "state_triggers": ["大雨", "雨后", "积水", "排水", "叶黄", "发黄", "烂根", "根腐", "继续浇", "不能再种", "暂时停种", "下渗", "排不掉"],
-      "aliases": ["雨季种植防烂根", "雨后菜地复查", "菜地积水", "排水下渗测试", "根腐预警", "雨后停种判断", "不继续浇水", "地块暂时禁用", "低洼积水", "土壤排水", "根区缺氧"],
-      "target_domains": ["planting", "food", "hygiene"],
-      "target_slug_domains": ["agriculture"],
-      "target_categories": ["种植与食物生产"],
-      "candidate_anchor_terms": ["连续降雨", "雨季种植", "植物叶黄", "倒伏", "根部发臭", "烂根", "根腐", "雨后复查", "排水下渗", "暂时停种"],
+      "object_triggers": [
+        "菜地",
+        "地块",
+        "种植地",
+        "作物",
+        "菜叶",
+        "幼苗",
+        "苗",
+        "根区"
+      ],
+      "state_triggers": [
+        "大雨",
+        "雨后",
+        "积水",
+        "排水",
+        "叶黄",
+        "发黄",
+        "烂根",
+        "根腐",
+        "继续浇",
+        "不能再种",
+        "暂时停种",
+        "下渗",
+        "排不掉"
+      ],
+      "aliases": [
+        "雨季种植防烂根",
+        "雨后菜地复查",
+        "菜地积水",
+        "排水下渗测试",
+        "根腐预警",
+        "雨后停种判断",
+        "不继续浇水",
+        "地块暂时禁用",
+        "低洼积水",
+        "土壤排水",
+        "根区缺氧"
+      ],
+      "target_domains": [
+        "planting",
+        "food",
+        "hygiene"
+      ],
+      "target_slug_domains": [
+        "agriculture"
+      ],
+      "target_categories": [
+        "种植与食物生产"
+      ],
+      "candidate_anchor_terms": [
+        "连续降雨",
+        "雨季种植",
+        "植物叶黄",
+        "倒伏",
+        "根部发臭",
+        "烂根",
+        "根腐",
+        "雨后复查",
+        "排水下渗",
+        "暂时停种"
+      ],
       "candidate_anchor_boost": 40,
       "candidate_anchor_miss_penalty": 90,
       "domain_boost": 42,
       "domain_mismatch_penalty": 70,
       "title_alias_boost": 30,
-      "mismatch_unless_context": ["住所进水", "屋内水位", "人员撤离", "断电", "带电设备", "电气风险"]
+      "mismatch_unless_context": [
+        "住所进水",
+        "屋内水位",
+        "人员撤离",
+        "断电",
+        "带电设备",
+        "电气风险"
+      ]
+    },
+    {
+      "name": "energy_daily_budget_priority",
+      "object_triggers": [
+        "手机",
+        "手电",
+        "收音机",
+        "移动电源",
+        "充电宝",
+        "照明",
+        "灯",
+        "设备",
+        "关键设备",
+        "用电",
+        "电量",
+        "电源",
+        "负载",
+        "非必要设备",
+        "娱乐设备",
+        "舒适设备",
+        "舒服一点的设备",
+        "Core",
+        "终端",
+        "随身终端",
+        "离线设备"
+      ],
+      "state_triggers": [
+        "停电三天",
+        "停电多日",
+        "多日停电",
+        "都没多少电",
+        "没多少电",
+        "今天怎么安排",
+        "明天怎么调整",
+        "优先给什么",
+        "优先充",
+        "能源预算",
+        "用电预算",
+        "用电复盘",
+        "晚上复盘",
+        "复盘明天",
+        "为了省电",
+        "只留一盏灯",
+        "不能全黑",
+        "最低照明",
+        "先停掉",
+        "断开负载",
+        "必须留下",
+        "短时间开机",
+        "开机窗口",
+        "安排短时间开机"
+      ],
+      "aliases": [
+        "每日能源预算",
+        "能源预算",
+        "一日预算",
+        "可用能源",
+        "用电预算",
+        "用电复盘",
+        "每日用电复盘",
+        "能源交班摘要",
+        "晚间复盘实际用电",
+        "次日调整",
+        "预算表",
+        "普通任务窗口",
+        "暂停非关键用电",
+        "设备供电优先级",
+        "夜间照明续航安排",
+        "低电量断开负载顺序",
+        "非必要设备停用清单",
+        "负载过大时断开排序",
+        "低电量断开负载",
+        "先断开非关键负载",
+        "先关哪些设备",
+        "哪些必须留下",
+        "低电量设备开机窗口",
+        "短时间开机记录",
+        "低电量设备记录窗口"
+      ],
+      "target_domains": [
+        "power",
+        "records",
+        "security"
+      ],
+      "target_slug_domains": [
+        "energy",
+        "general"
+      ],
+      "target_categories": [
+        "能源",
+        "信息保存与长期重建",
+        "能源与电力",
+        "能源照明与设备"
+      ],
+      "candidate_anchor_terms": [
+        "每日能源预算",
+        "能源预算",
+        "一日预算",
+        "可用能源",
+        "用电预算",
+        "用电复盘",
+        "每日用电复盘",
+        "晚间复盘实际用电",
+        "次日调整",
+        "能源交班",
+        "预算表",
+        "普通任务窗口",
+        "设备供电优先级",
+        "夜间照明续航",
+        "夜间照明续航安排",
+        "低电量断开负载",
+        "低电量断开负载顺序",
+        "非必要设备停用",
+        "非必要设备停用清单",
+        "负载过大时断开排序",
+        "低电量设备开机窗口",
+        "短窗口使用",
+        "离线记录",
+        "低电量开机窗口"
+      ],
+      "candidate_anchor_boost": 86,
+      "candidate_anchor_miss_penalty": 105,
+      "domain_boost": 58,
+      "domain_mismatch_penalty": 145,
+      "title_alias_boost": 40,
+      "mismatch_unless_context": [
+        "维修",
+        "手锯",
+        "锯木板",
+        "切割",
+        "钻孔",
+        "刀口",
+        "锯线",
+        "工具区",
+        "孩子",
+        "医疗",
+        "发热",
+        "漏液",
+        "鼓包",
+        "接线",
+        "短路",
+        "电线破皮"
+      ],
+      "negative_terms": []
+    },
+    {
+      "name": "energy_charging_queue_management",
+      "object_triggers": [
+        "充电口",
+        "一个口",
+        "唯一的充电口",
+        "太阳能板",
+        "移动电源",
+        "共享移动电源",
+        "充电"
+      ],
+      "state_triggers": [
+        "只有一个口",
+        "一个口",
+        "多设备",
+        "都要充",
+        "怎么排队",
+        "排队",
+        "排班",
+        "轮换",
+        "一直占着",
+        "占着唯一",
+        "谁先充",
+        "借走",
+        "归还",
+        "还回来",
+        "没人记录",
+        "没记录",
+        "充放电交接"
+      ],
+      "aliases": [
+        "充电队列和排班",
+        "充电口轮换规则",
+        "充放电交接记录",
+        "共享移动电源借用归还",
+        "一个充电口多设备排队",
+        "唯一充电口轮换",
+        "一直占着充电口",
+        "太阳能板一个口怎么排队"
+      ],
+      "target_domains": [
+        "power",
+        "records",
+        "security"
+      ],
+      "target_slug_domains": [
+        "energy"
+      ],
+      "target_categories": [
+        "能源",
+        "信息保存与长期重建",
+        "能源与电力",
+        "能源照明与设备"
+      ],
+      "candidate_anchor_terms": [
+        "充电队列",
+        "排班",
+        "充电口",
+        "轮换",
+        "充放电交接",
+        "共享移动电源",
+        "借用归还",
+        "排队",
+        "唯一充电口",
+        "多设备"
+      ],
+      "candidate_anchor_boost": 78,
+      "candidate_anchor_miss_penalty": 125,
+      "domain_boost": 60,
+      "domain_mismatch_penalty": 145,
+      "title_alias_boost": 190,
+      "mismatch_unless_context": [
+        "电池鼓包",
+        "漏液",
+        "发热",
+        "短路",
+        "接反",
+        "未知电源",
+        "维修",
+        "医疗"
+      ]
+    },
+    {
+      "name": "energy_solar_low_output_management",
+      "object_triggers": [
+        "太阳能",
+        "太阳能板",
+        "日照",
+        "太阳",
+        "手机",
+        "移动电源",
+        "照明",
+        "通信"
+      ],
+      "state_triggers": [
+        "阴天",
+        "云很多",
+        "输出很弱",
+        "没怎么充进去",
+        "连续两天",
+        "低产出",
+        "有几小时太阳",
+        "几小时太阳",
+        "先充手机",
+        "先充手机还是移动电源",
+        "白天怎么排充电",
+        "早上中午下午",
+        "目标选择",
+        "晚上照明和通信"
+      ],
+      "aliases": [
+        "太阳能充电白天排程",
+        "阴天太阳能降级安排",
+        "日照不足时充电目标选择",
+        "太阳能天气产出记录",
+        "太阳能低输出管理",
+        "连续两天太阳能低产出",
+        "有几小时太阳怎么安排充电",
+        "阴天先充手机还是移动电源"
+      ],
+      "target_domains": [
+        "power",
+        "records",
+        "security"
+      ],
+      "target_slug_domains": [
+        "energy"
+      ],
+      "target_categories": [
+        "能源",
+        "信息保存与长期重建",
+        "能源与电力",
+        "能源照明与设备"
+      ],
+      "candidate_anchor_terms": [
+        "太阳能充电白天排程",
+        "白天排程",
+        "阴天太阳能降级",
+        "阴天太阳能降级安排",
+        "日照不足",
+        "充电目标",
+        "目标选择",
+        "日照不足时充电目标选择",
+        "太阳能天气产出",
+        "天气产出记录",
+        "太阳能天气产出记录",
+        "低输出",
+        "白天补电",
+        "日照窗口"
+      ],
+      "candidate_anchor_boost": 92,
+      "candidate_anchor_miss_penalty": 130,
+      "domain_boost": 58,
+      "domain_mismatch_penalty": 140,
+      "title_alias_boost": 185,
+      "mismatch_unless_context": [
+        "种植",
+        "晒蔫",
+        "中暑",
+        "食物",
+        "维修",
+        "锯",
+        "钻孔",
+        "医疗"
+      ]
     }
   ]
 }

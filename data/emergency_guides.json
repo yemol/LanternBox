@@ -28689,7 +28689,10 @@
       "主食配给",
       "夜间异响"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "energy-backup-battery-rotation-ledger-001",
+      "energy-battery-aging-capacity-note-001"
+    ],
     "risk_level": "caution"
   },
   {
@@ -53553,6 +53556,10 @@
       "连续两天无法满足关键设备电量时，调整通信开机窗口和夜间照明规则。"
     ],
     "related_wiki": [
+      "energy-solar-daytime-charge-schedule-001",
+      "energy-cloudy-solar-downgrade-001",
+      "energy-solar-charge-target-selection-001",
+      "energy-solar-weather-pattern-log-001",
       "energy-battery-001",
       "energy-battery-002",
       "energy-battery-003",
@@ -53686,7 +53693,9 @@
       "energy-power-strip-001",
       "energy-radio-power-001",
       "energy-solar-charging-001",
-      "energy-solar-charging-002"
+      "energy-solar-charging-002",
+      "energy-backup-battery-rotation-ledger-001",
+      "energy-battery-aging-capacity-note-001"
     ],
     "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
     "category_original": "能源",
@@ -53782,6 +53791,8 @@
       "无法判断哪个设备异常时，全部断开并改用备用电源。"
     ],
     "related_wiki": [
+      "energy-low-battery-load-disconnect-order-001",
+      "energy-nonessential-device-suspend-list-001",
       "energy-battery-capacity-001",
       "energy-fever-001"
     ],
@@ -69514,5 +69525,280 @@
       "电源改装"
     ],
     "risk_level": "high"
+  },
+  {
+    "category": "能源",
+    "priority": "P1",
+    "category_original": "能源",
+    "domains": [
+      "power",
+      "records",
+      "security"
+    ],
+    "intents": [
+      "energy_management"
+    ],
+    "situations": [
+      "long_power_outage",
+      "energy_scarcity"
+    ],
+    "risk_level": "caution",
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "energy_management",
+    "id": "DG-0844",
+    "title": "每日能源预算",
+    "scenario": "长期断电或离网供电不稳定，团队每天需要决定电量怎么分配。",
+    "goal": "把可用能源、关键负载、预留量和暂停任务写成可交接的一日预算。",
+    "tools": [
+      "每日预算表",
+      "设备清单",
+      "电量记录",
+      "标签",
+      "铅笔"
+    ],
+    "steps": [
+      "统计可用电源、估计余量和今日可能补电来源。",
+      "列出关键负载：通信、最低照明、记录、医疗照护、取水或保温。",
+      "先写不可挪用预留量，再分配普通任务窗口。",
+      "标记今日暂停设备和可手工替代任务。",
+      "晚间复盘实际用电和次日调整。"
+    ],
+    "check": [
+      "预算表包含电源、负载、预留量、负责人和复查时间。",
+      "关键负载没有被娱乐、重复照明或长时间开屏占用。",
+      "当日补电失败时有降级方案。"
+    ],
+    "common_mistakes": [
+      "只写总电量不写用途。",
+      "先安排普通设备，再想关键负载。",
+      "晚间不复盘，第二天继续抢电。"
+    ],
+    "fallback": [
+      "没有电量百分比时，用满、半、低、空和使用时长估算。",
+      "没有纸表时，用胶带标签、木板或纸箱面做公共预算表。"
+    ],
+    "stop_or_escalate": [
+      "关键通信、照明或医疗照护低于最低线时，暂停所有非关键用电。",
+      "能源记录与实物不符时，先盘点再继续分配。",
+      "设备出现鼓包、发热、异味、进水或接口异常时，转入安全停用流程。"
+    ],
+    "related_wiki": [
+      "energy-daily-energy-budget-001",
+      "energy-device-power-priority-tier-001",
+      "energy-device-runtime-estimate-card-001",
+      "energy-day-end-power-review-001",
+      "general-energy-handover-summary-001"
+    ],
+    "notes": "本 Guide 处理能源预算和交接，不处理电气维修或危险设备继续使用。",
+    "objects": [
+      "每日能源预算",
+      "关键负载",
+      "移动电源",
+      "太阳能",
+      "低电量设备"
+    ],
+    "keywords": [
+      "每日能源预算",
+      "能源预算",
+      "关键负载",
+      "预留量",
+      "低电量",
+      "交班摘要"
+    ],
+    "negative_keywords": [
+      "电池鼓包",
+      "漏液维修",
+      "快充协议",
+      "逆变器改装"
+    ],
+    "top1_aliases": [
+      "每日能源预算",
+      "能源预算",
+      "电量怎么分配",
+      "停电三天优先充什么"
+    ]
+  },
+  {
+    "category": "能源",
+    "priority": "P1",
+    "category_original": "能源",
+    "domains": [
+      "power",
+      "records",
+      "security"
+    ],
+    "intents": [
+      "energy_management"
+    ],
+    "situations": [
+      "long_power_outage",
+      "energy_scarcity"
+    ],
+    "risk_level": "caution",
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "energy_management",
+    "id": "DG-0845",
+    "title": "关键设备最低电量线",
+    "scenario": "通信、照明、记录或医疗照护设备电量下降，需要决定何时停止非关键任务。",
+    "goal": "为关键设备设定低于即收紧的电量线，保留最低通信、照明和记录能力。",
+    "tools": [
+      "最低电量线表",
+      "设备标签",
+      "计时工具",
+      "纸质替代方案",
+      "铅笔"
+    ],
+    "steps": [
+      "给每类关键设备设最低电量线。",
+      "低于线时取消非关键任务和普通充电请求。",
+      "将设备改为短窗口使用或交由负责人保管。",
+      "确认纸质替代、低亮照明或离线记录路径。",
+      "每晚复查最低线是否过高或过低。"
+    ],
+    "check": [
+      "每台关键设备有最低线和负责人。",
+      "低于最低线后的动作明确。",
+      "替代方案可执行。"
+    ],
+    "common_mistakes": [
+      "把最低线当作提醒而不是停止普通使用的边界。",
+      "所有设备同时耗到最低线以下。",
+      "为了普通任务挪用最低照明或通信电量。"
+    ],
+    "fallback": [
+      "无法读百分比时，用开机次数、亮度变化、掉电速度和历史记录估算。",
+      "估算不确定时按更低电量处理，并缩短窗口。"
+    ],
+    "stop_or_escalate": [
+      "所有关键设备同时低于最低线时，进入低电量紧急模式。",
+      "设备异常发热、鼓包、进水或异味时转入停用隔离，不因最低线继续使用。",
+      "夜间最低照明无法保证时，停止非必要夜间行动。"
+    ],
+    "related_wiki": [
+      "energy-critical-device-minimum-line-001",
+      "energy-essential-load-reserve-001",
+      "energy-low-battery-power-window-001",
+      "energy-night-lighting-runtime-plan-001"
+    ],
+    "notes": "最低线用于能源管理，不替代 P0 电气安全边界。",
+    "objects": [
+      "关键设备",
+      "通信设备",
+      "照明设备",
+      "记录设备",
+      "最低电量线"
+    ],
+    "keywords": [
+      "关键设备最低电量线",
+      "最低电量",
+      "低电量开机窗口",
+      "夜间照明续航",
+      "关键负载预留量"
+    ],
+    "negative_keywords": [
+      "市电维修",
+      "高压电",
+      "快充协议"
+    ],
+    "top1_aliases": [
+      "关键设备最低电量线",
+      "最低电量线",
+      "低于多少电停止普通使用"
+    ]
+  },
+  {
+    "category": "能源",
+    "priority": "P1",
+    "category_original": "能源",
+    "domains": [
+      "power",
+      "records",
+      "security"
+    ],
+    "intents": [
+      "energy_management"
+    ],
+    "situations": [
+      "long_power_outage",
+      "energy_scarcity"
+    ],
+    "risk_level": "caution",
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "energy_management",
+    "id": "DG-0846",
+    "title": "充电队列和排班",
+    "scenario": "移动电源、太阳能板或充电口有限，多台设备同时要求补电。",
+    "goal": "按关键等级和时间窗口安排充电，避免口头插队和共享电源去向不明。",
+    "tools": [
+      "充电队列表",
+      "设备编号",
+      "线材编号",
+      "计时工具",
+      "借还记录"
+    ],
+    "steps": [
+      "收集待充设备编号、电量、用途和截止时间。",
+      "按关键等级排序，先通信、照明、记录或医疗照护，再普通工具。",
+      "给每个设备安排开始、结束、负责人和目标电量。",
+      "充电结束后记录实际变化，归还设备和线材。",
+      "排队冲突时由能源负责人按每日预算裁决。"
+    ],
+    "check": [
+      "队列中没有未编号设备。",
+      "每个充电窗口有结束条件。",
+      "共享移动电源借还状态清楚。"
+    ],
+    "common_mistakes": [
+      "谁先看到谁先充。",
+      "设备不编号，只凭口头说明。",
+      "移动电源借出后不写归还电量。"
+    ],
+    "fallback": [
+      "接口不足时只保留一个关键充电口，其他设备改到下一窗口。",
+      "没有计时工具时，用早饭后、正午、天黑前等固定事件切换窗口。"
+    ],
+    "stop_or_escalate": [
+      "设备、线缆、接口发热或异味时停止该路充电并转入安全 Guide。",
+      "队列无法满足关键设备最低线时，取消非关键设备。",
+      "共享电源去向不明时，暂停新的借用并先清点。"
+    ],
+    "related_wiki": [
+      "energy-charging-queue-schedule-001",
+      "energy-charge-discharge-handover-log-001",
+      "energy-shared-power-bank-borrow-return-001",
+      "energy-charging-port-rotation-rule-001"
+    ],
+    "notes": "本 Guide 管理充电秩序和借还，不指导快充协议、改线或电源改装。",
+    "objects": [
+      "充电队列",
+      "移动电源",
+      "充电口",
+      "共享电源",
+      "充电线"
+    ],
+    "keywords": [
+      "充电队列",
+      "充电排班",
+      "共享移动电源",
+      "借用归还",
+      "充电口轮换"
+    ],
+    "negative_keywords": [
+      "USB PD",
+      "快充协议",
+      "逆变器改装"
+    ],
+    "top1_aliases": [
+      "充电队列和排班",
+      "充电排班",
+      "多个设备抢电",
+      "共享移动电源借用"
+    ]
   }
 ]

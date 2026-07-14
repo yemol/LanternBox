@@ -68,7 +68,9 @@
     "energy-power-strip-001",
     "energy-radio-power-001",
     "energy-solar-charging-001",
-    "energy-solar-charging-002"
+    "energy-solar-charging-002",
+    "energy-backup-battery-rotation-ledger-001",
+    "energy-battery-aging-capacity-note-001"
   ],
   "notes": "长期生存能力库扩容行动卡。服务离线生存、知识保存和团队协作，不包含攻击性伤害装置制作。",
   "category_original": "能源",

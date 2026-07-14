@@ -1,0 +1,90 @@
+{
+  "category": "能源",
+  "priority": "P1",
+  "category_original": "能源",
+  "domains": [
+    "power",
+    "records",
+    "security"
+  ],
+  "intents": [
+    "energy_management"
+  ],
+  "situations": [
+    "long_power_outage",
+    "energy_scarcity"
+  ],
+  "risk_level": "caution",
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "power",
+  "primary_intent": "energy_management",
+  "id": "DG-0845",
+  "title": "关键设备最低电量线",
+  "scenario": "通信、照明、记录或医疗照护设备电量下降，需要决定何时停止非关键任务。",
+  "goal": "为关键设备设定低于即收紧的电量线，保留最低通信、照明和记录能力。",
+  "tools": [
+    "最低电量线表",
+    "设备标签",
+    "计时工具",
+    "纸质替代方案",
+    "铅笔"
+  ],
+  "steps": [
+    "给每类关键设备设最低电量线。",
+    "低于线时取消非关键任务和普通充电请求。",
+    "将设备改为短窗口使用或交由负责人保管。",
+    "确认纸质替代、低亮照明或离线记录路径。",
+    "每晚复查最低线是否过高或过低。"
+  ],
+  "check": [
+    "每台关键设备有最低线和负责人。",
+    "低于最低线后的动作明确。",
+    "替代方案可执行。"
+  ],
+  "common_mistakes": [
+    "把最低线当作提醒而不是停止普通使用的边界。",
+    "所有设备同时耗到最低线以下。",
+    "为了普通任务挪用最低照明或通信电量。"
+  ],
+  "fallback": [
+    "无法读百分比时，用开机次数、亮度变化、掉电速度和历史记录估算。",
+    "估算不确定时按更低电量处理，并缩短窗口。"
+  ],
+  "stop_or_escalate": [
+    "所有关键设备同时低于最低线时，进入低电量紧急模式。",
+    "设备异常发热、鼓包、进水或异味时转入停用隔离，不因最低线继续使用。",
+    "夜间最低照明无法保证时，停止非必要夜间行动。"
+  ],
+  "related_wiki": [
+    "energy-critical-device-minimum-line-001",
+    "energy-essential-load-reserve-001",
+    "energy-low-battery-power-window-001",
+    "energy-night-lighting-runtime-plan-001"
+  ],
+  "notes": "最低线用于能源管理，不替代 P0 电气安全边界。",
+  "objects": [
+    "关键设备",
+    "通信设备",
+    "照明设备",
+    "记录设备",
+    "最低电量线"
+  ],
+  "keywords": [
+    "关键设备最低电量线",
+    "最低电量",
+    "低电量开机窗口",
+    "夜间照明续航",
+    "关键负载预留量"
+  ],
+  "negative_keywords": [
+    "市电维修",
+    "高压电",
+    "快充协议"
+  ],
+  "top1_aliases": [
+    "关键设备最低电量线",
+    "最低电量线",
+    "低于多少电停止普通使用"
+  ]
+}

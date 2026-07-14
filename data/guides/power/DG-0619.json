@@ -50,6 +50,8 @@
     "无法判断哪个设备异常时，全部断开并改用备用电源。"
   ],
   "related_wiki": [
+    "energy-low-battery-load-disconnect-order-001",
+    "energy-nonessential-device-suspend-list-001",
     "energy-battery-capacity-001",
     "energy-fever-001"
   ],

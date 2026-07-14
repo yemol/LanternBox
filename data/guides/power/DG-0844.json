@@ -1,0 +1,94 @@
+{
+  "category": "能源",
+  "priority": "P1",
+  "category_original": "能源",
+  "domains": [
+    "power",
+    "records",
+    "security"
+  ],
+  "intents": [
+    "energy_management"
+  ],
+  "situations": [
+    "long_power_outage",
+    "energy_scarcity"
+  ],
+  "risk_level": "caution",
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "power",
+  "primary_intent": "energy_management",
+  "id": "DG-0844",
+  "title": "每日能源预算",
+  "scenario": "长期断电或离网供电不稳定，团队每天需要决定电量怎么分配。",
+  "goal": "把可用能源、关键负载、预留量和暂停任务写成可交接的一日预算。",
+  "tools": [
+    "每日预算表",
+    "设备清单",
+    "电量记录",
+    "标签",
+    "铅笔"
+  ],
+  "steps": [
+    "统计可用电源、估计余量和今日可能补电来源。",
+    "列出关键负载：通信、最低照明、记录、医疗照护、取水或保温。",
+    "先写不可挪用预留量，再分配普通任务窗口。",
+    "标记今日暂停设备和可手工替代任务。",
+    "晚间复盘实际用电和次日调整。"
+  ],
+  "check": [
+    "预算表包含电源、负载、预留量、负责人和复查时间。",
+    "关键负载没有被娱乐、重复照明或长时间开屏占用。",
+    "当日补电失败时有降级方案。"
+  ],
+  "common_mistakes": [
+    "只写总电量不写用途。",
+    "先安排普通设备，再想关键负载。",
+    "晚间不复盘，第二天继续抢电。"
+  ],
+  "fallback": [
+    "没有电量百分比时，用满、半、低、空和使用时长估算。",
+    "没有纸表时，用胶带标签、木板或纸箱面做公共预算表。"
+  ],
+  "stop_or_escalate": [
+    "关键通信、照明或医疗照护低于最低线时，暂停所有非关键用电。",
+    "能源记录与实物不符时，先盘点再继续分配。",
+    "设备出现鼓包、发热、异味、进水或接口异常时，转入安全停用流程。"
+  ],
+  "related_wiki": [
+    "energy-daily-energy-budget-001",
+    "energy-device-power-priority-tier-001",
+    "energy-device-runtime-estimate-card-001",
+    "energy-day-end-power-review-001",
+    "general-energy-handover-summary-001"
+  ],
+  "notes": "本 Guide 处理能源预算和交接，不处理电气维修或危险设备继续使用。",
+  "objects": [
+    "每日能源预算",
+    "关键负载",
+    "移动电源",
+    "太阳能",
+    "低电量设备"
+  ],
+  "keywords": [
+    "每日能源预算",
+    "能源预算",
+    "关键负载",
+    "预留量",
+    "低电量",
+    "交班摘要"
+  ],
+  "negative_keywords": [
+    "电池鼓包",
+    "漏液维修",
+    "快充协议",
+    "逆变器改装"
+  ],
+  "top1_aliases": [
+    "每日能源预算",
+    "能源预算",
+    "电量怎么分配",
+    "停电三天优先充什么"
+  ]
+}

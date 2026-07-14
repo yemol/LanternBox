@@ -42955,5 +42955,156 @@
     "primary_domain": null,
     "primary_intent": null,
     "top1_aliases": []
+  },
+  {
+    "id": "DG-0844",
+    "title": "每日能源预算",
+    "category": "能源",
+    "category_original": "能源",
+    "risk_level": "caution",
+    "domains": [
+      "power",
+      "records",
+      "security"
+    ],
+    "intents": [
+      "energy_management"
+    ],
+    "situations": [
+      "long_power_outage",
+      "energy_scarcity"
+    ],
+    "objects": [
+      "每日能源预算",
+      "关键负载",
+      "移动电源",
+      "太阳能",
+      "低电量设备"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "每日能源预算",
+      "能源预算",
+      "关键负载",
+      "预留量",
+      "低电量",
+      "交班摘要"
+    ],
+    "negative_keywords": [
+      "电池鼓包",
+      "漏液维修",
+      "快充协议",
+      "逆变器改装"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "energy_management",
+    "top1_aliases": [
+      "每日能源预算",
+      "能源预算",
+      "电量怎么分配",
+      "停电三天优先充什么"
+    ]
+  },
+  {
+    "id": "DG-0845",
+    "title": "关键设备最低电量线",
+    "category": "能源",
+    "category_original": "能源",
+    "risk_level": "caution",
+    "domains": [
+      "power",
+      "records",
+      "security"
+    ],
+    "intents": [
+      "energy_management"
+    ],
+    "situations": [
+      "long_power_outage",
+      "energy_scarcity"
+    ],
+    "objects": [
+      "关键设备",
+      "通信设备",
+      "照明设备",
+      "记录设备",
+      "最低电量线"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "关键设备最低电量线",
+      "最低电量",
+      "低电量开机窗口",
+      "夜间照明续航",
+      "关键负载预留量"
+    ],
+    "negative_keywords": [
+      "市电维修",
+      "高压电",
+      "快充协议"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "energy_management",
+    "top1_aliases": [
+      "关键设备最低电量线",
+      "最低电量线",
+      "低于多少电停止普通使用"
+    ]
+  },
+  {
+    "id": "DG-0846",
+    "title": "充电队列和排班",
+    "category": "能源",
+    "category_original": "能源",
+    "risk_level": "caution",
+    "domains": [
+      "power",
+      "records",
+      "security"
+    ],
+    "intents": [
+      "energy_management"
+    ],
+    "situations": [
+      "long_power_outage",
+      "energy_scarcity"
+    ],
+    "objects": [
+      "充电队列",
+      "移动电源",
+      "充电口",
+      "共享电源",
+      "充电线"
+    ],
+    "signals": [],
+    "risks": [],
+    "keywords": [
+      "充电队列",
+      "充电排班",
+      "共享移动电源",
+      "借用归还",
+      "充电口轮换"
+    ],
+    "negative_keywords": [
+      "USB PD",
+      "快充协议",
+      "逆变器改装"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "power",
+    "primary_intent": "energy_management",
+    "top1_aliases": [
+      "充电队列和排班",
+      "充电排班",
+      "多个设备抢电",
+      "共享移动电源借用"
+    ]
   }
 ]

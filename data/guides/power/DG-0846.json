@@ -1,0 +1,91 @@
+{
+  "category": "能源",
+  "priority": "P1",
+  "category_original": "能源",
+  "domains": [
+    "power",
+    "records",
+    "security"
+  ],
+  "intents": [
+    "energy_management"
+  ],
+  "situations": [
+    "long_power_outage",
+    "energy_scarcity"
+  ],
+  "risk_level": "caution",
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "power",
+  "primary_intent": "energy_management",
+  "id": "DG-0846",
+  "title": "充电队列和排班",
+  "scenario": "移动电源、太阳能板或充电口有限，多台设备同时要求补电。",
+  "goal": "按关键等级和时间窗口安排充电，避免口头插队和共享电源去向不明。",
+  "tools": [
+    "充电队列表",
+    "设备编号",
+    "线材编号",
+    "计时工具",
+    "借还记录"
+  ],
+  "steps": [
+    "收集待充设备编号、电量、用途和截止时间。",
+    "按关键等级排序，先通信、照明、记录或医疗照护，再普通工具。",
+    "给每个设备安排开始、结束、负责人和目标电量。",
+    "充电结束后记录实际变化，归还设备和线材。",
+    "排队冲突时由能源负责人按每日预算裁决。"
+  ],
+  "check": [
+    "队列中没有未编号设备。",
+    "每个充电窗口有结束条件。",
+    "共享移动电源借还状态清楚。"
+  ],
+  "common_mistakes": [
+    "谁先看到谁先充。",
+    "设备不编号，只凭口头说明。",
+    "移动电源借出后不写归还电量。"
+  ],
+  "fallback": [
+    "接口不足时只保留一个关键充电口，其他设备改到下一窗口。",
+    "没有计时工具时，用早饭后、正午、天黑前等固定事件切换窗口。"
+  ],
+  "stop_or_escalate": [
+    "设备、线缆、接口发热或异味时停止该路充电并转入安全 Guide。",
+    "队列无法满足关键设备最低线时，取消非关键设备。",
+    "共享电源去向不明时，暂停新的借用并先清点。"
+  ],
+  "related_wiki": [
+    "energy-charging-queue-schedule-001",
+    "energy-charge-discharge-handover-log-001",
+    "energy-shared-power-bank-borrow-return-001",
+    "energy-charging-port-rotation-rule-001"
+  ],
+  "notes": "本 Guide 管理充电秩序和借还，不指导快充协议、改线或电源改装。",
+  "objects": [
+    "充电队列",
+    "移动电源",
+    "充电口",
+    "共享电源",
+    "充电线"
+  ],
+  "keywords": [
+    "充电队列",
+    "充电排班",
+    "共享移动电源",
+    "借用归还",
+    "充电口轮换"
+  ],
+  "negative_keywords": [
+    "USB PD",
+    "快充协议",
+    "逆变器改装"
+  ],
+  "top1_aliases": [
+    "充电队列和排班",
+    "充电排班",
+    "多个设备抢电",
+    "共享移动电源借用"
+  ]
+}
