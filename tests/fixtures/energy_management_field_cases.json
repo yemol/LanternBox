@@ -1,0 +1,240 @@
+[
+  {
+    "id": "energy_three_day_blackout_charge_priority",
+    "query": "停电三天了，手机、手电、收音机和移动电源都没多少电，应该优先给什么设备充电？",
+    "expected_guides": ["DG-0844"],
+    "allowed_secondary_guides": ["DG-0845", "DG-0846", "DG-0107", "DG-0563"],
+    "expected_wiki": [
+      "energy-daily-energy-budget-001",
+      "energy-device-power-priority-tier-001",
+      "energy-essential-load-reserve-001"
+    ],
+    "observation": false,
+    "focus": "能源预算主导，通信作为负载补充，不要让通信窗口完全抢主位。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_daily_budget_no_percent",
+    "query": "很多设备看不到准确电量百分比，今天怎么做能源预算？",
+    "expected_guides": ["DG-0844"],
+    "allowed_secondary_guides": [],
+    "expected_wiki": [
+      "energy-daily-energy-budget-001",
+      "energy-device-runtime-estimate-card-001",
+      "energy-wh-mah-local-estimate-001"
+    ],
+    "observation": false,
+    "focus": "低资源估算，不要求精密计算。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_key_device_minimum_line",
+    "query": "手机和照明都快没电了，最低要给它们留多少，什么时候不能再用了？",
+    "expected_guides": ["DG-0845"],
+    "allowed_secondary_guides": [],
+    "expected_wiki": [
+      "energy-critical-device-minimum-line-001",
+      "energy-essential-load-reserve-001",
+      "energy-night-lighting-runtime-plan-001"
+    ],
+    "observation": false,
+    "focus": "关键设备最低电量线。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_charging_queue_many_devices",
+    "query": "太阳能板只有一个口，手机、收音机、手电和移动电源都要充，怎么排队？",
+    "expected_guides": ["DG-0846"],
+    "allowed_secondary_guides": ["DG-0844", "DG-0564", "DG-0617"],
+    "expected_wiki": [
+      "energy-charging-queue-schedule-001",
+      "energy-charging-port-rotation-rule-001",
+      "energy-charge-discharge-handover-log-001"
+    ],
+    "observation": false,
+    "focus": "充电队列和排班。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_shared_power_bank_unknown_return",
+    "query": "共享移动电源被借走后还回来，不知道剩多少电，也没人记录，怎么办？",
+    "expected_guides": ["DG-0846"],
+    "allowed_secondary_guides": [],
+    "expected_wiki": [
+      "energy-shared-power-bank-borrow-return-001",
+      "energy-charge-discharge-handover-log-001",
+      "general-energy-handover-summary-001"
+    ],
+    "observation": false,
+    "focus": "借还、交接、复盘，不是电池故障。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_port_occupied_too_long",
+    "query": "有人一直占着唯一的充电口给自己的设备充电，其他关键设备怎么办？",
+    "expected_guides": ["DG-0846"],
+    "allowed_secondary_guides": ["DG-0844"],
+    "expected_wiki": [
+      "energy-charging-port-rotation-rule-001",
+      "energy-charging-queue-schedule-001",
+      "energy-device-power-priority-tier-001"
+    ],
+    "observation": false,
+    "focus": "团队能源秩序和排班。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_cloudy_solar_target",
+    "query": "今天阴天，太阳能输出很弱，应该先充手机还是移动电源？",
+    "expected_guides": ["DG-0617"],
+    "allowed_secondary_guides": ["DG-0844", "DG-0845", "DG-0564"],
+    "expected_wiki": [
+      "energy-cloudy-solar-downgrade-001",
+      "energy-solar-charge-target-selection-001",
+      "energy-solar-daytime-charge-schedule-001"
+    ],
+    "observation": false,
+    "focus": "太阳能降级和充电目标选择。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_solar_daytime_schedule",
+    "query": "今天有几小时太阳，早上中午下午分别应该怎么安排充电？",
+    "expected_guides": ["DG-0617"],
+    "allowed_secondary_guides": ["DG-0564"],
+    "expected_wiki": [
+      "energy-solar-daytime-charge-schedule-001",
+      "energy-solar-weather-pattern-log-001",
+      "energy-solar-charge-target-selection-001"
+    ],
+    "observation": false,
+    "focus": "太阳能白天排程。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_solar_two_days_low_output",
+    "query": "太阳能连续两天都没怎么充进去，晚上照明和通信要怎么调整？",
+    "expected_guides": ["DG-0844"],
+    "allowed_secondary_guides": ["DG-0845", "DG-0617", "DG-0564"],
+    "expected_wiki": [
+      "energy-cloudy-solar-downgrade-001",
+      "energy-night-lighting-runtime-plan-001",
+      "energy-day-end-power-review-001"
+    ],
+    "observation": false,
+    "focus": "多日低产出后的能源预算调整。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_low_power_disconnect_order",
+    "query": "电量不够了，应该先关哪些设备，哪些必须留下？",
+    "expected_guides": ["DG-0619"],
+    "allowed_secondary_guides": ["DG-0844", "DG-0845"],
+    "expected_wiki": [
+      "energy-low-battery-load-disconnect-order-001",
+      "energy-nonessential-device-suspend-list-001",
+      "energy-essential-load-reserve-001"
+    ],
+    "observation": false,
+    "focus": "低电量断开负载顺序。不要误判成电气故障。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_one_light_at_night",
+    "query": "晚上为了省电，只留一盏灯可以吗？哪些地方不能全黑？",
+    "expected_guides": ["DG-0845"],
+    "allowed_secondary_guides": ["DG-0844", "DG-0565"],
+    "expected_wiki": [
+      "energy-night-lighting-runtime-plan-001",
+      "energy-essential-load-reserve-001"
+    ],
+    "observation": false,
+    "focus": "夜间最低照明和安全边界。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_nonessential_suspend",
+    "query": "现在电量快不够了，哪些娱乐或舒服一点的设备应该先停掉？",
+    "expected_guides": ["DG-0619"],
+    "allowed_secondary_guides": ["DG-0844", "DG-0845"],
+    "expected_wiki": [
+      "energy-nonessential-device-suspend-list-001",
+      "energy-low-battery-load-disconnect-order-001",
+      "energy-device-power-priority-tier-001"
+    ],
+    "observation": false,
+    "focus": "非必要负载停用。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_day_end_review",
+    "query": "今天用电情况很乱，晚上怎么复盘明天怎么调整？",
+    "expected_guides": ["DG-0844"],
+    "allowed_secondary_guides": [],
+    "expected_wiki": [
+      "energy-day-end-power-review-001",
+      "general-energy-handover-summary-001",
+      "energy-daily-energy-budget-001"
+    ],
+    "observation": true,
+    "focus": "每日复盘。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_battery_rotation_lost_track",
+    "query": "备用电池轮换记录乱了，不知道哪几节最近用过，怎么重新整理？",
+    "expected_guides": ["DG-0336"],
+    "allowed_secondary_guides": ["DG-0618", "DG-0844"],
+    "expected_wiki": [
+      "energy-backup-battery-rotation-ledger-001",
+      "energy-battery-aging-capacity-note-001"
+    ],
+    "observation": true,
+    "focus": "备用电池轮换台账，不要误入电池故障。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "energy_core_terminal_low_power_window",
+    "query": "Core 和随身终端都快没电了，应该怎么安排短时间开机和记录？",
+    "expected_guides": ["DG-0845"],
+    "allowed_secondary_guides": ["DG-0844", "DG-0107"],
+    "expected_wiki": [
+      "energy-low-battery-power-window-001",
+      "general-energy-handover-summary-001",
+      "energy-critical-device-minimum-line-001"
+    ],
+    "observation": true,
+    "focus": "观察是否被终端同步、数据备份或通信窗口完全抢主位。本批没有新增 energy-low-power-core-terminal-window-001，所以不强制 pass。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  }
+]

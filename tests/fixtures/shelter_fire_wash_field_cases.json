@@ -1,0 +1,253 @@
+[
+  {
+    "id": "shelter_sleep_where_tonight",
+    "query": "今晚只能临时住在一个漏风的房间里，地上有点潮，应该先怎么判断睡哪里比较安全？",
+    "expected_guides": ["DG-0847", "DG-0848"],
+    "expected_wiki": [
+      "shelter-site-selection-weather-exposure-001",
+      "shelter-ground-moisture-barrier-001",
+      "shelter-sleep-heat-loss-ground-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "临时住所选址、防潮、睡眠区。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "shelter_rain_leak_stay_or_move",
+    "query": "房间一角一直漏雨，东西有点湿了，今晚还能不能继续住这里？",
+    "expected_guides": ["DG-0847"],
+    "expected_wiki": [
+      "shelter-rain-leak-first-line-001",
+      "shelter-roof-wall-floor-seepage-signs-001",
+      "shelter-daily-habitability-check-001"
+    ],
+    "allowed_secondary_guides": ["DG-0068"],
+    "observation": false,
+    "focus": "Shelter 主导，evacuation 只作为停止线补充。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "shelter_wet_ground_sleep",
+    "query": "地面很冷很潮，没有床，晚上睡觉怎么垫才不容易失温？",
+    "expected_guides": ["DG-0848"],
+    "expected_wiki": [
+      "shelter-ground-moisture-barrier-001",
+      "shelter-sleep-heat-loss-ground-001",
+      "clothing-wet-cold-early-hypothermia-signs-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "地面隔离和睡眠保温。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "shelter_ventilation_keep_warm",
+    "query": "晚上很冷，大家想把门窗都堵死保暖，这样可以吗？",
+    "expected_guides": ["DG-0848"],
+    "expected_wiki": [
+      "shelter-ventilation-heat-balance-001",
+      "shelter-sleep-heat-loss-ground-001",
+      "fire-carbon-monoxide-suspect-stop-001"
+    ],
+    "allowed_secondary_guides": ["DG-0850"],
+    "observation": false,
+    "focus": "保温和通风边界。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "fire_indoor_charcoal_heating",
+    "query": "停电又很冷，能不能在室内烧炭取暖，开一点窗是不是就行？",
+    "expected_guides": ["DG-0850"],
+    "expected_wiki": [
+      "fire-indoor-combustion-no-go-zone-001",
+      "fire-carbon-monoxide-suspect-stop-001",
+      "fire-indoor-combustion-carbon-monoxide-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "室内燃烧和一氧化碳停止线。必须有明确禁用边界。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "fire_before_lighting_check",
+    "query": "准备在门口附近生火做点热水，点火前要先检查什么？",
+    "expected_guides": ["DG-0849"],
+    "expected_wiki": [
+      "fire-before-lighting-site-check-001",
+      "fire-dry-wet-fuel-sorting-001",
+      "fire-children-bystander-clear-zone-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "火源使用前检查。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "fire_temporary_stove_unstable",
+    "query": "临时炉具有点晃，但是还能烧，能不能先凑合用？",
+    "expected_guides": ["DG-0849"],
+    "expected_wiki": [
+      "fire-temporary-stove-stability-boundary-001",
+      "fire-before-lighting-site-check-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "临时炉具稳定性和禁用边界。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "fire_smoke_backdraft_room",
+    "query": "做饭的时候烟一直往屋里倒灌，应该开窗还是赶紧灭火？",
+    "expected_guides": ["DG-0850"],
+    "expected_wiki": [
+      "fire-smoke-backdraft-room-response-001",
+      "fire-carbon-monoxide-suspect-stop-001",
+      "shelter-ventilation-heat-balance-001"
+    ],
+    "allowed_secondary_guides": ["DG-0849"],
+    "observation": false,
+    "focus": "烟雾反流、通风、停止线。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "fire_hot_ash_trash_bag",
+    "query": "灰烬看起来灭了但还有点热，可以直接倒进垃圾袋吗？",
+    "expected_guides": ["DG-0851"],
+    "expected_wiki": [
+      "fire-ash-ember-cooling-disposal-001",
+      "fire-night-final-extinguish-log-001"
+    ],
+    "allowed_secondary_guides": ["DG-0849", "DG-0850", "DG-0488", "DG-0223"],
+    "observation": true,
+    "focus": "验证 DG-0851 新增后，灰烬余火场景由灰烬与余火处理 Guide 主导，且 Fire Wiki evidence 进入证据链。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "clothing_wet_socks_outing",
+    "query": "袜子湿了，鞋里也有水，但还要出去找东西，能不能继续走？",
+    "expected_guides": ["DG-0852"],
+    "expected_wiki": [
+      "clothing-foot-check-after-wet-work-001",
+      "clothing-shoe-sole-failure-outing-stop-001",
+      "clothing-wet-cold-early-hypothermia-signs-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "湿袜、鞋内进水、外出停止线。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "clothing_shivering_keep_working",
+    "query": "人已经冷得一直发抖，但活还没干完，可以继续撑一下吗？",
+    "expected_guides": ["DG-0852"],
+    "expected_wiki": [
+      "clothing-wet-cold-early-hypothermia-signs-001",
+      "clothing-layering-work-rest-adjustment-001"
+    ],
+    "allowed_secondary_guides": ["DG-0848"],
+    "observation": false,
+    "focus": "湿冷失温早期信号和停工边界。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "clothing_gloves_contaminated",
+    "query": "清理污染物的时候手套破了，但手还没碰到东西，可以继续用吗？",
+    "expected_guides": ["DG-0852"],
+    "expected_wiki": [
+      "clothing-glove-contamination-cut-boundary-001",
+      "clothing-contaminated-laundry-zone-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "PPE 破损污染边界。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "wash_water_toilet_kitchen_layout",
+    "query": "地方很小，水桶、做饭的地方和桶厕都只能放在一个房间附近，怎么分区？",
+    "expected_guides": ["DG-0853"],
+    "expected_wiki": [
+      "hygiene-wash-zone-layout-minimum-001",
+      "hygiene-food-water-toilet-distance-review-001",
+      "hygiene-contamination-zone-visible-marking-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "WASH 分区主导，water/food 只补充。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "wash_limited_handwater",
+    "query": "洗手水不够了，哪些时候必须洗手，哪些可以降级处理？",
+    "expected_guides": ["DG-0853"],
+    "expected_wiki": [
+      "hygiene-handwater-priority-table-001",
+      "hygiene-wash-zone-layout-minimum-001"
+    ],
+    "allowed_secondary_guides": ["DG-0572"],
+    "observation": false,
+    "focus": "洗手水优先级。不要被普通水配给完全抢走。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "wash_bucket_toilet_full",
+    "query": "桶厕快满了，还有味道，什么时候必须更换或封起来？",
+    "expected_guides": ["DG-0853"],
+    "expected_wiki": [
+      "hygiene-bucket-toilet-changeover-001",
+      "hygiene-daily-wash-round-checklist-001",
+      "hygiene-wash-abnormal-record-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "桶厕更换、封存和记录。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "wash_patient_cup_kitchen",
+    "query": "病人用过的杯子和毛巾不小心放到厨房边上了，现在怎么处理？",
+    "expected_guides": ["DG-0853"],
+    "expected_wiki": [
+      "hygiene-patient-cup-towel-isolation-001",
+      "hygiene-kitchen-raw-cooked-contamination-line-001",
+      "hygiene-wash-abnormal-record-001"
+    ],
+    "allowed_secondary_guides": ["DG-0083"],
+    "observation": true,
+    "focus": "观察未新增 DG-0854 时，病人用品与厨房污染 Wiki 能否进入 evidence。若 WASH 主 Guide 命中但 Wiki 不全，可 partial。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  }
+]
