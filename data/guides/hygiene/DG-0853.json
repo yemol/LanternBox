@@ -1,0 +1,112 @@
+{
+  "id": "DG-0853",
+  "title": "小团队 WASH 分区运行",
+  "category": "污染控制 / 隔离 / 清洁分区",
+  "priority": "P0",
+  "scenario": "小团队长期共处，水有限，有桶厕、厨房、病人、污染物和垃圾，需要每天维持最小卫生系统。",
+  "goal": "建立饮水、洗手、厕所、厨房、污染区和记录交接的最小运行表。",
+  "keywords": [
+    "WASH",
+    "分区",
+    "洗手水",
+    "桶厕",
+    "厨房污染",
+    "每日巡查",
+    "Batch5-I",
+    "环境与居住",
+    "长期断供",
+    "低资源",
+    "小团队",
+    "停止线"
+  ],
+  "tools": [
+    "分区标记",
+    "洗手点",
+    "桶厕材料",
+    "巡查表",
+    "交接记录"
+  ],
+  "steps": [
+    "标出饮水区、洗手区、厕所区、厨房区、污染区和睡眠区。",
+    "确定必须洗手时刻：处理厕所、呕吐物、垃圾后，做饭前，吃饭前，照护病人前后。",
+    "每日巡查水桶、洗手点、桶厕、垃圾、病人用品、厨房表面。",
+    "发现污染区漂移或标记破坏时，先隔离再清理。",
+    "交接 WASH 状态和待处理异常。"
+  ],
+  "check": [
+    "厕所区是否远离饮水和厨房。",
+    "洗手点是否可用。",
+    "污染垃圾是否二次封存。",
+    "是否有腹泻、呕吐、异味、虫害记录。"
+  ],
+  "common_mistakes": [
+    "把水桶放在厕所动线上。",
+    "洗手水被普通擦洗用完。",
+    "只口头交接污染区和病人用品。"
+  ],
+  "fallback": [
+    "水不足时保留关键时刻洗手，其他清洁降级。",
+    "空间不足时至少保持饮水、厨房、厕所三者不重叠。"
+  ],
+  "stop_or_escalate": [
+    "厕所或污物接近饮水或厨房、桶厕破袋、多人腹泻呕吐、污染区无法标记时停止共用相关区域。",
+    "食物接触污染表面时按弃用或隔离判断。"
+  ],
+  "related_wiki": [
+    "hygiene-wash-zone-layout-minimum-001",
+    "hygiene-handwater-priority-table-001",
+    "hygiene-bucket-toilet-changeover-001",
+    "hygiene-contamination-zone-visible-marking-001",
+    "hygiene-daily-wash-round-checklist-001",
+    "hygiene-wash-abnormal-record-001",
+    "hygiene-food-water-toilet-distance-review-001",
+    "hygiene-simple-team-wash-handover-001"
+  ],
+  "notes": "Batch5-I 环境与居住核心补洞行动卡。",
+  "category_original": "污染控制 / 隔离 / 清洁分区",
+  "domains": [
+    "hygiene",
+    "shelter",
+    "water",
+    "food",
+    "records"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "shelter_fire_wash_long_term"
+  ],
+  "objects": [
+    "污染控制 / 隔离 / 清洁分区",
+    "小团队 WASH 分区运行",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "WASH",
+    "分区",
+    "洗手水",
+    "桶厕",
+    "厨房污染",
+    "停止线",
+    "复查"
+  ],
+  "risks": [
+    "contamination",
+    "injury_or_exposure",
+    "resource_depletion"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "hygiene",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "小团队 WASH 分区运行",
+    "WASH",
+    "分区",
+    "洗手水"
+  ],
+  "risk_level": "high"
+}

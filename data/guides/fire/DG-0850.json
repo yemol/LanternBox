@@ -1,0 +1,107 @@
+{
+  "id": "DG-0850",
+  "title": "室内燃烧和一氧化碳停止线",
+  "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+  "priority": "P0",
+  "scenario": "有人想在室内烧炭、用炉具取暖或用火做饭，担心冷、烟、通风和一氧化碳风险。",
+  "goal": "在疑似一氧化碳、烟气倒灌或密闭燃烧时，优先停火、通风、离开风险空间。",
+  "keywords": [
+    "室内燃烧",
+    "一氧化碳",
+    "烧炭",
+    "通风",
+    "停火",
+    "烟雾",
+    "Batch5-I",
+    "环境与居住",
+    "长期断供",
+    "低资源",
+    "小团队",
+    "停止线"
+  ],
+  "tools": [
+    "通风出口",
+    "禁用标记",
+    "人员清点表",
+    "低亮照明",
+    "火源记录"
+  ],
+  "steps": [
+    "先确认是否密闭、是否有燃气味、是否多人睡眠、是否已有头晕恶心。",
+    "区分取暖、照明、做饭，不允许用高风险燃烧替代长期取暖。",
+    "保留通风路径，火源区远离睡眠区和儿童区。",
+    "每次用火设定结束时间和复查人。",
+    "出现异常时先停火、通风、离开，再讨论是否继续。"
+  ],
+  "check": [
+    "是否有人头晕、恶心、困倦、意识变慢。",
+    "烟是否向室内倒灌。",
+    "门窗通风是否被完全封死。",
+    "火源是否已经完全熄灭并复查。"
+  ],
+  "common_mistakes": [
+    "室内烧炭取暖。",
+    "睡觉时保留无人值守火源。",
+    "多人不适时仍认为只是疲劳。"
+  ],
+  "fallback": [
+    "用无火保暖、分层衣物、地面隔离、集中睡眠代替燃烧取暖。",
+    "必须做饭时缩短时间，人员离开烟气方向。"
+  ],
+  "stop_or_escalate": [
+    "密闭室内烧炭、燃气味环境点火、睡眠时留火、多人同时异常，全部停止。",
+    "疑似一氧化碳时不再尝试忍一忍或继续睡。"
+  ],
+  "related_wiki": [
+    "fire-indoor-combustion-no-go-zone-001",
+    "fire-carbon-monoxide-suspect-stop-001",
+    "fire-smoke-backdraft-room-response-001",
+    "shelter-ventilation-heat-balance-001",
+    "fire-indoor-combustion-carbon-monoxide-001"
+  ],
+  "notes": "Batch5-I 环境与居住核心补洞行动卡。",
+  "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+  "domains": [
+    "fire",
+    "shelter",
+    "medical"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "shelter_fire_wash_long_term"
+  ],
+  "objects": [
+    "火源 / 保温 / 通风 / 一氧化碳风险",
+    "室内燃烧和一氧化碳停止线",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "室内燃烧",
+    "一氧化碳",
+    "烧炭",
+    "通风",
+    "停火",
+    "停止线",
+    "复查"
+  ],
+  "risks": [
+    "contamination",
+    "injury_or_exposure",
+    "resource_depletion"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "fire",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "室内燃烧和一氧化碳停止线",
+    "室内燃烧",
+    "一氧化碳",
+    "烧炭"
+  ],
+  "risk_level": "high"
+}

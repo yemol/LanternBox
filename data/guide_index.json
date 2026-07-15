@@ -43106,5 +43106,390 @@
       "多个设备抢电",
       "共享移动电源借用"
     ]
+  },
+  {
+    "id": "DG-0847",
+    "title": "临时住所选址与防雨防潮",
+    "category": "庇护空间分区",
+    "category_original": "庇护空间分区",
+    "risk_level": "caution",
+    "domains": [
+      "shelter",
+      "hygiene",
+      "water",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "庇护空间分区",
+      "临时住所选址与防雨防潮",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "临时住所",
+      "选址",
+      "漏雨",
+      "防潮",
+      "睡眠区",
+      "停止线",
+      "复查"
+    ],
+    "risks": [
+      "contamination",
+      "injury_or_exposure",
+      "resource_depletion"
+    ],
+    "keywords": [
+      "临时住所",
+      "选址",
+      "漏雨",
+      "防潮",
+      "睡眠区",
+      "长期断供",
+      "小团队",
+      "Batch5-I",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "小团队",
+      "停止线"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "临时住所选址与防雨防潮",
+      "临时住所",
+      "选址",
+      "漏雨"
+    ]
+  },
+  {
+    "id": "DG-0848",
+    "title": "睡眠区保温和地面隔离",
+    "category": "庇护空间分区",
+    "category_original": "庇护空间分区",
+    "risk_level": "high",
+    "domains": [
+      "shelter",
+      "clothing",
+      "medical",
+      "fire"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "庇护空间分区",
+      "睡眠区保温和地面隔离",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "睡眠区",
+      "地面隔离",
+      "失温",
+      "湿冷",
+      "保温",
+      "停止线",
+      "复查"
+    ],
+    "risks": [
+      "contamination",
+      "injury_or_exposure",
+      "resource_depletion"
+    ],
+    "keywords": [
+      "睡眠区",
+      "地面隔离",
+      "失温",
+      "湿冷",
+      "保温",
+      "分层穿衣",
+      "Batch5-I",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "小团队",
+      "停止线"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "睡眠区保温和地面隔离",
+      "睡眠区",
+      "地面隔离",
+      "失温"
+    ]
+  },
+  {
+    "id": "DG-0849",
+    "title": "火源使用前检查",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "risk_level": "high",
+    "domains": [
+      "fire",
+      "shelter",
+      "food",
+      "clothing"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "火源使用前检查",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "火源",
+      "点火前检查",
+      "临时炉具",
+      "燃料",
+      "儿童远离",
+      "停止线",
+      "复查"
+    ],
+    "risks": [
+      "contamination",
+      "injury_or_exposure",
+      "resource_depletion"
+    ],
+    "keywords": [
+      "火源",
+      "点火前检查",
+      "临时炉具",
+      "燃料",
+      "儿童远离",
+      "通风",
+      "Batch5-I",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "小团队",
+      "停止线"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "fire",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "火源使用前检查",
+      "火源",
+      "点火前检查",
+      "临时炉具"
+    ]
+  },
+  {
+    "id": "DG-0850",
+    "title": "室内燃烧和一氧化碳停止线",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "risk_level": "high",
+    "domains": [
+      "fire",
+      "shelter",
+      "medical"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "室内燃烧和一氧化碳停止线",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "室内燃烧",
+      "一氧化碳",
+      "烧炭",
+      "通风",
+      "停火",
+      "停止线",
+      "复查"
+    ],
+    "risks": [
+      "contamination",
+      "injury_or_exposure",
+      "resource_depletion"
+    ],
+    "keywords": [
+      "室内燃烧",
+      "一氧化碳",
+      "烧炭",
+      "通风",
+      "停火",
+      "烟雾",
+      "Batch5-I",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "小团队",
+      "停止线"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "fire",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "室内燃烧和一氧化碳停止线",
+      "室内燃烧",
+      "一氧化碳",
+      "烧炭"
+    ]
+  },
+  {
+    "id": "DG-0852",
+    "title": "湿冷衣物和脚部保护",
+    "category": "衣物 / 鞋袜 / 体温防护",
+    "category_original": "衣物 / 鞋袜 / 体温防护",
+    "risk_level": "high",
+    "domains": [
+      "clothing",
+      "medical",
+      "shelter",
+      "hygiene"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "衣物 / 鞋袜 / 体温防护",
+      "湿冷衣物和脚部保护",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "湿袜",
+      "湿冷",
+      "鞋底损坏",
+      "脚部检查",
+      "手套",
+      "停止线",
+      "复查"
+    ],
+    "risks": [
+      "contamination",
+      "injury_or_exposure",
+      "resource_depletion"
+    ],
+    "keywords": [
+      "湿袜",
+      "湿冷",
+      "鞋底损坏",
+      "脚部检查",
+      "手套",
+      "污染衣物",
+      "Batch5-I",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "小团队",
+      "停止线"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "clothing",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "湿冷衣物和脚部保护",
+      "湿袜",
+      "湿冷",
+      "鞋底损坏"
+    ]
+  },
+  {
+    "id": "DG-0853",
+    "title": "小团队 WASH 分区运行",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "risk_level": "high",
+    "domains": [
+      "hygiene",
+      "shelter",
+      "water",
+      "food",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "污染控制 / 隔离 / 清洁分区",
+      "小团队 WASH 分区运行",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "WASH",
+      "分区",
+      "洗手水",
+      "桶厕",
+      "厨房污染",
+      "停止线",
+      "复查"
+    ],
+    "risks": [
+      "contamination",
+      "injury_or_exposure",
+      "resource_depletion"
+    ],
+    "keywords": [
+      "WASH",
+      "分区",
+      "洗手水",
+      "桶厕",
+      "厨房污染",
+      "每日巡查",
+      "Batch5-I",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "小团队",
+      "停止线"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "小团队 WASH 分区运行",
+      "WASH",
+      "分区",
+      "洗手水"
+    ]
   }
 ]

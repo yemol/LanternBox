@@ -1,0 +1,108 @@
+{
+  "id": "DG-0849",
+  "title": "火源使用前检查",
+  "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+  "priority": "P0",
+  "scenario": "断电、低温或需要做饭，小团队打算使用明火、临时炉具、蜡烛或酒精炉。",
+  "goal": "点火前先确认场地、燃料、旁人、通风和停止条件，避免火灾、烟气和烫伤。",
+  "keywords": [
+    "火源",
+    "点火前检查",
+    "临时炉具",
+    "燃料",
+    "儿童远离",
+    "通风",
+    "Batch5-I",
+    "环境与居住",
+    "长期断供",
+    "低资源",
+    "小团队",
+    "停止线"
+  ],
+  "tools": [
+    "低亮照明",
+    "清场工具",
+    "水或沙土",
+    "分区标记",
+    "看火记录"
+  ],
+  "steps": [
+    "先判断是否在室内、睡眠区、儿童活动区、燃气味、烟味倒灌或通风不良环境。",
+    "清空火源周边可燃物，设置旁人和儿童距离。",
+    "分开干湿燃料，禁用不明化学材料、塑料、油污材料。",
+    "检查炉具或容器是否稳定、会不会倾倒、是否能快速停止。",
+    "指定看火人和熄灭复查人。"
+  ],
+  "check": [
+    "火源周围已经清空。",
+    "有通风和退出路线。",
+    "有水、沙土、盖子等低风险熄灭材料。",
+    "已记录点火人、用途和预计熄灭时间。"
+  ],
+  "common_mistakes": [
+    "先点火再清场。",
+    "在床边、纸箱旁或塑料垫上用火。",
+    "让看火人同时照护儿童和做饭。"
+  ],
+  "fallback": [
+    "不能安全用火时，改用冷食、保温衣物、集中睡眠或低功耗照明。",
+    "必须做饭时缩短时间，人员离开烟气方向。"
+  ],
+  "stop_or_escalate": [
+    "燃气味、头晕恶心、烟气倒灌、炉具不稳、儿童无法隔离、无人看守时不点火。",
+    "室内烧炭、密闭取暖、不明燃料燃烧直接禁用。"
+  ],
+  "related_wiki": [
+    "fire-before-lighting-site-check-001",
+    "fire-dry-wet-fuel-sorting-001",
+    "fire-temporary-stove-stability-boundary-001",
+    "fire-children-bystander-clear-zone-001",
+    "shelter-kitchen-fire-sleep-distance-001"
+  ],
+  "notes": "Batch5-I 环境与居住核心补洞行动卡。",
+  "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+  "domains": [
+    "fire",
+    "shelter",
+    "food",
+    "clothing"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "shelter_fire_wash_long_term"
+  ],
+  "objects": [
+    "火源 / 保温 / 通风 / 一氧化碳风险",
+    "火源使用前检查",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "火源",
+    "点火前检查",
+    "临时炉具",
+    "燃料",
+    "儿童远离",
+    "停止线",
+    "复查"
+  ],
+  "risks": [
+    "contamination",
+    "injury_or_exposure",
+    "resource_depletion"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "fire",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "火源使用前检查",
+    "火源",
+    "点火前检查",
+    "临时炉具"
+  ],
+  "risk_level": "high"
+}

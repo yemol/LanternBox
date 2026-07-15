@@ -2001,6 +2001,347 @@
         "钻孔",
         "医疗"
       ]
+    },
+    {
+      "name": "shelter_ventilation_heat_balance",
+      "object_triggers": [
+        "门窗",
+        "门",
+        "窗",
+        "通风",
+        "空气",
+        "睡觉",
+        "睡眠",
+        "火源",
+        "多人"
+      ],
+      "state_triggers": [
+        "堵死",
+        "堵住",
+        "封死",
+        "全部封死",
+        "保暖",
+        "不通风",
+        "很冷",
+        "晚上很冷",
+        "闷",
+        "不流通",
+        "通风和保温"
+      ],
+      "aliases": [
+        "睡眠区保温和地面隔离",
+        "室内燃烧和一氧化碳停止线",
+        "保温和通风的冲突平衡",
+        "睡眠区地面失温风险",
+        "疑似一氧化碳时停止取暖",
+        "通风不能完全关闭",
+        "门窗堵死保暖",
+        "多人睡眠通风",
+        "睡觉保暖通风"
+      ],
+      "target_domains": [
+        "shelter",
+        "fire",
+        "medical"
+      ],
+      "target_slug_domains": [
+        "shelter",
+        "fire",
+        "clothing"
+      ],
+      "target_categories": [
+        "庇护空间分区",
+        "火源 / 保温 / 通风 / 一氧化碳风险",
+        "衣物 / 鞋袜 / 体温防护"
+      ],
+      "candidate_anchor_terms": [
+        "睡眠区保温",
+        "地面隔离",
+        "保温和通风",
+        "通风",
+        "睡眠区",
+        "一氧化碳",
+        "室内燃烧",
+        "疑似一氧化碳",
+        "火源取暖",
+        "湿冷失温"
+      ],
+      "candidate_anchor_boost": 92,
+      "candidate_anchor_miss_penalty": 125,
+      "domain_boost": 62,
+      "domain_mismatch_penalty": 145,
+      "title_alias_boost": 170,
+      "mismatch_unless_context": [
+        "门窗松动",
+        "门窗受损",
+        "加固",
+        "维修",
+        "螺丝",
+        "铰链",
+        "锁",
+        "玻璃破"
+      ]
+    },
+    {
+      "name": "fire_smoke_combustion_stop",
+      "object_triggers": [
+        "烟",
+        "烟气",
+        "烟雾",
+        "做饭",
+        "炉具",
+        "室内燃烧",
+        "一氧化碳",
+        "通风",
+        "开窗"
+      ],
+      "state_triggers": [
+        "倒灌",
+        "往屋里",
+        "烟很大",
+        "烟大",
+        "反流",
+        "灭火",
+        "先停火",
+        "停火",
+        "通风不好",
+        "头晕",
+        "恶心",
+        "困倦"
+      ],
+      "aliases": [
+        "室内燃烧和一氧化碳停止线",
+        "火源使用前检查",
+        "烟雾反流时的开窗和撤离判断",
+        "疑似一氧化碳时停止取暖",
+        "室内燃烧禁区和停止线",
+        "保温和通风的冲突平衡",
+        "烟倒灌停火",
+        "开窗还是灭火",
+        "做饭烟大停火"
+      ],
+      "target_domains": [
+        "fire",
+        "shelter",
+        "medical"
+      ],
+      "target_slug_domains": [
+        "fire",
+        "shelter"
+      ],
+      "target_categories": [
+        "火源 / 保温 / 通风 / 一氧化碳风险",
+        "庇护空间分区"
+      ],
+      "candidate_anchor_terms": [
+        "室内燃烧",
+        "一氧化碳",
+        "烟雾",
+        "烟气",
+        "烟雾反流",
+        "烟气倒灌",
+        "停火",
+        "通风",
+        "头晕",
+        "恶心",
+        "火源使用前"
+      ],
+      "candidate_anchor_boost": 94,
+      "candidate_anchor_miss_penalty": 130,
+      "domain_boost": 62,
+      "domain_mismatch_penalty": 145,
+      "title_alias_boost": 180,
+      "mismatch_unless_context": [
+        "省燃料",
+        "食谱",
+        "食物保存",
+        "煮熟",
+        "烹饪时间",
+        "水桶",
+        "取水"
+      ]
+    },
+    {
+      "name": "clothing_wet_cold_ppe",
+      "object_triggers": [
+        "袜子",
+        "湿袜",
+        "鞋",
+        "湿鞋",
+        "鞋里",
+        "脚",
+        "衣物",
+        "手套",
+        "PPE",
+        "护目",
+        "口鼻防护",
+        "污染衣物",
+        "污染物",
+        "人",
+        "活",
+        "工作"
+      ],
+      "state_triggers": [
+        "湿了",
+        "有水",
+        "继续走",
+        "出去找东西",
+        "外出",
+        "发抖",
+        "冷得发抖",
+        "继续干活",
+        "停工",
+        "湿冷",
+        "破了",
+        "继续用",
+        "还能不能继续用",
+        "清理污染物"
+      ],
+      "aliases": [
+        "湿冷衣物和脚部保护",
+        "湿冷失温早期信号",
+        "湿作业后的脚部检查",
+        "鞋底损坏后的外出停止线",
+        "手套使用和破损污染边界",
+        "污染衣物临时存放区",
+        "湿袜外出停止线",
+        "PPE 破损边界"
+      ],
+      "target_domains": [
+        "clothing",
+        "shelter",
+        "hygiene",
+        "medical"
+      ],
+      "target_slug_domains": [
+        "clothing",
+        "shelter"
+      ],
+      "target_categories": [
+        "衣物 / 鞋袜 / 体温防护",
+        "庇护空间分区",
+        "污染控制 / 隔离 / 清洁分区"
+      ],
+      "candidate_anchor_terms": [
+        "湿冷衣物",
+        "脚部保护",
+        "湿冷",
+        "湿袜",
+        "脚部检查",
+        "鞋底",
+        "外出停止线",
+        "发抖",
+        "手套",
+        "破损污染",
+        "污染衣物"
+      ],
+      "candidate_anchor_boost": 94,
+      "candidate_anchor_miss_penalty": 130,
+      "domain_boost": 62,
+      "domain_mismatch_penalty": 145,
+      "title_alias_boost": 180,
+      "mismatch_unless_context": [
+        "血液大量污染",
+        "呕吐物",
+        "腹泻",
+        "病人照护",
+        "伤口",
+        "发热"
+      ]
+    },
+    {
+      "name": "wash_zone_layout_priority",
+      "object_triggers": [
+        "水桶",
+        "桶厕",
+        "厨房",
+        "做饭地方",
+        "厕所",
+        "洗手水",
+        "食物",
+        "饮水",
+        "病人用品",
+        "杯子",
+        "毛巾",
+        "餐具",
+        "污染区",
+        "WASH"
+      ],
+      "state_triggers": [
+        "不够",
+        "优先级",
+        "分区",
+        "太近",
+        "快满",
+        "异味",
+        "封存",
+        "更换",
+        "污染",
+        "巡查",
+        "标记",
+        "只能放在",
+        "一个房间附近",
+        "厨房污染"
+      ],
+      "aliases": [
+        "小团队 WASH 分区运行",
+        "饮水洗手厕所厨房最小分区",
+        "洗手水优先级表",
+        "桶厕更换和封存流程",
+        "食物水桶厕所距离复核",
+        "污染区可见标记方法",
+        "卫生异常记录和追溯",
+        "每日 WASH 巡查表",
+        "WASH 分区"
+      ],
+      "target_domains": [
+        "hygiene",
+        "water",
+        "food",
+        "shelter",
+        "records"
+      ],
+      "target_slug_domains": [
+        "hygiene",
+        "water",
+        "food",
+        "shelter"
+      ],
+      "target_categories": [
+        "卫生",
+        "污染控制 / 隔离 / 清洁分区",
+        "水",
+        "食物",
+        "庇护空间分区"
+      ],
+      "candidate_anchor_terms": [
+        "WASH",
+        "分区",
+        "饮水区",
+        "洗手区",
+        "厕所区",
+        "厨房区",
+        "洗手水",
+        "桶厕",
+        "更换",
+        "封存",
+        "污染区",
+        "卫生异常",
+        "巡查"
+      ],
+      "candidate_anchor_boost": 94,
+      "candidate_anchor_miss_penalty": 130,
+      "domain_boost": 62,
+      "domain_mismatch_penalty": 145,
+      "title_alias_boost": 180,
+      "mismatch_unless_context": [
+        "水桶漏水修补",
+        "容器裂缝",
+        "单独洗手",
+        "只问洗手步骤",
+        "食谱",
+        "烹饪时间"
+      ]
     }
   ]
 }

@@ -1,0 +1,108 @@
+{
+  "id": "DG-0852",
+  "title": "湿冷衣物和脚部保护",
+  "category": "衣物 / 鞋袜 / 体温防护",
+  "priority": "P0",
+  "scenario": "雨天、涉水、低温、长距离外出或湿作业后，成员衣物鞋袜潮湿，仍需活动或睡眠。",
+  "goal": "先处理贴身湿冷和脚部风险，必要时停止外出或高风险任务。",
+  "keywords": [
+    "湿袜",
+    "湿冷",
+    "鞋底损坏",
+    "脚部检查",
+    "手套",
+    "污染衣物",
+    "Batch5-I",
+    "环境与居住",
+    "长期断供",
+    "低资源",
+    "小团队",
+    "停止线"
+  ],
+  "tools": [
+    "干布",
+    "备用袜或隔湿材料",
+    "污染袋",
+    "低亮照明",
+    "脚部检查记录"
+  ],
+  "steps": [
+    "先检查脚、袜、鞋内、手、头颈和贴身层是否湿冷。",
+    "湿袜湿鞋离开睡眠区，脚部擦干或换到最干状态。",
+    "外出前检查鞋底、鞋面、鞋带和防滑；破损时降级任务。",
+    "工作和休息切换时调整衣物，避免出汗后静止受冷。",
+    "污染衣物与普通湿衣分开放置。"
+  ],
+  "check": [
+    "脚趾是否发白、麻木、破皮、水泡或持续冰冷。",
+    "鞋底是否打滑、开裂或进水。",
+    "睡前是否移除贴身湿衣。",
+    "是否记录需要晾干或修补的衣物鞋袜。"
+  ],
+  "common_mistakes": [
+    "穿湿袜睡觉。",
+    "用临时修补鞋执行远距离负重。",
+    "污染衣物和普通湿衣混放。"
+  ],
+  "fallback": [
+    "没有干袜时先隔湿、减少步行、缩短任务。",
+    "PPE 不足时降低任务风险，不用薄布口鼻防护进入烟雾或化学气味区。"
+  ],
+  "stop_or_escalate": [
+    "持续发抖、行动迟缓、判断变差、脚部破皮感染迹象时停止外出和高风险工作。",
+    "鞋底严重开裂、湿冷无法处理时不执行远距离外出。"
+  ],
+  "related_wiki": [
+    "clothing-wet-cold-early-hypothermia-signs-001",
+    "clothing-foot-check-after-wet-work-001",
+    "clothing-shoe-sole-failure-outing-stop-001",
+    "clothing-glove-contamination-cut-boundary-001",
+    "clothing-contaminated-laundry-zone-001"
+  ],
+  "notes": "Batch5-I 环境与居住核心补洞行动卡。",
+  "category_original": "衣物 / 鞋袜 / 体温防护",
+  "domains": [
+    "clothing",
+    "medical",
+    "shelter",
+    "hygiene"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "shelter_fire_wash_long_term"
+  ],
+  "objects": [
+    "衣物 / 鞋袜 / 体温防护",
+    "湿冷衣物和脚部保护",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "湿袜",
+    "湿冷",
+    "鞋底损坏",
+    "脚部检查",
+    "手套",
+    "停止线",
+    "复查"
+  ],
+  "risks": [
+    "contamination",
+    "injury_or_exposure",
+    "resource_depletion"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "clothing",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "湿冷衣物和脚部保护",
+    "湿袜",
+    "湿冷",
+    "鞋底损坏"
+  ],
+  "risk_level": "high"
+}

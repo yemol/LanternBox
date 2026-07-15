@@ -1,0 +1,108 @@
+{
+  "id": "DG-0848",
+  "title": "睡眠区保温和地面隔离",
+  "category": "庇护空间分区",
+  "priority": "P0",
+  "scenario": "夜间低温、地面潮湿、衣物不足或多人共用临时睡眠区，需要降低失温风险。",
+  "goal": "让人员不直接接触湿冷地面，并在保温同时保留必要通风和夜间复查。",
+  "keywords": [
+    "睡眠区",
+    "地面隔离",
+    "失温",
+    "湿冷",
+    "保温",
+    "分层穿衣",
+    "Batch5-I",
+    "环境与居住",
+    "长期断供",
+    "低资源",
+    "小团队",
+    "停止线"
+  ],
+  "tools": [
+    "防潮材料",
+    "隔冷垫材",
+    "干衣物",
+    "低亮照明",
+    "夜间复查表"
+  ],
+  "steps": [
+    "先判断地面是否潮、冷、渗水或靠近门窗风口。",
+    "用可用材料做隔湿和隔冷，睡眠区离开污染区、厕所区和火源区。",
+    "睡前检查脚、袜、鞋、外层衣物是否湿。",
+    "保留最低通风，不因保温完全封闭有火源或多人空间。",
+    "记录夜间发冷、咳嗽、潮湿和第二天需晾干物品。"
+  ],
+  "check": [
+    "身体不直接接触湿冷地面。",
+    "湿衣湿鞋不进入睡眠层。",
+    "通风没有被完全堵死。",
+    "夜间有人负责复查儿童、老人、病人和湿冷人员。"
+  ],
+  "common_mistakes": [
+    "只加盖上层而忽略身体下方失热。",
+    "为了保暖封死所有通风。",
+    "穿湿袜或湿贴身层睡觉。"
+  ],
+  "fallback": [
+    "垫材不足时集中保一小块睡眠区。",
+    "衣物不足时用干燥材料优先补头颈、手脚和地面隔层。"
+  ],
+  "stop_or_escalate": [
+    "人员持续发抖、动作变慢、意识变差、湿衣无法更换时，停止继续睡在原位置。",
+    "火源取暖导致头晕、恶心、困倦或烟味加重时，立即停火通风转移。"
+  ],
+  "related_wiki": [
+    "shelter-sleep-heat-loss-ground-001",
+    "shelter-ground-moisture-barrier-001",
+    "shelter-ventilation-heat-balance-001",
+    "clothing-wet-cold-early-hypothermia-signs-001",
+    "clothing-layering-work-rest-adjustment-001"
+  ],
+  "notes": "Batch5-I 环境与居住核心补洞行动卡。",
+  "category_original": "庇护空间分区",
+  "domains": [
+    "shelter",
+    "clothing",
+    "medical",
+    "fire"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "shelter_fire_wash_long_term"
+  ],
+  "objects": [
+    "庇护空间分区",
+    "睡眠区保温和地面隔离",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "睡眠区",
+    "地面隔离",
+    "失温",
+    "湿冷",
+    "保温",
+    "停止线",
+    "复查"
+  ],
+  "risks": [
+    "contamination",
+    "injury_or_exposure",
+    "resource_depletion"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "shelter",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "睡眠区保温和地面隔离",
+    "睡眠区",
+    "地面隔离",
+    "失温"
+  ],
+  "risk_level": "high"
+}

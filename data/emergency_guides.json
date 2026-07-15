@@ -69800,5 +69800,657 @@
       "多个设备抢电",
       "共享移动电源借用"
     ]
+  },
+  {
+    "id": "DG-0847",
+    "title": "临时住所选址与防雨防潮",
+    "category": "庇护空间分区",
+    "priority": "P0",
+    "scenario": "低温潮湿、漏雨或临时避难点条件差，小团队需要判断今晚能否停留，以及睡眠区放在哪里。",
+    "goal": "先排除明显不可住风险，建立最小干燥核心区，并记录漏雨、湿区和复查时间。",
+    "keywords": [
+      "临时住所",
+      "选址",
+      "漏雨",
+      "防潮",
+      "睡眠区",
+      "长期断供",
+      "小团队",
+      "Batch5-I",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "小团队",
+      "停止线"
+    ],
+    "tools": [
+      "低亮照明",
+      "标记物",
+      "接水容器",
+      "防潮材料",
+      "记录纸笔"
+    ],
+    "steps": [
+      "先排除低洼积水、坠物、明显异味、烟气、污水、墙体持续渗水的位置。",
+      "按人员、干衣、食物、饮水和电源的顺序确定最小干燥核心区。",
+      "将睡眠区抬高或垫隔湿层，湿鞋湿衣放在入口缓冲区。",
+      "漏雨时先转移睡眠和物资，不做攀高、触电或结构拆改类修补。",
+      "标出入口、通道、厕所、厨房/火源和污染区，并写下复查时间。"
+    ],
+    "check": [
+      "睡眠区地面干燥或已隔湿。",
+      "头顶、墙边、地面没有持续滴水或扩大渗水。",
+      "夜间通道不穿过厕所区和火源区。",
+      "漏水点、湿区和第二天复查时间已记录。"
+    ],
+    "common_mistakes": [
+      "先修屋顶再转移睡眠物。",
+      "把唯一干燥角落同时当厨房、厕所用品区和睡眠区。",
+      "湿鞋湿衣进入睡眠层。"
+    ],
+    "fallback": [
+      "无法完全防雨时，只保一块最小睡眠区和干衣区。",
+      "垫材不足时优先给儿童、老人、病人和湿冷人员。"
+    ],
+    "stop_or_escalate": [
+      "持续渗水、污水倒灌、霉味刺鼻、结构异响、烟味进入或人员发冷发抖时，停止把该处作为睡眠区。",
+      "无法保持一块干燥睡眠区时，转入撤离或换点判断。"
+    ],
+    "related_wiki": [
+      "shelter-site-selection-weather-exposure-001",
+      "shelter-rain-leak-first-line-001",
+      "shelter-ground-moisture-barrier-001",
+      "shelter-roof-wall-floor-seepage-signs-001",
+      "shelter-daily-habitability-check-001"
+    ],
+    "notes": "Batch5-I 环境与居住核心补洞行动卡。",
+    "category_original": "庇护空间分区",
+    "domains": [
+      "shelter",
+      "hygiene",
+      "water",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "庇护空间分区",
+      "临时住所选址与防雨防潮",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "临时住所",
+      "选址",
+      "漏雨",
+      "防潮",
+      "睡眠区",
+      "停止线",
+      "复查"
+    ],
+    "risks": [
+      "contamination",
+      "injury_or_exposure",
+      "resource_depletion"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "临时住所选址与防雨防潮",
+      "临时住所",
+      "选址",
+      "漏雨"
+    ],
+    "risk_level": "caution"
+  },
+  {
+    "id": "DG-0848",
+    "title": "睡眠区保温和地面隔离",
+    "category": "庇护空间分区",
+    "priority": "P0",
+    "scenario": "夜间低温、地面潮湿、衣物不足或多人共用临时睡眠区，需要降低失温风险。",
+    "goal": "让人员不直接接触湿冷地面，并在保温同时保留必要通风和夜间复查。",
+    "keywords": [
+      "睡眠区",
+      "地面隔离",
+      "失温",
+      "湿冷",
+      "保温",
+      "分层穿衣",
+      "Batch5-I",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "小团队",
+      "停止线"
+    ],
+    "tools": [
+      "防潮材料",
+      "隔冷垫材",
+      "干衣物",
+      "低亮照明",
+      "夜间复查表"
+    ],
+    "steps": [
+      "先判断地面是否潮、冷、渗水或靠近门窗风口。",
+      "用可用材料做隔湿和隔冷，睡眠区离开污染区、厕所区和火源区。",
+      "睡前检查脚、袜、鞋、外层衣物是否湿。",
+      "保留最低通风，不因保温完全封闭有火源或多人空间。",
+      "记录夜间发冷、咳嗽、潮湿和第二天需晾干物品。"
+    ],
+    "check": [
+      "身体不直接接触湿冷地面。",
+      "湿衣湿鞋不进入睡眠层。",
+      "通风没有被完全堵死。",
+      "夜间有人负责复查儿童、老人、病人和湿冷人员。"
+    ],
+    "common_mistakes": [
+      "只加盖上层而忽略身体下方失热。",
+      "为了保暖封死所有通风。",
+      "穿湿袜或湿贴身层睡觉。"
+    ],
+    "fallback": [
+      "垫材不足时集中保一小块睡眠区。",
+      "衣物不足时用干燥材料优先补头颈、手脚和地面隔层。"
+    ],
+    "stop_or_escalate": [
+      "人员持续发抖、动作变慢、意识变差、湿衣无法更换时，停止继续睡在原位置。",
+      "火源取暖导致头晕、恶心、困倦或烟味加重时，立即停火通风转移。"
+    ],
+    "related_wiki": [
+      "shelter-sleep-heat-loss-ground-001",
+      "shelter-ground-moisture-barrier-001",
+      "shelter-ventilation-heat-balance-001",
+      "clothing-wet-cold-early-hypothermia-signs-001",
+      "clothing-layering-work-rest-adjustment-001"
+    ],
+    "notes": "Batch5-I 环境与居住核心补洞行动卡。",
+    "category_original": "庇护空间分区",
+    "domains": [
+      "shelter",
+      "clothing",
+      "medical",
+      "fire"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "庇护空间分区",
+      "睡眠区保温和地面隔离",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "睡眠区",
+      "地面隔离",
+      "失温",
+      "湿冷",
+      "保温",
+      "停止线",
+      "复查"
+    ],
+    "risks": [
+      "contamination",
+      "injury_or_exposure",
+      "resource_depletion"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "shelter",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "睡眠区保温和地面隔离",
+      "睡眠区",
+      "地面隔离",
+      "失温"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0849",
+    "title": "火源使用前检查",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "scenario": "断电、低温或需要做饭，小团队打算使用明火、临时炉具、蜡烛或酒精炉。",
+    "goal": "点火前先确认场地、燃料、旁人、通风和停止条件，避免火灾、烟气和烫伤。",
+    "keywords": [
+      "火源",
+      "点火前检查",
+      "临时炉具",
+      "燃料",
+      "儿童远离",
+      "通风",
+      "Batch5-I",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "小团队",
+      "停止线"
+    ],
+    "tools": [
+      "低亮照明",
+      "清场工具",
+      "水或沙土",
+      "分区标记",
+      "看火记录"
+    ],
+    "steps": [
+      "先判断是否在室内、睡眠区、儿童活动区、燃气味、烟味倒灌或通风不良环境。",
+      "清空火源周边可燃物，设置旁人和儿童距离。",
+      "分开干湿燃料，禁用不明化学材料、塑料、油污材料。",
+      "检查炉具或容器是否稳定、会不会倾倒、是否能快速停止。",
+      "指定看火人和熄灭复查人。"
+    ],
+    "check": [
+      "火源周围已经清空。",
+      "有通风和退出路线。",
+      "有水、沙土、盖子等低风险熄灭材料。",
+      "已记录点火人、用途和预计熄灭时间。"
+    ],
+    "common_mistakes": [
+      "先点火再清场。",
+      "在床边、纸箱旁或塑料垫上用火。",
+      "让看火人同时照护儿童和做饭。"
+    ],
+    "fallback": [
+      "不能安全用火时，改用冷食、保温衣物、集中睡眠或低功耗照明。",
+      "必须做饭时缩短时间，人员离开烟气方向。"
+    ],
+    "stop_or_escalate": [
+      "燃气味、头晕恶心、烟气倒灌、炉具不稳、儿童无法隔离、无人看守时不点火。",
+      "室内烧炭、密闭取暖、不明燃料燃烧直接禁用。"
+    ],
+    "related_wiki": [
+      "fire-before-lighting-site-check-001",
+      "fire-dry-wet-fuel-sorting-001",
+      "fire-temporary-stove-stability-boundary-001",
+      "fire-children-bystander-clear-zone-001",
+      "shelter-kitchen-fire-sleep-distance-001"
+    ],
+    "notes": "Batch5-I 环境与居住核心补洞行动卡。",
+    "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "domains": [
+      "fire",
+      "shelter",
+      "food",
+      "clothing"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "火源使用前检查",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "火源",
+      "点火前检查",
+      "临时炉具",
+      "燃料",
+      "儿童远离",
+      "停止线",
+      "复查"
+    ],
+    "risks": [
+      "contamination",
+      "injury_or_exposure",
+      "resource_depletion"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "fire",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "火源使用前检查",
+      "火源",
+      "点火前检查",
+      "临时炉具"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0850",
+    "title": "室内燃烧和一氧化碳停止线",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "scenario": "有人想在室内烧炭、用炉具取暖或用火做饭，担心冷、烟、通风和一氧化碳风险。",
+    "goal": "在疑似一氧化碳、烟气倒灌或密闭燃烧时，优先停火、通风、离开风险空间。",
+    "keywords": [
+      "室内燃烧",
+      "一氧化碳",
+      "烧炭",
+      "通风",
+      "停火",
+      "烟雾",
+      "Batch5-I",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "小团队",
+      "停止线"
+    ],
+    "tools": [
+      "通风出口",
+      "禁用标记",
+      "人员清点表",
+      "低亮照明",
+      "火源记录"
+    ],
+    "steps": [
+      "先确认是否密闭、是否有燃气味、是否多人睡眠、是否已有头晕恶心。",
+      "区分取暖、照明、做饭，不允许用高风险燃烧替代长期取暖。",
+      "保留通风路径，火源区远离睡眠区和儿童区。",
+      "每次用火设定结束时间和复查人。",
+      "出现异常时先停火、通风、离开，再讨论是否继续。"
+    ],
+    "check": [
+      "是否有人头晕、恶心、困倦、意识变慢。",
+      "烟是否向室内倒灌。",
+      "门窗通风是否被完全封死。",
+      "火源是否已经完全熄灭并复查。"
+    ],
+    "common_mistakes": [
+      "室内烧炭取暖。",
+      "睡觉时保留无人值守火源。",
+      "多人不适时仍认为只是疲劳。"
+    ],
+    "fallback": [
+      "用无火保暖、分层衣物、地面隔离、集中睡眠代替燃烧取暖。",
+      "必须做饭时缩短时间，人员离开烟气方向。"
+    ],
+    "stop_or_escalate": [
+      "密闭室内烧炭、燃气味环境点火、睡眠时留火、多人同时异常，全部停止。",
+      "疑似一氧化碳时不再尝试忍一忍或继续睡。"
+    ],
+    "related_wiki": [
+      "fire-indoor-combustion-no-go-zone-001",
+      "fire-carbon-monoxide-suspect-stop-001",
+      "fire-smoke-backdraft-room-response-001",
+      "shelter-ventilation-heat-balance-001",
+      "fire-indoor-combustion-carbon-monoxide-001"
+    ],
+    "notes": "Batch5-I 环境与居住核心补洞行动卡。",
+    "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "domains": [
+      "fire",
+      "shelter",
+      "medical"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "室内燃烧和一氧化碳停止线",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "室内燃烧",
+      "一氧化碳",
+      "烧炭",
+      "通风",
+      "停火",
+      "停止线",
+      "复查"
+    ],
+    "risks": [
+      "contamination",
+      "injury_or_exposure",
+      "resource_depletion"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "fire",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "室内燃烧和一氧化碳停止线",
+      "室内燃烧",
+      "一氧化碳",
+      "烧炭"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0852",
+    "title": "湿冷衣物和脚部保护",
+    "category": "衣物 / 鞋袜 / 体温防护",
+    "priority": "P0",
+    "scenario": "雨天、涉水、低温、长距离外出或湿作业后，成员衣物鞋袜潮湿，仍需活动或睡眠。",
+    "goal": "先处理贴身湿冷和脚部风险，必要时停止外出或高风险任务。",
+    "keywords": [
+      "湿袜",
+      "湿冷",
+      "鞋底损坏",
+      "脚部检查",
+      "手套",
+      "污染衣物",
+      "Batch5-I",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "小团队",
+      "停止线"
+    ],
+    "tools": [
+      "干布",
+      "备用袜或隔湿材料",
+      "污染袋",
+      "低亮照明",
+      "脚部检查记录"
+    ],
+    "steps": [
+      "先检查脚、袜、鞋内、手、头颈和贴身层是否湿冷。",
+      "湿袜湿鞋离开睡眠区，脚部擦干或换到最干状态。",
+      "外出前检查鞋底、鞋面、鞋带和防滑；破损时降级任务。",
+      "工作和休息切换时调整衣物，避免出汗后静止受冷。",
+      "污染衣物与普通湿衣分开放置。"
+    ],
+    "check": [
+      "脚趾是否发白、麻木、破皮、水泡或持续冰冷。",
+      "鞋底是否打滑、开裂或进水。",
+      "睡前是否移除贴身湿衣。",
+      "是否记录需要晾干或修补的衣物鞋袜。"
+    ],
+    "common_mistakes": [
+      "穿湿袜睡觉。",
+      "用临时修补鞋执行远距离负重。",
+      "污染衣物和普通湿衣混放。"
+    ],
+    "fallback": [
+      "没有干袜时先隔湿、减少步行、缩短任务。",
+      "PPE 不足时降低任务风险，不用薄布口鼻防护进入烟雾或化学气味区。"
+    ],
+    "stop_or_escalate": [
+      "持续发抖、行动迟缓、判断变差、脚部破皮感染迹象时停止外出和高风险工作。",
+      "鞋底严重开裂、湿冷无法处理时不执行远距离外出。"
+    ],
+    "related_wiki": [
+      "clothing-wet-cold-early-hypothermia-signs-001",
+      "clothing-foot-check-after-wet-work-001",
+      "clothing-shoe-sole-failure-outing-stop-001",
+      "clothing-glove-contamination-cut-boundary-001",
+      "clothing-contaminated-laundry-zone-001"
+    ],
+    "notes": "Batch5-I 环境与居住核心补洞行动卡。",
+    "category_original": "衣物 / 鞋袜 / 体温防护",
+    "domains": [
+      "clothing",
+      "medical",
+      "shelter",
+      "hygiene"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "衣物 / 鞋袜 / 体温防护",
+      "湿冷衣物和脚部保护",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "湿袜",
+      "湿冷",
+      "鞋底损坏",
+      "脚部检查",
+      "手套",
+      "停止线",
+      "复查"
+    ],
+    "risks": [
+      "contamination",
+      "injury_or_exposure",
+      "resource_depletion"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "clothing",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "湿冷衣物和脚部保护",
+      "湿袜",
+      "湿冷",
+      "鞋底损坏"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0853",
+    "title": "小团队 WASH 分区运行",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "priority": "P0",
+    "scenario": "小团队长期共处，水有限，有桶厕、厨房、病人、污染物和垃圾，需要每天维持最小卫生系统。",
+    "goal": "建立饮水、洗手、厕所、厨房、污染区和记录交接的最小运行表。",
+    "keywords": [
+      "WASH",
+      "分区",
+      "洗手水",
+      "桶厕",
+      "厨房污染",
+      "每日巡查",
+      "Batch5-I",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "小团队",
+      "停止线"
+    ],
+    "tools": [
+      "分区标记",
+      "洗手点",
+      "桶厕材料",
+      "巡查表",
+      "交接记录"
+    ],
+    "steps": [
+      "标出饮水区、洗手区、厕所区、厨房区、污染区和睡眠区。",
+      "确定必须洗手时刻：处理厕所、呕吐物、垃圾后，做饭前，吃饭前，照护病人前后。",
+      "每日巡查水桶、洗手点、桶厕、垃圾、病人用品、厨房表面。",
+      "发现污染区漂移或标记破坏时，先隔离再清理。",
+      "交接 WASH 状态和待处理异常。"
+    ],
+    "check": [
+      "厕所区是否远离饮水和厨房。",
+      "洗手点是否可用。",
+      "污染垃圾是否二次封存。",
+      "是否有腹泻、呕吐、异味、虫害记录。"
+    ],
+    "common_mistakes": [
+      "把水桶放在厕所动线上。",
+      "洗手水被普通擦洗用完。",
+      "只口头交接污染区和病人用品。"
+    ],
+    "fallback": [
+      "水不足时保留关键时刻洗手，其他清洁降级。",
+      "空间不足时至少保持饮水、厨房、厕所三者不重叠。"
+    ],
+    "stop_or_escalate": [
+      "厕所或污物接近饮水或厨房、桶厕破袋、多人腹泻呕吐、污染区无法标记时停止共用相关区域。",
+      "食物接触污染表面时按弃用或隔离判断。"
+    ],
+    "related_wiki": [
+      "hygiene-wash-zone-layout-minimum-001",
+      "hygiene-handwater-priority-table-001",
+      "hygiene-bucket-toilet-changeover-001",
+      "hygiene-contamination-zone-visible-marking-001",
+      "hygiene-daily-wash-round-checklist-001",
+      "hygiene-wash-abnormal-record-001",
+      "hygiene-food-water-toilet-distance-review-001",
+      "hygiene-simple-team-wash-handover-001"
+    ],
+    "notes": "Batch5-I 环境与居住核心补洞行动卡。",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "domains": [
+      "hygiene",
+      "shelter",
+      "water",
+      "food",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "污染控制 / 隔离 / 清洁分区",
+      "小团队 WASH 分区运行",
+      "长期断供",
+      "小团队"
+    ],
+    "signals": [
+      "WASH",
+      "分区",
+      "洗手水",
+      "桶厕",
+      "厨房污染",
+      "停止线",
+      "复查"
+    ],
+    "risks": [
+      "contamination",
+      "injury_or_exposure",
+      "resource_depletion"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "小团队 WASH 分区运行",
+      "WASH",
+      "分区",
+      "洗手水"
+    ],
+    "risk_level": "high"
   }
 ]

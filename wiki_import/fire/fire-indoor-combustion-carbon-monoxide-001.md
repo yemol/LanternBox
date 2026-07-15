@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于室内燃烧一氧化碳风险的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 一氧化碳, 室内燃烧, 炭火, 发电机, 高风险边界
-guide_links: DG-0221, DG-0591
+guide_links: DG-0221, DG-0591, DG-0850
 kiwix_topics: 室内燃烧一氧化碳风险, Carbon monoxide poisoning, Combustion, Indoor air quality
 last_reviewed: 2026-07-03
 status: published

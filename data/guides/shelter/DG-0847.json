@@ -1,0 +1,109 @@
+{
+  "id": "DG-0847",
+  "title": "临时住所选址与防雨防潮",
+  "category": "庇护空间分区",
+  "priority": "P0",
+  "scenario": "低温潮湿、漏雨或临时避难点条件差，小团队需要判断今晚能否停留，以及睡眠区放在哪里。",
+  "goal": "先排除明显不可住风险，建立最小干燥核心区，并记录漏雨、湿区和复查时间。",
+  "keywords": [
+    "临时住所",
+    "选址",
+    "漏雨",
+    "防潮",
+    "睡眠区",
+    "长期断供",
+    "小团队",
+    "Batch5-I",
+    "环境与居住",
+    "长期断供",
+    "低资源",
+    "小团队",
+    "停止线"
+  ],
+  "tools": [
+    "低亮照明",
+    "标记物",
+    "接水容器",
+    "防潮材料",
+    "记录纸笔"
+  ],
+  "steps": [
+    "先排除低洼积水、坠物、明显异味、烟气、污水、墙体持续渗水的位置。",
+    "按人员、干衣、食物、饮水和电源的顺序确定最小干燥核心区。",
+    "将睡眠区抬高或垫隔湿层，湿鞋湿衣放在入口缓冲区。",
+    "漏雨时先转移睡眠和物资，不做攀高、触电或结构拆改类修补。",
+    "标出入口、通道、厕所、厨房/火源和污染区，并写下复查时间。"
+  ],
+  "check": [
+    "睡眠区地面干燥或已隔湿。",
+    "头顶、墙边、地面没有持续滴水或扩大渗水。",
+    "夜间通道不穿过厕所区和火源区。",
+    "漏水点、湿区和第二天复查时间已记录。"
+  ],
+  "common_mistakes": [
+    "先修屋顶再转移睡眠物。",
+    "把唯一干燥角落同时当厨房、厕所用品区和睡眠区。",
+    "湿鞋湿衣进入睡眠层。"
+  ],
+  "fallback": [
+    "无法完全防雨时，只保一块最小睡眠区和干衣区。",
+    "垫材不足时优先给儿童、老人、病人和湿冷人员。"
+  ],
+  "stop_or_escalate": [
+    "持续渗水、污水倒灌、霉味刺鼻、结构异响、烟味进入或人员发冷发抖时，停止把该处作为睡眠区。",
+    "无法保持一块干燥睡眠区时，转入撤离或换点判断。"
+  ],
+  "related_wiki": [
+    "shelter-site-selection-weather-exposure-001",
+    "shelter-rain-leak-first-line-001",
+    "shelter-ground-moisture-barrier-001",
+    "shelter-roof-wall-floor-seepage-signs-001",
+    "shelter-daily-habitability-check-001"
+  ],
+  "notes": "Batch5-I 环境与居住核心补洞行动卡。",
+  "category_original": "庇护空间分区",
+  "domains": [
+    "shelter",
+    "hygiene",
+    "water",
+    "records"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "shelter_fire_wash_long_term"
+  ],
+  "objects": [
+    "庇护空间分区",
+    "临时住所选址与防雨防潮",
+    "长期断供",
+    "小团队"
+  ],
+  "signals": [
+    "临时住所",
+    "选址",
+    "漏雨",
+    "防潮",
+    "睡眠区",
+    "停止线",
+    "复查"
+  ],
+  "risks": [
+    "contamination",
+    "injury_or_exposure",
+    "resource_depletion"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "shelter",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "临时住所选址与防雨防潮",
+    "临时住所",
+    "选址",
+    "漏雨"
+  ],
+  "risk_level": "caution"
+}
