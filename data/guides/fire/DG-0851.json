@@ -1,0 +1,111 @@
+{
+  "id": "DG-0851",
+  "title": "灰烬与余火处理",
+  "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+  "priority": "P0",
+  "scenario": "做饭、取暖、蜡烛、炉具或炭火结束后，仍有灰烬、热炭、余火、热炉具或焦物，需要判断能否移动、封存或丢弃。",
+  "goal": "在确认冷却前，把灰烬、热炭、余火和热容器作为仍有复燃风险处理，避免垃圾袋引燃、烫伤和夜间复燃。",
+  "keywords": [
+    "灰烬",
+    "余火",
+    "热炭",
+    "垃圾袋",
+    "冷却",
+    "复燃",
+    "火源复查",
+    "Batch5-M",
+    "环境与居住",
+    "长期断供",
+    "低资源",
+    "停止线"
+  ],
+  "tools": [
+    "耐热位置",
+    "金属容器",
+    "沙土",
+    "禁入标记",
+    "复查记录"
+  ],
+  "steps": [
+    "停止继续加燃料。",
+    "清理儿童、旁人和可燃物。",
+    "判断是否存在烟、火星、红热、热气或容器明显发烫。",
+    "未确认冷却前，不进入塑料袋、普通垃圾、衣物旁、燃料旁或睡眠区。",
+    "放置在耐热位置冷却。",
+    "冷却确认后再封存或转移。",
+    "记录处理人和复查时间。"
+  ],
+  "check": [
+    "灰烬和焦物无烟。",
+    "无火星、无红热、无明显热感。",
+    "容器或放置面耐热且稳定。",
+    "周边无纸、布、塑料、燃料和睡眠用品。",
+    "夜间有复查记录。"
+  ],
+  "common_mistakes": [
+    "把看起来灭了的热灰直接倒进塑料袋。",
+    "把热容器放在衣物、床边或燃料旁冷却。",
+    "睡前只凭记忆确认火源已经处理。"
+  ],
+  "fallback": [
+    "无金属容器时使用耐热区域隔离。",
+    "使用沙土辅助覆盖并延长冷却时间。",
+    "没有表格时，手写记录火源、地点、处理时间和复查人。"
+  ],
+  "stop_or_escalate": [
+    "灰烬冒烟、出现红热、容器持续发热、风大扬灰、无法隔离儿童或可燃物时，按仍有余火处理。",
+    "无法确认冷却前不移动到普通垃圾或睡眠区。"
+  ],
+  "related_wiki": [
+    "fire-ash-ember-cooling-disposal-001",
+    "fire-night-final-extinguish-log-001",
+    "fire-small-fire-stop-001",
+    "fire-fire-response-001"
+  ],
+  "notes": "Batch5-M Shelter / Fire / WASH v0.2 小批次行动卡。",
+  "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+  "domains": [
+    "fire",
+    "shelter",
+    "hygiene"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "shelter_fire_wash_long_term"
+  ],
+  "objects": [
+    "火源 / 保温 / 通风 / 一氧化碳风险",
+    "灰烬与余火处理",
+    "热灰",
+    "垃圾袋",
+    "小团队"
+  ],
+  "signals": [
+    "灰烬",
+    "余火",
+    "热炭",
+    "垃圾袋",
+    "冷却",
+    "复燃",
+    "复查"
+  ],
+  "risks": [
+    "injury_or_exposure",
+    "fire",
+    "contamination"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "fire",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "灰烬与余火处理",
+    "热灰能不能倒垃圾袋",
+    "灰烬还有点热",
+    "余火处理"
+  ],
+  "risk_level": "high"
+}

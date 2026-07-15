@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于病人杯子毛巾餐具隔离的现场判断、行动边界和交接复查，帮助小团队在离线低资源条件下降低误用风险。
 tags: 病人用品, 餐具隔离, 毛巾, 厨房污染, 照护
-guide_links: 
+guide_links: DG-0854
 kiwix_topics: 病人杯子毛巾餐具隔离, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Off-grid living
 last_reviewed: 2026-07-15
 status: published

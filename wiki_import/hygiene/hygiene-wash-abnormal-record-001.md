@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于卫生异常记录和追溯的现场判断、行动边界和交接复查，帮助小团队在离线低资源条件下降低误用风险。
 tags: 卫生异常, 追溯, 记录, WASH, 交接
-guide_links: DG-0853
+guide_links: DG-0853, DG-0854
 kiwix_topics: 卫生异常记录和追溯, 卫生, Emergency preparedness, Off-grid living
 last_reviewed: 2026-07-15
 status: published

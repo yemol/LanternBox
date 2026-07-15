@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于夜间火源熄灭记录的现场判断、行动边界和交接复查，帮助小团队在离线低资源条件下降低误用风险。
 tags: 熄灭记录, 夜间, 火源复查, 余热, 交接
-guide_links: 
+guide_links: DG-0851
 kiwix_topics: 夜间火源熄灭记录, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Off-grid living
 last_reviewed: 2026-07-15
 status: published

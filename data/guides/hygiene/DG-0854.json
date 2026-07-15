@@ -1,0 +1,114 @@
+{
+  "id": "DG-0854",
+  "title": "病人用品与厨房污染隔离",
+  "category": "污染控制 / 隔离 / 清洁分区",
+  "priority": "P0",
+  "scenario": "病人杯子、毛巾、餐具、清洁用品或垃圾接近厨房、饮水桶、公共餐具或食物处理面，需要判断停用、隔离、清洁和恢复。",
+  "goal": "把病人用品误入厨房或饮水动线后的污染范围先停用、标记、隔离和记录，避免继续接触入口食物和公共用品。",
+  "keywords": [
+    "病人用品",
+    "杯子",
+    "毛巾",
+    "厨房污染",
+    "饮水桶",
+    "公共餐具",
+    "隔离",
+    "Batch5-M",
+    "WASH",
+    "长期断供",
+    "小团队",
+    "停止线"
+  ],
+  "tools": [
+    "个人标记",
+    "隔离容器",
+    "洗手点",
+    "污染区标记",
+    "异常记录"
+  ],
+  "steps": [
+    "停止继续使用受影响区域。",
+    "标记病人用品和接触位置。",
+    "将病人用品移回固定区域。",
+    "判断是否接触厨房台面、公共餐具、饮水桶或食物入口区域。",
+    "完成照护者手卫生。",
+    "清洁、隔离或停用相关物品。",
+    "记录污染范围和恢复时间。"
+  ],
+  "check": [
+    "病人用品是否专用。",
+    "病人用品和接触位置是否明确标记。",
+    "病人用品是否远离厨房和饮水区域。",
+    "是否避免进入饮水桶取水口和公共餐具区。",
+    "是否完成污染范围和恢复时间记录。"
+  ],
+  "common_mistakes": [
+    "把病人杯子和公共餐具临时放在同一区域。",
+    "只移动物品，不记录接触过的台面和餐具。",
+    "照护者处理病人用品后直接接触饮水或食物。"
+  ],
+  "fallback": [
+    "没有额外空间时，使用固定角落隔离并明确标记。",
+    "空间必须共用时，按时间分区处理，并在中间完成清洁和手卫生。",
+    "无法确认接触范围时，先扩大停用范围并记录待复查。"
+  ],
+  "stop_or_escalate": [
+    "病人用品接触熟食、公共餐具、饮水桶取水口或入口食物处理面时，停止共用相关物品和区域。",
+    "多人出现腹泻或呕吐时，停止共用可疑用品并扩大 WASH 异常记录和观察。"
+  ],
+  "related_wiki": [
+    "hygiene-patient-cup-towel-isolation-001",
+    "hygiene-kitchen-raw-cooked-contamination-line-001",
+    "hygiene-wash-abnormal-record-001",
+    "hygiene-shared-items-001",
+    "hygiene-contaminated-surface-001"
+  ],
+  "notes": "Batch5-M Shelter / Fire / WASH v0.2 小批次行动卡。",
+  "category_original": "污染控制 / 隔离 / 清洁分区",
+  "domains": [
+    "hygiene",
+    "food",
+    "water",
+    "medical",
+    "records"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "shelter_fire_wash_long_term"
+  ],
+  "objects": [
+    "污染控制 / 隔离 / 清洁分区",
+    "病人用品与厨房污染隔离",
+    "病人杯子",
+    "厨房台面",
+    "饮水桶"
+  ],
+  "signals": [
+    "病人用品",
+    "杯子",
+    "毛巾",
+    "厨房",
+    "饮水桶",
+    "污染隔离",
+    "记录"
+  ],
+  "risks": [
+    "contamination",
+    "medical",
+    "resource_depletion"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "hygiene",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "病人用品与厨房污染隔离",
+    "病人杯子毛巾进厨房",
+    "病人用品靠近厨房",
+    "病人用品污染隔离"
+  ],
+  "risk_level": "high"
+}

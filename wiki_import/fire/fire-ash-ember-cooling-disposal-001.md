@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于灰烬和余火冷却处理的现场判断、行动边界和交接复查，帮助小团队在离线低资源条件下降低误用风险。
 tags: 灰烬, 余火, 冷却, 复燃, 火源记录
-guide_links: 
+guide_links: DG-0851
 kiwix_topics: 灰烬和余火冷却处理, 火源 / 保温 / 通风 / 一氧化碳风险, Emergency preparedness, Off-grid living
 last_reviewed: 2026-07-15
 status: published

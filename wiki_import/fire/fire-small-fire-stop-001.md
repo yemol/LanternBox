@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 初起小火可先短时处理，但火势扩大、烟多、出口受威胁或人员不适时必须立即撤离；高风险条目，继续处置可能导致严重伤害。
 tags: 火灾, 小火, 撤离, 长期断供, 小团队, 离线生存
-guide_links: DG-0631, DG-0632, DG-0633
+guide_links: DG-0631, DG-0632, DG-0633, DG-0851
 kiwix_topics: 小火处理和撤离边界, Fire safety, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-11
 status: published

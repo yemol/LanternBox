@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于厨房生熟和污染线的现场判断、行动边界和交接复查，帮助小团队在离线低资源条件下降低误用风险。
 tags: 厨房, 生熟分区, 食物污染, WASH, 病人用品
-guide_links: 
+guide_links: DG-0854
 kiwix_topics: 厨房生熟和污染线, 食物, Emergency preparedness, Off-grid living
 last_reviewed: 2026-07-15
 status: published

@@ -43364,6 +43364,70 @@
     ]
   },
   {
+    "id": "DG-0851",
+    "title": "灰烬与余火处理",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "risk_level": "high",
+    "domains": [
+      "fire",
+      "shelter",
+      "hygiene"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "火源 / 保温 / 通风 / 一氧化碳风险",
+      "灰烬与余火处理",
+      "热灰",
+      "垃圾袋",
+      "小团队"
+    ],
+    "signals": [
+      "灰烬",
+      "余火",
+      "热炭",
+      "垃圾袋",
+      "冷却",
+      "复燃",
+      "复查"
+    ],
+    "risks": [
+      "injury_or_exposure",
+      "fire",
+      "contamination"
+    ],
+    "keywords": [
+      "灰烬",
+      "余火",
+      "热炭",
+      "垃圾袋",
+      "冷却",
+      "复燃",
+      "火源复查",
+      "Batch5-M",
+      "环境与居住",
+      "长期断供",
+      "低资源",
+      "停止线"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "fire",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "灰烬与余火处理",
+      "热灰能不能倒垃圾袋",
+      "灰烬还有点热",
+      "余火处理"
+    ]
+  },
+  {
     "id": "DG-0852",
     "title": "湿冷衣物和脚部保护",
     "category": "衣物 / 鞋袜 / 体温防护",
@@ -43490,6 +43554,72 @@
       "WASH",
       "分区",
       "洗手水"
+    ]
+  },
+  {
+    "id": "DG-0854",
+    "title": "病人用品与厨房污染隔离",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "risk_level": "high",
+    "domains": [
+      "hygiene",
+      "food",
+      "water",
+      "medical",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "shelter_fire_wash_long_term"
+    ],
+    "objects": [
+      "污染控制 / 隔离 / 清洁分区",
+      "病人用品与厨房污染隔离",
+      "病人杯子",
+      "厨房台面",
+      "饮水桶"
+    ],
+    "signals": [
+      "病人用品",
+      "杯子",
+      "毛巾",
+      "厨房",
+      "饮水桶",
+      "污染隔离",
+      "记录"
+    ],
+    "risks": [
+      "contamination",
+      "medical",
+      "resource_depletion"
+    ],
+    "keywords": [
+      "病人用品",
+      "杯子",
+      "毛巾",
+      "厨房污染",
+      "饮水桶",
+      "公共餐具",
+      "隔离",
+      "Batch5-M",
+      "WASH",
+      "长期断供",
+      "小团队",
+      "停止线"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "病人用品与厨房污染隔离",
+      "病人杯子毛巾进厨房",
+      "病人用品靠近厨房",
+      "病人用品污染隔离"
     ]
   }
 ]
