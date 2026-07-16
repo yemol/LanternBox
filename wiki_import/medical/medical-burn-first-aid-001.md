@@ -5,7 +5,7 @@ category: 医疗急救
 priority: P0
 summary: 优先冷却、覆盖和隔离污染物，避免涂抹不明材料；中风险条目，面积大、深部伤或意识异常时停止普通处理。
 tags: 烧伤, 烫伤, 急救, 冷却, 医疗观察, 伤口
-guide_links: DG-0560
+guide_links: DG-0560, DG-0007
 risk_level: caution
 status: published
 source: American Red Cross Burns First Aid；Mayo Clinic Burns

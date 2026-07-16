@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 记录体温感受、精神状态、尿量和伴随症状；高风险条目，皮疹、意识变化、持续恶化或儿童危险信号需升级。
 tags: 医疗, 医疗急救, 老人发热脱水为什么更危险, 长期断供, 小团队, 离线生存
-guide_links: DG-0611, DG-0612, DG-0613
+guide_links: DG-0611, DG-0612, DG-0613, DG-0017, DG-0020, DG-0559
 kiwix_topics: 老人发热脱水为什么更危险, 医疗急救, Emergency preparedness, Survival skills, Public health
 last_reviewed: 2026-07-02
 status: published

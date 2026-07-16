@@ -83,6 +83,13 @@
     "冰箱食物",
     "罐头鼓包"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "medical-wound-care-001",
+    "medical-wound-care-002",
+    "medical-clean-water-001",
+    "medical-cross-infection-001",
+    "hygiene-contamination-zone-001",
+    "hygiene-hygiene-knowledge-001"
+  ],
   "risk_level": "high"
 }

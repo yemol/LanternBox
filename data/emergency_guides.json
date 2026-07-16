@@ -161,7 +161,10 @@
       "太阳能充电",
       "夜间异响"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-bleeding-control-001",
+      "medical-bleeding-control-002"
+    ],
     "risk_level": "critical"
   },
   {
@@ -336,7 +339,10 @@
       "太阳能充电",
       "夜间异响"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-bleeding-control-001",
+      "medical-bleeding-control-002"
+    ],
     "risk_level": "critical"
   },
   {
@@ -613,7 +619,11 @@
       "太阳能充电",
       "夜间异响"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-burn-care-001",
+      "medical-burn-care-002",
+      "medical-burn-first-aid-001"
+    ],
     "risk_level": "high"
   },
   {
@@ -771,7 +781,9 @@
       "疑似骨折",
       "疑似骨折：固定不复位"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-fracture-immobilize-no-reposition-001"
+    ],
     "risk_level": "high"
   },
   {
@@ -856,7 +868,9 @@
       "脚步声",
       "门外"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-head-injury-24h-observation-001"
+    ],
     "risk_level": "high"
   },
   {
@@ -931,7 +945,9 @@
       "剩饭",
       "罐头鼓包"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-spine-injury-movement-boundary-001"
+    ],
     "risk_level": "high"
   },
   {
@@ -1068,7 +1084,9 @@
       "脚步声",
       "门外"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-choking-airway-obstruction-001"
+    ],
     "risk_level": "critical"
   },
   {
@@ -1152,7 +1170,9 @@
       "脚步声",
       "门外"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-recovery-position-breathing-observation-001"
+    ],
     "risk_level": "critical"
   },
   {
@@ -1213,7 +1233,9 @@
       "太阳能充电",
       "夜间异响"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-cpr-no-normal-breathing-001"
+    ],
     "risk_level": "critical"
   },
   {
@@ -1286,7 +1308,9 @@
       "太阳能充电",
       "夜间异响"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-seizure-protection-timing-001"
+    ],
     "risk_level": "critical"
   },
   {
@@ -1366,7 +1390,12 @@
       "脚步声",
       "门外"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-heat-activity-stop-001",
+      "medical-oral-rehydration-001",
+      "medical-dehydration-001",
+      "medical-dehydration-002"
+    ],
     "risk_level": "critical"
   },
   {
@@ -1619,7 +1648,11 @@
       "腹泻脱水：补液优先",
       "腹泻补液"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-dehydration-001",
+      "medical-dehydration-002",
+      "medical-oral-rehydration-001"
+    ],
     "risk_level": "caution"
   },
   {
@@ -5568,7 +5601,14 @@
       "脚步声",
       "门外"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-chemical-skin-eye-exposure-001",
+      "hygiene-contamination-zone-001",
+      "hygiene-contaminated-clothing-001",
+      "hygiene-hygiene-knowledge-001",
+      "hygiene-contamination-log-001",
+      "hygiene-isolation-supplies-001"
+    ],
     "risk_level": "critical"
   },
   {
@@ -7567,7 +7607,14 @@
       "冰箱食物",
       "罐头鼓包"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-wound-care-001",
+      "medical-wound-care-002",
+      "medical-clean-water-001",
+      "medical-cross-infection-001",
+      "hygiene-contamination-zone-001",
+      "hygiene-hygiene-knowledge-001"
+    ],
     "risk_level": "high"
   },
   {
@@ -9601,7 +9648,13 @@
       "脚步声",
       "门外"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-chemical-skin-eye-exposure-001",
+      "hygiene-contamination-zone-001",
+      "hygiene-hygiene-knowledge-001",
+      "hygiene-contamination-log-001",
+      "hygiene-isolation-supplies-001"
+    ],
     "risk_level": "high"
   },
   {
@@ -18350,7 +18403,9 @@
       "剩饭",
       "罐头鼓包"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "medical-accidental-medication-ingestion-001"
+    ],
     "risk_level": "high"
   },
   {
@@ -47634,8 +47689,11 @@
       "血便、持续高热、明显脱水、尿很少、意识差、婴幼儿或老人腹泻加重时，升级求援。"
     ],
     "related_wiki": [
+      "medical-dehydration-002",
+      "medical-oral-rehydration-001",
       "medical-child-elder-dehydration-risk-001",
-      "medical-diarrhea-dehydration-risk-001"
+      "medical-diarrhea-dehydration-risk-001",
+      "medical-dehydration-001"
     ],
     "notes": "P0 长期生存能力库第一批扩容行动卡。",
     "category_original": "医疗与照护",

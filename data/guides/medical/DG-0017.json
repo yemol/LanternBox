@@ -75,6 +75,11 @@
     "脚步声",
     "门外"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "medical-heat-activity-stop-001",
+    "medical-oral-rehydration-001",
+    "medical-dehydration-001",
+    "medical-dehydration-002"
+  ],
   "risk_level": "critical"
 }

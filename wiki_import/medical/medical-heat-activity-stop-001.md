@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 高温下出现头晕、恶心、抽筋、口干、尿少或精神变化时，先停下活动、转入阴凉处并观察；高风险条目，意识变化或胸痛需立即升级。
 tags: 医疗, 高温, 脱水, 热危害, 长期断供, 小团队, 离线生存
-guide_links: DG-0611, DG-0612, DG-0613
+guide_links: DG-0611, DG-0612, DG-0613, DG-0017
 kiwix_topics: 高温环境下何时停止外出和停下活动, Heat illness, Emergency preparedness, Survival skills, Public health
 last_reviewed: 2026-07-11
 status: published

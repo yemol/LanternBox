@@ -1,4 +1,4 @@
-# Guide Audit Report (2026-07-14)
+# Guide Audit Report (2026-07-16)
 
 ## 结论
 - 未发现阻断级问题：JSON 可解析、id/文件名/priority/最低结构检查通过。
@@ -6,7 +6,7 @@
 - 未发现 canonical clone 重复组。
 
 ## 覆盖范围
-- Guide JSON：765
+- Guide JSON：790
 - 目录数：24
 - 分类数：41
 
@@ -16,22 +16,22 @@
 |security|116|
 |water|110|
 |medical|75|
-|power|66|
-|hygiene|64|
+|power|72|
+|hygiene|66|
 |evacuation|58|
+|tools|48|
 |disaster|46|
-|tools|43|
 |records|25|
+|comms|23|
 |food|21|
 |external_contact|20|
 |general|20|
 |psychology|20|
-|comms|17|
+|shelter|14|
 |planting|12|
-|shelter|12|
-|clothing|5|
+|fire|8|
+|clothing|6|
 |contamination|5|
-|fire|5|
 |livestock|5|
 |repair|5|
 |risk_decision|5|
@@ -41,16 +41,16 @@
 ## Priority 分布
 |priority|数量|
 |---|---:|
-|P0|557|
-|P1|141|
+|P0|579|
+|P1|144|
 |P2|67|
 
 ## Risk Level 分布
 |risk_level|数量|
 |---|---:|
 |normal|108|
-|caution|572|
-|high|71|
+|caution|578|
+|high|90|
 |critical|14|
 
 ## 结构检查

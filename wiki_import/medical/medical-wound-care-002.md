@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 区分清洁、覆盖、污染来源和感染早期信号；高风险条目，红肿热痛加重、脓液或污染伤口需停止拖延。
 tags: 医疗, 医疗急救, 污染伤口和破伤风风险概念, 长期断供, 小团队, 离线生存
-guide_links: DG-0611, DG-0612, DG-0613
+guide_links: DG-0611, DG-0612, DG-0613, DG-0087
 kiwix_topics: 污染伤口和破伤风风险概念, 医疗急救, Emergency preparedness, Survival skills, Public health
 last_reviewed: 2026-07-02
 status: published

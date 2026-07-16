@@ -93,6 +93,10 @@
     "腹泻脱水：补液优先",
     "腹泻补液"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "medical-dehydration-001",
+    "medical-dehydration-002",
+    "medical-oral-rehydration-001"
+  ],
   "risk_level": "caution"
 }

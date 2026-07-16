@@ -2585,6 +2585,453 @@
         "互联网服务",
         "云同步"
       ]
+    },
+    {
+      "name": "medical_airway_breathing_emergency",
+      "object_triggers": [
+        "人",
+        "伤者",
+        "患者",
+        "有人",
+        "噎住",
+        "气道异物",
+        "CPR",
+        "心肺复苏",
+        "胸外按压",
+        "呼吸",
+        "正常呼吸",
+        "癫痫",
+        "抽搐"
+      ],
+      "state_triggers": [
+        "不能呼吸",
+        "不能说话",
+        "咳不出来",
+        "咳不出",
+        "无反应",
+        "没反应",
+        "无意识",
+        "没有正常呼吸",
+        "呼吸异常",
+        "喘不上气",
+        "还有呼吸",
+        "恢复体位",
+        "CPR",
+        "心肺复苏",
+        "胸外按压",
+        "发作",
+        "按住",
+        "塞嘴"
+      ],
+      "aliases": [
+        "噎住：背部拍击与腹部冲击",
+        "气道异物",
+        "昏迷但有呼吸：恢复体位",
+        "无反应无正常呼吸：胸外按压",
+        "CPR",
+        "心肺复苏",
+        "胸外按压",
+        "癫痫发作：保护头部与计时",
+        "癫痫发作",
+        "恢复体位",
+        "呼吸观察"
+      ],
+      "target_domains": [
+        "medical",
+        "records"
+      ],
+      "target_slug_domains": [
+        "medical"
+      ],
+      "target_categories": [
+        "医疗急救",
+        "医疗急救与照护",
+        "医疗与照护"
+      ],
+      "candidate_anchor_terms": [
+        "噎住",
+        "气道异物",
+        "不能说话",
+        "不能咳嗽",
+        "正常呼吸",
+        "恢复体位",
+        "胸外按压",
+        "CPR",
+        "心肺复苏",
+        "癫痫发作",
+        "保护头部",
+        "计时",
+        "抽搐",
+        "按住四肢"
+      ],
+      "candidate_anchor_boost": 112,
+      "candidate_anchor_miss_penalty": 145,
+      "domain_boost": 76,
+      "domain_mismatch_penalty": 165,
+      "title_alias_boost": 210,
+      "mismatch_unless_context": [
+        "无线电",
+        "LoRa",
+        "通信",
+        "服务器",
+        "网页",
+        "心理安抚"
+      ]
+    },
+    {
+      "name": "medical_trauma_bleeding_fracture",
+      "object_triggers": [
+        "出血",
+        "血",
+        "布",
+        "敷料",
+        "伤口",
+        "头",
+        "头部",
+        "脖子",
+        "颈",
+        "手脚",
+        "腿",
+        "骨折",
+        "骨头",
+        "四肢"
+      ],
+      "state_triggers": [
+        "大量",
+        "浸透",
+        "止不住",
+        "撞",
+        "摔",
+        "摔下来",
+        "坠落",
+        "想吐",
+        "呕吐",
+        "犯困",
+        "麻",
+        "无力",
+        "扶起来走",
+        "变形",
+        "疼痛",
+        "无法活动",
+        "不能掰",
+        "掰正",
+        "复位",
+        "固定"
+      ],
+      "aliases": [
+        "头部受伤：24 小时观察",
+        "疑似脊柱伤：少动、固定、轴线搬运"
+      ],
+      "target_domains": [
+        "medical",
+        "hygiene",
+        "records"
+      ],
+      "target_slug_domains": [
+        "medical"
+      ],
+      "target_categories": [
+        "医疗急救",
+        "医疗急救与照护",
+        "医疗与照护"
+      ],
+      "candidate_anchor_terms": [
+        "严重出血",
+        "大量出血",
+        "敷料浸透",
+        "加压包扎",
+        "头部受伤",
+        "24 小时观察",
+        "呕吐",
+        "嗜睡",
+        "意识变化",
+        "疑似脊柱伤",
+        "少动",
+        "麻木",
+        "无力",
+        "疑似骨折",
+        "固定不复位",
+        "不能负重",
+        "远端颜色"
+      ],
+      "candidate_anchor_boost": 118,
+      "candidate_anchor_miss_penalty": 150,
+      "domain_boost": 78,
+      "domain_mismatch_penalty": 170,
+      "title_alias_boost": 220,
+      "negative_terms": [
+        "腹泻",
+        "粪便",
+        "呕吐物",
+        "洗手",
+        "污染",
+        "出血"
+      ],
+      "negative_unless_context": [
+        "腹泻",
+        "粪便",
+        "呕吐物",
+        "洗手",
+        "污染",
+        "出血",
+        "血",
+        "伤口"
+      ],
+      "negative_penalty": 95,
+      "mismatch_unless_context": [
+        "木板切割",
+        "锯",
+        "刀具",
+        "草木灰",
+        "火灰",
+        "冰箱食物"
+      ]
+    },
+    {
+      "name": "medical_burn_heat_cold_exposure",
+      "object_triggers": [
+        "人",
+        "患者",
+        "皮肤",
+        "体温",
+        "烧伤",
+        "烫伤",
+        "中暑",
+        "低体温",
+        "失温",
+        "湿衣",
+        "衣服"
+      ],
+      "state_triggers": [
+        "烫伤",
+        "烧伤",
+        "牙膏",
+        "酱油",
+        "高温",
+        "头晕",
+        "出汗",
+        "反应慢",
+        "发冷",
+        "发抖",
+        "低体温",
+        "失温",
+        "湿了",
+        "靠火烤",
+        "直接靠火"
+      ],
+      "aliases": [
+        "烧烫伤：冷却、覆盖、后续观察",
+        "中暑：转移、降温、补液",
+        "失温：保温、干燥、缓慢复温",
+        "烧烫伤冷却",
+        "高温中暑",
+        "热伤害",
+        "低体温失温",
+        "湿冷失温"
+      ],
+      "target_domains": [
+        "medical",
+        "records"
+      ],
+      "target_slug_domains": [
+        "medical",
+        "fire"
+      ],
+      "target_categories": [
+        "医疗急救",
+        "医疗急救与照护",
+        "医疗与照护"
+      ],
+      "candidate_anchor_terms": [
+        "烧烫伤",
+        "冷却",
+        "覆盖",
+        "牙膏",
+        "酱油",
+        "中暑",
+        "高温",
+        "头晕",
+        "出汗",
+        "反应慢",
+        "补液",
+        "失温",
+        "低体温",
+        "发抖",
+        "湿衣",
+        "缓慢复温"
+      ],
+      "candidate_anchor_boost": 112,
+      "candidate_anchor_miss_penalty": 145,
+      "domain_boost": 76,
+      "domain_mismatch_penalty": 160,
+      "title_alias_boost": 210,
+      "mismatch_unless_context": [
+        "做饭火候",
+        "炉具",
+        "烟囱",
+        "室内燃烧",
+        "衣物收纳"
+      ]
+    },
+    {
+      "name": "medical_poisoning_chemical_exposure",
+      "object_triggers": [
+        "药",
+        "药物",
+        "不明药",
+        "孩子",
+        "儿童",
+        "皮肤",
+        "眼睛",
+        "眼睛附近",
+        "不明物质",
+        "化学味",
+        "化学物",
+        "电池",
+        "漏液"
+      ],
+      "state_triggers": [
+        "误服",
+        "误吃",
+        "吃了",
+        "不知道什么药",
+        "催吐",
+        "接触",
+        "刺痛",
+        "眼痛",
+        "弄到",
+        "沾到",
+        "漏液",
+        "腐蚀",
+        "冲洗"
+      ],
+      "aliases": [
+        "电池漏液处理",
+        "疑似化学污染：远离、脱外层、冲洗",
+        "化学物接触皮肤和眼睛",
+        "眼睛冲洗",
+        "皮肤接触冲洗"
+      ],
+      "target_domains": [
+        "medical",
+        "hygiene",
+        "records"
+      ],
+      "target_slug_domains": [
+        "medical"
+      ],
+      "target_categories": [
+        "医疗急救",
+        "医疗急救与照护",
+        "医疗与照护"
+      ],
+      "candidate_anchor_terms": [
+        "误服药",
+        "不明药物",
+        "儿童误服",
+        "催吐",
+        "药品包装",
+        "化学污染",
+        "皮肤",
+        "眼睛",
+        "冲洗",
+        "电池漏液",
+        "漏液",
+        "腐蚀",
+        "封存"
+      ],
+      "candidate_anchor_boost": 120,
+      "candidate_anchor_miss_penalty": 150,
+      "domain_boost": 78,
+      "domain_mismatch_penalty": 170,
+      "title_alias_boost": 220,
+      "mismatch_unless_context": [
+        "电池容量",
+        "串联",
+        "并联",
+        "充电预算",
+        "容器气味",
+        "水质异味"
+      ]
+    },
+    {
+      "name": "medical_infection_dehydration_fever",
+      "object_triggers": [
+        "患者",
+        "病人",
+        "症状",
+        "发烧",
+        "发热",
+        "腹泻",
+        "呕吐",
+        "脱水",
+        "伤口"
+      ],
+      "state_triggers": [
+        "发烧",
+        "发热",
+        "意识不清",
+        "精神差",
+        "腹泻",
+        "呕吐",
+        "很多次",
+        "脱水",
+        "尿少",
+        "不能饮水",
+        "碰到污水",
+        "红肿",
+        "感染"
+      ],
+      "aliases": [
+        "腹泻脱水：补液优先",
+        "腹泻与脱水观察",
+        "发热：降温、补水、记录",
+        "发热观察、补水和记录",
+        "伤口避开污水",
+        "脱水判断",
+        "补液盐",
+        "高热伴意识异常"
+      ],
+      "target_domains": [
+        "medical",
+        "records"
+      ],
+      "target_slug_domains": [
+        "medical"
+      ],
+      "target_categories": [
+        "医疗急救",
+        "医疗急救与照护",
+        "医疗与照护"
+      ],
+      "candidate_anchor_terms": [
+        "腹泻脱水",
+        "腹泻",
+        "呕吐",
+        "脱水",
+        "尿少",
+        "补液",
+        "发热",
+        "发烧",
+        "意识异常",
+        "意识不清",
+        "精神状态",
+        "伤口",
+        "污水",
+        "感染"
+      ],
+      "candidate_anchor_boost": 104,
+      "candidate_anchor_miss_penalty": 140,
+      "domain_boost": 70,
+      "domain_mismatch_penalty": 150,
+      "title_alias_boost": 195,
+      "mismatch_unless_context": [
+        "水桶分区",
+        "桶厕",
+        "厨房分区",
+        "食物保存",
+        "水源选择"
+      ]
     }
   ]
 }

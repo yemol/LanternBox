@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 强调持续压迫、减少频繁查看和记录出血变化；高风险条目，出血不止或意识异常时停止普通处理并升级。
 tags: 医疗, 医疗急救, 直接压迫止血为什么不能频繁查看, 长期断供, 小团队, 离线生存
-guide_links: DG-0611, DG-0612, DG-0613, DG-0614, DG-0615
+guide_links: DG-0611, DG-0612, DG-0613, DG-0614, DG-0615, DG-0002, DG-0004
 kiwix_topics: 直接压迫止血为什么不能频繁查看, 医疗急救, Emergency preparedness, Survival skills, Public health
 last_reviewed: 2026-07-02
 status: published

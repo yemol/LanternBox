@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于隔离用品不足时的替代的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 隔离用品不足时的替代, 长期断供, 小团队, 离线生存
-guide_links: DG-0661, DG-0662, DG-0663
+guide_links: DG-0661, DG-0662, DG-0663, DG-0064, DG-0112
 kiwix_topics: 隔离用品不足时的替代, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health
 last_reviewed: 2026-07-02
 status: published

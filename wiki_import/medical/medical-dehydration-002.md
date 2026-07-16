@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于腹泻呕吐后的脱水分级判断的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 医疗, 医疗急救, 腹泻呕吐后的脱水分级判断, 长期断供, 小团队, 离线生存
-guide_links: DG-0611, DG-0612, DG-0613
+guide_links: DG-0611, DG-0612, DG-0613, DG-0017, DG-0020, DG-0559
 kiwix_topics: 腹泻呕吐后的脱水分级判断, 医疗急救, Emergency preparedness, Survival skills, Public health
 last_reviewed: 2026-07-02
 status: published

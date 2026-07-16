@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于清洁区污染区的标记原则的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 污染控制, 污染控制 / 隔离 / 清洁分区, 清洁区污染区的标记原则, 长期断供, 小团队, 离线生存
-guide_links: DG-0661, DG-0662, DG-0663
+guide_links: DG-0661, DG-0662, DG-0663, DG-0064, DG-0087, DG-0112
 kiwix_topics: 清洁区污染区的标记原则, 污染控制 / 隔离 / 清洁分区, Emergency preparedness, Survival skills, Public health
 last_reviewed: 2026-07-02
 status: published

@@ -76,6 +76,13 @@
     "脚步声",
     "门外"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "medical-chemical-skin-eye-exposure-001",
+    "hygiene-contamination-zone-001",
+    "hygiene-contaminated-clothing-001",
+    "hygiene-hygiene-knowledge-001",
+    "hygiene-contamination-log-001",
+    "hygiene-isolation-supplies-001"
+  ],
   "risk_level": "critical"
 }

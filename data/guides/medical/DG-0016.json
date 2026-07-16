@@ -68,6 +68,8 @@
     "太阳能充电",
     "夜间异响"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "medical-seizure-protection-timing-001"
+  ],
   "risk_level": "critical"
 }

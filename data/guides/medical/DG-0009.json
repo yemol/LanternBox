@@ -85,6 +85,8 @@
     "疑似骨折",
     "疑似骨折：固定不复位"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "medical-fracture-immobilize-no-reposition-001"
+  ],
   "risk_level": "high"
 }

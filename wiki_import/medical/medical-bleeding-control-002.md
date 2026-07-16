@@ -5,7 +5,7 @@ category: 医疗急救
 priority: P0
 summary: 强调持续压迫、减少频繁查看和记录出血变化；中风险条目，出血不止或意识异常时停止普通处理并升级。
 tags: 医疗急救, 直接压迫止血原理, 直接压迫止血, P0, 长期生存
-guide_links: DG-0556
+guide_links: DG-0556, DG-0002, DG-0004
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge
