@@ -70677,5 +70677,652 @@
       "病人用品污染隔离"
     ],
     "risk_level": "high"
+  },
+  {
+    "id": "DG-0855",
+    "title": "通信设备无法连接排查",
+    "category": "通讯",
+    "priority": "P0",
+    "scenario": "对讲机、无线电、LoRa 节点或接收设备收不到、发不出、无人确认或连接断续，需要按顺序排查。",
+    "goal": "先确认电源、接口、天线、频道、位置和窗口，再决定备用通信，避免连续测试耗电或误判人员失联。",
+    "keywords": [
+      "通信设备",
+      "无法连接",
+      "无信号",
+      "无线电排查",
+      "天线检查",
+      "电源检查",
+      "LoRa",
+      "Batch6-B",
+      "Field Network",
+      "停止线"
+    ],
+    "tools": [
+      "设备清单",
+      "电量记录",
+      "频道记录",
+      "天线检查表",
+      "通信日志"
+    ],
+    "steps": [
+      "停止连续呼叫或反复开机测试，先记录设备、时间、地点、电量和现象。",
+      "按电源、电池、接口、天线、音量、频道、位置、窗口和对端状态顺序排查。",
+      "每次只改变一个变量，例如先换安全位置，再换备用频道。",
+      "两次仍失败时把设备或节点标记为降级，不再作为关键联络路径。",
+      "转入备用通信：固定窗口、纸条留言点、集合点、近距离信号或人工传递。"
+    ],
+    "check": [
+      "是否记录了失败时间、设备编号、电量和频道。",
+      "是否检查电源、天线、接口和当前窗口。",
+      "是否保留备用通信路径。",
+      "是否避免连续呼叫耗电。"
+    ],
+    "common_mistakes": [
+      "同时改频道、位置和设备，导致无法复盘。",
+      "把一次收不到信号直接判断为人员失联。",
+      "湿设备或天线异常时继续发射测试。"
+    ],
+    "fallback": [
+      "使用备用设备或备用频道。",
+      "转纸条留言点、固定集合点、近距离信号或人工传递。",
+      "电量不足时等待下一个关键窗口，不做普通测试。"
+    ],
+    "stop_or_escalate": [
+      "设备进水、发热、异味、电池异常、接口损坏或天线断裂时停止使用并隔离。",
+      "连续无人确认、身份不清或通信失败会诱发高风险外出时，停止普通排查并进入失联复核。"
+    ],
+    "related_wiki": [
+      "communication-device-fault-tree-001",
+      "communication-wet-device-stop-use-001",
+      "communication-radio-no-receive-check-001",
+      "communication-radio-no-transmit-check-001",
+      "communication-antenna-connection-check-001",
+      "communication-radio-interference-noise-check-001",
+      "communication-shortwave-noise-source-check-001"
+    ],
+    "notes": "Batch6-B Communication & Field Network 第一批扩容行动卡。",
+    "category_original": "通讯",
+    "domains": [
+      "comms",
+      "power",
+      "repair",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "communication_field_network"
+    ],
+    "objects": [
+      "通信设备",
+      "无线电",
+      "LoRa 节点",
+      "天线",
+      "电源"
+    ],
+    "signals": [
+      "无信号",
+      "无法连接",
+      "收不到",
+      "发不出",
+      "无人确认",
+      "故障排查"
+    ],
+    "risks": [
+      "resource_depletion",
+      "injury_or_exposure",
+      "information_loss"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "通信设备无法连接排查",
+      "无线电收不到信号",
+      "LoRa 节点连不上",
+      "通信设备无信号"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0856",
+    "title": "野外建立临时通信链路",
+    "category": "通讯",
+    "priority": "P0",
+    "scenario": "外出、巡查、临时营地或多点值守时，需要在两个地点之间建立短时通信链路，并规划备用或中继。",
+    "goal": "用最小频道计划、位置选择、节点角色和短消息格式建立可复查的临时链路。",
+    "keywords": [
+      "野外通信",
+      "临时通信链路",
+      "两点通信",
+      "中继",
+      "节点",
+      "频道计划",
+      "LoRa",
+      "Mesh",
+      "Batch6-B"
+    ],
+    "tools": [
+      "纸质地图",
+      "节点清单",
+      "通信设备",
+      "电量记录",
+      "留言点标记"
+    ],
+    "steps": [
+      "确定两端人员、地点、主频道、备用频道和通信窗口。",
+      "选择安全、干燥、可返回的位置放置设备或节点。",
+      "需要中继时先指定固定节点、移动节点和备用节点，不让所有节点同时移动。",
+      "只发送短消息：位置、状态、需求、危险和下次窗口。",
+      "测试后记录成功点、失败点、电量和下一次复查时间。"
+    ],
+    "check": [
+      "两端是否知道主频道、备用频道和窗口。",
+      "节点或设备位置是否安全、可复查、低暴露。",
+      "是否有失败后的纸条、集合点或人工传递路径。"
+    ],
+    "common_mistakes": [
+      "临时换点但不通知留守者。",
+      "把移动节点当作固定中继。",
+      "只测成功，不记录失败点。"
+    ],
+    "fallback": [
+      "链路不稳时缩短距离或改为检查点接力。",
+      "无线不可用时使用纸条点、近距离信号、固定集合点或人工传递。",
+      "电量不足时只保留报平安和危险消息。"
+    ],
+    "stop_or_escalate": [
+      "需要进入危险高点、暴露住所、离开返回路线或耗尽保底电量时停止建立链路。",
+      "节点身份不清、位置暴露或连续失败时停止作为关键链路。"
+    ],
+    "related_wiki": [
+      "communication-check-in-missed-window-001",
+      "communication-radio-channel-plan-minimum-001",
+      "communication-lora-node-id-map-001",
+      "communication-radio-range-line-of-sight-001",
+      "communication-radio-message-format-short-001",
+      "communication-antenna-placement-height-safety-001",
+      "communication-antenna-cable-strain-relief-001",
+      "communication-lora-node-placement-001",
+      "communication-lora-message-size-priority-001",
+      "communication-mesh-node-role-map-001"
+    ],
+    "notes": "Batch6-B Communication & Field Network 第一批扩容行动卡。",
+    "category_original": "通讯",
+    "domains": [
+      "comms",
+      "evacuation",
+      "shelter",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "communication_field_network"
+    ],
+    "objects": [
+      "临时通信链路",
+      "两点通信",
+      "中继节点",
+      "外出队",
+      "通信窗口"
+    ],
+    "signals": [
+      "野外通信",
+      "两点联系",
+      "中继",
+      "节点部署",
+      "临时链路"
+    ],
+    "risks": [
+      "resource_depletion",
+      "injury_or_exposure",
+      "information_loss"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "野外建立临时通信链路",
+      "两点通信",
+      "临时中继",
+      "外出队通信链路"
+    ],
+    "risk_level": "caution"
+  },
+  {
+    "id": "DG-0857",
+    "title": "LoRa 节点部署检查",
+    "category": "通讯",
+    "priority": "P0",
+    "scenario": "准备部署、移动或复查 LoRa 节点，需要确认节点位置、天线、电源、中继角色和消息边界。",
+    "goal": "建立编号、位置、供电、测试、未知节点隔离和中继降级的最小 LoRa 运行检查。",
+    "keywords": [
+      "LoRa",
+      "节点部署",
+      "中继",
+      "Mesh",
+      "节点编号",
+      "天线",
+      "电源",
+      "低功耗",
+      "Batch6-B"
+    ],
+    "tools": [
+      "节点位置图",
+      "电量记录表",
+      "短测试消息",
+      "标签",
+      "纸质通信日志"
+    ],
+    "steps": [
+      "给节点编号，记录负责人、角色、位置、供电方式和备用位置。",
+      "选择高处、干燥、低暴露、可复查的位置，并检查天线和接口。",
+      "发送短测试消息，记录成功、失败、延迟、电量和对端编号。",
+      "未知节点、重复编号或身份不清设备先隔离，不进入关键链路。",
+      "固定节点、中继节点、移动节点和备用节点分开记录，避免同时移动。"
+    ],
+    "check": [
+      "每个节点是否有编号、负责人和位置图。",
+      "天线、电源和最近一次测试是否可查。",
+      "是否有中继失败后的备用路径。"
+    ],
+    "common_mistakes": [
+      "节点放好后长期不查。",
+      "测试消息包含敏感库存或住址。",
+      "未知节点直接接入主链路。"
+    ],
+    "fallback": [
+      "节点低电时降低开机频率并保留主节点。",
+      "节点不稳时降为备用，改用纸条点、固定窗口或人工传递。",
+      "无中继时缩短外出距离或增加检查点。"
+    ],
+    "stop_or_escalate": [
+      "节点进水、发热、接口损坏、身份不清、位置暴露或连续两次测试失败时停止作为关键节点。",
+      "外出队需要带走唯一中继时，取消中继方案或重设固定节点。"
+    ],
+    "related_wiki": [
+      "communication-lora-node-placement-001",
+      "communication-mesh-node-role-map-001",
+      "communication-lora-node-id-map-001",
+      "communication-lora-range-test-log-001",
+      "communication-lora-store-forward-delay-001",
+      "communication-lora-message-size-priority-001",
+      "communication-lora-unknown-node-isolation-001",
+      "communication-lora-node-daily-001"
+    ],
+    "notes": "Batch6-B Communication & Field Network 第一批扩容行动卡。",
+    "category_original": "通讯",
+    "domains": [
+      "comms",
+      "power",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "communication_field_network"
+    ],
+    "objects": [
+      "LoRa 节点",
+      "中继节点",
+      "Mesh 节点",
+      "天线",
+      "电源"
+    ],
+    "signals": [
+      "LoRa 部署",
+      "节点位置",
+      "中继",
+      "未知节点",
+      "距离测试"
+    ],
+    "risks": [
+      "resource_depletion",
+      "information_loss",
+      "exposure"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "LoRa 节点部署检查",
+      "LoRa 节点放哪里",
+      "LoRa 中继节点",
+      "LoRa 节点排查"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0858",
+    "title": "无线电通信前检查",
+    "category": "通讯",
+    "priority": "P0",
+    "scenario": "准备使用无线电、对讲机或简易电台前，需要检查电池、天线、频道、环境和消息格式。",
+    "goal": "发射前先完成电量、天线、频道、监听和身份检查，避免误发、暴露、干扰和设备损坏。",
+    "keywords": [
+      "无线电",
+      "通信前检查",
+      "电池",
+      "天线",
+      "频道",
+      "监听",
+      "发射",
+      "回执",
+      "Batch6-B"
+    ],
+    "tools": [
+      "频道表",
+      "电量记录",
+      "天线检查表",
+      "短消息模板",
+      "通信日志"
+    ],
+    "steps": [
+      "检查电池、电量、设备外壳、接口和天线连接。",
+      "核对主频道、备用频道、监听窗口和呼号。",
+      "发射前先监听，确认信道空闲且身份明确。",
+      "把消息压缩为对象、位置、状态、需求和下次窗口。",
+      "发送后等待回执，未确认时记录失败，不连续呼叫。"
+    ],
+    "check": [
+      "电池、天线、频道和窗口是否确认。",
+      "是否先监听再发射。",
+      "消息是否短、可复述、有回执。",
+      "是否避免发送敏感库存、住所和成员全名。"
+    ],
+    "common_mistakes": [
+      "一开机就发射。",
+      "天线松动仍继续测试。",
+      "没有回执就把消息当作已送达。"
+    ],
+    "fallback": [
+      "发射条件不足时，改用固定窗口、纸条点、集合点或近距离信号。",
+      "频道不清时只做监听和记录，不发敏感内容。",
+      "电量不足时只保留危险和报平安消息。"
+    ],
+    "stop_or_escalate": [
+      "天线异常、设备进水发热、频道用途不明、身份不清或听到危险通信时停止普通发射。",
+      "需要暴露位置或耗尽保底电量才能通信时，改用备用路径。"
+    ],
+    "related_wiki": [
+      "communication-antenna-wet-weather-stop-001",
+      "communication-antenna-connection-check-001",
+      "communication-radio-listen-before-transmit-001",
+      "communication-radio-basic-terms-001",
+      "communication-radio-message-format-short-001",
+      "communication-radio-call-sign-identity-check-001",
+      "communication-radio-channel-plan-minimum-001",
+      "communication-radio-range-line-of-sight-001",
+      "communication-antenna-placement-height-safety-001",
+      "communication-antenna-cable-strain-relief-001",
+      "communication-shortwave-antenna-placement-safe-001"
+    ],
+    "notes": "Batch6-B Communication & Field Network 第一批扩容行动卡。",
+    "category_original": "通讯",
+    "domains": [
+      "comms",
+      "power",
+      "security",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "communication_field_network"
+    ],
+    "objects": [
+      "无线电",
+      "对讲机",
+      "电池",
+      "天线",
+      "频道"
+    ],
+    "signals": [
+      "发射前",
+      "监听",
+      "频道",
+      "回执",
+      "无线电检查"
+    ],
+    "risks": [
+      "resource_depletion",
+      "injury_or_exposure",
+      "information_loss"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "无线电通信前检查",
+      "电台发射前检查",
+      "对讲机发射前",
+      "无线电先监听"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0859",
+    "title": "通信设备低功耗运行",
+    "category": "通讯",
+    "priority": "P0",
+    "scenario": "通信设备、电池、太阳能或充电能力有限，需要安排节电策略、通信窗口、设备休眠和备用电量。",
+    "goal": "把通信需求纳入每日能源预算，优先保留危险消息、报平安、位置和回执。",
+    "keywords": [
+      "低功耗通信",
+      "通信窗口",
+      "节电",
+      "QRP",
+      "电量预算",
+      "设备休眠",
+      "LoRa",
+      "无线电",
+      "Batch6-B"
+    ],
+    "tools": [
+      "电量记录表",
+      "通信窗口表",
+      "设备清单",
+      "充电排班",
+      "通信日志"
+    ],
+    "steps": [
+      "列出所有通信设备、电量、负责人和充电方式。",
+      "设定每日通信窗口，窗口外休眠、关机或低功耗待机。",
+      "优先发送危险、报平安、位置、资源需求和回执。",
+      "每次窗口前后记录电量，不把测试和闲聊放进保底电量。",
+      "电量不足时减少窗口数量，转纸条点、集合点或人工传递。"
+    ],
+    "check": [
+      "是否有每台设备的保底电量。",
+      "通信窗口是否写在公共位置。",
+      "是否区分紧急消息和普通消息。",
+      "是否记录窗口前后电量。"
+    ],
+    "common_mistakes": [
+      "全天开机等待消息。",
+      "弱信号下反复搜索或连续呼叫。",
+      "通信测试抢占照明、医疗或安全电量。"
+    ],
+    "fallback": [
+      "降为每日一个关键窗口。",
+      "只保留主设备和主节点，备用设备关机保存。",
+      "使用纸条、集合点、近距离信号或人工传递补充。"
+    ],
+    "stop_or_escalate": [
+      "电池发热、鼓包、进水、快速掉电或设备异常时停止使用并隔离。",
+      "电量低于团队保底或影响照明、医疗、安全设备时，停止非紧急通信。"
+    ],
+    "related_wiki": [
+      "communication-battery-radio-runtime-budget-001",
+      "communication-qrp-power-budget-001",
+      "communication-qrp-contact-window-discipline-001",
+      "communication-wet-device-stop-use-001",
+      "communication-power-saving-001",
+      "communication-device-daily-check-001"
+    ],
+    "notes": "Batch6-B Communication & Field Network 第一批扩容行动卡。",
+    "category_original": "通讯",
+    "domains": [
+      "comms",
+      "power",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "communication_field_network"
+    ],
+    "objects": [
+      "通信设备",
+      "电池",
+      "通信窗口",
+      "LoRa",
+      "无线电"
+    ],
+    "signals": [
+      "低电量",
+      "节电",
+      "固定窗口",
+      "QRP",
+      "设备休眠"
+    ],
+    "risks": [
+      "resource_depletion",
+      "injury_or_exposure",
+      "information_loss"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "通信设备低功耗运行",
+      "低电量通信",
+      "通信窗口节电",
+      "LoRa 电量预算"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0860",
+    "title": "通信信息记录与交接",
+    "category": "通讯",
+    "priority": "P0",
+    "scenario": "团队使用无线电、LoRa、短波、纸条或人工传递时，需要记录频率、联系对象、消息级别、回执和交接。",
+    "goal": "建立通信日志和交接字段，让接手者知道哪些消息已确认、哪些待核、下一步做什么。",
+    "keywords": [
+      "通信日志",
+      "信息记录",
+      "频率记录",
+      "联系记录",
+      "交接",
+      "回执",
+      "短波",
+      "应急通信",
+      "Batch6-B"
+    ],
+    "tools": [
+      "通信日志本",
+      "频道表",
+      "节点清单",
+      "短消息模板",
+      "交接表"
+    ],
+    "steps": [
+      "每条消息记录时间、通信方式、设备或频道、发送者和接收者。",
+      "标记消息级别：危险、位置、资源、普通或待核。",
+      "写明是否收到回执，未确认消息不得当作已送达。",
+      "短波和转述信息要标明来源状态和核验情况。",
+      "交接时列出未确认消息、下一窗口、设备电量和待处理动作。"
+    ],
+    "check": [
+      "日志是否包含时间、方式、对象、频道或节点。",
+      "是否区分已确认、未确认和待核信息。",
+      "是否写明下一次通信窗口和负责人。",
+      "是否保护敏感位置和库存信息。"
+    ],
+    "common_mistakes": [
+      "只记录成功消息，不记录失败。",
+      "把未核短波信息当成事实传播。",
+      "交接只说口头结论，不留下字段。"
+    ],
+    "fallback": [
+      "没有日志本时，用固定纸页或防水纸条记录最小字段。",
+      "无法确认消息时标为待核，等待下一窗口。",
+      "敏感信息用编号、地标和等级替代完整细节。"
+    ],
+    "stop_or_escalate": [
+      "生命危险、成员失联、身份不清、敏感信息外泄或未确认消息被执行时，停止普通交接并复核日志。",
+      "日志丢失或被无关人员接触时，暂停使用旧编号并重新整理低敏版本。"
+    ],
+    "related_wiki": [
+      "communication-emergency-net-opening-check-001",
+      "communication-message-priority-levels-001",
+      "communication-check-in-missed-window-001",
+      "communication-radio-log-minimum-fields-001",
+      "communication-radio-message-format-short-001",
+      "communication-radio-call-sign-identity-check-001",
+      "communication-lora-message-size-priority-001",
+      "communication-shortwave-receive-log-verification-001"
+    ],
+    "notes": "Batch6-B Communication & Field Network 第一批扩容行动卡。",
+    "category_original": "通讯",
+    "domains": [
+      "comms",
+      "records",
+      "security"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "communication_field_network"
+    ],
+    "objects": [
+      "通信日志",
+      "频率记录",
+      "联系记录",
+      "回执",
+      "团队交接"
+    ],
+    "signals": [
+      "通信记录",
+      "交接",
+      "回执",
+      "频率",
+      "联系日志"
+    ],
+    "risks": [
+      "information_loss",
+      "resource_depletion",
+      "exposure"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "通信信息记录与交接",
+      "通信日志",
+      "频率记录",
+      "联系记录"
+    ],
+    "risk_level": "caution"
   }
 ]

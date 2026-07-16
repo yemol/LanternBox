@@ -1,0 +1,111 @@
+{
+  "id": "DG-0858",
+  "title": "无线电通信前检查",
+  "category": "通讯",
+  "priority": "P0",
+  "scenario": "准备使用无线电、对讲机或简易电台前，需要检查电池、天线、频道、环境和消息格式。",
+  "goal": "发射前先完成电量、天线、频道、监听和身份检查，避免误发、暴露、干扰和设备损坏。",
+  "keywords": [
+    "无线电",
+    "通信前检查",
+    "电池",
+    "天线",
+    "频道",
+    "监听",
+    "发射",
+    "回执",
+    "Batch6-B"
+  ],
+  "tools": [
+    "频道表",
+    "电量记录",
+    "天线检查表",
+    "短消息模板",
+    "通信日志"
+  ],
+  "steps": [
+    "检查电池、电量、设备外壳、接口和天线连接。",
+    "核对主频道、备用频道、监听窗口和呼号。",
+    "发射前先监听，确认信道空闲且身份明确。",
+    "把消息压缩为对象、位置、状态、需求和下次窗口。",
+    "发送后等待回执，未确认时记录失败，不连续呼叫。"
+  ],
+  "check": [
+    "电池、天线、频道和窗口是否确认。",
+    "是否先监听再发射。",
+    "消息是否短、可复述、有回执。",
+    "是否避免发送敏感库存、住所和成员全名。"
+  ],
+  "common_mistakes": [
+    "一开机就发射。",
+    "天线松动仍继续测试。",
+    "没有回执就把消息当作已送达。"
+  ],
+  "fallback": [
+    "发射条件不足时，改用固定窗口、纸条点、集合点或近距离信号。",
+    "频道不清时只做监听和记录，不发敏感内容。",
+    "电量不足时只保留危险和报平安消息。"
+  ],
+  "stop_or_escalate": [
+    "天线异常、设备进水发热、频道用途不明、身份不清或听到危险通信时停止普通发射。",
+    "需要暴露位置或耗尽保底电量才能通信时，改用备用路径。"
+  ],
+  "related_wiki": [
+    "communication-antenna-wet-weather-stop-001",
+    "communication-antenna-connection-check-001",
+    "communication-radio-listen-before-transmit-001",
+    "communication-radio-basic-terms-001",
+    "communication-radio-message-format-short-001",
+    "communication-radio-call-sign-identity-check-001",
+    "communication-radio-channel-plan-minimum-001",
+    "communication-radio-range-line-of-sight-001",
+    "communication-antenna-placement-height-safety-001",
+    "communication-antenna-cable-strain-relief-001",
+    "communication-shortwave-antenna-placement-safe-001"
+  ],
+  "notes": "Batch6-B Communication & Field Network 第一批扩容行动卡。",
+  "category_original": "通讯",
+  "domains": [
+    "comms",
+    "power",
+    "security",
+    "records"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "communication_field_network"
+  ],
+  "objects": [
+    "无线电",
+    "对讲机",
+    "电池",
+    "天线",
+    "频道"
+  ],
+  "signals": [
+    "发射前",
+    "监听",
+    "频道",
+    "回执",
+    "无线电检查"
+  ],
+  "risks": [
+    "resource_depletion",
+    "injury_or_exposure",
+    "information_loss"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "comms",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "无线电通信前检查",
+    "电台发射前检查",
+    "对讲机发射前",
+    "无线电先监听"
+  ],
+  "risk_level": "high"
+}

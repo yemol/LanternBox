@@ -43621,5 +43621,364 @@
       "病人用品靠近厨房",
       "病人用品污染隔离"
     ]
+  },
+  {
+    "id": "DG-0855",
+    "title": "通信设备无法连接排查",
+    "category": "通讯",
+    "category_original": "通讯",
+    "risk_level": "high",
+    "domains": [
+      "comms",
+      "power",
+      "repair",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "communication_field_network"
+    ],
+    "objects": [
+      "通信设备",
+      "无线电",
+      "LoRa 节点",
+      "天线",
+      "电源"
+    ],
+    "signals": [
+      "无信号",
+      "无法连接",
+      "收不到",
+      "发不出",
+      "无人确认",
+      "故障排查"
+    ],
+    "risks": [
+      "resource_depletion",
+      "injury_or_exposure",
+      "information_loss"
+    ],
+    "keywords": [
+      "通信设备",
+      "无法连接",
+      "无信号",
+      "无线电排查",
+      "天线检查",
+      "电源检查",
+      "LoRa",
+      "Batch6-B",
+      "Field Network",
+      "停止线"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "通信设备无法连接排查",
+      "无线电收不到信号",
+      "LoRa 节点连不上",
+      "通信设备无信号"
+    ]
+  },
+  {
+    "id": "DG-0856",
+    "title": "野外建立临时通信链路",
+    "category": "通讯",
+    "category_original": "通讯",
+    "risk_level": "caution",
+    "domains": [
+      "comms",
+      "evacuation",
+      "shelter",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "communication_field_network"
+    ],
+    "objects": [
+      "临时通信链路",
+      "两点通信",
+      "中继节点",
+      "外出队",
+      "通信窗口"
+    ],
+    "signals": [
+      "野外通信",
+      "两点联系",
+      "中继",
+      "节点部署",
+      "临时链路"
+    ],
+    "risks": [
+      "resource_depletion",
+      "injury_or_exposure",
+      "information_loss"
+    ],
+    "keywords": [
+      "野外通信",
+      "临时通信链路",
+      "两点通信",
+      "中继",
+      "节点",
+      "频道计划",
+      "LoRa",
+      "Mesh",
+      "Batch6-B"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "野外建立临时通信链路",
+      "两点通信",
+      "临时中继",
+      "外出队通信链路"
+    ]
+  },
+  {
+    "id": "DG-0857",
+    "title": "LoRa 节点部署检查",
+    "category": "通讯",
+    "category_original": "通讯",
+    "risk_level": "high",
+    "domains": [
+      "comms",
+      "power",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "communication_field_network"
+    ],
+    "objects": [
+      "LoRa 节点",
+      "中继节点",
+      "Mesh 节点",
+      "天线",
+      "电源"
+    ],
+    "signals": [
+      "LoRa 部署",
+      "节点位置",
+      "中继",
+      "未知节点",
+      "距离测试"
+    ],
+    "risks": [
+      "resource_depletion",
+      "information_loss",
+      "exposure"
+    ],
+    "keywords": [
+      "LoRa",
+      "节点部署",
+      "中继",
+      "Mesh",
+      "节点编号",
+      "天线",
+      "电源",
+      "低功耗",
+      "Batch6-B"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "LoRa 节点部署检查",
+      "LoRa 节点放哪里",
+      "LoRa 中继节点",
+      "LoRa 节点排查"
+    ]
+  },
+  {
+    "id": "DG-0858",
+    "title": "无线电通信前检查",
+    "category": "通讯",
+    "category_original": "通讯",
+    "risk_level": "high",
+    "domains": [
+      "comms",
+      "power",
+      "security",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "communication_field_network"
+    ],
+    "objects": [
+      "无线电",
+      "对讲机",
+      "电池",
+      "天线",
+      "频道"
+    ],
+    "signals": [
+      "发射前",
+      "监听",
+      "频道",
+      "回执",
+      "无线电检查"
+    ],
+    "risks": [
+      "resource_depletion",
+      "injury_or_exposure",
+      "information_loss"
+    ],
+    "keywords": [
+      "无线电",
+      "通信前检查",
+      "电池",
+      "天线",
+      "频道",
+      "监听",
+      "发射",
+      "回执",
+      "Batch6-B"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "无线电通信前检查",
+      "电台发射前检查",
+      "对讲机发射前",
+      "无线电先监听"
+    ]
+  },
+  {
+    "id": "DG-0859",
+    "title": "通信设备低功耗运行",
+    "category": "通讯",
+    "category_original": "通讯",
+    "risk_level": "high",
+    "domains": [
+      "comms",
+      "power",
+      "records"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "communication_field_network"
+    ],
+    "objects": [
+      "通信设备",
+      "电池",
+      "通信窗口",
+      "LoRa",
+      "无线电"
+    ],
+    "signals": [
+      "低电量",
+      "节电",
+      "固定窗口",
+      "QRP",
+      "设备休眠"
+    ],
+    "risks": [
+      "resource_depletion",
+      "injury_or_exposure",
+      "information_loss"
+    ],
+    "keywords": [
+      "低功耗通信",
+      "通信窗口",
+      "节电",
+      "QRP",
+      "电量预算",
+      "设备休眠",
+      "LoRa",
+      "无线电",
+      "Batch6-B"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "通信设备低功耗运行",
+      "低电量通信",
+      "通信窗口节电",
+      "LoRa 电量预算"
+    ]
+  },
+  {
+    "id": "DG-0860",
+    "title": "通信信息记录与交接",
+    "category": "通讯",
+    "category_original": "通讯",
+    "risk_level": "caution",
+    "domains": [
+      "comms",
+      "records",
+      "security"
+    ],
+    "intents": [
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "communication_field_network"
+    ],
+    "objects": [
+      "通信日志",
+      "频率记录",
+      "联系记录",
+      "回执",
+      "团队交接"
+    ],
+    "signals": [
+      "通信记录",
+      "交接",
+      "回执",
+      "频率",
+      "联系日志"
+    ],
+    "risks": [
+      "information_loss",
+      "resource_depletion",
+      "exposure"
+    ],
+    "keywords": [
+      "通信日志",
+      "信息记录",
+      "频率记录",
+      "联系记录",
+      "交接",
+      "回执",
+      "短波",
+      "应急通信",
+      "Batch6-B"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "comms",
+    "primary_intent": "long_term_survival_action",
+    "top1_aliases": [
+      "通信信息记录与交接",
+      "通信日志",
+      "频率记录",
+      "联系记录"
+    ]
   }
 ]

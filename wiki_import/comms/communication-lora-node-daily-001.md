@@ -5,7 +5,7 @@ category: 通讯
 priority: P0
 summary: 检查节点电量、天线、编号和收发测试；异常节点先标记再复查，并记录责任人、时间和复查结果。
 tags: LoRa, 通讯, 节点, 每日检查, 天线, 电量
-guide_links: DG-0639
+guide_links: DG-0639, DG-0857
 risk_level: normal
 status: published
 source: 壳中灯 LanternBox Protocol v0.1；常见 LoRa 设备使用说明

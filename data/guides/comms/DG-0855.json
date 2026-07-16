@@ -1,0 +1,109 @@
+{
+  "id": "DG-0855",
+  "title": "通信设备无法连接排查",
+  "category": "通讯",
+  "priority": "P0",
+  "scenario": "对讲机、无线电、LoRa 节点或接收设备收不到、发不出、无人确认或连接断续，需要按顺序排查。",
+  "goal": "先确认电源、接口、天线、频道、位置和窗口，再决定备用通信，避免连续测试耗电或误判人员失联。",
+  "keywords": [
+    "通信设备",
+    "无法连接",
+    "无信号",
+    "无线电排查",
+    "天线检查",
+    "电源检查",
+    "LoRa",
+    "Batch6-B",
+    "Field Network",
+    "停止线"
+  ],
+  "tools": [
+    "设备清单",
+    "电量记录",
+    "频道记录",
+    "天线检查表",
+    "通信日志"
+  ],
+  "steps": [
+    "停止连续呼叫或反复开机测试，先记录设备、时间、地点、电量和现象。",
+    "按电源、电池、接口、天线、音量、频道、位置、窗口和对端状态顺序排查。",
+    "每次只改变一个变量，例如先换安全位置，再换备用频道。",
+    "两次仍失败时把设备或节点标记为降级，不再作为关键联络路径。",
+    "转入备用通信：固定窗口、纸条留言点、集合点、近距离信号或人工传递。"
+  ],
+  "check": [
+    "是否记录了失败时间、设备编号、电量和频道。",
+    "是否检查电源、天线、接口和当前窗口。",
+    "是否保留备用通信路径。",
+    "是否避免连续呼叫耗电。"
+  ],
+  "common_mistakes": [
+    "同时改频道、位置和设备，导致无法复盘。",
+    "把一次收不到信号直接判断为人员失联。",
+    "湿设备或天线异常时继续发射测试。"
+  ],
+  "fallback": [
+    "使用备用设备或备用频道。",
+    "转纸条留言点、固定集合点、近距离信号或人工传递。",
+    "电量不足时等待下一个关键窗口，不做普通测试。"
+  ],
+  "stop_or_escalate": [
+    "设备进水、发热、异味、电池异常、接口损坏或天线断裂时停止使用并隔离。",
+    "连续无人确认、身份不清或通信失败会诱发高风险外出时，停止普通排查并进入失联复核。"
+  ],
+  "related_wiki": [
+    "communication-device-fault-tree-001",
+    "communication-wet-device-stop-use-001",
+    "communication-radio-no-receive-check-001",
+    "communication-radio-no-transmit-check-001",
+    "communication-antenna-connection-check-001",
+    "communication-radio-interference-noise-check-001",
+    "communication-shortwave-noise-source-check-001"
+  ],
+  "notes": "Batch6-B Communication & Field Network 第一批扩容行动卡。",
+  "category_original": "通讯",
+  "domains": [
+    "comms",
+    "power",
+    "repair",
+    "records"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "communication_field_network"
+  ],
+  "objects": [
+    "通信设备",
+    "无线电",
+    "LoRa 节点",
+    "天线",
+    "电源"
+  ],
+  "signals": [
+    "无信号",
+    "无法连接",
+    "收不到",
+    "发不出",
+    "无人确认",
+    "故障排查"
+  ],
+  "risks": [
+    "resource_depletion",
+    "injury_or_exposure",
+    "information_loss"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "comms",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "通信设备无法连接排查",
+    "无线电收不到信号",
+    "LoRa 节点连不上",
+    "通信设备无信号"
+  ],
+  "risk_level": "high"
+}

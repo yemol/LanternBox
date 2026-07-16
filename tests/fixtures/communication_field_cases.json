@@ -1,0 +1,261 @@
+[
+  {
+    "id": "communication_listen_before_transmit",
+    "query": "电台发射前是否要先监听？",
+    "expected_guides": ["DG-0858"],
+    "expected_wiki": ["communication-radio-listen-before-transmit-001"],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "无线电通信前检查，发射前先监听。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "communication_radio_no_reply_check",
+    "query": "无线电没人回，先检查什么？",
+    "expected_guides": ["DG-0855"],
+    "expected_wiki": [
+      "communication-radio-no-receive-check-001",
+      "communication-device-fault-tree-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "无人回应时按电源、天线、频道、窗口顺序排查。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "communication_loose_antenna_transmit",
+    "query": "天线松了还能不能继续发射？",
+    "expected_guides": ["DG-0855", "DG-0858"],
+    "expected_wiki": ["communication-antenna-connection-check-001"],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "天线松动时通信安全主导，repair 不应抢主位。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["repair"]
+  },
+  {
+    "id": "communication_wet_antenna_rain",
+    "query": "雨天接口潮湿还能不能架天线？",
+    "expected_guides": ["DG-0858", "DG-0855"],
+    "expected_wiki": ["communication-antenna-wet-weather-stop-001"],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "潮湿接口和天线安全边界，能源或维修只能 secondary。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["electronics", "repair"]
+  },
+  {
+    "id": "communication_lora_node_placement",
+    "query": "LoRa 节点应该放哪里？",
+    "expected_guides": ["DG-0857"],
+    "expected_wiki": ["communication-lora-node-placement-001"],
+    "allowed_secondary_guides": ["DG-0856"],
+    "observation": false,
+    "focus": "LoRa 节点部署位置。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "communication_lora_missed_twice",
+    "query": "LoRa 节点两次收不到消息怎么办？",
+    "expected_guides": ["DG-0857"],
+    "expected_wiki": [
+      "communication-lora-range-test-log-001",
+      "communication-lora-store-forward-delay-001"
+    ],
+    "allowed_secondary_guides": ["DG-0855"],
+    "observation": false,
+    "focus": "LoRa 节点失联、延迟和距离测试记录。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "communication_lora_unknown_node",
+    "query": "未知 LoRa 节点出现怎么办？",
+    "expected_guides": ["DG-0857"],
+    "expected_wiki": ["communication-lora-unknown-node-isolation-001"],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "未知节点隔离和记录。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "communication_field_temp_link",
+    "query": "外出队如何建立临时通信链路？",
+    "expected_guides": ["DG-0856"],
+    "expected_wiki": [
+      "communication-radio-channel-plan-minimum-001",
+      "communication-lora-node-id-map-001"
+    ],
+    "allowed_secondary_guides": ["DG-0858"],
+    "observation": false,
+    "focus": "两点通信、临时节点、中继和备用路径。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "communication_missed_checkin_window",
+    "query": "检查点错过通信窗口怎么办？",
+    "expected_guides": ["DG-0860"],
+    "expected_wiki": ["communication-check-in-missed-window-001"],
+    "allowed_secondary_guides": ["DG-0856"],
+    "observation": false,
+    "focus": "错过通信窗口后的记录、等待和复核。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "communication_low_power_schedule",
+    "query": "电量只剩一点，手机、LoRa、电台怎么安排？",
+    "expected_guides": ["DG-0859"],
+    "expected_wiki": ["communication-battery-radio-runtime-budget-001"],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "低功耗通信、通信窗口和保底电量。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["electronics", "energy"]
+  },
+  {
+    "id": "communication_shortwave_unverified_route",
+    "query": "短波听到未经确认的消息能不能改变路线？",
+    "expected_guides": ["DG-0860"],
+    "expected_wiki": ["communication-shortwave-receive-log-verification-001"],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "短波未确认信息、记录和路线决策边界，navigation 不应抢主位。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["gps", "navigation"]
+  },
+  {
+    "id": "communication_mesh_node_roles",
+    "query": "Mesh 节点角色怎么安排？",
+    "expected_guides": ["DG-0857", "DG-0856"],
+    "expected_wiki": ["communication-mesh-node-role-map-001"],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "Mesh 节点角色、位置和中继。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "communication_log_minimum_fields",
+    "query": "通信日志至少写什么？",
+    "expected_guides": ["DG-0860"],
+    "expected_wiki": ["communication-radio-log-minimum-fields-001"],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "通信日志最小字段、回执和交接。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "communication_wet_device_power_on",
+    "query": "通信设备进水还能不能开机测试？",
+    "expected_guides": ["DG-0855"],
+    "expected_wiki": ["communication-wet-device-stop-use-001"],
+    "allowed_secondary_guides": ["DG-0859"],
+    "observation": false,
+    "focus": "通信设备进水停用边界。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["electronics", "repair"]
+  },
+  {
+    "id": "communication_observe_network_node_down",
+    "query": "网络节点连不上",
+    "expected_guides": ["DG-0855", "DG-0857"],
+    "expected_wiki": [
+      "communication-device-fault-tree-001",
+      "communication-lora-node-placement-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 computer/data 是否抢主位。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["computer", "data"]
+  },
+  {
+    "id": "communication_observe_antenna_cable_broken",
+    "query": "天线线缆坏了",
+    "expected_guides": ["DG-0855", "DG-0858"],
+    "expected_wiki": [
+      "communication-antenna-connection-check-001",
+      "communication-antenna-cable-strain-relief-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 repair 是否抢主位。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["repair"]
+  },
+  {
+    "id": "communication_observe_low_power_comms",
+    "query": "低功耗通信",
+    "expected_guides": ["DG-0859"],
+    "expected_wiki": [
+      "communication-battery-radio-runtime-budget-001",
+      "communication-qrp-power-budget-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 energy 是否完全覆盖 communication。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["energy", "electronics"]
+  },
+  {
+    "id": "communication_observe_shortwave_noise",
+    "query": "短波噪声太大",
+    "expected_guides": ["DG-0855"],
+    "expected_wiki": ["communication-shortwave-noise-source-check-001"],
+    "allowed_secondary_guides": ["DG-0860"],
+    "observation": true,
+    "focus": "观察 survival 是否泛化。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["survival"]
+  },
+  {
+    "id": "communication_observe_team_split_checkin",
+    "query": "队伍分散怎么报平安",
+    "expected_guides": ["DG-0856", "DG-0860"],
+    "expected_wiki": [
+      "communication-radio-message-format-short-001",
+      "communication-check-in-missed-window-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 communication 是否优先，evacuation/navigation 是否只是补充。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["evacuation", "navigation"]
+  }
+]

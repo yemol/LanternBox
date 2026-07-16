@@ -1,0 +1,107 @@
+{
+  "id": "DG-0860",
+  "title": "通信信息记录与交接",
+  "category": "通讯",
+  "priority": "P0",
+  "scenario": "团队使用无线电、LoRa、短波、纸条或人工传递时，需要记录频率、联系对象、消息级别、回执和交接。",
+  "goal": "建立通信日志和交接字段，让接手者知道哪些消息已确认、哪些待核、下一步做什么。",
+  "keywords": [
+    "通信日志",
+    "信息记录",
+    "频率记录",
+    "联系记录",
+    "交接",
+    "回执",
+    "短波",
+    "应急通信",
+    "Batch6-B"
+  ],
+  "tools": [
+    "通信日志本",
+    "频道表",
+    "节点清单",
+    "短消息模板",
+    "交接表"
+  ],
+  "steps": [
+    "每条消息记录时间、通信方式、设备或频道、发送者和接收者。",
+    "标记消息级别：危险、位置、资源、普通或待核。",
+    "写明是否收到回执，未确认消息不得当作已送达。",
+    "短波和转述信息要标明来源状态和核验情况。",
+    "交接时列出未确认消息、下一窗口、设备电量和待处理动作。"
+  ],
+  "check": [
+    "日志是否包含时间、方式、对象、频道或节点。",
+    "是否区分已确认、未确认和待核信息。",
+    "是否写明下一次通信窗口和负责人。",
+    "是否保护敏感位置和库存信息。"
+  ],
+  "common_mistakes": [
+    "只记录成功消息，不记录失败。",
+    "把未核短波信息当成事实传播。",
+    "交接只说口头结论，不留下字段。"
+  ],
+  "fallback": [
+    "没有日志本时，用固定纸页或防水纸条记录最小字段。",
+    "无法确认消息时标为待核，等待下一窗口。",
+    "敏感信息用编号、地标和等级替代完整细节。"
+  ],
+  "stop_or_escalate": [
+    "生命危险、成员失联、身份不清、敏感信息外泄或未确认消息被执行时，停止普通交接并复核日志。",
+    "日志丢失或被无关人员接触时，暂停使用旧编号并重新整理低敏版本。"
+  ],
+  "related_wiki": [
+    "communication-emergency-net-opening-check-001",
+    "communication-message-priority-levels-001",
+    "communication-check-in-missed-window-001",
+    "communication-radio-log-minimum-fields-001",
+    "communication-radio-message-format-short-001",
+    "communication-radio-call-sign-identity-check-001",
+    "communication-lora-message-size-priority-001",
+    "communication-shortwave-receive-log-verification-001"
+  ],
+  "notes": "Batch6-B Communication & Field Network 第一批扩容行动卡。",
+  "category_original": "通讯",
+  "domains": [
+    "comms",
+    "records",
+    "security"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "communication_field_network"
+  ],
+  "objects": [
+    "通信日志",
+    "频率记录",
+    "联系记录",
+    "回执",
+    "团队交接"
+  ],
+  "signals": [
+    "通信记录",
+    "交接",
+    "回执",
+    "频率",
+    "联系日志"
+  ],
+  "risks": [
+    "information_loss",
+    "resource_depletion",
+    "exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "comms",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "通信信息记录与交接",
+    "通信日志",
+    "频率记录",
+    "联系记录"
+  ],
+  "risk_level": "caution"
+}

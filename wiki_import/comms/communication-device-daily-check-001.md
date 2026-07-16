@@ -5,7 +5,7 @@ category: 通讯
 priority: P0
 summary: 安排消息格式、开机窗口和备用联系路径；通信失败时不盲目外出寻找，并记录责任人、时间和复查结果。
 tags: 通讯, 对讲机, LoRa, 短波电台, 手机, 每日检查
-guide_links: DG-0582, DG-0639
+guide_links: DG-0582, DG-0639, DG-0859
 risk_level: normal
 status: published
 source: 壳中灯通讯检查规则；常见无线设备使用说明

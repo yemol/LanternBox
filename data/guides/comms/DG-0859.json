@@ -1,0 +1,105 @@
+{
+  "id": "DG-0859",
+  "title": "通信设备低功耗运行",
+  "category": "通讯",
+  "priority": "P0",
+  "scenario": "通信设备、电池、太阳能或充电能力有限，需要安排节电策略、通信窗口、设备休眠和备用电量。",
+  "goal": "把通信需求纳入每日能源预算，优先保留危险消息、报平安、位置和回执。",
+  "keywords": [
+    "低功耗通信",
+    "通信窗口",
+    "节电",
+    "QRP",
+    "电量预算",
+    "设备休眠",
+    "LoRa",
+    "无线电",
+    "Batch6-B"
+  ],
+  "tools": [
+    "电量记录表",
+    "通信窗口表",
+    "设备清单",
+    "充电排班",
+    "通信日志"
+  ],
+  "steps": [
+    "列出所有通信设备、电量、负责人和充电方式。",
+    "设定每日通信窗口，窗口外休眠、关机或低功耗待机。",
+    "优先发送危险、报平安、位置、资源需求和回执。",
+    "每次窗口前后记录电量，不把测试和闲聊放进保底电量。",
+    "电量不足时减少窗口数量，转纸条点、集合点或人工传递。"
+  ],
+  "check": [
+    "是否有每台设备的保底电量。",
+    "通信窗口是否写在公共位置。",
+    "是否区分紧急消息和普通消息。",
+    "是否记录窗口前后电量。"
+  ],
+  "common_mistakes": [
+    "全天开机等待消息。",
+    "弱信号下反复搜索或连续呼叫。",
+    "通信测试抢占照明、医疗或安全电量。"
+  ],
+  "fallback": [
+    "降为每日一个关键窗口。",
+    "只保留主设备和主节点，备用设备关机保存。",
+    "使用纸条、集合点、近距离信号或人工传递补充。"
+  ],
+  "stop_or_escalate": [
+    "电池发热、鼓包、进水、快速掉电或设备异常时停止使用并隔离。",
+    "电量低于团队保底或影响照明、医疗、安全设备时，停止非紧急通信。"
+  ],
+  "related_wiki": [
+    "communication-battery-radio-runtime-budget-001",
+    "communication-qrp-power-budget-001",
+    "communication-qrp-contact-window-discipline-001",
+    "communication-wet-device-stop-use-001",
+    "communication-power-saving-001",
+    "communication-device-daily-check-001"
+  ],
+  "notes": "Batch6-B Communication & Field Network 第一批扩容行动卡。",
+  "category_original": "通讯",
+  "domains": [
+    "comms",
+    "power",
+    "records"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "communication_field_network"
+  ],
+  "objects": [
+    "通信设备",
+    "电池",
+    "通信窗口",
+    "LoRa",
+    "无线电"
+  ],
+  "signals": [
+    "低电量",
+    "节电",
+    "固定窗口",
+    "QRP",
+    "设备休眠"
+  ],
+  "risks": [
+    "resource_depletion",
+    "injury_or_exposure",
+    "information_loss"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "comms",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "通信设备低功耗运行",
+    "低电量通信",
+    "通信窗口节电",
+    "LoRa 电量预算"
+  ],
+  "risk_level": "high"
+}

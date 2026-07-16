@@ -2342,6 +2342,249 @@
         "食谱",
         "烹饪时间"
       ]
+    },
+    {
+      "name": "communication_wet_device_safety",
+      "object_triggers": [
+        "电台",
+        "对讲机",
+        "无线电",
+        "LoRa 节点",
+        "LoRa",
+        "通信设备",
+        "天线接口",
+        "防水盒",
+        "盒子",
+        "接头",
+        "收音机",
+        "手机"
+      ],
+      "state_triggers": [
+        "进水",
+        "潮湿",
+        "淋雨",
+        "雨天",
+        "接口湿",
+        "受潮",
+        "有水",
+        "水滴",
+        "雾气",
+        "能不能开机",
+        "能不能继续发射",
+        "能不能测试",
+        "是否停用",
+        "开机测试",
+        "充电测试"
+      ],
+      "aliases": [
+        "通信设备进水停用边界",
+        "通信设备进水",
+        "湿设备停止开机测试",
+        "LoRa 节点进水",
+        "电台淋雨停用",
+        "无线电受潮停用",
+        "天线接口潮湿停用",
+        "备用通信路径",
+        "通信设备无法连接排查"
+      ],
+      "target_domains": [
+        "comms",
+        "records",
+        "security"
+      ],
+      "target_slug_domains": [
+        "communication"
+      ],
+      "target_categories": [
+        "通讯"
+      ],
+      "candidate_anchor_terms": [
+        "通信设备进水",
+        "进水停用",
+        "湿设备",
+        "开机测试",
+        "不继续开机测试",
+        "通信设备",
+        "LoRa 节点",
+        "电台",
+        "无线电",
+        "受潮",
+        "备用通信",
+        "隔离"
+      ],
+      "candidate_anchor_boost": 96,
+      "candidate_anchor_miss_penalty": 135,
+      "domain_boost": 68,
+      "domain_mismatch_penalty": 155,
+      "title_alias_boost": 190,
+      "mismatch_unless_context": [
+        "插线板",
+        "延长线",
+        "裸线",
+        "电路板",
+        "测电压",
+        "焊接",
+        "拆机",
+        "维修元件"
+      ]
+    },
+    {
+      "name": "communication_antenna_weather_safety",
+      "object_triggers": [
+        "天线",
+        "馈线",
+        "接头",
+        "接口",
+        "电台",
+        "无线电",
+        "LoRa",
+        "LoRa 节点"
+      ],
+      "state_triggers": [
+        "下雨",
+        "雨天",
+        "潮湿",
+        "雷雨",
+        "风大",
+        "户外",
+        "接口湿",
+        "架设",
+        "拆除",
+        "继续使用",
+        "继续发射",
+        "信号差",
+        "氧化"
+      ],
+      "aliases": [
+        "雨天潮湿天线停止线",
+        "天线天气安全",
+        "天线接口潮湿",
+        "天线连接检查",
+        "雨天架天线",
+        "天线松动停止发射",
+        "无线电通信前检查",
+        "通信设备无法连接排查"
+      ],
+      "target_domains": [
+        "comms",
+        "security",
+        "records"
+      ],
+      "target_slug_domains": [
+        "communication"
+      ],
+      "target_categories": [
+        "通讯"
+      ],
+      "candidate_anchor_terms": [
+        "雨天潮湿天线",
+        "天线停止线",
+        "天线连接",
+        "接口潮湿",
+        "继续发射",
+        "架设",
+        "雷雨",
+        "线缆破皮",
+        "停止发射",
+        "撤下临时天线",
+        "备用通信"
+      ],
+      "candidate_anchor_boost": 96,
+      "candidate_anchor_miss_penalty": 135,
+      "domain_boost": 68,
+      "domain_mismatch_penalty": 155,
+      "title_alias_boost": 190,
+      "mismatch_unless_context": [
+        "手机充电口",
+        "插线板",
+        "延长线",
+        "电线外皮",
+        "焊接",
+        "换接头",
+        "只问机械固定"
+      ]
+    },
+    {
+      "name": "communication_device_failure_isolation",
+      "object_triggers": [
+        "无线电",
+        "电台",
+        "对讲机",
+        "LoRa",
+        "LoRa 节点",
+        "通信节点",
+        "节点",
+        "通信设备"
+      ],
+      "state_triggers": [
+        "无信号",
+        "无回应",
+        "没人回应",
+        "没人回",
+        "连接失败",
+        "节点离线",
+        "通信异常",
+        "收不到",
+        "发不出",
+        "排查",
+        "隔离",
+        "更换",
+        "停止测试"
+      ],
+      "aliases": [
+        "通信设备无法连接排查",
+        "无线电收不到信号",
+        "无线电没人回应",
+        "LoRa 节点离线",
+        "LoRa 节点部署检查",
+        "LoRa 节点排查",
+        "节点离线排查",
+        "通信故障排查顺序",
+        "停止连续测试",
+        "备用通信路径",
+        "节点离线处理"
+      ],
+      "target_domains": [
+        "comms",
+        "power",
+        "records",
+        "repair"
+      ],
+      "target_slug_domains": [
+        "communication"
+      ],
+      "target_categories": [
+        "通讯"
+      ],
+      "candidate_anchor_terms": [
+        "通信设备无法连接",
+        "通信设备故障排查",
+        "无线电收不到",
+        "无线电发不出",
+        "无人确认",
+        "节点离线",
+        "LoRa 部署",
+        "节点位置",
+        "连续两次测试失败",
+        "LoRa 节点",
+        "停止连续呼叫",
+        "备用通信",
+        "记录设备编号"
+      ],
+      "candidate_anchor_boost": 92,
+      "candidate_anchor_miss_penalty": 130,
+      "domain_boost": 64,
+      "domain_mismatch_penalty": 145,
+      "title_alias_boost": 180,
+      "mismatch_unless_context": [
+        "服务器",
+        "网页",
+        "数据库",
+        "电脑网络",
+        "路由器配置",
+        "互联网服务",
+        "云同步"
+      ]
     }
   ]
 }

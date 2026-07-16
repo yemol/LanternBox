@@ -1,0 +1,109 @@
+{
+  "id": "DG-0856",
+  "title": "野外建立临时通信链路",
+  "category": "通讯",
+  "priority": "P0",
+  "scenario": "外出、巡查、临时营地或多点值守时，需要在两个地点之间建立短时通信链路，并规划备用或中继。",
+  "goal": "用最小频道计划、位置选择、节点角色和短消息格式建立可复查的临时链路。",
+  "keywords": [
+    "野外通信",
+    "临时通信链路",
+    "两点通信",
+    "中继",
+    "节点",
+    "频道计划",
+    "LoRa",
+    "Mesh",
+    "Batch6-B"
+  ],
+  "tools": [
+    "纸质地图",
+    "节点清单",
+    "通信设备",
+    "电量记录",
+    "留言点标记"
+  ],
+  "steps": [
+    "确定两端人员、地点、主频道、备用频道和通信窗口。",
+    "选择安全、干燥、可返回的位置放置设备或节点。",
+    "需要中继时先指定固定节点、移动节点和备用节点，不让所有节点同时移动。",
+    "只发送短消息：位置、状态、需求、危险和下次窗口。",
+    "测试后记录成功点、失败点、电量和下一次复查时间。"
+  ],
+  "check": [
+    "两端是否知道主频道、备用频道和窗口。",
+    "节点或设备位置是否安全、可复查、低暴露。",
+    "是否有失败后的纸条、集合点或人工传递路径。"
+  ],
+  "common_mistakes": [
+    "临时换点但不通知留守者。",
+    "把移动节点当作固定中继。",
+    "只测成功，不记录失败点。"
+  ],
+  "fallback": [
+    "链路不稳时缩短距离或改为检查点接力。",
+    "无线不可用时使用纸条点、近距离信号、固定集合点或人工传递。",
+    "电量不足时只保留报平安和危险消息。"
+  ],
+  "stop_or_escalate": [
+    "需要进入危险高点、暴露住所、离开返回路线或耗尽保底电量时停止建立链路。",
+    "节点身份不清、位置暴露或连续失败时停止作为关键链路。"
+  ],
+  "related_wiki": [
+    "communication-check-in-missed-window-001",
+    "communication-radio-channel-plan-minimum-001",
+    "communication-lora-node-id-map-001",
+    "communication-radio-range-line-of-sight-001",
+    "communication-radio-message-format-short-001",
+    "communication-antenna-placement-height-safety-001",
+    "communication-antenna-cable-strain-relief-001",
+    "communication-lora-node-placement-001",
+    "communication-lora-message-size-priority-001",
+    "communication-mesh-node-role-map-001"
+  ],
+  "notes": "Batch6-B Communication & Field Network 第一批扩容行动卡。",
+  "category_original": "通讯",
+  "domains": [
+    "comms",
+    "evacuation",
+    "shelter",
+    "records"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "communication_field_network"
+  ],
+  "objects": [
+    "临时通信链路",
+    "两点通信",
+    "中继节点",
+    "外出队",
+    "通信窗口"
+  ],
+  "signals": [
+    "野外通信",
+    "两点联系",
+    "中继",
+    "节点部署",
+    "临时链路"
+  ],
+  "risks": [
+    "resource_depletion",
+    "injury_or_exposure",
+    "information_loss"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "comms",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "野外建立临时通信链路",
+    "两点通信",
+    "临时中继",
+    "外出队通信链路"
+  ],
+  "risk_level": "caution"
+}

@@ -1,0 +1,4009 @@
+{
+  "generated_at": "2026-07-16T06:08:00.012108+00:00",
+  "summary": {
+    "total": 19,
+    "strict_total": 14,
+    "observation_total": 5,
+    "pass": 13,
+    "partial": 6,
+    "fail": 0,
+    "guide_hit_rate": "85.7%",
+    "expected_guide_hit_rate": "78.6%",
+    "wiki_hit_rate": "71.4%",
+    "guide_wiki_precise_rate": "85.7%",
+    "safety_boundary_rate": "100.0%",
+    "fallback_rate": "100.0%",
+    "record_rate": "100.0%",
+    "dangerous_suggestion_count": 0,
+    "kiwix_override_count": 0,
+    "cross_domain_count": 0,
+    "root_cause_counts": {
+      "selector 问题": 5,
+      "ranking 问题": 1,
+      "数据缺口": 3,
+      "合理 partial": 2,
+      "profile 缺口": 1
+    },
+    "cross_domain_counts": {},
+    "conflict_observation_counts": {}
+  },
+  "cases": [
+    {
+      "id": "communication_listen_before_transmit",
+      "query": "电台发射前是否要先监听？",
+      "observation": false,
+      "focus": "无线电通信前检查，发射前先监听。",
+      "watch_conflicts": [],
+      "expected_guides": [
+        "DG-0858"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-radio-listen-before-transmit-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "power",
+        "records",
+        "security",
+        "comms",
+        "water"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0858",
+          "title": "无线电通信前检查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "security",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0801",
+          "title": "先确认雨水收集点是否可用",
+          "risk_level": "caution",
+          "domains": [
+            "water"
+          ]
+        },
+        {
+          "id": "DG-0802",
+          "title": "先判断井口水是否可安全使用",
+          "risk_level": "caution",
+          "domains": [
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-antenna-wet-weather-stop-001",
+          "title": "雨天潮湿天线停止线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-antenna-connection-check-001",
+          "title": "天线连接检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-listen-before-transmit-001",
+          "title": "无线电发射前先监听",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-basic-terms-001",
+          "title": "无线电通信基本原理",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-message-format-short-001",
+          "title": "无线电短消息格式",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-call-sign-identity-check-001",
+          "title": "呼号和身份确认边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0858",
+          "title": "无线电通信前检查"
+        },
+        {
+          "id": "DG-0801",
+          "title": "先确认雨水收集点是否可用"
+        },
+        {
+          "id": "DG-0802",
+          "title": "先判断井口水是否可安全使用"
+        },
+        {
+          "id": "DG-0803",
+          "title": "先判断管道水是否可直接使用"
+        },
+        {
+          "id": "DG-0804",
+          "title": "先判断水是否浑浊"
+        },
+        {
+          "id": "DG-0805",
+          "title": "先判断水是否有异味"
+        },
+        {
+          "id": "DG-0806",
+          "title": "先判断水是否颜色异常"
+        },
+        {
+          "id": "DG-0807",
+          "title": "先判断水是否被污水接触"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "communication-antenna-cable-strain-relief-001",
+        "communication-antenna-connection-check-001",
+        "communication-antenna-placement-height-safety-001",
+        "communication-antenna-wet-weather-stop-001",
+        "communication-radio-basic-terms-001",
+        "communication-radio-call-sign-identity-check-001",
+        "communication-radio-channel-plan-minimum-001",
+        "communication-radio-listen-before-transmit-001",
+        "communication-radio-message-format-short-001",
+        "communication-radio-range-line-of-sight-001",
+        "communication-shortwave-antenna-placement-safe-001",
+        "water-chemical-risk-011",
+        "water-clarity-judgement-013",
+        "water-microbial-risk-012",
+        "water-rain-collection-008",
+        "water-unknown-source-010",
+        "water-well-safety-009"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0803",
+          "title": "先判断管道水是否可直接使用",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0804",
+          "title": "先判断水是否浑浊",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0805",
+          "title": "先判断水是否有异味",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0806",
+          "title": "先判断水是否颜色异常",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0807",
+          "title": "先判断水是否被污水接触",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_radio_no_reply_check",
+      "query": "无线电没人回，先检查什么？",
+      "observation": false,
+      "focus": "无人回应时按电源、天线、频道、窗口顺序排查。",
+      "watch_conflicts": [],
+      "expected_guides": [
+        "DG-0855"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-device-fault-tree-001",
+        "communication-radio-no-receive-check-001"
+      ],
+      "profiles": [
+        "communication_device_failure_isolation"
+      ],
+      "domains": [
+        "records",
+        "power",
+        "repair",
+        "comms",
+        "hygiene",
+        "water",
+        "medical",
+        "security"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "repair",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0441",
+          "title": "异常解除确认",
+          "risk_level": "caution",
+          "domains": [
+            "security",
+            "records",
+            "hygiene",
+            "medical",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-device-fault-tree-001",
+          "title": "通信设备故障排查顺序",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-wet-device-stop-use-001",
+          "title": "通信设备进水停用边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-no-receive-check-001",
+          "title": "无线电收不到信号排查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-no-transmit-check-001",
+          "title": "无线电发不出或无人确认排查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-antenna-connection-check-001",
+          "title": "天线连接检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-interference-noise-check-001",
+          "title": "无线电噪声和干扰初查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查"
+        },
+        {
+          "id": "DG-0441",
+          "title": "异常解除确认"
+        },
+        {
+          "id": "DG-0616",
+          "title": "充电宝鼓包发热停用隔离"
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录"
+        },
+        {
+          "id": "DG-0858",
+          "title": "无线电通信前检查"
+        },
+        {
+          "id": "DG-0195",
+          "title": "无线电通话纪律"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "communication-radio-no-receive-check-001",
+          "title": "无线电收不到信号排查"
+        },
+        {
+          "slug": "communication-antenna-wet-weather-stop-001",
+          "title": "雨天潮湿天线停止线"
+        },
+        {
+          "slug": "communication-device-fault-tree-001",
+          "title": "通信设备故障排查顺序"
+        },
+        {
+          "slug": "communication-battery-radio-runtime-budget-001",
+          "title": "无线电和 LoRa 电量预算"
+        },
+        {
+          "slug": "communication-radio-no-transmit-check-001",
+          "title": "无线电发不出或无人确认排查"
+        },
+        {
+          "slug": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图"
+        }
+      ],
+      "guide_related_wiki": [
+        "communication-antenna-connection-check-001",
+        "communication-device-fault-tree-001",
+        "communication-lora-message-size-priority-001",
+        "communication-lora-node-daily-001",
+        "communication-lora-node-id-map-001",
+        "communication-lora-node-placement-001",
+        "communication-lora-range-test-log-001",
+        "communication-lora-store-forward-delay-001",
+        "communication-lora-unknown-node-isolation-001",
+        "communication-mesh-node-role-map-001",
+        "communication-radio-interference-noise-check-001",
+        "communication-radio-no-receive-check-001",
+        "communication-radio-no-transmit-check-001",
+        "communication-shortwave-noise-source-check-001",
+        "communication-wet-device-stop-use-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0616",
+          "title": "充电宝鼓包发热停用隔离",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0858",
+          "title": "无线电通信前检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0195",
+          "title": "无线电通话纪律",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-antenna-wet-weather-stop-001",
+          "title": "雨天潮湿天线停止线",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-battery-radio-runtime-budget-001",
+          "title": "无线电和 LoRa 电量预算",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_loose_antenna_transmit",
+      "query": "天线松了还能不能继续发射？",
+      "observation": false,
+      "focus": "天线松动时通信安全主导，repair 不应抢主位。",
+      "watch_conflicts": [
+        "repair"
+      ],
+      "expected_guides": [
+        "DG-0855",
+        "DG-0858"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-antenna-connection-check-001"
+      ],
+      "profiles": [
+        "communication_antenna_weather_safety"
+      ],
+      "domains": [
+        "power",
+        "records",
+        "security",
+        "comms",
+        "repair",
+        "evacuation"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0858",
+          "title": "无线电通信前检查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "security",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "repair",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0120",
+          "title": "断电前安全关闭",
+          "risk_level": "caution",
+          "domains": [
+            "power",
+            "security",
+            "comms",
+            "records",
+            "evacuation"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-antenna-wet-weather-stop-001",
+          "title": "雨天潮湿天线停止线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-antenna-connection-check-001",
+          "title": "天线连接检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-listen-before-transmit-001",
+          "title": "无线电发射前先监听",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-basic-terms-001",
+          "title": "无线电通信基本原理",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-message-format-short-001",
+          "title": "无线电短消息格式",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-call-sign-identity-check-001",
+          "title": "呼号和身份确认边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0858",
+          "title": "无线电通信前检查"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0120",
+          "title": "断电前安全关闭"
+        },
+        {
+          "id": "DG-0181",
+          "title": "雷雨前准备"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "communication-antenna-wet-weather-stop-001",
+          "title": "雨天潮湿天线停止线"
+        },
+        {
+          "slug": "communication-antenna-connection-check-001",
+          "title": "天线连接检查"
+        }
+      ],
+      "guide_related_wiki": [
+        "communication-antenna-cable-strain-relief-001",
+        "communication-antenna-connection-check-001",
+        "communication-antenna-placement-height-safety-001",
+        "communication-antenna-wet-weather-stop-001",
+        "communication-device-fault-tree-001",
+        "communication-radio-basic-terms-001",
+        "communication-radio-call-sign-identity-check-001",
+        "communication-radio-channel-plan-minimum-001",
+        "communication-radio-interference-noise-check-001",
+        "communication-radio-listen-before-transmit-001",
+        "communication-radio-message-format-short-001",
+        "communication-radio-no-receive-check-001",
+        "communication-radio-no-transmit-check-001",
+        "communication-radio-range-line-of-sight-001",
+        "communication-shortwave-antenna-placement-safe-001",
+        "communication-shortwave-noise-source-check-001",
+        "communication-wet-device-stop-use-001",
+        "energy-core-shutdown-loss-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0181",
+          "title": "雷雨前准备",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_wet_antenna_rain",
+      "query": "雨天接口潮湿还能不能架天线？",
+      "observation": false,
+      "focus": "潮湿接口和天线安全边界，能源或维修只能 secondary。",
+      "watch_conflicts": [
+        "electronics",
+        "repair"
+      ],
+      "expected_guides": [
+        "DG-0855",
+        "DG-0858"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-antenna-wet-weather-stop-001"
+      ],
+      "profiles": [
+        "communication_antenna_weather_safety"
+      ],
+      "domains": [
+        "power",
+        "records",
+        "security",
+        "comms",
+        "repair",
+        "evacuation"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0858",
+          "title": "无线电通信前检查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "security",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "repair",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0120",
+          "title": "断电前安全关闭",
+          "risk_level": "caution",
+          "domains": [
+            "power",
+            "security",
+            "comms",
+            "records",
+            "evacuation"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-antenna-wet-weather-stop-001",
+          "title": "雨天潮湿天线停止线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-antenna-connection-check-001",
+          "title": "天线连接检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-listen-before-transmit-001",
+          "title": "无线电发射前先监听",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-basic-terms-001",
+          "title": "无线电通信基本原理",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-message-format-short-001",
+          "title": "无线电短消息格式",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-call-sign-identity-check-001",
+          "title": "呼号和身份确认边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0858",
+          "title": "无线电通信前检查"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0120",
+          "title": "断电前安全关闭"
+        },
+        {
+          "id": "DG-0181",
+          "title": "雷雨前准备"
+        },
+        {
+          "id": "DG-0620",
+          "title": "接口潮湿和线头保护"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "communication-antenna-wet-weather-stop-001",
+          "title": "雨天潮湿天线停止线"
+        },
+        {
+          "slug": "communication-antenna-connection-check-001",
+          "title": "天线连接检查"
+        }
+      ],
+      "guide_related_wiki": [
+        "communication-antenna-cable-strain-relief-001",
+        "communication-antenna-connection-check-001",
+        "communication-antenna-placement-height-safety-001",
+        "communication-antenna-wet-weather-stop-001",
+        "communication-device-fault-tree-001",
+        "communication-radio-basic-terms-001",
+        "communication-radio-call-sign-identity-check-001",
+        "communication-radio-channel-plan-minimum-001",
+        "communication-radio-interference-noise-check-001",
+        "communication-radio-listen-before-transmit-001",
+        "communication-radio-message-format-short-001",
+        "communication-radio-no-receive-check-001",
+        "communication-radio-no-transmit-check-001",
+        "communication-radio-range-line-of-sight-001",
+        "communication-shortwave-antenna-placement-safe-001",
+        "communication-shortwave-noise-source-check-001",
+        "communication-wet-device-stop-use-001",
+        "energy-core-shutdown-loss-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0181",
+          "title": "雷雨前准备",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0620",
+          "title": "接口潮湿和线头保护",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_lora_node_placement",
+      "query": "LoRa 节点应该放哪里？",
+      "observation": false,
+      "focus": "LoRa 节点部署位置。",
+      "watch_conflicts": [],
+      "expected_guides": [
+        "DG-0857"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0856"
+      ],
+      "expected_wiki": [
+        "communication-lora-node-placement-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "power",
+        "records",
+        "comms",
+        "repair"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录",
+          "risk_level": "caution",
+          "domains": [
+            "comms"
+          ]
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "repair",
+            "records"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-lora-node-placement-001",
+          "title": "LoRa 节点部署位置",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-mesh-node-role-map-001",
+          "title": "Mesh 网络基础节点角色",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-range-test-log-001",
+          "title": "LoRa 距离测试记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-store-forward-delay-001",
+          "title": "LoRa 延迟和转发误判",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-message-size-priority-001",
+          "title": "LoRa 短消息优先级",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查"
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路"
+        },
+        {
+          "id": "DG-0401",
+          "title": "五分钟技能教学"
+        },
+        {
+          "id": "DG-0704",
+          "title": "避免交换时暴露库存"
+        },
+        {
+          "id": "DG-0800",
+          "title": "先找到可用水源的方向"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "communication-lora-node-placement-001",
+          "title": "LoRa 节点部署位置"
+        },
+        {
+          "slug": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图"
+        },
+        {
+          "slug": "communication-lora-message-size-priority-001",
+          "title": "LoRa 短消息优先级"
+        },
+        {
+          "slug": "communication-lora-unknown-node-isolation-001",
+          "title": "未知 LoRa 节点隔离"
+        },
+        {
+          "slug": "communication-antenna-connection-check-001",
+          "title": "天线连接检查"
+        },
+        {
+          "slug": "communication-antenna-cable-strain-relief-001",
+          "title": "天线方向和线缆拉力影响"
+        }
+      ],
+      "guide_related_wiki": [
+        "communication-antenna-connection-check-001",
+        "communication-contact-window-001",
+        "communication-device-daily-check-001",
+        "communication-device-fault-tree-001",
+        "communication-lora-message-size-priority-001",
+        "communication-lora-node-daily-001",
+        "communication-lora-node-id-map-001",
+        "communication-lora-node-placement-001",
+        "communication-lora-range-test-log-001",
+        "communication-lora-store-forward-delay-001",
+        "communication-lora-unknown-node-isolation-001",
+        "communication-mesh-node-role-map-001",
+        "communication-offline-communication-001",
+        "communication-radio-interference-noise-check-001",
+        "communication-radio-no-receive-check-001",
+        "communication-radio-no-transmit-check-001",
+        "communication-shortwave-noise-source-check-001",
+        "communication-sms-001",
+        "communication-wet-device-stop-use-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0401",
+          "title": "五分钟技能教学",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0704",
+          "title": "避免交换时暴露库存",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0800",
+          "title": "先找到可用水源的方向",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-lora-unknown-node-isolation-001",
+          "title": "未知 LoRa 节点隔离",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-antenna-connection-check-001",
+          "title": "天线连接检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-antenna-cable-strain-relief-001",
+          "title": "天线方向和线缆拉力影响",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_lora_missed_twice",
+      "query": "LoRa 节点两次收不到消息怎么办？",
+      "observation": false,
+      "focus": "LoRa 节点失联、延迟和距离测试记录。",
+      "watch_conflicts": [],
+      "expected_guides": [
+        "DG-0857"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0855"
+      ],
+      "expected_wiki": [
+        "communication-lora-range-test-log-001",
+        "communication-lora-store-forward-delay-001"
+      ],
+      "profiles": [
+        "communication_device_failure_isolation"
+      ],
+      "domains": [
+        "power",
+        "records",
+        "comms",
+        "repair"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "repair",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录",
+          "risk_level": "caution",
+          "domains": [
+            "comms"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-lora-node-placement-001",
+          "title": "LoRa 节点部署位置",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-mesh-node-role-map-001",
+          "title": "Mesh 网络基础节点角色",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-range-test-log-001",
+          "title": "LoRa 距离测试记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-store-forward-delay-001",
+          "title": "LoRa 延迟和转发误判",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-message-size-priority-001",
+          "title": "LoRa 短消息优先级",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录"
+        },
+        {
+          "id": "DG-0441",
+          "title": "异常解除确认"
+        },
+        {
+          "id": "DG-0616",
+          "title": "充电宝鼓包发热停用隔离"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路"
+        },
+        {
+          "id": "DG-0159",
+          "title": "坏消息告知儿童"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "communication-radio-no-receive-check-001",
+          "title": "无线电收不到信号排查"
+        },
+        {
+          "slug": "communication-battery-radio-runtime-budget-001",
+          "title": "无线电和 LoRa 电量预算"
+        },
+        {
+          "slug": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图"
+        },
+        {
+          "slug": "communication-antenna-wet-weather-stop-001",
+          "title": "雨天潮湿天线停止线"
+        },
+        {
+          "slug": "communication-device-fault-tree-001",
+          "title": "通信设备故障排查顺序"
+        },
+        {
+          "slug": "communication-radio-no-transmit-check-001",
+          "title": "无线电发不出或无人确认排查"
+        }
+      ],
+      "guide_related_wiki": [
+        "communication-antenna-connection-check-001",
+        "communication-contact-window-001",
+        "communication-device-daily-check-001",
+        "communication-device-fault-tree-001",
+        "communication-lora-message-size-priority-001",
+        "communication-lora-node-daily-001",
+        "communication-lora-node-id-map-001",
+        "communication-lora-node-placement-001",
+        "communication-lora-range-test-log-001",
+        "communication-lora-store-forward-delay-001",
+        "communication-lora-unknown-node-isolation-001",
+        "communication-mesh-node-role-map-001",
+        "communication-offline-communication-001",
+        "communication-radio-interference-noise-check-001",
+        "communication-radio-no-receive-check-001",
+        "communication-radio-no-transmit-check-001",
+        "communication-shortwave-noise-source-check-001",
+        "communication-sms-001",
+        "communication-wet-device-stop-use-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0441",
+          "title": "异常解除确认",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0616",
+          "title": "充电宝鼓包发热停用隔离",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0159",
+          "title": "坏消息告知儿童",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-radio-no-receive-check-001",
+          "title": "无线电收不到信号排查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-battery-radio-runtime-budget-001",
+          "title": "无线电和 LoRa 电量预算",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-antenna-wet-weather-stop-001",
+          "title": "雨天潮湿天线停止线",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-device-fault-tree-001",
+          "title": "通信设备故障排查顺序",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-radio-no-transmit-check-001",
+          "title": "无线电发不出或无人确认排查",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_lora_unknown_node",
+      "query": "未知 LoRa 节点出现怎么办？",
+      "observation": false,
+      "focus": "未知节点隔离和记录。",
+      "watch_conflicts": [],
+      "expected_guides": [
+        "DG-0857"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-lora-unknown-node-isolation-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "power",
+        "records",
+        "comms",
+        "wild_food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录",
+          "risk_level": "caution",
+          "domains": [
+            "comms"
+          ]
+        },
+        {
+          "id": "DG-0681",
+          "title": "未知植物不入口",
+          "risk_level": "high",
+          "domains": [
+            "wild_food"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-lora-node-placement-001",
+          "title": "LoRa 节点部署位置",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-mesh-node-role-map-001",
+          "title": "Mesh 网络基础节点角色",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-range-test-log-001",
+          "title": "LoRa 距离测试记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-store-forward-delay-001",
+          "title": "LoRa 延迟和转发误判",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-message-size-priority-001",
+          "title": "LoRa 短消息优先级",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查"
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录"
+        },
+        {
+          "id": "DG-0681",
+          "title": "未知植物不入口"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0843",
+          "title": "未知电源安全判断"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路"
+        },
+        {
+          "id": "DG-0713",
+          "title": "冲突苗头出现时撤离"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "communication-lora-unknown-node-isolation-001",
+          "title": "未知 LoRa 节点隔离"
+        },
+        {
+          "slug": "communication-lora-message-size-priority-001",
+          "title": "LoRa 短消息优先级"
+        },
+        {
+          "slug": "energy-unknown-adapter-stop-use-001",
+          "title": "未知电源适配器停用判断"
+        },
+        {
+          "slug": "communication-lora-node-daily-001",
+          "title": "LoRa 节点每日状态检查"
+        },
+        {
+          "slug": "communication-lora-node-placement-001",
+          "title": "LoRa 节点部署位置"
+        },
+        {
+          "slug": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图"
+        },
+        {
+          "slug": "communication-antenna-connection-check-001",
+          "title": "天线连接检查"
+        },
+        {
+          "slug": "communication-antenna-cable-strain-relief-001",
+          "title": "天线方向和线缆拉力影响"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-small-livestock-index-001",
+        "communication-contact-window-001",
+        "communication-device-daily-check-001",
+        "communication-lora-message-size-priority-001",
+        "communication-lora-node-daily-001",
+        "communication-lora-node-id-map-001",
+        "communication-lora-node-placement-001",
+        "communication-lora-range-test-log-001",
+        "communication-lora-store-forward-delay-001",
+        "communication-lora-unknown-node-isolation-001",
+        "communication-mesh-node-role-map-001",
+        "communication-offline-communication-001",
+        "communication-sms-001",
+        "wildlife-animal-food-001",
+        "wildlife-animal-food-002",
+        "wildlife-children-001",
+        "wildlife-collection-site-001",
+        "wildlife-dead-animal-001",
+        "wildlife-do-not-eat-001",
+        "wildlife-drowning-risk-001",
+        "wildlife-edible-insects-001",
+        "wildlife-fishing-001",
+        "wildlife-foraging-cost-001",
+        "wildlife-hand-hygiene-001",
+        "wildlife-hunting-fishing-001",
+        "wildlife-misinjury-risk-001",
+        "wildlife-protein-001",
+        "wildlife-ration-integration-001",
+        "wildlife-review-001",
+        "wildlife-spoilage-001",
+        "wildlife-trapping-001",
+        "wildlife-unknown-plants-001",
+        "wildlife-water-quality-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0843",
+          "title": "未知电源安全判断",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0713",
+          "title": "冲突苗头出现时撤离",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-lora-unknown-node-isolation-001",
+          "title": "未知 LoRa 节点隔离",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "energy-unknown-adapter-stop-use-001",
+          "title": "未知电源适配器停用判断",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-lora-node-daily-001",
+          "title": "LoRa 节点每日状态检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-antenna-connection-check-001",
+          "title": "天线连接检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-antenna-cable-strain-relief-001",
+          "title": "天线方向和线缆拉力影响",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": false,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "partial",
+      "failure_reasons": [
+        "未命中预期 Wiki"
+      ],
+      "root_cause_classification": [
+        "selector 问题"
+      ]
+    },
+    {
+      "id": "communication_field_temp_link",
+      "query": "外出队如何建立临时通信链路？",
+      "observation": false,
+      "focus": "两点通信、临时节点、中继和备用路径。",
+      "watch_conflicts": [],
+      "expected_guides": [
+        "DG-0856"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0858"
+      ],
+      "expected_wiki": [
+        "communication-lora-node-id-map-001",
+        "communication-radio-channel-plan-minimum-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "records",
+        "evacuation",
+        "shelter",
+        "comms",
+        "hygiene",
+        "disaster",
+        "security",
+        "power"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路",
+          "risk_level": "caution",
+          "domains": [
+            "comms",
+            "evacuation",
+            "shelter",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0129",
+          "title": "营地边界标记",
+          "risk_level": "caution",
+          "domains": [
+            "security",
+            "shelter",
+            "disaster",
+            "evacuation",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0196",
+          "title": "无通信外出规则",
+          "risk_level": "caution",
+          "domains": [
+            "power",
+            "security",
+            "comms",
+            "records",
+            "evacuation"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-check-in-missed-window-001",
+          "title": "错过通信窗口后的动作",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-channel-plan-minimum-001",
+          "title": "最小频道计划",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-range-line-of-sight-001",
+          "title": "无线电距离和遮挡判断",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-message-format-short-001",
+          "title": "无线电短消息格式",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-antenna-placement-height-safety-001",
+          "title": "天线高度影响",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路"
+        },
+        {
+          "id": "DG-0129",
+          "title": "营地边界标记"
+        },
+        {
+          "id": "DG-0196",
+          "title": "无通信外出规则"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0860",
+          "title": "通信信息记录与交接"
+        },
+        {
+          "id": "DG-0723",
+          "title": "外出人员未归稳定等待"
+        },
+        {
+          "id": "DG-0653",
+          "title": "高温外出防晒和补水"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "communication-antenna-cable-strain-relief-001",
+        "communication-antenna-placement-height-safety-001",
+        "communication-check-in-missed-window-001",
+        "communication-lora-message-size-priority-001",
+        "communication-lora-node-id-map-001",
+        "communication-lora-node-placement-001",
+        "communication-mesh-node-role-map-001",
+        "communication-radio-channel-plan-minimum-001",
+        "communication-radio-message-format-short-001",
+        "communication-radio-range-line-of-sight-001",
+        "safety-outside-movement-003"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0860",
+          "title": "通信信息记录与交接",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0723",
+          "title": "外出人员未归稳定等待",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0653",
+          "title": "高温外出防晒和补水",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_missed_checkin_window",
+      "query": "检查点错过通信窗口怎么办？",
+      "observation": false,
+      "focus": "错过通信窗口后的记录、等待和复核。",
+      "watch_conflicts": [],
+      "expected_guides": [
+        "DG-0860"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0856"
+      ],
+      "expected_wiki": [
+        "communication-check-in-missed-window-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "power",
+        "records",
+        "comms",
+        "evacuation",
+        "shelter"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路",
+          "risk_level": "caution",
+          "domains": [
+            "comms",
+            "evacuation",
+            "shelter",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0636",
+          "title": "断网家庭固定开机窗口",
+          "risk_level": "caution",
+          "domains": [
+            "comms"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-battery-radio-runtime-budget-001",
+          "title": "无线电和 LoRa 电量预算",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-qrp-power-budget-001",
+          "title": "QRP 概念和电量预算",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-qrp-contact-window-discipline-001",
+          "title": "QRP 窗口纪律",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-wet-device-stop-use-001",
+          "title": "通信设备进水停用边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-power-saving-001",
+          "title": "低电量通信优先级",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-device-daily-check-001",
+          "title": "通讯设备每日检查",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路"
+        },
+        {
+          "id": "DG-0636",
+          "title": "断网家庭固定开机窗口"
+        },
+        {
+          "id": "DG-0860",
+          "title": "通信信息记录与交接"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式"
+        },
+        {
+          "id": "DG-0858",
+          "title": "无线电通信前检查"
+        },
+        {
+          "id": "DG-0196",
+          "title": "无通信外出规则"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "communication-antenna-cable-strain-relief-001",
+        "communication-antenna-placement-height-safety-001",
+        "communication-battery-radio-runtime-budget-001",
+        "communication-check-in-missed-window-001",
+        "communication-communication-discipline-001",
+        "communication-communication-failure-001",
+        "communication-communication-knowledge-001",
+        "communication-communication-knowledge-002",
+        "communication-communication-knowledge-003",
+        "communication-communication-knowledge-004",
+        "communication-communication-power-001",
+        "communication-contact-list-001",
+        "communication-contact-window-001",
+        "communication-contact-window-002",
+        "communication-device-daily-check-001",
+        "communication-lora-001",
+        "communication-lora-message-size-priority-001",
+        "communication-lora-node-id-map-001",
+        "communication-lora-node-placement-001",
+        "communication-meeting-point-001",
+        "communication-mesh-node-role-map-001",
+        "communication-offline-communication-001",
+        "communication-phone-001",
+        "communication-power-saving-001",
+        "communication-qrp-contact-window-discipline-001",
+        "communication-qrp-power-budget-001",
+        "communication-radio-channel-plan-minimum-001",
+        "communication-radio-message-format-short-001",
+        "communication-radio-range-line-of-sight-001",
+        "communication-separated-movement-001",
+        "communication-shortwave-001",
+        "communication-sms-001",
+        "communication-sync-rhythm-001",
+        "communication-wet-device-stop-use-001",
+        "communication-whistle-signal-001",
+        "communication-written-message-001",
+        "communication-written-message-002"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0860",
+          "title": "通信信息记录与交接",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0858",
+          "title": "无线电通信前检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0196",
+          "title": "无通信外出规则",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": false,
+      "wiki_hit": false,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "partial",
+      "failure_reasons": [
+        "未命中预期 Wiki"
+      ],
+      "root_cause_classification": [
+        "selector 问题"
+      ]
+    },
+    {
+      "id": "communication_low_power_schedule",
+      "query": "电量只剩一点，手机、LoRa、电台怎么安排？",
+      "observation": false,
+      "focus": "低功耗通信、通信窗口和保底电量。",
+      "watch_conflicts": [
+        "electronics",
+        "energy"
+      ],
+      "expected_guides": [
+        "DG-0859"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-battery-radio-runtime-budget-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "comms",
+        "power",
+        "records"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0582",
+          "title": "手机低电量：固定时间开机联系",
+          "risk_level": "caution",
+          "domains": [
+            "comms"
+          ]
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式",
+          "risk_level": "caution",
+          "domains": [
+            "power"
+          ]
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "records"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-device-daily-check-001",
+          "title": "通讯设备每日检查",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-power-saving-001",
+          "title": "低电量通信优先级",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-sms-002",
+          "title": "短信电话和耗电差异",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-phone-002",
+          "title": "手机省电为什么优先短信",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-node-placement-001",
+          "title": "LoRa 节点部署位置",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-mesh-node-role-map-001",
+          "title": "Mesh 网络基础节点角色",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0582",
+          "title": "手机低电量：固定时间开机联系"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式"
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查"
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录"
+        },
+        {
+          "id": "DG-0581",
+          "title": "手机没信号网络断了：家庭通讯计划和集合留言"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0545",
+          "title": "口粮管理：只剩三天食物时的分配"
+        },
+        {
+          "id": "DG-0113",
+          "title": "手机省电模式"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "communication-battery-radio-runtime-budget-001",
+          "title": "无线电和 LoRa 电量预算"
+        },
+        {
+          "slug": "communication-lora-node-placement-001",
+          "title": "LoRa 节点部署位置"
+        },
+        {
+          "slug": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图"
+        },
+        {
+          "slug": "communication-lora-message-size-priority-001",
+          "title": "LoRa 短消息优先级"
+        },
+        {
+          "slug": "communication-lora-unknown-node-isolation-001",
+          "title": "未知 LoRa 节点隔离"
+        },
+        {
+          "slug": "communication-device-daily-check-001",
+          "title": "通讯设备每日检查"
+        },
+        {
+          "slug": "energy-bank-battery-priority-001",
+          "title": "移动电源低电量使用优先级"
+        },
+        {
+          "slug": "communication-communication-knowledge-003",
+          "title": "纸质地图和联系人联动"
+        }
+      ],
+      "guide_related_wiki": [
+        "communication-device-daily-check-001",
+        "communication-lora-message-size-priority-001",
+        "communication-lora-node-daily-001",
+        "communication-lora-node-id-map-001",
+        "communication-lora-node-placement-001",
+        "communication-lora-range-test-log-001",
+        "communication-lora-store-forward-delay-001",
+        "communication-lora-unknown-node-isolation-001",
+        "communication-mesh-node-role-map-001",
+        "communication-power-saving-001",
+        "communication-sms-002",
+        "energy-phone-002"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0581",
+          "title": "手机没信号网络断了：家庭通讯计划和集合留言",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0545",
+          "title": "口粮管理：只剩三天食物时的分配",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0113",
+          "title": "手机省电模式",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-battery-radio-runtime-budget-001",
+          "title": "无线电和 LoRa 电量预算",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-lora-message-size-priority-001",
+          "title": "LoRa 短消息优先级",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-lora-unknown-node-isolation-001",
+          "title": "未知 LoRa 节点隔离",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "energy-bank-battery-priority-001",
+          "title": "移动电源低电量使用优先级",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-communication-knowledge-003",
+          "title": "纸质地图和联系人联动",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": false,
+      "expected_guide_hit": false,
+      "wiki_hit": false,
+      "guide_wiki_precise": false,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "partial",
+      "failure_reasons": [
+        "未命中预期或允许 Guide",
+        "未命中预期 Wiki"
+      ],
+      "root_cause_classification": [
+        "selector 问题",
+        "ranking 问题"
+      ]
+    },
+    {
+      "id": "communication_shortwave_unverified_route",
+      "query": "短波听到未经确认的消息能不能改变路线？",
+      "observation": false,
+      "focus": "短波未确认信息、记录和路线决策边界，navigation 不应抢主位。",
+      "watch_conflicts": [
+        "gps",
+        "navigation"
+      ],
+      "expected_guides": [
+        "DG-0860"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-shortwave-receive-log-verification-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "comms",
+        "external_contact"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0640",
+          "title": "短波收听时段和信息记录",
+          "risk_level": "caution",
+          "domains": [
+            "comms"
+          ]
+        },
+        {
+          "id": "DG-0700",
+          "title": "外部消息交叉验证记录",
+          "risk_level": "caution",
+          "domains": [
+            "external_contact"
+          ]
+        },
+        {
+          "id": "DG-0707",
+          "title": "判断外部信息可信度",
+          "risk_level": "caution",
+          "domains": [
+            "external_contact"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-contact-window-001",
+          "title": "固定开机窗口节省电量的原理",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-offline-communication-001",
+          "title": "断网后集合点为什么比设备重要",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-sms-001",
+          "title": "短信电话和即时消息的可靠性差异",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "safety-barter-001",
+          "title": "物资交换前的信息最小化",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "safety-safety-knowledge-001",
+          "title": "交换地点为什么不选核心住所",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "safety-stranger-contact-001",
+          "title": "陌生人求助的边界判断",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0640",
+          "title": "短波收听时段和信息记录"
+        },
+        {
+          "id": "DG-0700",
+          "title": "外部消息交叉验证记录"
+        },
+        {
+          "id": "DG-0707",
+          "title": "判断外部信息可信度"
+        },
+        {
+          "id": "DG-0721",
+          "title": "团队内传达坏消息"
+        },
+        {
+          "id": "DG-0294",
+          "title": "共同决定记录表"
+        },
+        {
+          "id": "DG-0694",
+          "title": "坏消息统一口径"
+        },
+        {
+          "id": "DG-0601",
+          "title": "夜间取水前的路线和容器检查"
+        },
+        {
+          "id": "DG-0860",
+          "title": "通信信息记录与交接"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "communication-contact-window-001",
+        "communication-offline-communication-001",
+        "communication-sms-001",
+        "safety-barter-001",
+        "safety-safety-knowledge-001",
+        "safety-safety-knowledge-003",
+        "safety-stranger-contact-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0721",
+          "title": "团队内传达坏消息",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0294",
+          "title": "共同决定记录表",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0694",
+          "title": "坏消息统一口径",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0601",
+          "title": "夜间取水前的路线和容器检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0860",
+          "title": "通信信息记录与交接",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": false,
+      "expected_guide_hit": false,
+      "wiki_hit": false,
+      "guide_wiki_precise": false,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "partial",
+      "failure_reasons": [
+        "未命中预期或允许 Guide",
+        "未命中预期 Wiki"
+      ],
+      "root_cause_classification": [
+        "数据缺口",
+        "selector 问题"
+      ]
+    },
+    {
+      "id": "communication_mesh_node_roles",
+      "query": "Mesh 节点角色怎么安排？",
+      "observation": false,
+      "focus": "Mesh 节点角色、位置和中继。",
+      "watch_conflicts": [],
+      "expected_guides": [
+        "DG-0856",
+        "DG-0857"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-mesh-node-role-map-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "power",
+        "records",
+        "comms",
+        "evacuation",
+        "shelter"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路",
+          "risk_level": "caution",
+          "domains": [
+            "comms",
+            "evacuation",
+            "shelter",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录",
+          "risk_level": "caution",
+          "domains": [
+            "comms"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-lora-node-placement-001",
+          "title": "LoRa 节点部署位置",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-mesh-node-role-map-001",
+          "title": "Mesh 网络基础节点角色",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-range-test-log-001",
+          "title": "LoRa 距离测试记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-store-forward-delay-001",
+          "title": "LoRa 延迟和转发误判",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-lora-message-size-priority-001",
+          "title": "LoRa 短消息优先级",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查"
+        },
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路"
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录"
+        },
+        {
+          "id": "DG-0405",
+          "title": "急救角色演练"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0705",
+          "title": "交换期间留守人员安排"
+        },
+        {
+          "id": "DG-0717",
+          "title": "长期断供下安排日常节奏"
+        },
+        {
+          "id": "DG-0728",
+          "title": "安排轮休避免疲劳失控"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "communication-mesh-node-role-map-001",
+          "title": "Mesh 网络基础节点角色"
+        },
+        {
+          "slug": "communication-lora-node-id-map-001",
+          "title": "LoRa 节点编号和位置图"
+        },
+        {
+          "slug": "communication-lora-store-forward-delay-001",
+          "title": "LoRa 延迟和转发误判"
+        }
+      ],
+      "guide_related_wiki": [
+        "communication-antenna-cable-strain-relief-001",
+        "communication-antenna-placement-height-safety-001",
+        "communication-check-in-missed-window-001",
+        "communication-contact-window-001",
+        "communication-device-daily-check-001",
+        "communication-lora-message-size-priority-001",
+        "communication-lora-node-daily-001",
+        "communication-lora-node-id-map-001",
+        "communication-lora-node-placement-001",
+        "communication-lora-range-test-log-001",
+        "communication-lora-store-forward-delay-001",
+        "communication-lora-unknown-node-isolation-001",
+        "communication-mesh-node-role-map-001",
+        "communication-offline-communication-001",
+        "communication-radio-channel-plan-minimum-001",
+        "communication-radio-message-format-short-001",
+        "communication-radio-range-line-of-sight-001",
+        "communication-sms-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0405",
+          "title": "急救角色演练",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0705",
+          "title": "交换期间留守人员安排",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0717",
+          "title": "长期断供下安排日常节奏",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0728",
+          "title": "安排轮休避免疲劳失控",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_log_minimum_fields",
+      "query": "通信日志至少写什么？",
+      "observation": false,
+      "focus": "通信日志最小字段、回执和交接。",
+      "watch_conflicts": [],
+      "expected_guides": [
+        "DG-0860"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-radio-log-minimum-fields-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "records",
+        "security",
+        "comms",
+        "power"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0860",
+          "title": "通信信息记录与交接",
+          "risk_level": "caution",
+          "domains": [
+            "comms",
+            "records",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式",
+          "risk_level": "caution",
+          "domains": [
+            "power"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-emergency-net-opening-check-001",
+          "title": "应急通信网开网检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-message-priority-levels-001",
+          "title": "紧急信息优先级",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-check-in-missed-window-001",
+          "title": "错过通信窗口后的动作",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-log-minimum-fields-001",
+          "title": "通信日志最小字段",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-message-format-short-001",
+          "title": "无线电短消息格式",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-call-sign-identity-check-001",
+          "title": "呼号和身份确认边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0860",
+          "title": "通信信息记录与交接"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式"
+        },
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0428",
+          "title": "外部观察日志"
+        },
+        {
+          "id": "DG-0858",
+          "title": "无线电通信前检查"
+        },
+        {
+          "id": "DG-0196",
+          "title": "无通信外出规则"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "communication-battery-radio-runtime-budget-001",
+        "communication-check-in-missed-window-001",
+        "communication-device-daily-check-001",
+        "communication-emergency-net-opening-check-001",
+        "communication-lora-message-size-priority-001",
+        "communication-message-priority-levels-001",
+        "communication-power-saving-001",
+        "communication-qrp-contact-window-discipline-001",
+        "communication-qrp-power-budget-001",
+        "communication-radio-call-sign-identity-check-001",
+        "communication-radio-log-minimum-fields-001",
+        "communication-radio-message-format-short-001",
+        "communication-shortwave-receive-log-verification-001",
+        "communication-wet-device-stop-use-001",
+        "energy-phone-002"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0428",
+          "title": "外部观察日志",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0858",
+          "title": "无线电通信前检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0196",
+          "title": "无通信外出规则",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_wet_device_power_on",
+      "query": "通信设备进水还能不能开机测试？",
+      "observation": false,
+      "focus": "通信设备进水停用边界。",
+      "watch_conflicts": [
+        "electronics",
+        "repair"
+      ],
+      "expected_guides": [
+        "DG-0855"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0859"
+      ],
+      "expected_wiki": [
+        "communication-wet-device-stop-use-001"
+      ],
+      "profiles": [
+        "energy_low_voltage_fault_stop",
+        "communication_wet_device_safety"
+      ],
+      "domains": [
+        "records",
+        "power",
+        "repair",
+        "comms",
+        "tools",
+        "security"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "repair",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用",
+          "risk_level": "high",
+          "domains": [
+            "power",
+            "security",
+            "tools",
+            "records"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-device-fault-tree-001",
+          "title": "通信设备故障排查顺序",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-wet-device-stop-use-001",
+          "title": "通信设备进水停用边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-no-receive-check-001",
+          "title": "无线电收不到信号排查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-no-transmit-check-001",
+          "title": "无线电发不出或无人确认排查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-antenna-connection-check-001",
+          "title": "天线连接检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-interference-noise-check-001",
+          "title": "无线电噪声和干扰初查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用"
+        },
+        {
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断"
+        },
+        {
+          "id": "DG-0382",
+          "title": "不熟悉设备不拆原则"
+        },
+        {
+          "id": "DG-0383",
+          "title": "维修前断电断火断水"
+        },
+        {
+          "id": "DG-0108",
+          "title": "充电宝轮换：编号、分区、复查"
+        },
+        {
+          "id": "DG-0547",
+          "title": "燃气味或疑似泄漏：禁止明火与先撤离"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "communication-wet-device-stop-use-001",
+          "title": "通信设备进水停用边界"
+        },
+        {
+          "slug": "communication-communication-power-001",
+          "title": "通信设备防水和防摔"
+        },
+        {
+          "slug": "energy-low-voltage-system-stop-boundary-001",
+          "title": "低压直流系统停用边界"
+        },
+        {
+          "slug": "energy-wet-low-voltage-device-no-test-001",
+          "title": "潮湿低压设备也不盲目通电"
+        },
+        {
+          "slug": "energy-charging-zone-fire-isolation-001",
+          "title": "集中充电区防火隔离"
+        },
+        {
+          "slug": "energy-damaged-power-bank-quarantine-001",
+          "title": "受摔移动电源隔离观察"
+        },
+        {
+          "slug": "energy-device-smell-heat-no-restart-001",
+          "title": "设备异味发热后不反复重启"
+        },
+        {
+          "slug": "energy-battery-swelling-001",
+          "title": "充电宝鼓包和发热时的停用边界"
+        }
+      ],
+      "guide_related_wiki": [
+        "communication-antenna-connection-check-001",
+        "communication-battery-radio-runtime-budget-001",
+        "communication-device-daily-check-001",
+        "communication-device-fault-tree-001",
+        "communication-power-saving-001",
+        "communication-qrp-contact-window-discipline-001",
+        "communication-qrp-power-budget-001",
+        "communication-radio-interference-noise-check-001",
+        "communication-radio-no-receive-check-001",
+        "communication-radio-no-transmit-check-001",
+        "communication-shortwave-noise-source-check-001",
+        "communication-wet-device-stop-use-001",
+        "energy-dc-polarity-reverse-check-001",
+        "energy-device-smell-heat-no-restart-001",
+        "energy-loose-connector-stop-use-001",
+        "energy-low-voltage-system-stop-boundary-001",
+        "energy-short-circuit-warning-signs-001",
+        "energy-wet-low-voltage-device-no-test-001",
+        "energy-wire-heating-load-limit-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0382",
+          "title": "不熟悉设备不拆原则",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0383",
+          "title": "维修前断电断火断水",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0108",
+          "title": "充电宝轮换：编号、分区、复查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0547",
+          "title": "燃气味或疑似泄漏：禁止明火与先撤离",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "communication-communication-power-001",
+          "title": "通信设备防水和防摔",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "energy-low-voltage-system-stop-boundary-001",
+          "title": "低压直流系统停用边界",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "energy-wet-low-voltage-device-no-test-001",
+          "title": "潮湿低压设备也不盲目通电",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "energy-charging-zone-fire-isolation-001",
+          "title": "集中充电区防火隔离",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "energy-damaged-power-bank-quarantine-001",
+          "title": "受摔移动电源隔离观察",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "energy-device-smell-heat-no-restart-001",
+          "title": "设备异味发热后不反复重启",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "wiki",
+          "id": "energy-battery-swelling-001",
+          "title": "充电宝鼓包和发热时的停用边界",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_observe_network_node_down",
+      "query": "网络节点连不上",
+      "observation": true,
+      "focus": "观察 computer/data 是否抢主位。",
+      "watch_conflicts": [
+        "computer",
+        "data"
+      ],
+      "expected_guides": [
+        "DG-0855",
+        "DG-0857"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-device-fault-tree-001",
+        "communication-lora-node-placement-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "records",
+        "power",
+        "repair",
+        "comms"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "repair",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0581",
+          "title": "手机没信号网络断了：家庭通讯计划和集合留言",
+          "risk_level": "normal",
+          "domains": [
+            "comms"
+          ]
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "records"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-device-fault-tree-001",
+          "title": "通信设备故障排查顺序",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-wet-device-stop-use-001",
+          "title": "通信设备进水停用边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-no-receive-check-001",
+          "title": "无线电收不到信号排查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-no-transmit-check-001",
+          "title": "无线电发不出或无人确认排查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-antenna-connection-check-001",
+          "title": "天线连接检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-interference-noise-check-001",
+          "title": "无线电噪声和干扰初查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0581",
+          "title": "手机没信号网络断了：家庭通讯计划和集合留言"
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查"
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录"
+        },
+        {
+          "id": "DG-0549",
+          "title": "断网断信号：家庭通讯计划和集合约定"
+        },
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路"
+        },
+        {
+          "id": "DG-0476",
+          "title": "洗手关键时刻"
+        },
+        {
+          "id": "DG-0642",
+          "title": "集合点失效后的备用点"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "communication-antenna-connection-check-001",
+        "communication-device-fault-tree-001",
+        "communication-lora-message-size-priority-001",
+        "communication-lora-node-daily-001",
+        "communication-lora-node-id-map-001",
+        "communication-lora-node-placement-001",
+        "communication-lora-range-test-log-001",
+        "communication-lora-store-forward-delay-001",
+        "communication-lora-unknown-node-isolation-001",
+        "communication-mesh-node-role-map-001",
+        "communication-radio-communication-basics-index-001",
+        "communication-radio-interference-noise-check-001",
+        "communication-radio-no-receive-check-001",
+        "communication-radio-no-transmit-check-001",
+        "communication-shortwave-noise-source-check-001",
+        "communication-wet-device-stop-use-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0549",
+          "title": "断网断信号：家庭通讯计划和集合约定",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0476",
+          "title": "洗手关键时刻",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0642",
+          "title": "集合点失效后的备用点",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_observe_antenna_cable_broken",
+      "query": "天线线缆坏了",
+      "observation": true,
+      "focus": "观察 repair 是否抢主位。",
+      "watch_conflicts": [
+        "repair"
+      ],
+      "expected_guides": [
+        "DG-0855",
+        "DG-0858"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-antenna-cable-strain-relief-001",
+        "communication-antenna-connection-check-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "power",
+        "records",
+        "security",
+        "comms",
+        "repair"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0858",
+          "title": "无线电通信前检查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "security",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "repair",
+            "records"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-antenna-wet-weather-stop-001",
+          "title": "雨天潮湿天线停止线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-antenna-connection-check-001",
+          "title": "天线连接检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-listen-before-transmit-001",
+          "title": "无线电发射前先监听",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-basic-terms-001",
+          "title": "无线电通信基本原理",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-message-format-short-001",
+          "title": "无线电短消息格式",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-radio-call-sign-identity-check-001",
+          "title": "呼号和身份确认边界",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0858",
+          "title": "无线电通信前检查"
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断"
+        },
+        {
+          "id": "DG-0843",
+          "title": "未知电源安全判断"
+        },
+        {
+          "id": "DG-0620",
+          "title": "接口潮湿和线头保护"
+        },
+        {
+          "id": "DG-0660",
+          "title": "夜间通道清障标记"
+        },
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "communication-antenna-cable-strain-relief-001",
+        "communication-antenna-connection-check-001",
+        "communication-antenna-placement-height-safety-001",
+        "communication-antenna-wet-weather-stop-001",
+        "communication-device-fault-tree-001",
+        "communication-lora-message-size-priority-001",
+        "communication-lora-node-daily-001",
+        "communication-lora-node-id-map-001",
+        "communication-lora-node-placement-001",
+        "communication-lora-range-test-log-001",
+        "communication-lora-store-forward-delay-001",
+        "communication-lora-unknown-node-isolation-001",
+        "communication-mesh-node-role-map-001",
+        "communication-radio-basic-terms-001",
+        "communication-radio-call-sign-identity-check-001",
+        "communication-radio-channel-plan-minimum-001",
+        "communication-radio-interference-noise-check-001",
+        "communication-radio-listen-before-transmit-001",
+        "communication-radio-message-format-short-001",
+        "communication-radio-no-receive-check-001",
+        "communication-radio-no-transmit-check-001",
+        "communication-radio-range-line-of-sight-001",
+        "communication-shortwave-antenna-placement-safe-001",
+        "communication-shortwave-noise-source-check-001",
+        "communication-wet-device-stop-use-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0843",
+          "title": "未知电源安全判断",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0620",
+          "title": "接口潮湿和线头保护",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0660",
+          "title": "夜间通道清障标记",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0842",
+          "title": "低压设备异常停用",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_observe_low_power_comms",
+      "query": "低功耗通信",
+      "observation": true,
+      "focus": "观察 energy 是否完全覆盖 communication。",
+      "watch_conflicts": [
+        "energy",
+        "electronics"
+      ],
+      "expected_guides": [
+        "DG-0859"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-battery-radio-runtime-budget-001",
+        "communication-qrp-power-budget-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "power",
+        "records",
+        "comms",
+        "water",
+        "medical",
+        "security"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "risk_level": "high",
+          "domains": [
+            "comms",
+            "power",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0122",
+          "title": "壳中灯设备低功耗运行",
+          "risk_level": "caution",
+          "domains": [
+            "power",
+            "security",
+            "comms",
+            "medical",
+            "water"
+          ]
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录",
+          "risk_level": "caution",
+          "domains": [
+            "comms"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-battery-radio-runtime-budget-001",
+          "title": "无线电和 LoRa 电量预算",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-qrp-power-budget-001",
+          "title": "QRP 概念和电量预算",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-qrp-contact-window-discipline-001",
+          "title": "QRP 窗口纪律",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-wet-device-stop-use-001",
+          "title": "通信设备进水停用边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-power-saving-001",
+          "title": "低电量通信优先级",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-device-daily-check-001",
+          "title": "通讯设备每日检查",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0122",
+          "title": "壳中灯设备低功耗运行"
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录"
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式"
+        },
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0860",
+          "title": "通信信息记录与交接"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "communication-battery-radio-runtime-budget-001",
+        "communication-contact-window-001",
+        "communication-device-daily-check-001",
+        "communication-lora-node-daily-001",
+        "communication-offline-communication-001",
+        "communication-power-saving-001",
+        "communication-qrp-contact-window-discipline-001",
+        "communication-qrp-power-budget-001",
+        "communication-sms-001",
+        "communication-wet-device-stop-use-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0860",
+          "title": "通信信息记录与交接",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "communication_observe_shortwave_noise",
+      "query": "短波噪声太大",
+      "observation": true,
+      "focus": "观察 survival 是否泛化。",
+      "watch_conflicts": [
+        "survival"
+      ],
+      "expected_guides": [
+        "DG-0855"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0860"
+      ],
+      "expected_wiki": [
+        "communication-shortwave-noise-source-check-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "comms",
+        "tools",
+        "hygiene",
+        "shelter",
+        "security"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0640",
+          "title": "短波收听时段和信息记录",
+          "risk_level": "caution",
+          "domains": [
+            "comms"
+          ]
+        },
+        {
+          "id": "DG-0347",
+          "title": "工具噪声控制",
+          "risk_level": "caution",
+          "domains": [
+            "hygiene",
+            "shelter",
+            "security",
+            "tools"
+          ]
+        },
+        {
+          "id": "DG-0348",
+          "title": "儿童和宠物噪声管理",
+          "risk_level": "caution",
+          "domains": [
+            "hygiene",
+            "shelter"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "communication-contact-window-001",
+          "title": "固定开机窗口节省电量的原理",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-offline-communication-001",
+          "title": "断网后集合点为什么比设备重要",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "communication-sms-001",
+          "title": "短信电话和即时消息的可靠性差异",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0640",
+          "title": "短波收听时段和信息记录"
+        },
+        {
+          "id": "DG-0347",
+          "title": "工具噪声控制"
+        },
+        {
+          "id": "DG-0348",
+          "title": "儿童和宠物噪声管理"
+        },
+        {
+          "id": "DG-0860",
+          "title": "通信信息记录与交接"
+        },
+        {
+          "id": "DG-0826",
+          "title": "先用水壶和小瓶做点滴分发"
+        },
+        {
+          "id": "DG-0428",
+          "title": "外部观察日志"
+        },
+        {
+          "id": "DG-0718",
+          "title": "睡眠不足争执降温"
+        },
+        {
+          "id": "DG-0346",
+          "title": "门窗静音处理"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "communication-contact-window-001",
+        "communication-offline-communication-001",
+        "communication-sms-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0860",
+          "title": "通信信息记录与交接",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0826",
+          "title": "先用水壶和小瓶做点滴分发",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0428",
+          "title": "外部观察日志",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0718",
+          "title": "睡眠不足争执降温",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0346",
+          "title": "门窗静音处理",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": false,
+      "expected_guide_hit": false,
+      "wiki_hit": false,
+      "guide_wiki_precise": false,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "partial",
+      "failure_reasons": [
+        "未命中预期或允许 Guide",
+        "未命中预期 Wiki"
+      ],
+      "root_cause_classification": [
+        "数据缺口",
+        "selector 问题",
+        "合理 partial"
+      ]
+    },
+    {
+      "id": "communication_observe_team_split_checkin",
+      "query": "队伍分散怎么报平安",
+      "observation": true,
+      "focus": "观察 communication 是否优先，evacuation/navigation 是否只是补充。",
+      "watch_conflicts": [
+        "evacuation",
+        "navigation"
+      ],
+      "expected_guides": [
+        "DG-0856",
+        "DG-0860"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "communication-check-in-missed-window-001",
+        "communication-radio-message-format-short-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "comms",
+        "evacuation",
+        "records",
+        "tools",
+        "security",
+        "external_contact",
+        "disaster",
+        "medical",
+        "shelter"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0192",
+          "title": "固定报平安时间",
+          "risk_level": "caution",
+          "domains": [
+            "security",
+            "tools",
+            "comms",
+            "records",
+            "evacuation"
+          ]
+        },
+        {
+          "id": "DG-0710",
+          "title": "处理同行请求",
+          "risk_level": "caution",
+          "domains": [
+            "external_contact"
+          ]
+        },
+        {
+          "id": "DG-0072",
+          "title": "撤离队伍顺序",
+          "risk_level": "caution",
+          "domains": [
+            "evacuation",
+            "security",
+            "disaster",
+            "shelter",
+            "medical"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "safety-route-planning-001",
+          "title": "陌生路线邀请为什么谨慎",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0192",
+          "title": "固定报平安时间"
+        },
+        {
+          "id": "DG-0710",
+          "title": "处理同行请求"
+        },
+        {
+          "id": "DG-0072",
+          "title": "撤离队伍顺序"
+        },
+        {
+          "id": "DG-0549",
+          "title": "断网断信号：家庭通讯计划和集合约定"
+        },
+        {
+          "id": "DG-0581",
+          "title": "手机没信号网络断了：家庭通讯计划和集合留言"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0502",
+          "title": "集合点三层规则"
+        },
+        {
+          "id": "DG-0071",
+          "title": "撤离路线选择：不是越短越好"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "safety-route-planning-001"
+      ],
+      "excluded_sources": [
+        {
+          "source_type": "guide",
+          "id": "DG-0549",
+          "title": "断网断信号：家庭通讯计划和集合约定",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0581",
+          "title": "手机没信号网络断了：家庭通讯计划和集合留言",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0502",
+          "title": "集合点三层规则",
+          "reason": "not_in_local_top_selection"
+        },
+        {
+          "source_type": "guide",
+          "id": "DG-0071",
+          "title": "撤离路线选择：不是越短越好",
+          "reason": "not_in_local_top_selection"
+        }
+      ],
+      "guide_hit": false,
+      "expected_guide_hit": false,
+      "wiki_hit": false,
+      "guide_wiki_precise": false,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "partial",
+      "failure_reasons": [
+        "未命中预期或允许 Guide",
+        "未命中预期 Wiki"
+      ],
+      "root_cause_classification": [
+        "数据缺口",
+        "profile 缺口",
+        "合理 partial"
+      ]
+    }
+  ]
+}

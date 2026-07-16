@@ -1,0 +1,106 @@
+{
+  "id": "DG-0857",
+  "title": "LoRa 节点部署检查",
+  "category": "通讯",
+  "priority": "P0",
+  "scenario": "准备部署、移动或复查 LoRa 节点，需要确认节点位置、天线、电源、中继角色和消息边界。",
+  "goal": "建立编号、位置、供电、测试、未知节点隔离和中继降级的最小 LoRa 运行检查。",
+  "keywords": [
+    "LoRa",
+    "节点部署",
+    "中继",
+    "Mesh",
+    "节点编号",
+    "天线",
+    "电源",
+    "低功耗",
+    "Batch6-B"
+  ],
+  "tools": [
+    "节点位置图",
+    "电量记录表",
+    "短测试消息",
+    "标签",
+    "纸质通信日志"
+  ],
+  "steps": [
+    "给节点编号，记录负责人、角色、位置、供电方式和备用位置。",
+    "选择高处、干燥、低暴露、可复查的位置，并检查天线和接口。",
+    "发送短测试消息，记录成功、失败、延迟、电量和对端编号。",
+    "未知节点、重复编号或身份不清设备先隔离，不进入关键链路。",
+    "固定节点、中继节点、移动节点和备用节点分开记录，避免同时移动。"
+  ],
+  "check": [
+    "每个节点是否有编号、负责人和位置图。",
+    "天线、电源和最近一次测试是否可查。",
+    "是否有中继失败后的备用路径。"
+  ],
+  "common_mistakes": [
+    "节点放好后长期不查。",
+    "测试消息包含敏感库存或住址。",
+    "未知节点直接接入主链路。"
+  ],
+  "fallback": [
+    "节点低电时降低开机频率并保留主节点。",
+    "节点不稳时降为备用，改用纸条点、固定窗口或人工传递。",
+    "无中继时缩短外出距离或增加检查点。"
+  ],
+  "stop_or_escalate": [
+    "节点进水、发热、接口损坏、身份不清、位置暴露或连续两次测试失败时停止作为关键节点。",
+    "外出队需要带走唯一中继时，取消中继方案或重设固定节点。"
+  ],
+  "related_wiki": [
+    "communication-lora-node-placement-001",
+    "communication-mesh-node-role-map-001",
+    "communication-lora-node-id-map-001",
+    "communication-lora-range-test-log-001",
+    "communication-lora-store-forward-delay-001",
+    "communication-lora-message-size-priority-001",
+    "communication-lora-unknown-node-isolation-001",
+    "communication-lora-node-daily-001"
+  ],
+  "notes": "Batch6-B Communication & Field Network 第一批扩容行动卡。",
+  "category_original": "通讯",
+  "domains": [
+    "comms",
+    "power",
+    "records"
+  ],
+  "intents": [
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "communication_field_network"
+  ],
+  "objects": [
+    "LoRa 节点",
+    "中继节点",
+    "Mesh 节点",
+    "天线",
+    "电源"
+  ],
+  "signals": [
+    "LoRa 部署",
+    "节点位置",
+    "中继",
+    "未知节点",
+    "距离测试"
+  ],
+  "risks": [
+    "resource_depletion",
+    "information_loss",
+    "exposure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "comms",
+  "primary_intent": "long_term_survival_action",
+  "top1_aliases": [
+    "LoRa 节点部署检查",
+    "LoRa 节点放哪里",
+    "LoRa 中继节点",
+    "LoRa 节点排查"
+  ],
+  "risk_level": "high"
+}
