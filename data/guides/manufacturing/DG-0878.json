@@ -1,0 +1,112 @@
+{
+  "id": "DG-0878",
+  "title": "工坊收工与工具封存",
+  "category": "基础制造与材料维修",
+  "priority": "P0",
+  "scenario": "制作、切割、钻孔、修边或小批量装配结束后，需要清点工具、分开成品和缺陷品，并封存危险物。",
+  "goal": "让制作风险在收工时真正结束，避免刀具、金属锐片、半成品、粉尘和缺陷品留在生活区。",
+  "tools": [
+    "工具清单",
+    "废料盒",
+    "危险工具箱",
+    "缺陷标签",
+    "扫帚",
+    "记录纸"
+  ],
+  "steps": [
+    "停止所有加工动作，把工具从台面边缘移开。",
+    "按清单清点刀、锯、钻头、剪刀、夹具和小紧固件。",
+    "收集木刺、金属锐片、钉子、粉尘和污染材料。",
+    "把原料、半成品、成品、缺陷品和危险品放回对应区域。",
+    "危险工具、禁用工具和待检材料封存并贴标签。",
+    "记录成品数量、缺陷件、缺失工具和次日优先复查项。"
+  ],
+  "check": [
+    "工具数量对上，危险工具不可被儿童接触。",
+    "锐片、钉子和粉尘已清理或隔离。",
+    "缺陷品没有混入成品区，半成品有状态标签。"
+  ],
+  "common_mistakes": [
+    "只收大工具，不清理小刀片、钉子和金属边角。",
+    "把半成品当成成品收起来。",
+    "工具缺失但没有封闭工作区。"
+  ],
+  "fallback": [
+    "时间不足时优先封存刀具、钻头、锐片和危险材料。",
+    "无法清理完时封闭工作区并写明未清理位置。",
+    "工具数量对不上时暂停下次开工直到找回或确认风险。"
+  ],
+  "stop_or_escalate": [
+    "工具缺失、锐片无法清理、儿童可能进入、危险材料混入普通区或禁用工具混回可用区时，不允许恢复生活区使用。",
+    "发现缺陷品可能被误用时立即隔离并补标签。"
+  ],
+  "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+  "category_original": "基础制造与材料维修",
+  "domains": [
+    "repair",
+    "tools"
+  ],
+  "intents": [
+    "manufacturing_production_foundation",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "manufacturing_foundation",
+    "workshop_operation"
+  ],
+  "objects": [
+    "刀具",
+    "钻头",
+    "废料",
+    "半成品",
+    "缺陷品",
+    "危险工具箱"
+  ],
+  "signals": [
+    "收工",
+    "清点",
+    "封存",
+    "工具缺失",
+    "缺陷品",
+    "锐片"
+  ],
+  "risks": [
+    "tool_left_out",
+    "sharp_waste",
+    "defect_misuse"
+  ],
+  "keywords": [
+    "工坊收工与工具封存",
+    "收工清点",
+    "危险工具",
+    "缺陷品",
+    "成品区",
+    "半成品",
+    "废料"
+  ],
+  "negative_keywords": [
+    "工业机床",
+    "冶炼",
+    "武器制造",
+    "电池自制",
+    "高压容器"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "manufacturing_production_foundation",
+  "top1_aliases": [
+    "工坊收工与工具封存"
+  ],
+  "related_wiki": [
+    "repair-manufacturing-end-clean-count-001",
+    "repair-manufacturing-damaged-tool-stop-001",
+    "repair-manufacturing-bystander-exclusion-001",
+    "repair-manufacturing-raw-finished-zones-001",
+    "repair-manufacturing-zone-layout-001",
+    "repair-manufacturing-salvaged-parts-sort-001",
+    "repair-manufacturing-batch-record-001",
+    "repair-manufacturing-defect-isolation-001"
+  ],
+  "risk_level": "high"
+}

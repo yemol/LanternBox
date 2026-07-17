@@ -1,0 +1,279 @@
+[
+  {
+    "id": "manufacturing_workbench_start_check",
+    "query": "开工前做一个小工作台，要先检查什么？",
+    "expected_guides": ["DG-0871"],
+    "expected_wiki": [
+      "repair-manufacturing-workbench-start-check-001",
+      "repair-manufacturing-zone-layout-001",
+      "repair-manufacturing-damaged-tool-stop-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "工坊开工前安全检查，工作区分区、台面、工具异常和旁人隔离应进入 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["repair", "tools", "safety"]
+  },
+  {
+    "id": "manufacturing_scrap_wood_shelf_judgement",
+    "query": "废木板能不能拿来做架子，怎么判断？",
+    "expected_guides": ["DG-0872"],
+    "expected_wiki": [
+      "repair-manufacturing-wood-selection-001",
+      "repair-manufacturing-scrap-material-check-001",
+      "repair-manufacturing-load-test-001"
+    ],
+    "allowed_secondary_guides": ["DG-0874", "DG-0877"],
+    "observation": false,
+    "focus": "材料再利用判断，木材选择、废旧材料检查和承重边界应进入 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["repair", "recycling", "shelter"]
+  },
+  {
+    "id": "manufacturing_wood_cut_clamp_no_foot",
+    "query": "切木板前怎么固定，能不能直接用脚踩着锯？",
+    "expected_guides": ["DG-0873"],
+    "expected_wiki": [
+      "repair-manufacturing-clamp-before-processing-001",
+      "repair-manufacturing-wood-saw-support-001"
+    ],
+    "allowed_secondary_guides": ["DG-0834"],
+    "observation": false,
+    "focus": "木材切割前固定与支撑，脚踩手扶应作为错误操作被阻断。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["tools", "repair", "safety"]
+  },
+  {
+    "id": "manufacturing_simple_box_not_fall_apart",
+    "query": "想做一个简易箱体，怎么保证不散架？",
+    "expected_guides": ["DG-0874"],
+    "expected_wiki": [
+      "repair-manufacturing-box-crate-check-001",
+      "repair-manufacturing-frame-square-check-001",
+      "repair-manufacturing-wood-screw-join-001"
+    ],
+    "allowed_secondary_guides": ["DG-0875", "DG-0877"],
+    "observation": false,
+    "focus": "简易结构件制作检查，框架、拼接、连接和成品复查应进入 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["repair", "tools"]
+  },
+  {
+    "id": "manufacturing_connection_method_choice",
+    "query": "胶水、螺丝、绳子捆扎，什么时候用哪种连接？",
+    "expected_guides": ["DG-0875"],
+    "expected_wiki": [
+      "repair-manufacturing-connection-choice-001",
+      "repair-manufacturing-fastener-reuse-boundary-001",
+      "repair-manufacturing-metal-join-choice-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "连接方式选择，胶粘、螺丝、捆扎、铆接/铁丝边界应进入 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["repair", "tools"]
+  },
+  {
+    "id": "manufacturing_sharp_scrap_metal_bracket",
+    "query": "废金属片边缘很锋利，能不能直接拿来做支架？",
+    "expected_guides": ["DG-0876"],
+    "expected_wiki": [
+      "repair-manufacturing-metal-scrap-check-001",
+      "repair-manufacturing-metal-edge-safe-001",
+      "repair-manufacturing-metal-bracket-check-001"
+    ],
+    "allowed_secondary_guides": ["DG-0877"],
+    "observation": false,
+    "focus": "废旧金属材料安全处理，金属废料判断、防割边和支架承重风险应进入 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["medical", "safety", "repair", "recycling"]
+  },
+  {
+    "id": "manufacturing_finished_shelf_heavy_load",
+    "query": "做好的架子能不能直接放重物？",
+    "expected_guides": ["DG-0877"],
+    "expected_wiki": [
+      "repair-manufacturing-load-test-001",
+      "repair-manufacturing-quality-recheck-001",
+      "repair-manufacturing-shelf-support-check-001"
+    ],
+    "allowed_secondary_guides": ["DG-0874"],
+    "observation": false,
+    "focus": "制作完成后的承重检查，逐级加载、连接点复查和降级用途应进入 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["repair", "shelter", "tools"]
+  },
+  {
+    "id": "manufacturing_shutdown_child_tool_safety",
+    "query": "收工时工具和半成品怎么处理，避免孩子碰到？",
+    "expected_guides": ["DG-0878"],
+    "expected_wiki": [
+      "repair-manufacturing-end-clean-count-001",
+      "repair-manufacturing-bystander-exclusion-001",
+      "repair-manufacturing-raw-finished-zones-001"
+    ],
+    "allowed_secondary_guides": ["DG-0871"],
+    "observation": false,
+    "focus": "工坊收工与工具封存，危险工具、半成品、儿童隔离和记录应进入 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["tools", "safety", "team"]
+  },
+  {
+    "id": "manufacturing_low_light_continue_cutting",
+    "query": "低光环境下还要继续切割材料，可以吗？",
+    "expected_guides": ["DG-0871"],
+    "expected_wiki": [
+      "repair-manufacturing-workbench-start-check-001",
+      "repair-manufacturing-dust-spark-stop-line-001"
+    ],
+    "allowed_secondary_guides": ["DG-0836", "DG-0873"],
+    "observation": false,
+    "focus": "低光制造停止线。Tools / Repair 可补充，但 manufacturing safety 应进入 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["tools", "repair", "safety"]
+  },
+  {
+    "id": "manufacturing_drilling_material_sliding",
+    "query": "打孔时材料一直滑动怎么办？",
+    "expected_guides": ["DG-0873"],
+    "expected_wiki": [
+      "repair-manufacturing-clamp-before-processing-001",
+      "repair-manufacturing-wood-drill-position-001"
+    ],
+    "allowed_secondary_guides": ["DG-0876", "DG-0834"],
+    "observation": false,
+    "focus": "固定夹持和打孔定位。Repair 可补充，但 manufacturing 应进入 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["repair", "tools"]
+  },
+  {
+    "id": "manufacturing_dust_no_mask_continue_sanding",
+    "query": "粉尘很多但没有专业口罩，还能继续磨吗？",
+    "expected_guides": ["DG-0871"],
+    "expected_wiki": [
+      "repair-manufacturing-dust-spark-stop-line-001",
+      "repair-manufacturing-ppe-minimum-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "工坊粉尘控制和最低 PPE。Medical / safety 只能 secondary。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["medical", "safety", "tools"]
+  },
+  {
+    "id": "manufacturing_sparks_near_fabric",
+    "query": "火花飞到旁边布料上，工作区要怎么处理？",
+    "expected_guides": ["DG-0871"],
+    "expected_wiki": [
+      "repair-manufacturing-cut-drill-clear-zone-001",
+      "repair-manufacturing-dust-spark-stop-line-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "工坊火花风险和工作区清理。Fire 可补充，但 manufacturing safety 应进入 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["fire", "safety", "tools"]
+  },
+  {
+    "id": "manufacturing_observe_repair_vs_rebuild_shelf",
+    "query": "修一个坏掉的架子和重新做一个架子有什么区别？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 repair / manufacturing 边界：修旧物可由 repair 主导，重新制作应带出 manufacturing evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["repair", "tools"]
+  },
+  {
+    "id": "manufacturing_observe_plastic_bucket_toolbox",
+    "query": "废塑料桶能不能改成工具盒？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 recycling / manufacturing 边界：再利用材料判断与工具收纳用途。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["recycling", "repair", "tools"]
+  },
+  {
+    "id": "manufacturing_observe_tarp_support_pole",
+    "query": "临时做一个雨棚支撑杆。",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 shelter / manufacturing 边界：雨棚用途可由 shelter 补充，支撑杆制作应带出材料和承重 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["shelter", "repair"]
+  },
+  {
+    "id": "manufacturing_observe_rope_stick_hanger",
+    "query": "绳子和木棍做一个临时挂架。",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 tools / repair / manufacturing 边界：软材料、木材和承重检查是否协同。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["tools", "repair", "shelter"]
+  },
+  {
+    "id": "manufacturing_observe_repeated_blocks_same_size",
+    "query": "做几个一样大小的小木块，怎么保证尺寸一致？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 repeated production / 模板 / 批量记录是否进入 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["tools", "repair"]
+  },
+  {
+    "id": "manufacturing_observe_no_screws_connection_substitute",
+    "query": "没有螺丝了，用什么方式替代连接？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 repair / manufacturing / material substitution 协同。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["repair", "tools"]
+  }
+]

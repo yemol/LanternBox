@@ -1,0 +1,109 @@
+{
+  "id": "DG-0873",
+  "title": "木材切割前固定与支撑",
+  "category": "基础制造与材料维修",
+  "priority": "P0",
+  "scenario": "使用旧木板、木条或木棍制作箱体、框架、架子或零件，需要在测量、划线、切割、打孔前固定材料。",
+  "goal": "让木材加工前尺寸清楚、材料稳定、手远离切割线，减少夹锯、开裂、滑动和落料伤人。",
+  "tools": [
+    "手锯",
+    "手钻或锥子",
+    "垫木",
+    "夹具或绳带",
+    "标记笔",
+    "尺"
+  ],
+  "steps": [
+    "先检查木材腐朽、潮湿、裂纹、虫蛀、钉子和油污。",
+    "写下用途和尺寸，标出保留侧、废料侧、孔位和切割线。",
+    "把木材放在垫木上，切割线两侧都有支撑。",
+    "用夹具、绳带、木楔或低矮重物固定，做低力推拉测试。",
+    "先轻锯导槽或试孔，发现夹锯、跳动、开裂或偏孔就停。",
+    "完成后处理木刺和尖角，记录失败件。"
+  ],
+  "check": [
+    "木材不需要用手靠近切线扶住。",
+    "切割线、孔位、落料方向和支撑点清楚。",
+    "孔位避开裂纹、旧孔和过近边缘。"
+  ],
+  "common_mistakes": [
+    "一手扶木料一手锯或钻。",
+    "没有标保留侧，切错后用短料冒险返工。",
+    "夹锯后用身体猛压锯片。"
+  ],
+  "fallback": [
+    "缺夹具时先缩短材料、换小件或只做标记。",
+    "木材有裂纹时降低用途或换料。",
+    "尺寸不确定时保留余量并先做样件。"
+  ],
+  "stop_or_escalate": [
+    "材料无法固定、切线靠近手、锯片持续夹住、木材裂纹扩大或光线不足时停止加工。",
+    "准备用木件承人、吊挂重物或支撑关键结构时，不使用本 Guide 作为唯一判断。"
+  ],
+  "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+  "category_original": "基础制造与材料维修",
+  "domains": [
+    "repair",
+    "tools"
+  ],
+  "intents": [
+    "manufacturing_production_foundation",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "manufacturing_foundation",
+    "workshop_operation"
+  ],
+  "objects": [
+    "木板",
+    "木条",
+    "木棍",
+    "手锯",
+    "手钻"
+  ],
+  "signals": [
+    "切割",
+    "打孔",
+    "夹锯",
+    "木材跳动",
+    "开裂"
+  ],
+  "risks": [
+    "cut_injury",
+    "wood_split",
+    "falling_offcut"
+  ],
+  "keywords": [
+    "木材切割前固定与支撑",
+    "木工",
+    "切割",
+    "打孔",
+    "夹具",
+    "划线",
+    "锯切",
+    "边距"
+  ],
+  "negative_keywords": [
+    "工业机床",
+    "冶炼",
+    "武器制造",
+    "电池自制",
+    "高压容器"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "manufacturing_production_foundation",
+  "top1_aliases": [
+    "木材切割前固定与支撑"
+  ],
+  "related_wiki": [
+    "repair-manufacturing-clamp-before-processing-001",
+    "repair-manufacturing-wood-saw-support-001",
+    "repair-manufacturing-wood-drill-position-001",
+    "repair-manufacturing-wood-measure-mark-001",
+    "repair-manufacturing-cut-drill-clear-zone-001",
+    "repair-manufacturing-wood-selection-001"
+  ],
+  "risk_level": "high"
+}

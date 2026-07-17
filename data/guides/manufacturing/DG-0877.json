@@ -1,0 +1,107 @@
+{
+  "id": "DG-0877",
+  "title": "制作完成后的承重检查",
+  "category": "基础制造与材料维修",
+  "priority": "P0",
+  "scenario": "自制架子、箱体、支架、框架或低负荷成品准备投入使用，需要判断能否承受预期重量或是否必须降级。",
+  "goal": "在正式使用前通过边缘、连接、变形和逐级加载检查发现失败信号，避免成品进入生活区后伤人或污染物资。",
+  "tools": [
+    "标记笔",
+    "轻载测试物",
+    "记录纸",
+    "缺陷标签",
+    "辅助支撑"
+  ],
+  "steps": [
+    "明确成品用途、最大重量、放置位置和失败后果。",
+    "检查材料裂纹、腐朽、锈蚀、锐边、污染和连接点。",
+    "从轻载开始逐级加载，不一次放满负荷。",
+    "每次加载后观察裂声、松动、开胶、弯曲、滑移和倾斜。",
+    "通过后标记允许用途、禁止用途和复查日期。",
+    "未通过成品放入缺陷区，不得混入成品区。"
+  ],
+  "check": [
+    "逐级加载无变形、无裂声、无松动。",
+    "锐边、毛刺和尖端已处理。",
+    "限制用途清楚，复查记录完整。"
+  ],
+  "common_mistakes": [
+    "一次性放上最大重量。",
+    "测试通过一次就长期不复查。",
+    "把失败件放回成品区等以后修。"
+  ],
+  "fallback": [
+    "降级为轻载、非承重或固定位置收纳。",
+    "增加支撑点后重新测试。",
+    "无法测试的成品不投入使用。"
+  ],
+  "stop_or_escalate": [
+    "用于承人、睡眠区上方、火源上方、悬挂重物或关键物资支撑时停止使用自制低负荷成品。",
+    "出现裂声、连接松动、明显变形、支脚滑动、边缘割手或污染不明时停用隔离。"
+  ],
+  "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+  "category_original": "基础制造与材料维修",
+  "domains": [
+    "repair",
+    "tools"
+  ],
+  "intents": [
+    "manufacturing_production_foundation",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "manufacturing_foundation",
+    "workshop_operation"
+  ],
+  "objects": [
+    "成品",
+    "架子",
+    "箱体",
+    "支架",
+    "框架"
+  ],
+  "signals": [
+    "承重前",
+    "质量检查",
+    "裂声",
+    "变形",
+    "松动",
+    "缺陷品"
+  ],
+  "risks": [
+    "load_failure",
+    "tip_over",
+    "contamination"
+  ],
+  "keywords": [
+    "制作完成后的承重检查",
+    "成品复查",
+    "承重",
+    "质量检查",
+    "缺陷隔离",
+    "架子",
+    "支架"
+  ],
+  "negative_keywords": [
+    "工业机床",
+    "冶炼",
+    "武器制造",
+    "电池自制",
+    "高压容器"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "manufacturing_production_foundation",
+  "top1_aliases": [
+    "制作完成后的承重检查"
+  ],
+  "related_wiki": [
+    "repair-manufacturing-load-test-001",
+    "repair-manufacturing-quality-recheck-001",
+    "repair-manufacturing-shelf-support-check-001",
+    "repair-manufacturing-metal-bracket-check-001",
+    "repair-manufacturing-defect-isolation-001"
+  ],
+  "risk_level": "high"
+}

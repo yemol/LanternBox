@@ -1,0 +1,115 @@
+{
+  "id": "DG-0871",
+  "title": "工坊开工前安全检查",
+  "category": "基础制造与材料维修",
+  "priority": "P0",
+  "scenario": "开始切割、钻孔、打磨、装配或小批量制作前，需要判断工作台、分区、工具、材料、旁人和 PPE 是否满足最低安全条件。",
+  "goal": "在开工前发现不稳台面、混放材料、低光、工具异常和旁人进入风险，把危险任务降级或暂停。",
+  "tools": [
+    "工作台或低矮台面",
+    "标记笔",
+    "废料盒",
+    "禁用标签",
+    "护目和手套",
+    "记录纸"
+  ],
+  "steps": [
+    "清空工作台，只留下本次任务需要的材料和工具。",
+    "检查照明、地面、出口通道、台面稳定和可燃物距离。",
+    "划出工具、原料、半成品、成品和危险品区域。",
+    "检查刀锯钻夹具是否松动、裂纹、缺齿、变形或缺防护。",
+    "确认儿童、旁人、饮水桶、食物和睡眠用品不在加工方向和落料区。",
+    "准备护目、手部保护和粉尘控制措施。",
+    "记录任务、负责人、材料来源和今日停止线。"
+  ],
+  "check": [
+    "台面低力推拉不晃，工具不会滚落。",
+    "材料能固定，通道不穿过加工线。",
+    "危险工具、锐片和待检材料没有混入成品区。",
+    "PPE、旁人隔离和开工记录已完成。"
+  ],
+  "common_mistakes": [
+    "一边清场一边开始切割。",
+    "把床、膝盖或水桶边缘当工作台。",
+    "工具损坏但为了赶进度继续使用。"
+  ],
+  "fallback": [
+    "不满足条件时只做测量、清点、贴标签和材料分类。",
+    "缺夹具或 PPE 时延后切割、钻孔、打磨任务。",
+    "旁人无法隔离时暂停加工并封存工具。"
+  ],
+  "stop_or_escalate": [
+    "低光、台面晃动、材料无法固定、儿童无法隔离、粉尘或火花无法控制时停止开工。",
+    "工具出现裂纹、缺齿、松动、异常声音或禁用标签缺失时，不得继续制作。"
+  ],
+  "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+  "category_original": "基础制造与材料维修",
+  "domains": [
+    "repair",
+    "tools"
+  ],
+  "intents": [
+    "manufacturing_production_foundation",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "manufacturing_foundation",
+    "workshop_operation"
+  ],
+  "objects": [
+    "工作台",
+    "手工具",
+    "原料",
+    "半成品",
+    "危险工具"
+  ],
+  "signals": [
+    "开工",
+    "切割",
+    "打孔",
+    "工具异常",
+    "低光",
+    "旁人进入"
+  ],
+  "risks": [
+    "cut_injury",
+    "dust_spark",
+    "tool_failure"
+  ],
+  "keywords": [
+    "工坊开工前安全检查",
+    "制造",
+    "工作台",
+    "工具异常",
+    "PPE",
+    "儿童隔离",
+    "粉尘火花",
+    "开工记录"
+  ],
+  "negative_keywords": [
+    "工业机床",
+    "冶炼",
+    "武器制造",
+    "电池自制",
+    "高压容器"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "manufacturing_production_foundation",
+  "top1_aliases": [
+    "工坊开工前安全检查"
+  ],
+  "related_wiki": [
+    "repair-manufacturing-zone-layout-001",
+    "repair-manufacturing-workbench-start-check-001",
+    "repair-manufacturing-dust-spark-stop-line-001",
+    "repair-manufacturing-cut-drill-clear-zone-001",
+    "repair-manufacturing-ppe-minimum-001",
+    "repair-manufacturing-bystander-exclusion-001",
+    "repair-manufacturing-damaged-tool-stop-001",
+    "repair-manufacturing-raw-finished-zones-001",
+    "repair-manufacturing-start-record-001"
+  ],
+  "risk_level": "high"
+}

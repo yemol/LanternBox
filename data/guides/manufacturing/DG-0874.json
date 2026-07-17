@@ -1,0 +1,109 @@
+{
+  "id": "DG-0874",
+  "title": "简易结构件制作检查",
+  "category": "基础制造与材料维修",
+  "priority": "P1",
+  "scenario": "制作简易箱体、框架、架子、盖板或低负荷支撑件，需要检查材料、连接、方正、倾倒和用途限制。",
+  "goal": "让自制结构件在进入使用前完成低风险复查，不把临时制作物当关键承重结构。",
+  "tools": [
+    "尺",
+    "标记笔",
+    "螺丝刀",
+    "夹具",
+    "轻载测试物",
+    "记录纸"
+  ],
+  "steps": [
+    "明确成品用途、放置位置、承受重量和失败后果。",
+    "选择已检查材料，排除腐朽、深锈、污染和锐边。",
+    "先做尺寸或草图，确认连接点和受力方向。",
+    "装配后检查方正、晃动、支脚、边角和连接点。",
+    "低载试用，发现裂声、变形、松动或倾斜就停。",
+    "标记允许用途、禁止用途和复查日期。"
+  ],
+  "check": [
+    "结构件不晃、不倾倒，边角已处理。",
+    "连接点没有开裂、空转、开胶或滑移。",
+    "用途标签清楚，没有进入人员承重或高处吊挂场景。"
+  ],
+  "common_mistakes": [
+    "做好后直接放重物。",
+    "为了看起来结实不断加连接件，却不检查材料裂纹。",
+    "把临时盖板或架子放在儿童和睡眠区上方。"
+  ],
+  "fallback": [
+    "降级为非承重收纳、模板或隔板。",
+    "增加支撑点后必须重新测试。",
+    "不能确认时拆回材料区或放入缺陷区。"
+  ],
+  "stop_or_escalate": [
+    "结构件用于承人、吊挂重物、火源上方、睡眠区上方或关键 shelter 支撑时停止使用。",
+    "出现裂声、明显变形、连接点开裂、支脚滑动或倾倒趋势时停止。"
+  ],
+  "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+  "category_original": "基础制造与材料维修",
+  "domains": [
+    "repair",
+    "tools"
+  ],
+  "intents": [
+    "manufacturing_production_foundation",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "manufacturing_foundation",
+    "workshop_operation"
+  ],
+  "objects": [
+    "箱体",
+    "框架",
+    "架子",
+    "支架",
+    "盖板"
+  ],
+  "signals": [
+    "制作",
+    "组装",
+    "方正",
+    "晃动",
+    "倾倒",
+    "裂声"
+  ],
+  "risks": [
+    "load_failure",
+    "tip_over",
+    "sharp_edge"
+  ],
+  "keywords": [
+    "简易结构件制作检查",
+    "框架",
+    "箱体",
+    "架子",
+    "支撑",
+    "方正检查",
+    "承重限制"
+  ],
+  "negative_keywords": [
+    "工业机床",
+    "冶炼",
+    "武器制造",
+    "电池自制",
+    "高压容器"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "manufacturing_production_foundation",
+  "top1_aliases": [
+    "简易结构件制作检查"
+  ],
+  "related_wiki": [
+    "repair-manufacturing-wood-selection-001",
+    "repair-manufacturing-wood-drill-position-001",
+    "repair-manufacturing-wood-screw-join-001",
+    "repair-manufacturing-frame-square-check-001",
+    "repair-manufacturing-shelf-support-check-001",
+    "repair-manufacturing-box-crate-check-001"
+  ],
+  "risk_level": "high"
+}

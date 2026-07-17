@@ -1,0 +1,111 @@
+{
+  "id": "DG-0875",
+  "title": "连接方式选择：胶粘/螺丝/捆扎",
+  "category": "基础制造与材料维修",
+  "priority": "P0",
+  "scenario": "制作新物品时需要在胶粘、螺丝、扎带、绳绑、铁丝或铆接之间选择连接方式。",
+  "goal": "根据材料、受力、潮湿、拆卸和复查需求选择保守连接方式，避免临时连接承担关键负荷。",
+  "tools": [
+    "胶",
+    "螺丝和垫片",
+    "扎带或绳带",
+    "铁丝",
+    "钳子",
+    "清洁布",
+    "标记笔"
+  ],
+  "steps": [
+    "先判断连接点是否承重、受潮、受热、震动或需要拆卸。",
+    "清洁接触面，去掉油污、粉尘、松散层和毛刺。",
+    "胶粘只用于合适表面和非关键受力，固化前不得加载。",
+    "螺丝和铆接要检查孔位、边距、裂纹和垫片。",
+    "捆扎、铁丝和扎带只作临时或低负荷固定，并写明复查周期。",
+    "完成后轻载测试，记录限制用途。"
+  ],
+  "check": [
+    "连接方式和材料匹配，受力方向明确。",
+    "连接后没有滑移、开胶、裂纹、孔边撕裂或尖端外露。",
+    "临时连接没有被标为永久承重。"
+  ],
+  "common_mistakes": [
+    "潮湿或油污表面直接胶粘。",
+    "用扎带吊重物。",
+    "螺丝靠近木材边缘导致开裂。"
+  ],
+  "fallback": [
+    "不确定时增加机械支撑并降低用途。",
+    "缺可靠紧固件时缩小成品、增加接触面积或暂缓。",
+    "连接失败后进入缺陷区，不直接再次使用。"
+  ],
+  "stop_or_escalate": [
+    "连接点要承人、吊挂重物、睡眠区上方负荷或火源上方物品时停止使用临时连接。",
+    "发现开胶、滑移、孔边撕裂、扎带白化脆裂或螺丝空转时停用。"
+  ],
+  "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+  "category_original": "基础制造与材料维修",
+  "domains": [
+    "repair",
+    "tools"
+  ],
+  "intents": [
+    "manufacturing_production_foundation",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "manufacturing_foundation",
+    "workshop_operation"
+  ],
+  "objects": [
+    "连接点",
+    "螺丝",
+    "胶",
+    "扎带",
+    "铁丝",
+    "铆钉"
+  ],
+  "signals": [
+    "粘不住",
+    "连接",
+    "固定",
+    "滑移",
+    "开胶",
+    "松动"
+  ],
+  "risks": [
+    "joint_failure",
+    "load_failure",
+    "sharp_end"
+  ],
+  "keywords": [
+    "连接方式选择",
+    "胶粘",
+    "螺丝",
+    "捆扎",
+    "扎带",
+    "铆接",
+    "铁丝",
+    "制造"
+  ],
+  "negative_keywords": [
+    "工业机床",
+    "冶炼",
+    "武器制造",
+    "电池自制",
+    "高压容器"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "manufacturing_production_foundation",
+  "top1_aliases": [
+    "连接方式选择：胶粘/螺丝/捆扎"
+  ],
+  "related_wiki": [
+    "repair-manufacturing-connection-choice-001",
+    "repair-manufacturing-wood-screw-join-001",
+    "repair-manufacturing-fastener-reuse-boundary-001",
+    "repair-manufacturing-metal-join-choice-001",
+    "repair-manufacturing-fabric-rope-leather-check-001"
+  ],
+  "risk_level": "caution"
+}

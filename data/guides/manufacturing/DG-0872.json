@@ -1,0 +1,114 @@
+{
+  "id": "DG-0872",
+  "title": "材料再利用前安全判断",
+  "category": "基础制造与材料维修",
+  "priority": "P0",
+  "scenario": "准备用废木板、金属片、塑料容器、布料、绳索、旧紧固件或拆解零件制作新物品，需要先判断来源、污染、强度和降级用途。",
+  "goal": "把不明、污染、脆化、深锈或不可承重材料挡在制作流程外，给可用材料写清限制。",
+  "tools": [
+    "手套",
+    "标签",
+    "待检箱",
+    "危险箱",
+    "干布",
+    "记录纸"
+  ],
+  "steps": [
+    "确认材料来源和原用途，无法确认时先放入待检区。",
+    "检查异味、油膜、霉变、锈粉、裂纹、脆化、锐边和残留物。",
+    "判断材料是否会接触水、食物、皮肤、火源、高温或承重。",
+    "能清洁的先清洁干燥，金属和硬边先去毛刺或包边。",
+    "按可用、降级、待检、危险、报废分类并写标签。",
+    "记录来源、限制用途和禁止用途。"
+  ],
+  "check": [
+    "来源、用途和限制已写在材料或容器上。",
+    "不明容器没有进入饮水、食物、病人或儿童用品用途。",
+    "承重用途有单独复查，没有靠猜测决定。"
+  ],
+  "common_mistakes": [
+    "捡到材料后直接制作。",
+    "只清洗一次就把未知容器用于饮水或食物。",
+    "把轻微可用材料混入承重材料堆。"
+  ],
+  "fallback": [
+    "不能确认来源时降级为标记牌、模板、非承重隔板或废料练习。",
+    "材料有强味、油膜、粉末或漏液时隔离，不进入生活区。",
+    "缺合格材料时缩小成品、降低用途或暂缓制作。"
+  ],
+  "stop_or_escalate": [
+    "发现药品、燃料、化学品、电池、压力容器来源或强烈异味时停止再利用。",
+    "材料准备用于承人、吊挂重物、睡眠区上方或入口物资但强度无法确认时停止使用。"
+  ],
+  "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+  "category_original": "基础制造与材料维修",
+  "domains": [
+    "repair",
+    "tools"
+  ],
+  "intents": [
+    "manufacturing_production_foundation",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "manufacturing_foundation",
+    "workshop_operation"
+  ],
+  "objects": [
+    "废木板",
+    "塑料容器",
+    "金属片",
+    "布料绳索",
+    "旧紧固件"
+  ],
+  "signals": [
+    "废料",
+    "再利用",
+    "不明来源",
+    "异味",
+    "锈蚀",
+    "承重"
+  ],
+  "risks": [
+    "contamination",
+    "load_failure",
+    "sharp_edge"
+  ],
+  "keywords": [
+    "材料再利用前安全判断",
+    "废旧材料",
+    "选材",
+    "污染",
+    "降级使用",
+    "塑料容器",
+    "金属废料",
+    "木材选择"
+  ],
+  "negative_keywords": [
+    "工业机床",
+    "冶炼",
+    "武器制造",
+    "电池自制",
+    "高压容器"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "manufacturing_production_foundation",
+  "top1_aliases": [
+    "材料再利用前安全判断"
+  ],
+  "related_wiki": [
+    "repair-manufacturing-scrap-material-check-001",
+    "repair-manufacturing-wood-selection-001",
+    "repair-manufacturing-metal-scrap-check-001",
+    "repair-manufacturing-plastic-reuse-boundary-001",
+    "repair-manufacturing-material-prep-001",
+    "repair-manufacturing-fabric-rope-leather-check-001",
+    "repair-manufacturing-fastener-reuse-boundary-001",
+    "repair-manufacturing-downgrade-label-001",
+    "repair-manufacturing-salvaged-parts-sort-001",
+    "repair-manufacturing-corroded-metal-reuse-001"
+  ],
+  "risk_level": "high"
+}

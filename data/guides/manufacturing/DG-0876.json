@@ -1,0 +1,113 @@
+{
+  "id": "DG-0876",
+  "title": "废旧金属材料安全处理",
+  "category": "基础制造与材料维修",
+  "priority": "P0",
+  "scenario": "准备用薄金属片、旧支架、罐盖、角码或废五金制作低负荷部件，需要处理来源、锐边、孔位、弯折和腐蚀。",
+  "goal": "让金属废料只用于可观察、低负荷和可复查的位置，先处理锐边和污染，再决定是否连接。",
+  "tools": [
+    "手套",
+    "护目",
+    "钳子",
+    "锉刀或砂纸",
+    "垫木",
+    "夹具",
+    "标签"
+  ],
+  "steps": [
+    "确认金属来源，排除燃料、化学品、电池、压力容器和不明涂层来源。",
+    "检查深锈、裂纹、孔洞、锐边、油污和掉粉。",
+    "打孔或弯折前固定材料，不用手扶金属片。",
+    "钻孔、剪切或弯折后立即去毛刺、包边或封闭尖端。",
+    "连接后检查孔边撕裂、松动、割手边和允许用途。",
+    "把不可承重、不可接水食、不可儿童接触写在标签上。"
+  ],
+  "check": [
+    "金属来源可接受，锐边已处理。",
+    "孔位、弯折线和连接点没有裂纹扩展。",
+    "成品位置不会让人经过时碰到金属边。"
+  ],
+  "common_mistakes": [
+    "把罐皮剪开后直接当支架。",
+    "用手扶金属片钻孔。",
+    "只处理外观正面，背面孔边仍割手。"
+  ],
+  "fallback": [
+    "改用木材、厚塑料或绳带方案。",
+    "金属只作外侧防磨片或标牌。",
+    "无法处理锐边或来源不明时隔离报废。"
+  ],
+  "stop_or_escalate": [
+    "金属来自不明压力容器、燃料容器、电池或化学品容器时停止。",
+    "锐边无法处理、材料旋转、深锈掉片、孔边撕裂或准备用于承重时停用。"
+  ],
+  "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+  "category_original": "基础制造与材料维修",
+  "domains": [
+    "repair",
+    "tools"
+  ],
+  "intents": [
+    "manufacturing_production_foundation",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "manufacturing_foundation",
+    "workshop_operation"
+  ],
+  "objects": [
+    "金属片",
+    "角码",
+    "罐盖",
+    "旧支架",
+    "铁丝"
+  ],
+  "signals": [
+    "金属边锋利",
+    "打孔",
+    "弯折",
+    "锈蚀",
+    "割手风险"
+  ],
+  "risks": [
+    "sharp_edge",
+    "corrosion_failure",
+    "contamination"
+  ],
+  "keywords": [
+    "废旧金属材料安全处理",
+    "金属废料",
+    "锐边",
+    "打孔",
+    "弯折",
+    "腐蚀",
+    "支架"
+  ],
+  "negative_keywords": [
+    "工业机床",
+    "冶炼",
+    "武器制造",
+    "电池自制",
+    "高压容器"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "manufacturing_production_foundation",
+  "top1_aliases": [
+    "废旧金属材料安全处理"
+  ],
+  "related_wiki": [
+    "repair-manufacturing-metal-scrap-check-001",
+    "repair-manufacturing-metal-edge-safe-001",
+    "repair-manufacturing-thin-metal-drill-001",
+    "repair-manufacturing-corroded-metal-reuse-001",
+    "repair-manufacturing-material-prep-001",
+    "repair-manufacturing-metal-bracket-check-001",
+    "repair-manufacturing-thin-metal-bend-001",
+    "repair-manufacturing-metal-join-choice-001",
+    "repair-manufacturing-clamp-before-processing-001",
+    "repair-manufacturing-cut-drill-clear-zone-001"
+  ],
+  "risk_level": "high"
+}

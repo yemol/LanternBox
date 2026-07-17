@@ -44377,5 +44377,505 @@
       "轨迹转返回路线",
       "path point 记录"
     ]
+  },
+  {
+    "id": "DG-0871",
+    "title": "工坊开工前安全检查",
+    "category": "基础制造与材料维修",
+    "category_original": "基础制造与材料维修",
+    "risk_level": "high",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "工作台",
+      "手工具",
+      "原料",
+      "半成品",
+      "危险工具"
+    ],
+    "signals": [
+      "开工",
+      "切割",
+      "打孔",
+      "工具异常",
+      "低光",
+      "旁人进入"
+    ],
+    "risks": [
+      "cut_injury",
+      "dust_spark",
+      "tool_failure"
+    ],
+    "keywords": [
+      "工坊开工前安全检查",
+      "制造",
+      "工作台",
+      "工具异常",
+      "PPE",
+      "儿童隔离",
+      "粉尘火花",
+      "开工记录"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "工坊开工前安全检查"
+    ]
+  },
+  {
+    "id": "DG-0872",
+    "title": "材料再利用前安全判断",
+    "category": "基础制造与材料维修",
+    "category_original": "基础制造与材料维修",
+    "risk_level": "high",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "废木板",
+      "塑料容器",
+      "金属片",
+      "布料绳索",
+      "旧紧固件"
+    ],
+    "signals": [
+      "废料",
+      "再利用",
+      "不明来源",
+      "异味",
+      "锈蚀",
+      "承重"
+    ],
+    "risks": [
+      "contamination",
+      "load_failure",
+      "sharp_edge"
+    ],
+    "keywords": [
+      "材料再利用前安全判断",
+      "废旧材料",
+      "选材",
+      "污染",
+      "降级使用",
+      "塑料容器",
+      "金属废料",
+      "木材选择"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "材料再利用前安全判断"
+    ]
+  },
+  {
+    "id": "DG-0873",
+    "title": "木材切割前固定与支撑",
+    "category": "基础制造与材料维修",
+    "category_original": "基础制造与材料维修",
+    "risk_level": "high",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "木板",
+      "木条",
+      "木棍",
+      "手锯",
+      "手钻"
+    ],
+    "signals": [
+      "切割",
+      "打孔",
+      "夹锯",
+      "木材跳动",
+      "开裂"
+    ],
+    "risks": [
+      "cut_injury",
+      "wood_split",
+      "falling_offcut"
+    ],
+    "keywords": [
+      "木材切割前固定与支撑",
+      "木工",
+      "切割",
+      "打孔",
+      "夹具",
+      "划线",
+      "锯切",
+      "边距"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "木材切割前固定与支撑"
+    ]
+  },
+  {
+    "id": "DG-0874",
+    "title": "简易结构件制作检查",
+    "category": "基础制造与材料维修",
+    "category_original": "基础制造与材料维修",
+    "risk_level": "high",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "箱体",
+      "框架",
+      "架子",
+      "支架",
+      "盖板"
+    ],
+    "signals": [
+      "制作",
+      "组装",
+      "方正",
+      "晃动",
+      "倾倒",
+      "裂声"
+    ],
+    "risks": [
+      "load_failure",
+      "tip_over",
+      "sharp_edge"
+    ],
+    "keywords": [
+      "简易结构件制作检查",
+      "框架",
+      "箱体",
+      "架子",
+      "支撑",
+      "方正检查",
+      "承重限制"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "简易结构件制作检查"
+    ]
+  },
+  {
+    "id": "DG-0875",
+    "title": "连接方式选择：胶粘/螺丝/捆扎",
+    "category": "基础制造与材料维修",
+    "category_original": "基础制造与材料维修",
+    "risk_level": "caution",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "连接点",
+      "螺丝",
+      "胶",
+      "扎带",
+      "铁丝",
+      "铆钉"
+    ],
+    "signals": [
+      "粘不住",
+      "连接",
+      "固定",
+      "滑移",
+      "开胶",
+      "松动"
+    ],
+    "risks": [
+      "joint_failure",
+      "load_failure",
+      "sharp_end"
+    ],
+    "keywords": [
+      "连接方式选择",
+      "胶粘",
+      "螺丝",
+      "捆扎",
+      "扎带",
+      "铆接",
+      "铁丝",
+      "制造"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "连接方式选择：胶粘/螺丝/捆扎"
+    ]
+  },
+  {
+    "id": "DG-0876",
+    "title": "废旧金属材料安全处理",
+    "category": "基础制造与材料维修",
+    "category_original": "基础制造与材料维修",
+    "risk_level": "high",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "金属片",
+      "角码",
+      "罐盖",
+      "旧支架",
+      "铁丝"
+    ],
+    "signals": [
+      "金属边锋利",
+      "打孔",
+      "弯折",
+      "锈蚀",
+      "割手风险"
+    ],
+    "risks": [
+      "sharp_edge",
+      "corrosion_failure",
+      "contamination"
+    ],
+    "keywords": [
+      "废旧金属材料安全处理",
+      "金属废料",
+      "锐边",
+      "打孔",
+      "弯折",
+      "腐蚀",
+      "支架"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "废旧金属材料安全处理"
+    ]
+  },
+  {
+    "id": "DG-0877",
+    "title": "制作完成后的承重检查",
+    "category": "基础制造与材料维修",
+    "category_original": "基础制造与材料维修",
+    "risk_level": "high",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "成品",
+      "架子",
+      "箱体",
+      "支架",
+      "框架"
+    ],
+    "signals": [
+      "承重前",
+      "质量检查",
+      "裂声",
+      "变形",
+      "松动",
+      "缺陷品"
+    ],
+    "risks": [
+      "load_failure",
+      "tip_over",
+      "contamination"
+    ],
+    "keywords": [
+      "制作完成后的承重检查",
+      "成品复查",
+      "承重",
+      "质量检查",
+      "缺陷隔离",
+      "架子",
+      "支架"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "制作完成后的承重检查"
+    ]
+  },
+  {
+    "id": "DG-0878",
+    "title": "工坊收工与工具封存",
+    "category": "基础制造与材料维修",
+    "category_original": "基础制造与材料维修",
+    "risk_level": "high",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "刀具",
+      "钻头",
+      "废料",
+      "半成品",
+      "缺陷品",
+      "危险工具箱"
+    ],
+    "signals": [
+      "收工",
+      "清点",
+      "封存",
+      "工具缺失",
+      "缺陷品",
+      "锐片"
+    ],
+    "risks": [
+      "tool_left_out",
+      "sharp_waste",
+      "defect_misuse"
+    ],
+    "keywords": [
+      "工坊收工与工具封存",
+      "收工清点",
+      "危险工具",
+      "缺陷品",
+      "成品区",
+      "半成品",
+      "废料"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "工坊收工与工具封存"
+    ]
   }
 ]

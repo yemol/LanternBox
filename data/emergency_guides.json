@@ -72066,5 +72066,895 @@
       "path point 记录"
     ],
     "risk_level": "caution"
+  },
+  {
+    "id": "DG-0871",
+    "title": "工坊开工前安全检查",
+    "category": "基础制造与材料维修",
+    "priority": "P0",
+    "scenario": "开始切割、钻孔、打磨、装配或小批量制作前，需要判断工作台、分区、工具、材料、旁人和 PPE 是否满足最低安全条件。",
+    "goal": "在开工前发现不稳台面、混放材料、低光、工具异常和旁人进入风险，把危险任务降级或暂停。",
+    "tools": [
+      "工作台或低矮台面",
+      "标记笔",
+      "废料盒",
+      "禁用标签",
+      "护目和手套",
+      "记录纸"
+    ],
+    "steps": [
+      "清空工作台，只留下本次任务需要的材料和工具。",
+      "检查照明、地面、出口通道、台面稳定和可燃物距离。",
+      "划出工具、原料、半成品、成品和危险品区域。",
+      "检查刀锯钻夹具是否松动、裂纹、缺齿、变形或缺防护。",
+      "确认儿童、旁人、饮水桶、食物和睡眠用品不在加工方向和落料区。",
+      "准备护目、手部保护和粉尘控制措施。",
+      "记录任务、负责人、材料来源和今日停止线。"
+    ],
+    "check": [
+      "台面低力推拉不晃，工具不会滚落。",
+      "材料能固定，通道不穿过加工线。",
+      "危险工具、锐片和待检材料没有混入成品区。",
+      "PPE、旁人隔离和开工记录已完成。"
+    ],
+    "common_mistakes": [
+      "一边清场一边开始切割。",
+      "把床、膝盖或水桶边缘当工作台。",
+      "工具损坏但为了赶进度继续使用。"
+    ],
+    "fallback": [
+      "不满足条件时只做测量、清点、贴标签和材料分类。",
+      "缺夹具或 PPE 时延后切割、钻孔、打磨任务。",
+      "旁人无法隔离时暂停加工并封存工具。"
+    ],
+    "stop_or_escalate": [
+      "低光、台面晃动、材料无法固定、儿童无法隔离、粉尘或火花无法控制时停止开工。",
+      "工具出现裂纹、缺齿、松动、异常声音或禁用标签缺失时，不得继续制作。"
+    ],
+    "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+    "category_original": "基础制造与材料维修",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "工作台",
+      "手工具",
+      "原料",
+      "半成品",
+      "危险工具"
+    ],
+    "signals": [
+      "开工",
+      "切割",
+      "打孔",
+      "工具异常",
+      "低光",
+      "旁人进入"
+    ],
+    "risks": [
+      "cut_injury",
+      "dust_spark",
+      "tool_failure"
+    ],
+    "keywords": [
+      "工坊开工前安全检查",
+      "制造",
+      "工作台",
+      "工具异常",
+      "PPE",
+      "儿童隔离",
+      "粉尘火花",
+      "开工记录"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "工坊开工前安全检查"
+    ],
+    "related_wiki": [
+      "repair-manufacturing-zone-layout-001",
+      "repair-manufacturing-workbench-start-check-001",
+      "repair-manufacturing-dust-spark-stop-line-001",
+      "repair-manufacturing-cut-drill-clear-zone-001",
+      "repair-manufacturing-ppe-minimum-001",
+      "repair-manufacturing-bystander-exclusion-001",
+      "repair-manufacturing-damaged-tool-stop-001",
+      "repair-manufacturing-raw-finished-zones-001",
+      "repair-manufacturing-start-record-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0872",
+    "title": "材料再利用前安全判断",
+    "category": "基础制造与材料维修",
+    "priority": "P0",
+    "scenario": "准备用废木板、金属片、塑料容器、布料、绳索、旧紧固件或拆解零件制作新物品，需要先判断来源、污染、强度和降级用途。",
+    "goal": "把不明、污染、脆化、深锈或不可承重材料挡在制作流程外，给可用材料写清限制。",
+    "tools": [
+      "手套",
+      "标签",
+      "待检箱",
+      "危险箱",
+      "干布",
+      "记录纸"
+    ],
+    "steps": [
+      "确认材料来源和原用途，无法确认时先放入待检区。",
+      "检查异味、油膜、霉变、锈粉、裂纹、脆化、锐边和残留物。",
+      "判断材料是否会接触水、食物、皮肤、火源、高温或承重。",
+      "能清洁的先清洁干燥，金属和硬边先去毛刺或包边。",
+      "按可用、降级、待检、危险、报废分类并写标签。",
+      "记录来源、限制用途和禁止用途。"
+    ],
+    "check": [
+      "来源、用途和限制已写在材料或容器上。",
+      "不明容器没有进入饮水、食物、病人或儿童用品用途。",
+      "承重用途有单独复查，没有靠猜测决定。"
+    ],
+    "common_mistakes": [
+      "捡到材料后直接制作。",
+      "只清洗一次就把未知容器用于饮水或食物。",
+      "把轻微可用材料混入承重材料堆。"
+    ],
+    "fallback": [
+      "不能确认来源时降级为标记牌、模板、非承重隔板或废料练习。",
+      "材料有强味、油膜、粉末或漏液时隔离，不进入生活区。",
+      "缺合格材料时缩小成品、降低用途或暂缓制作。"
+    ],
+    "stop_or_escalate": [
+      "发现药品、燃料、化学品、电池、压力容器来源或强烈异味时停止再利用。",
+      "材料准备用于承人、吊挂重物、睡眠区上方或入口物资但强度无法确认时停止使用。"
+    ],
+    "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+    "category_original": "基础制造与材料维修",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "废木板",
+      "塑料容器",
+      "金属片",
+      "布料绳索",
+      "旧紧固件"
+    ],
+    "signals": [
+      "废料",
+      "再利用",
+      "不明来源",
+      "异味",
+      "锈蚀",
+      "承重"
+    ],
+    "risks": [
+      "contamination",
+      "load_failure",
+      "sharp_edge"
+    ],
+    "keywords": [
+      "材料再利用前安全判断",
+      "废旧材料",
+      "选材",
+      "污染",
+      "降级使用",
+      "塑料容器",
+      "金属废料",
+      "木材选择"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "材料再利用前安全判断"
+    ],
+    "related_wiki": [
+      "repair-manufacturing-scrap-material-check-001",
+      "repair-manufacturing-wood-selection-001",
+      "repair-manufacturing-metal-scrap-check-001",
+      "repair-manufacturing-plastic-reuse-boundary-001",
+      "repair-manufacturing-material-prep-001",
+      "repair-manufacturing-fabric-rope-leather-check-001",
+      "repair-manufacturing-fastener-reuse-boundary-001",
+      "repair-manufacturing-downgrade-label-001",
+      "repair-manufacturing-salvaged-parts-sort-001",
+      "repair-manufacturing-corroded-metal-reuse-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0873",
+    "title": "木材切割前固定与支撑",
+    "category": "基础制造与材料维修",
+    "priority": "P0",
+    "scenario": "使用旧木板、木条或木棍制作箱体、框架、架子或零件，需要在测量、划线、切割、打孔前固定材料。",
+    "goal": "让木材加工前尺寸清楚、材料稳定、手远离切割线，减少夹锯、开裂、滑动和落料伤人。",
+    "tools": [
+      "手锯",
+      "手钻或锥子",
+      "垫木",
+      "夹具或绳带",
+      "标记笔",
+      "尺"
+    ],
+    "steps": [
+      "先检查木材腐朽、潮湿、裂纹、虫蛀、钉子和油污。",
+      "写下用途和尺寸，标出保留侧、废料侧、孔位和切割线。",
+      "把木材放在垫木上，切割线两侧都有支撑。",
+      "用夹具、绳带、木楔或低矮重物固定，做低力推拉测试。",
+      "先轻锯导槽或试孔，发现夹锯、跳动、开裂或偏孔就停。",
+      "完成后处理木刺和尖角，记录失败件。"
+    ],
+    "check": [
+      "木材不需要用手靠近切线扶住。",
+      "切割线、孔位、落料方向和支撑点清楚。",
+      "孔位避开裂纹、旧孔和过近边缘。"
+    ],
+    "common_mistakes": [
+      "一手扶木料一手锯或钻。",
+      "没有标保留侧，切错后用短料冒险返工。",
+      "夹锯后用身体猛压锯片。"
+    ],
+    "fallback": [
+      "缺夹具时先缩短材料、换小件或只做标记。",
+      "木材有裂纹时降低用途或换料。",
+      "尺寸不确定时保留余量并先做样件。"
+    ],
+    "stop_or_escalate": [
+      "材料无法固定、切线靠近手、锯片持续夹住、木材裂纹扩大或光线不足时停止加工。",
+      "准备用木件承人、吊挂重物或支撑关键结构时，不使用本 Guide 作为唯一判断。"
+    ],
+    "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+    "category_original": "基础制造与材料维修",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "木板",
+      "木条",
+      "木棍",
+      "手锯",
+      "手钻"
+    ],
+    "signals": [
+      "切割",
+      "打孔",
+      "夹锯",
+      "木材跳动",
+      "开裂"
+    ],
+    "risks": [
+      "cut_injury",
+      "wood_split",
+      "falling_offcut"
+    ],
+    "keywords": [
+      "木材切割前固定与支撑",
+      "木工",
+      "切割",
+      "打孔",
+      "夹具",
+      "划线",
+      "锯切",
+      "边距"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "木材切割前固定与支撑"
+    ],
+    "related_wiki": [
+      "repair-manufacturing-clamp-before-processing-001",
+      "repair-manufacturing-wood-saw-support-001",
+      "repair-manufacturing-wood-drill-position-001",
+      "repair-manufacturing-wood-measure-mark-001",
+      "repair-manufacturing-cut-drill-clear-zone-001",
+      "repair-manufacturing-wood-selection-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0874",
+    "title": "简易结构件制作检查",
+    "category": "基础制造与材料维修",
+    "priority": "P1",
+    "scenario": "制作简易箱体、框架、架子、盖板或低负荷支撑件，需要检查材料、连接、方正、倾倒和用途限制。",
+    "goal": "让自制结构件在进入使用前完成低风险复查，不把临时制作物当关键承重结构。",
+    "tools": [
+      "尺",
+      "标记笔",
+      "螺丝刀",
+      "夹具",
+      "轻载测试物",
+      "记录纸"
+    ],
+    "steps": [
+      "明确成品用途、放置位置、承受重量和失败后果。",
+      "选择已检查材料，排除腐朽、深锈、污染和锐边。",
+      "先做尺寸或草图，确认连接点和受力方向。",
+      "装配后检查方正、晃动、支脚、边角和连接点。",
+      "低载试用，发现裂声、变形、松动或倾斜就停。",
+      "标记允许用途、禁止用途和复查日期。"
+    ],
+    "check": [
+      "结构件不晃、不倾倒，边角已处理。",
+      "连接点没有开裂、空转、开胶或滑移。",
+      "用途标签清楚，没有进入人员承重或高处吊挂场景。"
+    ],
+    "common_mistakes": [
+      "做好后直接放重物。",
+      "为了看起来结实不断加连接件，却不检查材料裂纹。",
+      "把临时盖板或架子放在儿童和睡眠区上方。"
+    ],
+    "fallback": [
+      "降级为非承重收纳、模板或隔板。",
+      "增加支撑点后必须重新测试。",
+      "不能确认时拆回材料区或放入缺陷区。"
+    ],
+    "stop_or_escalate": [
+      "结构件用于承人、吊挂重物、火源上方、睡眠区上方或关键 shelter 支撑时停止使用。",
+      "出现裂声、明显变形、连接点开裂、支脚滑动或倾倒趋势时停止。"
+    ],
+    "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+    "category_original": "基础制造与材料维修",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "箱体",
+      "框架",
+      "架子",
+      "支架",
+      "盖板"
+    ],
+    "signals": [
+      "制作",
+      "组装",
+      "方正",
+      "晃动",
+      "倾倒",
+      "裂声"
+    ],
+    "risks": [
+      "load_failure",
+      "tip_over",
+      "sharp_edge"
+    ],
+    "keywords": [
+      "简易结构件制作检查",
+      "框架",
+      "箱体",
+      "架子",
+      "支撑",
+      "方正检查",
+      "承重限制"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "简易结构件制作检查"
+    ],
+    "related_wiki": [
+      "repair-manufacturing-wood-selection-001",
+      "repair-manufacturing-wood-drill-position-001",
+      "repair-manufacturing-wood-screw-join-001",
+      "repair-manufacturing-frame-square-check-001",
+      "repair-manufacturing-shelf-support-check-001",
+      "repair-manufacturing-box-crate-check-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0875",
+    "title": "连接方式选择：胶粘/螺丝/捆扎",
+    "category": "基础制造与材料维修",
+    "priority": "P0",
+    "scenario": "制作新物品时需要在胶粘、螺丝、扎带、绳绑、铁丝或铆接之间选择连接方式。",
+    "goal": "根据材料、受力、潮湿、拆卸和复查需求选择保守连接方式，避免临时连接承担关键负荷。",
+    "tools": [
+      "胶",
+      "螺丝和垫片",
+      "扎带或绳带",
+      "铁丝",
+      "钳子",
+      "清洁布",
+      "标记笔"
+    ],
+    "steps": [
+      "先判断连接点是否承重、受潮、受热、震动或需要拆卸。",
+      "清洁接触面，去掉油污、粉尘、松散层和毛刺。",
+      "胶粘只用于合适表面和非关键受力，固化前不得加载。",
+      "螺丝和铆接要检查孔位、边距、裂纹和垫片。",
+      "捆扎、铁丝和扎带只作临时或低负荷固定，并写明复查周期。",
+      "完成后轻载测试，记录限制用途。"
+    ],
+    "check": [
+      "连接方式和材料匹配，受力方向明确。",
+      "连接后没有滑移、开胶、裂纹、孔边撕裂或尖端外露。",
+      "临时连接没有被标为永久承重。"
+    ],
+    "common_mistakes": [
+      "潮湿或油污表面直接胶粘。",
+      "用扎带吊重物。",
+      "螺丝靠近木材边缘导致开裂。"
+    ],
+    "fallback": [
+      "不确定时增加机械支撑并降低用途。",
+      "缺可靠紧固件时缩小成品、增加接触面积或暂缓。",
+      "连接失败后进入缺陷区，不直接再次使用。"
+    ],
+    "stop_or_escalate": [
+      "连接点要承人、吊挂重物、睡眠区上方负荷或火源上方物品时停止使用临时连接。",
+      "发现开胶、滑移、孔边撕裂、扎带白化脆裂或螺丝空转时停用。"
+    ],
+    "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+    "category_original": "基础制造与材料维修",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "连接点",
+      "螺丝",
+      "胶",
+      "扎带",
+      "铁丝",
+      "铆钉"
+    ],
+    "signals": [
+      "粘不住",
+      "连接",
+      "固定",
+      "滑移",
+      "开胶",
+      "松动"
+    ],
+    "risks": [
+      "joint_failure",
+      "load_failure",
+      "sharp_end"
+    ],
+    "keywords": [
+      "连接方式选择",
+      "胶粘",
+      "螺丝",
+      "捆扎",
+      "扎带",
+      "铆接",
+      "铁丝",
+      "制造"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "连接方式选择：胶粘/螺丝/捆扎"
+    ],
+    "related_wiki": [
+      "repair-manufacturing-connection-choice-001",
+      "repair-manufacturing-wood-screw-join-001",
+      "repair-manufacturing-fastener-reuse-boundary-001",
+      "repair-manufacturing-metal-join-choice-001",
+      "repair-manufacturing-fabric-rope-leather-check-001"
+    ],
+    "risk_level": "caution"
+  },
+  {
+    "id": "DG-0876",
+    "title": "废旧金属材料安全处理",
+    "category": "基础制造与材料维修",
+    "priority": "P0",
+    "scenario": "准备用薄金属片、旧支架、罐盖、角码或废五金制作低负荷部件，需要处理来源、锐边、孔位、弯折和腐蚀。",
+    "goal": "让金属废料只用于可观察、低负荷和可复查的位置，先处理锐边和污染，再决定是否连接。",
+    "tools": [
+      "手套",
+      "护目",
+      "钳子",
+      "锉刀或砂纸",
+      "垫木",
+      "夹具",
+      "标签"
+    ],
+    "steps": [
+      "确认金属来源，排除燃料、化学品、电池、压力容器和不明涂层来源。",
+      "检查深锈、裂纹、孔洞、锐边、油污和掉粉。",
+      "打孔或弯折前固定材料，不用手扶金属片。",
+      "钻孔、剪切或弯折后立即去毛刺、包边或封闭尖端。",
+      "连接后检查孔边撕裂、松动、割手边和允许用途。",
+      "把不可承重、不可接水食、不可儿童接触写在标签上。"
+    ],
+    "check": [
+      "金属来源可接受，锐边已处理。",
+      "孔位、弯折线和连接点没有裂纹扩展。",
+      "成品位置不会让人经过时碰到金属边。"
+    ],
+    "common_mistakes": [
+      "把罐皮剪开后直接当支架。",
+      "用手扶金属片钻孔。",
+      "只处理外观正面，背面孔边仍割手。"
+    ],
+    "fallback": [
+      "改用木材、厚塑料或绳带方案。",
+      "金属只作外侧防磨片或标牌。",
+      "无法处理锐边或来源不明时隔离报废。"
+    ],
+    "stop_or_escalate": [
+      "金属来自不明压力容器、燃料容器、电池或化学品容器时停止。",
+      "锐边无法处理、材料旋转、深锈掉片、孔边撕裂或准备用于承重时停用。"
+    ],
+    "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+    "category_original": "基础制造与材料维修",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "金属片",
+      "角码",
+      "罐盖",
+      "旧支架",
+      "铁丝"
+    ],
+    "signals": [
+      "金属边锋利",
+      "打孔",
+      "弯折",
+      "锈蚀",
+      "割手风险"
+    ],
+    "risks": [
+      "sharp_edge",
+      "corrosion_failure",
+      "contamination"
+    ],
+    "keywords": [
+      "废旧金属材料安全处理",
+      "金属废料",
+      "锐边",
+      "打孔",
+      "弯折",
+      "腐蚀",
+      "支架"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "废旧金属材料安全处理"
+    ],
+    "related_wiki": [
+      "repair-manufacturing-metal-scrap-check-001",
+      "repair-manufacturing-metal-edge-safe-001",
+      "repair-manufacturing-thin-metal-drill-001",
+      "repair-manufacturing-corroded-metal-reuse-001",
+      "repair-manufacturing-material-prep-001",
+      "repair-manufacturing-metal-bracket-check-001",
+      "repair-manufacturing-thin-metal-bend-001",
+      "repair-manufacturing-metal-join-choice-001",
+      "repair-manufacturing-clamp-before-processing-001",
+      "repair-manufacturing-cut-drill-clear-zone-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0877",
+    "title": "制作完成后的承重检查",
+    "category": "基础制造与材料维修",
+    "priority": "P0",
+    "scenario": "自制架子、箱体、支架、框架或低负荷成品准备投入使用，需要判断能否承受预期重量或是否必须降级。",
+    "goal": "在正式使用前通过边缘、连接、变形和逐级加载检查发现失败信号，避免成品进入生活区后伤人或污染物资。",
+    "tools": [
+      "标记笔",
+      "轻载测试物",
+      "记录纸",
+      "缺陷标签",
+      "辅助支撑"
+    ],
+    "steps": [
+      "明确成品用途、最大重量、放置位置和失败后果。",
+      "检查材料裂纹、腐朽、锈蚀、锐边、污染和连接点。",
+      "从轻载开始逐级加载，不一次放满负荷。",
+      "每次加载后观察裂声、松动、开胶、弯曲、滑移和倾斜。",
+      "通过后标记允许用途、禁止用途和复查日期。",
+      "未通过成品放入缺陷区，不得混入成品区。"
+    ],
+    "check": [
+      "逐级加载无变形、无裂声、无松动。",
+      "锐边、毛刺和尖端已处理。",
+      "限制用途清楚，复查记录完整。"
+    ],
+    "common_mistakes": [
+      "一次性放上最大重量。",
+      "测试通过一次就长期不复查。",
+      "把失败件放回成品区等以后修。"
+    ],
+    "fallback": [
+      "降级为轻载、非承重或固定位置收纳。",
+      "增加支撑点后重新测试。",
+      "无法测试的成品不投入使用。"
+    ],
+    "stop_or_escalate": [
+      "用于承人、睡眠区上方、火源上方、悬挂重物或关键物资支撑时停止使用自制低负荷成品。",
+      "出现裂声、连接松动、明显变形、支脚滑动、边缘割手或污染不明时停用隔离。"
+    ],
+    "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+    "category_original": "基础制造与材料维修",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "成品",
+      "架子",
+      "箱体",
+      "支架",
+      "框架"
+    ],
+    "signals": [
+      "承重前",
+      "质量检查",
+      "裂声",
+      "变形",
+      "松动",
+      "缺陷品"
+    ],
+    "risks": [
+      "load_failure",
+      "tip_over",
+      "contamination"
+    ],
+    "keywords": [
+      "制作完成后的承重检查",
+      "成品复查",
+      "承重",
+      "质量检查",
+      "缺陷隔离",
+      "架子",
+      "支架"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "制作完成后的承重检查"
+    ],
+    "related_wiki": [
+      "repair-manufacturing-load-test-001",
+      "repair-manufacturing-quality-recheck-001",
+      "repair-manufacturing-shelf-support-check-001",
+      "repair-manufacturing-metal-bracket-check-001",
+      "repair-manufacturing-defect-isolation-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0878",
+    "title": "工坊收工与工具封存",
+    "category": "基础制造与材料维修",
+    "priority": "P0",
+    "scenario": "制作、切割、钻孔、修边或小批量装配结束后，需要清点工具、分开成品和缺陷品，并封存危险物。",
+    "goal": "让制作风险在收工时真正结束，避免刀具、金属锐片、半成品、粉尘和缺陷品留在生活区。",
+    "tools": [
+      "工具清单",
+      "废料盒",
+      "危险工具箱",
+      "缺陷标签",
+      "扫帚",
+      "记录纸"
+    ],
+    "steps": [
+      "停止所有加工动作，把工具从台面边缘移开。",
+      "按清单清点刀、锯、钻头、剪刀、夹具和小紧固件。",
+      "收集木刺、金属锐片、钉子、粉尘和污染材料。",
+      "把原料、半成品、成品、缺陷品和危险品放回对应区域。",
+      "危险工具、禁用工具和待检材料封存并贴标签。",
+      "记录成品数量、缺陷件、缺失工具和次日优先复查项。"
+    ],
+    "check": [
+      "工具数量对上，危险工具不可被儿童接触。",
+      "锐片、钉子和粉尘已清理或隔离。",
+      "缺陷品没有混入成品区，半成品有状态标签。"
+    ],
+    "common_mistakes": [
+      "只收大工具，不清理小刀片、钉子和金属边角。",
+      "把半成品当成成品收起来。",
+      "工具缺失但没有封闭工作区。"
+    ],
+    "fallback": [
+      "时间不足时优先封存刀具、钻头、锐片和危险材料。",
+      "无法清理完时封闭工作区并写明未清理位置。",
+      "工具数量对不上时暂停下次开工直到找回或确认风险。"
+    ],
+    "stop_or_escalate": [
+      "工具缺失、锐片无法清理、儿童可能进入、危险材料混入普通区或禁用工具混回可用区时，不允许恢复生活区使用。",
+      "发现缺陷品可能被误用时立即隔离并补标签。"
+    ],
+    "notes": "Batch9-C Manufacturing & Production Foundation v0.1 第一阶段行动知识链。",
+    "category_original": "基础制造与材料维修",
+    "domains": [
+      "repair",
+      "tools"
+    ],
+    "intents": [
+      "manufacturing_production_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "manufacturing_foundation",
+      "workshop_operation"
+    ],
+    "objects": [
+      "刀具",
+      "钻头",
+      "废料",
+      "半成品",
+      "缺陷品",
+      "危险工具箱"
+    ],
+    "signals": [
+      "收工",
+      "清点",
+      "封存",
+      "工具缺失",
+      "缺陷品",
+      "锐片"
+    ],
+    "risks": [
+      "tool_left_out",
+      "sharp_waste",
+      "defect_misuse"
+    ],
+    "keywords": [
+      "工坊收工与工具封存",
+      "收工清点",
+      "危险工具",
+      "缺陷品",
+      "成品区",
+      "半成品",
+      "废料"
+    ],
+    "negative_keywords": [
+      "工业机床",
+      "冶炼",
+      "武器制造",
+      "电池自制",
+      "高压容器"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "manufacturing_production_foundation",
+    "top1_aliases": [
+      "工坊收工与工具封存"
+    ],
+    "related_wiki": [
+      "repair-manufacturing-end-clean-count-001",
+      "repair-manufacturing-damaged-tool-stop-001",
+      "repair-manufacturing-bystander-exclusion-001",
+      "repair-manufacturing-raw-finished-zones-001",
+      "repair-manufacturing-zone-layout-001",
+      "repair-manufacturing-salvaged-parts-sort-001",
+      "repair-manufacturing-batch-record-001",
+      "repair-manufacturing-defect-isolation-001"
+    ],
+    "risk_level": "high"
   }
 ]
