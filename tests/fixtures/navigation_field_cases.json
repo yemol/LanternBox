@@ -1,0 +1,261 @@
+[
+  {
+    "id": "navigation_plan_before_foraging",
+    "query": "出去采集物资前应该怎么规划路线？",
+    "expected_guides": ["DG-0863"],
+    "expected_wiki": [
+      "navigation-outbound-route-card-001",
+      "navigation-route-checkpoint-numbering-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "个人外出路线规划，路线卡、检查点和返回线应进入 evidence。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["outdoor", "evacuation"]
+  },
+  {
+    "id": "navigation_lost_return_where",
+    "query": "走出去以后迷路了，不知道回哪里怎么办？",
+    "expected_guides": ["DG-0864"],
+    "expected_wiki": [
+      "navigation-lost-stop-and-last-known-point-001",
+      "navigation-return-route-plan-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "迷路后停止扩散、最近确定点和返回路线。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["evacuation", "communication"]
+  },
+  {
+    "id": "navigation_gps_drift",
+    "query": "GPS 有信号，但是位置一直漂移怎么办？",
+    "expected_guides": ["DG-0867"],
+    "expected_wiki": [
+      "navigation-position-error-check-001",
+      "navigation-gnss-basics-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "GNSS 坐标记录和定位误差复查。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["communication", "electronics"]
+  },
+  {
+    "id": "navigation_gnss_no_fix_record",
+    "query": "GNSS 没有定位成功还能继续记录吗？",
+    "expected_guides": ["DG-0867"],
+    "expected_wiki": [
+      "navigation-gnss-no-fix-downgrade-001"
+    ],
+    "allowed_secondary_guides": ["DG-0864"],
+    "observation": false,
+    "focus": "无 fix 时的记录停止线和降级定位。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["communication", "electronics"]
+  },
+  {
+    "id": "navigation_route_checkpoint_setup",
+    "query": "怎么给外出路线设置检查点？",
+    "expected_guides": ["DG-0866"],
+    "expected_wiki": [
+      "navigation-route-checkpoint-numbering-001"
+    ],
+    "allowed_secondary_guides": ["DG-0863"],
+    "observation": false,
+    "focus": "检查点编号、留守记录和路线进度。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["communication", "team"]
+  },
+  {
+    "id": "navigation_evac_route_risk_check",
+    "query": "撤离路线应该怎么检查风险？",
+    "expected_guides": ["DG-0865"],
+    "expected_wiki": [
+      "navigation-route-risk-score-001",
+      "navigation-flood-terrain-risk-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "撤离路线风险评分和洪水地形证据。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["evacuation", "geography"]
+  },
+  {
+    "id": "navigation_night_movement_route",
+    "query": "夜晚必须移动，路线应该怎么判断？",
+    "expected_guides": ["DG-0863"],
+    "expected_wiki": [
+      "navigation-night-route-risk-001"
+    ],
+    "allowed_secondary_guides": ["DG-0868", "DG-0865"],
+    "observation": false,
+    "focus": "夜间移动路线风险，DG-0868 未创建时 DG-0863/DG-0865 可承接。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["shelter", "security"]
+  },
+  {
+    "id": "navigation_track_review_after_day",
+    "query": "记录了一天 GPS 轨迹，回来后怎么看？",
+    "expected_guides": ["DG-0870"],
+    "expected_wiki": [
+      "navigation-gps-track-minimum-fields-001",
+      "navigation-track-to-return-summary-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "FT/GPS track 字段、漂移检查和返回摘要。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["journal", "communication"]
+  },
+  {
+    "id": "navigation_safe_route_return_next_time",
+    "query": "走过一次安全路线，下次怎么回来？",
+    "expected_guides": ["DG-0864"],
+    "expected_wiki": [
+      "navigation-return-route-plan-001"
+    ],
+    "allowed_secondary_guides": ["DG-0863", "DG-0870"],
+    "observation": false,
+    "focus": "返回路线、最近确定点和轨迹摘要。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["journal", "evacuation"]
+  },
+  {
+    "id": "navigation_flood_old_road",
+    "query": "洪水后原来的道路还能走吗？",
+    "expected_guides": ["DG-0865"],
+    "expected_wiki": [
+      "navigation-flood-terrain-risk-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "洪水后路线通行性，熟路不能默认安全。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["water", "geography", "evacuation"]
+  },
+  {
+    "id": "navigation_observe_nearby_water_source",
+    "query": "附近有没有水源？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 navigation vs water：水源寻找可由 water 主导，但 navigation 点位记录应作为补充。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["water"]
+  },
+  {
+    "id": "navigation_observe_radio_lost_find_team",
+    "query": "无线电失联以后怎么找队友？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 navigation vs communication：通信故障可主导，但搜索/检查点边界应进入。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["communication"]
+  },
+  {
+    "id": "navigation_observe_mountain_road_danger",
+    "query": "山区道路危险怎么办？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 navigation vs outdoor/geography：危险地形路线判断是否进入。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["outdoor", "geography"]
+  },
+  {
+    "id": "navigation_observe_night_camp_site",
+    "query": "夜晚露营怎么选择地点？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 navigation vs shelter：露营选址可由 shelter 主导，路线/夜间风险为补充。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["shelter"]
+  },
+  {
+    "id": "navigation_observe_danger_zone_record",
+    "query": "发现危险区域如何记录？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 navigation vs security：危险区记录和地图标记是否进入。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["security"]
+  },
+  {
+    "id": "navigation_observe_phone_map_unavailable",
+    "query": "手机地图不能用了怎么办？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 navigation vs communication/electronics：地图不可用时离线地图和纸质降级是否进入。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["communication", "electronics"]
+  },
+  {
+    "id": "navigation_observe_past_routes",
+    "query": "想知道过去走过哪些路线",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 track vs journal：历史路线记录是否由 track evidence 承接。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["journal"]
+  },
+  {
+    "id": "navigation_observe_team_share_rally",
+    "query": "团队成员如何共享集合点",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "观察 navigation vs team/communication：集合点共享是否兼顾导航字段和团队交接。",
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true,
+    "watch_conflicts": ["team", "communication"]
+  }
+]

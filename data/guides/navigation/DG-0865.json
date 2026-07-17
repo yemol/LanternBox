@@ -1,0 +1,120 @@
+{
+  "id": "DG-0865",
+  "title": "撤离路线检查",
+  "category": "避难转移",
+  "priority": "P0",
+  "scenario": "需要判断某条撤离或外出路线是否还能走，尤其在洪水、坍塌、冲突、烟火、夜间或天气变化后。",
+  "goal": "把路线继续、绕行、等待和取消条件写清楚，避免硬闯已变化的危险路线。",
+  "keywords": [
+    "撤离路线检查",
+    "避难转移",
+    "P0",
+    "Navigation v0.1",
+    "Batch8-C2",
+    "撤离路线",
+    "备用路线",
+    "洪水",
+    "坡地",
+    "停止线",
+    "路线受阻",
+    "夜间",
+    "坍塌",
+    "绕行",
+    "路线还能不能走",
+    "洪水后走哪条路",
+    "路线停止线"
+  ],
+  "tools": [
+    "路线图",
+    "备用路线",
+    "风险评分表",
+    "水位或天气记录",
+    "人员状态记录"
+  ],
+  "steps": [
+    "对路线做风险评分，逐段检查积水、桥涵、坡地、坍塌、冲突、烟火和照明。",
+    "确认每段是否有返回点或备用路线。",
+    "设置继续、绕行、等待和取消条件。",
+    "标记不可通行点、危险边界和复查时间。",
+    "把路线版本交给留守人或同行成员。"
+  ],
+  "check": [
+    "危险点已标出。",
+    "备用路线存在且不是未经复查的未知路。",
+    "返回路线没有被切断。",
+    "继续或停止线不是临时口头决定。"
+  ],
+  "common_mistakes": [
+    "把熟路当作低风险路。",
+    "只看距离，不看水、坡地和夜间边界。",
+    "遇阻后直接跟随他人绕行。"
+  ],
+  "fallback": [
+    "改用已复查的备用路线。",
+    "缩短移动距离，只到最近安全点。",
+    "转入临时避难点等待复查。"
+  ],
+  "stop_or_escalate": [
+    "水流不明、桥面受损、坡面开裂、落石、烟火阻断、夜间照明不足或路线进入冲突区域时停止通行。",
+    "所有可选路线都缺返回点或风险边界不明时，不强行移动。"
+  ],
+  "related_wiki": [
+    "navigation-route-risk-score-001",
+    "navigation-flood-terrain-risk-001",
+    "navigation-alternate-route-selection-001",
+    "navigation-route-closure-recheck-001",
+    "navigation-flood-road-stop-line-001",
+    "navigation-night-route-risk-001",
+    "navigation-night-movement-stop-line-001",
+    "navigation-slope-landslide-bypass-001",
+    "navigation-evacuation-route-passability-review-001",
+    "navigation-evacuation-route-go-no-go-line-001",
+    "navigation-route-difficulty-record-001",
+    "navigation-danger-zone-marking-001"
+  ],
+  "notes": "Batch8-C2 Navigation v0.1 第一阶段行动知识链。",
+  "category_original": "避难转移",
+  "domains": [
+    "navigation",
+    "evacuation"
+  ],
+  "intents": [
+    "navigation_v0_1_action",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "navigation_field_movement"
+  ],
+  "objects": [
+    "撤离路线",
+    "备用路线",
+    "洪水",
+    "坡地",
+    "停止线"
+  ],
+  "signals": [
+    "路线受阻",
+    "洪水",
+    "夜间",
+    "坍塌",
+    "绕行"
+  ],
+  "risks": [
+    "flood",
+    "landslide",
+    "route_blocked",
+    "night_movement"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "navigation",
+  "primary_intent": "navigation_v0_1_action",
+  "top1_aliases": [
+    "撤离路线检查",
+    "路线还能不能走",
+    "洪水后走哪条路",
+    "路线停止线"
+  ],
+  "risk_level": "high"
+}

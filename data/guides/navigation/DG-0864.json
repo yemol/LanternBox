@@ -1,0 +1,112 @@
+{
+  "id": "DG-0864",
+  "title": "迷路后的定位与返回",
+  "category": "地图地形与环境监测",
+  "priority": "P0",
+  "scenario": "外出后方向不确定、路线标记丢失、GNSS 无 fix、地图不可用或无法确认当前位置。",
+  "goal": "先停止扩散，找到最近确定点，再选择返回、等待或发出位置报告。",
+  "keywords": [
+    "迷路后的定位与返回",
+    "地图地形与环境监测",
+    "P0",
+    "Navigation v0.1",
+    "Batch8-C2",
+    "迷路",
+    "最近确定点",
+    "GNSS",
+    "返回路线",
+    "轨迹",
+    "不知道在哪",
+    "无 fix",
+    "路线标记丢失",
+    "轨迹漂移",
+    "迷路怎么办",
+    "找回营地路线",
+    "GNSS 无 fix"
+  ],
+  "tools": [
+    "路线卡",
+    "最近检查点记录",
+    "FT track 或手机轨迹",
+    "哨子或灯光",
+    "纸笔"
+  ],
+  "steps": [
+    "停止继续深入，不开新路。",
+    "找最近确定点、最后检查点、明显地标或最后可信 track point。",
+    "比对方向、时间、地形、轨迹和身体状态。",
+    "优先返回最近确定点，而不是继续找目标。",
+    "记录迷路时间、最后可信位置和采取的返回动作。"
+  ],
+  "check": [
+    "最近确定点明确。",
+    "队伍人数完整，光照、体力和天气允许返回。",
+    "返回路线能被当前人员复述。"
+  ],
+  "common_mistakes": [
+    "边走边等定位恢复。",
+    "分散寻找方向。",
+    "把漂移轨迹当作安全返回线。"
+  ],
+  "fallback": [
+    "留在安全可见位置，用哨声、灯光、通信或纸条报告位置。",
+    "无通信时按原定等待规则保留体力。",
+    "有可信 track 片段时只用可信段转返回摘要。"
+  ],
+  "stop_or_escalate": [
+    "两个连续节点无法确认、天黑、天气恶化、有人受伤、GNSS 漂移明显或轨迹断点明显时停止继续移动。",
+    "无法回到最近确定点时，停止寻找目标并转入等待或位置报告。"
+  ],
+  "related_wiki": [
+    "navigation-lost-stop-and-last-known-point-001",
+    "navigation-gnss-no-fix-downgrade-001",
+    "navigation-bearing-distance-estimate-001",
+    "navigation-position-error-check-001",
+    "navigation-return-route-plan-001",
+    "navigation-track-to-return-summary-001",
+    "navigation-return-route-marking-001"
+  ],
+  "notes": "Batch8-C2 Navigation v0.1 第一阶段行动知识链。",
+  "category_original": "地图地形与环境监测",
+  "domains": [
+    "navigation",
+    "safety"
+  ],
+  "intents": [
+    "navigation_v0_1_action",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "navigation_field_movement"
+  ],
+  "objects": [
+    "迷路",
+    "最近确定点",
+    "GNSS",
+    "返回路线",
+    "轨迹"
+  ],
+  "signals": [
+    "不知道在哪",
+    "无 fix",
+    "路线标记丢失",
+    "轨迹漂移"
+  ],
+  "risks": [
+    "lost",
+    "exposure",
+    "route_expansion"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "navigation",
+  "primary_intent": "navigation_v0_1_action",
+  "top1_aliases": [
+    "迷路后的定位与返回",
+    "迷路怎么办",
+    "找回营地路线",
+    "GNSS 无 fix"
+  ],
+  "risk_level": "high"
+}

@@ -43980,5 +43980,402 @@
       "频率记录",
       "联系记录"
     ]
+  },
+  {
+    "id": "DG-0863",
+    "title": "个人外出路线规划",
+    "category": "地图地形与环境监测",
+    "category_original": "地图地形与环境监测",
+    "risk_level": "high",
+    "domains": [
+      "navigation",
+      "evacuation"
+    ],
+    "intents": [
+      "navigation_v0_1_action",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "navigation_field_movement"
+    ],
+    "objects": [
+      "外出路线",
+      "返回路线",
+      "检查点",
+      "折返线",
+      "路线卡"
+    ],
+    "signals": [
+      "外出",
+      "路线",
+      "返回",
+      "折返",
+      "地图不可用"
+    ],
+    "risks": [
+      "lost",
+      "night_movement",
+      "route_blocked"
+    ],
+    "keywords": [
+      "个人外出路线规划",
+      "地图地形与环境监测",
+      "P0",
+      "Navigation v0.1",
+      "Batch8-C2",
+      "外出路线",
+      "返回路线",
+      "检查点",
+      "折返线",
+      "路线卡",
+      "外出",
+      "路线",
+      "返回",
+      "折返",
+      "地图不可用",
+      "外出路线卡",
+      "回营地路线",
+      "出发前路线规划"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "navigation",
+    "primary_intent": "navigation_v0_1_action",
+    "top1_aliases": [
+      "个人外出路线规划",
+      "外出路线卡",
+      "回营地路线",
+      "出发前路线规划"
+    ]
+  },
+  {
+    "id": "DG-0864",
+    "title": "迷路后的定位与返回",
+    "category": "地图地形与环境监测",
+    "category_original": "地图地形与环境监测",
+    "risk_level": "high",
+    "domains": [
+      "navigation",
+      "safety"
+    ],
+    "intents": [
+      "navigation_v0_1_action",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "navigation_field_movement"
+    ],
+    "objects": [
+      "迷路",
+      "最近确定点",
+      "GNSS",
+      "返回路线",
+      "轨迹"
+    ],
+    "signals": [
+      "不知道在哪",
+      "无 fix",
+      "路线标记丢失",
+      "轨迹漂移"
+    ],
+    "risks": [
+      "lost",
+      "exposure",
+      "route_expansion"
+    ],
+    "keywords": [
+      "迷路后的定位与返回",
+      "地图地形与环境监测",
+      "P0",
+      "Navigation v0.1",
+      "Batch8-C2",
+      "迷路",
+      "最近确定点",
+      "GNSS",
+      "返回路线",
+      "轨迹",
+      "不知道在哪",
+      "无 fix",
+      "路线标记丢失",
+      "轨迹漂移",
+      "迷路怎么办",
+      "找回营地路线",
+      "GNSS 无 fix"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "navigation",
+    "primary_intent": "navigation_v0_1_action",
+    "top1_aliases": [
+      "迷路后的定位与返回",
+      "迷路怎么办",
+      "找回营地路线",
+      "GNSS 无 fix"
+    ]
+  },
+  {
+    "id": "DG-0865",
+    "title": "撤离路线检查",
+    "category": "避难转移",
+    "category_original": "避难转移",
+    "risk_level": "high",
+    "domains": [
+      "navigation",
+      "evacuation"
+    ],
+    "intents": [
+      "navigation_v0_1_action",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "navigation_field_movement"
+    ],
+    "objects": [
+      "撤离路线",
+      "备用路线",
+      "洪水",
+      "坡地",
+      "停止线"
+    ],
+    "signals": [
+      "路线受阻",
+      "洪水",
+      "夜间",
+      "坍塌",
+      "绕行"
+    ],
+    "risks": [
+      "flood",
+      "landslide",
+      "route_blocked",
+      "night_movement"
+    ],
+    "keywords": [
+      "撤离路线检查",
+      "避难转移",
+      "P0",
+      "Navigation v0.1",
+      "Batch8-C2",
+      "撤离路线",
+      "备用路线",
+      "洪水",
+      "坡地",
+      "停止线",
+      "路线受阻",
+      "夜间",
+      "坍塌",
+      "绕行",
+      "路线还能不能走",
+      "洪水后走哪条路",
+      "路线停止线"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "navigation",
+    "primary_intent": "navigation_v0_1_action",
+    "top1_aliases": [
+      "撤离路线检查",
+      "路线还能不能走",
+      "洪水后走哪条路",
+      "路线停止线"
+    ]
+  },
+  {
+    "id": "DG-0866",
+    "title": "检查点记录与团队集合",
+    "category": "地图地形与环境监测",
+    "category_original": "地图地形与环境监测",
+    "risk_level": "high",
+    "domains": [
+      "navigation",
+      "comms",
+      "organization"
+    ],
+    "intents": [
+      "navigation_v0_1_action",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "navigation_field_movement"
+    ],
+    "objects": [
+      "检查点",
+      "集合点",
+      "位置报告",
+      "留守记录",
+      "超时"
+    ],
+    "signals": [
+      "错过检查点",
+      "队伍分散",
+      "位置不明",
+      "集合点失效"
+    ],
+    "risks": [
+      "lost",
+      "separation",
+      "communication_failure"
+    ],
+    "keywords": [
+      "检查点记录与团队集合",
+      "地图地形与环境监测",
+      "P0",
+      "Navigation v0.1",
+      "Batch8-C2",
+      "检查点",
+      "集合点",
+      "位置报告",
+      "留守记录",
+      "超时",
+      "错过检查点",
+      "队伍分散",
+      "位置不明",
+      "集合点失效",
+      "检查点错过",
+      "集合点规则"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "navigation",
+    "primary_intent": "navigation_v0_1_action",
+    "top1_aliases": [
+      "检查点记录与团队集合",
+      "检查点错过",
+      "位置报告",
+      "集合点规则"
+    ]
+  },
+  {
+    "id": "DG-0867",
+    "title": "GNSS 坐标记录",
+    "category": "地图地形与环境监测",
+    "category_original": "地图地形与环境监测",
+    "risk_level": "caution",
+    "domains": [
+      "navigation",
+      "records"
+    ],
+    "intents": [
+      "navigation_v0_1_action",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "navigation_field_movement"
+    ],
+    "objects": [
+      "GNSS",
+      "坐标",
+      "fix",
+      "点位",
+      "纸质备份"
+    ],
+    "signals": [
+      "坐标",
+      "无 fix",
+      "位置跳变",
+      "集合点"
+    ],
+    "risks": [
+      "position_error",
+      "lost"
+    ],
+    "keywords": [
+      "GNSS 坐标记录",
+      "地图地形与环境监测",
+      "P0",
+      "Navigation v0.1",
+      "Batch8-C2",
+      "GNSS",
+      "坐标",
+      "fix",
+      "点位",
+      "纸质备份",
+      "无 fix",
+      "位置跳变",
+      "集合点",
+      "坐标怎么记",
+      "GPS 点位记录",
+      "fix 状态"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "navigation",
+    "primary_intent": "navigation_v0_1_action",
+    "top1_aliases": [
+      "GNSS 坐标记录",
+      "坐标怎么记",
+      "GPS 点位记录",
+      "fix 状态"
+    ]
+  },
+  {
+    "id": "DG-0870",
+    "title": "野外任务轨迹记录",
+    "category": "地图地形与环境监测",
+    "category_original": "地图地形与环境监测",
+    "risk_level": "caution",
+    "domains": [
+      "navigation",
+      "records"
+    ],
+    "intents": [
+      "navigation_v0_1_action",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "navigation_field_movement"
+    ],
+    "objects": [
+      "FT track",
+      "session",
+      "path point",
+      "轨迹摘要",
+      "任务路线"
+    ],
+    "signals": [
+      "track",
+      "轨迹",
+      "path point",
+      "session",
+      "返回摘要"
+    ],
+    "risks": [
+      "position_error",
+      "record_loss",
+      "lost"
+    ],
+    "keywords": [
+      "野外任务轨迹记录",
+      "地图地形与环境监测",
+      "P0",
+      "Navigation v0.1",
+      "Batch8-C2",
+      "FT track",
+      "session",
+      "path point",
+      "轨迹摘要",
+      "任务路线",
+      "track",
+      "轨迹",
+      "返回摘要",
+      "轨迹转返回路线",
+      "path point 记录"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "navigation",
+    "primary_intent": "navigation_v0_1_action",
+    "top1_aliases": [
+      "野外任务轨迹记录",
+      "FT track",
+      "轨迹转返回路线",
+      "path point 记录"
+    ]
   }
 ]

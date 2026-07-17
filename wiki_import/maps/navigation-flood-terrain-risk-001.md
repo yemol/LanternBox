@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用于洪水风险地形的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 洪水风险地形, 地图地形与环境监测, P2, 长期重建, 离线知识, 记录, 判断
-guide_links: 
+guide_links: DG-0865
 kiwix_topics: 洪水风险地形, Topographic map, Weather observation, Environmental monitoring
 last_reviewed: 2026-07-03
 status: published

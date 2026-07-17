@@ -1,0 +1,107 @@
+{
+  "id": "DG-0867",
+  "title": "GNSS 坐标记录",
+  "category": "地图地形与环境监测",
+  "priority": "P0",
+  "scenario": "使用 FT、手机或 GNSS 设备记录基地点、水源、风险点、集合点、检查点或路线节点。",
+  "goal": "让坐标记录包含 fix、时间、来源、地标和复查状态，避免错误点位进入路线决策。",
+  "keywords": [
+    "GNSS 坐标记录",
+    "地图地形与环境监测",
+    "P0",
+    "Navigation v0.1",
+    "Batch8-C2",
+    "GNSS",
+    "坐标",
+    "fix",
+    "点位",
+    "纸质备份",
+    "无 fix",
+    "位置跳变",
+    "集合点",
+    "坐标怎么记",
+    "GPS 点位记录",
+    "fix 状态"
+  ],
+  "tools": [
+    "FT 或 GNSS 设备",
+    "纸质点位表",
+    "地图或草图",
+    "铅笔"
+  ],
+  "steps": [
+    "确认 fix 状态、时间来源和设备电量。",
+    "记录坐标、时间、设备、精度或卫星状态、地标描述和记录人。",
+    "做第二次读数或用地标复核。",
+    "写入纸质备份或同步给留守人。",
+    "标记点位类型和下次复查时间。"
+  ],
+  "check": [
+    "有 fix 且位置没有明显跳变。",
+    "坐标有时间、来源和地标。",
+    "纸质备份存在。",
+    "单点漂移已复查。"
+  ],
+  "common_mistakes": [
+    "只发坐标数字，不发地标。",
+    "把无 fix 或漂移点当作集合点。",
+    "混用坐标格式却不标明来源。"
+  ],
+  "fallback": [
+    "用地标、方向、距离、步数、时间和手绘草图替代坐标。",
+    "无稳定 fix 时只记录最近确定点和待复查范围。"
+  ],
+  "stop_or_escalate": [
+    "无 fix、位置跳变、地标无法说明、设备电量不足或记录人无法解释坐标来源时，不把该坐标作为关键决策依据。",
+    "关键点未经复查时，不作为集合点、危险绕行点或返回依据。"
+  ],
+  "related_wiki": [
+    "navigation-gnss-basics-001",
+    "navigation-coordinate-record-format-001",
+    "navigation-coordinate-paper-backup-001",
+    "navigation-position-error-check-001",
+    "navigation-gnss-no-fix-downgrade-001"
+  ],
+  "notes": "Batch8-C2 Navigation v0.1 第一阶段行动知识链。",
+  "category_original": "地图地形与环境监测",
+  "domains": [
+    "navigation",
+    "records"
+  ],
+  "intents": [
+    "navigation_v0_1_action",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "navigation_field_movement"
+  ],
+  "objects": [
+    "GNSS",
+    "坐标",
+    "fix",
+    "点位",
+    "纸质备份"
+  ],
+  "signals": [
+    "坐标",
+    "无 fix",
+    "位置跳变",
+    "集合点"
+  ],
+  "risks": [
+    "position_error",
+    "lost"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "navigation",
+  "primary_intent": "navigation_v0_1_action",
+  "top1_aliases": [
+    "GNSS 坐标记录",
+    "坐标怎么记",
+    "GPS 点位记录",
+    "fix 状态"
+  ],
+  "risk_level": "caution"
+}

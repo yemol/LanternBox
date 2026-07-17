@@ -71382,5 +71382,689 @@
       "联系记录"
     ],
     "risk_level": "caution"
+  },
+  {
+    "id": "DG-0863",
+    "title": "个人外出路线规划",
+    "category": "地图地形与环境监测",
+    "priority": "P0",
+    "scenario": "个人外出取水、巡查、采集或寻找物资，需要在出发前确定去程、返回、检查点、风险和停止线。",
+    "goal": "让外出行动有路线卡、返回线、检查点和留守记录，目标未达时也能安全回撤。",
+    "keywords": [
+      "个人外出路线规划",
+      "地图地形与环境监测",
+      "P0",
+      "Navigation v0.1",
+      "Batch8-C2",
+      "外出路线",
+      "返回路线",
+      "检查点",
+      "折返线",
+      "路线卡",
+      "外出",
+      "路线",
+      "返回",
+      "折返",
+      "地图不可用",
+      "外出路线卡",
+      "回营地路线",
+      "出发前路线规划"
+    ],
+    "tools": [
+      "纸质地图或草图",
+      "路线卡",
+      "铅笔",
+      "计时工具",
+      "照明和通信窗口记录"
+    ],
+    "steps": [
+      "写明人员、目的、出发时间、最晚返回时间和留守联系人。",
+      "标出起点、目标、去程、返回路线和备用路线。",
+      "设置检查点、折返线、夜间停止线和可等待位置。",
+      "标出危险点、禁行点、通信窗口和最近安全点。",
+      "出发前把路线卡交给留守人，并确认对方能复述。"
+    ],
+    "check": [
+      "返回路线能被第二个人复述。",
+      "至少有一个备用路线或撤回点。",
+      "最晚返回时间、折返线和夜间停止线明确。",
+      "留守人知道超时后先看哪张记录。"
+    ],
+    "common_mistakes": [
+      "只写目标，不写返回路线。",
+      "把最短路线当作安全路线。",
+      "临时改路却不更新留守记录。"
+    ],
+    "fallback": [
+      "没有地图时使用手绘草图、地标顺序、步数和时间。",
+      "不能确认返回时缩短任务距离，只到最近确定点。",
+      "无人留守时不做远距离外出。"
+    ],
+    "stop_or_escalate": [
+      "无返回路线、无地图或草图、夜间照明不足、天气恶化、人员体力不足或通信窗口不可用时，不扩大外出范围。",
+      "到折返时间、路线受阻或返回资源不足时停止向目标推进并返回。"
+    ],
+    "related_wiki": [
+      "navigation-outbound-route-card-001",
+      "navigation-route-checkpoint-numbering-001",
+      "navigation-return-route-plan-001",
+      "navigation-time-distance-turnback-line-001",
+      "navigation-compass-orientation-basics-001",
+      "navigation-bearing-distance-estimate-001",
+      "navigation-offline-map-version-control-001",
+      "navigation-offline-map-layer-check-001",
+      "navigation-paper-map-index-card-001",
+      "navigation-night-movement-stop-line-001",
+      "navigation-offline-map-maintenance-001",
+      "navigation-return-route-marking-001",
+      "navigation-night-route-risk-001"
+    ],
+    "notes": "Batch8-C2 Navigation v0.1 第一阶段行动知识链。",
+    "category_original": "地图地形与环境监测",
+    "domains": [
+      "navigation",
+      "evacuation"
+    ],
+    "intents": [
+      "navigation_v0_1_action",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "navigation_field_movement"
+    ],
+    "objects": [
+      "外出路线",
+      "返回路线",
+      "检查点",
+      "折返线",
+      "路线卡"
+    ],
+    "signals": [
+      "外出",
+      "路线",
+      "返回",
+      "折返",
+      "地图不可用"
+    ],
+    "risks": [
+      "lost",
+      "night_movement",
+      "route_blocked"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "navigation",
+    "primary_intent": "navigation_v0_1_action",
+    "top1_aliases": [
+      "个人外出路线规划",
+      "外出路线卡",
+      "回营地路线",
+      "出发前路线规划"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0864",
+    "title": "迷路后的定位与返回",
+    "category": "地图地形与环境监测",
+    "priority": "P0",
+    "scenario": "外出后方向不确定、路线标记丢失、GNSS 无 fix、地图不可用或无法确认当前位置。",
+    "goal": "先停止扩散，找到最近确定点，再选择返回、等待或发出位置报告。",
+    "keywords": [
+      "迷路后的定位与返回",
+      "地图地形与环境监测",
+      "P0",
+      "Navigation v0.1",
+      "Batch8-C2",
+      "迷路",
+      "最近确定点",
+      "GNSS",
+      "返回路线",
+      "轨迹",
+      "不知道在哪",
+      "无 fix",
+      "路线标记丢失",
+      "轨迹漂移",
+      "迷路怎么办",
+      "找回营地路线",
+      "GNSS 无 fix"
+    ],
+    "tools": [
+      "路线卡",
+      "最近检查点记录",
+      "FT track 或手机轨迹",
+      "哨子或灯光",
+      "纸笔"
+    ],
+    "steps": [
+      "停止继续深入，不开新路。",
+      "找最近确定点、最后检查点、明显地标或最后可信 track point。",
+      "比对方向、时间、地形、轨迹和身体状态。",
+      "优先返回最近确定点，而不是继续找目标。",
+      "记录迷路时间、最后可信位置和采取的返回动作。"
+    ],
+    "check": [
+      "最近确定点明确。",
+      "队伍人数完整，光照、体力和天气允许返回。",
+      "返回路线能被当前人员复述。"
+    ],
+    "common_mistakes": [
+      "边走边等定位恢复。",
+      "分散寻找方向。",
+      "把漂移轨迹当作安全返回线。"
+    ],
+    "fallback": [
+      "留在安全可见位置，用哨声、灯光、通信或纸条报告位置。",
+      "无通信时按原定等待规则保留体力。",
+      "有可信 track 片段时只用可信段转返回摘要。"
+    ],
+    "stop_or_escalate": [
+      "两个连续节点无法确认、天黑、天气恶化、有人受伤、GNSS 漂移明显或轨迹断点明显时停止继续移动。",
+      "无法回到最近确定点时，停止寻找目标并转入等待或位置报告。"
+    ],
+    "related_wiki": [
+      "navigation-lost-stop-and-last-known-point-001",
+      "navigation-gnss-no-fix-downgrade-001",
+      "navigation-bearing-distance-estimate-001",
+      "navigation-position-error-check-001",
+      "navigation-return-route-plan-001",
+      "navigation-track-to-return-summary-001",
+      "navigation-return-route-marking-001"
+    ],
+    "notes": "Batch8-C2 Navigation v0.1 第一阶段行动知识链。",
+    "category_original": "地图地形与环境监测",
+    "domains": [
+      "navigation",
+      "safety"
+    ],
+    "intents": [
+      "navigation_v0_1_action",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "navigation_field_movement"
+    ],
+    "objects": [
+      "迷路",
+      "最近确定点",
+      "GNSS",
+      "返回路线",
+      "轨迹"
+    ],
+    "signals": [
+      "不知道在哪",
+      "无 fix",
+      "路线标记丢失",
+      "轨迹漂移"
+    ],
+    "risks": [
+      "lost",
+      "exposure",
+      "route_expansion"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "navigation",
+    "primary_intent": "navigation_v0_1_action",
+    "top1_aliases": [
+      "迷路后的定位与返回",
+      "迷路怎么办",
+      "找回营地路线",
+      "GNSS 无 fix"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0865",
+    "title": "撤离路线检查",
+    "category": "避难转移",
+    "priority": "P0",
+    "scenario": "需要判断某条撤离或外出路线是否还能走，尤其在洪水、坍塌、冲突、烟火、夜间或天气变化后。",
+    "goal": "把路线继续、绕行、等待和取消条件写清楚，避免硬闯已变化的危险路线。",
+    "keywords": [
+      "撤离路线检查",
+      "避难转移",
+      "P0",
+      "Navigation v0.1",
+      "Batch8-C2",
+      "撤离路线",
+      "备用路线",
+      "洪水",
+      "坡地",
+      "停止线",
+      "路线受阻",
+      "夜间",
+      "坍塌",
+      "绕行",
+      "路线还能不能走",
+      "洪水后走哪条路",
+      "路线停止线"
+    ],
+    "tools": [
+      "路线图",
+      "备用路线",
+      "风险评分表",
+      "水位或天气记录",
+      "人员状态记录"
+    ],
+    "steps": [
+      "对路线做风险评分，逐段检查积水、桥涵、坡地、坍塌、冲突、烟火和照明。",
+      "确认每段是否有返回点或备用路线。",
+      "设置继续、绕行、等待和取消条件。",
+      "标记不可通行点、危险边界和复查时间。",
+      "把路线版本交给留守人或同行成员。"
+    ],
+    "check": [
+      "危险点已标出。",
+      "备用路线存在且不是未经复查的未知路。",
+      "返回路线没有被切断。",
+      "继续或停止线不是临时口头决定。"
+    ],
+    "common_mistakes": [
+      "把熟路当作低风险路。",
+      "只看距离，不看水、坡地和夜间边界。",
+      "遇阻后直接跟随他人绕行。"
+    ],
+    "fallback": [
+      "改用已复查的备用路线。",
+      "缩短移动距离，只到最近安全点。",
+      "转入临时避难点等待复查。"
+    ],
+    "stop_or_escalate": [
+      "水流不明、桥面受损、坡面开裂、落石、烟火阻断、夜间照明不足或路线进入冲突区域时停止通行。",
+      "所有可选路线都缺返回点或风险边界不明时，不强行移动。"
+    ],
+    "related_wiki": [
+      "navigation-route-risk-score-001",
+      "navigation-flood-terrain-risk-001",
+      "navigation-alternate-route-selection-001",
+      "navigation-route-closure-recheck-001",
+      "navigation-flood-road-stop-line-001",
+      "navigation-night-route-risk-001",
+      "navigation-night-movement-stop-line-001",
+      "navigation-slope-landslide-bypass-001",
+      "navigation-evacuation-route-passability-review-001",
+      "navigation-evacuation-route-go-no-go-line-001",
+      "navigation-route-difficulty-record-001",
+      "navigation-danger-zone-marking-001"
+    ],
+    "notes": "Batch8-C2 Navigation v0.1 第一阶段行动知识链。",
+    "category_original": "避难转移",
+    "domains": [
+      "navigation",
+      "evacuation"
+    ],
+    "intents": [
+      "navigation_v0_1_action",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "navigation_field_movement"
+    ],
+    "objects": [
+      "撤离路线",
+      "备用路线",
+      "洪水",
+      "坡地",
+      "停止线"
+    ],
+    "signals": [
+      "路线受阻",
+      "洪水",
+      "夜间",
+      "坍塌",
+      "绕行"
+    ],
+    "risks": [
+      "flood",
+      "landslide",
+      "route_blocked",
+      "night_movement"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "navigation",
+    "primary_intent": "navigation_v0_1_action",
+    "top1_aliases": [
+      "撤离路线检查",
+      "路线还能不能走",
+      "洪水后走哪条路",
+      "路线停止线"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0866",
+    "title": "检查点记录与团队集合",
+    "category": "地图地形与环境监测",
+    "priority": "P0",
+    "scenario": "个人外出或小队分组行动时，需要用检查点、集合点和位置报告让留守方判断是否正常、超时或需要停止行动。",
+    "goal": "让检查点、集合点、位置报告和超时处理形成同一张可追踪记录。",
+    "keywords": [
+      "检查点记录与团队集合",
+      "地图地形与环境监测",
+      "P0",
+      "Navigation v0.1",
+      "Batch8-C2",
+      "检查点",
+      "集合点",
+      "位置报告",
+      "留守记录",
+      "超时",
+      "错过检查点",
+      "队伍分散",
+      "位置不明",
+      "集合点失效",
+      "检查点错过",
+      "集合点规则"
+    ],
+    "tools": [
+      "检查点表",
+      "集合点规则",
+      "地图或草图",
+      "通信日志",
+      "纸笔"
+    ],
+    "steps": [
+      "编号起点、转折点、危险点、补给点、目标点和返回点。",
+      "为每个检查点写到达时间、最晚报告时间和下一动作。",
+      "定义主集合点、备用集合点和失效条件。",
+      "位置报告包含坐标、地标、方向、风险和下一窗口。",
+      "留守方记录超时、等待、回撤或启动搜索的边界。"
+    ],
+    "check": [
+      "检查点编号清楚。",
+      "集合点至少两级。",
+      "位置报告字段完整并有回执。",
+      "通信记录和纸图编号一致。"
+    ],
+    "common_mistakes": [
+      "只说地名，不说检查点编号。",
+      "集合点失效后临时改点但不记录。",
+      "错过窗口后立刻分散寻找。"
+    ],
+    "fallback": [
+      "回到上一个检查点。",
+      "转备用集合点。",
+      "用纸条、哨声、灯光或下一个通信窗口降级。"
+    ],
+    "stop_or_escalate": [
+      "检查点错过、集合点失效、队伍分散、天气恶化、危险点扩大或连续通信窗口失败时停止按原计划推进。",
+      "最后确认点不明时，不派单人盲目外出寻找。"
+    ],
+    "related_wiki": [
+      "navigation-route-checkpoint-numbering-001",
+      "navigation-team-rally-point-rules-001",
+      "navigation-missed-checkpoint-response-001",
+      "navigation-map-symbol-standard-001",
+      "navigation-poi-minimum-fields-001",
+      "communication-position-report-navigation-fields-001",
+      "navigation-coordinate-paper-backup-001",
+      "navigation-danger-zone-marking-001"
+    ],
+    "notes": "Batch8-C2 Navigation v0.1 第一阶段行动知识链。",
+    "category_original": "地图地形与环境监测",
+    "domains": [
+      "navigation",
+      "comms",
+      "organization"
+    ],
+    "intents": [
+      "navigation_v0_1_action",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "navigation_field_movement"
+    ],
+    "objects": [
+      "检查点",
+      "集合点",
+      "位置报告",
+      "留守记录",
+      "超时"
+    ],
+    "signals": [
+      "错过检查点",
+      "队伍分散",
+      "位置不明",
+      "集合点失效"
+    ],
+    "risks": [
+      "lost",
+      "separation",
+      "communication_failure"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "navigation",
+    "primary_intent": "navigation_v0_1_action",
+    "top1_aliases": [
+      "检查点记录与团队集合",
+      "检查点错过",
+      "位置报告",
+      "集合点规则"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0867",
+    "title": "GNSS 坐标记录",
+    "category": "地图地形与环境监测",
+    "priority": "P0",
+    "scenario": "使用 FT、手机或 GNSS 设备记录基地点、水源、风险点、集合点、检查点或路线节点。",
+    "goal": "让坐标记录包含 fix、时间、来源、地标和复查状态，避免错误点位进入路线决策。",
+    "keywords": [
+      "GNSS 坐标记录",
+      "地图地形与环境监测",
+      "P0",
+      "Navigation v0.1",
+      "Batch8-C2",
+      "GNSS",
+      "坐标",
+      "fix",
+      "点位",
+      "纸质备份",
+      "无 fix",
+      "位置跳变",
+      "集合点",
+      "坐标怎么记",
+      "GPS 点位记录",
+      "fix 状态"
+    ],
+    "tools": [
+      "FT 或 GNSS 设备",
+      "纸质点位表",
+      "地图或草图",
+      "铅笔"
+    ],
+    "steps": [
+      "确认 fix 状态、时间来源和设备电量。",
+      "记录坐标、时间、设备、精度或卫星状态、地标描述和记录人。",
+      "做第二次读数或用地标复核。",
+      "写入纸质备份或同步给留守人。",
+      "标记点位类型和下次复查时间。"
+    ],
+    "check": [
+      "有 fix 且位置没有明显跳变。",
+      "坐标有时间、来源和地标。",
+      "纸质备份存在。",
+      "单点漂移已复查。"
+    ],
+    "common_mistakes": [
+      "只发坐标数字，不发地标。",
+      "把无 fix 或漂移点当作集合点。",
+      "混用坐标格式却不标明来源。"
+    ],
+    "fallback": [
+      "用地标、方向、距离、步数、时间和手绘草图替代坐标。",
+      "无稳定 fix 时只记录最近确定点和待复查范围。"
+    ],
+    "stop_or_escalate": [
+      "无 fix、位置跳变、地标无法说明、设备电量不足或记录人无法解释坐标来源时，不把该坐标作为关键决策依据。",
+      "关键点未经复查时，不作为集合点、危险绕行点或返回依据。"
+    ],
+    "related_wiki": [
+      "navigation-gnss-basics-001",
+      "navigation-coordinate-record-format-001",
+      "navigation-coordinate-paper-backup-001",
+      "navigation-position-error-check-001",
+      "navigation-gnss-no-fix-downgrade-001"
+    ],
+    "notes": "Batch8-C2 Navigation v0.1 第一阶段行动知识链。",
+    "category_original": "地图地形与环境监测",
+    "domains": [
+      "navigation",
+      "records"
+    ],
+    "intents": [
+      "navigation_v0_1_action",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "navigation_field_movement"
+    ],
+    "objects": [
+      "GNSS",
+      "坐标",
+      "fix",
+      "点位",
+      "纸质备份"
+    ],
+    "signals": [
+      "坐标",
+      "无 fix",
+      "位置跳变",
+      "集合点"
+    ],
+    "risks": [
+      "position_error",
+      "lost"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "navigation",
+    "primary_intent": "navigation_v0_1_action",
+    "top1_aliases": [
+      "GNSS 坐标记录",
+      "坐标怎么记",
+      "GPS 点位记录",
+      "fix 状态"
+    ],
+    "risk_level": "caution"
+  },
+  {
+    "id": "DG-0870",
+    "title": "野外任务轨迹记录",
+    "category": "地图地形与环境监测",
+    "priority": "P0",
+    "scenario": "使用 FT、手机或 GNSS 记录巡查、取水、采集、探路或撤离前侦察轨迹，并需要把轨迹转成可返回、可交接的路线摘要。",
+    "goal": "把 track、session 和 path point 转成可复盘、可返回、可交接的任务路线记录。",
+    "keywords": [
+      "野外任务轨迹记录",
+      "地图地形与环境监测",
+      "P0",
+      "Navigation v0.1",
+      "Batch8-C2",
+      "FT track",
+      "session",
+      "path point",
+      "轨迹摘要",
+      "任务路线",
+      "track",
+      "轨迹",
+      "返回摘要",
+      "轨迹转返回路线",
+      "path point 记录"
+    ],
+    "tools": [
+      "FT 或定位设备",
+      "SD 记录",
+      "路线卡",
+      "纸笔",
+      "地图或草图"
+    ],
+    "steps": [
+      "开始 session，确认 base 和时间。",
+      "记录关键 path point：转折点、危险点、资源点、等待点和返回点。",
+      "给重要点写备注，不只保存坐标。",
+      "返回后检查漂移、跳点、断点和停留点。",
+      "转成纸质路线摘要：地标、方向、耗时、危险点和返回线。"
+    ],
+    "check": [
+      "session 有起止。",
+      "关键点有时间和备注。",
+      "轨迹可回放且异常段已标记。",
+      "返回摘要可被第二个人理解。"
+    ],
+    "common_mistakes": [
+      "只保存轨迹线，不写关键点含义。",
+      "忽略漂移和断点。",
+      "把一次任务轨迹直接当长期安全路线。"
+    ],
+    "fallback": [
+      "手写点位和时间。",
+      "用地标顺序替代轨迹。",
+      "回到基地后补录为任务路线记录。"
+    ],
+    "stop_or_escalate": [
+      "无 fix、SD 不可写、轨迹跳点、设备低电、路线与实际不符或 base 不可信时，不按轨迹直接返回。",
+      "关键断点未核实时，不让第二个人照轨迹外出。"
+    ],
+    "related_wiki": [
+      "navigation-gps-track-minimum-fields-001",
+      "navigation-track-drift-gap-check-001",
+      "navigation-track-to-return-summary-001",
+      "navigation-task-route-record-001",
+      "navigation-poi-minimum-fields-001"
+    ],
+    "notes": "Batch8-C2 Navigation v0.1 第一阶段行动知识链。",
+    "category_original": "地图地形与环境监测",
+    "domains": [
+      "navigation",
+      "records"
+    ],
+    "intents": [
+      "navigation_v0_1_action",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "navigation_field_movement"
+    ],
+    "objects": [
+      "FT track",
+      "session",
+      "path point",
+      "轨迹摘要",
+      "任务路线"
+    ],
+    "signals": [
+      "track",
+      "轨迹",
+      "path point",
+      "session",
+      "返回摘要"
+    ],
+    "risks": [
+      "position_error",
+      "record_loss",
+      "lost"
+    ],
+    "negative_keywords": [],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "navigation",
+    "primary_intent": "navigation_v0_1_action",
+    "top1_aliases": [
+      "野外任务轨迹记录",
+      "FT track",
+      "轨迹转返回路线",
+      "path point 记录"
+    ],
+    "risk_level": "caution"
   }
 ]

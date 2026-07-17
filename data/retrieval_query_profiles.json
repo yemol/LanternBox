@@ -3032,6 +3032,361 @@
         "食物保存",
         "水源选择"
       ]
+    },
+    {
+      "name": "navigation_terrain_risk",
+      "object_triggers": [
+        "道路",
+        "旧路",
+        "原来的道路",
+        "路线",
+        "撤离路线",
+        "夜间移动",
+        "夜晚",
+        "桥",
+        "桥梁",
+        "山区道路",
+        "山路",
+        "坡地",
+        "滑坡",
+        "洪水"
+      ],
+      "state_triggers": [
+        "洪水后",
+        "还能走",
+        "能不能走",
+        "怎么判断",
+        "路线风险",
+        "风险",
+        "封路",
+        "绕行",
+        "危险",
+        "夜间",
+        "夜晚",
+        "必须移动",
+        "滑坡",
+        "坍塌"
+      ],
+      "aliases": [
+        "撤离路线检查",
+        "路线还能不能走",
+        "洪水后走哪条路",
+        "洪水后道路停止线",
+        "洪水风险地形",
+        "夜间路线风险",
+        "夜间移动停止线",
+        "路线风险评分",
+        "危险地形绕行",
+        "路线停止线"
+      ],
+      "target_domains": [
+        "navigation"
+      ],
+      "target_slug_domains": [
+        "navigation"
+      ],
+      "target_categories": [
+        "地图地形与环境监测",
+        "避难转移"
+      ],
+      "candidate_anchor_terms": [
+        "撤离路线检查",
+        "路线还能不能走",
+        "洪水后走哪条路",
+        "路线停止线",
+        "路线风险",
+        "洪水后道路",
+        "洪水风险地形",
+        "夜间路线",
+        "夜间移动",
+        "停止通行",
+        "绕行",
+        "返回点"
+      ],
+      "candidate_anchor_boost": 104,
+      "candidate_anchor_miss_penalty": 140,
+      "domain_boost": 72,
+      "domain_mismatch_penalty": 165,
+      "title_alias_boost": 215,
+      "mismatch_unless_context": [
+        "取水",
+        "饮水",
+        "水桶",
+        "水质",
+        "厕所",
+        "露营点",
+        "庇护所"
+      ]
+    },
+    {
+      "name": "navigation_route_planning",
+      "object_triggers": [
+        "外出",
+        "采集",
+        "物资",
+        "路线",
+        "外出路线",
+        "检查点",
+        "集合点",
+        "返回路线",
+        "回营地",
+        "营地",
+        "路线记录",
+        "路线卡"
+      ],
+      "state_triggers": [
+        "规划",
+        "计划",
+        "设置",
+        "编号",
+        "记录",
+        "怎么",
+        "怎么给",
+        "回来",
+        "返回",
+        "下次",
+        "回营地",
+        "出发前"
+      ],
+      "aliases": [
+        "个人外出路线规划",
+        "外出路线卡",
+        "路线检查点编号",
+        "检查点记录与团队集合",
+        "返回路线规划",
+        "时间距离折返线",
+        "回营地路线",
+        "出发前路线规划",
+        "野外任务轨迹记录"
+      ],
+      "target_domains": [
+        "navigation"
+      ],
+      "target_slug_domains": [
+        "navigation"
+      ],
+      "target_categories": [
+        "地图地形与环境监测"
+      ],
+      "candidate_anchor_terms": [
+        "个人外出路线规划",
+        "外出路线卡",
+        "路线检查点",
+        "检查点",
+        "集合点",
+        "返回路线",
+        "路线卡",
+        "折返线",
+        "回营地",
+        "留守记录",
+        "轨迹记录"
+      ],
+      "candidate_anchor_boost": 100,
+      "candidate_anchor_miss_penalty": 135,
+      "domain_boost": 70,
+      "domain_mismatch_penalty": 160,
+      "title_alias_boost": 210,
+      "mismatch_unless_context": [
+        "通信窗口",
+        "物资库存",
+        "食物采集种类",
+        "工具清单",
+        "庇护选址"
+      ]
+    },
+    {
+      "name": "navigation_lost_return",
+      "object_triggers": [
+        "迷路",
+        "回营地",
+        "营地",
+        "路线",
+        "安全路线",
+        "走过一次",
+        "已走过",
+        "原路",
+        "返回路线",
+        "历史路线"
+      ],
+      "state_triggers": [
+        "回来",
+        "返回",
+        "回哪里",
+        "回营地",
+        "下次",
+        "怎么回来",
+        "找不到",
+        "不知道回哪里",
+        "原路返回",
+        "复用"
+      ],
+      "aliases": [
+        "迷路后的定位与返回",
+        "返回路线规划",
+        "走过路线返回",
+        "历史安全路线返回",
+        "原路返回",
+        "回营地路线",
+        "最后确认点",
+        "轨迹转返回摘要"
+      ],
+      "target_domains": [
+        "navigation"
+      ],
+      "target_slug_domains": [
+        "navigation"
+      ],
+      "target_categories": [
+        "地图地形与环境监测"
+      ],
+      "candidate_anchor_terms": [
+        "迷路后的定位与返回",
+        "返回路线",
+        "最近确定点",
+        "最后确认点",
+        "回营地",
+        "原路返回",
+        "轨迹转返回",
+        "路线卡",
+        "不扩大搜索"
+      ],
+      "candidate_anchor_boost": 104,
+      "candidate_anchor_miss_penalty": 140,
+      "domain_boost": 72,
+      "domain_mismatch_penalty": 165,
+      "title_alias_boost": 215,
+      "mismatch_unless_context": [
+        "人员冲突",
+        "陌生人",
+        "治安",
+        "夜间厕所",
+        "低亮"
+      ]
+    },
+    {
+      "name": "navigation_checkpoint_management",
+      "object_triggers": [
+        "检查点",
+        "集合点",
+        "位置报告",
+        "路线编号",
+        "检查点编号"
+      ],
+      "state_triggers": [
+        "设置",
+        "编号",
+        "记录",
+        "怎么给",
+        "怎么设置",
+        "错过",
+        "超时",
+        "共享",
+        "报告"
+      ],
+      "aliases": [
+        "检查点记录与团队集合",
+        "路线检查点编号",
+        "检查点错过",
+        "集合点规则",
+        "位置报告",
+        "超时处理",
+        "留守记录"
+      ],
+      "target_domains": [
+        "navigation"
+      ],
+      "target_slug_domains": [
+        "navigation"
+      ],
+      "target_categories": [
+        "地图地形与环境监测"
+      ],
+      "candidate_anchor_terms": [
+        "检查点记录与团队集合",
+        "路线检查点编号",
+        "检查点",
+        "集合点",
+        "位置报告",
+        "最晚报告时间",
+        "超时",
+        "留守方",
+        "回执"
+      ],
+      "candidate_anchor_boost": 112,
+      "candidate_anchor_miss_penalty": 150,
+      "domain_boost": 76,
+      "domain_mismatch_penalty": 170,
+      "title_alias_boost": 250,
+      "mismatch_unless_context": [
+        "通信窗口频率",
+        "库存检查点",
+        "软件断点",
+        "测试断点"
+      ]
+    },
+    {
+      "name": "navigation_track_management",
+      "object_triggers": [
+        "GPS track",
+        "GPS 轨迹",
+        "轨迹",
+        "track",
+        "session",
+        "route history",
+        "历史路线",
+        "过去走过",
+        "走过哪些路线",
+        "路线记录"
+      ],
+      "state_triggers": [
+        "记录",
+        "怎么看",
+        "怎么记录",
+        "回来后",
+        "路径保存",
+        "返回摘要",
+        "路线历史",
+        "下次",
+        "复盘"
+      ],
+      "aliases": [
+        "野外任务轨迹记录",
+        "GPS 轨迹最小字段",
+        "轨迹转返回摘要",
+        "轨迹漂移和缺口检查",
+        "路线历史记录",
+        "session 轨迹记录"
+      ],
+      "target_domains": [
+        "navigation"
+      ],
+      "target_slug_domains": [
+        "navigation"
+      ],
+      "target_categories": [
+        "地图地形与环境监测"
+      ],
+      "candidate_anchor_terms": [
+        "野外任务轨迹记录",
+        "GPS 轨迹",
+        "轨迹记录",
+        "轨迹转返回",
+        "session",
+        "path point",
+        "路线历史",
+        "返回摘要"
+      ],
+      "candidate_anchor_boost": 96,
+      "candidate_anchor_miss_penalty": 130,
+      "domain_boost": 66,
+      "domain_mismatch_penalty": 150,
+      "title_alias_boost": 195,
+      "mismatch_unless_context": [
+        "日记",
+        "医疗记录",
+        "库存记录",
+        "通信日志"
+      ]
     }
   ]
 }

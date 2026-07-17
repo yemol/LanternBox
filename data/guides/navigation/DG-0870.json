@@ -1,0 +1,110 @@
+{
+  "id": "DG-0870",
+  "title": "野外任务轨迹记录",
+  "category": "地图地形与环境监测",
+  "priority": "P0",
+  "scenario": "使用 FT、手机或 GNSS 记录巡查、取水、采集、探路或撤离前侦察轨迹，并需要把轨迹转成可返回、可交接的路线摘要。",
+  "goal": "把 track、session 和 path point 转成可复盘、可返回、可交接的任务路线记录。",
+  "keywords": [
+    "野外任务轨迹记录",
+    "地图地形与环境监测",
+    "P0",
+    "Navigation v0.1",
+    "Batch8-C2",
+    "FT track",
+    "session",
+    "path point",
+    "轨迹摘要",
+    "任务路线",
+    "track",
+    "轨迹",
+    "返回摘要",
+    "轨迹转返回路线",
+    "path point 记录"
+  ],
+  "tools": [
+    "FT 或定位设备",
+    "SD 记录",
+    "路线卡",
+    "纸笔",
+    "地图或草图"
+  ],
+  "steps": [
+    "开始 session，确认 base 和时间。",
+    "记录关键 path point：转折点、危险点、资源点、等待点和返回点。",
+    "给重要点写备注，不只保存坐标。",
+    "返回后检查漂移、跳点、断点和停留点。",
+    "转成纸质路线摘要：地标、方向、耗时、危险点和返回线。"
+  ],
+  "check": [
+    "session 有起止。",
+    "关键点有时间和备注。",
+    "轨迹可回放且异常段已标记。",
+    "返回摘要可被第二个人理解。"
+  ],
+  "common_mistakes": [
+    "只保存轨迹线，不写关键点含义。",
+    "忽略漂移和断点。",
+    "把一次任务轨迹直接当长期安全路线。"
+  ],
+  "fallback": [
+    "手写点位和时间。",
+    "用地标顺序替代轨迹。",
+    "回到基地后补录为任务路线记录。"
+  ],
+  "stop_or_escalate": [
+    "无 fix、SD 不可写、轨迹跳点、设备低电、路线与实际不符或 base 不可信时，不按轨迹直接返回。",
+    "关键断点未核实时，不让第二个人照轨迹外出。"
+  ],
+  "related_wiki": [
+    "navigation-gps-track-minimum-fields-001",
+    "navigation-track-drift-gap-check-001",
+    "navigation-track-to-return-summary-001",
+    "navigation-task-route-record-001",
+    "navigation-poi-minimum-fields-001"
+  ],
+  "notes": "Batch8-C2 Navigation v0.1 第一阶段行动知识链。",
+  "category_original": "地图地形与环境监测",
+  "domains": [
+    "navigation",
+    "records"
+  ],
+  "intents": [
+    "navigation_v0_1_action",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "navigation_field_movement"
+  ],
+  "objects": [
+    "FT track",
+    "session",
+    "path point",
+    "轨迹摘要",
+    "任务路线"
+  ],
+  "signals": [
+    "track",
+    "轨迹",
+    "path point",
+    "session",
+    "返回摘要"
+  ],
+  "risks": [
+    "position_error",
+    "record_loss",
+    "lost"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "navigation",
+  "primary_intent": "navigation_v0_1_action",
+  "top1_aliases": [
+    "野外任务轨迹记录",
+    "FT track",
+    "轨迹转返回路线",
+    "path point 记录"
+  ],
+  "risk_level": "caution"
+}

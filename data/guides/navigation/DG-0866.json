@@ -1,0 +1,114 @@
+{
+  "id": "DG-0866",
+  "title": "检查点记录与团队集合",
+  "category": "地图地形与环境监测",
+  "priority": "P0",
+  "scenario": "个人外出或小队分组行动时，需要用检查点、集合点和位置报告让留守方判断是否正常、超时或需要停止行动。",
+  "goal": "让检查点、集合点、位置报告和超时处理形成同一张可追踪记录。",
+  "keywords": [
+    "检查点记录与团队集合",
+    "地图地形与环境监测",
+    "P0",
+    "Navigation v0.1",
+    "Batch8-C2",
+    "检查点",
+    "集合点",
+    "位置报告",
+    "留守记录",
+    "超时",
+    "错过检查点",
+    "队伍分散",
+    "位置不明",
+    "集合点失效",
+    "检查点错过",
+    "集合点规则"
+  ],
+  "tools": [
+    "检查点表",
+    "集合点规则",
+    "地图或草图",
+    "通信日志",
+    "纸笔"
+  ],
+  "steps": [
+    "编号起点、转折点、危险点、补给点、目标点和返回点。",
+    "为每个检查点写到达时间、最晚报告时间和下一动作。",
+    "定义主集合点、备用集合点和失效条件。",
+    "位置报告包含坐标、地标、方向、风险和下一窗口。",
+    "留守方记录超时、等待、回撤或启动搜索的边界。"
+  ],
+  "check": [
+    "检查点编号清楚。",
+    "集合点至少两级。",
+    "位置报告字段完整并有回执。",
+    "通信记录和纸图编号一致。"
+  ],
+  "common_mistakes": [
+    "只说地名，不说检查点编号。",
+    "集合点失效后临时改点但不记录。",
+    "错过窗口后立刻分散寻找。"
+  ],
+  "fallback": [
+    "回到上一个检查点。",
+    "转备用集合点。",
+    "用纸条、哨声、灯光或下一个通信窗口降级。"
+  ],
+  "stop_or_escalate": [
+    "检查点错过、集合点失效、队伍分散、天气恶化、危险点扩大或连续通信窗口失败时停止按原计划推进。",
+    "最后确认点不明时，不派单人盲目外出寻找。"
+  ],
+  "related_wiki": [
+    "navigation-route-checkpoint-numbering-001",
+    "navigation-team-rally-point-rules-001",
+    "navigation-missed-checkpoint-response-001",
+    "navigation-map-symbol-standard-001",
+    "navigation-poi-minimum-fields-001",
+    "communication-position-report-navigation-fields-001",
+    "navigation-coordinate-paper-backup-001",
+    "navigation-danger-zone-marking-001"
+  ],
+  "notes": "Batch8-C2 Navigation v0.1 第一阶段行动知识链。",
+  "category_original": "地图地形与环境监测",
+  "domains": [
+    "navigation",
+    "comms",
+    "organization"
+  ],
+  "intents": [
+    "navigation_v0_1_action",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "navigation_field_movement"
+  ],
+  "objects": [
+    "检查点",
+    "集合点",
+    "位置报告",
+    "留守记录",
+    "超时"
+  ],
+  "signals": [
+    "错过检查点",
+    "队伍分散",
+    "位置不明",
+    "集合点失效"
+  ],
+  "risks": [
+    "lost",
+    "separation",
+    "communication_failure"
+  ],
+  "negative_keywords": [],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "navigation",
+  "primary_intent": "navigation_v0_1_action",
+  "top1_aliases": [
+    "检查点记录与团队集合",
+    "检查点错过",
+    "位置报告",
+    "集合点规则"
+  ],
+  "risk_level": "high"
+}
