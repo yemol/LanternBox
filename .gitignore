@@ -93,3 +93,4 @@ wiki_import/**/*_media/
 
 data/terminal_sync/
 data/terminal_sync/archive/
+hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/.pio/
