@@ -1,0 +1,115 @@
+{
+  "id": "DG-0892",
+  "title": "可再利用材料进入材料池前检查",
+  "category": "基础制造与材料维修",
+  "priority": "P1",
+  "scenario": "废木板、金属片、布料、绳索、容器或小零件看起来可用，需要决定是否进入材料池、待检区或废弃物隔离区。",
+  "goal": "在制作加工前完成来源、污染、结构、干燥和标记检查，避免把危险材料带入工坊。",
+  "tools": [
+    "材料池标签",
+    "待检区",
+    "手套",
+    "记录纸",
+    "清洁布",
+    "分格盒"
+  ],
+  "steps": [
+    "先记录材料来源、发现位置和可能接触过的污染物。",
+    "检查异味、渗液、霉点、虫害、尖锐边、裂纹、锈蚀和不明残留。",
+    "把可用、待清洁、待加工、降级使用和不可再用材料分区。",
+    "木板、金属片、布绳、容器和小零件分别存放，不混入成品区。",
+    "给进入材料池的材料标记用途限制和检查日期。",
+    "制作前仍需 Manufacturing Guide 判断加工、承重和连接方式。"
+  ],
+  "check": [
+    "来源和风险已记录。",
+    "污染或不明残留材料未进入材料池。",
+    "待检、可用和不可再用材料分开。",
+    "用途限制标签清楚。"
+  ],
+  "common_mistakes": [
+    "看到材料完整就直接拿去制作。",
+    "把污染容器洗一洗就当食物容器。",
+    "没有标记材料等级，后续误用于承重。"
+  ],
+  "fallback": [
+    "无法确认来源时放入待检区，不进入制作。",
+    "清洁条件不足时只做隔离和记录。",
+    "材料池空间不足时优先保留干燥、无污染、可多用途材料。"
+  ],
+  "stop_or_escalate": [
+    "出现不明化学残留、刺鼻气味、电池漏液接触、腐败渗液、尖锐物裸露或霉变扩散时，停止进入材料池。",
+    "需要承重或接触食物饮水时，必须在 Manufacturing 或 WASH 边界下重新判断。"
+  ],
+  "notes": "Waste / Recycling 负责材料池准入和等级记录；切割、打孔、连接、承重检查由 Manufacturing Guide 主导。",
+  "category_original": "基础制造与材料维修",
+  "domains": [
+    "repair",
+    "hygiene"
+  ],
+  "intents": [
+    "waste_recycling_foundation",
+    "material_pool_intake"
+  ],
+  "situations": [
+    "resource_cycle",
+    "material_pool"
+  ],
+  "objects": [
+    "废木板",
+    "金属片",
+    "布料",
+    "绳索",
+    "容器",
+    "材料池"
+  ],
+  "signals": [
+    "可再利用",
+    "待检",
+    "异味",
+    "锈蚀",
+    "霉点",
+    "残留"
+  ],
+  "risks": [
+    "contaminated_material",
+    "structural_failure",
+    "cut_injury"
+  ],
+  "keywords": [
+    "材料池",
+    "再利用材料",
+    "废木板",
+    "金属片",
+    "布料绳索",
+    "材料等级",
+    "待检区"
+  ],
+  "negative_keywords": [
+    "专业机加工",
+    "金属冶炼",
+    "塑料熔融",
+    "危险化学处理"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "waste_recycling_foundation",
+  "top1_aliases": [
+    "可再利用材料进入材料池前检查"
+  ],
+  "related_wiki": [
+    "repair-recycling-salvaged-wood-intake-check-001",
+    "repair-recycling-metal-sheet-intake-check-001",
+    "repair-recycling-material-intake-checklist-001",
+    "repair-recycling-material-downgrade-label-001",
+    "repair-recycling-material-pool-zone-layout-001",
+    "hygiene-waste-metal-edge-scrap-isolation-001",
+    "repair-recycling-fabric-rope-intake-check-001",
+    "repair-recycling-fasteners-small-parts-sort-001",
+    "repair-recycling-cleanable-noncleanable-material-001",
+    "hygiene-waste-recycling-batch-quarantine-001",
+    "general-waste-reuse-failure-record-001"
+  ],
+  "risk_level": "normal"
+}

@@ -1,0 +1,106 @@
+{
+  "id": "DG-0890",
+  "title": "厨余和有机物进入堆肥前判断",
+  "category": "种植与食物生产",
+  "priority": "P0",
+  "scenario": "小团队把厨余、有机物、病人剩饭或异味腐败物拿到堆肥等待区前，需要判断能否进入农业循环。",
+  "goal": "在堆肥成熟判断之前，先把厨余按可等待、需隔离、不得进入食用地块三类分流，避免污染扩散。",
+  "tools": [
+    "厨余桶",
+    "隔离桶",
+    "标签",
+    "手套",
+    "记录纸",
+    "覆盖材料"
+  ],
+  "steps": [
+    "先分出病人剩饭、油脂肉类、刺鼻异味、渗液和来源不明厨余。",
+    "可堆肥厨余进入等待区前标记来源和日期。",
+    "病人剩饭、明显腐败渗液和来源不明厨余不得进入食用地块流程。",
+    "堆肥等待区远离饮水、厨房、睡眠区和儿童活动区。",
+    "每日检查异味、虫害、渗液和容器破损。",
+    "农业施用前必须再由堆肥成熟和土壤使用 Guide 判断。"
+  ],
+  "check": [
+    "病人剩饭和普通厨余分开。",
+    "油脂、肉类、刺鼻异味和渗液物没有混入等待区。",
+    "等待区有距离、覆盖和日期记录。",
+    "进入食用地块前仍需农业 Guide 复核。"
+  ],
+  "common_mistakes": [
+    "把所有厨余都视作肥料。",
+    "把等待区直接当成熟堆肥区。",
+    "病人剩饭混入普通厨余后继续使用。"
+  ],
+  "fallback": [
+    "无法确认来源时先隔离，不进入堆肥等待区。",
+    "没有合适等待区时，优先减少厨余暴露和渗液，不急于进入农业循环。",
+    "虫害或异味失控时缩小存放量并记录失败原因。"
+  ],
+  "stop_or_escalate": [
+    "病人剩饭、腐败渗液、刺鼻气味、油脂肉类过多或容器漏液时，停止进入堆肥等待区。",
+    "堆肥等待区靠近饮水、厨房或睡眠区时，先迁移或隔离，再考虑农业使用。"
+  ],
+  "notes": "Waste / Recycling 只负责厨余进入农业前的分流边界；堆肥成熟、施入土壤和作物风险由 Agriculture Guide 主导。",
+  "category_original": "种植与食物生产",
+  "domains": [
+    "agriculture",
+    "hygiene"
+  ],
+  "intents": [
+    "waste_recycling_foundation",
+    "organic_waste_sorting"
+  ],
+  "situations": [
+    "kitchen_scrap_sorting",
+    "compost_interface"
+  ],
+  "objects": [
+    "厨余",
+    "病人剩饭",
+    "堆肥等待区",
+    "有机物",
+    "食用地块"
+  ],
+  "signals": [
+    "异味",
+    "渗液",
+    "虫害",
+    "油脂",
+    "病人剩饭"
+  ],
+  "risks": [
+    "food_area_contamination",
+    "soil_contamination",
+    "pest_spread"
+  ],
+  "keywords": [
+    "厨余分流",
+    "堆肥前判断",
+    "病人剩饭",
+    "有机物",
+    "堆肥等待区",
+    "农业接口"
+  ],
+  "negative_keywords": [
+    "农药配方",
+    "化学灭虫剂",
+    "商业堆肥工程"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "agriculture",
+  "primary_intent": "waste_recycling_foundation",
+  "top1_aliases": [
+    "厨余和有机物进入堆肥前判断"
+  ],
+  "related_wiki": [
+    "hygiene-waste-food-rot-wet-isolation-001",
+    "hygiene-waste-patient-leftover-no-compost-001",
+    "agriculture-waste-kitchen-scrap-before-compost-001",
+    "hygiene-waste-oil-meat-odor-organic-boundary-001",
+    "agriculture-waste-compost-waiting-bin-distance-001",
+    "hygiene-waste-organic-pest-odor-daily-check-001"
+  ],
+  "risk_level": "high"
+}

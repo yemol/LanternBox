@@ -1,0 +1,104 @@
+{
+  "id": "DG-0889",
+  "title": "病人垃圾与污染物分流",
+  "category": "污染控制 / 隔离 / 清洁分区",
+  "priority": "P0",
+  "scenario": "病人用过的纸巾、杯盘、剩饭、清洁布、呕吐物接触物或疑似污染物接近普通垃圾、厨房、饮水或材料池。",
+  "goal": "把病人垃圾和疑似污染物从普通垃圾与可再利用材料中分离，标记接触范围并留下恢复记录。",
+  "tools": [
+    "专用袋或桶",
+    "标签",
+    "手套",
+    "清洁用水",
+    "隔离角",
+    "记录纸"
+  ],
+  "steps": [
+    "停止把病人垃圾继续混入普通垃圾。",
+    "标记已接触的桶、台面、餐具、材料或地面。",
+    "把病人垃圾放回固定污染物区域，外侧写明来源、日期和处理人。",
+    "病人剩饭、杯盘和清洁布不得进入厨余堆肥或材料池。",
+    "照护者完成手卫生后，再处理普通垃圾或厨房区域。",
+    "记录污染范围、隔离位置、清洁状态和恢复时间。"
+  ],
+  "check": [
+    "病人垃圾有专用区域和清楚标记。",
+    "没有混入普通垃圾、厨余堆肥或材料池。",
+    "饮水桶、厨房台面和公共餐具已排查。",
+    "处理人手卫生和记录已完成。"
+  ],
+  "common_mistakes": [
+    "把病人剩饭当普通厨余。",
+    "清洁布用完后又放回公共工具区。",
+    "只清理可见垃圾，不标记接触位置。"
+  ],
+  "fallback": [
+    "没有专用桶时，用固定角落、双层袋和醒目标记临时隔离。",
+    "空间不足时采用时间分区，病人垃圾最后处理。",
+    "接触范围不清楚时扩大隔离，不把相关物品恢复公共使用。"
+  ],
+  "stop_or_escalate": [
+    "病人垃圾接触熟食、公共餐具、饮水桶取水口或多人出现腹泻呕吐时，停止恢复使用并转入 WASH 和医疗观察链。",
+    "污染物来源不明、带刺鼻气味或疑似化学残留时，按不明污染物隔离，不进入普通垃圾。"
+  ],
+  "notes": "Waste / Recycling 负责病人垃圾分流和记录；人体卫生、照护和清洁步骤由 WASH / Hygiene Guide 主导。",
+  "category_original": "污染控制 / 隔离 / 清洁分区",
+  "domains": [
+    "hygiene",
+    "contamination"
+  ],
+  "intents": [
+    "waste_recycling_foundation",
+    "patient_waste_isolation"
+  ],
+  "situations": [
+    "patient_waste",
+    "contaminated_items"
+  ],
+  "objects": [
+    "病人垃圾",
+    "剩饭",
+    "清洁布",
+    "污染物",
+    "公共餐具"
+  ],
+  "signals": [
+    "病人用品",
+    "呕吐",
+    "腹泻",
+    "接触厨房",
+    "污染范围不明"
+  ],
+  "risks": [
+    "cross_contamination",
+    "food_water_contamination"
+  ],
+  "keywords": [
+    "病人垃圾",
+    "污染物分流",
+    "病人剩饭",
+    "污染用品",
+    "厨房污染",
+    "饮水区隔离"
+  ],
+  "negative_keywords": [
+    "专业医疗废物",
+    "医院流程",
+    "城市环卫"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "hygiene",
+  "primary_intent": "waste_recycling_foundation",
+  "top1_aliases": [
+    "病人垃圾与污染物分流"
+  ],
+  "related_wiki": [
+    "hygiene-waste-patient-trash-double-bag-zone-001",
+    "hygiene-waste-unknown-chemical-item-hold-001",
+    "hygiene-waste-battery-leakage-boundary-001",
+    "hygiene-waste-contaminated-container-downgrade-001",
+    "hygiene-waste-patient-leftover-no-compost-001"
+  ],
+  "risk_level": "high"
+}

@@ -1,0 +1,111 @@
+{
+  "id": "DG-0887",
+  "title": "废弃物基础分类与临时隔离",
+  "category": "污染控制 / 隔离 / 清洁分区",
+  "priority": "P0",
+  "scenario": "长期断供或小团队驻留时，生活区开始出现混合垃圾、腐败厨余、锋利物、漏液物或来源不明废弃物，需要先分类、隔离和标记。",
+  "goal": "把废弃物从饮水、食物、睡眠和儿童活动区移开，先按危险程度分流，再决定等待、交接或进入材料池。",
+  "tools": [
+    "临时垃圾桶或硬质容器",
+    "标签",
+    "绳线或隔离标记",
+    "手套",
+    "记录纸"
+  ],
+  "steps": [
+    "停止把新垃圾继续倒入混合堆。",
+    "先分出锋利物、热灰、病人垃圾、电池漏液物、不明化学污染物和腐败渗液厨余。",
+    "把疑似污染和危险废弃物放入固定临时桶，远离饮水、食物、睡眠区和通道。",
+    "给每个容器标记来源、日期、主要风险和处理人。",
+    "可再利用材料只进入待检材料区，不直接进入工具区或成品区。",
+    "安排每日复查异味、渗液、虫害、散落和儿童接触风险。"
+  ],
+  "check": [
+    "危险废弃物没有和普通垃圾混放。",
+    "临时桶有标签和来源记录。",
+    "废弃物远离饮水、食物、睡眠区。",
+    "儿童和非操作人员不能接触。",
+    "今日复查人和复查时间已记录。"
+  ],
+  "common_mistakes": [
+    "先攒成一堆，等有空再分。",
+    "把可用材料和污染垃圾放在同一个容器。",
+    "没有标记来源，后续无法判断是否能再用。"
+  ],
+  "fallback": [
+    "没有足够容器时，先用固定角落加明显标记分出危险废弃物。",
+    "无法判断来源时按污染物处理，不进入材料池。",
+    "容器不足时优先隔离锋利物、漏液物、病人垃圾和热灰。"
+  ],
+  "stop_or_escalate": [
+    "发现不明化学污染、电池漏液、病人垃圾混入、热灰未冷却、腐败渗液或尖锐物裸露时，停止普通分类，先隔离并标记。",
+    "污染范围靠近饮水桶、厨房台面或睡眠区时，暂停该区域使用并转入清洁分区判断。"
+  ],
+  "notes": "Batch11-B Waste / Recycling v0.1 第一阶段行动入口；只处理分类、隔离、材料池判断和交接记录，不替代 WASH、Fire、Agriculture 或 Manufacturing 的主操作。",
+  "category_original": "污染控制 / 隔离 / 清洁分区",
+  "domains": [
+    "hygiene",
+    "general"
+  ],
+  "intents": [
+    "waste_recycling_foundation",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "waste_sorting",
+    "resource_cycle"
+  ],
+  "objects": [
+    "混合垃圾",
+    "临时桶",
+    "污染物",
+    "厨余",
+    "材料池"
+  ],
+  "signals": [
+    "混放",
+    "异味",
+    "渗液",
+    "来源不明",
+    "儿童靠近"
+  ],
+  "risks": [
+    "contamination_spread",
+    "cut_injury",
+    "food_water_contamination"
+  ],
+  "keywords": [
+    "废弃物分类",
+    "垃圾分流",
+    "临时隔离",
+    "材料池",
+    "来源记录",
+    "混合垃圾禁止",
+    "污染垃圾标记"
+  ],
+  "negative_keywords": [
+    "城市环卫",
+    "垃圾处理厂",
+    "危险化学处理",
+    "塑料熔融",
+    "金属冶炼"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "hygiene",
+  "primary_intent": "waste_recycling_foundation",
+  "top1_aliases": [
+    "废弃物基础分类与临时隔离"
+  ],
+  "related_wiki": [
+    "hygiene-waste-basic-sorting-isolation-001",
+    "general-waste-source-label-minimum-001",
+    "hygiene-waste-mixed-trash-stop-line-001",
+    "hygiene-waste-battery-leakage-boundary-001",
+    "hygiene-waste-unknown-chemical-item-hold-001",
+    "hygiene-waste-child-access-control-001",
+    "hygiene-waste-food-rot-wet-isolation-001",
+    "hygiene-waste-temporary-overflow-plan-001"
+  ],
+  "risk_level": "high"
+}

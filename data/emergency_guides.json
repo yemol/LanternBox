@@ -73818,5 +73818,861 @@
       "agriculture-expectation-001"
     ],
     "risk_level": "caution"
+  },
+  {
+    "id": "DG-0887",
+    "title": "废弃物基础分类与临时隔离",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "priority": "P0",
+    "scenario": "长期断供或小团队驻留时，生活区开始出现混合垃圾、腐败厨余、锋利物、漏液物或来源不明废弃物，需要先分类、隔离和标记。",
+    "goal": "把废弃物从饮水、食物、睡眠和儿童活动区移开，先按危险程度分流，再决定等待、交接或进入材料池。",
+    "tools": [
+      "临时垃圾桶或硬质容器",
+      "标签",
+      "绳线或隔离标记",
+      "手套",
+      "记录纸"
+    ],
+    "steps": [
+      "停止把新垃圾继续倒入混合堆。",
+      "先分出锋利物、热灰、病人垃圾、电池漏液物、不明化学污染物和腐败渗液厨余。",
+      "把疑似污染和危险废弃物放入固定临时桶，远离饮水、食物、睡眠区和通道。",
+      "给每个容器标记来源、日期、主要风险和处理人。",
+      "可再利用材料只进入待检材料区，不直接进入工具区或成品区。",
+      "安排每日复查异味、渗液、虫害、散落和儿童接触风险。"
+    ],
+    "check": [
+      "危险废弃物没有和普通垃圾混放。",
+      "临时桶有标签和来源记录。",
+      "废弃物远离饮水、食物、睡眠区。",
+      "儿童和非操作人员不能接触。",
+      "今日复查人和复查时间已记录。"
+    ],
+    "common_mistakes": [
+      "先攒成一堆，等有空再分。",
+      "把可用材料和污染垃圾放在同一个容器。",
+      "没有标记来源，后续无法判断是否能再用。"
+    ],
+    "fallback": [
+      "没有足够容器时，先用固定角落加明显标记分出危险废弃物。",
+      "无法判断来源时按污染物处理，不进入材料池。",
+      "容器不足时优先隔离锋利物、漏液物、病人垃圾和热灰。"
+    ],
+    "stop_or_escalate": [
+      "发现不明化学污染、电池漏液、病人垃圾混入、热灰未冷却、腐败渗液或尖锐物裸露时，停止普通分类，先隔离并标记。",
+      "污染范围靠近饮水桶、厨房台面或睡眠区时，暂停该区域使用并转入清洁分区判断。"
+    ],
+    "notes": "Batch11-B Waste / Recycling v0.1 第一阶段行动入口；只处理分类、隔离、材料池判断和交接记录，不替代 WASH、Fire、Agriculture 或 Manufacturing 的主操作。",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "domains": [
+      "hygiene",
+      "general"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "waste_sorting",
+      "resource_cycle"
+    ],
+    "objects": [
+      "混合垃圾",
+      "临时桶",
+      "污染物",
+      "厨余",
+      "材料池"
+    ],
+    "signals": [
+      "混放",
+      "异味",
+      "渗液",
+      "来源不明",
+      "儿童靠近"
+    ],
+    "risks": [
+      "contamination_spread",
+      "cut_injury",
+      "food_water_contamination"
+    ],
+    "keywords": [
+      "废弃物分类",
+      "垃圾分流",
+      "临时隔离",
+      "材料池",
+      "来源记录",
+      "混合垃圾禁止",
+      "污染垃圾标记"
+    ],
+    "negative_keywords": [
+      "城市环卫",
+      "垃圾处理厂",
+      "危险化学处理",
+      "塑料熔融",
+      "金属冶炼"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "废弃物基础分类与临时隔离"
+    ],
+    "related_wiki": [
+      "hygiene-waste-basic-sorting-isolation-001",
+      "general-waste-source-label-minimum-001",
+      "hygiene-waste-mixed-trash-stop-line-001",
+      "hygiene-waste-battery-leakage-boundary-001",
+      "hygiene-waste-unknown-chemical-item-hold-001",
+      "hygiene-waste-child-access-control-001",
+      "hygiene-waste-food-rot-wet-isolation-001",
+      "hygiene-waste-temporary-overflow-plan-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0888",
+    "title": "锋利 / 破碎 / 金属边角废物处理",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "priority": "P0",
+    "scenario": "玻璃碎片、刀片、钉子、金属边角或破裂硬塑料散落，可能划伤人员或混入可再利用材料。",
+    "goal": "先让锋利物退出通道和生活区，再用硬质容器、包覆、标记和复查降低割伤与混入风险。",
+    "tools": [
+      "厚手套",
+      "硬质容器",
+      "夹取工具",
+      "布条或纸板",
+      "标签",
+      "记录纸"
+    ],
+    "steps": [
+      "停止人员通过碎片区域，清走儿童和旁人。",
+      "先确认是否有裸露刀刃、玻璃尖角、钉子、毛刺或弹起风险。",
+      "用夹取工具或厚手套把锋利物放入硬质容器，不用软袋直接装。",
+      "较大锋利边先包覆或折边标记，再放入待处理区。",
+      "可再利用金属片只进入待检区，未处理毛刺前不进入制作区。",
+      "记录来源、位置、处理人和复查时间。"
+    ],
+    "check": [
+      "地面和通道没有散落碎片。",
+      "容器外侧有锋利物标记。",
+      "软袋没有直接装玻璃、钉子或金属尖角。",
+      "待再利用材料与普通垃圾分开。"
+    ],
+    "common_mistakes": [
+      "用手扫玻璃碎片。",
+      "把钉子和金属片直接丢进软袋。",
+      "锋利材料没处理边缘就拿去制作支架。"
+    ],
+    "fallback": [
+      "没有硬质容器时，先用纸板或厚布包覆并固定在隔离角落。",
+      "无法安全夹取时先封锁区域，等有工具和光线后再处理。",
+      "材料是否可再用不明确时标记为待检，不进入材料池。"
+    ],
+    "stop_or_escalate": [
+      "锋利物裸露、玻璃碎片散落、金属边角带血迹或无法清点时，停止普通清理并扩大隔离范围。",
+      "发生割伤时先转入医疗伤口清洁和出血判断，废弃物处理暂停到区域可控后继续。"
+    ],
+    "notes": "Waste / Recycling 负责锋利废弃物分流和材料池前置判断；加工、防割边处理属于 Manufacturing 后续任务。",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "domains": [
+      "hygiene",
+      "repair"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "sharp_waste_isolation"
+    ],
+    "situations": [
+      "sharp_waste",
+      "scrap_material_intake"
+    ],
+    "objects": [
+      "玻璃碎片",
+      "金属边角",
+      "钉子",
+      "硬质容器"
+    ],
+    "signals": [
+      "锋利",
+      "破碎",
+      "毛刺",
+      "散落",
+      "划伤"
+    ],
+    "risks": [
+      "cut_injury",
+      "contamination_spread"
+    ],
+    "keywords": [
+      "锋利物",
+      "碎玻璃",
+      "金属边角",
+      "钉子",
+      "硬质容器",
+      "防割标记",
+      "材料池待检"
+    ],
+    "negative_keywords": [
+      "金属冶炼",
+      "专业机加工",
+      "武器制造"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "锋利破碎金属边角废物处理"
+    ],
+    "related_wiki": [
+      "hygiene-waste-sharp-glass-temporary-container-001",
+      "hygiene-waste-metal-edge-scrap-isolation-001",
+      "hygiene-waste-child-access-control-001",
+      "repair-recycling-metal-sheet-intake-check-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0889",
+    "title": "病人垃圾与污染物分流",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "priority": "P0",
+    "scenario": "病人用过的纸巾、杯盘、剩饭、清洁布、呕吐物接触物或疑似污染物接近普通垃圾、厨房、饮水或材料池。",
+    "goal": "把病人垃圾和疑似污染物从普通垃圾与可再利用材料中分离，标记接触范围并留下恢复记录。",
+    "tools": [
+      "专用袋或桶",
+      "标签",
+      "手套",
+      "清洁用水",
+      "隔离角",
+      "记录纸"
+    ],
+    "steps": [
+      "停止把病人垃圾继续混入普通垃圾。",
+      "标记已接触的桶、台面、餐具、材料或地面。",
+      "把病人垃圾放回固定污染物区域，外侧写明来源、日期和处理人。",
+      "病人剩饭、杯盘和清洁布不得进入厨余堆肥或材料池。",
+      "照护者完成手卫生后，再处理普通垃圾或厨房区域。",
+      "记录污染范围、隔离位置、清洁状态和恢复时间。"
+    ],
+    "check": [
+      "病人垃圾有专用区域和清楚标记。",
+      "没有混入普通垃圾、厨余堆肥或材料池。",
+      "饮水桶、厨房台面和公共餐具已排查。",
+      "处理人手卫生和记录已完成。"
+    ],
+    "common_mistakes": [
+      "把病人剩饭当普通厨余。",
+      "清洁布用完后又放回公共工具区。",
+      "只清理可见垃圾，不标记接触位置。"
+    ],
+    "fallback": [
+      "没有专用桶时，用固定角落、双层袋和醒目标记临时隔离。",
+      "空间不足时采用时间分区，病人垃圾最后处理。",
+      "接触范围不清楚时扩大隔离，不把相关物品恢复公共使用。"
+    ],
+    "stop_or_escalate": [
+      "病人垃圾接触熟食、公共餐具、饮水桶取水口或多人出现腹泻呕吐时，停止恢复使用并转入 WASH 和医疗观察链。",
+      "污染物来源不明、带刺鼻气味或疑似化学残留时，按不明污染物隔离，不进入普通垃圾。"
+    ],
+    "notes": "Waste / Recycling 负责病人垃圾分流和记录；人体卫生、照护和清洁步骤由 WASH / Hygiene Guide 主导。",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "domains": [
+      "hygiene",
+      "contamination"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "patient_waste_isolation"
+    ],
+    "situations": [
+      "patient_waste",
+      "contaminated_items"
+    ],
+    "objects": [
+      "病人垃圾",
+      "剩饭",
+      "清洁布",
+      "污染物",
+      "公共餐具"
+    ],
+    "signals": [
+      "病人用品",
+      "呕吐",
+      "腹泻",
+      "接触厨房",
+      "污染范围不明"
+    ],
+    "risks": [
+      "cross_contamination",
+      "food_water_contamination"
+    ],
+    "keywords": [
+      "病人垃圾",
+      "污染物分流",
+      "病人剩饭",
+      "污染用品",
+      "厨房污染",
+      "饮水区隔离"
+    ],
+    "negative_keywords": [
+      "专业医疗废物",
+      "医院流程",
+      "城市环卫"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "病人垃圾与污染物分流"
+    ],
+    "related_wiki": [
+      "hygiene-waste-patient-trash-double-bag-zone-001",
+      "hygiene-waste-unknown-chemical-item-hold-001",
+      "hygiene-waste-battery-leakage-boundary-001",
+      "hygiene-waste-contaminated-container-downgrade-001",
+      "hygiene-waste-patient-leftover-no-compost-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0890",
+    "title": "厨余和有机物进入堆肥前判断",
+    "category": "种植与食物生产",
+    "priority": "P0",
+    "scenario": "小团队把厨余、有机物、病人剩饭或异味腐败物拿到堆肥等待区前，需要判断能否进入农业循环。",
+    "goal": "在堆肥成熟判断之前，先把厨余按可等待、需隔离、不得进入食用地块三类分流，避免污染扩散。",
+    "tools": [
+      "厨余桶",
+      "隔离桶",
+      "标签",
+      "手套",
+      "记录纸",
+      "覆盖材料"
+    ],
+    "steps": [
+      "先分出病人剩饭、油脂肉类、刺鼻异味、渗液和来源不明厨余。",
+      "可堆肥厨余进入等待区前标记来源和日期。",
+      "病人剩饭、明显腐败渗液和来源不明厨余不得进入食用地块流程。",
+      "堆肥等待区远离饮水、厨房、睡眠区和儿童活动区。",
+      "每日检查异味、虫害、渗液和容器破损。",
+      "农业施用前必须再由堆肥成熟和土壤使用 Guide 判断。"
+    ],
+    "check": [
+      "病人剩饭和普通厨余分开。",
+      "油脂、肉类、刺鼻异味和渗液物没有混入等待区。",
+      "等待区有距离、覆盖和日期记录。",
+      "进入食用地块前仍需农业 Guide 复核。"
+    ],
+    "common_mistakes": [
+      "把所有厨余都视作肥料。",
+      "把等待区直接当成熟堆肥区。",
+      "病人剩饭混入普通厨余后继续使用。"
+    ],
+    "fallback": [
+      "无法确认来源时先隔离，不进入堆肥等待区。",
+      "没有合适等待区时，优先减少厨余暴露和渗液，不急于进入农业循环。",
+      "虫害或异味失控时缩小存放量并记录失败原因。"
+    ],
+    "stop_or_escalate": [
+      "病人剩饭、腐败渗液、刺鼻气味、油脂肉类过多或容器漏液时，停止进入堆肥等待区。",
+      "堆肥等待区靠近饮水、厨房或睡眠区时，先迁移或隔离，再考虑农业使用。"
+    ],
+    "notes": "Waste / Recycling 只负责厨余进入农业前的分流边界；堆肥成熟、施入土壤和作物风险由 Agriculture Guide 主导。",
+    "category_original": "种植与食物生产",
+    "domains": [
+      "agriculture",
+      "hygiene"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "organic_waste_sorting"
+    ],
+    "situations": [
+      "kitchen_scrap_sorting",
+      "compost_interface"
+    ],
+    "objects": [
+      "厨余",
+      "病人剩饭",
+      "堆肥等待区",
+      "有机物",
+      "食用地块"
+    ],
+    "signals": [
+      "异味",
+      "渗液",
+      "虫害",
+      "油脂",
+      "病人剩饭"
+    ],
+    "risks": [
+      "food_area_contamination",
+      "soil_contamination",
+      "pest_spread"
+    ],
+    "keywords": [
+      "厨余分流",
+      "堆肥前判断",
+      "病人剩饭",
+      "有机物",
+      "堆肥等待区",
+      "农业接口"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂",
+      "商业堆肥工程"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "agriculture",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "厨余和有机物进入堆肥前判断"
+    ],
+    "related_wiki": [
+      "hygiene-waste-food-rot-wet-isolation-001",
+      "hygiene-waste-patient-leftover-no-compost-001",
+      "agriculture-waste-kitchen-scrap-before-compost-001",
+      "hygiene-waste-oil-meat-odor-organic-boundary-001",
+      "agriculture-waste-compost-waiting-bin-distance-001",
+      "hygiene-waste-organic-pest-odor-daily-check-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0891",
+    "title": "灰烬与炭渣冷却后分流",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "priority": "P0",
+    "scenario": "做饭、取暖或燃烧结束后，现场已有看似熄灭的灰烬、炭渣或炉具残留，需要判断能否进入垃圾、保存或等待。",
+    "goal": "把火源停止线和废弃物分流衔接起来，未冷却前按火源风险处理，冷却确认后再进入 Waste / Recycling 分类。",
+    "tools": [
+      "耐热位置",
+      "沙土",
+      "金属或耐热容器",
+      "标签",
+      "记录纸"
+    ],
+    "steps": [
+      "先按仍有余火处理，停止继续加燃料和翻动扬灰。",
+      "检查烟、火星、红热、热气和容器发烫。",
+      "未确认冷却前不进入塑料袋、普通垃圾、材料池或睡眠区附近。",
+      "冷却等待区远离纸、布、燃料、厨余和儿童活动区。",
+      "冷灰、炭渣和疑似热灰分别标记，不混入普通垃圾。",
+      "需要进入土壤或再利用前，转给 Agriculture 或 Fire 相关 Guide 再判断。"
+    ],
+    "check": [
+      "没有烟、火星、红热和明显热感。",
+      "灰烬未进入软袋或普通垃圾。",
+      "冷却位置周边无纸、布、塑料和燃料。",
+      "处理人和复查时间已记录。"
+    ],
+    "common_mistakes": [
+      "看不到火星就直接倒垃圾袋。",
+      "把温热灰烬和厨余混放。",
+      "冷灰未标记来源就撒到种植区。"
+    ],
+    "fallback": [
+      "没有金属容器时，使用耐热区域和沙土隔离。",
+      "不能确认冷却时继续等待，不进入垃圾流程。",
+      "灰烬来源不明时只封存记录，不进入土壤或材料循环。"
+    ],
+    "stop_or_escalate": [
+      "冒烟、红热、容器持续发热、风大扬灰或无法隔离儿童时，停止 Waste 分流，回到火源余火处理。",
+      "灰烬混入普通垃圾后出现烟味或热感时，立即停止搬运并扩大隔离。"
+    ],
+    "notes": "余火和热灰由 Fire 停止线主导；Waste / Recycling 只承接冷却确认后的分流、标记和记录。",
+    "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "domains": [
+      "fire",
+      "hygiene",
+      "agriculture"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "ash_waste_sorting"
+    ],
+    "situations": [
+      "ash_disposal",
+      "post_fire_waste"
+    ],
+    "objects": [
+      "灰烬",
+      "炭渣",
+      "冷灰",
+      "热灰",
+      "普通垃圾"
+    ],
+    "signals": [
+      "冒烟",
+      "热感",
+      "红热",
+      "塑料袋",
+      "冷却"
+    ],
+    "risks": [
+      "rekindle_fire",
+      "smoke_exposure",
+      "trash_fire"
+    ],
+    "keywords": [
+      "灰烬分流",
+      "炭渣",
+      "冷灰",
+      "热灰",
+      "余火",
+      "不能进垃圾袋",
+      "灰烬记录"
+    ],
+    "negative_keywords": [
+      "室内燃烧技巧",
+      "烟囱施工",
+      "复杂炉具制造"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "fire",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "灰烬与炭渣冷却后分流"
+    ],
+    "related_wiki": [
+      "fire-waste-hot-ash-not-trash-001",
+      "fire-waste-cold-ash-storage-boundary-001",
+      "hygiene-waste-ash-trash-mixing-ban-001",
+      "fire-waste-charcoal-residue-reuse-check-001",
+      "agriculture-waste-ash-soil-use-interface-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0892",
+    "title": "可再利用材料进入材料池前检查",
+    "category": "基础制造与材料维修",
+    "priority": "P1",
+    "scenario": "废木板、金属片、布料、绳索、容器或小零件看起来可用，需要决定是否进入材料池、待检区或废弃物隔离区。",
+    "goal": "在制作加工前完成来源、污染、结构、干燥和标记检查，避免把危险材料带入工坊。",
+    "tools": [
+      "材料池标签",
+      "待检区",
+      "手套",
+      "记录纸",
+      "清洁布",
+      "分格盒"
+    ],
+    "steps": [
+      "先记录材料来源、发现位置和可能接触过的污染物。",
+      "检查异味、渗液、霉点、虫害、尖锐边、裂纹、锈蚀和不明残留。",
+      "把可用、待清洁、待加工、降级使用和不可再用材料分区。",
+      "木板、金属片、布绳、容器和小零件分别存放，不混入成品区。",
+      "给进入材料池的材料标记用途限制和检查日期。",
+      "制作前仍需 Manufacturing Guide 判断加工、承重和连接方式。"
+    ],
+    "check": [
+      "来源和风险已记录。",
+      "污染或不明残留材料未进入材料池。",
+      "待检、可用和不可再用材料分开。",
+      "用途限制标签清楚。"
+    ],
+    "common_mistakes": [
+      "看到材料完整就直接拿去制作。",
+      "把污染容器洗一洗就当食物容器。",
+      "没有标记材料等级，后续误用于承重。"
+    ],
+    "fallback": [
+      "无法确认来源时放入待检区，不进入制作。",
+      "清洁条件不足时只做隔离和记录。",
+      "材料池空间不足时优先保留干燥、无污染、可多用途材料。"
+    ],
+    "stop_or_escalate": [
+      "出现不明化学残留、刺鼻气味、电池漏液接触、腐败渗液、尖锐物裸露或霉变扩散时，停止进入材料池。",
+      "需要承重或接触食物饮水时，必须在 Manufacturing 或 WASH 边界下重新判断。"
+    ],
+    "notes": "Waste / Recycling 负责材料池准入和等级记录；切割、打孔、连接、承重检查由 Manufacturing Guide 主导。",
+    "category_original": "基础制造与材料维修",
+    "domains": [
+      "repair",
+      "hygiene"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "material_pool_intake"
+    ],
+    "situations": [
+      "resource_cycle",
+      "material_pool"
+    ],
+    "objects": [
+      "废木板",
+      "金属片",
+      "布料",
+      "绳索",
+      "容器",
+      "材料池"
+    ],
+    "signals": [
+      "可再利用",
+      "待检",
+      "异味",
+      "锈蚀",
+      "霉点",
+      "残留"
+    ],
+    "risks": [
+      "contaminated_material",
+      "structural_failure",
+      "cut_injury"
+    ],
+    "keywords": [
+      "材料池",
+      "再利用材料",
+      "废木板",
+      "金属片",
+      "布料绳索",
+      "材料等级",
+      "待检区"
+    ],
+    "negative_keywords": [
+      "专业机加工",
+      "金属冶炼",
+      "塑料熔融",
+      "危险化学处理"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "可再利用材料进入材料池前检查"
+    ],
+    "related_wiki": [
+      "repair-recycling-salvaged-wood-intake-check-001",
+      "repair-recycling-metal-sheet-intake-check-001",
+      "repair-recycling-material-intake-checklist-001",
+      "repair-recycling-material-downgrade-label-001",
+      "repair-recycling-material-pool-zone-layout-001",
+      "hygiene-waste-metal-edge-scrap-isolation-001",
+      "repair-recycling-fabric-rope-intake-check-001",
+      "repair-recycling-fasteners-small-parts-sort-001",
+      "repair-recycling-cleanable-noncleanable-material-001",
+      "hygiene-waste-recycling-batch-quarantine-001",
+      "general-waste-reuse-failure-record-001"
+    ],
+    "risk_level": "normal"
+  },
+  {
+    "id": "DG-0893",
+    "title": "塑料桶 / 容器再利用前判断",
+    "category": "基础制造与材料维修",
+    "priority": "P1",
+    "scenario": "塑料桶、瓶罐、盒子或旧容器准备改作工具盒、材料桶、临时垃圾桶或储物容器前，需要判断残留和用途边界。",
+    "goal": "防止不明残留、异味、渗漏或污染容器进入食物饮水和清洁区，只把合适容器降级到安全用途。",
+    "tools": [
+      "标签",
+      "清洁布",
+      "手套",
+      "待检区",
+      "记录纸"
+    ],
+    "steps": [
+      "先查看容器原用途、标签、气味、残留、渗漏和裂纹。",
+      "来源不明、刺鼻气味、油污、药品或化学残留容器不得用于饮水、食物或医疗相关物品。",
+      "可清洁容器先进入待检区，完成清洁、干燥和复查后再确定用途。",
+      "把容器标记为工具、废弃物、材料、清洁用品或不可用，不跨用途混用。",
+      "有疑问时降级为非接触用途或隔离废弃，不进入材料池主区。",
+      "记录容器来源、判定用途和复查时间。"
+    ],
+    "check": [
+      "容器没有不明残留或刺鼻气味。",
+      "用途标签清楚，未用于食物饮水。",
+      "裂纹、渗漏和盖子状态已检查。",
+      "来源和复查记录完整。"
+    ],
+    "common_mistakes": [
+      "闻起来不明显就当安全容器。",
+      "把旧化学容器改作水桶。",
+      "容器换用途后不改标签。"
+    ],
+    "fallback": [
+      "来源不明时只作外部标记、隔离或非接触用途。",
+      "清洁条件不足时暂存待检，不进入厨房或饮水区。",
+      "容器数量不足时优先保留无异味、无裂纹、来源清楚的容器。"
+    ],
+    "stop_or_escalate": [
+      "出现刺鼻气味、不明残留、渗漏、药品或化学标签、电池漏液接触时，停止再利用。",
+      "容器曾接触病人垃圾、腐败渗液或污染物时，不进入食物、饮水或医疗用品链。"
+    ],
+    "notes": "本 Guide 只处理容器再利用前判断；具体加工改造由 Manufacturing Guide 主导，饮水食品接触由 WASH / Food safety 边界主导。",
+    "category_original": "基础制造与材料维修",
+    "domains": [
+      "repair",
+      "hygiene"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "container_reuse_boundary"
+    ],
+    "situations": [
+      "container_reuse",
+      "material_pool"
+    ],
+    "objects": [
+      "塑料桶",
+      "旧容器",
+      "瓶罐",
+      "工具盒",
+      "材料桶"
+    ],
+    "signals": [
+      "异味",
+      "残留",
+      "裂纹",
+      "渗漏",
+      "用途不明"
+    ],
+    "risks": [
+      "chemical_residue",
+      "food_water_contamination",
+      "mislabeling"
+    ],
+    "keywords": [
+      "塑料桶再利用",
+      "旧容器",
+      "容器残留",
+      "用途降级",
+      "容器标签",
+      "材料桶"
+    ],
+    "negative_keywords": [
+      "塑料熔融",
+      "化学清洗配方",
+      "食品级认证"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "塑料桶容器再利用前判断"
+    ],
+    "related_wiki": [
+      "repair-recycling-plastic-container-intake-check-001",
+      "hygiene-waste-contaminated-container-downgrade-001",
+      "repair-recycling-cleanable-noncleanable-material-001",
+      "repair-recycling-material-downgrade-label-001"
+    ],
+    "risk_level": "normal"
+  },
+  {
+    "id": "DG-0894",
+    "title": "废弃物与材料池记录交接",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "priority": "P2",
+    "scenario": "小团队需要把废弃物、危险隔离桶、待检材料、可用材料和回收失败记录交给下一班或另一个负责人。",
+    "goal": "用最小字段记录来源、风险、位置、用途限制和下一步动作，避免危险物失踪或材料误用。",
+    "tools": [
+      "交接卡",
+      "材料池台账",
+      "标签",
+      "笔",
+      "固定存放点"
+    ],
+    "steps": [
+      "按废弃物、危险隔离、待检材料、可用材料和不可再用材料分开记录。",
+      "每条记录写来源、日期、位置、风险、处理人和下一步动作。",
+      "材料池记录增加等级、用途限制、数量和复查日期。",
+      "危险废弃物记录必须能指向实际容器和隔离位置。",
+      "交接时现场核对标签、容器、数量和异常变化。",
+      "回收失败或降级原因写入记录，避免下一班重复误判。"
+    ],
+    "check": [
+      "记录能找到对应实物。",
+      "危险废弃物有位置和风险字段。",
+      "材料等级、用途限制和复查日期完整。",
+      "交接人和接收人已确认。"
+    ],
+    "common_mistakes": [
+      "只写有几袋垃圾，不写风险来源。",
+      "材料池只有堆放，没有等级和用途限制。",
+      "回收失败不记录，下一班又拿去尝试。"
+    ],
+    "fallback": [
+      "没有表格时，用编号标签加一本总账。",
+      "时间紧时先记录危险项和待检材料，普通项稍后补全。",
+      "无法交接到人时，把记录固定在存放点外侧。"
+    ],
+    "stop_or_escalate": [
+      "危险废弃物找不到实物、标签脱落、记录与位置不一致或出现渗液异味时，停止交接普通材料，先复查隔离区。",
+      "材料用途限制缺失时，不得进入制作或食物饮水链。"
+    ],
+    "notes": "本 Guide 建立 Waste / Recycling 的记录层；不替代库存系统、医疗记录或团队治理流程。",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "domains": [
+      "general",
+      "hygiene",
+      "repair"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "record_handover"
+    ],
+    "situations": [
+      "waste_handover",
+      "material_pool_ledger"
+    ],
+    "objects": [
+      "交接卡",
+      "材料池台账",
+      "危险隔离桶",
+      "待检材料",
+      "标签"
+    ],
+    "signals": [
+      "交接",
+      "记录缺失",
+      "标签脱落",
+      "材料误用",
+      "回收失败"
+    ],
+    "risks": [
+      "lost_hazardous_waste",
+      "material_misuse",
+      "handover_failure"
+    ],
+    "keywords": [
+      "废弃物记录",
+      "材料池台账",
+      "交接卡",
+      "来源记录",
+      "可用材料等级",
+      "回收失败记录"
+    ],
+    "negative_keywords": [
+      "云端库存",
+      "城市环卫系统",
+      "企业仓储系统"
+    ],
+    "ranking_role": "support",
+    "guide_type": "procedure",
+    "primary_domain": "general",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "废弃物与材料池记录交接"
+    ],
+    "related_wiki": [
+      "general-recycling-material-pool-ledger-001",
+      "general-waste-reuse-failure-record-001",
+      "general-waste-disposal-handover-card-001",
+      "general-waste-source-hazard-log-001",
+      "general-waste-source-label-minimum-001",
+      "hygiene-waste-organic-pest-odor-daily-check-001",
+      "repair-recycling-fasteners-small-parts-sort-001",
+      "repair-recycling-material-downgrade-label-001"
+    ],
+    "risk_level": "normal"
   }
 ]

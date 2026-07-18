@@ -1,0 +1,103 @@
+{
+  "id": "DG-0888",
+  "title": "锋利 / 破碎 / 金属边角废物处理",
+  "category": "污染控制 / 隔离 / 清洁分区",
+  "priority": "P0",
+  "scenario": "玻璃碎片、刀片、钉子、金属边角或破裂硬塑料散落，可能划伤人员或混入可再利用材料。",
+  "goal": "先让锋利物退出通道和生活区，再用硬质容器、包覆、标记和复查降低割伤与混入风险。",
+  "tools": [
+    "厚手套",
+    "硬质容器",
+    "夹取工具",
+    "布条或纸板",
+    "标签",
+    "记录纸"
+  ],
+  "steps": [
+    "停止人员通过碎片区域，清走儿童和旁人。",
+    "先确认是否有裸露刀刃、玻璃尖角、钉子、毛刺或弹起风险。",
+    "用夹取工具或厚手套把锋利物放入硬质容器，不用软袋直接装。",
+    "较大锋利边先包覆或折边标记，再放入待处理区。",
+    "可再利用金属片只进入待检区，未处理毛刺前不进入制作区。",
+    "记录来源、位置、处理人和复查时间。"
+  ],
+  "check": [
+    "地面和通道没有散落碎片。",
+    "容器外侧有锋利物标记。",
+    "软袋没有直接装玻璃、钉子或金属尖角。",
+    "待再利用材料与普通垃圾分开。"
+  ],
+  "common_mistakes": [
+    "用手扫玻璃碎片。",
+    "把钉子和金属片直接丢进软袋。",
+    "锋利材料没处理边缘就拿去制作支架。"
+  ],
+  "fallback": [
+    "没有硬质容器时，先用纸板或厚布包覆并固定在隔离角落。",
+    "无法安全夹取时先封锁区域，等有工具和光线后再处理。",
+    "材料是否可再用不明确时标记为待检，不进入材料池。"
+  ],
+  "stop_or_escalate": [
+    "锋利物裸露、玻璃碎片散落、金属边角带血迹或无法清点时，停止普通清理并扩大隔离范围。",
+    "发生割伤时先转入医疗伤口清洁和出血判断，废弃物处理暂停到区域可控后继续。"
+  ],
+  "notes": "Waste / Recycling 负责锋利废弃物分流和材料池前置判断；加工、防割边处理属于 Manufacturing 后续任务。",
+  "category_original": "污染控制 / 隔离 / 清洁分区",
+  "domains": [
+    "hygiene",
+    "repair"
+  ],
+  "intents": [
+    "waste_recycling_foundation",
+    "sharp_waste_isolation"
+  ],
+  "situations": [
+    "sharp_waste",
+    "scrap_material_intake"
+  ],
+  "objects": [
+    "玻璃碎片",
+    "金属边角",
+    "钉子",
+    "硬质容器"
+  ],
+  "signals": [
+    "锋利",
+    "破碎",
+    "毛刺",
+    "散落",
+    "划伤"
+  ],
+  "risks": [
+    "cut_injury",
+    "contamination_spread"
+  ],
+  "keywords": [
+    "锋利物",
+    "碎玻璃",
+    "金属边角",
+    "钉子",
+    "硬质容器",
+    "防割标记",
+    "材料池待检"
+  ],
+  "negative_keywords": [
+    "金属冶炼",
+    "专业机加工",
+    "武器制造"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "hygiene",
+  "primary_intent": "waste_recycling_foundation",
+  "top1_aliases": [
+    "锋利破碎金属边角废物处理"
+  ],
+  "related_wiki": [
+    "hygiene-waste-sharp-glass-temporary-container-001",
+    "hygiene-waste-metal-edge-scrap-isolation-001",
+    "hygiene-waste-child-access-control-001",
+    "repair-recycling-metal-sheet-intake-check-001"
+  ],
+  "risk_level": "high"
+}

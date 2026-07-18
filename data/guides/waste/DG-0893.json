@@ -1,0 +1,103 @@
+{
+  "id": "DG-0893",
+  "title": "塑料桶 / 容器再利用前判断",
+  "category": "基础制造与材料维修",
+  "priority": "P1",
+  "scenario": "塑料桶、瓶罐、盒子或旧容器准备改作工具盒、材料桶、临时垃圾桶或储物容器前，需要判断残留和用途边界。",
+  "goal": "防止不明残留、异味、渗漏或污染容器进入食物饮水和清洁区，只把合适容器降级到安全用途。",
+  "tools": [
+    "标签",
+    "清洁布",
+    "手套",
+    "待检区",
+    "记录纸"
+  ],
+  "steps": [
+    "先查看容器原用途、标签、气味、残留、渗漏和裂纹。",
+    "来源不明、刺鼻气味、油污、药品或化学残留容器不得用于饮水、食物或医疗相关物品。",
+    "可清洁容器先进入待检区，完成清洁、干燥和复查后再确定用途。",
+    "把容器标记为工具、废弃物、材料、清洁用品或不可用，不跨用途混用。",
+    "有疑问时降级为非接触用途或隔离废弃，不进入材料池主区。",
+    "记录容器来源、判定用途和复查时间。"
+  ],
+  "check": [
+    "容器没有不明残留或刺鼻气味。",
+    "用途标签清楚，未用于食物饮水。",
+    "裂纹、渗漏和盖子状态已检查。",
+    "来源和复查记录完整。"
+  ],
+  "common_mistakes": [
+    "闻起来不明显就当安全容器。",
+    "把旧化学容器改作水桶。",
+    "容器换用途后不改标签。"
+  ],
+  "fallback": [
+    "来源不明时只作外部标记、隔离或非接触用途。",
+    "清洁条件不足时暂存待检，不进入厨房或饮水区。",
+    "容器数量不足时优先保留无异味、无裂纹、来源清楚的容器。"
+  ],
+  "stop_or_escalate": [
+    "出现刺鼻气味、不明残留、渗漏、药品或化学标签、电池漏液接触时，停止再利用。",
+    "容器曾接触病人垃圾、腐败渗液或污染物时，不进入食物、饮水或医疗用品链。"
+  ],
+  "notes": "本 Guide 只处理容器再利用前判断；具体加工改造由 Manufacturing Guide 主导，饮水食品接触由 WASH / Food safety 边界主导。",
+  "category_original": "基础制造与材料维修",
+  "domains": [
+    "repair",
+    "hygiene"
+  ],
+  "intents": [
+    "waste_recycling_foundation",
+    "container_reuse_boundary"
+  ],
+  "situations": [
+    "container_reuse",
+    "material_pool"
+  ],
+  "objects": [
+    "塑料桶",
+    "旧容器",
+    "瓶罐",
+    "工具盒",
+    "材料桶"
+  ],
+  "signals": [
+    "异味",
+    "残留",
+    "裂纹",
+    "渗漏",
+    "用途不明"
+  ],
+  "risks": [
+    "chemical_residue",
+    "food_water_contamination",
+    "mislabeling"
+  ],
+  "keywords": [
+    "塑料桶再利用",
+    "旧容器",
+    "容器残留",
+    "用途降级",
+    "容器标签",
+    "材料桶"
+  ],
+  "negative_keywords": [
+    "塑料熔融",
+    "化学清洗配方",
+    "食品级认证"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "waste_recycling_foundation",
+  "top1_aliases": [
+    "塑料桶容器再利用前判断"
+  ],
+  "related_wiki": [
+    "repair-recycling-plastic-container-intake-check-001",
+    "hygiene-waste-contaminated-container-downgrade-001",
+    "repair-recycling-cleanable-noncleanable-material-001",
+    "repair-recycling-material-downgrade-label-001"
+  ],
+  "risk_level": "normal"
+}

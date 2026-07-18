@@ -3972,6 +3972,496 @@
         "衣服沾到",
         "人体接触"
       ]
+    },
+    {
+      "name": "waste_basic_sorting",
+      "object_triggers": [
+        "垃圾",
+        "混合垃圾",
+        "废弃物",
+        "垃圾桶",
+        "污染垃圾桶",
+        "临时桶",
+        "临时隔离"
+      ],
+      "state_triggers": [
+        "先怎么分类",
+        "怎么分类",
+        "怎么临时隔离",
+        "放在哪里",
+        "不能靠近",
+        "标记",
+        "混放",
+        "远离饮水",
+        "远离食物",
+        "远离睡眠区"
+      ],
+      "aliases": [
+        "废弃物基础分类与临时隔离",
+        "废弃物基础分类",
+        "混合垃圾禁止线",
+        "废弃物来源最小标签",
+        "污染垃圾桶位置",
+        "污染垃圾标记",
+        "临时隔离",
+        "垃圾分流"
+      ],
+      "target_domains": [
+        "hygiene",
+        "general"
+      ],
+      "target_slug_domains": [
+        "hygiene",
+        "general"
+      ],
+      "target_categories": [
+        "污染控制 / 隔离 / 清洁分区",
+        "信息保存与长期重建"
+      ],
+      "candidate_anchor_terms": [
+        "废弃物基础分类与临时隔离",
+        "废弃物分类",
+        "垃圾分流",
+        "混合垃圾禁止",
+        "临时桶",
+        "污染垃圾标记",
+        "来源记录",
+        "远离饮水",
+        "远离食物",
+        "睡眠区",
+        "材料池"
+      ],
+      "candidate_anchor_boost": 126,
+      "candidate_anchor_miss_penalty": 150,
+      "domain_boost": 82,
+      "domain_mismatch_penalty": 180,
+      "title_alias_boost": 280,
+      "mismatch_unless_context": [
+        "已经接触",
+        "碰到手",
+        "眼睛",
+        "皮肤",
+        "吸入",
+        "中毒",
+        "伤口",
+        "割伤",
+        "扎伤",
+        "生病",
+        "病人照护"
+      ]
+    },
+    {
+      "name": "waste_sharp_broken_material",
+      "object_triggers": [
+        "碎玻璃",
+        "玻璃片",
+        "锋利物",
+        "金属边角",
+        "钉子",
+        "铁丝",
+        "刀片"
+      ],
+      "state_triggers": [
+        "散在地上",
+        "怎么收集",
+        "怎么标记",
+        "避免扎伤",
+        "裸露",
+        "临时包裹",
+        "放进哪里",
+        "怎么处理"
+      ],
+      "aliases": [
+        "锋利 / 破碎 / 金属边角废物处理",
+        "锋利破碎金属边角废物处理",
+        "碎玻璃和锋利物临时容器",
+        "金属边角废料隔离",
+        "儿童远离废弃物和材料池",
+        "硬质容器",
+        "防割标记"
+      ],
+      "target_domains": [
+        "hygiene",
+        "repair"
+      ],
+      "target_slug_domains": [
+        "hygiene",
+        "repair"
+      ],
+      "target_categories": [
+        "污染控制 / 隔离 / 清洁分区",
+        "基础制造与材料维修"
+      ],
+      "candidate_anchor_terms": [
+        "锋利 / 破碎 / 金属边角废物处理",
+        "碎玻璃",
+        "锋利物",
+        "金属边角",
+        "钉子",
+        "硬质容器",
+        "包覆",
+        "防割标记",
+        "临时容器",
+        "散落碎片"
+      ],
+      "candidate_anchor_boost": 132,
+      "candidate_anchor_miss_penalty": 155,
+      "domain_boost": 84,
+      "domain_mismatch_penalty": 185,
+      "title_alias_boost": 300,
+      "mismatch_unless_context": [
+        "割伤了",
+        "扎伤了",
+        "流血",
+        "出血",
+        "伤口",
+        "已经受伤",
+        "感染"
+      ]
+    },
+    {
+      "name": "waste_contaminated_trash",
+      "object_triggers": [
+        "病人垃圾",
+        "病人",
+        "病人纸巾",
+        "纸巾",
+        "病人剩饭",
+        "污染垃圾",
+        "不明废弃物",
+        "刺鼻味",
+        "电池漏液",
+        "漏液垃圾"
+      ],
+      "state_triggers": [
+        "能不能混入普通垃圾",
+        "混进普通垃圾",
+        "和普通垃圾放一起",
+        "放哪里",
+        "怎么标记",
+        "怎么隔离",
+        "远离",
+        "渗液",
+        "异味"
+      ],
+      "aliases": [
+        "病人垃圾与污染物分流",
+        "废弃物基础分类与临时隔离",
+        "病人垃圾双层封存区",
+        "不明化学污染物暂存",
+        "电池漏液废弃物边界",
+        "污染容器降级和禁用",
+        "污染垃圾标记"
+      ],
+      "target_domains": [
+      ],
+      "target_slug_domains": [
+        "hygiene",
+        "general"
+      ],
+      "target_categories": [
+        "污染控制 / 隔离 / 清洁分区",
+        "信息保存与长期重建"
+      ],
+      "candidate_anchor_terms": [
+        "病人垃圾与污染物分流",
+        "病人垃圾",
+        "污染物分流",
+        "病人剩饭",
+        "不明化学污染物",
+        "电池漏液废弃物",
+        "普通垃圾",
+        "标记",
+        "远离厨房",
+        "饮水区"
+      ],
+      "candidate_anchor_boost": 190,
+      "candidate_anchor_miss_penalty": 210,
+      "domain_boost": 105,
+      "domain_mismatch_penalty": 220,
+      "title_alias_boost": 430,
+      "negative_terms": [
+        "皮肤",
+        "眼睛",
+        "冲洗",
+        "腐蚀",
+        "充电",
+        "电压",
+        "电源系统",
+        "储能"
+      ],
+      "negative_penalty": 150,
+      "negative_unless_context": [
+        "碰到手",
+        "弄到手",
+        "眼睛",
+        "皮肤",
+        "充电",
+        "储能",
+        "电压",
+        "开机"
+      ],
+      "mismatch_unless_context": [
+        "碰到手",
+        "弄到手",
+        "眼睛",
+        "皮肤",
+        "吸入",
+        "呼吸",
+        "中毒",
+        "误服",
+        "充电",
+        "储能",
+        "电压",
+        "开机"
+      ]
+    },
+    {
+      "name": "waste_kitchen_scrap_boundary",
+      "object_triggers": [
+        "厨余",
+        "剩饭",
+        "病人剩饭",
+        "腐败厨余",
+        "油脂",
+        "肉类",
+        "堆肥桶",
+        "堆肥等待区"
+      ],
+      "state_triggers": [
+        "能不能进堆肥",
+        "进堆肥",
+        "发臭",
+        "渗液",
+        "倒进",
+        "分流",
+        "临时隔离",
+        "进入堆肥前"
+      ],
+      "aliases": [
+        "厨余和有机物进入堆肥前判断",
+        "厨余进堆肥前分拣",
+        "腐败食物和湿垃圾隔离",
+        "病人剩饭不直接进堆肥",
+        "油脂肉类和异味厨余边界",
+        "堆肥等待桶距离边界"
+      ],
+      "target_domains": [
+        "agriculture",
+        "hygiene"
+      ],
+      "target_slug_domains": [
+        "agriculture",
+        "hygiene"
+      ],
+      "target_categories": [
+        "种植与食物生产",
+        "污染控制 / 隔离 / 清洁分区",
+        "卫生"
+      ],
+      "candidate_anchor_terms": [
+        "厨余和有机物进入堆肥前判断",
+        "厨余分流",
+        "堆肥前判断",
+        "病人剩饭",
+        "腐败渗液",
+        "发臭",
+        "油脂肉类",
+        "堆肥等待区",
+        "进入食用地块前",
+        "农业接口"
+      ],
+      "candidate_anchor_boost": 138,
+      "candidate_anchor_miss_penalty": 160,
+      "domain_boost": 86,
+      "domain_mismatch_penalty": 190,
+      "title_alias_boost": 320,
+      "mismatch_unless_context": [
+        "已经腐熟",
+        "堆肥成熟",
+        "施到地里",
+        "食用地块",
+        "叶菜旁边",
+        "土壤",
+        "轮作",
+        "病虫害"
+      ]
+    },
+    {
+      "name": "waste_ash_char_boundary",
+      "object_triggers": [
+        "热灰",
+        "冷灰",
+        "灰烬",
+        "炭渣",
+        "火堆灰",
+        "炉灰",
+        "余火"
+      ],
+      "state_triggers": [
+        "能不能倒进垃圾桶",
+        "倒进垃圾桶",
+        "是否冷却",
+        "保存起来",
+        "混入普通垃圾",
+        "分流",
+        "复燃",
+        "冷却等待"
+      ],
+      "aliases": [
+        "灰烬与炭渣冷却后分流",
+        "热灰不得进入垃圾袋",
+        "冷灰保存和丢弃边界",
+        "灰烬混入普通垃圾风险",
+        "炭渣再利用前检查",
+        "灰烬进入土壤前转交判断"
+      ],
+      "target_domains": [
+        "fire",
+        "hygiene",
+        "agriculture"
+      ],
+      "target_slug_domains": [
+        "fire",
+        "hygiene",
+        "agriculture"
+      ],
+      "target_categories": [
+        "火源 / 保温 / 通风 / 一氧化碳风险",
+        "污染控制 / 隔离 / 清洁分区",
+        "种植与食物生产"
+      ],
+      "candidate_anchor_terms": [
+        "灰烬与炭渣冷却后分流",
+        "热灰",
+        "冷灰",
+        "炭渣",
+        "普通垃圾",
+        "垃圾袋",
+        "冷却后",
+        "保存",
+        "分流",
+        "处理人和复查时间"
+      ],
+      "candidate_anchor_boost": 140,
+      "candidate_anchor_miss_penalty": 162,
+      "domain_boost": 88,
+      "domain_mismatch_penalty": 192,
+      "title_alias_boost": 330,
+      "mismatch_unless_context": [
+        "室内烧",
+        "一氧化碳",
+        "火还在烧",
+        "火势",
+        "灭火",
+        "起火",
+        "烟很大",
+        "通风"
+      ]
+    },
+    {
+      "name": "waste_material_pool_reuse",
+      "object_triggers": [
+        "废木板",
+        "旧木板",
+        "木料",
+        "金属片",
+        "塑料桶",
+        "旧容器",
+        "材料池",
+        "可用材料池",
+        "可再利用材料",
+        "回收材料",
+        "废弃物",
+        "废弃物交接"
+      ],
+      "state_triggers": [
+        "能不能放进材料池",
+        "直接放进材料池",
+        "能不能收进材料池",
+        "再利用前",
+        "有异味",
+        "不明残留",
+        "记录",
+        "登记",
+        "等级",
+        "交接",
+        "下一班",
+        "回收失败"
+      ],
+      "aliases": [
+        "塑料桶 / 容器再利用前判断",
+        "废弃物与材料池记录交接",
+        "材料池台账最小字段",
+        "回收再利用失败记录",
+        "废弃物处理交接卡",
+        "废木板入池判断",
+        "金属片入池判断",
+        "塑料容器入池判断",
+        "污染容器降级和禁用"
+      ],
+      "target_domains": [
+        "repair",
+        "hygiene",
+        "general"
+      ],
+      "target_slug_domains": [
+        "repair",
+        "hygiene",
+        "general"
+      ],
+      "target_categories": [
+        "基础制造与材料维修",
+        "污染控制 / 隔离 / 清洁分区",
+        "信息保存与长期重建",
+        "维修 / 制作 / 替代 / 拆解再利用"
+      ],
+      "candidate_anchor_terms": [
+        "可再利用材料进入材料池前检查",
+        "塑料桶 / 容器再利用前判断",
+        "废弃物与材料池记录交接",
+        "用途限制",
+        "材料等级",
+        "交接卡",
+        "材料池台账",
+        "回收再利用失败记录",
+        "废弃物处理交接卡",
+        "塑料容器入池判断",
+        "污染容器降级和禁用",
+        "回收失败"
+      ],
+      "candidate_anchor_boost": 142,
+      "candidate_anchor_miss_penalty": 165,
+      "domain_boost": 88,
+      "domain_mismatch_penalty": 195,
+      "title_alias_boost": 340,
+      "negative_terms": [
+        "废弃物与材料池记录交接",
+        "材料池台账",
+        "交接卡"
+      ],
+      "negative_penalty": 420,
+      "negative_unless_context": [
+        "记录",
+        "登记",
+        "交接",
+        "下一班",
+        "没人知道",
+        "回收失败",
+        "台账"
+      ],
+      "mismatch_unless_context": [
+        "切割",
+        "打孔",
+        "制作",
+        "做成",
+        "承重",
+        "架子怎么做",
+        "修理",
+        "维修",
+        "饮水容器清洁",
+        "装饮用水"
+      ]
     }
   ]
 }

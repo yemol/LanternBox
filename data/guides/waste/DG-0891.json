@@ -1,0 +1,106 @@
+{
+  "id": "DG-0891",
+  "title": "灰烬与炭渣冷却后分流",
+  "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+  "priority": "P0",
+  "scenario": "做饭、取暖或燃烧结束后，现场已有看似熄灭的灰烬、炭渣或炉具残留，需要判断能否进入垃圾、保存或等待。",
+  "goal": "把火源停止线和废弃物分流衔接起来，未冷却前按火源风险处理，冷却确认后再进入 Waste / Recycling 分类。",
+  "tools": [
+    "耐热位置",
+    "沙土",
+    "金属或耐热容器",
+    "标签",
+    "记录纸"
+  ],
+  "steps": [
+    "先按仍有余火处理，停止继续加燃料和翻动扬灰。",
+    "检查烟、火星、红热、热气和容器发烫。",
+    "未确认冷却前不进入塑料袋、普通垃圾、材料池或睡眠区附近。",
+    "冷却等待区远离纸、布、燃料、厨余和儿童活动区。",
+    "冷灰、炭渣和疑似热灰分别标记，不混入普通垃圾。",
+    "需要进入土壤或再利用前，转给 Agriculture 或 Fire 相关 Guide 再判断。"
+  ],
+  "check": [
+    "没有烟、火星、红热和明显热感。",
+    "灰烬未进入软袋或普通垃圾。",
+    "冷却位置周边无纸、布、塑料和燃料。",
+    "处理人和复查时间已记录。"
+  ],
+  "common_mistakes": [
+    "看不到火星就直接倒垃圾袋。",
+    "把温热灰烬和厨余混放。",
+    "冷灰未标记来源就撒到种植区。"
+  ],
+  "fallback": [
+    "没有金属容器时，使用耐热区域和沙土隔离。",
+    "不能确认冷却时继续等待，不进入垃圾流程。",
+    "灰烬来源不明时只封存记录，不进入土壤或材料循环。"
+  ],
+  "stop_or_escalate": [
+    "冒烟、红热、容器持续发热、风大扬灰或无法隔离儿童时，停止 Waste 分流，回到火源余火处理。",
+    "灰烬混入普通垃圾后出现烟味或热感时，立即停止搬运并扩大隔离。"
+  ],
+  "notes": "余火和热灰由 Fire 停止线主导；Waste / Recycling 只承接冷却确认后的分流、标记和记录。",
+  "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+  "domains": [
+    "fire",
+    "hygiene",
+    "agriculture"
+  ],
+  "intents": [
+    "waste_recycling_foundation",
+    "ash_waste_sorting"
+  ],
+  "situations": [
+    "ash_disposal",
+    "post_fire_waste"
+  ],
+  "objects": [
+    "灰烬",
+    "炭渣",
+    "冷灰",
+    "热灰",
+    "普通垃圾"
+  ],
+  "signals": [
+    "冒烟",
+    "热感",
+    "红热",
+    "塑料袋",
+    "冷却"
+  ],
+  "risks": [
+    "rekindle_fire",
+    "smoke_exposure",
+    "trash_fire"
+  ],
+  "keywords": [
+    "灰烬分流",
+    "炭渣",
+    "冷灰",
+    "热灰",
+    "余火",
+    "不能进垃圾袋",
+    "灰烬记录"
+  ],
+  "negative_keywords": [
+    "室内燃烧技巧",
+    "烟囱施工",
+    "复杂炉具制造"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "fire",
+  "primary_intent": "waste_recycling_foundation",
+  "top1_aliases": [
+    "灰烬与炭渣冷却后分流"
+  ],
+  "related_wiki": [
+    "fire-waste-hot-ash-not-trash-001",
+    "fire-waste-cold-ash-storage-boundary-001",
+    "hygiene-waste-ash-trash-mixing-ban-001",
+    "fire-waste-charcoal-residue-reuse-check-001",
+    "agriculture-waste-ash-soil-use-interface-001"
+  ],
+  "risk_level": "high"
+}

@@ -45349,5 +45349,477 @@
     "top1_aliases": [
       "小规模粮食生产优先级"
     ]
+  },
+  {
+    "id": "DG-0887",
+    "title": "废弃物基础分类与临时隔离",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "risk_level": "high",
+    "domains": [
+      "hygiene",
+      "general"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "waste_sorting",
+      "resource_cycle"
+    ],
+    "objects": [
+      "混合垃圾",
+      "临时桶",
+      "污染物",
+      "厨余",
+      "材料池"
+    ],
+    "signals": [
+      "混放",
+      "异味",
+      "渗液",
+      "来源不明",
+      "儿童靠近"
+    ],
+    "risks": [
+      "contamination_spread",
+      "cut_injury",
+      "food_water_contamination"
+    ],
+    "keywords": [
+      "废弃物分类",
+      "垃圾分流",
+      "临时隔离",
+      "材料池",
+      "来源记录",
+      "混合垃圾禁止",
+      "污染垃圾标记"
+    ],
+    "negative_keywords": [
+      "城市环卫",
+      "垃圾处理厂",
+      "危险化学处理",
+      "塑料熔融",
+      "金属冶炼"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "废弃物基础分类与临时隔离"
+    ]
+  },
+  {
+    "id": "DG-0888",
+    "title": "锋利 / 破碎 / 金属边角废物处理",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "risk_level": "high",
+    "domains": [
+      "hygiene",
+      "repair"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "sharp_waste_isolation"
+    ],
+    "situations": [
+      "sharp_waste",
+      "scrap_material_intake"
+    ],
+    "objects": [
+      "玻璃碎片",
+      "金属边角",
+      "钉子",
+      "硬质容器"
+    ],
+    "signals": [
+      "锋利",
+      "破碎",
+      "毛刺",
+      "散落",
+      "划伤"
+    ],
+    "risks": [
+      "cut_injury",
+      "contamination_spread"
+    ],
+    "keywords": [
+      "锋利物",
+      "碎玻璃",
+      "金属边角",
+      "钉子",
+      "硬质容器",
+      "防割标记",
+      "材料池待检"
+    ],
+    "negative_keywords": [
+      "金属冶炼",
+      "专业机加工",
+      "武器制造"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "锋利破碎金属边角废物处理"
+    ]
+  },
+  {
+    "id": "DG-0889",
+    "title": "病人垃圾与污染物分流",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "risk_level": "high",
+    "domains": [
+      "hygiene",
+      "contamination"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "patient_waste_isolation"
+    ],
+    "situations": [
+      "patient_waste",
+      "contaminated_items"
+    ],
+    "objects": [
+      "病人垃圾",
+      "剩饭",
+      "清洁布",
+      "污染物",
+      "公共餐具"
+    ],
+    "signals": [
+      "病人用品",
+      "呕吐",
+      "腹泻",
+      "接触厨房",
+      "污染范围不明"
+    ],
+    "risks": [
+      "cross_contamination",
+      "food_water_contamination"
+    ],
+    "keywords": [
+      "病人垃圾",
+      "污染物分流",
+      "病人剩饭",
+      "污染用品",
+      "厨房污染",
+      "饮水区隔离"
+    ],
+    "negative_keywords": [
+      "专业医疗废物",
+      "医院流程",
+      "城市环卫"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "病人垃圾与污染物分流"
+    ]
+  },
+  {
+    "id": "DG-0890",
+    "title": "厨余和有机物进入堆肥前判断",
+    "category": "种植与食物生产",
+    "category_original": "种植与食物生产",
+    "risk_level": "high",
+    "domains": [
+      "agriculture",
+      "hygiene"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "organic_waste_sorting"
+    ],
+    "situations": [
+      "kitchen_scrap_sorting",
+      "compost_interface"
+    ],
+    "objects": [
+      "厨余",
+      "病人剩饭",
+      "堆肥等待区",
+      "有机物",
+      "食用地块"
+    ],
+    "signals": [
+      "异味",
+      "渗液",
+      "虫害",
+      "油脂",
+      "病人剩饭"
+    ],
+    "risks": [
+      "food_area_contamination",
+      "soil_contamination",
+      "pest_spread"
+    ],
+    "keywords": [
+      "厨余分流",
+      "堆肥前判断",
+      "病人剩饭",
+      "有机物",
+      "堆肥等待区",
+      "农业接口"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂",
+      "商业堆肥工程"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "agriculture",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "厨余和有机物进入堆肥前判断"
+    ]
+  },
+  {
+    "id": "DG-0891",
+    "title": "灰烬与炭渣冷却后分流",
+    "category": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "category_original": "火源 / 保温 / 通风 / 一氧化碳风险",
+    "risk_level": "high",
+    "domains": [
+      "fire",
+      "hygiene",
+      "agriculture"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "ash_waste_sorting"
+    ],
+    "situations": [
+      "ash_disposal",
+      "post_fire_waste"
+    ],
+    "objects": [
+      "灰烬",
+      "炭渣",
+      "冷灰",
+      "热灰",
+      "普通垃圾"
+    ],
+    "signals": [
+      "冒烟",
+      "热感",
+      "红热",
+      "塑料袋",
+      "冷却"
+    ],
+    "risks": [
+      "rekindle_fire",
+      "smoke_exposure",
+      "trash_fire"
+    ],
+    "keywords": [
+      "灰烬分流",
+      "炭渣",
+      "冷灰",
+      "热灰",
+      "余火",
+      "不能进垃圾袋",
+      "灰烬记录"
+    ],
+    "negative_keywords": [
+      "室内燃烧技巧",
+      "烟囱施工",
+      "复杂炉具制造"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "fire",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "灰烬与炭渣冷却后分流"
+    ]
+  },
+  {
+    "id": "DG-0892",
+    "title": "可再利用材料进入材料池前检查",
+    "category": "基础制造与材料维修",
+    "category_original": "基础制造与材料维修",
+    "risk_level": "normal",
+    "domains": [
+      "repair",
+      "hygiene"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "material_pool_intake"
+    ],
+    "situations": [
+      "resource_cycle",
+      "material_pool"
+    ],
+    "objects": [
+      "废木板",
+      "金属片",
+      "布料",
+      "绳索",
+      "容器",
+      "材料池"
+    ],
+    "signals": [
+      "可再利用",
+      "待检",
+      "异味",
+      "锈蚀",
+      "霉点",
+      "残留"
+    ],
+    "risks": [
+      "contaminated_material",
+      "structural_failure",
+      "cut_injury"
+    ],
+    "keywords": [
+      "材料池",
+      "再利用材料",
+      "废木板",
+      "金属片",
+      "布料绳索",
+      "材料等级",
+      "待检区"
+    ],
+    "negative_keywords": [
+      "专业机加工",
+      "金属冶炼",
+      "塑料熔融",
+      "危险化学处理"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "可再利用材料进入材料池前检查"
+    ]
+  },
+  {
+    "id": "DG-0893",
+    "title": "塑料桶 / 容器再利用前判断",
+    "category": "基础制造与材料维修",
+    "category_original": "基础制造与材料维修",
+    "risk_level": "normal",
+    "domains": [
+      "repair",
+      "hygiene"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "container_reuse_boundary"
+    ],
+    "situations": [
+      "container_reuse",
+      "material_pool"
+    ],
+    "objects": [
+      "塑料桶",
+      "旧容器",
+      "瓶罐",
+      "工具盒",
+      "材料桶"
+    ],
+    "signals": [
+      "异味",
+      "残留",
+      "裂纹",
+      "渗漏",
+      "用途不明"
+    ],
+    "risks": [
+      "chemical_residue",
+      "food_water_contamination",
+      "mislabeling"
+    ],
+    "keywords": [
+      "塑料桶再利用",
+      "旧容器",
+      "容器残留",
+      "用途降级",
+      "容器标签",
+      "材料桶"
+    ],
+    "negative_keywords": [
+      "塑料熔融",
+      "化学清洗配方",
+      "食品级认证"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "塑料桶容器再利用前判断"
+    ]
+  },
+  {
+    "id": "DG-0894",
+    "title": "废弃物与材料池记录交接",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "risk_level": "normal",
+    "domains": [
+      "general",
+      "hygiene",
+      "repair"
+    ],
+    "intents": [
+      "waste_recycling_foundation",
+      "record_handover"
+    ],
+    "situations": [
+      "waste_handover",
+      "material_pool_ledger"
+    ],
+    "objects": [
+      "交接卡",
+      "材料池台账",
+      "危险隔离桶",
+      "待检材料",
+      "标签"
+    ],
+    "signals": [
+      "交接",
+      "记录缺失",
+      "标签脱落",
+      "材料误用",
+      "回收失败"
+    ],
+    "risks": [
+      "lost_hazardous_waste",
+      "material_misuse",
+      "handover_failure"
+    ],
+    "keywords": [
+      "废弃物记录",
+      "材料池台账",
+      "交接卡",
+      "来源记录",
+      "可用材料等级",
+      "回收失败记录"
+    ],
+    "negative_keywords": [
+      "云端库存",
+      "城市环卫系统",
+      "企业仓储系统"
+    ],
+    "ranking_role": "support",
+    "guide_type": "procedure",
+    "primary_domain": "general",
+    "primary_intent": "waste_recycling_foundation",
+    "top1_aliases": [
+      "废弃物与材料池记录交接"
+    ]
   }
 ]

@@ -1,0 +1,108 @@
+{
+  "id": "DG-0894",
+  "title": "废弃物与材料池记录交接",
+  "category": "污染控制 / 隔离 / 清洁分区",
+  "priority": "P2",
+  "scenario": "小团队需要把废弃物、危险隔离桶、待检材料、可用材料和回收失败记录交给下一班或另一个负责人。",
+  "goal": "用最小字段记录来源、风险、位置、用途限制和下一步动作，避免危险物失踪或材料误用。",
+  "tools": [
+    "交接卡",
+    "材料池台账",
+    "标签",
+    "笔",
+    "固定存放点"
+  ],
+  "steps": [
+    "按废弃物、危险隔离、待检材料、可用材料和不可再用材料分开记录。",
+    "每条记录写来源、日期、位置、风险、处理人和下一步动作。",
+    "材料池记录增加等级、用途限制、数量和复查日期。",
+    "危险废弃物记录必须能指向实际容器和隔离位置。",
+    "交接时现场核对标签、容器、数量和异常变化。",
+    "回收失败或降级原因写入记录，避免下一班重复误判。"
+  ],
+  "check": [
+    "记录能找到对应实物。",
+    "危险废弃物有位置和风险字段。",
+    "材料等级、用途限制和复查日期完整。",
+    "交接人和接收人已确认。"
+  ],
+  "common_mistakes": [
+    "只写有几袋垃圾，不写风险来源。",
+    "材料池只有堆放，没有等级和用途限制。",
+    "回收失败不记录，下一班又拿去尝试。"
+  ],
+  "fallback": [
+    "没有表格时，用编号标签加一本总账。",
+    "时间紧时先记录危险项和待检材料，普通项稍后补全。",
+    "无法交接到人时，把记录固定在存放点外侧。"
+  ],
+  "stop_or_escalate": [
+    "危险废弃物找不到实物、标签脱落、记录与位置不一致或出现渗液异味时，停止交接普通材料，先复查隔离区。",
+    "材料用途限制缺失时，不得进入制作或食物饮水链。"
+  ],
+  "notes": "本 Guide 建立 Waste / Recycling 的记录层；不替代库存系统、医疗记录或团队治理流程。",
+  "category_original": "污染控制 / 隔离 / 清洁分区",
+  "domains": [
+    "general",
+    "hygiene",
+    "repair"
+  ],
+  "intents": [
+    "waste_recycling_foundation",
+    "record_handover"
+  ],
+  "situations": [
+    "waste_handover",
+    "material_pool_ledger"
+  ],
+  "objects": [
+    "交接卡",
+    "材料池台账",
+    "危险隔离桶",
+    "待检材料",
+    "标签"
+  ],
+  "signals": [
+    "交接",
+    "记录缺失",
+    "标签脱落",
+    "材料误用",
+    "回收失败"
+  ],
+  "risks": [
+    "lost_hazardous_waste",
+    "material_misuse",
+    "handover_failure"
+  ],
+  "keywords": [
+    "废弃物记录",
+    "材料池台账",
+    "交接卡",
+    "来源记录",
+    "可用材料等级",
+    "回收失败记录"
+  ],
+  "negative_keywords": [
+    "云端库存",
+    "城市环卫系统",
+    "企业仓储系统"
+  ],
+  "ranking_role": "support",
+  "guide_type": "procedure",
+  "primary_domain": "general",
+  "primary_intent": "waste_recycling_foundation",
+  "top1_aliases": [
+    "废弃物与材料池记录交接"
+  ],
+  "related_wiki": [
+    "general-recycling-material-pool-ledger-001",
+    "general-waste-reuse-failure-record-001",
+    "general-waste-disposal-handover-card-001",
+    "general-waste-source-hazard-log-001",
+    "general-waste-source-label-minimum-001",
+    "hygiene-waste-organic-pest-odor-daily-check-001",
+    "repair-recycling-fasteners-small-parts-sort-001",
+    "repair-recycling-material-downgrade-label-001"
+  ],
+  "risk_level": "normal"
+}
