@@ -1,0 +1,549 @@
+[
+  {
+    "id": "storage_zone_labeling",
+    "query": "家里的储藏区应该怎么分区和贴标签？",
+    "expected_guides": [
+      "DG-0895"
+    ],
+    "expected_wiki": [
+      "general-storage-zone-basic-layout-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "Storage 主行动链起点：分区、标签、可疑区、复查日和交接，不应被泛记录或安全建议替代。",
+    "watch_conflicts": [
+      "food",
+      "agriculture",
+      "medical",
+      "manufacturing",
+      "waste",
+      "energy",
+      "fire",
+      "repair"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_dry_grain_moisture_pest",
+    "query": "米面豆类怎么防潮防虫长期保存？",
+    "expected_guides": [
+      "DG-0896"
+    ],
+    "expected_wiki": [
+      "food-storage-dry-grain-zone-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "干粮长期保存应由 Storage/Food storage evidence 主导，入口食用判断只作为后续补充。",
+    "watch_conflicts": [
+      "food",
+      "hygiene",
+      "waste"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_rodent_food_batch_isolation",
+    "query": "储粮区发现鼠咬痕迹，要怎么隔离批次？",
+    "expected_guides": [
+      "DG-0896",
+      "DG-0901"
+    ],
+    "expected_wiki": [
+      "food-storage-rodent-bite-isolation-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "鼠咬食物先做批次隔离和记录，不直接进入食用判断。",
+    "watch_conflicts": [
+      "food",
+      "hygiene",
+      "medical",
+      "waste"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_moldy_dry_food_batch_hold",
+    "query": "干粮有霉味，但还没准备吃，应该怎么处理这批？",
+    "expected_guides": [
+      "DG-0896",
+      "DG-0901"
+    ],
+    "expected_wiki": [
+      "food-storage-grain-moisture-clump-check-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "霉味干粮在未入口前应由储藏批次隔离主导，Food safety 可补充不可入口边界。",
+    "watch_conflicts": [
+      "food",
+      "hygiene",
+      "waste"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_fifo_grain_rotation",
+    "query": "储粮应该怎么做先入先出，避免旧粮被忘掉？",
+    "expected_guides": [
+      "DG-0902",
+      "DG-0896"
+    ],
+    "expected_wiki": [
+      "general-storage-fifo-shelf-rule-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "先入先出是 Storage 记录和轮换动作，不应被一般食物库存泛化。",
+    "watch_conflicts": [
+      "food",
+      "records",
+      "organization"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_seed_moisture_recheck",
+    "query": "种子袋有潮气，应该怎么复查和隔离？",
+    "expected_guides": [
+      "DG-0897"
+    ],
+    "expected_wiki": [
+      "agriculture-storage-seed-moisture-quarantine-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "受潮种子储藏复查和待复测隔离应命中 DG-0897，Agriculture 生产计划可补充。",
+    "watch_conflicts": [
+      "agriculture",
+      "food",
+      "hygiene"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_seed_food_separation",
+    "query": "留种和食用种子应该怎么分开放？",
+    "expected_guides": [
+      "DG-0897"
+    ],
+    "expected_wiki": [
+      "agriculture-storage-seed-food-separation-shelf-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "留种和食用分离属于种子 storage 主链，应避免被普通 food storage 抢走。",
+    "watch_conflicts": [
+      "agriculture",
+      "food",
+      "records"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_seed_library_rotation_record",
+    "query": "种子库怎么做轮换记录？",
+    "expected_guides": [
+      "DG-0897"
+    ],
+    "expected_wiki": [
+      "agriculture-storage-seed-library-rotation-card-001"
+    ],
+    "allowed_secondary_guides": [
+      "DG-0902"
+    ],
+    "observation": false,
+    "focus": "种子库轮换记录应由种子储藏入口主导，通用交接记录可为 secondary。",
+    "watch_conflicts": [
+      "agriculture",
+      "organization",
+      "records"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_first_aid_kit_review",
+    "query": "急救包多久复查一次，最少看哪些东西？",
+    "expected_guides": [
+      "DG-0898"
+    ],
+    "expected_wiki": [
+      "medical-storage-first-aid-kit-monthly-check-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "急救包储藏复查应命中 DG-0898，不做医疗治疗建议。",
+    "watch_conflicts": [
+      "medical",
+      "hygiene",
+      "records"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_damaged_medicine_package",
+    "query": "药品包装破损了，能不能放回药箱？",
+    "expected_guides": [
+      "DG-0898",
+      "DG-0901"
+    ],
+    "expected_wiki": [
+      "medical-storage-expired-unknown-medicine-hold-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "包装破损药品应由储藏隔离和药箱复查主导，不做过期药品可用性判断。",
+    "watch_conflicts": [
+      "medical",
+      "hygiene",
+      "waste"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_dressing_bandage_dry",
+    "query": "敷料和绷带怎么防潮保存？",
+    "expected_guides": [
+      "DG-0898"
+    ],
+    "expected_wiki": [
+      "medical-storage-dressing-bandage-dry-pack-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "敷料绷带保存应进入医疗物资 storage evidence，Medical 处置只补充。",
+    "watch_conflicts": [
+      "medical",
+      "hygiene"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_tool_rust_prevention",
+    "query": "工具怎么防锈储藏，避免下次不能用？",
+    "expected_guides": [
+      "DG-0899"
+    ],
+    "expected_wiki": [
+      "repair-storage-tool-dry-rust-check-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "工具防锈储藏应命中 DG-0899，Repair 维修不是主入口。",
+    "watch_conflicts": [
+      "repair",
+      "tools",
+      "manufacturing"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_sharp_tool_safe_box",
+    "query": "刃具和锋利工具应该怎么安全存放？",
+    "expected_guides": [
+      "DG-0899"
+    ],
+    "expected_wiki": [
+      "repair-storage-sharp-tool-secure-box-001"
+    ],
+    "allowed_secondary_guides": [
+      "DG-0901"
+    ],
+    "observation": false,
+    "focus": "锋利工具可用储藏和儿童隔离应由 Storage 工具材料入口主导。",
+    "watch_conflicts": [
+      "repair",
+      "tools",
+      "medical",
+      "safety"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_small_parts_sorting",
+    "query": "小零件怎么分类，避免维修时找不到？",
+    "expected_guides": [
+      "DG-0899",
+      "DG-0902"
+    ],
+    "expected_wiki": [
+      "repair-storage-small-parts-bin-label-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "小零件分类标签和领用记录应进入 Storage 记录链，不只是 repair 泛建议。",
+    "watch_conflicts": [
+      "repair",
+      "tools",
+      "manufacturing",
+      "records"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_battery_power_bank_zone",
+    "query": "电池和充电宝长期不用，应该怎么分区保存？",
+    "expected_guides": [
+      "DG-0900"
+    ],
+    "expected_wiki": [
+      "energy-storage-battery-dry-cool-zone-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "电池和充电宝长期保存应命中 DG-0900，Energy 使用维护只作为补充。",
+    "watch_conflicts": [
+      "energy",
+      "fire",
+      "repair"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_matches_ignition_dry_check",
+    "query": "火柴和点火材料受潮，应该怎么保存和复查？",
+    "expected_guides": [
+      "DG-0900"
+    ],
+    "expected_wiki": [
+      "fire-storage-match-candle-dry-box-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "点火材料防潮储藏应由能源/燃料 storage 入口主导，Fire 使用边界补充。",
+    "watch_conflicts": [
+      "fire",
+      "energy",
+      "shelter"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_fuel_common_goods_boundary",
+    "query": "燃料能不能和普通物资放在一起？",
+    "expected_guides": [
+      "DG-0900"
+    ],
+    "expected_wiki": [
+      "fire-storage-fuel-away-from-living-zone-001"
+    ],
+    "allowed_secondary_guides": [
+      "DG-0901"
+    ],
+    "observation": false,
+    "focus": "燃料储藏分区和远离火源是 Storage/Energy-Fire 边界，不应被泛 fire 操作替代。",
+    "watch_conflicts": [
+      "fire",
+      "energy",
+      "shelter",
+      "safety"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_leak_odor_item_isolation",
+    "query": "有漏液和刺鼻味的物品，应该放进正常仓库吗？",
+    "expected_guides": [
+      "DG-0901"
+    ],
+    "expected_wiki": [
+      "hygiene-storage-leak-odor-isolation-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "漏液异味物品应命中隔离入口，Waste/WASH 只作为交接和清洁补充。",
+    "watch_conflicts": [
+      "waste",
+      "hygiene",
+      "contamination",
+      "medical"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_suspicious_batch_review_label",
+    "query": "过期或可疑批次应该怎么贴标签，等复查？",
+    "expected_guides": [
+      "DG-0901"
+    ],
+    "expected_wiki": [
+      "general-storage-suspect-batch-quarantine-001"
+    ],
+    "allowed_secondary_guides": [
+      "DG-0902"
+    ],
+    "observation": false,
+    "focus": "过期和可疑批次应先隔离、禁用或待复查标签，再交接。",
+    "watch_conflicts": [
+      "food",
+      "medical",
+      "waste",
+      "records"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "storage_handover_minimum_fields",
+    "query": "储藏区交接时，下一班最少要知道什么？",
+    "expected_guides": [
+      "DG-0902"
+    ],
+    "expected_wiki": [
+      "general-storage-handover-card-001"
+    ],
+    "allowed_secondary_guides": [],
+    "observation": false,
+    "focus": "储藏交接最小字段应进入 DG-0902，不应被泛团队记录替代。",
+    "watch_conflicts": [
+      "organization",
+      "records",
+      "safety"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "obs_storage_moldy_food_eat",
+    "query": "粮食有霉味还能不能吃？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "Food 可以主导入口食用判断；观察 Storage 是否补充批次隔离和记录。",
+    "watch_conflicts": [
+      "food",
+      "hygiene",
+      "waste"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "obs_storage_seed_moisture_sow",
+    "query": "种子受潮还能不能播？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "Agriculture 可以主导播种/发芽率判断；观察 Storage 是否补充储藏复查。",
+    "watch_conflicts": [
+      "agriculture",
+      "food",
+      "records"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "obs_storage_expired_medicine_use",
+    "query": "药品过期还能不能用？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "Medical 可以主导用药判断；观察 Storage 是否补充过期标记和隔离。",
+    "watch_conflicts": [
+      "medical",
+      "hygiene",
+      "waste"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "obs_storage_shelf_stronger",
+    "query": "仓库货架怎么做更结实？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "Manufacturing 可以主导制作；观察 Storage 是否补充承重、分区和堆叠安全需求。",
+    "watch_conflicts": [
+      "manufacturing",
+      "repair",
+      "shelter"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "obs_storage_battery_leak_skin",
+    "query": "电池漏液碰到手怎么办？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "Medical/Contamination 可以主导人体接触；观察 Storage 是否补充隔离区和标签。",
+    "watch_conflicts": [
+      "medical",
+      "contamination",
+      "energy",
+      "waste"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  },
+  {
+    "id": "obs_storage_unknown_residue_container",
+    "query": "旧容器有不明残留，还能不能继续用来储藏？",
+    "expected_guides": [],
+    "expected_wiki": [],
+    "allowed_secondary_guides": [],
+    "observation": true,
+    "focus": "Waste/Recycling 可以主导再利用判断；观察 Storage 是否补充储藏区隔离和不可混入正常库存。",
+    "watch_conflicts": [
+      "waste",
+      "hygiene",
+      "manufacturing",
+      "food"
+    ],
+    "should_have_safety_boundary": true,
+    "should_have_fallback": true,
+    "should_have_record_check": true
+  }
+]

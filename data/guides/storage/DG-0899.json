@@ -1,0 +1,109 @@
+{
+  "id": "DG-0899",
+  "title": "工具和材料防潮防锈储藏",
+  "category": "基础制造与材料维修",
+  "priority": "P1",
+  "scenario": "工具、刃具、小零件、绳索、布料、木材和金属片需要长期保存，担心锈蚀、割伤、受潮、倒塌或误用。",
+  "goal": "让工具材料有固定位置、用途边界和复查记录，避免安全事故和生产中断。",
+  "tools": [
+    "工具盒",
+    "刃具盒",
+    "零件盒",
+    "材料架",
+    "复查卡"
+  ],
+  "steps": [
+    "工具入库前擦干泥水，损坏件贴待修或禁用标签。",
+    "刃具和锋利工具加护套，放入儿童不可接触的安全盒。",
+    "小零件按类型、尺寸、状态分盒，污染或生锈件待检。",
+    "布料和绳索干燥后储藏，承重用途不明时贴非承重标签。",
+    "木材和金属片离地堆放，锋利边不伸入通道。",
+    "每周检查锈蚀、断股、霉味、货架超载和缺件。"
+  ],
+  "check": [
+    "工具干燥。",
+    "锋利物有保护。",
+    "材料标签写用途限制。",
+    "堆体稳定，通道无尖边。"
+  ],
+  "common_mistakes": [
+    "锋利废边和可用刃具混放。",
+    "湿绳湿布直接入库。",
+    "承重未知材料拿去做支撑。"
+  ],
+  "fallback": [
+    "没有工具柜时，用固定盒位和挂点替代。",
+    "缺护套时，用厚布包边并标明锋利。",
+    "货架不足时，重物低放并减少堆高。"
+  ],
+  "stop_or_escalate": [
+    "刃口裸露、工具裂柄松头、货架变形、金属尖边外露、布绳霉烂或儿童可触及时，停止领用并重新封存。"
+  ],
+  "notes": "Long-Term Storage v0.1 行动入口；只处理保存、标签、复查、隔离和交接，不替代相邻领域专业判断。",
+  "category_original": "基础制造与材料维修",
+  "domains": [
+    "repair",
+    "tools",
+    "general"
+  ],
+  "intents": [
+    "long_term_storage_foundation",
+    "offline_inventory_action"
+  ],
+  "situations": [
+    "long_term_storage",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "工具盒",
+    "刃具盒",
+    "零件盒",
+    "材料架",
+    "复查卡"
+  ],
+  "signals": [
+    "工具储藏",
+    "防锈",
+    "锋利工具",
+    "小零件盒",
+    "材料堆放",
+    "货架超载"
+  ],
+  "risks": [
+    "misuse",
+    "contamination",
+    "moisture_damage",
+    "handover_loss"
+  ],
+  "keywords": [
+    "工具储藏",
+    "防锈",
+    "锋利工具",
+    "小零件盒",
+    "材料堆放",
+    "货架超载"
+  ],
+  "negative_keywords": [
+    "云端库存",
+    "冷链系统",
+    "大型仓库工程",
+    "城市供应链管理"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "long_term_storage_foundation",
+  "top1_aliases": [
+    "工具和材料防潮防锈储藏"
+  ],
+  "related_wiki": [
+    "repair-storage-tool-dry-rust-check-001",
+    "repair-storage-sharp-tool-secure-box-001",
+    "repair-storage-small-parts-bin-label-001",
+    "repair-storage-fabric-rope-dry-check-001",
+    "repair-storage-wood-metal-material-stack-001",
+    "repair-storage-shelf-overload-warning-001"
+  ],
+  "risk_level": "high"
+}

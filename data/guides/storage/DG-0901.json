@@ -1,0 +1,113 @@
+{
+  "id": "DG-0901",
+  "title": "霉变 / 漏液 / 过期 / 污染物隔离",
+  "category": "污染控制 / 隔离 / 清洁分区",
+  "priority": "P0",
+  "scenario": "储藏区发现霉味、漏液、异味、过期、鼠咬、包装破损、病人污染或不明残留物。",
+  "goal": "立即把可疑物从主库存中移出，防止误用、扩散和交接遗漏。",
+  "tools": [
+    "隔离容器",
+    "禁用标签",
+    "异常记录",
+    "手套或替代隔离物",
+    "交接卡"
+  ],
+  "steps": [
+    "停止继续从同一区域领用。",
+    "标记异常物和接触位置，写霉味、漏液、过期、鼠咬、包装破损或不明残留。",
+    "把可疑物移到远离饮水、食物、睡眠区、儿童和火源的隔离点。",
+    "检查同批次、相邻货架和接触容器。",
+    "记录来源、数量、位置、发现人、处理人和下一步交接。",
+    "根据物品类型移交 Food、Medical、Energy、Waste 或 WASH 判断。"
+  ],
+  "check": [
+    "可疑物离开主库。",
+    "禁用或待复查标签清楚。",
+    "接触过的相邻批次已检查。",
+    "交接记录能找到实物。"
+  ],
+  "common_mistakes": [
+    "闻到异味还放回原位。",
+    "只丢掉一个破袋，不追查同批次。",
+    "过期药品混在可用药箱。"
+  ],
+  "fallback": [
+    "没有隔离桶时，用托盘、独立角落和醒目标记。",
+    "人员不足时，先处理漏液、药品、食物和电池。",
+    "记录纸不足时，编号标签加总账。"
+  ],
+  "stop_or_escalate": [
+    "刺鼻气味、皮肤眼睛刺激、电池漏液、霉变食物、病人垃圾、药品破损、燃料泄漏或多人接触时，停止普通盘点并升级隔离。"
+  ],
+  "notes": "Long-Term Storage v0.1 行动入口；只处理保存、标签、复查、隔离和交接，不替代相邻领域专业判断。",
+  "category_original": "污染控制 / 隔离 / 清洁分区",
+  "domains": [
+    "hygiene",
+    "general",
+    "food"
+  ],
+  "intents": [
+    "long_term_storage_foundation",
+    "offline_inventory_action"
+  ],
+  "situations": [
+    "long_term_storage",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "隔离容器",
+    "禁用标签",
+    "异常记录",
+    "手套或替代隔离物",
+    "交接卡"
+  ],
+  "signals": [
+    "霉变隔离",
+    "漏液异味",
+    "过期物品",
+    "污染容器",
+    "可疑批次"
+  ],
+  "risks": [
+    "misuse",
+    "contamination",
+    "moisture_damage",
+    "handover_loss"
+  ],
+  "keywords": [
+    "霉变隔离",
+    "漏液异味",
+    "过期物品",
+    "污染容器",
+    "可疑批次"
+  ],
+  "negative_keywords": [
+    "云端库存",
+    "冷链系统",
+    "大型仓库工程",
+    "城市供应链管理"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "hygiene",
+  "primary_intent": "long_term_storage_foundation",
+  "top1_aliases": [
+    "霉变 / 漏液 / 过期 / 污染物隔离"
+  ],
+  "related_wiki": [
+    "hygiene-storage-leak-odor-isolation-001",
+    "general-storage-suspect-batch-quarantine-001",
+    "general-storage-expired-item-hold-card-001",
+    "hygiene-storage-contaminated-container-hold-001",
+    "medical-storage-expired-unknown-medicine-hold-001",
+    "energy-storage-battery-leak-suspect-bin-001",
+    "food-storage-grain-moisture-clump-check-001",
+    "food-storage-rodent-bite-isolation-001",
+    "medical-storage-dressing-bandage-dry-pack-001",
+    "agriculture-storage-seed-moisture-quarantine-001",
+    "fire-storage-fuel-away-from-living-zone-001",
+    "repair-storage-sharp-tool-secure-box-001"
+  ],
+  "risk_level": "high"
+}

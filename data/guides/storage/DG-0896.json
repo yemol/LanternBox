@@ -1,0 +1,110 @@
+{
+  "id": "DG-0896",
+  "title": "干粮 / 米面豆类防潮防虫储藏",
+  "category": "食物",
+  "priority": "P0",
+  "scenario": "干粮、米面、豆类、罐头或应急口粮需要长期保存，并持续防潮、防虫、防鼠。",
+  "goal": "保持食物储藏批次可追踪、可复查，并把可疑批次及时隔离。",
+  "tools": [
+    "储粮容器",
+    "货架",
+    "标签",
+    "库存卡",
+    "隔离袋"
+  ],
+  "steps": [
+    "按米面豆类、罐头、开封食品和应急保底口粮分区。",
+    "容器离地、避潮、远离垃圾、燃料、病人用品和强气味源。",
+    "使用先入先出，旧批次放在前方并记录领用。",
+    "固定检查结块、霉味、虫粉、鼠咬、鼓包、漏液和标签脱落。",
+    "开封食品贴短期使用标签，不放回未开封区。",
+    "异常批次连同同箱相邻批次移入隔离区。"
+  ],
+  "check": [
+    "无霉味、无虫害、无鼠咬。",
+    "罐头不鼓包不漏液。",
+    "应急口粮保底线未被突破。",
+    "异常批次有记录和隔离位置。"
+  ],
+  "common_mistakes": [
+    "把新粮压在旧粮前面。",
+    "开封食品无日期。",
+    "鼠咬袋只剪掉破口继续混用。"
+  ],
+  "fallback": [
+    "没有密封桶时，先用干燥内袋加外箱，并离地放置。",
+    "虫鼠迹象不明时，先隔离同架批次。",
+    "保底口粮不足时，暂停普通领用并重算配给。"
+  ],
+  "stop_or_escalate": [
+    "出现霉味、虫害、鼠咬、结块、鼓包、漏液、腐败味或来源不明标签时，不进入入口判断，先隔离。"
+  ],
+  "notes": "Long-Term Storage v0.1 行动入口；只处理保存、标签、复查、隔离和交接，不替代相邻领域专业判断。",
+  "category_original": "食物",
+  "domains": [
+    "food",
+    "general",
+    "hygiene"
+  ],
+  "intents": [
+    "long_term_storage_foundation",
+    "offline_inventory_action"
+  ],
+  "situations": [
+    "long_term_storage",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "储粮容器",
+    "货架",
+    "标签",
+    "库存卡",
+    "隔离袋"
+  ],
+  "signals": [
+    "干粮储藏",
+    "米面豆类",
+    "防潮防虫",
+    "鼠咬",
+    "罐头复查",
+    "应急口粮"
+  ],
+  "risks": [
+    "misuse",
+    "contamination",
+    "moisture_damage",
+    "handover_loss"
+  ],
+  "keywords": [
+    "干粮储藏",
+    "米面豆类",
+    "防潮防虫",
+    "鼠咬",
+    "罐头复查",
+    "应急口粮"
+  ],
+  "negative_keywords": [
+    "云端库存",
+    "冷链系统",
+    "大型仓库工程",
+    "城市供应链管理"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "food",
+  "primary_intent": "long_term_storage_foundation",
+  "top1_aliases": [
+    "干粮 / 米面豆类防潮防虫储藏"
+  ],
+  "related_wiki": [
+    "food-storage-dry-grain-zone-001",
+    "food-storage-grain-moisture-clump-check-001",
+    "food-storage-rodent-bite-isolation-001",
+    "general-storage-pest-rodent-check-001",
+    "food-storage-can-jar-monthly-check-001",
+    "food-storage-opened-package-short-use-001",
+    "food-storage-emergency-ration-reserve-line-001"
+  ],
+  "risk_level": "high"
+}

@@ -4153,8 +4153,7 @@
         "污染容器降级和禁用",
         "污染垃圾标记"
       ],
-      "target_domains": [
-      ],
+      "target_domains": [],
       "target_slug_domains": [
         "hygiene",
         "general"
@@ -4462,6 +4461,676 @@
         "饮水容器清洁",
         "装饮用水"
       ]
+    },
+    {
+      "name": "storage_basic_zone_labeling",
+      "object_triggers": [
+        "储藏区",
+        "仓库",
+        "货架",
+        "物资区",
+        "标签",
+        "分区",
+        "正常库存",
+        "隔离区",
+        "储藏"
+      ],
+      "state_triggers": [
+        "怎么分区",
+        "怎么贴标签",
+        "贴标签",
+        "放在哪里",
+        "不能混放",
+        "正常仓库",
+        "待复查",
+        "交接",
+        "编号"
+      ],
+      "aliases": [
+        "储藏区基础分区与标签",
+        "长期储藏区基础分区",
+        "储藏标签最小字段",
+        "储藏区潮湿日查",
+        "储藏区虫鼠巡查",
+        "储藏记录、先入先出与交接"
+      ],
+      "target_domains": [
+        "general",
+        "hygiene",
+        "repair"
+      ],
+      "target_slug_domains": [
+        "general",
+        "hygiene",
+        "repair"
+      ],
+      "target_categories": [
+        "信息保存与长期重建",
+        "污染控制 / 隔离 / 清洁分区",
+        "基础制造与材料维修"
+      ],
+      "candidate_anchor_terms": [
+        "储藏区基础分区与标签",
+        "长期储藏区基础分区",
+        "储藏标签最小字段",
+        "储藏区潮湿日查",
+        "储藏区虫鼠巡查",
+        "先入先出货架规则"
+      ],
+      "candidate_anchor_boost": 155,
+      "candidate_anchor_miss_penalty": 175,
+      "domain_boost": 88,
+      "domain_mismatch_penalty": 190,
+      "title_alias_boost": 430,
+      "mismatch_unless_context": [
+        "制作货架",
+        "货架怎么做",
+        "承重结构",
+        "修货架",
+        "通信交接",
+        "团队任务交接"
+      ]
+    },
+    {
+      "name": "storage_food_grain_rotation",
+      "object_triggers": [
+        "米",
+        "面",
+        "豆类",
+        "干粮",
+        "储粮",
+        "粮食批次",
+        "食物库存",
+        "粮袋",
+        "旧粮"
+      ],
+      "state_triggers": [
+        "防潮",
+        "防虫",
+        "鼠咬",
+        "霉味",
+        "批次隔离",
+        "先入先出",
+        "旧粮",
+        "复查",
+        "忘掉",
+        "长期保存",
+        "长期储藏"
+      ],
+      "aliases": [
+        "干粮 / 米面豆类防潮防虫储藏",
+        "霉变 / 漏液 / 过期 / 污染物隔离",
+        "储藏记录、先入先出与交接",
+        "米面豆类受潮结块检查",
+        "鼠咬食物批次隔离",
+        "先入先出货架规则"
+      ],
+      "target_domains": [
+        "food",
+        "general",
+        "hygiene"
+      ],
+      "target_slug_domains": [
+        "food",
+        "general",
+        "hygiene"
+      ],
+      "target_categories": [
+        "食物",
+        "信息保存与长期重建",
+        "污染控制 / 隔离 / 清洁分区"
+      ],
+      "candidate_anchor_terms": [
+        "干粮 / 米面豆类防潮防虫储藏",
+        "霉变 / 漏液 / 过期 / 污染物隔离",
+        "储藏记录、先入先出与交接",
+        "干粮分区",
+        "受潮结块",
+        "鼠咬食物批次隔离",
+        "先入先出货架规则",
+        "储粮"
+      ],
+      "candidate_anchor_boost": 160,
+      "candidate_anchor_miss_penalty": 180,
+      "domain_boost": 90,
+      "domain_mismatch_penalty": 200,
+      "title_alias_boost": 440,
+      "negative_terms": [
+        "能不能吃",
+        "吃了",
+        "入口",
+        "食物中毒",
+        "腹泻"
+      ],
+      "negative_penalty": 280,
+      "negative_unless_context": [
+        "还没准备吃",
+        "储粮区",
+        "储藏",
+        "保存",
+        "批次隔离",
+        "先入先出",
+        "复查",
+        "旧粮",
+        "忘掉"
+      ],
+      "mismatch_unless_context": [
+        "做饭",
+        "烹饪",
+        "已经吃了",
+        "食物中毒"
+      ]
+    },
+    {
+      "name": "storage_seed_storage",
+      "object_triggers": [
+        "种子袋",
+        "种子盒",
+        "种子库",
+        "留种",
+        "食用种子",
+        "种子批次",
+        "种子储藏",
+        "种子"
+      ],
+      "state_triggers": [
+        "有潮气",
+        "怎么保存",
+        "保存",
+        "分开放",
+        "分开",
+        "轮换记录",
+        "储藏复查",
+        "批次标签",
+        "混放",
+        "潮湿",
+        "受潮",
+        "复查",
+        "隔离"
+      ],
+      "aliases": [
+        "种子储藏与复查",
+        "种子盒干燥复查",
+        "种子袋批次标签",
+        "留种和食用批次分架",
+        "受潮种子待复测隔离",
+        "小型种子库轮换卡"
+      ],
+      "target_domains": [
+        "agriculture",
+        "general",
+        "food"
+      ],
+      "target_slug_domains": [
+        "agriculture",
+        "general",
+        "food"
+      ],
+      "target_categories": [
+        "种植与食物生产",
+        "信息保存与长期重建",
+        "食物"
+      ],
+      "candidate_anchor_terms": [
+        "种子储藏与复查",
+        "种子盒干燥复查",
+        "种子袋批次标签",
+        "留种和食用批次分架",
+        "受潮种子待复测隔离",
+        "小型种子库轮换卡"
+      ],
+      "candidate_anchor_boost": 175,
+      "candidate_anchor_miss_penalty": 210,
+      "domain_boost": 100,
+      "domain_mismatch_penalty": 220,
+      "title_alias_boost": 500,
+      "negative_terms": [
+        "能不能播",
+        "发芽率",
+        "大面积播种",
+        "生产计划",
+        "播种计划"
+      ],
+      "negative_penalty": 340,
+      "negative_unless_context": [
+        "保存",
+        "储藏",
+        "种子袋",
+        "种子盒",
+        "轮换记录",
+        "分开放",
+        "批次标签",
+        "潮气",
+        "受潮",
+        "隔离"
+      ]
+    },
+    {
+      "name": "storage_medical_supply_storage",
+      "object_triggers": [
+        "急救包",
+        "药品",
+        "药箱",
+        "敷料",
+        "绷带",
+        "消毒用品",
+        "医疗物资",
+        "药品包装"
+      ],
+      "state_triggers": [
+        "包装破损",
+        "破损",
+        "防潮",
+        "避光",
+        "放回药箱",
+        "放回",
+        "多久复查",
+        "最少看哪些",
+        "污染",
+        "分区",
+        "保存",
+        "储藏"
+      ],
+      "aliases": [
+        "医疗物资与急救包储藏复查",
+        "急救包月度复查",
+        "药品避光防潮盒",
+        "敷料和绷带干燥封存",
+        "过期和不明药品暂存",
+        "霉变 / 漏液 / 过期 / 污染物隔离"
+      ],
+      "target_domains": [
+        "medical",
+        "general",
+        "hygiene"
+      ],
+      "target_slug_domains": [
+        "medical",
+        "general",
+        "hygiene"
+      ],
+      "target_categories": [
+        "医疗急救",
+        "信息保存与长期重建",
+        "污染控制 / 隔离 / 清洁分区"
+      ],
+      "candidate_anchor_terms": [
+        "医疗物资与急救包储藏复查",
+        "急救包月度复查",
+        "药品避光防潮盒",
+        "敷料和绷带干燥封存",
+        "过期和不明药品暂存",
+        "霉变 / 漏液 / 过期 / 污染物隔离"
+      ],
+      "candidate_anchor_boost": 165,
+      "candidate_anchor_miss_penalty": 190,
+      "domain_boost": 95,
+      "domain_mismatch_penalty": 205,
+      "title_alias_boost": 470,
+      "negative_terms": [
+        "能不能用",
+        "治疗",
+        "剂量",
+        "吃药",
+        "服用",
+        "症状"
+      ],
+      "negative_penalty": 320,
+      "negative_unless_context": [
+        "药箱",
+        "储藏",
+        "保存",
+        "包装",
+        "防潮",
+        "复查",
+        "放回",
+        "隔离",
+        "急救包",
+        "敷料",
+        "绷带"
+      ]
+    },
+    {
+      "name": "storage_tools_materials_storage",
+      "object_triggers": [
+        "工具",
+        "刃具",
+        "锋利工具",
+        "小零件",
+        "螺丝",
+        "钉子",
+        "绳索",
+        "布料",
+        "木材",
+        "金属片",
+        "材料"
+      ],
+      "state_triggers": [
+        "防锈",
+        "安全存放",
+        "存放",
+        "分类",
+        "找不到",
+        "防潮",
+        "防鼠",
+        "堆叠",
+        "复查",
+        "下次不能用",
+        "储藏"
+      ],
+      "aliases": [
+        "工具和材料防潮防锈储藏",
+        "工具干燥防锈储藏",
+        "刃具和锋利工具安全盒",
+        "小零件盒分类标签",
+        "布料和绳索储藏复查",
+        "木材金属片堆放边界"
+      ],
+      "target_domains": [
+        "repair",
+        "tools",
+        "general"
+      ],
+      "target_slug_domains": [
+        "repair",
+        "general"
+      ],
+      "target_categories": [
+        "基础制造与材料维修",
+        "信息保存与长期重建",
+        "维修 / 制作 / 替代 / 拆解再利用"
+      ],
+      "candidate_anchor_terms": [
+        "工具和材料防潮防锈储藏",
+        "工具干燥防锈储藏",
+        "刃具和锋利工具安全盒",
+        "小零件盒分类标签",
+        "布料和绳索储藏复查",
+        "木材金属片堆放边界"
+      ],
+      "candidate_anchor_boost": 160,
+      "candidate_anchor_miss_penalty": 180,
+      "domain_boost": 90,
+      "domain_mismatch_penalty": 190,
+      "title_alias_boost": 440,
+      "negative_terms": [
+        "制作",
+        "切割",
+        "打孔",
+        "做架子",
+        "承重制作",
+        "修理",
+        "维修"
+      ],
+      "negative_penalty": 260,
+      "negative_unless_context": [
+        "储藏",
+        "存放",
+        "分类",
+        "防锈",
+        "防潮",
+        "找不到",
+        "下次不能用",
+        "材料区"
+      ]
+    },
+    {
+      "name": "storage_energy_fuel_storage",
+      "object_triggers": [
+        "电池",
+        "充电宝",
+        "小型电源",
+        "燃料",
+        "火柴",
+        "点火材料",
+        "蜡烛",
+        "能源物资"
+      ],
+      "state_triggers": [
+        "长期不用",
+        "怎么保存",
+        "保存",
+        "分区保存",
+        "分区",
+        "远离火源",
+        "受潮",
+        "防潮复查",
+        "普通物资混放",
+        "普通物资",
+        "标签",
+        "储藏"
+      ],
+      "aliases": [
+        "能源 / 燃料物资安全储藏",
+        "电池干燥阴凉储藏区",
+        "充电宝轮换标签",
+        "火柴蜡烛防潮盒",
+        "燃料远离生活区储藏线",
+        "漏液疑似电池隔离盒"
+      ],
+      "target_domains": [
+        "energy",
+        "fire",
+        "general"
+      ],
+      "target_slug_domains": [
+        "energy",
+        "fire",
+        "general"
+      ],
+      "target_categories": [
+        "能源",
+        "火源 / 保温 / 通风 / 一氧化碳风险",
+        "信息保存与长期重建"
+      ],
+      "candidate_anchor_terms": [
+        "能源 / 燃料物资安全储藏",
+        "电池干燥阴凉储藏区",
+        "充电宝轮换标签",
+        "火柴蜡烛防潮盒",
+        "燃料远离生活区储藏线",
+        "漏液疑似电池隔离盒"
+      ],
+      "candidate_anchor_boost": 170,
+      "candidate_anchor_miss_penalty": 200,
+      "domain_boost": 95,
+      "domain_mismatch_penalty": 210,
+      "title_alias_boost": 480,
+      "negative_terms": [
+        "鼓包",
+        "发热",
+        "继续充",
+        "开机",
+        "测试",
+        "触电",
+        "电压",
+        "能不能用"
+      ],
+      "negative_penalty": 340,
+      "negative_unless_context": [
+        "长期不用",
+        "保存",
+        "储藏",
+        "分区",
+        "标签",
+        "防潮",
+        "普通物资",
+        "远离火源"
+      ]
+    },
+    {
+      "name": "storage_suspicious_item_isolation",
+      "object_triggers": [
+        "可疑批次",
+        "过期物品",
+        "漏液物品",
+        "刺鼻味物品",
+        "霉味物品",
+        "破损包装",
+        "包装破损",
+        "污染用品",
+        "正常仓库",
+        "物品",
+        "可疑物品"
+      ],
+      "state_triggers": [
+        "能不能放回",
+        "能不能混入",
+        "放进正常仓库",
+        "正常仓库",
+        "等复查",
+        "待复查",
+        "贴标签",
+        "隔离",
+        "异味",
+        "漏液",
+        "过期",
+        "不明残留",
+        "刺鼻味",
+        "霉味"
+      ],
+      "aliases": [
+        "霉变 / 漏液 / 过期 / 污染物隔离",
+        "可疑批次隔离区",
+        "漏液异味物品隔离",
+        "污染容器暂存标签",
+        "过期和不明药品暂存",
+        "漏液疑似电池隔离盒"
+      ],
+      "target_domains": [
+        "hygiene",
+        "general",
+        "medical",
+        "energy",
+        "food"
+      ],
+      "target_slug_domains": [
+        "hygiene",
+        "general",
+        "medical",
+        "energy",
+        "food"
+      ],
+      "target_categories": [
+        "污染控制 / 隔离 / 清洁分区",
+        "信息保存与长期重建",
+        "医疗急救",
+        "能源",
+        "食物"
+      ],
+      "candidate_anchor_terms": [
+        "霉变 / 漏液 / 过期 / 污染物隔离",
+        "可疑批次隔离区",
+        "漏液异味物品隔离",
+        "污染容器暂存标签",
+        "过期和不明药品暂存",
+        "漏液疑似电池隔离盒",
+        "受潮结块"
+      ],
+      "candidate_anchor_boost": 170,
+      "candidate_anchor_miss_penalty": 205,
+      "domain_boost": 95,
+      "domain_mismatch_penalty": 215,
+      "title_alias_boost": 490,
+      "negative_terms": [
+        "碰到手",
+        "眼睛",
+        "皮肤",
+        "误服",
+        "清洁消毒",
+        "废弃物处理",
+        "怎么丢"
+      ],
+      "negative_penalty": 360,
+      "negative_unless_context": [
+        "正常仓库",
+        "库存",
+        "放回",
+        "混入",
+        "待复查",
+        "标签",
+        "储藏",
+        "可疑批次",
+        "过期物品"
+      ]
+    },
+    {
+      "name": "storage_inventory_handover",
+      "aliases": [
+        "储藏记录、先入先出与交接",
+        "储藏区交接卡",
+        "储藏库存卡最小字段",
+        "储藏复查日历",
+        "储藏异常记录",
+        "先入先出货架规则"
+      ],
+      "target_domains": [
+        "general",
+        "food",
+        "agriculture"
+      ],
+      "target_slug_domains": [
+        "general",
+        "food",
+        "agriculture",
+        "repair",
+        "energy"
+      ],
+      "target_categories": [
+        "信息保存与长期重建",
+        "食物",
+        "种植与食物生产",
+        "基础制造与材料维修",
+        "能源"
+      ],
+      "candidate_anchor_terms": [
+        "储藏记录、先入先出与交接",
+        "储藏区交接卡",
+        "储藏库存卡最小字段",
+        "储藏复查日历",
+        "储藏异常记录",
+        "先入先出货架规则"
+      ],
+      "candidate_anchor_boost": 170,
+      "candidate_anchor_miss_penalty": 210,
+      "domain_boost": 95,
+      "domain_mismatch_penalty": 220,
+      "title_alias_boost": 500,
+      "negative_terms": [
+        "通信交接",
+        "任务交接",
+        "成员交接",
+        "班组",
+        "无线电",
+        "外出队"
+      ],
+      "negative_penalty": 340,
+      "negative_unless_context": [
+        "储藏区",
+        "库存",
+        "批次",
+        "领用",
+        "复查",
+        "先入先出",
+        "储藏记录"
+      ],
+      "trigger_any": [
+        "储藏区交接",
+        "库存卡",
+        "储藏记录",
+        "批次记录",
+        "领用记录",
+        "复查日期",
+        "先入先出",
+        "FIFO",
+        "轮换记录",
+        "储藏复查日历",
+        "储藏异常记录",
+        "下一班最少",
+        "最少要知道",
+        "交接卡"
+      ],
+      "min_trigger_matches": 1
     }
   ]
 }

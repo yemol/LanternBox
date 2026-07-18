@@ -1,0 +1,106 @@
+{
+  "id": "DG-0900",
+  "title": "能源 / 燃料物资安全储藏",
+  "category": "能源",
+  "priority": "P1",
+  "scenario": "电池、充电宝、火柴、蜡烛、点火材料和小量燃料需要保存，担心进水、漏液、发热、受潮或靠近火源。",
+  "goal": "建立能源和燃料物资的分区、轮换、禁火和异常隔离边界。",
+  "tools": [
+    "电池盒",
+    "电源标签",
+    "点火材料盒",
+    "燃料标签",
+    "隔离盒"
+  ],
+  "steps": [
+    "电池按型号和状态分盒，不与金属散件混放。",
+    "充电宝和小型电源贴可用、待充、待查或禁用标签。",
+    "火柴、蜡烛和点火材料放在干燥盒内，远离儿童。",
+    "燃料储藏点远离睡眠区、厨房入口、热灰、炉具和明火。",
+    "每月检查鼓包、漏液、发热、进水、异味和容器破损。",
+    "异常电池或燃料先隔离并记录来源。"
+  ],
+  "check": [
+    "电池干燥阴凉。",
+    "点火材料防潮。",
+    "燃料有禁火标签。",
+    "异常物未混入主库。"
+  ],
+  "common_mistakes": [
+    "电池和螺丝混盒。",
+    "燃料临时放在睡眠区。",
+    "受潮火柴仍放回应急盒。"
+  ],
+  "fallback": [
+    "没有专用盒时，先用干燥独立容器和明显标签。",
+    "电量记录不足时，先分可用、待充、待查。",
+    "空间不足时，燃料和火源距离优先保障。"
+  ],
+  "stop_or_escalate": [
+    "电池漏液、鼓包、发热、进水、燃料漏液、刺鼻气味、火源靠近燃料或儿童可触及时，停止普通储藏操作。"
+  ],
+  "notes": "Long-Term Storage v0.1 行动入口；只处理保存、标签、复查、隔离和交接，不替代相邻领域专业判断。",
+  "category_original": "能源",
+  "domains": [
+    "energy",
+    "fire",
+    "general"
+  ],
+  "intents": [
+    "long_term_storage_foundation",
+    "offline_inventory_action"
+  ],
+  "situations": [
+    "long_term_storage",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "电池盒",
+    "电源标签",
+    "点火材料盒",
+    "燃料标签",
+    "隔离盒"
+  ],
+  "signals": [
+    "电池储藏",
+    "充电宝轮换",
+    "燃料远离火源",
+    "火柴防潮",
+    "漏液隔离"
+  ],
+  "risks": [
+    "misuse",
+    "contamination",
+    "moisture_damage",
+    "handover_loss"
+  ],
+  "keywords": [
+    "电池储藏",
+    "充电宝轮换",
+    "燃料远离火源",
+    "火柴防潮",
+    "漏液隔离"
+  ],
+  "negative_keywords": [
+    "云端库存",
+    "冷链系统",
+    "大型仓库工程",
+    "城市供应链管理"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "energy",
+  "primary_intent": "long_term_storage_foundation",
+  "top1_aliases": [
+    "能源 / 燃料物资安全储藏"
+  ],
+  "related_wiki": [
+    "energy-storage-battery-dry-cool-zone-001",
+    "energy-storage-power-bank-rotation-label-001",
+    "fire-storage-match-candle-dry-box-001",
+    "fire-storage-fuel-away-from-living-zone-001",
+    "energy-storage-battery-leak-suspect-bin-001"
+  ],
+  "risk_level": "high"
+}

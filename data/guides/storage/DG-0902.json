@@ -1,0 +1,116 @@
+{
+  "id": "DG-0902",
+  "title": "储藏记录、先入先出与交接",
+  "category": "信息保存与长期重建",
+  "priority": "P2",
+  "scenario": "小团队需要离线管理库存、批次、复查日期、领用、异常和交接，防止物资失踪或旧批次被遗忘。",
+  "goal": "用最小字段建立库存卡、复查日历、异常记录和交接卡。",
+  "tools": [
+    "库存卡",
+    "复查日历",
+    "异常记录",
+    "交接卡",
+    "笔"
+  ],
+  "steps": [
+    "为每个储藏区建立库存卡，写物品、批次、数量、位置、状态、入库日和复查日。",
+    "领用时记录领用人、数量、用途和剩余量。",
+    "把食物、种子、药箱、电池、材料和隔离区复查日期写入日历。",
+    "异常记录写信号、处理动作、隔离位置和下次复查。",
+    "交接卡列出低库存、保底线、可疑批次、隔离物和下一班任务。",
+    "每周核对实物、标签、库存卡和交接卡。"
+  ],
+  "check": [
+    "库存卡能找到实物。",
+    "先入先出记录完整。",
+    "复查逾期项有负责人。",
+    "异常记录已经关闭或有下一步。"
+  ],
+  "common_mistakes": [
+    "只记总数，不记批次。",
+    "交接口头说明，没有位置和负责人。",
+    "异常处理后不关闭记录。"
+  ],
+  "fallback": [
+    "没有表格时，用编号标签加一本总账。",
+    "时间紧时先记录高风险物、保底物资和隔离物。",
+    "多人领用时，固定一个交接点统一登记。"
+  ],
+  "stop_or_escalate": [
+    "库存卡和实物多处不符、危险隔离物位置不明、保底口粮不足、药箱状态不清或电池漏液未记录时，暂停普通发放并盘点。"
+  ],
+  "notes": "Long-Term Storage v0.1 行动入口；只处理保存、标签、复查、隔离和交接，不替代相邻领域专业判断。",
+  "category_original": "信息保存与长期重建",
+  "domains": [
+    "general",
+    "food",
+    "agriculture"
+  ],
+  "intents": [
+    "long_term_storage_foundation",
+    "offline_inventory_action"
+  ],
+  "situations": [
+    "long_term_storage",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "库存卡",
+    "复查日历",
+    "异常记录",
+    "交接卡",
+    "笔"
+  ],
+  "signals": [
+    "储藏记录",
+    "库存卡",
+    "复查日历",
+    "先入先出",
+    "交接卡",
+    "异常记录"
+  ],
+  "risks": [
+    "misuse",
+    "contamination",
+    "moisture_damage",
+    "handover_loss"
+  ],
+  "keywords": [
+    "储藏记录",
+    "库存卡",
+    "复查日历",
+    "先入先出",
+    "交接卡",
+    "异常记录"
+  ],
+  "negative_keywords": [
+    "云端库存",
+    "冷链系统",
+    "大型仓库工程",
+    "城市供应链管理"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "general",
+  "primary_intent": "long_term_storage_foundation",
+  "top1_aliases": [
+    "储藏记录、先入先出与交接"
+  ],
+  "related_wiki": [
+    "general-storage-handover-card-001",
+    "general-storage-inventory-card-minimum-001",
+    "general-storage-check-calendar-001",
+    "general-storage-issue-log-001",
+    "general-storage-fifo-shelf-rule-001",
+    "general-storage-label-minimum-fields-001",
+    "agriculture-storage-seed-library-rotation-card-001",
+    "agriculture-storage-seed-bag-label-001",
+    "food-storage-opened-package-short-use-001",
+    "food-storage-emergency-ration-reserve-line-001",
+    "energy-storage-power-bank-rotation-label-001",
+    "general-storage-expired-item-hold-card-001",
+    "repair-storage-small-parts-bin-label-001"
+  ],
+  "risk_level": "normal"
+}

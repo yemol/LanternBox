@@ -1,0 +1,106 @@
+{
+  "id": "DG-0898",
+  "title": "医疗物资与急救包储藏复查",
+  "category": "医疗急救",
+  "priority": "P0",
+  "scenario": "药品、敷料、绷带、消毒用品和急救包需要长期保存，担心受潮、过期、污染或缺件。",
+  "goal": "保持医疗物资分区、干燥、可复查，并把不明或污染用品隔离。",
+  "tools": [
+    "药箱",
+    "急救包清单",
+    "标签",
+    "隔离袋",
+    "复查卡"
+  ],
+  "steps": [
+    "药品、敷料、照护用品和病人专用品分区存放。",
+    "药品保持原包装或清晰标签，避光、防潮、远离儿童和食物。",
+    "每月按清单检查急救包，记录缺件、过期、受潮和污染。",
+    "敷料、绷带和消毒用品外包装破损时先隔离。",
+    "过期、不明、受潮或散片药品进入暂存袋，不放回可用层。",
+    "交接时说明药箱完整度和隔离物位置。"
+  ],
+  "check": [
+    "药品标签完整。",
+    "敷料干燥未污染。",
+    "急救包清单与实物一致。",
+    "隔离药品没有混入可用区。"
+  ],
+  "common_mistakes": [
+    "散片药和正常药混盒。",
+    "受潮敷料仍标为可用。",
+    "急救包只补药品，不查记录卡和隔离袋。"
+  ],
+  "fallback": [
+    "没有专用药箱时，用避光干燥盒加编号袋。",
+    "清单缺失时，先盘点高风险药品、敷料和手套。",
+    "空间不足时，仍要分开可用层和隔离层。"
+  ],
+  "stop_or_escalate": [
+    "药品包装破损、过期、受潮、变色、刺鼻气味、儿童可接触、敷料污染或急救包关键缺件时，停止标记为可用。"
+  ],
+  "notes": "Long-Term Storage v0.1 行动入口；只处理保存、标签、复查、隔离和交接，不替代相邻领域专业判断。",
+  "category_original": "医疗急救",
+  "domains": [
+    "medical",
+    "general",
+    "hygiene"
+  ],
+  "intents": [
+    "long_term_storage_foundation",
+    "offline_inventory_action"
+  ],
+  "situations": [
+    "long_term_storage",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "药箱",
+    "急救包清单",
+    "标签",
+    "隔离袋",
+    "复查卡"
+  ],
+  "signals": [
+    "药品储藏",
+    "急救包复查",
+    "敷料绷带",
+    "过期药品",
+    "医疗物资污染"
+  ],
+  "risks": [
+    "misuse",
+    "contamination",
+    "moisture_damage",
+    "handover_loss"
+  ],
+  "keywords": [
+    "药品储藏",
+    "急救包复查",
+    "敷料绷带",
+    "过期药品",
+    "医疗物资污染"
+  ],
+  "negative_keywords": [
+    "云端库存",
+    "冷链系统",
+    "大型仓库工程",
+    "城市供应链管理"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "medical",
+  "primary_intent": "long_term_storage_foundation",
+  "top1_aliases": [
+    "医疗物资与急救包储藏复查"
+  ],
+  "related_wiki": [
+    "medical-storage-dressing-bandage-dry-pack-001",
+    "medical-storage-expired-unknown-medicine-hold-001",
+    "medical-storage-first-aid-kit-monthly-check-001",
+    "medical-storage-medicine-dry-dark-box-001",
+    "medical-storage-care-supply-zone-001"
+  ],
+  "risk_level": "high"
+}

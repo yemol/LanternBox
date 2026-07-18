@@ -1,0 +1,106 @@
+{
+  "id": "DG-0897",
+  "title": "种子储藏与复查",
+  "category": "种植与食物生产",
+  "priority": "P0",
+  "scenario": "留种、购买种子或交换种子需要跨季保存，担心受潮、混放、误食或复测遗漏。",
+  "goal": "让种子库保持干燥、分批、可复测，并与食用粮和生产计划保持清楚边界。",
+  "tools": [
+    "种子盒",
+    "种子袋",
+    "批次标签",
+    "复测卡",
+    "待复测区"
+  ],
+  "steps": [
+    "按作物和年份分盒，每袋写来源、批次、数量、位置和复测日。",
+    "留种批次与食用粮豆分架，厨房领用路线不经过种子盒。",
+    "定期检查盒内潮湿、结块、霉味、虫蛀和标签脱落。",
+    "受潮或来源不清种子移到待复测区，不作为可靠库存。",
+    "播种领用后登记地块、数量和剩余量。",
+    "季度交接时核对轮换卡和实物。"
+  ],
+  "check": [
+    "种子干燥无霉味。",
+    "标签能追到来源年份。",
+    "留种和食用分开。",
+    "待复测批次没有参与关键播种计划。"
+  ],
+  "common_mistakes": [
+    "把食用豆倒入种子盒。",
+    "受潮种子晾一下就回主库。",
+    "只记作物名，不记年份和来源。"
+  ],
+  "fallback": [
+    "没有专用种子盒时，使用干燥小袋加编号外盒。",
+    "复测条件不足时，先标待复测并降低生产计划依赖。",
+    "关键种子不足时，优先保留少量安全批次。"
+  ],
+  "stop_or_escalate": [
+    "种子霉味、结块、虫害、受潮、标签不明、留种与食用混放或关键作物只剩未复测批次时，停止领用。"
+  ],
+  "notes": "Long-Term Storage v0.1 行动入口；只处理保存、标签、复查、隔离和交接，不替代相邻领域专业判断。",
+  "category_original": "种植与食物生产",
+  "domains": [
+    "agriculture",
+    "general",
+    "food"
+  ],
+  "intents": [
+    "long_term_storage_foundation",
+    "offline_inventory_action"
+  ],
+  "situations": [
+    "long_term_storage",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "种子盒",
+    "种子袋",
+    "批次标签",
+    "复测卡",
+    "待复测区"
+  ],
+  "signals": [
+    "种子储藏",
+    "种子批次",
+    "发芽率复测",
+    "留种食用分离",
+    "种子受潮"
+  ],
+  "risks": [
+    "misuse",
+    "contamination",
+    "moisture_damage",
+    "handover_loss"
+  ],
+  "keywords": [
+    "种子储藏",
+    "种子批次",
+    "发芽率复测",
+    "留种食用分离",
+    "种子受潮"
+  ],
+  "negative_keywords": [
+    "云端库存",
+    "冷链系统",
+    "大型仓库工程",
+    "城市供应链管理"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "agriculture",
+  "primary_intent": "long_term_storage_foundation",
+  "top1_aliases": [
+    "种子储藏与复查"
+  ],
+  "related_wiki": [
+    "agriculture-storage-seed-moisture-quarantine-001",
+    "agriculture-storage-seed-food-separation-shelf-001",
+    "agriculture-storage-seed-library-rotation-card-001",
+    "agriculture-storage-seed-bag-label-001",
+    "agriculture-storage-seed-box-dry-check-001"
+  ],
+  "risk_level": "high"
+}

@@ -45821,5 +45821,501 @@
     "top1_aliases": [
       "废弃物与材料池记录交接"
     ]
+  },
+  {
+    "id": "DG-0895",
+    "title": "储藏区基础分区与标签",
+    "category": "信息保存与长期重建",
+    "category_original": "信息保存与长期重建",
+    "risk_level": "high",
+    "domains": [
+      "general",
+      "hygiene",
+      "repair"
+    ],
+    "intents": [
+      "long_term_storage_foundation",
+      "offline_inventory_action"
+    ],
+    "situations": [
+      "long_term_storage",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "分区标识",
+      "标签",
+      "库存卡",
+      "笔",
+      "离地垫高材料"
+    ],
+    "signals": [
+      "长期储藏",
+      "储藏分区",
+      "批次标签",
+      "防潮",
+      "虫鼠",
+      "可疑批次"
+    ],
+    "risks": [
+      "misuse",
+      "contamination",
+      "moisture_damage",
+      "handover_loss"
+    ],
+    "keywords": [
+      "长期储藏",
+      "储藏分区",
+      "批次标签",
+      "防潮",
+      "虫鼠",
+      "可疑批次"
+    ],
+    "negative_keywords": [
+      "云端库存",
+      "冷链系统",
+      "大型仓库工程",
+      "城市供应链管理"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "general",
+    "primary_intent": "long_term_storage_foundation",
+    "top1_aliases": [
+      "储藏区基础分区与标签"
+    ]
+  },
+  {
+    "id": "DG-0896",
+    "title": "干粮 / 米面豆类防潮防虫储藏",
+    "category": "食物",
+    "category_original": "食物",
+    "risk_level": "high",
+    "domains": [
+      "food",
+      "general",
+      "hygiene"
+    ],
+    "intents": [
+      "long_term_storage_foundation",
+      "offline_inventory_action"
+    ],
+    "situations": [
+      "long_term_storage",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "储粮容器",
+      "货架",
+      "标签",
+      "库存卡",
+      "隔离袋"
+    ],
+    "signals": [
+      "干粮储藏",
+      "米面豆类",
+      "防潮防虫",
+      "鼠咬",
+      "罐头复查",
+      "应急口粮"
+    ],
+    "risks": [
+      "misuse",
+      "contamination",
+      "moisture_damage",
+      "handover_loss"
+    ],
+    "keywords": [
+      "干粮储藏",
+      "米面豆类",
+      "防潮防虫",
+      "鼠咬",
+      "罐头复查",
+      "应急口粮"
+    ],
+    "negative_keywords": [
+      "云端库存",
+      "冷链系统",
+      "大型仓库工程",
+      "城市供应链管理"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "food",
+    "primary_intent": "long_term_storage_foundation",
+    "top1_aliases": [
+      "干粮 / 米面豆类防潮防虫储藏"
+    ]
+  },
+  {
+    "id": "DG-0897",
+    "title": "种子储藏与复查",
+    "category": "种植与食物生产",
+    "category_original": "种植与食物生产",
+    "risk_level": "high",
+    "domains": [
+      "agriculture",
+      "general",
+      "food"
+    ],
+    "intents": [
+      "long_term_storage_foundation",
+      "offline_inventory_action"
+    ],
+    "situations": [
+      "long_term_storage",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "种子盒",
+      "种子袋",
+      "批次标签",
+      "复测卡",
+      "待复测区"
+    ],
+    "signals": [
+      "种子储藏",
+      "种子批次",
+      "发芽率复测",
+      "留种食用分离",
+      "种子受潮"
+    ],
+    "risks": [
+      "misuse",
+      "contamination",
+      "moisture_damage",
+      "handover_loss"
+    ],
+    "keywords": [
+      "种子储藏",
+      "种子批次",
+      "发芽率复测",
+      "留种食用分离",
+      "种子受潮"
+    ],
+    "negative_keywords": [
+      "云端库存",
+      "冷链系统",
+      "大型仓库工程",
+      "城市供应链管理"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "agriculture",
+    "primary_intent": "long_term_storage_foundation",
+    "top1_aliases": [
+      "种子储藏与复查"
+    ]
+  },
+  {
+    "id": "DG-0898",
+    "title": "医疗物资与急救包储藏复查",
+    "category": "医疗急救",
+    "category_original": "医疗急救",
+    "risk_level": "high",
+    "domains": [
+      "medical",
+      "general",
+      "hygiene"
+    ],
+    "intents": [
+      "long_term_storage_foundation",
+      "offline_inventory_action"
+    ],
+    "situations": [
+      "long_term_storage",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "药箱",
+      "急救包清单",
+      "标签",
+      "隔离袋",
+      "复查卡"
+    ],
+    "signals": [
+      "药品储藏",
+      "急救包复查",
+      "敷料绷带",
+      "过期药品",
+      "医疗物资污染"
+    ],
+    "risks": [
+      "misuse",
+      "contamination",
+      "moisture_damage",
+      "handover_loss"
+    ],
+    "keywords": [
+      "药品储藏",
+      "急救包复查",
+      "敷料绷带",
+      "过期药品",
+      "医疗物资污染"
+    ],
+    "negative_keywords": [
+      "云端库存",
+      "冷链系统",
+      "大型仓库工程",
+      "城市供应链管理"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "medical",
+    "primary_intent": "long_term_storage_foundation",
+    "top1_aliases": [
+      "医疗物资与急救包储藏复查"
+    ]
+  },
+  {
+    "id": "DG-0899",
+    "title": "工具和材料防潮防锈储藏",
+    "category": "基础制造与材料维修",
+    "category_original": "基础制造与材料维修",
+    "risk_level": "high",
+    "domains": [
+      "repair",
+      "tools",
+      "general"
+    ],
+    "intents": [
+      "long_term_storage_foundation",
+      "offline_inventory_action"
+    ],
+    "situations": [
+      "long_term_storage",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "工具盒",
+      "刃具盒",
+      "零件盒",
+      "材料架",
+      "复查卡"
+    ],
+    "signals": [
+      "工具储藏",
+      "防锈",
+      "锋利工具",
+      "小零件盒",
+      "材料堆放",
+      "货架超载"
+    ],
+    "risks": [
+      "misuse",
+      "contamination",
+      "moisture_damage",
+      "handover_loss"
+    ],
+    "keywords": [
+      "工具储藏",
+      "防锈",
+      "锋利工具",
+      "小零件盒",
+      "材料堆放",
+      "货架超载"
+    ],
+    "negative_keywords": [
+      "云端库存",
+      "冷链系统",
+      "大型仓库工程",
+      "城市供应链管理"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "long_term_storage_foundation",
+    "top1_aliases": [
+      "工具和材料防潮防锈储藏"
+    ]
+  },
+  {
+    "id": "DG-0900",
+    "title": "能源 / 燃料物资安全储藏",
+    "category": "能源",
+    "category_original": "能源",
+    "risk_level": "high",
+    "domains": [
+      "energy",
+      "fire",
+      "general"
+    ],
+    "intents": [
+      "long_term_storage_foundation",
+      "offline_inventory_action"
+    ],
+    "situations": [
+      "long_term_storage",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "电池盒",
+      "电源标签",
+      "点火材料盒",
+      "燃料标签",
+      "隔离盒"
+    ],
+    "signals": [
+      "电池储藏",
+      "充电宝轮换",
+      "燃料远离火源",
+      "火柴防潮",
+      "漏液隔离"
+    ],
+    "risks": [
+      "misuse",
+      "contamination",
+      "moisture_damage",
+      "handover_loss"
+    ],
+    "keywords": [
+      "电池储藏",
+      "充电宝轮换",
+      "燃料远离火源",
+      "火柴防潮",
+      "漏液隔离"
+    ],
+    "negative_keywords": [
+      "云端库存",
+      "冷链系统",
+      "大型仓库工程",
+      "城市供应链管理"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "energy",
+    "primary_intent": "long_term_storage_foundation",
+    "top1_aliases": [
+      "能源 / 燃料物资安全储藏"
+    ]
+  },
+  {
+    "id": "DG-0901",
+    "title": "霉变 / 漏液 / 过期 / 污染物隔离",
+    "category": "污染控制 / 隔离 / 清洁分区",
+    "category_original": "污染控制 / 隔离 / 清洁分区",
+    "risk_level": "high",
+    "domains": [
+      "hygiene",
+      "general",
+      "food"
+    ],
+    "intents": [
+      "long_term_storage_foundation",
+      "offline_inventory_action"
+    ],
+    "situations": [
+      "long_term_storage",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "隔离容器",
+      "禁用标签",
+      "异常记录",
+      "手套或替代隔离物",
+      "交接卡"
+    ],
+    "signals": [
+      "霉变隔离",
+      "漏液异味",
+      "过期物品",
+      "污染容器",
+      "可疑批次"
+    ],
+    "risks": [
+      "misuse",
+      "contamination",
+      "moisture_damage",
+      "handover_loss"
+    ],
+    "keywords": [
+      "霉变隔离",
+      "漏液异味",
+      "过期物品",
+      "污染容器",
+      "可疑批次"
+    ],
+    "negative_keywords": [
+      "云端库存",
+      "冷链系统",
+      "大型仓库工程",
+      "城市供应链管理"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "hygiene",
+    "primary_intent": "long_term_storage_foundation",
+    "top1_aliases": [
+      "霉变 / 漏液 / 过期 / 污染物隔离"
+    ]
+  },
+  {
+    "id": "DG-0902",
+    "title": "储藏记录、先入先出与交接",
+    "category": "信息保存与长期重建",
+    "category_original": "信息保存与长期重建",
+    "risk_level": "normal",
+    "domains": [
+      "general",
+      "food",
+      "agriculture"
+    ],
+    "intents": [
+      "long_term_storage_foundation",
+      "offline_inventory_action"
+    ],
+    "situations": [
+      "long_term_storage",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "库存卡",
+      "复查日历",
+      "异常记录",
+      "交接卡",
+      "笔"
+    ],
+    "signals": [
+      "储藏记录",
+      "库存卡",
+      "复查日历",
+      "先入先出",
+      "交接卡",
+      "异常记录"
+    ],
+    "risks": [
+      "misuse",
+      "contamination",
+      "moisture_damage",
+      "handover_loss"
+    ],
+    "keywords": [
+      "储藏记录",
+      "库存卡",
+      "复查日历",
+      "先入先出",
+      "交接卡",
+      "异常记录"
+    ],
+    "negative_keywords": [
+      "云端库存",
+      "冷链系统",
+      "大型仓库工程",
+      "城市供应链管理"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "general",
+    "primary_intent": "long_term_storage_foundation",
+    "top1_aliases": [
+      "储藏记录、先入先出与交接"
+    ]
   }
 ]

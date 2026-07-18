@@ -1,0 +1,109 @@
+{
+  "id": "DG-0895",
+  "title": "储藏区基础分区与标签",
+  "category": "信息保存与长期重建",
+  "priority": "P0",
+  "scenario": "小团队开始建立长期储藏区，食物、种子、医疗、工具材料、能源和可疑物容易混放。",
+  "goal": "建立固定分区和最小标签，让下一班能安全找到、复查和隔离物资。",
+  "tools": [
+    "分区标识",
+    "标签",
+    "库存卡",
+    "笔",
+    "离地垫高材料"
+  ],
+  "steps": [
+    "先把可用物资、待复查物资和禁用物资分开放。",
+    "按食物、种子、医疗、工具材料、能源和可疑物设置固定区域。",
+    "给每个区域贴名称、负责人、复查日和禁止混放内容。",
+    "为容器和货架补齐名称、来源、批次、状态、入库日和复查日。",
+    "检查潮湿、虫鼠、堆叠超载和燃料靠近火源问题。",
+    "交接时现场核对高风险区和可疑区。"
+  ],
+  "check": [
+    "主库和隔离区分开。",
+    "每个区域有标签。",
+    "通道未被堵住。",
+    "高风险物资有复查日和负责人。"
+  ],
+  "common_mistakes": [
+    "只按物品大小堆放，不按风险分区。",
+    "标签只写名字，没有批次和状态。",
+    "可疑物暂时放回主库。"
+  ],
+  "fallback": [
+    "没有货架时，用离地垫高和固定角落临时分区。",
+    "没有标签纸时，用编号加总账。",
+    "空间不足时，优先分开食物、医疗、能源和可疑物。"
+  ],
+  "stop_or_escalate": [
+    "发现燃料贴近火源、漏液物进主库、霉味食物混入可用区、货架变形或标签大面积缺失时，停止领用并先重建分区。"
+  ],
+  "notes": "Long-Term Storage v0.1 行动入口；只处理保存、标签、复查、隔离和交接，不替代相邻领域专业判断。",
+  "category_original": "信息保存与长期重建",
+  "domains": [
+    "general",
+    "hygiene",
+    "repair"
+  ],
+  "intents": [
+    "long_term_storage_foundation",
+    "offline_inventory_action"
+  ],
+  "situations": [
+    "long_term_storage",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "分区标识",
+    "标签",
+    "库存卡",
+    "笔",
+    "离地垫高材料"
+  ],
+  "signals": [
+    "长期储藏",
+    "储藏分区",
+    "批次标签",
+    "防潮",
+    "虫鼠",
+    "可疑批次"
+  ],
+  "risks": [
+    "misuse",
+    "contamination",
+    "moisture_damage",
+    "handover_loss"
+  ],
+  "keywords": [
+    "长期储藏",
+    "储藏分区",
+    "批次标签",
+    "防潮",
+    "虫鼠",
+    "可疑批次"
+  ],
+  "negative_keywords": [
+    "云端库存",
+    "冷链系统",
+    "大型仓库工程",
+    "城市供应链管理"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "general",
+  "primary_intent": "long_term_storage_foundation",
+  "top1_aliases": [
+    "储藏区基础分区与标签"
+  ],
+  "related_wiki": [
+    "general-storage-zone-basic-layout-001",
+    "general-storage-label-minimum-fields-001",
+    "general-storage-moisture-daily-check-001",
+    "general-storage-pest-rodent-check-001",
+    "general-storage-fifo-shelf-rule-001",
+    "repair-storage-shelf-overload-warning-001"
+  ],
+  "risk_level": "high"
+}

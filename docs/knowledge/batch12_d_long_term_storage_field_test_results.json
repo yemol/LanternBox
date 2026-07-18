@@ -1,0 +1,4804 @@
+{
+  "generated_at": "2026-07-18T14:51:11.016617+00:00",
+  "summary": {
+    "total": 26,
+    "strict_total": 20,
+    "observation_total": 6,
+    "pass": 26,
+    "partial": 0,
+    "fail": 0,
+    "strict_pass": 20,
+    "strict_partial": 0,
+    "strict_fail": 0,
+    "guide_hit_rate": "100.0%",
+    "expected_guide_hit_rate": "100.0%",
+    "wiki_hit_rate": "100.0%",
+    "wiki_hit_any_rate": "100.0%",
+    "guide_wiki_precise_rate": "100.0%",
+    "storage_primary_rate": "88.5%",
+    "safety_boundary_rate": "100.0%",
+    "fallback_rate": "100.0%",
+    "record_rate": "100.0%",
+    "dangerous_suggestion_count": 0,
+    "kiwix_override_count": 0,
+    "cross_domain_count": 3,
+    "root_cause_counts": {},
+    "cross_domain_counts": {
+      "off_domain_primary": 3,
+      "storage_vs_food": 1,
+      "storage_vs_medical": 1,
+      "storage_vs_waste": 2,
+      "storage_vs_energy": 1,
+      "storage_vs_manufacturing": 1,
+      "storage_vs_hygiene": 1
+    },
+    "conflict_observation_counts": {
+      "food": 2,
+      "hygiene": 2,
+      "waste": 3,
+      "medical": 1,
+      "contamination": 1,
+      "energy": 1,
+      "manufacturing": 1
+    }
+  },
+  "cases": [
+    {
+      "id": "storage_zone_labeling",
+      "query": "家里的储藏区应该怎么分区和贴标签？",
+      "observation": false,
+      "focus": "Storage 主行动链起点：分区、标签、可疑区、复查日和交接，不应被泛记录或安全建议替代。",
+      "watch_conflicts": [
+        "food",
+        "agriculture",
+        "medical",
+        "manufacturing",
+        "waste",
+        "energy",
+        "fire",
+        "repair"
+      ],
+      "expected_guides": [
+        "DG-0895"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "general-storage-zone-basic-layout-001"
+      ],
+      "profiles": [
+        "storage_basic_zone_labeling"
+      ],
+      "domains": [
+        "general",
+        "repair",
+        "hygiene",
+        "agriculture",
+        "food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签",
+          "risk_level": "high",
+          "domains": [
+            "general",
+            "hygiene",
+            "repair"
+          ]
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接",
+          "risk_level": "normal",
+          "domains": [
+            "general",
+            "food",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏",
+          "risk_level": "high",
+          "domains": [
+            "food",
+            "general",
+            "hygiene"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "general-storage-zone-basic-layout-001",
+          "title": "长期储藏区基础分区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-label-minimum-fields-001",
+          "title": "储藏标签最小字段",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-moisture-daily-check-001",
+          "title": "储藏区潮湿日查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-pest-rodent-check-001",
+          "title": "储藏区虫鼠巡查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-shelf-overload-warning-001",
+          "title": "储藏架超载警示",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-handover-card-001",
+          "title": "储藏区交接卡",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-inventory-card-minimum-001",
+          "title": "储藏库存卡最小字段",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏"
+        },
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏"
+        },
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "general-storage-zone-basic-layout-001",
+          "title": "长期储藏区基础分区"
+        },
+        {
+          "slug": "general-storage-moisture-daily-check-001",
+          "title": "储藏区潮湿日查"
+        },
+        {
+          "slug": "general-storage-pest-rodent-check-001",
+          "title": "储藏区虫鼠巡查"
+        },
+        {
+          "slug": "general-storage-label-minimum-fields-001",
+          "title": "储藏标签最小字段"
+        },
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-bag-label-001",
+        "agriculture-storage-seed-library-rotation-card-001",
+        "energy-storage-power-bank-rotation-label-001",
+        "food-storage-can-jar-monthly-check-001",
+        "food-storage-dry-grain-zone-001",
+        "food-storage-emergency-ration-reserve-line-001",
+        "food-storage-grain-moisture-clump-check-001",
+        "food-storage-opened-package-short-use-001",
+        "food-storage-rodent-bite-isolation-001",
+        "general-storage-check-calendar-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-fifo-shelf-rule-001",
+        "general-storage-handover-card-001",
+        "general-storage-inventory-card-minimum-001",
+        "general-storage-issue-log-001",
+        "general-storage-label-minimum-fields-001",
+        "general-storage-moisture-daily-check-001",
+        "general-storage-pest-rodent-check-001",
+        "general-storage-zone-basic-layout-001",
+        "repair-storage-shelf-overload-warning-001",
+        "repair-storage-small-parts-bin-label-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_dry_grain_moisture_pest",
+      "query": "米面豆类怎么防潮防虫长期保存？",
+      "observation": false,
+      "focus": "干粮长期保存应由 Storage/Food storage evidence 主导，入口食用判断只作为后续补充。",
+      "watch_conflicts": [
+        "food",
+        "hygiene",
+        "waste"
+      ],
+      "expected_guides": [
+        "DG-0896"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "food-storage-dry-grain-zone-001"
+      ],
+      "profiles": [
+        "storage_food_grain_rotation"
+      ],
+      "domains": [
+        "general",
+        "hygiene",
+        "food",
+        "agriculture"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏",
+          "risk_level": "high",
+          "domains": [
+            "food",
+            "general",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接",
+          "risk_level": "normal",
+          "domains": [
+            "general",
+            "food",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离",
+          "risk_level": "high",
+          "domains": [
+            "hygiene",
+            "general",
+            "food"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "food-storage-dry-grain-zone-001",
+          "title": "干粮和米面豆类储藏区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-grain-moisture-clump-check-001",
+          "title": "米面豆类受潮结块检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-pest-rodent-check-001",
+          "title": "储藏区虫鼠巡查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-can-jar-monthly-check-001",
+          "title": "罐头和密封食品月度复查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-opened-package-short-use-001",
+          "title": "开封食品短期使用标签",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-emergency-ration-reserve-line-001",
+          "title": "应急口粮保底线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-handover-card-001",
+          "title": "储藏区交接卡",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        },
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离"
+        },
+        {
+          "id": "DG-0049",
+          "title": "食物防鼠：硬盒、离地、清屑"
+        },
+        {
+          "id": "DG-0176",
+          "title": "室内防潮防霉"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0600",
+          "title": "食物残渣处理：防虫防臭和卫生"
+        },
+        {
+          "id": "DG-0044",
+          "title": "晒干保存：切薄、防虫、彻底干"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "food-storage-grain-moisture-clump-check-001",
+          "title": "米面豆类受潮结块检查"
+        },
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则"
+        },
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离"
+        },
+        {
+          "slug": "general-storage-pest-rodent-check-001",
+          "title": "储藏区虫鼠巡查"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-bag-label-001",
+        "agriculture-storage-seed-library-rotation-card-001",
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "energy-storage-power-bank-rotation-label-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "food-storage-can-jar-monthly-check-001",
+        "food-storage-dry-grain-zone-001",
+        "food-storage-emergency-ration-reserve-line-001",
+        "food-storage-grain-moisture-clump-check-001",
+        "food-storage-opened-package-short-use-001",
+        "food-storage-rodent-bite-isolation-001",
+        "general-storage-check-calendar-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-fifo-shelf-rule-001",
+        "general-storage-handover-card-001",
+        "general-storage-inventory-card-minimum-001",
+        "general-storage-issue-log-001",
+        "general-storage-label-minimum-fields-001",
+        "general-storage-pest-rodent-check-001",
+        "general-storage-suspect-batch-quarantine-001",
+        "hygiene-storage-contaminated-container-hold-001",
+        "hygiene-storage-leak-odor-isolation-001",
+        "medical-storage-dressing-bandage-dry-pack-001",
+        "medical-storage-expired-unknown-medicine-hold-001",
+        "repair-storage-sharp-tool-secure-box-001",
+        "repair-storage-small-parts-bin-label-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_rodent_food_batch_isolation",
+      "query": "储粮区发现鼠咬痕迹，要怎么隔离批次？",
+      "observation": false,
+      "focus": "鼠咬食物先做批次隔离和记录，不直接进入食用判断。",
+      "watch_conflicts": [
+        "food",
+        "hygiene",
+        "medical",
+        "waste"
+      ],
+      "expected_guides": [
+        "DG-0896",
+        "DG-0901"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "food-storage-rodent-bite-isolation-001"
+      ],
+      "profiles": [
+        "storage_food_grain_rotation"
+      ],
+      "domains": [
+        "general",
+        "hygiene",
+        "food",
+        "agriculture"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离",
+          "risk_level": "high",
+          "domains": [
+            "hygiene",
+            "general",
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏",
+          "risk_level": "high",
+          "domains": [
+            "food",
+            "general",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接",
+          "risk_level": "normal",
+          "domains": [
+            "general",
+            "food",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "hygiene-storage-leak-odor-isolation-001",
+          "title": "漏液异味物品隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-suspect-batch-quarantine-001",
+          "title": "可疑批次隔离区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-expired-item-hold-card-001",
+          "title": "过期物品暂存卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-storage-contaminated-container-hold-001",
+          "title": "污染容器暂存标签",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-expired-unknown-medicine-hold-001",
+          "title": "过期和不明药品暂存",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-storage-battery-leak-suspect-bin-001",
+          "title": "漏液疑似电池隔离盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-grain-moisture-clump-check-001",
+          "title": "米面豆类受潮结块检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离"
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        },
+        {
+          "id": "DG-0049",
+          "title": "食物防鼠：硬盒、离地、清屑"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "food-storage-grain-moisture-clump-check-001",
+          "title": "米面豆类受潮结块检查"
+        },
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则"
+        },
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离"
+        },
+        {
+          "slug": "general-storage-pest-rodent-check-001",
+          "title": "储藏区虫鼠巡查"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-bag-label-001",
+        "agriculture-storage-seed-library-rotation-card-001",
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "energy-storage-power-bank-rotation-label-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "food-storage-can-jar-monthly-check-001",
+        "food-storage-dry-grain-zone-001",
+        "food-storage-emergency-ration-reserve-line-001",
+        "food-storage-grain-moisture-clump-check-001",
+        "food-storage-opened-package-short-use-001",
+        "food-storage-rodent-bite-isolation-001",
+        "general-storage-check-calendar-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-fifo-shelf-rule-001",
+        "general-storage-handover-card-001",
+        "general-storage-inventory-card-minimum-001",
+        "general-storage-issue-log-001",
+        "general-storage-label-minimum-fields-001",
+        "general-storage-pest-rodent-check-001",
+        "general-storage-suspect-batch-quarantine-001",
+        "hygiene-storage-contaminated-container-hold-001",
+        "hygiene-storage-leak-odor-isolation-001",
+        "medical-storage-dressing-bandage-dry-pack-001",
+        "medical-storage-expired-unknown-medicine-hold-001",
+        "repair-storage-sharp-tool-secure-box-001",
+        "repair-storage-small-parts-bin-label-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_moldy_dry_food_batch_hold",
+      "query": "干粮有霉味，但还没准备吃，应该怎么处理这批？",
+      "observation": false,
+      "focus": "霉味干粮在未入口前应由储藏批次隔离主导，Food safety 可补充不可入口边界。",
+      "watch_conflicts": [
+        "food",
+        "hygiene",
+        "waste"
+      ],
+      "expected_guides": [
+        "DG-0896",
+        "DG-0901"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "food-storage-grain-moisture-clump-check-001"
+      ],
+      "profiles": [
+        "storage_food_grain_rotation"
+      ],
+      "domains": [
+        "general",
+        "hygiene",
+        "food",
+        "agriculture"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏",
+          "risk_level": "high",
+          "domains": [
+            "food",
+            "general",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离",
+          "risk_level": "high",
+          "domains": [
+            "hygiene",
+            "general",
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接",
+          "risk_level": "normal",
+          "domains": [
+            "general",
+            "food",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "food-storage-dry-grain-zone-001",
+          "title": "干粮和米面豆类储藏区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-grain-moisture-clump-check-001",
+          "title": "米面豆类受潮结块检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-pest-rodent-check-001",
+          "title": "储藏区虫鼠巡查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-can-jar-monthly-check-001",
+          "title": "罐头和密封食品月度复查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-opened-package-short-use-001",
+          "title": "开封食品短期使用标签",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-emergency-ration-reserve-line-001",
+          "title": "应急口粮保底线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-storage-leak-odor-isolation-001",
+          "title": "漏液异味物品隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏"
+        },
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        },
+        {
+          "id": "DG-0049",
+          "title": "食物防鼠：硬盒、离地、清屑"
+        },
+        {
+          "id": "DG-0628",
+          "title": "霉味衣物和睡眠区分离"
+        },
+        {
+          "id": "DG-0606",
+          "title": "干粮和罐头三天配给表"
+        },
+        {
+          "id": "DG-0575",
+          "title": "室内异味和霉味：通风干燥判断"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "food-storage-grain-moisture-clump-check-001",
+          "title": "米面豆类受潮结块检查"
+        },
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则"
+        },
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离"
+        },
+        {
+          "slug": "general-storage-pest-rodent-check-001",
+          "title": "储藏区虫鼠巡查"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-bag-label-001",
+        "agriculture-storage-seed-library-rotation-card-001",
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "energy-storage-power-bank-rotation-label-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "food-storage-can-jar-monthly-check-001",
+        "food-storage-dry-grain-zone-001",
+        "food-storage-emergency-ration-reserve-line-001",
+        "food-storage-grain-moisture-clump-check-001",
+        "food-storage-opened-package-short-use-001",
+        "food-storage-rodent-bite-isolation-001",
+        "general-storage-check-calendar-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-fifo-shelf-rule-001",
+        "general-storage-handover-card-001",
+        "general-storage-inventory-card-minimum-001",
+        "general-storage-issue-log-001",
+        "general-storage-label-minimum-fields-001",
+        "general-storage-pest-rodent-check-001",
+        "general-storage-suspect-batch-quarantine-001",
+        "hygiene-storage-contaminated-container-hold-001",
+        "hygiene-storage-leak-odor-isolation-001",
+        "medical-storage-dressing-bandage-dry-pack-001",
+        "medical-storage-expired-unknown-medicine-hold-001",
+        "repair-storage-sharp-tool-secure-box-001",
+        "repair-storage-small-parts-bin-label-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_fifo_grain_rotation",
+      "query": "储粮应该怎么做先入先出，避免旧粮被忘掉？",
+      "observation": false,
+      "focus": "先入先出是 Storage 记录和轮换动作，不应被一般食物库存泛化。",
+      "watch_conflicts": [
+        "food",
+        "records",
+        "organization"
+      ],
+      "expected_guides": [
+        "DG-0896",
+        "DG-0902"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "general-storage-fifo-shelf-rule-001"
+      ],
+      "profiles": [
+        "storage_food_grain_rotation",
+        "storage_inventory_handover"
+      ],
+      "domains": [
+        "general",
+        "agriculture",
+        "food",
+        "hygiene"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接",
+          "risk_level": "normal",
+          "domains": [
+            "general",
+            "food",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏",
+          "risk_level": "high",
+          "domains": [
+            "food",
+            "general",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离",
+          "risk_level": "high",
+          "domains": [
+            "hygiene",
+            "general",
+            "food"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "general-storage-handover-card-001",
+          "title": "储藏区交接卡",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-inventory-card-minimum-001",
+          "title": "储藏库存卡最小字段",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-check-calendar-001",
+          "title": "储藏复查日历",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-issue-log-001",
+          "title": "储藏异常记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-label-minimum-fields-001",
+          "title": "储藏标签最小字段",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏"
+        },
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离"
+        },
+        {
+          "id": "DG-0049",
+          "title": "食物防鼠：硬盒、离地、清屑"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则"
+        },
+        {
+          "slug": "general-storage-check-calendar-001",
+          "title": "储藏复查日历"
+        },
+        {
+          "slug": "general-storage-handover-card-001",
+          "title": "储藏区交接卡"
+        },
+        {
+          "slug": "general-storage-inventory-card-minimum-001",
+          "title": "储藏库存卡最小字段"
+        },
+        {
+          "slug": "general-storage-issue-log-001",
+          "title": "储藏异常记录"
+        },
+        {
+          "slug": "food-storage-grain-moisture-clump-check-001",
+          "title": "米面豆类受潮结块检查"
+        },
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离"
+        },
+        {
+          "slug": "general-storage-pest-rodent-check-001",
+          "title": "储藏区虫鼠巡查"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-bag-label-001",
+        "agriculture-storage-seed-library-rotation-card-001",
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "energy-storage-power-bank-rotation-label-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "food-storage-can-jar-monthly-check-001",
+        "food-storage-dry-grain-zone-001",
+        "food-storage-emergency-ration-reserve-line-001",
+        "food-storage-grain-moisture-clump-check-001",
+        "food-storage-opened-package-short-use-001",
+        "food-storage-rodent-bite-isolation-001",
+        "general-storage-check-calendar-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-fifo-shelf-rule-001",
+        "general-storage-handover-card-001",
+        "general-storage-inventory-card-minimum-001",
+        "general-storage-issue-log-001",
+        "general-storage-label-minimum-fields-001",
+        "general-storage-pest-rodent-check-001",
+        "general-storage-suspect-batch-quarantine-001",
+        "hygiene-storage-contaminated-container-hold-001",
+        "hygiene-storage-leak-odor-isolation-001",
+        "medical-storage-dressing-bandage-dry-pack-001",
+        "medical-storage-expired-unknown-medicine-hold-001",
+        "repair-storage-sharp-tool-secure-box-001",
+        "repair-storage-small-parts-bin-label-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_seed_moisture_recheck",
+      "query": "种子袋有潮气，应该怎么复查和隔离？",
+      "observation": false,
+      "focus": "受潮种子储藏复查和待复测隔离应命中 DG-0897，Agriculture 生产计划可补充。",
+      "watch_conflicts": [
+        "agriculture",
+        "food",
+        "hygiene"
+      ],
+      "expected_guides": [
+        "DG-0897"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-storage-seed-moisture-quarantine-001"
+      ],
+      "profiles": [
+        "storage_seed_storage"
+      ],
+      "domains": [
+        "general",
+        "agriculture",
+        "food",
+        "planting"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查",
+          "risk_level": "high",
+          "domains": [
+            "agriculture",
+            "general",
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-food-separation-shelf-001",
+          "title": "留种和食用批次分架",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-box-dry-check-001",
+          "title": "种子盒干燥复查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-batch-viability-ledger-001",
+          "title": "种子批次与发芽率复测台账",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-drying-recheck-001",
+          "title": "种子干燥后的复查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-storage-moisture-failure-001",
+          "title": "种子受潮失效判断",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查"
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-storage-seed-box-dry-check-001",
+          "title": "种子盒干燥复查"
+        },
+        {
+          "slug": "agriculture-storage-seed-food-separation-shelf-001",
+          "title": "留种和食用批次分架"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签"
+        },
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-seed-batch-viability-ledger-001",
+        "agriculture-seed-drying-recheck-001",
+        "agriculture-seed-food-harvest-separation-001",
+        "agriculture-seed-germination-test-001",
+        "agriculture-seed-library-box-index-001",
+        "agriculture-seed-reserve-use-line-001",
+        "agriculture-seed-saving-001",
+        "agriculture-seed-selection-for-saving-001",
+        "agriculture-seed-storage-001",
+        "agriculture-seed-storage-moisture-failure-001",
+        "agriculture-storage-seed-bag-label-001",
+        "agriculture-storage-seed-box-dry-check-001",
+        "agriculture-storage-seed-food-separation-shelf-001",
+        "agriculture-storage-seed-library-rotation-card-001",
+        "agriculture-storage-seed-moisture-quarantine-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_seed_food_separation",
+      "query": "留种和食用种子应该怎么分开放？",
+      "observation": false,
+      "focus": "留种和食用分离属于种子 storage 主链，应避免被普通 food storage 抢走。",
+      "watch_conflicts": [
+        "agriculture",
+        "food",
+        "records"
+      ],
+      "expected_guides": [
+        "DG-0897"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-storage-seed-food-separation-shelf-001"
+      ],
+      "profiles": [
+        "agriculture_seed_library",
+        "agriculture_postharvest_storage",
+        "storage_seed_storage"
+      ],
+      "domains": [
+        "general",
+        "agriculture",
+        "food",
+        "planting"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查",
+          "risk_level": "high",
+          "domains": [
+            "agriculture",
+            "general",
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-food-separation-shelf-001",
+          "title": "留种和食用批次分架",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-box-dry-check-001",
+          "title": "种子盒干燥复查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-batch-viability-ledger-001",
+          "title": "种子批次与发芽率复测台账",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-drying-recheck-001",
+          "title": "种子干燥后的复查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-storage-moisture-failure-001",
+          "title": "种子受潮失效判断",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查"
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测"
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0885",
+          "title": "收获后晾晒防霉与储藏"
+        },
+        {
+          "id": "DG-0232",
+          "title": "种子库存管理"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        },
+        {
+          "id": "DG-0832",
+          "title": "采收后分级防霉"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-storage-seed-food-separation-shelf-001",
+          "title": "留种和食用批次分架"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡"
+        },
+        {
+          "slug": "agriculture-storage-seed-box-dry-check-001",
+          "title": "种子盒干燥复查"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签"
+        },
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离"
+        },
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离"
+        },
+        {
+          "slug": "agriculture-rodent-insect-storage-barrier-001",
+          "title": "储粮鼠虫防护"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-expectation-001",
+        "agriculture-local-crop-profile-001",
+        "agriculture-planting-inventory-link-001",
+        "agriculture-production-failure-backup-plan-001",
+        "agriculture-quick-leaf-long-cycle-balance-001",
+        "agriculture-seed-batch-viability-ledger-001",
+        "agriculture-seed-drying-recheck-001",
+        "agriculture-seed-food-harvest-separation-001",
+        "agriculture-seed-germination-test-001",
+        "agriculture-seed-library-box-index-001",
+        "agriculture-seed-reserve-use-line-001",
+        "agriculture-seed-saving-001",
+        "agriculture-seed-selection-for-saving-001",
+        "agriculture-seed-storage-001",
+        "agriculture-seed-storage-002",
+        "agriculture-seed-storage-moisture-failure-001",
+        "agriculture-staple-crop-small-plot-priority-001",
+        "agriculture-storage-seed-bag-label-001",
+        "agriculture-storage-seed-box-dry-check-001",
+        "agriculture-storage-seed-food-separation-shelf-001",
+        "agriculture-storage-seed-library-rotation-card-001",
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "agriculture-water-fertility-budget-card-001",
+        "agriculture-yield-record-minimum-fields-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_seed_library_rotation_record",
+      "query": "种子库怎么做轮换记录？",
+      "observation": false,
+      "focus": "种子库轮换记录应由种子储藏入口主导，通用交接记录可为 secondary。",
+      "watch_conflicts": [
+        "agriculture",
+        "organization",
+        "records"
+      ],
+      "expected_guides": [
+        "DG-0897"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0902"
+      ],
+      "expected_wiki": [
+        "agriculture-storage-seed-library-rotation-card-001"
+      ],
+      "profiles": [
+        "storage_seed_storage",
+        "storage_inventory_handover"
+      ],
+      "domains": [
+        "general",
+        "agriculture",
+        "food",
+        "planting",
+        "water"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查",
+          "risk_level": "high",
+          "domains": [
+            "agriculture",
+            "general",
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接",
+          "risk_level": "normal",
+          "domains": [
+            "general",
+            "food",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0232",
+          "title": "种子库存管理",
+          "risk_level": "normal",
+          "domains": [
+            "food",
+            "planting",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-food-separation-shelf-001",
+          "title": "留种和食用批次分架",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-box-dry-check-001",
+          "title": "种子盒干燥复查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-handover-card-001",
+          "title": "储藏区交接卡",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-inventory-card-minimum-001",
+          "title": "储藏库存卡最小字段",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-check-calendar-001",
+          "title": "储藏复查日历",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        },
+        {
+          "id": "DG-0232",
+          "title": "种子库存管理"
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签"
+        },
+        {
+          "slug": "agriculture-storage-seed-food-separation-shelf-001",
+          "title": "留种和食用批次分架"
+        },
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡"
+        },
+        {
+          "slug": "agriculture-storage-seed-box-dry-check-001",
+          "title": "种子盒干燥复查"
+        },
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则"
+        },
+        {
+          "slug": "general-storage-check-calendar-001",
+          "title": "储藏复查日历"
+        },
+        {
+          "slug": "general-storage-handover-card-001",
+          "title": "储藏区交接卡"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-planting-inventory-link-001",
+        "agriculture-seed-germination-test-001",
+        "agriculture-soil-fertility-basics-index-001",
+        "agriculture-storage-seed-bag-label-001",
+        "agriculture-storage-seed-box-dry-check-001",
+        "agriculture-storage-seed-food-separation-shelf-001",
+        "agriculture-storage-seed-library-rotation-card-001",
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "energy-storage-power-bank-rotation-label-001",
+        "food-storage-emergency-ration-reserve-line-001",
+        "food-storage-opened-package-short-use-001",
+        "general-storage-check-calendar-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-fifo-shelf-rule-001",
+        "general-storage-handover-card-001",
+        "general-storage-inventory-card-minimum-001",
+        "general-storage-issue-log-001",
+        "general-storage-label-minimum-fields-001",
+        "repair-storage-small-parts-bin-label-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_first_aid_kit_review",
+      "query": "急救包多久复查一次，最少看哪些东西？",
+      "observation": false,
+      "focus": "急救包储藏复查应命中 DG-0898，不做医疗治疗建议。",
+      "watch_conflicts": [
+        "medical",
+        "hygiene",
+        "records"
+      ],
+      "expected_guides": [
+        "DG-0898"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "medical-storage-first-aid-kit-monthly-check-001"
+      ],
+      "profiles": [
+        "storage_medical_supply_storage"
+      ],
+      "domains": [
+        "general",
+        "medical",
+        "hygiene",
+        "food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查",
+          "risk_level": "high",
+          "domains": [
+            "medical",
+            "general",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离",
+          "risk_level": "high",
+          "domains": [
+            "hygiene",
+            "general",
+            "food"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "medical-storage-dressing-bandage-dry-pack-001",
+          "title": "敷料和绷带干燥封存",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-expired-unknown-medicine-hold-001",
+          "title": "过期和不明药品暂存",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-first-aid-kit-monthly-check-001",
+          "title": "急救包月度复查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-medicine-dry-dark-box-001",
+          "title": "药品避光防潮盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-care-supply-zone-001",
+          "title": "照护用品储藏分区",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-storage-leak-odor-isolation-001",
+          "title": "漏液异味物品隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-suspect-batch-quarantine-001",
+          "title": "可疑批次隔离区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-expired-item-hold-card-001",
+          "title": "过期物品暂存卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查"
+        },
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "medical-storage-first-aid-kit-monthly-check-001",
+          "title": "急救包月度复查"
+        },
+        {
+          "slug": "medical-storage-dressing-bandage-dry-pack-001",
+          "title": "敷料和绷带干燥封存"
+        },
+        {
+          "slug": "medical-storage-expired-unknown-medicine-hold-001",
+          "title": "过期和不明药品暂存"
+        },
+        {
+          "slug": "medical-storage-medicine-dry-dark-box-001",
+          "title": "药品避光防潮盒"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "food-storage-grain-moisture-clump-check-001",
+        "food-storage-rodent-bite-isolation-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-suspect-batch-quarantine-001",
+        "hygiene-storage-contaminated-container-hold-001",
+        "hygiene-storage-leak-odor-isolation-001",
+        "medical-storage-care-supply-zone-001",
+        "medical-storage-dressing-bandage-dry-pack-001",
+        "medical-storage-expired-unknown-medicine-hold-001",
+        "medical-storage-first-aid-kit-monthly-check-001",
+        "medical-storage-medicine-dry-dark-box-001",
+        "repair-storage-sharp-tool-secure-box-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_damaged_medicine_package",
+      "query": "药品包装破损了，能不能放回药箱？",
+      "observation": false,
+      "focus": "包装破损药品应由储藏隔离和药箱复查主导，不做过期药品可用性判断。",
+      "watch_conflicts": [
+        "medical",
+        "hygiene",
+        "waste"
+      ],
+      "expected_guides": [
+        "DG-0898",
+        "DG-0901"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "medical-storage-expired-unknown-medicine-hold-001"
+      ],
+      "profiles": [
+        "storage_medical_supply_storage",
+        "storage_suspicious_item_isolation"
+      ],
+      "domains": [
+        "general",
+        "hygiene",
+        "food",
+        "medical"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离",
+          "risk_level": "high",
+          "domains": [
+            "hygiene",
+            "general",
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查",
+          "risk_level": "high",
+          "domains": [
+            "medical",
+            "general",
+            "hygiene"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "hygiene-storage-leak-odor-isolation-001",
+          "title": "漏液异味物品隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-suspect-batch-quarantine-001",
+          "title": "可疑批次隔离区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-expired-item-hold-card-001",
+          "title": "过期物品暂存卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-storage-contaminated-container-hold-001",
+          "title": "污染容器暂存标签",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-expired-unknown-medicine-hold-001",
+          "title": "过期和不明药品暂存",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-storage-battery-leak-suspect-bin-001",
+          "title": "漏液疑似电池隔离盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-grain-moisture-clump-check-001",
+          "title": "米面豆类受潮结块检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离"
+        },
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "medical-storage-expired-unknown-medicine-hold-001",
+          "title": "过期和不明药品暂存"
+        },
+        {
+          "slug": "general-storage-suspect-batch-quarantine-001",
+          "title": "可疑批次隔离区"
+        },
+        {
+          "slug": "hygiene-storage-leak-odor-isolation-001",
+          "title": "漏液异味物品隔离"
+        },
+        {
+          "slug": "hygiene-storage-contaminated-container-hold-001",
+          "title": "污染容器暂存标签"
+        },
+        {
+          "slug": "medical-storage-medicine-dry-dark-box-001",
+          "title": "药品避光防潮盒"
+        },
+        {
+          "slug": "medical-storage-first-aid-kit-monthly-check-001",
+          "title": "急救包月度复查"
+        },
+        {
+          "slug": "medical-storage-dressing-bandage-dry-pack-001",
+          "title": "敷料和绷带干燥封存"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "food-storage-grain-moisture-clump-check-001",
+        "food-storage-rodent-bite-isolation-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-suspect-batch-quarantine-001",
+        "hygiene-storage-contaminated-container-hold-001",
+        "hygiene-storage-leak-odor-isolation-001",
+        "medical-storage-care-supply-zone-001",
+        "medical-storage-dressing-bandage-dry-pack-001",
+        "medical-storage-expired-unknown-medicine-hold-001",
+        "medical-storage-first-aid-kit-monthly-check-001",
+        "medical-storage-medicine-dry-dark-box-001",
+        "repair-storage-sharp-tool-secure-box-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_dressing_bandage_dry",
+      "query": "敷料和绷带怎么防潮保存？",
+      "observation": false,
+      "focus": "敷料绷带保存应进入医疗物资 storage evidence，Medical 处置只补充。",
+      "watch_conflicts": [
+        "medical",
+        "hygiene"
+      ],
+      "expected_guides": [
+        "DG-0898"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "medical-storage-dressing-bandage-dry-pack-001"
+      ],
+      "profiles": [
+        "storage_medical_supply_storage"
+      ],
+      "domains": [
+        "general",
+        "medical",
+        "hygiene",
+        "food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查",
+          "risk_level": "high",
+          "domains": [
+            "medical",
+            "general",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离",
+          "risk_level": "high",
+          "domains": [
+            "hygiene",
+            "general",
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏",
+          "risk_level": "high",
+          "domains": [
+            "food",
+            "general",
+            "hygiene"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "medical-storage-dressing-bandage-dry-pack-001",
+          "title": "敷料和绷带干燥封存",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-expired-unknown-medicine-hold-001",
+          "title": "过期和不明药品暂存",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-first-aid-kit-monthly-check-001",
+          "title": "急救包月度复查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-medicine-dry-dark-box-001",
+          "title": "药品避光防潮盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-care-supply-zone-001",
+          "title": "照护用品储藏分区",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-storage-leak-odor-isolation-001",
+          "title": "漏液异味物品隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-suspect-batch-quarantine-001",
+          "title": "可疑批次隔离区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-expired-item-hold-card-001",
+          "title": "过期物品暂存卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查"
+        },
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离"
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏"
+        },
+        {
+          "id": "DG-0556",
+          "title": "直接压迫止血：从出血到固定"
+        },
+        {
+          "id": "DG-0847",
+          "title": "临时住所选址与防雨防潮"
+        },
+        {
+          "id": "DG-0176",
+          "title": "室内防潮防霉"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "medical-storage-first-aid-kit-monthly-check-001",
+          "title": "急救包月度复查"
+        },
+        {
+          "slug": "medical-storage-dressing-bandage-dry-pack-001",
+          "title": "敷料和绷带干燥封存"
+        },
+        {
+          "slug": "medical-storage-medicine-dry-dark-box-001",
+          "title": "药品避光防潮盒"
+        },
+        {
+          "slug": "medical-storage-expired-unknown-medicine-hold-001",
+          "title": "过期和不明药品暂存"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "food-storage-can-jar-monthly-check-001",
+        "food-storage-dry-grain-zone-001",
+        "food-storage-emergency-ration-reserve-line-001",
+        "food-storage-grain-moisture-clump-check-001",
+        "food-storage-opened-package-short-use-001",
+        "food-storage-rodent-bite-isolation-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-pest-rodent-check-001",
+        "general-storage-suspect-batch-quarantine-001",
+        "hygiene-storage-contaminated-container-hold-001",
+        "hygiene-storage-leak-odor-isolation-001",
+        "medical-storage-care-supply-zone-001",
+        "medical-storage-dressing-bandage-dry-pack-001",
+        "medical-storage-expired-unknown-medicine-hold-001",
+        "medical-storage-first-aid-kit-monthly-check-001",
+        "medical-storage-medicine-dry-dark-box-001",
+        "repair-storage-sharp-tool-secure-box-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_tool_rust_prevention",
+      "query": "工具怎么防锈储藏，避免下次不能用？",
+      "observation": false,
+      "focus": "工具防锈储藏应命中 DG-0899，Repair 维修不是主入口。",
+      "watch_conflicts": [
+        "repair",
+        "tools",
+        "manufacturing"
+      ],
+      "expected_guides": [
+        "DG-0899"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "repair-storage-tool-dry-rust-check-001"
+      ],
+      "profiles": [
+        "storage_tools_materials_storage"
+      ],
+      "domains": [
+        "general",
+        "tools",
+        "repair",
+        "hygiene",
+        "shelter",
+        "security",
+        "disaster",
+        "evacuation"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏",
+          "risk_level": "high",
+          "domains": [
+            "repair",
+            "tools",
+            "general"
+          ]
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签",
+          "risk_level": "high",
+          "domains": [
+            "general",
+            "hygiene",
+            "repair"
+          ]
+        },
+        {
+          "id": "DG-0373",
+          "title": "工具防锈防潮",
+          "risk_level": "normal",
+          "domains": [
+            "tools",
+            "disaster",
+            "evacuation",
+            "shelter",
+            "security"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-storage-tool-dry-rust-check-001",
+          "title": "工具干燥防锈储藏",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-sharp-tool-secure-box-001",
+          "title": "刃具和锋利工具安全盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-small-parts-bin-label-001",
+          "title": "小零件盒分类标签",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-fabric-rope-dry-check-001",
+          "title": "布料和绳索储藏复查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-wood-metal-material-stack-001",
+          "title": "木材金属片堆放边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-shelf-overload-warning-001",
+          "title": "储藏架超载警示",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-zone-basic-layout-001",
+          "title": "长期储藏区基础分区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-label-minimum-fields-001",
+          "title": "储藏标签最小字段",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        },
+        {
+          "id": "DG-0373",
+          "title": "工具防锈防潮"
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        },
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏"
+        },
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查"
+        },
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-storage-tool-dry-rust-check-001",
+          "title": "工具干燥防锈储藏"
+        },
+        {
+          "slug": "repair-storage-sharp-tool-secure-box-001",
+          "title": "刃具和锋利工具安全盒"
+        },
+        {
+          "slug": "repair-storage-small-parts-bin-label-001",
+          "title": "小零件盒分类标签"
+        },
+        {
+          "slug": "repair-storage-fabric-rope-dry-check-001",
+          "title": "布料和绳索储藏复查"
+        },
+        {
+          "slug": "repair-storage-wood-metal-material-stack-001",
+          "title": "木材金属片堆放边界"
+        }
+      ],
+      "guide_related_wiki": [
+        "general-storage-fifo-shelf-rule-001",
+        "general-storage-label-minimum-fields-001",
+        "general-storage-moisture-daily-check-001",
+        "general-storage-pest-rodent-check-001",
+        "general-storage-zone-basic-layout-001",
+        "repair-hand-tool-care-001",
+        "repair-storage-fabric-rope-dry-check-001",
+        "repair-storage-sharp-tool-secure-box-001",
+        "repair-storage-shelf-overload-warning-001",
+        "repair-storage-small-parts-bin-label-001",
+        "repair-storage-tool-dry-rust-check-001",
+        "repair-storage-wood-metal-material-stack-001",
+        "repair-tool-clean-rust-prevention-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_sharp_tool_safe_box",
+      "query": "刃具和锋利工具应该怎么安全存放？",
+      "observation": false,
+      "focus": "锋利工具可用储藏和儿童隔离应由 Storage 工具材料入口主导。",
+      "watch_conflicts": [
+        "repair",
+        "tools",
+        "medical",
+        "safety"
+      ],
+      "expected_guides": [
+        "DG-0899"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0901"
+      ],
+      "expected_wiki": [
+        "repair-storage-sharp-tool-secure-box-001"
+      ],
+      "profiles": [
+        "storage_tools_materials_storage"
+      ],
+      "domains": [
+        "general",
+        "tools",
+        "repair",
+        "hygiene"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏",
+          "risk_level": "high",
+          "domains": [
+            "repair",
+            "tools",
+            "general"
+          ]
+        },
+        {
+          "id": "DG-0888",
+          "title": "锋利 / 破碎 / 金属边角废物处理",
+          "risk_level": "high",
+          "domains": [
+            "hygiene",
+            "repair"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-storage-tool-dry-rust-check-001",
+          "title": "工具干燥防锈储藏",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-sharp-tool-secure-box-001",
+          "title": "刃具和锋利工具安全盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-small-parts-bin-label-001",
+          "title": "小零件盒分类标签",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-fabric-rope-dry-check-001",
+          "title": "布料和绳索储藏复查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-wood-metal-material-stack-001",
+          "title": "木材金属片堆放边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-shelf-overload-warning-001",
+          "title": "储藏架超载警示",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-waste-sharp-glass-temporary-container-001",
+          "title": "碎玻璃和锋利物临时容器",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-waste-metal-edge-scrap-isolation-001",
+          "title": "金属边角废料隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0888",
+          "title": "锋利 / 破碎 / 金属边角废物处理"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-storage-tool-dry-rust-check-001",
+          "title": "工具干燥防锈储藏"
+        },
+        {
+          "slug": "repair-storage-sharp-tool-secure-box-001",
+          "title": "刃具和锋利工具安全盒"
+        },
+        {
+          "slug": "repair-storage-small-parts-bin-label-001",
+          "title": "小零件盒分类标签"
+        },
+        {
+          "slug": "repair-storage-fabric-rope-dry-check-001",
+          "title": "布料和绳索储藏复查"
+        },
+        {
+          "slug": "repair-storage-wood-metal-material-stack-001",
+          "title": "木材金属片堆放边界"
+        }
+      ],
+      "guide_related_wiki": [
+        "hygiene-waste-child-access-control-001",
+        "hygiene-waste-metal-edge-scrap-isolation-001",
+        "hygiene-waste-sharp-glass-temporary-container-001",
+        "repair-recycling-metal-sheet-intake-check-001",
+        "repair-storage-fabric-rope-dry-check-001",
+        "repair-storage-sharp-tool-secure-box-001",
+        "repair-storage-shelf-overload-warning-001",
+        "repair-storage-small-parts-bin-label-001",
+        "repair-storage-tool-dry-rust-check-001",
+        "repair-storage-wood-metal-material-stack-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_small_parts_sorting",
+      "query": "小零件怎么分类，避免维修时找不到？",
+      "observation": false,
+      "focus": "小零件分类标签和领用记录应进入 Storage 记录链，不只是 repair 泛建议。",
+      "watch_conflicts": [
+        "repair",
+        "tools",
+        "manufacturing",
+        "records"
+      ],
+      "expected_guides": [
+        "DG-0899",
+        "DG-0902"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "repair-storage-small-parts-bin-label-001"
+      ],
+      "profiles": [
+        "storage_tools_materials_storage"
+      ],
+      "domains": [
+        "general",
+        "tools",
+        "repair",
+        "power",
+        "security",
+        "shelter",
+        "comms",
+        "records"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏",
+          "risk_level": "high",
+          "domains": [
+            "repair",
+            "tools",
+            "general"
+          ]
+        },
+        {
+          "id": "DG-0309",
+          "title": "临时小零件盒",
+          "risk_level": "caution",
+          "domains": [
+            "power",
+            "tools",
+            "security",
+            "shelter"
+          ]
+        },
+        {
+          "id": "DG-0272",
+          "title": "设备外借和维修前清理",
+          "risk_level": "caution",
+          "domains": [
+            "power",
+            "security",
+            "tools",
+            "comms",
+            "records"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-storage-tool-dry-rust-check-001",
+          "title": "工具干燥防锈储藏",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-sharp-tool-secure-box-001",
+          "title": "刃具和锋利工具安全盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-small-parts-bin-label-001",
+          "title": "小零件盒分类标签",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-fabric-rope-dry-check-001",
+          "title": "布料和绳索储藏复查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-wood-metal-material-stack-001",
+          "title": "木材金属片堆放边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-shelf-overload-warning-001",
+          "title": "储藏架超载警示",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0309",
+          "title": "临时小零件盒"
+        },
+        {
+          "id": "DG-0272",
+          "title": "设备外借和维修前清理"
+        },
+        {
+          "id": "DG-0887",
+          "title": "废弃物基础分类与临时隔离"
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-storage-small-parts-bin-label-001",
+          "title": "小零件盒分类标签"
+        },
+        {
+          "slug": "repair-storage-tool-dry-rust-check-001",
+          "title": "工具干燥防锈储藏"
+        },
+        {
+          "slug": "repair-storage-sharp-tool-secure-box-001",
+          "title": "刃具和锋利工具安全盒"
+        },
+        {
+          "slug": "repair-storage-fabric-rope-dry-check-001",
+          "title": "布料和绳索储藏复查"
+        },
+        {
+          "slug": "repair-storage-wood-metal-material-stack-001",
+          "title": "木材金属片堆放边界"
+        }
+      ],
+      "guide_related_wiki": [
+        "repair-storage-fabric-rope-dry-check-001",
+        "repair-storage-sharp-tool-secure-box-001",
+        "repair-storage-shelf-overload-warning-001",
+        "repair-storage-small-parts-bin-label-001",
+        "repair-storage-tool-dry-rust-check-001",
+        "repair-storage-wood-metal-material-stack-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_battery_power_bank_zone",
+      "query": "电池和充电宝长期不用，应该怎么分区保存？",
+      "observation": false,
+      "focus": "电池和充电宝长期保存应命中 DG-0900，Energy 使用维护只作为补充。",
+      "watch_conflicts": [
+        "energy",
+        "fire",
+        "repair"
+      ],
+      "expected_guides": [
+        "DG-0900"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "energy-storage-battery-dry-cool-zone-001"
+      ],
+      "profiles": [
+        "storage_basic_zone_labeling",
+        "storage_energy_fuel_storage"
+      ],
+      "domains": [
+        "general",
+        "fire",
+        "energy",
+        "repair",
+        "hygiene",
+        "agriculture",
+        "food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏",
+          "risk_level": "high",
+          "domains": [
+            "energy",
+            "fire",
+            "general"
+          ]
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签",
+          "risk_level": "high",
+          "domains": [
+            "general",
+            "hygiene",
+            "repair"
+          ]
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接",
+          "risk_level": "normal",
+          "domains": [
+            "general",
+            "food",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "energy-storage-battery-dry-cool-zone-001",
+          "title": "电池干燥阴凉储藏区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-storage-power-bank-rotation-label-001",
+          "title": "充电宝轮换标签",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "fire-storage-match-candle-dry-box-001",
+          "title": "火柴蜡烛防潮盒",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "fire-storage-fuel-away-from-living-zone-001",
+          "title": "燃料远离生活区储藏线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-storage-battery-leak-suspect-bin-001",
+          "title": "漏液疑似电池隔离盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-zone-basic-layout-001",
+          "title": "长期储藏区基础分区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-label-minimum-fields-001",
+          "title": "储藏标签最小字段",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-moisture-daily-check-001",
+          "title": "储藏区潮湿日查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "general-storage-zone-basic-layout-001",
+          "title": "长期储藏区基础分区"
+        },
+        {
+          "slug": "general-storage-moisture-daily-check-001",
+          "title": "储藏区潮湿日查"
+        },
+        {
+          "slug": "general-storage-pest-rodent-check-001",
+          "title": "储藏区虫鼠巡查"
+        },
+        {
+          "slug": "general-storage-label-minimum-fields-001",
+          "title": "储藏标签最小字段"
+        },
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-bag-label-001",
+        "agriculture-storage-seed-library-rotation-card-001",
+        "energy-storage-battery-dry-cool-zone-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "energy-storage-power-bank-rotation-label-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "fire-storage-match-candle-dry-box-001",
+        "food-storage-emergency-ration-reserve-line-001",
+        "food-storage-opened-package-short-use-001",
+        "general-storage-check-calendar-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-fifo-shelf-rule-001",
+        "general-storage-handover-card-001",
+        "general-storage-inventory-card-minimum-001",
+        "general-storage-issue-log-001",
+        "general-storage-label-minimum-fields-001",
+        "general-storage-moisture-daily-check-001",
+        "general-storage-pest-rodent-check-001",
+        "general-storage-zone-basic-layout-001",
+        "repair-storage-shelf-overload-warning-001",
+        "repair-storage-small-parts-bin-label-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_matches_ignition_dry_check",
+      "query": "火柴和点火材料受潮，应该怎么保存和复查？",
+      "observation": false,
+      "focus": "点火材料防潮储藏应由能源/燃料 storage 入口主导，Fire 使用边界补充。",
+      "watch_conflicts": [
+        "fire",
+        "energy",
+        "shelter"
+      ],
+      "expected_guides": [
+        "DG-0900"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "fire-storage-match-candle-dry-box-001"
+      ],
+      "profiles": [
+        "storage_tools_materials_storage",
+        "storage_energy_fuel_storage"
+      ],
+      "domains": [
+        "general",
+        "fire",
+        "energy",
+        "tools",
+        "repair"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏",
+          "risk_level": "high",
+          "domains": [
+            "energy",
+            "fire",
+            "general"
+          ]
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏",
+          "risk_level": "high",
+          "domains": [
+            "repair",
+            "tools",
+            "general"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "energy-storage-battery-dry-cool-zone-001",
+          "title": "电池干燥阴凉储藏区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-storage-power-bank-rotation-label-001",
+          "title": "充电宝轮换标签",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "fire-storage-match-candle-dry-box-001",
+          "title": "火柴蜡烛防潮盒",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "fire-storage-fuel-away-from-living-zone-001",
+          "title": "燃料远离生活区储藏线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-storage-battery-leak-suspect-bin-001",
+          "title": "漏液疑似电池隔离盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-tool-dry-rust-check-001",
+          "title": "工具干燥防锈储藏",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-sharp-tool-secure-box-001",
+          "title": "刃具和锋利工具安全盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-small-parts-bin-label-001",
+          "title": "小零件盒分类标签",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "energy-storage-battery-dry-cool-zone-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "energy-storage-power-bank-rotation-label-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "fire-storage-match-candle-dry-box-001",
+        "repair-storage-fabric-rope-dry-check-001",
+        "repair-storage-sharp-tool-secure-box-001",
+        "repair-storage-shelf-overload-warning-001",
+        "repair-storage-small-parts-bin-label-001",
+        "repair-storage-tool-dry-rust-check-001",
+        "repair-storage-wood-metal-material-stack-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_fuel_common_goods_boundary",
+      "query": "燃料能不能和普通物资放在一起？",
+      "observation": false,
+      "focus": "燃料储藏分区和远离火源是 Storage/Energy-Fire 边界，不应被泛 fire 操作替代。",
+      "watch_conflicts": [
+        "fire",
+        "energy",
+        "shelter",
+        "safety"
+      ],
+      "expected_guides": [
+        "DG-0900"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0901"
+      ],
+      "expected_wiki": [
+        "fire-storage-fuel-away-from-living-zone-001"
+      ],
+      "profiles": [
+        "storage_energy_fuel_storage"
+      ],
+      "domains": [
+        "general",
+        "fire",
+        "energy"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏",
+          "risk_level": "high",
+          "domains": [
+            "energy",
+            "fire",
+            "general"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "energy-storage-battery-dry-cool-zone-001",
+          "title": "电池干燥阴凉储藏区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-storage-power-bank-rotation-label-001",
+          "title": "充电宝轮换标签",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "fire-storage-match-candle-dry-box-001",
+          "title": "火柴蜡烛防潮盒",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "fire-storage-fuel-away-from-living-zone-001",
+          "title": "燃料远离生活区储藏线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-storage-battery-leak-suspect-bin-001",
+          "title": "漏液疑似电池隔离盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-storage-battery-dry-cool-zone-001",
+          "title": "电池干燥阴凉储藏区"
+        },
+        {
+          "slug": "energy-storage-power-bank-rotation-label-001",
+          "title": "充电宝轮换标签"
+        },
+        {
+          "slug": "fire-storage-match-candle-dry-box-001",
+          "title": "火柴蜡烛防潮盒"
+        },
+        {
+          "slug": "fire-storage-fuel-away-from-living-zone-001",
+          "title": "燃料远离生活区储藏线"
+        },
+        {
+          "slug": "energy-storage-battery-leak-suspect-bin-001",
+          "title": "漏液疑似电池隔离盒"
+        }
+      ],
+      "guide_related_wiki": [
+        "energy-storage-battery-dry-cool-zone-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "energy-storage-power-bank-rotation-label-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "fire-storage-match-candle-dry-box-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_leak_odor_item_isolation",
+      "query": "有漏液和刺鼻味的物品，应该放进正常仓库吗？",
+      "observation": false,
+      "focus": "漏液异味物品应命中隔离入口，Waste/WASH 只作为交接和清洁补充。",
+      "watch_conflicts": [
+        "waste",
+        "hygiene",
+        "contamination",
+        "medical"
+      ],
+      "expected_guides": [
+        "DG-0901"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "hygiene-storage-leak-odor-isolation-001"
+      ],
+      "profiles": [
+        "medical_poisoning_chemical_exposure",
+        "storage_basic_zone_labeling",
+        "storage_suspicious_item_isolation"
+      ],
+      "domains": [
+        "general",
+        "hygiene",
+        "food",
+        "repair",
+        "water",
+        "medical",
+        "power"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离",
+          "risk_level": "high",
+          "domains": [
+            "hygiene",
+            "general",
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签",
+          "risk_level": "high",
+          "domains": [
+            "general",
+            "hygiene",
+            "repair"
+          ]
+        },
+        {
+          "id": "DG-0112",
+          "title": "电池漏液处理",
+          "risk_level": "high",
+          "domains": [
+            "power",
+            "hygiene",
+            "medical",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "hygiene-storage-leak-odor-isolation-001",
+          "title": "漏液异味物品隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-suspect-batch-quarantine-001",
+          "title": "可疑批次隔离区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-expired-item-hold-card-001",
+          "title": "过期物品暂存卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-storage-contaminated-container-hold-001",
+          "title": "污染容器暂存标签",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-expired-unknown-medicine-hold-001",
+          "title": "过期和不明药品暂存",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-storage-battery-leak-suspect-bin-001",
+          "title": "漏液疑似电池隔离盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-grain-moisture-clump-check-001",
+          "title": "米面豆类受潮结块检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        },
+        {
+          "id": "DG-0112",
+          "title": "电池漏液处理"
+        },
+        {
+          "id": "DG-0064",
+          "title": "疑似化学污染：远离、脱外层、冲洗"
+        },
+        {
+          "id": "DG-0887",
+          "title": "废弃物基础分类与临时隔离"
+        },
+        {
+          "id": "DG-0389",
+          "title": "每周卫生清理日"
+        },
+        {
+          "id": "DG-0227",
+          "title": "种植土安全判断"
+        },
+        {
+          "id": "DG-0210",
+          "title": "药品专用检查：有效期、状态、标签"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "food-storage-grain-moisture-clump-check-001",
+        "food-storage-rodent-bite-isolation-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-fifo-shelf-rule-001",
+        "general-storage-label-minimum-fields-001",
+        "general-storage-moisture-daily-check-001",
+        "general-storage-pest-rodent-check-001",
+        "general-storage-suspect-batch-quarantine-001",
+        "general-storage-zone-basic-layout-001",
+        "hygiene-contamination-log-001",
+        "hygiene-contamination-zone-001",
+        "hygiene-hygiene-knowledge-001",
+        "hygiene-isolation-supplies-001",
+        "hygiene-storage-contaminated-container-hold-001",
+        "hygiene-storage-leak-odor-isolation-001",
+        "medical-chemical-skin-eye-exposure-001",
+        "medical-storage-dressing-bandage-dry-pack-001",
+        "medical-storage-expired-unknown-medicine-hold-001",
+        "repair-storage-sharp-tool-secure-box-001",
+        "repair-storage-shelf-overload-warning-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_suspicious_batch_review_label",
+      "query": "过期或可疑批次应该怎么贴标签，等复查？",
+      "observation": false,
+      "focus": "过期和可疑批次应先隔离、禁用或待复查标签，再交接。",
+      "watch_conflicts": [
+        "food",
+        "medical",
+        "waste",
+        "records"
+      ],
+      "expected_guides": [
+        "DG-0901"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0902"
+      ],
+      "expected_wiki": [
+        "general-storage-suspect-batch-quarantine-001"
+      ],
+      "profiles": [
+        "storage_basic_zone_labeling",
+        "storage_suspicious_item_isolation"
+      ],
+      "domains": [
+        "general",
+        "hygiene",
+        "food",
+        "repair",
+        "agriculture"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离",
+          "risk_level": "high",
+          "domains": [
+            "hygiene",
+            "general",
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签",
+          "risk_level": "high",
+          "domains": [
+            "general",
+            "hygiene",
+            "repair"
+          ]
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接",
+          "risk_level": "normal",
+          "domains": [
+            "general",
+            "food",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "hygiene-storage-leak-odor-isolation-001",
+          "title": "漏液异味物品隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-suspect-batch-quarantine-001",
+          "title": "可疑批次隔离区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-expired-item-hold-card-001",
+          "title": "过期物品暂存卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-storage-contaminated-container-hold-001",
+          "title": "污染容器暂存标签",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-expired-unknown-medicine-hold-001",
+          "title": "过期和不明药品暂存",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-storage-battery-leak-suspect-bin-001",
+          "title": "漏液疑似电池隔离盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-grain-moisture-clump-check-001",
+          "title": "米面豆类受潮结块检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "general-storage-suspect-batch-quarantine-001",
+          "title": "可疑批次隔离区"
+        },
+        {
+          "slug": "hygiene-storage-leak-odor-isolation-001",
+          "title": "漏液异味物品隔离"
+        },
+        {
+          "slug": "hygiene-storage-contaminated-container-hold-001",
+          "title": "污染容器暂存标签"
+        },
+        {
+          "slug": "general-storage-zone-basic-layout-001",
+          "title": "长期储藏区基础分区"
+        },
+        {
+          "slug": "general-storage-label-minimum-fields-001",
+          "title": "储藏标签最小字段"
+        },
+        {
+          "slug": "general-storage-moisture-daily-check-001",
+          "title": "储藏区潮湿日查"
+        },
+        {
+          "slug": "general-storage-pest-rodent-check-001",
+          "title": "储藏区虫鼠巡查"
+        },
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-bag-label-001",
+        "agriculture-storage-seed-library-rotation-card-001",
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "energy-storage-power-bank-rotation-label-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "food-storage-emergency-ration-reserve-line-001",
+        "food-storage-grain-moisture-clump-check-001",
+        "food-storage-opened-package-short-use-001",
+        "food-storage-rodent-bite-isolation-001",
+        "general-storage-check-calendar-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-fifo-shelf-rule-001",
+        "general-storage-handover-card-001",
+        "general-storage-inventory-card-minimum-001",
+        "general-storage-issue-log-001",
+        "general-storage-label-minimum-fields-001",
+        "general-storage-moisture-daily-check-001",
+        "general-storage-pest-rodent-check-001",
+        "general-storage-suspect-batch-quarantine-001",
+        "general-storage-zone-basic-layout-001",
+        "hygiene-storage-contaminated-container-hold-001",
+        "hygiene-storage-leak-odor-isolation-001",
+        "medical-storage-dressing-bandage-dry-pack-001",
+        "medical-storage-expired-unknown-medicine-hold-001",
+        "repair-storage-sharp-tool-secure-box-001",
+        "repair-storage-shelf-overload-warning-001",
+        "repair-storage-small-parts-bin-label-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "storage_handover_minimum_fields",
+      "query": "储藏区交接时，下一班最少要知道什么？",
+      "observation": false,
+      "focus": "储藏交接最小字段应进入 DG-0902，不应被泛团队记录替代。",
+      "watch_conflicts": [
+        "organization",
+        "records",
+        "safety"
+      ],
+      "expected_guides": [
+        "DG-0902"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "general-storage-handover-card-001"
+      ],
+      "profiles": [
+        "inventory_consumption",
+        "storage_basic_zone_labeling",
+        "storage_inventory_handover"
+      ],
+      "domains": [
+        "general",
+        "agriculture",
+        "food",
+        "repair",
+        "hygiene"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接",
+          "risk_level": "normal",
+          "domains": [
+            "general",
+            "food",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签",
+          "risk_level": "high",
+          "domains": [
+            "general",
+            "hygiene",
+            "repair"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "general-storage-handover-card-001",
+          "title": "储藏区交接卡",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-inventory-card-minimum-001",
+          "title": "储藏库存卡最小字段",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-check-calendar-001",
+          "title": "储藏复查日历",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-issue-log-001",
+          "title": "储藏异常记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-label-minimum-fields-001",
+          "title": "储藏标签最小字段",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则"
+        },
+        {
+          "slug": "general-storage-handover-card-001",
+          "title": "储藏区交接卡"
+        },
+        {
+          "slug": "general-storage-inventory-card-minimum-001",
+          "title": "储藏库存卡最小字段"
+        },
+        {
+          "slug": "general-storage-issue-log-001",
+          "title": "储藏异常记录"
+        },
+        {
+          "slug": "general-storage-check-calendar-001",
+          "title": "储藏复查日历"
+        },
+        {
+          "slug": "general-storage-zone-basic-layout-001",
+          "title": "长期储藏区基础分区"
+        },
+        {
+          "slug": "general-storage-label-minimum-fields-001",
+          "title": "储藏标签最小字段"
+        },
+        {
+          "slug": "general-storage-moisture-daily-check-001",
+          "title": "储藏区潮湿日查"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-bag-label-001",
+        "agriculture-storage-seed-library-rotation-card-001",
+        "energy-storage-power-bank-rotation-label-001",
+        "food-storage-emergency-ration-reserve-line-001",
+        "food-storage-opened-package-short-use-001",
+        "general-storage-check-calendar-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-fifo-shelf-rule-001",
+        "general-storage-handover-card-001",
+        "general-storage-inventory-card-minimum-001",
+        "general-storage-issue-log-001",
+        "general-storage-label-minimum-fields-001",
+        "general-storage-moisture-daily-check-001",
+        "general-storage-pest-rodent-check-001",
+        "general-storage-zone-basic-layout-001",
+        "repair-storage-shelf-overload-warning-001",
+        "repair-storage-small-parts-bin-label-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "obs_storage_moldy_food_eat",
+      "query": "粮食有霉味还能不能吃？",
+      "observation": true,
+      "focus": "Food 可以主导入口食用判断；观察 Storage 是否补充批次隔离和记录。",
+      "watch_conflicts": [
+        "food",
+        "hygiene",
+        "waste"
+      ],
+      "expected_guides": [],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [],
+      "profiles": [],
+      "domains": [
+        "food",
+        "hygiene",
+        "planting",
+        "agriculture"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0608",
+          "title": "霉变粮食和坚果停用",
+          "risk_level": "high",
+          "domains": [
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0628",
+          "title": "霉味衣物和睡眠区分离",
+          "risk_level": "caution",
+          "domains": [
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "food-canned-food-001",
+          "title": "干粮和罐头三天配给原则",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-canned-food-002",
+          "title": "干货罐头轮换和先开先用",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-children-001",
+          "title": "儿童老人食物优先级判断",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-cooking-001",
+          "title": "低燃料烹饪对食物安全的影响",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-food-knowledge-001",
+          "title": "即食食品和需煮食品的排序",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-food-knowledge-002",
+          "title": "不可食残渣和可食剩余的分界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-food-knowledge-003",
+          "title": "断供期间食物心理安慰与纪律",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-food-poisoning-001",
+          "title": "多人共餐时食物中毒追溯",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0608",
+          "title": "霉变粮食和坚果停用"
+        },
+        {
+          "id": "DG-0628",
+          "title": "霉味衣物和睡眠区分离"
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0575",
+          "title": "室内异味和霉味：通风干燥判断"
+        },
+        {
+          "id": "DG-0040",
+          "title": "停电后冰箱食物处置"
+        },
+        {
+          "id": "DG-0047",
+          "title": "罐头检查：鼓包、喷液、锈蚀"
+        },
+        {
+          "id": "DG-0865",
+          "title": "撤离路线检查"
+        },
+        {
+          "id": "DG-0830",
+          "title": "草木灰来源审查和禁用"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-expectation-001",
+        "agriculture-local-crop-profile-001",
+        "agriculture-planting-inventory-link-001",
+        "agriculture-production-failure-backup-plan-001",
+        "agriculture-quick-leaf-long-cycle-balance-001",
+        "agriculture-seed-reserve-use-line-001",
+        "agriculture-seed-storage-002",
+        "agriculture-staple-crop-small-plot-priority-001",
+        "agriculture-water-fertility-budget-card-001",
+        "agriculture-yield-record-minimum-fields-001",
+        "food-canned-food-001",
+        "food-canned-food-002",
+        "food-children-001",
+        "food-cooking-001",
+        "food-food-knowledge-001",
+        "food-food-knowledge-002",
+        "food-food-knowledge-003",
+        "food-food-poisoning-001",
+        "food-food-waste-001",
+        "food-hunger-001",
+        "food-inventory-001",
+        "food-mold-001",
+        "food-package-damage-001",
+        "food-protein-001",
+        "food-refrigeration-001",
+        "food-refrigeration-002",
+        "food-spoilage-001",
+        "food-spoilage-002",
+        "food-spoilage-check-001",
+        "food-staple-food-001",
+        "food-waste-001",
+        "hygiene-hand-hygiene-001",
+        "hygiene-handwashing-001",
+        "hygiene-handwashing-002",
+        "hygiene-hygiene-knowledge-002",
+        "hygiene-hygiene-knowledge-003",
+        "hygiene-hygiene-knowledge-004",
+        "hygiene-mold-002",
+        "hygiene-odor-001",
+        "hygiene-odor-002",
+        "hygiene-pest-control-001",
+        "hygiene-shared-items-001",
+        "hygiene-sleep-001",
+        "hygiene-toilet-001",
+        "hygiene-toilet-002",
+        "hygiene-vomit-002",
+        "hygiene-waste-002",
+        "hygiene-waste-003",
+        "hygiene-waste-004",
+        "hygiene-wet-waste-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [
+        "off_domain_primary",
+        "storage_vs_food"
+      ],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "obs_storage_seed_moisture_sow",
+      "query": "种子受潮还能不能播？",
+      "observation": true,
+      "focus": "Agriculture 可以主导播种/发芽率判断；观察 Storage 是否补充储藏复查。",
+      "watch_conflicts": [
+        "agriculture",
+        "food",
+        "records"
+      ],
+      "expected_guides": [],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [],
+      "profiles": [
+        "agriculture_seed_library",
+        "storage_seed_storage"
+      ],
+      "domains": [
+        "general",
+        "agriculture",
+        "food",
+        "planting"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查",
+          "risk_level": "high",
+          "domains": [
+            "agriculture",
+            "general",
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-food-separation-shelf-001",
+          "title": "留种和食用批次分架",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-seed-box-dry-check-001",
+          "title": "种子盒干燥复查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-batch-viability-ledger-001",
+          "title": "种子批次与发芽率复测台账",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-drying-recheck-001",
+          "title": "种子干燥后的复查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-storage-moisture-failure-001",
+          "title": "种子受潮失效判断",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查"
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测"
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0232",
+          "title": "种子库存管理"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签"
+        },
+        {
+          "slug": "agriculture-storage-seed-food-separation-shelf-001",
+          "title": "留种和食用批次分架"
+        },
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡"
+        },
+        {
+          "slug": "agriculture-storage-seed-box-dry-check-001",
+          "title": "种子盒干燥复查"
+        },
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线"
+        },
+        {
+          "slug": "agriculture-seed-storage-moisture-failure-001",
+          "title": "种子受潮失效判断"
+        },
+        {
+          "slug": "agriculture-seed-batch-viability-ledger-001",
+          "title": "种子批次与发芽率复测台账"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-expectation-001",
+        "agriculture-local-crop-profile-001",
+        "agriculture-planting-inventory-link-001",
+        "agriculture-production-failure-backup-plan-001",
+        "agriculture-quick-leaf-long-cycle-balance-001",
+        "agriculture-seed-batch-viability-ledger-001",
+        "agriculture-seed-drying-recheck-001",
+        "agriculture-seed-food-harvest-separation-001",
+        "agriculture-seed-germination-test-001",
+        "agriculture-seed-library-box-index-001",
+        "agriculture-seed-reserve-use-line-001",
+        "agriculture-seed-saving-001",
+        "agriculture-seed-selection-for-saving-001",
+        "agriculture-seed-storage-001",
+        "agriculture-seed-storage-002",
+        "agriculture-seed-storage-moisture-failure-001",
+        "agriculture-staple-crop-small-plot-priority-001",
+        "agriculture-storage-seed-bag-label-001",
+        "agriculture-storage-seed-box-dry-check-001",
+        "agriculture-storage-seed-food-separation-shelf-001",
+        "agriculture-storage-seed-library-rotation-card-001",
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "agriculture-water-fertility-budget-card-001",
+        "agriculture-yield-record-minimum-fields-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "obs_storage_expired_medicine_use",
+      "query": "药品过期还能不能用？",
+      "observation": true,
+      "focus": "Medical 可以主导用药判断；观察 Storage 是否补充过期标记和隔离。",
+      "watch_conflicts": [
+        "medical",
+        "hygiene",
+        "waste"
+      ],
+      "expected_guides": [],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [],
+      "profiles": [],
+      "domains": [
+        "general",
+        "hygiene",
+        "food",
+        "evacuation",
+        "medical"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离",
+          "risk_level": "high",
+          "domains": [
+            "hygiene",
+            "general",
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0587",
+          "title": "必须转移时：水食物药品证件优先级",
+          "risk_level": "caution",
+          "domains": [
+            "evacuation"
+          ]
+        },
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查",
+          "risk_level": "high",
+          "domains": [
+            "medical",
+            "general",
+            "hygiene"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "hygiene-storage-leak-odor-isolation-001",
+          "title": "漏液异味物品隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-suspect-batch-quarantine-001",
+          "title": "可疑批次隔离区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-storage-expired-item-hold-card-001",
+          "title": "过期物品暂存卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-storage-contaminated-container-hold-001",
+          "title": "污染容器暂存标签",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "medical-storage-expired-unknown-medicine-hold-001",
+          "title": "过期和不明药品暂存",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-storage-battery-leak-suspect-bin-001",
+          "title": "漏液疑似电池隔离盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-grain-moisture-clump-check-001",
+          "title": "米面豆类受潮结块检查",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离"
+        },
+        {
+          "id": "DG-0587",
+          "title": "必须转移时：水食物药品证件优先级"
+        },
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查"
+        },
+        {
+          "id": "DG-0038",
+          "title": "灰水再利用：能用，但不能误饮"
+        },
+        {
+          "id": "DG-0865",
+          "title": "撤离路线检查"
+        },
+        {
+          "id": "DG-0210",
+          "title": "药品专用检查：有效期、状态、标签"
+        },
+        {
+          "id": "DG-0209",
+          "title": "药品分区：口服、外用、慢病、儿童"
+        },
+        {
+          "id": "DG-0213",
+          "title": "药品借用登记"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "energy-storage-battery-leak-suspect-bin-001",
+        "fire-storage-fuel-away-from-living-zone-001",
+        "food-storage-grain-moisture-clump-check-001",
+        "food-storage-rodent-bite-isolation-001",
+        "general-storage-expired-item-hold-card-001",
+        "general-storage-suspect-batch-quarantine-001",
+        "hygiene-storage-contaminated-container-hold-001",
+        "hygiene-storage-leak-odor-isolation-001",
+        "medical-storage-care-supply-zone-001",
+        "medical-storage-dressing-bandage-dry-pack-001",
+        "medical-storage-expired-unknown-medicine-hold-001",
+        "medical-storage-first-aid-kit-monthly-check-001",
+        "medical-storage-medicine-dry-dark-box-001",
+        "repair-storage-sharp-tool-secure-box-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "obs_storage_shelf_stronger",
+      "query": "仓库货架怎么做更结实？",
+      "observation": true,
+      "focus": "Manufacturing 可以主导制作；观察 Storage 是否补充承重、分区和堆叠安全需求。",
+      "watch_conflicts": [
+        "manufacturing",
+        "repair",
+        "shelter"
+      ],
+      "expected_guides": [],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [],
+      "profiles": [],
+      "domains": [
+        "general",
+        "tools",
+        "repair",
+        "water",
+        "shelter",
+        "medical",
+        "disaster",
+        "evacuation",
+        "security",
+        "records"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏",
+          "risk_level": "high",
+          "domains": [
+            "repair",
+            "tools",
+            "general"
+          ]
+        },
+        {
+          "id": "DG-0059",
+          "title": "火场返回前判断",
+          "risk_level": "high",
+          "domains": [
+            "disaster",
+            "medical",
+            "water",
+            "evacuation",
+            "shelter"
+          ]
+        },
+        {
+          "id": "DG-0079",
+          "title": "撤离后回取物资判断",
+          "risk_level": "caution",
+          "domains": [
+            "evacuation",
+            "shelter",
+            "security",
+            "disaster",
+            "records"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-storage-tool-dry-rust-check-001",
+          "title": "工具干燥防锈储藏",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-sharp-tool-secure-box-001",
+          "title": "刃具和锋利工具安全盒",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-small-parts-bin-label-001",
+          "title": "小零件盒分类标签",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-fabric-rope-dry-check-001",
+          "title": "布料和绳索储藏复查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-wood-metal-material-stack-001",
+          "title": "木材金属片堆放边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-storage-shelf-overload-warning-001",
+          "title": "储藏架超载警示",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0059",
+          "title": "火场返回前判断"
+        },
+        {
+          "id": "DG-0079",
+          "title": "撤离后回取物资判断"
+        },
+        {
+          "id": "DG-0132",
+          "title": "资源暴露后的应对"
+        },
+        {
+          "id": "DG-0133",
+          "title": "物资被翻动处理"
+        },
+        {
+          "id": "DG-0198",
+          "title": "纸质地图标注"
+        },
+        {
+          "id": "DG-0356",
+          "title": "脚印和路线痕迹"
+        },
+        {
+          "id": "DG-0255",
+          "title": "自行车出发前检查"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "repair-storage-fabric-rope-dry-check-001",
+        "repair-storage-sharp-tool-secure-box-001",
+        "repair-storage-shelf-overload-warning-001",
+        "repair-storage-small-parts-bin-label-001",
+        "repair-storage-tool-dry-rust-check-001",
+        "repair-storage-wood-metal-material-stack-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "obs_storage_battery_leak_skin",
+      "query": "电池漏液碰到手怎么办？",
+      "observation": true,
+      "focus": "Medical/Contamination 可以主导人体接触；观察 Storage 是否补充隔离区和标签。",
+      "watch_conflicts": [
+        "medical",
+        "contamination",
+        "energy",
+        "waste"
+      ],
+      "expected_guides": [],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [],
+      "profiles": [
+        "energy_battery_abnormal_isolation",
+        "medical_poisoning_chemical_exposure"
+      ],
+      "domains": [
+        "water",
+        "medical",
+        "power",
+        "hygiene",
+        "records",
+        "security",
+        "disaster"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0112",
+          "title": "电池漏液处理",
+          "risk_level": "high",
+          "domains": [
+            "power",
+            "hygiene",
+            "medical",
+            "water"
+          ]
+        },
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离",
+          "risk_level": "high",
+          "domains": [
+            "power",
+            "security",
+            "records"
+          ]
+        },
+        {
+          "id": "DG-0064",
+          "title": "疑似化学污染：远离、脱外层、冲洗",
+          "risk_level": "critical",
+          "domains": [
+            "disaster",
+            "hygiene",
+            "medical",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "medical-chemical-skin-eye-exposure-001",
+          "title": "化学物接触皮肤和眼睛的冲洗边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-contamination-zone-001",
+          "title": "清洁区污染区的标记原则",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-hygiene-knowledge-001",
+          "title": "处理污染物后的手部清洁",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-contamination-log-001",
+          "title": "污染记录帮助追溯来源",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-isolation-supplies-001",
+          "title": "隔离用品不足时的替代",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-battery-parallel-series-boundary-001",
+          "title": "电池串并联禁用边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-battery-chemistry-mix-stop-001",
+          "title": "不同电池类型混用停用边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "energy-battery-leak-corrosion-isolation-001",
+          "title": "电池漏液和腐蚀隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0112",
+          "title": "电池漏液处理"
+        },
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离"
+        },
+        {
+          "id": "DG-0064",
+          "title": "疑似化学污染：远离、脱外层、冲洗"
+        },
+        {
+          "id": "DG-0901",
+          "title": "霉变 / 漏液 / 过期 / 污染物隔离"
+        },
+        {
+          "id": "DG-0108",
+          "title": "充电宝轮换：编号、分区、复查"
+        },
+        {
+          "id": "DG-0210",
+          "title": "药品专用检查：有效期、状态、标签"
+        },
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用"
+        },
+        {
+          "id": "DG-0061",
+          "title": "极寒断电过夜"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-battery-leak-corrosion-isolation-001",
+          "title": "电池漏液和腐蚀隔离"
+        }
+      ],
+      "guide_related_wiki": [
+        "energy-battery-chemistry-mix-stop-001",
+        "energy-battery-leak-corrosion-isolation-001",
+        "energy-battery-parallel-series-boundary-001",
+        "energy-battery-storage-temperature-boundary-001",
+        "energy-damaged-power-bank-quarantine-001",
+        "hygiene-contaminated-clothing-001",
+        "hygiene-contamination-log-001",
+        "hygiene-contamination-zone-001",
+        "hygiene-hygiene-knowledge-001",
+        "hygiene-isolation-supplies-001",
+        "medical-chemical-skin-eye-exposure-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [
+        "off_domain_primary",
+        "storage_vs_medical",
+        "storage_vs_waste",
+        "storage_vs_energy"
+      ],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "obs_storage_unknown_residue_container",
+      "query": "旧容器有不明残留，还能不能继续用来储藏？",
+      "observation": true,
+      "focus": "Waste/Recycling 可以主导再利用判断；观察 Storage 是否补充储藏区隔离和不可混入正常库存。",
+      "watch_conflicts": [
+        "waste",
+        "hygiene",
+        "manufacturing",
+        "food"
+      ],
+      "expected_guides": [],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [],
+      "profiles": [
+        "waste_material_pool_reuse"
+      ],
+      "domains": [
+        "hygiene",
+        "repair",
+        "general",
+        "tools"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0893",
+          "title": "塑料桶 / 容器再利用前判断",
+          "risk_level": "normal",
+          "domains": [
+            "repair",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0894",
+          "title": "废弃物与材料池记录交接",
+          "risk_level": "normal",
+          "domains": [
+            "general",
+            "hygiene",
+            "repair"
+          ]
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏",
+          "risk_level": "high",
+          "domains": [
+            "repair",
+            "tools",
+            "general"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "repair-recycling-plastic-container-intake-check-001",
+          "title": "塑料容器入池判断",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "hygiene-waste-contaminated-container-downgrade-001",
+          "title": "污染容器降级和禁用",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-recycling-cleanable-noncleanable-material-001",
+          "title": "可清洁材料和不可再用材料分界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "repair-recycling-material-downgrade-label-001",
+          "title": "材料降级用途标签",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-recycling-material-pool-ledger-001",
+          "title": "材料池台账最小字段",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-waste-reuse-failure-record-001",
+          "title": "回收再利用失败记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-waste-disposal-handover-card-001",
+          "title": "废弃物处理交接卡",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "general-waste-source-hazard-log-001",
+          "title": "废弃物来源和风险记录",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0893",
+          "title": "塑料桶 / 容器再利用前判断"
+        },
+        {
+          "id": "DG-0894",
+          "title": "废弃物与材料池记录交接"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0892",
+          "title": "可再利用材料进入材料池前检查"
+        },
+        {
+          "id": "DG-0874",
+          "title": "简易结构件制作检查"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏"
+        },
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "hygiene-waste-contaminated-container-downgrade-001",
+          "title": "污染容器降级和禁用"
+        },
+        {
+          "slug": "repair-recycling-plastic-container-intake-check-001",
+          "title": "塑料容器入池判断"
+        },
+        {
+          "slug": "general-waste-reuse-failure-record-001",
+          "title": "回收再利用失败记录"
+        },
+        {
+          "slug": "repair-recycling-material-intake-checklist-001",
+          "title": "材料入池前检查清单"
+        },
+        {
+          "slug": "repair-storage-fabric-rope-dry-check-001",
+          "title": "布料和绳索储藏复查"
+        }
+      ],
+      "guide_related_wiki": [
+        "general-recycling-material-pool-ledger-001",
+        "general-waste-disposal-handover-card-001",
+        "general-waste-reuse-failure-record-001",
+        "general-waste-source-hazard-log-001",
+        "general-waste-source-label-minimum-001",
+        "hygiene-waste-contaminated-container-downgrade-001",
+        "hygiene-waste-organic-pest-odor-daily-check-001",
+        "repair-recycling-cleanable-noncleanable-material-001",
+        "repair-recycling-fasteners-small-parts-sort-001",
+        "repair-recycling-material-downgrade-label-001",
+        "repair-recycling-plastic-container-intake-check-001",
+        "repair-storage-fabric-rope-dry-check-001",
+        "repair-storage-sharp-tool-secure-box-001",
+        "repair-storage-shelf-overload-warning-001",
+        "repair-storage-small-parts-bin-label-001",
+        "repair-storage-tool-dry-rust-check-001",
+        "repair-storage-wood-metal-material-stack-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [
+        "off_domain_primary",
+        "storage_vs_manufacturing",
+        "storage_vs_waste",
+        "storage_vs_hygiene"
+      ],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    }
+  ]
+}
