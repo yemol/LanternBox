@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 评估水、饲料、清洁人力和污染边界；中风险条目，收益低于卫生与安全成本时退出或缩小。
 tags: 种植, 育苗失败的常见原因, 长期断供, 小团队, 离线生存
-guide_links: DG-0671, DG-0672, DG-0673
+guide_links: DG-0671, DG-0672, DG-0673, DG-0880
 kiwix_topics: 育苗失败的常见原因, 种植, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published

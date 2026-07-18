@@ -6,7 +6,7 @@ priority: P0
 risk_level: normal
 summary: 用大小、色泽、硬度和单果试采决定分批收获，避免过早损失可食量或过熟腐败。条目提供可观察检查和交接记录，支持离线种植决策。
 tags: 小规模作物采收成熟判断,离线种植,行动记录
-guide_links: DG-0832
+guide_links: DG-0832, DG-0885
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

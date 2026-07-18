@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 将有霉层、软腐、虫卵和不明斑点的作物残体从覆盖物、堆肥和健康土中分出。条目提供可观察检查和交接记录，支持离线种植决策。
 tags: 病害作物残体分流,离线种植,行动记录
-guide_links: DG-0831
+guide_links: DG-0831, DG-0883
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

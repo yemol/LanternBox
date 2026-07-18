@@ -72956,5 +72956,867 @@
       "repair-manufacturing-defect-isolation-001"
     ],
     "risk_level": "high"
+  },
+  {
+    "id": "DG-0879",
+    "title": "种子保存与发芽率复测",
+    "category": "种植与食物生产",
+    "priority": "P0",
+    "scenario": "留种、获赠种子或旧种子需要判断是否还能保留、播种或作为食物消耗。",
+    "goal": "保护核心种源，用批次、干燥复查和小样发芽率复测决定保留、试种或淘汰。",
+    "tools": [
+      "种子袋",
+      "标签",
+      "干燥容器",
+      "复测小盘",
+      "记录纸"
+    ],
+    "steps": [
+      "先按作物、来源、年份和批次分开种子，不把未知批次混入主种子库。",
+      "检查霉味、虫粉、结块、返潮和容器水痕，异常批次立即隔离。",
+      "对旧种子或外来种子做小样发芽率复测，再决定是否大面积播种。",
+      "把核心留种、优先试种、待观察和可淘汰批次分别标记。",
+      "取用种子后更新剩余数量、复测日期和下一季保底量。"
+    ],
+    "check": [
+      "批次标签完整。",
+      "受潮或霉味种子未混入主库存。",
+      "核心留种和食用消耗批次分开。"
+    ],
+    "common_mistakes": [
+      "把所有种子混成一袋。",
+      "刚采下或返潮种子直接密封。",
+      "缺粮时吃掉最后可靠种源。"
+    ],
+    "fallback": [
+      "没有专用盒时，用纸袋编号加总清单管理。",
+      "复测条件不足时，先保留本地适应性强和上季表现好的小批次。",
+      "可靠种子不足时缩小播种面积，优先保留核心种源。"
+    ],
+    "stop_or_escalate": [
+      "出现霉味、虫粉、结块、容器进水或来源污染疑点时，停止作为主种源。",
+      "核心留种低于最低播种量时，停止继续作为口粮消耗。"
+    ],
+    "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+    "category_original": "种植与食物生产",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "种子",
+      "种子袋",
+      "种子库",
+      "复测小样",
+      "留种批次"
+    ],
+    "signals": [
+      "霉味",
+      "结块",
+      "虫粉",
+      "发芽率低",
+      "核心留种不足"
+    ],
+    "risks": [
+      "seed_loss",
+      "moisture_damage",
+      "long_term_food_production_loss"
+    ],
+    "keywords": [
+      "种子保存",
+      "发芽率复测",
+      "留种",
+      "种子受潮",
+      "种子库"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "种子保存与发芽率复测"
+    ],
+    "related_wiki": [
+      "agriculture-seed-batch-viability-ledger-001",
+      "agriculture-seed-drying-recheck-001",
+      "agriculture-seed-storage-moisture-failure-001",
+      "agriculture-seed-reserve-use-line-001",
+      "agriculture-seed-library-box-index-001",
+      "agriculture-seed-food-harvest-separation-001",
+      "agriculture-seed-storage-001",
+      "agriculture-seed-germination-test-001",
+      "agriculture-seed-selection-for-saving-001",
+      "agriculture-seed-saving-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0880",
+    "title": "连续育苗与失败复盘",
+    "category": "种植与食物生产",
+    "priority": "P0",
+    "scenario": "需要连续补种、育苗失败、移栽后缓苗差，或苗盘出现腐烂、倒伏和病害扩散。",
+    "goal": "让育苗按资源上限滚动进行，发现失败时先隔离和复盘，再安排下一批。",
+    "tools": [
+      "苗盘",
+      "标签",
+      "浇水记录",
+      "隔离托盘",
+      "记录纸"
+    ],
+    "steps": [
+      "盘点水、光、容器、土和照护人手，决定本批育苗上限。",
+      "按采收窗口安排连续育苗，不把全部种子一次播完。",
+      "发现倒伏、茎基腐烂、霉味或过密时，先隔离问题苗盘。",
+      "移栽前逐步炼苗，确认真叶、根系、土团和天气条件。",
+      "失败后记录种子、土、水、光、密度和病害信号，再调整下一批。"
+    ],
+    "check": [
+      "下一批育苗日期明确。",
+      "病苗和健康苗分开。",
+      "移栽前有炼苗和缓苗观察。"
+    ],
+    "common_mistakes": [
+      "一次播完全部种子。",
+      "苗盘过密仍继续浇水。",
+      "移栽当天才发现没有可用地块。"
+    ],
+    "fallback": [
+      "连续失败时缩小到一个对照小样。",
+      "水和照护不足时优先快收作物。",
+      "健康苗不足时保留未接触病区的苗盘。"
+    ],
+    "stop_or_escalate": [
+      "苗盘腐烂扩散、多个苗盘同时发病、连续两批失败或照护资源不足时，停止扩大育苗。",
+      "无法分清健康区和病区时，暂停移栽和跨区操作。"
+    ],
+    "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+    "category_original": "种植与食物生产",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "苗盘",
+      "幼苗",
+      "育苗土",
+      "移栽地块",
+      "浇水记录"
+    ],
+    "signals": [
+      "倒伏",
+      "茎基腐烂",
+      "出苗率低",
+      "缓苗差",
+      "苗盘过密"
+    ],
+    "risks": [
+      "seedling_disease",
+      "resource_overload",
+      "production_gap"
+    ],
+    "keywords": [
+      "连续育苗",
+      "育苗失败",
+      "苗期隔离",
+      "炼苗",
+      "移栽缓苗"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "连续育苗与失败复盘"
+    ],
+    "related_wiki": [
+      "agriculture-continuous-nursery-schedule-001",
+      "agriculture-seedling-damping-off-isolation-001",
+      "agriculture-transplant-hardening-off-001",
+      "agriculture-nursery-capacity-limit-001",
+      "agriculture-seedling-001",
+      "agriculture-seedling-transplant-001",
+      "agriculture-seedling-thinning-001",
+      "agriculture-planting-failure-review-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0881",
+    "title": "土壤贫瘠与板结恢复判断",
+    "category": "种植与食物生产",
+    "priority": "P0",
+    "scenario": "作物长势差、土壤板结、积水、盐壳或多年连续种植后产量下降，需要判断是否恢复、休整或换地块。",
+    "goal": "用现场信号区分贫瘠、板结、积水、盐分和污染疑点，选择保守恢复路径。",
+    "tools": [
+      "地块编号牌",
+      "小铲",
+      "覆盖物",
+      "成熟堆肥",
+      "记录纸"
+    ],
+    "steps": [
+      "观察叶色、株高、根系、土表硬壳、下渗和历史产量。",
+      "把贫瘠、板结、积水、盐壳和污染疑点分开记录。",
+      "先小范围浅松、覆盖、高畦或少量成熟堆肥，不全地块同时改动。",
+      "发现盐壳、油膜、污水或刺鼻味时，停止按普通恢复处理。",
+      "两周后复查新叶、下渗、根系和虫害变化。"
+    ],
+    "check": [
+      "地块编号和问题类型明确。",
+      "恢复措施有对照。",
+      "下一次复查时间明确。"
+    ],
+    "common_mistakes": [
+      "把盐害或污染误当缺肥。",
+      "一次改动太多条件。",
+      "未成熟堆肥直接当恢复材料。"
+    ],
+    "fallback": [
+      "改用容器或高畦小样。",
+      "改种低需求短周期作物。",
+      "保留休耕和覆盖恢复窗口。"
+    ],
+    "stop_or_escalate": [
+      "出现不明化学气味、油膜、盐壳扩大、污水痕迹或作物异常灼伤时，停止食用种植并标记地块。",
+      "连续恢复无改善时，不继续投入主种子。"
+    ],
+    "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+    "category_original": "种植与食物生产",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "土壤",
+      "地块",
+      "覆盖物",
+      "成熟堆肥",
+      "排水沟"
+    ],
+    "signals": [
+      "板结",
+      "积水",
+      "盐壳",
+      "叶色淡",
+      "产量下降"
+    ],
+    "risks": [
+      "soil_degradation",
+      "contamination",
+      "waterlogging"
+    ],
+    "keywords": [
+      "土壤贫瘠",
+      "土壤板结",
+      "盐壳",
+      "积水地块",
+      "土壤恢复"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "土壤贫瘠与板结恢复判断"
+    ],
+    "related_wiki": [
+      "agriculture-soil-poor-fertility-signs-001",
+      "agriculture-soil-compaction-recovery-001",
+      "agriculture-salinity-crust-stop-line-001",
+      "agriculture-raised-bed-drainage-recovery-001",
+      "agriculture-soil-recovery-log-001",
+      "agriculture-water-fertility-budget-card-001",
+      "agriculture-soil-texture-field-check-001",
+      "agriculture-soil-drainage-test-001",
+      "agriculture-soil-fertility-basics-index-001"
+    ],
+    "risk_level": "caution"
+  },
+  {
+    "id": "DG-0882",
+    "title": "堆肥成熟和未腐熟风险判断",
+    "category": "种植与食物生产",
+    "priority": "P0",
+    "scenario": "准备把堆肥、厨余堆肥或粪肥相关材料用于食用种植区，需要判断是否成熟、隔离或禁用。",
+    "goal": "防止未腐熟、有病原或来源不清的材料进入食用作物链。",
+    "tools": [
+      "堆肥批次标签",
+      "隔离标记",
+      "小铲",
+      "手套",
+      "记录纸"
+    ],
+    "steps": [
+      "确认材料来源，排除病人残渣、油腻腐败物、未知化学物和新鲜粪肥。",
+      "检查堆肥是否发热、发臭、黏滑、未分解或引来鼠虫。",
+      "未成熟或来源不清时，移回堆肥区并贴禁用标签。",
+      "成熟批次也先小量进入低风险地块，远离可食叶面和取水路径。",
+      "施用后记录地块、批次和雨后复查结果。"
+    ],
+    "check": [
+      "来源清楚。",
+      "无发热和腐败臭味。",
+      "食用区、厨房路径和饮水区未被污染。"
+    ],
+    "common_mistakes": [
+      "把新鲜厨余埋到叶菜旁。",
+      "用气味异常堆肥催苗。",
+      "雨后不检查粪肥流向。"
+    ],
+    "fallback": [
+      "继续隔离熟化。",
+      "改用干净覆盖物和休耕恢复。",
+      "来源不清材料转为污染控制问题，不进入农业循环。"
+    ],
+    "stop_or_escalate": [
+      "发臭、发热、来源不明、含病人残渣、粪肥未成熟或雨水冲入食用区时，停止施用和采收受影响作物。",
+      "接触可食部位后，不混入正常采收。"
+    ],
+    "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+    "category_original": "种植与食物生产",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "堆肥",
+      "厨余",
+      "粪肥",
+      "食用地块",
+      "隔离区"
+    ],
+    "signals": [
+      "发热",
+      "臭味",
+      "未分解",
+      "来源不明",
+      "雨水冲刷"
+    ],
+    "risks": [
+      "pathogen_contamination",
+      "food_zone_pollution",
+      "crop_damage"
+    ],
+    "keywords": [
+      "堆肥成熟",
+      "未腐熟肥",
+      "粪肥边界",
+      "厨余堆肥",
+      "食用地块"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "堆肥成熟和未腐熟风险判断"
+    ],
+    "related_wiki": [
+      "agriculture-compost-maturity-second-check-001",
+      "agriculture-immature-compost-stop-line-001",
+      "agriculture-manure-compost-food-zone-boundary-001",
+      "agriculture-kitchen-waste-compost-boundary-001",
+      "agriculture-compost-001",
+      "agriculture-compost-pile-setup-001",
+      "agriculture-manure-growing-zone-separation-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0883",
+    "title": "病虫害早期隔离与工具分流",
+    "category": "种植与食物生产",
+    "priority": "P0",
+    "scenario": "叶背出现虫卵幼虫、植株有病斑腐烂，或工具可能把病害从问题区带到健康区。",
+    "goal": "用巡查、隔离、人工处理和工具分区控制病虫害扩散。",
+    "tools": [
+      "地块标记",
+      "单独手套",
+      "待清洁工具盒",
+      "记录纸",
+      "隔离袋"
+    ],
+    "steps": [
+      "停止跨区操作，先标记受影响作物、苗盘或地块。",
+      "检查叶背、嫩梢、茎基、土面和病虫害扩散范围。",
+      "人工清除虫卵幼虫或移除严重病株，并把残体隔离。",
+      "剪过病株或接触腐烂苗盘的工具不进入健康区。",
+      "记录处理数量、工具接触路径和复查时间。"
+    ],
+    "check": [
+      "问题区有标记。",
+      "病区工具和健康区工具分开。",
+      "虫害或病害有复查记录。"
+    ],
+    "common_mistakes": [
+      "用同一把剪刀从病株剪到留种株。",
+      "只看叶面不看叶背。",
+      "拔掉病株后残体丢在菜地边。"
+    ],
+    "fallback": [
+      "缺工具时把一件工具限定为病区专用。",
+      "人手不足时优先保护育苗区、留种株和主生产地块。",
+      "严重局部可放弃，保护周边健康区。"
+    ],
+    "stop_or_escalate": [
+      "病害迅速扩散、工具已跨多个健康区、不明化学污染或污染地块信号出现时，停止采收、移栽和跨区操作。",
+      "无法分清污染边界时，先封区重建记录。"
+    ],
+    "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+    "category_original": "种植与食物生产",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "叶片",
+      "苗盘",
+      "剪刀",
+      "手套",
+      "病株"
+    ],
+    "signals": [
+      "虫卵",
+      "幼虫",
+      "病斑",
+      "腐烂",
+      "工具跨区"
+    ],
+    "risks": [
+      "pest_spread",
+      "disease_transfer",
+      "contaminated_harvest"
+    ],
+    "keywords": [
+      "虫害巡查",
+      "病株隔离",
+      "工具分流",
+      "叶背虫卵",
+      "污染地块停用"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "病虫害早期隔离与工具分流"
+    ],
+    "related_wiki": [
+      "agriculture-pest-early-scouting-routine-001",
+      "agriculture-egg-larvae-leaf-back-check-001",
+      "agriculture-manual-pest-removal-record-001",
+      "agriculture-diseased-tool-zone-separation-001",
+      "agriculture-unknown-chemical-plot-stop-001",
+      "agriculture-seedling-damping-off-isolation-001",
+      "agriculture-manure-compost-food-zone-boundary-001",
+      "agriculture-plant-pests-001",
+      "agriculture-manual-pest-removal-001",
+      "agriculture-crop-disease-isolation-001",
+      "agriculture-diseased-residue-separation-001",
+      "agriculture-contaminated-plot-ban-record-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0884",
+    "title": "轮作和多季种植计划",
+    "category": "种植与食物生产",
+    "priority": "P1",
+    "scenario": "同一小地块要连续生产，需要安排下一季作物、轮作、补种窗口和失败备用计划。",
+    "goal": "把地块、作物家族、耗肥程度、季节窗口和失败备用连成多季生产计划。",
+    "tools": [
+      "地块图",
+      "轮作卡",
+      "种植日历",
+      "产量记录",
+      "记录纸"
+    ],
+    "steps": [
+      "列出每个地块上一季作物、病虫害、肥力状态和采收结果。",
+      "按作物家族、耗肥程度和快慢周期安排下一季。",
+      "为主作物保留备用种子、补种窗口和恢复地块。",
+      "把育苗、移栽、采收、土壤恢复和留种任务写入日历。",
+      "季末用产量和失败记录修订下一季计划。"
+    ],
+    "check": [
+      "上一季和下一季能对应。",
+      "补种和恢复窗口存在。",
+      "失败原因进入下季决策。"
+    ],
+    "common_mistakes": [
+      "同一地块连续种同类作物。",
+      "只按想吃什么安排播种。",
+      "没有留下补种和休整空间。"
+    ],
+    "fallback": [
+      "作物分类不清时先按叶菜、根菜、果菜和豆类粗分。",
+      "资源不足时减少作物种类。",
+      "先做三个月滚动计划，再扩展到年度计划。"
+    ],
+    "stop_or_escalate": [
+      "连续病害、土壤衰退、种子不足、水肥预算不足或污染地块未解除时，不按原计划扩大。",
+      "记录与现场标签矛盾时，先重建地块基线。"
+    ],
+    "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+    "category_original": "种植与食物生产",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "地块",
+      "轮作卡",
+      "种植日历",
+      "备用种子",
+      "产量记录"
+    ],
+    "signals": [
+      "连续病害",
+      "产量下降",
+      "补种窗口",
+      "地块疲劳",
+      "计划断档"
+    ],
+    "risks": [
+      "rotation_failure",
+      "production_gap",
+      "soil_exhaustion"
+    ],
+    "keywords": [
+      "轮作",
+      "多季种植",
+      "种植日历",
+      "生产失败备用",
+      "年度菜地计划"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "轮作和多季种植计划"
+    ],
+    "related_wiki": [
+      "agriculture-crop-family-rotation-card-001",
+      "agriculture-heavy-light-feeder-rotation-001",
+      "agriculture-quick-leaf-long-cycle-balance-001",
+      "agriculture-seasonal-planting-calendar-001",
+      "agriculture-production-failure-backup-plan-001",
+      "agriculture-annual-garden-plan-card-001",
+      "agriculture-yield-record-minimum-fields-001",
+      "agriculture-team-garden-task-handover-001",
+      "agriculture-crop-rotation-basic-001",
+      "agriculture-seasonal-planting-plan-001",
+      "agriculture-growing-record-handover-001",
+      "agriculture-growing-log-001"
+    ],
+    "risk_level": "caution"
+  },
+  {
+    "id": "DG-0885",
+    "title": "收获后晾晒防霉与储藏",
+    "category": "种植与食物生产",
+    "priority": "P1",
+    "scenario": "采收后需要晾晒、分级、留种、入容器储藏，或发现返潮、鼠虫、霉味和批次混杂。",
+    "goal": "把采收物分批干燥、标记、入库和复查，避免霉变批次污染主储藏。",
+    "tools": [
+      "晾晒架",
+      "批次标签",
+      "干燥容器",
+      "储藏记录",
+      "隔离袋"
+    ],
+    "steps": [
+      "采收后立即分开食用、留种和待观察批次。",
+      "晾晒前检查架面清洁、离地、通风、防雨和防鼠虫。",
+      "记录晾晒日期、翻动、返潮、虫害和入库判断。",
+      "入库前检查容器干燥、来源、异味、旧残渣和虫害。",
+      "发现霉味、结块、变色、发热或鼠虫污染时，隔离批次并复查同源批次。"
+    ],
+    "check": [
+      "批次标签完整。",
+      "入库容器干燥清洁。",
+      "霉变或待观察批次没有混入主库。"
+    ],
+    "common_mistakes": [
+      "未干透就密封。",
+      "留种和食用混在一起。",
+      "发现一包霉变仍倒回大桶。"
+    ],
+    "fallback": [
+      "天气不稳时小批量分次晾晒。",
+      "容器不足时优先保护核心留种和高价值粮食。",
+      "可疑批次继续隔离待判断。"
+    ],
+    "stop_or_escalate": [
+      "霉味、结块、变色、发热、鼠粪、虫害扩散或容器返潮时，不食用、不留种、不混入主库。",
+      "已接触污染容器的批次必须单独标记和复查。"
+    ],
+    "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+    "category_original": "种植与食物生产",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "收获批次",
+      "晾晒架",
+      "储藏容器",
+      "留种批次",
+      "粮食"
+    ],
+    "signals": [
+      "霉味",
+      "返潮",
+      "鼠粪",
+      "虫粉",
+      "容器异味"
+    ],
+    "risks": [
+      "postharvest_mold",
+      "storage_loss",
+      "seed_contamination"
+    ],
+    "keywords": [
+      "收获后处理",
+      "晾晒防霉",
+      "储藏容器",
+      "留种批次",
+      "霉变批次"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "收获后晾晒防霉与储藏"
+    ],
+    "related_wiki": [
+      "agriculture-harvest-drying-rack-check-001",
+      "agriculture-postharvest-drydown-record-001",
+      "agriculture-seed-food-harvest-separation-001",
+      "agriculture-storage-container-dry-clean-check-001",
+      "agriculture-rodent-insect-storage-barrier-001",
+      "agriculture-mold-batch-discard-line-001",
+      "agriculture-root-crop-curing-basic-001",
+      "agriculture-harvest-maturity-check-001",
+      "agriculture-post-harvest-mold-prevention-001",
+      "agriculture-harvest-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0886",
+    "title": "小规模粮食生产优先级",
+    "category": "种植与食物生产",
+    "priority": "P1",
+    "scenario": "地块、水、种子和人力有限，需要判断先种什么、保留什么种子，以及失败后是否扩大粮食作物。",
+    "goal": "在短期食物补给和长期粮食尝试之间建立保守优先级，避免耗尽核心资源。",
+    "tools": [
+      "地块清单",
+      "种子台账",
+      "水肥预算卡",
+      "产量记录",
+      "计划纸"
+    ],
+    "steps": [
+      "盘点地块、日照、水量、成熟堆肥、核心种子和现有口粮压力。",
+      "先保留核心留种和短周期补给作物，再安排粮食作物小样。",
+      "评估作物周期、预期产量、病虫害压力和水肥需求。",
+      "一季结束后用产量、投入和失败原因决定是否扩大。",
+      "当资源不足时缩小试验面积，保护可靠种源。"
+    ],
+    "check": [
+      "核心种子仍保留。",
+      "粮食作物先小样验证。",
+      "水肥预算没有挤占饮水和卫生需求。"
+    ],
+    "common_mistakes": [
+      "把小地块粮食试验当成稳定口粮。",
+      "播完所有种子后才发现周期太长。",
+      "没有记录投入和产量。"
+    ],
+    "fallback": [
+      "优先本地适应性强、管理简单的作物。",
+      "用快收叶菜维持短期补给。",
+      "粮食作物连续失败时退回小样和种源保护。"
+    ],
+    "stop_or_escalate": [
+      "种子库即将耗尽、连续失败、地块污染、水肥不足或口粮压力无法等待长周期作物时，不扩大粮食试验。",
+      "饮水和卫生用水紧张时，停止扩大灌溉。"
+    ],
+    "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+    "category_original": "种植与食物生产",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "粮食作物",
+      "地块",
+      "种子库",
+      "水肥预算",
+      "产量记录"
+    ],
+    "signals": [
+      "口粮压力",
+      "种子不足",
+      "周期过长",
+      "连续失败",
+      "水肥不足"
+    ],
+    "risks": [
+      "food_production_overreach",
+      "seed_depletion",
+      "resource_shortage"
+    ],
+    "keywords": [
+      "小规模粮食",
+      "粮食作物优先级",
+      "水肥预算",
+      "核心留种",
+      "长期生产"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "小规模粮食生产优先级"
+    ],
+    "related_wiki": [
+      "agriculture-staple-crop-small-plot-priority-001",
+      "agriculture-seed-reserve-use-line-001",
+      "agriculture-quick-leaf-long-cycle-balance-001",
+      "agriculture-production-failure-backup-plan-001",
+      "agriculture-yield-record-minimum-fields-001",
+      "agriculture-water-fertility-budget-card-001",
+      "agriculture-local-crop-profile-001",
+      "agriculture-planting-inventory-link-001",
+      "agriculture-seed-storage-002",
+      "agriculture-expectation-001"
+    ],
+    "risk_level": "caution"
   }
 ]

@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 将本地已验证作物的播种窗口、耗水、可食部分、常见失败和留种结果整理成离线档案。条目提供可观察检查和交接记录，支持离线种植决策。
 tags: 本地作物行动档案,离线种植,行动记录
-guide_links: 
+guide_links: DG-0886
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

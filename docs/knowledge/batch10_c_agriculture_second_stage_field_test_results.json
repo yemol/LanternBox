@@ -1,0 +1,4480 @@
+{
+  "generated_at": "2026-07-18T04:03:02.542176+00:00",
+  "summary": {
+    "total": 24,
+    "strict_total": 18,
+    "observation_total": 6,
+    "pass": 24,
+    "partial": 0,
+    "fail": 0,
+    "strict_pass": 18,
+    "strict_partial": 0,
+    "strict_fail": 0,
+    "guide_hit_rate": "100.0%",
+    "expected_guide_hit_rate": "94.4%",
+    "wiki_hit_rate": "100.0%",
+    "wiki_hit_any_rate": "100.0%",
+    "guide_wiki_precise_rate": "100.0%",
+    "agriculture_primary_rate": "95.8%",
+    "safety_boundary_rate": "100.0%",
+    "fallback_rate": "100.0%",
+    "record_rate": "100.0%",
+    "dangerous_suggestion_count": 0,
+    "kiwix_override_count": 0,
+    "cross_domain_count": 1,
+    "root_cause_counts": {},
+    "cross_domain_counts": {
+      "off_domain_primary": 1,
+      "agriculture_vs_food": 1
+    },
+    "conflict_observation_counts": {
+      "food": 1,
+      "medical": 1
+    }
+  },
+  "cases": [
+    {
+      "id": "agri_seed_low_germination_large_sowing",
+      "query": "旧种子发芽率很低，还能不能大面积播种？",
+      "observation": false,
+      "focus": "种子批次和发芽率复测应主导，避免低发芽率种子直接占用主地块。",
+      "watch_conflicts": [
+        "food",
+        "storage"
+      ],
+      "expected_guides": [
+        "DG-0879"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-seed-batch-viability-ledger-001"
+      ],
+      "profiles": [
+        "planting_seed_germination",
+        "agriculture_seed_library"
+      ],
+      "domains": [
+        "agriculture",
+        "planting",
+        "food",
+        "water"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0053",
+          "title": "种子发芽测试：先测一小撮",
+          "risk_level": "caution",
+          "domains": [
+            "water",
+            "food",
+            "planting"
+          ]
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-seed-batch-viability-ledger-001",
+          "title": "种子批次与发芽率复测台账",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-drying-recheck-001",
+          "title": "种子干燥后的复查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-storage-moisture-failure-001",
+          "title": "种子受潮失效判断",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-library-box-index-001",
+          "title": "小型种子库盒索引",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-storage-001",
+          "title": "种子保存的干燥和温度",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-germination-test-001",
+          "title": "种子发芽率小样测试",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测"
+        },
+        {
+          "id": "DG-0053",
+          "title": "种子发芽测试：先测一小撮"
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0232",
+          "title": "种子库存管理"
+        },
+        {
+          "id": "DG-0671",
+          "title": "种子干燥封存"
+        },
+        {
+          "id": "DG-0236",
+          "title": "简易育苗流程"
+        },
+        {
+          "id": "DG-0513",
+          "title": "种子保存基础"
+        },
+        {
+          "id": "DG-0830",
+          "title": "草木灰来源审查和禁用"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-seed-batch-viability-ledger-001",
+          "title": "种子批次与发芽率复测台账"
+        },
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线"
+        },
+        {
+          "slug": "agriculture-seed-storage-moisture-failure-001",
+          "title": "种子受潮失效判断"
+        },
+        {
+          "slug": "agriculture-seasonal-planting-plan-001",
+          "title": "季节种植滚动计划"
+        },
+        {
+          "slug": "agriculture-seed-exchange-quarantine-001",
+          "title": "种子交换批次隔离"
+        },
+        {
+          "slug": "general-seed-batch-record-001",
+          "title": "种子批次记录"
+        },
+        {
+          "slug": "agriculture-seed-germination-test-001",
+          "title": "种子发芽率小样测试"
+        },
+        {
+          "slug": "agriculture-sowing-depth-spacing-001",
+          "title": "播种深度与间距小样设置"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-expectation-001",
+        "agriculture-local-crop-profile-001",
+        "agriculture-planting-inventory-link-001",
+        "agriculture-production-failure-backup-plan-001",
+        "agriculture-quick-leaf-long-cycle-balance-001",
+        "agriculture-seed-batch-viability-ledger-001",
+        "agriculture-seed-drying-recheck-001",
+        "agriculture-seed-food-harvest-separation-001",
+        "agriculture-seed-germination-test-001",
+        "agriculture-seed-library-box-index-001",
+        "agriculture-seed-reserve-use-line-001",
+        "agriculture-seed-saving-001",
+        "agriculture-seed-selection-for-saving-001",
+        "agriculture-seed-storage-001",
+        "agriculture-seed-storage-002",
+        "agriculture-seed-storage-moisture-failure-001",
+        "agriculture-staple-crop-small-plot-priority-001",
+        "agriculture-water-fertility-budget-card-001",
+        "agriculture-yield-record-minimum-fields-001",
+        "general-seed-batch-record-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_seed_mold_back_to_library",
+      "query": "种子受潮有霉味，能不能混回种子库？",
+      "observation": false,
+      "focus": "种子受潮和霉味应触发隔离、停用主种源和记录。",
+      "watch_conflicts": [
+        "food",
+        "hygiene"
+      ],
+      "expected_guides": [
+        "DG-0879"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-seed-storage-moisture-failure-001"
+      ],
+      "profiles": [
+        "agriculture_seed_library"
+      ],
+      "domains": [
+        "agriculture",
+        "planting",
+        "water",
+        "food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0232",
+          "title": "种子库存管理",
+          "risk_level": "normal",
+          "domains": [
+            "food",
+            "planting",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-seed-batch-viability-ledger-001",
+          "title": "种子批次与发芽率复测台账",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-drying-recheck-001",
+          "title": "种子干燥后的复查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-storage-moisture-failure-001",
+          "title": "种子受潮失效判断",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-library-box-index-001",
+          "title": "小型种子库盒索引",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-storage-001",
+          "title": "种子保存的干燥和温度",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-germination-test-001",
+          "title": "种子发芽率小样测试",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测"
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0232",
+          "title": "种子库存管理"
+        },
+        {
+          "id": "DG-0671",
+          "title": "种子干燥封存"
+        },
+        {
+          "id": "DG-0513",
+          "title": "种子保存基础"
+        },
+        {
+          "id": "DG-0053",
+          "title": "种子发芽测试：先测一小撮"
+        },
+        {
+          "id": "DG-0830",
+          "title": "草木灰来源审查和禁用"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线"
+        },
+        {
+          "slug": "agriculture-seed-storage-moisture-failure-001",
+          "title": "种子受潮失效判断"
+        },
+        {
+          "slug": "agriculture-seed-batch-viability-ledger-001",
+          "title": "种子批次与发芽率复测台账"
+        },
+        {
+          "slug": "agriculture-seed-library-box-index-001",
+          "title": "小型种子库盒索引"
+        },
+        {
+          "slug": "agriculture-seasonal-planting-plan-001",
+          "title": "季节种植滚动计划"
+        },
+        {
+          "slug": "agriculture-seed-exchange-quarantine-001",
+          "title": "种子交换批次隔离"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离"
+        },
+        {
+          "slug": "agriculture-rodent-insect-storage-barrier-001",
+          "title": "储粮鼠虫防护"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-expectation-001",
+        "agriculture-local-crop-profile-001",
+        "agriculture-planting-inventory-link-001",
+        "agriculture-production-failure-backup-plan-001",
+        "agriculture-quick-leaf-long-cycle-balance-001",
+        "agriculture-seed-batch-viability-ledger-001",
+        "agriculture-seed-drying-recheck-001",
+        "agriculture-seed-food-harvest-separation-001",
+        "agriculture-seed-germination-test-001",
+        "agriculture-seed-library-box-index-001",
+        "agriculture-seed-reserve-use-line-001",
+        "agriculture-seed-saving-001",
+        "agriculture-seed-selection-for-saving-001",
+        "agriculture-seed-storage-001",
+        "agriculture-seed-storage-002",
+        "agriculture-seed-storage-moisture-failure-001",
+        "agriculture-soil-fertility-basics-index-001",
+        "agriculture-staple-crop-small-plot-priority-001",
+        "agriculture-water-fertility-budget-card-001",
+        "agriculture-yield-record-minimum-fields-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_continuous_nursery_no_gap",
+      "query": "连续育苗怎么安排，避免菜地断档？",
+      "observation": false,
+      "focus": "连续育苗排期和资源上限应进入 selected evidence。",
+      "watch_conflicts": [
+        "food",
+        "organization"
+      ],
+      "expected_guides": [
+        "DG-0880"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-continuous-nursery-schedule-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "agriculture",
+        "planting",
+        "psychology",
+        "water",
+        "food",
+        "security"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0880",
+          "title": "连续育苗与失败复盘",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0728",
+          "title": "安排轮休避免疲劳失控",
+          "risk_level": "caution",
+          "domains": [
+            "psychology"
+          ]
+        },
+        {
+          "id": "DG-0236",
+          "title": "简易育苗流程",
+          "risk_level": "normal",
+          "domains": [
+            "food",
+            "security",
+            "planting",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-continuous-nursery-schedule-001",
+          "title": "连续育苗排期",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seedling-damping-off-isolation-001",
+          "title": "苗期猝倒和隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-transplant-hardening-off-001",
+          "title": "移栽前炼苗和缓苗风险",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-nursery-capacity-limit-001",
+          "title": "育苗数量和照护上限",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seedling-001",
+          "title": "育苗失败的常见原因",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seedling-transplant-001",
+          "title": "幼苗移栽和缓苗检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seedling-thinning-001",
+          "title": "幼苗间苗与保留株选择",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-planting-failure-review-001",
+          "title": "种植失败现场复盘",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0880",
+          "title": "连续育苗与失败复盘"
+        },
+        {
+          "id": "DG-0728",
+          "title": "安排轮休避免疲劳失控"
+        },
+        {
+          "id": "DG-0236",
+          "title": "简易育苗流程"
+        },
+        {
+          "id": "DG-0514",
+          "title": "育苗失败记录"
+        },
+        {
+          "id": "DG-0705",
+          "title": "交换期间留守人员安排"
+        },
+        {
+          "id": "DG-0717",
+          "title": "长期断供下安排日常节奏"
+        },
+        {
+          "id": "DG-0825",
+          "title": "先把饮水分发安排成固定时段"
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-continuous-nursery-schedule-001",
+        "agriculture-improvised-nursery-tray-001",
+        "agriculture-nursery-capacity-limit-001",
+        "agriculture-planting-failure-review-001",
+        "agriculture-seedling-001",
+        "agriculture-seedling-damping-off-isolation-001",
+        "agriculture-seedling-thinning-001",
+        "agriculture-seedling-transplant-001",
+        "agriculture-shade-heat-protection-001",
+        "agriculture-sowing-depth-spacing-001",
+        "agriculture-transplant-hardening-off-001",
+        "organization-fatigue-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_seedling_damping_off",
+      "query": "苗盘里有幼苗倒伏腐烂，怎么办？",
+      "observation": false,
+      "focus": "苗期猝倒、腐烂和苗盘隔离应主导，不应泛化成普通卫生或污染。",
+      "watch_conflicts": [
+        "hygiene",
+        "contamination"
+      ],
+      "expected_guides": [
+        "DG-0880"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0883"
+      ],
+      "expected_wiki": [
+        "agriculture-seedling-damping-off-isolation-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "agriculture",
+        "planting",
+        "water",
+        "food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0880",
+          "title": "连续育苗与失败复盘",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0234",
+          "title": "雨季种植防烂根",
+          "risk_level": "normal",
+          "domains": [
+            "food",
+            "planting",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-continuous-nursery-schedule-001",
+          "title": "连续育苗排期",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seedling-damping-off-isolation-001",
+          "title": "苗期猝倒和隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-transplant-hardening-off-001",
+          "title": "移栽前炼苗和缓苗风险",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-nursery-capacity-limit-001",
+          "title": "育苗数量和照护上限",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seedling-001",
+          "title": "育苗失败的常见原因",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seedling-transplant-001",
+          "title": "幼苗移栽和缓苗检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seedling-thinning-001",
+          "title": "幼苗间苗与保留株选择",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-planting-failure-review-001",
+          "title": "种植失败现场复盘",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0880",
+          "title": "连续育苗与失败复盘"
+        },
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流"
+        },
+        {
+          "id": "DG-0234",
+          "title": "雨季种植防烂根"
+        },
+        {
+          "id": "DG-0672",
+          "title": "芽苗菜每日冲洗"
+        },
+        {
+          "id": "DG-0030",
+          "title": "浑浊水处理：沉淀、过滤、煮沸"
+        },
+        {
+          "id": "DG-0047",
+          "title": "罐头检查：鼓包、喷液、锈蚀"
+        },
+        {
+          "id": "DG-0209",
+          "title": "药品分区：口服、外用、慢病、儿童"
+        },
+        {
+          "id": "DG-0412",
+          "title": "知识卡转任务卡"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-contaminated-plot-ban-record-001",
+        "agriculture-continuous-nursery-schedule-001",
+        "agriculture-crop-disease-isolation-001",
+        "agriculture-diseased-residue-separation-001",
+        "agriculture-diseased-tool-zone-separation-001",
+        "agriculture-egg-larvae-leaf-back-check-001",
+        "agriculture-manual-pest-removal-001",
+        "agriculture-manual-pest-removal-record-001",
+        "agriculture-manure-compost-food-zone-boundary-001",
+        "agriculture-nursery-capacity-limit-001",
+        "agriculture-pest-early-scouting-routine-001",
+        "agriculture-plant-pests-001",
+        "agriculture-planting-failure-review-001",
+        "agriculture-post-rain-garden-review-001",
+        "agriculture-root-rot-warning-001",
+        "agriculture-seedling-001",
+        "agriculture-seedling-damping-off-isolation-001",
+        "agriculture-seedling-thinning-001",
+        "agriculture-seedling-transplant-001",
+        "agriculture-soil-drainage-test-001",
+        "agriculture-transplant-hardening-off-001",
+        "agriculture-unknown-chemical-plot-stop-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_compacted_soil_recovery",
+      "query": "土壤板结，菜长得很差，怎么恢复？",
+      "observation": false,
+      "focus": "土壤贫瘠和板结恢复应主导，避免被水或泛种植旧 Guide 完全吸走。",
+      "watch_conflicts": [
+        "water",
+        "tools"
+      ],
+      "expected_guides": [
+        "DG-0881"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-soil-compaction-recovery-001",
+        "agriculture-soil-poor-fertility-signs-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "agriculture",
+        "planting",
+        "psychology",
+        "records",
+        "evacuation",
+        "security",
+        "comms"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0881",
+          "title": "土壤贫瘠与板结恢复判断",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0727",
+          "title": "短期可完成任务恢复秩序",
+          "risk_level": "caution",
+          "domains": [
+            "psychology"
+          ]
+        },
+        {
+          "id": "DG-0275",
+          "title": "备份恢复演练",
+          "risk_level": "normal",
+          "domains": [
+            "security",
+            "comms",
+            "records",
+            "evacuation"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-soil-poor-fertility-signs-001",
+          "title": "土壤贫瘠的现场信号",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-soil-compaction-recovery-001",
+          "title": "土壤板结恢复",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-salinity-crust-stop-line-001",
+          "title": "土表盐壳和盐分风险",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-raised-bed-drainage-recovery-001",
+          "title": "积水地块的高畦恢复",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-soil-recovery-log-001",
+          "title": "土壤恢复记录",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-water-fertility-budget-card-001",
+          "title": "水肥预算卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-soil-texture-field-check-001",
+          "title": "土壤质地手感判断",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-soil-drainage-test-001",
+          "title": "种植地排水下渗测试",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0881",
+          "title": "土壤贫瘠与板结恢复判断"
+        },
+        {
+          "id": "DG-0727",
+          "title": "短期可完成任务恢复秩序"
+        },
+        {
+          "id": "DG-0275",
+          "title": "备份恢复演练"
+        },
+        {
+          "id": "DG-0538",
+          "title": "数据恢复演练"
+        },
+        {
+          "id": "DG-0014",
+          "title": "昏迷但有呼吸：恢复体位"
+        },
+        {
+          "id": "DG-0506",
+          "title": "中暑后恢复观察"
+        },
+        {
+          "id": "DG-0060",
+          "title": "台风或强风后：坠物和漏电检查"
+        },
+        {
+          "id": "DG-0065",
+          "title": "大规模停水第一天"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-soil-compaction-recovery-001",
+          "title": "土壤板结恢复"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-raised-bed-drainage-recovery-001",
+        "agriculture-salinity-crust-stop-line-001",
+        "agriculture-soil-compaction-recovery-001",
+        "agriculture-soil-drainage-test-001",
+        "agriculture-soil-fertility-basics-index-001",
+        "agriculture-soil-poor-fertility-signs-001",
+        "agriculture-soil-recovery-log-001",
+        "agriculture-soil-texture-field-check-001",
+        "agriculture-water-fertility-budget-card-001",
+        "education-offline-data-backup-001",
+        "general-paper-digital-dual-backup-001",
+        "organization-task-tiers-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_salt_crust_continue_fertilizer",
+      "query": "土表有白色盐壳，还能继续施肥吗？",
+      "observation": false,
+      "focus": "土表盐壳应触发停止继续施肥和水源/盐分记录。",
+      "watch_conflicts": [
+        "water",
+        "contamination"
+      ],
+      "expected_guides": [
+        "DG-0881"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-salinity-crust-stop-line-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "agriculture",
+        "planting",
+        "power",
+        "security",
+        "medical",
+        "hygiene",
+        "water"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0881",
+          "title": "土壤贫瘠与板结恢复判断",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0111",
+          "title": "电线和插线板安全检查",
+          "risk_level": "high",
+          "domains": [
+            "power",
+            "security"
+          ]
+        },
+        {
+          "id": "DG-0112",
+          "title": "电池漏液处理",
+          "risk_level": "high",
+          "domains": [
+            "power",
+            "hygiene",
+            "medical",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-soil-poor-fertility-signs-001",
+          "title": "土壤贫瘠的现场信号",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-soil-compaction-recovery-001",
+          "title": "土壤板结恢复",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-salinity-crust-stop-line-001",
+          "title": "土表盐壳和盐分风险",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-raised-bed-drainage-recovery-001",
+          "title": "积水地块的高畦恢复",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-soil-recovery-log-001",
+          "title": "土壤恢复记录",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-water-fertility-budget-card-001",
+          "title": "水肥预算卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-soil-texture-field-check-001",
+          "title": "土壤质地手感判断",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-soil-drainage-test-001",
+          "title": "种植地排水下渗测试",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0881",
+          "title": "土壤贫瘠与板结恢复判断"
+        },
+        {
+          "id": "DG-0111",
+          "title": "电线和插线板安全检查"
+        },
+        {
+          "id": "DG-0112",
+          "title": "电池漏液处理"
+        },
+        {
+          "id": "DG-0815",
+          "title": "先做储水轮换和复查"
+        },
+        {
+          "id": "DG-0622",
+          "title": "鞋底开裂转移前修补"
+        },
+        {
+          "id": "DG-0804",
+          "title": "先判断水是否浑浊"
+        },
+        {
+          "id": "DG-0830",
+          "title": "草木灰来源审查和禁用"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-raised-bed-drainage-recovery-001",
+        "agriculture-salinity-crust-stop-line-001",
+        "agriculture-soil-compaction-recovery-001",
+        "agriculture-soil-drainage-test-001",
+        "agriculture-soil-fertility-basics-index-001",
+        "agriculture-soil-poor-fertility-signs-001",
+        "agriculture-soil-recovery-log-001",
+        "agriculture-soil-texture-field-check-001",
+        "agriculture-water-fertility-budget-card-001",
+        "energy-basic-electrical-safety-index-001",
+        "energy-water-damaged-electrical-no-power-001",
+        "hygiene-contamination-log-001",
+        "hygiene-contamination-zone-001",
+        "hygiene-hygiene-knowledge-001",
+        "hygiene-isolation-supplies-001",
+        "medical-chemical-skin-eye-exposure-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_stinky_kitchen_compost_leafy_greens",
+      "query": "厨余堆肥还发臭，能不能倒在叶菜旁边？",
+      "observation": false,
+      "focus": "发臭厨余和未腐熟肥应触发食用区禁入边界。",
+      "watch_conflicts": [
+        "hygiene",
+        "contamination",
+        "food"
+      ],
+      "expected_guides": [
+        "DG-0882"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-immature-compost-stop-line-001",
+        "agriculture-kitchen-waste-compost-boundary-001"
+      ],
+      "profiles": [
+        "agriculture_contaminated_plot_boundary"
+      ],
+      "domains": [
+        "agriculture",
+        "planting",
+        "water",
+        "food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0882",
+          "title": "堆肥成熟和未腐熟风险判断",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0235",
+          "title": "堆肥成熟判断",
+          "risk_level": "caution",
+          "domains": [
+            "food",
+            "planting",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-compost-maturity-second-check-001",
+          "title": "堆肥成熟二次确认",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-immature-compost-stop-line-001",
+          "title": "未腐熟肥进入食用区停止线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manure-compost-food-zone-boundary-001",
+          "title": "粪肥与食用地块边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-kitchen-waste-compost-boundary-001",
+          "title": "厨余堆肥进入种植区边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-compost-001",
+          "title": "堆肥成熟和病原风险",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-compost-pile-setup-001",
+          "title": "小型厨余堆肥建堆",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manure-growing-zone-separation-001",
+          "title": "粪污与食用种植区隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-pest-early-scouting-routine-001",
+          "title": "虫害早期巡查流程",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0882",
+          "title": "堆肥成熟和未腐熟风险判断"
+        },
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流"
+        },
+        {
+          "id": "DG-0235",
+          "title": "堆肥成熟判断"
+        },
+        {
+          "id": "DG-0054",
+          "title": "堆肥：厨余不是随便堆"
+        },
+        {
+          "id": "DG-0229",
+          "title": "叶菜轮播计划"
+        },
+        {
+          "id": "DG-0052",
+          "title": "阳台种菜：从容器到第一批叶菜"
+        },
+        {
+          "id": "DG-0831",
+          "title": "作物病害隔离与工具分流"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-immature-compost-stop-line-001",
+          "title": "未腐熟肥进入食用区停止线"
+        },
+        {
+          "slug": "agriculture-kitchen-waste-compost-boundary-001",
+          "title": "厨余堆肥进入种植区边界"
+        },
+        {
+          "slug": "agriculture-unknown-chemical-plot-stop-001",
+          "title": "不明化学污染地块停用"
+        },
+        {
+          "slug": "agriculture-manure-compost-food-zone-boundary-001",
+          "title": "粪肥与食用地块边界"
+        },
+        {
+          "slug": "agriculture-contaminated-plot-ban-record-001",
+          "title": "污染地块禁用记录"
+        },
+        {
+          "slug": "agriculture-compost-pile-setup-001",
+          "title": "小型厨余堆肥建堆"
+        },
+        {
+          "slug": "agriculture-compost-maturity-second-check-001",
+          "title": "堆肥成熟二次确认"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-compost-001",
+        "agriculture-compost-maturity-second-check-001",
+        "agriculture-compost-pile-setup-001",
+        "agriculture-contaminated-plot-ban-record-001",
+        "agriculture-crop-disease-isolation-001",
+        "agriculture-diseased-residue-separation-001",
+        "agriculture-diseased-tool-zone-separation-001",
+        "agriculture-egg-larvae-leaf-back-check-001",
+        "agriculture-immature-compost-stop-line-001",
+        "agriculture-kitchen-waste-compost-boundary-001",
+        "agriculture-manual-pest-removal-001",
+        "agriculture-manual-pest-removal-record-001",
+        "agriculture-manure-compost-food-zone-boundary-001",
+        "agriculture-manure-growing-zone-separation-001",
+        "agriculture-pest-early-scouting-routine-001",
+        "agriculture-plant-pests-001",
+        "agriculture-seedling-damping-off-isolation-001",
+        "agriculture-unknown-chemical-plot-stop-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_manure_direct_edible_plot",
+      "query": "粪肥能不能直接用在食用菜地？",
+      "observation": false,
+      "focus": "粪肥与食用区边界应主导，WASH/污染控制可作为 secondary。",
+      "watch_conflicts": [
+        "hygiene",
+        "contamination"
+      ],
+      "expected_guides": [
+        "DG-0882"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-manure-compost-food-zone-boundary-001"
+      ],
+      "profiles": [
+        "agriculture_contaminated_plot_boundary"
+      ],
+      "domains": [
+        "agriculture",
+        "planting",
+        "water",
+        "food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0882",
+          "title": "堆肥成熟和未腐熟风险判断",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0235",
+          "title": "堆肥成熟判断",
+          "risk_level": "caution",
+          "domains": [
+            "food",
+            "planting",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-compost-maturity-second-check-001",
+          "title": "堆肥成熟二次确认",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-immature-compost-stop-line-001",
+          "title": "未腐熟肥进入食用区停止线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manure-compost-food-zone-boundary-001",
+          "title": "粪肥与食用地块边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-kitchen-waste-compost-boundary-001",
+          "title": "厨余堆肥进入种植区边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-compost-001",
+          "title": "堆肥成熟和病原风险",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-compost-pile-setup-001",
+          "title": "小型厨余堆肥建堆",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manure-growing-zone-separation-001",
+          "title": "粪污与食用种植区隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-pest-early-scouting-routine-001",
+          "title": "虫害早期巡查流程",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0882",
+          "title": "堆肥成熟和未腐熟风险判断"
+        },
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流"
+        },
+        {
+          "id": "DG-0235",
+          "title": "堆肥成熟判断"
+        },
+        {
+          "id": "DG-0830",
+          "title": "草木灰来源审查和禁用"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-unknown-chemical-plot-stop-001",
+          "title": "不明化学污染地块停用"
+        },
+        {
+          "slug": "agriculture-manure-compost-food-zone-boundary-001",
+          "title": "粪肥与食用地块边界"
+        },
+        {
+          "slug": "agriculture-kitchen-waste-compost-boundary-001",
+          "title": "厨余堆肥进入种植区边界"
+        },
+        {
+          "slug": "agriculture-immature-compost-stop-line-001",
+          "title": "未腐熟肥进入食用区停止线"
+        },
+        {
+          "slug": "agriculture-contaminated-plot-ban-record-001",
+          "title": "污染地块禁用记录"
+        },
+        {
+          "slug": "agriculture-compost-pile-setup-001",
+          "title": "小型厨余堆肥建堆"
+        },
+        {
+          "slug": "agriculture-compost-maturity-second-check-001",
+          "title": "堆肥成熟二次确认"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-compost-001",
+        "agriculture-compost-maturity-second-check-001",
+        "agriculture-compost-pile-setup-001",
+        "agriculture-contaminated-plot-ban-record-001",
+        "agriculture-crop-disease-isolation-001",
+        "agriculture-diseased-residue-separation-001",
+        "agriculture-diseased-tool-zone-separation-001",
+        "agriculture-egg-larvae-leaf-back-check-001",
+        "agriculture-immature-compost-stop-line-001",
+        "agriculture-kitchen-waste-compost-boundary-001",
+        "agriculture-manual-pest-removal-001",
+        "agriculture-manual-pest-removal-record-001",
+        "agriculture-manure-compost-food-zone-boundary-001",
+        "agriculture-manure-growing-zone-separation-001",
+        "agriculture-pest-early-scouting-routine-001",
+        "agriculture-plant-pests-001",
+        "agriculture-seedling-damping-off-isolation-001",
+        "agriculture-unknown-chemical-plot-stop-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_leaf_back_many_eggs",
+      "query": "叶背发现很多虫卵，应该怎么处理？",
+      "observation": false,
+      "focus": "虫卵、幼虫和叶背巡查应触发农业病虫害早期隔离。",
+      "watch_conflicts": [
+        "food",
+        "medical"
+      ],
+      "expected_guides": [
+        "DG-0883"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-egg-larvae-leaf-back-check-001",
+        "agriculture-pest-early-scouting-routine-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "agriculture",
+        "planting",
+        "food",
+        "hygiene",
+        "tools",
+        "medical"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0831",
+          "title": "作物病害隔离与工具分流",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "food",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0002",
+          "title": "伤者初筛：意识、呼吸、大出血",
+          "risk_level": "critical",
+          "domains": [
+            "medical",
+            "hygiene",
+            "tools"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-pest-early-scouting-routine-001",
+          "title": "虫害早期巡查流程",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-egg-larvae-leaf-back-check-001",
+          "title": "叶背虫卵和幼虫检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manual-pest-removal-record-001",
+          "title": "人工除虫后的复查记录",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-diseased-tool-zone-separation-001",
+          "title": "带病害工具分区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-unknown-chemical-plot-stop-001",
+          "title": "不明化学污染地块停用",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seedling-damping-off-isolation-001",
+          "title": "苗期猝倒和隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manure-compost-food-zone-boundary-001",
+          "title": "粪肥与食用地块边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-plant-pests-001",
+          "title": "病虫害早期观察",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流"
+        },
+        {
+          "id": "DG-0831",
+          "title": "作物病害隔离与工具分流"
+        },
+        {
+          "id": "DG-0002",
+          "title": "伤者初筛：意识、呼吸、大出血"
+        },
+        {
+          "id": "DG-0133",
+          "title": "物资被翻动处理"
+        },
+        {
+          "id": "DG-0170",
+          "title": "动物尸体处理"
+        },
+        {
+          "id": "DG-0283",
+          "title": "数据泄露初步处理"
+        },
+        {
+          "id": "DG-0528",
+          "title": "失效内容标记"
+        },
+        {
+          "id": "DG-0579",
+          "title": "火灾初期：撤离优先和小火边界"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-contaminated-plot-ban-record-001",
+        "agriculture-crop-disease-isolation-001",
+        "agriculture-diseased-residue-separation-001",
+        "agriculture-diseased-tool-zone-separation-001",
+        "agriculture-egg-larvae-leaf-back-check-001",
+        "agriculture-manual-pest-removal-001",
+        "agriculture-manual-pest-removal-record-001",
+        "agriculture-manure-compost-food-zone-boundary-001",
+        "agriculture-pest-early-scouting-routine-001",
+        "agriculture-plant-pests-001",
+        "agriculture-seedling-damping-off-isolation-001",
+        "agriculture-unknown-chemical-plot-stop-001",
+        "medical-bleeding-control-001",
+        "medical-bleeding-control-002"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_diseased_pruner_cross_use",
+      "query": "剪过病株的剪刀还能继续剪别的菜吗？",
+      "observation": false,
+      "focus": "病害工具分流应主导，tools/repair 不应只按工具清洁或维修回答。",
+      "watch_conflicts": [
+        "tools",
+        "repair",
+        "hygiene"
+      ],
+      "expected_guides": [
+        "DG-0883"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-diseased-tool-zone-separation-001"
+      ],
+      "profiles": [
+        "agriculture_pest_disease_control"
+      ],
+      "domains": [
+        "agriculture",
+        "planting",
+        "food",
+        "hygiene"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0831",
+          "title": "作物病害隔离与工具分流",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "food",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0675",
+          "title": "采收后留种标记",
+          "risk_level": "caution",
+          "domains": [
+            "planting"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-pest-early-scouting-routine-001",
+          "title": "虫害早期巡查流程",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-egg-larvae-leaf-back-check-001",
+          "title": "叶背虫卵和幼虫检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manual-pest-removal-record-001",
+          "title": "人工除虫后的复查记录",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-diseased-tool-zone-separation-001",
+          "title": "带病害工具分区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-unknown-chemical-plot-stop-001",
+          "title": "不明化学污染地块停用",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seedling-damping-off-isolation-001",
+          "title": "苗期猝倒和隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manure-compost-food-zone-boundary-001",
+          "title": "粪肥与食用地块边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-plant-pests-001",
+          "title": "病虫害早期观察",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流"
+        },
+        {
+          "id": "DG-0831",
+          "title": "作物病害隔离与工具分流"
+        },
+        {
+          "id": "DG-0675",
+          "title": "采收后留种标记"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-diseased-tool-zone-separation-001",
+          "title": "带病害工具分区"
+        },
+        {
+          "slug": "agriculture-egg-larvae-leaf-back-check-001",
+          "title": "叶背虫卵和幼虫检查"
+        },
+        {
+          "slug": "agriculture-manual-pest-removal-record-001",
+          "title": "人工除虫后的复查记录"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-container-002",
+        "agriculture-contaminated-plot-ban-record-001",
+        "agriculture-crop-disease-isolation-001",
+        "agriculture-diseased-residue-separation-001",
+        "agriculture-diseased-tool-zone-separation-001",
+        "agriculture-egg-larvae-leaf-back-check-001",
+        "agriculture-manual-pest-removal-001",
+        "agriculture-manual-pest-removal-record-001",
+        "agriculture-manure-compost-food-zone-boundary-001",
+        "agriculture-pest-early-scouting-routine-001",
+        "agriculture-plant-pests-001",
+        "agriculture-seed-selection-for-saving-001",
+        "agriculture-seed-storage-001",
+        "agriculture-seedling-damping-off-isolation-001",
+        "agriculture-sprouts-001",
+        "agriculture-unknown-chemical-plot-stop-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_unknown_chemical_plot_food",
+      "query": "这块地疑似有化学污染，还能种吃的吗？",
+      "observation": false,
+      "focus": "不明化学污染地块应触发食用作物停用和边界标记。",
+      "watch_conflicts": [
+        "contamination",
+        "food",
+        "medical"
+      ],
+      "expected_guides": [
+        "DG-0883"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-unknown-chemical-plot-stop-001"
+      ],
+      "profiles": [
+        "agriculture_contaminated_plot_boundary"
+      ],
+      "domains": [
+        "agriculture",
+        "planting",
+        "water",
+        "food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0882",
+          "title": "堆肥成熟和未腐熟风险判断",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0235",
+          "title": "堆肥成熟判断",
+          "risk_level": "caution",
+          "domains": [
+            "food",
+            "planting",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-pest-early-scouting-routine-001",
+          "title": "虫害早期巡查流程",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-egg-larvae-leaf-back-check-001",
+          "title": "叶背虫卵和幼虫检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manual-pest-removal-record-001",
+          "title": "人工除虫后的复查记录",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-diseased-tool-zone-separation-001",
+          "title": "带病害工具分区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-unknown-chemical-plot-stop-001",
+          "title": "不明化学污染地块停用",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seedling-damping-off-isolation-001",
+          "title": "苗期猝倒和隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manure-compost-food-zone-boundary-001",
+          "title": "粪肥与食用地块边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-plant-pests-001",
+          "title": "病虫害早期观察",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流"
+        },
+        {
+          "id": "DG-0882",
+          "title": "堆肥成熟和未腐熟风险判断"
+        },
+        {
+          "id": "DG-0235",
+          "title": "堆肥成熟判断"
+        },
+        {
+          "id": "DG-0064",
+          "title": "疑似化学污染：远离、脱外层、冲洗"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-contaminated-plot-ban-record-001",
+          "title": "污染地块禁用记录"
+        },
+        {
+          "slug": "agriculture-unknown-chemical-plot-stop-001",
+          "title": "不明化学污染地块停用"
+        },
+        {
+          "slug": "agriculture-manure-compost-food-zone-boundary-001",
+          "title": "粪肥与食用地块边界"
+        },
+        {
+          "slug": "agriculture-kitchen-waste-compost-boundary-001",
+          "title": "厨余堆肥进入种植区边界"
+        },
+        {
+          "slug": "agriculture-immature-compost-stop-line-001",
+          "title": "未腐熟肥进入食用区停止线"
+        },
+        {
+          "slug": "agriculture-compost-pile-setup-001",
+          "title": "小型厨余堆肥建堆"
+        },
+        {
+          "slug": "agriculture-compost-maturity-second-check-001",
+          "title": "堆肥成熟二次确认"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-compost-001",
+        "agriculture-compost-maturity-second-check-001",
+        "agriculture-compost-pile-setup-001",
+        "agriculture-contaminated-plot-ban-record-001",
+        "agriculture-crop-disease-isolation-001",
+        "agriculture-diseased-residue-separation-001",
+        "agriculture-diseased-tool-zone-separation-001",
+        "agriculture-egg-larvae-leaf-back-check-001",
+        "agriculture-immature-compost-stop-line-001",
+        "agriculture-kitchen-waste-compost-boundary-001",
+        "agriculture-manual-pest-removal-001",
+        "agriculture-manual-pest-removal-record-001",
+        "agriculture-manure-compost-food-zone-boundary-001",
+        "agriculture-manure-growing-zone-separation-001",
+        "agriculture-pest-early-scouting-routine-001",
+        "agriculture-plant-pests-001",
+        "agriculture-seedling-damping-off-isolation-001",
+        "agriculture-unknown-chemical-plot-stop-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_next_season_same_small_plot",
+      "query": "同一小地块下一季应该种什么？",
+      "observation": false,
+      "focus": "轮作和多季计划应主导，而不是普通食物或泛种植建议。",
+      "watch_conflicts": [
+        "food",
+        "organization"
+      ],
+      "expected_guides": [
+        "DG-0884"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-crop-family-rotation-card-001",
+        "agriculture-heavy-light-feeder-rotation-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "agriculture",
+        "planting",
+        "water",
+        "records",
+        "medical",
+        "security",
+        "disaster",
+        "power"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0552",
+          "title": "停水后第一小时：容器收集和分区",
+          "risk_level": "caution",
+          "domains": [
+            "water"
+          ]
+        },
+        {
+          "id": "DG-0055",
+          "title": "地震后第一小时：先稳住，不急着乱跑",
+          "risk_level": "caution",
+          "domains": [
+            "disaster",
+            "power",
+            "security",
+            "records",
+            "medical"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-crop-family-rotation-card-001",
+          "title": "作物家族轮作卡",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-heavy-light-feeder-rotation-001",
+          "title": "高耗肥和低耗肥作物轮作",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-quick-leaf-long-cycle-balance-001",
+          "title": "快收叶菜和长周期作物搭配",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seasonal-planting-calendar-001",
+          "title": "多季种植日历",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-production-failure-backup-plan-001",
+          "title": "生产失败备用计划",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-annual-garden-plan-card-001",
+          "title": "家庭菜地年度计划卡",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-yield-record-minimum-fields-001",
+          "title": "产量记录最小字段",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-team-garden-task-handover-001",
+          "title": "菜地任务交接",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        },
+        {
+          "id": "DG-0552",
+          "title": "停水后第一小时：容器收集和分区"
+        },
+        {
+          "id": "DG-0055",
+          "title": "地震后第一小时：先稳住，不急着乱跑"
+        },
+        {
+          "id": "DG-0342",
+          "title": "停电后第一小时"
+        },
+        {
+          "id": "DG-0053",
+          "title": "种子发芽测试：先测一小撮"
+        },
+        {
+          "id": "DG-0077",
+          "title": "到达新地点第一小时"
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0881",
+          "title": "土壤贫瘠与板结恢复判断"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-annual-garden-plan-card-001",
+        "agriculture-crop-family-rotation-card-001",
+        "agriculture-crop-rotation-basic-001",
+        "agriculture-growing-log-001",
+        "agriculture-growing-record-handover-001",
+        "agriculture-heavy-light-feeder-rotation-001",
+        "agriculture-production-failure-backup-plan-001",
+        "agriculture-quick-leaf-long-cycle-balance-001",
+        "agriculture-seasonal-planting-calendar-001",
+        "agriculture-seasonal-planting-plan-001",
+        "agriculture-team-garden-task-handover-001",
+        "agriculture-yield-record-minimum-fields-001",
+        "hygiene-fecal-contamination-water-separation-001",
+        "water-container-001",
+        "water-priority-outage-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_leafy_quick_vs_long_cycle_staple",
+      "query": "快收叶菜和长周期粮食怎么搭配？",
+      "observation": false,
+      "focus": "快收叶菜和长周期粮食搭配可由轮作或小规模粮食优先级主导。",
+      "watch_conflicts": [
+        "food",
+        "storage"
+      ],
+      "expected_guides": [
+        "DG-0884"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0886"
+      ],
+      "expected_wiki": [
+        "agriculture-quick-leaf-long-cycle-balance-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "agriculture",
+        "planting",
+        "food",
+        "water"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0608",
+          "title": "霉变粮食和坚果停用",
+          "risk_level": "high",
+          "domains": [
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0229",
+          "title": "叶菜轮播计划",
+          "risk_level": "caution",
+          "domains": [
+            "food",
+            "planting",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-staple-crop-small-plot-priority-001",
+          "title": "小地块粮食作物优先级",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-quick-leaf-long-cycle-balance-001",
+          "title": "快收叶菜和长周期作物搭配",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-production-failure-backup-plan-001",
+          "title": "生产失败备用计划",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-yield-record-minimum-fields-001",
+          "title": "产量记录最小字段",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-water-fertility-budget-card-001",
+          "title": "水肥预算卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-local-crop-profile-001",
+          "title": "本地作物行动档案",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-planting-inventory-link-001",
+          "title": "种植计划与库存消耗联动",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0608",
+          "title": "霉变粮食和坚果停用"
+        },
+        {
+          "id": "DG-0229",
+          "title": "叶菜轮播计划"
+        },
+        {
+          "id": "DG-0052",
+          "title": "阳台种菜：从容器到第一批叶菜"
+        },
+        {
+          "id": "DG-0511",
+          "title": "工具维护周期表"
+        },
+        {
+          "id": "DG-0832",
+          "title": "采收后分级防霉"
+        },
+        {
+          "id": "DG-0249",
+          "title": "重物分批搬运"
+        },
+        {
+          "id": "DG-0251",
+          "title": "楼梯搬运规则"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-expectation-001",
+        "agriculture-local-crop-profile-001",
+        "agriculture-planting-inventory-link-001",
+        "agriculture-production-failure-backup-plan-001",
+        "agriculture-quick-leaf-long-cycle-balance-001",
+        "agriculture-seasonal-planting-plan-001",
+        "agriculture-seed-reserve-use-line-001",
+        "agriculture-seed-storage-002",
+        "agriculture-small-garden-pest-index-001",
+        "agriculture-staple-crop-small-plot-priority-001",
+        "agriculture-water-fertility-budget-card-001",
+        "agriculture-yield-record-minimum-fields-001",
+        "food-canned-food-001",
+        "food-canned-food-002",
+        "food-children-001",
+        "food-cooking-001",
+        "food-food-knowledge-001",
+        "food-food-knowledge-002",
+        "food-food-knowledge-003",
+        "food-food-poisoning-001",
+        "food-food-waste-001",
+        "food-hunger-001",
+        "food-inventory-001",
+        "food-mold-001",
+        "food-package-damage-001",
+        "food-protein-001",
+        "food-refrigeration-001",
+        "food-refrigeration-002",
+        "food-spoilage-001",
+        "food-spoilage-002",
+        "food-spoilage-check-001",
+        "food-staple-food-001",
+        "food-waste-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": false,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_harvested_beans_dry_mold_prevention",
+      "query": "收获后的豆子怎么晾晒，避免发霉？",
+      "observation": false,
+      "focus": "采收后干燥记录和晾晒架质量应主导，food safety 可补充但不应完全抢主位。",
+      "watch_conflicts": [
+        "food",
+        "manufacturing"
+      ],
+      "expected_guides": [
+        "DG-0885"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-harvest-drying-rack-check-001",
+        "agriculture-postharvest-drydown-record-001"
+      ],
+      "profiles": [
+        "agriculture_postharvest_storage"
+      ],
+      "domains": [
+        "agriculture",
+        "planting",
+        "food",
+        "hygiene",
+        "tools",
+        "medical",
+        "security"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0885",
+          "title": "收获后晾晒防霉与储藏",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0832",
+          "title": "采收后分级防霉",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "food",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0306",
+          "title": "简易晾晒绳",
+          "risk_level": "caution",
+          "domains": [
+            "security",
+            "tools",
+            "planting",
+            "hygiene",
+            "medical"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-harvest-drying-rack-check-001",
+          "title": "收获晾晒架检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-postharvest-drydown-record-001",
+          "title": "收获后干燥记录",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-container-dry-clean-check-001",
+          "title": "储藏容器干燥清洁检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-rodent-insect-storage-barrier-001",
+          "title": "储粮鼠虫防护",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-mold-batch-discard-line-001",
+          "title": "霉变批次丢弃边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-root-crop-curing-basic-001",
+          "title": "根茎作物短期熟化和储藏",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-harvest-maturity-check-001",
+          "title": "小规模作物采收成熟判断",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0885",
+          "title": "收获后晾晒防霉与储藏"
+        },
+        {
+          "id": "DG-0832",
+          "title": "采收后分级防霉"
+        },
+        {
+          "id": "DG-0306",
+          "title": "简易晾晒绳"
+        },
+        {
+          "id": "DG-0357",
+          "title": "晾晒痕迹控制"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-postharvest-drydown-record-001",
+          "title": "收获后干燥记录"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离"
+        },
+        {
+          "slug": "agriculture-storage-container-dry-clean-check-001",
+          "title": "储藏容器干燥清洁检查"
+        },
+        {
+          "slug": "agriculture-rodent-insect-storage-barrier-001",
+          "title": "储粮鼠虫防护"
+        },
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-harvest-001",
+        "agriculture-harvest-drying-rack-check-001",
+        "agriculture-harvest-maturity-check-001",
+        "agriculture-mold-batch-discard-line-001",
+        "agriculture-post-harvest-mold-prevention-001",
+        "agriculture-postharvest-drydown-record-001",
+        "agriculture-rodent-insect-storage-barrier-001",
+        "agriculture-root-crop-curing-basic-001",
+        "agriculture-seed-food-harvest-separation-001",
+        "agriculture-storage-container-dry-clean-check-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_seed_food_batch_separation",
+      "query": "留种和食用批次怎么分开？",
+      "observation": false,
+      "focus": "留种、食用、待观察批次分离应进入 selected evidence。",
+      "watch_conflicts": [
+        "food",
+        "storage"
+      ],
+      "expected_guides": [
+        "DG-0885"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0879"
+      ],
+      "expected_wiki": [
+        "agriculture-seed-food-harvest-separation-001"
+      ],
+      "profiles": [
+        "agriculture_seed_library",
+        "agriculture_postharvest_storage"
+      ],
+      "domains": [
+        "agriculture",
+        "planting"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0885",
+          "title": "收获后晾晒防霉与储藏",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-harvest-drying-rack-check-001",
+          "title": "收获晾晒架检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-postharvest-drydown-record-001",
+          "title": "收获后干燥记录",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-container-dry-clean-check-001",
+          "title": "储藏容器干燥清洁检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-rodent-insect-storage-barrier-001",
+          "title": "储粮鼠虫防护",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-mold-batch-discard-line-001",
+          "title": "霉变批次丢弃边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-root-crop-curing-basic-001",
+          "title": "根茎作物短期熟化和储藏",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-harvest-maturity-check-001",
+          "title": "小规模作物采收成熟判断",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0885",
+          "title": "收获后晾晒防霉与储藏"
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测"
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0232",
+          "title": "种子库存管理"
+        },
+        {
+          "id": "DG-0832",
+          "title": "采收后分级防霉"
+        },
+        {
+          "id": "DG-0675",
+          "title": "采收后留种标记"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离"
+        },
+        {
+          "slug": "agriculture-rodent-insect-storage-barrier-001",
+          "title": "储粮鼠虫防护"
+        },
+        {
+          "slug": "agriculture-postharvest-drydown-record-001",
+          "title": "收获后干燥记录"
+        },
+        {
+          "slug": "agriculture-seed-batch-viability-ledger-001",
+          "title": "种子批次与发芽率复测台账"
+        },
+        {
+          "slug": "agriculture-seed-storage-moisture-failure-001",
+          "title": "种子受潮失效判断"
+        },
+        {
+          "slug": "agriculture-seed-library-box-index-001",
+          "title": "小型种子库盒索引"
+        },
+        {
+          "slug": "agriculture-seasonal-planting-plan-001",
+          "title": "季节种植滚动计划"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-expectation-001",
+        "agriculture-harvest-001",
+        "agriculture-harvest-drying-rack-check-001",
+        "agriculture-harvest-maturity-check-001",
+        "agriculture-local-crop-profile-001",
+        "agriculture-mold-batch-discard-line-001",
+        "agriculture-planting-inventory-link-001",
+        "agriculture-post-harvest-mold-prevention-001",
+        "agriculture-postharvest-drydown-record-001",
+        "agriculture-production-failure-backup-plan-001",
+        "agriculture-quick-leaf-long-cycle-balance-001",
+        "agriculture-rodent-insect-storage-barrier-001",
+        "agriculture-root-crop-curing-basic-001",
+        "agriculture-seed-batch-viability-ledger-001",
+        "agriculture-seed-drying-recheck-001",
+        "agriculture-seed-food-harvest-separation-001",
+        "agriculture-seed-germination-test-001",
+        "agriculture-seed-library-box-index-001",
+        "agriculture-seed-reserve-use-line-001",
+        "agriculture-seed-saving-001",
+        "agriculture-seed-selection-for-saving-001",
+        "agriculture-seed-storage-001",
+        "agriculture-seed-storage-002",
+        "agriculture-seed-storage-moisture-failure-001",
+        "agriculture-staple-crop-small-plot-priority-001",
+        "agriculture-storage-container-dry-clean-check-001",
+        "agriculture-water-fertility-budget-card-001",
+        "agriculture-yield-record-minimum-fields-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_storage_container_moisture_grain",
+      "query": "储藏容器有潮气，还能不能装粮？",
+      "observation": false,
+      "focus": "储藏容器干燥清洁检查应主导，manufacturing 只能补充容器制作/修复。",
+      "watch_conflicts": [
+        "food",
+        "manufacturing",
+        "hygiene"
+      ],
+      "expected_guides": [
+        "DG-0885"
+      ],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [
+        "agriculture-storage-container-dry-clean-check-001"
+      ],
+      "profiles": [
+        "agriculture_postharvest_storage"
+      ],
+      "domains": [
+        "agriculture",
+        "planting",
+        "food",
+        "hygiene"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0885",
+          "title": "收获后晾晒防霉与储藏",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0832",
+          "title": "采收后分级防霉",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "food",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0673",
+          "title": "容器种植排水孔检查",
+          "risk_level": "caution",
+          "domains": [
+            "planting"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-harvest-drying-rack-check-001",
+          "title": "收获晾晒架检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-postharvest-drydown-record-001",
+          "title": "收获后干燥记录",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-container-dry-clean-check-001",
+          "title": "储藏容器干燥清洁检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-rodent-insect-storage-barrier-001",
+          "title": "储粮鼠虫防护",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-mold-batch-discard-line-001",
+          "title": "霉变批次丢弃边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-root-crop-curing-basic-001",
+          "title": "根茎作物短期熟化和储藏",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-harvest-maturity-check-001",
+          "title": "小规模作物采收成熟判断",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0885",
+          "title": "收获后晾晒防霉与储藏"
+        },
+        {
+          "id": "DG-0832",
+          "title": "采收后分级防霉"
+        },
+        {
+          "id": "DG-0673",
+          "title": "容器种植排水孔检查"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-postharvest-drydown-record-001",
+          "title": "收获后干燥记录"
+        },
+        {
+          "slug": "agriculture-storage-container-dry-clean-check-001",
+          "title": "储藏容器干燥清洁检查"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离"
+        },
+        {
+          "slug": "agriculture-rodent-insect-storage-barrier-001",
+          "title": "储粮鼠虫防护"
+        },
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-compost-001",
+        "agriculture-container-002",
+        "agriculture-container-003",
+        "agriculture-edible-parts-001",
+        "agriculture-expectation-001",
+        "agriculture-greywater-001",
+        "agriculture-growing-log-001",
+        "agriculture-harvest-001",
+        "agriculture-harvest-drying-rack-check-001",
+        "agriculture-harvest-maturity-check-001",
+        "agriculture-heat-001",
+        "agriculture-irrigation-001",
+        "agriculture-leafy-greens-001",
+        "agriculture-light-001",
+        "agriculture-mold-batch-discard-line-001",
+        "agriculture-plant-pests-001",
+        "agriculture-post-harvest-mold-prevention-001",
+        "agriculture-postharvest-drydown-record-001",
+        "agriculture-rodent-insect-storage-barrier-001",
+        "agriculture-root-crop-curing-basic-001",
+        "agriculture-seed-food-harvest-separation-001",
+        "agriculture-seed-saving-001",
+        "agriculture-seed-storage-001",
+        "agriculture-seed-storage-002",
+        "agriculture-seedling-001",
+        "agriculture-soil-001",
+        "agriculture-sprouts-001",
+        "agriculture-storage-container-dry-clean-check-001",
+        "agriculture-vertical-growing-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_small_plot_leafy_or_staple_first",
+      "query": "小地块先种叶菜还是粮食作物？",
+      "observation": false,
+      "focus": "小规模粮食生产优先级应主导，平衡短期补给和长期试种。",
+      "watch_conflicts": [
+        "food",
+        "water"
+      ],
+      "expected_guides": [
+        "DG-0886"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0884"
+      ],
+      "expected_wiki": [
+        "agriculture-staple-crop-small-plot-priority-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "agriculture",
+        "planting",
+        "food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0608",
+          "title": "霉变粮食和坚果停用",
+          "risk_level": "high",
+          "domains": [
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-staple-crop-small-plot-priority-001",
+          "title": "小地块粮食作物优先级",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-quick-leaf-long-cycle-balance-001",
+          "title": "快收叶菜和长周期作物搭配",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-production-failure-backup-plan-001",
+          "title": "生产失败备用计划",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-yield-record-minimum-fields-001",
+          "title": "产量记录最小字段",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-water-fertility-budget-card-001",
+          "title": "水肥预算卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-local-crop-profile-001",
+          "title": "本地作物行动档案",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-planting-inventory-link-001",
+          "title": "种植计划与库存消耗联动",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0608",
+          "title": "霉变粮食和坚果停用"
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        },
+        {
+          "id": "DG-0229",
+          "title": "叶菜轮播计划"
+        },
+        {
+          "id": "DG-0052",
+          "title": "阳台种菜：从容器到第一批叶菜"
+        },
+        {
+          "id": "DG-0881",
+          "title": "土壤贫瘠与板结恢复判断"
+        },
+        {
+          "id": "DG-0882",
+          "title": "堆肥成熟和未腐熟风险判断"
+        },
+        {
+          "id": "DG-0831",
+          "title": "作物病害隔离与工具分流"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-annual-garden-plan-card-001",
+        "agriculture-crop-family-rotation-card-001",
+        "agriculture-crop-rotation-basic-001",
+        "agriculture-expectation-001",
+        "agriculture-growing-log-001",
+        "agriculture-growing-record-handover-001",
+        "agriculture-heavy-light-feeder-rotation-001",
+        "agriculture-local-crop-profile-001",
+        "agriculture-planting-inventory-link-001",
+        "agriculture-production-failure-backup-plan-001",
+        "agriculture-quick-leaf-long-cycle-balance-001",
+        "agriculture-seasonal-planting-calendar-001",
+        "agriculture-seasonal-planting-plan-001",
+        "agriculture-seed-reserve-use-line-001",
+        "agriculture-seed-storage-002",
+        "agriculture-staple-crop-small-plot-priority-001",
+        "agriculture-team-garden-task-handover-001",
+        "agriculture-water-fertility-budget-card-001",
+        "agriculture-yield-record-minimum-fields-001",
+        "food-canned-food-001",
+        "food-canned-food-002",
+        "food-children-001",
+        "food-cooking-001",
+        "food-food-knowledge-001",
+        "food-food-knowledge-002",
+        "food-food-knowledge-003",
+        "food-food-poisoning-001",
+        "food-food-waste-001",
+        "food-hunger-001",
+        "food-inventory-001",
+        "food-mold-001",
+        "food-package-damage-001",
+        "food-protein-001",
+        "food-refrigeration-001",
+        "food-refrigeration-002",
+        "food-spoilage-001",
+        "food-spoilage-002",
+        "food-spoilage-check-001",
+        "food-staple-food-001",
+        "food-waste-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_repeated_production_failure_next_batch",
+      "query": "连续几次生产失败，下一批怎么调整？",
+      "observation": false,
+      "focus": "生产失败备用计划和多季计划应进入 evidence。",
+      "watch_conflicts": [
+        "food",
+        "organization"
+      ],
+      "expected_guides": [
+        "DG-0884"
+      ],
+      "allowed_secondary_guides": [
+        "DG-0886"
+      ],
+      "expected_wiki": [
+        "agriculture-production-failure-backup-plan-001"
+      ],
+      "profiles": [],
+      "domains": [
+        "agriculture",
+        "planting"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0880",
+          "title": "连续育苗与失败复盘",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-crop-family-rotation-card-001",
+          "title": "作物家族轮作卡",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-heavy-light-feeder-rotation-001",
+          "title": "高耗肥和低耗肥作物轮作",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-quick-leaf-long-cycle-balance-001",
+          "title": "快收叶菜和长周期作物搭配",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seasonal-planting-calendar-001",
+          "title": "多季种植日历",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-production-failure-backup-plan-001",
+          "title": "生产失败备用计划",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-annual-garden-plan-card-001",
+          "title": "家庭菜地年度计划卡",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-yield-record-minimum-fields-001",
+          "title": "产量记录最小字段",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-team-garden-task-handover-001",
+          "title": "菜地任务交接",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        },
+        {
+          "id": "DG-0880",
+          "title": "连续育苗与失败复盘"
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0729",
+          "title": "失败后复盘不指责"
+        },
+        {
+          "id": "DG-0667",
+          "title": "维修失败三次后停用"
+        },
+        {
+          "id": "DG-0230",
+          "title": "豆芽安全生产"
+        },
+        {
+          "id": "DG-0295",
+          "title": "任务失败复盘"
+        },
+        {
+          "id": "DG-0052",
+          "title": "阳台种菜：从容器到第一批叶菜"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-annual-garden-plan-card-001",
+        "agriculture-continuous-nursery-schedule-001",
+        "agriculture-crop-family-rotation-card-001",
+        "agriculture-crop-rotation-basic-001",
+        "agriculture-expectation-001",
+        "agriculture-growing-log-001",
+        "agriculture-growing-record-handover-001",
+        "agriculture-heavy-light-feeder-rotation-001",
+        "agriculture-local-crop-profile-001",
+        "agriculture-nursery-capacity-limit-001",
+        "agriculture-planting-failure-review-001",
+        "agriculture-planting-inventory-link-001",
+        "agriculture-production-failure-backup-plan-001",
+        "agriculture-quick-leaf-long-cycle-balance-001",
+        "agriculture-seasonal-planting-calendar-001",
+        "agriculture-seasonal-planting-plan-001",
+        "agriculture-seed-reserve-use-line-001",
+        "agriculture-seed-storage-002",
+        "agriculture-seedling-001",
+        "agriculture-seedling-damping-off-isolation-001",
+        "agriculture-seedling-thinning-001",
+        "agriculture-seedling-transplant-001",
+        "agriculture-staple-crop-small-plot-priority-001",
+        "agriculture-team-garden-task-handover-001",
+        "agriculture-transplant-hardening-off-001",
+        "agriculture-water-fertility-budget-card-001",
+        "agriculture-yield-record-minimum-fields-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_observe_moldy_grain_eat",
+      "query": "粮食有霉味还能不能吃？",
+      "observation": true,
+      "focus": "观察 food safety 是否主导，Agriculture 是否补充批次隔离和储藏记录。",
+      "watch_conflicts": [
+        "food",
+        "medical"
+      ],
+      "expected_guides": [],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [],
+      "profiles": [],
+      "domains": [
+        "food",
+        "hygiene",
+        "agriculture",
+        "planting"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0608",
+          "title": "霉变粮食和坚果停用",
+          "risk_level": "high",
+          "domains": [
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0628",
+          "title": "霉味衣物和睡眠区分离",
+          "risk_level": "caution",
+          "domains": [
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "food-canned-food-001",
+          "title": "干粮和罐头三天配给原则",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-canned-food-002",
+          "title": "干货罐头轮换和先开先用",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-children-001",
+          "title": "儿童老人食物优先级判断",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-cooking-001",
+          "title": "低燃料烹饪对食物安全的影响",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-food-knowledge-001",
+          "title": "即食食品和需煮食品的排序",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-food-knowledge-002",
+          "title": "不可食残渣和可食剩余的分界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-food-knowledge-003",
+          "title": "断供期间食物心理安慰与纪律",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-food-poisoning-001",
+          "title": "多人共餐时食物中毒追溯",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0608",
+          "title": "霉变粮食和坚果停用"
+        },
+        {
+          "id": "DG-0628",
+          "title": "霉味衣物和睡眠区分离"
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0575",
+          "title": "室内异味和霉味：通风干燥判断"
+        },
+        {
+          "id": "DG-0040",
+          "title": "停电后冰箱食物处置"
+        },
+        {
+          "id": "DG-0047",
+          "title": "罐头检查：鼓包、喷液、锈蚀"
+        },
+        {
+          "id": "DG-0865",
+          "title": "撤离路线检查"
+        },
+        {
+          "id": "DG-0830",
+          "title": "草木灰来源审查和禁用"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-expectation-001",
+        "agriculture-local-crop-profile-001",
+        "agriculture-planting-inventory-link-001",
+        "agriculture-production-failure-backup-plan-001",
+        "agriculture-quick-leaf-long-cycle-balance-001",
+        "agriculture-seed-reserve-use-line-001",
+        "agriculture-seed-storage-002",
+        "agriculture-staple-crop-small-plot-priority-001",
+        "agriculture-water-fertility-budget-card-001",
+        "agriculture-yield-record-minimum-fields-001",
+        "food-canned-food-001",
+        "food-canned-food-002",
+        "food-children-001",
+        "food-cooking-001",
+        "food-food-knowledge-001",
+        "food-food-knowledge-002",
+        "food-food-knowledge-003",
+        "food-food-poisoning-001",
+        "food-food-waste-001",
+        "food-hunger-001",
+        "food-inventory-001",
+        "food-mold-001",
+        "food-package-damage-001",
+        "food-protein-001",
+        "food-refrigeration-001",
+        "food-refrigeration-002",
+        "food-spoilage-001",
+        "food-spoilage-002",
+        "food-spoilage-check-001",
+        "food-staple-food-001",
+        "food-waste-001",
+        "hygiene-hand-hygiene-001",
+        "hygiene-handwashing-001",
+        "hygiene-handwashing-002",
+        "hygiene-hygiene-knowledge-002",
+        "hygiene-hygiene-knowledge-003",
+        "hygiene-hygiene-knowledge-004",
+        "hygiene-mold-002",
+        "hygiene-odor-001",
+        "hygiene-odor-002",
+        "hygiene-pest-control-001",
+        "hygiene-shared-items-001",
+        "hygiene-sleep-001",
+        "hygiene-toilet-001",
+        "hygiene-toilet-002",
+        "hygiene-vomit-002",
+        "hygiene-waste-002",
+        "hygiene-waste-003",
+        "hygiene-waste-004",
+        "hygiene-wet-waste-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [
+        "off_domain_primary",
+        "agriculture_vs_food"
+      ],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_observe_drying_rack_make",
+      "query": "晾晒架怎么做？",
+      "observation": true,
+      "focus": "观察 manufacturing 是否主导，Agriculture 是否补充晾晒质量要求。",
+      "watch_conflicts": [
+        "manufacturing",
+        "tools"
+      ],
+      "expected_guides": [],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [],
+      "profiles": [
+        "agriculture_postharvest_storage"
+      ],
+      "domains": [
+        "agriculture",
+        "planting",
+        "food",
+        "hygiene",
+        "tools",
+        "medical",
+        "security"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0885",
+          "title": "收获后晾晒防霉与储藏",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0832",
+          "title": "采收后分级防霉",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "food",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0306",
+          "title": "简易晾晒绳",
+          "risk_level": "caution",
+          "domains": [
+            "security",
+            "tools",
+            "planting",
+            "hygiene",
+            "medical"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-harvest-drying-rack-check-001",
+          "title": "收获晾晒架检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-postharvest-drydown-record-001",
+          "title": "收获后干燥记录",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-storage-container-dry-clean-check-001",
+          "title": "储藏容器干燥清洁检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-rodent-insect-storage-barrier-001",
+          "title": "储粮鼠虫防护",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-mold-batch-discard-line-001",
+          "title": "霉变批次丢弃边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-root-crop-curing-basic-001",
+          "title": "根茎作物短期熟化和储藏",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-harvest-maturity-check-001",
+          "title": "小规模作物采收成熟判断",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0885",
+          "title": "收获后晾晒防霉与储藏"
+        },
+        {
+          "id": "DG-0832",
+          "title": "采收后分级防霉"
+        },
+        {
+          "id": "DG-0306",
+          "title": "简易晾晒绳"
+        },
+        {
+          "id": "DG-0357",
+          "title": "晾晒痕迹控制"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-postharvest-drydown-record-001",
+          "title": "收获后干燥记录"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离"
+        },
+        {
+          "slug": "agriculture-storage-container-dry-clean-check-001",
+          "title": "储藏容器干燥清洁检查"
+        },
+        {
+          "slug": "agriculture-rodent-insect-storage-barrier-001",
+          "title": "储粮鼠虫防护"
+        },
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-harvest-001",
+        "agriculture-harvest-drying-rack-check-001",
+        "agriculture-harvest-maturity-check-001",
+        "agriculture-mold-batch-discard-line-001",
+        "agriculture-post-harvest-mold-prevention-001",
+        "agriculture-postharvest-drydown-record-001",
+        "agriculture-rodent-insect-storage-barrier-001",
+        "agriculture-root-crop-curing-basic-001",
+        "agriculture-seed-food-harvest-separation-001",
+        "agriculture-storage-container-dry-clean-check-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_observe_waterlogged_soil_domain",
+      "query": "土壤积水严重，是水的问题还是种植问题？",
+      "observation": true,
+      "focus": "观察 water / agriculture 边界：饮水和洪水归 water，根区恢复归 agriculture。",
+      "watch_conflicts": [
+        "water"
+      ],
+      "expected_guides": [],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [],
+      "profiles": [],
+      "domains": [
+        "agriculture",
+        "planting",
+        "water",
+        "food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0881",
+          "title": "土壤贫瘠与板结恢复判断",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0673",
+          "title": "容器种植排水孔检查",
+          "risk_level": "caution",
+          "domains": [
+            "planting"
+          ]
+        },
+        {
+          "id": "DG-0234",
+          "title": "雨季种植防烂根",
+          "risk_level": "normal",
+          "domains": [
+            "food",
+            "planting",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-soil-poor-fertility-signs-001",
+          "title": "土壤贫瘠的现场信号",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-soil-compaction-recovery-001",
+          "title": "土壤板结恢复",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-salinity-crust-stop-line-001",
+          "title": "土表盐壳和盐分风险",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-raised-bed-drainage-recovery-001",
+          "title": "积水地块的高畦恢复",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-soil-recovery-log-001",
+          "title": "土壤恢复记录",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-water-fertility-budget-card-001",
+          "title": "水肥预算卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-soil-texture-field-check-001",
+          "title": "土壤质地手感判断",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-soil-drainage-test-001",
+          "title": "种植地排水下渗测试",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0881",
+          "title": "土壤贫瘠与板结恢复判断"
+        },
+        {
+          "id": "DG-0673",
+          "title": "容器种植排水孔检查"
+        },
+        {
+          "id": "DG-0234",
+          "title": "雨季种植防烂根"
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        },
+        {
+          "id": "DG-0227",
+          "title": "种植土安全判断"
+        },
+        {
+          "id": "DG-0675",
+          "title": "采收后留种标记"
+        },
+        {
+          "id": "DG-0515",
+          "title": "容器种植分区"
+        },
+        {
+          "id": "DG-0672",
+          "title": "芽苗菜每日冲洗"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-compost-001",
+        "agriculture-container-002",
+        "agriculture-container-003",
+        "agriculture-edible-parts-001",
+        "agriculture-expectation-001",
+        "agriculture-greywater-001",
+        "agriculture-growing-log-001",
+        "agriculture-harvest-001",
+        "agriculture-heat-001",
+        "agriculture-irrigation-001",
+        "agriculture-leafy-greens-001",
+        "agriculture-light-001",
+        "agriculture-plant-pests-001",
+        "agriculture-post-rain-garden-review-001",
+        "agriculture-raised-bed-drainage-recovery-001",
+        "agriculture-root-rot-warning-001",
+        "agriculture-salinity-crust-stop-line-001",
+        "agriculture-seed-saving-001",
+        "agriculture-seed-storage-001",
+        "agriculture-seed-storage-002",
+        "agriculture-seedling-001",
+        "agriculture-soil-001",
+        "agriculture-soil-compaction-recovery-001",
+        "agriculture-soil-drainage-test-001",
+        "agriculture-soil-fertility-basics-index-001",
+        "agriculture-soil-poor-fertility-signs-001",
+        "agriculture-soil-recovery-log-001",
+        "agriculture-soil-texture-field-check-001",
+        "agriculture-sprouts-001",
+        "agriculture-vertical-growing-001",
+        "agriculture-water-fertility-budget-card-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_observe_tool_disease_clean_or_repair",
+      "query": "工具上可能带病害，需要清洗还是修理？",
+      "observation": true,
+      "focus": "观察 tools / repair / agriculture 边界：病害传播应有 agriculture evidence。",
+      "watch_conflicts": [
+        "tools",
+        "repair",
+        "hygiene"
+      ],
+      "expected_guides": [],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [],
+      "profiles": [
+        "agriculture_pest_disease_control"
+      ],
+      "domains": [
+        "agriculture",
+        "planting",
+        "food",
+        "hygiene"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0831",
+          "title": "作物病害隔离与工具分流",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "food",
+            "hygiene"
+          ]
+        },
+        {
+          "id": "DG-0675",
+          "title": "采收后留种标记",
+          "risk_level": "caution",
+          "domains": [
+            "planting"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-pest-early-scouting-routine-001",
+          "title": "虫害早期巡查流程",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-egg-larvae-leaf-back-check-001",
+          "title": "叶背虫卵和幼虫检查",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manual-pest-removal-record-001",
+          "title": "人工除虫后的复查记录",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-diseased-tool-zone-separation-001",
+          "title": "带病害工具分区",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-unknown-chemical-plot-stop-001",
+          "title": "不明化学污染地块停用",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seedling-damping-off-isolation-001",
+          "title": "苗期猝倒和隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manure-compost-food-zone-boundary-001",
+          "title": "粪肥与食用地块边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-plant-pests-001",
+          "title": "病虫害早期观察",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0883",
+          "title": "病虫害早期隔离与工具分流"
+        },
+        {
+          "id": "DG-0831",
+          "title": "作物病害隔离与工具分流"
+        },
+        {
+          "id": "DG-0675",
+          "title": "采收后留种标记"
+        },
+        {
+          "id": "DG-0878",
+          "title": "工坊收工与工具封存"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-diseased-tool-zone-separation-001",
+          "title": "带病害工具分区"
+        },
+        {
+          "slug": "agriculture-egg-larvae-leaf-back-check-001",
+          "title": "叶背虫卵和幼虫检查"
+        },
+        {
+          "slug": "agriculture-manual-pest-removal-record-001",
+          "title": "人工除虫后的复查记录"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-container-002",
+        "agriculture-contaminated-plot-ban-record-001",
+        "agriculture-crop-disease-isolation-001",
+        "agriculture-diseased-residue-separation-001",
+        "agriculture-diseased-tool-zone-separation-001",
+        "agriculture-egg-larvae-leaf-back-check-001",
+        "agriculture-manual-pest-removal-001",
+        "agriculture-manual-pest-removal-record-001",
+        "agriculture-manure-compost-food-zone-boundary-001",
+        "agriculture-pest-early-scouting-routine-001",
+        "agriculture-plant-pests-001",
+        "agriculture-seed-selection-for-saving-001",
+        "agriculture-seed-storage-001",
+        "agriculture-seedling-damping-off-isolation-001",
+        "agriculture-sprouts-001",
+        "agriculture-unknown-chemical-plot-stop-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_observe_patient_leftovers_compost",
+      "query": "厨余和病人剩饭能不能进堆肥？",
+      "observation": true,
+      "focus": "观察 hygiene / contamination / agriculture 边界：病人剩饭应触发卫生污染边界，农业补充堆肥禁入。",
+      "watch_conflicts": [
+        "hygiene",
+        "contamination",
+        "food"
+      ],
+      "expected_guides": [],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [],
+      "profiles": [],
+      "domains": [
+        "agriculture",
+        "planting",
+        "food",
+        "security",
+        "water"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0882",
+          "title": "堆肥成熟和未腐熟风险判断",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0607",
+          "title": "剩饭过夜无冷藏禁食判断",
+          "risk_level": "caution",
+          "domains": [
+            "food"
+          ]
+        },
+        {
+          "id": "DG-0054",
+          "title": "堆肥：厨余不是随便堆",
+          "risk_level": "caution",
+          "domains": [
+            "water",
+            "food",
+            "security",
+            "planting"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-compost-maturity-second-check-001",
+          "title": "堆肥成熟二次确认",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-immature-compost-stop-line-001",
+          "title": "未腐熟肥进入食用区停止线",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manure-compost-food-zone-boundary-001",
+          "title": "粪肥与食用地块边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-kitchen-waste-compost-boundary-001",
+          "title": "厨余堆肥进入种植区边界",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-compost-001",
+          "title": "堆肥成熟和病原风险",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-compost-pile-setup-001",
+          "title": "小型厨余堆肥建堆",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-manure-growing-zone-separation-001",
+          "title": "粪污与食用种植区隔离",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "food-canned-food-001",
+          "title": "干粮和罐头三天配给原则",
+          "risk_level": "high",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0882",
+          "title": "堆肥成熟和未腐熟风险判断"
+        },
+        {
+          "id": "DG-0607",
+          "title": "剩饭过夜无冷藏禁食判断"
+        },
+        {
+          "id": "DG-0054",
+          "title": "堆肥：厨余不是随便堆"
+        },
+        {
+          "id": "DG-0351",
+          "title": "厨余气味控制"
+        },
+        {
+          "id": "DG-0235",
+          "title": "堆肥成熟判断"
+        },
+        {
+          "id": "DG-0820",
+          "title": "先给病人和照护人员留更安全的水"
+        },
+        {
+          "id": "DG-0854",
+          "title": "病人用品与厨房污染隔离"
+        },
+        {
+          "id": "DG-0048",
+          "title": "剩饭处理：出锅时间和再加热"
+        }
+      ],
+      "wiki_candidates": [],
+      "guide_related_wiki": [
+        "agriculture-compost-001",
+        "agriculture-compost-maturity-second-check-001",
+        "agriculture-compost-pile-setup-001",
+        "agriculture-immature-compost-stop-line-001",
+        "agriculture-kitchen-waste-compost-boundary-001",
+        "agriculture-manure-compost-food-zone-boundary-001",
+        "agriculture-manure-growing-zone-separation-001",
+        "food-canned-food-001",
+        "food-canned-food-002",
+        "food-children-001",
+        "food-cooking-001",
+        "food-food-knowledge-001",
+        "food-food-knowledge-002",
+        "food-food-knowledge-003",
+        "food-food-poisoning-001",
+        "food-food-waste-001",
+        "food-hunger-001",
+        "food-inventory-001",
+        "food-leftovers-001",
+        "food-mold-001",
+        "food-package-damage-001",
+        "food-protein-001",
+        "food-refrigeration-001",
+        "food-refrigeration-002",
+        "food-spoilage-001",
+        "food-spoilage-002",
+        "food-spoilage-check-001",
+        "food-staple-food-001",
+        "food-waste-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    },
+    {
+      "id": "agri_observe_eat_seed_reserve",
+      "query": "今年收成少，要不要吃掉留种？",
+      "observation": true,
+      "focus": "观察 food rationing / agriculture seed reserve 边界：口粮分配可补充，但核心留种应进入 evidence。",
+      "watch_conflicts": [
+        "food",
+        "storage"
+      ],
+      "expected_guides": [],
+      "allowed_secondary_guides": [],
+      "expected_wiki": [],
+      "profiles": [
+        "agriculture_seed_library"
+      ],
+      "domains": [
+        "agriculture",
+        "planting",
+        "water",
+        "food"
+      ],
+      "guides_selected": [
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级",
+          "risk_level": "caution",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测",
+          "risk_level": "high",
+          "domains": [
+            "planting",
+            "agriculture"
+          ]
+        },
+        {
+          "id": "DG-0232",
+          "title": "种子库存管理",
+          "risk_level": "normal",
+          "domains": [
+            "food",
+            "planting",
+            "water"
+          ]
+        }
+      ],
+      "wikis_selected": [
+        {
+          "slug": "agriculture-staple-crop-small-plot-priority-001",
+          "title": "小地块粮食作物优先级",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-quick-leaf-long-cycle-balance-001",
+          "title": "快收叶菜和长周期作物搭配",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-production-failure-backup-plan-001",
+          "title": "生产失败备用计划",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-yield-record-minimum-fields-001",
+          "title": "产量记录最小字段",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-water-fertility-budget-card-001",
+          "title": "水肥预算卡",
+          "risk_level": "caution",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-local-crop-profile-001",
+          "title": "本地作物行动档案",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        },
+        {
+          "slug": "agriculture-planting-inventory-link-001",
+          "title": "种植计划与库存消耗联动",
+          "risk_level": "normal",
+          "source_reason": "guide_related_wiki"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测"
+        },
+        {
+          "id": "DG-0232",
+          "title": "种子库存管理"
+        },
+        {
+          "id": "DG-0051",
+          "title": "留种粮：吃掉之前先分出来"
+        },
+        {
+          "id": "DG-0675",
+          "title": "采收后留种标记"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-seed-reserve-use-line-001",
+          "title": "留种和食用种子的保底线"
+        },
+        {
+          "slug": "agriculture-seed-batch-viability-ledger-001",
+          "title": "种子批次与发芽率复测台账"
+        },
+        {
+          "slug": "agriculture-seed-storage-moisture-failure-001",
+          "title": "种子受潮失效判断"
+        },
+        {
+          "slug": "agriculture-seed-library-box-index-001",
+          "title": "小型种子库盒索引"
+        },
+        {
+          "slug": "agriculture-seasonal-planting-plan-001",
+          "title": "季节种植滚动计划"
+        },
+        {
+          "slug": "agriculture-seed-exchange-quarantine-001",
+          "title": "种子交换批次隔离"
+        },
+        {
+          "slug": "agriculture-seed-food-harvest-separation-001",
+          "title": "留种批次与食用批次分离"
+        },
+        {
+          "slug": "agriculture-rodent-insect-storage-barrier-001",
+          "title": "储粮鼠虫防护"
+        }
+      ],
+      "guide_related_wiki": [
+        "agriculture-expectation-001",
+        "agriculture-local-crop-profile-001",
+        "agriculture-planting-inventory-link-001",
+        "agriculture-production-failure-backup-plan-001",
+        "agriculture-quick-leaf-long-cycle-balance-001",
+        "agriculture-seed-batch-viability-ledger-001",
+        "agriculture-seed-drying-recheck-001",
+        "agriculture-seed-food-harvest-separation-001",
+        "agriculture-seed-germination-test-001",
+        "agriculture-seed-library-box-index-001",
+        "agriculture-seed-reserve-use-line-001",
+        "agriculture-seed-saving-001",
+        "agriculture-seed-selection-for-saving-001",
+        "agriculture-seed-storage-001",
+        "agriculture-seed-storage-002",
+        "agriculture-seed-storage-moisture-failure-001",
+        "agriculture-soil-fertility-basics-index-001",
+        "agriculture-staple-crop-small-plot-priority-001",
+        "agriculture-water-fertility-budget-card-001",
+        "agriculture-yield-record-minimum-fields-001"
+      ],
+      "guide_hit": true,
+      "expected_guide_hit": true,
+      "wiki_hit": true,
+      "wiki_hit_any": true,
+      "guide_wiki_precise": true,
+      "has_safety_boundary": true,
+      "has_fallback": true,
+      "has_record_or_check": true,
+      "dangerous_suggestions": [],
+      "kiwix_override": false,
+      "cross_domain": [],
+      "verdict": "pass",
+      "failure_reasons": [],
+      "root_cause_classification": []
+    }
+  ]
+}

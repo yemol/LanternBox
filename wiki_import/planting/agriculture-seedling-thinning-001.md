@@ -6,7 +6,7 @@ priority: P0
 risk_level: caution
 summary: 在幼苗过密时保留茎短、叶色正常且间距合适的株，减少拔苗带根和病弱苗持续耗水。条目提供可观察检查和交接记录，支持离线种植决策。
 tags: 幼苗间苗,保留株选择,离线种植,行动记录
-guide_links: 
+guide_links: DG-0880
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

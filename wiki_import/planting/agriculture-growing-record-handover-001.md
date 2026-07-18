@@ -6,7 +6,7 @@ priority: P1
 risk_level: normal
 summary: 用容器或地块编号、最后操作、异常与下一时点任务完成种植交班，避免重复浇水和遗漏隔离。条目提供可观察检查和交接记录，支持离线种植决策。
 tags: 种植记录交接复述,离线种植,行动记录
-guide_links: 
+guide_links: DG-0884
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

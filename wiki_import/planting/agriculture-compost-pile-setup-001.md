@@ -6,7 +6,7 @@ priority: P0
 risk_level: caution
 summary: 将植物性厨余与干叶分层建成可通气的小堆，控制渗液、腐臭、虫害和未腐熟物进入菜地。
 tags: 厨余,堆肥,建堆,通气,渗液
-guide_links: DG-0235
+guide_links: DG-0235, DG-0882
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

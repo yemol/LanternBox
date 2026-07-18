@@ -1,0 +1,110 @@
+{
+  "id": "DG-0883",
+  "title": "病虫害早期隔离与工具分流",
+  "category": "种植与食物生产",
+  "priority": "P0",
+  "scenario": "叶背出现虫卵幼虫、植株有病斑腐烂，或工具可能把病害从问题区带到健康区。",
+  "goal": "用巡查、隔离、人工处理和工具分区控制病虫害扩散。",
+  "tools": [
+    "地块标记",
+    "单独手套",
+    "待清洁工具盒",
+    "记录纸",
+    "隔离袋"
+  ],
+  "steps": [
+    "停止跨区操作，先标记受影响作物、苗盘或地块。",
+    "检查叶背、嫩梢、茎基、土面和病虫害扩散范围。",
+    "人工清除虫卵幼虫或移除严重病株，并把残体隔离。",
+    "剪过病株或接触腐烂苗盘的工具不进入健康区。",
+    "记录处理数量、工具接触路径和复查时间。"
+  ],
+  "check": [
+    "问题区有标记。",
+    "病区工具和健康区工具分开。",
+    "虫害或病害有复查记录。"
+  ],
+  "common_mistakes": [
+    "用同一把剪刀从病株剪到留种株。",
+    "只看叶面不看叶背。",
+    "拔掉病株后残体丢在菜地边。"
+  ],
+  "fallback": [
+    "缺工具时把一件工具限定为病区专用。",
+    "人手不足时优先保护育苗区、留种株和主生产地块。",
+    "严重局部可放弃，保护周边健康区。"
+  ],
+  "stop_or_escalate": [
+    "病害迅速扩散、工具已跨多个健康区、不明化学污染或污染地块信号出现时，停止采收、移栽和跨区操作。",
+    "无法分清污染边界时，先封区重建记录。"
+  ],
+  "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+  "category_original": "种植与食物生产",
+  "domains": [
+    "planting",
+    "agriculture"
+  ],
+  "intents": [
+    "agriculture_second_stage",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "long_term_food_production",
+    "small_scale_agriculture"
+  ],
+  "objects": [
+    "叶片",
+    "苗盘",
+    "剪刀",
+    "手套",
+    "病株"
+  ],
+  "signals": [
+    "虫卵",
+    "幼虫",
+    "病斑",
+    "腐烂",
+    "工具跨区"
+  ],
+  "risks": [
+    "pest_spread",
+    "disease_transfer",
+    "contaminated_harvest"
+  ],
+  "keywords": [
+    "虫害巡查",
+    "病株隔离",
+    "工具分流",
+    "叶背虫卵",
+    "污染地块停用"
+  ],
+  "negative_keywords": [
+    "农药配方",
+    "化学灭虫剂自制",
+    "大型农机",
+    "商业温室",
+    "畜牧深水区"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "planting",
+  "primary_intent": "agriculture_second_stage",
+  "top1_aliases": [
+    "病虫害早期隔离与工具分流"
+  ],
+  "related_wiki": [
+    "agriculture-pest-early-scouting-routine-001",
+    "agriculture-egg-larvae-leaf-back-check-001",
+    "agriculture-manual-pest-removal-record-001",
+    "agriculture-diseased-tool-zone-separation-001",
+    "agriculture-unknown-chemical-plot-stop-001",
+    "agriculture-seedling-damping-off-isolation-001",
+    "agriculture-manure-compost-food-zone-boundary-001",
+    "agriculture-plant-pests-001",
+    "agriculture-manual-pest-removal-001",
+    "agriculture-crop-disease-isolation-001",
+    "agriculture-diseased-residue-separation-001",
+    "agriculture-contaminated-plot-ban-record-001"
+  ],
+  "risk_level": "high"
+}

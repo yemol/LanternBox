@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 在小菜园用早晚巡查、叶背查找和定点移除降低害虫数量，避免不明药剂污染食物。条目提供可观察检查和交接记录，支持离线种植决策。
 tags: 小规模虫害人工清除,离线种植,行动记录
-guide_links: DG-0233
+guide_links: DG-0233, DG-0883
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

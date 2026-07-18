@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 控制种子干燥、温度、标签和优先级；中风险条目，受潮发霉或虫害时隔离，并记录责任人、时间和复查结果。
 tags: 种植, 种子保存的干燥和温度, 长期断供, 小团队, 离线生存
-guide_links: DG-0671, DG-0672, DG-0673, DG-0674, DG-0675
+guide_links: DG-0671, DG-0672, DG-0673, DG-0674, DG-0675, DG-0879
 kiwix_topics: 种子保存的干燥和温度, 种植, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published

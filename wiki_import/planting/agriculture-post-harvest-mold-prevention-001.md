@@ -6,7 +6,7 @@ priority: P0
 risk_level: caution
 summary: 用破损、潮湿、霉点和异味将采收物分为立即食用、通风短存和隔离批，防止一件损坏扩散到整筐。
 tags: 采后分级,防霉,潮湿,破损,短存隔离
-guide_links: DG-0832
+guide_links: DG-0832, DG-0885
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

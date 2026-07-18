@@ -6,7 +6,7 @@ priority: P0
 risk_level: caution
 summary: 用少量种子在播种前测出发芽比例，避免把有限容器、土和水耗在已失活的批次上。
 tags: 种子,发芽率,小样测试,批次判断
-guide_links: DG-0232, DG-0053
+guide_links: DG-0053, DG-0232, DG-0879
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

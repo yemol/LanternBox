@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 把种植收益、水耗和周期写清，避免把种植当即时粮食；中风险条目，水人力不足时停止扩种。
 tags: 种植, 长期断供下种植预期管理, 长期断供, 小团队, 离线生存
-guide_links: DG-0671, DG-0672, DG-0673
+guide_links: DG-0671, DG-0672, DG-0673, DG-0886
 kiwix_topics: 长期断供下种植预期管理, 种植, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published

@@ -6,7 +6,7 @@ priority: P1
 risk_level: normal
 summary: 用作物类型、根系深浅和上季病虫记录轮换地块，减少连作病害和单一养分长期消耗。条目提供可观察检查和交接记录，支持离线种植决策。
 tags: 小地块作物轮作排布,离线种植,行动记录
-guide_links: 
+guide_links: DG-0884
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

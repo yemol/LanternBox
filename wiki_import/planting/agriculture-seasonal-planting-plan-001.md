@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用本地温度、雨水、日照、种子库和收获窗口制作四周滚动计划，避免一次耗尽种子。条目提供可观察检查和交接记录，支持离线种植决策。
 tags: 季节种植滚动计划,离线种植,行动记录
-guide_links: DG-0229
+guide_links: DG-0229, DG-0884
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

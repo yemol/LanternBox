@@ -1,0 +1,107 @@
+{
+  "id": "DG-0881",
+  "title": "土壤贫瘠与板结恢复判断",
+  "category": "种植与食物生产",
+  "priority": "P0",
+  "scenario": "作物长势差、土壤板结、积水、盐壳或多年连续种植后产量下降，需要判断是否恢复、休整或换地块。",
+  "goal": "用现场信号区分贫瘠、板结、积水、盐分和污染疑点，选择保守恢复路径。",
+  "tools": [
+    "地块编号牌",
+    "小铲",
+    "覆盖物",
+    "成熟堆肥",
+    "记录纸"
+  ],
+  "steps": [
+    "观察叶色、株高、根系、土表硬壳、下渗和历史产量。",
+    "把贫瘠、板结、积水、盐壳和污染疑点分开记录。",
+    "先小范围浅松、覆盖、高畦或少量成熟堆肥，不全地块同时改动。",
+    "发现盐壳、油膜、污水或刺鼻味时，停止按普通恢复处理。",
+    "两周后复查新叶、下渗、根系和虫害变化。"
+  ],
+  "check": [
+    "地块编号和问题类型明确。",
+    "恢复措施有对照。",
+    "下一次复查时间明确。"
+  ],
+  "common_mistakes": [
+    "把盐害或污染误当缺肥。",
+    "一次改动太多条件。",
+    "未成熟堆肥直接当恢复材料。"
+  ],
+  "fallback": [
+    "改用容器或高畦小样。",
+    "改种低需求短周期作物。",
+    "保留休耕和覆盖恢复窗口。"
+  ],
+  "stop_or_escalate": [
+    "出现不明化学气味、油膜、盐壳扩大、污水痕迹或作物异常灼伤时，停止食用种植并标记地块。",
+    "连续恢复无改善时，不继续投入主种子。"
+  ],
+  "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+  "category_original": "种植与食物生产",
+  "domains": [
+    "planting",
+    "agriculture"
+  ],
+  "intents": [
+    "agriculture_second_stage",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "long_term_food_production",
+    "small_scale_agriculture"
+  ],
+  "objects": [
+    "土壤",
+    "地块",
+    "覆盖物",
+    "成熟堆肥",
+    "排水沟"
+  ],
+  "signals": [
+    "板结",
+    "积水",
+    "盐壳",
+    "叶色淡",
+    "产量下降"
+  ],
+  "risks": [
+    "soil_degradation",
+    "contamination",
+    "waterlogging"
+  ],
+  "keywords": [
+    "土壤贫瘠",
+    "土壤板结",
+    "盐壳",
+    "积水地块",
+    "土壤恢复"
+  ],
+  "negative_keywords": [
+    "农药配方",
+    "化学灭虫剂自制",
+    "大型农机",
+    "商业温室",
+    "畜牧深水区"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "planting",
+  "primary_intent": "agriculture_second_stage",
+  "top1_aliases": [
+    "土壤贫瘠与板结恢复判断"
+  ],
+  "related_wiki": [
+    "agriculture-soil-poor-fertility-signs-001",
+    "agriculture-soil-compaction-recovery-001",
+    "agriculture-salinity-crust-stop-line-001",
+    "agriculture-raised-bed-drainage-recovery-001",
+    "agriculture-soil-recovery-log-001",
+    "agriculture-water-fertility-budget-card-001",
+    "agriculture-soil-texture-field-check-001",
+    "agriculture-soil-drainage-test-001",
+    "agriculture-soil-fertility-basics-index-001"
+  ],
+  "risk_level": "caution"
+}

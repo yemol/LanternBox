@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 把种子、水、基质、容器和预计收获纳入同一消耗表，判断种植是净补充还是正在挤占生活底线。条目提供可观察检查和交接记录，支持离线种植决策。
 tags: 种植计划,库存消耗联动,离线种植,行动记录
-guide_links: DG-0232
+guide_links: DG-0232, DG-0886
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

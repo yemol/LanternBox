@@ -6,7 +6,7 @@ priority: P2
 risk_level: high
 summary: 用地图、现场双重标记和污染来源记录锁定禁种边界，防止交班后误把可疑土用于入口作物。条目提供可观察检查和交接记录，支持离线种植决策。
 tags: 污染地块禁用记录,离线种植,行动记录
-guide_links: DG-0227
+guide_links: DG-0227, DG-0883
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

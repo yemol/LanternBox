@@ -6,7 +6,7 @@ priority: P0
 risk_level: caution
 summary: 在叶斑、霉层、软腐或不明萎蔞出现时隔离植株和工具，减少浇水、触摸与残体带来的扩散。
 tags: 作物病害,隔离,叶斑,工具分流,残体
-guide_links: DG-0831
+guide_links: DG-0831, DG-0883
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

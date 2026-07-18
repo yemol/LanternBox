@@ -1,0 +1,105 @@
+{
+  "id": "DG-0882",
+  "title": "堆肥成熟和未腐熟风险判断",
+  "category": "种植与食物生产",
+  "priority": "P0",
+  "scenario": "准备把堆肥、厨余堆肥或粪肥相关材料用于食用种植区，需要判断是否成熟、隔离或禁用。",
+  "goal": "防止未腐熟、有病原或来源不清的材料进入食用作物链。",
+  "tools": [
+    "堆肥批次标签",
+    "隔离标记",
+    "小铲",
+    "手套",
+    "记录纸"
+  ],
+  "steps": [
+    "确认材料来源，排除病人残渣、油腻腐败物、未知化学物和新鲜粪肥。",
+    "检查堆肥是否发热、发臭、黏滑、未分解或引来鼠虫。",
+    "未成熟或来源不清时，移回堆肥区并贴禁用标签。",
+    "成熟批次也先小量进入低风险地块，远离可食叶面和取水路径。",
+    "施用后记录地块、批次和雨后复查结果。"
+  ],
+  "check": [
+    "来源清楚。",
+    "无发热和腐败臭味。",
+    "食用区、厨房路径和饮水区未被污染。"
+  ],
+  "common_mistakes": [
+    "把新鲜厨余埋到叶菜旁。",
+    "用气味异常堆肥催苗。",
+    "雨后不检查粪肥流向。"
+  ],
+  "fallback": [
+    "继续隔离熟化。",
+    "改用干净覆盖物和休耕恢复。",
+    "来源不清材料转为污染控制问题，不进入农业循环。"
+  ],
+  "stop_or_escalate": [
+    "发臭、发热、来源不明、含病人残渣、粪肥未成熟或雨水冲入食用区时，停止施用和采收受影响作物。",
+    "接触可食部位后，不混入正常采收。"
+  ],
+  "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+  "category_original": "种植与食物生产",
+  "domains": [
+    "planting",
+    "agriculture"
+  ],
+  "intents": [
+    "agriculture_second_stage",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "long_term_food_production",
+    "small_scale_agriculture"
+  ],
+  "objects": [
+    "堆肥",
+    "厨余",
+    "粪肥",
+    "食用地块",
+    "隔离区"
+  ],
+  "signals": [
+    "发热",
+    "臭味",
+    "未分解",
+    "来源不明",
+    "雨水冲刷"
+  ],
+  "risks": [
+    "pathogen_contamination",
+    "food_zone_pollution",
+    "crop_damage"
+  ],
+  "keywords": [
+    "堆肥成熟",
+    "未腐熟肥",
+    "粪肥边界",
+    "厨余堆肥",
+    "食用地块"
+  ],
+  "negative_keywords": [
+    "农药配方",
+    "化学灭虫剂自制",
+    "大型农机",
+    "商业温室",
+    "畜牧深水区"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "planting",
+  "primary_intent": "agriculture_second_stage",
+  "top1_aliases": [
+    "堆肥成熟和未腐熟风险判断"
+  ],
+  "related_wiki": [
+    "agriculture-compost-maturity-second-check-001",
+    "agriculture-immature-compost-stop-line-001",
+    "agriculture-manure-compost-food-zone-boundary-001",
+    "agriculture-kitchen-waste-compost-boundary-001",
+    "agriculture-compost-001",
+    "agriculture-compost-pile-setup-001",
+    "agriculture-manure-growing-zone-separation-001"
+  ],
+  "risk_level": "high"
+}

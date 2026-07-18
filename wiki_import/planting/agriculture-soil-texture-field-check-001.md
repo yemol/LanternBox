@@ -6,7 +6,7 @@ priority: P0
 risk_level: normal
 summary: 用湿土的成团、搓条和散开表现判断沙质、黏重或混合土，为浇水和改良安排提供依据。
 tags: 土壤,质地,手感测试,浇水判断
-guide_links: 
+guide_links: DG-0881
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

@@ -6,7 +6,7 @@ priority: P0
 risk_level: caution
 summary: 用小坑和定量水观察土壤下渗与积水，在播种前识别烂根、冲刷和污水外溢风险。
 tags: 土壤排水,下渗测试,积水,烂根风险
-guide_links: DG-0234
+guide_links: DG-0234, DG-0881
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

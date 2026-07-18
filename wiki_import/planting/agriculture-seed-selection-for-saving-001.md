@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 在采收前用健康、成熟、稳定和无混杂记录选留种对象，避免只从剩余弱果取种。条目提供可观察检查和交接记录，支持离线种植决策。
 tags: 留种植株和果实选择,离线种植,行动记录
-guide_links: DG-0675
+guide_links: DG-0675, DG-0879
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

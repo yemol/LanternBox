@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用于土壤肥力基础索引的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 土壤肥力, 有机质, 堆肥, 排水, 种植记录, Kiwix索引
-guide_links: DG-0230, DG-0231, DG-0232
+guide_links: DG-0230, DG-0231, DG-0232, DG-0881
 kiwix_topics: 土壤肥力基础索引, Soil fertility, Compost, Organic matter, Soil pH
 last_reviewed: 2026-07-03
 status: published

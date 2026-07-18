@@ -3674,6 +3674,304 @@
         "已有结构失效",
         "庇护所选址"
       ]
+    },
+    {
+      "name": "agriculture_seed_library",
+      "object_triggers": [
+        "种子",
+        "种子库",
+        "留种",
+        "食用批次",
+        "旧种子",
+        "种子批次",
+        "发芽率",
+        "种子盒"
+      ],
+      "state_triggers": [
+        "发芽率低",
+        "受潮",
+        "霉味",
+        "结块",
+        "虫害",
+        "混回",
+        "分开",
+        "怎么分开",
+        "大面积播种",
+        "吃掉留种",
+        "复测",
+        "台账"
+      ],
+      "aliases": [
+        "种子保存与发芽率复测",
+        "种子批次与发芽率复测台账",
+        "种子受潮失效判断",
+        "留种和食用种子的保底线",
+        "小型种子库盒索引",
+        "小规模粮食生产优先级",
+        "核心留种",
+        "主种源"
+      ],
+      "target_domains": [
+        "planting",
+        "agriculture"
+      ],
+      "target_slug_domains": [
+        "agriculture"
+      ],
+      "target_categories": [
+        "种植与食物生产",
+        "种植"
+      ],
+      "candidate_anchor_terms": [
+        "种子保存与发芽率复测",
+        "种子批次",
+        "发芽率复测",
+        "受潮失效",
+        "主种源",
+        "核心留种",
+        "种子库",
+        "留种保底",
+        "大面积播种",
+        "小型种子库"
+      ],
+      "candidate_anchor_boost": 118,
+      "candidate_anchor_miss_penalty": 135,
+      "domain_boost": 78,
+      "domain_mismatch_penalty": 165,
+      "title_alias_boost": 245,
+      "mismatch_unless_context": [
+        "已经发霉能不能吃",
+        "吃了不舒服",
+        "食物中毒",
+        "熟食",
+        "剩饭",
+        "入口食用"
+      ]
+    },
+    {
+      "name": "agriculture_pest_disease_control",
+      "object_triggers": [
+        "病株",
+        "剪刀",
+        "手套",
+        "工具",
+        "叶背",
+        "虫卵",
+        "幼虫",
+        "苗盘",
+        "地块"
+      ],
+      "state_triggers": [
+        "剪过病株",
+        "继续剪",
+        "带病害",
+        "跨区",
+        "分区",
+        "隔离",
+        "复查",
+        "人工除虫",
+        "能不能继续"
+      ],
+      "aliases": [
+        "病虫害早期隔离与工具分流",
+        "带病害工具分区",
+        "叶背虫卵和幼虫检查",
+        "虫害早期巡查流程",
+        "人工除虫后的复查记录",
+        "作物病害工具分流",
+        "健康区工具",
+        "病区工具"
+      ],
+      "target_domains": [
+        "planting",
+        "agriculture"
+      ],
+      "target_slug_domains": [
+        "agriculture"
+      ],
+      "target_categories": [
+        "种植与食物生产",
+        "种植"
+      ],
+      "candidate_anchor_terms": [
+        "病虫害早期隔离与工具分流",
+        "带病害工具分区",
+        "病株",
+        "剪刀",
+        "继续剪",
+        "跨区",
+        "叶背虫卵",
+        "人工除虫",
+        "健康区",
+        "病区"
+      ],
+      "candidate_anchor_boost": 122,
+      "candidate_anchor_miss_penalty": 140,
+      "domain_boost": 80,
+      "domain_mismatch_penalty": 170,
+      "title_alias_boost": 255,
+      "mismatch_unless_context": [
+        "剪刀坏了",
+        "刀柄松",
+        "工具维修",
+        "磨刀",
+        "螺丝松",
+        "人体感染",
+        "伤口"
+      ]
+    },
+    {
+      "name": "agriculture_postharvest_storage",
+      "object_triggers": [
+        "收获",
+        "豆子",
+        "粮食",
+        "种子",
+        "留种批次",
+        "食用批次",
+        "储藏容器",
+        "晾晒",
+        "霉味"
+      ],
+      "state_triggers": [
+        "晾晒",
+        "分开",
+        "防霉",
+        "入库",
+        "容器潮湿",
+        "批次混入",
+        "储藏",
+        "鼠虫",
+        "怎么分开"
+      ],
+      "aliases": [
+        "收获后晾晒防霉与储藏",
+        "收获后干燥记录",
+        "收获晾晒架检查",
+        "留种批次与食用批次分离",
+        "储藏容器干燥清洁检查",
+        "储粮鼠虫防护",
+        "霉变批次丢弃边界"
+      ],
+      "target_domains": [
+        "planting",
+        "agriculture"
+      ],
+      "target_slug_domains": [
+        "agriculture"
+      ],
+      "target_categories": [
+        "种植与食物生产",
+        "种植"
+      ],
+      "candidate_anchor_terms": [
+        "收获后晾晒防霉与储藏",
+        "收获后干燥",
+        "晾晒防霉",
+        "留种批次",
+        "食用批次",
+        "储藏容器",
+        "容器潮湿",
+        "批次分离",
+        "鼠虫防护",
+        "入库"
+      ],
+      "candidate_anchor_boost": 120,
+      "candidate_anchor_miss_penalty": 140,
+      "domain_boost": 78,
+      "domain_mismatch_penalty": 165,
+      "title_alias_boost": 250,
+      "mismatch_unless_context": [
+        "已经吃了",
+        "能不能吃",
+        "食物中毒",
+        "剩饭",
+        "熟食",
+        "做架子",
+        "怎么制作"
+      ]
+    },
+    {
+      "name": "agriculture_contaminated_plot_boundary",
+      "object_triggers": [
+        "地块",
+        "块地",
+        "这块地",
+        "菜地",
+        "土壤",
+        "食用菜地",
+        "种植区",
+        "叶菜",
+        "堆肥",
+        "粪肥",
+        "厨余"
+      ],
+      "state_triggers": [
+        "化学污染",
+        "刺鼻味",
+        "来源不明",
+        "种吃的",
+        "种吃",
+        "发臭",
+        "倒在",
+        "倒在叶菜",
+        "叶菜旁边",
+        "倒菜地",
+        "直接用",
+        "停用",
+        "隔离",
+        "标记",
+        "能不能种"
+      ],
+      "aliases": [
+        "病虫害早期隔离与工具分流",
+        "不明化学污染地块停用",
+        "堆肥成熟和未腐熟风险判断",
+        "粪肥与食用地块边界",
+        "厨余堆肥进入种植区边界",
+        "未腐熟肥进入食用区停止线",
+        "食用地块停用",
+        "污染地块禁用"
+      ],
+      "target_domains": [
+        "planting",
+        "agriculture"
+      ],
+      "target_slug_domains": [
+        "agriculture"
+      ],
+      "target_categories": [
+        "种植与食物生产",
+        "种植"
+      ],
+      "candidate_anchor_terms": [
+        "不明化学污染地块停用",
+        "化学污染地块",
+        "食用地块",
+        "种吃的",
+        "污染地块",
+        "地块停用",
+        "粪肥与食用地块",
+        "厨余堆肥",
+        "未腐熟",
+        "标记禁用"
+      ],
+      "candidate_anchor_boost": 128,
+      "candidate_anchor_miss_penalty": 145,
+      "domain_boost": 84,
+      "domain_mismatch_penalty": 180,
+      "title_alias_boost": 260,
+      "mismatch_unless_context": [
+        "眼睛",
+        "皮肤",
+        "吸入",
+        "呼吸刺激",
+        "喝水",
+        "饮水",
+        "水桶",
+        "衣服沾到",
+        "人体接触"
+      ]
     }
   ]
 }

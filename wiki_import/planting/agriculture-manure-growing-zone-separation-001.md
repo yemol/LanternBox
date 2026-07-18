@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用上风上坡布置、防渗容器和工具分色将粪污与菜地分开，防止粪水进入根区和取水路线。
 tags: 粪污,种植区,隔离,防渗,交叉污染
-guide_links: DG-0678
+guide_links: DG-0678, DG-0882
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

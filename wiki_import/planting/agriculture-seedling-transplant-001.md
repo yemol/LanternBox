@@ -6,7 +6,7 @@ priority: P0
 risk_level: caution
 summary: 在幼苗根团成形后完成起苗、定植、遮阴和缓苗复查，减少断根、倒伏和移栽后失水。
 tags: 幼苗,移栽,缓苗,根团,遮阴
-guide_links: DG-0236
+guide_links: DG-0236, DG-0880
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

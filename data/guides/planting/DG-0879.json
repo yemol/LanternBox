@@ -1,0 +1,108 @@
+{
+  "id": "DG-0879",
+  "title": "种子保存与发芽率复测",
+  "category": "种植与食物生产",
+  "priority": "P0",
+  "scenario": "留种、获赠种子或旧种子需要判断是否还能保留、播种或作为食物消耗。",
+  "goal": "保护核心种源，用批次、干燥复查和小样发芽率复测决定保留、试种或淘汰。",
+  "tools": [
+    "种子袋",
+    "标签",
+    "干燥容器",
+    "复测小盘",
+    "记录纸"
+  ],
+  "steps": [
+    "先按作物、来源、年份和批次分开种子，不把未知批次混入主种子库。",
+    "检查霉味、虫粉、结块、返潮和容器水痕，异常批次立即隔离。",
+    "对旧种子或外来种子做小样发芽率复测，再决定是否大面积播种。",
+    "把核心留种、优先试种、待观察和可淘汰批次分别标记。",
+    "取用种子后更新剩余数量、复测日期和下一季保底量。"
+  ],
+  "check": [
+    "批次标签完整。",
+    "受潮或霉味种子未混入主库存。",
+    "核心留种和食用消耗批次分开。"
+  ],
+  "common_mistakes": [
+    "把所有种子混成一袋。",
+    "刚采下或返潮种子直接密封。",
+    "缺粮时吃掉最后可靠种源。"
+  ],
+  "fallback": [
+    "没有专用盒时，用纸袋编号加总清单管理。",
+    "复测条件不足时，先保留本地适应性强和上季表现好的小批次。",
+    "可靠种子不足时缩小播种面积，优先保留核心种源。"
+  ],
+  "stop_or_escalate": [
+    "出现霉味、虫粉、结块、容器进水或来源污染疑点时，停止作为主种源。",
+    "核心留种低于最低播种量时，停止继续作为口粮消耗。"
+  ],
+  "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+  "category_original": "种植与食物生产",
+  "domains": [
+    "planting",
+    "agriculture"
+  ],
+  "intents": [
+    "agriculture_second_stage",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "long_term_food_production",
+    "small_scale_agriculture"
+  ],
+  "objects": [
+    "种子",
+    "种子袋",
+    "种子库",
+    "复测小样",
+    "留种批次"
+  ],
+  "signals": [
+    "霉味",
+    "结块",
+    "虫粉",
+    "发芽率低",
+    "核心留种不足"
+  ],
+  "risks": [
+    "seed_loss",
+    "moisture_damage",
+    "long_term_food_production_loss"
+  ],
+  "keywords": [
+    "种子保存",
+    "发芽率复测",
+    "留种",
+    "种子受潮",
+    "种子库"
+  ],
+  "negative_keywords": [
+    "农药配方",
+    "化学灭虫剂自制",
+    "大型农机",
+    "商业温室",
+    "畜牧深水区"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "planting",
+  "primary_intent": "agriculture_second_stage",
+  "top1_aliases": [
+    "种子保存与发芽率复测"
+  ],
+  "related_wiki": [
+    "agriculture-seed-batch-viability-ledger-001",
+    "agriculture-seed-drying-recheck-001",
+    "agriculture-seed-storage-moisture-failure-001",
+    "agriculture-seed-reserve-use-line-001",
+    "agriculture-seed-library-box-index-001",
+    "agriculture-seed-food-harvest-separation-001",
+    "agriculture-seed-storage-001",
+    "agriculture-seed-germination-test-001",
+    "agriculture-seed-selection-for-saving-001",
+    "agriculture-seed-saving-001"
+  ],
+  "risk_level": "high"
+}

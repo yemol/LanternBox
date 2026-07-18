@@ -1,0 +1,108 @@
+{
+  "id": "DG-0886",
+  "title": "小规模粮食生产优先级",
+  "category": "种植与食物生产",
+  "priority": "P1",
+  "scenario": "地块、水、种子和人力有限，需要判断先种什么、保留什么种子，以及失败后是否扩大粮食作物。",
+  "goal": "在短期食物补给和长期粮食尝试之间建立保守优先级，避免耗尽核心资源。",
+  "tools": [
+    "地块清单",
+    "种子台账",
+    "水肥预算卡",
+    "产量记录",
+    "计划纸"
+  ],
+  "steps": [
+    "盘点地块、日照、水量、成熟堆肥、核心种子和现有口粮压力。",
+    "先保留核心留种和短周期补给作物，再安排粮食作物小样。",
+    "评估作物周期、预期产量、病虫害压力和水肥需求。",
+    "一季结束后用产量、投入和失败原因决定是否扩大。",
+    "当资源不足时缩小试验面积，保护可靠种源。"
+  ],
+  "check": [
+    "核心种子仍保留。",
+    "粮食作物先小样验证。",
+    "水肥预算没有挤占饮水和卫生需求。"
+  ],
+  "common_mistakes": [
+    "把小地块粮食试验当成稳定口粮。",
+    "播完所有种子后才发现周期太长。",
+    "没有记录投入和产量。"
+  ],
+  "fallback": [
+    "优先本地适应性强、管理简单的作物。",
+    "用快收叶菜维持短期补给。",
+    "粮食作物连续失败时退回小样和种源保护。"
+  ],
+  "stop_or_escalate": [
+    "种子库即将耗尽、连续失败、地块污染、水肥不足或口粮压力无法等待长周期作物时，不扩大粮食试验。",
+    "饮水和卫生用水紧张时，停止扩大灌溉。"
+  ],
+  "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+  "category_original": "种植与食物生产",
+  "domains": [
+    "planting",
+    "agriculture"
+  ],
+  "intents": [
+    "agriculture_second_stage",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "long_term_food_production",
+    "small_scale_agriculture"
+  ],
+  "objects": [
+    "粮食作物",
+    "地块",
+    "种子库",
+    "水肥预算",
+    "产量记录"
+  ],
+  "signals": [
+    "口粮压力",
+    "种子不足",
+    "周期过长",
+    "连续失败",
+    "水肥不足"
+  ],
+  "risks": [
+    "food_production_overreach",
+    "seed_depletion",
+    "resource_shortage"
+  ],
+  "keywords": [
+    "小规模粮食",
+    "粮食作物优先级",
+    "水肥预算",
+    "核心留种",
+    "长期生产"
+  ],
+  "negative_keywords": [
+    "农药配方",
+    "化学灭虫剂自制",
+    "大型农机",
+    "商业温室",
+    "畜牧深水区"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "planting",
+  "primary_intent": "agriculture_second_stage",
+  "top1_aliases": [
+    "小规模粮食生产优先级"
+  ],
+  "related_wiki": [
+    "agriculture-staple-crop-small-plot-priority-001",
+    "agriculture-seed-reserve-use-line-001",
+    "agriculture-quick-leaf-long-cycle-balance-001",
+    "agriculture-production-failure-backup-plan-001",
+    "agriculture-yield-record-minimum-fields-001",
+    "agriculture-water-fertility-budget-card-001",
+    "agriculture-local-crop-profile-001",
+    "agriculture-planting-inventory-link-001",
+    "agriculture-seed-storage-002",
+    "agriculture-expectation-001"
+  ],
+  "risk_level": "caution"
+}

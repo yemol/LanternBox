@@ -44877,5 +44877,477 @@
     "top1_aliases": [
       "工坊收工与工具封存"
     ]
+  },
+  {
+    "id": "DG-0879",
+    "title": "种子保存与发芽率复测",
+    "category": "种植与食物生产",
+    "category_original": "种植与食物生产",
+    "risk_level": "high",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "种子",
+      "种子袋",
+      "种子库",
+      "复测小样",
+      "留种批次"
+    ],
+    "signals": [
+      "霉味",
+      "结块",
+      "虫粉",
+      "发芽率低",
+      "核心留种不足"
+    ],
+    "risks": [
+      "seed_loss",
+      "moisture_damage",
+      "long_term_food_production_loss"
+    ],
+    "keywords": [
+      "种子保存",
+      "发芽率复测",
+      "留种",
+      "种子受潮",
+      "种子库"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "种子保存与发芽率复测"
+    ]
+  },
+  {
+    "id": "DG-0880",
+    "title": "连续育苗与失败复盘",
+    "category": "种植与食物生产",
+    "category_original": "种植与食物生产",
+    "risk_level": "high",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "苗盘",
+      "幼苗",
+      "育苗土",
+      "移栽地块",
+      "浇水记录"
+    ],
+    "signals": [
+      "倒伏",
+      "茎基腐烂",
+      "出苗率低",
+      "缓苗差",
+      "苗盘过密"
+    ],
+    "risks": [
+      "seedling_disease",
+      "resource_overload",
+      "production_gap"
+    ],
+    "keywords": [
+      "连续育苗",
+      "育苗失败",
+      "苗期隔离",
+      "炼苗",
+      "移栽缓苗"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "连续育苗与失败复盘"
+    ]
+  },
+  {
+    "id": "DG-0881",
+    "title": "土壤贫瘠与板结恢复判断",
+    "category": "种植与食物生产",
+    "category_original": "种植与食物生产",
+    "risk_level": "caution",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "土壤",
+      "地块",
+      "覆盖物",
+      "成熟堆肥",
+      "排水沟"
+    ],
+    "signals": [
+      "板结",
+      "积水",
+      "盐壳",
+      "叶色淡",
+      "产量下降"
+    ],
+    "risks": [
+      "soil_degradation",
+      "contamination",
+      "waterlogging"
+    ],
+    "keywords": [
+      "土壤贫瘠",
+      "土壤板结",
+      "盐壳",
+      "积水地块",
+      "土壤恢复"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "土壤贫瘠与板结恢复判断"
+    ]
+  },
+  {
+    "id": "DG-0882",
+    "title": "堆肥成熟和未腐熟风险判断",
+    "category": "种植与食物生产",
+    "category_original": "种植与食物生产",
+    "risk_level": "high",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "堆肥",
+      "厨余",
+      "粪肥",
+      "食用地块",
+      "隔离区"
+    ],
+    "signals": [
+      "发热",
+      "臭味",
+      "未分解",
+      "来源不明",
+      "雨水冲刷"
+    ],
+    "risks": [
+      "pathogen_contamination",
+      "food_zone_pollution",
+      "crop_damage"
+    ],
+    "keywords": [
+      "堆肥成熟",
+      "未腐熟肥",
+      "粪肥边界",
+      "厨余堆肥",
+      "食用地块"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "堆肥成熟和未腐熟风险判断"
+    ]
+  },
+  {
+    "id": "DG-0883",
+    "title": "病虫害早期隔离与工具分流",
+    "category": "种植与食物生产",
+    "category_original": "种植与食物生产",
+    "risk_level": "high",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "叶片",
+      "苗盘",
+      "剪刀",
+      "手套",
+      "病株"
+    ],
+    "signals": [
+      "虫卵",
+      "幼虫",
+      "病斑",
+      "腐烂",
+      "工具跨区"
+    ],
+    "risks": [
+      "pest_spread",
+      "disease_transfer",
+      "contaminated_harvest"
+    ],
+    "keywords": [
+      "虫害巡查",
+      "病株隔离",
+      "工具分流",
+      "叶背虫卵",
+      "污染地块停用"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "病虫害早期隔离与工具分流"
+    ]
+  },
+  {
+    "id": "DG-0884",
+    "title": "轮作和多季种植计划",
+    "category": "种植与食物生产",
+    "category_original": "种植与食物生产",
+    "risk_level": "caution",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "地块",
+      "轮作卡",
+      "种植日历",
+      "备用种子",
+      "产量记录"
+    ],
+    "signals": [
+      "连续病害",
+      "产量下降",
+      "补种窗口",
+      "地块疲劳",
+      "计划断档"
+    ],
+    "risks": [
+      "rotation_failure",
+      "production_gap",
+      "soil_exhaustion"
+    ],
+    "keywords": [
+      "轮作",
+      "多季种植",
+      "种植日历",
+      "生产失败备用",
+      "年度菜地计划"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "轮作和多季种植计划"
+    ]
+  },
+  {
+    "id": "DG-0885",
+    "title": "收获后晾晒防霉与储藏",
+    "category": "种植与食物生产",
+    "category_original": "种植与食物生产",
+    "risk_level": "high",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "收获批次",
+      "晾晒架",
+      "储藏容器",
+      "留种批次",
+      "粮食"
+    ],
+    "signals": [
+      "霉味",
+      "返潮",
+      "鼠粪",
+      "虫粉",
+      "容器异味"
+    ],
+    "risks": [
+      "postharvest_mold",
+      "storage_loss",
+      "seed_contamination"
+    ],
+    "keywords": [
+      "收获后处理",
+      "晾晒防霉",
+      "储藏容器",
+      "留种批次",
+      "霉变批次"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "收获后晾晒防霉与储藏"
+    ]
+  },
+  {
+    "id": "DG-0886",
+    "title": "小规模粮食生产优先级",
+    "category": "种植与食物生产",
+    "category_original": "种植与食物生产",
+    "risk_level": "caution",
+    "domains": [
+      "planting",
+      "agriculture"
+    ],
+    "intents": [
+      "agriculture_second_stage",
+      "long_term_survival_action"
+    ],
+    "situations": [
+      "long_term_food_production",
+      "small_scale_agriculture"
+    ],
+    "objects": [
+      "粮食作物",
+      "地块",
+      "种子库",
+      "水肥预算",
+      "产量记录"
+    ],
+    "signals": [
+      "口粮压力",
+      "种子不足",
+      "周期过长",
+      "连续失败",
+      "水肥不足"
+    ],
+    "risks": [
+      "food_production_overreach",
+      "seed_depletion",
+      "resource_shortage"
+    ],
+    "keywords": [
+      "小规模粮食",
+      "粮食作物优先级",
+      "水肥预算",
+      "核心留种",
+      "长期生产"
+    ],
+    "negative_keywords": [
+      "农药配方",
+      "化学灭虫剂自制",
+      "大型农机",
+      "商业温室",
+      "畜牧深水区"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "planting",
+    "primary_intent": "agriculture_second_stage",
+    "top1_aliases": [
+      "小规模粮食生产优先级"
+    ]
   }
 ]

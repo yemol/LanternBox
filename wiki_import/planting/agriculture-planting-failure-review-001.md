@@ -6,7 +6,7 @@ priority: P0
 risk_level: normal
 summary: 用种子、土、水、光、温度和病虫证据复盘未发芽或死苗，为下一批只改一个条件。
 tags: 种植失败,复盘,死苗,变量记录
-guide_links: DG-0514
+guide_links: DG-0514, DG-0880
 last_reviewed: 2026-07-12
 status: published
 source: LanternBox internal curated knowledge

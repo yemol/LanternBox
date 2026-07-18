@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于种植记录的字段的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 种植, 种植记录的字段, 长期断供, 小团队, 离线生存
-guide_links: DG-0671, DG-0672, DG-0673
+guide_links: DG-0671, DG-0672, DG-0673, DG-0884
 kiwix_topics: 种植记录的字段, 种植, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published

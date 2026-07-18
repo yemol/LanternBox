@@ -1,0 +1,110 @@
+{
+  "id": "DG-0884",
+  "title": "轮作和多季种植计划",
+  "category": "种植与食物生产",
+  "priority": "P1",
+  "scenario": "同一小地块要连续生产，需要安排下一季作物、轮作、补种窗口和失败备用计划。",
+  "goal": "把地块、作物家族、耗肥程度、季节窗口和失败备用连成多季生产计划。",
+  "tools": [
+    "地块图",
+    "轮作卡",
+    "种植日历",
+    "产量记录",
+    "记录纸"
+  ],
+  "steps": [
+    "列出每个地块上一季作物、病虫害、肥力状态和采收结果。",
+    "按作物家族、耗肥程度和快慢周期安排下一季。",
+    "为主作物保留备用种子、补种窗口和恢复地块。",
+    "把育苗、移栽、采收、土壤恢复和留种任务写入日历。",
+    "季末用产量和失败记录修订下一季计划。"
+  ],
+  "check": [
+    "上一季和下一季能对应。",
+    "补种和恢复窗口存在。",
+    "失败原因进入下季决策。"
+  ],
+  "common_mistakes": [
+    "同一地块连续种同类作物。",
+    "只按想吃什么安排播种。",
+    "没有留下补种和休整空间。"
+  ],
+  "fallback": [
+    "作物分类不清时先按叶菜、根菜、果菜和豆类粗分。",
+    "资源不足时减少作物种类。",
+    "先做三个月滚动计划，再扩展到年度计划。"
+  ],
+  "stop_or_escalate": [
+    "连续病害、土壤衰退、种子不足、水肥预算不足或污染地块未解除时，不按原计划扩大。",
+    "记录与现场标签矛盾时，先重建地块基线。"
+  ],
+  "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+  "category_original": "种植与食物生产",
+  "domains": [
+    "planting",
+    "agriculture"
+  ],
+  "intents": [
+    "agriculture_second_stage",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "long_term_food_production",
+    "small_scale_agriculture"
+  ],
+  "objects": [
+    "地块",
+    "轮作卡",
+    "种植日历",
+    "备用种子",
+    "产量记录"
+  ],
+  "signals": [
+    "连续病害",
+    "产量下降",
+    "补种窗口",
+    "地块疲劳",
+    "计划断档"
+  ],
+  "risks": [
+    "rotation_failure",
+    "production_gap",
+    "soil_exhaustion"
+  ],
+  "keywords": [
+    "轮作",
+    "多季种植",
+    "种植日历",
+    "生产失败备用",
+    "年度菜地计划"
+  ],
+  "negative_keywords": [
+    "农药配方",
+    "化学灭虫剂自制",
+    "大型农机",
+    "商业温室",
+    "畜牧深水区"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "planting",
+  "primary_intent": "agriculture_second_stage",
+  "top1_aliases": [
+    "轮作和多季种植计划"
+  ],
+  "related_wiki": [
+    "agriculture-crop-family-rotation-card-001",
+    "agriculture-heavy-light-feeder-rotation-001",
+    "agriculture-quick-leaf-long-cycle-balance-001",
+    "agriculture-seasonal-planting-calendar-001",
+    "agriculture-production-failure-backup-plan-001",
+    "agriculture-annual-garden-plan-card-001",
+    "agriculture-yield-record-minimum-fields-001",
+    "agriculture-team-garden-task-handover-001",
+    "agriculture-crop-rotation-basic-001",
+    "agriculture-seasonal-planting-plan-001",
+    "agriculture-growing-record-handover-001",
+    "agriculture-growing-log-001"
+  ],
+  "risk_level": "caution"
+}

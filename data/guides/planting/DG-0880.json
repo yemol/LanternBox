@@ -1,0 +1,106 @@
+{
+  "id": "DG-0880",
+  "title": "连续育苗与失败复盘",
+  "category": "种植与食物生产",
+  "priority": "P0",
+  "scenario": "需要连续补种、育苗失败、移栽后缓苗差，或苗盘出现腐烂、倒伏和病害扩散。",
+  "goal": "让育苗按资源上限滚动进行，发现失败时先隔离和复盘，再安排下一批。",
+  "tools": [
+    "苗盘",
+    "标签",
+    "浇水记录",
+    "隔离托盘",
+    "记录纸"
+  ],
+  "steps": [
+    "盘点水、光、容器、土和照护人手，决定本批育苗上限。",
+    "按采收窗口安排连续育苗，不把全部种子一次播完。",
+    "发现倒伏、茎基腐烂、霉味或过密时，先隔离问题苗盘。",
+    "移栽前逐步炼苗，确认真叶、根系、土团和天气条件。",
+    "失败后记录种子、土、水、光、密度和病害信号，再调整下一批。"
+  ],
+  "check": [
+    "下一批育苗日期明确。",
+    "病苗和健康苗分开。",
+    "移栽前有炼苗和缓苗观察。"
+  ],
+  "common_mistakes": [
+    "一次播完全部种子。",
+    "苗盘过密仍继续浇水。",
+    "移栽当天才发现没有可用地块。"
+  ],
+  "fallback": [
+    "连续失败时缩小到一个对照小样。",
+    "水和照护不足时优先快收作物。",
+    "健康苗不足时保留未接触病区的苗盘。"
+  ],
+  "stop_or_escalate": [
+    "苗盘腐烂扩散、多个苗盘同时发病、连续两批失败或照护资源不足时，停止扩大育苗。",
+    "无法分清健康区和病区时，暂停移栽和跨区操作。"
+  ],
+  "notes": "Batch10-B Agriculture Second Stage v0.1 第一阶段行动知识链；不包含农药配方、化学灭虫剂自制或高复杂农业工程。",
+  "category_original": "种植与食物生产",
+  "domains": [
+    "planting",
+    "agriculture"
+  ],
+  "intents": [
+    "agriculture_second_stage",
+    "long_term_survival_action"
+  ],
+  "situations": [
+    "long_term_food_production",
+    "small_scale_agriculture"
+  ],
+  "objects": [
+    "苗盘",
+    "幼苗",
+    "育苗土",
+    "移栽地块",
+    "浇水记录"
+  ],
+  "signals": [
+    "倒伏",
+    "茎基腐烂",
+    "出苗率低",
+    "缓苗差",
+    "苗盘过密"
+  ],
+  "risks": [
+    "seedling_disease",
+    "resource_overload",
+    "production_gap"
+  ],
+  "keywords": [
+    "连续育苗",
+    "育苗失败",
+    "苗期隔离",
+    "炼苗",
+    "移栽缓苗"
+  ],
+  "negative_keywords": [
+    "农药配方",
+    "化学灭虫剂自制",
+    "大型农机",
+    "商业温室",
+    "畜牧深水区"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "planting",
+  "primary_intent": "agriculture_second_stage",
+  "top1_aliases": [
+    "连续育苗与失败复盘"
+  ],
+  "related_wiki": [
+    "agriculture-continuous-nursery-schedule-001",
+    "agriculture-seedling-damping-off-isolation-001",
+    "agriculture-transplant-hardening-off-001",
+    "agriculture-nursery-capacity-limit-001",
+    "agriculture-seedling-001",
+    "agriculture-seedling-transplant-001",
+    "agriculture-seedling-thinning-001",
+    "agriculture-planting-failure-review-001"
+  ],
+  "risk_level": "high"
+}

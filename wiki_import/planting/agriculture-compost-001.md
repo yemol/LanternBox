@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 判断堆肥成熟度、异味、温度和可食作物接触风险；中风险条目，未成熟或病原风险不用于入口作物。
 tags: 种植, 堆肥成熟和病原风险, 长期断供, 小团队, 离线生存
-guide_links: DG-0671, DG-0672, DG-0673
+guide_links: DG-0671, DG-0672, DG-0673, DG-0882
 kiwix_topics: 堆肥成熟和病原风险, 种植, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published
