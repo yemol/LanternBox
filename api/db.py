@@ -59,7 +59,8 @@ def init_db():
             entry_type TEXT DEFAULT '日常记录',
             title TEXT,
             content TEXT NOT NULL,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            metadata_json TEXT
         )
         """
     )
@@ -131,6 +132,9 @@ def init_db():
 
     if not column_exists(conn, "inventory", "item_code"):
         conn.execute("ALTER TABLE inventory ADD COLUMN item_code TEXT")
+
+    if not column_exists(conn, "journal", "metadata_json"):
+        conn.execute("ALTER TABLE journal ADD COLUMN metadata_json TEXT")
 
     backfill_item_codes(conn)
     conn.commit()

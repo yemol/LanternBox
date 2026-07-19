@@ -6,6 +6,7 @@ implement transport, encryption, or FT-01 firmware behavior.
 
 import hashlib
 import json
+import math
 import re
 from datetime import datetime, timezone
 from pathlib import Path
@@ -20,8 +21,16 @@ from ..models import (
 from .journal_service import (
     create_journal_entry_from_terminal_audio_index,
     create_journal_entry_from_terminal_event,
+    delete_all_terminal_track_journal_entries,
+    delete_journal_entry_from_terminal_track,
+    delete_path_related_terminal_event_journal_entries,
+    upsert_journal_entry_from_terminal_track,
 )
 from .terminal_service import get_terminal_device, update_terminal_last_seen
+from .terminal_track_validator import (
+    build_valid_terminal_track,
+    is_path_related_record as validator_is_path_related_record,
+)
 
 
 SYNC_ROOT = DATA_DIR / "terminal_sync"
@@ -136,6 +145,221 @@ def _read_jsonl_records(path: Path) -> list[dict[str, Any]]:
     return records
 
 
+def _parse_record_datetime(record: dict[str, Any]) -> datetime | None:
+    device_date = _first_record_text(record, ["device_date", "date"])
+    device_time = _first_record_text(record, ["device_time", "time"])
+    candidates = []
+    if device_date or device_time:
+        candidates.append(" ".join(part for part in [device_date, device_time] if part))
+    candidates.extend(
+        _first_record_text(record, [key])
+        for key in ["timestamp", "device_timestamp", "created_at", "core_received_at"]
+    )
+    for raw in candidates:
+        text = str(raw or "").strip()
+        if not text:
+            continue
+        normalized = text.replace("Z", "+00:00")
+        for candidate in (
+            normalized,
+            normalized.replace("T", " "),
+            normalized.split(".")[0].replace("T", " "),
+        ):
+            try:
+                parsed = datetime.fromisoformat(candidate)
+            except ValueError:
+                continue
+            if parsed.tzinfo is not None:
+                parsed = parsed.astimezone()
+            return parsed.replace(tzinfo=None)
+        for fmt, length in (
+            ("%Y-%m-%d %H:%M:%S", 19),
+            ("%Y-%m-%d %H:%M", 16),
+            ("%Y-%m-%d", 10),
+        ):
+            try:
+                return datetime.strptime(text[:length], fmt)
+            except ValueError:
+                continue
+    return None
+
+
+def _format_track_time(value: datetime | None) -> str:
+    if value is None:
+        return ""
+    return value.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def _coordinate_point(record: dict[str, Any]) -> dict[str, float] | None:
+    lat = record.get("lat", record.get("latitude"))
+    lon = record.get("lon", record.get("longitude"))
+    try:
+        lat_num = float(lat)
+        lon_num = float(lon)
+    except (TypeError, ValueError):
+        return None
+    if lat_num == 0 and lon_num == 0:
+        return None
+    return {"lat": lat_num, "lon": lon_num}
+
+
+def _track_kind(record: dict[str, Any], default_kind: str = "path_point") -> str:
+    event_type = _record_event_type(record)
+    if event_type in {"session_start", "start"}:
+        return "start"
+    if event_type in {"base_mark", "base"}:
+        return "base"
+    if event_type in {"endpoint", "end", "session_end", "session_stop"}:
+        return "end"
+    if event_type == "path_point":
+        return "path_point"
+    return default_kind
+
+
+def _haversine_meters(a: dict[str, float], b: dict[str, float]) -> float:
+    radius = 6371000
+    lat1 = math.radians(a["lat"])
+    lat2 = math.radians(b["lat"])
+    delta_lat = math.radians(b["lat"] - a["lat"])
+    delta_lon = math.radians(b["lon"] - a["lon"])
+    h = (
+        math.sin(delta_lat / 2) ** 2
+        + math.cos(lat1) * math.cos(lat2) * math.sin(delta_lon / 2) ** 2
+    )
+    return 2 * radius * math.asin(math.sqrt(h))
+
+
+def _stored_track_source(device_id: str) -> str:
+    return str(_get_archive_dir(device_id) / RECORD_ARCHIVE_FILES["path_points"])
+
+
+def _build_terminal_track(
+    *,
+    device_id: str,
+    session_id: str,
+) -> dict[str, Any] | None:
+    """Build one clean Core-facing terminal_track, or None if invalid.
+
+    Raw path_points and path-related field_events stay archived. This function
+    only emits useful, validated track summaries for Journal / Map / History.
+    """
+    device_archive_dir = _get_archive_dir(device_id)
+    path_points_path = device_archive_dir / RECORD_ARCHIVE_FILES["path_points"]
+    field_events_path = device_archive_dir / RECORD_ARCHIVE_FILES["field_events"]
+
+    path_point_records = [
+        record
+        for record in _read_jsonl_records(path_points_path)
+        if _record_session_id(record) == session_id
+    ]
+    field_event_records = [
+        record
+        for record in _read_jsonl_records(field_events_path)
+        if _record_session_id(record) == session_id and validator_is_path_related_record(record)
+    ]
+
+    return build_valid_terminal_track(
+        device_id=device_id,
+        session_id=session_id,
+        path_point_records=path_point_records,
+        field_event_records=field_event_records,
+        track_source=_stored_track_source(device_id),
+    )
+
+
+def _collect_track_sessions_for_device(device_id: str) -> set[str]:
+    device_archive_dir = _get_archive_dir(device_id)
+    sessions: set[str] = set()
+
+    for record in _read_jsonl_records(device_archive_dir / RECORD_ARCHIVE_FILES["path_points"]):
+        session_id = _record_session_id(record)
+        if session_id:
+            sessions.add(session_id)
+
+    for record in _read_jsonl_records(device_archive_dir / RECORD_ARCHIVE_FILES["field_events"]):
+        if not validator_is_path_related_record(record):
+            continue
+        session_id = _record_session_id(record)
+        if session_id:
+            sessions.add(session_id)
+
+    return sessions
+
+
+def rebuild_terminal_tracks_from_archive(
+    *,
+    device_id: str | None = None,
+    replace_existing: bool = True,
+    apply_changes: bool = True,
+) -> dict[str, Any]:
+    """Rebuild clean terminal_track journal entries from raw archive data.
+
+    This is deterministic derived-data regeneration: archive, seen_ids, sync_log,
+    upload_records, audio, and commit ACK data are not modified.
+    """
+    _ensure_sync_dirs()
+
+    if apply_changes and replace_existing:
+        deleted = delete_all_terminal_track_journal_entries(device_id=device_id)
+        deleted_legacy_path_events = delete_path_related_terminal_event_journal_entries(device_id=device_id)
+    else:
+        deleted = 0
+        deleted_legacy_path_events = 0
+
+    device_dirs: list[Path] = []
+    if device_id:
+        device_dirs = [_get_archive_dir(device_id)]
+    elif ARCHIVE_DIR.exists():
+        device_dirs = [path for path in ARCHIVE_DIR.iterdir() if path.is_dir()]
+
+    rebuilt = 0
+    valid = 0
+    invalid = 0
+    sessions_total = 0
+    devices: dict[str, dict[str, int]] = {}
+
+    for device_dir in sorted(device_dirs):
+        current_device_id = device_dir.name
+        sessions = sorted(_collect_track_sessions_for_device(current_device_id))
+        devices[current_device_id] = {"sessions": len(sessions), "valid": 0, "invalid": 0}
+        sessions_total += len(sessions)
+
+        for session_id in sessions:
+            track = _build_terminal_track(device_id=current_device_id, session_id=session_id)
+            if track is None:
+                invalid += 1
+                devices[current_device_id]["invalid"] += 1
+                if apply_changes and not replace_existing:
+                    delete_journal_entry_from_terminal_track(
+                        device_id=current_device_id,
+                        session_id=session_id,
+                    )
+                continue
+
+            valid += 1
+            devices[current_device_id]["valid"] += 1
+            if apply_changes:
+                upsert_journal_entry_from_terminal_track(
+                    device_id=current_device_id,
+                    session_id=session_id,
+                    track=track,
+                )
+            rebuilt += 1
+
+    return {
+        "ok": True,
+        "apply_changes": apply_changes,
+        "replace_existing": replace_existing,
+        "deleted_existing_terminal_tracks": deleted,
+        "deleted_legacy_path_event_journal_entries": deleted_legacy_path_events,
+        "devices": devices,
+        "sessions": sessions_total,
+        "valid": valid,
+        "invalid": invalid,
+        "journal_rebuilt": rebuilt,
+    }
+
+
 def _normalize_audio_size(value: Any) -> int | None:
     try:
         size = int(value)
@@ -221,6 +445,29 @@ def _check_trusted_device(device_id: str) -> None:
 
 def _record_text(record: dict[str, Any], key: str) -> str:
     return str(record.get(key) or "").strip()
+
+
+def _first_record_text(record: dict[str, Any], keys: list[str]) -> str:
+    for key in keys:
+        text = _record_text(record, key)
+        if text:
+            return text
+    return ""
+
+
+def _record_session_id(record: dict[str, Any]) -> str:
+    return _first_record_text(record, ["session_id", "track_session_id", "session"])
+
+
+def _record_event_type(record: dict[str, Any]) -> str:
+    return _first_record_text(record, ["point_type", "event_type", "type", "category"]).lower()
+
+
+def _is_path_related_record(record: dict[str, Any]) -> bool:
+    # Keep the sync ingestion gate aligned with the validator. Track-source and
+    # track-control events must be archived, folded into terminal_track, or
+    # ignored as control noise; they must not become standalone 终端现场日志.
+    return validator_is_path_related_record(record)
 
 
 def _generate_record_id(record_type: str, payload_device_id: str, record: dict[str, Any]) -> str:
@@ -330,11 +577,20 @@ def upload_records(payload: TerminalSyncUploadRecordsRequest) -> dict[str, Any]:
     imported = 0
     skipped_duplicate = 0
     now = _now_iso()
+    affected_track_sessions: set[str] = set()
 
     for record in payload.records:
         record_id = _generate_record_id(record_type, device_id, record)
         if record_id in seen_ids:
             skipped_duplicate += 1
+            if record_type == "path_points":
+                session_id = _record_session_id(record)
+                if session_id:
+                    affected_track_sessions.add(session_id)
+            elif record_type == "field_events" and _is_path_related_record(record):
+                session_id = _record_session_id(record)
+                if session_id:
+                    affected_track_sessions.add(session_id)
             continue
 
         archived_record = dict(record)
@@ -342,7 +598,15 @@ def upload_records(payload: TerminalSyncUploadRecordsRequest) -> dict[str, Any]:
         archived_record["core_received_at"] = now
         _append_jsonl(archive_path, archived_record)
 
-        if record_type == "field_events":
+        if record_type == "path_points":
+            session_id = _record_session_id(archived_record)
+            if session_id:
+                affected_track_sessions.add(session_id)
+        elif record_type == "field_events" and _is_path_related_record(archived_record):
+            session_id = _record_session_id(archived_record)
+            if session_id:
+                affected_track_sessions.add(session_id)
+        elif record_type == "field_events":
             create_journal_entry_from_terminal_event(
                 device_id=device_id,
                 sync_session_id=sync_session_id,
@@ -366,6 +630,20 @@ def upload_records(payload: TerminalSyncUploadRecordsRequest) -> dict[str, Any]:
         imported += 1
 
     _write_json_file_atomic(seen_path, seen_data)
+
+    for session_id in sorted(affected_track_sessions):
+        track = _build_terminal_track(device_id=device_id, session_id=session_id)
+        if track is None:
+            delete_journal_entry_from_terminal_track(
+                device_id=device_id,
+                session_id=session_id,
+            )
+            continue
+        upsert_journal_entry_from_terminal_track(
+            device_id=device_id,
+            session_id=session_id,
+            track=track,
+        )
 
     _write_sync_log({
         "event_type": "upload_records",
