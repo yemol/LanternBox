@@ -426,6 +426,31 @@
       `;
     }
 
+
+
+    function renderTerminalAudio(entry) {
+      const type = String(entry.entry_type || '');
+      const title = String(entry.title || '');
+
+      if (type !== '终端录音日志' && !title.startsWith('终端录音')) {
+        return '';
+      }
+
+      const metadata = entry.metadata || {};
+      const playUrl = String(metadata.play_url || entry.play_url || '').trim();
+      const available = Boolean(metadata.audio_available || entry.audio_available || playUrl);
+
+      if (available && playUrl) {
+        return `
+          <div class="terminal-audio-player">
+            <audio controls preload="none" src="${escapeHtml(playUrl)}"></audio>
+          </div>
+        `;
+      }
+
+      return '<p class="terminal-audio-status">音频文件尚未同步到 Core。</p>';
+    }
+
     function renderJournalList() {
       updateFilterUI();
       renderCalendar();
@@ -453,6 +478,7 @@
         const title = escapeHtml(entry.title || '未命名记录');
         const content = escapeHtml(entry.content || '');
         const createdAt = escapeHtml(formatTime(entry.created_at));
+        const audioHtml = renderTerminalAudio(entry);
 
         return `
           <article class="item-card journal-card">
@@ -464,6 +490,7 @@
 
             <div>
               <p class="journal-content">${content}</p>
+              ${audioHtml}
               <button
                 class="danger-button"
                 type="button"

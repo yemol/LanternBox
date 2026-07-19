@@ -446,6 +446,10 @@ def status_page():
 def terminals_page():
     return FileResponse(APP_DIR / "terminals.html")
 
+@router.get("/terminal-sync.html")
+def terminal_sync_page():
+    return FileResponse(APP_DIR / "terminal_sync.html")
+
 @router.get("/tasks.html")
 def tasks_page():
     return FileResponse(APP_DIR / "tasks.html")

@@ -21,6 +21,7 @@ from ..models import (
 from .journal_service import (
     create_journal_entry_from_terminal_audio_index,
     create_journal_entry_from_terminal_event,
+    link_terminal_audio_to_journal,
     delete_all_terminal_track_journal_entries,
     delete_journal_entry_from_terminal_track,
     delete_path_related_terminal_event_journal_entries,
@@ -517,6 +518,51 @@ def _write_sync_log(payload: dict[str, Any]) -> None:
     _append_jsonl(SYNC_LOG_PATH, event)
 
 
+
+
+def _audio_record_has_matching_stored_file(record: dict[str, Any], expected_size: int | None) -> bool:
+    stored_path = str(record.get("stored_path") or record.get("path") or "").strip()
+    if not stored_path:
+        return False
+    resolved = _resolve_stored_path(stored_path).resolve()
+    archive_root = ARCHIVE_DIR.resolve()
+    try:
+        resolved.relative_to(archive_root)
+    except ValueError:
+        return False
+    if not resolved.exists() or not resolved.is_file():
+        return False
+    if expected_size is not None and resolved.stat().st_size != expected_size:
+        return False
+    return True
+
+
+def _filter_needed_audio_files(device_id: str, audio_files: Any) -> list[dict[str, Any]]:
+    if not isinstance(audio_files, list):
+        return []
+
+    device_archive_dir = _get_archive_dir(device_id)
+    existing_by_audio_id = _load_audio_records(device_archive_dir, include_legacy=True)
+    needed: list[dict[str, Any]] = []
+
+    for item in audio_files:
+        if not isinstance(item, dict):
+            continue
+        audio_id = str(item.get("audio_id") or "").strip()
+        filename = str(item.get("filename") or "").strip()
+        if not audio_id or not filename:
+            continue
+        expected_size = _normalize_audio_size(item.get("size"))
+        records = existing_by_audio_id.get(audio_id, [])
+        already_available = any(
+            _audio_record_has_matching_stored_file(record, expected_size)
+            for record in records
+        )
+        if not already_available:
+            needed.append(dict(item))
+
+    return needed
+
 def receive_manifest(payload: TerminalSyncManifestRequest) -> dict[str, Any]:
     device_id = payload.device_id.strip()
     sync_session_id = payload.sync_session_id.strip()
@@ -542,6 +588,7 @@ def receive_manifest(payload: TerminalSyncManifestRequest) -> dict[str, Any]:
     update_terminal_last_seen(device_id)
 
     audio_files = payload.items.get("audio_files", []) if isinstance(payload.items, dict) else []
+    needed_audio_files = _filter_needed_audio_files(device_id, audio_files)
     return {
         "ok": True,
         "sync_session_id": sync_session_id,
@@ -550,7 +597,7 @@ def receive_manifest(payload: TerminalSyncManifestRequest) -> dict[str, Any]:
             "field_events": True,
             "boot_logs": True,
             "audio_index": True,
-            "audio_files": audio_files if isinstance(audio_files, list) else [],
+            "audio_files": needed_audio_files,
         },
     }
 
@@ -726,6 +773,18 @@ def upload_audio_file(
             "audio_id": audio_id_value,
             "size": actual_size,
         })
+        existing_stored_path = existing.get("stored_path") or existing.get("path", "")
+        link_terminal_audio_to_journal(
+            device_id=device_id_value,
+            audio_id=audio_id_value,
+            filename=filename_value or existing.get("filename", ""),
+            stored_path=existing_stored_path,
+            size=actual_size,
+            sha256=str(existing.get("sha256") or ""),
+            received_at=str(existing.get("received_at") or ""),
+            sync_session_id=sync_session_id_value,
+            stored_filename=str(existing.get("stored_filename") or ""),
+        )
         update_terminal_last_seen(device_id_value)
         return {
             "ok": True,
@@ -735,7 +794,7 @@ def upload_audio_file(
             "imported": False,
             "duplicate": True,
             "conflict": False,
-            "path": existing.get("stored_path") or existing.get("path", ""),
+            "path": existing_stored_path,
             "ack": True,
         }
 
@@ -759,6 +818,17 @@ def upload_audio_file(
         "sha256": sha256,
     }
     _append_jsonl(device_archive_dir / AUDIO_INDEX_JSONL_FILE, audio_file_record)
+    link_terminal_audio_to_journal(
+        device_id=device_id_value,
+        audio_id=audio_id_value,
+        filename=filename_value,
+        stored_path=stored_path,
+        size=actual_size,
+        sha256=sha256,
+        received_at=now,
+        sync_session_id=sync_session_id_value,
+        stored_filename=file_name,
+    )
     _write_sync_log({
         "event_type": "upload_audio",
         "device_id": device_id_value,

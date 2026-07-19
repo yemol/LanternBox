@@ -7,11 +7,13 @@ should become user-visible journal entries.
 
 import re
 import json
+import urllib.parse
 from datetime import datetime
 from pathlib import PurePosixPath
 from typing import Any
 
 from ..db import column_exists, get_db_connection
+from .terminal_audio_service import build_journal_audio_playback_metadata
 
 
 TERMINAL_EVENT_ENTRY_TYPE = "终端现场日志"
@@ -209,9 +211,40 @@ def format_file_size(value: Any) -> str:
 
 
 def format_duration(value: Any) -> str:
+    """Format raw seconds or an already formatted duration label.
+
+    Terminal audio rows are rendered from durable Journal content and metadata.
+    Older rows may already contain labels such as ``7.7秒`` or ``1分12秒``.
+    Treat those as valid display values instead of trying to parse them as raw
+    floats and degrading them to ``未知`` on the next /api/journal read.
+    """
     text = _text(value)
     if not text:
         return "未知"
+
+    lowered = text.lower()
+    if lowered in {"未知", "unknown", "none", "null", "nan"}:
+        return "未知"
+
+    # Already formatted labels from previous Journal content.
+    compact = text.replace(" ", "")
+    if re.fullmatch(r"\d+(?:\.\d+)?秒", compact):
+        return compact
+    if re.fullmatch(r"\d+分\d{1,2}秒", compact):
+        return compact
+    if re.fullmatch(r"\d+小时(?:\d{1,2}分)?(?:\d{1,2}秒)?", compact):
+        return compact
+
+    # Common English / mixed labels, kept permissive for imported records.
+    seconds_match = re.fullmatch(r"(\d+(?:\.\d+)?)\s*(?:s|sec|secs|second|seconds)", lowered)
+    if seconds_match:
+        text = seconds_match.group(1)
+    minutes_match = re.fullmatch(r"(\d+)\s*(?:m|min|mins|minute|minutes)\s*(?:(\d+(?:\.\d+)?)\s*(?:s|sec|secs|second|seconds))?", lowered)
+    if minutes_match:
+        minutes = int(minutes_match.group(1))
+        seconds_part = float(minutes_match.group(2) or 0)
+        text = str(minutes * 60 + seconds_part)
+
     try:
         seconds = float(text)
     except ValueError:
@@ -224,8 +257,11 @@ def format_duration(value: Any) -> str:
         return f"{seconds:.1f}".rstrip("0").rstrip(".") + "秒"
 
     total = int(round(seconds))
-    minutes = total // 60
+    hours = total // 3600
+    minutes = (total % 3600) // 60
     rest = total % 60
+    if hours:
+        return f"{hours}小时{minutes:02d}分{rest:02d}秒"
     return f"{minutes}分{rest:02d}秒"
 
 
@@ -341,8 +377,7 @@ def _terminal_audio_content(
     duration = _terminal_audio_duration(record)
 
     lines = [
-        "这是终端录音索引日志。",
-        "录音文件可能尚未上传到 Core。",
+        "这是终端录音日志。",
         f"来源终端：{device_id}",
     ]
     _append_optional_line(lines, "文件名", filename)
@@ -693,16 +728,94 @@ def _row_to_terminal_event_record(row: dict[str, Any]) -> tuple[str, dict[str, A
 def _row_to_terminal_audio_record(row: dict[str, Any]) -> tuple[str, str, dict[str, Any], str]:
     labels = _content_labels(row.get("content"))
     parts = _title_parts(row.get("title"))
-    device_id = labels.get("来源终端") or (parts[1] if len(parts) > 1 else "")
+    metadata = _metadata_from_entry(dict(row))
+
+    device_id = (
+        _text(metadata.get("device_id"))
+        or labels.get("来源终端")
+        or (parts[1] if len(parts) > 1 else "")
+    )
     title_target = parts[2] if len(parts) > 2 else ""
+
+    # Prefer raw values stored in metadata_json. Content labels are already
+    # formatted for humans, and re-parsing them can otherwise turn 7.7秒 back
+    # into 未知 on the next render.
     record = {
-        "filename": labels.get("文件名") or title_target,
+        "filename": _text(metadata.get("filename")) or labels.get("文件名") or title_target,
         "device_timestamp": labels.get("记录时间") or labels.get("终端时间") or "",
-        "duration_sec": labels.get("时长") or "",
-        "size": labels.get("文件大小") or "",
+        "duration_sec": _text(metadata.get("duration")) or labels.get("时长") or "",
+        "size": metadata.get("size") if metadata.get("size") not in (None, "") else labels.get("文件大小") or "",
+        "audio_id": _text(metadata.get("audio_id")),
     }
-    sync_session = labels.get("同步会话") or labels.get("同步批次") or ""
+    sync_session = (
+        _text(metadata.get("sync_session_id"))
+        or labels.get("同步会话")
+        or labels.get("同步批次")
+        or ""
+    )
     return device_id, sync_session, record, title_target
+
+
+
+
+def _metadata_from_entry(entry: dict[str, Any]) -> dict[str, Any]:
+    raw = _text(entry.get("metadata_json"))
+    if not raw:
+        return {}
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError:
+        return {}
+    return parsed if isinstance(parsed, dict) else {}
+
+
+
+def _terminal_audio_display_metadata(
+    *,
+    entry: dict[str, Any],
+    device_id: str,
+    sync_session_id: str,
+    record: dict[str, Any],
+    fallback: str = "",
+) -> dict[str, Any]:
+    existing = _metadata_from_entry(entry)
+    filename = _terminal_audio_filename(record) or extract_filename(fallback) or _text(existing.get("filename"))
+    audio_id = (
+        _text(existing.get("audio_id"))
+        or _first_text(record, ["audio_id"])
+        or _text(existing.get("record_id"))
+    )
+    persisted = {
+        **existing,
+        "entry_kind": "terminal_audio",
+        "device_id": _text(existing.get("device_id")) or device_id,
+        "sync_session_id": _text(existing.get("sync_session_id")) or sync_session_id,
+        "audio_id": audio_id,
+        "filename": filename,
+        "size": existing.get("size") or _first_text(record, ["size", "bytes", "file_size"]),
+        "duration": existing.get("duration") or _first_text(record, ["duration", "duration_sec", "duration_seconds", "seconds"]),
+    }
+    linked = build_journal_audio_playback_metadata(persisted)
+    return {
+        **persisted,
+        "audio_available": linked.get("audio_available", False),
+        "stored_audio_exists": linked.get("stored_audio_exists", False),
+        "play_url": linked.get("play_url", ""),
+        "received_at": _text(linked.get("received_at") or existing.get("received_at")),
+        "sha256": _text(linked.get("sha256") or existing.get("sha256")),
+    }
+
+
+def _public_terminal_audio_metadata(metadata: dict[str, Any]) -> dict[str, Any]:
+    """Return browser-safe terminal audio metadata.
+
+    Keep stored_path in the database for file-existence validation, but never
+    expose raw archive paths to the frontend.
+    """
+    result = dict(metadata or {})
+    for key in ("stored_path", "resolved_path", "path"):
+        result.pop(key, None)
+    return result
 
 
 def format_terminal_journal_entry_for_display(entry: dict[str, Any]) -> dict[str, Any]:
@@ -732,6 +845,13 @@ def format_terminal_journal_entry_for_display(entry: dict[str, Any]) -> dict[str
         display_record = dict(record)
         if created_at and not format_journal_created_at(_terminal_time(display_record)):
             display_record["device_timestamp"] = created_at
+        metadata = _terminal_audio_display_metadata(
+            entry=entry,
+            device_id=device_id,
+            sync_session_id=sync_session_id,
+            record=display_record,
+            fallback=fallback,
+        )
         return {
             **entry,
             "title": _terminal_audio_title(device_id, display_record, fallback),
@@ -741,20 +861,30 @@ def format_terminal_journal_entry_for_display(entry: dict[str, Any]) -> dict[str
                 record=display_record,
             ),
             "created_at": created_at or entry.get("created_at"),
+            "metadata": _public_terminal_audio_metadata(metadata),
+            "audio_available": metadata.get("audio_available", False),
+            "play_url": metadata.get("play_url", ""),
         }
 
     return entry
 
 
 def _attach_journal_metadata(entry: dict[str, Any]) -> dict[str, Any]:
+    metadata: dict[str, Any] = {}
     raw = _text(entry.get("metadata_json"))
-    if not raw:
-        return entry
-    try:
-        metadata = json.loads(raw)
-    except json.JSONDecodeError:
-        return entry
-    if not isinstance(metadata, dict):
+    if raw:
+        try:
+            parsed = json.loads(raw)
+        except json.JSONDecodeError:
+            parsed = {}
+        if isinstance(parsed, dict):
+            metadata.update(parsed)
+
+    existing_metadata = entry.get("metadata")
+    if isinstance(existing_metadata, dict):
+        metadata.update(existing_metadata)
+
+    if not metadata:
         return entry
 
     result = dict(entry)
@@ -772,6 +902,12 @@ def _attach_journal_metadata(entry: dict[str, Any]) -> dict[str, Any]:
         ):
             if key in metadata:
                 result[key] = metadata[key]
+    if result.get("entry_type") == TERMINAL_AUDIO_ENTRY_TYPE:
+        public_metadata = _public_terminal_audio_metadata(metadata)
+        result["metadata"] = public_metadata
+        for key in ("audio_id", "filename", "audio_available", "stored_audio_exists", "play_url"):
+            if key in public_metadata:
+                result[key] = public_metadata[key]
     return result
 
 
@@ -788,8 +924,11 @@ def list_journal_entries() -> list[dict[str, Any]]:
     conn = get_db_connection()
     rows = conn.execute("SELECT * FROM journal ORDER BY id DESC").fetchall()
     conn.close()
+
     entries = [
-        _attach_journal_metadata(format_terminal_journal_entry_for_display(dict(row)))
+        _attach_journal_metadata(
+            format_terminal_journal_entry_for_display(dict(row))
+        )
         for row in rows
     ]
     return sorted(entries, key=_journal_sort_key, reverse=True)
@@ -876,6 +1015,21 @@ def create_journal_entry_from_terminal_audio_index(
     record: dict[str, Any],
     received_at: str | None = None,
 ) -> dict[str, Any]:
+    filename = _terminal_audio_filename(record)
+    audio_id = _first_text(record, ["audio_id"]) or record_id
+    metadata = {
+        "entry_kind": "terminal_audio",
+        "device_id": device_id,
+        "sync_session_id": sync_session_id,
+        "record_id": record_id,
+        "audio_id": audio_id,
+        "filename": filename,
+        "size": _first_text(record, ["size", "bytes", "file_size"]),
+        "duration": _first_text(record, ["duration", "duration_sec", "duration_seconds", "seconds"]),
+        "audio_available": False,
+        "stored_audio_exists": False,
+        "play_url": "",
+    }
     return create_journal_entry(
         entry_type=TERMINAL_AUDIO_ENTRY_TYPE,
         title=_terminal_audio_title(device_id, record, record_id),
@@ -885,4 +1039,121 @@ def create_journal_entry_from_terminal_audio_index(
             record=record,
         ),
         created_at=_terminal_created_at(record, received_at),
+        metadata=metadata,
     )
+
+
+def _row_matches_terminal_audio(
+    row,
+    *,
+    device_id: str,
+    audio_id: str,
+    filename: str,
+) -> bool:
+    raw_metadata = _text(row["metadata_json"] if "metadata_json" in row.keys() else "")
+    metadata: dict[str, Any] = {}
+    if raw_metadata:
+        try:
+            parsed = json.loads(raw_metadata)
+        except json.JSONDecodeError:
+            parsed = {}
+        if isinstance(parsed, dict):
+            metadata = parsed
+
+    if _text(metadata.get("audio_id")) and _text(metadata.get("audio_id")) == audio_id:
+        return True
+
+    labels = _content_labels(row["content"] if "content" in row.keys() else "")
+    parts = _title_parts(row["title"] if "title" in row.keys() else "")
+    row_device_id = _text(metadata.get("device_id")) or labels.get("来源终端") or (parts[1] if len(parts) > 1 else "")
+    row_filename = _text(metadata.get("filename")) or labels.get("文件名") or (parts[2] if len(parts) > 2 else "")
+    return row_device_id == device_id and extract_filename(row_filename) == filename
+
+
+def link_terminal_audio_to_journal(
+    *,
+    device_id: str,
+    audio_id: str,
+    filename: str,
+    stored_path: str,
+    size: int | str | None = None,
+    duration: int | float | str | None = None,
+    sha256: str = "",
+    received_at: str = "",
+    sync_session_id: str = "",
+    stored_filename: str = "",
+) -> dict[str, Any]:
+    """Persistently link an uploaded WAV file to its Journal audio row.
+
+    This runs at upload time, so /api/journal does not need to scan the archive.
+    Duplicate uploads call this too, which backfills older journal rows after a
+    code upgrade or after a previous display bug.
+    """
+    device_id_value = _text(device_id)
+    audio_id_value = _text(audio_id)
+    filename_value = extract_filename(filename)
+    if not device_id_value or not audio_id_value:
+        return {"ok": False, "matched": 0, "updated": 0, "reason": "missing device_id or audio_id"}
+
+    conn = get_db_connection()
+    _ensure_journal_metadata_column(conn)
+    rows = conn.execute(
+        """
+        SELECT id, entry_type, title, content, metadata_json
+        FROM journal
+        WHERE entry_type = ? OR title LIKE '终端录音%'
+        ORDER BY id DESC
+        """,
+        (TERMINAL_AUDIO_ENTRY_TYPE,),
+    ).fetchall()
+
+    matched_ids: list[int] = []
+    for row in rows:
+        if _row_matches_terminal_audio(
+            row,
+            device_id=device_id_value,
+            audio_id=audio_id_value,
+            filename=filename_value,
+        ):
+            matched_ids.append(int(row["id"]))
+
+    updated = 0
+    for row in rows:
+        entry_id = int(row["id"])
+        if entry_id not in matched_ids:
+            continue
+        raw_metadata = _text(row["metadata_json"] if "metadata_json" in row.keys() else "")
+        metadata: dict[str, Any] = {}
+        if raw_metadata:
+            try:
+                parsed = json.loads(raw_metadata)
+            except json.JSONDecodeError:
+                parsed = {}
+            if isinstance(parsed, dict):
+                metadata = parsed
+
+        metadata.update({
+            "entry_kind": "terminal_audio",
+            "device_id": device_id_value,
+            "audio_id": audio_id_value,
+            "filename": filename_value or _text(metadata.get("filename")),
+            "stored_path": _text(stored_path),
+            "stored_filename": _text(stored_filename),
+            "size": size if size is not None else metadata.get("size", ""),
+            "duration": duration if duration not in (None, "") else metadata.get("duration", ""),
+            "sha256": _text(sha256),
+            "received_at": _text(received_at) or _text(metadata.get("received_at")),
+            "sync_session_id": _text(sync_session_id) or _text(metadata.get("sync_session_id")),
+            "audio_available": True,
+            "stored_audio_exists": True,
+            "play_url": "/api/terminal-sync/audio?" + urllib.parse.urlencode({"audio_id": audio_id_value}),
+        })
+        conn.execute(
+            "UPDATE journal SET metadata_json = ? WHERE id = ?",
+            (_json_dumps(metadata), entry_id),
+        )
+        updated += 1
+
+    conn.commit()
+    conn.close()
+    return {"ok": True, "matched": len(matched_ids), "updated": updated}

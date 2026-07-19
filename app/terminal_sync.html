@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>终端同步 - 壳中灯</title>
+  <link rel="icon" href="/static/assets/brand/lanternbox-icon-original.png" type="image/png" />
+  <link rel="stylesheet" href="/static/style.css?v=terminal-sync-console-v0-1b" />
+</head>
+<body>
+  <main class="shell terminal-sync-page">
+    <section class="hero compact-hero">
+      <div class="page-header-row">
+        <div>
+          <p class="eyebrow">TERMINAL SYNC</p>
+          <h1 class="brand-title"><img class="brand-mark-inline" src="/static/assets/brand/lanternbox-icon-original.webp" alt="" />终端同步</h1>
+          <p class="subtitle">通过 USB Serial 从 FT-01 只读同步 Manifest、记录索引和 WAV 录音文件。同步目标固定为当前 Core 服务，不需要手动填写 API 地址。当前版本不执行终端清理。</p>
+        </div>
+        <div class="page-actions">
+          <a class="page-nav-button" href="/terminals.html">终端设备</a>
+          <a class="page-nav-button" href="/journal">日记记录</a>
+          <a class="page-nav-button" href="/">返回总览</a>
+        </div>
+      </div>
+      <p id="sync-message" class="notice" style="display:none;"></p>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2>同步控制台</h2>
+        <span id="sync-status" class="sync-status-pill">待机</span>
+      </div>
+
+      <div class="form-card">
+        <div class="sync-control-grid">
+          <label class="field-label">
+            <span>串口</span>
+            <select id="port-select" class="select-input">
+              <option value="">请先扫描串口</option>
+            </select>
+          </label>
+
+        </div>
+
+        <div class="sync-option-row">
+          <label><input id="upload-records-check" type="checkbox" checked /> 同步 JSONL 记录</label>
+          <label><input id="upload-audio-check" type="checkbox" checked /> 同步 WAV 录音文件</label>
+        </div>
+
+        <div class="page-actions">
+          <button id="scan-ports-button" class="small-button" type="button">扫描串口</button>
+          <button id="start-sync-button" class="small-button" type="button">开始同步</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="sync-result-section" class="list-section" style="display:none;">
+      <div class="section-title-row">
+        <h2 id="sync-result-title">同步结果</h2>
+        <span id="sync-result-status" class="sync-status-pill">等待</span>
+      </div>
+      <div id="sync-result-card" class="sync-result-card">
+        <p class="empty">同步完成后会在这里显示摘要。</p>
+      </div>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2>同步日志</h2>
+        <button id="clear-log-button" class="small-button" type="button">清空显示</button>
+      </div>
+      <pre id="sync-log" class="sync-log-panel">等待同步...</pre>
+    </section>
+  </main>
+
+  <script>
+    const portSelect = document.getElementById('port-select');
+    const uploadRecordsCheck = document.getElementById('upload-records-check');
+    const uploadAudioCheck = document.getElementById('upload-audio-check');
+    const scanPortsButton = document.getElementById('scan-ports-button');
+    const startSyncButton = document.getElementById('start-sync-button');
+    const clearLogButton = document.getElementById('clear-log-button');
+    const syncStatus = document.getElementById('sync-status');
+    const syncLog = document.getElementById('sync-log');
+    const messageBox = document.getElementById('sync-message');
+    const resultSection = document.getElementById('sync-result-section');
+    const resultTitle = document.getElementById('sync-result-title');
+    const resultStatus = document.getElementById('sync-result-status');
+    const resultCard = document.getElementById('sync-result-card');
+
+    let activeJobId = '';
+    let pollTimer = null;
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function showMessage(message, isError = false) {
+      messageBox.style.display = 'block';
+      messageBox.textContent = message;
+      messageBox.style.borderColor = isError ? 'rgba(255, 123, 138, 0.42)' : 'rgba(137, 204, 255, 0.18)';
+      messageBox.style.color = isError ? '#ffe0e6' : '#b7d2e8';
+    }
+
+    function setStatus(text, failed = false) {
+      syncStatus.textContent = text;
+      syncStatus.classList.toggle('failed', failed);
+    }
+
+    function setLog(lines) {
+      syncLog.textContent = lines.length ? lines.join('\n') : '等待同步...';
+      syncLog.scrollTop = syncLog.scrollHeight;
+    }
+
+    async function readError(response, fallback) {
+      try {
+        const data = await response.json();
+        return data.detail || data.message || data.error || fallback;
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    async function scanPorts() {
+      scanPortsButton.disabled = true;
+      scanPortsButton.textContent = '扫描中...';
+      try {
+        const response = await fetch('/api/terminal-sync/ports', { cache: 'no-store' });
+        const data = await response.json();
+        if (!response.ok || data.ok === false) {
+          throw new Error(data.message || '串口扫描失败');
+        }
+
+        const ports = Array.isArray(data.ports) ? data.ports : [];
+        if (!ports.length) {
+          portSelect.innerHTML = '<option value="">未发现串口</option>';
+          showMessage('没有发现可用串口，请确认 FT-01 已连接，且 Arduino Serial Monitor 已关闭。', true);
+          return;
+        }
+
+        portSelect.innerHTML = ports.map(port => {
+          const label = `${port.device}｜${port.description || 'Serial Port'}`;
+          return `<option value="${escapeHtml(port.device)}">${escapeHtml(label)}</option>`;
+        }).join('');
+        showMessage(`发现 ${ports.length} 个串口。`);
+      } catch (error) {
+        console.error(error);
+        showMessage(error.message || '串口扫描失败。', true);
+      } finally {
+        scanPortsButton.disabled = false;
+        scanPortsButton.textContent = '扫描串口';
+      }
+    }
+
+    async function startSync() {
+      const port = portSelect.value;
+      if (!port) {
+        showMessage('请先选择串口。', true);
+        return;
+      }
+
+      startSyncButton.disabled = true;
+      resultSection.style.display = 'none';
+      setStatus('启动中');
+      setLog(['正在启动同步任务...']);
+
+      try {
+        const response = await fetch('/api/terminal-sync/jobs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            port,
+            upload_records: uploadRecordsCheck.checked,
+            upload_audio_files: uploadAudioCheck.checked
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(await readError(response, `同步任务启动失败：${response.status}`));
+        }
+
+        const job = await response.json();
+        activeJobId = job.job_id;
+        setStatus('运行中');
+        showMessage(`同步任务已启动：${activeJobId}`);
+        pollJob();
+      } catch (error) {
+        console.error(error);
+        setStatus('失败', true);
+        showMessage(error.message || '同步任务启动失败。', true);
+        startSyncButton.disabled = false;
+      }
+    }
+
+    function parseRecordLine(line) {
+      const match = String(line || '').match(/^records\s+(\S+):\s+received=(\d+)\s+imported=(\d+)\s+skipped_duplicate=(\d+)\s+ack=(\S+)/);
+      if (!match) return null;
+      return {
+        type: match[1],
+        received: Number(match[2]),
+        imported: Number(match[3]),
+        skipped: Number(match[4]),
+        ack: match[5]
+      };
+    }
+
+    function parseAudioLine(line) {
+      const match = String(line || '').match(/^audio\s+([^:]+):\s+size=(\d+)\s+status=(\S+)\s+imported=(\S+)\s+duplicate=(\S+)\s+ack=(\S+)/);
+      if (!match) return null;
+      return {
+        filename: match[1],
+        size: Number(match[2]),
+        status: match[3],
+        imported: match[4] === 'True' || match[4] === 'true',
+        duplicate: match[5] === 'True' || match[5] === 'true',
+        ack: match[6]
+      };
+    }
+
+    function parseAudioFailedLine(line) {
+      const match = String(line || '').match(/^audio\s+([^:]+):\s+failed\s+error=(.*)$/);
+      if (!match) return null;
+      return { filename: match[1], error: match[2] || '未知错误' };
+    }
+
+    function recordTypeLabel(type) {
+      const map = {
+        path_points: '路径点',
+        field_events: '现场日志',
+        boot_logs: '启动日志',
+        audio_index: '录音索引'
+      };
+      return map[type] || type;
+    }
+
+    function renderSyncResult(job) {
+      const stdout = Array.isArray(job.stdout) ? job.stdout : [];
+      const stderr = Array.isArray(job.stderr) ? job.stderr : [];
+      const records = stdout.map(parseRecordLine).filter(Boolean);
+      const audios = stdout.map(parseAudioLine).filter(Boolean);
+      const audioFailures = stdout.map(parseAudioFailedLine).filter(Boolean);
+      const manifestLine = stdout.find(line => String(line).startsWith('captured manifest')) || '';
+      const completed = job.status === 'succeeded';
+      const failed = job.status === 'failed';
+      const warning = completed && audioFailures.length > 0;
+
+      resultSection.style.display = 'block';
+      resultTitle.textContent = completed
+        ? (warning ? '同步完成，但有录音失败' : '同步完成')
+        : (failed ? '同步失败' : '同步进行中');
+      resultStatus.textContent = completed ? (warning ? '部分完成' : '成功') : (failed ? '失败' : '运行中');
+      resultStatus.classList.toggle('failed', failed || warning);
+
+      const audioImported = audios.filter(item => item.imported).length;
+      const audioDuplicate = audios.filter(item => item.duplicate).length;
+      const audioAck = audios.filter(item => String(item.ack).toLowerCase() === 'true').length;
+
+      const recordRows = records.length
+        ? records.map(item => `
+          <div class="sync-result-row">
+            <strong>${escapeHtml(recordTypeLabel(item.type))}</strong>
+            <span>接收 ${item.received}｜新增 ${item.imported}｜重复 ${item.skipped}｜ACK ${escapeHtml(item.ack)}</span>
+          </div>
+        `).join('')
+        : '<p class="empty">本次没有 JSONL 记录摘要。</p>';
+
+      const failureRows = audioFailures.length
+        ? `
+          <div class="sync-result-warnings">
+            <strong>录音失败：</strong>
+            ${audioFailures.map(item => `<p>${escapeHtml(item.filename)}：${escapeHtml(item.error)}</p>`).join('')}
+          </div>
+        `
+        : '';
+
+      resultCard.innerHTML = `
+        <div class="sync-result-main ${failed ? 'failed' : warning ? 'warning' : 'success'}">
+          <h3>${completed ? (warning ? '同步已结束，部分 WAV 未写入' : '同步已安全结束') : failed ? '同步中断' : '同步仍在运行'}</h3>
+          <p>${escapeHtml(manifestLine || `任务：${job.job_id}`)}</p>
+          <p>串口：${escapeHtml(job.port || '')}</p>
+          <p>开始：${escapeHtml(job.started_at || job.created_at || '')}｜结束：${escapeHtml(job.finished_at || '尚未结束')}</p>
+        </div>
+        <div class="sync-result-grid">
+          ${recordRows}
+          <div class="sync-result-row">
+            <strong>WAV 录音</strong>
+            <span>处理 ${audios.length}｜新增 ${audioImported}｜重复 ${audioDuplicate}｜ACK ${audioAck}｜失败 ${audioFailures.length}</span>
+          </div>
+        </div>
+        ${failureRows}
+        <div class="page-actions sync-result-actions">
+          <a class="page-nav-button" href="/journal">查看日记记录</a>
+          <button id="sync-again-button" class="small-button" type="button">再次同步</button>
+        </div>
+      `;
+
+      const againButton = document.getElementById('sync-again-button');
+      if (againButton) {
+        againButton.addEventListener('click', () => {
+          resultSection.style.display = 'none';
+          startSync();
+        });
+      }
+    }
+
+    async function pollJob() {
+      if (!activeJobId) return;
+      clearTimeout(pollTimer);
+
+      try {
+        const response = await fetch(`/api/terminal-sync/jobs/${encodeURIComponent(activeJobId)}`, { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error(await readError(response, `读取任务失败：${response.status}`));
+        }
+        const data = await response.json();
+        const job = data.job;
+        const lines = [
+          `任务：${job.job_id}`,
+          `状态：${job.status}`,
+          `串口：${job.port}`,
+          `开始：${job.started_at || job.created_at}`,
+          '',
+          '--- STDOUT ---',
+          ...(job.stdout || []),
+          '',
+          '--- STDERR ---',
+          ...(job.stderr || []),
+        ];
+        if (job.error) {
+          lines.push('', `错误：${job.error}`);
+        }
+        setLog(lines);
+
+        if (job.status === 'succeeded') {
+          setStatus('同步完成');
+          renderSyncResult(job);
+          showMessage('同步已完成，可以到日记记录查看终端日志和录音。');
+          startSyncButton.disabled = false;
+          return;
+        }
+        if (job.status === 'failed') {
+          setStatus('同步失败', true);
+          renderSyncResult(job);
+          showMessage(job.error || '同步失败，请查看下方摘要和日志。', true);
+          startSyncButton.disabled = false;
+          return;
+        }
+        pollTimer = setTimeout(pollJob, 1000);
+      } catch (error) {
+        console.error(error);
+        setStatus('读取失败', true);
+        showMessage(error.message || '读取同步任务失败。', true);
+        startSyncButton.disabled = false;
+      }
+    }
+
+    scanPortsButton.addEventListener('click', scanPorts);
+    startSyncButton.addEventListener('click', startSync);
+    clearLogButton.addEventListener('click', () => setLog([]));
+
+    scanPorts();
+  </script>
+</body>
+</html>

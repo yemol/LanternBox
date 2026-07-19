@@ -1429,3 +1429,204 @@ textarea:focus {
     flex: 1;
   }
 }
+
+/* ---------- Terminal Audio Playback ---------- */
+.terminal-audio-player {
+  margin: 14px 0 4px;
+  padding: 12px;
+  border: 1px solid rgba(137, 204, 255, 0.14);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.terminal-audio-player audio {
+  display: block;
+  width: 100%;
+}
+
+.terminal-audio-status {
+  margin: 12px 0 4px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ---------- Terminal Sync Console ---------- */
+.sync-control-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.terminal-sync-page .field-label {
+  gap: 8px;
+}
+
+.terminal-sync-page .field-label span {
+  display: block;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.terminal-sync-page #port-select {
+  width: 100%;
+}
+
+.sync-option-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+.sync-option-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sync-option-row input[type="checkbox"] {
+  width: auto;
+}
+
+.sync-log-panel {
+  min-height: 240px;
+  max-height: 440px;
+  overflow-y: auto;
+  padding: 16px;
+  border: 1px solid rgba(137, 204, 255, 0.16);
+  border-radius: 18px;
+  background: rgba(1, 8, 18, 0.48);
+  color: var(--text-soft);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.sync-status-pill {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 1px solid rgba(137, 204, 255, 0.28);
+  border-radius: 999px;
+  color: var(--accent-bright);
+  background: rgba(104, 199, 255, 0.1);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.sync-status-pill.failed {
+  color: #ffe0e6;
+  border-color: var(--danger-border);
+  background: var(--danger-bg);
+}
+
+@media (max-width: 760px) {
+  .sync-control-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Terminal Sync Result v0.1d ---------- */
+.sync-result-card {
+  display: grid;
+  gap: 16px;
+}
+
+.sync-result-main {
+  padding: 18px;
+  border: 1px solid rgba(137, 204, 255, 0.16);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.sync-result-main h3 {
+  margin: 0 0 10px;
+  color: var(--text-main);
+}
+
+.sync-result-main p {
+  margin: 4px 0;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+.sync-result-main.success {
+  border-color: rgba(80, 220, 160, 0.34);
+  background: rgba(40, 180, 120, 0.12);
+}
+
+.sync-result-main.warning {
+  border-color: rgba(255, 180, 92, 0.48);
+  background: rgba(255, 164, 64, 0.14);
+}
+
+.sync-result-main.failed,
+.sync-result-warnings {
+  border-color: var(--danger-border);
+  background: var(--danger-bg);
+}
+
+.sync-result-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.sync-result-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(137, 204, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.sync-result-row strong {
+  color: var(--text-main);
+}
+
+.sync-result-row span {
+  color: var(--text-soft);
+  text-align: right;
+}
+
+.sync-result-warnings {
+  padding: 14px 16px;
+  border-radius: 16px;
+}
+
+.sync-result-warnings strong,
+.sync-result-warnings p {
+  color: #ffe0e6;
+}
+
+.sync-result-warnings p {
+  margin: 8px 0 0;
+  line-height: 1.6;
+}
+
+.sync-result-actions {
+  margin-top: 4px;
+}
+
+.sync-status-pill.failed {
+  color: #ffe0e6;
+  border-color: var(--danger-border);
+  background: var(--danger-bg);
+}
+
+@media (max-width: 680px) {
+  .sync-result-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sync-result-row span {
+    text-align: left;
+  }
+}

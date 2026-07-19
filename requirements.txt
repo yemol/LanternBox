@@ -17,3 +17,4 @@ libzim==3.10.0
 beautifulsoup4==4.15.0
 soupsieve==2.8.4
 opencc-python-reimplemented==0.1.7
+pyserial>=3.5
