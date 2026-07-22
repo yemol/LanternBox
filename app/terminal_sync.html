@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>终端同步 - 壳中灯</title>
   <link rel="icon" href="/static/assets/brand/lanternbox-icon-original.png" type="image/png" />
-  <link rel="stylesheet" href="/static/style.css?v=terminal-sync-console-v0-1b" />
+  <link rel="stylesheet" href="/static/style.css?v=terminal-sync-console-v0-1i" />
 </head>
 <body>
   <main class="shell terminal-sync-page">
@@ -17,9 +17,9 @@
           <p class="subtitle">通过 USB Serial 从 FT-01 只读同步 Manifest、记录索引和 WAV 录音文件。同步目标固定为当前 Core 服务，不需要手动填写 API 地址。当前版本不执行终端清理。</p>
         </div>
         <div class="page-actions">
+          <a class="page-nav-button" href="/">返回总览</a>
           <a class="page-nav-button" href="/terminals.html">终端设备</a>
           <a class="page-nav-button" href="/journal">日记记录</a>
-          <a class="page-nav-button" href="/">返回总览</a>
         </div>
       </div>
       <p id="sync-message" class="notice" style="display:none;"></p>
@@ -147,7 +147,6 @@
           const label = `${port.device}｜${port.description || 'Serial Port'}`;
           return `<option value="${escapeHtml(port.device)}">${escapeHtml(label)}</option>`;
         }).join('');
-        showMessage(`发现 ${ports.length} 个串口。`);
       } catch (error) {
         console.error(error);
         showMessage(error.message || '串口扫描失败。', true);

@@ -7,7 +7,7 @@
   <title>日记记录 - 壳中灯</title>
 
   <link rel="icon" href="/static/assets/brand/lanternbox-icon-original.png" type="image/png" />
-  <link rel="stylesheet" href="/static/style.css?v=brand-logo-webp-1" />
+  <link rel="stylesheet" href="/static/style.css?v=journal-calendar-v0-4" />
 </head>
 
 <body>
@@ -301,6 +301,7 @@
 
       const today = new Date();
       const todayKey = `${today.getFullYear()}-${pad2(today.getMonth() + 1)}-${pad2(today.getDate())}`;
+      const activeDateKey = selectedDate || todayKey;
 
       for (let day = 1; day <= totalDays; day += 1) {
         const dateKey = `${calendarYear}-${pad2(calendarMonth + 1)}-${pad2(day)}`;
@@ -309,8 +310,7 @@
         const classes = [
           'calendar-day',
           count > 0 ? 'has-entry' : '',
-          dateKey === selectedDate ? 'selected' : '',
-          dateKey === todayKey ? 'today' : ''
+          dateKey === activeDateKey ? 'selected' : ''
         ].filter(Boolean).join(' ');
 
         cells.push(`

@@ -868,8 +868,14 @@ textarea:focus {
   font-weight: 800;
 }
 
-.calendar-day.today .calendar-number {
-  color: var(--accent-bright);
+.calendar-day.selected {
+  border-color: var(--border-strong);
+  background: rgba(104, 199, 255, 0.2);
+  box-shadow: 0 0 28px rgba(104, 199, 255, 0.12);
+}
+
+.calendar-day.selected .calendar-number {
+  color: #f2fbff;
 }
 
 @media (max-width: 680px) {
@@ -1430,6 +1436,39 @@ textarea:focus {
   }
 }
 
+.page-header-row > .page-actions,
+.emergency-page .page-header > .page-actions,
+.library-header-row > .library-header-actions,
+.admin-header-row > .admin-header-actions,
+.kiwix-header-row > .kiwix-actions {
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  margin-left: auto;
+}
+
+.page-header-row > .page-actions .page-nav-button,
+.emergency-page .page-header > .page-actions .page-nav-button,
+.library-header-row > .library-header-actions .page-nav-button,
+.admin-header-row > .admin-header-actions .page-nav-button,
+.kiwix-header-row > .kiwix-actions .page-nav-button {
+  flex: 0 0 auto;
+  width: 156px;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .page-header-row > .page-actions,
+  .emergency-page .page-header > .page-actions,
+  .library-header-row > .library-header-actions,
+  .admin-header-row > .admin-header-actions,
+  .kiwix-header-row > .kiwix-actions {
+    width: auto;
+    align-self: flex-end;
+  }
+}
+
 /* ---------- Terminal Audio Playback ---------- */
 .terminal-audio-player {
   margin: 14px 0 4px;
@@ -1458,6 +1497,7 @@ textarea:focus {
 }
 
 .terminal-sync-page .field-label {
+  display: grid;
   gap: 8px;
 }
 
