@@ -3,6 +3,8 @@
 #include "FT02_FontData.h"
 #include "FT02_StatusFontData.h"
 #include "FT02_IconRenderer.h"
+#include "FT02_BottomIconData.h"
+#include "FT02_BottomBar.h"
 #include "FT02_StatusBar.h"
 
 static void drawCentered(
@@ -221,13 +223,26 @@ void FT02_DrawHomeScreen(
         drawTile(display, tileX + (tileW + gapX) * 2, tileY + tileH + gapY, tileW, tileH, "通信管理", 5, false);
 
         // Footer
-        display.drawLine(24, 420, W - 24, 420, GxEPD_BLACK);
-        display.drawLine(W / 3, 430, W / 3, 468, GxEPD_BLACK);
-        display.drawLine(W * 2 / 3, 430, W * 2 / 3, 468, GxEPD_BLACK);
+        // Bottom action bar
+        const FT02BottomBarItem bottomItems[3] = {
+            {
+                nullptr,
+                "编号：FT-02A"
+            },
+            {
+                nullptr,
+                "版本：v1.30"
+            },
+            {
+                &ICON_BOTTOM_HELP,
+                "帮助(H)"
+            }
+        };
 
-        FT02_DrawTextPack(display, ft02_menu_24m, "选择", 220, 456);
-        FT02_DrawTextPack(display, ft02_menu_24m, "确认", 450, 456);
-        FT02_DrawTextPack(display, ft02_menu_24m, "帮助", 680, 456);
+        FT02_DrawBottomBar(
+            display,
+            bottomItems
+        );
     }
     while(display.nextPage());
 }
