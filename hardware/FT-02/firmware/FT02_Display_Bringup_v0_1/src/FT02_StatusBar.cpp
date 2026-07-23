@@ -5,10 +5,10 @@
 static const int FT02_STATUS_LINE_Y = 73;
 static const int FT02_STATUS_LINE_H = 3;
 
-static const int FT02_TIME_X = 30;
+static const int FT02_TIME_X = 27;
 static const int FT02_TIME_BASELINE_Y = 44;
 
-static const int FT02_DATE_X = 135;
+static const int FT02_DATE_X = 132;
 static const int FT02_DATE_BASELINE_Y = 44;
 
 static const int FT02_BLOCK_START_X = 225;
@@ -27,9 +27,9 @@ static const int FT02_STATUS_VLINE_BOTTOM_Y = 66;
 
 // Partial refresh region for clock + date.
 // Visual element positions are frozen; only the refresh window is widened to cover 05/20.
-static const int FT02_CLOCK_PARTIAL_X = 20;
+static const int FT02_CLOCK_PARTIAL_X = 16;
 static const int FT02_CLOCK_PARTIAL_Y = 8;
-static const int FT02_CLOCK_PARTIAL_W = 220;
+static const int FT02_CLOCK_PARTIAL_W = 184;
 static const int FT02_CLOCK_PARTIAL_H = 52;
 
 static void FT02_DrawClockText(
