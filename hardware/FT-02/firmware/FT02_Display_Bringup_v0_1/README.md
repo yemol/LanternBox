@@ -1,91 +1,114 @@
-# FT02_HomeScreen_v1.51_HomeFinalLocked
+# FT02 v1.90 SDMMC 1-bit File R/W From v1.87 NoRetry
 
-基于 v1.50_PageIndicatorBigger。
+基于 `FT02_v1_87_SDMMC1Bit_TopStatus.zip`，不是基于 v1.88。
 
-本版为首页样式锁定后的整理版，主要做代码清理与模块拆分，不改变最终视觉布局。
+## 为什么回到 v1.87
 
-## 首页视觉冻结
+v1.88 引入了多次 `SD_MMC.end()` / `setPins()` / `begin()` 重试。  
+实际测试表明这反而可能让 SDMMC 状态更不稳定，导致 `SD ERR`。
 
-顶部状态栏：
-- 已抽象为 FT02_StatusBar
-- 保持当前布局不变。
+所以 v1.90 的原则是：
 
-底部状态栏：
-- 已抽象为 FT02_BottomBar
-- 内容锁定为：
-  - 编号：FT-02A
-  - 版本：v1.30
-  - 帮助(H)
-- 保持当前布局不变。
+```text
+保留 v1.87 已经成功的单次 SDMMC 1-bit mount 路径
+只在 mount 成功之后增加文件写入 / 读取烟测
+不继承 v1.88 的重试逻辑
+```
 
-首页中间区域：
-- 主标题：
-  - 壳中灯智能随身终端
-  - x=40
-  - baselineY=140
-- 右侧提示：
-  - 方向键选择 确认键进入
-  - x=W-310
-  - baselineY=140
-- card：
-  - tileX=32
-  - tileY=170
-  - tileW=230
-  - tileH=100
-  - gapX=24
-  - gapY=24
-- card 文字：
-  - ft02_menu_28m
-  - x=cardX+90
-  - baselineY=cardY+60
-- card 图标：
-  - 6 个首页 card 均使用 SVG 转换后的 48x48 bitmap 图标
-- 分页标记：
-  - 当前页 0
-  - 总页数 2
-  - y=420
-  - dotRadius=7
-  - dotGap=26
+## 接线
 
-## 本版代码整理
+```text
+SD 3.3V -> 3V3_EXT
+SD GND  -> GND
+SD CD   -> GPIO7
 
-新增：
-- src/FT02_HomeContent.h
-- src/FT02_HomeContent.cpp
-- src/FT02_HomeCards.h
-- src/FT02_HomeCards.cpp
+SD CLK -> GPIO15
+SD CMD -> GPIO16
+SD D0  -> GPIO17
 
-清理：
-- src/FT02_HomeUI.cpp 现在只负责页面编排：
-  - 清屏
-  - 顶部状态栏
-  - 首页标题区域
-  - 首页 card 区域
-  - 底部状态栏
-- 移除 HomeUI.cpp 中已经不用的旧手绘图标函数：
-  - drawBookIcon
-  - drawMapIcon
-  - drawLogIcon
-  - drawSearchIcon
-  - drawDeviceIcon
-  - drawCommIcon
-- 移除 HomeUI.cpp 中的 card 绘制细节，统一放到 FT02_HomeCards.cpp。
-- 移除 HomeUI.cpp 中的标题绘制细节，统一放到 FT02_HomeContent.cpp。
+SD D3 -> 不接
+SD D1 -> 不接
+SD D2 -> 不接
+```
 
-保持：
-- src/FT02_HomeCardIconData.h 保留 6 个首页图标 bitmap 数据。
-- 源 SVG / TTF / OTF 文件未包含在工程包内。
-- 顶部状态栏、底部状态栏、字体、图标数据、时间局部刷新逻辑不做额外改动。
+## 本版测试内容
 
-## 提交建议
+5 秒后自动：
 
-Summary：
-锁定 FT-02 首页样式并整理 Home UI 模块
+```text
+1. SD_MMC 1-bit 挂载
+2. 读取 card size / total / used
+3. 写入 /ft02_rw_test.txt
+4. 重新读取 /ft02_rw_test.txt
+5. 校验内容是否包含 FT02_RW_TEST_V1_90
+6. 成功后顶部显示 剩余容量 / RW OK
+```
 
-Description：
-- 锁定首页顶部、底部、中间 card 区域视觉布局
-- 抽出 FT02_HomeContent 负责首页标题区域
-- 抽出 FT02_HomeCards 负责 card 网格、图标、分页标记
-- 清理 HomeUI.cpp 中旧的手绘图标函数和页面细节
-- 保留 6 个 SVG 转换后的首页 card bitmap 图标
-- 保持顶部状态栏和底部状态栏已锁定布局不变
+## 顶部成功显示
+
+```text
+29G
+RW OK
+```
+
+## 串口成功关键行
+
+```text
+SD_MMC.begin OK
+File R/W smoke OK
+SD file R/W result: RW_OK
+FT02 SDMMC 1-bit READY + FILE RW OK
+```
+
+## 注意
+
+本版会在 SD 卡根目录创建或覆盖：
+
+```text
+/ft02_rw_test.txt
+```
+
+---
+
+# v1.91 Help Restored
+
+本版本在 v1.90 基础上恢复被遗漏的 Help 页面，不改变现有硬件引脚、CardKB2 接线、首页布局或 SD 存储实现。
+
+## 修复内容
+
+```text
+H / h              -> 从首页进入 Help 页面
+B / b              -> 从 Help 返回首页
+Esc                 -> 从 Help 返回首页
+Backspace           -> 从 Help 返回首页
+```
+
+新增模块：
+
+```text
+src/FT02_PageState.h
+src/FT02_HelpUI.h
+src/FT02_HelpUI.cpp
+```
+
+页面切换结构：
+
+```text
+HOME --H--> HELP
+HELP --B / ESC / Backspace--> HOME
+```
+
+返回首页后会立即恢复：
+
+- 当前时间与日期
+- 当前 SD 顶部状态
+- 原来的首页卡片选中位置
+
+## 未修改内容
+
+- ePaper 引脚
+- CardKB2 SDA=GPIO4 / SCL=GPIO5 / 0x5F
+- 首页卡片布局与局部刷新
+- SD 模块实现与接线
+- 顶部状态栏布局
+- 底部状态栏几何布局

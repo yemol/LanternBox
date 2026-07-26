@@ -22,9 +22,12 @@ static const FT02BottomBarItem FT02_HOME_BOTTOM_ITEMS[3] = {
 };
 
 void FT02_DrawHomeScreen(
-    FT02Display& display
+    FT02Display& display,
+    int selectedCardIndex
 )
 {
+    display.setFullWindow();
+
     display.firstPage();
 
     do
@@ -33,7 +36,7 @@ void FT02_DrawHomeScreen(
 
         FT02_DrawStatusBar(display);
         FT02_DrawHomeHeader(display);
-        FT02_DrawHomeCardGrid(display);
+        FT02_DrawHomeCardGrid(display, selectedCardIndex);
 
         FT02_DrawBottomBar(
             display,

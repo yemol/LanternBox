@@ -14,3 +14,10 @@ void FT02_DrawStatusBarClock(
     const char* hhmm,
     const char* mmdd
 );
+
+
+void FT02_DrawStatusBarStorage(
+    FT02Display& display,
+    const char* line1,
+    const char* line2
+);

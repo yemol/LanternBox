@@ -3,5 +3,6 @@
 #include "FT02_FontPackRenderer.h"
 
 void FT02_DrawHomeScreen(
-    FT02Display& display
+    FT02Display& display,
+    int selectedCardIndex
 );

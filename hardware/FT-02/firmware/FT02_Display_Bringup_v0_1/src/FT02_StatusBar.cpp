@@ -162,7 +162,7 @@ void FT02_DrawStatusBar(
     FT02_DrawTextPack(
         display,
         ft02_status_22r,
-        "28G",
+        "SD",
         blockStart + FT02_STATUS_TEXT_OFFSET_X,
         FT02_STATUS_TEXT_LINE1_Y
     );
@@ -170,7 +170,7 @@ void FT02_DrawStatusBar(
     FT02_DrawTextPack(
         display,
         ft02_status_22r,
-        "SD剩余",
+        "INIT",
         blockStart + FT02_STATUS_TEXT_OFFSET_X,
         FT02_STATUS_TEXT_LINE2_Y
     );
@@ -203,6 +203,98 @@ void FT02_DrawStatusBar(
         blockStart + FT02_STATUS_TEXT_OFFSET_X,
         FT02_STATUS_TEXT_LINE2_Y
     );
+}
+
+
+static void FT02_DrawStatusStorageBlockContent(
+    FT02Display& display,
+    const char* line1,
+    const char* line2
+)
+{
+    int blockStart = FT02_BLOCK_START_X + FT02_BLOCK_WIDTH * 2;
+
+    FT02_DrawIconSize(
+        display,
+        ICON_STATUS_SD,
+        blockStart + FT02_ICON_OFFSET_X,
+        FT02_ICON_Y,
+        FT02_ICON_SIZE,
+        false
+    );
+
+    FT02_DrawTextPack(
+        display,
+        ft02_status_22r,
+        line1,
+        blockStart + FT02_STATUS_TEXT_OFFSET_X,
+        FT02_STATUS_TEXT_LINE1_Y
+    );
+
+    FT02_DrawTextPack(
+        display,
+        ft02_status_22r,
+        line2,
+        blockStart + FT02_STATUS_TEXT_OFFSET_X,
+        FT02_STATUS_TEXT_LINE2_Y
+    );
+}
+
+void FT02_DrawStatusBarStorage(
+    FT02Display& display,
+    const char* line1,
+    const char* line2
+)
+{
+    static const int partialX = 512;
+    static const int partialY = 6;
+    static const int partialW = 160;
+    static const int partialH = 61;
+
+    display.setPartialWindow(
+        partialX,
+        partialY,
+        partialW,
+        partialH
+    );
+
+    display.firstPage();
+
+    do
+    {
+        display.fillRect(
+            partialX,
+            partialY,
+            partialW,
+            partialH,
+            GxEPD_WHITE
+        );
+
+        display.drawLine(
+            FT02_BLOCK_START_X + FT02_BLOCK_WIDTH * 2 - 10,
+            FT02_STATUS_VLINE_TOP_Y,
+            FT02_BLOCK_START_X + FT02_BLOCK_WIDTH * 2 - 10,
+            FT02_STATUS_VLINE_BOTTOM_Y,
+            GxEPD_BLACK
+        );
+
+        display.drawLine(
+            FT02_BLOCK_START_X + FT02_BLOCK_WIDTH * 3 - 10,
+            FT02_STATUS_VLINE_TOP_Y,
+            FT02_BLOCK_START_X + FT02_BLOCK_WIDTH * 3 - 10,
+            FT02_STATUS_VLINE_BOTTOM_Y,
+            GxEPD_BLACK
+        );
+
+        FT02_DrawStatusStorageBlockContent(
+            display,
+            line1,
+            line2
+        );
+    }
+    while(display.nextPage());
+
+    display.setFullWindow();
 }
 
 void FT02_DrawStatusBarClock(
