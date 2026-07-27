@@ -1,0 +1,12 @@
+{
+  "name": "Shanghai Central",
+  "center_lon": 121.4737,
+  "center_lat": 31.2304,
+  "zoom": 15,
+  "columns": 8,
+  "rows": 6,
+  "detail": "street",
+  "scale": 2,
+  "threshold": 165,
+  "max_labels": 55
+}

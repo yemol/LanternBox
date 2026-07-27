@@ -1,114 +1,55 @@
-# FT02 v1.90 SDMMC 1-bit File R/W From v1.87 NoRetry
+# FT-02 v1.98 干净主线固件
 
-基于 `FT02_v1_87_SDMMC1Bit_TopStatus.zip`，不是基于 v1.88。
+本版本直接基于用户最后提供、已由 Codex 编译并完成硬件验证的工程整理。
 
-## 为什么回到 v1.87
-
-v1.88 引入了多次 `SD_MMC.end()` / `setPins()` / `begin()` 重试。  
-实际测试表明这反而可能让 SDMMC 状态更不稳定，导致 `SD ERR`。
-
-所以 v1.90 的原则是：
+## 稳定 SD 基线
 
 ```text
-保留 v1.87 已经成功的单次 SDMMC 1-bit mount 路径
-只在 mount 成功之后增加文件写入 / 读取烟测
-不继承 v1.88 的重试逻辑
+SDMMC 1-bit
+频率：5 MHz
+CLK -> GPIO35
+CMD -> GPIO2
+D0  -> GPIO1
+CD / D1 / D2 / D3 -> 不接
 ```
 
-## 接线
+SD 底层使用原生 `esp_vfs_fat_sdmmc_mount()`，保持 Codex 已验证的实现，不改回 Arduino `SD_MMC.begin()`。
+
+## 构建环境
+
+本包只保留 Codex 实际使用的 Arduino 3 / pioarduino 环境，避免 PlatformIO 再去下载旧的 Arduino-ESP32 2.0.17。
+
+```ini
+platform = https://github.com/pioarduino/platform-espressif32/releases/download/55.03.311/platform-espressif32.zip
+board = esp32-s3-devkitc-1
+framework = arduino
+```
+
+在项目根目录执行：
+
+```bash
+~/.platformio/penv/bin/pio run -e esp32-s3-devkitc-1 -t clean
+~/.platformio/penv/bin/pio run -e esp32-s3-devkitc-1
+~/.platformio/penv/bin/pio run -e esp32-s3-devkitc-1 -t upload
+```
+
+## 已移除的测试代码
+
+- SD 32 MiB / 64 MiB 读写压测
+- CRC 与测试数据生成
+- 启动 R/W Probe
+- 地图启动探针
+- 启动日志测试写入
+- 延迟重复挂载与重复探针
+- 测试文件创建和清理
+
+正式固件只执行一次 SD 挂载。地图页面打开时按需读取 `/maps/current/map.cfg` 和 FTM 图块。
+
+## 其他固定引脚
 
 ```text
-SD 3.3V -> 3V3_EXT
-SD GND  -> GND
-SD CD   -> GPIO7
-
-SD CLK -> GPIO15
-SD CMD -> GPIO16
-SD D0  -> GPIO17
-
-SD D3 -> 不接
-SD D1 -> 不接
-SD D2 -> 不接
+墨水屏：PWR18 BUSY3 RST8 DC9 CS10 MOSI11 SCK12
+CardKB2：SDA4 SCL5 地址0x5F
 ```
 
-## 本版测试内容
-
-5 秒后自动：
-
-```text
-1. SD_MMC 1-bit 挂载
-2. 读取 card size / total / used
-3. 写入 /ft02_rw_test.txt
-4. 重新读取 /ft02_rw_test.txt
-5. 校验内容是否包含 FT02_RW_TEST_V1_90
-6. 成功后顶部显示 剩余容量 / RW OK
-```
-
-## 顶部成功显示
-
-```text
-29G
-RW OK
-```
-
-## 串口成功关键行
-
-```text
-SD_MMC.begin OK
-File R/W smoke OK
-SD file R/W result: RW_OK
-FT02 SDMMC 1-bit READY + FILE RW OK
-```
-
-## 注意
-
-本版会在 SD 卡根目录创建或覆盖：
-
-```text
-/ft02_rw_test.txt
-```
-
----
-
-# v1.91 Help Restored
-
-本版本在 v1.90 基础上恢复被遗漏的 Help 页面，不改变现有硬件引脚、CardKB2 接线、首页布局或 SD 存储实现。
-
-## 修复内容
-
-```text
-H / h              -> 从首页进入 Help 页面
-B / b              -> 从 Help 返回首页
-Esc                 -> 从 Help 返回首页
-Backspace           -> 从 Help 返回首页
-```
-
-新增模块：
-
-```text
-src/FT02_PageState.h
-src/FT02_HelpUI.h
-src/FT02_HelpUI.cpp
-```
-
-页面切换结构：
-
-```text
-HOME --H--> HELP
-HELP --B / ESC / Backspace--> HOME
-```
-
-返回首页后会立即恢复：
-
-- 当前时间与日期
-- 当前 SD 顶部状态
-- 原来的首页卡片选中位置
-
-## 未修改内容
-
-- ePaper 引脚
-- CardKB2 SDA=GPIO4 / SCL=GPIO5 / 0x5F
-- 首页卡片布局与局部刷新
-- SD 模块实现与接线
-- 顶部状态栏布局
-- 底部状态栏几何布局
+地图数据不包含在本固件包内，继续保留 SD 卡现有 `/maps/current/` 目录。

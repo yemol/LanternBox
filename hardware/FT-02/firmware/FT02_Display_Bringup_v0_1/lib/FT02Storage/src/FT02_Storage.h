@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
+#include <stdio.h>
 
 enum FT02StorageState
 {
@@ -14,42 +15,31 @@ enum FT02StorageState
 enum FT02StorageError
 {
     FT02_STORAGE_ERROR_NONE = 0,
-    FT02_STORAGE_ERROR_SET_PINS_FAILED,
     FT02_STORAGE_ERROR_MOUNT_FAILED,
-    FT02_STORAGE_ERROR_CARD_NONE,
-    FT02_STORAGE_ERROR_RW_FAILED
-};
-
-enum FT02StorageRwResult
-{
-    FT02_STORAGE_RW_NOT_RUN = 0,
-    FT02_STORAGE_RW_WRITE_OPEN_FAILED,
-    FT02_STORAGE_RW_WRITE_FAILED,
-    FT02_STORAGE_RW_READ_OPEN_FAILED,
-    FT02_STORAGE_RW_READ_MISMATCH,
-    FT02_STORAGE_RW_OK
+    FT02_STORAGE_ERROR_CARD_NONE
 };
 
 void FT02_StorageBegin();
 
 FT02StorageState FT02_StorageStateCurrent();
 FT02StorageError FT02_StorageLastError();
-
 bool FT02_StorageIsReady();
-
-uint8_t FT02_StorageCardDetectRaw();
-uint8_t FT02_StorageD3Raw();
 
 unsigned long FT02_StorageCardSizeMB();
 unsigned long FT02_StorageTotalMB();
 unsigned long FT02_StorageUsedMB();
 unsigned long FT02_StorageFreeMB();
 
-FT02StorageRwResult FT02_StorageRwResultCurrent();
-const char* FT02_StorageRwResultText();
-
 const char* FT02_StorageCardTypeText();
 const char* FT02_StorageStateText();
 const char* FT02_StorageErrorText();
+const char* FT02_StorageProfileText();
 
-bool FT02_StoragePollCardDetectChanged();
+uint32_t FT02_StorageFrequencyKHz();
+int FT02_StorageClockPin();
+int FT02_StorageCommandPin();
+int FT02_StorageD0Pin();
+
+bool FT02_StorageFileExists(const char* path);
+FILE* FT02_StorageOpenReadFile(const char* path);
+bool FT02_StorageAppendLine(const char* path, const char* line);

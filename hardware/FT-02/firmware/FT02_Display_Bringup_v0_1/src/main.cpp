@@ -3,6 +3,9 @@
 #include <GxEPD2_BW.h>
 
 #include "FT02_HomeUI.h"
+#include "FT02_MapData.h"
+#include "FT02_MapUI.h"
+#include "FT02_MapTile.h"
 #include "FT02_HelpUI.h"
 #include "FT02_PageState.h"
 #include "FT02_HomeCards.h"
@@ -48,8 +51,10 @@ static uint32_t g_ft02BootMillis = 0;
 static int g_ft02LastShownMinute = -1;
 static int g_ft02HomeSelectedCard = 0;
 static FT02PageState g_ft02PageState = FT02_PAGE_HOME;
+static FT02PageState g_ft02PageBeforeHelp = FT02_PAGE_HOME;
 static bool g_ft02RuntimeBannerPrinted = false;
-static bool g_ft02StorageProbeStarted = false;
+
+static void FT02_RedrawCurrentPage();
 
 static int FT02_MonthFromBuildString(const char* mon)
 {
@@ -229,22 +234,11 @@ static void FT02_UpdateStorageTopStatus()
             freeGb
         );
 
-        if(FT02_StorageRwResultCurrent() == FT02_STORAGE_RW_OK)
-        {
-            snprintf(
-                line2,
-                sizeof(line2),
-                "RW OK"
-            );
-        }
-        else
-        {
-            snprintf(
-                line2,
-                sizeof(line2),
-                "SD剩余"
-            );
-        }
+        snprintf(
+            line2,
+            sizeof(line2),
+            "SD剩余"
+        );
     }
     else if(FT02_StorageStateCurrent() == FT02_STORAGE_STATE_SCANNING)
     {
@@ -310,50 +304,6 @@ static void FT02_UpdateStorageTopStatus()
     );
 }
 
-static void FT02_RunDelayedStorageProbeIfNeeded()
-{
-    if(g_ft02StorageProbeStarted)
-    {
-        return;
-    }
-
-    if(millis() < 5000)
-    {
-        return;
-    }
-
-    g_ft02StorageProbeStarted = true;
-
-    Serial.println("FT-02 SDMMC 1-bit file R/W smoke v1.90 begins now");
-    Serial.flush();
-
-    FT02_DrawStatusBarStorage(
-        display,
-        "SD",
-        "SCAN"
-    );
-
-    FT02_StorageBegin();
-
-    FT02_UpdateStorageTopStatus();
-
-    Serial.print("FT-02 storage top status: ");
-    Serial.print(FT02_StorageStateText());
-    Serial.print(" error=");
-    Serial.print(FT02_StorageErrorText());
-    Serial.print(" freeMB=");
-    Serial.print(FT02_StorageFreeMB());
-    Serial.print(" rw=");
-    Serial.print(FT02_StorageRwResultText());
-    Serial.print(" cd=");
-    Serial.print(FT02_StorageCardDetectRaw());
-    Serial.print(" d3=");
-    Serial.println(FT02_StorageD3Raw());
-    Serial.flush();
-}
-
-
-
 static void FT02_PrintRuntimeBannerIfNeeded()
 {
     if(g_ft02RuntimeBannerPrinted)
@@ -368,7 +318,9 @@ static void FT02_PrintRuntimeBannerIfNeeded()
 
     g_ft02RuntimeBannerPrinted = true;
 
-    Serial.println("FT-02 runtime alive: v1.91 Help restored, SD base v1.90, CardKB2 SDA=4 SCL=5");
+    Serial.print("FT-02 runtime alive: v1.98 clean map firmware, ");
+    Serial.print(FT02_StorageProfileText());
+    Serial.println(", Help restored, CardKB2 SDA=4 SCL=5");
     Serial.flush();
 }
 
@@ -377,6 +329,10 @@ static void FT02_RedrawCurrentPage()
     if(g_ft02PageState == FT02_PAGE_HELP)
     {
         FT02_DrawHelpScreen(display);
+    }
+    else if(g_ft02PageState == FT02_PAGE_MAP)
+    {
+        FT02_DrawMapScreen(display);
     }
     else
     {
@@ -399,8 +355,13 @@ static void FT02_OpenHelpPage()
         return;
     }
 
+    g_ft02PageBeforeHelp = g_ft02PageState;
     g_ft02PageState = FT02_PAGE_HELP;
-    Serial.println("Page: HOME -> HELP");
+
+    Serial.print("Page: ");
+    Serial.print((int)g_ft02PageBeforeHelp);
+    Serial.println(" -> HELP");
+
     FT02_RedrawCurrentPage();
 }
 
@@ -412,7 +373,37 @@ static void FT02_ReturnHomePage()
     }
 
     g_ft02PageState = FT02_PAGE_HOME;
-    Serial.println("Page: HELP -> HOME");
+    Serial.println("Page: current -> HOME");
+    FT02_RedrawCurrentPage();
+}
+
+static void FT02_ReturnFromHelpPage()
+{
+    if(g_ft02PageState != FT02_PAGE_HELP)
+    {
+        return;
+    }
+
+    g_ft02PageState = g_ft02PageBeforeHelp;
+
+    Serial.print("Page: HELP -> ");
+    Serial.println((int)g_ft02PageState);
+
+    FT02_RedrawCurrentPage();
+}
+
+static void FT02_OpenMapPage()
+{
+    if(g_ft02PageState == FT02_PAGE_MAP)
+    {
+        return;
+    }
+
+    FT02_MapUIOpen();
+
+    g_ft02PageState = FT02_PAGE_MAP;
+    Serial.println("Page: HOME -> MAP");
+
     FT02_RedrawCurrentPage();
 }
 
@@ -458,6 +449,13 @@ static bool FT02_HandleHomeInput(
     {
         Serial.print("Home card select: ");
         Serial.println(g_ft02HomeSelectedCard);
+
+        if(g_ft02HomeSelectedCard == 1)
+        {
+            FT02_OpenMapPage();
+            return true;
+        }
+
         return false;
     }
     else if(event.key == FT02_KEY_HELP)
@@ -498,13 +496,72 @@ static bool FT02_HandleHelpInput(
 {
     if(event.key == FT02_KEY_BACK)
     {
-        FT02_ReturnHomePage();
+        FT02_ReturnFromHelpPage();
         return true;
     }
 
     if(event.key == FT02_KEY_HELP)
     {
         Serial.println("Help page already open");
+    }
+
+    return false;
+}
+
+static bool FT02_HandleMapInput(
+    const FT02InputEvent& event
+)
+{
+    bool changed = false;
+
+    if(event.key == FT02_KEY_LEFT)
+    {
+        changed = FT02_MapUIMove(
+            -1,
+            0
+        );
+    }
+    else if(event.key == FT02_KEY_RIGHT)
+    {
+        changed = FT02_MapUIMove(
+            1,
+            0
+        );
+    }
+    else if(event.key == FT02_KEY_UP)
+    {
+        changed = FT02_MapUIMove(
+            0,
+            -1
+        );
+    }
+    else if(event.key == FT02_KEY_DOWN)
+    {
+        changed = FT02_MapUIMove(
+            0,
+            1
+        );
+    }
+    else if(event.key == FT02_KEY_SELECT)
+    {
+        FT02_MapUIReload();
+        changed = true;
+    }
+    else if(event.key == FT02_KEY_HELP)
+    {
+        FT02_OpenHelpPage();
+        return true;
+    }
+    else if(event.key == FT02_KEY_BACK)
+    {
+        FT02_ReturnHomePage();
+        return true;
+    }
+
+    if(changed)
+    {
+        FT02_RedrawCurrentPage();
+        return true;
     }
 
     return false;
@@ -519,6 +576,11 @@ static bool FT02_HandleInput(
         return FT02_HandleHelpInput(event);
     }
 
+    if(g_ft02PageState == FT02_PAGE_MAP)
+    {
+        return FT02_HandleMapInput(event);
+    }
+
     return FT02_HandleHomeInput(event);
 }
 
@@ -527,7 +589,9 @@ void setup()
     Serial.begin(115200);
     delay(2000);
 
-    Serial.println("FT-02 HomeScreen v1.91 HelpRestored From v1.90 Start");
+    Serial.print("FT-02 v1.98 ");
+    Serial.print(FT02_StorageProfileText());
+    Serial.println(" Map Read Start");
 
     FT02_InputBegin(
         CARDKB_SDA,
@@ -537,6 +601,12 @@ void setup()
 
     Serial.println("FT02 InputManager ready: fixed pins SDA=4 SCL=5, D=UP, Z=LEFT, X=DOWN, C=RIGHT");
 
+    FT02_StorageBegin();
+
+    pinMode(EPD_CS, OUTPUT);
+    pinMode(EPD_RST, OUTPUT);
+    pinMode(EPD_DC, OUTPUT);
+    pinMode(EPD_BUSY, INPUT);
     pinMode(EPD_PWR, OUTPUT);
     digitalWrite(EPD_PWR, HIGH);
 
@@ -559,16 +629,17 @@ void setup()
     g_ft02BootMillis = millis();
 
     FT02_UpdateClockIfNeeded(true);
+    FT02_UpdateStorageTopStatus();
 
-    Serial.println("FT-02 HomeScreen v1.91 HelpRestored From v1.90 Done");
-    Serial.println("SDMMC 1-bit file R/W no-retry probe will run after 5 seconds.");
+    Serial.print("FT-02 v1.98 ");
+    Serial.print(FT02_StorageProfileText());
+    Serial.println(" ready");
     Serial.flush();
 }
 
 void loop()
 {
     FT02_PrintRuntimeBannerIfNeeded();
-    FT02_RunDelayedStorageProbeIfNeeded();
 
     // Real elapsed clock:
     // refreshes only when the displayed minute changes.
@@ -580,13 +651,7 @@ void loop()
         FT02_HandleInput(inputEvent);
     }
 
-    if(FT02_StoragePollCardDetectChanged())
-    {
-        FT02_UpdateStorageTopStatus();
-    }
-
     FT02_UpdateClockIfNeeded(false);
 
     delay(20);
 }
-
