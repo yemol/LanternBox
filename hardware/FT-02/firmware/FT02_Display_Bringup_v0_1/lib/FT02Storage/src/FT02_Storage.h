@@ -2,6 +2,7 @@
 
 #include <Arduino.h>
 #include <stdio.h>
+#include <stdint.h>
 
 enum FT02StorageState
 {
@@ -41,5 +42,10 @@ int FT02_StorageCommandPin();
 int FT02_StorageD0Pin();
 
 bool FT02_StorageFileExists(const char* path);
+bool FT02_StorageFileSize(const char* path, uint64_t& bytes);
 FILE* FT02_StorageOpenReadFile(const char* path);
+FILE* FT02_StorageOpenWriteFile(const char* path, bool truncate = true);
+bool FT02_StorageSyncFile(FILE* file);
+bool FT02_StorageDeleteFile(const char* path);
+bool FT02_StorageRenameFile(const char* fromPath, const char* toPath);
 bool FT02_StorageAppendLine(const char* path, const char* line);

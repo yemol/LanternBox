@@ -3,9 +3,8 @@
 #include <GxEPD2_BW.h>
 
 #include "FT02_HomeUI.h"
-#include "FT02_MapData.h"
-#include "FT02_MapUI.h"
-#include "FT02_MapTile.h"
+#include "FT02_PbfMapUI.h"
+#include "FT02_PbfMapRuntime.h"
 #include "FT02_HelpUI.h"
 #include "FT02_PageState.h"
 #include "FT02_HomeCards.h"
@@ -22,6 +21,9 @@ constexpr int EPD_DC   = 9;
 constexpr int EPD_CS   = 10;
 constexpr int EPD_MOSI = 11;
 constexpr int EPD_SCK  = 12;
+constexpr uint32_t EPD_SPI_HZ = 4000000UL;
+
+SPIClass g_ft02EpdSpi(HSPI);
 
 constexpr int CARDKB_SDA = 4;
 constexpr int CARDKB_SCL = 5;
@@ -213,95 +215,45 @@ static void FT02_UpdateClockIfNeeded(bool force)
 
 
 
-static void FT02_UpdateStorageTopStatus()
+static void FT02_RefreshStorageStatusCache()
 {
     char line1[16];
     char line2[16];
 
     if(FT02_StorageIsReady())
     {
-        unsigned long freeGb = FT02_StorageFreeMB() / 1024UL;
-
-        if(freeGb < 1 && FT02_StorageFreeMB() > 0)
-        {
-            freeGb = 1;
-        }
-
-        snprintf(
-            line1,
-            sizeof(line1),
-            "%luG",
-            freeGb
-        );
-
-        snprintf(
-            line2,
-            sizeof(line2),
-            "SD剩余"
-        );
+        const unsigned long freeMb = FT02_StorageFreeMB();
+        unsigned long freeGb = freeMb / 1024UL;
+        if(freeGb < 1 && freeMb > 0) freeGb = 1;
+        snprintf(line1, sizeof(line1), "%luG", freeGb);
+        snprintf(line2, sizeof(line2), "SD剩余");
     }
     else if(FT02_StorageStateCurrent() == FT02_STORAGE_STATE_SCANNING)
     {
-        snprintf(
-            line1,
-            sizeof(line1),
-            "SD"
-        );
-
-        snprintf(
-            line2,
-            sizeof(line2),
-            "SCAN"
-        );
+        snprintf(line1, sizeof(line1), "SD");
+        snprintf(line2, sizeof(line2), "SCAN");
     }
     else if(FT02_StorageStateCurrent() == FT02_STORAGE_STATE_NO_CARD)
     {
-        snprintf(
-            line1,
-            sizeof(line1),
-            "NO"
-        );
-
-        snprintf(
-            line2,
-            sizeof(line2),
-            "SD"
-        );
+        snprintf(line1, sizeof(line1), "NO");
+        snprintf(line2, sizeof(line2), "SD");
     }
     else if(FT02_StorageStateCurrent() == FT02_STORAGE_STATE_ERROR)
     {
-        snprintf(
-            line1,
-            sizeof(line1),
-            "SD"
-        );
-
-        snprintf(
-            line2,
-            sizeof(line2),
-            "ERR"
-        );
+        snprintf(line1, sizeof(line1), "SD");
+        snprintf(line2, sizeof(line2), "ERR");
     }
     else
     {
-        snprintf(
-            line1,
-            sizeof(line1),
-            "SD"
-        );
-
-        snprintf(
-            line2,
-            sizeof(line2),
-            "INIT"
-        );
+        snprintf(line1, sizeof(line1), "SD");
+        snprintf(line2, sizeof(line2), "INIT");
     }
 
-    FT02_DrawStatusBarStorage(
-        display,
-        line1,
-        line2
-    );
+    FT02_SetStatusBarStorageCache(line1, line2);
+    Serial.print("Storage status cache: ");
+    Serial.print(line1);
+    Serial.print(" / ");
+    Serial.println(line2);
 }
 
 static void FT02_PrintRuntimeBannerIfNeeded()
@@ -318,7 +270,7 @@ static void FT02_PrintRuntimeBannerIfNeeded()
 
     g_ft02RuntimeBannerPrinted = true;
 
-    Serial.print("FT-02 runtime alive: v1.98 clean map firmware, ");
+    Serial.print("FT-02 runtime alive: v2.30 PBF Map UI A3.13 SPI40, ");
     Serial.print(FT02_StorageProfileText());
     Serial.println(", Help restored, CardKB2 SDA=4 SCL=5");
     Serial.flush();
@@ -326,26 +278,29 @@ static void FT02_PrintRuntimeBannerIfNeeded()
 
 static void FT02_RedrawCurrentPage()
 {
+    if(g_ft02PageState == FT02_PAGE_MAP)
+    {
+        // Map rendering owns only Y=76..479. The top status bar remains in
+        // place, so pan/zoom never re-queries or refreshes SD information.
+        FT02_DrawPbfMapScreen(display);
+        // Map READY now uses a full-window refresh, so restore the live clock
+        // immediately instead of leaving the status bar at its boot placeholder.
+        FT02_UpdateClockIfNeeded(true);
+        return;
+    }
+
     if(g_ft02PageState == FT02_PAGE_HELP)
     {
         FT02_DrawHelpScreen(display);
     }
-    else if(g_ft02PageState == FT02_PAGE_MAP)
-    {
-        FT02_DrawMapScreen(display);
-    }
     else
     {
-        FT02_DrawHomeScreen(
-            display,
-            g_ft02HomeSelectedCard
-        );
+        FT02_DrawHomeScreen(display, g_ft02HomeSelectedCard);
     }
 
-    // Full-page rendering uses boot placeholders in the status bar.
-    // Restore the live clock and the current storage state immediately.
+    // Home/help are full-page renders. Restore only the live clock; storage
+    // text is already drawn from the cached status-bar value.
     FT02_UpdateClockIfNeeded(true);
-    FT02_UpdateStorageTopStatus();
 }
 
 static void FT02_OpenHelpPage()
@@ -372,6 +327,12 @@ static void FT02_ReturnHomePage()
         return;
     }
 
+    if(g_ft02PageState == FT02_PAGE_MAP)
+    {
+        FT02_PbfMapUnload();
+    }
+
+    FT02_RefreshStorageStatusCache();
     g_ft02PageState = FT02_PAGE_HOME;
     Serial.println("Page: current -> HOME");
     FT02_RedrawCurrentPage();
@@ -392,6 +353,24 @@ static void FT02_ReturnFromHelpPage()
     FT02_RedrawCurrentPage();
 }
 
+static void FT02_RunDirectPbfMap(bool recenter, bool showLoading)
+{
+    if(recenter)
+    {
+        FT02_PbfMapResetView();
+    }
+
+    FT02_PbfMapPrepare();
+    if(showLoading)
+    {
+        FT02_RedrawCurrentPage();
+        delay(250);
+    }
+
+    FT02_PbfMapBuild();
+    FT02_RedrawCurrentPage();
+}
+
 static void FT02_OpenMapPage()
 {
     if(g_ft02PageState == FT02_PAGE_MAP)
@@ -399,12 +378,9 @@ static void FT02_OpenMapPage()
         return;
     }
 
-    FT02_MapUIOpen();
-
     g_ft02PageState = FT02_PAGE_MAP;
-    Serial.println("Page: HOME -> MAP");
-
-    FT02_RedrawCurrentPage();
+    Serial.println("Page: HOME -> DIRECT PBF MAP A3.13");
+    FT02_RunDirectPbfMap(false, true);
 }
 
 static bool FT02_HandleHomeInput(
@@ -512,56 +488,89 @@ static bool FT02_HandleMapInput(
     const FT02InputEvent& event
 )
 {
-    bool changed = false;
-
-    if(event.key == FT02_KEY_LEFT)
-    {
-        changed = FT02_MapUIMove(
-            -1,
-            0
-        );
-    }
-    else if(event.key == FT02_KEY_RIGHT)
-    {
-        changed = FT02_MapUIMove(
-            1,
-            0
-        );
-    }
-    else if(event.key == FT02_KEY_UP)
-    {
-        changed = FT02_MapUIMove(
-            0,
-            -1
-        );
-    }
-    else if(event.key == FT02_KEY_DOWN)
-    {
-        changed = FT02_MapUIMove(
-            0,
-            1
-        );
-    }
-    else if(event.key == FT02_KEY_SELECT)
-    {
-        FT02_MapUIReload();
-        changed = true;
-    }
-    else if(event.key == FT02_KEY_HELP)
-    {
-        FT02_OpenHelpPage();
-        return true;
-    }
-    else if(event.key == FT02_KEY_BACK)
+    if(event.key == FT02_KEY_BACK)
     {
         FT02_ReturnHomePage();
         return true;
     }
 
-    if(changed)
+    if(event.key == FT02_KEY_HELP)
     {
-        FT02_RedrawCurrentPage();
+        FT02_OpenHelpPage();
         return true;
+    }
+
+    if(event.key == FT02_KEY_SELECT)
+    {
+        FT02_RunDirectPbfMap(false, false);
+        return true;
+    }
+
+    const int currentZoom = FT02_PbfMapReportCurrent().zoom;
+    const int panStep = currentZoom <= 16 ? 16 : (currentZoom == 17 ? 32 : 64);
+
+    if(event.key == FT02_KEY_LEFT)
+    {
+        FT02_PbfMapMovePixels(-panStep, 0);
+        FT02_RunDirectPbfMap(false, false);
+        return true;
+    }
+
+    if(event.key == FT02_KEY_RIGHT)
+    {
+        FT02_PbfMapMovePixels(panStep, 0);
+        FT02_RunDirectPbfMap(false, false);
+        return true;
+    }
+
+    if(event.key == FT02_KEY_UP)
+    {
+        FT02_PbfMapMovePixels(0, -panStep);
+        FT02_RunDirectPbfMap(false, false);
+        return true;
+    }
+
+    if(event.key == FT02_KEY_DOWN)
+    {
+        FT02_PbfMapMovePixels(0, panStep);
+        FT02_RunDirectPbfMap(false, false);
+        return true;
+    }
+
+    if(event.key == FT02_KEY_CHAR)
+    {
+        char raw = event.raw;
+        if(raw == 'q' || raw == 'Q' || raw == '+' || raw == '=')
+        {
+            const int before = FT02_PbfMapReportCurrent().zoom;
+            Serial.printf("[MAP-A3.13] zoom-in key raw=0x%02X before=%d\n", (unsigned char)raw, before);
+            if(FT02_PbfMapChangeZoom(1))
+            {
+                FT02_RunDirectPbfMap(false, false);
+            }
+            return true;
+        }
+        if(raw == 'e' || raw == 'E' || raw == '-' || raw == '_')
+        {
+            const int before = FT02_PbfMapReportCurrent().zoom;
+            Serial.printf("[MAP-A3.13] zoom-out key raw=0x%02X before=%d\n", (unsigned char)raw, before);
+            if(FT02_PbfMapChangeZoom(-1))
+            {
+                FT02_RunDirectPbfMap(false, false);
+            }
+            return true;
+        }
+        if(raw == 'r' || raw == 'R')
+        {
+            FT02_RunDirectPbfMap(true, false);
+            return true;
+        }
+        if(raw == 'f' || raw == 'F')
+        {
+            FT02_PbfMapInvalidateCache();
+            FT02_RunDirectPbfMap(false, true);
+            return true;
+        }
     }
 
     return false;
@@ -589,9 +598,18 @@ void setup()
     Serial.begin(115200);
     delay(2000);
 
-    Serial.print("FT-02 v1.98 ");
+    Serial.print("FT-02 v2.30 PBF Map UI A3.13 SPI40 ");
     Serial.print(FT02_StorageProfileText());
-    Serial.println(" Map Read Start");
+    Serial.println(" Start");
+
+    Serial.print("[BOOT] flash_bytes=");
+    Serial.print(ESP.getFlashChipSize());
+    Serial.print(" heap_free=");
+    Serial.print(ESP.getFreeHeap());
+    Serial.print(" psram_bytes=");
+    Serial.print(ESP.getPsramSize());
+    Serial.print(" psram_free=");
+    Serial.println(ESP.getFreePsram());
 
     FT02_InputBegin(
         CARDKB_SDA,
@@ -602,6 +620,7 @@ void setup()
     Serial.println("FT02 InputManager ready: fixed pins SDA=4 SCL=5, D=UP, Z=LEFT, X=DOWN, C=RIGHT");
 
     FT02_StorageBegin();
+    FT02_RefreshStorageStatusCache();
 
     pinMode(EPD_CS, OUTPUT);
     pinMode(EPD_RST, OUTPUT);
@@ -609,15 +628,24 @@ void setup()
     pinMode(EPD_BUSY, INPUT);
     pinMode(EPD_PWR, OUTPUT);
     digitalWrite(EPD_PWR, HIGH);
+    digitalWrite(EPD_RST, HIGH);
+    digitalWrite(EPD_DC, LOW);
+    digitalWrite(EPD_CS, HIGH);
+    delay(50);
 
-    SPI.begin(
-        EPD_SCK,
-        -1,
-        EPD_MOSI,
-        EPD_CS
+    if(!g_ft02EpdSpi.begin(EPD_SCK, -1, EPD_MOSI, EPD_CS))
+    {
+        Serial.println("[EPD] HSPI begin failed");
+    }
+
+    display.init(
+        115200,
+        true,
+        10,
+        false,
+        g_ft02EpdSpi,
+        SPISettings(EPD_SPI_HZ, MSBFIRST, SPI_MODE0)
     );
-
-    display.init(115200);
     display.setRotation(2);
 
     FT02_DrawHomeScreen(
@@ -629,9 +657,8 @@ void setup()
     g_ft02BootMillis = millis();
 
     FT02_UpdateClockIfNeeded(true);
-    FT02_UpdateStorageTopStatus();
 
-    Serial.print("FT-02 v1.98 ");
+    Serial.print("FT-02 v2.30 PBF Map UI A3.13 SPI40 ");
     Serial.print(FT02_StorageProfileText());
     Serial.println(" ready");
     Serial.flush();

@@ -16,6 +16,12 @@ void FT02_DrawStatusBarClock(
 );
 
 
+
+void FT02_SetStatusBarStorageCache(
+    const char* line1,
+    const char* line2
+);
+
 void FT02_DrawStatusBarStorage(
     FT02Display& display,
     const char* line1,

@@ -1,6 +1,17 @@
 
 #include "FT02_StatusBar.h"
 #include "FT02_BatteryIconReplace2.h"
+#include <string.h>
+#include <stdio.h>
+
+static char g_ft02StorageLine1[16] = "SD";
+static char g_ft02StorageLine2[16] = "INIT";
+
+void FT02_SetStatusBarStorageCache(const char* line1, const char* line2)
+{
+    snprintf(g_ft02StorageLine1, sizeof(g_ft02StorageLine1), "%s", line1 != nullptr ? line1 : "SD");
+    snprintf(g_ft02StorageLine2, sizeof(g_ft02StorageLine2), "%s", line2 != nullptr ? line2 : "INIT");
+}
 
 static const int FT02_STATUS_LINE_Y = 73;
 static const int FT02_STATUS_LINE_H = 3;
@@ -162,7 +173,7 @@ void FT02_DrawStatusBar(
     FT02_DrawTextPack(
         display,
         ft02_status_22r,
-        "SD",
+        g_ft02StorageLine1,
         blockStart + FT02_STATUS_TEXT_OFFSET_X,
         FT02_STATUS_TEXT_LINE1_Y
     );
@@ -170,7 +181,7 @@ void FT02_DrawStatusBar(
     FT02_DrawTextPack(
         display,
         ft02_status_22r,
-        "INIT",
+        g_ft02StorageLine2,
         blockStart + FT02_STATUS_TEXT_OFFSET_X,
         FT02_STATUS_TEXT_LINE2_Y
     );
@@ -246,6 +257,7 @@ void FT02_DrawStatusBarStorage(
     const char* line2
 )
 {
+    FT02_SetStatusBarStorageCache(line1, line2);
     static const int partialX = 512;
     static const int partialY = 6;
     static const int partialW = 160;
