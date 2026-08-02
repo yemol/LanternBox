@@ -37,9 +37,10 @@ static int FT02_CellEndX(
     return (screenWidth * (index + 1)) / 3;
 }
 
-void FT02_DrawBottomBar(
+static void FT02_DrawBottomBarInternal(
     FT02Display& display,
-    const FT02BottomBarItem items[3]
+    const FT02BottomBarItem items[3],
+    const FT02FontPack& font
 )
 {
     int W = display.width();
@@ -90,7 +91,7 @@ void FT02_DrawBottomBar(
 
         int textWidth = items[i].label != nullptr
             ? FT02_TextWidthPack(
-                ft02_bottom_24m,
+                font,
                 items[i].label
             )
             : 0;
@@ -118,11 +119,36 @@ void FT02_DrawBottomBar(
         {
             FT02_DrawTextPack(
                 display,
-                ft02_bottom_24m,
+                font,
                 items[i].label,
                 groupX + iconWidth + gap,
                 FT02_BOTTOM_TEXT_BASELINE_Y
             );
         }
     }
+}
+
+void FT02_DrawBottomBar(
+    FT02Display& display,
+    const FT02BottomBarItem items[3]
+)
+{
+    FT02_DrawBottomBarInternal(
+        display,
+        items,
+        ft02_bottom_24m
+    );
+}
+
+void FT02_DrawBottomBarWithFont(
+    FT02Display& display,
+    const FT02BottomBarItem items[3],
+    const FT02FontPack& font
+)
+{
+    FT02_DrawBottomBarInternal(
+        display,
+        items,
+        font
+    );
 }

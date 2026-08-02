@@ -1,4 +1,5 @@
 #include "FT02_HomeCards.h"
+#include "FT02_EpdLifecycle.h"
 
 #include "FT02_FontData.h"
 #include "FT02_HomeCardIconData.h"
@@ -42,7 +43,7 @@ static const FT02HomeCard FT02_HOME_CARDS[] = {
         &ICON_HOME_CARD_LOG
     },
     {
-        "定位搜索",
+        "定位记录",
         &ICON_HOME_CARD_LOCATION
     },
     {
@@ -413,6 +414,8 @@ static void FT02_RedrawHomeCardSelectionPartial(
         }
     }
     while(display.nextPage());
+
+    FT02_EpdPowerOffAfterCommit(display, "home-selection-partial");
 }
 
 int FT02_HomeCardCount()

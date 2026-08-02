@@ -1,0 +1,82 @@
+pack_id: lanternbox-ft02-field-manual-zh
+title: FT-02 现场行动手册
+language: zh-CN
+schema_version: 1
+content_version: 0.1.1
+created_at: '2026-07-31'
+content_policy: 只提供现场动作指导；不提供百科式理论；所有步骤必须可执行、可检查。
+phase1_card_count: 42
+source_registry:
+  SRC-RC-FIRSTAID:
+    title: American Red Cross - First Aid Steps
+    url: https://www.redcross.org/take-a-class/first-aid/performing-first-aid/first-aid-steps
+  SRC-RC-BLEEDING:
+    title: American Red Cross - Life-Threatening External Bleeding
+    url: https://www.redcross.org/take-a-class/resources/learn-first-aid/bleeding-life-threatening-external
+  SRC-RC-CPR:
+    title: American Red Cross - CPR Steps
+    url: https://www.redcross.org/take-a-class/cpr/performing-cpr/cpr-steps
+  SRC-RC-CPR-GUIDE:
+    title: American Red Cross Guidelines - CPR Techniques and Sequence
+    url: https://guidelines.redcross.org/guidelines-database/cpr-techniques-and-sequence/
+  SRC-RC-CHOKING:
+    title: American Red Cross - Adult/Child Choking
+    url: https://www.redcross.org/take-a-class/resources/learn-first-aid/adult-child-choking
+  SRC-RC-BURNS:
+    title: American Red Cross - Burns
+    url: https://www.redcross.org/take-a-class/resources/learn-first-aid/burns
+  SRC-RC-FRACTURE:
+    title: American Red Cross - Fractures
+    url: https://www.redcross.org/take-a-class/resources/learn-first-aid/fractures
+  SRC-RC-HYPOTHERMIA:
+    title: American Red Cross - Hypothermia
+    url: https://www.redcross.org/take-a-class/resources/learn-first-aid/hypothermia
+  SRC-RC-HEAT:
+    title: American Red Cross - Heat Exhaustion
+    url: https://www.redcross.org/take-a-class/resources/learn-first-aid/heat-exhaustion
+  SRC-RC-BITE:
+    title: American Red Cross - Animal Bites
+    url: https://www.redcross.org/take-a-class/resources/learn-first-aid/animal-bites
+  SRC-CDC-RABIES:
+    title: CDC - Rabies Prevention and Control
+    url: https://www.cdc.gov/rabies/prevention/index.html
+  SRC-CDC-WATER:
+    title: CDC - How to Make Water Safe in an Emergency
+    url: https://www.cdc.gov/water-emergency/about/index.html
+  SRC-CDC-WATER-SAFETY:
+    title: CDC - Prevent Diarrheal Illness After a Disaster
+    url: https://www.cdc.gov/water-emergency/safety/index.html
+  SRC-CDC-HYGIENE:
+    title: CDC - Personal Hygiene During an Emergency
+    url: https://www.cdc.gov/water-emergency/safety/guidelines-for-personal-hygiene-during-an-emergency.html
+  SRC-USDA-FOOD:
+    title: USDA FSIS - Keep Food Safe During Emergencies
+    url: https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/emergencies/keep-your-food-safe-during-emergencies
+  SRC-CDC-CO:
+    title: CDC - Carbon Monoxide Poisoning Basics
+    url: https://www.cdc.gov/carbon-monoxide/about/index.html
+  SRC-CDC-POWER:
+    title: CDC - Protect Yourself During a Power Outage
+    url: https://www.cdc.gov/natural-disasters/response/what-to-do-protect-yourself-during-a-power-outage.html
+  SRC-NPS-FOOD:
+    title: 'NPS - Bear Safety: Storing Food'
+    url: https://home.nps.gov/articles/bearsafetyfood.htm
+  SRC-NPS-WASTE:
+    title: NPS - Human Waste and Trash
+    url: https://www.nps.gov/jotr/planyourvisit/trash.htm
+  SRC-NPS-CAMP:
+    title: NPS - Camping and Wildlife Safety
+    url: https://www.nps.gov/neri/planyourvisit/camping-and-wildlife.htm
+  SRC-READY:
+    title: Ready.gov - Emergency Preparedness
+    url: https://www.ready.gov/
+  SRC-OSHA-BATTERY:
+    title: OSHA - Lithium-ion Battery Storage Safety
+    url: https://www.osha.gov/quicktakes/09222025
+build_targets:
+  ft02:
+    format: compiled-binary-pack
+    status: integrated-v2.51-category-subtitle-compact
+  core:
+    format: yaml-source+search-index
+    status: source-of-truth

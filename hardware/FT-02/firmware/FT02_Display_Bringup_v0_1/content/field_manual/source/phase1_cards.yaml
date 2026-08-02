@@ -1,0 +1,1531 @@
+cards:
+- id: MED-001
+  title: 严重外伤出血
+  category: MED
+  priority: critical
+  quick_access: true
+  trigger: 血液持续流出、喷射，或敷料很快被浸透。
+  immediate_actions:
+  - 确认现场安全并戴手套。
+  - 立即呼叫急救并取得止血带。
+  - 用手或厚敷料持续直接压迫伤口。
+  steps:
+  - 保持持续压迫，不要反复掀开查看。
+  - 敷料浸透时在上面继续加敷料。
+  - 四肢危及生命的出血且直接压迫无效时，按止血带说明绑在伤口上方、不要压在关节上。
+  - 收紧至出血停止，并记录时间。
+  alternatives:
+  - 没有敷料时，用折叠干净布料或衣物直接压迫。
+  stop_or_escalate:
+  - 出血不停、出现意识改变、皮肤湿冷、呼吸加快时立即转运。
+  do_not:
+  - 不要拔出深插伤口的异物。
+  - 不要松开已经有效止血的止血带。
+  - 不要把止血带绑在颈部、躯干或关节上。
+  completion_check:
+  - 伤口不再持续出血；敷料没有继续快速浸透；急救或转运已启动。
+  tools:
+  - 手套
+  - 敷料
+  - 止血带
+  keywords:
+  - 止血
+  - 大出血
+  - tourniquet
+  source_refs:
+  - SRC-RC-FIRSTAID
+  - SRC-RC-BLEEDING
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: MED-002
+  title: 成人无呼吸：心肺复苏与AED
+  category: MED
+  priority: critical
+  quick_access: true
+  trigger: 成人无反应，且不呼吸或只有濒死喘息。
+  immediate_actions:
+  - 让他人呼叫急救并取AED。
+  - 把患者仰卧放在坚硬平面。
+  - 立即开始胸外按压。
+  steps:
+  - 双手重叠放在胸骨下半部中央。
+  - 肩膀位于双手正上方，肘部伸直。
+  - 按压频率每分钟100至120次，深度至少5厘米，每次让胸廓完全回弹。
+  - 受过训练时按30次按压、2次人工呼吸循环；不会吹气时持续按压。
+  - AED到达后开机，贴电极并完全按语音提示操作。
+  alternatives:
+  - 只有一人时，先用手机免提呼叫急救，再开始按压。
+  stop_or_escalate:
+  - 恢复正常呼吸、专业人员接手、现场变得不安全或施救者无法继续时停止。
+  do_not:
+  - 不要在软床上按压。
+  - AED分析或放电时不要接触患者。
+  - 不要因检查脉搏长时间中断按压。
+  completion_check:
+  - 按压持续进行；AED已接入；中断尽量少于10秒。
+  tools:
+  - AED
+  keywords:
+  - CPR
+  - AED
+  - 心肺复苏
+  source_refs:
+  - SRC-RC-CPR
+  - SRC-RC-CPR-GUIDE
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: MED-003
+  title: 成人或儿童窒息
+  category: MED
+  priority: critical
+  quick_access: true
+  trigger: 患者无法咳嗽、说话或呼吸，发不出声音或皮肤发青。
+  immediate_actions:
+  - 立即呼叫急救。
+  - 站在患者侧后方。
+  - 给予5次肩胛骨之间的背部拍击。
+  steps:
+  - 5次背部拍击无效时，站到身后。
+  - 双手在肚脐上方、胸骨下方做5次向内向上的腹部冲击。
+  - 交替进行5次背部拍击和5次腹部冲击。
+  - 患者失去反应时，小心放倒并开始心肺复苏；每次打开气道时只移除看得见的异物。
+  alternatives:
+  - 孕妇或腹部无法环抱者，改在胸骨下半部做胸部冲击。
+  stop_or_escalate:
+  - 异物排出后仍持续咳嗽、呼吸困难或胸腹疼痛时接受医疗评估。
+  do_not:
+  - 不要盲目用手指掏口腔。
+  - 患者还能有力咳嗽时不要拍背或冲击，让其继续咳嗽。
+  completion_check:
+  - 患者能正常呼吸、说话或有力咳嗽；或已转入CPR和AED流程。
+  tools: []
+  keywords:
+  - 窒息
+  - 噎住
+  - choking
+  source_refs:
+  - SRC-RC-CHOKING
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: MED-004
+  title: 热力烧伤初步处理
+  category: MED
+  priority: high
+  quick_access: true
+  trigger: 皮肤接触火焰、热液、蒸汽或高温物体。
+  immediate_actions:
+  - 脱离热源并确认现场安全。
+  - 取下未粘住皮肤的衣物、戒指和手表。
+  - 用干净凉流动水持续冷却至少15分钟。
+  steps:
+  - 大面积冷却时同时防止失温。
+  - 冷却后保持伤口清洁。
+  - 需要转运时用无粘性的干净敷料或保鲜膜松散覆盖。
+  alternatives:
+  - 无流动水时，用干净凉水浸湿的布反复更换。
+  stop_or_escalate:
+  - 面部、气道、手、脚、会阴、关节、环绕肢体、面积超过患者手掌，或电烧伤、化学烧伤时立即求助。
+  do_not:
+  - 不要用冰直接敷。
+  - 不要涂牙膏、油脂或药膏。
+  - 不要撕掉粘住皮肤的衣物。
+  - 不要挑破水疱。
+  completion_check:
+  - 烧伤区域已持续冷却；紧身物已移除；伤口已清洁覆盖或转运已启动。
+  tools:
+  - 清洁水
+  - 无粘敷料
+  keywords:
+  - 烧伤
+  - 烫伤
+  source_refs:
+  - SRC-RC-BURNS
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: MED-005
+  title: 疑似骨折与临时固定
+  category: MED
+  priority: high
+  quick_access: false
+  trigger: 肢体变形、剧痛、肿胀、无法活动、骨头外露或受伤时有断裂声。
+  immediate_actions:
+  - 让伤者停止移动受伤部位。
+  - 检查伤处远端的颜色、温度、感觉和活动。
+  - 开放伤口先覆盖并控制出血。
+  steps:
+  - 保持发现时姿势，不强行拉直。
+  - 只有必须移动或转运且会固定时，使用有软垫的硬板固定伤处上下两个关节。
+  - 固定带打在夹板上，不直接压伤口或骨突。
+  - 固定后再次检查远端循环和感觉。
+  alternatives:
+  - 没有夹板时，用木板、折叠硬纸板、登山杖或健侧肢体辅助固定。
+  stop_or_escalate:
+  - 头颈脊柱、骨盆、大腿骨损伤；远端发白发冷麻木；骨头外露；严重出血时立即求助。
+  do_not:
+  - 不要把外露骨头推回。
+  - 不要反复测试能否活动。
+  - 不要为了上夹板强行复位。
+  completion_check:
+  - 伤处不再移动；固定前后远端颜色、温度和感觉没有恶化；转运路线已确定。
+  tools:
+  - 夹板
+  - 软垫
+  - 固定带
+  keywords:
+  - 骨折
+  - 夹板
+  source_refs:
+  - SRC-RC-FRACTURE
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: MED-006
+  title: 高温不适与疑似热射病
+  category: MED
+  priority: critical
+  quick_access: true
+  trigger: 高温环境中出现头晕、无力、呕吐、无法站立；或出现意识异常、抽搐、昏迷。
+  immediate_actions:
+  - 立即移到阴凉通风处。
+  - 脱去多余衣物。
+  - 意识异常、抽搐或昏迷时立即呼叫急救并开始主动降温。
+  steps:
+  - 用凉水喷湿皮肤并持续扇风。
+  - 将冰袋或冷湿布放在颈部、腋窝和腹股沟。
+  - 清醒且能吞咽者小口补充含电解质饮料或水。
+  - 意识异常或呕吐者侧卧，不给口服液体。
+  alternatives:
+  - 没有冰袋时，用湿毛巾、浸水衣物和持续扇风。
+  stop_or_escalate:
+  - 降温10至15分钟无改善、无法站立、反复呕吐、意识变化、抽搐时立即转运。
+  do_not:
+  - 不要让意识异常者喝水。
+  - 不要让患者继续走动或劳动。
+  - 不要只靠退烧药处理。
+  completion_check:
+  - 患者转入凉爽环境；持续降温已开始；意识和呼吸被持续监测；急救已联系。
+  tools:
+  - 凉水
+  - 风扇
+  - 冷敷物
+  keywords:
+  - 中暑
+  - 热射病
+  - 热衰竭
+  source_refs:
+  - SRC-RC-HEAT
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: MED-007
+  title: 失温处理
+  category: MED
+  priority: critical
+  quick_access: true
+  trigger: 湿冷环境中持续发抖、动作迟缓、说话含糊、判断力下降，或停止发抖。
+  immediate_actions:
+  - 移到避风、干燥和较温暖处。
+  - 脱去湿衣并擦干身体。
+  - 用干燥衣物、毯子和防水层包裹，优先温暖躯干和头部。
+  steps:
+  - 让患者保持平卧并减少不必要移动。
+  - 热水袋或暖包先包布，再放在胸部、腋窝和腹股沟附近。
+  - 清醒且能吞咽者可小口喝温热无酒精、无咖啡因饮料。
+  - 持续检查呼吸和意识。
+  alternatives:
+  - 没有毯子时，用干衣、睡袋、塑料布和同伴体温分层保温。
+  stop_or_escalate:
+  - 意识异常、停止发抖、呼吸很慢、身体僵硬时立即求助并准备CPR。
+  do_not:
+  - 不要揉搓四肢。
+  - 不要直接接触高温热源。
+  - 不要饮酒。
+  - 不要让患者自行剧烈运动取暖。
+  completion_check:
+  - 湿衣已移除；躯干被持续保温；意识和呼吸稳定或转运已启动。
+  tools:
+  - 干衣
+  - 毯子
+  - 暖包
+  keywords:
+  - 失温
+  - 低体温
+  source_refs:
+  - SRC-RC-HYPOTHERMIA
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: MED-008
+  title: 动物咬伤与狂犬病暴露
+  category: MED
+  priority: high
+  quick_access: true
+  trigger: 被陌生、流浪或野生哺乳动物咬伤、抓伤，或唾液接触破损皮肤、眼口鼻。
+  immediate_actions:
+  - 先远离动物并控制严重出血。
+  - 立即用大量肥皂和流动水清洗伤口15分钟。
+  - 尽快前往医疗机构评估狂犬病和破伤风处置。
+  steps:
+  - 清洗后用干净敷料覆盖。
+  - 记录动物种类、外观、行为、地点和时间。
+  - 宠物咬伤时索要疫苗记录；不要自行捕捉野生动物。
+  alternatives:
+  - 没有流动水时，用充足清洁水持续冲洗并反复使用肥皂。
+  stop_or_escalate:
+  - 伤口深、位于头颈手部、出血不停、动物行为异常、蝙蝠接触或无法确认动物状态时立即就医。
+  do_not:
+  - 不要用嘴吸伤口。
+  - 不要自行缝合或封闭深咬伤。
+  - 不要等待出现症状后再处理。
+  completion_check:
+  - 伤口已冲洗15分钟；暴露信息已记录；医疗评估已启动。
+  tools:
+  - 肥皂
+  - 清洁水
+  - 敷料
+  keywords:
+  - 咬伤
+  - 抓伤
+  - 狂犬病
+  source_refs:
+  - SRC-RC-BITE
+  - SRC-CDC-RABIES
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: WAT-001
+  title: 紧急情况下选择水源
+  category: WAT
+  priority: high
+  quick_access: false
+  trigger: 现有自来水被通知不安全、断水，或只能寻找替代水源。
+  immediate_actions:
+  - 优先使用未开封瓶装水。
+  - 其次使用确认未污染的热水器储水或由安全水制成的冰。
+  - 无法确认安全的水一律按污染水处理。
+  steps:
+  - 避开洪水、工业排放、油膜、异味、异常颜色、动物尸体附近和农药化肥区域。
+  - 取水点尽量选上游、流动水段，并远离营地和排泄区。
+  - 取水后先沉淀过滤，再煮沸或消毒。
+  alternatives:
+  - 雨水可作为待处理水收集，但必须使用干净容器并再次消毒。
+  stop_or_escalate:
+  - 怀疑化学、燃油、重金属或放射性污染时，煮沸无效，必须更换水源。
+  do_not:
+  - 不要饮用暖气锅炉、汽车散热器、泳池或消防系统中的水。
+  - 不要仅凭清澈和无味判断安全。
+  completion_check:
+  - 水源风险已判断；容器已标记“未处理”；后续处理方法已确定。
+  tools:
+  - 干净容器
+  keywords:
+  - 水源
+  - 取水
+  source_refs:
+  - SRC-CDC-WATER
+  - SRC-CDC-WATER-SAFETY
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: WAT-002
+  title: 浑浊水沉淀与预过滤
+  category: WAT
+  priority: normal
+  quick_access: false
+  trigger: 水中有泥沙、悬浮物或明显浑浊，需要在消毒前处理。
+  immediate_actions:
+  - 将水装入干净容器静置，直到大颗粒下沉。
+  - 缓慢倒出上层水，不搅动沉淀。
+  - 用多层干净布、咖啡滤纸或滤芯过滤。
+  steps:
+  - 过滤材料由粗到细排列。
+  - 过滤后如果仍浑浊，再次沉淀和过滤。
+  - 完成预过滤后必须继续煮沸或化学消毒。
+  alternatives:
+  - 没有滤材时，先延长沉淀时间，再从表层缓慢取水。
+  stop_or_escalate:
+  - 出现油膜、溶剂味、化学味、异常泡沫时停止处理并弃用水源。
+  do_not:
+  - 不要把过滤当作消毒。
+  - 不要让脏手、脏杯接触处理后的水。
+  completion_check:
+  - 肉眼可见颗粒明显减少；处理水转入已清洁的容器；下一步消毒已开始。
+  tools:
+  - 容器
+  - 布或滤纸
+  keywords:
+  - 浑浊水
+  - 过滤
+  source_refs:
+  - SRC-CDC-WATER
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: WAT-003
+  title: 饮水煮沸消毒
+  category: WAT
+  priority: high
+  quick_access: true
+  trigger: 水源可能含病原体，且有锅具和热源。
+  immediate_actions:
+  - 先对浑浊水沉淀和过滤。
+  - 加热至持续翻滚沸腾。
+  - 保持翻滚沸腾至少1分钟。
+  steps:
+  - 高海拔或无法确认海拔时可延长至3分钟。
+  - 关火后加盖自然冷却。
+  - 倒入清洁带盖容器并标记处理时间。
+  alternatives:
+  - 没有锅盖时，冷却期间用干净布覆盖，避免灰尘和昆虫。
+  stop_or_escalate:
+  - 闻到燃油、溶剂、农药或其他化学味时停止使用。
+  do_not:
+  - 不要用刚处理好的水加入未经处理的冰。
+  - 不要用脏勺、手或杯口接触储水内部。
+  completion_check:
+  - 水完成规定沸腾时间；冷却过程受保护；容器密封并标记。
+  tools:
+  - 锅
+  - 热源
+  - 带盖容器
+  keywords:
+  - 煮沸
+  - 饮水
+  source_refs:
+  - SRC-CDC-WATER-SAFETY
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: WAT-004
+  title: 无香含氯漂白剂消毒饮水
+  category: WAT
+  priority: high
+  quick_access: true
+  trigger: 无法煮沸，且有标签标明含5%至9%次氯酸钠的无香普通液体漂白剂。
+  immediate_actions:
+  - 先沉淀并过滤浑浊水。
+  - 确认漂白剂无香、无清洁添加剂、未过期。
+  - 每3.8升清水加入8滴；浑浊水加入16滴。
+  steps:
+  - 充分搅匀。
+  - 静置至少30分钟。
+  - 水应有轻微氯味；没有氯味时重复同样剂量，再等15分钟。
+  - 处理后密封保存。
+  alternatives:
+  - 滴管缺失时先用量具校准，不凭感觉倾倒。
+  stop_or_escalate:
+  - 漂白剂浓度不在5%至9%、有香味、含增稠剂或其他添加剂时不要使用。
+  do_not:
+  - 不要把漂白剂与酸、氨或其他清洁剂混合。
+  - 不要用粉状、片状泳池氯直接按本卡剂量处理。
+  completion_check:
+  - 剂量和等待时间已完成；水有轻微氯味；容器已密封标记。
+  tools:
+  - 无香漂白剂
+  - 滴管
+  - 容器
+  keywords:
+  - 漂白剂
+  - 消毒水
+  source_refs:
+  - SRC-CDC-WATER-SAFETY
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: FOD-001
+  title: 停电后的冰箱与冷冻食物
+  category: FOD
+  priority: high
+  quick_access: false
+  trigger: 冰箱或冷冻柜断电。
+  immediate_actions:
+  - 立即停止频繁开门。
+  - 记录停电开始时间。
+  - 准备冰块、保冷箱和温度计。
+  steps:
+  - 冰箱门未开时，易腐食物约可维持4小时。
+  - 断电超过4小时，将易腐食物转入能保持4摄氏度以下的保冷箱；无法保持时丢弃。
+  - 满载冷冻柜约维持48小时，半满约24小时。
+  - 恢复供电后，仍有冰晶或温度不高于4摄氏度的冷冻食物可继续使用或再次冷冻。
+  alternatives:
+  - 没有温度计且无法确认时间时，对肉、蛋、奶、熟食和剩菜采取丢弃策略。
+  stop_or_escalate:
+  - 食物出现异味、黏液、胀包，或易腐食物高于4摄氏度超过2小时，丢弃。
+  do_not:
+  - 不要尝味判断安全。
+  - 不要把食物放在室外雪地，避免温度波动和动物污染。
+  completion_check:
+  - 断电时间已记录；保留和丢弃食物已分开；冷藏区恢复到4摄氏度以下。
+  tools:
+  - 温度计
+  - 保冷箱
+  - 冰块
+  keywords:
+  - 停电
+  - 冰箱
+  - 食物
+  source_refs:
+  - SRC-USDA-FOOD
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: FOD-002
+  title: 洪水或火灾后食物处理
+  category: FOD
+  priority: high
+  quick_access: false
+  trigger: 食物接触洪水、污水、烟气、灭火剂或高温。
+  immediate_actions:
+  - 把接触洪水或污水的食物与安全食物隔离。
+  - 丢弃纸盒、塑料袋、旋盖瓶和其他非密封包装食物。
+  - 靠近火灾并受烟气或灭火剂影响的食物全部丢弃。
+  steps:
+  - 未损坏的全金属罐和商业软罐可按官方消毒流程处理后保留。
+  - 清洁储存区前戴手套和防水鞋。
+  - 处理结束后洗手并清洁工具。
+  alternatives:
+  - 无法确认包装是否密封时按污染处理。
+  stop_or_escalate:
+  - 罐体鼓包、泄漏、严重凹陷、锈穿或受高温变形时立即丢弃。
+  do_not:
+  - 不要尝味。
+  - 不要只擦拭外包装后继续食用。
+  - 不要把污染食物喂给动物。
+  completion_check:
+  - 污染食物已封袋隔离；安全食物转移到清洁区域；接触面已清洁。
+  tools:
+  - 手套
+  - 垃圾袋
+  keywords:
+  - 洪水
+  - 火灾
+  - 食物污染
+  source_refs:
+  - SRC-USDA-FOOD
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: FOD-003
+  title: 生熟食物交叉污染控制
+  category: FOD
+  priority: normal
+  quick_access: false
+  trigger: 同时处理生肉、生蛋和即食食物。
+  immediate_actions:
+  - 先处理即食食物，再处理生食。
+  - 生熟使用不同刀具、砧板和容器。
+  - 接触生食后用肥皂洗手至少20秒。
+  steps:
+  - 生食放在密闭容器并置于熟食下方。
+  - 台面和工具用清洁剂清洗后再消毒。
+  - 不具备清洗条件时，使用一次性垫材和独立工具。
+  alternatives:
+  - 工具不足时，先完成熟食处理并封存，再彻底清洁工具后处理生食。
+  stop_or_escalate:
+  - 出现生肉汁滴到熟食、饮水或餐具上时，被污染物品不得直接食用。
+  do_not:
+  - 不要用处理生肉的盘子盛熟食。
+  - 不要用同一块脏布反复擦拭所有区域。
+  completion_check:
+  - 生熟区域分开；手和工具已清洁；即食食物已覆盖。
+  tools:
+  - 肥皂
+  - 独立容器
+  keywords:
+  - 生熟分开
+  - 交叉污染
+  source_refs:
+  - SRC-USDA-FOOD
+  - SRC-CDC-HYGIENE
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: FIR-001
+  title: 室内起火与烟雾撤离
+  category: FIR
+  priority: critical
+  quick_access: true
+  trigger: 室内出现无法立即控制的火焰、浓烟或高温。
+  immediate_actions:
+  - 立即呼喊示警并启动撤离。
+  - 贴近地面移动，避开烟层。
+  - 使用最近的安全出口，不返回取物。
+  steps:
+  - 开门前用手背触摸门和把手；发热时不要开启，改走其他出口。
+  - 通过门后随手关门，减缓火烟蔓延。
+  - 到室外指定集合点清点人员并呼叫消防。
+  alternatives:
+  - 出口被堵时进入有外窗房间，关门、封堵门缝、在窗口发出求救信号。
+  stop_or_escalate:
+  - 衣物着火时立即停下、躺倒、翻滚压灭。
+  - 有人失联时把最后位置告诉消防人员，不自行返回。
+  do_not:
+  - 不要乘电梯。
+  - 不要在浓烟中站立行走。
+  - 不要打开明显发热的门。
+  completion_check:
+  - 所有人员到集合点；人数已清点；消防已联系；无人返回建筑。
+  tools: []
+  keywords:
+  - 火灾
+  - 烟雾
+  - 撤离
+  source_refs:
+  - SRC-READY
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: FIR-002
+  title: 营火彻底熄灭
+  category: FIR
+  priority: high
+  quick_access: false
+  trigger: 准备离开营火、睡觉或风力增大。
+  immediate_actions:
+  - 停止加柴并摊开余烬。
+  - 缓慢浇水直到停止嘶响。
+  - 用工具搅拌灰烬和炭块。
+  steps:
+  - 再次浇水并翻动所有炭块。
+  - 手背靠近灰烬上方检查热量，不直接触摸。
+  - 仍有热量、烟或红光时继续浇水搅拌。
+  alternatives:
+  - 水不足时使用大量湿土或砂覆盖、搅拌，再检查热量；这不是首选。
+  stop_or_escalate:
+  - 无法完全熄灭或风将火星带走时立即求助并清理周围可燃物。
+  do_not:
+  - 不要把灰烬直接埋住后离开。
+  - 不要把燃烧木炭倒入垃圾桶。
+  completion_check:
+  - 无烟、无红光、无可感热量；周围无飞散火星；工具已收回。
+  tools:
+  - 水
+  - 铲子
+  keywords:
+  - 营火
+  - 灭火
+  source_refs:
+  - SRC-NPS-CAMP
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: FIR-003
+  title: 疑似一氧化碳中毒
+  category: FIR
+  priority: critical
+  quick_access: true
+  trigger: 室内或半封闭空间使用燃烧设备后，多人出现头痛、头晕、恶心、乏力、胸痛或意识混乱。
+  immediate_actions:
+  - 立即让所有人撤到室外新鲜空气处。
+  - 在安全位置呼叫急救和消防。
+  - 能安全做到时关闭燃烧设备；不要返回污染空间。
+  steps:
+  - 检查呼吸和意识。
+  - 无正常呼吸时开始CPR并使用AED。
+  - 保持患者休息，等待专业救援。
+  - 让救援人员知道使用了发电机、炭火、炉具或发动机。
+  alternatives:
+  - 没有通信时，派未暴露人员到安全处求助，其他人留在上风向。
+  stop_or_escalate:
+  - 任何意识变化、胸痛、呼吸困难、孕妇或多人同时不适都按紧急情况处理。
+  do_not:
+  - 不要依靠开窗后继续留在室内。
+  - 不要自行驾车运送意识异常患者。
+  - 不要再次启动设备。
+  completion_check:
+  - 人员全部离开污染区；急救已联系；污染空间保持无人进入。
+  tools:
+  - CO报警器
+  keywords:
+  - 一氧化碳
+  - 发电机
+  - 炭火
+  source_refs:
+  - SRC-CDC-CO
+  - SRC-CDC-POWER
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: FIR-004
+  title: 淋湿后快速保温
+  category: FIR
+  priority: high
+  quick_access: false
+  trigger: 衣物被雨雪或落水浸湿，环境有风或低温。
+  immediate_actions:
+  - 立即离开风口和水边。
+  - 脱去湿衣并擦干身体。
+  - 穿上干燥内层、中层和防风防水外层。
+  steps:
+  - 优先保护头、颈、胸腹和腹股沟。
+  - 坐卧在隔热垫上，不直接接触冷地。
+  - 喝温热饮料仅限清醒且能吞咽者。
+  - 持续观察是否出现发抖减弱、迟钝或说话含糊。
+  alternatives:
+  - 没有干衣时，先用塑料布挡风，再用睡袋、毯子或同伴衣物包裹。
+  stop_or_escalate:
+  - 出现意识异常、停止发抖或行动能力下降时转入失温卡并立即求助。
+  do_not:
+  - 不要穿着湿衣继续赶路。
+  - 不要饮酒。
+  - 不要直接贴近明火烘烤皮肤。
+  completion_check:
+  - 湿衣已移除；身体与地面隔热；风雨被阻挡；意识保持正常。
+  tools:
+  - 干衣
+  - 防水层
+  - 隔热垫
+  keywords:
+  - 湿冷
+  - 保温
+  source_refs:
+  - SRC-RC-HYPOTHERMIA
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: HYG-001
+  title: 应急条件下洗手
+  category: HYG
+  priority: high
+  quick_access: false
+  trigger: 如厕后、处理伤口前、做饭前、接触生食或垃圾后。
+  immediate_actions:
+  - 用安全水打湿双手。
+  - 涂肥皂并搓洗至少20秒。
+  - 用安全水冲净并自然风干或用干净材料擦干。
+  steps:
+  - 搓洗手心、手背、指缝、拇指、指尖和手腕。
+  - 没有安全自来水时，用煮沸或消毒后的水。
+  alternatives:
+  - 没有肥皂和水时，使用酒精含量至少60%的免洗手消毒剂；手明显脏污时仍应尽快用水和肥皂清洗。
+  stop_or_escalate:
+  - 接触污水、呕吐物、粪便或伤口后，手部有破损时加强防护并更换手套。
+  do_not:
+  - 不要多人共用脏毛巾。
+  - 不要用未经处理的污染水冲洗伤口或餐具。
+  completion_check:
+  - 所有关键部位已搓洗20秒；手已完全冲净并干燥。
+  tools:
+  - 肥皂
+  - 安全水
+  keywords:
+  - 洗手
+  - 卫生
+  source_refs:
+  - SRC-CDC-HYGIENE
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: HYG-002
+  title: 无厕所时处理排泄物
+  category: HYG
+  priority: high
+  quick_access: false
+  trigger: 没有可用厕所，且必须临时处理排泄物。
+  immediate_actions:
+  - 优先使用便携式厕所或排泄物袋并密封带走。
+  - 无法带走且当地允许掩埋时，选择距水源、营地和道路至少60米的位置。
+  - 挖约15至20厘米深的小坑。
+  steps:
+  - 排泄后完全回填并恢复表面。
+  - 厕纸和卫生用品装袋带走。
+  - 在厕所区设置洗手点和明显标记。
+  alternatives:
+  - 硬地、雪地、高海拔、洪水区或人员密集区应使用密封袋带走，不掩埋。
+  stop_or_escalate:
+  - 地下水浅、附近有水源、洪水可能淹没或当地禁止掩埋时，必须改用密封收集。
+  do_not:
+  - 不要在河流、沟渠、道路或营地附近排泄。
+  - 不要把厕纸和卫生用品留在地表。
+  completion_check:
+  - 排泄物已密封带走或按条件正确掩埋；洗手点可用；区域有标记。
+  tools:
+  - 铲子
+  - 密封袋
+  - 肥皂
+  keywords:
+  - 厕所
+  - 排泄物
+  source_refs:
+  - SRC-NPS-WASTE
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: HYG-003
+  title: 接触污水后的清理
+  category: HYG
+  priority: high
+  quick_access: false
+  trigger: 房间、营地或物品接触污水、粪便或洪水。
+  immediate_actions:
+  - 限制人员进入污染区。
+  - 穿防水靴、橡胶手套和护目镜。
+  - 先移除固体污染物，再进行清洗和消毒。
+  steps:
+  - 开放伤口先用防水敷料覆盖。
+  - 清洁工具与生活工具分开。
+  - 工作结束后脱下污染装备，洗手并清洗可重复装备。
+  - 污染食物、药品和吸水材料按废弃处理。
+  alternatives:
+  - 没有专业装备时，使用厚垃圾袋临时包覆鞋和小腿，但移动时防滑。
+  stop_or_escalate:
+  - 出现皮肤红肿、流脓、发热、腹泻或眼部接触后不适时就医。
+  do_not:
+  - 不要赤脚进入。
+  - 不要把漂白剂与酸或氨混合。
+  - 不要在封闭空间大量使用清洁剂。
+  completion_check:
+  - 污染区已隔离；人员完成清洁；污染物被密封；工具分区存放。
+  tools:
+  - 防水靴
+  - 橡胶手套
+  - 护目镜
+  keywords:
+  - 污水
+  - 清洁
+  source_refs:
+  - SRC-CDC-HYGIENE
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: REP-001
+  title: 发现管路漏水
+  category: REP
+  priority: high
+  quick_access: false
+  trigger: 管道、接头或容器持续漏水，可能损坏设备或污染物资。
+  immediate_actions:
+  - 关闭上游阀门或水泵。
+  - 切断附近电源。
+  - 把物资和电子设备移出积水区。
+  steps:
+  - 擦干漏点并确认具体位置。
+  - 低压小裂缝可用橡胶片覆盖后用卡箍或绳带压紧。
+  - 接头松动时在无压力状态下重新紧固。
+  - 放置接水容器并持续观察。
+  alternatives:
+  - 没有卡箍时，用自行车内胎或厚橡胶片加多圈强力胶带临时压紧。
+  stop_or_escalate:
+  - 裂缝扩大、管路变形、热水或化学液体泄漏时停止临修并隔离区域。
+  do_not:
+  - 不要在带压状态拆接头。
+  - 不要让水流入配电箱、插座或电池。
+  completion_check:
+  - 上游已关闭；漏量明显降低或停止；临修点无继续扩张；后续正式维修已标记。
+  tools:
+  - 橡胶片
+  - 卡箍
+  - 接水容器
+  keywords:
+  - 漏水
+  - 管道
+  source_refs: []
+  review:
+    status: engineering_draft
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: REP-002
+  title: 电源线或接头破损
+  category: REP
+  priority: critical
+  quick_access: false
+  trigger: 导线绝缘破损、接头松动、打火、发热或有焦味。
+  immediate_actions:
+  - 立即关闭设备并断开电源。
+  - 拔掉电池或上游保险。
+  - 隔离并标记故障线缆。
+  steps:
+  - 确认无电后检查线芯是否断裂、腐蚀或烧黑。
+  - 只允许对低压系统做临时修复。
+  - 剪除烧损部分，使用匹配电流的压接端子或焊接恢复连接。
+  - 使用热缩管或多层绝缘材料覆盖，并做应力释放。
+  alternatives:
+  - 没有合格接头时保持停用，不用扭线加胶带代替承载连接。
+  stop_or_escalate:
+  - 涉及市电、高压、电池主回路、进水或持续发热时停止操作并由专业人员处理。
+  do_not:
+  - 不要带电维修。
+  - 不要用裸铜线替代保险丝。
+  - 不要把不同线径随意并联。
+  completion_check:
+  - 连接无裸露；拉动不松脱；通电5分钟无发热、焦味或电压异常。
+  tools:
+  - 万用表
+  - 压接端子
+  - 热缩管
+  keywords:
+  - 电线
+  - 接头
+  - 短路
+  source_refs: []
+  review:
+    status: engineering_draft
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: REP-003
+  title: 帐篷或防水布撕裂
+  category: REP
+  priority: normal
+  quick_access: false
+  trigger: 帐篷外帐、防水布或遮蔽物被划破，雨风可能进入。
+  immediate_actions:
+  - 先降低受力：松开附近拉绳或增加临时支撑。
+  - 擦干并清洁破口周围。
+  - 从内外两侧覆盖补片。
+  steps:
+  - 补片每边至少超过裂口3厘米。
+  - 圆化补片四角，减少再次翘起。
+  - 沿受力方向增加胶带或缝线。
+  - 修好后重新张紧，避免破口位于最高受力点。
+  alternatives:
+  - 没有补片时，用塑料袋、雨衣或备用布覆盖，再用胶带和绳线固定。
+  stop_or_escalate:
+  - 主支撑点断裂、结构可能倒塌或强风继续增大时撤到更安全庇护点。
+  do_not:
+  - 不要在表面潮湿、泥污时直接贴胶。
+  - 不要把裂口拉紧后只贴单面胶带。
+  completion_check:
+  - 补片边缘完全贴合；喷水测试无明显渗漏；张紧后裂口不继续扩大。
+  tools:
+  - 补片
+  - 胶带
+  - 针线
+  keywords:
+  - 帐篷
+  - 防水布
+  source_refs: []
+  review:
+    status: field_test_required
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: ENR-001
+  title: 锂电池异常发热或鼓胀
+  category: ENR
+  priority: critical
+  quick_access: true
+  trigger: 电池明显发热、鼓胀、异味、冒烟、漏液或充电异常。
+  immediate_actions:
+  - 立即停止充电和使用。
+  - 能安全断电时切断电源。
+  - 疏散人员并移开周围可燃物。
+  steps:
+  - 不要触碰鼓胀或冒烟电芯。
+  - 设备未起火且可安全移动时，移到室外空旷不可燃地面。
+  - 出现冒烟、喷气或火焰时立即远离并呼叫消防。
+  - 冷却后隔离，不再使用。
+  alternatives:
+  - 无法安全移动时，关闭房门、撤离并等待消防。
+  stop_or_escalate:
+  - 火焰、连续喷气、多个电芯连锁发热、室内烟雾增加时立即撤离。
+  do_not:
+  - 不要刺穿、挤压或拆解。
+  - 不要放入普通垃圾。
+  - 不要重新充电测试。
+  completion_check:
+  - 电源已断；人员已撤到安全距离；电池被隔离并安排专业回收。
+  tools:
+  - 灭火器
+  - 不可燃隔离区
+  keywords:
+  - 电池
+  - 鼓包
+  - 热失控
+  source_refs:
+  - SRC-OSHA-BATTERY
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: ENR-002
+  title: 太阳能系统无输出
+  category: ENR
+  priority: normal
+  quick_access: false
+  trigger: 光照正常，但控制器无输入或无法给电池充电。
+  immediate_actions:
+  - 关闭负载。
+  - 检查控制器和电池是否有过温、异味或鼓胀。
+  - 确认面板无遮挡并朝向光源。
+  steps:
+  - 检查MC4或其他接头是否松脱、接反、进水或烧蚀。
+  - 用万用表测量面板开路电压。
+  - 面板电压正常时检查控制器输入端，再检查电池端。
+  - 逐段恢复连接，每接一段观察电压和温升。
+  alternatives:
+  - 没有万用表时，先更换已知正常线缆或控制器，逐段排除，但不要短接面板。
+  stop_or_escalate:
+  - 接头烧黑、线缆发热、电池异常或电压超过设备额定值时停止。
+  do_not:
+  - 不要在强光下带电插拔大电流接头。
+  - 不要直接把面板接到不兼容电池。
+  completion_check:
+  - 输入电压稳定；控制器开始充电；接头连续运行10分钟无发热。
+  tools:
+  - 万用表
+  keywords:
+  - 太阳能
+  - 无输出
+  source_refs: []
+  review:
+    status: field_test_required
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: ENR-003
+  title: 保险丝反复熔断
+  category: ENR
+  priority: high
+  quick_access: false
+  trigger: 更换保险丝后再次熔断或设备一上电就断电。
+  immediate_actions:
+  - 关闭电源并断开电池。
+  - 不要再次换更大规格保险丝。
+  - 检查线缆破损、接反、进水和焦痕。
+  steps:
+  - 断开所有负载。
+  - 装回原规格保险丝后逐个接入负载。
+  - 接入某一路后再次熔断，保持该路断开并检查短路或过载。
+  - 测量负载电流并与保险丝及线径额定值比较。
+  alternatives:
+  - 没有测量工具时，保持故障支路停用，不进行试错式反复通电。
+  stop_or_escalate:
+  - 主线烧蚀、持续冒烟、无法识别回路或涉及市电时停止并交专业人员。
+  do_not:
+  - 不要用金属丝、铝箔或更大保险丝代替。
+  - 不要绕过保险丝直接供电。
+  completion_check:
+  - 故障支路已隔离；原规格保险丝保持正常；线缆无异常发热。
+  tools:
+  - 原规格保险丝
+  - 万用表
+  keywords:
+  - 保险丝
+  - 短路
+  source_refs: []
+  review:
+    status: engineering_draft
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: NAV-001
+  title: 发现迷路或路线不确定
+  category: NAV
+  priority: high
+  quick_access: true
+  trigger: 无法确认当前位置、路线与地图不符，或连续两个参照物无法对应。
+  immediate_actions:
+  - 立即停止继续前进。
+  - 回到最后一个确定位置；无法安全回退时原地停留。
+  - 记录当前时间、最后可靠位置和大致行进方向。
+  steps:
+  - 检查地图朝向、坐标系和比例尺。
+  - 用道路、河流、山脊、建筑和太阳方向至少两个参照物交叉定位。
+  - 发送位置和计划给外部联系人。
+  - 天黑、恶劣天气或有人受伤时优先建立庇护，不盲目赶路。
+  alternatives:
+  - 无信号时在安全开阔处尝试通信；不要为找信号进入悬崖、激流或未知区域。
+  stop_or_escalate:
+  - 剩余水、体温、伤情或天气开始威胁安全时立即转入求救和庇护流程。
+  do_not:
+  - 不要凭感觉持续走。
+  - 不要把估算坐标当作精确位置。
+  - 不要让队伍分散寻找路线。
+  completion_check:
+  - 队伍已停下并清点；最后可靠位置已记录；下一步是原地等待、回退或明确路线之一。
+  tools:
+  - 地图
+  - 指南针
+  keywords:
+  - 迷路
+  - 定位
+  source_refs:
+  - SRC-NPS-CAMP
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: NAV-002
+  title: 记录和传递坐标
+  category: NAV
+  priority: normal
+  quick_access: false
+  trigger: 需要保存位置或向他人报告坐标。
+  immediate_actions:
+  - 确认坐标系，优先使用WGS-84。
+  - 统一按“纬度在前、经度在后”记录。
+  - 同时记录时间和定位精度。
+  steps:
+  - 保留至少小数点后5位。
+  - 检查经纬度范围和正负号。
+  - 在离线地图上目视确认点位没有落入明显错误区域。
+  - 语音传递时分组慢读，并让对方复述。
+  alternatives:
+  - 无法获得GNSS时，明确标记为“估算位置”，并附道路、地标和方向。
+  stop_or_escalate:
+  - 坐标落入海上、其他国家或远离实际区域时停止发送并重新检查顺序与符号。
+  do_not:
+  - 不要省略坐标系。
+  - 不要混用度分秒和十进制度而不标记。
+  completion_check:
+  - 坐标系、数值、时间、精度和复述确认全部完成。
+  tools:
+  - GNSS或地图
+  keywords:
+  - 坐标
+  - WGS84
+  source_refs: []
+  review:
+    status: field_test_required
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: NAV-003
+  title: 无线电紧急联络格式
+  category: NAV
+  priority: high
+  quick_access: false
+  trigger: 需要用LoRa、对讲机或其他低带宽信道求助。
+  immediate_actions:
+  - 先说被呼叫对象，再说自己的呼号。
+  - 报告位置、事件、人数和最紧急需求。
+  - 发送后要求对方复述关键内容。
+  steps:
+  - 格式：对象—身份—位置—情况—人数—需求—下次联络时间。
+  - 坐标分组慢读两遍。
+  - 每次只传一个重点，避免长篇叙述。
+  - 无回应时按固定间隔重试，并保留电量。
+  alternatives:
+  - 不能发坐标时，报告道路、地标、方向、距离和最后已知位置。
+  stop_or_escalate:
+  - 伤情恶化、位置变化或撤离计划改变时立即更新。
+  do_not:
+  - 不要占用信道反复闲聊。
+  - 不要只说“出事了”而不报位置和人数。
+  completion_check:
+  - 对方已复述位置和需求；下一次联络时间已明确；日志已记录。
+  tools:
+  - 无线电
+  keywords:
+  - 求救
+  - 对讲机
+  - LoRa
+  source_refs: []
+  review:
+    status: field_test_required
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: SHL-001
+  title: 快速选择临时庇护点
+  category: SHL
+  priority: high
+  quick_access: false
+  trigger: 需要在数小时内避雨、避风、保温或等待救援。
+  immediate_actions:
+  - 先避开洪水沟、河道、落石坡、枯树、孤立高点和电线。
+  - 选择地势略高、排水良好、背风但可通风的位置。
+  - 确认至少两条撤离路线。
+  steps:
+  - 睡眠区与烹饪区分开。
+  - 燃烧设备放在庇护外并远离门窗进风口。
+  - 铺设隔热层，把人员与湿冷地面隔开。
+  - 把水、急救、照明和通信放在伸手可及处。
+  alternatives:
+  - 建筑物受损时，只使用结构完整、无燃气味、无积水触电风险的区域。
+  stop_or_escalate:
+  - 水位上升、山体有落石声、树木持续倾斜、出现烟气或CO报警时立即转移。
+  do_not:
+  - 不要在干涸河床、桥下排水道或独立大树下扎营。
+  - 不要在睡眠区使用炭火或发电机。
+  completion_check:
+  - 位置无明显次生灾害；排水和通风可用；撤离路线明确；人员与地面隔热。
+  tools:
+  - 防水布
+  - 隔热垫
+  keywords:
+  - 庇护
+  - 营地
+  source_refs:
+  - SRC-READY
+  - SRC-CDC-POWER
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: SHL-002
+  title: 决定留守还是撤离
+  category: SHL
+  priority: high
+  quick_access: true
+  trigger: 当前地点出现火、水、结构、治安或资源风险，需要决定是否离开。
+  immediate_actions:
+  - 列出当前地点的立即威胁。
+  - 确认目的地、路线、交通和到达后的资源。
+  - 计算队伍最慢成员所需时间。
+  steps:
+  - 满足以下任一条件优先撤离：威胁持续扩大；建筑不安全；官方发布撤离；医疗需求无法满足；水和空气受污染。
+  - 撤离前只带关键物资：水、药、保温、照明、通信、证件。
+  - 向外部联系人报告路线和预计到达时间。
+  alternatives:
+  - 没有可靠目的地和路线时，先改善当前庇护并持续监测，不因焦虑盲目移动。
+  stop_or_escalate:
+  - 路线被阻断、天气恶化、队伍无法维持体温或有人伤情加重时重新评估并停止推进。
+  do_not:
+  - 不要让队伍分散。
+  - 不要为了非关键物资延误撤离。
+  - 不要在夜间进入未侦察路线，除非当前地点更危险。
+  completion_check:
+  - 留守或撤离决定已明确；所有人知道路线、集合点和失散方案。
+  tools:
+  - 地图
+  - 撤离包
+  keywords:
+  - 撤离
+  - 留守
+  source_refs:
+  - SRC-READY
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: SHL-003
+  title: 夜间转移队伍
+  category: SHL
+  priority: high
+  quick_access: false
+  trigger: 必须在黑暗中移动，且等待天亮风险更高。
+  immediate_actions:
+  - 确认每人照明、电量和保温。
+  - 安排领队和收尾人员。
+  - 所有人两两结伴并完成清点。
+  steps:
+  - 降低速度，队伍间距保持可见或可触达。
+  - 每个路口、跨水点和障碍后重新清点。
+  - 只走已知路线，避开河岸、悬崖和倒塌建筑。
+  - 每30分钟检查体温、伤情和电量。
+  alternatives:
+  - 照明不足时使用反光标记或短绳保持队形，但不要把人员硬绑在一起。
+  stop_or_escalate:
+  - 失去队员、路线不明、照明不足或天气突然恶化时立即停止并建立临时庇护。
+  do_not:
+  - 不要单独前出侦察超过可视距离。
+  - 不要戴耳机。
+  - 不要为赶时间缩短清点流程。
+  completion_check:
+  - 全员到达检查点；人数、伤情和装备已记录；下一段路线确认。
+  tools:
+  - 头灯
+  - 备用电池
+  keywords:
+  - 夜间
+  - 转移
+  source_refs: []
+  review:
+    status: field_test_required
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: ANM-001
+  title: 营地食物与气味防动物管理
+  category: ANM
+  priority: high
+  quick_access: false
+  trigger: 在野外或动物活动区域建立营地。
+  immediate_actions:
+  - 睡眠区内不存放食物、垃圾、宠物食物和有气味用品。
+  - 食物和垃圾立即密封。
+  - 烹饪区、储食区与睡眠区分开。
+  steps:
+  - 优先使用防动物容器或固定储物箱。
+  - 没有箱体时按当地规则悬挂食物，并远离睡眠区。
+  - 饭后立即清理残渣、锅具和地面。
+  - 垃圾和包装按食物同等管理。
+  alternatives:
+  - 可把锅盖或金属器皿放在储物箱上作为声音报警，但不能代替可靠密封。
+  stop_or_escalate:
+  - 动物反复接近、储物被破坏或营地位于明显兽道时迁移营地。
+  do_not:
+  - 不要把食物放在帐篷。
+  - 不要燃烧或掩埋厨余。
+  - 不要投喂动物。
+  completion_check:
+  - 睡眠区无气味物品；所有食物垃圾已密封；烹饪区地面无残渣。
+  tools:
+  - 密封容器
+  keywords:
+  - 防兽
+  - 食物储存
+  source_refs:
+  - SRC-NPS-FOOD
+  - SRC-NPS-CAMP
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: ANM-002
+  title: 遭遇野猪逼近
+  category: ANM
+  priority: critical
+  quick_access: true
+  trigger: 野猪近距离盯视、低头、跺脚、发出威吓声或开始逼近。
+  immediate_actions:
+  - 不要转身奔跑。
+  - 缓慢向侧后方退开。
+  - 移动到大树、车辆、巨石或建筑物后方。
+  steps:
+  - 始终让坚固障碍物位于人与野猪之间。
+  - 不要堵住野猪和幼崽的退路。
+  - 有稳固高处时迅速进入。
+  - 发生冲撞时绕障碍移动；无处可躲时用背包或硬物保护腹部和大腿。
+  alternatives:
+  - 没有坚固障碍时，保持正面观察并沿开阔方向缓慢退离。
+  stop_or_escalate:
+  - 动物持续逼近、出现多只、附近有幼崽或有人受伤时立即撤离并求助。
+  do_not:
+  - 不要靠近幼崽。
+  - 不要追赶或投掷食物。
+  - 不要倒地装死作为首选。
+  completion_check:
+  - 野猪离开视线后等待至少10分钟；确认无同伴后沿相反方向撤离。
+  tools:
+  - 背包或硬质屏障
+  keywords:
+  - 野猪
+  - 动物攻击
+  source_refs: []
+  review:
+    status: field_test_required
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: ANM-003
+  title: 遭遇流浪犬或犬群
+  category: ANM
+  priority: critical
+  quick_access: true
+  trigger: 陌生犬持续靠近、包围、低吼、露齿或追逐。
+  immediate_actions:
+  - 停止奔跑，身体侧向站立。
+  - 避免直盯犬眼，但持续观察。
+  - 用低沉坚定声音命令后退。
+  steps:
+  - 缓慢后退到门、车辆、围栏或高处。
+  - 把背包、自行车或木板放在身体与犬之间。
+  - 犬扑来时保持屏障在前，不用手脚主动伸向犬口。
+  - 倒地时蜷缩，双手保护头颈，面部朝下。
+  alternatives:
+  - 没有屏障时，用外套缠住前臂仅作最后防护，并持续向安全处撤离。
+  stop_or_escalate:
+  - 被咬破皮肤、犬只行为异常或无法脱离包围时立即求助并转入咬伤卡。
+  do_not:
+  - 不要尖叫奔跑。
+  - 不要挥舞食物诱导犬群。
+  - 不要把儿童留在队伍边缘。
+  completion_check:
+  - 人员进入封闭安全区；犬群不再接近；伤口已检查和处理。
+  tools:
+  - 背包
+  - 硬质屏障
+  keywords:
+  - 狗
+  - 犬群
+  source_refs:
+  - SRC-RC-BITE
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: ANM-004
+  title: 发现蛇或发生蛇咬
+  category: ANM
+  priority: critical
+  quick_access: true
+  trigger: 近距离发现蛇，或疑似被蛇咬。
+  immediate_actions:
+  - 未被咬时停止靠近，给蛇留出逃离路线，缓慢后退。
+  - 被咬后立即离开蛇的攻击距离并保持安静。
+  - 呼叫急救并减少伤肢活动。
+  steps:
+  - 取下伤肢上的戒指、手表和紧身物。
+  - 让伤者平卧，伤肢保持自然位置并简单固定。
+  - 记录咬伤时间和肿胀边界变化。
+  - 尽快转运，不捕捉蛇；安全时可远距离拍照。
+  alternatives:
+  - 没有夹板时，用衣物和直板限制大幅移动，但不绑紧。
+  stop_or_escalate:
+  - 出现呼吸困难、意识变化、快速肿胀、持续呕吐或严重出血时按危急情况处理。
+  do_not:
+  - 不要切开、吸吮、电击或冰敷。
+  - 不要使用止血带。
+  - 不要让伤者跑动。
+  completion_check:
+  - 伤者保持安静；紧身物已移除；时间和肿胀已记录；转运已启动。
+  tools:
+  - 标记笔
+  - 简易固定材料
+  keywords:
+  - 蛇
+  - 蛇咬
+  source_refs:
+  - SRC-RC-FIRSTAID
+  review:
+    status: source_reviewed
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: ANM-005
+  title: 营地非伤害声音预警线
+  category: ANM
+  priority: normal
+  quick_access: false
+  trigger: 需要在夜间提前发现动物或人员接近营地。
+  immediate_actions:
+  - 选择营地外围动物可能进入的通道。
+  - 确保预警线不会穿过公共道路和人员主要通道。
+  - 准备绳线、金属罐和石子。
+  steps:
+  - 把绳线设置在离地20至35厘米。
+  - 每隔3至5米悬挂一个装有少量石子的金属罐。
+  - 人员通道处留断口并做反光标记。
+  - 天黑前逐段测试，确认营地内能听见。
+  - 天亮后解除或重新标记。
+  alternatives:
+  - 没有金属罐时，用铃铛、硬塑料瓶和小石子替代。
+  stop_or_escalate:
+  - 线绳可能绊倒儿童、救援人员或牲畜时立即拆除。
+  do_not:
+  - 不得连接刀刃、尖刺、套索、弹射物或通电装置。
+  - 不得设置无人知晓的隐藏机关。
+  completion_check:
+  - 任意一段被轻触时能发出清晰声音；人员通道安全；所有成员知道位置。
+  tools:
+  - 绳线
+  - 金属罐
+  - 石子
+  keywords:
+  - 预警线
+  - 营地警戒
+  source_refs: []
+  review:
+    status: field_test_required
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: ORG-001
+  title: 队伍结伴与人员清点
+  category: ORG
+  priority: high
+  quick_access: false
+  trigger: 队伍开始移动、到达节点、遇到危险或准备休息。
+  immediate_actions:
+  - 两人一组结伴，明确彼此负责。
+  - 指定领队和收尾。
+  - 按姓名或编号完成清点。
+  steps:
+  - 出发前记录人数、目的地和预计到达时间。
+  - 每个路口、障碍、休息点和事件后重新清点。
+  - 任何人离队必须报告去向、路线和返回时间。
+  - 发现失联立即停止全队前进。
+  alternatives:
+  - 人数较多时按小组清点，再由组长汇总。
+  stop_or_escalate:
+  - 人员失联、有人无法跟上或通信中断时停止移动并启动最后已知位置搜索流程。
+  do_not:
+  - 不要让体弱者走在队尾无人照看。
+  - 不要以“应该跟上了”代替实际清点。
+  completion_check:
+  - 人数与名单一致；结伴关系明确；领队和收尾均已确认。
+  tools:
+  - 人员名单
+  keywords:
+  - 清点
+  - 结伴
+  source_refs: []
+  review:
+    status: field_test_required
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: ORG-002
+  title: 值守交接
+  category: ORG
+  priority: normal
+  quick_access: false
+  trigger: 营地、设备、伤员或通信需要轮班值守。
+  immediate_actions:
+  - 下一班到位后再交班。
+  - 口头报告人员、设备、风险和待办。
+  - 双方共同检查关键物资和报警状态。
+  steps:
+  - 固定格式记录：时间、天气、人员、设备状态、异常、已采取措施、下一次检查时间。
+  - 明确谁拥有决定权和紧急联系方法。
+  - 交班人离开前，让接班人复述关键风险。
+  alternatives:
+  - 没有纸笔时，用终端日志或语音记录，并由接班人确认。
+  stop_or_escalate:
+  - 发现伤情变化、设备过热、火源异常、动物接近或通信中断时，不等交班时间，立即处理和报告。
+  do_not:
+  - 不要只说“一切正常”。
+  - 不要在接班人未到位时离岗。
+  completion_check:
+  - 接班人已复述风险；记录完整；下一次检查时间明确。
+  tools:
+  - 日志
+  keywords:
+  - 交接
+  - 值守
+  source_refs: []
+  review:
+    status: field_test_required
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。
+- id: ORG-003
+  title: 事件现场简短记录
+  category: ORG
+  priority: normal
+  quick_access: false
+  trigger: 发生伤情、设备故障、位置变化或资源消耗。
+  immediate_actions:
+  - 立即记录时间。
+  - 记录地点或坐标。
+  - 记录发生了什么和已经做了什么。
+  steps:
+  - 使用固定格式：时间—位置—人员—事件—动作—结果—下一步。
+  - 数字、药物、止血带时间、坐标和电量单独核对。
+  - 每次状态变化追加新记录，不覆盖旧记录。
+  alternatives:
+  - 无法打字时先录音，恢复条件后转成文字。
+  stop_or_escalate:
+  - 记录与实际状态冲突时，以现场重新确认结果为准，并保留更正记录。
+  do_not:
+  - 不要依赖记忆延后补写。
+  - 不要删除错误记录，应追加更正。
+  completion_check:
+  - 记录包含时间、位置、动作和结果；下一位接手者能据此继续。
+  tools:
+  - 终端日志
+  keywords:
+  - 记录
+  - 事件日志
+  source_refs: []
+  review:
+    status: field_test_required
+    last_reviewed: '2026-07-31'
+    notes: 上线前需完成中文措辞复核与实机分页检查。

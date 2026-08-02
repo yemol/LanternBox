@@ -6,6 +6,15 @@
 #include "FT02_PbfMapUI.h"
 #include "FT02_PbfMapRuntime.h"
 #include "FT02_HelpUI.h"
+#include "FT02_KnowledgeUI.h"
+#include "FT02_FieldManual.h"
+#include "FT02_Gnss.h"
+#include "FT02_LocationRecorder.h"
+#include "FT02_LocationRecorderUI.h"
+#include "FT02_GlobalCJKFontData.h"
+#include "FT02_GlobalCJKBoldFontData.h"
+#include "FT02_GlobalCJK20FontData.h"
+#include "FT02_FontPackRenderer.h"
 #include "FT02_PageState.h"
 #include "FT02_HomeCards.h"
 #include "FT02_InputManager.h"
@@ -13,6 +22,7 @@
 #include "FT02_Storage.h"
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 
 constexpr int EPD_PWR  = 18;
 constexpr int EPD_BUSY = 3;
@@ -25,8 +35,8 @@ constexpr uint32_t EPD_SPI_HZ = 4000000UL;
 
 SPIClass g_ft02EpdSpi(HSPI);
 
-constexpr int CARDKB_SDA = 4;
-constexpr int CARDKB_SCL = 5;
+constexpr int CARDKB_SDA = 47;
+constexpr int CARDKB_SCL = 21;
 constexpr uint8_t CARDKB_ADDR = 0x5F;
 
 FT02Display display(
@@ -55,8 +65,16 @@ static int g_ft02HomeSelectedCard = 0;
 static FT02PageState g_ft02PageState = FT02_PAGE_HOME;
 static FT02PageState g_ft02PageBeforeHelp = FT02_PAGE_HOME;
 static bool g_ft02RuntimeBannerPrinted = false;
+static uint32_t g_ft02RecorderLastUiGeneration = 0;
+static uint32_t g_ft02RecorderLastGnssGeneration = 0;
+static uint32_t g_ft02RecorderLastScreenRefreshMs = 0;
+static char g_ft02LastGnssStatusLine1[16] = "";
+static char g_ft02LastGnssStatusLine2[16] = "";
 
 static void FT02_RedrawCurrentPage();
+static void FT02_ReinitializeEpdFullMode(const char* source);
+static void FT02_DrawKnowledgeAfterCleanTransition(const char* source);
+static void FT02_SyncGnssStatusBar(bool allowPartialRefresh);
 
 static int FT02_MonthFromBuildString(const char* mon)
 {
@@ -170,6 +188,25 @@ static FT02DateTime FT02_CurrentDateTime()
     return dt;
 }
 
+static void FT02_UpdateClockCacheOnly()
+{
+    FT02DateTime now = FT02_CurrentDateTime();
+
+    char hhmm[6];
+    char mmdd[6];
+
+    snprintf(hhmm, sizeof(hhmm), "%02d:%02d", now.hour, now.minute);
+    snprintf(mmdd, sizeof(mmdd), "%02d/%02d", now.month, now.day);
+
+    FT02_SetStatusBarClockCache(hhmm, mmdd);
+    g_ft02LastShownMinute = now.hour * 60 + now.minute;
+
+    Serial.print("Clock cache: ");
+    Serial.print(hhmm);
+    Serial.print(" ");
+    Serial.println(mmdd);
+}
+
 static void FT02_UpdateClockIfNeeded(bool force)
 {
     FT02DateTime now = FT02_CurrentDateTime();
@@ -177,6 +214,18 @@ static void FT02_UpdateClockIfNeeded(bool force)
 
     if(!force && minuteKey == g_ft02LastShownMinute)
     {
+        return;
+    }
+
+    // Knowledge pages are deliberately kept free of status-bar partial
+    // refreshes. A partial update before the next full knowledge frame can
+    // leave the SSD1677/GDEQ0426T82 controller in a state that makes fixed
+    // horizontal regions appear pale. Cache the new time only; the next
+    // knowledge full-frame commit will draw it together with the page.
+    if(g_ft02PageState == FT02_PAGE_KNOWLEDGE)
+    {
+        FT02_UpdateClockCacheOnly();
+        Serial.println("[EPD] static-page clock cache updated; partial refresh suppressed");
         return;
     }
 
@@ -214,6 +263,66 @@ static void FT02_UpdateClockIfNeeded(bool force)
 }
 
 
+
+static void FT02_SyncGnssStatusBar(bool allowPartialRefresh)
+{
+    const FT02GnssSnapshot snapshot = FT02_GnssSnapshotCurrent();
+
+    const char* line1 = "GPS";
+    const char* line2 = "连接中";
+
+    if(snapshot.communicationActive)
+    {
+        if(snapshot.fixValid)
+        {
+            if(snapshot.fixType >= 3) line2 = "3D定位";
+            else if(snapshot.fixType == 2) line2 = "2D定位";
+            else line2 = "已定位";
+        }
+        else
+        {
+            line2 = "搜索中";
+        }
+    }
+    else if(snapshot.nmeaSeen && snapshot.lastSentenceAgeMs > 5000)
+    {
+        line2 = "通讯超时";
+    }
+    else if(snapshot.serialDataSeen && !snapshot.nmeaSeen)
+    {
+        line2 = "数据异常";
+    }
+    else if(snapshot.startAgeMs >= 3000)
+    {
+        line2 = "无数据";
+    }
+
+    const bool changed =
+        strcmp(g_ft02LastGnssStatusLine1, line1) != 0 ||
+        strcmp(g_ft02LastGnssStatusLine2, line2) != 0;
+
+    FT02_SetStatusBarGnssCache(line1, line2);
+
+    if(!changed) return;
+
+    snprintf(g_ft02LastGnssStatusLine1, sizeof(g_ft02LastGnssStatusLine1), "%s", line1);
+    snprintf(g_ft02LastGnssStatusLine2, sizeof(g_ft02LastGnssStatusLine2), "%s", line2);
+
+    Serial.print("GNSS status cache: ");
+    Serial.print(line1);
+    Serial.print(" / ");
+    Serial.println(line2);
+
+    // Knowledge pages must not receive status-bar partial updates because that
+    // can reintroduce the pale-band controller state. The GNSS page already
+    // performs a full page refresh for meaningful GNSS state changes.
+    if(allowPartialRefresh &&
+       g_ft02PageState != FT02_PAGE_KNOWLEDGE &&
+       g_ft02PageState != FT02_PAGE_LOCATION_RECORDER)
+    {
+        FT02_DrawStatusBarGnss(display, line1, line2);
+    }
+}
 
 static void FT02_RefreshStorageStatusCache()
 {
@@ -270,37 +379,94 @@ static void FT02_PrintRuntimeBannerIfNeeded()
 
     g_ft02RuntimeBannerPrinted = true;
 
-    Serial.print("FT-02 runtime alive: v2.30 PBF Map UI A3.13 SPI40, ");
+    Serial.print("FT-02 runtime alive: v2.55 Location Recorder A2 + FieldManualRuntime + PBF Map UI A3.13 SPI40, ");
     Serial.print(FT02_StorageProfileText());
-    Serial.println(", Help restored, CardKB2 SDA=4 SCL=5");
+    Serial.println(", Help restored, CardKB2 SDA=47 SCL=21");
     Serial.flush();
+}
+
+static void FT02_ReinitializeEpdFullMode(const char* source)
+{
+    Serial.print("[EPD] clean full-mode reinit begin source=");
+    Serial.println(source != nullptr ? source : "unknown");
+
+    // End any previous display lifecycle, then hard-cycle only the e-paper
+    // power rail. This is the sequence proven by v2.44 to clear the stale
+    // partial-update/LUT state that caused one horizontal Card band to fade.
+    display.epd2.powerOff();
+    delay(30);
+
+    digitalWrite(EPD_PWR, LOW);
+    delay(160);
+    digitalWrite(EPD_PWR, HIGH);
+    delay(160);
+
+    digitalWrite(EPD_RST, HIGH);
+    digitalWrite(EPD_DC, LOW);
+    digitalWrite(EPD_CS, HIGH);
+    delay(30);
+
+    display.init(
+        115200,
+        true,
+        10,
+        false,
+        g_ft02EpdSpi,
+        SPISettings(EPD_SPI_HZ, MSBFIRST, SPI_MODE0)
+    );
+    display.setRotation(2);
+
+    Serial.println("[EPD] clean full-mode reinit complete");
+}
+
+static void FT02_DrawKnowledgeAfterCleanTransition(const char* source)
+{
+    // v2.48: keep the controller power-cycle/full-mode reinitialization that
+    // eliminated the pale-band issue, but do not submit a separate visible
+    // white frame. The final knowledge page is the first and only refresh.
+    FT02_ReinitializeEpdFullMode(source);
+    FT02_UpdateClockCacheOnly();
+    FT02_SyncGnssStatusBar(false);
+    Serial.println("[EPD] single-refresh entry: drawing final knowledge frame");
+    FT02_DrawKnowledgeScreen(display);
 }
 
 static void FT02_RedrawCurrentPage()
 {
+    // Prime the full-page status bar with live clock text before drawing.
+    // This keeps each page transition to one hardware transaction.
+    FT02_UpdateClockCacheOnly();
+    FT02_SyncGnssStatusBar(false);
+
     if(g_ft02PageState == FT02_PAGE_MAP)
     {
         // Map rendering owns only Y=76..479. The top status bar remains in
         // place, so pan/zoom never re-queries or refreshes SD information.
         FT02_DrawPbfMapScreen(display);
-        // Map READY now uses a full-window refresh, so restore the live clock
-        // immediately instead of leaving the status bar at its boot placeholder.
-        FT02_UpdateClockIfNeeded(true);
         return;
     }
 
-    if(g_ft02PageState == FT02_PAGE_HELP)
+    if(g_ft02PageState == FT02_PAGE_LOCATION_RECORDER)
+    {
+        FT02_DrawLocationRecorderScreen(
+            display,
+            FT02_GnssSnapshotCurrent(),
+            FT02_LocationRecorderSnapshotCurrent()
+        );
+    }
+    else if(g_ft02PageState == FT02_PAGE_HELP)
     {
         FT02_DrawHelpScreen(display);
+    }
+    else if(g_ft02PageState == FT02_PAGE_KNOWLEDGE)
+    {
+        FT02_DrawKnowledgeScreen(display);
     }
     else
     {
         FT02_DrawHomeScreen(display, g_ft02HomeSelectedCard);
     }
 
-    // Home/help are full-page renders. Restore only the live clock; storage
-    // text is already drawn from the cached status-bar value.
-    FT02_UpdateClockIfNeeded(true);
 }
 
 static void FT02_OpenHelpPage()
@@ -327,6 +493,9 @@ static void FT02_ReturnHomePage()
         return;
     }
 
+    const bool returningFromKnowledge =
+        g_ft02PageState == FT02_PAGE_KNOWLEDGE;
+
     if(g_ft02PageState == FT02_PAGE_MAP)
     {
         FT02_PbfMapUnload();
@@ -335,6 +504,20 @@ static void FT02_ReturnHomePage()
     FT02_RefreshStorageStatusCache();
     g_ft02PageState = FT02_PAGE_HOME;
     Serial.println("Page: current -> HOME");
+
+    if(returningFromKnowledge)
+    {
+        // v2.48: use the same proven clean-controller transition as knowledge
+        // entry, but submit the final home page as the first and only frame.
+        // This preserves the pale-band fix without a separate white refresh.
+        FT02_ReinitializeEpdFullMode("knowledge-exit-home");
+        FT02_UpdateClockCacheOnly();
+        FT02_SyncGnssStatusBar(false);
+        Serial.println("[EPD] single-refresh exit: drawing final home frame");
+        FT02_DrawHomeScreen(display, g_ft02HomeSelectedCard);
+        return;
+    }
+
     FT02_RedrawCurrentPage();
 }
 
@@ -349,6 +532,12 @@ static void FT02_ReturnFromHelpPage()
 
     Serial.print("Page: HELP -> ");
     Serial.println((int)g_ft02PageState);
+
+    if(g_ft02PageState == FT02_PAGE_KNOWLEDGE)
+    {
+        FT02_DrawKnowledgeAfterCleanTransition("help-return-knowledge");
+        return;
+    }
 
     FT02_RedrawCurrentPage();
 }
@@ -381,6 +570,41 @@ static void FT02_OpenMapPage()
     g_ft02PageState = FT02_PAGE_MAP;
     Serial.println("Page: HOME -> DIRECT PBF MAP A3.13");
     FT02_RunDirectPbfMap(false, true);
+}
+
+static void FT02_OpenLocationRecorderPage()
+{
+    if(g_ft02PageState == FT02_PAGE_LOCATION_RECORDER)
+    {
+        return;
+    }
+
+    g_ft02PageState = FT02_PAGE_LOCATION_RECORDER;
+    const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+    const FT02LocationRecorderSnapshot recorder = FT02_LocationRecorderSnapshotCurrent();
+    g_ft02RecorderLastGnssGeneration = gnss.uiGeneration;
+    g_ft02RecorderLastUiGeneration = recorder.uiGeneration;
+    g_ft02RecorderLastScreenRefreshMs = millis();
+    Serial.println("Page: HOME -> LOCATION RECORDER A3 RX39 TX38 38400");
+    FT02_RedrawCurrentPage();
+}
+
+
+static void FT02_OpenKnowledgePage()
+{
+    if(g_ft02PageState == FT02_PAGE_KNOWLEDGE)
+    {
+        return;
+    }
+
+    FT02_KnowledgeReset();
+    g_ft02PageState = FT02_PAGE_KNOWLEDGE;
+    Serial.println("Page: HOME -> FIELD MANUAL RUNTIME A1 v2.58");
+
+    // v2.48 optimization: preserve the proven controller power-cycle and
+    // full-mode reinitialization, then submit the final knowledge page as the
+    // first frame. This removes the separate visible white refresh.
+    FT02_DrawKnowledgeAfterCleanTransition("home-enter-knowledge");
 }
 
 static bool FT02_HandleHomeInput(
@@ -426,9 +650,21 @@ static bool FT02_HandleHomeInput(
         Serial.print("Home card select: ");
         Serial.println(g_ft02HomeSelectedCard);
 
+        if(g_ft02HomeSelectedCard == 0)
+        {
+            FT02_OpenKnowledgePage();
+            return true;
+        }
+
         if(g_ft02HomeSelectedCard == 1)
         {
             FT02_OpenMapPage();
+            return true;
+        }
+
+        if(g_ft02HomeSelectedCard == 3)
+        {
+            FT02_OpenLocationRecorderPage();
             return true;
         }
 
@@ -562,7 +798,11 @@ static bool FT02_HandleMapInput(
         }
         if(raw == 'r' || raw == 'R')
         {
-            FT02_RunDirectPbfMap(true, false);
+            // Recenter can trigger a cache lookup or a first-time regional
+            // cache build. Draw the existing LOADING state before that work
+            // starts so the e-paper screen never appears frozen.
+            Serial.println("[MAP-A3.13] R recenter requested; showing loading hint before map build");
+            FT02_RunDirectPbfMap(true, true);
             return true;
         }
         if(raw == 'f' || raw == 'F')
@@ -571,6 +811,108 @@ static bool FT02_HandleMapInput(
             FT02_RunDirectPbfMap(false, true);
             return true;
         }
+    }
+
+    return false;
+}
+
+static bool FT02_HandleLocationRecorderInput(
+    const FT02InputEvent& event
+)
+{
+    if(event.key == FT02_KEY_BACK)
+    {
+        // Leaving the recorder page must not terminate an active journey.
+        // FT02_LocationRecorderPoll() runs from the global main loop, so the
+        // session, elapsed time and automatic track points continue in the
+        // background while the user visits Home, Map or Knowledge pages.
+        const FT02LocationRecorderSnapshot recorder =
+            FT02_LocationRecorderSnapshotCurrent();
+        Serial.printf(
+            "[RECORDER] leave page; session=%s background=%s auto=%s points=%lu\n",
+            recorder.sessionActive ? recorder.sessionId : "--",
+            recorder.sessionActive ? "continue" : "idle",
+            recorder.autoTrackEnabled ? "on" : "off",
+            (unsigned long)recorder.pointCount
+        );
+        FT02_ReturnHomePage();
+        return true;
+    }
+
+    if(event.key == FT02_KEY_HELP)
+    {
+        FT02_OpenHelpPage();
+        return true;
+    }
+
+    bool handled = false;
+
+    if(event.key == FT02_KEY_SELECT)
+    {
+        FT02_LocationRecorderToggleSession();
+        handled = true;
+    }
+    else if(event.key == FT02_KEY_CHAR)
+    {
+        const char raw = event.raw;
+        if(raw == 'p' || raw == 'P')
+        {
+            FT02_LocationRecorderRecordManualPoint();
+            handled = true;
+        }
+        else if(raw == 'a' || raw == 'A')
+        {
+            FT02_LocationRecorderToggleAutoTrack();
+            handled = true;
+        }
+        else if(raw == 'r' || raw == 'R')
+        {
+            FT02_GnssReconnect();
+            handled = true;
+        }
+    }
+
+    if(handled)
+    {
+        const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+        const FT02LocationRecorderSnapshot recorder = FT02_LocationRecorderSnapshotCurrent();
+        g_ft02RecorderLastGnssGeneration = gnss.uiGeneration;
+        g_ft02RecorderLastUiGeneration = recorder.uiGeneration;
+        g_ft02RecorderLastScreenRefreshMs = millis();
+        FT02_DrawLocationRecorderMiddlePartial(display, gnss, recorder);
+        return true;
+    }
+
+    return false;
+}
+
+
+static bool FT02_HandleKnowledgeInput(
+    const FT02InputEvent& event
+)
+{
+    if(event.key == FT02_KEY_HELP)
+    {
+        FT02_OpenHelpPage();
+        return true;
+    }
+
+    const FT02KnowledgeAction action = FT02_HandleKnowledgeInput(
+        display,
+        event
+    );
+
+    if(action == FT02_KNOWLEDGE_ACTION_EXIT_HOME)
+    {
+        FT02_ReturnHomePage();
+        return true;
+    }
+
+    if(event.key != FT02_KEY_NONE)
+    {
+        // Knowledge UI already committed the current page, including the live
+        // cached clock. Do not issue a second status-bar refresh here.
+        return true;
     }
 
     return false;
@@ -590,6 +932,16 @@ static bool FT02_HandleInput(
         return FT02_HandleMapInput(event);
     }
 
+    if(g_ft02PageState == FT02_PAGE_KNOWLEDGE)
+    {
+        return FT02_HandleKnowledgeInput(event);
+    }
+
+    if(g_ft02PageState == FT02_PAGE_LOCATION_RECORDER)
+    {
+        return FT02_HandleLocationRecorderInput(event);
+    }
+
     return FT02_HandleHomeInput(event);
 }
 
@@ -598,7 +950,7 @@ void setup()
     Serial.begin(115200);
     delay(2000);
 
-    Serial.print("FT-02 v2.30 PBF Map UI A3.13 SPI40 ");
+    Serial.print("FT-02 v2.58 Optimized 20px Font Location Recorder A3 FieldManualRuntime PBF Map UI A3.13 SPI40 ");
     Serial.print(FT02_StorageProfileText());
     Serial.println(" Start");
 
@@ -611,16 +963,52 @@ void setup()
     Serial.print(" psram_free=");
     Serial.println(ESP.getFreePsram());
 
+    const bool fontSelfTest =
+        FT02_HasGlyphPack(ft02_cjk_24r, 0x58F3) && // 壳
+        FT02_HasGlyphPack(ft02_cjk_24r, 0x77E5) && // 知
+        FT02_HasGlyphPack(ft02_cjk_24r, 0x8BC6) && // 识
+        FT02_HasGlyphPack(ft02_cjk_24r, 0x5E93);   // 库
+    Serial.print("[FONT] global_cjk_24r glyphs=");
+    Serial.print(FT02_CJK_24R_GLYPH_COUNT);
+    Serial.print(" self_test=");
+    Serial.println(fontSelfTest ? "PASS" : "FAIL");
+
+    const bool smallFontSelfTest =
+        FT02_HasGlyphPack(ft02_cjk_20r, 0x8BF4) && // 说
+        FT02_HasGlyphPack(ft02_cjk_20r, 0x660E) && // 明
+        FT02_HasGlyphPack(ft02_cjk_20r, 0x6458) && // 摘
+        FT02_HasGlyphPack(ft02_cjk_20r, 0x8981);   // 要
+    Serial.print("[FONT] global_cjk_20r glyphs=");
+    Serial.print(FT02_CJK_20R_GLYPH_COUNT);
+    Serial.print(" self_test=");
+    Serial.println(smallFontSelfTest ? "PASS" : "FAIL");
+
+
+    const bool boldFontSelfTest =
+        FT02_HasGlyphPack(ft02_cjk_24b, 0x58F3) && // 壳
+        FT02_HasGlyphPack(ft02_cjk_24b, 0x77E5) && // 知
+        FT02_HasGlyphPack(ft02_cjk_24b, 0x8BC6) && // 识
+        FT02_HasGlyphPack(ft02_cjk_24b, 0x5E93);   // 库
+    Serial.print("[FONT] global_cjk_24b glyphs=");
+    Serial.print(FT02_CJK_24B_GLYPH_COUNT);
+    Serial.print(" self_test=");
+    Serial.println(boldFontSelfTest ? "PASS" : "FAIL");
+
     FT02_InputBegin(
         CARDKB_SDA,
         CARDKB_SCL,
         CARDKB_ADDR
     );
 
-    Serial.println("FT02 InputManager ready: fixed pins SDA=4 SCL=5, D=UP, Z=LEFT, X=DOWN, C=RIGHT");
+    Serial.println("FT02 InputManager ready: fixed pins SDA=47 SCL=21, D=UP, Z=LEFT, X=DOWN, C=RIGHT");
+
+    FT02_GnssBegin();
+    FT02_SyncGnssStatusBar(false);
 
     FT02_StorageBegin();
     FT02_RefreshStorageStatusCache();
+    FT02_LocationRecorderBegin();
+    FT02_FieldManualBegin(true);
 
     pinMode(EPD_CS, OUTPUT);
     pinMode(EPD_RST, OUTPUT);
@@ -648,17 +1036,16 @@ void setup()
     );
     display.setRotation(2);
 
+    g_ft02BootDateTime = FT02_ReadBuildDateTime();
+    g_ft02BootMillis = millis();
+    FT02_UpdateClockCacheOnly();
+
     FT02_DrawHomeScreen(
         display,
         g_ft02HomeSelectedCard
     );
 
-    g_ft02BootDateTime = FT02_ReadBuildDateTime();
-    g_ft02BootMillis = millis();
-
-    FT02_UpdateClockIfNeeded(true);
-
-    Serial.print("FT-02 v2.30 PBF Map UI A3.13 SPI40 ");
+    Serial.print("FT-02 v2.58 Optimized 20px Font Location Recorder A3 FieldManualRuntime PBF Map UI A3.13 SPI40 ");
     Serial.print(FT02_StorageProfileText());
     Serial.println(" ready");
     Serial.flush();
@@ -667,6 +1054,32 @@ void setup()
 void loop()
 {
     FT02_PrintRuntimeBannerIfNeeded();
+    FT02_GnssPoll();
+    FT02_LocationRecorderPoll();
+    FT02_SyncGnssStatusBar(true);
+
+    if(g_ft02PageState == FT02_PAGE_LOCATION_RECORDER)
+    {
+        const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+        const FT02LocationRecorderSnapshot recorder = FT02_LocationRecorderSnapshotCurrent();
+        const uint32_t now = millis();
+
+        // Refresh only for meaningful recorder/GNSS changes and no more often
+        // than once every five seconds. Button actions still redraw immediately.
+        const bool changed =
+            gnss.uiGeneration != g_ft02RecorderLastGnssGeneration ||
+            recorder.uiGeneration != g_ft02RecorderLastUiGeneration;
+        const bool periodicRecorderTick = recorder.sessionActive;
+
+        if((changed || periodicRecorderTick) &&
+           now - g_ft02RecorderLastScreenRefreshMs >= 5000)
+        {
+            g_ft02RecorderLastGnssGeneration = gnss.uiGeneration;
+            g_ft02RecorderLastUiGeneration = recorder.uiGeneration;
+            g_ft02RecorderLastScreenRefreshMs = now;
+            FT02_DrawLocationRecorderMiddlePartial(display, gnss, recorder);
+        }
+    }
 
     // Real elapsed clock:
     // refreshes only when the displayed minute changes.

@@ -9,6 +9,12 @@ void FT02_DrawStatusBar(
     FT02Display& display
 );
 
+
+void FT02_SetStatusBarClockCache(
+    const char* hhmm,
+    const char* mmdd
+);
+
 void FT02_DrawStatusBarClock(
     FT02Display& display,
     const char* hhmm,
@@ -23,6 +29,17 @@ void FT02_SetStatusBarStorageCache(
 );
 
 void FT02_DrawStatusBarStorage(
+    FT02Display& display,
+    const char* line1,
+    const char* line2
+);
+
+void FT02_SetStatusBarGnssCache(
+    const char* line1,
+    const char* line2
+);
+
+void FT02_DrawStatusBarGnss(
     FT02Display& display,
     const char* line1,
     const char* line2

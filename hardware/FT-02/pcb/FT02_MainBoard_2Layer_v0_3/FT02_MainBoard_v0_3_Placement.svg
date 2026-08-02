@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+<style>
+.board{fill:#f8f8f8;stroke:#111;stroke-width:5}.blk{fill:#fff;stroke:#111;stroke-width:3}.m{fill:#dcecf6}.p{fill:#f7e7bd}.c{fill:#e4f0df}.s{fill:#eee3f5}
+.k{fill:none;stroke:#b00020;stroke-width:4;stroke-dasharray:12 8}.t{font:26px Arial,'Noto Sans CJK SC',sans-serif}.sm{font:20px Arial,'Noto Sans CJK SC',sans-serif}.h{font:bold 38px Arial,'Noto Sans CJK SC',sans-serif}
+</style>
+<text x="50" y="55" class="h">FT-02 主控载板 v0.3 顶层布局草案</text>
+<text x="50" y="90" class="sm">100 × 60 mm，2 层，器件仅顶层；底层尽量保持连续 GND。</text>
+<rect x="150" y="150" width="1000" height="600" rx="12" class="board"/>
+<circle cx="190" cy="190" r="16" class="blk"/><circle cx="1110" cy="190" r="16" class="blk"/>
+<circle cx="190" cy="710" r="16" class="blk"/><circle cx="1110" cy="710" r="16" class="blk"/>
+
+<rect x="160" y="180" width="180" height="250" rx="10" class="blk m"/>
+<text x="190" y="250" class="t">ESP32-S3</text><text x="190" y="290" class="sm">WROOM-1 N16R8</text>
+<rect x="145" y="150" width="170" height="170" class="k"/><text x="160" y="340" class="sm">天线伸出板边</text>
+
+<rect x="210" y="625" width="140" height="80" rx="10" class="blk p"/><text x="235" y="675" class="t">USB-C</text>
+<rect x="430" y="575" width="230" height="120" rx="10" class="blk p"/><text x="465" y="625" class="t">TPS62132</text><text x="465" y="660" class="sm">3.3V / 3A</text>
+<rect x="900" y="315" width="210" height="230" rx="10" class="blk s"/><text x="945" y="390" class="t">MicroSD</text><text x="945" y="430" class="sm">右侧插拔</text>
+
+<rect x="520" y="160" width="300" height="65" rx="10" class="blk c"/><text x="620" y="205" class="t">EPD 1×9</text>
+<rect x="920" y="170" width="190" height="65" rx="10" class="blk c"/><text x="955" y="215" class="t">GNSS 1×5</text>
+<rect x="1060" y="570" width="70" height="150" rx="10" class="blk c"/><text x="1078" y="625" class="sm">LoRa</text><text x="1075" y="655" class="sm">1×6</text>
+<rect x="600" y="690" width="210" height="45" rx="10" class="blk c"/><text x="650" y="722" class="sm">CardKB2 1×4</text>
+<rect x="720" y="585" width="160" height="70" rx="10" class="blk"/><text x="745" y="625" class="sm">扩展测试点</text>
+
+<text x="150" y="810" class="sm">正式布线前仍需锁定 USB-C、MicroSD、GNSS、LoRa 插头方向与外壳开孔。</text>
+</svg>

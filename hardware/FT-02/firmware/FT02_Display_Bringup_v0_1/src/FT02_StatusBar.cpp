@@ -1,16 +1,34 @@
 
 #include "FT02_StatusBar.h"
 #include "FT02_BatteryIconReplace2.h"
+#include "FT02_EpdLifecycle.h"
+#include "FT02_GlobalCJK20FontData.h"
 #include <string.h>
 #include <stdio.h>
 
 static char g_ft02StorageLine1[16] = "SD";
 static char g_ft02StorageLine2[16] = "INIT";
+static char g_ft02ClockHHMM[6] = "14:28";
+static char g_ft02ClockMMDD[6] = "05/20";
+static char g_ft02GnssLine1[16] = "GPS";
+static char g_ft02GnssLine2[16] = "连接中";
 
 void FT02_SetStatusBarStorageCache(const char* line1, const char* line2)
 {
     snprintf(g_ft02StorageLine1, sizeof(g_ft02StorageLine1), "%s", line1 != nullptr ? line1 : "SD");
     snprintf(g_ft02StorageLine2, sizeof(g_ft02StorageLine2), "%s", line2 != nullptr ? line2 : "INIT");
+}
+
+void FT02_SetStatusBarClockCache(const char* hhmm, const char* mmdd)
+{
+    snprintf(g_ft02ClockHHMM, sizeof(g_ft02ClockHHMM), "%s", hhmm != nullptr ? hhmm : "--:--");
+    snprintf(g_ft02ClockMMDD, sizeof(g_ft02ClockMMDD), "%s", mmdd != nullptr ? mmdd : "--/--");
+}
+
+void FT02_SetStatusBarGnssCache(const char* line1, const char* line2)
+{
+    snprintf(g_ft02GnssLine1, sizeof(g_ft02GnssLine1), "%s", line1 != nullptr ? line1 : "GPS");
+    snprintf(g_ft02GnssLine2, sizeof(g_ft02GnssLine2), "%s", line2 != nullptr ? line2 : "连接中");
 }
 
 static const int FT02_STATUS_LINE_Y = 73;
@@ -81,11 +99,12 @@ void FT02_DrawStatusBar(
         GxEPD_BLACK
     );
 
-    // Default boot display. Runtime clock/date will update this area afterward.
+    // Full-page renders use the live cached clock. This avoids an immediate
+    // second partial refresh after every page transition.
     FT02_DrawClockText(
         display,
-        "14:28",
-        "05/20"
+        g_ft02ClockHHMM,
+        g_ft02ClockMMDD
     );
 
     int blockStart = FT02_BLOCK_START_X;
@@ -144,15 +163,15 @@ void FT02_DrawStatusBar(
     FT02_DrawTextPack(
         display,
         ft02_status_22r,
-        "GPS",
+        g_ft02GnssLine1,
         blockStart + FT02_STATUS_TEXT_OFFSET_X,
         FT02_STATUS_TEXT_LINE1_Y
     );
 
     FT02_DrawTextPack(
         display,
-        ft02_status_22r,
-        "未定位",
+        ft02_cjk_20r,
+        g_ft02GnssLine2,
         blockStart + FT02_STATUS_TEXT_OFFSET_X,
         FT02_STATUS_TEXT_LINE2_Y
     );
@@ -216,6 +235,84 @@ void FT02_DrawStatusBar(
     );
 }
 
+
+static void FT02_DrawStatusGnssBlockContent(
+    FT02Display& display,
+    const char* line1,
+    const char* line2
+)
+{
+    const int blockStart = FT02_BLOCK_START_X + FT02_BLOCK_WIDTH;
+
+    FT02_DrawIconSize(
+        display,
+        ICON_STATUS_GPS,
+        blockStart + FT02_ICON_OFFSET_X,
+        FT02_ICON_Y,
+        FT02_ICON_SIZE,
+        false
+    );
+
+    FT02_DrawTextPack(
+        display,
+        ft02_status_22r,
+        line1,
+        blockStart + FT02_STATUS_TEXT_OFFSET_X,
+        FT02_STATUS_TEXT_LINE1_Y
+    );
+
+    FT02_DrawTextPack(
+        display,
+        ft02_cjk_20r,
+        line2,
+        blockStart + FT02_STATUS_TEXT_OFFSET_X,
+        FT02_STATUS_TEXT_LINE2_Y
+    );
+}
+
+void FT02_DrawStatusBarGnss(
+    FT02Display& display,
+    const char* line1,
+    const char* line2
+)
+{
+    FT02_SetStatusBarGnssCache(line1, line2);
+
+    static const int partialX = 362;
+    static const int partialY = 6;
+    static const int partialW = 160;
+    static const int partialH = 61;
+
+    display.setPartialWindow(partialX, partialY, partialW, partialH);
+    display.firstPage();
+
+    do
+    {
+        display.fillRect(partialX, partialY, partialW, partialH, GxEPD_WHITE);
+
+        display.drawLine(
+            FT02_BLOCK_START_X + FT02_BLOCK_WIDTH - 10,
+            FT02_STATUS_VLINE_TOP_Y,
+            FT02_BLOCK_START_X + FT02_BLOCK_WIDTH - 10,
+            FT02_STATUS_VLINE_BOTTOM_Y,
+            GxEPD_BLACK
+        );
+
+        display.drawLine(
+            FT02_BLOCK_START_X + FT02_BLOCK_WIDTH * 2 - 10,
+            FT02_STATUS_VLINE_TOP_Y,
+            FT02_BLOCK_START_X + FT02_BLOCK_WIDTH * 2 - 10,
+            FT02_STATUS_VLINE_BOTTOM_Y,
+            GxEPD_BLACK
+        );
+
+        FT02_DrawStatusGnssBlockContent(display, line1, line2);
+    }
+    while(display.nextPage());
+
+    display.setFullWindow();
+    FT02_EpdPowerOffAfterCommit(display, "status-gnss-partial");
+}
 
 static void FT02_DrawStatusStorageBlockContent(
     FT02Display& display,
@@ -307,6 +404,7 @@ void FT02_DrawStatusBarStorage(
     while(display.nextPage());
 
     display.setFullWindow();
+    FT02_EpdPowerOffAfterCommit(display, "status-storage-partial");
 }
 
 void FT02_DrawStatusBarClock(
@@ -315,6 +413,8 @@ void FT02_DrawStatusBarClock(
     const char* mmdd
 )
 {
+    FT02_SetStatusBarClockCache(hhmm, mmdd);
+
     display.setPartialWindow(
         FT02_CLOCK_PARTIAL_X,
         FT02_CLOCK_PARTIAL_Y,
@@ -343,4 +443,5 @@ void FT02_DrawStatusBarClock(
     while(display.nextPage());
 
     display.setFullWindow();
+    FT02_EpdPowerOffAfterCommit(display, "status-clock-partial");
 }

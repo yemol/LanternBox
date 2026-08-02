@@ -9,8 +9,13 @@
 static const int FT02_PBF_MAP_MIN_ZOOM = 16;
 static const int FT02_PBF_MAP_MAX_ZOOM = 20;
 static const int FT02_PBF_MAP_DEFAULT_ZOOM = 18;
-static const double FT02_PBF_MAP_DEFAULT_LON = 121.4737;
-static const double FT02_PBF_MAP_DEFAULT_LAT = 31.2304;
+// Coordinate contract for the map runtime:
+// - OSM/PBF geometry and GNSS positions use WGS-84.
+// - Mainland-China web-map coordinates (GCJ-02) must be converted before use.
+// Original Google Maps point (GCJ-02): 31.210449492563992, 121.38134188066108
+// Converted default center (WGS-84): 31.212306845416812, 121.37670781443698
+static const double FT02_PBF_MAP_DEFAULT_LON = 121.37670781443698;
+static const double FT02_PBF_MAP_DEFAULT_LAT = 31.212306845416812;
 
 enum FT02PbfMapState
 {

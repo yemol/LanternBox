@@ -1,0 +1,13 @@
+LanternBox Mesh v0.1
+
+Primary Channel URL:
+https://meshtastic.org/e/#CiYSIIIBRbV-5RtLzwSIcQ-TVxGazgRjWnj2cOsymDOYrEFuOgIIDRIWCAEY-gEgCygFOARAA0gBUBNoAdAGAg
+
+https://meshtastic.org/e/#CiYSIIIBRbV-5RtLzwSIcQ-TVxGazgRjWnj2cOsymDOYrEFuOgIIDRIWCAEY-gEgCygFOARAA0gBUBNoAdAGAg
+
+
+Created:
+2026-07-16
+
+Node:
+FTRB

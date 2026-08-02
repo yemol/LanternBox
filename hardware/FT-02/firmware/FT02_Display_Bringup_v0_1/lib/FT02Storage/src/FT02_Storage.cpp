@@ -16,7 +16,7 @@ extern "C" {
 #include "ff.h"
 }
 
-// FT-02 Storage v2.0 / firmware v2.30
+// FT-02 Storage v2.0 / firmware v2.34
 // Frozen production backend:
 //   SD: FSPI / SPI Mode 3 / 40 MHz
 //   Pins: SCK42, MOSI2, MISO1, CS41

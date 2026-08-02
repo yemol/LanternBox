@@ -1,0 +1,21 @@
+﻿Reference,Part,Footprint/Class,Qty,Function,Status/Note
+U1,ESP32-S3-WROOM-1-N16R8,ESP32-S3-WROOM-1 N16R8,1,主控模组，PCB 天线版,正式下单前核对供应商料号
+U2,TPS62132RGTR,VQFN-16 3x3mm,1,固定 3.3V / 3A Buck,替代上一版错误的 TPS62133
+L1,2.2uH shielded,4x4mm class,1,Buck 电感,按 TPS6213x 数据手册选型
+J1,USB-C USB2.0 16P,Mid-mount or top-mount,1,供电+原生 USB,机械型号待锁定
+J2,MicroSD socket,Push-push / self-lock,1,SPI Mode 3,机械型号待锁定
+J3,PinHeader 1x9 2.54mm,Vertical,1,电子纸接口,
+J4,PinHeader 1x5 2.54mm,Vertical,1,GNSS 接口,
+J5,PinHeader 1x6 2.54mm,Vertical,1,LoRa UART 接口,
+J6,PinHeader 1x4 2.54mm,Vertical,1,CardKB2 I2C,
+F1,PTC 0.75A-1.1A hold,1206/1812,1,USB 5V 输入保护,按整机峰值复核
+D1,USB ESD array,SOT-23-6 or DFN,1,USB D+/D- ESD,低电容
+D2,5V TVS,SMA/SMBJ or compact,1,5V 输入浪涌保护,按外壳和线缆环境复核
+"Rcc1,Rcc2",5.1k 1%,0402/0603,2,USB-C CC 下拉,
+"Rusb1,Rusb2",0R/22R option,0402/0603,2,USB 串联调试位,默认 0R，按实测决定
+Rsd1-Rsd4,0R/22R option,0402/0603,4,MicroSD 串联调试位,默认 0R
+Cbulk,220uF low-ESR,SMD electrolytic/polymer,1,3V3 总线储能,
+Csd,47uF + 10uF + 100nF,mixed,1 set,MicroSD 本地去耦,
+Cesp,10uF + 1uF + 100nF,mixed,1 set,ESP32 本地去耦,
+SW1,Tact switch,SMD,1,RESET / EN,
+SW2,Tact switch,SMD,1,BOOT / GPIO0,

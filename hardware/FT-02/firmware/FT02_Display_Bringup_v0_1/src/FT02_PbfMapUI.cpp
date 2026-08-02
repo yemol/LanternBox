@@ -1,4 +1,5 @@
 #include "FT02_PbfMapUI.h"
+#include "FT02_EpdLifecycle.h"
 
 #include "FT02_PbfMapRuntime.h"
 #include "FT02_RoadNameFont.h"
@@ -507,8 +508,8 @@ static void FT02_DrawLoading(FT02Display& display)
     display.drawRect(70, 145, 660, 220, GxEPD_BLACK);
     display.drawRect(74, 149, 652, 212, GxEPD_BLACK);
     FT02_MapCentered(display, "DIRECT PBF MAP A3.13", 80, 184, 640, 3);
-    FT02_MapCentered(display, "LOADING REGIONAL CACHE OR BUILDING IT FROM RAW PBF", 80, 238, 640, 1);
-    FT02_MapCentered(display, "FIRST REGION IS SLOW; LATER PAN AND ZOOM USE CACHE", 80, 272, 640, 1);
+    FT02_MapCentered(display, "LOADING MAP OR RETURNING TO DEFAULT CENTER", 80, 238, 640, 1);
+    FT02_MapCentered(display, "FIRST VISIT MAY BUILD CACHE AND TAKE LONGER", 80, 272, 640, 1);
 
     char position[96];
     snprintf(position, sizeof(position), "CENTER %.5f %.5f   Z%d", report.centerLon, report.centerLat, report.zoom);
@@ -516,7 +517,7 @@ static void FT02_DrawLoading(FT02Display& display)
 
     display.fillRect(0, MAP_BOTTOM, 800, 40, GxEPD_WHITE);
     display.fillRect(0, MAP_BOTTOM, 800, 3, GxEPD_BLACK);
-    FT02_MapCentered(display, "SERIAL MONITOR SHOWS LIVE CACHE PROGRESS", 0, 455, 800, 1);
+    FT02_MapCentered(display, "DEVICE IS WORKING - PLEASE WAIT", 0, 455, 800, 1);
 }
 
 static void FT02_DrawError(FT02Display& display)
@@ -569,6 +570,7 @@ void FT02_DrawPbfMapScreen(FT02Display& display)
             FT02_DrawReadyBottom(display);
         }
         while(display.nextPage());
+        FT02_EpdPowerOffAfterCommit(display, "map-ready-full");
 
         Serial.printf(
             "[MAP-A3.13] FULL refresh complete; balanced 20px Chinese footer drawn zoom=%d scale=%dm\n",
@@ -591,4 +593,5 @@ void FT02_DrawPbfMapScreen(FT02Display& display)
     }
     while(display.nextPage());
     display.setFullWindow();
+    FT02_EpdPowerOffAfterCommit(display, "map-state-partial");
 }

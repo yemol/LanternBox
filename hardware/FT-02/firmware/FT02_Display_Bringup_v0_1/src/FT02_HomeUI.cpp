@@ -1,4 +1,5 @@
 #include "FT02_HomeUI.h"
+#include "FT02_EpdLifecycle.h"
 
 #include "FT02_BottomBar.h"
 #include "FT02_BottomIconData.h"
@@ -44,4 +45,6 @@ void FT02_DrawHomeScreen(
         );
     }
     while(display.nextPage());
+
+    FT02_EpdPowerOffAfterCommit(display, "home-full");
 }

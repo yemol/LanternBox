@@ -1,0 +1,22 @@
+{
+  "pack_id": "lanternbox-ft02-field-manual-zh",
+  "title": "FT-02 现场行动手册",
+  "language": "zh-CN",
+  "schema_version": 1,
+  "content_version": "0.1.1",
+  "category_count": 11,
+  "card_count": 42,
+  "quick_count": 17,
+  "runtime_files": [
+    "manifest.bin",
+    "categories.bin",
+    "cards.idx",
+    "cards.dat",
+    "quick.idx"
+  ],
+  "optional_files": [
+    "search.idx",
+    "sources.json",
+    "checksums.sha256"
+  ]
+}

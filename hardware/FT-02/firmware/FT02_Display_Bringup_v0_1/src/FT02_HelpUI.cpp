@@ -1,4 +1,5 @@
 #include "FT02_HelpUI.h"
+#include "FT02_EpdLifecycle.h"
 
 #include "FT02_BottomBar.h"
 #include "FT02_FontData.h"
@@ -257,4 +258,6 @@ void FT02_DrawHelpScreen(
         );
     }
     while(display.nextPage());
+
+    FT02_EpdPowerOffAfterCommit(display, "help-full");
 }
