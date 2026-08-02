@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>终端同步 - 壳中灯</title>
   <link rel="icon" href="/static/assets/brand/lanternbox-icon-original.png" type="image/png" />
-  <link rel="stylesheet" href="/static/style.css?v=terminal-sync-console-v0-1i" />
+  <link rel="stylesheet" href="/static/style.css?v=terminal-task-sync-v0-1" />
 </head>
 <body>
   <main class="shell terminal-sync-page">
@@ -14,7 +14,7 @@
         <div>
           <p class="eyebrow">TERMINAL SYNC</p>
           <h1 class="brand-title"><img class="brand-mark-inline" src="/static/assets/brand/lanternbox-icon-original.webp" alt="" />终端同步</h1>
-          <p class="subtitle">通过 USB Serial 从 FT-01 只读同步 Manifest、记录索引和 WAV 录音文件。同步目标固定为当前 Core 服务，不需要手动填写 API 地址。当前版本不执行终端清理。</p>
+          <p class="subtitle">通过 USB Serial 从 FT-01 只读同步 Manifest、记录索引和 WAV 录音文件。同步目标固定为当前 Core 服务，不需要手动填写 API 地址。当前版本会在成功同步后尝试清理已同步的终端记录。</p>
         </div>
         <div class="page-actions">
           <a class="page-nav-button" href="/">返回总览</a>
@@ -45,6 +45,7 @@
         <div class="sync-option-row">
           <label><input id="upload-records-check" type="checkbox" checked /> 同步 JSONL 记录</label>
           <label><input id="upload-audio-check" type="checkbox" checked /> 同步 WAV 录音文件</label>
+          <label><input id="sync-tasks-check" type="checkbox" checked /> 同步任务</label>
         </div>
 
         <div class="page-actions">
@@ -77,6 +78,7 @@
     const portSelect = document.getElementById('port-select');
     const uploadRecordsCheck = document.getElementById('upload-records-check');
     const uploadAudioCheck = document.getElementById('upload-audio-check');
+    const syncTasksCheck = document.getElementById('sync-tasks-check');
     const scanPortsButton = document.getElementById('scan-ports-button');
     const startSyncButton = document.getElementById('start-sync-button');
     const clearLogButton = document.getElementById('clear-log-button');
@@ -175,7 +177,8 @@
           body: JSON.stringify({
             port,
             upload_records: uploadRecordsCheck.checked,
-            upload_audio_files: uploadAudioCheck.checked
+            upload_audio_files: uploadAudioCheck.checked,
+            sync_tasks: syncTasksCheck.checked
           })
         });
 
@@ -227,6 +230,78 @@
       return { filename: match[1], error: match[2] || '未知错误' };
     }
 
+    function parseTaskReportsLine(line) {
+      const match = String(line || '').match(/^task reports:\s+received=(\d+)\s+uploaded=(\d+)\s+duplicates=(\d+)\s+failed=(\d+)\s+ack=(\S+)/);
+      if (!match) return null;
+      return {
+        received: Number(match[1]),
+        uploaded: Number(match[2]),
+        duplicates: Number(match[3]),
+        failed: Number(match[4]),
+        ack: match[5]
+      };
+    }
+
+    function parseTasksDownloadLine(line) {
+      const text = String(line || '');
+      if (!text.startsWith('tasks download:')) return null;
+      const parts = {};
+      for (const token of text.replace('tasks download:', '').trim().split(/\s+/)) {
+        if (!token.includes('=')) continue;
+        const [k, v] = token.split('=', 2);
+        parts[k] = v;
+      }
+      return {
+        pulled: Number(parts.pulled || 0),
+        sent: Number(parts.sent || 0),
+        stored: Number(parts.stored || 0),
+        ack: parts.ack,
+        line_ack: parts.hasOwnProperty('line_ack') ? (String(parts.line_ack).toLowerCase() === 'true' || parts.line_ack === '1') : undefined,
+        line_acked: parts.line_acked ? Number(parts.line_acked) : undefined,
+        save_done: parts.hasOwnProperty('save_done') ? (String(parts.save_done).toLowerCase() === 'true' || parts.save_done === '1') : undefined,
+        save_stored: parts.save_stored ? Number(parts.save_stored) : undefined,
+        stage: parts.stage,
+        error: parts.error,
+      };
+    }
+
+    function parseCleanupLine(line) {
+      const text = String(line || '');
+      if (!text.startsWith('cleanup:')) return null;
+      const parts = {};
+      for (const token of text.replace('cleanup:', '').trim().split(/\s+/)) {
+        if (!token.includes('=')) continue;
+        const [k, v] = token.split('=', 2);
+        parts[k] = v;
+      }
+      const clearedValue = parts.cleared ? String(parts.cleared).split(',').map(item => item.trim()).filter(Boolean) : [];
+      return {
+        requested: parts.requested ? Number(parts.requested) : undefined,
+        cleared: Number.isNaN(Number(parts.cleared)) ? clearedValue : Number(parts.cleared),
+        failed: parts.failed ? Number(parts.failed) : 0,
+        ack: parts.ack,
+        error: parts.error,
+      };
+    }
+
+    function parseAudioCleanupLine(line) {
+      const text = String(line || '');
+      if (!text.startsWith('audio cleanup:')) return null;
+      const parts = {};
+      for (const token of text.replace('audio cleanup:', '').trim().split(/\s+/)) {
+        if (!token.includes('=')) continue;
+        const [k, v] = token.split('=', 2);
+        parts[k] = v;
+      }
+      return {
+        requested: parts.requested ? Number(parts.requested) : 0,
+        deleted: parts.deleted ? Number(parts.deleted) : 0,
+        index_removed: parts.index_removed ? Number(parts.index_removed) : 0,
+        failed: parts.failed ? Number(parts.failed) : 0,
+        ack: parts.ack,
+      };
+    }
+
     function recordTypeLabel(type) {
       const map = {
         path_points: '路径点',
@@ -243,15 +318,45 @@
       const records = stdout.map(parseRecordLine).filter(Boolean);
       const audios = stdout.map(parseAudioLine).filter(Boolean);
       const audioFailures = stdout.map(parseAudioFailedLine).filter(Boolean);
+      const summary = job.summary || {};
+      const taskReports = summary.task_reports || stdout.map(parseTaskReportsLine).find(Boolean) || null;
+      const tasksDownload = summary.tasks_download || stdout.map(parseTasksDownloadLine).find(Boolean) || null;
+      const cleanup = summary.cleanup || stdout.map(parseCleanupLine).find(Boolean) || null;
+      const audioCleanup = summary.audio_cleanup || stdout.map(parseAudioCleanupLine).find(Boolean) || null;
       const manifestLine = stdout.find(line => String(line).startsWith('captured manifest')) || '';
       const completed = job.status === 'succeeded';
       const failed = job.status === 'failed';
-      const warning = completed && audioFailures.length > 0;
+      // Determine task warnings. Special-case: if ACK is true but save_done
+      // is explicitly false, show a warning that save confirmation didn't arrive.
+      const taskReportsProblem = taskReports && (taskReports.failed > 0 || String(taskReports.ack).toLowerCase() !== 'true');
+      const tasksDownloadProblem = tasksDownload && String(tasksDownload.ack).toLowerCase() !== 'true';
+      const tasksDownloadSaveMissing = tasksDownload && String(tasksDownload.ack).toLowerCase() === 'true' && tasksDownload.hasOwnProperty('save_done') && tasksDownload.save_done === false;
+      const taskLineAckProblem = tasksDownload && tasksDownload.line_ack && (tasksDownload.line_acked === undefined || tasksDownload.line_acked === 0);
+      const cleanupProblem = cleanup && (String(cleanup.ack).toLowerCase() !== 'true' || cleanup.error);
+      const taskWarning = Boolean(taskReportsProblem || tasksDownloadProblem || tasksDownloadSaveMissing || taskLineAckProblem);
+      const audioWarning = audioFailures.length > 0;
+      const warning = completed && (audioWarning || taskWarning || cleanupProblem);
 
       resultSection.style.display = 'block';
-      resultTitle.textContent = completed
-        ? (warning ? '同步完成，但有录音失败' : '同步完成')
-        : (failed ? '同步失败' : '同步进行中');
+      // Title and status. If tasks ACK succeeded but save_done explicitly false,
+      // show a specific warning message per requirements.
+      if (completed) {
+        if (cleanupProblem) {
+          resultTitle.textContent = '同步完成，但终端清理失败 ⚠️';
+        } else if (tasksDownload && String(tasksDownload.ack).toLowerCase() !== 'true') {
+          resultTitle.textContent = '同步完成，但任务下发失败 ⚠️';
+        } else if (tasksDownload && tasksDownload.line_ack && (tasksDownload.line_acked === undefined || tasksDownload.line_acked === 0)) {
+          resultTitle.textContent = '同步完成，但任务下发失败 ⚠️';
+        } else if (tasksDownload && String(tasksDownload.ack).toLowerCase() === 'true' && tasksDownload.hasOwnProperty('save_done') && tasksDownload.save_done === false) {
+          resultTitle.textContent = '同步完成，任务已下发，保存确认未返回 ⚠️';
+        } else if (audioWarning) {
+          resultTitle.textContent = '同步完成，但有录音失败 ⚠️';
+        } else {
+          resultTitle.textContent = '同步完成 ✅';
+        }
+      } else {
+        resultTitle.textContent = failed ? '同步失败' : '同步进行中';
+      }
       resultStatus.textContent = completed ? (warning ? '部分完成' : '成功') : (failed ? '失败' : '运行中');
       resultStatus.classList.toggle('failed', failed || warning);
 
@@ -277,9 +382,54 @@
         `
         : '';
 
+      const taskReportRow = taskReports
+        ? `
+          <div class="sync-result-row">
+            <strong>任务回报</strong>
+            <span>接收 ${taskReports.received}｜上传 ${taskReports.uploaded}｜重复 ${taskReports.duplicates}｜失败 ${taskReports.failed}｜ACK ${escapeHtml(taskReports.ack)}</span>
+          </div>
+        `
+        : `
+          <div class="sync-result-row">
+            <strong>任务回报</strong>
+            <span>本次未执行或无摘要。</span>
+          </div>
+        `;
+
+      const cleanupRowData = summary.cleanup || stdout.map(parseCleanupLine).find(Boolean) || null;
+      const cleanupCount = cleanupRowData ? (Array.isArray(cleanupRowData.cleared) ? cleanupRowData.cleared.length : Number(cleanupRowData.cleared || 0)) : 0;
+      const cleanupRow = cleanupRowData
+        ? `
+          <div class="sync-result-row">
+            <strong>本地清理</strong>
+            <span>已清理 ${cleanupCount}｜失败 ${cleanupRowData.failed || 0}｜ACK ${escapeHtml(cleanupRowData.ack)}</span>
+          </div>
+          ${cleanupRowData.error ? `<div class="sync-result-row"><strong>清理错误</strong><span>${escapeHtml(cleanupRowData.error)}</span></div>` : ''}
+        `
+        : `
+          <div class="sync-result-row">
+            <strong>终端清理</strong>
+            <span>本次未执行或无摘要。</span>
+          </div>
+        `;
+
+      const taskDownloadRow = tasksDownload
+        ? `
+          <div class="sync-result-row">
+            <strong>任务下发</strong>
+            <span>Core 任务 ${tasksDownload.pulled}｜尝试发送 ${tasksDownload.sent}｜终端确认 ${tasksDownload.line_acked ?? 0}｜已保存 ${tasksDownload.stored}｜ACK ${escapeHtml(tasksDownload.ack)}</span>
+          </div>
+        `
+        : `
+          <div class="sync-result-row">
+            <strong>任务下发</strong>
+            <span>本次未执行或无摘要。</span>
+          </div>
+        `;
+
       resultCard.innerHTML = `
         <div class="sync-result-main ${failed ? 'failed' : warning ? 'warning' : 'success'}">
-          <h3>${completed ? (warning ? '同步已结束，部分 WAV 未写入' : '同步已安全结束') : failed ? '同步中断' : '同步仍在运行'}</h3>
+          <h3>${completed ? (cleanupProblem ? '同步完成，但终端清理失败' : taskWarning ? '同步完成，但任务部分需要检查' : audioWarning ? '同步完成，但录音部分需要检查' : '同步完成 ✅') : failed ? '同步中断' : '同步仍在运行'}</h3>
           <p>${escapeHtml(manifestLine || `任务：${job.job_id}`)}</p>
           <p>串口：${escapeHtml(job.port || '')}</p>
           <p>开始：${escapeHtml(job.started_at || job.created_at || '')}｜结束：${escapeHtml(job.finished_at || '尚未结束')}</p>
@@ -290,6 +440,15 @@
             <strong>WAV 录音</strong>
             <span>处理 ${audios.length}｜新增 ${audioImported}｜重复 ${audioDuplicate}｜ACK ${audioAck}｜失败 ${audioFailures.length}</span>
           </div>
+          ${taskReportRow}
+          ${taskDownloadRow}
+          ${cleanupRow}
+          ${audioCleanup ? `
+            <div class="sync-result-row">
+              <strong>录音清理</strong>
+              <span>已删除 ${audioCleanup.deleted}｜失败 ${audioCleanup.failed}｜ACK ${escapeHtml(audioCleanup.ack)}</span>
+            </div>
+          ` : ''}
         </div>
         ${failureRows}
         <div class="page-actions sync-result-actions">

@@ -44,8 +44,50 @@
       box-shadow: 0 0 0 3px rgba(104, 199, 255, 0.08);
     }
 
+    .task-card.not-started {
+      border-color: rgba(255, 183, 92, 0.35);
+      background: rgba(255, 183, 92, 0.08);
+    }
+
+    .task-card.in-progress {
+      border-color: rgba(104, 199, 255, 0.35);
+      background: rgba(104, 199, 255, 0.1);
+    }
+
+    .task-card.completed {
+      border-color: rgba(99, 184, 108, 0.55);
+      background: rgba(99, 184, 108, 0.16);
+    }
+
     .task-card[data-task-id] {
       cursor: pointer;
+    }
+
+    .task-status-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .task-status-badge.not-started {
+      background: rgba(255, 183, 92, 0.28);
+      color: #ffffff;
+    }
+
+    .task-status-badge.in-progress {
+      background: rgba(104, 199, 255, 0.28);
+      color: #ffffff;
+    }
+
+    .task-status-badge.completed {
+      background: rgba(99, 184, 108, 0.35);
+      color: #ffffff;
     }
 
     .task-fields {
@@ -64,6 +106,113 @@
     .task-fields strong {
       color: var(--text-main);
       font-weight: 800;
+    }
+
+    .task-date-group {
+      display: grid;
+      gap: 12px;
+      padding: 16px 0 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .task-date-group:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .task-date-group-title {
+      margin: 0;
+      color: var(--text-main);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .task-group-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .calendar-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .calendar-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 10px;
+      color: var(--text-soft);
+      font-size: 14px;
+      margin-top: 16px;
+    }
+
+    .calendar-day,
+    .empty-day {
+      min-height: 96px;
+      border-radius: 16px;
+      border: 1px solid rgba(137, 204, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      padding: 12px;
+      text-align: left;
+      display: grid;
+      gap: 6px;
+      align-items: flex-start;
+      justify-items: stretch;
+    }
+
+    .calendar-day {
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .calendar-day:hover {
+      transform: translateY(-1px);
+      border-color: rgba(137, 204, 255, 0.28);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .calendar-day.selected {
+      border-color: rgba(104, 199, 255, 0.35);
+      background: rgba(104, 199, 255, 0.12);
+    }
+
+    .calendar-day.has-entry {
+      /* 已显示任务数量，不再使用额外高亮颜色 */
+    }
+
+    .calendar-number {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .calendar-count {
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .empty-day {
+      background: transparent;
+      border-color: transparent;
+    }
+
+    .task-section-empty {
+      padding: 18px;
+      color: var(--text-soft);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px dashed rgba(137, 204, 255, 0.18);
+      border-radius: 16px;
+      margin: 0;
     }
 
     .task-form-grid {
@@ -278,7 +427,7 @@
           <p class="eyebrow">任务调度</p>
           <h1 class="brand-title"><img class="brand-mark-inline" src="/static/assets/brand/lanternbox-icon-original.webp" alt="" />任务管理</h1>
           <p class="subtitle">
-            创建、查看和分派 Core 任务，并预览终端可拉取的任务列表。
+            创建、查看和分派 Core 任务，并通过日历视图按天组织任务。
           </p>
         </div>
 
@@ -293,7 +442,10 @@
 
     <section class="list-section">
       <div class="section-title-row">
-        <h2>任务列表</h2>
+        <div>
+          <h2>任务列表</h2>
+          <span class="section-hint">按日期分组显示任务，结合日历视图方便每天追踪。</span>
+        </div>
         <div class="task-list-toolbar">
           <button id="refresh-button" class="small-button" type="button">刷新任务</button>
           <button id="clear-filter-button" class="small-button" type="button">显示全部</button>
@@ -308,6 +460,30 @@
             <option value="unassigned">未分派</option>
           </select>
         </label>
+      </div>
+
+      <div class="section-title-row">
+        <h2 id="task-calendar-title">任务日历</h2>
+        <div class="calendar-actions">
+          <button id="toggle-calendar-button" class="small-button" type="button">折叠日历</button>
+          <button id="prev-month-button" class="small-button" type="button">上个月</button>
+          <button id="today-button" class="small-button" type="button">今天</button>
+          <button id="next-month-button" class="small-button" type="button">下个月</button>
+        </div>
+      </div>
+
+      <div id="calendar-body">
+        <div class="calendar-weekdays">
+          <span>一</span>
+          <span>二</span>
+          <span>三</span>
+          <span>四</span>
+          <span>五</span>
+          <span>六</span>
+          <span>日</span>
+        </div>
+
+        <div id="task-calendar" class="calendar-grid"></div>
       </div>
 
       <div id="task-result-info" class="result-info">正在读取任务...</div>
@@ -328,6 +504,17 @@
           </select>
         </label>
         <button id="next-page-button" class="small-button" type="button">下一页</button>
+      </div>
+    </section>
+
+    <section class="list-section">
+      <div class="section-title-row">
+        <h2>待处理任务</h2>
+        <span class="section-hint">未完成任务集中显示，便于优先处理。</span>
+      </div>
+
+      <div id="unfinished-task-list" class="task-grid">
+        <p class="empty">暂无未完成任务</p>
       </div>
     </section>
 
@@ -400,25 +587,9 @@
       </form>
     </section>
 
-    <section class="list-section">
-      <div class="section-title-row">
-        <h2>终端拉取预览</h2>
-        <button id="pull-button" class="small-button" type="button">预览所选终端可拉取任务</button>
-      </div>
-
-      <div class="search-row">
-        <select id="pull-device-id"></select>
-        <button id="clear-pull-button" class="small-button" type="button">恢复默认</button>
-      </div>
-
-      <div id="pull-result-info" class="result-info">选择一个受信任终端后，可预览它调用拉取接口时会收到的任务。</div>
-      <div id="pull-list" class="task-grid">
-        <p class="empty">暂无预览结果</p>
-      </div>
-    </section>
 
     <section class="notice task-footer-note">
-      Task UI v0.2：仅用于 Core 端任务创建、分派、状态查看和终端拉取预览；状态回传由终端侧完成；不包含终端同步、任务离线执行、地图导航或多成员权限。
+      Task UI v0.2：仅用于 Core 端任务创建、分派与状态查看；任务按日期组织展示，终端状态回传由终端侧完成。
     </section>
   </main>
 
@@ -452,18 +623,26 @@
     const createAssignedTo = document.getElementById('create-assigned-to');
     const taskTagsDisplay = document.getElementById('task-tags-display');
     const taskTagButtons = document.getElementById('task-tag-buttons');
-    const pullButton = document.getElementById('pull-button');
-    const pullDeviceId = document.getElementById('pull-device-id');
-    const clearPullButton = document.getElementById('clear-pull-button');
-    const pullResultInfo = document.getElementById('pull-result-info');
-    const pullList = document.getElementById('pull-list');
+    const taskCalendarTitle = document.getElementById('task-calendar-title');
+    const calendarBody = document.getElementById('calendar-body');
+    const calendarGrid = document.getElementById('task-calendar');
+    const toggleCalendarButton = document.getElementById('toggle-calendar-button');
+    const prevMonthButton = document.getElementById('prev-month-button');
+    const nextMonthButton = document.getElementById('next-month-button');
+    const todayButton = document.getElementById('today-button');
     const taskModal = document.getElementById('task-modal');
     const taskModalId = document.getElementById('task-modal-id');
     const taskModalTitle = document.getElementById('task-modal-title');
     const taskModalMeta = document.getElementById('task-modal-meta');
     const taskModalBody = document.getElementById('task-modal-body');
+    const unfinishedTaskList = document.getElementById('unfinished-task-list');
 
     let currentTasks = [];
+    const today = new Date();
+    let selectedDate = `${today.getFullYear()}-${pad2(today.getMonth() + 1)}-${pad2(today.getDate())}`;
+    let calendarYear = today.getFullYear();
+    let calendarMonth = today.getMonth();
+    let calendarCollapsed = false;
     let currentTerminals = [];
     let selectedTaskId = '';
     let selectedTask = null;
@@ -472,10 +651,12 @@
 
     const statusLabels = {
       open: '未分派',
+      pending: '待处理',
       assigned: '已分派',
       in_progress: '进行中',
       blocked: '受阻',
       done: '完成',
+      completed: '完成',
       cancelled: '取消'
     };
 
@@ -528,6 +709,10 @@
       }
 
       return items.map(tag => tagLabels[tag] || tag).join('，');
+    }
+
+    function pad2(value) {
+      return String(value).padStart(2, '0');
     }
 
     function selectedSingleValue(selectEl) {
@@ -603,6 +788,38 @@
       return (preferred || devices[0] || {}).device_id || '';
     }
 
+    function isCompletedStatus(status) {
+      const normalized = String(status || '').trim().toLowerCase();
+      return ['done', 'completed', 'cancelled'].includes(normalized);
+    }
+
+    function taskDateKey(task) {
+      const dateText = String(task.created_at || task.updated_at || '').trim();
+      const date = new Date(dateText);
+      if (Number.isNaN(date.getTime())) {
+        return '未记录';
+      }
+      return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`;
+    }
+
+    function formatLocalShortDate(dateText) {
+      const text = String(dateText || '').trim();
+      if (!text) {
+        return '未记录';
+      }
+      const date = new Date(text);
+      if (Number.isNaN(date.getTime())) {
+        return text;
+      }
+      return date.toLocaleString(undefined, {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    }
+
     function formatAssignedDevices(items) {
       if (!Array.isArray(items) || !items.length) {
         return '未分派';
@@ -656,11 +873,7 @@
         ${allTerminalOptions}
       `;
 
-      pullDeviceId.innerHTML = trustedTerminalOptions || '<option value="" disabled>暂无受信任终端</option>';
-      pullDeviceId.value = defaultDeviceId;
-      pullDeviceId.disabled = !defaultDeviceId;
-      pullButton.disabled = !defaultDeviceId;
-      clearPullButton.disabled = !defaultDeviceId;
+      // terminal selection is not needed on this page
     }
 
     function buildTarget(formData) {
@@ -724,29 +937,187 @@
         : '第 0 / 0 页';
     }
 
+    function normalizeTaskStatusCategory(status) {
+      const normalized = String(status || '').trim().toLowerCase();
+      if (['open'].includes(normalized)) {
+        return 'not-started';
+      }
+
+      if (['pending', 'assigned', 'in_progress', 'blocked'].includes(normalized)) {
+        return 'in-progress';
+      }
+
+      if (['done', 'completed', 'cancelled'].includes(normalized)) {
+        return 'completed';
+      }
+
+      return 'in-progress';
+    }
+
+    function renderTaskCard(task, allowDetail = true) {
+      const statusCategory = normalizeTaskStatusCategory(task.status);
+      const activeClass = task.task_id === selectedTaskId ? ' active' : '';
+      const detailAttribute = allowDetail ? ` data-task-id="${escapeHtml(task.task_id)}"` : '';
+      return `
+        <article class="task-card ${statusCategory}${activeClass}"${detailAttribute}>
+          <div class="task-card-header" style="display:flex;gap:12px;align-items:center;justify-content:space-between;">
+            <div>
+              <p class="item-code">${escapeHtml(task.task_id)}</p>
+              <h3>${escapeHtml(task.title || '未命名任务')}</h3>
+            </div>
+            <span class="task-status-badge ${statusCategory}">${escapeHtml(statusLabel(task.status))}</span>
+          </div>
+          <div class="task-fields">
+            <p><strong>优先级：</strong>${escapeHtml(priorityLabel(task.priority))}</p>
+            <p><strong>分派给：</strong>${escapeHtml(formatAssignedDevices(task.assigned_to))}</p>
+            <p><strong>版本：</strong>${escapeHtml(task.revision)}</p>
+            <p><strong>更新时间：</strong>${escapeHtml(formatLocalShortDate(task.updated_at))}</p>
+          </div>
+        </article>
+      `;
+    }
+
     function renderTaskCards(tasks, targetElement, allowDetail = true) {
       if (!tasks.length) {
         targetElement.innerHTML = '<p class="empty">暂无任务</p>';
         return;
       }
 
-      targetElement.innerHTML = tasks.map(task => {
-        const activeClass = task.task_id === selectedTaskId ? ' active' : '';
-        const detailAttribute = allowDetail ? ` data-task-id="${escapeHtml(task.task_id)}"` : '';
+      targetElement.innerHTML = tasks.map(task => renderTaskCard(task, allowDetail)).join('');
+    }
+
+    function groupTasksByDate(tasks) {
+      const groups = {};
+      tasks.forEach(task => {
+        const key = taskDateKey(task);
+        groups[key] = groups[key] || [];
+        groups[key].push(task);
+      });
+      return groups;
+    }
+
+    function getCalendarSourceTasks() {
+      const filter = assignedFilter.value || 'all';
+
+      if (filter === 'all') {
+        return currentTasks;
+      }
+
+      if (filter === 'unassigned') {
+        return currentTasks.filter(task => !Array.isArray(task.assigned_to) || task.assigned_to.length === 0);
+      }
+
+      return currentTasks.filter(task => Array.isArray(task.assigned_to) && task.assigned_to.includes(filter));
+    }
+
+    function getTaskCountByDate() {
+      return getCalendarSourceTasks().reduce((map, task) => {
+        const key = taskDateKey(task);
+        if (!key || key === '未记录') {
+          return map;
+        }
+        map[key] = (map[key] || 0) + 1;
+        return map;
+      }, {});
+    }
+
+    function renderTaskCalendar() {
+      const monthLabel = `${calendarYear}年${calendarMonth + 1}月`;
+      const filterLabel = assignedFilter.value === 'all' ? '全部任务' : assignedFilter.value === 'unassigned' ? '未分派' : '已分派终端';
+      taskCalendarTitle.textContent = `任务日历｜${monthLabel}｜${filterLabel}`;
+
+      const taskCountByDate = getTaskCountByDate();
+      const firstDay = new Date(calendarYear, calendarMonth, 1);
+      const lastDay = new Date(calendarYear, calendarMonth + 1, 0);
+      const totalDays = lastDay.getDate();
+      let startWeekday = firstDay.getDay();
+      startWeekday = startWeekday === 0 ? 7 : startWeekday;
+
+      const cells = [];
+
+      for (let i = 1; i < startWeekday; i += 1) {
+        cells.push('<div class="calendar-day empty-day"></div>');
+      }
+
+      const today = new Date();
+      const todayKey = `${today.getFullYear()}-${pad2(today.getMonth() + 1)}-${pad2(today.getDate())}`;
+      const activeDateKey = selectedDate || todayKey;
+
+      for (let day = 1; day <= totalDays; day += 1) {
+        const dateKey = `${calendarYear}-${pad2(calendarMonth + 1)}-${pad2(day)}`;
+        const count = taskCountByDate[dateKey] || 0;
+        const classes = [
+          'calendar-day',
+          count > 0 ? 'has-entry' : '',
+          dateKey === activeDateKey ? 'selected' : ''
+        ].filter(Boolean).join(' ');
+
+        cells.push(`
+          <button class="${classes}" type="button" data-date="${dateKey}">
+            <span class="calendar-number">${day}</span>
+            ${count > 0 ? `<span class="calendar-count">${count} 个</span>` : ''}
+          </button>
+        `);
+      }
+
+      calendarGrid.innerHTML = cells.join('');
+    }
+
+    function updateCalendarCollapseUI() {
+      calendarBody.style.display = calendarCollapsed ? 'none' : 'block';
+      toggleCalendarButton.textContent = calendarCollapsed ? '展开日历' : '折叠日历';
+    }
+
+    function filteredTasks() {
+      const filter = assignedFilter.value || 'all';
+      let tasks = currentTasks;
+
+      if (filter === 'unassigned') {
+        tasks = tasks.filter(task => !Array.isArray(task.assigned_to) || task.assigned_to.length === 0);
+      } else if (filter !== 'all') {
+        tasks = tasks.filter(task => Array.isArray(task.assigned_to) && task.assigned_to.includes(filter));
+      }
+
+      if (selectedDate) {
+        tasks = tasks.filter(task => taskDateKey(task) === selectedDate);
+      }
+
+      return tasks;
+    }
+
+    function renderGroupedTaskCards(tasks, targetElement, allowDetail = true) {
+      if (!tasks.length) {
+        targetElement.innerHTML = '<p class="empty">暂无任务</p>';
+        return;
+      }
+
+      const grouped = groupTasksByDate(tasks);
+      const sortedKeys = Object.keys(grouped).sort((a, b) => {
+        if (a === '未记录') return 1;
+        if (b === '未记录') return -1;
+        return b.localeCompare(a);
+      });
+
+      targetElement.innerHTML = sortedKeys.map(dateKey => {
+        const items = grouped[dateKey];
         return `
-          <article class="task-card${activeClass}"${detailAttribute}>
-            <p class="item-code">${escapeHtml(task.task_id)}</p>
-            <h3>${escapeHtml(task.title || '未命名任务')}</h3>
-            <div class="task-fields">
-              <p><strong>状态：</strong>${escapeHtml(statusLabel(task.status))}</p>
-              <p><strong>优先级：</strong>${escapeHtml(priorityLabel(task.priority))}</p>
-              <p><strong>分派给：</strong>${escapeHtml(formatAssignedDevices(task.assigned_to))}</p>
-              <p><strong>版本：</strong>${escapeHtml(task.revision)}</p>
-              <p><strong>更新时间：</strong>${escapeHtml(task.updated_at || '未记录')}</p>
+          <section class="task-date-group">
+            <h3 class="task-date-group-title">${escapeHtml(dateKey)}（${items.length}）</h3>
+            <div class="task-group-grid">
+              ${items.map(task => renderTaskCard(task, allowDetail)).join('')}
             </div>
-          </article>
+          </section>
         `;
       }).join('');
+    }
+
+    function renderUnfinishedTaskList() {
+      const unfinished = currentTasks.filter(task => !isCompletedStatus(task.status));
+      if (!unfinished.length) {
+        unfinishedTaskList.innerHTML = '<p class="task-section-empty">暂无未完成任务</p>';
+        return;
+      }
+      renderTaskCards(unfinished, unfinishedTaskList, true);
     }
 
     async function loadTasks() {
@@ -780,11 +1151,15 @@
         : filter === 'unassigned'
           ? '未分派'
           : terminalLabel(terminalById(filter) || { device_id: filter, name: '', trusted: false });
+      const dateText = selectedDate ? `｜日期：${selectedDate}` : '';
       const pageStart = tasks.length ? (currentPage - 1) * page.size + 1 : 0;
       const pageEnd = tasks.length ? pageStart + page.items.length - 1 : 0;
-      taskResultInfo.textContent = `当前显示 ${pageStart}-${pageEnd} / ${tasks.length} 个筛选结果，共 ${currentTasks.length} 个任务。筛选：${filterText}`;
-      renderTaskCards(page.items, taskList, true);
+      taskResultInfo.textContent = `当前显示 ${pageStart}-${pageEnd} / ${tasks.length} 个筛选结果，共 ${currentTasks.length} 个任务。筛选：${filterText}${dateText}`;
+      renderTaskCalendar();
+      updateCalendarCollapseUI();
+      renderGroupedTaskCards(page.items, taskList, true);
       renderPagination(tasks.length, page.totalPages);
+      renderUnfinishedTaskList();
     }
 
     async function createTask(payload) {
@@ -830,8 +1205,8 @@
               <p><strong>分派给：</strong>${escapeHtml(formatAssignedDevices(task.assigned_to))}</p>
               <p><strong>版本：</strong>${escapeHtml(task.revision)}</p>
               <p><strong>标签：</strong>${escapeHtml(formatTags(task.tags))}</p>
-              <p><strong>创建时间：</strong>${escapeHtml(task.created_at || '未记录')}</p>
-              <p><strong>更新时间：</strong>${escapeHtml(task.updated_at || '未记录')}</p>
+              <p><strong>创建时间：</strong>${escapeHtml(formatLocalShortDate(task.created_at))}</p>
+              <p><strong>更新时间：</strong>${escapeHtml(formatLocalShortDate(task.updated_at))}</p>
             </div>
             <p><strong>目标：</strong></p>
             <pre class="task-json">${escapeHtml(JSON.stringify(task.target || {}, null, 2))}</pre>
@@ -891,44 +1266,6 @@
       return response.json();
     }
 
-    async function loadPullPreview() {
-      const deviceId = pullDeviceId.value || defaultTrustedDeviceId();
-      if (!deviceId) {
-        pullResultInfo.textContent = '暂无受信任终端，无法预览待拉取任务。';
-        pullList.innerHTML = '<p class="empty">暂无预览结果</p>';
-        showMessage('暂无受信任终端，请先在终端设备页面设置信任状态。', true);
-        return;
-      }
-
-      pullDeviceId.value = deviceId;
-      pullResultInfo.textContent = '正在读取终端待拉取任务...';
-      pullList.innerHTML = '<p class="empty">正在读取...</p>';
-
-      try {
-        const response = await fetch(`/api/tasks/pull/${encodeURIComponent(deviceId)}`, {
-          cache: 'no-store'
-        });
-
-        if (!response.ok) {
-          throw new Error(await readError(response, `拉取预览失败：${response.status}`));
-        }
-
-        const result = await response.json();
-        const tasks = Array.isArray(result.tasks)
-          ? result.tasks.map(task => ({
-              ...task,
-              assigned_to: Array.isArray(task.assigned_to) ? task.assigned_to : [deviceId]
-            }))
-          : [];
-        pullResultInfo.textContent = `${deviceId} 当前可拉取 ${tasks.length} 个任务。`;
-        renderTaskCards(tasks, pullList, false);
-      } catch (error) {
-        console.error(error);
-        pullResultInfo.textContent = '终端拉取预览失败。';
-        pullList.innerHTML = `<p class="empty">API 请求失败：${escapeHtml(error.message || '请检查设备状态')}</p>`;
-        showMessage(error.message || '终端拉取预览失败。', true);
-      }
-    }
 
     taskForm.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -1014,11 +1351,13 @@
 
     refreshButton.addEventListener('click', loadTasks);
     assignedFilter.addEventListener('change', () => {
+      selectedDate = '';
       currentPage = 1;
       renderTaskList();
     });
     clearFilterButton.addEventListener('click', () => {
       assignedFilter.value = 'all';
+      selectedDate = '';
       currentPage = 1;
       renderTaskList();
     });
@@ -1034,9 +1373,57 @@
       currentPage = 1;
       renderTaskList();
     });
-    pullButton.addEventListener('click', loadPullPreview);
-    clearPullButton.addEventListener('click', () => {
-      pullDeviceId.value = defaultTrustedDeviceId();
+
+    calendarGrid.addEventListener('click', (event) => {
+      const dayButton = event.target.closest('.calendar-day');
+
+      if (!dayButton || !dayButton.dataset.date) {
+        return;
+      }
+
+      selectedDate = dayButton.dataset.date;
+      currentPage = 1;
+      renderTaskList();
+    });
+
+    toggleCalendarButton.addEventListener('click', () => {
+      calendarCollapsed = !calendarCollapsed;
+      if (calendarCollapsed) {
+        selectedDate = '';
+      }
+      currentPage = 1;
+      renderTaskList();
+    });
+
+    prevMonthButton.addEventListener('click', () => {
+      calendarMonth -= 1;
+
+      if (calendarMonth < 0) {
+        calendarMonth = 11;
+        calendarYear -= 1;
+      }
+
+      renderTaskCalendar();
+    });
+
+    nextMonthButton.addEventListener('click', () => {
+      calendarMonth += 1;
+
+      if (calendarMonth > 11) {
+        calendarMonth = 0;
+        calendarYear += 1;
+      }
+
+      renderTaskCalendar();
+    });
+
+    todayButton.addEventListener('click', () => {
+      const today = new Date();
+      calendarYear = today.getFullYear();
+      calendarMonth = today.getMonth();
+      selectedDate = `${calendarYear}-${pad2(calendarMonth + 1)}-${pad2(today.getDate())}`;
+      currentPage = 1;
+      renderTaskList();
     });
 
     window.closeTaskModal = closeTaskModal;

@@ -43,6 +43,7 @@ class TerminalUsbSyncJob:
     api_base: str
     upload_records: bool
     upload_audio_files: bool
+    sync_tasks: bool
     status: str = "queued"
     returncode: int | None = None
     created_at: str = field(default_factory=lambda: datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
@@ -79,6 +80,148 @@ def _append_limited(lines: list[str], text: str) -> None:
         del lines[:-MAX_LOG_LINES]
 
 
+def _parse_bool(value: str) -> bool:
+    return str(value or "").strip().lower() in {"1", "true", "yes", "ok"}
+
+
+def _parse_task_reports_line(line: str) -> dict[str, Any] | None:
+    text = str(line or "")
+    prefix = "task reports:"
+    if not text.startswith(prefix):
+        return None
+    parts = {}
+    for token in text[len(prefix):].strip().split():
+        if "=" not in token:
+            continue
+        key, value = token.split("=", 1)
+        parts[key] = value
+    return {
+        "received": int(parts.get("received") or 0),
+        "uploaded": int(parts.get("uploaded") or 0),
+        "duplicates": int(parts.get("duplicates") or 0),
+        "failed": int(parts.get("failed") or 0),
+        "ack": _parse_bool(parts.get("ack", "false")),
+    }
+
+
+def _parse_tasks_download_line(line: str) -> dict[str, Any] | None:
+    text = str(line or "")
+    prefix = "tasks download:"
+    if not text.startswith(prefix):
+        return None
+    parts = {}
+    for token in text[len(prefix):].strip().split():
+        if "=" not in token:
+            continue
+        key, value = token.split("=", 1)
+        parts[key] = value
+    result: dict[str, Any] = {
+        "pulled": int(parts.get("pulled") or 0),
+        "sent": int(parts.get("sent") or 0),
+        "stored": int(parts.get("stored") or 0),
+        "ack": _parse_bool(parts.get("ack", "false")),
+    }
+    # Optional extended fields
+    if "save_done" in parts:
+        result["save_done"] = _parse_bool(parts.get("save_done"))
+    if "save_stored" in parts:
+        try:
+            result["save_stored"] = int(parts.get("save_stored") or 0)
+        except Exception:
+            result["save_stored"] = None
+    if "stage" in parts:
+        result["stage"] = parts.get("stage")
+    if "line_ack" in parts:
+        result["line_ack"] = _parse_bool(parts.get("line_ack"))
+    if "line_acked" in parts:
+        try:
+            result["line_acked"] = int(parts.get("line_acked") or 0)
+        except Exception:
+            result["line_acked"] = None
+    if "error" in parts:
+        result["error"] = parts.get("error")
+    return result
+
+
+def _parse_cleanup_line(line: str) -> dict[str, Any] | None:
+    text = str(line or "")
+    prefix = "cleanup:"
+    if not text.startswith(prefix):
+        return None
+    parts = {}
+    for token in text[len(prefix):].strip().split():
+        if "=" not in token:
+            continue
+        key, value = token.split("=", 1)
+        parts[key] = value
+
+    cleared_value: int | list[str] = 0
+    raw_cleared = parts.get("cleared")
+    if raw_cleared is not None:
+        if raw_cleared.isdigit():
+            cleared_value = int(raw_cleared)
+        else:
+            cleared_value = [item.strip() for item in raw_cleared.split(",") if item.strip()]
+
+    requested = int(parts.get("requested") or 0)
+    if requested == 0 and isinstance(cleared_value, list):
+        requested = len(cleared_value)
+
+    result: dict[str, Any] = {
+        "requested": requested,
+        "cleared": cleared_value,
+        "failed": int(parts.get("failed") or 0),
+        "ack": _parse_bool(parts.get("ack", "false")),
+        "error": parts.get("error"),
+    }
+    return result
+
+
+def _parse_audio_cleanup_line(line: str) -> dict[str, Any] | None:
+    text = str(line or "")
+    prefix = "audio cleanup:"
+    if not text.startswith(prefix):
+        return None
+    parts = {}
+    for token in text[len(prefix):].strip().split():
+        if "=" not in token:
+            continue
+        key, value = token.split("=", 1)
+        parts[key] = value
+
+    result: dict[str, Any] = {
+        "requested": int(parts.get("requested") or 0),
+        "deleted": int(parts.get("deleted") or 0),
+        "index_removed": int(parts.get("index_removed") or 0),
+        "failed": int(parts.get("failed") or 0),
+        "ack": _parse_bool(parts.get("ack", "false")),
+        "error": parts.get("error"),
+    }
+    return result
+
+
+def extract_sync_summary(stdout_lines: list[str]) -> dict[str, Any]:
+    summary: dict[str, Any] = {}
+    for line in stdout_lines:
+        task_reports = _parse_task_reports_line(line)
+        if task_reports is not None:
+            summary["task_reports"] = task_reports
+            continue
+        tasks_download = _parse_tasks_download_line(line)
+        if tasks_download is not None:
+            summary["tasks_download"] = tasks_download
+            continue
+        cleanup = _parse_cleanup_line(line)
+        if cleanup is not None:
+            summary["cleanup"] = cleanup
+            continue
+        audio_cleanup = _parse_audio_cleanup_line(line)
+        if audio_cleanup is not None:
+            summary["audio_cleanup"] = audio_cleanup
+            continue
+    return summary
+
+
 def _job_to_dict(job: TerminalUsbSyncJob) -> dict[str, Any]:
     return {
         "job_id": job.job_id,
@@ -87,6 +230,7 @@ def _job_to_dict(job: TerminalUsbSyncJob) -> dict[str, Any]:
         "api_base": job.api_base,
         "upload_records": job.upload_records,
         "upload_audio_files": job.upload_audio_files,
+        "sync_tasks": job.sync_tasks,
         "status": job.status,
         "returncode": job.returncode,
         "created_at": job.created_at,
@@ -96,6 +240,7 @@ def _job_to_dict(job: TerminalUsbSyncJob) -> dict[str, Any]:
         "stdout": list(job.stdout_lines),
         "stderr": list(job.stderr_lines),
         "error": job.error,
+        "summary": extract_sync_summary(job.stdout_lines),
     }
 
 
@@ -144,6 +289,7 @@ def start_usb_sync_job(
     api_base: str = "http://127.0.0.1:8787",
     upload_records: bool = True,
     upload_audio_files: bool = True,
+    sync_tasks: bool = True,
 ) -> dict[str, Any]:
     port_value = str(port or "").strip()
     if not port_value:
@@ -160,6 +306,7 @@ def start_usb_sync_job(
         api_base=str(api_base or "http://127.0.0.1:8787").strip(),
         upload_records=bool(upload_records),
         upload_audio_files=bool(upload_audio_files),
+        sync_tasks=bool(sync_tasks),
     )
     with _LOCK:
         _JOBS[job.job_id] = job
@@ -193,6 +340,8 @@ def _run_job(job_id: str) -> None:
         command.append("--upload-audio-files")
         command.extend(["--audio-retries", "2"])
         command.append("--continue-on-audio-error")
+    if job.sync_tasks:
+        command.append("--sync-tasks")
 
     try:
         process = subprocess.Popen(
