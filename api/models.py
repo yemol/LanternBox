@@ -100,6 +100,7 @@ class TaskAssignRequest(BaseModel):
 
 
 class TaskReportRequest(BaseModel):
+    report_id: Optional[str] = None
     device_id: str
     task_id: str
     status: Optional[str] = None
@@ -108,6 +109,7 @@ class TaskReportRequest(BaseModel):
     device_time: str = ""
     lat: Optional[float] = None
     lon: Optional[float] = None
+    source: str = "terminal"
 
 
 class TaskItem(BaseModel):
@@ -128,7 +130,11 @@ class TaskItem(BaseModel):
 class TaskMutationResponse(BaseModel):
     ok: bool
     task_id: str
-    revision: int
+    revision: int = 0
+    report_id: Optional[str] = None
+    status: Optional[str] = None
+    duplicate: bool = False
+    ack: bool = True
 
 
 class TerminalSyncManifestRequest(BaseModel):

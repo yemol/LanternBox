@@ -8,6 +8,42 @@
 
   <link rel="icon" href="/static/assets/brand/lanternbox-icon-original.png" type="image/png" />
   <link rel="stylesheet" href="/static/style.css?v=journal-calendar-v0-4" />
+  <style>
+    .journal-sync-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .journal-sync-badge.synced {
+      background: rgba(116, 196, 159, 0.38);
+    }
+
+    .journal-sync-badge.pending {
+      background: rgba(255, 183, 92, 0.38);
+    }
+
+    .journal-sync-badge.local {
+      background: rgba(137, 204, 255, 0.16);
+      color: #ffffff;
+    }
+
+    .journal-entry-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+  </style>
 </head>
 
 <body>
@@ -451,6 +487,29 @@
       return '<p class="terminal-audio-status">音频文件尚未同步到 Core。</p>';
     }
 
+    function renderJournalSyncStatus(entry) {
+      const metadata = entry.metadata || {};
+      const syncSession = String(
+        metadata.sync_session_id ||
+        metadata.sync_session ||
+        metadata.session_id ||
+        ''
+      ).trim();
+      const entryType = String(entry.entry_type || '').trim();
+      const title = String(entry.title || '').trim();
+      const isTerminalEntry = entryType.startsWith('终端') || title.startsWith('终端');
+
+      if (syncSession) {
+        return `<span class="journal-sync-badge synced">已同步</span>`;
+      }
+
+      if (isTerminalEntry) {
+        return `<span class="journal-sync-badge pending">待同步</span>`;
+      }
+
+      return `<span class="journal-sync-badge local">本地记录</span>`;
+    }
+
     function renderJournalList() {
       updateFilterUI();
       renderCalendar();
@@ -479,13 +538,17 @@
         const content = escapeHtml(entry.content || '');
         const createdAt = escapeHtml(formatTime(entry.created_at));
         const audioHtml = renderTerminalAudio(entry);
+        const syncStatus = renderJournalSyncStatus(entry);
 
         return `
           <article class="item-card journal-card">
             <div>
               <p class="item-code">${type}</p>
               <h3>${title}</h3>
-              <p>${createdAt}</p>
+              <div class="journal-entry-meta">
+                <p>${createdAt}</p>
+                ${syncStatus}
+              </div>
             </div>
 
             <div>

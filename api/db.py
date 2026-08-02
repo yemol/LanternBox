@@ -117,6 +117,7 @@ def init_db():
         """
         CREATE TABLE IF NOT EXISTS task_reports (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            report_id TEXT,
             task_id TEXT,
             device_id TEXT,
             status TEXT,
@@ -125,6 +126,7 @@ def init_db():
             device_time TEXT,
             lat REAL,
             lon REAL,
+            source TEXT,
             created_at TEXT
         )
         """
@@ -135,6 +137,20 @@ def init_db():
 
     if not column_exists(conn, "journal", "metadata_json"):
         conn.execute("ALTER TABLE journal ADD COLUMN metadata_json TEXT")
+
+    if not column_exists(conn, "task_reports", "report_id"):
+        conn.execute("ALTER TABLE task_reports ADD COLUMN report_id TEXT")
+
+    if not column_exists(conn, "task_reports", "source"):
+        conn.execute("ALTER TABLE task_reports ADD COLUMN source TEXT")
+
+    conn.execute(
+        """
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_task_reports_report_id
+        ON task_reports(report_id)
+        WHERE report_id IS NOT NULL AND report_id != ''
+        """
+    )
 
     backfill_item_codes(conn)
     conn.commit()

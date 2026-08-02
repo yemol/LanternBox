@@ -5,6 +5,7 @@ task report recording. It does not implement terminal sync or transport.
 """
 
 import json
+import hashlib
 from datetime import datetime, timezone
 from typing import Any, Optional
 
@@ -19,9 +20,25 @@ from ..models import (
 from .terminal_service import get_terminal_device
 
 
-TASK_STATUSES = {"open", "assigned", "in_progress", "blocked", "done", "cancelled"}
+TASK_STATUSES = {
+    "open",
+    "pending",
+    "assigned",
+    "in_progress",
+    "blocked",
+    "done",
+    "completed",
+    "cancelled",
+}
 TASK_PRIORITIES = {"low", "normal", "high", "critical"}
-FINAL_TASK_STATUSES = {"done", "cancelled"}
+FINAL_TASK_STATUSES = {"done", "completed", "cancelled"}
+STATUS_ALIASES = {
+    "todo": "pending",
+    "new": "pending",
+    "started": "in_progress",
+    "done": "completed",
+    "complete": "completed",
+}
 
 
 class TaskNotFoundError(Exception):
@@ -73,9 +90,31 @@ def _validate_priority(priority: str) -> str:
 
 def _validate_status(status: str) -> str:
     normalized = str(status or "open").strip() or "open"
+    normalized = STATUS_ALIASES.get(normalized, normalized)
     if normalized not in TASK_STATUSES:
         raise ValueError(f"unsupported task status: {normalized}")
     return normalized
+
+
+def _stable_report_id(
+    *,
+    device_id: str,
+    task_id: str,
+    status: str,
+    note: str,
+    device_date: str,
+    device_time: str,
+) -> str:
+    payload = {
+        "device_id": device_id,
+        "task_id": task_id,
+        "status": status,
+        "device_date": device_date,
+        "device_time": device_time,
+        "note": note,
+    }
+    digest = hashlib.sha256(_json_dumps(payload).encode("utf-8")).hexdigest()[:20]
+    return f"{device_id}:task_report:{task_id}:{digest}"
 
 
 def _ensure_devices_exist(device_ids: list[str]) -> None:
@@ -400,41 +439,71 @@ def pull_tasks_for_device(device_id: str) -> list[dict[str, Any]]:
             "target": task.target,
             "tags": task.tags,
             "updated_at": task.updated_at,
+            "assigned_to": task.assigned_to,
         }
         for task in tasks
     ]
 
 
-def record_task_report(payload: TaskReportRequest) -> TaskItem:
+def record_task_report(payload: TaskReportRequest) -> dict[str, Any]:
     device_id = payload.device_id.strip()
     task_id = payload.task_id.strip()
     _ensure_trusted_device(device_id)
     existing = get_task(task_id)
 
     next_status = existing.status
+    normalized_report_status = ""
     if payload.status:
-        next_status = _validate_status(payload.status)
+        normalized_report_status = _validate_status(payload.status)
+        next_status = normalized_report_status
 
     updated_at = _now_iso()
     revision = existing.revision + 1
+    report_id = str(payload.report_id or "").strip() or _stable_report_id(
+        device_id=device_id,
+        task_id=task_id,
+        status=normalized_report_status,
+        note=payload.note,
+        device_date=payload.device_date,
+        device_time=payload.device_time,
+    )
 
     report_payload = {
+        "report_id": report_id,
         "device_id": device_id,
         "task_id": task_id,
-        "status": payload.status,
+        "status": normalized_report_status,
         "note": payload.note,
         "device_date": payload.device_date,
         "device_time": payload.device_time,
         "lat": payload.lat,
         "lon": payload.lon,
+        "source": payload.source or "terminal",
     }
 
     conn = get_db_connection()
     try:
+        duplicate = conn.execute(
+            "SELECT id FROM task_reports WHERE report_id = ?",
+            (report_id,),
+        ).fetchone()
+        if duplicate:
+            current = get_task(task_id)
+            return {
+                "ok": True,
+                "task_id": current.task_id,
+                "revision": current.revision,
+                "report_id": report_id,
+                "status": current.status,
+                "duplicate": True,
+                "ack": True,
+            }
+
         conn.execute(
             """
             INSERT INTO task_reports
             (
+                report_id,
                 task_id,
                 device_id,
                 status,
@@ -443,19 +512,22 @@ def record_task_report(payload: TaskReportRequest) -> TaskItem:
                 device_time,
                 lat,
                 lon,
+                source,
                 created_at
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
+                report_id,
                 task_id,
                 device_id,
-                payload.status or "",
+                normalized_report_status,
                 payload.note,
                 payload.device_date,
                 payload.device_time,
                 payload.lat,
                 payload.lon,
+                payload.source or "terminal",
                 updated_at,
             ),
         )
@@ -469,9 +541,18 @@ def record_task_report(payload: TaskReportRequest) -> TaskItem:
             """,
             (next_status, updated_at, revision, task_id),
         )
-        _insert_task_event(conn, task_id, "report", report_payload)
+        _insert_task_event(conn, task_id, "terminal_report", report_payload)
         conn.commit()
     finally:
         conn.close()
 
-    return get_task(task_id)
+    task = get_task(task_id)
+    return {
+        "ok": True,
+        "task_id": task.task_id,
+        "revision": task.revision,
+        "report_id": report_id,
+        "status": task.status,
+        "duplicate": False,
+        "ack": True,
+    }

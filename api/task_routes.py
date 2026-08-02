@@ -79,12 +79,7 @@ def pull_tasks_api(device_id: str):
 @router.post("/report", response_model=TaskMutationResponse)
 def report_task_api(payload: TaskReportRequest):
     try:
-        task = record_task_report(payload)
-        return {
-            "ok": True,
-            "task_id": task.task_id,
-            "revision": task.revision,
-        }
+        return record_task_report(payload)
     except DeviceNotFoundError as error:
         raise _device_not_found(error)
     except DeviceNotTrustedError as error:

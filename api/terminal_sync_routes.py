@@ -159,6 +159,7 @@ async def create_terminal_sync_job(request: Request):
             api_base=str(payload.get("api_base") or str(request.base_url).rstrip("/")),
             upload_records=bool(payload.get("upload_records", True)),
             upload_audio_files=bool(payload.get("upload_audio_files", True)),
+            sync_tasks=bool(payload.get("sync_tasks", True)),
         )
     except TerminalUsbSyncError as error:
         raise HTTPException(status_code=400, detail=str(error))
