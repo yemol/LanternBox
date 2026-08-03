@@ -6,6 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from .config import APP_DIR, TTS_OUTPUT_DIR
 from .db import init_db
 from .resources import load_local_resources
+from .lora_routes import router as lora_router
 from .routes import router
 from .task_routes import router as task_router
 from .terminal_routes import router as terminal_router
@@ -18,6 +19,7 @@ app.include_router(router)
 app.include_router(terminal_router)
 app.include_router(task_router)
 app.include_router(terminal_sync_router)
+app.include_router(lora_router)
 
 
 @app.on_event("startup")

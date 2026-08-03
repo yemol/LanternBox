@@ -44,6 +44,18 @@ class AiRuntimeSettingsUpdate(BaseModel):
     show_retrieval_debug: Optional[bool] = None
 
 
+class LoraConnectRequest(BaseModel):
+    port: str
+    baud: int = 115200
+    transport: str = "usb_serial"
+
+
+class LoraSendRequest(BaseModel):
+    text: str
+    target: Optional[Any] = ""
+    targets: Optional[List[str]] = None
+
+
 class TerminalRegisterRequest(BaseModel):
     device_id: str
     name: str = ""

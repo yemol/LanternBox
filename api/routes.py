@@ -20,6 +20,7 @@ from .services.journal_service import (
     delete_journal_entry,
     list_journal_entries,
 )
+from .services.lora_service import get_lora_status
 
 from .config import (
     APP_DIR,
@@ -450,6 +451,10 @@ def terminals_page():
 def terminal_sync_page():
     return FileResponse(APP_DIR / "terminal_sync.html")
 
+@router.get("/communication.html")
+def communication_page():
+    return FileResponse(APP_DIR / "communication.html")
+
 @router.get("/tasks.html")
 def tasks_page():
     return FileResponse(APP_DIR / "tasks.html")
@@ -773,6 +778,26 @@ def system_check():
         "ok": voice_service["ok"],
         "message": "可用" if voice_service["ok"] else f"不可用：{voice_service['message']}"
     })
+
+    try:
+        lora = get_lora_status()["bridge"]
+        checks.append({
+            "id": "lora_bridge",
+            "title": "LoRa 接收端",
+            "ok": True,
+            "message": (
+                f"已通过 {lora.get('transport', 'usb_serial')} 连接 {lora['port']}，RX {lora['rx_count']} 条，TX {lora['tx_count']} 条"
+                if lora["connected"]
+                else "通讯模块可用，尚未连接 Heltec"
+            )
+        })
+    except Exception as error:
+        checks.append({
+            "id": "lora_bridge",
+            "title": "LoRa 接收端",
+            "ok": False,
+            "message": f"读取失败：{error}"
+        })
 
     checks.append({
         "id": "tts_output",

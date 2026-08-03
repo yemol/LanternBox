@@ -33,6 +33,16 @@ def backfill_item_codes(conn):
         )
 
 
+def add_column_if_missing(conn, table_name: str, column_name: str, column_definition: str):
+    if column_exists(conn, table_name, column_name):
+        return
+    try:
+        conn.execute(f"ALTER TABLE {table_name} ADD COLUMN {column_definition}")
+    except sqlite3.OperationalError as error:
+        if "duplicate column name" not in str(error).lower():
+            raise
+
+
 def init_db():
     conn = get_db_connection()
 
@@ -132,17 +142,51 @@ def init_db():
         """
     )
 
-    if not column_exists(conn, "inventory", "item_code"):
-        conn.execute("ALTER TABLE inventory ADD COLUMN item_code TEXT")
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS lora_messages (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            direction TEXT NOT NULL,
+            text TEXT NOT NULL,
+            raw TEXT,
+            transport TEXT,
+            port TEXT,
+            rssi REAL,
+            snr REAL,
+            metadata_json TEXT,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+        )
+        """
+    )
 
-    if not column_exists(conn, "journal", "metadata_json"):
-        conn.execute("ALTER TABLE journal ADD COLUMN metadata_json TEXT")
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS lora_nodes (
+            node_id TEXT PRIMARY KEY,
+            name TEXT,
+            role TEXT,
+            status TEXT,
+            transport TEXT,
+            port TEXT,
+            rssi REAL,
+            snr REAL,
+            message_count INTEGER DEFAULT 0,
+            metadata_json TEXT,
+            first_seen_at TEXT,
+            last_seen_at TEXT
+        )
+        """
+    )
 
-    if not column_exists(conn, "task_reports", "report_id"):
-        conn.execute("ALTER TABLE task_reports ADD COLUMN report_id TEXT")
+    add_column_if_missing(conn, "inventory", "item_code", "item_code TEXT")
 
-    if not column_exists(conn, "task_reports", "source"):
-        conn.execute("ALTER TABLE task_reports ADD COLUMN source TEXT")
+    add_column_if_missing(conn, "journal", "metadata_json", "metadata_json TEXT")
+
+    add_column_if_missing(conn, "task_reports", "report_id", "report_id TEXT")
+
+    add_column_if_missing(conn, "task_reports", "source", "source TEXT")
+
+    add_column_if_missing(conn, "lora_messages", "transport", "transport TEXT")
 
     conn.execute(
         """
