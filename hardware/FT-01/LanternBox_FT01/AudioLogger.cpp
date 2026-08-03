@@ -1,32 +1,10 @@
 #include "AudioLogger.h"
-
-#ifndef SD_SPI_CS_PIN
-#define SD_SPI_CS_PIN 12
-#endif
-
-#ifndef LORA_NSS_PIN
-#define LORA_NSS_PIN 5
-#endif
-
-#ifndef LORA_RST_PIN
-#define LORA_RST_PIN 3
-#endif
+#include "FtTextUtil.h"
+#include "FtHardware.h"
+#include "FtAudioStore.h"
 
 const char* AudioLogger::AUDIO_DIR = "/lanternbox/audio";
 const char* AudioLogger::INDEX_FILE = "/lanternbox/audio/index.jsonl";
-
-static String audioBaseNameLocal(const String& path) {
-  int slash = path.lastIndexOf('/');
-  if (slash >= 0 && slash + 1 < path.length()) {
-    return path.substring(slash + 1);
-  }
-  return path;
-}
-
-static String audioNormalizePathLocal(const String& path, const String& dir) {
-  if (path.startsWith("/")) return path;
-  return dir + "/" + path;
-}
 
 bool AudioLogger::begin() {
   if (begun) return true;
@@ -74,18 +52,7 @@ void AudioLogger::update() {
 }
 
 void AudioLogger::prepareSdBus() {
-  // AudioLogger also touches SD after boot.
-  // Re-assert shared SPI idle state before SD.exists/open/read/write.
-  pinMode(LORA_NSS_PIN, OUTPUT);
-  digitalWrite(LORA_NSS_PIN, HIGH);
-
-  pinMode(LORA_RST_PIN, OUTPUT);
-  digitalWrite(LORA_RST_PIN, HIGH);
-
-  pinMode(SD_SPI_CS_PIN, OUTPUT);
-  digitalWrite(SD_SPI_CS_PIN, HIGH);
-
-  delayMicroseconds(50);
+  FtHardware::prepareSharedSpiIdle(50UL);
 }
 
 bool AudioLogger::ensureAudioDirs() {
@@ -170,29 +137,6 @@ String AudioLogger::nextAudioFilename() {
   return String(AUDIO_DIR) + "/audio_999.wav";
 }
 
-String AudioLogger::latestAudioFilename() {
-  prepareSdBus();
-  for (int i = 999; i >= 1; i--) {
-    char path[48];
-    snprintf(path, sizeof(path), "%s/audio_%03d.wav", AUDIO_DIR, i);
-
-    if (SD.exists(path)) {
-      return String(path);
-    }
-  }
-
-  return "";
-}
-
-String AudioLogger::fileNameOnly(const String& path) const {
-  int slash = path.lastIndexOf('/');
-  if (slash >= 0 && slash + 1 < path.length()) {
-    return path.substring(slash + 1);
-  }
-
-  return path;
-}
-
 void AudioLogger::refreshList() {
   prepareSdBus();
 
@@ -225,7 +169,7 @@ void AudioLogger::refreshList() {
     if (e <= p) continue;
 
     String fileValue = line.substring(p, e);
-    String fullPath = audioNormalizePathLocal(fileValue, String(AUDIO_DIR));
+    String fullPath = ftNormalizePath(fileValue, String(AUDIO_DIR));
 
     // Critical: do not show stale index entries.
     if (SD.exists(fullPath)) {
@@ -276,30 +220,6 @@ int AudioLogger::listCount() const {
 
 int AudioLogger::listIndex() const {
   return selectedIndex;
-}
-
-String AudioLogger::selectedFileName() const {
-  if (audioFileCount <= 0 || selectedIndex < 0 || selectedIndex >= audioFileCount) {
-    return "--";
-  }
-
-  return fileNameOnly(audioFiles[selectedIndex]);
-}
-
-String AudioLogger::selectedFilePath() const {
-  if (audioFileCount <= 0 || selectedIndex < 0 || selectedIndex >= audioFileCount) {
-    return "";
-  }
-
-  return audioFiles[selectedIndex];
-}
-
-String AudioLogger::listFileNameAt(int index) const {
-  if (audioFileCount <= 0 || index < 0 || index >= audioFileCount) {
-    return "--";
-  }
-
-  return fileNameOnly(audioFiles[index]);
 }
 
 String AudioLogger::listFilePathAt(int index) const {
@@ -480,137 +400,29 @@ void AudioLogger::stopPlayback() {
   Serial.println("[AUDIO] playback stop requested");
 }
 
-bool AudioLogger::playLatest() {
-  String target = lastAudioPath;
-  if (target.length() == 0 || !SD.exists(target)) {
-    target = latestAudioFilename();
-  }
-
-  return playFile(target);
-}
-
-void AudioLogger::rewriteIndexExcluding(const String& deletedPath) {
-  prepareSdBus();
-
-  String deletedName = audioBaseNameLocal(deletedPath);
-  String deletedFull = audioNormalizePathLocal(deletedPath, String(AUDIO_DIR));
-
-  File oldFile = SD.open(INDEX_FILE, FILE_READ);
-  if (!oldFile) {
-    Serial.println("[AUDIO] index rewrite skipped: no index");
-    return;
-  }
-
-  String keep[64];
-  int keepCount = 0;
-  int removedCount = 0;
-
-  while (oldFile.available() && keepCount < 64) {
-    String line = oldFile.readStringUntil('\n');
-    if (line.length() == 0) continue;
-
-    int p = line.indexOf("\"file\":\"");
-    bool keepLine = true;
-
-    if (p >= 0) {
-      p += 8;
-      int e = line.indexOf("\"", p);
-
-      if (e > p) {
-        String fileValue = line.substring(p, e);
-        String fileName = audioBaseNameLocal(fileValue);
-        String fullPath = audioNormalizePathLocal(fileValue, String(AUDIO_DIR));
-
-        bool isDeletedTarget =
-          (fileValue == deletedPath) ||
-          (fullPath == deletedFull) ||
-          (fileName == deletedName);
-
-        bool existsOnSd = SD.exists(fullPath);
-
-        // Drop exact deleted target and drop stale missing WAV entries.
-        if (isDeletedTarget || !existsOnSd) {
-          keepLine = false;
-          removedCount++;
-        }
-      }
-    }
-
-    if (keepLine) {
-      keep[keepCount++] = line;
-    }
-  }
-
-  oldFile.close();
-
-  prepareSdBus();
-  SD.remove(INDEX_FILE);
-
-  File newFile = SD.open(INDEX_FILE, FILE_WRITE);
-  if (!newFile) {
-    Serial.println("[AUDIO] index rewrite failed: open write");
-    return;
-  }
-
-  for (int i = 0; i < keepCount; i++) {
-    newFile.println(keep[i]);
-  }
-
-  newFile.close();
-
-  Serial.print("[AUDIO] index rewrite keep=");
-  Serial.print(keepCount);
-  Serial.print(" removed=");
-  Serial.println(removedCount);
-}
-
 bool AudioLogger::deleteSelected() {
   if (state != IDLE) {
     Serial.println("[AUDIO] delete blocked: busy");
     return false;
   }
 
-  if (audioFileCount == 0) {
-    refreshList();
-  }
-
-  if (audioFileCount <= 0 ||
-      selectedIndex < 0 ||
-      selectedIndex >= audioFileCount) {
+  if (audioFileCount == 0) refreshList();
+  if (audioFileCount <= 0 || selectedIndex < 0 || selectedIndex >= audioFileCount) {
     Serial.println("[AUDIO] delete no selection");
     return false;
   }
 
-  String target = audioFiles[selectedIndex];
-  String targetName = audioBaseNameLocal(target);
-  String targetFull = audioNormalizePathLocal(target, String(AUDIO_DIR));
-prepareSdBus();
-
-  bool fileRemoved = false;
-
-  if (SD.exists(targetFull)) {
-    fileRemoved = SD.remove(targetFull);
-    Serial.print("[AUDIO] wav remove ");
-} else {
-// Treat as cleanup success, but still remove its index record.
-    fileRemoved = true;
-  }
-
-  if (!fileRemoved) {
+  FtAudioDeleteResult result;
+  bool ok = ftDeleteAudioAndIndex(ftBaseName(audioFiles[selectedIndex]), result);
+  if (!ok) {
+    Serial.print("[AUDIO] delete failed: ");
+    Serial.println(result.error);
     return false;
   }
 
-  // This is the important part: persistently remove the index entry.
-  rewriteIndexExcluding(targetFull);
-
   refreshList();
-
-  if (audioFileCount == 0) {
-    selectedIndex = 0;
-  } else if (selectedIndex >= audioFileCount) {
-    selectedIndex = audioFileCount - 1;
-  }
-
+  if (audioFileCount == 0) selectedIndex = 0;
+  else if (selectedIndex >= audioFileCount) selectedIndex = audioFileCount - 1;
   return true;
 }
 
@@ -768,18 +580,6 @@ void AudioLogger::gainDown() {
   Serial.println(playGain % 10);
 }
 
-bool AudioLogger::isRecording() const {
-  return state == RECORDING;
-}
-
-bool AudioLogger::isSaving() const {
-  return state == SAVING;
-}
-
-bool AudioLogger::isPlaying() const {
-  return state == PLAYING;
-}
-
 bool AudioLogger::isBusy() const {
   return state == RECORDING || state == SAVING || state == PLAYING;
 }
@@ -794,18 +594,6 @@ const char* AudioLogger::stateText() const {
   }
 
   return "UNKNOWN";
-}
-
-String AudioLogger::lastFile() const {
-  return lastAudioPath;
-}
-
-uint32_t AudioLogger::samples() const {
-  return totalSamples;
-}
-
-uint32_t AudioLogger::droppedChunks() const {
-  return dropped;
 }
 
 int AudioLogger::gainX10() const {

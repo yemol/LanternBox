@@ -44,7 +44,6 @@ public:
   );
 
   bool stopRecord();
-  bool playLatest();
   bool playSelected();
   bool deleteSelected();
   void stopPlayback();
@@ -52,23 +51,14 @@ public:
   void moveSelection(int delta);
   int listCount() const;
   int listIndex() const;
-  String selectedFileName() const;
-  String selectedFilePath() const;
-  String listFileNameAt(int index) const;
   String listFilePathAt(int index) const;
 
   void gainUp();
   void gainDown();
 
-  bool isRecording() const;
-  bool isSaving() const;
-  bool isPlaying() const;
   bool isBusy() const;
 
   const char* stateText() const;
-  String lastFile() const;
-  uint32_t samples() const;
-  uint32_t droppedChunks() const;
   int gainX10() const;
 
 private:
@@ -98,12 +88,9 @@ private:
   void closeMic();
   void writeWavHeader(File& f, uint32_t dataBytes);
   String nextAudioFilename();
-  String latestAudioFilename();
   bool playFile(const String& target);
-  String fileNameOnly(const String& path) const;
   void drainAudioQueue();
   void saveAudioIndex();
-  void rewriteIndexExcluding(const String& deletedPath);
   void applyPlaybackGain(int16_t* data, size_t samples);
 
   static void micTaskThunk(void* arg);

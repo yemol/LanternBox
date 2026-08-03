@@ -1,4 +1,5 @@
 #include <M5Cardputer.h>
+#include "FtConfig.h"
 #include <SPI.h>
 #include <SD.h>
 #include "UiRecorder.h"
@@ -10,6 +11,12 @@
 #include "UiSync.h"
 #include "TaskManager.h"
 #include "UiTasks.h"
+#include "LoRaManager.h"
+#include "UiLoRaProbe.h"
+#include "FtUiCommon.h"
+#include "FtTextUtil.h"
+#include "FtHardware.h"
+#include "FtTimeUtil.h"
 
 /*
   LanternBox Field Terminal
@@ -31,25 +38,10 @@
   - Esc / Del: leave recorder, stop session and auto track
 */
 
-#define SD_SPI_SCK_PIN   40
-#define SD_SPI_MISO_PIN  39
-#define SD_SPI_MOSI_PIN  14
-#define SD_SPI_CS_PIN    12
-#define SD_INIT_FREQ     400000
-
-#define LORA_NSS_PIN     5
-#define LORA_RST_PIN     3
-#define LORA_IRQ_PIN     4
-#define LORA_BUSY_PIN    6
-
-#define GNSS_RX_PIN      15
-#define GNSS_TX_PIN      13
-#define GNSS_BAUD        115200
-
 #define LOCAL_TIMEZONE_OFFSET_SECONDS 28800
 static const char* LOCAL_TIMEZONE_TEXT = "UTC+8";
 
-const char* VERSION = "v0.4.4c-audio-cleanup-guard";
+const char* VERSION = "v0.5.2e";
 
 // Serial debug switches.
 // Keep raw NMEA off by default, otherwise useful logs are buried.
@@ -62,6 +54,10 @@ HardwareSerial GNSS(1);
 AudioLogger audioLogger;
 SyncManager syncManager;
 TaskManager taskManager;
+LoRaManager loraManager;
+UiLoRaProbe uiLoRaProbe;
+unsigned long lastLoRaInitAttemptMs = 0;
+static constexpr unsigned long LORA_INIT_RETRY_MS = 30000UL;
 
 m5::imu_data_t imuData;
 double imuHeadingDeg = 0.0;
@@ -71,13 +67,13 @@ unsigned long lastImuMillis = 0;
 // ---------- App state ----------
 enum AppScreen {
   SCREEN_HOME,
-  SCREEN_STATUS,
   SCREEN_RECORDER,
   SCREEN_LOG,
   SCREEN_NAV,
   SCREEN_SYNC,
   SCREEN_TASKS,
   SCREEN_DEVICE,
+  SCREEN_LORA_PROBE,
   SCREEN_HELP,
   SCREEN_PLACEHOLDER
 };
@@ -88,17 +84,19 @@ AppScreen previousScreen = SCREEN_HOME;
 struct MenuItem {
   const char* titleCn;
   const char* titleEn;
+  AppScreen target;
 };
 
-MenuItem menuItems[] = {
-  {"路径", "LOG"},
-  {"日志", "LOGS"},
-  {"导航", "NAV"},
-  {"任务", "TASK"},
-  {"设置", "SET"},
-  {"同步", "SYNC"},
-  {"设备", "DEV"},
-  {"关于", "INFO"}
+const MenuItem menuItems[] = {
+  {"路径", "LOG",  SCREEN_RECORDER},
+  {"日志", "LOGS", SCREEN_LOG},
+  {"导航", "NAV",  SCREEN_NAV},
+  {"任务", "TASK", SCREEN_TASKS},
+  {"设置", "SET",  SCREEN_PLACEHOLDER},
+  {"同步", "SYNC", SCREEN_SYNC},
+  {"设备", "DEV",  SCREEN_DEVICE},
+  {"通信", "LORA", SCREEN_LORA_PROBE},
+  {"关于", "INFO", SCREEN_PLACEHOLDER}
 };
 
 const int menuCount = sizeof(menuItems) / sizeof(menuItems[0]);
@@ -192,13 +190,18 @@ int baseWriteCount = 0;
 int eventWriteCount = 0;
 bool autoTrack = false;
 unsigned long lastAutoTrackMillis = 0;
-const unsigned long autoTrackIntervalMs = 30000;
 
 String currentSessionId = "";
 String lastRecordTime = "--";
 bool sessionActive = false;
 
 // ---------- Forward declarations ----------
+void useChineseFont16();
+void useChineseFont12();
+void useAsciiFont();
+unsigned long getCurrentEpoch();
+void updateDeviceStatus();
+String formatDouble6(double value);
 bool initSD();
 bool ensureLanternDirs();
 bool writeBootLog();
@@ -206,6 +209,11 @@ bool appendLineToFile(const char* path, const String& line);
 bool appendFieldEvent(const String& eventType, const String& note);
 bool writeStorageTestEvent();
 void initGNSS();
+void drawHomeScreen();
+void drawLoRaProbeScreen();
+void handleLoRaProbeKey(const String& key);
+void handleDeviceKey(const String& key);
+void openHelpPage(HelpType type, AppScreen returnPage);
 
 void logGnssSummaryIfNeeded() {
   if (!DEBUG_GNSS_SUMMARY) return;
@@ -244,19 +252,9 @@ void readGnssStream();
 void drawCurrentScreen();
 void processSerialSyncCommands();
 void processSerialSyncCommandLine(String line);
+void markTaskReceiveActivity();
+void clearTaskReceiveActivity();
 
-
-// ---------- Forward declarations used by Device page ----------
-void updateDeviceStatus();
-String formatDouble6(double value);
-bool initSD();
-void initGNSS();
-bool keyHasLetter(const String& key, char lower, char upper);
-bool isEscKey(const String& key);
-bool isLeftKey(const String& key);
-bool isRightKey(const String& key);
-void drawHomeScreen();
-void openHelpPage(HelpType type, AppScreen returnPage);
 
 String shortDeviceId() {
   String id = String(DEVICE_ID);
@@ -276,7 +274,7 @@ String uptimeText() {
   unsigned long m = (sec % 3600UL) / 60UL;
   unsigned long s = sec % 60UL;
 
-  char buf[16];
+  char buf[24];
   if (h > 0) snprintf(buf, sizeof(buf), "%luh%02lum", h, m);
   else snprintf(buf, sizeof(buf), "%lum%02lus", m, s);
   return String(buf);
@@ -284,52 +282,19 @@ String uptimeText() {
 
 void drawDeviceHeader(const String& title) {
   updateDeviceStatus();
-
-  char timeText[12];
-  epochToTimeString(getCurrentEpoch(), timeText, sizeof(timeText));
-  String hhmm = String(timeText).substring(0, 5);
-
-  canvas.fillRect(0, 0, canvas.width(), 22, BLACK);
-
-  useChineseFont16();
-  canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(8, 4);
-  canvas.print(title);
-
-  useAsciiFont();
-  canvas.setTextColor(sdReady ? GREEN : DARKGREY, BLACK);
-  canvas.setCursor(136, 5);
-  canvas.print("SD");
-
-  canvas.setTextColor(gnssFix ? GREEN : DARKGREY, BLACK);
-  canvas.setCursor(162, 5);
-  canvas.print("GNSS");
-
-  canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(204, 5);
-  canvas.print(hhmm);
+  ftDrawHeaderBase(title);
+  ftDrawSdGnssStatus(136, 162);
+  ftDrawClockHHMM(204);
 }
 
 void drawDeviceRow(int y, const String& label, const String& value, uint16_t color = WHITE) {
-  useChineseFont12();
-  canvas.setTextColor(LIGHTGREY, BLACK);
-  canvas.setCursor(10, y);
-  canvas.print(label);
-
-  useAsciiFont();
-  canvas.setTextColor(color, BLACK);
-  canvas.setCursor(84, y + 1);
-  canvas.print(value);
+  ftDrawLabelValueRow(y, label, value, 84, color);
 }
 
 void drawDeviceFooter() {
-  canvas.drawLine(0, 112, canvas.width(), 112, WHITE);
+  ftDrawFooter("< > Page | R Refresh | H Help");
 
   useAsciiFont();
-  canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(8, 116);
-  canvas.print("< > Page | R Refresh | H Help");
-
   canvas.setCursor(202, 116);
   canvas.print(devicePage + 1);
   canvas.print("/");
@@ -373,55 +338,13 @@ void drawDeviceScreen() {
     drawDeviceRow(48, "导航", "UI TEST", ORANGE);
     drawDeviceRow(64, "路径", String(pathPointCount) + " pts");
     drawDeviceRow(80, "音频", "OK", GREEN);
-    drawDeviceRow(96, "LoRa", "未接入", DARKGREY);
+    drawDeviceRow(96, "LoRa", loraManager.isReady() ? "PROBE OK" : "Probe", loraManager.isReady() ? GREEN : ORANGE);
   }
 
   drawDeviceFooter();
   canvas.pushSprite(0, 0);
 }
 
-
-void drawHomeScreen();
-void drawStatusScreen();
-void drawDeviceScreen();
-void drawRecorderScreen();
-void openSyncHelp();
-void drawHelpScreen();
-void drawHelpManager();
-void drawLogScreen();
-void handleLogKey(const String& key);
-void handleDeviceKey(const String& key);
-void audioLogStart();
-void audioLogStop();
-void audioLogPlay();
-void audioLogStopPlayback();
-
-void audioLogStopPlayback() {
-  audioLogger.stopPlayback();
-  drawLogScreen();
-}
-
-void audioLogGainUp();
-void audioLogGainDown();
-void audioLogListRefresh();
-void audioLogListMove(int delta);
-void audioLogListPlaySelected();
-bool audioLogDeleteSelected();
-String audioLogSelectedFileName();
-String audioLogSelectedFilePath();
-String audioLogListFileNameAt(int index);
-String audioLogListFilePathAt(int index);
-int audioLogListCount();
-int audioLogListIndex();
-const char* audioLogStateText();
-String audioLogLastFile();
-uint32_t audioLogSamples();
-uint32_t audioLogDropped();
-int audioLogGainX10();
-bool audioLogIsBusy();
-void openHelpPage(HelpType type, AppScreen returnPage);
-void updateDeviceStatus();
-void openLogHelp();
 
 // ---------- Font helpers ----------
 void useChineseFont16() {
@@ -443,128 +366,11 @@ void useAsciiFont() {
 }
 
 // ---------- Time helpers ----------
-int monthNameToNumber(const char* month) {
-  if (strcmp(month, "Jan") == 0) return 1;
-  if (strcmp(month, "Feb") == 0) return 2;
-  if (strcmp(month, "Mar") == 0) return 3;
-  if (strcmp(month, "Apr") == 0) return 4;
-  if (strcmp(month, "May") == 0) return 5;
-  if (strcmp(month, "Jun") == 0) return 6;
-  if (strcmp(month, "Jul") == 0) return 7;
-  if (strcmp(month, "Aug") == 0) return 8;
-  if (strcmp(month, "Sep") == 0) return 9;
-  if (strcmp(month, "Oct") == 0) return 10;
-  if (strcmp(month, "Nov") == 0) return 11;
-  if (strcmp(month, "Dec") == 0) return 12;
-  return 1;
-}
-
-bool isLeapYear(int year) {
-  if (year % 400 == 0) return true;
-  if (year % 100 == 0) return false;
-  return year % 4 == 0;
-}
-
-unsigned long daysBeforeMonth(int year, int month) {
-  const int daysInMonth[] = {
-    31, 28, 31, 30, 31, 30,
-    31, 31, 30, 31, 30, 31
-  };
-
-  unsigned long days = 0;
-  for (int m = 1; m < month; m++) {
-    days += daysInMonth[m - 1];
-    if (m == 2 && isLeapYear(year)) days += 1;
-  }
-
-  return days;
-}
-
-unsigned long makeEpochFromCompileTime() {
-  char monthStr[4];
-  int day;
-  int year;
-  int hour;
-  int minute;
-  int second;
-
-  sscanf(__DATE__, "%3s %d %d", monthStr, &day, &year);
-  sscanf(__TIME__, "%d:%d:%d", &hour, &minute, &second);
-
-  int month = monthNameToNumber(monthStr);
-
-  unsigned long days = 0;
-  for (int y = 1970; y < year; y++) {
-    days += isLeapYear(y) ? 366 : 365;
-  }
-
-  days += daysBeforeMonth(year, month);
-  days += day - 1;
-
-  return days * 86400UL + hour * 3600UL + minute * 60UL + second;
-}
-
 unsigned long getCurrentEpoch() {
   long uptimeSeconds = (millis() - bootMillis) / 1000;
   long current = (long)baseEpoch + uptimeSeconds + timeOffsetSeconds;
   if (current < 0) current = 0;
   return (unsigned long)current;
-}
-
-void epochToTimeString(unsigned long epoch, char* buffer, size_t bufferSize) {
-  unsigned long secondsInDay = epoch % 86400UL;
-  int hour = secondsInDay / 3600;
-  int minute = (secondsInDay % 3600) / 60;
-  int second = secondsInDay % 60;
-  snprintf(buffer, bufferSize, "%02d:%02d:%02d", hour, minute, second);
-}
-
-void epochToShortTimeString(unsigned long epoch, char* buffer, size_t bufferSize) {
-  unsigned long secondsInDay = epoch % 86400UL;
-  int hour = secondsInDay / 3600;
-  int minute = (secondsInDay % 3600) / 60;
-  snprintf(buffer, bufferSize, "%02d:%02d", hour, minute);
-}
-
-int daysInMonth(int year, int month) {
-  switch (month) {
-    case 1: return 31;
-    case 2: return isLeapYear(year) ? 29 : 28;
-    case 3: return 31;
-    case 4: return 30;
-    case 5: return 31;
-    case 6: return 30;
-    case 7: return 31;
-    case 8: return 31;
-    case 9: return 30;
-    case 10: return 31;
-    case 11: return 30;
-    case 12: return 31;
-    default: return 30;
-  }
-}
-
-void epochToDateString(unsigned long epoch, char* buffer, size_t bufferSize) {
-  unsigned long days = epoch / 86400UL;
-  int year = 1970;
-
-  while (true) {
-    int daysInYear = isLeapYear(year) ? 366 : 365;
-    if (days < (unsigned long)daysInYear) break;
-    days -= daysInYear;
-    year++;
-  }
-
-  int month = 1;
-  while (month <= 12) {
-    int dim = daysInMonth(year, month);
-    if (days < (unsigned long)dim) break;
-    days -= dim;
-    month++;
-  }
-
-  int day = (int)days + 1;
-  snprintf(buffer, bufferSize, "%04d-%02d-%02d", year, month, day);
 }
 
 String currentDeviceDateText() {
@@ -577,22 +383,6 @@ String currentDeviceTimeText() {
   char timeText[12];
   epochToTimeString(getCurrentEpoch(), timeText, sizeof(timeText));
   return String(timeText);
-}
-
-unsigned long makeEpochFromDateTime(int year, int month, int day, int hour, int minute, int second) {
-  if (year < 1970 || month < 1 || month > 12 || day < 1 || day > 31) {
-    return 0;
-  }
-
-  unsigned long days = 0;
-  for (int y = 1970; y < year; y++) {
-    days += isLeapYear(y) ? 366 : 365;
-  }
-
-  days += daysBeforeMonth(year, month);
-  days += day - 1;
-
-  return days * 86400UL + hour * 3600UL + minute * 60UL + second;
 }
 
 bool syncDeviceTimeFromGnssRaw(const String& dateRaw, const String& timeRaw) {
@@ -668,46 +458,10 @@ void stopSession() {
 
 // ---------- SD helpers ----------
 void prepareSharedSpiBusForSD() {
-  pinMode(LORA_NSS_PIN, OUTPUT);
-  digitalWrite(LORA_NSS_PIN, HIGH);
-
-  pinMode(LORA_RST_PIN, OUTPUT);
-  digitalWrite(LORA_RST_PIN, HIGH);
-
-  pinMode(SD_SPI_CS_PIN, OUTPUT);
-  digitalWrite(SD_SPI_CS_PIN, HIGH);
-
-  pinMode(LORA_IRQ_PIN, INPUT);
-  pinMode(LORA_BUSY_PIN, INPUT);
-
-  delay(20);
+  FtHardware::prepareSharedSpiIdle(20000UL);
   if (!isSyncSerialQuietMode()) {
-    Serial.println("[SPI] shared bus prepared: LoRa NSS high, LoRa RST high, SD CS high");
+    Serial.println("[SPI] shared bus idle for SD");
   }
-}
-
-String formatBytes(uint64_t bytes) {
-  double value = (double)bytes;
-
-  if (value >= 1024.0 * 1024.0 * 1024.0) {
-    char buf[24];
-    snprintf(buf, sizeof(buf), "%.2fGB", value / 1024.0 / 1024.0 / 1024.0);
-    return String(buf);
-  }
-
-  if (value >= 1024.0 * 1024.0) {
-    char buf[24];
-    snprintf(buf, sizeof(buf), "%.2fMB", value / 1024.0 / 1024.0);
-    return String(buf);
-  }
-
-  if (value >= 1024.0) {
-    char buf[24];
-    snprintf(buf, sizeof(buf), "%.2fKB", value / 1024.0);
-    return String(buf);
-  }
-
-  return String((unsigned long)bytes) + "B";
 }
 
 String cardTypeToText(uint8_t cardType) {
@@ -889,10 +643,10 @@ bool initSD() {
 
   prepareSharedSpiBusForSD();
 
-  SPI.begin(SD_SPI_SCK_PIN, SD_SPI_MISO_PIN, SD_SPI_MOSI_PIN, SD_SPI_CS_PIN);
+  SPI.begin(FtHardware::SD_SCK_PIN, FtHardware::SD_MISO_PIN, FtHardware::SD_MOSI_PIN, FtHardware::SD_CS_PIN);
   delay(50);
 
-  if (!SD.begin(SD_SPI_CS_PIN, SPI, SD_INIT_FREQ)) {
+  if (!SD.begin(FtHardware::SD_CS_PIN, SPI, FtHardware::SD_INIT_FREQ)) {
     sdReady = false;
     sdStatusText = "FAIL";
     sdMessage = "BEGIN FAIL";
@@ -911,7 +665,7 @@ bool initSD() {
     return false;
   }
 
-  sdSizeText = formatBytes(SD.cardSize());
+  sdSizeText = ftFormatBytes(SD.cardSize(), 2);
 
   Serial.print("[SD] type: ");
   Serial.println(sdTypeText);
@@ -1080,7 +834,7 @@ void initGNSS() {
   GNSS.end();
   delay(80);
 
-  GNSS.begin(GNSS_BAUD, SERIAL_8N1, GNSS_RX_PIN, GNSS_TX_PIN);
+  GNSS.begin(FtHardware::GNSS_BAUD, SERIAL_8N1, FtHardware::GNSS_RX_PIN, FtHardware::GNSS_TX_PIN);
   delay(120);
 
   gnssStatusText = "GNSS START";
@@ -1236,7 +990,7 @@ void autoTrackTick() {
   if (!gnssFix) return;
 
   unsigned long now = millis();
-  if (now - lastAutoTrackMillis >= autoTrackIntervalMs) {
+  if (now - lastAutoTrackMillis >= FT_AUTO_TRACK_INTERVAL_MS) {
     lastAutoTrackMillis = now;
     savePathPoint("auto");
   }
@@ -1248,41 +1002,7 @@ void updateDeviceStatus() {
   batteryVoltage = M5Cardputer.Power.getBatteryVoltage();
 }
 
-String recorderModeText() {
-  if (autoTrack) return "AUTO";
-  if (sessionActive) return "SESSION";
-  return "IDLE";
-}
-
-String baseStateText() {
-  return baseSet ? "YES" : "NO";
-}
-
-String shortSessionText() {
-  if (currentSessionId.length() == 0) return "--";
-  return currentSessionId;
-}
-
-String gnssStateText() {
-  if (gnssFix) return "FIX";
-  if (gnssNmeaSeen && millis() - gnssLastNmeaMillis > 5000) return "LOST";
-  if (gnssNmeaSeen) return "SEARCH";
-  return "WAIT";
-}
-
 // ---------- Drawing ----------
-void drawRowAscii(int y, const char* labelCn, const String& value, uint16_t color = WHITE) {
-  useChineseFont12();
-  canvas.setTextColor(DARKGREY, BLACK);
-  canvas.setCursor(8, y);
-  canvas.print(labelCn);
-
-  useAsciiFont();
-  canvas.setTextColor(color, BLACK);
-  canvas.setCursor(66, y + 2);
-  canvas.print(value);
-}
-
 void drawTopBar() {
   canvas.fillRect(0, 0, canvas.width(), 20, BLACK);
 
@@ -1311,6 +1031,15 @@ void drawTopBar() {
     canvas.print("%");
   } else {
     canvas.print("--");
+  }
+
+  const size_t unread = loraManager.unreadMessageCount();
+  if (unread > 0) {
+    canvas.setTextColor(CYAN, BLACK);
+    canvas.setCursor(216, 5);
+    canvas.print("M");
+    if (unread > 9) canvas.print("9+");
+    else canvas.print((int)unread);
   }
 
   canvas.drawLine(0, 20, canvas.width(), 20, DARKGREY);
@@ -1422,207 +1151,6 @@ void drawHomeScreen() {
   canvas.pushSprite(0, 0);
 }
 
-void drawStatusScreen() {
-  updateDeviceStatus();
-
-  canvas.fillSprite(BLACK);
-
-  useChineseFont16();
-  canvas.setTextColor(GREEN, BLACK);
-  canvas.setCursor(8, 4);
-  canvas.print("壳中灯 状态");
-
-  useAsciiFont();
-  canvas.setTextColor(DARKGREY, BLACK);
-  canvas.setCursor(144, 10);
-  canvas.print(DEVICE_ID);
-
-  canvas.drawLine(0, 25, canvas.width(), 25, DARKGREY);
-
-  char timeText[12];
-  epochToTimeString(getCurrentEpoch(), timeText, sizeof(timeText));
-
-  String batteryText = batteryLevel >= 0 ? String(batteryLevel) + "%" : "--";
-
-  drawRowAscii(30, "版本", VERSION);
-  drawRowAscii(44, "时间", String(timeText));
-  drawRowAscii(58, "电量", batteryText, batteryLevel <= 20 ? ORANGE : WHITE);
-  drawRowAscii(72, "SD", sdStatusText + " " + sdTypeText, sdReady ? GREEN : ORANGE);
-  drawRowAscii(86, "GNSS", gnssFix ? "FIX" : gnssStatusText, gnssFix ? GREEN : ORANGE);
-  drawRowAscii(100, "卫星", gnssSatellites >= 0 ? String(gnssSatellites) : "--");
-  drawRowAscii(114, "日志", sdLogText, sdLogText == "OK" ? GREEN : ORANGE);
-
-  canvas.pushSprite(0, 0);
-}
-
-
-
-String displaySessionId(int maxLen) {
-  if (currentSessionId.length() == 0) return "--";
-  if (currentSessionId.length() <= maxLen) return currentSessionId;
-  return currentSessionId.substring(0, maxLen);
-}
-
-String autoNextText() {
-  if (!autoTrack) return "--";
-
-  unsigned long now = millis();
-  unsigned long elapsed = now - lastAutoTrackMillis;
-
-  if (elapsed >= autoTrackIntervalMs) {
-    return "00:00";
-  }
-
-  unsigned long remain = (autoTrackIntervalMs - elapsed) / 1000;
-  char buf[8];
-  snprintf(buf, sizeof(buf), "00:%02lu", remain);
-  return String(buf);
-}
-
-String baseDisplayText() {
-  return baseSet ? "SET" : "NO";
-}
-
-
-String displaySessionIdForCard() {
-  if (!sessionActive || currentSessionId.length() == 0) {
-    return "尚未开启";
-  }
-
-  if (currentSessionId.length() <= 12) {
-    return currentSessionId;
-  }
-
-  return currentSessionId.substring(0, 12);
-}
-
-String pointsDisplayText() {
-  return String(pathWriteCount);
-}
-
-String satelliteDisplayText() {
-  if (!gnssFix) return "NO FIX";
-  if (gnssSatellites < 0) return "--";
-  return String(gnssSatellites);
-}
-
-String countdownDisplayText() {
-  if (!autoTrack) return "--:--";
-  return autoNextText();
-}
-
-void drawBatteryIcon(int x, int y, int percent) {
-  canvas.drawRoundRect(x, y + 3, 14, 17, 2, WHITE);
-  canvas.fillRect(x + 4, y, 6, 3, WHITE);
-
-  int h = 0;
-  if (percent >= 0) {
-    h = map(percent, 0, 100, 0, 13);
-    if (h < 0) h = 0;
-    if (h > 13) h = 13;
-  }
-
-  if (h > 0) {
-    canvas.fillRect(x + 3, y + 17 - h, 8, h, WHITE);
-  }
-}
-
-void drawSdIconSmall(int x, int y, bool ok) {
-  uint16_t c = ok ? GREEN : DARKGREY;
-
-  canvas.fillRoundRect(x + 2, y + 2, 16, 20, 2, c);
-  canvas.fillTriangle(x + 2, y + 2, x + 8, y + 2, x + 2, y + 8, BLACK);
-  canvas.fillRect(x + 8, y + 5, 2, 5, BLACK);
-  canvas.fillRect(x + 12, y + 5, 2, 5, BLACK);
-  canvas.fillRect(x + 16, y + 5, 2, 5, BLACK);
-}
-
-void drawAutoIconSmall(int x, int y, bool on) {
-  uint16_t c = on ? GREEN : DARKGREY;
-
-  canvas.drawRoundRect(x + 2, y + 3, 18, 20, 2, c);
-  canvas.fillRect(x, y + 7, 4, 3, c);
-  canvas.fillRect(x, y + 14, 4, 3, c);
-  canvas.drawLine(x + 8, y + 9, x + 17, y + 9, c);
-  canvas.drawLine(x + 8, y + 15, x + 17, y + 15, c);
-}
-
-void drawTagIcon(int x, int y) {
-  uint16_t c = DARKGREY;
-  canvas.fillRoundRect(x + 6, y + 4, 19, 14, 3, c);
-  canvas.fillTriangle(x + 6, y + 4, x + 0, y + 12, x + 6, y + 18, c);
-  canvas.fillCircle(x + 6, y + 13, 2, WHITE);
-}
-
-void drawNavIcon(int x, int y) {
-  uint16_t c = DARKGREY;
-  canvas.fillTriangle(x + 10, y + 2, x + 25, y + 27, x + 4, y + 18, c);
-}
-
-void drawStopwatchIcon(int x, int y) {
-  uint16_t c = DARKGREY;
-  canvas.fillCircle(x + 14, y + 16, 12, c);
-  canvas.fillRoundRect(x + 10, y + 1, 8, 3, 1, c);
-  canvas.drawLine(x + 14, y + 16, x + 14, y + 8, WHITE);
-  canvas.fillCircle(x + 14, y + 16, 2, WHITE);
-}
-
-void drawSatelliteIcon(int x, int y) {
-  uint16_t c = DARKGREY;
-  canvas.fillCircle(x + 19, y + 6, 4, c);
-  canvas.fillRect(x + 8, y + 10, 8, 8, c);
-  canvas.drawLine(x + 8, y + 10, x + 3, y + 5, c);
-  canvas.drawLine(x + 16, y + 18, x + 22, y + 24, c);
-  canvas.drawCircle(x + 8, y + 20, 10, c);
-  canvas.fillRect(x + 8, y + 10, 18, 20, WHITE);
-}
-
-void drawPinIcon(int x, int y) {
-  canvas.fillCircle(x + 8, y + 7, 8, WHITE);
-  canvas.fillTriangle(x, y + 10, x + 16, y + 10, x + 8, y + 24, WHITE);
-  canvas.fillCircle(x + 8, y + 7, 3, BLACK);
-}
-
-void drawClockIcon(int x, int y) {
-  canvas.drawRoundRect(x, y, 22, 22, 4, WHITE);
-  canvas.drawCircle(x + 11, y + 11, 8, WHITE);
-  canvas.drawLine(x + 11, y + 11, x + 11, y + 6, WHITE);
-  canvas.drawLine(x + 11, y + 11, x + 16, y + 11, WHITE);
-}
-
-void drawInfoCard(int x, int y, int w, int h, const String& title, const String& value, int iconType, bool valueGreen = false) {
-  canvas.fillRect(x, y, w, h, WHITE);
-
-  if (iconType == 1) drawTagIcon(x + 8, y + 5);
-  else if (iconType == 2) drawNavIcon(x + 9, y + 3);
-  else if (iconType == 3) drawStopwatchIcon(x + 8, y + 3);
-  else if (iconType == 4) drawSatelliteIcon(x + 8, y + 3);
-
-  if (title == "SESSION" || title == "POINTS") {
-    useAsciiFont();
-    canvas.setTextColor(BLACK, WHITE);
-    canvas.setCursor(x + 39, y + 8);
-    canvas.print(title);
-  } else {
-    useChineseFont12();
-    canvas.setTextColor(BLACK, WHITE);
-    canvas.setCursor(x + 39, y + 7);
-    canvas.print(title);
-  }
-
-  if (title == "SESSION") {
-    useChineseFont12();
-    canvas.setTextColor(valueGreen ? GREEN : BLACK, WHITE);
-    canvas.setCursor(x + 39, y + 22);
-    canvas.print(value);
-  } else {
-    useAsciiFont();
-    canvas.setTextColor(valueGreen ? GREEN : BLACK, WHITE);
-    canvas.setCursor(x + 47, y + 23);
-    canvas.print(value);
-  }
-}
-
 // drawRecorderScreen() moved to UiRecorder.cpp in v0.1.0.
 // The recorder page is now the first stable split module.
 
@@ -1649,149 +1177,15 @@ void drawPlaceholderScreen() {
 
 void drawCurrentScreen() {
   if (currentScreen == SCREEN_HOME) drawHomeScreen();
-  else if (currentScreen == SCREEN_STATUS) drawStatusScreen();
   else if (currentScreen == SCREEN_RECORDER) drawRecorderScreen();
   else if (currentScreen == SCREEN_LOG) drawLogScreen();
   else if (currentScreen == SCREEN_NAV) drawNavScreen();
   else if (currentScreen == SCREEN_SYNC) drawSyncScreen();
   else if (currentScreen == SCREEN_TASKS) drawTasksScreen();
   else if (currentScreen == SCREEN_DEVICE) drawDeviceScreen();
+  else if (currentScreen == SCREEN_LORA_PROBE) drawLoRaProbeScreen();
   else if (currentScreen == SCREEN_HELP) drawHelpManager();
   else drawPlaceholderScreen();
-}
-
-
-// ---------- Audio Logger bridge ----------
-void audioLogStart() {
-  if (!sdReady) {
-    lastAction = "NO SD";
-    lastWriteStatus = "AUDIO NO SD";
-    Serial.println("[AUDIO] start blocked: SD not ready");
-    drawLogScreen();
-    return;
-  }
-
-  ensureSessionStarted("audio");
-
-  AudioLoggerGnssSnapshot snap;
-  snap.fix = gnssFix;
-  snap.satellites = gnssSatellites;
-  snap.lat = gnssLat;
-  snap.lon = gnssLon;
-  snap.utcTime = gnssUtcTime;
-  snap.utcDate = gnssUtcDate;
-
-  bool ok = audioLogger.startRecord(
-    currentSessionId,
-    snap,
-    currentDeviceDateText(),
-    currentDeviceTimeText()
-  );
-
-  lastAction = ok ? "AUDIO REC" : "AUDIO FAIL";
-  lastWriteStatus = ok ? "AUDIO REC" : "AUDIO BUSY";
-  drawLogScreen();
-}
-
-void audioLogStop() {
-  bool ok = audioLogger.stopRecord();
-
-  lastAction = ok ? "AUDIO SAVED" : "AUDIO STOP FAIL";
-  lastWriteStatus = ok ? "AUDIO SAVED" : "AUDIO FAIL";
-}
-
-void audioLogPlay() {
-  bool ok = audioLogger.playLatest();
-
-  lastAction = ok ? "AUDIO PLAY" : "PLAY FAIL";
-  lastWriteStatus = ok ? "AUDIO PLAY" : "PLAY FAIL";
-  drawLogScreen();
-}
-
-void audioLogGainUp() {
-  audioLogger.gainUp();
-  lastAction = "GAIN UP";
-  drawLogScreen();
-}
-
-void audioLogGainDown() {
-  audioLogger.gainDown();
-  lastAction = "GAIN DOWN";
-  drawLogScreen();
-}
-
-void audioLogListRefresh() {
-  audioLogger.refreshList();
-  lastAction = "LIST REFRESH";
-}
-
-void audioLogListMove(int delta) {
-  audioLogger.moveSelection(delta);
-  drawLogScreen();
-}
-
-void audioLogListPlaySelected() {
-  bool ok = audioLogger.playSelected();
-  lastAction = ok ? "PLAY SELECT" : "PLAY FAIL";
-  lastWriteStatus = ok ? "PLAY SELECT" : "PLAY FAIL";
-  drawLogScreen();
-}
-
-String audioLogSelectedFileName() {
-  return audioLogger.selectedFileName();
-}
-
-String audioLogSelectedFilePath() {
-  return audioLogger.selectedFilePath();
-}
-
-String audioLogListFileNameAt(int index) {
-  return audioLogger.listFileNameAt(index);
-}
-
-String audioLogListFilePathAt(int index) {
-  return audioLogger.listFilePathAt(index);
-}
-
-int audioLogListCount() {
-  return audioLogger.listCount();
-}
-
-int audioLogListIndex() {
-  return audioLogger.listIndex();
-}
-
-bool audioLogDeleteSelected() {
-  bool ok = audioLogger.deleteSelected();
-
-  lastAction = ok ? "AUDIO DELETE" : "DELETE FAIL";
-  lastWriteStatus = ok ? "AUDIO DELETE" : "DELETE FAIL";
-
-  return ok;
-}
-
-const char* audioLogStateText() {
-  return audioLogger.stateText();
-}
-
-String audioLogLastFile() {
-  return audioLogger.lastFile();
-}
-
-uint32_t audioLogSamples() {
-  return audioLogger.samples();
-}
-
-uint32_t audioLogDropped() {
-  return audioLogger.droppedChunks();
-}
-
-int audioLogGainX10() {
-  return audioLogger.gainX10();
-}
-
-bool audioLogIsBusy() {
-  return audioLogger.isBusy();
 }
 
 
@@ -1868,98 +1262,67 @@ String readKeyText() {
   return result;
 }
 
-bool keyHasLetter(const String& key, char lower, char upper) {
-  return key.indexOf(lower) >= 0 || key.indexOf(upper) >= 0;
-}
-
-bool isEscKey(const String& key) {
-  return key == "`" || key == "~" || key == "[ESC]" || key == "ESC";
-}
-
-bool isLeftKey(const String& key) {
-  return key == "," || key == "[LEFT]" || key == "LEFT";
-}
-
-bool isRightKey(const String& key) {
-  return key == "/" || key == "[RIGHT]" || key == "RIGHT";
-}
-
-bool isUpKey(const String& key) {
-  return key == ";" || key == "[UP]" || key == "UP";
-}
-
-bool isDownKey(const String& key) {
-  return key == "." || key == "[DOWN]" || key == "DOWN";
-}
-
-bool isEnterKey(const String& key) {
-  return key == "[ENTER]" || key == "OK";
-}
-
 void confirmSelection() {
-  lastAction = menuItems[selectedIndex].titleEn;
+  const MenuItem& item = menuItems[selectedIndex];
+  lastAction = item.titleEn;
 
   Serial.print("[ACTION] Enter ");
-  Serial.print(menuItems[selectedIndex].titleCn);
+  Serial.print(item.titleCn);
   Serial.print(" / ");
-  Serial.println(menuItems[selectedIndex].titleEn);
+  Serial.println(item.titleEn);
 
-  if (strcmp(menuItems[selectedIndex].titleEn, "LOG") == 0) {
-    currentScreen = SCREEN_RECORDER;
-    drawRecorderScreen();
-    return;
+  currentScreen = item.target;
+  switch (item.target) {
+    case SCREEN_RECORDER:
+      drawRecorderScreen();
+      break;
+    case SCREEN_LOG:
+      audioLogger.refreshList();
+      drawLogScreen();
+      break;
+    case SCREEN_NAV:
+      navReloadTrackData();
+      drawNavScreen();
+      break;
+    case SCREEN_SYNC:
+      if (taskManager.isReceivingTasks()) {
+        taskManager.abortReceiveTasks();
+        clearTaskReceiveActivity();
+      }
+      drawSyncScreen();
+      break;
+    case SCREEN_TASKS:
+      tasksRefresh();
+      drawTasksScreen();
+      break;
+    case SCREEN_DEVICE:
+      devicePage = 0;
+      drawDeviceScreen();
+      break;
+    case SCREEN_LORA_PROBE:
+      uiLoRaProbe.activate();
+      break;
+    default:
+      placeholderTitle = item.titleCn;
+      drawPlaceholderScreen();
+      break;
   }
-
-  if (strcmp(menuItems[selectedIndex].titleEn, "STAT") == 0) {
-    currentScreen = SCREEN_STATUS;
-    drawStatusScreen();
-    return;
-  }
-
-  if (strcmp(menuItems[selectedIndex].titleEn, "LOGS") == 0) {
-    currentScreen = SCREEN_LOG;
-    audioLogListRefresh();
-    drawLogScreen();
-    return;
-  }
-
-  if (strcmp(menuItems[selectedIndex].titleEn, "NAV") == 0) {
-    currentScreen = SCREEN_NAV;
-    navReloadTrackData();
-    drawNavScreen();
-    return;
-  }
-
-  if (strcmp(menuItems[selectedIndex].titleEn, "SYNC") == 0) {
-    if (taskManager.isReceivingTasks()) {
-      taskManager.abortReceiveTasks();
-      clearTaskReceiveActivity();
-    }
-    currentScreen = SCREEN_SYNC;
-    drawSyncScreen();
-    return;
-  }
-
-  if (strcmp(menuItems[selectedIndex].titleEn, "TASK") == 0) {
-    currentScreen = SCREEN_TASKS;
-    tasksRefresh();
-    drawTasksScreen();
-    return;
-  }
-
-  if (strcmp(menuItems[selectedIndex].titleEn, "DEV") == 0) {
-    currentScreen = SCREEN_DEVICE;
-    devicePage = 0;
-    drawDeviceScreen();
-    return;
-  }
-
-  placeholderTitle = menuItems[selectedIndex].titleCn;
-  currentScreen = SCREEN_PLACEHOLDER;
-  drawPlaceholderScreen();
 }
 
 
+void drawLoRaProbeScreen() {
+  uiLoRaProbe.draw();
+}
+
+void handleLoRaProbeKey(const String& key) {
+  uiLoRaProbe.handleKey(key);
+  if (uiLoRaProbe.wantsExit()) {
+    uiLoRaProbe.clearExit();
+    currentScreen = SCREEN_HOME;
+    drawHomeScreen();
+    return;
+  }
+}
 
 
 void openLogHelp() {
@@ -2001,14 +1364,14 @@ void handleHomeKey(const String& key) {
   else if (key == "2") selectedIndex = currentPage * itemsPerPage + 1;
   else if (key == "3") selectedIndex = currentPage * itemsPerPage + 2;
   else if (key == "4") selectedIndex = currentPage * itemsPerPage + 3;
-  else if (isLeftKey(key)) moveLeft();
-  else if (isRightKey(key)) moveRight();
-  else if (isUpKey(key)) moveUp();
-  else if (isDownKey(key)) moveDown();
-  else if (isEnterKey(key)) {
+  else if (FtKey::isLeft(key)) moveLeft();
+  else if (FtKey::isRight(key)) moveRight();
+  else if (FtKey::isUp(key)) moveUp();
+  else if (FtKey::isDown(key)) moveDown();
+  else if (FtKey::isEnter(key)) {
     confirmSelection();
     return;
-  } else if (keyHasLetter(key, 'r', 'R')) {
+  } else if (FtKey::hasLetter(key, 'r', 'R')) {
     initSD();
     initGNSS();
   }
@@ -2018,47 +1381,24 @@ void handleHomeKey(const String& key) {
   drawHomeScreen();
 }
 
-void handleStatusKey(const String& key) {
-  if (isEscKey(key) || key == "[DEL]") {
-    currentScreen = SCREEN_HOME;
-    drawHomeScreen();
-    return;
-  }
-
-  if (isLeftKey(key)) timeOffsetSeconds -= 60;
-  else if (isRightKey(key)) timeOffsetSeconds += 60;
-  else if (isUpKey(key)) timeOffsetSeconds += 10;
-  else if (isDownKey(key)) timeOffsetSeconds -= 10;
-  else if (keyHasLetter(key, 'r', 'R')) {
-    initSD();
-    initGNSS();
-  }
-
-  Serial.print("[TIME] offset seconds=");
-  Serial.println(timeOffsetSeconds);
-
-  drawStatusScreen();
-}
-
-
 void handleDeviceKey(const String& key) {
-  if (isEscKey(key) || key == "[DEL]") {
+  if (FtKey::isEsc(key) || key == "[DEL]") {
     currentScreen = SCREEN_HOME;
     drawHomeScreen();
     return;
   }
 
-  if (isLeftKey(key)) {
+  if (FtKey::isLeft(key)) {
     devicePage--;
     if (devicePage < 0) devicePage = DEVICE_PAGE_COUNT - 1;
-  } else if (isRightKey(key)) {
+  } else if (FtKey::isRight(key)) {
     devicePage++;
     if (devicePage >= DEVICE_PAGE_COUNT) devicePage = 0;
-  } else if (keyHasLetter(key, 'r', 'R')) {
+  } else if (FtKey::hasLetter(key, 'r', 'R')) {
     updateDeviceStatus();
     if (!sdReady) initSD();
     initGNSS();
-  } else if (keyHasLetter(key, 'h', 'H')) {
+  } else if (FtKey::hasLetter(key, 'h', 'H')) {
     openHelpPage(HELP_DEVICE, SCREEN_DEVICE);
     return;
   }
@@ -2068,23 +1408,23 @@ void handleDeviceKey(const String& key) {
 
 
 void handleRecorderKey(const String& key) {
-  if (isEscKey(key) || key == "[DEL]") {
+  if (FtKey::isEsc(key) || key == "[DEL]") {
     currentScreen = SCREEN_HOME;
     drawHomeScreen();
     return;
   }
 
-  if (keyHasLetter(key, 'h', 'H')) {
+  if (FtKey::hasLetter(key, 'h', 'H')) {
     openHelpPage(HELP_RECORDER, SCREEN_RECORDER);
     return;
   }
 
   bool guardedAction =
-    keyHasLetter(key, 'a', 'A') ||
-    keyHasLetter(key, 'b', 'B') ||
-    keyHasLetter(key, 'p', 'P') ||
-    keyHasLetter(key, 's', 'S') ||
-    isEnterKey(key) ||
+    FtKey::hasLetter(key, 'a', 'A') ||
+    FtKey::hasLetter(key, 'b', 'B') ||
+    FtKey::hasLetter(key, 'p', 'P') ||
+    FtKey::hasLetter(key, 's', 'S') ||
+    FtKey::isEnter(key) ||
     key == "[SPACE]";
 
   if (!gnssFix && guardedAction) {
@@ -2095,7 +1435,7 @@ void handleRecorderKey(const String& key) {
     return;
   }
 
-  if (keyHasLetter(key, 's', 'S')) {
+  if (FtKey::hasLetter(key, 's', 'S')) {
     stopSession();
     lastAction = "STOP";
     lastWriteStatus = "SESSION STOP";
@@ -2103,11 +1443,11 @@ void handleRecorderKey(const String& key) {
     return;
   }
 
-  if (keyHasLetter(key, 'b', 'B')) {
+  if (FtKey::hasLetter(key, 'b', 'B')) {
     saveBasePosition();
-  } else if (keyHasLetter(key, 'p', 'P') || isEnterKey(key)) {
+  } else if (FtKey::hasLetter(key, 'p', 'P') || FtKey::isEnter(key)) {
     savePathPoint("manual");
-  } else if (keyHasLetter(key, 'a', 'A') || key == "[SPACE]") {
+  } else if (FtKey::hasLetter(key, 'a', 'A') || key == "[SPACE]") {
     autoTrack = !autoTrack;
 
     if (autoTrack) {
@@ -2122,7 +1462,7 @@ void handleRecorderKey(const String& key) {
       savePathPoint("auto_start");
       lastAutoTrackMillis = millis();
     }
-  } else if (keyHasLetter(key, 'r', 'R')) {
+  } else if (FtKey::hasLetter(key, 'r', 'R')) {
     initSD();
     initGNSS();
     lastAction = "RESET";
@@ -2140,7 +1480,7 @@ void handleHelpKey(const String& key) {
     return;
   }
 
-  if (isEscKey(key) || key == "[DEL]" || isEnterKey(key)) {
+  if (FtKey::isEsc(key) || key == "[DEL]" || FtKey::isEnter(key)) {
     currentScreen = previousScreen;
     drawCurrentScreen();
   }
@@ -2277,7 +1617,7 @@ void processSerialSyncCommandLine(String line) {
       endSyncSerialQuiet(true);
     } else {
       markTaskReceiveActivity();
-      bool ok = taskManager.receiveTaskLine(line, sdReady);
+      bool ok = taskManager.receiveTaskLine(line);
       // v0.4.3f: explicit per-line ACK for host-side flow control.
       // Core must wait for this ACK before sending the next task JSON line.
       // This prevents USB CDC RX overflow when downlinking JSONL to ESP32-S3.
@@ -2452,7 +1792,7 @@ void processSerialSyncCommands() {
 }
 
 void handleNavKeyWrapper(const String& key) {
-  if (isEscKey(key) || key == "[DEL]") {
+  if (FtKey::isEsc(key) || key == "[DEL]") {
     currentScreen = SCREEN_HOME;
     drawHomeScreen();
     return;
@@ -2464,7 +1804,7 @@ void handleNavKeyWrapper(const String& key) {
 }
 
 void handlePlaceholderKey(const String& key) {
-  if (isEscKey(key) || key == "[DEL]" || isEnterKey(key)) {
+  if (FtKey::isEsc(key) || key == "[DEL]" || FtKey::isEnter(key)) {
     currentScreen = SCREEN_HOME;
     drawHomeScreen();
   }
@@ -2479,13 +1819,13 @@ void handleKey(const String& key) {
   }
 
   if (currentScreen == SCREEN_HOME) handleHomeKey(key);
-  else if (currentScreen == SCREEN_STATUS) handleStatusKey(key);
   else if (currentScreen == SCREEN_RECORDER) handleRecorderKey(key);
   else if (currentScreen == SCREEN_LOG) handleLogKey(key);
   else if (currentScreen == SCREEN_NAV) handleNavKeyWrapper(key);
   else if (currentScreen == SCREEN_SYNC) handleSyncKey(key);
   else if (currentScreen == SCREEN_TASKS) handleTasksKey(key);
   else if (currentScreen == SCREEN_DEVICE) handleDeviceKey(key);
+  else if (currentScreen == SCREEN_LORA_PROBE) handleLoRaProbeKey(key);
   else if (currentScreen == SCREEN_HELP) handleHelpKey(key);
   else handlePlaceholderKey(key);
 }
@@ -2534,6 +1874,15 @@ void setup() {
   initGNSS();
   audioLogger.begin();
   syncManager.begin(DEVICE_ID, VERSION);
+  uiLoRaProbe.begin(&canvas, &loraManager);
+  lastLoRaInitAttemptMs = millis();
+  if (loraManager.begin()) {
+    Serial.println("LORA_BACKGROUND_BOOT_READY");
+    loraManager.sendMeshtasticNodeInfo(true);
+    loraManager.startListening();
+  } else {
+    Serial.println("LORA_BACKGROUND_BOOT_FAIL");
+  }
   taskManager.begin(DEVICE_ID);
   taskManager.refresh(sdReady);
 
@@ -2566,6 +1915,36 @@ void updateIMUHeading() {
   }
 }
 
+void serviceLoRaBackground() {
+  const unsigned long now = millis();
+
+  if (!loraManager.isReady()) {
+    if (lastLoRaInitAttemptMs == 0 || now - lastLoRaInitAttemptMs >= LORA_INIT_RETRY_MS) {
+      lastLoRaInitAttemptMs = now;
+      if (loraManager.begin()) {
+        Serial.println("LORA_BACKGROUND_READY");
+        loraManager.sendMeshtasticNodeInfo(true);
+        loraManager.startListening();
+      } else {
+        Serial.println("LORA_BACKGROUND_INIT_RETRY");
+      }
+    }
+    return;
+  }
+
+  // pollReceive() returns immediately unless the radio IRQ reports a packet.
+  // This keeps radio reception alive on every screen without blocking keys.
+  const bool received = loraManager.pollReceive();
+  if (received && currentScreen != SCREEN_LORA_PROBE) {
+    Serial.print("LORA_BACKGROUND_RX unread=");
+    Serial.println((int)loraManager.unreadMessageCount());
+
+    // Refresh the home status indicator immediately. Other pages keep their
+    // own drawing cadence and the message remains queued for the inbox.
+    if (currentScreen == SCREEN_HOME) drawHomeScreen();
+  }
+}
+
 void loop() {
   M5Cardputer.update();
 
@@ -2575,10 +1954,15 @@ void loop() {
   audioLogger.update();
   updateIMUHeading();
   autoTrackTick();
+  serviceLoRaBackground();
 
   String key = readKeyText();
   if (key.length() > 0) {
     handleKey(key);
+  }
+
+  if (currentScreen == SCREEN_LORA_PROBE) {
+    uiLoRaProbe.tick();
   }
 
   unsigned long now = millis();

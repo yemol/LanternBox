@@ -1,6 +1,7 @@
 #include "TaskManager.h"
 #include <Arduino.h>
 #include <SD.h>
+#include "FtTextUtil.h"
 
 extern void prepareSharedSpiBusForSD();
 extern String currentDeviceDateText();
@@ -30,62 +31,6 @@ void TaskManager::clearTasks() {
   }
   count = 0;
   selected = 0;
-}
-
-String TaskManager::jsonEscape(const String& value) {
-  String out = "";
-  for (int i = 0; i < value.length(); i++) {
-    char c = value[i];
-    if (c == '\\') out += "\\\\";
-    else if (c == '"') out += "\\\"";
-    else if (c == '\n') out += "\\n";
-    else if (c == '\r') out += "\\r";
-    else out += c;
-  }
-  return out;
-}
-
-String TaskManager::extractJsonStringValue(const String& line, const String& key) {
-  String needle = "\"" + key + "\"";
-  int keyPos = line.indexOf(needle);
-  if (keyPos < 0) return "";
-
-  int colon = line.indexOf(':', keyPos + needle.length());
-  if (colon < 0) return "";
-
-  int firstQuote = line.indexOf('"', colon + 1);
-  if (firstQuote < 0) return "";
-
-  int secondQuote = firstQuote + 1;
-  bool escaped = false;
-
-  while (secondQuote < line.length()) {
-    char c = line[secondQuote];
-    if (c == '\\' && !escaped) {
-      escaped = true;
-    } else {
-      if (c == '"' && !escaped) break;
-      escaped = false;
-    }
-    secondQuote++;
-  }
-
-  if (secondQuote >= line.length()) return "";
-  return line.substring(firstQuote + 1, secondQuote);
-}
-
-int TaskManager::extractJsonIntValue(const String& line, const String& key, int fallback) {
-  String needle = "\"" + key + "\"";
-  int keyPos = line.indexOf(needle);
-  if (keyPos < 0) return fallback;
-  int colon = line.indexOf(':', keyPos + needle.length());
-  if (colon < 0) return fallback;
-  int start = colon + 1;
-  while (start < line.length() && (line[start] == ' ' || line[start] == '\t')) start++;
-  int end = start;
-  while (end < line.length() && ((line[end] >= '0' && line[end] <= '9') || line[end] == '-')) end++;
-  if (end <= start) return fallback;
-  return line.substring(start, end).toInt();
 }
 
 String TaskManager::normalizeStatus(const String& value) {
@@ -139,19 +84,19 @@ bool TaskManager::refresh(bool sdReady) {
     line.trim();
     if (line.length() == 0 || !line.startsWith("{")) continue;
 
-    String taskId = extractJsonStringValue(line, "task_id");
-    if (taskId.length() == 0) taskId = extractJsonStringValue(line, "id");
+    String taskId = ftJsonString(line, "task_id");
+    if (taskId.length() == 0) taskId = ftJsonString(line, "id");
     if (taskId.length() == 0) continue;
 
     FtTaskItem& item = tasks[count];
     item.valid = true;
     item.taskId = taskId;
-    item.title = extractJsonStringValue(line, "title");
-    item.description = extractJsonStringValue(line, "description");
-    item.status = normalizeStatus(extractJsonStringValue(line, "status"));
-    item.priority = extractJsonStringValue(line, "priority");
-    item.updatedAt = extractJsonStringValue(line, "updated_at");
-    item.revision = extractJsonIntValue(line, "revision", 0);
+    item.title = ftJsonString(line, "title");
+    item.description = ftJsonString(line, "description");
+    item.status = normalizeStatus(ftJsonString(line, "status"));
+    item.priority = ftJsonString(line, "priority");
+    item.updatedAt = ftJsonString(line, "updated_at");
+    item.revision = ftJsonInt(line, "revision", 0);
 
     if (item.title.length() == 0) item.title = item.taskId;
     if (item.priority.length() == 0) item.priority = "normal";
@@ -175,8 +120,8 @@ void TaskManager::applyReportOverlay(bool sdReady) {
     String line = f.readStringUntil('\n');
     line.trim();
     if (line.length() == 0 || !line.startsWith("{")) continue;
-    String taskId = extractJsonStringValue(line, "task_id");
-    String status = normalizeStatus(extractJsonStringValue(line, "status"));
+    String taskId = ftJsonString(line, "task_id");
+    String status = normalizeStatus(ftJsonString(line, "status"));
     if (taskId.length() == 0 || status.length() == 0) continue;
 
     for (int i = 0; i < count; i++) {
@@ -263,19 +208,19 @@ bool TaskManager::appendStatusReport(const FtTaskItem& task, const String& newSt
   }
 
   f.print("{\"report_id\":\"");
-  f.print(jsonEscape(reportId));
+  f.print(ftJsonEscape(reportId));
   f.print("\",\"device_id\":\"");
-  f.print(jsonEscape(deviceIdText));
+  f.print(ftJsonEscape(deviceIdText));
   f.print("\",\"task_id\":\"");
-  f.print(jsonEscape(task.taskId));
+  f.print(ftJsonEscape(task.taskId));
   f.print("\",\"status\":\"");
-  f.print(jsonEscape(normalizeStatus(newStatus)));
+  f.print(ftJsonEscape(normalizeStatus(newStatus)));
   f.print("\",\"note\":\"");
-  f.print(jsonEscape(note));
+  f.print(ftJsonEscape(note));
   f.print("\",\"device_date\":\"");
-  f.print(jsonEscape(date));
+  f.print(ftJsonEscape(date));
   f.print("\",\"device_time\":\"");
-  f.print(jsonEscape(time));
+  f.print(ftJsonEscape(time));
   f.print("\",\"source\":\"ft01\"}");
   f.println();
   f.close();
@@ -319,7 +264,7 @@ bool TaskManager::startReceiveTasks(int expectedCount, bool sdReady) {
   return true;
 }
 
-bool TaskManager::receiveTaskLine(const String& rawLine, bool sdReady) {
+bool TaskManager::receiveTaskLine(const String& rawLine) {
   if (!receivingTasks) return false;
 
   String line = rawLine;

@@ -1,0 +1,16 @@
+{
+  "baseline": "FT-01 v0.5.2e",
+  "original_markdown_count": 64,
+  "cleaned_markdown_count": 8,
+  "private_secret_removed_from_commit_package": true,
+  "documents": [
+    "CHANGELOG.md",
+    "README.md",
+    "SECURITY.md",
+    "docs/ARCHITECTURE.md",
+    "docs/BUILD_AND_RELEASE.md",
+    "docs/COMMUNICATION.md",
+    "docs/SUBSYSTEMS.md",
+    "docs/TESTING.md"
+  ]
+}

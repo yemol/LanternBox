@@ -166,12 +166,6 @@ void showHelp(HelpType type) {
   canvas.pushSprite(0, 0);
 }
 
-void handleHelpManagerKey(const String& key) {
-  // Help pages are controlled by the parent screen.
-  // Do not swallow ESC here.
-}
-
-
 void drawHelpManager() {
   showHelp(currentHelpType);
 }

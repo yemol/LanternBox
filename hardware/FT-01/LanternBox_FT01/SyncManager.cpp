@@ -1,6 +1,8 @@
 #include "SyncManager.h"
 #include <Arduino.h>
 #include <SD.h>
+#include "FtTextUtil.h"
+#include "FtAudioStore.h"
 
 extern void prepareSharedSpiBusForSD();
 extern String currentDeviceDateText();
@@ -13,23 +15,6 @@ static const char* AUDIO_INDEX_FILE = "/lanternbox/audio/index.jsonl";
 static const char* AUDIO_DIR = "/lanternbox/audio";
 static const char* TASK_REPORTS_FILE = "/lanternbox/tasks/task_reports.jsonl";
 
-
-static bool isRealAudioWavFile(const String& filename) {
-  if (filename.length() == 0) return false;
-  if (filename.startsWith(".")) return false;
-  if (filename.startsWith("._")) return false;
-  if (filename.indexOf("/.") >= 0) return false;
-
-  String lower = filename;
-  lower.toLowerCase();
-  if (!lower.endsWith(".wav")) return false;
-
-  // First-phase recorder files use audio_###.wav. This excludes macOS resource fork files
-  // and unrelated wav files accidentally copied to the SD card.
-  if (!lower.startsWith("audio_")) return false;
-
-  return true;
-}
 
 void SyncManager::begin(const char* deviceId, const char* version) {
   deviceIdText = String(deviceId);
@@ -53,26 +38,6 @@ String SyncManager::makeSafeSessionId() {
   s += time;
   return s;
 }
-
-String SyncManager::jsonEscape(const String& value) {
-  String out = "";
-  for (int i = 0; i < value.length(); i++) {
-    char c = value[i];
-    if (c == '\\') out += "\\\\";
-    else if (c == '"') out += "\\\"";
-    else if (c == '\n') out += "\\n";
-    else if (c == '\r') out += "\\r";
-    else out += c;
-  }
-  return out;
-}
-
-String SyncManager::baseNameFromPath(const String& path) {
-  int idx = path.lastIndexOf('/');
-  if (idx < 0) return path;
-  return path.substring(idx + 1);
-}
-
 
 const char* SyncManager::recordTypeToPath(const String& recordType) {
   if (recordType == "path_points") return PATH_POINTS_FILE;
@@ -221,107 +186,9 @@ bool SyncManager::retainLastJsonlLines(const char* path, int keepLines, String& 
 }
 
 
-bool SyncManager::isSafeAudioDeleteFilename(const String& filename) {
-  if (!isRealAudioWavFile(filename)) return false;
-  if (filename.indexOf('/') >= 0) return false;
-  if (filename.indexOf('\\') >= 0) return false;
-  if (filename.indexOf("..") >= 0) return false;
-  if (filename.length() > 64) return false;
-  return true;
-}
-
-bool SyncManager::rewriteAudioIndexWithoutFile(const String& filename, int& removedOut, String& errorOut) {
-  removedOut = 0;
-  errorOut = "";
-
-  if (!ensureDir("/lanternbox")) {
-    errorOut = "mkdir_lanternbox_failed";
-    return false;
-  }
-  if (!ensureDir("/lanternbox/audio")) {
-    errorOut = "mkdir_audio_failed";
-    return false;
-  }
-
-  if (!SD.exists(AUDIO_INDEX_FILE)) {
-    File empty = SD.open(AUDIO_INDEX_FILE, FILE_WRITE);
-    if (!empty) {
-      errorOut = "open_index_failed";
-      return false;
-    }
-    empty.flush();
-    empty.close();
-    return true;
-  }
-
-  File in = SD.open(AUDIO_INDEX_FILE, FILE_READ);
-  if (!in) {
-    errorOut = "open_index_failed";
-    return false;
-  }
-
-  const char* TEMP_INDEX_FILE = "/lanternbox/audio/index.tmp";
-  if (SD.exists(TEMP_INDEX_FILE)) {
-    SD.remove(TEMP_INDEX_FILE);
-  }
-
-  File out = SD.open(TEMP_INDEX_FILE, FILE_WRITE);
-  if (!out) {
-    in.close();
-    errorOut = "open_temp_failed";
-    return false;
-  }
-
-  while (in.available()) {
-    String line = in.readStringUntil('\n');
-    line.trim();
-    if (line.length() == 0) continue;
-
-    String lineFilename = extractJsonStringValue(line, "filename");
-    if (lineFilename.length() == 0) {
-      lineFilename = baseNameFromPath(extractJsonStringValue(line, "path"));
-    }
-    if (lineFilename.length() == 0) {
-      lineFilename = baseNameFromPath(extractJsonStringValue(line, "file"));
-    }
-
-    if (lineFilename == filename) {
-      removedOut++;
-    } else {
-      out.println(line);
-    }
-    delay(1);
-  }
-
-  in.close();
-  out.flush();
-  out.close();
-
-  if (SD.exists(AUDIO_INDEX_FILE)) {
-    if (!SD.remove(AUDIO_INDEX_FILE)) {
-      SD.remove(TEMP_INDEX_FILE);
-      errorOut = "remove_index_failed";
-      return false;
-    }
-  }
-
-  if (!SD.rename(TEMP_INDEX_FILE, AUDIO_INDEX_FILE)) {
-    errorOut = "rename_temp_failed";
-    return false;
-  }
-
-  return true;
-}
-
 bool SyncManager::deleteUploadedAudio(const String& filenameInput, bool sdReady) {
   String filename = filenameInput;
   filename.trim();
-
-  bool wavDeleted = false;
-  bool wavMissing = false;
-  bool indexRemoved = false;
-  int indexRemovedCount = 0;
-  String errorText = "";
 
   if (!sdReady) {
     Serial.print("FT01_SYNC_AUDIO_DELETE_ACK file=");
@@ -331,58 +198,23 @@ bool SyncManager::deleteUploadedAudio(const String& filenameInput, bool sdReady)
     return false;
   }
 
-  prepareSharedSpiBusForSD();
-
-  if (!isSafeAudioDeleteFilename(filename)) {
-    Serial.print("FT01_SYNC_AUDIO_DELETE_ACK file=");
-    Serial.print(filename.length() > 0 ? filename : String("unknown"));
-    Serial.println(" wav_deleted=false index_removed=false ok=false error=bad_filename");
-    statusText = "AUDIO CLEAN FAIL";
-    return false;
-  }
-
-  if (!ensureDir("/lanternbox") || !ensureDir("/lanternbox/audio")) {
-    Serial.print("FT01_SYNC_AUDIO_DELETE_ACK file=");
-    Serial.print(filename);
-    Serial.println(" wav_deleted=false index_removed=false ok=false error=mkdir_failed");
-    statusText = "AUDIO CLEAN FAIL";
-    return false;
-  }
-
-  String wavPath = String(AUDIO_DIR) + "/" + filename;
-  if (SD.exists(wavPath.c_str())) {
-    wavDeleted = SD.remove(wavPath.c_str());
-    if (!wavDeleted) {
-      errorText = "wav_remove_failed";
-    }
-  } else {
-    wavMissing = true;
-  }
-
-  bool indexOk = false;
-  if (errorText.length() == 0) {
-    indexOk = rewriteAudioIndexWithoutFile(filename, indexRemovedCount, errorText);
-    indexRemoved = indexRemovedCount > 0;
-  }
-
-  bool ok = (wavDeleted || wavMissing) && indexOk;
+  FtAudioDeleteResult result;
+  bool ok = ftDeleteAudioAndIndex(filename, result);
 
   Serial.print("FT01_SYNC_AUDIO_DELETE_ACK file=");
-  Serial.print(filename);
+  Serial.print(filename.length() > 0 ? filename : String("unknown"));
   Serial.print(" wav_deleted=");
-  Serial.print(wavDeleted ? "true" : "false");
-  if (wavMissing) {
-    Serial.print(" wav_missing=true");
-  }
+  Serial.print(result.wavDeleted ? "true" : "false");
+  if (result.wavMissing) Serial.print(" wav_missing=true");
   Serial.print(" index_removed=");
-  Serial.print(indexRemoved ? "true" : "false");
+  Serial.print(result.indexRemoved > 0 ? "true" : "false");
   Serial.print(" index_removed_count=");
-  Serial.print(indexRemovedCount);
+  Serial.print(result.indexRemoved);
   Serial.print(" ok=");
   Serial.print(ok ? "true" : "false");
   if (!ok) {
     Serial.print(" error=");
-    Serial.print(errorText.length() > 0 ? errorText : String("unknown"));
+    Serial.print(result.error.length() > 0 ? result.error : String("unknown"));
   }
   Serial.println();
   Serial.flush();
@@ -390,35 +222,6 @@ bool SyncManager::deleteUploadedAudio(const String& filenameInput, bool sdReady)
   refresh(sdReady);
   statusText = ok ? "AUDIO CLEAN OK" : "AUDIO CLEAN FAIL";
   return ok;
-}
-
-String SyncManager::extractJsonStringValue(const String& line, const String& key) {
-  String needle = "\"" + key + "\"";
-  int keyPos = line.indexOf(needle);
-  if (keyPos < 0) return "";
-
-  int colon = line.indexOf(':', keyPos + needle.length());
-  if (colon < 0) return "";
-
-  int firstQuote = line.indexOf('"', colon + 1);
-  if (firstQuote < 0) return "";
-
-  int secondQuote = firstQuote + 1;
-  bool escaped = false;
-
-  while (secondQuote < line.length()) {
-    char c = line[secondQuote];
-    if (c == '\\' && !escaped) {
-      escaped = true;
-    } else {
-      if (c == '"' && !escaped) break;
-      escaped = false;
-    }
-    secondQuote++;
-  }
-
-  if (secondQuote >= line.length()) return "";
-  return line.substring(firstQuote + 1, secondQuote);
 }
 
 SyncAudioIndexMeta SyncManager::findAudioIndexMeta(const String& filename) {
@@ -437,24 +240,24 @@ SyncAudioIndexMeta SyncManager::findAudioIndexMeta(const String& filename) {
     line.trim();
     if (line.length() == 0) continue;
 
-    String lineFilename = extractJsonStringValue(line, "filename");
+    String lineFilename = ftJsonString(line, "filename");
     if (lineFilename.length() == 0) {
-      lineFilename = baseNameFromPath(extractJsonStringValue(line, "path"));
+      lineFilename = ftBaseName(ftJsonString(line, "path"));
     }
     if (lineFilename.length() == 0) {
-      lineFilename = baseNameFromPath(extractJsonStringValue(line, "file"));
+      lineFilename = ftBaseName(ftJsonString(line, "file"));
     }
 
     if (lineFilename == filename) {
       meta.found = true;
 
-      String sessionId = extractJsonStringValue(line, "session_id");
+      String sessionId = ftJsonString(line, "session_id");
       if (sessionId.length() > 0) meta.sessionId = sessionId;
 
-      String deviceDate = extractJsonStringValue(line, "device_date");
+      String deviceDate = ftJsonString(line, "device_date");
       if (deviceDate.length() > 0) meta.deviceDate = deviceDate;
 
-      String deviceTime = extractJsonStringValue(line, "device_time");
+      String deviceTime = ftJsonString(line, "device_time");
       if (deviceTime.length() > 0) meta.deviceTime = deviceTime;
       break;
     }
@@ -523,8 +326,8 @@ int SyncManager::countAudioFiles(uint64_t& bytesOut) {
 
   while (file) {
     if (!file.isDirectory()) {
-      String name = baseNameFromPath(String(file.name()));
-      if (isRealAudioWavFile(name)) {
+      String name = ftBaseName(String(file.name()));
+      if (ftIsAudioWavFilename(name)) {
         count++;
         bytesOut += file.size();
       }
@@ -590,13 +393,13 @@ void SyncManager::printManifest(bool sdReady) {
   Serial.println("FT01_SYNC_MANIFEST_BEGIN");
   Serial.println("{");
   Serial.print("  \"device_id\":\"");
-  Serial.print(jsonEscape(deviceIdText));
+  Serial.print(ftJsonEscape(deviceIdText));
   Serial.println("\",");
   Serial.print("  \"firmware_version\":\"");
-  Serial.print(jsonEscape(versionText));
+  Serial.print(ftJsonEscape(versionText));
   Serial.println("\",");
   Serial.print("  \"sync_session_id\":\"");
-  Serial.print(jsonEscape(syncSessionId));
+  Serial.print(ftJsonEscape(syncSessionId));
   Serial.println("\",");
   Serial.println("  \"transport\":\"usb_serial\",");
   Serial.println("  \"items\":{");
@@ -623,9 +426,9 @@ void SyncManager::printManifest(bool sdReady) {
 
       while (file) {
         if (!file.isDirectory()) {
-          String filename = baseNameFromPath(String(file.name()));
+          String filename = ftBaseName(String(file.name()));
 
-          if (isRealAudioWavFile(filename)) {
+          if (ftIsAudioWavFilename(filename)) {
             if (!first) Serial.println(",");
             first = false;
 
@@ -638,20 +441,20 @@ void SyncManager::printManifest(bool sdReady) {
             String deviceTime = meta.deviceTime.length() > 0 ? meta.deviceTime : currentDeviceTimeText();
 
             Serial.print("      {\"audio_id\":\"");
-            Serial.print(jsonEscape(audioId));
+            Serial.print(ftJsonEscape(audioId));
             Serial.print("\",\"filename\":\"");
-            Serial.print(jsonEscape(filename));
+            Serial.print(ftJsonEscape(filename));
             Serial.print("\",\"path\":\"/lanternbox/audio/");
-            Serial.print(jsonEscape(filename));
+            Serial.print(ftJsonEscape(filename));
             Serial.print("\",\"size\":");
             Serial.print(fileSize);
             Serial.print(",\"session_id\":\"");
-            Serial.print(jsonEscape(sessionId));
+            Serial.print(ftJsonEscape(sessionId));
             Serial.print("\"");
             Serial.print(",\"device_date\":\"");
-            Serial.print(jsonEscape(deviceDate));
+            Serial.print(ftJsonEscape(deviceDate));
             Serial.print("\",\"device_time\":\"");
-            Serial.print(jsonEscape(deviceTime));
+            Serial.print(ftJsonEscape(deviceTime));
             Serial.print("\"");
             Serial.print("}");
           }
@@ -716,9 +519,9 @@ bool SyncManager::printRecords(const String& recordType, bool sdReady) {
       f.close();
     } else {
       Serial.print("{\"sync_dump_error\":\"open_failed\",\"record_type\":\"");
-      Serial.print(jsonEscape(recordType));
+      Serial.print(ftJsonEscape(recordType));
       Serial.print("\",\"path\":\"");
-      Serial.print(jsonEscape(String(path)));
+      Serial.print(ftJsonEscape(String(path)));
       Serial.println("\"}");
     }
   }
@@ -853,7 +656,7 @@ static int base64EncodeChunk(const uint8_t* input, int inputLen, char* output) {
 }
 
 bool SyncManager::printAudioFile(const String& requestedFilename, bool sdReady) {
-  String filename = baseNameFromPath(requestedFilename);
+  String filename = ftBaseName(requestedFilename);
   filename.trim();
 
   if (!sdReady) {
@@ -863,7 +666,7 @@ bool SyncManager::printAudioFile(const String& requestedFilename, bool sdReady) 
     return false;
   }
 
-  if (!isRealAudioWavFile(filename)) {
+  if (!ftIsAudioWavFilename(filename)) {
     Serial.print("FT01_SYNC_AUDIO_ERROR ");
     Serial.print(filename.length() ? filename : "unknown");
     Serial.println(" invalid_filename");

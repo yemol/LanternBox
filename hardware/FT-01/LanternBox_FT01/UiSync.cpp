@@ -2,6 +2,8 @@
 #include "SyncManager.h"
 #include <Arduino.h>
 #include <M5Cardputer.h>
+#include "FtUiCommon.h"
+#include "FtTextUtil.h"
 
 extern M5Canvas canvas;
 extern SyncManager syncManager;
@@ -30,77 +32,17 @@ static bool syncBusy = false;
 static String syncBusyText = "";
 static const int SYNC_DETAIL_PAGE_COUNT = 2;
 
-static bool syncIsEsc(const String& key) {
-  return key == "`" || key == "[ESC]" || key == "ESC" || key == "[DEL]";
-}
-
-static bool syncIsEnter(const String& key) {
-  return key == "\r" || key == "\n" || key.indexOf("ENTER") >= 0 || key == "OK" || key == "[ENTER]";
-}
-
-static bool syncIsLeft(const String& key) {
-  return key == "," || key == "[LEFT]" || key == "LEFT";
-}
-
-static bool syncIsRight(const String& key) {
-  return key == "/" || key == "[RIGHT]" || key == "RIGHT";
-}
-
-static bool syncHasLetter(const String& key, char lower, char upper) {
-  if (key == "\r" || key == "\n" || key.indexOf("ENTER") >= 0) return false;
-  return key.indexOf(lower) >= 0 || key.indexOf(upper) >= 0;
-}
-
 static void syncHeader(const String& title) {
-  canvas.fillRect(0, 0, canvas.width(), 22, BLACK);
-
-  useChineseFont16();
-  canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(8, 4);
-  canvas.print(title);
-
-  useAsciiFont();
-  canvas.setTextColor(sdReady ? GREEN : DARKGREY, BLACK);
-  canvas.setCursor(138, 5);
-  canvas.print("SD");
-
-  canvas.setTextColor(gnssFix ? GREEN : DARKGREY, BLACK);
-  canvas.setCursor(164, 5);
-  canvas.print("GNSS");
+  ftDrawHeaderBase(title);
+  ftDrawSdGnssStatus(138, 164);
 }
 
 static void syncFooter(const String& text) {
-  canvas.drawLine(0, 112, canvas.width(), 112, WHITE);
-
-  useAsciiFont();
-  canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(8, 116);
-  canvas.print(text);
+  ftDrawFooter(text);
 }
 
 static void row(int y, const String& label, const String& value, uint16_t color = WHITE) {
-  useChineseFont12();
-  canvas.setTextColor(LIGHTGREY, BLACK);
-  canvas.setCursor(10, y);
-  canvas.print(label);
-
-  useAsciiFont();
-  canvas.setTextColor(color, BLACK);
-  canvas.setCursor(92, y + 1);
-  canvas.print(value);
-}
-
-
-static String formatBytesSync(uint64_t bytes) {
-  if (bytes >= 1024ULL * 1024ULL) {
-    float mb = (float)bytes / (1024.0f * 1024.0f);
-    return String(mb, 1) + "MB";
-  }
-  if (bytes >= 1024ULL) {
-    float kb = (float)bytes / 1024.0f;
-    return String(kb, 1) + "KB";
-  }
-  return String((uint32_t)bytes) + "B";
+  ftDrawLabelValueRow(y, label, value, 92, color);
 }
 
 static void drawTransportCard(int x, int y, int w, int h, const String& title, const String& subtitle, bool selected, bool enabled) {
@@ -219,7 +161,7 @@ static void drawDetailUpload() {
   row(46, "现场日志", String(st.fieldEvents));
   row(62, "启动日志", String(st.bootLogs));
   row(78, "录音索引", String(st.audioIndex));
-  row(94, "录音文件", formatBytesSync(st.audioBytes));
+  row(94, "录音文件", ftFormatBytes(st.audioBytes, 1));
 
   syncFooter("< > 翻页 | U Hello | M Manifest");
 }
@@ -265,7 +207,7 @@ void handleSyncKey(const String& key) {
     return;
   }
 
-  if (syncIsEsc(key)) {
+  if (FtKey::isEsc(key, true)) {
     if (syncView == SYNC_VIEW_DETAIL) {
       syncView = SYNC_VIEW_TRANSPORT;
       drawSyncScreen();
@@ -278,13 +220,13 @@ void handleSyncKey(const String& key) {
   }
 
   if (syncView == SYNC_VIEW_TRANSPORT) {
-    if (syncIsLeft(key)) {
+    if (FtKey::isLeft(key)) {
       syncTransportIndex--;
       if (syncTransportIndex < 0) syncTransportIndex = 2;
-    } else if (syncIsRight(key)) {
+    } else if (FtKey::isRight(key)) {
       syncTransportIndex++;
       if (syncTransportIndex > 2) syncTransportIndex = 0;
-    } else if (syncIsEnter(key)) {
+    } else if (FtKey::isEnter(key)) {
       if (syncTransportIndex == 0) {
         syncBusy = true;
         syncBusyText = "正在读取 SD...";
@@ -297,7 +239,7 @@ void handleSyncKey(const String& key) {
         syncView = SYNC_VIEW_DETAIL;
         syncDetailPage = 0;
       }
-    } else if (syncHasLetter(key, 'h', 'H')) {
+    } else if (FtKey::hasLetter(key, 'h', 'H')) {
       openSyncHelp();
       return;
     }
@@ -306,17 +248,17 @@ void handleSyncKey(const String& key) {
     return;
   }
 
-  if (syncIsLeft(key)) {
+  if (FtKey::isLeft(key)) {
     syncDetailPage--;
     if (syncDetailPage < 0) syncDetailPage = SYNC_DETAIL_PAGE_COUNT - 1;
-  } else if (syncIsRight(key)) {
+  } else if (FtKey::isRight(key)) {
     syncDetailPage++;
     if (syncDetailPage >= SYNC_DETAIL_PAGE_COUNT) syncDetailPage = 0;
-  } else if (syncHasLetter(key, 'r', 'R')) {
+  } else if (FtKey::hasLetter(key, 'r', 'R')) {
     syncManager.refresh(sdReady);
-  } else if (syncHasLetter(key, 'u', 'U')) {
+  } else if (FtKey::hasLetter(key, 'u', 'U')) {
     syncManager.printUsbHello(sdReady, gnssFix, gnssSatellites, sdStatusText);
-  } else if (syncHasLetter(key, 'm', 'M')) {
+  } else if (FtKey::hasLetter(key, 'm', 'M')) {
     syncBusy = true;
     syncBusyText = "正在同步中...";
     drawSyncScreen();
@@ -325,7 +267,7 @@ void handleSyncKey(const String& key) {
 
     syncBusy = false;
     syncBusyText = "";
-  } else if (syncHasLetter(key, 'h', 'H')) {
+  } else if (FtKey::hasLetter(key, 'h', 'H')) {
     openSyncHelp();
     return;
   }

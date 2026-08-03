@@ -2,6 +2,9 @@
 #include <M5Cardputer.h>
 #include <SD.h>
 #include "HelpManager.h"
+#include "AudioLogger.h"
+#include "FtUiCommon.h"
+#include "FtTextUtil.h"
 
 extern M5Canvas canvas;
 
@@ -13,36 +16,22 @@ extern void openLogHelp();
 
 extern bool sdReady;
 extern bool gnssFix;
-extern int batteryLevel;
-extern String lastWriteStatus;
 extern unsigned long getCurrentEpoch();
 extern void epochToTimeString(unsigned long epoch, char* buffer, size_t bufferSize);
 extern void updateDeviceStatus();
 
-extern void audioLogStart();
-extern void audioLogStop();
-extern void audioLogPlay();
-extern void audioLogStopPlayback();
-extern void audioLogGainUp();
-extern void audioLogGainDown();
-extern void audioLogListRefresh();
-extern void audioLogListMove(int delta);
-extern void audioLogListPlaySelected();
-extern bool audioLogDeleteSelected();
-extern String audioLogSelectedFileName();
-extern String audioLogSelectedFilePath();
-extern String audioLogListFileNameAt(int index);
-extern String audioLogListFilePathAt(int index);
-extern int audioLogListCount();
-extern int audioLogListIndex();
-extern const char* audioLogStateText();
-extern uint32_t audioLogSamples();
-extern uint32_t audioLogDropped();
-extern int audioLogGainX10();
-extern bool audioLogIsBusy();
-
-static const uint16_t ROW_NORMAL = 0x03A0;
-static const uint16_t ROW_ACTIVE = WHITE;
+extern AudioLogger audioLogger;
+extern String lastAction;
+extern String lastWriteStatus;
+extern String currentSessionId;
+extern int gnssSatellites;
+extern double gnssLat;
+extern double gnssLon;
+extern String gnssUtcTime;
+extern String gnssUtcDate;
+extern void ensureSessionStarted(const char* reason);
+extern String currentDeviceDateText();
+extern String currentDeviceTimeText();
 
 static bool audioMetaCacheReady = false;
 static String audioMetaDate[20];
@@ -50,63 +39,10 @@ static String audioMetaTime[20];
 static String audioMetaDuration[20];
 
 static bool deleteConfirmArmed = false;
-static unsigned long deleteConfirmMs = 0;
-
-static bool keyHasLetterLocal(const String& key, char lower, char upper) {
-  // Avoid treating textual control tokens like "\\r" as the R key.
-  if (key == "\\r" || key == "\\n" || key.indexOf("ENTER") >= 0) {
-    return false;
-  }
-
-  return key.indexOf(lower) >= 0 || key.indexOf(upper) >= 0;
-}
-
-static bool isEscLike(const String& key) {
-  return key == "`" ||
-         key == "~" ||
-         key.indexOf("[ESC]") >= 0 ||
-         key.indexOf("[DEL]") >= 0 ||
-         key.indexOf("ESC") >= 0 ||
-         key.indexOf("DEL") >= 0;
-}
-
-static bool isLeftLike(const String& key) {
-  return key == "," ||
-         key == "<" ||
-         key.indexOf("LEFT") >= 0;
-}
-
-static bool isRightLike(const String& key) {
-  return key == "/" ||
-         key == ">" ||
-         key.indexOf("RIGHT") >= 0;
-}
-
-static bool isEnterLike(const String& key) {
-  return key.indexOf("[ENTER]") >= 0 ||
-         key.indexOf("ENTER") >= 0 ||
-         key == "OK" ||
-         key.indexOf('\n') >= 0 ||
-         key.indexOf('\r') >= 0 ||
-         key == "\\n" ||
-         key == "\\r";
-}
 
 static String gainText() {
-  int gain = audioLogGainX10();
+  int gain = audioLogger.gainX10();
   return String(gain / 10) + "." + String(gain % 10) + "x";
-}
-
-static String getJsonStringValueLocal(const String& line, const String& key) {
-  String marker = "\"" + key + "\":\"";
-  int start = line.indexOf(marker);
-  if (start < 0) return "";
-
-  start += marker.length();
-  int end = line.indexOf("\"", start);
-
-  if (end < 0) return "";
-  return line.substring(start, end);
 }
 
 static String durationFromPathFast(const String& path) {
@@ -127,6 +63,62 @@ static String durationFromPathFast(const String& path) {
   }
 
   return String(seconds / 60) + "m" + String(seconds % 60) + "s";
+}
+
+static void refreshAudioList() {
+  audioLogger.refreshList();
+  lastAction = "LIST REFRESH";
+}
+
+static void moveAudioSelection(int delta) {
+  audioLogger.moveSelection(delta);
+}
+
+static void startAudioRecording() {
+  if (!sdReady) {
+    lastAction = "NO SD";
+    lastWriteStatus = "AUDIO NO SD";
+    Serial.println("[AUDIO] start blocked: SD not ready");
+    return;
+  }
+
+  ensureSessionStarted("audio");
+
+  AudioLoggerGnssSnapshot snap;
+  snap.fix = gnssFix;
+  snap.satellites = gnssSatellites;
+  snap.lat = gnssLat;
+  snap.lon = gnssLon;
+  snap.utcTime = gnssUtcTime;
+  snap.utcDate = gnssUtcDate;
+
+  bool ok = audioLogger.startRecord(
+    currentSessionId,
+    snap,
+    currentDeviceDateText(),
+    currentDeviceTimeText()
+  );
+  lastAction = ok ? "AUDIO REC" : "AUDIO FAIL";
+  lastWriteStatus = ok ? "AUDIO REC" : "AUDIO BUSY";
+}
+
+static void stopAudioRecording() {
+  bool ok = audioLogger.stopRecord();
+  lastAction = ok ? "AUDIO SAVED" : "AUDIO STOP FAIL";
+  lastWriteStatus = ok ? "AUDIO SAVED" : "AUDIO FAIL";
+}
+
+static void playSelectedAudio() {
+  bool ok = audioLogger.playSelected();
+  lastAction = ok ? "PLAY SELECT" : "PLAY FAIL";
+  lastWriteStatus = ok ? "PLAY SELECT" : "PLAY FAIL";
+}
+
+static bool deleteSelectedAudio() {
+  bool ok = audioLogger.deleteSelected();
+  lastAction = ok ? "AUDIO DELETE" : "DELETE FAIL";
+  lastWriteStatus = ok ? "AUDIO DELETE" : "DELETE FAIL";
+  return ok;
 }
 
 static void rebuildAudioMetaCache() {
@@ -150,16 +142,16 @@ static void rebuildAudioMetaCache() {
   while (f.available()) {
     String line = f.readStringUntil('\n');
 
-    String fileName = getJsonStringValueLocal(line, "file");
+    String fileName = ftJsonString(line, "file");
     if (fileName.length() == 0) continue;
 
-    for (int i = 0; i < audioLogListCount() && i < 20; i++) {
-      String path = audioLogListFilePathAt(i);
+    for (int i = 0; i < audioLogger.listCount() && i < 20; i++) {
+      String path = audioLogger.listFilePathAt(i);
 
       if (path.endsWith(fileName.substring(fileName.lastIndexOf("/") + 1))) {
-        audioMetaDate[i] = getJsonStringValueLocal(line, "device_date");
+        audioMetaDate[i] = ftJsonString(line, "device_date");
 
-        String t = getJsonStringValueLocal(line, "device_time");
+        String t = ftJsonString(line, "device_time");
         if (t.length() >= 5) {
           audioMetaTime[i] = t.substring(0, 5);
         }
@@ -184,17 +176,11 @@ static void drawTopBar() {
   char timeText[12];
   epochToTimeString(getCurrentEpoch(), timeText, sizeof(timeText));
 
-  canvas.fillRect(0, 0, canvas.width(), 20, BLACK);
-
-  useChineseFont12();
-  canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(7, 4);
-  canvas.print("语音日志");
-
+  ftDrawCompactTitle("语音日志");
   useAsciiFont();
-  canvas.setTextColor(audioLogIsBusy() ? ORANGE : GREEN, BLACK);
+  canvas.setTextColor(audioLogger.isBusy() ? ORANGE : GREEN, BLACK);
   canvas.setCursor(78, 5);
-  canvas.print(audioLogStateText());
+  canvas.print(audioLogger.stateText());
 
   canvas.setTextColor(sdReady ? GREEN : DARKGREY, BLACK);
   canvas.setCursor(140, 5);
@@ -208,60 +194,6 @@ static void drawTopBar() {
   canvas.setCursor(202, 5);
   canvas.print(String(timeText).substring(0, 5));
 
-}
-
-static void drawAudioRow(int row, int fileIndex) {
-  bool selected = fileIndex == audioLogListIndex();
-  int y = 28 + row * 27;
-  uint16_t fill = selected ? ROW_ACTIVE : ROW_NORMAL;
-  uint16_t textColor = BLACK;
-
-  canvas.fillRoundRect(12, y, 216, 17, 3, fill);
-
-  String timeText = "--:--";
-  String duration = "--";
-  String dateText = "--";
-
-  if (fileIndex >= 0 && fileIndex < 20 && audioMetaCacheReady) {
-    timeText = audioMetaTime[fileIndex];
-    duration = audioMetaDuration[fileIndex];
-    dateText = audioMetaDate[fileIndex];
-  }
-
-  if (dateText.length() >= 5) {
-    dateText = dateText.substring(5);   // MM-DD
-  }
-
-  useAsciiFont();
-  canvas.setTextSize(1);
-  canvas.setTextColor(textColor, fill);
-
-  canvas.setCursor(16, y + 3);
-  canvas.print(selected ? ">" : " ");
-  canvas.print(fileIndex + 1);
-
-  canvas.setCursor(50, y + 3);
-  canvas.print(dateText);
-
-  canvas.setCursor(128, y + 3);
-  canvas.print(String(timeText).substring(0, 5));
-
-  canvas.setCursor(182, y + 3);
-  canvas.print(duration);
-
-  // light overdraw for better legibility without increasing row height
-  canvas.setCursor(17, y + 3);
-  canvas.print(selected ? ">" : " ");
-  canvas.print(fileIndex + 1);
-
-  canvas.setCursor(51, y + 3);
-  canvas.print(dateText);
-
-  canvas.setCursor(129, y + 3);
-  canvas.print(String(timeText).substring(0, 5));
-
-  canvas.setCursor(183, y + 3);
-  canvas.print(duration);
 }
 
 static void drawLogLoading(const String& text) {
@@ -312,8 +244,8 @@ void drawLogScreen() {
   canvas.fillSprite(BLACK);
   drawTopBar();
 
-  int count = audioLogListCount();
-  int selected = audioLogListIndex();
+  int count = audioLogger.listCount();
+  int selected = audioLogger.listIndex();
 
   int startIndex = selected - 1;
   if (startIndex < 0) startIndex = 0;
@@ -376,7 +308,7 @@ void drawLogScreen() {
 
 void handleLogKey(const String& key) {
   bool isDeleteKey =
-      keyHasLetterLocal(key, 'b', 'B') ||
+      FtKey::hasLetter(key, 'b', 'B') ||
       key.indexOf("[DEL]") >= 0 ||
       key.indexOf("DEL") >= 0;
 
@@ -386,11 +318,11 @@ void handleLogKey(const String& key) {
     if (isDeleteKey) {
       drawLogLoading("删除中");
 
-      bool ok = audioLogDeleteSelected();
+      bool ok = deleteSelectedAudio();
 deleteConfirmArmed = false;
 
       if (ok) {
-        audioLogListRefresh();
+        refreshAudioList();
         invalidateAudioMetaCache();
         rebuildAudioMetaCache();
       }
@@ -404,43 +336,43 @@ deleteConfirmArmed = false;
     return;
   }
 
-  if (isEscLike(key)) {
-    if (!audioLogIsBusy()) {
+  if (FtKey::isEsc(key, true)) {
+    if (!audioLogger.isBusy()) {
       returnToHomeFromModule();
     }
     return;
   }
 
-  if (keyHasLetterLocal(key, 'h', 'H')) {
+  if (FtKey::hasLetter(key, 'h', 'H')) {
     openLogHelp();
     return;
   }
 
   // Enter / P must be handled before R.
   // Some Enter payloads look like "\\r", which otherwise can be mistaken for R.
-  if (keyHasLetterLocal(key, 'p', 'P') || isEnterLike(key)) {
-    if (audioLogIsBusy()) {
-      audioLogStopPlayback();
+  if (FtKey::hasLetter(key, 'p', 'P') || FtKey::isEnter(key)) {
+    if (audioLogger.isBusy()) {
+      audioLogger.stopPlayback();
       drawLogScreen();
     } else {
       drawLogLoading("播放中");
-      audioLogListPlaySelected();
+      playSelectedAudio();
       drawLogScreen();
     }
     return;
   }
 
-  if (keyHasLetterLocal(key, 'r', 'R')) {
-    audioLogStart();
+  if (FtKey::hasLetter(key, 'r', 'R')) {
+    startAudioRecording();
     return;
   }
 
-  if (keyHasLetterLocal(key, 's', 'S')) {
+  if (FtKey::hasLetter(key, 's', 'S')) {
     drawLogLoading("保存中");
-    audioLogStop();
+    stopAudioRecording();
 
     drawLogLoading("刷新列表");
-    audioLogListRefresh();
+    refreshAudioList();
     invalidateAudioMetaCache();
 
     drawLogLoading("整理信息");
@@ -450,19 +382,19 @@ deleteConfirmArmed = false;
     return;
   }
 
-  if (isLeftLike(key)) {
-    audioLogListMove(-1);
+  if (FtKey::isLeft(key)) {
+    moveAudioSelection(-1);
     return;
   }
 
-  if (isRightLike(key)) {
-    audioLogListMove(1);
+  if (FtKey::isRight(key)) {
+    moveAudioSelection(1);
     return;
   }
 
-  if (keyHasLetterLocal(key, 'a', 'A')) {
+  if (FtKey::hasLetter(key, 'a', 'A')) {
     drawLogLoading("刷新列表");
-    audioLogListRefresh();
+    refreshAudioList();
     invalidateAudioMetaCache();
 
     drawLogLoading("整理信息");
@@ -474,18 +406,17 @@ deleteConfirmArmed = false;
 
   if (isDeleteKey) {
     deleteConfirmArmed = true;
-    deleteConfirmMs = millis();
     drawDeleteConfirm();
     return;
   }
 
-  if (keyHasLetterLocal(key, 'u', 'U')) {
-    audioLogGainUp();
+  if (FtKey::hasLetter(key, 'u', 'U')) {
+    audioLogger.gainUp();
     return;
   }
 
-  if (keyHasLetterLocal(key, 'd', 'D')) {
-    audioLogGainDown();
+  if (FtKey::hasLetter(key, 'd', 'D')) {
+    audioLogger.gainDown();
     return;
   }
 }

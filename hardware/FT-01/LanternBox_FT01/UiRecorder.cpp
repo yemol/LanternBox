@@ -1,9 +1,10 @@
 #include "UiRecorder.h"
+#include "FtUiCommon.h"
+#include "FtConfig.h"
 
 static const uint16_t CARD_GREEN = 0x8EEC;  // readable soft green
 
 // ---------- Shared state from LanternBox_FT01.ino ----------
-extern const char* VERSION;
 extern M5Canvas canvas;
 
 extern bool autoTrack;
@@ -21,7 +22,6 @@ extern double gnssLon;
 extern String currentSessionId;
 
 extern unsigned long lastAutoTrackMillis;
-extern const unsigned long autoTrackIntervalMs;
 
 
 // ---------- Shared helpers from LanternBox_FT01.ino ----------
@@ -30,9 +30,8 @@ extern void useAsciiFont();
 extern void updateDeviceStatus();
 extern unsigned long getCurrentEpoch();
 extern void epochToTimeString(unsigned long epoch, char* buffer, size_t bufferSize);
-extern String autoNextText();
 
-void drawTextCard(int x, int y, int w, int h, const String& title, const String& value, bool highlight = false) {
+void drawTextCard(int x, int y, int w, int h, const String& title, const String& value) {
   canvas.fillRoundRect(x, y, w, h, 3, CARD_GREEN);
 
   useChineseFont12();
@@ -73,7 +72,20 @@ String satelliteDisplayCompact() {
 
 String countdownDisplayCompact() {
   if (!autoTrack) return "--:--";
-  return autoNextText();
+
+  const unsigned long elapsed = millis() - lastAutoTrackMillis;
+  if (elapsed >= FT_AUTO_TRACK_INTERVAL_MS) return "00:00";
+
+  unsigned long remainingSeconds =
+      (FT_AUTO_TRACK_INTERVAL_MS - elapsed) / 1000UL;
+  if (remainingSeconds > 99UL) remainingSeconds = 99UL;
+
+  const char text[6] = {
+      '0', '0', ':',
+      static_cast<char>('0' + remainingSeconds / 10UL),
+      static_cast<char>('0' + remainingSeconds % 10UL),
+      '\0'};
+  return String(text);
 }
 
 
@@ -85,13 +97,7 @@ void drawRecorderScreen() {
   epochToTimeString(getCurrentEpoch(), timeText, sizeof(timeText));
 
   // ===== Compact Header =====
-  canvas.fillRect(0, 0, canvas.width(), 20, BLACK);
-
-  useChineseFont12();
-  canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(7, 4);
-  canvas.print("路径记录");
-
+  ftDrawCompactTitle("路径记录");
   useAsciiFont();
   canvas.setTextColor(autoTrack ? GREEN : DARKGREY, BLACK);
   canvas.setCursor(112, 5);
@@ -124,10 +130,10 @@ void drawRecorderScreen() {
   const int topY = 29;
   const int bottomY = 68;
 
-  drawTextCard(leftX, topY, cardW, cardH, "会话", displaySessionIdCompact(), sessionActive);
-  drawTextCard(rightX, topY, cardW, cardH, "路径点", String(pathWriteCount), pathWriteCount > 0);
-  drawTextCard(leftX, bottomY, cardW, cardH, "倒计时", countdownDisplayCompact(), autoTrack);
-  drawTextCard(rightX, bottomY, cardW, cardH, "卫星", satelliteDisplayCompact(), gnssFix);
+  drawTextCard(leftX, topY, cardW, cardH, "会话", displaySessionIdCompact());
+  drawTextCard(rightX, topY, cardW, cardH, "路径点", String(pathWriteCount));
+  drawTextCard(leftX, bottomY, cardW, cardH, "倒计时", countdownDisplayCompact());
+  drawTextCard(rightX, bottomY, cardW, cardH, "卫星", satelliteDisplayCompact());
 
   // ===== Shortcut row =====
   useChineseFont12();
@@ -160,55 +166,3 @@ void drawRecorderScreen() {
 
   canvas.pushSprite(0, 0);
 }
-
-
-void drawHelpScreen() {
-  canvas.fillSprite(BLACK);
-
-  useChineseFont12();
-  canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(8, 5);
-  canvas.print("帮助 / HELP");
-
-  useAsciiFont();
-  canvas.setTextColor(DARKGREY, BLACK);
-  canvas.setCursor(86, 6);
-  canvas.print(VERSION);
-
-  canvas.drawLine(0, 20, canvas.width(), 20, WHITE);
-
-  useAsciiFont();
-  canvas.setTextColor(WHITE, BLACK);
-
-  canvas.setCursor(10, 28);
-  canvas.print("A  AUTO ON/OFF   FIX");
-
-  canvas.setCursor(10, 43);
-  canvas.print("B  SAVE BASE     FIX");
-
-  canvas.setCursor(10, 58);
-  canvas.print("P  SAVE POINT    FIX");
-
-  canvas.setCursor(10, 73);
-  canvas.print("S  STOP SESSION  FIX");
-
-  canvas.setCursor(10, 88);
-  canvas.print("R  RESET SD/GNSS");
-
-  canvas.setCursor(10, 103);
-  canvas.print("H  CLOSE HELP");
-
-  canvas.setCursor(10, 118);
-  canvas.print("ESC BACK, REC KEEPS RUNNING");
-
-  canvas.setTextColor(autoTrack ? GREEN : DARKGREY, BLACK);
-  canvas.setCursor(174, 28);
-  canvas.print(autoTrack ? "AUTO" : "IDLE");
-
-  canvas.setTextColor(sdReady ? GREEN : ORANGE, BLACK);
-  canvas.setCursor(174, 43);
-  canvas.print(sdReady ? "SD OK" : "NO SD");
-
-  canvas.pushSprite(0, 0);
-}
-

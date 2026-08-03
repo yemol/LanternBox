@@ -17,6 +17,4 @@ enum HelpType {
 };
 
 void showHelp(HelpType type);
-void handleHelpManagerKey(const String& key);
-
 void drawHelpManager();

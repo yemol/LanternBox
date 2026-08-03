@@ -2,6 +2,7 @@
 #include "TaskManager.h"
 #include <Arduino.h>
 #include <M5Cardputer.h>
+#include "FtUiCommon.h"
 
 extern M5Canvas canvas;
 extern TaskManager taskManager;
@@ -14,27 +15,6 @@ extern void returnToHomeFromModule();
 
 static bool taskDetailMode = false;
 static int taskDetailScrollLine = 0;
-
-static bool taskIsEsc(const String& key) {
-  return key == "`" || key == "[ESC]" || key == "ESC" || key == "[DEL]";
-}
-
-static bool taskIsEnter(const String& key) {
-  return key == "\r" || key == "\n" || key.indexOf("ENTER") >= 0 || key == "OK" || key == "[ENTER]";
-}
-
-static bool taskIsLeft(const String& key) {
-  return key == "," || key == "[LEFT]" || key == "LEFT" || key == ";" || key == "[UP]" || key == "UP";
-}
-
-static bool taskIsRight(const String& key) {
-  return key == "/" || key == "[RIGHT]" || key == "RIGHT" || key == "." || key == "[DOWN]" || key == "DOWN";
-}
-
-static bool taskHasLetter(const String& key, char lower, char upper) {
-  if (key == "\r" || key == "\n" || key.indexOf("ENTER") >= 0) return false;
-  return key.indexOf(lower) >= 0 || key.indexOf(upper) >= 0;
-}
 
 static bool isUtf8Continuation(unsigned char c) {
   return (c & 0xC0) == 0x80;
@@ -85,13 +65,6 @@ static String statusShort(const String& value) {
   return "TODO";
 }
 
-static String statusChinese(const String& value) {
-  if (value == "in_progress") return "进行中";
-  if (value == "completed") return "已完成";
-  if (value == "blocked") return "受阻";
-  return "待处理";
-}
-
 static uint16_t statusColor(const String& value) {
   if (value == "completed") return GREEN;
   if (value == "blocked") return ORANGE;
@@ -100,12 +73,7 @@ static uint16_t statusColor(const String& value) {
 }
 
 static void taskHeader(const String& title) {
-  canvas.fillRect(0, 0, canvas.width(), 22, BLACK);
-
-  useChineseFont16();
-  canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(8, 4);
-  canvas.print(title);
+  ftDrawHeaderBase(title);
 
   useAsciiFont();
   canvas.setTextColor(sdReady ? GREEN : DARKGREY, BLACK);
@@ -119,11 +87,7 @@ static void taskHeader(const String& title) {
 }
 
 static void taskFooter(const String& text) {
-  canvas.drawLine(0, 112, canvas.width(), 112, WHITE);
-  useAsciiFont();
-  canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(6, 116);
-  canvas.print(text);
+  ftDrawFooter(text, 6);
 }
 
 static void printChinese16Bold(const String& text, int x, int y, uint16_t color, uint16_t bg) {
@@ -299,7 +263,7 @@ void drawTasksScreen() {
 }
 
 void handleTasksKey(const String& key) {
-  if (taskIsEsc(key)) {
+  if (FtKey::isEsc(key, true)) {
     if (taskDetailMode) {
       taskDetailMode = false;
       taskDetailScrollLine = 0;
@@ -322,23 +286,23 @@ void handleTasksKey(const String& key) {
       if (maxPages < 1) maxPages = 1;
     }
 
-    if (taskIsLeft(key)) {
+    if ((FtKey::isLeft(key) || FtKey::isUp(key))) {
       taskDetailScrollLine--;
       if (taskDetailScrollLine < 0) taskDetailScrollLine = 0;
-    } else if (taskIsRight(key)) {
+    } else if ((FtKey::isRight(key) || FtKey::isDown(key))) {
       taskDetailScrollLine++;
       if (taskDetailScrollLine > maxPages - 1) taskDetailScrollLine = maxPages - 1;
-    } else if (taskIsEnter(key)) {
+    } else if (FtKey::isEnter(key)) {
       taskDetailMode = false;
       taskDetailScrollLine = 0;
-    } else if (taskHasLetter(key, 'r', 'R')) {
+    } else if (FtKey::hasLetter(key, 'r', 'R')) {
       tasksRefresh();
       taskDetailScrollLine = 0;
-    } else if (taskHasLetter(key, 's', 'S')) {
+    } else if (FtKey::hasLetter(key, 's', 'S')) {
       taskManager.setSelectedStatus("in_progress", sdReady);
-    } else if (taskHasLetter(key, 'd', 'D')) {
+    } else if (FtKey::hasLetter(key, 'd', 'D')) {
       taskManager.setSelectedStatus("completed", sdReady);
-    } else if (taskHasLetter(key, 'b', 'B')) {
+    } else if (FtKey::hasLetter(key, 'b', 'B')) {
       taskManager.setSelectedStatus("blocked", sdReady);
     }
 
@@ -346,22 +310,22 @@ void handleTasksKey(const String& key) {
     return;
   }
 
-  if (taskIsLeft(key)) {
+  if ((FtKey::isLeft(key) || FtKey::isUp(key))) {
     taskManager.moveSelected(-1);
-  } else if (taskIsRight(key)) {
+  } else if ((FtKey::isRight(key) || FtKey::isDown(key))) {
     taskManager.moveSelected(1);
-  } else if (taskIsEnter(key)) {
+  } else if (FtKey::isEnter(key)) {
     if (taskManager.taskCount() > 0) {
       taskDetailMode = true;
       taskDetailScrollLine = 0;
     }
-  } else if (taskHasLetter(key, 'r', 'R')) {
+  } else if (FtKey::hasLetter(key, 'r', 'R')) {
     tasksRefresh();
-  } else if (taskHasLetter(key, 's', 'S')) {
+  } else if (FtKey::hasLetter(key, 's', 'S')) {
     taskManager.setSelectedStatus("in_progress", sdReady);
-  } else if (taskHasLetter(key, 'd', 'D')) {
+  } else if (FtKey::hasLetter(key, 'd', 'D')) {
     taskManager.setSelectedStatus("completed", sdReady);
-  } else if (taskHasLetter(key, 'b', 'B')) {
+  } else if (FtKey::hasLetter(key, 'b', 'B')) {
     taskManager.setSelectedStatus("blocked", sdReady);
   }
 

@@ -31,9 +31,7 @@ public:
 
   const SyncManifestStats& stats() const { return manifestStats; }
   const String& lastStatus() const { return statusText; }
-  const String& lastSyncSessionId() const { return syncSessionId; }
   const String& deviceId() const { return deviceIdText; }
-  const String& firmwareVersion() const { return versionText; }
 
 private:
   String deviceIdText;
@@ -48,14 +46,9 @@ private:
   bool ensureDir(const char* path);
   bool truncateRecordFile(const char* path, String& errorOut);
   bool retainLastJsonlLines(const char* path, int keepLines, String& errorOut, int& retainedOut);
-  bool isSafeAudioDeleteFilename(const String& filename);
-  bool rewriteAudioIndexWithoutFile(const String& filename, int& removedOut, String& errorOut);
   int countJsonlLines(const char* path);
   int countAudioFiles(uint64_t& bytesOut);
   String makeSafeSessionId();
-  String jsonEscape(const String& value);
-  String baseNameFromPath(const String& path);
-  String extractJsonStringValue(const String& line, const String& key);
   SyncAudioIndexMeta findAudioIndexMeta(const String& filename);
   String buildStableAudioId(const String& filename, uint32_t size, const SyncAudioIndexMeta& meta);
 };

@@ -39,7 +39,7 @@ public:
   bool appendStatusReport(const FtTaskItem& task, const String& newStatus, const String& note, bool sdReady);
 
   bool startReceiveTasks(int expectedCount, bool sdReady);
-  bool receiveTaskLine(const String& line, bool sdReady);
+  bool receiveTaskLine(const String& line);
   bool finishReceiveTasks(bool sdReady);
   bool abortReceiveTasks();
   bool isReceivingTasks() const { return receivingTasks; }
@@ -69,9 +69,6 @@ private:
   String receiveError = "";
   String receiveBuffer[MAX_TASKS];
 
-  String jsonEscape(const String& value);
-  String extractJsonStringValue(const String& line, const String& key);
-  int extractJsonIntValue(const String& line, const String& key, int fallback = 0);
   String normalizeStatus(const String& value);
   void clearTasks();
   void applyReportOverlay(bool sdReady);

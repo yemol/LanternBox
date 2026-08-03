@@ -1,0 +1,21 @@
+{
+  "version": "v0.5.2e",
+  "last_observed_previous_sketch_bytes": 1322806,
+  "required_flash_size": "8MB",
+  "required_partition_profile": "8M with spiffs (3MB APP/1.5MB SPIFFS)",
+  "expected_maximum_bytes": 3342336,
+  "release_budget_ratio": 0.8,
+  "current_version_real_arduino_compile": "pending",
+  "note": "Adds fresh-GNSS coordinates to the same outgoing channel or PKI text message. Real Arduino Sketch size must be filled from the IDE output.",
+  "host_modified_units_checked": [
+    "FtGnssContext.cpp",
+    "UiLoRaProbe.cpp",
+    "LoRaManager.cpp",
+    "LanternBox_FT01.ino"
+  ],
+  "host_gnss_module_test": "PASS",
+  "host_payload_budget_test": "PASS: 120-byte text + worst-case coordinate footer = 149 bytes <= 160-byte payload budget",
+  "host_project_full_arduino_compile": "pending: M5Stack ESP32 Core 3.2.2 toolchain not present in this environment",
+  "capacity_status": "requires_real_arduino_build",
+  "notes": "Background radio service added; record real Sketch and Maximum values after Arduino build."
+}

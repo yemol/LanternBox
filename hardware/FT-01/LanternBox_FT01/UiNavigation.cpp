@@ -1,5 +1,7 @@
 #include "UiNavigation.h"
 #include "HelpManager.h"
+#include "FtUiCommon.h"
+#include "FtTextUtil.h"
 #include <math.h>
 
 // ---------- Shared state from LanternBox_FT01.ino ----------
@@ -96,44 +98,6 @@ static const double MOVE_HEADING_LOCK_METERS = 5.0;
 static const double MAP_POINT_DEDUP_METERS = 2.0;
 
 // ---------- Small parsers ----------
-String extractStringField(const String& line, const String& key) {
-  String pattern = "\"" + key + "\":\"";
-  int start = line.indexOf(pattern);
-  if (start < 0) return "";
-
-  start += pattern.length();
-  int end = line.indexOf("\"", start);
-  if (end < 0) return "";
-
-  return line.substring(start, end);
-}
-
-double extractDoubleField(const String& line, const String& key, double fallback = 0.0) {
-  String pattern = "\"" + key + "\":";
-  int start = line.indexOf(pattern);
-  if (start < 0) return fallback;
-
-  start += pattern.length();
-  int end = line.indexOf(",", start);
-  if (end < 0) end = line.indexOf("}", start);
-  if (end < 0) return fallback;
-
-  return line.substring(start, end).toDouble();
-}
-
-int extractIntField(const String& line, const String& key, int fallback = 0) {
-  String pattern = "\"" + key + "\":";
-  int start = line.indexOf(pattern);
-  if (start < 0) return fallback;
-
-  start += pattern.length();
-  int end = line.indexOf(",", start);
-  if (end < 0) end = line.indexOf("}", start);
-  if (end < 0) return fallback;
-
-  return line.substring(start, end).toInt();
-}
-
 String normalizedSessionId(const String& raw) {
   if (raw.length() == 0) return "NO_SESSION";
   return raw;
@@ -149,10 +113,10 @@ String dateFromGnssUtcDate(const String& raw) {
 }
 
 String pointDateFromLine(const String& line) {
-  String localDate = extractStringField(line, "device_date");
+  String localDate = ftJsonString(line, "device_date");
   if (localDate.length() > 0) return localDate;
 
-  String utcDate = extractStringField(line, "gnss_utc_date");
+  String utcDate = ftJsonString(line, "gnss_utc_date");
   if (utcDate.length() > 0) return dateFromGnssUtcDate(utcDate);
 
   return "--";
@@ -166,20 +130,20 @@ String shortText(const String& value, int maxLen) {
 bool parsePathPointLine(const String& line, NavPoint& point) {
   if (line.indexOf("\"type\":\"path_point\"") < 0) return false;
 
-  double lat = extractDoubleField(line, "lat", 0.0);
-  double lon = extractDoubleField(line, "lon", 0.0);
+  double lat = ftJsonDouble(line, "lat", 0.0);
+  double lon = ftJsonDouble(line, "lon", 0.0);
 
   if (lat == 0.0 && lon == 0.0) return false;
 
   point.valid = true;
-  point.seq = extractIntField(line, "seq", 0);
+  point.seq = ftJsonInt(line, "seq", 0);
   point.lat = lat;
   point.lon = lon;
-  point.satellites = extractIntField(line, "satellites", -1);
-  point.mode = extractStringField(line, "mode");
+  point.satellites = ftJsonInt(line, "satellites", -1);
+  point.mode = ftJsonString(line, "mode");
   point.date = pointDateFromLine(line);
-  point.time = extractStringField(line, "device_time");
-  point.session = normalizedSessionId(extractStringField(line, "session_id"));
+  point.time = ftJsonString(line, "device_time");
+  point.session = normalizedSessionId(ftJsonString(line, "session_id"));
 
   return true;
 }
@@ -292,8 +256,8 @@ void loadBasePoint() {
   }
   file.close();
 
-  double lat = extractDoubleField(content, "lat", 0.0);
-  double lon = extractDoubleField(content, "lon", 0.0);
+  double lat = ftJsonDouble(content, "lat", 0.0);
+  double lon = ftJsonDouble(content, "lon", 0.0);
 
   if (!(lat == 0.0 && lon == 0.0)) {
     baseLoaded = true;
@@ -455,12 +419,14 @@ void navReloadTrackData() {
 }
 
 // ---------- Navigation math ----------
+static constexpr double NAV_PI = 3.14159265358979323846;
+
 double degToRad(double deg) {
-  return deg * PI / 180.0;
+  return deg * NAV_PI / 180.0;
 }
 
 double radToDeg(double rad) {
-  return rad * 180.0 / PI;
+  return rad * 180.0 / NAV_PI;
 }
 
 double distanceMeters(double lat1, double lon1, double lat2, double lon2) {
@@ -607,49 +573,14 @@ void navPathCard(int x, int y, int w, int h, const String& title, const String& 
 
 void navHeader(const String& title) {
   updateDeviceStatus();
-
-  char timeText[12];
-  epochToTimeString(getCurrentEpoch(), timeText, sizeof(timeText));
-  String hhmm = String(timeText).substring(0, 5);
-
-  canvas.fillRect(0, 0, canvas.width(), 22, BLACK);
-
-  useChineseFont16();
-  canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(8, 4);
-  canvas.print(title);
-
-  useAsciiFont();
-  canvas.setTextColor(sdReady ? GREEN : DARKGREY, BLACK);
-  canvas.setCursor(136, 5);
-  canvas.print("SD");
-
-  canvas.setTextColor(gnssFix ? GREEN : DARKGREY, BLACK);
-  canvas.setCursor(162, 5);
-  canvas.print("GNSS");
-
-  canvas.setTextColor(WHITE, BLACK);
-  canvas.setCursor(204, 5);
-  canvas.print(hhmm);
-
-  // No header separator line on navigation list/dashboard pages.
+  ftDrawHeaderBase(title);
+  ftDrawSdGnssStatus(136, 162);
+  ftDrawClockHHMM(204);
 }
 
 void navFooter(const String& hint) {
-  char timeText[12];
-  epochToTimeString(getCurrentEpoch(), timeText, sizeof(timeText));
-  String hhmm = String(timeText).substring(0, 5);
-
-  canvas.drawLine(0, 112, canvas.width(), 112, WHITE);
-
-  useAsciiFont();
-  canvas.setTextColor(WHITE, BLACK);
-
-  canvas.setCursor(8, 116);
-  canvas.print(hint);
-
-  canvas.setCursor(198, 116);
-  canvas.print(hhmm);
+  ftDrawFooter(hint);
+  ftDrawClockHHMM(198);
 }
 
 void drawSessionList() {
@@ -1067,34 +998,6 @@ void drawNavScreen() {
 }
 
 // ---------- Input ----------
-bool navKeyHasLetter(const String& key, char lower, char upper) {
-  return key.indexOf(lower) >= 0 || key.indexOf(upper) >= 0;
-}
-
-bool navIsLeft(const String& key) {
-  return key == "," || key == "[LEFT]" || key == "LEFT";
-}
-
-bool navIsRight(const String& key) {
-  return key == "/" || key == "[RIGHT]" || key == "RIGHT";
-}
-
-
-bool navIsEsc(const String& key) {
-  return key.indexOf("[ESC]") >= 0 ||
-         key.indexOf("[DEL]") >= 0 ||
-         key == "`" ||
-         key == "ESC";
-}
-
-bool navIsEnter(const String& key) {
-  return key.indexOf("[ENTER]") >= 0 ||
-         key.indexOf("\n") >= 0 ||
-         key.indexOf("\r") >= 0 ||
-         key == "OK" ||
-         key == "ENTER";
-}
-
 void selectPointDelta(int delta) {
   if (navPointCount <= 0) return;
 
@@ -1116,28 +1019,24 @@ void selectSessionDelta(int delta) {
 
 extern void openNavigationHelp(HelpType type);
 
-void openNavHelp(HelpType type) {
-  openNavigationHelp(type);
-}
-
 void handleNavKey(const String& key) {
-  if (navIsEsc(key)) {
+  if (FtKey::isEsc(key, true)) {
     returnToHomeFromModule();
     return;
   }
 
-  if (navPage == NAV_PAGE_SESSIONS && navIsEnter(key)) {
+  if (navPage == NAV_PAGE_SESSIONS && FtKey::isEnter(key)) {
     openSelectedSession();
-  } else if (navKeyHasLetter(key, 'h', 'H')) {
+  } else if (FtKey::hasLetter(key, 'h', 'H')) {
     if (navPage == NAV_PAGE_MAP) {
-      openNavHelp(HELP_NAV_MAP);
+      openNavigationHelp(HELP_NAV_MAP);
     } else if (navPage == NAV_PAGE_COMPASS) {
-      openNavHelp(HELP_NAV_COMPASS);
+      openNavigationHelp(HELP_NAV_COMPASS);
     } else {
-      openNavHelp(HELP_NAVIGATION);
+      openNavigationHelp(HELP_NAVIGATION);
     }
     return;
-    } else if (navPage == NAV_PAGE_MAP && navIsEnter(key)) {
+    } else if (navPage == NAV_PAGE_MAP && FtKey::isEnter(key)) {
     if (navPointCount > 0) {
       navTargetType = TARGET_POINT;
       navTargetIndex = navSelectedIndex;
@@ -1146,31 +1045,31 @@ void handleNavKey(const String& key) {
       navTargetIndex = -1;
     }
     navPage = NAV_PAGE_COMPASS;
-  } else if (navKeyHasLetter(key, 'r', 'R')) {
+  } else if (FtKey::hasLetter(key, 'r', 'R')) {
     navReloadTrackData();
-  } else if (navKeyHasLetter(key, 'l', 'L')) {
+  } else if (FtKey::hasLetter(key, 'l', 'L')) {
     navPage = NAV_PAGE_SESSIONS;
-  } else if (navKeyHasLetter(key, 'o', 'O')) {
+  } else if (FtKey::hasLetter(key, 'o', 'O')) {
     if (selectedSessionId.length() > 0 && navPointCount == 0) loadPointsForSelectedSession();
     navPage = NAV_PAGE_OVERVIEW;
-  } else if (navKeyHasLetter(key, 'm', 'M')) {
+  } else if (FtKey::hasLetter(key, 'm', 'M')) {
     if (selectedSessionId.length() > 0 && navPointCount == 0) loadPointsForSelectedSession();
     navPage = NAV_PAGE_MAP;
-  } else if (navKeyHasLetter(key, 'n', 'N')) {
+  } else if (FtKey::hasLetter(key, 'n', 'N')) {
     if (selectedSessionId.length() > 0 && navPointCount == 0) loadPointsForSelectedSession();
     navPage = NAV_PAGE_COMPASS;
-  } else if (navKeyHasLetter(key, 'b', 'B')) {
+  } else if (FtKey::hasLetter(key, 'b', 'B')) {
     if (baseLoaded) {
       navTargetType = TARGET_BASE;
       navTargetIndex = -1;
       navPage = NAV_PAGE_COMPASS;
     }
-  } else if (navIsEnter(key)) {
+  } else if (FtKey::isEnter(key)) {
     // Enter on session list is handled first.
-  } else if (navIsLeft(key)) {
+  } else if (FtKey::isLeft(key)) {
     if (navPage == NAV_PAGE_SESSIONS) selectSessionDelta(-1);
     else selectPointDelta(-1);
-  } else if (navIsRight(key)) {
+  } else if (FtKey::isRight(key)) {
     if (navPage == NAV_PAGE_SESSIONS) selectSessionDelta(1);
     else selectPointDelta(1);
   }
