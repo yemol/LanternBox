@@ -177,6 +177,11 @@
       box-shadow: 0 0 0 3px rgba(255, 180, 92, 0.08);
     }
 
+    .lora-node-card.self-node {
+      border-color: rgba(137, 204, 255, 0.16);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
     .lora-node-card:disabled {
       cursor: not-allowed;
       opacity: 0.7;
@@ -302,6 +307,20 @@
       color: var(--text-muted);
       font-size: 13px;
       line-height: 1.5;
+    }
+
+    .message-route {
+      margin: 8px 0 0;
+      display: grid;
+      gap: 4px;
+      color: var(--text-main);
+      font-size: 13px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .message-route-line {
+      margin: 0;
     }
 
     .communication-actions {
@@ -594,15 +613,88 @@
       messageCharCount.textContent = `${messageInput.value.length} / ${maxLength}`;
     }
 
-    function formatMeta(message) {
-      const parts = [message.created_at || '--'];
-      const metadata = message.metadata || {};
-      if (message.transport) parts.push(transportLabel(message.transport));
-      if (message.port) parts.push(message.port);
+    function normalizeMessageNodeId(value) {
+      const text = String(value ?? '').trim();
+      if (!text || ['unknown', 'none', 'null'].includes(text.toLowerCase())) return '';
+      if (text.startsWith('!')) return text.toLowerCase();
+      if (text.toLowerCase().startsWith('0x')) {
+        const parsed = Number.parseInt(text.slice(2), 16);
+        return Number.isFinite(parsed) ? `!${parsed.toString(16).padStart(8, '0')}` : text.toLowerCase();
+      }
+      if (/^\d+$/.test(text)) {
+        const parsed = Number.parseInt(text, 10);
+        return Number.isFinite(parsed) ? `!${parsed.toString(16).padStart(8, '0')}` : text;
+      }
+      return text;
+    }
+
+    function messageSenderId(message) {
+      const metadata = message && message.metadata ? message.metadata : {};
+      return normalizeMessageNodeId(
+        metadata.sender_node_id
+        || metadata.from_id
+        || metadata.fromId
+        || metadata.sender_id
+        || metadata.sender
+        || metadata.from
+        || metadata.node_id
+        || metadata.device_id
+      );
+    }
+
+    function messageSenderLabel(message) {
+      const senderId = messageSenderId(message);
+      if (!senderId) return '';
+      return routeNodeLabel(senderId);
+    }
+
+    function routeNodeLabel(nodeId) {
+      const node = findNodeById(nodeId);
+      if (!node) return nodeId;
+      const longName = nodeLongName(node);
+      const shortName = nodeShortName(node);
+      const primary = longName || nodeDisplayName(node) || nodeId;
+      return shortName && shortName !== primary ? `${primary}（${shortName}）` : primary;
+    }
+
+    function messageTargetIds(message) {
+      const metadata = message && message.metadata ? message.metadata : {};
       if (message.direction === 'tx') {
         const targets = Array.isArray(metadata.targets) ? metadata.targets : (metadata.target ? [metadata.target] : []);
-        parts.push(targets.length ? `目标 ${targets.map(targetDisplayText).join('，')}` : '广播');
+        return targets.map(normalizeMessageNodeId).filter(Boolean);
       }
+      const rawTarget = metadata.to_id || metadata.toId || metadata.target_id || metadata.target || metadata.to;
+      const text = String(rawTarget ?? '').trim();
+      const lowered = text.toLowerCase();
+      if (!text || text === '^all' || ['broadcast', 'all', '*', '4294967295', '0xffffffff'].includes(lowered)) {
+        return [];
+      }
+      const normalized = normalizeMessageNodeId(text);
+      return normalized ? [normalized] : [];
+    }
+
+    function messageRouteTargetLabel(message) {
+      const targetIds = messageTargetIds(message);
+      if (!targetIds.length) return '广播';
+      return targetIds.map(routeNodeLabel).join('，');
+    }
+
+    function renderMessageRoute(message) {
+      const lines = [];
+      if (message.direction === 'rx') {
+        const sender = messageSenderLabel(message);
+        if (sender) lines.push(`来自：${sender}`);
+      } else {
+        lines.push('来自：Core');
+      }
+      lines.push(`目标：${messageRouteTargetLabel(message)}`);
+      return `<div class="message-route">${lines.map(line => `<p class="message-route-line">${escapeHtml(line)}</p>`).join('')}</div>`;
+    }
+
+    function formatMeta(message) {
+      const parts = [message.created_at || '--'];
+      if (message.transport) parts.push(transportLabel(message.transport));
+      if (message.port) parts.push(message.port);
       if (message.rssi !== null && message.rssi !== undefined) parts.push(`RSSI ${message.rssi}`);
       if (message.snr !== null && message.snr !== undefined) parts.push(`SNR ${message.snr}`);
       return parts.join(' ｜ ');
@@ -615,6 +707,9 @@
         return;
       }
 
+      const previousScrollBottom = messageFeed.scrollHeight - messageFeed.scrollTop - messageFeed.clientHeight;
+      const shouldFollowBottom = previousScrollBottom <= 48;
+      const previousScrollTop = messageFeed.scrollTop;
       messageFeed.innerHTML = messages.map(message => {
         const direction = message.direction === 'tx' ? 'tx' : 'rx';
         const label = direction === 'tx' ? 'TX' : 'RX';
@@ -623,12 +718,15 @@
             <span class="message-direction">${label}</span>
             <div class="message-body">
               <p class="message-text">${escapeHtml(message.text || '')}</p>
+              ${renderMessageRoute(message)}
               <p class="message-meta">${escapeHtml(formatMeta(message))}</p>
             </div>
           </article>
         `;
       }).join('');
-      messageFeed.scrollTop = messageFeed.scrollHeight;
+      messageFeed.scrollTop = shouldFollowBottom
+        ? messageFeed.scrollHeight
+        : Math.min(previousScrollTop, messageFeed.scrollHeight - messageFeed.clientHeight);
     }
 
     function nodeUser(node) {
@@ -688,6 +786,7 @@
       const parts = [];
       const shortName = nodeShortName(node);
       const id = String(node.node_id || '').trim();
+      if (isSelfNode(node)) parts.push('本机');
       if (shortName) parts.push(`短名 ${shortName}`);
       if (id) parts.push(`ID ${id}`);
       if (node.role) parts.push(node.role);
@@ -699,11 +798,16 @@
       return parts.join(' ｜ ');
     }
 
+    function isSelfNode(node) {
+      const metadata = node && node.metadata ? node.metadata : {};
+      return Boolean(metadata.is_self || metadata.self || metadata.isSelf);
+    }
+
     function renderNodes(nodes, onlineCount) {
       latestNodes = Array.isArray(nodes) ? nodes : [];
       latestOnlineCount = Number(onlineCount || 0);
       selectedTargetIds = selectedTargetIds.filter(nodeId =>
-        latestNodes.some(node => String(node.node_id || '').trim() === nodeId && node.online)
+        latestNodes.some(node => String(node.node_id || '').trim() === nodeId && node.online && !isSelfNode(node))
       );
       renderSelectedTarget();
       nodeCountPill.textContent = `${latestOnlineCount} 在线`;
@@ -714,16 +818,17 @@
 
       nodeList.innerHTML = nodes.map(node => {
         const id = String(node.node_id || '').trim();
+        const self = isSelfNode(node);
         const selected = id && isSelectedTarget(id);
-        const disabled = node.online ? '' : 'disabled';
+        const disabled = node.online && !self ? '' : 'disabled';
         return `
-        <button class="lora-node-card ${node.online ? 'online' : ''} ${selected ? 'selected' : ''}" type="button" data-node-id="${escapeHtml(id)}" ${disabled}>
+        <button class="lora-node-card ${node.online ? 'online' : ''} ${self ? 'self-node' : ''} ${selected ? 'selected' : ''}" type="button" data-node-id="${escapeHtml(id)}" ${disabled}>
           <div class="node-main">
             <h3>${escapeHtml(nodeTitle(node))}</h3>
             <p>${escapeHtml(nodeMeta(node) || '暂无链路信息')}</p>
           </div>
           <span class="node-status-stack">
-            <span class="node-status">${node.online ? '在线' : '离线'}</span>
+            <span class="node-status">${self ? '本机' : node.online ? '在线' : '离线'}</span>
             ${selected ? '<span class="node-status node-target-status">目标</span>' : ''}
           </span>
         </button>
@@ -745,7 +850,7 @@
 
     function selectTarget(nodeId) {
       const node = findNodeById(nodeId);
-      if (!node || !node.online) return;
+      if (!node || !node.online || isSelfNode(node)) return;
       selectedTargetIds = isSelectedTarget(nodeId)
         ? selectedTargetIds.filter(id => id !== nodeId)
         : [...selectedTargetIds, nodeId];

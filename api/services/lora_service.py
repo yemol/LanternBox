@@ -98,6 +98,10 @@ class LoraBridgeState:
 
 _STATE = LoraBridgeState()
 _SERIAL: Any = None
+_MESHTASTIC_INTERFACE: Any = None
+_MESHTASTIC_SUBSCRIPTIONS: list[tuple[Any, str]] = []
+_RECENT_MESHTASTIC_PACKETS: dict[str, float] = {}
+_SELF_NODE_ID = ""
 _BLE_CLIENT: Any = None
 _BLE_LOOP: asyncio.AbstractEventLoop | None = None
 _BLE_RX_BUFFER = ""
@@ -342,6 +346,198 @@ def _coerce_float(value: Any) -> float | None:
         return float(value)
     except Exception:
         return None
+
+
+def _json_safe(value: Any, *, max_text_chars: int = 500) -> Any:
+    if isinstance(value, bytes):
+        try:
+            return value.decode("utf-8", errors="replace")[:max_text_chars]
+        except Exception:
+            return list(value[:64])
+    if isinstance(value, bytearray):
+        return _json_safe(bytes(value), max_text_chars=max_text_chars)
+    if isinstance(value, dict):
+        return {
+            str(key): _json_safe(item, max_text_chars=max_text_chars)
+            for key, item in value.items()
+            if str(key) not in {"raw", "payload"}
+        }
+    if isinstance(value, (list, tuple)):
+        return [_json_safe(item, max_text_chars=max_text_chars) for item in value[:40]]
+    if isinstance(value, (str, int, float, bool)) or value is None:
+        return value[:max_text_chars] if isinstance(value, str) else value
+    return str(value)[:max_text_chars]
+
+
+def _decode_payload_text(value: Any) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, str):
+        return value.strip()
+    if isinstance(value, bytes):
+        return value.decode("utf-8", errors="replace").strip()
+    if isinstance(value, bytearray):
+        return bytes(value).decode("utf-8", errors="replace").strip()
+    if isinstance(value, list) and all(isinstance(item, int) for item in value):
+        try:
+            return bytes(value).decode("utf-8", errors="replace").strip()
+        except Exception:
+            return ""
+    return str(value).strip()
+
+
+def _meshtastic_packet_text(packet: dict[str, Any]) -> str:
+    if not isinstance(packet, dict):
+        return ""
+
+    decoded = packet.get("decoded")
+    if not isinstance(decoded, dict):
+        decoded = {}
+
+    direct_text = (
+        decoded.get("text")
+        or decoded.get("message")
+        or packet.get("text")
+        or packet.get("message")
+    )
+    text = _decode_payload_text(direct_text)
+    if text:
+        return text[:MAX_MESSAGE_CHARS]
+
+    portnum = str(decoded.get("portnum") or decoded.get("portNum") or "").upper()
+    if portnum and "TEXT_MESSAGE_APP" not in portnum:
+        return ""
+    return _decode_payload_text(decoded.get("payload"))[:MAX_MESSAGE_CHARS]
+
+
+def _packet_node_id(packet: dict[str, Any]) -> str:
+    if not isinstance(packet, dict):
+        return ""
+    numeric_node = packet.get("from") or packet.get("sender")
+    if isinstance(numeric_node, int):
+        return _normalize_node_id(_mesh_node_num_to_id(numeric_node))
+    return _normalize_node_id(
+        packet.get("fromId")
+        or packet.get("from_id")
+        or numeric_node
+        or packet.get("sender")
+        or packet.get("sender_id")
+    )
+
+
+def _meshtastic_packet_metadata(packet: dict[str, Any]) -> dict[str, Any]:
+    decoded = packet.get("decoded") if isinstance(packet.get("decoded"), dict) else {}
+    sender_node_id = _packet_node_id(packet)
+    metadata = {
+        "source": "meshtastic_api_packet",
+        "sender_node_id": sender_node_id,
+        "from": packet.get("from"),
+        "from_id": packet.get("fromId") or packet.get("from_id"),
+        "to": packet.get("to"),
+        "to_id": packet.get("toId") or packet.get("to_id"),
+        "id": packet.get("id"),
+        "channel": packet.get("channel"),
+        "rx_rssi": packet.get("rxRssi") or packet.get("rxRSSI") or packet.get("rssi"),
+        "rx_snr": packet.get("rxSnr") or packet.get("rxSNR") or packet.get("snr"),
+        "decoded": _json_safe(decoded),
+    }
+    return {key: value for key, value in metadata.items() if value not in ("", None, {})}
+
+
+def _meshtastic_packet_key(packet: dict[str, Any], text: str) -> str:
+    return "|".join([
+        str(packet.get("fromId") or packet.get("from_id") or packet.get("from") or ""),
+        str(packet.get("toId") or packet.get("to_id") or packet.get("to") or ""),
+        str(packet.get("id") or ""),
+        str(packet.get("rxTime") or packet.get("rx_time") or ""),
+        text,
+    ])
+
+
+def _remember_meshtastic_packet(key: str, ttl_seconds: int = 30) -> bool:
+    if not key:
+        return False
+    now = time.monotonic()
+    with _LOCK:
+        expired = [item_key for item_key, seen_at in _RECENT_MESHTASTIC_PACKETS.items() if now - seen_at > ttl_seconds]
+        for item_key in expired:
+            _RECENT_MESHTASTIC_PACKETS.pop(item_key, None)
+        if key in _RECENT_MESHTASTIC_PACKETS:
+            return True
+        _RECENT_MESHTASTIC_PACKETS[key] = now
+    return False
+
+
+def _record_meshtastic_packet(packet: Any, interface: Any = None) -> None:
+    if not isinstance(packet, dict):
+        return
+
+    text = _meshtastic_packet_text(packet)
+    if not text or text.lower() == "redacted":
+        return
+    if _remember_meshtastic_packet(_meshtastic_packet_key(packet, text)):
+        return
+
+    rssi = _coerce_float(packet.get("rxRssi") or packet.get("rxRSSI") or packet.get("rssi"))
+    snr = _coerce_float(packet.get("rxSnr") or packet.get("rxSNR") or packet.get("snr"))
+    node_id = _packet_node_id(packet)
+    metadata = _meshtastic_packet_metadata(packet)
+
+    if node_id:
+        _record_seen_node(
+            node_id=node_id,
+            name=node_id,
+            role="meshtastic_node",
+            status="online",
+            transport="usb_serial",
+            port=getattr(interface, "devPath", "") or getattr(interface, "dev_path", "") or _STATE.port,
+            rssi=rssi,
+            snr=snr,
+            metadata=metadata,
+        )
+
+    _append_message(
+        direction="rx",
+        text=text,
+        raw=json.dumps(_json_safe(packet), ensure_ascii=False, separators=(",", ":")),
+        transport="usb_serial",
+        port=getattr(interface, "devPath", "") or getattr(interface, "dev_path", "") or _STATE.port,
+        rssi=rssi,
+        snr=snr,
+        metadata=metadata,
+    )
+    with _LOCK:
+        _STATE.rx_count += 1
+        _STATE.last_rx_at = _now()
+        _STATE.updated_at = _STATE.last_rx_at
+
+
+def _subscribe_meshtastic_events() -> list[tuple[Any, str]]:
+    from pubsub import pub
+
+    def on_receive(packet=None, interface=None, **kwargs):
+        _record_meshtastic_packet(packet or kwargs.get("packet"), interface=interface)
+
+    subscriptions = [
+        (on_receive, "meshtastic.receive.text"),
+        (on_receive, "meshtastic.receive"),
+    ]
+    for callback, topic in subscriptions:
+        pub.subscribe(callback, topic)
+    return subscriptions
+
+
+def _unsubscribe_meshtastic_events(subscriptions: list[tuple[Any, str]]) -> None:
+    try:
+        from pubsub import pub
+    except Exception:
+        return
+
+    for callback, topic in subscriptions:
+        try:
+            pub.unsubscribe(callback, topic)
+        except Exception:
+            pass
 
 
 def _parse_inbound_line(line: str) -> dict[str, Any]:
@@ -596,18 +792,13 @@ def _record_meshtastic_node(
     *,
     transport: str,
     port: str,
+    is_self: bool = False,
 ) -> bool:
     if not isinstance(node, dict):
         return False
 
     user = node.get("user") if isinstance(node.get("user"), dict) else {}
-    node_id = _normalize_node_id(
-        user.get("id")
-        or node.get("id")
-        or node.get("num")
-        or node.get("nodeNum")
-        or _mesh_node_num_to_id(node_key)
-    )
+    node_id = _meshtastic_node_id(node_key, node)
     if not node_id:
         return False
 
@@ -623,6 +814,8 @@ def _record_meshtastic_node(
         "user": user,
         "node": node,
     }
+    if is_self:
+        metadata["is_self"] = True
     if short_name:
         metadata["short_name"] = short_name
 
@@ -653,6 +846,19 @@ def _record_meshtastic_node(
         finally:
             conn.close()
     return True
+
+
+def _meshtastic_node_id(node_key: Any, node: dict[str, Any]) -> str:
+    if not isinstance(node, dict):
+        return ""
+    user = node.get("user") if isinstance(node.get("user"), dict) else {}
+    return _normalize_node_id(
+        user.get("id")
+        or node.get("id")
+        or node.get("num")
+        or node.get("nodeNum")
+        or _mesh_node_num_to_id(node_key)
+    )
 
 
 def bootstrap_meshtastic_nodes(port: str, transport: str = "usb_serial") -> dict[str, Any]:
@@ -693,6 +899,7 @@ def bootstrap_meshtastic_nodes(port: str, transport: str = "usb_serial") -> dict
                 my_node,
                 transport=transport,
                 port=port_value,
+                is_self=True,
             ):
                 count = max(count, 1)
 
@@ -705,6 +912,73 @@ def bootstrap_meshtastic_nodes(port: str, transport: str = "usb_serial") -> dict
                 interface.close()
             except Exception:
                 pass
+
+
+def _connect_meshtastic_bridge(port: str, baud: int, transport: str) -> dict[str, Any]:
+    global _MESHTASTIC_INTERFACE, _MESHTASTIC_SUBSCRIPTIONS, _SELF_NODE_ID
+
+    try:
+        from meshtastic.serial_interface import SerialInterface
+    except Exception as exc:
+        raise LoraBridgeError(f"meshtastic package is not available: {exc}") from exc
+
+    subscriptions: list[tuple[Any, str]] = []
+    interface = None
+    try:
+        subscriptions = _subscribe_meshtastic_events()
+        interface = SerialInterface(
+            devPath=port,
+            debugOut=None,
+            noProto=False,
+            connectNow=True,
+            noNodes=False,
+            timeout=MESHTASTIC_NODE_BOOTSTRAP_TIMEOUT_SECONDS,
+        )
+
+        count = 0
+        nodes = getattr(interface, "nodes", None) or getattr(interface, "nodesByNum", None) or {}
+        if isinstance(nodes, dict):
+            for key, node in nodes.items():
+                if _record_meshtastic_node(key, node, transport=transport, port=port):
+                    count += 1
+
+        my_node = interface.getMyNodeInfo() if hasattr(interface, "getMyNodeInfo") else None
+        if isinstance(my_node, dict):
+            self_node_id = _meshtastic_node_id(my_node.get("num") or my_node.get("nodeNum") or "self", my_node)
+            if _record_meshtastic_node(
+                my_node.get("num") or my_node.get("nodeNum") or "self",
+                my_node,
+                transport=transport,
+                port=port,
+                is_self=True,
+            ):
+                count = max(count, 1)
+                _SELF_NODE_ID = self_node_id
+
+        with _LOCK:
+            _MESHTASTIC_INTERFACE = interface
+            _MESHTASTIC_SUBSCRIPTIONS = subscriptions
+            _STATE.connected = True
+            _STATE.transport = transport
+            _STATE.port = port
+            _STATE.baud = int(baud or 115200)
+            _STATE.status = "connected"
+            _STATE.error = ""
+            _STATE.connected_at = _now()
+            _STATE.updated_at = _STATE.connected_at
+            _STATE.node_bootstrap_at = _STATE.connected_at
+            _STATE.node_bootstrap_status = "ok"
+            _STATE.node_bootstrap_count = count
+            _STATE.node_bootstrap_error = ""
+        return get_lora_status()
+    except Exception as exc:
+        _unsubscribe_meshtastic_events(subscriptions)
+        if interface is not None:
+            try:
+                interface.close()
+            except Exception:
+                pass
+        raise LoraBridgeError(str(exc)) from exc
 
 
 def _extract_nodes_from_metadata(metadata: dict[str, Any], rssi: float | None, snr: float | None) -> list[dict[str, Any]]:
@@ -1113,12 +1387,15 @@ def connect_lora_bridge(
     if serial is None:
         raise LoraBridgeError("pyserial is required. Install with: pip install pyserial")
 
-    bootstrap = bootstrap_meshtastic_nodes(port_value, transport=transport_value)
-    with _LOCK:
-        _STATE.node_bootstrap_at = _now()
-        _STATE.node_bootstrap_status = "ok" if bootstrap.get("ok") else "failed"
-        _STATE.node_bootstrap_count = int(bootstrap.get("count") or 0)
-        _STATE.node_bootstrap_error = "" if bootstrap.get("ok") else str(bootstrap.get("message") or "")
+    if transport_value == "usb_serial" and _meshtastic_available():
+        try:
+            return _connect_meshtastic_bridge(port_value, int(baud or 115200), transport_value)
+        except LoraBridgeError as exc:
+            with _LOCK:
+                _STATE.node_bootstrap_at = _now()
+                _STATE.node_bootstrap_status = "failed"
+                _STATE.node_bootstrap_count = 0
+                _STATE.node_bootstrap_error = str(exc)
 
     try:
         ser = serial.Serial(
@@ -1228,18 +1505,36 @@ def _send_meshtastic_text(port: str, text: str, targets: list[str]) -> None:
                 pass
 
 
+def _send_meshtastic_text_with_interface(interface: Any, text: str, targets: list[str]) -> None:
+    destinations = targets or ["^all"]
+    for destination in destinations:
+        interface.sendText(text, destinationId=destination)
+
+
 def disconnect_lora_bridge() -> dict[str, Any]:
-    global _SERIAL, _STOP_EVENT, _READER_THREAD, _BLE_RX_BUFFER
+    global _SERIAL, _MESHTASTIC_INTERFACE, _MESHTASTIC_SUBSCRIPTIONS, _RECENT_MESHTASTIC_PACKETS, _SELF_NODE_ID, _STOP_EVENT, _READER_THREAD, _BLE_RX_BUFFER
 
     with _LOCK:
         ser = _SERIAL
+        mesh_interface = _MESHTASTIC_INTERFACE
+        mesh_subscriptions = list(_MESHTASTIC_SUBSCRIPTIONS)
         stop_event = _STOP_EVENT
         reader = _READER_THREAD
         _SERIAL = None
+        _MESHTASTIC_INTERFACE = None
+        _MESHTASTIC_SUBSCRIPTIONS = []
+        _RECENT_MESHTASTIC_PACKETS = {}
+        _SELF_NODE_ID = ""
         _STOP_EVENT = None
         _READER_THREAD = None
         _BLE_RX_BUFFER = ""
 
+    _unsubscribe_meshtastic_events(mesh_subscriptions)
+    if mesh_interface is not None:
+        try:
+            mesh_interface.close()
+        except Exception:
+            pass
     if stop_event is not None:
         stop_event.set()
     if ser is not None:
@@ -1276,6 +1571,7 @@ def send_lora_message(text: str, target: Any = "") -> dict[str, Any]:
 
     with _LOCK:
         ser = _SERIAL
+        mesh_interface = _MESHTASTIC_INTERFACE
         ble_client = _BLE_CLIENT
         ble_loop = _BLE_LOOP
         transport = _STATE.transport
@@ -1288,7 +1584,17 @@ def send_lora_message(text: str, target: Any = "") -> dict[str, Any]:
 
     wire_texts = _format_outbound_payloads(value, target_values)
     sent_by = "serial_bridge"
-    if transport == "usb_serial" and _meshtastic_available():
+    if mesh_interface is not None:
+        try:
+            _send_meshtastic_text_with_interface(mesh_interface, value, target_values)
+            sent_by = "meshtastic_api"
+        except Exception as exc:
+            with _LOCK:
+                _STATE.status = "error"
+                _STATE.error = f"failed to send Meshtastic message: {exc}"
+                _STATE.updated_at = _now()
+            raise LoraBridgeError(_STATE.error)
+    elif transport == "usb_serial" and _meshtastic_available():
         _pause_serial_reader()
         send_error: Exception | None = None
         resume_error: Exception | None = None
@@ -1415,6 +1721,8 @@ def list_lora_nodes(
         canonical_id = _normalize_node_id(node.get("node_id"))
         if not canonical_id:
             continue
+        if _SELF_NODE_ID and canonical_id == _SELF_NODE_ID:
+            node["metadata"] = {**(node.get("metadata") or {}), "is_self": True}
         merged_nodes[canonical_id] = _merge_lora_node(merged_nodes.get(canonical_id, {}), node)
 
     nodes = sorted(
