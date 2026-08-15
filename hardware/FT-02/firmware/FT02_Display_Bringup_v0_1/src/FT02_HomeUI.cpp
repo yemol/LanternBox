@@ -2,6 +2,7 @@
 #include "FT02_EpdLifecycle.h"
 
 #include "FT02_BottomBar.h"
+#include "FT02_BuildInfo.h"
 #include "FT02_BottomIconData.h"
 #include "FT02_HomeCards.h"
 #include "FT02_HomeContent.h"
@@ -14,7 +15,7 @@ static const FT02BottomBarItem FT02_HOME_BOTTOM_ITEMS[3] = {
     },
     {
         nullptr,
-        "版本：v1.30"
+        FT02_FIRMWARE_VERSION_LABEL
     },
     {
         &ICON_BOTTOM_HELP,

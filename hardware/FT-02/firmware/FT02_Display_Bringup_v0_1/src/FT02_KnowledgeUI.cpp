@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "FT02_BottomBar.h"
+#include "FT02_BuildInfo.h"
 #include "FT02_FieldManual.h"
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
@@ -998,7 +999,9 @@ void FT02_KnowledgeReset()
 
 void FT02_DrawKnowledgeScreen(FT02Display& display)
 {
-    Serial.print("[KNOWLEDGE] v2.51 SD runtime state=");
+    Serial.print("[KNOWLEDGE] ");
+    Serial.print(FT02_FIRMWARE_VERSION);
+    Serial.print(" SD runtime state=");
     Serial.println(FT02_FieldManualStateText());
     display.setFullWindow();
     display.firstPage();

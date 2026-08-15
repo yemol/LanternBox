@@ -9,6 +9,13 @@ struct FT02GnssSnapshot
     bool nmeaSeen;
     bool communicationActive;
     bool fixValid;
+    bool hasPosition;
+    bool altitudeValid;
+    bool speedValid;
+    bool moving;
+    bool courseValid;
+    bool timeValid;
+    bool systemTimeSynchronized;
     uint32_t currentBaud;
     uint32_t detectedBaud;
     uint32_t bytesReceived;
@@ -18,17 +25,23 @@ struct FT02GnssSnapshot
     uint32_t lastByteAgeMs;
     uint32_t lastSentenceAgeMs;
     uint32_t lastFixAgeMs;
+    uint32_t lastTimeSyncAgeMs;
+    uint32_t timeSyncCount;
     uint8_t fixType;
     uint8_t fixQuality;
     uint8_t satellites;
     double latitude;
     double longitude;
+    float rawAltitudeMeters;
     float altitudeMeters;
     float hdop;
+    float rawSpeedKmh;
     float speedKmh;
     float courseDegrees;
     char utcTime[12];
     char utcDate[12];
+    char localTime[12];
+    char localDate[12];
     uint32_t uiGeneration;
 };
 

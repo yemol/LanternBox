@@ -115,35 +115,82 @@ static char FT02_ReadCardKbRawKey()
     return raw;
 }
 
-static FT02InputKey FT02_MapRawKey(
+static char FT02_NormalizeCommandChar(
     char raw
 )
 {
-    // Current software navigation layout:
+    const uint8_t code = static_cast<uint8_t>(raw);
+
+    // CardKB2 I2C mode returns the character after Aa/Sym/Fn processing.
+    // FT-02 hotkeys must therefore not rely on receiving the base letter.
+    // Keep event.raw untouched; this second channel is only for UI commands.
+    switch(code)
+    {
+        // Sym-layer aliases for FT-02 command keys.
+        case '^': return 'd'; // D / Up
+        case '{': return 'a'; // A / auto track
+        case '\\': return 'r'; // R / reconnect or record
+        case '=': return 'p'; // P / point or playback
+        case '"': return 'h'; // H / help
+        case ':': return 'l'; // L / location log
+        case '>': return 'b'; // B / back
+        case '/': return 't'; // T / delete
+        case '[': return 'f'; // F / map cache rebuild
+        default:
+            break;
+    }
+
+    if(code >= 'A' && code <= 'Z')
+    {
+        return static_cast<char>(code - 'A' + 'a');
+    }
+
+    // Official CardKB2 Fn direction codes are non-ASCII and are mapped by
+    // FT02_MapRawKey(). They intentionally have no command character.
+    if(code >= 0x80) return 0;
+
+    return static_cast<char>(code);
+}
+
+static FT02InputKey FT02_MapRawKey(
+    char raw,
+    char command
+)
+{
+    const uint8_t code = static_cast<uint8_t>(raw);
+
+    // Native CardKB2 Fn-direction bytes (M5Stack CardKB2 key map).
+    // Supporting these alongside the established D/Z/X/C aliases makes the
+    // input layer independent of whether Fn or the legacy navigation layout
+    // is being used.
+    if(code == 0xB4) return FT02_KEY_LEFT;
+    if(code == 0xB5) return FT02_KEY_UP;
+    if(code == 0xB6) return FT02_KEY_DOWN;
+    if(code == 0xB7) return FT02_KEY_RIGHT;
+
+    // Current FT-02 software navigation layout:
     //
     //     D
     //   Z X C
     //
-    // D = Up, Z = Left, X = Down, C = Right.
-    //
-    // This is an input-layer mapping only. UI pages consume FT02InputKey and
-    // do not depend on the physical key source.
-    if(raw == 'd' || raw == 'D') return FT02_KEY_UP;
-    if(raw == 'z' || raw == 'Z') return FT02_KEY_LEFT;
-    if(raw == 'x' || raw == 'X') return FT02_KEY_DOWN;
-    if(raw == 'c' || raw == 'C') return FT02_KEY_RIGHT;
+    // command is already normalized across Aa/Sym state, so Sym+D ('^')
+    // still produces UP instead of being dropped as an unrelated character.
+    if(command == 'd') return FT02_KEY_UP;
+    if(command == 'z') return FT02_KEY_LEFT;
+    if(command == 'x') return FT02_KEY_DOWN;
+    if(command == 'c') return FT02_KEY_RIGHT;
 
     if(raw == '\r' || raw == '\n' || raw == ' ')
     {
         return FT02_KEY_SELECT;
     }
 
-    if(raw == 'h' || raw == 'H')
+    if(command == 'h')
     {
         return FT02_KEY_HELP;
     }
 
-    if(raw == 0x08 || raw == 0x1B || raw == 'b' || raw == 'B')
+    if(code == 0x08 || code == 0x1B || command == 'b')
     {
         return FT02_KEY_BACK;
     }
@@ -192,6 +239,7 @@ FT02InputEvent FT02_InputPoll()
     FT02InputEvent event;
     event.key = FT02_KEY_NONE;
     event.raw = 0;
+    event.command = 0;
 
     char raw = FT02_ReadCardKbRawKey();
 
@@ -215,7 +263,8 @@ FT02InputEvent FT02_InputPoll()
     g_ft02LastRawKeyMillis = now;
 
     event.raw = raw;
-    event.key = FT02_MapRawKey(raw);
+    event.command = FT02_NormalizeCommandChar(raw);
+    event.key = FT02_MapRawKey(raw, event.command);
 
     return event;
 }
@@ -238,4 +287,9 @@ const char* FT02_InputKeyName(
         default:
             return "NONE";
     }
+}
+
+char FT02_InputCurrentRawKey()
+{
+    return g_ft02LastRawKey;
 }

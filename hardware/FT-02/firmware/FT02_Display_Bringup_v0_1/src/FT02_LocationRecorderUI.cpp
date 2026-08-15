@@ -14,7 +14,7 @@ namespace
 static const FT02BottomBarItem FT02_RECORDER_BOTTOM_ITEMS[3] = {
     {nullptr, "ENTER 开始/停止"},
     {nullptr, "P 记点  A 自动"},
-    {nullptr, "R 重连  B 返回"}
+    {nullptr, "L列表 R重连 B返回"}
 };
 
 static const int FT02_RECORDER_PARTIAL_X = 24;
@@ -160,13 +160,18 @@ static void FT02_DrawRecorderContent(
     else snprintf(value, sizeof(value), "--");
     FT02_RecorderDrawLabelValue(display, "经度", value, 418, 330, 500);
 
-    if(gnss.fixValid) snprintf(value, sizeof(value), "%.1fm", gnss.altitudeMeters);
-    else snprintf(value, sizeof(value), "--");
+    if(gnss.fixValid && gnss.altitudeValid)
+        snprintf(value, sizeof(value), "约%.0fm", gnss.altitudeMeters);
+    else
+        snprintf(value, sizeof(value), "--");
     FT02_RecorderDrawLabelValue(display, "海拔", value, 418, 360, 500);
 
-    if(gnss.fixValid)
+    if(gnss.fixValid && gnss.speedValid)
     {
-        snprintf(value, sizeof(value), "%.1fkm/h  %.0f°", gnss.speedKmh, gnss.courseDegrees);
+        if(gnss.courseValid)
+            snprintf(value, sizeof(value), "%.1fkm/h  %.0f°", gnss.speedKmh, gnss.courseDegrees);
+        else
+            snprintf(value, sizeof(value), "%.1fkm/h  --", gnss.speedKmh);
     }
     else
     {
@@ -205,8 +210,8 @@ void FT02_DrawLocationRecorderMiddlePartial(
 )
 {
     // Periodically perform one clean full refresh to prevent long-running
-    // partial-update ghosting. At the normal five-second UI cadence this is
-    // approximately once every ten minutes.
+    // partial-update ghosting. At the normal 30-second recorder UI cadence this is
+    // approximately once every hour.
     if(g_ft02RecorderPartialCount >= FT02_RECORDER_PARTIAL_LIMIT)
     {
         Serial.println("[RECORDER-UI] partial budget reached; clean full refresh");

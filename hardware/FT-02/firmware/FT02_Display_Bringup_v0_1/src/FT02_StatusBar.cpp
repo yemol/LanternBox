@@ -1,5 +1,8 @@
 
 #include "FT02_StatusBar.h"
+#include "FT02_LoRaTransport.h"
+#include "FT02_LoRaNodeRuntime.h"
+#include "FT02_LoRaCommunicationRuntime.h"
 #include "FT02_BatteryIconReplace2.h"
 #include "FT02_EpdLifecycle.h"
 #include "FT02_GlobalCJK20FontData.h"
@@ -12,6 +15,16 @@ static char g_ft02ClockHHMM[6] = "14:28";
 static char g_ft02ClockMMDD[6] = "05/20";
 static char g_ft02GnssLine1[16] = "GPS";
 static char g_ft02GnssLine2[16] = "连接中";
+
+void FT02_GetStatusBarSnapshot(FT02StatusBarSnapshot& snapshot)
+{
+    snprintf(snapshot.storageLine1, sizeof(snapshot.storageLine1), "%s", g_ft02StorageLine1);
+    snprintf(snapshot.storageLine2, sizeof(snapshot.storageLine2), "%s", g_ft02StorageLine2);
+    snprintf(snapshot.clockHHMM, sizeof(snapshot.clockHHMM), "%s", g_ft02ClockHHMM);
+    snprintf(snapshot.clockMMDD, sizeof(snapshot.clockMMDD), "%s", g_ft02ClockMMDD);
+    snprintf(snapshot.gnssLine1, sizeof(snapshot.gnssLine1), "%s", g_ft02GnssLine1);
+    snprintf(snapshot.gnssLine2, sizeof(snapshot.gnssLine2), "%s", g_ft02GnssLine2);
+}
 
 void FT02_SetStatusBarStorageCache(const char* line1, const char* line2)
 {
@@ -29,6 +42,31 @@ void FT02_SetStatusBarGnssCache(const char* line1, const char* line2)
 {
     snprintf(g_ft02GnssLine1, sizeof(g_ft02GnssLine1), "%s", line1 != nullptr ? line1 : "GPS");
     snprintf(g_ft02GnssLine2, sizeof(g_ft02GnssLine2), "%s", line2 != nullptr ? line2 : "连接中");
+}
+
+
+static void FT02_FormatLoRaLine1(char* out, size_t outSize)
+{
+    // Keep line 1 fixed-width. Unread count belongs on line 2 so the
+    // compact LoRa block never grows past its right boundary.
+    snprintf(out, outSize, "LoRa");
+}
+
+static void FT02_FormatLoRaLine2(char* out, size_t outSize, const char* connectionStatus)
+{
+    const uint16_t unread = FT02_LoRaCommunicationUnreadCount();
+
+    // Unread messages own line 2 whenever present. This keeps line 1 fixed as
+    // "LoRa" and prevents the notification badge from overflowing the block.
+    // Cap presentation at 9+ so the width remains deterministic.
+    if(unread > 0)
+    {
+        if(unread <= 9) snprintf(out, outSize, "%u条消息", static_cast<unsigned>(unread));
+        else snprintf(out, outSize, "9+条消息");
+        return;
+    }
+
+    snprintf(out, outSize, "%s", connectionStatus != nullptr ? connectionStatus : "连接中");
 }
 
 static const int FT02_STATUS_LINE_Y = 73;
@@ -131,18 +169,27 @@ void FT02_DrawStatusBar(
         false
     );
 
+    char loraLine1[16];
+    FT02_FormatLoRaLine1(loraLine1, sizeof(loraLine1));
     FT02_DrawTextPack(
         display,
         ft02_status_22r,
-        "LoRa",
+        loraLine1,
         blockStart + FT02_STATUS_TEXT_OFFSET_X,
         FT02_STATUS_TEXT_LINE1_Y
     );
 
+    const char* loraStatus = FT02_LoRaNodeRuntimeReady()
+        ? "已连接"
+        : (FT02_LoRaTransportLinkUp() ? "同步中" : "连接中");
+    char loraLine2[20];
+    FT02_FormatLoRaLine2(loraLine2, sizeof(loraLine2), loraStatus);
+
+    // The full 20px CJK pack covers both connection states and the unread label.
     FT02_DrawTextPack(
         display,
-        ft02_status_22r,
-        "已连接",
+        ft02_cjk_20r,
+        loraLine2,
         blockStart + FT02_STATUS_TEXT_OFFSET_X,
         FT02_STATUS_TEXT_LINE2_Y
     );
@@ -235,6 +282,82 @@ void FT02_DrawStatusBar(
     );
 }
 
+
+static void FT02_DrawStatusLoRaBlockContent(
+    FT02Display& display,
+    const char* line2
+)
+{
+    const int blockStart = FT02_BLOCK_START_X;
+
+    FT02_DrawIconSize(
+        display,
+        ICON_STATUS_WIRELESS,
+        blockStart + FT02_ICON_OFFSET_X,
+        FT02_ICON_Y,
+        FT02_ICON_SIZE,
+        false
+    );
+
+    char loraLine1[16];
+    FT02_FormatLoRaLine1(loraLine1, sizeof(loraLine1));
+    FT02_DrawTextPack(
+        display,
+        ft02_status_22r,
+        loraLine1,
+        blockStart + FT02_STATUS_TEXT_OFFSET_X,
+        FT02_STATUS_TEXT_LINE1_Y
+    );
+
+    char loraLine2[20];
+    FT02_FormatLoRaLine2(loraLine2, sizeof(loraLine2), line2);
+    FT02_DrawTextPack(
+        display,
+        ft02_cjk_20r,
+        loraLine2,
+        blockStart + FT02_STATUS_TEXT_OFFSET_X,
+        FT02_STATUS_TEXT_LINE2_Y
+    );
+}
+
+void FT02_DrawStatusBarLoRa(
+    FT02Display& display,
+    const char* line2
+)
+{
+    static const int partialX = 212;
+    static const int partialY = 6;
+    static const int partialW = 160;
+    static const int partialH = 61;
+
+    display.setPartialWindow(partialX, partialY, partialW, partialH);
+    display.firstPage();
+    do
+    {
+        display.fillRect(partialX, partialY, partialW, partialH, GxEPD_WHITE);
+
+        display.drawLine(
+            FT02_BLOCK_START_X - 10,
+            FT02_STATUS_VLINE_TOP_Y,
+            FT02_BLOCK_START_X - 10,
+            FT02_STATUS_VLINE_BOTTOM_Y,
+            GxEPD_BLACK
+        );
+        display.drawLine(
+            FT02_BLOCK_START_X + FT02_BLOCK_WIDTH - 10,
+            FT02_STATUS_VLINE_TOP_Y,
+            FT02_BLOCK_START_X + FT02_BLOCK_WIDTH - 10,
+            FT02_STATUS_VLINE_BOTTOM_Y,
+            GxEPD_BLACK
+        );
+
+        FT02_DrawStatusLoRaBlockContent(display, line2);
+    }
+    while(display.nextPage());
+
+    display.setFullWindow();
+    FT02_EpdPowerOffAfterCommit(display, "status-lora-partial");
+}
 
 static void FT02_DrawStatusGnssBlockContent(
     FT02Display& display,

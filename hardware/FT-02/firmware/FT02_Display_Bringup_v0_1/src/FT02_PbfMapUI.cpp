@@ -2,6 +2,7 @@
 #include "FT02_EpdLifecycle.h"
 
 #include "FT02_PbfMapRuntime.h"
+#include "FT02_Gnss.h"
 #include "FT02_RoadNameFont.h"
 #include "FT02_FooterFont20.h"
 #include "FT02_StatusBar.h"
@@ -9,6 +10,10 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 static const int MAP_TOP = 76;
 static const int MAP_HEIGHT = 364;
@@ -371,6 +376,53 @@ static void FT02_DrawZoomControl(
     FT02_DrawZoomSymbol(display, x, y, plus);
 }
 
+static void FT02_DrawGnssPositionMarker(FT02Display& display)
+{
+    const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+    if(!gnss.hasPosition) return;
+
+    int16_t localX = 0;
+    int16_t localY = 0;
+    if(!FT02_PbfMapProjectCoordinate(
+        gnss.longitude,
+        gnss.latitude,
+        localX,
+        localY
+    ))
+    {
+        return;
+    }
+
+    if(localX < 10 || localX >= MAP_WIDTH - 10 ||
+       localY < 10 || localY >= MAP_HEIGHT - 10)
+    {
+        return;
+    }
+
+    const int x = localX;
+    const int y = localY + MAP_TOP;
+    display.fillCircle(x, y, 3, GxEPD_BLACK);
+    display.drawCircle(x, y, 8, GxEPD_BLACK);
+
+    if(gnss.fixValid)
+    {
+        display.drawCircle(x, y, 10, GxEPD_BLACK);
+        if(gnss.courseValid)
+        {
+            const double radians = gnss.courseDegrees * M_PI / 180.0;
+            const int hx = x + (int)lround(sin(radians) * 15.0);
+            const int hy = y - (int)lround(cos(radians) * 15.0);
+            display.drawLine(x, y, hx, hy, GxEPD_BLACK);
+        }
+    }
+    else
+    {
+        // A hollow crossed marker means this is the last known position.
+        display.drawLine(x - 6, y - 6, x + 6, y + 6, GxEPD_BLACK);
+        display.drawLine(x + 6, y - 6, x - 6, y + 6, GxEPD_BLACK);
+    }
+}
+
 static void FT02_DrawMapOverlay(FT02Display& display)
 {
     // Frozen absolute positions from the approved map layout.
@@ -381,6 +433,7 @@ static void FT02_DrawMapOverlay(FT02Display& display)
     display.drawCircle(cx, cy, 7, GxEPD_BLACK);
     display.drawLine(cx - 12, cy, cx + 12, cy, GxEPD_BLACK);
     display.drawLine(cx, cy - 12, cx, cy + 12, GxEPD_BLACK);
+    FT02_DrawGnssPositionMarker(display);
 }
 
 static int FT02_MapScaleMeters(int zoom)
@@ -494,9 +547,29 @@ static void FT02_DrawReadyBottom(FT02Display& display)
         FT02_MapScaleMeters(report.zoom)
     );
 
-    FT02_DrawMapStatusCellChinese(display, 0, "速度 --");
-    FT02_DrawMapStatusCellChinese(display, 1, "方向 --");
-    FT02_DrawMapStatusCellChinese(display, 2, "海拔 --");
+    const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+    char speedText[32];
+    char courseText[32];
+    char altitudeText[32];
+
+    if(gnss.fixValid && gnss.speedValid)
+        snprintf(speedText, sizeof(speedText), "速度 %d", (int)lroundf(gnss.speedKmh));
+    else
+        snprintf(speedText, sizeof(speedText), "速度 --");
+
+    if(gnss.fixValid && gnss.courseValid)
+        snprintf(courseText, sizeof(courseText), "方向 %d", (int)lroundf(gnss.courseDegrees));
+    else
+        snprintf(courseText, sizeof(courseText), "方向 --");
+
+    if(gnss.fixValid && gnss.altitudeValid)
+        snprintf(altitudeText, sizeof(altitudeText), "海拔 %d", (int)lroundf(gnss.altitudeMeters));
+    else
+        snprintf(altitudeText, sizeof(altitudeText), "海拔 --");
+
+    FT02_DrawMapStatusCellChinese(display, 0, speedText);
+    FT02_DrawMapStatusCellChinese(display, 1, courseText);
+    FT02_DrawMapStatusCellChinese(display, 2, altitudeText);
     FT02_DrawMapStatusCellChinese(display, 3, "距离 --");
     FT02_DrawMapStatusCellChinese(display, 4, scaleText);
 }
@@ -507,7 +580,7 @@ static void FT02_DrawLoading(FT02Display& display)
     display.fillRect(0, MAP_TOP, 800, MAP_HEIGHT, GxEPD_WHITE);
     display.drawRect(70, 145, 660, 220, GxEPD_BLACK);
     display.drawRect(74, 149, 652, 212, GxEPD_BLACK);
-    FT02_MapCentered(display, "DIRECT PBF MAP A3.13", 80, 184, 640, 3);
+    FT02_MapCentered(display, "DIRECT PBF MAP A3.14", 80, 184, 640, 3);
     FT02_MapCentered(display, "LOADING MAP OR RETURNING TO DEFAULT CENTER", 80, 238, 640, 1);
     FT02_MapCentered(display, "FIRST VISIT MAY BUILD CACHE AND TAKE LONGER", 80, 272, 640, 1);
 
@@ -525,7 +598,7 @@ static void FT02_DrawError(FT02Display& display)
     const FT02PbfMapReport& report = FT02_PbfMapReportCurrent();
     display.fillRect(0, MAP_TOP, 800, MAP_HEIGHT, GxEPD_WHITE);
     display.drawRect(70, 150, 660, 190, GxEPD_BLACK);
-    FT02_MapCentered(display, "DIRECT PBF MAP A3.13 FAILED", 80, 190, 640, 2);
+    FT02_MapCentered(display, "DIRECT PBF MAP A3.14 FAILED", 80, 190, 640, 2);
     FT02_MapCentered(display, FT02_PbfMapErrorText(), 80, 240, 640, 2);
 
     char detail[128];
@@ -546,7 +619,7 @@ void FT02_DrawPbfMapScreen(FT02Display& display)
     const FT02PbfMapReport& report = FT02_PbfMapReportCurrent();
 
     Serial.printf(
-        "[MAP-A3.13] render begin state=%d zoom=%d center=%.7f,%.7f\n",
+        "[MAP-A3.14] render begin state=%d zoom=%d center=%.7f,%.7f\n",
         (int)report.state,
         report.zoom,
         report.centerLon,
@@ -573,7 +646,7 @@ void FT02_DrawPbfMapScreen(FT02Display& display)
         FT02_EpdPowerOffAfterCommit(display, "map-ready-full");
 
         Serial.printf(
-            "[MAP-A3.13] FULL refresh complete; balanced 20px Chinese footer drawn zoom=%d scale=%dm\n",
+            "[MAP-A3.14] FULL refresh complete; balanced 20px Chinese footer drawn zoom=%d scale=%dm\n",
             report.zoom,
             FT02_MapScaleMeters(report.zoom)
         );

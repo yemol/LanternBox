@@ -5,12 +5,12 @@
 #include <esp_system.h>
 
 #include "FT02_Storage.h"
+#include "FT02_BuildInfo.h"
 
 namespace
 {
 constexpr const char* FT02_TRACK_PATH = "/lanternbox/tracks/path_points.jsonl";
 constexpr const char* FT02_DEVICE_ID = "FT-02A";
-constexpr const char* FT02_FIRMWARE_VERSION = "v2.55";
 constexpr uint32_t FT02_AUTO_TRACK_INTERVAL_MS = 30000UL;
 
 FT02LocationRecorderSnapshot g_ft02Recorder = {};
@@ -183,7 +183,7 @@ static bool FT02_RecorderWriteEvent(
     char line[896];
     const double latitude = gnss.fixValid ? gnss.latitude : 0.0;
     const double longitude = gnss.fixValid ? gnss.longitude : 0.0;
-    const float altitude = gnss.fixValid ? gnss.altitudeMeters : 0.0f;
+    const float altitude = (gnss.fixValid && gnss.altitudeValid) ? gnss.altitudeMeters : 0.0f;
     const float hdop = gnss.hdop > 0.0f ? gnss.hdop : 0.0f;
 
     const int written = snprintf(

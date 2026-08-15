@@ -1,0 +1,38 @@
+# Third-party notices
+
+## Waveshare 4.26-inch e-Paper reference driver
+
+`src/FT02_Gray4Panel.cpp` adapts the four-gray LUT, initialization sequence, two-plane pixel mapping, refresh lifecycle, deep-sleep command and power-off handling from Waveshare's official `epd4in26.py` reference driver.
+
+Source project:
+
+```text
+https://github.com/waveshareteam/e-Paper
+RaspberryPi_JetsonNano/python/lib/waveshare_epd/epd4in26.py
+```
+
+Refer to the upstream source for its complete permission notice and warranty disclaimer.
+
+## Noto Sans CJK generated bitmap data
+
+`src/FT02_GrayMapFontData.cpp` contains generated 2-bit bitmap glyph data produced from Noto Sans CJK Regular and Bold at build preparation time.
+
+The source font files are licensed under the SIL Open Font License 1.1. No font file is included or redistributed in this package. The package contains only generated bitmap glyph data required by the FT-02 firmware.
+
+The generator is retained at:
+
+```text
+tools/generate_ft02_gray_map_fonts.py
+```
+
+## SparkFun WM8960 Arduino Library
+
+`src/FT02_AudioLog.cpp` uses the SparkFun WM8960 Arduino Library for WM8960 I2C register configuration. PlatformIO resolves version `1.0.3` from the declared dependency. The library is distributed under its upstream MIT license.
+
+## Espressif I2S standard driver
+
+The full-duplex I2S path uses the standard I2S driver supplied by the configured Arduino-ESP32 / ESP-IDF platform. No Espressif source file is vendored into this package.
+
+## xpinyin database / Unihan-derived Mandarin readings
+
+The generated `src/FT02_PinyinImeData.h` uses Mandarin spelling data derived during build preparation from the `xpinyin` database distributed with TeX Live. The xpinyin database states that it is generated from the Unicode Unihan database and is distributed under the LaTeX Project Public License (LPPL), version 1.3c or later. Candidate ordering is FT-02-specific and generated separately.

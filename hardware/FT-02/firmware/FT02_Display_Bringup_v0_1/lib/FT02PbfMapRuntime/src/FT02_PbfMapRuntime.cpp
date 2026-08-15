@@ -15,7 +15,7 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-// FT-02 Direct PBF Map A3.13
+// FT-02 Direct PBF Map A3.14
 //
 // A3 keeps the untouched .osm.pbf as the source of truth, but builds a
 // device-side persistent regional geometry cache. The first view in a region
@@ -32,7 +32,7 @@ static const uint32_t FT02_PBF_CACHE_GEO_SEGMENT_CAPACITY = 90000U;
 static const uint32_t FT02_PBF_CACHE_GEO_LABEL_CAPACITY = 1024U;
 static const uint32_t FT02_PBF_CACHE_REGION_PIXELS_Z18 = 3072U;
 static const uint32_t FT02_PBF_CACHE_REGION_MARGIN_PIXELS_Z18 = 192U;
-static const uint32_t FT02_PBF_CACHE_VERSION = 5U;
+static const uint32_t FT02_PBF_CACHE_VERSION = 6U;
 static const char* FT02_PBF_CACHE_PATH = "/maps/raw/shanghai-260726.osm.pbc5";
 static const int FT02_PBF_MAP_WIDTH = 800;
 static const int FT02_PBF_MAP_HEIGHT = 364;
@@ -384,7 +384,7 @@ static bool FT02_WriteDmaStaged(
     if(stage == nullptr)
     {
         Serial.printf(
-            "[PBF-A3.13] cache writer DMA buffer allocation failed heap=%lu\n",
+            "[PBF-A3.14] cache writer DMA buffer allocation failed heap=%lu\n",
             (unsigned long)ESP.getFreeHeap()
         );
         return false;
@@ -407,7 +407,7 @@ static bool FT02_WriteDmaStaged(
         if(written != chunk)
         {
             Serial.printf(
-                "[PBF-A3.13] cache write failed section=%s offset=%lu requested=%lu written=%lu errno=%d ferror=%d\n",
+                "[PBF-A3.14] cache write failed section=%s offset=%lu requested=%lu written=%lu errno=%d ferror=%d\n",
                 section != nullptr ? section : "?",
                 (unsigned long)offset,
                 (unsigned long)chunk,
@@ -425,7 +425,7 @@ static bool FT02_WriteDmaStaged(
         if(offset >= nextReport || offset == bytes)
         {
             Serial.printf(
-                "[PBF-A3.13] cache write %s %lu/%lu bytes total=%lu\n",
+                "[PBF-A3.14] cache write %s %lu/%lu bytes total=%lu\n",
                 section != nullptr ? section : "?",
                 (unsigned long)offset,
                 (unsigned long)bytes,
@@ -1301,16 +1301,33 @@ static void FT02_AddNamedPoiLabel(
     );
 }
 
+static int32_t FT02_ProjectXWideE7(int32_t lonE7)
+{
+    const double world = FT02_LonToWorldX(lonE7 / 10000000.0, g_zoom);
+    return (int32_t)lround(world - g_centerWorldX + FT02_PBF_MAP_WIDTH * 0.5);
+}
+
+static int32_t FT02_ProjectYWideE7(int32_t latE7)
+{
+    const double world = FT02_LatToWorldY(latE7 / 10000000.0, g_zoom);
+    return (int32_t)lround(world - g_centerWorldY + FT02_PBF_MAP_HEIGHT * 0.5);
+}
+
+static int16_t FT02_ClampProjectedCoordinate(int32_t value)
+{
+    if(value < -32760) return -32760;
+    if(value > 32760) return 32760;
+    return (int16_t)value;
+}
+
 static int16_t FT02_ProjectX(int32_t lonE7)
 {
-    double world = FT02_LonToWorldX(lonE7 / 10000000.0, g_zoom);
-    return (int16_t)lround(world - g_centerWorldX + FT02_PBF_MAP_WIDTH * 0.5);
+    return FT02_ClampProjectedCoordinate(FT02_ProjectXWideE7(lonE7));
 }
 
 static int16_t FT02_ProjectY(int32_t latE7)
 {
-    double world = FT02_LatToWorldY(latE7 / 10000000.0, g_zoom);
-    return (int16_t)lround(world - g_centerWorldY + FT02_PBF_MAP_HEIGHT * 0.5);
+    return FT02_ClampProjectedCoordinate(FT02_ProjectYWideE7(latE7));
 }
 
 static bool FT02_SegmentMightBeVisible(int16_t x1, int16_t y1, int16_t x2, int16_t y2)
@@ -1367,7 +1384,30 @@ static void FT02_AddSegment(int32_t lat1, int32_t lon1, int32_t lat2, int32_t lo
     }
     FT02PbfMapSegment& segment = g_segments[g_segmentCount++];
     segment.x1 = x1; segment.y1 = y1; segment.x2 = x2; segment.y2 = y2; segment.style = style;
+    memset(segment.reserved, 0, sizeof(segment.reserved));
     g_report.segments = (uint32_t)g_segmentCount;
+}
+
+static void FT02_MarkWayRange(size_t start, size_t end, bool closed)
+{
+    if(end <= start) return;
+    const uint8_t closedFlag = closed ? static_cast<uint8_t>(FT02_PBF_MAP_SEGMENT_WAY_CLOSED) : 0U;
+    if(g_buildingCache)
+    {
+        if(g_geoSegments == nullptr || end > g_geoSegmentCount) return;
+        g_geoSegments[start].reserved[0] |=
+            (uint8_t)(FT02_PBF_MAP_SEGMENT_WAY_START | closedFlag);
+        g_geoSegments[end - 1U].reserved[0] |=
+            (uint8_t)(FT02_PBF_MAP_SEGMENT_WAY_END | closedFlag);
+    }
+    else
+    {
+        if(g_segments == nullptr || end > g_segmentCount) return;
+        g_segments[start].reserved[0] |=
+            (uint8_t)(FT02_PBF_MAP_SEGMENT_WAY_START | closedFlag);
+        g_segments[end - 1U].reserved[0] |=
+            (uint8_t)(FT02_PBF_MAP_SEGMENT_WAY_END | closedFlag);
+    }
 }
 
 static bool FT02_ParseWay(
@@ -1413,8 +1453,11 @@ static bool FT02_ParseWay(
 
     FT02PackedIterator refs;
     FT02_PackedBegin(refs, refSlices, refSliceCount);
+    const size_t waySegmentStart = g_buildingCache ? g_geoSegmentCount : g_segmentCount;
     int64_t nodeId = 0;
     bool previousResolved = false;
+    bool firstResolved = false;
+    int32_t firstLat = 0, firstLon = 0;
     int32_t previousLat = 0, previousLon = 0;
     bool accepted = false;
     int64_t longestScore = -1;
@@ -1427,6 +1470,12 @@ static bool FT02_ParseWay(
         nodeId += FT02_ZigZag64(encoded);
         int32_t lat = 0, lon = 0;
         bool resolved = FT02_NodeFind(nodeId, lat, lon);
+        if(resolved && !firstResolved)
+        {
+            firstResolved = true;
+            firstLat = lat;
+            firstLon = lon;
+        }
         if(resolved && previousResolved)
         {
             size_t before = g_buildingCache ? g_geoSegmentCount : g_segmentCount;
@@ -1452,6 +1501,12 @@ static bool FT02_ParseWay(
     }
     if(accepted)
     {
+        const size_t waySegmentEnd = g_buildingCache ? g_geoSegmentCount : g_segmentCount;
+        const bool closed =
+            firstResolved && previousResolved &&
+            firstLat == previousLat && firstLon == previousLon;
+        FT02_MarkWayRange(waySegmentStart, waySegmentEnd, closed);
+
         g_report.waysAccepted++;
         if(g_buildingCache && nameIndex >= 0 && (uint32_t)nameIndex < strings.count)
         {
@@ -1535,14 +1590,14 @@ static bool FT02_LoadIndex()
     FILE* file = FT02_StorageOpenReadFile(FT02_PBF_INDEX_PATH);
     if(file == nullptr)
     {
-        Serial.println("[PBF-A3.13] index open failed");
+        Serial.println("[PBF-A3.14] index open failed");
         return false;
     }
 
     FT02PbfIndexHeaderDisk header;
     if(!FT02_ReadExact(file, &header, sizeof(header)))
     {
-        Serial.println("[PBF-A3.13] index header read failed");
+        Serial.println("[PBF-A3.14] index header read failed");
         fclose(file);
         return false;
     }
@@ -1555,7 +1610,7 @@ static bool FT02_LoadIndex()
        header.entryCount > 4096U)
     {
         Serial.printf(
-            "[PBF-A3.13] index header invalid version=%u header=%u entry=%u count=%lu\n",
+            "[PBF-A3.14] index header invalid version=%u header=%u entry=%u count=%lu\n",
             (unsigned)header.version,
             (unsigned)header.headerBytes,
             (unsigned)header.entryBytes,
@@ -1573,7 +1628,7 @@ static bool FT02_LoadIndex()
     if(g_indexEntries == nullptr)
     {
         Serial.printf(
-            "[PBF-A3.13] index allocation failed bytes=%lu heap=%lu psram=%lu\n",
+            "[PBF-A3.14] index allocation failed bytes=%lu heap=%lu psram=%lu\n",
             (unsigned long)entryBytes,
             (unsigned long)ESP.getFreeHeap(),
             (unsigned long)ESP.getFreePsram()
@@ -1587,7 +1642,7 @@ static bool FT02_LoadIndex()
 
     if(!readOk)
     {
-        Serial.println("[PBF-A3.13] index entries read failed");
+        Serial.println("[PBF-A3.14] index entries read failed");
         FT02_MapFree(g_indexEntries);
         g_indexEntries = nullptr;
         return false;
@@ -1605,7 +1660,7 @@ static bool FT02_LoadIndex()
     if(actualCrc != header.entryCrc32)
     {
         Serial.printf(
-            "[PBF-A3.13] index CRC mismatch expected=0x%08lX actual=0x%08lX\n",
+            "[PBF-A3.14] index CRC mismatch expected=0x%08lX actual=0x%08lX\n",
             (unsigned long)header.entryCrc32,
             (unsigned long)actualCrc
         );
@@ -1620,7 +1675,7 @@ static bool FT02_LoadIndex()
     g_report.indexEntries = header.entryCount;
 
     Serial.printf(
-        "[PBF-A3.13] index loaded entries=%lu bytes=%lu\n",
+        "[PBF-A3.14] index loaded entries=%lu bytes=%lu\n",
         (unsigned long)g_indexEntryCount,
         (unsigned long)entryBytes
     );
@@ -1631,7 +1686,7 @@ static bool FT02_EnsureIndexForCacheBuild()
 {
     if(FT02_LoadIndex()) return true;
 
-    Serial.println("[PBF-A3.13] validating/recovering persistent index");
+    Serial.println("[PBF-A3.14] validating/recovering persistent index");
 
     if(FT02_PbfIndexEnsure(
             false,
@@ -1639,7 +1694,7 @@ static bool FT02_EnsureIndexForCacheBuild()
             FT02_PBF_INDEX_PATH
         ) && FT02_LoadIndex())
     {
-        Serial.println("[PBF-A3.13] index recovered by normal ensure");
+        Serial.println("[PBF-A3.14] index recovered by normal ensure");
         return true;
     }
 
@@ -1647,7 +1702,7 @@ static bool FT02_EnsureIndexForCacheBuild()
     // new regional cache must be built. Normal open, pan, zoom and R recenter
     // never touch the index when a valid PBC4 cache is available.
     Serial.printf(
-        "[PBF-A3.13] normal ensure failed: %s; forcing one rebuild\n",
+        "[PBF-A3.14] normal ensure failed: %s; forcing one rebuild\n",
         FT02_PbfIndexErrorText()
     );
 
@@ -1661,7 +1716,7 @@ static bool FT02_EnsureIndexForCacheBuild()
         ))
     {
         Serial.printf(
-            "[PBF-A3.13] forced index rebuild failed: %s\n",
+            "[PBF-A3.14] forced index rebuild failed: %s\n",
             FT02_PbfIndexErrorText()
         );
         return false;
@@ -1669,11 +1724,11 @@ static bool FT02_EnsureIndexForCacheBuild()
 
     if(!FT02_LoadIndex())
     {
-        Serial.println("[PBF-A3.13] rebuilt index could not be loaded");
+        Serial.println("[PBF-A3.14] rebuilt index could not be loaded");
         return false;
     }
 
-    Serial.println("[PBF-A3.13] index rebuilt and loaded");
+    Serial.println("[PBF-A3.14] index rebuilt and loaded");
     return true;
 }
 
@@ -1766,7 +1821,7 @@ static bool FT02_SaveCache(uint32_t buildElapsedMs)
     FILE* file = FT02_StorageOpenWriteFile(tempPath, true);
     if(file == nullptr)
     {
-        Serial.printf("[PBF-A3.13] cache temp open failed path=%s errno=%d\n", tempPath, errno);
+        Serial.printf("[PBF-A3.14] cache temp open failed path=%s errno=%d\n", tempPath, errno);
         return false;
     }
 
@@ -1798,7 +1853,7 @@ static bool FT02_SaveCache(uint32_t buildElapsedMs)
     if(!ok)
     {
         Serial.printf(
-            "[PBF-A3.13] cache temp write/sync failed total=%lu expected=%lu close=%d errno=%d\n",
+            "[PBF-A3.14] cache temp write/sync failed total=%lu expected=%lu close=%d errno=%d\n",
             (unsigned long)totalWritten,
             (unsigned long)header.fileBytes,
             closeResult,
@@ -1812,7 +1867,7 @@ static bool FT02_SaveCache(uint32_t buildElapsedMs)
     if(!FT02_StorageFileSize(tempPath, writtenBytes) || writtenBytes != header.fileBytes)
     {
         Serial.printf(
-            "[PBF-A3.13] cache temp size mismatch actual=%llu expected=%lu\n",
+            "[PBF-A3.14] cache temp size mismatch actual=%llu expected=%lu\n",
             (unsigned long long)writtenBytes,
             (unsigned long)header.fileBytes
         );
@@ -1906,6 +1961,95 @@ static bool FT02_LabelVisibleAtZoom(uint8_t priority)
     return g_zoom >= 20;
 }
 
+static bool FT02_WideBoundsMightBeVisible(
+    int32_t minX, int32_t minY, int32_t maxX, int32_t maxY
+)
+{
+    const int32_t margin = 8;
+    if(maxX < -margin || minX > FT02_PBF_MAP_WIDTH + margin) return false;
+    if(maxY < -margin || minY > FT02_PBF_MAP_HEIGHT + margin) return false;
+    return true;
+}
+
+static bool FT02_AppendProjectedSegment(
+    int32_t x1, int32_t y1, int32_t x2, int32_t y2,
+    uint8_t style, uint8_t flags
+)
+{
+    if(g_segments == nullptr || g_segmentCount >= FT02_PBF_MAP_SEGMENT_CAPACITY)
+    {
+        g_report.segmentLimitReached = true;
+        return false;
+    }
+    FT02PbfMapSegment& target = g_segments[g_segmentCount++];
+    target.x1 = FT02_ClampProjectedCoordinate(x1);
+    target.y1 = FT02_ClampProjectedCoordinate(y1);
+    target.x2 = FT02_ClampProjectedCoordinate(x2);
+    target.y2 = FT02_ClampProjectedCoordinate(y2);
+    target.style = style;
+    memset(target.reserved, 0, sizeof(target.reserved));
+    target.reserved[0] = flags;
+    g_report.segments = (uint32_t)g_segmentCount;
+    return true;
+}
+
+static size_t FT02_GeoWayEnd(size_t start)
+{
+    if(start >= g_geoSegmentCount) return start;
+    size_t end = start;
+    while(end < g_geoSegmentCount)
+    {
+        const FT02PbfGeoSegmentDisk& segment = g_geoSegments[end];
+        ++end;
+        if((segment.reserved[0] & FT02_PBF_MAP_SEGMENT_WAY_END) != 0U) break;
+        if(end < g_geoSegmentCount &&
+           (g_geoSegments[end].reserved[0] & FT02_PBF_MAP_SEGMENT_WAY_START) != 0U)
+            break;
+    }
+    return end;
+}
+
+static void FT02_ProjectCachedBuildingWay(size_t start, size_t end)
+{
+    if(start >= end || end > g_geoSegmentCount || !FT02_StyleVisibleAtZoom(FT02_PBF_MAP_STYLE_BUILDING))
+        return;
+
+    int32_t minX = INT32_MAX;
+    int32_t minY = INT32_MAX;
+    int32_t maxX = INT32_MIN;
+    int32_t maxY = INT32_MIN;
+    for(size_t i = start; i < end; ++i)
+    {
+        const FT02PbfGeoSegmentDisk& source = g_geoSegments[i];
+        const int32_t x1 = FT02_ProjectXWideE7(source.lon1E7);
+        const int32_t y1 = FT02_ProjectYWideE7(source.lat1E7);
+        const int32_t x2 = FT02_ProjectXWideE7(source.lon2E7);
+        const int32_t y2 = FT02_ProjectYWideE7(source.lat2E7);
+        if(x1 < minX) minX = x1;
+        if(x1 > maxX) maxX = x1;
+        if(x2 < minX) minX = x2;
+        if(x2 > maxX) maxX = x2;
+        if(y1 < minY) minY = y1;
+        if(y1 > maxY) maxY = y1;
+        if(y2 < minY) minY = y2;
+        if(y2 > maxY) maxY = y2;
+    }
+    if(!FT02_WideBoundsMightBeVisible(minX, minY, maxX, maxY)) return;
+
+    for(size_t i = start; i < end; ++i)
+    {
+        const FT02PbfGeoSegmentDisk& source = g_geoSegments[i];
+        if(!FT02_AppendProjectedSegment(
+                FT02_ProjectXWideE7(source.lon1E7),
+                FT02_ProjectYWideE7(source.lat1E7),
+                FT02_ProjectXWideE7(source.lon2E7),
+                FT02_ProjectYWideE7(source.lat2E7),
+                source.style,
+                source.reserved[0]))
+            break;
+    }
+}
+
 static bool FT02_ProjectCache()
 {
     if(!g_cacheResident || g_geoSegments == nullptr) return false;
@@ -1915,9 +2059,19 @@ static bool FT02_ProjectCache()
     g_segmentCount = 0;
     g_labelCount = 0;
 
-    for(size_t i = 0; i < g_geoSegmentCount; i++)
+    size_t segmentIndex = 0U;
+    while(segmentIndex < g_geoSegmentCount)
     {
-        const FT02PbfGeoSegmentDisk& source = g_geoSegments[i];
+        const FT02PbfGeoSegmentDisk& source = g_geoSegments[segmentIndex];
+        if(source.style == FT02_PBF_MAP_STYLE_BUILDING)
+        {
+            const size_t wayEnd = FT02_GeoWayEnd(segmentIndex);
+            FT02_ProjectCachedBuildingWay(segmentIndex, wayEnd);
+            segmentIndex = wayEnd > segmentIndex ? wayEnd : segmentIndex + 1U;
+            continue;
+        }
+
+        const size_t before = g_segmentCount;
         FT02_AddSegment(
             source.lat1E7,
             source.lon1E7,
@@ -1925,6 +2079,9 @@ static bool FT02_ProjectCache()
             source.lon2E7,
             source.style
         );
+        if(g_segmentCount > before)
+            g_segments[g_segmentCount - 1U].reserved[0] = source.reserved[0];
+        ++segmentIndex;
     }
 
     for(int priority = 4; priority >= 1; priority--)
@@ -2056,7 +2213,7 @@ static bool FT02_Fail(FT02PbfMapError error)
     g_report.error = error;
     g_report.minimumFreeHeap = ESP.getMinFreeHeap();
     g_report.freePsramAfter = ESP.getFreePsram();
-    Serial.print("[PBF-A3.13] FAIL error=");
+    Serial.print("[PBF-A3.14] FAIL error=");
     Serial.println((int)error);
     FT02_ReleaseAllBuffers();
     return false;
@@ -2089,6 +2246,135 @@ void FT02_PbfMapResetView()
     g_centerWorldY = FT02_LatToWorldY(g_centerLat, g_zoom);
 }
 
+void FT02_PbfMapSetCenter(double longitude, double latitude)
+{
+    if(!isfinite(longitude) || !isfinite(latitude) ||
+       longitude < -180.0 || longitude > 180.0 ||
+       latitude < -85.0 || latitude > 85.0)
+    {
+        Serial.printf(
+            "[PBF-A3.14] rejected invalid center %.7f,%.7f\n",
+            longitude,
+            latitude
+        );
+        return;
+    }
+
+    g_centerLon = longitude;
+    g_centerLat = latitude;
+    g_centerWorldX = FT02_LonToWorldX(g_centerLon, g_zoom);
+    g_centerWorldY = FT02_LatToWorldY(g_centerLat, g_zoom);
+    Serial.printf(
+        "[PBF-A3.14] center set %.7f,%.7f z=%d\n",
+        g_centerLon,
+        g_centerLat,
+        g_zoom
+    );
+}
+
+
+bool FT02_PbfMapFitBounds(
+    double minLongitude,
+    double minLatitude,
+    double maxLongitude,
+    double maxLatitude,
+    int viewportWidth,
+    int viewportHeight,
+    int paddingPixels
+)
+{
+    return FT02_PbfMapFitBoundsLimited(
+        minLongitude,
+        minLatitude,
+        maxLongitude,
+        maxLatitude,
+        viewportWidth,
+        viewportHeight,
+        paddingPixels,
+        FT02_PBF_MAP_MIN_ZOOM,
+        FT02_PBF_MAP_MAX_ZOOM
+    );
+}
+
+bool FT02_PbfMapFitBoundsLimited(
+    double minLongitude,
+    double minLatitude,
+    double maxLongitude,
+    double maxLatitude,
+    int viewportWidth,
+    int viewportHeight,
+    int paddingPixels,
+    int requestedMinZoom,
+    int requestedMaxZoom
+)
+{
+    if(!isfinite(minLongitude) || !isfinite(maxLongitude) ||
+       !isfinite(minLatitude) || !isfinite(maxLatitude) ||
+       minLongitude < -180.0 || maxLongitude > 180.0 ||
+       minLatitude < -85.0 || maxLatitude > 85.0 ||
+       minLongitude > maxLongitude || minLatitude > maxLatitude ||
+       viewportWidth <= 0 || viewportHeight <= 0)
+    {
+        return false;
+    }
+
+    int minimumZoom = requestedMinZoom;
+    int maximumZoom = requestedMaxZoom;
+    if(minimumZoom < FT02_PBF_MAP_MIN_ZOOM) minimumZoom = FT02_PBF_MAP_MIN_ZOOM;
+    if(minimumZoom > FT02_PBF_MAP_MAX_ZOOM) minimumZoom = FT02_PBF_MAP_MAX_ZOOM;
+    if(maximumZoom < FT02_PBF_MAP_MIN_ZOOM) maximumZoom = FT02_PBF_MAP_MIN_ZOOM;
+    if(maximumZoom > FT02_PBF_MAP_MAX_ZOOM) maximumZoom = FT02_PBF_MAP_MAX_ZOOM;
+    if(maximumZoom < minimumZoom) maximumZoom = minimumZoom;
+
+    if(paddingPixels < 0) paddingPixels = 0;
+    const int usableWidth = viewportWidth - paddingPixels * 2;
+    const int usableHeight = viewportHeight - paddingPixels * 2;
+    if(usableWidth <= 0 || usableHeight <= 0) return false;
+
+    int selectedZoom = minimumZoom;
+    bool fits = false;
+    for(int zoom = maximumZoom; zoom >= minimumZoom; zoom--)
+    {
+        const double x1 = FT02_LonToWorldX(minLongitude, zoom);
+        const double x2 = FT02_LonToWorldX(maxLongitude, zoom);
+        const double y1 = FT02_LatToWorldY(minLatitude, zoom);
+        const double y2 = FT02_LatToWorldY(maxLatitude, zoom);
+        const double spanX = fabs(x2 - x1);
+        const double spanY = fabs(y2 - y1);
+        if(spanX <= static_cast<double>(usableWidth) &&
+           spanY <= static_cast<double>(usableHeight))
+        {
+            selectedZoom = zoom;
+            fits = true;
+            break;
+        }
+    }
+
+    const double minX = FT02_LonToWorldX(minLongitude, selectedZoom);
+    const double maxX = FT02_LonToWorldX(maxLongitude, selectedZoom);
+    const double yA = FT02_LatToWorldY(minLatitude, selectedZoom);
+    const double yB = FT02_LatToWorldY(maxLatitude, selectedZoom);
+    g_zoom = selectedZoom;
+    g_centerWorldX = (minX + maxX) * 0.5;
+    g_centerWorldY = (yA + yB) * 0.5;
+    g_centerLon = FT02_WorldXToLon(g_centerWorldX, g_zoom);
+    g_centerLat = FT02_WorldYToLat(g_centerWorldY, g_zoom);
+
+    Serial.printf(
+        "[PBF-A3.14] fit bounds z=%d fits=%d range=Z%d-Z%d viewport=%dx%d pad=%d center=%.7f,%.7f\n",
+        g_zoom,
+        fits ? 1 : 0,
+        minimumZoom,
+        maximumZoom,
+        viewportWidth,
+        viewportHeight,
+        paddingPixels,
+        g_centerLon,
+        g_centerLat
+    );
+    return fits;
+}
+
 void FT02_PbfMapMovePixels(int dx, int dy)
 {
     if(g_centerWorldX == 0.0 && g_centerWorldY == 0.0) FT02_PbfMapResetView();
@@ -2096,6 +2382,67 @@ void FT02_PbfMapMovePixels(int dx, int dy)
     g_centerWorldY += dy;
     g_centerLon = FT02_WorldXToLon(g_centerWorldX, g_zoom);
     g_centerLat = FT02_WorldYToLat(g_centerWorldY, g_zoom);
+}
+
+bool FT02_PbfMapProjectCoordinateWide(
+    double longitude,
+    double latitude,
+    int32_t& screenX,
+    int32_t& screenY
+)
+{
+    if(!isfinite(longitude) || !isfinite(latitude) ||
+       longitude < -180.0 || longitude > 180.0 ||
+       latitude < -85.0 || latitude > 85.0)
+    {
+        return false;
+    }
+    if(g_centerWorldX == 0.0 && g_centerWorldY == 0.0)
+    {
+        FT02_PbfMapResetView();
+    }
+
+    const double worldX = FT02_LonToWorldX(longitude, g_zoom);
+    const double worldY = FT02_LatToWorldY(latitude, g_zoom);
+    const double projectedX = worldX - g_centerWorldX + FT02_PBF_MAP_WIDTH * 0.5;
+    const double projectedY = worldY - g_centerWorldY + FT02_PBF_MAP_HEIGHT * 0.5;
+    if(projectedX < -2147483647.0 || projectedX > 2147483647.0 ||
+       projectedY < -2147483647.0 || projectedY > 2147483647.0)
+    {
+        return false;
+    }
+
+    screenX = static_cast<int32_t>(llround(projectedX));
+    screenY = static_cast<int32_t>(llround(projectedY));
+    return true;
+}
+
+bool FT02_PbfMapProjectCoordinate(
+    double longitude,
+    double latitude,
+    int16_t& screenX,
+    int16_t& screenY
+)
+{
+    int32_t wideX = 0;
+    int32_t wideY = 0;
+    if(!FT02_PbfMapProjectCoordinateWide(longitude, latitude, wideX, wideY))
+    {
+        return false;
+    }
+
+    if(wideX < -32768) wideX = -32768;
+    if(wideX > 32767) wideX = 32767;
+    if(wideY < -32768) wideY = -32768;
+    if(wideY > 32767) wideY = 32767;
+    screenX = static_cast<int16_t>(wideX);
+    screenY = static_cast<int16_t>(wideY);
+    return true;
+}
+
+int FT02_PbfMapZoomCurrent()
+{
+    return g_zoom;
 }
 
 bool FT02_PbfMapChangeZoom(int delta)
@@ -2121,7 +2468,7 @@ bool FT02_PbfMapChangeZoom(int delta)
     if(next == g_zoom)
     {
         Serial.printf(
-            "[PBF-A3.13] zoom limit unchanged z=%d center=%.7f,%.7f; rebuild skipped\n",
+            "[PBF-A3.14] zoom limit unchanged z=%d center=%.7f,%.7f; rebuild skipped\n",
             g_zoom,
             anchorLon,
             anchorLat
@@ -2136,7 +2483,7 @@ bool FT02_PbfMapChangeZoom(int delta)
     g_centerWorldY = FT02_LatToWorldY(anchorLat, g_zoom);
 
     Serial.printf(
-        "[PBF-A3.13] zoom anchor kept oldZ=%d newZ=%d center=%.7f,%.7f\n",
+        "[PBF-A3.14] zoom anchor kept oldZ=%d newZ=%d center=%.7f,%.7f\n",
         oldZoom,
         g_zoom,
         g_centerLon,
@@ -2170,9 +2517,9 @@ bool FT02_PbfMapBuild()
 
     const uint32_t started = millis();
 
-    Serial.println("[PBF-A3.13] regional cache map build begin");
+    Serial.println("[PBF-A3.14] regional cache map build begin");
     Serial.printf(
-        "[PBF-A3.13] center=%.7f,%.7f zoom=%d\n",
+        "[PBF-A3.14] center=%.7f,%.7f zoom=%d\n",
         g_centerLon,
         g_centerLat,
         g_zoom
@@ -2199,11 +2546,11 @@ bool FT02_PbfMapBuild()
                 g_sourceSignature
             ))
         {
-            Serial.println("[PBF-A3.13] source identity check failed before cache load");
+            Serial.println("[PBF-A3.14] source identity check failed before cache load");
             return FT02_Fail(FT02_PBF_MAP_ERROR_SOURCE_OPEN);
         }
         Serial.printf(
-            "[PBF-A3.13] source identity ready bytes=%llu signature=0x%08lX time=%lu ms\n",
+            "[PBF-A3.14] source identity ready bytes=%llu signature=0x%08lX time=%lu ms\n",
             (unsigned long long)g_sourceFileBytes,
             (unsigned long)g_sourceSignature,
             (unsigned long)(millis() - identityStarted)
@@ -2215,7 +2562,7 @@ bool FT02_PbfMapBuild()
         g_forceCacheRebuild = false;
         FT02_ReleaseCacheBuffers();
         FT02_StorageDeleteFile(FT02_PBF_CACHE_PATH);
-        Serial.println("[PBF-A3.13] forced regional cache rebuild requested");
+        Serial.println("[PBF-A3.14] forced regional cache rebuild requested");
     }
 
     // Fastest path: R, pan and zoom inside the current resident cache are
@@ -2226,7 +2573,7 @@ bool FT02_PbfMapBuild()
         cacheReady = true;
         g_report.cacheReusedInMemory = true;
         g_report.cacheFileBytes = g_cacheHeader.fileBytes;
-        Serial.println("[PBF-A3.13] RAM cache hit; index not accessed");
+        Serial.println("[PBF-A3.14] RAM cache hit; index not accessed");
     }
 
     // Cold-start path: the regional cache is self-contained. Load and use it
@@ -2245,7 +2592,7 @@ bool FT02_PbfMapBuild()
                 cacheReady = true;
                 g_report.cacheLoaded = true;
                 Serial.printf(
-                    "[PBF-A3.13] SD cache hit segments=%lu labels=%lu time=%lu ms; index not accessed\n",
+                    "[PBF-A3.14] SD cache hit segments=%lu labels=%lu time=%lu ms; index not accessed\n",
                     (unsigned long)g_geoSegmentCount,
                     (unsigned long)g_geoLabelCount,
                     (unsigned long)g_report.cacheLoadMs
@@ -2253,13 +2600,13 @@ bool FT02_PbfMapBuild()
             }
             else
             {
-                Serial.println("[PBF-A3.13] SD cache does not cover view; rebuilding region");
+                Serial.println("[PBF-A3.14] SD cache does not cover view; rebuilding region");
                 FT02_ReleaseCacheBuffers();
             }
         }
         else
         {
-            Serial.println("[PBF-A3.13] SD cache invalid; deleting and rebuilding region");
+            Serial.println("[PBF-A3.14] SD cache invalid; deleting and rebuilding region");
             FT02_StorageDeleteFile(FT02_PBF_CACHE_PATH);
             FT02_ReleaseCacheBuffers();
         }
@@ -2273,7 +2620,7 @@ bool FT02_PbfMapBuild()
             return FT02_Fail(FT02_PBF_MAP_ERROR_INDEX_INVALID);
         }
 
-        Serial.println("[PBF-A3.13] building new regional cache from raw PBF");
+        Serial.println("[PBF-A3.14] building new regional cache from raw PBF");
 
         if(!FT02_BuildRegionalCache())
         {
@@ -2314,7 +2661,7 @@ bool FT02_PbfMapBuild()
         : (g_report.cacheLoaded ? "SD CACHE" : "RAM CACHE");
 
     Serial.printf(
-        "[PBF-A3.13] PASS source=%s screen_segments=%lu labels=%lu project=%lu ms total=%lu ms\n",
+        "[PBF-A3.14] PASS source=%s screen_segments=%lu labels=%lu project=%lu ms total=%lu ms\n",
         source,
         (unsigned long)g_report.segments,
         (unsigned long)g_report.labels,

@@ -3,6 +3,7 @@
 #include <GxEPD2_BW.h>
 
 #include "FT02_HomeUI.h"
+#include "FT02_BuildInfo.h"
 #include "FT02_PbfMapUI.h"
 #include "FT02_PbfMapRuntime.h"
 #include "FT02_HelpUI.h"
@@ -11,6 +12,10 @@
 #include "FT02_Gnss.h"
 #include "FT02_LocationRecorder.h"
 #include "FT02_LocationRecorderUI.h"
+#include "FT02_LocationLog.h"
+#include "FT02_LocationLogUI.h"
+#include "FT02_AudioLog.h"
+#include "FT02_AudioLogUI.h"
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
 #include "FT02_GlobalCJK20FontData.h"
@@ -20,9 +25,21 @@
 #include "FT02_InputManager.h"
 #include "FT02_StatusBar.h"
 #include "FT02_Storage.h"
+#include "FT02_GrayMapUI.h"
+#include "FT02_LoRaTransport.h"
+#include "FT02_LoRaNodeRuntime.h"
+#include "FT02_LoRaCommunicationRuntime.h"
+#include "FT02_CommunicationNodeUI.h"
+#include "FT02_PinyinLearning.h"
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include <math.h>
+#include <time.h>
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 constexpr int EPD_PWR  = 18;
 constexpr int EPD_BUSY = 3;
@@ -64,17 +81,56 @@ static int g_ft02LastShownMinute = -1;
 static int g_ft02HomeSelectedCard = 0;
 static FT02PageState g_ft02PageState = FT02_PAGE_HOME;
 static FT02PageState g_ft02PageBeforeHelp = FT02_PAGE_HOME;
+static bool g_ft02MapGrayActive = false;
 static bool g_ft02RuntimeBannerPrinted = false;
+static bool g_ft02CommunicationReadyPresented = false;
+static bool g_ft02LastLoRaLinkState = false;
+static bool g_ft02LastLoRaReadyState = false;
+static uint32_t g_ft02LastCommunicationRevision = 0;
+static uint16_t g_ft02LastLoRaUnread = 0;
 static uint32_t g_ft02RecorderLastUiGeneration = 0;
 static uint32_t g_ft02RecorderLastGnssGeneration = 0;
 static uint32_t g_ft02RecorderLastScreenRefreshMs = 0;
+static uint16_t g_ft02LocationLogSelectedIndex = 0;
+static uint32_t g_ft02LocationLogLastGeneration = 0;
+static FT02PageState g_ft02LocationLogDeleteReturnPage = FT02_PAGE_LOCATION_LOG_LIST;
+static uint16_t g_ft02AudioLogSelectedIndex = 0;
+static uint32_t g_ft02AudioLogLastGeneration = 0;
+static bool g_ft02AudioCommandReleaseRequired = false;
+static uint32_t g_ft02AudioLastShownRecordBucket = 0xFFFFFFFFu;
+static uint32_t g_ft02AudioLastShownPlayBucket = 0xFFFFFFFFu;
+static uint8_t g_ft02AudioLastShownVolume = 0xFFu;
+constexpr uint32_t FT02_AUDIO_TIMER_REFRESH_MS = 5000u;
+constexpr uint32_t FT02_RECORDER_UI_REFRESH_MS = 15000UL;
 static char g_ft02LastGnssStatusLine1[16] = "";
 static char g_ft02LastGnssStatusLine2[16] = "";
+static bool g_ft02MapFollowGnss = true;
+static bool g_ft02MapHasTrackedFix = false;
+static bool g_ft02MapLastFixValid = false;
+static double g_ft02MapLastFollowLat = 0.0;
+static double g_ft02MapLastFollowLon = 0.0;
+static uint32_t g_ft02MapLastFollowRefreshMs = 0;
+static bool g_ft02MapRefreshPending = false;
+static uint32_t g_ft02MapRefreshDeadlineMs = 0;
+static int g_ft02MapPendingZoomFrom = 0;
+constexpr uint32_t FT02_MAP_FOLLOW_REFRESH_MS = 15000UL;
+constexpr double FT02_MAP_FOLLOW_DISTANCE_METERS = 12.0;
+constexpr uint32_t FT02_MAP_ZOOM_SETTLE_MS = 450UL;
 
 static void FT02_RedrawCurrentPage();
 static void FT02_ReinitializeEpdFullMode(const char* source);
 static void FT02_DrawKnowledgeAfterCleanTransition(const char* source);
 static void FT02_SyncGnssStatusBar(bool allowPartialRefresh);
+static void FT02_UpdateMapGnssFollow();
+static void FT02_RunDirectPbfMap(bool resetDefault, bool showLoading);
+static bool FT02_CommitGrayMap(const char* source);
+static void FT02_EnsureBwAfterGrayMap(const char* source);
+static void FT02_ScheduleMapZoomRefresh(int originalZoom);
+static void FT02_ProcessPendingMapRefresh();
+static void FT02_CancelPendingMapRefresh(const char* source);
+static void FT02_OpenAudioLogListPage(bool reload);
+static void FT02_ClampAudioLogSelection();
+static bool FT02_ArmAudioCommandAfterRelease();
 
 static int FT02_MonthFromBuildString(const char* mon)
 {
@@ -177,15 +233,39 @@ static FT02DateTime FT02_ReadBuildDateTime()
 
 static FT02DateTime FT02_CurrentDateTime()
 {
+    // Once GNSS has set the ESP32 UTC clock, localtime_r() applies the
+    // fixed UTC+8 timezone configured by FT02_GnssBegin().  Before the first
+    // valid GNSS date/time arrives, retain the proven build-time fallback.
+    const time_t systemNow = time(nullptr);
+    if(systemNow >= 1704067200) // 2024-01-01 UTC sanity threshold
+    {
+        struct tm localTm = {};
+        localtime_r(&systemNow, &localTm);
+        FT02DateTime dt;
+        dt.year = localTm.tm_year + 1900;
+        dt.month = localTm.tm_mon + 1;
+        dt.day = localTm.tm_mday;
+        dt.hour = localTm.tm_hour;
+        dt.minute = localTm.tm_min;
+        return dt;
+    }
+
     FT02DateTime dt = g_ft02BootDateTime;
-
-    uint32_t elapsedMinutes = (millis() - g_ft02BootMillis) / 60000UL;
-    FT02_AddMinutes(
-        dt,
-        elapsedMinutes
-    );
-
+    const uint32_t elapsedMinutes = (millis() - g_ft02BootMillis) / 60000UL;
+    FT02_AddMinutes(dt, elapsedMinutes);
     return dt;
+}
+
+static int FT02_DateTimeMinuteKey(const FT02DateTime& dt)
+{
+    return (((dt.month * 32 + dt.day) * 24 + dt.hour) * 60 + dt.minute);
+}
+
+static bool FT02_IsNativeGrayPage()
+{
+    // The production map owns the SSD1677 four-gray LUT and both RAM planes.
+    // Never mix one-bit partial updates into it.
+    return g_ft02PageState == FT02_PAGE_MAP;
 }
 
 static void FT02_UpdateClockCacheOnly()
@@ -199,7 +279,7 @@ static void FT02_UpdateClockCacheOnly()
     snprintf(mmdd, sizeof(mmdd), "%02d/%02d", now.month, now.day);
 
     FT02_SetStatusBarClockCache(hhmm, mmdd);
-    g_ft02LastShownMinute = now.hour * 60 + now.minute;
+    g_ft02LastShownMinute = FT02_DateTimeMinuteKey(now);
 
     Serial.print("Clock cache: ");
     Serial.print(hhmm);
@@ -210,10 +290,20 @@ static void FT02_UpdateClockCacheOnly()
 static void FT02_UpdateClockIfNeeded(bool force)
 {
     FT02DateTime now = FT02_CurrentDateTime();
-    int minuteKey = now.hour * 60 + now.minute;
+    int minuteKey = FT02_DateTimeMinuteKey(now);
 
     if(!force && minuteKey == g_ft02LastShownMinute)
     {
+        return;
+    }
+
+    // The production four-gray map owns the SSD1677 LUT and both RAM
+    // bit planes. Never let the normal GxEPD2 one-bit status-bar path write
+    // into the controller until the page has been exited and reinitialized.
+    if(FT02_IsNativeGrayPage())
+    {
+        FT02_UpdateClockCacheOnly();
+        Serial.println("[GRAY4] clock cache updated; one-bit partial refresh suppressed");
         return;
     }
 
@@ -318,7 +408,13 @@ static void FT02_SyncGnssStatusBar(bool allowPartialRefresh)
     // performs a full page refresh for meaningful GNSS state changes.
     if(allowPartialRefresh &&
        g_ft02PageState != FT02_PAGE_KNOWLEDGE &&
-       g_ft02PageState != FT02_PAGE_LOCATION_RECORDER)
+       g_ft02PageState != FT02_PAGE_LOCATION_RECORDER &&
+       g_ft02PageState != FT02_PAGE_LOCATION_LOG_LIST &&
+       g_ft02PageState != FT02_PAGE_LOCATION_LOG_DETAIL &&
+       g_ft02PageState != FT02_PAGE_LOCATION_LOG_DELETE_CONFIRM &&
+       g_ft02PageState != FT02_PAGE_AUDIO_LOG_LIST &&
+       g_ft02PageState != FT02_PAGE_AUDIO_LOG_DELETE_CONFIRM &&
+       !FT02_IsNativeGrayPage())
     {
         FT02_DrawStatusBarGnss(display, line1, line2);
     }
@@ -379,9 +475,11 @@ static void FT02_PrintRuntimeBannerIfNeeded()
 
     g_ft02RuntimeBannerPrinted = true;
 
-    Serial.print("FT-02 runtime alive: v2.55 Location Recorder A2 + FieldManualRuntime + PBF Map UI A3.13 SPI40, ");
+    Serial.print("FT-02 runtime alive: ");
+    Serial.print(FT02_FIRMWARE_BUILD_LABEL);
+    Serial.print(" + Location Recorder A3 + FieldManualRuntime + PBF Map UI A3.14 SPI40, ");
     Serial.print(FT02_StorageProfileText());
-    Serial.println(", Help restored, CardKB2 SDA=47 SCL=21");
+    Serial.println(", production gray map, Help restored, CardKB2 SDA=47 SCL=21");
     Serial.flush();
 }
 
@@ -419,6 +517,94 @@ static void FT02_ReinitializeEpdFullMode(const char* source)
     Serial.println("[EPD] clean full-mode reinit complete");
 }
 
+static void FT02_PrepareCleanGrayTransition(const char* source)
+{
+    Serial.print("[GRAY4] clean transition begin source=");
+    Serial.println(source != nullptr ? source : "unknown");
+
+    // A raw four-gray refresh does not inherit GxEPD2's previous/current RAM
+    // history. Restore the proven full-refresh driver first and drive the
+    // entire panel to white before loading the grayscale LUT. This prevents
+    // the previous black-white page from remaining as an inverted ghost.
+    FT02_ReinitializeEpdFullMode("gray4-preclear-reinit");
+    display.setFullWindow();
+    display.firstPage();
+    do
+    {
+        display.fillScreen(GxEPD_WHITE);
+    } while(display.nextPage());
+    display.epd2.powerOff();
+    delay(40);
+
+    Serial.println("[GRAY4] clean transition white frame complete");
+}
+
+static bool FT02_CommitGrayMap(const char* source)
+{
+    const bool continuingGraySession = g_ft02MapGrayActive;
+
+    Serial.print("[GRAY4-MAP] production commit begin source=");
+    Serial.print(source != nullptr ? source : "unknown");
+    Serial.print(" transition=");
+    Serial.println(continuingGraySession ? "gray-to-gray-single" : "bw-to-gray-clean");
+
+    // Entering the production map from a normal one-bit page still needs one
+    // clean white transition, otherwise the old status bar can remain in the
+    // first four-gray frame. Once a valid four-gray map is already displayed,
+    // do not submit another visible white frame for pan/zoom/follow updates.
+    // The raw driver writes the complete 800x480 two-plane frame, so a direct
+    // gray-to-gray full update is the single visible transaction we need.
+    if(!continuingGraySession)
+    {
+        FT02_PrepareCleanGrayTransition(source);
+    }
+    else
+    {
+        Serial.println("[GRAY4-MAP] retained gray session; white preclear skipped");
+    }
+
+    // Block all one-bit status writes while the panel is being re-powered and
+    // the complete four-gray frame is committed.
+    g_ft02MapGrayActive = false;
+    digitalWrite(EPD_PWR, LOW);
+    delay(160);
+    digitalWrite(EPD_PWR, HIGH);
+    delay(160);
+
+    const FT02GrayMapReport report = FT02_DrawGrayMapScreen(
+        g_ft02EpdSpi,
+        EPD_SPI_HZ,
+        EPD_PWR,
+        EPD_BUSY,
+        EPD_RST,
+        EPD_DC,
+        EPD_CS
+    );
+
+    g_ft02MapGrayActive = report.success;
+    Serial.printf(
+        "[GRAY4-MAP] production commit success=%s init=%s refresh=%s sleep=%s transaction=%s aa_font=yes buildings=outline-only render=%lums total=%lums message=%s\n",
+        report.success ? "yes" : "no",
+        report.panelInitialized ? "yes" : "no",
+        report.refreshCompleted ? "yes" : "no",
+        report.panelQuiesced ? "yes" : "no",
+        continuingGraySession ? "single-gray" : "clean-plus-gray",
+        static_cast<unsigned long>(report.renderMs),
+        static_cast<unsigned long>(report.elapsedMs),
+        report.message != nullptr ? report.message : "--"
+    );
+    return report.success;
+}
+
+static void FT02_EnsureBwAfterGrayMap(const char* source)
+{
+    if(!g_ft02MapGrayActive) return;
+    Serial.print("[GRAY4-MAP] leave production gray mode source=");
+    Serial.println(source != nullptr ? source : "unknown");
+    g_ft02MapGrayActive = false;
+    FT02_ReinitializeEpdFullMode(source);
+}
+
 static void FT02_DrawKnowledgeAfterCleanTransition(const char* source)
 {
     // v2.48: keep the controller power-cycle/full-mode reinitialization that
@@ -440,9 +626,22 @@ static void FT02_RedrawCurrentPage()
 
     if(g_ft02PageState == FT02_PAGE_MAP)
     {
-        // Map rendering owns only Y=76..479. The top status bar remains in
-        // place, so pan/zoom never re-queries or refreshes SD information.
-        FT02_DrawPbfMapScreen(display);
+        const FT02PbfMapReport& mapReport = FT02_PbfMapReportCurrent();
+        if(mapReport.state == FT02_PBF_MAP_READY)
+        {
+            if(!FT02_CommitGrayMap("map-production-redraw"))
+            {
+                Serial.println("[GRAY4-MAP] production commit failed; using safe black-white fallback");
+                g_ft02MapGrayActive = false;
+                FT02_ReinitializeEpdFullMode("map-gray-fallback");
+                FT02_DrawPbfMapScreen(display);
+            }
+        }
+        else
+        {
+            FT02_EnsureBwAfterGrayMap("map-loading-or-error");
+            FT02_DrawPbfMapScreen(display);
+        }
         return;
     }
 
@@ -453,6 +652,48 @@ static void FT02_RedrawCurrentPage()
             FT02_GnssSnapshotCurrent(),
             FT02_LocationRecorderSnapshotCurrent()
         );
+    }
+    else if(g_ft02PageState == FT02_PAGE_LOCATION_LOG_LIST)
+    {
+        FT02_DrawLocationLogListScreen(display, g_ft02LocationLogSelectedIndex);
+    }
+    else if(g_ft02PageState == FT02_PAGE_LOCATION_LOG_DETAIL)
+    {
+        FT02_DrawLocationLogDetailScreen(display, g_ft02LocationLogSelectedIndex);
+    }
+    else if(g_ft02PageState == FT02_PAGE_LOCATION_LOG_DELETE_CONFIRM)
+    {
+        FT02LocationLogEntry entry;
+        if(FT02_LocationLogGetNewest(g_ft02LocationLogSelectedIndex, entry))
+        {
+            FT02_DrawLocationLogDeleteConfirmScreen(display, entry);
+        }
+        else
+        {
+            g_ft02PageState = FT02_PAGE_LOCATION_LOG_LIST;
+            FT02_DrawLocationLogListScreen(display, g_ft02LocationLogSelectedIndex);
+        }
+    }
+    else if(g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST)
+    {
+        FT02_DrawAudioLogListScreen(display, g_ft02AudioLogSelectedIndex);
+    }
+    else if(g_ft02PageState == FT02_PAGE_AUDIO_LOG_DELETE_CONFIRM)
+    {
+        FT02AudioLogEntry entry;
+        if(FT02_AudioLogGetNewest(g_ft02AudioLogSelectedIndex, entry))
+        {
+            FT02_DrawAudioLogDeleteConfirmScreen(display, entry);
+        }
+        else
+        {
+            g_ft02PageState = FT02_PAGE_AUDIO_LOG_LIST;
+            FT02_DrawAudioLogListScreen(display, g_ft02AudioLogSelectedIndex);
+        }
+    }
+    else if(g_ft02PageState == FT02_PAGE_COMMUNICATION)
+    {
+        FT02_DrawCommunicationNodeScreen(display);
     }
     else if(g_ft02PageState == FT02_PAGE_HELP)
     {
@@ -477,6 +718,11 @@ static void FT02_OpenHelpPage()
     }
 
     g_ft02PageBeforeHelp = g_ft02PageState;
+    if(g_ft02PageBeforeHelp == FT02_PAGE_MAP)
+    {
+        FT02_CancelPendingMapRefresh("map-to-help");
+        FT02_EnsureBwAfterGrayMap("map-to-help");
+    }
     g_ft02PageState = FT02_PAGE_HELP;
 
     Serial.print("Page: ");
@@ -498,6 +744,8 @@ static void FT02_ReturnHomePage()
 
     if(g_ft02PageState == FT02_PAGE_MAP)
     {
+        FT02_CancelPendingMapRefresh("map-to-home");
+        FT02_EnsureBwAfterGrayMap("map-to-home");
         FT02_PbfMapUnload();
     }
 
@@ -542,11 +790,103 @@ static void FT02_ReturnFromHelpPage()
     FT02_RedrawCurrentPage();
 }
 
-static void FT02_RunDirectPbfMap(bool recenter, bool showLoading)
+static double FT02_MapDistanceMeters(
+    double lat1,
+    double lon1,
+    double lat2,
+    double lon2
+)
 {
-    if(recenter)
+    constexpr double earthRadiusMeters = 6371000.0;
+    const double toRadians = M_PI / 180.0;
+    const double p1 = lat1 * toRadians;
+    const double p2 = lat2 * toRadians;
+    const double dp = (lat2 - lat1) * toRadians;
+    const double dl = (lon2 - lon1) * toRadians;
+    const double a = sin(dp * 0.5) * sin(dp * 0.5) +
+        cos(p1) * cos(p2) * sin(dl * 0.5) * sin(dl * 0.5);
+    const double c = 2.0 * atan2(sqrt(a), sqrt(1.0 - a));
+    return earthRadiusMeters * c;
+}
+
+static bool FT02_MapCenterOnCurrentGnss()
+{
+    const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+    if(!gnss.fixValid || !gnss.hasPosition) return false;
+
+    FT02_PbfMapSetCenter(gnss.longitude, gnss.latitude);
+    g_ft02MapHasTrackedFix = true;
+    g_ft02MapLastFixValid = true;
+    g_ft02MapLastFollowLat = gnss.latitude;
+    g_ft02MapLastFollowLon = gnss.longitude;
+    g_ft02MapLastFollowRefreshMs = millis();
+    return true;
+}
+
+static void FT02_CancelPendingMapRefresh(const char* source)
+{
+    if(!g_ft02MapRefreshPending) return;
+
+    Serial.print("[MAP-A3.14] pending zoom refresh cancelled source=");
+    Serial.println(source != nullptr ? source : "unknown");
+    g_ft02MapRefreshPending = false;
+    g_ft02MapRefreshDeadlineMs = 0;
+    g_ft02MapPendingZoomFrom = 0;
+}
+
+static void FT02_ScheduleMapZoomRefresh(int originalZoom)
+{
+    if(!g_ft02MapRefreshPending)
+    {
+        g_ft02MapPendingZoomFrom = originalZoom;
+    }
+
+    g_ft02MapRefreshPending = true;
+    g_ft02MapRefreshDeadlineMs = millis() + FT02_MAP_ZOOM_SETTLE_MS;
+    Serial.printf(
+        "[MAP-A3.14] zoom refresh queued from=Z%d target=Z%d settle=%lums\n",
+        g_ft02MapPendingZoomFrom,
+        FT02_PbfMapZoomCurrent(),
+        static_cast<unsigned long>(FT02_MAP_ZOOM_SETTLE_MS)
+    );
+}
+
+static void FT02_ProcessPendingMapRefresh()
+{
+    if(!g_ft02MapRefreshPending) return;
+
+    if(g_ft02PageState != FT02_PAGE_MAP)
+    {
+        FT02_CancelPendingMapRefresh("page-changed");
+        return;
+    }
+
+    const uint32_t now = millis();
+    if(static_cast<int32_t>(now - g_ft02MapRefreshDeadlineMs) < 0)
+    {
+        return;
+    }
+
+    const int fromZoom = g_ft02MapPendingZoomFrom;
+    const int targetZoom = FT02_PbfMapZoomCurrent();
+    g_ft02MapRefreshPending = false;
+    g_ft02MapRefreshDeadlineMs = 0;
+    g_ft02MapPendingZoomFrom = 0;
+
+    Serial.printf(
+        "[MAP-A3.14] queued zoom commit from=Z%d target=Z%d one-render=yes\n",
+        fromZoom,
+        targetZoom
+    );
+    FT02_RunDirectPbfMap(false, false);
+}
+
+static void FT02_RunDirectPbfMap(bool resetDefault, bool showLoading)
+{
+    if(resetDefault)
     {
         FT02_PbfMapResetView();
+        g_ft02MapHasTrackedFix = false;
     }
 
     FT02_PbfMapPrepare();
@@ -560,6 +900,61 @@ static void FT02_RunDirectPbfMap(bool recenter, bool showLoading)
     FT02_RedrawCurrentPage();
 }
 
+static void FT02_UpdateMapGnssFollow()
+{
+    if(g_ft02PageState != FT02_PAGE_MAP || !g_ft02MapFollowGnss) return;
+    if(g_ft02MapRefreshPending) return;
+
+    const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+    const bool fixChanged = gnss.fixValid != g_ft02MapLastFixValid;
+    g_ft02MapLastFixValid = gnss.fixValid;
+
+    if(!gnss.fixValid || !gnss.hasPosition)
+    {
+        // Redraw once when a live fix becomes stale so the marker changes to
+        // the crossed last-known-position form and live values become "--".
+        if(fixChanged && FT02_PbfMapReportCurrent().state == FT02_PBF_MAP_READY)
+        {
+            FT02_RedrawCurrentPage();
+        }
+        return;
+    }
+
+    if(!g_ft02MapHasTrackedFix)
+    {
+        Serial.println("[MAP-A3.14] first GNSS fix acquired; centering map");
+        FT02_MapCenterOnCurrentGnss();
+        FT02_RunDirectPbfMap(false, true);
+        return;
+    }
+
+    const uint32_t now = millis();
+    if(now - g_ft02MapLastFollowRefreshMs < FT02_MAP_FOLLOW_REFRESH_MS)
+    {
+        return;
+    }
+
+    const double movedMeters = FT02_MapDistanceMeters(
+        g_ft02MapLastFollowLat,
+        g_ft02MapLastFollowLon,
+        gnss.latitude,
+        gnss.longitude
+    );
+    if(movedMeters < FT02_MAP_FOLLOW_DISTANCE_METERS)
+    {
+        return;
+    }
+
+    Serial.printf(
+        "[MAP-A3.14] follow update moved=%.1fm center=%.6f,%.6f\n",
+        movedMeters,
+        gnss.latitude,
+        gnss.longitude
+    );
+    FT02_MapCenterOnCurrentGnss();
+    FT02_RunDirectPbfMap(false, false);
+}
+
 static void FT02_OpenMapPage()
 {
     if(g_ft02PageState == FT02_PAGE_MAP)
@@ -568,12 +963,29 @@ static void FT02_OpenMapPage()
     }
 
     g_ft02PageState = FT02_PAGE_MAP;
-    Serial.println("Page: HOME -> DIRECT PBF MAP A3.13");
+    g_ft02MapRefreshPending = false;
+    g_ft02MapRefreshDeadlineMs = 0;
+    g_ft02MapPendingZoomFrom = 0;
+    g_ft02MapFollowGnss = true;
+    g_ft02MapHasTrackedFix = false;
+    g_ft02MapLastFixValid = false;
+
+    if(!FT02_MapCenterOnCurrentGnss())
+    {
+        FT02_PbfMapResetView();
+        Serial.println("[MAP-A3.14] no live GNSS fix; opening at default center");
+    }
+
+    Serial.println("Page: HOME -> DIRECT PBF MAP A3.14 GNSS FOLLOW");
     FT02_RunDirectPbfMap(false, true);
 }
 
 static void FT02_OpenLocationRecorderPage()
 {
+    // Location-log SD loading is owned by a background task. Leaving the list
+    // must not touch its FILE handle or wait for cancellation; let it finish
+    // and keep the cache warm for the next visit.
+    FT02_ReleaseLocationLogDetailMap();
     if(g_ft02PageState == FT02_PAGE_LOCATION_RECORDER)
     {
         return;
@@ -584,9 +996,143 @@ static void FT02_OpenLocationRecorderPage()
     const FT02LocationRecorderSnapshot recorder = FT02_LocationRecorderSnapshotCurrent();
     g_ft02RecorderLastGnssGeneration = gnss.uiGeneration;
     g_ft02RecorderLastUiGeneration = recorder.uiGeneration;
-    g_ft02RecorderLastScreenRefreshMs = millis();
     Serial.println("Page: HOME -> LOCATION RECORDER A3 RX39 TX38 38400");
     FT02_RedrawCurrentPage();
+    // Start the live-refresh interval only after the blocking e-paper commit
+    // has completed. This prevents a long refresh from consuming the next
+    // refresh window before input polling gets another turn.
+    g_ft02RecorderLastScreenRefreshMs = millis();
+}
+
+static void FT02_ClampLocationLogSelection()
+{
+    const FT02LocationLogStatus status = FT02_LocationLogStatusCurrent();
+    if(status.count == 0)
+    {
+        g_ft02LocationLogSelectedIndex = 0;
+    }
+    else if(g_ft02LocationLogSelectedIndex >= status.count)
+    {
+        g_ft02LocationLogSelectedIndex = static_cast<uint16_t>(status.count - 1U);
+    }
+}
+
+static void FT02_OpenLocationLogListPage(bool reload)
+{
+    FT02_ReleaseLocationLogDetailMap();
+    g_ft02PageState = FT02_PAGE_LOCATION_LOG_LIST;
+    g_ft02LocationLogSelectedIndex = 0;
+
+    if(reload)
+    {
+        FT02_LocationLogStartReload();
+    }
+    FT02_ClampLocationLogSelection();
+    g_ft02LocationLogLastGeneration = FT02_LocationLogStatusCurrent().generation;
+
+    const FT02LocationLogStatus status = FT02_LocationLogStatusCurrent();
+    Serial.printf(
+        "Page: LOCATION RECORDER -> LOCATION LOG LIST loading=%d count=%u selected=%u\n",
+        status.loading ? 1 : 0,
+        static_cast<unsigned int>(status.count),
+        static_cast<unsigned int>(g_ft02LocationLogSelectedIndex)
+    );
+    FT02_RedrawCurrentPage();
+}
+
+static bool FT02_OpenLocationLogDetailPage()
+{
+    FT02LocationLogEntry entry;
+    if(!FT02_LocationLogGetNewest(g_ft02LocationLogSelectedIndex, entry))
+    {
+        return false;
+    }
+
+    FT02_PrepareLocationLogDetailMap(g_ft02LocationLogSelectedIndex);
+    g_ft02PageState = FT02_PAGE_LOCATION_LOG_DETAIL;
+    Serial.printf(
+        "Page: LOCATION LOG LIST -> DETAIL session=%s\n",
+        entry.sessionId
+    );
+    FT02_RedrawCurrentPage();
+    return true;
+}
+
+static bool FT02_OpenLocationLogDeleteConfirmPage(FT02PageState returnPage)
+{
+    FT02LocationLogEntry entry;
+    if(!FT02_LocationLogGetNewest(g_ft02LocationLogSelectedIndex, entry))
+    {
+        return false;
+    }
+    if(entry.active)
+    {
+        Serial.printf(
+            "[LOCATION-LOG] delete blocked for active session=%s\n",
+            entry.sessionId
+        );
+        return false;
+    }
+
+    g_ft02LocationLogDeleteReturnPage = returnPage;
+    g_ft02PageState = FT02_PAGE_LOCATION_LOG_DELETE_CONFIRM;
+    FT02_RedrawCurrentPage();
+    return true;
+}
+
+
+static bool FT02_ArmAudioCommandAfterRelease()
+{
+    if(g_ft02AudioCommandReleaseRequired)
+    {
+        Serial.println("[AUDIO-UI] command ignored until key release");
+        return false;
+    }
+    g_ft02AudioCommandReleaseRequired = true;
+    return true;
+}
+
+static void FT02_ClampAudioLogSelection()
+{
+    const FT02AudioLogStatus status = FT02_AudioLogStatusCurrent();
+    if(status.count == 0)
+    {
+        g_ft02AudioLogSelectedIndex = 0;
+    }
+    else if(g_ft02AudioLogSelectedIndex >= status.count)
+    {
+        g_ft02AudioLogSelectedIndex = static_cast<uint16_t>(status.count - 1u);
+    }
+}
+
+static void FT02_OpenAudioLogListPage(bool reload)
+{
+    if(reload)
+    {
+        FT02_AudioLogReload();
+    }
+    FT02_ClampAudioLogSelection();
+    g_ft02AudioLogLastGeneration = FT02_AudioLogStatusCurrent().generation;
+    g_ft02AudioLastShownRecordBucket = 0xFFFFFFFFu;
+    g_ft02AudioLastShownPlayBucket = 0xFFFFFFFFu;
+    g_ft02AudioLastShownVolume = 0xFFu;
+    g_ft02PageState = FT02_PAGE_AUDIO_LOG_LIST;
+    Serial.printf(
+        "Page: HOME -> AUDIO LOG LIST count=%u selected=%u\n",
+        static_cast<unsigned int>(FT02_AudioLogStatusCurrent().count),
+        static_cast<unsigned int>(g_ft02AudioLogSelectedIndex)
+    );
+    FT02_RedrawCurrentPage();
+}
+
+static bool FT02_OpenAudioLogDeleteConfirmPage()
+{
+    if(FT02_AudioLogIsBusy()) return false;
+    FT02AudioLogEntry entry;
+    if(!FT02_AudioLogGetNewest(g_ft02AudioLogSelectedIndex, entry)) return false;
+    g_ft02PageState = FT02_PAGE_AUDIO_LOG_DELETE_CONFIRM;
+    FT02_RedrawCurrentPage();
+    return true;
 }
 
 
@@ -599,12 +1145,60 @@ static void FT02_OpenKnowledgePage()
 
     FT02_KnowledgeReset();
     g_ft02PageState = FT02_PAGE_KNOWLEDGE;
-    Serial.println("Page: HOME -> FIELD MANUAL RUNTIME A1 v2.58");
+    Serial.print("Page: HOME -> FIELD MANUAL RUNTIME A1 ");
+    Serial.println(FT02_FIRMWARE_VERSION);
 
     // v2.48 optimization: preserve the proven controller power-cycle and
     // full-mode reinitialization, then submit the final knowledge page as the
     // first frame. This removes the separate visible white refresh.
     FT02_DrawKnowledgeAfterCleanTransition("home-enter-knowledge");
+}
+
+static void FT02_OpenCommunicationPage()
+{
+    if(g_ft02PageState == FT02_PAGE_COMMUNICATION) return;
+
+    g_ft02PageState = FT02_PAGE_COMMUNICATION;
+    FT02_CommunicationUIOpen();
+    g_ft02CommunicationReadyPresented = FT02_LoRaNodeRuntimeReady();
+    g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
+    g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
+    Serial.printf(
+        "Page: HOME -> COMMUNICATION Complete Runtime A1 ready=%d nodes=%u\n",
+        g_ft02CommunicationReadyPresented ? 1 : 0,
+        static_cast<unsigned>(FT02_LoRaNodeRuntimeNodeCount())
+    );
+    FT02_RedrawCurrentPage();
+}
+
+static bool FT02_HandleCommunicationInput(
+    const FT02InputEvent& event
+)
+{
+    const FT02CommunicationInputResult result = FT02_CommunicationUIHandleInput(event);
+    if(result == FT02_COMM_INPUT_EXIT_HOME)
+    {
+        FT02_ReturnHomePage();
+        return true;
+    }
+    if(result == FT02_COMM_INPUT_OPEN_HELP)
+    {
+        FT02_OpenHelpPage();
+        return true;
+    }
+    if(result == FT02_COMM_INPUT_REDRAW)
+    {
+        // Manual R resync resets NodeRuntime immediately. Mirror the real
+        // readiness state here so the later READY transition is observable.
+        // v2.70a left this flag true, which made the communication page remain
+        // visually stuck at “同步中” even after NodeDB had recovered to READY.
+        g_ft02CommunicationReadyPresented = FT02_LoRaNodeRuntimeReady();
+        g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
+        g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
+        FT02_RedrawCurrentPage();
+        return true;
+    }
+    return result != FT02_COMM_INPUT_NONE;
 }
 
 static bool FT02_HandleHomeInput(
@@ -662,9 +1256,21 @@ static bool FT02_HandleHomeInput(
             return true;
         }
 
+        if(g_ft02HomeSelectedCard == 2)
+        {
+            FT02_OpenAudioLogListPage(true);
+            return true;
+        }
+
         if(g_ft02HomeSelectedCard == 3)
         {
             FT02_OpenLocationRecorderPage();
+            return true;
+        }
+
+        if(g_ft02HomeSelectedCard == 5)
+        {
+            FT02_OpenCommunicationPage();
             return true;
         }
 
@@ -715,6 +1321,7 @@ static bool FT02_HandleHelpInput(
     if(event.key == FT02_KEY_HELP)
     {
         Serial.println("Help page already open");
+        return false;
     }
 
     return false;
@@ -726,27 +1333,32 @@ static bool FT02_HandleMapInput(
 {
     if(event.key == FT02_KEY_BACK)
     {
+        FT02_CancelPendingMapRefresh("back");
         FT02_ReturnHomePage();
         return true;
     }
 
     if(event.key == FT02_KEY_HELP)
     {
+        FT02_CancelPendingMapRefresh("help");
         FT02_OpenHelpPage();
         return true;
     }
 
     if(event.key == FT02_KEY_SELECT)
     {
+        FT02_CancelPendingMapRefresh("manual-refresh");
         FT02_RunDirectPbfMap(false, false);
         return true;
     }
 
-    const int currentZoom = FT02_PbfMapReportCurrent().zoom;
+    const int currentZoom = FT02_PbfMapZoomCurrent();
     const int panStep = currentZoom <= 16 ? 16 : (currentZoom == 17 ? 32 : 64);
 
     if(event.key == FT02_KEY_LEFT)
     {
+        FT02_CancelPendingMapRefresh("pan");
+        g_ft02MapFollowGnss = false;
         FT02_PbfMapMovePixels(-panStep, 0);
         FT02_RunDirectPbfMap(false, false);
         return true;
@@ -754,6 +1366,8 @@ static bool FT02_HandleMapInput(
 
     if(event.key == FT02_KEY_RIGHT)
     {
+        FT02_CancelPendingMapRefresh("pan");
+        g_ft02MapFollowGnss = false;
         FT02_PbfMapMovePixels(panStep, 0);
         FT02_RunDirectPbfMap(false, false);
         return true;
@@ -761,6 +1375,8 @@ static bool FT02_HandleMapInput(
 
     if(event.key == FT02_KEY_UP)
     {
+        FT02_CancelPendingMapRefresh("pan");
+        g_ft02MapFollowGnss = false;
         FT02_PbfMapMovePixels(0, -panStep);
         FT02_RunDirectPbfMap(false, false);
         return true;
@@ -768,6 +1384,8 @@ static bool FT02_HandleMapInput(
 
     if(event.key == FT02_KEY_DOWN)
     {
+        FT02_CancelPendingMapRefresh("pan");
+        g_ft02MapFollowGnss = false;
         FT02_PbfMapMovePixels(0, panStep);
         FT02_RunDirectPbfMap(false, false);
         return true;
@@ -778,35 +1396,45 @@ static bool FT02_HandleMapInput(
         char raw = event.raw;
         if(raw == 'q' || raw == 'Q' || raw == '+' || raw == '=')
         {
-            const int before = FT02_PbfMapReportCurrent().zoom;
-            Serial.printf("[MAP-A3.13] zoom-in key raw=0x%02X before=%d\n", (unsigned char)raw, before);
+            const int before = FT02_PbfMapZoomCurrent();
+            Serial.printf("[MAP-A3.14] zoom-in key raw=0x%02X before=%d\n", (unsigned char)raw, before);
             if(FT02_PbfMapChangeZoom(1))
             {
-                FT02_RunDirectPbfMap(false, false);
+                FT02_ScheduleMapZoomRefresh(before);
             }
             return true;
         }
         if(raw == 'e' || raw == 'E' || raw == '-' || raw == '_')
         {
-            const int before = FT02_PbfMapReportCurrent().zoom;
-            Serial.printf("[MAP-A3.13] zoom-out key raw=0x%02X before=%d\n", (unsigned char)raw, before);
+            const int before = FT02_PbfMapZoomCurrent();
+            Serial.printf("[MAP-A3.14] zoom-out key raw=0x%02X before=%d\n", (unsigned char)raw, before);
             if(FT02_PbfMapChangeZoom(-1))
             {
-                FT02_RunDirectPbfMap(false, false);
+                FT02_ScheduleMapZoomRefresh(before);
             }
             return true;
         }
-        if(raw == 'r' || raw == 'R')
+        if(event.command == 'r')
         {
-            // Recenter can trigger a cache lookup or a first-time regional
-            // cache build. Draw the existing LOADING state before that work
-            // starts so the e-paper screen never appears frozen.
-            Serial.println("[MAP-A3.13] R recenter requested; showing loading hint before map build");
-            FT02_RunDirectPbfMap(true, true);
+            FT02_CancelPendingMapRefresh("recenter");
+            // R now means "return to my position".  When no live fix exists,
+            // keep the previous safe behavior and return to the WGS-84 default.
+            g_ft02MapFollowGnss = true;
+            if(FT02_MapCenterOnCurrentGnss())
+            {
+                Serial.println("[MAP-A3.14] R recenter to live GNSS position");
+                FT02_RunDirectPbfMap(false, true);
+            }
+            else
+            {
+                Serial.println("[MAP-A3.14] R requested without fix; using default center");
+                FT02_RunDirectPbfMap(true, true);
+            }
             return true;
         }
-        if(raw == 'f' || raw == 'F')
+        if(event.command == 'f')
         {
+            FT02_CancelPendingMapRefresh("force-cache-rebuild");
             FT02_PbfMapInvalidateCache();
             FT02_RunDirectPbfMap(false, true);
             return true;
@@ -820,6 +1448,14 @@ static bool FT02_HandleLocationRecorderInput(
     const FT02InputEvent& event
 )
 {
+    // Event-only trace: no periodic spam, but every deliberate recorder-page
+    // key gives us a hard checkpoint if a future real-device stall reappears.
+    Serial.printf(
+        "[RECORDER-INPUT] key=%s raw=0x%02X cmd=%c\n",
+        FT02_InputKeyName(event.key),
+        static_cast<unsigned int>(static_cast<uint8_t>(event.raw)),
+        event.command >= 0x20 && event.command <= 0x7E ? event.command : '-'
+    );
     if(event.key == FT02_KEY_BACK)
     {
         // Leaving the recorder page must not terminate an active journey.
@@ -854,21 +1490,26 @@ static bool FT02_HandleLocationRecorderInput(
     }
     else if(event.key == FT02_KEY_CHAR)
     {
-        const char raw = event.raw;
-        if(raw == 'p' || raw == 'P')
+        const char command = event.command;
+        if(command == 'p')
         {
             FT02_LocationRecorderRecordManualPoint();
             handled = true;
         }
-        else if(raw == 'a' || raw == 'A')
+        else if(command == 'a')
         {
             FT02_LocationRecorderToggleAutoTrack();
             handled = true;
         }
-        else if(raw == 'r' || raw == 'R')
+        else if(command == 'r')
         {
             FT02_GnssReconnect();
             handled = true;
+        }
+        else if(command == 'l')
+        {
+            FT02_OpenLocationLogListPage(true);
+            return true;
         }
     }
 
@@ -878,14 +1519,361 @@ static bool FT02_HandleLocationRecorderInput(
         const FT02LocationRecorderSnapshot recorder = FT02_LocationRecorderSnapshotCurrent();
         g_ft02RecorderLastGnssGeneration = gnss.uiGeneration;
         g_ft02RecorderLastUiGeneration = recorder.uiGeneration;
-        g_ft02RecorderLastScreenRefreshMs = millis();
         FT02_DrawLocationRecorderMiddlePartial(display, gnss, recorder);
+        // Button-driven redraws are intentional. Restart the automatic UI
+        // interval only after the e-paper operation has really finished.
+        g_ft02RecorderLastScreenRefreshMs = millis();
         return true;
     }
 
     return false;
 }
 
+
+static bool FT02_HandleLocationLogListInput(
+    const FT02InputEvent& event
+)
+{
+    const FT02LocationLogStatus status = FT02_LocationLogStatusCurrent();
+
+    if(event.key == FT02_KEY_BACK)
+    {
+        FT02_OpenLocationRecorderPage();
+        return true;
+    }
+    if(event.key == FT02_KEY_HELP)
+    {
+        // Keep any location-log background read alive while Help is open.
+        // The worker never blocks CardKB/GNSS/UI.
+        FT02_OpenHelpPage();
+        return true;
+    }
+
+    // While the JSONL index is loading, keep BACK/HELP/R responsive but do
+    // not navigate partially built entries.
+    if(status.loading)
+    {
+        if(event.key == FT02_KEY_CHAR && event.command == 'r')
+        {
+            g_ft02LocationLogSelectedIndex = 0;
+            FT02_LocationLogStartReload();
+            g_ft02LocationLogLastGeneration = FT02_LocationLogStatusCurrent().generation;
+            FT02_DrawLocationLogListBodyPartial(display, g_ft02LocationLogSelectedIndex);
+            return true;
+        }
+        return false;
+    }
+
+    if(event.key == FT02_KEY_SELECT)
+    {
+        return FT02_OpenLocationLogDetailPage();
+    }
+
+    uint16_t next = g_ft02LocationLogSelectedIndex;
+    if(status.count > 0 && event.key == FT02_KEY_UP)
+    {
+        next = FT02_LocationLogWrapIndex(next, status.count, -1);
+    }
+    else if(status.count > 0 && event.key == FT02_KEY_DOWN)
+    {
+        next = FT02_LocationLogWrapIndex(next, status.count, 1);
+    }
+    else if(event.key == FT02_KEY_LEFT && status.count > 0)
+    {
+        next = FT02_LocationLogWrapIndex(next, status.count, -5);
+    }
+    else if(event.key == FT02_KEY_RIGHT && status.count > 0)
+    {
+        next = FT02_LocationLogWrapIndex(next, status.count, 5);
+    }
+    else if(event.key == FT02_KEY_CHAR)
+    {
+        const char command = event.command;
+        if(command == 'r')
+        {
+            g_ft02LocationLogSelectedIndex = 0;
+            FT02_LocationLogStartReload();
+            g_ft02LocationLogLastGeneration = FT02_LocationLogStatusCurrent().generation;
+            FT02_DrawLocationLogListBodyPartial(display, g_ft02LocationLogSelectedIndex);
+            return true;
+        }
+        if(command == 't')
+        {
+            return FT02_OpenLocationLogDeleteConfirmPage(FT02_PAGE_LOCATION_LOG_LIST);
+        }
+        return false;
+    }
+    else
+    {
+        return false;
+    }
+
+    if(next == g_ft02LocationLogSelectedIndex) return false;
+    g_ft02LocationLogSelectedIndex = next;
+    FT02_DrawLocationLogListBodyPartial(display, g_ft02LocationLogSelectedIndex);
+    return true;
+}
+
+static bool FT02_HandleLocationLogDetailInput(
+    const FT02InputEvent& event
+)
+{
+    const FT02LocationLogStatus status = FT02_LocationLogStatusCurrent();
+
+    if(event.key == FT02_KEY_BACK)
+    {
+        FT02_ReleaseLocationLogDetailMap();
+        g_ft02PageState = FT02_PAGE_LOCATION_LOG_LIST;
+        FT02_RedrawCurrentPage();
+        return true;
+    }
+    if(event.key == FT02_KEY_HELP)
+    {
+        FT02_OpenHelpPage();
+        return true;
+    }
+
+    uint16_t next = g_ft02LocationLogSelectedIndex;
+    if(status.count > 0 &&
+       (event.key == FT02_KEY_LEFT || event.key == FT02_KEY_UP))
+    {
+        next = FT02_LocationLogWrapIndex(next, status.count, -1);
+    }
+    else if(status.count > 0 &&
+            (event.key == FT02_KEY_RIGHT || event.key == FT02_KEY_DOWN))
+    {
+        next = FT02_LocationLogWrapIndex(next, status.count, 1);
+    }
+    else if(event.key == FT02_KEY_CHAR &&
+            event.command == 't')
+    {
+        return FT02_OpenLocationLogDeleteConfirmPage(FT02_PAGE_LOCATION_LOG_DETAIL);
+    }
+    else
+    {
+        return false;
+    }
+
+    if(next == g_ft02LocationLogSelectedIndex) return false;
+    g_ft02LocationLogSelectedIndex = next;
+    FT02_PrepareLocationLogDetailMap(g_ft02LocationLogSelectedIndex);
+    FT02_DrawLocationLogDetailBodyPartial(display, g_ft02LocationLogSelectedIndex);
+    return true;
+}
+
+static bool FT02_HandleLocationLogDeleteConfirmInput(
+    const FT02InputEvent& event
+)
+{
+    if(event.key == FT02_KEY_BACK)
+    {
+        g_ft02PageState = g_ft02LocationLogDeleteReturnPage;
+        FT02_RedrawCurrentPage();
+        return true;
+    }
+    if(event.key == FT02_KEY_HELP)
+    {
+        FT02_OpenHelpPage();
+        return true;
+    }
+    if(event.key != FT02_KEY_SELECT) return false;
+
+    FT02LocationLogEntry entry;
+    if(!FT02_LocationLogGetNewest(g_ft02LocationLogSelectedIndex, entry))
+    {
+        g_ft02PageState = FT02_PAGE_LOCATION_LOG_LIST;
+        FT02_RedrawCurrentPage();
+        return true;
+    }
+
+    const bool deleted = FT02_LocationLogDeleteSession(entry.sessionId);
+    if(deleted) FT02_ReleaseLocationLogDetailMap();
+    FT02_ClampLocationLogSelection();
+    g_ft02PageState = deleted
+        ? FT02_PAGE_LOCATION_LOG_LIST
+        : g_ft02LocationLogDeleteReturnPage;
+    FT02_RedrawCurrentPage();
+    return true;
+}
+
+
+static bool FT02_HandleAudioLogListInput(
+    const FT02InputEvent& event
+)
+{
+    const FT02AudioLogStatus status = FT02_AudioLogStatusCurrent();
+    const FT02AudioLogState state = FT02_AudioLogStateCurrent();
+
+    if(state == FT02_AUDIO_LOG_PLAYING)
+    {
+        if(event.key == FT02_KEY_UP || event.key == FT02_KEY_DOWN)
+        {
+            const int8_t delta = event.key == FT02_KEY_UP ? 1 : -1;
+            if(FT02_AudioLogAdjustPlaybackVolume(delta))
+            {
+                const FT02AudioLogStatus updated = FT02_AudioLogStatusCurrent();
+                g_ft02AudioLastShownVolume = updated.playbackVolumeLevel;
+                g_ft02AudioLastShownPlayBucket = updated.playbackElapsedMs /
+                    FT02_AUDIO_TIMER_REFRESH_MS;
+                FT02_DrawAudioLogPlayingStatusPartial(display, updated);
+                return true;
+            }
+            return false;
+        }
+
+        const bool stopKey =
+            event.key == FT02_KEY_BACK ||
+            event.key == FT02_KEY_SELECT ||
+            (event.key == FT02_KEY_CHAR &&
+             event.command == 'p');
+        if(stopKey)
+        {
+            if(!FT02_ArmAudioCommandAfterRelease()) return false;
+            const bool requested = FT02_AudioLogRequestPlaybackStop();
+            if(requested)
+            {
+                const FT02AudioLogStatus updated = FT02_AudioLogStatusCurrent();
+                FT02_DrawAudioLogPlayingStatusPartial(display, updated);
+            }
+            return requested;
+        }
+
+        Serial.println("[AUDIO-UI] input ignored while playing; UP/DOWN volume, B/ENTER/P stop");
+        return false;
+    }
+
+    if(state == FT02_AUDIO_LOG_RECORDING || state == FT02_AUDIO_LOG_POST_ROLL)
+    {
+        if(event.key == FT02_KEY_CHAR && event.command == 'r')
+        {
+            if(!FT02_ArmAudioCommandAfterRelease()) return false;
+            return FT02_AudioLogRequestStop();
+        }
+        Serial.println("[AUDIO-UI] input ignored while recording; press R to stop");
+        return false;
+    }
+
+    if(event.key == FT02_KEY_BACK)
+    {
+        FT02_ReturnHomePage();
+        return true;
+    }
+    if(event.key == FT02_KEY_HELP)
+    {
+        FT02_OpenHelpPage();
+        return true;
+    }
+
+    if(event.key == FT02_KEY_CHAR && event.command == 'r')
+    {
+        if(!FT02_ArmAudioCommandAfterRelease()) return false;
+        // Draw the initial 00:00 cue before capture starts. Later timer updates
+        // are isolated to a small window while streaming continues in the audio task.
+        FT02AudioLogStatus cueStatus = status;
+        cueStatus.recordingElapsedMs = 0;
+        cueStatus.recordingSeconds = 0;
+        cueStatus.stopRequested = false;
+        cueStatus.activeAudioId[0] = '\0';
+        FT02_DrawAudioLogRecordingBodyPartial(display, cueStatus);
+        delay(40);
+        const bool started = FT02_AudioLogStartRecording(FT02_GnssSnapshotCurrent());
+        g_ft02AudioLogLastGeneration = FT02_AudioLogStatusCurrent().generation;
+        if(started)
+        {
+            g_ft02AudioLastShownRecordBucket = 0;
+        }
+        else
+        {
+            FT02_DrawAudioLogListBodyPartial(display, g_ft02AudioLogSelectedIndex);
+        }
+        return true;
+    }
+
+    if((event.key == FT02_KEY_SELECT) ||
+       (event.key == FT02_KEY_CHAR && event.command == 'p'))
+    {
+        if(!FT02_ArmAudioCommandAfterRelease()) return false;
+        FT02AudioLogEntry entry;
+        if(!FT02_AudioLogGetNewest(g_ft02AudioLogSelectedIndex, entry)) return false;
+
+        // Start opens and scans the WAV but streaming does not begin until the
+        // background audio task runs, so the playback screen can be committed first.
+        const bool started = FT02_AudioLogPlayNewest(g_ft02AudioLogSelectedIndex);
+        g_ft02AudioLogLastGeneration = FT02_AudioLogStatusCurrent().generation;
+        if(started)
+        {
+            const FT02AudioLogStatus updated = FT02_AudioLogStatusCurrent();
+            g_ft02AudioLastShownPlayBucket = 0;
+            g_ft02AudioLastShownVolume = updated.playbackVolumeLevel;
+            FT02_DrawAudioLogPlayingBodyPartial(display, entry);
+            FT02_AudioLogReleasePlaybackStart();
+        }
+        else
+        {
+            FT02_DrawAudioLogListBodyPartial(display, g_ft02AudioLogSelectedIndex);
+        }
+        return true;
+    }
+
+    if(event.key == FT02_KEY_CHAR && event.command == 't')
+    {
+        if(!FT02_ArmAudioCommandAfterRelease()) return false;
+        return FT02_OpenAudioLogDeleteConfirmPage();
+    }
+
+    uint16_t next = g_ft02AudioLogSelectedIndex;
+    if(status.count > 0 && event.key == FT02_KEY_UP)
+    {
+        next = FT02_AudioLogWrapIndex(next, status.count, -1);
+    }
+    else if(status.count > 0 && event.key == FT02_KEY_DOWN)
+    {
+        next = FT02_AudioLogWrapIndex(next, status.count, 1);
+    }
+    else if(status.count > 0 && event.key == FT02_KEY_LEFT)
+    {
+        next = FT02_AudioLogWrapIndex(next, status.count, -5);
+    }
+    else if(status.count > 0 && event.key == FT02_KEY_RIGHT)
+    {
+        next = FT02_AudioLogWrapIndex(next, status.count, 5);
+    }
+    else
+    {
+        return false;
+    }
+
+    if(next == g_ft02AudioLogSelectedIndex) return false;
+    g_ft02AudioLogSelectedIndex = next;
+    FT02_DrawAudioLogListBodyPartial(display, g_ft02AudioLogSelectedIndex);
+    return true;
+}
+
+static bool FT02_HandleAudioLogDeleteConfirmInput(
+    const FT02InputEvent& event
+)
+{
+    if(event.key == FT02_KEY_BACK)
+    {
+        g_ft02PageState = FT02_PAGE_AUDIO_LOG_LIST;
+        FT02_RedrawCurrentPage();
+        return true;
+    }
+    if(event.key == FT02_KEY_HELP)
+    {
+        FT02_OpenHelpPage();
+        return true;
+    }
+    if(event.key != FT02_KEY_SELECT) return false;
+    if(!FT02_ArmAudioCommandAfterRelease()) return false;
+
+    (void)FT02_AudioLogDeleteNewest(g_ft02AudioLogSelectedIndex);
+    FT02_ClampAudioLogSelection();
+    g_ft02AudioLogLastGeneration = FT02_AudioLogStatusCurrent().generation;
+    g_ft02PageState = FT02_PAGE_AUDIO_LOG_LIST;
+    FT02_RedrawCurrentPage();
+    return true;
+}
 
 static bool FT02_HandleKnowledgeInput(
     const FT02InputEvent& event
@@ -937,9 +1925,39 @@ static bool FT02_HandleInput(
         return FT02_HandleKnowledgeInput(event);
     }
 
+    if(g_ft02PageState == FT02_PAGE_COMMUNICATION)
+    {
+        return FT02_HandleCommunicationInput(event);
+    }
+
     if(g_ft02PageState == FT02_PAGE_LOCATION_RECORDER)
     {
         return FT02_HandleLocationRecorderInput(event);
+    }
+
+    if(g_ft02PageState == FT02_PAGE_LOCATION_LOG_LIST)
+    {
+        return FT02_HandleLocationLogListInput(event);
+    }
+
+    if(g_ft02PageState == FT02_PAGE_LOCATION_LOG_DETAIL)
+    {
+        return FT02_HandleLocationLogDetailInput(event);
+    }
+
+    if(g_ft02PageState == FT02_PAGE_LOCATION_LOG_DELETE_CONFIRM)
+    {
+        return FT02_HandleLocationLogDeleteConfirmInput(event);
+    }
+
+    if(g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST)
+    {
+        return FT02_HandleAudioLogListInput(event);
+    }
+
+    if(g_ft02PageState == FT02_PAGE_AUDIO_LOG_DELETE_CONFIRM)
+    {
+        return FT02_HandleAudioLogDeleteConfirmInput(event);
     }
 
     return FT02_HandleHomeInput(event);
@@ -950,7 +1968,9 @@ void setup()
     Serial.begin(115200);
     delay(2000);
 
-    Serial.print("FT-02 v2.58 Optimized 20px Font Location Recorder A3 FieldManualRuntime PBF Map UI A3.13 SPI40 ");
+    Serial.print("FT-02 ");
+    Serial.print(FT02_FIRMWARE_BUILD_LABEL);
+    Serial.print(" Production Gray Map + AA Map Font + Voice Log A1 + Location Recorder A4 + FieldManualRuntime + PBF Map UI A3.14 SPI40 ");
     Serial.print(FT02_StorageProfileText());
     Serial.println(" Start");
 
@@ -1003,11 +2023,16 @@ void setup()
     Serial.println("FT02 InputManager ready: fixed pins SDA=47 SCL=21, D=UP, Z=LEFT, X=DOWN, C=RIGHT");
 
     FT02_GnssBegin();
+    FT02_LoRaTransportBegin();
     FT02_SyncGnssStatusBar(false);
 
     FT02_StorageBegin();
     FT02_RefreshStorageStatusCache();
+    FT02_PinyinLearningBegin();
     FT02_LocationRecorderBegin();
+    FT02_LocationLogBegin();
+    FT02_AudioLogBegin();
+    g_ft02AudioLogLastGeneration = FT02_AudioLogStatusCurrent().generation;
     FT02_FieldManualBegin(true);
 
     pinMode(EPD_CS, OUTPUT);
@@ -1045,7 +2070,9 @@ void setup()
         g_ft02HomeSelectedCard
     );
 
-    Serial.print("FT-02 v2.58 Optimized 20px Font Location Recorder A3 FieldManualRuntime PBF Map UI A3.13 SPI40 ");
+    Serial.print("FT-02 ");
+    Serial.print(FT02_FIRMWARE_BUILD_LABEL);
+    Serial.print(" Production Gray Map + AA Map Font + Voice Log A1 + Location Recorder A4 + FieldManualRuntime + PBF Map UI A3.14 SPI40 ");
     Serial.print(FT02_StorageProfileText());
     Serial.println(" ready");
     Serial.flush();
@@ -1054,44 +2081,198 @@ void setup()
 void loop()
 {
     FT02_PrintRuntimeBannerIfNeeded();
-    FT02_GnssPoll();
-    FT02_LocationRecorderPoll();
-    FT02_SyncGnssStatusBar(true);
 
-    if(g_ft02PageState == FT02_PAGE_LOCATION_RECORDER)
-    {
-        const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
-        const FT02LocationRecorderSnapshot recorder = FT02_LocationRecorderSnapshotCurrent();
-        const uint32_t now = millis();
-
-        // Refresh only for meaningful recorder/GNSS changes and no more often
-        // than once every five seconds. Button actions still redraw immediately.
-        const bool changed =
-            gnss.uiGeneration != g_ft02RecorderLastGnssGeneration ||
-            recorder.uiGeneration != g_ft02RecorderLastUiGeneration;
-        const bool periodicRecorderTick = recorder.sessionActive;
-
-        if((changed || periodicRecorderTick) &&
-           now - g_ft02RecorderLastScreenRefreshMs >= 5000)
-        {
-            g_ft02RecorderLastGnssGeneration = gnss.uiGeneration;
-            g_ft02RecorderLastUiGeneration = recorder.uiGeneration;
-            g_ft02RecorderLastScreenRefreshMs = now;
-            FT02_DrawLocationRecorderMiddlePartial(display, gnss, recorder);
-        }
-    }
-
-    // Real elapsed clock:
-    // refreshes only when the displayed minute changes.
-    // The date is refreshed in the same local window and rolls over at midnight.
+    // Input is a top-priority service. In particular, never place a blocking
+    // e-paper refresh ahead of CardKB polling: a long display commit can make
+    // the recorder page appear frozen and can starve short key presses.
     FT02InputEvent inputEvent = FT02_InputPoll();
+    if(FT02_InputCurrentRawKey() == 0)
+    {
+        g_ft02AudioCommandReleaseRequired = false;
+        FT02_AudioLogNotifyKeyRelease();
+    }
 
     if(inputEvent.key != FT02_KEY_NONE)
     {
         FT02_HandleInput(inputEvent);
     }
 
-    FT02_UpdateClockIfNeeded(false);
+    FT02_LoRaTransportPoll();
+    FT02_GnssPoll();
+    FT02_LocationRecorderPoll();
+    const bool locationLogLoadCompleted = FT02_LocationLogPollReload();
+    FT02_AudioLogPoll();
 
-    delay(20);
+    if(locationLogLoadCompleted && g_ft02PageState == FT02_PAGE_LOCATION_LOG_LIST)
+    {
+        FT02_ClampLocationLogSelection();
+        g_ft02LocationLogLastGeneration = FT02_LocationLogStatusCurrent().generation;
+        FT02_DrawLocationLogListBodyPartial(display, g_ft02LocationLogSelectedIndex);
+    }
+
+    const bool audioBusy = FT02_AudioLogIsBusy();
+    const bool audioCapturing = FT02_AudioLogIsCapturing();
+    if(!audioBusy)
+    {
+        // IME learning persistence shares the SD backend with audio logging.
+        // Never start a background learning snapshot while audio I/O is busy.
+        FT02_PinyinLearningPoll();
+
+        const bool loraLink = FT02_LoRaTransportLinkUp();
+        const bool loraReady = FT02_LoRaNodeRuntimeReady();
+        const uint32_t commRevision = FT02_LoRaCommunicationRevision();
+        const uint16_t loraUnread = FT02_LoRaCommunicationUnreadCount();
+        bool communicationPageRedrawn = false;
+
+        if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
+           !loraReady && g_ft02CommunicationReadyPresented)
+        {
+            // A manual R or an automatic health recovery has started a fresh
+            // radio cycle. Present the transition once instead of leaving stale
+            // “已同步” content on the communication page.
+            g_ft02CommunicationReadyPresented = false;
+            FT02_CommunicationUIOnSyncStarted("LoRa 正在重新同步...");
+            g_ft02LastLoRaLinkState = loraLink;
+            g_ft02LastLoRaReadyState = loraReady;
+            g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
+            g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
+            if(!FT02_CommunicationUIIsCompose())
+            {
+                FT02_RedrawCurrentPage();
+                communicationPageRedrawn = true;
+            }
+        }
+        else if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
+                loraReady && !g_ft02CommunicationReadyPresented)
+        {
+            // The initial/resync want_config burst can contain dozens of frames.
+            // Redraw only after the complete NodeDB is ready, and clear only the
+            // transient resync notice. Other user-facing notices are preserved.
+            g_ft02CommunicationReadyPresented = true;
+            FT02_CommunicationUIOnSyncReady();
+            g_ft02LastLoRaLinkState = loraLink;
+            g_ft02LastLoRaReadyState = loraReady;
+            if(FT02_CommunicationUIIsInbox()) FT02_LoRaCommunicationMarkAllRead();
+            g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
+            g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
+            FT02_RedrawCurrentPage();
+            communicationPageRedrawn = true;
+        }
+        else if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
+                !FT02_CommunicationUIIsCompose() &&
+                commRevision != g_ft02LastCommunicationRevision)
+        {
+            // Background receive is always live. If the user is already in the
+            // inbox, rendering the new message also counts as reading it.
+            if(FT02_CommunicationUIIsInbox()) FT02_LoRaCommunicationMarkAllRead();
+            g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
+            g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
+            FT02_RedrawCurrentPage();
+            communicationPageRedrawn = true;
+        }
+        else if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
+                FT02_CommunicationUITakeDeferredRedraw(millis()))
+        {
+            g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
+            g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
+            FT02_RedrawCurrentPage();
+            communicationPageRedrawn = true;
+        }
+
+        if(!communicationPageRedrawn && !FT02_IsNativeGrayPage() &&
+           (loraLink != g_ft02LastLoRaLinkState ||
+            loraReady != g_ft02LastLoRaReadyState ||
+            loraUnread != g_ft02LastLoRaUnread))
+        {
+            g_ft02LastLoRaLinkState = loraLink;
+            g_ft02LastLoRaReadyState = loraReady;
+            g_ft02LastLoRaUnread = loraUnread;
+            FT02_DrawStatusBarLoRa(
+                display,
+                loraReady ? "已连接" : (loraLink ? "同步中" : "连接中")
+            );
+        }
+
+        FT02_SyncGnssStatusBar(true);
+        FT02_UpdateMapGnssFollow();
+    }
+
+    if(!audioBusy && g_ft02PageState == FT02_PAGE_LOCATION_RECORDER)
+    {
+        const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+        const FT02LocationRecorderSnapshot recorder = FT02_LocationRecorderSnapshotCurrent();
+        const uint32_t now = millis();
+
+        // GNSS can change several times per second, while this device uses an
+        // e-paper panel. Treat the recorder screen as a low-rate dashboard:
+        // background data remains live, but automatic presentation refreshes
+        // are capped at 30 seconds. Button actions still redraw immediately.
+        const bool changed =
+            gnss.uiGeneration != g_ft02RecorderLastGnssGeneration ||
+            recorder.uiGeneration != g_ft02RecorderLastUiGeneration;
+        const bool periodicRecorderTick = recorder.sessionActive;
+
+        if((changed || periodicRecorderTick) &&
+           now - g_ft02RecorderLastScreenRefreshMs >= FT02_RECORDER_UI_REFRESH_MS)
+        {
+            g_ft02RecorderLastGnssGeneration = gnss.uiGeneration;
+            g_ft02RecorderLastUiGeneration = recorder.uiGeneration;
+            FT02_DrawLocationRecorderMiddlePartial(display, gnss, recorder);
+            // Measure the next interval from the end of the blocking display
+            // commit, not from its beginning. This guarantees idle time for
+            // input and background services between e-paper refreshes.
+            g_ft02RecorderLastScreenRefreshMs = millis();
+        }
+    }
+
+    // Real elapsed clock:
+    // refreshes only when the displayed minute changes.
+    // The date is refreshed in the same local window and rolls over at midnight.
+    const FT02AudioLogStatus audioStatus = FT02_AudioLogStatusCurrent();
+    if(g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST)
+    {
+        const FT02AudioLogState audioState = FT02_AudioLogStateCurrent();
+        if(audioState == FT02_AUDIO_LOG_RECORDING || audioState == FT02_AUDIO_LOG_POST_ROLL)
+        {
+            const uint32_t bucket = audioStatus.recordingElapsedMs /
+                FT02_AUDIO_TIMER_REFRESH_MS;
+            if(bucket != g_ft02AudioLastShownRecordBucket)
+            {
+                g_ft02AudioLastShownRecordBucket = bucket;
+                FT02_DrawAudioLogRecordingTimerPartial(display, audioStatus);
+            }
+        }
+        else if(audioState == FT02_AUDIO_LOG_PLAYING)
+        {
+            const uint32_t bucket = audioStatus.playbackElapsedMs /
+                FT02_AUDIO_TIMER_REFRESH_MS;
+            if(bucket != g_ft02AudioLastShownPlayBucket ||
+               audioStatus.playbackVolumeLevel != g_ft02AudioLastShownVolume)
+            {
+                g_ft02AudioLastShownPlayBucket = bucket;
+                g_ft02AudioLastShownVolume = audioStatus.playbackVolumeLevel;
+                FT02_DrawAudioLogPlayingStatusPartial(display, audioStatus);
+            }
+        }
+    }
+    if(g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST &&
+       !FT02_AudioLogIsBusy() &&
+       audioStatus.generation != g_ft02AudioLogLastGeneration)
+    {
+        g_ft02AudioLogLastGeneration = audioStatus.generation;
+        g_ft02AudioLogSelectedIndex = 0;
+        FT02_ClampAudioLogSelection();
+        FT02_DrawAudioLogListBodyPartial(display, g_ft02AudioLogSelectedIndex);
+    }
+
+    // Zoom keys only update the desired level. Multiple taps inside the settle
+    // window are coalesced and produce one map build plus one gray refresh.
+    FT02_ProcessPendingMapRefresh();
+
+    if(!FT02_AudioLogIsBusy())
+    {
+        FT02_UpdateClockIfNeeded(false);
+    }
+
+    delay(FT02_AudioLogIsPlaying() ? 5 : 20);
 }

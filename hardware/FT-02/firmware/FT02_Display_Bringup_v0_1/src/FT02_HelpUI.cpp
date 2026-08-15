@@ -235,6 +235,8 @@ static void FT02_DrawHelpContent(
         "返回",
         FT02_HELP_PANEL_Y + 212
     );
+
+
 }
 
 void FT02_DrawHelpScreen(

@@ -9,6 +9,18 @@ void FT02_DrawStatusBar(
     FT02Display& display
 );
 
+struct FT02StatusBarSnapshot
+{
+    char storageLine1[16];
+    char storageLine2[16];
+    char clockHHMM[6];
+    char clockMMDD[6];
+    char gnssLine1[16];
+    char gnssLine2[16];
+};
+
+void FT02_GetStatusBarSnapshot(FT02StatusBarSnapshot& snapshot);
+
 
 void FT02_SetStatusBarClockCache(
     const char* hhmm,
@@ -44,3 +56,5 @@ void FT02_DrawStatusBarGnss(
     const char* line1,
     const char* line2
 );
+
+void FT02_DrawStatusBarLoRa(FT02Display& display, const char* line2);

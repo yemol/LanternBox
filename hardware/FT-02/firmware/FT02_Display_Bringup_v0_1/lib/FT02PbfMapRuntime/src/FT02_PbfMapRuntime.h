@@ -56,6 +56,16 @@ enum FT02PbfMapStyle : uint8_t
     FT02_PBF_MAP_STYLE_WATER = 7
 };
 
+// reserved[0] flags preserve OSM way boundaries through the geographic cache
+// and projected screen buffer. Four-gray building rendering uses them to
+// reconstruct and clip complete building polygons at the map viewport edge.
+enum FT02PbfMapSegmentFlags : uint8_t
+{
+    FT02_PBF_MAP_SEGMENT_WAY_START = 0x01U,
+    FT02_PBF_MAP_SEGMENT_WAY_END = 0x02U,
+    FT02_PBF_MAP_SEGMENT_WAY_CLOSED = 0x04U
+};
+
 struct FT02PbfMapSegment
 {
     int16_t x1;
@@ -117,7 +127,51 @@ struct FT02PbfMapReport
 void FT02_PbfMapPrepare();
 void FT02_PbfMapUnload();
 void FT02_PbfMapResetView();
+void FT02_PbfMapSetCenter(double longitude, double latitude);
+// Selects the highest globally supported zoom whose projected bounds fit
+// inside the requested viewport after padding. If nothing fits, the view is
+// centered at the global minimum zoom and false is returned.
+bool FT02_PbfMapFitBounds(
+    double minLongitude,
+    double minLatitude,
+    double maxLongitude,
+    double maxLatitude,
+    int viewportWidth,
+    int viewportHeight,
+    int paddingPixels
+);
+
+// Context-specific fit helper. The requested range is clamped to the global
+// map limits. If the bounds do not fit at requestedMinZoom, the map remains
+// centered at requestedMinZoom and false is returned. This lets compact views
+// enforce a useful detail floor without changing the main map zoom range.
+bool FT02_PbfMapFitBoundsLimited(
+    double minLongitude,
+    double minLatitude,
+    double maxLongitude,
+    double maxLatitude,
+    int viewportWidth,
+    int viewportHeight,
+    int paddingPixels,
+    int requestedMinZoom,
+    int requestedMaxZoom
+);
 void FT02_PbfMapMovePixels(int dx, int dy);
+bool FT02_PbfMapProjectCoordinate(
+    double longitude,
+    double latitude,
+    int16_t& screenX,
+    int16_t& screenY
+);
+// Wide projection for overlays that may intentionally extend far beyond the
+// current viewport. Avoids int16 wraparound before line clipping.
+bool FT02_PbfMapProjectCoordinateWide(
+    double longitude,
+    double latitude,
+    int32_t& screenX,
+    int32_t& screenY
+);
+int FT02_PbfMapZoomCurrent();
 bool FT02_PbfMapChangeZoom(int delta);
 void FT02_PbfMapInvalidateCache();
 bool FT02_PbfMapBuild();
