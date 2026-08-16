@@ -18,7 +18,7 @@ static const uint16_t LORA_PROBE_PREAMBLE = 8;
 // v0.5.2d fresh-GNSS attachment for broadcast and PKI direct messages.
 // CN35 locked build: AES-256 channel TX plus persistent X25519 PKI identity.
 // Do not publish this source package; it contains the current channel key.
-static const uint32_t MESH_NATIVE_NODE_NUM = 0x4C423001UL; // !4c423001, FT01
+static const uint32_t MESH_NATIVE_NODE_NUM = 0x4C423001UL; // !4c423001, LanternBox FT01 / FT01
 static const uint32_t MESH_NATIVE_BROADCAST = 0xFFFFFFFFUL;
 static const uint8_t MESH_NATIVE_HOP_LIMIT = 3;
 static const uint8_t MESH_NATIVE_HOP_START = 3;
@@ -141,7 +141,7 @@ static bool buildUserProto(const uint8_t publicKey[32], uint8_t* out, size_t max
   outLen = 0;
   if (!publicKey) return false;
   if (!appendStringField(out, outLen, maxLen, 1, String("!4c423001"))) return false;
-  if (!appendStringField(out, outLen, maxLen, 2, String("FT01"))) return false;
+  if (!appendStringField(out, outLen, maxLen, 2, String("LanternBox FT01"))) return false;
   if (!appendStringField(out, outLen, maxLen, 3, String("FT01"))) return false;
   if (!appendVarintField(out, outLen, maxLen, 5, 112)) return false; // M5STACK_CARDPUTER_ADV
   if (!appendBytesField(out, outLen, maxLen, 8, publicKey, 32)) return false;
