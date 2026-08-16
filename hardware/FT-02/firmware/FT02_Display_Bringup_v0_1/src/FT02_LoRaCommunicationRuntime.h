@@ -5,6 +5,43 @@
 constexpr size_t FT02_LORA_MESSAGE_TEXT_BYTES = 192;
 constexpr size_t FT02_LORA_USER_TEXT_MAX_BYTES = 120;
 
+
+
+enum FT02MessageDeliveryMode : uint8_t
+{
+    FT02_MESSAGE_IMMEDIATE = 0,
+    FT02_MESSAGE_RELIABLE,
+    FT02_MESSAGE_PERSISTENT
+};
+
+enum FT02MessageDeliveryState : uint8_t
+{
+    FT02_DELIVERY_EMPTY = 0,
+    FT02_DELIVERY_QUEUED,
+    FT02_DELIVERY_WAITING_ACK,
+    FT02_DELIVERY_SENT,
+    FT02_DELIVERY_DELIVERED,
+    FT02_DELIVERY_EXPIRED,
+    FT02_DELIVERY_FAILED,
+    FT02_DELIVERY_CANCELED
+};
+
+struct FT02LoRaOutboxView
+{
+    bool valid;
+    uint32_t logicalId;
+    uint32_t destination;
+    bool broadcast;
+    FT02MessageDeliveryMode mode;
+    FT02MessageDeliveryState state;
+    uint32_t createdEpoch;
+    uint32_t expiresEpoch;
+    uint16_t attemptCount;
+    uint32_t lastPacketId;
+    uint32_t lastAttemptMs;
+    char text[FT02_LORA_MESSAGE_TEXT_BYTES];
+};
+
 enum FT02LoRaTxState : uint8_t
 {
     FT02_LORA_TX_NONE = 0,
@@ -68,6 +105,21 @@ uint32_t FT02_LoRaCommunicationAckCount();
 uint32_t FT02_LoRaCommunicationNakCount();
 uint32_t FT02_LoRaCommunicationLastRxPacketId();
 bool FT02_LoRaCommunicationGetLastTx(FT02LoRaTxStatusView& out);
+
+
+// LanternBox reliable-message layer. Private messages can be immediate,
+// reliable-with-TTL, or persistent-until-delivered/canceled. Broadcast remains
+// immediate in A1 because a broadcast has no single target ACK.
+void FT02_LoRaMessageDeliveryBegin();
+void FT02_LoRaMessageDeliveryPoll();
+bool FT02_LoRaMessageQueuePrivate(uint32_t destination, const char* userText, bool attachFreshGnss, FT02MessageDeliveryMode mode);
+bool FT02_LoRaMessageQueueBroadcast(const char* userText, bool attachFreshGnss);
+size_t FT02_LoRaMessageOutboxCount();
+bool FT02_LoRaMessageGetOutboxNewest(size_t newestIndex, FT02LoRaOutboxView& out);
+bool FT02_LoRaMessageCancel(uint32_t logicalId);
+uint32_t FT02_LoRaMessageDeliveryRevision();
+const char* FT02_LoRaMessageDeliveryModeText(FT02MessageDeliveryMode mode);
+const char* FT02_LoRaMessageDeliveryStateText(FT02MessageDeliveryState state);
 
 const char* FT02_LoRaCommunicationTxStateText(FT02LoRaTxState state);
 const char* FT02_LoRaCommunicationRoutingErrorText(uint32_t error);

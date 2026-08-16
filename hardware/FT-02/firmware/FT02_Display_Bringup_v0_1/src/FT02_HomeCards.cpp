@@ -8,6 +8,7 @@ struct FT02HomeCard
 {
     const char* label;
     const FT02Icon* icon;
+    const FT02FontPack* font;
 };
 
 static const int FT02_HOME_CARD_X = 32;
@@ -32,27 +33,33 @@ static const int FT02_HOME_PAGE_DOT_GAP = 26;
 static const FT02HomeCard FT02_HOME_CARDS[] = {
     {
         "知识库",
-        &ICON_HOME_CARD_KNOWLEDGE
+        &ICON_HOME_CARD_KNOWLEDGE,
+        &ft02_menu_28m
     },
     {
         "地图导航",
-        &ICON_HOME_CARD_MAP
+        &ICON_HOME_CARD_MAP,
+        &ft02_menu_28m
     },
     {
         "日志记录",
-        &ICON_HOME_CARD_LOG
+        &ICON_HOME_CARD_LOG,
+        &ft02_menu_28m
     },
     {
         "定位记录",
-        &ICON_HOME_CARD_LOCATION
+        &ICON_HOME_CARD_LOCATION,
+        &ft02_menu_28m
+    },
+    {
+        "内部通讯",
+        &ICON_HOME_CARD_NETWORK,
+        &ft02_menu_28m
     },
     {
         "设备状态",
-        &ICON_HOME_CARD_SYSTEM
-    },
-    {
-        "通信管理",
-        &ICON_HOME_CARD_NETWORK
+        &ICON_HOME_CARD_SYSTEM,
+        &ft02_menu_28m
     }
 };
 
@@ -217,7 +224,7 @@ static void FT02_DrawHomeCard(
     {
         FT02_DrawTextPackInvert(
             display,
-            ft02_menu_28m,
+            *card.font,
             card.label,
             textX,
             textBaselineY
@@ -227,7 +234,7 @@ static void FT02_DrawHomeCard(
     {
         FT02_DrawTextPack(
             display,
-            ft02_menu_28m,
+            *card.font,
             card.label,
             textX,
             textBaselineY

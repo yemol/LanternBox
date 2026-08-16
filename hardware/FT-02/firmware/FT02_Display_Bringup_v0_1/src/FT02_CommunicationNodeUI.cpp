@@ -24,6 +24,7 @@ enum CommMode : uint8_t
     COMM_INBOX = 0,
     COMM_NODES,
     COMM_COMPOSE,
+    COMM_OUTBOX,
     COMM_DIAG
 };
 
@@ -38,9 +39,17 @@ constexpr uint32_t COMPOSE_REDRAW_IDLE_MS = 650u;
 constexpr size_t PINYIN_VISIBLE_CANDIDATES = FT02_PINYIN_PAGE_SIZE;
 
 CommMode g_mode = COMM_INBOX;
+
+// Unit CardKB2 (U215) I2C factory firmware consumes Fn+D/Z/X/C internally
+// and does not emit those arrow combinations to the I2C host. Use translated
+// Sym-layer angle brackets instead; they arrive as ordinary ASCII bytes and
+// provide an unambiguous left/right compose shortcut.
+static constexpr uint8_t CARDKB_MODE_LEFT  = static_cast<uint8_t>('<');
+static constexpr uint8_t CARDKB_MODE_RIGHT = static_cast<uint8_t>('>');
 CommMode g_composeReturnMode = COMM_INBOX;
 size_t g_messageIndex = 0;
 size_t g_nodeSelection = 0;
+size_t g_outboxIndex = 0;
 bool g_composePrivate = false;
 bool g_composeReply = false;
 uint32_t g_composeTarget = 0;
@@ -51,22 +60,26 @@ char g_pinyin[FT02_PINYIN_MAX_INPUT + 1] = {};
 size_t g_pinyinLength = 0;
 size_t g_pinyinPage = 0;
 ComposeInputMode g_composeInputMode = COMPOSE_INPUT_CN;
+FT02MessageDeliveryMode g_composeDeliveryMode = FT02_MESSAGE_IMMEDIATE;
 bool g_composeDirty = false;
 uint32_t g_composeLastEditMs = 0;
 char g_notice[96] = {};
 bool g_syncNoticeActive = false;
 
 static const FT02BottomBarItem BOTTOM_INBOX[3] = {
-    {nullptr, "确认 回复 / T广播"}, {nullptr, "M 节点"}, {nullptr, "S 诊断 / B返回"}
+    {nullptr, "确认回复 / T广播"}, {nullptr, "M节点 / O发件"}, {nullptr, "S诊断 / B返回"}
 };
 static const FT02BottomBarItem BOTTOM_NODES[3] = {
     {nullptr, "方向键选择"}, {nullptr, "确认 私信"}, {nullptr, "T广播 / B收件箱"}
 };
 static const FT02BottomBarItem BOTTOM_COMPOSE_CN[3] = {
-    {nullptr, "空格首选 / 1-5选词"}, {nullptr, "6/7翻页 / Sym+W英文"}, {nullptr, "DEL删除 / ENTER发送"}
+    {nullptr, "空格首选 / 1-5选词"}, {nullptr, "Sym+V/B 模式·候选"}, {nullptr, "DEL删除 / ENTER发送"}
 };
 static const FT02BottomBarItem BOTTOM_COMPOSE_EN[3] = {
-    {nullptr, "英文直接输入"}, {nullptr, "Sym+W切中文"}, {nullptr, "DEL删除 / ENTER发送"}
+    {nullptr, "英文直接输入"}, {nullptr, "Sym+V/B模式 / Sym+W中"}, {nullptr, "DEL删除 / ENTER发送"}
+};
+static const FT02BottomBarItem BOTTOM_OUTBOX[3] = {
+    {nullptr, "方向键 浏览"}, {nullptr, "DEL 撤销"}, {nullptr, "B 收件箱"}
 };
 static const FT02BottomBarItem BOTTOM_DIAG[3] = {
     {nullptr, "R 重同步"}, {nullptr, "M 节点"}, {nullptr, "B 收件箱"}
@@ -314,6 +327,34 @@ bool toggleComposeInputMode()
     return true;
 }
 
+const char* deliveryModeDetail(FT02MessageDeliveryMode mode)
+{
+    switch(mode)
+    {
+        case FT02_MESSAGE_IMMEDIATE: return "即时·10分钟";
+        case FT02_MESSAGE_RELIABLE: return "可靠·2小时";
+        case FT02_MESSAGE_PERSISTENT: return "持久·至送达/撤销";
+        default: return "--";
+    }
+}
+
+void cycleComposeDeliveryMode(int delta)
+{
+    if(!g_composePrivate)
+    {
+        setNotice("广播在A1中固定为即时消息");
+        markComposeEdited();
+        return;
+    }
+    int mode = static_cast<int>(g_composeDeliveryMode);
+    mode = (mode + delta + 3) % 3;
+    g_composeDeliveryMode = static_cast<FT02MessageDeliveryMode>(mode);
+    char notice[64];
+    snprintf(notice, sizeof(notice), "消息模式：%s", deliveryModeDetail(g_composeDeliveryMode));
+    setNotice(notice);
+    markComposeEdited();
+}
+
 void beginCompose(bool isPrivate, uint32_t target, CommMode returnMode, bool isReply = false, uint32_t replyPacketId = 0)
 {
     g_mode = COMM_COMPOSE;
@@ -322,6 +363,7 @@ void beginCompose(bool isPrivate, uint32_t target, CommMode returnMode, bool isR
     g_composeReply = isReply;
     g_composeTarget = target;
     g_replyPacketId = isReply ? replyPacketId : 0;
+    g_composeDeliveryMode = FT02_MESSAGE_IMMEDIATE;
     g_composeLength = 0;
     g_composeText[0] = '\0';
     resetPinyin();
@@ -374,7 +416,7 @@ void drawUtf8Lines(FT02Display& display, const char* text, int x, int firstBasel
 void drawHeader(FT02Display& display, const char* section)
 {
     FT02_DrawStatusBar(display);
-    FT02_DrawTextPack(display, ft02_cjk_24b, "通信管理", 32, 116);
+    FT02_DrawTextPack(display, ft02_cjk_24b, "内部通讯", 32, 116);
     FT02_DrawTextPack(display, ft02_cjk_20r, section, 166, 116);
     display.drawLine(32, 128, 768, 128, GxEPD_BLACK);
 }
@@ -485,6 +527,59 @@ void drawInbox(FT02Display& display)
         }
     }
     FT02_DrawBottomBarWithFont(display, BOTTOM_INBOX, ft02_cjk_20r);
+}
+
+void drawOutbox(FT02Display& display)
+{
+    drawHeader(display, "发件箱");
+    const size_t count = FT02_LoRaMessageOutboxCount();
+    char summary[160];
+    snprintf(summary, sizeof(summary), "本地投递记录：%u   即时10分钟 / 可靠2小时 / 持久至送达或撤销",
+             static_cast<unsigned>(count));
+    FT02_DrawTextPack(display, ft02_cjk_20r, summary, 32, 156);
+    if(g_notice[0]) FT02_DrawTextPack(display, ft02_cjk_20r, g_notice, 32, 181);
+
+    if(count == 0)
+    {
+        FT02_DrawTextPack(display, ft02_cjk_24r, "暂无发件记录", 304, 280);
+        FT02_DrawTextPack(display, ft02_cjk_20r, "私信编写时用 Sym+V/B 切换投递模式", 214, 320);
+    }
+    else
+    {
+        if(g_outboxIndex >= count) g_outboxIndex = count - 1;
+        FT02LoRaOutboxView item;
+        if(FT02_LoRaMessageGetOutboxNewest(g_outboxIndex, item))
+        {
+            char targetName[40] = {};
+            if(item.broadcast) snprintf(targetName, sizeof(targetName), "Primary广播");
+            else nodeName(item.destination, targetName, sizeof(targetName));
+
+            char meta[220];
+            snprintf(meta, sizeof(meta), "%s  %s  → %s   %u/%u",
+                     FT02_LoRaMessageDeliveryModeText(item.mode),
+                     FT02_LoRaMessageDeliveryStateText(item.state),
+                     targetName,
+                     static_cast<unsigned>(g_outboxIndex + 1u),
+                     static_cast<unsigned>(count));
+            FT02_DrawTextPack(display, ft02_cjk_24b, meta, 32, 214);
+
+            display.drawRect(32, 230, 736, 122, GxEPD_BLACK);
+            drawUtf8Lines(display, item.text, 48, 260, 58, 28, 3);
+
+            char details[220];
+            snprintf(details, sizeof(details), "逻辑ID 0x%08lX   尝试 %u   最后包 0x%08lX",
+                     static_cast<unsigned long>(item.logicalId),
+                     static_cast<unsigned>(item.attemptCount),
+                     static_cast<unsigned long>(item.lastPacketId));
+            FT02_DrawTextPack(display, ft02_cjk_20r, details, 32, 386);
+
+            const bool active = item.state == FT02_DELIVERY_QUEUED || item.state == FT02_DELIVERY_WAITING_ACK;
+            FT02_DrawTextPack(display, ft02_cjk_20r,
+                              active ? "DEL 可撤销当前待投递消息" : "该消息已结束投递流程",
+                              32, 420);
+        }
+    }
+    FT02_DrawBottomBarWithFont(display, BOTTOM_OUTBOX, ft02_cjk_20r);
 }
 
 void drawNodeRow(FT02Display& display, size_t nodeIndex, int y, bool selected)
@@ -639,8 +734,9 @@ void drawCompose(FT02Display& display)
 
     const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
     const bool gpsAttach = gnss.fixValid && gnss.hasPosition && gnss.lastFixAgeMs <= 15000u;
-    char foot[180];
-    snprintf(foot, sizeof(foot), "字节：%u/%u   GPS：%s   DEL删除   ESC取消",
+    char foot[220];
+    snprintf(foot, sizeof(foot), "模式：%s   字节：%u/%u   GPS：%s   DEL删除   ESC取消",
+             g_composePrivate ? deliveryModeDetail(g_composeDeliveryMode) : "即时·广播",
              static_cast<unsigned>(g_composeLength),
              static_cast<unsigned>(FT02_LORA_USER_TEXT_MAX_BYTES),
              gpsAttach ? "已定位" : "无定位");
@@ -723,14 +819,27 @@ bool handleComposeRaw(const FT02InputEvent& event)
         return true;
     }
 
-    // Candidate paging is a Chinese-mode action. Keep native CardKB2 Fn
-    // left/right support plus deterministic 6/7 fallback while Pinyin exists.
-    if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0 && (raw == 0xB4u || raw == '6'))
+    // CardKB2 I2C does not forward Fn+D/Z/X/C to the host. The factory
+    // firmware does forward Sym-layer '<' and '>' as ASCII, so use those for
+    // delivery-mode cycling. While Pinyin is active the same pair pages the
+    // candidate list instead of changing delivery policy.
+    if(g_pinyinLength == 0 && (raw == CARDKB_MODE_LEFT || raw == CARDKB_MODE_RIGHT))
+    {
+        cycleComposeDeliveryMode(raw == CARDKB_MODE_LEFT ? -1 : +1);
+        Serial.printf("[COMM] delivery mode key raw='%c' mode=%s\n",
+                      static_cast<char>(raw),
+                      deliveryModeDetail(g_composeDeliveryMode));
+        return true;
+    }
+
+    // Candidate paging remains available through the same Sym-layer pair,
+    // with 6/7 retained as the proven deterministic fallback during Pinyin.
+    if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0 && (raw == CARDKB_MODE_LEFT || raw == '6'))
     {
         movePinyinPage(-1);
         return true;
     }
-    if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0 && (raw == 0xB7u || raw == '7'))
+    if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0 && (raw == CARDKB_MODE_RIGHT || raw == '7'))
     {
         movePinyinPage(+1);
         return true;
@@ -753,16 +862,20 @@ bool handleComposeRaw(const FT02InputEvent& event)
         }
         bool ok = false;
         if(g_composePrivate)
-            ok = FT02_LoRaCommunicationSendPrivate(g_composeTarget, g_composeText, true);
+            ok = FT02_LoRaMessageQueuePrivate(g_composeTarget, g_composeText, true, g_composeDeliveryMode);
         else
-            ok = FT02_LoRaCommunicationSendBroadcast(g_composeText, true);
+            ok = FT02_LoRaMessageQueueBroadcast(g_composeText, true);
 
         if(ok)
         {
-            // A successful send is a natural durability boundary for IME
-            // learning. This avoids an SD write on every selected character.
+            // Queue acceptance is the durability boundary for the outgoing
+            // message. Delivery may happen immediately or later according to
+            // the selected policy.
             (void)FT02_PinyinLearningFlush();
-            setNotice(g_composeReply ? "回复已发送，等待 ACK" : (g_composePrivate ? "私信已发送，等待 ACK" : "广播已发送"));
+            if(!g_composePrivate) setNotice("即时广播已加入发送队列");
+            else if(g_composeDeliveryMode == FT02_MESSAGE_IMMEDIATE) setNotice("即时消息已加入发送队列");
+            else if(g_composeDeliveryMode == FT02_MESSAGE_RELIABLE) setNotice("可靠消息已保存，等待目标 ACK");
+            else setNotice("持久通知已保存，等待送达或撤销");
             g_mode = COMM_INBOX;
             if(!g_composeReply) g_messageIndex = 0;
             g_composeReply = false;
@@ -771,7 +884,7 @@ bool handleComposeRaw(const FT02InputEvent& event)
         }
         else
         {
-            setNotice(g_composePrivate ? "发送失败：检查连接或PKI" : "发送失败：LoRa未就绪");
+            setNotice(g_composePrivate ? "无法加入发件队列：目标或队列不可用" : "无法加入广播队列");
         }
         return true;
     }
@@ -868,6 +981,7 @@ void FT02_CommunicationUIOpen()
 {
     g_mode = COMM_INBOX;
     g_messageIndex = 0;
+    g_outboxIndex = 0;
     setNotice("");
     FT02_LoRaCommunicationMarkAllRead();
 }
@@ -882,6 +996,7 @@ void FT02_DrawCommunicationNodeScreen(FT02Display& display)
         if(g_mode == COMM_INBOX) drawInbox(display);
         else if(g_mode == COMM_NODES) drawNodes(display);
         else if(g_mode == COMM_COMPOSE) drawCompose(display);
+        else if(g_mode == COMM_OUTBOX) drawOutbox(display);
         else drawDiag(display);
     }
     while(display.nextPage());
@@ -895,6 +1010,21 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
     if(g_mode == COMM_COMPOSE)
     {
         return handleComposeRaw(event) ? FT02_COMM_INPUT_REDRAW : FT02_COMM_INPUT_NONE;
+    }
+
+    // CardKB2 DEL emits 0x08, which InputManager normally maps to BACK. In the
+    // outbox it is intentionally reserved for canceling an active delivery.
+    const uint8_t raw = static_cast<uint8_t>(event.raw);
+    if(g_mode == COMM_OUTBOX && (raw == 0x08u || raw == 0x7Fu))
+    {
+        const size_t count = FT02_LoRaMessageOutboxCount();
+        if(count == 0) return FT02_COMM_INPUT_NONE;
+        if(g_outboxIndex >= count) g_outboxIndex = count - 1;
+        FT02LoRaOutboxView item;
+        if(!FT02_LoRaMessageGetOutboxNewest(g_outboxIndex, item)) return FT02_COMM_INPUT_NONE;
+        if(FT02_LoRaMessageCancel(item.logicalId)) setNotice("已撤销当前待投递消息");
+        else setNotice("该消息已结束，不能撤销");
+        return FT02_COMM_INPUT_REDRAW;
     }
 
     if(event.key == FT02_KEY_HELP) return FT02_COMM_INPUT_OPEN_HELP;
@@ -917,6 +1047,13 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
     if(cmd == 'm')
     {
         g_mode = COMM_NODES;
+        setNotice("");
+        return FT02_COMM_INPUT_REDRAW;
+    }
+    if(cmd == 'o')
+    {
+        g_mode = COMM_OUTBOX;
+        g_outboxIndex = 0;
         setNotice("");
         return FT02_COMM_INPUT_REDRAW;
     }
@@ -983,6 +1120,20 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
         if(count > 0 && (event.key == FT02_KEY_RIGHT || event.key == FT02_KEY_DOWN))
         {
             g_messageIndex = g_messageIndex == 0 ? count - 1 : g_messageIndex - 1;
+            return FT02_COMM_INPUT_REDRAW;
+        }
+    }
+    else if(g_mode == COMM_OUTBOX)
+    {
+        const size_t count = FT02_LoRaMessageOutboxCount();
+        if(count > 0 && (event.key == FT02_KEY_LEFT || event.key == FT02_KEY_UP))
+        {
+            g_outboxIndex = (g_outboxIndex + 1u) % count;
+            return FT02_COMM_INPUT_REDRAW;
+        }
+        if(count > 0 && (event.key == FT02_KEY_RIGHT || event.key == FT02_KEY_DOWN))
+        {
+            g_outboxIndex = g_outboxIndex == 0 ? count - 1u : g_outboxIndex - 1u;
             return FT02_COMM_INPUT_REDRAW;
         }
     }

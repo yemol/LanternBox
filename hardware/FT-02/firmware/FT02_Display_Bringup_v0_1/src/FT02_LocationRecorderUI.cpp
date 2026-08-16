@@ -145,7 +145,20 @@ static void FT02_DrawRecorderContent(
 
     FT02_RecorderDrawLabelValue(display, "GNSS", FT02_RecorderGnssState(gnss), 418, 210, 500);
 
-    snprintf(value, sizeof(value), "%u", (unsigned int)gnss.satellites);
+    if(gnss.gsvSeen)
+    {
+        snprintf(
+            value,
+            sizeof(value),
+            "%u/%u",
+            (unsigned int)gnss.satellites,
+            (unsigned int)gnss.satellitesVisible
+        );
+    }
+    else
+    {
+        snprintf(value, sizeof(value), "%u/--", (unsigned int)gnss.satellites);
+    }
     FT02_RecorderDrawLabelValue(display, "卫星", value, 418, 240, 500);
 
     if(gnss.hdop > 0.0f) snprintf(value, sizeof(value), "%.1f", gnss.hdop);

@@ -7,6 +7,7 @@ struct FT02GnssSnapshot
     bool started;
     bool serialDataSeen;
     bool nmeaSeen;
+    bool gsvSeen;
     bool communicationActive;
     bool fixValid;
     bool hasPosition;
@@ -30,6 +31,7 @@ struct FT02GnssSnapshot
     uint8_t fixType;
     uint8_t fixQuality;
     uint8_t satellites;
+    uint8_t satellitesVisible;
     double latitude;
     double longitude;
     float rawAltitudeMeters;

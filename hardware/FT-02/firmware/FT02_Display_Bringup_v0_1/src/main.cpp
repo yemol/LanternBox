@@ -30,6 +30,7 @@
 #include "FT02_LoRaNodeRuntime.h"
 #include "FT02_LoRaCommunicationRuntime.h"
 #include "FT02_CommunicationNodeUI.h"
+#include "FT02_SystemSelfTest.h"
 #include "FT02_PinyinLearning.h"
 #include <stdio.h>
 #include <stdint.h>
@@ -131,6 +132,7 @@ static void FT02_CancelPendingMapRefresh(const char* source);
 static void FT02_OpenAudioLogListPage(bool reload);
 static void FT02_ClampAudioLogSelection();
 static bool FT02_ArmAudioCommandAfterRelease();
+static void FT02_OpenDeviceStatusPage();
 
 static int FT02_MonthFromBuildString(const char* mon)
 {
@@ -695,6 +697,10 @@ static void FT02_RedrawCurrentPage()
     {
         FT02_DrawCommunicationNodeScreen(display);
     }
+    else if(g_ft02PageState == FT02_PAGE_DEVICE_STATUS)
+    {
+        FT02_DrawSystemSelfTestScreen(display);
+    }
     else if(g_ft02PageState == FT02_PAGE_HELP)
     {
         FT02_DrawHelpScreen(display);
@@ -1154,6 +1160,56 @@ static void FT02_OpenKnowledgePage()
     FT02_DrawKnowledgeAfterCleanTransition("home-enter-knowledge");
 }
 
+static void FT02_OpenDeviceStatusPage()
+{
+    if(g_ft02PageState == FT02_PAGE_DEVICE_STATUS) return;
+    g_ft02PageState = FT02_PAGE_DEVICE_STATUS;
+    FT02_SystemSelfTestRun();
+    Serial.println("Page: HOME -> DEVICE STATUS / SYSTEM SELF-TEST A1");
+    FT02_RedrawCurrentPage();
+}
+
+static bool FT02_HandleDeviceStatusInput(const FT02InputEvent& event)
+{
+    if(event.key == FT02_KEY_BACK)
+    {
+        FT02_ReturnHomePage();
+        return true;
+    }
+    if(event.key == FT02_KEY_HELP)
+    {
+        FT02_OpenHelpPage();
+        return true;
+    }
+    if(event.key == FT02_KEY_LEFT || event.key == FT02_KEY_UP)
+    {
+        const uint8_t page = FT02_SystemSelfTestPage();
+        if(page > 0)
+        {
+            FT02_SystemSelfTestSetPage(page - 1U);
+            FT02_RedrawCurrentPage();
+        }
+        return true;
+    }
+    if(event.key == FT02_KEY_RIGHT || event.key == FT02_KEY_DOWN)
+    {
+        const uint8_t page = FT02_SystemSelfTestPage();
+        if(page + 1U < FT02_SystemSelfTestPageCount())
+        {
+            FT02_SystemSelfTestSetPage(page + 1U);
+            FT02_RedrawCurrentPage();
+        }
+        return true;
+    }
+    if(event.key == FT02_KEY_SELECT)
+    {
+        FT02_SystemSelfTestRun();
+        FT02_RedrawCurrentPage();
+        return true;
+    }
+    return false;
+}
+
 static void FT02_OpenCommunicationPage()
 {
     if(g_ft02PageState == FT02_PAGE_COMMUNICATION) return;
@@ -1268,9 +1324,15 @@ static bool FT02_HandleHomeInput(
             return true;
         }
 
-        if(g_ft02HomeSelectedCard == 5)
+        if(g_ft02HomeSelectedCard == 4)
         {
             FT02_OpenCommunicationPage();
+            return true;
+        }
+
+        if(g_ft02HomeSelectedCard == 5)
+        {
+            FT02_OpenDeviceStatusPage();
             return true;
         }
 
@@ -1930,6 +1992,11 @@ static bool FT02_HandleInput(
         return FT02_HandleCommunicationInput(event);
     }
 
+    if(g_ft02PageState == FT02_PAGE_DEVICE_STATUS)
+    {
+        return FT02_HandleDeviceStatusInput(event);
+    }
+
     if(g_ft02PageState == FT02_PAGE_LOCATION_RECORDER)
     {
         return FT02_HandleLocationRecorderInput(event);
@@ -2029,6 +2096,7 @@ void setup()
     FT02_StorageBegin();
     FT02_RefreshStorageStatusCache();
     FT02_PinyinLearningBegin();
+    FT02_LoRaMessageDeliveryBegin();
     FT02_LocationRecorderBegin();
     FT02_LocationLogBegin();
     FT02_AudioLogBegin();
@@ -2117,6 +2185,7 @@ void loop()
         // IME learning persistence shares the SD backend with audio logging.
         // Never start a background learning snapshot while audio I/O is busy.
         FT02_PinyinLearningPoll();
+        FT02_LoRaMessageDeliveryPoll();
 
         const bool loraLink = FT02_LoRaTransportLinkUp();
         const bool loraReady = FT02_LoRaNodeRuntimeReady();

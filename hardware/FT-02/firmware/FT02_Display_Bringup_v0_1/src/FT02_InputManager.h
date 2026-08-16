@@ -42,6 +42,9 @@ void FT02_InputBegin(
 
 FT02InputEvent FT02_InputPoll();
 
+// Passive availability state maintained by the existing periodic CardKB2 probe.
+bool FT02_InputCardKbAvailable();
+
 // Current raw CardKB byte observed by the last poll. Zero means released.
 char FT02_InputCurrentRawKey();
 

@@ -18,6 +18,8 @@ constexpr int FT02_GNSS_TX_PIN = 38; // ESP32 TX -> GNSS RX
 constexpr uint32_t FT02_GNSS_BAUD = 38400;
 constexpr uint32_t FT02_GNSS_LINK_STALE_MS = 5000;
 constexpr uint32_t FT02_GNSS_FIX_STALE_MS = 6000;
+constexpr uint32_t FT02_GNSS_GSV_STALE_MS = 10000;
+constexpr size_t FT02_GNSS_GSV_TALKER_SLOTS = 8;
 constexpr uint32_t FT02_GNSS_CLOCK_RESYNC_MS = 10UL * 60UL * 1000UL;
 constexpr size_t FT02_GNSS_LINE_CAPACITY = 160;
 constexpr size_t FT02_GNSS_FILTER_SAMPLES = 5;
@@ -40,6 +42,15 @@ uint32_t g_ft02GnssLastByteMs = 0;
 uint32_t g_ft02GnssLastSentenceMs = 0;
 uint32_t g_ft02GnssLastFixMs = 0;
 uint32_t g_ft02GnssLastTimeSyncMs = 0;
+
+struct FT02GnssGsvTalkerState
+{
+    char talker[3];
+    uint8_t satellitesVisible;
+    uint32_t lastSeenMs;
+};
+
+FT02GnssGsvTalkerState g_ft02GnssGsvTalkers[FT02_GNSS_GSV_TALKER_SLOTS] = {};
 
 float g_ft02AltitudeSamples[FT02_GNSS_FILTER_SAMPLES] = {};
 size_t g_ft02AltitudeSampleCount = 0;
@@ -563,6 +574,97 @@ static void FT02_GnssUpdateTime(const char* rawTime, const char* rawDate)
     }
 }
 
+static void FT02_GnssResetGsvState()
+{
+    memset(g_ft02GnssGsvTalkers, 0, sizeof(g_ft02GnssGsvTalkers));
+    g_ft02Gnss.gsvSeen = false;
+    g_ft02Gnss.satellitesVisible = 0;
+}
+
+static void FT02_GnssRefreshVisibleSatellites(uint32_t nowMs)
+{
+    uint16_t totalVisible = 0;
+    bool anyFresh = false;
+    bool mixedFresh = false;
+    uint8_t mixedVisible = 0;
+
+    for(size_t i = 0; i < FT02_GNSS_GSV_TALKER_SLOTS; i++)
+    {
+        const FT02GnssGsvTalkerState& slot = g_ft02GnssGsvTalkers[i];
+        if(slot.talker[0] == 0 || slot.lastSeenMs == 0 ||
+           nowMs - slot.lastSeenMs > FT02_GNSS_GSV_STALE_MS)
+        {
+            continue;
+        }
+
+        anyFresh = true;
+        if(slot.talker[0] == 'G' && slot.talker[1] == 'N')
+        {
+            // A GN talker is a mixed-constellation total. Prefer it over
+            // constellation-specific GP/GL/GA/GB/GQ totals to avoid double-counting.
+            mixedFresh = true;
+            mixedVisible = slot.satellitesVisible;
+            break;
+        }
+
+        totalVisible += slot.satellitesVisible;
+    }
+
+    const uint8_t visible = mixedFresh
+        ? mixedVisible
+        : (uint8_t)(totalVisible > 255U ? 255U : totalVisible);
+    const bool gsvSeen = anyFresh;
+
+    if(g_ft02Gnss.gsvSeen != gsvSeen ||
+       g_ft02Gnss.satellitesVisible != visible)
+    {
+        g_ft02Gnss.gsvSeen = gsvSeen;
+        g_ft02Gnss.satellitesVisible = visible;
+        FT02_GnssMarkUiChanged();
+    }
+}
+
+static void FT02_GnssParseGsv(char* fields[], int count)
+{
+    // NMEA GSV: $ttGSV,total_messages,message_number,total_satellites,...
+    if(count < 4 || fields[0] == nullptr || strlen(fields[0]) < 3) return;
+
+    const char talker0 = fields[0][1];
+    const char talker1 = fields[0][2];
+    if(talker0 == 0 || talker1 == 0) return;
+
+    int visibleInt = atoi(fields[3]);
+    if(visibleInt < 0) visibleInt = 0;
+    if(visibleInt > 255) visibleInt = 255;
+    const uint8_t visible = (uint8_t)visibleInt;
+    const uint32_t nowMs = millis();
+
+    FT02GnssGsvTalkerState* target = nullptr;
+    FT02GnssGsvTalkerState* empty = nullptr;
+    FT02GnssGsvTalkerState* oldest = &g_ft02GnssGsvTalkers[0];
+
+    for(size_t i = 0; i < FT02_GNSS_GSV_TALKER_SLOTS; i++)
+    {
+        FT02GnssGsvTalkerState& slot = g_ft02GnssGsvTalkers[i];
+        if(slot.talker[0] == talker0 && slot.talker[1] == talker1)
+        {
+            target = &slot;
+            break;
+        }
+        if(empty == nullptr && slot.talker[0] == 0) empty = &slot;
+        if(slot.lastSeenMs < oldest->lastSeenMs) oldest = &slot;
+    }
+
+    if(target == nullptr) target = empty != nullptr ? empty : oldest;
+    target->talker[0] = talker0;
+    target->talker[1] = talker1;
+    target->talker[2] = 0;
+    target->satellitesVisible = visible;
+    target->lastSeenMs = nowMs;
+
+    FT02_GnssRefreshVisibleSatellites(nowMs);
+}
+
 static void FT02_GnssParseGga(char* fields[], int count)
 {
     if(count < 10) return;
@@ -698,6 +800,10 @@ static void FT02_GnssHandleLine(const char* sourceLine)
     {
         FT02_GnssParseGsa(fields, count);
     }
+    else if(strcmp(type, "GSV") == 0)
+    {
+        FT02_GnssParseGsv(fields, count);
+    }
 }
 
 static void FT02_GnssOpenSerial()
@@ -744,6 +850,7 @@ static void FT02_GnssResetRuntimeFields(bool preserveClockState)
     snprintf(g_ft02Gnss.localDate, sizeof(g_ft02Gnss.localDate), "--/--/--");
     FT02_GnssResetAltitudeFilter();
     FT02_GnssResetSpeedFilter();
+    FT02_GnssResetGsvState();
 }
 }
 
@@ -849,6 +956,8 @@ void FT02_GnssPoll()
         FT02_GnssUpdateFixState(false);
     }
 
+    // Keep the diagnostic "visible" count honest if GSV output stops.
+    FT02_GnssRefreshVisibleSatellites(now);
 }
 
 FT02GnssSnapshot FT02_GnssSnapshotCurrent()

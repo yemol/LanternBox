@@ -6,7 +6,7 @@
 #include "FT02_GrayMapFontData.h"
 #include "FT02_StatusBar.h"
 #include "FT02_IconData.h"
-#include "FT02_BatteryIconReplace2.h"
+#include "FT02_BatteryIcon.h"
 
 #include <math.h>
 #include <stdio.h>
@@ -699,7 +699,7 @@ static void drawProductionHeader(GrayCanvas& canvas)
     drawStatusBlock(canvas, ICON_STATUS_WIRELESS, blockStartX, "LoRa", "已连接");
     drawStatusBlock(canvas, ICON_STATUS_GPS, blockStartX + blockWidth, status.gnssLine1, status.gnssLine2);
     drawStatusBlock(canvas, ICON_STATUS_SD, blockStartX + blockWidth * 2, status.storageLine1, status.storageLine2);
-    drawStatusBlock(canvas, ICON_STATUS_BATTERY_REPLACE2, blockStartX + blockWidth * 3, "86%", "电量");
+    drawStatusBlock(canvas, ICON_STATUS_BATTERY, blockStartX + blockWidth * 3, "86%", "电量");
 }
 
 static void drawFooterCell(

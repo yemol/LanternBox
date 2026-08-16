@@ -3,7 +3,7 @@
 #include "FT02_LoRaTransport.h"
 #include "FT02_LoRaNodeRuntime.h"
 #include "FT02_LoRaCommunicationRuntime.h"
-#include "FT02_BatteryIconReplace2.h"
+#include "FT02_BatteryIcon.h"
 #include "FT02_EpdLifecycle.h"
 #include "FT02_GlobalCJK20FontData.h"
 #include <string.h>
@@ -258,7 +258,7 @@ void FT02_DrawStatusBar(
 
     FT02_DrawIconSize(
         display,
-        ICON_STATUS_BATTERY_REPLACE2,
+        ICON_STATUS_BATTERY,
         blockStart + FT02_ICON_OFFSET_X,
         FT02_ICON_Y,
         FT02_ICON_SIZE,

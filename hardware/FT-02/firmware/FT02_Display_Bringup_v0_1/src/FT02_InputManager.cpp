@@ -145,8 +145,9 @@ static char FT02_NormalizeCommandChar(
         return static_cast<char>(code - 'A' + 'a');
     }
 
-    // Official CardKB2 Fn direction codes are non-ASCII and are mapped by
-    // FT02_MapRawKey(). They intentionally have no command character.
+    // CardKB v1.1 modifier-layer codes are non-ASCII and intentionally have
+    // no ASCII command character. Normal physical arrows are mapped below;
+    // Fn-layer arrows are consumed by feature-specific handlers from raw.
     if(code >= 0x80) return 0;
 
     return static_cast<char>(code);
@@ -159,10 +160,10 @@ static FT02InputKey FT02_MapRawKey(
 {
     const uint8_t code = static_cast<uint8_t>(raw);
 
-    // Native CardKB2 Fn-direction bytes (M5Stack CardKB2 key map).
-    // Supporting these alongside the established D/Z/X/C aliases makes the
-    // input layer independent of whether Fn or the legacy navigation layout
-    // is being used.
+    // Native CardKB v1.1 physical direction bytes (normal layer).
+    // Official firmware maps LEFT/UP/DOWN/RIGHT to 180..183 (0xB4..0xB7).
+    // Fn+LEFT/Fn+RIGHT are different bytes (0x98/0xA5) and are intentionally
+    // left as raw feature shortcuts rather than global navigation keys.
     if(code == 0xB4) return FT02_KEY_LEFT;
     if(code == 0xB5) return FT02_KEY_UP;
     if(code == 0xB6) return FT02_KEY_DOWN;
@@ -232,6 +233,11 @@ void FT02_InputBegin(
     Serial.println(g_ft02CardKbAddress, HEX);
 
     FT02_UpdateCardKbAvailability(true);
+}
+
+bool FT02_InputCardKbAvailable()
+{
+    return g_ft02CardKbAvailable;
 }
 
 FT02InputEvent FT02_InputPoll()
