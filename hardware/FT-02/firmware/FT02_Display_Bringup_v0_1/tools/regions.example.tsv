@@ -1,0 +1,5 @@
+# region_id	min_lon	min_lat	max_lon	max_lat	tile_zoom	tile_root
+shanghai	120.8000000	30.6000000	122.2000000	31.9000000	11	/maps/regions/shanghai/tiles
+# Future examples can be added without firmware changes:
+# jiangsu	...	...	...	...	11	/maps/regions/jiangsu/tiles
+# zhejiang	...	...	...	...	11	/maps/regions/zhejiang/tiles

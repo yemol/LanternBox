@@ -1,0 +1,5 @@
+﻿Ref,X_mm nominal,Y_mm nominal,Drill,Type,Keepout_d,Rule
+H1,3,3,2.2,NPTH,6.0,Locked
+H2,63,3,2.2,NPTH,6.0,May shift minimally only for E512 RF
+H3,3,55,2.2,NPTH,6.0,Locked
+H4,63,55,2.2,NPTH,6.0,May shift minimally only for E512 RF

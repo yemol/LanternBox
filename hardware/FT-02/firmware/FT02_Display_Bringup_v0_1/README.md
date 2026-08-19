@@ -1,128 +1,72 @@
-# FT-02 v2.74g Release Candidate
+# LanternBox FT-02 Firmware
 
-当前版本：`v2.74g`
+FT-02 是 LanternBox 的随身终端固件工程。当前生产架构采用 **Core + LR01 双处理器**：
 
-## v2.74g 首页中文字库修正
+- **Core**：UI、电子纸显示、输入、SD、地图、日志、知识库。
+- **LR01**：GNSS、QMC5883L 罗盘、Meshtastic/LoRa。
+- Core 与 LR01 通过 Host UART A2 通讯。
+- Core 不直接访问 GNSS、罗盘或 LoRa 硬件。
 
-- 修复首页“内部通讯”Card 字体尺寸不一致问题。
-- 将“内 / 部 / 讯”补入原有 28px 精简菜单字库，首页六张 Card 统一使用 `ft02_menu_28m`。
-- 不新增字体文件，不修改内部通讯、GNSS、自检、LoRa 或输入逻辑。
+## 当前版本
 
-基线：FT-02 v2.72c 已验证中文输入法 / LoRa 主链路，后续 v2.73-v2.74 在其上增加可靠消息、GNSS 可见卫星诊断、CardKB2 模式切换与系统自检。
+见 [`VERSION.txt`](VERSION.txt)。
 
-本目录已按提交版本整理，仅保留固件源码、必要工程配置、运行时帮助源码、工程工具、第三方声明和校验文件；历史调试中间文件与电池图标迭代残留已移除。
+当前主线：**v2.75k Documentation & Help Cleanup**。
 
-## v2.74g 编译修正
+本版不改变已验证的通讯/导航架构，主要整理项目说明、帮助、协议和验收文件，同时更新设备内帮助页。
 
-- 修复发布清理后电池图标 `ICON_STATUS_BATTERY` 重复定义导致的编译失败。
-- 电池图标统一由 `src/FT02_BatteryIcon.h` 提供；旧 24×24 定义已从 `FT02_IconData.h` 移除。
-- 不改变首页入口、自检、内部通讯、GNSS 或输入逻辑。
+## 编译
 
-## 1. 本版界面调整
+工程使用 PlatformIO。
 
-首页第二行入口顺序调整为：
-
-- 第 4 格：定位记录
-- 第 5 格：内部通讯
-- 第 6 格：设备状态
-
-首页入口与通讯页面标题统一显示“内部通讯”。
-
-## 2. 内部通讯
-
-- 广播：固定即时发送。
-- 私信：支持即时 / 可靠 / 持久三种投递模式。
-- 私信编写且无活动拼音时：`Sym+V` / `Sym+B` 切换投递模式。
-- 有活动拼音时：`Sym+V` / `Sym+B` 用于候选翻页；`6` / `7` 保留为备用翻页。
-- 支持 NodeDB、后台收信、广播、PKI 私信、ACK / NAK、收件箱回复和本地 Outbox。
-- Outbox：`/lanternbox/messages/outbox_v1.tsv`。
-
-## 3. GNSS
-
-- UART：38400 baud。
-- ESP32-S3 RX：GPIO39；TX：GPIO38。
-- 保留 GGA / RMC / GSA 定位解析。
-- 新增 GSV 可见卫星统计。
-- 定位记录页卫星显示格式：`使用/可见`，例如 `0/3`、`5/11`。
-- 未收到有效 GSV 时显示 `0/--`。
-- GNSS 通讯与 GNSS Fix 在系统自检中独立判断，未定位不会直接判定模块故障。
-
-## 4. 系统自检 A1
-
-首页“设备状态”进入系统自检，共两页单列显示。每个项目使用一行：
-
-`项目  状态  简要说明`
-
-状态：
-
-- `PASS`：正常。
-- `WARN`：可使用但存在注意项，并显示原因。
-- `FAIL`：功能不可用或检测失败，并显示具体层级/原因。
-- `--`：暂未接入检测。
-
-当前检查项目包括：
-
-- ESP32 主控运行状态 / Heap
-- PSRAM
-- SD 挂载与临时文件真实读写
-- CardKB2 I2C 0x5F
-- GNSS 通讯
-- GNSS 定位及使用/可见卫星
-- LoRa 协处理器通讯
-- LoRa 网络节点状态
-- WM8960 / I2S 音频状态
-- 地图数据
-- Field Manual 数据
-- 拼音学习持久化
-- 系统时间 / GNSS 校时
-- 电池：暂显示“未接入检测”
-
-操作：
-
-- `← / →`：翻页（同时兼容 `↑ / ↓`）。
-- `ENTER`：重新自检并返回第 1 页。
-- `H`：帮助。
-- `B / ESC`：返回。
-
-自检不会重置或重新配置 GNSS / LoRa，不会重新初始化音频 Codec。SD 写测仅使用 `/lanternbox/.selftest.tmp`，校验后立即删除；音频忙时跳过写测。可用条件下结果追加至 `/lanternbox/logs/selftest.log`。
-
-## 5. 中文输入法
-
-- 离线拼音、连续拼音自动切分、词组候选、数字选词、空格首选。
-- 本地词频学习与 SD 持久化。
-- `Sym+W`：中英文切换。
-- `1-5`：候选选择。
-- `6 / 7`：候选上一页 / 下一页。
-- `0`：活动拼音按英文原样上屏。
-- `DEL`：优先删除拼音，拼音为空后删除正文字符。
-
-## 6. 主要工程文件
-
-```text
-VERSION.txt
-platformio.ini
-boards/
-src/
-lib/
-tools/
-README.md
-THIRD_PARTY_NOTICES.txt
-FILE_CHECKSUMS.sha256
+```bash
+pio run
 ```
 
-其中 `src/FT02_HelpUI.cpp/.h` 为设备运行时帮助页面源码，属于正式固件组成部分，不是发布文档或调试残留。
+当前环境：
 
-地图数据不随普通固件包重复分发。
+```text
+ft02-pbf-a1-n16r8-spi40
+custom board: boards/ft02-esp32-s3-n16r8.json
+```
 
-## 7. 提交前验收建议
+不要删除 `boards/`，否则 PlatformIO 会报 `UnknownBoard`。
 
-1. 编译目标与分区表正常，固件大小未超限。
-2. 首页确认第 5 格为“内部通讯”、第 6 格为“设备状态”。
-3. 内部通讯页面标题显示“内部通讯”。
-4. 私信 `Sym+V/B` 可切换即时 / 可靠 / 持久。
-5. 广播维持即时模式。
-6. GNSS 页面可显示 `使用/可见` 卫星数。
-7. 系统自检两页可翻页、重新检测、返回，异常项目带原因说明。
-8. SD、LoRa、GNSS、音频、地图、Field Manual、拼音输入进行一次基本回归。
+更完整步骤见：
 
-最终实机结果以本机 PlatformIO 编译、刷写及设备测试为准。
+- [`docs/BUILD_AND_FLASH.md`](docs/BUILD_AND_FLASH.md)
+- [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md)
+
+## 当前关键功能
+
+- PBF 离线地图、搜索、区域缓存与黑白快速导航
+- LR01 实时 GNSS 定位同步
+- 地图当前位置方向箭头
+- CardKB2 离线拼音输入
+- 语音日志与定位记录
+- Meshtastic 广播、私信、可靠投递状态
+- 三页系统自检
+- LR01 QMC5883L 罗盘校准 UI
+- 离线应急手册 / 知识库
+
+## 文档入口
+
+- [`docs/README.md`](docs/README.md) 文档索引
+- [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md) 用户操作说明
+- [`docs/BUILD_AND_FLASH.md`](docs/BUILD_AND_FLASH.md) 编译与刷机
+- [`docs/LR01_HOST_PROTOCOL_A2.md`](docs/LR01_HOST_PROTOCOL_A2.md) Core ↔ LR01 协议
+- [`docs/FT02_LR01_HOST_INTERFACE_PIN_LOCK.md`](docs/FT02_LR01_HOST_INTERFACE_PIN_LOCK.md) 硬件接口锁定
+- [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md) 提交/发布前检查
+- [`CHANGELOG.md`](CHANGELOG.md) 版本变更记录
+
+历史测试和审计记录已归档到 `docs/history/`，不再堆在工程根目录。
+
+## 架构硬约束
+
+1. Core 不解析 NMEA。
+2. Core 不访问 QMC5883L I2C。
+3. Core 不控制 SX126x。
+4. Core 不运行 Meshtastic protobuf full-sync / NodeDB 权威逻辑。
+5. 罗盘校准参数只由 LR01 计算并持久化。
+6. 所有导航、罗盘与 LoRa 运行状态以 LR01 Host Protocol 为权威。
+

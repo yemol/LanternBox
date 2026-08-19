@@ -20,7 +20,7 @@ struct FT02SelfTestItem
 
 struct FT02SelfTestReport
 {
-    static constexpr uint8_t MAX_ITEMS = 16;
+    static constexpr uint8_t MAX_ITEMS = 21;
     FT02SelfTestItem items[MAX_ITEMS];
     uint8_t count;
     uint8_t passed;

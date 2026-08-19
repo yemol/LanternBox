@@ -643,9 +643,27 @@ static void drawPositionMarkers(GrayCanvas& canvas)
         if(gnss.courseValid)
         {
             const double radians = gnss.courseDegrees * M_PI / 180.0;
-            const int hx = x + static_cast<int>(lround(sin(radians) * 15.0));
-            const int hy = y - static_cast<int>(lround(cos(radians) * 15.0));
-            canvas.line(x, y, hx, hy, FT02_GRAY4_BLACK);
+            const double sx = sin(radians);
+            const double cy = cos(radians);
+
+            constexpr double TIP_R = 18.0;
+            constexpr double BASE_R = 7.0;
+            constexpr double HALF_W = 6.0;
+
+            const int tipX = x + static_cast<int>(lround(sx * TIP_R));
+            const int tipY = y - static_cast<int>(lround(cy * TIP_R));
+            const double baseCx = x + sx * BASE_R;
+            const double baseCy = y - cy * BASE_R;
+            const double px = cy;
+            const double py = sx;
+            const int leftX = static_cast<int>(lround(baseCx - px * HALF_W));
+            const int leftY = static_cast<int>(lround(baseCy - py * HALF_W));
+            const int rightX = static_cast<int>(lround(baseCx + px * HALF_W));
+            const int rightY = static_cast<int>(lround(baseCy + py * HALF_W));
+
+            canvas.line(tipX, tipY, leftX, leftY, FT02_GRAY4_BLACK);
+            canvas.line(leftX, leftY, rightX, rightY, FT02_GRAY4_BLACK);
+            canvas.line(rightX, rightY, tipX, tipY, FT02_GRAY4_BLACK);
         }
     }
     else

@@ -1,0 +1,44 @@
+{
+  "project": "FT02-LR01",
+  "revision": "v1.1",
+  "type": "Local Codex + KiCad Fabrication Handoff",
+  "status": "HANDOFF_ONLY_NOT_ORDERABLE_P2_2_PRODUCTION_PASSIVE_BOM_BLOCKED",
+  "date": "2026-08-15",
+  "stage": "P2.2 Production Passive BOM & Remaining Pin Authority BLOCKED",
+  "board": "66x58mm / 2-layer / 1.0mm",
+  "assembly": "Top SMT; GNSS Bottom TH DNP/user solder",
+  "b2_3_result": {
+    "J2": "PASS",
+    "U4": "PASS",
+    "SW1_SW2": "PASS",
+    "U6": "PASS",
+    "EXACT_MANUFACTURER_FOOTPRINTS": "PASS"
+  },
+  "exact_parts": {
+    "U1": "ESP32-S3FH4R2 C3013940",
+    "Y1": "7D040000I01 C648973",
+    "U4": "BMI270 C2836813",
+    "U5": "RV-3028-C7... C3304278",
+    "U3": "PE4259-63 C470892",
+    "J1": "USB4105-GF-A C3020560",
+    "J2": "FH34D-10S-0.5SH(50) CL0580-1270-0-50",
+    "U6": "TPD2EUSB30DRTR DRT0003A PASS via TI TIDA-010057/TIDM594A CAD/CAE",
+    "SW1_SW2": "B3U-1000P"
+  },
+  "release_rule": "output/FABRICATION_RELEASE_GATE.md => Overall: PASS",
+  "b2_4_result": {
+    "TPD2EUSB30DRTR": "PASS",
+    "package_reference": "DRT0003A",
+    "authority": "TI TIDA-010057 / TIDM594A CAD/CAE"
+  },
+  "gates": {
+    "EXACT_SYMBOL_PIN_MAPPING": "BLOCKED",
+    "FULL_SCHEMATIC_CAPTURE": "BLOCKED",
+    "SCHEMATIC_ERC": "BLOCKED",
+    "PRODUCTION_PASSIVE_BOM": "PASS",
+    "POWER_DECOUPLING_REQUIREMENTS": "PASS",
+    "REMAINING_PIN_AUTHORITY": "BLOCKED",
+    "P2_2_PRODUCTION_PASSIVE_BOM_GATE": "BLOCKED"
+  },
+  "overall_fabrication_release": "BLOCKED"
+}

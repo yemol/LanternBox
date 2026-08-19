@@ -11,23 +11,15 @@
 
 #include "FT02_Gnss.h"
 #include "FT02_LoRaNodeRuntime.h"
-#include "FT02_LoRaTransport.h"
+#include "FT02_LR01HostRuntime.h"
 
 namespace
 {
 constexpr uint32_t FT02_BROADCAST_NODE = 0xFFFFFFFFu;
-constexpr uint32_t FT02_PORT_TEXT_MESSAGE_APP = 1u;
-constexpr uint32_t FT02_PORT_NODEINFO_APP = 4u;
-constexpr uint32_t FT02_PORT_ROUTING_APP = 5u;
-constexpr uint32_t FT02_PRIORITY_RELIABLE = 70u;
-constexpr uint32_t FT02_HOP_LIMIT = 3u;
 constexpr uint32_t FT02_FRESH_GNSS_MS = 15000u;
 constexpr size_t FT02_INBOX_MAX = 50;
 constexpr size_t FT02_DEDUP_MAX = 32;
 constexpr size_t FT02_PENDING_MAX = 8;
-constexpr size_t FT02_PROTO_DATA_MAX = 240;
-constexpr size_t FT02_PROTO_MESH_MAX = 360;
-constexpr size_t FT02_PROTO_TORADIO_MAX = 400;
 constexpr size_t FT02_OUTBOX_MAX = 16;
 constexpr uint32_t FT02_IMMEDIATE_TTL_SEC = 10u * 60u;
 constexpr uint32_t FT02_RELIABLE_TTL_SEC = 2u * 60u * 60u;
@@ -92,133 +84,6 @@ uint32_t g_packetCounter = 0x20000001u;
 void resolveOutboxPacket(uint32_t packetId, uint32_t error);
 void outboxOnSessionReset();
 
-bool readVarint(const uint8_t* data, size_t length, size_t& offset, uint64_t& value)
-{
-    value = 0;
-    uint8_t shift = 0;
-    while(offset < length && shift < 64)
-    {
-        const uint8_t b = data[offset++];
-        value |= static_cast<uint64_t>(b & 0x7Fu) << shift;
-        if((b & 0x80u) == 0) return true;
-        shift = static_cast<uint8_t>(shift + 7);
-    }
-    return false;
-}
-
-bool readLength(const uint8_t* data, size_t length, size_t& offset, const uint8_t*& ptr, size_t& itemLength)
-{
-    uint64_t value = 0;
-    if(!readVarint(data, length, offset, value)) return false;
-    if(value > static_cast<uint64_t>(length - offset)) return false;
-    itemLength = static_cast<size_t>(value);
-    ptr = data + offset;
-    offset += itemLength;
-    return true;
-}
-
-bool readFixed32(const uint8_t* data, size_t length, size_t& offset, uint32_t& value)
-{
-    if(offset + 4 > length) return false;
-    value = static_cast<uint32_t>(data[offset]) |
-        (static_cast<uint32_t>(data[offset + 1]) << 8) |
-        (static_cast<uint32_t>(data[offset + 2]) << 16) |
-        (static_cast<uint32_t>(data[offset + 3]) << 24);
-    offset += 4;
-    return true;
-}
-
-bool skipField(const uint8_t* data, size_t length, size_t& offset, uint8_t wire)
-{
-    uint64_t value = 0;
-    const uint8_t* ptr = nullptr;
-    size_t itemLength = 0;
-    switch(wire)
-    {
-        case 0: return readVarint(data, length, offset, value);
-        case 1:
-            if(offset + 8 > length) return false;
-            offset += 8;
-            return true;
-        case 2: return readLength(data, length, offset, ptr, itemLength);
-        case 5:
-            if(offset + 4 > length) return false;
-            offset += 4;
-            return true;
-        default: return false;
-    }
-}
-
-size_t encodeVarint(uint64_t value, uint8_t* out, size_t capacity)
-{
-    size_t count = 0;
-    do
-    {
-        if(count >= capacity) return 0;
-        uint8_t b = static_cast<uint8_t>(value & 0x7Fu);
-        value >>= 7;
-        if(value != 0) b |= 0x80u;
-        out[count++] = b;
-    } while(value != 0);
-    return count;
-}
-
-struct ProtoWriter
-{
-    uint8_t* data;
-    size_t capacity;
-    size_t length;
-
-    bool byte(uint8_t value)
-    {
-        if(length >= capacity) return false;
-        data[length++] = value;
-        return true;
-    }
-
-    bool bytes(const uint8_t* src, size_t count)
-    {
-        if(count > capacity - length) return false;
-        if(count > 0) memcpy(data + length, src, count);
-        length += count;
-        return true;
-    }
-
-    bool varint(uint64_t value)
-    {
-        uint8_t tmp[10];
-        const size_t n = encodeVarint(value, tmp, sizeof(tmp));
-        return n > 0 && bytes(tmp, n);
-    }
-
-    bool key(uint32_t field, uint8_t wire)
-    {
-        return varint((static_cast<uint64_t>(field) << 3) | wire);
-    }
-
-    bool varintField(uint32_t field, uint64_t value)
-    {
-        return key(field, 0u) && varint(value);
-    }
-
-    bool fixed32Field(uint32_t field, uint32_t value)
-    {
-        if(!key(field, 5u)) return false;
-        const uint8_t raw[4] = {
-            static_cast<uint8_t>(value & 0xFFu),
-            static_cast<uint8_t>((value >> 8) & 0xFFu),
-            static_cast<uint8_t>((value >> 16) & 0xFFu),
-            static_cast<uint8_t>((value >> 24) & 0xFFu)
-        };
-        return bytes(raw, sizeof(raw));
-    }
-
-    bool lengthField(uint32_t field, const uint8_t* src, size_t count)
-    {
-        return key(field, 2u) && varint(count) && bytes(src, count);
-    }
-};
-
 size_t safeUtf8Prefix(const char* text, size_t maxBytes)
 {
     if(text == nullptr) return 0;
@@ -227,15 +92,6 @@ size_t safeUtf8Prefix(const char* text, size_t maxBytes)
     if(n == len) return n;
     while(n > 0 && (static_cast<uint8_t>(text[n]) & 0xC0u) == 0x80u) --n;
     return n;
-}
-
-void copyUtf8(char* dst, size_t dstSize, const uint8_t* src, size_t srcLength)
-{
-    if(dstSize == 0) return;
-    size_t count = srcLength < dstSize - 1 ? srcLength : dstSize - 1;
-    while(count > 0 && count < srcLength && (src[count] & 0xC0u) == 0x80u) --count;
-    if(count > 0) memcpy(dst, src, count);
-    dst[count] = '\0';
 }
 
 bool packetIdInUse(uint32_t id)
@@ -306,7 +162,7 @@ void registerTx(uint32_t packetId, uint32_t destination, bool broadcast, bool pk
     slot.view.destination = destination;
     slot.view.broadcast = broadcast;
     slot.view.pkiEncrypted = pki;
-    slot.view.state = FT02_LORA_TX_SENT;
+    slot.view.state = FT02_LORA_TX_NONE;
     slot.view.sentAtMs = millis();
     const size_t previewBytes = safeUtf8Prefix(text, sizeof(slot.view.preview) - 1);
     memcpy(slot.view.preview, text, previewBytes);
@@ -342,242 +198,6 @@ void resolveAck(uint32_t requestId, uint32_t error)
     ++g_revision;
 }
 
-struct DecodedData
-{
-    uint32_t portnum = 0;
-    const uint8_t* payload = nullptr;
-    size_t payloadLength = 0;
-    uint32_t requestId = 0;
-};
-
-bool parseData(const uint8_t* data, size_t length, DecodedData& out)
-{
-    size_t offset = 0;
-    while(offset < length)
-    {
-        uint64_t key = 0;
-        if(!readVarint(data, length, offset, key)) return false;
-        const uint32_t field = static_cast<uint32_t>(key >> 3);
-        const uint8_t wire = static_cast<uint8_t>(key & 7u);
-        if(field == 1u && wire == 0u)
-        {
-            uint64_t value = 0;
-            if(!readVarint(data, length, offset, value)) return false;
-            out.portnum = static_cast<uint32_t>(value);
-        }
-        else if(field == 2u && wire == 2u)
-        {
-            if(!readLength(data, length, offset, out.payload, out.payloadLength)) return false;
-        }
-        else if(field == 6u && wire == 5u)
-        {
-            if(!readFixed32(data, length, offset, out.requestId)) return false;
-        }
-        else if(!skipField(data, length, offset, wire))
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
-uint32_t parseRoutingError(const uint8_t* data, size_t length)
-{
-    uint32_t error = 0;
-    size_t offset = 0;
-    while(offset < length)
-    {
-        uint64_t key = 0;
-        if(!readVarint(data, length, offset, key)) return error;
-        const uint32_t field = static_cast<uint32_t>(key >> 3);
-        const uint8_t wire = static_cast<uint8_t>(key & 7u);
-        if(field == 3u && wire == 0u)
-        {
-            uint64_t value = 0;
-            if(!readVarint(data, length, offset, value)) return error;
-            return static_cast<uint32_t>(value);
-        }
-        if(!skipField(data, length, offset, wire)) return error;
-    }
-    return error;
-}
-
-void parseQueueStatus(const uint8_t* data, size_t length)
-{
-    int32_t result = 0;
-    uint32_t packetId = 0;
-    size_t offset = 0;
-    while(offset < length)
-    {
-        uint64_t key = 0;
-        if(!readVarint(data, length, offset, key)) return;
-        const uint32_t field = static_cast<uint32_t>(key >> 3);
-        const uint8_t wire = static_cast<uint8_t>(key & 7u);
-        if((field == 1u || field == 4u) && wire == 0u)
-        {
-            uint64_t value = 0;
-            if(!readVarint(data, length, offset, value)) return;
-            if(field == 1u) result = static_cast<int32_t>(static_cast<uint32_t>(value));
-            else packetId = static_cast<uint32_t>(value);
-        }
-        else if(!skipField(data, length, offset, wire)) return;
-    }
-    if(packetId == 0 || result == 0) return;
-    PendingTx* pending = findPending(packetId);
-    if(pending == nullptr) return;
-    pending->view.state = FT02_LORA_TX_FAILED;
-    pending->view.completedAtMs = millis();
-    pending->view.routingError = static_cast<uint32_t>(result);
-    ++g_nakCount;
-    resolveOutboxPacket(packetId, static_cast<uint32_t>(result));
-    ++g_revision;
-    Serial.printf(
-        "[LORA-MSG] queue reject packet=0x%08lX result=%ld\n",
-        static_cast<unsigned long>(packetId),
-        static_cast<long>(result)
-    );
-}
-
-void parseMeshPacket(const uint8_t* data, size_t length)
-{
-    uint32_t from = 0;
-    uint32_t to = 0;
-    uint32_t packetId = 0;
-    uint32_t rxTime = 0;
-    bool hasRxTime = false;
-    bool hasSnr = false;
-    float snr = 0.0f;
-    bool hasRssi = false;
-    int32_t rssi = 0;
-    uint32_t hopLimit = 0;
-    uint32_t hopStart = 0;
-    bool pkiEncrypted = false;
-    const uint8_t* decodedPtr = nullptr;
-    size_t decodedLength = 0;
-
-    size_t offset = 0;
-    while(offset < length)
-    {
-        uint64_t key = 0;
-        if(!readVarint(data, length, offset, key)) return;
-        const uint32_t field = static_cast<uint32_t>(key >> 3);
-        const uint8_t wire = static_cast<uint8_t>(key & 7u);
-
-        if((field == 1u || field == 2u || field == 6u || field == 7u) && wire == 5u)
-        {
-            uint32_t value = 0;
-            if(!readFixed32(data, length, offset, value)) return;
-            if(field == 1u) from = value;
-            else if(field == 2u) to = value;
-            else if(field == 6u) packetId = value;
-            else { rxTime = value; hasRxTime = true; }
-        }
-        else if(field == 4u && wire == 2u)
-        {
-            if(!readLength(data, length, offset, decodedPtr, decodedLength)) return;
-        }
-        else if(field == 8u && wire == 5u)
-        {
-            uint32_t bits = 0;
-            if(!readFixed32(data, length, offset, bits)) return;
-            memcpy(&snr, &bits, sizeof(snr));
-            hasSnr = true;
-        }
-        else if((field == 9u || field == 12u || field == 15u || field == 17u) && wire == 0u)
-        {
-            uint64_t value = 0;
-            if(!readVarint(data, length, offset, value)) return;
-            if(field == 9u) hopLimit = static_cast<uint32_t>(value);
-            else if(field == 12u) { rssi = static_cast<int32_t>(static_cast<uint32_t>(value)); hasRssi = true; }
-            else if(field == 15u) hopStart = static_cast<uint32_t>(value);
-            else pkiEncrypted = value != 0;
-        }
-        else if(!skipField(data, length, offset, wire))
-        {
-            return;
-        }
-    }
-
-    bool hasHops = hopStart > 0 && hopStart >= hopLimit;
-    uint8_t hops = hasHops ? static_cast<uint8_t>(hopStart - hopLimit) : 0;
-    if(from != 0)
-    {
-        FT02_LoRaNodeRuntimeUpdatePacketMetrics(from, hasSnr, snr, hasHops, hops, hasRxTime ? rxTime : 0);
-    }
-    if(decodedPtr == nullptr || decodedLength == 0) return;
-
-    DecodedData decoded;
-    if(!parseData(decodedPtr, decodedLength, decoded)) return;
-
-    if(decoded.portnum == FT02_PORT_ROUTING_APP && decoded.requestId != 0)
-    {
-        const uint32_t error = decoded.payload != nullptr
-            ? parseRoutingError(decoded.payload, decoded.payloadLength)
-            : 0u;
-        resolveAck(decoded.requestId, error);
-        return;
-    }
-
-    if(decoded.portnum == FT02_PORT_NODEINFO_APP && from != 0 && decoded.payload != nullptr)
-    {
-        FT02_LoRaNodeRuntimeUpdateUserFromPacket(
-            from,
-            decoded.payload,
-            decoded.payloadLength,
-            hasSnr,
-            snr,
-            hasHops,
-            hops,
-            hasRxTime ? rxTime : 0
-        );
-        return;
-    }
-
-    if(decoded.portnum != FT02_PORT_TEXT_MESSAGE_APP || decoded.payload == nullptr) return;
-    const uint32_t localNode = FT02_LoRaNodeRuntimeLocalNode();
-    if(from == 0 || from == localNode) return; // don't create unread entries for our own TX echoes
-
-    if(isDuplicate(from, packetId))
-    {
-        ++g_duplicateCount;
-        ++g_revision;
-        Serial.printf(
-            "[LORA-MSG] duplicate from=!%08lX id=0x%08lX\n",
-            static_cast<unsigned long>(from),
-            static_cast<unsigned long>(packetId)
-        );
-        return;
-    }
-
-    FT02LoRaMessageView message = {};
-    message.valid = true;
-    message.from = from;
-    message.to = to;
-    message.packetId = packetId;
-    message.broadcast = to == FT02_BROADCAST_NODE;
-    message.pkiEncrypted = pkiEncrypted;
-    copyUtf8(message.text, sizeof(message.text), decoded.payload, decoded.payloadLength);
-    message.hasRxTime = hasRxTime;
-    message.rxTimeEpoch = rxTime;
-    message.hasRssi = hasRssi;
-    message.rssi = rssi;
-    message.hasSnr = hasSnr;
-    message.snr = snr;
-    message.hasHops = hasHops;
-    message.hops = hops;
-
-    g_lastRxPacketId = packetId;
-    pushInbox(message);
-    Serial.printf(
-        "[LORA-MSG] RX from=!%08lX id=0x%08lX kind=%s pki=%u text=%s\n",
-        static_cast<unsigned long>(from),
-        static_cast<unsigned long>(packetId),
-        message.broadcast ? "broadcast" : "direct",
-        pkiEncrypted ? 1u : 0u,
-        message.text
-    );
-}
-
 bool makeTextPayload(const char* userText, bool attachFreshGnss, char* out, size_t outSize)
 {
     if(userText == nullptr || out == nullptr || outSize == 0) return false;
@@ -606,60 +226,35 @@ bool makeTextPayload(const char* userText, bool attachFreshGnss, char* out, size
 
 bool sendText(uint32_t destination, bool direct, const uint8_t* publicKey, const char* userText, bool attachFreshGnss, uint32_t* outPacketId = nullptr)
 {
-    if(!FT02_LoRaNodeRuntimeReady() || !FT02_LoRaTransportLinkUp()) return false;
+    (void)publicKey; // LR01 owns PKI/public-key material in the new architecture.
+    if(!FT02_LR01HostRadioReady()) return false;
 
     char text[FT02_LORA_MESSAGE_TEXT_BYTES];
     if(!makeTextPayload(userText, attachFreshGnss, text, sizeof(text))) return false;
-    const size_t textLen = strlen(text);
 
-    uint8_t dataProto[FT02_PROTO_DATA_MAX];
-    ProtoWriter dataWriter{dataProto, sizeof(dataProto), 0};
-    if(!dataWriter.varintField(1u, FT02_PORT_TEXT_MESSAGE_APP) ||
-       !dataWriter.lengthField(2u, reinterpret_cast<const uint8_t*>(text), textLen))
-    {
-        return false;
-    }
+    // LR01 Host A2 accepts the frozen protocol payload limit, while Core intentionally limits user
+    // traffic to 120 UTF-8 bytes. Truncate at a valid UTF-8 boundary after any
+    // optional GPS suffix has been appended.
+    const size_t limited = safeUtf8Prefix(text, FT02_LORA_USER_TEXT_MAX_BYTES);
+    text[limited] = '\0';
+    if(limited == 0) return false;
 
     const uint32_t packetId = generatePacketId();
-    uint8_t meshProto[FT02_PROTO_MESH_MAX];
-    ProtoWriter meshWriter{meshProto, sizeof(meshProto), 0};
-    if(!meshWriter.fixed32Field(2u, destination) ||
-       !meshWriter.lengthField(4u, dataProto, dataWriter.length) ||
-       !meshWriter.fixed32Field(6u, packetId) ||
-       !meshWriter.varintField(9u, FT02_HOP_LIMIT) ||
-       (direct && !meshWriter.varintField(10u, 1u)) ||
-       !meshWriter.varintField(11u, FT02_PRIORITY_RELIABLE))
-    {
-        return false;
-    }
-
-    if(direct)
-    {
-        if(publicKey == nullptr) return false;
-        if(!meshWriter.lengthField(16u, publicKey, 32u) ||
-           !meshWriter.varintField(17u, 1u))
-        {
-            return false;
-        }
-    }
-
-    uint8_t toRadio[FT02_PROTO_TORADIO_MAX];
-    ProtoWriter toRadioWriter{toRadio, sizeof(toRadio), 0};
-    if(!toRadioWriter.lengthField(1u, meshProto, meshWriter.length)) return false;
-
-    if(!FT02_LoRaTransportSendToRadio(toRadio, toRadioWriter.length)) return false;
+    const bool submitted = direct
+        ? FT02_LR01HostSendPrivate(packetId, destination, text)
+        : FT02_LR01HostSendBroadcast(packetId, text);
+    if(!submitted) return false;
 
     registerTx(packetId, destination, !direct, direct, text);
     if(outPacketId != nullptr) *outPacketId = packetId;
     ++g_txCount;
     ++g_revision;
     Serial.printf(
-        "[LORA-MSG] TX %s to=!%08lX id=0x%08lX pki=%u bytes=%u text=%s\n",
+        "[LORA-MSG] LR01 submit %s to=!%08lX local_id=0x%08lX bytes=%u text=%s\n",
         direct ? "private" : "broadcast",
         static_cast<unsigned long>(destination),
         static_cast<unsigned long>(packetId),
-        direct ? 1u : 0u,
-        static_cast<unsigned>(textLen),
+        static_cast<unsigned>(limited),
         text
     );
     return true;
@@ -727,7 +322,7 @@ void resolveOutboxPacket(uint32_t packetId, uint32_t error)
     else if(slot.view.mode == FT02_MESSAGE_IMMEDIATE)
     {
         // Immediate messages are never application-layer retried after the
-        // coprocessor accepted the transmission. A later routing NAK is simply
+        // LR01 accepted the Host transmission. A later routing NAK is simply
         // surfaced as a failed terminal state.
         slot.view.state = FT02_DELIVERY_FAILED;
     }
@@ -1017,14 +612,15 @@ uint32_t g_lastDeliverySubmitMs = 0;
 bool trySubmitOutbox(OutboxSlot& slot, uint32_t nowMs)
 {
     if(!slot.view.valid || !deliveryStateActive(slot.view.state)) return false;
-    if(!FT02_LoRaTransportLinkUp() || !FT02_LoRaNodeRuntimeReady()) return false;
+    if(!FT02_LR01HostRadioReady()) return false;
     if(g_lastDeliverySubmitMs != 0 && static_cast<uint32_t>(nowMs - g_lastDeliverySubmitMs) < 2500u) return false;
 
     if(slot.view.state == FT02_DELIVERY_WAITING_ACK)
     {
-        const uint32_t retryMs = slot.view.mode == FT02_MESSAGE_PERSISTENT
-            ? FT02_PERSISTENT_RETRY_MS : FT02_RELIABLE_RETRY_MS;
-        if(static_cast<uint32_t>(nowMs - slot.view.lastAttemptMs) < retryMs) return false;
+        // A2 keeps exactly one Core outbox attempt waiting for the correlated
+        // LR01 delivery ACK/TIMEOUT. Do not submit another attempt until that
+        // lifecycle completes.
+        return false;
     }
     else if(slot.view.attemptCount > 0)
     {
@@ -1034,23 +630,17 @@ bool trySubmitOutbox(OutboxSlot& slot, uint32_t nowMs)
            static_cast<uint32_t>(nowMs - slot.view.lastAttemptMs) < retryMs) return false;
     }
 
-    uint8_t key[32] = {};
-    const uint8_t* keyPtr = nullptr;
     const bool direct = !slot.view.broadcast;
-    if(direct)
-    {
-        if(!FT02_LoRaNodeRuntimeGetPublicKey(slot.view.destination, key)) return false;
-        keyPtr = key;
-    }
-
     uint32_t packetId = 0;
-    if(!sendText(slot.view.destination, direct, keyPtr, slot.view.text, false, &packetId)) return false;
+    if(!sendText(slot.view.destination, direct, nullptr, slot.view.text, false, &packetId)) return false;
     slot.view.lastPacketId = packetId;
     slot.view.lastAttemptMs = nowMs;
     if(slot.view.attemptCount < 0xFFFFu) ++slot.view.attemptCount;
     g_lastDeliverySubmitMs = nowMs;
-    slot.view.state = slot.view.mode == FT02_MESSAGE_IMMEDIATE
-        ? FT02_DELIVERY_SENT : FT02_DELIVERY_WAITING_ACK;
+    // LR01 Host A2 correlates this packetId as the Core lifecycle id. Private
+    // reliable/persistent items remain WAITING_ACK until MESH_DELIVERY ACK or
+    // TIMEOUT; TIMEOUT returns retryable modes to QUEUED.
+    slot.view.state = FT02_DELIVERY_WAITING_ACK;
     markOutboxDirty();
     Serial.printf("[LORA-DELIVERY] submit logical=0x%08lX packet=0x%08lX attempt=%u state=%s\n",
                   static_cast<unsigned long>(slot.view.logicalId),
@@ -1084,31 +674,6 @@ void pollOutboxDelivery()
 }
 }
 
-void FT02_LoRaCommunicationRuntimeOnFromRadio(const uint8_t* payload, uint16_t length)
-{
-    if(payload == nullptr || length == 0) return;
-    size_t offset = 0;
-    while(offset < length)
-    {
-        uint64_t key = 0;
-        if(!readVarint(payload, length, offset, key)) return;
-        const uint32_t field = static_cast<uint32_t>(key >> 3);
-        const uint8_t wire = static_cast<uint8_t>(key & 7u);
-        if((field == 2u || field == 11u) && wire == 2u)
-        {
-            const uint8_t* item = nullptr;
-            size_t itemLength = 0;
-            if(!readLength(payload, length, offset, item, itemLength)) return;
-            if(field == 2u) parseMeshPacket(item, itemLength);
-            else parseQueueStatus(item, itemLength);
-        }
-        else if(!skipField(payload, length, offset, wire))
-        {
-            return;
-        }
-    }
-}
-
 void FT02_LoRaCommunicationRuntimeResetSession()
 {
     outboxOnSessionReset();
@@ -1133,9 +698,7 @@ bool FT02_LoRaCommunicationSendBroadcast(const char* userText, bool attachFreshG
 bool FT02_LoRaCommunicationSendPrivate(uint32_t destination, const char* userText, bool attachFreshGnss)
 {
     if(destination == 0 || destination == FT02_LoRaNodeRuntimeLocalNode()) return false;
-    uint8_t key[32];
-    if(!FT02_LoRaNodeRuntimeGetPublicKey(destination, key)) return false;
-    return sendText(destination, true, key, userText, attachFreshGnss);
+    return sendText(destination, true, nullptr, userText, attachFreshGnss);
 }
 
 void FT02_LoRaMessageDeliveryBegin()
@@ -1215,6 +778,19 @@ bool FT02_LoRaMessageCancel(uint32_t logicalId)
     slot.view.state = FT02_DELIVERY_CANCELED;
     markOutboxDirty();
     Serial.printf("[LORA-DELIVERY] canceled logical=0x%08lX\n", static_cast<unsigned long>(logicalId));
+    return true;
+}
+
+bool FT02_LoRaMessageClearOutbox()
+{
+    if(g_outboxCount == 0) return true;
+
+    memset(g_outbox, 0, sizeof(g_outbox));
+    g_outboxHead = 0;
+    g_outboxCount = 0;
+    markOutboxDirty();
+
+    Serial.println("[LORA-DELIVERY] outbox cleared");
     return true;
 }
 
@@ -1332,4 +908,151 @@ const char* FT02_LoRaCommunicationRoutingErrorText(uint32_t error)
         case 39: return "PKI_SEND_FAIL_PUBLIC_KEY";
         default: return "ROUTING_ERROR";
     }
+}
+
+void FT02_LoRaCommunicationHostReceive(uint32_t airPacketId,
+                                       uint32_t from,
+                                       uint32_t to,
+                                       const char* senderName,
+                                       bool pkiEncrypted,
+                                       float rssi,
+                                       float snr,
+                                       const char* text)
+{
+    (void)senderName;
+    if(from == 0 || text == nullptr || text[0] == '\0') return;
+
+    const uint32_t packetId = airPacketId != 0 ? airPacketId : generatePacketId();
+    if(isDuplicate(from, packetId))
+    {
+        ++g_duplicateCount;
+        ++g_revision;
+        Serial.printf("[LORA-MSG] LR01 duplicate from=!%08lX id=0x%08lX dropped\n",
+                      static_cast<unsigned long>(from),
+                      static_cast<unsigned long>(packetId));
+        return;
+    }
+
+    FT02LoRaMessageView message = {};
+    message.valid = true;
+    message.from = from;
+    message.to = to != 0 ? to : (pkiEncrypted ? FT02_LoRaNodeRuntimeLocalNode() : FT02_BROADCAST_NODE);
+    message.packetId = packetId;
+    message.broadcast = message.to == FT02_BROADCAST_NODE;
+    message.pkiEncrypted = pkiEncrypted;
+    const size_t bytes = safeUtf8Prefix(text, sizeof(message.text) - 1);
+    memcpy(message.text, text, bytes);
+    message.text[bytes] = '\0';
+    message.hasRxTime = false;
+    message.hasRssi = true;
+    message.rssi = static_cast<int32_t>(lroundf(rssi));
+    message.hasSnr = true;
+    message.snr = snr;
+    message.hasHops = false;
+    pushInbox(message);
+    g_lastRxPacketId = message.packetId;
+    Serial.printf("[LORA-MSG] LR01 RX %s from=!%08lX to=!%08lX air_id=0x%08lX rssi=%ld snr=%.1f text=%s\n",
+                  message.broadcast ? "broadcast" : "private",
+                  static_cast<unsigned long>(from),
+                  static_cast<unsigned long>(message.to),
+                  static_cast<unsigned long>(message.packetId),
+                  static_cast<long>(message.rssi),
+                  static_cast<double>(snr),
+                  message.text);
+}
+
+void FT02_LoRaCommunicationHostTxAccepted(uint32_t hostId)
+{
+    PendingTx* pending = findPending(hostId);
+    if(pending == nullptr) return;
+    // ACCEPTED confirms LR01 ownership of the request but not RF transmission.
+    ++g_revision;
+}
+
+void FT02_LoRaCommunicationHostTxSent(uint32_t hostId)
+{
+    PendingTx* pending = findPending(hostId);
+    if(pending != nullptr)
+    {
+        pending->view.state = FT02_LORA_TX_SENT;
+        if(pending->view.sentAtMs == 0) pending->view.sentAtMs = millis();
+    }
+
+    const int outboxIndex = findOutboxPacket(hostId);
+    if(outboxIndex >= 0)
+    {
+        OutboxSlot& slot = g_outbox[outboxIndex];
+        if(slot.view.valid && slot.view.broadcast)
+        {
+            slot.view.state = FT02_DELIVERY_SENT;
+            markOutboxDirty();
+        }
+        // Private reliable/persistent messages intentionally remain WAITING_ACK
+        // until LR01 reports MESH_DELIVERY ACK/TIMEOUT.
+    }
+    ++g_revision;
+}
+
+void FT02_LoRaCommunicationHostTxFailed(uint32_t hostId, const char* reason)
+{
+    PendingTx* pending = findPending(hostId);
+    if(pending != nullptr)
+    {
+        pending->view.completedAtMs = millis();
+        pending->view.state = FT02_LORA_TX_FAILED;
+        pending->view.routingError = 8; // NO_RESPONSE/general host failure mapping for existing UI.
+    }
+    resolveOutboxPacket(hostId, 8);
+    ++g_nakCount;
+    ++g_revision;
+    Serial.printf("[LORA-MSG] LR01 TX failed id=0x%08lX reason=%s\n",
+                  static_cast<unsigned long>(hostId), reason != nullptr ? reason : "");
+}
+
+void FT02_LoRaCommunicationHostTxResult(uint32_t hostId, const char* type, bool ok, const char* reason)
+{
+    (void)type;
+    // A2 SENT and DELIVERY carry the authoritative lifecycle. RESULT remains a
+    // compatibility summary; only a negative result is terminal here.
+    if(!ok) FT02_LoRaCommunicationHostTxFailed(hostId, reason);
+}
+
+void FT02_LoRaCommunicationHostDelivery(uint32_t hostId, uint32_t node, bool ack)
+{
+    (void)node;
+    if(hostId == 0) return;
+    if(ack)
+    {
+        resolveAck(hostId, 0);
+        resolveOutboxPacket(hostId, 0);
+    }
+    else
+    {
+        resolveAck(hostId, 3); // TIMEOUT
+        resolveOutboxPacket(hostId, 3);
+    }
+    ++g_revision;
+}
+
+void FT02_LoRaCommunicationHostTxResult(const char* type, bool ok)
+{
+    const bool wantsPrivate = type != nullptr && strcmp(type, "PRIVATE") == 0;
+    const bool wantsBroadcast = type != nullptr && strcmp(type, "TEXT") == 0;
+
+    // A1 fallback only: resolve newest local TX of the same class because there
+    // is no host lifecycle id in the legacy line.
+    for(size_t n = 0; n < FT02_PENDING_MAX; ++n)
+    {
+        const size_t index = (g_pendingHead + FT02_PENDING_MAX - 1 - n) % FT02_PENDING_MAX;
+        PendingTx& pending = g_pending[index];
+        if(!pending.view.valid) continue;
+        if(wantsPrivate && pending.view.broadcast) continue;
+        if(wantsBroadcast && !pending.view.broadcast) continue;
+        if(pending.view.completedAtMs != 0) continue;
+        pending.view.completedAtMs = millis();
+        pending.view.state = ok ? FT02_LORA_TX_SENT : FT02_LORA_TX_FAILED;
+        if(ok) ++g_ackCount; else ++g_nakCount;
+        break;
+    }
+    ++g_revision;
 }

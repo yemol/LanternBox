@@ -210,7 +210,7 @@ static void FT02_DrawHelpContent(
     FT02_DrawTextPack(
         display,
         ft02_menu_28m,
-        "确认 / 帮助 / 返回",
+        "常用快捷键",
         FT02_HELP_RIGHT_X + 24,
         FT02_HELP_PANEL_Y + 42
     );
@@ -231,8 +231,8 @@ static void FT02_DrawHelpContent(
 
     FT02_DrawHelpLabelRow(
         display,
-        "B / ESC",
-        "返回",
+        "K",
+        "状态页罗盘",
         FT02_HELP_PANEL_Y + 212
     );
 

@@ -1,0 +1,761 @@
+{
+  "counts": {
+    "footprints": 53,
+    "segments": 180,
+    "vias": 684,
+    "zones": 65,
+    "graphics": 95
+  },
+  "clip_counts": {
+    "segments": 9,
+    "zones": 6,
+    "graphics_lines": 4,
+    "graphics_polys": 0
+  },
+  "footprints": [
+    {
+      "ref": "L1",
+      "value": "Inductor",
+      "lib": "SX1280_e325v01a:RLC_402_SMD",
+      "source": [
+        166.7761,
+        102.9536
+      ],
+      "target": [
+        39.77500000000002,
+        26.94999999999999
+      ]
+    },
+    {
+      "ref": "C7",
+      "value": "Cap",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        169.5761,
+        105.5286
+      ],
+      "target": [
+        42.575,
+        29.52499999999999
+      ]
+    },
+    {
+      "ref": "R868",
+      "value": "Resistor",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        187.3511,
+        125.5536
+      ],
+      "target": [
+        60.35000000000001,
+        49.55
+      ]
+    },
+    {
+      "ref": "C5",
+      "value": "Cap",
+      "lib": "SX1280_e325v01a:RLC_402_SMD",
+      "source": [
+        172.60111,
+        102.9536
+      ],
+      "target": [
+        45.60001000000001,
+        26.94999999999999
+      ]
+    },
+    {
+      "ref": "L5",
+      "value": "Inductor",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        186.4011,
+        104.3286
+      ],
+      "target": [
+        59.40000000000002,
+        28.32499999999999
+      ]
+    },
+    {
+      "ref": "R3",
+      "value": "Resistor",
+      "lib": "SX126x_e383v02a:RLC_402_SMD",
+      "source": [
+        179.5011,
+        107.3036
+      ],
+      "target": [
+        52.500000000000014,
+        31.299999999999997
+      ]
+    },
+    {
+      "ref": "FB1",
+      "value": "Ferrite beads",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        163.6511,
+        93.82856
+      ],
+      "target": [
+        36.65000000000002,
+        17.82495999999999
+      ]
+    },
+    {
+      "ref": "C25",
+      "value": "Cap",
+      "lib": "SX126x_e407v02a:rlc_402_smd",
+      "source": [
+        166.0761,
+        97.2536
+      ],
+      "target": [
+        39.075,
+        21.25
+      ]
+    },
+    {
+      "ref": "Logo_LoRA2",
+      "value": "Logo symbol",
+      "lib": "SX126x_e383v01a:Logo LoRa Size3",
+      "source": [
+        169.0263,
+        130.8176
+      ],
+      "target": [
+        42.0252,
+        54.81399999999999
+      ]
+    },
+    {
+      "ref": "U2",
+      "value": "PE4259 RF Switch",
+      "lib": "SX126x_e383v02a:SC70-6",
+      "source": [
+        179.5261,
+        104.3286
+      ],
+      "target": [
+        52.52500000000002,
+        28.32499999999999
+      ]
+    },
+    {
+      "ref": "C12",
+      "value": "Cap",
+      "lib": "SX1280_e363v01a:RLC_402_SMD",
+      "source": [
+        167.9511,
+        105.5536
+      ],
+      "target": [
+        40.95,
+        29.549999999999997
+      ]
+    },
+    {
+      "ref": "Other",
+      "value": "Resistor",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        187.3511,
+        129.0036
+      ],
+      "target": [
+        60.35000000000001,
+        53.0
+      ]
+    },
+    {
+      "ref": "C13",
+      "value": "Cap",
+      "lib": "SX126x_e407v02a:rlc_402_smd",
+      "source": [
+        161.0511,
+        96.8536
+      ],
+      "target": [
+        34.05,
+        20.849999999999994
+      ]
+    },
+    {
+      "ref": "R4",
+      "value": "Resistor",
+      "lib": "SX1280_e325v01a:RLC_402_SMD",
+      "source": [
+        179.5511,
+        101.3536
+      ],
+      "target": [
+        52.55,
+        25.349999999999994
+      ]
+    },
+    {
+      "ref": "R434",
+      "value": "Resistor",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        187.3511,
+        127.8536
+      ],
+      "target": [
+        60.35000000000001,
+        51.849999999999994
+      ]
+    },
+    {
+      "ref": "C8",
+      "value": "Cap",
+      "lib": "SX1280_e325v01a:RLC_402_SMD",
+      "source": [
+        182.0511,
+        104.3286
+      ],
+      "target": [
+        55.05,
+        28.32499999999999
+      ]
+    },
+    {
+      "ref": "L3",
+      "value": "Inductor",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        170.95108,
+        103.30359
+      ],
+      "target": [
+        43.94998,
+        27.299989999999994
+      ]
+    },
+    {
+      "ref": "RFIO",
+      "value": "SMA",
+      "lib": "SX126x_e407v01a:SMA_end_launch_1.0mm_9.52mm",
+      "source": [
+        190.6511,
+        104.3286
+      ],
+      "target": [
+        63.65000000000002,
+        28.32499999999999
+      ]
+    },
+    {
+      "ref": "C1",
+      "value": "Cap",
+      "lib": "SX1280_e325v01a:RLC_402_SMD",
+      "source": [
+        167.7511,
+        101.8536
+      ],
+      "target": [
+        40.750000000000014,
+        25.849999999999994
+      ]
+    },
+    {
+      "ref": "C9",
+      "value": "Cap",
+      "lib": "SX1280_e325v01a:RLC_402_SMD",
+      "source": [
+        184.8511,
+        104.8786
+      ],
+      "target": [
+        57.85000000000001,
+        28.875
+      ]
+    },
+    {
+      "ref": "L7",
+      "value": "Inductor",
+      "lib": "SX126x_e383v01a:rlc_805_smd enlarged",
+      "source": [
+        156.67609,
+        103.1286
+      ],
+      "target": [
+        29.674989999999994,
+        27.125
+      ]
+    },
+    {
+      "ref": "R5",
+      "value": "Resistor",
+      "lib": "SX126x_e407v02a:rlc_402_smd",
+      "source": [
+        165.1011,
+        95.77857
+      ],
+      "target": [
+        38.10000000000001,
+        19.774969999999996
+      ]
+    },
+    {
+      "ref": "Shield",
+      "value": "Logo symbol",
+      "lib": "SX126x_e383v01a:BMIS-209-F - SHIELD",
+      "source": [
+        154.3511,
+        110.4536
+      ],
+      "target": [
+        27.35000000000001,
+        34.44999999999999
+      ]
+    },
+    {
+      "ref": "C11",
+      "value": "Cap",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        168.17609,
+        104.4536
+      ],
+      "target": [
+        41.174989999999994,
+        28.44999999999999
+      ]
+    },
+    {
+      "ref": "C14",
+      "value": "Cap",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        180.4511,
+        101.3536
+      ],
+      "target": [
+        53.45,
+        25.349999999999994
+      ]
+    },
+    {
+      "ref": "C17",
+      "value": "Cap",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        160.0011,
+        103.1536
+      ],
+      "target": [
+        33.000000000000014,
+        27.14999999999999
+      ]
+    },
+    {
+      "ref": "C28",
+      "value": "Cap",
+      "lib": "SX126x_e383v02a:RLC_402_SMD",
+      "source": [
+        165.7011,
+        93.82856
+      ],
+      "target": [
+        38.7,
+        17.82495999999999
+      ]
+    },
+    {
+      "ref": "Logo ESD",
+      "value": "Logo symbol",
+      "lib": "SX1276_e311v01a:Logo ESD",
+      "source": [
+        158.7647,
+        133.1036
+      ],
+      "target": [
+        31.76360000000001,
+        57.099999999999994
+      ]
+    },
+    {
+      "ref": "P2",
+      "value": "Header 4X2",
+      "lib": "Miscellaneous Connectors:HDR2X4",
+      "source": [
+        157.8211,
+        115.7436
+      ],
+      "target": [
+        30.820000000000007,
+        39.739999999999995
+      ]
+    },
+    {
+      "ref": "C18",
+      "value": "Cap",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        160.0011,
+        106.0536
+      ],
+      "target": [
+        33.000000000000014,
+        30.049999999999997
+      ]
+    },
+    {
+      "ref": "L4",
+      "value": "Inductor",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        174.10108,
+        103.5036
+      ],
+      "target": [
+        47.09998,
+        27.5
+      ]
+    },
+    {
+      "ref": "C16",
+      "value": "Cap",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        166.8761,
+        100.8036
+      ],
+      "target": [
+        39.875000000000014,
+        24.799999999999997
+      ]
+    },
+    {
+      "ref": "C3",
+      "value": "Cap",
+      "lib": "SX126x_e407v02a:rlc_402_smd",
+      "source": [
+        168.75108,
+        103.4786
+      ],
+      "target": [
+        41.74998000000001,
+        27.474999999999994
+      ]
+    },
+    {
+      "ref": "C2",
+      "value": "Cap",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        168.62611,
+        101.8536
+      ],
+      "target": [
+        41.62501000000002,
+        25.849999999999994
+      ]
+    },
+    {
+      "ref": "Logo Semtech S",
+      "value": "Logo symbol",
+      "lib": "SX1280_e325v02a:logo_semtech_horiz_size3",
+      "source": [
+        154.3511,
+        87.2036
+      ],
+      "target": [
+        27.35000000000001,
+        11.199999999999989
+      ]
+    },
+    {
+      "ref": "R915",
+      "value": "Resistor",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        187.3511,
+        124.4036
+      ],
+      "target": [
+        60.35000000000001,
+        48.39999999999999
+      ]
+    },
+    {
+      "ref": "L6",
+      "value": "Inductor",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        166.4511,
+        105.0036
+      ],
+      "target": [
+        39.45,
+        29.0
+      ]
+    },
+    {
+      "ref": "C47",
+      "value": "Cap",
+      "lib": "SX126x_e407v02a:rlc_402_smd",
+      "source": [
+        177.52609,
+        102.9536
+      ],
+      "target": [
+        50.52499000000002,
+        26.94999999999999
+      ]
+    },
+    {
+      "ref": "Q1",
+      "value": "Xtal",
+      "lib": "SX126x_e407v02a:nd2520da",
+      "source": [
+        163.4261,
+        98.30357
+      ],
+      "target": [
+        36.425,
+        22.299969999999988
+      ]
+    },
+    {
+      "ref": "Q2",
+      "value": "TCXO",
+      "lib": "SX126x_e383v01a:TCXO 2.0x1.6mm",
+      "source": [
+        162.67609,
+        95.72857
+      ],
+      "target": [
+        35.674989999999994,
+        19.72497
+      ]
+    },
+    {
+      "ref": "C27",
+      "value": "Cap",
+      "lib": "SX126x_e383v01a:RLC_402_SMD",
+      "source": [
+        164.2261,
+        95.77857
+      ],
+      "target": [
+        37.22500000000001,
+        19.774969999999996
+      ]
+    },
+    {
+      "ref": "R490",
+      "value": "Resistor",
+      "lib": "SX126x_e407v01a:rlc_402_smd",
+      "source": [
+        187.3511,
+        126.7036
+      ],
+      "target": [
+        60.35000000000001,
+        50.69999999999999
+      ]
+    },
+    {
+      "ref": "C15",
+      "value": "Cap",
+      "lib": "SX126x_e383v02a:RLC_402_SMD",
+      "source": [
+        180.4511,
+        107.3036
+      ],
+      "target": [
+        53.45,
+        31.299999999999997
+      ]
+    },
+    {
+      "ref": "L2",
+      "value": "Inductor",
+      "lib": "SX126x_e407v02a:rlc_402_smd",
+      "source": [
+        158.6011,
+        100.6536
+      ],
+      "target": [
+        31.60000000000001,
+        24.64999999999999
+      ]
+    },
+    {
+      "ref": "R6",
+      "value": "Resistor",
+      "lib": "SX126x_e407v02a:rlc_402_smd",
+      "source": [
+        160.0511,
+        101.1536
+      ],
+      "target": [
+        33.05,
+        25.14999999999999
+      ]
+    },
+    {
+      "ref": "GND",
+      "value": "Test Pin",
+      "lib": "SX1280_e325v01a:pin_0.9mm",
+      "source": [
+        174.4011,
+        119.1036
+      ],
+      "target": [
+        47.40000000000002,
+        43.099999999999994
+      ]
+    },
+    {
+      "ref": "C4",
+      "value": "Cap",
+      "lib": "SX1280_e325v01a:RLC_402_SMD",
+      "source": [
+        170.9511,
+        104.15359
+      ],
+      "target": [
+        43.95,
+        28.14998999999999
+      ]
+    },
+    {
+      "ref": "C10",
+      "value": "Cap",
+      "lib": "SX1280_e325v01a:RLC_402_SMD",
+      "source": [
+        187.9011,
+        104.8786
+      ],
+      "target": [
+        60.90000000000002,
+        28.875
+      ]
+    },
+    {
+      "ref": "C6",
+      "value": "Cap",
+      "lib": "SX1280_e325v01a:RLC_402_SMD",
+      "source": [
+        176.12607,
+        103.5036
+      ],
+      "target": [
+        49.124970000000005,
+        27.5
+      ]
+    },
+    {
+      "ref": "P3",
+      "value": "Header 2",
+      "lib": "Miscellaneous Connectors:HDR1X2",
+      "source": [
+        162.9661,
+        88.8036
+      ],
+      "target": [
+        35.96500000000002,
+        12.799999999999997
+      ]
+    },
+    {
+      "ref": "C19",
+      "value": "Cap",
+      "lib": "SX126x_e407v02a:rlc_402_smd",
+      "source": [
+        170.4011,
+        101.8786
+      ],
+      "target": [
+        43.40000000000002,
+        25.875
+      ]
+    },
+    {
+      "ref": "U1",
+      "value": "SX1261/2",
+      "lib": "SX1280_e325v01a:VQFN24_4X4MM",
+      "source": [
+        163.2011,
+        105.0036
+      ],
+      "target": [
+        36.2,
+        29.0
+      ]
+    },
+    {
+      "ref": "Logo Bot",
+      "value": "Logo symbol",
+      "lib": "SX1280_e325v01a:logo_semtech_horiz_size4",
+      "source": [
+        176.9011,
+        120.9036
+      ],
+      "target": [
+        49.90000000000002,
+        44.89999999999999
+      ]
+    }
+  ],
+  "checks": {
+    "max_fp_err": 0.0,
+    "rel_err": 0.0,
+    "seg_trans_err": 0.0,
+    "trace_len_err": 0.0,
+    "rf_len_err": 0.0,
+    "via_trans_err": 0.0,
+    "via_rel_err_sample": 0.0
+  },
+  "board_edge_artifact_exclusion_approval": "ENGINEERING APPROVAL GRANTED 2026-08-15",
+  "excluded_artifacts": [
+    {
+      "start": 1488753,
+      "end": 1489481,
+      "bbox": [
+        26.4989,
+        57.85,
+        66.147118,
+        58.15
+      ],
+      "sha256": "06efb7a8c7bf1b3674b32bbe81cae4208c48e109abe06d79738d564669083888"
+    },
+    {
+      "start": 1494124,
+      "end": 1494846,
+      "bbox": [
+        26.4989,
+        -0.15,
+        66.147118,
+        0.15
+      ],
+      "sha256": "b3560eb0c8d1ebd74afe1b84690738a8cbe6e44b2f76fa2a6edb0bb8ab2506f5"
+    },
+    {
+      "start": 1496903,
+      "end": 1497817,
+      "bbox": [
+        65.85,
+        -0.147118,
+        66.15,
+        58.147118
+      ],
+      "sha256": "f91c7dcd6fcc525fe5959a85b6eaf0d47cbf5a019770e03f0566f71b55b21020"
+    }
+  ],
+  "excluded_artifact_count": 3,
+  "post_deletion_counts": {
+    "footprint": 53,
+    "segment": 180,
+    "via": 684,
+    "zone": 62
+  },
+  "nonartifact_zone_sha256_before": "8adb4ddd6e5d472319da3c4ec07fbc61a0dcff222c5d6abe2496d3dcf5fa00c2",
+  "nonartifact_zone_sha256_after": "8adb4ddd6e5d472319da3c4ec07fbc61a0dcff222c5d6abe2496d3dcf5fa00c2",
+  "outline_violation_count_after": 0
+}

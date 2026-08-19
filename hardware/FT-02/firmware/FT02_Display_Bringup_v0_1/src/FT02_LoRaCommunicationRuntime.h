@@ -84,9 +84,6 @@ struct FT02LoRaTxStatusView
     char preview[64];
 };
 
-// Called once for every complete FromRadio protobuf frame. This is a pure
-// upper-layer parser; UART/framing/reset remain owned by FT02_LoRaTransport.
-void FT02_LoRaCommunicationRuntimeOnFromRadio(const uint8_t* payload, uint16_t length);
 void FT02_LoRaCommunicationRuntimeResetSession();
 
 bool FT02_LoRaCommunicationSendBroadcast(const char* userText, bool attachFreshGnss);
@@ -117,9 +114,29 @@ bool FT02_LoRaMessageQueueBroadcast(const char* userText, bool attachFreshGnss);
 size_t FT02_LoRaMessageOutboxCount();
 bool FT02_LoRaMessageGetOutboxNewest(size_t newestIndex, FT02LoRaOutboxView& out);
 bool FT02_LoRaMessageCancel(uint32_t logicalId);
+bool FT02_LoRaMessageClearOutbox();
 uint32_t FT02_LoRaMessageDeliveryRevision();
 const char* FT02_LoRaMessageDeliveryModeText(FT02MessageDeliveryMode mode);
 const char* FT02_LoRaMessageDeliveryStateText(FT02MessageDeliveryState state);
 
 const char* FT02_LoRaCommunicationTxStateText(FT02LoRaTxState state);
 const char* FT02_LoRaCommunicationRoutingErrorText(uint32_t error);
+
+// LR01 Host Protocol A2 application adapter entry points. Core lifecycle IDs are
+// preserved end-to-end so the existing inbox/outbox/reliable-message UI can
+// correlate ACCEPTED/SENT/ACK/TIMEOUT without guessing by message class.
+void FT02_LoRaCommunicationHostReceive(uint32_t airPacketId,
+                                       uint32_t from,
+                                       uint32_t to,
+                                       const char* senderName,
+                                       bool pkiEncrypted,
+                                       float rssi,
+                                       float snr,
+                                       const char* text);
+void FT02_LoRaCommunicationHostTxAccepted(uint32_t hostId);
+void FT02_LoRaCommunicationHostTxSent(uint32_t hostId);
+void FT02_LoRaCommunicationHostTxFailed(uint32_t hostId, const char* reason);
+void FT02_LoRaCommunicationHostTxResult(uint32_t hostId, const char* type, bool ok, const char* reason);
+void FT02_LoRaCommunicationHostDelivery(uint32_t hostId, uint32_t node, bool ack);
+// A1 fallback for legacy result lines without host id.
+void FT02_LoRaCommunicationHostTxResult(const char* type, bool ok);

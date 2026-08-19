@@ -17,5 +17,7 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
 bool FT02_CommunicationUITakeDeferredRedraw(uint32_t nowMs);
 bool FT02_CommunicationUIIsInbox();
 bool FT02_CommunicationUIIsCompose();
+bool FT02_CommunicationUIIsNodes();
+void FT02_CommunicationUIOnNodeListUpdated(uint16_t count);
 void FT02_CommunicationUIOnSyncStarted(const char* noticeText);
 void FT02_CommunicationUIOnSyncReady();

@@ -1,10 +1,25 @@
 #include "FT02_PbfMapUI.h"
+
+static FT02MapLoadingReason g_ft02MapLoadingReason = FT02_MAP_LOADING_GENERIC;
+static bool g_ft02MapOverlayFollowGnss = true;
+
+void FT02_PbfMapSetFollowGnss(bool enabled)
+{
+    g_ft02MapOverlayFollowGnss = enabled;
+}
+
+void FT02_PbfMapSetLoadingReason(FT02MapLoadingReason reason)
+{
+    g_ft02MapLoadingReason = reason;
+}
 #include "FT02_EpdLifecycle.h"
 
 #include "FT02_PbfMapRuntime.h"
 #include "FT02_Gnss.h"
 #include "FT02_RoadNameFont.h"
 #include "FT02_FooterFont20.h"
+#include "FT02_GlobalCJKFontData.h"
+#include "FT02_FontPackRenderer.h"
 #include "FT02_StatusBar.h"
 
 #include <math.h>
@@ -409,10 +424,33 @@ static void FT02_DrawGnssPositionMarker(FT02Display& display)
         display.drawCircle(x, y, 10, GxEPD_BLACK);
         if(gnss.courseValid)
         {
+            // Direction arrow driven by LR01 compass heading.
+            // 0 deg points to map north (screen up), clockwise positive.
             const double radians = gnss.courseDegrees * M_PI / 180.0;
-            const int hx = x + (int)lround(sin(radians) * 15.0);
-            const int hy = y - (int)lround(cos(radians) * 15.0);
-            display.drawLine(x, y, hx, hy, GxEPD_BLACK);
+            const double sx = sin(radians);
+            const double cy = cos(radians);
+
+            constexpr double TIP_R = 18.0;
+            constexpr double BASE_R = 7.0;
+            constexpr double HALF_W = 6.0;
+
+            const int tipX = x + (int)lround(sx * TIP_R);
+            const int tipY = y - (int)lround(cy * TIP_R);
+
+            const double baseCx = x + sx * BASE_R;
+            const double baseCy = y - cy * BASE_R;
+            const double px = cy;
+            const double py = sx;
+
+            const int leftX = (int)lround(baseCx - px * HALF_W);
+            const int leftY = (int)lround(baseCy - py * HALF_W);
+            const int rightX = (int)lround(baseCx + px * HALF_W);
+            const int rightY = (int)lround(baseCy + py * HALF_W);
+
+            // White halo keeps the arrow visible over dense black map geometry.
+            display.drawTriangle(tipX, tipY, leftX, leftY, rightX, rightY, GxEPD_WHITE);
+            display.fillTriangle(tipX, tipY, leftX, leftY, rightX, rightY, GxEPD_BLACK);
+            display.fillCircle(x, y, 3, GxEPD_BLACK);
         }
     }
     else
@@ -428,11 +466,16 @@ static void FT02_DrawMapOverlay(FT02Display& display)
     // Frozen absolute positions from the approved map layout.
     FT02_DrawZoomControl(display, 18, 196, true);
     FT02_DrawZoomControl(display, 18, 264, false);
-    const int cx = 400;
-    const int cy = MAP_TOP + MAP_HEIGHT / 2;
-    display.drawCircle(cx, cy, 7, GxEPD_BLACK);
-    display.drawLine(cx - 12, cy, cx + 12, cy, GxEPD_BLACK);
-    display.drawLine(cx, cy - 12, cx, cy + 12, GxEPD_BLACK);
+    const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+    const bool showMapCenterCursor = !(g_ft02MapOverlayFollowGnss && gnss.fixValid && gnss.hasPosition);
+    if(showMapCenterCursor)
+    {
+        const int cx = 400;
+        const int cy = MAP_TOP + MAP_HEIGHT / 2;
+        display.drawCircle(cx, cy, 7, GxEPD_BLACK);
+        display.drawLine(cx - 12, cy, cx + 12, cy, GxEPD_BLACK);
+        display.drawLine(cx, cy - 12, cx, cy + 12, GxEPD_BLACK);
+    }
     FT02_DrawGnssPositionMarker(display);
 }
 
@@ -574,23 +617,67 @@ static void FT02_DrawReadyBottom(FT02Display& display)
     FT02_DrawMapStatusCellChinese(display, 4, scaleText);
 }
 
+static void FT02_DrawLoadingCjkCentered(
+    FT02Display& display,
+    const char* text,
+    int baselineY
+)
+{
+    const int width = FT02_TextWidthPack(ft02_cjk_24r, text);
+    int x = (MAP_WIDTH - width) / 2;
+    if(x < 12) x = 12;
+    FT02_DrawTextPack(display, ft02_cjk_24r, text, x, baselineY);
+}
+
 static void FT02_DrawLoading(FT02Display& display)
 {
     const FT02PbfMapReport& report = FT02_PbfMapReportCurrent();
     display.fillRect(0, MAP_TOP, 800, MAP_HEIGHT, GxEPD_WHITE);
     display.drawRect(70, 145, 660, 220, GxEPD_BLACK);
     display.drawRect(74, 149, 652, 212, GxEPD_BLACK);
-    FT02_MapCentered(display, "DIRECT PBF MAP A3.14", 80, 184, 640, 3);
-    FT02_MapCentered(display, "LOADING MAP OR RETURNING TO DEFAULT CENTER", 80, 238, 640, 1);
-    FT02_MapCentered(display, "FIRST VISIT MAY BUILD CACHE AND TAKE LONGER", 80, 272, 640, 1);
+
+    // Map Load UX A1: this page is intentionally simple and explicit.
+    // A PBF regional-cache miss can block for tens of seconds; the user must
+    // get a visible acknowledgement before the blocking build begins.
+    const char* title = "地图加载中";
+    const char* detail = "正在准备目标区域，请稍候";
+    const char* note = "首次访问新区域可能需要建立缓存";
+    if(g_ft02MapLoadingReason == FT02_MAP_LOADING_PAN)
+    {
+        title = "正在移动地图";
+        detail = "正在加载新的地图区域，请稍候";
+        note = "移动完成后将显示最终位置";
+    }
+    else if(g_ft02MapLoadingReason == FT02_MAP_LOADING_ZOOM)
+    {
+        title = "正在调整地图缩放";
+        detail = "正在加载新的缩放级别，请稍候";
+        note = "缩放完成后将显示最终地图";
+    }
+    else if(g_ft02MapLoadingReason == FT02_MAP_LOADING_SEARCH)
+    {
+        title = "正在定位搜索结果";
+        detail = "正在加载目标地点地图，请稍候";
+        note = "首次访问新区域可能需要建立缓存";
+    }
+    else if(g_ft02MapLoadingReason == FT02_MAP_LOADING_NAVIGATION)
+    {
+        title = "正在更新导航地图";
+        detail = "当前位置已接近地图边缘";
+        note = "正在重新居中，请稍候";
+    }
+
+    FT02_DrawLoadingCjkCentered(display, title, 202);
+    FT02_DrawLoadingCjkCentered(display, detail, 248);
+    FT02_DrawLoadingCjkCentered(display, note, 288);
 
     char position[96];
     snprintf(position, sizeof(position), "CENTER %.5f %.5f   Z%d", report.centerLon, report.centerLat, report.zoom);
-    FT02_MapCentered(display, position, 80, 310, 640, 1);
+    FT02_MapCentered(display, position, 80, 326, 640, 1);
 
     display.fillRect(0, MAP_BOTTOM, 800, 40, GxEPD_WHITE);
     display.fillRect(0, MAP_BOTTOM, 800, 3, GxEPD_BLACK);
-    FT02_MapCentered(display, "DEVICE IS WORKING - PLEASE WAIT", 0, 455, 800, 1);
+    FT02_DrawLoadingCjkCentered(display, "设备正在工作，请勿重复按键", 469);
 }
 
 static void FT02_DrawError(FT02Display& display)
@@ -667,4 +754,72 @@ void FT02_DrawPbfMapScreen(FT02Display& display)
     while(display.nextPage());
     display.setFullWindow();
     FT02_EpdPowerOffAfterCommit(display, "map-state-partial");
+}
+
+
+bool FT02_RefreshPbfMapNavigationPartial(
+    FT02Display& display,
+    double oldLon,
+    double oldLat,
+    double newLon,
+    double newLat
+)
+{
+    const FT02PbfMapReport& report = FT02_PbfMapReportCurrent();
+    if(report.state != FT02_PBF_MAP_READY) return false;
+
+    int16_t oldX = 0;
+    int16_t oldY = 0;
+    int16_t newX = 0;
+    int16_t newY = 0;
+    if(!FT02_PbfMapProjectCoordinate(oldLon, oldLat, oldX, oldY)) return false;
+    if(!FT02_PbfMapProjectCoordinate(newLon, newLat, newX, newY)) return false;
+
+    // The marker can extend ~15 px because of the course needle. Use a wider
+    // guard so the previous marker is fully erased and the underlying map is
+    // reconstructed from the already-resident projected geometry.
+    constexpr int PAD = 24;
+    int x0 = min((int)oldX, (int)newX) - PAD;
+    int x1 = max((int)oldX, (int)newX) + PAD;
+    int y0 = min((int)oldY, (int)newY) + MAP_TOP - PAD;
+    int y1 = max((int)oldY, (int)newY) + MAP_TOP + PAD;
+
+    if(x0 < 0) x0 = 0;
+    if(y0 < MAP_TOP) y0 = MAP_TOP;
+    if(x1 >= MAP_WIDTH) x1 = MAP_WIDTH - 1;
+    if(y1 >= MAP_BOTTOM) y1 = MAP_BOTTOM - 1;
+    if(x1 <= x0 || y1 <= y0) return false;
+
+    const int w = x1 - x0 + 1;
+    const int h = y1 - y0 + 1;
+    const uint32_t started = millis();
+
+    display.setPartialWindow(x0, y0, w, h);
+    display.firstPage();
+    do
+    {
+        // Rebuild the map pixels under both old and new marker positions from
+        // the in-memory projected geometry. No PBF read/build occurs here.
+        display.fillRect(x0, y0, w, h, GxEPD_WHITE);
+        FT02_DrawMapGeometry(display);
+        FT02_DrawRoadLabels(display);
+        FT02_DrawMapOverlay(display);
+    }
+    while(display.nextPage());
+    display.setFullWindow();
+    FT02_EpdPowerOffAfterCommit(display, "map-nav-marker-partial");
+
+    Serial.printf(
+        "[MAP-NAV-A1] partial commit rect=%d,%d %dx%d old=%d,%d new=%d,%d total=%lums\n",
+        x0,
+        y0,
+        w,
+        h,
+        (int)oldX,
+        (int)oldY,
+        (int)newX,
+        (int)newY,
+        static_cast<unsigned long>(millis() - started)
+    );
+    return true;
 }

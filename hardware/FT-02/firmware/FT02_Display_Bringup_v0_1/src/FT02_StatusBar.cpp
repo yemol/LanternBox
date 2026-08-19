@@ -1,7 +1,7 @@
 
 #include "FT02_StatusBar.h"
-#include "FT02_LoRaTransport.h"
 #include "FT02_LoRaNodeRuntime.h"
+#include "FT02_LR01HostRuntime.h"
 #include "FT02_LoRaCommunicationRuntime.h"
 #include "FT02_BatteryIcon.h"
 #include "FT02_EpdLifecycle.h"
@@ -181,7 +181,7 @@ void FT02_DrawStatusBar(
 
     const char* loraStatus = FT02_LoRaNodeRuntimeReady()
         ? "已连接"
-        : (FT02_LoRaTransportLinkUp() ? "同步中" : "连接中");
+        : (FT02_LR01HostOnline() ? "同步中" : "连接中");
     char loraLine2[20];
     FT02_FormatLoRaLine2(loraLine2, sizeof(loraLine2), loraStatus);
 

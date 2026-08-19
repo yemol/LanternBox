@@ -2,8 +2,10 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 #include <Arduino.h>
+#include <esp_system.h>
 
 #include "FT02_AudioLog.h"
 #include "FT02_BottomBar.h"
@@ -16,7 +18,7 @@
 #include "FT02_Gnss.h"
 #include "FT02_InputManager.h"
 #include "FT02_LoRaNodeRuntime.h"
-#include "FT02_LoRaTransport.h"
+#include "FT02_LR01HostRuntime.h"
 #include "FT02_PbfIndex.h"
 #include "FT02_PinyinLearning.h"
 #include "FT02_StatusBar.h"
@@ -27,13 +29,13 @@ namespace
 FT02SelfTestReport g_report = {};
 uint8_t g_pageIndex = 0;
 
-static constexpr uint8_t FT02_SELFTEST_PAGE_COUNT = 2;
-static constexpr uint8_t FT02_SELFTEST_PAGE1_ITEMS = 7;
+static constexpr uint8_t FT02_SELFTEST_PAGE_COUNT = 3;
+static constexpr uint8_t FT02_SELFTEST_ITEMS_PER_PAGE = 7;
 
 static const FT02BottomBarItem FT02_SELFTEST_BOTTOM_ITEMS[3] = {
     {nullptr, "←/→ 翻页"},
     {nullptr, "ENTER 重新自检"},
-    {nullptr, "H帮助 B返回"}
+    {nullptr, "K罗盘校准 / B返回"}
 };
 
 const char* stateText(FT02SelfTestState state)
@@ -185,91 +187,68 @@ void runKeyboard()
 
 void runGnss()
 {
-    const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
-
-    if(gnss.communicationActive)
-    {
-        addItem("GNSS通讯", FT02_SELFTEST_PASS, "NMEA数据正常");
-    }
-    else if(gnss.nmeaSeen)
-    {
-        addItem("GNSS通讯", FT02_SELFTEST_WARN, "近期NMEA通讯超时");
-    }
-    else if(gnss.serialDataSeen)
-    {
-        addItem("GNSS通讯", FT02_SELFTEST_FAIL, "串口有数据但NMEA异常");
-    }
+    const FT02LR01State& lr01 = FT02_LR01HostState();
+    const FT02GnssSnapshot nav = FT02_GnssSnapshotCurrent();
+    if(!FT02_LR01HostOnline())
+        addItem("通讯模块", FT02_SELFTEST_FAIL, "Host UART无有效状态");
     else
-    {
-        addItem("GNSS通讯", FT02_SELFTEST_FAIL, "未收到GNSS串口数据");
-    }
+        addItem("通讯模块", FT02_SELFTEST_PASS, "Host UART协议A2在线");
 
-    if(gnss.fixValid)
+    if(lr01.gnssReady)
+        addItem("GNSS", FT02_SELFTEST_PASS, "导航模块GNSS数据流正常");
+    else
+        addItem("GNSS", FT02_SELFTEST_FAIL, "导航模块GNSS离线");
+
+    if(nav.fixValid)
     {
         char text[96];
-        snprintf(
-            text,
-            sizeof(text),
-            "%u/%u星 %s",
-            (unsigned)gnss.satellites,
-            (unsigned)gnss.satellitesVisible,
-            gnss.fixType >= 3 ? "3D定位" : "已定位"
-        );
-        addItem("GNSS定位", FT02_SELFTEST_PASS, text);
+        snprintf(text,sizeof(text),"%u/%u星 %s HDOP %.2f",(unsigned)nav.satellites,(unsigned)nav.satellitesVisible,nav.fixType>=3?"3D定位":"2D定位",nav.hdop);
+        addItem("GNSS定位",FT02_SELFTEST_PASS,text);
     }
-    else if(gnss.communicationActive)
+    else if(lr01.gnssReady)
+        addItem("GNSS定位",FT02_SELFTEST_WARN,"数据流正常，当前未定位");
+    else
+        addItem("GNSS定位",FT02_SELFTEST_WARN,"等待导航模块GNSS恢复");
+
+    if(lr01.compassReady && lr01.compassValid)
     {
         char text[96];
-        if(gnss.gsvSeen && gnss.satellitesVisible > 0)
-            snprintf(text, sizeof(text), "已见%u星，尚未定位", (unsigned)gnss.satellitesVisible);
-        else if(gnss.gsvSeen)
-            snprintf(text, sizeof(text), "未发现可见卫星");
+        if(lr01.compassQuality >= 3)
+            snprintf(text,sizeof(text),"航向 %.1f° 已校准·高质量",(double)lr01.headingX10/10.0);
+        else if(lr01.compassQuality == 2)
+            snprintf(text,sizeof(text),"航向 %.1f° 已校准·可用",(double)lr01.headingX10/10.0);
         else
-            snprintf(text, sizeof(text), "等待卫星数据");
-        addItem("GNSS定位", FT02_SELFTEST_WARN, text);
+            snprintf(text,sizeof(text),"航向 %.1f° 未保存校准",(double)lr01.headingX10/10.0);
+        addItem("罗盘",lr01.compassQuality>=2?FT02_SELFTEST_PASS:FT02_SELFTEST_WARN,text);
     }
     else
-    {
-        addItem("GNSS定位", FT02_SELFTEST_WARN, "等待GNSS通讯恢复");
-    }
+        addItem("罗盘",FT02_SELFTEST_FAIL,"导航模块罗盘不可用");
 }
 
 void runLoRa()
 {
-    const bool link = FT02_LoRaTransportLinkUp();
-    const bool ready = FT02_LoRaNodeRuntimeReady();
-    const uint32_t frames = FT02_LoRaTransportFrameCount();
-
-    if(link && ready)
+    const FT02LR01State& lr01 = FT02_LR01HostState();
+    if(FT02_LR01HostOnline() && lr01.loraReady)
     {
         char text[96];
-        snprintf(text, sizeof(text), "模块通讯正常 帧%lu", (unsigned long)frames);
-        addItem("LoRa通讯", FT02_SELFTEST_PASS, text);
+        snprintf(text,sizeof(text),"%s %.3fMHz RX%lu",lr01.radioProfile,(double)lr01.frequencyMHz,(unsigned long)lr01.rxCount);
+        addItem("LoRa通讯",FT02_SELFTEST_PASS,text);
     }
-    else if(link)
-    {
-        addItem("LoRa通讯", FT02_SELFTEST_WARN, "模块在线，节点同步中");
-    }
+    else if(FT02_LR01HostOnline())
+        addItem("LoRa通讯",FT02_SELFTEST_WARN,"通讯模块在线，Radio未就绪");
     else
-    {
-        addItem("LoRa通讯", FT02_SELFTEST_FAIL, "无线模块无有效响应");
-    }
+        addItem("LoRa通讯",FT02_SELFTEST_FAIL,"通讯模块Host UART离线");
 
-    const size_t nodes = FT02_LoRaNodeRuntimeNodeCount();
-    if(ready && nodes > 1)
+    if(lr01.loraReady && lr01.nodeCount>0)
     {
         char text[96];
-        snprintf(text, sizeof(text), "已发现%u个节点", (unsigned)nodes);
-        addItem("LoRa网络", FT02_SELFTEST_PASS, text);
+        snprintf(text,sizeof(text),"发现%u节点 PKI%u",(unsigned)lr01.nodeCount,(unsigned)lr01.pkiPeerCount);
+        addItem("LoRa网络",FT02_SELFTEST_PASS,text);
     }
-    else if(ready)
-    {
-        addItem("LoRa网络", FT02_SELFTEST_WARN, "未发现其他节点");
-    }
+    else if(lr01.loraReady)
+        addItem("LoRa网络",FT02_SELFTEST_WARN,"尚未发现其他节点");
     else
-    {
-        addItem("LoRa网络", FT02_SELFTEST_WARN, "等待节点数据库就绪");
-    }
+        addItem("LoRa网络",FT02_SELFTEST_WARN,"等待通讯模块Radio就绪");
 }
 
 void runAudio()
@@ -344,12 +323,146 @@ void runPinyin()
 void runTime()
 {
     const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
-    if(gnss.systemTimeSynchronized)
-        addItem("系统时间", FT02_SELFTEST_PASS, "GNSS校时完成");
-    else if(gnss.timeValid)
-        addItem("系统时间", FT02_SELFTEST_WARN, "GNSS时间可用，尚未同步");
+    const FT02LR01State& lr01 = FT02_LR01HostState();
+
+    if(!gnss.timeValid || !lr01.timeValid || lr01.unixTime == 0u)
+    {
+        addItem("系统时间", FT02_SELFTEST_WARN, "尚未获得有效GNSS时间");
+        return;
+    }
+
+    const time_t utc = static_cast<time_t>(lr01.unixTime);
+    struct tm tmUtc = {};
+    if(gmtime_r(&utc, &tmUtc) == nullptr)
+    {
+        addItem("系统时间", FT02_SELFTEST_FAIL, "时间转换失败");
+        return;
+    }
+
+    const int year = tmUtc.tm_year + 1900;
+    if(year < 2025 || year > 2099)
+    {
+        char text[96];
+        snprintf(text, sizeof(text), "时间越界 年份%d", year);
+        addItem("系统时间", FT02_SELFTEST_FAIL, text);
+        return;
+    }
+
+    char text[96];
+    if(gnss.localDate[0] != '\0' && gnss.localTime[0] != '\0')
+        snprintf(text, sizeof(text), "%s %s %s", gnss.localDate, gnss.localTime,
+                 gnss.systemTimeSynchronized ? "已同步" : "待同步");
     else
-        addItem("系统时间", FT02_SELFTEST_WARN, "尚未完成GNSS校时");
+        snprintf(text, sizeof(text), "UTC %04d-%02d-%02d %02d:%02d %s",
+                 year, tmUtc.tm_mon + 1, tmUtc.tm_mday, tmUtc.tm_hour, tmUtc.tm_min,
+                 gnss.systemTimeSynchronized ? "已同步" : "待同步");
+
+    addItem("系统时间",
+            gnss.systemTimeSynchronized ? FT02_SELFTEST_PASS : FT02_SELFTEST_WARN,
+            text);
+}
+
+void runHostUart()
+{
+    const FT02LR01State& lr01 = FT02_LR01HostState();
+    if(!FT02_LR01HostOnline())
+    {
+        addItem("Host UART", FT02_SELFTEST_FAIL, "通讯模块离线");
+        return;
+    }
+
+    char text[96];
+    snprintf(text, sizeof(text), "A%u RX%lu UART错%lu",
+             static_cast<unsigned>(lr01.protocolVersion),
+             static_cast<unsigned long>(FT02_LR01HostRxLineCount()),
+             static_cast<unsigned long>(lr01.uartErrors));
+
+    addItem("Host UART",
+            lr01.uartErrors == 0u ? FT02_SELFTEST_PASS : FT02_SELFTEST_WARN,
+            text);
+}
+
+void runStorageSpace()
+{
+    if(!FT02_StorageIsReady())
+    {
+        addItem("存储空间", FT02_SELFTEST_FAIL, "SD未就绪");
+        return;
+    }
+
+    const unsigned long freeMb = FT02_StorageFreeMB();
+    char text[96];
+    snprintf(text, sizeof(text), "SD剩余 %luMB", freeMb);
+
+    addItem("存储空间",
+            freeMb < 500UL ? FT02_SELFTEST_WARN : FT02_SELFTEST_PASS,
+            text);
+}
+
+void runMemoryHealth()
+{
+    const uint32_t freeHeap = ESP.getFreeHeap();
+    const uint32_t totalPsram = ESP.getPsramSize();
+    const uint32_t freePsram = ESP.getFreePsram();
+
+    char text[96];
+    snprintf(text, sizeof(text), "Heap %luKB PSRAM %lu/%luKB",
+             static_cast<unsigned long>(freeHeap / 1024U),
+             static_cast<unsigned long>(freePsram / 1024U),
+             static_cast<unsigned long>(totalPsram / 1024U));
+
+    FT02SelfTestState state = FT02_SELFTEST_PASS;
+    if(freeHeap < 32U * 1024U || (totalPsram > 0u && freePsram < 256U * 1024U))
+        state = FT02_SELFTEST_FAIL;
+    else if(freeHeap < 64U * 1024U || (totalPsram > 0u && freePsram < 512U * 1024U))
+        state = FT02_SELFTEST_WARN;
+
+    addItem("内存状态", state, text);
+}
+
+void runCommunicationErrors()
+{
+    const FT02LR01State& lr01 = FT02_LR01HostState();
+
+    char text[96];
+    snprintf(text, sizeof(text), "RX错%lu UART错%lu Radio复位%lu",
+             static_cast<unsigned long>(lr01.rxErrors),
+             static_cast<unsigned long>(lr01.uartErrors),
+             static_cast<unsigned long>(lr01.radioResets));
+
+    const bool anyError = lr01.rxErrors > 0u || lr01.uartErrors > 0u || lr01.radioResets > 0u;
+    addItem("通讯错误", anyError ? FT02_SELFTEST_WARN : FT02_SELFTEST_PASS, text);
+}
+
+const char* resetReasonText(esp_reset_reason_t reason)
+{
+    switch(reason)
+    {
+        case ESP_RST_POWERON: return "正常上电";
+        case ESP_RST_SW: return "软件复位";
+        case ESP_RST_PANIC: return "异常崩溃复位";
+        case ESP_RST_INT_WDT: return "中断看门狗";
+        case ESP_RST_TASK_WDT: return "任务看门狗";
+        case ESP_RST_WDT: return "其他看门狗";
+        case ESP_RST_BROWNOUT: return "欠压复位";
+        case ESP_RST_DEEPSLEEP: return "深睡眠唤醒";
+        case ESP_RST_EXT: return "外部复位";
+        default: return "其他复位";
+    }
+}
+
+void runStartupState()
+{
+    const esp_reset_reason_t reason = esp_reset_reason();
+    const char* detail = resetReasonText(reason);
+
+    FT02SelfTestState state = FT02_SELFTEST_PASS;
+    if(reason == ESP_RST_PANIC || reason == ESP_RST_INT_WDT ||
+       reason == ESP_RST_TASK_WDT || reason == ESP_RST_WDT ||
+       reason == ESP_RST_BROWNOUT)
+        state = FT02_SELFTEST_WARN;
+
+    addItem("启动状态", state, detail);
 }
 
 void saveReportLog()
@@ -368,7 +481,7 @@ void saveReportLog()
 
     fprintf(
         file,
-        "[%s] FT02 %s SELFTEST-A1 pass=%u warn=%u fail=%u skip=%u elapsed=%lums\n",
+        "[%s] FT02 %s SELFTEST-A2 pass=%u warn=%u fail=%u skip=%u elapsed=%lums\n",
         stamp,
         FT02_FIRMWARE_VERSION,
         (unsigned)g_report.passed,
@@ -411,24 +524,34 @@ void FT02_SystemSelfTestRun()
     g_report.generation = nextGeneration;
     g_pageIndex = 0;
 
+    // Page 1/3: Core hardware
     runMainControl();
     runPsram();
     runStorage();
     runKeyboard();
-    runGnss();
-    runLoRa();
     runAudio();
+    runTime();
+    addItem("电池", FT02_SELFTEST_NA, "尚未接入检测");
+
+    // Page 2/3: Navigation and communications
+    runGnss();       // 通讯模块 / GNSS / GNSS定位 / 罗盘
+    runLoRa();       // LoRa通讯 / LoRa网络
+    runHostUart();   // Host UART
+
+    // Page 3/3: Data and system health
     runMap();
     runManual();
     runPinyin();
-    runTime();
-    addItem("电池", FT02_SELFTEST_NA, "尚未接入检测");
+    runStorageSpace();
+    runMemoryHealth();
+    runCommunicationErrors();
+    runStartupState();
 
     g_report.elapsedMs = millis() - started;
     saveReportLog();
 
     Serial.printf(
-        "[SELFTEST-A1] complete pass=%u warn=%u fail=%u skip=%u elapsed=%lums\n",
+        "[SELFTEST-A2] complete pass=%u warn=%u fail=%u skip=%u elapsed=%lums\n",
         (unsigned)g_report.passed,
         (unsigned)g_report.warned,
         (unsigned)g_report.failed,
@@ -439,7 +562,7 @@ void FT02_SystemSelfTestRun()
     {
         const FT02SelfTestItem& item = g_report.items[i];
         Serial.printf(
-            "[SELFTEST-A1] %-12s %-4s %s\n",
+            "[SELFTEST-A2] %-12s %-4s %s\n",
             item.name,
             stateText(item.state),
             item.detail
@@ -504,10 +627,12 @@ void FT02_DrawSystemSelfTestScreen(FT02Display& display)
 
         display.drawLine(32, 157, 768, 157, GxEPD_BLACK);
 
-        const uint8_t startIndex = g_pageIndex == 0 ? 0 : FT02_SELFTEST_PAGE1_ITEMS;
-        const uint8_t endIndex = g_pageIndex == 0
-            ? (report.count < FT02_SELFTEST_PAGE1_ITEMS ? report.count : FT02_SELFTEST_PAGE1_ITEMS)
-            : report.count;
+        const uint8_t startIndex =
+            static_cast<uint8_t>(g_pageIndex * FT02_SELFTEST_ITEMS_PER_PAGE);
+        const uint8_t pageEnd =
+            static_cast<uint8_t>(startIndex + FT02_SELFTEST_ITEMS_PER_PAGE);
+        const uint8_t endIndex =
+            report.count < pageEnd ? report.count : pageEnd;
 
         uint8_t row = 0;
         for(uint8_t i = startIndex; i < endIndex; ++i, ++row)

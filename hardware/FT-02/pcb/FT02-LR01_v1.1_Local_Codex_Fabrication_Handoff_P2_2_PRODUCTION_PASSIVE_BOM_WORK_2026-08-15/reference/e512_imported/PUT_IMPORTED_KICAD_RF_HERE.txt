@@ -1,0 +1,1 @@
+If Codex reports MANUAL_RF_IMPORT_REQUIRED, save the KiCad-imported E512 PCB here, then tell Codex: continue.

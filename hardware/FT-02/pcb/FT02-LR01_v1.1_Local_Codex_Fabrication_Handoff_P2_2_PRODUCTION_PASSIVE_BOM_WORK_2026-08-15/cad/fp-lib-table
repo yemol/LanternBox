@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "FT02-LR01")(type "KiCad")(uri "${KIPRJMOD}/FT02-LR01.pretty")(options "")(descr "FT02-LR01 exact local production footprints"))
+)

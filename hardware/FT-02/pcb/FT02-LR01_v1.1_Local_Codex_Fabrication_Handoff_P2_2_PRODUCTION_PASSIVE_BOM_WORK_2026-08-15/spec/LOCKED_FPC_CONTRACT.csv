@@ -1,0 +1,11 @@
+﻿Pin,Net,Direction at LR01,Purpose
+1,GND,-,Ground A
+2,3V3_AON,IN,3.3V A
+3,HOST_TX,OUT,LR01 -> FT-02
+4,HOST_RX,IN,FT-02 -> LR01
+5,HOST_WAKE,OUT,Wake/IRQ
+6,LR01_EN,IN,Enable/reset
+7,RESERVED,-,Reserved
+8,AUX_RESERVED,BIDIR,Reserved/test contract only
+9,3V3_AON,IN,3.3V B
+10,GND,-,Ground B

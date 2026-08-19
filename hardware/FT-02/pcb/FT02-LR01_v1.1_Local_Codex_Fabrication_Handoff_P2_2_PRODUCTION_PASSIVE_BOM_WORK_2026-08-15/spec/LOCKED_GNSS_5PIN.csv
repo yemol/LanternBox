@@ -1,0 +1,6 @@
+﻿Pin,Silk,Net,ESP32,Assembly
+1,VCC,GNSS_3V3,-,DNP/user solder
+2,GND,GND,-,DNP/user solder
+3,TX,GNSS_RX,GPIO15,DNP/user solder
+4,RX,GNSS_TX,GPIO16,DNP/user solder
+5,PPS,GNSS_PPS,GPIO47,DNP/user solder

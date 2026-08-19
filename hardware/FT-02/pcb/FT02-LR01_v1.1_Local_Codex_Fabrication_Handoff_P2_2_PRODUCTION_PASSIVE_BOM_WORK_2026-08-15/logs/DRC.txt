@@ -1,0 +1,3 @@
+DRC not run.
+Status: BLOCKED
+Reason: Production PCB `cad/FT02-LR01_v1.1_Fabrication_Release.kicad_pcb` has not been created because RF protected-region and exact-footprint gates are blocked.

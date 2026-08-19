@@ -11,11 +11,12 @@
 #include "FT02_GlobalCJKBoldFontData.h"
 #include "FT02_Gnss.h"
 #include "FT02_LoRaCommunicationRuntime.h"
+#include "FT02_LR01HostRuntime.h"
 #include "FT02_LoRaNodeRuntime.h"
-#include "FT02_LoRaTransport.h"
 #include "FT02_PinyinIme.h"
 #include "FT02_PinyinLearning.h"
 #include "FT02_StatusBar.h"
+#include "FT02_TextInputMode.h"
 
 namespace
 {
@@ -25,13 +26,9 @@ enum CommMode : uint8_t
     COMM_NODES,
     COMM_COMPOSE,
     COMM_OUTBOX,
+    COMM_OUTBOX_CANCEL_CONFIRM,
+    COMM_OUTBOX_CLEAR_CONFIRM,
     COMM_DIAG
-};
-
-enum ComposeInputMode : uint8_t
-{
-    COMPOSE_INPUT_CN = 0,
-    COMPOSE_INPUT_EN
 };
 
 constexpr size_t VISIBLE_NODE_ROWS = 4;
@@ -50,6 +47,7 @@ CommMode g_composeReturnMode = COMM_INBOX;
 size_t g_messageIndex = 0;
 size_t g_nodeSelection = 0;
 size_t g_outboxIndex = 0;
+uint32_t g_pendingCancelLogicalId = 0;
 bool g_composePrivate = false;
 bool g_composeReply = false;
 uint32_t g_composeTarget = 0;
@@ -59,7 +57,6 @@ size_t g_composeLength = 0;
 char g_pinyin[FT02_PINYIN_MAX_INPUT + 1] = {};
 size_t g_pinyinLength = 0;
 size_t g_pinyinPage = 0;
-ComposeInputMode g_composeInputMode = COMPOSE_INPUT_CN;
 FT02MessageDeliveryMode g_composeDeliveryMode = FT02_MESSAGE_IMMEDIATE;
 bool g_composeDirty = false;
 uint32_t g_composeLastEditMs = 0;
@@ -73,13 +70,13 @@ static const FT02BottomBarItem BOTTOM_NODES[3] = {
     {nullptr, "方向键选择"}, {nullptr, "确认 私信"}, {nullptr, "T广播 / B收件箱"}
 };
 static const FT02BottomBarItem BOTTOM_COMPOSE_CN[3] = {
-    {nullptr, "空格首选 / 1-5选词"}, {nullptr, "Sym+V/B 模式·候选"}, {nullptr, "DEL删除 / ENTER发送"}
+    {nullptr, "空格首选 / 1-5选词"}, {nullptr, "Sym+V/B 模式·候选"}, {nullptr, "` 中英 / ENTER发送"}
 };
 static const FT02BottomBarItem BOTTOM_COMPOSE_EN[3] = {
-    {nullptr, "英文直接输入"}, {nullptr, "Sym+V/B模式 / Sym+W中"}, {nullptr, "DEL删除 / ENTER发送"}
+    {nullptr, "英文直接输入"}, {nullptr, "Sym+V/B模式 / ` 中英"}, {nullptr, "DEL删除 / ENTER发送"}
 };
 static const FT02BottomBarItem BOTTOM_OUTBOX[3] = {
-    {nullptr, "方向键 浏览"}, {nullptr, "DEL 撤销"}, {nullptr, "B 收件箱"}
+    {nullptr, "方向键 浏览"}, {nullptr, "DEL 撤销 / K清空"}, {nullptr, "B 收件箱"}
 };
 static const FT02BottomBarItem BOTTOM_DIAG[3] = {
     {nullptr, "R 重同步"}, {nullptr, "M 节点"}, {nullptr, "B 收件箱"}
@@ -172,7 +169,7 @@ const char* chinesePunctuation(uint8_t raw)
 
 bool appendComposePunctuationOrAscii(uint8_t raw)
 {
-    if(g_composeInputMode == COMPOSE_INPUT_CN)
+    if(FT02_TextInputModeIsChinese())
     {
         if(const char* mapped = chinesePunctuation(raw))
             return appendUtf8ToCompose(mapped);
@@ -310,7 +307,7 @@ bool toggleComposeInputMode()
     // the compose-mode switch so normal digits remain available for messages.
     // If a Chinese composition is active, commit its default candidate first
     // instead of silently discarding what the user already typed.
-    if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0)
+    if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0)
     {
         if(!commitPinyinDefault())
         {
@@ -319,10 +316,8 @@ bool toggleComposeInputMode()
         }
     }
 
-    g_composeInputMode = (g_composeInputMode == COMPOSE_INPUT_CN)
-        ? COMPOSE_INPUT_EN
-        : COMPOSE_INPUT_CN;
-    setNotice(g_composeInputMode == COMPOSE_INPUT_CN ? "已切换中文输入" : "已切换英文输入");
+    const FT02TextInputMode mode = FT02_TextInputModeToggle();
+    setNotice(mode == FT02_TEXT_INPUT_CN ? "已切换中文输入" : "已切换英文输入");
     markComposeEdited();
     return true;
 }
@@ -582,6 +577,31 @@ void drawOutbox(FT02Display& display)
     FT02_DrawBottomBarWithFont(display, BOTTOM_OUTBOX, ft02_cjk_20r);
 }
 
+
+void drawOutboxCancelConfirm(FT02Display& display)
+{
+    drawHeader(display, "撤销投递");
+
+    FT02_DrawTextPack(display, ft02_cjk_24r, "确认撤销当前待投递消息？", 214, 220);
+    FT02_DrawTextPack(display, ft02_cjk_20r, "撤销后 Core 将停止继续投递该消息。", 200, 276);
+    FT02_DrawTextPack(display, ft02_cjk_20r, "确认键 确认撤销    B / ESC 取消", 220, 360);
+}
+
+void drawOutboxClearConfirm(FT02Display& display)
+{
+    drawHeader(display, "清空发件箱");
+    const size_t count = FT02_LoRaMessageOutboxCount();
+
+    FT02_DrawTextPack(display, ft02_cjk_24r, "确认清空全部发件记录？", 236, 220);
+
+    char detail[160];
+    snprintf(detail, sizeof(detail), "当前共有 %u 条记录。此操作不可恢复。", static_cast<unsigned>(count));
+    FT02_DrawTextPack(display, ft02_cjk_20r, detail, 210, 270);
+
+    FT02_DrawTextPack(display, ft02_cjk_20r, "若仍有待确认/待投递消息，清空后 Core 将停止跟踪。", 128, 312);
+    FT02_DrawTextPack(display, ft02_cjk_20r, "确认键 确认清空    B / ESC 取消", 220, 370);
+}
+
 void drawNodeRow(FT02Display& display, size_t nodeIndex, int y, bool selected)
 {
     FT02LoRaNodeView node;
@@ -622,17 +642,18 @@ void drawNodes(FT02Display& display)
 {
     drawHeader(display, "网络终端");
     const size_t count = FT02_LoRaNodeRuntimeNodeCount();
-    char summary[160];
-    snprintf(summary, sizeof(summary), "NodeDB：%s   节点：%u/%lu   R=硬件复位并重同步",
-             FT02_LoRaNodeRuntimeReady() ? "已同步" : "同步中",
+    const FT02LR01State& lr01 = FT02_LR01HostState();
+    char summary[180];
+    snprintf(summary, sizeof(summary), "通讯模块：%s   节点缓存：%u/%u   R=刷新节点",
+             FT02_LR01HostOnline() ? "在线" : "离线",
              static_cast<unsigned>(count),
-             static_cast<unsigned long>(FT02_LoRaNodeRuntimeExpectedNodeCount()));
+             static_cast<unsigned>(lr01.listedNodeCount));
     FT02_DrawTextPack(display, ft02_cjk_20r, summary, 32, 156);
     if(g_notice[0]) FT02_DrawTextPack(display, ft02_cjk_20r, g_notice, 32, 181);
 
     if(count == 0)
     {
-        FT02_DrawTextPack(display, ft02_cjk_24r, "等待 NodeDB...", 310, 292);
+        FT02_DrawTextPack(display, ft02_cjk_24r, "正在读取通讯模块节点...", 270, 292);
     }
     else
     {
@@ -681,7 +702,7 @@ void drawCompose(FT02Display& display)
     // Compose input status occupies the lower part of the editor so mode,
     // Pinyin candidates and punctuation behavior are always visible.
     display.drawFastHLine(40, 286, 720, GxEPD_BLACK);
-    if(g_composeInputMode == COMPOSE_INPUT_CN)
+    if(FT02_TextInputModeIsChinese())
     {
         if(g_pinyinLength > 0)
         {
@@ -723,13 +744,13 @@ void drawCompose(FT02Display& display)
         else
         {
             FT02_DrawTextPack(display, ft02_cjk_20r, "[中] 拼音输入：连续拼音 / 词组 / 词频学习", 48, 312);
-            FT02_DrawTextPack(display, ft02_cjk_20r, "Sym标点自动中文化；Sym+W切英文", 48, 338);
+            FT02_DrawTextPack(display, ft02_cjk_20r, "Sym标点自动中文化；`切英文", 48, 338);
         }
     }
     else
     {
         FT02_DrawTextPack(display, ft02_cjk_20r, "[EN] 英文输入：字母 / 数字 / 符号直接上屏", 48, 312);
-        FT02_DrawTextPack(display, ft02_cjk_20r, "Sym+W切中文；标点保持英文", 48, 338);
+        FT02_DrawTextPack(display, ft02_cjk_20r, "`切中文；标点保持英文", 48, 338);
     }
 
     const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
@@ -744,7 +765,7 @@ void drawCompose(FT02Display& display)
     if(g_notice[0]) FT02_DrawTextPack(display, ft02_cjk_20r, g_notice, 32, 414);
     FT02_DrawBottomBarWithFont(
         display,
-        g_composeInputMode == COMPOSE_INPUT_CN ? BOTTOM_COMPOSE_CN : BOTTOM_COMPOSE_EN,
+        FT02_TextInputModeIsChinese() ? BOTTOM_COMPOSE_CN : BOTTOM_COMPOSE_EN,
         ft02_cjk_20r
     );
 }
@@ -753,16 +774,17 @@ void drawDiag(FT02Display& display)
 {
     drawHeader(display, "通讯诊断");
     char line[220];
-    snprintf(line, sizeof(line), "PROTO：%s   NodeDB：%s   节点：%u/%lu",
-             FT02_LoRaTransportLinkUp() ? "在线" : "离线",
-             FT02_LoRaNodeRuntimeReady() ? "READY" : "SYNC",
+    const FT02LR01State& lr01 = FT02_LR01HostState();
+    snprintf(line, sizeof(line), "通讯模块：%s   协议：A%u   节点：%u/%u",
+             FT02_LR01HostOnline() ? "在线" : "离线",
+             static_cast<unsigned>(lr01.protocolVersion),
              static_cast<unsigned>(FT02_LoRaNodeRuntimeNodeCount()),
-             static_cast<unsigned long>(FT02_LoRaNodeRuntimeExpectedNodeCount()));
+             static_cast<unsigned>(lr01.listedNodeCount));
     FT02_DrawTextPack(display, ft02_cjk_20r, line, 32, 158);
 
-    snprintf(line, sizeof(line), "FromRadio帧：%lu   Radio硬复位：%lu",
-             static_cast<unsigned long>(FT02_LoRaTransportFrameCount()),
-             static_cast<unsigned long>(FT02_LoRaTransportResetCount()));
+    snprintf(line, sizeof(line), "Host RX行：%lu   LR01 Radio复位：%lu",
+             static_cast<unsigned long>(FT02_LR01HostRxLineCount()),
+             static_cast<unsigned long>(lr01.radioResets));
     FT02_DrawTextPack(display, ft02_cjk_20r, line, 32, 196);
 
     snprintf(line, sizeof(line), "消息 RX：%lu   TX：%lu   重复丢弃：%lu   未读：%u",
@@ -834,12 +856,12 @@ bool handleComposeRaw(const FT02InputEvent& event)
 
     // Candidate paging remains available through the same Sym-layer pair,
     // with 6/7 retained as the proven deterministic fallback during Pinyin.
-    if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0 && (raw == CARDKB_MODE_LEFT || raw == '6'))
+    if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0 && (raw == CARDKB_MODE_LEFT || raw == '6'))
     {
         movePinyinPage(-1);
         return true;
     }
-    if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0 && (raw == CARDKB_MODE_RIGHT || raw == '7'))
+    if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0 && (raw == CARDKB_MODE_RIGHT || raw == '7'))
     {
         movePinyinPage(+1);
         return true;
@@ -849,7 +871,7 @@ bool handleComposeRaw(const FT02InputEvent& event)
     {
         // ENTER commits active Pinyin first. A second ENTER sends, which
         // prevents accidental transmission while the user is choosing a word.
-        if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0)
+        if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0)
         {
             commitPinyinDefault();
             return false;
@@ -891,7 +913,7 @@ bool handleComposeRaw(const FT02InputEvent& event)
 
     if(raw == 0x1Bu)
     {
-        if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0)
+        if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0)
         {
             resetPinyin();
             setNotice("已取消当前拼音");
@@ -908,7 +930,7 @@ bool handleComposeRaw(const FT02InputEvent& event)
 
     if(raw == 0x08u || raw == 0x7Fu)
     {
-        if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0) pinyinBackspace();
+        if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0) pinyinBackspace();
         else
         {
             utf8Backspace();
@@ -919,7 +941,7 @@ bool handleComposeRaw(const FT02InputEvent& event)
 
     if(raw == ' ')
     {
-        if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0)
+        if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0)
         {
             if(!commitPinyinDefault()) setNotice("无法上屏当前拼音");
         }
@@ -934,13 +956,13 @@ bool handleComposeRaw(const FT02InputEvent& event)
     // Chinese mode keeps the A3 candidate workflow. 1..5 select visible
     // candidates, 6/7 are paging shortcuts above, and 0 commits active Pinyin
     // as literal English/ASCII without changing the persistent input mode.
-    if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0 && raw >= '1' && raw <= '5')
+    if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0 && raw >= '1' && raw <= '5')
     {
         if(!commitPinyinCandidate(static_cast<size_t>(raw - '1')))
             setNotice("该候选不存在");
         return false;
     }
-    if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0 && raw == '0')
+    if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0 && raw == '0')
     {
         commitRawPinyin();
         return false;
@@ -948,7 +970,7 @@ bool handleComposeRaw(const FT02InputEvent& event)
 
     if((raw >= 'a' && raw <= 'z') || (raw >= 'A' && raw <= 'Z'))
     {
-        if(g_composeInputMode == COMPOSE_INPUT_CN)
+        if(FT02_TextInputModeIsChinese())
             appendPinyinLetter(static_cast<char>(raw));
         else
         {
@@ -963,7 +985,7 @@ bool handleComposeRaw(const FT02InputEvent& event)
     // forms: ，。？！：；. English mode preserves the exact ASCII symbol.
     if(raw >= 0x20u && raw < 0x7Fu)
     {
-        if(g_composeInputMode == COMPOSE_INPUT_CN && g_pinyinLength > 0 && !commitPinyinDefault())
+        if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0 && !commitPinyinDefault())
             return false;
         if(!appendComposePunctuationOrAscii(raw))
             return false;
@@ -997,6 +1019,8 @@ void FT02_DrawCommunicationNodeScreen(FT02Display& display)
         else if(g_mode == COMM_NODES) drawNodes(display);
         else if(g_mode == COMM_COMPOSE) drawCompose(display);
         else if(g_mode == COMM_OUTBOX) drawOutbox(display);
+        else if(g_mode == COMM_OUTBOX_CANCEL_CONFIRM) drawOutboxCancelConfirm(display);
+        else if(g_mode == COMM_OUTBOX_CLEAR_CONFIRM) drawOutboxClearConfirm(display);
         else drawDiag(display);
     }
     while(display.nextPage());
@@ -1022,9 +1046,41 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
         if(g_outboxIndex >= count) g_outboxIndex = count - 1;
         FT02LoRaOutboxView item;
         if(!FT02_LoRaMessageGetOutboxNewest(g_outboxIndex, item)) return FT02_COMM_INPUT_NONE;
-        if(FT02_LoRaMessageCancel(item.logicalId)) setNotice("已撤销当前待投递消息");
-        else setNotice("该消息已结束，不能撤销");
+        const bool active = item.state == FT02_DELIVERY_QUEUED || item.state == FT02_DELIVERY_WAITING_ACK;
+        if(active)
+        {
+            g_pendingCancelLogicalId = item.logicalId;
+            g_mode = COMM_OUTBOX_CANCEL_CONFIRM;
+            setNotice("");
+        }
+        else if(item.state == FT02_DELIVERY_DELIVERED)
+        {
+            setNotice("消息已经投递，无法撤销");
+        }
+        else
+        {
+            setNotice("该消息已结束，无法撤销");
+        }
         return FT02_COMM_INPUT_REDRAW;
+    }
+
+    if(g_mode == COMM_OUTBOX_CLEAR_CONFIRM)
+    {
+        if(event.key == FT02_KEY_SELECT)
+        {
+            const bool ok = FT02_LoRaMessageClearOutbox();
+            g_mode = COMM_OUTBOX;
+            g_outboxIndex = 0;
+            setNotice(ok ? "发件箱已清空" : "清空发件箱失败");
+            return FT02_COMM_INPUT_REDRAW;
+        }
+        if(event.key == FT02_KEY_BACK || event.command == 'b')
+        {
+            g_mode = COMM_OUTBOX;
+            setNotice("已取消清空");
+            return FT02_COMM_INPUT_REDRAW;
+        }
+        return FT02_COMM_INPUT_NONE;
     }
 
     if(event.key == FT02_KEY_HELP) return FT02_COMM_INPUT_OPEN_HELP;
@@ -1047,7 +1103,9 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
     if(cmd == 'm')
     {
         g_mode = COMM_NODES;
-        setNotice("");
+        g_nodeSelection = 0;
+        if(FT02_LR01HostRequestNodes()) setNotice("已请求通讯模块节点列表");
+        else setNotice("通讯模块节点请求发送失败");
         return FT02_COMM_INPUT_REDRAW;
     }
     if(cmd == 'o')
@@ -1088,17 +1146,9 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
                 setNotice("当前消息没有可回复的发送者");
                 return FT02_COMM_INPUT_REDRAW;
             }
-            FT02LoRaNodeView senderNode;
-            if(!FT02_LoRaNodeRuntimeFindNode(msg.from, senderNode))
-            {
-                setNotice("发送者不在 NodeDB，暂时无法直接回复");
-                return FT02_COMM_INPUT_REDRAW;
-            }
-            if(!senderNode.publicKeyValid)
-            {
-                setNotice("发送者暂无 PKI 公钥，暂时无法直接回复");
-                return FT02_COMM_INPUT_REDRAW;
-            }
+            // A2: Core no longer gates replies on its legacy NodeDB. LR01 owns
+            // peer discovery and PKI state and returns node_not_found / pki_not_ready
+            // if this target is not currently eligible for a private send.
             beginCompose(true, msg.from, COMM_INBOX, true, msg.packetId);
             return FT02_COMM_INPUT_REDRAW;
         }
@@ -1126,6 +1176,17 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
     else if(g_mode == COMM_OUTBOX)
     {
         const size_t count = FT02_LoRaMessageOutboxCount();
+        if(cmd == 'k')
+        {
+            if(count == 0)
+            {
+                setNotice("发件箱已经为空");
+                return FT02_COMM_INPUT_REDRAW;
+            }
+            g_mode = COMM_OUTBOX_CLEAR_CONFIRM;
+            setNotice("");
+            return FT02_COMM_INPUT_REDRAW;
+        }
         if(count > 0 && (event.key == FT02_KEY_LEFT || event.key == FT02_KEY_UP))
         {
             g_outboxIndex = (g_outboxIndex + 1u) % count;
@@ -1159,25 +1220,25 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
                 setNotice("本机节点不能作为私信目标");
                 return FT02_COMM_INPUT_REDRAW;
             }
-            if(!node.publicKeyValid)
-            {
-                setNotice("该节点暂无 PKI 公钥，不能建立私信");
-                return FT02_COMM_INPUT_REDRAW;
-            }
+            // PKI ownership moved to LR01. Let LR01 validate whether this peer
+            // currently has a learned public key.
             beginCompose(true, node.node, COMM_NODES);
             return FT02_COMM_INPUT_REDRAW;
         }
         if(cmd == 'r')
         {
-            setSyncNotice("正在硬件复位 LoRa 并重同步...");
-            FT02_LoRaTransportForceResync("user-resync");
+            setSyncNotice("正在刷新通讯模块节点列表...");
+            (void)FT02_LR01HostRequestStatus();
+            (void)FT02_LR01HostRequestNodes();
             return FT02_COMM_INPUT_REDRAW;
         }
     }
     else if(g_mode == COMM_DIAG && cmd == 'r')
     {
-        setSyncNotice("正在硬件复位 LoRa 并重同步...");
-        FT02_LoRaTransportForceResync("diagnostic-resync");
+        setSyncNotice("正在请求通讯模块刷新状态...");
+        (void)FT02_LR01HostRequestStatus();
+        (void)FT02_LR01HostRequestNodeInfo();
+        (void)FT02_LR01HostRequestNodes();
         return FT02_COMM_INPUT_REDRAW;
     }
 
@@ -1203,12 +1264,29 @@ bool FT02_CommunicationUIIsCompose()
     return g_mode == COMM_COMPOSE;
 }
 
+bool FT02_CommunicationUIIsNodes()
+{
+    return g_mode == COMM_NODES;
+}
+
+void FT02_CommunicationUIOnNodeListUpdated(uint16_t count)
+{
+    if(g_mode != COMM_NODES) return;
+    if(count == 0) setNotice("通讯模块当前未发现其他节点");
+    else
+    {
+        char notice[64];
+        snprintf(notice, sizeof(notice), "通讯模块节点列表已更新：%u", static_cast<unsigned>(count));
+        setNotice(notice);
+    }
+}
+
 void FT02_CommunicationUIOnSyncStarted(const char* noticeText)
 {
     setSyncNotice(
         (noticeText != nullptr && noticeText[0] != '\0')
             ? noticeText
-            : "LoRa 正在重新同步..."
+            : "通讯模块正在同步状态..."
     );
 }
 

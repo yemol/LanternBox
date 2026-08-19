@@ -4,6 +4,7 @@
 
 #include "FT02_BottomBar.h"
 #include "FT02_EpdLifecycle.h"
+#include "FT02_GnssFieldTest.h"
 #include "FT02_GlobalCJK20FontData.h"
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
@@ -12,9 +13,9 @@
 namespace
 {
 static const FT02BottomBarItem FT02_RECORDER_BOTTOM_ITEMS[3] = {
-    {nullptr, "ENTER 开始/停止"},
-    {nullptr, "P 记点  A 自动"},
-    {nullptr, "L列表 R重连 B返回"}
+    {nullptr, "ENTER 路径开始/停止"},
+    {nullptr, "T 导航日志  P记点"},
+    {nullptr, "A自动 L列表 R重连 B返回"}
 };
 
 static const int FT02_RECORDER_PARTIAL_X = 24;
@@ -46,8 +47,7 @@ static const char* FT02_RecorderGnssState(const FT02GnssSnapshot& gnss)
         if(gnss.fixType == 2) return "2D定位";
         return "已定位";
     }
-    if(gnss.nmeaSeen) return "通讯超时";
-    if(gnss.serialDataSeen) return "数据异常";
+    
     return "连接中";
 }
 
@@ -74,9 +74,36 @@ static void FT02_DrawRecorderContent(
 {
     FT02_DrawTextPack(display, ft02_cjk_24b, "定位记录", 32, 119);
 
-    const char* hint = recorder.sessionActive
-        ? (recorder.autoTrackEnabled ? "路径与自动轨迹记录中" : "路径记录中")
-        : (gnss.communicationActive ? "GNSS 通讯正常" : "等待 GNSS 数据");
+    const FT02GnssFieldTestSnapshot fieldTest = FT02_GnssFieldTestSnapshotCurrent();
+    char hintBuffer[96];
+    const char* hint = nullptr;
+    if(fieldTest.active)
+    {
+        snprintf(
+            hintBuffer,
+            sizeof(hintBuffer),
+            "导航日志记录中 %lus  状态%lu条",
+            (unsigned long)fieldTest.durationSeconds,
+            (unsigned long)fieldTest.rawSentenceCount
+        );
+        hint = hintBuffer;
+    }
+    else if(fieldTest.rawSentenceCount > 0)
+    {
+        snprintf(
+            hintBuffer,
+            sizeof(hintBuffer),
+            "导航日志已保存  状态%lu条",
+            (unsigned long)fieldTest.rawSentenceCount
+        );
+        hint = hintBuffer;
+    }
+    else
+    {
+        hint = recorder.sessionActive
+            ? (recorder.autoTrackEnabled ? "路径与自动轨迹记录中" : "路径记录中")
+            : (gnss.communicationActive ? "导航模块在线" : "等待导航模块");
+    }
     const int hintWidth = FT02_TextWidthPack(ft02_cjk_20r, hint);
     FT02_DrawTextPack(display, ft02_cjk_20r, hint, display.width() - 32 - hintWidth, 117);
 
@@ -145,7 +172,7 @@ static void FT02_DrawRecorderContent(
 
     FT02_RecorderDrawLabelValue(display, "GNSS", FT02_RecorderGnssState(gnss), 418, 210, 500);
 
-    if(gnss.gsvSeen)
+    if(gnss.satellitesVisible > 0)
     {
         snprintf(
             value,

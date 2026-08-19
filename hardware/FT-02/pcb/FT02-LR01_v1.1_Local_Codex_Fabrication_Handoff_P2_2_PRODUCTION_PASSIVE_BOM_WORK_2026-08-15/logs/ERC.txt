@@ -1,0 +1,6 @@
+P2.2 ERC NOT RUN
+Date: 2026-08-15
+
+P2.2 is a BOM / authority closure phase. Full production schematic capture was not continued and ERC closure was not run.
+
+SCHEMATIC_ERC = NOT RUN / PENDING FULL SCHEMATIC

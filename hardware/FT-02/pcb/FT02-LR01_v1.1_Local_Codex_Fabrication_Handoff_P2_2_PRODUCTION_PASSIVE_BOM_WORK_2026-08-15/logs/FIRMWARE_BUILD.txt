@@ -1,0 +1,21 @@
+FT02-LR01 v1.1 Firmware Gate
+Status: BLOCKED
+Date: 2026-08-14
+
+Required target:
+- ESP32-S3FH4R2
+- 4MB Flash
+- 2MB PSRAM
+- USB Serial/JTAG
+- locked LR01 GPIO map
+
+Search result:
+- Found FT-02 host firmware at hardware/FT-02/firmware/FT02_Display_Bringup_v0_1.
+- platformio.ini default env: ft02-pbf-a1-n16r8-spi40.
+- boards/ft02-esp32-s3-n16r8.json describes 16MB QIO flash and 8MB OPI PSRAM.
+- No LR01-specific firmware source or FH4R2 / 4MB / 2MB build environment was found.
+- No pio/platformio executable was available in the current shell.
+
+Decision:
+- Firmware build gate is BLOCKED.
+- No build was faked or substituted from the incompatible FT-02 N16R8 host firmware.

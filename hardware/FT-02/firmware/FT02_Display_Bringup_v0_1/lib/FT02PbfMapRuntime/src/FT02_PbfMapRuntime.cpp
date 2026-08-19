@@ -15,7 +15,7 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-// FT-02 Direct PBF Map A3.14
+// FT-02 Direct PBF Map A3.18 / Map Source Tiles A2
 //
 // A3 keeps the untouched .osm.pbf as the source of truth, but builds a
 // device-side persistent regional geometry cache. The first view in a region
@@ -33,7 +33,30 @@ static const uint32_t FT02_PBF_CACHE_GEO_LABEL_CAPACITY = 1024U;
 static const uint32_t FT02_PBF_CACHE_REGION_PIXELS_Z18 = 3072U;
 static const uint32_t FT02_PBF_CACHE_REGION_MARGIN_PIXELS_Z18 = 192U;
 static const uint32_t FT02_PBF_CACHE_VERSION = 6U;
-static const char* FT02_PBF_CACHE_PATH = "/maps/raw/shanghai-260726.osm.pbc5";
+static const char* FT02_PBF_LEGACY_CACHE_PATH = "/maps/raw/shanghai-260726.osm.pbc5";
+static const char* FT02_MAP_REGION_MANIFEST_PATH = "/maps/regions/regions.tsv";
+static const uint8_t FT02_MAP_SOURCE_MAX_REGIONS = 8U;
+static const uint8_t FT02_MAP_SOURCE_DEFAULT_ZOOM = 11U;
+
+struct FT02MapRegionSource
+{
+    char id[24];
+    double minLon;
+    double minLat;
+    double maxLon;
+    double maxLat;
+    uint8_t tileZoom;
+    char tileRoot[80];
+};
+
+static FT02MapRegionSource g_mapRegions[FT02_MAP_SOURCE_MAX_REGIONS];
+static uint8_t g_mapRegionCount = 0;
+static bool g_mapRegionsLoaded = false;
+static char g_activeSourcePath[160] = {};
+static char g_activeIndexPath[168] = {};
+static char g_activeSourceLabel[48] = "legacy-monolithic";
+static bool g_mapSourceChanged = false;
+static const uint32_t FT02_PBF_CACHE_CELL_PIXELS_Z18 = 2048U;
 static const int FT02_PBF_MAP_WIDTH = 800;
 static const int FT02_PBF_MAP_HEIGHT = 364;
 static const int FT02_PBF_MAP_MARGIN_PIXELS = 160;
@@ -133,6 +156,114 @@ struct FT02PbfGeoLabelDisk
 };
 #pragma pack(pop)
 
+
+static uint32_t FT02_MapTileX(double lon, uint8_t zoom)
+{
+    const double n = (double)(1UL << zoom);
+    double x = floor(((lon + 180.0) / 360.0) * n);
+    if(x < 0.0) x = 0.0;
+    if(x >= n) x = n - 1.0;
+    return (uint32_t)x;
+}
+
+static uint32_t FT02_MapTileY(double lat, uint8_t zoom)
+{
+    if(lat > 85.05112878) lat = 85.05112878;
+    if(lat < -85.05112878) lat = -85.05112878;
+    const double rad = lat * M_PI / 180.0;
+    const double n = (double)(1UL << zoom);
+    double y = floor((1.0 - asinh(tan(rad)) / M_PI) * 0.5 * n);
+    if(y < 0.0) y = 0.0;
+    if(y >= n) y = n - 1.0;
+    return (uint32_t)y;
+}
+
+static bool FT02_LoadRegionManifest()
+{
+    if(g_mapRegionsLoaded) return g_mapRegionCount > 0;
+    g_mapRegionsLoaded = true;
+    g_mapRegionCount = 0;
+
+    FILE* f = FT02_StorageOpenReadFile(FT02_MAP_REGION_MANIFEST_PATH);
+    if(f == nullptr)
+    {
+        Serial.printf("[MAP-SOURCE-A2] manifest missing path=%s; legacy fallback remains available\n", FT02_MAP_REGION_MANIFEST_PATH);
+        return false;
+    }
+
+    char line[256];
+    while(g_mapRegionCount < FT02_MAP_SOURCE_MAX_REGIONS && fgets(line, sizeof(line), f) != nullptr)
+    {
+        if(line[0] == '#' || line[0] == '\r' || line[0] == '\n' || line[0] == 0) continue;
+        char* save = nullptr;
+        char* id = strtok_r(line, "\t\r\n", &save);
+        char* minLon = strtok_r(nullptr, "\t\r\n", &save);
+        char* minLat = strtok_r(nullptr, "\t\r\n", &save);
+        char* maxLon = strtok_r(nullptr, "\t\r\n", &save);
+        char* maxLat = strtok_r(nullptr, "\t\r\n", &save);
+        char* zoom = strtok_r(nullptr, "\t\r\n", &save);
+        char* root = strtok_r(nullptr, "\t\r\n", &save);
+        if(!id || !minLon || !minLat || !maxLon || !maxLat || !zoom || !root) continue;
+
+        FT02MapRegionSource& r = g_mapRegions[g_mapRegionCount];
+        memset(&r, 0, sizeof(r));
+        snprintf(r.id, sizeof(r.id), "%s", id);
+        r.minLon = atof(minLon); r.minLat = atof(minLat);
+        r.maxLon = atof(maxLon); r.maxLat = atof(maxLat);
+        int z = atoi(zoom);
+        if(z < 6 || z > 16) z = FT02_MAP_SOURCE_DEFAULT_ZOOM;
+        r.tileZoom = (uint8_t)z;
+        snprintf(r.tileRoot, sizeof(r.tileRoot), "%s", root);
+        if(r.minLon < r.maxLon && r.minLat < r.maxLat && r.tileRoot[0] == '/') g_mapRegionCount++;
+    }
+    fclose(f);
+    Serial.printf("[MAP-SOURCE-A2] manifest loaded regions=%u\n", (unsigned)g_mapRegionCount);
+    return g_mapRegionCount > 0;
+}
+
+static bool FT02_SelectMapSource(double lon, double lat)
+{
+    const char* selectedSource = FT02_PBF_SOURCE_PATH;
+    const char* selectedIndex = FT02_PBF_INDEX_PATH;
+    char sourceBuf[160] = {};
+    char indexBuf[168] = {};
+    char labelBuf[48] = "legacy-monolithic";
+
+    FT02_LoadRegionManifest();
+    for(uint8_t i = 0; i < g_mapRegionCount; ++i)
+    {
+        const FT02MapRegionSource& r = g_mapRegions[i];
+        if(lon < r.minLon || lon > r.maxLon || lat < r.minLat || lat > r.maxLat) continue;
+        const uint32_t x = FT02_MapTileX(lon, r.tileZoom);
+        const uint32_t y = FT02_MapTileY(lat, r.tileZoom);
+        snprintf(sourceBuf, sizeof(sourceBuf), "%s/z%u_x%lu_y%lu.osm.pbf", r.tileRoot, (unsigned)r.tileZoom, (unsigned long)x, (unsigned long)y);
+        snprintf(indexBuf, sizeof(indexBuf), "%s/z%u_x%lu_y%lu.osm.pbi", r.tileRoot, (unsigned)r.tileZoom, (unsigned long)x, (unsigned long)y);
+        if(FT02_StorageFileExists(sourceBuf))
+        {
+            selectedSource = sourceBuf;
+            selectedIndex = indexBuf;
+            snprintf(labelBuf, sizeof(labelBuf), "%s:z%u/%lu/%lu", r.id, (unsigned)r.tileZoom, (unsigned long)x, (unsigned long)y);
+        }
+        else
+        {
+            Serial.printf("[MAP-SOURCE-A2] tile missing region=%s z=%u x=%lu y=%lu; fallback monolithic\n", r.id, (unsigned)r.tileZoom, (unsigned long)x, (unsigned long)y);
+        }
+        break;
+    }
+
+    g_mapSourceChanged = strcmp(g_activeSourcePath, selectedSource) != 0;
+    snprintf(g_activeSourcePath, sizeof(g_activeSourcePath), "%s", selectedSource);
+    snprintf(g_activeIndexPath, sizeof(g_activeIndexPath), "%s", selectedIndex);
+    snprintf(g_activeSourceLabel, sizeof(g_activeSourceLabel), "%s", labelBuf);
+    Serial.printf("[MAP-SOURCE-A2] selected source=%s pbf=%s pbi=%s\n", g_activeSourceLabel, g_activeSourcePath, g_activeIndexPath);
+    if(strcmp(selectedSource, FT02_PBF_SOURCE_PATH) != 0)
+    {
+        const bool pbiPresent = FT02_StorageFileExists(g_activeIndexPath);
+        Serial.printf("[MAP-SOURCE-A2] tile pair pbf=1 pbi=%d mode=%s\n", pbiPresent ? 1 : 0, pbiPresent ? "host-prebuilt" : "device-recovery");
+    }
+    return true;
+}
+
 static_assert(sizeof(FT02PbfIndexHeaderDisk) == 128, "PBI header size mismatch");
 static_assert(sizeof(FT02PbfIndexEntryDisk) == 64, "PBI entry size mismatch");
 static_assert(sizeof(FT02PbfCacheHeaderDisk) == 128, "PBC5 header size mismatch");
@@ -211,11 +342,58 @@ static bool g_cacheResident = false;
 static bool g_buildingCache = false;
 static bool g_forceCacheRebuild = false;
 static FT02ViewBounds g_cacheBuildBounds;
+static char g_activeCachePath[128] = {};
+static char g_activeCacheTempPath[136] = {};
+static double g_cacheAnchorLon = FT02_PBF_MAP_DEFAULT_LON;
+static double g_cacheAnchorLat = FT02_PBF_MAP_DEFAULT_LAT;
 static double g_centerLon = FT02_PBF_MAP_DEFAULT_LON;
 static double g_centerLat = FT02_PBF_MAP_DEFAULT_LAT;
 static int g_zoom = FT02_PBF_MAP_DEFAULT_ZOOM;
 static double g_centerWorldX = 0.0;
 static double g_centerWorldY = 0.0;
+
+// Map Storage I/O A1 instrumentation. These counters intentionally cover
+// raw .osm.pbf indexed block access only, so cache-hit timings remain easy
+// to distinguish from first-visit PBF work.
+struct FT02PbfIoStats
+{
+    uint32_t seeks;
+    uint32_t reads;
+    uint64_t bytes;
+    uint32_t seekMs;
+    uint32_t readMs;
+    uint32_t inflateMs;
+    uint32_t blocks;
+};
+
+static FT02PbfIoStats g_pbfIo = {};
+
+static void FT02_ResetPbfIoStats()
+{
+    memset(&g_pbfIo, 0, sizeof(g_pbfIo));
+}
+
+static bool FT02_PbfSourceSeek(FILE* file, uint64_t offset)
+{
+    if(file == nullptr || offset > (uint64_t)LONG_MAX) return false;
+    const uint32_t started = millis();
+    const int rc = fseek(file, (long)offset, SEEK_SET);
+    g_pbfIo.seekMs += millis() - started;
+    g_pbfIo.seeks++;
+    return rc == 0;
+}
+
+static bool FT02_PbfSourceRead(FILE* file, void* output, size_t bytes)
+{
+    if(bytes == 0) return true;
+    if(file == nullptr || output == nullptr) return false;
+    const uint32_t started = millis();
+    const size_t got = fread(output, 1, bytes, file);
+    g_pbfIo.readMs += millis() - started;
+    g_pbfIo.reads++;
+    g_pbfIo.bytes += got;
+    return got == bytes;
+}
 
 // Forward declarations used by the node pass. The definitions live beside
 // the shared string-table and label helpers below.
@@ -384,7 +562,7 @@ static bool FT02_WriteDmaStaged(
     if(stage == nullptr)
     {
         Serial.printf(
-            "[PBF-A3.14] cache writer DMA buffer allocation failed heap=%lu\n",
+            "[PBF-A3.18] cache writer DMA buffer allocation failed heap=%lu\n",
             (unsigned long)ESP.getFreeHeap()
         );
         return false;
@@ -407,7 +585,7 @@ static bool FT02_WriteDmaStaged(
         if(written != chunk)
         {
             Serial.printf(
-                "[PBF-A3.14] cache write failed section=%s offset=%lu requested=%lu written=%lu errno=%d ferror=%d\n",
+                "[PBF-A3.18] cache write failed section=%s offset=%lu requested=%lu written=%lu errno=%d ferror=%d\n",
                 section != nullptr ? section : "?",
                 (unsigned long)offset,
                 (unsigned long)chunk,
@@ -425,7 +603,7 @@ static bool FT02_WriteDmaStaged(
         if(offset >= nextReport || offset == bytes)
         {
             Serial.printf(
-                "[PBF-A3.14] cache write %s %lu/%lu bytes total=%lu\n",
+                "[PBF-A3.18] cache write %s %lu/%lu bytes total=%lu\n",
                 section != nullptr ? section : "?",
                 (unsigned long)offset,
                 (unsigned long)bytes,
@@ -525,22 +703,24 @@ static bool FT02_LoadRawBlock(FILE* source, const FT02PbfIndexEntryDisk& entry, 
     rawLength = 0;
     if(entry.blobBytes == 0 || entry.blobBytes > FT02_PBF_MAP_MAX_BLOB_BYTES) return false;
     if(entry.rawBytes == 0 || entry.rawBytes > FT02_PBF_MAP_MAX_RAW_BYTES) return false;
-    if(fseek(source, (long)entry.fileOffset, SEEK_SET) != 0) return false;
 
-    uint8_t prefix[4];
-    if(!FT02_ReadExact(source, prefix, sizeof(prefix))) return false;
-    uint32_t headerLength = ((uint32_t)prefix[0] << 24) | ((uint32_t)prefix[1] << 16) |
-        ((uint32_t)prefix[2] << 8) | (uint32_t)prefix[3];
-    if(headerLength != entry.blobHeaderBytes) return false;
-    if(fseek(source, (long)headerLength, SEEK_CUR) != 0) return false;
+    // I/O A1: the validated .pbi already stores both the BlobHeader length and
+    // the Blob payload length. The previous reader re-read the 4-byte prefix
+    // and then performed a second seek for every block. On an SPI/FAT path
+    // those tiny operations are disproportionately expensive. Seek directly
+    // to the Blob payload and issue one large fread, allowing FatFs to use the
+    // existing CMD18 16 KiB multi-block transport.
+    const uint64_t blobOffset = entry.fileOffset + 4ULL + (uint64_t)entry.blobHeaderBytes;
+    if(!FT02_PbfSourceSeek(source, blobOffset)) return false;
 
     uint8_t* blobBytes = (uint8_t*)FT02_MapAlloc(entry.blobBytes);
     if(blobBytes == nullptr) return false;
-    if(!FT02_ReadExact(source, blobBytes, entry.blobBytes))
+    if(!FT02_PbfSourceRead(source, blobBytes, entry.blobBytes))
     {
         FT02_MapFree(blobBytes);
         return false;
     }
+    g_pbfIo.blocks++;
 
     FT02PbfBlobView blob;
     if(!FT02_ParseBlob(blobBytes, entry.blobBytes, blob) || blob.unsupportedCompression)
@@ -570,7 +750,9 @@ static bool FT02_LoadRawBlock(FILE* source, const FT02PbfIndexEntryDisk& entry, 
         return false;
     }
     size_t inflated = 0;
+    const uint32_t inflateStarted = millis();
     bool ok = FT02_Inflate(blob.zlibData, blob.zlibLength, raw, blob.rawSize, inflated);
+    g_pbfIo.inflateMs += millis() - inflateStarted;
     FT02_MapFree(blobBytes);
     if(!ok || inflated != blob.rawSize)
     {
@@ -650,6 +832,33 @@ static FT02ViewBounds FT02_CacheRegionBoundsForCenter(double centerLon, double c
     bounds.maxLatE7 = (int32_t)llround(FT02_WorldYToLat(cy - half, baseZoom) * 10000000.0);
     bounds.minLatE7 = (int32_t)llround(FT02_WorldYToLat(cy + half, baseZoom) * 10000000.0);
     return bounds;
+}
+
+static void FT02_SelectRegionalCacheSlot(double lon, double lat)
+{
+    const int baseZoom = 18;
+    const double cell = (double)FT02_PBF_CACHE_CELL_PIXELS_Z18;
+    const double wx = FT02_LonToWorldX(lon, baseZoom);
+    const double wy = FT02_LatToWorldY(lat, baseZoom);
+    const uint32_t cellX = (uint32_t)floor(wx / cell);
+    const uint32_t cellY = (uint32_t)floor(wy / cell);
+    const double anchorX = ((double)cellX + 0.5) * cell;
+    const double anchorY = ((double)cellY + 0.5) * cell;
+    g_cacheAnchorLon = FT02_WorldXToLon(anchorX, baseZoom);
+    g_cacheAnchorLat = FT02_WorldYToLat(anchorY, baseZoom);
+    snprintf(
+        g_activeCachePath,
+        sizeof(g_activeCachePath),
+        "/maps/raw/shanghai-260726.osm.pbc5.%lu.%lu",
+        (unsigned long)cellX,
+        (unsigned long)cellY
+    );
+    snprintf(
+        g_activeCacheTempPath,
+        sizeof(g_activeCacheTempPath),
+        "%s.tmp",
+        g_activeCachePath
+    );
 }
 
 static bool FT02_ViewInsideCache(const FT02ViewBounds& view)
@@ -1587,17 +1796,17 @@ static bool FT02_LoadIndex()
     g_indexEntries = nullptr;
     g_indexEntryCount = 0;
 
-    FILE* file = FT02_StorageOpenReadFile(FT02_PBF_INDEX_PATH);
+    FILE* file = FT02_StorageOpenReadFile(g_activeIndexPath);
     if(file == nullptr)
     {
-        Serial.println("[PBF-A3.14] index open failed");
+        Serial.println("[PBF-A3.18] index open failed");
         return false;
     }
 
     FT02PbfIndexHeaderDisk header;
     if(!FT02_ReadExact(file, &header, sizeof(header)))
     {
-        Serial.println("[PBF-A3.14] index header read failed");
+        Serial.println("[PBF-A3.18] index header read failed");
         fclose(file);
         return false;
     }
@@ -1610,7 +1819,7 @@ static bool FT02_LoadIndex()
        header.entryCount > 4096U)
     {
         Serial.printf(
-            "[PBF-A3.14] index header invalid version=%u header=%u entry=%u count=%lu\n",
+            "[PBF-A3.18] index header invalid version=%u header=%u entry=%u count=%lu\n",
             (unsigned)header.version,
             (unsigned)header.headerBytes,
             (unsigned)header.entryBytes,
@@ -1628,7 +1837,7 @@ static bool FT02_LoadIndex()
     if(g_indexEntries == nullptr)
     {
         Serial.printf(
-            "[PBF-A3.14] index allocation failed bytes=%lu heap=%lu psram=%lu\n",
+            "[PBF-A3.18] index allocation failed bytes=%lu heap=%lu psram=%lu\n",
             (unsigned long)entryBytes,
             (unsigned long)ESP.getFreeHeap(),
             (unsigned long)ESP.getFreePsram()
@@ -1642,7 +1851,7 @@ static bool FT02_LoadIndex()
 
     if(!readOk)
     {
-        Serial.println("[PBF-A3.14] index entries read failed");
+        Serial.println("[PBF-A3.18] index entries read failed");
         FT02_MapFree(g_indexEntries);
         g_indexEntries = nullptr;
         return false;
@@ -1660,7 +1869,7 @@ static bool FT02_LoadIndex()
     if(actualCrc != header.entryCrc32)
     {
         Serial.printf(
-            "[PBF-A3.14] index CRC mismatch expected=0x%08lX actual=0x%08lX\n",
+            "[PBF-A3.18] index CRC mismatch expected=0x%08lX actual=0x%08lX\n",
             (unsigned long)header.entryCrc32,
             (unsigned long)actualCrc
         );
@@ -1675,7 +1884,7 @@ static bool FT02_LoadIndex()
     g_report.indexEntries = header.entryCount;
 
     Serial.printf(
-        "[PBF-A3.14] index loaded entries=%lu bytes=%lu\n",
+        "[PBF-A3.18] index loaded entries=%lu bytes=%lu\n",
         (unsigned long)g_indexEntryCount,
         (unsigned long)entryBytes
     );
@@ -1686,37 +1895,37 @@ static bool FT02_EnsureIndexForCacheBuild()
 {
     if(FT02_LoadIndex()) return true;
 
-    Serial.println("[PBF-A3.14] validating/recovering persistent index");
+    Serial.println("[PBF-A3.18] validating/recovering persistent index");
 
     if(FT02_PbfIndexEnsure(
             false,
-            FT02_PBF_SOURCE_PATH,
-            FT02_PBF_INDEX_PATH
+            g_activeSourcePath,
+            g_activeIndexPath
         ) && FT02_LoadIndex())
     {
-        Serial.println("[PBF-A3.14] index recovered by normal ensure");
+        Serial.println("[PBF-A3.18] index recovered by normal ensure");
         return true;
     }
 
     // One deterministic recovery attempt. This path is reached only when a
     // new regional cache must be built. Normal open, pan, zoom and R recenter
-    // never touch the index when a valid PBC4 cache is available.
+    // never touch the index when a valid regional cache is available.
     Serial.printf(
-        "[PBF-A3.14] normal ensure failed: %s; forcing one rebuild\n",
+        "[PBF-A3.18] normal ensure failed: %s; forcing one rebuild\n",
         FT02_PbfIndexErrorText()
     );
 
-    FT02_StorageDeleteFile(FT02_PBF_INDEX_PATH);
+    FT02_StorageDeleteFile(g_activeIndexPath);
     FT02_StorageDeleteFile(FT02_PBF_INDEX_TEMP_PATH);
 
     if(!FT02_PbfIndexEnsure(
             true,
-            FT02_PBF_SOURCE_PATH,
-            FT02_PBF_INDEX_PATH
+            g_activeSourcePath,
+            g_activeIndexPath
         ))
     {
         Serial.printf(
-            "[PBF-A3.14] forced index rebuild failed: %s\n",
+            "[PBF-A3.18] forced index rebuild failed: %s\n",
             FT02_PbfIndexErrorText()
         );
         return false;
@@ -1724,11 +1933,11 @@ static bool FT02_EnsureIndexForCacheBuild()
 
     if(!FT02_LoadIndex())
     {
-        Serial.println("[PBF-A3.14] rebuilt index could not be loaded");
+        Serial.println("[PBF-A3.18] rebuilt index could not be loaded");
         return false;
     }
 
-    Serial.println("[PBF-A3.14] index rebuilt and loaded");
+    Serial.println("[PBF-A3.18] index rebuilt and loaded");
     return true;
 }
 
@@ -1794,7 +2003,7 @@ static uint32_t FT02_CachePayloadCrc()
 
 static bool FT02_SaveCache(uint32_t buildElapsedMs)
 {
-    const char* tempPath = "/maps/raw/shanghai-260726.osm.pbc5.tmp";
+    const char* tempPath = g_activeCacheTempPath;
     FT02PbfCacheHeaderDisk header;
     memset(&header, 0, sizeof(header));
     memcpy(header.magic, "FTPBC5", 6);
@@ -1810,8 +2019,8 @@ static bool FT02_SaveCache(uint32_t buildElapsedMs)
     header.minLonE7 = g_cacheBuildBounds.minLonE7;
     header.maxLatE7 = g_cacheBuildBounds.maxLatE7;
     header.maxLonE7 = g_cacheBuildBounds.maxLonE7;
-    header.centerLatE7 = (int32_t)llround(g_centerLat * 10000000.0);
-    header.centerLonE7 = (int32_t)llround(g_centerLon * 10000000.0);
+    header.centerLatE7 = (int32_t)llround(g_cacheAnchorLat * 10000000.0);
+    header.centerLonE7 = (int32_t)llround(g_cacheAnchorLon * 10000000.0);
     header.buildElapsedMs = buildElapsedMs;
     header.payloadCrc32 = FT02_CachePayloadCrc();
     header.fileBytes = sizeof(header)
@@ -1821,7 +2030,7 @@ static bool FT02_SaveCache(uint32_t buildElapsedMs)
     FILE* file = FT02_StorageOpenWriteFile(tempPath, true);
     if(file == nullptr)
     {
-        Serial.printf("[PBF-A3.14] cache temp open failed path=%s errno=%d\n", tempPath, errno);
+        Serial.printf("[PBF-A3.18] cache temp open failed path=%s errno=%d\n", tempPath, errno);
         return false;
     }
 
@@ -1853,7 +2062,7 @@ static bool FT02_SaveCache(uint32_t buildElapsedMs)
     if(!ok)
     {
         Serial.printf(
-            "[PBF-A3.14] cache temp write/sync failed total=%lu expected=%lu close=%d errno=%d\n",
+            "[PBF-A3.18] cache temp write/sync failed total=%lu expected=%lu close=%d errno=%d\n",
             (unsigned long)totalWritten,
             (unsigned long)header.fileBytes,
             closeResult,
@@ -1867,15 +2076,15 @@ static bool FT02_SaveCache(uint32_t buildElapsedMs)
     if(!FT02_StorageFileSize(tempPath, writtenBytes) || writtenBytes != header.fileBytes)
     {
         Serial.printf(
-            "[PBF-A3.14] cache temp size mismatch actual=%llu expected=%lu\n",
+            "[PBF-A3.18] cache temp size mismatch actual=%llu expected=%lu\n",
             (unsigned long long)writtenBytes,
             (unsigned long)header.fileBytes
         );
         FT02_StorageDeleteFile(tempPath);
         return false;
     }
-    FT02_StorageDeleteFile(FT02_PBF_CACHE_PATH);
-    if(!FT02_StorageRenameFile(tempPath, FT02_PBF_CACHE_PATH))
+    FT02_StorageDeleteFile(g_activeCachePath);
+    if(!FT02_StorageRenameFile(tempPath, g_activeCachePath))
     {
         FT02_StorageDeleteFile(tempPath);
         return false;
@@ -1883,12 +2092,13 @@ static bool FT02_SaveCache(uint32_t buildElapsedMs)
     g_cacheHeader = header;
     g_cacheResident = true;
     g_report.cacheFileBytes = header.fileBytes;
+    Serial.printf("[PBF-A3.18] cache saved path=%s bytes=%lu\n", g_activeCachePath, (unsigned long)header.fileBytes);
     return true;
 }
 
-static bool FT02_LoadCacheFromSd()
+static bool FT02_LoadCacheFromSd(const char* cachePath)
 {
-    FILE* file = FT02_StorageOpenReadFile(FT02_PBF_CACHE_PATH);
+    FILE* file = FT02_StorageOpenReadFile(cachePath);
     if(file == nullptr) return false;
     FT02PbfCacheHeaderDisk header;
     bool ok = FT02_ReadExact(file, &header, sizeof(header));
@@ -2118,7 +2328,8 @@ static bool FT02_ProjectCache()
 static bool FT02_BuildRegionalCache()
 {
     FT02_ReleaseCacheBuffers();
-    g_cacheBuildBounds = FT02_CacheRegionBoundsForCenter(g_centerLon, g_centerLat);
+    FT02_SelectRegionalCacheSlot(g_centerLon, g_centerLat);
+    g_cacheBuildBounds = FT02_CacheRegionBoundsForCenter(g_cacheAnchorLon, g_cacheAnchorLat);
     g_geoSegments = (FT02PbfGeoSegmentDisk*)FT02_MapAlloc(
         sizeof(FT02PbfGeoSegmentDisk) * FT02_PBF_CACHE_GEO_SEGMENT_CAPACITY
     );
@@ -2134,7 +2345,7 @@ static bool FT02_BuildRegionalCache()
     g_geoLabelCount = 0;
     g_buildingCache = true;
 
-    FILE* source = FT02_StorageOpenReadFile(FT02_PBF_SOURCE_PATH);
+    FILE* source = FT02_StorageOpenReadFile(g_activeSourcePath);
     if(source == nullptr) return false;
     uint32_t started = millis();
     uint32_t nodePassStart = millis();
@@ -2197,6 +2408,20 @@ static bool FT02_BuildRegionalCache()
     g_report.cacheBuildMs = millis() - started;
     g_buildingCache = false;
 
+    Serial.printf(
+        "[MAP-IO-A1] raw_pbf blocks=%lu seeks=%lu reads=%lu bytes=%llu seek=%lu ms read=%lu ms inflate=%lu ms node_pass=%lu ms way_pass=%lu ms build=%lu ms\n",
+        (unsigned long)g_pbfIo.blocks,
+        (unsigned long)g_pbfIo.seeks,
+        (unsigned long)g_pbfIo.reads,
+        (unsigned long long)g_pbfIo.bytes,
+        (unsigned long)g_pbfIo.seekMs,
+        (unsigned long)g_pbfIo.readMs,
+        (unsigned long)g_pbfIo.inflateMs,
+        (unsigned long)g_report.nodePassMs,
+        (unsigned long)g_report.wayPassMs,
+        (unsigned long)g_report.cacheBuildMs
+    );
+
     if(g_report.nodesKept >= FT02_PBF_MAP_NODE_MAX_LOAD) return false;
     if(g_geoSegmentCount == 0 || g_report.segmentLimitReached) return false;
     if(!FT02_SaveCache(g_report.cacheBuildMs)) return false;
@@ -2213,7 +2438,7 @@ static bool FT02_Fail(FT02PbfMapError error)
     g_report.error = error;
     g_report.minimumFreeHeap = ESP.getMinFreeHeap();
     g_report.freePsramAfter = ESP.getFreePsram();
-    Serial.print("[PBF-A3.14] FAIL error=");
+    Serial.print("[PBF-A3.18] FAIL error=");
     Serial.println((int)error);
     FT02_ReleaseAllBuffers();
     return false;
@@ -2229,6 +2454,7 @@ void FT02_PbfMapPrepare()
     FT02_ReleaseRuntimeBuffers();
     FT02_ReleaseScreenBuffers();
     memset(&g_report, 0, sizeof(g_report));
+    FT02_ResetPbfIoStats();
     if(g_centerWorldX == 0.0 && g_centerWorldY == 0.0) FT02_PbfMapResetView();
     g_report.state = FT02_PBF_MAP_LOADING;
     g_report.error = FT02_PBF_MAP_ERROR_NONE;
@@ -2253,7 +2479,7 @@ void FT02_PbfMapSetCenter(double longitude, double latitude)
        latitude < -85.0 || latitude > 85.0)
     {
         Serial.printf(
-            "[PBF-A3.14] rejected invalid center %.7f,%.7f\n",
+            "[PBF-A3.18] rejected invalid center %.7f,%.7f\n",
             longitude,
             latitude
         );
@@ -2265,7 +2491,7 @@ void FT02_PbfMapSetCenter(double longitude, double latitude)
     g_centerWorldX = FT02_LonToWorldX(g_centerLon, g_zoom);
     g_centerWorldY = FT02_LatToWorldY(g_centerLat, g_zoom);
     Serial.printf(
-        "[PBF-A3.14] center set %.7f,%.7f z=%d\n",
+        "[PBF-A3.18] center set %.7f,%.7f z=%d\n",
         g_centerLon,
         g_centerLat,
         g_zoom
@@ -2361,7 +2587,7 @@ bool FT02_PbfMapFitBoundsLimited(
     g_centerLat = FT02_WorldYToLat(g_centerWorldY, g_zoom);
 
     Serial.printf(
-        "[PBF-A3.14] fit bounds z=%d fits=%d range=Z%d-Z%d viewport=%dx%d pad=%d center=%.7f,%.7f\n",
+        "[PBF-A3.18] fit bounds z=%d fits=%d range=Z%d-Z%d viewport=%dx%d pad=%d center=%.7f,%.7f\n",
         g_zoom,
         fits ? 1 : 0,
         minimumZoom,
@@ -2468,7 +2694,7 @@ bool FT02_PbfMapChangeZoom(int delta)
     if(next == g_zoom)
     {
         Serial.printf(
-            "[PBF-A3.14] zoom limit unchanged z=%d center=%.7f,%.7f; rebuild skipped\n",
+            "[PBF-A3.18] zoom limit unchanged z=%d center=%.7f,%.7f; rebuild skipped\n",
             g_zoom,
             anchorLon,
             anchorLat
@@ -2483,7 +2709,7 @@ bool FT02_PbfMapChangeZoom(int delta)
     g_centerWorldY = FT02_LatToWorldY(anchorLat, g_zoom);
 
     Serial.printf(
-        "[PBF-A3.14] zoom anchor kept oldZ=%d newZ=%d center=%.7f,%.7f\n",
+        "[PBF-A3.18] zoom anchor kept oldZ=%d newZ=%d center=%.7f,%.7f\n",
         oldZoom,
         g_zoom,
         g_centerLon,
@@ -2495,7 +2721,8 @@ bool FT02_PbfMapChangeZoom(int delta)
 void FT02_PbfMapInvalidateCache()
 {
     g_forceCacheRebuild = true;
-    FT02_StorageDeleteFile(FT02_PBF_CACHE_PATH);
+    FT02_SelectRegionalCacheSlot(g_centerLon, g_centerLat);
+    FT02_StorageDeleteFile(g_activeCachePath);
     FT02_ReleaseCacheBuffers();
 }
 
@@ -2517,9 +2744,9 @@ bool FT02_PbfMapBuild()
 
     const uint32_t started = millis();
 
-    Serial.println("[PBF-A3.14] regional cache map build begin");
+    Serial.println("[PBF-A3.18] regional cache map build begin");
     Serial.printf(
-        "[PBF-A3.14] center=%.7f,%.7f zoom=%d\n",
+        "[PBF-A3.18] center=%.7f,%.7f zoom=%d\n",
         g_centerLon,
         g_centerLat,
         g_zoom
@@ -2530,27 +2757,38 @@ bool FT02_PbfMapBuild()
         return FT02_Fail(FT02_PBF_MAP_ERROR_STORAGE);
     }
 
+    FT02_SelectMapSource(g_centerLon, g_centerLat);
+    if(g_mapSourceChanged)
+    {
+        g_sourceFileBytes = 0;
+        g_sourceSignature = 0;
+        FT02_MapFree(g_indexEntries); g_indexEntries = nullptr; g_indexEntryCount = 0;
+        Serial.println("[MAP-SOURCE-A2] source identity/index state reset after tile switch");
+    }
+
     const FT02ViewBounds view = FT02_CurrentViewBounds();
     bool cacheReady = false;
+    FT02_SelectRegionalCacheSlot(g_centerLon, g_centerLat);
+    Serial.printf("[PBF-A3.18] cache slot path=%s anchor=%.7f,%.7f\n", g_activeCachePath, g_cacheAnchorLon, g_cacheAnchorLat);
 
     // Cold boot previously compared a valid PBC5 header against zero-valued
     // source identity fields, deleted the cache, and rebuilt it on every first
     // map open. Prime the identity from three small source samples before the
     // cache header is validated. This does not load or rebuild the PBI index.
-    if(!g_cacheResident && (g_sourceFileBytes == 0 || g_sourceSignature == 0))
+    if(g_mapSourceChanged || (!g_cacheResident && (g_sourceFileBytes == 0 || g_sourceSignature == 0)))
     {
         const uint32_t identityStarted = millis();
         if(!FT02_PbfIndexComputeSourceIdentity(
-                FT02_PBF_SOURCE_PATH,
+                g_activeSourcePath,
                 g_sourceFileBytes,
                 g_sourceSignature
             ))
         {
-            Serial.println("[PBF-A3.14] source identity check failed before cache load");
+            Serial.println("[PBF-A3.18] source identity check failed before cache load");
             return FT02_Fail(FT02_PBF_MAP_ERROR_SOURCE_OPEN);
         }
         Serial.printf(
-            "[PBF-A3.14] source identity ready bytes=%llu signature=0x%08lX time=%lu ms\n",
+            "[PBF-A3.18] source identity ready bytes=%llu signature=0x%08lX time=%lu ms\n",
             (unsigned long long)g_sourceFileBytes,
             (unsigned long)g_sourceSignature,
             (unsigned long)(millis() - identityStarted)
@@ -2561,8 +2799,8 @@ bool FT02_PbfMapBuild()
     {
         g_forceCacheRebuild = false;
         FT02_ReleaseCacheBuffers();
-        FT02_StorageDeleteFile(FT02_PBF_CACHE_PATH);
-        Serial.println("[PBF-A3.14] forced regional cache rebuild requested");
+        FT02_StorageDeleteFile(g_activeCachePath);
+        Serial.println("[PBF-A3.18] forced regional cache rebuild requested");
     }
 
     // Fastest path: R, pan and zoom inside the current resident cache are
@@ -2573,42 +2811,62 @@ bool FT02_PbfMapBuild()
         cacheReady = true;
         g_report.cacheReusedInMemory = true;
         g_report.cacheFileBytes = g_cacheHeader.fileBytes;
-        Serial.println("[PBF-A3.14] RAM cache hit; index not accessed");
+        Serial.println("[PBF-A3.18] RAM cache hit; index not accessed");
+    }
+    else if(g_cacheResident)
+    {
+        // The requested search/pan target left the resident region. Drop only
+        // the RAM copy, then try the deterministic SD slot for the new region
+        // before considering an expensive raw-PBF rebuild.
+        FT02_ReleaseCacheBuffers();
+        Serial.println("[PBF-A3.18] resident cache miss; checking target SD slot");
     }
 
-    // Cold-start path: the regional cache is self-contained. Load and use it
+    // Cold-start / region-switch path: the regional cache is self-contained. Load and use it
     // before touching the .pbi block index. This allows the map to start even
     // when an old or damaged index is present on the card.
-    if(!cacheReady && !g_cacheResident && FT02_FileExists(FT02_PBF_CACHE_PATH))
+    if(!cacheReady && !g_cacheResident)
     {
-        const uint32_t loadStarted = millis();
-
-        if(FT02_LoadCacheFromSd())
+        const char* candidatePath = nullptr;
+        bool legacyCandidate = false;
+        if(FT02_FileExists(g_activeCachePath))
+            candidatePath = g_activeCachePath;
+        else if(FT02_FileExists(FT02_PBF_LEGACY_CACHE_PATH))
         {
-            g_report.cacheLoadMs = millis() - loadStarted;
+            candidatePath = FT02_PBF_LEGACY_CACHE_PATH;
+            legacyCandidate = true;
+        }
 
-            if(FT02_ViewInsideCache(view))
+        if(candidatePath != nullptr)
+        {
+            const uint32_t loadStarted = millis();
+            if(FT02_LoadCacheFromSd(candidatePath))
             {
-                cacheReady = true;
-                g_report.cacheLoaded = true;
-                Serial.printf(
-                    "[PBF-A3.14] SD cache hit segments=%lu labels=%lu time=%lu ms; index not accessed\n",
-                    (unsigned long)g_geoSegmentCount,
-                    (unsigned long)g_geoLabelCount,
-                    (unsigned long)g_report.cacheLoadMs
-                );
+                g_report.cacheLoadMs = millis() - loadStarted;
+                if(FT02_ViewInsideCache(view))
+                {
+                    cacheReady = true;
+                    g_report.cacheLoaded = true;
+                    Serial.printf(
+                        "[PBF-A3.18] SD cache hit path=%s segments=%lu labels=%lu time=%lu ms; index not accessed\n",
+                        candidatePath,
+                        (unsigned long)g_geoSegmentCount,
+                        (unsigned long)g_geoLabelCount,
+                        (unsigned long)g_report.cacheLoadMs
+                    );
+                }
+                else
+                {
+                    Serial.printf("[PBF-A3.18] SD cache does not cover view path=%s; trying/building slot\n", candidatePath);
+                    FT02_ReleaseCacheBuffers();
+                }
             }
             else
             {
-                Serial.println("[PBF-A3.14] SD cache does not cover view; rebuilding region");
+                Serial.printf("[PBF-A3.18] SD cache invalid path=%s\n", candidatePath);
+                if(!legacyCandidate) FT02_StorageDeleteFile(candidatePath);
                 FT02_ReleaseCacheBuffers();
             }
-        }
-        else
-        {
-            Serial.println("[PBF-A3.14] SD cache invalid; deleting and rebuilding region");
-            FT02_StorageDeleteFile(FT02_PBF_CACHE_PATH);
-            FT02_ReleaseCacheBuffers();
         }
     }
 
@@ -2620,7 +2878,7 @@ bool FT02_PbfMapBuild()
             return FT02_Fail(FT02_PBF_MAP_ERROR_INDEX_INVALID);
         }
 
-        Serial.println("[PBF-A3.14] building new regional cache from raw PBF");
+        Serial.println("[PBF-A3.18] building new regional cache from raw PBF");
 
         if(!FT02_BuildRegionalCache())
         {
@@ -2661,7 +2919,7 @@ bool FT02_PbfMapBuild()
         : (g_report.cacheLoaded ? "SD CACHE" : "RAM CACHE");
 
     Serial.printf(
-        "[PBF-A3.14] PASS source=%s screen_segments=%lu labels=%lu project=%lu ms total=%lu ms\n",
+        "[PBF-A3.18] PASS source=%s screen_segments=%lu labels=%lu project=%lu ms total=%lu ms\n",
         source,
         (unsigned long)g_report.segments,
         (unsigned long)g_report.labels,

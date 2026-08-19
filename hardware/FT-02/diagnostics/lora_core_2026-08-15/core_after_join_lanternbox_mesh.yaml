@@ -1,0 +1,62 @@
+# start of Meshtastic configure yaml
+canned_messages: Hi|Bye|Yes|No|Ok
+channel_url: https://meshtastic.org/e/#CiYSIIIBRbV-5RtLzwSIcQ-TVxGazgRjWnj2cOsymDOYrEFuOgIIDRIWCAEY-gEgCygFOARAA0gBUBNoAdAGAg
+config:
+  bluetooth:
+    enabled: true
+    fixedPin: 123456
+  device:
+    nodeInfoBroadcastSecs: 10800
+  display:
+    screenOnSecs: 600
+  lora:
+    bandwidth: 250
+    codingRate: 5
+    femLnaMode: NOT_PRESENT
+    hopLimit: 3
+    region: CN
+    spreadFactor: 11
+    sx126xRxBoostedGain: true
+    txEnabled: true
+    txPower: 19
+    usePreset: true
+  network:
+    ntpServer: meshtastic.pool.ntp.org
+  position:
+    broadcastSmartMinimumDistance: 100
+    broadcastSmartMinimumIntervalSecs: 300
+    gpsMode: NOT_PRESENT
+    gpsUpdateInterval: 120
+    positionBroadcastSecs: 3600
+    positionBroadcastSmartEnabled: true
+    positionFlags: 811
+  power:
+    lsSecs: 300
+    minWakeSecs: 10
+    sdsSecs: 4294967295
+    waitBluetoothSecs: 60
+  security:
+    privateKey: base64:+LAluJtmHXSKCiMOUlSItdv2gmr93QJR8bNsj9pRY3M=
+    publicKey: base64:HJltMNPPoyV9MOcd0uk7HrhOibl9h0OWrsCokU29xnw=
+    serialEnabled: true
+module_config:
+  ambientLighting:
+    blue: 160
+    current: 10
+    green: 169
+    red: 211
+  cannedMessage:
+    enabled: true
+  detectionSensor:
+    detectionTriggerType: LOGIC_HIGH
+    minimumBroadcastSecs: 45
+  mqtt:
+    address: mqtt.meshtastic.org
+    encryptionEnabled: true
+    password: large4cats
+    root: msh/CN
+    username: meshdev
+  telemetry:
+    deviceUpdateInterval: 2147483647
+owner: LanternBox Core
+owner_short: Core

@@ -1,0 +1,12 @@
+Import Report
+=============
+
+Source file: TIDA_010057.PcbDoc
+Source format: Altium Designer
+Output file: tida_010057_imported.kicad_pcb
+
+Statistics:
+  Footprints: 593
+  Tracks: 4750
+  Vias: 1029
+  Zones: 216

@@ -1,0 +1,14 @@
+(kicad_sch
+	(version 20250114)
+	(generator "codex-p2-1-symbol-authority")
+	(generator_version "1.0")
+	(uuid "1ef1823d-d1d7-4132-8bb0-cc3616565992")
+	(paper "A4")
+	(title_block
+		(title "FT02-LR01 v1.1 P2.1 schematic capture")
+		(date "2026-08-15")
+		(rev "P2.1-BLOCKED")
+		(comment 1 "Exact local symbol library established; full production schematic capture is BLOCKED pending missing exact digital passives and decoupling BOM authority.")
+		(comment 2 "Frozen RF PCB fragment, board outline, mounting holes, footprints, placement and routing were not modified.")
+	)
+)
