@@ -1,125 +1,123 @@
-# FT02-LR01 MeshtasticNative A2
+# LanternBox FT02-LR01 Firmware
 
-A2 is a backward-compatible extension of the A1 firmware that was already
-verified on real hardware for Core UART, broadcast messaging and PKI private messaging.
+FT02-LR01 是 LanternBox / FT-02 的导航与通信协处理器固件。
 
-Identity:
-- owner: LanternBox FT-02
-- owner_short: FT02
-- node: !4c423002
+当前基线：**Meshtastic Native A2 + QMC5883L Compass Calibration A1**
 
-Host:
-- Core TX GPIO13 -> LR01 RX GPIO18
-- Core RX GPIO7 <- LR01 TX GPIO17
-- 115200 8N1, ASCII/UTF-8 + LF
+设备身份：
 
-## A2 commands
+```text
+owner: LanternBox FT-02
+owner_short: FT02
+node: !4c423002
+```
 
-CORE_PING_x
-CORE_STATUS?
-CORE_STATUS? id=42
-MESH_NODEINFO
-MESH_NODES?
-MESH_TX hello
-MESH_TX id=123 hello
-MESH_PRIVATE !4c423001 hello
-MESH_PRIVATE id=124 !4c423001 hello
+## 职责边界
 
-## A2 events
+LR01 是以下硬件与协议的唯一权威：
 
-LR01_BOOT version=MESH_NATIVE_A2 protocol=2 node=FT02 id=!4c423002
-LR01_READY protocol=2
+- LoRa / Meshtastic Native
+- K25+ GNSS
+- QMC5883L 罗盘
+- 罗盘校准与持久化
+- Core ↔ LR01 Host UART 协议
 
-MESH_TX_ACCEPTED id=123
-MESH_TX_SENT id=123
-MESH_TX_FAILED id=123 reason=...
-MESH_TX_RESULT id=123 type=TEXT|PRIVATE ok=0|1 ...
-MESH_DELIVERY id=124 node=4C423001 status=ACK|TIMEOUT
+FT-02 Core 只负责 Host UART 上层业务、UI、存储和应用逻辑，不直接访问 SX1262、GNSS 或 QMC5883L。
 
-MESH_NODE ...
-MESH_NODE_END count=N
+## 当前已实现
 
-MESH_RX id=<air_packet_id> from=<node> to=<node> ...
+- CN35 / 478.875 MHz Meshtastic Native 收发
+- 广播文本消息
+- PKI 私信
+- NodeInfo / 节点发现
+- Routing ACK / Delivery 状态
+- Host Message ID 生命周期
+- 节点列表查询
+- GNSS 位置、速度、时间、卫星状态
+- QMC5883L 航向
+- QMC5883L 非阻塞校准
+- 校准双槽 NVS 持久化、CRC32、回滚保护
+- Host UART 状态与错误上报
 
-STATUS_END
-STATUS_END id=42
+## 已实机验证基线
 
-## NAV additions
-- fix_type=0/2/3
-- sat_used=
-- sat_visible=
-- speed=<cm/s>
-- unix=<UTC Unix seconds>
-- time_valid=0/1
-- compass_q=0..3
+在进入罗盘校准扩展前，下列链路已经实机通过：
 
-The legacy `sat=` field remains and equals sat_used for A1 compatibility.
+- Core ↔ LR01 Host UART
+- `CORE_PING` / `LR01_PONG`
+- GNSS 数据流
+- QMC5883L 读取
+- SX1262 初始化与真实 RF 接收
+- Meshtastic NodeInfo
+- Meshtastic 广播文本接收
+- 广播与 PKI 私信收发
 
-## SYSTEM additions
-- heap=
-- psram=
-- rx_errors=
-- uart_errors=
-- radio_resets=
+罗盘校准扩展需按 `docs/ACCEPTANCE_TESTS.md` 完成最终实机验收后再标记为稳定。
 
-## RADIO additions
-- tx_queue=0
+## 硬件连接
 
-The current radio TX path is synchronous, so queue depth is 0. Private messages
-are tracked separately for delivery ACK/TIMEOUT.
+| 功能 | LR01 GPIO |
+|---|---:|
+| QMC5883L SDA | 4 |
+| QMC5883L SCL | 5 |
+| GNSS RX | 6 |
+| GNSS TX | 7 |
+| SX1262 NSS | 8 |
+| SX1262 SCK | 9 |
+| SX1262 MOSI | 10 |
+| SX1262 MISO | 11 |
+| SX1262 RESET | 12 |
+| SX1262 BUSY | 13 |
+| SX1262 DIO1 | 14 |
+| Host UART TX | 17 |
+| Host UART RX | 18 |
 
-## limits
-- user message payload: <=120 UTF-8 bytes
-- Host UART line: 256 bytes
+Host UART：
 
+```text
+Core GPIO13 TX -> LR01 GPIO18 RX
+Core GPIO7  RX <- LR01 GPIO17 TX
+115200 8N1
+ASCII / UTF-8 + LF
+```
 
-## HOST_PROTOCOL_A2 Final lock
+## 编译与烧录
 
-The following three state frames are frozen for Core A2 integration.
+使用 PlatformIO 打开项目根目录。
 
-NAV_STATE:
-NAV_STATE fix=<0|1> fix_type=<0|2|3> lat=<e7> lon=<e7> alt=<dm> sat=<n> sat_used=<n> sat_visible=<n> hdop=<x100> speed=<cm/s> heading=<x10deg> compass=<0|1> compass_q=<0..3> unix=<sec> time_valid=<0|1>
+```bash
+platformio run
+```
 
-RADIO_STATE:
-RADIO_STATE ready=<0|1> profile=<name> freq=<MHz> rx=<n> nodes=<n> pki=<n> dup=<n> tx_queue=<n>
+烧录：
 
-SYSTEM_STATE:
-SYSTEM_STATE gnss=<0|1> compass=<0|1> lora=<0|1> uptime=<sec> gnss_bytes=<n> heap=<bytes> psram=<bytes> rx_errors=<n> uart_errors=<n> radio_resets=<n>
+```bash
+platformio run -t upload
+```
 
-Identity:
-owner=LanternBox FT-02
-owner_short=FT02
-node=!4c423002
+串口监视：
 
-MESH_DELIVERY status=ACK means a matching Meshtastic ROUTING_APP delivery ACK was received from the mesh, not merely local radio transmission completion.
+```bash
+platformio device monitor -b 115200
+```
 
-Core-provided id=<uint32> remains the Host-side lifecycle key through ACCEPTED / SENT / FAILED / RESULT / DELIVERY.
+也可直接使用 VS Code PlatformIO 的 Build / Upload / Monitor。
 
+## 文档
 
-# QMC5883L Compass Calibration Extension
+- [`docs/HOST_PROTOCOL_A2.md`](docs/HOST_PROTOCOL_A2.md)：Core ↔ LR01 正式 Host 协议
+- [`docs/COMPASS_CALIBRATION.md`](docs/COMPASS_CALIBRATION.md)：QMC5883L 校准设计与语义
+- [`docs/ACCEPTANCE_TESTS.md`](docs/ACCEPTANCE_TESTS.md)：烧录后的验收流程
+- [`docs/HARDWARE.md`](docs/HARDWARE.md)：硬件角色、引脚与总线说明
+- [`docs/TROUBLESHOOTING.md`](docs/TROUBLESHOOTING.md)：常见故障排查
+- [`CHANGELOG.md`](CHANGELOG.md)：版本变化记录
 
-This build adds a non-blocking, persistent compass calibration flow owned entirely by LR01.
-Core never receives raw magnetometer samples and never accesses QMC5883L I2C.
+## 重要约束
 
-Commands:
-- COMPASS_CAL_START
-- COMPASS_CAL_STATUS?
-- COMPASS_CAL_SAVE
-- COMPASS_CAL_CANCEL
-- COMPASS_CAL_RESET
-
-Status:
-COMPASS_CAL_STATE state=<IDLE|RUNNING|READY|SAVED|CANCELED|FAILED> progress=<0..100> quality=<0..3> samples=<n> calibrated=<0|1> min_x=<n> max_x=<n> min_y=<n> max_y=<n> min_z=<n> max_z=<n>
-
-Persistence:
-- ESP32 Preferences / NVS namespace `qmc_cal`
-- two-slot generation + CRC32 storage
-- old valid slot remains a rollback copy
-- SAVE is the only operation that activates a new calibration
-- START never deletes the saved calibration
-
-Heading behavior:
-- During calibration, heading continues using the previously saved calibration.
-- If no saved calibration exists, raw magnetic heading is used and compass_q=1.
-- After SAVE, the new offsets/scales take effect immediately.
-- X/Y/Z are all corrected. Because LR01 has no accelerometer, heading remains a 2D magnetic azimuth from corrected X/Y; corrected Z is used in calibration coverage/quality and retained for future tilt compensation.
+1. 不要让 Core 重新直接访问 QMC5883L、GNSS 或 SX1262。
+2. 不要破坏 HOST_PROTOCOL_A2 已冻结字段名称、单位和语义。
+3. 新协议能力优先以“新增命令 / 新增独立状态包”扩展。
+4. `COMPASS_CAL_START` 不得删除旧校准。
+5. 只有 `COMPASS_CAL_SAVE` 成功后，新校准才生效。
+6. `COMPASS_CAL_RESET` 是显式破坏性操作。
+7. 项目包含私有 Meshtastic 网络材料时，不要上传到公开仓库。
