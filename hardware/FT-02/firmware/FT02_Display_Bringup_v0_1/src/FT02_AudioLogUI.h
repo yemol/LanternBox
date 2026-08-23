@@ -13,6 +13,12 @@ void FT02_DrawAudioLogListBodyPartial(
     uint16_t selectedNewestIndex
 );
 
+void FT02_DrawAudioLogListSelectionPartial(
+    FT02Display& display,
+    uint16_t oldSelectedNewestIndex,
+    uint16_t newSelectedNewestIndex
+);
+
 void FT02_DrawAudioLogRecordingBodyPartial(
     FT02Display& display,
     const FT02AudioLogStatus& status

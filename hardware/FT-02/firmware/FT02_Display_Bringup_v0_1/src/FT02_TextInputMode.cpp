@@ -5,10 +5,6 @@ namespace
 FT02TextInputMode g_mode = FT02_TEXT_INPUT_CN;
 }
 
-FT02TextInputMode FT02_TextInputModeCurrent()
-{
-    return g_mode;
-}
 
 bool FT02_TextInputModeIsChinese()
 {
@@ -21,7 +17,3 @@ FT02TextInputMode FT02_TextInputModeToggle()
     return g_mode;
 }
 
-void FT02_TextInputModeSet(FT02TextInputMode mode)
-{
-    g_mode = mode;
-}

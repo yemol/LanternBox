@@ -1,5 +1,6 @@
 #include "FT02_HomeCards.h"
 #include "FT02_EpdLifecycle.h"
+#include "FT02_EpdInteractiveRuntime.h"
 
 #include "FT02_FontData.h"
 #include "FT02_HomeCardIconData.h"
@@ -367,6 +368,8 @@ static void FT02_RedrawHomeCardSelectionPartial(
     int partialW = partialRight - partialX;
     int partialH = unionBottom - partialY;
 
+    const uint32_t startedMs = millis();
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(
         partialX,
         partialY,
@@ -421,8 +424,8 @@ static void FT02_RedrawHomeCardSelectionPartial(
         }
     }
     while(display.nextPage());
-
-    FT02_EpdPowerOffAfterCommit(display, "home-selection-partial");
+    FT02_EpdInteractiveEndBusyCapture(display);
+    FT02_EpdInteractiveFinishPartial(display, "home-selection-partial", startedMs);
 }
 
 int FT02_HomeCardCount()

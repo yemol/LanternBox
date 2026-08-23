@@ -24,9 +24,9 @@
 #include "FT02_PageState.h"
 #include "FT02_HomeCards.h"
 #include "FT02_InputManager.h"
+#include "FT02_EpdInteractiveRuntime.h"
 #include "FT02_StatusBar.h"
 #include "FT02_Storage.h"
-#include "FT02_GrayMapUI.h"
 #include "FT02_MapSearch.h"
 #include "FT02_LoRaNodeRuntime.h"
 #include "FT02_LR01HostRuntime.h"
@@ -85,7 +85,6 @@ static int g_ft02LastShownMinute = -1;
 static int g_ft02HomeSelectedCard = 0;
 static FT02PageState g_ft02PageState = FT02_PAGE_HOME;
 static FT02PageState g_ft02PageBeforeHelp = FT02_PAGE_HOME;
-static bool g_ft02MapGrayActive = false;
 static bool g_ft02RuntimeBannerPrinted = false;
 static bool g_ft02CommunicationReadyPresented = false;
 static bool g_ft02LastLoRaLinkState = false;
@@ -151,8 +150,6 @@ static void FT02_DrawKnowledgeAfterCleanTransition(const char* source);
 static void FT02_SyncGnssStatusBar(bool allowPartialRefresh);
 static void FT02_UpdateMapGnssFollow();
 static void FT02_RunDirectPbfMap(bool resetDefault, bool showLoading);
-static bool FT02_CommitGrayMap(const char* source);
-static void FT02_EnsureBwAfterGrayMap(const char* source);
 static void FT02_ScheduleMapZoomRefresh(int originalZoom);
 static void FT02_ScheduleMapPanRefresh();
 static void FT02_ProcessPendingMapRefresh();
@@ -293,10 +290,11 @@ static int FT02_DateTimeMinuteKey(const FT02DateTime& dt)
     return (((dt.month * 32 + dt.day) * 24 + dt.hour) * 60 + dt.minute);
 }
 
-static bool FT02_IsNativeGrayPage()
+static bool FT02_IsMapStatusPartialSuppressed()
 {
-    // The production map owns the SSD1677 four-gray LUT and both RAM planes.
-    // Never mix one-bit partial updates into it.
+    // The map page owns its own refresh cadence and rendering transaction.
+    // Keep background status-bar partial updates out of it so they cannot
+    // interrupt navigation redraw scheduling.
     return g_ft02PageState == FT02_PAGE_MAP;
 }
 
@@ -329,13 +327,12 @@ static void FT02_UpdateClockIfNeeded(bool force)
         return;
     }
 
-    // The production four-gray map owns the SSD1677 LUT and both RAM
-    // bit planes. Never let the normal GxEPD2 one-bit status-bar path write
-    // into the controller until the page has been exited and reinitialized.
-    if(FT02_IsNativeGrayPage())
+    // The map page owns its own refresh cadence. Cache the new time while
+    // navigating instead of injecting a separate status-bar transaction.
+    if(FT02_IsMapStatusPartialSuppressed())
     {
         FT02_UpdateClockCacheOnly();
-        Serial.println("[GRAY4] clock cache updated; one-bit partial refresh suppressed");
+        Serial.println("[MAP] clock cache updated; background status partial suppressed");
         return;
     }
 
@@ -437,7 +434,7 @@ static void FT02_SyncGnssStatusBar(bool allowPartialRefresh)
        g_ft02PageState != FT02_PAGE_LOCATION_LOG_DELETE_CONFIRM &&
        g_ft02PageState != FT02_PAGE_AUDIO_LOG_LIST &&
        g_ft02PageState != FT02_PAGE_AUDIO_LOG_DELETE_CONFIRM &&
-       !FT02_IsNativeGrayPage())
+       !FT02_IsMapStatusPartialSuppressed())
     {
         FT02_DrawStatusBarGnss(display, line1, line2);
     }
@@ -540,94 +537,6 @@ static void FT02_ReinitializeEpdFullMode(const char* source)
     Serial.println("[EPD] clean full-mode reinit complete");
 }
 
-static void FT02_PrepareCleanGrayTransition(const char* source)
-{
-    Serial.print("[GRAY4] clean transition begin source=");
-    Serial.println(source != nullptr ? source : "unknown");
-
-    // A raw four-gray refresh does not inherit GxEPD2's previous/current RAM
-    // history. Restore the proven full-refresh driver first and drive the
-    // entire panel to white before loading the grayscale LUT. This prevents
-    // the previous black-white page from remaining as an inverted ghost.
-    FT02_ReinitializeEpdFullMode("gray4-preclear-reinit");
-    display.setFullWindow();
-    display.firstPage();
-    do
-    {
-        display.fillScreen(GxEPD_WHITE);
-    } while(display.nextPage());
-    display.epd2.powerOff();
-    delay(40);
-
-    Serial.println("[GRAY4] clean transition white frame complete");
-}
-
-static bool FT02_CommitGrayMap(const char* source)
-{
-    const bool continuingGraySession = g_ft02MapGrayActive;
-
-    Serial.print("[GRAY4-MAP] production commit begin source=");
-    Serial.print(source != nullptr ? source : "unknown");
-    Serial.print(" transition=");
-    Serial.println(continuingGraySession ? "gray-to-gray-single" : "bw-to-gray-clean");
-
-    // Entering the production map from a normal one-bit page still needs one
-    // clean white transition, otherwise the old status bar can remain in the
-    // first four-gray frame. Once a valid four-gray map is already displayed,
-    // do not submit another visible white frame for pan/zoom/follow updates.
-    // The raw driver writes the complete 800x480 two-plane frame, so a direct
-    // gray-to-gray full update is the single visible transaction we need.
-    if(!continuingGraySession)
-    {
-        FT02_PrepareCleanGrayTransition(source);
-    }
-    else
-    {
-        Serial.println("[GRAY4-MAP] retained gray session; white preclear skipped");
-    }
-
-    // Block all one-bit status writes while the panel is being re-powered and
-    // the complete four-gray frame is committed.
-    g_ft02MapGrayActive = false;
-    digitalWrite(EPD_PWR, LOW);
-    delay(160);
-    digitalWrite(EPD_PWR, HIGH);
-    delay(160);
-
-    const FT02GrayMapReport report = FT02_DrawGrayMapScreen(
-        g_ft02EpdSpi,
-        EPD_SPI_HZ,
-        EPD_PWR,
-        EPD_BUSY,
-        EPD_RST,
-        EPD_DC,
-        EPD_CS
-    );
-
-    g_ft02MapGrayActive = report.success;
-    Serial.printf(
-        "[GRAY4-MAP] production commit success=%s init=%s refresh=%s sleep=%s transaction=%s aa_font=yes buildings=outline-only render=%lums total=%lums message=%s\n",
-        report.success ? "yes" : "no",
-        report.panelInitialized ? "yes" : "no",
-        report.refreshCompleted ? "yes" : "no",
-        report.panelQuiesced ? "yes" : "no",
-        continuingGraySession ? "single-gray" : "clean-plus-gray",
-        static_cast<unsigned long>(report.renderMs),
-        static_cast<unsigned long>(report.elapsedMs),
-        report.message != nullptr ? report.message : "--"
-    );
-    return report.success;
-}
-
-static void FT02_EnsureBwAfterGrayMap(const char* source)
-{
-    if(!g_ft02MapGrayActive) return;
-    Serial.print("[GRAY4-MAP] leave production gray mode source=");
-    Serial.println(source != nullptr ? source : "unknown");
-    g_ft02MapGrayActive = false;
-    FT02_ReinitializeEpdFullMode(source);
-}
-
 static void FT02_DrawKnowledgeAfterCleanTransition(const char* source)
 {
     // v2.48: keep the controller power-cycle/full-mode reinitialization that
@@ -669,18 +578,16 @@ static void FT02_RedrawCurrentPage()
         const FT02PbfMapReport& mapReport = FT02_PbfMapReportCurrent();
         if(mapReport.state == FT02_PBF_MAP_READY)
         {
-            // Map Navigation A1: production map is now intentionally 1-bit
-            // black/white. Road hierarchy is encoded by line width/style and
-            // buildings remain outline-only. This avoids the ~6.7 s Gray4
-            // commit and keeps navigation compatible with fast partial updates.
-            FT02_EnsureBwAfterGrayMap("map-bw-production");
-            Serial.println("[MAP-BW-A1] production BW commit; Gray4 disabled for navigation");
+            // Production navigation is intentionally 1-bit black/white.
+            // Road hierarchy is encoded by line width/style and buildings
+            // remain outline-only so the page stays compatible with fast
+            // navigation redraws.
+            Serial.println("[MAP-BW-A1] production BW navigation commit");
             FT02_PbfMapSetFollowGnss(g_ft02MapFollowGnss);
             FT02_DrawPbfMapScreen(display);
         }
         else
         {
-            FT02_EnsureBwAfterGrayMap("map-loading-or-error");
             FT02_PbfMapSetFollowGnss(g_ft02MapFollowGnss);
             FT02_DrawPbfMapScreen(display);
         }
@@ -771,7 +678,6 @@ static void FT02_OpenHelpPage()
     if(g_ft02PageBeforeHelp == FT02_PAGE_MAP)
     {
         FT02_CancelPendingMapRefresh("map-to-help");
-        FT02_EnsureBwAfterGrayMap("map-to-help");
     }
     g_ft02PageState = FT02_PAGE_HELP;
 
@@ -795,7 +701,6 @@ static void FT02_ReturnHomePage()
     if(g_ft02PageState == FT02_PAGE_MAP)
     {
         FT02_CancelPendingMapRefresh("map-to-home");
-        FT02_EnsureBwAfterGrayMap("map-to-home");
         FT02_PbfMapUnload();
     }
 
@@ -984,7 +889,7 @@ static void FT02_ProcessPendingMapRefresh()
             targetZoom
         );
     }
-    // The following build + gray commit is blocking. Disarm map navigation
+    // The following build + display commit is blocking. Disarm map navigation
     // before entering it so a held key cannot leak through as a new pan batch
     // when the loop resumes. The gate is released only after a zero raw key is
     // observed in loop().
@@ -1528,6 +1433,11 @@ static bool FT02_HandleCommunicationInput(
         FT02_OpenHelpPage();
         return true;
     }
+    if(result == FT02_COMM_INPUT_BROWSE_PARTIAL)
+    {
+        FT02_DrawCommunicationBrowsePartial(display);
+        return true;
+    }
     if(result == FT02_COMM_INPUT_REDRAW)
     {
         // Manual R resync resets NodeRuntime immediately. Mirror the real
@@ -1816,7 +1726,6 @@ static bool FT02_HandleMapInput(
 static void FT02_OpenMapSearchPage()
 {
     FT02_CancelPendingMapRefresh("search-open");
-    FT02_EnsureBwAfterGrayMap("map-to-search");
     g_ft02MapRequireNavRelease = false;
     g_ft02MapReleaseZeroSinceMs = 0;
     FT02_MapSearchOpen();
@@ -1844,7 +1753,7 @@ static bool FT02_HandleMapSearchInput(const FT02InputEvent& event)
         {
             g_ft02MapFollowGnss = false;
             FT02_CancelPendingMapRefresh("search-jump");
-            // ENTER selected the result. The map build/gray commit can block for
+            // ENTER selected the result. The map build/display commit can block for
             // seconds (or ~1 minute on a cold regional-cache build), so arm the
             // release gate before changing page state. Any buffered/repeated
             // ENTER is then discarded when the loop resumes instead of being
@@ -1856,10 +1765,15 @@ static bool FT02_HandleMapSearchInput(const FT02InputEvent& event)
             Serial.println("Page: MAP SEARCH -> MAP (search jump)");
             // Map Load UX A2: acknowledge the selection with a contextual
             // loading-state partial refresh before the potentially blocking PBF
-            // build. The final destination map remains the only gray-map commit.
+            // build. The final destination map remains the only final map commit.
             FT02_PbfMapSetLoadingReason(FT02_MAP_LOADING_SEARCH);
             FT02_RunDirectPbfMap(false, true);
         }
+        return true;
+    }
+    if(action == FT02_MAP_SEARCH_ACTION_SELECTION_PARTIAL)
+    {
+        FT02_DrawMapSearchSelectionPartial(display);
         return true;
     }
     if(action == FT02_MAP_SEARCH_ACTION_REDRAW)
@@ -2042,8 +1956,11 @@ static bool FT02_HandleLocationLogListInput(
     }
 
     if(next == g_ft02LocationLogSelectedIndex) return false;
+    const uint16_t oldSelected = g_ft02LocationLogSelectedIndex;
     g_ft02LocationLogSelectedIndex = next;
-    FT02_DrawLocationLogListBodyPartial(display, g_ft02LocationLogSelectedIndex);
+    FT02_DrawLocationLogListSelectionPartial(
+        display, oldSelected, g_ft02LocationLogSelectedIndex
+    );
     return true;
 }
 
@@ -2277,8 +2194,11 @@ static bool FT02_HandleAudioLogListInput(
     }
 
     if(next == g_ft02AudioLogSelectedIndex) return false;
+    const uint16_t oldSelected = g_ft02AudioLogSelectedIndex;
     g_ft02AudioLogSelectedIndex = next;
-    FT02_DrawAudioLogListBodyPartial(display, g_ft02AudioLogSelectedIndex);
+    FT02_DrawAudioLogListSelectionPartial(
+        display, oldSelected, g_ft02AudioLogSelectedIndex
+    );
     return true;
 }
 
@@ -2312,7 +2232,11 @@ static bool FT02_HandleKnowledgeInput(
     const FT02InputEvent& event
 )
 {
-    if(event.key == FT02_KEY_HELP)
+    // FieldManual search is a free-form text surface. InputManager still
+    // classifies raw 'h' as the global HELP shortcut, but while search input
+    // is active the raw letter must reach KnowledgeUI first (same principle
+    // already used there for B/D/Z/X/C).
+    if(event.key == FT02_KEY_HELP && !FT02_KnowledgeTextInputActive())
     {
         FT02_OpenHelpPage();
         return true;
@@ -2467,6 +2391,7 @@ void setup()
         CARDKB_SCL,
         CARDKB_ADDR
     );
+    FT02_EpdInteractiveReset();
 
     Serial.println("FT02 InputManager ready: fixed pins SDA=47 SCL=21, D=UP, Z=LEFT, X=DOWN, C=RIGHT");
 
@@ -2535,7 +2460,20 @@ void loop()
     // Input is a top-priority service. In particular, never place a blocking
     // e-paper refresh ahead of CardKB polling: a long display commit can make
     // the recorder page appear frozen and can starve short key presses.
-    FT02InputEvent inputEvent = FT02_InputPoll();
+    FT02InputEvent inputEvent = {};
+    if(!FT02_EpdInteractiveTakeQueuedInput(inputEvent))
+    {
+        inputEvent = FT02_InputPoll();
+    }
+    else
+    {
+        Serial.printf(
+            "[EPD-INTERACTIVE-A1] replay key=%s raw=0x%02X page=%u\n",
+            FT02_InputKeyName(inputEvent.key),
+            static_cast<unsigned>(static_cast<uint8_t>(inputEvent.raw)),
+            static_cast<unsigned>(g_ft02PageState)
+        );
+    }
     const uint8_t currentRawKey = FT02_InputCurrentRawKey();
     if(currentRawKey == 0)
     {
@@ -2570,9 +2508,24 @@ void loop()
         FT02_HandleInput(inputEvent);
     }
 
+    if(g_ft02PageState == FT02_PAGE_KNOWLEDGE)
+    {
+        const FT02KnowledgeAction deferredKnowledgeAction =
+            FT02_KnowledgeService(display, millis());
+        if(deferredKnowledgeAction == FT02_KNOWLEDGE_ACTION_EXIT_HOME)
+        {
+            FT02_ReturnHomePage();
+        }
+    }
+
+    if(g_ft02PageState != FT02_PAGE_KNOWLEDGE)
+    {
+        FT02_EpdInteractiveService(display, millis());
+    }
+
     if(g_ft02PageState == FT02_PAGE_MAP_SEARCH && FT02_MapSearchTakeDeferredRedraw(millis()))
     {
-        FT02_RedrawCurrentPage();
+        FT02_DrawMapSearchInputPartial(display);
     }
 
     FT02_LR01HostPoll();
@@ -2687,11 +2640,11 @@ void loop()
         {
             g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
             g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
-            FT02_RedrawCurrentPage();
+            FT02_DrawCommunicationComposePartial(display);
             communicationPageRedrawn = true;
         }
 
-        if(!communicationPageRedrawn && !FT02_IsNativeGrayPage() &&
+        if(!communicationPageRedrawn && !FT02_IsMapStatusPartialSuppressed() &&
            (loraLink != g_ft02LastLoRaLinkState ||
             loraReady != g_ft02LastLoRaReadyState ||
             loraUnread != g_ft02LastLoRaUnread))
@@ -2782,7 +2735,7 @@ void loop()
 
     // Map pan/zoom input only updates the desired view. Multiple inputs inside
     // the settle window are coalesced; the scheduler owns the single final
-    // map build plus gray refresh.
+    // map build plus display refresh.
     FT02_ProcessPendingMapRefresh();
 
     if(!FT02_AudioLogIsBusy())
@@ -2790,5 +2743,18 @@ void loop()
         FT02_UpdateClockIfNeeded(false);
     }
 
-    delay(FT02_AudioLogIsPlaying() ? 5 : 20);
+    // Interactive e-paper pages now keep CardKB polling alive while BUSY and
+    // use a tighter idle cadence. Static/diagnostic pages keep the conservative
+    // 20 ms scheduler cadence.
+    const bool fastInteractivePage =
+        g_ft02PageState == FT02_PAGE_HOME ||
+        g_ft02PageState == FT02_PAGE_KNOWLEDGE ||
+        g_ft02PageState == FT02_PAGE_MAP_SEARCH ||
+        g_ft02PageState == FT02_PAGE_COMMUNICATION ||
+        g_ft02PageState == FT02_PAGE_LOCATION_LOG_LIST ||
+        g_ft02PageState == FT02_PAGE_LOCATION_LOG_DETAIL ||
+        g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST;
+    const uint32_t loopDelayMs = FT02_AudioLogIsPlaying() ? 5u :
+        (fastInteractivePage ? 5u : 20u);
+    delay(loopDelayMs);
 }

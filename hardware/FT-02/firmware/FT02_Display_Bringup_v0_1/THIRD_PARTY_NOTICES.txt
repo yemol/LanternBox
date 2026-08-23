@@ -1,28 +1,18 @@
 # Third-party notices
 
-## Waveshare 4.26-inch e-Paper reference driver
-
-`src/FT02_Gray4Panel.cpp` adapts the four-gray LUT, initialization sequence, two-plane pixel mapping, refresh lifecycle, deep-sleep command and power-off handling from Waveshare's official `epd4in26.py` reference driver.
-
-Source project:
-
-```text
-https://github.com/waveshareteam/e-Paper
-RaspberryPi_JetsonNano/python/lib/waveshare_epd/epd4in26.py
-```
-
-Refer to the upstream source for its complete permission notice and warranty disclaimer.
-
 ## Noto Sans CJK generated bitmap data
 
-`src/FT02_GrayMapFontData.cpp` contains generated 2-bit bitmap glyph data produced from Noto Sans CJK Regular and Bold at build preparation time.
+FT-02 includes generated bitmap glyph data produced from Noto Sans CJK Regular and Bold during build preparation, including the global CJK, map and footer font packs.
 
 The source font files are licensed under the SIL Open Font License 1.1. No font file is included or redistributed in this package. The package contains only generated bitmap glyph data required by the FT-02 firmware.
 
-The generator is retained at:
+Relevant generators include:
 
 ```text
-tools/generate_ft02_gray_map_fonts.py
+tools/generate_ft02_global_cjk_font.py
+tools/generate_ft02_global_cjk_bold_font.py
+tools/generate_ft02_global_cjk20_optimized_font.py
+tools/generate_ft02_map_fonts.py
 ```
 
 ## SparkFun WM8960 Arduino Library

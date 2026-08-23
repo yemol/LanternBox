@@ -5,6 +5,7 @@
 
 #include "FT02_BottomBar.h"
 #include "FT02_EpdLifecycle.h"
+#include "FT02_EpdInteractiveRuntime.h"
 #include "FT02_GlobalCJK20FontData.h"
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
@@ -196,6 +197,53 @@ static void FT02_DrawAudioHeader(
     }
 }
 
+
+static void FT02_DrawAudioListRow(
+    FT02Display& display,
+    uint16_t newestIndex,
+    int row,
+    bool selected
+)
+{
+    FT02AudioLogEntry entry;
+    if(!FT02_AudioLogGetNewest(newestIndex, entry)) return;
+
+    const int y = FT02_AUDIO_ROW_Y + row * (FT02_AUDIO_ROW_H + FT02_AUDIO_ROW_GAP);
+    const int baselineY = y + FT02_AUDIO_ROW_BASELINE_OFFSET;
+    display.fillRect(FT02_AUDIO_ROW_X, y, FT02_AUDIO_ROW_W, FT02_AUDIO_ROW_H,
+                     selected ? GxEPD_BLACK : GxEPD_WHITE);
+    display.drawRect(FT02_AUDIO_ROW_X, y, FT02_AUDIO_ROW_W, FT02_AUDIO_ROW_H, GxEPD_BLACK);
+
+    char dateLine[96];
+    FT02_AudioFormatEntryTitle(entry, dateLine, sizeof(dateLine));
+    char duration[20];
+    char size[20];
+    FT02_AudioFormatDuration(entry.durationMs, duration, sizeof(duration));
+    FT02_AudioFormatSize(entry.sizeBytes, size, sizeof(size));
+    char metaLine[112];
+    snprintf(metaLine, sizeof(metaLine), "时长%s  %s  %s",
+             duration, size, entry.fileExists ? "文件正常" : "文件缺失");
+
+    if(selected)
+    {
+        FT02_DrawTextPackInvertClipped(display, ft02_cjk_20r, dateLine,
+            FT02_AUDIO_ROW_X + 16, baselineY,
+            FT02_AUDIO_ROW_X, y, FT02_AUDIO_ROW_W, FT02_AUDIO_ROW_H);
+        FT02_DrawTextPackInvertClipped(display, ft02_cjk_20r, metaLine,
+            FT02_AUDIO_ROW_X + 350, baselineY,
+            FT02_AUDIO_ROW_X, y, FT02_AUDIO_ROW_W, FT02_AUDIO_ROW_H);
+    }
+    else
+    {
+        FT02_DrawTextPackClipped(display, ft02_cjk_20r, dateLine,
+            FT02_AUDIO_ROW_X + 16, baselineY,
+            FT02_AUDIO_ROW_X, y, FT02_AUDIO_ROW_W, FT02_AUDIO_ROW_H);
+        FT02_DrawTextPackClipped(display, ft02_cjk_20r, metaLine,
+            FT02_AUDIO_ROW_X + 350, baselineY,
+            FT02_AUDIO_ROW_X, y, FT02_AUDIO_ROW_W, FT02_AUDIO_ROW_H);
+    }
+}
+
 static void FT02_DrawAudioListContent(
     FT02Display& display,
     uint16_t selectedNewestIndex
@@ -260,95 +308,7 @@ static void FT02_DrawAudioListContent(
     {
         const uint16_t newestIndex = static_cast<uint16_t>(pageStart + row);
         if(newestIndex >= status.count) break;
-
-        FT02AudioLogEntry entry;
-        if(!FT02_AudioLogGetNewest(newestIndex, entry)) continue;
-
-        const int y = FT02_AUDIO_ROW_Y + row * (FT02_AUDIO_ROW_H + FT02_AUDIO_ROW_GAP);
-        const int baselineY = y + FT02_AUDIO_ROW_BASELINE_OFFSET;
-        const bool selected = newestIndex == selectedNewestIndex;
-        display.fillRect(
-            FT02_AUDIO_ROW_X,
-            y,
-            FT02_AUDIO_ROW_W,
-            FT02_AUDIO_ROW_H,
-            selected ? GxEPD_BLACK : GxEPD_WHITE
-        );
-        display.drawRect(
-            FT02_AUDIO_ROW_X,
-            y,
-            FT02_AUDIO_ROW_W,
-            FT02_AUDIO_ROW_H,
-            GxEPD_BLACK
-        );
-
-        char dateLine[96];
-        FT02_AudioFormatEntryTitle(entry, dateLine, sizeof(dateLine));
-
-        char duration[20];
-        char size[20];
-        FT02_AudioFormatDuration(entry.durationMs, duration, sizeof(duration));
-        FT02_AudioFormatSize(entry.sizeBytes, size, sizeof(size));
-        char metaLine[112];
-        snprintf(
-            metaLine,
-            sizeof(metaLine),
-            "时长%s  %s  %s",
-            duration,
-            size,
-            entry.fileExists ? "文件正常" : "文件缺失"
-        );
-
-        if(selected)
-        {
-            FT02_DrawTextPackInvertClipped(
-                display,
-                ft02_cjk_20r,
-                dateLine,
-                FT02_AUDIO_ROW_X + 16,
-                baselineY,
-                FT02_AUDIO_ROW_X,
-                y,
-                FT02_AUDIO_ROW_W,
-                FT02_AUDIO_ROW_H
-            );
-            FT02_DrawTextPackInvertClipped(
-                display,
-                ft02_cjk_20r,
-                metaLine,
-                FT02_AUDIO_ROW_X + 350,
-                baselineY,
-                FT02_AUDIO_ROW_X,
-                y,
-                FT02_AUDIO_ROW_W,
-                FT02_AUDIO_ROW_H
-            );
-        }
-        else
-        {
-            FT02_DrawTextPackClipped(
-                display,
-                ft02_cjk_20r,
-                dateLine,
-                FT02_AUDIO_ROW_X + 16,
-                baselineY,
-                FT02_AUDIO_ROW_X,
-                y,
-                FT02_AUDIO_ROW_W,
-                FT02_AUDIO_ROW_H
-            );
-            FT02_DrawTextPackClipped(
-                display,
-                ft02_cjk_20r,
-                metaLine,
-                FT02_AUDIO_ROW_X + 350,
-                baselineY,
-                FT02_AUDIO_ROW_X,
-                y,
-                FT02_AUDIO_ROW_W,
-                FT02_AUDIO_ROW_H
-            );
-        }
+        FT02_DrawAudioListRow(display, newestIndex, row, newestIndex == selectedNewestIndex);
     }
 }
 
@@ -471,6 +431,8 @@ static void FT02_AudioCommitBodyPartial(
         return;
     }
 
+    const uint32_t startedMs = millis();
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(
         FT02_AUDIO_BODY_X,
         FT02_AUDIO_BODY_Y,
@@ -491,9 +453,9 @@ static void FT02_AudioCommitBodyPartial(
         FT02_DrawBottomBarWithFont(display, FT02_AUDIO_LIST_BOTTOM_ITEMS, ft02_cjk_20r);
     }
     while(display.nextPage());
-    display.setFullWindow();
+    FT02_EpdInteractiveEndBusyCapture(display);
     g_ft02AudioPartialCount++;
-    FT02_EpdPowerOffAfterCommit(display, tag);
+    FT02_EpdInteractiveFinishPartial(display, tag, startedMs);
 }
 }
 
@@ -503,6 +465,7 @@ void FT02_DrawAudioLogListScreen(
 )
 {
     g_ft02AudioPartialCount = 0;
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setFullWindow();
     display.firstPage();
     do
@@ -513,7 +476,8 @@ void FT02_DrawAudioLogListScreen(
         FT02_DrawBottomBarWithFont(display, FT02_AUDIO_LIST_BOTTOM_ITEMS, ft02_cjk_20r);
     }
     while(display.nextPage());
-    FT02_EpdPowerOffAfterCommit(display, "audio-log-list-full");
+    FT02_EpdInteractivePowerOffNow(display, "audio-log-list-full");
+    FT02_EpdInteractiveEndBusyCapture(display);
 }
 
 void FT02_DrawAudioLogListBodyPartial(
@@ -527,6 +491,45 @@ void FT02_DrawAudioLogListBodyPartial(
         selectedNewestIndex,
         "audio-log-list-partial"
     );
+}
+
+
+void FT02_DrawAudioLogListSelectionPartial(
+    FT02Display& display,
+    uint16_t oldSelectedNewestIndex,
+    uint16_t newSelectedNewestIndex
+)
+{
+    const uint16_t oldPage = FT02_AudioPageStart(oldSelectedNewestIndex);
+    const uint16_t newPage = FT02_AudioPageStart(newSelectedNewestIndex);
+    if(oldPage != newPage)
+    {
+        FT02_DrawAudioLogListBodyPartial(display, newSelectedNewestIndex);
+        return;
+    }
+
+    const int oldRow = static_cast<int>(oldSelectedNewestIndex - oldPage);
+    const int newRow = static_cast<int>(newSelectedNewestIndex - newPage);
+    const int firstRow = oldRow < newRow ? oldRow : newRow;
+    const int lastRow = oldRow > newRow ? oldRow : newRow;
+    const int y = FT02_AUDIO_ROW_Y + firstRow * (FT02_AUDIO_ROW_H + FT02_AUDIO_ROW_GAP);
+    const int bottom = FT02_AUDIO_ROW_Y + lastRow * (FT02_AUDIO_ROW_H + FT02_AUDIO_ROW_GAP) + FT02_AUDIO_ROW_H;
+    const int h = bottom - y;
+    const uint32_t startedMs = millis();
+
+    FT02_EpdInteractiveBeginBusyCapture(display);
+    display.setPartialWindow(FT02_AUDIO_ROW_X, y, FT02_AUDIO_ROW_W, h);
+    display.firstPage();
+    do
+    {
+        display.fillRect(FT02_AUDIO_ROW_X, y, FT02_AUDIO_ROW_W, h, GxEPD_WHITE);
+        FT02_DrawAudioListRow(display, oldSelectedNewestIndex, oldRow, false);
+        FT02_DrawAudioListRow(display, newSelectedNewestIndex, newRow, true);
+    }
+    while(display.nextPage());
+    FT02_EpdInteractiveEndBusyCapture(display);
+    ++g_ft02AudioPartialCount;
+    FT02_EpdInteractiveFinishPartial(display, "audio-log-list-selection-micro", startedMs);
 }
 
 void FT02_DrawAudioLogRecordingBodyPartial(

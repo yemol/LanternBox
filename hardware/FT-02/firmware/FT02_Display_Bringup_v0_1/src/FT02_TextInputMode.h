@@ -12,7 +12,5 @@ enum FT02TextInputMode : uint8_t
     FT02_TEXT_INPUT_EN
 };
 
-FT02TextInputMode FT02_TextInputModeCurrent();
 bool FT02_TextInputModeIsChinese();
 FT02TextInputMode FT02_TextInputModeToggle();
-void FT02_TextInputModeSet(FT02TextInputMode mode);

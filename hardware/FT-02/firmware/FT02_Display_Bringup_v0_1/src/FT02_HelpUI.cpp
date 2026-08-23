@@ -3,6 +3,8 @@
 
 #include "FT02_BottomBar.h"
 #include "FT02_FontData.h"
+#include "FT02_GlobalCJK20FontData.h"
+#include "FT02_GlobalCJKBoldFontData.h"
 #include "FT02_StatusBar.h"
 
 static const int FT02_HELP_CONTENT_TOP = 156;
@@ -83,7 +85,10 @@ static void FT02_DrawHelpLabelRow(
 {
     const int keyX = FT02_HELP_RIGHT_X + 24;
     const int keyY = baselineY - 34;
-    const int keyW = 200;
+    // Keep enough room for the longest Chinese action label on the right.
+    // The previous 200 px key box left only 96 px for "状态页罗盘", which
+    // becomes too tight once rendered with the complete CJK font.
+    const int keyW = 190;
     const int keyH = 44;
 
     FT02_DrawHelpKey(
@@ -97,9 +102,9 @@ static void FT02_DrawHelpLabelRow(
 
     FT02_DrawTextPack(
         display,
-        ft02_menu_28m,
+        ft02_cjk_20r,
         actionLabel,
-        FT02_HELP_RIGHT_X + 244,
+        FT02_HELP_RIGHT_X + 230,
         baselineY
     );
 }
@@ -120,13 +125,13 @@ static void FT02_DrawHelpContent(
 
     const char* returnHint = "B / ESC 返回";
     int returnHintWidth = FT02_TextWidthPack(
-        ft02_ui_22r,
+        ft02_cjk_20r,
         returnHint
     );
 
     FT02_DrawTextPack(
         display,
-        ft02_ui_22r,
+        ft02_cjk_20r,
         returnHint,
         W - 40 - returnHintWidth,
         132
@@ -158,7 +163,7 @@ static void FT02_DrawHelpContent(
 
     FT02_DrawTextPack(
         display,
-        ft02_menu_28m,
+        ft02_cjk_24b,
         "方向键",
         FT02_HELP_LEFT_X + 24,
         FT02_HELP_PANEL_Y + 42
@@ -209,7 +214,7 @@ static void FT02_DrawHelpContent(
 
     FT02_DrawTextPack(
         display,
-        ft02_menu_28m,
+        ft02_cjk_24b,
         "常用快捷键",
         FT02_HELP_RIGHT_X + 24,
         FT02_HELP_PANEL_Y + 42
@@ -254,9 +259,10 @@ void FT02_DrawHelpScreen(
         FT02_DrawStatusBar(display);
         FT02_DrawHelpContent(display);
 
-        FT02_DrawBottomBar(
+        FT02_DrawBottomBarWithFont(
             display,
-            FT02_HELP_BOTTOM_ITEMS
+            FT02_HELP_BOTTOM_ITEMS,
+            ft02_cjk_20r
         );
     }
     while(display.nextPage());

@@ -1,1 +1,1 @@
-FT-02 v2.75k / Documentation & Help Cleanup / 2026-08-19
+FT-02 v2.75k19 / Submission Hotfix A1.1 + Help CJK Font Fix + Global EPD Interactive Runtime A1 + FieldManual Runtime A3.12 + LR01 Single Authority / 2026-08-23

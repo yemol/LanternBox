@@ -8,6 +8,7 @@
 #include <esp_heap_caps.h>
 
 #include "FT02_EpdLifecycle.h"
+#include "FT02_EpdInteractiveRuntime.h"
 #include "FT02_GlobalCJK20FontData.h"
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
@@ -25,7 +26,7 @@ enum SearchMode : uint8_t
     SEARCH_RESULTS
 };
 
-constexpr uint32_t SEARCH_REDRAW_IDLE_MS = 650u;
+constexpr uint32_t SEARCH_REDRAW_IDLE_MS = 320u;
 constexpr size_t PINYIN_VISIBLE = FT02_PINYIN_PAGE_SIZE;
 constexpr uint8_t CARDKB_MODE_LEFT = static_cast<uint8_t>('<');
 constexpr uint8_t CARDKB_MODE_RIGHT = static_cast<uint8_t>('>');
@@ -41,6 +42,7 @@ uint8_t g_resultScore[FT02_MAP_SEARCH_RESULT_COUNT] = {};
 uint8_t g_resultPriority[FT02_MAP_SEARCH_RESULT_COUNT] = {};
 size_t g_resultCount = 0;
 size_t g_selected = 0;
+size_t g_previousSelected = 0;
 char g_notice[96] = {};
 bool g_dirty = false;
 uint32_t g_lastEditMs = 0;
@@ -625,6 +627,7 @@ void FT02_MapSearchOpen()
     resetPinyin();
     g_resultCount = 0;
     g_selected = 0;
+    g_previousSelected = 0;
     g_notice[0] = '\0';
     g_dirty = false;
     g_jumpReady = false;
@@ -637,6 +640,7 @@ void FT02_MapSearchOpen()
 
 void FT02_DrawMapSearchScreen(FT02Display& display)
 {
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setFullWindow();
     display.firstPage();
     do
@@ -654,8 +658,79 @@ void FT02_DrawMapSearchScreen(FT02Display& display)
     }
     while(display.nextPage());
     display.setFullWindow();
-    FT02_EpdPowerOffAfterCommit(display, "map-search-full");
+    FT02_EpdInteractivePowerOffNow(display, "map-search-full");
+    FT02_EpdInteractiveEndBusyCapture(display);
     g_dirty = false;
+}
+
+
+static size_t FT02_MapSearchVisibleFirst(size_t selected)
+{
+    constexpr size_t VISIBLE_ROWS = 3;
+    size_t first = 0;
+    if(selected >= VISIBLE_ROWS) first = selected - VISIBLE_ROWS + 1;
+    if(first + VISIBLE_ROWS > g_resultCount && g_resultCount > VISIBLE_ROWS)
+        first = g_resultCount - VISIBLE_ROWS;
+    return first;
+}
+
+static void FT02_MapSearchCommitPartial(
+    FT02Display& display,
+    int x,
+    int y,
+    int w,
+    int h,
+    const char* source
+)
+{
+    const uint32_t startedMs = millis();
+    FT02_EpdInteractiveBeginBusyCapture(display);
+    display.setPartialWindow(x, y, w, h);
+    display.firstPage();
+    do
+    {
+        display.fillRect(x, y, w, h, GxEPD_WHITE);
+        if(g_mode == SEARCH_QUERY) drawQuery(display);
+        else drawResults(display);
+    }
+    while(display.nextPage());
+    FT02_EpdInteractiveEndBusyCapture(display);
+    FT02_EpdInteractiveFinishPartial(display, source, startedMs);
+}
+
+void FT02_DrawMapSearchInputPartial(FT02Display& display)
+{
+    // Query editor, candidates and notice. Status bar and footer stay untouched.
+    FT02_MapSearchCommitPartial(display, 16, 88, 768, 346, "map-search-input-partial");
+    g_dirty = false;
+}
+
+void FT02_DrawMapSearchSelectionPartial(FT02Display& display)
+{
+    if(g_mode != SEARCH_RESULTS || g_resultCount == 0)
+    {
+        FT02_MapSearchCommitPartial(display, 16, 88, 768, 346, "map-search-results-partial");
+        return;
+    }
+
+    const size_t oldFirst = FT02_MapSearchVisibleFirst(g_previousSelected);
+    const size_t newFirst = FT02_MapSearchVisibleFirst(g_selected);
+    if(oldFirst != newFirst)
+    {
+        FT02_MapSearchCommitPartial(display, 16, 88, 768, 346, "map-search-results-scroll-partial");
+        return;
+    }
+
+    const int oldRow = static_cast<int>(g_previousSelected - oldFirst);
+    const int newRow = static_cast<int>(g_selected - newFirst);
+    const int firstRow = oldRow < newRow ? oldRow : newRow;
+    const int lastRow = oldRow > newRow ? oldRow : newRow;
+    const int y = 150 + firstRow * 88 - 29;
+    const int bottom = 150 + lastRow * 88 + 49;
+    FT02_MapSearchCommitPartial(
+        display, 16, y, 768, bottom - y,
+        "map-search-selection-micro"
+    );
 }
 
 FT02MapSearchAction FT02_MapSearchHandleInput(const FT02InputEvent& event)
@@ -666,13 +741,17 @@ FT02MapSearchAction FT02_MapSearchHandleInput(const FT02InputEvent& event)
     {
         if(event.key == FT02_KEY_UP || event.key == FT02_KEY_LEFT)
         {
-            if(g_selected > 0) --g_selected;
-            return FT02_MAP_SEARCH_ACTION_REDRAW;
+            if(g_selected == 0) return FT02_MAP_SEARCH_ACTION_NONE;
+            g_previousSelected = g_selected;
+            --g_selected;
+            return FT02_MAP_SEARCH_ACTION_SELECTION_PARTIAL;
         }
         if(event.key == FT02_KEY_DOWN || event.key == FT02_KEY_RIGHT)
         {
-            if(g_selected + 1 < g_resultCount) ++g_selected;
-            return FT02_MAP_SEARCH_ACTION_REDRAW;
+            if(g_selected + 1 >= g_resultCount) return FT02_MAP_SEARCH_ACTION_NONE;
+            g_previousSelected = g_selected;
+            ++g_selected;
+            return FT02_MAP_SEARCH_ACTION_SELECTION_PARTIAL;
         }
         if(event.key == FT02_KEY_SELECT && g_resultCount > 0)
         {

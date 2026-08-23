@@ -6,6 +6,7 @@
 
 #include "FT02_BottomBar.h"
 #include "FT02_EpdLifecycle.h"
+#include "FT02_EpdInteractiveRuntime.h"
 #include "FT02_GlobalCJK20FontData.h"
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
@@ -118,6 +119,59 @@ static void FT02_DrawLocationLogHeader(
     }
 }
 
+
+static void FT02_DrawLocationLogRow(
+    FT02Display& display,
+    uint16_t newestIndex,
+    int row,
+    bool selected
+)
+{
+    FT02LocationLogEntry entry;
+    if(!FT02_LocationLogGetNewest(newestIndex, entry)) return;
+
+    const int y = FT02_LOG_ROW_Y + row * (FT02_LOG_ROW_H + FT02_LOG_ROW_GAP);
+    display.fillRect(
+        FT02_LOG_ROW_X, y, FT02_LOG_ROW_W, FT02_LOG_ROW_H,
+        selected ? GxEPD_BLACK : GxEPD_WHITE
+    );
+    display.drawRect(FT02_LOG_ROW_X, y, FT02_LOG_ROW_W, FT02_LOG_ROW_H, GxEPD_BLACK);
+
+    char firstLine[96];
+    snprintf(
+        firstLine, sizeof(firstLine), "%s  %s",
+        entry.startDate[0] != '\0' ? entry.startDate : "日期未知",
+        entry.startTime[0] != '\0' ? entry.startTime : "--:--:--"
+    );
+
+    char durationText[20];
+    FT02_LocationLogFormatDuration(entry, durationText, sizeof(durationText));
+    char secondLine[128];
+    snprintf(
+        secondLine, sizeof(secondLine), "点数%lu  时长%s  %s",
+        static_cast<unsigned long>(entry.pointCount), durationText,
+        FT02_LocationLogModeText(entry)
+    );
+
+    const char* stateText = FT02_LocationLogStateText(entry);
+    const int stateWidth = FT02_TextWidthPack(ft02_cjk_20r, stateText);
+    if(selected)
+    {
+        FT02_DrawTextPackInvertClipped(display, ft02_cjk_20r, firstLine, 46, y + 23, 42, y + 2, 560, FT02_LOG_ROW_H - 4);
+        FT02_DrawTextPackInvertClipped(display, ft02_cjk_20r, stateText,
+            FT02_LOG_ROW_X + FT02_LOG_ROW_W - 18 - stateWidth, y + 23,
+            FT02_LOG_ROW_X, y, FT02_LOG_ROW_W, FT02_LOG_ROW_H);
+        FT02_DrawTextPackInvertClipped(display, ft02_cjk_20r, secondLine, 46, y + 47, 42, y + 24, FT02_LOG_ROW_W - 24, 28);
+    }
+    else
+    {
+        FT02_DrawTextPackClipped(display, ft02_cjk_20r, firstLine, 46, y + 23, 42, y + 2, 560, FT02_LOG_ROW_H - 4);
+        FT02_DrawTextPack(display, ft02_cjk_20r, stateText,
+            FT02_LOG_ROW_X + FT02_LOG_ROW_W - 18 - stateWidth, y + 23);
+        FT02_DrawTextPackClipped(display, ft02_cjk_20r, secondLine, 46, y + 47, 42, y + 24, FT02_LOG_ROW_W - 24, 28);
+    }
+}
+
 static void FT02_DrawLocationLogListContent(
     FT02Display& display,
     uint16_t selectedNewestIndex
@@ -179,113 +233,7 @@ static void FT02_DrawLocationLogListContent(
     {
         const uint16_t newestIndex = static_cast<uint16_t>(pageStart + row);
         if(newestIndex >= status.count) break;
-
-        FT02LocationLogEntry entry;
-        if(!FT02_LocationLogGetNewest(newestIndex, entry)) continue;
-
-        const int y = FT02_LOG_ROW_Y + row * (FT02_LOG_ROW_H + FT02_LOG_ROW_GAP);
-        const bool selected = newestIndex == selectedNewestIndex;
-        display.fillRect(
-            FT02_LOG_ROW_X,
-            y,
-            FT02_LOG_ROW_W,
-            FT02_LOG_ROW_H,
-            selected ? GxEPD_BLACK : GxEPD_WHITE
-        );
-        display.drawRect(FT02_LOG_ROW_X, y, FT02_LOG_ROW_W, FT02_LOG_ROW_H, GxEPD_BLACK);
-
-        char firstLine[96];
-        snprintf(
-            firstLine,
-            sizeof(firstLine),
-            "%s  %s",
-            entry.startDate[0] != '\0' ? entry.startDate : "日期未知",
-            entry.startTime[0] != '\0' ? entry.startTime : "--:--:--"
-        );
-
-        char durationText[20];
-        FT02_LocationLogFormatDuration(entry, durationText, sizeof(durationText));
-        char secondLine[128];
-        snprintf(
-            secondLine,
-            sizeof(secondLine),
-            "点数%lu  时长%s  %s",
-            static_cast<unsigned long>(entry.pointCount),
-            durationText,
-            FT02_LocationLogModeText(entry)
-        );
-
-        const char* stateText = FT02_LocationLogStateText(entry);
-        const int stateWidth = FT02_TextWidthPack(ft02_cjk_20r, stateText);
-
-        if(selected)
-        {
-            FT02_DrawTextPackInvertClipped(
-                display,
-                ft02_cjk_20r,
-                firstLine,
-                46,
-                y + 23,
-                42,
-                y + 2,
-                560,
-                FT02_LOG_ROW_H - 4
-            );
-            FT02_DrawTextPackInvertClipped(
-                display,
-                ft02_cjk_20r,
-                stateText,
-                FT02_LOG_ROW_X + FT02_LOG_ROW_W - 18 - stateWidth,
-                y + 23,
-                FT02_LOG_ROW_X,
-                y,
-                FT02_LOG_ROW_W,
-                FT02_LOG_ROW_H
-            );
-            FT02_DrawTextPackInvertClipped(
-                display,
-                ft02_cjk_20r,
-                secondLine,
-                46,
-                y + 47,
-                42,
-                y + 24,
-                FT02_LOG_ROW_W - 24,
-                28
-            );
-        }
-        else
-        {
-            FT02_DrawTextPackClipped(
-                display,
-                ft02_cjk_20r,
-                firstLine,
-                46,
-                y + 23,
-                42,
-                y + 2,
-                560,
-                FT02_LOG_ROW_H - 4
-            );
-            FT02_DrawTextPack(
-                display,
-                ft02_cjk_20r,
-                stateText,
-                FT02_LOG_ROW_X + FT02_LOG_ROW_W - 18 - stateWidth,
-                y + 23
-            );
-            FT02_DrawTextPackClipped(
-                display,
-                ft02_cjk_20r,
-                secondLine,
-                46,
-                y + 47,
-                42,
-                y + 24,
-                FT02_LOG_ROW_W - 24,
-                28
-            );
-        }
+        FT02_DrawLocationLogRow(display, newestIndex, row, newestIndex == selectedNewestIndex);
     }
 }
 
@@ -781,6 +729,8 @@ static void FT02_LocationLogCommitBodyPartial(
         return;
     }
 
+    const uint32_t startedMs = millis();
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(FT02_LOG_BODY_X, FT02_LOG_BODY_Y, FT02_LOG_BODY_W, FT02_LOG_BODY_H);
     display.firstPage();
     do
@@ -789,9 +739,9 @@ static void FT02_LocationLogCommitBodyPartial(
         drawContent(display, selectedNewestIndex);
     }
     while(display.nextPage());
-    display.setFullWindow();
+    FT02_EpdInteractiveEndBusyCapture(display);
     g_ft02LocationLogPartialCount++;
-    FT02_EpdPowerOffAfterCommit(display, tag);
+    FT02_EpdInteractiveFinishPartial(display, tag, startedMs);
 }
 }
 
@@ -857,6 +807,7 @@ void FT02_DrawLocationLogListScreen(
 )
 {
     g_ft02LocationLogPartialCount = 0;
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setFullWindow();
     display.firstPage();
     do
@@ -867,7 +818,8 @@ void FT02_DrawLocationLogListScreen(
         FT02_DrawBottomBarWithFont(display, FT02_LOG_LIST_BOTTOM_ITEMS, ft02_cjk_20r);
     }
     while(display.nextPage());
-    FT02_EpdPowerOffAfterCommit(display, "location-log-list-full");
+    FT02_EpdInteractivePowerOffNow(display, "location-log-list-full");
+    FT02_EpdInteractiveEndBusyCapture(display);
 }
 
 void FT02_DrawLocationLogListBodyPartial(
@@ -883,12 +835,52 @@ void FT02_DrawLocationLogListBodyPartial(
     );
 }
 
+
+void FT02_DrawLocationLogListSelectionPartial(
+    FT02Display& display,
+    uint16_t oldSelectedNewestIndex,
+    uint16_t newSelectedNewestIndex
+)
+{
+    const uint16_t oldPage = FT02_LocationLogPageStart(oldSelectedNewestIndex);
+    const uint16_t newPage = FT02_LocationLogPageStart(newSelectedNewestIndex);
+    if(oldPage != newPage)
+    {
+        FT02_DrawLocationLogListBodyPartial(display, newSelectedNewestIndex);
+        return;
+    }
+
+    const int oldRow = static_cast<int>(oldSelectedNewestIndex - oldPage);
+    const int newRow = static_cast<int>(newSelectedNewestIndex - newPage);
+    const int firstRow = oldRow < newRow ? oldRow : newRow;
+    const int lastRow = oldRow > newRow ? oldRow : newRow;
+    const int y = FT02_LOG_ROW_Y + firstRow * (FT02_LOG_ROW_H + FT02_LOG_ROW_GAP);
+    const int bottom = FT02_LOG_ROW_Y + lastRow * (FT02_LOG_ROW_H + FT02_LOG_ROW_GAP) + FT02_LOG_ROW_H;
+    const int h = bottom - y;
+    const uint32_t startedMs = millis();
+
+    FT02_EpdInteractiveBeginBusyCapture(display);
+    display.setPartialWindow(FT02_LOG_ROW_X, y, FT02_LOG_ROW_W, h);
+    display.firstPage();
+    do
+    {
+        display.fillRect(FT02_LOG_ROW_X, y, FT02_LOG_ROW_W, h, GxEPD_WHITE);
+        FT02_DrawLocationLogRow(display, oldSelectedNewestIndex, oldRow, false);
+        FT02_DrawLocationLogRow(display, newSelectedNewestIndex, newRow, true);
+    }
+    while(display.nextPage());
+    FT02_EpdInteractiveEndBusyCapture(display);
+    ++g_ft02LocationLogPartialCount;
+    FT02_EpdInteractiveFinishPartial(display, "location-log-list-selection-micro", startedMs);
+}
+
 void FT02_DrawLocationLogDetailScreen(
     FT02Display& display,
     uint16_t selectedNewestIndex
 )
 {
     g_ft02LocationLogPartialCount = 0;
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setFullWindow();
     display.firstPage();
     do
@@ -899,7 +891,8 @@ void FT02_DrawLocationLogDetailScreen(
         FT02_DrawBottomBarWithFont(display, FT02_LOG_DETAIL_BOTTOM_ITEMS, ft02_cjk_20r);
     }
     while(display.nextPage());
-    FT02_EpdPowerOffAfterCommit(display, "location-log-detail-full");
+    FT02_EpdInteractivePowerOffNow(display, "location-log-detail-full");
+    FT02_EpdInteractiveEndBusyCapture(display);
 }
 
 void FT02_DrawLocationLogDetailBodyPartial(

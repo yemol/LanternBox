@@ -1,0 +1,4813 @@
+[
+  {
+    "id": "MED001",
+    "category": "MED",
+    "title": "现场初始评估与求救",
+    "summary": "先判断现场安全、意识、呼吸和致命出血，再决定下一步。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "任何受伤、昏迷或突发不适现场。"
+      },
+      {
+        "title": "判断",
+        "text": "先看环境是否仍有车流、火、电、落石、毒气等危险；呼叫伤者并轻拍肩部；观察是否正常呼吸；快速看有无喷涌或持续大量出血。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先保护自己和伤者免受二次伤害。\n2. 无反应、无正常呼吸或有致命出血时立即呼叫当地急救并取AED/急救包。\n3. 按发现的问题处理：无正常呼吸做CPR；大量出血直接压迫。\n4. 有反应者询问症状、过敏、用药和既往病史。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要为了检查而让疑似头颈脊柱伤者站起或走动；不要把自己置于危险源中。"
+      },
+      {
+        "title": "升级处理",
+        "text": "无反应、仅喘息、严重呼吸困难、持续大量出血、抽搐、严重过敏、严重创伤均应立即求救。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 场景安全\n□ 已检查意识和呼吸\n□ 已处理致命出血\n□ 已发出求救信息"
+      }
+    ],
+    "sources": [
+      "RC_GENERAL"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED002",
+    "category": "MED",
+    "title": "威胁生命的外出血",
+    "summary": "持续喷涌或大量流血时，立即直接压迫并尽快获得急救。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "四肢或身体表面伤口出现持续流血、喷射样出血，或短时间内形成大量血泊。"
+      },
+      {
+        "title": "判断",
+        "text": "危险信号：血液持续流出或喷出；伤者苍白、湿冷、反应变差、呼吸快、脉搏快弱。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 有手套就戴；若是致命出血且没有手套，不要因此延误，尽量用塑料袋/干净布等隔离直接接触。\n2. 找到主要出血点，用纱布或干净布直接覆盖。\n3. 双手持续、稳定、用力直接压迫，不要频繁松开查看。\n4. 四肢致命出血且有商业止血带并会使用时，按产品说明施用；记下施用时间。\n5. 保暖并持续观察意识和呼吸。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用细绳、电线等窄材料代替正规止血带；不要因查看伤口反复松开压力；正规止血带一旦有效止血，不要自行松开或取下；深插异物不要拔出后再压迫。"
+      },
+      {
+        "title": "升级处理",
+        "text": "立即呼叫急救。压迫仍无法控制、伤者意识下降或出现休克表现时属于高度紧急。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 主要出血点已持续压迫\n□ 出血明显减少/停止\n□ 已求救\n□ 持续监测意识呼吸"
+      }
+    ],
+    "sources": [
+      "RC_BLEED",
+      "RC_SHOCK",
+      "IFRC_2025"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "MED002-IMG01",
+        "caption": "覆盖出血点，双手持续用力压迫"
+      }
+    ]
+  },
+  {
+    "id": "MED003",
+    "category": "MED",
+    "title": "严重开放性伤口",
+    "summary": "较深、张开、穿刺或污染伤口的现场处置：先止血、再覆盖、减少活动并撤离。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "伤口很深、边缘明显张开、可见深层组织、穿刺伤，或位于手足/关节并影响活动。"
+      },
+      {
+        "title": "判断",
+        "text": "先判断是否有致命出血；再看是否存在麻木、末端活动障碍、深插异物、动物咬伤或严重污染。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先按MED002控制明显出血。\n2. 若无嵌入异物，用干净敷料覆盖；被血浸透时在原敷料上继续加压，不要反复揭开。\n3. 让伤者休息，避免使用伤处。\n4. 记录受伤时间、原因、污染情况、感觉和活动变化。\n5. 尽快安排医疗评估。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要自行缝合；不要把酒精、双氧水等刺激性液体大量灌入深伤口；不要深入探查伤口；不要强行拔出嵌入物。"
+      },
+      {
+        "title": "升级处理",
+        "text": "持续大量出血、感觉/活动异常、伤口很深或污染严重、咬伤、穿刺伤应尽快专业处理；意识变差立即求救。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 出血已控制\n□ 伤口已覆盖保护\n□ 未反复探查/深度冲洗\n□ 已安排医疗评估"
+      }
+    ],
+    "sources": [
+      "RC_WOUNDS",
+      "RC_BLEED",
+      "IFRC_2025"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED004",
+    "category": "MED",
+    "title": "小伤口与擦伤",
+    "summary": "清洁、覆盖并监测感染，适用于表浅小伤口。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "表浅割伤、擦伤，出血少且可通过短时间直接压迫停止。"
+      },
+      {
+        "title": "判断",
+        "text": "不应归为小伤口：持续出血、明显张开、深穿刺、咬伤、异物嵌入、明显麻木或活动异常。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 洗手或戴手套。\n2. 轻度出血用干净纱布直接压迫。\n3. 用安全的清洁水充分冲掉表面泥沙和污物。\n4. 轻轻擦干周围皮肤，覆盖干净敷料。\n5. 每天观察红、肿、热、痛、脓液变化。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用脏水清洗；不要抠掉正在愈合的组织；不要把草药、泥土等未知材料敷在开放伤口上。"
+      },
+      {
+        "title": "升级处理",
+        "text": "红肿范围扩大、疼痛加重、出现脓液、红线向上延伸或发热时应医疗评估。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 污物已冲净\n□ 出血停止\n□ 敷料干净\n□ 已记住感染警示"
+      }
+    ],
+    "sources": [
+      "RC_WOUNDS"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED005",
+    "category": "MED",
+    "title": "嵌入异物伤口",
+    "summary": "异物仍插在伤口中时，避免拔除，用周围填垫固定并尽快撤离。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "刀片、木枝、金属等物体仍插在身体组织中。"
+      },
+      {
+        "title": "判断",
+        "text": "若异物深、较大、靠近眼睛/颈胸腹、伴大量出血或伤者状态恶化，都应视为严重。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 不拔异物。\n2. 若周围出血，用敷料在异物两侧施压，避免直接压在异物顶部。\n3. 用卷起的纱布或软布在异物周围做支撑，减少晃动。\n4. 固定支撑材料。\n5. 保持伤者稳定，尽快求救/撤离。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要旋转、推进或拔出异物；不要为了看伤口而移动异物；不要让伤者自行走动长距离。"
+      },
+      {
+        "title": "升级处理",
+        "text": "眼、颈、胸、腹部嵌入物，持续大量出血、呼吸困难或意识异常应立即求救。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 异物未被移动\n□ 周围出血受控\n□ 异物已支撑固定\n□ 已安排撤离"
+      }
+    ],
+    "sources": [
+      "RC_WOUNDS",
+      "RC_BLEED"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "MED005-IMG01",
+        "caption": "异物不拔；两侧垫高后固定"
+      }
+    ]
+  },
+  {
+    "id": "MED006",
+    "category": "MED",
+    "title": "疑似骨折与关节损伤",
+    "summary": "把明显骨骼或关节损伤当作骨折处理：休息、保持原位、减少移动。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "跌落、撞击、扭转后出现明显疼痛、肿胀、变形、无法正常使用肢体。"
+      },
+      {
+        "title": "判断",
+        "text": "警示：肢体弯曲/变形、骨外露、麻木刺痛、伤处以下冰冷苍白、明显活动障碍、头颈脊柱/骨盆/大腿伤。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 让伤者停止活动，保持伤处在发现时的位置。\n2. 开放伤口先控制出血并覆盖。\n3. 无开放伤口可用布包裹冷敷物，每次不超过20分钟。\n4. 若必须等待较久且受过固定训练，可在不改变伤肢位置的前提下用夹板限制移动，并检查末端血运。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要强行拉直或复位；不要让伤者测试能否负重；不要把冰直接贴皮肤。"
+      },
+      {
+        "title": "升级处理",
+        "text": "明显变形、骨外露、末端麻木/冰冷、头颈脊柱/骨盆/大腿伤、严重或多处伤应立即求救。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 伤肢已停止活动\n□ 未强行复位\n□ 末端颜色温度感觉可监测\n□ 已决定是否撤离"
+      }
+    ],
+    "sources": [
+      "RC_FRACT"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "MED006-IMG01",
+        "caption": "保持原位；夹板两侧固定伤肢"
+      }
+    ]
+  },
+  {
+    "id": "MED007",
+    "category": "MED",
+    "title": "扭伤与拉伤",
+    "summary": "轻中度软组织损伤以停止负重、冷敷和支撑为主，并警惕骨折。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "运动、滑倒、扭转后出现局部疼痛、肿胀、活动受限，但无明显变形。"
+      },
+      {
+        "title": "判断",
+        "text": "若完全不能承重、明显变形、骨点压痛很强、麻木或伤处以下冰冷，应按疑似骨折处理。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 停止导致疼痛的活动。\n2. 让伤处休息并避免负重。\n3. 冷敷物外包薄布，每次约15–20分钟，间隔后可重复。\n4. 弹性绷带只做轻度支撑，出现麻木、发紫、冰冷立即放松。\n5. 观察24–48小时功能变化。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要忍痛继续运动；不要早期强力按摩；不要把绷带缠到引起末端麻木或变色。"
+      },
+      {
+        "title": "升级处理",
+        "text": "疼痛/肿胀迅速加重、无法使用肢体、怀疑骨折或数日无改善时应评估。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已停止负重\n□ 冷敷有隔离层\n□ 末端循环正常\n□ 已排查骨折警示"
+      }
+    ],
+    "sources": [
+      "RC_FRACT"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED008",
+    "category": "MED",
+    "title": "热烧伤处理",
+    "summary": "热烧伤先脱离热源，用清洁凉流动水充分冷却，再保护创面并判断是否需急救。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "火焰、热液、热金属等造成的皮肤烧伤。"
+      },
+      {
+        "title": "判断",
+        "text": "严重信号：深层/白蜡样/焦黑烧伤、面积较大，位于脸/口鼻/手/足/大关节/会阴，环绕肢体/胸颈，或由电、化学、爆炸造成；吸入烟雾或呼吸异常也属紧急。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先停止热源，确保现场安全。\n2. 尽快用可饮用级别的清洁凉流动水冷却5–20分钟；条件允许优先充分接近20分钟。大面积烧伤冷却时防止伤者失温。\n3. 取下未粘在皮肤上的戒指、手表和紧物；粘住的衣物不要撕。\n4. 冷却后，小面积烧伤保持清洁；需转运时用干净、不粘连敷料松松覆盖。\n5. 继续观察呼吸、意识和疼痛变化。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要直接敷冰；不要涂黄油、牙膏等油脂/偏方；不要撕掉粘住皮肤的衣物；不要挑破水疱；严重烧伤不要为了“清洗干净”而擦洗创面。"
+      },
+      {
+        "title": "升级处理",
+        "text": "深度烧伤、面积较大、特殊部位、电/化学烧伤、吸入烟雾或呼吸异常应尽快急救/医疗。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 热源已停止\n□ 已充分冷却\n□ 无冰直接接触\n□ 已判断是否需急救"
+      }
+    ],
+    "sources": [
+      "RC_BURNS",
+      "IFRC_2025"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "MED008-IMG01",
+        "caption": "凉水持续冷却，再松散覆盖"
+      }
+    ]
+  },
+  {
+    "id": "MED009",
+    "category": "MED",
+    "title": "失温处理",
+    "summary": "湿冷、风冷环境下出现发抖、迟钝或意识改变时，优先阻止继续散热并缓慢复温。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "冷空气、冷水、湿衣、强风中出现持续发抖、动作笨拙、反应迟钝、言语含糊或意识改变。"
+      },
+      {
+        "title": "判断",
+        "text": "严重信号：停止发抖但仍很冷、明显混乱/嗜睡、无反应、呼吸很慢或异常。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 轻柔转移到避风干燥处。\n2. 脱下湿衣，擦干并换干衣。\n3. 用睡袋/毯子包裹躯干、头颈，并与地面隔热。\n4. 热水袋/热垫需包布后放在躯干附近，避免烫伤。\n5. 清醒且能正常吞咽者可小口喝温热无咖啡因饮料。\n6. 持续监测呼吸和意识。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用热水浴快速加热中重度失温者；不要揉搓四肢；不要让严重失温者剧烈走动；意识不清者不要喂水食。"
+      },
+      {
+        "title": "升级处理",
+        "text": "意识改变、停止发抖、呼吸异常或无法安全复温时立即求救。无正常呼吸按训练实施CPR。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已隔绝风雨和地面\n□ 湿衣已处理\n□ 正在缓慢复温躯干\n□ 持续监测意识呼吸"
+      }
+    ],
+    "sources": [
+      "RC_HYPO"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "MED009-IMG01",
+        "caption": "隔地保温；优先温暖躯干"
+      }
+    ]
+  },
+  {
+    "id": "MED010",
+    "category": "MED",
+    "title": "冻伤处理",
+    "summary": "冻白、蜡样、麻木的手足等组织需要防再冻、温水复温和保护。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "冰冻环境中手指、脚趾、耳鼻等出现麻木、蜡样外观或白/黄/蓝/红色改变。"
+      },
+      {
+        "title": "判断",
+        "text": "水疱、黑色皮肤、同时有失温、大片区域受累均提示严重；若可能再次冻住，不要开始主动复温。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先处理失温和整体保暖。\n2. 取下受累部位的湿物、戒指等紧物。\n3. 确定不会再次受冻后，用37–40°C清洁温水浸泡，直到组织回暖；无温水时在温暖室内自然复温。\n4. 不破水疱，复温后松松覆盖干燥无菌敷料，指趾间放纱布隔开。\n5. 尽量避免用冻伤脚继续行走。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要揉搓或按摩；不要烤火、直接贴热源；不要用过热水；不要让已经复温组织再次冻结。"
+      },
+      {
+        "title": "升级处理",
+        "text": "水疱、黑皮、感觉长期不恢复、面积大或合并失温时尽快医疗处理。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已避免再冻结\n□ 温度不过热\n□ 未揉搓\n□ 已保护并准备医疗评估"
+      }
+    ],
+    "sources": [
+      "RC_FROST"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED011",
+    "category": "MED",
+    "title": "热衰竭处理",
+    "summary": "高温活动后头晕、乏力、恶心但意识基本正常时，快速降温并小口补液。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "高温或剧烈活动后出现乏力、头晕、头痛、恶心、出汗、皮肤凉湿、心跳快。"
+      },
+      {
+        "title": "判断",
+        "text": "若出现意识改变、抽搐或无反应，按热射病处理；晕厥、无法站立/行走、持续呕吐或快速恶化也需要尽快急救评估。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 移到阴凉、有空气流动处。\n2. 松开或减少多余衣物。\n3. 用凉水喷湿皮肤、湿毛巾配合扇风降温。\n4. 清醒且能吞咽者小口喝凉水或含电解质饮料，不要猛灌。\n5. 让其休息并持续观察。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要继续暴晒或运动；不要让意识异常者喝水；不要一次大量灌水。"
+      },
+      {
+        "title": "升级处理",
+        "text": "休息降温后不改善、晕厥、无法站立/行走、持续呕吐、不能喝水、意识改变或出现热射病表现时立即求救。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已转移阴凉处\n□ 已主动降温\n□ 能吞咽才补液\n□ 正监测意识变化"
+      }
+    ],
+    "sources": [
+      "RC_HEATEX",
+      "IFRC_2025"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED012",
+    "category": "MED",
+    "title": "热射病紧急处理",
+    "summary": "高温下出现意识异常、抽搐或无反应是危及生命的热射病，必须边求救边快速降温。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "高温暴露/剧烈运动后出现混乱、行为异常、抽搐、无反应、明显虚弱，可伴很热皮肤、快速呼吸和心跳。"
+      },
+      {
+        "title": "判断",
+        "text": "关键不是是否出汗，而是高温暴露背景下出现中枢神经异常：混乱、抽搐、昏迷。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 立即呼叫急救。\n2. 立刻停止活动并移到凉处，去除多余衣物。\n3. 条件允许且能安全操作时，优先把伤者颈部以下浸入冷水并持续快速降温；无法浸泡时，用大量凉/冷水持续湿润皮肤并扇风，可配合冷湿毛巾或冷敷包辅助。\n4. 持续降温并监测呼吸和意识，直到专业人员接手或状态明显改善。\n5. 无正常呼吸时按训练实施CPR/AED。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要等待体温计确认才降温；不要给意识异常、抽搐或呕吐者口服液体；不要只靠退烧药；不要因“仍在出汗”而排除热射病。"
+      },
+      {
+        "title": "升级处理",
+        "text": "这是紧急情况，必须尽快专业救援。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已呼叫急救\n□ 正在持续快速降温\n□ 未给意识异常者喝水\n□ 持续监测呼吸"
+      }
+    ],
+    "sources": [
+      "RC_HEATSTROKE",
+      "RC_GENERAL",
+      "IFRC_2025"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED013",
+    "category": "MED",
+    "title": "脱水与口服补液",
+    "summary": "口渴、口干、尿少/尿深、头晕时应减少活动并少量多次补充安全液体。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "炎热、运动、呕吐、腹泻或长期饮水不足后出现口干、疲劳、头晕、尿量减少或尿色变深。"
+      },
+      {
+        "title": "判断",
+        "text": "严重信号：几乎不排尿、持续呕吐无法饮水、明显嗜睡/混乱、休克表现、黑便/血便、持续剧烈腹痛。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 停止剧烈活动并到阴凉安全处。\n2. 清醒且能吞咽者少量多次喝安全水或口服补液液；有正规口服补液盐按包装比例配制。\n3. 每隔几分钟小口补充，比短时间猛喝更容易耐受。\n4. 同时处理持续出汗、呕吐或腹泻原因并观察尿量。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要给意识异常或不能吞咽者饮水；不要自行把口服补液盐配得更浓；不要用不安全水源配制。"
+      },
+      {
+        "title": "升级处理",
+        "text": "无法保留液体、明显意识改变、严重少尿/无尿、休克表现或儿童/老人快速恶化时尽快医疗。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已停止继续失水\n□ 补液水源安全\n□ 少量多次补充\n□ 已观察尿量和意识"
+      }
+    ],
+    "sources": [
+      "RC_DEHY",
+      "CDC_WATER"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED014",
+    "category": "MED",
+    "title": "晕厥后的处理",
+    "summary": "短暂失去意识后恢复者仍需先检查呼吸，并排除更严重问题。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "人在闷热、久站、疼痛、紧张或脱水后突然短暂失去意识，随后较快恢复。"
+      },
+      {
+        "title": "判断",
+        "text": "先检查是否能回应、是否正常呼吸。若持续无反应、恢复不完整、呼吸异常、胸痛、严重创伤、抽搐或反复晕厥，不应当作普通晕厥。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 让其平躺，避免立即站起。\n2. 检查呼吸和明显外伤。\n3. 若无正常呼吸，立即求救并CPR/AED。\n4. 若呼吸正常但未完全清醒且无脊柱伤嫌疑，可置恢复体位并持续观察。\n5. 完全清醒后缓慢坐起，再决定是否站立。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要让刚醒者马上走动；不要给未完全清醒者喝水或进食；疑似头颈脊柱伤不要随意翻动。"
+      },
+      {
+        "title": "升级处理",
+        "text": "持续无反应、胸痛、呼吸困难、抽搐、严重头痛、明显外伤或首次原因不明晕厥应求助医疗。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已检查呼吸\n□ 未急于站立\n□ 已排查外伤/严重症状\n□ 状态稳定后才移动"
+      }
+    ],
+    "sources": [
+      "RC_FAINT",
+      "RC_GENERAL"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED015",
+    "category": "MED",
+    "title": "休克识别与处理",
+    "summary": "严重创伤、失血或过敏后出现苍白湿冷、呼吸快、反应差时，先处理病因并保暖等候救援。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "严重出血、创伤、过敏等之后出现脉搏快弱、呼吸快、皮肤苍白/灰冷湿、口渴、焦躁或意识下降。"
+      },
+      {
+        "title": "判断",
+        "text": "休克是危及生命的循环问题。关键是病因背景加上上述全身状态变化，而不是普通紧张。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 立即求救。\n2. 能处理的病因先处理，如直接压迫出血。\n3. 无明显创伤且呼吸舒适者可平躺；若呼吸困难让其保持最舒服的姿势。\n4. 防止失温，盖毯但避免过热。\n5. 持续监测意识和呼吸。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要给食物或饮料；不要让伤者自行走动；不要为了抬腿而改变疑似脊柱/骨盆/腿部伤者体位。"
+      },
+      {
+        "title": "升级处理",
+        "text": "任何休克表现都应视为紧急情况。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已求救\n□ 主要病因正在处理\n□ 已保温\n□ 持续监测意识呼吸"
+      }
+    ],
+    "sources": [
+      "RC_SHOCK"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED016",
+    "category": "MED",
+    "title": "成人/儿童完全气道梗阻",
+    "summary": "不能说话、咳嗽或呼吸时，用5次背部拍击与5次腹部冲击交替处理。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "清醒成人或1岁以上儿童突然无法咳嗽、说话或呼吸，可能发不出声音或皮肤发青。"
+      },
+      {
+        "title": "判断",
+        "text": "如果还能有力咳嗽或说话，鼓励继续咳嗽并观察；只有明显完全或严重梗阻才实施冲击。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 让他人呼叫急救。\n2. 站在伤者侧后方，让其上身前倾，手掌根在肩胛骨之间给予5次有力背部拍击。\n3. 若未解除，站到身后，在肚脐上方做5次向内、向上的腹部冲击。\n4. 继续5背拍+5腹冲，直到异物排出或人失去反应。\n5. 若失去反应，安全放平，开始CPR；每轮按压后只取出看得见的口中异物。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要盲目用手指扫口腔；孕妇或腹部无法环抱者改用胸部冲击；不要对1岁以下婴儿做腹部冲击。"
+      },
+      {
+        "title": "升级处理",
+        "text": "严重/完全气道梗阻属于紧急情况，应尽快启动当地急救系统；即使异物排出，如仍有持续呼吸不适或受伤也应医疗评估。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已区分有效咳嗽与完全梗阻\n□ 正按5+5循环\n□ 未盲扫口腔\n□ 已求救"
+      }
+    ],
+    "sources": [
+      "RC_CHOKE",
+      "AHA_2025_BLS",
+      "IFRC_2025"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "MED016-IMG01",
+        "caption": "完全梗阻按卡片施救；无反应转CPR"
+      }
+    ]
+  },
+  {
+    "id": "MED017",
+    "category": "MED",
+    "title": "成人徒手CPR与AED",
+    "summary": "成人无反应且不正常呼吸/仅喘息时，立即胸外按压并尽快使用AED。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "成人突然倒地，无反应，且没有正常、规律呼吸或只有濒死喘息。"
+      },
+      {
+        "title": "判断",
+        "text": "检查反应和呼吸不超过10秒。若不确定是否正常呼吸且无反应，按心搏骤停处理。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 呼叫当地急救并让人取AED；独处时用免提电话求救。\n2. 让伤者仰卧在坚硬平面。\n3. 双手掌根叠放胸部中央，肩在手正上方，肘伸直。\n4. 以100–120次/分钟连续按压，成人深度约5–6厘米，每次让胸廓完全回弹，并尽量减少中断。\n5. 未受训者持续徒手按压；会且愿意做人工呼吸者按30次按压+2次吹气。\n6. AED到达后立即开机，按语音提示操作；AED分析/放电时无人接触伤者。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要因反复检查脉搏长时间停按；不要在柔软床垫上按压；不要在AED分析/放电时触碰伤者。"
+      },
+      {
+        "title": "升级处理",
+        "text": "持续至伤者恢复正常呼吸、专业人员接手、现场变危险或你无法继续。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已呼叫急救/AED\n□ 100–120次/分\n□ 成人按压约5–6厘米并充分回弹\n□ AED到达即使用"
+      }
+    ],
+    "sources": [
+      "RC_CPR",
+      "RC_HANDSCPR",
+      "AHA_2025_BLS",
+      "IFRC_2025"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "MED017-IMG01",
+        "caption": "胸部中央垂直按压；AED按图贴片"
+      }
+    ]
+  },
+  {
+    "id": "MED018",
+    "category": "MED",
+    "title": "严重过敏与肾上腺素",
+    "summary": "面舌喉肿胀、呼吸困难或休克表现提示过敏性反应，优先使用本人处方肾上腺素并求救。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "接触食物、药物、昆虫等后迅速出现全身荨麻疹、脸/舌/喉肿胀、喘鸣呼吸困难、声音改变、晕厥或休克。"
+      },
+      {
+        "title": "判断",
+        "text": "只有局部轻度皮疹不一定是过敏性休克；一旦累及呼吸、循环或多个系统，应按严重过敏处理。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 立即呼叫急救。\n2. 若伤者有本人处方的肾上腺素自动注射器/鼻喷剂，帮助其按设备说明立即使用；仅在当地规则允许且你受过训练时替其施用。\n3. 呼吸困难时允许坐在最舒服姿势；休克时可平躺。\n4. 记录用药时间，持续监测呼吸和意识。\n5. 症状持续且急救未到，第二剂仅按其处方/产品说明或专业指导使用。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要让严重过敏者独自走动；不要因症状短暂好转取消医疗评估；不要使用他人的处方药代替。"
+      },
+      {
+        "title": "升级处理",
+        "text": "任何呼吸困难、喉舌肿胀、晕厥或休克表现都应紧急求救。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已求救\n□ 本人处方肾上腺素已按说明使用\n□ 已记录时间\n□ 持续监测"
+      }
+    ],
+    "sources": [
+      "RC_ALLERGY"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED019",
+    "category": "MED",
+    "title": "动物咬伤",
+    "summary": "破皮咬伤先止血、充分清洁，并因感染/狂犬病/破伤风风险尽快医疗评估。",
+    "priority": 1,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "犬、猫、野生动物或不明动物咬伤、抓伤导致皮肤破损。"
+      },
+      {
+        "title": "判断",
+        "text": "深穿刺、大片撕裂、持续出血、手/脸部位、野生/流浪动物、蝙蝠接触风险更高。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先离开动物，确保现场安全。\n2. 大量出血按MED002处理。\n3. 非致命出血稳定后，用肥皂和大量安全水充分清洗伤口。\n4. 覆盖干净敷料。\n5. 记录动物种类、外观、时间地点；不要冒险捕捉。\n6. 尽快医疗评估是否需抗生素、破伤风或狂犬病处理。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用嘴吸伤口；不要追赶或捕捉野生动物；不要因为伤口小就忽视猫咬/穿刺伤或蝙蝠暴露。"
+      },
+      {
+        "title": "升级处理",
+        "text": "任何破皮动物咬伤都建议医疗评估；严重出血、脸颈伤或伤者状态异常立即求救。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已脱离动物\n□ 伤口已清洗覆盖\n□ 已记录动物信息\n□ 已安排医疗评估"
+      }
+    ],
+    "sources": [
+      "RC_ANIMAL"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED020",
+    "category": "MED",
+    "title": "疑似毒蛇咬伤",
+    "summary": "疑似毒蛇咬伤应完全减少活动、固定患肢并尽快搬运就医，不切、不吸、不冰敷、不紧扎。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "被未知或可能有毒蛇咬伤，局部出现牙痕、疼痛、红肿或逐渐扩大的肿胀。"
+      },
+      {
+        "title": "判断",
+        "text": "无法安全确认蛇种时按潜在毒蛇处理；全身恶心、乏力、麻痹、呼吸异常、休克均属严重。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 立即呼叫急救/安排最快安全转运，并离开蛇所在位置。\n2. 不追、不抓蛇；只在安全距离记住外观或拍照。\n3. 让伤者完全减少活动，去掉戒指、手表等可能被肿胀卡住的紧物。\n4. 在发现时的位置用夹板/软垫固定咬伤肢体；尽量用担架或他人搬运，不让伤者自行步行。\n5. 持续监测呼吸和意识；若呕吐且无脊柱伤限制，可侧卧保护气道。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要切开、吸吮、挤压、按摩、电击或冰敷；不要使用紧扎动脉的止血带；不要让伤者跑步或饮酒。压力固定绷带只适用于部分以神经毒为主且不造成明显局部肿胀的蛇种/地区，应按当地正式指南或受训方法使用，不自行套用。"
+      },
+      {
+        "title": "升级处理",
+        "text": "任何疑似毒蛇咬伤都需要紧急医疗评估；呼吸变弱、意识异常、进行性麻痹或休克时最高优先级，并准备CPR。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已求救/安排转运\n□ 伤者和患肢尽量静止\n□ 紧物已去除\n□ 未切吸冰敷或紧扎止血带"
+      }
+    ],
+    "sources": [
+      "RC_SNAKE",
+      "WHO_SNAKE",
+      "IFRC_2025"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED021",
+    "category": "MED",
+    "title": "头颈脊柱伤",
+    "summary": "高能量跌落或头颈背痛、麻木无力时，尽量保持原位并立即求救。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "从高处跌落、车辆事故、头部重击后出现头颈背痛、麻木、无力、平衡异常或意识改变。"
+      },
+      {
+        "title": "判断",
+        "text": "高危信号：肢体麻木无力、无法移动、明显变形、反复呕吐、抽搐、耳鼻流血/液、呼吸异常。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 告诉伤者不要移动头颈和身体。\n2. 保持发现时姿势，除非现场不安全、必须CPR或必须控制致命出血。\n3. 不摘头盔，除非为开放气道/CPR所必需且你会操作。\n4. 立即求救并持续观察呼吸、意识。\n5. 保暖但避免移动脊柱。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要让伤者坐起、站立或“试试看能不能走”；不要扭转颈部检查；不要随意搬运。"
+      },
+      {
+        "title": "升级处理",
+        "text": "任何疑似头颈脊柱伤都应尽快专业救援。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已限制移动\n□ 已求救\n□ 呼吸意识持续监测\n□ 未随意摘头盔"
+      }
+    ],
+    "sources": [
+      "RC_HEAD"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "MED021-IMG01",
+        "caption": "非必要不搬动；从两侧稳定头部"
+      }
+    ]
+  },
+  {
+    "id": "MED022",
+    "category": "MED",
+    "title": "疑似脑震荡",
+    "summary": "头部受撞后出现头痛、眩晕、记忆/反应异常时，停止活动并持续观察。",
+    "priority": 1,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "头部或身体受撞后出现头痛、眩晕、恶心、记忆困难、反应迟缓、平衡差或短暂意识丧失。"
+      },
+      {
+        "title": "判断",
+        "text": "危险信号：意识越来越差、反复呕吐、抽搐、明显行为改变、严重/加重头痛、视力异常、肢体无力。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 立即停止运动和危险活动。\n2. 让伤者安静休息并有人陪同观察。\n3. 记录受伤时间、是否失去意识、症状变化。\n4. 当天不要返回运动或驾驶。\n5. 安排医疗评估，尤其症状持续时。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要让伤者“睡一觉就算了”而无人观察；不要让其继续比赛/攀爬；不要用药物掩盖逐渐加重的神经症状。"
+      },
+      {
+        "title": "升级处理",
+        "text": "出现任何危险信号立即求救；症状持续或首次明显脑震荡也应医疗评估。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已停止活动\n□ 有人持续观察\n□ 已记录症状\n□ 已判断危险信号"
+      }
+    ],
+    "sources": [
+      "RC_CONCUSS",
+      "RC_HEAD"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED023",
+    "category": "MED",
+    "title": "眼部化学物或异物",
+    "summary": "化学液体进眼立即持续冲洗；刺入物不要拔，保护眼睛并求助。",
+    "priority": 1,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "化学品溅眼、沙尘小颗粒入眼，或物体刺入眼球。"
+      },
+      {
+        "title": "判断",
+        "text": "视力下降、持续剧痛、出血、化学品暴露、刺入物都需要尽快医疗；普通灰尘轻刺激可先冲洗。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 化学液体入眼：立即用大量清洁水持续冲洗，头偏向患侧使污染水远离另一只眼；持续冲洗到专业人员接手，或严格按该化学品SDS/中毒咨询指导。\n2. 普通松散异物可用清洁水冲洗，不要用手揉。\n3. 刺入眼球的异物不要拔；用硬质眼罩/纸杯样保护罩避免受压。\n4. 取下隐形眼镜仅在容易取下且不会延误冲洗时进行。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要揉眼；不要用镊子夹眼球表面深嵌异物；不要向刺入眼睛施压；化学暴露不要等待疼痛出现再冲洗。"
+      },
+      {
+        "title": "升级处理",
+        "text": "化学品、视力变化、刺入物、持续疼痛/出血应尽快急救或眼科处理。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 化学暴露已立即冲洗\n□ 未揉眼\n□ 刺入物未移动\n□ 已安排医疗"
+      }
+    ],
+    "sources": [
+      "RC_EYE",
+      "IFRC_2025"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "MED023-IMG01",
+        "caption": "冲洗从鼻侧向外流，避免流入另一眼"
+      }
+    ]
+  },
+  {
+    "id": "MED024",
+    "category": "MED",
+    "title": "鼻出血",
+    "summary": "坐直微前倾，连续捏紧鼻翼10–15分钟，不要仰头。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "非严重外伤后的常见鼻出血。"
+      },
+      {
+        "title": "判断",
+        "text": "如果是严重头部/面部创伤后出血、出血喷涌或量很大，不按普通鼻出血处理。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 让伤者坐下，身体和头部略向前。\n2. 用拇指和食指捏住柔软鼻翼，连续10–15分钟不要中途松开检查。\n3. 用嘴呼吸，流入口中的血吐出不要吞咽。\n4. 15分钟后再松手判断是否停止。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要仰头；不要平躺吞血；不要每隔几十秒松开看一次；不要把纸巾深塞入鼻腔。"
+      },
+      {
+        "title": "升级处理",
+        "text": "连续压迫15分钟仍不停、出血很大、头颈伤、正在使用抗凝药且难止血时应医疗求助。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 身体前倾\n□ 连续压迫满10–15分钟\n□ 未仰头吞血\n□ 已判断是否需医疗"
+      }
+    ],
+    "sources": [
+      "RC_NOSE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "MED024-IMG01",
+        "caption": "身体前倾，持续捏住鼻翼软部"
+      }
+    ]
+  },
+  {
+    "id": "MED025",
+    "category": "MED",
+    "title": "抽搐发作保护",
+    "summary": "抽搐时清空周围危险物、保护头部、计时，不按住身体、不塞东西进嘴。",
+    "priority": 1,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "突然失去意识并全身抽搐，或已知癫痫患者出现发作。"
+      },
+      {
+        "title": "判断",
+        "text": "紧急信号：首次发作、持续超过5分钟、连续多次、在水中发作、受伤、孕妇、呼吸未恢复。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 记录开始时间。\n2. 移开硬物、火源、锐物，垫软物保护头部；松开颈部紧衣物。\n3. 不强行压住肢体，让发作自然结束。\n4. 抽搐停止后检查呼吸；呼吸正常且无需要限制翻动的严重创伤时，让其侧卧保持气道通畅。\n5. 发作后陪伴，伤者未完全清醒前不要给食物、饮料或药片。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要往嘴里塞勺子、布或手指；不要喂水/药片给未清醒者；不要强行制止抽动。"
+      },
+      {
+        "title": "升级处理",
+        "text": "发作>5分钟、连续发作、首次发作、受伤/水中发作、呼吸异常应立即求救。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已计时\n□ 周围危险物已移开\n□ 未按压/塞口\n□ 发作后已检查呼吸"
+      }
+    ],
+    "sources": [
+      "RC_SEIZ"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "MED025-IMG01",
+        "caption": "移开硬物、垫护头部；不要强按"
+      }
+    ]
+  },
+  {
+    "id": "MED026",
+    "category": "MED",
+    "title": "中毒暴露初步处理",
+    "summary": "先远离毒源且不让救援者暴露，再根据物质信息联系急救/中毒咨询。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "误食药物/化学品、吸入烟气/一氧化碳、皮肤眼睛接触有毒物。"
+      },
+      {
+        "title": "判断",
+        "text": "多人同时头晕、异常气味、散落容器、口周灼伤、意识改变、呼吸困难都提示严重。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先确保你不会进入有毒环境；只有在自身安全时才把伤者移离毒源/到新鲜空气处。\n2. 无反应无正常呼吸时求救并CPR/AED。\n3. 保存容器/标签，记录物质、估计数量和暴露时间。\n4. 联系当地急救或中毒咨询机构，严格按其指导处理。\n5. 皮肤/眼暴露优先按标签或SDS处理；一般液体化学品在没有相反指示时用大量清水冲洗，干粉先避免扬尘并按说明清除。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要自行催吐；不要给牛奶、盐水等“解毒”；不要在未知毒气环境中无防护进入救人；不要用未知化学品互相“中和”；除非专业指导不要随意喂食饮水。"
+      },
+      {
+        "title": "升级处理",
+        "text": "呼吸困难、意识变化、抽搐、多人同时发病、一氧化碳或未知高毒物暴露立即求救。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 救援者未暴露\n□ 已离开毒源\n□ 保存物质信息\n□ 已联系专业机构"
+      }
+    ],
+    "sources": [
+      "RC_POISON",
+      "IFRC_2025"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED027",
+    "category": "MED",
+    "title": "腹泻/呕吐时补液",
+    "summary": "核心是安全液体少量多次补充，并监测脱水和危险症状。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "短期腹泻或呕吐导致口渴、尿少、乏力，但伤者意识清楚、能吞咽。"
+      },
+      {
+        "title": "判断",
+        "text": "危险信号：血便/黑便、持续剧烈腹痛、明显脱水、持续无法保留液体、意识改变、婴幼儿/老人快速恶化。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 使用安全饮用水或按说明配制的口服补液盐。\n2. 每几分钟小口补充，呕吐后暂停片刻再少量继续。\n3. 症状缓解后逐渐恢复清淡、易耐受食物。\n4. 注意洗手和粪便处理，避免污染水和食物。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用未经处理的水配补液；不要自行把补液盐配浓；意识不清或吞咽困难者不要口服。"
+      },
+      {
+        "title": "升级处理",
+        "text": "血便/黑便、持续剧痛、明显脱水、持续无法保留液体、意识改变或快速恶化时立即医疗评估；婴幼儿、老人和基础病患者应更早求助。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 水源安全\n□ 少量多次补液\n□ 正观察尿量和意识\n□ 已加强卫生"
+      }
+    ],
+    "sources": [
+      "RC_DIARRHEA",
+      "RC_DEHY",
+      "CDC_HYGIENE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED028",
+    "category": "MED",
+    "title": "伤员搬运决策",
+    "summary": "能不搬就不搬；只有现场危险、必须CPR/止血或必须撤离时才移动严重伤员。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "受伤者无法自行安全移动，尤其可能有骨折或头颈脊柱伤。"
+      },
+      {
+        "title": "判断",
+        "text": "先问：留在原地是否更安全？能否等待救援？移动是否会加重伤情？现场是否有火、水、落石、车流等迫在眉睫危险？"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 无立即危险时，让伤者保持原位并求救。\n2. 必须移动时先控制大出血、尽量固定明显骨折。\n3. 多人协同时指定一人统一口令，尽量让头颈躯干作为整体移动。\n4. 路线先清障，再搬运。\n5. 搬运过程中持续询问疼痛、麻木和呼吸。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要为了“舒服一点”随意移动疑似脊柱伤者；不要单人硬拖明显骨盆/大腿伤者，除非不移动会有生命危险。"
+      },
+      {
+        "title": "升级处理",
+        "text": "呼吸困难、意识下降、疑似脊柱/骨盆/大腿严重伤优先等待专业救援，除非现场本身致命。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已比较移动与留置风险\n□ 先处理致命问题\n□ 路线已清理\n□ 搬运时持续监测"
+      }
+    ],
+    "sources": [
+      "RC_HEAD",
+      "RC_FRACT",
+      "RC_GENERAL"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "MED028-IMG01",
+        "caption": "非危险不搬动；必要时最少移动"
+      }
+    ]
+  },
+  {
+    "id": "MED029",
+    "category": "MED",
+    "title": "伤口感染警示",
+    "summary": "每天看红肿范围、疼痛、渗液和全身状态，发现扩散趋势及时就医。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "任何开放伤口处理后的后续观察。"
+      },
+      {
+        "title": "判断",
+        "text": "警示：红肿范围扩大、局部越来越热痛、脓性分泌物、红线沿肢体向上延伸、发热或全身不适。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 保持伤口和敷料清洁干燥，按需要更换湿污敷料。\n2. 每天在相近时间观察红肿边界和疼痛变化。\n3. 有条件可在红肿边缘外做日期标记，便于判断是否扩散。\n4. 继续避免污染水、泥土接触。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要把越来越严重的红肿当成正常愈合；不要挤压脓肿；不要用未知草药或腐蚀性液体覆盖。"
+      },
+      {
+        "title": "升级处理",
+        "text": "红肿快速扩展、出现红线、发热、恶臭脓液、剧痛或全身状态变差时尽快医疗。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 敷料清洁\n□ 已比较红肿变化\n□ 无全身感染信号\n□ 知道何时就医"
+      }
+    ],
+    "sources": [
+      "RC_WOUNDS",
+      "RC_ANIMAL"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "MED030",
+    "category": "MED",
+    "title": "急救记录与交接",
+    "summary": "记录时间、伤情、处理和变化，可显著减少后续救援信息丢失。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "任何需要撤离、等待救援或多人轮换照护的伤病。"
+      },
+      {
+        "title": "判断",
+        "text": "最低要记录：时间、事件原因、主要伤情、意识/呼吸变化、出血、处理措施、药物/肾上腺素使用时间、已知过敏和疾病。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 用纸或FT-02日志记录事件时间线。\n2. 每次状态明显变化时补记时间。\n3. 搬运或人员交接时，由一人完整口头复述并交出记录。\n4. 若求救，信息按“位置-人数-主要伤情-已做处理-需要什么”发送。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要只凭记忆；不要在多人救援时让每个人各说一套；不要遗漏药物使用时间和过敏史。"
+      },
+      {
+        "title": "升级处理",
+        "text": "伤情严重时记录不能延误止血、CPR、降温等立即救命措施。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 时间线完整\n□ 位置清楚\n□ 已做处理有记录\n□ 交接人已确认"
+      }
+    ],
+    "sources": [
+      "RC_GENERAL",
+      "NPS_WILD"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "SUR001",
+    "category": "SUR",
+    "title": "迷路后的第一小时",
+    "summary": "无法确定路线时先停下、定位、求救；若无法安全找回路线，留在可搜救位置。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "步行中发现路线不明、GPS/地图无法确认当前位置，或已经偏离计划路线。"
+      },
+      {
+        "title": "判断",
+        "text": "先问自己：是否能明确指出最后一个确定位置？是否有安全、短距离、确定的原路可退？若没有，就不要继续猜方向。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 停下，深呼吸，避免继续扩大偏差。\n2. 用地图、罗盘、GNSS和明显地标尝试定位。\n3. 只有在原路清晰且安全时短距离回退；否则留在安全、易发现地点。\n4. 发出求救信息，包含坐标、最后已知位置、人数、装备和健康状况。\n5. 保持干燥保温，准备显眼信号。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要沿未知溪谷或河流盲目下行；不要频繁改变方向；不要为了“找信号”在黑夜或恶劣天气继续冒险移动。"
+      },
+      {
+        "title": "升级处理",
+        "text": "存在悬崖、洪水、低温等即时危险时可移动到附近更安全位置，并留下明显方向标记。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已停止无目的移动\n□ 已尝试定位\n□ 已发送位置/状态\n□ 已建立可见信号"
+      }
+    ],
+    "sources": [
+      "NPS_LOST",
+      "NPS_LOST2"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "SUR002",
+    "category": "SUR",
+    "title": "出发前路线与回程计划",
+    "summary": "离开营地或道路前，把路线、回程时间、天气和撤退点写下来。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "徒步、搜寻水源、进入陌生区域前。"
+      },
+      {
+        "title": "判断",
+        "text": "如果没有地图/导航、没有明确回程时间、天气可能恶化或没人知道你的行程，风险明显增大。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 在地图上标出起点、目标、备用撤退点和不可进入区域。\n2. 记录预计出发/返回时间。\n3. 告知留守人员或在营地留下路线信息。\n4. 检查水、保温层、雨具、照明、通讯和急救包。\n5. 途中在岔路口确认位置，不等到迷路才看地图。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要只依赖手机信号；不要把最后电量全部用于娱乐或持续亮屏；不要在天气明显变坏时坚持原计划。"
+      },
+      {
+        "title": "升级处理",
+        "text": "超过预定回程时间、导航失效或天气快速恶化时及时撤回，不等到天黑。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 路线和撤退点已记录\n□ 有人知道行程\n□ 基础装备齐全\n□ 设定回程时间"
+      }
+    ],
+    "sources": [
+      "NPS_WILD",
+      "NPS_LOST2"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "SUR003",
+    "category": "SUR",
+    "title": "临时避护选址",
+    "summary": "避护点首先避开洪水、落石、枯树和强风，再考虑舒适。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "需要过夜、避雨、避风或等待救援。"
+      },
+      {
+        "title": "判断",
+        "text": "危险位置包括干涸河床/沟底、陡坡脚、落石带、悬崖边、孤立高点、明显枯树/断枝下方。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先观察头顶、坡上、排水方向和风向。\n2. 选略高、排水好、相对平坦、背风但不过度暴露的位置。\n3. 与水边保持足够距离，避免夜间涨水。\n4. 清除尖石和可能滚动物体。\n5. 先铺地面隔热层，再搭遮雨防风层。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在峡谷狭窄处、河床、松动崖壁下、孤立大树正下方搭营；雷暴时帐篷不是防雷设施。"
+      },
+      {
+        "title": "升级处理",
+        "text": "若天气预警、溪水突然浑浊上涨、落石增多或树木明显不稳，应立即换址。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 头顶无枯枝危险\n□ 不在低洼水道\n□ 地面可排水\n□ 有撤离路线"
+      }
+    ],
+    "sources": [
+      "NPS_WILD",
+      "NPS_FLASH",
+      "NPS_LIGHTNING"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR003-IMG01",
+        "caption": "避沟底枯树落石；选略高排水处"
+      }
+    ]
+  },
+  {
+    "id": "SUR004",
+    "category": "SUR",
+    "title": "防雨斜棚搭建",
+    "summary": "用防水布做低矮斜棚，优先挡风雨并减少热量损失。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "有防水布、绳索，需快速搭建单人或双人避雨处。"
+      },
+      {
+        "title": "判断",
+        "text": "斜棚应把低侧朝向主风雨方向，顶部绷紧，雨水能顺坡流走；地面不能成为积水点。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 选两处牢固支点拉一条主绳，或用树/杆作支撑。\n2. 防水布一边固定较高，另一边压低形成明显坡度。\n3. 四角拉紧并固定，避免积水形成水兜。\n4. 低侧朝风雨方向，入口背风。\n5. 布边外侧挖排水沟只在允许且必要时进行，优先选天然排水地形。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要把绳索横跨常用通道造成绊倒；不要把布搭在枯树、落石区；不要在雷暴高点依赖帐篷/斜棚避雷。"
+      },
+      {
+        "title": "升级处理",
+        "text": "强风下固定点持续滑移、布面撕裂或积水时，应降低高度、缩小迎风面或换址。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 布面有坡度无积水\n□ 固定点可靠\n□ 入口背风\n□ 通道无绊线"
+      }
+    ],
+    "sources": [
+      "NPS_WILD",
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR004-IMG01",
+        "caption": "拉稳主绳，固定下缘；迎风侧压低"
+      }
+    ]
+  },
+  {
+    "id": "SUR005",
+    "category": "SUR",
+    "title": "地面隔热与睡眠保温",
+    "summary": "冷夜里先隔绝地面导热，再增加上方保温；只加盖而不垫地常常不够。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "气温低、地面湿冷，需要休息或等待救援。"
+      },
+      {
+        "title": "判断",
+        "text": "若身体下方几乎没有隔热层，睡袋被压扁后保温能力大幅下降；湿衣和风会进一步增加失热。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先选干燥位置。\n2. 在身体下铺防潮层，再铺睡垫；无睡垫可用大量干燥、无尖刺植物材料装入袋/衣物形成厚层，使用后按当地规则处理。\n3. 换干衣，头颈保温。\n4. 睡袋/毯子外可加防风层，但必须保持呼吸通风。\n5. 夜间发现持续发抖或衣物变湿及时处理。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要直接睡在裸露冷地面；不要把完全不透气材料蒙住口鼻；不要把燃烧炉具放进封闭帐篷取暖。"
+      },
+      {
+        "title": "升级处理",
+        "text": "出现意识变慢、言语含糊或发抖停止时按失温处理并求救。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 身下有隔热层\n□ 衣物干燥\n□ 呼吸区通风\n□ 无炉具在密闭空间燃烧"
+      }
+    ],
+    "sources": [
+      "RC_HYPO",
+      "NPS_WILD"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR005-IMG01",
+        "caption": "先隔绝地面，再铺睡垫或保温层"
+      }
+    ]
+  },
+  {
+    "id": "SUR006",
+    "category": "SUR",
+    "title": "湿冷环境衣物管理",
+    "summary": "核心是保持贴身层干燥、及时换湿衣、用多层而不是一件厚湿衣。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "雨雪、涉水或大量出汗后仍需继续活动/等待。"
+      },
+      {
+        "title": "判断",
+        "text": "贴身层湿透、风大、停止活动后快速变冷，都是失温前兆。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 一旦进入安全处，优先换掉湿透贴身衣物。\n2. 多层穿着：贴身排汗层、保温层、外层防风雨。\n3. 活动时过热就提前减层，避免汗湿；停下前及时加层。\n4. 手套、袜子湿后尽快更换或晾干。\n5. 保持备用干衣密封在防水袋中。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要穿着湿衣长时间静坐；不要把唯一干衣用于擦地或其他用途；不要靠饮酒“取暖”。"
+      },
+      {
+        "title": "升级处理",
+        "text": "持续发抖、动作笨拙、意识异常时按MED009处理。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 至少保留一套干层\n□ 运动时不过热出汗\n□ 停下即加保温\n□ 湿袜/手套已处理"
+      }
+    ],
+    "sources": [
+      "RC_HYPO",
+      "NPS_WILD"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "SUR007",
+    "category": "SUR",
+    "title": "低温中保持热量",
+    "summary": "在安全前提下用避风、干燥、隔地和适量能量摄入减少失温风险。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "寒冷、风大、湿度高或必须长时间等待。"
+      },
+      {
+        "title": "判断",
+        "text": "发抖是明显警告；冷而不发抖但反应迟钝更危险。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先避风、避雨、隔绝地面。\n2. 保持核心躯干干燥和保温。\n3. 清醒、能吞咽者少量多次吃高能量食物和温热饮料。\n4. 轻度寒冷可适度活动产热，但避免出汗。\n5. 与同伴定时互相检查言语、动作和精神状态。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要让已明显失温的人剧烈运动；不要用酒精；不要在密闭空间使用燃烧炉具。"
+      },
+      {
+        "title": "升级处理",
+        "text": "出现混乱、步态不稳、停止发抖、嗜睡或呼吸异常时转MED009并求救。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已避风隔地\n□ 核心躯干干燥\n□ 有规律状态检查\n□ 未过度运动出汗"
+      }
+    ],
+    "sources": [
+      "RC_HYPO"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "SUR008",
+    "category": "SUR",
+    "title": "雷暴避险",
+    "summary": "听到雷声就立即寻找封闭建筑或硬顶车辆；户外没有真正安全的雷暴避难点。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "户外出现雷声、闪电、乌云迅速发展或强阵风。"
+      },
+      {
+        "title": "判断",
+        "text": "能听到雷声就已处于可被雷击范围。高点、孤立树、水边、金属设施和开阔地风险高。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 优先进入完整建筑或封闭硬顶车辆，并关窗。\n2. 无法到达时立即离开山脊、峰顶、开阔地、水体和孤立高物，向较低位置移动。\n3. 远离孤立大树、金属围栏和电力设施。\n4. 多人应分散，避免一次雷击伤及全组。\n5. 最后一次听到雷声后至少等待30分钟再恢复活动。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要躺平在地上；不要躲在孤立树下、浅洞/岩檐下或帐篷里当作安全避雷；不要继续水上活动。"
+      },
+      {
+        "title": "升级处理",
+        "text": "有人被雷击可安全触碰。无反应无正常呼吸时立即CPR/AED并求救。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已离开高点/水边\n□ 正向建筑或硬顶车移动\n□ 队伍已适当分散\n□ 记住30分钟规则"
+      }
+    ],
+    "sources": [
+      "NPS_LIGHTNING"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR008-IMG01",
+        "caption": "离开高点孤树；优先进建筑或车内"
+      }
+    ]
+  },
+  {
+    "id": "SUR009",
+    "category": "SUR",
+    "title": "山洪与峡谷涨水",
+    "summary": "峡谷、沟谷中一旦看到水色突变、漂浮物、流速或水位上升，立即向高处撤。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "狭窄峡谷、溪沟、干河床、暴雨天气或上游有雷暴时。"
+      },
+      {
+        "title": "判断",
+        "text": "危险信号：雷声、上游乌云、溪水突然浑浊、漂浮树枝增多、流速增强、水位快速上涨。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 进入峡谷前先看天气和上游汇水范围；有疑虑就不进入。\n2. 一旦出现危险信号，立即离开河道/沟底，向附近稳定高地上升。\n3. 不要沿河道试图“跑赢”洪峰。\n4. 夜间或能见度差时更保守，避免进入狭窄沟谷。\n5. 撤到高处后等待水位稳定并重新评估路线。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在干涸河床扎营；不要跨越明显上涨的急流；不要因为当地没下雨就忽视上游暴雨。"
+      },
+      {
+        "title": "升级处理",
+        "text": "水位快速上涨、退路被切断时立即求救，并继续向安全高处转移。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已离开沟底\n□ 位于稳定高地\n□ 没有尝试穿越洪水\n□ 已重新评估路线"
+      }
+    ],
+    "sources": [
+      "NPS_FLASH"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR009-IMG01",
+        "caption": "低洼涨水时立即向高处撤离"
+      }
+    ]
+  },
+  {
+    "id": "SUR010",
+    "category": "SUR",
+    "title": "河流涉渡决策",
+    "summary": "不确定就不下水；上涨、深、急、浑浊、冰冷或下游有危险的水优先绕行。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "徒步路线需要跨越无桥溪流或河流。"
+      },
+      {
+        "title": "判断",
+        "text": "危险：水位上涨、看不清河底、冰冷急流、下游有瀑布/急滩、单脚站立就被明显推移、没有安全退出点。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先寻找桥、浅滩或绕行路线。\n2. 观察至少几分钟确认水位没有上涨。\n3. 选择宽、浅、底部较平且下游无重大危险的位置。\n4. 若必须涉水且评估安全，解开背包腰带/胸带便于紧急脱包，使用杖探底，侧身缓慢移动。\n5. 感到失去稳定立即退回。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在洪水、夜间、冰冷急流或看不清河底时冒险涉渡；不要多人用绳索把自己绑成一串。"
+      },
+      {
+        "title": "升级处理",
+        "text": "无法确认安全、体力不足或水势变化时返回并寻找其他路线。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已寻找替代路线\n□ 水位稳定\n□ 下游无致命障碍\n□ 随时可退回"
+      }
+    ],
+    "sources": [
+      "NPS_FLASH",
+      "FT02_SAFE",
+      "NPS_RIVER"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR010-IMG01",
+        "caption": "优先绕行；涉渡只选宽浅稳定处"
+      }
+    ]
+  },
+  {
+    "id": "SUR011",
+    "category": "SUR",
+    "title": "陡坡与落石风险",
+    "summary": "尽量避开松动坡面、崖脚和碎石沟，队伍通过时拉开距离并减少落石。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "山坡、崖壁、碎石坡、雨后或冻融后的山地行进。"
+      },
+      {
+        "title": "判断",
+        "text": "新鲜碎石、坡上频繁小石滚落、裂缝、雨后松动、崖壁下堆积大量新碎屑都提示风险。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 优先选稳定路线绕开崖脚和落石沟。\n2. 必须短暂通过时一次一人、快速但不奔跑，通过后到有遮挡的位置等待。\n3. 队员之间不要上下重叠站位。\n4. 若无安全绕行，退回并改线。\n5. 休息和扎营远离崖脚、陡坡底。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要故意踢落石头；不要在落石沟内停留拍照/休息；不要在大雨或明显落石活动时硬闯。"
+      },
+      {
+        "title": "升级处理",
+        "text": "落石频率增加、路径被破坏或有人受伤时停止前进并求助。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已识别落石沟\n□ 通过时不重叠站位\n□ 营地远离崖脚\n□ 有备用路线"
+      }
+    ],
+    "sources": [
+      "NPS_WILD",
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "SUR012",
+    "category": "SUR",
+    "title": "夜间是否继续移动",
+    "summary": "除非留在原地更危险，否则迷路、受伤或地形复杂时优先停下等天亮。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "天黑后仍在陌生、陡峭、无明确路线区域。"
+      },
+      {
+        "title": "判断",
+        "text": "继续移动的主要风险是跌落、偏航和找不到返回点。只有火灾、洪水、极端低温等当前位置本身危险时才必须移动。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 评估当前位置是否有即时危险。\n2. 无即时危险时建立避风、保温、可见的等待点。\n3. 发送坐标和状态，节省照明与电量。\n4. 必须移动时只走已确认路线，降低速度，两人以上保持视线/语音联系。\n5. 每到岔路立即确认地图和方向。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在无照明情况下沿悬崖、溪谷或碎石坡摸黑赶路；不要因焦虑持续走到彻底失去定位。"
+      },
+      {
+        "title": "升级处理",
+        "text": "当前位置有洪水、火灾、落石或失温无法缓解时，向最近明确安全点移动并留下路线信息。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已判断留/走风险\n□ 有照明和导航\n□ 已发送坐标\n□ 不盲目赶路"
+      }
+    ],
+    "sources": [
+      "NPS_LOST",
+      "NPS_WILD"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "SUR013",
+    "category": "SUR",
+    "title": "地图+罗盘基础定向",
+    "summary": "先把地图北向与现实北向一致，再用明确地标确认位置，避免只凭一个方向判断。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "无可靠网络，需要用纸图/离线地图和磁罗盘确认路线。"
+      },
+      {
+        "title": "判断",
+        "text": "磁罗盘给的是磁北；地图通常以真北/网格北为参考。短距离基础导航可先用地图方向+多个地标交叉确认，精确长距离需考虑当地磁偏角。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 远离大块金属、电机和磁体再读罗盘。\n2. 把地图旋转，使地图北方向大致与罗盘北一致。\n3. 找两个以上可确认地标，如山峰、道路、河流转弯。\n4. 在地图上确认这些地标的相对方向是否一致。\n5. 只在位置判断一致后规划下一段短路线，并频繁复核。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在车辆、音箱、磁吸扣旁校准/读罗盘；不要仅凭单一地标或一次读数走很远。"
+      },
+      {
+        "title": "升级处理",
+        "text": "读数明显漂移或地图地形对不上时停止前进，重新校准/换位置复核。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 罗盘远离磁干扰\n□ 地图已定向\n□ 至少两个地标吻合\n□ 短段行进后再复核"
+      }
+    ],
+    "sources": [
+      "NPS_LOST",
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR013-IMG01",
+        "caption": "地图北向对准罗盘北向再判断路线"
+      }
+    ]
+  },
+  {
+    "id": "SUR014",
+    "category": "SUR",
+    "title": "路线标记与回撤",
+    "summary": "在复杂岔路记录关键点和回撤方向，减少“来时认识、回去陌生”。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "离开明显道路、进入树林/多岔路区域，或搜寻水源后需要原路返回。"
+      },
+      {
+        "title": "判断",
+        "text": "好的标记必须能从回程方向看见、不会误导他人、不会损害环境。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 每个关键岔路在FT-02记录坐标/文字备注。\n2. 允许的情况下使用可回收彩带或自然摆放但不破坏环境的临时标志。\n3. 标记时回头看一次，确认返程视角能识别。\n4. 记录最后一个确定点，不要连续走过多个未确认岔路。\n5. 回撤后清除临时人工标记。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要刻树、喷漆或留下永久垃圾；不要在公共路线设置容易误导他人的箭头。"
+      },
+      {
+        "title": "升级处理",
+        "text": "如果标记与导航互相矛盾，停下重新定位，不继续猜。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 关键岔路有坐标\n□ 回程视角可识别\n□ 标记可回收\n□ 最后确定点明确"
+      }
+    ],
+    "sources": [
+      "NPS_LOST2",
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "SUR015",
+    "category": "SUR",
+    "title": "搜救信号设置",
+    "summary": "信号要显眼、重复、可长期保持；三次一组的重复信号可用于求救。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "迷路、受伤或无法继续移动，需要让地面/空中搜救更容易发现。"
+      },
+      {
+        "title": "判断",
+        "text": "选择开阔但安全的位置；颜色/反光与背景反差越大越好。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 在开阔地摆放大面积高对比物，如亮色防水布/衣物。\n2. 有阳光时用信号镜/反光物扫向可见飞机或远处人员。\n3. 哨声、灯光等可使用“三次一组”这种常见求救节律，并留间隔听回应；若当地/队伍有既定信号标准，以既定标准为准。\n4. 夜间使用间歇灯光而不是一直亮，兼顾电量。\n5. 在营地和受伤者附近留下明显定位标志。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要为了信号跑到悬崖、山顶雷暴区等危险位置；不要用可能引发野火的信号火。"
+      },
+      {
+        "title": "升级处理",
+        "text": "发现搜救人员/航空器后保持原地并用清晰、可重复动作回应。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 信号与背景反差明显\n□ 求救节律清楚可重复\n□ 未制造新危险\n□ 节省电量"
+      }
+    ],
+    "sources": [
+      "NPS_LOST",
+      "NPS_LOST2"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR015-IMG01",
+        "caption": "哨声、反光、醒目标志重复发送"
+      }
+    ]
+  },
+  {
+    "id": "SUR016",
+    "category": "SUR",
+    "title": "紧急通讯信息模板",
+    "summary": "一次消息尽量包含位置、人数、伤情、环境和需求，减少来回询问。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "通过LoRa、短信、卫星设备或无线电求救。"
+      },
+      {
+        "title": "判断",
+        "text": "最有价值的信息依次是：你在哪里、发生什么、几个人、是否有伤、还能否移动、有哪些危险。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先发：GPS坐标/地图地名+最后已知位置。\n2. 再发：人数、主要伤情、意识/呼吸、是否有大出血。\n3. 发：环境危险，如洪水、雷暴、火灾、低温。\n4. 发：装备和可移动能力。\n5. 最后写计划：原地等待/向某点移动，并注明下次联络时间。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要只发“救命”不发位置；不要连续重复长消息耗电；不要在计划移动后忘记更新坐标。"
+      },
+      {
+        "title": "升级处理",
+        "text": "有人伤情快速恶化时优先发送新状态和准确位置。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 坐标明确\n□ 人数伤情明确\n□ 当前计划明确\n□ 约定下次联络时间"
+      }
+    ],
+    "sources": [
+      "NPS_WILD",
+      "NPS_LOST2"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "SUR017",
+    "category": "SUR",
+    "title": "野外水源选择",
+    "summary": "优先选择可处理的流动水/雨水，但任何天然水都应视为可能带病原体。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "储水不足，需要从自然环境补水。"
+      },
+      {
+        "title": "判断",
+        "text": "清澈不代表安全。避开有油膜、化学气味、矿区/工业污染、动物尸体、污水排放或洪水污染的水。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 有瓶装/已知安全水优先。\n2. 天然水中优先选择上游污染源少、流动且较清的水，但仍必须处理。\n3. 浑水先沉淀或用干净布预滤去颗粒。\n4. 再按SUR018煮沸，或按SUR019过滤+消毒。\n5. 取水点与厕所/排泄点分开。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要直接喝“看起来很清”的山溪；含燃油、毒化学品、放射性污染的水不能靠煮沸或普通消毒变安全。"
+      },
+      {
+        "title": "升级处理",
+        "text": "只有疑似化学污染水源时应放弃该水源，寻找其他来源。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 无明显化学污染迹象\n□ 已计划处理\n□ 取水点远离排泄污染\n□ 容器干净"
+      }
+    ],
+    "sources": [
+      "CDC_HIKE_WATER",
+      "CDC_WATER"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR017-IMG01",
+        "caption": "优先流动清水；避开污染和死水"
+      }
+    ]
+  },
+  {
+    "id": "SUR018",
+    "category": "SUR",
+    "title": "煮沸饮水",
+    "summary": "煮沸是野外去除水中病原体最可靠的基础方法之一。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "天然水、供水中断或怀疑微生物污染，且有容器和安全热源。"
+      },
+      {
+        "title": "判断",
+        "text": "燃油/化学品污染不能通过煮沸解决。浑水应先沉淀或预滤。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 浑水先静置取上清液或用干净布过滤。\n2. 把水加热到持续翻滚沸腾。\n3. 海拔不高于约2000米（CDC原值6500英尺）时滚沸1分钟；高于约2000米时滚沸3分钟。\n4. 自然冷却，不要加入未经处理的冰/水。\n5. 装入干净、有盖容器。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要把煮沸当作化学污染处理；不要在密闭帐篷里用燃烧炉具煮水；不要用不耐热容器直接加热。"
+      },
+      {
+        "title": "升级处理",
+        "text": "出现燃油味、化学异味或已知有毒污染时停止使用该水源。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已滚沸足够时间\n□ 未混入生水\n□ 容器干净有盖\n□ 热源使用安全"
+      }
+    ],
+    "sources": [
+      "CDC_WATER",
+      "CDC_HIKE_WATER"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR018-IMG01",
+        "caption": "持续翻滚沸腾后，装入干净容器"
+      }
+    ]
+  },
+  {
+    "id": "SUR019",
+    "category": "SUR",
+    "title": "过滤后消毒饮水",
+    "summary": "无法煮沸时，优先“过滤+按产品说明消毒”，因为单纯过滤未必去除病毒。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "有合格便携滤水器和消毒剂，但无法安全煮水。"
+      },
+      {
+        "title": "判断",
+        "text": "查看滤芯标称能力；很多徒步滤水器主要去除原虫/部分细菌，不保证去除病毒。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 浑水先预滤减少泥沙。\n2. 用合格滤水器按说明过滤。\n3. 再用正规水消毒片/二氧化氯等按标签剂量和等待时间处理。\n4. 清洁水端与原水端分开，避免软管/瓶口交叉污染。\n5. 滤芯到寿命或冻坏后按说明更换。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要猜测消毒剂剂量；不要把原水瓶口碰到净水口；不要依赖普通布滤除病原体。"
+      },
+      {
+        "title": "升级处理",
+        "text": "疑似化学污染时放弃该水源；滤芯损坏或无法确认处理效果时优先煮沸。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 先过滤后消毒\n□ 严格按标签剂量\n□ 原水/净水端分开\n□ 无化学污染疑虑"
+      }
+    ],
+    "sources": [
+      "CDC_HIKE_WATER"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR019-IMG01",
+        "caption": "浑水先预滤，再可靠消毒"
+      }
+    ]
+  },
+  {
+    "id": "SUR020",
+    "category": "SUR",
+    "title": "野外排泄与水源卫生",
+    "summary": "厕所缺失时，把排泄点与水体、营地和取水点分开，减少疾病传播。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "偏远地区无厕所，需要处理人类排泄物。"
+      },
+      {
+        "title": "判断",
+        "text": "当地法规/公园规则优先；某些区域要求全部带走。若允许掩埋，必须远离水体。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 优先使用厕所或携带式废物袋。\n2. 若当地允许掩埋，选择距湖泊/河流/泉水、营地和食物处理区至少约60米（200英尺）的地点。\n3. 挖约20厘米（8英寸）深的小坑排便并覆土；厕纸按当地规定带走或处理。\n4. 处理后优先用肥皂和安全水洗手；无条件且手没有明显泥污/油污时可暂用≥60%酒精免洗手液，并在有条件时尽快正规洗手。\n5. 取水与做饭器具避免接触排泄区域。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要直接在水体中排便；不要把排泄物留在地表；不要在营地中央、取水点附近处理。"
+      },
+      {
+        "title": "升级处理",
+        "text": "多人出现腹泻/呕吐时加强隔离、手卫生和饮水处理。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 距水源/营地/食物区约60米以上（当地规则优先）\n□ 按当地规则处理\n□ 已清洁双手\n□ 未污染取水区"
+      }
+    ],
+    "sources": [
+      "CDC_HIKE_WATER",
+      "CDC_HYGIENE",
+      "CDC_OUTDOOR_SAN"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR020-IMG01",
+        "caption": "排泄点远离水源；事后清洁双手"
+      }
+    ]
+  },
+  {
+    "id": "SUR021",
+    "category": "SUR",
+    "title": "是否生火的判断",
+    "summary": "有禁火令、强风、极干环境或无法彻底熄灭时，不生火；炉具通常更可控。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "需要取暖、煮水或做饭，正在考虑点开放火。"
+      },
+      {
+        "title": "判断",
+        "text": "先看当地禁火规定、风速、地面干燥程度、周围可燃物和可用灭火水量。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 有任何禁火/炉具限制时严格遵守。\n2. 高火险或强风时原则上不生开放火；只有当地规则明确允许时，才使用有可靠关断装置的合规炉具，并放在稳定、无可燃物的位置。\n3. 允许生火时优先使用既有火圈，周围清理可燃物并准备足量水和铲具。\n4. 火堆只做需要的大小，全程有人看守。\n5. 离开前按SUR022彻底熄灭。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在帐篷内、干草地、低垂树枝下生火；不要用汽油等高挥发燃料泼火；不要无人看守。"
+      },
+      {
+        "title": "升级处理",
+        "text": "风突然增大、火星持续飞散或无法控制时立即灭火。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已确认当地规则\n□ 水和灭火工具在手\n□ 周围无可燃物\n□ 全程有人看守"
+      }
+    ],
+    "sources": [
+      "NPS_FIRE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR021-IMG01",
+        "caption": "清理火区可燃物；远离帐篷装备"
+      }
+    ]
+  },
+  {
+    "id": "SUR022",
+    "category": "SUR",
+    "title": "彻底熄灭营火",
+    "summary": "离开前必须做到灰烬和木炭冷到可触摸：浇水、搅拌、摸温、重复。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "任何被允许使用的木火/炭火准备离开或睡觉前。"
+      },
+      {
+        "title": "判断",
+        "text": "表面无火焰不代表安全，白灰下仍可能有高温余烬。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 停止添柴，让大块木材尽量烧小。\n2. 用足量水浇透所有余烬、木炭和火圈边缘。\n3. 用棍/铲彻底搅拌，翻出下层热炭，再次浇水。\n4. 反复搅拌和浇水。\n5. 用手背靠近检查温度，直到所有残余完全冷却才离开。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要只盖土不浇水；不要把热炭埋进干土；不要在仍有热感时离开。"
+      },
+      {
+        "title": "升级处理",
+        "text": "如果无法彻底冷却，就不能离开火点无人看守。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 无烟无火星\n□ 所有灰炭已浸湿\n□ 翻动后仍冷\n□ 冷到可触摸"
+      }
+    ],
+    "sources": [
+      "NPS_FIRE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR022-IMG01",
+        "caption": "浇水、搅拌、再浇水，确认全冷"
+      }
+    ]
+  },
+  {
+    "id": "SUR023",
+    "category": "SUR",
+    "title": "终端与通讯电量管理",
+    "summary": "把电量优先给定位、求救和定时联络，不持续亮屏或无目的扫描。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "离线野外环境，FT-02/无线设备电量有限且无法快速补充。"
+      },
+      {
+        "title": "判断",
+        "text": "先估算剩余电量、是否有太阳能/备用电池、下一次必须联络的时间。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 记录当前电量和最低保留线。\n2. 降低屏幕刷新和非必要功能使用频率。\n3. GNSS/地图只做任务需要的定位和记录，已确定安全营地后减少无目的反复操作。\n4. 在任务/网络协议允许时按约定时段集中主动收发；必须持续在线的网络则保留接收能力，消息尽量短且包含完整坐标与状态。\n5. 太阳能充电优先在白天稳定放置，保持面板无遮挡，保护设备免受雨水和过热。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要为了寻找弱信号持续高功率发射；不要把电池耗到完全关机才开始节电；不要在高温暴晒下给异常发热电池充电。"
+      },
+      {
+        "title": "升级处理",
+        "text": "剩余电量不足以覆盖下一次必要联络时立即进入最低功耗策略并通知同伴。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已设最低保留电量\n□ 联络有固定时段\n□ 消息短而完整\n□ 非必要耗电已关闭"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "SUR024",
+    "category": "SUR",
+    "title": "暴雨大风临时应对",
+    "summary": "在天气恶化前降低暴露、远离枯树和洪水通道，并提前加固或撤离。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "强风、暴雨、冰雹或快速发展的雷暴来临。"
+      },
+      {
+        "title": "判断",
+        "text": "观察风向突变、树冠剧烈摆动、排水沟快速积水、帐篷拉点松动和雷声。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 提前穿好防雨层并把保温层保持干燥。\n2. 从山脊、开阔地、枯树和排水沟撤到更安全位置。\n3. 加固防水布/帐篷，降低迎风面；把松散物品收好。\n4. 背包、电子设备和干衣放入防水袋。\n5. 保持鞋袜尽量干燥，暴雨结束后立即处理湿衣。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在雷暴中躲孤立树、浅洞或帐篷当防雷；不要在涨水沟谷里加固营地而不撤离。"
+      },
+      {
+        "title": "升级处理",
+        "text": "雷暴按SUR008；水位上涨按SUR009；结构无法保持稳定时撤离营地。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已离开高点/水道\n□ 干衣电子设备防水\n□ 结构迎风面已降低\n□ 有撤离路线"
+      }
+    ],
+    "sources": [
+      "NPS_LIGHTNING",
+      "NPS_FLASH",
+      "NPS_WILD"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "SUR024-IMG01",
+        "caption": "降低迎风面，加密锚点和拉绳"
+      }
+    ]
+  },
+  {
+    "id": "SUR025",
+    "category": "SUR",
+    "title": "何时停止任务并撤离",
+    "summary": "出现天气、伤病、导航或装备任一关键失控时，及时撤退比继续完成目标更重要。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "徒步、搜寻、维修或采集过程中犹豫是否继续。"
+      },
+      {
+        "title": "判断",
+        "text": "四类停止信号：位置无法确认；天气窗口关闭；人员出现持续伤病/失温；关键装备失效且无可靠备份。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 停下列出现了哪些停止信号。\n2. 比较最近安全点与目标距离，不使用“已经走这么远了”作为继续理由。\n3. 趁仍有体力、光照和天气窗口时回撤。\n4. 更新团队和通讯端的撤离计划、路线和预计到达时间。\n5. 途中只处理维持安全所需任务。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要因为沉没成本、面子或计划表坚持前进；不要等到天黑、电量耗尽、伤情恶化才撤。"
+      },
+      {
+        "title": "升级处理",
+        "text": "若回撤路线本身已不安全，停止移动并转入求救/避护模式。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 停止信号已识别\n□ 安全点明确\n□ 趁条件尚可撤离\n□ 已更新联络计划"
+      }
+    ],
+    "sources": [
+      "NPS_WILD",
+      "NPS_LOST2"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "REP001",
+    "category": "REP",
+    "title": "电子设备进水后的处理",
+    "summary": "先断电、擦干、拆除可拆电源，完全干燥前不要反复通电测试。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "FT-02、无线电、移动电源或其他低压电子设备进水/淋湿。"
+      },
+      {
+        "title": "判断",
+        "text": "盐水、泥水、饮料比清水风险更高；设备若仍发热、冒烟或电池异常，优先远离可燃物。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 立即关机并断开充电线、外接电源。\n2. 能安全拆下的电池/模块按设计拆下；不可拆则保持关机。\n3. 擦去外部水分，打开允许开启的舱盖促进通风。\n4. 污水/盐水进入裸露电路时，若你懂设备维护，可在断电状态用适合电子设备的清洁方式处理污染；否则不要盲目冲洗主板。\n5. 放在干燥通风处充分干燥后再检查。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要边充电边烘干；不要用高温火烤/热风枪猛吹电池；不要反复开机“看看好了没”；不要把湿设备密封进袋中长期放置。"
+      },
+      {
+        "title": "升级处理",
+        "text": "出现电池鼓胀、异味、异常发热、冒烟时按REP002处理，不再通电。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已彻底断电\n□ 外部积水已去除\n□ 干燥前未通电\n□ 电池无异常"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "REP002",
+    "category": "REP",
+    "title": "锂电池鼓胀/发热/破损",
+    "summary": "鼓胀、破损或异常发热的锂电池停止使用；若出现冒烟/嘶嘶声/快速升温，先撤离人员而不是搬运电池。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "锂聚合物/锂离子电池出现鼓胀、裂口、刺穿、异味、异常发热、冒烟。"
+      },
+      {
+        "title": "判断",
+        "text": "物理膨胀、裂口/刺穿、刺激性异味、异常持续升温、嘶嘶声、冒烟均视为危险；鼓胀本身就表示电池已受损，不应继续使用或充电。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 电池仅鼓胀/损坏但仍冷却稳定时，能安全做到才停止充电、关机并断开外接电源；不要挤压、弯折或拆刺电芯。\n2. 若电池快速升温、嘶嘶作响、冒烟或起火，不要抱着设备穿过人员/可燃物区域；立即让人员远离并呼叫消防/当地紧急服务。\n3. 冷却稳定且无即时火灾风险后，按制造商/当地危险废物机构指导临时存放在远离可燃物的安全位置。\n4. 搬运去处置前按当地规则隔离端子，使用不导电胶带或独立绝缘包装；先确认接收点接受“损坏/缺陷锂电池”。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要刺穿、压平、折弯、再次充电或继续使用；不要把损坏电池放入口袋/背包与金属物混放；不要丢入普通垃圾、普通路边回收或一般电池回收箱；不要把正在异常升温/冒烟的电池拿在手里搬运。"
+      },
+      {
+        "title": "升级处理",
+        "text": "快速升温、嘶嘶声、冒烟、起火、刺激性烟气或无法安全隔离时立即撤离并求助；损坏/召回电池不得按普通完好电池处理。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已停止使用/充电\n□ 异常升温或冒烟时人员已撤离\n□ 稳定后端子已防短路\n□ 已联系可接收损坏锂电池的合规渠道"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE",
+      "EPA_LIION_2026",
+      "FAA_LIION"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "REP003",
+    "category": "REP",
+    "title": "USB接口接触不良",
+    "summary": "先排除线材和电源，再检查接口脏污、松动和机械损伤，不强行掰针脚。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "USB-C/USB接口时充时断、需要特定角度才连接、无法识别设备。"
+      },
+      {
+        "title": "判断",
+        "text": "若接口发热、焦味、明显烧黑或外壳松脱，停止使用，不再靠晃动维持供电。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 断开电源。\n2. 换一根已知正常线和已知正常电源测试。\n3. 用光查看接口是否有绒毛、泥沙、弯针或液体。\n4. 仅在断电状态，用非金属工具轻除松散绒毛；不要刮触点。\n5. 插头应能完全插入且不需侧向用力。\n6. 接口本体松动时停止频繁插拔，转为维修。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用针、刀片等金属物在带电接口里抠；不要把接口掰回形状；不要在发热或烧焦状态继续充电。"
+      },
+      {
+        "title": "升级处理",
+        "text": "换线/电源仍故障、接口松脱、发热或焦痕时需要焊接/板级维修。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已换线排除\n□ 已换电源排除\n□ 接口无异物/水\n□ 无异常发热"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "REP004",
+    "category": "REP",
+    "title": "导线断裂的临时连接",
+    "summary": "低压导线临时修复要先断电、确认极性，再做牢靠机械连接和绝缘。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "低压直流设备线缆在中段断裂，且你能确认线的功能与极性。"
+      },
+      {
+        "title": "判断",
+        "text": "若不清楚导线用途、涉及市电/高压、线束多芯颜色不可靠或电池短路风险高，不做临时连接。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 彻底断电。\n2. 标记两端每根导线对应关系，不凭颜色猜功能。\n3. 剥出少量完整铜线，去掉氧化/烧黑部分。\n4. 用可靠接线端子或绞接形成机械牢固连接；有条件再焊接。\n5. 每根导线单独绝缘，再做外层应力释放，避免拉力直接作用于接头。\n6. 通电前用万用表检查短路和极性。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要带电剥线；不要只拧一下再用一圈胶带悬空承力；不要把不同功能线靠颜色直接对接。"
+      },
+      {
+        "title": "升级处理",
+        "text": "发现绝缘大面积融化、短路烧焦或无法确认极性时停止，改换整根线。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已断电\n□ 对应关系确认\n□ 单线独立绝缘\n□ 通电前已查短路"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP004-IMG01",
+        "caption": "低压线先机械连接，再绝缘并试拉"
+      }
+    ]
+  },
+  {
+    "id": "REP005",
+    "category": "REP",
+    "title": "无焊接条件的接线",
+    "summary": "优先使用螺钉端子、压接或可靠机械绞接，目标是低电阻且不受拉。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "野外没有烙铁，需要恢复低压导线连续性。"
+      },
+      {
+        "title": "判断",
+        "text": "适合信号线和低压小电流线；大电流供电线必须更谨慎，接头发热即停止。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 断电并剥出干净铜线。\n2. 有接线端子优先使用，确保铜线完全夹紧且无散丝外露。\n3. 只能绞接时，两端铜线充分交叠并紧密绞合，轻拉确认不松；只用于低压、小电流临时用途。\n4. 每个接头单独绝缘，错开多根接头位置减少短路机会。\n5. 用扎带/胶带做应力释放。\n6. 短时、低负载通电检查；先观察/测温或用手背靠近感受异常热量，明显升温立即断电，不直接捏住接头。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用于市电；不要让裸铜外露；不要让接头承担悬挂重量；不要在潮湿状态通电。"
+      },
+      {
+        "title": "升级处理",
+        "text": "接头明显发热、变色或间歇断电时停止使用，重新制作或更换线束。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 接头拉不松\n□ 无裸铜\n□ 有应力释放\n□ 通电后不发热"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP005-IMG01",
+        "caption": "仅限低压；机械接触后绝缘并卸力"
+      }
+    ]
+  },
+  {
+    "id": "REP006",
+    "category": "REP",
+    "title": "焊接导线修复",
+    "summary": "小型低压线焊接应先形成机械连接，再快速焊透并做绝缘和应力释放。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "有烙铁、电源和基本焊接经验，需要修复低压导线。"
+      },
+      {
+        "title": "判断",
+        "text": "电池线、大电流线、靠近锂电池本体的焊接风险更高；不熟悉时不要直接在电池极耳操作。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 断电并把热缩管先套在线上。\n2. 剥线、绞合并固定，避免焊接时移动。\n3. 烙铁清洁上锡，快速加热接头让焊锡浸润铜线，不堆大焊球。\n4. 冷却后轻拉检查。\n5. 热缩或绝缘，再在接头两侧增加应力释放。\n6. 通电前测短路/极性。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要焊市电裸线；不要长时间加热电池端子；不要用酸性焊剂残留在电子线束上。"
+      },
+      {
+        "title": "升级处理",
+        "text": "焊点灰白松动、轻拉即动、导线绝缘被大面积烫化时重新制作。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 焊点已冷却牢固\n□ 无裸露\n□ 极性正确\n□ 有应力释放"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP006-IMG01",
+        "caption": "机械搭接后焊接，再热缩绝缘"
+      }
+    ]
+  },
+  {
+    "id": "REP007",
+    "category": "REP",
+    "title": "线缆应力释放",
+    "summary": "接头附近最容易再次断裂，应让拉力落在外皮和固定点，而不是焊点。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "修过的电源线、USB线、天线线或传感器线经常被拉动。"
+      },
+      {
+        "title": "判断",
+        "text": "如果接头一弯就直接折到焊点/裸铜处，说明缺少应力释放。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 在接头外做完整绝缘。\n2. 用热缩管、编织套或胶带把硬接头到柔软线材的过渡拉长。\n3. 在线缆进入外壳前做扎带固定或压线夹。\n4. 保留适当弯曲余量，不拉得笔直。\n5. 高频弯折位置避免形成尖锐折角。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用胶带把裸线直接粘在外壳上当固定；不要把扎带勒到切伤线皮。"
+      },
+      {
+        "title": "升级处理",
+        "text": "若线材内部已多处断股或外皮老化开裂，换整线比继续补更可靠。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 拉力不落在接头\n□ 有弯曲余量\n□ 固定不割伤线皮\n□ 接头绝缘完整"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP007-IMG01",
+        "caption": "连接点不承拉力，另设固定点卸力"
+      }
+    ]
+  },
+  {
+    "id": "REP008",
+    "category": "REP",
+    "title": "螺丝松动与滑牙",
+    "summary": "先判断是螺丝松、螺纹坏还是塑料柱裂，再选择复紧、加垫或更换，不盲目拧更紧。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "外壳、支架、PCB固定螺丝松动或反复松脱。"
+      },
+      {
+        "title": "判断",
+        "text": "如果螺丝一直空转、塑料柱有裂纹、金属螺纹掉屑，继续拧只会扩大损坏。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 断电并卸除受力部件。\n2. 检查螺丝、螺纹孔和固定柱是否完整。\n3. 螺纹正常时清洁后适度复紧；需要防松时使用适合材料的防松方式。\n4. 塑料件避免过度扭矩，可加平垫分散压力。\n5. 滑牙或柱裂时先临时改用贯穿螺栓/螺母等可靠机械方案，空间允许才做。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用更大力矩硬拧滑牙螺丝；不要在不知道背面是否有PCB、电池、线束时钻孔或换更长螺丝；不要让金属屑留在电子设备内部。"
+      },
+      {
+        "title": "升级处理",
+        "text": "关键承力点滑牙、PCB固定失效或壳体裂纹继续扩展时应正式修复/更换。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已确认损坏类型\n□ 无过度扭矩\n□ 固定后无晃动\n□ 无金属屑残留"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "REP009",
+    "category": "REP",
+    "title": "塑料外壳裂纹临时加固",
+    "summary": "停止裂纹继续扩展比把表面粘平更重要，可用跨裂纹机械加固。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "ABS/PETG/PLA等打印外壳或塑料件出现裂纹，但关键电子部分仍完整。"
+      },
+      {
+        "title": "判断",
+        "text": "裂纹若位于铰链、螺丝柱、提手等受力点，单纯胶水通常不够。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 卸掉该部位载荷并断电。\n2. 清洁、干燥裂纹周围。\n3. 临时用强胶带从两侧跨裂纹贴合，并延伸到完整区域。\n4. 有条件用小夹板/薄片跨裂纹两侧机械固定，分散应力。\n5. 后续正式修复时重做加强筋或更换件。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要让胶水流入按键、接口、散热孔；不要在裂纹仍承受拉力时直接粘；不要依赖脆性胶水修复高载荷提手。"
+      },
+      {
+        "title": "升级处理",
+        "text": "裂纹靠近电池、屏幕玻璃或导致内部件移动时停止携带使用并正式维修。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已卸载应力\n□ 加固跨过裂纹两侧\n□ 不影响接口/散热\n□ 内部件不再晃动"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP009-IMG01",
+        "caption": "裂纹外跨补片，分散受力防扩展"
+      }
+    ]
+  },
+  {
+    "id": "REP010",
+    "category": "REP",
+    "title": "布料破口修补",
+    "summary": "先阻止裂口扩大，再缝合或贴补片；高受力区域用补片覆盖完整布料。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "帐篷、背包、衣物出现撕裂。"
+      },
+      {
+        "title": "判断",
+        "text": "若只是小直裂可直接缝；靠近背带、拉点、拉链等高受力位置需要更大补片。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 清洁并擦干区域。\n2. 临时修补：布基胶带从两面贴住，边缘压实。\n3. 永久缝补：用结实线沿裂口两侧完整布料缝合，针距均匀不过密。\n4. 高受力处加一块圆角补片，覆盖裂口四周完整区域。\n5. 防水布修后按材料需要重新做防水封边。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在湿泥表面直接贴胶带；不要把针脚密到把薄布变成“撕裂虚线”；不要只缝已经毛糙的裂边。"
+      },
+      {
+        "title": "升级处理",
+        "text": "主承力背带、帐篷主拉点损坏时减少负荷并尽快正式修复。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 裂口不再扩展\n□ 补片跨到完整布\n□ 高受力处已减载\n□ 防水层已检查"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP010-IMG01",
+        "caption": "补片覆盖破口四周，沿边连续固定"
+      }
+    ]
+  },
+  {
+    "id": "REP011",
+    "category": "REP",
+    "title": "背包肩带/腰带临时修复",
+    "summary": "背带断裂时先减重，再用跨越大面积的绑扎/缝补恢复承力。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "背包肩带、腰带与包体连接处撕裂。"
+      },
+      {
+        "title": "判断",
+        "text": "如果只剩少量布丝相连，不要继续满载；需要把力分散到包体更大区域。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先取出重物或重新分配重量。\n2. 保留原织带，不剪短。\n3. 用结实绳带穿过包体可靠环点，做临时辅助肩带/腰带。\n4. 能缝补时用多排回针/箱形加交叉方式把织带固定到完整布面。\n5. 先低负荷试背，再逐步加重。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要只在撕裂边缘缝一条线；不要让细绳直接勒肩承受全部重量；不要满载测试。"
+      },
+      {
+        "title": "升级处理",
+        "text": "两侧肩带都失效、包体继续撕裂时改用搬运袋/分装而不是继续硬背。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已减重\n□ 受力分散到完整区域\n□ 低负荷测试通过\n□ 无继续撕裂"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP011-IMG01",
+        "caption": "补片跨过肩带断口，固定在完整织带"
+      }
+    ]
+  },
+  {
+    "id": "REP012",
+    "category": "REP",
+    "title": "鞋底脱胶与鞋面开裂",
+    "summary": "临时目标是保持鞋底不翻卷、脚部干燥并避免形成新的摩擦伤。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "鞋底前端脱胶、侧边开裂或鞋面破口。"
+      },
+      {
+        "title": "判断",
+        "text": "若鞋底完全断裂、鞋底结构粉化或鞋底钉刺穿，不应只靠胶带长距离继续。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 清除泥沙并尽量干燥。\n2. 脱胶较小时用适合鞋材胶粘并压紧到固化；现场没有固化时间时，用结实胶带从鞋底边缘绕过鞋面做临时绑带。\n3. 绑带避开脚背血管压迫点，不要勒麻。\n4. 鞋面破口可从内外双面贴补，减少进砂。\n5. 重新穿着后走短距离检查磨脚点。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要把胶水涂到脚皮；不要把绳索勒紧到脚麻/发紫；不要让松脱鞋底形成绊倒风险。"
+      },
+      {
+        "title": "升级处理",
+        "text": "脚部出现麻木、水疱快速加重或鞋底无法稳定时停止长距离行进。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 鞋底不会翻卷\n□ 无过紧绑带\n□ 砂石不大量进入\n□ 已短程试走"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP012-IMG01",
+        "caption": "清洁干燥后压紧鞋底，避开脚底绑扎"
+      }
+    ]
+  },
+  {
+    "id": "REP013",
+    "category": "REP",
+    "title": "卡住或失效的拉链",
+    "summary": "先清理异物和减小张力，再处理拉头，不强拉导致齿链永久损坏。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "背包、帐篷、衣物拉链卡住或闭合后自动分开。"
+      },
+      {
+        "title": "判断",
+        "text": "先看是否夹布、泥沙、齿链弯曲；若拉头明显张开，可能是夹持力不足。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 停止猛拉，把拉头退回无张力位置。\n2. 清除夹住的布线、砂粒和泥土。\n3. 用少量蜡/专用拉链润滑剂润滑干净齿链。\n4. 闭合后分开的拉链，可在有工具和经验时非常轻微地夹紧拉头两侧；一次只调一点。\n5. 完全坏掉时用安全别针/绳扣临时封闭。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用钳子一次夹得过紧；不要在帐篷门承受大拉力时修；不要用食用油大量润滑吸附灰尘。"
+      },
+      {
+        "title": "升级处理",
+        "text": "齿链缺齿、布带撕裂或拉头断裂时应更换零件。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 异物已清除\n□ 张力已释放\n□ 拉链能顺畅移动\n□ 临时封闭可靠"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP013-IMG01",
+        "caption": "清除卡物对齐齿列，再缓慢拉动"
+      }
+    ]
+  },
+  {
+    "id": "REP014",
+    "category": "REP",
+    "title": "绳索磨损检查",
+    "summary": "承力绳出现割伤、熔伤、明显扁化或芯层外露时应降级或报废。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "营绳、捆扎绳、牵引绳长期使用后检查。"
+      },
+      {
+        "title": "判断",
+        "text": "危险迹象：局部割痕、毛羽成束、化学污染、熔融硬点、明显直径变细、内芯可见。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 从一端到另一端用手摸和目视检查。\n2. 标记可疑点，轻微表面毛羽可继续用于低风险捆扎，但不用于人员生命安全。\n3. 有明显切伤/熔伤/芯层损伤的绳段剪除或整绳报废。\n4. 打结处定期换位置，避免长期在同一点折弯。\n5. 清洁干燥后避光储存。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要把未知历史、严重老化的绳用于攀爬/悬吊人；不要用烧熔方式“修复”承力损伤。"
+      },
+      {
+        "title": "升级处理",
+        "text": "涉及人员承重、安全保护时必须使用符合用途、状态可确认的专业绳具。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已全长检查\n□ 损伤点已标记\n□ 高风险用途不使用可疑绳\n□ 干燥储存"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP014-IMG01",
+        "caption": "磨毛割伤硬化绳索，不用于关键受力"
+      }
+    ]
+  },
+  {
+    "id": "REP015",
+    "category": "REP",
+    "title": "刀具刃口现场维护",
+    "summary": "轻度钝化用稳定角度磨削和去毛刺即可；缺口/卷刃严重时不要急于大磨。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "户外刀、剪、斧的小刃口变钝但结构完好。"
+      },
+      {
+        "title": "判断",
+        "text": "若刀柄松动、刀身裂纹、刃口大缺口，先停止使用而不是只磨锋利。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 固定身体和磨具，刃口始终朝远离身体方向。\n2. 用已有刃角作为参考，轻压沿整个刃口均匀磨削。\n3. 两侧交替，直到形成均匀小毛刺，再用更细磨面轻轻去毛刺。\n4. 擦净金属粉并薄涂防锈油（食品接触工具用合适产品）。\n5. 收纳前确保刀鞘完整。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要边走边磨；不要用膝盖作砧板；不要把大缺口磨成极薄刃；不要测试锋利时用手指横划刃口。"
+      },
+      {
+        "title": "升级处理",
+        "text": "刀柄松动、刀身裂纹、锁定机构失效时停止使用。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 磨削方向远离身体\n□ 两侧均匀\n□ 已去毛刺\n□ 刀柄/锁定正常"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP015-IMG01",
+        "caption": "保持小角度均匀磨削，避免刃口过薄"
+      }
+    ]
+  },
+  {
+    "id": "REP016",
+    "category": "REP",
+    "title": "金属锈蚀与接点腐蚀",
+    "summary": "先断电、去除松散腐蚀物、彻底干燥，再判断是否需要更换。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "工具、螺钉、接插件或裸露金属受潮生锈/发绿。"
+      },
+      {
+        "title": "判断",
+        "text": "电子接点发黑、发绿且接触不稳，或金属已经明显变薄/起层，不是简单擦一下就可靠。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 断电并拆开可拆部件。\n2. 干刷/擦去松散污物；电子接点用适合电气接点的清洁剂按说明处理。\n3. 完全干燥后检查是否有坑蚀、断裂、镀层脱落。\n4. 工具表面轻锈可机械清除并做防锈保护。\n5. 关键接点严重腐蚀时更换连接器或端子。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要带电喷清洁剂；不要用砂纸猛烈磨掉精密连接器镀层；不要把导电粉尘留在电路中。"
+      },
+      {
+        "title": "升级处理",
+        "text": "腐蚀已造成发热、间歇断电或结构变薄时应更换。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已断电\n□ 腐蚀物已清理\n□ 已彻底干燥\n□ 关键接点可靠"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "REP017",
+    "category": "REP",
+    "title": "太阳能充电不工作的排查",
+    "summary": "按“光照→面板→线缆→管理板→电池”顺序排查，不先拆设备。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "太阳能板连接后无充电、充电时断时续或功率明显偏低。"
+      },
+      {
+        "title": "判断",
+        "text": "阴影、面板角度、接头松动、输入电压不足、电池已满/过热都可能让充电看似停止。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 把面板移到无遮挡直射光，表面擦净并按面板安装方式朝向太阳。\n2. 检查插头是否插到底、线缆是否破损。\n3. 有万用表时设在合适的直流电压档，先在断开负载状态测面板输出电压，再测接入管理板后的输入；不要把电流档直接并到面板两端。\n4. 查看管理板指示/状态，确认电池温度和电压处于允许范围。\n5. 换已知正常线缆或面板逐项排除。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要短路太阳能板输出；不要把万用表电流档直接跨接电源两端；不要绕过充电管理板直接给锂电池充电；不要给鼓胀/过热电池继续充电。"
+      },
+      {
+        "title": "升级处理",
+        "text": "输入正常但管理板无输出、板件异常发热或有焦味时停止使用并维修。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 光照无遮挡\n□ 线缆可靠\n□ 输入输出分段测过\n□ 电池状态正常"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "REP018",
+    "category": "REP",
+    "title": "LoRa/GNSS天线连接检查",
+    "summary": "信号突然变差时先检查天线、转接线和接头机械状态，发射设备不要无天线长时间工作。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "LoRa距离明显下降、GNSS搜星异常，设备近期有跌落或拆装。"
+      },
+      {
+        "title": "判断",
+        "text": "接头松、同轴线被夹折、天线底座裂开、连接器中心针损坏都可能导致信号问题。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 关闭射频设备或停止发射。\n2. 检查天线型号/频段是否正确且安装到正确接口。\n3. 检查连接器是否完全咬合，无歪斜和松动。\n4. 沿同轴线检查是否有锐角折弯、压扁、外皮破损。\n5. 换已知正常天线/转接线做对比测试。\n6. GNSS天线保持朝天、远离大块金属遮挡。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用钳子过度拧紧小型RF连接器；不要频繁折弯细同轴线；LoRa发射时不要故意断开天线。"
+      },
+      {
+        "title": "升级处理",
+        "text": "更换天线/线缆后仍无改善，需检查板端连接器和射频电路。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 频段/接口正确\n□ 接头完全连接\n□ 同轴无压伤\n□ 已做替换对比"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP018-IMG01",
+        "caption": "接头正对插到底，禁止斜插硬扭"
+      }
+    ]
+  },
+  {
+    "id": "REP019",
+    "category": "REP",
+    "title": "SD卡读取异常排查",
+    "summary": "先确认供电和卡是否可靠插入，再做冷启动、换卡和文件系统检查，不反复热拔。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "FT-02显示SD未就绪、文件读错或突然丢卡。"
+      },
+      {
+        "title": "判断",
+        "text": "若设备热重启后SD异常但彻底断电再上电恢复，可能与外部电源轨未复位有关；若换卡也失败则检查硬件。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 停止正在写入的日志，安全关机/断电。\n2. 重新插紧SD卡，检查触点是否脏污。\n3. 彻底断电数秒后冷启动。\n4. 仍失败时用已知正常、兼容格式的SD卡测试。\n5. 在电脑上备份后检查文件系统错误和剩余空间。\n6. 若只有某张卡失败，优先更换卡而不是反复修复。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在正在写日志时拔卡；不要把重要数据只留一份；不要在电压不稳时频繁格式化。"
+      },
+      {
+        "title": "升级处理",
+        "text": "多张正常卡都无法挂载、卡槽松动或触点损坏时需硬件维修。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已冷启动\n□ 卡可靠插入\n□ 已换卡对比\n□ 重要数据有备份"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "REP020",
+    "category": "REP",
+    "title": "现场故障排查顺序",
+    "summary": "按“供电→连接→配置→替换→部件”排查，避免同时改多个变量。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "任何设备突然不工作但没有明显烧毁迹象。"
+      },
+      {
+        "title": "判断",
+        "text": "最常见问题往往是供电、线缆、接头、配置或单个可替换件，而不是同时多个模块坏。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 记录故障现象和故障前最后一次改动。\n2. 检查电源电压、开关、保险和电池状态。\n3. 检查所有相关插头/线缆/接地。\n4. 恢复到最后已知正常配置，不同时改多个参数。\n5. 用已知正常的线、模块或电源逐一替换对比。\n6. 每次只改变一个条件并记录结果。\n7. 明确故障边界后再拆板。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要一上来重刷固件、重焊全部接头；不要在原因不明时绕过保护电路；不要一次改多个变量。"
+      },
+      {
+        "title": "升级处理",
+        "text": "出现短路、冒烟、焦味、异常高温时先断电，不继续排查通电状态。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 故障前改动已记录\n□ 电源先确认\n□ 每次只改一个变量\n□ 已缩小故障范围"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "CMP001",
+    "category": "CMP",
+    "title": "营地选址安全检查",
+    "summary": "睡前先排除水、树、坡、火和动物五类风险。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "准备建立半日以上营地或过夜点。"
+      },
+      {
+        "title": "判断",
+        "text": "检查：是否在洪水通道；头顶有无枯枝；坡上有无落石；火源是否安全；食物气味是否会引来动物。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 绕营地走一圈，从上坡、下坡和头顶看危险。\n2. 把睡眠区放在排水较好且无枯树风险处。\n3. 烹饪/火区与睡眠区分开，遵守当地规则。\n4. 食物和有气味物品按当地野生动物要求存放。\n5. 明确夜间撤离方向。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在干河床、崖脚、枯树下、孤立高点搭营；不要让火源紧贴帐篷。"
+      },
+      {
+        "title": "升级处理",
+        "text": "发现水位、风、树木或动物活动风险增加时及时换营地。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 水/树/坡/火/动物均检查\n□ 有撤离方向\n□ 睡眠区安全\n□ 食物管理符合当地要求"
+      }
+    ],
+    "sources": [
+      "NPS_WILD",
+      "NPS_FLASH",
+      "NPS_FIRE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "CMP001-IMG01",
+        "caption": "睡眠火区食品分开，避低洼枯树"
+      }
+    ]
+  },
+  {
+    "id": "CMP002",
+    "category": "CMP",
+    "title": "营地区域分区",
+    "summary": "把睡眠、做饭、火源、卫生和设备区分开，减少交叉风险。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "多人营地或需要过夜。"
+      },
+      {
+        "title": "判断",
+        "text": "如果做饭、厕所、火、睡眠全部挤在一起，火灾、食物污染和动物风险都会增加。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 睡眠区选最安全干燥位置。\n2. 烹饪/火源区置于合规、通风且远离帐篷和干植被的位置。\n3. 取水和净水容器分开标识。\n4. 卫生/排泄区按当地规则远离水源和营地。\n5. 设备充电区保持干燥、避免脚踩和绊线。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在帐篷内燃烧炉具；不要把原水容器和净水容器混用；不要让充电线穿过主要通道。"
+      },
+      {
+        "title": "升级处理",
+        "text": "空间不足时宁可缩小营地，也不要牺牲火源/卫生安全间距。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 五个功能区明确\n□ 通道无绊线\n□ 生熟/原净水分开\n□ 火源远离睡眠区"
+      }
+    ],
+    "sources": [
+      "CDC_HYGIENE",
+      "NPS_FIRE",
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "CMP002-IMG01",
+        "caption": "分开睡眠火源食品区，留撤离通道"
+      }
+    ]
+  },
+  {
+    "id": "CMP003",
+    "category": "CMP",
+    "title": "无伤害外围声响报警",
+    "summary": "用可见、非绊线式的铃铛/空罐增加营地接近感知，不制造捕捉或伤害结构。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "夜间希望增加营地入口/装备区的接近感知，但不设置任何会绊倒、勒住或伤害人/动物的装置。"
+      },
+      {
+        "title": "判断",
+        "text": "报警目标只是“触碰后发声”。优先把发声件挂在入口帘、明显标志杆、装备袋或可控门口，不把细线横跨人员/动物可能经过的路径。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 选入口、食物储存区或重要装备附近的明显固定点。\n2. 把铃铛、空罐串等发声件挂在固定点/门帘/装备袋上，让移动或触碰时能发声。\n3. 若使用短绳，只连接固定点与发声件，不横跨通道；用亮色材料让队员能看见。\n4. 夜间前全员确认哪些位置会发声以及安全通道。\n5. 白天或离营时全部撤除。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要设置隐藏绊线、套索、尖刺、刀片、捕兽夹、重物坠落、电击或任何致伤/捕捉结构；不要让绳线跨公共路径、帐篷出口或颈部高度。"
+      },
+      {
+        "title": "升级处理",
+        "text": "若需要隐藏线、强拉力或捕捉结构才能“有效”，就停止该方案；改用值守、灯光、商业传感器或调整营地位置。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 只产生声音/提醒\n□ 无横跨通道的隐藏绳线\n□ 无致伤或捕捉部件\n□ 离营可完全撤除"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "CMP003-IMG01",
+        "caption": "报警线避开通道，只发声不绊人"
+      }
+    ]
+  },
+  {
+    "id": "CMP004",
+    "category": "CMP",
+    "title": "夜间值守交接",
+    "summary": "多人营地用短班次和固定检查项，避免一个人熬到失去判断力。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "环境存在动物、天气、火源或设备安全风险，需要夜间观察。"
+      },
+      {
+        "title": "判断",
+        "text": "值守目标是早发现异常，不是主动追踪未知人员/动物。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 设定固定班次和交接时间。\n2. 每班检查天气、水位/风、火源是否熄灭、外围报警、通讯状态。\n3. 发现异常先叫醒同伴，再决定撤离或处理。\n4. 交接时说明未解决的问题和设备位置。\n5. 值守者保持保暖和照明，避免独自离营地太远。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要单人追逐动物或陌生声音；不要值守时饮酒；不要让火堆无人看守。"
+      },
+      {
+        "title": "升级处理",
+        "text": "连续出现大型动物、洪水、强风或人身安全威胁时优先全员撤到更安全位置。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 班次明确\n□ 检查项固定\n□ 异常先叫醒同伴\n□ 交接完整"
+      }
+    ],
+    "sources": [
+      "NPS_WILD",
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "CMP005",
+    "category": "CMP",
+    "title": "食物与气味物品管理",
+    "summary": "食物、垃圾、牙膏等气味物应按当地野生动物规则存放，避免放在睡眠区。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "野外过夜、有野生动物活动的区域。"
+      },
+      {
+        "title": "判断",
+        "text": "不同地区对熊罐、悬挂、车内存放规定不同，以当地官方要求为准。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 把食物、垃圾、烹饪残留和有香味洗漱用品集中管理。\n2. 使用当地规定的防动物容器/储存方式。\n3. 烹饪后清理锅具和食物残渣，不在帐篷里存放。\n4. 夜间检查包装是否完整、垃圾是否封闭。\n5. 离营时所有垃圾带走。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要把食物藏在睡袋、帐篷或衣袋里；不要用“喂一点让它走”的方式处理野生动物。"
+      },
+      {
+        "title": "升级处理",
+        "text": "大型动物反复靠近营地时，按当地野生动物指导撤离/求助。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 气味物集中\n□ 符合当地存放规则\n□ 睡眠区无食物\n□ 垃圾全部封闭"
+      }
+    ],
+    "sources": [
+      "NPS_WILD",
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "CMP006",
+    "category": "CMP",
+    "title": "动物接近时减少冲突",
+    "summary": "先保持距离、给动物退路并遵循当地物种指引，不主动靠近拍照。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "营地附近出现大型或行为异常的野生动物。"
+      },
+      {
+        "title": "判断",
+        "text": "物种不同应对不同，尤其熊、山狮等必须参考当地管理部门规则；通用原则是保持距离和不喂食。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 召集同伴和儿童，不让人分散。\n2. 停止靠近，给动物明显退路。\n3. 收好食物和垃圾，不用食物引开。\n4. 缓慢离开冲突区域，不追赶动物。\n5. 记录位置并提醒其他队员。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要奔跑追逐、投喂、围堵或试图触摸幼兽；不要把通用规则替代当地针对具体物种的官方指导。"
+      },
+      {
+        "title": "升级处理",
+        "text": "动物表现攻击、跟随、进入帐篷/食物区或疑似狂犬病异常行为时撤离并联系当地管理/救援机构。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 队员已集中\n□ 保持距离\n□ 无投喂\n□ 已按当地物种规则处理"
+      }
+    ],
+    "sources": [
+      "NPS_WILD"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "CMP007",
+    "category": "CMP",
+    "title": "强风前营地加固",
+    "summary": "大风前降低结构高度、减少迎风面、收起松散物，不要等帐篷开始倒才处理。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "预报或现场出现强风、阵风。"
+      },
+      {
+        "title": "判断",
+        "text": "拉绳持续震动、帐篷杆明显弯曲、树冠大幅摆动提示需要提前处理。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先检查周围枯树和断枝，必要时换营地。\n2. 按帐篷/庇护所本身的设计，把较小、较低的迎风面朝主风向；不要机械套用“入口一定朝哪边”。\n3. 重新拉紧主拉绳，固定点尽量分散受力。\n4. 收起桌布、袋子、轻工具等飞散物。\n5. 重要装备放低并压稳，撤离路线保持畅通。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在枯树下加固帐篷；不要用身体硬撑即将断裂的杆件；不要把拉绳横在主通道。"
+      },
+      {
+        "title": "升级处理",
+        "text": "结构持续失稳、树木危险或风力继续增强时撤到更安全位置。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 无枯树风险\n□ 迎风面已降低\n□ 松散物收好\n□ 撤离通道畅通"
+      }
+    ],
+    "sources": [
+      "NPS_WILD",
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "CMP007-IMG01",
+        "caption": "降低迎风面，补充锚点并检查拉绳"
+      }
+    ]
+  },
+  {
+    "id": "CMP008",
+    "category": "CMP",
+    "title": "枯树与落枝检查",
+    "summary": "搭营前抬头看死枝、倾斜树和根部松动，风雨后重新检查。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "树林中休息、搭帐篷或停车。"
+      },
+      {
+        "title": "判断",
+        "text": "无叶枯枝、裂开的主枝、蘑菇腐朽、树干明显倾斜、根盘抬起都可能是危险信号。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 从不同角度观察营地上方树冠。\n2. 不在明显枯树、断枝或倾斜树下停留。\n3. 大风、暴雨、冻融后重新检查。\n4. 帐篷和坐卧区不要放在可能倒伏方向。\n5. 夜间听到持续断裂声或树木倾倒声立即撤离。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要因为“树很大能挡雨”就忽略死枝；不要攀爬危险树去拆枝。"
+      },
+      {
+        "title": "升级处理",
+        "text": "无法判断树体稳定性时换到更开阔安全位置。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 上方无死枝\n□ 根部稳定\n□ 风雨后已复查\n□ 有快速撤离方向"
+      }
+    ],
+    "sources": [
+      "NPS_WILD"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "CMP008-IMG01",
+        "caption": "检查头顶枯枝裂干，发现风险换址"
+      }
+    ]
+  },
+  {
+    "id": "CMP009",
+    "category": "CMP",
+    "title": "营地紧急撤离",
+    "summary": "预先把关键装备分成“带走”和“可放弃”，发生洪水、火灾等时不因收拾物品拖延。",
+    "priority": 1,
+    "quick_access": true,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "洪水、野火、落石、强风、治安或医疗事件要求快速离开营地。"
+      },
+      {
+        "title": "判断",
+        "text": "撤离优先级：人→急救/通讯/水→保温→导航→其他装备。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 睡前把鞋、衣物、灯、FT-02、急救包放在固定易取位置。\n2. 明确两条离营方向和集合点。\n3. 发生紧急情况先点名人员，再拿核心包。\n4. 不回头收拾低价值物品。\n5. 到安全点后重新点名、检查伤情并更新坐标。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要为了帐篷、炊具等物品延误撤离；不要让队员各自跑不同方向。"
+      },
+      {
+        "title": "升级处理",
+        "text": "人员失联、有人受伤或撤离路线被切断时立即切换到求救模式。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 核心包可一把带走\n□ 两条撤离方向明确\n□ 有集合点\n□ 安全点重新点名"
+      }
+    ],
+    "sources": [
+      "NPS_FLASH",
+      "NPS_FIRE",
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "CMP009-IMG01",
+        "caption": "预先定撤离方向，通道保持无障碍"
+      }
+    ]
+  },
+  {
+    "id": "CMP010",
+    "category": "CMP",
+    "title": "离营关闭检查",
+    "summary": "离开前把火、垃圾、食物、临时绳线和电子设备逐项清零。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "短时离营或彻底撤营。"
+      },
+      {
+        "title": "判断",
+        "text": "最容易遗漏的是余烬、食物气味、细绳和正在充电的电池。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 火堆按SUR022彻底冷却。\n2. 所有垃圾、食物残渣和临时标记带走。\n3. 拆除外围报警线和可能绊人的拉绳。\n4. 关闭炉具、充电器和不需要的设备。\n5. 最后一人沿营地外围走一圈复查。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要留下“看起来熄了”的热灰；不要把胶带、细线、金属片留在环境中。"
+      },
+      {
+        "title": "升级处理",
+        "text": "发现任何余温、燃料泄漏或动物已翻动食物时先处理再离开。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 火冷到可触摸\n□ 无垃圾/食物残留\n□ 临时装置已拆\n□ 电源已关闭"
+      }
+    ],
+    "sources": [
+      "NPS_FIRE",
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "TOL001",
+    "category": "TOL",
+    "title": "平结：同粗绳捆扎",
+    "summary": "平结适合低风险包扎/捆束，不作为两根绳的可靠连接结，更不用于人员承重。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "绑包裹、固定卷起布料、收束绷带等两端围绕同一物体的低风险捆束场景。"
+      },
+      {
+        "title": "判断",
+        "text": "口诀是“右压左，再左压右”，成结后两侧绳端应平行贴着主绳。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 两根绳端交叉，右端压过左端并穿回。\n2. 再反向：原左端压过原右端并穿回。\n3. 拉紧四个方向，检查结体对称且两个绳尾分别贴着对应主绳。\n4. 绳尾保留足够长度。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要把平结当作两根绳的可靠连接结；不要用于攀爬、吊人、救援生命线；在很滑绳材上容易滑脱；不要把“奶奶结”误当平结。"
+      },
+      {
+        "title": "升级处理",
+        "text": "关键承重场景换用经过认证的装备和合适专业绳结。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 结体对称\n□ 绳尾与主绳平行\n□ 只用于低风险捆扎\n□ 绳尾长度足够"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE",
+      "KNOT_SQUARE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL001-IMG01",
+        "caption": "第1步：A压过B，先做第一次交叉"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL001-IMG02",
+        "caption": "第2步：A从B下方穿回，拉成半结"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL001-IMG03",
+        "caption": "第3步：反向交叉，这次B压过A"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL001-IMG04",
+        "caption": "第4步：四端拉紧；绳尾应平行"
+      }
+    ]
+  },
+  {
+    "id": "TOL002",
+    "category": "TOL",
+    "title": "称人结：固定绳圈",
+    "summary": "称人结可形成不自行收紧的固定绳圈，适合一般固定，不作为未训练者的生命保护结。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "做固定环、套住柱体或非生命安全的牵引点。"
+      },
+      {
+        "title": "判断",
+        "text": "正确结体中，工作端绕主绳后回穿原小圈，受力后绳圈大小基本不变。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 在主绳上做一个小圈。\n2. 工作端从小圈下方穿出。\n3. 绕过主绳背面。\n4. 再从原小圈穿回。\n5. 拉紧主绳和绳圈，整理结体并保留足够绳尾。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要仅凭这张卡用于攀岩保护、垂降或吊人；滑绳/高动态载荷需要专业备份和训练。"
+      },
+      {
+        "title": "升级处理",
+        "text": "结体无法一眼确认、绳尾太短或绳材严重磨损时不用。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 绳圈固定不收紧\n□ 工作端回穿正确\n□ 绳尾充分\n□ 非生命安全用途"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE",
+      "KNOT_BOWLINE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL002-IMG01",
+        "caption": "第1步：主绳做小圈，留出工作端A"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL002-IMG02",
+        "caption": "第2步：A从小圈下方穿到上方"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL002-IMG03",
+        "caption": "第3步：A绕到主绳S的背后"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL002-IMG04",
+        "caption": "第4步：A再穿回最初的小圈"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL002-IMG05",
+        "caption": "第5步：整理并拉紧，得到固定绳圈"
+      }
+    ]
+  },
+  {
+    "id": "TOL003",
+    "category": "TOL",
+    "title": "双套结：快速临时固定",
+    "summary": "双套结适合把绳快速固定到杆上，负载方向反复变化时应加备份。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "搭棚、临时固定拉绳、绑到圆杆。"
+      },
+      {
+        "title": "判断",
+        "text": "双套结由两个同方向绳圈交叠形成，受持续单向拉力时较稳。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 绳绕杆一圈并交叉。\n2. 再绕第二圈。\n3. 工作端从第二圈下穿出。\n4. 拉紧并整理两个交叉圈。\n5. 长时间或方向变化大时用半结/止结做备份。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要把它当作单独的生命安全保护结；在光滑杆、频繁松载场景可能滑动。"
+      },
+      {
+        "title": "升级处理",
+        "text": "固定点必须可靠，若杆件本身会滑/断，换支点。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 两圈方向正确\n□ 结体贴紧杆件\n□ 需要时有备份\n□ 支点可靠"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE",
+      "KNOT_CLOVE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL003-IMG01",
+        "caption": "第1步：工作端A绕杆一整圈"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL003-IMG02",
+        "caption": "第2步：跨过主绳，再绕杆一圈"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL003-IMG03",
+        "caption": "第3步：A从最后交叉处下方穿出"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL003-IMG04",
+        "caption": "第4步：两端拉紧，结体贴住杆件"
+      }
+    ]
+  },
+  {
+    "id": "TOL004",
+    "category": "TOL",
+    "title": "卡车结：拉紧营绳",
+    "summary": "卡车结利用简易滑轮效应拉紧绳线，适合防水布和捆扎。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "需要把一条营绳拉紧到固定点。"
+      },
+      {
+        "title": "判断",
+        "text": "需要一个主绳中间的小环和末端绕过固定点形成回拉。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 在主绳中段折出一个绳耳，用单结把绳耳固定成一个小环；此环只用于营绳等低风险用途。\n2. 工作端绕过远端固定点，再穿回这个小环。\n3. 拉工作端形成机械增力，把营绳拉到需要的张力。\n4. 保持张力，把工作端在主绳上连续做两个半结锁住。\n5. 检查固定点、布料和小环都没有明显变形或滑移。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要过度拉紧导致帐篷环、树枝或塑料布撕裂；不要用于吊人、救援或其他生命安全负载；不要在无法确认结体时继续加力。"
+      },
+      {
+        "title": "升级处理",
+        "text": "风大时定期复查，拉点开始变形立即减张力。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 张力足够但不过大\n□ 锁结完成\n□ 支点未变形\n□ 无绊脚位置"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE",
+      "KNOT_TRUCKER"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL004-IMG01",
+        "caption": "第1步：主绳中段先做一个固定小环"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL004-IMG02",
+        "caption": "第2步：工作端A绕过远端锚点"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL004-IMG03",
+        "caption": "第3步：A穿回主绳上的小环"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL004-IMG04",
+        "caption": "第4步：拉A收紧，产生增力效果"
+      },
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL004-IMG05",
+        "caption": "第5步：保持张力，用两个半结锁住"
+      }
+    ]
+  },
+  {
+    "id": "TOL005",
+    "category": "TOL",
+    "title": "三脚架绑扎",
+    "summary": "三根杆用绑扎形成可张开的三脚架，适合晾晒、支撑轻型装备。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "有三根长度相近的直杆和绳，需要做轻型稳定支架。"
+      },
+      {
+        "title": "判断",
+        "text": "杆件应无腐朽裂纹，三脚展开后重心必须落在三角支撑面内。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 三根杆平行摆放，上端对齐并留少量间隙。\n2. 绳在三杆之间连续缠绕多圈。\n3. 再在杆间做数圈收紧绕线，压紧原缠绕。\n4. 打止结后竖起，张开三脚形成稳定三角形。\n5. 先轻载测试再使用。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用腐朽/裂杆；不要把轻型三脚架用于吊人；火上悬锅时需用耐热材料并防倾倒。"
+      },
+      {
+        "title": "升级处理",
+        "text": "支架晃动、绑扎滑移或杆件裂响时立即卸载。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 三脚形成稳定三角\n□ 绑扎不滑\n□ 已轻载测试\n□ 载荷用途合适"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL005-IMG01",
+        "caption": "图解：三脚架绑扎"
+      }
+    ]
+  },
+  {
+    "id": "TOL006",
+    "category": "TOL",
+    "title": "简易地面锚点",
+    "summary": "软土里用长桩低角度受力，沙地/雪地可用埋设横木增加面积。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "帐篷拉绳在普通地钉抓力不足。"
+      },
+      {
+        "title": "判断",
+        "text": "不同土壤、地钉形状和拉力方向差异很大；关键是锚点在逐步加载时不移动、不翻转，且拉绳方向不会把桩轻易拔出。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 普通土：使用足够长且适合土质的地钉/桩，按拉绳方向和地钉设计打入，让桩的主要受力面抵住完整土体；不要执着固定角度。\n2. 软沙/雪：可横向埋入结实木棍或适合的“死锚”，绳从中部引出后充分压实回填。\n3. 从小张力开始逐步加载，观察锚点是否移动或土体开裂。\n4. 强风时增加多个独立锚点分担，并持续复查。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要使用尖锐金属在地下管线未知区域猛打；不要依赖腐朽树枝；不要把锚点放在容易绊人的通道。"
+      },
+      {
+        "title": "升级处理",
+        "text": "锚点开始拔出、土体开裂或暴雨软化时降低张力并换位。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 受力方向合理\n□ 已逐步加载测试\n□ 无绊脚风险\n□ 强风有冗余"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL006-IMG01",
+        "caption": "图解：地面锚点"
+      }
+    ]
+  },
+  {
+    "id": "TOL007",
+    "category": "TOL",
+    "title": "布料预滤器",
+    "summary": "布料只能去除大颗粒，不能把生水变成可直接饮用的安全水。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "天然水较浑，需要在煮沸或过滤消毒前去除泥沙。"
+      },
+      {
+        "title": "判断",
+        "text": "预滤后的水仍可能含细菌、病毒和寄生虫。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 使用尽量干净、致密的布折叠多层。\n2. 把布固定在容器口，缓慢倒水。\n3. 水太浑时先静置沉淀，再取上层水预滤。\n4. 预滤后必须继续煮沸或按可靠方法过滤+消毒。\n5. 处理净水时换干净器具，避免回污染。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要把“看起来清”当安全；不要用预滤替代煮沸/消毒；不要用接触过粪便或化学品的布。"
+      },
+      {
+        "title": "升级处理",
+        "text": "怀疑化学/燃油污染时整套方法无效，应换水源。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 大颗粒已减少\n□ 后续仍会消毒\n□ 净水器具干净\n□ 无化学污染疑虑"
+      }
+    ],
+    "sources": [
+      "CDC_HIKE_WATER",
+      "CDC_WATER"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL007-IMG01",
+        "caption": "图解：布料预滤"
+      }
+    ]
+  },
+  {
+    "id": "TOL008",
+    "category": "TOL",
+    "title": "简易搬运杆",
+    "summary": "用结实长杆分担不规则物品重量，只运装备，不作为未经训练的伤员担架。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "需要搬运水袋、木料、装备，单人手提不方便。"
+      },
+      {
+        "title": "判断",
+        "text": "杆必须无明显裂纹、腐朽和尖刺，挂点靠近重心且不易滑。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 选直、结实、表面平滑的杆。\n2. 用两点以上绑扎把物品固定，防止左右摆动。\n3. 先抬离地几厘米检查杆弯曲和绳结。\n4. 两人抬时统一口令起落，步幅小。\n5. 转弯和上下坡时减速。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用未知强度杆搬人；不要把尖端朝向队员；不要把重物挂得过高导致翻转。"
+      },
+      {
+        "title": "升级处理",
+        "text": "杆明显弯曲、裂响或绑扎滑动时立即放下减载。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 杆件完整\n□ 物品不摆动\n□ 已低位试载\n□ 起落有口令"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL008-IMG01",
+        "caption": "图解：双人搬运杆"
+      }
+    ]
+  },
+  {
+    "id": "TOL009",
+    "category": "TOL",
+    "title": "简易夹板式固定夹",
+    "summary": "两片硬板+软垫+绑带可临时夹住裂开的非人体部件。",
+    "priority": 3,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "工具柄、外壳、支架等断裂，需要临时恢复形状。"
+      },
+      {
+        "title": "判断",
+        "text": "适用于静态低载荷结构；旋转件、高温件、电气裸露件不适合。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 停止使用并清理断裂面周围。\n2. 在断口两侧放两片比裂纹长的硬板。\n3. 中间加薄软垫防止局部压伤。\n4. 用绳带分多点均匀绑紧。\n5. 低载荷测试，观察是否滑移。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要夹住电池导致挤压；不要夹在旋转/高温部件上；不要用过度绑紧代替真正结构强度。"
+      },
+      {
+        "title": "升级处理",
+        "text": "承力件持续开裂或夹板移动时停止使用并换件。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 夹板跨过断口\n□ 多点均匀受力\n□ 不压电池/线束\n□ 已低载测试"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL009-IMG01",
+        "caption": "图解：夹板式固定夹"
+      }
+    ]
+  },
+  {
+    "id": "TOL010",
+    "category": "TOL",
+    "title": "防水布集雨",
+    "summary": "干净防水布可收集雨水，但收集面和容器要清洁，饮用前仍按环境风险处理。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "降雨期间需要补充非化学污染的水。"
+      },
+      {
+        "title": "判断",
+        "text": "屋面/布面若有油污、农药、鸟粪等污染，不适合作饮用水收集面。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 选择干净、无明显化学污染的防水布。\n2. 开始下雨后先让最初一段雨水冲洗收集面；冲洗量应根据布面灰尘、鸟粪等污染程度判断，不按固定分钟数。\n3. 布面做斜坡，把最低点导向干净容器。\n4. 防止容器接触泥地和脏手，原水与净水容器分开。\n5. 野外无法确认卫生条件时，饮用前仍按SUR018/SUR019处理。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要从沥青、化学涂层或有明显鸟粪的表面直接收集饮用水；不要把收集容器和原水容器混用。"
+      },
+      {
+        "title": "升级处理",
+        "text": "发现异味、油膜或异常颜色时不用作饮水。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 收集面干净\n□ 容器干净\n□ 无化学污染迹象\n□ 饮用前按需处理"
+      }
+    ],
+    "sources": [
+      "CDC_WATER"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "TOL010-IMG01",
+        "caption": "图解：防水布集雨"
+      }
+    ]
+  },
+  {
+    "id": "FOD001",
+    "category": "FOD",
+    "title": "食物安全优先级",
+    "summary": "野外缺粮时先保护现有安全食物，不用高风险未知植物/蘑菇“试吃”。",
+    "priority": 1,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "食物储备减少，需要决定吃什么和如何分配。"
+      },
+      {
+        "title": "判断",
+        "text": "最安全优先级：已知完好包装食物→明确来源且保存良好的食物→可靠识别且本地明确可食资源。未知蘑菇/植物风险高。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 盘点所有食物的数量、热量大致水平和保质状态。\n2. 优先吃已开封、易腐但仍安全的食物，再保存耐储食品。\n3. 高活动时保持规律进食，避免一次性吃光高能量食物。\n4. 对无法可靠识别的野生植物、蘑菇、种子不食用。\n5. 保持饮水安全优先于寻找冒险食物。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用“动物吃了所以人能吃”“少量试毒”等方法判断安全；不要食用未知蘑菇。"
+      },
+      {
+        "title": "升级处理",
+        "text": "出现长期食物短缺时应调整活动量、求救/撤离，而不是扩大高风险采食。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已盘点食物\n□ 易腐先处理\n□ 未食未知野物\n□ 饮水安全优先"
+      }
+    ],
+    "sources": [
+      "CDC_FOOD",
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "FOD002",
+    "category": "FOD",
+    "title": "断电后的易腐食物判断",
+    "summary": "冷藏失效后按时间和温度判断，不靠闻味或试吃确认安全。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "冰箱/冷藏箱因停电或故障失去冷源。"
+      },
+      {
+        "title": "判断",
+        "text": "冰箱门保持关闭时，冷藏食物通常最多可安全保持约4小时；冷冻食品若仍有冰晶或温度≤约4°C，可按官方指引再冷冻/烹调。无法确认温度且已完全解冻变暖的易腐食品按高风险处理。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 尽量保持冰箱/冷冻箱关闭，减少升温。\n2. 记录断电开始时间。\n3. 冰箱失去电力/冷源满约4小时后，肉、鱼、禽、蛋、奶、剩菜等冷藏易腐食品应丢弃。\n4. 冷冻食品仍有冰晶或测得≤约4°C时，可按当地官方食品安全表决定再冷冻或烹调；已经完全解冻且明显升温的易腐食品不要冒险保留。\n5. 罐头/干粮另行检查包装完整性。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要靠闻味或尝一口判断；不要把已经温热很久的易腐食物重新冷藏后当作安全；不确定断电时间/温度时宁可丢弃高风险易腐食品。"
+      },
+      {
+        "title": "升级处理",
+        "text": "食用后出现持续呕吐、腹泻、血便、严重腹痛或脱水按MED027/MED013处理。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已记录断电时间\n□ 易腐食品已分类\n□ 不靠味道试吃\n□ 高风险食物已丢弃"
+      }
+    ],
+    "sources": [
+      "CDC_FOOD",
+      "CDC_POWER_FOOD"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  },
+  {
+    "id": "FOD003",
+    "category": "FOD",
+    "title": "罐头与包装食品检查",
+    "summary": "鼓包、渗漏、严重锈蚀、破损或异常喷液的罐头/包装直接丢弃。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "长期储备食品、受潮或灾后食品检查。"
+      },
+      {
+        "title": "判断",
+        "text": "危险包装：罐体膨胀、渗漏、深度锈蚀、接缝破坏、异常喷液或明显受洪水/污水污染。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 先看包装是否密封完整。\n2. 检查生产/保质信息和储存条件。\n3. 有鼓包、渗漏、接缝损坏或异常异味的直接丢弃。\n4. 与洪水/污水接触的非防水包装食品丢弃。\n5. 开封后正常食品也要注意尽快食用和防污染。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要尝可疑罐头确认；不要把鼓包罐头加热后继续吃；不要食用被污水浸泡的纸盒/软包装食品；没有异常气味也不能证明可疑罐头安全。"
+      },
+      {
+        "title": "升级处理",
+        "text": "多人出现相似胃肠症状或有人出现神经异常时尽快医疗求助。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 包装完整\n□ 无鼓包渗漏\n□ 未受污水污染\n□ 可疑食品已丢弃"
+      }
+    ],
+    "sources": [
+      "CDC_FOOD"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "FOD003-IMG01",
+        "caption": "鼓胀渗漏深锈罐头直接丢弃"
+      }
+    ]
+  },
+  {
+    "id": "FOD004",
+    "category": "FOD",
+    "title": "生熟分开与手卫生",
+    "summary": "野外做饭最常见的风险是生食汁液、脏手和餐具把病原带到熟食。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "处理肉类、鱼、鸡蛋或多人共餐。"
+      },
+      {
+        "title": "判断",
+        "text": "同一刀板切生肉后直接切熟食、取水后手未清洁、抹布长期潮湿都会增加污染。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 生食和即食/熟食使用不同容器；若器具只有一套，先处理即食物，再处理生食，并彻底清洁后才再次接触熟食。\n2. 接触生肉、厕所、垃圾后，用肥皂和安全水搓洗至少20秒。没有肥皂水且手不明显脏/油时，可暂用≥60%酒精免洗手液；有条件后尽快正规洗手。\n3. 生食接触过的刀板、餐具充分清洁后再用。\n4. 熟食盖好，减少苍蝇和灰尘污染。\n5. 原水和净水容器明确区分。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用擦过生肉的布擦熟食餐具；不要把熟食放回盛过生肉的盘里。"
+      },
+      {
+        "title": "升级处理",
+        "text": "多人出现腹泻/呕吐时立即加强隔离和水食卫生。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 生熟分开\n□ 肥皂水洗手优先\n□ 餐具无交叉污染\n□ 原水净水分开"
+      }
+    ],
+    "sources": [
+      "CDC_HYGIENE",
+      "CDC_FOOD",
+      "CDC_OUTDOOR_SAN"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "FOD004-IMG01",
+        "caption": "生熟分开；处理生食后清洁双手"
+      }
+    ]
+  },
+  {
+    "id": "FOD005",
+    "category": "FOD",
+    "title": "未知植物与蘑菇原则",
+    "summary": "不能可靠识别就不吃；不存在通用的“野外可食性测试”能保证安全。",
+    "priority": 1,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "需要考虑采集野生植物、浆果或蘑菇作为食物。"
+      },
+      {
+        "title": "判断",
+        "text": "许多有毒物与可食物外观相似，烹煮、银器测试、动物食用、少量舔尝都不能可靠排除毒性。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 只有在你能可靠识别到具体物种、确定可食部位和正确处理方式时才考虑食用。\n2. 蘑菇默认不采食，除非有当地可靠专家级识别能力。\n3. 不确定时保留现有安全食物，减少活动消耗并寻找救援/补给。\n4. 误食未知植物后保留样本/照片和时间，出现症状联系急救/中毒咨询。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要做“通用可食性测试”；不要因为鸟兽在吃就判断人可食；不要混合多种未知植物一起试。"
+      },
+      {
+        "title": "升级处理",
+        "text": "出现呕吐、意识异常、呼吸困难、抽搐等按MED026并尽快求助。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 物种身份可靠\n□ 可食部位和处理方式明确\n□ 不确定就不吃\n□ 有误食记录方案"
+      }
+    ],
+    "sources": [
+      "RC_POISON",
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  }
+]

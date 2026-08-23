@@ -4,9 +4,14 @@
 #include <stdint.h>
 
 static const int FT02_FIELD_MANUAL_MAX_CATEGORIES = 16;
-static const int FT02_FIELD_MANUAL_MAX_CARDS = 64;
+static const int FT02_FIELD_MANUAL_MAX_CARDS = 256;
 static const int FT02_FIELD_MANUAL_MAX_QUICK = 32;
 static const int FT02_FIELD_MANUAL_MAX_SECTIONS = 8;
+static const int FT02_FIELD_MANUAL_MAX_MEDIA = 256;
+static const int FT02_FIELD_MANUAL_MEDIA_MAX_WIDTH = 688;
+static const int FT02_FIELD_MANUAL_MEDIA_MAX_HEIGHT = 184;
+static const int FT02_FIELD_MANUAL_MEDIA_BUFFER_SIZE = 24576;
+static const uint8_t FT02_FIELD_MANUAL_MEDIA_FLAG_CAPTION_BELOW = 0x01;
 
 enum FT02FieldManualState
 {
@@ -43,6 +48,21 @@ struct FT02FieldManualCardIndex
     uint8_t priority;
     uint8_t reserved[2];
 };
+
+// FieldManual Runtime A3 optional image-page index entry.
+// media.idx is optional: A2 text-only packs remain valid without it.
+struct FT02FieldManualMediaIndex
+{
+    uint16_t cardIndex;
+    uint8_t order;
+    uint8_t flags;
+    uint16_t width;
+    uint16_t height;
+    uint32_t dataOffset;
+    uint32_t dataLength;
+    uint32_t crc32;
+    char caption[64];
+};
 #pragma pack(pop)
 
 struct FT02FieldManualSection
@@ -58,8 +78,15 @@ struct FT02FieldManualLoadedCard
     FT02FieldManualSection sections[FT02_FIELD_MANUAL_MAX_SECTIONS];
 };
 
+struct FT02FieldManualLoadedMedia
+{
+    const FT02FieldManualMediaIndex* index;
+    const uint8_t* data;
+};
+
 bool FT02_FieldManualBegin(bool forceReload = false);
 void FT02_FieldManualUnloadCard();
+void FT02_FieldManualUnloadMedia();
 
 FT02FieldManualState FT02_FieldManualStateCurrent();
 const char* FT02_FieldManualStateText();
@@ -76,3 +103,12 @@ int FT02_FieldManualQuickGlobalIndex(int localIndex);
 
 bool FT02_FieldManualLoadCard(int globalIndex);
 const FT02FieldManualLoadedCard* FT02_FieldManualLoadedCardCurrent();
+int FT02_FieldManualLoadedCardGlobalIndex();
+
+// Runtime A3 image pages. If media.idx/media.dat are absent or invalid,
+// text cards still work and these functions simply report zero/no media.
+bool FT02_FieldManualMediaReady();
+int FT02_FieldManualMediaCount();
+int FT02_FieldManualMediaCountForCard(int globalCardIndex);
+bool FT02_FieldManualLoadMediaForCard(int globalCardIndex, int mediaOrdinal);
+const FT02FieldManualLoadedMedia* FT02_FieldManualLoadedMediaCurrent();

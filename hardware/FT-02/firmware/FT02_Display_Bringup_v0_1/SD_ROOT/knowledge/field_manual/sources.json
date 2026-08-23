@@ -1,0 +1,198 @@
+{
+  "RC_GENERAL": {
+    "name": "American Red Cross First Aid Steps",
+    "url": "https://www.redcross.org/take-a-class/first-aid/performing-first-aid/first-aid-steps"
+  },
+  "RC_BLEED": {
+    "name": "American Red Cross - Life-Threatening External Bleeding",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/bleeding-life-threatening-external"
+  },
+  "RC_WOUNDS": {
+    "name": "American Red Cross - Wounds",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/wounds"
+  },
+  "RC_FRACT": {
+    "name": "American Red Cross - Fractures",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/fractures"
+  },
+  "RC_BURNS": {
+    "name": "American Red Cross - Burns",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/burns"
+  },
+  "RC_HYPO": {
+    "name": "American Red Cross - Hypothermia",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/hypothermia"
+  },
+  "RC_FROST": {
+    "name": "American Red Cross - Frostbite",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/frostbite"
+  },
+  "RC_HEATEX": {
+    "name": "American Red Cross - Heat Exhaustion",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/heat-exhaustion"
+  },
+  "RC_HEATSTROKE": {
+    "name": "American Red Cross - Heat Stroke",
+    "url": "https://production.redcross.org/take-a-class/learn-fa-heat-stroke.html"
+  },
+  "RC_DEHY": {
+    "name": "American Red Cross - Dehydration",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/dehydration"
+  },
+  "RC_CHOKE": {
+    "name": "American Red Cross - Adult & Child Choking",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/adult-child-choking"
+  },
+  "RC_CPR": {
+    "name": "American Red Cross - CPR Steps",
+    "url": "https://production.redcross.org/take-a-class/cpr/performing-cpr/cpr-steps"
+  },
+  "RC_HANDSCPR": {
+    "name": "American Red Cross - Hands-Only CPR",
+    "url": "https://production.redcross.org/take-a-class/cpr/performing-cpr/hands-only-cpr"
+  },
+  "RC_ALLERGY": {
+    "name": "American Red Cross - Allergic Reaction/Anaphylaxis",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/allergic-reaction-anaphylaxis"
+  },
+  "RC_ANIMAL": {
+    "name": "American Red Cross - Animal Bites",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/animal-bites"
+  },
+  "RC_SNAKE": {
+    "name": "American Red Cross - Venomous Snake Bites",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/venomous-snake-bites"
+  },
+  "RC_HEAD": {
+    "name": "American Red Cross - Head, Neck and Spinal Injury",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/head-neck-spinal-injury"
+  },
+  "RC_CONCUSS": {
+    "name": "American Red Cross - Concussion",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/concussion"
+  },
+  "RC_EYE": {
+    "name": "American Red Cross - Eye Injury",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/eye-injury"
+  },
+  "RC_NOSE": {
+    "name": "American Red Cross - Nosebleeds",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/nosebleeds"
+  },
+  "RC_SEIZ": {
+    "name": "American Red Cross - Seizures",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/seizures"
+  },
+  "RC_POISON": {
+    "name": "American Red Cross - Poison Exposure",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/poison-exposure"
+  },
+  "RC_SHOCK": {
+    "name": "American Red Cross - Shock",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/shock"
+  },
+  "RC_FAINT": {
+    "name": "American Red Cross - Fainting",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/fainting"
+  },
+  "RC_DIARRHEA": {
+    "name": "American Red Cross - Diarrhea",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/diarrhea"
+  },
+  "CDC_WATER": {
+    "name": "CDC - How to Make Water Safe in an Emergency",
+    "url": "https://www.cdc.gov/water-emergency/about/index.html"
+  },
+  "CDC_HIKE_WATER": {
+    "name": "CDC - Water Treatment When Hiking/Camping",
+    "url": "https://www.cdc.gov/drinking-water/prevention/water-treatment-hiking-camping-traveling.html"
+  },
+  "CDC_HYGIENE": {
+    "name": "CDC - Personal Hygiene During an Emergency",
+    "url": "https://www.cdc.gov/water-emergency/safety/guidelines-for-personal-hygiene-during-an-emergency.html"
+  },
+  "CDC_FOOD": {
+    "name": "CDC - Food Safety During/After Power Outages and Disasters",
+    "url": "https://www.cdc.gov/natural-disasters/response/what-to-do-protect-yourself-during-a-power-outage.html"
+  },
+  "NPS_LOST": {
+    "name": "NPS - Wilderness Safety / Lost",
+    "url": "https://www.nps.gov/yose/planyourvisit/wilderness_safety.htm"
+  },
+  "NPS_LOST2": {
+    "name": "NPS - Outdoor Emergency Plan",
+    "url": "https://www.nps.gov/articles/gtgemergencyplan.htm"
+  },
+  "NPS_LIGHTNING": {
+    "name": "NPS - Lightning Safety",
+    "url": "https://home.nps.gov/yose/planyourvisit/lightning.htm"
+  },
+  "NPS_FLASH": {
+    "name": "NPS - Flash Flood Safety (Zion)",
+    "url": "https://www.nps.gov/zion/planyourvisit/flash-flood.htm"
+  },
+  "NPS_FIRE": {
+    "name": "NPS - Campfire Safety / drown-stir-feel-repeat",
+    "url": "https://www.nps.gov/grte/learn/news/fire-danger-elevated-to-very-high.htm"
+  },
+  "NPS_WILD": {
+    "name": "NPS - Wilderness Safety",
+    "url": "https://home.nps.gov/yose/planyourvisit/wilderness_safety.htm"
+  },
+  "FT02_SAFE": {
+    "name": "FT-02 engineering safety baseline",
+    "url": ""
+  },
+  "IFRC_2025": {
+    "name": "IFRC International First Aid, Resuscitation and Education Guidelines 2025",
+    "url": "https://www.ifrc.org/document/ifrc-international-first-aid-resuscitation-and-education-guidelines-2025"
+  },
+  "AHA_2025_BLS": {
+    "name": "American Heart Association 2025 Adult Basic Life Support Guidelines",
+    "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-basic-life-support"
+  },
+  "WHO_SNAKE": {
+    "name": "World Health Organization - Snakebite envenoming: treatment and first aid",
+    "url": "https://www.who.int/teams/control-of-neglected-tropical-diseases/snakebite-envenoming/treatment"
+  },
+  "CDC_POWER_FOOD": {
+    "name": "CDC - What to Do to Protect Yourself During a Power Outage: Food Safety",
+    "url": "https://www.cdc.gov/natural-disasters/response/what-to-do-protect-yourself-during-a-power-outage.html"
+  },
+  "CDC_OUTDOOR_SAN": {
+    "name": "CDC - Preventing Norovirus When Camping, Hiking, or Outdoors",
+    "url": "https://www.cdc.gov/norovirus/prevention/outdoor-camping.html"
+  },
+  "NPS_RIVER": {
+    "name": "National Park Service - River and Stream Safety",
+    "url": "https://www.nps.gov/articles/river-and-stream-safety.htm"
+  },
+  "NPS_FLASH_2026": {
+    "name": "National Park Service - Zion Flash Flood Safety",
+    "url": "https://www.nps.gov/zion/planyourvisit/flash-flood.htm"
+  },
+  "EPA_LIION_2026": {
+    "name": "US EPA - Frequent Questions on Lithium-Ion Batteries",
+    "url": "https://www.epa.gov/recycle/frequent-questions-lithium-ion-batteries"
+  },
+  "FAA_LIION": {
+    "name": "FAA PackSafe - Lithium Batteries",
+    "url": "https://www.faa.gov/hazmat/packsafe/more_info/?hazmat=7"
+  },
+  "KNOT_SQUARE": {
+    "name": "Animated Knots by Grog - Square (Reef) Knot",
+    "url": "https://www.animatedknots.com/square-knot"
+  },
+  "KNOT_BOWLINE": {
+    "name": "Animated Knots by Grog - Bowline Knot",
+    "url": "https://www.animatedknots.com/bowline-knot"
+  },
+  "KNOT_CLOVE": {
+    "name": "Animated Knots by Grog - Clove Hitch (Rope End)",
+    "url": "https://www.animatedknots.com/cloveend/"
+  },
+  "KNOT_TRUCKER": {
+    "name": "Animated Knots by Grog - Trucker's Hitch",
+    "url": "https://www.animatedknots.com/truckers-hitch-knot"
+  }
+}

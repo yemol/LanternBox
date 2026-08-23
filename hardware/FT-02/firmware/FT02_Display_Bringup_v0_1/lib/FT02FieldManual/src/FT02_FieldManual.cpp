@@ -1,7 +1,12 @@
 #include "FT02_FieldManual.h"
 
 #include <stdio.h>
+#include <stddef.h>
 #include <string.h>
+
+#if defined(ARDUINO_ARCH_ESP32)
+#include <esp_heap_caps.h>
+#endif
 
 #include "FT02_Storage.h"
 
@@ -13,11 +18,15 @@ static const char* FT02_FM_CATEGORIES_PATH = "/knowledge/field_manual/categories
 static const char* FT02_FM_INDEX_PATH = "/knowledge/field_manual/cards.idx";
 static const char* FT02_FM_DATA_PATH = "/knowledge/field_manual/cards.dat";
 static const char* FT02_FM_QUICK_PATH = "/knowledge/field_manual/quick.idx";
+static const char* FT02_FM_MEDIA_INDEX_PATH = "/knowledge/field_manual/media.idx";
+static const char* FT02_FM_MEDIA_DATA_PATH = "/knowledge/field_manual/media.dat";
 
 static const uint8_t FT02_FM_MAGIC[8] = {'F', 'T', '0', '2', 'F', 'M', '1', 0};
 static const uint16_t FT02_FM_SCHEMA_VERSION = 1;
 static const uint32_t FT02_FM_FILE_FORMAT_VERSION = 1;
 static const size_t FT02_FM_CARD_BUFFER_SIZE = 4096;
+static const uint8_t FT02_FM_MEDIA_MAGIC[8] = {'F', 'T', '0', '2', 'M', 'D', '1', 0};
+static const uint16_t FT02_FM_MEDIA_FORMAT_VERSION = 1;
 
 #pragma pack(push, 1)
 struct FT02FieldManualManifestBinary
@@ -34,20 +43,114 @@ struct FT02FieldManualManifestBinary
     uint32_t quickIndexCrc32;
     uint32_t fileFormatVersion;
 };
+
+struct FT02FieldManualMediaHeaderBinary
+{
+    uint8_t magic[8];
+    uint16_t formatVersion;
+    uint16_t mediaCount;
+    uint32_t dataFileSize;
+};
 #pragma pack(pop)
 
 static_assert(sizeof(FT02FieldManualManifestBinary) == 52, "field manual manifest layout mismatch");
 static_assert(sizeof(FT02FieldManualCategory) == 204, "field manual category layout mismatch");
 static_assert(sizeof(FT02FieldManualCardIndex) == 316, "field manual card index layout mismatch");
+static_assert(sizeof(FT02FieldManualMediaHeaderBinary) == 16, "field manual media header layout mismatch");
+static_assert(sizeof(FT02FieldManualMediaIndex) == 84, "field manual media index layout mismatch");
 
 static FT02FieldManualState g_state = FT02_FIELD_MANUAL_NOT_STARTED;
 static FT02FieldManualManifestBinary g_manifest = {};
 static FT02FieldManualCategory g_categories[FT02_FIELD_MANUAL_MAX_CATEGORIES] = {};
-static FT02FieldManualCardIndex g_cards[FT02_FIELD_MANUAL_MAX_CARDS] = {};
+static FT02FieldManualCardIndex* g_cards = nullptr;
+static size_t g_cardsAllocatedBytes = 0;
 static uint16_t g_quickIndices[FT02_FIELD_MANUAL_MAX_QUICK] = {};
 static uint8_t g_cardBuffer[FT02_FM_CARD_BUFFER_SIZE] = {};
 static FT02FieldManualLoadedCard g_loadedCard = {};
 static uint64_t g_cardsDataFileSize = 0;
+
+static bool g_mediaReady = false;
+static uint16_t g_mediaCount = 0;
+static uint64_t g_mediaDataFileSize = 0;
+static FT02FieldManualMediaIndex* g_media = nullptr;
+static size_t g_mediaAllocatedBytes = 0;
+static uint8_t* g_mediaBuffer = nullptr;
+static size_t g_mediaBufferAllocatedBytes = 0;
+static FT02FieldManualLoadedMedia g_loadedMedia = {};
+
+
+static void* FT02_FmPsramAlloc(size_t bytes)
+{
+    if(bytes == 0) return nullptr;
+#if defined(ARDUINO_ARCH_ESP32)
+    return heap_caps_malloc(bytes, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
+#else
+    return malloc(bytes);
+#endif
+}
+
+static void FT02_FmPsramFree(void* memory)
+{
+    if(memory == nullptr) return;
+#if defined(ARDUINO_ARCH_ESP32)
+    heap_caps_free(memory);
+#else
+    free(memory);
+#endif
+}
+
+static bool FT02_FmReadExactStaged(const char* path, void* destination, size_t bytes)
+{
+    if(destination == nullptr && bytes != 0) return false;
+    FILE* file = FT02_StorageOpenReadFile(path);
+    if(file == nullptr) return false;
+
+    uint8_t stage[512];
+    uint8_t* output = static_cast<uint8_t*>(destination);
+    size_t done = 0;
+    bool ok = true;
+    while(done < bytes)
+    {
+        const size_t chunk = (bytes - done) < sizeof(stage) ? (bytes - done) : sizeof(stage);
+        if(fread(stage, 1, chunk, file) != chunk)
+        {
+            ok = false;
+            break;
+        }
+        memcpy(output + done, stage, chunk);
+        done += chunk;
+        yield();
+    }
+    const int trailing = ok ? fgetc(file) : EOF;
+    fclose(file);
+    return ok && done == bytes && trailing == EOF;
+}
+
+static bool FT02_FmReadRangeStaged(const char* path, uint32_t offset, void* destination, size_t bytes)
+{
+    if(destination == nullptr && bytes != 0) return false;
+    FILE* file = FT02_StorageOpenReadFile(path);
+    if(file == nullptr) return false;
+    bool ok = fseek(file, static_cast<long>(offset), SEEK_SET) == 0;
+
+    uint8_t stage[512];
+    uint8_t* output = static_cast<uint8_t*>(destination);
+    size_t done = 0;
+    while(ok && done < bytes)
+    {
+        const size_t chunk = (bytes - done) < sizeof(stage) ? (bytes - done) : sizeof(stage);
+        if(fread(stage, 1, chunk, file) != chunk)
+        {
+            ok = false;
+            break;
+        }
+        memcpy(output + done, stage, chunk);
+        done += chunk;
+        yield();
+    }
+    fclose(file);
+    return ok && done == bytes;
+}
 
 static uint16_t FT02_FmReadU16(const uint8_t* data)
 {
@@ -187,15 +290,166 @@ static bool FT02_FmValidateCatalog()
     return true;
 }
 
+
+static bool FT02_FmLoadOptionalMediaCatalog()
+{
+    g_mediaReady = false;
+    g_mediaCount = 0;
+    g_mediaDataFileSize = 0;
+    if(g_media != nullptr)
+    {
+        FT02_FmPsramFree(g_media);
+        g_media = nullptr;
+        g_mediaAllocatedBytes = 0;
+    }
+    if(g_mediaBuffer != nullptr)
+    {
+        FT02_FmPsramFree(g_mediaBuffer);
+        g_mediaBuffer = nullptr;
+        g_mediaBufferAllocatedBytes = 0;
+    }
+    memset(&g_loadedMedia, 0, sizeof(g_loadedMedia));
+
+    const bool hasIndex = FT02_StorageFileExists(FT02_FM_MEDIA_INDEX_PATH);
+    const bool hasData = FT02_StorageFileExists(FT02_FM_MEDIA_DATA_PATH);
+    if(!hasIndex && !hasData)
+    {
+        Serial.println("[FIELD-MANUAL] optional media pack not present; text-only mode");
+        return true;
+    }
+    if(!hasIndex || !hasData)
+    {
+        Serial.println("[FIELD-MANUAL] media pack incomplete; media disabled");
+        return true;
+    }
+
+    uint64_t indexFileSize = 0;
+    uint64_t dataFileSize = 0;
+    if(!FT02_StorageFileSize(FT02_FM_MEDIA_INDEX_PATH, indexFileSize) ||
+       !FT02_StorageFileSize(FT02_FM_MEDIA_DATA_PATH, dataFileSize))
+    {
+        Serial.println("[FIELD-MANUAL] media file size read failed; media disabled");
+        return true;
+    }
+
+    FILE* file = FT02_StorageOpenReadFile(FT02_FM_MEDIA_INDEX_PATH);
+    if(file == nullptr)
+    {
+        Serial.println("[FIELD-MANUAL] media index open failed; media disabled");
+        return true;
+    }
+
+    FT02FieldManualMediaHeaderBinary header = {};
+    bool ok = fread(&header, 1, sizeof(header), file) == sizeof(header);
+    if(!ok || memcmp(header.magic, FT02_FM_MEDIA_MAGIC, sizeof(header.magic)) != 0 ||
+       header.formatVersion != FT02_FM_MEDIA_FORMAT_VERSION ||
+       header.mediaCount > FT02_FIELD_MANUAL_MAX_MEDIA ||
+       header.dataFileSize != dataFileSize)
+    {
+        fclose(file);
+        Serial.println("[FIELD-MANUAL] media header invalid; media disabled");
+        return true;
+    }
+
+    const uint64_t expectedIndexSize = sizeof(header) +
+        static_cast<uint64_t>(header.mediaCount) * sizeof(FT02FieldManualMediaIndex);
+    if(indexFileSize != expectedIndexSize)
+    {
+        fclose(file);
+        Serial.println("[FIELD-MANUAL] media index size mismatch; media disabled");
+        return true;
+    }
+
+    fclose(file);
+
+    if(header.mediaCount > 0)
+    {
+        const size_t mediaBytes = static_cast<size_t>(header.mediaCount) * sizeof(FT02FieldManualMediaIndex);
+        g_media = static_cast<FT02FieldManualMediaIndex*>(FT02_FmPsramAlloc(mediaBytes));
+        if(g_media == nullptr)
+        {
+            Serial.println("[FIELD-MANUAL] media PSRAM catalog allocation failed; media disabled");
+            return true;
+        }
+        g_mediaAllocatedBytes = mediaBytes;
+        memset(g_media, 0, mediaBytes);
+        if(!FT02_FmReadRangeStaged(
+            FT02_FM_MEDIA_INDEX_PATH,
+            static_cast<uint32_t>(sizeof(header)),
+            g_media,
+            mediaBytes
+        ))
+        {
+            Serial.println("[FIELD-MANUAL] media index staged read failed; media disabled");
+            FT02_FmPsramFree(g_media);
+            g_media = nullptr;
+            g_mediaAllocatedBytes = 0;
+            return true;
+        }
+    }
+
+    for(int mediaIndex = 0; mediaIndex < header.mediaCount; mediaIndex++)
+    {
+        FT02FieldManualMediaIndex& item = g_media[mediaIndex];
+        item.caption[sizeof(item.caption) - 1] = 0;
+        const uint32_t rowBytes = (static_cast<uint32_t>(item.width) + 7U) / 8U;
+        const uint32_t expectedLength = rowBytes * item.height;
+        const uint64_t end = static_cast<uint64_t>(item.dataOffset) + item.dataLength;
+        if(item.cardIndex >= g_manifest.cardCount ||
+           item.width < 1 || item.width > FT02_FIELD_MANUAL_MEDIA_MAX_WIDTH ||
+           item.height < 1 || item.height > FT02_FIELD_MANUAL_MEDIA_MAX_HEIGHT ||
+           item.dataLength < 1 || item.dataLength > FT02_FIELD_MANUAL_MEDIA_BUFFER_SIZE ||
+           item.dataLength != expectedLength || end > dataFileSize)
+        {
+            Serial.print("[FIELD-MANUAL] media entry invalid index=");
+            Serial.println(mediaIndex);
+            FT02_FmPsramFree(g_media);
+            g_media = nullptr;
+            g_mediaAllocatedBytes = 0;
+            return true;
+        }
+    }
+
+    g_mediaCount = header.mediaCount;
+    g_mediaDataFileSize = dataFileSize;
+    g_mediaReady = true;
+    Serial.print("[FIELD-MANUAL] media ready count=");
+    Serial.print(g_mediaCount);
+    Serial.print(" psram=");
+    Serial.println(g_mediaAllocatedBytes);
+    return true;
+}
+
 static void FT02_FmResetMemory()
 {
     memset(&g_manifest, 0, sizeof(g_manifest));
     memset(g_categories, 0, sizeof(g_categories));
-    memset(g_cards, 0, sizeof(g_cards));
+    if(g_cards != nullptr)
+    {
+        FT02_FmPsramFree(g_cards);
+        g_cards = nullptr;
+    }
+    g_cardsAllocatedBytes = 0;
     memset(g_quickIndices, 0, sizeof(g_quickIndices));
     memset(g_cardBuffer, 0, sizeof(g_cardBuffer));
     memset(&g_loadedCard, 0, sizeof(g_loadedCard));
     g_cardsDataFileSize = 0;
+    g_mediaReady = false;
+    g_mediaCount = 0;
+    g_mediaDataFileSize = 0;
+    if(g_media != nullptr)
+    {
+        FT02_FmPsramFree(g_media);
+        g_media = nullptr;
+    }
+    g_mediaAllocatedBytes = 0;
+    if(g_mediaBuffer != nullptr)
+    {
+        FT02_FmPsramFree(g_mediaBuffer);
+        g_mediaBuffer = nullptr;
+    }
+    g_mediaBufferAllocatedBytes = 0;
+    memset(&g_loadedMedia, 0, sizeof(g_loadedMedia));
 }
 
 } // namespace
@@ -274,20 +528,43 @@ bool FT02_FieldManualBegin(bool forceReload)
         return false;
     }
 
+    g_cards = static_cast<FT02FieldManualCardIndex*>(FT02_FmPsramAlloc(cardIndexBytes));
+    if(g_cards == nullptr)
+    {
+        g_state = FT02_FIELD_MANUAL_IO_ERROR;
+        Serial.println("[FIELD-MANUAL] card index PSRAM allocation failed");
+        return false;
+    }
+    g_cardsAllocatedBytes = cardIndexBytes;
+    memset(g_cards, 0, cardIndexBytes);
+
     if(!FT02_FmReadExact(FT02_FM_CATEGORIES_PATH, g_categories, categoryBytes) ||
-       !FT02_FmReadExact(FT02_FM_INDEX_PATH, g_cards, cardIndexBytes) ||
+       !FT02_FmReadExactStaged(FT02_FM_INDEX_PATH, g_cards, cardIndexBytes) ||
        !FT02_FmReadExact(FT02_FM_QUICK_PATH, g_quickIndices, quickBytes))
     {
         g_state = FT02_FIELD_MANUAL_IO_ERROR;
         Serial.println("[FIELD-MANUAL] catalog read failed");
+        FT02_FmPsramFree(g_cards);
+        g_cards = nullptr;
+        g_cardsAllocatedBytes = 0;
         return false;
     }
+
+    Serial.print("[FIELD-MANUAL] card index PSRAM bytes=");
+    Serial.println(g_cardsAllocatedBytes);
 
     if(!FT02_FmValidateCatalog())
     {
         g_state = FT02_FIELD_MANUAL_BAD_FORMAT;
+        FT02_FmPsramFree(g_cards);
+        g_cards = nullptr;
+        g_cardsAllocatedBytes = 0;
         return false;
     }
+
+    // Runtime A3 media is optional and deliberately fail-soft: a damaged or
+    // absent media pack never prevents the reviewed text manual from loading.
+    FT02_FmLoadOptionalMediaCatalog();
 
     g_state = FT02_FIELD_MANUAL_READY;
     Serial.print("[FIELD-MANUAL] ready version=");
@@ -301,8 +578,20 @@ bool FT02_FieldManualBegin(bool forceReload)
     return true;
 }
 
+void FT02_FieldManualUnloadMedia()
+{
+    memset(&g_loadedMedia, 0, sizeof(g_loadedMedia));
+    if(g_mediaBuffer != nullptr)
+    {
+        FT02_FmPsramFree(g_mediaBuffer);
+        g_mediaBuffer = nullptr;
+    }
+    g_mediaBufferAllocatedBytes = 0;
+}
+
 void FT02_FieldManualUnloadCard()
 {
+    FT02_FieldManualUnloadMedia();
     memset(g_cardBuffer, 0, sizeof(g_cardBuffer));
     memset(&g_loadedCard, 0, sizeof(g_loadedCard));
 }
@@ -358,7 +647,7 @@ const FT02FieldManualCategory* FT02_FieldManualCategoryAt(int index)
 
 const FT02FieldManualCardIndex* FT02_FieldManualCardAt(int globalIndex)
 {
-    if(g_state != FT02_FIELD_MANUAL_READY || globalIndex < 0 || globalIndex >= g_manifest.cardCount)
+    if(g_state != FT02_FIELD_MANUAL_READY || g_cards == nullptr || globalIndex < 0 || globalIndex >= g_manifest.cardCount)
     {
         return nullptr;
     }
@@ -462,3 +751,93 @@ const FT02FieldManualLoadedCard* FT02_FieldManualLoadedCardCurrent()
 {
     return g_loadedCard.index != nullptr ? &g_loadedCard : nullptr;
 }
+
+int FT02_FieldManualLoadedCardGlobalIndex()
+{
+    if(g_loadedCard.index == nullptr || g_cards == nullptr) return -1;
+    const ptrdiff_t index = g_loadedCard.index - g_cards;
+    return index >= 0 && index < g_manifest.cardCount ? static_cast<int>(index) : -1;
+}
+
+bool FT02_FieldManualMediaReady()
+{
+    return g_state == FT02_FIELD_MANUAL_READY && g_mediaReady;
+}
+
+int FT02_FieldManualMediaCount()
+{
+    return FT02_FieldManualMediaReady() ? g_mediaCount : 0;
+}
+
+int FT02_FieldManualMediaCountForCard(int globalCardIndex)
+{
+    if(!FT02_FieldManualMediaReady() || globalCardIndex < 0 || globalCardIndex >= g_manifest.cardCount)
+    {
+        return 0;
+    }
+    int count = 0;
+    for(int mediaIndex = 0; mediaIndex < g_mediaCount; mediaIndex++)
+    {
+        if(g_media[mediaIndex].cardIndex == globalCardIndex) count++;
+    }
+    return count;
+}
+
+bool FT02_FieldManualLoadMediaForCard(int globalCardIndex, int mediaOrdinal)
+{
+    FT02_FieldManualUnloadMedia();
+    if(!FT02_FieldManualMediaReady() || mediaOrdinal < 0) return false;
+
+    const FT02FieldManualMediaIndex* selected = nullptr;
+    int ordinal = 0;
+    for(int mediaIndex = 0; mediaIndex < g_mediaCount; mediaIndex++)
+    {
+        if(g_media[mediaIndex].cardIndex != globalCardIndex) continue;
+        if(ordinal == mediaOrdinal)
+        {
+            selected = &g_media[mediaIndex];
+            break;
+        }
+        ordinal++;
+    }
+    if(selected == nullptr || selected->dataLength > FT02_FIELD_MANUAL_MEDIA_BUFFER_SIZE) return false;
+
+    g_mediaBuffer = static_cast<uint8_t*>(FT02_FmPsramAlloc(selected->dataLength));
+    if(g_mediaBuffer == nullptr)
+    {
+        Serial.println("[FIELD-MANUAL] media PSRAM image allocation failed");
+        return false;
+    }
+    g_mediaBufferAllocatedBytes = selected->dataLength;
+    if(!FT02_FmReadRangeStaged(
+        FT02_FM_MEDIA_DATA_PATH,
+        selected->dataOffset,
+        g_mediaBuffer,
+        selected->dataLength
+    ))
+    {
+        FT02_FieldManualUnloadMedia();
+        return false;
+    }
+
+    const uint32_t crc = FT02_FmCrc32Update(0, g_mediaBuffer, selected->dataLength);
+    if(crc != selected->crc32)
+    {
+        Serial.print("[FIELD-MANUAL] media CRC mismatch card=");
+        Serial.print(globalCardIndex);
+        Serial.print(" ordinal=");
+        Serial.println(mediaOrdinal);
+        FT02_FieldManualUnloadMedia();
+        return false;
+    }
+
+    g_loadedMedia.index = selected;
+    g_loadedMedia.data = g_mediaBuffer;
+    return true;
+}
+
+const FT02FieldManualLoadedMedia* FT02_FieldManualLoadedMediaCurrent()
+{
+    return g_loadedMedia.index != nullptr ? &g_loadedMedia : nullptr;
+}
+

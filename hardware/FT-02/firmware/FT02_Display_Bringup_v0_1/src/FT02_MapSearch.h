@@ -32,12 +32,15 @@ enum FT02MapSearchAction : uint8_t
 {
     FT02_MAP_SEARCH_ACTION_NONE = 0,
     FT02_MAP_SEARCH_ACTION_REDRAW,
+    FT02_MAP_SEARCH_ACTION_SELECTION_PARTIAL,
     FT02_MAP_SEARCH_ACTION_EXIT_MAP,
     FT02_MAP_SEARCH_ACTION_JUMP
 };
 
 void FT02_MapSearchOpen();
 void FT02_DrawMapSearchScreen(FT02Display& display);
+void FT02_DrawMapSearchInputPartial(FT02Display& display);
+void FT02_DrawMapSearchSelectionPartial(FT02Display& display);
 FT02MapSearchAction FT02_MapSearchHandleInput(const FT02InputEvent& event);
 bool FT02_MapSearchTakeDeferredRedraw(uint32_t nowMs);
 bool FT02_MapSearchTakeJump(double& longitude, double& latitude, char* name, size_t nameBytes);

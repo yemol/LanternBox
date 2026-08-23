@@ -5,6 +5,7 @@
 #include "FT02_LoRaCommunicationRuntime.h"
 #include "FT02_BatteryIcon.h"
 #include "FT02_EpdLifecycle.h"
+#include "FT02_EpdInteractiveRuntime.h"
 #include "FT02_GlobalCJK20FontData.h"
 #include <string.h>
 #include <stdio.h>
@@ -330,6 +331,7 @@ void FT02_DrawStatusBarLoRa(
     static const int partialW = 160;
     static const int partialH = 61;
 
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(partialX, partialY, partialW, partialH);
     display.firstPage();
     do
@@ -356,7 +358,8 @@ void FT02_DrawStatusBarLoRa(
     while(display.nextPage());
 
     display.setFullWindow();
-    FT02_EpdPowerOffAfterCommit(display, "status-lora-partial");
+    FT02_EpdInteractivePowerOffNow(display, "status-lora-partial");
+    FT02_EpdInteractiveEndBusyCapture(display);
 }
 
 static void FT02_DrawStatusGnssBlockContent(
@@ -406,6 +409,7 @@ void FT02_DrawStatusBarGnss(
     static const int partialW = 160;
     static const int partialH = 61;
 
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(partialX, partialY, partialW, partialH);
     display.firstPage();
 
@@ -434,7 +438,8 @@ void FT02_DrawStatusBarGnss(
     while(display.nextPage());
 
     display.setFullWindow();
-    FT02_EpdPowerOffAfterCommit(display, "status-gnss-partial");
+    FT02_EpdInteractivePowerOffNow(display, "status-gnss-partial");
+    FT02_EpdInteractiveEndBusyCapture(display);
 }
 
 static void FT02_DrawStatusStorageBlockContent(
@@ -483,6 +488,7 @@ void FT02_DrawStatusBarStorage(
     static const int partialW = 160;
     static const int partialH = 61;
 
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(
         partialX,
         partialY,
@@ -527,7 +533,8 @@ void FT02_DrawStatusBarStorage(
     while(display.nextPage());
 
     display.setFullWindow();
-    FT02_EpdPowerOffAfterCommit(display, "status-storage-partial");
+    FT02_EpdInteractivePowerOffNow(display, "status-storage-partial");
+    FT02_EpdInteractiveEndBusyCapture(display);
 }
 
 void FT02_DrawStatusBarClock(
@@ -538,6 +545,7 @@ void FT02_DrawStatusBarClock(
 {
     FT02_SetStatusBarClockCache(hhmm, mmdd);
 
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(
         FT02_CLOCK_PARTIAL_X,
         FT02_CLOCK_PARTIAL_Y,
@@ -566,5 +574,6 @@ void FT02_DrawStatusBarClock(
     while(display.nextPage());
 
     display.setFullWindow();
-    FT02_EpdPowerOffAfterCommit(display, "status-clock-partial");
+    FT02_EpdInteractivePowerOffNow(display, "status-clock-partial");
+    FT02_EpdInteractiveEndBusyCapture(display);
 }

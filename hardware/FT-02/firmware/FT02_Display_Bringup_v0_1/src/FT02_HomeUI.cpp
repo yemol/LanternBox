@@ -1,5 +1,6 @@
 #include "FT02_HomeUI.h"
 #include "FT02_EpdLifecycle.h"
+#include "FT02_EpdInteractiveRuntime.h"
 
 #include "FT02_BottomBar.h"
 #include "FT02_BuildInfo.h"
@@ -28,6 +29,7 @@ void FT02_DrawHomeScreen(
     int selectedCardIndex
 )
 {
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setFullWindow();
 
     display.firstPage();
@@ -47,5 +49,6 @@ void FT02_DrawHomeScreen(
     }
     while(display.nextPage());
 
-    FT02_EpdPowerOffAfterCommit(display, "home-full");
+    FT02_EpdInteractivePowerOffNow(display, "home-full");
+    FT02_EpdInteractiveEndBusyCapture(display);
 }

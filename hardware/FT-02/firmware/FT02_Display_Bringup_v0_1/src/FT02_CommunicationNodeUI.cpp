@@ -6,6 +6,7 @@
 
 #include "FT02_BottomBar.h"
 #include "FT02_EpdLifecycle.h"
+#include "FT02_EpdInteractiveRuntime.h"
 #include "FT02_GlobalCJK20FontData.h"
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
@@ -32,7 +33,7 @@ enum CommMode : uint8_t
 };
 
 constexpr size_t VISIBLE_NODE_ROWS = 4;
-constexpr uint32_t COMPOSE_REDRAW_IDLE_MS = 650u;
+constexpr uint32_t COMPOSE_REDRAW_IDLE_MS = 320u;
 constexpr size_t PINYIN_VISIBLE_CANDIDATES = FT02_PINYIN_PAGE_SIZE;
 
 CommMode g_mode = COMM_INBOX;
@@ -1010,6 +1011,7 @@ void FT02_CommunicationUIOpen()
 
 void FT02_DrawCommunicationNodeScreen(FT02Display& display)
 {
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setFullWindow();
     display.firstPage();
     do
@@ -1025,7 +1027,51 @@ void FT02_DrawCommunicationNodeScreen(FT02Display& display)
     }
     while(display.nextPage());
     display.setFullWindow();
-    FT02_EpdPowerOffAfterCommit(display, "communication-full");
+    FT02_EpdInteractivePowerOffNow(display, "communication-full");
+    FT02_EpdInteractiveEndBusyCapture(display);
+    g_composeDirty = false;
+}
+
+
+static void FT02_CommunicationCommitPartial(
+    FT02Display& display,
+    int x,
+    int y,
+    int w,
+    int h,
+    const char* source
+)
+{
+    const uint32_t startedMs = millis();
+    FT02_EpdInteractiveBeginBusyCapture(display);
+    display.setPartialWindow(x, y, w, h);
+    display.firstPage();
+    do
+    {
+        display.fillRect(x, y, w, h, GxEPD_WHITE);
+        if(g_mode == COMM_INBOX) drawInbox(display);
+        else if(g_mode == COMM_NODES) drawNodes(display);
+        else if(g_mode == COMM_COMPOSE) drawCompose(display);
+        else if(g_mode == COMM_OUTBOX) drawOutbox(display);
+        else if(g_mode == COMM_OUTBOX_CANCEL_CONFIRM) drawOutboxCancelConfirm(display);
+        else if(g_mode == COMM_OUTBOX_CLEAR_CONFIRM) drawOutboxClearConfirm(display);
+        else drawDiag(display);
+    }
+    while(display.nextPage());
+    FT02_EpdInteractiveEndBusyCapture(display);
+    FT02_EpdInteractiveFinishPartial(display, source, startedMs);
+}
+
+void FT02_DrawCommunicationBrowsePartial(FT02Display& display)
+{
+    // Inbox/outbox/node browsing only changes the content below the page header.
+    FT02_CommunicationCommitPartial(display, 16, 174, 768, 266, "communication-browse-partial");
+}
+
+void FT02_DrawCommunicationComposePartial(FT02Display& display)
+{
+    // Text editor, Pinyin candidates, mode and notice. Keep status/header/footer.
+    FT02_CommunicationCommitPartial(display, 24, 140, 752, 300, "communication-compose-partial");
     g_composeDirty = false;
 }
 
@@ -1155,22 +1201,22 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
         if(count > 0 && cmd == 'p')
         {
             g_messageIndex = (g_messageIndex + 1) % count;
-            return FT02_COMM_INPUT_REDRAW;
+            return FT02_COMM_INPUT_BROWSE_PARTIAL;
         }
         if(count > 0 && cmd == 'n')
         {
             g_messageIndex = g_messageIndex == 0 ? count - 1 : g_messageIndex - 1;
-            return FT02_COMM_INPUT_REDRAW;
+            return FT02_COMM_INPUT_BROWSE_PARTIAL;
         }
         if(count > 0 && (event.key == FT02_KEY_LEFT || event.key == FT02_KEY_UP))
         {
             g_messageIndex = (g_messageIndex + 1) % count;
-            return FT02_COMM_INPUT_REDRAW;
+            return FT02_COMM_INPUT_BROWSE_PARTIAL;
         }
         if(count > 0 && (event.key == FT02_KEY_RIGHT || event.key == FT02_KEY_DOWN))
         {
             g_messageIndex = g_messageIndex == 0 ? count - 1 : g_messageIndex - 1;
-            return FT02_COMM_INPUT_REDRAW;
+            return FT02_COMM_INPUT_BROWSE_PARTIAL;
         }
     }
     else if(g_mode == COMM_OUTBOX)
@@ -1190,12 +1236,12 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
         if(count > 0 && (event.key == FT02_KEY_LEFT || event.key == FT02_KEY_UP))
         {
             g_outboxIndex = (g_outboxIndex + 1u) % count;
-            return FT02_COMM_INPUT_REDRAW;
+            return FT02_COMM_INPUT_BROWSE_PARTIAL;
         }
         if(count > 0 && (event.key == FT02_KEY_RIGHT || event.key == FT02_KEY_DOWN))
         {
             g_outboxIndex = g_outboxIndex == 0 ? count - 1u : g_outboxIndex - 1u;
-            return FT02_COMM_INPUT_REDRAW;
+            return FT02_COMM_INPUT_BROWSE_PARTIAL;
         }
     }
     else if(g_mode == COMM_NODES)
@@ -1204,12 +1250,12 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
         if(count > 0 && event.key == FT02_KEY_UP)
         {
             g_nodeSelection = g_nodeSelection == 0 ? count - 1 : g_nodeSelection - 1;
-            return FT02_COMM_INPUT_REDRAW;
+            return FT02_COMM_INPUT_BROWSE_PARTIAL;
         }
         if(count > 0 && event.key == FT02_KEY_DOWN)
         {
             g_nodeSelection = (g_nodeSelection + 1) % count;
-            return FT02_COMM_INPUT_REDRAW;
+            return FT02_COMM_INPUT_BROWSE_PARTIAL;
         }
         if(count > 0 && event.key == FT02_KEY_SELECT)
         {

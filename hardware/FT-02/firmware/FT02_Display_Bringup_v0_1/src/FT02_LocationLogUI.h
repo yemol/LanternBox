@@ -18,6 +18,12 @@ void FT02_DrawLocationLogListBodyPartial(
     FT02Display& display,
     uint16_t selectedNewestIndex
 );
+
+void FT02_DrawLocationLogListSelectionPartial(
+    FT02Display& display,
+    uint16_t oldSelectedNewestIndex,
+    uint16_t newSelectedNewestIndex
+);
 void FT02_DrawLocationLogDetailScreen(
     FT02Display& display,
     uint16_t selectedNewestIndex
