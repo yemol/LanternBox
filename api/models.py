@@ -39,6 +39,13 @@ class TtsSpeakRequest(BaseModel):
     engine: Optional[str] = None
 
 
+class LibraryBookUpdate(BaseModel):
+    title: Optional[str] = None
+    author: Optional[str] = None
+    category: Optional[str] = None
+    description: Optional[str] = None
+
+
 class AiRuntimeSettingsUpdate(BaseModel):
     retrieval_v2_model: Optional[str] = None
     show_retrieval_debug: Optional[bool] = None

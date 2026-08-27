@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>图书管理 - 壳中灯 LanternBox</title>
+  <link rel="icon" href="/static/assets/brand/lanternbox-icon-original.png" type="image/png" />
+  <link rel="stylesheet" href="/static/style.css?v=header-actions-v0-3" />
+  <style>
+    .books-admin-hero { margin-bottom: 20px; }
+    .books-admin-header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .books-admin-header-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; flex-wrap: nowrap; margin-left: auto; }
+    .admin-chip-button { min-height: 40px; padding: 9px 13px; border-radius: 12px; border: 1px solid rgba(137, 204, 255, 0.18); color: var(--text-main); background: rgba(255, 255, 255, 0.045); font-weight: 900; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+    .admin-chip-button:hover { border-color: var(--border-strong); background: rgba(104, 199, 255, 0.1); }
+    .admin-chip-button:disabled { opacity: 0.45; cursor: not-allowed; }
+    .admin-danger-button { border-color: rgba(255, 134, 134, 0.28); color: #ffd0d0; }
+    .admin-danger-button:hover { border-color: rgba(255, 134, 134, 0.5); background: rgba(255, 134, 134, 0.09); }
+    .admin-section { margin-top: 16px; padding: 18px; border: 1px solid rgba(137, 204, 255, 0.14); border-radius: 22px; background: rgba(255, 255, 255, 0.045); }
+    .admin-section-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .admin-section-title h2 { margin: 0; color: var(--text-main); font-size: 22px; }
+    .admin-section-title span { color: var(--text-muted); font-size: 14px; }
+    .admin-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; }
+    .admin-toolbar input, .admin-form input, .admin-form textarea, .modal-form input, .modal-form textarea { width: 100%; min-height: 44px; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(137, 204, 255, 0.18); color: var(--text-main); background: rgba(0, 0, 0, 0.18); font-size: 14px; outline: none; box-sizing: border-box; }
+    .admin-toolbar input:focus, .admin-form input:focus, .admin-form textarea:focus, .modal-form input:focus, .modal-form textarea:focus { border-color: var(--border-strong); box-shadow: 0 0 0 3px rgba(104, 199, 255, 0.08); }
+    .admin-form { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) auto; gap: 10px; align-items: end; }
+    .admin-form label, .modal-form label { display: grid; gap: 6px; color: var(--text-muted); font-size: 12px; font-weight: 900; letter-spacing: 0.03em; }
+    .admin-form textarea, .modal-form textarea { min-height: 44px; resize: vertical; }
+    .admin-form input[type="file"] { padding: 9px; }
+    .admin-status-text { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+    .admin-empty { padding: 16px; border: 1px dashed rgba(137, 204, 255, 0.18); border-radius: 16px; color: var(--text-muted); background: rgba(255, 255, 255, 0.025); font-size: 15px; line-height: 1.6; }
+    .book-table-wrap { margin-top: 14px; overflow-x: auto; border: 1px solid rgba(137, 204, 255, 0.14); border-radius: 16px; background: rgba(0, 0, 0, 0.10); }
+    .book-table { width: 100%; min-width: 820px; border-collapse: collapse; table-layout: fixed; }
+    .book-table th, .book-table td { padding: 9px 12px; border-bottom: 1px solid rgba(137, 204, 255, 0.10); color: var(--text-soft); font-size: 16px; line-height: 1.35; text-align: left; vertical-align: middle; }
+    .book-table th { color: var(--text-muted); font-size: 14px; letter-spacing: 0.04em; font-weight: 900; background: rgba(255, 255, 255, 0.035); }
+    .book-table tr:last-child td { border-bottom: 0; }
+    .book-title-cell { color: var(--text-main); font-weight: 900; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .book-muted-cell { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .book-actions-cell { display: flex; gap: 12px; justify-content: flex-end; align-items: center; flex-wrap: nowrap; white-space: nowrap; }
+    .book-actions-cell .table-action-button { appearance: none; min-height: 0; height: auto; width: auto; padding: 0; border: 0; border-radius: 0; color: var(--accent-bright); background: none; box-shadow: none; font: inherit; font-size: 16px; font-weight: 700; line-height: 1.35; cursor: pointer; transform: none; }
+    .book-actions-cell .table-action-button:hover { color: var(--text-main); background: none; border: 0; box-shadow: none; text-decoration: underline; transform: none; }
+    .book-actions-cell .table-action-button-danger { color: #ffd0d0; }
+    .book-actions-cell .table-action-button-danger:hover { color: #ffffff; }
+    .book-badge { display: inline-flex; align-items: center; min-height: 26px; padding: 3px 9px; border-radius: 999px; color: var(--text-soft); background: rgba(104, 199, 255, 0.1); border: 1px solid rgba(137, 204, 255, 0.16); font-size: 14px; font-weight: 900; }
+    .pagination-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+    .pagination-info { color: var(--text-muted); font-size: 14px; }
+    .pagination-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .modal-card-small { width: min(620px, 92vw); }
+    .modal-form { display: grid; gap: 12px; }
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 14px; }
+    .confirm-copy { color: var(--text-soft); font-size: 15px; line-height: 1.7; margin: 0; }
+    .confirm-title { color: var(--text-main); font-weight: 900; overflow-wrap: anywhere; }
+    @media (max-width: 900px) {
+      .admin-toolbar, .admin-form { grid-template-columns: 1fr; }
+      .books-admin-header-actions { align-items: stretch; width: 100%; }
+      .book-table th, .book-table td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero books-admin-hero">
+      <div class="books-admin-header-row">
+        <div>
+          <p class="eyebrow">BOOK MANAGEMENT</p>
+          <h1 class="brand-title"><img class="brand-mark-inline" src="/static/assets/brand/lanternbox-icon-original.webp" alt="" />图书管理</h1>
+          <p class="subtitle">维护 PDF / EPUB 文件与图书信息。</p>
+        </div>
+        <div class="books-admin-header-actions">
+          <a class="page-nav-button" href="/ebooks.html">返回阅读</a>
+          <a class="page-nav-button" href="/library.html">返回资料库</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="admin-section">
+      <div class="admin-section-title">
+        <h2>上传图书</h2>
+        <span>PDF / EPUB</span>
+      </div>
+      <form id="book-upload-form" class="admin-form">
+        <label>文件
+          <input id="book-file-input" name="file" type="file" accept=".pdf,.epub,application/pdf,application/epub+zip" required />
+        </label>
+        <label>书名
+          <input id="book-title-input" name="title" type="text" placeholder="留空则使用文件名" />
+        </label>
+        <label>作者
+          <input id="book-author-input" name="author" type="text" placeholder="可选" />
+        </label>
+        <label>分类
+          <input id="book-category-input" name="category" type="text" placeholder="如 医疗 / 农业 / 维修" />
+        </label>
+        <button id="book-upload-button" class="admin-chip-button" type="submit">上传</button>
+        <label style="grid-column: 1 / -1;">说明
+          <textarea id="book-description-input" name="description" placeholder="可选：用途、版本、来源或阅读提示"></textarea>
+        </label>
+      </form>
+      <p id="admin-status" class="admin-status-text">删除会移入归档，不会真实删除文件。</p>
+    </section>
+
+    <section class="admin-section">
+      <div class="admin-section-title">
+        <h2>图书列表</h2>
+        <span id="book-count-label">正在读取</span>
+      </div>
+      <div class="admin-toolbar">
+        <input id="book-search-input" type="search" placeholder="搜索书名、作者、分类或说明..." />
+        <button class="admin-chip-button" onclick="loadBooks()" type="button">搜索</button>
+        <button class="admin-chip-button" onclick="resetBookSearch()" type="button">刷新</button>
+      </div>
+      <div id="book-admin-list"></div>
+      <div id="pagination-row" class="pagination-row"></div>
+    </section>
+
+    <div id="edit-modal" class="guide-modal hidden">
+      <div class="guide-modal-backdrop" onclick="closeEditModal()"></div>
+      <div class="guide-modal-card modal-card-small">
+        <div class="guide-modal-header">
+          <div>
+            <p class="guide-modal-id">EDIT BOOK</p>
+            <h2>编辑图书信息</h2>
+            <p id="edit-modal-meta" class="guide-modal-category"></p>
+          </div>
+          <button class="guide-modal-close" onclick="closeEditModal()">关闭</button>
+        </div>
+        <div class="guide-modal-body">
+          <form id="edit-book-form" class="modal-form">
+            <label>书名
+              <input id="edit-title-input" type="text" />
+            </label>
+            <label>作者
+              <input id="edit-author-input" type="text" />
+            </label>
+            <label>分类
+              <input id="edit-category-input" type="text" />
+            </label>
+            <label>说明
+              <textarea id="edit-description-input"></textarea>
+            </label>
+            <div class="modal-actions">
+              <button class="admin-chip-button" onclick="closeEditModal()" type="button">取消</button>
+              <button id="edit-save-button" class="admin-chip-button" type="submit">保存</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="archive-modal" class="guide-modal hidden">
+      <div class="guide-modal-backdrop" onclick="closeArchiveModal()"></div>
+      <div class="guide-modal-card modal-card-small">
+        <div class="guide-modal-header">
+          <div>
+            <p class="guide-modal-id">ARCHIVE BOOK</p>
+            <h2>确认删除</h2>
+            <p class="guide-modal-category">删除会移入归档，不会真实删除文件。</p>
+          </div>
+          <button class="guide-modal-close" onclick="closeArchiveModal()">关闭</button>
+        </div>
+        <div class="guide-modal-body">
+          <p class="confirm-copy">确认将 <span id="archive-book-title" class="confirm-title"></span> 移入归档？归档后它不会出现在阅读书架和当前管理列表中。</p>
+          <div class="modal-actions">
+            <button class="admin-chip-button" onclick="closeArchiveModal()" type="button">取消</button>
+            <button id="archive-confirm-button" class="admin-chip-button admin-danger-button" onclick="confirmArchiveBook()" type="button">移入归档</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const bookAdminList = document.getElementById('book-admin-list');
+    const adminStatus = document.getElementById('admin-status');
+    const bookCountLabel = document.getElementById('book-count-label');
+    const bookSearchInput = document.getElementById('book-search-input');
+    const bookUploadForm = document.getElementById('book-upload-form');
+    const bookUploadButton = document.getElementById('book-upload-button');
+    const paginationRow = document.getElementById('pagination-row');
+    const editBookForm = document.getElementById('edit-book-form');
+    const editSaveButton = document.getElementById('edit-save-button');
+    const archiveConfirmButton = document.getElementById('archive-confirm-button');
+    const pageSize = 10;
+    let managedBooks = [];
+    let currentPage = 1;
+    let editingBook = null;
+    let archivingBook = null;
+
+    bookSearchInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') loadBooks();
+    });
+
+    bookUploadForm.addEventListener('submit', uploadBook);
+    editBookForm.addEventListener('submit', saveEditingBook);
+
+    async function loadBooks() {
+      const keyword = bookSearchInput.value.trim();
+      bookCountLabel.textContent = '读取中';
+      bookAdminList.innerHTML = '<div class="admin-empty">正在读取图书列表...</div>';
+      paginationRow.innerHTML = '';
+
+      try {
+        const url = keyword ? `/api/library/books?q=${encodeURIComponent(keyword)}` : '/api/library/books';
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('图书列表读取失败');
+        const data = await response.json();
+        if (!data.ok) throw new Error(data.error || '图书接口返回异常');
+        managedBooks = Array.isArray(data.books) ? data.books : [];
+        currentPage = Math.min(currentPage, getTotalPages()) || 1;
+        renderManagedBooks();
+      } catch (error) {
+        console.error(error);
+        managedBooks = [];
+        bookAdminList.innerHTML = '<div class="admin-empty">图书列表读取失败，请确认后端服务正常。</div>';
+        bookCountLabel.textContent = '读取失败';
+      }
+    }
+
+    function resetBookSearch() {
+      bookSearchInput.value = '';
+      currentPage = 1;
+      loadBooks();
+    }
+
+    async function uploadBook(event) {
+      event.preventDefault();
+      const fileInput = document.getElementById('book-file-input');
+      if (!fileInput.files || !fileInput.files.length) {
+        adminStatus.textContent = '请选择 PDF 或 EPUB 文件。';
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const params = new URLSearchParams({
+        filename: file.name,
+        title: document.getElementById('book-title-input').value.trim(),
+        author: document.getElementById('book-author-input').value.trim(),
+        category: document.getElementById('book-category-input').value.trim(),
+        description: document.getElementById('book-description-input').value.trim(),
+      });
+
+      bookUploadButton.disabled = true;
+      bookUploadButton.textContent = '上传中...';
+      adminStatus.textContent = '正在上传图书...';
+
+      try {
+        const response = await fetch(`/api/library/books?${params.toString()}`, {
+          method: 'POST',
+          headers: { 'Content-Type': file.type || 'application/octet-stream' },
+          body: file
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.ok) throw new Error(data.detail || data.error || '图书上传失败');
+        bookUploadForm.reset();
+        currentPage = 1;
+        adminStatus.textContent = data.message || '图书已上传。';
+        await loadBooks();
+      } catch (error) {
+        console.error(error);
+        adminStatus.textContent = `上传失败：${error.message}`;
+      } finally {
+        bookUploadButton.disabled = false;
+        bookUploadButton.textContent = '上传';
+      }
+    }
+
+    function renderManagedBooks() {
+      if (!managedBooks.length) {
+        bookAdminList.innerHTML = '<div class="admin-empty">还没有图书。上传 PDF / EPUB，或把文件放入 data/library/books 后刷新。</div>';
+        paginationRow.innerHTML = '';
+        bookCountLabel.textContent = '共 0 本';
+        return;
+      }
+
+      const totalPages = getTotalPages();
+      currentPage = Math.max(1, Math.min(currentPage, totalPages));
+      const start = (currentPage - 1) * pageSize;
+      const pageBooks = managedBooks.slice(start, start + pageSize);
+
+      bookAdminList.innerHTML = `
+        <div class="book-table-wrap">
+          <table class="book-table">
+            <thead>
+              <tr>
+                <th style="width: 32%;">书名</th>
+                <th style="width: 16%;">作者</th>
+                <th style="width: 12%;">分类</th>
+                <th style="width: 10%;">格式</th>
+                <th style="width: 14%;">大小</th>
+                <th style="width: 16%; text-align: right;">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${pageBooks.map((book, pageIndex) => renderBookRow(book, start + pageIndex)).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+
+      bookCountLabel.textContent = `共 ${managedBooks.length} 本`;
+      paginationRow.innerHTML = `
+        <div class="pagination-info">第 ${currentPage} / ${totalPages} 页 · 显示 ${start + 1}-${Math.min(start + pageSize, managedBooks.length)} 本</div>
+        <div class="pagination-actions">
+          <button class="admin-chip-button" onclick="goToPage(1)" type="button" ${currentPage === 1 ? 'disabled' : ''}>首页</button>
+          <button class="admin-chip-button" onclick="goToPage(currentPage - 1)" type="button" ${currentPage === 1 ? 'disabled' : ''}>上一页</button>
+          <button class="admin-chip-button" onclick="goToPage(currentPage + 1)" type="button" ${currentPage === totalPages ? 'disabled' : ''}>下一页</button>
+          <button class="admin-chip-button" onclick="goToPage(${totalPages})" type="button" ${currentPage === totalPages ? 'disabled' : ''}>末页</button>
+        </div>
+      `;
+    }
+
+    function renderBookRow(book, index) {
+      const title = cleanDisplayValue(book.title) || '未命名图书';
+      const author = cleanDisplayValue(book.author);
+      const category = cleanDisplayValue(book.category) || '未分类';
+      return `
+        <tr>
+          <td><div class="book-title-cell" title="${escapeAttribute(book.original_filename || title)}">${escapeHtml(title)}</div></td>
+          <td><div class="book-muted-cell" title="${escapeAttribute(author)}">${escapeHtml(author || '-')}</div></td>
+          <td><span class="book-badge">${escapeHtml(category)}</span></td>
+          <td>${escapeHtml(String(book.format || '').toUpperCase())}</td>
+          <td>${escapeHtml(formatBytes(book.size_bytes || 0))}</td>
+          <td><div class="book-actions-cell"><button class="table-action-button" onclick="openEditModal(${index})" type="button">编辑</button><button class="table-action-button table-action-button-danger" onclick="openArchiveModal(${index})" type="button">删除</button></div></td>
+        </tr>
+      `;
+    }
+
+    function getTotalPages() {
+      return Math.max(1, Math.ceil(managedBooks.length / pageSize));
+    }
+
+    function goToPage(page) {
+      currentPage = Math.max(1, Math.min(page, getTotalPages()));
+      renderManagedBooks();
+    }
+
+    function openEditModal(index) {
+      editingBook = managedBooks[index] || null;
+      if (!editingBook) return;
+      document.getElementById('edit-modal-meta').textContent = editingBook.original_filename || editingBook.id;
+      document.getElementById('edit-title-input').value = cleanDisplayValue(editingBook.title);
+      document.getElementById('edit-author-input').value = cleanDisplayValue(editingBook.author);
+      document.getElementById('edit-category-input').value = cleanDisplayValue(editingBook.category);
+      document.getElementById('edit-description-input').value = cleanDisplayValue(editingBook.description);
+      document.getElementById('edit-modal').classList.remove('hidden');
+      document.body.classList.add('modal-open');
+    }
+
+    function closeEditModal() {
+      editingBook = null;
+      document.getElementById('edit-modal').classList.add('hidden');
+      document.body.classList.remove('modal-open');
+    }
+
+    async function saveEditingBook(event) {
+      event.preventDefault();
+      if (!editingBook || !editingBook.id) return;
+
+      const payload = {
+        title: document.getElementById('edit-title-input').value.trim(),
+        author: document.getElementById('edit-author-input').value.trim(),
+        category: document.getElementById('edit-category-input').value.trim(),
+        description: document.getElementById('edit-description-input').value.trim(),
+      };
+
+      editSaveButton.disabled = true;
+      editSaveButton.textContent = '保存中...';
+      try {
+        const response = await fetch(`/api/library/books/${encodeURIComponent(editingBook.id)}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.ok) throw new Error(data.detail || data.error || '图书信息保存失败');
+        adminStatus.textContent = data.message || '图书信息已保存。';
+        closeEditModal();
+        await loadBooks();
+      } catch (error) {
+        console.error(error);
+        adminStatus.textContent = `保存失败：${error.message}`;
+      } finally {
+        editSaveButton.disabled = false;
+        editSaveButton.textContent = '保存';
+      }
+    }
+
+    function openArchiveModal(index) {
+      archivingBook = managedBooks[index] || null;
+      if (!archivingBook) return;
+      document.getElementById('archive-book-title').textContent = `《${archivingBook.title || '未命名图书'}》`;
+      document.getElementById('archive-modal').classList.remove('hidden');
+      document.body.classList.add('modal-open');
+    }
+
+    function closeArchiveModal() {
+      archivingBook = null;
+      document.getElementById('archive-modal').classList.add('hidden');
+      document.body.classList.remove('modal-open');
+    }
+
+    async function confirmArchiveBook() {
+      if (!archivingBook || !archivingBook.id) return;
+      archiveConfirmButton.disabled = true;
+      archiveConfirmButton.textContent = '归档中...';
+
+      try {
+        const response = await fetch(`/api/library/books/${encodeURIComponent(archivingBook.id)}`, { method: 'DELETE' });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || data.ok === false) throw new Error(data.detail || data.error || '图书归档失败');
+        adminStatus.textContent = data.message || '图书已移入归档。';
+        closeArchiveModal();
+        await loadBooks();
+      } catch (error) {
+        console.error(error);
+        adminStatus.textContent = `归档失败：${error.message}`;
+      } finally {
+        archiveConfirmButton.disabled = false;
+        archiveConfirmButton.textContent = '移入归档';
+      }
+    }
+
+    function cleanDisplayValue(value) {
+      const text = String(value ?? '').trim();
+      return ['none', 'null', 'undefined'].includes(text.toLowerCase()) ? '' : text;
+    }
+
+    function formatBytes(bytes) {
+      const size = Number(bytes) || 0;
+      if (size < 1024) return `${size} B`;
+      if (size < 1024 * 1024) return `${(size / 1024).toFixed(1)} KB`;
+      if (size < 1024 * 1024 * 1024) return `${(size / 1024 / 1024).toFixed(1)} MB`;
+      return `${(size / 1024 / 1024 / 1024).toFixed(1)} GB`;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    function escapeAttribute(value) {
+      return escapeHtml(value).replaceAll('`', '&#096;');
+    }
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        closeEditModal();
+        closeArchiveModal();
+      }
+    });
+
+    loadBooks();
+  </script>
+</body>
+</html>

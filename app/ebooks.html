@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>电子书图书馆 - 壳中灯 LanternBox</title>
+  <link rel="icon" href="/static/assets/brand/lanternbox-icon-original.png" type="image/png" />
+  <link rel="stylesheet" href="/static/style.css?v=header-actions-v0-3" />
+  <style>
+    .ebooks-hero { margin-bottom: 20px; }
+    .ebooks-header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .ebooks-header-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; flex-wrap: nowrap; margin-left: auto; }
+    .ebook-chip-button { min-height: 42px; padding: 10px 15px; border-radius: 14px; border: 1px solid rgba(137, 204, 255, 0.18); color: var(--text-main); background: rgba(255, 255, 255, 0.045); font-weight: 900; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+    .ebook-chip-button:hover { border-color: var(--border-strong); background: rgba(104, 199, 255, 0.1); }
+    .ebook-chip-button:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; transform: none; }
+    .ebook-section { margin-top: 16px; padding: 18px; border: 1px solid rgba(137, 204, 255, 0.14); border-radius: 22px; background: rgba(255, 255, 255, 0.045); }
+    .ebook-section-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .ebook-section-title h2 { margin: 0; color: var(--text-main); font-size: 22px; }
+    .ebook-section-title span { color: var(--text-muted); font-size: 14px; }
+    .ebook-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; }
+    .ebook-toolbar input { width: 100%; min-height: 44px; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(137, 204, 255, 0.18); color: var(--text-main); background: rgba(0, 0, 0, 0.18); font-size: 14px; outline: none; box-sizing: border-box; }
+    .ebook-toolbar input:focus { border-color: var(--border-strong); box-shadow: 0 0 0 3px rgba(104, 199, 255, 0.08); }
+    .ebook-status-text { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+    .ebook-empty { padding: 16px; border: 1px dashed rgba(137, 204, 255, 0.18); border-radius: 16px; color: var(--text-muted); background: rgba(255, 255, 255, 0.025); font-size: 15px; line-height: 1.6; }
+    .ebook-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin-top: 14px; }
+    .ebook-card { min-width: 0; display: grid; gap: 10px; padding: 16px; border: 1px solid rgba(137, 204, 255, 0.14); border-radius: 18px; background: rgba(255, 255, 255, 0.045); }
+    .ebook-card h3 { margin: 0; color: var(--text-main); font-size: 18px; line-height: 1.45; }
+    .ebook-card p { margin: 0; color: var(--text-soft); font-size: 14px; line-height: 1.6; }
+    .ebook-card small { color: var(--text-muted); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+    .ebook-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+    .ebook-badge { display: inline-flex; align-items: center; min-height: 24px; padding: 3px 8px; border-radius: 999px; color: var(--text-soft); background: rgba(104, 199, 255, 0.1); border: 1px solid rgba(137, 204, 255, 0.16); font-size: 12px; font-weight: 900; }
+    .ebook-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .ebook-reader-card { width: min(1180px, calc(100vw - 28px)); height: calc(100vh - 28px); max-height: calc(100vh - 28px); margin: 14px auto 0; display: grid; grid-template-rows: auto minmax(0, 1fr); }
+    .ebook-reader-body { min-height: 0; max-height: none; height: auto; display: grid; grid-template-rows: auto minmax(0, 1fr); padding: 0; overflow: hidden; }
+    .ebook-reader-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 12px 16px; border-bottom: 1px solid rgba(137, 204, 255, 0.16); background: rgba(255, 255, 255, 0.026); }
+    .ebook-reader-title { min-width: 0; color: var(--text-soft); font-size: 14px; line-height: 1.5; }
+    .ebook-reader-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .ebook-reader-frame { width: 100%; height: 100%; border: 0; background: #f7f5ee; }
+    .ebook-pdf-reader-layout { min-height: 0; display: grid; grid-template-columns: minmax(210px, 290px) minmax(0, 1fr); height: 100%; }
+    .ebook-pdf-reader-layout.no-outline { grid-template-columns: minmax(0, 1fr); }
+    .ebook-pdf-outline { min-height: 0; overflow: auto; padding: 12px; border-right: 1px solid rgba(137, 204, 255, 0.14); background: rgba(0, 0, 0, 0.16); }
+    .ebook-pdf-reader-layout.no-outline .ebook-pdf-outline { display: none; }
+    .ebook-pdf-outline button { width: 100%; margin-bottom: 5px; padding: 8px 10px; border-radius: 8px; border: 1px solid transparent; color: var(--text-soft); background: transparent; text-align: left; cursor: pointer; font-size: 14px; line-height: 1.45; overflow-wrap: anywhere; }
+    .ebook-pdf-outline button:hover, .ebook-pdf-outline button.active { border-color: rgba(137, 204, 255, 0.2); color: var(--text-main); background: rgba(104, 199, 255, 0.1); }
+    .ebook-pdf-layout { min-height: 0; overflow: auto; padding: 18px; background: #222831; }
+    .ebook-pdf-page { width: 1050px; max-width: none; height: auto; display: block; margin: 0 auto; background: #fbfaf5; box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35); }
+    .ebook-pdf-page-label { color: var(--text-soft); font-size: 14px; font-weight: 900; min-width: 92px; text-align: center; }
+    .ebook-pdf-jump { width: 74px; min-height: 42px; padding: 8px 10px; border-radius: 12px; border: 1px solid rgba(137, 204, 255, 0.18); color: var(--text-main); background: rgba(0, 0, 0, 0.18); font-size: 14px; font-weight: 900; outline: none; box-sizing: border-box; }
+    .ebook-pdf-zoom-label { color: var(--text-soft); font-size: 14px; font-weight: 900; min-width: 54px; text-align: center; }
+    .ebook-epub-layout { min-height: 0; display: grid; grid-template-columns: minmax(190px, 260px) minmax(0, 1fr); height: 100%; }
+    .ebook-toc { overflow: auto; padding: 12px; border-right: 1px solid rgba(137, 204, 255, 0.14); background: rgba(0, 0, 0, 0.12); }
+    .ebook-toc button { width: 100%; margin-bottom: 6px; padding: 9px 10px; border-radius: 10px; border: 1px solid transparent; color: var(--text-soft); background: transparent; text-align: left; cursor: pointer; line-height: 1.45; font-size: 14px; }
+    .ebook-toc button:hover, .ebook-toc button.active { border-color: rgba(137, 204, 255, 0.2); color: var(--text-main); background: rgba(104, 199, 255, 0.1); }
+    .ebook-chapter { min-height: 0; overflow: auto; padding: 28px; color: #1f2933; background: #fbfaf5; font-family: Georgia, 'Times New Roman', 'Noto Serif SC', serif; font-size: 18px; line-height: 1.85; }
+    .ebook-chapter h1, .ebook-chapter h2, .ebook-chapter h3 { color: #111827; line-height: 1.35; }
+    .ebook-chapter img { max-width: 100%; height: auto; display: block; margin: 16px auto; }
+    .ebook-chapter a { color: #0f5d8f; }
+    @media (max-width: 900px) {
+      .ebook-toolbar, .ebook-epub-layout, .ebook-pdf-reader-layout { grid-template-columns: 1fr; }
+      .ebook-toc, .ebook-pdf-outline { max-height: 170px; border-right: 0; border-bottom: 1px solid rgba(137, 204, 255, 0.14); }
+      .ebook-reader-card { width: calc(100vw - 20px); height: calc(100vh - 20px); max-height: calc(100vh - 20px); margin-top: 10px; }
+      .ebook-chapter { padding: 20px; font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero ebooks-hero">
+      <div class="ebooks-header-row">
+        <div>
+          <p class="eyebrow">EBOOK LIBRARY</p>
+          <h1 class="brand-title"><img class="brand-mark-inline" src="/static/assets/brand/lanternbox-icon-original.webp" alt="" />电子书图书馆</h1>
+          <p class="subtitle">PDF / EPUB 书架与离线阅读。当前页面仅用于阅读。</p>
+        </div>
+        <div class="ebooks-header-actions">
+          <a class="page-nav-button" href="/ebooks-admin.html">图书管理</a>
+          <a class="page-nav-button" href="/library.html">返回资料库</a>
+          <a class="page-nav-button" href="/">返回总览</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ebook-section">
+      <div class="ebook-section-title">
+        <h2>书架</h2>
+        <span id="ebook-count-label">正在读取</span>
+      </div>
+      <div class="ebook-toolbar">
+        <input id="ebook-search-input" type="search" placeholder="搜索书名、作者、分类或说明..." />
+        <button class="ebook-chip-button" onclick="loadEbooks()" type="button">搜索</button>
+        <button class="ebook-chip-button" onclick="resetEbookSearch()" type="button">刷新</button>
+      </div>
+      <p id="ebook-status" class="ebook-status-text">选择一本电子书开始阅读；上传、删除和信息编辑请进入图书管理。</p>
+      <div id="ebook-list" class="ebook-grid"></div>
+    </section>
+
+    <div id="ebook-modal" class="guide-modal hidden">
+      <div class="guide-modal-backdrop" onclick="closeEbookReader()"></div>
+      <div class="guide-modal-card ebook-reader-card">
+        <div class="guide-modal-header">
+          <div>
+            <p id="ebook-modal-id" class="guide-modal-id"></p>
+            <h2 id="ebook-modal-title">电子书阅读器</h2>
+            <p id="ebook-modal-meta" class="guide-modal-category"></p>
+          </div>
+          <button class="guide-modal-close" onclick="closeEbookReader()">关闭</button>
+        </div>
+        <div id="ebook-reader-body" class="guide-modal-body ebook-reader-body"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const ebookList = document.getElementById('ebook-list');
+    const ebookStatus = document.getElementById('ebook-status');
+    const ebookCountLabel = document.getElementById('ebook-count-label');
+    const ebookSearchInput = document.getElementById('ebook-search-input');
+    let latestEbooks = [];
+    let currentPdfBook = null;
+    let currentPdfPage = 1;
+    let currentPdfPageCount = 0;
+    let currentPdfOutline = [];
+    let currentPdfZoom = 1.35;
+    let currentEpubBook = null;
+    let currentEpubChapters = [];
+    let currentEpubChapterIndex = 0;
+
+    ebookSearchInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') loadEbooks();
+    });
+
+    async function loadEbooks() {
+      const keyword = ebookSearchInput.value.trim();
+      ebookStatus.textContent = keyword ? `正在搜索电子书：${keyword}` : '正在读取电子书图书馆...';
+      ebookCountLabel.textContent = '读取中';
+      ebookList.innerHTML = '<div class="ebook-empty">正在读取电子书...</div>';
+
+      try {
+        const url = keyword ? `/api/library/books?q=${encodeURIComponent(keyword)}` : '/api/library/books';
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('电子书列表读取失败');
+        const data = await response.json();
+        if (!data.ok) throw new Error(data.error || '电子书接口返回异常');
+        latestEbooks = Array.isArray(data.books) ? data.books : [];
+        renderEbooks(latestEbooks);
+        ebookStatus.textContent = keyword ? `搜索完成：${keyword}` : '电子书图书馆已同步。';
+        ebookCountLabel.textContent = `共 ${latestEbooks.length} 本`;
+      } catch (error) {
+        console.error(error);
+        latestEbooks = [];
+        ebookList.innerHTML = '<div class="ebook-empty">电子书列表读取失败，请确认后端服务正常。</div>';
+        ebookStatus.textContent = `读取失败：${error.message}`;
+        ebookCountLabel.textContent = '读取失败';
+      }
+    }
+
+    function resetEbookSearch() {
+      ebookSearchInput.value = '';
+      loadEbooks();
+    }
+
+    function renderEbooks(books) {
+      if (!Array.isArray(books) || !books.length) {
+        ebookList.innerHTML = '<div class="ebook-empty">还没有电子书。请进入图书管理导入 PDF / EPUB。</div>';
+        return;
+      }
+
+      ebookList.innerHTML = books.map((book, index) => {
+        const author = cleanDisplayValue(book.author);
+        const category = cleanDisplayValue(book.category);
+        const description = cleanDisplayValue(book.description);
+        const meta = [author, category].filter(Boolean).join(' · ') || '本地图书馆';
+        return `
+          <article class="ebook-card">
+            <div class="ebook-badges">
+              <span class="ebook-badge">${escapeHtml(String(book.format || '').toUpperCase())}</span>
+              <span class="ebook-badge">${escapeHtml(formatBytes(book.size_bytes || 0))}</span>
+            </div>
+            <h3>${escapeHtml(book.title || '未命名电子书')}</h3>
+            <p>${escapeHtml(description || meta)}</p>
+            <div class="ebook-actions">
+              <button class="ebook-chip-button" onclick="openEbook(${index})" type="button">阅读</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    async function openEbook(index) {
+      const book = latestEbooks[index];
+      if (!book || !book.id) return;
+
+      const modal = document.getElementById('ebook-modal');
+      const modalId = document.getElementById('ebook-modal-id');
+      const modalTitle = document.getElementById('ebook-modal-title');
+      const modalMeta = document.getElementById('ebook-modal-meta');
+      const readerBody = document.getElementById('ebook-reader-body');
+
+      modalId.textContent = `${String(book.format || '').toUpperCase()} · ${book.id}`;
+      modalTitle.textContent = book.title || '未命名电子书';
+      modalMeta.textContent = [cleanDisplayValue(book.author), cleanDisplayValue(book.category), formatBytes(book.size_bytes || 0)].filter(Boolean).join(' · ');
+      readerBody.innerHTML = '<div class="ebook-empty">正在打开电子书...</div>';
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+
+      if (book.format === 'pdf') {
+        await openPdfReader(book);
+      } else if (book.format === 'epub') {
+        await openEpubReader(book);
+      } else {
+        readerBody.innerHTML = '<div class="ebook-empty">暂不支持这种电子书格式。</div>';
+      }
+    }
+
+    async function openPdfReader(book) {
+      const readerBody = document.getElementById('ebook-reader-body');
+      currentPdfBook = book;
+      currentPdfPage = 1;
+      currentPdfPageCount = 0;
+      currentPdfOutline = [];
+
+      try {
+        const [infoResponse, outlineResponse] = await Promise.all([
+          fetch(`/api/library/books/${encodeURIComponent(book.id)}/pdf/info`),
+          fetch(`/api/library/books/${encodeURIComponent(book.id)}/pdf/outline`),
+        ]);
+        if (!infoResponse.ok) throw new Error('PDF 信息读取失败');
+        const data = await infoResponse.json();
+        if (!data.ok) throw new Error(data.detail || 'PDF 信息返回异常');
+        currentPdfPageCount = Number(data.page_count) || 0;
+        if (!currentPdfPageCount) throw new Error('PDF 页数为空');
+
+        if (outlineResponse.ok) {
+          const outlineData = await outlineResponse.json();
+          currentPdfOutline = Array.isArray(outlineData.outline) ? outlineData.outline : [];
+        }
+
+        readerBody.innerHTML = `
+          <div class="ebook-reader-toolbar">
+            <div id="ebook-reader-title" class="ebook-reader-title">PDF 阅读器</div>
+            <div class="ebook-reader-actions">
+              <button id="ebook-pdf-prev" class="ebook-chip-button" onclick="openPdfPage(currentPdfPage - 1)" type="button">上一页</button>
+              <span id="ebook-pdf-page-label" class="ebook-pdf-page-label">1 / ${currentPdfPageCount}</span>
+              <input id="ebook-pdf-jump" class="ebook-pdf-jump" type="number" min="1" max="${currentPdfPageCount}" value="1" onchange="openPdfPage(this.value)" />
+              <button id="ebook-pdf-next" class="ebook-chip-button" onclick="openPdfPage(currentPdfPage + 1)" type="button">下一页</button>
+              <button class="ebook-chip-button" onclick="setPdfZoom(currentPdfZoom - 0.2)" type="button">-</button>
+              <span id="ebook-pdf-zoom-label" class="ebook-pdf-zoom-label">135%</span>
+              <button class="ebook-chip-button" onclick="setPdfZoom(currentPdfZoom + 0.2)" type="button">+</button>
+              <button class="ebook-chip-button" onclick="fitPdfWidth()" type="button">适宽</button>
+            </div>
+          </div>
+          <div class="ebook-pdf-reader-layout ${currentPdfOutline.length ? '' : 'no-outline'}">
+            <nav id="ebook-pdf-outline" class="ebook-pdf-outline"></nav>
+            <div class="ebook-pdf-layout">
+              <img id="ebook-pdf-page" class="ebook-pdf-page" alt="PDF 页面" />
+            </div>
+          </div>
+        `;
+        renderPdfOutline();
+        await openPdfPage(1);
+      } catch (error) {
+        console.error(error);
+        readerBody.innerHTML = `<div class="ebook-empty">PDF 打开失败：${escapeHtml(error.message)}</div>`;
+      }
+    }
+
+    function renderPdfOutline() {
+      const toc = document.getElementById('ebook-pdf-outline');
+      if (!toc || !currentPdfOutline.length) return;
+      const activeIndex = currentPdfOutline.reduce((bestIndex, item, index) => {
+        const page = Number(item.page) || 0;
+        if (page > currentPdfPage) return bestIndex;
+        if (bestIndex < 0) return index;
+        const bestPage = Number(currentPdfOutline[bestIndex].page) || 0;
+        return page >= bestPage ? index : bestIndex;
+      }, -1);
+
+      toc.innerHTML = currentPdfOutline.map((item, index) => {
+        const page = Math.max(1, Math.min(Number(item.page) || 1, currentPdfPageCount || 1));
+        const level = Math.max(0, Math.min(Number(item.level) || 0, 6));
+        return `
+          <button class="${index === activeIndex ? 'active' : ''}" style="padding-left: ${10 + level * 14}px" onclick="openPdfPage(${page})" type="button">
+            ${escapeHtml(item.title || '未命名目录')} · ${page}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function getPdfRenderWidth() {
+      return Math.round(Math.max(1700, Math.min(3600, 1700 * currentPdfZoom)));
+    }
+
+    function applyPdfZoom() {
+      const img = document.getElementById('ebook-pdf-page');
+      const zoomLabel = document.getElementById('ebook-pdf-zoom-label');
+      if (img) img.style.width = `${Math.round(1050 * currentPdfZoom)}px`;
+      if (zoomLabel) zoomLabel.textContent = `${Math.round(currentPdfZoom * 100)}%`;
+    }
+
+    function setPdfZoom(zoom) {
+      currentPdfZoom = Math.max(0.8, Math.min(Number(zoom) || 1, 2.6));
+      applyPdfZoom();
+      if (currentPdfBook && currentPdfPageCount) openPdfPage(currentPdfPage, { keepScroll: true });
+    }
+
+    function fitPdfWidth() {
+      const pageScroller = document.querySelector('.ebook-pdf-layout');
+      const availableWidth = Math.max(760, (pageScroller?.clientWidth || 1050) - 36);
+      setPdfZoom(availableWidth / 1050);
+    }
+
+    async function openPdfPage(page, options = {}) {
+      if (!currentPdfBook || !currentPdfPageCount) return;
+      currentPdfPage = Math.max(1, Math.min(Number(page) || 1, currentPdfPageCount));
+
+      const title = document.getElementById('ebook-reader-title');
+      const label = document.getElementById('ebook-pdf-page-label');
+      const jump = document.getElementById('ebook-pdf-jump');
+      const prev = document.getElementById('ebook-pdf-prev');
+      const next = document.getElementById('ebook-pdf-next');
+      const img = document.getElementById('ebook-pdf-page');
+      const pageScroller = document.querySelector('.ebook-pdf-layout');
+      if (pageScroller && !options.keepScroll) {
+        pageScroller.scrollTop = 0;
+        pageScroller.scrollLeft = 0;
+      }
+      if (title) title.textContent = `正在渲染第 ${currentPdfPage} 页`;
+      if (label) label.textContent = `${currentPdfPage} / ${currentPdfPageCount}`;
+      if (jump) jump.value = String(currentPdfPage);
+      if (prev) prev.disabled = currentPdfPage <= 1;
+      if (next) next.disabled = currentPdfPage >= currentPdfPageCount;
+      renderPdfOutline();
+      applyPdfZoom();
+      if (!img) return;
+
+      img.onload = () => {
+        if (title) title.textContent = `第 ${currentPdfPage} 页`;
+        applyPdfZoom();
+      };
+      img.onerror = () => {
+        if (title) title.textContent = `第 ${currentPdfPage} 页渲染失败`;
+      };
+      img.removeAttribute('src');
+      img.src = `/api/library/books/${encodeURIComponent(currentPdfBook.id)}/pdf/pages/${currentPdfPage}?width=${getPdfRenderWidth()}`;
+    }
+
+    async function openEpubReader(book) {
+      const readerBody = document.getElementById('ebook-reader-body');
+      currentEpubBook = book;
+      currentEpubChapterIndex = 0;
+
+      try {
+        const response = await fetch(`/api/library/books/${encodeURIComponent(book.id)}/epub/manifest`);
+        if (!response.ok) throw new Error('EPUB 目录读取失败');
+        const data = await response.json();
+        if (!data.ok) throw new Error(data.detail || 'EPUB 目录返回异常');
+        currentEpubChapters = Array.isArray(data.chapters) ? data.chapters : [];
+        if (!currentEpubChapters.length) throw new Error('EPUB 没有可阅读章节');
+        readerBody.innerHTML = `
+          <div class="ebook-reader-toolbar">
+            <div id="ebook-reader-title" class="ebook-reader-title">准备读取章节</div>
+            <div class="ebook-reader-actions">
+              <button class="ebook-chip-button" onclick="openEpubChapter(currentEpubChapterIndex - 1)" type="button">上一章</button>
+              <button class="ebook-chip-button" onclick="openEpubChapter(currentEpubChapterIndex + 1)" type="button">下一章</button>
+            </div>
+          </div>
+          <div class="ebook-epub-layout">
+            <nav id="ebook-toc" class="ebook-toc"></nav>
+            <article id="ebook-chapter" class="ebook-chapter">正在读取章节...</article>
+          </div>
+        `;
+        renderEpubToc();
+        await openEpubChapter(0);
+      } catch (error) {
+        console.error(error);
+        readerBody.innerHTML = `<div class="ebook-empty">EPUB 打开失败：${escapeHtml(error.message)}</div>`;
+      }
+    }
+
+    function renderEpubToc() {
+      const toc = document.getElementById('ebook-toc');
+      if (!toc) return;
+      toc.innerHTML = currentEpubChapters.map(chapter => {
+        const level = Math.max(0, Math.min(Number(chapter.level || 0), 4));
+        return `
+          <button class="${chapter.index === currentEpubChapterIndex ? 'active' : ''}" style="padding-left: ${10 + level * 14}px" onclick="openEpubChapter(${chapter.index})" type="button">
+            ${escapeHtml(chapter.title || `章节 ${chapter.index + 1}`)}
+          </button>
+        `;
+      }).join('');
+    }
+
+    async function openEpubChapter(index) {
+      if (!currentEpubBook || index < 0 || index >= currentEpubChapters.length) return;
+      currentEpubChapterIndex = index;
+      renderEpubToc();
+
+      const title = document.getElementById('ebook-reader-title');
+      const chapterEl = document.getElementById('ebook-chapter');
+      if (title) title.textContent = `正在读取 ${index + 1} / ${currentEpubChapters.length}`;
+      if (chapterEl) chapterEl.innerHTML = '正在读取章节...';
+
+      try {
+        const response = await fetch(`/api/library/books/${encodeURIComponent(currentEpubBook.id)}/epub/chapters/${index}`);
+        if (!response.ok) throw new Error('章节读取失败');
+        const data = await response.json();
+        if (!data.ok || !data.chapter) throw new Error(data.detail || '章节返回异常');
+        if (title) title.textContent = `${index + 1} / ${currentEpubChapters.length} · ${currentEpubChapters[index]?.title || '章节'}`;
+        if (chapterEl) {
+          chapterEl.innerHTML = data.chapter.html || '<p>这一章没有可显示内容。</p>';
+          const anchor = data.chapter.anchor;
+          const target = anchor ? chapterEl.querySelector(`[id="${CSS.escape(anchor)}"], [name="${CSS.escape(anchor)}"]`) : null;
+          if (target) {
+            target.scrollIntoView({ block: 'start' });
+          } else {
+            chapterEl.scrollTop = 0;
+          }
+        }
+      } catch (error) {
+        console.error(error);
+        if (chapterEl) chapterEl.innerHTML = `<p>章节读取失败：${escapeHtml(error.message)}</p>`;
+      }
+    }
+
+    function closeEbookReader() {
+      const modal = document.getElementById('ebook-modal');
+      modal.classList.add('hidden');
+      document.body.classList.remove('modal-open');
+      const readerBody = document.getElementById('ebook-reader-body');
+      readerBody.innerHTML = '';
+      currentPdfBook = null;
+      currentPdfPage = 1;
+      currentPdfPageCount = 0;
+      currentPdfOutline = [];
+      currentPdfZoom = 1.35;
+      currentEpubBook = null;
+      currentEpubChapters = [];
+      currentEpubChapterIndex = 0;
+    }
+
+    function cleanDisplayValue(value) {
+      const text = String(value ?? '').trim();
+      return ['none', 'null', 'undefined'].includes(text.toLowerCase()) ? '' : text;
+    }
+
+    function formatBytes(bytes) {
+      const size = Number(bytes) || 0;
+      if (size < 1024) return `${size} B`;
+      if (size < 1024 * 1024) return `${(size / 1024).toFixed(1)} KB`;
+      if (size < 1024 * 1024 * 1024) return `${(size / 1024 / 1024).toFixed(1)} MB`;
+      return `${(size / 1024 / 1024 / 1024).toFixed(1)} GB`;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeEbookReader();
+    });
+
+    loadEbooks();
+  </script>
+</body>
+</html>

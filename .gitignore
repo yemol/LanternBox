@@ -96,3 +96,9 @@ data/terminal_sync/archive/
 hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/.pio/
 hardware/FT-01/LanternBox_FT01/Ft01Secrets.h
 hardware/Meshtastic/
+# Ebook library local content and caches
+data/library/books/
+data/library/archive/
+data/library/pdf_cache/
+data/library/epub_cache/
+docs/books/

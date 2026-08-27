@@ -10,6 +10,13 @@ APP_DIR = BASE_DIR / "app"
 DATA_DIR = BASE_DIR / "data"
 BACKUP_DIR = BASE_DIR / "backups"
 DB_PATH = DATA_DIR / "lanternbox.db"
+LIBRARY_DIR = DATA_DIR / "library"
+LIBRARY_BOOKS_DIR = LIBRARY_DIR / "books"
+LIBRARY_ARCHIVE_DIR = LIBRARY_DIR / "archive"
+LIBRARY_PDF_CACHE_DIR = LIBRARY_DIR / "pdf_cache"
+LIBRARY_EPUB_CACHE_DIR = LIBRARY_DIR / "epub_cache"
+LIBRARY_INDEX_FILE = LIBRARY_DIR / "library_index.json"
+LIBRARY_MANUAL_OUTLINES_FILE = LIBRARY_DIR / "manual_outlines.json"
 POCKETBASE_DATA_DB_PATH = BASE_DIR / "pocketbase" / "pb_data" / "data.db"
 EMERGENCY_GUIDES_PATH = DATA_DIR / "emergency_guides.json"
 EMERGENCY_GUIDES_FILE = DATA_DIR / "emergency_guides.json"
@@ -121,6 +128,10 @@ CHAT_SUMMARY_MAX_CHARS = 1800
 
 DATA_DIR.mkdir(exist_ok=True)
 BACKUP_DIR.mkdir(exist_ok=True)
+LIBRARY_BOOKS_DIR.mkdir(parents=True, exist_ok=True)
+LIBRARY_ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+LIBRARY_PDF_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+LIBRARY_EPUB_CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 SCENARIO_PROFILE = """
 当前系统默认场景是“壳中灯 LanternBox 离线生存与长期自给环境”。

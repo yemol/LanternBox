@@ -5,9 +5,10 @@ import sqlite3
 import uuid
 from datetime import datetime
 from typing import Any
+from urllib.parse import quote
 import urllib.request
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import FileResponse, Response, StreamingResponse
 
 from .services.wiki_service import (
@@ -21,6 +22,23 @@ from .services.journal_service import (
     list_journal_entries,
 )
 from .services.lora_service import get_lora_status
+from .services.library_service import (
+    BookNotFoundError,
+    archive_book,
+    LibraryError,
+    UnsupportedBookFormatError,
+    create_book_from_stream,
+    get_book,
+    get_book_file_path,
+    get_pdf_info,
+    get_pdf_outline,
+    get_pdf_page_image_path,
+    get_epub_chapter,
+    get_epub_manifest,
+    get_epub_resource,
+    list_books,
+    update_book_metadata,
+)
 
 from .config import (
     APP_DIR,
@@ -37,7 +55,7 @@ from .config import (
 )
 
 from .db import get_db_connection
-from .models import AiAdviceRequest, AiRuntimeSettingsUpdate, InventoryItem, JournalEntry, TtsSpeakRequest
+from .models import AiAdviceRequest, AiRuntimeSettingsUpdate, InventoryItem, JournalEntry, LibraryBookUpdate, TtsSpeakRequest
 from .resources import load_local_resources
 from .tts import cleanup_tts_output, synthesize_tts_to_file
 from .utils import get_default_model_for_mode
@@ -435,9 +453,214 @@ def assistant_page():
 def library_page():
     return FileResponse(APP_DIR / "library.html")
 
+@router.get("/ebooks.html")
+def ebooks_page():
+    return FileResponse(APP_DIR / "ebooks.html")
+
+@router.get("/ebooks")
+def ebooks_short_page():
+    return FileResponse(APP_DIR / "ebooks.html")
+
+@router.get("/ebooks-admin.html")
+def ebooks_admin_page():
+    return FileResponse(APP_DIR / "ebooks_admin.html")
+
+@router.get("/ebooks-admin")
+def ebooks_admin_short_page():
+    return FileResponse(APP_DIR / "ebooks_admin.html")
+
 @router.get("/kiwix.html")
 def kiwix_page():
     return FileResponse(APP_DIR / "kiwix.html")
+
+
+def _raise_library_http_error(error: LibraryError):
+    if isinstance(error, BookNotFoundError):
+        raise HTTPException(status_code=404, detail=str(error))
+    if isinstance(error, UnsupportedBookFormatError):
+        raise HTTPException(status_code=400, detail=str(error))
+    raise HTTPException(status_code=400, detail=str(error))
+
+
+@router.get("/api/library/books")
+def api_library_books(q: str = ""):
+    books = list_books(q)
+    return {
+        "ok": True,
+        "query": q.strip(),
+        "total": len(books),
+        "books": books,
+    }
+
+
+@router.post("/api/library/books")
+async def api_upload_library_book(
+    request: Request,
+    filename: str = "",
+    title: str = "",
+    author: str = "",
+    category: str = "",
+    description: str = "",
+):
+    original_filename = filename or request.headers.get("x-filename", "")
+
+    try:
+        book = await create_book_from_stream(
+            chunks=request.stream(),
+            original_filename=original_filename,
+            title=title,
+            author=author,
+            category=category,
+            description=description,
+        )
+    except LibraryError as error:
+        _raise_library_http_error(error)
+
+    return {
+        "ok": True,
+        "book": book,
+        "message": "电子书已加入图书馆。",
+    }
+
+
+@router.get("/api/library/books/{book_id}")
+def api_library_book_detail(book_id: str):
+    try:
+        book = get_book(book_id)
+    except LibraryError as error:
+        _raise_library_http_error(error)
+
+    return {
+        "ok": True,
+        "book": book,
+    }
+
+
+@router.patch("/api/library/books/{book_id}")
+def api_update_library_book(book_id: str, payload: LibraryBookUpdate):
+    patch = payload.dict(exclude_unset=True)
+    try:
+        book = update_book_metadata(book_id, patch)
+    except LibraryError as error:
+        _raise_library_http_error(error)
+
+    return {
+        "ok": True,
+        "book": book,
+        "message": "图书信息已更新。",
+    }
+
+
+@router.delete("/api/library/books/{book_id}")
+def api_delete_library_book(book_id: str):
+    if not archive_book(book_id):
+        raise HTTPException(status_code=404, detail="没有找到这本可归档的电子书。")
+
+    return {
+        "ok": True,
+        "message": "电子书已移入归档。",
+    }
+
+
+@router.get("/api/library/books/{book_id}/file")
+def api_library_book_file(book_id: str):
+    try:
+        path = get_book_file_path(book_id)
+    except LibraryError as error:
+        _raise_library_http_error(error)
+
+    if path.suffix.lower() == ".pdf":
+        ascii_name = path.name.encode("ascii", "ignore").decode("ascii") or "book.pdf"
+        ascii_name = "".join(char if 31 < ord(char) < 127 and char not in '\\"' else "_" for char in ascii_name)
+        encoded_name = quote(path.name)
+        return FileResponse(
+            path,
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": (
+                    f"inline; filename=\"{ascii_name}\"; filename*=UTF-8''{encoded_name}"
+                ),
+                "X-Content-Type-Options": "nosniff",
+            },
+        )
+
+    return FileResponse(path, media_type="application/epub+zip", filename=path.name)
+
+
+@router.get("/api/library/books/{book_id}/pdf/info")
+def api_library_pdf_info(book_id: str):
+    try:
+        info = get_pdf_info(book_id)
+    except LibraryError as error:
+        _raise_library_http_error(error)
+
+    return {
+        "ok": True,
+        **info,
+    }
+
+
+@router.get("/api/library/books/{book_id}/pdf/outline")
+def api_library_pdf_outline(book_id: str):
+    try:
+        outline = get_pdf_outline(book_id)
+    except LibraryError as error:
+        _raise_library_http_error(error)
+
+    return {
+        "ok": True,
+        **outline,
+    }
+
+
+@router.get("/api/library/books/{book_id}/pdf/pages/{page}")
+def api_library_pdf_page(book_id: str, page: int, width: int = 1500):
+    try:
+        image_path = get_pdf_page_image_path(book_id, page, width)
+    except LibraryError as error:
+        _raise_library_http_error(error)
+
+    return FileResponse(
+        image_path,
+        media_type="image/png",
+        headers={"Cache-Control": "public, max-age=86400"},
+    )
+
+
+@router.get("/api/library/books/{book_id}/epub/manifest")
+def api_library_epub_manifest(book_id: str):
+    try:
+        manifest = get_epub_manifest(book_id)
+    except LibraryError as error:
+        _raise_library_http_error(error)
+
+    return {
+        "ok": True,
+        **manifest,
+    }
+
+
+@router.get("/api/library/books/{book_id}/epub/chapters/{chapter_index}")
+def api_library_epub_chapter(book_id: str, chapter_index: int):
+    try:
+        chapter = get_epub_chapter(book_id, chapter_index)
+    except LibraryError as error:
+        _raise_library_http_error(error)
+
+    return {
+        "ok": True,
+        **chapter,
+    }
+
+
+@router.get("/api/library/books/{book_id}/epub/resource")
+def api_library_epub_resource(book_id: str, path: str):
+    try:
+        data, content_type = get_epub_resource(book_id, path)
+    except LibraryError as error:
+        _raise_library_http_error(error)
+
+    return Response(content=data, media_type=content_type)
 
 @router.get("/status.html")
 def status_page():
