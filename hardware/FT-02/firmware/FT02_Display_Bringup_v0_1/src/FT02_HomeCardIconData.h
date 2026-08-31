@@ -149,3 +149,8 @@ static const uint8_t ICON_HOME_CARD_NETWORK_DATA[] = {
 };
 
 static const FT02Icon ICON_HOME_CARD_NETWORK = {48, 48, 6, ICON_HOME_CARD_NETWORK_DATA};
+
+// Field Library Alpha reuses the proven monochrome book glyph for the first
+// firmware integration. The card itself is independently addressable and can
+// receive a dedicated library glyph later without changing HomeCards logic.
+static const FT02Icon ICON_HOME_CARD_LIBRARY = ICON_HOME_CARD_KNOWLEDGE;

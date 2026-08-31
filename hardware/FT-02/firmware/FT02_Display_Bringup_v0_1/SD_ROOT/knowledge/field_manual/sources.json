@@ -194,5 +194,201 @@
   "KNOT_TRUCKER": {
     "name": "Animated Knots by Grog - Trucker's Hitch",
     "url": "https://www.animatedknots.com/truckers-hitch-knot"
+  },
+  "RC_HEART": {
+    "name": "American Red Cross - Heart Attack",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/heart-attack"
+  },
+  "RC_STROKE": {
+    "name": "American Red Cross - Stroke",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/stroke"
+  },
+  "RC_ASTHMA": {
+    "name": "American Red Cross - Asthma Attack",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/asthma-attack"
+  },
+  "RC_RESP": {
+    "name": "American Red Cross - Respiratory Distress",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/respiratory-distress-trouble-breathing"
+  },
+  "RC_DIAB": {
+    "name": "American Red Cross - Diabetic Emergencies",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/diabetic-emergencies"
+  },
+  "RC_INFANT_CHOKE": {
+    "name": "American Red Cross - Infant Choking",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/infant-choking"
+  },
+  "RC_INFANT_CPR": {
+    "name": "American Red Cross - Child & Baby CPR",
+    "url": "https://www.redcross.org/take-a-class/cpr/performing-cpr/child-baby-cpr"
+  },
+  "RC_DROWN": {
+    "name": "American Red Cross Guidelines - Drowning Process Resuscitation",
+    "url": "https://guidelines.redcross.org/guidelines-database/drowning-process-resuscitation/"
+  },
+  "RC_OPIOID": {
+    "name": "American Red Cross - Opioid Overdose",
+    "url": "https://www.redcross.org/take-a-class/resources/learn-first-aid/opioid-overdose"
+  },
+  "CDC_NALOXONE": {
+    "name": "CDC - Lifesaving Naloxone",
+    "url": "https://www.cdc.gov/stop-overdose/caring/naloxone.html"
+  },
+  "CDC_CO": {
+    "name": "CDC - Carbon Monoxide Poisoning Basics",
+    "url": "https://www.cdc.gov/carbon-monoxide/about/index.html"
+  },
+  "CDC_POWER": {
+    "name": "CDC - What to Do During a Power Outage",
+    "url": "https://www.cdc.gov/natural-disasters/response/what-to-do-protect-yourself-during-a-power-outage.html"
+  },
+  "READY_EARTHQUAKE": {
+    "name": "FEMA Ready.gov - Earthquakes",
+    "url": "https://www.ready.gov/earthquakes"
+  },
+  "READY_FIRE": {
+    "name": "FEMA Ready.gov - Home Fires",
+    "url": "https://www.ready.gov/home-fires"
+  },
+  "READY_WILDFIRE": {
+    "name": "FEMA Ready.gov - Wildfires",
+    "url": "https://www.ready.gov/wildfires"
+  },
+  "READY_FLOOD": {
+    "name": "FEMA Ready.gov - Floods",
+    "url": "https://www.ready.gov/floods"
+  },
+  "READY_HURRICANE": {
+    "name": "FEMA Ready.gov - Hurricanes",
+    "url": "https://www.ready.gov/hurricanes"
+  },
+  "READY_TSUNAMI": {
+    "name": "FEMA Ready.gov - Tsunamis",
+    "url": "https://www.ready.gov/tsunamis"
+  },
+  "READY_HAZARDS": {
+    "name": "FEMA Ready.gov - Full Suite Hazard Information Sheets",
+    "url": "https://www.ready.gov/sites/default/files/2025-02/fema_full-suite-hazard-info-sheets.pdf"
+  },
+  "CDC_FLOOD": {
+    "name": "CDC - Flood and Disaster Safety Messaging",
+    "url": "https://www.cdc.gov/natural-disasters/about/index.html"
+  },
+  "CDC_NORO": {
+    "name": "CDC - Norovirus Prevention and Cleanup",
+    "url": "https://www.cdc.gov/norovirus/prevention/index.html"
+  },
+  "WHO_WASH": {
+    "name": "WHO - Household Water Treatment and Safe Storage after Emergencies",
+    "url": "https://www.who.int/docs/default-source/wash-documents/wash-in-emergencies/household-water-treatment-and-safe-storage-after-emergencies.pdf"
+  },
+  "OSHA_POWERLINE": {
+    "name": "OSHA - Downed Electrical Lines and Disaster Utilities",
+    "url": "https://www.osha.gov/etools/hurricane/activity-sheets/community-public-health/public-safety"
+  },
+  "USFA_EXT": {
+    "name": "U.S. Fire Administration - Choosing and Using Fire Extinguishers",
+    "url": "https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/fire-extinguishers/"
+  },
+  "USFA_COOK": {
+    "name": "U.S. Fire Administration - Cooking Fire Safety",
+    "url": "https://www.usfa.fema.gov/prevention/home-fires/prevent-fires/cooking/"
+  },
+  "USFA_HEATER": {
+    "name": "U.S. Fire Administration - Portable Heater Fire Safety",
+    "url": "https://www.usfa.fema.gov/downloads/pdf/publications/portable_heater_fire_safety_flyer.pdf"
+  },
+  "NPS_CAMP_SAFETY": {
+    "name": "National Park Service - Camping Safely During Your Stay",
+    "url": "https://home.nps.gov/articles/camp-safety-during-your-stay.htm"
+  },
+  "FEMA_WIND_OPENINGS": {
+    "name": "FEMA - Protect Your Property From Severe Winds",
+    "url": "https://www.fema.gov/sites/default/files/2020-11/fema_protect-your-property_severe-wind.pdf"
+  },
+  "READY_PLAN": {
+    "name": "FEMA Ready.gov - Make a Plan / Evacuation and Communication",
+    "url": "https://www.ready.gov/plan"
+  },
+  "NPS_KATMAI_CAMP_2026": {
+    "name": "National Park Service - Katmai Camping Best Practices / Bear Country",
+    "url": "https://home.nps.gov/katm/planyourvisit/plyovicamp.htm"
+  },
+  "NPS_BEAR_CAMP_2026": {
+    "name": "National Park Service - Denali Bear Safety / Backcountry Food Storage",
+    "url": "https://home.nps.gov/dena/planyourvisit/bear-safety.htm"
+  },
+  "NPS_LION": {
+    "name": "National Park Service - Mountain Lion Safety",
+    "url": "https://home.nps.gov/articles/mountain-lion-safety.htm"
+  },
+  "NPS_WILDLIFE": {
+    "name": "National Park Service - Wildlife Safety",
+    "url": "https://home.nps.gov/romo/planyourvisit/wildlife-safety.htm"
+  },
+  "CDC_WILDLIFE_2026": {
+    "name": "CDC - Wildlife: Healthy Pets, Healthy People",
+    "url": "https://www.cdc.gov/healthy-pets/about/wildlife.html"
+  },
+  "CDC_TRICH_2024": {
+    "name": "CDC - How to Prevent Trichinellosis",
+    "url": "https://www.cdc.gov/trichinellosis/prevention/index.html"
+  },
+  "CDC_TRICH_MMWR_2024": {
+    "name": "CDC MMWR - Trichinellosis Outbreak Associated with Undercooked Bear Meat (2022)",
+    "url": "https://www.cdc.gov/mmwr/volumes/73/wr/mm7320a2.htm"
+  },
+  "CDC_GAME_BIRD_2025": {
+    "name": "CDC - Hunters and Bird Flu / Wild Game Handling",
+    "url": "https://www.cdc.gov/bird-flu/risk-factors/hunters-and-bird-flu.html"
+  },
+  "AFH10_644": {
+    "name": "U.S. Air Force Handbook 10-644 Survival Evasion Resistance Escape Operations",
+    "url": "https://static.e-publishing.af.mil/production/1/af_a3/publication/afh10-644/afh10-644.pdf"
+  },
+  "FEMA_CERT_COLLAPSE": {
+    "name": "FEMA CERT Basic Training - Light Search and Rescue / Structural Collapse Safety",
+    "url": "https://www.fema.gov/sites/default/files/2020-07/fema-cert_basic-training-participant-manual_01-01-2011.pdf"
+  },
+  "FEMA_CERT_HAZARD": {
+    "name": "FEMA CERT Hazard Annexes - Earthquake / Trapped in Debris",
+    "url": "https://www.ready.gov/sites/default/files/2019.CERT_.HazardAnnexes.PM_.FINAL_.508c.pdf"
+  },
+  "NPS_WINTER_2025": {
+    "name": "National Park Service - North Cascades Winter Safety",
+    "url": "https://home.nps.gov/noca/planyourvisit/winter-safety.htm"
+  },
+  "NPS_WHITEOUT": {
+    "name": "National Park Service - Mount Rainier Hiking Safety / Whiteout",
+    "url": "https://www.nps.gov/mora/planyourvisit/hiking-safety.htm"
+  },
+  "NPS_ICE_2025": {
+    "name": "National Park Service - Curecanti Ice Safety",
+    "url": "https://www.nps.gov/cure/planyourvisit/safety.htm"
+  },
+  "RC_CHEST_GUIDE": {
+    "name": "American Red Cross Guidelines - Open Chest Wounds",
+    "url": "https://www.redcross.org/take-a-class/resources/guidelines"
+  },
+  "AHA_2025_PED_BLS": {
+    "name": "American Heart Association 2025 Pediatric Basic Life Support Guidelines",
+    "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/pediatric-basic-life-support"
+  },
+  "ESFI_DOWNED": {
+    "name": "Electrical Safety Foundation International - Downed Power Lines",
+    "url": "https://www.esfi.org/downed-power-lines/"
+  },
+  "CDC_TICK_2026": {
+    "name": "CDC - What to Do After a Tick Bite (2026)",
+    "url": "https://www.cdc.gov/ticks/after-a-tick-bite/index.html"
+  },
+  "CDC_RODENT_CLEAN": {
+    "name": "CDC - How to Clean Up After Rodents",
+    "url": "https://www.cdc.gov/healthy-pets/rodent-control/clean-up.html"
+  },
+  "CDC_BOTULISM": {
+    "name": "CDC - Botulism Prevention",
+    "url": "https://www.cdc.gov/botulism/prevention/index.html"
   }
 }

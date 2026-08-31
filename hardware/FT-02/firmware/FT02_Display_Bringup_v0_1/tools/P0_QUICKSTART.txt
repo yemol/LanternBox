@@ -1,0 +1,9 @@
+FT-02 Field Library P0 Clean Baseline A6
+
+1) Reset all prior book/source data:
+   python3 tools/reset_p0_library.py --project-root "$PWD"
+
+2) Verify the empty clean baseline:
+   python3 tools/validate_ft02_field_library.py "$PWD/SD_ROOT/library"
+
+3) Do NOT fetch anything until a book is explicitly approved and added to tools/p0_sources_A6.json.

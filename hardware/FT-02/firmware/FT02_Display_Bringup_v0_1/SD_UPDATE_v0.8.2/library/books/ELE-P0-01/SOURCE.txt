@@ -1,0 +1,13 @@
+Title: 灾后与离线场景零基础电工手册
+Author: LanternBox 编辑组（综合整理）
+Source: local-curated
+Record: FT02_ELE_P0_01_A3_FULL
+License: Internal curated derivative; preserve source provenance separately
+Reuse status: APPROVED_INTERNAL
+Content status: P0_A3_FULL
+Source status: APPROVED
+Content audit: APPROVED
+Practical value: APPROVED
+Admission: APPROVED
+Library role: CORE_CONTENT
+Installable: True

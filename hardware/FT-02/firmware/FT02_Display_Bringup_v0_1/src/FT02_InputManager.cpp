@@ -2,14 +2,27 @@
 
 #include <Wire.h>
 
+#include "FT02_I2CBus.h"
+
 static uint8_t g_ft02CardKbAddress = 0x5F;
 static char g_ft02LastRawKey = 0;
 static uint32_t g_ft02LastRawKeyMillis = 0;
+
+// Discrete one-shot keys (ENTER/BACK/HELP) must not auto-repeat while the
+// same physical press is held across a long e-paper transaction.  CardKB2 can
+// occasionally expose a very short zero between repeat reports, so release is
+// only accepted after several consecutive zero samples spanning a stable
+// interval.  Direction/character keys retain the existing repeat behavior.
+static uint8_t g_ft02OneShotLatchedRaw = 0;
+static uint8_t g_ft02OneShotReleaseZeroSamples = 0;
+static uint32_t g_ft02OneShotReleaseZeroSinceMs = 0;
 
 static bool g_ft02CardKbAvailable = false;
 static uint32_t g_ft02LastProbeMillis = 0;
 static uint32_t g_ft02LastReadFailLogMillis = 0;
 static uint8_t g_ft02ReadFailCount = 0;
+static bool g_ft02LowNoiseMode = false;
+static uint32_t g_ft02LastPhysicalPollMs = 0;
 
 static int g_ft02InputSdaPin = -1;
 static int g_ft02InputSclPin = -1;
@@ -18,14 +31,25 @@ static const uint32_t FT02_INPUT_PROBE_INTERVAL_MS = 3000;
 static const uint32_t FT02_INPUT_FAIL_LOG_INTERVAL_MS = 3000;
 static const uint8_t FT02_INPUT_MAX_READ_FAILS = 3;
 static const uint32_t FT02_INPUT_SAME_KEY_REPEAT_MS = 180;
+static const uint32_t FT02_INPUT_LOW_NOISE_POLL_MS = 100;
+static const uint8_t FT02_INPUT_ONE_SHOT_RELEASE_SAMPLES = 4;
+static const uint32_t FT02_INPUT_ONE_SHOT_RELEASE_STABLE_MS = 48;
+
+static bool FT02_IsOneShotKey(FT02InputKey key)
+{
+    return key == FT02_KEY_SELECT || key == FT02_KEY_BACK || key == FT02_KEY_HELP;
+}
 
 static bool FT02_ProbeCardKb()
 {
+    if(!FT02_I2CBusLock(50)) return false;
+
     Wire.beginTransmission(
         g_ft02CardKbAddress
     );
 
-    uint8_t error = Wire.endTransmission();
+    const uint8_t error = Wire.endTransmission();
+    FT02_I2CBusUnlock();
 
     return error == 0;
 }
@@ -76,13 +100,19 @@ static char FT02_ReadCardKbRawKey()
         return 0;
     }
 
-    uint8_t received = Wire.requestFrom(
+    if(!FT02_I2CBusLock(20))
+    {
+        return 0;
+    }
+
+    const uint8_t received = Wire.requestFrom(
         g_ft02CardKbAddress,
         static_cast<uint8_t>(1)
     );
 
     if(received < 1 || Wire.available() <= 0)
     {
+        FT02_I2CBusUnlock();
         g_ft02ReadFailCount++;
 
         uint32_t now = millis();
@@ -105,7 +135,8 @@ static char FT02_ReadCardKbRawKey()
 
     g_ft02ReadFailCount = 0;
 
-    char raw = static_cast<char>(Wire.read());
+    const char raw = static_cast<char>(Wire.read());
+    FT02_I2CBusUnlock();
 
     if(raw == 0)
     {
@@ -211,10 +242,15 @@ void FT02_InputBegin(
 
     g_ft02LastRawKey = 0;
     g_ft02LastRawKeyMillis = 0;
+    g_ft02OneShotLatchedRaw = 0;
+    g_ft02OneShotReleaseZeroSamples = 0;
+    g_ft02OneShotReleaseZeroSinceMs = 0;
     g_ft02ReadFailCount = 0;
     g_ft02LastReadFailLogMillis = 0;
     g_ft02LastProbeMillis = 0;
     g_ft02CardKbAvailable = false;
+    g_ft02LowNoiseMode = false;
+    g_ft02LastPhysicalPollMs = 0;
 
     Wire.begin(
         g_ft02InputSdaPin,
@@ -224,6 +260,7 @@ void FT02_InputBegin(
     Wire.setClock(
         100000
     );
+    FT02_I2CBusInit();
 
     Serial.print("FT02 InputManager: fixed CardKB2 pins SDA=");
     Serial.print(g_ft02InputSdaPin);
@@ -240,22 +277,89 @@ bool FT02_InputCardKbAvailable()
     return g_ft02CardKbAvailable;
 }
 
+void FT02_InputSetLowNoiseMode(bool enabled)
+{
+    if(g_ft02LowNoiseMode == enabled) return;
+    g_ft02LowNoiseMode = enabled;
+    g_ft02LastPhysicalPollMs = 0;
+    Serial.printf(
+        "[INPUT-I2C] low-noise polling=%s interval=%lums\n",
+        enabled ? "ON" : "OFF",
+        static_cast<unsigned long>(enabled ? FT02_INPUT_LOW_NOISE_POLL_MS : 0u)
+    );
+}
+
 FT02InputEvent FT02_InputPoll()
 {
     FT02InputEvent event;
+    if(g_ft02LowNoiseMode)
+    {
+        const uint32_t now = millis();
+        if(now - g_ft02LastPhysicalPollMs < FT02_INPUT_LOW_NOISE_POLL_MS)
+        {
+            event.key = FT02_KEY_NONE;
+            event.raw = 0;
+            event.command = 0;
+            return event;
+        }
+        g_ft02LastPhysicalPollMs = now;
+    }
     event.key = FT02_KEY_NONE;
     event.raw = 0;
     event.command = 0;
 
     char raw = FT02_ReadCardKbRawKey();
 
+    const uint32_t now = millis();
+
     if(raw == 0)
     {
         g_ft02LastRawKey = 0;
+
+        if(g_ft02OneShotLatchedRaw != 0)
+        {
+            if(g_ft02OneShotReleaseZeroSamples == 0)
+            {
+                g_ft02OneShotReleaseZeroSinceMs = now;
+            }
+            if(g_ft02OneShotReleaseZeroSamples < 0xFF)
+            {
+                ++g_ft02OneShotReleaseZeroSamples;
+            }
+
+            if(g_ft02OneShotReleaseZeroSamples >= FT02_INPUT_ONE_SHOT_RELEASE_SAMPLES &&
+               static_cast<uint32_t>(now - g_ft02OneShotReleaseZeroSinceMs) >=
+                   FT02_INPUT_ONE_SHOT_RELEASE_STABLE_MS)
+            {
+                Serial.printf(
+                    "[INPUT-ONE-SHOT-A16] release stable raw=0x%02X samples=%u ms=%lu\n",
+                    static_cast<unsigned>(g_ft02OneShotLatchedRaw),
+                    static_cast<unsigned>(g_ft02OneShotReleaseZeroSamples),
+                    static_cast<unsigned long>(now - g_ft02OneShotReleaseZeroSinceMs)
+                );
+                g_ft02OneShotLatchedRaw = 0;
+                g_ft02OneShotReleaseZeroSamples = 0;
+                g_ft02OneShotReleaseZeroSinceMs = 0;
+            }
+        }
         return event;
     }
 
-    uint32_t now = millis();
+    if(g_ft02OneShotLatchedRaw != 0)
+    {
+        g_ft02OneShotReleaseZeroSamples = 0;
+        g_ft02OneShotReleaseZeroSinceMs = 0;
+
+        if(static_cast<uint8_t>(raw) == g_ft02OneShotLatchedRaw)
+        {
+            return event;
+        }
+
+        // A genuinely different key is allowed immediately. This preserves
+        // responsive navigation while the previous discrete key is being
+        // released.
+        g_ft02OneShotLatchedRaw = 0;
+    }
 
     if(raw == g_ft02LastRawKey)
     {
@@ -271,6 +375,13 @@ FT02InputEvent FT02_InputPoll()
     event.raw = raw;
     event.command = FT02_NormalizeCommandChar(raw);
     event.key = FT02_MapRawKey(raw, event.command);
+
+    if(FT02_IsOneShotKey(event.key))
+    {
+        g_ft02OneShotLatchedRaw = static_cast<uint8_t>(raw);
+        g_ft02OneShotReleaseZeroSamples = 0;
+        g_ft02OneShotReleaseZeroSinceMs = 0;
+    }
 
     return event;
 }

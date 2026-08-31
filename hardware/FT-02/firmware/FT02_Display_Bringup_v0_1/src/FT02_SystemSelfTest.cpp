@@ -255,11 +255,11 @@ void runAudio()
 {
     const FT02AudioLogStatus audio = FT02_AudioLogStatusCurrent();
     if(audio.codecReady && audio.i2sReady)
-        addItem("音频", FT02_SELFTEST_PASS, "WM8960与I2S正常");
-    else if(!audio.codecReady)
-        addItem("音频", FT02_SELFTEST_FAIL, "WM8960无响应");
-    else
+        addItem("音频", FT02_SELFTEST_PASS, "ES8311与I2S正常");
+    else if(!audio.i2sReady)
         addItem("音频", FT02_SELFTEST_FAIL, "I2S初始化失败");
+    else
+        addItem("音频", FT02_SELFTEST_FAIL, "ES8311无响应");
 }
 
 void runMap()

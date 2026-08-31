@@ -42,6 +42,10 @@ void FT02_InputBegin(
 
 FT02InputEvent FT02_InputPoll();
 
+// Low-noise capture mode keeps R/stop responsive while reducing CardKB2 I2C
+// activity to 10 Hz, cutting digital-edge coupling into the analogue mic path.
+void FT02_InputSetLowNoiseMode(bool enabled);
+
 // Passive availability state maintained by the existing periodic CardKB2 probe.
 bool FT02_InputCardKbAvailable();
 

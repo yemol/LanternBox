@@ -1,8 +1,10 @@
 #include "FT02_HomeCards.h"
+#include <string.h>
 #include "FT02_EpdLifecycle.h"
 #include "FT02_EpdInteractiveRuntime.h"
 
 #include "FT02_FontData.h"
+#include "FT02_GlobalCJKFontData.h"
 #include "FT02_HomeCardIconData.h"
 
 struct FT02HomeCard
@@ -11,6 +13,29 @@ struct FT02HomeCard
     const FT02Icon* icon;
     const FT02FontPack* font;
 };
+
+static const FT02FontIndexRecord FT02_HOME_LIBRARY_BOOK_28_IDX[] PROGMEM = {
+    {0x4E66, 0}
+};
+
+static const uint8_t FT02_HOME_LIBRARY_BOOK_28_BIN[] PROGMEM = {
+    0x1C, 0x1B, 0x04, 0x00, 0xE8, 0x1C, 0x00, 0x00, 0x00, 0x0C, 0x06, 0x00, 0x00, 0x0C, 0x06, 0x00,
+    0x00, 0x0C, 0x0F, 0x00, 0x00, 0x0C, 0x07, 0x80, 0x00, 0x0C, 0x00, 0xE0, 0x0F, 0xFF, 0xFE, 0x40,
+    0x0F, 0xFF, 0xFE, 0x00, 0x00, 0x0C, 0x0E, 0x00, 0x00, 0x0C, 0x0E, 0x00, 0x00, 0x0C, 0x0E, 0x00,
+    0x00, 0x0C, 0x0E, 0x00, 0x00, 0x0C, 0x0E, 0x00, 0x00, 0x0C, 0x0E, 0x00, 0x3F, 0xFF, 0xFF, 0xE0,
+    0x3F, 0xFF, 0xFF, 0xE0, 0x00, 0x0C, 0x00, 0x40, 0x00, 0x0C, 0x00, 0x40, 0x00, 0x0C, 0x00, 0xC0,
+    0x00, 0x0C, 0x00, 0xC0, 0x00, 0x0C, 0x00, 0xC0, 0x00, 0x0C, 0x00, 0xC0, 0x00, 0x0C, 0x3F, 0xC0,
+    0x00, 0x0C, 0x1F, 0x80, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+};
+
+static const FT02FontPack FT02_HOME_LIBRARY_BOOK_28 = {
+    FT02_HOME_LIBRARY_BOOK_28_IDX,
+    1,
+    FT02_HOME_LIBRARY_BOOK_28_BIN,
+    sizeof(FT02_HOME_LIBRARY_BOOK_28_BIN)
+};
+
 
 static const int FT02_HOME_CARD_X = 32;
 static const int FT02_HOME_CARD_Y = 170;
@@ -25,8 +50,7 @@ static const int FT02_HOME_CARD_ICON_OFFSET_Y = 22;
 static const int FT02_HOME_CARD_TEXT_OFFSET_X = 90;
 static const int FT02_HOME_CARD_TEXT_BASELINE_OFFSET_Y = 60;
 
-static const int FT02_HOME_CURRENT_PAGE = 0;
-static const int FT02_HOME_TOTAL_PAGES = 2;
+static const int FT02_HOME_CARDS_PER_PAGE = 6;
 static const int FT02_HOME_PAGE_INDICATOR_Y = 420;
 static const int FT02_HOME_PAGE_DOT_RADIUS = 7;
 static const int FT02_HOME_PAGE_DOT_GAP = 26;
@@ -61,6 +85,11 @@ static const FT02HomeCard FT02_HOME_CARDS[] = {
         "设备状态",
         &ICON_HOME_CARD_SYSTEM,
         &ft02_menu_28m
+    },
+    {
+        "随身书库",
+        &ICON_HOME_CARD_LIBRARY,
+        &ft02_menu_28m
     }
 };
 
@@ -79,8 +108,9 @@ static void FT02_GetHomeCardRect(
         cardIndex
     );
 
-    int row = cardIndex / 3;
-    int col = cardIndex % 3;
+    const int localIndex = cardIndex % FT02_HOME_CARDS_PER_PAGE;
+    int row = localIndex / 3;
+    int col = localIndex % 3;
 
     *x = FT02_HOME_CARD_X
         + col * (FT02_HOME_CARD_W + FT02_HOME_CARD_GAP_X);
@@ -162,6 +192,29 @@ static void FT02_DrawHomePageIndicator(
     }
 }
 
+static void FT02_DrawHomeLibraryLabel(
+    FT02Display& display,
+    int x,
+    int baselineY,
+    bool selected
+)
+{
+    const char* first = "随身";
+    const char* middle = "书";
+    const char* last = "库";
+
+    if(selected) FT02_DrawTextPackInvert(display, ft02_menu_28m, first, x, baselineY);
+    else FT02_DrawTextPack(display, ft02_menu_28m, first, x, baselineY);
+    x += FT02_TextWidthPack(ft02_menu_28m, first);
+
+    if(selected) FT02_DrawTextPackInvert(display, FT02_HOME_LIBRARY_BOOK_28, middle, x, baselineY);
+    else FT02_DrawTextPack(display, FT02_HOME_LIBRARY_BOOK_28, middle, x, baselineY);
+    x += FT02_TextWidthPack(FT02_HOME_LIBRARY_BOOK_28, middle);
+
+    if(selected) FT02_DrawTextPackInvert(display, ft02_menu_28m, last, x, baselineY);
+    else FT02_DrawTextPack(display, ft02_menu_28m, last, x, baselineY);
+}
+
 static void FT02_DrawHomeCard(
     FT02Display& display,
     int x,
@@ -221,7 +274,11 @@ static void FT02_DrawHomeCard(
     int textX = x + FT02_HOME_CARD_TEXT_OFFSET_X;
     int textBaselineY = y + FT02_HOME_CARD_TEXT_BASELINE_OFFSET_Y;
 
-    if(selected)
+    if(strcmp(card.label, "随身书库") == 0)
+    {
+        FT02_DrawHomeLibraryLabel(display, textX, textBaselineY, selected);
+    }
+    else if(selected)
     {
         FT02_DrawTextPackInvert(
             display,
@@ -389,7 +446,10 @@ static void FT02_RedrawHomeCardSelectionPartial(
             GxEPD_WHITE
         );
 
-        for(int i = 0; i < FT02_HOME_CARD_COUNT; i++)
+        const int currentPage = FT02_HomeCardPageForIndex(newSelectedCardIndex);
+        const int pageStart = currentPage * FT02_HOME_CARDS_PER_PAGE;
+        const int pageEnd = FT02_MinInt(pageStart + FT02_HOME_CARDS_PER_PAGE, FT02_HOME_CARD_COUNT);
+        for(int i = pageStart; i < pageEnd; i++)
         {
             int cardX;
             int cardY;
@@ -456,27 +516,65 @@ int FT02_MoveHomeCardSelection(
     int deltaCol
 )
 {
-    selectedCardIndex = FT02_ClampHomeCardIndex(
-        selectedCardIndex
-    );
+    selectedCardIndex = FT02_ClampHomeCardIndex(selectedCardIndex);
 
-    int row = selectedCardIndex / 3;
-    int col = selectedCardIndex % 3;
+    const int page = selectedCardIndex / FT02_HOME_CARDS_PER_PAGE;
+    const int pageStart = page * FT02_HOME_CARDS_PER_PAGE;
+    const int localIndex = selectedCardIndex - pageStart;
+    const int row = localIndex / 3;
+    const int col = localIndex % 3;
 
-    int nextRow = row + deltaRow;
-    int nextCol = col + deltaCol;
+    if(deltaRow != 0)
+    {
+        int targetLocal = (row + deltaRow) * 3 + col;
+        if(targetLocal >= 0 && targetLocal < FT02_HOME_CARDS_PER_PAGE)
+        {
+            const int candidate = pageStart + targetLocal;
+            if(candidate >= 0 && candidate < FT02_HOME_CARD_COUNT) return candidate;
+        }
+        return selectedCardIndex;
+    }
 
-    if(nextRow < 0) nextRow = 0;
-    if(nextRow > 1) nextRow = 1;
+    if(deltaCol < 0)
+    {
+        if(col > 0) return selectedCardIndex - 1;
+        if(page > 0)
+        {
+            const int previousPageStart = (page - 1) * FT02_HOME_CARDS_PER_PAGE;
+            const int candidate = previousPageStart + row * 3 + 2;
+            return FT02_ClampHomeCardIndex(candidate);
+        }
+        return selectedCardIndex;
+    }
 
-    if(nextCol < 0) nextCol = 0;
-    if(nextCol > 2) nextCol = 2;
+    if(deltaCol > 0)
+    {
+        if(col < 2)
+        {
+            const int candidate = selectedCardIndex + 1;
+            if(candidate < FT02_HOME_CARD_COUNT &&
+               candidate / FT02_HOME_CARDS_PER_PAGE == page) return candidate;
+        }
 
-    int nextIndex = nextRow * 3 + nextCol;
+        const int nextPageStart = (page + 1) * FT02_HOME_CARDS_PER_PAGE;
+        if(nextPageStart < FT02_HOME_CARD_COUNT)
+        {
+            int candidate = nextPageStart + row * 3;
+            if(candidate >= FT02_HOME_CARD_COUNT) candidate = nextPageStart;
+            return candidate;
+        }
+        return selectedCardIndex;
+    }
 
-    return FT02_ClampHomeCardIndex(
-        nextIndex
-    );
+    return selectedCardIndex;
+}
+
+int FT02_HomeCardPageForIndex(
+    int selectedCardIndex
+)
+{
+    selectedCardIndex = FT02_ClampHomeCardIndex(selectedCardIndex);
+    return selectedCardIndex / FT02_HOME_CARDS_PER_PAGE;
 }
 
 void FT02_DrawHomeCardGrid(
@@ -488,7 +586,11 @@ void FT02_DrawHomeCardGrid(
         selectedCardIndex
     );
 
-    for(int i = 0; i < FT02_HOME_CARD_COUNT; i++)
+    const int currentPage = FT02_HomeCardPageForIndex(selectedCardIndex);
+    const int pageStart = currentPage * FT02_HOME_CARDS_PER_PAGE;
+    const int pageEnd = FT02_MinInt(pageStart + FT02_HOME_CARDS_PER_PAGE, FT02_HOME_CARD_COUNT);
+
+    for(int i = pageStart; i < pageEnd; i++)
     {
         FT02_DrawHomeCardByIndex(
             display,
@@ -497,10 +599,12 @@ void FT02_DrawHomeCardGrid(
         );
     }
 
+    const int totalPages =
+        (FT02_HOME_CARD_COUNT + FT02_HOME_CARDS_PER_PAGE - 1) / FT02_HOME_CARDS_PER_PAGE;
     FT02_DrawHomePageIndicator(
         display,
-        FT02_HOME_CURRENT_PAGE,
-        FT02_HOME_TOTAL_PAGES
+        currentPage,
+        totalPages
     );
 }
 

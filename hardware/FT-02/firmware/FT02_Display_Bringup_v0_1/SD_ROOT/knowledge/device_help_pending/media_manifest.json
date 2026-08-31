@@ -1,0 +1,31 @@
+{
+  "format": "FT02MD1-pending",
+  "items": [
+    {
+      "card_id": "REP018",
+      "card_index": 0,
+      "order": 0,
+      "file": "rep018_01.png",
+      "caption": "歪斜或松动的射频接头不可用",
+      "flags": 1,
+      "width": 640,
+      "height": 110,
+      "offset": 0,
+      "length": 8800,
+      "crc32": "539b3fcb"
+    },
+    {
+      "card_id": "REP018",
+      "card_index": 0,
+      "order": 1,
+      "file": "rep018_02.png",
+      "caption": "对正后插到底，细同轴不要锐折",
+      "flags": 1,
+      "width": 640,
+      "height": 110,
+      "offset": 8800,
+      "length": 8800,
+      "crc32": "efbaed1b"
+    }
+  ]
+}

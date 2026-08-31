@@ -1,0 +1,5 @@
+P0 content toolchain revision: A6 CLEAN BASELINE
+Firmware version remains v2.75k25.
+No Field Library books or approved download sources are included.
+Only entries explicitly passing the A6 P0 Admission Gate may be fetched or built.
+See FT02_FieldLibrary_P0_CleanBaseline_A6.md.

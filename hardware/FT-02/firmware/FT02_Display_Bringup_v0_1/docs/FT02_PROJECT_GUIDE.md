@@ -1,7 +1,7 @@
 # LanternBox FT-02 项目说明与提交指南
 
-**提交基线：FT-02 v2.75k19**  
-**日期：2026-08-23**
+**当前预览基线：FT-02 v2.75k22 / FieldManual Runtime A3.15 Dynamic Split Visual Preview**  
+**日期：2026-08-24**
 
 本文是当前 FT-02 工程的主要说明文件，合并原来的用户操作、编译刷机、FieldManual 部署/媒体规范、发布检查和当前验证记录。历史测试与审计仍保留在 `docs/history/`，但不作为当前操作入口。
 
@@ -53,7 +53,16 @@ Core GPIO6 RESET_N -> LR01 RST / CHIP_PU / EN
 
 ## 2. 当前版本能力
 
-v2.75k19 以已经完成提交收口的 v2.75k18 为基线，只修复帮助页仍使用早期 UI 子集字库造成的中文缺字方框。`常用快捷键`、`状态页罗盘` 等帮助页中文改用工程现有的全量 CJK 字库；已验证交互、知识库、地图、日志、通讯和 LR01 架构均保持不变。
+
+### v2.75k22 / A3.15 Dynamic Split Visual Preview
+
+针对 A3.14 实机出现的“图片完整但未吃满左栏”问题，本版从根上调整：Split 媒体允许等比放大；测试媒体去除无效白边；左右栏按实际媒体宽高比动态分配。旧媒体版式完全兼容。
+
+### v2.75k21 / A3.14 Split Visual Preview
+
+本预览版在不改变 `FT02FieldManualMediaIndex` 84-byte 二进制布局的前提下，新增 media flag bit1。设置后 Reader 使用“左图右文”：左侧位图完整等比 Fit，右侧显示图解页码与 caption。旧 bit0 `caption_below` 和无 flag 媒体继续按原版式显示。预览批次只迁移 6 张真实卡、18 个图解页，用于实机判断空间比例和可读性。
+
+v2.75k20 基于 v2.75k19，修复 FieldManual 搜索连续输入时在电子纸 BUSY 边界上偶发的字符顺序颠倒。Knowledge 不再保留第二套私有 BUSY 输入队列，所有页面统一使用 Global EPD Interactive Runtime A2 的单一严格 FIFO；主循环先消费旧队列事件，再读取新的实时按键。帮助页 CJK 修复、FieldManual v1.3.1 内容、地图、日志、通讯和 LR01 架构保持不变。
 
 主要能力：
 
@@ -65,7 +74,7 @@ v2.75k19 以已经完成提交收口的 v2.75k18 为基线，只修复帮助页�
 - 三页系统自检与 LR01 罗盘校准 UI
 - FieldManual A3 图文行动卡
 - FieldManual 分类、搜索、最近阅读、我的收藏
-- Global EPD Interactive Runtime A1：BUSY 期间继续收键、Hot Partial、日志/搜索/通讯快速局刷
+- Global EPD Interactive Runtime A2：BUSY 期间继续收键、单一严格 FIFO、Hot Partial、日志/搜索/通讯/FieldManual 快速局刷
 
 EPD SPI 继续保持 **4 MHz**。当前提交基线不通过提高总线频率换取速度。
 
@@ -203,15 +212,15 @@ B / ESC    = 返回来源列表
 SD_ROOT/knowledge/field_manual/
 ```
 
-权威内容版本：**v1.0.5-a3.3**。
+权威内容版本：**v1.3.1-a3.3**。
 
 当前数据：
 
-- 100 张行动卡
-- 6 个分类
+- 197 张行动卡
+- 9 个分类
 - 32 个快速入口
 - 57 张卡带图
-- 141 个图解页面
+- 159 个图解页面
 - 图解统一 640×110、1-bit 黑白
 - 一图一步，图片下方显示短 caption
 - Runtime `MAX_CARDS = 256`
@@ -332,7 +341,7 @@ COMPASS_CAL_RESET
 
 ---
 
-## 10. Global EPD Interactive Runtime A1
+## 10. Global EPD Interactive Runtime A2
 
 v2.75k17 已将 FieldManual 中验证有效的快速交互机制扩展到第一批高频页面：
 
@@ -348,13 +357,13 @@ v2.75k17 已将 FieldManual 中验证有效的快速交互机制扩展到第一�
 1. GxEPD2 BUSY 期间继续扫描 CardKB2。
 2. 公共 BUSY 队列容量 24 项。
 3. 触发刷新按键必须先真实松开，避免误判成长按重复。
-4. 局刷后保持短时 Hot，空闲约 2.5 秒再 `powerOff()`。
+4. 局刷后保持短时 Hot，通用交互页空闲约 350 ms 后再 `powerOff()`；Field Library 阅读页沿用专用 Hot Reader 策略。
 5. 高频列表同页移动优先 micro partial。
 6. 高交互页面使用 5 ms 主循环节奏；静态页面保持 20 ms。
 
 2026-08-23 已完成实机体验验证：相较旧刷新策略，按键响应和连续导航体感有显著提升。v2.75k18 完成提交收口；随后实机发现帮助页旧 UI 子集字体对 `常用快捷键`、`状态页罗盘` 缺字，v2.75k19 仅修复该显示问题，不修改已验证交互行为。
 
-FieldManual 仍保留自己的 A3.9 队列/方向键合并逻辑，因为它还负责把 BUSY 期间连续导航合并为最终位置；这不是与公共 Runtime 等价的重复代码，提交版不为“形式统一”牺牲已验证行为。
+v2.75k20 起 FieldManual 不再保留自己的 A3.9 私有队列。实机发现双队列会在连续文本输入时产生时间顺序竞争，因此 Knowledge 改为直接读取公共 FIFO；搜索字符严格按 FIFO 消费，而首页/分类/列表/Reader 仍在 Knowledge 层对公共 FIFO 中连续方向键做最终位置合并。这样既保留快速导航，也消除双队列排序风险。
 
 ---
 
@@ -457,14 +466,14 @@ FT02 vX.XX: <主要功能/修复>
 - 删除无任何 include / 调用路径的孤立字体头 `FT02_GrayFontPackTypes.h`、旧 `FT02_MapFontData.h`、`FT02_StatusFont.h`；保留当前实际使用的 RoadName / MapStatus / StatusBar 字体数据。
 - 删除若干只有声明和实现、当前工程没有调用者的简单 Runtime getter/reset/introspection API。
 - 删除废弃的 `boards/ft02-esp32-s3-n16r8.json`。
-- 合并重复/过期说明文件；FieldManual 当前规范统一以 v1.0.5-a3.3 / 640×110 / 141 页为准。
+- 合并重复/过期说明文件；FieldManual 当前规范统一以 v1.3.1-a3.3 / 197 张行动卡 / 9 分类 / 640×110 / 159 页为准。
 - 工程内部 checksum 统一只保留 `SHA256SUMS.txt`。
 
 明确保留：
 
 - FieldManual A3/A3.2 兼容 Fit 路径，因为它承担旧媒体包兼容，不是死代码。
 - `FT02_Gnss` facade，因为它现在承载 LR01 Navigation State 快照兼容接口，并不直接解析 NMEA。
-- FieldManual A3.9 专用 BUSY 队列/导航合并，因为公共 Runtime 当前不提供等价的多方向键合并语义。
+- FieldManual 的方向键合并语义继续保留，但事件来源统一为 Global EPD A2 单一 FIFO；不再保留私有 BUSY 队列。
 - `docs/history/`，用于版本追溯，不参与当前功能入口。
 
 ### 当前验证状态
@@ -472,6 +481,7 @@ FT02 vX.XX: <主要功能/修复>
 - v2.75k17 Global EPD Interactive Runtime A1：2026-08-23 实机体验验证通过，用户确认按键响应显著改善。
 - v2.75k18：功能逻辑沿用 k17，仅做提交清理；版本集中化检查、Python tools 语法、JSON 解析、工程内 FT02 include 完整性、删除符号残留、修改 C++ 文件分隔符结构检查均已 PASS。
 - v2.75k19：帮助页改用全量 CJK 字库并校验页面全部中文字符均存在；其余冻结边界保持 k18。
+- v2.75k20：FieldManual 与其他交互页统一到 Global EPD A2 单一 FIFO，修复连续搜索输入的字符顺序竞争；待本机编译与实机验证。
 - `FT02_InputManager.cpp/.h` 与 k17 逐字节一致，`SD_ROOT` 与 k17 逐文件一致，EPD SPI 仍为 4 MHz，Board ID 仍为 `esp32-s3-devkitc1-n16r8`。
 - 当前打包环境不具备 PlatformIO，因此此环境未执行 ESP32-S3 `pio run` / upload。提交前仍应在本机执行一次 `pio run`，随后做最小烟雾测试。
 

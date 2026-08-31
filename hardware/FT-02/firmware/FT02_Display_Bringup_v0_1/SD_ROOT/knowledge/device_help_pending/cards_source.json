@@ -1,0 +1,94 @@
+[
+  {
+    "id": "REP018",
+    "category": "REP",
+    "title": "LoRa/GNSS天线连接检查",
+    "summary": "信号突然变差时先检查天线、转接线和接头机械状态，发射设备不要无天线长时间工作。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "LoRa距离明显下降、GNSS搜星异常，设备近期有跌落或拆装。"
+      },
+      {
+        "title": "判断",
+        "text": "接头松、同轴线被夹折、天线底座裂开、连接器中心针损坏都可能导致信号问题。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 关闭射频设备或停止发射。\n2. 检查天线型号/频段是否正确且安装到正确接口。\n3. 检查连接器是否完全咬合，无歪斜和松动。\n4. 沿同轴线检查是否有锐角折弯、压扁、外皮破损。\n5. 换已知正常天线/转接线做对比测试。\n6. GNSS天线保持朝天、远离大块金属遮挡。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要用钳子过度拧紧小型RF连接器；不要频繁折弯细同轴线；LoRa发射时不要故意断开天线。"
+      },
+      {
+        "title": "升级处理",
+        "text": "更换天线/线缆后仍无改善，需检查板端连接器和射频电路。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 频段/接口正确\n□ 接头完全连接\n□ 同轴无压伤\n□ 已做替换对比"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ],
+    "media": [
+      {
+        "type": "image",
+        "format": "1bit",
+        "media_id": "REP018-IMG01",
+        "caption": "接头正对插到底，禁止斜插硬扭"
+      }
+    ]
+  },
+  {
+    "id": "REP019",
+    "category": "REP",
+    "title": "SD卡读取异常排查",
+    "summary": "先确认供电和卡是否可靠插入，再做冷启动、换卡和文件系统检查，不反复热拔。",
+    "priority": 2,
+    "quick_access": false,
+    "sections": [
+      {
+        "title": "适用情况",
+        "text": "FT-02显示SD未就绪、文件读错或突然丢卡。"
+      },
+      {
+        "title": "判断",
+        "text": "若设备热重启后SD异常但彻底断电再上电恢复，可能与外部电源轨未复位有关；若换卡也失败则检查硬件。"
+      },
+      {
+        "title": "操作步骤",
+        "text": "1. 停止正在写入的日志，安全关机/断电。\n2. 重新插紧SD卡，检查触点是否脏污。\n3. 彻底断电数秒后冷启动。\n4. 仍失败时用已知正常、兼容格式的SD卡测试。\n5. 在电脑上备份后检查文件系统错误和剩余空间。\n6. 若只有某张卡失败，优先更换卡而不是反复修复。"
+      },
+      {
+        "title": "不要做",
+        "text": "不要在正在写日志时拔卡；不要把重要数据只留一份；不要在电压不稳时频繁格式化。"
+      },
+      {
+        "title": "升级处理",
+        "text": "多张正常卡都无法挂载、卡槽松动或触点损坏时需硬件维修。"
+      },
+      {
+        "title": "完成检查",
+        "text": "□ 已冷启动\n□ 卡可靠插入\n□ 已换卡对比\n□ 重要数据有备份"
+      }
+    ],
+    "sources": [
+      "FT02_SAFE"
+    ],
+    "review_status": "double-reviewed-2026-08-20",
+    "review_passes": [
+      "PASS1_source_concordance_and_risk_check",
+      "PASS2_independent_practicality_and_failure_mode_check"
+    ]
+  }
+]

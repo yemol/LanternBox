@@ -1,3 +1,5 @@
+> **版本说明（2026-08-24）：** 本文件主要记录 v1.0.5-a3.3 原 100 张卡/原有图解的审核历史。当前知识包已扩展为 v1.1.0-a3.3 / 163 张卡；新增 63 张的范围、审核与结构校验见 `COVERAGE_EXPANSION_V110.md` 和 `coverage_expansion_v110.json`。
+
 # FT-02 绳结图解复核记录
 
 版本：FieldManual Content v1.0.3-a3.2

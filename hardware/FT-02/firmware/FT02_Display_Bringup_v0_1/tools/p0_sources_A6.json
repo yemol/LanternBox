@@ -1,0 +1,79 @@
+{
+  "schema": "ft02-p0-source-manifest-v3",
+  "generated": "2026-08-26",
+  "baseline": "A6-CLEAN",
+  "policy": {
+    "language": "zh",
+    "priority": "P0-only",
+    "runtime_rule": "zero-default-deny; only fully approved CORE_CONTENT may enter FT-02",
+    "required_gate_fields": [
+      "priority=P0",
+      "language=zh",
+      "library_role=CORE_CONTENT",
+      "installable=true",
+      "source_status=APPROVED",
+      "content_audit_status=APPROVED",
+      "practical_value_status=APPROVED",
+      "admission_status=APPROVED"
+    ],
+    "excluded_from_runtime": [
+      "candidate",
+      "audit/reference material",
+      "training syllabus",
+      "occupational standard",
+      "policy/regulation",
+      "management/network material",
+      "content pending review",
+      "source pending review"
+    ],
+    "no_pirated_sources": true
+  },
+  "sources": [],
+  "p0_slots": [
+    {
+      "slot": "SUR-P0-01",
+      "capability": "综合野外生存",
+      "status": "EMPTY_REVIEW_REQUIRED"
+    },
+    {
+      "slot": "AGR-P0-01",
+      "capability": "基本农作物生产",
+      "status": "EMPTY_REVIEW_REQUIRED"
+    },
+    {
+      "slot": "AGR-P0-02",
+      "capability": "留种与种子循环",
+      "status": "EMPTY_REVIEW_REQUIRED"
+    },
+    {
+      "slot": "BLD-P0-01",
+      "capability": "建筑与营地修复",
+      "status": "EMPTY_REVIEW_REQUIRED"
+    },
+    {
+      "slot": "ELE-P0-01",
+      "capability": "基础电工与安全",
+      "status": "EMPTY_REVIEW_REQUIRED"
+    },
+    {
+      "slot": "ELE-P0-02",
+      "capability": "电气维修",
+      "status": "EMPTY_REVIEW_REQUIRED"
+    },
+    {
+      "slot": "ELE-P0-03",
+      "capability": "电子元件、电源与设备维修",
+      "status": "EMPTY_REVIEW_REQUIRED"
+    },
+    {
+      "slot": "MEC-P0-01",
+      "capability": "钳工与手工机械加工",
+      "status": "EMPTY_REVIEW_REQUIRED"
+    },
+    {
+      "slot": "MED-P0-01",
+      "capability": "基础急救与有限医疗资源",
+      "status": "EMPTY_REVIEW_REQUIRED"
+    }
+  ]
+}

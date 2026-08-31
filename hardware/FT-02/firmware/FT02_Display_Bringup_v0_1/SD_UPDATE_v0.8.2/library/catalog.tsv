@@ -1,0 +1,6 @@
+# FT-02 Field Library catalog v0.2
+# id<TAB>title<TAB>author<TAB>category<TAB>priority<TAB>format<TAB>root<TAB>toc
+BLD-P0-01	图解木工技能速成	王珣 主编	建筑与修缮	P0	scanpdf	/library/books/BLD-P0-01	/library/books/BLD-P0-01/toc.tsv
+AGR-P0-01	菜园里的学问——有机园艺方法	曾明	新手种植基础	P0	epub	/library/books/AGR-P0-01	/library/books/AGR-P0-01/toc.tsv
+SUR-P0-01	怀斯曼生存手册	[英]约翰·怀斯曼	综合野外生存	P0	epub	/library/books/SUR-P0-01	/library/books/SUR-P0-01/toc.tsv
+ELE-P0-01	灾后与离线场景零基础电工手册	LanternBox 编辑组（综合整理）	电工与电力	P0	epub	/library/books/ELE-P0-01	/library/books/ELE-P0-01/toc.tsv

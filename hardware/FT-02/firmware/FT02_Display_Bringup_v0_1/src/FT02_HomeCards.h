@@ -8,6 +8,10 @@ int FT02_ClampHomeCardIndex(
     int selectedCardIndex
 );
 
+int FT02_HomeCardPageForIndex(
+    int selectedCardIndex
+);
+
 int FT02_MoveHomeCardSelection(
     int selectedCardIndex,
     int deltaRow,

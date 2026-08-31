@@ -2,9 +2,9 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <SparkFun_WM8960_Arduino_Library.h>
 #include <driver/i2s_std.h>
 #include <esp_err.h>
+#include <esp_heap_caps.h>
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
@@ -17,6 +17,7 @@
 #include <freertos/task.h>
 
 #include "FT02_Storage.h"
+#include "FT02_ES8311.h"
 
 namespace
 {
@@ -24,6 +25,10 @@ constexpr int FT02_AUDIO_BCLK_PIN = 14;
 constexpr int FT02_AUDIO_WS_PIN = 15;
 constexpr int FT02_AUDIO_DOUT_PIN = 16;
 constexpr int FT02_AUDIO_DIN_PIN = 17;
+// WeAct ES8311+NS4150B module: SD/CTRL is the hardware power-amplifier shutdown.
+// GPIO4 is free in the current FT-02 production pin map (CardKB2 is SDA47/SCL21).
+constexpr int FT02_AUDIO_PA_SD_PIN = 4;
+constexpr uint32_t FT02_AUDIO_PA_STARTUP_MS = 125;
 
 constexpr uint32_t FT02_AUDIO_SAMPLE_RATE = 44100;
 constexpr uint16_t FT02_AUDIO_BITS_PER_SAMPLE = 16;
@@ -32,23 +37,51 @@ constexpr uint32_t FT02_AUDIO_POST_ROLL_MS = 250;
 constexpr uint32_t FT02_AUDIO_MIN_STOP_MS = 600;
 constexpr uint32_t FT02_AUDIO_MAX_SECONDS = 600;
 constexpr size_t FT02_AUDIO_FRAMES_PER_BLOCK = 512;
-constexpr float FT02_AUDIO_SPEAKER_DB = 0.0f;
-constexpr float FT02_AUDIO_MIC_PGA_DB = 30.0f;
-constexpr float FT02_AUDIO_ADC_DIGITAL_DB = 6.0f;
+constexpr bool FT02_AUDIO_ES8311_DIGITAL_MIC = false;
 constexpr float FT02_AUDIO_PLAYBACK_TARGET_RMS = 6500.0f;
-constexpr float FT02_AUDIO_PLAYBACK_MAX_GAIN = 4.0f;
+constexpr float FT02_AUDIO_PLAYBACK_MAX_GAIN = 2.0f;
 constexpr float FT02_AUDIO_LIMIT_THRESHOLD = 22000.0f;
 constexpr float FT02_AUDIO_LIMIT_RATIO = 6.0f;
 constexpr size_t FT02_AUDIO_INDEX_LINE_BYTES = 1024;
 constexpr uint8_t FT02_AUDIO_PLAYBACK_BLOCKS_PER_POLL = 4;
+constexpr uint8_t FT02_AUDIO_PLAYBACK_PRIME_BLOCKS = 2;
+constexpr uint8_t FT02_AUDIO_PLAYBACK_FADE_BLOCKS = 4;
+constexpr uint32_t FT02_AUDIO_PLAYBACK_FADE_FRAMES =
+    static_cast<uint32_t>(FT02_AUDIO_PLAYBACK_FADE_BLOCKS) *
+    FT02_AUDIO_FRAMES_PER_BLOCK;
 constexpr uint8_t FT02_AUDIO_PLAYBACK_TAIL_BLOCKS = 8;
 constexpr uint32_t FT02_AUDIO_PLAYBACK_TAIL_WAIT_MS = 120;
+constexpr uint32_t FT02_AUDIO_DAC_MUTE_SETTLE_MS = 24;
+constexpr uint32_t FT02_AUDIO_PA_SHUTDOWN_SETTLE_MS = 18;
+constexpr uint32_t FT02_AUDIO_EPD_GUARD_READY_TIMEOUT_MS = 220;
+constexpr uint32_t FT02_AUDIO_EPD_RESUME_FADE_FRAMES = FT02_AUDIO_FRAMES_PER_BLOCK;
+// E-paper high-voltage activity is visibly correlated with the capture noise on
+// the real FT-02. After the recording cue commit, leave the audio path idle long
+// enough for the panel rail / analogue microphone path to settle; the background
+// audio task keeps draining RX while state is still IDLE.
+constexpr uint32_t FT02_AUDIO_RECORD_START_SETTLE_MS = 900;
+// Keep normal short voice logs entirely away from the 40 MHz SD bus while
+// capturing. 4 MiB stores about 47.5 s of mono/16-bit/44.1 kHz audio. If a
+// recording outgrows the staging buffer we fall back to direct SD streaming
+// and log that the low-noise isolation window has ended.
+constexpr size_t FT02_AUDIO_PSRAM_STAGE_TARGET_BYTES = 4u * 1024u * 1024u;
+constexpr size_t FT02_AUDIO_PSRAM_STAGE_MIN_BYTES = 1u * 1024u * 1024u;
+// Short voice logs are also staged before playback. This removes SD read stalls
+// from the live TX path and makes the output test independent of the 40 MHz FSPI
+// bus. Files above this size retain a safe streaming fallback.
+constexpr size_t FT02_AUDIO_PLAYBACK_PSRAM_MAX_BYTES = 4u * 1024u * 1024u;
+// Repair only very short, near-full-scale EMI bursts. The 128-sample limit is
+// about 2.9 ms at 44.1 kHz, which keeps the repair distinct from sustained
+// speech or genuine clipping.
+constexpr int32_t FT02_AUDIO_BURST_TRIGGER = 30000;
+constexpr int32_t FT02_AUDIO_BURST_NEIGHBOR_MAX = 14000;
+constexpr size_t FT02_AUDIO_BURST_MAX_RUN = 128;
 constexpr const char* FT02_AUDIO_PREF_NAMESPACE = "ft02audio";
 constexpr const char* FT02_AUDIO_PREF_VOLUME_KEY = "volume";
 
 constexpr float FT02_AUDIO_VOLUME_GAINS[FT02_AUDIO_VOLUME_MAX_LEVEL + 1] = {
-    0.0f, 0.20f, 0.28f, 0.40f, 0.56f, 0.70f,
-    0.85f, 1.00f, 1.20f, 1.45f, 1.70f
+    0.0f, 0.10f, 0.18f, 0.30f, 0.46f, 0.60f,
+    0.75f, 0.90f, 1.10f, 1.35f, 1.60f
 };
 
 constexpr const char* FT02_AUDIO_DIR = "/lanternbox/audio";
@@ -59,7 +92,7 @@ constexpr const char* FT02_AUDIO_SEQUENCE_BACKUP = "/lanternbox/audio/audio_sequ
 constexpr uint32_t FT02_AUDIO_SEQUENCE_MIN = 1u;
 constexpr uint32_t FT02_AUDIO_SEQUENCE_MAX = 999999999u;
 
-WM8960 g_ft02AudioCodec;
+FT02ES8311 g_ft02AudioCodec;
 i2s_chan_handle_t g_ft02AudioTx = nullptr;
 i2s_chan_handle_t g_ft02AudioRx = nullptr;
 
@@ -83,6 +116,10 @@ struct FT02AudioRecordingSession
     uint32_t sequence = 0;
     uint32_t recordedFrames = 0;
     uint32_t dataBytes = 0;
+    uint8_t* psramStage = nullptr;
+    size_t psramStageCapacity = 0;
+    size_t psramStageUsed = 0;
+    bool sdStreamingFallback = false;
     int32_t peak = 0;
     int16_t minSample = INT16_MAX;
     int16_t maxSample = INT16_MIN;
@@ -90,9 +127,15 @@ struct FT02AudioRecordingSession
     uint64_t sumSq = 0;
     uint32_t clipCount = 0;
     uint32_t zeroCount = 0;
+    uint32_t burstRepairSamples = 0;
+    int32_t rawPeak = 0;
+    bool havePreviousFilteredSample = false;
+    int16_t previousFilteredSample = 0;
     uint32_t nextProgressMs = 1000;
     uint32_t secondFrames = 0;
     int32_t secondPeak = 0;
+    int32_t secondRawPeak = 0;
+    uint32_t secondBurstRepairSamples = 0;
     uint64_t secondSumSq = 0;
     bool gnssFix = false;
     double latitude = 0.0;
@@ -122,24 +165,72 @@ struct FT02WavInfo
 struct FT02AudioPlaybackSession
 {
     FILE* file = nullptr;
+    uint8_t* psramStage = nullptr;
+    size_t psramStageBytes = 0;
+    size_t psramStageOffset = 0;
     FT02WavInfo info = {};
     bool useRight = false;
     bool success = true;
     bool stopRequested = false;
     bool startReleased = false;
     bool volumeDirty = false;
+    bool outputUnmuted = false;
+    bool paEnabled = false;
+    bool paWarmup = false;
+    bool rxSuspended = false;
+    uint32_t paWarmupDeadlineMs = 0;
     bool draining = false;
+    uint8_t primeBlocksWritten = 0;
     uint8_t tailBlocksWritten = 0;
     uint32_t tailWaitDeadlineMs = 0;
     uint32_t bytesRemaining = 0;
     uint32_t playedFrames = 0;
     uint32_t totalFrames = 0;
+    uint32_t partialWrites = 0;
+    int16_t lastOutputSample = 0;
+    bool fadeWritten = false;
+    bool stopFadeActive = false;
+    volatile bool epdGuardActive = false;
+    volatile bool epdGuardReady = false;
+    uint32_t epdResumeFadeFramesRemaining = 0;
+    uint32_t stopFadeFramesRemaining = 0;
     float normalizationGain = 1.0f;
     char audioId[48] = {};
     char filePath[112] = {};
 };
 
 FT02AudioPlaybackSession g_ft02AudioPlayback;
+
+static bool g_ft02AudioPaInitialized = false;
+static bool g_ft02AudioPaEnabled = false;
+
+static void FT02_AudioPaInit()
+{
+    // Drive shutdown LOW as early as the audio subsystem starts. For completely
+    // silent reset/boot before setup() reaches this point, add a 10 kOhm
+    // pulldown from the module SD pin to GND.
+    pinMode(FT02_AUDIO_PA_SD_PIN, OUTPUT);
+    digitalWrite(FT02_AUDIO_PA_SD_PIN, LOW);
+    g_ft02AudioPaInitialized = true;
+    g_ft02AudioPaEnabled = false;
+    Serial.printf(
+        "[AUDIO-PA] NS4150B SD/CTRL ready pin=GPIO%d state=SHUTDOWN\n",
+        FT02_AUDIO_PA_SD_PIN
+    );
+}
+
+static void FT02_AudioPaSet(bool enabled)
+{
+    if(!g_ft02AudioPaInitialized) FT02_AudioPaInit();
+    if(g_ft02AudioPaEnabled == enabled) return;
+    digitalWrite(FT02_AUDIO_PA_SD_PIN, enabled ? HIGH : LOW);
+    g_ft02AudioPaEnabled = enabled;
+    Serial.printf(
+        "[AUDIO-PA] %s pin=GPIO%d\n",
+        enabled ? "ENABLE" : "SHUTDOWN",
+        FT02_AUDIO_PA_SD_PIN
+    );
+}
 
 static uint8_t FT02_AudioLoadVolumeLevel()
 {
@@ -332,84 +423,11 @@ static void FT02_AudioLogEspError(const char* label, esp_err_t error)
 
 static bool FT02_AudioInitCodec()
 {
-    if(!g_ft02AudioCodec.begin(Wire))
+    if(!g_ft02AudioCodec.begin(Wire, FT02_AUDIO_ES8311_DIGITAL_MIC))
     {
-        FT02_AudioSetMessage("WM8960未响应", false);
+        FT02_AudioSetMessage("ES8311未响应或配置失败", false);
         return false;
     }
-
-    bool ok = true;
-    auto step = [&ok](const char* name, bool result)
-    {
-        Serial.printf("[AUDIO-CODEC] %-34s %s\n", name, result ? "OK" : "FAIL");
-        if(!result) ok = false;
-        return result;
-    };
-
-    step("enableVREF", g_ft02AudioCodec.enableVREF());
-    step("enableVMID", g_ft02AudioCodec.enableVMID());
-    delay(100);
-    step("enableLMIC", g_ft02AudioCodec.enableLMIC());
-    step("disableMicBias(onboard mic)", g_ft02AudioCodec.disableMicBias());
-    delay(80);
-    Serial.println("[AUDIO-CODEC] PGAL input VMID                  OK (reset default)");
-    step("connectLMN1", g_ft02AudioCodec.connectLMN1());
-    step("disableLINMUTE", g_ft02AudioCodec.disableLINMUTE());
-    step("setLINVOLDB(+30dB)", g_ft02AudioCodec.setLINVOLDB(FT02_AUDIO_MIC_PGA_DB));
-    step("setLMICBOOST(0dB)", g_ft02AudioCodec.setLMICBOOST(WM8960_MIC_BOOST_GAIN_0DB));
-    step("connectLMIC2B", g_ft02AudioCodec.connectLMIC2B());
-    step("enableAINL", g_ft02AudioCodec.enableAINL());
-
-    step("disableLB2LO", g_ft02AudioCodec.disableLB2LO());
-    step("disableRB2RO", g_ft02AudioCodec.disableRB2RO());
-    step("enableLD2LO", g_ft02AudioCodec.enableLD2LO());
-    step("enableRD2RO", g_ft02AudioCodec.enableRD2RO());
-    step("setLB2LOVOL(-21dB)", g_ft02AudioCodec.setLB2LOVOL(WM8960_OUTPUT_MIXER_GAIN_NEG_21DB));
-    step("setRB2ROVOL(-21dB)", g_ft02AudioCodec.setRB2ROVOL(WM8960_OUTPUT_MIXER_GAIN_NEG_21DB));
-    step("enableLOMIX", g_ft02AudioCodec.enableLOMIX());
-    step("enableROMIX", g_ft02AudioCodec.enableROMIX());
-
-    step("enablePLL", g_ft02AudioCodec.enablePLL());
-    step("setPLLPRESCALE(/2)", g_ft02AudioCodec.setPLLPRESCALE(WM8960_PLLPRESCALE_DIV_2));
-    step("setSMD(fractional)", g_ft02AudioCodec.setSMD(WM8960_PLL_MODE_FRACTIONAL));
-    step("setCLKSEL(PLL)", g_ft02AudioCodec.setCLKSEL(WM8960_CLKSEL_PLL));
-    step("setSYSCLKDIV(/2)", g_ft02AudioCodec.setSYSCLKDIV(WM8960_SYSCLK_DIV_BY_2));
-    step("setBCLKDIV(4)", g_ft02AudioCodec.setBCLKDIV(4));
-    step("setDCLKDIV(16)", g_ft02AudioCodec.setDCLKDIV(WM8960_DCLKDIV_16));
-    step("setPLLN(7)", g_ft02AudioCodec.setPLLN(7));
-    step("setPLLK(86,C2,26)", g_ft02AudioCodec.setPLLK(0x86, 0xC2, 0x26));
-    step("setWL(16-bit)", g_ft02AudioCodec.setWL(WM8960_WL_16BIT));
-    step("enablePeripheralMode", g_ft02AudioCodec.enablePeripheralMode());
-    step(
-        "audioIF(I2S/16/slave)",
-        g_ft02AudioCodec.writeRegister(WM8960_REG_AUDIO_INTERFACE_1, 0x0002)
-    );
-
-    step("enableAdcLeft", g_ft02AudioCodec.enableAdcLeft());
-    step("disableAdcRight", g_ft02AudioCodec.disableAdcRight());
-    step(
-        "adcLeftDigital(+6dB)",
-        g_ft02AudioCodec.setAdcLeftDigitalVolumeDB(FT02_AUDIO_ADC_DIGITAL_DB)
-    );
-    step("disableALC(fixed gain)", g_ft02AudioCodec.disableAlc());
-    step("disablePeakLimiter", g_ft02AudioCodec.disablePeakLimiter());
-    step("disableNoiseGate", g_ft02AudioCodec.disableNoiseGate());
-
-    step("enableDacLeft", g_ft02AudioCodec.enableDacLeft());
-    step("enableDacRight", g_ft02AudioCodec.enableDacRight());
-    step("disableLoopBack", g_ft02AudioCodec.disableLoopBack());
-    step("disableDacMute", g_ft02AudioCodec.disableDacMute());
-    step("enableSpeakers", g_ft02AudioCodec.enableSpeakers());
-    step("disableLeftSpeaker", g_ft02AudioCodec.disableLeftSpeaker());
-    step("enableRightSpeaker", g_ft02AudioCodec.enableRightSpeaker());
-    step("speakerVolume(0dB)", g_ft02AudioCodec.setSpeakerVolumeDB(FT02_AUDIO_SPEAKER_DB));
-
-    if(!ok)
-    {
-        FT02_AudioSetMessage("WM8960配置失败", false);
-        return false;
-    }
-    Serial.println("[AUDIO-CODEC] complete                         OK");
     return true;
 }
 
@@ -418,6 +436,7 @@ static bool FT02_AudioInitI2s()
     i2s_chan_config_t channelConfig = I2S_CHANNEL_DEFAULT_CONFIG(I2S_NUM_0, I2S_ROLE_MASTER);
     channelConfig.dma_desc_num = 8;
     channelConfig.dma_frame_num = 256;
+    channelConfig.auto_clear_after_cb = true;
 
     esp_err_t error = i2s_new_channel(&channelConfig, &g_ft02AudioTx, &g_ft02AudioRx);
     if(error != ESP_OK)
@@ -428,6 +447,15 @@ static bool FT02_AudioInitI2s()
 
     i2s_std_config_t config = {};
     config.clk_cfg = I2S_STD_CLK_DEFAULT_CONFIG(FT02_AUDIO_SAMPLE_RATE);
+    // ESP32-S3 I2S HW does not expose APLL as a selectable I2S source in this
+    // toolchain. Keep the target-supported default source chosen by ESP-IDF.
+    // The fractional divider still generates the requested 44.1 kHz /
+    // 1.4112 MHz BCLK, while avoiding a target-specific undefined enum.
+    config.clk_cfg.clk_src = I2S_CLK_SRC_DEFAULT;
+    // ESP-IDF documents that a higher internal MCLK multiple improves BCLK/WS
+    // clock resolution/jitter even when the codec does not consume an MCLK pin.
+    // ES8311 uses BCLK/SCLK as its master-clock reference on this board.
+    config.clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_512;
     config.slot_cfg = I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(
         I2S_DATA_BIT_WIDTH_16BIT,
         I2S_SLOT_MODE_STEREO
@@ -474,6 +502,11 @@ static bool FT02_AudioInitI2s()
         &written,
         pdMS_TO_TICKS(200)
     );
+    Serial.printf(
+        "[AUDIO-I2S] rate=%lu format=Philips/16/stereo clock=DEFAULT mclkMul=512 BCLK=%lu MCLK=NC\n",
+        static_cast<unsigned long>(FT02_AUDIO_SAMPLE_RATE),
+        static_cast<unsigned long>(FT02_AUDIO_SAMPLE_RATE * 16u * 2u)
+    );
     return true;
 }
 
@@ -492,6 +525,44 @@ static void FT02_AudioQueueSilence(uint32_t timeoutMs = 0)
     {
         FT02_AudioLogEspError("[AUDIO-I2S] silence", error);
     }
+}
+
+static bool FT02_AudioWriteAll(
+    const void* data,
+    size_t bytes,
+    const char* label
+)
+{
+    if(g_ft02AudioTx == nullptr || data == nullptr || bytes == 0) return bytes == 0;
+    size_t offset = 0;
+    while(offset < bytes)
+    {
+        size_t written = 0;
+        const esp_err_t error = i2s_channel_write(
+            g_ft02AudioTx,
+            static_cast<const uint8_t*>(data) + offset,
+            bytes - offset,
+            &written,
+            portMAX_DELAY
+        );
+        if(error != ESP_OK || written == 0)
+        {
+            FT02_AudioLogEspError(label, error);
+            return false;
+        }
+        if(written < bytes - offset)
+        {
+            g_ft02AudioPlayback.partialWrites++;
+            Serial.printf(
+                "[AUDIO-PLAY] partial TX write=%u remaining=%u count=%lu\n",
+                static_cast<unsigned int>(written),
+                static_cast<unsigned int>(bytes - offset),
+                static_cast<unsigned long>(g_ft02AudioPlayback.partialWrites)
+            );
+        }
+        offset += written;
+    }
+    return true;
 }
 
 static void FT02_AudioDrainIdleRx()
@@ -1116,6 +1187,151 @@ static bool FT02_AudioAppendDeleteRecord(const FT02AudioLogEntry& entry)
            FT02_StorageAppendLine(FT02_AUDIO_INDEX, line);
 }
 
+static int32_t FT02_AudioAbs16(int16_t sample)
+{
+    const int32_t value = static_cast<int32_t>(sample);
+    return value < 0 ? -value : value;
+}
+
+static uint32_t FT02_AudioRepairSaturatedBurstBlock(
+    int16_t* samples,
+    size_t frames,
+    bool havePrevious,
+    int16_t previousSample
+)
+{
+    if(samples == nullptr || frames < 2) return 0;
+
+    uint32_t repaired = 0;
+    size_t i = 0;
+    while(i < frames)
+    {
+        if(FT02_AudioAbs16(samples[i]) < FT02_AUDIO_BURST_TRIGGER)
+        {
+            ++i;
+            continue;
+        }
+
+        const size_t runStart = i;
+        size_t runEnd = i;
+        bool tooLong = false;
+        while(runEnd + 1u < frames &&
+              FT02_AudioAbs16(samples[runEnd + 1u]) >= FT02_AUDIO_BURST_TRIGGER)
+        {
+            if(runEnd - runStart + 1u >= FT02_AUDIO_BURST_MAX_RUN)
+            {
+                tooLong = true;
+                break;
+            }
+            ++runEnd;
+        }
+
+        const size_t runLength = runEnd - runStart + 1u;
+        const bool haveLeft = runStart > 0 || havePrevious;
+        const bool haveRight = runEnd + 1u < frames;
+        if(!tooLong && runLength <= FT02_AUDIO_BURST_MAX_RUN && haveLeft && haveRight)
+        {
+            const int16_t left = runStart > 0 ? samples[runStart - 1u] : previousSample;
+            const int16_t right = samples[runEnd + 1u];
+            if(FT02_AudioAbs16(left) <= FT02_AUDIO_BURST_NEIGHBOR_MAX &&
+               FT02_AudioAbs16(right) <= FT02_AUDIO_BURST_NEIGHBOR_MAX)
+            {
+                const int32_t left32 = static_cast<int32_t>(left);
+                const int32_t right32 = static_cast<int32_t>(right);
+                for(size_t k = 0; k < runLength; ++k)
+                {
+                    const int32_t numerator =
+                        left32 * static_cast<int32_t>(runLength - k) +
+                        right32 * static_cast<int32_t>(k + 1u);
+                    samples[runStart + k] = static_cast<int16_t>(
+                        numerator / static_cast<int32_t>(runLength + 1u)
+                    );
+                    ++repaired;
+                }
+            }
+        }
+
+        i = runEnd + 1u;
+    }
+    return repaired;
+}
+
+static void FT02_AudioFreeRecordingStage()
+{
+    if(g_ft02AudioRecording.psramStage != nullptr)
+    {
+        heap_caps_free(g_ft02AudioRecording.psramStage);
+        g_ft02AudioRecording.psramStage = nullptr;
+    }
+    g_ft02AudioRecording.psramStageCapacity = 0;
+    g_ft02AudioRecording.psramStageUsed = 0;
+}
+
+static bool FT02_AudioAllocateRecordingStage()
+{
+    FT02_AudioFreeRecordingStage();
+    const size_t candidates[] = {
+        FT02_AUDIO_PSRAM_STAGE_TARGET_BYTES,
+        3u * 1024u * 1024u,
+        2u * 1024u * 1024u,
+        FT02_AUDIO_PSRAM_STAGE_MIN_BYTES
+    };
+    for(size_t bytes : candidates)
+    {
+        void* memory = heap_caps_malloc(bytes, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
+        if(memory != nullptr)
+        {
+            g_ft02AudioRecording.psramStage = static_cast<uint8_t*>(memory);
+            g_ft02AudioRecording.psramStageCapacity = bytes;
+            g_ft02AudioRecording.psramStageUsed = 0;
+            const double seconds = static_cast<double>(bytes) /
+                static_cast<double>(FT02_AUDIO_SAMPLE_RATE * sizeof(int16_t));
+            Serial.printf(
+                "[AUDIO-REC] PSRAM low-noise stage=%u KiB window=%.1fs free_after=%u\n",
+                static_cast<unsigned>(bytes / 1024u),
+                seconds,
+                static_cast<unsigned>(heap_caps_get_free_size(MALLOC_CAP_SPIRAM))
+            );
+            return true;
+        }
+    }
+    Serial.println("[AUDIO-REC] WARN PSRAM stage unavailable; SD streaming active during capture");
+    return false;
+}
+
+static bool FT02_AudioFlushRecordingStage()
+{
+    if(g_ft02AudioRecording.psramStage == nullptr ||
+       g_ft02AudioRecording.psramStageUsed == 0)
+    {
+        return true;
+    }
+    if(g_ft02AudioRecording.file == nullptr) return false;
+
+    const size_t bytes = g_ft02AudioRecording.psramStageUsed;
+    const size_t written = fwrite(
+        g_ft02AudioRecording.psramStage,
+        1,
+        bytes,
+        g_ft02AudioRecording.file
+    );
+    if(written != bytes)
+    {
+        Serial.printf(
+            "[AUDIO-REC] SD stage flush failed written=%u expected=%u\n",
+            static_cast<unsigned>(written),
+            static_cast<unsigned>(bytes)
+        );
+        return false;
+    }
+    Serial.printf(
+        "[AUDIO-REC] PSRAM stage flushed to SD bytes=%u\n",
+        static_cast<unsigned>(bytes)
+    );
+    g_ft02AudioRecording.psramStageUsed = 0;
+    return true;
+}
+
 static bool FT02_AudioAppendRecordingSamples(const int16_t* samples, size_t frames)
 {
     if(g_ft02AudioRecording.file == nullptr || samples == nullptr || frames == 0)
@@ -1124,11 +1340,49 @@ static bool FT02_AudioAppendRecordingSamples(const int16_t* samples, size_t fram
     }
 
     const size_t bytes = frames * sizeof(int16_t);
-    if(fwrite(samples, 1, bytes, g_ft02AudioRecording.file) != bytes)
+    if(g_ft02AudioRecording.psramStage != nullptr &&
+       !g_ft02AudioRecording.sdStreamingFallback)
     {
-        Serial.println("[AUDIO-REC] SD write failed");
-        g_ft02AudioRecording.success = false;
-        return false;
+        if(g_ft02AudioRecording.psramStageUsed + bytes <=
+           g_ft02AudioRecording.psramStageCapacity)
+        {
+            memcpy(
+                g_ft02AudioRecording.psramStage + g_ft02AudioRecording.psramStageUsed,
+                samples,
+                bytes
+            );
+            g_ft02AudioRecording.psramStageUsed += bytes;
+        }
+        else
+        {
+            Serial.printf(
+                "[AUDIO-REC] PSRAM stage full at %.1fs; switching to SD streaming\n",
+                static_cast<double>(g_ft02AudioRecording.recordedFrames) /
+                    static_cast<double>(FT02_AUDIO_SAMPLE_RATE)
+            );
+            if(!FT02_AudioFlushRecordingStage())
+            {
+                g_ft02AudioRecording.success = false;
+                return false;
+            }
+            FT02_AudioFreeRecordingStage();
+            g_ft02AudioRecording.sdStreamingFallback = true;
+            if(fwrite(samples, 1, bytes, g_ft02AudioRecording.file) != bytes)
+            {
+                Serial.println("[AUDIO-REC] SD write failed");
+                g_ft02AudioRecording.success = false;
+                return false;
+            }
+        }
+    }
+    else
+    {
+        if(fwrite(samples, 1, bytes, g_ft02AudioRecording.file) != bytes)
+        {
+            Serial.println("[AUDIO-REC] SD write failed");
+            g_ft02AudioRecording.success = false;
+            return false;
+        }
     }
 
     for(size_t i = 0; i < frames; i++)
@@ -1170,6 +1424,12 @@ static void FT02_AudioFinishRecording(const char* reason)
     {
         if(success)
         {
+            // Normal short recordings have touched no SD data path since the
+            // pre-capture WAV header. Commit PSRAM only after speech stops.
+            success = FT02_AudioFlushRecordingStage();
+        }
+        if(success)
+        {
             success = FT02_AudioFinalizeWav(
                 g_ft02AudioRecording.file,
                 g_ft02AudioRecording.dataBytes
@@ -1178,6 +1438,7 @@ static void FT02_AudioFinishRecording(const char* reason)
         fclose(g_ft02AudioRecording.file);
         g_ft02AudioRecording.file = nullptr;
     }
+    FT02_AudioFreeRecordingStage();
 
     const uint32_t durationMs = static_cast<uint32_t>(
         (static_cast<uint64_t>(g_ft02AudioRecording.recordedFrames) * 1000u) /
@@ -1205,7 +1466,7 @@ static void FT02_AudioFinishRecording(const char* reason)
         static_cast<double>(samples);
 
     Serial.printf(
-        "[AUDIO-REC] complete success=%s reason=%s id=%s file=%s duration=%lu.%03lus samples=%lu size=%llu peak=%ld rms=%.1f clip=%.3f%%\n",
+        "[AUDIO-REC] complete success=%s reason=%s id=%s file=%s duration=%lu.%03lus samples=%lu size=%llu rawPeak=%ld peak=%ld rms=%.1f clip=%.3f%% burstfix=%lu\n",
         success ? "yes" : "no",
         reason != nullptr ? reason : "unknown",
         g_ft02AudioRecording.audioId,
@@ -1214,9 +1475,11 @@ static void FT02_AudioFinishRecording(const char* reason)
         static_cast<unsigned long>(durationMs % 1000u),
         static_cast<unsigned long>(g_ft02AudioRecording.recordedFrames),
         static_cast<unsigned long long>(fileSize),
+        static_cast<long>(g_ft02AudioRecording.rawPeak),
         static_cast<long>(g_ft02AudioRecording.peak),
         rms,
-        clipPercent
+        clipPercent,
+        static_cast<unsigned long>(g_ft02AudioRecording.burstRepairSamples)
     );
 
     g_ft02AudioStatus.recording = false;
@@ -1245,7 +1508,7 @@ static void FT02_AudioFinishRecording(const char* reason)
     FT02_AudioQueueSilence(50);
     g_ft02AudioRecording = FT02AudioRecordingSession{};
     (void)FT02_AudioLogReload();
-    g_ft02AudioRestartNotBeforeMs = millis() + 500u;
+    g_ft02AudioRestartNotBeforeMs = millis() + 2500u;
     FT02_AudioSetMessage(success ? "录音已保存" : "录音保存失败", success);
     g_ft02AudioState = FT02_AUDIO_LOG_IDLE;
     FT02_AudioChanged();
@@ -1291,7 +1554,30 @@ static void FT02_AudioServiceRecording()
         const size_t frames = bytesRead / (2u * sizeof(int16_t));
         for(size_t i = 0; i < frames; i++)
         {
-            g_ft02AudioMonoBuffer[i] = g_ft02AudioStereoBuffer[i * 2u];
+            const int16_t sample = g_ft02AudioStereoBuffer[i * 2u];
+            g_ft02AudioMonoBuffer[i] = sample;
+            const int32_t rawMagnitude = FT02_AudioAbs16(sample);
+            if(rawMagnitude > g_ft02AudioRecording.rawPeak)
+            {
+                g_ft02AudioRecording.rawPeak = rawMagnitude;
+            }
+            if(rawMagnitude > g_ft02AudioRecording.secondRawPeak)
+            {
+                g_ft02AudioRecording.secondRawPeak = rawMagnitude;
+            }
+        }
+        const uint32_t repaired = FT02_AudioRepairSaturatedBurstBlock(
+            g_ft02AudioMonoBuffer,
+            frames,
+            g_ft02AudioRecording.havePreviousFilteredSample,
+            g_ft02AudioRecording.previousFilteredSample
+        );
+        g_ft02AudioRecording.burstRepairSamples += repaired;
+        g_ft02AudioRecording.secondBurstRepairSamples += repaired;
+        if(frames > 0)
+        {
+            g_ft02AudioRecording.previousFilteredSample = g_ft02AudioMonoBuffer[frames - 1u];
+            g_ft02AudioRecording.havePreviousFilteredSample = true;
         }
         if(!FT02_AudioAppendRecordingSamples(g_ft02AudioMonoBuffer, frames)) break;
         FT02_AudioQueueSilence(0);
@@ -1315,17 +1601,21 @@ static void FT02_AudioServiceRecording()
             )
             : 0.0;
         Serial.printf(
-            "[AUDIO-REC] elapsed=%lu.%01lus bytes=%lu peak=%ld rms=%.1f state=%s\n",
+            "[AUDIO-REC] elapsed=%lu.%01lus bytes=%lu rawPeak=%ld peak=%ld rms=%.1f burstfix=%lu state=%s\n",
             static_cast<unsigned long>(g_ft02AudioRecording.nextProgressMs / 1000u),
             static_cast<unsigned long>((g_ft02AudioRecording.nextProgressMs % 1000u) / 100u),
             static_cast<unsigned long>(g_ft02AudioRecording.dataBytes),
+            static_cast<long>(g_ft02AudioRecording.secondRawPeak),
             static_cast<long>(g_ft02AudioRecording.secondPeak),
             secondRms,
+            static_cast<unsigned long>(g_ft02AudioRecording.secondBurstRepairSamples),
             g_ft02AudioState == FT02_AUDIO_LOG_POST_ROLL ? "TAIL" : "REC"
         );
         g_ft02AudioRecording.nextProgressMs += 1000u;
         g_ft02AudioRecording.secondFrames = 0;
         g_ft02AudioRecording.secondPeak = 0;
+        g_ft02AudioRecording.secondRawPeak = 0;
+        g_ft02AudioRecording.secondBurstRepairSamples = 0;
         g_ft02AudioRecording.secondSumSq = 0;
     }
 
@@ -1336,13 +1626,122 @@ static void FT02_AudioServiceRecording()
     }
 }
 
+static bool FT02_AudioWriteFadeToZero()
+{
+    if(!g_ft02AudioPlayback.outputUnmuted || !g_ft02AudioPlayback.paEnabled)
+    {
+        g_ft02AudioPlayback.lastOutputSample = 0;
+        return true;
+    }
+
+    const int32_t startSample = g_ft02AudioPlayback.lastOutputSample;
+    const size_t totalFrames =
+        static_cast<size_t>(FT02_AUDIO_PLAYBACK_FADE_BLOCKS) *
+        FT02_AUDIO_FRAMES_PER_BLOCK;
+
+    for(uint8_t block = 0; block < FT02_AUDIO_PLAYBACK_FADE_BLOCKS; block++)
+    {
+        for(size_t i = 0; i < FT02_AUDIO_FRAMES_PER_BLOCK; i++)
+        {
+            const size_t frameIndex =
+                static_cast<size_t>(block) * FT02_AUDIO_FRAMES_PER_BLOCK + i;
+            const size_t remaining = totalFrames - frameIndex;
+            const int16_t sample = static_cast<int16_t>(
+                (startSample * static_cast<int32_t>(remaining)) /
+                static_cast<int32_t>(totalFrames)
+            );
+            g_ft02AudioPlayBuffer[i * 2u] = sample;
+            g_ft02AudioPlayBuffer[i * 2u + 1u] = sample;
+        }
+
+        if(!FT02_AudioWriteAll(
+            g_ft02AudioPlayBuffer,
+            sizeof(g_ft02AudioPlayBuffer),
+            "[AUDIO-PLAY] fade"
+        ))
+        {
+            return false;
+        }
+    }
+
+    g_ft02AudioPlayback.lastOutputSample = 0;
+    g_ft02AudioPlayback.fadeWritten = true;
+    Serial.printf(
+        "[AUDIO-PLAY] stop fade complete blocks=%u duration=%.1fms from=%d\n",
+        static_cast<unsigned int>(FT02_AUDIO_PLAYBACK_FADE_BLOCKS),
+        (1000.0f * static_cast<float>(totalFrames)) /
+            static_cast<float>(FT02_AUDIO_SAMPLE_RATE),
+        static_cast<int>(startSample)
+    );
+    return true;
+}
+
+static bool FT02_AudioEnterEpdHoldFromAudioTask()
+{
+    if(g_ft02AudioPlayback.epdGuardReady) return true;
+
+    // Do not consume source PCM. Ramp only the currently exposed output sample
+    // to zero, then keep TX alive with zero blocks while the UI performs the
+    // blocking e-paper partial update. The WAV offset / playedFrames remain
+    // frozen, so no spoken content is lost during the display refresh.
+    const int32_t startSample = g_ft02AudioPlayback.lastOutputSample;
+    for(size_t i = 0; i < FT02_AUDIO_FRAMES_PER_BLOCK; i++)
+    {
+        const size_t remaining = FT02_AUDIO_FRAMES_PER_BLOCK - i;
+        const int16_t sample = static_cast<int16_t>(
+            (startSample * static_cast<int32_t>(remaining)) /
+            static_cast<int32_t>(FT02_AUDIO_FRAMES_PER_BLOCK)
+        );
+        g_ft02AudioPlayBuffer[i * 2u] = sample;
+        g_ft02AudioPlayBuffer[i * 2u + 1u] = sample;
+    }
+    if(!FT02_AudioWriteAll(
+        g_ft02AudioPlayBuffer,
+        sizeof(g_ft02AudioPlayBuffer),
+        "[AUDIO-EPD] guard fade"
+    ))
+    {
+        return false;
+    }
+    if(!FT02_AudioWriteAll(
+        g_ft02AudioZeroBuffer,
+        sizeof(g_ft02AudioZeroBuffer),
+        "[AUDIO-EPD] guard zero"
+    ))
+    {
+        return false;
+    }
+    g_ft02AudioPlayback.lastOutputSample = 0;
+
+    if(g_ft02AudioPlayback.paEnabled)
+    {
+        FT02_AudioPaSet(false);
+        g_ft02AudioPlayback.paEnabled = false;
+    }
+    g_ft02AudioPlayback.epdGuardReady = true;
+    Serial.println("[AUDIO-EPD] playback held at zero; PA shutdown; source pointer frozen");
+    return true;
+}
+
 static void FT02_AudioBeginPlaybackDrain()
 {
+    if(g_ft02AudioPlayback.draining) return;
+
     if(g_ft02AudioPlayback.file != nullptr)
     {
         fclose(g_ft02AudioPlayback.file);
         g_ft02AudioPlayback.file = nullptr;
     }
+
+    // Manual stop used to cut the current PCM sample directly to zero. That
+    // discontinuity is reproduced by the BTL amplifier as a loud click. Append
+    // a short, deterministic ramp before the zero tail so the waveform reaches
+    // the centre point continuously. The fade is also harmless at natural EOF.
+    if(!FT02_AudioWriteFadeToZero())
+    {
+        g_ft02AudioPlayback.success = false;
+    }
+
     g_ft02AudioPlayback.draining = true;
     g_ft02AudioPlayback.tailBlocksWritten = 0;
     g_ft02AudioPlayback.tailWaitDeadlineMs = 0;
@@ -1357,19 +1756,68 @@ static void FT02_AudioFinishPlayback()
     }
 
     const bool stopped = g_ft02AudioPlayback.stopRequested;
-    const bool success = g_ft02AudioPlayback.success;
+    bool success = g_ft02AudioPlayback.success;
+
+    // The PCM stream is now at zero. Quiet the DAC while the PA still sees a
+    // stable centred input, allow the soft-mute/volume ramp to settle, then
+    // shut down the BTL amplifier. Power the DAC down only after the speaker
+    // bridge is disconnected. This avoids both the former hard PCM step and
+    // the NS4150B shutdown transient being amplified by the speaker.
+    if(!g_ft02AudioCodec.prepareDacForPaShutdown())
+    {
+        Serial.println("[AUDIO-PLAY] FAIL: unable to prepare DAC shutdown");
+        success = false;
+    }
+    FT02_AudioQueueSilence(20);
+    delay(FT02_AUDIO_DAC_MUTE_SETTLE_MS);
+
+    FT02_AudioPaSet(false);
+    delay(FT02_AUDIO_PA_SHUTDOWN_SETTLE_MS);
+
+    if(!g_ft02AudioCodec.powerDownDac())
+    {
+        Serial.println("[AUDIO-PLAY] FAIL: unable to power down DAC");
+        success = false;
+    }
+    Serial.println("[AUDIO-PLAY] pop-safe shutdown complete: fade->DAC mute->PA off->DAC powerdown");
+
+    if(g_ft02AudioPlayback.rxSuspended)
+    {
+        const esp_err_t rxError = i2s_channel_enable(g_ft02AudioRx);
+        if(rxError != ESP_OK)
+        {
+            FT02_AudioLogEspError("[AUDIO-PLAY] resume RX", rxError);
+            success = false;
+        }
+        else
+        {
+            Serial.println("[AUDIO-PLAY] RX DMA resumed after playback");
+        }
+        g_ft02AudioPlayback.rxSuspended = false;
+    }
+
     if(g_ft02AudioPlayback.volumeDirty)
     {
         FT02_AudioSaveVolumeLevel(g_ft02AudioStatus.playbackVolumeLevel);
     }
     Serial.printf(
-        "[AUDIO-PLAY] complete success=%s stopped=%s frames=%lu/%lu volume=%u/10\n",
+        "[AUDIO-PLAY] complete success=%s stopped=%s frames=%lu/%lu volume=%u/10 source=%s partialWrites=%lu\n",
         success ? "yes" : "no",
         stopped ? "yes" : "no",
         static_cast<unsigned long>(g_ft02AudioPlayback.playedFrames),
         static_cast<unsigned long>(g_ft02AudioPlayback.totalFrames),
-        static_cast<unsigned int>(g_ft02AudioStatus.playbackVolumeLevel)
+        static_cast<unsigned int>(g_ft02AudioStatus.playbackVolumeLevel),
+        g_ft02AudioPlayback.psramStage != nullptr ? "PSRAM_STAGE" : "SD_STREAM",
+        static_cast<unsigned long>(g_ft02AudioPlayback.partialWrites)
     );
+
+    if(g_ft02AudioPlayback.psramStage != nullptr)
+    {
+        heap_caps_free(g_ft02AudioPlayback.psramStage);
+        g_ft02AudioPlayback.psramStage = nullptr;
+        g_ft02AudioPlayback.psramStageBytes = 0;
+        g_ft02AudioPlayback.psramStageOffset = 0;
+    }
 
     g_ft02AudioStatus.playing = false;
     g_ft02AudioStatus.playbackStopRequested = false;
@@ -1390,11 +1838,128 @@ static void FT02_AudioServicePlayback()
 {
     if(g_ft02AudioState != FT02_AUDIO_LOG_PLAYING) return;
 
+    // A stop requested before the UI releases streaming must not leave the
+    // session stuck. The DAC is still muted, so finish immediately.
+    if(g_ft02AudioPlayback.stopRequested && !g_ft02AudioPlayback.startReleased)
+    {
+        FT02_AudioFinishPlayback();
+        return;
+    }
+
     if(!g_ft02AudioPlayback.startReleased) return;
 
-    if(g_ft02AudioPlayback.stopRequested && !g_ft02AudioPlayback.draining)
+    if(!g_ft02AudioPlayback.rxSuspended)
     {
-        FT02_AudioBeginPlaybackDrain();
+        const esp_err_t rxError = i2s_channel_disable(g_ft02AudioRx);
+        if(rxError != ESP_OK)
+        {
+            FT02_AudioLogEspError("[AUDIO-PLAY] suspend RX", rxError);
+            g_ft02AudioPlayback.success = false;
+            FT02_AudioBeginPlaybackDrain();
+            return;
+        }
+        g_ft02AudioPlayback.rxSuspended = true;
+        Serial.println("[AUDIO-PLAY] RX DMA suspended; TX-only clean playback");
+    }
+
+    if(g_ft02AudioPlayback.stopRequested &&
+       !g_ft02AudioPlayback.draining &&
+       !g_ft02AudioPlayback.stopFadeActive)
+    {
+        // Do not cut the current waveform directly to zero. Continue consuming
+        // a short piece of the source while applying a linear envelope. This
+        // preserves waveform continuity and prevents the manual-stop click.
+        g_ft02AudioPlayback.stopFadeActive = true;
+        g_ft02AudioPlayback.stopFadeFramesRemaining =
+            FT02_AUDIO_PLAYBACK_FADE_FRAMES;
+        Serial.printf(
+            "[AUDIO-PLAY] manual stop fade started frames=%lu duration=%.1fms\n",
+            static_cast<unsigned long>(FT02_AUDIO_PLAYBACK_FADE_FRAMES),
+            (1000.0f * static_cast<float>(FT02_AUDIO_PLAYBACK_FADE_FRAMES)) /
+                static_cast<float>(FT02_AUDIO_SAMPLE_RATE)
+        );
+    }
+
+    // Prime TX with real zero frames before exposing the analogue output.
+    // This removes the boot/idle current-noise window caused by a permanently
+    // unmuted DAC on the SCLK/no-MCLK design.
+    if(!g_ft02AudioPlayback.draining && !g_ft02AudioPlayback.outputUnmuted)
+    {
+        if(g_ft02AudioPlayback.primeBlocksWritten < FT02_AUDIO_PLAYBACK_PRIME_BLOCKS)
+        {
+            if(!FT02_AudioWriteAll(
+                g_ft02AudioZeroBuffer,
+                sizeof(g_ft02AudioZeroBuffer),
+                "[AUDIO-PLAY] prime"
+            ))
+            {
+                g_ft02AudioPlayback.success = false;
+                FT02_AudioBeginPlaybackDrain();
+                return;
+            }
+            g_ft02AudioPlayback.primeBlocksWritten++;
+            return;
+        }
+
+        // Prepare a stable zero-level DAC output while the external PA is
+        // still physically shut down. Then enable NS4150B and keep streaming
+        // zeros across its ~120 ms startup time. Real PCM starts only after
+        // both analogue stages are settled.
+        if(!g_ft02AudioPlayback.paEnabled)
+        {
+            if(!g_ft02AudioCodec.setDacMuted(false))
+            {
+                Serial.println("[AUDIO-PLAY] FAIL: unable to prepare DAC");
+                FT02_AudioPaSet(false);
+                g_ft02AudioPlayback.success = false;
+                FT02_AudioBeginPlaybackDrain();
+                return;
+            }
+            FT02_AudioPaSet(true);
+            g_ft02AudioPlayback.paEnabled = true;
+            g_ft02AudioPlayback.paWarmup = true;
+            g_ft02AudioPlayback.paWarmupDeadlineMs =
+                millis() + FT02_AUDIO_PA_STARTUP_MS;
+            Serial.println("[AUDIO-PLAY] DAC zero ready; PA warmup started");
+            return;
+        }
+
+        if(g_ft02AudioPlayback.paWarmup)
+        {
+            FT02_AudioQueueSilence(10);
+            if(!FT02_AudioTimeReached(millis(), g_ft02AudioPlayback.paWarmupDeadlineMs))
+            {
+                return;
+            }
+            g_ft02AudioPlayback.paWarmup = false;
+        }
+
+        g_ft02AudioPlayback.outputUnmuted = true;
+        Serial.println("[AUDIO-PLAY] output live after zero-prime + PA quiet warmup");
+        return;
+    }
+
+    // During an explicit safe EPD update, freeze the source pointer and hold TX
+    // at zero so the blocking panel update cannot create a speaker transient or
+    // consume unheard PCM.
+    if(!g_ft02AudioPlayback.draining && g_ft02AudioPlayback.epdGuardActive)
+    {
+        if(!FT02_AudioEnterEpdHoldFromAudioTask())
+        {
+            g_ft02AudioPlayback.success = false;
+            FT02_AudioBeginPlaybackDrain();
+            return;
+        }
+        if(!FT02_AudioWriteAll(
+            g_ft02AudioZeroBuffer,
+            sizeof(g_ft02AudioZeroBuffer),
+            "[AUDIO-EPD] guard hold"
+        ))
+        {
+            g_ft02AudioPlayback.success = false;
+            FT02_AudioBeginPlaybackDrain();
+        }
+        return;
     }
 
     if(!g_ft02AudioPlayback.draining)
@@ -1413,12 +1978,30 @@ static void FT02_AudioServicePlayback()
             const size_t bytesWanted = g_ft02AudioPlayback.bytesRemaining < maxInputBytes
                 ? static_cast<size_t>(g_ft02AudioPlayback.bytesRemaining)
                 : maxInputBytes;
-            const size_t bytesRead = fread(
-                g_ft02AudioStereoBuffer,
-                1,
-                bytesWanted,
-                g_ft02AudioPlayback.file
-            );
+            size_t bytesRead = 0;
+            if(g_ft02AudioPlayback.psramStage != nullptr)
+            {
+                const size_t available = g_ft02AudioPlayback.psramStageBytes -
+                    g_ft02AudioPlayback.psramStageOffset;
+                bytesRead = bytesWanted < available ? bytesWanted : available;
+                if(bytesRead > 0)
+                {
+                    memcpy(
+                        g_ft02AudioStereoBuffer,
+                        g_ft02AudioPlayback.psramStage + g_ft02AudioPlayback.psramStageOffset,
+                        bytesRead
+                    );
+                }
+            }
+            else if(g_ft02AudioPlayback.file != nullptr)
+            {
+                bytesRead = fread(
+                    g_ft02AudioStereoBuffer,
+                    1,
+                    bytesWanted,
+                    g_ft02AudioPlayback.file
+                );
+            }
             if(bytesRead == 0)
             {
                 if(g_ft02AudioPlayback.bytesRemaining > 0)
@@ -1440,7 +2023,26 @@ static void FT02_AudioServicePlayback()
                     const int16_t sample = g_ft02AudioStereoBuffer[
                         i * 2u + (g_ft02AudioPlayback.useRight ? 1u : 0u)
                     ];
-                    const int16_t amplified = FT02_AudioApplyPlaybackGain(sample, effectiveGain);
+                    float frameGain = effectiveGain;
+                    if(g_ft02AudioPlayback.stopFadeActive)
+                    {
+                        frameGain *= static_cast<float>(
+                            g_ft02AudioPlayback.stopFadeFramesRemaining
+                        ) / static_cast<float>(FT02_AUDIO_PLAYBACK_FADE_FRAMES);
+                        if(g_ft02AudioPlayback.stopFadeFramesRemaining > 0)
+                        {
+                            g_ft02AudioPlayback.stopFadeFramesRemaining--;
+                        }
+                    }
+                    if(g_ft02AudioPlayback.epdResumeFadeFramesRemaining > 0)
+                    {
+                        const uint32_t done = FT02_AUDIO_EPD_RESUME_FADE_FRAMES -
+                            g_ft02AudioPlayback.epdResumeFadeFramesRemaining;
+                        frameGain *= static_cast<float>(done) /
+                            static_cast<float>(FT02_AUDIO_EPD_RESUME_FADE_FRAMES);
+                        g_ft02AudioPlayback.epdResumeFadeFramesRemaining--;
+                    }
+                    const int16_t amplified = FT02_AudioApplyPlaybackGain(sample, frameGain);
                     g_ft02AudioPlayBuffer[i * 2u] = amplified;
                     g_ft02AudioPlayBuffer[i * 2u + 1u] = amplified;
                 }
@@ -1450,37 +2052,55 @@ static void FT02_AudioServicePlayback()
                 frames = bytesRead / sizeof(int16_t);
                 for(size_t i = 0; i < frames; i++)
                 {
+                    float frameGain = effectiveGain;
+                    if(g_ft02AudioPlayback.stopFadeActive)
+                    {
+                        frameGain *= static_cast<float>(
+                            g_ft02AudioPlayback.stopFadeFramesRemaining
+                        ) / static_cast<float>(FT02_AUDIO_PLAYBACK_FADE_FRAMES);
+                        if(g_ft02AudioPlayback.stopFadeFramesRemaining > 0)
+                        {
+                            g_ft02AudioPlayback.stopFadeFramesRemaining--;
+                        }
+                    }
+                    if(g_ft02AudioPlayback.epdResumeFadeFramesRemaining > 0)
+                    {
+                        const uint32_t done = FT02_AUDIO_EPD_RESUME_FADE_FRAMES -
+                            g_ft02AudioPlayback.epdResumeFadeFramesRemaining;
+                        frameGain *= static_cast<float>(done) /
+                            static_cast<float>(FT02_AUDIO_EPD_RESUME_FADE_FRAMES);
+                        g_ft02AudioPlayback.epdResumeFadeFramesRemaining--;
+                    }
                     const int16_t amplified = FT02_AudioApplyPlaybackGain(
                         g_ft02AudioStereoBuffer[i],
-                        effectiveGain
+                        frameGain
                     );
                     g_ft02AudioPlayBuffer[i * 2u] = amplified;
                     g_ft02AudioPlayBuffer[i * 2u + 1u] = amplified;
                 }
             }
 
-            size_t written = 0;
-            const esp_err_t error = i2s_channel_write(
-                g_ft02AudioTx,
+            if(frames > 0)
+            {
+                g_ft02AudioPlayback.lastOutputSample =
+                    g_ft02AudioPlayBuffer[(frames - 1u) * 2u];
+            }
+
+            if(!FT02_AudioWriteAll(
                 g_ft02AudioPlayBuffer,
                 frames * 2u * sizeof(int16_t),
-                &written,
-                pdMS_TO_TICKS(30)
-            );
-            if(error == ESP_ERR_TIMEOUT)
+                "[AUDIO-PLAY] write"
+            ))
             {
-                // Rewind this block and retry on the next poll instead of losing audio.
-                fseek(g_ft02AudioPlayback.file, -static_cast<long>(bytesRead), SEEK_CUR);
-                break;
-            }
-            if(error != ESP_OK || written != frames * 2u * sizeof(int16_t))
-            {
-                FT02_AudioLogEspError("[AUDIO-PLAY] write", error);
                 g_ft02AudioPlayback.success = false;
                 FT02_AudioBeginPlaybackDrain();
                 break;
             }
 
+            if(g_ft02AudioPlayback.psramStage != nullptr)
+            {
+                g_ft02AudioPlayback.psramStageOffset += bytesRead;
+            }
             g_ft02AudioPlayback.playedFrames += static_cast<uint32_t>(frames);
             g_ft02AudioPlayback.bytesRemaining -= static_cast<uint32_t>(bytesRead);
             g_ft02AudioStatus.playbackElapsedMs = static_cast<uint32_t>(
@@ -1491,6 +2111,15 @@ static void FT02_AudioServicePlayback()
             {
                 g_ft02AudioStatus.playbackElapsedMs = g_ft02AudioStatus.playbackDurationMs;
             }
+
+            if(g_ft02AudioPlayback.stopFadeActive &&
+               g_ft02AudioPlayback.stopFadeFramesRemaining == 0)
+            {
+                Serial.println("[AUDIO-PLAY] manual stop fade reached zero");
+                g_ft02AudioPlayback.stopFadeActive = false;
+                FT02_AudioBeginPlaybackDrain();
+                break;
+            }
         }
     }
 
@@ -1498,18 +2127,12 @@ static void FT02_AudioServicePlayback()
 
     if(g_ft02AudioPlayback.tailBlocksWritten < FT02_AUDIO_PLAYBACK_TAIL_BLOCKS)
     {
-        size_t written = 0;
-        const esp_err_t error = i2s_channel_write(
-            g_ft02AudioTx,
+        if(!FT02_AudioWriteAll(
             g_ft02AudioZeroBuffer,
             sizeof(g_ft02AudioZeroBuffer),
-            &written,
-            pdMS_TO_TICKS(30)
-        );
-        if(error == ESP_ERR_TIMEOUT) return;
-        if(error != ESP_OK || written != sizeof(g_ft02AudioZeroBuffer))
+            "[AUDIO-PLAY] tail"
+        ))
         {
-            FT02_AudioLogEspError("[AUDIO-PLAY] tail", error);
             g_ft02AudioPlayback.success = false;
             g_ft02AudioPlayback.tailBlocksWritten = FT02_AUDIO_PLAYBACK_TAIL_BLOCKS;
         }
@@ -1562,11 +2185,18 @@ bool FT02_AudioLogBegin()
     g_ft02AudioStatus.storageReady = FT02_StorageIsReady();
     g_ft02AudioStatus.playbackVolumeLevel = FT02_AudioLoadVolumeLevel();
 
-    // Waveshare board supplies its own 24 MHz MCLK. GPIO13 is fully released.
-    g_ft02AudioStatus.codecReady = FT02_AudioInitCodec();
-    if(g_ft02AudioStatus.codecReady)
+    // The board-level NS4150B PA has its own SD/CTRL pin. Keep the class-D
+    // stage physically shut down for boot, idle and recording. Digital DAC
+    // mute alone cannot isolate a powered/floating external amplifier.
+    FT02_AudioPaInit();
+
+    // ES8311 derives its internal master clock from BCLK/SCLK. Start I2S first
+    // so BCLK and LRCK are stable before the codec is configured. MCLK remains
+    // unconnected.
+    g_ft02AudioStatus.i2sReady = FT02_AudioInitI2s();
+    if(g_ft02AudioStatus.i2sReady)
     {
-        g_ft02AudioStatus.i2sReady = FT02_AudioInitI2s();
+        g_ft02AudioStatus.codecReady = FT02_AudioInitCodec();
     }
     const bool logStoreReady = FT02_AudioLogReload();
 
@@ -1580,7 +2210,9 @@ bool FT02_AudioLogBegin()
             : (logStoreReady ? "语音模块未就绪" : "录音编号状态异常"),
         ready
     );
-    if(g_ft02AudioStatus.i2sReady && g_ft02AudioServiceTaskHandle == nullptr)
+    if(g_ft02AudioStatus.codecReady &&
+       g_ft02AudioStatus.i2sReady &&
+       g_ft02AudioServiceTaskHandle == nullptr)
     {
         const BaseType_t taskCreated = xTaskCreatePinnedToCore(
             FT02_AudioServiceTask,
@@ -1605,7 +2237,8 @@ bool FT02_AudioLogBegin()
             g_ft02AudioServiceTaskHandle != nullptr;
 
     Serial.printf(
-        "[AUDIO-LOG] begin codec=%s i2s=%s storage=%s count=%u nextId=%lu volume=%u/10 task=%s pins=BCLK%d WS%d DOUT%d DIN%d\n",
+        "[AUDIO-LOG] begin codec=ES8311@0x%02X/%s i2s=%s storage=%s count=%u nextId=%lu volume=%u/10 task=%s pins=BCLK%d WS%d DOUT%d DIN%d PA_SD%d MCLK=NC mic=AMIC DAC=IDLE_POWERDOWN\n",
+        static_cast<unsigned int>(g_ft02AudioCodec.address()),
         g_ft02AudioStatus.codecReady ? "OK" : "FAIL",
         g_ft02AudioStatus.i2sReady ? "OK" : "FAIL",
         g_ft02AudioStatus.storageReady ? "OK" : "FAIL",
@@ -1616,7 +2249,8 @@ bool FT02_AudioLogBegin()
         FT02_AUDIO_BCLK_PIN,
         FT02_AUDIO_WS_PIN,
         FT02_AUDIO_DOUT_PIN,
-        FT02_AUDIO_DIN_PIN
+        FT02_AUDIO_DIN_PIN,
+        FT02_AUDIO_PA_SD_PIN
     );
     return ready;
 }
@@ -1660,6 +2294,70 @@ bool FT02_AudioLogIsPlaying()
 bool FT02_AudioLogIsBusy()
 {
     return FT02_AudioLogIsCapturing() || FT02_AudioLogIsPlaying();
+}
+
+
+bool FT02_AudioLogSetPlaybackEpdGuard(bool enabled)
+{
+    if(enabled)
+    {
+        if(g_ft02AudioState != FT02_AUDIO_LOG_PLAYING ||
+           g_ft02AudioPlayback.draining ||
+           !g_ft02AudioPlayback.outputUnmuted)
+        {
+            return false;
+        }
+        if(g_ft02AudioPlayback.epdGuardActive && g_ft02AudioPlayback.epdGuardReady)
+        {
+            return true;
+        }
+
+        g_ft02AudioPlayback.epdGuardReady = false;
+        g_ft02AudioPlayback.epdGuardActive = true;
+        const uint32_t deadline = millis() + FT02_AUDIO_EPD_GUARD_READY_TIMEOUT_MS;
+        while(!g_ft02AudioPlayback.epdGuardReady &&
+              g_ft02AudioState == FT02_AUDIO_LOG_PLAYING &&
+              !FT02_AudioTimeReached(millis(), deadline))
+        {
+            delay(2);
+        }
+        if(!g_ft02AudioPlayback.epdGuardReady)
+        {
+            g_ft02AudioPlayback.epdGuardActive = false;
+            Serial.println("[AUDIO-EPD] FAIL: guard could not reach zero before timeout");
+            return false;
+        }
+        Serial.println("[AUDIO-PA] EPD guard=ON source=PAUSED_ZERO");
+        return true;
+    }
+
+    if(!g_ft02AudioPlayback.epdGuardActive) return true;
+
+    if(g_ft02AudioState == FT02_AUDIO_LOG_PLAYING &&
+       !g_ft02AudioPlayback.draining &&
+       g_ft02AudioPlayback.outputUnmuted)
+    {
+        // The source pointer is still frozen and TX is emitting zeros. Bring
+        // NS4150B back up against a true zero input, keep zero output across its
+        // startup interval, then release the source with a one-block fade-in.
+        FT02_AudioPaSet(true);
+        g_ft02AudioPlayback.paEnabled = true;
+        delay(FT02_AUDIO_PA_STARTUP_MS);
+        g_ft02AudioPlayback.epdResumeFadeFramesRemaining =
+            FT02_AUDIO_EPD_RESUME_FADE_FRAMES;
+        g_ft02AudioPlayback.epdGuardReady = false;
+        g_ft02AudioPlayback.epdGuardActive = false;
+        Serial.printf(
+            "[AUDIO-PA] EPD guard=OFF resumeFade=%lu frames source=EXACT_SAME_PCM\n",
+            static_cast<unsigned long>(FT02_AUDIO_EPD_RESUME_FADE_FRAMES)
+        );
+        return true;
+    }
+
+    g_ft02AudioPlayback.epdGuardReady = false;
+    g_ft02AudioPlayback.epdGuardActive = false;
+    Serial.println("[AUDIO-PA] EPD guard=OFF playback already draining/idle; PA stays shutdown");
+    return true;
 }
 
 bool FT02_AudioLogReload()
@@ -1743,6 +2441,17 @@ bool FT02_AudioLogStartRecording(const FT02GnssSnapshot& gnss)
         return false;
     }
 
+    // Recording never needs the speaker path. Physically shut down NS4150B
+    // first, then power/mute the ES8311 DAC side. This removes the 400 kHz
+    // class-D stage from the analogue microphone environment while capturing.
+    FT02_AudioPaSet(false);
+    if(!g_ft02AudioCodec.setDacMuted(true))
+    {
+        FT02_AudioSetMessage("无法静音扬声器，录音未开始", false);
+        FT02_AudioChanged();
+        return false;
+    }
+
     g_ft02AudioRecording = FT02AudioRecordingSession{};
 
     // Bind one deterministic location snapshot to the voice log at the exact
@@ -1775,6 +2484,8 @@ bool FT02_AudioLogStartRecording(const FT02GnssSnapshot& gnss)
         Serial.println("[AUDIO-REC] GNSS not captured: no current valid fix");
     }
 
+    // Complete SD-side setup before the analogue settle window so no 40 MHz SD
+    // burst lands immediately on the capture start boundary.
     if(!FT02_AudioBuildIdentity(gnss))
     {
         FT02_AudioSetMessage("无法分配录音编号", false);
@@ -1782,7 +2493,26 @@ bool FT02_AudioLogStartRecording(const FT02GnssSnapshot& gnss)
         return false;
     }
 
-    // Clear samples collected during the e-paper recording indicator update.
+    FILE* file = FT02_StorageOpenWriteFile(g_ft02AudioRecording.filePath, true);
+    if(file == nullptr || !FT02_AudioWriteWavHeader(file, 0))
+    {
+        if(file != nullptr) fclose(file);
+        FT02_AudioSetMessage("无法创建WAV文件", false);
+        FT02_AudioChanged();
+        return false;
+    }
+    g_ft02AudioRecording.file = file;
+    (void)FT02_AudioAllocateRecordingStage();
+
+    // Cue refresh and all pre-record SD writes are complete. Drain RX while
+    // the panel rail, SD bus and analogue microphone path settle. During the
+    // normal PSRAM staging window, no SD payload writes occur while speaking.
+    Serial.printf(
+        "[AUDIO-REC] post-EPD+SD settle=%lums; RX draining before WAV payload\n",
+        static_cast<unsigned long>(FT02_AUDIO_RECORD_START_SETTLE_MS)
+    );
+    delay(FT02_AUDIO_RECORD_START_SETTLE_MS);
+
     for(uint8_t batch = 0; batch < 8; batch++)
     {
         size_t discarded = 0;
@@ -1800,17 +2530,6 @@ bool FT02_AudioLogStartRecording(const FT02GnssSnapshot& gnss)
             break;
         }
     }
-
-    FILE* file = FT02_StorageOpenWriteFile(g_ft02AudioRecording.filePath, true);
-    if(file == nullptr || !FT02_AudioWriteWavHeader(file, 0))
-    {
-        if(file != nullptr) fclose(file);
-        FT02_AudioSetMessage("无法创建WAV文件", false);
-        FT02_AudioChanged();
-        return false;
-    }
-
-    g_ft02AudioRecording.file = file;
     g_ft02AudioRecording.startMs = millis();
     g_ft02AudioRecording.stopArmed = false;
     g_ft02AudioState = FT02_AUDIO_LOG_RECORDING;
@@ -1835,12 +2554,13 @@ bool FT02_AudioLogStartRecording(const FT02GnssSnapshot& gnss)
     FT02_AudioChanged();
 
     Serial.printf(
-        "[AUDIO-REC] begin id=%s path=%s rate=%lu channels=1 postRoll=%lums max=%lus\n",
+        "[AUDIO-REC] begin id=%s path=%s rate=%lu channels=1 postRoll=%lums max=%lus storage=%s\n",
         g_ft02AudioRecording.audioId,
         g_ft02AudioRecording.filePath,
         static_cast<unsigned long>(FT02_AUDIO_SAMPLE_RATE),
         static_cast<unsigned long>(FT02_AUDIO_POST_ROLL_MS),
-        static_cast<unsigned long>(FT02_AUDIO_MAX_SECONDS)
+        static_cast<unsigned long>(FT02_AUDIO_MAX_SECONDS),
+        g_ft02AudioRecording.psramStage != nullptr ? "PSRAM_STAGE" : "SD_STREAM"
     );
     return true;
 }
@@ -1906,15 +2626,63 @@ bool FT02_AudioLogPlayNewest(uint16_t newestIndex)
         return false;
     }
 
+    uint8_t* playbackStage = nullptr;
+    bool staged = false;
+    if(info.dataBytes > 0 && info.dataBytes <= FT02_AUDIO_PLAYBACK_PSRAM_MAX_BYTES)
+    {
+        playbackStage = static_cast<uint8_t*>(heap_caps_malloc(
+            static_cast<size_t>(info.dataBytes),
+            MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT
+        ));
+        if(playbackStage != nullptr)
+        {
+            size_t loaded = 0;
+            while(loaded < info.dataBytes)
+            {
+                const size_t chunk = (info.dataBytes - loaded) > 16384u
+                    ? 16384u
+                    : static_cast<size_t>(info.dataBytes - loaded);
+                const size_t got = fread(playbackStage + loaded, 1, chunk, file);
+                if(got == 0) break;
+                loaded += got;
+                yield();
+            }
+            staged = loaded == info.dataBytes;
+            if(!staged)
+            {
+                heap_caps_free(playbackStage);
+                playbackStage = nullptr;
+                if(fseek(file, static_cast<long>(info.dataOffset), SEEK_SET) != 0)
+                {
+                    fclose(file);
+                    FT02_AudioSetMessage("WAV回卷失败", false);
+                    return false;
+                }
+            }
+        }
+    }
+
     uint64_t sumSqLeft = 0;
     uint64_t sumSqRight = 0;
     uint32_t bytesRemaining = info.dataBytes;
+    size_t scanOffset = 0;
+    alignas(4) int16_t scanBuffer[FT02_AUDIO_FRAMES_PER_BLOCK * 2];
     while(bytesRemaining > 0)
     {
-        const size_t bytesWanted = bytesRemaining < sizeof(g_ft02AudioStereoBuffer)
+        const size_t bytesWanted = bytesRemaining < sizeof(scanBuffer)
             ? static_cast<size_t>(bytesRemaining)
-            : sizeof(g_ft02AudioStereoBuffer);
-        const size_t bytesRead = fread(g_ft02AudioStereoBuffer, 1, bytesWanted, file);
+            : sizeof(scanBuffer);
+        size_t bytesRead = 0;
+        if(staged)
+        {
+            bytesRead = bytesWanted;
+            memcpy(scanBuffer, playbackStage + scanOffset, bytesRead);
+            scanOffset += bytesRead;
+        }
+        else
+        {
+            bytesRead = fread(scanBuffer, 1, bytesWanted, file);
+        }
         if(bytesRead == 0) break;
 
         if(info.channels == 2)
@@ -1922,8 +2690,8 @@ bool FT02_AudioLogPlayNewest(uint16_t newestIndex)
             const size_t frames = bytesRead / (2u * sizeof(int16_t));
             for(size_t i = 0; i < frames; i++)
             {
-                const int32_t left = g_ft02AudioStereoBuffer[i * 2u];
-                const int32_t right = g_ft02AudioStereoBuffer[i * 2u + 1u];
+                const int32_t left = scanBuffer[i * 2u];
+                const int32_t right = scanBuffer[i * 2u + 1u];
                 sumSqLeft += static_cast<uint64_t>(static_cast<int64_t>(left) * left);
                 sumSqRight += static_cast<uint64_t>(static_cast<int64_t>(right) * right);
             }
@@ -1933,12 +2701,20 @@ bool FT02_AudioLogPlayNewest(uint16_t newestIndex)
             const size_t frames = bytesRead / sizeof(int16_t);
             for(size_t i = 0; i < frames; i++)
             {
-                const int32_t sample = g_ft02AudioStereoBuffer[i];
+                const int32_t sample = scanBuffer[i];
                 sumSqLeft += static_cast<uint64_t>(static_cast<int64_t>(sample) * sample);
             }
         }
         bytesRemaining -= static_cast<uint32_t>(bytesRead);
         yield();
+    }
+
+    if(bytesRemaining != 0)
+    {
+        if(playbackStage != nullptr) heap_caps_free(playbackStage);
+        fclose(file);
+        FT02_AudioSetMessage("WAV读取不完整", false);
+        return false;
     }
 
     const bool useRight = info.channels == 2 && sumSqRight > sumSqLeft;
@@ -1962,15 +2738,33 @@ bool FT02_AudioLogPlayNewest(uint16_t newestIndex)
         }
     }
 
-    if(fseek(file, static_cast<long>(info.dataOffset), SEEK_SET) != 0)
+    if(staged)
+    {
+        fclose(file);
+        file = nullptr;
+    }
+    else if(fseek(file, static_cast<long>(info.dataOffset), SEEK_SET) != 0)
     {
         fclose(file);
         FT02_AudioSetMessage("WAV回卷失败", false);
         return false;
     }
 
+    // Keep the codec muted throughout staging/UI refresh. The audio task will
+    // suspend RX, prime TX with zeros and unmute only after the screen commit.
+    if(!g_ft02AudioCodec.setDacMuted(true))
+    {
+        if(playbackStage != nullptr) heap_caps_free(playbackStage);
+        if(file != nullptr) fclose(file);
+        FT02_AudioSetMessage("播放前DAC静音失败", false);
+        return false;
+    }
+
     g_ft02AudioPlayback = FT02AudioPlaybackSession{};
     g_ft02AudioPlayback.file = file;
+    g_ft02AudioPlayback.psramStage = playbackStage;
+    g_ft02AudioPlayback.psramStageBytes = staged ? info.dataBytes : 0;
+    g_ft02AudioPlayback.psramStageOffset = 0;
     g_ft02AudioPlayback.info = info;
     g_ft02AudioPlayback.useRight = useRight;
     g_ft02AudioPlayback.bytesRemaining = info.dataBytes;
@@ -2012,7 +2806,7 @@ bool FT02_AudioLogPlayNewest(uint16_t newestIndex)
     FT02_AudioSetMessage("正在播放，B或ENTER停止", true);
     FT02_AudioChanged();
     Serial.printf(
-        "[AUDIO-PLAY] begin id=%s path=%s channels=%u bytes=%lu duration=%lu.%03lus rms=%.1f normalize=%.2fx volume=%u/10 userGain=%.2fx\n",
+        "[AUDIO-PLAY] begin id=%s path=%s channels=%u bytes=%lu duration=%lu.%03lus rms=%.1f normalize=%.2fx volume=%u/10 userGain=%.2fx source=%s\\n",
         entry.audioId,
         entry.filePath,
         info.channels,
@@ -2022,7 +2816,8 @@ bool FT02_AudioLogPlayNewest(uint16_t newestIndex)
         selectedRms,
         normalizationGain,
         static_cast<unsigned int>(g_ft02AudioStatus.playbackVolumeLevel),
-        FT02_AudioUserVolumeGain(g_ft02AudioStatus.playbackVolumeLevel)
+        FT02_AudioUserVolumeGain(g_ft02AudioStatus.playbackVolumeLevel),
+        staged ? "PSRAM_STAGE" : "SD_STREAM"
     );
     return true;
 }

@@ -9,6 +9,7 @@
 #include "FT02_HelpUI.h"
 #include "FT02_KnowledgeUI.h"
 #include "FT02_FieldManual.h"
+#include "FT02_FieldLibrary.h"
 #include "FT02_Gnss.h"
 #include "FT02_GnssFieldTest.h"
 #include "FT02_LocationRecorder.h"
@@ -104,9 +105,12 @@ static FT02PageState g_ft02LocationLogDeleteReturnPage = FT02_PAGE_LOCATION_LOG_
 static uint16_t g_ft02AudioLogSelectedIndex = 0;
 static uint32_t g_ft02AudioLogLastGeneration = 0;
 static bool g_ft02AudioCommandReleaseRequired = false;
+static uint32_t g_ft02AudioRecordRestartGuardUntilMs = 0;
 static uint32_t g_ft02AudioLastShownRecordBucket = 0xFFFFFFFFu;
-static uint32_t g_ft02AudioLastShownPlayBucket = 0xFFFFFFFFu;
 static uint8_t g_ft02AudioLastShownVolume = 0xFFu;
+static bool g_ft02AudioVolumeRefreshPending = false;
+static uint32_t g_ft02AudioVolumeRefreshDueMs = 0;
+constexpr uint32_t FT02_AUDIO_VOLUME_REFRESH_COALESCE_MS = 220u;
 constexpr uint32_t FT02_AUDIO_TIMER_REFRESH_MS = 5000u;
 constexpr uint32_t FT02_RECORDER_UI_REFRESH_MS = 15000UL;
 static char g_ft02LastGnssStatusLine1[16] = "";
@@ -157,8 +161,9 @@ static void FT02_CancelPendingMapRefresh(const char* source);
 static void FT02_ArmMapNavReleaseGate(const char* source);
 static void FT02_OpenAudioLogListPage(bool reload);
 static void FT02_ClampAudioLogSelection();
-static bool FT02_ArmAudioCommandAfterRelease();
+static bool FT02_ArmAudioCommandAfterRelease(const FT02InputEvent& event);
 static void FT02_OpenDeviceStatusPage();
+static void FT02_OpenFieldLibraryPage();
 static void FT02_OpenMapSearchPage();
 
 static int FT02_MonthFromBuildString(const char* mon)
@@ -341,10 +346,10 @@ static void FT02_UpdateClockIfNeeded(bool force)
     // leave the SSD1677/GDEQ0426T82 controller in a state that makes fixed
     // horizontal regions appear pale. Cache the new time only; the next
     // knowledge full-frame commit will draw it together with the page.
-    if(g_ft02PageState == FT02_PAGE_KNOWLEDGE)
+    if(g_ft02PageState == FT02_PAGE_KNOWLEDGE || g_ft02PageState == FT02_PAGE_LIBRARY)
     {
         FT02_UpdateClockCacheOnly();
-        Serial.println("[EPD] static-page clock cache updated; partial refresh suppressed");
+        Serial.println("[EPD] static/reader-page clock cache updated; background status partial suppressed");
         return;
     }
 
@@ -429,6 +434,7 @@ static void FT02_SyncGnssStatusBar(bool allowPartialRefresh)
     // performs a full page refresh for meaningful GNSS state changes.
     if(allowPartialRefresh &&
        g_ft02PageState != FT02_PAGE_KNOWLEDGE &&
+       g_ft02PageState != FT02_PAGE_LIBRARY &&
        g_ft02PageState != FT02_PAGE_LOCATION_LOG_LIST &&
        g_ft02PageState != FT02_PAGE_LOCATION_LOG_DETAIL &&
        g_ft02PageState != FT02_PAGE_LOCATION_LOG_DELETE_CONFIRM &&
@@ -659,6 +665,10 @@ static void FT02_RedrawCurrentPage()
     else if(g_ft02PageState == FT02_PAGE_KNOWLEDGE)
     {
         FT02_DrawKnowledgeScreen(display);
+    }
+    else if(g_ft02PageState == FT02_PAGE_LIBRARY)
+    {
+        FT02_DrawFieldLibraryScreen(display);
     }
     else
     {
@@ -1239,8 +1249,19 @@ static bool FT02_OpenLocationLogDeleteConfirmPage(FT02PageState returnPage)
 }
 
 
-static bool FT02_ArmAudioCommandAfterRelease()
+static bool FT02_ArmAudioCommandAfterRelease(const FT02InputEvent& event)
 {
+    // EPD FIFO events are often replayed after the physical key has already
+    // been released. Only require a release when this exact key is still down.
+    const uint8_t currentRaw = static_cast<uint8_t>(FT02_InputCurrentRawKey());
+    const uint8_t eventRaw = static_cast<uint8_t>(event.raw);
+    const bool physicalKeyStillDown = currentRaw != 0 && currentRaw == eventRaw;
+
+    if(!physicalKeyStillDown)
+    {
+        g_ft02AudioCommandReleaseRequired = false;
+        return true;
+    }
     if(g_ft02AudioCommandReleaseRequired)
     {
         Serial.println("[AUDIO-UI] command ignored until key release");
@@ -1272,7 +1293,6 @@ static void FT02_OpenAudioLogListPage(bool reload)
     FT02_ClampAudioLogSelection();
     g_ft02AudioLogLastGeneration = FT02_AudioLogStatusCurrent().generation;
     g_ft02AudioLastShownRecordBucket = 0xFFFFFFFFu;
-    g_ft02AudioLastShownPlayBucket = 0xFFFFFFFFu;
     g_ft02AudioLastShownVolume = 0xFFu;
     g_ft02PageState = FT02_PAGE_AUDIO_LOG_LIST;
     Serial.printf(
@@ -1293,6 +1313,19 @@ static bool FT02_OpenAudioLogDeleteConfirmPage()
     return true;
 }
 
+
+static void FT02_OpenFieldLibraryPage()
+{
+    if(g_ft02PageState == FT02_PAGE_LIBRARY) return;
+
+    FT02_FieldLibraryBegin(false);
+    FT02_FieldLibraryReset();
+    g_ft02PageState = FT02_PAGE_LIBRARY;
+    Serial.printf("Page: HOME -> FIELD LIBRARY Alpha books=%d ready=%d\n",
+                  FT02_FieldLibraryBookCount(),
+                  FT02_FieldLibraryReady() ? 1 : 0);
+    FT02_RedrawCurrentPage();
+}
 
 static void FT02_OpenKnowledgePage()
 {
@@ -1533,6 +1566,12 @@ static bool FT02_HandleHomeInput(
             return true;
         }
 
+        if(g_ft02HomeSelectedCard == 6)
+        {
+            FT02_OpenFieldLibraryPage();
+            return true;
+        }
+
         return false;
     }
     else if(event.key == FT02_KEY_HELP)
@@ -1558,11 +1597,19 @@ static bool FT02_HandleHomeInput(
     int oldSelectedCard = g_ft02HomeSelectedCard;
     g_ft02HomeSelectedCard = nextSelected;
 
-    FT02_RedrawHomeCardSelection(
-        display,
-        oldSelectedCard,
-        g_ft02HomeSelectedCard
-    );
+    if(FT02_HomeCardPageForIndex(oldSelectedCard) !=
+       FT02_HomeCardPageForIndex(g_ft02HomeSelectedCard))
+    {
+        FT02_DrawHomeScreen(display, g_ft02HomeSelectedCard);
+    }
+    else
+    {
+        FT02_RedrawHomeCardSelection(
+            display,
+            oldSelectedCard,
+            g_ft02HomeSelectedCard
+        );
+    }
 
     return true;
 }
@@ -2062,10 +2109,16 @@ static bool FT02_HandleAudioLogListInput(
             if(FT02_AudioLogAdjustPlaybackVolume(delta))
             {
                 const FT02AudioLogStatus updated = FT02_AudioLogStatusCurrent();
-                g_ft02AudioLastShownVolume = updated.playbackVolumeLevel;
-                g_ft02AudioLastShownPlayBucket = updated.playbackElapsedMs /
-                    FT02_AUDIO_TIMER_REFRESH_MS;
-                FT02_DrawAudioLogPlayingStatusPartial(display, updated);
+                // Audible gain changes immediately. Coalesce rapid taps, then
+                // refresh only the volume line under the audio EPD guard.
+                g_ft02AudioVolumeRefreshPending = true;
+                g_ft02AudioVolumeRefreshDueMs = millis() +
+                    FT02_AUDIO_VOLUME_REFRESH_COALESCE_MS;
+                Serial.printf(
+                    "[AUDIO-EPD] volume refresh pending level=%u/10 coalesce=%lums\n",
+                    static_cast<unsigned int>(updated.playbackVolumeLevel),
+                    static_cast<unsigned long>(FT02_AUDIO_VOLUME_REFRESH_COALESCE_MS)
+                );
                 return true;
             }
             return false;
@@ -2078,12 +2131,16 @@ static bool FT02_HandleAudioLogListInput(
              event.command == 'p');
         if(stopKey)
         {
-            if(!FT02_ArmAudioCommandAfterRelease()) return false;
+            if(!FT02_ArmAudioCommandAfterRelease(event)) return false;
+            g_ft02AudioVolumeRefreshPending = false;
+            g_ft02AudioVolumeRefreshDueMs = 0;
             const bool requested = FT02_AudioLogRequestPlaybackStop();
             if(requested)
             {
-                const FT02AudioLogStatus updated = FT02_AudioLogStatusCurrent();
-                FT02_DrawAudioLogPlayingStatusPartial(display, updated);
+                // Do not energize the EPD while the PA is still active. The
+                // audio task shuts down the speaker path first, then the list
+                // refresh occurs from the normal generation update.
+                Serial.println("[AUDIO-EPD] stop refresh deferred until PA shutdown");
             }
             return requested;
         }
@@ -2096,8 +2153,16 @@ static bool FT02_HandleAudioLogListInput(
     {
         if(event.key == FT02_KEY_CHAR && event.command == 'r')
         {
-            if(!FT02_ArmAudioCommandAfterRelease()) return false;
-            return FT02_AudioLogRequestStop();
+            if(!FT02_ArmAudioCommandAfterRelease(event)) return false;
+            const bool requested = FT02_AudioLogRequestStop();
+            if(requested)
+            {
+                // A held/repeated R can survive the stop/save EPD work as a
+                // deferred FIFO event. Do not let that stale event start a
+                // second recording when the state returns to IDLE.
+                g_ft02AudioRecordRestartGuardUntilMs = millis() + 2500u;
+            }
+            return requested;
         }
         Serial.println("[AUDIO-UI] input ignored while recording; press R to stop");
         return false;
@@ -2116,9 +2181,17 @@ static bool FT02_HandleAudioLogListInput(
 
     if(event.key == FT02_KEY_CHAR && event.command == 'r')
     {
-        if(!FT02_ArmAudioCommandAfterRelease()) return false;
-        // Draw the initial 00:00 cue before capture starts. Later timer updates
-        // are isolated to a small window while streaming continues in the audio task.
+        if(static_cast<int32_t>(millis() - g_ft02AudioRecordRestartGuardUntilMs) < 0)
+        {
+            Serial.println("[AUDIO-UI] stale R ignored during post-record guard");
+            return true;
+        }
+        if(!FT02_ArmAudioCommandAfterRelease(event)) return false;
+
+        // Recording UX intentionally keeps the proven cue-before-capture order:
+        // first commit "00:00 / recording" to e-paper, then begin ADC capture.
+        // The ~1 s visual delay is acceptable and prevents the initial high-
+        // voltage EPD transaction from contaminating the first captured audio.
         FT02AudioLogStatus cueStatus = status;
         cueStatus.recordingElapsedMs = 0;
         cueStatus.recordingSeconds = 0;
@@ -2131,6 +2204,7 @@ static bool FT02_HandleAudioLogListInput(
         if(started)
         {
             g_ft02AudioLastShownRecordBucket = 0;
+            Serial.println("[AUDIO-UI] cue committed; capture started; 5 s timer partials retained");
         }
         else
         {
@@ -2142,7 +2216,7 @@ static bool FT02_HandleAudioLogListInput(
     if((event.key == FT02_KEY_SELECT) ||
        (event.key == FT02_KEY_CHAR && event.command == 'p'))
     {
-        if(!FT02_ArmAudioCommandAfterRelease()) return false;
+        if(!FT02_ArmAudioCommandAfterRelease(event)) return false;
         FT02AudioLogEntry entry;
         if(!FT02_AudioLogGetNewest(g_ft02AudioLogSelectedIndex, entry)) return false;
 
@@ -2153,8 +2227,9 @@ static bool FT02_HandleAudioLogListInput(
         if(started)
         {
             const FT02AudioLogStatus updated = FT02_AudioLogStatusCurrent();
-            g_ft02AudioLastShownPlayBucket = 0;
             g_ft02AudioLastShownVolume = updated.playbackVolumeLevel;
+            g_ft02AudioVolumeRefreshPending = false;
+            g_ft02AudioVolumeRefreshDueMs = 0;
             FT02_DrawAudioLogPlayingBodyPartial(display, entry);
             FT02_AudioLogReleasePlaybackStart();
         }
@@ -2167,7 +2242,7 @@ static bool FT02_HandleAudioLogListInput(
 
     if(event.key == FT02_KEY_CHAR && event.command == 't')
     {
-        if(!FT02_ArmAudioCommandAfterRelease()) return false;
+        if(!FT02_ArmAudioCommandAfterRelease(event)) return false;
         return FT02_OpenAudioLogDeleteConfirmPage();
     }
 
@@ -2218,7 +2293,7 @@ static bool FT02_HandleAudioLogDeleteConfirmInput(
         return true;
     }
     if(event.key != FT02_KEY_SELECT) return false;
-    if(!FT02_ArmAudioCommandAfterRelease()) return false;
+    if(!FT02_ArmAudioCommandAfterRelease(event)) return false;
 
     (void)FT02_AudioLogDeleteNewest(g_ft02AudioLogSelectedIndex);
     FT02_ClampAudioLogSelection();
@@ -2263,6 +2338,26 @@ static bool FT02_HandleKnowledgeInput(
     return false;
 }
 
+static bool FT02_HandleFieldLibraryInputMain(
+    const FT02InputEvent& event
+)
+{
+    if(event.key == FT02_KEY_HELP)
+    {
+        FT02_OpenHelpPage();
+        return true;
+    }
+
+    const FT02FieldLibraryAction action =
+        FT02_HandleFieldLibraryInput(display, event);
+    if(action == FT02_LIBRARY_ACTION_EXIT_HOME)
+    {
+        FT02_ReturnHomePage();
+        return true;
+    }
+    return event.key != FT02_KEY_NONE;
+}
+
 static bool FT02_HandleInput(
     const FT02InputEvent& event
 )
@@ -2285,6 +2380,11 @@ static bool FT02_HandleInput(
     if(g_ft02PageState == FT02_PAGE_KNOWLEDGE)
     {
         return FT02_HandleKnowledgeInput(event);
+    }
+
+    if(g_ft02PageState == FT02_PAGE_LIBRARY)
+    {
+        return FT02_HandleFieldLibraryInputMain(event);
     }
 
     if(g_ft02PageState == FT02_PAGE_COMMUNICATION)
@@ -2457,22 +2557,48 @@ void loop()
 {
     FT02_PrintRuntimeBannerIfNeeded();
 
+    // Recording/post-roll needs only low-latency R/stop, not unrestricted I2C
+    // polling. 10 Hz keeps the key responsive while reducing mic-side EMI.
+    FT02_InputSetLowNoiseMode(FT02_AudioLogIsCapturing());
+
     // Input is a top-priority service. In particular, never place a blocking
     // e-paper refresh ahead of CardKB polling: a long display commit can make
     // the recorder page appear frozen and can starve short key presses.
-    FT02InputEvent inputEvent = {};
-    if(!FT02_EpdInteractiveTakeQueuedInput(inputEvent))
+    // Strict input ordering:
+    //
+    // Every key captured while e-paper BUSY lives in the shared FIFO. When
+    // FieldManual is active, let it consume/coalesce the oldest queued events
+    // before polling a newer live key. This prevents rapid search typing from
+    // being reordered around a deferred partial refresh.
+    bool queuedInputHandledByKnowledge = false;
+    if(g_ft02PageState == FT02_PAGE_KNOWLEDGE &&
+       FT02_EpdInteractiveQueuedInputCount() > 0)
     {
-        inputEvent = FT02_InputPoll();
+        const FT02KnowledgeAction queuedKnowledgeAction =
+            FT02_KnowledgeProcessQueuedInput(display, &queuedInputHandledByKnowledge);
+        if(queuedKnowledgeAction == FT02_KNOWLEDGE_ACTION_EXIT_HOME)
+        {
+            FT02_ReturnHomePage();
+        }
     }
-    else
+
+    FT02InputEvent inputEvent = {};
+    if(!queuedInputHandledByKnowledge)
     {
-        Serial.printf(
-            "[EPD-INTERACTIVE-A1] replay key=%s raw=0x%02X page=%u\n",
-            FT02_InputKeyName(inputEvent.key),
-            static_cast<unsigned>(static_cast<uint8_t>(inputEvent.raw)),
-            static_cast<unsigned>(g_ft02PageState)
-        );
+        if(!FT02_EpdInteractiveTakeQueuedInput(inputEvent))
+        {
+            inputEvent = FT02_InputPoll();
+        }
+        else
+        {
+            Serial.printf(
+                "[EPD-INTERACTIVE-A2] replay key=%s raw=0x%02X page=%u pending=%u\n",
+                FT02_InputKeyName(inputEvent.key),
+                static_cast<unsigned>(static_cast<uint8_t>(inputEvent.raw)),
+                static_cast<unsigned>(g_ft02PageState),
+                static_cast<unsigned>(FT02_EpdInteractiveQueuedInputCount())
+            );
+        }
     }
     const uint8_t currentRawKey = FT02_InputCurrentRawKey();
     if(currentRawKey == 0)
@@ -2518,10 +2644,9 @@ void loop()
         }
     }
 
-    if(g_ft02PageState != FT02_PAGE_KNOWLEDGE)
-    {
-        FT02_EpdInteractiveService(display, millis());
-    }
+    // Global runtime owns the e-paper hot/power-off lifecycle for every
+    // interactive page, including FieldManual.
+    FT02_EpdInteractiveService(display, millis());
 
     if(g_ft02PageState == FT02_PAGE_MAP_SEARCH && FT02_MapSearchTakeDeferredRedraw(millis()))
     {
@@ -2645,6 +2770,7 @@ void loop()
         }
 
         if(!communicationPageRedrawn && !FT02_IsMapStatusPartialSuppressed() &&
+           g_ft02PageState != FT02_PAGE_LIBRARY &&
            (loraLink != g_ft02LastLoRaLinkState ||
             loraReady != g_ft02LastLoRaReadyState ||
             loraUnread != g_ft02LastLoRaUnread))
@@ -2702,26 +2828,72 @@ void loop()
         const FT02AudioLogState audioState = FT02_AudioLogStateCurrent();
         if(audioState == FT02_AUDIO_LOG_RECORDING || audioState == FT02_AUDIO_LOG_POST_ROLL)
         {
+            // Recording duration remains visible. Only the small timer window
+            // is refreshed every 5 s; the audio task continues independently.
+            // NS4150B PA is now physically shut down throughout recording, so
+            // the display update no longer shares an active class-D load.
             const uint32_t bucket = audioStatus.recordingElapsedMs /
                 FT02_AUDIO_TIMER_REFRESH_MS;
             if(bucket != g_ft02AudioLastShownRecordBucket)
             {
                 g_ft02AudioLastShownRecordBucket = bucket;
+                Serial.printf(
+                    "[AUDIO-EPD] timer refresh begin rec=%lums bucket=%lu\n",
+                    static_cast<unsigned long>(audioStatus.recordingElapsedMs),
+                    static_cast<unsigned long>(bucket)
+                );
                 FT02_DrawAudioLogRecordingTimerPartial(display, audioStatus);
+                Serial.printf(
+                    "[AUDIO-EPD] timer refresh end rec=%lums\n",
+                    static_cast<unsigned long>(FT02_AudioLogStatusCurrent().recordingElapsedMs)
+                );
             }
         }
         else if(audioState == FT02_AUDIO_LOG_PLAYING)
         {
-            const uint32_t bucket = audioStatus.playbackElapsedMs /
-                FT02_AUDIO_TIMER_REFRESH_MS;
-            if(bucket != g_ft02AudioLastShownPlayBucket ||
-               audioStatus.playbackVolumeLevel != g_ft02AudioLastShownVolume)
+            // Playback time stays static. The only in-play display update is
+            // an explicit user volume change. Rapid
+            // taps are coalesced, then the audio task freezes at zero and
+            // shuts PA down before the tiny volume-line partial is committed.
+            if(g_ft02AudioVolumeRefreshPending &&
+               static_cast<int32_t>(millis() - g_ft02AudioVolumeRefreshDueMs) >= 0)
             {
-                g_ft02AudioLastShownPlayBucket = bucket;
-                g_ft02AudioLastShownVolume = audioStatus.playbackVolumeLevel;
-                FT02_DrawAudioLogPlayingStatusPartial(display, audioStatus);
+                const FT02AudioLogStatus latest = FT02_AudioLogStatusCurrent();
+                if(latest.playbackVolumeLevel == g_ft02AudioLastShownVolume)
+                {
+                    g_ft02AudioVolumeRefreshPending = false;
+                }
+                else if(FT02_AudioLogSetPlaybackEpdGuard(true))
+                {
+                    Serial.printf(
+                        "[AUDIO-EPD] volume refresh begin level=%u/10\n",
+                        static_cast<unsigned int>(latest.playbackVolumeLevel)
+                    );
+                    FT02_DrawAudioLogPlayingVolumePartial(display, latest);
+                    g_ft02AudioLastShownVolume = latest.playbackVolumeLevel;
+                    g_ft02AudioVolumeRefreshPending = false;
+                    const bool resumed = FT02_AudioLogSetPlaybackEpdGuard(false);
+                    Serial.printf(
+                        "[AUDIO-EPD] volume refresh end level=%u/10 resumed=%s\n",
+                        static_cast<unsigned int>(latest.playbackVolumeLevel),
+                        resumed ? "yes" : "no"
+                    );
+                }
+                else
+                {
+                    // Playback may be entering its pop-safe drain. Do not
+                    // energize the EPD in that transition; the list redraw
+                    // after PA shutdown will show the persisted final volume.
+                    g_ft02AudioVolumeRefreshPending = false;
+                    Serial.println("[AUDIO-EPD] volume refresh skipped: audio guard unavailable");
+                }
             }
         }
+    }
+    if(g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST && !FT02_AudioLogIsPlaying())
+    {
+        g_ft02AudioVolumeRefreshPending = false;
+        g_ft02AudioVolumeRefreshDueMs = 0;
     }
     if(g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST &&
        !FT02_AudioLogIsBusy() &&
@@ -2749,6 +2921,7 @@ void loop()
     const bool fastInteractivePage =
         g_ft02PageState == FT02_PAGE_HOME ||
         g_ft02PageState == FT02_PAGE_KNOWLEDGE ||
+        g_ft02PageState == FT02_PAGE_LIBRARY ||
         g_ft02PageState == FT02_PAGE_MAP_SEARCH ||
         g_ft02PageState == FT02_PAGE_COMMUNICATION ||
         g_ft02PageState == FT02_PAGE_LOCATION_LOG_LIST ||

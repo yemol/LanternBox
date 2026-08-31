@@ -1,5 +1,5 @@
 #include "FT02_KnowledgeUI.h"
-#include "FT02_EpdLifecycle.h"
+#include "FT02_EpdInteractiveRuntime.h"
 
 #include <Arduino.h>
 #include <stdio.h>
@@ -120,28 +120,15 @@ static char g_searchNotice[72] = {};
 static char g_readerFeedback[32] = {};
 static const uint32_t FT02_KNOWLEDGE_SEARCH_REDRAW_IDLE_MS = 320u;
 
-// A3.9 FieldManual interaction lifecycle.
+// A3.13 FieldManual now uses the single global interactive e-paper runtime.
 //
-// GDEQ0426T82 fast partial refresh still occupies the panel for roughly half
-// a second. The display driver waits on BUSY synchronously, but GxEPD2 exposes
-// setBusyCallback() specifically so time-critical services can keep running.
-// During every Knowledge display commit we therefore continue polling CardKB2
-// and queue presses for the next main-loop service pass. Navigation presses
-// captured in the same BUSY interval are coalesced into one final selection so
-// a quick RIGHT,RIGHT,RIGHT burst does not cause three more panel waveforms.
-static bool g_partialPowerOffPending = false;
-static uint32_t g_partialLastCommitMs = 0;
-static const uint32_t FT02_KNOWLEDGE_PARTIAL_HOT_IDLE_MS = 2500;
-
-static const uint8_t FT02_KNOWLEDGE_BUSY_QUEUE_CAPACITY = 16;
-static const uint32_t FT02_KNOWLEDGE_BUSY_POLL_INTERVAL_MS = 8;
-static FT02InputEvent g_busyInputQueue[FT02_KNOWLEDGE_BUSY_QUEUE_CAPACITY] = {};
-static uint8_t g_busyInputHead = 0;
-static uint8_t g_busyInputCount = 0;
-static uint32_t g_busyInputLastPollMs = 0;
-static uint32_t g_busyInputDropped = 0;
-static bool g_busyCaptureActive = false;
-static bool g_busyWaitForInitialRelease = false;
+// Earlier A3.9 builds kept a second private BUSY-time keyboard queue here.
+// That could reorder rapid text entry: an older key captured during an e-paper
+// refresh remained in the private queue while the main loop accepted a newer
+// live key first. All FieldManual display commits now feed the same global FIFO
+// used by the rest of FT-02, so queued and live input have one ordering source.
+// Navigation bursts are still coalesced from that FIFO before any newer live
+// key is polled.
 static char g_errorTitle[48] = "手册不可用";
 static char g_errorDetail[120] = "请检查 SD 卡数据包。";
 
@@ -1134,7 +1121,8 @@ static void FT02_KnowledgeDrawBitmapFit1bpp(
     int areaX,
     int areaY,
     int areaWidth,
-    int areaHeight
+    int areaHeight,
+    bool allowUpscale = false
 )
 {
     if(data == nullptr || sourceWidth < 1 || sourceHeight < 1 ||
@@ -1143,8 +1131,10 @@ static void FT02_KnowledgeDrawBitmapFit1bpp(
         return;
     }
 
-    // Fast path for normal A3.3 media: center and draw 1:1.
-    if(sourceWidth <= areaWidth && sourceHeight <= areaHeight)
+    // Normal A3.3 media stays 1:1 when it already fits. Split Visual pages
+    // may opt in to upscaling so tightly-cropped action art can use the full
+    // pane instead of floating in a large empty rectangle.
+    if(!allowUpscale && sourceWidth <= areaWidth && sourceHeight <= areaHeight)
     {
         const int x = areaX + (areaWidth - sourceWidth) / 2;
         const int y = areaY + (areaHeight - sourceHeight) / 2;
@@ -1212,8 +1202,128 @@ static bool FT02_KnowledgeDrawReaderMediaPage(
     const char* caption = info.caption[0] != 0 ? info.caption : "图解";
     const bool captionBelow =
         (info.flags & FT02_FIELD_MANUAL_MEDIA_FLAG_CAPTION_BELOW) != 0;
+    const bool splitLeft =
+        (info.flags & FT02_FIELD_MANUAL_MEDIA_FLAG_SPLIT_LEFT) != 0;
 
-    if(captionBelow)
+    if(splitLeft)
+    {
+        // A3.14 preview: large, fully-fitted illustration on the left and the
+        // step caption on the right. This layout is intended for concrete
+        // posture / structure / placement diagrams where the old 130px-high
+        // banner made the useful subject too small. The bitmap is always fit
+        // inside its pane, never cropped.
+        const int mediaCount = FT02_FieldManualMediaCountForCard(globalCardIndex);
+        const int contentX = FT02_KNOWLEDGE_READER_X + 16;
+        const int contentY = FT02_KNOWLEDGE_READER_Y + 14;
+        const int contentH = FT02_KNOWLEDGE_READER_H - 28;
+        const int imageAreaH = contentH - 8;
+        const int gap = 12;
+        const int rightEdge = FT02_KNOWLEDGE_READER_X + FT02_KNOWLEDGE_READER_W - 16;
+        const int minTextW = 188;
+
+        // A3.15: the split ratio follows the actual media aspect ratio.
+        // Narrow action art no longer floats inside a fixed 432 px pane,
+        // while wide structure diagrams may grow up to 500 px. Text keeps
+        // a readable minimum width.
+        int imagePaneW = static_cast<int>(
+            (static_cast<int64_t>(info.width) * imageAreaH) / info.height
+        ) + 12;
+        if(imagePaneW < 280) imagePaneW = 280;
+        const int maxImagePaneW = rightEdge - contentX - gap - minTextW;
+        if(imagePaneW > 500) imagePaneW = 500;
+        if(imagePaneW > maxImagePaneW) imagePaneW = maxImagePaneW;
+
+        const int dividerX = contentX + imagePaneW;
+        const int textX = dividerX + gap;
+        const int textW = rightEdge - textX;
+
+        FT02_KnowledgeDrawBitmapFit1bpp(
+            display,
+            media->data,
+            info.width,
+            info.height,
+            contentX + 4,
+            contentY + 4,
+            imagePaneW - 12,
+            imageAreaH,
+            true
+        );
+
+        display.drawLine(
+            dividerX,
+            contentY,
+            dividerX,
+            contentY + contentH,
+            GxEPD_BLACK
+        );
+
+        char heading[32];
+        snprintf(heading, sizeof(heading), "图解 %d/%d", mediaOrdinal + 1, mediaCount);
+        FT02_DrawTextPackClipped(
+            display,
+            ft02_cjk_24b,
+            heading,
+            textX,
+            contentY + 30,
+            textX,
+            contentY + 4,
+            textW,
+            36
+        );
+
+        display.fillRect(textX, contentY + 42, textW, 1, GxEPD_BLACK);
+        FT02_DrawTextPackClipped(
+            display,
+            ft02_cjk_24b,
+            "本步",
+            textX,
+            contentY + 74,
+            textX,
+            contentY + 48,
+            textW,
+            34
+        );
+
+        char line[128];
+        const char* cursor = caption;
+        int baseline = contentY + 111;
+        for(int lineIndex = 0; lineIndex < 4 && *cursor; lineIndex++)
+        {
+            const char* next = cursor;
+            FT02_KnowledgeNextWrappedLine(cursor, textW, line, sizeof(line), &next);
+            // Split-page step text must use the exact same body
+            // font and line spacing as the following pure-text reader pages.
+            // Wrapping already measures glyphs with ft02_cjk_24r in
+            // FT02_KnowledgeNextWrappedLine(), so drawing with 20r here made
+            // the split caption visibly smaller and inconsistent.
+            FT02_DrawTextPackClipped(
+                display,
+                ft02_cjk_24r,
+                line,
+                textX,
+                baseline + lineIndex * FT02_KNOWLEDGE_READER_TEXT_LINE_HEIGHT,
+                textX,
+                contentY + 82,
+                textW,
+                contentH - 88
+            );
+            if(next <= cursor) break;
+            cursor = next;
+        }
+
+        FT02_DrawTextPackClipped(
+            display,
+            ft02_cjk_20r,
+            "←/→继续",
+            textX,
+            contentY + contentH - 10,
+            textX,
+            contentY + contentH - 34,
+            textW,
+            28
+        );
+    }
+    else if(captionBelow)
     {
         const int mediaCount = FT02_FieldManualMediaCountForCard(globalCardIndex);
         char heading[32];
@@ -1467,7 +1577,7 @@ static void FT02_KnowledgeRedraw(FT02Display& display)
 // FieldManual A3.9 navigation refresh policy:
 //
 // A CardKB press is available to InputManager immediately, but GxEPD2's
-// full-window e-paper transaction is blocking.  v2.75k8 redrew the complete
+// full-window e-paper transaction is blocking. Redrawing the complete
 // 800x480 frame after every selection move, so the main loop could not poll
 // the next key until that full refresh finished.  Keep full refreshes for
 // screen transitions, but use the panel's already proven partial-refresh path
@@ -1495,139 +1605,10 @@ static bool FT02_KnowledgeRectsIntersect(
     return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
 }
 
-static void FT02_KnowledgeBusyQueueReset()
-{
-    g_busyInputHead = 0;
-    g_busyInputCount = 0;
-    g_busyInputLastPollMs = 0;
-    g_busyInputDropped = 0;
-    g_busyCaptureActive = false;
-    g_busyWaitForInitialRelease = false;
-}
-
-static bool FT02_KnowledgeBusyQueuePush(const FT02InputEvent& event)
-{
-    if(event.key == FT02_KEY_NONE) return true;
-    if(g_busyInputCount >= FT02_KNOWLEDGE_BUSY_QUEUE_CAPACITY)
-    {
-        g_busyInputDropped++;
-        return false;
-    }
-    const uint8_t tail = static_cast<uint8_t>(
-        (g_busyInputHead + g_busyInputCount) % FT02_KNOWLEDGE_BUSY_QUEUE_CAPACITY
-    );
-    g_busyInputQueue[tail] = event;
-    g_busyInputCount++;
-    return true;
-}
-
-static bool FT02_KnowledgeBusyQueuePeek(FT02InputEvent* outEvent)
-{
-    if(outEvent == nullptr || g_busyInputCount == 0) return false;
-    *outEvent = g_busyInputQueue[g_busyInputHead];
-    return true;
-}
-
-static bool FT02_KnowledgeBusyQueuePop(FT02InputEvent* outEvent)
-{
-    if(!FT02_KnowledgeBusyQueuePeek(outEvent)) return false;
-    g_busyInputHead = static_cast<uint8_t>(
-        (g_busyInputHead + 1u) % FT02_KNOWLEDGE_BUSY_QUEUE_CAPACITY
-    );
-    g_busyInputCount--;
-    return true;
-}
-
 static bool FT02_KnowledgeDirectional(const FT02InputEvent& event)
 {
     return event.key == FT02_KEY_LEFT || event.key == FT02_KEY_RIGHT ||
            event.key == FT02_KEY_UP || event.key == FT02_KEY_DOWN;
-}
-
-static void FT02_KnowledgeBusyInputCallback(const void*)
-{
-    // GxEPD2 normally delay(1)s while BUSY. A registered callback replaces
-    // that delay, so keep yielding here as well; otherwise a long full refresh
-    // would become an unnecessary tight CPU spin.
-    if(!g_busyCaptureActive)
-    {
-        delay(1);
-        return;
-    }
-    const uint32_t now = millis();
-    if(static_cast<uint32_t>(now - g_busyInputLastPollMs) <
-       FT02_KNOWLEDGE_BUSY_POLL_INTERVAL_MS)
-    {
-        delay(1);
-        return;
-    }
-    g_busyInputLastPollMs = now;
-
-    const FT02InputEvent event = FT02_InputPoll();
-    const char currentRaw = FT02_InputCurrentRawKey();
-
-    // The key that initiated a refresh can remain electrically held for a
-    // while. Do not turn that same physical press into accidental repeat
-    // events merely because the display is BUSY. Once release is observed,
-    // every subsequent press is eligible for queuing.
-    if(g_busyWaitForInitialRelease)
-    {
-        if(currentRaw == 0) g_busyWaitForInitialRelease = false;
-        delay(1);
-        return;
-    }
-
-    if(event.key != FT02_KEY_NONE)
-    {
-        (void)FT02_KnowledgeBusyQueuePush(event);
-    }
-    delay(1);
-}
-
-static void FT02_KnowledgeBeginBusyCapture(FT02Display& display)
-{
-    g_busyInputLastPollMs = 0;
-    g_busyWaitForInitialRelease = FT02_InputCurrentRawKey() != 0;
-    g_busyCaptureActive = true;
-    display.epd2.setBusyCallback(FT02_KnowledgeBusyInputCallback);
-}
-
-static void FT02_KnowledgeEndBusyCapture(FT02Display& display)
-{
-    g_busyCaptureActive = false;
-    g_busyWaitForInitialRelease = false;
-    display.epd2.setBusyCallback(nullptr);
-    if(g_busyInputDropped > 0)
-    {
-        Serial.printf(
-            "[KNOWLEDGE-INPUT-A3.9] busy queue overflow dropped=%lu pending=%u\n",
-            static_cast<unsigned long>(g_busyInputDropped),
-            static_cast<unsigned>(g_busyInputCount)
-        );
-        g_busyInputDropped = 0;
-    }
-}
-
-static void FT02_KnowledgeFinishPartial(
-    FT02Display& display,
-    const char* source,
-    uint32_t startedMs
-)
-{
-    // Other FT-02 pages expect the default full window after a local partial
-    // transaction. Restore it immediately, but deliberately keep the panel
-    // drive hot for a short browsing burst. GxEPD2's driver specifies up to
-    // ~200 ms for powerOff in addition to the ~600 ms partial refresh budget;
-    // paying that cost on every key makes consecutive navigation feel sticky.
-    display.setFullWindow();
-    g_partialPowerOffPending = true;
-    g_partialLastCommitMs = millis();
-
-    Serial.printf(
-        "[KNOWLEDGE-EPD-A3.9] partial source=%s elapsed=%lums panel=hot\n",
-        source != nullptr ? source : "unknown",
-        static_cast<unsigned long>(g_partialLastCommitMs - startedMs)
-    );
 }
 
 static void FT02_KnowledgeRedrawContentPartial(
@@ -1636,7 +1617,7 @@ static void FT02_KnowledgeRedrawContentPartial(
 )
 {
     const uint32_t startedMs = millis();
-    FT02_KnowledgeBeginBusyCapture(display);
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(
         FT02_KNOWLEDGE_PARTIAL_X,
         FT02_KNOWLEDGE_PARTIAL_Y,
@@ -1659,8 +1640,8 @@ static void FT02_KnowledgeRedrawContentPartial(
         FT02_KnowledgeDrawCurrentContent(display);
     }
     while(display.nextPage());
-    FT02_KnowledgeEndBusyCapture(display);
-    FT02_KnowledgeFinishPartial(display, source, startedMs);
+    FT02_EpdInteractiveEndBusyCapture(display);
+    FT02_EpdInteractiveFinishPartial(display, source, startedMs);
 }
 
 static void FT02_KnowledgeRedrawGridSelectionPartial(
@@ -1671,7 +1652,7 @@ static void FT02_KnowledgeRedrawGridSelectionPartial(
 )
 {
     const uint32_t startedMs = millis();
-    FT02_KnowledgeBeginBusyCapture(display);
+    FT02_EpdInteractiveBeginBusyCapture(display);
     int oldX, oldY, oldW, oldH;
     int newX, newY, newW, newH;
     FT02_KnowledgeGridRect(oldSelected % FT02_KNOWLEDGE_GRID_PAGE_SIZE,
@@ -1731,8 +1712,8 @@ static void FT02_KnowledgeRedrawGridSelectionPartial(
         }
     }
     while(display.nextPage());
-    FT02_KnowledgeEndBusyCapture(display);
-    FT02_KnowledgeFinishPartial(
+    FT02_EpdInteractiveEndBusyCapture(display);
+    FT02_EpdInteractiveFinishPartial(
         display,
         categoryMode ? "knowledge-category-selection-partial" : "knowledge-home-selection-partial",
         startedMs
@@ -1776,7 +1757,7 @@ static void FT02_KnowledgeRedrawListSelectionPartial(
     );
 
     const uint32_t startedMs = millis();
-    FT02_KnowledgeBeginBusyCapture(display);
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(partialX, partialY, partialW, partialH);
     display.firstPage();
     do
@@ -1808,8 +1789,8 @@ static void FT02_KnowledgeRedrawListSelectionPartial(
         }
     }
     while(display.nextPage());
-    FT02_KnowledgeEndBusyCapture(display);
-    FT02_KnowledgeFinishPartial(display, "knowledge-list-row-partial", startedMs);
+    FT02_EpdInteractiveEndBusyCapture(display);
+    FT02_EpdInteractiveFinishPartial(display, "knowledge-list-row-partial", startedMs);
 }
 
 static void FT02_KnowledgeApplyListSelection(
@@ -2292,16 +2273,16 @@ static FT02KnowledgeAction FT02_KnowledgeDispatchInputInternal(
     return FT02_KNOWLEDGE_ACTION_NONE;
 }
 
-static FT02KnowledgeAction FT02_KnowledgeProcessBusyInputQueue(
+static FT02KnowledgeAction FT02_KnowledgeProcessQueuedInputInternal(
     FT02Display& display,
     bool* outProcessed
 )
 {
     if(outProcessed != nullptr) *outProcessed = false;
-    if(g_busyInputCount == 0) return FT02_KNOWLEDGE_ACTION_NONE;
+    if(FT02_EpdInteractiveQueuedInputCount() == 0) return FT02_KNOWLEDGE_ACTION_NONE;
 
     FT02InputEvent first = {};
-    if(!FT02_KnowledgeBusyQueuePeek(&first)) return FT02_KNOWLEDGE_ACTION_NONE;
+    if(!FT02_EpdInteractivePeekQueuedInput(first)) return FT02_KNOWLEDGE_ACTION_NONE;
 
     // Search deliberately treats D/Z/X/C as literal text even though the
     // global InputManager classifies them as directions. Never coalesce them
@@ -2321,9 +2302,9 @@ static FT02KnowledgeAction FT02_KnowledgeProcessBusyInputQueue(
             const int old = g_homeSelected;
             int next = old;
             FT02InputEvent event = {};
-            while(FT02_KnowledgeBusyQueuePeek(&event) && FT02_KnowledgeDirectional(event))
+            while(FT02_EpdInteractivePeekQueuedInput(event) && FT02_KnowledgeDirectional(event))
             {
-                (void)FT02_KnowledgeBusyQueuePop(&event);
+                (void)FT02_EpdInteractiveTakeQueuedInput(event);
                 if(event.key == FT02_KEY_LEFT) next = FT02_KnowledgeMoveGrid(next, FT02_KnowledgeHomeCount(), 0, -1);
                 else if(event.key == FT02_KEY_RIGHT) next = FT02_KnowledgeMoveGrid(next, FT02_KnowledgeHomeCount(), 0, 1);
                 else if(event.key == FT02_KEY_UP) next = FT02_KnowledgeMoveGrid(next, FT02_KnowledgeHomeCount(), -1, 0);
@@ -2334,8 +2315,8 @@ static FT02KnowledgeAction FT02_KnowledgeProcessBusyInputQueue(
                 g_homeSelected = next;
                 FT02_KnowledgeRedrawGridSelectionPartial(display, old, next, false);
             }
-            Serial.printf("[KNOWLEDGE-INPUT-A3.9] coalesced home old=%d new=%d pending=%u\n",
-                          old, next, static_cast<unsigned>(g_busyInputCount));
+            Serial.printf("[KNOWLEDGE-INPUT-A3.13] coalesced home old=%d new=%d pending=%u\n",
+                          old, next, static_cast<unsigned>(FT02_EpdInteractiveQueuedInputCount()));
             return FT02_KNOWLEDGE_ACTION_NONE;
         }
 
@@ -2345,9 +2326,9 @@ static FT02KnowledgeAction FT02_KnowledgeProcessBusyInputQueue(
             const int old = g_categorySelected;
             int next = old;
             FT02InputEvent event = {};
-            while(FT02_KnowledgeBusyQueuePeek(&event) && FT02_KnowledgeDirectional(event))
+            while(FT02_EpdInteractivePeekQueuedInput(event) && FT02_KnowledgeDirectional(event))
             {
-                (void)FT02_KnowledgeBusyQueuePop(&event);
+                (void)FT02_EpdInteractiveTakeQueuedInput(event);
                 if(event.key == FT02_KEY_LEFT) next = FT02_KnowledgeMoveGrid(next, count, 0, -1);
                 else if(event.key == FT02_KEY_RIGHT) next = FT02_KnowledgeMoveGrid(next, count, 0, 1);
                 else if(event.key == FT02_KEY_UP) next = FT02_KnowledgeMoveGrid(next, count, -1, 0);
@@ -2363,8 +2344,8 @@ static FT02KnowledgeAction FT02_KnowledgeProcessBusyInputQueue(
                 else
                     FT02_KnowledgeRedrawContentPartial(display, "knowledge-category-queued-page-partial");
             }
-            Serial.printf("[KNOWLEDGE-INPUT-A3.9] coalesced category old=%d new=%d pending=%u\n",
-                          old, next, static_cast<unsigned>(g_busyInputCount));
+            Serial.printf("[KNOWLEDGE-INPUT-A3.13] coalesced category old=%d new=%d pending=%u\n",
+                          old, next, static_cast<unsigned>(FT02_EpdInteractiveQueuedInputCount()));
             return FT02_KNOWLEDGE_ACTION_NONE;
         }
 
@@ -2374,9 +2355,9 @@ static FT02KnowledgeAction FT02_KnowledgeProcessBusyInputQueue(
             const int old = g_listSelected;
             int next = old;
             FT02InputEvent event = {};
-            while(FT02_KnowledgeBusyQueuePeek(&event) && FT02_KnowledgeDirectional(event))
+            while(FT02_EpdInteractivePeekQueuedInput(event) && FT02_KnowledgeDirectional(event))
             {
-                (void)FT02_KnowledgeBusyQueuePop(&event);
+                (void)FT02_EpdInteractiveTakeQueuedInput(event);
                 if(event.key == FT02_KEY_LEFT) next -= FT02_KNOWLEDGE_LIST_PAGE_SIZE;
                 else if(event.key == FT02_KEY_RIGHT) next += FT02_KNOWLEDGE_LIST_PAGE_SIZE;
                 else if(event.key == FT02_KEY_UP) next--;
@@ -2384,8 +2365,8 @@ static FT02KnowledgeAction FT02_KnowledgeProcessBusyInputQueue(
                 next = FT02_KnowledgeClamp(next, 0, count - 1);
             }
             FT02_KnowledgeApplyListSelection(display, next, "knowledge-list-queued-page-partial");
-            Serial.printf("[KNOWLEDGE-INPUT-A3.9] coalesced list old=%d new=%d pending=%u\n",
-                          old, next, static_cast<unsigned>(g_busyInputCount));
+            Serial.printf("[KNOWLEDGE-INPUT-A3.13] coalesced list old=%d new=%d pending=%u\n",
+                          old, next, static_cast<unsigned>(FT02_EpdInteractiveQueuedInputCount()));
             return FT02_KNOWLEDGE_ACTION_NONE;
         }
 
@@ -2395,16 +2376,16 @@ static FT02KnowledgeAction FT02_KnowledgeProcessBusyInputQueue(
             if(card == nullptr)
             {
                 FT02InputEvent discard = {};
-                (void)FT02_KnowledgeBusyQueuePop(&discard);
+                (void)FT02_EpdInteractiveTakeQueuedInput(discard);
                 return FT02_KNOWLEDGE_ACTION_NONE;
             }
             const int pageCount = FT02_KnowledgeReaderPageCount(*card);
             const int old = g_readerPage;
             int next = old;
             FT02InputEvent event = {};
-            while(FT02_KnowledgeBusyQueuePeek(&event) && FT02_KnowledgeDirectional(event))
+            while(FT02_EpdInteractivePeekQueuedInput(event) && FT02_KnowledgeDirectional(event))
             {
-                (void)FT02_KnowledgeBusyQueuePop(&event);
+                (void)FT02_EpdInteractiveTakeQueuedInput(event);
                 if(event.key == FT02_KEY_LEFT) next--;
                 else if(event.key == FT02_KEY_RIGHT) next++;
                 next = FT02_KnowledgeClamp(next, 0, pageCount - 1);
@@ -2416,23 +2397,17 @@ static FT02KnowledgeAction FT02_KnowledgeProcessBusyInputQueue(
                 FT02_FieldManualRecentUpdatePage(FT02_FieldManualLoadedCardGlobalIndex(), g_readerPage);
                 FT02_KnowledgeRedrawContentPartial(display, "knowledge-reader-queued-page-partial");
             }
-            Serial.printf("[KNOWLEDGE-INPUT-A3.9] coalesced reader old=%d new=%d pending=%u\n",
-                          old, next, static_cast<unsigned>(g_busyInputCount));
+            Serial.printf("[KNOWLEDGE-INPUT-A3.13] coalesced reader old=%d new=%d pending=%u\n",
+                          old, next, static_cast<unsigned>(FT02_EpdInteractiveQueuedInputCount()));
             return FT02_KNOWLEDGE_ACTION_NONE;
         }
     }
 
-    // Non-navigation events preserve FIFO order. Process one per service pass;
-    // if it starts another display commit, presses made during that commit are
-    // appended behind it and will be handled on the following loop pass.
-    FT02InputEvent event = {};
-    if(!FT02_KnowledgeBusyQueuePop(&event)) return FT02_KNOWLEDGE_ACTION_NONE;
-    if(outProcessed != nullptr) *outProcessed = true;
-    Serial.printf("[KNOWLEDGE-INPUT-A3.9] queued key=%s raw=0x%02X pending=%u\n",
-                  FT02_InputKeyName(event.key),
-                  static_cast<unsigned>(static_cast<uint8_t>(event.raw)),
-                  static_cast<unsigned>(g_busyInputCount));
-    return FT02_KnowledgeDispatchInputInternal(display, event);
+    // Do not consume non-navigation events here. The main loop will replay the
+    // same oldest FIFO item through the normal page router before it ever polls
+    // a newer live key. This preserves global HELP/BACK semantics outside the
+    // search editor, while search still receives raw H/B/D/Z/X/C as text.
+    return FT02_KNOWLEDGE_ACTION_NONE;
 }
 
 } // namespace
@@ -2452,9 +2427,6 @@ void FT02_KnowledgeReset()
     FT02_KnowledgeSearchResetInput(true);
     FT02_FieldManualFavoritesBegin();
     FT02_FieldManualRecentBegin();
-    g_partialPowerOffPending = false;
-    g_partialLastCommitMs = 0;
-    FT02_KnowledgeBusyQueueReset();
 }
 
 void FT02_DrawKnowledgeScreen(FT02Display& display)
@@ -2463,7 +2435,7 @@ void FT02_DrawKnowledgeScreen(FT02Display& display)
     Serial.print(FT02_FIRMWARE_VERSION);
     Serial.print(" SD runtime state=");
     Serial.println(FT02_FieldManualStateText());
-    FT02_KnowledgeBeginBusyCapture(display);
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setFullWindow();
     display.firstPage();
     do
@@ -2473,28 +2445,27 @@ void FT02_DrawKnowledgeScreen(FT02Display& display)
         FT02_KnowledgeDrawCurrentContent(display);
     }
     while(display.nextPage());
-    FT02_EpdPowerOffAfterCommit(display, "knowledge-full");
-    FT02_KnowledgeEndBusyCapture(display);
-    g_partialPowerOffPending = false;
-    g_partialLastCommitMs = 0;
+    FT02_EpdInteractivePowerOffNow(display, "knowledge-full");
+    FT02_EpdInteractiveEndBusyCapture(display);
+}
+
+FT02KnowledgeAction FT02_KnowledgeProcessQueuedInput(
+    FT02Display& display,
+    bool* outProcessed
+)
+{
+    return FT02_KnowledgeProcessQueuedInputInternal(display, outProcessed);
 }
 
 FT02KnowledgeAction FT02_KnowledgeService(FT02Display& display, uint32_t nowMs)
 {
     FT02_FieldManualRecentPoll(nowMs);
 
-    bool queuedInputProcessed = false;
-    const FT02KnowledgeAction queuedAction = FT02_KnowledgeProcessBusyInputQueue(
-        display,
-        &queuedInputProcessed
-    );
-    if(queuedInputProcessed) return queuedAction;
-
     // E-paper text entry is intentionally deferred until the user pauses.
     // Keystrokes are accepted immediately in RAM; a 320 ms idle gap coalesces
     // a burst of typing into one partial waveform instead of one ~0.5 s panel
-    // transaction per character. A3.9 shortens the settle gap from 650 ms to
-    // 320 ms because BUSY-time input capture now prevents lost keystrokes.
+    // transaction per character. A3.13 keeps the 320 ms settle gap while all
+    // BUSY-captured keys now share the global strict-FIFO ordering path.
     if(g_screen == FT02_KNOWLEDGE_SCREEN_SEARCH && g_searchDirty &&
        static_cast<uint32_t>(nowMs - g_searchLastEditMs) >= FT02_KNOWLEDGE_SEARCH_REDRAW_IDLE_MS)
     {
@@ -2503,22 +2474,6 @@ FT02KnowledgeAction FT02_KnowledgeService(FT02Display& display, uint32_t nowMs)
         return FT02_KNOWLEDGE_ACTION_NONE;
     }
 
-    if(!g_partialPowerOffPending) return FT02_KNOWLEDGE_ACTION_NONE;
-    if(static_cast<uint32_t>(nowMs - g_partialLastCommitMs) < FT02_KNOWLEDGE_PARTIAL_HOT_IDLE_MS)
-        return FT02_KNOWLEDGE_ACTION_NONE;
-
-    const uint32_t startedMs = millis();
-    FT02_KnowledgeBeginBusyCapture(display);
-    display.epd2.powerOff();
-    FT02_KnowledgeEndBusyCapture(display);
-    const uint32_t endedMs = millis();
-    g_partialPowerOffPending = false;
-    g_partialLastCommitMs = 0;
-
-    Serial.printf(
-        "[KNOWLEDGE-EPD-A3.9] idle powerOff elapsed=%lums\n",
-        static_cast<unsigned long>(endedMs - startedMs)
-    );
     return FT02_KNOWLEDGE_ACTION_NONE;
 }
 

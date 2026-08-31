@@ -34,7 +34,7 @@ void FT02_DrawAudioLogPlayingBodyPartial(
     const FT02AudioLogEntry& entry
 );
 
-void FT02_DrawAudioLogPlayingStatusPartial(
+void FT02_DrawAudioLogPlayingVolumePartial(
     FT02Display& display,
     const FT02AudioLogStatus& status
 );

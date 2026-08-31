@@ -1,17 +1,12 @@
 # FT-02 文档索引
 
-当前提交版本的日常操作、编译刷机、FieldManual 部署、发布检查和验证状态已经合并到：
+当前生产基线以以下文档为准：
 
-- [`FT02_PROJECT_GUIDE.md`](FT02_PROJECT_GUIDE.md) — **当前主要说明书**
+- `FT02_PROJECT_GUIDE.md`：项目、构建、部署与维护主说明。
+- `LR01_HOST_PROTOCOL_A2.md`：Core ↔ LR01 Host UART A2 协议。
+- `FT02_LR01_HOST_INTERFACE_PIN_LOCK.md`：LR01 固定引脚与硬件约束。
+- `FT02_AUDIO_ES8311_PA_WIRING.md`：ES8311 + NS4150B 当前接线与 PA 控制。
+- `FT02_FieldLibrary_P0_CleanBaseline_A6.md` / `FT02_FieldLibrary_v0.8.1_BW_Cleanup.md`：Field Library 基线说明。
+- `FT02_FieldManual_v1.3.*`：当前 FieldManual 内容审计与质量修订资料。
 
-接口权威文档继续独立保留：
-
-- [`LR01_HOST_PROTOCOL_A2.md`](LR01_HOST_PROTOCOL_A2.md) — Core ↔ LR01 Host UART A2 协议
-- [`FT02_LR01_HOST_INTERFACE_PIN_LOCK.md`](FT02_LR01_HOST_INTERFACE_PIN_LOCK.md) — 固定 UART / RESET 引脚与硬件约束
-
-历史记录：
-
-- `history/tests/` — 各阶段测试说明
-- `history/audits/` — 架构与版本审计
-
-历史文档只用于追溯，不代表当前快捷键、版本号或发布状态。
+历史阶段测试与审计文件已从生产提交包中移除；版本演进只保留在根目录 `CHANGELOG.md`。

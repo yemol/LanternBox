@@ -1,0 +1,1 @@
+Firmware package carries an empty Library SD template. Use the separate A10 SD package for real P0 books.

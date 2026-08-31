@@ -85,6 +85,7 @@ bool FT02_AudioLogPlayNewest(uint16_t newestIndex);
 void FT02_AudioLogReleasePlaybackStart();
 bool FT02_AudioLogRequestPlaybackStop();
 bool FT02_AudioLogAdjustPlaybackVolume(int8_t delta);
+bool FT02_AudioLogSetPlaybackEpdGuard(bool enabled);
 bool FT02_AudioLogDeleteNewest(uint16_t newestIndex);
 
 const char* FT02_AudioLogIndexPath();

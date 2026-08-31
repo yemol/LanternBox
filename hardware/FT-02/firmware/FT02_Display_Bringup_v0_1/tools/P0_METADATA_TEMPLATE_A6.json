@@ -1,0 +1,20 @@
+{
+  "title": "填写中文书名",
+  "author": "",
+  "category": "填写能力分类",
+  "priority": "P0",
+  "language": "zh",
+  "source_priority": "P0",
+  "library_role": "CORE_CONTENT",
+  "installable": true,
+  "source_status": "APPROVED",
+  "content_audit_status": "APPROVED",
+  "practical_value_status": "APPROVED",
+  "admission_status": "APPROVED",
+  "source_url": "",
+  "source_record": "",
+  "license": "",
+  "reuse_status": "APPROVED",
+  "content_status": "P0_CORE_APPROVED",
+  "slot": ""
+}

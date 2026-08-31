@@ -1,57 +1,61 @@
-# LanternBox FT-02 Firmware
+# FT-02 v2.75k57 Production Baseline
 
-FT-02 是 LanternBox / 壳中灯的随身终端固件工程。当前采用 **Core ESP32-S3 + LR01** 双处理器架构：Core 负责 UI、电子纸、输入、SD、地图、日志和 FieldManual；LR01 负责 GNSS、QMC5883L 罗盘和 Meshtastic/LoRa。
+这是 FT-02 当前可提交、可归档的生产源码基线。固件功能冻结在 **v2.75k57**；本包只做生产化清理，不引入新的运行行为。
 
-## 当前提交基线
+## 冻结功能
 
-**FT-02 v2.75k19 / Submission Hotfix A1.1**
+- ESP32-S3 / 16 MB Flash / 8 MB PSRAM。
+- CardKB2：SDA 47、SCL 21、0x5F。
+- LR01：RX 7、TX 13，导航与无线单一权威源。
+- SD：FSPI Mode3 40 MHz，SCK 42 / MOSI 2 / MISO 1 / CS 41。
+- ES8311：BCLK 14 / WS 15 / DOUT 16 / DIN 17，AMIC，MCLK NC。
+- NS4150B：SD/CTRL GPIO4；闲置、录音时硬关断。
+- 音频播放：PSRAM clean playback、Full-TX、播放期间不刷新计时、静态总时长、46.4 ms pop-safe stop。
+- 播放音量：1/10 = 0.10x；后续档位保持既有增量；用户主动调音量时采用 PA-off 安全刷新。
+- 录音：PSRAM staging、900 ms EPD/SD settle、5 秒录音计时保留。
+- Field Library v0.8.2：Reader clean-slate 刷新 x=0,y=86,w=800,h=394。
+- SELECT/BACK/HELP：稳定释放后重新武装；方向键和文本输入保持正常重复。
+- 通用 EPD partial hot-idle：350 ms；加上实机约 140 ms powerOff，尾部生命周期控制在约 0.5 秒内。
 
-本版以已经完成实机快速交互验证并收口的 v2.75k18 为提交基线，只修复帮助页旧 UI 子集字库缺字导致的方框乱码，不改变已验证功能行为：
-
-- `常用快捷键`、`状态页罗盘` 等帮助页中文改用全量 CJK 字库，消除缺字方框
-- 右侧快捷键说明重新预留完整 5 个中文字宽度，避免修复字形后越过边框
-- 帮助页底栏中文也统一使用全量 CJK 20px 字库
-- 保持 Global EPD Interactive Runtime A1、FieldManual A3.12、收藏/最近阅读/搜索、LR01 Single Authority 和全部已验证按键行为不变
-
-完整操作、部署、编译、验证与发布说明：
-
-- [`docs/FT02_PROJECT_GUIDE.md`](docs/FT02_PROJECT_GUIDE.md)
-
-接口权威：
-
-- [`docs/LR01_HOST_PROTOCOL_A2.md`](docs/LR01_HOST_PROTOCOL_A2.md)
-- [`docs/FT02_LR01_HOST_INTERFACE_PIN_LOCK.md`](docs/FT02_LR01_HOST_INTERFACE_PIN_LOCK.md)
-
-版本历史：
-
-- [`CHANGELOG.md`](CHANGELOG.md)
-
-## 编译
+## 构建
 
 ```bash
-pio run
+platformio run
+platformio run --target upload --upload-port /dev/cu.usbmodem2201
+platformio device monitor --port /dev/cu.usbmodem2201
 ```
 
-当前 PlatformIO 环境：
+生产环境基于：
 
-```text
-ft02-pbf-a1-n16r8-spi40
-board = esp32-s3-devkitc1-n16r8
+- `platform-espressif32 55.03.311`
+- `framework-arduinoespressif32 3.3.11`
+- `esp32-s3-devkitc1-n16r8`
+
+## 回归检查
+
+```bash
+python3 tools/test_audio_regression.py
+python3 tools/test_input_epd_regression.py
+python3 tools/test_field_library_v082.py
+python3 tools/test_pdf_recovery.py --builder tools/build_ft02_field_library.py
 ```
 
-必须保留：
+## SD 内容
 
-```text
-boards/esp32-s3-devkitc1-n16r8.json
-```
+- `SD_ROOT/`：完整运行目录。
+- `SD_UPDATE_v0.8.2/`：Field Library v0.8.2 覆盖内容。
+- 修改 FieldManual 运行文件时，必须同步更新 `manifest.bin` 的 CRC32，并在打包前验证 media/index/data CRC。
 
-废弃的 `ft02-esp32-s3-n16r8` Board ID 不再包含在提交包中，也不要恢复。
+## 文档
 
-## 架构硬约束
+主要文档在 `docs/`：
 
-1. Core 不解析 NMEA。
-2. Core 不直接访问 QMC5883L。
-3. Core 不直接控制 SX126x。
-4. Core 不承担 Meshtastic protobuf full-sync / NodeDB 权威逻辑。
-5. 罗盘校准参数由 LR01 计算并持久化。
-6. 导航、罗盘和 LoRa 状态以 LR01 Host Protocol 为权威。
+- `FT02_PROJECT_GUIDE.md`
+- `LR01_HOST_PROTOCOL_A2.md`
+- `FT02_LR01_HOST_INTERFACE_PIN_LOCK.md`
+- `FT02_AUDIO_ES8311_PA_WIRING.md`
+- Field Library / FieldManual 当前内容与质量文档
+
+## 生产清理说明
+
+本包已移除：阶段性 AUDIT/REPORT、旧版 release note、历史测试档案、缓存/构建产物、过期版本过程注释，以及未被当前运行路径调用的自动 quiet-window 播放计时扫描器。运行中仍有实际用途的自检、错误日志、导航记录和音频安全 guard 均保留。

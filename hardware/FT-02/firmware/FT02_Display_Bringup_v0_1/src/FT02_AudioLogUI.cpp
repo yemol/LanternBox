@@ -33,7 +33,11 @@ constexpr int FT02_AUDIO_REC_TIMER_H = 92;
 constexpr int FT02_AUDIO_PLAY_STATUS_X = 208;
 constexpr int FT02_AUDIO_PLAY_STATUS_Y = 270;
 constexpr int FT02_AUDIO_PLAY_STATUS_W = 512;
-constexpr int FT02_AUDIO_PLAY_STATUS_H = 88;
+constexpr int FT02_AUDIO_PLAY_STATUS_H = 54;
+constexpr int FT02_AUDIO_PLAY_VOLUME_X = 208;
+constexpr int FT02_AUDIO_PLAY_VOLUME_Y = 316;
+constexpr int FT02_AUDIO_PLAY_VOLUME_W = 512;
+constexpr int FT02_AUDIO_PLAY_VOLUME_H = 48;
 
 uint16_t g_ft02AudioPartialCount = 0;
 
@@ -336,7 +340,7 @@ static void FT02_DrawAudioRecordingContent(
 
     display.fillCircle(150, 244, 34, GxEPD_BLACK);
     FT02_DrawTextPack(display, ft02_cjk_24b, "正在录音", 214, 218);
-    FT02_DrawTextPack(display, ft02_cjk_20r, "麦克风已开启，请开始说话", 214, 258);
+    FT02_DrawTextPack(display, ft02_cjk_20r, "界面出现后稍候约1秒再开始说话", 214, 258);
     FT02_DrawTextPack(display, ft02_cjk_20r, "再次按 R 结束并保存", 214, 298);
     FT02_DrawAudioRecordingTimerContent(display, status);
 
@@ -368,27 +372,11 @@ static void FT02_DrawAudioRecordingContent(
     );
 }
 
-static void FT02_DrawAudioPlayingStatusContent(
+static void FT02_DrawAudioPlayingVolumeContent(
     FT02Display& display,
     const FT02AudioLogStatus& status
 )
 {
-    char elapsed[20];
-    char duration[20];
-    FT02_AudioFormatDuration(status.playbackElapsedMs, elapsed, sizeof(elapsed));
-    FT02_AudioFormatDuration(status.playbackDurationMs, duration, sizeof(duration));
-
-    char progressLine[72];
-    snprintf(
-        progressLine,
-        sizeof(progressLine),
-        "%s  %s / %s",
-        status.playbackStopRequested ? "停止中" : "播放",
-        elapsed,
-        duration
-    );
-    FT02_DrawTextPack(display, ft02_cjk_24b, progressLine, 226, 302);
-
     char volumeLine[96];
     snprintf(
         volumeLine,
@@ -397,6 +385,23 @@ static void FT02_DrawAudioPlayingStatusContent(
         static_cast<unsigned int>(status.playbackVolumeLevel)
     );
     FT02_DrawTextPack(display, ft02_cjk_20r, volumeLine, 226, 342);
+}
+
+static void FT02_DrawAudioPlayingStatusContent(
+    FT02Display& display,
+    const FT02AudioLogStatus& status
+)
+{
+    // Playback time is intentionally static. The only permitted in-play EPD
+    // update is an explicit user volume change executed under the PA-off guard.
+    char duration[20];
+    FT02_AudioFormatDuration(status.playbackDurationMs, duration, sizeof(duration));
+
+    char progressLine[72];
+    snprintf(progressLine, sizeof(progressLine), "总时长  %s", duration);
+    FT02_DrawTextPack(display, ft02_cjk_24b, progressLine, 226, 302);
+
+    FT02_DrawAudioPlayingVolumeContent(display, status);
 }
 
 static void FT02_DrawAudioPlayingContent(
@@ -621,33 +626,45 @@ void FT02_DrawAudioLogPlayingBodyPartial(
     FT02_EpdPowerOffAfterCommit(display, "audio-log-playing-cue");
 }
 
-void FT02_DrawAudioLogPlayingStatusPartial(
+void FT02_DrawAudioLogPlayingVolumePartial(
     FT02Display& display,
     const FT02AudioLogStatus& status
 )
 {
+    // Called only while the audio task has frozen the source pointer at zero
+    // and physically shut down NS4150B. Power the EPD
+    // off before releasing the audio guard so neither the partial waveform nor
+    // its rail shutdown can couple into the active speaker path.
+    const uint32_t startedMs = millis();
+    FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(
-        FT02_AUDIO_PLAY_STATUS_X,
-        FT02_AUDIO_PLAY_STATUS_Y,
-        FT02_AUDIO_PLAY_STATUS_W,
-        FT02_AUDIO_PLAY_STATUS_H
+        FT02_AUDIO_PLAY_VOLUME_X,
+        FT02_AUDIO_PLAY_VOLUME_Y,
+        FT02_AUDIO_PLAY_VOLUME_W,
+        FT02_AUDIO_PLAY_VOLUME_H
     );
     display.firstPage();
     do
     {
         display.fillRect(
-            FT02_AUDIO_PLAY_STATUS_X,
-            FT02_AUDIO_PLAY_STATUS_Y,
-            FT02_AUDIO_PLAY_STATUS_W,
-            FT02_AUDIO_PLAY_STATUS_H,
+            FT02_AUDIO_PLAY_VOLUME_X,
+            FT02_AUDIO_PLAY_VOLUME_Y,
+            FT02_AUDIO_PLAY_VOLUME_W,
+            FT02_AUDIO_PLAY_VOLUME_H,
             GxEPD_WHITE
         );
-        FT02_DrawAudioPlayingStatusContent(display, status);
+        FT02_DrawAudioPlayingVolumeContent(display, status);
     }
     while(display.nextPage());
     display.setFullWindow();
+    FT02_EpdInteractiveEndBusyCapture(display);
     g_ft02AudioPartialCount++;
-    FT02_EpdPowerOffAfterCommit(display, "audio-log-playing-status");
+    Serial.printf(
+        "[AUDIO-EPD] volume-only partial elapsed=%lums level=%u/10\n",
+        static_cast<unsigned long>(millis() - startedMs),
+        static_cast<unsigned int>(status.playbackVolumeLevel)
+    );
+    FT02_EpdInteractivePowerOffNow(display, "audio-log-playing-volume-safe");
 }
 
 void FT02_DrawAudioLogDeleteConfirmScreen(

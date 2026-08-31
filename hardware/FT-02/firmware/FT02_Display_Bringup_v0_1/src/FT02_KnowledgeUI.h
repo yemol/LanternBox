@@ -15,11 +15,19 @@ void FT02_DrawKnowledgeScreen(
     FT02Display& display
 );
 
-// Quiesce the e-paper drive after a short idle period following fast partial
-// FieldManual navigation. Call from the main loop while Knowledge is active.
+// Service deferred FieldManual work such as recent-reading persistence and
+// coalesced search redraws. Global EPD runtime owns BUSY input and power-off.
 FT02KnowledgeAction FT02_KnowledgeService(
     FT02Display& display,
     uint32_t nowMs
+);
+
+// Consume the oldest BUSY-captured input before the main loop polls any newer
+// live key. Navigation bursts may be coalesced, but text input remains strict
+// FIFO. outProcessed is true when one or more queued events were consumed.
+FT02KnowledgeAction FT02_KnowledgeProcessQueuedInput(
+    FT02Display& display,
+    bool* outProcessed
 );
 
 // True while FieldManual owns a free-form text entry surface. Global
