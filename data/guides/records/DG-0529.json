@@ -67,6 +67,10 @@
     "成员档案"
   ],
   "negative_keywords": [],
-  "related_wiki": [],
+  "related_wiki": [
+    "records-retention-access-disposal-001",
+    "general-member-info-backup-001",
+    "general-medical-record-archive-001"
+  ],
   "risk_level": "normal"
 }

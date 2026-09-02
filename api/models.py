@@ -1,6 +1,6 @@
 """FastAPI 请求与数据模型定义。负责 API 层输入输出结构。"""
 
-from typing import Any, List, Optional
+from typing import Any, List, Literal, Optional
 from pydantic import BaseModel
 
 
@@ -49,6 +49,9 @@ class LibraryBookUpdate(BaseModel):
 class AiRuntimeSettingsUpdate(BaseModel):
     retrieval_v2_model: Optional[str] = None
     show_retrieval_debug: Optional[bool] = None
+    contract_mode: Optional[Literal["off", "shadow", "compare", "production"]] = None
+    contract_canary_enabled: Optional[bool] = None
+    contract_canary_transitions: Optional[List[str]] = None
 
 
 class LoraConnectRequest(BaseModel):

@@ -6,6 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用于在不做复杂电学计算时，把 Wh、mAh、电压和设备使用时长转成粗略可比较的本地估算。
 tags: 能源, Wh, mAh, 电量估算, 本地记录
+guide_links: DG-0919, DG-0925
 kiwix_topics: Wh 和 mAh 的本地估算口径, off-grid energy management, emergency power planning
 last_reviewed: 2026-07-14
 status: published

@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于备用电池封存和轮换原则的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 能源, 备用电池封存和轮换原则, 长期断供, 小团队, 离线生存
-guide_links: DG-0616, DG-0617, DG-0618
+guide_links: DG-0616, DG-0617, DG-0618, DG-0921
 kiwix_topics: 备用电池封存和轮换原则, 能源, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published

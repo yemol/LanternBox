@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于给通信、最低照明、记录和照护设备保留不可挪用电量，防止普通任务抢占关键负载。
 tags: 能源, 关键负载, 预留量, 低电量, 设备优先级
-guide_links: DG-0845
+guide_links: DG-0845, DG-0920, DG-0928
 kiwix_topics: 关键负载预留量, off-grid energy management, emergency power planning
 last_reviewed: 2026-07-14
 status: published

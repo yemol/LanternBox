@@ -1,0 +1,102 @@
+{
+  "fixture_version": "batch16-i-v1",
+  "frozen_before_execution": true,
+  "cases": [
+    {
+      "id": "E01",
+      "group": "energy",
+      "focus": "capacity_decline",
+      "query": "同一块电池带同一台设备，运行时间越来越短，怎么确认实际容量下降？",
+      "expected_contract_primary": "energy_deepening",
+      "accepted_retrieval_primary": ["energy_deepening"]
+    },
+    {
+      "id": "E02",
+      "group": "energy",
+      "focus": "battery_abnormal",
+      "query": "这个备用锂电池已经鼓包发烫，还能继续测容量吗？",
+      "expected_contract_primary": "energy_safety",
+      "accepted_retrieval_primary": ["energy_safety", "fire"]
+    },
+    {
+      "id": "E03",
+      "group": "energy",
+      "focus": "controller_smoke_without_fire",
+      "query": "太阳能控制器正在冒烟但没有明火，还能继续用吗？",
+      "expected_contract_primary": "energy_safety",
+      "accepted_retrieval_primary": ["energy_safety", "fire"]
+    },
+    {
+      "id": "E04",
+      "group": "energy",
+      "focus": "solar_long_term_trend",
+      "query": "冬天太阳能产出下降，如何建立跨季长期基线？",
+      "expected_contract_primary": "energy_deepening",
+      "accepted_retrieval_primary": ["energy_deepening"]
+    },
+    {
+      "id": "M01",
+      "group": "medical",
+      "focus": "electrical_injury",
+      "query": "有人被电源线电击后手部烧伤，设备已经断电，先处理什么？",
+      "expected_contract_primary": "medical",
+      "accepted_retrieval_primary": ["medical"]
+    },
+    {
+      "id": "M02",
+      "group": "medical",
+      "focus": "ordinary_medical_passthrough",
+      "query": "成年人持续发烧咳嗽，应该先观察和处理什么？",
+      "expected_contract_primary": "unassigned",
+      "accepted_retrieval_primary": ["medical"]
+    },
+    {
+      "id": "R01",
+      "group": "records",
+      "focus": "experiment_data_archive",
+      "query": "三季种植实验数据如何标记可信度并长期归档？",
+      "expected_contract_primary": "records",
+      "accepted_retrieval_primary": ["records"]
+    },
+    {
+      "id": "R02",
+      "group": "records",
+      "focus": "device_history_records",
+      "query": "设备三个月内反复故障的历史记录怎么按版本归档？",
+      "expected_contract_primary": "records",
+      "accepted_retrieval_primary": ["records"]
+    },
+    {
+      "id": "S01",
+      "group": "storage",
+      "focus": "seed_storage",
+      "query": "备用种子装袋防潮后如何入库存放？",
+      "expected_contract_primary": "storage",
+      "accepted_retrieval_primary": ["storage", "agriculture"]
+    },
+    {
+      "id": "S02",
+      "group": "storage",
+      "focus": "spare_parts_storage",
+      "query": "备用零件贴标签后如何入库存放？",
+      "expected_contract_primary": "storage",
+      "accepted_retrieval_primary": ["storage"]
+    },
+    {
+      "id": "W01",
+      "group": "manufacturing",
+      "focus": "repair_log_archive",
+      "query": "工作台设备维修日志如何按版本归档？",
+      "expected_contract_primary": "records",
+      "accepted_retrieval_primary": ["records"]
+    },
+    {
+      "id": "W02",
+      "group": "manufacturing",
+      "focus": "workshop_material_storage",
+      "query": "工坊剩余木板和金属材料如何贴标签后入库存放？",
+      "expected_contract_primary": "storage",
+      "accepted_retrieval_primary": ["storage"]
+    }
+  ]
+}

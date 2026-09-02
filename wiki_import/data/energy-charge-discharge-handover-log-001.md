@@ -6,7 +6,7 @@ priority: P1
 risk_level: normal
 summary: 用于记录设备充电、放电、借出、归还和异常，让下一班知道电源和设备真实状态。
 tags: 能源, 充放电, 交接记录, 设备编号, 长期断电
-guide_links: DG-0846
+guide_links: DG-0846, DG-0921
 kiwix_topics: 充放电交接记录, off-grid energy management, emergency power planning
 last_reviewed: 2026-07-14
 status: published

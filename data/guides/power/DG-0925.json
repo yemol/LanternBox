@@ -1,0 +1,66 @@
+{
+  "id": "DG-0925",
+  "title": "低压电压、电流、功率与运行时长现场测量",
+  "category": "能源",
+  "priority": "P0",
+  "risk_level": "high",
+  "scenario": "需要用 USB Power Meter 或安全范围内的 multimeter，在 5V、USB 或已知低压 DC 路径测量 V、A、W、Wh/Ah 与 runtime。",
+  "goal": "取得带仪表、设备、时间、负载模式、接法和条件的原始测量，不把一次读数自动写成容量或健康结论。",
+  "domains": [
+    "power",
+    "records",
+    "security"
+  ],
+  "keywords": [
+    "低压现场测量",
+    "USB Power Meter",
+    "电压测量",
+    "电流测量",
+    "Wh Ah",
+    "运行时长验证"
+  ],
+  "tools": [
+    "完好 USB Power Meter",
+    "量程和表笔完好的 multimeter",
+    "设备与仪表编号",
+    "计时工具",
+    "测量记录"
+  ],
+  "steps": [
+    "确认电源类型、已知低压范围、极性、仪表量程和表笔插孔；任何未知项都停止。",
+    "USB Power Meter 按成品说明串在已知 USB 电源与负载之间，记录 V、A、W 与累计 Wh/Ah。",
+    "multimeter 测电压时选择合适直流电压档，并接在已知低压测点两端。",
+    "测电流前先断电，按串联方式接入已知低压回路；电流档不得直接并接电源两端。",
+    "固定负载模式、线缆、环境和起止条件，记录稳定值、短时峰值、累计能量与 runtime。",
+    "至少重复一次；保存原始样本，Energy 只在多次可比结果上形成保守判断。"
+  ],
+  "check": [
+    "测量范围只包含 5V、USB 或明确标注的低压 DC。",
+    "instrument、device、time、load_mode、conditions、单位和接法齐全。",
+    "电压并接与电流串接的区别已经确认。",
+    "单次读数和固定 UI 百分比没有被写成可信 Fuel Gauge 或健康结论。"
+  ],
+  "common_mistakes": [
+    "把电流档直接并接电源两端造成短路。",
+    "不检查表笔插孔和量程就接入。",
+    "测量未知电压、市电或高压 DC。",
+    "只记一个数字，不记负载模式、接法和条件。"
+  ],
+  "fallback": [
+    "无法安全测量时使用铭牌下限和固定任务实际 runtime，按更保守容量规划。",
+    "仪表状态不明时不使用，记录 UNKNOWN 并等待有合格低压测量条件。"
+  ],
+  "stop_or_escalate": [
+    "未知电压、破损表笔、电流档并接、短接电池、潮湿、裸露高风险导体、火花或异常热时立即停止、断开并隔离。",
+    "市电、110V/220V、高压 DC、高压太阳能串、配电箱或逆变器输出测量全部禁止，进入专业边界。",
+    "需要拆壳、暴露内部电池导体或绕过保护件时停止。"
+  ],
+  "notes": "不提供住宅市电 multimeter 教程。Records 保存原始样本，Energy 解释保守容量，仪表维修归 Repair。",
+  "related_wiki": [
+    "energy-usb-dc-conversion-loss-001",
+    "energy-low-voltage-field-measurement-runtime-verify-001",
+    "energy-battery-capacity-001",
+    "energy-wh-mah-local-estimate-001",
+    "energy-device-consumption-baseline-001"
+  ]
+}

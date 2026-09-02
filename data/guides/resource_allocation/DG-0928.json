@@ -1,0 +1,116 @@
+{
+  "category": "风险决策",
+  "domains": [
+    "resource_allocation",
+    "risk_decision",
+    "records"
+  ],
+  "intents": [
+    "resource_allocation_v0_1",
+    "offline_allocation_action"
+  ],
+  "situations": [
+    "resource_scarcity",
+    "uncertain_replenishment",
+    "offline_team"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "resource_allocation",
+  "primary_intent": "resource_allocation_v0_1",
+  "id": "DG-0928",
+  "title": "关键资源最低保障线与储备分级",
+  "priority": "P0",
+  "risk_level": "high",
+  "scenario": "多个普通任务争用饮水、能源、口粮、医疗耗材或关键材料，可能触碰最低保障线或错误释放 reserve。",
+  "goal": "先登记专业域 safety minimum，再区分 operational、emergency、strategic reserve，按资源用途决定剩余量。",
+  "keywords": [
+    "最低保障线",
+    "operational reserve",
+    "emergency reserve",
+    "strategic reserve",
+    "用途优先级",
+    "关键资源"
+  ],
+  "tools": [
+    "最低保障线登记",
+    "reserve 标签",
+    "用途申请表",
+    "资源状态卡",
+    "纸笔"
+  ],
+  "steps": [
+    "从 Water、Food、Energy、Medical、Safety 的正式 evidence 抄录最低量、单位、适用条件和负责域，不自行猜测。",
+    "将 safety minimum 从 USABLE 中先保护，再把 reserve 分为 OPERATIONAL、EMERGENCY、STRATEGIC。",
+    "为每笔 reserve 写目的、release trigger、允许用途、释放后 recheck 和补回条件。",
+    "按资源分别列 Life/Safety、Critical Infrastructure、Food/Water Production、Maintenance、Productivity、Optional 用途。",
+    "核对每个申请的数量、horizon、可延期性和已验证替代，只分配扣除保护量后的余额。",
+    "发生冲突时先延期或缩小普通任务，不按身份、地位或服从程度排序人员。",
+    "reserve 被释放后立即重算剩余保障时长，并记录下一复查。"
+  ],
+  "check": [
+    "每条最低线可追溯到专业域。",
+    "三类 reserve 有不同 trigger 和时间尺度。",
+    "每种资源使用自己的用途模型。",
+    "医疗条目只有库存和能力，不含患者价值或治疗排序。"
+  ],
+  "common_mistakes": [
+    "把未使用库存都称为 reserve。",
+    "用一张全局表粗暴排序所有资源。",
+    "为了赶工动用战略储备。",
+    "把患者身份写成物资分配等级。"
+  ],
+  "fallback": [
+    "最低量暂时不能量化时，保护专业域明确要求的完整应急包或最小服务窗口。",
+    "冲突证据不足时只批准不触碰 safety minimum 的短窗口并提前复查。"
+  ],
+  "stop_or_escalate": [
+    "动用后会跌破饮水、关键能源、必要医疗耗材或安全设备最低线时，停止普通 allocation。",
+    "出现具体患者、症状、伤情、治疗顺序或人员价值排序时转 Medical；危险设备和污染物不得因稀缺继续使用。"
+  ],
+  "notes": "Resource Allocation 执行保护和用途分配；专业域定义最低线，Medical 保留临床判断，Team Operations 安排人员。",
+  "objects": [
+    "最低保障线",
+    "三类储备",
+    "饮水",
+    "关键能源",
+    "医疗耗材",
+    "关键材料"
+  ],
+  "signals": [
+    "普通任务触线",
+    "储备释放",
+    "关键资源冲突",
+    "医疗耗材不足"
+  ],
+  "risks": [
+    "safety_minimum_breach",
+    "unethical_priority",
+    "reserve_misuse"
+  ],
+  "negative_keywords": [
+    "患者先治谁",
+    "今天电量怎么排",
+    "物资怎么防潮",
+    "谁来发放"
+  ],
+  "top1_aliases": [
+    "关键资源最低保障线",
+    "应急和战略储备怎么分",
+    "医疗耗材库存不足怎么保留"
+  ],
+  "related_wiki": [
+    "resource-allocation-safety-minimum-register-001",
+    "resource-allocation-reserve-class-policy-001",
+    "resource-allocation-resource-specific-priority-001",
+    "energy-essential-load-reserve-001",
+    "energy-critical-device-minimum-line-001",
+    "energy-daily-energy-budget-001",
+    "food-storage-emergency-ration-reserve-line-001",
+    "food-staple-food-002",
+    "food-rationing-priority-001",
+    "water-drinking-water-002",
+    "water-rationing-priority-001",
+    "production-workshop-material-reservation-line-001"
+  ]
+}

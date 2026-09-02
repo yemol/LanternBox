@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 在食物短缺时优先考虑儿童、老人、病人、重体力者和必要照护需求，再安排普通成员的分配；高风险条目，分配错误会直接影响团队稳定。
 tags: 食物, 分配, 短缺, 长期断供, 小团队, 离线生存
-guide_links: DG-0601, DG-0602, DG-0603
+guide_links: DG-0601, DG-0602, DG-0603, DG-0928
 kiwix_topics: 食物短缺时先给谁吃和怎么分配, Food rationing, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-11
 status: published

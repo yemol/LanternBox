@@ -6,7 +6,7 @@ priority: P2
 risk_level: caution
 summary: 把可用水、成熟堆肥、覆盖物和优先作物对应起来，避免长期生产超出资源承受能力。
 tags: 水肥预算卡,农业第二阶段,长期生产,小规模种植,离线生存
-guide_links: DG-0881, DG-0886
+guide_links: DG-0881, DG-0886, DG-0929, DG-0930
 kiwix_topics: 水肥预算卡, 种植, 小规模农业, 粮食生产, 种子保存
 last_reviewed: 2026-07-18
 status: published

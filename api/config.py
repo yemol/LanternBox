@@ -75,9 +75,18 @@ DEFAULT_MODELS = {
 # -----------------------------
 RUNTIME_SETTINGS_PATH = DATA_DIR / "runtime_settings.json"
 
+CONTRACT_CANARY_TRANSITION_IDS = (
+    "active_hazard_to_energy_safety",
+    "long_term_energy_to_energy_deepening",
+    "information_object_to_records",
+)
+
 DEFAULT_RUNTIME_SETTINGS: Dict[str, Any] = {
     "retrieval_v2_model": OLLAMA_MODEL,
     "show_retrieval_debug": True,
+    "contract_mode": "off",
+    "contract_canary_enabled": False,
+    "contract_canary_transitions": list(CONTRACT_CANARY_TRANSITION_IDS),
 }
 
 
@@ -87,6 +96,20 @@ def _normalize_runtime_settings(raw: Dict[str, Any]) -> Dict[str, Any]:
         settings.update({k: v for k, v in raw.items() if k in DEFAULT_RUNTIME_SETTINGS})
 
     settings["show_retrieval_debug"] = bool(settings.get("show_retrieval_debug"))
+
+    contract_mode = str(settings.get("contract_mode", "off") or "off").strip().lower()
+    settings["contract_mode"] = contract_mode if contract_mode in {"off", "shadow", "compare", "production"} else "off"
+
+    settings["contract_canary_enabled"] = bool(settings.get("contract_canary_enabled", False))
+    raw_transitions = settings.get("contract_canary_transitions", [])
+    if not isinstance(raw_transitions, list):
+        raw_transitions = []
+    requested_transitions = {str(value) for value in raw_transitions}
+    settings["contract_canary_transitions"] = [
+        transition_id
+        for transition_id in CONTRACT_CANARY_TRANSITION_IDS
+        if transition_id in requested_transitions
+    ]
 
     settings["retrieval_v2_model"] = OLLAMA_MODEL
 

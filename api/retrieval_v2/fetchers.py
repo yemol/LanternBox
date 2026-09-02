@@ -5,7 +5,7 @@ import math
 import re
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Iterable, List
+from typing import Any, Callable, Iterable, List
 
 from .policy import policy_float, policy_int, policy_map, policy_set, policy_str_list, policy_string
 from .schemas import EvidenceCandidate, SourcePlanItem
@@ -425,11 +425,19 @@ def fetch_guide_candidates(
     plan: SourcePlanItem,
     user_message: str = "",
     core_terms: List[str] | None = None,
+    guide_filter: Callable[[dict[str, Any]], bool] | None = None,
+    apply_query_profiles: bool = True,
 ) -> List[EvidenceCandidate]:
     guides = _load_json(EMERGENCY_GUIDES_FILE, [])
+    if guide_filter is not None:
+        guides = [guide for guide in guides if guide_filter(guide)]
     terms = _plan_terms(plan)
     core = _core_terms(core_terms)
-    query_profiles = _matching_query_profiles(user_message)
+    query_profiles = (
+        _matching_query_profiles(user_message)
+        if apply_query_profiles
+        else []
+    )
     profile_aliases = _clean_terms(
         [alias for profile in query_profiles for alias in profile.get("aliases", [])],
         limit=48,

@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用于知识卡片归档的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 知识卡片归档, 信息保存与长期重建, P2, 长期重建, 离线知识, 记录, 判断
-guide_links: DG-0412, DG-0526
+guide_links: DG-0412, DG-0526, DG-0915, DG-0916
 kiwix_topics: 知识卡片归档, Offline backup, Records management, Knowledge management
 last_reviewed: 2026-07-03
 status: published

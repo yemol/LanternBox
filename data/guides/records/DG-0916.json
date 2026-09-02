@@ -1,0 +1,62 @@
+{
+  "id": "DG-0916",
+  "title": "SOP / Knowledge Card 版本更新与废止",
+  "category": "信息保存与长期重建",
+  "priority": "P0",
+  "risk_level": "high",
+  "scenario": "团队需要发布新 SOP、撤下旧版，或在新版暴露问题时回到上一可用版本。",
+  "goal": "保证现场只有一个可识别的当前版本，同时保留变更理由、旧版和回滚证据。",
+  "domains": [
+    "records"
+  ],
+  "keywords": [
+    "SOP 版本",
+    "当前版本",
+    "旧版隔离",
+    "版本回滚",
+    "变更日志"
+  ],
+  "tools": [
+    "SOP 母本",
+    "版本登记页",
+    "旧版封套",
+    "发放回收表"
+  ],
+  "steps": [
+    "给候选版本写编号、日期、负责人、适用范围、变更摘要和依据，不覆盖旧母本。",
+    "核对所有高风险停止线与对应领域审查结果，再由授权人签字发布。",
+    "在目录和工作点标出唯一当前版；逐份回收旧版，盖作废标记后转入隔离封套。",
+    "记录领取人、地点和未收回副本；未完成回收的工作点暂停按新旧 SOP 混合作业。",
+    "需要回滚时写触发问题、选定旧版和重新验证结果，按一次新发布处理。"
+  ],
+  "check": [
+    "当前版编号在目录、母本和工作副本上一致。",
+    "每次变更和回滚都有理由、审查人及日期。",
+    "旧版可追溯但不会被误当当前版。"
+  ],
+  "common_mistakes": [
+    "在旧纸上直接改字。",
+    "发布新版却不回收现场副本。",
+    "回滚后继续沿用新版变更日志。"
+  ],
+  "fallback": [
+    "无法印制时由两人手抄并逐页核对编号。",
+    "目录损坏时暂停发放，用母本封面和签名登记重建当前版本。"
+  ],
+  "stop_or_escalate": [
+    "当前版本无法唯一确认、旧版混在工作点或关键页面缺失时，停止按该 SOP 作业。",
+    "高风险变更未获对应领域复核，或回滚版本未重新验证时，不得发布。"
+  ],
+  "notes": "版本控制负责谁在何时使用哪份知识，不替代具体 SOP 的技术验证。",
+  "related_wiki": [
+    "records-lifecycle-state-model-001",
+    "records-sop-version-minimum-fields-001",
+    "records-current-version-selection-001",
+    "records-superseded-version-isolation-001",
+    "records-rollback-revalidation-001",
+    "records-high-risk-knowledge-review-gate-001",
+    "records-version-change-log-001",
+    "general-knowledge-card-archive-001",
+    "general-offline-directory-index-001"
+  ]
+}

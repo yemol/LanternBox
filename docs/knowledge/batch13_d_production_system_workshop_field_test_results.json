@@ -1,0 +1,3369 @@
+{
+  "generated_at": "2026-08-24T06:23:45.632265+00:00",
+  "summary": {
+    "total": 26,
+    "strict_total": 20,
+    "observation_total": 6,
+    "pass": 21,
+    "partial": 3,
+    "fail": 2,
+    "strict_pass": 20,
+    "strict_partial": 0,
+    "strict_fail": 0,
+    "observation_pass": 1,
+    "observation_partial": 3,
+    "observation_fail": 2,
+    "production_guide_hit_rate": "100.0%",
+    "expected_guide_hit_rate": "100.0%",
+    "wiki_full_hit_rate": "65.0%",
+    "wiki_any_hit_rate": "100.0%",
+    "guide_wiki_precise_rate": "100.0%",
+    "production_primary_rate": "100.0%",
+    "cross_domain_reasonable_count": 24,
+    "dangerous_suggestion_count": 0,
+    "kiwix_override_count": 0,
+    "safety_rate": "100.0%",
+    "fallback_rate": "100.0%",
+    "record_check_rate": "100.0%",
+    "root_cause_counts": {
+      "Production 补充 evidence 未进入": 5,
+      "observation 主域偏离": 2
+    }
+  },
+  "cases": [
+    {
+      "id": "production_daily_start_check",
+      "type": "strict",
+      "query": "今天工坊准备开工，应该先检查什么？",
+      "focus": "Production 应主导每日开工检查。",
+      "expected_guide": [
+        "DG-0903"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-daily-start-check-001",
+        "production-workshop-material-count-before-work-001",
+        "production-workshop-risk-source-scan-001",
+        "production-workshop-task-board-minimum-001",
+        "production-workshop-tool-count-before-work-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查",
+          "labels": [
+            "manufacturing",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-daily-start-check-001",
+          "title": "工坊每日开工总检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-task-board-minimum-001",
+          "title": "工坊任务板最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-tool-count-before-work-001",
+          "title": "开工前工具清点",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-material-count-before-work-001",
+          "title": "开工前材料清点",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-risk-source-scan-001",
+          "title": "工坊风险源开工扫描",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-daily-resource-budget-001",
+          "title": "当日生产资源预算",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "repair-manufacturing-zone-layout-001",
+          "title": "低资源工坊最小分区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0871"
+        },
+        {
+          "slug": "repair-manufacturing-workbench-start-check-001",
+          "title": "工坊工作台开工前安全检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0871"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查"
+        },
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "manufacturing_workspace_safety",
+        "production_workshop_start_close"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_tool_count_before_work",
+      "type": "strict",
+      "query": "开工前发现几个关键工具状态不清，要怎么清点？",
+      "focus": "Production 主导清点，Repair 只补异常工具去向。",
+      "expected_guide": [
+        "DG-0903"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-tool-count-before-work-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查",
+          "labels": [
+            "manufacturing",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-daily-start-check-001",
+          "title": "工坊每日开工总检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-task-board-minimum-001",
+          "title": "工坊任务板最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-tool-count-before-work-001",
+          "title": "开工前工具清点",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-material-count-before-work-001",
+          "title": "开工前材料清点",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-risk-source-scan-001",
+          "title": "工坊风险源开工扫描",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-daily-resource-budget-001",
+          "title": "当日生产资源预算",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-unfinished-item-tag-001",
+          "title": "未完成品状态标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0904"
+        },
+        {
+          "slug": "production-workshop-daily-stop-shutdown-001",
+          "title": "工坊收工断电与封存",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0904"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查"
+        },
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查"
+        },
+        {
+          "id": "DG-0150",
+          "title": "工具借用和归还"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "repair_tool_handover",
+        "production_workshop_start_close"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_material_count_reserve",
+      "type": "strict",
+      "query": "今天生产前怎么确认材料够用，又不要把关键材料用光？",
+      "focus": "Production 主导材料清点和保留线。",
+      "expected_guide": [
+        "DG-0903",
+        "DG-0905"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-material-count-before-work-001",
+        "production-workshop-material-reservation-line-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-daily-start-check-001",
+          "title": "工坊每日开工总检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-task-board-minimum-001",
+          "title": "工坊任务板最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-tool-count-before-work-001",
+          "title": "开工前工具清点",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-material-count-before-work-001",
+          "title": "开工前材料清点",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-risk-source-scan-001",
+          "title": "工坊风险源开工扫描",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-daily-resource-budget-001",
+          "title": "当日生产资源预算",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-unfinished-item-tag-001",
+          "title": "未完成品状态标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0904"
+        },
+        {
+          "slug": "production-workshop-daily-stop-shutdown-001",
+          "title": "工坊收工断电与封存",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0904"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查"
+        },
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "production_workshop_start_close"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": false,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_daily_closeout",
+      "type": "strict",
+      "query": "工坊今天做不完了，收工前怎么封存？",
+      "focus": "Production 主导收工与未完成品封存，Storage 可补保存。",
+      "expected_guide": [
+        "DG-0904"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-daily-stop-shutdown-001",
+        "production-workshop-end-of-day-status-log-001",
+        "production-workshop-unfinished-item-tag-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查",
+          "labels": [
+            "manufacturing",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-unfinished-item-tag-001",
+          "title": "未完成品状态标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0904"
+        },
+        {
+          "slug": "production-workshop-daily-stop-shutdown-001",
+          "title": "工坊收工断电与封存",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0904"
+        },
+        {
+          "slug": "production-workshop-end-of-day-status-log-001",
+          "title": "当日任务状态记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0904"
+        },
+        {
+          "slug": "production-workshop-daily-start-check-001",
+          "title": "工坊每日开工总检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-task-board-minimum-001",
+          "title": "工坊任务板最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-tool-count-before-work-001",
+          "title": "开工前工具清点",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-material-count-before-work-001",
+          "title": "开工前材料清点",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        },
+        {
+          "slug": "production-workshop-risk-source-scan-001",
+          "title": "工坊风险源开工扫描",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0903"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存"
+        },
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "manufacturing_workspace_safety",
+        "production_workshop_start_close"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_unfinished_item_tag",
+      "type": "strict",
+      "query": "半成品还没做完，明天继续，标签最少要写什么？",
+      "focus": "Production 主导未完成品状态和班次交接。",
+      "expected_guide": [
+        "DG-0904",
+        "DG-0905",
+        "DG-0910"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-unfinished-item-tag-001",
+        "production-workshop-wip-handover-tag-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-raw-material-intake-card-001",
+          "title": "原料入工坊卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-wip-zone-layout-001",
+          "title": "半成品暂存区布局",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-wip-handover-tag-001",
+          "title": "半成品交接标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-finished-goods-hold-zone-001",
+          "title": "成品待检区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-waste-transfer-card-001",
+          "title": "生产废料转 Waste 交接卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-batch-label-minimum-001",
+          "title": "生产批次标签最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-material-count-before-work-001",
+          "title": "开工前材料清点",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-material-reservation-line-001",
+          "title": "生产材料保留线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "production_material_wip_flow"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": false,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_raw_material_intake",
+      "type": "strict",
+      "query": "从材料池拿来的原料进工坊前要怎么登记？",
+      "focus": "Production 主导原料入工坊登记，Waste 补来源判断。",
+      "expected_guide": [
+        "DG-0905"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-batch-label-minimum-001",
+        "production-workshop-raw-material-intake-card-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0894",
+          "title": "废弃物与材料池记录交接",
+          "labels": [
+            "records",
+            "repair",
+            "waste"
+          ],
+          "risk_level": "normal"
+        },
+        {
+          "id": "DG-0892",
+          "title": "可再利用材料进入材料池前检查",
+          "labels": [
+            "repair",
+            "waste"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-raw-material-intake-card-001",
+          "title": "原料入工坊卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-wip-zone-layout-001",
+          "title": "半成品暂存区布局",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-wip-handover-tag-001",
+          "title": "半成品交接标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-finished-goods-hold-zone-001",
+          "title": "成品待检区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-waste-transfer-card-001",
+          "title": "生产废料转 Waste 交接卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-batch-label-minimum-001",
+          "title": "生产批次标签最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-material-count-before-work-001",
+          "title": "开工前材料清点",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-material-reservation-line-001",
+          "title": "生产材料保留线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转"
+        },
+        {
+          "id": "DG-0894",
+          "title": "废弃物与材料池记录交接"
+        },
+        {
+          "id": "DG-0892",
+          "title": "可再利用材料进入材料池前检查"
+        },
+        {
+          "id": "DG-0893",
+          "title": "塑料桶 / 容器再利用前判断"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "waste_material_pool_reuse",
+        "production_material_wip_flow"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_wip_zone",
+      "type": "strict",
+      "query": "半成品应该放在哪里，怎么避免和成品混在一起？",
+      "focus": "Production 主导 WIP 暂存，Storage 不应抢主位。",
+      "expected_guide": [
+        "DG-0905"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-finished-goods-hold-zone-001",
+        "production-workshop-wip-handover-tag-001",
+        "production-workshop-wip-zone-layout-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-raw-material-intake-card-001",
+          "title": "原料入工坊卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-wip-zone-layout-001",
+          "title": "半成品暂存区布局",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-wip-handover-tag-001",
+          "title": "半成品交接标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-finished-goods-hold-zone-001",
+          "title": "成品待检区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-waste-transfer-card-001",
+          "title": "生产废料转 Waste 交接卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-batch-label-minimum-001",
+          "title": "生产批次标签最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-material-count-before-work-001",
+          "title": "开工前材料清点",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-material-reservation-line-001",
+          "title": "生产材料保留线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "production_material_wip_flow"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_finished_goods_hold",
+      "type": "strict",
+      "query": "一批东西刚做完，还没检查，能不能直接入库？",
+      "focus": "Production 主导待检和放行，Storage 只补长期入库。",
+      "expected_guide": [
+        "DG-0905",
+        "DG-0907"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-finished-goods-hold-zone-001",
+        "production-workshop-finished-goods-storage-transfer-001",
+        "production-workshop-function-check-before-release-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0907",
+          "title": "成品质量复查",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0908",
+          "title": "不合格品 / 返工 / 报废判断",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏",
+          "labels": [
+            "records",
+            "repair",
+            "storage",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-finished-goods-hold-zone-001",
+          "title": "成品待检区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-finished-goods-storage-transfer-001",
+          "title": "成品入库转交",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-size-check-sheet-001",
+          "title": "尺寸复查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-stability-check-sheet-001",
+          "title": "稳定性复查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-edge-burr-check-001",
+          "title": "锐边毛刺检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-loose-fastener-check-001",
+          "title": "松动连接复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-function-check-before-release-001",
+          "title": "成品放行前功能检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-quality-record-minimum-001",
+          "title": "质量检查记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0907",
+          "title": "成品质量复查"
+        },
+        {
+          "id": "DG-0908",
+          "title": "不合格品 / 返工 / 报废判断"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        },
+        {
+          "id": "DG-0058",
+          "title": "洪水退去后：别急着回家吃东西"
+        },
+        {
+          "id": "DG-0880",
+          "title": "连续育苗与失败复盘"
+        },
+        {
+          "id": "DG-0699",
+          "title": "交换物品隔离检查"
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "production_quality_release"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_waste_transfer",
+      "type": "strict",
+      "query": "工坊产生的边角料和废料要怎么交给废料区？",
+      "focus": "Production 主导转交流程，Waste 补分类判断。",
+      "expected_guide": [
+        "DG-0905",
+        "DG-0908"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-nonconforming-item-quarantine-001",
+        "production-workshop-waste-transfer-card-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-raw-material-intake-card-001",
+          "title": "原料入工坊卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-wip-zone-layout-001",
+          "title": "半成品暂存区布局",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-wip-handover-tag-001",
+          "title": "半成品交接标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-finished-goods-hold-zone-001",
+          "title": "成品待检区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-waste-transfer-card-001",
+          "title": "生产废料转 Waste 交接卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-batch-label-minimum-001",
+          "title": "生产批次标签最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-material-count-before-work-001",
+          "title": "开工前材料清点",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-material-reservation-line-001",
+          "title": "生产材料保留线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0905"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "production_material_wip_flow"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": false,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_first_article",
+      "type": "strict",
+      "query": "要连续做十个同样的小支架，为什么要先做首件确认？",
+      "focus": "Production 主导首件确认和批次入口。",
+      "expected_guide": [
+        "DG-0906"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-first-article-check-001",
+        "production-workshop-repeat-step-card-001",
+        "production-workshop-template-size-standard-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0906",
+          "title": "小批量重复制作流程",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-batch-label-minimum-001",
+          "title": "生产批次标签最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-template-size-standard-001",
+          "title": "模板与尺寸标准卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-first-article-check-001",
+          "title": "首件确认",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-repeat-step-card-001",
+          "title": "重复制作步骤卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-each-piece-check-001",
+          "title": "每件检查规则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-batch-consistency-check-001",
+          "title": "批次一致性复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-failed-batch-isolation-001",
+          "title": "失败批次隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0906",
+          "title": "小批量重复制作流程"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "production_batch_repetition"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_batch_consistency",
+      "type": "strict",
+      "query": "一批零件做出来大小不太一样，应该怎么复查？",
+      "focus": "Production 主导批次一致性，Manufacturing 补制作问题。",
+      "expected_guide": [
+        "DG-0906",
+        "DG-0907"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-batch-consistency-check-001",
+        "production-workshop-size-check-sheet-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0906",
+          "title": "小批量重复制作流程",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-batch-label-minimum-001",
+          "title": "生产批次标签最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-template-size-standard-001",
+          "title": "模板与尺寸标准卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-first-article-check-001",
+          "title": "首件确认",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-repeat-step-card-001",
+          "title": "重复制作步骤卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-each-piece-check-001",
+          "title": "每件检查规则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-batch-consistency-check-001",
+          "title": "批次一致性复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-failed-batch-isolation-001",
+          "title": "失败批次隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0906",
+          "title": "小批量重复制作流程"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "production_batch_repetition"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": false,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_failed_batch",
+      "type": "strict",
+      "query": "批量制作中发现前三个都有同样问题，整批要怎么处理？",
+      "focus": "Production 主导整批暂停和隔离。",
+      "expected_guide": [
+        "DG-0906",
+        "DG-0908"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-failed-batch-isolation-001",
+        "production-workshop-nonconforming-item-quarantine-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0906",
+          "title": "小批量重复制作流程",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-batch-label-minimum-001",
+          "title": "生产批次标签最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-template-size-standard-001",
+          "title": "模板与尺寸标准卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-first-article-check-001",
+          "title": "首件确认",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-repeat-step-card-001",
+          "title": "重复制作步骤卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-each-piece-check-001",
+          "title": "每件检查规则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-batch-consistency-check-001",
+          "title": "批次一致性复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        },
+        {
+          "slug": "production-workshop-failed-batch-isolation-001",
+          "title": "失败批次隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0906"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0906",
+          "title": "小批量重复制作流程"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "production_batch_repetition"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": false,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_finished_quality_review",
+      "type": "strict",
+      "query": "成品准备使用前，质量复查最少看哪些项目？",
+      "focus": "Production 主导成品质量复查。",
+      "expected_guide": [
+        "DG-0907"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-edge-burr-check-001",
+        "production-workshop-function-check-before-release-001",
+        "production-workshop-loose-fastener-check-001",
+        "production-workshop-size-check-sheet-001",
+        "production-workshop-stability-check-sheet-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0907",
+          "title": "成品质量复查",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0908",
+          "title": "不合格品 / 返工 / 报废判断",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签",
+          "labels": [
+            "records",
+            "repair",
+            "storage"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-finished-goods-hold-zone-001",
+          "title": "成品待检区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-finished-goods-storage-transfer-001",
+          "title": "成品入库转交",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-size-check-sheet-001",
+          "title": "尺寸复查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-stability-check-sheet-001",
+          "title": "稳定性复查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-edge-burr-check-001",
+          "title": "锐边毛刺检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-loose-fastener-check-001",
+          "title": "松动连接复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-function-check-before-release-001",
+          "title": "成品放行前功能检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-quality-record-minimum-001",
+          "title": "质量检查记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0907",
+          "title": "成品质量复查"
+        },
+        {
+          "id": "DG-0908",
+          "title": "不合格品 / 返工 / 报废判断"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查"
+        },
+        {
+          "id": "DG-0058",
+          "title": "洪水退去后：别急着回家吃东西"
+        },
+        {
+          "id": "DG-0696",
+          "title": "物资交换不暴露库存"
+        },
+        {
+          "id": "DG-0699",
+          "title": "交换物品隔离检查"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "production_quality_release"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_edge_burr_release",
+      "type": "strict",
+      "query": "做好的东西边缘有毛刺和突出的钉子，能不能先放行使用？",
+      "focus": "Production 主导禁止放行；未受伤时 Medical 不应抢主位。",
+      "expected_guide": [
+        "DG-0907",
+        "DG-0908"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-edge-burr-check-001",
+        "production-workshop-rework-decision-line-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0907",
+          "title": "成品质量复查",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0908",
+          "title": "不合格品 / 返工 / 报废判断",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签",
+          "labels": [
+            "records",
+            "repair",
+            "storage"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-finished-goods-hold-zone-001",
+          "title": "成品待检区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-finished-goods-storage-transfer-001",
+          "title": "成品入库转交",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-size-check-sheet-001",
+          "title": "尺寸复查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-stability-check-sheet-001",
+          "title": "稳定性复查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-edge-burr-check-001",
+          "title": "锐边毛刺检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-loose-fastener-check-001",
+          "title": "松动连接复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-function-check-before-release-001",
+          "title": "成品放行前功能检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-quality-record-minimum-001",
+          "title": "质量检查记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0907",
+          "title": "成品质量复查"
+        },
+        {
+          "id": "DG-0908",
+          "title": "不合格品 / 返工 / 报废判断"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0058",
+          "title": "洪水退去后：别急着回家吃东西"
+        },
+        {
+          "id": "DG-0627",
+          "title": "垃圾渗漏后的地面清理"
+        },
+        {
+          "id": "DG-0079",
+          "title": "撤离后回取物资判断"
+        },
+        {
+          "id": "DG-0492",
+          "title": "洪水后饮水保护"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离"
+        },
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离"
+        },
+        {
+          "slug": "medical-storage-dressing-bandage-dry-pack-001",
+          "title": "敷料和绷带干燥封存"
+        }
+      ],
+      "profiles": [
+        "production_quality_release"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": false,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_loose_connection",
+      "type": "strict",
+      "query": "成品螺丝和扎带有松动，入库前怎么办？",
+      "focus": "Production 主导连接复查和返工，Storage 补入库前提。",
+      "expected_guide": [
+        "DG-0907",
+        "DG-0908"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-finished-goods-storage-transfer-001",
+        "production-workshop-loose-fastener-check-001",
+        "production-workshop-rework-decision-line-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0907",
+          "title": "成品质量复查",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0908",
+          "title": "不合格品 / 返工 / 报废判断",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏",
+          "labels": [
+            "records",
+            "repair",
+            "storage",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-finished-goods-hold-zone-001",
+          "title": "成品待检区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-finished-goods-storage-transfer-001",
+          "title": "成品入库转交",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-size-check-sheet-001",
+          "title": "尺寸复查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-stability-check-sheet-001",
+          "title": "稳定性复查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-edge-burr-check-001",
+          "title": "锐边毛刺检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-loose-fastener-check-001",
+          "title": "松动连接复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-function-check-before-release-001",
+          "title": "成品放行前功能检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        },
+        {
+          "slug": "production-workshop-quality-record-minimum-001",
+          "title": "质量检查记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0907",
+          "title": "成品质量复查"
+        },
+        {
+          "id": "DG-0908",
+          "title": "不合格品 / 返工 / 报废判断"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        },
+        {
+          "id": "DG-0699",
+          "title": "交换物品隔离检查"
+        },
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏"
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏"
+        },
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "food-storage-rodent-bite-isolation-001",
+          "title": "鼠咬食物批次隔离"
+        }
+      ],
+      "profiles": [
+        "manufacturing_connection_load_check",
+        "production_quality_release"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": false,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_rework_scrap",
+      "type": "strict",
+      "query": "不合格的半成品是返工、降级还是报废，怎么判断？",
+      "focus": "Production 主导返工、降级和报废入口，Waste 补去向。",
+      "expected_guide": [
+        "DG-0908"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-nonconforming-item-quarantine-001",
+        "production-workshop-rework-decision-line-001",
+        "production-workshop-scrap-decision-line-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0908",
+          "title": "不合格品 / 返工 / 报废判断",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0907",
+          "title": "成品质量复查",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签",
+          "labels": [
+            "records",
+            "repair",
+            "storage"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-nonconforming-item-quarantine-001",
+          "title": "不合格品隔离区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0908"
+        },
+        {
+          "slug": "production-workshop-waste-transfer-card-001",
+          "title": "生产废料转 Waste 交接卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0908"
+        },
+        {
+          "slug": "production-workshop-edge-burr-check-001",
+          "title": "锐边毛刺检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0908"
+        },
+        {
+          "slug": "production-workshop-rework-decision-line-001",
+          "title": "返工判断线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0908"
+        },
+        {
+          "slug": "production-workshop-scrap-decision-line-001",
+          "title": "报废判断线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0908"
+        },
+        {
+          "slug": "production-workshop-quality-record-minimum-001",
+          "title": "质量检查记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0908"
+        },
+        {
+          "slug": "production-workshop-failed-batch-isolation-001",
+          "title": "失败批次隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0908"
+        },
+        {
+          "slug": "production-workshop-finished-goods-hold-zone-001",
+          "title": "成品待检区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0907"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0908",
+          "title": "不合格品 / 返工 / 报废判断"
+        },
+        {
+          "id": "DG-0907",
+          "title": "成品质量复查"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0631",
+          "title": "陌生人交换物资低暴露流程"
+        },
+        {
+          "id": "DG-0627",
+          "title": "垃圾渗漏后的地面清理"
+        },
+        {
+          "id": "DG-0632",
+          "title": "门口玻璃碎裂隔离"
+        },
+        {
+          "id": "DG-0696",
+          "title": "物资交换不暴露库存"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "production_quality_release"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_low_light_stop",
+      "type": "strict",
+      "query": "工坊灯光很暗，但还想继续切割和钻孔，可以吗？",
+      "focus": "Production 触发停工，Safety、Fire、Power 可补边界。",
+      "expected_guide": [
+        "DG-0909"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-low-light-stop-line-001",
+        "production-workshop-risk-source-scan-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0909",
+          "title": "工坊安全记录与 near miss 复盘",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-risk-source-scan-001",
+          "title": "工坊风险源开工扫描",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-ppe-check-before-task-001",
+          "title": "生产防护用品检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-dust-spark-near-miss-log-001",
+          "title": "粉尘火花 near miss 记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-low-light-stop-line-001",
+          "title": "低照明生产停止线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-fatigue-stop-line-001",
+          "title": "疲劳生产停止线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-bystander-exclusion-log-001",
+          "title": "非操作人员隔离记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-incident-review-card-001",
+          "title": "工坊伤害与 near miss 复盘卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0909",
+          "title": "工坊安全记录与 near miss 复盘"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "manufacturing_workspace_safety",
+        "manufacturing_cutting_clamping",
+        "production_workshop_safety_incident"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_fatigue_stop",
+      "type": "strict",
+      "query": "连续做了很久开始手抖，还能继续做高风险加工吗？",
+      "focus": "Production 主导疲劳停工和任务降级。",
+      "expected_guide": [
+        "DG-0909",
+        "DG-0910"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-fatigue-stop-line-001",
+        "production-workshop-incident-review-card-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0909",
+          "title": "工坊安全记录与 near miss 复盘",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-risk-source-scan-001",
+          "title": "工坊风险源开工扫描",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-ppe-check-before-task-001",
+          "title": "生产防护用品检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-dust-spark-near-miss-log-001",
+          "title": "粉尘火花 near miss 记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-low-light-stop-line-001",
+          "title": "低照明生产停止线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-fatigue-stop-line-001",
+          "title": "疲劳生产停止线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-bystander-exclusion-log-001",
+          "title": "非操作人员隔离记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-incident-review-card-001",
+          "title": "工坊伤害与 near miss 复盘卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0909",
+          "title": "工坊安全记录与 near miss 复盘"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "production_workshop_safety_incident"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_near_miss_review",
+      "type": "strict",
+      "query": "刚才打磨时火花和碎屑差点伤到人，复工前要记录什么？",
+      "focus": "Production 主导 near miss 复盘，Medical/Fire 可补紧急处置。",
+      "expected_guide": [
+        "DG-0909"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-dust-spark-near-miss-log-001",
+        "production-workshop-incident-review-card-001",
+        "production-workshop-ppe-check-before-task-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0909",
+          "title": "工坊安全记录与 near miss 复盘",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查",
+          "labels": [
+            "manufacturing",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-risk-source-scan-001",
+          "title": "工坊风险源开工扫描",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-ppe-check-before-task-001",
+          "title": "生产防护用品检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-dust-spark-near-miss-log-001",
+          "title": "粉尘火花 near miss 记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-low-light-stop-line-001",
+          "title": "低照明生产停止线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-fatigue-stop-line-001",
+          "title": "疲劳生产停止线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-bystander-exclusion-log-001",
+          "title": "非操作人员隔离记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "production-workshop-incident-review-card-001",
+          "title": "工坊伤害与 near miss 复盘卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0909"
+        },
+        {
+          "slug": "repair-manufacturing-zone-layout-001",
+          "title": "低资源工坊最小分区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0871"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0909",
+          "title": "工坊安全记录与 near miss 复盘"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "manufacturing_workspace_safety",
+        "production_workshop_safety_incident"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "production_shift_handover",
+      "type": "strict",
+      "query": "下一班要接手未完成的工坊任务，交接卡最少写什么？",
+      "focus": "Production 主导班次级工坊交接。",
+      "expected_guide": [
+        "DG-0910"
+      ],
+      "expected_wiki_any": [
+        "production-workshop-next-action-handover-001",
+        "production-workshop-shift-handover-card-001",
+        "production-workshop-tool-state-handover-001",
+        "production-workshop-wip-handover-tag-001"
+      ],
+      "expected_primary_domains": [],
+      "actual_top_guides": [
+        {
+          "id": "DG-0910",
+          "title": "工坊任务交接",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-shift-handover-card-001",
+          "title": "工坊班次交接卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-tool-state-handover-001",
+          "title": "工具状态交接",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-next-action-handover-001",
+          "title": "下一步动作交接",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-wip-handover-tag-001",
+          "title": "半成品交接标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-unfinished-item-tag-001",
+          "title": "未完成品状态标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-task-board-minimum-001",
+          "title": "工坊任务板最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-end-of-day-status-log-001",
+          "title": "当日任务状态记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-fatigue-stop-line-001",
+          "title": "疲劳生产停止线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0910",
+          "title": "工坊任务交接"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "inventory_consumption",
+        "storage_inventory_handover",
+        "production_shift_handover"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Production Guide 为 top1，且至少一篇预期 Wiki 进入 evidence。",
+      "production_guide_hit": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_full_hit": true,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "Production 主导合理。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "observation_make_shelf",
+      "type": "observation",
+      "query": "我想做一个结实的架子，具体怎么切木板和连接？",
+      "focus": "Manufacturing 应主导具体制作，Production 只补流程和质检。",
+      "expected_guide": [],
+      "expected_wiki_any": [
+        "production-workshop-first-article-check-001",
+        "production-workshop-function-check-before-release-001"
+      ],
+      "expected_primary_domains": [
+        "manufacturing"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0873",
+          "title": "木材切割前固定与支撑",
+          "labels": [
+            "manufacturing",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "repair-manufacturing-clamp-before-processing-001",
+          "title": "切割和钻孔前固定夹持",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-saw-support-001",
+          "title": "木材重复锯切支撑",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-drill-position-001",
+          "title": "木材打孔定位和边距检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-measure-mark-001",
+          "title": "木材测量划线和切割线确认",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-cut-drill-clear-zone-001",
+          "title": "切割钻孔打磨前清场",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-selection-001",
+          "title": "木材制作前选择边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0873",
+          "title": "木材切割前固定与支撑"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "manufacturing_cutting_clamping"
+      ],
+      "pass_partial_fail": "partial",
+      "reason": "相邻领域主导合理，但 Production 补充 evidence 未进入。",
+      "production_guide_hit": false,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_full_hit": false,
+      "wiki_any_hit": false,
+      "guide_wiki_precise": false,
+      "production_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "预期主域=manufacturing；实际=manufacturing,repair,tools；Production补充=无。",
+      "root_cause_classification": [
+        "Production 补充 evidence 未进入"
+      ]
+    },
+    {
+      "id": "observation_broken_saw",
+      "type": "observation",
+      "query": "锯子坏了还能不能继续用，怎么修？",
+      "focus": "Tools/Repair 应主导维修，Production 只补停工和交接。",
+      "expected_guide": [],
+      "expected_wiki_any": [
+        "production-workshop-tool-count-before-work-001",
+        "production-workshop-tool-state-handover-001"
+      ],
+      "expected_primary_domains": [
+        "repair",
+        "tools"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离",
+          "labels": [
+            "repair",
+            "safety",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签",
+          "labels": [
+            "records",
+            "repair",
+            "safety",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0873",
+          "title": "木材切割前固定与支撑",
+          "labels": [
+            "manufacturing",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "repair-dangerous-tool-temporary-isolation-001",
+          "title": "危险工具临时隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0837"
+        },
+        {
+          "slug": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0837"
+        },
+        {
+          "slug": "repair-sharp-blunt-tool-zone-storage-001",
+          "title": "锐器和钝器分区存放",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0837"
+        },
+        {
+          "slug": "repair-damaged-tool-disable-tag-001",
+          "title": "工具破损后禁用标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0840"
+        },
+        {
+          "slug": "repair-damaged-tool-report-isolation-001",
+          "title": "工具损坏上报和隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0840"
+        },
+        {
+          "slug": "repair-manufacturing-clamp-before-processing-001",
+          "title": "切割和钻孔前固定夹持",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-saw-support-001",
+          "title": "木材重复锯切支撑",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-drill-position-001",
+          "title": "木材打孔定位和边距检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签"
+        },
+        {
+          "id": "DG-0873",
+          "title": "木材切割前固定与支撑"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "repair_tool_damage_isolation",
+        "manufacturing_cutting_clamping"
+      ],
+      "pass_partial_fail": "partial",
+      "reason": "相邻领域主导合理，但 Production 补充 evidence 未进入。",
+      "production_guide_hit": false,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_full_hit": false,
+      "wiki_any_hit": false,
+      "guide_wiki_precise": false,
+      "production_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "预期主域=repair,tools；实际=repair,safety,tools；Production补充=无。",
+      "root_cause_classification": [
+        "Production 补充 evidence 未进入"
+      ]
+    },
+    {
+      "id": "observation_salvaged_wood",
+      "type": "observation",
+      "query": "这块旧木板从废料堆拿来，能不能拿去做东西？",
+      "focus": "Waste/Manufacturing 应主导可用性判断，Production 补入工坊记录。",
+      "expected_guide": [],
+      "expected_wiki_any": [
+        "production-workshop-raw-material-intake-card-001"
+      ],
+      "expected_primary_domains": [
+        "waste",
+        "manufacturing"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0830",
+          "title": "草木灰来源审查和禁用",
+          "labels": [
+            "other"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0315",
+          "title": "废料存放上限",
+          "labels": [
+            "repair",
+            "safety",
+            "tools"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0058",
+          "title": "洪水退去后：别急着回家吃东西",
+          "labels": [
+            "safety"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "agriculture-wood-ash-fertilizer-boundary-001",
+          "title": "草木灰施用禁用边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0830"
+        },
+        {
+          "slug": "food-post-flood-food-high-risk-001",
+          "title": "洪水后食物默认高风险",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0058"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0830",
+          "title": "草木灰来源审查和禁用"
+        },
+        {
+          "id": "DG-0315",
+          "title": "废料存放上限"
+        },
+        {
+          "id": "DG-0058",
+          "title": "洪水退去后：别急着回家吃东西"
+        },
+        {
+          "id": "DG-0231",
+          "title": "厨房废料再生"
+        },
+        {
+          "id": "DG-0304",
+          "title": "木板和木棍再利用"
+        },
+        {
+          "id": "DG-0865",
+          "title": "撤离路线检查"
+        },
+        {
+          "id": "DG-0873",
+          "title": "木材切割前固定与支撑"
+        },
+        {
+          "id": "DG-0872",
+          "title": "材料再利用前安全判断"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [],
+      "pass_partial_fail": "fail",
+      "reason": "top1 未落在允许的相邻主域，cross-domain 主位不合理。",
+      "production_guide_hit": false,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_full_hit": false,
+      "wiki_any_hit": false,
+      "guide_wiki_precise": false,
+      "production_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "预期主域=manufacturing,waste；实际=other；Production补充=无。",
+      "root_cause_classification": [
+        "observation 主域偏离",
+        "Production 补充 evidence 未进入"
+      ]
+    },
+    {
+      "id": "observation_long_term_finished_storage",
+      "type": "observation",
+      "query": "检查合格的成品要长期放在哪里，怎么保存？",
+      "focus": "Storage 应主导长期保存，Production 补成品转交。",
+      "expected_guide": [],
+      "expected_wiki_any": [
+        "production-workshop-batch-label-minimum-001",
+        "production-workshop-finished-goods-storage-transfer-001"
+      ],
+      "expected_primary_domains": [
+        "storage"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签",
+          "labels": [
+            "records",
+            "repair",
+            "storage"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏",
+          "labels": [
+            "records",
+            "repair",
+            "storage",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查",
+          "labels": [
+            "energy",
+            "records"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "general-storage-zone-basic-layout-001",
+          "title": "长期储藏区基础分区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0895"
+        },
+        {
+          "slug": "general-storage-label-minimum-fields-001",
+          "title": "储藏标签最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0895"
+        },
+        {
+          "slug": "general-storage-moisture-daily-check-001",
+          "title": "储藏区潮湿日查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0895"
+        },
+        {
+          "slug": "general-storage-pest-rodent-check-001",
+          "title": "储藏区虫鼠巡查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0895"
+        },
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0895"
+        },
+        {
+          "slug": "repair-storage-shelf-overload-warning-001",
+          "title": "储藏架超载警示",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0895"
+        },
+        {
+          "slug": "repair-storage-tool-dry-rust-check-001",
+          "title": "工具干燥防锈储藏",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0899"
+        },
+        {
+          "slug": "repair-storage-sharp-tool-secure-box-001",
+          "title": "刃具和锋利工具安全盒",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0899"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0857",
+          "title": "LoRa 节点部署检查"
+        },
+        {
+          "id": "DG-0853",
+          "title": "小团队 WASH 分区运行"
+        },
+        {
+          "id": "DG-0627",
+          "title": "垃圾渗漏后的地面清理"
+        },
+        {
+          "id": "DG-0631",
+          "title": "陌生人交换物资低暴露流程"
+        },
+        {
+          "id": "DG-0632",
+          "title": "门口玻璃碎裂隔离"
+        },
+        {
+          "id": "DG-0696",
+          "title": "物资交换不暴露库存"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [
+        "production_quality_release"
+      ],
+      "pass_partial_fail": "partial",
+      "reason": "相邻领域主导合理，但 Production 补充 evidence 未进入。",
+      "production_guide_hit": false,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_full_hit": false,
+      "wiki_any_hit": false,
+      "guide_wiki_precise": false,
+      "production_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "预期主域=storage；实际=records,repair,storage；Production补充=无。",
+      "root_cause_classification": [
+        "Production 补充 evidence 未进入"
+      ]
+    },
+    {
+      "id": "observation_workshop_injury",
+      "type": "observation",
+      "query": "工坊切割时有人被划伤流血了，应该先做什么？",
+      "focus": "Medical 应主导止血处置，Production 只补停工和复盘。",
+      "expected_guide": [],
+      "expected_wiki_any": [
+        "production-workshop-daily-stop-shutdown-001",
+        "production-workshop-incident-review-card-001"
+      ],
+      "expected_primary_domains": [
+        "medical"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场",
+          "labels": [
+            "repair",
+            "safety",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0873",
+          "title": "木材切割前固定与支撑",
+          "labels": [
+            "manufacturing",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查",
+          "labels": [
+            "manufacturing",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0839"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0839"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0839"
+        },
+        {
+          "slug": "repair-manufacturing-clamp-before-processing-001",
+          "title": "切割和钻孔前固定夹持",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-saw-support-001",
+          "title": "木材重复锯切支撑",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-drill-position-001",
+          "title": "木材打孔定位和边距检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-measure-mark-001",
+          "title": "木材测量划线和切割线确认",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-cut-drill-clear-zone-001",
+          "title": "切割钻孔打磨前清场",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0839",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "id": "DG-0873",
+          "title": "木材切割前固定与支撑"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查"
+        },
+        {
+          "id": "DG-0878",
+          "title": "工坊收工与工具封存"
+        },
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查"
+        },
+        {
+          "id": "DG-0909",
+          "title": "工坊安全记录与 near miss 复盘"
+        },
+        {
+          "id": "DG-0834",
+          "title": "锯切前固定与支撑"
+        },
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "repair-knife-saw-clear-zone-001",
+          "title": "刀锯作业前清场"
+        },
+        {
+          "slug": "repair-multi-person-repair-zone-boundary-001",
+          "title": "多人同时维修的分区边界"
+        },
+        {
+          "slug": "repair-bystander-position-boundary-001",
+          "title": "维修现场旁人站位边界"
+        },
+        {
+          "slug": "repair-work-zone-minimum-layout-001",
+          "title": "维修工作区最小布置"
+        },
+        {
+          "slug": "repair-temporary-workbench-stability-check-001",
+          "title": "临时工作台稳定性检查"
+        },
+        {
+          "slug": "repair-mixed-repair-material-risk-001",
+          "title": "维修材料混放风险"
+        },
+        {
+          "slug": "repair-floor-clutter-trip-check-001",
+          "title": "地面杂物和绊倒风险检查"
+        },
+        {
+          "slug": "repair-hand-drill-clear-zone-001",
+          "title": "手钻作业前清场"
+        }
+      ],
+      "profiles": [
+        "repair_site_clearance_boundary"
+      ],
+      "pass_partial_fail": "fail",
+      "reason": "top1 未落在允许的相邻主域，cross-domain 主位不合理。",
+      "production_guide_hit": false,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_full_hit": false,
+      "wiki_any_hit": false,
+      "guide_wiki_precise": false,
+      "production_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "预期主域=medical；实际=repair,safety,tools；Production补充=无。",
+      "root_cause_classification": [
+        "observation 主域偏离",
+        "Production 补充 evidence 未进入"
+      ]
+    },
+    {
+      "id": "observation_low_energy_schedule",
+      "type": "observation",
+      "query": "今天电量不够，工坊任务怎么安排？",
+      "focus": "Energy Management 或 Production 共主均合理。",
+      "expected_guide": [],
+      "expected_wiki_any": [
+        "production-workshop-daily-resource-budget-001",
+        "production-workshop-task-board-minimum-001"
+      ],
+      "expected_primary_domains": [
+        "energy",
+        "production"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0910",
+          "title": "工坊任务交接",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查",
+          "labels": [
+            "production",
+            "records",
+            "repair",
+            "tools"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-shift-handover-card-001",
+          "title": "工坊班次交接卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-tool-state-handover-001",
+          "title": "工具状态交接",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-next-action-handover-001",
+          "title": "下一步动作交接",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-wip-handover-tag-001",
+          "title": "半成品交接标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-unfinished-item-tag-001",
+          "title": "未完成品状态标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-task-board-minimum-001",
+          "title": "工坊任务板最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-end-of-day-status-log-001",
+          "title": "当日任务状态记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-fatigue-stop-line-001",
+          "title": "疲劳生产停止线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0910",
+          "title": "工坊任务交接"
+        },
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存"
+        },
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查"
+        },
+        {
+          "id": "DG-0909",
+          "title": "工坊安全记录与 near miss 复盘"
+        },
+        {
+          "id": "DG-0582",
+          "title": "手机低电量：固定时间开机联系"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查"
+        },
+        {
+          "id": "DG-0878",
+          "title": "工坊收工与工具封存"
+        },
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles": [],
+      "pass_partial_fail": "pass",
+      "reason": "相邻领域主导合理，且 Production Guide/Wiki 作为补充进入。",
+      "production_guide_hit": true,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_full_hit": false,
+      "wiki_any_hit": true,
+      "guide_wiki_precise": true,
+      "production_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "cross_domain_notes": "预期主域=energy,production；实际=production,records,repair,tools；Production补充=有。",
+      "root_cause_classification": []
+    }
+  ]
+}

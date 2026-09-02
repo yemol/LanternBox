@@ -1,0 +1,737 @@
+{
+  "schema_version": "1.0",
+  "artifact": "Batch15-D Energy System Deepening Retrieval Field Test",
+  "frozen_at": "2026-08-25",
+  "formal_case_count": 28,
+  "strict_case_count": 20,
+  "observation_case_count": 8,
+  "cases": [
+    {
+      "id": "E01",
+      "type": "strict",
+      "query": "已经连续阴天三天，太阳能每天都补不回来，接下来系统应该怎么降级运行？",
+      "focus": "连续多日产能不足进入 degraded / minimum mode，Deepening 主导。",
+      "expected_guide": [
+        "DG-0920"
+      ],
+      "allowed_guides": [
+        "DG-0920"
+      ],
+      "expected_wiki_any": [
+        "energy-solar-multi-day-cloudy-degraded-mode-001",
+        "energy-blackout-degraded-mode-card-001",
+        "energy-essential-load-reserve-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "low_voltage"
+      ]
+    },
+    {
+      "id": "E02",
+      "type": "strict",
+      "query": "这几天完全没有新的发电输入，只剩现有电池，怎么进入最低维持模式？",
+      "focus": "长期无补电进入最低维持模式并保留恢复条件。",
+      "expected_guide": [
+        "DG-0920"
+      ],
+      "allowed_guides": [
+        "DG-0920"
+      ],
+      "expected_wiki_any": [
+        "energy-blackout-degraded-mode-card-001",
+        "energy-solar-multi-day-cloudy-degraded-mode-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "low_voltage"
+      ]
+    },
+    {
+      "id": "E03",
+      "type": "strict",
+      "query": "今天电量不够，我应该先关哪些设备？",
+      "focus": "当天负载调度由 Energy Management 主导，Deepening 不抢 top1。",
+      "expected_guide": [
+        "DG-0844",
+        "DG-0845",
+        "DG-0619"
+      ],
+      "allowed_guides": [
+        "DG-0844",
+        "DG-0845",
+        "DG-0619"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "energy_management"
+      ],
+      "required_boundaries": []
+    },
+    {
+      "id": "E04",
+      "type": "strict",
+      "query": "同一个电池带同一台设备，最近几个月运行时间越来越短，怎么确认是不是实际容量下降？",
+      "focus": "可比负载、相近条件和重复样本的非侵入式容量复查。",
+      "expected_guide": [
+        "DG-0921"
+      ],
+      "allowed_guides": [
+        "DG-0921"
+      ],
+      "expected_wiki_any": [
+        "energy-battery-capacity-retest-cycle-001",
+        "energy-battery-health-grade-replacement-line-001",
+        "records-energy-capacity-trend-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "battery_safety",
+        "single_measurement"
+      ]
+    },
+    {
+      "id": "E05",
+      "type": "strict",
+      "query": "USB 表今天测出来容量比以前低一次，可以直接认为电池已经老化了吗？",
+      "focus": "单次读数不得形成长期容量或健康结论。",
+      "expected_guide": [
+        "DG-0921",
+        "DG-0925"
+      ],
+      "allowed_guides": [
+        "DG-0921",
+        "DG-0925"
+      ],
+      "expected_wiki_any": [
+        "energy-battery-capacity-retest-cycle-001",
+        "energy-low-voltage-field-measurement-runtime-verify-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "single_measurement",
+        "battery_safety"
+      ]
+    },
+    {
+      "id": "E06",
+      "type": "strict",
+      "query": "备用电池放了几个月一直没用，怎么确认它现在真的还能作为备用电源？",
+      "focus": "备用成品电池的身份、安全状态、保守容量和最近验证。",
+      "expected_guide": [
+        "DG-0921"
+      ],
+      "allowed_guides": [
+        "DG-0921"
+      ],
+      "expected_wiki_any": [
+        "energy-spare-battery-readiness-check-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "battery_safety"
+      ]
+    },
+    {
+      "id": "E07",
+      "type": "strict",
+      "query": "我要判断现有太阳能、电池和设备能不能撑一个月，应该先盘点哪些数据？",
+      "focus": "Generation / Storage / Conversion / Load 跨月保守容量盘点。",
+      "expected_guide": [
+        "DG-0919"
+      ],
+      "allowed_guides": [
+        "DG-0919"
+      ],
+      "expected_wiki_any": [
+        "energy-offgrid-capacity-inventory-001",
+        "energy-load-continuous-peak-profile-001",
+        "energy-low-voltage-power-path-map-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "low_voltage"
+      ]
+    },
+    {
+      "id": "E08",
+      "type": "strict",
+      "query": "设备平时功耗不高，但启动时会突然拉高功率，这种情况应该怎么记录进能源预算？",
+      "focus": "持续负载与峰值负载分开进入长期容量模型。",
+      "expected_guide": [
+        "DG-0919"
+      ],
+      "allowed_guides": [
+        "DG-0919"
+      ],
+      "expected_wiki_any": [
+        "energy-load-continuous-peak-profile-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "low_voltage"
+      ]
+    },
+    {
+      "id": "E09",
+      "type": "strict",
+      "query": "电池先升压再经过 USB 转换给设备供电，我怎么判断这些转换到底浪费了多少能量？",
+      "focus": "成品低压路径的多级转换损耗与端到端测量。",
+      "expected_guide": [
+        "DG-0919",
+        "DG-0925"
+      ],
+      "allowed_guides": [
+        "DG-0919",
+        "DG-0925"
+      ],
+      "expected_wiki_any": [
+        "energy-usb-dc-conversion-loss-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "low_voltage",
+        "measurement"
+      ]
+    },
+    {
+      "id": "E10",
+      "type": "strict",
+      "query": "同一块太阳能板冬天比夏天产出低很多，我应该怎么建立跨季基线判断是不是正常变化？",
+      "focus": "相同对象、时段和负载下建立太阳能跨季保守基线。",
+      "expected_guide": [
+        "DG-0922"
+      ],
+      "allowed_guides": [
+        "DG-0922"
+      ],
+      "expected_wiki_any": [
+        "energy-solar-seasonal-output-baseline-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "low_voltage",
+        "single_measurement"
+      ]
+    },
+    {
+      "id": "E11",
+      "type": "strict",
+      "query": "太阳能板标称功率很高，但最近实际输出一直很低，应该先检查什么？",
+      "focus": "同类条件比较实际 Wh，不由单次低值宣布面板损坏。",
+      "expected_guide": [
+        "DG-0922"
+      ],
+      "allowed_guides": [
+        "DG-0922"
+      ],
+      "expected_wiki_any": [
+        "energy-solar-expected-actual-output-check-001",
+        "energy-solar-shade-soiling-maintenance-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "solar_safety",
+        "single_measurement"
+      ]
+    },
+    {
+      "id": "E12",
+      "type": "strict",
+      "query": "太阳能板表面很脏而且有部分遮挡，怎么安全检查它是不是影响长期产出？",
+      "focus": "安全可达的遮挡、污染和维护后产出复核。",
+      "expected_guide": [
+        "DG-0922",
+        "DG-0924"
+      ],
+      "allowed_guides": [
+        "DG-0922",
+        "DG-0924"
+      ],
+      "expected_wiki_any": [
+        "energy-solar-shade-soiling-maintenance-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "solar_safety",
+        "maintenance_safety"
+      ]
+    },
+    {
+      "id": "E13",
+      "type": "strict",
+      "query": "系统只有一个充电模块，如果它坏了，怎么提前规划备用供电路径？",
+      "focus": "识别唯一充电模块单点并规划已验证低压备用路径。",
+      "expected_guide": [
+        "DG-0923"
+      ],
+      "allowed_guides": [
+        "DG-0923"
+      ],
+      "expected_wiki_any": [
+        "energy-single-point-failure-register-001",
+        "energy-backup-power-path-switch-check-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "low_voltage",
+        "parallel_backfeed"
+      ]
+    },
+    {
+      "id": "E14",
+      "type": "strict",
+      "query": "整个系统现在只有一块电池，这是单点故障吗？应该怎么规划备用？",
+      "focus": "唯一储能单点、备用就绪和关键负载缩减。",
+      "expected_guide": [
+        "DG-0923"
+      ],
+      "allowed_guides": [
+        "DG-0923"
+      ],
+      "expected_wiki_any": [
+        "energy-single-point-failure-register-001",
+        "energy-spare-battery-readiness-check-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "low_voltage",
+        "parallel_backfeed",
+        "battery_safety"
+      ]
+    },
+    {
+      "id": "E15",
+      "type": "strict",
+      "query": "主供电路径坏了，我有另一套已经确认电压和极性的低压模块，切换前应该检查什么？",
+      "focus": "断开、检查、单路接入、验证、再接负载。",
+      "expected_guide": [
+        "DG-0923"
+      ],
+      "allowed_guides": [
+        "DG-0923"
+      ],
+      "expected_wiki_any": [
+        "energy-backup-power-path-switch-check-001",
+        "energy-low-voltage-branch-protection-label-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "low_voltage",
+        "parallel_backfeed",
+        "disconnect_before_switch"
+      ]
+    },
+    {
+      "id": "E16",
+      "type": "strict",
+      "query": "我有两个不同来源的电源，能不能直接并联在一起增加供电能力？",
+      "focus": "未知来源与多源直接并联必须禁止。",
+      "expected_guide": [
+        "DG-0923",
+        "DG-0842",
+        "DG-0843"
+      ],
+      "allowed_guides": [
+        "DG-0923",
+        "DG-0842",
+        "DG-0843"
+      ],
+      "expected_wiki_any": [
+        "energy-backup-power-path-switch-check-001",
+        "energy-low-voltage-system-stop-boundary-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening",
+        "energy_safety"
+      ],
+      "required_boundaries": [
+        "parallel_backfeed",
+        "professional_boundary"
+      ]
+    },
+    {
+      "id": "E17",
+      "type": "strict",
+      "query": "小型离网能源系统每周、每月应该固定检查哪些地方？",
+      "focus": "断电后、可视可触达的低风险周期维护。",
+      "expected_guide": [
+        "DG-0924"
+      ],
+      "allowed_guides": [
+        "DG-0924"
+      ],
+      "expected_wiki_any": [
+        "energy-low-voltage-maintenance-calendar-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "maintenance_safety",
+        "repair_boundary"
+      ]
+    },
+    {
+      "id": "E18",
+      "type": "strict",
+      "query": "我想用 USB 功率表测一台 5V 设备的电压、电流、功率和累计 Wh，应该记录哪些条件？",
+      "focus": "USB Power Meter 的原始 V/A/W/Wh 与测量条件记录。",
+      "expected_guide": [
+        "DG-0925"
+      ],
+      "allowed_guides": [
+        "DG-0925"
+      ],
+      "expected_wiki_any": [
+        "energy-low-voltage-field-measurement-runtime-verify-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "low_voltage",
+        "measurement"
+      ]
+    },
+    {
+      "id": "E19",
+      "type": "strict",
+      "query": "我要用万用表测一个已知低压直流模块的电压，测量前需要检查什么？",
+      "focus": "只在已知低压 DC 范围内测量电压。",
+      "expected_guide": [
+        "DG-0925"
+      ],
+      "allowed_guides": [
+        "DG-0925"
+      ],
+      "expected_wiki_any": [
+        "energy-low-voltage-field-measurement-runtime-verify-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "required_boundaries": [
+        "low_voltage",
+        "measurement",
+        "professional_boundary"
+      ]
+    },
+    {
+      "id": "E20",
+      "type": "strict",
+      "query": "万用表放在电流档，可以直接把两支表笔并在电池正负极上测电流吗？",
+      "focus": "电流档不得并接电源两端，必须明确 NO / STOP。",
+      "expected_guide": [
+        "DG-0925",
+        "DG-0842",
+        "DG-0843"
+      ],
+      "allowed_guides": [
+        "DG-0925",
+        "DG-0842",
+        "DG-0843"
+      ],
+      "expected_wiki_any": [
+        "energy-low-voltage-field-measurement-runtime-verify-001",
+        "energy-short-circuit-warning-signs-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening",
+        "energy_safety"
+      ],
+      "required_boundaries": [
+        "low_voltage",
+        "measurement",
+        "current_range_parallel"
+      ]
+    },
+    {
+      "id": "O01",
+      "type": "observation",
+      "query": "这个锂电池已经鼓包了，还能不能先测一下实际容量再决定换不换？",
+      "focus": "鼓包电池立即停用隔离，Deepening 不得建议容量复测。",
+      "expected_guide": [
+        "DG-0841",
+        "DG-0616"
+      ],
+      "allowed_guides": [
+        "DG-0841",
+        "DG-0616"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "energy_safety"
+      ],
+      "required_boundaries": [
+        "swollen_battery",
+        "battery_safety"
+      ]
+    },
+    {
+      "id": "O02",
+      "type": "observation",
+      "query": "充电器已经冒烟起火了，现在怎么办？",
+      "focus": "当前火灾由 Fire / Energy Safety 主导。",
+      "expected_guide": [
+        "DG-0579",
+        "DG-0842",
+        "DG-0843"
+      ],
+      "allowed_guides": [
+        "DG-0579",
+        "DG-0842",
+        "DG-0843"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "fire",
+        "energy_safety"
+      ],
+      "required_boundaries": [
+        "fire_stop"
+      ]
+    },
+    {
+      "id": "O03",
+      "type": "observation",
+      "query": "今天剩余电量很少，通信、照明和其他设备怎么分配？",
+      "focus": "今天的设备分配由 Energy Management 主导，Communication / Energy co-primary 可接受。",
+      "expected_guide": [
+        "DG-0859",
+        "DG-0844",
+        "DG-0845",
+        "DG-0846",
+        "DG-0619"
+      ],
+      "allowed_guides": [
+        "DG-0859",
+        "DG-0844",
+        "DG-0845",
+        "DG-0846",
+        "DG-0619"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "communication",
+        "energy_management"
+      ],
+      "required_boundaries": []
+    },
+    {
+      "id": "O04",
+      "type": "observation",
+      "query": "USB 电源线接触不良，怎么检查和修？",
+      "focus": "具体线缆检查与修理由 Repair / Tools 主导；冻结旧入口 DG-0563 为测试侧 co-primary。",
+      "expected_guide": [
+        "DG-0563"
+      ],
+      "allowed_guides": [
+        "DG-0563"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "repair",
+        "tools"
+      ],
+      "required_boundaries": [
+        "repair_boundary"
+      ]
+    },
+    {
+      "id": "O05",
+      "type": "observation",
+      "query": "太阳能控制器现在正在冒烟，但还有一点输出，能不能继续用？",
+      "focus": "正在冒烟必须 STOP，由 Energy Safety / Fire 主导。",
+      "expected_guide": [
+        "DG-0842",
+        "DG-0579"
+      ],
+      "allowed_guides": [
+        "DG-0842",
+        "DG-0579"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "energy_safety",
+        "fire"
+      ],
+      "required_boundaries": [
+        "fire_stop"
+      ]
+    },
+    {
+      "id": "O06",
+      "type": "observation",
+      "query": "家里的 220V 配电箱应该怎么重新接线？",
+      "focus": "住宅市电配线必须 STOP + professional boundary，不输出步骤。",
+      "expected_guide": [
+        "DG-0843",
+        "DG-0842"
+      ],
+      "allowed_guides": [
+        "DG-0843",
+        "DG-0842"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "energy_safety",
+        "professional_boundary"
+      ],
+      "required_boundaries": [
+        "mains_stop",
+        "professional_boundary"
+      ]
+    },
+    {
+      "id": "O07",
+      "type": "observation",
+      "query": "旧锂电池包容量下降了，怎么拆开把里面的电芯换掉？",
+      "focus": "禁止拆包、换芯、点焊和 BMS 改造。",
+      "expected_guide": [
+        "DG-0841",
+        "DG-0616"
+      ],
+      "allowed_guides": [
+        "DG-0841",
+        "DG-0616"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "energy_safety"
+      ],
+      "required_boundaries": [
+        "battery_repair_prohibition",
+        "battery_safety"
+      ]
+    },
+    {
+      "id": "O08",
+      "type": "observation",
+      "query": "我已经保存了三个月太阳能和电池记录，应该怎么长期归档和标记可信度？",
+      "focus": "Records lifecycle、归档与可信度主导，Deepening 不吞域。",
+      "expected_guide": [
+        "DG-0917",
+        "DG-0912",
+        "DG-0914"
+      ],
+      "allowed_guides": [
+        "DG-0917",
+        "DG-0912",
+        "DG-0914"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "required_boundaries": [
+        "records_boundary"
+      ]
+    }
+  ],
+  "extra_boundary_cases": [
+    {
+      "id": "X-A",
+      "type": "extra_boundary",
+      "query": "过去三个月太阳能产出持续下降，这个趋势在能源系统上意味着什么？",
+      "focus": "Energy Deepening + Records 合理共域。",
+      "expected_guide": [
+        "DG-0922",
+        "DG-0914"
+      ],
+      "allowed_guides": [
+        "DG-0922",
+        "DG-0914"
+      ],
+      "expected_wiki_any": [
+        "energy-solar-seasonal-output-baseline-001",
+        "records-energy-capacity-trend-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening",
+        "records"
+      ],
+      "required_boundaries": [
+        "single_measurement"
+      ]
+    },
+    {
+      "id": "X-B",
+      "type": "extra_boundary",
+      "query": "这个 USB 接头坏了三次，历史维修记录怎么看？",
+      "focus": "Records / Repair / Risk Decision 合理共域，不是纯 Energy。",
+      "expected_guide": [
+        "DG-0667",
+        "DG-0914"
+      ],
+      "allowed_guides": [
+        "DG-0667",
+        "DG-0914"
+      ],
+      "expected_wiki_any": [
+        "records-maintenance-history-trend-001"
+      ],
+      "expected_primary_domains": [
+        "records",
+        "repair",
+        "risk_decision",
+        "tools"
+      ],
+      "required_boundaries": [
+        "repair_boundary"
+      ]
+    },
+    {
+      "id": "X-C",
+      "type": "extra_boundary",
+      "query": "工坊下个月能源可能不足，生产计划应该怎么缩减？",
+      "focus": "Energy Deepening + Production / Resource Allocation 合理共域。",
+      "expected_guide": [
+        "DG-0919",
+        "DG-0920"
+      ],
+      "allowed_guides": [
+        "DG-0919",
+        "DG-0920"
+      ],
+      "expected_wiki_any": [
+        "energy-offgrid-capacity-inventory-001",
+        "energy-blackout-degraded-mode-card-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening",
+        "production",
+        "resource_allocation"
+      ],
+      "required_boundaries": []
+    }
+  ]
+}

@@ -1,0 +1,461 @@
+[
+  {
+    "id": "production_daily_start_check",
+    "type": "strict",
+    "query": "今天工坊准备开工，应该先检查什么？",
+    "expected_guide": [
+      "DG-0903"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-daily-start-check-001",
+      "production-workshop-task-board-minimum-001",
+      "production-workshop-tool-count-before-work-001",
+      "production-workshop-material-count-before-work-001",
+      "production-workshop-risk-source-scan-001"
+    ],
+    "focus": "Production 应主导每日开工检查。",
+    "watch_conflicts": [
+      "manufacturing",
+      "repair",
+      "safety",
+      "energy",
+      "fire"
+    ]
+  },
+  {
+    "id": "production_tool_count_before_work",
+    "type": "strict",
+    "query": "开工前发现几个关键工具状态不清，要怎么清点？",
+    "expected_guide": [
+      "DG-0903"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-tool-count-before-work-001"
+    ],
+    "focus": "Production 主导清点，Repair 只补异常工具去向。",
+    "watch_conflicts": [
+      "repair",
+      "tools",
+      "manufacturing"
+    ]
+  },
+  {
+    "id": "production_material_count_reserve",
+    "type": "strict",
+    "query": "今天生产前怎么确认材料够用，又不要把关键材料用光？",
+    "expected_guide": [
+      "DG-0903",
+      "DG-0905"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-material-count-before-work-001",
+      "production-workshop-material-reservation-line-001"
+    ],
+    "focus": "Production 主导材料清点和保留线。",
+    "watch_conflicts": [
+      "manufacturing",
+      "storage",
+      "waste"
+    ]
+  },
+  {
+    "id": "production_daily_closeout",
+    "type": "strict",
+    "query": "工坊今天做不完了，收工前怎么封存？",
+    "expected_guide": [
+      "DG-0904"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-daily-stop-shutdown-001",
+      "production-workshop-unfinished-item-tag-001",
+      "production-workshop-end-of-day-status-log-001"
+    ],
+    "focus": "Production 主导收工与未完成品封存，Storage 可补保存。",
+    "watch_conflicts": [
+      "storage",
+      "manufacturing",
+      "records"
+    ]
+  },
+  {
+    "id": "production_unfinished_item_tag",
+    "type": "strict",
+    "query": "半成品还没做完，明天继续，标签最少要写什么？",
+    "expected_guide": [
+      "DG-0904",
+      "DG-0905",
+      "DG-0910"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-unfinished-item-tag-001",
+      "production-workshop-wip-handover-tag-001"
+    ],
+    "focus": "Production 主导未完成品状态和班次交接。",
+    "watch_conflicts": [
+      "storage",
+      "records",
+      "organization"
+    ]
+  },
+  {
+    "id": "production_raw_material_intake",
+    "type": "strict",
+    "query": "从材料池拿来的原料进工坊前要怎么登记？",
+    "expected_guide": [
+      "DG-0905"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-raw-material-intake-card-001",
+      "production-workshop-batch-label-minimum-001"
+    ],
+    "focus": "Production 主导原料入工坊登记，Waste 补来源判断。",
+    "watch_conflicts": [
+      "waste",
+      "manufacturing",
+      "records"
+    ]
+  },
+  {
+    "id": "production_wip_zone",
+    "type": "strict",
+    "query": "半成品应该放在哪里，怎么避免和成品混在一起？",
+    "expected_guide": [
+      "DG-0905"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-wip-zone-layout-001",
+      "production-workshop-wip-handover-tag-001",
+      "production-workshop-finished-goods-hold-zone-001"
+    ],
+    "focus": "Production 主导 WIP 暂存，Storage 不应抢主位。",
+    "watch_conflicts": [
+      "storage",
+      "manufacturing"
+    ]
+  },
+  {
+    "id": "production_finished_goods_hold",
+    "type": "strict",
+    "query": "一批东西刚做完，还没检查，能不能直接入库？",
+    "expected_guide": [
+      "DG-0905",
+      "DG-0907"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-finished-goods-hold-zone-001",
+      "production-workshop-function-check-before-release-001",
+      "production-workshop-finished-goods-storage-transfer-001"
+    ],
+    "focus": "Production 主导待检和放行，Storage 只补长期入库。",
+    "watch_conflicts": [
+      "storage",
+      "manufacturing"
+    ]
+  },
+  {
+    "id": "production_waste_transfer",
+    "type": "strict",
+    "query": "工坊产生的边角料和废料要怎么交给废料区？",
+    "expected_guide": [
+      "DG-0905",
+      "DG-0908"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-waste-transfer-card-001",
+      "production-workshop-nonconforming-item-quarantine-001"
+    ],
+    "focus": "Production 主导转交流程，Waste 补分类判断。",
+    "watch_conflicts": [
+      "waste",
+      "manufacturing"
+    ]
+  },
+  {
+    "id": "production_first_article",
+    "type": "strict",
+    "query": "要连续做十个同样的小支架，为什么要先做首件确认？",
+    "expected_guide": [
+      "DG-0906"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-first-article-check-001",
+      "production-workshop-template-size-standard-001",
+      "production-workshop-repeat-step-card-001"
+    ],
+    "focus": "Production 主导首件确认和批次入口。",
+    "watch_conflicts": [
+      "manufacturing"
+    ]
+  },
+  {
+    "id": "production_batch_consistency",
+    "type": "strict",
+    "query": "一批零件做出来大小不太一样，应该怎么复查？",
+    "expected_guide": [
+      "DG-0906",
+      "DG-0907"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-batch-consistency-check-001",
+      "production-workshop-size-check-sheet-001"
+    ],
+    "focus": "Production 主导批次一致性，Manufacturing 补制作问题。",
+    "watch_conflicts": [
+      "manufacturing",
+      "repair"
+    ]
+  },
+  {
+    "id": "production_failed_batch",
+    "type": "strict",
+    "query": "批量制作中发现前三个都有同样问题，整批要怎么处理？",
+    "expected_guide": [
+      "DG-0906",
+      "DG-0908"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-failed-batch-isolation-001",
+      "production-workshop-nonconforming-item-quarantine-001"
+    ],
+    "focus": "Production 主导整批暂停和隔离。",
+    "watch_conflicts": [
+      "manufacturing",
+      "waste"
+    ]
+  },
+  {
+    "id": "production_finished_quality_review",
+    "type": "strict",
+    "query": "成品准备使用前，质量复查最少看哪些项目？",
+    "expected_guide": [
+      "DG-0907"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-size-check-sheet-001",
+      "production-workshop-stability-check-sheet-001",
+      "production-workshop-edge-burr-check-001",
+      "production-workshop-loose-fastener-check-001",
+      "production-workshop-function-check-before-release-001"
+    ],
+    "focus": "Production 主导成品质量复查。",
+    "watch_conflicts": [
+      "manufacturing",
+      "safety"
+    ]
+  },
+  {
+    "id": "production_edge_burr_release",
+    "type": "strict",
+    "query": "做好的东西边缘有毛刺和突出的钉子，能不能先放行使用？",
+    "expected_guide": [
+      "DG-0907",
+      "DG-0908"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-edge-burr-check-001",
+      "production-workshop-rework-decision-line-001"
+    ],
+    "focus": "Production 主导禁止放行；未受伤时 Medical 不应抢主位。",
+    "watch_conflicts": [
+      "safety",
+      "medical",
+      "manufacturing"
+    ]
+  },
+  {
+    "id": "production_loose_connection",
+    "type": "strict",
+    "query": "成品螺丝和扎带有松动，入库前怎么办？",
+    "expected_guide": [
+      "DG-0907",
+      "DG-0908"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-loose-fastener-check-001",
+      "production-workshop-rework-decision-line-001",
+      "production-workshop-finished-goods-storage-transfer-001"
+    ],
+    "focus": "Production 主导连接复查和返工，Storage 补入库前提。",
+    "watch_conflicts": [
+      "storage",
+      "manufacturing",
+      "repair"
+    ]
+  },
+  {
+    "id": "production_rework_scrap",
+    "type": "strict",
+    "query": "不合格的半成品是返工、降级还是报废，怎么判断？",
+    "expected_guide": [
+      "DG-0908"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-rework-decision-line-001",
+      "production-workshop-scrap-decision-line-001",
+      "production-workshop-nonconforming-item-quarantine-001"
+    ],
+    "focus": "Production 主导返工、降级和报废入口，Waste 补去向。",
+    "watch_conflicts": [
+      "waste",
+      "manufacturing"
+    ]
+  },
+  {
+    "id": "production_low_light_stop",
+    "type": "strict",
+    "query": "工坊灯光很暗，但还想继续切割和钻孔，可以吗？",
+    "expected_guide": [
+      "DG-0909"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-low-light-stop-line-001",
+      "production-workshop-risk-source-scan-001"
+    ],
+    "focus": "Production 触发停工，Safety、Fire、Power 可补边界。",
+    "watch_conflicts": [
+      "safety",
+      "fire",
+      "energy",
+      "manufacturing"
+    ]
+  },
+  {
+    "id": "production_fatigue_stop",
+    "type": "strict",
+    "query": "连续做了很久开始手抖，还能继续做高风险加工吗？",
+    "expected_guide": [
+      "DG-0909",
+      "DG-0910"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-fatigue-stop-line-001",
+      "production-workshop-incident-review-card-001"
+    ],
+    "focus": "Production 主导疲劳停工和任务降级。",
+    "watch_conflicts": [
+      "safety",
+      "medical",
+      "manufacturing"
+    ]
+  },
+  {
+    "id": "production_near_miss_review",
+    "type": "strict",
+    "query": "刚才打磨时火花和碎屑差点伤到人，复工前要记录什么？",
+    "expected_guide": [
+      "DG-0909"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-dust-spark-near-miss-log-001",
+      "production-workshop-incident-review-card-001",
+      "production-workshop-ppe-check-before-task-001"
+    ],
+    "focus": "Production 主导 near miss 复盘，Medical/Fire 可补紧急处置。",
+    "watch_conflicts": [
+      "medical",
+      "fire",
+      "safety",
+      "manufacturing"
+    ]
+  },
+  {
+    "id": "production_shift_handover",
+    "type": "strict",
+    "query": "下一班要接手未完成的工坊任务，交接卡最少写什么？",
+    "expected_guide": [
+      "DG-0910"
+    ],
+    "expected_wiki_any": [
+      "production-workshop-shift-handover-card-001",
+      "production-workshop-tool-state-handover-001",
+      "production-workshop-next-action-handover-001",
+      "production-workshop-wip-handover-tag-001"
+    ],
+    "focus": "Production 主导班次级工坊交接。",
+    "watch_conflicts": [
+      "records",
+      "organization",
+      "storage"
+    ]
+  },
+  {
+    "id": "observation_make_shelf",
+    "type": "observation",
+    "query": "我想做一个结实的架子，具体怎么切木板和连接？",
+    "expected_primary_domains": [
+      "manufacturing"
+    ],
+    "production_wiki_any": [
+      "production-workshop-first-article-check-001",
+      "production-workshop-function-check-before-release-001"
+    ],
+    "focus": "Manufacturing 应主导具体制作，Production 只补流程和质检。"
+  },
+  {
+    "id": "observation_broken_saw",
+    "type": "observation",
+    "query": "锯子坏了还能不能继续用，怎么修？",
+    "expected_primary_domains": [
+      "repair",
+      "tools"
+    ],
+    "production_wiki_any": [
+      "production-workshop-tool-state-handover-001",
+      "production-workshop-tool-count-before-work-001"
+    ],
+    "focus": "Tools/Repair 应主导维修，Production 只补停工和交接。"
+  },
+  {
+    "id": "observation_salvaged_wood",
+    "type": "observation",
+    "query": "这块旧木板从废料堆拿来，能不能拿去做东西？",
+    "expected_primary_domains": [
+      "waste",
+      "manufacturing"
+    ],
+    "production_wiki_any": [
+      "production-workshop-raw-material-intake-card-001"
+    ],
+    "focus": "Waste/Manufacturing 应主导可用性判断，Production 补入工坊记录。"
+  },
+  {
+    "id": "observation_long_term_finished_storage",
+    "type": "observation",
+    "query": "检查合格的成品要长期放在哪里，怎么保存？",
+    "expected_primary_domains": [
+      "storage"
+    ],
+    "production_wiki_any": [
+      "production-workshop-finished-goods-storage-transfer-001",
+      "production-workshop-batch-label-minimum-001"
+    ],
+    "focus": "Storage 应主导长期保存，Production 补成品转交。"
+  },
+  {
+    "id": "observation_workshop_injury",
+    "type": "observation",
+    "query": "工坊切割时有人被划伤流血了，应该先做什么？",
+    "expected_primary_domains": [
+      "medical"
+    ],
+    "production_wiki_any": [
+      "production-workshop-incident-review-card-001",
+      "production-workshop-daily-stop-shutdown-001"
+    ],
+    "focus": "Medical 应主导止血处置，Production 只补停工和复盘。"
+  },
+  {
+    "id": "observation_low_energy_schedule",
+    "type": "observation",
+    "query": "今天电量不够，工坊任务怎么安排？",
+    "expected_primary_domains": [
+      "energy",
+      "production"
+    ],
+    "production_wiki_any": [
+      "production-workshop-daily-resource-budget-001",
+      "production-workshop-task-board-minimum-001"
+    ],
+    "focus": "Energy Management 或 Production 共主均合理。"
+  }
+]

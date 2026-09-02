@@ -1,0 +1,4076 @@
+{
+  "generated_at": "2026-08-24T14:58:40.225143+00:00",
+  "scope": "Batch14-D read-only retrieval field test; no answer generation",
+  "verification": {
+    "wiki_audit": {
+      "markdown": 1139,
+      "pocketbase": 1139,
+      "errors": 0,
+      "warnings": 0,
+      "advisories": 0
+    },
+    "guide_audit": {
+      "guides": 844,
+      "errors": 0,
+      "warnings": 0,
+      "advisories": 0
+    },
+    "retrieval_contracts": {
+      "passed": 9,
+      "failed": 0
+    }
+  },
+  "summary": {
+    "total": 26,
+    "strict_total": 20,
+    "observation_total": 6,
+    "pass": 23,
+    "partial": 3,
+    "fail": 0,
+    "strict_pass": 20,
+    "strict_partial": 0,
+    "strict_fail": 0,
+    "observation_pass": 3,
+    "observation_partial": 3,
+    "observation_fail": 0,
+    "records_primary_rate": "100.0%",
+    "expected_guide_hit_rate": "100.0%",
+    "expected_guide_top1_rate": "100.0%",
+    "wiki_any_hit_rate": "100.0%",
+    "wiki_full_hit_rate": "75.0%",
+    "guide_wiki_precise_rate": "100.0%",
+    "cross_domain_reasonable_rate": "100.0%",
+    "lifecycle_evidence_retrieval_correctness": "100.0%",
+    "lifecycle_applicable_cases": 4,
+    "lifecycle_semantic_violation_count": 0,
+    "version_correctness": "100.0%",
+    "knowledge_promotion_gate_correctness": "100.0%",
+    "skill_authorization_boundary_correctness": "100.0%",
+    "dangerous_suggestion_count": 0,
+    "kiwix_override_count": 0,
+    "safety_rate": "100.0%",
+    "fallback_rate": "100.0%",
+    "record_check_rate": "100.0%",
+    "root_cause_counts": {
+      "R. 合理 observation，不修": 6
+    }
+  },
+  "lifecycle_metrics": {
+    "raw_auto_promoted_count": 0,
+    "unverified_to_current_count": 0,
+    "single_log_to_verified_count": 0,
+    "single_experience_to_current_count": 0,
+    "superseded_used_as_default_count": 0,
+    "archived_used_as_default_count": 0,
+    "rollback_without_revalidation_count": 0,
+    "automatic_skill_authorization_count": 0
+  },
+  "cases": [
+    {
+      "id": "S01",
+      "type": "strict",
+      "query": "我刚记录了一件现场异常，最少应该写哪些信息？",
+      "focus": "原始现场记录最小字段，Records 主导。",
+      "expected_guide": [
+        "DG-0911",
+        "DG-0912"
+      ],
+      "expected_wiki_any": [
+        "general-event-log-001",
+        "records-lifecycle-state-model-001",
+        "records-raw-record-minimum-fields-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0911",
+          "title": "每日跨域运行摘要",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-raw-record-minimum-fields-001",
+          "title": "原始现场记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-review-verification-checklist-001",
+          "title": "记录复核与验证检查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-source-direct-reported-boundary-001",
+          "title": "亲历、转述与设备来源边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-contradictory-evidence-handling-001",
+          "title": "冲突记录保留与复核",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "general-record-trust-label-001",
+          "title": "记录可信度标注",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-medical-observation-handover-boundary-001",
+          "title": "医疗观察交接与隐私边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查"
+        },
+        {
+          "id": "DG-0911",
+          "title": "每日跨域运行摘要"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "records-daily-cross-domain-summary-001",
+          "title": "每日跨域运行摘要"
+        }
+      ],
+      "profiles_triggered": [
+        "records_capture_trust_summary"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S02",
+      "type": "strict",
+      "query": "这条记录是别人告诉我的，不是我亲眼看到的，应该怎么标？",
+      "focus": "亲历、转述与设备来源边界，Records 主导。",
+      "expected_guide": [
+        "DG-0912"
+      ],
+      "expected_wiki_any": [
+        "general-record-trust-label-001",
+        "records-source-direct-reported-boundary-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0911",
+          "title": "每日跨域运行摘要",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-raw-record-minimum-fields-001",
+          "title": "原始现场记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-review-verification-checklist-001",
+          "title": "记录复核与验证检查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-source-direct-reported-boundary-001",
+          "title": "亲历、转述与设备来源边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-contradictory-evidence-handling-001",
+          "title": "冲突记录保留与复核",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "general-record-trust-label-001",
+          "title": "记录可信度标注",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-medical-observation-handover-boundary-001",
+          "title": "医疗观察交接与隐私边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查"
+        },
+        {
+          "id": "DG-0911",
+          "title": "每日跨域运行摘要"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "records-daily-cross-domain-summary-001",
+          "title": "每日跨域运行摘要"
+        }
+      ],
+      "profiles_triggered": [
+        "records_capture_trust_summary"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S03",
+      "type": "strict",
+      "query": "设备自动记录了一个异常值，可以直接当成已经确认的事实吗？",
+      "focus": "设备 metadata 不等于事实，不能自动 VERIFIED。",
+      "expected_guide": [
+        "DG-0912"
+      ],
+      "expected_wiki_any": [
+        "records-lifecycle-state-model-001",
+        "records-review-verification-checklist-001",
+        "records-source-direct-reported-boundary-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0911",
+          "title": "每日跨域运行摘要",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-raw-record-minimum-fields-001",
+          "title": "原始现场记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-review-verification-checklist-001",
+          "title": "记录复核与验证检查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-source-direct-reported-boundary-001",
+          "title": "亲历、转述与设备来源边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-contradictory-evidence-handling-001",
+          "title": "冲突记录保留与复核",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "general-record-trust-label-001",
+          "title": "记录可信度标注",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-medical-observation-handover-boundary-001",
+          "title": "医疗观察交接与隐私边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查"
+        },
+        {
+          "id": "DG-0911",
+          "title": "每日跨域运行摘要"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "records-daily-cross-domain-summary-001",
+          "title": "每日跨域运行摘要"
+        }
+      ],
+      "profiles_triggered": [
+        "records_capture_trust_summary"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S04",
+      "type": "strict",
+      "query": "两份记录对同一件事说法不一样，应该删掉哪一份？",
+      "focus": "冲突记录并列保留，不通过删除制造一致。",
+      "expected_guide": [
+        "DG-0912"
+      ],
+      "expected_wiki_any": [
+        "records-contradictory-evidence-handling-001",
+        "records-review-verification-checklist-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0911",
+          "title": "每日跨域运行摘要",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-raw-record-minimum-fields-001",
+          "title": "原始现场记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-review-verification-checklist-001",
+          "title": "记录复核与验证检查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-source-direct-reported-boundary-001",
+          "title": "亲历、转述与设备来源边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-contradictory-evidence-handling-001",
+          "title": "冲突记录保留与复核",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "general-record-trust-label-001",
+          "title": "记录可信度标注",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-medical-observation-handover-boundary-001",
+          "title": "医疗观察交接与隐私边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查"
+        },
+        {
+          "id": "DG-0911",
+          "title": "每日跨域运行摘要"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "records-daily-cross-domain-summary-001",
+          "title": "每日跨域运行摘要"
+        }
+      ],
+      "profiles_triggered": [
+        "records_capture_trust_summary"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S05",
+      "type": "strict",
+      "query": "今天发生了很多事，我想整理一份跨领域的日终摘要，应该保留什么？",
+      "focus": "每日跨域摘要，Records 主导。",
+      "expected_guide": [
+        "DG-0911"
+      ],
+      "expected_wiki_any": [
+        "general-event-log-001",
+        "records-daily-cross-domain-summary-001",
+        "records-raw-record-minimum-fields-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0911",
+          "title": "每日跨域运行摘要",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "normal"
+        },
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-daily-cross-domain-summary-001",
+          "title": "每日跨域运行摘要",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0911"
+        },
+        {
+          "slug": "records-raw-record-minimum-fields-001",
+          "title": "原始现场记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0911"
+        },
+        {
+          "slug": "general-event-log-001",
+          "title": "事件日志",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0911"
+        },
+        {
+          "slug": "education-paper-notebook-001",
+          "title": "纸质记录本使用规范",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0911"
+        },
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-review-verification-checklist-001",
+          "title": "记录复核与验证检查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-source-direct-reported-boundary-001",
+          "title": "亲历、转述与设备来源边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0911",
+          "title": "每日跨域运行摘要"
+        },
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "records-daily-cross-domain-summary-001",
+          "title": "每日跨域运行摘要"
+        }
+      ],
+      "profiles_triggered": [
+        "records_capture_trust_summary"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S06",
+      "type": "strict",
+      "query": "一个任务失败了，现场已经安全，之后应该怎么做失败复盘？",
+      "focus": "现场安全后的失败复盘，Records 主导。",
+      "expected_guide": [
+        "DG-0295",
+        "DG-0913"
+      ],
+      "expected_wiki_any": [
+        "general-failure-lesson-record-001",
+        "records-corrective-action-verification-001",
+        "records-failure-cause-classification-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0913",
+          "title": "失败 / 事故记录复盘",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0295",
+          "title": "任务失败复盘",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "normal"
+        },
+        {
+          "id": "DG-0880",
+          "title": "连续育苗与失败复盘",
+          "labels": [
+            "agriculture"
+          ],
+          "primary_labels": [
+            "agriculture"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-contradictory-evidence-handling-001",
+          "title": "冲突记录保留与复核",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0913"
+        },
+        {
+          "slug": "records-failure-cause-classification-001",
+          "title": "失败原因分类与边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0913"
+        },
+        {
+          "slug": "records-corrective-action-verification-001",
+          "title": "整改项验证与关闭",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0913"
+        },
+        {
+          "slug": "records-incident-near-miss-review-template-001",
+          "title": "事故与 near miss 上层复盘",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0913"
+        },
+        {
+          "slug": "general-failure-lesson-record-001",
+          "title": "失败经验记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0913"
+        },
+        {
+          "slug": "agriculture-continuous-nursery-schedule-001",
+          "title": "连续育苗排期",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0880"
+        },
+        {
+          "slug": "agriculture-seedling-damping-off-isolation-001",
+          "title": "苗期猝倒和隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0880"
+        },
+        {
+          "slug": "agriculture-transplant-hardening-off-001",
+          "title": "移栽前炼苗和缓苗风险",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0880"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0913",
+          "title": "失败 / 事故记录复盘"
+        },
+        {
+          "id": "DG-0295",
+          "title": "任务失败复盘"
+        },
+        {
+          "id": "DG-0880",
+          "title": "连续育苗与失败复盘"
+        },
+        {
+          "id": "DG-0729",
+          "title": "失败后复盘不指责"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "records_post_event_review"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S07",
+      "type": "strict",
+      "query": "刚才发生了一次险情，但已经处理完并恢复安全，怎么记录原因和整改？",
+      "focus": "near miss 上层复盘，不回到现场 Safety 操作。",
+      "expected_guide": [
+        "DG-0913"
+      ],
+      "expected_wiki_any": [
+        "records-corrective-action-verification-001",
+        "records-incident-near-miss-review-template-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0913",
+          "title": "失败 / 事故记录复盘",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0295",
+          "title": "任务失败复盘",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-contradictory-evidence-handling-001",
+          "title": "冲突记录保留与复核",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0913"
+        },
+        {
+          "slug": "records-failure-cause-classification-001",
+          "title": "失败原因分类与边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0913"
+        },
+        {
+          "slug": "records-corrective-action-verification-001",
+          "title": "整改项验证与关闭",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0913"
+        },
+        {
+          "slug": "records-incident-near-miss-review-template-001",
+          "title": "事故与 near miss 上层复盘",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0913"
+        },
+        {
+          "slug": "general-failure-lesson-record-001",
+          "title": "失败经验记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0913"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0913",
+          "title": "失败 / 事故记录复盘"
+        },
+        {
+          "id": "DG-0295",
+          "title": "任务失败复盘"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "records_post_event_review"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S08",
+      "type": "strict",
+      "query": "同一个设备三个月里坏了四次，我想从历史记录判断是不是重复故障，怎么整理？",
+      "focus": "维修历史趋势由 Records 主导，Repair 可 secondary。",
+      "expected_guide": [
+        "DG-0914"
+      ],
+      "expected_wiki_any": [
+        "records-maintenance-history-trend-001",
+        "records-pending-hypothesis-next-test-001",
+        "records-repeated-problem-trend-review-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-success-review-minimum-001",
+          "title": "成功做法复盘最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-repeated-problem-trend-review-001",
+          "title": "重复问题与趋势复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-pending-hypothesis-next-test-001",
+          "title": "待验证假设与下一次测试",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-corrective-action-verification-001",
+          "title": "整改项验证与关闭",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-maintenance-history-trend-001",
+          "title": "维修履历与重复故障趋势",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-production-batch-long-term-review-001",
+          "title": "生产批次长期回顾",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-agriculture-season-comparison-001",
+          "title": "农业跨季对比",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "records_long_term_trend"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S09",
+      "type": "strict",
+      "query": "过去三季种同一种作物都失败了，我想比较天气、地点和批次记录找规律。",
+      "focus": "Records 与 Agriculture 合理共域，不把相关性写成确定原因。",
+      "expected_guide": [
+        "DG-0914"
+      ],
+      "expected_wiki_any": [
+        "records-agriculture-season-comparison-001",
+        "records-applicable-conditions-context-001",
+        "records-repeated-problem-trend-review-001"
+      ],
+      "expected_primary_domains": [
+        "records",
+        "agriculture"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接",
+          "labels": [
+            "agriculture",
+            "records",
+            "storage"
+          ],
+          "primary_labels": [
+            "storage"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-success-review-minimum-001",
+          "title": "成功做法复盘最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-repeated-problem-trend-review-001",
+          "title": "重复问题与趋势复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-pending-hypothesis-next-test-001",
+          "title": "待验证假设与下一次测试",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-corrective-action-verification-001",
+          "title": "整改项验证与关闭",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-maintenance-history-trend-001",
+          "title": "维修履历与重复故障趋势",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-production-batch-long-term-review-001",
+          "title": "生产批次长期回顾",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-agriculture-season-comparison-001",
+          "title": "农业跨季对比",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "storage_inventory_handover",
+        "records_long_term_trend"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=agriculture,records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S10",
+      "type": "strict",
+      "query": "我想比较过去几个月电池可用容量和太阳能产出的变化趋势。",
+      "focus": "Records 与 Energy 合理共域，不提供危险电池维修。",
+      "expected_guide": [
+        "DG-0914"
+      ],
+      "expected_wiki_any": [
+        "records-applicable-conditions-context-001",
+        "records-energy-capacity-trend-001",
+        "records-repeated-problem-trend-review-001"
+      ],
+      "expected_primary_domains": [
+        "records",
+        "energy"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-success-review-minimum-001",
+          "title": "成功做法复盘最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-repeated-problem-trend-review-001",
+          "title": "重复问题与趋势复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-pending-hypothesis-next-test-001",
+          "title": "待验证假设与下一次测试",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-corrective-action-verification-001",
+          "title": "整改项验证与关闭",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-maintenance-history-trend-001",
+          "title": "维修履历与重复故障趋势",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-production-batch-long-term-review-001",
+          "title": "生产批次长期回顾",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-agriculture-season-comparison-001",
+          "title": "农业跨季对比",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "records_long_term_trend"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=energy,records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S11",
+      "type": "strict",
+      "query": "这个办法今天第一次成功了，可以直接把它写进正式 SOP 吗？",
+      "focus": "一次成功不能直接进入正式 SOP 或 CURRENT。",
+      "expected_guide": [
+        "DG-0915",
+        "DG-0916"
+      ],
+      "expected_wiki_any": [
+        "records-high-risk-knowledge-review-gate-001",
+        "records-knowledge-promotion-gate-001",
+        "records-lifecycle-state-model-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0915",
+          "title": "经验升级为 SOP 候选",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0115",
+          "title": "壳中灯启动检查",
+          "labels": [
+            "energy",
+            "records",
+            "safety",
+            "tools"
+          ],
+          "primary_labels": [
+            "tools"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-sop-version-minimum-fields-001",
+          "title": "SOP 与知识卡版本最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-current-version-selection-001",
+          "title": "CURRENT 版本选择规则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-superseded-version-isolation-001",
+          "title": "SUPERSEDED 旧版隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-rollback-revalidation-001",
+          "title": "回滚与重新验证",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-high-risk-knowledge-review-gate-001",
+          "title": "高风险知识审核门禁",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-version-change-log-001",
+          "title": "知识版本变更日志",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "general-knowledge-card-archive-001",
+          "title": "知识卡片归档",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止"
+        },
+        {
+          "id": "DG-0915",
+          "title": "经验升级为 SOP 候选"
+        },
+        {
+          "id": "DG-0115",
+          "title": "壳中灯启动检查"
+        },
+        {
+          "id": "DG-0552",
+          "title": "停水后第一小时：容器收集和分区"
+        },
+        {
+          "id": "DG-0065",
+          "title": "大规模停水第一天"
+        },
+        {
+          "id": "DG-0556",
+          "title": "直接压迫止血：从出血到固定"
+        },
+        {
+          "id": "DG-0052",
+          "title": "阳台种菜：从容器到第一批叶菜"
+        },
+        {
+          "id": "DG-0055",
+          "title": "地震后第一小时：先稳住，不急着乱跑"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "records-sop-version-minimum-fields-001",
+          "title": "SOP 与知识卡版本最小字段"
+        },
+        {
+          "slug": "records-knowledge-promotion-gate-001",
+          "title": "经验晋升正式知识门槛"
+        }
+      ],
+      "profiles_triggered": [],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S12",
+      "type": "strict",
+      "query": "我刚写完一条日志，能不能直接把状态设成 VERIFIED？",
+      "focus": "一次日志不得自动晋升 VERIFIED。",
+      "expected_guide": [
+        "DG-0912",
+        "DG-0915"
+      ],
+      "expected_wiki_any": [
+        "records-knowledge-promotion-gate-001",
+        "records-lifecycle-state-model-001",
+        "records-review-verification-checklist-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0911",
+          "title": "每日跨域运行摘要",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-raw-record-minimum-fields-001",
+          "title": "原始现场记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-review-verification-checklist-001",
+          "title": "记录复核与验证检查表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-source-direct-reported-boundary-001",
+          "title": "亲历、转述与设备来源边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-contradictory-evidence-handling-001",
+          "title": "冲突记录保留与复核",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "general-record-trust-label-001",
+          "title": "记录可信度标注",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        },
+        {
+          "slug": "records-medical-observation-handover-boundary-001",
+          "title": "医疗观察交接与隐私边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0912"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查"
+        },
+        {
+          "id": "DG-0911",
+          "title": "每日跨域运行摘要"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "records-daily-cross-domain-summary-001",
+          "title": "每日跨域运行摘要"
+        }
+      ],
+      "profiles_triggered": [
+        "records_capture_trust_summary"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S13",
+      "type": "strict",
+      "query": "我自己试了一次新的急救方法感觉有效，能直接加入正式知识库吗？",
+      "focus": "高风险经验由 Records 执行晋升门禁，Medical 只作领域 reviewer。",
+      "expected_guide": [
+        "DG-0915"
+      ],
+      "expected_wiki_any": [
+        "records-high-risk-knowledge-review-gate-001",
+        "records-knowledge-promotion-gate-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0915",
+          "title": "经验升级为 SOP 候选",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0210",
+          "title": "药品专用检查：有效期、状态、标签",
+          "labels": [
+            "energy",
+            "medical"
+          ],
+          "primary_labels": [
+            "medical"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0710",
+          "title": "处理同行请求",
+          "labels": [
+            "other"
+          ],
+          "primary_labels": [
+            "other"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0915"
+        },
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0915"
+        },
+        {
+          "slug": "records-knowledge-promotion-gate-001",
+          "title": "经验晋升正式知识门槛",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0915"
+        },
+        {
+          "slug": "records-high-risk-knowledge-review-gate-001",
+          "title": "高风险知识审核门禁",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0915"
+        },
+        {
+          "slug": "general-knowledge-card-archive-001",
+          "title": "知识卡片归档",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0915"
+        },
+        {
+          "slug": "medical-medication-storage-check-001",
+          "title": "常用药储存检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0210"
+        },
+        {
+          "slug": "safety-route-planning-001",
+          "title": "陌生路线邀请为什么谨慎",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0710"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0915",
+          "title": "经验升级为 SOP 候选"
+        },
+        {
+          "id": "DG-0210",
+          "title": "药品专用检查：有效期、状态、标签"
+        },
+        {
+          "id": "DG-0710",
+          "title": "处理同行请求"
+        },
+        {
+          "id": "DG-0898",
+          "title": "医疗物资与急救包储藏复查"
+        },
+        {
+          "id": "DG-0556",
+          "title": "直接压迫止血：从出血到固定"
+        },
+        {
+          "id": "DG-0360",
+          "title": "无火保暖方法"
+        },
+        {
+          "id": "DG-0412",
+          "title": "知识卡转任务卡"
+        },
+        {
+          "id": "DG-0003",
+          "title": "直接压迫止血：从看到血到固定敷料"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S14",
+      "type": "strict",
+      "query": "同一个 SOP 有好几个版本，我现在应该默认用哪个版本？",
+      "focus": "只有 CURRENT 默认指导行动。",
+      "expected_guide": [
+        "DG-0916"
+      ],
+      "expected_wiki_any": [
+        "records-current-version-selection-001",
+        "records-sop-version-minimum-fields-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0915",
+          "title": "经验升级为 SOP 候选",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0277",
+          "title": "备份版本命名",
+          "labels": [
+            "records",
+            "safety"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-sop-version-minimum-fields-001",
+          "title": "SOP 与知识卡版本最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-current-version-selection-001",
+          "title": "CURRENT 版本选择规则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-superseded-version-isolation-001",
+          "title": "SUPERSEDED 旧版隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-rollback-revalidation-001",
+          "title": "回滚与重新验证",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-high-risk-knowledge-review-gate-001",
+          "title": "高风险知识审核门禁",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-version-change-log-001",
+          "title": "知识版本变更日志",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "general-knowledge-card-archive-001",
+          "title": "知识卡片归档",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止"
+        },
+        {
+          "id": "DG-0915",
+          "title": "经验升级为 SOP 候选"
+        },
+        {
+          "id": "DG-0277",
+          "title": "备份版本命名"
+        },
+        {
+          "id": "DG-0527",
+          "title": "指南版本号规则"
+        },
+        {
+          "id": "DG-0425",
+          "title": "版本更新提示卡"
+        },
+        {
+          "id": "DG-0827",
+          "title": "先在水源附近设一个临时取水点"
+        },
+        {
+          "id": "DG-0714",
+          "title": "管理多次接触对象"
+        },
+        {
+          "id": "DG-0276",
+          "title": "三份备份位置"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "records-sop-version-minimum-fields-001",
+          "title": "SOP 与知识卡版本最小字段"
+        },
+        {
+          "slug": "records-knowledge-promotion-gate-001",
+          "title": "经验晋升正式知识门槛"
+        }
+      ],
+      "profiles_triggered": [],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S15",
+      "type": "strict",
+      "query": "我找到一份 SUPERSEDED 的旧 SOP，还可以直接照着执行吗？",
+      "focus": "SUPERSEDED 不得作为默认行动版本。",
+      "expected_guide": [
+        "DG-0916"
+      ],
+      "expected_wiki_any": [
+        "records-current-version-selection-001",
+        "records-superseded-version-isolation-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0915",
+          "title": "经验升级为 SOP 候选",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0556",
+          "title": "直接压迫止血：从出血到固定",
+          "labels": [
+            "medical"
+          ],
+          "primary_labels": [
+            "medical"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-sop-version-minimum-fields-001",
+          "title": "SOP 与知识卡版本最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-current-version-selection-001",
+          "title": "CURRENT 版本选择规则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-superseded-version-isolation-001",
+          "title": "SUPERSEDED 旧版隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-rollback-revalidation-001",
+          "title": "回滚与重新验证",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-high-risk-knowledge-review-gate-001",
+          "title": "高风险知识审核门禁",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-version-change-log-001",
+          "title": "知识版本变更日志",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "general-knowledge-card-archive-001",
+          "title": "知识卡片归档",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止"
+        },
+        {
+          "id": "DG-0915",
+          "title": "经验升级为 SOP 候选"
+        },
+        {
+          "id": "DG-0556",
+          "title": "直接压迫止血：从出血到固定"
+        },
+        {
+          "id": "DG-0803",
+          "title": "先判断管道水是否可直接使用"
+        },
+        {
+          "id": "DG-0003",
+          "title": "直接压迫止血：从看到血到固定敷料"
+        },
+        {
+          "id": "DG-0912",
+          "title": "原始记录可信度检查"
+        },
+        {
+          "id": "DG-0800",
+          "title": "先找到可用水源的方向"
+        },
+        {
+          "id": "DG-0687",
+          "title": "外出登记和归队检查"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "records-superseded-version-isolation-001",
+          "title": "SUPERSEDED 旧版隔离"
+        },
+        {
+          "slug": "records-sop-version-minimum-fields-001",
+          "title": "SOP 与知识卡版本最小字段"
+        },
+        {
+          "slug": "records-knowledge-promotion-gate-001",
+          "title": "经验晋升正式知识门槛"
+        }
+      ],
+      "profiles_triggered": [],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S16",
+      "type": "strict",
+      "query": "新 SOP 有问题，能不能直接把旧版本改回 CURRENT？",
+      "focus": "回滚必须形成新 CURRENT version 并重新验证。",
+      "expected_guide": [
+        "DG-0916"
+      ],
+      "expected_wiki_any": [
+        "records-current-version-selection-001",
+        "records-rollback-revalidation-001",
+        "records-version-change-log-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0803",
+          "title": "先判断管道水是否可直接使用",
+          "labels": [
+            "other"
+          ],
+          "primary_labels": [
+            "other"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0915",
+          "title": "经验升级为 SOP 候选",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-sop-version-minimum-fields-001",
+          "title": "SOP 与知识卡版本最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-current-version-selection-001",
+          "title": "CURRENT 版本选择规则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-superseded-version-isolation-001",
+          "title": "SUPERSEDED 旧版隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-rollback-revalidation-001",
+          "title": "回滚与重新验证",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-high-risk-knowledge-review-gate-001",
+          "title": "高风险知识审核门禁",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-version-change-log-001",
+          "title": "知识版本变更日志",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "general-knowledge-card-archive-001",
+          "title": "知识卡片归档",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0916"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止"
+        },
+        {
+          "id": "DG-0803",
+          "title": "先判断管道水是否可直接使用"
+        },
+        {
+          "id": "DG-0915",
+          "title": "经验升级为 SOP 候选"
+        },
+        {
+          "id": "DG-0425",
+          "title": "版本更新提示卡"
+        },
+        {
+          "id": "DG-0527",
+          "title": "指南版本号规则"
+        },
+        {
+          "id": "DG-0277",
+          "title": "备份版本命名"
+        },
+        {
+          "id": "DG-0865",
+          "title": "撤离路线检查"
+        },
+        {
+          "id": "DG-0556",
+          "title": "直接压迫止血：从出血到固定"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "records-sop-version-minimum-fields-001",
+          "title": "SOP 与知识卡版本最小字段"
+        },
+        {
+          "slug": "records-knowledge-promotion-gate-001",
+          "title": "经验晋升正式知识门槛"
+        }
+      ],
+      "profiles_triggered": [],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S17",
+      "type": "strict",
+      "query": "归档的 ARCHIVED 知识卡还能作为当前操作依据吗？",
+      "focus": "ARCHIVED 只用于历史查询。",
+      "expected_guide": [
+        "DG-0916",
+        "DG-0917"
+      ],
+      "expected_wiki_any": [
+        "general-knowledge-card-archive-001",
+        "general-offline-directory-index-001",
+        "records-superseded-version-isolation-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0917",
+          "title": "长期记录归档与索引",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-superseded-version-isolation-001",
+          "title": "SUPERSEDED 旧版隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "records-retention-access-disposal-001",
+          "title": "记录保留、访问与到期处理",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "records-medical-observation-handover-boundary-001",
+          "title": "医疗观察交接与隐私边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "education-paper-notebook-001",
+          "title": "纸质记录本使用规范",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "general-long-term-archive-check-001",
+          "title": "长期档案轮检",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "general-offline-directory-index-001",
+          "title": "离线目录索引",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "education-offline-data-backup-001",
+          "title": "离线资料备份基础",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "general-member-info-backup-001",
+          "title": "成员信息备份",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0917",
+          "title": "长期记录归档与索引"
+        },
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "records_archive_index"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S18",
+      "type": "strict",
+      "query": "SD、纸本和 Core 上都有记录，我怎么做长期索引和备份？",
+      "focus": "长期记录归档与索引，Records 主导。",
+      "expected_guide": [
+        "DG-0917"
+      ],
+      "expected_wiki_any": [
+        "education-offline-data-backup-001",
+        "general-long-term-archive-check-001",
+        "general-offline-directory-index-001",
+        "records-retention-access-disposal-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0917",
+          "title": "长期记录归档与索引",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-superseded-version-isolation-001",
+          "title": "SUPERSEDED 旧版隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "records-retention-access-disposal-001",
+          "title": "记录保留、访问与到期处理",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "records-medical-observation-handover-boundary-001",
+          "title": "医疗观察交接与隐私边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "education-paper-notebook-001",
+          "title": "纸质记录本使用规范",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "general-long-term-archive-check-001",
+          "title": "长期档案轮检",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "general-offline-directory-index-001",
+          "title": "离线目录索引",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "education-offline-data-backup-001",
+          "title": "离线资料备份基础",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        },
+        {
+          "slug": "general-member-info-backup-001",
+          "title": "成员信息备份",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0917"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0917",
+          "title": "长期记录归档与索引"
+        },
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "records_archive_index"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S19",
+      "type": "strict",
+      "query": "一个成员只跟着做过几次，还没有独立完成过，现在应该算什么技能等级？",
+      "focus": "不得自动进入 INDEPENDENT。",
+      "expected_guide": [
+        "DG-0400",
+        "DG-0918"
+      ],
+      "expected_wiki_any": [
+        "records-skill-authorization-minimum-001",
+        "records-skill-level-boundaries-001",
+        "records-supervised-practice-evidence-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0400",
+          "title": "基础技能清单",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "organization",
+            "records"
+          ],
+          "risk_level": "normal"
+        },
+        {
+          "id": "DG-0918",
+          "title": "新成员知识与技能交接",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0401",
+          "title": "五分钟技能教学",
+          "labels": [
+            "energy",
+            "records"
+          ],
+          "primary_labels": [
+            "organization",
+            "training"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-skill-authorization-minimum-001",
+          "title": "技能授权记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "records-skill-level-boundaries-001",
+          "title": "OBSERVE 到 INDEPENDENT 等级边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "records-supervised-practice-evidence-001",
+          "title": "监督练习证据记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "records-skill-expiry-refresher-001",
+          "title": "技能过期、降级与复训",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "records-new-member-learning-path-001",
+          "title": "新成员低风险学习路径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "records-knowledge-transfer-handover-summary-001",
+          "title": "知识与技能交接摘要",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "general-small-team-handoff-001",
+          "title": "小团队知识交接",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "organization-onboarding-001",
+          "title": "新成员加入的信息交接",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0400",
+          "title": "基础技能清单"
+        },
+        {
+          "id": "DG-0918",
+          "title": "新成员知识与技能交接"
+        },
+        {
+          "id": "DG-0401",
+          "title": "五分钟技能教学"
+        },
+        {
+          "id": "DG-0910",
+          "title": "工坊任务交接"
+        },
+        {
+          "id": "DG-0429",
+          "title": "风险等级四档"
+        },
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存"
+        },
+        {
+          "id": "DG-0727",
+          "title": "短期可完成任务恢复秩序"
+        },
+        {
+          "id": "DG-0877",
+          "title": "制作完成后的承重检查"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=organization,records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "S20",
+      "type": "strict",
+      "query": "一个人很久没做这个高风险任务了，还能继续按 INDEPENDENT 独立操作吗？",
+      "focus": "技能过期后降级并复训，不自动保持长期授权。",
+      "expected_guide": [
+        "DG-0918"
+      ],
+      "expected_wiki_any": [
+        "records-skill-authorization-minimum-001",
+        "records-skill-expiry-refresher-001",
+        "records-skill-level-boundaries-001"
+      ],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0918",
+          "title": "新成员知识与技能交接",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0689",
+          "title": "疲劳成员停止高风险任务",
+          "labels": [
+            "other"
+          ],
+          "primary_labels": [
+            "other"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0394",
+          "title": "高风险任务双人制",
+          "labels": [
+            "tools"
+          ],
+          "primary_labels": [
+            "tools"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-skill-authorization-minimum-001",
+          "title": "技能授权记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "records-skill-level-boundaries-001",
+          "title": "OBSERVE 到 INDEPENDENT 等级边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "records-supervised-practice-evidence-001",
+          "title": "监督练习证据记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "records-skill-expiry-refresher-001",
+          "title": "技能过期、降级与复训",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "records-new-member-learning-path-001",
+          "title": "新成员低风险学习路径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "records-knowledge-transfer-handover-summary-001",
+          "title": "知识与技能交接摘要",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "general-small-team-handoff-001",
+          "title": "小团队知识交接",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        },
+        {
+          "slug": "organization-onboarding-001",
+          "title": "新成员加入的信息交接",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0918"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0918",
+          "title": "新成员知识与技能交接"
+        },
+        {
+          "id": "DG-0689",
+          "title": "疲劳成员停止高风险任务"
+        },
+        {
+          "id": "DG-0394",
+          "title": "高风险任务双人制"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "records_skill_evidence"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "O01",
+      "type": "observation",
+      "query": "有人手臂正在大量流血，现在应该先做什么？",
+      "focus": "当前急救必须由 Medical 主导。",
+      "expected_guide": [],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "medical"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0010",
+          "title": "头部受伤：24 小时观察",
+          "labels": [
+            "medical"
+          ],
+          "primary_labels": [
+            "medical"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0011",
+          "title": "疑似脊柱伤：少动、固定、轴线搬运",
+          "labels": [
+            "medical",
+            "tools"
+          ],
+          "primary_labels": [
+            "medical"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0574",
+          "title": "呕吐物和粪便污染：隔离清洁",
+          "labels": [
+            "other"
+          ],
+          "primary_labels": [
+            "other"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "medical-head-injury-24h-observation-001",
+          "title": "头部受伤后的 24 小时观察",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0010"
+        },
+        {
+          "slug": "medical-spine-injury-movement-boundary-001",
+          "title": "疑似脊柱伤的移动边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0011"
+        },
+        {
+          "slug": "hygiene-fecal-oral-001",
+          "title": "粪口传播基础",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0574"
+        },
+        {
+          "slug": "hygiene-vomit-003",
+          "title": "呕吐物粪便污染路径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0574"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0010",
+          "title": "头部受伤：24 小时观察"
+        },
+        {
+          "id": "DG-0011",
+          "title": "疑似脊柱伤：少动、固定、轴线搬运"
+        },
+        {
+          "id": "DG-0574",
+          "title": "呕吐物和粪便污染：隔离清洁"
+        },
+        {
+          "id": "DG-0889",
+          "title": "病人垃圾与污染物分流"
+        },
+        {
+          "id": "DG-0020",
+          "title": "腹泻脱水：补液优先"
+        },
+        {
+          "id": "DG-0086",
+          "title": "垃圾分区：普通、污染、尖锐"
+        },
+        {
+          "id": "DG-0088",
+          "title": "衣物污染隔离"
+        },
+        {
+          "id": "DG-0612",
+          "title": "小伤口少水清洁卡"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "medical-head-injury-24h-observation-001",
+          "title": "头部受伤后的 24 小时观察"
+        },
+        {
+          "slug": "medical-spine-injury-movement-boundary-001",
+          "title": "疑似脊柱伤的移动边界"
+        }
+      ],
+      "profiles_triggered": [
+        "medical_trauma_bleeding_fracture"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "当前业务域正确主导，Records 未抢主位。",
+      "records_primary": false,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=medical；实际 top1 主域=medical；辅助标签=medical；Records top1=False；Records 补充=False。",
+      "root_cause_classification": [
+        "R. 合理 observation，不修"
+      ]
+    },
+    {
+      "id": "O02",
+      "type": "observation",
+      "query": "我要做一个木架，木板具体怎么切和连接？",
+      "focus": "当前制作必须由 Manufacturing 主导。",
+      "expected_guide": [],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "manufacturing"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0873",
+          "title": "木材切割前固定与支撑",
+          "labels": [
+            "manufacturing",
+            "repair",
+            "tools"
+          ],
+          "primary_labels": [
+            "manufacturing"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "repair-manufacturing-clamp-before-processing-001",
+          "title": "切割和钻孔前固定夹持",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-saw-support-001",
+          "title": "木材重复锯切支撑",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-drill-position-001",
+          "title": "木材打孔定位和边距检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-measure-mark-001",
+          "title": "木材测量划线和切割线确认",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-cut-drill-clear-zone-001",
+          "title": "切割钻孔打磨前清场",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-selection-001",
+          "title": "木材制作前选择边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0873",
+          "title": "木材切割前固定与支撑"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "manufacturing_cutting_clamping"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "当前业务域正确主导，Records 未抢主位。",
+      "records_primary": false,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=manufacturing；实际 top1 主域=manufacturing；辅助标签=manufacturing,repair,tools；Records top1=False；Records 补充=False。",
+      "root_cause_classification": [
+        "R. 合理 observation，不修"
+      ]
+    },
+    {
+      "id": "O03",
+      "type": "observation",
+      "query": "锯子坏了，现在怎么检查和修？",
+      "focus": "当前维修由 Repair / Tools 主导，Records 最多补历史。",
+      "expected_guide": [],
+      "expected_wiki_any": [
+        "records-maintenance-history-trend-001"
+      ],
+      "expected_primary_domains": [
+        "repair",
+        "tools"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离",
+          "labels": [
+            "repair",
+            "tools"
+          ],
+          "primary_labels": [
+            "repair"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签",
+          "labels": [
+            "records",
+            "repair",
+            "tools"
+          ],
+          "primary_labels": [
+            "repair"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0873",
+          "title": "木材切割前固定与支撑",
+          "labels": [
+            "manufacturing",
+            "repair",
+            "tools"
+          ],
+          "primary_labels": [
+            "manufacturing"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "repair-dangerous-tool-temporary-isolation-001",
+          "title": "危险工具临时隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0837"
+        },
+        {
+          "slug": "repair-dangerous-tool-borrow-permission-001",
+          "title": "危险工具借用权限",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0837"
+        },
+        {
+          "slug": "repair-sharp-blunt-tool-zone-storage-001",
+          "title": "锐器和钝器分区存放",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0837"
+        },
+        {
+          "slug": "repair-damaged-tool-disable-tag-001",
+          "title": "工具破损后禁用标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0840"
+        },
+        {
+          "slug": "repair-damaged-tool-report-isolation-001",
+          "title": "工具损坏上报和隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0840"
+        },
+        {
+          "slug": "repair-manufacturing-clamp-before-processing-001",
+          "title": "切割和钻孔前固定夹持",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-saw-support-001",
+          "title": "木材重复锯切支撑",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        },
+        {
+          "slug": "repair-manufacturing-wood-drill-position-001",
+          "title": "木材打孔定位和边距检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0873"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0837",
+          "title": "危险工具临时隔离"
+        },
+        {
+          "id": "DG-0840",
+          "title": "工具破损后禁用标签"
+        },
+        {
+          "id": "DG-0873",
+          "title": "木材切割前固定与支撑"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "repair_tool_damage_isolation",
+        "manufacturing_cutting_clamping"
+      ],
+      "pass_partial_fail": "partial",
+      "reason": "业务域正确主导，但合理的 Records 补充 evidence 未进入。",
+      "records_primary": false,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=repair,tools；实际 top1 主域=repair；辅助标签=repair,tools；Records top1=False；Records 补充=False。",
+      "root_cause_classification": [
+        "R. 合理 observation，不修"
+      ]
+    },
+    {
+      "id": "O04",
+      "type": "observation",
+      "query": "储藏区今天换班，库存和异常交接卡应该怎么写？",
+      "focus": "当前储藏交接由 Long-Term Storage 主导。",
+      "expected_guide": [],
+      "expected_wiki_any": [
+        "general-long-term-archive-check-001"
+      ],
+      "expected_primary_domains": [
+        "storage"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接",
+          "labels": [
+            "agriculture",
+            "records",
+            "storage"
+          ],
+          "primary_labels": [
+            "storage"
+          ],
+          "risk_level": "normal"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签",
+          "labels": [
+            "records",
+            "repair",
+            "storage"
+          ],
+          "primary_labels": [
+            "storage"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "general-storage-handover-card-001",
+          "title": "储藏区交接卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0902"
+        },
+        {
+          "slug": "general-storage-inventory-card-minimum-001",
+          "title": "储藏库存卡最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0902"
+        },
+        {
+          "slug": "general-storage-check-calendar-001",
+          "title": "储藏复查日历",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0902"
+        },
+        {
+          "slug": "general-storage-issue-log-001",
+          "title": "储藏异常记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0902"
+        },
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0902"
+        },
+        {
+          "slug": "general-storage-label-minimum-fields-001",
+          "title": "储藏标签最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0902"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0902"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0902"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        },
+        {
+          "id": "DG-0895",
+          "title": "储藏区基础分区与标签"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "general-storage-fifo-shelf-rule-001",
+          "title": "先入先出货架规则"
+        },
+        {
+          "slug": "general-storage-handover-card-001",
+          "title": "储藏区交接卡"
+        },
+        {
+          "slug": "general-storage-inventory-card-minimum-001",
+          "title": "储藏库存卡最小字段"
+        },
+        {
+          "slug": "general-storage-check-calendar-001",
+          "title": "储藏复查日历"
+        },
+        {
+          "slug": "general-storage-issue-log-001",
+          "title": "储藏异常记录"
+        },
+        {
+          "slug": "general-storage-zone-basic-layout-001",
+          "title": "长期储藏区基础分区"
+        },
+        {
+          "slug": "general-storage-moisture-daily-check-001",
+          "title": "储藏区潮湿日查"
+        },
+        {
+          "slug": "general-storage-pest-rodent-check-001",
+          "title": "储藏区虫鼠巡查"
+        }
+      ],
+      "profiles_triggered": [
+        "inventory_consumption",
+        "storage_basic_zone_labeling",
+        "storage_inventory_handover"
+      ],
+      "pass_partial_fail": "partial",
+      "reason": "业务域正确主导，但合理的 Records 补充 evidence 未进入。",
+      "records_primary": false,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=storage；实际 top1 主域=storage；辅助标签=agriculture,records,storage；Records top1=False；Records 补充=False。",
+      "root_cause_classification": [
+        "R. 合理 observation，不修"
+      ]
+    },
+    {
+      "id": "O05",
+      "type": "observation",
+      "query": "下一班要接手工坊里还没完成的半成品，应该怎么交接？",
+      "focus": "当前 WIP 交接由 Production System / Workshop 主导。",
+      "expected_guide": [],
+      "expected_wiki_any": [
+        "records-production-batch-long-term-review-001"
+      ],
+      "expected_primary_domains": [
+        "production"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0910",
+          "title": "工坊任务交接",
+          "labels": [
+            "production",
+            "repair",
+            "tools"
+          ],
+          "primary_labels": [
+            "production"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转",
+          "labels": [
+            "production",
+            "repair",
+            "tools"
+          ],
+          "primary_labels": [
+            "production"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-shift-handover-card-001",
+          "title": "工坊班次交接卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-tool-state-handover-001",
+          "title": "工具状态交接",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-next-action-handover-001",
+          "title": "下一步动作交接",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-wip-handover-tag-001",
+          "title": "半成品交接标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-unfinished-item-tag-001",
+          "title": "未完成品状态标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-task-board-minimum-001",
+          "title": "工坊任务板最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-end-of-day-status-log-001",
+          "title": "当日任务状态记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        },
+        {
+          "slug": "production-workshop-fatigue-stop-line-001",
+          "title": "疲劳生产停止线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0910"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0910",
+          "title": "工坊任务交接"
+        },
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "inventory_consumption",
+        "production_shift_handover"
+      ],
+      "pass_partial_fail": "partial",
+      "reason": "业务域正确主导，但合理的 Records 补充 evidence 未进入。",
+      "records_primary": false,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=production；实际 top1 主域=production；辅助标签=production,repair,tools；Records top1=False；Records 补充=False。",
+      "root_cause_classification": [
+        "R. 合理 observation，不修"
+      ]
+    },
+    {
+      "id": "O06",
+      "type": "observation",
+      "query": "今天电量不够，哪些设备先停，电池怎么分配？",
+      "focus": "当前能源调度由 Energy Management 主导。",
+      "expected_guide": [],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "energy"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用",
+          "labels": [
+            "energy"
+          ],
+          "primary_labels": [
+            "energy"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线",
+          "labels": [
+            "energy",
+            "records"
+          ],
+          "primary_labels": [
+            "energy"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "labels": [
+            "energy",
+            "records"
+          ],
+          "primary_labels": [
+            "communication",
+            "energy"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-battery-capacity-002",
+          "title": "电池容量和功耗基础",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0562"
+        },
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-low-battery-power-window-001",
+          "title": "低电量设备开机窗口",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-night-lighting-runtime-plan-001",
+          "title": "夜间照明续航安排",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "communication-battery-radio-runtime-budget-001",
+          "title": "无线电和 LoRa 电量预算",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "communication-qrp-power-budget-001",
+          "title": "QRP 概念和电量预算",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "communication-qrp-contact-window-discipline-001",
+          "title": "QRP 窗口纪律",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0844",
+          "title": "每日能源预算"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0582",
+          "title": "手机低电量：固定时间开机联系"
+        },
+        {
+          "id": "DG-0565",
+          "title": "停电夜间：低亮照明布置"
+        },
+        {
+          "id": "DG-0336",
+          "title": "电池轮换使用"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "pass_partial_fail": "pass",
+      "reason": "当前业务域正确主导，Records 未抢主位。",
+      "records_primary": false,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=energy；实际 top1 主域=energy；辅助标签=energy；Records top1=False；Records 补充=False。",
+      "root_cause_classification": [
+        "R. 合理 observation，不修"
+      ]
+    }
+  ],
+  "extra_boundary_observations": [
+    {
+      "id": "X-A",
+      "type": "boundary_observation",
+      "query": "这个病人的观察记录怎么交给下一位照护者？",
+      "focus": "Medical + Records 合理共域；Records 只管格式、趋势和访问。",
+      "expected_guide": [
+        "DG-0912",
+        "DG-0917"
+      ],
+      "expected_wiki_any": [
+        "general-medical-record-archive-001",
+        "records-medical-observation-handover-boundary-001"
+      ],
+      "expected_primary_domains": [
+        "medical",
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0695",
+          "title": "照护者疲劳替换",
+          "labels": [
+            "other"
+          ],
+          "primary_labels": [
+            "other"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0615",
+          "title": "照护者处理呕吐物后防交叉感染",
+          "labels": [
+            "medical"
+          ],
+          "primary_labels": [
+            "medical"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0478",
+          "title": "照护者自我保护",
+          "labels": [
+            "medical"
+          ],
+          "primary_labels": [
+            "medical"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "psychology-children-001",
+          "title": "儿童害怕时的安抚原则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0695"
+        },
+        {
+          "slug": "psychology-elder-anxiety-001",
+          "title": "老人焦虑和控制感",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0695"
+        },
+        {
+          "slug": "psychology-panic-001",
+          "title": "恐慌传播为什么要统一信息",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0695"
+        },
+        {
+          "slug": "hygiene-fecal-contamination-water-separation-001",
+          "title": "粪便污染与饮水隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0615"
+        },
+        {
+          "slug": "medical-bleeding-control-001",
+          "title": "直接压迫止血为什么不能频繁查看",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0615"
+        },
+        {
+          "slug": "medical-clean-water-001",
+          "title": "小伤口清洁水不足时的边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0615"
+        },
+        {
+          "slug": "medical-cross-infection-002",
+          "title": "照护者手卫生与交叉感染",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0615"
+        },
+        {
+          "slug": "medical-wound-care-001",
+          "title": "伤口红肿热痛和感染早期信号",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0615"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0695",
+          "title": "照护者疲劳替换"
+        },
+        {
+          "id": "DG-0615",
+          "title": "照护者处理呕吐物后防交叉感染"
+        },
+        {
+          "id": "DG-0478",
+          "title": "照护者自我保护"
+        },
+        {
+          "id": "DG-0106",
+          "title": "照护者崩溃预警"
+        },
+        {
+          "id": "DG-0820",
+          "title": "先给病人和照护人员留更安全的水"
+        },
+        {
+          "id": "DG-0894",
+          "title": "废弃物与材料池记录交接"
+        },
+        {
+          "id": "DG-0558",
+          "title": "发热观察、补水和记录"
+        },
+        {
+          "id": "DG-0854",
+          "title": "病人用品与厨房污染隔离"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "pass_partial_fail": "fail",
+      "reason": "预期 Records Guide 未进入 selected top3。",
+      "records_primary": false,
+      "expected_guide_hit": false,
+      "expected_guide_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=medical,records；实际 top1 主域=other；辅助标签=other；Records top1=False；Records 补充=False。",
+      "root_cause_classification": [
+        "A. Records query profile 缺失",
+        "B. correct Records Guide exists but not selected",
+        "E. Records Wiki exists but not selected"
+      ]
+    },
+    {
+      "id": "X-B",
+      "type": "boundary_observation",
+      "query": "这个架子已经坏三次了，历史记录怎么看？",
+      "focus": "Records + Repair 合理共域；当前修法仍归 Repair。",
+      "expected_guide": [
+        "DG-0914"
+      ],
+      "expected_wiki_any": [
+        "records-maintenance-history-trend-001",
+        "records-repeated-problem-trend-review-001"
+      ],
+      "expected_primary_domains": [
+        "records",
+        "repair"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-success-review-minimum-001",
+          "title": "成功做法复盘最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-repeated-problem-trend-review-001",
+          "title": "重复问题与趋势复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-pending-hypothesis-next-test-001",
+          "title": "待验证假设与下一次测试",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-corrective-action-verification-001",
+          "title": "整改项验证与关闭",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-maintenance-history-trend-001",
+          "title": "维修履历与重复故障趋势",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-production-batch-long-term-review-001",
+          "title": "生产批次长期回顾",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-agriculture-season-comparison-001",
+          "title": "农业跨季对比",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "records_long_term_trend"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=records,repair；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    },
+    {
+      "id": "X-C",
+      "type": "boundary_observation",
+      "query": "过去三季番茄为什么总失败？",
+      "focus": "Records + Agriculture 合理共域，不把相关性写成确定原因。",
+      "expected_guide": [
+        "DG-0914"
+      ],
+      "expected_wiki_any": [
+        "records-agriculture-season-comparison-001",
+        "records-applicable-conditions-context-001"
+      ],
+      "expected_primary_domains": [
+        "records",
+        "agriculture"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取",
+          "labels": [
+            "records"
+          ],
+          "primary_labels": [
+            "records"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-success-review-minimum-001",
+          "title": "成功做法复盘最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-repeated-problem-trend-review-001",
+          "title": "重复问题与趋势复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-pending-hypothesis-next-test-001",
+          "title": "待验证假设与下一次测试",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-corrective-action-verification-001",
+          "title": "整改项验证与关闭",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-maintenance-history-trend-001",
+          "title": "维修履历与重复故障趋势",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-production-batch-long-term-review-001",
+          "title": "生产批次长期回顾",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-agriculture-season-comparison-001",
+          "title": "农业跨季对比",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "records_long_term_trend"
+      ],
+      "pass_partial_fail": "pass",
+      "reason": "预期 Guide 主导或允许的共主成立，且至少一篇预期 Wiki 进入 evidence。",
+      "records_primary": true,
+      "expected_guide_hit": true,
+      "expected_guide_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "accepted_co_primary_support_correct": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": [],
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "lifecycle_boundary_correct": true,
+      "version_boundary_correct": true,
+      "knowledge_promotion_boundary_correct": true,
+      "skill_authorization_boundary_correct": true,
+      "cross_domain_notes": "预期主域=agriculture,records；实际 top1 主域=records；辅助标签=records；Records top1=True；Records 补充=True。",
+      "root_cause_classification": []
+    }
+  ]
+}

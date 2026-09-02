@@ -12366,7 +12366,10 @@
       "太阳能充电",
       "夜间异响"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "general-member-info-backup-001",
+      "records-retention-access-disposal-001"
+    ],
     "risk_level": "caution"
   },
   {
@@ -34120,7 +34123,12 @@
       "主食配给",
       "夜间异响"
     ],
-    "related_wiki": [],
+    "related_wiki": [
+      "records-skill-authorization-minimum-001",
+      "records-skill-level-boundaries-001",
+      "records-supervised-practice-evidence-001",
+      "records-skill-expiry-refresher-001"
+    ],
     "risk_level": "normal"
   },
   {
@@ -44944,7 +44952,11 @@
       "成员档案"
     ],
     "negative_keywords": [],
-    "related_wiki": [],
+    "related_wiki": [
+      "records-retention-access-disposal-001",
+      "general-member-info-backup-001",
+      "general-medical-record-archive-001"
+    ],
     "risk_level": "normal"
   },
   {
@@ -75549,5 +75561,2427 @@
       "repair-storage-small-parts-bin-label-001"
     ],
     "risk_level": "normal"
+  },
+  {
+    "id": "DG-0903",
+    "title": "工坊开工前检查",
+    "category": "团队轮值与任务管理",
+    "priority": "P0",
+    "scenario": "当天开始生产前，任务、工具、材料、能源和风险状态不清。",
+    "goal": "用离线可执行的开工检查把人员、实物、状态、停止线和下一步连接起来。",
+    "tools": [
+      "任务板",
+      "工具清单",
+      "材料卡",
+      "禁用标签",
+      "笔"
+    ],
+    "steps": [
+      "确认今日任务和负责人。",
+      "检查工作区通道、照明、潮湿、粉尘和旁人。",
+      "清点关键工具。",
+      "清点材料和保留线。",
+      "标记风险源。",
+      "写入任务板。",
+      "状态变化时更新任务板、标签或交接卡。",
+      "结束前由另一名成员对照现场实物复核。"
+    ],
+    "check": [
+      "任务明确。",
+      "工具可用。",
+      "材料够用且未越过保留线。",
+      "高风险源已处理。",
+      "未授权人员不在加工区。"
+    ],
+    "common_mistakes": [
+      "只口头说明开工检查，没有对应实物和编号。",
+      "状态变化后不更新标签或任务板。",
+      "为了赶进度越过明确停止线。"
+    ],
+    "fallback": [
+      "任务拆小。",
+      "转低风险清理 / 标记任务。",
+      "等待照明或工具恢复。",
+      "转 Repair / Waste / Storage 判断。"
+    ],
+    "stop_or_escalate": [
+      "工具破损、低照明、潮湿电气、火花粉尘不可控、儿童进入或材料来源不明时停止开工。"
+    ],
+    "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "repair",
+      "organization",
+      "tools"
+    ],
+    "intents": [
+      "production_workshop_v0_1",
+      "offline_workshop_action"
+    ],
+    "situations": [
+      "workshop_operation",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "任务板",
+      "工具清单",
+      "材料卡",
+      "禁用标签",
+      "笔"
+    ],
+    "signals": [
+      "工坊开工前检查",
+      "开工检查",
+      "工坊",
+      "生产流程"
+    ],
+    "risks": [
+      "低照明",
+      "工具破损",
+      "材料来源不明"
+    ],
+    "keywords": [
+      "工坊开工前检查",
+      "开工检查",
+      "工坊生产",
+      "离线流程",
+      "小团队",
+      "任务交接"
+    ],
+    "negative_keywords": [
+      "大型工厂排产",
+      "自动化生产线",
+      "专业质量认证",
+      "危险化学品生产",
+      "武器制造",
+      "高压电气作业",
+      "ERP"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "production_workshop_v0_1",
+    "top1_aliases": [
+      "工坊开工前检查"
+    ],
+    "related_wiki": [
+      "production-workshop-daily-start-check-001",
+      "production-workshop-task-board-minimum-001",
+      "production-workshop-tool-count-before-work-001",
+      "production-workshop-material-count-before-work-001",
+      "production-workshop-risk-source-scan-001",
+      "production-workshop-daily-resource-budget-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0904",
+    "title": "工坊收工与未完成品封存",
+    "category": "团队轮值与任务管理",
+    "priority": "P0",
+    "scenario": "当天工作结束或必须暂停，工坊内有未完成品、危险工具和未清理材料。",
+    "goal": "用离线可执行的收工封存把人员、实物、状态、停止线和下一步连接起来。",
+    "tools": [
+      "断电表",
+      "工具清单",
+      "状态标签",
+      "隔离箱",
+      "笔"
+    ],
+    "steps": [
+      "停止加工。",
+      "断开非必要电源。",
+      "清点刃具和关键工具。",
+      "清理碎屑和可燃物。",
+      "给未完成品贴状态标签。",
+      "隔离危险件。",
+      "记录当日任务状态。",
+      "状态变化时更新任务板、标签或交接卡。",
+      "结束前由另一名成员对照现场实物复核。"
+    ],
+    "check": [
+      "工具封存。",
+      "未完成品不混入成品。",
+      "危险材料隔离。",
+      "任务状态可被下一班理解。"
+    ],
+    "common_mistakes": [
+      "只口头说明收工封存，没有对应实物和编号。",
+      "状态变化后不更新标签或任务板。",
+      "为了赶进度越过明确停止线。"
+    ],
+    "fallback": [
+      "空间不足时设置临时暂停区。",
+      "标签不足时用编号 + 总表。",
+      "工具缺失时封闭工坊并查找。"
+    ],
+    "stop_or_escalate": [
+      "缺失刃具、未断电、可疑火花 / 气味、半成品承重不明或标签缺失时不允许离场。"
+    ],
+    "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "repair",
+      "organization",
+      "tools"
+    ],
+    "intents": [
+      "production_workshop_v0_1",
+      "offline_workshop_action"
+    ],
+    "situations": [
+      "workshop_operation",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "断电表",
+      "工具清单",
+      "状态标签",
+      "隔离箱",
+      "笔"
+    ],
+    "signals": [
+      "工坊收工与未完成品封存",
+      "收工封存",
+      "工坊",
+      "生产流程"
+    ],
+    "risks": [
+      "未断电",
+      "刃具缺失",
+      "状态不明"
+    ],
+    "keywords": [
+      "工坊收工与未完成品封存",
+      "收工封存",
+      "工坊生产",
+      "离线流程",
+      "小团队",
+      "任务交接"
+    ],
+    "negative_keywords": [
+      "大型工厂排产",
+      "自动化生产线",
+      "专业质量认证",
+      "危险化学品生产",
+      "武器制造",
+      "高压电气作业",
+      "ERP"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "production_workshop_v0_1",
+    "top1_aliases": [
+      "工坊收工与未完成品封存"
+    ],
+    "related_wiki": [
+      "production-workshop-unfinished-item-tag-001",
+      "production-workshop-daily-stop-shutdown-001",
+      "production-workshop-end-of-day-status-log-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0905",
+    "title": "原料 / 半成品 / 成品流转",
+    "category": "团队轮值与任务管理",
+    "priority": "P0",
+    "scenario": "原料、半成品、成品、废料和待检物混放，下一步去向不清。",
+    "goal": "用离线可执行的生产流转把人员、实物、状态、停止线和下一步连接起来。",
+    "tools": [
+      "材料卡",
+      "批次标签",
+      "状态区标识",
+      "待检牌",
+      "交接卡"
+    ],
+    "steps": [
+      "为原料建入工坊卡。",
+      "设置待加工、半成品、待检、返工、报废和成品转交区。",
+      "每次移动都更新标签。",
+      "不合格品转隔离。",
+      "合格成品转 Storage。",
+      "状态变化时更新任务板、标签或交接卡。",
+      "结束前由另一名成员对照现场实物复核。"
+    ],
+    "check": [
+      "每件物品有状态。",
+      "半成品不进入成品区。",
+      "报废和污染物不回主流程。",
+      "成品入库字段完整。"
+    ],
+    "common_mistakes": [
+      "只口头说明生产流转，没有对应实物和编号。",
+      "状态变化后不更新标签或任务板。",
+      "为了赶进度越过明确停止线。"
+    ],
+    "fallback": [
+      "空间不足时用颜色 / 编号临时区。",
+      "记录不足时先建总账。",
+      "争议物放中立待检区。"
+    ],
+    "stop_or_escalate": [
+      "来源不明、污染、结构裂纹、缺标签、成品未经检查或 Waste / Storage 边界不明时停止流转。"
+    ],
+    "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "repair",
+      "organization",
+      "tools"
+    ],
+    "intents": [
+      "production_workshop_v0_1",
+      "offline_workshop_action"
+    ],
+    "situations": [
+      "workshop_operation",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "材料卡",
+      "批次标签",
+      "状态区标识",
+      "待检牌",
+      "交接卡"
+    ],
+    "signals": [
+      "原料 / 半成品 / 成品流转",
+      "生产流转",
+      "工坊",
+      "生产流程"
+    ],
+    "risks": [
+      "状态混放",
+      "污染材料",
+      "未经检查"
+    ],
+    "keywords": [
+      "原料 / 半成品 / 成品流转",
+      "生产流转",
+      "工坊生产",
+      "离线流程",
+      "小团队",
+      "任务交接"
+    ],
+    "negative_keywords": [
+      "大型工厂排产",
+      "自动化生产线",
+      "专业质量认证",
+      "危险化学品生产",
+      "武器制造",
+      "高压电气作业",
+      "ERP"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "production_workshop_v0_1",
+    "top1_aliases": [
+      "原料 / 半成品 / 成品流转"
+    ],
+    "related_wiki": [
+      "production-workshop-raw-material-intake-card-001",
+      "production-workshop-wip-zone-layout-001",
+      "production-workshop-wip-handover-tag-001",
+      "production-workshop-finished-goods-hold-zone-001",
+      "production-workshop-waste-transfer-card-001",
+      "production-workshop-batch-label-minimum-001",
+      "production-workshop-material-count-before-work-001",
+      "production-workshop-material-reservation-line-001",
+      "production-workshop-finished-goods-storage-transfer-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0906",
+    "title": "小批量重复制作流程",
+    "category": "团队轮值与任务管理",
+    "priority": "P1",
+    "scenario": "需要连续制作多个相似零件、箱体、支架、标签板或简单工具，但容易批量偏差。",
+    "goal": "用离线可执行的小批量制作把人员、实物、状态、停止线和下一步连接起来。",
+    "tools": [
+      "模板卡",
+      "首件标签",
+      "步骤卡",
+      "批次标签",
+      "检查表"
+    ],
+    "steps": [
+      "先做首件。",
+      "确认模板和关键尺寸。",
+      "固定重复步骤卡。",
+      "每件做关键检查。",
+      "发现系统性问题时暂停整批。",
+      "记录批次一致性。",
+      "状态变化时更新任务板、标签或交接卡。",
+      "结束前由另一名成员对照现场实物复核。"
+    ],
+    "check": [
+      "首件合格。",
+      "模板编号清楚。",
+      "每件有检查痕迹。",
+      "失败批次已隔离。"
+    ],
+    "common_mistakes": [
+      "只口头说明小批量制作，没有对应实物和编号。",
+      "状态变化后不更新标签或任务板。",
+      "为了赶进度越过明确停止线。"
+    ],
+    "fallback": [
+      "降低批量规模。",
+      "改为单件制作。",
+      "只完成低风险部件。",
+      "重新做模板。"
+    ],
+    "stop_or_escalate": [
+      "首件不合格、模板尺寸争议、同类缺陷连续出现、材料批次混乱或疲劳操作时停止批量制作。"
+    ],
+    "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "repair",
+      "organization",
+      "tools"
+    ],
+    "intents": [
+      "production_workshop_v0_1",
+      "offline_workshop_action"
+    ],
+    "situations": [
+      "workshop_operation",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "模板卡",
+      "首件标签",
+      "步骤卡",
+      "批次标签",
+      "检查表"
+    ],
+    "signals": [
+      "小批量重复制作流程",
+      "小批量制作",
+      "工坊",
+      "生产流程"
+    ],
+    "risks": [
+      "首件失败",
+      "批次偏差",
+      "模板争议"
+    ],
+    "keywords": [
+      "小批量重复制作流程",
+      "小批量制作",
+      "工坊生产",
+      "离线流程",
+      "小团队",
+      "任务交接"
+    ],
+    "negative_keywords": [
+      "大型工厂排产",
+      "自动化生产线",
+      "专业质量认证",
+      "危险化学品生产",
+      "武器制造",
+      "高压电气作业",
+      "ERP"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "production_workshop_v0_1",
+    "top1_aliases": [
+      "小批量重复制作流程"
+    ],
+    "related_wiki": [
+      "production-workshop-batch-label-minimum-001",
+      "production-workshop-template-size-standard-001",
+      "production-workshop-first-article-check-001",
+      "production-workshop-repeat-step-card-001",
+      "production-workshop-each-piece-check-001",
+      "production-workshop-batch-consistency-check-001",
+      "production-workshop-failed-batch-isolation-001"
+    ],
+    "risk_level": "caution"
+  },
+  {
+    "id": "DG-0907",
+    "title": "成品质量复查",
+    "category": "团队轮值与任务管理",
+    "priority": "P0",
+    "scenario": "成品准备使用或入库前，需要判断是否可放行。",
+    "goal": "用离线可执行的质量复查把人员、实物、状态、停止线和下一步连接起来。",
+    "tools": [
+      "尺寸表",
+      "直尺或模板",
+      "稳定性表",
+      "质量记录",
+      "待检牌"
+    ],
+    "steps": [
+      "核对用途和限制。",
+      "复查尺寸。",
+      "复查稳定性和承重前状态。",
+      "检查锐边、毛刺、松动和污染。",
+      "做功能检查。",
+      "记录放行、返工、降级或报废。",
+      "状态变化时更新任务板、标签或交接卡。",
+      "结束前由另一名成员对照现场实物复核。"
+    ],
+    "check": [
+      "尺寸合格。",
+      "无危险锐边。",
+      "连接未松动。",
+      "功能符合用途。",
+      "去向明确。"
+    ],
+    "common_mistakes": [
+      "只口头说明质量复查，没有对应实物和编号。",
+      "状态变化后不更新标签或任务板。",
+      "为了赶进度越过明确停止线。"
+    ],
+    "fallback": [
+      "降级为非承重 / 非接触用途。",
+      "转返工。",
+      "转 Waste。",
+      "临时封存待复查。"
+    ],
+    "stop_or_escalate": [
+      "承重不明、锐边无法处理、连接松动、污染、儿童可能接触或检查记录缺失时不放行。"
+    ],
+    "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "repair",
+      "organization",
+      "tools"
+    ],
+    "intents": [
+      "production_workshop_v0_1",
+      "offline_workshop_action"
+    ],
+    "situations": [
+      "workshop_operation",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "尺寸表",
+      "直尺或模板",
+      "稳定性表",
+      "质量记录",
+      "待检牌"
+    ],
+    "signals": [
+      "成品质量复查",
+      "质量复查",
+      "工坊",
+      "生产流程"
+    ],
+    "risks": [
+      "裂纹",
+      "锐边",
+      "连接松动"
+    ],
+    "keywords": [
+      "成品质量复查",
+      "质量复查",
+      "工坊生产",
+      "离线流程",
+      "小团队",
+      "任务交接"
+    ],
+    "negative_keywords": [
+      "大型工厂排产",
+      "自动化生产线",
+      "专业质量认证",
+      "危险化学品生产",
+      "武器制造",
+      "高压电气作业",
+      "ERP"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "production_workshop_v0_1",
+    "top1_aliases": [
+      "成品质量复查"
+    ],
+    "related_wiki": [
+      "production-workshop-finished-goods-hold-zone-001",
+      "production-workshop-finished-goods-storage-transfer-001",
+      "production-workshop-size-check-sheet-001",
+      "production-workshop-stability-check-sheet-001",
+      "production-workshop-edge-burr-check-001",
+      "production-workshop-loose-fastener-check-001",
+      "production-workshop-function-check-before-release-001",
+      "production-workshop-quality-record-minimum-001",
+      "production-workshop-each-piece-check-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0908",
+    "title": "不合格品 / 返工 / 报废判断",
+    "category": "团队轮值与任务管理",
+    "priority": "P0",
+    "scenario": "成品或半成品出现开裂、松动、尺寸错误、污染、锐边或功能失败。",
+    "goal": "用离线可执行的不合格品把人员、实物、状态、停止线和下一步连接起来。",
+    "tools": [
+      "不合格标签",
+      "隔离区",
+      "返工卡",
+      "报废记录",
+      "Waste 交接卡"
+    ],
+    "steps": [
+      "先隔离。",
+      "判断是否可返工。",
+      "不可返工则降级或报废。",
+      "可回收材料转 Waste。",
+      "原因写入复盘。",
+      "禁止混回合格区。",
+      "状态变化时更新任务板、标签或交接卡。",
+      "结束前由另一名成员对照现场实物复核。"
+    ],
+    "check": [
+      "不合格品有标签。",
+      "返工条件清楚。",
+      "报废理由记录。",
+      "材料去向可追踪。"
+    ],
+    "common_mistakes": [
+      "只口头说明不合格品，没有对应实物和编号。",
+      "状态变化后不更新标签或任务板。",
+      "为了赶进度越过明确停止线。"
+    ],
+    "fallback": [
+      "改作练习件。",
+      "降级为低风险用途。",
+      "拆解入材料池。",
+      "封存待有经验者复查。"
+    ],
+    "stop_or_escalate": [
+      "承重件裂纹、污染来源不明、锐边不可控、反复返工失败或涉及电气 / 火灾风险时停止返工。"
+    ],
+    "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "repair",
+      "organization",
+      "tools"
+    ],
+    "intents": [
+      "production_workshop_v0_1",
+      "offline_workshop_action"
+    ],
+    "situations": [
+      "workshop_operation",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "不合格标签",
+      "隔离区",
+      "返工卡",
+      "报废记录",
+      "Waste 交接卡"
+    ],
+    "signals": [
+      "不合格品 / 返工 / 报废判断",
+      "不合格品",
+      "工坊",
+      "生产流程"
+    ],
+    "risks": [
+      "反复返工",
+      "污染",
+      "误放行"
+    ],
+    "keywords": [
+      "不合格品 / 返工 / 报废判断",
+      "不合格品",
+      "工坊生产",
+      "离线流程",
+      "小团队",
+      "任务交接"
+    ],
+    "negative_keywords": [
+      "大型工厂排产",
+      "自动化生产线",
+      "专业质量认证",
+      "危险化学品生产",
+      "武器制造",
+      "高压电气作业",
+      "ERP"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "production_workshop_v0_1",
+    "top1_aliases": [
+      "不合格品 / 返工 / 报废判断"
+    ],
+    "related_wiki": [
+      "production-workshop-nonconforming-item-quarantine-001",
+      "production-workshop-waste-transfer-card-001",
+      "production-workshop-edge-burr-check-001",
+      "production-workshop-rework-decision-line-001",
+      "production-workshop-scrap-decision-line-001",
+      "production-workshop-quality-record-minimum-001",
+      "production-workshop-failed-batch-isolation-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0909",
+    "title": "工坊安全记录与 near miss 复盘",
+    "category": "团队轮值与任务管理",
+    "priority": "P1",
+    "scenario": "生产中出现低照明、疲劳、粉尘、火花、工具险些伤人或旁人误入。",
+    "goal": "用离线可执行的安全记录把人员、实物、状态、停止线和下一步连接起来。",
+    "tools": [
+      "near miss 卡",
+      "隔离标识",
+      "PPE 清单",
+      "任务板",
+      "笔"
+    ],
+    "steps": [
+      "立即暂停相关任务。",
+      "隔离风险源。",
+      "记录 near miss。",
+      "确认 PPE 和人员状态。",
+      "决定复工、降级或停工。",
+      "把整改项写入任务板。",
+      "状态变化时更新任务板、标签或交接卡。",
+      "结束前由另一名成员对照现场实物复核。"
+    ],
+    "check": [
+      "险情记录完整。",
+      "风险源已处理。",
+      "复工条件明确。",
+      "重复风险有负责人。"
+    ],
+    "common_mistakes": [
+      "只口头说明安全记录，没有对应实物和编号。",
+      "状态变化后不更新标签或任务板。",
+      "为了赶进度越过明确停止线。"
+    ],
+    "fallback": [
+      "只做清理、标记、记录和低风险整理。",
+      "延后高风险工序。",
+      "双人复核后再复工。"
+    ],
+    "stop_or_escalate": [
+      "有人受伤、火花 / 烟味、漏电、刃具失控、疲劳明显或儿童进入时停止生产并转相邻安全 / 医疗域。"
+    ],
+    "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "repair",
+      "organization",
+      "tools"
+    ],
+    "intents": [
+      "production_workshop_v0_1",
+      "offline_workshop_action"
+    ],
+    "situations": [
+      "workshop_operation",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "near miss 卡",
+      "隔离标识",
+      "PPE 清单",
+      "任务板",
+      "笔"
+    ],
+    "signals": [
+      "工坊安全记录与 near miss 复盘",
+      "安全记录",
+      "工坊",
+      "生产流程"
+    ],
+    "risks": [
+      "粉尘火花",
+      "低照明",
+      "疲劳"
+    ],
+    "keywords": [
+      "工坊安全记录与 near miss 复盘",
+      "安全记录",
+      "工坊生产",
+      "离线流程",
+      "小团队",
+      "任务交接"
+    ],
+    "negative_keywords": [
+      "大型工厂排产",
+      "自动化生产线",
+      "专业质量认证",
+      "危险化学品生产",
+      "武器制造",
+      "高压电气作业",
+      "ERP"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "production_workshop_v0_1",
+    "top1_aliases": [
+      "工坊安全记录与 near miss 复盘"
+    ],
+    "related_wiki": [
+      "production-workshop-risk-source-scan-001",
+      "production-workshop-ppe-check-before-task-001",
+      "production-workshop-dust-spark-near-miss-log-001",
+      "production-workshop-low-light-stop-line-001",
+      "production-workshop-fatigue-stop-line-001",
+      "production-workshop-bystander-exclusion-log-001",
+      "production-workshop-incident-review-card-001"
+    ],
+    "risk_level": "high"
+  },
+  {
+    "id": "DG-0910",
+    "title": "工坊任务交接",
+    "category": "团队轮值与任务管理",
+    "priority": "P1",
+    "scenario": "下一班、另一个成员或第二天需要接手未完成生产任务。",
+    "goal": "用离线可执行的任务交接把人员、实物、状态、停止线和下一步连接起来。",
+    "tools": [
+      "交接卡",
+      "任务板",
+      "半成品标签",
+      "工具表",
+      "禁用标签"
+    ],
+    "steps": [
+      "列出未完成任务。",
+      "说明半成品位置和状态。",
+      "交接工具状态。",
+      "标记风险点。",
+      "写清下一步动作。",
+      "交接失败原因和禁止操作。",
+      "双方复述确认。",
+      "状态变化时更新任务板、标签或交接卡。",
+      "结束前由另一名成员对照现场实物复核。"
+    ],
+    "check": [
+      "任务、物品、工具、风险、下一步、负责人都可追踪。",
+      "接手人能够根据现场实物复述任务、风险、下一步和停止条件。"
+    ],
+    "common_mistakes": [
+      "只口头说明任务交接，没有对应实物和编号。",
+      "状态变化后不更新标签或任务板。",
+      "为了赶进度越过明确停止线。"
+    ],
+    "fallback": [
+      "交接给更有经验者。",
+      "暂停任务。",
+      "只交接清理 / 记录任务。",
+      "把半成品转待检区。"
+    ],
+    "stop_or_escalate": [
+      "半成品状态不明、工具缺失、风险点未说明、失败原因未记录或接手人无技能授权时不交接开工。"
+    ],
+    "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+    "category_original": "团队轮值与任务管理",
+    "domains": [
+      "repair",
+      "organization",
+      "tools"
+    ],
+    "intents": [
+      "production_workshop_v0_1",
+      "offline_workshop_action"
+    ],
+    "situations": [
+      "workshop_operation",
+      "resource_limited_team",
+      "offline_handover"
+    ],
+    "objects": [
+      "交接卡",
+      "任务板",
+      "半成品标签",
+      "工具表",
+      "禁用标签"
+    ],
+    "signals": [
+      "工坊任务交接",
+      "任务交接",
+      "工坊",
+      "生产流程"
+    ],
+    "risks": [
+      "工具缺失",
+      "状态不明",
+      "技能不匹配"
+    ],
+    "keywords": [
+      "工坊任务交接",
+      "任务交接",
+      "工坊生产",
+      "离线流程",
+      "小团队",
+      "任务交接"
+    ],
+    "negative_keywords": [
+      "大型工厂排产",
+      "自动化生产线",
+      "专业质量认证",
+      "危险化学品生产",
+      "武器制造",
+      "高压电气作业",
+      "ERP"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "repair",
+    "primary_intent": "production_workshop_v0_1",
+    "top1_aliases": [
+      "工坊任务交接"
+    ],
+    "related_wiki": [
+      "production-workshop-shift-handover-card-001",
+      "production-workshop-tool-state-handover-001",
+      "production-workshop-next-action-handover-001",
+      "production-workshop-wip-handover-tag-001",
+      "production-workshop-unfinished-item-tag-001",
+      "production-workshop-task-board-minimum-001",
+      "production-workshop-end-of-day-status-log-001",
+      "production-workshop-fatigue-stop-line-001",
+      "production-workshop-daily-resource-budget-001"
+    ],
+    "risk_level": "caution"
+  },
+  {
+    "id": "DG-0911",
+    "title": "每日跨域运行摘要",
+    "category": "信息保存与长期重建",
+    "priority": "P0",
+    "risk_level": "normal",
+    "scenario": "小团队一天内产生了多个领域的纸面记录，需要在收工前收齐并给次日值守者留下可执行摘要。",
+    "goal": "在断网和设备不可用时，用一页摘要保住未完成事项、异常、责任人和次日首要动作。",
+    "domains": [
+      "records"
+    ],
+    "keywords": [
+      "当日记录收口",
+      "次日摘要",
+      "跨域记录",
+      "未完成事项",
+      "纸面交接"
+    ],
+    "tools": [
+      "当日事件页",
+      "一页摘要表",
+      "铅笔",
+      "待核对夹"
+    ],
+    "steps": [
+      "按水、食物、能源、医疗、生产和人员顺序收齐当日记录；缺页时在摘要上写明缺失领域和保管人。",
+      "每条摘要只写发生时间、事实、影响、当前状态、负责人和下一步，不把传闻改写成已确认事实。",
+      "把未完成、待核对和已关闭事项分栏，给未完成项写次日最晚复查时间。",
+      "由另一名成员对照原始记录抽查关键数字和停止状态，签名后把摘要放到次日任务板。"
+    ],
+    "check": [
+      "每个未完成项都有负责人、下一步和期限。",
+      "关键数字能回到原始记录，待核对内容没有被写成定论。"
+    ],
+    "common_mistakes": [
+      "只抄结果而不写状态。",
+      "把不同领域记录混成无法追溯的一段话。",
+      "摘要完成后丢弃原始页。"
+    ],
+    "fallback": [
+      "时间不足时先收口伤病、饮水、火险和正在运行的设备，再列出其余缺页。",
+      "没有统一表格时用编号纸页，并在首页写页码和保管位置。"
+    ],
+    "stop_or_escalate": [
+      "发现伤病、污染、火险或设备仍处于危险状态时，停止文书收口并交给对应领域负责人先处置。",
+      "关键记录缺失且可能影响次日安全决策时，不得标记已关闭。"
+    ],
+    "notes": "Records 只负责保留事实和交接状态，不替对应领域作技术判断。",
+    "related_wiki": [
+      "records-daily-cross-domain-summary-001",
+      "records-raw-record-minimum-fields-001",
+      "general-event-log-001",
+      "education-paper-notebook-001"
+    ]
+  },
+  {
+    "id": "DG-0912",
+    "title": "原始记录可信度检查",
+    "category": "信息保存与长期重建",
+    "priority": "P0",
+    "risk_level": "caution",
+    "scenario": "记录来自不同人员、转述或不同时间点，需要判断哪些内容可直接用于行动，哪些仍待核对。",
+    "goal": "保留来源差异，为每条记录标注事实层级、适用条件和复核状态。",
+    "domains": [
+      "records"
+    ],
+    "keywords": [
+      "原始记录复核",
+      "可信度标记",
+      "直接观察",
+      "转述",
+      "矛盾证据"
+    ],
+    "tools": [
+      "原始记录",
+      "可信度标记表",
+      "来源索引",
+      "待核对夹"
+    ],
+    "steps": [
+      "保留原始页，不擦改原文；另页登记记录人、时间、地点、对象、单位和当时条件。",
+      "把内容标为直接观察、本人报告、他人转述或推断，并写出可回查的来源编号。",
+      "核对单位、时间顺序和对象身份；遇到冲突时并列保留，不用多数票消除差异。",
+      "写明适用条件、已完成的复核、尚缺证据和下一次核对时间，再由第二人签名。"
+    ],
+    "check": [
+      "每条关键结论都能指回原始来源。",
+      "推断、转述和直接观察使用不同标记。",
+      "冲突记录保留双方内容与待查项。"
+    ],
+    "common_mistakes": [
+      "在原始页上覆盖旧值。",
+      "把讲述者身份当成事实可信度。",
+      "忽略测量单位和环境条件。"
+    ],
+    "fallback": [
+      "无人可复核时标记为单人未复核，并限制其用途。",
+      "来源暂时找不到时保留内容但降为待核对，不据此执行高风险动作。"
+    ],
+    "stop_or_escalate": [
+      "记录将触发医疗、火灾、电气、结构承重或食水安全决策而来源不清时，停止据此行动并交对应领域复核。",
+      "身份、单位或时间存在无法解释的冲突时，不得提升为已验证知识。"
+    ],
+    "notes": "可信度标记说明证据状态，不给记录人贴永久标签。",
+    "related_wiki": [
+      "records-lifecycle-state-model-001",
+      "records-raw-record-minimum-fields-001",
+      "records-review-verification-checklist-001",
+      "records-source-direct-reported-boundary-001",
+      "records-applicable-conditions-context-001",
+      "records-contradictory-evidence-handling-001",
+      "general-record-trust-label-001",
+      "records-medical-observation-handover-boundary-001"
+    ]
+  },
+  {
+    "id": "DG-0913",
+    "title": "失败 / 事故记录复盘",
+    "category": "信息保存与长期重建",
+    "priority": "P0",
+    "risk_level": "high",
+    "scenario": "发生伤害、险情、污染、设备故障或任务失败后，需要形成可追溯复盘而不妨碍现场处置。",
+    "goal": "分开事实、原因假设和纠正措施，留下下一次可验证的行动。",
+    "domains": [
+      "records"
+    ],
+    "keywords": [
+      "事故复盘",
+      "失败原因",
+      "near miss",
+      "纠正措施",
+      "事件时间线"
+    ],
+    "tools": [
+      "事件原始页",
+      "复盘卡",
+      "时间线纸",
+      "证据封套"
+    ],
+    "steps": [
+      "确认人员救治、危险隔离和对应领域报告已经启动；复盘人员不得为了记录返回危险区。",
+      "按时间写已知事实、动作和结果，给照片、零件、测量页或证人记录编号。",
+      "把直接原因、促成条件和待验证假设分栏，禁止把未经核实的责任归属写成结论。",
+      "为每项纠正措施写负责人、完成期限、验证方法和失败后的升级路径。",
+      "复查措施是否真正降低复发条件；未验证前保持事件为开放状态。"
+    ],
+    "check": [
+      "现场安全和人员照护优先于复盘。",
+      "事实、假设和责任判断彼此分开。",
+      "纠正措施有验证结果而不只是完成日期。"
+    ],
+    "common_mistakes": [
+      "边救援边追问责任。",
+      "只记录谁犯错，不记录环境和流程条件。",
+      "把更换人员当作唯一纠正措施。"
+    ],
+    "fallback": [
+      "当事人暂时不能陈述时先封存现有证据并标记缺口。",
+      "人员不足时先写五行时间线和未解除危险，完整复盘延后但不得取消。"
+    ],
+    "stop_or_escalate": [
+      "仍有流血、烟火、触电、泄漏、结构不稳或污染扩散时，立即停止复盘并由 Medical、Fire、Energy 或 Safety 主导处置。",
+      "证据收集会暴露人员于危险或破坏现场隔离时，停止收集。"
+    ],
+    "notes": "本 Guide 记录事故和失败，不替代急救、危险控制或专业调查。",
+    "related_wiki": [
+      "records-contradictory-evidence-handling-001",
+      "records-failure-cause-classification-001",
+      "records-corrective-action-verification-001",
+      "records-incident-near-miss-review-template-001",
+      "general-failure-lesson-record-001"
+    ]
+  },
+  {
+    "id": "DG-0914",
+    "title": "重复问题与经验提取",
+    "category": "信息保存与长期重建",
+    "priority": "P0",
+    "risk_level": "caution",
+    "scenario": "维护、生产、农业或能源记录积累了多个周期，需要识别重复问题并安排下一次小范围验证。",
+    "goal": "用同口径数据区分趋势、偶发波动和未知项，形成有限且可停止的验证计划。",
+    "domains": [
+      "records"
+    ],
+    "keywords": [
+      "周期趋势",
+      "重复问题",
+      "待验证假设",
+      "纠正验证",
+      "跨期比较"
+    ],
+    "tools": [
+      "周期记录",
+      "对比表",
+      "趋势页",
+      "假设卡"
+    ],
+    "steps": [
+      "选取目的相同、单位一致且条件可比的周期；无法比较的记录单独列出。",
+      "分别汇总成功条件、失败模式、资源消耗和异常，不用平均值掩盖极端事件。",
+      "把观察到的重复现象写为趋势，把可能原因写为假设，并列出反证条件。",
+      "只安排一个变量清楚、规模受限的下一次验证，写负责人、期限、停止线和记录字段。",
+      "验证结束后记录结果；不支持假设时明确否定或保留未知，不反向修改旧记录。"
+    ],
+    "check": [
+      "比较记录的单位、对象和环境条件一致或已注明差异。",
+      "趋势与原因假设分开。",
+      "下一次验证有停止线和结果字段。"
+    ],
+    "common_mistakes": [
+      "把两个周期当作长期规律。",
+      "只挑支持原想法的记录。",
+      "同时改变多个条件导致结果无法解释。"
+    ],
+    "fallback": [
+      "数据太少时只列观察和缺口，不宣布趋势。",
+      "无法安全试验时保留假设，等待对应领域给出验证条件。"
+    ],
+    "stop_or_escalate": [
+      "验证涉及医疗、承重、电气、火灾、污染或食水安全时，停止由 Records 自行设计，交对应领域负责人批准。",
+      "单位不一致、原始页缺失或样本条件无法辨认时，不得形成推广结论。"
+    ],
+    "notes": "Records 组织比较和证据状态，不替具体领域决定技术参数。",
+    "related_wiki": [
+      "records-applicable-conditions-context-001",
+      "records-success-review-minimum-001",
+      "records-repeated-problem-trend-review-001",
+      "records-pending-hypothesis-next-test-001",
+      "records-corrective-action-verification-001",
+      "records-maintenance-history-trend-001",
+      "records-production-batch-long-term-review-001",
+      "records-agriculture-season-comparison-001",
+      "records-energy-capacity-trend-001"
+    ]
+  },
+  {
+    "id": "DG-0915",
+    "title": "经验升级为 SOP 候选",
+    "category": "信息保存与长期重建",
+    "priority": "P0",
+    "risk_level": "high",
+    "scenario": "一条现场经验已经多次出现，团队准备把它从待验证记录提升为知识卡或正式操作依据。",
+    "goal": "用证据门槛、适用边界和复审责任防止未经验证的经验被普遍执行。",
+    "domains": [
+      "records"
+    ],
+    "keywords": [
+      "经验提升",
+      "知识推广门槛",
+      "正式知识",
+      "高风险复审",
+      "适用边界"
+    ],
+    "tools": [
+      "原始记录索引",
+      "知识提升审查表",
+      "知识卡",
+      "复审日历"
+    ],
+    "steps": [
+      "汇集支持、反对和失败记录，确认每条证据都能回到原始页和发生条件。",
+      "写清知识解决的问题、适用对象、所需资源、禁止场景、停止线和已知未知项。",
+      "由未参与原经验的人复核来源、重复次数和矛盾证据；高风险内容同时交对应领域负责人审查。",
+      "只在审查通过后分配正式编号、状态、版本、负责人和下次复审日期。",
+      "保留被替代的草稿和审查记录，让后续人员能说明为何提升或拒绝。"
+    ],
+    "check": [
+      "知识卡能追溯到多条独立记录或明确的权威来源。",
+      "适用条件、禁止条件和停止线可直接执行。",
+      "高风险内容有对应领域签字。"
+    ],
+    "common_mistakes": [
+      "一次成功就写成通用规则。",
+      "只收集支持证据。",
+      "把发布编号误当成技术正确性证明。"
+    ],
+    "fallback": [
+      "证据不足时维持待验证状态，并写清下一条最有价值的记录。",
+      "无法找到领域复核人时，归档为参考材料，不放入正式操作入口。"
+    ],
+    "stop_or_escalate": [
+      "涉及医疗剂量、食水安全、火灾、电气、承重或其他高风险动作且无领域审查时，禁止提升和发布。",
+      "证据冲突未解释、来源不可追溯或适用条件缺失时，保持待验证。"
+    ],
+    "notes": "提升流程管理知识可信度，不把 Records 变成各技术领域的审批机构。",
+    "related_wiki": [
+      "records-lifecycle-state-model-001",
+      "records-applicable-conditions-context-001",
+      "records-knowledge-promotion-gate-001",
+      "records-high-risk-knowledge-review-gate-001",
+      "general-knowledge-card-archive-001"
+    ]
+  },
+  {
+    "id": "DG-0916",
+    "title": "SOP / Knowledge Card 版本更新与废止",
+    "category": "信息保存与长期重建",
+    "priority": "P0",
+    "risk_level": "high",
+    "scenario": "团队需要发布新 SOP、撤下旧版，或在新版暴露问题时回到上一可用版本。",
+    "goal": "保证现场只有一个可识别的当前版本，同时保留变更理由、旧版和回滚证据。",
+    "domains": [
+      "records"
+    ],
+    "keywords": [
+      "SOP 版本",
+      "当前版本",
+      "旧版隔离",
+      "版本回滚",
+      "变更日志"
+    ],
+    "tools": [
+      "SOP 母本",
+      "版本登记页",
+      "旧版封套",
+      "发放回收表"
+    ],
+    "steps": [
+      "给候选版本写编号、日期、负责人、适用范围、变更摘要和依据，不覆盖旧母本。",
+      "核对所有高风险停止线与对应领域审查结果，再由授权人签字发布。",
+      "在目录和工作点标出唯一当前版；逐份回收旧版，盖作废标记后转入隔离封套。",
+      "记录领取人、地点和未收回副本；未完成回收的工作点暂停按新旧 SOP 混合作业。",
+      "需要回滚时写触发问题、选定旧版和重新验证结果，按一次新发布处理。"
+    ],
+    "check": [
+      "当前版编号在目录、母本和工作副本上一致。",
+      "每次变更和回滚都有理由、审查人及日期。",
+      "旧版可追溯但不会被误当当前版。"
+    ],
+    "common_mistakes": [
+      "在旧纸上直接改字。",
+      "发布新版却不回收现场副本。",
+      "回滚后继续沿用新版变更日志。"
+    ],
+    "fallback": [
+      "无法印制时由两人手抄并逐页核对编号。",
+      "目录损坏时暂停发放，用母本封面和签名登记重建当前版本。"
+    ],
+    "stop_or_escalate": [
+      "当前版本无法唯一确认、旧版混在工作点或关键页面缺失时，停止按该 SOP 作业。",
+      "高风险变更未获对应领域复核，或回滚版本未重新验证时，不得发布。"
+    ],
+    "notes": "版本控制负责谁在何时使用哪份知识，不替代具体 SOP 的技术验证。",
+    "related_wiki": [
+      "records-lifecycle-state-model-001",
+      "records-sop-version-minimum-fields-001",
+      "records-current-version-selection-001",
+      "records-superseded-version-isolation-001",
+      "records-rollback-revalidation-001",
+      "records-high-risk-knowledge-review-gate-001",
+      "records-version-change-log-001",
+      "general-knowledge-card-archive-001",
+      "general-offline-directory-index-001"
+    ]
+  },
+  {
+    "id": "DG-0917",
+    "title": "长期记录归档与索引",
+    "category": "信息保存与长期重建",
+    "priority": "P1",
+    "risk_level": "caution",
+    "scenario": "纸面档案持续增加，团队需要决定哪些留在工作点、哪些长期封存、哪些到期后可销毁。",
+    "goal": "按用途、敏感度和保存期限分层保管，避免误删关键证据或长期暴露个人资料。",
+    "domains": [
+      "records"
+    ],
+    "keywords": [
+      "纸面档案",
+      "保留期限",
+      "访问权限",
+      "档案销毁",
+      "长期封存"
+    ],
+    "tools": [
+      "档案目录",
+      "封套",
+      "保留销毁表",
+      "访问登记页"
+    ],
+    "steps": [
+      "给档案标注编号、内容类型、时间范围、责任人、敏感级别和最后复审日期。",
+      "分为现场活跃、长期保留、受限访问和待处置四区，目录只写定位所需信息。",
+      "把医疗、身份和事故记录放入受限封套，访问时登记人员、原因和归还时间。",
+      "到复审日期时核对未完成事项、追溯价值、领域要求和是否存在替代副本。",
+      "两人确认可销毁后记录档案号、理由、批准人、日期和方式，再让内容无法复原。"
+    ],
+    "check": [
+      "目录能定位档案但不泄露敏感正文。",
+      "待销毁档案没有开放事项或唯一证据。",
+      "访问和销毁都有双人记录。"
+    ],
+    "common_mistakes": [
+      "按纸张新旧决定销毁。",
+      "把敏感资料放在公共目录。",
+      "销毁后才发现它是唯一副本。"
+    ],
+    "fallback": [
+      "没有上锁柜时使用封签箱并由两人分别保管箱体和目录。",
+      "不能安全销毁时密封转入受限待处置区，禁止当作废纸利用。"
+    ],
+    "stop_or_escalate": [
+      "档案涉及正在处理的伤病、事故、权限争议或无法确认的唯一副本时，停止销毁。",
+      "访问记录异常、封签破损或敏感页失踪时，隔离档案并通知负责人。"
+    ],
+    "notes": "长期物理储藏环境由 Storage 判断；本 Guide 管理记录的保留、访问和处置状态。",
+    "related_wiki": [
+      "records-superseded-version-isolation-001",
+      "records-retention-access-disposal-001",
+      "records-medical-observation-handover-boundary-001",
+      "education-paper-notebook-001",
+      "general-long-term-archive-check-001",
+      "general-offline-directory-index-001",
+      "education-offline-data-backup-001",
+      "general-member-info-backup-001"
+    ]
+  },
+  {
+    "id": "DG-0918",
+    "title": "新成员知识与技能交接",
+    "category": "信息保存与长期重建",
+    "priority": "P0",
+    "risk_level": "caution",
+    "scenario": "成员需要学习、练习或接手一项任务，团队必须记录其当前能力边界和仍需监督的动作。",
+    "goal": "用可观察证据记录技能级别、授权范围、复训期限和交接缺口。",
+    "domains": [
+      "records"
+    ],
+    "keywords": [
+      "技能授权",
+      "监督练习",
+      "复训期限",
+      "学习路径",
+      "知识交接"
+    ],
+    "tools": [
+      "技能卡",
+      "监督练习记录",
+      "授权表",
+      "交接摘要"
+    ],
+    "steps": [
+      "把任务拆成可观察动作，写清仅可旁观、可监督操作、可独立操作和可带教的边界。",
+      "每次练习记录日期、条件、监督人、完成动作、错误、停止原因和下一步，不以参加次数代替能力证据。",
+      "授权人对照实际演示确认范围，为高风险动作单独写限制、复训日期和撤销条件。",
+      "人员交接时列出在办任务、知识位置、未验证判断、当前授权和需要继续监督的项目。",
+      "到期、长期未练习或发生相关事故后，把授权降为待复核，重新完成指定演示。"
+    ],
+    "check": [
+      "技能级别对应可观察行为。",
+      "授权范围、监督要求和到期日可直接查到。",
+      "交接摘要区分已掌握、待验证和未知。"
+    ],
+    "common_mistakes": [
+      "把资历或自述当作唯一能力证明。",
+      "一次演示后永久授权。",
+      "交接只给文件位置，不写未完成判断。"
+    ],
+    "fallback": [
+      "没有合格授权人时只允许旁观和低风险辅助，并记录等待复核。",
+      "人员紧缺时缩小任务范围，不扩大未经验证的授权。"
+    ],
+    "stop_or_escalate": [
+      "接手人没有所需授权、监督人不在场或无法说明停止线时，停止该项操作。",
+      "任务涉及医疗、电气、火灾、承重或其他高风险专业动作时，由对应领域决定授权标准。"
+    ],
+    "notes": "Records 保存技能证据；人员制度和岗位安排仍由 Organization 负责。",
+    "related_wiki": [
+      "records-skill-authorization-minimum-001",
+      "records-skill-level-boundaries-001",
+      "records-supervised-practice-evidence-001",
+      "records-skill-expiry-refresher-001",
+      "records-new-member-learning-path-001",
+      "records-knowledge-transfer-handover-summary-001",
+      "general-small-team-handoff-001",
+      "organization-onboarding-001",
+      "organization-skill-redundancy-001"
+    ]
+  },
+  {
+    "id": "DG-0919",
+    "title": "小型离网能源容量盘点",
+    "category": "能源",
+    "priority": "P1",
+    "risk_level": "caution",
+    "scenario": "小团队需要判断未来数日到数周的发电、储能、转换与负载是否匹配，而不是只安排今天的用电顺序。",
+    "goal": "用统一保守口径形成 Generation、Storage、Conversion、Load 容量模型，暴露未知项、转换级数和单点。",
+    "domains": [
+      "power",
+      "records"
+    ],
+    "keywords": [
+      "离网能源容量",
+      "保守可用容量",
+      "发电储能",
+      "持续负载",
+      "峰值负载",
+      "转换损耗"
+    ],
+    "tools": [
+      "容量盘点表",
+      "设备编号",
+      "供电路径图",
+      "耗电基线",
+      "铅笔"
+    ],
+    "steps": [
+      "列出发电源、储能、转换器、保护件、支路与负载，并给每个对象固定编号。",
+      "分开记录标称值、同条件实测值、保守可用值和未知项；没有证据的数值不得补猜。",
+      "对负载写持续功率、峰值功率、运行窗口和任务重要性。",
+      "从电源到负载写出转换路径与转换级数，标出重复转换和唯一部件。",
+      "按最差可信发电与偏低可用容量估算可维持时间，并列下一次复测。",
+      "当天设备先后顺序交 DG-0844 / DG-0845，不在本盘点中重新分配。"
+    ],
+    "check": [
+      "每个数值都有对象、单位、来源、日期与测量条件。",
+      "标称、实测、保守值和未知项彼此分开。",
+      "关键负载的持续值、峰值与转换路径均可追踪。",
+      "容量结论能回到原始记录，不依赖固定 UI 百分比。"
+    ],
+    "common_mistakes": [
+      "把标称容量直接当作可用容量。",
+      "只算储能，不算转换损耗和负载峰值。",
+      "把今天谁先用电混入跨周容量模型。",
+      "为了补齐表格给未知部件编造数值。"
+    ],
+    "fallback": [
+      "没有仪表时使用铭牌下限、历史运行时长和 UNKNOWN 标记，并按更低容量安排。",
+      "发电数据不足时只承诺最低关键负载，缩短普通任务窗口。"
+    ],
+    "stop_or_escalate": [
+      "来源不明、接线不明、保护件缺失、未知极性或可能涉及市电/高压时，停止通电确认并隔离。",
+      "出现发热、异味、火花、潮湿、破损或裸露导体时，停止盘点中的测试并转 Energy Safety / Repair。",
+      "需要住宅配电、并网、高压串或逆变器工程时停止，进入专业边界。"
+    ],
+    "notes": "本 Guide 负责长期容量模型；当天分配归 Energy Management，原始历史归 Records，具体维修归 Repair。",
+    "related_wiki": [
+      "energy-offgrid-capacity-inventory-001",
+      "energy-load-continuous-peak-profile-001",
+      "energy-low-voltage-power-path-map-001",
+      "energy-usb-dc-conversion-loss-001",
+      "energy-battery-capacity-001",
+      "energy-battery-capacity-002",
+      "energy-wh-mah-local-estimate-001",
+      "energy-device-consumption-baseline-001",
+      "records-energy-capacity-trend-001"
+    ]
+  },
+  {
+    "id": "DG-0920",
+    "title": "连续阴天与长期发电不足降级运行",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "caution",
+    "scenario": "太阳能连续多日低产出、长期无补电或发电部件部分失效，现有储能不能维持普通运行。",
+    "goal": "依据连续产出、保守容量和关键负载进入可交接的 DEGRADED / MINIMUM 模式，并定义恢复证据。",
+    "domains": [
+      "power",
+      "security"
+    ],
+    "keywords": [
+      "连续阴天",
+      "长期发电不足",
+      "blackout mode",
+      "degraded mode",
+      "最低维持模式",
+      "恢复条件"
+    ],
+    "tools": [
+      "最近三日产出记录",
+      "保守容量盘点",
+      "关键负载最低线",
+      "公共模式卡",
+      "铅笔"
+    ],
+    "steps": [
+      "比较最近多日产出、当前可用储能和关键负载日耗，区分长期产能不足与今天临时低电量。",
+      "冻结可延后负载，按现有断开顺序停止重复照明、娱乐和非必要高耗能任务。",
+      "为通信、最低照明、医疗照护与记录设置短而固定的运行窗口。",
+      "把已失败部件从路径图移出，只按已验证低压单一路径接入备用源。",
+      "每日同一时点复核剩余容量、当天产出、不可用部件和下一天气窗口。",
+      "发电与储能连续两个可比周期恢复到保守线后，一次只恢复一个普通负载。"
+    ],
+    "check": [
+      "模式卡写明进入原因、允许负载、暂停负载、保留量和下一复核。",
+      "关键负载没有因普通任务跌破最低线。",
+      "退出依据来自重复可比样本，不是一次晴天高值。",
+      "当天分配仍由 Energy Management 入口执行。"
+    ],
+    "common_mistakes": [
+      "把一天低电量误写成长期产能不足。",
+      "一次晴天就恢复全部负载。",
+      "把冒烟或过热模块当作可降级继续使用。",
+      "直接并联多个未知备用源。"
+    ],
+    "fallback": [
+      "无法补电时转纸本记录、人工值守和最短通信窗口。",
+      "容量无法确认时只保留一个最关键的已验证负载。"
+    ],
+    "stop_or_escalate": [
+      "冒烟、火花、焦味、异常热、进水、电池鼓包或保护件动作时立即停止并转 Energy Safety / Fire。",
+      "备用源电压、极性、接口或保护无法确认时不得接入。",
+      "涉及市电、并网、高压 DC 或高压太阳能串时停止，进入专业边界。"
+    ],
+    "notes": "本 Guide 处理连续多日和长期产能不足；今天的设备分配继续由 Energy Management 主导。",
+    "related_wiki": [
+      "energy-solar-multi-day-cloudy-degraded-mode-001",
+      "energy-blackout-degraded-mode-card-001",
+      "energy-generation-component-failure-degraded-path-001",
+      "energy-cloudy-solar-downgrade-001",
+      "energy-solar-daytime-charge-schedule-001",
+      "energy-essential-load-reserve-001",
+      "energy-low-battery-load-disconnect-order-001"
+    ]
+  },
+  {
+    "id": "DG-0921",
+    "title": "电池实际容量下降复查",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "high",
+    "scenario": "同一成品电池或移动电源的实际运行时间逐月缩短，或备用电池很久没有验证，需要非侵入式复查。",
+    "goal": "在可比负载和环境下复测 runtime / Wh，以多次趋势形成保守容量、健康等级、替换线和备用就绪状态。",
+    "domains": [
+      "power",
+      "records",
+      "security"
+    ],
+    "keywords": [
+      "电池实际容量",
+      "容量复测",
+      "运行时间下降",
+      "电池健康等级",
+      "replacement line",
+      "备用电池就绪"
+    ],
+    "tools": [
+      "电池编号",
+      "可比较低压负载",
+      "USB power meter 或计时工具",
+      "温度记录",
+      "停用标签"
+    ],
+    "steps": [
+      "先检查鼓包、漏液、腐蚀、摔裂、异常热、异味和接口损伤；任一异常都停止复测。",
+      "选择与历史相同或可比较的负载、模式、线缆、温度、开始状态和停止阈值。",
+      "记录 runtime 或累计 Wh，不以显示百分比单独作为容量。",
+      "在不同日期重复，并与至少三个可比样本比较；条件变化必须注明。",
+      "取偏低结果作为保守可用容量，按 A / B / C / UNKNOWN / ISOLATED 记录任务能力。",
+      "低于关键任务需求时从关键电源清单移除，安排成品替换或退役，不拆修。"
+    ],
+    "check": [
+      "负载、温度、起止状态、仪表和单位可比较。",
+      "单次读数没有被写成长期退化结论。",
+      "健康等级同时考虑安全状态、趋势和任务需求。",
+      "备用源的身份、接口、最近验证和允许用途清楚。"
+    ],
+    "common_mistakes": [
+      "对鼓包或漏液电池继续做容量测试。",
+      "用一次百分比下降宣布电池报废。",
+      "不同负载和温度的结果直接比较。",
+      "通过拆包、换芯、点焊或改 BMS 恢复容量。"
+    ],
+    "fallback": [
+      "没有仪表时用同一设备完成固定任务的实际时长比较，并标低置信度。",
+      "数据不足时降低规划容量、标 UNKNOWN，并准备已验证成品替代模块。"
+    ],
+    "stop_or_escalate": [
+      "鼓包、漏液、异常热、异味、腐蚀、摔裂、冒烟或接头快速升温时立即 STOP、断开并隔离，交 Energy Safety。",
+      "禁止拆电池包、换芯、点焊、电芯重组、BMS 改造或修理损坏锂电池。",
+      "测试可能短接电池、需要裸露内部导体或超出已知低压范围时停止。"
+    ],
+    "notes": "只允许非侵入式容量验证。Storage 管理长期存放，Records 保存样本，Energy 解释安全样本的容量趋势。",
+    "related_wiki": [
+      "energy-battery-capacity-retest-cycle-001",
+      "energy-battery-health-grade-replacement-line-001",
+      "energy-spare-battery-readiness-check-001",
+      "energy-battery-capacity-001",
+      "energy-battery-aging-capacity-note-001",
+      "energy-backup-battery-rotation-ledger-001",
+      "energy-battery-003",
+      "energy-charge-discharge-handover-log-001",
+      "records-energy-capacity-trend-001"
+    ]
+  },
+  {
+    "id": "DG-0922",
+    "title": "太阳能实际产出与预期偏差检查",
+    "category": "能源",
+    "priority": "P1",
+    "risk_level": "caution",
+    "scenario": "同一套低压太阳能系统标称功率较高，但实际 Wh 或完成固定充电任务的能力持续低于季节保守基线。",
+    "goal": "在同类天气、时段与负载下比较预期和实际，依次检查遮挡、污染、摆放、固定、接头与控制器状态。",
+    "domains": [
+      "power",
+      "records",
+      "repair"
+    ],
+    "keywords": [
+      "太阳能实际产出",
+      "预期偏差",
+      "跨季基线",
+      "面板遮挡",
+      "面板污染",
+      "控制器状态"
+    ],
+    "tools": [
+      "季节产出基线",
+      "天气记录",
+      "panel_id",
+      "USB power meter 或任务计时",
+      "维护记录"
+    ],
+    "steps": [
+      "选择与基线相近的天气、时段、温度、面板位置和负载，记录实际 Wh 或固定任务用时。",
+      "检查新增遮挡、板面污染、方向或角度变化、固定点和线缆拉扯。",
+      "断开后目视检查接头、保护件和控制器的松动、腐蚀、水汽、热痕或告警。",
+      "一次只改变一个安全变量，并记录调整前后结果。",
+      "至少取得多个可比样本；单次低读数只标待复测，不判定面板故障。",
+      "偏差持续时降低保守发电值，将可疑部件交 Repair，并按需要进入降级模式。"
+    ],
+    "check": [
+      "天气、时段、负载、位置、工具和单位可比较。",
+      "预期来自本地季节基线，不直接使用标称峰值。",
+      "维护前后结果可追踪，且没有同时改变多个变量。",
+      "当前冒烟、火花或过热没有被当作普通偏差。"
+    ],
+    "common_mistakes": [
+      "一次低读数就宣告面板损坏。",
+      "拿不同季节或时段的值直接比较。",
+      "同时清洁、换线和换控制器，无法判断原因。",
+      "为了靠近日照位置进行屋顶或高处作业。"
+    ],
+    "fallback": [
+      "无法安全检查时按较低实际产出规划，缩小负载并保留原始偏差记录。",
+      "没有能量表时使用完成相同充电任务的时间作为低置信度相对值。"
+    ],
+    "stop_or_escalate": [
+      "破裂面板、裸露导体、控制器冒烟、火花、积水或接头快速升温时停止并转 Energy Safety / Fire。",
+      "需要屋顶高处、带电拆线、高压串联、并网或市电操作时停止，进入专业边界。",
+      "来源和电压不明的控制器或面板不得接入测试。"
+    ],
+    "notes": "Records 保存跨季样本，Repair 处理部件故障；本 Guide 只解释低压系统的预期/实际偏差。",
+    "related_wiki": [
+      "energy-solar-seasonal-output-baseline-001",
+      "energy-solar-shade-soiling-maintenance-001",
+      "energy-solar-expected-actual-output-check-001",
+      "energy-solar-daytime-charge-schedule-001",
+      "energy-solar-weather-pattern-log-001",
+      "records-energy-capacity-trend-001"
+    ]
+  },
+  {
+    "id": "DG-0923",
+    "title": "单点故障、备用路径与关键负载切换",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "high",
+    "scenario": "唯一电池、控制器、转换器或线缆失效后，需要识别受影响关键负载并切换到已验证的低压备用路径。",
+    "goal": "在已知低压、电压匹配、极性确认、成品模块和可整体断开的范围内，按断开、检查、单路接入、验证、再接负载完成切换。",
+    "domains": [
+      "power",
+      "security",
+      "repair"
+    ],
+    "keywords": [
+      "单点故障",
+      "备用供电路径",
+      "关键负载切换",
+      "低压单路接入",
+      "支路隔离",
+      "备用电池"
+    ],
+    "tools": [
+      "供电路径图",
+      "单点故障清单",
+      "支路与极性标签",
+      "备用源就绪记录",
+      "停用标签"
+    ],
+    "steps": [
+      "从关键负载逆向检查发电、储能、转换、保护和支路，确认失效点及受影响范围。",
+      "停止负载并断开原输入；确认路径不再带电后检查备用源身份、电压、极性、接口、保护和最近验证。",
+      "保持其他电源断开，只接入一条已知低压成品备用路径，禁止多源直接并联。",
+      "先用低风险测试负载验证输出稳定、无发热、无异味且保护正常。",
+      "一次只接一个最关键负载，观察掉电、重启、温升和保护动作。",
+      "记录当前路径、允许负载、回退点和下一复核；任何异常立即断开。"
+    ],
+    "check": [
+      "备用路径的低压范围、电压、极性、接口、保护和状态全部已知。",
+      "切换严格采用断开、检查、单路接入、验证、再接负载。",
+      "路径图和支路标签与实物一致。",
+      "无法确认时只保留最少关键负载或停用。"
+    ],
+    "common_mistakes": [
+      "带电改线或边插拔边猜路径。",
+      "把多个未知电源或不同电池直接并联。",
+      "绕过保险或用更大保护件强行供电。",
+      "备用源久未验证却直接承担关键负载。"
+    ],
+    "fallback": [
+      "无法确认备用路径时停用相关支路，只保留独立且已验证的最少关键负载。",
+      "没有安全备用时转纸本、人工值守和无电替代，不拼接自制电源。"
+    ],
+    "stop_or_escalate": [
+      "未知电源并联、多源直接并联、市电反送、绕过保险、未知极性、带电改线或高压 DC 操作全部禁止并立即停止。",
+      "出现火花、焦味、快速升温、潮湿、裸露导体或保护件动作时断开并隔离，转 Energy Safety / Fire。",
+      "涉及 110V/220V、配电箱、并网、高压太阳能串、大型逆变器、工业 UPS 或微电网时停止，进入专业边界。"
+    ],
+    "notes": "具体线缆、接头和部件维修归 Repair。本 Guide 只处理低压系统单点影响与已验证备用路径切换。",
+    "related_wiki": [
+      "energy-spare-battery-readiness-check-001",
+      "energy-low-voltage-power-path-map-001",
+      "energy-low-voltage-branch-protection-label-001",
+      "energy-single-point-failure-register-001",
+      "energy-backup-power-path-switch-check-001",
+      "energy-generation-component-failure-degraded-path-001",
+      "energy-backup-battery-rotation-ledger-001"
+    ]
+  },
+  {
+    "id": "DG-0924",
+    "title": "低压能源系统周期维护",
+    "category": "能源",
+    "priority": "P1",
+    "risk_level": "caution",
+    "scenario": "小型离网能源系统需要按周、月或季复核面板、线缆、接头、电池外观、控制器、标签和备用件状态。",
+    "goal": "用断电后的低风险状态检查提前发现变化，记录 STOP / WATCH / OK 与下次日期，具体修理交 Repair。",
+    "domains": [
+      "power",
+      "repair",
+      "records"
+    ],
+    "keywords": [
+      "低压周期维护",
+      "面板清洁",
+      "接头巡检",
+      "线缆磨损",
+      "控制器告警",
+      "备用件状态"
+    ],
+    "tools": [
+      "维护日历",
+      "供电路径图",
+      "停用标签",
+      "软布",
+      "状态记录"
+    ],
+    "steps": [
+      "按对象风险与环境写周、月、季检查频率、负责人和下次日期。",
+      "断开后检查安全可达面板的污染、遮挡、固定点和位置变化。",
+      "检查线缆磨损、夹压、变色，接头松动、腐蚀、水汽和热痕。",
+      "电池只查外观、气味和异常温升记录；控制器只记告警与外壳状态，不拆壳。",
+      "核对路径标签、保护件标识、备用件身份和最近验证日期。",
+      "将结果记为 OK、WATCH、STOP 或 UNKNOWN；STOP 对象隔离，WATCH 安排复查。"
+    ],
+    "check": [
+      "对象、状态、观察、动作、负责人和下次日期齐全。",
+      "维护只包含安全可达、断电后的低风险检查。",
+      "STOP 对象已退出可用路径并有清楚标签。",
+      "维护后产出或功能验证有记录。"
+    ],
+    "common_mistakes": [
+      "把周期检查变成带电维修。",
+      "只看面板，不查接头、标签和备用件。",
+      "WATCH 项没有下次日期。",
+      "对鼓包电池继续清洁或复测。"
+    ],
+    "fallback": [
+      "没有维修能力时停用可疑模块，缩小系统范围并使用已验证替换件。",
+      "无法安全到达面板或固定点时降低预期产出，不攀高处理。"
+    ],
+    "stop_or_escalate": [
+      "需要拆壳、带电维修、屋顶高处、处理鼓包电池或接触裸露导体时停止，具体维修交 Repair / 专业边界。",
+      "烧焦、冒烟、火花、异常热、漏液或积水时立即断开并隔离，转 Energy Safety / Fire。",
+      "维护涉及市电、高压 DC、并网或保护设计改造时停止。"
+    ],
+    "notes": "Energy 决定维护状态对容量和降级的影响；Repair 负责修理方法，Records 保存维护履历。",
+    "related_wiki": [
+      "energy-solar-shade-soiling-maintenance-001",
+      "energy-low-voltage-branch-protection-label-001",
+      "energy-low-voltage-maintenance-calendar-001",
+      "energy-generation-component-failure-degraded-path-001"
+    ]
+  },
+  {
+    "id": "DG-0925",
+    "title": "低压电压、电流、功率与运行时长现场测量",
+    "category": "能源",
+    "priority": "P0",
+    "risk_level": "high",
+    "scenario": "需要用 USB Power Meter 或安全范围内的 multimeter，在 5V、USB 或已知低压 DC 路径测量 V、A、W、Wh/Ah 与 runtime。",
+    "goal": "取得带仪表、设备、时间、负载模式、接法和条件的原始测量，不把一次读数自动写成容量或健康结论。",
+    "domains": [
+      "power",
+      "records",
+      "security"
+    ],
+    "keywords": [
+      "低压现场测量",
+      "USB Power Meter",
+      "电压测量",
+      "电流测量",
+      "Wh Ah",
+      "运行时长验证"
+    ],
+    "tools": [
+      "完好 USB Power Meter",
+      "量程和表笔完好的 multimeter",
+      "设备与仪表编号",
+      "计时工具",
+      "测量记录"
+    ],
+    "steps": [
+      "确认电源类型、已知低压范围、极性、仪表量程和表笔插孔；任何未知项都停止。",
+      "USB Power Meter 按成品说明串在已知 USB 电源与负载之间，记录 V、A、W 与累计 Wh/Ah。",
+      "multimeter 测电压时选择合适直流电压档，并接在已知低压测点两端。",
+      "测电流前先断电，按串联方式接入已知低压回路；电流档不得直接并接电源两端。",
+      "固定负载模式、线缆、环境和起止条件，记录稳定值、短时峰值、累计能量与 runtime。",
+      "至少重复一次；保存原始样本，Energy 只在多次可比结果上形成保守判断。"
+    ],
+    "check": [
+      "测量范围只包含 5V、USB 或明确标注的低压 DC。",
+      "instrument、device、time、load_mode、conditions、单位和接法齐全。",
+      "电压并接与电流串接的区别已经确认。",
+      "单次读数和固定 UI 百分比没有被写成可信 Fuel Gauge 或健康结论。"
+    ],
+    "common_mistakes": [
+      "把电流档直接并接电源两端造成短路。",
+      "不检查表笔插孔和量程就接入。",
+      "测量未知电压、市电或高压 DC。",
+      "只记一个数字，不记负载模式、接法和条件。"
+    ],
+    "fallback": [
+      "无法安全测量时使用铭牌下限和固定任务实际 runtime，按更保守容量规划。",
+      "仪表状态不明时不使用，记录 UNKNOWN 并等待有合格低压测量条件。"
+    ],
+    "stop_or_escalate": [
+      "未知电压、破损表笔、电流档并接、短接电池、潮湿、裸露高风险导体、火花或异常热时立即停止、断开并隔离。",
+      "市电、110V/220V、高压 DC、高压太阳能串、配电箱或逆变器输出测量全部禁止，进入专业边界。",
+      "需要拆壳、暴露内部电池导体或绕过保护件时停止。"
+    ],
+    "notes": "不提供住宅市电 multimeter 教程。Records 保存原始样本，Energy 解释保守容量，仪表维修归 Repair。",
+    "related_wiki": [
+      "energy-usb-dc-conversion-loss-001",
+      "energy-low-voltage-field-measurement-runtime-verify-001",
+      "energy-battery-capacity-001",
+      "energy-wh-mah-local-estimate-001",
+      "energy-device-consumption-baseline-001"
+    ]
+  },
+  {
+    "category": "风险决策",
+    "domains": [
+      "resource_allocation",
+      "risk_decision",
+      "records"
+    ],
+    "intents": [
+      "resource_allocation_v0_1",
+      "offline_allocation_action"
+    ],
+    "situations": [
+      "resource_scarcity",
+      "uncertain_replenishment",
+      "offline_team"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "resource_allocation",
+    "primary_intent": "resource_allocation_v0_1",
+    "id": "DG-0926",
+    "title": "有限资源快速盘点与可用量确认",
+    "priority": "P0",
+    "risk_level": "high",
+    "scenario": "库存记录与实物数量不一致，或食物、水、能源、耗材、工具和零件状态混杂，需要先确认真正可分配的数量。",
+    "goal": "在不改变专业安全判断的前提下，把总量拆成可用、不可用、已预留和待确认，并给预计补给单独标记。",
+    "keywords": [
+      "有限资源盘点",
+      "可分配量",
+      "USABLE",
+      "UNCERTAIN",
+      "账实核对",
+      "预计补给"
+    ],
+    "tools": [
+      "实物清单",
+      "库存卡",
+      "隔离标签",
+      "固定计量容器",
+      "纸笔"
+    ],
+    "steps": [
+      "按资源、批次、位置和统一单位列出账面总量，再到现场逐项核对实物。",
+      "将数量拆成 USABLE、UNAVAILABLE、RESERVED、UNCERTAIN；污染、破损、隔离或专业域禁用项进入 UNAVAILABLE。",
+      "给 RESERVED 写用途、等级、释放 trigger 和复查时间；同一数量不得再次计入可分配量。",
+      "给 UNCERTAIN 写缺失证据和确认动作；确认前按不可分配处理。",
+      "把 confirmed、expected、uncertain replenishment 另列来源和日期，不并入现货。",
+      "抽查饮水、关键能源、必要医疗耗材和唯一零件，签记状态卡有效时间。"
+    ],
+    "check": [
+      "账面数、实物数和四种状态量可以相互核对。",
+      "预计补给没有进入当前 USABLE。",
+      "危险、污染和来源不明资源均未被分配。",
+      "记录含单位、证据、检查时间和下一复查。"
+    ],
+    "common_mistakes": [
+      "把总库存直接当可用量。",
+      "同一份 reserve 同时出现在普通预算。",
+      "为填满表格猜测数量或状态。",
+      "因资源稀缺把隔离物移回可用区。"
+    ],
+    "fallback": [
+      "无法称量时使用完整包装数或固定容器，并标低置信度。",
+      "无法全量盘点时先保护安全最低资源和唯一恢复零件。"
+    ],
+    "stop_or_escalate": [
+      "设备冒烟、火花、异常热、电池鼓包或漏液、化学异味、污染食水或人员伤害时停止盘点操作并转 Safety / Fire / Medical。",
+      "资源来源、污染、隔离或专业安全状态无法确认时不得标为可用。"
+    ],
+    "notes": "只确认可分配状态；Storage 负责保存与隔离，专业域负责安全可用性，Records 负责原始记录。",
+    "objects": [
+      "资源状态卡",
+      "库存卡",
+      "食物饮水",
+      "能源燃料",
+      "医疗卫生耗材",
+      "工具零件"
+    ],
+    "signals": [
+      "账实不符",
+      "可用量不清",
+      "库存状态混杂",
+      "补给未到"
+    ],
+    "risks": [
+      "unsafe_resource_use",
+      "double_allocation",
+      "uncertain_inventory"
+    ],
+    "negative_keywords": [
+      "怎么保存",
+      "怎么维修",
+      "患者治疗",
+      "谁值班",
+      "设备冒烟还能用"
+    ],
+    "top1_aliases": [
+      "有限资源快速盘点",
+      "真正可分配量",
+      "库存和实物对不上怎么办"
+    ],
+    "related_wiki": [
+      "resource-allocation-available-resource-status-001",
+      "resource-allocation-uncertainty-scenarios-001",
+      "general-storage-inventory-card-minimum-001",
+      "general-inventory-consumption-log-001",
+      "energy-offgrid-capacity-inventory-001",
+      "food-inventory-001",
+      "water-quantity-estimate-021"
+    ]
+  },
+  {
+    "category": "风险决策",
+    "domains": [
+      "resource_allocation",
+      "risk_decision",
+      "records"
+    ],
+    "intents": [
+      "resource_allocation_v0_1",
+      "offline_allocation_action"
+    ],
+    "situations": [
+      "resource_scarcity",
+      "uncertain_replenishment",
+      "offline_team"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "resource_allocation",
+    "primary_intent": "resource_allocation_v0_1",
+    "id": "DG-0927",
+    "title": "未来 7 天跨资源预算",
+    "priority": "P1",
+    "risk_level": "caution",
+    "scenario": "食物、水、电、燃料和关键耗材的可维持时间不同，需要在补给不确定时安排未来七天，而不是只优化今天。",
+    "goal": "用可分配量、三档消耗、最低保障线、reserve 和补给置信度形成可手算的七天跨资源预算。",
+    "keywords": [
+      "未来七天预算",
+      "跨资源消耗",
+      "分配时距",
+      "补给置信度",
+      "可维持时长",
+      "worst case"
+    ],
+    "tools": [
+      "资源状态卡",
+      "消耗记录",
+      "最低保障线表",
+      "补给日历",
+      "七列表",
+      "铅笔"
+    ],
+    "steps": [
+      "确认每种资源的 USABLE、RESERVED、单位和记录有效时间，未确认数值保持 UNKNOWN。",
+      "按 NORMAL、SAFETY MINIMUM、HIGH LOAD 写日或周消耗，并根据人数、天气、照护和任务变化修正。",
+      "分开计算 today 与 3-7 days，列出最先触及 safety minimum 的限制资源。",
+      "将补给标为 CONFIRMED、EXPECTED、UNCERTAIN 或 NONE；到货验收前不加入 USABLE。",
+      "为 best、expected、worst 三种情景估算每日结余，普通预算采用 expected，安全检查采用 worst。",
+      "先扣 safety minimum 和 reserve，再安排普通用途；无法覆盖七天的任务标延期、缩小或降级。",
+      "写下一次盘点、补给失约 trigger 和重新预算条件。"
+    ],
+    "check": [
+      "每种资源有单位、消耗来源和七天结余。",
+      "预计补给没有被当成确定库存。",
+      "worst case 没有越过专业域 safety minimum。",
+      "最先触线资源、延期任务和复算时间明确。"
+    ],
+    "common_mistakes": [
+      "用今天的低消耗直接外推一个月。",
+      "把不同资源换成一个无单位总分。",
+      "只做 best case 并提前释放 reserve。",
+      "为了完成任务修改专业最低线。"
+    ],
+    "fallback": [
+      "记录不足时使用最近完整周期和最差可信消耗，标为 PROVISIONAL。",
+      "七天跨度超出可信范围时缩短为三天预算并每日重算。"
+    ],
+    "stop_or_escalate": [
+      "任一关键资源已低于专业域最低线、单位或实物无法核对时，暂停普通分配并先盘点。",
+      "Active Hazard、人员伤害或污染资源出现时转 Safety / Fire / Medical，预算后置。"
+    ],
+    "notes": "跨资源七天预算由 Resource Allocation 主导；当天纯能源调度归 Energy Management，长期能源容量归 Energy Deepening。",
+    "objects": [
+      "七天预算表",
+      "食物",
+      "饮水",
+      "能源",
+      "燃料",
+      "关键耗材"
+    ],
+    "signals": [
+      "维持天数不同",
+      "补给十天后",
+      "补给不确定",
+      "消耗高负载"
+    ],
+    "risks": [
+      "short_horizon_bias",
+      "forecast_overconfidence",
+      "minimum_breach"
+    ],
+    "negative_keywords": [
+      "今天怎么充电",
+      "一个月能源容量",
+      "怎么储存",
+      "治疗顺序"
+    ],
+    "top1_aliases": [
+      "未来七天资源预算",
+      "食物够十四天电只够五天",
+      "补给十天后怎么分配"
+    ],
+    "related_wiki": [
+      "resource-allocation-consumption-horizon-baseline-001",
+      "resource-allocation-horizon-replenishment-001",
+      "resource-allocation-uncertainty-scenarios-001",
+      "energy-device-consumption-baseline-001",
+      "energy-offgrid-capacity-inventory-001",
+      "energy-solar-seasonal-output-baseline-001",
+      "food-inventory-001",
+      "water-drinking-water-001",
+      "water-usage-log-023",
+      "agriculture-planting-inventory-link-001"
+    ]
+  },
+  {
+    "category": "风险决策",
+    "domains": [
+      "resource_allocation",
+      "risk_decision",
+      "records"
+    ],
+    "intents": [
+      "resource_allocation_v0_1",
+      "offline_allocation_action"
+    ],
+    "situations": [
+      "resource_scarcity",
+      "uncertain_replenishment",
+      "offline_team"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "resource_allocation",
+    "primary_intent": "resource_allocation_v0_1",
+    "id": "DG-0928",
+    "title": "关键资源最低保障线与储备分级",
+    "priority": "P0",
+    "risk_level": "high",
+    "scenario": "多个普通任务争用饮水、能源、口粮、医疗耗材或关键材料，可能触碰最低保障线或错误释放 reserve。",
+    "goal": "先登记专业域 safety minimum，再区分 operational、emergency、strategic reserve，按资源用途决定剩余量。",
+    "keywords": [
+      "最低保障线",
+      "operational reserve",
+      "emergency reserve",
+      "strategic reserve",
+      "用途优先级",
+      "关键资源"
+    ],
+    "tools": [
+      "最低保障线登记",
+      "reserve 标签",
+      "用途申请表",
+      "资源状态卡",
+      "纸笔"
+    ],
+    "steps": [
+      "从 Water、Food、Energy、Medical、Safety 的正式 evidence 抄录最低量、单位、适用条件和负责域，不自行猜测。",
+      "将 safety minimum 从 USABLE 中先保护，再把 reserve 分为 OPERATIONAL、EMERGENCY、STRATEGIC。",
+      "为每笔 reserve 写目的、release trigger、允许用途、释放后 recheck 和补回条件。",
+      "按资源分别列 Life/Safety、Critical Infrastructure、Food/Water Production、Maintenance、Productivity、Optional 用途。",
+      "核对每个申请的数量、horizon、可延期性和已验证替代，只分配扣除保护量后的余额。",
+      "发生冲突时先延期或缩小普通任务，不按身份、地位或服从程度排序人员。",
+      "reserve 被释放后立即重算剩余保障时长，并记录下一复查。"
+    ],
+    "check": [
+      "每条最低线可追溯到专业域。",
+      "三类 reserve 有不同 trigger 和时间尺度。",
+      "每种资源使用自己的用途模型。",
+      "医疗条目只有库存和能力，不含患者价值或治疗排序。"
+    ],
+    "common_mistakes": [
+      "把未使用库存都称为 reserve。",
+      "用一张全局表粗暴排序所有资源。",
+      "为了赶工动用战略储备。",
+      "把患者身份写成物资分配等级。"
+    ],
+    "fallback": [
+      "最低量暂时不能量化时，保护专业域明确要求的完整应急包或最小服务窗口。",
+      "冲突证据不足时只批准不触碰 safety minimum 的短窗口并提前复查。"
+    ],
+    "stop_or_escalate": [
+      "动用后会跌破饮水、关键能源、必要医疗耗材或安全设备最低线时，停止普通 allocation。",
+      "出现具体患者、症状、伤情、治疗顺序或人员价值排序时转 Medical；危险设备和污染物不得因稀缺继续使用。"
+    ],
+    "notes": "Resource Allocation 执行保护和用途分配；专业域定义最低线，Medical 保留临床判断，Team Operations 安排人员。",
+    "objects": [
+      "最低保障线",
+      "三类储备",
+      "饮水",
+      "关键能源",
+      "医疗耗材",
+      "关键材料"
+    ],
+    "signals": [
+      "普通任务触线",
+      "储备释放",
+      "关键资源冲突",
+      "医疗耗材不足"
+    ],
+    "risks": [
+      "safety_minimum_breach",
+      "unethical_priority",
+      "reserve_misuse"
+    ],
+    "negative_keywords": [
+      "患者先治谁",
+      "今天电量怎么排",
+      "物资怎么防潮",
+      "谁来发放"
+    ],
+    "top1_aliases": [
+      "关键资源最低保障线",
+      "应急和战略储备怎么分",
+      "医疗耗材库存不足怎么保留"
+    ],
+    "related_wiki": [
+      "resource-allocation-safety-minimum-register-001",
+      "resource-allocation-reserve-class-policy-001",
+      "resource-allocation-resource-specific-priority-001",
+      "energy-essential-load-reserve-001",
+      "energy-critical-device-minimum-line-001",
+      "energy-daily-energy-budget-001",
+      "food-storage-emergency-ration-reserve-line-001",
+      "food-staple-food-002",
+      "food-rationing-priority-001",
+      "water-drinking-water-002",
+      "water-rationing-priority-001",
+      "production-workshop-material-reservation-line-001"
+    ]
+  },
+  {
+    "category": "风险决策",
+    "domains": [
+      "resource_allocation",
+      "risk_decision",
+      "records"
+    ],
+    "intents": [
+      "resource_allocation_v0_1",
+      "offline_allocation_action"
+    ],
+    "situations": [
+      "resource_scarcity",
+      "uncertain_replenishment",
+      "offline_team"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "resource_allocation",
+    "primary_intent": "resource_allocation_v0_1",
+    "id": "DG-0929",
+    "title": "补给中断后的替代与降级分配",
+    "priority": "P0",
+    "risk_level": "high",
+    "scenario": "补给失约、关键资源不可用或消耗持续超出计划，需要在资源耗尽前选择替代、延期、缩小任务或降低服务等级。",
+    "goal": "保护最低服务和 reserve，只从专业域验证过的替代路径中选择，并给 degraded mode 设置进入与退出条件。",
+    "keywords": [
+      "补给中断",
+      "替代路径",
+      "降级分配",
+      "任务延期",
+      "trigger action recheck",
+      "最低服务"
+    ],
+    "tools": [
+      "补给日历",
+      "模式卡",
+      "最低保障线",
+      "已验证替代清单",
+      "任务需求表",
+      "纸笔"
+    ],
+    "steps": [
+      "确认补给失约、资源不可用或消耗偏差的事实，重新计算当前 USABLE 与 worst-case horizon。",
+      "列出必须保留的最低服务、可降低服务和可暂停任务，先冻结会触碰 safety minimum 的普通申请。",
+      "依次评估减少频率、缩短窗口、低耗方式、延期和取消；只有专业域验证过的方案可标 substitution。",
+      "选择 degraded level，写允许用途、暂停用途、每日上限、reserve 状态和生效时间。",
+      "设置进入 trigger、下一升级动作和 recheck；普通恢复必须满足补给验收或多个可比周期恢复。",
+      "每次只恢复一个普通用途，观察实际消耗后再继续。",
+      "把维修、制造、生产或医疗的具体执行交回对应 owner。"
+    ],
+    "check": [
+      "降级在资源耗尽前生效。",
+      "替代路径有专业域验证证据。",
+      "最低服务、暂停任务、上限和恢复条件完整。",
+      "supplement 失约后没有继续使用旧预算。"
+    ],
+    "common_mistakes": [
+      "把危险设备当低性能设备继续用。",
+      "临时拼接未知材料或电源作为替代。",
+      "一次补给或一次晴天后恢复全部用途。",
+      "只减少舒适用量却不重算关键资源。"
+    ],
+    "fallback": [
+      "没有已验证替代时，延期、缩小或取消任务，保留纸本、人工或无电低风险路径。",
+      "数据不足时进入更保守 degraded level 并缩短复查周期。"
+    ],
+    "stop_or_escalate": [
+      "鼓包电池、冒烟设备、火花、异常热、未知电源、污染材料或不明医疗物资必须停用隔离，不得作为替代。",
+      "需要具体 Repair、Manufacturing、临床处置或越过安全保护时停止分配并转对应专业域。"
+    ],
+    "notes": "只选择资源路径和服务等级，不提供维修、制造或生产技术步骤。",
+    "objects": [
+      "补给日历",
+      "降级模式卡",
+      "替代资源",
+      "延期任务",
+      "最低服务"
+    ],
+    "signals": [
+      "补给失约",
+      "资源不可用",
+      "消耗超标",
+      "关键零件只剩一个"
+    ],
+    "risks": [
+      "unsafe_substitution",
+      "resource_exhaustion",
+      "premature_recovery"
+    ],
+    "negative_keywords": [
+      "怎么拆电池",
+      "怎么制作零件",
+      "怎么修设备",
+      "患者怎么治疗"
+    ],
+    "top1_aliases": [
+      "补给中断后怎么降级",
+      "资源不足替代还是延期",
+      "唯一零件如何保留"
+    ],
+    "related_wiki": [
+      "resource-allocation-horizon-replenishment-001",
+      "resource-allocation-substitution-degraded-mode-001",
+      "resource-allocation-trigger-action-recheck-001",
+      "energy-solar-multi-day-cloudy-degraded-mode-001",
+      "energy-generation-component-failure-degraded-path-001",
+      "water-shortage-response-041",
+      "production-workshop-daily-resource-budget-001",
+      "production-workshop-material-reservation-line-001",
+      "agriculture-water-fertility-budget-card-001"
+    ]
+  },
+  {
+    "category": "风险决策",
+    "domains": [
+      "resource_allocation",
+      "risk_decision",
+      "records"
+    ],
+    "intents": [
+      "resource_allocation_v0_1",
+      "offline_allocation_action"
+    ],
+    "situations": [
+      "resource_scarcity",
+      "uncertain_replenishment",
+      "offline_team"
+    ],
+    "ranking_role": "primary",
+    "guide_type": "procedure",
+    "primary_domain": "resource_allocation",
+    "primary_intent": "resource_allocation_v0_1",
+    "id": "DG-0930",
+    "title": "长期短缺资源重分配与周期复查",
+    "priority": "P1",
+    "risk_level": "caution",
+    "scenario": "短缺持续数周，补给、消耗或设备效率不断变化，原分配计划偏差扩大，需要用记录调整而不是无限沿用。",
+    "goal": "用 Plan、Observe、Record、Compare、Adjust 循环保留版本、解释偏差并做小步可回退的长期重分配。",
+    "keywords": [
+      "长期短缺",
+      "资源重分配",
+      "周期复查",
+      "消耗偏差",
+      "best expected worst",
+      "计划版本"
+    ],
+    "tools": [
+      "当前分配计划",
+      "资源状态卡",
+      "消耗和补给记录",
+      "三情景手算卡",
+      "变更记录",
+      "纸笔"
+    ],
+    "steps": [
+      "保存当前计划版本，写用途、数量、horizon、safety minimum、reserve、补给假设和生效时间。",
+      "在固定时点观察实物余量、实际消耗、补给结果和专业域状态，不用回忆补数字。",
+      "比较计划与实际，区分盘点误差、需求变化、浪费、补给失约和设备效率下降。",
+      "更新 best、expected、worst 三种情景，检查最先触线资源和 trigger 是否提前。",
+      "只对有 evidence 的用途量、任务窗口、reserve 或 degraded level 做小步调整。",
+      "保留旧版本和拒绝的方案，写变更原因、下一 trigger、recheck 和回退点。",
+      "由第二人确认新计划没有越过专业最低线，也没有吞掉 Records、Production、Medical 或 Team Operations 职责。"
+    ],
+    "check": [
+      "计划、实际、偏差和新决定可逐项追踪。",
+      "原版本和假设没有被覆盖。",
+      "调整有 evidence 且可回退。",
+      "每轮都有下一触发线、复查时间和负责角色。"
+    ],
+    "common_mistakes": [
+      "一次异常就改成永久趋势。",
+      "只改表格数字不查实物。",
+      "长期未动用就取消战略 reserve。",
+      "把记录工作本身当作分配决定。"
+    ],
+    "fallback": [
+      "历史不足时保留当前计划，只做较小降级并增加观察频率。",
+      "无法确认偏差原因时分别保留多个假设，不用单一解释强行调整。"
+    ],
+    "stop_or_escalate": [
+      "新计划会跌破 safety minimum、危险状态未关闭、实物与记录无法核对时停止普通重分配。",
+      "涉及具体患者处置、危险设备恢复、专业维修或人员排班时转对应 owner。"
+    ],
+    "notes": "Records 保存事实、版本和趋势；Resource Allocation 根据 evidence 更新用途和 reserve，不改写专业知识。",
+    "objects": [
+      "分配计划版本",
+      "实际消耗",
+      "补给记录",
+      "三情景",
+      "偏差表"
+    ],
+    "signals": [
+      "持续数周短缺",
+      "消耗快百分之三十",
+      "计划偏差扩大",
+      "补给反复延误"
+    ],
+    "risks": [
+      "stale_plan",
+      "unsupported_adjustment",
+      "boundary_takeover"
+    ],
+    "negative_keywords": [
+      "日志怎么归档",
+      "谁值夜班",
+      "设备怎么修",
+      "患者治疗顺序"
+    ],
+    "top1_aliases": [
+      "长期短缺怎么重新分配",
+      "资源消耗比计划快百分之三十",
+      "资源分配周期复查"
+    ],
+    "related_wiki": [
+      "resource-allocation-review-loop-001",
+      "resource-allocation-uncertainty-scenarios-001",
+      "resource-allocation-consumption-horizon-baseline-001",
+      "resource-allocation-trigger-action-recheck-001",
+      "general-inventory-consumption-log-001",
+      "records-energy-capacity-trend-001",
+      "energy-solar-seasonal-output-baseline-001",
+      "production-workshop-daily-resource-budget-001",
+      "agriculture-planting-inventory-link-001",
+      "agriculture-water-fertility-budget-card-001"
+    ]
   }
 ]

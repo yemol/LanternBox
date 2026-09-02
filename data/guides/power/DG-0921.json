@@ -1,0 +1,70 @@
+{
+  "id": "DG-0921",
+  "title": "电池实际容量下降复查",
+  "category": "能源",
+  "priority": "P0",
+  "risk_level": "high",
+  "scenario": "同一成品电池或移动电源的实际运行时间逐月缩短，或备用电池很久没有验证，需要非侵入式复查。",
+  "goal": "在可比负载和环境下复测 runtime / Wh，以多次趋势形成保守容量、健康等级、替换线和备用就绪状态。",
+  "domains": [
+    "power",
+    "records",
+    "security"
+  ],
+  "keywords": [
+    "电池实际容量",
+    "容量复测",
+    "运行时间下降",
+    "电池健康等级",
+    "replacement line",
+    "备用电池就绪"
+  ],
+  "tools": [
+    "电池编号",
+    "可比较低压负载",
+    "USB power meter 或计时工具",
+    "温度记录",
+    "停用标签"
+  ],
+  "steps": [
+    "先检查鼓包、漏液、腐蚀、摔裂、异常热、异味和接口损伤；任一异常都停止复测。",
+    "选择与历史相同或可比较的负载、模式、线缆、温度、开始状态和停止阈值。",
+    "记录 runtime 或累计 Wh，不以显示百分比单独作为容量。",
+    "在不同日期重复，并与至少三个可比样本比较；条件变化必须注明。",
+    "取偏低结果作为保守可用容量，按 A / B / C / UNKNOWN / ISOLATED 记录任务能力。",
+    "低于关键任务需求时从关键电源清单移除，安排成品替换或退役，不拆修。"
+  ],
+  "check": [
+    "负载、温度、起止状态、仪表和单位可比较。",
+    "单次读数没有被写成长期退化结论。",
+    "健康等级同时考虑安全状态、趋势和任务需求。",
+    "备用源的身份、接口、最近验证和允许用途清楚。"
+  ],
+  "common_mistakes": [
+    "对鼓包或漏液电池继续做容量测试。",
+    "用一次百分比下降宣布电池报废。",
+    "不同负载和温度的结果直接比较。",
+    "通过拆包、换芯、点焊或改 BMS 恢复容量。"
+  ],
+  "fallback": [
+    "没有仪表时用同一设备完成固定任务的实际时长比较，并标低置信度。",
+    "数据不足时降低规划容量、标 UNKNOWN，并准备已验证成品替代模块。"
+  ],
+  "stop_or_escalate": [
+    "鼓包、漏液、异常热、异味、腐蚀、摔裂、冒烟或接头快速升温时立即 STOP、断开并隔离，交 Energy Safety。",
+    "禁止拆电池包、换芯、点焊、电芯重组、BMS 改造或修理损坏锂电池。",
+    "测试可能短接电池、需要裸露内部导体或超出已知低压范围时停止。"
+  ],
+  "notes": "只允许非侵入式容量验证。Storage 管理长期存放，Records 保存样本，Energy 解释安全样本的容量趋势。",
+  "related_wiki": [
+    "energy-battery-capacity-retest-cycle-001",
+    "energy-battery-health-grade-replacement-line-001",
+    "energy-spare-battery-readiness-check-001",
+    "energy-battery-capacity-001",
+    "energy-battery-aging-capacity-note-001",
+    "energy-backup-battery-rotation-ledger-001",
+    "energy-battery-003",
+    "energy-charge-discharge-handover-log-001",
+    "records-energy-capacity-trend-001"
+  ]
+}

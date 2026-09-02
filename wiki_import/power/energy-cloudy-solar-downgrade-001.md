@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于阴天、云多或输出很弱时收缩太阳能目标，只保关键设备和最低夜间照明。
 tags: 能源, 太阳能, 阴天, 降级, 关键设备, 日照不足
-guide_links: DG-0617
+guide_links: DG-0617, DG-0920
 kiwix_topics: 阴天太阳能降级安排, off-grid energy management, emergency power planning
 last_reviewed: 2026-07-14
 status: published

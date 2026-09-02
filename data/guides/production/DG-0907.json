@@ -1,0 +1,116 @@
+{
+  "id": "DG-0907",
+  "title": "成品质量复查",
+  "category": "团队轮值与任务管理",
+  "priority": "P0",
+  "scenario": "成品准备使用或入库前，需要判断是否可放行。",
+  "goal": "用离线可执行的质量复查把人员、实物、状态、停止线和下一步连接起来。",
+  "tools": [
+    "尺寸表",
+    "直尺或模板",
+    "稳定性表",
+    "质量记录",
+    "待检牌"
+  ],
+  "steps": [
+    "核对用途和限制。",
+    "复查尺寸。",
+    "复查稳定性和承重前状态。",
+    "检查锐边、毛刺、松动和污染。",
+    "做功能检查。",
+    "记录放行、返工、降级或报废。",
+    "状态变化时更新任务板、标签或交接卡。",
+    "结束前由另一名成员对照现场实物复核。"
+  ],
+  "check": [
+    "尺寸合格。",
+    "无危险锐边。",
+    "连接未松动。",
+    "功能符合用途。",
+    "去向明确。"
+  ],
+  "common_mistakes": [
+    "只口头说明质量复查，没有对应实物和编号。",
+    "状态变化后不更新标签或任务板。",
+    "为了赶进度越过明确停止线。"
+  ],
+  "fallback": [
+    "降级为非承重 / 非接触用途。",
+    "转返工。",
+    "转 Waste。",
+    "临时封存待复查。"
+  ],
+  "stop_or_escalate": [
+    "承重不明、锐边无法处理、连接松动、污染、儿童可能接触或检查记录缺失时不放行。"
+  ],
+  "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+  "category_original": "团队轮值与任务管理",
+  "domains": [
+    "repair",
+    "organization",
+    "tools"
+  ],
+  "intents": [
+    "production_workshop_v0_1",
+    "offline_workshop_action"
+  ],
+  "situations": [
+    "workshop_operation",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "尺寸表",
+    "直尺或模板",
+    "稳定性表",
+    "质量记录",
+    "待检牌"
+  ],
+  "signals": [
+    "成品质量复查",
+    "质量复查",
+    "工坊",
+    "生产流程"
+  ],
+  "risks": [
+    "裂纹",
+    "锐边",
+    "连接松动"
+  ],
+  "keywords": [
+    "成品质量复查",
+    "质量复查",
+    "工坊生产",
+    "离线流程",
+    "小团队",
+    "任务交接"
+  ],
+  "negative_keywords": [
+    "大型工厂排产",
+    "自动化生产线",
+    "专业质量认证",
+    "危险化学品生产",
+    "武器制造",
+    "高压电气作业",
+    "ERP"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "production_workshop_v0_1",
+  "top1_aliases": [
+    "成品质量复查"
+  ],
+  "related_wiki": [
+    "production-workshop-finished-goods-hold-zone-001",
+    "production-workshop-finished-goods-storage-transfer-001",
+    "production-workshop-size-check-sheet-001",
+    "production-workshop-stability-check-sheet-001",
+    "production-workshop-edge-burr-check-001",
+    "production-workshop-loose-fastener-check-001",
+    "production-workshop-function-check-before-release-001",
+    "production-workshop-quality-record-minimum-001",
+    "production-workshop-each-piece-check-001"
+  ],
+  "risk_level": "high"
+}

@@ -5,7 +5,7 @@ category: 团队轮值与任务管理
 priority: P2
 summary: 用纸本记录事件、物资、健康、风险和决策；不要让关键记录只留在设备里，复查结果需交接。
 tags: 纸质记录, 日记, 备份, 记录规范, 事件记录, 离线系统
-guide_links: DG-0421
+guide_links: DG-0421, DG-0911, DG-0917
 risk_level: normal
 status: published
 source: 壳中灯本地记录规则；应急日志管理通用经验

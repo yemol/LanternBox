@@ -6,6 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用于记录每台设备在常用模式下的实际耗电经验，为预算、排班和最低电量线提供依据。
 tags: 能源, 耗电基线, 设备记录, 预算, 长期维护
+guide_links: DG-0919, DG-0925, DG-0927
 kiwix_topics: 设备耗电基线记录, off-grid energy management, emergency power planning
 last_reviewed: 2026-07-14
 status: published

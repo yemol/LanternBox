@@ -1,0 +1,109 @@
+{
+  "id": "DG-0904",
+  "title": "工坊收工与未完成品封存",
+  "category": "团队轮值与任务管理",
+  "priority": "P0",
+  "scenario": "当天工作结束或必须暂停，工坊内有未完成品、危险工具和未清理材料。",
+  "goal": "用离线可执行的收工封存把人员、实物、状态、停止线和下一步连接起来。",
+  "tools": [
+    "断电表",
+    "工具清单",
+    "状态标签",
+    "隔离箱",
+    "笔"
+  ],
+  "steps": [
+    "停止加工。",
+    "断开非必要电源。",
+    "清点刃具和关键工具。",
+    "清理碎屑和可燃物。",
+    "给未完成品贴状态标签。",
+    "隔离危险件。",
+    "记录当日任务状态。",
+    "状态变化时更新任务板、标签或交接卡。",
+    "结束前由另一名成员对照现场实物复核。"
+  ],
+  "check": [
+    "工具封存。",
+    "未完成品不混入成品。",
+    "危险材料隔离。",
+    "任务状态可被下一班理解。"
+  ],
+  "common_mistakes": [
+    "只口头说明收工封存，没有对应实物和编号。",
+    "状态变化后不更新标签或任务板。",
+    "为了赶进度越过明确停止线。"
+  ],
+  "fallback": [
+    "空间不足时设置临时暂停区。",
+    "标签不足时用编号 + 总表。",
+    "工具缺失时封闭工坊并查找。"
+  ],
+  "stop_or_escalate": [
+    "缺失刃具、未断电、可疑火花 / 气味、半成品承重不明或标签缺失时不允许离场。"
+  ],
+  "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+  "category_original": "团队轮值与任务管理",
+  "domains": [
+    "repair",
+    "organization",
+    "tools"
+  ],
+  "intents": [
+    "production_workshop_v0_1",
+    "offline_workshop_action"
+  ],
+  "situations": [
+    "workshop_operation",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "断电表",
+    "工具清单",
+    "状态标签",
+    "隔离箱",
+    "笔"
+  ],
+  "signals": [
+    "工坊收工与未完成品封存",
+    "收工封存",
+    "工坊",
+    "生产流程"
+  ],
+  "risks": [
+    "未断电",
+    "刃具缺失",
+    "状态不明"
+  ],
+  "keywords": [
+    "工坊收工与未完成品封存",
+    "收工封存",
+    "工坊生产",
+    "离线流程",
+    "小团队",
+    "任务交接"
+  ],
+  "negative_keywords": [
+    "大型工厂排产",
+    "自动化生产线",
+    "专业质量认证",
+    "危险化学品生产",
+    "武器制造",
+    "高压电气作业",
+    "ERP"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "production_workshop_v0_1",
+  "top1_aliases": [
+    "工坊收工与未完成品封存"
+  ],
+  "related_wiki": [
+    "production-workshop-unfinished-item-tag-001",
+    "production-workshop-daily-stop-shutdown-001",
+    "production-workshop-end-of-day-status-log-001"
+  ],
+  "risk_level": "high"
+}

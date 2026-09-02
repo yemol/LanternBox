@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于技能双人掌握的意义的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 团队管理, 团队轮值与任务管理, 技能双人掌握的意义, 长期断供, 小团队, 离线生存
-guide_links: DG-0686, DG-0687, DG-0688
+guide_links: DG-0686, DG-0687, DG-0688, DG-0918
 kiwix_topics: 技能双人掌握的意义, 团队轮值与任务管理, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published

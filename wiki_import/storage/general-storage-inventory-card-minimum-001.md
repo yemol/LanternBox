@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 库存卡至少记录物品、批次、数量、位置、状态、入库日、复查日、领用和异常。并保留隔离、复查和交接记录。
 tags: 库存卡, 最小字段, 批次记录, 领用, 储藏
-guide_links: [DG-0902]
+guide_links: [DG-0902, DG-0926]
 kiwix_topics: 库存卡字段, long term storage, offline inventory
 last_reviewed: 2026-07-18
 status: published

@@ -1,0 +1,113 @@
+{
+  "id": "DG-0903",
+  "title": "工坊开工前检查",
+  "category": "团队轮值与任务管理",
+  "priority": "P0",
+  "scenario": "当天开始生产前，任务、工具、材料、能源和风险状态不清。",
+  "goal": "用离线可执行的开工检查把人员、实物、状态、停止线和下一步连接起来。",
+  "tools": [
+    "任务板",
+    "工具清单",
+    "材料卡",
+    "禁用标签",
+    "笔"
+  ],
+  "steps": [
+    "确认今日任务和负责人。",
+    "检查工作区通道、照明、潮湿、粉尘和旁人。",
+    "清点关键工具。",
+    "清点材料和保留线。",
+    "标记风险源。",
+    "写入任务板。",
+    "状态变化时更新任务板、标签或交接卡。",
+    "结束前由另一名成员对照现场实物复核。"
+  ],
+  "check": [
+    "任务明确。",
+    "工具可用。",
+    "材料够用且未越过保留线。",
+    "高风险源已处理。",
+    "未授权人员不在加工区。"
+  ],
+  "common_mistakes": [
+    "只口头说明开工检查，没有对应实物和编号。",
+    "状态变化后不更新标签或任务板。",
+    "为了赶进度越过明确停止线。"
+  ],
+  "fallback": [
+    "任务拆小。",
+    "转低风险清理 / 标记任务。",
+    "等待照明或工具恢复。",
+    "转 Repair / Waste / Storage 判断。"
+  ],
+  "stop_or_escalate": [
+    "工具破损、低照明、潮湿电气、火花粉尘不可控、儿童进入或材料来源不明时停止开工。"
+  ],
+  "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+  "category_original": "团队轮值与任务管理",
+  "domains": [
+    "repair",
+    "organization",
+    "tools"
+  ],
+  "intents": [
+    "production_workshop_v0_1",
+    "offline_workshop_action"
+  ],
+  "situations": [
+    "workshop_operation",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "任务板",
+    "工具清单",
+    "材料卡",
+    "禁用标签",
+    "笔"
+  ],
+  "signals": [
+    "工坊开工前检查",
+    "开工检查",
+    "工坊",
+    "生产流程"
+  ],
+  "risks": [
+    "低照明",
+    "工具破损",
+    "材料来源不明"
+  ],
+  "keywords": [
+    "工坊开工前检查",
+    "开工检查",
+    "工坊生产",
+    "离线流程",
+    "小团队",
+    "任务交接"
+  ],
+  "negative_keywords": [
+    "大型工厂排产",
+    "自动化生产线",
+    "专业质量认证",
+    "危险化学品生产",
+    "武器制造",
+    "高压电气作业",
+    "ERP"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "production_workshop_v0_1",
+  "top1_aliases": [
+    "工坊开工前检查"
+  ],
+  "related_wiki": [
+    "production-workshop-daily-start-check-001",
+    "production-workshop-task-board-minimum-001",
+    "production-workshop-tool-count-before-work-001",
+    "production-workshop-material-count-before-work-001",
+    "production-workshop-risk-source-scan-001",
+    "production-workshop-daily-resource-budget-001"
+  ],
+  "risk_level": "high"
+}

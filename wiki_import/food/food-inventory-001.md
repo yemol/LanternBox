@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用人数、餐次、热量和损耗修正食物可用天数；高风险条目，发现误差扩大时降低体力任务和消耗。
 tags: 食物, 食物库存天数估算的误差来源, 长期断供, 小团队, 离线生存
-guide_links: DG-0606, DG-0607, DG-0608
+guide_links: DG-0606, DG-0607, DG-0608, DG-0926, DG-0927
 kiwix_topics: 食物库存天数估算的误差来源, 食物, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published

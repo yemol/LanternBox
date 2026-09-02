@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 在供水不足时先保障饮用、用药、照护和最低限度烹饪，再安排一般清洁；高风险条目，优先级错误会直接影响健康。
 tags: 水, 饮用水, 缺水, 长期断供, 小团队, 离线生存
-guide_links: DG-0551, DG-0823
+guide_links: DG-0551, DG-0823, DG-0928
 kiwix_topics: 缺水时饮用水和清洁水的优先级, Water scarcity, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-11
 status: published

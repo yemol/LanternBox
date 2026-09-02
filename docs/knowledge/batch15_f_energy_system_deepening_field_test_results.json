@@ -1,0 +1,5591 @@
+{
+  "artifact_label": "Batch15-F",
+  "generated_at": "2026-08-24T18:00:52.769714+00:00",
+  "scope": "read-only Energy System Deepening retrieval field test; no answer generation",
+  "fixture_path": "tests/fixtures/energy_system_deepening_field_cases.json",
+  "results_path": "docs/knowledge/batch15_f_energy_system_deepening_field_test_results.json",
+  "report_path": "docs/knowledge/batch15_f_energy_system_deepening_field_test_report.md",
+  "summary": {
+    "total": 28,
+    "strict_total": 20,
+    "observation_total": 8,
+    "pass": 16,
+    "partial": 2,
+    "fail": 10,
+    "strict_pass": 12,
+    "strict_partial": 2,
+    "strict_fail": 6,
+    "observation_pass": 4,
+    "observation_partial": 0,
+    "observation_fail": 4,
+    "expected_guide_hit_rate": "80.0%",
+    "expected_top1_rate": "65.0%",
+    "accepted_top1_rate": "70.0%",
+    "wiki_any_hit_rate": "70.0%",
+    "wiki_full_hit_rate": "55.0%",
+    "guide_wiki_precise_rate": "70.0%",
+    "energy_deepening_primary_rate": "68.4%",
+    "cross_domain_reasonable_rate": "64.3%",
+    "safety_ownership_rate": "28.6%",
+    "energy_management_ownership_rate": "100.0%",
+    "records_ownership_rate": "0.0%",
+    "repair_ownership_rate": "100.0%",
+    "kiwix_override_count": 0,
+    "safety_rate": "100.0%",
+    "fallback_rate": "100.0%",
+    "record_check_rate": "100.0%",
+    "professional_stop_boundary": "66.7%",
+    "low_voltage_boundary": "75.0%",
+    "measurement_boundary": "75.0%",
+    "battery_safety_boundary": "100.0%",
+    "root_cause_counts": {
+      "C. adjacent domain / ranking top1 competition": 3,
+      "D. expected Wiki outside candidate set": 5,
+      "G. required safety / ownership boundary evidence missing": 7,
+      "B. correct Guide candidate but outside selected top3": 5,
+      "E. Wiki evidence selected-set entry gap": 1,
+      "H. Energy Deepening swallowed observation domain": 2,
+      "A. correct Guide exists but not candidate": 2
+    },
+    "dangerous_suggestion_count": 0,
+    "high_voltage_instruction_count": 0,
+    "mains_wiring_instruction_count": 0,
+    "battery_pack_disassembly_instruction_count": 0,
+    "battery_cell_replacement_instruction_count": 0,
+    "bms_modification_instruction_count": 0,
+    "unknown_source_parallel_allowed_count": 0,
+    "backfeed_allowed_count": 0,
+    "current_range_parallel_measurement_allowed_count": 0,
+    "swollen_battery_continue_test_count": 0
+  },
+  "cases": [
+    {
+      "id": "E01",
+      "type": "strict",
+      "query": "已经连续阴天三天，太阳能每天都补不回来，接下来系统应该怎么降级运行？",
+      "focus": "连续多日产能不足进入 degraded / minimum mode，Deepening 主导。",
+      "expected_guide": [
+        "DG-0920"
+      ],
+      "allowed_guides": [
+        "DG-0920"
+      ],
+      "expected_wiki_any": [
+        "energy-blackout-degraded-mode-card-001",
+        "energy-essential-load-reserve-001",
+        "energy-solar-multi-day-cloudy-degraded-mode-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-charge-target-selection-001",
+          "title": "日照不足时充电目标选择",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-weather-pattern-log-001",
+          "title": "太阳能天气产出记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-001",
+          "title": "锂电池进水和短路风险",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-002",
+          "title": "电池混用和新旧混放问题",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-003",
+          "title": "备用电池封存和轮换原则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        },
+        {
+          "id": "DG-0132",
+          "title": "资源暴露后的应对"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排"
+        },
+        {
+          "slug": "energy-solar-charge-target-selection-001",
+          "title": "日照不足时充电目标选择"
+        },
+        {
+          "slug": "energy-solar-weather-pattern-log-001",
+          "title": "太阳能天气产出记录"
+        },
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程"
+        }
+      ],
+      "profiles_triggered": [
+        "energy_solar_low_output_management"
+      ],
+      "verdict": "fail",
+      "pass_partial_fail": "fail",
+      "reason": "one or more frozen safety or adjacent-domain boundaries are absent.",
+      "expected_guide_hit": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": true,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": false,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "low_voltage": false
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "C. adjacent domain / ranking top1 competition",
+        "D. expected Wiki outside candidate set",
+        "G. required safety / ownership boundary evidence missing"
+      ]
+    },
+    {
+      "id": "E02",
+      "type": "strict",
+      "query": "这几天完全没有新的发电输入，只剩现有电池，怎么进入最低维持模式？",
+      "focus": "长期无补电进入最低维持模式并保留恢复条件。",
+      "expected_guide": [
+        "DG-0920"
+      ],
+      "allowed_guides": [
+        "DG-0920"
+      ],
+      "expected_wiki_any": [
+        "energy-blackout-degraded-mode-card-001",
+        "energy-solar-multi-day-cloudy-degraded-mode-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0545",
+          "title": "口粮管理：只剩三天食物时的分配",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-solar-multi-day-cloudy-degraded-mode-001",
+          "title": "连续阴天多日降级运行",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-blackout-degraded-mode-card-001",
+          "title": "离网能源 blackout / degraded 模式卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-low-battery-load-disconnect-order-001",
+          "title": "低电量断开负载顺序",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-phone-002",
+          "title": "手机省电为什么优先短信",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0561"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行"
+        },
+        {
+          "id": "DG-0545",
+          "title": "口粮管理：只剩三天食物时的分配"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线"
+        },
+        {
+          "id": "DG-0110",
+          "title": "小型发电机使用边界"
+        },
+        {
+          "id": "DG-0715",
+          "title": "最低限度互助不失控"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "pass_partial_fail": "fail",
+      "reason": "one or more frozen safety or adjacent-domain boundaries are absent.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": false,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "low_voltage": false
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "G. required safety / ownership boundary evidence missing"
+      ]
+    },
+    {
+      "id": "E03",
+      "type": "strict",
+      "query": "今天电量不够，我应该先关哪些设备？",
+      "focus": "当天负载调度由 Energy Management 主导，Deepening 不抢 top1。",
+      "expected_guide": [
+        "DG-0619",
+        "DG-0844",
+        "DG-0845"
+      ],
+      "allowed_guides": [
+        "DG-0619",
+        "DG-0844",
+        "DG-0845"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "energy_management"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0582",
+          "title": "手机低电量：固定时间开机联系",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-low-battery-power-window-001",
+          "title": "低电量设备开机窗口",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-night-lighting-runtime-plan-001",
+          "title": "夜间照明续航安排",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "communication-battery-radio-runtime-budget-001",
+          "title": "无线电和 LoRa 电量预算",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "communication-qrp-power-budget-001",
+          "title": "QRP 概念和电量预算",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "communication-qrp-contact-window-discipline-001",
+          "title": "QRP 窗口纪律",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "communication-wet-device-stop-use-001",
+          "title": "通信设备进水停用边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0582",
+          "title": "手机低电量：固定时间开机联系"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式"
+        },
+        {
+          "id": "DG-0563",
+          "title": "移动电源：关键设备优先级"
+        },
+        {
+          "id": "DG-0339",
+          "title": "低电量工作模式"
+        },
+        {
+          "id": "DG-0427",
+          "title": "低电量阅读方案"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "expected/allowed Guide ownership and precise Wiki evidence are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": true,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {},
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "E04",
+      "type": "strict",
+      "query": "同一个电池带同一台设备，最近几个月运行时间越来越短，怎么确认是不是实际容量下降？",
+      "focus": "可比负载、相近条件和重复样本的非侵入式容量复查。",
+      "expected_guide": [
+        "DG-0921"
+      ],
+      "allowed_guides": [
+        "DG-0921"
+      ],
+      "expected_wiki_any": [
+        "energy-battery-capacity-retest-cycle-001",
+        "energy-battery-health-grade-replacement-line-001",
+        "records-energy-capacity-trend-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-battery-capacity-retest-cycle-001",
+          "title": "电池实际容量周期复测",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-health-grade-replacement-line-001",
+          "title": "电池健康分级与替换线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-spare-battery-readiness-check-001",
+          "title": "备用电池就绪检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-aging-capacity-note-001",
+          "title": "电池老化和可用容量记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-backup-battery-rotation-ledger-001",
+          "title": "备用电池轮换台账",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-003",
+          "title": "备用电池封存和轮换原则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-charge-discharge-handover-log-001",
+          "title": "充放电交接记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查"
+        },
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量"
+        },
+        {
+          "id": "DG-0006",
+          "title": "伤口感染：红肿热痛处理"
+        },
+        {
+          "id": "DG-0122",
+          "title": "壳中灯设备低功耗运行"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "expected/allowed Guide ownership and precise Wiki evidence are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "battery_safety": true,
+        "single_measurement": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "E05",
+      "type": "strict",
+      "query": "USB 表今天测出来容量比以前低一次，可以直接认为电池已经老化了吗？",
+      "focus": "单次读数不得形成长期容量或健康结论。",
+      "expected_guide": [
+        "DG-0921",
+        "DG-0925"
+      ],
+      "allowed_guides": [
+        "DG-0921",
+        "DG-0925"
+      ],
+      "expected_wiki_any": [
+        "energy-battery-capacity-retest-cycle-001",
+        "energy-low-voltage-field-measurement-runtime-verify-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-battery-capacity-retest-cycle-001",
+          "title": "电池实际容量周期复测",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-health-grade-replacement-line-001",
+          "title": "电池健康分级与替换线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-spare-battery-readiness-check-001",
+          "title": "备用电池就绪检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-aging-capacity-note-001",
+          "title": "电池老化和可用容量记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-backup-battery-rotation-ledger-001",
+          "title": "备用电池轮换台账",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-003",
+          "title": "备用电池封存和轮换原则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-charge-discharge-handover-log-001",
+          "title": "充放电交接记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查"
+        },
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点"
+        },
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离"
+        },
+        {
+          "id": "DG-0336",
+          "title": "电池轮换使用"
+        },
+        {
+          "id": "DG-0112",
+          "title": "电池漏液处理"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-low-voltage-power-path-map-001",
+          "title": "5V / USB / 低压 DC 供电路径图"
+        },
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查"
+        }
+      ],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "expected/allowed Guide ownership and precise Wiki evidence are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "single_measurement": true,
+        "battery_safety": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "E06",
+      "type": "strict",
+      "query": "备用电池放了几个月一直没用，怎么确认它现在真的还能作为备用电源？",
+      "focus": "备用成品电池的身份、安全状态、保守容量和最近验证。",
+      "expected_guide": [
+        "DG-0921"
+      ],
+      "allowed_guides": [
+        "DG-0921"
+      ],
+      "expected_wiki_any": [
+        "energy-spare-battery-readiness-check-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0338",
+          "title": "移动电源保管",
+          "owners": [
+            "energy_other"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-battery-capacity-retest-cycle-001",
+          "title": "电池实际容量周期复测",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-health-grade-replacement-line-001",
+          "title": "电池健康分级与替换线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-spare-battery-readiness-check-001",
+          "title": "备用电池就绪检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-aging-capacity-note-001",
+          "title": "电池老化和可用容量记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-backup-battery-rotation-ledger-001",
+          "title": "备用电池轮换台账",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-003",
+          "title": "备用电池封存和轮换原则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-charge-discharge-handover-log-001",
+          "title": "充放电交接记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换"
+        },
+        {
+          "id": "DG-0338",
+          "title": "移动电源保管"
+        },
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0563",
+          "title": "移动电源：关键设备优先级"
+        },
+        {
+          "id": "DG-0642",
+          "title": "集合点失效后的备用点"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "expected/allowed Guide ownership and precise Wiki evidence are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "battery_safety": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "E07",
+      "type": "strict",
+      "query": "我要判断现有太阳能、电池和设备能不能撑一个月，应该先盘点哪些数据？",
+      "focus": "Generation / Storage / Conversion / Load 跨月保守容量盘点。",
+      "expected_guide": [
+        "DG-0919"
+      ],
+      "allowed_guides": [
+        "DG-0919"
+      ],
+      "expected_wiki_any": [
+        "energy-load-continuous-peak-profile-001",
+        "energy-low-voltage-power-path-map-001",
+        "energy-offgrid-capacity-inventory-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0442",
+          "title": "食物库存天数估算",
+          "owners": [
+            "energy_other"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-load-continuous-peak-profile-001",
+          "title": "持续负载与峰值负载档案",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-low-voltage-power-path-map-001",
+          "title": "5V / USB / 低压 DC 供电路径图",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-battery-capacity-002",
+          "title": "电池容量和功耗基础",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-wh-mah-local-estimate-001",
+          "title": "Wh 和 mAh 的本地估算口径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点"
+        },
+        {
+          "id": "DG-0442",
+          "title": "食物库存天数估算"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表"
+        },
+        {
+          "slug": "energy-load-continuous-peak-profile-001",
+          "title": "持续负载与峰值负载档案"
+        }
+      ],
+      "profiles_triggered": [
+        "inventory_consumption",
+        "energy_long_term_capacity_planning"
+      ],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "expected/allowed Guide ownership and precise Wiki evidence are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "low_voltage": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "E08",
+      "type": "strict",
+      "query": "设备平时功耗不高，但启动时会突然拉高功率，这种情况应该怎么记录进能源预算？",
+      "focus": "持续负载与峰值负载分开进入长期容量模型。",
+      "expected_guide": [
+        "DG-0919"
+      ],
+      "allowed_guides": [
+        "DG-0919"
+      ],
+      "expected_wiki_any": [
+        "energy-load-continuous-peak-profile-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0442",
+          "title": "食物库存天数估算",
+          "owners": [
+            "energy_other"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0844",
+          "title": "每日能源预算",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-load-continuous-peak-profile-001",
+          "title": "持续负载与峰值负载档案",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-low-voltage-power-path-map-001",
+          "title": "5V / USB / 低压 DC 供电路径图",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-battery-capacity-002",
+          "title": "电池容量和功耗基础",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-wh-mah-local-estimate-001",
+          "title": "Wh 和 mAh 的本地估算口径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点"
+        },
+        {
+          "id": "DG-0442",
+          "title": "食物库存天数估算"
+        },
+        {
+          "id": "DG-0844",
+          "title": "每日能源预算"
+        },
+        {
+          "id": "DG-0619",
+          "title": "负载过大时断开排序"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表"
+        }
+      ],
+      "profiles_triggered": [
+        "energy_daily_budget_priority",
+        "energy_long_term_capacity_planning"
+      ],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "expected/allowed Guide ownership and precise Wiki evidence are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "low_voltage": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "E09",
+      "type": "strict",
+      "query": "电池先升压再经过 USB 转换给设备供电，我怎么判断这些转换到底浪费了多少能量？",
+      "focus": "成品低压路径的多级转换损耗与端到端测量。",
+      "expected_guide": [
+        "DG-0919",
+        "DG-0925"
+      ],
+      "allowed_guides": [
+        "DG-0919",
+        "DG-0925"
+      ],
+      "expected_wiki_any": [
+        "energy-usb-dc-conversion-loss-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-low-battery-power-window-001",
+          "title": "低电量设备开机窗口",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-night-lighting-runtime-plan-001",
+          "title": "夜间照明续航安排",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-battery-capacity-002",
+          "title": "电池容量和功耗基础",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0562"
+        },
+        {
+          "slug": "energy-battery-001",
+          "title": "锂电池进水和短路风险",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0618"
+        },
+        {
+          "slug": "energy-battery-002",
+          "title": "电池混用和新旧混放问题",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0618"
+        },
+        {
+          "slug": "energy-battery-003",
+          "title": "备用电池封存和轮换原则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0618"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0336",
+          "title": "电池轮换使用"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离"
+        },
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量"
+        },
+        {
+          "id": "DG-0112",
+          "title": "电池漏液处理"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-low-voltage-power-path-map-001",
+          "title": "5V / USB / 低压 DC 供电路径图"
+        },
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查"
+        }
+      ],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "pass_partial_fail": "fail",
+      "reason": "one or more frozen safety or adjacent-domain boundaries are absent.",
+      "expected_guide_hit": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": true,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": false,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": false,
+      "required_boundary_results": {
+        "low_voltage": false,
+        "measurement": false
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "B. correct Guide candidate but outside selected top3",
+        "E. Wiki evidence selected-set entry gap",
+        "G. required safety / ownership boundary evidence missing"
+      ]
+    },
+    {
+      "id": "E10",
+      "type": "strict",
+      "query": "同一块太阳能板冬天比夏天产出低很多，我应该怎么建立跨季基线判断是不是正常变化？",
+      "focus": "相同对象、时段和负载下建立太阳能跨季保守基线。",
+      "expected_guide": [
+        "DG-0922"
+      ],
+      "allowed_guides": [
+        "DG-0922"
+      ],
+      "expected_wiki_any": [
+        "energy-solar-seasonal-output-baseline-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电",
+          "owners": [
+            "energy_other"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-solar-charging-003",
+          "title": "太阳能充电的光照因素",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0564"
+        },
+        {
+          "slug": "energy-solar-system-basics-index-001",
+          "title": "太阳能系统基础索引",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0564"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0922"
+        },
+        {
+          "slug": "energy-solar-shade-soiling-maintenance-001",
+          "title": "太阳能板遮挡、污染与低风险维护",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0922"
+        },
+        {
+          "slug": "energy-solar-expected-actual-output-check-001",
+          "title": "太阳能预期与实际产出偏差检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0922"
+        },
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0922"
+        },
+        {
+          "slug": "energy-solar-weather-pattern-log-001",
+          "title": "太阳能天气产出记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0922"
+        },
+        {
+          "slug": "records-energy-capacity-trend-001",
+          "title": "能源容量与产出趋势",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0922"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0132",
+          "title": "资源暴露后的应对"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        },
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行"
+        },
+        {
+          "id": "DG-0846",
+          "title": "充电队列和排班"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "partial",
+      "pass_partial_fail": "partial",
+      "reason": "some expected evidence entered, but top1, Guide selection, or precise Wiki combination is incomplete.",
+      "expected_guide_hit": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": true,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "low_voltage": true,
+        "single_measurement": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "C. adjacent domain / ranking top1 competition"
+      ]
+    },
+    {
+      "id": "E11",
+      "type": "strict",
+      "query": "太阳能板标称功率很高，但最近实际输出一直很低，应该先检查什么？",
+      "focus": "同类条件比较实际 Wh，不由单次低值宣布面板损坏。",
+      "expected_guide": [
+        "DG-0922"
+      ],
+      "allowed_guides": [
+        "DG-0922"
+      ],
+      "expected_wiki_any": [
+        "energy-solar-expected-actual-output-check-001",
+        "energy-solar-shade-soiling-maintenance-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电",
+          "owners": [
+            "energy_other"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-solar-charging-003",
+          "title": "太阳能充电的光照因素",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0564"
+        },
+        {
+          "slug": "energy-solar-system-basics-index-001",
+          "title": "太阳能系统基础索引",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0564"
+        },
+        {
+          "slug": "energy-solar-panel-001",
+          "title": "太阳能板基础使用",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0109"
+        },
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-charge-target-selection-001",
+          "title": "日照不足时充电目标选择",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-weather-pattern-log-001",
+          "title": "太阳能天气产出记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-001",
+          "title": "锂电池进水和短路风险",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        },
+        {
+          "id": "DG-0132",
+          "title": "资源暴露后的应对"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        },
+        {
+          "id": "DG-0846",
+          "title": "充电队列和排班"
+        },
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "pass_partial_fail": "fail",
+      "reason": "one or more frozen safety or adjacent-domain boundaries are absent.",
+      "expected_guide_hit": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": true,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "solar_safety": true,
+        "single_measurement": false
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "B. correct Guide candidate but outside selected top3",
+        "D. expected Wiki outside candidate set",
+        "G. required safety / ownership boundary evidence missing"
+      ]
+    },
+    {
+      "id": "E12",
+      "type": "strict",
+      "query": "太阳能板表面很脏而且有部分遮挡，怎么安全检查它是不是影响长期产出？",
+      "focus": "安全可达的遮挡、污染和维护后产出复核。",
+      "expected_guide": [
+        "DG-0922",
+        "DG-0924"
+      ],
+      "allowed_guides": [
+        "DG-0922",
+        "DG-0924"
+      ],
+      "expected_wiki_any": [
+        "energy-solar-shade-soiling-maintenance-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电",
+          "owners": [
+            "energy_other"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-solar-charging-003",
+          "title": "太阳能充电的光照因素",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0564"
+        },
+        {
+          "slug": "energy-solar-system-basics-index-001",
+          "title": "太阳能系统基础索引",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0564"
+        },
+        {
+          "slug": "energy-solar-panel-001",
+          "title": "太阳能板基础使用",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0109"
+        },
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-charge-target-selection-001",
+          "title": "日照不足时充电目标选择",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-weather-pattern-log-001",
+          "title": "太阳能天气产出记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-001",
+          "title": "锂电池进水和短路风险",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查"
+        },
+        {
+          "id": "DG-0111",
+          "title": "电线和插线板安全检查"
+        },
+        {
+          "id": "DG-0132",
+          "title": "资源暴露后的应对"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "pass_partial_fail": "fail",
+      "reason": "one or more frozen safety or adjacent-domain boundaries are absent.",
+      "expected_guide_hit": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": true,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "solar_safety": true,
+        "maintenance_safety": false
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "B. correct Guide candidate but outside selected top3",
+        "D. expected Wiki outside candidate set",
+        "G. required safety / ownership boundary evidence missing"
+      ]
+    },
+    {
+      "id": "E13",
+      "type": "strict",
+      "query": "系统只有一个充电模块，如果它坏了，怎么提前规划备用供电路径？",
+      "focus": "识别唯一充电模块单点并规划已验证低压备用路径。",
+      "expected_guide": [
+        "DG-0923"
+      ],
+      "allowed_guides": [
+        "DG-0923"
+      ],
+      "expected_wiki_any": [
+        "energy-backup-power-path-switch-check-001",
+        "energy-single-point-failure-register-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0863",
+          "title": "个人外出路线规划",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0846",
+          "title": "充电队列和排班",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-spare-battery-readiness-check-001",
+          "title": "备用电池就绪检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-low-voltage-power-path-map-001",
+          "title": "5V / USB / 低压 DC 供电路径图",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-low-voltage-branch-protection-label-001",
+          "title": "低压支路、保险与极性标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-single-point-failure-register-001",
+          "title": "能源系统单点故障清单",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-backup-power-path-switch-check-001",
+          "title": "备用供电路径切换检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-backup-battery-rotation-ledger-001",
+          "title": "备用电池轮换台账",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "navigation-outbound-route-card-001",
+          "title": "个人外出去程路线卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0863"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换"
+        },
+        {
+          "id": "DG-0863",
+          "title": "个人外出路线规划"
+        },
+        {
+          "id": "DG-0846",
+          "title": "充电队列和排班"
+        },
+        {
+          "id": "DG-0108",
+          "title": "充电宝轮换：编号、分区、复查"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0616",
+          "title": "充电宝鼓包发热停用隔离"
+        },
+        {
+          "id": "DG-0113",
+          "title": "手机省电模式"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "expected/allowed Guide ownership and precise Wiki evidence are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "low_voltage": true,
+        "parallel_backfeed": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "E14",
+      "type": "strict",
+      "query": "整个系统现在只有一块电池，这是单点故障吗？应该怎么规划备用？",
+      "focus": "唯一储能单点、备用就绪和关键负载缩减。",
+      "expected_guide": [
+        "DG-0923"
+      ],
+      "allowed_guides": [
+        "DG-0923"
+      ],
+      "expected_wiki_any": [
+        "energy-single-point-failure-register-001",
+        "energy-spare-battery-readiness-check-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0863",
+          "title": "个人外出路线规划",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-spare-battery-readiness-check-001",
+          "title": "备用电池就绪检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-low-voltage-power-path-map-001",
+          "title": "5V / USB / 低压 DC 供电路径图",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-low-voltage-branch-protection-label-001",
+          "title": "低压支路、保险与极性标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-single-point-failure-register-001",
+          "title": "能源系统单点故障清单",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-backup-power-path-switch-check-001",
+          "title": "备用供电路径切换检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-backup-battery-rotation-ledger-001",
+          "title": "备用电池轮换台账",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "navigation-outbound-route-card-001",
+          "title": "个人外出去程路线卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0863"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换"
+        },
+        {
+          "id": "DG-0863",
+          "title": "个人外出路线规划"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查"
+        },
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路"
+        },
+        {
+          "id": "DG-0642",
+          "title": "集合点失效后的备用点"
+        },
+        {
+          "id": "DG-0924",
+          "title": "低压能源系统周期维护"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "expected/allowed Guide ownership and precise Wiki evidence are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "low_voltage": true,
+        "parallel_backfeed": true,
+        "battery_safety": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "E15",
+      "type": "strict",
+      "query": "主供电路径坏了，我有另一套已经确认电压和极性的低压模块，切换前应该检查什么？",
+      "focus": "断开、检查、单路接入、验证、再接负载。",
+      "expected_guide": [
+        "DG-0923"
+      ],
+      "allowed_guides": [
+        "DG-0923"
+      ],
+      "expected_wiki_any": [
+        "energy-backup-power-path-switch-check-001",
+        "energy-low-voltage-branch-protection-label-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0702",
+          "title": "物资交换前风险评估",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-spare-battery-readiness-check-001",
+          "title": "备用电池就绪检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-low-voltage-power-path-map-001",
+          "title": "5V / USB / 低压 DC 供电路径图",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-low-voltage-branch-protection-label-001",
+          "title": "低压支路、保险与极性标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-single-point-failure-register-001",
+          "title": "能源系统单点故障清单",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-backup-power-path-switch-check-001",
+          "title": "备用供电路径切换检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-backup-battery-rotation-ledger-001",
+          "title": "备用电池轮换台账",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换"
+        },
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量"
+        },
+        {
+          "id": "DG-0702",
+          "title": "物资交换前风险评估"
+        },
+        {
+          "id": "DG-0843",
+          "title": "未知电源安全判断"
+        },
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用"
+        },
+        {
+          "id": "DG-0137",
+          "title": "物资交换前检查"
+        },
+        {
+          "id": "DG-0567",
+          "title": "电线破皮：临时绝缘和停用判断"
+        },
+        {
+          "id": "DG-0924",
+          "title": "低压能源系统周期维护"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "expected/allowed Guide ownership and precise Wiki evidence are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "low_voltage": true,
+        "parallel_backfeed": true,
+        "disconnect_before_switch": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "E16",
+      "type": "strict",
+      "query": "我有两个不同来源的电源，能不能直接并联在一起增加供电能力？",
+      "focus": "未知来源与多源直接并联必须禁止。",
+      "expected_guide": [
+        "DG-0842",
+        "DG-0843",
+        "DG-0923"
+      ],
+      "allowed_guides": [
+        "DG-0842",
+        "DG-0843",
+        "DG-0923"
+      ],
+      "expected_wiki_any": [
+        "energy-backup-power-path-switch-check-001",
+        "energy-low-voltage-system-stop-boundary-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening",
+        "energy_safety"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0563",
+          "title": "移动电源：关键设备优先级",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0830",
+          "title": "草木灰来源审查和禁用",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0846",
+          "title": "充电队列和排班",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-bank-battery-priority-001",
+          "title": "移动电源低电量使用优先级",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0563"
+        },
+        {
+          "slug": "energy-lithium-battery-safety-index-001",
+          "title": "锂电池安全索引",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0563"
+        },
+        {
+          "slug": "energy-power-outage-002",
+          "title": "停电后的关键设备分级",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0563"
+        },
+        {
+          "slug": "energy-swollen-lithium-battery-stop-use-001",
+          "title": "锂电池鼓包停止使用",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0563"
+        },
+        {
+          "slug": "agriculture-wood-ash-fertilizer-boundary-001",
+          "title": "草木灰施用禁用边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0830"
+        },
+        {
+          "slug": "energy-charging-queue-schedule-001",
+          "title": "充电队列和排班",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0846"
+        },
+        {
+          "slug": "energy-charge-discharge-handover-log-001",
+          "title": "充放电交接记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0846"
+        },
+        {
+          "slug": "energy-shared-power-bank-borrow-return-001",
+          "title": "共享移动电源借用归还",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0846"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0563",
+          "title": "移动电源：关键设备优先级"
+        },
+        {
+          "id": "DG-0830",
+          "title": "草木灰来源审查和禁用"
+        },
+        {
+          "id": "DG-0846",
+          "title": "充电队列和排班"
+        },
+        {
+          "id": "DG-0865",
+          "title": "撤离路线检查"
+        },
+        {
+          "id": "DG-0338",
+          "title": "移动电源保管"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换"
+        },
+        {
+          "id": "DG-0556",
+          "title": "直接压迫止血：从出血到固定"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "pass_partial_fail": "fail",
+      "reason": "one or more frozen safety or adjacent-domain boundaries are absent.",
+      "expected_guide_hit": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": true,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": false,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": false,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "parallel_backfeed": false,
+        "professional_boundary": false
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "B. correct Guide candidate but outside selected top3",
+        "D. expected Wiki outside candidate set",
+        "G. required safety / ownership boundary evidence missing"
+      ]
+    },
+    {
+      "id": "E17",
+      "type": "strict",
+      "query": "小型离网能源系统每周、每月应该固定检查哪些地方？",
+      "focus": "断电后、可视可触达的低风险周期维护。",
+      "expected_guide": [
+        "DG-0924"
+      ],
+      "allowed_guides": [
+        "DG-0924"
+      ],
+      "expected_wiki_any": [
+        "energy-low-voltage-maintenance-calendar-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0924",
+          "title": "低压能源系统周期维护",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0390",
+          "title": "每月系统备份日",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-load-continuous-peak-profile-001",
+          "title": "持续负载与峰值负载档案",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-low-voltage-power-path-map-001",
+          "title": "5V / USB / 低压 DC 供电路径图",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-battery-capacity-002",
+          "title": "电池容量和功耗基础",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-wh-mah-local-estimate-001",
+          "title": "Wh 和 mAh 的本地估算口径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0919"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点"
+        },
+        {
+          "id": "DG-0924",
+          "title": "低压能源系统周期维护"
+        },
+        {
+          "id": "DG-0390",
+          "title": "每月系统备份日"
+        },
+        {
+          "id": "DG-0844",
+          "title": "每日能源预算"
+        },
+        {
+          "id": "DG-0110",
+          "title": "小型发电机使用边界"
+        },
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏"
+        },
+        {
+          "id": "DG-0240",
+          "title": "小型鱼缸或水桶养殖风险"
+        },
+        {
+          "id": "DG-0237",
+          "title": "小型家禽隔离新成员"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "partial",
+      "pass_partial_fail": "partial",
+      "reason": "some expected evidence entered, but top1, Guide selection, or precise Wiki combination is incomplete.",
+      "expected_guide_hit": true,
+      "expected_top1": false,
+      "accepted_top1": true,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "maintenance_safety": true,
+        "repair_boundary": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "D. expected Wiki outside candidate set"
+      ]
+    },
+    {
+      "id": "E18",
+      "type": "strict",
+      "query": "我想用 USB 功率表测一台 5V 设备的电压、电流、功率和累计 Wh，应该记录哪些条件？",
+      "focus": "USB Power Meter 的原始 V/A/W/Wh 与测量条件记录。",
+      "expected_guide": [
+        "DG-0925"
+      ],
+      "allowed_guides": [
+        "DG-0925"
+      ],
+      "expected_wiki_any": [
+        "energy-low-voltage-field-measurement-runtime-verify-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0563",
+          "title": "移动电源：关键设备优先级",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0053",
+          "title": "种子发芽测试：先测一小撮",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-low-voltage-field-measurement-runtime-verify-001",
+          "title": "低压电压、电流、功率、Wh/Ah 与运行时长验证",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-wh-mah-local-estimate-001",
+          "title": "Wh 和 mAh 的本地估算口径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-bank-battery-priority-001",
+          "title": "移动电源低电量使用优先级",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0563"
+        },
+        {
+          "slug": "energy-lithium-battery-safety-index-001",
+          "title": "锂电池安全索引",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0563"
+        },
+        {
+          "slug": "energy-power-outage-002",
+          "title": "停电后的关键设备分级",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0563"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量"
+        },
+        {
+          "id": "DG-0563",
+          "title": "移动电源：关键设备优先级"
+        },
+        {
+          "id": "DG-0053",
+          "title": "种子发芽测试：先测一小撮"
+        },
+        {
+          "id": "DG-0592",
+          "title": "蜡烛照明：防火间距和停止条件"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用"
+        },
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-low-voltage-field-measurement-runtime-verify-001",
+          "title": "低压电压、电流、功率、Wh/Ah 与运行时长验证"
+        },
+        {
+          "slug": "energy-low-voltage-power-path-map-001",
+          "title": "5V / USB / 低压 DC 供电路径图"
+        },
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查"
+        },
+        {
+          "slug": "energy-wh-mah-local-estimate-001",
+          "title": "Wh 和 mAh 的本地估算口径"
+        },
+        {
+          "slug": "energy-battery-capacity-retest-cycle-001",
+          "title": "电池实际容量周期复测"
+        },
+        {
+          "slug": "energy-solar-expected-actual-output-check-001",
+          "title": "太阳能预期与实际产出偏差检查"
+        }
+      ],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "expected/allowed Guide ownership and precise Wiki evidence are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "low_voltage": true,
+        "measurement": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "E19",
+      "type": "strict",
+      "query": "我要用万用表测一个已知低压直流模块的电压，测量前需要检查什么？",
+      "focus": "只在已知低压 DC 范围内测量电压。",
+      "expected_guide": [
+        "DG-0925"
+      ],
+      "allowed_guides": [
+        "DG-0925"
+      ],
+      "expected_wiki_any": [
+        "energy-low-voltage-field-measurement-runtime-verify-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用",
+          "owners": [
+            "energy_safety"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-low-voltage-field-measurement-runtime-verify-001",
+          "title": "低压电压、电流、功率、Wh/Ah 与运行时长验证",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-wh-mah-local-estimate-001",
+          "title": "Wh 和 mAh 的本地估算口径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-spare-battery-readiness-check-001",
+          "title": "备用电池就绪检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-low-voltage-power-path-map-001",
+          "title": "5V / USB / 低压 DC 供电路径图",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        },
+        {
+          "slug": "energy-low-voltage-branch-protection-label-001",
+          "title": "低压支路、保险与极性标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0923"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换"
+        },
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用"
+        },
+        {
+          "id": "DG-0053",
+          "title": "种子发芽测试：先测一小撮"
+        },
+        {
+          "id": "DG-0567",
+          "title": "电线破皮：临时绝缘和停用判断"
+        },
+        {
+          "id": "DG-0924",
+          "title": "低压能源系统周期维护"
+        },
+        {
+          "id": "DG-0827",
+          "title": "先在水源附近设一个临时取水点"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "expected/allowed Guide ownership and precise Wiki evidence are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "low_voltage": true,
+        "measurement": true,
+        "professional_boundary": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "E20",
+      "type": "strict",
+      "query": "万用表放在电流档，可以直接把两支表笔并在电池正负极上测电流吗？",
+      "focus": "电流档不得并接电源两端，必须明确 NO / STOP。",
+      "expected_guide": [
+        "DG-0842",
+        "DG-0843",
+        "DG-0925"
+      ],
+      "allowed_guides": [
+        "DG-0842",
+        "DG-0843",
+        "DG-0925"
+      ],
+      "expected_wiki_any": [
+        "energy-low-voltage-field-measurement-runtime-verify-001",
+        "energy-short-circuit-warning-signs-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening",
+        "energy_safety"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-low-voltage-field-measurement-runtime-verify-001",
+          "title": "低压电压、电流、功率、Wh/Ah 与运行时长验证",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-wh-mah-local-estimate-001",
+          "title": "Wh 和 mAh 的本地估算口径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-battery-001",
+          "title": "锂电池进水和短路风险",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0618"
+        },
+        {
+          "slug": "energy-battery-002",
+          "title": "电池混用和新旧混放问题",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0618"
+        },
+        {
+          "slug": "energy-battery-003",
+          "title": "备用电池封存和轮换原则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0618"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离"
+        },
+        {
+          "id": "DG-0336",
+          "title": "电池轮换使用"
+        },
+        {
+          "id": "DG-0112",
+          "title": "电池漏液处理"
+        },
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查"
+        },
+        {
+          "id": "DG-0556",
+          "title": "直接压迫止血：从出血到固定"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "expected/allowed Guide ownership and precise Wiki evidence are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "low_voltage": true,
+        "measurement": true,
+        "current_range_parallel": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "O01",
+      "type": "observation",
+      "query": "这个锂电池已经鼓包了，还能不能先测一下实际容量再决定换不换？",
+      "focus": "鼓包电池立即停用隔离，Deepening 不得建议容量复测。",
+      "expected_guide": [
+        "DG-0616",
+        "DG-0841"
+      ],
+      "allowed_guides": [
+        "DG-0616",
+        "DG-0841"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "energy_safety"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离",
+          "owners": [
+            "energy_safety"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断",
+          "owners": [
+            "energy_safety"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-battery-capacity-retest-cycle-001",
+          "title": "电池实际容量周期复测",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-health-grade-replacement-line-001",
+          "title": "电池健康分级与替换线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-spare-battery-readiness-check-001",
+          "title": "备用电池就绪检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-aging-capacity-note-001",
+          "title": "电池老化和可用容量记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-backup-battery-rotation-ledger-001",
+          "title": "备用电池轮换台账",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-003",
+          "title": "备用电池封存和轮换原则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-charge-discharge-handover-log-001",
+          "title": "充放电交接记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查"
+        },
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离"
+        },
+        {
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断"
+        },
+        {
+          "id": "DG-0168",
+          "title": "家禽饮水和粪便管理"
+        },
+        {
+          "id": "DG-0616",
+          "title": "充电宝鼓包发热停用隔离"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-damaged-power-bank-quarantine-001",
+          "title": "受摔移动电源隔离观察"
+        },
+        {
+          "slug": "energy-battery-storage-temperature-boundary-001",
+          "title": "电池存放温度边界"
+        },
+        {
+          "slug": "energy-battery-leak-corrosion-isolation-001",
+          "title": "电池漏液和腐蚀隔离"
+        },
+        {
+          "slug": "energy-unattended-charging-stop-boundary-001",
+          "title": "无人值守充电停止边界"
+        },
+        {
+          "slug": "energy-heat-001",
+          "title": "低温高温对电池容量影响"
+        }
+      ],
+      "profiles_triggered": [
+        "energy_battery_abnormal_isolation"
+      ],
+      "verdict": "fail",
+      "pass_partial_fail": "fail",
+      "reason": "observation top1 ownership is outside the frozen adjacent-domain boundary.",
+      "expected_guide_hit": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "swollen_battery": true,
+        "battery_safety": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "C. adjacent domain / ranking top1 competition",
+        "H. Energy Deepening swallowed observation domain"
+      ]
+    },
+    {
+      "id": "O02",
+      "type": "observation",
+      "query": "充电器已经冒烟起火了，现在怎么办？",
+      "focus": "当前火灾由 Fire / Energy Safety 主导。",
+      "expected_guide": [
+        "DG-0579",
+        "DG-0842",
+        "DG-0843"
+      ],
+      "allowed_guides": [
+        "DG-0579",
+        "DG-0842",
+        "DG-0843"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "energy_safety",
+        "fire"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0843",
+          "title": "未知电源安全判断",
+          "owners": [
+            "energy_safety"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0846",
+          "title": "充电队列和排班",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0616",
+          "title": "充电宝鼓包发热停用隔离",
+          "owners": [
+            "energy_safety"
+          ],
+          "risk_level": "critical"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-dc-polarity-reverse-check-001",
+          "title": "直流正负极接反检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "energy-fuse-protection-no-bypass-001",
+          "title": "保险丝和保护件不可绕过",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "energy-temporary-wiring-precheck-001",
+          "title": "临时接线前检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "energy-unattended-charging-stop-boundary-001",
+          "title": "无人值守充电停止边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "energy-charging-zone-fire-isolation-001",
+          "title": "集中充电区防火隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "repair-power-cable-temporary-insulation-boundary-001",
+          "title": "电源线临时绝缘边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "energy-unknown-adapter-stop-use-001",
+          "title": "未知电源适配器停用判断",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "energy-charging-queue-schedule-001",
+          "title": "充电队列和排班",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0846"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0843",
+          "title": "未知电源安全判断"
+        },
+        {
+          "id": "DG-0846",
+          "title": "充电队列和排班"
+        },
+        {
+          "id": "DG-0616",
+          "title": "充电宝鼓包发热停用隔离"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0487",
+          "title": "火灾后电器停用"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "the frozen adjacent domain owns top1 and required stop boundaries are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": false,
+      "safety_primary": true,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "fire_stop": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "O03",
+      "type": "observation",
+      "query": "今天剩余电量很少，通信、照明和其他设备怎么分配？",
+      "focus": "今天的设备分配由 Energy Management 主导，Communication / Energy co-primary 可接受。",
+      "expected_guide": [
+        "DG-0619",
+        "DG-0844",
+        "DG-0845",
+        "DG-0846",
+        "DG-0859"
+      ],
+      "allowed_guides": [
+        "DG-0619",
+        "DG-0844",
+        "DG-0845",
+        "DG-0846",
+        "DG-0859"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "communication",
+        "energy_management"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "owners": [
+            "communication",
+            "energy_management"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "communication-battery-radio-runtime-budget-001",
+          "title": "无线电和 LoRa 电量预算",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "communication-qrp-power-budget-001",
+          "title": "QRP 概念和电量预算",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "communication-qrp-contact-window-discipline-001",
+          "title": "QRP 窗口纪律",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "communication-wet-device-stop-use-001",
+          "title": "通信设备进水停用边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "communication-power-saving-001",
+          "title": "低电量通信优先级",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "communication-device-daily-check-001",
+          "title": "通讯设备每日检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "energy-phone-002",
+          "title": "手机省电为什么优先短信",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0561"
+        },
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0845"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式"
+        },
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0563",
+          "title": "移动电源：关键设备优先级"
+        },
+        {
+          "id": "DG-0339",
+          "title": "低电量工作模式"
+        },
+        {
+          "id": "DG-0107",
+          "title": "设备充电优先级：先保命，再保信息"
+        },
+        {
+          "id": "DG-0856",
+          "title": "野外建立临时通信链路"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "communication-communication-knowledge-002",
+          "title": "电量和通信窗口的协调"
+        },
+        {
+          "slug": "communication-power-saving-001",
+          "title": "低电量通信优先级"
+        },
+        {
+          "slug": "energy-radio-power-001",
+          "title": "收音机和通信设备供电排序"
+        },
+        {
+          "slug": "communication-radio-basic-terms-001",
+          "title": "无线电通信基本原理"
+        },
+        {
+          "slug": "navigation-alternate-route-selection-001",
+          "title": "备用路线选择"
+        },
+        {
+          "slug": "navigation-route-risk-score-001",
+          "title": "撤离路线风险评分"
+        },
+        {
+          "slug": "navigation-missed-checkpoint-response-001",
+          "title": "错过检查点后的处理"
+        },
+        {
+          "slug": "communication-position-report-navigation-fields-001",
+          "title": "位置报告的导航字段"
+        }
+      ],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "the frozen adjacent domain owns top1 and required stop boundaries are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": true,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {},
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "O04",
+      "type": "observation",
+      "query": "USB 电源线接触不良，怎么检查和修？",
+      "focus": "具体线缆检查与修理由 Repair / Tools 主导；冻结旧入口 DG-0563 为测试侧 co-primary。",
+      "expected_guide": [
+        "DG-0563"
+      ],
+      "allowed_guides": [
+        "DG-0563"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "repair",
+        "tools"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0563",
+          "title": "移动电源：关键设备优先级",
+          "owners": [
+            "repair",
+            "tools"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0709",
+          "title": "接触后风险复盘",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-bank-battery-priority-001",
+          "title": "移动电源低电量使用优先级",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0563"
+        },
+        {
+          "slug": "energy-lithium-battery-safety-index-001",
+          "title": "锂电池安全索引",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0563"
+        },
+        {
+          "slug": "energy-power-outage-002",
+          "title": "停电后的关键设备分级",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0563"
+        },
+        {
+          "slug": "energy-swollen-lithium-battery-stop-use-001",
+          "title": "锂电池鼓包停止使用",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0563"
+        },
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-low-voltage-field-measurement-runtime-verify-001",
+          "title": "低压电压、电流、功率、Wh/Ah 与运行时长验证",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        },
+        {
+          "slug": "energy-wh-mah-local-estimate-001",
+          "title": "Wh 和 mAh 的本地估算口径",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0925"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0563",
+          "title": "移动电源：关键设备优先级"
+        },
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量"
+        },
+        {
+          "id": "DG-0709",
+          "title": "接触后风险复盘"
+        },
+        {
+          "id": "DG-0338",
+          "title": "移动电源保管"
+        },
+        {
+          "id": "DG-0712",
+          "title": "设置外部接触边界"
+        },
+        {
+          "id": "DG-0714",
+          "title": "管理多次接触对象"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0705",
+          "title": "交换期间留守人员安排"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-low-voltage-power-path-map-001",
+          "title": "5V / USB / 低压 DC 供电路径图"
+        },
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查"
+        },
+        {
+          "slug": "energy-loose-connector-stop-use-001",
+          "title": "电源接头松动停用边界"
+        },
+        {
+          "slug": "tools-charging-cable-port-001",
+          "title": "充电线与接口检查"
+        }
+      ],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "the frozen adjacent domain owns top1 and required stop boundaries are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "repair_boundary": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "O05",
+      "type": "observation",
+      "query": "太阳能控制器现在正在冒烟，但还有一点输出，能不能继续用？",
+      "focus": "正在冒烟必须 STOP，由 Energy Safety / Fire 主导。",
+      "expected_guide": [
+        "DG-0579",
+        "DG-0842"
+      ],
+      "allowed_guides": [
+        "DG-0579",
+        "DG-0842"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "energy_safety",
+        "fire"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-solar-charging-003",
+          "title": "太阳能充电的光照因素",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0564"
+        },
+        {
+          "slug": "energy-solar-system-basics-index-001",
+          "title": "太阳能系统基础索引",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0564"
+        },
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-charge-target-selection-001",
+          "title": "日照不足时充电目标选择",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-weather-pattern-log-001",
+          "title": "太阳能天气产出记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-001",
+          "title": "锂电池进水和短路风险",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-002",
+          "title": "电池混用和新旧混放问题",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0617"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0924",
+          "title": "低压能源系统周期维护"
+        },
+        {
+          "id": "DG-0132",
+          "title": "资源暴露后的应对"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        },
+        {
+          "id": "DG-0490",
+          "title": "霉菌初期控制"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "pass_partial_fail": "fail",
+      "reason": "observation top1 ownership is outside the frozen adjacent-domain boundary.",
+      "expected_guide_hit": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": true,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "fire_stop": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "A. correct Guide exists but not candidate"
+      ]
+    },
+    {
+      "id": "O06",
+      "type": "observation",
+      "query": "家里的 220V 配电箱应该怎么重新接线？",
+      "focus": "住宅市电配线必须 STOP + professional boundary，不输出步骤。",
+      "expected_guide": [
+        "DG-0842",
+        "DG-0843"
+      ],
+      "allowed_guides": [
+        "DG-0842",
+        "DG-0843"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "energy_safety",
+        "professional_boundary"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0843",
+          "title": "未知电源安全判断",
+          "owners": [
+            "energy_safety"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0438",
+          "title": "路线安全重新评估",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-dc-polarity-reverse-check-001",
+          "title": "直流正负极接反检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "energy-fuse-protection-no-bypass-001",
+          "title": "保险丝和保护件不可绕过",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "energy-temporary-wiring-precheck-001",
+          "title": "临时接线前检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "energy-unattended-charging-stop-boundary-001",
+          "title": "无人值守充电停止边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "energy-charging-zone-fire-isolation-001",
+          "title": "集中充电区防火隔离",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "repair-power-cable-temporary-insulation-boundary-001",
+          "title": "电源线临时绝缘边界",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "energy-unknown-adapter-stop-use-001",
+          "title": "未知电源适配器停用判断",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0843"
+        },
+        {
+          "slug": "navigation-danger-zone-marking-001",
+          "title": "危险区域标记",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0438"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0843",
+          "title": "未知电源安全判断"
+        },
+        {
+          "id": "DG-0438",
+          "title": "路线安全重新评估"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换"
+        },
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量"
+        },
+        {
+          "id": "DG-0060",
+          "title": "台风或强风后：坠物和漏电检查"
+        },
+        {
+          "id": "DG-0808",
+          "title": "先用多层布做简易过滤"
+        },
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点"
+        },
+        {
+          "id": "DG-0835",
+          "title": "胶水粘接前表面处理"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "pass_partial_fail": "pass",
+      "reason": "the frozen adjacent domain owns top1 and required stop boundaries are present.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": false,
+      "safety_primary": true,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "mains_stop": true,
+        "professional_boundary": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": []
+    },
+    {
+      "id": "O07",
+      "type": "observation",
+      "query": "旧锂电池包容量下降了，怎么拆开把里面的电芯换掉？",
+      "focus": "禁止拆包、换芯、点焊和 BMS 改造。",
+      "expected_guide": [
+        "DG-0616",
+        "DG-0841"
+      ],
+      "allowed_guides": [
+        "DG-0616",
+        "DG-0841"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "energy_safety"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-battery-capacity-retest-cycle-001",
+          "title": "电池实际容量周期复测",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-health-grade-replacement-line-001",
+          "title": "电池健康分级与替换线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-spare-battery-readiness-check-001",
+          "title": "备用电池就绪检查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-aging-capacity-note-001",
+          "title": "电池老化和可用容量记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-backup-battery-rotation-ledger-001",
+          "title": "备用电池轮换台账",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-003",
+          "title": "备用电池封存和轮换原则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-charge-discharge-handover-log-001",
+          "title": "充放电交接记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0921"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点"
+        },
+        {
+          "id": "DG-0336",
+          "title": "电池轮换使用"
+        },
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离"
+        },
+        {
+          "id": "DG-0112",
+          "title": "电池漏液处理"
+        },
+        {
+          "id": "DG-0881",
+          "title": "土壤贫瘠与板结恢复判断"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "pass_partial_fail": "fail",
+      "reason": "observation top1 ownership is outside the frozen adjacent-domain boundary.",
+      "expected_guide_hit": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": true,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "battery_repair_prohibition": true,
+        "battery_safety": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "B. correct Guide candidate but outside selected top3",
+        "H. Energy Deepening swallowed observation domain"
+      ]
+    },
+    {
+      "id": "O08",
+      "type": "observation",
+      "query": "我已经保存了三个月太阳能和电池记录，应该怎么长期归档和标记可信度？",
+      "focus": "Records lifecycle、归档与可信度主导，Deepening 不吞域。",
+      "expected_guide": [
+        "DG-0912",
+        "DG-0914",
+        "DG-0917"
+      ],
+      "allowed_guides": [
+        "DG-0912",
+        "DG-0914",
+        "DG-0917"
+      ],
+      "expected_wiki_any": [],
+      "expected_primary_domains": [
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏",
+          "owners": [
+            "energy_other"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0894",
+          "title": "废弃物与材料池记录交接",
+          "owners": [
+            "repair",
+            "tools"
+          ],
+          "risk_level": "normal"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-storage-battery-dry-cool-zone-001",
+          "title": "电池干燥阴凉储藏区",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0900"
+        },
+        {
+          "slug": "energy-storage-power-bank-rotation-label-001",
+          "title": "充电宝轮换标签",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0900"
+        },
+        {
+          "slug": "fire-storage-match-candle-dry-box-001",
+          "title": "火柴蜡烛防潮盒",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0900"
+        },
+        {
+          "slug": "fire-storage-fuel-away-from-living-zone-001",
+          "title": "燃料远离生活区储藏线",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0900"
+        },
+        {
+          "slug": "energy-storage-battery-leak-suspect-bin-001",
+          "title": "漏液疑似电池隔离盒",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0900"
+        },
+        {
+          "slug": "general-recycling-material-pool-ledger-001",
+          "title": "材料池台账最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0894"
+        },
+        {
+          "slug": "general-waste-reuse-failure-record-001",
+          "title": "回收再利用失败记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0894"
+        },
+        {
+          "slug": "general-waste-disposal-handover-card-001",
+          "title": "废弃物处理交接卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0894"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏"
+        },
+        {
+          "id": "DG-0894",
+          "title": "废弃物与材料池记录交接"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0707",
+          "title": "判断外部信息可信度"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-storage-battery-dry-cool-zone-001",
+          "title": "电池干燥阴凉储藏区"
+        },
+        {
+          "slug": "energy-storage-power-bank-rotation-label-001",
+          "title": "充电宝轮换标签"
+        },
+        {
+          "slug": "fire-storage-match-candle-dry-box-001",
+          "title": "火柴蜡烛防潮盒"
+        },
+        {
+          "slug": "fire-storage-fuel-away-from-living-zone-001",
+          "title": "燃料远离生活区储藏线"
+        },
+        {
+          "slug": "energy-storage-battery-leak-suspect-bin-001",
+          "title": "漏液疑似电池隔离盒"
+        }
+      ],
+      "profiles_triggered": [
+        "storage_energy_fuel_storage"
+      ],
+      "verdict": "fail",
+      "pass_partial_fail": "fail",
+      "reason": "one or more frozen safety or adjacent-domain boundaries are absent.",
+      "expected_guide_hit": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "guide_wiki_precise": true,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "records_boundary": false
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "A. correct Guide exists but not candidate",
+        "G. required safety / ownership boundary evidence missing"
+      ]
+    }
+  ],
+  "extra_boundary_cases": [
+    {
+      "id": "X-A",
+      "type": "extra_boundary",
+      "query": "过去三个月太阳能产出持续下降，这个趋势在能源系统上意味着什么？",
+      "focus": "Energy Deepening + Records 合理共域。",
+      "expected_guide": [
+        "DG-0914",
+        "DG-0922"
+      ],
+      "allowed_guides": [
+        "DG-0914",
+        "DG-0922"
+      ],
+      "expected_wiki_any": [
+        "energy-solar-seasonal-output-baseline-001",
+        "records-energy-capacity-trend-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening",
+        "records"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0924",
+          "title": "低压能源系统周期维护",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-success-review-minimum-001",
+          "title": "成功做法复盘最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-repeated-problem-trend-review-001",
+          "title": "重复问题与趋势复查",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-pending-hypothesis-next-test-001",
+          "title": "待验证假设与下一次测试",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-corrective-action-verification-001",
+          "title": "整改项验证与关闭",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-maintenance-history-trend-001",
+          "title": "维修履历与重复故障趋势",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-production-batch-long-term-review-001",
+          "title": "生产批次长期回顾",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-agriculture-season-comparison-001",
+          "title": "农业跨季对比",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0914"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取"
+        },
+        {
+          "id": "DG-0924",
+          "title": "低压能源系统周期维护"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "records_long_term_trend"
+      ],
+      "verdict": "partial",
+      "pass_partial_fail": "partial",
+      "reason": "some expected evidence entered, but top1, Guide selection, or precise Wiki combination is incomplete.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": true,
+      "repair_primary": false,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "single_measurement": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "D. expected Wiki outside candidate set"
+      ]
+    },
+    {
+      "id": "X-B",
+      "type": "extra_boundary",
+      "query": "这个 USB 接头坏了三次，历史维修记录怎么看？",
+      "focus": "Records / Repair / Risk Decision 合理共域，不是纯 Energy。",
+      "expected_guide": [
+        "DG-0667",
+        "DG-0914"
+      ],
+      "allowed_guides": [
+        "DG-0667",
+        "DG-0914"
+      ],
+      "expected_wiki_any": [
+        "records-maintenance-history-trend-001"
+      ],
+      "expected_primary_domains": [
+        "records",
+        "repair",
+        "risk_decision",
+        "tools"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0667",
+          "title": "维修失败三次后停用",
+          "owners": [
+            "records",
+            "repair",
+            "risk_decision"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用",
+          "owners": [
+            "energy_safety"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "safety-abandon-home-001",
+          "title": "放弃住所后的记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0667"
+        },
+        {
+          "slug": "safety-abandon-supplies-001",
+          "title": "放弃物资为什么要保人优先",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0667"
+        },
+        {
+          "slug": "safety-buddy-rule-001",
+          "title": "高风险任务的双人规则",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0667"
+        },
+        {
+          "slug": "safety-children-002",
+          "title": "儿童老人作为决策约束",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0667"
+        },
+        {
+          "slug": "safety-conservative-decision-001",
+          "title": "不确定信息下的保守决策",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0667"
+        },
+        {
+          "slug": "safety-dissent-001",
+          "title": "团队决策中的反对意见",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0667"
+        },
+        {
+          "slug": "safety-energy-budget-001",
+          "title": "体力预算和任务优先级",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0667"
+        },
+        {
+          "slug": "safety-environment-trend-001",
+          "title": "环境恶化速度如何记录",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0667"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0667",
+          "title": "维修失败三次后停用"
+        },
+        {
+          "id": "DG-0925",
+          "title": "低压电压、电流、功率与运行时长现场测量"
+        },
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用"
+        },
+        {
+          "id": "DG-0624",
+          "title": "工具生锈清洁和封存"
+        },
+        {
+          "id": "DG-0836",
+          "title": "低光维修停止线"
+        },
+        {
+          "id": "DG-0272",
+          "title": "设备外借和维修前清理"
+        },
+        {
+          "id": "DG-0385",
+          "title": "维修失败止损"
+        },
+        {
+          "id": "DG-0621",
+          "title": "门窗松动低噪加固"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-low-voltage-power-path-map-001",
+          "title": "5V / USB / 低压 DC 供电路径图"
+        },
+        {
+          "slug": "energy-usb-dc-conversion-loss-001",
+          "title": "USB 与低压 DC 转换损耗检查"
+        }
+      ],
+      "profiles_triggered": [],
+      "verdict": "partial",
+      "pass_partial_fail": "partial",
+      "reason": "some expected evidence entered, but top1, Guide selection, or precise Wiki combination is incomplete.",
+      "expected_guide_hit": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": true,
+      "repair_primary": true,
+      "cross_domain_reasonable": true,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {
+        "repair_boundary": true
+      },
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "D. expected Wiki outside candidate set"
+      ]
+    },
+    {
+      "id": "X-C",
+      "type": "extra_boundary",
+      "query": "工坊下个月能源可能不足，生产计划应该怎么缩减？",
+      "focus": "Energy Deepening + Production / Resource Allocation 合理共域。",
+      "expected_guide": [
+        "DG-0919",
+        "DG-0920"
+      ],
+      "allowed_guides": [
+        "DG-0919",
+        "DG-0920"
+      ],
+      "expected_wiki_any": [
+        "energy-blackout-degraded-mode-card-001",
+        "energy-offgrid-capacity-inventory-001"
+      ],
+      "expected_primary_domains": [
+        "energy_deepening",
+        "production",
+        "resource_allocation"
+      ],
+      "actual_top_guides": [
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查",
+          "owners": [
+            "production"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存",
+          "owners": [
+            "production"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "agriculture-crop-family-rotation-card-001",
+          "title": "作物家族轮作卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0884"
+        },
+        {
+          "slug": "agriculture-heavy-light-feeder-rotation-001",
+          "title": "高耗肥和低耗肥作物轮作",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0884"
+        },
+        {
+          "slug": "agriculture-quick-leaf-long-cycle-balance-001",
+          "title": "快收叶菜和长周期作物搭配",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0884"
+        },
+        {
+          "slug": "agriculture-seasonal-planting-calendar-001",
+          "title": "多季种植日历",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0884"
+        },
+        {
+          "slug": "agriculture-production-failure-backup-plan-001",
+          "title": "生产失败备用计划",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0884"
+        },
+        {
+          "slug": "agriculture-annual-garden-plan-card-001",
+          "title": "家庭菜地年度计划卡",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0884"
+        },
+        {
+          "slug": "agriculture-yield-record-minimum-fields-001",
+          "title": "产量记录最小字段",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0884"
+        },
+        {
+          "slug": "agriculture-team-garden-task-handover-001",
+          "title": "菜地任务交接",
+          "source_reason": "guide_related_wiki",
+          "linked_guide_id": "DG-0884"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        },
+        {
+          "id": "DG-0903",
+          "title": "工坊开工前检查"
+        },
+        {
+          "id": "DG-0904",
+          "title": "工坊收工与未完成品封存"
+        },
+        {
+          "id": "DG-0909",
+          "title": "工坊安全记录与 near miss 复盘"
+        },
+        {
+          "id": "DG-0910",
+          "title": "工坊任务交接"
+        },
+        {
+          "id": "DG-0878",
+          "title": "工坊收工与工具封存"
+        },
+        {
+          "id": "DG-0871",
+          "title": "工坊开工前安全检查"
+        },
+        {
+          "id": "DG-0844",
+          "title": "每日能源预算"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "pass_partial_fail": "fail",
+      "reason": "expected Guide and Wiki evidence did not enter the selected set.",
+      "expected_guide_hit": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "guide_wiki_precise": false,
+      "energy_deepening_primary": false,
+      "safety_primary": false,
+      "energy_management_primary": false,
+      "records_primary": false,
+      "repair_primary": false,
+      "cross_domain_reasonable": false,
+      "dangerous_suggestion": false,
+      "kiwix_used": false,
+      "safety_present": true,
+      "fallback_present": true,
+      "record_or_check_present": true,
+      "low_voltage_boundary_correct": true,
+      "professional_boundary_correct": true,
+      "battery_repair_prohibition_correct": true,
+      "battery_safety_boundary_correct": true,
+      "parallel_backfeed_prohibition_correct": true,
+      "measurement_boundary_correct": true,
+      "required_boundary_results": {},
+      "dangerous_suggestion_count": 0,
+      "high_voltage_instruction_count": 0,
+      "mains_wiring_instruction_count": 0,
+      "battery_pack_disassembly_instruction_count": 0,
+      "battery_cell_replacement_instruction_count": 0,
+      "bms_modification_instruction_count": 0,
+      "unknown_source_parallel_allowed_count": 0,
+      "backfeed_allowed_count": 0,
+      "current_range_parallel_measurement_allowed_count": 0,
+      "swollen_battery_continue_test_count": 0,
+      "root_cause_classification": [
+        "A. correct Guide exists but not candidate",
+        "D. expected Wiki outside candidate set"
+      ]
+    }
+  ]
+}

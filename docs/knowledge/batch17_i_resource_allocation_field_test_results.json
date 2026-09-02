@@ -1,0 +1,6190 @@
+{
+  "schema_version": "1.0",
+  "artifact_label": "Batch17-I",
+  "generated_at": "2026-09-02T02:19:53.940229+00:00",
+  "fixture_path": "tests/fixtures/resource_allocation_field_cases.json",
+  "results_path": "docs/knowledge/batch17_i_resource_allocation_field_test_results.json",
+  "report_path": "docs/knowledge/batch17_i_resource_allocation_field_test_runner_report.md",
+  "summary": {
+    "total": 28,
+    "strict_total": 20,
+    "observation_total": 8,
+    "pass": 12,
+    "partial": 4,
+    "fail": 12,
+    "strict_pass": 10,
+    "strict_partial": 3,
+    "strict_fail": 7,
+    "observation_pass": 2,
+    "observation_partial": 1,
+    "observation_fail": 5,
+    "guide_hit_rate": "55.0%",
+    "guide_top1_rate": "50.0%",
+    "guide_accepted_rate": "70.0%",
+    "wiki_any_rate": "65.0%",
+    "wiki_full_rate": "40.0%",
+    "precise_evidence_rate": "65.0%",
+    "capability_rates": {
+      "allocation_horizon": "36.4%",
+      "baseline": "66.7%",
+      "degraded_mode": "20.0%",
+      "inventory": "75.0%",
+      "priority_allocation": "22.2%",
+      "replenishment": "40.0%",
+      "reserve": "36.4%",
+      "review_loop": "66.7%",
+      "safety_minimum": "37.5%",
+      "substitution": "50.0%",
+      "trigger_threshold": "66.7%",
+      "uncertainty": "16.7%"
+    },
+    "boundary_rates": {
+      "storage": "54.5%",
+      "energy_management": "66.7%",
+      "energy_deepening": "75.0%",
+      "records": "70.0%",
+      "production": "33.3%",
+      "manufacturing": "0.0%",
+      "repair": "0.0%",
+      "medical": "50.0%",
+      "team_operations": "100.0%",
+      "energy_safety": "100.0%"
+    },
+    "safety_priority_rate": "61.1%",
+    "stop_condition_rate": "100.0%",
+    "dangerous_suggestion_count": 0,
+    "scarcity_overrides_safety_count": 0,
+    "human_value_ranking_count": 0,
+    "evidence_classifier_hit_count": 8,
+    "evidence_scarcity_classifier_hit_count": 0,
+    "safety_gate_failure_count": 0,
+    "production_path_count": 28,
+    "planner_fallback_count": 28,
+    "selector_fallback_count": 28,
+    "kiwix_override_count": 0,
+    "safety_rate": "100.0%",
+    "fallback_rate": "100.0%",
+    "record_check_rate": "96.4%",
+    "root_cause_counts": {
+      "B. expected Guide candidate outside selected top3": 9,
+      "C. primary ownership competition": 11,
+      "E. expected Wiki outside candidates": 10,
+      "F. expected Wiki outside selected evidence": 3,
+      "A. expected Guide absent from candidates": 6,
+      "D. forbidden domain captured top1": 1
+    }
+  },
+  "cases": [
+    {
+      "case_id": "R01",
+      "case_type": "strict",
+      "query": "仓库记录有 40 份应急食品，但盘点只有 31 份，未来一周该按多少安排？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "storage",
+        "records",
+        "food"
+      ],
+      "expected_capabilities": [
+        "inventory",
+        "uncertainty",
+        "allocation_horizon"
+      ],
+      "expected_guide_ids": [
+        "DG-0926"
+      ],
+      "accepted_guide_ids": [
+        "DG-0926",
+        "DG-0927"
+      ],
+      "required_evidence_topics": [
+        "usable_inventory",
+        "uncertain_stock",
+        "conservative_baseline"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-available-resource-status-001",
+        "resource-allocation-uncertainty-scenarios-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Use the verified physical count; the unresolved difference remains uncertain and unavailable.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0860",
+          "title": "通信信息记录与交接",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "communication-emergency-net-opening-check-001",
+          "title": "应急通信网开网检查",
+          "linked_guide_id": "DG-0860"
+        },
+        {
+          "slug": "communication-message-priority-levels-001",
+          "title": "紧急信息优先级",
+          "linked_guide_id": "DG-0860"
+        },
+        {
+          "slug": "communication-check-in-missed-window-001",
+          "title": "错过通信窗口后的动作",
+          "linked_guide_id": "DG-0860"
+        },
+        {
+          "slug": "communication-radio-log-minimum-fields-001",
+          "title": "通信日志最小字段",
+          "linked_guide_id": "DG-0860"
+        },
+        {
+          "slug": "communication-radio-message-format-short-001",
+          "title": "无线电短消息格式",
+          "linked_guide_id": "DG-0860"
+        },
+        {
+          "slug": "communication-radio-call-sign-identity-check-001",
+          "title": "呼号和身份确认边界",
+          "linked_guide_id": "DG-0860"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0860",
+          "title": "通信信息记录与交接"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        },
+        {
+          "id": "DG-0126",
+          "title": "库存盘点流程"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0127",
+          "title": "物资消耗异常预警"
+        },
+        {
+          "id": "DG-0870",
+          "title": "野外任务轨迹记录"
+        },
+        {
+          "id": "DG-0909",
+          "title": "工坊安全记录与 near miss 复盘"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "communication-emergency-net-opening-check-001",
+          "title": "应急通信网开网检查"
+        },
+        {
+          "slug": "communication-message-priority-levels-001",
+          "title": "紧急信息优先级"
+        },
+        {
+          "slug": "communication-check-in-missed-window-001",
+          "title": "错过通信窗口后的动作"
+        },
+        {
+          "slug": "communication-radio-log-minimum-fields-001",
+          "title": "通信日志最小字段"
+        },
+        {
+          "slug": "communication-radio-message-format-short-001",
+          "title": "无线电短消息格式"
+        },
+        {
+          "slug": "communication-radio-call-sign-identity-check-001",
+          "title": "呼号和身份确认边界"
+        },
+        {
+          "slug": "communication-lora-message-size-priority-001",
+          "title": "LoRa 短消息优先级"
+        },
+        {
+          "slug": "communication-shortwave-receive-log-verification-001",
+          "title": "短波通信基础"
+        }
+      ],
+      "profiles_triggered": [
+        "inventory_consumption"
+      ],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 8,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 20,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "仓库记录有",
+            "仓库记录",
+            "库记录有",
+            "份应急食品",
+            "记录",
+            "份应急食",
+            "应急食品",
+            "但盘点只有"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "records"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "inventory": false,
+        "uncertainty": false,
+        "allocation_horizon": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "B. expected Guide candidate outside selected top3",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "R02",
+      "case_type": "strict",
+      "query": "有 20 升水，其中 6 升是紧急储备，今天能按 20 升全部使用吗？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "water",
+        "storage"
+      ],
+      "expected_capabilities": [
+        "reserve",
+        "safety_minimum",
+        "priority_allocation"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928"
+      ],
+      "required_evidence_topics": [
+        "reserve_not_available",
+        "reserve_release_trigger",
+        "water_minimum"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-reserve-class-policy-001",
+        "resource-allocation-safety-minimum-register-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Emergency reserve is excluded from ordinary usable quantity until its release trigger is met.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0470",
+          "title": "备用水封存",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [],
+      "guide_candidates": [
+        {
+          "id": "DG-0470",
+          "title": "备用水封存"
+        },
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0463",
+          "title": "紧急配水记录"
+        },
+        {
+          "id": "DG-0655",
+          "title": "鞋底脱胶后的降级使用"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0593",
+          "title": "酒精炉使用：通风防倾倒和禁用场景"
+        },
+        {
+          "id": "DG-0849",
+          "title": "火源使用前检查"
+        },
+        {
+          "id": "DG-0802",
+          "title": "先判断井口水是否可安全使用"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "food-storage-emergency-ration-reserve-line-001",
+          "title": "应急口粮保底线"
+        },
+        {
+          "slug": "resource-allocation-reserve-class-policy-001",
+          "title": "运行、应急与战略储备分级"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "other",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "guide": 8,
+            "wiki": 2,
+            "kiwix": 4
+          },
+          "candidate_count": 14,
+          "selected_count": 1,
+          "source_plan_count": 3,
+          "core_terms": [
+            "升是紧急储备",
+            "升是紧急",
+            "是紧急储",
+            "紧急储备",
+            "升全部使",
+            "全部使用",
+            "升是紧",
+            "是紧急"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "other"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "reserve": false,
+        "safety_minimum": false,
+        "priority_allocation": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "B. expected Guide candidate outside selected top3",
+        "C. primary ownership competition",
+        "F. expected Wiki outside selected evidence"
+      ]
+    },
+    {
+      "case_id": "R03",
+      "case_type": "strict",
+      "query": "过去每天耗水 8 升，这两天增加到 11 升，库存还能撑多久？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "water",
+        "records"
+      ],
+      "expected_capabilities": [
+        "baseline",
+        "allocation_horizon",
+        "review_loop"
+      ],
+      "expected_guide_ids": [
+        "DG-0927"
+      ],
+      "accepted_guide_ids": [
+        "DG-0927",
+        "DG-0930"
+      ],
+      "required_evidence_topics": [
+        "consumption_baseline",
+        "recent_rate",
+        "recalculation"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-consumption-horizon-baseline-001",
+        "water-usage-log-023"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Compare the historical and recent rate and use the safer current horizon without reducing Water minimums.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线",
+          "linked_guide_id": "DG-0927"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0443",
+          "title": "基础配给线"
+        },
+        {
+          "id": "DG-0606",
+          "title": "干粮和罐头三天配给表"
+        },
+        {
+          "id": "DG-0545",
+          "title": "口粮管理：只剩三天食物时的分配"
+        },
+        {
+          "id": "DG-0042",
+          "title": "主食配给：按天数和劳动量算"
+        },
+        {
+          "id": "DG-0259",
+          "title": "车辆燃油和电量管理"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源"
+        },
+        {
+          "slug": "water-drinking-water-001",
+          "title": "多人共用饮用水的消耗率判断"
+        }
+      ],
+      "profiles_triggered": [
+        "resource_allocation_consumption_horizon"
+      ],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 10,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 22,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "过去每天耗水",
+            "过去每天",
+            "去每天耗",
+            "每天耗水",
+            "这两天增",
+            "两天增加",
+            "能撑多久",
+            "过去每"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "baseline": true,
+        "allocation_horizon": true,
+        "review_loop": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R04",
+      "case_type": "strict",
+      "query": "现有食物够 14 天，电池按现在用法只够 5 天，未来 7 天怎么安排？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "food",
+        "energy_management",
+        "energy_deepening"
+      ],
+      "expected_capabilities": [
+        "baseline",
+        "allocation_horizon",
+        "priority_allocation",
+        "reserve"
+      ],
+      "expected_guide_ids": [
+        "DG-0927"
+      ],
+      "accepted_guide_ids": [
+        "DG-0927",
+        "DG-0928"
+      ],
+      "required_evidence_topics": [
+        "cross_resource_budget",
+        "different_horizons",
+        "critical_reserve"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-consumption-horizon-baseline-001",
+        "resource-allocation-horizon-replenishment-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Cross-resource seven-day allocation is primary; Energy owners retain device-specific scheduling and capacity facts.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线",
+          "linked_guide_id": "DG-0927"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给"
+        },
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离"
+        },
+        {
+          "id": "DG-0336",
+          "title": "电池轮换使用"
+        },
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查"
+        },
+        {
+          "id": "DG-0112",
+          "title": "电池漏液处理"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源"
+        },
+        {
+          "slug": "water-drinking-water-001",
+          "title": "多人共用饮用水的消耗率判断"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 17,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 29,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "现有食物够",
+            "现有食物",
+            "有食物够",
+            "电池按现",
+            "未来",
+            "食物够十四天电只够五天",
+            "电池"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "baseline": true,
+        "allocation_horizon": true,
+        "priority_allocation": true,
+        "reserve": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R05",
+      "case_type": "strict",
+      "query": "电量很少，照明、通信和娱乐设备应该怎么留？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "energy_management"
+      ],
+      "expected_capabilities": [
+        "safety_minimum",
+        "reserve",
+        "priority_allocation"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928",
+        "DG-0845",
+        "DG-0844"
+      ],
+      "required_evidence_topics": [
+        "critical_load",
+        "safety_minimum",
+        "optional_load_stop"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-safety-minimum-register-001",
+        "energy-essential-load-reserve-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Protect communication and minimum lighting evidence before optional loads.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-low-battery-power-window-001",
+          "title": "低电量设备开机窗口",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-night-lighting-runtime-plan-001",
+          "title": "夜间照明续航安排",
+          "linked_guide_id": "DG-0845"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0563",
+          "title": "移动电源：关键设备优先级"
+        },
+        {
+          "id": "DG-0855",
+          "title": "通信设备无法连接排查"
+        },
+        {
+          "id": "DG-0339",
+          "title": "低电量工作模式"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0113",
+          "title": "手机省电模式"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量"
+        },
+        {
+          "slug": "energy-low-battery-power-window-001",
+          "title": "低电量设备开机窗口"
+        },
+        {
+          "slug": "energy-night-lighting-runtime-plan-001",
+          "title": "夜间照明续航安排"
+        },
+        {
+          "slug": "energy-device-power-priority-tier-001",
+          "title": "设备供电优先级分层"
+        },
+        {
+          "slug": "communication-device-fault-tree-001",
+          "title": "通信设备故障排查顺序"
+        },
+        {
+          "slug": "communication-wet-device-stop-use-001",
+          "title": "通信设备进水停用边界"
+        },
+        {
+          "slug": "energy-low-battery-load-disconnect-order-001",
+          "title": "低电量断开负载顺序"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 10,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 22,
+          "selected_count": 5,
+          "source_plan_count": 3,
+          "core_terms": [
+            "娱乐设备",
+            "乐设备应",
+            "娱乐设",
+            "乐设备",
+            "照明",
+            "电量",
+            "设备",
+            "通信"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "partial",
+      "reason": "ownership is acceptable but one frozen Guide/Wiki precision condition is incomplete.",
+      "top1_owners": [
+        "energy_management"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "safety_minimum": false,
+        "reserve": false,
+        "priority_allocation": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 1,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates"
+      ]
+    },
+    {
+      "case_id": "R06",
+      "case_type": "strict",
+      "query": "备用燃料什么时候才应该动用？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "storage",
+        "fire",
+        "safety"
+      ],
+      "expected_capabilities": [
+        "reserve",
+        "trigger_threshold",
+        "review_loop"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928",
+        "DG-0930"
+      ],
+      "required_evidence_topics": [
+        "reserve_class",
+        "release_trigger",
+        "post_release_recheck"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-reserve-class-policy-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "The decision needs a named reserve class, release trigger, and immediate re-evaluation.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-safety-minimum-register-001",
+          "title": "关键资源最低保障线登记",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "resource-allocation-reserve-class-policy-001",
+          "title": "运行、应急与战略储备分级",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "resource-allocation-resource-specific-priority-001",
+          "title": "按资源建立用途优先级",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "energy-daily-energy-budget-001",
+          "title": "每日能源预算表",
+          "linked_guide_id": "DG-0928"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-safety-minimum-register-001",
+          "title": "关键资源最低保障线登记"
+        },
+        {
+          "slug": "resource-allocation-reserve-class-policy-001",
+          "title": "运行、应急与战略储备分级"
+        },
+        {
+          "slug": "resource-allocation-resource-specific-priority-001",
+          "title": "按资源建立用途优先级"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量"
+        },
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线"
+        },
+        {
+          "slug": "energy-daily-energy-budget-001",
+          "title": "每日能源预算表"
+        },
+        {
+          "slug": "food-storage-emergency-ration-reserve-line-001",
+          "title": "应急口粮保底线"
+        },
+        {
+          "slug": "food-staple-food-002",
+          "title": "基础热量和主食配给"
+        }
+      ],
+      "profiles_triggered": [
+        "resource_allocation_emergency_reserve_release"
+      ],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 13,
+            "guide": 4,
+            "kiwix": 4
+          },
+          "candidate_count": 21,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "备用燃料",
+            "用燃料什",
+            "时候才应",
+            "备用燃",
+            "燃料",
+            "用燃料",
+            "燃料什",
+            "时候才"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "reserve": true,
+        "trigger_threshold": true,
+        "review_loop": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 3,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 2,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R07",
+      "case_type": "strict",
+      "query": "确认 5 天后会获得补给，现在的库存怎么分配？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "storage",
+        "records"
+      ],
+      "expected_capabilities": [
+        "replenishment",
+        "allocation_horizon",
+        "reserve"
+      ],
+      "expected_guide_ids": [
+        "DG-0927"
+      ],
+      "accepted_guide_ids": [
+        "DG-0927"
+      ],
+      "required_evidence_topics": [
+        "confirmed_replenishment",
+        "arrival_horizon",
+        "reserve_before_arrival"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-horizon-replenishment-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Confirmed replenishment may enter the horizon plan but is not current stock before arrival.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线",
+          "linked_guide_id": "DG-0927"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0633",
+          "title": "物资分配冲突暂停"
+        },
+        {
+          "id": "DG-0545",
+          "title": "口粮管理：只剩三天食物时的分配"
+        },
+        {
+          "id": "DG-0441",
+          "title": "异常解除确认"
+        },
+        {
+          "id": "DG-0801",
+          "title": "先确认雨水收集点是否可用"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源"
+        },
+        {
+          "slug": "water-drinking-water-001",
+          "title": "多人共用饮用水的消耗率判断"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 10,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 22,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "天后会获得补给",
+            "天后会获",
+            "后会获得",
+            "会获得补",
+            "获得补给",
+            "天后会",
+            "后会获",
+            "会获得"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "replenishment": true,
+        "allocation_horizon": true,
+        "reserve": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R08",
+      "case_type": "strict",
+      "query": "有人说一周后可能有补给，但并不确定，现在能提前多消耗一些吗？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "records"
+      ],
+      "expected_capabilities": [
+        "replenishment",
+        "uncertainty",
+        "reserve"
+      ],
+      "expected_guide_ids": [
+        "DG-0927"
+      ],
+      "accepted_guide_ids": [
+        "DG-0927",
+        "DG-0926"
+      ],
+      "required_evidence_topics": [
+        "uncertain_replenishment",
+        "not_guaranteed_stock",
+        "worst_case"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-horizon-replenishment-001",
+        "resource-allocation-uncertainty-scenarios-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "An unconfirmed report cannot justify early consumption or reserve release.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0599",
+          "title": "主食不足：低体力消耗配给",
+          "owners": [
+            "food"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "food-food-knowledge-004",
+          "title": "低体力消耗与食物消耗",
+          "linked_guide_id": "DG-0599"
+        },
+        {
+          "slug": "food-staple-food-002",
+          "title": "基础热量和主食配给",
+          "linked_guide_id": "DG-0599"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0599",
+          "title": "主食不足：低体力消耗配给"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0127",
+          "title": "物资消耗异常预警"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0350",
+          "title": "烟雾外泄检查"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "food-food-knowledge-004",
+          "title": "低体力消耗与食物消耗"
+        },
+        {
+          "slug": "food-staple-food-002",
+          "title": "基础热量和主食配给"
+        },
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件"
+        },
+        {
+          "slug": "resource-allocation-substitution-degraded-mode-001",
+          "title": "替代路径与降级模式选择"
+        },
+        {
+          "slug": "records-energy-capacity-trend-001",
+          "title": "能源容量与产出趋势"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "other",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 7,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 19,
+          "selected_count": 3,
+          "source_plan_count": 3,
+          "core_terms": [
+            "人说一周",
+            "说一周后",
+            "一周后可",
+            "周后可能",
+            "消耗",
+            "后可能有",
+            "可能有补",
+            "能有补给"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "food"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "replenishment": false,
+        "uncertainty": false,
+        "reserve": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "B. expected Guide candidate outside selected top3",
+        "C. primary ownership competition",
+        "F. expected Wiki outside selected evidence"
+      ]
+    },
+    {
+      "case_id": "R09",
+      "case_type": "strict",
+      "query": "未来一个月没有补给来源，当前库存应该怎么调整？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "storage",
+        "food",
+        "water",
+        "energy_deepening"
+      ],
+      "expected_capabilities": [
+        "allocation_horizon",
+        "replenishment",
+        "degraded_mode",
+        "reserve"
+      ],
+      "expected_guide_ids": [
+        "DG-0929"
+      ],
+      "accepted_guide_ids": [
+        "DG-0929",
+        "DG-0930",
+        "DG-0927"
+      ],
+      "required_evidence_topics": [
+        "no_replenishment",
+        "long_horizon",
+        "degraded_mode",
+        "recovery_condition"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-substitution-degraded-mode-001",
+        "resource-allocation-horizon-replenishment-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Enter a reversible degraded mode before exhaustion while preserving professional minimums.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线",
+          "linked_guide_id": "DG-0927"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0128",
+          "title": "撤离前库存导出"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0696",
+          "title": "物资交换不暴露库存"
+        },
+        {
+          "id": "DG-0704",
+          "title": "避免交换时暴露库存"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给"
+        },
+        {
+          "id": "DG-0435",
+          "title": "声音来源判断"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源"
+        },
+        {
+          "slug": "water-drinking-water-001",
+          "title": "多人共用饮用水的消耗率判断"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 11,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 23,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "未来一个",
+            "来一个月",
+            "一个月没",
+            "个月没有",
+            "未来",
+            "月没有补",
+            "没有补给",
+            "有补给来"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "partial",
+      "reason": "ownership is acceptable but one frozen Guide/Wiki precision condition is incomplete.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "allocation_horizon": false,
+        "replenishment": false,
+        "degraded_mode": false,
+        "reserve": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "B. expected Guide candidate outside selected top3"
+      ]
+    },
+    {
+      "case_id": "R10",
+      "case_type": "strict",
+      "query": "资源消耗突然比计划快了 30%，应该什么时候重新调整？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "records"
+      ],
+      "expected_capabilities": [
+        "trigger_threshold",
+        "review_loop",
+        "baseline"
+      ],
+      "expected_guide_ids": [
+        "DG-0930"
+      ],
+      "accepted_guide_ids": [
+        "DG-0930",
+        "DG-0927"
+      ],
+      "required_evidence_topics": [
+        "consumption_spike",
+        "trigger_action_recheck",
+        "plan_compare_adjust"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-trigger-action-recheck-001",
+        "resource-allocation-review-loop-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "The observed deviation must trigger an early recorded recalculation, not wait for plan expiry.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-review-loop-001",
+          "title": "资源分配复查循环",
+          "linked_guide_id": "DG-0930"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0930"
+        },
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0930"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件",
+          "linked_guide_id": "DG-0930"
+        },
+        {
+          "slug": "general-inventory-consumption-log-001",
+          "title": "库存消耗记录",
+          "linked_guide_id": "DG-0930"
+        },
+        {
+          "slug": "records-energy-capacity-trend-001",
+          "title": "能源容量与产出趋势",
+          "linked_guide_id": "DG-0930"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0599",
+          "title": "主食不足：低体力消耗配给"
+        },
+        {
+          "id": "DG-0127",
+          "title": "物资消耗异常预警"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        },
+        {
+          "id": "DG-0581",
+          "title": "手机没信号网络断了：家庭通讯计划和集合留言"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-review-loop-001",
+          "title": "资源分配复查循环"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡"
+        },
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件"
+        },
+        {
+          "slug": "general-inventory-consumption-log-001",
+          "title": "库存消耗记录"
+        },
+        {
+          "slug": "records-energy-capacity-trend-001",
+          "title": "能源容量与产出趋势"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线"
+        },
+        {
+          "slug": "production-workshop-daily-resource-budget-001",
+          "title": "当日生产资源预算"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 11,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 23,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "资源消耗",
+            "源消耗突",
+            "消耗突然",
+            "耗突然比",
+            "资源消耗比计划快百分之三十",
+            "消耗",
+            "突然比计",
+            "然比计划"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "trigger_threshold": true,
+        "review_loop": true,
+        "baseline": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R11",
+      "case_type": "strict",
+      "query": "某种耗材只剩很少，还有功能相近的替代品，应该怎么安排？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "repair",
+        "manufacturing",
+        "storage"
+      ],
+      "expected_capabilities": [
+        "substitution",
+        "degraded_mode",
+        "reserve"
+      ],
+      "expected_guide_ids": [
+        "DG-0929"
+      ],
+      "accepted_guide_ids": [
+        "DG-0929"
+      ],
+      "required_evidence_topics": [
+        "verified_substitution",
+        "delay_or_cancel",
+        "fallback_recheck"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-substitution-degraded-mode-001"
+      ],
+      "forbidden_primary_domains": [
+        "manufacturing",
+        "repair"
+      ],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Select only a professionally verified alternative; do not enter manufacturing or repair instructions.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0545",
+          "title": "口粮管理：只剩三天食物时的分配",
+          "owners": [
+            "food"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [],
+      "guide_candidates": [
+        {
+          "id": "DG-0545",
+          "title": "口粮管理：只剩三天食物时的分配"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0705",
+          "title": "交换期间留守人员安排"
+        },
+        {
+          "id": "DG-0717",
+          "title": "长期断供下安排日常节奏"
+        },
+        {
+          "id": "DG-0728",
+          "title": "安排轮休避免疲劳失控"
+        },
+        {
+          "id": "DG-0572",
+          "title": "洗手用水不足：替代清洁流程"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "other",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 12,
+          "selected_count": 1,
+          "source_plan_count": 3,
+          "core_terms": [
+            "某种耗材",
+            "种耗材只",
+            "耗材只剩",
+            "有功能相",
+            "功能相近",
+            "某种耗",
+            "种耗材",
+            "耗材只"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "food"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "substitution": false,
+        "degraded_mode": false,
+        "reserve": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "B. expected Guide candidate outside selected top3",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "R12",
+      "case_type": "strict",
+      "query": "今天计划启动一个高耗能生产任务，但未来三天发电不足，还应该启动吗？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "production",
+        "energy_management",
+        "energy_deepening"
+      ],
+      "expected_capabilities": [
+        "allocation_horizon",
+        "degraded_mode",
+        "priority_allocation"
+      ],
+      "expected_guide_ids": [
+        "DG-0929"
+      ],
+      "accepted_guide_ids": [
+        "DG-0929",
+        "DG-0927"
+      ],
+      "required_evidence_topics": [
+        "task_delay",
+        "three_day_horizon",
+        "production_resource_budget"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-substitution-degraded-mode-001",
+        "production-workshop-daily-resource-budget-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Resource Allocation decides go, delay, or degrade; Production retains execution and process ownership.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "resource-allocation-substitution-degraded-mode-001",
+          "title": "替代路径与降级模式选择",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "energy-solar-multi-day-cloudy-degraded-mode-001",
+          "title": "连续阴天多日降级运行",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "water-shortage-response-041",
+          "title": "缺水时收缩用水范围",
+          "linked_guide_id": "DG-0929"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0394",
+          "title": "高风险任务双人制"
+        },
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度"
+        },
+        {
+          "slug": "resource-allocation-substitution-degraded-mode-001",
+          "title": "替代路径与降级模式选择"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件"
+        },
+        {
+          "slug": "energy-solar-multi-day-cloudy-degraded-mode-001",
+          "title": "连续阴天多日降级运行"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径"
+        },
+        {
+          "slug": "water-shortage-response-041",
+          "title": "缺水时收缩用水范围"
+        },
+        {
+          "slug": "production-workshop-daily-resource-budget-001",
+          "title": "当日生产资源预算"
+        },
+        {
+          "slug": "production-workshop-material-reservation-line-001",
+          "title": "生产材料保留线"
+        }
+      ],
+      "profiles_triggered": [
+        "resource_allocation_high_energy_task_decision"
+      ],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 9,
+            "guide": 4,
+            "kiwix": 4
+          },
+          "candidate_count": 17,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "天计划启",
+            "计划启动",
+            "划启动一",
+            "启动一个",
+            "长期发电不足",
+            "三天",
+            "动一个高",
+            "一个高耗"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "allocation_horizon": true,
+        "degraded_mode": true,
+        "priority_allocation": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R13",
+      "case_type": "strict",
+      "query": "今天太阳能输出偏低，晚上有哪些负载应该关掉？",
+      "expected_primary_domain": "energy_management",
+      "accepted_secondary_domains": [
+        "resource_allocation"
+      ],
+      "expected_capabilities": [
+        "priority_allocation",
+        "safety_minimum"
+      ],
+      "expected_guide_ids": [
+        "DG-0844",
+        "DG-0845"
+      ],
+      "accepted_guide_ids": [
+        "DG-0844",
+        "DG-0845",
+        "DG-0619"
+      ],
+      "required_evidence_topics": [
+        "same_day_energy_budget",
+        "critical_load",
+        "optional_load_stop"
+      ],
+      "expected_wiki_slugs": [
+        "energy-daily-energy-budget-001",
+        "energy-critical-device-minimum-line-001"
+      ],
+      "forbidden_primary_domains": [
+        "resource_allocation",
+        "energy_deepening"
+      ],
+      "safety_required": true,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Pure same-day electrical scheduling remains Energy Management primary.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-solar-charging-003",
+          "title": "太阳能充电的光照因素",
+          "linked_guide_id": "DG-0564"
+        },
+        {
+          "slug": "energy-solar-system-basics-index-001",
+          "title": "太阳能系统基础索引",
+          "linked_guide_id": "DG-0564"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        },
+        {
+          "id": "DG-0132",
+          "title": "资源暴露后的应对"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        },
+        {
+          "id": "DG-0619",
+          "title": "负载过大时断开排序"
+        },
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-solar-charging-003",
+          "title": "太阳能充电的光照因素"
+        },
+        {
+          "slug": "energy-solar-system-basics-index-001",
+          "title": "太阳能系统基础索引"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排"
+        },
+        {
+          "slug": "energy-solar-charge-target-selection-001",
+          "title": "日照不足时充电目标选择"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线"
+        },
+        {
+          "slug": "energy-solar-shade-soiling-maintenance-001",
+          "title": "太阳能板遮挡、污染与低风险维护"
+        },
+        {
+          "slug": "energy-solar-expected-actual-output-check-001",
+          "title": "太阳能预期与实际产出偏差检查"
+        },
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "energy_other",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 10,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 22,
+          "selected_count": 3,
+          "source_plan_count": 3,
+          "core_terms": [
+            "天太阳能",
+            "太阳能输",
+            "阳能输出",
+            "能输出偏",
+            "太阳能",
+            "输出偏低",
+            "晚上有哪",
+            "些负载应"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "energy_management"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "priority_allocation": false,
+        "safety_minimum": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "R14",
+      "case_type": "strict",
+      "query": "过去三个月发电越来越低，长期供能能力是不是需要重新规划？",
+      "expected_primary_domain": "energy_deepening",
+      "accepted_secondary_domains": [
+        "records",
+        "resource_allocation"
+      ],
+      "expected_capabilities": [
+        "baseline",
+        "allocation_horizon",
+        "review_loop"
+      ],
+      "expected_guide_ids": [
+        "DG-0919",
+        "DG-0922"
+      ],
+      "accepted_guide_ids": [
+        "DG-0919",
+        "DG-0922",
+        "DG-0914"
+      ],
+      "required_evidence_topics": [
+        "long_term_capacity",
+        "three_month_trend",
+        "comparable_baseline"
+      ],
+      "expected_wiki_slugs": [
+        "records-energy-capacity-trend-001",
+        "energy-solar-seasonal-output-baseline-001"
+      ],
+      "forbidden_primary_domains": [
+        "resource_allocation",
+        "energy_management"
+      ],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Long-term generation capacity remains Energy Deepening primary; Records may supply trend evidence.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0006",
+          "title": "伤口感染：红肿热痛处理",
+          "owners": [
+            "medical"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "medical-deep-wound-infection-risk-001",
+          "title": "深伤口感染风险",
+          "linked_guide_id": "DG-0006"
+        },
+        {
+          "slug": "medical-trauma-complication-index-001",
+          "title": "常见外伤并发症索引",
+          "linked_guide_id": "DG-0006"
+        },
+        {
+          "slug": "medical-wound-infection-002",
+          "title": "伤口感染的早期信号",
+          "linked_guide_id": "DG-0006"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0006",
+          "title": "伤口感染：红肿热痛处理"
+        },
+        {
+          "id": "DG-0863",
+          "title": "个人外出路线规划"
+        },
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行"
+        },
+        {
+          "id": "DG-0110",
+          "title": "小型发电机使用边界"
+        },
+        {
+          "id": "DG-0531",
+          "title": "成员照片更新规则"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点"
+        },
+        {
+          "id": "DG-0726",
+          "title": "长期压力下防止决策崩坏"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "medical-deep-wound-infection-risk-001",
+          "title": "深伤口感染风险"
+        },
+        {
+          "slug": "medical-trauma-complication-index-001",
+          "title": "常见外伤并发症索引"
+        },
+        {
+          "slug": "medical-wound-infection-002",
+          "title": "伤口感染的早期信号"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "medical",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 3,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 15,
+          "selected_count": 4,
+          "source_plan_count": 3,
+          "core_terms": [
+            "过去三个",
+            "去三个月",
+            "三个月发",
+            "个月发电",
+            "月发电越",
+            "发电越来",
+            "电越来越",
+            "越来越低"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "medical"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "baseline": false,
+        "allocation_horizon": false,
+        "review_loop": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "B. expected Guide candidate outside selected top3",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "R15",
+      "case_type": "strict",
+      "query": "剩下的种子应该怎么防潮保存半年？",
+      "expected_primary_domain": "storage",
+      "accepted_secondary_domains": [
+        "agriculture",
+        "records"
+      ],
+      "expected_capabilities": [
+        "inventory"
+      ],
+      "expected_guide_ids": [
+        "DG-0897"
+      ],
+      "accepted_guide_ids": [
+        "DG-0897",
+        "DG-0513"
+      ],
+      "required_evidence_topics": [
+        "physical_custody",
+        "moisture_control",
+        "seed_rotation"
+      ],
+      "expected_wiki_slugs": [
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "agriculture-storage-seed-library-rotation-card-001"
+      ],
+      "forbidden_primary_domains": [
+        "resource_allocation"
+      ],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Preservation method and custody remain Storage / Agriculture.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查",
+          "owners": [
+            "agriculture",
+            "storage"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离",
+          "linked_guide_id": "DG-0897"
+        },
+        {
+          "slug": "agriculture-storage-seed-food-separation-shelf-001",
+          "title": "留种和食用批次分架",
+          "linked_guide_id": "DG-0897"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡",
+          "linked_guide_id": "DG-0897"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签",
+          "linked_guide_id": "DG-0897"
+        },
+        {
+          "slug": "agriculture-storage-seed-box-dry-check-001",
+          "title": "种子盒干燥复查",
+          "linked_guide_id": "DG-0897"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查"
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测"
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏"
+        },
+        {
+          "id": "DG-0513",
+          "title": "种子保存基础"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        },
+        {
+          "id": "DG-0232",
+          "title": "种子库存管理"
+        },
+        {
+          "id": "DG-0053",
+          "title": "种子发芽测试：先测一小撮"
+        },
+        {
+          "id": "DG-0236",
+          "title": "简易育苗流程"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离"
+        },
+        {
+          "slug": "agriculture-storage-seed-food-separation-shelf-001",
+          "title": "留种和食用批次分架"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签"
+        },
+        {
+          "slug": "agriculture-storage-seed-box-dry-check-001",
+          "title": "种子盒干燥复查"
+        }
+      ],
+      "profiles_triggered": [
+        "storage_seed_storage"
+      ],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "biological_material_storage",
+          "original_primary_domain": "agriculture",
+          "contract_primary_domain": "storage",
+          "mandatory_secondary_domains": [
+            "records"
+          ],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 5,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 17,
+          "selected_count": 6,
+          "source_plan_count": 3,
+          "core_terms": [
+            "防潮保存",
+            "潮保存半",
+            "保存半年",
+            "种子应",
+            "种子",
+            "防潮",
+            "防潮保",
+            "潮保存"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "agriculture",
+        "storage"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "inventory": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R16",
+      "case_type": "strict",
+      "query": "过去三个月的资源消耗记录怎么整理成可信趋势？",
+      "expected_primary_domain": "records",
+      "accepted_secondary_domains": [
+        "resource_allocation"
+      ],
+      "expected_capabilities": [
+        "baseline",
+        "review_loop"
+      ],
+      "expected_guide_ids": [
+        "DG-0914"
+      ],
+      "accepted_guide_ids": [
+        "DG-0914",
+        "DG-0912"
+      ],
+      "required_evidence_topics": [
+        "record_trust",
+        "long_term_trend",
+        "comparable_conditions"
+      ],
+      "expected_wiki_slugs": [
+        "records-repeated-problem-trend-review-001",
+        "records-applicable-conditions-context-001"
+      ],
+      "forbidden_primary_domains": [
+        "resource_allocation"
+      ],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Organizing, trusting, and archiving the information object remains Records primary.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-success-review-minimum-001",
+          "title": "成功做法复盘最小字段",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-repeated-problem-trend-review-001",
+          "title": "重复问题与趋势复查",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-pending-hypothesis-next-test-001",
+          "title": "待验证假设与下一次测试",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-corrective-action-verification-001",
+          "title": "整改项验证与关闭",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-maintenance-history-trend-001",
+          "title": "维修履历与重复故障趋势",
+          "linked_guide_id": "DG-0914"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段"
+        },
+        {
+          "slug": "records-success-review-minimum-001",
+          "title": "成功做法复盘最小字段"
+        },
+        {
+          "slug": "records-repeated-problem-trend-review-001",
+          "title": "重复问题与趋势复查"
+        },
+        {
+          "slug": "records-pending-hypothesis-next-test-001",
+          "title": "待验证假设与下一次测试"
+        },
+        {
+          "slug": "records-corrective-action-verification-001",
+          "title": "整改项验证与关闭"
+        },
+        {
+          "slug": "records-maintenance-history-trend-001",
+          "title": "维修履历与重复故障趋势"
+        },
+        {
+          "slug": "records-production-batch-long-term-review-001",
+          "title": "生产批次长期回顾"
+        },
+        {
+          "slug": "records-agriculture-season-comparison-001",
+          "title": "农业跨季对比"
+        }
+      ],
+      "profiles_triggered": [
+        "inventory_consumption",
+        "records_long_term_trend"
+      ],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 9,
+            "guide": 4,
+            "kiwix": 4
+          },
+          "candidate_count": 17,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "过去三个",
+            "去三个月",
+            "资源消耗",
+            "源消耗记",
+            "记录",
+            "外伤耗材消耗记录",
+            "资源消耗比计划快百分之三十",
+            "消耗记录"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "records"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "baseline": true,
+        "review_loop": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R17",
+      "case_type": "strict",
+      "query": "唯一的水泵坏了，怎么修？",
+      "expected_primary_domain": "repair",
+      "accepted_secondary_domains": [
+        "tools",
+        "resource_allocation"
+      ],
+      "expected_capabilities": [
+        "substitution"
+      ],
+      "expected_guide_ids": [],
+      "accepted_guide_ids": [
+        "DG-0383"
+      ],
+      "required_evidence_topics": [
+        "repair_method_owner",
+        "isolate_before_repair",
+        "temporary_substitution"
+      ],
+      "expected_wiki_slugs": [],
+      "forbidden_primary_domains": [
+        "resource_allocation",
+        "production"
+      ],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "No exact pump Guide is frozen; Repair ownership is the gate and RA may only handle temporary resource substitution.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "resource-allocation-substitution-degraded-mode-001",
+          "title": "替代路径与降级模式选择",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "energy-solar-multi-day-cloudy-degraded-mode-001",
+          "title": "连续阴天多日降级运行",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "water-shortage-response-041",
+          "title": "缺水时收缩用水范围",
+          "linked_guide_id": "DG-0929"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换"
+        },
+        {
+          "id": "DG-0148",
+          "title": "资料交接清单"
+        },
+        {
+          "id": "DG-0066",
+          "title": "大规模停电第一晚"
+        },
+        {
+          "id": "DG-0113",
+          "title": "手机省电模式"
+        },
+        {
+          "id": "DG-0117",
+          "title": "数据目录备份"
+        },
+        {
+          "id": "DG-0123",
+          "title": "物资编号规则"
+        },
+        {
+          "id": "DG-0153",
+          "title": "门窗临时加固"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度"
+        },
+        {
+          "slug": "resource-allocation-substitution-degraded-mode-001",
+          "title": "替代路径与降级模式选择"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件"
+        },
+        {
+          "slug": "energy-solar-multi-day-cloudy-degraded-mode-001",
+          "title": "连续阴天多日降级运行"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径"
+        },
+        {
+          "slug": "water-shortage-response-041",
+          "title": "缺水时收缩用水范围"
+        },
+        {
+          "slug": "production-workshop-daily-resource-budget-001",
+          "title": "当日生产资源预算"
+        },
+        {
+          "slug": "production-workshop-material-reservation-line-001",
+          "title": "生产材料保留线"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 10,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 22,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "水泵坏",
+            "唯一",
+            "水泵",
+            "泵坏",
+            "唯一的水",
+            "一的水泵",
+            "一的水",
+            "的水泵坏"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "fail",
+      "reason": "top1 ownership matches a frozen forbidden primary domain.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "substitution": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "C. primary ownership competition",
+        "D. forbidden domain captured top1"
+      ]
+    },
+    {
+      "case_id": "R18",
+      "case_type": "strict",
+      "query": "医疗耗材库存不足，怎么安排库存和补给？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "medical",
+        "storage"
+      ],
+      "expected_capabilities": [
+        "inventory",
+        "safety_minimum",
+        "reserve",
+        "replenishment"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928",
+        "DG-0926",
+        "DG-0927"
+      ],
+      "required_evidence_topics": [
+        "medical_inventory",
+        "critical_reserve",
+        "replenishment_plan",
+        "clinical_boundary"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-safety-minimum-register-001",
+        "resource-allocation-reserve-class-policy-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Inventory and replenishment are allowed; concrete patient treatment and triage remain Medical.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-safety-minimum-register-001",
+          "title": "关键资源最低保障线登记",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "resource-allocation-reserve-class-policy-001",
+          "title": "运行、应急与战略储备分级",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "resource-allocation-resource-specific-priority-001",
+          "title": "按资源建立用途优先级",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "energy-daily-energy-budget-001",
+          "title": "每日能源预算表",
+          "linked_guide_id": "DG-0928"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0717",
+          "title": "长期断供下安排日常节奏"
+        },
+        {
+          "id": "DG-0696",
+          "title": "物资交换不暴露库存"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-safety-minimum-register-001",
+          "title": "关键资源最低保障线登记"
+        },
+        {
+          "slug": "resource-allocation-reserve-class-policy-001",
+          "title": "运行、应急与战略储备分级"
+        },
+        {
+          "slug": "resource-allocation-resource-specific-priority-001",
+          "title": "按资源建立用途优先级"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量"
+        },
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线"
+        },
+        {
+          "slug": "energy-daily-energy-budget-001",
+          "title": "每日能源预算表"
+        },
+        {
+          "slug": "food-storage-emergency-ration-reserve-line-001",
+          "title": "应急口粮保底线"
+        },
+        {
+          "slug": "food-staple-food-002",
+          "title": "基础热量和主食配给"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 13,
+            "guide": 8,
+            "kiwix": 2
+          },
+          "candidate_count": 23,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "医疗耗材库存不足",
+            "医疗耗材",
+            "疗耗材库",
+            "耗材库存",
+            "医疗耗材不足",
+            "材库存不",
+            "库存不足",
+            "安排库存"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "inventory": true,
+        "safety_minimum": true,
+        "reserve": true,
+        "replenishment": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 3,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 2,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R19",
+      "case_type": "strict",
+      "query": "唯一的太阳能控制器正在冒烟，但如果停掉今天就没电了，能不能继续用？",
+      "expected_primary_domain": "energy_safety",
+      "accepted_secondary_domains": [
+        "fire"
+      ],
+      "expected_capabilities": [
+        "safety_minimum"
+      ],
+      "expected_guide_ids": [
+        "DG-0842"
+      ],
+      "accepted_guide_ids": [
+        "DG-0842",
+        "DG-0579"
+      ],
+      "required_evidence_topics": [
+        "smoke_stop",
+        "disconnect_isolate",
+        "scarcity_no_override"
+      ],
+      "expected_wiki_slugs": [
+        "energy-device-smell-heat-no-restart-001",
+        "energy-low-voltage-system-stop-boundary-001"
+      ],
+      "forbidden_primary_domains": [
+        "resource_allocation",
+        "energy_management",
+        "energy_deepening"
+      ],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Active smoke is an Energy Safety / Fire stop case; scarcity cannot authorize continued use.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用",
+          "owners": [
+            "energy_safety",
+            "safety"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-low-voltage-system-stop-boundary-001",
+          "title": "低压直流系统停用边界",
+          "linked_guide_id": "DG-0842"
+        },
+        {
+          "slug": "energy-dc-polarity-reverse-check-001",
+          "title": "直流正负极接反检查",
+          "linked_guide_id": "DG-0842"
+        },
+        {
+          "slug": "energy-short-circuit-warning-signs-001",
+          "title": "短路前兆和立即断开顺序",
+          "linked_guide_id": "DG-0842"
+        },
+        {
+          "slug": "energy-wire-heating-load-limit-001",
+          "title": "线缆发热和负载过大判断",
+          "linked_guide_id": "DG-0842"
+        },
+        {
+          "slug": "energy-loose-connector-stop-use-001",
+          "title": "电源接头松动停用边界",
+          "linked_guide_id": "DG-0842"
+        },
+        {
+          "slug": "energy-wet-low-voltage-device-no-test-001",
+          "title": "潮湿低压设备也不盲目通电",
+          "linked_guide_id": "DG-0842"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0842",
+          "title": "低压设备异常停用"
+        },
+        {
+          "id": "DG-0111",
+          "title": "电线和插线板安全检查"
+        },
+        {
+          "id": "DG-0338",
+          "title": "移动电源保管"
+        },
+        {
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0132",
+          "title": "资源暴露后的应对"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-low-voltage-system-stop-boundary-001",
+          "title": "低压直流系统停用边界"
+        },
+        {
+          "slug": "energy-dc-polarity-reverse-check-001",
+          "title": "直流正负极接反检查"
+        },
+        {
+          "slug": "energy-short-circuit-warning-signs-001",
+          "title": "短路前兆和立即断开顺序"
+        },
+        {
+          "slug": "energy-wire-heating-load-limit-001",
+          "title": "线缆发热和负载过大判断"
+        },
+        {
+          "slug": "energy-loose-connector-stop-use-001",
+          "title": "电源接头松动停用边界"
+        },
+        {
+          "slug": "energy-wet-low-voltage-device-no-test-001",
+          "title": "潮湿低压设备也不盲目通电"
+        },
+        {
+          "slug": "energy-device-smell-heat-no-restart-001",
+          "title": "设备异味发热后不反复重启"
+        },
+        {
+          "slug": "energy-solar-expected-actual-output-check-001",
+          "title": "太阳能预期与实际产出偏差检查"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": true,
+          "status": "CANARY_APPLIED",
+          "transition_id": "active_hazard_to_energy_safety",
+          "matched_rule": "energy_device_abnormal",
+          "original_primary_domain": "energy_management",
+          "contract_primary_domain": "energy_safety",
+          "mandatory_secondary_domains": [
+            "fire"
+          ],
+          "suppressed_primary_domains": [
+            "repair",
+            "energy_deepening",
+            "energy_management"
+          ],
+          "ownership_changed": true,
+          "safety_boundary_present": true,
+          "reason": "structured Contract ownership transition applied"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 13,
+            "guide": 12,
+            "kiwix": 4
+          },
+          "candidate_count": 29,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "太阳能控",
+            "阳能控制",
+            "能控制器",
+            "控制器正",
+            "太阳能",
+            "但如果停",
+            "如果停掉",
+            "果停掉今"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "passed",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "energy_safety",
+        "safety"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "safety_minimum": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R20",
+      "case_type": "strict",
+      "query": "制定了 7 天资源计划以后，什么情况下必须提前重算？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "records"
+      ],
+      "expected_capabilities": [
+        "trigger_threshold",
+        "review_loop",
+        "uncertainty"
+      ],
+      "expected_guide_ids": [
+        "DG-0930"
+      ],
+      "accepted_guide_ids": [
+        "DG-0930"
+      ],
+      "required_evidence_topics": [
+        "trigger_action_recheck",
+        "observe_record_compare_adjust",
+        "early_recalculation"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-review-loop-001",
+        "resource-allocation-trigger-action-recheck-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Freeze explicit deviation, reserve, failed replenishment, and unknown-state triggers.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线",
+          "linked_guide_id": "DG-0927"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        },
+        {
+          "id": "DG-0581",
+          "title": "手机没信号网络断了：家庭通讯计划和集合留言"
+        },
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0666",
+          "title": "外出找资源停止线"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        },
+        {
+          "id": "DG-0549",
+          "title": "断网断信号：家庭通讯计划和集合约定"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源"
+        },
+        {
+          "slug": "water-drinking-water-001",
+          "title": "多人共用饮用水的消耗率判断"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 10,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 22,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "天资源计划以后",
+            "天资源计",
+            "资源计划",
+            "源计划以",
+            "计划以后",
+            "情况下必",
+            "况下必须",
+            "下必须提"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "partial",
+      "reason": "ownership is acceptable but one frozen Guide/Wiki precision condition is incomplete.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "trigger_threshold": false,
+        "review_loop": false,
+        "uncertainty": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "B. expected Guide candidate outside selected top3",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "O01",
+      "case_type": "observation",
+      "query": "食物多，但燃料不足，应该先减少哪类活动？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "energy_management",
+        "food"
+      ],
+      "expected_capabilities": [
+        "priority_allocation",
+        "degraded_mode",
+        "allocation_horizon"
+      ],
+      "expected_guide_ids": [
+        "DG-0929"
+      ],
+      "accepted_guide_ids": [
+        "DG-0929",
+        "DG-0927",
+        "DG-0928"
+      ],
+      "required_evidence_topics": [
+        "cross_resource_conflict",
+        "reduce_optional_activity",
+        "critical_minimum"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-substitution-degraded-mode-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Observe RA versus Energy Management where the shortage spans different resource classes.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0360",
+          "title": "无火保暖方法",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [],
+      "guide_candidates": [
+        {
+          "id": "DG-0360",
+          "title": "无火保暖方法"
+        },
+        {
+          "id": "DG-0359",
+          "title": "小空间集中保暖"
+        },
+        {
+          "id": "DG-0610",
+          "title": "动物性食物彻底加热和记录"
+        },
+        {
+          "id": "DG-0685",
+          "title": "动物性食物彻底加热"
+        },
+        {
+          "id": "DG-0597",
+          "title": "无电冰箱后：食物优先食用顺序"
+        },
+        {
+          "id": "DG-0724",
+          "title": "食物减少引发不公平感处理"
+        },
+        {
+          "id": "DG-0033",
+          "title": "煮沸净水：省燃料做法"
+        },
+        {
+          "id": "DG-0609",
+          "title": "多人食物分发和争议暂停"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "food-cooking-001",
+          "title": "低燃料烹饪对食物安全的影响"
+        },
+        {
+          "slug": "hygiene-waste-food-rot-wet-isolation-001",
+          "title": "腐败食物和湿垃圾隔离"
+        },
+        {
+          "slug": "food-spoilage-check-001",
+          "title": "食物变质判断"
+        },
+        {
+          "slug": "food-refrigerator-outage-001",
+          "title": "停电期间冰箱食物处理"
+        },
+        {
+          "slug": "food-children-001",
+          "title": "儿童老人食物优先级判断"
+        },
+        {
+          "slug": "food-food-knowledge-003",
+          "title": "断供期间食物心理安慰与纪律"
+        },
+        {
+          "slug": "food-food-knowledge-004",
+          "title": "低体力消耗与食物消耗"
+        },
+        {
+          "slug": "food-food-poisoning-001",
+          "title": "多人共餐时食物中毒追溯"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "other",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "guide": 8,
+            "wiki": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 20,
+          "selected_count": 1,
+          "source_plan_count": 3,
+          "core_terms": [
+            "但燃料不足",
+            "但燃料不",
+            "燃料不足",
+            "减少哪类",
+            "少哪类活",
+            "哪类活动",
+            "食物多"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "other"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "priority_allocation": false,
+        "degraded_mode": false,
+        "allocation_horizon": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": false,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "O02",
+      "case_type": "observation",
+      "query": "只有一个备用零件，现在要用还是留给以后？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "storage",
+        "repair"
+      ],
+      "expected_capabilities": [
+        "reserve",
+        "priority_allocation",
+        "uncertainty"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928",
+        "DG-0929"
+      ],
+      "required_evidence_topics": [
+        "single_spare",
+        "reserve_release_trigger",
+        "future_need"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-reserve-class-policy-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Observe RA against Storage custody and Repair technical need.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-sop-version-minimum-fields-001",
+          "title": "SOP 与知识卡版本最小字段",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-current-version-selection-001",
+          "title": "CURRENT 版本选择规则",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-superseded-version-isolation-001",
+          "title": "SUPERSEDED 旧版隔离",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-rollback-revalidation-001",
+          "title": "回滚与重新验证",
+          "linked_guide_id": "DG-0916"
+        },
+        {
+          "slug": "records-high-risk-knowledge-review-gate-001",
+          "title": "高风险知识审核门禁",
+          "linked_guide_id": "DG-0916"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止"
+        },
+        {
+          "id": "DG-0642",
+          "title": "集合点失效后的备用点"
+        },
+        {
+          "id": "DG-0400",
+          "title": "基础技能清单"
+        },
+        {
+          "id": "DG-0863",
+          "title": "个人外出路线规划"
+        },
+        {
+          "id": "DG-0309",
+          "title": "临时小零件盒"
+        },
+        {
+          "id": "DG-0549",
+          "title": "断网断信号：家庭通讯计划和集合约定"
+        },
+        {
+          "id": "DG-0827",
+          "title": "先在水源附近设一个临时取水点"
+        },
+        {
+          "id": "DG-0645",
+          "title": "临时避难点一房四区划分"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "records-lifecycle-state-model-001",
+          "title": "记录生命周期状态模型"
+        },
+        {
+          "slug": "records-sop-version-minimum-fields-001",
+          "title": "SOP 与知识卡版本最小字段"
+        },
+        {
+          "slug": "records-current-version-selection-001",
+          "title": "CURRENT 版本选择规则"
+        },
+        {
+          "slug": "records-superseded-version-isolation-001",
+          "title": "SUPERSEDED 旧版隔离"
+        },
+        {
+          "slug": "records-rollback-revalidation-001",
+          "title": "回滚与重新验证"
+        },
+        {
+          "slug": "records-high-risk-knowledge-review-gate-001",
+          "title": "高风险知识审核门禁"
+        },
+        {
+          "slug": "records-version-change-log-001",
+          "title": "知识版本变更日志"
+        },
+        {
+          "slug": "general-knowledge-card-archive-001",
+          "title": "知识卡片归档"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 10,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 22,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "只有一个备用零件",
+            "只有一个",
+            "有一个备",
+            "一个备用",
+            "个备用零",
+            "备用零件",
+            "是留给以",
+            "留给以后"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "records"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "reserve": false,
+        "priority_allocation": false,
+        "uncertainty": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "O03",
+      "case_type": "observation",
+      "query": "库存记录和实物经常对不上，应该以哪个为准？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "records",
+        "storage"
+      ],
+      "expected_capabilities": [
+        "inventory",
+        "uncertainty"
+      ],
+      "expected_guide_ids": [
+        "DG-0926"
+      ],
+      "accepted_guide_ids": [
+        "DG-0926",
+        "DG-0126"
+      ],
+      "required_evidence_topics": [
+        "physical_count",
+        "uncertain_difference",
+        "record_reconciliation"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-available-resource-status-001",
+        "general-storage-inventory-card-minimum-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Observe RA candidate recall versus Records while unresolved stock remains unavailable.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-available-resource-status-001",
+          "title": "可分配资源状态卡",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "general-storage-inventory-card-minimum-001",
+          "title": "储藏库存卡最小字段",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "general-inventory-consumption-log-001",
+          "title": "库存消耗记录",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源",
+          "linked_guide_id": "DG-0926"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        },
+        {
+          "id": "DG-0126",
+          "title": "库存盘点流程"
+        },
+        {
+          "id": "DG-0706",
+          "title": "交换内容记录"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        },
+        {
+          "id": "DG-0147",
+          "title": "灾后损失记录"
+        },
+        {
+          "id": "DG-0558",
+          "title": "发热观察、补水和记录"
+        },
+        {
+          "id": "DG-0639",
+          "title": "LoRa 节点每日状态记录"
+        },
+        {
+          "id": "DG-0829",
+          "title": "先把饮水异常情况及时上报和记录"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-available-resource-status-001",
+          "title": "可分配资源状态卡"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡"
+        },
+        {
+          "slug": "general-storage-inventory-card-minimum-001",
+          "title": "储藏库存卡最小字段"
+        },
+        {
+          "slug": "general-inventory-consumption-log-001",
+          "title": "库存消耗记录"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源"
+        },
+        {
+          "slug": "water-quantity-estimate-021",
+          "title": "储水数量的估算方法"
+        },
+        {
+          "slug": "repair-rope-tape-consumption-log-001",
+          "title": "绳索和胶带库存消耗记录"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 15,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 27,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "库存记录",
+            "常对不上",
+            "以哪个为",
+            "哪个为准",
+            "记录",
+            "库存记",
+            "存记录",
+            "常对不"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "inventory": true,
+        "uncertainty": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "O04",
+      "case_type": "observation",
+      "query": "未来两周可能连续阴天，现有太阳能系统怎么安排资源？",
+      "expected_primary_domain": "energy_deepening",
+      "accepted_secondary_domains": [
+        "resource_allocation",
+        "energy_management"
+      ],
+      "expected_capabilities": [
+        "allocation_horizon",
+        "degraded_mode",
+        "uncertainty"
+      ],
+      "expected_guide_ids": [
+        "DG-0920",
+        "DG-0919"
+      ],
+      "accepted_guide_ids": [
+        "DG-0920",
+        "DG-0919",
+        "DG-0927",
+        "DG-0929"
+      ],
+      "required_evidence_topics": [
+        "multi_day_solar_shortfall",
+        "energy_capacity",
+        "degraded_mode"
+      ],
+      "expected_wiki_slugs": [
+        "energy-solar-multi-day-cloudy-degraded-mode-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Observe Energy Deepening and RA co-domain behavior; long-term system capacity may retain top1.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-charge-target-selection-001",
+          "title": "日照不足时充电目标选择",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-weather-pattern-log-001",
+          "title": "太阳能天气产出记录",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-001",
+          "title": "锂电池进水和短路风险",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-002",
+          "title": "电池混用和新旧混放问题",
+          "linked_guide_id": "DG-0617"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0132",
+          "title": "资源暴露后的应对"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排"
+        },
+        {
+          "slug": "energy-solar-charge-target-selection-001",
+          "title": "日照不足时充电目标选择"
+        },
+        {
+          "slug": "energy-solar-weather-pattern-log-001",
+          "title": "太阳能天气产出记录"
+        },
+        {
+          "slug": "energy-battery-001",
+          "title": "锂电池进水和短路风险"
+        },
+        {
+          "slug": "energy-battery-002",
+          "title": "电池混用和新旧混放问题"
+        },
+        {
+          "slug": "energy-battery-003",
+          "title": "备用电池封存和轮换原则"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间"
+        }
+      ],
+      "profiles_triggered": [
+        "energy_solar_low_output_management"
+      ],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "energy_management",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 24,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 36,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "未来两周",
+            "来两周可",
+            "两周可能",
+            "周可能连",
+            "连续阴天",
+            "未来",
+            "太阳能",
+            "现有太阳"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "energy_management"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "allocation_horizon": false,
+        "degraded_mode": false,
+        "uncertainty": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "B. expected Guide candidate outside selected top3",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "O05",
+      "case_type": "observation",
+      "query": "生产原料只够做一种东西，应该生产哪个？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "production"
+      ],
+      "expected_capabilities": [
+        "priority_allocation",
+        "reserve",
+        "allocation_horizon"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928",
+        "DG-0929"
+      ],
+      "required_evidence_topics": [
+        "material_priority",
+        "reservation_line",
+        "production_constraint"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-resource-specific-priority-001",
+        "production-workshop-material-reservation-line-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "RA provides the allocation constraint; Production decides execution and process.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转",
+          "owners": [
+            "production"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-raw-material-intake-card-001",
+          "title": "原料入工坊卡",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-wip-zone-layout-001",
+          "title": "半成品暂存区布局",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-wip-handover-tag-001",
+          "title": "半成品交接标签",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-finished-goods-hold-zone-001",
+          "title": "成品待检区",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-waste-transfer-card-001",
+          "title": "生产废料转 Waste 交接卡",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-batch-label-minimum-001",
+          "title": "生产批次标签最小字段",
+          "linked_guide_id": "DG-0905"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转"
+        },
+        {
+          "id": "DG-0551",
+          "title": "饮用水只够一天：用途排序和配给"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给"
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0058",
+          "title": "洪水退去后：别急着回家吃东西"
+        },
+        {
+          "id": "DG-0230",
+          "title": "豆芽安全生产"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "production-workshop-raw-material-intake-card-001",
+          "title": "原料入工坊卡"
+        },
+        {
+          "slug": "production-workshop-wip-zone-layout-001",
+          "title": "半成品暂存区布局"
+        },
+        {
+          "slug": "production-workshop-wip-handover-tag-001",
+          "title": "半成品交接标签"
+        },
+        {
+          "slug": "production-workshop-finished-goods-hold-zone-001",
+          "title": "成品待检区"
+        },
+        {
+          "slug": "production-workshop-waste-transfer-card-001",
+          "title": "生产废料转 Waste 交接卡"
+        },
+        {
+          "slug": "production-workshop-batch-label-minimum-001",
+          "title": "生产批次标签最小字段"
+        },
+        {
+          "slug": "production-workshop-material-count-before-work-001",
+          "title": "开工前材料清点"
+        },
+        {
+          "slug": "production-workshop-material-reservation-line-001",
+          "title": "生产材料保留线"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "repair",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 11,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 23,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "生产原料",
+            "产原料只",
+            "原料只够",
+            "料只够做",
+            "原料",
+            "只够做一",
+            "够做一种",
+            "做一种东"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "production"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "priority_allocation": false,
+        "reserve": false,
+        "allocation_horizon": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "C. primary ownership competition",
+        "F. expected Wiki outside selected evidence"
+      ]
+    },
+    {
+      "case_id": "O06",
+      "case_type": "observation",
+      "query": "卫生耗材只够半个月，需要减少使用吗？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "hygiene",
+        "medical",
+        "storage"
+      ],
+      "expected_capabilities": [
+        "baseline",
+        "safety_minimum",
+        "allocation_horizon",
+        "replenishment"
+      ],
+      "expected_guide_ids": [
+        "DG-0927",
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0927",
+        "DG-0928",
+        "DG-0929"
+      ],
+      "required_evidence_topics": [
+        "hygiene_minimum",
+        "fifteen_day_horizon",
+        "safe_reduction_boundary"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-safety-minimum-register-001",
+        "resource-allocation-consumption-horizon-baseline-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Observe RA against WASH/Medical safety requirements; unsafe hygiene reduction is forbidden.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0662",
+          "title": "呕吐物清理后手卫生",
+          "owners": [
+            "contamination"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "hygiene-animal-carcass-001",
+          "title": "动物尸体为什么要远离水食物",
+          "linked_guide_id": "DG-0662"
+        },
+        {
+          "slug": "hygiene-blister-001",
+          "title": "污水泡过物资的降级判断",
+          "linked_guide_id": "DG-0662"
+        },
+        {
+          "slug": "hygiene-blood-contamination-001",
+          "title": "血液污染的接触风险",
+          "linked_guide_id": "DG-0662"
+        },
+        {
+          "slug": "hygiene-boiling-001",
+          "title": "化学污染不能靠煮沸解决",
+          "linked_guide_id": "DG-0662"
+        },
+        {
+          "slug": "hygiene-children-001",
+          "title": "儿童接触污染物的防护",
+          "linked_guide_id": "DG-0662"
+        },
+        {
+          "slug": "hygiene-cleaning-sequence-001",
+          "title": "清理顺序从干净到污染",
+          "linked_guide_id": "DG-0662"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0662",
+          "title": "呕吐物清理后手卫生"
+        },
+        {
+          "id": "DG-0600",
+          "title": "食物残渣处理：防虫防臭和卫生"
+        },
+        {
+          "id": "DG-0626",
+          "title": "桶厕满袋封存和更换"
+        },
+        {
+          "id": "DG-0629",
+          "title": "防鼠食物高处封存"
+        },
+        {
+          "id": "DG-0627",
+          "title": "垃圾渗漏后的地面清理"
+        },
+        {
+          "id": "DG-0628",
+          "title": "霉味衣物和睡眠区分离"
+        },
+        {
+          "id": "DG-0630",
+          "title": "少水餐具清洁顺序"
+        },
+        {
+          "id": "DG-0572",
+          "title": "洗手用水不足：替代清洁流程"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "hygiene-animal-carcass-001",
+          "title": "动物尸体为什么要远离水食物"
+        },
+        {
+          "slug": "hygiene-blister-001",
+          "title": "污水泡过物资的降级判断"
+        },
+        {
+          "slug": "hygiene-blood-contamination-001",
+          "title": "血液污染的接触风险"
+        },
+        {
+          "slug": "hygiene-boiling-001",
+          "title": "化学污染不能靠煮沸解决"
+        },
+        {
+          "slug": "hygiene-children-001",
+          "title": "儿童接触污染物的防护"
+        },
+        {
+          "slug": "hygiene-cleaning-sequence-001",
+          "title": "清理顺序从干净到污染"
+        },
+        {
+          "slug": "hygiene-container-001",
+          "title": "化学品气味和容器禁用判断"
+        },
+        {
+          "slug": "hygiene-contaminated-clothing-001",
+          "title": "污染衣物和普通衣物分开"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "other",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 22,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 34,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "卫生耗材",
+            "生耗材只",
+            "耗材只够",
+            "材只够半",
+            "卫生",
+            "只够半个",
+            "够半个月",
+            "减少使用"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "contamination"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "baseline": false,
+        "safety_minimum": false,
+        "allocation_horizon": false,
+        "replenishment": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "O07",
+      "case_type": "observation",
+      "query": "资源不足时，是不是应该让最有技能的人优先获得更多资源？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "team_operations",
+        "organization"
+      ],
+      "expected_capabilities": [
+        "priority_allocation",
+        "safety_minimum"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928"
+      ],
+      "required_evidence_topics": [
+        "purpose_not_person",
+        "no_human_value_ranking",
+        "team_boundary"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-resource-specific-priority-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Reject person-value ranking; Team Operations may assign qualified operators but not human worth.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "resource-allocation-substitution-degraded-mode-001",
+          "title": "替代路径与降级模式选择",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "energy-solar-multi-day-cloudy-degraded-mode-001",
+          "title": "连续阴天多日降级运行",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "water-shortage-response-041",
+          "title": "缺水时收缩用水范围",
+          "linked_guide_id": "DG-0929"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0590",
+          "title": "放弃物资：保人优先判断"
+        },
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0666",
+          "title": "外出找资源停止线"
+        },
+        {
+          "id": "DG-0400",
+          "title": "基础技能清单"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度"
+        },
+        {
+          "slug": "resource-allocation-substitution-degraded-mode-001",
+          "title": "替代路径与降级模式选择"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件"
+        },
+        {
+          "slug": "energy-solar-multi-day-cloudy-degraded-mode-001",
+          "title": "连续阴天多日降级运行"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径"
+        },
+        {
+          "slug": "water-shortage-response-041",
+          "title": "缺水时收缩用水范围"
+        },
+        {
+          "slug": "production-workshop-daily-resource-budget-001",
+          "title": "当日生产资源预算"
+        },
+        {
+          "slug": "production-workshop-material-reservation-line-001",
+          "title": "生产材料保留线"
+        }
+      ],
+      "profiles_triggered": [],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "",
+          "original_primary_domain": "records",
+          "contract_primary_domain": "unassigned",
+          "mandatory_secondary_domains": [],
+          "suppressed_primary_domains": [],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 10,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 22,
+          "selected_count": 7,
+          "source_plan_count": 3,
+          "core_terms": [
+            "资源不足时",
+            "资源不足",
+            "源不足时",
+            "让最有技",
+            "最有技能",
+            "获得更多",
+            "得更多资",
+            "更多资源"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "partial",
+      "reason": "ownership is acceptable but one frozen Guide/Wiki precision condition is incomplete.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "priority_allocation": false,
+        "safety_minimum": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 0,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "B. expected Guide candidate outside selected top3",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "O08",
+      "case_type": "observation",
+      "query": "电池鼓包了，但这是最后一块可用电池。",
+      "expected_primary_domain": "energy_safety",
+      "accepted_secondary_domains": [
+        "fire"
+      ],
+      "expected_capabilities": [
+        "safety_minimum"
+      ],
+      "expected_guide_ids": [
+        "DG-0841",
+        "DG-0616"
+      ],
+      "accepted_guide_ids": [
+        "DG-0841",
+        "DG-0616"
+      ],
+      "required_evidence_topics": [
+        "swollen_battery_stop",
+        "isolation",
+        "scarcity_no_override"
+      ],
+      "expected_wiki_slugs": [
+        "energy-damaged-power-bank-quarantine-001",
+        "energy-battery-leak-corrosion-isolation-001"
+      ],
+      "forbidden_primary_domains": [
+        "resource_allocation",
+        "energy_management",
+        "energy_deepening"
+      ],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Safety ownership is mandatory; the last battery remains unsafe and unavailable.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离",
+          "owners": [
+            "energy_safety",
+            "safety"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-battery-parallel-series-boundary-001",
+          "title": "电池串并联禁用边界",
+          "linked_guide_id": "DG-0841"
+        },
+        {
+          "slug": "energy-battery-chemistry-mix-stop-001",
+          "title": "不同电池类型混用停用边界",
+          "linked_guide_id": "DG-0841"
+        },
+        {
+          "slug": "energy-battery-leak-corrosion-isolation-001",
+          "title": "电池漏液和腐蚀隔离",
+          "linked_guide_id": "DG-0841"
+        },
+        {
+          "slug": "energy-damaged-power-bank-quarantine-001",
+          "title": "受摔移动电源隔离观察",
+          "linked_guide_id": "DG-0841"
+        },
+        {
+          "slug": "energy-battery-storage-temperature-boundary-001",
+          "title": "电池存放温度边界",
+          "linked_guide_id": "DG-0841"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离"
+        },
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查"
+        },
+        {
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断"
+        },
+        {
+          "id": "DG-0168",
+          "title": "家禽饮水和粪便管理"
+        },
+        {
+          "id": "DG-0616",
+          "title": "充电宝鼓包发热停用隔离"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0336",
+          "title": "电池轮换使用"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-battery-parallel-series-boundary-001",
+          "title": "电池串并联禁用边界"
+        },
+        {
+          "slug": "energy-battery-chemistry-mix-stop-001",
+          "title": "不同电池类型混用停用边界"
+        },
+        {
+          "slug": "energy-battery-leak-corrosion-isolation-001",
+          "title": "电池漏液和腐蚀隔离"
+        },
+        {
+          "slug": "energy-damaged-power-bank-quarantine-001",
+          "title": "受摔移动电源隔离观察"
+        },
+        {
+          "slug": "energy-battery-storage-temperature-boundary-001",
+          "title": "电池存放温度边界"
+        },
+        {
+          "slug": "energy-heat-001",
+          "title": "低温高温对电池容量影响"
+        },
+        {
+          "slug": "energy-unattended-charging-stop-boundary-001",
+          "title": "无人值守充电停止边界"
+        }
+      ],
+      "profiles_triggered": [
+        "energy_battery_abnormal_isolation"
+      ],
+      "production_path": {
+        "engine": "retrieval_v2_ai_orchestrated",
+        "planner_fallback": true,
+        "selector_fallback": true,
+        "contract_canary": {
+          "mode": "production",
+          "canary": false,
+          "status": "COMPARE_ONLY",
+          "transition_id": "",
+          "matched_rule": "battery_abnormal",
+          "original_primary_domain": "energy_safety",
+          "contract_primary_domain": "energy_safety",
+          "mandatory_secondary_domains": [
+            "fire"
+          ],
+          "suppressed_primary_domains": [
+            "repair",
+            "energy_deepening",
+            "energy_management",
+            "storage"
+          ],
+          "ownership_changed": false,
+          "safety_boundary_present": false,
+          "reason": "decision is outside the enabled canary transitions"
+        },
+        "debug": {
+          "engine": "retrieval_v2_ai_orchestrated",
+          "candidate_types": {
+            "wiki": 7,
+            "guide": 8,
+            "kiwix": 4
+          },
+          "candidate_count": 19,
+          "selected_count": 6,
+          "source_plan_count": 3,
+          "core_terms": [
+            "电池鼓包",
+            "但这是最",
+            "这是最后",
+            "是最后一",
+            "电池",
+            "鼓包",
+            "最后一块",
+            "后一块可"
+          ],
+          "ok": false,
+          "error": "Ollama 调用失败：HTTPConnectionPool(host='127.0.0.1', port=1): Max retries exceeded with url: /api/chat (Caused by NewConnectionError(\"HTTPConnection(host='127.0.0.1', port=1): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+          "stage": "selector"
+        }
+      },
+      "safety_gate_status": "not_applicable",
+      "safety_gate_failure": false,
+      "answer_generated": false,
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "energy_safety",
+        "safety"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "safety_minimum": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "evidence_classifier_hit_count": 1,
+      "evidence_scarcity_classifier_hit_count": 0,
+      "evidence_human_value_classifier_hit_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    }
+  ]
+}

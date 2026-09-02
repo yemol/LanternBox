@@ -5,7 +5,7 @@ category: 水
 priority: P0
 summary: 估算每人最低饮水需求和缺水信号；中风险条目，少喝硬撑会削弱判断，并记录责任人、时间和复查结果。
 tags: 水, 饮用水最低需求和缺水信号, 饮用水最低需, P0, 长期生存
-guide_links: DG-0551
+guide_links: DG-0551, DG-0928
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge

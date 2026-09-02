@@ -78,6 +78,9 @@
     "太阳能充电",
     "夜间异响"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "general-member-info-backup-001",
+    "records-retention-access-disposal-001"
+  ],
   "risk_level": "caution"
 }

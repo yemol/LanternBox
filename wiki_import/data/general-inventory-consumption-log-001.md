@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用于库存消耗记录的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 库存消耗记录, 信息保存与长期重建, P2, 长期重建, 离线知识, 记录, 判断
-guide_links: DG-0127
+guide_links: DG-0127, DG-0926, DG-0930
 kiwix_topics: 库存消耗记录, Offline backup, Records management, Knowledge management
 last_reviewed: 2026-07-03
 status: published

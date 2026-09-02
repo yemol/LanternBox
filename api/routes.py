@@ -145,6 +145,9 @@ def get_ai_runtime_settings():
             "retrieval_engine": "当前主检索引擎为 retrieval_v2_ai_orchestrated",
             "show_retrieval_debug": "是否在接口返回中显示 v2 检索计划、候选来源和选中证据",
             "retrieval_v2_model": "Retrieval v2 规划和证据选择使用的本地模型",
+            "contract_mode": "跨域 ownership contract 模式：off、shadow、compare、production；默认 off",
+            "contract_canary_enabled": "production 模式下是否启用受控 ownership canary；默认关闭",
+            "contract_canary_transitions": "允许生效的结构化 canary transition identifiers",
         },
     }
 

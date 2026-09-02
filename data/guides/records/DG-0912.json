@@ -1,0 +1,60 @@
+{
+  "id": "DG-0912",
+  "title": "原始记录可信度检查",
+  "category": "信息保存与长期重建",
+  "priority": "P0",
+  "risk_level": "caution",
+  "scenario": "记录来自不同人员、转述或不同时间点，需要判断哪些内容可直接用于行动，哪些仍待核对。",
+  "goal": "保留来源差异，为每条记录标注事实层级、适用条件和复核状态。",
+  "domains": [
+    "records"
+  ],
+  "keywords": [
+    "原始记录复核",
+    "可信度标记",
+    "直接观察",
+    "转述",
+    "矛盾证据"
+  ],
+  "tools": [
+    "原始记录",
+    "可信度标记表",
+    "来源索引",
+    "待核对夹"
+  ],
+  "steps": [
+    "保留原始页，不擦改原文；另页登记记录人、时间、地点、对象、单位和当时条件。",
+    "把内容标为直接观察、本人报告、他人转述或推断，并写出可回查的来源编号。",
+    "核对单位、时间顺序和对象身份；遇到冲突时并列保留，不用多数票消除差异。",
+    "写明适用条件、已完成的复核、尚缺证据和下一次核对时间，再由第二人签名。"
+  ],
+  "check": [
+    "每条关键结论都能指回原始来源。",
+    "推断、转述和直接观察使用不同标记。",
+    "冲突记录保留双方内容与待查项。"
+  ],
+  "common_mistakes": [
+    "在原始页上覆盖旧值。",
+    "把讲述者身份当成事实可信度。",
+    "忽略测量单位和环境条件。"
+  ],
+  "fallback": [
+    "无人可复核时标记为单人未复核，并限制其用途。",
+    "来源暂时找不到时保留内容但降为待核对，不据此执行高风险动作。"
+  ],
+  "stop_or_escalate": [
+    "记录将触发医疗、火灾、电气、结构承重或食水安全决策而来源不清时，停止据此行动并交对应领域复核。",
+    "身份、单位或时间存在无法解释的冲突时，不得提升为已验证知识。"
+  ],
+  "notes": "可信度标记说明证据状态，不给记录人贴永久标签。",
+  "related_wiki": [
+    "records-lifecycle-state-model-001",
+    "records-raw-record-minimum-fields-001",
+    "records-review-verification-checklist-001",
+    "records-source-direct-reported-boundary-001",
+    "records-applicable-conditions-context-001",
+    "records-contradictory-evidence-handling-001",
+    "general-record-trust-label-001",
+    "records-medical-observation-handover-boundary-001"
+  ]
+}

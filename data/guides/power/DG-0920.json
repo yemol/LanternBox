@@ -1,0 +1,67 @@
+{
+  "id": "DG-0920",
+  "title": "连续阴天与长期发电不足降级运行",
+  "category": "能源",
+  "priority": "P0",
+  "risk_level": "caution",
+  "scenario": "太阳能连续多日低产出、长期无补电或发电部件部分失效，现有储能不能维持普通运行。",
+  "goal": "依据连续产出、保守容量和关键负载进入可交接的 DEGRADED / MINIMUM 模式，并定义恢复证据。",
+  "domains": [
+    "power",
+    "security"
+  ],
+  "keywords": [
+    "连续阴天",
+    "长期发电不足",
+    "blackout mode",
+    "degraded mode",
+    "最低维持模式",
+    "恢复条件"
+  ],
+  "tools": [
+    "最近三日产出记录",
+    "保守容量盘点",
+    "关键负载最低线",
+    "公共模式卡",
+    "铅笔"
+  ],
+  "steps": [
+    "比较最近多日产出、当前可用储能和关键负载日耗，区分长期产能不足与今天临时低电量。",
+    "冻结可延后负载，按现有断开顺序停止重复照明、娱乐和非必要高耗能任务。",
+    "为通信、最低照明、医疗照护与记录设置短而固定的运行窗口。",
+    "把已失败部件从路径图移出，只按已验证低压单一路径接入备用源。",
+    "每日同一时点复核剩余容量、当天产出、不可用部件和下一天气窗口。",
+    "发电与储能连续两个可比周期恢复到保守线后，一次只恢复一个普通负载。"
+  ],
+  "check": [
+    "模式卡写明进入原因、允许负载、暂停负载、保留量和下一复核。",
+    "关键负载没有因普通任务跌破最低线。",
+    "退出依据来自重复可比样本，不是一次晴天高值。",
+    "当天分配仍由 Energy Management 入口执行。"
+  ],
+  "common_mistakes": [
+    "把一天低电量误写成长期产能不足。",
+    "一次晴天就恢复全部负载。",
+    "把冒烟或过热模块当作可降级继续使用。",
+    "直接并联多个未知备用源。"
+  ],
+  "fallback": [
+    "无法补电时转纸本记录、人工值守和最短通信窗口。",
+    "容量无法确认时只保留一个最关键的已验证负载。"
+  ],
+  "stop_or_escalate": [
+    "冒烟、火花、焦味、异常热、进水、电池鼓包或保护件动作时立即停止并转 Energy Safety / Fire。",
+    "备用源电压、极性、接口或保护无法确认时不得接入。",
+    "涉及市电、并网、高压 DC 或高压太阳能串时停止，进入专业边界。"
+  ],
+  "notes": "本 Guide 处理连续多日和长期产能不足；今天的设备分配继续由 Energy Management 主导。",
+  "related_wiki": [
+    "energy-solar-multi-day-cloudy-degraded-mode-001",
+    "energy-blackout-degraded-mode-card-001",
+    "energy-generation-component-failure-degraded-path-001",
+    "energy-cloudy-solar-downgrade-001",
+    "energy-solar-daytime-charge-schedule-001",
+    "energy-essential-load-reserve-001",
+    "energy-low-battery-load-disconnect-order-001"
+  ]
+}

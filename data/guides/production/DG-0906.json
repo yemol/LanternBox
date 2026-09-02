@@ -1,0 +1,113 @@
+{
+  "id": "DG-0906",
+  "title": "小批量重复制作流程",
+  "category": "团队轮值与任务管理",
+  "priority": "P1",
+  "scenario": "需要连续制作多个相似零件、箱体、支架、标签板或简单工具，但容易批量偏差。",
+  "goal": "用离线可执行的小批量制作把人员、实物、状态、停止线和下一步连接起来。",
+  "tools": [
+    "模板卡",
+    "首件标签",
+    "步骤卡",
+    "批次标签",
+    "检查表"
+  ],
+  "steps": [
+    "先做首件。",
+    "确认模板和关键尺寸。",
+    "固定重复步骤卡。",
+    "每件做关键检查。",
+    "发现系统性问题时暂停整批。",
+    "记录批次一致性。",
+    "状态变化时更新任务板、标签或交接卡。",
+    "结束前由另一名成员对照现场实物复核。"
+  ],
+  "check": [
+    "首件合格。",
+    "模板编号清楚。",
+    "每件有检查痕迹。",
+    "失败批次已隔离。"
+  ],
+  "common_mistakes": [
+    "只口头说明小批量制作，没有对应实物和编号。",
+    "状态变化后不更新标签或任务板。",
+    "为了赶进度越过明确停止线。"
+  ],
+  "fallback": [
+    "降低批量规模。",
+    "改为单件制作。",
+    "只完成低风险部件。",
+    "重新做模板。"
+  ],
+  "stop_or_escalate": [
+    "首件不合格、模板尺寸争议、同类缺陷连续出现、材料批次混乱或疲劳操作时停止批量制作。"
+  ],
+  "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+  "category_original": "团队轮值与任务管理",
+  "domains": [
+    "repair",
+    "organization",
+    "tools"
+  ],
+  "intents": [
+    "production_workshop_v0_1",
+    "offline_workshop_action"
+  ],
+  "situations": [
+    "workshop_operation",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "模板卡",
+    "首件标签",
+    "步骤卡",
+    "批次标签",
+    "检查表"
+  ],
+  "signals": [
+    "小批量重复制作流程",
+    "小批量制作",
+    "工坊",
+    "生产流程"
+  ],
+  "risks": [
+    "首件失败",
+    "批次偏差",
+    "模板争议"
+  ],
+  "keywords": [
+    "小批量重复制作流程",
+    "小批量制作",
+    "工坊生产",
+    "离线流程",
+    "小团队",
+    "任务交接"
+  ],
+  "negative_keywords": [
+    "大型工厂排产",
+    "自动化生产线",
+    "专业质量认证",
+    "危险化学品生产",
+    "武器制造",
+    "高压电气作业",
+    "ERP"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "production_workshop_v0_1",
+  "top1_aliases": [
+    "小批量重复制作流程"
+  ],
+  "related_wiki": [
+    "production-workshop-batch-label-minimum-001",
+    "production-workshop-template-size-standard-001",
+    "production-workshop-first-article-check-001",
+    "production-workshop-repeat-step-card-001",
+    "production-workshop-each-piece-check-001",
+    "production-workshop-batch-consistency-check-001",
+    "production-workshop-failed-batch-isolation-001"
+  ],
+  "risk_level": "caution"
+}

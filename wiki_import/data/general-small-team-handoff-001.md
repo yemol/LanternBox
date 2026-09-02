@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用于小团队知识交接的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 小团队知识交接, 信息保存与长期重建, P2, 长期重建, 离线知识, 记录, 判断
-guide_links: DG-0148, DG-0296
+guide_links: DG-0148, DG-0296, DG-0918
 kiwix_topics: 小团队知识交接, Offline backup, Records management, Knowledge management
 last_reviewed: 2026-07-03
 status: published

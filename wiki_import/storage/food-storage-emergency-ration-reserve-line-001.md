@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 为干粮和即食食品设置不可随意动用的保底线，防止日常领用耗尽紧急储备。并保留隔离、复查和交接记录。
 tags: 应急口粮, 保底线, 库存, 领用, 配给
-guide_links: [DG-0896, DG-0902]
+guide_links: [DG-0896, DG-0902, DG-0928]
 kiwix_topics: 应急口粮保底, long term storage, offline inventory
 last_reviewed: 2026-07-18
 status: published

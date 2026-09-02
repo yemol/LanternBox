@@ -6,7 +6,7 @@ priority: P0
 risk_level: caution
 summary: 用于用水记录与消耗跟踪的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 水, 储水, 取水, 长期断供, 小团队, 离线生存
-guide_links: DG-0463
+guide_links: DG-0463, DG-0927
 kiwix_topics: 用水记录与消耗跟踪, Water safety, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-11
 status: published

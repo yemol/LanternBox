@@ -6,7 +6,7 @@ priority: P0
 risk_level: high
 summary: 用于电池容量和实际可用时间的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 能源, 电池容量和实际可用时间, 长期断供, 小团队, 离线生存
-guide_links: DG-0616, DG-0617, DG-0618, DG-0619, DG-0620
+guide_links: DG-0616, DG-0617, DG-0618, DG-0619, DG-0620, DG-0919, DG-0921, DG-0925
 kiwix_topics: 电池容量和实际可用时间, 能源, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-02
 status: published

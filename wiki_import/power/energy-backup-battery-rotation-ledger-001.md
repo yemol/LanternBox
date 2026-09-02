@@ -6,7 +6,7 @@ priority: P1
 risk_level: normal
 summary: 用于记录备用电池编号、估计电量、使用设备和复查时间，避免好电池、半电电池和待废电池混放。
 tags: 能源, 备用电池, 轮换台账, 电池编号, 记录
-guide_links: DG-0336, DG-0618
+guide_links: DG-0336, DG-0618, DG-0921, DG-0923
 kiwix_topics: 备用电池轮换台账, off-grid energy management, emergency power planning
 last_reviewed: 2026-07-14
 status: published

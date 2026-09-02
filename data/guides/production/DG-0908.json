@@ -1,0 +1,113 @@
+{
+  "id": "DG-0908",
+  "title": "不合格品 / 返工 / 报废判断",
+  "category": "团队轮值与任务管理",
+  "priority": "P0",
+  "scenario": "成品或半成品出现开裂、松动、尺寸错误、污染、锐边或功能失败。",
+  "goal": "用离线可执行的不合格品把人员、实物、状态、停止线和下一步连接起来。",
+  "tools": [
+    "不合格标签",
+    "隔离区",
+    "返工卡",
+    "报废记录",
+    "Waste 交接卡"
+  ],
+  "steps": [
+    "先隔离。",
+    "判断是否可返工。",
+    "不可返工则降级或报废。",
+    "可回收材料转 Waste。",
+    "原因写入复盘。",
+    "禁止混回合格区。",
+    "状态变化时更新任务板、标签或交接卡。",
+    "结束前由另一名成员对照现场实物复核。"
+  ],
+  "check": [
+    "不合格品有标签。",
+    "返工条件清楚。",
+    "报废理由记录。",
+    "材料去向可追踪。"
+  ],
+  "common_mistakes": [
+    "只口头说明不合格品，没有对应实物和编号。",
+    "状态变化后不更新标签或任务板。",
+    "为了赶进度越过明确停止线。"
+  ],
+  "fallback": [
+    "改作练习件。",
+    "降级为低风险用途。",
+    "拆解入材料池。",
+    "封存待有经验者复查。"
+  ],
+  "stop_or_escalate": [
+    "承重件裂纹、污染来源不明、锐边不可控、反复返工失败或涉及电气 / 火灾风险时停止返工。"
+  ],
+  "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+  "category_original": "团队轮值与任务管理",
+  "domains": [
+    "repair",
+    "organization",
+    "tools"
+  ],
+  "intents": [
+    "production_workshop_v0_1",
+    "offline_workshop_action"
+  ],
+  "situations": [
+    "workshop_operation",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "不合格标签",
+    "隔离区",
+    "返工卡",
+    "报废记录",
+    "Waste 交接卡"
+  ],
+  "signals": [
+    "不合格品 / 返工 / 报废判断",
+    "不合格品",
+    "工坊",
+    "生产流程"
+  ],
+  "risks": [
+    "反复返工",
+    "污染",
+    "误放行"
+  ],
+  "keywords": [
+    "不合格品 / 返工 / 报废判断",
+    "不合格品",
+    "工坊生产",
+    "离线流程",
+    "小团队",
+    "任务交接"
+  ],
+  "negative_keywords": [
+    "大型工厂排产",
+    "自动化生产线",
+    "专业质量认证",
+    "危险化学品生产",
+    "武器制造",
+    "高压电气作业",
+    "ERP"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "production_workshop_v0_1",
+  "top1_aliases": [
+    "不合格品 / 返工 / 报废判断"
+  ],
+  "related_wiki": [
+    "production-workshop-nonconforming-item-quarantine-001",
+    "production-workshop-waste-transfer-card-001",
+    "production-workshop-edge-burr-check-001",
+    "production-workshop-rework-decision-line-001",
+    "production-workshop-scrap-decision-line-001",
+    "production-workshop-quality-record-minimum-001",
+    "production-workshop-failed-batch-isolation-001"
+  ],
+  "risk_level": "high"
+}

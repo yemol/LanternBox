@@ -1,0 +1,62 @@
+{
+  "id": "DG-0914",
+  "title": "重复问题与经验提取",
+  "category": "信息保存与长期重建",
+  "priority": "P0",
+  "risk_level": "caution",
+  "scenario": "维护、生产、农业或能源记录积累了多个周期，需要识别重复问题并安排下一次小范围验证。",
+  "goal": "用同口径数据区分趋势、偶发波动和未知项，形成有限且可停止的验证计划。",
+  "domains": [
+    "records"
+  ],
+  "keywords": [
+    "周期趋势",
+    "重复问题",
+    "待验证假设",
+    "纠正验证",
+    "跨期比较"
+  ],
+  "tools": [
+    "周期记录",
+    "对比表",
+    "趋势页",
+    "假设卡"
+  ],
+  "steps": [
+    "选取目的相同、单位一致且条件可比的周期；无法比较的记录单独列出。",
+    "分别汇总成功条件、失败模式、资源消耗和异常，不用平均值掩盖极端事件。",
+    "把观察到的重复现象写为趋势，把可能原因写为假设，并列出反证条件。",
+    "只安排一个变量清楚、规模受限的下一次验证，写负责人、期限、停止线和记录字段。",
+    "验证结束后记录结果；不支持假设时明确否定或保留未知，不反向修改旧记录。"
+  ],
+  "check": [
+    "比较记录的单位、对象和环境条件一致或已注明差异。",
+    "趋势与原因假设分开。",
+    "下一次验证有停止线和结果字段。"
+  ],
+  "common_mistakes": [
+    "把两个周期当作长期规律。",
+    "只挑支持原想法的记录。",
+    "同时改变多个条件导致结果无法解释。"
+  ],
+  "fallback": [
+    "数据太少时只列观察和缺口，不宣布趋势。",
+    "无法安全试验时保留假设，等待对应领域给出验证条件。"
+  ],
+  "stop_or_escalate": [
+    "验证涉及医疗、承重、电气、火灾、污染或食水安全时，停止由 Records 自行设计，交对应领域负责人批准。",
+    "单位不一致、原始页缺失或样本条件无法辨认时，不得形成推广结论。"
+  ],
+  "notes": "Records 组织比较和证据状态，不替具体领域决定技术参数。",
+  "related_wiki": [
+    "records-applicable-conditions-context-001",
+    "records-success-review-minimum-001",
+    "records-repeated-problem-trend-review-001",
+    "records-pending-hypothesis-next-test-001",
+    "records-corrective-action-verification-001",
+    "records-maintenance-history-trend-001",
+    "records-production-batch-long-term-review-001",
+    "records-agriculture-season-comparison-001",
+    "records-energy-capacity-trend-001"
+  ]
+}

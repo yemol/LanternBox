@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用于记录晴天、阴天、遮挡、时间段和补电效果，帮助之后安排太阳能白天排程。
 tags: 能源, 太阳能, 天气记录, 产出记录, 日照
-guide_links: DG-0617
+guide_links: DG-0617, DG-0922
 kiwix_topics: 太阳能天气产出记录, off-grid energy management, emergency power planning
 last_reviewed: 2026-07-14
 status: published

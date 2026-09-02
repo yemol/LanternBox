@@ -1,0 +1,1002 @@
+{
+  "schema_version": "1.1",
+  "contract_version": "1.1.0",
+  "status": "production_ready_not_enabled",
+  "runtime_integration": true,
+  "default_mode": "off",
+  "description": "Single declarative source for Cross-Domain Contract runtime, tests, lanes, safety-gate observation, and audit metadata.",
+  "contract_precedence": [
+    "human_harm",
+    "post_event",
+    "active_hazard",
+    "repair_boundary",
+    "negative_boundary",
+    "information_object"
+  ],
+  "known_domains": [
+    "unassigned",
+    "medical",
+    "medical_bio_safety",
+    "medical_storage",
+    "fire",
+    "energy_safety",
+    "energy_deepening",
+    "energy_management",
+    "energy",
+    "records",
+    "storage",
+    "repair",
+    "manufacturing",
+    "production",
+    "agriculture",
+    "tools",
+    "other"
+  ],
+  "audit_policy": {
+    "event_version": "1.0",
+    "retention_days": 30,
+    "retention_class": "local_rotating_jsonl",
+    "contains_full_query": false,
+    "query_identifier": "sha256"
+  },
+  "rules": [
+    {
+      "id": "human_harm_priority",
+      "family": "human_harm",
+      "priority": 600,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "人员",
+              "有人",
+              "伤者",
+              "患者",
+              "操作人员",
+              "成员",
+              "儿童"
+            ]
+          },
+          {
+            "any_terms": [
+              "电击",
+              "触电",
+              "烧伤",
+              "烫伤",
+              "吸入烟气",
+              "呼吸困难",
+              "咳嗽",
+              "头晕",
+              "人员受伤",
+              "受伤"
+            ]
+          }
+        ],
+        "none": [
+          {
+            "any_terms": [
+              "无人受伤",
+              "没有人受伤",
+              "无人接触",
+              "没有人接触"
+            ]
+          }
+        ]
+      },
+      "primary_domain": "medical",
+      "mandatory_secondary_domains": [
+        "energy_safety"
+      ],
+      "suppressed_domains": [
+        "repair",
+        "energy_deepening",
+        "energy_management",
+        "records",
+        "storage"
+      ],
+      "contract_reason": "current injury or exposure overrides device ownership",
+      "confidence": 1.0,
+      "safety_gate": {
+        "required": true,
+        "gate_type": "human_harm",
+        "prohibited_actions": [
+          "do_not_resume_equipment",
+          "do_not_delay_medical_care"
+        ]
+      },
+      "secondary_by_context": [
+        {
+          "conditions": {
+            "all": [
+              {
+                "any_terms": [
+                  "明火",
+                  "起火",
+                  "火势扩大",
+                  "浓烟",
+                  "燃烧",
+                  "热失控",
+                  "烟气"
+                ],
+                "mask_phrases": [
+                  "没有看到明火",
+                  "没有明火",
+                  "未见明火",
+                  "看不到火焰",
+                  "没有烟",
+                  "未冒烟",
+                  "无烟气",
+                  "无燃烧",
+                  "没有起火",
+                  "未发生燃烧",
+                  "不要等到起火"
+                ]
+              }
+            ],
+            "none": []
+          },
+          "domains": [
+            "fire"
+          ],
+          "position": "prepend"
+        }
+      ]
+    },
+    {
+      "id": "historical_fire_record",
+      "family": "post_event",
+      "priority": 550,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "昨天",
+              "上周",
+              "此前",
+              "曾经",
+              "历史事件",
+              "历史事故"
+            ]
+          },
+          {
+            "any_terms": [
+              "已经熄灭",
+              "火已熄灭",
+              "现场安全",
+              "现场已安全"
+            ]
+          },
+          {
+            "any_terms": [
+              "复盘",
+              "归档",
+              "原因",
+              "整改"
+            ]
+          }
+        ],
+        "none": []
+      },
+      "primary_domain": "records",
+      "mandatory_secondary_domains": [
+        "fire",
+        "energy_safety"
+      ],
+      "suppressed_domains": [
+        "repair",
+        "energy_deepening",
+        "energy_management"
+      ],
+      "contract_reason": "resolved historical fire with post-event lifecycle intent",
+      "confidence": 0.98,
+      "safety_gate": {
+        "required": false,
+        "gate_type": "none",
+        "prohibited_actions": []
+      },
+      "secondary_by_context": []
+    },
+    {
+      "id": "active_fire",
+      "family": "active_hazard",
+      "priority": 500,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "明火",
+              "起火",
+              "火势扩大",
+              "浓烟",
+              "燃烧",
+              "热失控"
+            ],
+            "mask_phrases": [
+              "没有看到明火",
+              "没有明火",
+              "未见明火",
+              "看不到火焰",
+              "没有烟",
+              "未冒烟",
+              "无烟气",
+              "无燃烧",
+              "没有起火",
+              "未发生燃烧",
+              "不要等到起火"
+            ]
+          }
+        ],
+        "none": []
+      },
+      "primary_domain": "fire",
+      "mandatory_secondary_domains": [
+        "energy_safety"
+      ],
+      "suppressed_domains": [
+        "repair",
+        "energy_deepening",
+        "energy_management",
+        "records",
+        "storage"
+      ],
+      "contract_reason": "unnegated current fire evidence",
+      "confidence": 1.0,
+      "safety_gate": {
+        "required": true,
+        "gate_type": "active_hazard",
+        "prohibited_actions": [
+          "stop",
+          "evacuate",
+          "isolate",
+          "escalate"
+        ]
+      },
+      "secondary_by_context": []
+    },
+    {
+      "id": "battery_invasive_operation",
+      "family": "active_hazard",
+      "priority": 450,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "电池",
+              "电池包",
+              "锂电池",
+              "锂电池包",
+              "充电宝",
+              "移动电源"
+            ]
+          },
+          {
+            "any_terms": [
+              "拆开",
+              "拆包",
+              "换芯",
+              "更换电芯",
+              "点焊",
+              "电芯重组",
+              "BMS"
+            ]
+          }
+        ],
+        "none": []
+      },
+      "primary_domain": "energy_safety",
+      "mandatory_secondary_domains": [
+        "fire"
+      ],
+      "suppressed_domains": [
+        "repair",
+        "energy_deepening",
+        "energy_management",
+        "manufacturing"
+      ],
+      "contract_reason": "battery pack disassembly or cell work is prohibited",
+      "confidence": 1.0,
+      "safety_gate": {
+        "required": true,
+        "gate_type": "active_hazard",
+        "prohibited_actions": [
+          "stop",
+          "do_not_disassemble",
+          "isolate"
+        ]
+      },
+      "secondary_by_context": []
+    },
+    {
+      "id": "battery_abnormal",
+      "family": "active_hazard",
+      "priority": 420,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "电池",
+              "电池包",
+              "锂电池",
+              "锂电池包",
+              "充电宝",
+              "移动电源"
+            ]
+          },
+          {
+            "any_terms": [
+              "鼓包",
+              "漏液",
+              "异常热",
+              "发烫",
+              "异味",
+              "腐蚀",
+              "开裂",
+              "冒烟",
+              "嘶嘶声",
+              "快速升温"
+            ]
+          }
+        ],
+        "none": [
+          {
+            "any_terms": [
+              "已经停用隔离且冷却稳定",
+              "冷却稳定并已隔离"
+            ]
+          }
+        ]
+      },
+      "primary_domain": "energy_safety",
+      "mandatory_secondary_domains": [
+        "fire"
+      ],
+      "suppressed_domains": [
+        "repair",
+        "energy_deepening",
+        "energy_management",
+        "storage"
+      ],
+      "contract_reason": "unsafe battery state requires stop and isolation",
+      "confidence": 0.99,
+      "safety_gate": {
+        "required": true,
+        "gate_type": "active_hazard",
+        "prohibited_actions": [
+          "stop",
+          "disconnect",
+          "isolate"
+        ]
+      },
+      "secondary_by_context": []
+    },
+    {
+      "id": "energy_device_abnormal",
+      "family": "active_hazard",
+      "priority": 400,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "太阳能控制器",
+              "充电控制器",
+              "充电器",
+              "低压设备",
+              "供电线",
+              "电源模块",
+              "接头",
+              "线缆",
+              "电源",
+              "设备"
+            ]
+          },
+          {
+            "any_terms": [
+              "冒烟",
+              "烟味",
+              "焦味",
+              "火花",
+              "异常热",
+              "过热",
+              "烫手",
+              "发烫",
+              "快速升温"
+            ]
+          }
+        ],
+        "none": []
+      },
+      "primary_domain": "energy_safety",
+      "mandatory_secondary_domains": [],
+      "suppressed_domains": [
+        "repair",
+        "energy_deepening",
+        "energy_management"
+      ],
+      "contract_reason": "device hazard without unnegated active fire",
+      "confidence": 0.98,
+      "safety_gate": {
+        "required": true,
+        "gate_type": "active_hazard",
+        "prohibited_actions": [
+          "stop",
+          "disconnect",
+          "isolate",
+          "fire_escalation"
+        ]
+      },
+      "secondary_by_context": [
+        {
+          "conditions": {
+            "all": [
+              {
+                "any_terms": [
+                  "冒烟",
+                  "烟味",
+                  "焦味"
+                ]
+              }
+            ],
+            "none": []
+          },
+          "domains": [
+            "fire"
+          ],
+          "position": "append"
+        }
+      ]
+    },
+    {
+      "id": "unknown_power_action",
+      "family": "active_hazard",
+      "priority": 380,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "未知来源",
+              "来源不明",
+              "电压不明",
+              "极性不明",
+              "无法确认"
+            ]
+          },
+          {
+            "any_terms": [
+              "电源",
+              "电源模块",
+              "适配器",
+              "供电模块",
+              "模块"
+            ]
+          },
+          {
+            "any_terms": [
+              "并联",
+              "反送",
+              "通电",
+              "接线",
+              "连接",
+              "测试",
+              "充电"
+            ]
+          }
+        ],
+        "none": [
+          {
+            "any_terms": [
+              "禁止",
+              "不要",
+              "避免",
+              "不允许",
+              "不可",
+              "不得"
+            ]
+          }
+        ]
+      },
+      "primary_domain": "energy_safety",
+      "mandatory_secondary_domains": [
+        "fire"
+      ],
+      "suppressed_domains": [
+        "repair",
+        "energy_deepening",
+        "energy_management"
+      ],
+      "contract_reason": "unknown source or polarity with energizing action",
+      "confidence": 1.0,
+      "safety_gate": {
+        "required": true,
+        "gate_type": "active_hazard",
+        "prohibited_actions": [
+          "stop",
+          "do_not_connect",
+          "isolate"
+        ]
+      },
+      "secondary_by_context": []
+    },
+    {
+      "id": "safe_repair_handover",
+      "family": "repair_boundary",
+      "priority": 360,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "无人受伤",
+              "没有人受伤",
+              "无人接触",
+              "没有人接触"
+            ]
+          },
+          {
+            "any_terms": [
+              "已断电",
+              "已经断电"
+            ]
+          },
+          {
+            "any_terms": [
+              "线缆检查",
+              "外部线缆",
+              "检查"
+            ]
+          }
+        ],
+        "none": []
+      },
+      "primary_domain": "repair",
+      "mandatory_secondary_domains": [
+        "energy_safety"
+      ],
+      "suppressed_domains": [
+        "energy_deepening",
+        "energy_management"
+      ],
+      "contract_reason": "no injury and source de-energized before external inspection",
+      "confidence": 0.95,
+      "safety_gate": {
+        "required": false,
+        "gate_type": "none",
+        "prohibited_actions": []
+      },
+      "secondary_by_context": []
+    },
+    {
+      "id": "normal_capacity_degradation",
+      "family": "negative_boundary",
+      "priority": 340,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "电池",
+              "电池包",
+              "锂电池",
+              "锂电池包",
+              "充电宝",
+              "移动电源"
+            ]
+          },
+          {
+            "any_terms": [
+              "运行时间越来越短",
+              "容量下降"
+            ]
+          }
+        ],
+        "none": [
+          {
+            "any_terms": [
+              "鼓包",
+              "漏液",
+              "异常热",
+              "发烫",
+              "异味",
+              "腐蚀",
+              "开裂",
+              "冒烟",
+              "嘶嘶声",
+              "快速升温"
+            ]
+          },
+          {
+            "any_terms": [
+              "拆开",
+              "拆包",
+              "换芯",
+              "点焊",
+              "BMS"
+            ]
+          }
+        ]
+      },
+      "primary_domain": "energy_deepening",
+      "mandatory_secondary_domains": [],
+      "suppressed_domains": [],
+      "contract_reason": "non-invasive capacity review",
+      "confidence": 0.95,
+      "safety_gate": {
+        "required": false,
+        "gate_type": "none",
+        "prohibited_actions": []
+      },
+      "secondary_by_context": []
+    },
+    {
+      "id": "solar_seasonal_baseline",
+      "family": "negative_boundary",
+      "priority": 330,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "太阳能"
+            ]
+          },
+          {
+            "any_terms": [
+              "跨季基线",
+              "跨季",
+              "季节",
+              "冬天"
+            ]
+          }
+        ],
+        "none": [
+          {
+            "any_terms": [
+              "冒烟",
+              "烟味",
+              "焦味",
+              "火花",
+              "异常热",
+              "过热",
+              "烫手",
+              "发烫",
+              "快速升温",
+              "明火",
+              "起火",
+              "火势扩大",
+              "浓烟",
+              "燃烧",
+              "热失控"
+            ]
+          }
+        ]
+      },
+      "primary_domain": "energy_deepening",
+      "mandatory_secondary_domains": [],
+      "suppressed_domains": [],
+      "contract_reason": "long-term non-hazard solar comparison",
+      "confidence": 0.94,
+      "safety_gate": {
+        "required": false,
+        "gate_type": "none",
+        "prohibited_actions": []
+      },
+      "secondary_by_context": []
+    },
+    {
+      "id": "information_lifecycle",
+      "family": "information_object",
+      "priority": 300,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "记录",
+              "日志",
+              "数据",
+              "文件",
+              "档案",
+              "版本",
+              "台账",
+              "表格",
+              "检测结果",
+              "测量结果",
+              "测试数据",
+              "观察结果"
+            ]
+          },
+          {
+            "any_terms": [
+              "归档",
+              "索引",
+              "版本",
+              "可信度",
+              "长期趋势",
+              "做趋势",
+              "备份",
+              "CURRENT",
+              "SUPERSEDED",
+              "ARCHIVED"
+            ]
+          }
+        ],
+        "none": []
+      },
+      "primary_domain": "records",
+      "mandatory_secondary_domains": [],
+      "suppressed_domains": [
+        "storage"
+      ],
+      "contract_reason": "record, data, version, trust, or trend intent",
+      "confidence": 0.97,
+      "safety_gate": {
+        "required": false,
+        "gate_type": "none",
+        "prohibited_actions": []
+      },
+      "secondary_by_context": [
+        {
+          "conditions": {
+            "all": [
+              {
+                "any_terms": [
+                  "医疗",
+                  "卫生",
+                  "样本"
+                ]
+              }
+            ],
+            "none": []
+          },
+          "domains": [
+            "medical"
+          ],
+          "position": "append"
+        },
+        {
+          "conditions": {
+            "all": [
+              {
+                "any_terms": [
+                  "种植",
+                  "发芽",
+                  "农业"
+                ]
+              }
+            ],
+            "none": []
+          },
+          "domains": [
+            "agriculture"
+          ],
+          "position": "append"
+        },
+        {
+          "conditions": {
+            "all": [
+              {
+                "any_terms": [
+                  "能源",
+                  "发电",
+                  "电池",
+                  "太阳能"
+                ]
+              }
+            ],
+            "none": []
+          },
+          "domains": [
+            "energy"
+          ],
+          "position": "append"
+        }
+      ]
+    },
+    {
+      "id": "medical_sample_custody",
+      "family": "information_object",
+      "priority": 250,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "医疗样本",
+              "样本试管"
+            ]
+          },
+          {
+            "any_terms": [
+              "装袋",
+              "防潮",
+              "入库",
+              "存放",
+              "保存",
+              "低温保存",
+              "贴标签",
+              "交接",
+              "长期不用",
+              "如何保存",
+              "怎么保存",
+              "分区",
+              "堆放",
+              "封存",
+              "轮换",
+              "避光",
+              "远离火源"
+            ]
+          }
+        ],
+        "none": []
+      },
+      "primary_domain": "medical_bio_safety",
+      "mandatory_secondary_domains": [
+        "records"
+      ],
+      "suppressed_domains": [
+        "storage"
+      ],
+      "contract_reason": "physical medical sample handling and preservation",
+      "confidence": 0.98,
+      "safety_gate": {
+        "required": false,
+        "gate_type": "none",
+        "prohibited_actions": []
+      },
+      "secondary_by_context": []
+    },
+    {
+      "id": "biological_material_storage",
+      "family": "information_object",
+      "priority": 240,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "种子本体",
+              "备用种子",
+              "种子"
+            ]
+          },
+          {
+            "any_terms": [
+              "装袋",
+              "防潮",
+              "入库",
+              "存放",
+              "保存",
+              "低温保存",
+              "贴标签",
+              "交接",
+              "长期不用",
+              "如何保存",
+              "怎么保存",
+              "分区",
+              "堆放",
+              "封存",
+              "轮换",
+              "避光",
+              "远离火源"
+            ]
+          }
+        ],
+        "none": []
+      },
+      "primary_domain": "storage",
+      "mandatory_secondary_domains": [
+        "records"
+      ],
+      "suppressed_domains": [],
+      "contract_reason": "physical seed custody",
+      "confidence": 0.97,
+      "safety_gate": {
+        "required": false,
+        "gate_type": "none",
+        "prohibited_actions": []
+      },
+      "secondary_by_context": []
+    },
+    {
+      "id": "medical_consumable_storage",
+      "family": "information_object",
+      "priority": 230,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "卫生耗材"
+            ]
+          },
+          {
+            "any_terms": [
+              "装袋",
+              "防潮",
+              "入库",
+              "存放",
+              "保存",
+              "低温保存",
+              "贴标签",
+              "交接",
+              "长期不用",
+              "如何保存",
+              "怎么保存",
+              "分区",
+              "堆放",
+              "封存",
+              "轮换",
+              "避光",
+              "远离火源"
+            ]
+          }
+        ],
+        "none": []
+      },
+      "primary_domain": "medical_storage",
+      "mandatory_secondary_domains": [
+        "records"
+      ],
+      "suppressed_domains": [],
+      "contract_reason": "physical medical consumable custody",
+      "confidence": 0.96,
+      "safety_gate": {
+        "required": false,
+        "gate_type": "none",
+        "prohibited_actions": []
+      },
+      "secondary_by_context": []
+    },
+    {
+      "id": "physical_storage",
+      "family": "information_object",
+      "priority": 200,
+      "conditions": {
+        "all": [
+          {
+            "any_terms": [
+              "零件",
+              "备件",
+              "物资",
+              "材料",
+              "设备",
+              "备用电池",
+              "电池",
+              "燃料",
+              "工具",
+              "成品",
+              "充电宝"
+            ]
+          },
+          {
+            "any_terms": [
+              "装袋",
+              "防潮",
+              "入库",
+              "存放",
+              "保存",
+              "低温保存",
+              "贴标签",
+              "交接",
+              "长期不用",
+              "如何保存",
+              "怎么保存",
+              "分区",
+              "堆放",
+              "封存",
+              "轮换",
+              "避光",
+              "远离火源"
+            ]
+          }
+        ],
+        "none": []
+      },
+      "primary_domain": "storage",
+      "mandatory_secondary_domains": [
+        "records"
+      ],
+      "suppressed_domains": [],
+      "contract_reason": "physical material or equipment preservation",
+      "confidence": 0.95,
+      "safety_gate": {
+        "required": false,
+        "gate_type": "none",
+        "prohibited_actions": []
+      },
+      "secondary_by_context": []
+    }
+  ]
+}

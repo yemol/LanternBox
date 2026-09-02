@@ -1,0 +1,62 @@
+{
+  "id": "DG-0918",
+  "title": "新成员知识与技能交接",
+  "category": "信息保存与长期重建",
+  "priority": "P0",
+  "risk_level": "caution",
+  "scenario": "成员需要学习、练习或接手一项任务，团队必须记录其当前能力边界和仍需监督的动作。",
+  "goal": "用可观察证据记录技能级别、授权范围、复训期限和交接缺口。",
+  "domains": [
+    "records"
+  ],
+  "keywords": [
+    "技能授权",
+    "监督练习",
+    "复训期限",
+    "学习路径",
+    "知识交接"
+  ],
+  "tools": [
+    "技能卡",
+    "监督练习记录",
+    "授权表",
+    "交接摘要"
+  ],
+  "steps": [
+    "把任务拆成可观察动作，写清仅可旁观、可监督操作、可独立操作和可带教的边界。",
+    "每次练习记录日期、条件、监督人、完成动作、错误、停止原因和下一步，不以参加次数代替能力证据。",
+    "授权人对照实际演示确认范围，为高风险动作单独写限制、复训日期和撤销条件。",
+    "人员交接时列出在办任务、知识位置、未验证判断、当前授权和需要继续监督的项目。",
+    "到期、长期未练习或发生相关事故后，把授权降为待复核，重新完成指定演示。"
+  ],
+  "check": [
+    "技能级别对应可观察行为。",
+    "授权范围、监督要求和到期日可直接查到。",
+    "交接摘要区分已掌握、待验证和未知。"
+  ],
+  "common_mistakes": [
+    "把资历或自述当作唯一能力证明。",
+    "一次演示后永久授权。",
+    "交接只给文件位置，不写未完成判断。"
+  ],
+  "fallback": [
+    "没有合格授权人时只允许旁观和低风险辅助，并记录等待复核。",
+    "人员紧缺时缩小任务范围，不扩大未经验证的授权。"
+  ],
+  "stop_or_escalate": [
+    "接手人没有所需授权、监督人不在场或无法说明停止线时，停止该项操作。",
+    "任务涉及医疗、电气、火灾、承重或其他高风险专业动作时，由对应领域决定授权标准。"
+  ],
+  "notes": "Records 保存技能证据；人员制度和岗位安排仍由 Organization 负责。",
+  "related_wiki": [
+    "records-skill-authorization-minimum-001",
+    "records-skill-level-boundaries-001",
+    "records-supervised-practice-evidence-001",
+    "records-skill-expiry-refresher-001",
+    "records-new-member-learning-path-001",
+    "records-knowledge-transfer-handover-summary-001",
+    "general-small-team-handoff-001",
+    "organization-onboarding-001",
+    "organization-skill-redundancy-001"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "DG-0917",
+  "title": "长期记录归档与索引",
+  "category": "信息保存与长期重建",
+  "priority": "P1",
+  "risk_level": "caution",
+  "scenario": "纸面档案持续增加，团队需要决定哪些留在工作点、哪些长期封存、哪些到期后可销毁。",
+  "goal": "按用途、敏感度和保存期限分层保管，避免误删关键证据或长期暴露个人资料。",
+  "domains": [
+    "records"
+  ],
+  "keywords": [
+    "纸面档案",
+    "保留期限",
+    "访问权限",
+    "档案销毁",
+    "长期封存"
+  ],
+  "tools": [
+    "档案目录",
+    "封套",
+    "保留销毁表",
+    "访问登记页"
+  ],
+  "steps": [
+    "给档案标注编号、内容类型、时间范围、责任人、敏感级别和最后复审日期。",
+    "分为现场活跃、长期保留、受限访问和待处置四区，目录只写定位所需信息。",
+    "把医疗、身份和事故记录放入受限封套，访问时登记人员、原因和归还时间。",
+    "到复审日期时核对未完成事项、追溯价值、领域要求和是否存在替代副本。",
+    "两人确认可销毁后记录档案号、理由、批准人、日期和方式，再让内容无法复原。"
+  ],
+  "check": [
+    "目录能定位档案但不泄露敏感正文。",
+    "待销毁档案没有开放事项或唯一证据。",
+    "访问和销毁都有双人记录。"
+  ],
+  "common_mistakes": [
+    "按纸张新旧决定销毁。",
+    "把敏感资料放在公共目录。",
+    "销毁后才发现它是唯一副本。"
+  ],
+  "fallback": [
+    "没有上锁柜时使用封签箱并由两人分别保管箱体和目录。",
+    "不能安全销毁时密封转入受限待处置区，禁止当作废纸利用。"
+  ],
+  "stop_or_escalate": [
+    "档案涉及正在处理的伤病、事故、权限争议或无法确认的唯一副本时，停止销毁。",
+    "访问记录异常、封签破损或敏感页失踪时，隔离档案并通知负责人。"
+  ],
+  "notes": "长期物理储藏环境由 Storage 判断；本 Guide 管理记录的保留、访问和处置状态。",
+  "related_wiki": [
+    "records-superseded-version-isolation-001",
+    "records-retention-access-disposal-001",
+    "records-medical-observation-handover-boundary-001",
+    "education-paper-notebook-001",
+    "general-long-term-archive-check-001",
+    "general-offline-directory-index-001",
+    "education-offline-data-backup-001",
+    "general-member-info-backup-001"
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "id": "DG-0910",
+  "title": "工坊任务交接",
+  "category": "团队轮值与任务管理",
+  "priority": "P1",
+  "scenario": "下一班、另一个成员或第二天需要接手未完成生产任务。",
+  "goal": "用离线可执行的任务交接把人员、实物、状态、停止线和下一步连接起来。",
+  "tools": [
+    "交接卡",
+    "任务板",
+    "半成品标签",
+    "工具表",
+    "禁用标签"
+  ],
+  "steps": [
+    "列出未完成任务。",
+    "说明半成品位置和状态。",
+    "交接工具状态。",
+    "标记风险点。",
+    "写清下一步动作。",
+    "交接失败原因和禁止操作。",
+    "双方复述确认。",
+    "状态变化时更新任务板、标签或交接卡。",
+    "结束前由另一名成员对照现场实物复核。"
+  ],
+  "check": [
+    "任务、物品、工具、风险、下一步、负责人都可追踪。",
+    "接手人能够根据现场实物复述任务、风险、下一步和停止条件。"
+  ],
+  "common_mistakes": [
+    "只口头说明任务交接，没有对应实物和编号。",
+    "状态变化后不更新标签或任务板。",
+    "为了赶进度越过明确停止线。"
+  ],
+  "fallback": [
+    "交接给更有经验者。",
+    "暂停任务。",
+    "只交接清理 / 记录任务。",
+    "把半成品转待检区。"
+  ],
+  "stop_or_escalate": [
+    "半成品状态不明、工具缺失、风险点未说明、失败原因未记录或接手人无技能授权时不交接开工。"
+  ],
+  "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+  "category_original": "团队轮值与任务管理",
+  "domains": [
+    "repair",
+    "organization",
+    "tools"
+  ],
+  "intents": [
+    "production_workshop_v0_1",
+    "offline_workshop_action"
+  ],
+  "situations": [
+    "workshop_operation",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "交接卡",
+    "任务板",
+    "半成品标签",
+    "工具表",
+    "禁用标签"
+  ],
+  "signals": [
+    "工坊任务交接",
+    "任务交接",
+    "工坊",
+    "生产流程"
+  ],
+  "risks": [
+    "工具缺失",
+    "状态不明",
+    "技能不匹配"
+  ],
+  "keywords": [
+    "工坊任务交接",
+    "任务交接",
+    "工坊生产",
+    "离线流程",
+    "小团队",
+    "任务交接"
+  ],
+  "negative_keywords": [
+    "大型工厂排产",
+    "自动化生产线",
+    "专业质量认证",
+    "危险化学品生产",
+    "武器制造",
+    "高压电气作业",
+    "ERP"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "production_workshop_v0_1",
+  "top1_aliases": [
+    "工坊任务交接"
+  ],
+  "related_wiki": [
+    "production-workshop-shift-handover-card-001",
+    "production-workshop-tool-state-handover-001",
+    "production-workshop-next-action-handover-001",
+    "production-workshop-wip-handover-tag-001",
+    "production-workshop-unfinished-item-tag-001",
+    "production-workshop-task-board-minimum-001",
+    "production-workshop-end-of-day-status-log-001",
+    "production-workshop-fatigue-stop-line-001",
+    "production-workshop-daily-resource-budget-001"
+  ],
+  "risk_level": "caution"
+}

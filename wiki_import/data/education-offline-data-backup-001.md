@@ -5,7 +5,7 @@ category: 团队轮值与任务管理
 priority: P2
 summary: 离线资料备份基础用于使用多副本、异介质、校验和恢复演练；未验证备份不算可用，并留下交接记录。
 tags: 数据备份, 离线资料, 冷备份, 硬盘, 校验, 恢复
-guide_links: DG-0117, DG-0275
+guide_links: DG-0117, DG-0275, DG-0917
 risk_level: normal
 status: published
 source: 3-2-1 备份原则；壳中灯本地数据安全规则

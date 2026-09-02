@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于把当天可用电量、补电来源、关键负载和保留量写成一页预算，避免长期断电时临时抢电。
 tags: 能源, 每日预算, 低电量, 关键负载, 交接, 长期断电
-guide_links: DG-0844
+guide_links: DG-0844, DG-0928
 kiwix_topics: 每日能源预算表, off-grid energy management, emergency power planning
 last_reviewed: 2026-07-14
 status: published

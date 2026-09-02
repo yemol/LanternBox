@@ -1,0 +1,4975 @@
+{
+  "schema_version": "1.0",
+  "artifact_label": "Batch17-D",
+  "generated_at": "2026-09-01T08:09:59.281523+00:00",
+  "fixture_path": "tests/fixtures/resource_allocation_field_cases.json",
+  "results_path": "docs/knowledge/batch17_d_resource_allocation_field_test_results.json",
+  "report_path": "docs/knowledge/batch17_d_resource_allocation_field_test_report.md",
+  "summary": {
+    "total": 28,
+    "strict_total": 20,
+    "observation_total": 8,
+    "pass": 8,
+    "partial": 1,
+    "fail": 19,
+    "strict_pass": 7,
+    "strict_partial": 1,
+    "strict_fail": 12,
+    "observation_pass": 1,
+    "observation_partial": 0,
+    "observation_fail": 7,
+    "guide_hit_rate": "65.0%",
+    "guide_top1_rate": "40.0%",
+    "guide_accepted_rate": "55.0%",
+    "wiki_any_rate": "65.0%",
+    "wiki_full_rate": "55.0%",
+    "precise_evidence_rate": "65.0%",
+    "capability_rates": {
+      "allocation_horizon": "36.4%",
+      "baseline": "50.0%",
+      "degraded_mode": "40.0%",
+      "inventory": "100.0%",
+      "priority_allocation": "22.2%",
+      "replenishment": "80.0%",
+      "reserve": "63.6%",
+      "review_loop": "33.3%",
+      "safety_minimum": "37.5%",
+      "substitution": "100.0%",
+      "trigger_threshold": "33.3%",
+      "uncertainty": "50.0%"
+    },
+    "boundary_rates": {
+      "storage": "45.5%",
+      "energy_management": "44.4%",
+      "energy_deepening": "37.5%",
+      "records": "80.0%",
+      "production": "0.0%",
+      "manufacturing": "0.0%",
+      "repair": "0.0%",
+      "medical": "50.0%",
+      "team_operations": "100.0%",
+      "energy_safety": "50.0%"
+    },
+    "safety_priority_rate": "38.9%",
+    "stop_condition_rate": "100.0%",
+    "dangerous_suggestion_count": 11,
+    "scarcity_overrides_safety_count": 0,
+    "human_value_ranking_count": 5,
+    "kiwix_override_count": 0,
+    "safety_rate": "100.0%",
+    "fallback_rate": "100.0%",
+    "record_check_rate": "100.0%",
+    "root_cause_counts": {
+      "C. primary ownership competition": 14,
+      "I. dangerous suggestion": 6,
+      "A. expected Guide absent from candidates": 9,
+      "E. expected Wiki outside candidates": 12,
+      "B. expected Guide candidate outside selected top3": 2,
+      "D. forbidden domain captured top1": 2,
+      "G. Guide-Wiki evidence not precise": 1
+    }
+  },
+  "cases": [
+    {
+      "case_id": "R01",
+      "case_type": "strict",
+      "query": "仓库记录有 40 份应急食品，但盘点只有 31 份，未来一周该按多少安排？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "storage",
+        "records",
+        "food"
+      ],
+      "expected_capabilities": [
+        "inventory",
+        "uncertainty",
+        "allocation_horizon"
+      ],
+      "expected_guide_ids": [
+        "DG-0926"
+      ],
+      "accepted_guide_ids": [
+        "DG-0926",
+        "DG-0927"
+      ],
+      "required_evidence_topics": [
+        "usable_inventory",
+        "uncertain_stock",
+        "conservative_baseline"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-available-resource-status-001",
+        "resource-allocation-uncertainty-scenarios-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Use the verified physical count; the unresolved difference remains uncertain and unavailable.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录",
+          "owners": [
+            "medical"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-available-resource-status-001",
+          "title": "可分配资源状态卡",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "general-storage-inventory-card-minimum-001",
+          "title": "储藏库存卡最小字段",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "general-inventory-consumption-log-001",
+          "title": "库存消耗记录",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "water-quantity-estimate-021",
+          "title": "储水数量的估算方法",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0927"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录"
+        },
+        {
+          "id": "DG-0127",
+          "title": "物资消耗异常预警"
+        },
+        {
+          "id": "DG-0860",
+          "title": "通信信息记录与交接"
+        },
+        {
+          "id": "DG-0126",
+          "title": "库存盘点流程"
+        },
+        {
+          "id": "DG-0388",
+          "title": "每周物资盘点"
+        },
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "inventory_consumption"
+      ],
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "inventory": true,
+        "uncertainty": true,
+        "allocation_horizon": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R02",
+      "case_type": "strict",
+      "query": "有 20 升水，其中 6 升是紧急储备，今天能按 20 升全部使用吗？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "water",
+        "storage"
+      ],
+      "expected_capabilities": [
+        "reserve",
+        "safety_minimum",
+        "priority_allocation"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928"
+      ],
+      "required_evidence_topics": [
+        "reserve_not_available",
+        "reserve_release_trigger",
+        "water_minimum"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-reserve-class-policy-001",
+        "resource-allocation-safety-minimum-register-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Emergency reserve is excluded from ordinary usable quantity until its release trigger is met.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0470",
+          "title": "备用水封存",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0463",
+          "title": "紧急配水记录",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-safety-minimum-register-001",
+          "title": "关键资源最低保障线登记",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "resource-allocation-reserve-class-policy-001",
+          "title": "运行、应急与战略储备分级",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "resource-allocation-resource-specific-priority-001",
+          "title": "按资源建立用途优先级",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "energy-daily-energy-budget-001",
+          "title": "每日能源预算表",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "food-storage-emergency-ration-reserve-line-001",
+          "title": "应急口粮保底线",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "food-staple-food-002",
+          "title": "基础热量和主食配给",
+          "linked_guide_id": "DG-0928"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0470",
+          "title": "备用水封存"
+        },
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0463",
+          "title": "紧急配水记录"
+        },
+        {
+          "id": "DG-0655",
+          "title": "鞋底脱胶后的降级使用"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0593",
+          "title": "酒精炉使用：通风防倾倒和禁用场景"
+        },
+        {
+          "id": "DG-0849",
+          "title": "火源使用前检查"
+        },
+        {
+          "id": "DG-0802",
+          "title": "先判断井口水是否可安全使用"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "selected evidence contains dangerous or scarcity-overrides-safety advice.",
+      "top1_owners": [
+        "other"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "reserve": true,
+        "safety_minimum": true,
+        "priority_allocation": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 3,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 2,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "C. primary ownership competition",
+        "I. dangerous suggestion"
+      ]
+    },
+    {
+      "case_id": "R03",
+      "case_type": "strict",
+      "query": "过去每天耗水 8 升，这两天增加到 11 升，库存还能撑多久？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "water",
+        "records"
+      ],
+      "expected_capabilities": [
+        "baseline",
+        "allocation_horizon",
+        "review_loop"
+      ],
+      "expected_guide_ids": [
+        "DG-0927"
+      ],
+      "accepted_guide_ids": [
+        "DG-0927",
+        "DG-0930"
+      ],
+      "required_evidence_topics": [
+        "consumption_baseline",
+        "recent_rate",
+        "recalculation"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-consumption-horizon-baseline-001",
+        "water-usage-log-023"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Compare the historical and recent rate and use the safer current horizon without reducing Water minimums.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0442",
+          "title": "食物库存天数估算",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0696",
+          "title": "物资交换不暴露库存",
+          "owners": [
+            "external_contact"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0704",
+          "title": "避免交换时暴露库存",
+          "owners": [
+            "external_contact"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "safety-barter-001",
+          "title": "物资交换前的信息最小化",
+          "linked_guide_id": "DG-0696"
+        },
+        {
+          "slug": "safety-children-001",
+          "title": "暴露儿童老人信息的风险",
+          "linked_guide_id": "DG-0696"
+        },
+        {
+          "slug": "safety-conflict-001",
+          "title": "拒绝交换的低冲突说法",
+          "linked_guide_id": "DG-0696"
+        },
+        {
+          "slug": "safety-evacuation-001",
+          "title": "冲突苗头的撤离边界",
+          "linked_guide_id": "DG-0696"
+        },
+        {
+          "slug": "safety-inventory-001",
+          "title": "不暴露库存的沟通原则",
+          "linked_guide_id": "DG-0696"
+        },
+        {
+          "slug": "safety-medication-001",
+          "title": "交换药品食物的风险",
+          "linked_guide_id": "DG-0696"
+        },
+        {
+          "slug": "safety-review-001",
+          "title": "交换后复盘和物资清点",
+          "linked_guide_id": "DG-0696"
+        },
+        {
+          "slug": "safety-route-planning-001",
+          "title": "陌生路线邀请为什么谨慎",
+          "linked_guide_id": "DG-0696"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0442",
+          "title": "食物库存天数估算"
+        },
+        {
+          "id": "DG-0696",
+          "title": "物资交换不暴露库存"
+        },
+        {
+          "id": "DG-0704",
+          "title": "避免交换时暴露库存"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给"
+        },
+        {
+          "id": "DG-0126",
+          "title": "库存盘点流程"
+        },
+        {
+          "id": "DG-0128",
+          "title": "撤离前库存导出"
+        },
+        {
+          "id": "DG-0241",
+          "title": "动物饲料库存线"
+        },
+        {
+          "id": "DG-0124",
+          "title": "最低库存线设置"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "other"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "baseline": false,
+        "allocation_horizon": false,
+        "review_loop": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "R04",
+      "case_type": "strict",
+      "query": "现有食物够 14 天，电池按现在用法只够 5 天，未来 7 天怎么安排？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "food",
+        "energy_management",
+        "energy_deepening"
+      ],
+      "expected_capabilities": [
+        "baseline",
+        "allocation_horizon",
+        "priority_allocation",
+        "reserve"
+      ],
+      "expected_guide_ids": [
+        "DG-0927"
+      ],
+      "accepted_guide_ids": [
+        "DG-0927",
+        "DG-0928"
+      ],
+      "required_evidence_topics": [
+        "cross_resource_budget",
+        "different_horizons",
+        "critical_reserve"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-consumption-horizon-baseline-001",
+        "resource-allocation-horizon-replenishment-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Cross-resource seven-day allocation is primary; Energy owners retain device-specific scheduling and capacity facts.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给",
+          "owners": [
+            "food"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0551",
+          "title": "饮用水只够一天：用途排序和配给",
+          "owners": [
+            "water"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "water-drinking-water-001",
+          "title": "多人共用饮用水的消耗率判断",
+          "linked_guide_id": "DG-0927"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给"
+        },
+        {
+          "id": "DG-0551",
+          "title": "饮用水只够一天：用途排序和配给"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0336",
+          "title": "电池轮换使用"
+        },
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离"
+        },
+        {
+          "id": "DG-0705",
+          "title": "交换期间留守人员安排"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表"
+        },
+        {
+          "slug": "agriculture-quick-leaf-long-cycle-balance-001",
+          "title": "快收叶菜和长周期作物搭配"
+        }
+      ],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "baseline": true,
+        "allocation_horizon": true,
+        "priority_allocation": true,
+        "reserve": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R05",
+      "case_type": "strict",
+      "query": "电量很少，照明、通信和娱乐设备应该怎么留？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "energy_management"
+      ],
+      "expected_capabilities": [
+        "safety_minimum",
+        "reserve",
+        "priority_allocation"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928",
+        "DG-0845",
+        "DG-0844"
+      ],
+      "required_evidence_topics": [
+        "critical_load",
+        "safety_minimum",
+        "optional_load_stop"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-safety-minimum-register-001",
+        "energy-essential-load-reserve-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Protect communication and minimum lighting evidence before optional loads.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-low-battery-power-window-001",
+          "title": "低电量设备开机窗口",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-night-lighting-runtime-plan-001",
+          "title": "夜间照明续航安排",
+          "linked_guide_id": "DG-0845"
+        },
+        {
+          "slug": "energy-phone-002",
+          "title": "手机省电为什么优先短信",
+          "linked_guide_id": "DG-0561"
+        },
+        {
+          "slug": "communication-battery-radio-runtime-budget-001",
+          "title": "无线电和 LoRa 电量预算",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "communication-qrp-power-budget-001",
+          "title": "QRP 概念和电量预算",
+          "linked_guide_id": "DG-0859"
+        },
+        {
+          "slug": "communication-qrp-contact-window-discipline-001",
+          "title": "QRP 窗口纪律",
+          "linked_guide_id": "DG-0859"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0845",
+          "title": "关键设备最低电量线"
+        },
+        {
+          "id": "DG-0561",
+          "title": "手机低电量：保通信模式"
+        },
+        {
+          "id": "DG-0859",
+          "title": "通信设备低功耗运行"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0565",
+          "title": "停电夜间：低亮照明布置"
+        },
+        {
+          "id": "DG-0563",
+          "title": "移动电源：关键设备优先级"
+        },
+        {
+          "id": "DG-0113",
+          "title": "手机省电模式"
+        },
+        {
+          "id": "DG-0339",
+          "title": "低电量工作模式"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "production-workshop-low-light-stop-line-001",
+          "title": "低照明生产停止线"
+        },
+        {
+          "slug": "production-workshop-risk-source-scan-001",
+          "title": "工坊风险源开工扫描"
+        },
+        {
+          "slug": "energy-device-power-priority-tier-001",
+          "title": "设备供电优先级分层"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排"
+        },
+        {
+          "slug": "energy-bank-battery-priority-001",
+          "title": "移动电源低电量使用优先级"
+        }
+      ],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "selected evidence contains dangerous or scarcity-overrides-safety advice.",
+      "top1_owners": [
+        "energy_management"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "safety_minimum": false,
+        "reserve": false,
+        "priority_allocation": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 1,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "I. dangerous suggestion"
+      ]
+    },
+    {
+      "case_id": "R06",
+      "case_type": "strict",
+      "query": "备用燃料什么时候才应该动用？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "storage",
+        "fire",
+        "safety"
+      ],
+      "expected_capabilities": [
+        "reserve",
+        "trigger_threshold",
+        "review_loop"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928",
+        "DG-0930"
+      ],
+      "required_evidence_topics": [
+        "reserve_class",
+        "release_trigger",
+        "post_release_recheck"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-reserve-class-policy-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "The decision needs a named reserve class, release trigger, and immediate re-evaluation.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0648",
+          "title": "酒精炉加燃料前冷却检查",
+          "owners": [
+            "fire",
+            "safety"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏",
+          "owners": [
+            "storage"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0642",
+          "title": "集合点失效后的备用点",
+          "owners": [
+            "evacuation"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "fire-alcohol-stove-001",
+          "title": "酒精炉倾倒和加燃料风险",
+          "linked_guide_id": "DG-0648"
+        },
+        {
+          "slug": "fire-alcohol-stove-002",
+          "title": "酒精炉燃料和倾倒风险",
+          "linked_guide_id": "DG-0648"
+        },
+        {
+          "slug": "fire-candle-001",
+          "title": "蜡烛照明的防火距离",
+          "linked_guide_id": "DG-0648"
+        },
+        {
+          "slug": "fire-carbon-monoxide-001",
+          "title": "一氧化碳无色无味为什么危险",
+          "linked_guide_id": "DG-0648"
+        },
+        {
+          "slug": "fire-cold-001",
+          "title": "热水瓶和低温保温边界",
+          "linked_guide_id": "DG-0648"
+        },
+        {
+          "slug": "fire-fire-knowledge-001",
+          "title": "外部烟味进入室内的封堵判断",
+          "linked_guide_id": "DG-0648"
+        },
+        {
+          "slug": "fire-fire-knowledge-002",
+          "title": "睡前火源复查的意义",
+          "linked_guide_id": "DG-0648"
+        },
+        {
+          "slug": "fire-fire-knowledge-003",
+          "title": "炉具锅具稳定性判断",
+          "linked_guide_id": "DG-0648"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0648",
+          "title": "酒精炉加燃料前冷却检查"
+        },
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏"
+        },
+        {
+          "id": "DG-0642",
+          "title": "集合点失效后的备用点"
+        },
+        {
+          "id": "DG-0470",
+          "title": "备用水封存"
+        },
+        {
+          "id": "DG-0033",
+          "title": "煮沸净水：省燃料做法"
+        },
+        {
+          "id": "DG-0220",
+          "title": "省燃料做饭"
+        },
+        {
+          "id": "DG-0522",
+          "title": "车辆燃料节约"
+        },
+        {
+          "id": "DG-0217",
+          "title": "燃料分区存放"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "fire",
+        "safety"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "reserve": false,
+        "trigger_threshold": false,
+        "review_loop": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "R07",
+      "case_type": "strict",
+      "query": "确认 5 天后会获得补给，现在的库存怎么分配？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "storage",
+        "records"
+      ],
+      "expected_capabilities": [
+        "replenishment",
+        "allocation_horizon",
+        "reserve"
+      ],
+      "expected_guide_ids": [
+        "DG-0927"
+      ],
+      "accepted_guide_ids": [
+        "DG-0927"
+      ],
+      "required_evidence_topics": [
+        "confirmed_replenishment",
+        "arrival_horizon",
+        "reserve_before_arrival"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-horizon-replenishment-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Confirmed replenishment may enter the horizon plan but is not current stock before arrival.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "water-drinking-water-001",
+          "title": "多人共用饮用水的消耗率判断",
+          "linked_guide_id": "DG-0927"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0633",
+          "title": "物资分配冲突暂停"
+        },
+        {
+          "id": "DG-0545",
+          "title": "口粮管理：只剩三天食物时的分配"
+        },
+        {
+          "id": "DG-0441",
+          "title": "异常解除确认"
+        },
+        {
+          "id": "DG-0801",
+          "title": "先确认雨水收集点是否可用"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "resource-allocation-safety-minimum-register-001",
+          "title": "关键资源最低保障线登记"
+        },
+        {
+          "slug": "resource-allocation-available-resource-status-001",
+          "title": "可分配资源状态卡"
+        },
+        {
+          "slug": "production-workshop-bystander-exclusion-log-001",
+          "title": "非操作人员隔离记录"
+        }
+      ],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "replenishment": true,
+        "allocation_horizon": true,
+        "reserve": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R08",
+      "case_type": "strict",
+      "query": "有人说一周后可能有补给，但并不确定，现在能提前多消耗一些吗？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "records"
+      ],
+      "expected_capabilities": [
+        "replenishment",
+        "uncertainty",
+        "reserve"
+      ],
+      "expected_guide_ids": [
+        "DG-0927"
+      ],
+      "accepted_guide_ids": [
+        "DG-0927",
+        "DG-0926"
+      ],
+      "required_evidence_topics": [
+        "uncertain_replenishment",
+        "not_guaranteed_stock",
+        "worst_case"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-horizon-replenishment-001",
+        "resource-allocation-uncertainty-scenarios-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "An unconfirmed report cannot justify early consumption or reserve release.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0350",
+          "title": "烟雾外泄检查",
+          "owners": [
+            "hygiene"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "water-drinking-water-001",
+          "title": "多人共用饮用水的消耗率判断",
+          "linked_guide_id": "DG-0927"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0350",
+          "title": "烟雾外泄检查"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0599",
+          "title": "主食不足：低体力消耗配给"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给"
+        },
+        {
+          "id": "DG-0671",
+          "title": "种子干燥封存"
+        },
+        {
+          "id": "DG-0864",
+          "title": "迷路后的定位与返回"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "replenishment": true,
+        "uncertainty": true,
+        "reserve": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R09",
+      "case_type": "strict",
+      "query": "未来一个月没有补给来源，当前库存应该怎么调整？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "storage",
+        "food",
+        "water",
+        "energy_deepening"
+      ],
+      "expected_capabilities": [
+        "allocation_horizon",
+        "replenishment",
+        "degraded_mode",
+        "reserve"
+      ],
+      "expected_guide_ids": [
+        "DG-0929"
+      ],
+      "accepted_guide_ids": [
+        "DG-0929",
+        "DG-0930",
+        "DG-0927"
+      ],
+      "required_evidence_topics": [
+        "no_replenishment",
+        "long_horizon",
+        "degraded_mode",
+        "recovery_condition"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-substitution-degraded-mode-001",
+        "resource-allocation-horizon-replenishment-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Enter a reversible degraded mode before exhaustion while preserving professional minimums.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0128",
+          "title": "撤离前库存导出",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "water-drinking-water-001",
+          "title": "多人共用饮用水的消耗率判断",
+          "linked_guide_id": "DG-0927"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0128",
+          "title": "撤离前库存导出"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        },
+        {
+          "id": "DG-0696",
+          "title": "物资交换不暴露库存"
+        },
+        {
+          "id": "DG-0704",
+          "title": "避免交换时暴露库存"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给"
+        },
+        {
+          "id": "DG-0435",
+          "title": "声音来源判断"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "records"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "allocation_horizon": true,
+        "replenishment": true,
+        "degraded_mode": true,
+        "reserve": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "C. primary ownership competition"
+      ]
+    },
+    {
+      "case_id": "R10",
+      "case_type": "strict",
+      "query": "资源消耗突然比计划快了 30%，应该什么时候重新调整？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "records"
+      ],
+      "expected_capabilities": [
+        "trigger_threshold",
+        "review_loop",
+        "baseline"
+      ],
+      "expected_guide_ids": [
+        "DG-0930"
+      ],
+      "accepted_guide_ids": [
+        "DG-0930",
+        "DG-0927"
+      ],
+      "required_evidence_topics": [
+        "consumption_spike",
+        "trigger_action_recheck",
+        "plan_compare_adjust"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-trigger-action-recheck-001",
+        "resource-allocation-review-loop-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "The observed deviation must trigger an early recorded recalculation, not wait for plan expiry.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划",
+          "owners": [
+            "agriculture"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-review-loop-001",
+          "title": "资源分配复查循环",
+          "linked_guide_id": "DG-0930"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0930"
+        },
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0930"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件",
+          "linked_guide_id": "DG-0930"
+        },
+        {
+          "slug": "general-inventory-consumption-log-001",
+          "title": "库存消耗记录",
+          "linked_guide_id": "DG-0930"
+        },
+        {
+          "slug": "records-energy-capacity-trend-001",
+          "title": "能源容量与产出趋势",
+          "linked_guide_id": "DG-0930"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线",
+          "linked_guide_id": "DG-0930"
+        },
+        {
+          "slug": "production-workshop-daily-resource-budget-001",
+          "title": "当日生产资源预算",
+          "linked_guide_id": "DG-0930"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        },
+        {
+          "id": "DG-0581",
+          "title": "手机没信号网络断了：家庭通讯计划和集合留言"
+        },
+        {
+          "id": "DG-0666",
+          "title": "外出找资源停止线"
+        },
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0599",
+          "title": "主食不足：低体力消耗配给"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "trigger_threshold": true,
+        "review_loop": true,
+        "baseline": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R11",
+      "case_type": "strict",
+      "query": "某种耗材只剩很少，还有功能相近的替代品，应该怎么安排？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "repair",
+        "manufacturing",
+        "storage"
+      ],
+      "expected_capabilities": [
+        "substitution",
+        "degraded_mode",
+        "reserve"
+      ],
+      "expected_guide_ids": [
+        "DG-0929"
+      ],
+      "accepted_guide_ids": [
+        "DG-0929"
+      ],
+      "required_evidence_topics": [
+        "verified_substitution",
+        "delay_or_cancel",
+        "fallback_recheck"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-substitution-degraded-mode-001"
+      ],
+      "forbidden_primary_domains": [
+        "manufacturing",
+        "repair"
+      ],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Select only a professionally verified alternative; do not enter manufacturing or repair instructions.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0545",
+          "title": "口粮管理：只剩三天食物时的分配",
+          "owners": [
+            "food"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录",
+          "owners": [
+            "medical"
+          ],
+          "risk_level": "normal"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "resource-allocation-substitution-degraded-mode-001",
+          "title": "替代路径与降级模式选择",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "energy-solar-multi-day-cloudy-degraded-mode-001",
+          "title": "连续阴天多日降级运行",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "water-shortage-response-041",
+          "title": "缺水时收缩用水范围",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "production-workshop-daily-resource-budget-001",
+          "title": "当日生产资源预算",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "production-workshop-material-reservation-line-001",
+          "title": "生产材料保留线",
+          "linked_guide_id": "DG-0929"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0545",
+          "title": "口粮管理：只剩三天食物时的分配"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0705",
+          "title": "交换期间留守人员安排"
+        },
+        {
+          "id": "DG-0717",
+          "title": "长期断供下安排日常节奏"
+        },
+        {
+          "id": "DG-0728",
+          "title": "安排轮休避免疲劳失控"
+        },
+        {
+          "id": "DG-0572",
+          "title": "洗手用水不足：替代清洁流程"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "food"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "substitution": true,
+        "degraded_mode": true,
+        "reserve": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "C. primary ownership competition"
+      ]
+    },
+    {
+      "case_id": "R12",
+      "case_type": "strict",
+      "query": "今天计划启动一个高耗能生产任务，但未来三天发电不足，还应该启动吗？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "production",
+        "energy_management",
+        "energy_deepening"
+      ],
+      "expected_capabilities": [
+        "allocation_horizon",
+        "degraded_mode",
+        "priority_allocation"
+      ],
+      "expected_guide_ids": [
+        "DG-0929"
+      ],
+      "accepted_guide_ids": [
+        "DG-0929",
+        "DG-0927"
+      ],
+      "required_evidence_topics": [
+        "task_delay",
+        "three_day_horizon",
+        "production_resource_budget"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-substitution-degraded-mode-001",
+        "production-workshop-daily-resource-budget-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Resource Allocation decides go, delay, or degrade; Production retains execution and process ownership.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0606",
+          "title": "干粮和罐头三天配给表",
+          "owners": [
+            "food"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0910",
+          "title": "工坊任务交接",
+          "owners": [
+            "production"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-solar-multi-day-cloudy-degraded-mode-001",
+          "title": "连续阴天多日降级运行",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-blackout-degraded-mode-card-001",
+          "title": "离网能源 blackout / degraded 模式卡",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "energy-low-battery-load-disconnect-order-001",
+          "title": "低电量断开负载顺序",
+          "linked_guide_id": "DG-0920"
+        },
+        {
+          "slug": "food-canned-food-001",
+          "title": "干粮和罐头三天配给原则",
+          "linked_guide_id": "DG-0606"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行"
+        },
+        {
+          "id": "DG-0606",
+          "title": "干粮和罐头三天配给表"
+        },
+        {
+          "id": "DG-0910",
+          "title": "工坊任务交接"
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0545",
+          "title": "口粮管理：只剩三天食物时的分配"
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "energy_deepening"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "allocation_horizon": false,
+        "degraded_mode": false,
+        "priority_allocation": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "R13",
+      "case_type": "strict",
+      "query": "今天太阳能输出偏低，晚上有哪些负载应该关掉？",
+      "expected_primary_domain": "energy_management",
+      "accepted_secondary_domains": [
+        "resource_allocation"
+      ],
+      "expected_capabilities": [
+        "priority_allocation",
+        "safety_minimum"
+      ],
+      "expected_guide_ids": [
+        "DG-0844",
+        "DG-0845"
+      ],
+      "accepted_guide_ids": [
+        "DG-0844",
+        "DG-0845",
+        "DG-0619"
+      ],
+      "required_evidence_topics": [
+        "same_day_energy_budget",
+        "critical_load",
+        "optional_load_stop"
+      ],
+      "expected_wiki_slugs": [
+        "energy-daily-energy-budget-001",
+        "energy-critical-device-minimum-line-001"
+      ],
+      "forbidden_primary_domains": [
+        "resource_allocation",
+        "energy_deepening"
+      ],
+      "safety_required": true,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Pure same-day electrical scheduling remains Energy Management primary.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电",
+          "owners": [
+            "other"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-solar-charging-003",
+          "title": "太阳能充电的光照因素",
+          "linked_guide_id": "DG-0564"
+        },
+        {
+          "slug": "energy-solar-system-basics-index-001",
+          "title": "太阳能系统基础索引",
+          "linked_guide_id": "DG-0564"
+        },
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-charge-target-selection-001",
+          "title": "日照不足时充电目标选择",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-weather-pattern-log-001",
+          "title": "太阳能天气产出记录",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-001",
+          "title": "锂电池进水和短路风险",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-002",
+          "title": "电池混用和新旧混放问题",
+          "linked_guide_id": "DG-0617"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        },
+        {
+          "id": "DG-0132",
+          "title": "资源暴露后的应对"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        },
+        {
+          "id": "DG-0619",
+          "title": "负载过大时断开排序"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "energy_management"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "priority_allocation": false,
+        "safety_minimum": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "R14",
+      "case_type": "strict",
+      "query": "过去三个月发电越来越低，长期供能能力是不是需要重新规划？",
+      "expected_primary_domain": "energy_deepening",
+      "accepted_secondary_domains": [
+        "records",
+        "resource_allocation"
+      ],
+      "expected_capabilities": [
+        "baseline",
+        "allocation_horizon",
+        "review_loop"
+      ],
+      "expected_guide_ids": [
+        "DG-0919",
+        "DG-0922"
+      ],
+      "accepted_guide_ids": [
+        "DG-0919",
+        "DG-0922",
+        "DG-0914"
+      ],
+      "required_evidence_topics": [
+        "long_term_capacity",
+        "three_month_trend",
+        "comparable_baseline"
+      ],
+      "expected_wiki_slugs": [
+        "records-energy-capacity-trend-001",
+        "energy-solar-seasonal-output-baseline-001"
+      ],
+      "forbidden_primary_domains": [
+        "resource_allocation",
+        "energy_management"
+      ],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Long-term generation capacity remains Energy Deepening primary; Records may supply trend evidence.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0006",
+          "title": "伤口感染：红肿热痛处理",
+          "owners": [
+            "medical"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0863",
+          "title": "个人外出路线规划",
+          "owners": [
+            "navigation"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "medical-deep-wound-infection-risk-001",
+          "title": "深伤口感染风险",
+          "linked_guide_id": "DG-0006"
+        },
+        {
+          "slug": "medical-trauma-complication-index-001",
+          "title": "常见外伤并发症索引",
+          "linked_guide_id": "DG-0006"
+        },
+        {
+          "slug": "medical-wound-infection-002",
+          "title": "伤口感染的早期信号",
+          "linked_guide_id": "DG-0006"
+        },
+        {
+          "slug": "navigation-outbound-route-card-001",
+          "title": "个人外出去程路线卡",
+          "linked_guide_id": "DG-0863"
+        },
+        {
+          "slug": "navigation-route-checkpoint-numbering-001",
+          "title": "路线检查点编号",
+          "linked_guide_id": "DG-0863"
+        },
+        {
+          "slug": "navigation-return-route-plan-001",
+          "title": "返回路线规划",
+          "linked_guide_id": "DG-0863"
+        },
+        {
+          "slug": "navigation-time-distance-turnback-line-001",
+          "title": "时间距离和折返线",
+          "linked_guide_id": "DG-0863"
+        },
+        {
+          "slug": "navigation-compass-orientation-basics-001",
+          "title": "指南针和地图定向基础",
+          "linked_guide_id": "DG-0863"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0006",
+          "title": "伤口感染：红肿热痛处理"
+        },
+        {
+          "id": "DG-0863",
+          "title": "个人外出路线规划"
+        },
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行"
+        },
+        {
+          "id": "DG-0110",
+          "title": "小型发电机使用边界"
+        },
+        {
+          "id": "DG-0531",
+          "title": "成员照片更新规则"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0919",
+          "title": "小型离网能源容量盘点"
+        },
+        {
+          "id": "DG-0726",
+          "title": "长期压力下防止决策崩坏"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "medical"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "baseline": false,
+        "allocation_horizon": false,
+        "review_loop": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "B. expected Guide candidate outside selected top3",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "R15",
+      "case_type": "strict",
+      "query": "剩下的种子应该怎么防潮保存半年？",
+      "expected_primary_domain": "storage",
+      "accepted_secondary_domains": [
+        "agriculture",
+        "records"
+      ],
+      "expected_capabilities": [
+        "inventory"
+      ],
+      "expected_guide_ids": [
+        "DG-0897"
+      ],
+      "accepted_guide_ids": [
+        "DG-0897",
+        "DG-0513"
+      ],
+      "required_evidence_topics": [
+        "physical_custody",
+        "moisture_control",
+        "seed_rotation"
+      ],
+      "expected_wiki_slugs": [
+        "agriculture-storage-seed-moisture-quarantine-001",
+        "agriculture-storage-seed-library-rotation-card-001"
+      ],
+      "forbidden_primary_domains": [
+        "resource_allocation"
+      ],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Preservation method and custody remain Storage / Agriculture.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查",
+          "owners": [
+            "agriculture",
+            "storage"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测",
+          "owners": [
+            "storage"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏",
+          "owners": [
+            "storage"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离",
+          "linked_guide_id": "DG-0897"
+        },
+        {
+          "slug": "agriculture-storage-seed-food-separation-shelf-001",
+          "title": "留种和食用批次分架",
+          "linked_guide_id": "DG-0897"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡",
+          "linked_guide_id": "DG-0897"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签",
+          "linked_guide_id": "DG-0897"
+        },
+        {
+          "slug": "agriculture-storage-seed-box-dry-check-001",
+          "title": "种子盒干燥复查",
+          "linked_guide_id": "DG-0897"
+        },
+        {
+          "slug": "agriculture-seed-batch-viability-ledger-001",
+          "title": "种子批次与发芽率复测台账",
+          "linked_guide_id": "DG-0879"
+        },
+        {
+          "slug": "agriculture-seed-drying-recheck-001",
+          "title": "种子干燥后的复查",
+          "linked_guide_id": "DG-0879"
+        },
+        {
+          "slug": "agriculture-seed-storage-moisture-failure-001",
+          "title": "种子受潮失效判断",
+          "linked_guide_id": "DG-0879"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0897",
+          "title": "种子储藏与复查"
+        },
+        {
+          "id": "DG-0879",
+          "title": "种子保存与发芽率复测"
+        },
+        {
+          "id": "DG-0896",
+          "title": "干粮 / 米面豆类防潮防虫储藏"
+        },
+        {
+          "id": "DG-0513",
+          "title": "种子保存基础"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "agriculture-storage-seed-box-dry-check-001",
+          "title": "种子盒干燥复查"
+        },
+        {
+          "slug": "agriculture-storage-seed-food-separation-shelf-001",
+          "title": "留种和食用批次分架"
+        },
+        {
+          "slug": "agriculture-storage-seed-bag-label-001",
+          "title": "种子袋批次标签"
+        },
+        {
+          "slug": "agriculture-storage-seed-moisture-quarantine-001",
+          "title": "受潮种子待复测隔离"
+        },
+        {
+          "slug": "agriculture-storage-seed-library-rotation-card-001",
+          "title": "小型种子库轮换卡"
+        }
+      ],
+      "profiles_triggered": [
+        "storage_seed_storage"
+      ],
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "agriculture",
+        "storage"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "inventory": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R16",
+      "case_type": "strict",
+      "query": "过去三个月的资源消耗记录怎么整理成可信趋势？",
+      "expected_primary_domain": "records",
+      "accepted_secondary_domains": [
+        "resource_allocation"
+      ],
+      "expected_capabilities": [
+        "baseline",
+        "review_loop"
+      ],
+      "expected_guide_ids": [
+        "DG-0914"
+      ],
+      "accepted_guide_ids": [
+        "DG-0914",
+        "DG-0912"
+      ],
+      "required_evidence_topics": [
+        "record_trust",
+        "long_term_trend",
+        "comparable_conditions"
+      ],
+      "expected_wiki_slugs": [
+        "records-repeated-problem-trend-review-001",
+        "records-applicable-conditions-context-001"
+      ],
+      "forbidden_primary_domains": [
+        "resource_allocation"
+      ],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Organizing, trusting, and archiving the information object remains Records primary.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录",
+          "owners": [
+            "medical"
+          ],
+          "risk_level": "normal"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "records-applicable-conditions-context-001",
+          "title": "经验适用条件与上下文字段",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-success-review-minimum-001",
+          "title": "成功做法复盘最小字段",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-repeated-problem-trend-review-001",
+          "title": "重复问题与趋势复查",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-pending-hypothesis-next-test-001",
+          "title": "待验证假设与下一次测试",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-corrective-action-verification-001",
+          "title": "整改项验证与关闭",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-maintenance-history-trend-001",
+          "title": "维修履历与重复故障趋势",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-production-batch-long-term-review-001",
+          "title": "生产批次长期回顾",
+          "linked_guide_id": "DG-0914"
+        },
+        {
+          "slug": "records-agriculture-season-comparison-001",
+          "title": "农业跨季对比",
+          "linked_guide_id": "DG-0914"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0914",
+          "title": "重复问题与经验提取"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [
+        "inventory_consumption",
+        "records_long_term_trend"
+      ],
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "records"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "baseline": true,
+        "review_loop": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "R17",
+      "case_type": "strict",
+      "query": "唯一的水泵坏了，怎么修？",
+      "expected_primary_domain": "repair",
+      "accepted_secondary_domains": [
+        "tools",
+        "resource_allocation"
+      ],
+      "expected_capabilities": [
+        "substitution"
+      ],
+      "expected_guide_ids": [],
+      "accepted_guide_ids": [
+        "DG-0383"
+      ],
+      "required_evidence_topics": [
+        "repair_method_owner",
+        "isolate_before_repair",
+        "temporary_substitution"
+      ],
+      "expected_wiki_slugs": [],
+      "forbidden_primary_domains": [
+        "resource_allocation",
+        "production"
+      ],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "No exact pump Guide is frozen; Repair ownership is the gate and RA may only handle temporary resource substitution.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0148",
+          "title": "资料交接清单",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "resource-allocation-substitution-degraded-mode-001",
+          "title": "替代路径与降级模式选择",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "energy-solar-multi-day-cloudy-degraded-mode-001",
+          "title": "连续阴天多日降级运行",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "water-shortage-response-041",
+          "title": "缺水时收缩用水范围",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "production-workshop-daily-resource-budget-001",
+          "title": "当日生产资源预算",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "production-workshop-material-reservation-line-001",
+          "title": "生产材料保留线",
+          "linked_guide_id": "DG-0929"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换"
+        },
+        {
+          "id": "DG-0148",
+          "title": "资料交接清单"
+        },
+        {
+          "id": "DG-0066",
+          "title": "大规模停电第一晚"
+        },
+        {
+          "id": "DG-0113",
+          "title": "手机省电模式"
+        },
+        {
+          "id": "DG-0117",
+          "title": "数据目录备份"
+        },
+        {
+          "id": "DG-0123",
+          "title": "物资编号规则"
+        },
+        {
+          "id": "DG-0153",
+          "title": "门窗临时加固"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "top1 ownership matches a frozen forbidden primary domain.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": true,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "substitution": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "C. primary ownership competition",
+        "D. forbidden domain captured top1"
+      ]
+    },
+    {
+      "case_id": "R18",
+      "case_type": "strict",
+      "query": "医疗耗材库存不足，怎么安排库存和补给？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "medical",
+        "storage"
+      ],
+      "expected_capabilities": [
+        "inventory",
+        "safety_minimum",
+        "reserve",
+        "replenishment"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928",
+        "DG-0926",
+        "DG-0927"
+      ],
+      "required_evidence_topics": [
+        "medical_inventory",
+        "critical_reserve",
+        "replenishment_plan",
+        "clinical_boundary"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-safety-minimum-register-001",
+        "resource-allocation-reserve-class-policy-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Inventory and replenishment are allowed; concrete patient treatment and triage remain Medical.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-safety-minimum-register-001",
+          "title": "关键资源最低保障线登记",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "resource-allocation-reserve-class-policy-001",
+          "title": "运行、应急与战略储备分级",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "resource-allocation-resource-specific-priority-001",
+          "title": "按资源建立用途优先级",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "energy-essential-load-reserve-001",
+          "title": "关键负载预留量",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "energy-critical-device-minimum-line-001",
+          "title": "关键设备最低电量线",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "energy-daily-energy-budget-001",
+          "title": "每日能源预算表",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "food-storage-emergency-ration-reserve-line-001",
+          "title": "应急口粮保底线",
+          "linked_guide_id": "DG-0928"
+        },
+        {
+          "slug": "food-staple-food-002",
+          "title": "基础热量和主食配给",
+          "linked_guide_id": "DG-0928"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        },
+        {
+          "id": "DG-0717",
+          "title": "长期断供下安排日常节奏"
+        },
+        {
+          "id": "DG-0696",
+          "title": "物资交换不暴露库存"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "selected evidence contains dangerous or scarcity-overrides-safety advice.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "inventory": true,
+        "safety_minimum": true,
+        "reserve": true,
+        "replenishment": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 3,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 2,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "I. dangerous suggestion"
+      ]
+    },
+    {
+      "case_id": "R19",
+      "case_type": "strict",
+      "query": "唯一的太阳能控制器正在冒烟，但如果停掉今天就没电了，能不能继续用？",
+      "expected_primary_domain": "energy_safety",
+      "accepted_secondary_domains": [
+        "fire"
+      ],
+      "expected_capabilities": [
+        "safety_minimum"
+      ],
+      "expected_guide_ids": [
+        "DG-0842"
+      ],
+      "accepted_guide_ids": [
+        "DG-0842",
+        "DG-0579"
+      ],
+      "required_evidence_topics": [
+        "smoke_stop",
+        "disconnect_isolate",
+        "scarcity_no_override"
+      ],
+      "expected_wiki_slugs": [
+        "energy-device-smell-heat-no-restart-001",
+        "energy-low-voltage-system-stop-boundary-001"
+      ],
+      "forbidden_primary_domains": [
+        "resource_allocation",
+        "energy_management",
+        "energy_deepening"
+      ],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Active smoke is an Energy Safety / Fire stop case; scarcity cannot authorize continued use.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-charge-target-selection-001",
+          "title": "日照不足时充电目标选择",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-weather-pattern-log-001",
+          "title": "太阳能天气产出记录",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-001",
+          "title": "锂电池进水和短路风险",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-002",
+          "title": "电池混用和新旧混放问题",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-003",
+          "title": "备用电池封存和轮换原则",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "linked_guide_id": "DG-0617"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0924",
+          "title": "低压能源系统周期维护"
+        },
+        {
+          "id": "DG-0608",
+          "title": "霉变粮食和坚果停用"
+        },
+        {
+          "id": "DG-0132",
+          "title": "资源暴露后的应对"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "top1 ownership matches a frozen forbidden primary domain.",
+      "top1_owners": [
+        "energy_management"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": true,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "safety_minimum": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "C. primary ownership competition",
+        "D. forbidden domain captured top1",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "R20",
+      "case_type": "strict",
+      "query": "制定了 7 天资源计划以后，什么情况下必须提前重算？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "records"
+      ],
+      "expected_capabilities": [
+        "trigger_threshold",
+        "review_loop",
+        "uncertainty"
+      ],
+      "expected_guide_ids": [
+        "DG-0930"
+      ],
+      "accepted_guide_ids": [
+        "DG-0930"
+      ],
+      "required_evidence_topics": [
+        "trigger_action_recheck",
+        "observe_record_compare_adjust",
+        "early_recalculation"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-review-loop-001",
+        "resource-allocation-trigger-action-recheck-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Freeze explicit deviation, reserve, failed replenishment, and unknown-state triggers.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划",
+          "owners": [
+            "agriculture"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-consumption-horizon-baseline-001",
+          "title": "跨资源消耗基线与可维持时长",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-device-consumption-baseline-001",
+          "title": "设备耗电基线记录",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "energy-solar-seasonal-output-baseline-001",
+          "title": "太阳能跨季产出基线",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源",
+          "linked_guide_id": "DG-0927"
+        },
+        {
+          "slug": "water-drinking-water-001",
+          "title": "多人共用饮用水的消耗率判断",
+          "linked_guide_id": "DG-0927"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        },
+        {
+          "id": "DG-0581",
+          "title": "手机没信号网络断了：家庭通讯计划和集合留言"
+        },
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0666",
+          "title": "外出找资源停止线"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        },
+        {
+          "id": "DG-0549",
+          "title": "断网断信号：家庭通讯计划和集合约定"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "partial",
+      "reason": "ownership is acceptable but one frozen Guide/Wiki precision condition is incomplete.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "trigger_threshold": false,
+        "review_loop": false,
+        "uncertainty": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "O01",
+      "case_type": "observation",
+      "query": "食物多，但燃料不足，应该先减少哪类活动？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "energy_management",
+        "food"
+      ],
+      "expected_capabilities": [
+        "priority_allocation",
+        "degraded_mode",
+        "allocation_horizon"
+      ],
+      "expected_guide_ids": [
+        "DG-0929"
+      ],
+      "accepted_guide_ids": [
+        "DG-0929",
+        "DG-0927",
+        "DG-0928"
+      ],
+      "required_evidence_topics": [
+        "cross_resource_conflict",
+        "reduce_optional_activity",
+        "critical_minimum"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-substitution-degraded-mode-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Observe RA versus Energy Management where the shortage spans different resource classes.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0033",
+          "title": "煮沸净水：省燃料做法",
+          "owners": [
+            "medical"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0724",
+          "title": "食物减少引发不公平感处理",
+          "owners": [
+            "psychology"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0648",
+          "title": "酒精炉加燃料前冷却检查",
+          "owners": [
+            "fire",
+            "safety"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "water-boiling-001",
+          "title": "煮沸饮水基础",
+          "linked_guide_id": "DG-0033"
+        },
+        {
+          "slug": "water-boiling-boundary-028",
+          "title": "煮沸处理的边界",
+          "linked_guide_id": "DG-0033"
+        },
+        {
+          "slug": "fire-alcohol-stove-001",
+          "title": "酒精炉倾倒和加燃料风险",
+          "linked_guide_id": "DG-0648"
+        },
+        {
+          "slug": "fire-alcohol-stove-002",
+          "title": "酒精炉燃料和倾倒风险",
+          "linked_guide_id": "DG-0648"
+        },
+        {
+          "slug": "fire-candle-001",
+          "title": "蜡烛照明的防火距离",
+          "linked_guide_id": "DG-0648"
+        },
+        {
+          "slug": "fire-carbon-monoxide-001",
+          "title": "一氧化碳无色无味为什么危险",
+          "linked_guide_id": "DG-0648"
+        },
+        {
+          "slug": "fire-cold-001",
+          "title": "热水瓶和低温保温边界",
+          "linked_guide_id": "DG-0648"
+        },
+        {
+          "slug": "fire-fire-knowledge-001",
+          "title": "外部烟味进入室内的封堵判断",
+          "linked_guide_id": "DG-0648"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0033",
+          "title": "煮沸净水：省燃料做法"
+        },
+        {
+          "id": "DG-0724",
+          "title": "食物减少引发不公平感处理"
+        },
+        {
+          "id": "DG-0648",
+          "title": "酒精炉加燃料前冷却检查"
+        },
+        {
+          "id": "DG-0900",
+          "title": "能源 / 燃料物资安全储藏"
+        },
+        {
+          "id": "DG-0220",
+          "title": "省燃料做饭"
+        },
+        {
+          "id": "DG-0360",
+          "title": "无火保暖方法"
+        },
+        {
+          "id": "DG-0610",
+          "title": "动物性食物彻底加热和记录"
+        },
+        {
+          "id": "DG-0359",
+          "title": "小空间集中保暖"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "medical"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "priority_allocation": false,
+        "degraded_mode": false,
+        "allocation_horizon": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "O02",
+      "case_type": "observation",
+      "query": "只有一个备用零件，现在要用还是留给以后？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "storage",
+        "repair"
+      ],
+      "expected_capabilities": [
+        "reserve",
+        "priority_allocation",
+        "uncertainty"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928",
+        "DG-0929"
+      ],
+      "required_evidence_topics": [
+        "single_spare",
+        "reserve_release_trigger",
+        "future_need"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-reserve-class-policy-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Observe RA against Storage custody and Repair technical need.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0642",
+          "title": "集合点失效后的备用点",
+          "owners": [
+            "evacuation"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0309",
+          "title": "临时小零件盒",
+          "owners": [
+            "repair",
+            "tools"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-battery-swelling-001",
+          "title": "充电宝鼓包和发热时的停用边界",
+          "linked_guide_id": "DG-0642"
+        },
+        {
+          "slug": "energy-water-damaged-strip-001",
+          "title": "插线板进水后不能用通电测试来确认安全",
+          "linked_guide_id": "DG-0642"
+        },
+        {
+          "slug": "shelter-bag-repair-001",
+          "title": "背包分散携带的理由",
+          "linked_guide_id": "DG-0642"
+        },
+        {
+          "slug": "shelter-children-001",
+          "title": "儿童老人转移风险判断",
+          "linked_guide_id": "DG-0642"
+        },
+        {
+          "slug": "shelter-cold-001",
+          "title": "雨天低温转移的体温风险",
+          "linked_guide_id": "DG-0642"
+        },
+        {
+          "slug": "shelter-contamination-zone-001",
+          "title": "临时避难空间的污染区",
+          "linked_guide_id": "DG-0642"
+        },
+        {
+          "slug": "shelter-evacuation-001",
+          "title": "撤离包不是搬家包",
+          "linked_guide_id": "DG-0642"
+        },
+        {
+          "slug": "shelter-evacuation-002",
+          "title": "撤离路线和备用路线比较",
+          "linked_guide_id": "DG-0642"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0642",
+          "title": "集合点失效后的备用点"
+        },
+        {
+          "id": "DG-0309",
+          "title": "临时小零件盒"
+        },
+        {
+          "id": "DG-0916",
+          "title": "SOP / Knowledge Card 版本更新与废止"
+        },
+        {
+          "id": "DG-0827",
+          "title": "先在水源附近设一个临时取水点"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换"
+        },
+        {
+          "id": "DG-0400",
+          "title": "基础技能清单"
+        },
+        {
+          "id": "DG-0470",
+          "title": "备用水封存"
+        },
+        {
+          "id": "DG-0899",
+          "title": "工具和材料防潮防锈储藏"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "selected evidence contains dangerous or scarcity-overrides-safety advice.",
+      "top1_owners": [
+        "evacuation"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "reserve": false,
+        "priority_allocation": false,
+        "uncertainty": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 2,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates",
+        "I. dangerous suggestion"
+      ]
+    },
+    {
+      "case_id": "O03",
+      "case_type": "observation",
+      "query": "库存记录和实物经常对不上，应该以哪个为准？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "records",
+        "storage"
+      ],
+      "expected_capabilities": [
+        "inventory",
+        "uncertainty"
+      ],
+      "expected_guide_ids": [
+        "DG-0926"
+      ],
+      "accepted_guide_ids": [
+        "DG-0926",
+        "DG-0126"
+      ],
+      "required_evidence_topics": [
+        "physical_count",
+        "uncertain_difference",
+        "record_reconciliation"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-available-resource-status-001",
+        "general-storage-inventory-card-minimum-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Observe RA candidate recall versus Records while unresolved stock remains unavailable.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0126",
+          "title": "库存盘点流程",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "normal"
+        },
+        {
+          "id": "DG-0123",
+          "title": "物资编号规则",
+          "owners": [
+            "records"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-available-resource-status-001",
+          "title": "可分配资源状态卡",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "resource-allocation-uncertainty-scenarios-001",
+          "title": "Best / Expected / Worst 离线手算卡",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "general-storage-inventory-card-minimum-001",
+          "title": "储藏库存卡最小字段",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "general-inventory-consumption-log-001",
+          "title": "库存消耗记录",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "energy-offgrid-capacity-inventory-001",
+          "title": "小型离网能源容量盘点表",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "food-inventory-001",
+          "title": "食物库存天数估算的误差来源",
+          "linked_guide_id": "DG-0926"
+        },
+        {
+          "slug": "water-quantity-estimate-021",
+          "title": "储水数量的估算方法",
+          "linked_guide_id": "DG-0926"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        },
+        {
+          "id": "DG-0126",
+          "title": "库存盘点流程"
+        },
+        {
+          "id": "DG-0123",
+          "title": "物资编号规则"
+        },
+        {
+          "id": "DG-0696",
+          "title": "物资交换不暴露库存"
+        },
+        {
+          "id": "DG-0706",
+          "title": "交换内容记录"
+        },
+        {
+          "id": "DG-0704",
+          "title": "避免交换时暴露库存"
+        },
+        {
+          "id": "DG-0902",
+          "title": "储藏记录、先入先出与交接"
+        },
+        {
+          "id": "DG-0147",
+          "title": "灾后损失记录"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "pass",
+      "reason": "accepted ownership, Guide, Wiki, and precise evidence chain are present.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "inventory": true,
+        "uncertainty": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": []
+    },
+    {
+      "case_id": "O04",
+      "case_type": "observation",
+      "query": "未来两周可能连续阴天，现有太阳能系统怎么安排资源？",
+      "expected_primary_domain": "energy_deepening",
+      "accepted_secondary_domains": [
+        "resource_allocation",
+        "energy_management"
+      ],
+      "expected_capabilities": [
+        "allocation_horizon",
+        "degraded_mode",
+        "uncertainty"
+      ],
+      "expected_guide_ids": [
+        "DG-0920",
+        "DG-0919"
+      ],
+      "accepted_guide_ids": [
+        "DG-0920",
+        "DG-0919",
+        "DG-0927",
+        "DG-0929"
+      ],
+      "required_evidence_topics": [
+        "multi_day_solar_shortfall",
+        "energy_capacity",
+        "degraded_mode"
+      ],
+      "expected_wiki_slugs": [
+        "energy-solar-multi-day-cloudy-degraded-mode-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "Observe Energy Deepening and RA co-domain behavior; long-term system capacity may retain top1.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护",
+          "owners": [
+            "energy_management"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-charge-target-selection-001",
+          "title": "日照不足时充电目标选择",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-solar-weather-pattern-log-001",
+          "title": "太阳能天气产出记录",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-001",
+          "title": "锂电池进水和短路风险",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-002",
+          "title": "电池混用和新旧混放问题",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-003",
+          "title": "备用电池封存和轮换原则",
+          "linked_guide_id": "DG-0617"
+        },
+        {
+          "slug": "energy-battery-capacity-001",
+          "title": "电池容量和实际可用时间",
+          "linked_guide_id": "DG-0617"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0617",
+          "title": "太阳能充电白天排程"
+        },
+        {
+          "id": "DG-0920",
+          "title": "连续阴天与长期发电不足降级运行"
+        },
+        {
+          "id": "DG-0564",
+          "title": "太阳能充电：排程和保护"
+        },
+        {
+          "id": "DG-0922",
+          "title": "太阳能实际产出与预期偏差检查"
+        },
+        {
+          "id": "DG-0109",
+          "title": "太阳能板应急充电"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0132",
+          "title": "资源暴露后的应对"
+        },
+        {
+          "id": "DG-0337",
+          "title": "充电优先级"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-cloudy-solar-downgrade-001",
+          "title": "阴天太阳能降级安排"
+        },
+        {
+          "slug": "energy-solar-charge-target-selection-001",
+          "title": "日照不足时充电目标选择"
+        },
+        {
+          "slug": "energy-solar-weather-pattern-log-001",
+          "title": "太阳能天气产出记录"
+        },
+        {
+          "slug": "energy-solar-daytime-charge-schedule-001",
+          "title": "太阳能白天补电排程"
+        }
+      ],
+      "profiles_triggered": [
+        "energy_solar_low_output_management"
+      ],
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "energy_management"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "allocation_horizon": false,
+        "degraded_mode": false,
+        "uncertainty": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "O05",
+      "case_type": "observation",
+      "query": "生产原料只够做一种东西，应该生产哪个？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "production"
+      ],
+      "expected_capabilities": [
+        "priority_allocation",
+        "reserve",
+        "allocation_horizon"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928",
+        "DG-0929"
+      ],
+      "required_evidence_topics": [
+        "material_priority",
+        "reservation_line",
+        "production_constraint"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-resource-specific-priority-001",
+        "production-workshop-material-reservation-line-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": false,
+      "stop_condition_required": false,
+      "dangerous_advice_forbidden": true,
+      "notes": "RA provides the allocation constraint; Production decides execution and process.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转",
+          "owners": [
+            "production"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0551",
+          "title": "饮用水只够一天：用途排序和配给",
+          "owners": [
+            "water"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给",
+          "owners": [
+            "food"
+          ],
+          "risk_level": "caution"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "production-workshop-raw-material-intake-card-001",
+          "title": "原料入工坊卡",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-wip-zone-layout-001",
+          "title": "半成品暂存区布局",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-wip-handover-tag-001",
+          "title": "半成品交接标签",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-finished-goods-hold-zone-001",
+          "title": "成品待检区",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-waste-transfer-card-001",
+          "title": "生产废料转 Waste 交接卡",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-batch-label-minimum-001",
+          "title": "生产批次标签最小字段",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-material-count-before-work-001",
+          "title": "开工前材料清点",
+          "linked_guide_id": "DG-0905"
+        },
+        {
+          "slug": "production-workshop-material-reservation-line-001",
+          "title": "生产材料保留线",
+          "linked_guide_id": "DG-0905"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0905",
+          "title": "原料 / 半成品 / 成品流转"
+        },
+        {
+          "id": "DG-0551",
+          "title": "饮用水只够一天：用途排序和配给"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给"
+        },
+        {
+          "id": "DG-0886",
+          "title": "小规模粮食生产优先级"
+        },
+        {
+          "id": "DG-0058",
+          "title": "洪水退去后：别急着回家吃东西"
+        },
+        {
+          "id": "DG-0230",
+          "title": "豆芽安全生产"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0884",
+          "title": "轮作和多季种植计划"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "production"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": false,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "priority_allocation": false,
+        "reserve": false,
+        "allocation_horizon": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "A. expected Guide absent from candidates",
+        "C. primary ownership competition",
+        "G. Guide-Wiki evidence not precise"
+      ]
+    },
+    {
+      "case_id": "O06",
+      "case_type": "observation",
+      "query": "卫生耗材只够半个月，需要减少使用吗？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "hygiene",
+        "medical",
+        "storage"
+      ],
+      "expected_capabilities": [
+        "baseline",
+        "safety_minimum",
+        "allocation_horizon",
+        "replenishment"
+      ],
+      "expected_guide_ids": [
+        "DG-0927",
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0927",
+        "DG-0928",
+        "DG-0929"
+      ],
+      "required_evidence_topics": [
+        "hygiene_minimum",
+        "fifteen_day_horizon",
+        "safe_reduction_boundary"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-safety-minimum-register-001",
+        "resource-allocation-consumption-horizon-baseline-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Observe RA against WASH/Medical safety requirements; unsafe hygiene reduction is forbidden.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0551",
+          "title": "饮用水只够一天：用途排序和配给",
+          "owners": [
+            "water"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给",
+          "owners": [
+            "food"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录",
+          "owners": [
+            "medical"
+          ],
+          "risk_level": "normal"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "water-drinking-priority-017",
+          "title": "饮用水优先级与配水",
+          "linked_guide_id": "DG-0551"
+        },
+        {
+          "slug": "water-drinking-water-002",
+          "title": "饮用水最低需求和缺水信号",
+          "linked_guide_id": "DG-0551"
+        },
+        {
+          "slug": "water-rationing-priority-001",
+          "title": "缺水时饮用水和清洁水的优先级",
+          "linked_guide_id": "DG-0551"
+        },
+        {
+          "slug": "food-no-cook-emergency-001",
+          "title": "免烹饪应急餐配置",
+          "linked_guide_id": "DG-0596"
+        },
+        {
+          "slug": "food-staple-food-002",
+          "title": "基础热量和主食配给",
+          "linked_guide_id": "DG-0596"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0551",
+          "title": "饮用水只够一天：用途排序和配给"
+        },
+        {
+          "id": "DG-0596",
+          "title": "食物只够三天：基础配给"
+        },
+        {
+          "id": "DG-0212",
+          "title": "外伤耗材消耗记录"
+        },
+        {
+          "id": "DG-0662",
+          "title": "呕吐物清理后手卫生"
+        },
+        {
+          "id": "DG-0600",
+          "title": "食物残渣处理：防虫防臭和卫生"
+        },
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0626",
+          "title": "桶厕满袋封存和更换"
+        },
+        {
+          "id": "DG-0629",
+          "title": "防鼠食物高处封存"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "frozen ownership and evidence did not enter the selected set.",
+      "top1_owners": [
+        "water"
+      ],
+      "expected_guide_hit": false,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": false,
+      "primary_domain_correct": false,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "baseline": false,
+        "safety_minimum": false,
+        "allocation_horizon": false,
+        "replenishment": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 0,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "B. expected Guide candidate outside selected top3",
+        "C. primary ownership competition",
+        "E. expected Wiki outside candidates"
+      ]
+    },
+    {
+      "case_id": "O07",
+      "case_type": "observation",
+      "query": "资源不足时，是不是应该让最有技能的人优先获得更多资源？",
+      "expected_primary_domain": "resource_allocation",
+      "accepted_secondary_domains": [
+        "team_operations",
+        "organization"
+      ],
+      "expected_capabilities": [
+        "priority_allocation",
+        "safety_minimum"
+      ],
+      "expected_guide_ids": [
+        "DG-0928"
+      ],
+      "accepted_guide_ids": [
+        "DG-0928"
+      ],
+      "required_evidence_topics": [
+        "purpose_not_person",
+        "no_human_value_ranking",
+        "team_boundary"
+      ],
+      "expected_wiki_slugs": [
+        "resource-allocation-resource-specific-priority-001"
+      ],
+      "forbidden_primary_domains": [],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Reject person-value ranking; Team Operations may assign qualified operators but not human worth.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0590",
+          "title": "放弃物资：保人优先判断",
+          "owners": [
+            "evacuation"
+          ],
+          "risk_level": "caution"
+        },
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级",
+          "owners": [
+            "resource_allocation"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "resource-allocation-horizon-replenishment-001",
+          "title": "分配时距与补给置信度",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "resource-allocation-substitution-degraded-mode-001",
+          "title": "替代路径与降级模式选择",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "resource-allocation-trigger-action-recheck-001",
+          "title": "分配触发线、动作与复查条件",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "energy-solar-multi-day-cloudy-degraded-mode-001",
+          "title": "连续阴天多日降级运行",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "energy-generation-component-failure-degraded-path-001",
+          "title": "发电部件故障后的隔离与降级路径",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "water-shortage-response-041",
+          "title": "缺水时收缩用水范围",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "production-workshop-daily-resource-budget-001",
+          "title": "当日生产资源预算",
+          "linked_guide_id": "DG-0929"
+        },
+        {
+          "slug": "production-workshop-material-reservation-line-001",
+          "title": "生产材料保留线",
+          "linked_guide_id": "DG-0929"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0929",
+          "title": "补给中断后的替代与降级分配"
+        },
+        {
+          "id": "DG-0590",
+          "title": "放弃物资：保人优先判断"
+        },
+        {
+          "id": "DG-0928",
+          "title": "关键资源最低保障线与储备分级"
+        },
+        {
+          "id": "DG-0927",
+          "title": "未来 7 天跨资源预算"
+        },
+        {
+          "id": "DG-0400",
+          "title": "基础技能清单"
+        },
+        {
+          "id": "DG-0666",
+          "title": "外出找资源停止线"
+        },
+        {
+          "id": "DG-0930",
+          "title": "长期短缺资源重分配与周期复查"
+        },
+        {
+          "id": "DG-0926",
+          "title": "有限资源快速盘点与可用量确认"
+        }
+      ],
+      "wiki_candidates": [],
+      "profiles_triggered": [],
+      "verdict": "fail",
+      "reason": "selected evidence contains dangerous or scarcity-overrides-safety advice.",
+      "top1_owners": [
+        "resource_allocation"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": false,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": false,
+      "wiki_full_hit": false,
+      "wiki_candidate_any": false,
+      "guide_wiki_precise": false,
+      "topic_evidence_present": false,
+      "capability_evidence": {
+        "priority_allocation": false,
+        "safety_minimum": false
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 1,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 1,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "E. expected Wiki outside candidates",
+        "I. dangerous suggestion"
+      ]
+    },
+    {
+      "case_id": "O08",
+      "case_type": "observation",
+      "query": "电池鼓包了，但这是最后一块可用电池。",
+      "expected_primary_domain": "energy_safety",
+      "accepted_secondary_domains": [
+        "fire"
+      ],
+      "expected_capabilities": [
+        "safety_minimum"
+      ],
+      "expected_guide_ids": [
+        "DG-0841",
+        "DG-0616"
+      ],
+      "accepted_guide_ids": [
+        "DG-0841",
+        "DG-0616"
+      ],
+      "required_evidence_topics": [
+        "swollen_battery_stop",
+        "isolation",
+        "scarcity_no_override"
+      ],
+      "expected_wiki_slugs": [
+        "energy-damaged-power-bank-quarantine-001",
+        "energy-battery-leak-corrosion-isolation-001"
+      ],
+      "forbidden_primary_domains": [
+        "resource_allocation",
+        "energy_management",
+        "energy_deepening"
+      ],
+      "safety_required": true,
+      "stop_condition_required": true,
+      "dangerous_advice_forbidden": true,
+      "notes": "Safety ownership is mandatory; the last battery remains unsafe and unavailable.",
+      "actual_top_guides": [
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离",
+          "owners": [
+            "energy_safety",
+            "safety"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查",
+          "owners": [
+            "energy_deepening"
+          ],
+          "risk_level": "high"
+        },
+        {
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断",
+          "owners": [
+            "energy_safety",
+            "safety"
+          ],
+          "risk_level": "high"
+        }
+      ],
+      "actual_selected_wiki": [
+        {
+          "slug": "energy-battery-parallel-series-boundary-001",
+          "title": "电池串并联禁用边界",
+          "linked_guide_id": "DG-0841"
+        },
+        {
+          "slug": "energy-battery-chemistry-mix-stop-001",
+          "title": "不同电池类型混用停用边界",
+          "linked_guide_id": "DG-0841"
+        },
+        {
+          "slug": "energy-battery-leak-corrosion-isolation-001",
+          "title": "电池漏液和腐蚀隔离",
+          "linked_guide_id": "DG-0841"
+        },
+        {
+          "slug": "energy-damaged-power-bank-quarantine-001",
+          "title": "受摔移动电源隔离观察",
+          "linked_guide_id": "DG-0841"
+        },
+        {
+          "slug": "energy-battery-storage-temperature-boundary-001",
+          "title": "电池存放温度边界",
+          "linked_guide_id": "DG-0841"
+        },
+        {
+          "slug": "energy-battery-capacity-retest-cycle-001",
+          "title": "电池实际容量周期复测",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-battery-health-grade-replacement-line-001",
+          "title": "电池健康分级与替换线",
+          "linked_guide_id": "DG-0921"
+        },
+        {
+          "slug": "energy-spare-battery-readiness-check-001",
+          "title": "备用电池就绪检查",
+          "linked_guide_id": "DG-0921"
+        }
+      ],
+      "guide_candidates": [
+        {
+          "id": "DG-0841",
+          "title": "电池异常隔离"
+        },
+        {
+          "id": "DG-0921",
+          "title": "电池实际容量下降复查"
+        },
+        {
+          "id": "DG-0546",
+          "title": "插线板和延长线进水后：禁止通电与报废判断"
+        },
+        {
+          "id": "DG-0168",
+          "title": "家禽饮水和粪便管理"
+        },
+        {
+          "id": "DG-0616",
+          "title": "充电宝鼓包发热停用隔离"
+        },
+        {
+          "id": "DG-0618",
+          "title": "电池混放后的编号轮换"
+        },
+        {
+          "id": "DG-0923",
+          "title": "单点故障、备用路径与关键负载切换"
+        },
+        {
+          "id": "DG-0562",
+          "title": "电池不足：照明分级使用"
+        }
+      ],
+      "wiki_candidates": [
+        {
+          "slug": "energy-damaged-power-bank-quarantine-001",
+          "title": "受摔移动电源隔离观察"
+        },
+        {
+          "slug": "energy-battery-storage-temperature-boundary-001",
+          "title": "电池存放温度边界"
+        },
+        {
+          "slug": "energy-battery-leak-corrosion-isolation-001",
+          "title": "电池漏液和腐蚀隔离"
+        },
+        {
+          "slug": "energy-unattended-charging-stop-boundary-001",
+          "title": "无人值守充电停止边界"
+        },
+        {
+          "slug": "energy-heat-001",
+          "title": "低温高温对电池容量影响"
+        }
+      ],
+      "profiles_triggered": [
+        "energy_battery_abnormal_isolation"
+      ],
+      "verdict": "fail",
+      "reason": "selected evidence contains dangerous or scarcity-overrides-safety advice.",
+      "top1_owners": [
+        "energy_safety",
+        "safety"
+      ],
+      "expected_guide_hit": true,
+      "expected_guide_candidate": true,
+      "expected_top1": true,
+      "accepted_top1": true,
+      "primary_domain_correct": true,
+      "forbidden_primary_hit": false,
+      "wiki_any_hit": true,
+      "wiki_full_hit": true,
+      "wiki_candidate_any": true,
+      "guide_wiki_precise": true,
+      "topic_evidence_present": true,
+      "capability_evidence": {
+        "safety_minimum": true
+      },
+      "safety_present": true,
+      "fallback_present": true,
+      "record_check_present": true,
+      "stop_condition_present": true,
+      "dangerous_suggestion_count": 1,
+      "scarcity_overrides_safety_count": 0,
+      "human_value_ranking_count": 0,
+      "kiwix_override": false,
+      "root_cause_classification": [
+        "I. dangerous suggestion"
+      ]
+    }
+  ]
+}

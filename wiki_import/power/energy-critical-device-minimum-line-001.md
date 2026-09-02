@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于为通信、照明、记录和照护设备设定最低电量线，低于线时自动收紧非关键用电。
 tags: 能源, 最低电量线, 关键设备, 通信, 照明, 低电量
-guide_links: DG-0845
+guide_links: DG-0845, DG-0928
 kiwix_topics: 关键设备最低电量线, off-grid energy management, emergency power planning
 last_reviewed: 2026-07-14
 status: published

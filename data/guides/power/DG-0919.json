@@ -1,0 +1,69 @@
+{
+  "id": "DG-0919",
+  "title": "小型离网能源容量盘点",
+  "category": "能源",
+  "priority": "P1",
+  "risk_level": "caution",
+  "scenario": "小团队需要判断未来数日到数周的发电、储能、转换与负载是否匹配，而不是只安排今天的用电顺序。",
+  "goal": "用统一保守口径形成 Generation、Storage、Conversion、Load 容量模型，暴露未知项、转换级数和单点。",
+  "domains": [
+    "power",
+    "records"
+  ],
+  "keywords": [
+    "离网能源容量",
+    "保守可用容量",
+    "发电储能",
+    "持续负载",
+    "峰值负载",
+    "转换损耗"
+  ],
+  "tools": [
+    "容量盘点表",
+    "设备编号",
+    "供电路径图",
+    "耗电基线",
+    "铅笔"
+  ],
+  "steps": [
+    "列出发电源、储能、转换器、保护件、支路与负载，并给每个对象固定编号。",
+    "分开记录标称值、同条件实测值、保守可用值和未知项；没有证据的数值不得补猜。",
+    "对负载写持续功率、峰值功率、运行窗口和任务重要性。",
+    "从电源到负载写出转换路径与转换级数，标出重复转换和唯一部件。",
+    "按最差可信发电与偏低可用容量估算可维持时间，并列下一次复测。",
+    "当天设备先后顺序交 DG-0844 / DG-0845，不在本盘点中重新分配。"
+  ],
+  "check": [
+    "每个数值都有对象、单位、来源、日期与测量条件。",
+    "标称、实测、保守值和未知项彼此分开。",
+    "关键负载的持续值、峰值与转换路径均可追踪。",
+    "容量结论能回到原始记录，不依赖固定 UI 百分比。"
+  ],
+  "common_mistakes": [
+    "把标称容量直接当作可用容量。",
+    "只算储能，不算转换损耗和负载峰值。",
+    "把今天谁先用电混入跨周容量模型。",
+    "为了补齐表格给未知部件编造数值。"
+  ],
+  "fallback": [
+    "没有仪表时使用铭牌下限、历史运行时长和 UNKNOWN 标记，并按更低容量安排。",
+    "发电数据不足时只承诺最低关键负载，缩短普通任务窗口。"
+  ],
+  "stop_or_escalate": [
+    "来源不明、接线不明、保护件缺失、未知极性或可能涉及市电/高压时，停止通电确认并隔离。",
+    "出现发热、异味、火花、潮湿、破损或裸露导体时，停止盘点中的测试并转 Energy Safety / Repair。",
+    "需要住宅配电、并网、高压串或逆变器工程时停止，进入专业边界。"
+  ],
+  "notes": "本 Guide 负责长期容量模型；当天分配归 Energy Management，原始历史归 Records，具体维修归 Repair。",
+  "related_wiki": [
+    "energy-offgrid-capacity-inventory-001",
+    "energy-load-continuous-peak-profile-001",
+    "energy-low-voltage-power-path-map-001",
+    "energy-usb-dc-conversion-loss-001",
+    "energy-battery-capacity-001",
+    "energy-battery-capacity-002",
+    "energy-wh-mah-local-estimate-001",
+    "energy-device-consumption-baseline-001",
+    "records-energy-capacity-trend-001"
+  ]
+}

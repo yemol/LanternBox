@@ -1,0 +1,115 @@
+{
+  "category": "风险决策",
+  "domains": [
+    "resource_allocation",
+    "risk_decision",
+    "records"
+  ],
+  "intents": [
+    "resource_allocation_v0_1",
+    "offline_allocation_action"
+  ],
+  "situations": [
+    "resource_scarcity",
+    "uncertain_replenishment",
+    "offline_team"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "resource_allocation",
+  "primary_intent": "resource_allocation_v0_1",
+  "id": "DG-0927",
+  "title": "未来 7 天跨资源预算",
+  "priority": "P1",
+  "risk_level": "caution",
+  "scenario": "食物、水、电、燃料和关键耗材的可维持时间不同，需要在补给不确定时安排未来七天，而不是只优化今天。",
+  "goal": "用可分配量、三档消耗、最低保障线、reserve 和补给置信度形成可手算的七天跨资源预算。",
+  "keywords": [
+    "未来七天预算",
+    "跨资源消耗",
+    "分配时距",
+    "补给置信度",
+    "可维持时长",
+    "worst case"
+  ],
+  "tools": [
+    "资源状态卡",
+    "消耗记录",
+    "最低保障线表",
+    "补给日历",
+    "七列表",
+    "铅笔"
+  ],
+  "steps": [
+    "确认每种资源的 USABLE、RESERVED、单位和记录有效时间，未确认数值保持 UNKNOWN。",
+    "按 NORMAL、SAFETY MINIMUM、HIGH LOAD 写日或周消耗，并根据人数、天气、照护和任务变化修正。",
+    "分开计算 today 与 3-7 days，列出最先触及 safety minimum 的限制资源。",
+    "将补给标为 CONFIRMED、EXPECTED、UNCERTAIN 或 NONE；到货验收前不加入 USABLE。",
+    "为 best、expected、worst 三种情景估算每日结余，普通预算采用 expected，安全检查采用 worst。",
+    "先扣 safety minimum 和 reserve，再安排普通用途；无法覆盖七天的任务标延期、缩小或降级。",
+    "写下一次盘点、补给失约 trigger 和重新预算条件。"
+  ],
+  "check": [
+    "每种资源有单位、消耗来源和七天结余。",
+    "预计补给没有被当成确定库存。",
+    "worst case 没有越过专业域 safety minimum。",
+    "最先触线资源、延期任务和复算时间明确。"
+  ],
+  "common_mistakes": [
+    "用今天的低消耗直接外推一个月。",
+    "把不同资源换成一个无单位总分。",
+    "只做 best case 并提前释放 reserve。",
+    "为了完成任务修改专业最低线。"
+  ],
+  "fallback": [
+    "记录不足时使用最近完整周期和最差可信消耗，标为 PROVISIONAL。",
+    "七天跨度超出可信范围时缩短为三天预算并每日重算。"
+  ],
+  "stop_or_escalate": [
+    "任一关键资源已低于专业域最低线、单位或实物无法核对时，暂停普通分配并先盘点。",
+    "Active Hazard、人员伤害或污染资源出现时转 Safety / Fire / Medical，预算后置。"
+  ],
+  "notes": "跨资源七天预算由 Resource Allocation 主导；当天纯能源调度归 Energy Management，长期能源容量归 Energy Deepening。",
+  "objects": [
+    "七天预算表",
+    "食物",
+    "饮水",
+    "能源",
+    "燃料",
+    "关键耗材"
+  ],
+  "signals": [
+    "维持天数不同",
+    "补给十天后",
+    "补给不确定",
+    "消耗高负载"
+  ],
+  "risks": [
+    "short_horizon_bias",
+    "forecast_overconfidence",
+    "minimum_breach"
+  ],
+  "negative_keywords": [
+    "今天怎么充电",
+    "一个月能源容量",
+    "怎么储存",
+    "治疗顺序"
+  ],
+  "top1_aliases": [
+    "未来七天资源预算",
+    "食物够十四天电只够五天",
+    "补给十天后怎么分配"
+  ],
+  "related_wiki": [
+    "resource-allocation-consumption-horizon-baseline-001",
+    "resource-allocation-horizon-replenishment-001",
+    "resource-allocation-uncertainty-scenarios-001",
+    "energy-device-consumption-baseline-001",
+    "energy-offgrid-capacity-inventory-001",
+    "energy-solar-seasonal-output-baseline-001",
+    "food-inventory-001",
+    "water-drinking-water-001",
+    "water-usage-log-023",
+    "agriculture-planting-inventory-link-001"
+  ]
+}

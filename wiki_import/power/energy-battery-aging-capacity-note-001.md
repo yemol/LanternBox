@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用于记录掉电快、充不满、低温衰减和使用时长缩短等老化迹象，避免按标称容量安排关键任务。
 tags: 能源, 电池老化, 容量记录, 轮换, 低电量
-guide_links: DG-0336, DG-0618
+guide_links: DG-0336, DG-0618, DG-0921
 kiwix_topics: 电池老化和可用容量记录, off-grid energy management, emergency power planning
 last_reviewed: 2026-07-14
 status: published

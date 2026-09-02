@@ -5,7 +5,7 @@ category: 能源
 priority: P0
 summary: 用于电池容量和功耗基础的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 能源, 电池容量和功耗基础, 电池容量和功, P0, 长期生存
-guide_links: DG-0562
+guide_links: DG-0562, DG-0919
 risk_level: caution
 status: published
 source: LanternBox internal curated knowledge

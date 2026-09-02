@@ -1,0 +1,112 @@
+{
+  "id": "DG-0909",
+  "title": "工坊安全记录与 near miss 复盘",
+  "category": "团队轮值与任务管理",
+  "priority": "P1",
+  "scenario": "生产中出现低照明、疲劳、粉尘、火花、工具险些伤人或旁人误入。",
+  "goal": "用离线可执行的安全记录把人员、实物、状态、停止线和下一步连接起来。",
+  "tools": [
+    "near miss 卡",
+    "隔离标识",
+    "PPE 清单",
+    "任务板",
+    "笔"
+  ],
+  "steps": [
+    "立即暂停相关任务。",
+    "隔离风险源。",
+    "记录 near miss。",
+    "确认 PPE 和人员状态。",
+    "决定复工、降级或停工。",
+    "把整改项写入任务板。",
+    "状态变化时更新任务板、标签或交接卡。",
+    "结束前由另一名成员对照现场实物复核。"
+  ],
+  "check": [
+    "险情记录完整。",
+    "风险源已处理。",
+    "复工条件明确。",
+    "重复风险有负责人。"
+  ],
+  "common_mistakes": [
+    "只口头说明安全记录，没有对应实物和编号。",
+    "状态变化后不更新标签或任务板。",
+    "为了赶进度越过明确停止线。"
+  ],
+  "fallback": [
+    "只做清理、标记、记录和低风险整理。",
+    "延后高风险工序。",
+    "双人复核后再复工。"
+  ],
+  "stop_or_escalate": [
+    "有人受伤、火花 / 烟味、漏电、刃具失控、疲劳明显或儿童进入时停止生产并转相邻安全 / 医疗域。"
+  ],
+  "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+  "category_original": "团队轮值与任务管理",
+  "domains": [
+    "repair",
+    "organization",
+    "tools"
+  ],
+  "intents": [
+    "production_workshop_v0_1",
+    "offline_workshop_action"
+  ],
+  "situations": [
+    "workshop_operation",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "near miss 卡",
+    "隔离标识",
+    "PPE 清单",
+    "任务板",
+    "笔"
+  ],
+  "signals": [
+    "工坊安全记录与 near miss 复盘",
+    "安全记录",
+    "工坊",
+    "生产流程"
+  ],
+  "risks": [
+    "粉尘火花",
+    "低照明",
+    "疲劳"
+  ],
+  "keywords": [
+    "工坊安全记录与 near miss 复盘",
+    "安全记录",
+    "工坊生产",
+    "离线流程",
+    "小团队",
+    "任务交接"
+  ],
+  "negative_keywords": [
+    "大型工厂排产",
+    "自动化生产线",
+    "专业质量认证",
+    "危险化学品生产",
+    "武器制造",
+    "高压电气作业",
+    "ERP"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "production_workshop_v0_1",
+  "top1_aliases": [
+    "工坊安全记录与 near miss 复盘"
+  ],
+  "related_wiki": [
+    "production-workshop-risk-source-scan-001",
+    "production-workshop-ppe-check-before-task-001",
+    "production-workshop-dust-spark-near-miss-log-001",
+    "production-workshop-low-light-stop-line-001",
+    "production-workshop-fatigue-stop-line-001",
+    "production-workshop-bystander-exclusion-log-001",
+    "production-workshop-incident-review-card-001"
+  ],
+  "risk_level": "high"
+}

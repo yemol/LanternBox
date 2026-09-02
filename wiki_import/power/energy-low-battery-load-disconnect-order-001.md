@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于在电量不足但未发生故障时，按顺序断开非关键负载，保留通信、照明和照护。
 tags: 能源, 低电量, 断开负载, 负载顺序, 关键设备
-guide_links: DG-0619
+guide_links: DG-0619, DG-0920
 kiwix_topics: 低电量断开负载顺序, off-grid energy management, emergency power planning
 last_reviewed: 2026-07-14
 status: published

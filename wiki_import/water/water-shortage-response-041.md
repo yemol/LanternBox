@@ -6,7 +6,7 @@ priority: P0
 risk_level: caution
 summary: 用于缺水时收缩用水范围的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 水, 储水, 取水, 长期断供, 小团队, 离线生存
-guide_links: DG-0823, DG-0824, DG-0825
+guide_links: DG-0823, DG-0824, DG-0825, DG-0929
 kiwix_topics: 缺水时收缩用水范围, Water safety, Emergency preparedness, Survival skills, Off-grid living
 last_reviewed: 2026-07-11
 status: published

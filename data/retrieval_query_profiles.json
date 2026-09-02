@@ -5131,6 +5131,919 @@
         "交接卡"
       ],
       "min_trigger_matches": 1
+    },
+    {
+      "name": "production_workshop_start_close",
+      "object_triggers": [
+        "工坊",
+        "工作区",
+        "关键工具",
+        "生产",
+        "加工区"
+      ],
+      "state_triggers": [
+        "准备开工",
+        "开工前",
+        "生产前",
+        "收工前",
+        "今天做不完",
+        "收工",
+        "封存",
+        "关键工具状态不清",
+        "清点",
+        "保留线",
+        "风险源",
+        "当日任务状态"
+      ],
+      "aliases": [
+        "工坊开工前检查",
+        "工坊收工与未完成品封存",
+        "工坊每日开工总检查",
+        "开工前工具清点",
+        "开工前材料清点",
+        "工坊风险源开工扫描",
+        "工坊收工断电与封存",
+        "当日任务状态记录"
+      ],
+      "target_categories": [
+        "团队轮值与任务管理"
+      ],
+      "candidate_anchor_terms": [
+        "工坊开工前检查",
+        "工坊收工与未完成品封存",
+        "当天开始生产前",
+        "当天工作结束",
+        "检查工作区通道",
+        "清点关键工具",
+        "清点材料和保留线",
+        "给未完成品贴状态标签",
+        "记录当日任务状态"
+      ],
+      "candidate_anchor_boost": 250,
+      "candidate_anchor_miss_penalty": 250,
+      "domain_boost": 120,
+      "domain_mismatch_penalty": 260,
+      "title_alias_boost": 620,
+      "negative_terms": [
+        "工坊收工与未完成品封存",
+        "当天工作结束或必须暂停",
+        "断开非必要电源"
+      ],
+      "negative_penalty": 800,
+      "negative_unless_context": [
+        "收工",
+        "做不完",
+        "封存",
+        "工作结束",
+        "暂停"
+      ]
+    },
+    {
+      "name": "production_material_wip_flow",
+      "object_triggers": [
+        "材料池",
+        "原料",
+        "半成品",
+        "成品",
+        "待检",
+        "边角料",
+        "废料",
+        "生产材料",
+        "批次标签"
+      ],
+      "state_triggers": [
+        "进工坊",
+        "登记",
+        "半成品应该放在哪里",
+        "避免和成品混",
+        "交给废料区",
+        "怎么交给",
+        "刚做完",
+        "还没检查",
+        "直接入库",
+        "状态标签",
+        "明天继续",
+        "标签最少",
+        "流转",
+        "暂存",
+        "保留线"
+      ],
+      "aliases": [
+        "原料 / 半成品 / 成品流转",
+        "原料入工坊卡",
+        "半成品暂存区布局",
+        "半成品交接标签",
+        "成品待检区",
+        "生产废料转 Waste 交接卡",
+        "生产批次标签最小字段"
+      ],
+      "target_categories": [
+        "团队轮值与任务管理"
+      ],
+      "candidate_anchor_terms": [
+        "原料 / 半成品 / 成品流转",
+        "为原料建入工坊卡",
+        "半成品、成品、废料和待检物混放",
+        "半成品不进入成品区",
+        "合格成品转 Storage",
+        "不合格品转隔离",
+        "每次移动都更新标签"
+      ],
+      "candidate_anchor_boost": 255,
+      "candidate_anchor_miss_penalty": 255,
+      "domain_boost": 120,
+      "domain_mismatch_penalty": 265,
+      "title_alias_boost": 640,
+      "mismatch_unless_context": [
+        "材料能不能用",
+        "是否可再利用",
+        "具体制作",
+        "长期保存",
+        "长期储藏"
+      ]
+    },
+    {
+      "name": "production_batch_repetition",
+      "object_triggers": [
+        "一批",
+        "批量",
+        "十个",
+        "首件",
+        "模板",
+        "零件",
+        "小支架",
+        "重复制作"
+      ],
+      "state_triggers": [
+        "连续做",
+        "首件确认",
+        "大小不太一样",
+        "尺寸一致",
+        "批次一致",
+        "每件检查",
+        "整批",
+        "同样问题",
+        "重复制作",
+        "系统性问题"
+      ],
+      "aliases": [
+        "小批量重复制作流程",
+        "模板与尺寸标准卡",
+        "首件确认",
+        "重复制作步骤卡",
+        "每件检查规则",
+        "批次一致性复查",
+        "失败批次隔离"
+      ],
+      "target_categories": [
+        "团队轮值与任务管理"
+      ],
+      "candidate_anchor_terms": [
+        "小批量重复制作流程",
+        "需要连续制作多个相似零件",
+        "先做首件",
+        "确认模板和关键尺寸",
+        "每件做关键检查",
+        "发现系统性问题时暂停整批",
+        "记录批次一致性",
+        "失败批次已隔离"
+      ],
+      "candidate_anchor_boost": 255,
+      "candidate_anchor_miss_penalty": 255,
+      "domain_boost": 120,
+      "domain_mismatch_penalty": 265,
+      "title_alias_boost": 640,
+      "mismatch_unless_context": [
+        "具体怎么切",
+        "具体怎么连接",
+        "单件怎么做"
+      ]
+    },
+    {
+      "name": "production_quality_release",
+      "object_triggers": [
+        "成品",
+        "做好的东西",
+        "一批东西",
+        "半成品",
+        "螺丝",
+        "扎带",
+        "承重件",
+        "不合格品"
+      ],
+      "state_triggers": [
+        "还没检查",
+        "质量复查",
+        "放行",
+        "毛刺",
+        "突出钉子",
+        "松动",
+        "入库前",
+        "返工",
+        "降级",
+        "报废",
+        "不合格",
+        "功能检查",
+        "尺寸复查",
+        "稳定性复查",
+        "长期放在哪里",
+        "怎么保存"
+      ],
+      "aliases": [
+        "成品质量复查",
+        "不合格品 / 返工 / 报废判断",
+        "成品放行前功能检查",
+        "锐边毛刺检查",
+        "松动连接复查",
+        "返工判断线",
+        "报废判断线",
+        "储藏区基础分区与标签",
+        "工具和材料防潮防锈储藏"
+      ],
+      "target_categories": [
+        "团队轮值与任务管理"
+      ],
+      "candidate_anchor_terms": [
+        "成品质量复查",
+        "不合格品 / 返工 / 报废判断",
+        "成品准备使用或入库前",
+        "检查锐边、毛刺、松动和污染",
+        "做功能检查",
+        "记录放行、返工、降级或报废",
+        "先隔离",
+        "禁止混回合格区",
+        "储藏区基础分区与标签",
+        "工具和材料防潮防锈储藏",
+        "需要长期保存"
+      ],
+      "candidate_anchor_boost": 1000,
+      "candidate_anchor_miss_penalty": 500,
+      "domain_boost": 125,
+      "domain_mismatch_penalty": 500,
+      "title_alias_boost": 1500,
+      "mismatch_unless_context": [
+        "长期",
+        "长期放在哪里",
+        "怎么保存"
+      ],
+      "negative_terms": [
+        "成品质量复查",
+        "不合格品 / 返工 / 报废判断",
+        "成品准备使用或入库前",
+        "记录放行、返工、降级或报废",
+        "禁止混回合格区"
+      ],
+      "negative_penalty": 6000,
+      "negative_unless_context": [
+        "还没检查",
+        "质量复查",
+        "放行",
+        "毛刺",
+        "突出钉子",
+        "松动",
+        "入库前",
+        "返工",
+        "降级",
+        "报废",
+        "不合格",
+        "功能检查",
+        "尺寸复查",
+        "稳定性复查"
+      ]
+    },
+    {
+      "name": "production_workshop_safety_incident",
+      "object_triggers": [
+        "工坊",
+        "加工区",
+        "加工",
+        "切割",
+        "钻孔",
+        "打磨",
+        "粉尘",
+        "火花",
+        "碎屑"
+      ],
+      "state_triggers": [
+        "灯光很暗",
+        "低照明",
+        "手抖",
+        "疲劳",
+        "差点伤到人",
+        "复工前",
+        "near miss",
+        "险些伤人",
+        "儿童进入",
+        "旁人误入",
+        "防护用品",
+        "PPE"
+      ],
+      "aliases": [
+        "工坊安全记录与 near miss 复盘",
+        "粉尘火花 near miss 记录",
+        "低照明生产停止线",
+        "疲劳生产停止线",
+        "生产防护用品检查",
+        "非操作人员隔离记录",
+        "工坊伤害与 near miss 复盘卡"
+      ],
+      "target_categories": [
+        "团队轮值与任务管理"
+      ],
+      "candidate_anchor_terms": [
+        "工坊安全记录与 near miss 复盘",
+        "生产中出现低照明、疲劳、粉尘、火花",
+        "立即暂停相关任务",
+        "记录 near miss",
+        "确认 PPE 和人员状态",
+        "决定复工、降级或停工",
+        "整改项写入任务板"
+      ],
+      "candidate_anchor_boost": 270,
+      "candidate_anchor_miss_penalty": 270,
+      "domain_boost": 130,
+      "domain_mismatch_penalty": 280,
+      "title_alias_boost": 680,
+      "mismatch_unless_context": [
+        "已经受伤",
+        "划伤流血",
+        "骨折",
+        "烧伤",
+        "火已经烧起来",
+        "一氧化碳",
+        "漏电"
+      ]
+    },
+    {
+      "name": "production_shift_handover",
+      "object_triggers": [
+        "工坊任务",
+        "未完成的工坊任务",
+        "工坊",
+        "加工任务",
+        "半成品",
+        "工具状态"
+      ],
+      "state_triggers": [
+        "下一班",
+        "接手",
+        "交接",
+        "下一步",
+        "失败原因",
+        "最少写什么",
+        "复述确认",
+        "无技能授权"
+      ],
+      "aliases": [
+        "工坊任务交接",
+        "工坊班次交接卡",
+        "工具状态交接",
+        "下一步动作交接",
+        "半成品交接标签"
+      ],
+      "target_categories": [
+        "团队轮值与任务管理"
+      ],
+      "candidate_anchor_terms": [
+        "工坊任务交接",
+        "下一班、另一个成员或第二天需要接手",
+        "列出未完成任务",
+        "说明半成品位置和状态",
+        "交接工具状态",
+        "写清下一步动作",
+        "交接失败原因和禁止操作",
+        "双方复述确认"
+      ],
+      "candidate_anchor_boost": 265,
+      "candidate_anchor_miss_penalty": 265,
+      "domain_boost": 125,
+      "domain_mismatch_penalty": 275,
+      "title_alias_boost": 660,
+      "mismatch_unless_context": [
+        "储藏区交接",
+        "长期知识",
+        "人员制度"
+      ],
+      "negative_terms": [
+        "储藏记录、先入先出与交接",
+        "储藏区交接卡",
+        "储藏库存卡最小字段",
+        "先入先出货架规则"
+      ],
+      "negative_penalty": 900,
+      "negative_unless_context": [
+        "储藏区",
+        "库存",
+        "储藏记录",
+        "先入先出"
+      ]
+    },
+    {
+      "name": "records_capture_trust_summary",
+      "trigger_any": [
+        "最少应该写",
+        "最少信息",
+        "不是我亲眼",
+        "别人告诉",
+        "设备自动记录",
+        "确认的事实",
+        "两份记录",
+        "说法不一样",
+        "删掉哪一份",
+        "VERIFIED",
+        "跨领域",
+        "日终摘要",
+        "跨域日终",
+        "原始记录最小字段"
+      ],
+      "min_trigger_matches": 1,
+      "aliases": [
+        "原始记录可信度检查",
+        "每日跨域运行摘要",
+        "原始现场记录最小字段",
+        "亲历、转述与设备来源边界",
+        "记录复核与验证检查表",
+        "冲突记录保留与复核",
+        "记录生命周期状态模型",
+        "跨域日终摘要"
+      ],
+      "target_domains": [
+        "records"
+      ],
+      "candidate_anchor_terms": [
+        "原始记录可信度检查",
+        "每日跨域运行摘要"
+      ],
+      "candidate_anchor_boost": 520,
+      "candidate_anchor_miss_penalty": 340,
+      "domain_boost": 120,
+      "domain_mismatch_penalty": 320,
+      "title_alias_boost": 900,
+      "negative_terms": [
+        "通信信息记录与交接",
+        "储藏记录、先入先出与交接",
+        "工坊任务交接",
+        "每日能源预算",
+        "医疗观察"
+      ],
+      "negative_penalty": 260,
+      "negative_unless_context": [
+        "不是我亲眼",
+        "设备自动记录",
+        "VERIFIED",
+        "两份记录",
+        "日终摘要",
+        "跨领域",
+        "跨域日终"
+      ]
+    },
+    {
+      "name": "records_post_event_review",
+      "object_triggers": [
+        "任务失败",
+        "失败复盘",
+        "near miss",
+        "险情",
+        "事故",
+        "整改"
+      ],
+      "state_triggers": [
+        "现场已经安全",
+        "已经安全",
+        "已经处理完",
+        "已恢复安全",
+        "已经恢复安全",
+        "恢复安全后",
+        "事后",
+        "之后应该",
+        "原因和整改",
+        "关闭验证"
+      ],
+      "aliases": [
+        "失败 / 事故记录复盘",
+        "任务失败复盘",
+        "事故与 near miss 上层复盘",
+        "失败原因分类与边界",
+        "整改项验证与关闭"
+      ],
+      "target_domains": [
+        "records"
+      ],
+      "candidate_anchor_terms": [
+        "失败 / 事故记录复盘"
+      ],
+      "candidate_anchor_boost": 540,
+      "candidate_anchor_miss_penalty": 350,
+      "domain_boost": 125,
+      "domain_mismatch_penalty": 330,
+      "title_alias_boost": 920,
+      "negative_terms": [
+        "正在大量流血",
+        "正在起火",
+        "仍有流血",
+        "仍未安全",
+        "工坊安全记录与 near miss 复盘"
+      ],
+      "negative_penalty": 360,
+      "negative_unless_context": [
+        "已经安全",
+        "现场已经安全",
+        "已经处理完",
+        "恢复安全",
+        "事后"
+      ]
+    },
+    {
+      "name": "records_long_term_trend",
+      "object_triggers": [
+        "三个月",
+        "几个月",
+        "三季",
+        "多季",
+        "多次",
+        "坏了四次",
+        "坏三次",
+        "历史记录",
+        "过去",
+        "跨批次",
+        "跨季",
+        "长期"
+      ],
+      "state_triggers": [
+        "比较",
+        "找规律",
+        "趋势",
+        "重复故障",
+        "历史记录",
+        "为什么总失败",
+        "变化趋势",
+        "长期变化",
+        "都失败",
+        "总失败"
+      ],
+      "aliases": [
+        "重复问题与经验提取",
+        "重复问题与趋势复查",
+        "维修履历与重复故障趋势",
+        "农业跨季对比",
+        "能源容量与产出趋势",
+        "经验适用条件与上下文字段"
+      ],
+      "target_domains": [
+        "records"
+      ],
+      "candidate_anchor_terms": [
+        "重复问题与经验提取"
+      ],
+      "candidate_anchor_boost": 600,
+      "candidate_anchor_miss_penalty": 390,
+      "domain_boost": 135,
+      "domain_mismatch_penalty": 360,
+      "title_alias_boost": 980,
+      "negative_terms": [
+        "怎么检查和修",
+        "具体怎么切",
+        "具体怎么连接",
+        "哪些设备先停",
+        "电池怎么分配",
+        "当前怎么种",
+        "今天怎么种",
+        "现在怎么处理"
+      ],
+      "negative_penalty": 440,
+      "negative_unless_context": [
+        "三个月",
+        "几个月",
+        "三季",
+        "多季",
+        "多次",
+        "历史记录",
+        "趋势",
+        "跨批次",
+        "跨季"
+      ]
+    },
+    {
+      "name": "records_archive_index",
+      "object_triggers": [
+        "ARCHIVED",
+        "历史版本",
+        "长期索引",
+        "多介质备份",
+        "离线归档",
+        "归档的",
+        "SD",
+        "纸本",
+        "Core"
+      ],
+      "state_triggers": [
+        "当前操作依据",
+        "作为当前",
+        "历史查询",
+        "长期索引",
+        "怎么做长期",
+        "备份",
+        "多介质",
+        "离线归档",
+        "归档"
+      ],
+      "aliases": [
+        "长期记录归档与索引",
+        "SOP / Knowledge Card 版本更新与废止",
+        "记录保留、访问与到期处理",
+        "CURRENT 版本选择规则",
+        "SUPERSEDED 旧版隔离",
+        "离线目录索引",
+        "长期归档检查"
+      ],
+      "target_domains": [
+        "records"
+      ],
+      "candidate_anchor_terms": [
+        "长期记录归档与索引",
+        "SOP / Knowledge Card 版本更新与废止"
+      ],
+      "candidate_anchor_boost": 560,
+      "candidate_anchor_miss_penalty": 360,
+      "domain_boost": 125,
+      "domain_mismatch_penalty": 335,
+      "title_alias_boost": 940,
+      "negative_terms": [
+        "基础技能清单",
+        "照护任务双人备份",
+        "通信设备低功耗运行"
+      ],
+      "negative_penalty": 330,
+      "negative_unless_context": [
+        "ARCHIVED",
+        "历史版本",
+        "长期索引",
+        "多介质备份",
+        "离线归档"
+      ]
+    },
+    {
+      "name": "energy_long_term_capacity_planning",
+      "object_triggers": [
+        "一个月",
+        "未来一月",
+        "未来一个月",
+        "跨月",
+        "长期容量",
+        "持续负载",
+        "峰值负载",
+        "平时功耗",
+        "启动时"
+      ],
+      "state_triggers": [
+        "容量盘点",
+        "盘点哪些数据",
+        "能不能撑",
+        "可以撑多久",
+        "保守可用",
+        "持续功耗",
+        "启动功率",
+        "记录进能源预算"
+      ],
+      "aliases": [
+        "小型离网能源容量盘点",
+        "持续负载与峰值负载档案",
+        "离网能源长期容量模型",
+        "Generation Storage Conversion Load 保守容量"
+      ],
+      "target_domains": [
+        "power"
+      ],
+      "target_slug_domains": [
+        "energy"
+      ],
+      "target_categories": [
+        "能源"
+      ],
+      "candidate_anchor_terms": [
+        "小型离网能源容量盘点",
+        "持续负载",
+        "峰值负载",
+        "保守值",
+        "generation",
+        "storage",
+        "conversion"
+      ],
+      "candidate_anchor_boost": 620,
+      "candidate_anchor_miss_penalty": 410,
+      "domain_boost": 135,
+      "domain_mismatch_penalty": 360,
+      "title_alias_boost": 980,
+      "negative_terms": [
+        "每日能源预算",
+        "充电队列",
+        "电池异常隔离",
+        "低压设备异常停用",
+        "长期记录归档与索引",
+        "维修"
+      ],
+      "negative_penalty": 460,
+      "negative_unless_context": [
+        "一个月",
+        "未来一月",
+        "未来一个月",
+        "跨月",
+        "长期容量",
+        "持续负载",
+        "峰值负载"
+      ]
+    },
+    {
+      "name": "records_skill_evidence",
+      "object_triggers": [
+        "INDEPENDENT",
+        "SUPERVISED",
+        "技能过期",
+        "复训",
+        "独立资格",
+        "授权 evidence",
+        "技能授权"
+      ],
+      "state_triggers": [
+        "很久没做",
+        "很久没练",
+        "过期",
+        "复训",
+        "重新确认",
+        "继续按 INDEPENDENT",
+        "独立操作",
+        "独立资格"
+      ],
+      "aliases": [
+        "新成员知识与技能交接",
+        "技能过期、降级与复训",
+        "技能授权记录最小字段",
+        "OBSERVE 到 INDEPENDENT 等级边界",
+        "监督练习证据记录"
+      ],
+      "target_domains": [
+        "records"
+      ],
+      "candidate_anchor_terms": [
+        "新成员知识与技能交接"
+      ],
+      "candidate_anchor_boost": 600,
+      "candidate_anchor_miss_penalty": 390,
+      "domain_boost": 135,
+      "domain_mismatch_penalty": 360,
+      "title_alias_boost": 980,
+      "negative_terms": [
+        "疲劳成员停止高风险任务",
+        "工坊任务交接",
+        "工具状态交接",
+        "基础技能清单"
+      ],
+      "negative_penalty": 420,
+      "negative_unless_context": [
+        "INDEPENDENT",
+        "SUPERVISED",
+        "技能过期",
+        "复训",
+        "独立资格",
+        "授权 evidence"
+      ]
+    },
+    {
+      "name": "resource_allocation_consumption_horizon",
+      "object_triggers": [
+        "过去每天",
+        "历史消耗",
+        "当前消耗",
+        "近期消耗",
+        "每天耗",
+        "消耗变化",
+        "库存还能撑",
+        "可维持时长"
+      ],
+      "state_triggers": [
+        "增加到",
+        "减少到",
+        "变成",
+        "上升到",
+        "下降到",
+        "还能撑多久",
+        "能撑多久",
+        "能维持多久",
+        "剩余支持时间"
+      ],
+      "aliases": [
+        "未来 7 天跨资源预算",
+        "长期短缺资源重分配与周期复查",
+        "跨资源消耗",
+        "可维持时长",
+        "消耗偏差"
+      ],
+      "target_domains": [
+        "resource_allocation"
+      ],
+      "candidate_anchor_terms": [
+        "可维持时长",
+        "跨资源消耗",
+        "实际消耗",
+        "消耗偏差"
+      ],
+      "candidate_anchor_boost": 620,
+      "candidate_anchor_miss_penalty": 410,
+      "domain_boost": 140,
+      "domain_mismatch_penalty": 380,
+      "title_alias_boost": 980
+    },
+    {
+      "name": "resource_allocation_emergency_reserve_release",
+      "object_triggers": [
+        "备用燃料",
+        "备用资源",
+        "应急储备",
+        "紧急储备",
+        "战略储备",
+        "储备燃料",
+        "备用水",
+        "备用电池"
+      ],
+      "state_triggers": [
+        "什么时候动用",
+        "什么时候才应该动用",
+        "何时动用",
+        "什么时候使用",
+        "何时使用",
+        "释放条件",
+        "能不能动用",
+        "最低保留线",
+        "保留多少"
+      ],
+      "aliases": [
+        "关键资源最低保障线与储备分级",
+        "长期短缺资源重分配与周期复查",
+        "储备释放",
+        "最低保障线",
+        "应急和战略储备怎么分"
+      ],
+      "target_domains": [
+        "resource_allocation"
+      ],
+      "candidate_anchor_terms": [
+        "最低保障线",
+        "储备分级",
+        "储备释放",
+        "emergency reserve",
+        "strategic reserve",
+        "周期复查"
+      ],
+      "candidate_anchor_boost": 620,
+      "candidate_anchor_miss_penalty": 410,
+      "domain_boost": 140,
+      "domain_mismatch_penalty": 380,
+      "title_alias_boost": 980
+    },
+    {
+      "name": "resource_allocation_high_energy_task_decision",
+      "object_triggers": [
+        "高耗能任务",
+        "高耗能生产",
+        "耗能任务",
+        "生产任务",
+        "高负载任务",
+        "资源密集任务"
+      ],
+      "state_triggers": [
+        "是否启动",
+        "还应该启动",
+        "要不要启动",
+        "应该延期",
+        "任务延期",
+        "延后",
+        "推迟",
+        "重新排序",
+        "先做哪个",
+        "暂缓"
+      ],
+      "aliases": [
+        "补给中断后的替代与降级分配",
+        "未来 7 天跨资源预算",
+        "资源不足替代还是延期",
+        "任务延期",
+        "降级分配"
+      ],
+      "target_domains": [
+        "resource_allocation"
+      ],
+      "candidate_anchor_terms": [
+        "任务延期",
+        "降级分配",
+        "资源不足替代还是延期",
+        "未来 7 天跨资源预算",
+        "消耗高负载"
+      ],
+      "candidate_anchor_boost": 620,
+      "candidate_anchor_miss_penalty": 410,
+      "domain_boost": 140,
+      "domain_mismatch_penalty": 380,
+      "title_alias_boost": 980
     }
   ]
 }

@@ -6,7 +6,7 @@ priority: P1
 risk_level: caution
 summary: 用于把白天日照分成早中晚补电窗口，按关键设备和移动电源缓冲安排太阳能充电。
 tags: 能源, 太阳能, 白天补电, 排程, 日照, 低电量
-guide_links: DG-0617
+guide_links: DG-0617, DG-0920, DG-0922
 kiwix_topics: 太阳能白天补电排程, off-grid energy management, emergency power planning
 last_reviewed: 2026-07-14
 status: published

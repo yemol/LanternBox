@@ -6,7 +6,7 @@ priority: P2
 risk_level: normal
 summary: 用于医疗记录保存的现场判断、操作安排和复查记录，帮助团队在资源有限时确认边界并降低误用风险。
 tags: 医疗记录保存, 信息保存与长期重建, P2, 长期重建, 离线知识, 记录, 判断
-guide_links: DG-0145
+guide_links: DG-0145, DG-0529
 kiwix_topics: 医疗记录保存, Offline backup, Records management, Knowledge management
 last_reviewed: 2026-07-03
 status: published

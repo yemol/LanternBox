@@ -4,7 +4,18 @@ from typing import Dict, List, Optional, Tuple
 
 from pydantic import Field
 
+from .contract_canary import (
+    apply_contract_canary_candidates,
+    apply_contract_canary_selection,
+)
+from .contract_compare import record_compare_evaluation
+from .contract_runtime import (
+    get_contract_canary_settings,
+    get_contract_mode,
+    record_contract_decision,
+)
 from .fetchers import fetch_candidates_from_plan, fetch_related_wiki_candidates, normalize_core_terms
+from .ownership_intents import apply_ownership_intent_candidates
 from .policy import policy_int, policy_map, policy_set, policy_str_list, policy_string
 from .planner import build_retrieval_plan
 from .schemas import EvidenceCandidate, EvidenceSelection, RetrievalDebug, RetrievalPlan, RetrievalV2Result, SelectedEvidence, SourcePlanItem
@@ -792,6 +803,11 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
     except Exception as exc:
         return _empty_result(user_message, error=str(exc), stage="plan_normalization")
 
+    contract_mode = get_contract_mode()
+    canary_enabled, _ = get_contract_canary_settings()
+    if contract_mode == "shadow" or (contract_mode == "production" and not canary_enabled):
+        record_contract_decision(user_message, mode=contract_mode)
+
     try:
         candidates = fetch_candidates_from_plan(
             plan.source_plan,
@@ -823,6 +839,24 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
             debug=_debug_payload(plan=plan, ok=False, error=str(exc), stage="fetch"),
             kiwix_explanations=[],
         )
+
+    canary_lane = apply_contract_canary_candidates(
+        user_message,
+        plan,
+        candidates,
+        mode=contract_mode,
+    )
+    candidates = canary_lane.candidates
+    ownership_lane = apply_ownership_intent_candidates(
+        user_message,
+        candidates,
+        contract_status=canary_lane.context.status,
+        contract_safety_boundary=canary_lane.context.safety_boundary_present,
+    )
+    candidates = ownership_lane.candidates
+
+    if contract_mode == "compare":
+        record_compare_evaluation(user_message, candidates, mode="compare")
 
     try:
         selection = select_evidence_with_ai(
@@ -856,6 +890,11 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
         candidates=candidates,
         selected_evidence=selected_evidence,
     )
+    selected_evidence, selection = apply_contract_canary_selection(
+        canary_lane,
+        selected_evidence,
+        selection,
+    )
     try:
         candidates, selected_evidence, selection = _expand_selected_guide_wikis(
             candidates=candidates,
@@ -875,6 +914,10 @@ def run_retrieval_v2(user_message: str) -> RetrievalV2Result:
         selected_evidence=selected_evidence,
         selection=selection,
     )
+    if canary_lane.context.status != "NOT_APPLICABLE":
+        retrieval_decision["contract_canary"] = canary_lane.context.public_payload()
+    if ownership_lane.context.status != "NOT_APPLICABLE":
+        retrieval_decision["ownership_intent"] = ownership_lane.context.model_dump()
 
     return _result_payload(
         plan=plan,

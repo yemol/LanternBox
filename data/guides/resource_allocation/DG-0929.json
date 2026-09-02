@@ -1,0 +1,113 @@
+{
+  "category": "风险决策",
+  "domains": [
+    "resource_allocation",
+    "risk_decision",
+    "records"
+  ],
+  "intents": [
+    "resource_allocation_v0_1",
+    "offline_allocation_action"
+  ],
+  "situations": [
+    "resource_scarcity",
+    "uncertain_replenishment",
+    "offline_team"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "resource_allocation",
+  "primary_intent": "resource_allocation_v0_1",
+  "id": "DG-0929",
+  "title": "补给中断后的替代与降级分配",
+  "priority": "P0",
+  "risk_level": "high",
+  "scenario": "补给失约、关键资源不可用或消耗持续超出计划，需要在资源耗尽前选择替代、延期、缩小任务或降低服务等级。",
+  "goal": "保护最低服务和 reserve，只从专业域验证过的替代路径中选择，并给 degraded mode 设置进入与退出条件。",
+  "keywords": [
+    "补给中断",
+    "替代路径",
+    "降级分配",
+    "任务延期",
+    "trigger action recheck",
+    "最低服务"
+  ],
+  "tools": [
+    "补给日历",
+    "模式卡",
+    "最低保障线",
+    "已验证替代清单",
+    "任务需求表",
+    "纸笔"
+  ],
+  "steps": [
+    "确认补给失约、资源不可用或消耗偏差的事实，重新计算当前 USABLE 与 worst-case horizon。",
+    "列出必须保留的最低服务、可降低服务和可暂停任务，先冻结会触碰 safety minimum 的普通申请。",
+    "依次评估减少频率、缩短窗口、低耗方式、延期和取消；只有专业域验证过的方案可标 substitution。",
+    "选择 degraded level，写允许用途、暂停用途、每日上限、reserve 状态和生效时间。",
+    "设置进入 trigger、下一升级动作和 recheck；普通恢复必须满足补给验收或多个可比周期恢复。",
+    "每次只恢复一个普通用途，观察实际消耗后再继续。",
+    "把维修、制造、生产或医疗的具体执行交回对应 owner。"
+  ],
+  "check": [
+    "降级在资源耗尽前生效。",
+    "替代路径有专业域验证证据。",
+    "最低服务、暂停任务、上限和恢复条件完整。",
+    "supplement 失约后没有继续使用旧预算。"
+  ],
+  "common_mistakes": [
+    "把危险设备当低性能设备继续用。",
+    "临时拼接未知材料或电源作为替代。",
+    "一次补给或一次晴天后恢复全部用途。",
+    "只减少舒适用量却不重算关键资源。"
+  ],
+  "fallback": [
+    "没有已验证替代时，延期、缩小或取消任务，保留纸本、人工或无电低风险路径。",
+    "数据不足时进入更保守 degraded level 并缩短复查周期。"
+  ],
+  "stop_or_escalate": [
+    "鼓包电池、冒烟设备、火花、异常热、未知电源、污染材料或不明医疗物资必须停用隔离，不得作为替代。",
+    "需要具体 Repair、Manufacturing、临床处置或越过安全保护时停止分配并转对应专业域。"
+  ],
+  "notes": "只选择资源路径和服务等级，不提供维修、制造或生产技术步骤。",
+  "objects": [
+    "补给日历",
+    "降级模式卡",
+    "替代资源",
+    "延期任务",
+    "最低服务"
+  ],
+  "signals": [
+    "补给失约",
+    "资源不可用",
+    "消耗超标",
+    "关键零件只剩一个"
+  ],
+  "risks": [
+    "unsafe_substitution",
+    "resource_exhaustion",
+    "premature_recovery"
+  ],
+  "negative_keywords": [
+    "怎么拆电池",
+    "怎么制作零件",
+    "怎么修设备",
+    "患者怎么治疗"
+  ],
+  "top1_aliases": [
+    "补给中断后怎么降级",
+    "资源不足替代还是延期",
+    "唯一零件如何保留"
+  ],
+  "related_wiki": [
+    "resource-allocation-horizon-replenishment-001",
+    "resource-allocation-substitution-degraded-mode-001",
+    "resource-allocation-trigger-action-recheck-001",
+    "energy-solar-multi-day-cloudy-degraded-mode-001",
+    "energy-generation-component-failure-degraded-path-001",
+    "water-shortage-response-041",
+    "production-workshop-daily-resource-budget-001",
+    "production-workshop-material-reservation-line-001",
+    "agriculture-water-fertility-budget-card-001"
+  ]
+}

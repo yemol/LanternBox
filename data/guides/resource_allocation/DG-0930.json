@@ -1,0 +1,114 @@
+{
+  "category": "风险决策",
+  "domains": [
+    "resource_allocation",
+    "risk_decision",
+    "records"
+  ],
+  "intents": [
+    "resource_allocation_v0_1",
+    "offline_allocation_action"
+  ],
+  "situations": [
+    "resource_scarcity",
+    "uncertain_replenishment",
+    "offline_team"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "resource_allocation",
+  "primary_intent": "resource_allocation_v0_1",
+  "id": "DG-0930",
+  "title": "长期短缺资源重分配与周期复查",
+  "priority": "P1",
+  "risk_level": "caution",
+  "scenario": "短缺持续数周，补给、消耗或设备效率不断变化，原分配计划偏差扩大，需要用记录调整而不是无限沿用。",
+  "goal": "用 Plan、Observe、Record、Compare、Adjust 循环保留版本、解释偏差并做小步可回退的长期重分配。",
+  "keywords": [
+    "长期短缺",
+    "资源重分配",
+    "周期复查",
+    "消耗偏差",
+    "best expected worst",
+    "计划版本"
+  ],
+  "tools": [
+    "当前分配计划",
+    "资源状态卡",
+    "消耗和补给记录",
+    "三情景手算卡",
+    "变更记录",
+    "纸笔"
+  ],
+  "steps": [
+    "保存当前计划版本，写用途、数量、horizon、safety minimum、reserve、补给假设和生效时间。",
+    "在固定时点观察实物余量、实际消耗、补给结果和专业域状态，不用回忆补数字。",
+    "比较计划与实际，区分盘点误差、需求变化、浪费、补给失约和设备效率下降。",
+    "更新 best、expected、worst 三种情景，检查最先触线资源和 trigger 是否提前。",
+    "只对有 evidence 的用途量、任务窗口、reserve 或 degraded level 做小步调整。",
+    "保留旧版本和拒绝的方案，写变更原因、下一 trigger、recheck 和回退点。",
+    "由第二人确认新计划没有越过专业最低线，也没有吞掉 Records、Production、Medical 或 Team Operations 职责。"
+  ],
+  "check": [
+    "计划、实际、偏差和新决定可逐项追踪。",
+    "原版本和假设没有被覆盖。",
+    "调整有 evidence 且可回退。",
+    "每轮都有下一触发线、复查时间和负责角色。"
+  ],
+  "common_mistakes": [
+    "一次异常就改成永久趋势。",
+    "只改表格数字不查实物。",
+    "长期未动用就取消战略 reserve。",
+    "把记录工作本身当作分配决定。"
+  ],
+  "fallback": [
+    "历史不足时保留当前计划，只做较小降级并增加观察频率。",
+    "无法确认偏差原因时分别保留多个假设，不用单一解释强行调整。"
+  ],
+  "stop_or_escalate": [
+    "新计划会跌破 safety minimum、危险状态未关闭、实物与记录无法核对时停止普通重分配。",
+    "涉及具体患者处置、危险设备恢复、专业维修或人员排班时转对应 owner。"
+  ],
+  "notes": "Records 保存事实、版本和趋势；Resource Allocation 根据 evidence 更新用途和 reserve，不改写专业知识。",
+  "objects": [
+    "分配计划版本",
+    "实际消耗",
+    "补给记录",
+    "三情景",
+    "偏差表"
+  ],
+  "signals": [
+    "持续数周短缺",
+    "消耗快百分之三十",
+    "计划偏差扩大",
+    "补给反复延误"
+  ],
+  "risks": [
+    "stale_plan",
+    "unsupported_adjustment",
+    "boundary_takeover"
+  ],
+  "negative_keywords": [
+    "日志怎么归档",
+    "谁值夜班",
+    "设备怎么修",
+    "患者治疗顺序"
+  ],
+  "top1_aliases": [
+    "长期短缺怎么重新分配",
+    "资源消耗比计划快百分之三十",
+    "资源分配周期复查"
+  ],
+  "related_wiki": [
+    "resource-allocation-review-loop-001",
+    "resource-allocation-uncertainty-scenarios-001",
+    "resource-allocation-consumption-horizon-baseline-001",
+    "resource-allocation-trigger-action-recheck-001",
+    "general-inventory-consumption-log-001",
+    "records-energy-capacity-trend-001",
+    "energy-solar-seasonal-output-baseline-001",
+    "production-workshop-daily-resource-budget-001",
+    "agriculture-planting-inventory-link-001",
+    "agriculture-water-fertility-budget-card-001"
+  ]
+}

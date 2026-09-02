@@ -1,0 +1,113 @@
+{
+  "id": "DG-0905",
+  "title": "原料 / 半成品 / 成品流转",
+  "category": "团队轮值与任务管理",
+  "priority": "P0",
+  "scenario": "原料、半成品、成品、废料和待检物混放，下一步去向不清。",
+  "goal": "用离线可执行的生产流转把人员、实物、状态、停止线和下一步连接起来。",
+  "tools": [
+    "材料卡",
+    "批次标签",
+    "状态区标识",
+    "待检牌",
+    "交接卡"
+  ],
+  "steps": [
+    "为原料建入工坊卡。",
+    "设置待加工、半成品、待检、返工、报废和成品转交区。",
+    "每次移动都更新标签。",
+    "不合格品转隔离。",
+    "合格成品转 Storage。",
+    "状态变化时更新任务板、标签或交接卡。",
+    "结束前由另一名成员对照现场实物复核。"
+  ],
+  "check": [
+    "每件物品有状态。",
+    "半成品不进入成品区。",
+    "报废和污染物不回主流程。",
+    "成品入库字段完整。"
+  ],
+  "common_mistakes": [
+    "只口头说明生产流转，没有对应实物和编号。",
+    "状态变化后不更新标签或任务板。",
+    "为了赶进度越过明确停止线。"
+  ],
+  "fallback": [
+    "空间不足时用颜色 / 编号临时区。",
+    "记录不足时先建总账。",
+    "争议物放中立待检区。"
+  ],
+  "stop_or_escalate": [
+    "来源不明、污染、结构裂纹、缺标签、成品未经检查或 Waste / Storage 边界不明时停止流转。"
+  ],
+  "notes": "Production System / Workshop v0.1 行动入口；不替代 Manufacturing、Waste、Storage、Repair、Records、Organization 或安全域判断。",
+  "category_original": "团队轮值与任务管理",
+  "domains": [
+    "repair",
+    "organization",
+    "tools"
+  ],
+  "intents": [
+    "production_workshop_v0_1",
+    "offline_workshop_action"
+  ],
+  "situations": [
+    "workshop_operation",
+    "resource_limited_team",
+    "offline_handover"
+  ],
+  "objects": [
+    "材料卡",
+    "批次标签",
+    "状态区标识",
+    "待检牌",
+    "交接卡"
+  ],
+  "signals": [
+    "原料 / 半成品 / 成品流转",
+    "生产流转",
+    "工坊",
+    "生产流程"
+  ],
+  "risks": [
+    "状态混放",
+    "污染材料",
+    "未经检查"
+  ],
+  "keywords": [
+    "原料 / 半成品 / 成品流转",
+    "生产流转",
+    "工坊生产",
+    "离线流程",
+    "小团队",
+    "任务交接"
+  ],
+  "negative_keywords": [
+    "大型工厂排产",
+    "自动化生产线",
+    "专业质量认证",
+    "危险化学品生产",
+    "武器制造",
+    "高压电气作业",
+    "ERP"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "repair",
+  "primary_intent": "production_workshop_v0_1",
+  "top1_aliases": [
+    "原料 / 半成品 / 成品流转"
+  ],
+  "related_wiki": [
+    "production-workshop-raw-material-intake-card-001",
+    "production-workshop-wip-zone-layout-001",
+    "production-workshop-wip-handover-tag-001",
+    "production-workshop-finished-goods-hold-zone-001",
+    "production-workshop-waste-transfer-card-001",
+    "production-workshop-batch-label-minimum-001",
+    "production-workshop-material-count-before-work-001",
+    "production-workshop-material-reservation-line-001",
+    "production-workshop-finished-goods-storage-transfer-001"
+  ],
+  "risk_level": "high"
+}

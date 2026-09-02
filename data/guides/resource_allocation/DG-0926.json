@@ -1,0 +1,111 @@
+{
+  "category": "风险决策",
+  "domains": [
+    "resource_allocation",
+    "risk_decision",
+    "records"
+  ],
+  "intents": [
+    "resource_allocation_v0_1",
+    "offline_allocation_action"
+  ],
+  "situations": [
+    "resource_scarcity",
+    "uncertain_replenishment",
+    "offline_team"
+  ],
+  "ranking_role": "primary",
+  "guide_type": "procedure",
+  "primary_domain": "resource_allocation",
+  "primary_intent": "resource_allocation_v0_1",
+  "id": "DG-0926",
+  "title": "有限资源快速盘点与可用量确认",
+  "priority": "P0",
+  "risk_level": "high",
+  "scenario": "库存记录与实物数量不一致，或食物、水、能源、耗材、工具和零件状态混杂，需要先确认真正可分配的数量。",
+  "goal": "在不改变专业安全判断的前提下，把总量拆成可用、不可用、已预留和待确认，并给预计补给单独标记。",
+  "keywords": [
+    "有限资源盘点",
+    "可分配量",
+    "USABLE",
+    "UNCERTAIN",
+    "账实核对",
+    "预计补给"
+  ],
+  "tools": [
+    "实物清单",
+    "库存卡",
+    "隔离标签",
+    "固定计量容器",
+    "纸笔"
+  ],
+  "steps": [
+    "按资源、批次、位置和统一单位列出账面总量，再到现场逐项核对实物。",
+    "将数量拆成 USABLE、UNAVAILABLE、RESERVED、UNCERTAIN；污染、破损、隔离或专业域禁用项进入 UNAVAILABLE。",
+    "给 RESERVED 写用途、等级、释放 trigger 和复查时间；同一数量不得再次计入可分配量。",
+    "给 UNCERTAIN 写缺失证据和确认动作；确认前按不可分配处理。",
+    "把 confirmed、expected、uncertain replenishment 另列来源和日期，不并入现货。",
+    "抽查饮水、关键能源、必要医疗耗材和唯一零件，签记状态卡有效时间。"
+  ],
+  "check": [
+    "账面数、实物数和四种状态量可以相互核对。",
+    "预计补给没有进入当前 USABLE。",
+    "危险、污染和来源不明资源均未被分配。",
+    "记录含单位、证据、检查时间和下一复查。"
+  ],
+  "common_mistakes": [
+    "把总库存直接当可用量。",
+    "同一份 reserve 同时出现在普通预算。",
+    "为填满表格猜测数量或状态。",
+    "因资源稀缺把隔离物移回可用区。"
+  ],
+  "fallback": [
+    "无法称量时使用完整包装数或固定容器，并标低置信度。",
+    "无法全量盘点时先保护安全最低资源和唯一恢复零件。"
+  ],
+  "stop_or_escalate": [
+    "设备冒烟、火花、异常热、电池鼓包或漏液、化学异味、污染食水或人员伤害时停止盘点操作并转 Safety / Fire / Medical。",
+    "资源来源、污染、隔离或专业安全状态无法确认时不得标为可用。"
+  ],
+  "notes": "只确认可分配状态；Storage 负责保存与隔离，专业域负责安全可用性，Records 负责原始记录。",
+  "objects": [
+    "资源状态卡",
+    "库存卡",
+    "食物饮水",
+    "能源燃料",
+    "医疗卫生耗材",
+    "工具零件"
+  ],
+  "signals": [
+    "账实不符",
+    "可用量不清",
+    "库存状态混杂",
+    "补给未到"
+  ],
+  "risks": [
+    "unsafe_resource_use",
+    "double_allocation",
+    "uncertain_inventory"
+  ],
+  "negative_keywords": [
+    "怎么保存",
+    "怎么维修",
+    "患者治疗",
+    "谁值班",
+    "设备冒烟还能用"
+  ],
+  "top1_aliases": [
+    "有限资源快速盘点",
+    "真正可分配量",
+    "库存和实物对不上怎么办"
+  ],
+  "related_wiki": [
+    "resource-allocation-available-resource-status-001",
+    "resource-allocation-uncertainty-scenarios-001",
+    "general-storage-inventory-card-minimum-001",
+    "general-inventory-consumption-log-001",
+    "energy-offgrid-capacity-inventory-001",
+    "food-inventory-001",
+    "water-quantity-estimate-021"
+  ]
+}

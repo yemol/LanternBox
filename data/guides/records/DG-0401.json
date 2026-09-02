@@ -76,6 +76,11 @@
     "主食配给",
     "夜间异响"
   ],
-  "related_wiki": [],
+  "related_wiki": [
+    "records-skill-authorization-minimum-001",
+    "records-skill-level-boundaries-001",
+    "records-supervised-practice-evidence-001",
+    "records-skill-expiry-refresher-001"
+  ],
   "risk_level": "normal"
 }
