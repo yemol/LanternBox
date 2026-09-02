@@ -35,6 +35,7 @@
 #include "FT02_CommunicationNodeUI.h"
 #include "FT02_CompassCalibrationUI.h"
 #include "FT02_SystemSelfTest.h"
+#include "FT02_WirelessManager.h"
 #include "FT02_PinyinLearning.h"
 #include <stdio.h>
 #include <stdint.h>
@@ -165,6 +166,7 @@ static bool FT02_ArmAudioCommandAfterRelease(const FT02InputEvent& event);
 static void FT02_OpenDeviceStatusPage();
 static void FT02_OpenFieldLibraryPage();
 static void FT02_OpenMapSearchPage();
+static void FT02_OpenWirelessWiFiPage();
 
 static int FT02_MonthFromBuildString(const char* mon)
 {
@@ -658,6 +660,10 @@ static void FT02_RedrawCurrentPage()
     {
         FT02_DrawCompassCalibrationScreen(display);
     }
+    else if(g_ft02PageState == FT02_PAGE_WIRELESS_WIFI)
+    {
+        FT02_DrawWirelessWiFiScreen(display);
+    }
     else if(g_ft02PageState == FT02_PAGE_HELP)
     {
         FT02_DrawHelpScreen(display);
@@ -712,6 +718,10 @@ static void FT02_ReturnHomePage()
     {
         FT02_CancelPendingMapRefresh("map-to-home");
         FT02_PbfMapUnload();
+    }
+    if(g_ft02PageState == FT02_PAGE_WIRELESS_WIFI)
+    {
+        FT02_WirelessManagerCloseWiFi();
     }
 
     FT02_RefreshStorageStatusCache();
@@ -1347,6 +1357,40 @@ static void FT02_OpenKnowledgePage()
 
 static void FT02_OpenCompassCalibrationPage();
 
+static void FT02_OpenWirelessWiFiPage()
+{
+    g_ft02PageState = FT02_PAGE_WIRELESS_WIFI;
+    FT02_WirelessManagerOpenWiFi();
+    FT02_RedrawCurrentPage();
+}
+
+static bool FT02_HandleWirelessWiFiInput(const FT02InputEvent& event)
+{
+    const FT02WirelessAction action = FT02_WirelessManagerHandleWiFiInput(event);
+    if(action == FT02_WIRELESS_ACTION_EXIT_TOOLS)
+    {
+        FT02_ReturnHomePage();
+        return true;
+    }
+    if(action == FT02_WIRELESS_ACTION_OPEN_HELP)
+    {
+        FT02_WirelessManagerCloseWiFi();
+        FT02_OpenHelpPage();
+        return true;
+    }
+    if(action == FT02_WIRELESS_ACTION_PARTIAL_REDRAW)
+    {
+        FT02_DrawWirelessWiFiBodyPartial(display);
+        return true;
+    }
+    if(action == FT02_WIRELESS_ACTION_REDRAW)
+    {
+        FT02_RedrawCurrentPage();
+        return true;
+    }
+    return action != FT02_WIRELESS_ACTION_NONE;
+}
+
 static void FT02_OpenDeviceStatusPage()
 {
     if(g_ft02PageState == FT02_PAGE_DEVICE_STATUS) return;
@@ -1569,6 +1613,12 @@ static bool FT02_HandleHomeInput(
         if(g_ft02HomeSelectedCard == 6)
         {
             FT02_OpenFieldLibraryPage();
+            return true;
+        }
+
+        if(g_ft02HomeSelectedCard == 7)
+        {
+            FT02_OpenWirelessWiFiPage();
             return true;
         }
 
@@ -2402,6 +2452,11 @@ static bool FT02_HandleInput(
         return FT02_HandleCompassCalibrationInput(event);
     }
 
+    if(g_ft02PageState == FT02_PAGE_WIRELESS_WIFI)
+    {
+        return FT02_HandleWirelessWiFiInput(event);
+    }
+
     if(g_ft02PageState == FT02_PAGE_LOCATION_RECORDER)
     {
         return FT02_HandleLocationRecorderInput(event);
@@ -2442,7 +2497,7 @@ void setup()
 
     Serial.print("FT-02 ");
     Serial.print(FT02_FIRMWARE_BUILD_LABEL);
-    Serial.print(" Production BW Fast Navigation A2 Arrow + Voice Log A1 + Location Recorder A4 + FieldManualRuntime + PBF Map UI A3.14 + Map UX A5 + Map Search A5 SPI40 ");
+    Serial.print(" WiFi Module A2 + Production BW Fast Navigation A2 Arrow + Voice Log A1 + Location Recorder A4 + FieldManualRuntime + PBF Map UI A3.14 + Map UX A5 + Map Search A5 SPI40 ");
     Serial.print(FT02_StorageProfileText());
     Serial.println(" Start");
 
@@ -2504,6 +2559,7 @@ void setup()
     FT02_GnssFieldTestBegin();
     FT02_PinyinLearningBegin();
     FT02_LoRaMessageDeliveryBegin();
+    FT02_WirelessManagerBegin();
     FT02_LocationRecorderBegin();
     FT02_LocationLogBegin();
     FT02_AudioLogBegin();
@@ -2547,7 +2603,7 @@ void setup()
 
     Serial.print("FT-02 ");
     Serial.print(FT02_FIRMWARE_BUILD_LABEL);
-    Serial.print(" Production BW Fast Navigation A2 Arrow + Voice Log A1 + Location Recorder A4 + FieldManualRuntime + PBF Map UI A3.14 + Map UX A5 + Map Search A5 SPI40 ");
+    Serial.print(" WiFi Module A2 + Production BW Fast Navigation A2 Arrow + Voice Log A1 + Location Recorder A4 + FieldManualRuntime + PBF Map UI A3.14 + Map UX A5 + Map Search A5 SPI40 ");
     Serial.print(FT02_StorageProfileText());
     Serial.println(" ready");
     Serial.flush();
@@ -2654,6 +2710,10 @@ void loop()
     }
 
     FT02_LR01HostPoll();
+    if(FT02_WirelessManagerPoll(millis()) && g_ft02PageState == FT02_PAGE_WIRELESS_WIFI)
+    {
+        FT02_RedrawCurrentPage();
+    }
 
     if(g_ft02PageState == FT02_PAGE_COMPASS_CALIBRATION)
     {
@@ -2924,6 +2984,7 @@ void loop()
         g_ft02PageState == FT02_PAGE_LIBRARY ||
         g_ft02PageState == FT02_PAGE_MAP_SEARCH ||
         g_ft02PageState == FT02_PAGE_COMMUNICATION ||
+        g_ft02PageState == FT02_PAGE_WIRELESS_WIFI ||
         g_ft02PageState == FT02_PAGE_LOCATION_LOG_LIST ||
         g_ft02PageState == FT02_PAGE_LOCATION_LOG_DETAIL ||
         g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST;

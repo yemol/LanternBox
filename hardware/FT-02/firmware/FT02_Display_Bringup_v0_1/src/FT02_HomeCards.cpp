@@ -5,6 +5,7 @@
 
 #include "FT02_FontData.h"
 #include "FT02_GlobalCJKFontData.h"
+#include "FT02_GlobalCJKBoldFontData.h"
 #include "FT02_HomeCardIconData.h"
 
 struct FT02HomeCard
@@ -89,6 +90,11 @@ static const FT02HomeCard FT02_HOME_CARDS[] = {
     {
         "随身书库",
         &ICON_HOME_CARD_LIBRARY,
+        &ft02_menu_28m
+    },
+    {
+        "WiFi网络",
+        &ICON_HOME_CARD_WIFI,
         &ft02_menu_28m
     }
 };
@@ -192,6 +198,24 @@ static void FT02_DrawHomePageIndicator(
     }
 }
 
+static void FT02_DrawHomeWifiLabel(
+    FT02Display& display,
+    int x,
+    int baselineY,
+    bool selected
+)
+{
+    const char* wifi = "WiFi";
+    const char* network = "网络";
+
+    if(selected) FT02_DrawTextPackInvert(display, ft02_menu_28m, wifi, x, baselineY);
+    else FT02_DrawTextPack(display, ft02_menu_28m, wifi, x, baselineY);
+    x += FT02_TextWidthPack(ft02_menu_28m, wifi) + 2;
+
+    if(selected) FT02_DrawTextPackInvert(display, ft02_cjk_24b, network, x, baselineY - 2);
+    else FT02_DrawTextPack(display, ft02_cjk_24b, network, x, baselineY - 2);
+}
+
 static void FT02_DrawHomeLibraryLabel(
     FT02Display& display,
     int x,
@@ -277,6 +301,10 @@ static void FT02_DrawHomeCard(
     if(strcmp(card.label, "随身书库") == 0)
     {
         FT02_DrawHomeLibraryLabel(display, textX, textBaselineY, selected);
+    }
+    else if(strcmp(card.label, "WiFi网络") == 0)
+    {
+        FT02_DrawHomeWifiLabel(display, textX, textBaselineY, selected);
     }
     else if(selected)
     {

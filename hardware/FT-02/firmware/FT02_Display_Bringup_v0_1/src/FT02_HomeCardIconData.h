@@ -154,3 +154,4 @@ static const FT02Icon ICON_HOME_CARD_NETWORK = {48, 48, 6, ICON_HOME_CARD_NETWOR
 // firmware integration. The card itself is independently addressable and can
 // receive a dedicated library glyph later without changing HomeCards logic.
 static const FT02Icon ICON_HOME_CARD_LIBRARY = ICON_HOME_CARD_KNOWLEDGE;
+static const FT02Icon ICON_HOME_CARD_WIFI = ICON_HOME_CARD_NETWORK;
