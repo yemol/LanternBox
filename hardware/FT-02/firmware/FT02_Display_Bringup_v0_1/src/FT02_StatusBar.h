@@ -17,6 +17,8 @@ struct FT02StatusBarSnapshot
     char clockMMDD[6];
     char gnssLine1[16];
     char gnssLine2[16];
+    char batteryLine1[16];
+    char batteryLine2[16];
 };
 
 void FT02_GetStatusBarSnapshot(FT02StatusBarSnapshot& snapshot);
@@ -58,3 +60,14 @@ void FT02_DrawStatusBarGnss(
 );
 
 void FT02_DrawStatusBarLoRa(FT02Display& display, const char* line2);
+
+void FT02_SetStatusBarBatteryCache(
+    const char* line1,
+    const char* line2
+);
+
+void FT02_DrawStatusBarBattery(
+    FT02Display& display,
+    const char* line1,
+    const char* line2
+);

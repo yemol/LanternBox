@@ -8,6 +8,7 @@
 #include <esp_system.h>
 
 #include "FT02_AudioLog.h"
+#include "FT02_BatteryMonitor.h"
 #include "FT02_BottomBar.h"
 #include "FT02_BuildInfo.h"
 #include "FT02_EpdLifecycle.h"
@@ -183,6 +184,36 @@ void runKeyboard()
         addItem("键盘", FT02_SELFTEST_PASS, "CardKB2 0x5F正常");
     else
         addItem("键盘", FT02_SELFTEST_FAIL, "I2C设备无响应");
+}
+
+void runBattery()
+{
+    FT02_BatteryMonitorRefreshNow();
+    const FT02BatterySnapshot battery = FT02_BatterySnapshotCurrent();
+
+    if(!battery.monitorPresent || !battery.valid)
+    {
+        addItem("电池", FT02_SELFTEST_FAIL, "MAX17048 0x36未检测/读取失败");
+        return;
+    }
+
+    char detail[96];
+    const char* flow = FT02_BatteryIsCharging() ? "充电" : "供电";
+    snprintf(
+        detail,
+        sizeof(detail),
+        "%.0f%% %.3fV %s %+.1f%%/h",
+        static_cast<double>(battery.percent),
+        static_cast<double>(battery.voltage),
+        flow,
+        static_cast<double>(battery.ratePercentPerHour)
+    );
+
+    const FT02BatteryBand band = FT02_BatteryBandCurrent();
+    if(band == FT02_BATTERY_CRITICAL || band == FT02_BATTERY_LOW)
+        addItem("电池", FT02_SELFTEST_WARN, detail);
+    else
+        addItem("电池", FT02_SELFTEST_PASS, detail);
 }
 
 void runGnss()
@@ -531,7 +562,7 @@ void FT02_SystemSelfTestRun()
     runKeyboard();
     runAudio();
     runTime();
-    addItem("电池", FT02_SELFTEST_NA, "尚未接入检测");
+    runBattery();
 
     // Page 2/3: Navigation and communications
     runGnss();       // 通讯模块 / GNSS / GNSS定位 / 罗盘

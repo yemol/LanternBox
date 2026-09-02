@@ -1,1 +1,1 @@
-FT-02 v2.75k64 WiFi Module A2
+FT-02 v2.75k65 MAX17048 Battery Monitor A1

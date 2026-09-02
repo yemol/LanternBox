@@ -17,6 +17,7 @@
 #include "FT02_LocationLog.h"
 #include "FT02_LocationLogUI.h"
 #include "FT02_AudioLog.h"
+#include "FT02_BatteryMonitor.h"
 #include "FT02_AudioLogUI.h"
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
@@ -88,6 +89,8 @@ static int g_ft02HomeSelectedCard = 0;
 static FT02PageState g_ft02PageState = FT02_PAGE_HOME;
 static FT02PageState g_ft02PageBeforeHelp = FT02_PAGE_HOME;
 static bool g_ft02RuntimeBannerPrinted = false;
+static char g_ft02LastBatteryStatusLine1[16] = "";
+static char g_ft02LastBatteryStatusLine2[16] = "";
 static bool g_ft02CommunicationReadyPresented = false;
 static bool g_ft02LastLoRaLinkState = false;
 static bool g_ft02LastLoRaReadyState = false;
@@ -153,6 +156,7 @@ static void FT02_RedrawCurrentPage();
 static void FT02_ReinitializeEpdFullMode(const char* source);
 static void FT02_DrawKnowledgeAfterCleanTransition(const char* source);
 static void FT02_SyncGnssStatusBar(bool allowPartialRefresh);
+static void FT02_SyncBatteryStatusBar(bool allowPartialRefresh);
 static void FT02_UpdateMapGnssFollow();
 static void FT02_RunDirectPbfMap(bool resetDefault, bool showLoading);
 static void FT02_ScheduleMapZoomRefresh(int originalZoom);
@@ -389,6 +393,33 @@ static void FT02_UpdateClockIfNeeded(bool force)
 }
 
 
+
+static void FT02_SyncBatteryStatusBar(bool allowPartialRefresh)
+{
+    char line1[16];
+    char line2[16];
+    FT02_BatteryFormatStatus(line1, sizeof(line1), line2, sizeof(line2));
+
+    const bool changed =
+        strcmp(line1, g_ft02LastBatteryStatusLine1) != 0 ||
+        strcmp(line2, g_ft02LastBatteryStatusLine2) != 0;
+
+    FT02_SetStatusBarBatteryCache(line1, line2);
+    snprintf(g_ft02LastBatteryStatusLine1, sizeof(g_ft02LastBatteryStatusLine1), "%s", line1);
+    snprintf(g_ft02LastBatteryStatusLine2, sizeof(g_ft02LastBatteryStatusLine2), "%s", line2);
+
+    if(!allowPartialRefresh || !changed) return;
+
+    if(g_ft02PageState == FT02_PAGE_MAP ||
+       g_ft02PageState == FT02_PAGE_KNOWLEDGE ||
+       g_ft02PageState == FT02_PAGE_LIBRARY ||
+       FT02_AudioLogIsBusy())
+    {
+        return;
+    }
+
+    FT02_DrawStatusBarBattery(display, line1, line2);
+}
 
 static void FT02_SyncGnssStatusBar(bool allowPartialRefresh)
 {
@@ -2550,6 +2581,9 @@ void setup()
 
     Serial.println("FT02 InputManager ready: fixed pins SDA=47 SCL=21, D=UP, Z=LEFT, X=DOWN, C=RIGHT");
 
+    FT02_BatteryMonitorBegin();
+    FT02_SyncBatteryStatusBar(false);
+
     FT02_GnssBegin();
     FT02_LR01HostBegin();
     FT02_SyncGnssStatusBar(false);
@@ -2969,6 +3003,14 @@ void loop()
     // the settle window are coalesced; the scheduler owns the single final
     // map build plus display refresh.
     FT02_ProcessPendingMapRefresh();
+
+    // MAX17048 shares the CardKB2/ES8311 I2C bus. Measurements stay out of
+    // active audio work; the status bar refreshes only when visible text changes.
+    if(!FT02_AudioLogIsBusy())
+    {
+        if(FT02_BatteryMonitorPoll())
+            FT02_SyncBatteryStatusBar(true);
+    }
 
     if(!FT02_AudioLogIsBusy())
     {

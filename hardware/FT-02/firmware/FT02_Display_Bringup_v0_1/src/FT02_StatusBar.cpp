@@ -16,6 +16,8 @@ static char g_ft02ClockHHMM[6] = "14:28";
 static char g_ft02ClockMMDD[6] = "05/20";
 static char g_ft02GnssLine1[16] = "GPS";
 static char g_ft02GnssLine2[16] = "连接中";
+static char g_ft02BatteryLine1[16] = "--%";
+static char g_ft02BatteryLine2[16] = "检测中";
 
 void FT02_GetStatusBarSnapshot(FT02StatusBarSnapshot& snapshot)
 {
@@ -25,6 +27,8 @@ void FT02_GetStatusBarSnapshot(FT02StatusBarSnapshot& snapshot)
     snprintf(snapshot.clockMMDD, sizeof(snapshot.clockMMDD), "%s", g_ft02ClockMMDD);
     snprintf(snapshot.gnssLine1, sizeof(snapshot.gnssLine1), "%s", g_ft02GnssLine1);
     snprintf(snapshot.gnssLine2, sizeof(snapshot.gnssLine2), "%s", g_ft02GnssLine2);
+    snprintf(snapshot.batteryLine1, sizeof(snapshot.batteryLine1), "%s", g_ft02BatteryLine1);
+    snprintf(snapshot.batteryLine2, sizeof(snapshot.batteryLine2), "%s", g_ft02BatteryLine2);
 }
 
 void FT02_SetStatusBarStorageCache(const char* line1, const char* line2)
@@ -43,6 +47,12 @@ void FT02_SetStatusBarGnssCache(const char* line1, const char* line2)
 {
     snprintf(g_ft02GnssLine1, sizeof(g_ft02GnssLine1), "%s", line1 != nullptr ? line1 : "GPS");
     snprintf(g_ft02GnssLine2, sizeof(g_ft02GnssLine2), "%s", line2 != nullptr ? line2 : "连接中");
+}
+
+void FT02_SetStatusBarBatteryCache(const char* line1, const char* line2)
+{
+    snprintf(g_ft02BatteryLine1, sizeof(g_ft02BatteryLine1), "%s", line1 != nullptr ? line1 : "--%");
+    snprintf(g_ft02BatteryLine2, sizeof(g_ft02BatteryLine2), "%s", line2 != nullptr ? line2 : "检测中");
 }
 
 
@@ -269,15 +279,15 @@ void FT02_DrawStatusBar(
     FT02_DrawTextPack(
         display,
         ft02_status_22r,
-        "86%",
+        g_ft02BatteryLine1,
         blockStart + FT02_STATUS_TEXT_OFFSET_X,
         FT02_STATUS_TEXT_LINE1_Y
     );
 
     FT02_DrawTextPack(
         display,
-        ft02_status_22r,
-        "电量",
+        ft02_cjk_20r,
+        g_ft02BatteryLine2,
         blockStart + FT02_STATUS_TEXT_OFFSET_X,
         FT02_STATUS_TEXT_LINE2_Y
     );
@@ -575,5 +585,75 @@ void FT02_DrawStatusBarClock(
 
     display.setFullWindow();
     FT02_EpdInteractivePowerOffNow(display, "status-clock-partial");
+    FT02_EpdInteractiveEndBusyCapture(display);
+}
+
+
+static void FT02_DrawStatusBatteryBlockContent(
+    FT02Display& display,
+    const char* line1,
+    const char* line2
+)
+{
+    const int blockStart = FT02_BLOCK_START_X + FT02_BLOCK_WIDTH * 3;
+
+    FT02_DrawIconSize(
+        display,
+        ICON_STATUS_BATTERY,
+        blockStart + FT02_ICON_OFFSET_X,
+        FT02_ICON_Y,
+        FT02_ICON_SIZE,
+        false
+    );
+
+    FT02_DrawTextPack(
+        display,
+        ft02_status_22r,
+        line1,
+        blockStart + FT02_STATUS_TEXT_OFFSET_X,
+        FT02_STATUS_TEXT_LINE1_Y
+    );
+
+    FT02_DrawTextPack(
+        display,
+        ft02_cjk_20r,
+        line2,
+        blockStart + FT02_STATUS_TEXT_OFFSET_X,
+        FT02_STATUS_TEXT_LINE2_Y
+    );
+}
+
+void FT02_DrawStatusBarBattery(
+    FT02Display& display,
+    const char* line1,
+    const char* line2
+)
+{
+    FT02_SetStatusBarBatteryCache(line1, line2);
+
+    static const int partialX = 662;
+    static const int partialY = 6;
+    static const int partialW = 138;
+    static const int partialH = 61;
+
+    FT02_EpdInteractiveBeginBusyCapture(display);
+    display.setPartialWindow(partialX, partialY, partialW, partialH);
+    display.firstPage();
+    do
+    {
+        display.fillRect(partialX, partialY, partialW, partialH, GxEPD_WHITE);
+        display.drawLine(
+            FT02_BLOCK_START_X + FT02_BLOCK_WIDTH * 3 - 10,
+            FT02_STATUS_VLINE_TOP_Y,
+            FT02_BLOCK_START_X + FT02_BLOCK_WIDTH * 3 - 10,
+            FT02_STATUS_VLINE_BOTTOM_Y,
+            GxEPD_BLACK
+        );
+        FT02_DrawStatusBatteryBlockContent(display, line1, line2);
+    }
+    while(display.nextPage());
+
+    display.setFullWindow();
+    FT02_EpdInteractivePowerOffNow(display, "status-battery-partial");
     FT02_EpdInteractiveEndBusyCapture(display);
 }
