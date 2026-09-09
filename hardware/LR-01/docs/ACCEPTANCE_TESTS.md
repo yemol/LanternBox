@@ -77,7 +77,7 @@ MESH_DELIVERY id=1002 node=4C423001 status=ACK
 
 ## B. QMC5883L 校准
 
-LR01 USB Serial Monitor 设为 `115200`。测试固件允许 USB 调试口输入同样的校准命令。
+LR01 USB Serial Monitor 设为 `115200`。固件允许 USB 控制台输入同样的校准命令。
 
 ### 1. 初始状态
 
@@ -208,3 +208,58 @@ COMPASS_CAL_STATE state=IDLE ... calibrated=0 ...
 ```
 
 重启后仍为 `calibrated=0`。
+
+## C. GNSS Robust Recovery A1
+
+### 1. 基础诊断
+
+发送：
+
+```text
+CORE_STATUS? id=9001
+```
+
+确认 `SYSTEM_STATE` 至少满足：
+
+```text
+gnss_rxbuf=4096
+gnss_nmea_ok=<持续增长>
+gnss_nmea_bad=<正常情况下应远低于 ok>
+```
+
+### 2. 室内 -> 室外恢复（本版核心回归）
+
+1. 在室内开机，保持 GNSS 无 Fix 2~5 分钟。
+2. 不重启 LR01，不重新插拔，不进入任何手动“重连”。
+3. 把整机直接移动到室外开阔天空。
+4. 观察 `NAV_STATE`。
+
+通过条件：
+
+- `sat_visible` 只能反映 5 秒内的新鲜 GSV；旧值会自动归零。
+- 获取有效定位后必须自动从 `fix=0` 转为 `fix=1`。
+- 不允许要求人工重连 LR01。
+- `gnss_nmea_ok` 应持续增长。
+- 正常情况下 `gnss_recoveries` 可以保持 0；若链路异常触发恢复，应自动恢复后继续增长 `gnss_bytes` / `gnss_nmea_ok`。
+
+### 3. GNSS 串口异常恢复
+
+测试环境允许时，短暂中断 GNSS TX -> LR01 RX 后恢复。
+
+预期：
+
+- 超过约 8 秒无 GNSS 字节时进入 `stream_stall`。
+- 只重建 GNSS UART receive path，不重启 LoRa、罗盘或 Host UART。
+- 恢复接线后 GNSS 数据自动重新进入。
+
+### 4. NMEA 数据健康
+
+长期观察：
+
+```text
+gnss_nmea_ok
+gnss_nmea_bad
+```
+
+若 `gnss_nmea_bad` 快速连续增长，优先检查 GNSS UART 数据完整性、波特率、供电和接线。4096-byte RX buffer 用于降低主循环忙碌时的溢出风险。
+

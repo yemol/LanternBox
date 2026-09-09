@@ -14,7 +14,7 @@ node=!4c423002
 启动：
 
 ```text
-LR01_BOOT version=MESH_NATIVE_A2 protocol=2 node=FT02 id=!4c423002
+LR01_BOOT version=MESH_NATIVE_A2_GNSS_RECOVERY_A4_1_PRODUCTION_CLEAN protocol=2 node=FT02 id=!4c423002
 LR01_READY protocol=2
 ```
 
@@ -126,14 +126,22 @@ RADIO_STATE ready=1 profile=CN35 freq=478.875 rx=25 nodes=3 pki=2 dup=1 tx_queue
 ### SYSTEM_STATE
 
 ```text
-SYSTEM_STATE gnss=<0|1> compass=<0|1> lora=<0|1> uptime=<sec> gnss_bytes=<n> heap=<bytes> psram=<bytes> rx_errors=<n> uart_errors=<n> radio_resets=<n>
+SYSTEM_STATE gnss=<0|1> compass=<0|1> lora=<0|1> uptime=<sec> gnss_bytes=<n> heap=<bytes> psram=<bytes> rx_errors=<n> uart_errors=<n> radio_resets=<n> [gnss_nmea_ok=<n> gnss_nmea_bad=<n> gnss_recoveries=<n> gnss_rxbuf=<bytes> gnss_loc_age=<ms>]
 ```
 
 示例：
 
 ```text
-SYSTEM_STATE gnss=1 compass=1 lora=1 uptime=1234 gnss_bytes=974815 heap=185000 psram=8123456 rx_errors=0 uart_errors=0 radio_resets=0
+SYSTEM_STATE gnss=1 compass=1 lora=1 uptime=1234 gnss_bytes=974815 heap=185000 psram=8123456 rx_errors=0 uart_errors=0 radio_resets=0 gnss_nmea_ok=6210 gnss_nmea_bad=0 gnss_recoveries=0 gnss_rxbuf=4096 gnss_loc_age=320
 ```
+
+新增 GNSS 字段均为 A2 的**尾部增量诊断字段**；既有字段名称、顺序和单位不变。Core 可以忽略未知尾部字段。
+
+- `gnss_nmea_ok`：TinyGPSPlus 校验通过的 NMEA 累计句数。
+- `gnss_nmea_bad`：NMEA checksum 失败累计句数。
+- `gnss_recoveries`：GNSS 接收路径累计自动恢复次数。
+- `gnss_rxbuf`：当前 GNSS HardwareSerial RX buffer bytes，本版应为 `4096`。
+- `gnss_loc_age`：距最近一次有效 location commit 的毫秒数；尚未出现过有效位置时为 `4294967295`。
 
 ### 强制状态同步结束
 
@@ -263,3 +271,40 @@ LR01_ERR code=<n> message="<text>"
 - 后续优先新增独立命令和状态包。
 - `NAV_STATE` 现有字段顺序和含义保持不变。
 - A1 无 ID 的 `MESH_TX` / `MESH_PRIVATE` 仍保留兼容入口。
+
+
+## GNSS Blackbox A1 diagnostic extension
+
+These commands are additive diagnostics and do not alter frozen protocol=2 fields.
+
+```text
+GNSS_LOG_STATUS?
+GNSS_LOG?
+GNSS_LOG_CLEAR
+GNSS_LOG_FLUSH
+GNSS_UBX_STATUS?
+GNSS_UBX_POLL
+GNSS_CFG_BASELINE
+```
+
+`GNSS_LOG?` returns records oldest to newest between `GNSS_LOG_BEGIN` and `GNSS_LOG_END`.
+Each record contains uptime, event, stream/fix state, fix type, used/visible satellites, HDOP, GNSS byte count, good/bad NMEA checksum counters, location age, byte age and recovery count.
+
+Critical events: `BOOT`, `FIX_GAIN`, `FIX_LOST`, `RECOVERY_STREAM`, `RECOVERY_NMEA`, `RECOVERY_NO_FIX`.
+
+## GNSS Receiver Recovery A2 diagnostic commands
+
+- `GNSS_RECOVERY_STATUS?`
+- `GNSS_RECEIVER_HOT`
+- `GNSS_RECEIVER_WARM`
+- `GNSS_RECEIVER_COLD`
+
+
+## Software GNSS power control
+
+Commands:
+- `GNSS_SOFT_OFF` -> `GNSS_POWER_SET enabled=0 mode=SOFTWARE_STANDBY ok=1`
+- `GNSS_SOFT_ON` -> `GNSS_POWER_SET enabled=1 mode=ACTIVE ok=1`
+- `GNSS_POWER?` -> `GNSS_POWER_STATE enabled=<0|1> mode=<ACTIVE|SOFTWARE_STANDBY> stream=<0|1> fix=<0|1> changed_ms=<ms>`
+
+Software GNSS standby uses u-blox M10 `UBX-RXM-PMREQ` with UART RX as the wake source.

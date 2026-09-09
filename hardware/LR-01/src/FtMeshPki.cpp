@@ -344,10 +344,10 @@ bool FtMeshPki::encryptForPeer(const uint8_t peerPublicKey[32],
   uint8_t sharedSecret[32];
   uint8_t aesKey[32];
   if (!x25519(sharedSecret, privateKeyBytes, peerPublicKey)) return false;
-  if (mbedtls_sha256(sharedSecret, sizeof(sharedSecret), aesKey, 0) != 0) {
-    memset(sharedSecret, 0, sizeof(sharedSecret));
-    return false;
-  }
+  // mbedTLS compatibility: some ESP32/Arduino cores expose
+  // mbedtls_sha256() as void, while newer variants return int.
+  // Calling it as a statement is source-compatible with both APIs.
+  mbedtls_sha256(sharedSecret, sizeof(sharedSecret), aesKey, 0);
 
   uint32_t extraNonce = esp_random();
   if (extraNonce == 0) extraNonce = 1;
@@ -401,10 +401,10 @@ bool FtMeshPki::decryptFromPeer(const uint8_t peerPublicKey[32],
   uint8_t sharedSecret[32];
   uint8_t aesKey[32];
   if (!x25519(sharedSecret, privateKeyBytes, peerPublicKey)) return false;
-  if (mbedtls_sha256(sharedSecret, sizeof(sharedSecret), aesKey, 0) != 0) {
-    memset(sharedSecret, 0, sizeof(sharedSecret));
-    return false;
-  }
+  // mbedTLS compatibility: some ESP32/Arduino cores expose
+  // mbedtls_sha256() as void, while newer variants return int.
+  // Calling it as a statement is source-compatible with both APIs.
+  mbedtls_sha256(sharedSecret, sizeof(sharedSecret), aesKey, 0);
 
   const uint8_t* tag = encrypted + cipherLen;
   uint32_t extraNonce = readLe32(encrypted + cipherLen + CCM_TAG_BYTES);

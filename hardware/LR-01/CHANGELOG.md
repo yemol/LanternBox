@@ -1,41 +1,36 @@
 # Changelog
 
-## 2026-08-19 - Meshtastic Native A2 + Compass Calibration A1
+## 2026-09-09 - A4.3 Submission Clean
 
-### Added
+- No functional protocol change from the tested A4.3 build.
+- Retains 180-degree compass installation correction and GNSS software standby.
+- Disables routine LoRa packet-flow traces by default; errors and recovery events remain.
+- Removes intermediate verification/package artifacts from the repository root.
+- Adds Git ignore rules and a safe secrets template.
+- Simplifies production comments and version banners.
 
-- QMC5883L 正式校准流程
-- `COMPASS_CAL_START`
-- `COMPASS_CAL_STATUS?`
-- `COMPASS_CAL_SAVE`
-- `COMPASS_CAL_CANCEL`
-- `COMPASS_CAL_RESET`
-- `COMPASS_CAL_STATE`
-- Hard-iron offset 校准
-- 基础 per-axis soft-iron scale 修正
-- 基于样本、三轴跨度、平衡度和空间覆盖的 progress / quality
-- 双槽 NVS + generation + CRC32 校准持久化
-- USB Serial bench calibration command input
+## 2026-09-08 - A4.3 Compass / GNSS control
 
-### Protocol baseline retained
+- Added 180-degree compass installation yaw correction after calibration.
+- Retained `GNSS_SOFT_OFF`, `GNSS_SOFT_ON`, and `GNSS_POWER?`.
+- GNSS latitude/longitude/fix behavior and Host Protocol 2 field names remain unchanged.
 
-- HOST_PROTOCOL_A2 protocol=2
-- `NAV_STATE`
-- `RADIO_STATE`
-- `SYSTEM_STATE`
-- Message ID lifecycle
-- Node list
-- Meshtastic broadcast / PKI private messaging
-- Routing ACK / Delivery status
+## 2026-09-08 - GNSS software standby
 
-### Documentation
+- Added u-blox M10 `UBX-RXM-PMREQ` software standby with UART-RX wake.
+- Suppresses GNSS UART polling/recovery/periodic blackbox sampling while standby is active.
+- Reapplies the RAM acquisition baseline after wake.
+- Records `GNSS_SOFT_OFF` and `GNSS_SOFT_ON` blackbox events.
 
-- 合并重复 Host Protocol 文档
-- 新增硬件参考
-- 新增罗盘校准说明
-- 新增统一验收文档
-- 新增故障排查文档
+## 2026-09-08 - GNSS production recovery
 
-## Previous verified baseline
+- Added UBX receiver monitoring, RAM-only acquisition configuration and UBX-PVT fallback.
+- Added persistent GNSS blackbox diagnostics.
+- Receiver watchdog performs a deliberate cold restart only after sustained strong-sky
+  evidence with no ephemeris/used-SV progress, then allows an undisturbed reacquisition window.
+- GNSS UART RX buffer remains 4096 bytes.
 
-A2 之前已实机验证：Host UART、GNSS stream、QMC5883L、SX1262 RF、Meshtastic NodeInfo、广播消息和 PKI 私信链路。
+## 2026-08-19 - Host Protocol 2 / compass calibration
+
+- Added persistent QMC compass calibration.
+- Retained NAV/RADIO/SYSTEM state, messaging, node list and delivery status interfaces.

@@ -174,3 +174,10 @@ CRC / generation 验证
 2 = 当前 active calibration 可用
 3 = 当前 active calibration 质量良好
 ```
+
+
+## A4.3 installation yaw correction
+
+The combined GNSS/QMC board is mounted flat (not flipped) but rotated 180 degrees in yaw. A4.3 therefore applies a fixed +180 degree installation correction **after** the existing calibration math and before publishing `heading`.
+
+This does not replace calibration. Because the sensor is being relocated inside the FT-02 enclosure, run the normal compass calibration again after the final physical installation to account for the new local magnetic environment.

@@ -15,9 +15,8 @@ static const int8_t LORA_PROBE_POWER_DBM = 19;
 static const uint16_t LORA_PROBE_PREAMBLE = 8;
 
 
-// v0.5.2d fresh-GNSS attachment for broadcast and PKI direct messages.
-// CN35 locked build: AES-256 channel TX plus persistent X25519 PKI identity.
-// Do not publish this source package; it contains the current channel key.
+// Meshtastic-compatible channel transport with AES-256 channel encryption and
+// persistent X25519 PKI identity. Channel material comes from local Ft01Secrets.h.
 static const uint32_t MESH_NATIVE_NODE_NUM = 0x4C423002UL; // !4c423002, LanternBox FT-02 / FT02
 static const uint32_t MESH_NATIVE_BROADCAST = 0xFFFFFFFFUL;
 static const uint8_t MESH_NATIVE_HOP_LIMIT = 3;
@@ -405,24 +404,24 @@ bool LoRaManager::begin() {
     Serial.println("MESH_PKI_INIT_FAIL");
     return false;
   }
-  Serial.println("MESH_PKI_IDENTITY_READY persistent=true");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.println("MESH_PKI_IDENTITY_READY persistent=true");
   loadNodeNames();
   FtHardware::prepareSharedSpiIdle(10000UL);
 
   const LoRaProbeProfile& profile = LORA_PROBE_PROFILES[profileIndex];
 
-  Serial.print("LORA_PROBE_INIT_BEGIN profile=");
-  Serial.print(profile.label);
-  Serial.print(" freq=");
-  Serial.print(profile.freqMhz, 3);
-  Serial.print(" bw=");
-  Serial.print((int)LORA_PROBE_BW_KHZ);
-  Serial.print(" sf=");
-  Serial.print(LORA_PROBE_SF);
-  Serial.print(" cr=");
-  Serial.print(LORA_PROBE_CR);
-  Serial.print(" sync=0x");
-  Serial.println(profile.syncWord, HEX);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print("LORA_PROBE_INIT_BEGIN profile=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(profile.label);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" freq=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(profile.freqMhz, 3);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" bw=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print((int)LORA_PROBE_BW_KHZ);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" sf=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(LORA_PROBE_SF);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" cr=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(LORA_PROBE_CR);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" sync=0x");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.println(profile.syncWord, HEX);
 
   int16_t state = radio.begin(
     profile.freqMhz,
@@ -442,16 +441,15 @@ bool LoRaManager::begin() {
     return false;
   }
 
-  // Many SX1262 boards route the RF switch through DIO2. If this board does not
-  // require it, RadioLib still keeps the radio usable. This is a probe build, so
-  // avoid hard-failing on RF switch configuration.
+  // SX1262 boards commonly route the RF switch through DIO2. Keep this
+  // non-fatal because hardware variants may not require it.
   radio.setDio2AsRfSwitch(true);
 
   ready = true;
   listening = false;
   radio.setPacketReceivedAction(onLoRaPacketReceived);
   statusText = "INIT OK";
-  Serial.println("LORA_PROBE_INIT_OK");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.println("LORA_PROBE_INIT_OK");
   return startListening();
 }
 
@@ -522,12 +520,12 @@ void LoRaManager::cycleProfile() {
   ready = false;
   listening = false;
   statusText = String("PROFILE ") + currentProfileName();
-  Serial.print("LORA_PROBE_PROFILE profile=");
-  Serial.print(currentProfileName());
-  Serial.print(" freq=");
-  Serial.print(currentFreqMhz(), 3);
-  Serial.print(" sync=0x");
-  Serial.println(LORA_PROBE_PROFILES[profileIndex].syncWord, HEX);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print("LORA_PROBE_PROFILE profile=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(currentProfileName());
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" freq=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(currentFreqMhz(), 3);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" sync=0x");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.println(LORA_PROBE_PROFILES[profileIndex].syncWord, HEX);
 }
 
 float LoRaManager::currentFreqMhz() const {
@@ -702,18 +700,18 @@ bool LoRaManager::transmitMeshFrame(uint32_t toNode,
   memcpy(frame + MESH_NATIVE_HEADER_LEN, payload, payloadLen);
   size_t frameLen = MESH_NATIVE_HEADER_LEN + payloadLen;
 
-  Serial.print("MESH_NATIVE_TX_BEGIN encrypted=true type=");
-  Serial.print(typeName);
-  Serial.print(" id=");
-  Serial.print(formatHex32(packetId));
-  Serial.print(" to=");
-  Serial.print(formatHex32(toNode));
-  Serial.print(" channel=");
-  Serial.print(formatHex8(channel));
-  Serial.print(" want_ack=");
-  Serial.print(wantAck ? "true" : "false");
-  Serial.print(" len=");
-  Serial.println((int)frameLen);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print("MESH_NATIVE_TX_BEGIN encrypted=true type=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(typeName);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" id=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(packetId));
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" to=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(toNode));
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" channel=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex8(channel));
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" want_ack=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(wantAck ? "true" : "false");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" len=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.println((int)frameLen);
 
   int16_t state = radio.transmit(frame, frameLen);
   digitalWrite(FtHardware::LORA_NSS_PIN, HIGH);
@@ -730,10 +728,10 @@ bool LoRaManager::transmitMeshFrame(uint32_t toNode,
     Serial.println(state);
   } else {
     statusText = String(typeName) + " TX OK";
-    Serial.print("MESH_NATIVE_TX_OK type=");
-    Serial.print(typeName);
-    Serial.print(" id=");
-    Serial.println(formatHex32(packetId));
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print("MESH_NATIVE_TX_OK type=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(typeName);
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" id=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.println(formatHex32(packetId));
   }
 
   startListening();
@@ -754,10 +752,10 @@ bool LoRaManager::sendRoutingAck(uint32_t toNode, uint32_t requestId, bool relia
                               requestId);
   if (ok) {
     ackSentCounter++;
-    Serial.print("MESH_ACK_TX_OK to=");
-    Serial.print(formatHex32(toNode));
-    Serial.print(" request_id=");
-    Serial.println(formatHex32(requestId));
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print("MESH_ACK_TX_OK to=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(toNode));
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" request_id=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.println(formatHex32(requestId));
   } else {
     ackFailCounter++;
     Serial.print("MESH_ACK_TX_FAIL to=");
@@ -799,16 +797,16 @@ bool LoRaManager::processReceivedFrame(const uint8_t* data, size_t len) {
   rxOkCounter++;
   lastRxMillis = millis();
 
-  Serial.print("LORA_RX_OK profile=");
-  Serial.print(currentProfileName());
-  Serial.print(" len=");
-  Serial.print(payloadBytes);
-  Serial.print(" rssi=");
-  Serial.print(rssi, 1);
-  Serial.print(" snr=");
-  Serial.print(snr, 1);
-  Serial.print(" kind=");
-  Serial.println(frameKindText);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print("LORA_RX_OK profile=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(currentProfileName());
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" len=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(payloadBytes);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" rssi=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(rssi, 1);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" snr=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(snr, 1);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" kind=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.println(frameKindText);
 
   const bool replyNodeInfo = nodeInfoReplyPending;
   const bool replyAck = ackReplyPending;
@@ -820,13 +818,13 @@ bool LoRaManager::processReceivedFrame(const uint8_t* data, size_t len) {
 
   if (replyAck) sendRoutingAck(replyTo, replyRequestId, reliableAck);
   if (replyNodeInfo) {
-    Serial.println("MESH_NODEINFO_REPLY requested=true");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.println("MESH_NODEINFO_REPLY requested=true");
     sendMeshtasticNodeInfo(false);
   }
   if (requestUnknownName) {
     lastAutomaticNodeInfoRequestMs = millis();
-    Serial.print("MESH_NODEINFO_AUTO_REQUEST unknown_from=");
-    Serial.println(formatHex32(meshFrom));
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print("MESH_NODEINFO_AUTO_REQUEST unknown_from=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.println(formatHex32(meshFrom));
     sendMeshtasticNodeInfo(true);
   }
   return true;
@@ -1075,13 +1073,13 @@ bool LoRaManager::handleDecodedMeshData(const uint8_t* plain, size_t plainLen, b
   if (portnum == MESH_PORT_TEXT_MESSAGE_APP) {
     frameKindText = pkiEncrypted ? "MESH_PKI_TEXT" : "MESH_TEXT";
     payloadText = decodeTextPayload(appPayload, appLen);
-    Serial.print(pkiEncrypted ? "MESH_PKI_DECODE_OK portnum=TEXT_MESSAGE_APP from=" : "MESH_DECODE encrypted=true portnum=TEXT_MESSAGE_APP from=");
-    Serial.print(formatHex32(meshFrom));
-    Serial.print(" id=");
-    Serial.print(formatHex32(meshId));
-    Serial.print(" text_len=");
-    Serial.print((int)appLen);
-    Serial.println(" text=redacted");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(pkiEncrypted ? "MESH_PKI_DECODE_OK portnum=TEXT_MESSAGE_APP from=" : "MESH_DECODE encrypted=true portnum=TEXT_MESSAGE_APP from=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(meshFrom));
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" id=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(meshId));
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" text_len=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print((int)appLen);
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.println(" text=redacted");
     return true;
   }
 
@@ -1126,12 +1124,12 @@ bool LoRaManager::handleDecodedMeshData(const uint8_t* plain, size_t plainLen, b
       lastDeliveryFromValue = meshFrom;
       lastDeliveryAckValue = ackOk;
       deliveryRevisionCounter++;
-      Serial.print("MESH_DELIVERY_RX request_id=");
-      Serial.print(formatHex32(requestId));
-      Serial.print(" from=");
-      Serial.print(formatHex32(meshFrom));
-      Serial.print(" status=");
-      Serial.println(ackOk ? "ACK" : "NAK");
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.print("MESH_DELIVERY_RX request_id=");
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(requestId));
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" from=");
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(meshFrom));
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" status=");
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.println(ackOk ? "ACK" : "NAK");
     }
     payloadText = ackOk ? "ACK" : "ROUTING";
     return true;
@@ -1154,33 +1152,33 @@ bool LoRaManager::handleDecodedMeshData(const uint8_t* plain, size_t plainLen, b
     if (wantResponse && meshFrom != MESH_NATIVE_NODE_NUM) nodeInfoReplyPending = true;
     String name = nodeDisplayName(meshFrom);
     payloadText = name + (learnedKey ? " PKI" : " NODEINFO");
-    Serial.print("MESH_NODEINFO_RX from=");
-    Serial.print(formatHex32(meshFrom));
-    Serial.print(" user_id=");
-    Serial.print(parsedUser ? user.id : String("--"));
-    Serial.print(" identity_match=");
-    Serial.print(identityMatchesHeader ? "true" : "false");
-    Serial.print(" name=");
-    Serial.print(name);
-    Serial.print(" pki_key=");
-    Serial.print(learnedKey ? "learned" : "absent");
-    Serial.print(" peers=");
-    Serial.print((int)pki.peerCount());
-    Serial.print(" want_response=");
-    Serial.println(wantResponse ? "true" : "false");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print("MESH_NODEINFO_RX from=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(meshFrom));
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" user_id=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(parsedUser ? user.id : String("--"));
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" identity_match=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(identityMatchesHeader ? "true" : "false");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" name=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(name);
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" pki_key=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(learnedKey ? "learned" : "absent");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" peers=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print((int)pki.peerCount());
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" want_response=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.println(wantResponse ? "true" : "false");
     return true;
   }
 
   frameKindText = pkiEncrypted ? "MESH_PKI_DATA" : "MESH_DECODED";
   payloadText = String("portnum=") + String(portnum) + String(" payload=") + String((int)appLen);
-  Serial.print(pkiEncrypted ? "MESH_PKI_DECODE_OK portnum=" : "MESH_DECODE encrypted=true portnum=");
-  Serial.print(portnum);
-  Serial.print(" from=");
-  Serial.print(formatHex32(meshFrom));
-  Serial.print(" id=");
-  Serial.print(formatHex32(meshId));
-  Serial.print(" payload_len=");
-  Serial.println((int)appLen);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(pkiEncrypted ? "MESH_PKI_DECODE_OK portnum=" : "MESH_DECODE encrypted=true portnum=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(portnum);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" from=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(meshFrom));
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" id=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(meshId));
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" payload_len=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.println((int)appLen);
   return true;
 }
 
@@ -1280,11 +1278,11 @@ void LoRaManager::retryPendingForPeer(uint32_t node) {
       String text = decodeTextPayload(appPayload, appLen);
       updateInboxDecoded(pending.from, pending.id, "MESH_PKI_TEXT", text);
       pkiDecryptOkCounter++;
-      Serial.print("MESH_PKI_RETRY_OK from=");
-      Serial.print(formatHex32(pending.from));
-      Serial.print(" id=");
-      Serial.print(formatHex32(pending.id));
-      Serial.println(" text=redacted");
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.print("MESH_PKI_RETRY_OK from=");
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(pending.from));
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" id=");
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(pending.id));
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.println(" text=redacted");
     } else {
       updateInboxDecoded(pending.from, pending.id, "MESH_PKI_DATA", String("portnum=") + String(portnum));
       pkiDecryptOkCounter++;
@@ -1355,10 +1353,10 @@ void LoRaManager::rememberFrameSummary() {
 
   if (!isLbx && meshDuplicatePacket) {
     duplicateDropCounter++;
-    Serial.print("LORA_INBOX_SKIP_DUP from=");
-    Serial.print(formatHex32(meshFrom));
-    Serial.print(" id=");
-    Serial.println(formatHex32(meshId));
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print("LORA_INBOX_SKIP_DUP from=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(meshFrom));
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" id=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.println(formatHex32(meshId));
     return;
   }
 
@@ -1383,34 +1381,34 @@ void LoRaManager::rememberFrameSummary() {
   frame.lbxDevice = isLbx ? lbxDevice : (isDecodedMesh ? nodeDisplayName(meshFrom) : "");
   frame.lbxSeq = isLbx ? lbxSeq : 0;
 
-  Serial.print("LORA_INBOX_ADD slot=");
-  Serial.print((int)inboxWriteIndex);
-  Serial.print(" total=");
-  Serial.print((int)(inboxStored < MESH_INBOX_MAX ? inboxStored + 1 : inboxStored));
-  Serial.print(" kind=");
-  Serial.print(frame.kind);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print("LORA_INBOX_ADD slot=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print((int)inboxWriteIndex);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" total=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print((int)(inboxStored < MESH_INBOX_MAX ? inboxStored + 1 : inboxStored));
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" kind=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(frame.kind);
   if (isLbx || isDecodedMesh) {
-    Serial.print(" device=");
-    Serial.print(frame.lbxDevice);
-    Serial.print(" type=");
-    Serial.print(frame.lbxType.length() ? frame.lbxType : frame.kind);
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" device=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(frame.lbxDevice);
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" type=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(frame.lbxType.length() ? frame.lbxType : frame.kind);
     if (isLbx) {
-      Serial.print(" seq=");
-      Serial.print(frame.lbxSeq);
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" seq=");
+      if (FT_VERBOSE_DIAGNOSTICS) Serial.print(frame.lbxSeq);
     }
-    Serial.print(" text=redacted");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" text=redacted");
   } else {
-    Serial.print(" from=");
-    Serial.print(formatHex32(frame.from));
-    Serial.print(" id=");
-    Serial.print(formatHex32(frame.id));
-    Serial.print(" payload_len=");
-    Serial.print(frame.payloadLen);
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" from=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(frame.from));
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" id=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(formatHex32(frame.id));
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" payload_len=");
+    if (FT_VERBOSE_DIAGNOSTICS) Serial.print(frame.payloadLen);
   }
-  Serial.print(" rssi=");
-  Serial.print(frame.rssi, 1);
-  Serial.print(" snr=");
-  Serial.println(frame.snr, 1);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" rssi=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(frame.rssi, 1);
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.print(" snr=");
+  if (FT_VERBOSE_DIAGNOSTICS) Serial.println(frame.snr, 1);
 
   if (isMessageKind(frame.kind)) {
     if (unreadMessageCounter < MESH_INBOX_MAX) unreadMessageCounter++;
