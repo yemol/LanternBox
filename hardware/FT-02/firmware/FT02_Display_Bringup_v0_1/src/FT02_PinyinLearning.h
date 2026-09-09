@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-// FT-02 Offline Pinyin IME A3 user-frequency learning.
+// Offline Pinyin IME user-frequency learning.
 //
 // Privacy / persistence model:
 // - stores only Pinyin key + selected candidate + count + last-used epoch

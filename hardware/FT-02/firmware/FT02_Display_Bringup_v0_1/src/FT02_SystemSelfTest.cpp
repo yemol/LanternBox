@@ -17,6 +17,7 @@
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
 #include "FT02_Gnss.h"
+#include "FT02_GnssPowerControl.h"
 #include "FT02_InputManager.h"
 #include "FT02_LoRaNodeRuntime.h"
 #include "FT02_LR01HostRuntime.h"
@@ -30,13 +31,34 @@ namespace
 FT02SelfTestReport g_report = {};
 uint8_t g_pageIndex = 0;
 
+struct FT02CommErrorBaseline
+{
+    bool valid = false;
+    uint32_t rxErrors = 0;
+    uint32_t uartErrors = 0;
+    uint32_t radioResets = 0;
+};
+
+FT02CommErrorBaseline g_commBaseline = {};
+
+static constexpr uint8_t FT02_EXPECTED_LR01_PROTOCOL = 2;
+static constexpr uint32_t FT02_COMM_RX_WARN_TOTAL = 10u;
+static constexpr uint32_t FT02_COMM_UART_WARN_TOTAL = 10u;
+static constexpr uint32_t FT02_COMM_RADIO_RESET_WARN_TOTAL = 3u;
+
 static constexpr uint8_t FT02_SELFTEST_PAGE_COUNT = 3;
 static constexpr uint8_t FT02_SELFTEST_ITEMS_PER_PAGE = 7;
 
-static const FT02BottomBarItem FT02_SELFTEST_BOTTOM_ITEMS[3] = {
+static const FT02BottomBarItem FT02_SELFTEST_BOTTOM_DEFAULT[3] = {
     {nullptr, "←/→ 翻页"},
     {nullptr, "ENTER 重新自检"},
-    {nullptr, "K罗盘校准 / B返回"}
+    {nullptr, "B 返回"}
+};
+
+static const FT02BottomBarItem FT02_SELFTEST_BOTTOM_GNSS[3] = {
+    {nullptr, "←/→ 翻页"},
+    {nullptr, "ENTER GNSS开/关"},
+    {nullptr, "B 返回"}
 };
 
 const char* stateText(FT02SelfTestState state)
@@ -199,6 +221,38 @@ void runBattery()
 
     char detail[96];
     const char* flow = FT02_BatteryIsCharging() ? "充电" : "供电";
+    const FT02BatteryBand band = FT02_BatteryBandCurrent();
+
+    if(band == FT02_BATTERY_CRITICAL)
+    {
+        snprintf(
+            detail,
+            sizeof(detail),
+            "严重低电量 %.0f%% %.3fV %s %+.1f%%/h",
+            static_cast<double>(battery.percent),
+            static_cast<double>(battery.voltage),
+            flow,
+            static_cast<double>(battery.ratePercentPerHour)
+        );
+        addItem("电池", FT02_SELFTEST_WARN, detail);
+        return;
+    }
+
+    if(band == FT02_BATTERY_LOW)
+    {
+        snprintf(
+            detail,
+            sizeof(detail),
+            "低电量 %.0f%% %.3fV %s %+.1f%%/h",
+            static_cast<double>(battery.percent),
+            static_cast<double>(battery.voltage),
+            flow,
+            static_cast<double>(battery.ratePercentPerHour)
+        );
+        addItem("电池", FT02_SELFTEST_WARN, detail);
+        return;
+    }
+
     snprintf(
         detail,
         sizeof(detail),
@@ -208,39 +262,64 @@ void runBattery()
         flow,
         static_cast<double>(battery.ratePercentPerHour)
     );
-
-    const FT02BatteryBand band = FT02_BatteryBandCurrent();
-    if(band == FT02_BATTERY_CRITICAL || band == FT02_BATTERY_LOW)
-        addItem("电池", FT02_SELFTEST_WARN, detail);
-    else
-        addItem("电池", FT02_SELFTEST_PASS, detail);
+    addItem("电池", FT02_SELFTEST_PASS, detail);
 }
 
 void runGnss()
 {
     const FT02LR01State& lr01 = FT02_LR01HostState();
     const FT02GnssSnapshot nav = FT02_GnssSnapshotCurrent();
+    const bool userEnabled = FT02_GnssPowerDesiredEnabled();
+
     if(!FT02_LR01HostOnline())
+    {
         addItem("通讯模块", FT02_SELFTEST_FAIL, "Host UART无有效状态");
-    else
+    }
+    else if(lr01.protocolVersion == 0u)
+    {
+        addItem("通讯模块", FT02_SELFTEST_PASS, "Host UART在线·启动协议帧未捕获");
+    }
+    else if(lr01.protocolVersion == FT02_EXPECTED_LR01_PROTOCOL)
+    {
         addItem("通讯模块", FT02_SELFTEST_PASS, "Host UART协议A2在线");
-
-    if(lr01.gnssReady)
-        addItem("GNSS", FT02_SELFTEST_PASS, "导航模块GNSS数据流正常");
+    }
     else
-        addItem("GNSS", FT02_SELFTEST_FAIL, "导航模块GNSS离线");
-
-    if(nav.fixValid)
     {
         char text[96];
-        snprintf(text,sizeof(text),"%u/%u星 %s HDOP %.2f",(unsigned)nav.satellites,(unsigned)nav.satellitesVisible,nav.fixType>=3?"3D定位":"2D定位",nav.hdop);
-        addItem("GNSS定位",FT02_SELFTEST_PASS,text);
+        snprintf(text, sizeof(text), "Host UART协议A%u，期望A2", static_cast<unsigned>(lr01.protocolVersion));
+        addItem("通讯模块", FT02_SELFTEST_WARN, text);
     }
-    else if(lr01.gnssReady)
-        addItem("GNSS定位",FT02_SELFTEST_WARN,"数据流正常，当前未定位");
-    else
-        addItem("GNSS定位",FT02_SELFTEST_WARN,"等待导航模块GNSS恢复");
 
+    if(!userEnabled)
+    {
+        addItem("GNSS", FT02_SELFTEST_NA, "用户已关闭·软件待机");
+        addItem("GNSS定位", FT02_SELFTEST_NA, "GNSS关闭，未进行定位");
+    }
+    else if(FT02_GnssPowerActualKnown() && !FT02_GnssPowerActualEnabled())
+    {
+        addItem("GNSS", FT02_SELFTEST_WARN, "已请求开启，正在唤醒");
+        addItem("GNSS定位", FT02_SELFTEST_WARN, "等待GNSS恢复数据流");
+    }
+    else
+    {
+        if(lr01.gnssReady)
+            addItem("GNSS", FT02_SELFTEST_PASS, "已开启·GNSS数据流正常");
+        else
+            addItem("GNSS", FT02_SELFTEST_WARN, "已开启·等待GNSS数据流");
+
+        if(nav.fixValid)
+        {
+            char text[96];
+            snprintf(text,sizeof(text),"%u/%u星 %s HDOP %.2f",(unsigned)nav.satellites,(unsigned)nav.satellitesVisible,nav.fixType>=3?"3D定位":"2D定位",nav.hdop);
+            addItem("GNSS定位",FT02_SELFTEST_PASS,text);
+        }
+        else if(lr01.gnssReady)
+            addItem("GNSS定位",FT02_SELFTEST_WARN,"数据流正常，当前未定位");
+        else
+            addItem("GNSS定位",FT02_SELFTEST_WARN,"等待导航模块GNSS恢复");
+    }
+
+    // The QMC compass is intentionally independent from GNSS software standby.
     if(lr01.compassReady && lr01.compassValid)
     {
         char text[96];
@@ -249,7 +328,7 @@ void runGnss()
         else if(lr01.compassQuality == 2)
             snprintf(text,sizeof(text),"航向 %.1f° 已校准·可用",(double)lr01.headingX10/10.0);
         else
-            snprintf(text,sizeof(text),"航向 %.1f° 未保存校准",(double)lr01.headingX10/10.0);
+            snprintf(text,sizeof(text),"航向 %.1f° 建议校准",(double)lr01.headingX10/10.0);
         addItem("罗盘",lr01.compassQuality>=2?FT02_SELFTEST_PASS:FT02_SELFTEST_WARN,text);
     }
     else
@@ -358,7 +437,10 @@ void runTime()
 
     if(!gnss.timeValid || !lr01.timeValid || lr01.unixTime == 0u)
     {
-        addItem("系统时间", FT02_SELFTEST_WARN, "尚未获得有效GNSS时间");
+        if(!FT02_GnssPowerDesiredEnabled())
+            addItem("系统时间", FT02_SELFTEST_NA, "GNSS已关闭，未执行卫星校时");
+        else
+            addItem("系统时间", FT02_SELFTEST_WARN, "尚未获得有效GNSS时间");
         return;
     }
 
@@ -403,13 +485,22 @@ void runHostUart()
     }
 
     char text[96];
-    snprintf(text, sizeof(text), "A%u RX%lu UART错%lu",
+    if(lr01.protocolVersion == 0u)
+    {
+        snprintf(text, sizeof(text), "在线 RX%lu·协议启动帧未捕获",
+                 static_cast<unsigned long>(FT02_LR01HostRxLineCount()));
+        addItem("Host UART", FT02_SELFTEST_PASS, text);
+        return;
+    }
+
+    snprintf(text, sizeof(text), "A%u RX%lu 当前链路正常",
              static_cast<unsigned>(lr01.protocolVersion),
-             static_cast<unsigned long>(FT02_LR01HostRxLineCount()),
-             static_cast<unsigned long>(lr01.uartErrors));
+             static_cast<unsigned long>(FT02_LR01HostRxLineCount()));
 
     addItem("Host UART",
-            lr01.uartErrors == 0u ? FT02_SELFTEST_PASS : FT02_SELFTEST_WARN,
+            lr01.protocolVersion == FT02_EXPECTED_LR01_PROTOCOL
+                ? FT02_SELFTEST_PASS
+                : FT02_SELFTEST_WARN,
             text);
 }
 
@@ -455,14 +546,66 @@ void runCommunicationErrors()
 {
     const FT02LR01State& lr01 = FT02_LR01HostState();
 
-    char text[96];
-    snprintf(text, sizeof(text), "RX错%lu UART错%lu Radio复位%lu",
-             static_cast<unsigned long>(lr01.rxErrors),
-             static_cast<unsigned long>(lr01.uartErrors),
-             static_cast<unsigned long>(lr01.radioResets));
+    const auto deltaCounter = [](uint32_t current, uint32_t previous) -> uint32_t
+    {
+        // LR01 counters reset when LR01 reboots. Treat the post-reboot value as
+        // the new delta instead of allowing unsigned wrap to create a false alarm.
+        return current >= previous ? current - previous : current;
+    };
 
-    const bool anyError = lr01.rxErrors > 0u || lr01.uartErrors > 0u || lr01.radioResets > 0u;
-    addItem("通讯错误", anyError ? FT02_SELFTEST_WARN : FT02_SELFTEST_PASS, text);
+    const uint32_t deltaRx = g_commBaseline.valid
+        ? deltaCounter(lr01.rxErrors, g_commBaseline.rxErrors)
+        : 0u;
+    const uint32_t deltaUart = g_commBaseline.valid
+        ? deltaCounter(lr01.uartErrors, g_commBaseline.uartErrors)
+        : 0u;
+    const uint32_t deltaResets = g_commBaseline.valid
+        ? deltaCounter(lr01.radioResets, g_commBaseline.radioResets)
+        : 0u;
+
+    const bool newErrors = deltaRx > 0u || deltaUart > 0u || deltaResets > 0u;
+    const bool totalsHigh =
+        lr01.rxErrors >= FT02_COMM_RX_WARN_TOTAL ||
+        lr01.uartErrors >= FT02_COMM_UART_WARN_TOTAL ||
+        lr01.radioResets >= FT02_COMM_RADIO_RESET_WARN_TOTAL;
+
+    char text[96];
+    FT02SelfTestState state = FT02_SELFTEST_PASS;
+
+    if(newErrors)
+    {
+        snprintf(text, sizeof(text), "本次新增 RX+%lu UART+%lu 复位+%lu",
+                 static_cast<unsigned long>(deltaRx),
+                 static_cast<unsigned long>(deltaUart),
+                 static_cast<unsigned long>(deltaResets));
+        state = FT02_SELFTEST_WARN;
+    }
+    else if(totalsHigh)
+    {
+        snprintf(text, sizeof(text), "累计偏高 RX%lu UART%lu 复位%lu",
+                 static_cast<unsigned long>(lr01.rxErrors),
+                 static_cast<unsigned long>(lr01.uartErrors),
+                 static_cast<unsigned long>(lr01.radioResets));
+        state = FT02_SELFTEST_WARN;
+    }
+    else if(lr01.rxErrors > 0u || lr01.uartErrors > 0u || lr01.radioResets > 0u)
+    {
+        snprintf(text, sizeof(text), "当前正常·累计 RX%lu UART%lu 复位%lu",
+                 static_cast<unsigned long>(lr01.rxErrors),
+                 static_cast<unsigned long>(lr01.uartErrors),
+                 static_cast<unsigned long>(lr01.radioResets));
+    }
+    else
+    {
+        snprintf(text, sizeof(text), "当前正常·无通讯错误");
+    }
+
+    g_commBaseline.valid = true;
+    g_commBaseline.rxErrors = lr01.rxErrors;
+    g_commBaseline.uartErrors = lr01.uartErrors;
+    g_commBaseline.radioResets = lr01.radioResets;
+
+    addItem("通讯错误", state, text);
 }
 
 const char* resetReasonText(esp_reset_reason_t reason)
@@ -538,9 +681,7 @@ void drawItem(
     int baselineY
 )
 {
-    // Single-line diagnostic row: item + state + concise explanation.
-    // The second detail line used by A1/A1-layout is intentionally removed so
-    // the freed vertical space can become larger, calmer spacing between rows.
+    // Single-line diagnostic row: item, state and concise explanation.
     FT02_DrawTextPack(display, ft02_cjk_20r, item.name, x, baselineY);
     FT02_DrawTextPack(display, ft02_cjk_20r, stateText(item.state), x + 150, baselineY);
     FT02_DrawTextPack(display, ft02_cjk_20r, item.detail, x + 258, baselineY);
@@ -581,23 +722,10 @@ void FT02_SystemSelfTestRun()
     g_report.elapsedMs = millis() - started;
     saveReportLog();
 
-    Serial.printf(
-        "[SELFTEST-A2] complete pass=%u warn=%u fail=%u skip=%u elapsed=%lums\n",
-        (unsigned)g_report.passed,
-        (unsigned)g_report.warned,
-        (unsigned)g_report.failed,
-        (unsigned)g_report.skipped,
-        (unsigned long)g_report.elapsedMs
-    );
     for(uint8_t i = 0; i < g_report.count; ++i)
     {
         const FT02SelfTestItem& item = g_report.items[i];
-        Serial.printf(
-            "[SELFTEST-A2] %-12s %-4s %s\n",
-            item.name,
-            stateText(item.state),
-            item.detail
-        );
+
     }
 }
 
@@ -672,9 +800,12 @@ void FT02_DrawSystemSelfTestScreen(FT02Display& display)
             drawItem(display, report.items[i], 48, baselineY);
         }
 
-        FT02_DrawBottomBarWithFont(display, FT02_SELFTEST_BOTTOM_ITEMS, ft02_cjk_20r);
+        const FT02BottomBarItem* bottom = g_pageIndex == 1u
+            ? FT02_SELFTEST_BOTTOM_GNSS
+            : FT02_SELFTEST_BOTTOM_DEFAULT;
+        FT02_DrawBottomBarWithFont(display, bottom, ft02_cjk_20r);
     }
     while(display.nextPage());
 
-    FT02_EpdPowerOffAfterCommit(display, "system-selftest-full");
+    FT02_EpdPowerOffAfterCommit(display);
 }

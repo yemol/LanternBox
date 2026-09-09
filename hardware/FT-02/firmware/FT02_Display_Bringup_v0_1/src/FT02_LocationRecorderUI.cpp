@@ -5,6 +5,7 @@
 #include "FT02_BottomBar.h"
 #include "FT02_EpdLifecycle.h"
 #include "FT02_GnssFieldTest.h"
+#include "FT02_GnssPowerControl.h"
 #include "FT02_GlobalCJK20FontData.h"
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
@@ -40,6 +41,7 @@ static void FT02_RecorderDrawLabelValue(
 
 static const char* FT02_RecorderGnssState(const FT02GnssSnapshot& gnss)
 {
+    if(!FT02_GnssPowerDesiredEnabled()) return "已关闭";
     if(gnss.communicationActive)
     {
         if(!gnss.fixValid) return "搜索中";
@@ -47,7 +49,7 @@ static const char* FT02_RecorderGnssState(const FT02GnssSnapshot& gnss)
         if(gnss.fixType == 2) return "2D定位";
         return "已定位";
     }
-    
+
     return "连接中";
 }
 
@@ -100,9 +102,12 @@ static void FT02_DrawRecorderContent(
     }
     else
     {
-        hint = recorder.sessionActive
-            ? (recorder.autoTrackEnabled ? "路径与自动轨迹记录中" : "路径记录中")
-            : (gnss.communicationActive ? "导航模块在线" : "等待导航模块");
+        if(!FT02_GnssPowerDesiredEnabled())
+            hint = "GNSS已关闭·请在设备状态中开启";
+        else
+            hint = recorder.sessionActive
+                ? (recorder.autoTrackEnabled ? "路径与自动轨迹记录中" : "路径记录中")
+                : (gnss.communicationActive ? "导航模块在线" : "等待导航模块");
     }
     const int hintWidth = FT02_TextWidthPack(ft02_cjk_20r, hint);
     FT02_DrawTextPack(display, ft02_cjk_20r, hint, display.width() - 32 - hintWidth, 117);
@@ -141,7 +146,11 @@ static void FT02_DrawRecorderContent(
 
     if(recorder.autoTrackEnabled)
     {
-        if(gnss.fixValid)
+        if(!FT02_GnssPowerDesiredEnabled())
+        {
+            snprintf(value, sizeof(value), "暂停  GNSS关闭");
+        }
+        else if(gnss.fixValid)
         {
             snprintf(value, sizeof(value), "开启  下次%lus", (unsigned long)recorder.nextAutoSeconds);
         }
@@ -158,7 +167,9 @@ static void FT02_DrawRecorderContent(
 
     const char* originText = recorder.originRecorded
         ? "已记录"
-        : (recorder.sessionActive ? "等待定位" : "--");
+        : (recorder.sessionActive
+            ? (FT02_GnssPowerDesiredEnabled() ? "等待定位" : "GNSS关闭")
+            : "--");
     FT02_RecorderDrawLabelValue(
         display,
         "起点",
@@ -240,7 +251,7 @@ void FT02_DrawLocationRecorderScreen(
     }
     while(display.nextPage());
 
-    FT02_EpdPowerOffAfterCommit(display, "location-recorder-full");
+    FT02_EpdPowerOffAfterCommit(display);
 }
 
 void FT02_DrawLocationRecorderMiddlePartial(
@@ -254,7 +265,7 @@ void FT02_DrawLocationRecorderMiddlePartial(
     // approximately once every hour.
     if(g_ft02RecorderPartialCount >= FT02_RECORDER_PARTIAL_LIMIT)
     {
-        Serial.println("[RECORDER-UI] partial budget reached; clean full refresh");
+
         FT02_DrawLocationRecorderScreen(display, gnss, recorder);
         return;
     }
@@ -282,5 +293,5 @@ void FT02_DrawLocationRecorderMiddlePartial(
 
     display.setFullWindow();
     g_ft02RecorderPartialCount++;
-    FT02_EpdPowerOffAfterCommit(display, "location-recorder-middle-partial");
+    FT02_EpdPowerOffAfterCommit(display);
 }

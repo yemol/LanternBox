@@ -156,7 +156,6 @@ struct FT02PbfGeoLabelDisk
 };
 #pragma pack(pop)
 
-
 static uint32_t FT02_MapTileX(double lon, uint8_t zoom)
 {
     const double n = (double)(1UL << zoom);
@@ -217,7 +216,7 @@ static bool FT02_LoadRegionManifest()
         if(r.minLon < r.maxLon && r.minLat < r.maxLat && r.tileRoot[0] == '/') g_mapRegionCount++;
     }
     fclose(f);
-    Serial.printf("[MAP-SOURCE-A2] manifest loaded regions=%u\n", (unsigned)g_mapRegionCount);
+
     return g_mapRegionCount > 0;
 }
 
@@ -255,11 +254,11 @@ static bool FT02_SelectMapSource(double lon, double lat)
     snprintf(g_activeSourcePath, sizeof(g_activeSourcePath), "%s", selectedSource);
     snprintf(g_activeIndexPath, sizeof(g_activeIndexPath), "%s", selectedIndex);
     snprintf(g_activeSourceLabel, sizeof(g_activeSourceLabel), "%s", labelBuf);
-    Serial.printf("[MAP-SOURCE-A2] selected source=%s pbf=%s pbi=%s\n", g_activeSourceLabel, g_activeSourcePath, g_activeIndexPath);
+
     if(strcmp(selectedSource, FT02_PBF_SOURCE_PATH) != 0)
     {
         const bool pbiPresent = FT02_StorageFileExists(g_activeIndexPath);
-        Serial.printf("[MAP-SOURCE-A2] tile pair pbf=1 pbi=%d mode=%s\n", pbiPresent ? 1 : 0, pbiPresent ? "host-prebuilt" : "device-recovery");
+
     }
     return true;
 }
@@ -570,7 +569,6 @@ static bool FT02_WriteDmaStaged(
 
     const uint8_t* source = (const uint8_t*)input;
     size_t offset = 0;
-    size_t nextReport = 64U * 1024U;
     bool ok = true;
 
     while(offset < bytes)
@@ -599,18 +597,6 @@ static bool FT02_WriteDmaStaged(
 
         offset += chunk;
         totalWritten += chunk;
-
-        if(offset >= nextReport || offset == bytes)
-        {
-            Serial.printf(
-                "[PBF-A3.18] cache write %s %lu/%lu bytes total=%lu\n",
-                section != nullptr ? section : "?",
-                (unsigned long)offset,
-                (unsigned long)bytes,
-                (unsigned long)totalWritten
-            );
-            nextReport += 64U * 1024U;
-        }
 
         delay(1);
     }
@@ -1883,11 +1869,6 @@ static bool FT02_LoadIndex()
     g_sourceSignature = header.sourceSignature;
     g_report.indexEntries = header.entryCount;
 
-    Serial.printf(
-        "[PBF-A3.18] index loaded entries=%lu bytes=%lu\n",
-        (unsigned long)g_indexEntryCount,
-        (unsigned long)entryBytes
-    );
     return true;
 }
 
@@ -1895,15 +1876,13 @@ static bool FT02_EnsureIndexForCacheBuild()
 {
     if(FT02_LoadIndex()) return true;
 
-    Serial.println("[PBF-A3.18] validating/recovering persistent index");
-
     if(FT02_PbfIndexEnsure(
             false,
             g_activeSourcePath,
             g_activeIndexPath
         ) && FT02_LoadIndex())
     {
-        Serial.println("[PBF-A3.18] index recovered by normal ensure");
+
         return true;
     }
 
@@ -1937,7 +1916,6 @@ static bool FT02_EnsureIndexForCacheBuild()
         return false;
     }
 
-    Serial.println("[PBF-A3.18] index rebuilt and loaded");
     return true;
 }
 
@@ -1967,7 +1945,6 @@ static void FT02_ReleaseAllBuffers()
     FT02_ReleaseScreenBuffers();
     FT02_ReleaseCacheBuffers();
 }
-
 
 static bool FT02_AllocateScreenBuffers()
 {
@@ -2092,7 +2069,7 @@ static bool FT02_SaveCache(uint32_t buildElapsedMs)
     g_cacheHeader = header;
     g_cacheResident = true;
     g_report.cacheFileBytes = header.fileBytes;
-    Serial.printf("[PBF-A3.18] cache saved path=%s bytes=%lu\n", g_activeCachePath, (unsigned long)header.fileBytes);
+
     return true;
 }
 
@@ -2368,9 +2345,7 @@ static bool FT02_BuildRegionalCache()
         }
         g_report.nodeBlocksRead++;
         if((g_report.nodeBlocksRead & 7U) == 0U)
-            Serial.printf("[PBF-A3] cache node blocks=%lu nodes=%lu\n",
-                (unsigned long)g_report.nodeBlocksRead,
-                (unsigned long)g_report.nodesKept);
+
         delay(1);
     }
     g_report.nodePassMs = millis() - nodePassStart;
@@ -2395,32 +2370,13 @@ static bool FT02_BuildRegionalCache()
         }
         g_report.wayBlocksRead++;
         if((g_report.wayBlocksRead & 7U) == 0U)
-            Serial.printf("[PBF-A3] cache way blocks=%lu ways=%lu accepted=%lu geo=%lu labels=%lu\n",
-                (unsigned long)g_report.wayBlocksRead,
-                (unsigned long)g_report.waysScanned,
-                (unsigned long)g_report.waysAccepted,
-                (unsigned long)g_geoSegmentCount,
-                (unsigned long)g_geoLabelCount);
+
         delay(1);
     }
     fclose(source);
     g_report.wayPassMs = millis() - wayPassStart;
     g_report.cacheBuildMs = millis() - started;
     g_buildingCache = false;
-
-    Serial.printf(
-        "[MAP-IO-A1] raw_pbf blocks=%lu seeks=%lu reads=%lu bytes=%llu seek=%lu ms read=%lu ms inflate=%lu ms node_pass=%lu ms way_pass=%lu ms build=%lu ms\n",
-        (unsigned long)g_pbfIo.blocks,
-        (unsigned long)g_pbfIo.seeks,
-        (unsigned long)g_pbfIo.reads,
-        (unsigned long long)g_pbfIo.bytes,
-        (unsigned long)g_pbfIo.seekMs,
-        (unsigned long)g_pbfIo.readMs,
-        (unsigned long)g_pbfIo.inflateMs,
-        (unsigned long)g_report.nodePassMs,
-        (unsigned long)g_report.wayPassMs,
-        (unsigned long)g_report.cacheBuildMs
-    );
 
     if(g_report.nodesKept >= FT02_PBF_MAP_NODE_MAX_LOAD) return false;
     if(g_geoSegmentCount == 0 || g_report.segmentLimitReached) return false;
@@ -2438,8 +2394,8 @@ static bool FT02_Fail(FT02PbfMapError error)
     g_report.error = error;
     g_report.minimumFreeHeap = ESP.getMinFreeHeap();
     g_report.freePsramAfter = ESP.getFreePsram();
-    Serial.print("[PBF-A3.18] FAIL error=");
-    Serial.println((int)error);
+    Serial.printf("[PBF] build failed error=%d\n", static_cast<int>(error));
+
     FT02_ReleaseAllBuffers();
     return false;
 }
@@ -2490,14 +2446,8 @@ void FT02_PbfMapSetCenter(double longitude, double latitude)
     g_centerLat = latitude;
     g_centerWorldX = FT02_LonToWorldX(g_centerLon, g_zoom);
     g_centerWorldY = FT02_LatToWorldY(g_centerLat, g_zoom);
-    Serial.printf(
-        "[PBF-A3.18] center set %.7f,%.7f z=%d\n",
-        g_centerLon,
-        g_centerLat,
-        g_zoom
-    );
-}
 
+}
 
 bool FT02_PbfMapFitBounds(
     double minLongitude,
@@ -2586,18 +2536,6 @@ bool FT02_PbfMapFitBoundsLimited(
     g_centerLon = FT02_WorldXToLon(g_centerWorldX, g_zoom);
     g_centerLat = FT02_WorldYToLat(g_centerWorldY, g_zoom);
 
-    Serial.printf(
-        "[PBF-A3.18] fit bounds z=%d fits=%d range=Z%d-Z%d viewport=%dx%d pad=%d center=%.7f,%.7f\n",
-        g_zoom,
-        fits ? 1 : 0,
-        minimumZoom,
-        maximumZoom,
-        viewportWidth,
-        viewportHeight,
-        paddingPixels,
-        g_centerLon,
-        g_centerLat
-    );
     return fits;
 }
 
@@ -2693,12 +2631,7 @@ bool FT02_PbfMapChangeZoom(int delta)
 
     if(next == g_zoom)
     {
-        Serial.printf(
-            "[PBF-A3.18] zoom limit unchanged z=%d center=%.7f,%.7f; rebuild skipped\n",
-            g_zoom,
-            anchorLon,
-            anchorLat
-        );
+
         return false;
     }
 
@@ -2708,13 +2641,6 @@ bool FT02_PbfMapChangeZoom(int delta)
     g_centerWorldX = FT02_LonToWorldX(anchorLon, g_zoom);
     g_centerWorldY = FT02_LatToWorldY(anchorLat, g_zoom);
 
-    Serial.printf(
-        "[PBF-A3.18] zoom anchor kept oldZ=%d newZ=%d center=%.7f,%.7f\n",
-        oldZoom,
-        g_zoom,
-        g_centerLon,
-        g_centerLat
-    );
     return true;
 }
 
@@ -2744,14 +2670,6 @@ bool FT02_PbfMapBuild()
 
     const uint32_t started = millis();
 
-    Serial.println("[PBF-A3.18] regional cache map build begin");
-    Serial.printf(
-        "[PBF-A3.18] center=%.7f,%.7f zoom=%d\n",
-        g_centerLon,
-        g_centerLat,
-        g_zoom
-    );
-
     if(!FT02_StorageIsReady())
     {
         return FT02_Fail(FT02_PBF_MAP_ERROR_STORAGE);
@@ -2763,13 +2681,12 @@ bool FT02_PbfMapBuild()
         g_sourceFileBytes = 0;
         g_sourceSignature = 0;
         FT02_MapFree(g_indexEntries); g_indexEntries = nullptr; g_indexEntryCount = 0;
-        Serial.println("[MAP-SOURCE-A2] source identity/index state reset after tile switch");
+
     }
 
     const FT02ViewBounds view = FT02_CurrentViewBounds();
     bool cacheReady = false;
     FT02_SelectRegionalCacheSlot(g_centerLon, g_centerLat);
-    Serial.printf("[PBF-A3.18] cache slot path=%s anchor=%.7f,%.7f\n", g_activeCachePath, g_cacheAnchorLon, g_cacheAnchorLat);
 
     // Cold boot previously compared a valid PBC5 header against zero-valued
     // source identity fields, deleted the cache, and rebuilt it on every first
@@ -2787,12 +2704,7 @@ bool FT02_PbfMapBuild()
             Serial.println("[PBF-A3.18] source identity check failed before cache load");
             return FT02_Fail(FT02_PBF_MAP_ERROR_SOURCE_OPEN);
         }
-        Serial.printf(
-            "[PBF-A3.18] source identity ready bytes=%llu signature=0x%08lX time=%lu ms\n",
-            (unsigned long long)g_sourceFileBytes,
-            (unsigned long)g_sourceSignature,
-            (unsigned long)(millis() - identityStarted)
-        );
+
     }
 
     if(g_forceCacheRebuild)
@@ -2800,7 +2712,7 @@ bool FT02_PbfMapBuild()
         g_forceCacheRebuild = false;
         FT02_ReleaseCacheBuffers();
         FT02_StorageDeleteFile(g_activeCachePath);
-        Serial.println("[PBF-A3.18] forced regional cache rebuild requested");
+
     }
 
     // Fastest path: R, pan and zoom inside the current resident cache are
@@ -2811,7 +2723,7 @@ bool FT02_PbfMapBuild()
         cacheReady = true;
         g_report.cacheReusedInMemory = true;
         g_report.cacheFileBytes = g_cacheHeader.fileBytes;
-        Serial.println("[PBF-A3.18] RAM cache hit; index not accessed");
+
     }
     else if(g_cacheResident)
     {
@@ -2819,7 +2731,7 @@ bool FT02_PbfMapBuild()
         // the RAM copy, then try the deterministic SD slot for the new region
         // before considering an expensive raw-PBF rebuild.
         FT02_ReleaseCacheBuffers();
-        Serial.println("[PBF-A3.18] resident cache miss; checking target SD slot");
+
     }
 
     // Cold-start / region-switch path: the regional cache is self-contained. Load and use it
@@ -2847,17 +2759,11 @@ bool FT02_PbfMapBuild()
                 {
                     cacheReady = true;
                     g_report.cacheLoaded = true;
-                    Serial.printf(
-                        "[PBF-A3.18] SD cache hit path=%s segments=%lu labels=%lu time=%lu ms; index not accessed\n",
-                        candidatePath,
-                        (unsigned long)g_geoSegmentCount,
-                        (unsigned long)g_geoLabelCount,
-                        (unsigned long)g_report.cacheLoadMs
-                    );
+
                 }
                 else
                 {
-                    Serial.printf("[PBF-A3.18] SD cache does not cover view path=%s; trying/building slot\n", candidatePath);
+
                     FT02_ReleaseCacheBuffers();
                 }
             }
@@ -2877,8 +2783,6 @@ bool FT02_PbfMapBuild()
         {
             return FT02_Fail(FT02_PBF_MAP_ERROR_INDEX_INVALID);
         }
-
-        Serial.println("[PBF-A3.18] building new regional cache from raw PBF");
 
         if(!FT02_BuildRegionalCache())
         {
@@ -2918,14 +2822,6 @@ bool FT02_PbfMapBuild()
         ? "NEW CACHE"
         : (g_report.cacheLoaded ? "SD CACHE" : "RAM CACHE");
 
-    Serial.printf(
-        "[PBF-A3.18] PASS source=%s screen_segments=%lu labels=%lu project=%lu ms total=%lu ms\n",
-        source,
-        (unsigned long)g_report.segments,
-        (unsigned long)g_report.labels,
-        (unsigned long)g_report.projectMs,
-        (unsigned long)g_report.elapsedMs
-    );
     return true;
 }
 

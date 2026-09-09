@@ -427,7 +427,6 @@ static bool FT02_LineBelongsToSession(const char* line, const char* sessionId)
            strcmp(lineSessionId, sessionId) == 0;
 }
 
-
 static bool FT02_LocationRoutePointFromLine(
     const char* line,
     const char* requestedSessionId,
@@ -587,7 +586,7 @@ static void FT02_LocationLogReloadTask(void*)
         build.status.loading = false;
         build.status.loaded = false;
         FT02_LocationLogWorkerSetMessage(build, "定位记录后台加载已取消");
-        Serial.println("[LOCATION-LOG] background reload cancelled");
+
         FT02_LocationLogCommitBuild(build, false);
     }
     else
@@ -621,15 +620,6 @@ static void FT02_LocationLogReloadTask(void*)
             );
         }
 
-        Serial.printf(
-            "[LOCATION-LOG] background reload done sessions=%u total=%lu lines=%lu parse_errors=%lu truncated=%d ok=%d\n",
-            static_cast<unsigned int>(build.status.count),
-            static_cast<unsigned long>(build.status.totalSessions),
-            static_cast<unsigned long>(build.status.lineCount),
-            static_cast<unsigned long>(build.status.parseErrorCount),
-            build.status.truncated ? 1 : 0,
-            readOk ? 1 : 0
-        );
         FT02_LocationLogCommitBuild(build, true);
     }
 
@@ -650,7 +640,7 @@ void FT02_LocationLogBegin()
     g_ft02LocationLogStatus.storageReady = FT02_StorageIsReady();
     FT02_LocationLogSetMessage("尚未加载定位记录");
     FT02_LocationLogChanged();
-    Serial.println("[LOCATION-LOG] background session-list service ready");
+
 }
 
 bool FT02_LocationLogStartReload()
@@ -659,7 +649,7 @@ bool FT02_LocationLogStartReload()
     // reader against the same JSONL file or block the UI waiting for it.
     if(g_ft02LocationLogReloadTaskHandle != nullptr || g_ft02LocationLogStatus.loading)
     {
-        Serial.println("[LOCATION-LOG] background reload already active");
+
         return true;
     }
 
@@ -703,7 +693,6 @@ bool FT02_LocationLogStartReload()
         return false;
     }
 
-    Serial.println("[LOCATION-LOG] background reload queued");
     return true;
 }
 
@@ -725,7 +714,7 @@ void FT02_LocationLogCancelReload()
     // Never fclose a FILE owned by the worker from the main task. A blocked SD
     // call may take time to return, but input/GNSS/UI remain responsive.
     g_ft02LocationLogCancelRequested = true;
-    Serial.println("[LOCATION-LOG] background reload cancel requested");
+
 }
 
 bool FT02_LocationLogIsLoading()
@@ -791,7 +780,6 @@ bool FT02_LocationLogGetNewest(
 
     return output.valid;
 }
-
 
 uint16_t FT02_LocationLogWrapIndex(
     uint16_t current,
@@ -973,15 +961,7 @@ bool FT02_LocationLogLoadRoute(const char* sessionId)
         "已加载全部 %lu 个有效定位点",
         static_cast<unsigned long>(stored)
     );
-    Serial.printf(
-        "[LOCATION-LOG] route loaded session=%s points=%lu bounds=%.7f,%.7f..%.7f,%.7f\n",
-        sessionId,
-        static_cast<unsigned long>(stored),
-        g_ft02LocationRouteStatus.minLatitude,
-        g_ft02LocationRouteStatus.minLongitude,
-        g_ft02LocationRouteStatus.maxLatitude,
-        g_ft02LocationRouteStatus.maxLongitude
-    );
+
     FT02_LocationRouteChanged();
     return true;
 }
@@ -1092,11 +1072,6 @@ bool FT02_LocationLogDeleteSession(const char* sessionId)
     }
 
     FT02_StorageDeleteFile(FT02_TRACK_BACKUP_PATH);
-    Serial.printf(
-        "[LOCATION-LOG] deleted session=%s lines=%lu\n",
-        sessionId,
-        static_cast<unsigned long>(removedLines)
-    );
 
     // Rebuild the list incrementally. Deletion itself is complete at this
     // point, so do not trap the UI in a second whole-file synchronous scan.

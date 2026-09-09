@@ -16,6 +16,7 @@ void FT02_PbfMapSetLoadingReason(FT02MapLoadingReason reason)
 
 #include "FT02_PbfMapRuntime.h"
 #include "FT02_Gnss.h"
+#include "FT02_GnssPowerControl.h"
 #include "FT02_RoadNameFont.h"
 #include "FT02_FooterFont20.h"
 #include "FT02_GlobalCJKFontData.h"
@@ -595,20 +596,29 @@ static void FT02_DrawReadyBottom(FT02Display& display)
     char courseText[32];
     char altitudeText[32];
 
-    if(gnss.fixValid && gnss.speedValid)
-        snprintf(speedText, sizeof(speedText), "速度 %d", (int)lroundf(gnss.speedKmh));
-    else
-        snprintf(speedText, sizeof(speedText), "速度 --");
-
-    if(gnss.fixValid && gnss.courseValid)
-        snprintf(courseText, sizeof(courseText), "方向 %d", (int)lroundf(gnss.courseDegrees));
-    else
+    if(!FT02_GnssPowerDesiredEnabled())
+    {
+        snprintf(speedText, sizeof(speedText), "GNSS关闭");
         snprintf(courseText, sizeof(courseText), "方向 --");
-
-    if(gnss.fixValid && gnss.altitudeValid)
-        snprintf(altitudeText, sizeof(altitudeText), "海拔 %d", (int)lroundf(gnss.altitudeMeters));
-    else
         snprintf(altitudeText, sizeof(altitudeText), "海拔 --");
+    }
+    else
+    {
+        if(gnss.fixValid && gnss.speedValid)
+            snprintf(speedText, sizeof(speedText), "速度 %d", (int)lroundf(gnss.speedKmh));
+        else
+            snprintf(speedText, sizeof(speedText), "速度 --");
+
+        if(gnss.fixValid && gnss.courseValid)
+            snprintf(courseText, sizeof(courseText), "方向 %d", (int)lroundf(gnss.courseDegrees));
+        else
+            snprintf(courseText, sizeof(courseText), "方向 --");
+
+        if(gnss.fixValid && gnss.altitudeValid)
+            snprintf(altitudeText, sizeof(altitudeText), "海拔 %d", (int)lroundf(gnss.altitudeMeters));
+        else
+            snprintf(altitudeText, sizeof(altitudeText), "海拔 --");
+    }
 
     FT02_DrawMapStatusCellChinese(display, 0, speedText);
     FT02_DrawMapStatusCellChinese(display, 1, courseText);
@@ -636,9 +646,8 @@ static void FT02_DrawLoading(FT02Display& display)
     display.drawRect(70, 145, 660, 220, GxEPD_BLACK);
     display.drawRect(74, 149, 652, 212, GxEPD_BLACK);
 
-    // Map Load UX A1: this page is intentionally simple and explicit.
-    // A PBF regional-cache miss can block for tens of seconds; the user must
-    // get a visible acknowledgement before the blocking build begins.
+    // A regional cache miss can take tens of seconds, so acknowledge the
+    // action before the blocking build begins.
     const char* title = "地图加载中";
     const char* detail = "正在准备目标区域，请稍候";
     const char* note = "首次访问新区域可能需要建立缓存";
@@ -705,14 +714,6 @@ void FT02_DrawPbfMapScreen(FT02Display& display)
 {
     const FT02PbfMapReport& report = FT02_PbfMapReportCurrent();
 
-    Serial.printf(
-        "[MAP-A3.14] render begin state=%d zoom=%d center=%.7f,%.7f\n",
-        (int)report.state,
-        report.zoom,
-        report.centerLon,
-        report.centerLat
-    );
-
     if(report.state == FT02_PBF_MAP_READY)
     {
         // The home/help footer is reliable because those pages use a full
@@ -730,13 +731,8 @@ void FT02_DrawPbfMapScreen(FT02Display& display)
             FT02_DrawReadyBottom(display);
         }
         while(display.nextPage());
-        FT02_EpdPowerOffAfterCommit(display, "map-ready-full");
+        FT02_EpdPowerOffAfterCommit(display);
 
-        Serial.printf(
-            "[MAP-A3.14] FULL refresh complete; balanced 20px Chinese footer drawn zoom=%d scale=%dm\n",
-            report.zoom,
-            FT02_MapScaleMeters(report.zoom)
-        );
         return;
     }
 
@@ -753,9 +749,8 @@ void FT02_DrawPbfMapScreen(FT02Display& display)
     }
     while(display.nextPage());
     display.setFullWindow();
-    FT02_EpdPowerOffAfterCommit(display, "map-state-partial");
+    FT02_EpdPowerOffAfterCommit(display);
 }
-
 
 bool FT02_RefreshPbfMapNavigationPartial(
     FT02Display& display,
@@ -807,19 +802,7 @@ bool FT02_RefreshPbfMapNavigationPartial(
     }
     while(display.nextPage());
     display.setFullWindow();
-    FT02_EpdPowerOffAfterCommit(display, "map-nav-marker-partial");
+    FT02_EpdPowerOffAfterCommit(display);
 
-    Serial.printf(
-        "[MAP-NAV-A1] partial commit rect=%d,%d %dx%d old=%d,%d new=%d,%d total=%lums\n",
-        x0,
-        y0,
-        w,
-        h,
-        (int)oldX,
-        (int)oldY,
-        (int)newX,
-        (int)newY,
-        static_cast<unsigned long>(millis() - started)
-    );
     return true;
 }

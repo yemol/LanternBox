@@ -181,7 +181,7 @@ void resolveAck(uint32_t requestId, uint32_t error)
     {
         pending->view.state = FT02_LORA_TX_ACKED;
         ++g_ackCount;
-        Serial.printf("[LORA-MSG] ACK packet=0x%08lX\n", static_cast<unsigned long>(requestId));
+
     }
     else
     {
@@ -249,14 +249,7 @@ bool sendText(uint32_t destination, bool direct, const uint8_t* publicKey, const
     if(outPacketId != nullptr) *outPacketId = packetId;
     ++g_txCount;
     ++g_revision;
-    Serial.printf(
-        "[LORA-MSG] LR01 submit %s to=!%08lX local_id=0x%08lX bytes=%u text=%s\n",
-        direct ? "private" : "broadcast",
-        static_cast<unsigned long>(destination),
-        static_cast<unsigned long>(packetId),
-        static_cast<unsigned>(limited),
-        text
-    );
+
     return true;
 }
 
@@ -314,10 +307,7 @@ void resolveOutboxPacket(uint32_t packetId, uint32_t error)
     if(error == 0)
     {
         slot.view.state = FT02_DELIVERY_DELIVERED;
-        Serial.printf("[LORA-DELIVERY] delivered logical=0x%08lX packet=0x%08lX mode=%s\n",
-                      static_cast<unsigned long>(slot.view.logicalId),
-                      static_cast<unsigned long>(packetId),
-                      FT02_LoRaMessageDeliveryModeText(slot.view.mode));
+
     }
     else if(slot.view.mode == FT02_MESSAGE_IMMEDIATE)
     {
@@ -458,7 +448,7 @@ bool writeOutboxSnapshot()
     }
     (void)FT02_StorageDeleteFile(FT02_OUTBOX_BACKUP);
     g_outboxDirty = false;
-    Serial.printf("[LORA-DELIVERY] outbox saved entries=%u\n", static_cast<unsigned>(g_outboxCount));
+
     return true;
 }
 
@@ -480,7 +470,7 @@ bool loadOutboxSnapshot()
     if(!FT02_StorageFileExists(FT02_OUTBOX_PATH))
     {
         g_outboxLoaded = true;
-        Serial.println("[LORA-DELIVERY] outbox file absent; starting fresh");
+
         return true;
     }
 
@@ -551,7 +541,7 @@ bool loadOutboxSnapshot()
     g_outboxLoaded = true;
     if(!headerSeen) Serial.println("[LORA-DELIVERY] outbox header missing/different; valid rows recovered");
     if(normalized) markOutboxDirty();
-    Serial.printf("[LORA-DELIVERY] outbox loaded entries=%u\n", static_cast<unsigned>(g_outboxCount));
+
     return true;
 }
 
@@ -600,10 +590,7 @@ bool queuePreparedMessage(uint32_t destination, bool broadcast, const char* prep
     slot.createdMs = millis();
     snprintf(slot.view.text, sizeof(slot.view.text), "%s", preparedText);
     markOutboxDirty();
-    Serial.printf("[LORA-DELIVERY] queued logical=0x%08lX mode=%s to=!%08lX broadcast=%u\n",
-                  static_cast<unsigned long>(slot.view.logicalId),
-                  FT02_LoRaMessageDeliveryModeText(mode),
-                  static_cast<unsigned long>(destination), broadcast ? 1u : 0u);
+
     return true;
 }
 
@@ -642,11 +629,7 @@ bool trySubmitOutbox(OutboxSlot& slot, uint32_t nowMs)
     // TIMEOUT; TIMEOUT returns retryable modes to QUEUED.
     slot.view.state = FT02_DELIVERY_WAITING_ACK;
     markOutboxDirty();
-    Serial.printf("[LORA-DELIVERY] submit logical=0x%08lX packet=0x%08lX attempt=%u state=%s\n",
-                  static_cast<unsigned long>(slot.view.logicalId),
-                  static_cast<unsigned long>(packetId),
-                  static_cast<unsigned>(slot.view.attemptCount),
-                  FT02_LoRaMessageDeliveryStateText(slot.view.state));
+
     return true;
 }
 
@@ -663,9 +646,6 @@ void pollOutboxDelivery()
         {
             slot.view.state = FT02_DELIVERY_EXPIRED;
             expiryChanged = true;
-            Serial.printf("[LORA-DELIVERY] expired logical=0x%08lX mode=%s\n",
-                          static_cast<unsigned long>(slot.view.logicalId),
-                          FT02_LoRaMessageDeliveryModeText(slot.view.mode));
             continue;
         }
         if(trySubmitOutbox(slot, nowMs)) break; // respect Meshtastic client rate limit
@@ -707,7 +687,6 @@ void FT02_LoRaMessageDeliveryBegin()
     if(!loadOutboxSnapshot())
     {
         g_outboxLoadRetryMs = millis();
-        Serial.println("[LORA-DELIVERY] outbox load deferred: storage unavailable");
     }
 }
 
@@ -777,7 +756,7 @@ bool FT02_LoRaMessageCancel(uint32_t logicalId)
     if(!deliveryStateActive(slot.view.state)) return false;
     slot.view.state = FT02_DELIVERY_CANCELED;
     markOutboxDirty();
-    Serial.printf("[LORA-DELIVERY] canceled logical=0x%08lX\n", static_cast<unsigned long>(logicalId));
+
     return true;
 }
 
@@ -790,7 +769,6 @@ bool FT02_LoRaMessageClearOutbox()
     g_outboxCount = 0;
     markOutboxDirty();
 
-    Serial.println("[LORA-DELIVERY] outbox cleared");
     return true;
 }
 
@@ -927,9 +905,7 @@ void FT02_LoRaCommunicationHostReceive(uint32_t airPacketId,
     {
         ++g_duplicateCount;
         ++g_revision;
-        Serial.printf("[LORA-MSG] LR01 duplicate from=!%08lX id=0x%08lX dropped\n",
-                      static_cast<unsigned long>(from),
-                      static_cast<unsigned long>(packetId));
+
         return;
     }
 
@@ -951,14 +927,7 @@ void FT02_LoRaCommunicationHostReceive(uint32_t airPacketId,
     message.hasHops = false;
     pushInbox(message);
     g_lastRxPacketId = message.packetId;
-    Serial.printf("[LORA-MSG] LR01 RX %s from=!%08lX to=!%08lX air_id=0x%08lX rssi=%ld snr=%.1f text=%s\n",
-                  message.broadcast ? "broadcast" : "private",
-                  static_cast<unsigned long>(from),
-                  static_cast<unsigned long>(message.to),
-                  static_cast<unsigned long>(message.packetId),
-                  static_cast<long>(message.rssi),
-                  static_cast<double>(snr),
-                  message.text);
+
 }
 
 void FT02_LoRaCommunicationHostTxAccepted(uint32_t hostId)

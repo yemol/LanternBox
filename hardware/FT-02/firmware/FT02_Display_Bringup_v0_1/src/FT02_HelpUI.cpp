@@ -267,5 +267,5 @@ void FT02_DrawHelpScreen(
     }
     while(display.nextPage());
 
-    FT02_EpdPowerOffAfterCommit(display, "help-full");
+    FT02_EpdPowerOffAfterCommit(display);
 }

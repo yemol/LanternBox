@@ -201,7 +201,6 @@ static void FT02_DrawAudioHeader(
     }
 }
 
-
 static void FT02_DrawAudioListRow(
     FT02Display& display,
     uint16_t newestIndex,
@@ -426,8 +425,7 @@ static void FT02_DrawAudioPlayingContent(
 static void FT02_AudioCommitBodyPartial(
     FT02Display& display,
     void (*drawContent)(FT02Display&, uint16_t),
-    uint16_t selectedNewestIndex,
-    const char* tag
+    uint16_t selectedNewestIndex
 )
 {
     if(g_ft02AudioPartialCount >= FT02_AUDIO_PARTIAL_LIMIT)
@@ -436,7 +434,6 @@ static void FT02_AudioCommitBodyPartial(
         return;
     }
 
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(
         FT02_AUDIO_BODY_X,
@@ -460,7 +457,7 @@ static void FT02_AudioCommitBodyPartial(
     while(display.nextPage());
     FT02_EpdInteractiveEndBusyCapture(display);
     g_ft02AudioPartialCount++;
-    FT02_EpdInteractiveFinishPartial(display, tag, startedMs);
+    FT02_EpdInteractiveFinishPartial(display);
 }
 }
 
@@ -481,7 +478,7 @@ void FT02_DrawAudioLogListScreen(
         FT02_DrawBottomBarWithFont(display, FT02_AUDIO_LIST_BOTTOM_ITEMS, ft02_cjk_20r);
     }
     while(display.nextPage());
-    FT02_EpdInteractivePowerOffNow(display, "audio-log-list-full");
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
 }
 
@@ -493,11 +490,8 @@ void FT02_DrawAudioLogListBodyPartial(
     FT02_AudioCommitBodyPartial(
         display,
         FT02_DrawAudioListContent,
-        selectedNewestIndex,
-        "audio-log-list-partial"
-    );
+        selectedNewestIndex);
 }
-
 
 void FT02_DrawAudioLogListSelectionPartial(
     FT02Display& display,
@@ -520,7 +514,6 @@ void FT02_DrawAudioLogListSelectionPartial(
     const int y = FT02_AUDIO_ROW_Y + firstRow * (FT02_AUDIO_ROW_H + FT02_AUDIO_ROW_GAP);
     const int bottom = FT02_AUDIO_ROW_Y + lastRow * (FT02_AUDIO_ROW_H + FT02_AUDIO_ROW_GAP) + FT02_AUDIO_ROW_H;
     const int h = bottom - y;
-    const uint32_t startedMs = millis();
 
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(FT02_AUDIO_ROW_X, y, FT02_AUDIO_ROW_W, h);
@@ -534,7 +527,7 @@ void FT02_DrawAudioLogListSelectionPartial(
     while(display.nextPage());
     FT02_EpdInteractiveEndBusyCapture(display);
     ++g_ft02AudioPartialCount;
-    FT02_EpdInteractiveFinishPartial(display, "audio-log-list-selection-micro", startedMs);
+    FT02_EpdInteractiveFinishPartial(display);
 }
 
 void FT02_DrawAudioLogRecordingBodyPartial(
@@ -564,7 +557,7 @@ void FT02_DrawAudioLogRecordingBodyPartial(
     while(display.nextPage());
     display.setFullWindow();
     g_ft02AudioPartialCount++;
-    FT02_EpdPowerOffAfterCommit(display, "audio-log-recording-cue");
+    FT02_EpdPowerOffAfterCommit(display);
 }
 
 void FT02_DrawAudioLogRecordingTimerPartial(
@@ -593,7 +586,7 @@ void FT02_DrawAudioLogRecordingTimerPartial(
     while(display.nextPage());
     display.setFullWindow();
     g_ft02AudioPartialCount++;
-    FT02_EpdPowerOffAfterCommit(display, "audio-log-recording-timer");
+    FT02_EpdPowerOffAfterCommit(display);
 }
 
 void FT02_DrawAudioLogPlayingBodyPartial(
@@ -623,7 +616,7 @@ void FT02_DrawAudioLogPlayingBodyPartial(
     while(display.nextPage());
     display.setFullWindow();
     g_ft02AudioPartialCount++;
-    FT02_EpdPowerOffAfterCommit(display, "audio-log-playing-cue");
+    FT02_EpdPowerOffAfterCommit(display);
 }
 
 void FT02_DrawAudioLogPlayingVolumePartial(
@@ -635,7 +628,6 @@ void FT02_DrawAudioLogPlayingVolumePartial(
     // and physically shut down NS4150B. Power the EPD
     // off before releasing the audio guard so neither the partial waveform nor
     // its rail shutdown can couple into the active speaker path.
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(
         FT02_AUDIO_PLAY_VOLUME_X,
@@ -659,12 +651,8 @@ void FT02_DrawAudioLogPlayingVolumePartial(
     display.setFullWindow();
     FT02_EpdInteractiveEndBusyCapture(display);
     g_ft02AudioPartialCount++;
-    Serial.printf(
-        "[AUDIO-EPD] volume-only partial elapsed=%lums level=%u/10\n",
-        static_cast<unsigned long>(millis() - startedMs),
-        static_cast<unsigned int>(status.playbackVolumeLevel)
-    );
-    FT02_EpdInteractivePowerOffNow(display, "audio-log-playing-volume-safe");
+
+    FT02_EpdInteractivePowerOffNow(display);
 }
 
 void FT02_DrawAudioLogDeleteConfirmScreen(
@@ -736,5 +724,5 @@ void FT02_DrawAudioLogDeleteConfirmScreen(
         FT02_DrawBottomBarWithFont(display, FT02_AUDIO_DELETE_BOTTOM_ITEMS, ft02_cjk_20r);
     }
     while(display.nextPage());
-    FT02_EpdPowerOffAfterCommit(display, "audio-log-delete-confirm");
+    FT02_EpdPowerOffAfterCommit(display);
 }

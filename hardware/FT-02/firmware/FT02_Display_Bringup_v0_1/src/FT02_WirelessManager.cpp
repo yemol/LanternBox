@@ -600,12 +600,11 @@ void FT02_DrawWirelessWiFiScreen(FT02Display& display)
         drawWirelessWiFiBody(display);
     }
     while(display.nextPage());
-    FT02_EpdPowerOffAfterCommit(display, "wireless-wifi-full");
+    FT02_EpdPowerOffAfterCommit(display);
 }
 
 void FT02_DrawWirelessWiFiBodyPartial(FT02Display& display)
 {
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(0, 136, display.width(), display.height() - 136);
     display.firstPage();
@@ -615,5 +614,5 @@ void FT02_DrawWirelessWiFiBodyPartial(FT02Display& display)
     }
     while(display.nextPage());
     FT02_EpdInteractiveEndBusyCapture(display);
-    FT02_EpdInteractiveFinishPartial(display, "wireless-wifi-body-partial", startedMs);
+    FT02_EpdInteractiveFinishPartial(display);
 }

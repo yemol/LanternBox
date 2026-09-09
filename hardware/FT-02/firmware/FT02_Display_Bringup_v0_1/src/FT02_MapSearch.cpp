@@ -139,11 +139,10 @@ bool ensureDiskIndexReady()
     if(f == nullptr)
     {
         setNotice("缺少搜索目录 .search.idx");
-        Serial.printf("[MAP-SEARCH-A4] index missing path=%s\n", FT02_MAP_SEARCH_INDEX_PATH);
+        Serial.printf("[MAP-SEARCH] index missing path=%s\n", FT02_MAP_SEARCH_INDEX_PATH);
         return false;
     }
 
-    const uint32_t started = millis();
     SearchIndexHeader header = {};
     const bool headerOk =
         fread(&header, 1, sizeof(header), f) == sizeof(header) &&
@@ -158,7 +157,7 @@ bool ensureDiskIndexReady()
         fclose(f);
         resetIndexState();
         setNotice("搜索目录版本不匹配，请重新生成");
-        Serial.println("[MAP-SEARCH-A4] invalid .search.idx header/directory");
+        Serial.println("[MAP-SEARCH] invalid .search.idx header/directory");
         return false;
     }
     fclose(f);
@@ -167,21 +166,13 @@ bool ensureDiskIndexReady()
     {
         resetIndexState();
         setNotice("缺少搜索数据 .search.dat");
-        Serial.printf("[MAP-SEARCH-A4] data missing path=%s\n", FT02_MAP_SEARCH_DATA_PATH);
+        Serial.printf("[MAP-SEARCH] data missing path=%s\n", FT02_MAP_SEARCH_DATA_PATH);
         return false;
     }
 
     g_uniqueRecordCount = header.uniqueRecordCount;
     g_dataRecordCount = header.dataRecordCount;
     g_indexReady = true;
-    Serial.printf("[MAP-SEARCH-A4] directory ready buckets=%u unique=%lu data_records=%lu bytes=%u elapsed=%lums heap=%u psram=%u\n",
-                  static_cast<unsigned>(SEARCH_BUCKET_COUNT),
-                  static_cast<unsigned long>(g_uniqueRecordCount),
-                  static_cast<unsigned long>(g_dataRecordCount),
-                  static_cast<unsigned>(sizeof(g_buckets)),
-                  static_cast<unsigned long>(millis() - started),
-                  static_cast<unsigned>(ESP.getFreeHeap()),
-                  static_cast<unsigned>(ESP.getFreePsram()));
     return true;
 }
 
@@ -431,8 +422,6 @@ void runSearch()
     {
         g_mode = SEARCH_RESULTS;
         setNotice("没有找到匹配地点");
-        Serial.printf("[MAP-SEARCH-A4] query=\"%s\" bucket=%u records=0 results=0 search=0ms\n",
-                      g_query, static_cast<unsigned>(bucketId));
         return;
     }
 
@@ -441,25 +430,22 @@ void runSearch()
     {
         g_mode = SEARCH_RESULTS;
         setNotice("搜索数据文件无法打开");
-        Serial.printf("[MAP-SEARCH-A4] data open failed path=%s\n", FT02_MAP_SEARCH_DATA_PATH);
+        Serial.printf("[MAP-SEARCH] data open failed path=%s\n", FT02_MAP_SEARCH_DATA_PATH);
         return;
     }
 
-    const uint32_t started = millis();
     if(fseek(f, static_cast<long>(bucket.offsetBytes), SEEK_SET) != 0)
     {
         fclose(f);
         g_mode = SEARCH_RESULTS;
         setNotice("搜索数据定位失败");
-        Serial.printf("[MAP-SEARCH-A4] seek failed bucket=%u offset=%lu\n",
+        Serial.printf("[MAP-SEARCH] seek failed bucket=%u offset=%lu\n",
                       static_cast<unsigned>(bucketId), static_cast<unsigned long>(bucket.offsetBytes));
         return;
     }
 
     SearchIndexRecord stream[SEARCH_STREAM_RECORDS] = {};
     uint32_t remaining = bucket.recordCount;
-    uint32_t scanned = 0;
-    size_t bytesRead = 0;
     bool readError = false;
     while(remaining > 0)
     {
@@ -470,8 +456,6 @@ void runSearch()
             readError = true;
             break;
         }
-        bytesRead += got * sizeof(SearchIndexRecord);
-        scanned += static_cast<uint32_t>(got);
         remaining -= static_cast<uint32_t>(got);
 
         for(size_t i = 0; i < got; ++i)
@@ -503,15 +487,6 @@ void runSearch()
     else
         snprintf(g_notice, sizeof(g_notice), "找到 %u 个有效地点", static_cast<unsigned>(g_resultCount));
 
-    Serial.printf("[MAP-SEARCH-A4] query=\"%s\" bucket=%u bucket_records=%lu scanned=%lu bytes=%u results=%u search=%lums heap=%u psram=%u\n",
-                  g_query, static_cast<unsigned>(bucketId),
-                  static_cast<unsigned long>(bucket.recordCount),
-                  static_cast<unsigned long>(scanned),
-                  static_cast<unsigned>(bytesRead),
-                  static_cast<unsigned>(g_resultCount),
-                  static_cast<unsigned long>(millis() - started),
-                  static_cast<unsigned>(ESP.getFreeHeap()),
-                  static_cast<unsigned>(ESP.getFreePsram()));
 }
 
 void drawQuery(FT02Display& display)
@@ -574,8 +549,8 @@ void drawResults(FT02Display& display)
     else
     {
         // Three roomy two-line rows keep the detail line fully visible on the
-        // 4.26-inch panel. A4 used four 72 px rows; the 20 px AA font detail
-        // line could be clipped by the next selection band. A5 gives each
+        // On the 4.26-inch panel the detail line needs more vertical room, so
+        // each result row receives enough height to avoid clipping.
         // result its own 88 px card-sized vertical slot.
         constexpr size_t VISIBLE_ROWS = 3;
         size_t first = 0;
@@ -631,11 +606,6 @@ void FT02_MapSearchOpen()
     g_notice[0] = '\0';
     g_dirty = false;
     g_jumpReady = false;
-    Serial.printf("[MAP-SEARCH-A4] open idx=%s exists=%d dat=%s exists=%d\n",
-                  FT02_MAP_SEARCH_INDEX_PATH,
-                  FT02_StorageFileExists(FT02_MAP_SEARCH_INDEX_PATH) ? 1 : 0,
-                  FT02_MAP_SEARCH_DATA_PATH,
-                  FT02_StorageFileExists(FT02_MAP_SEARCH_DATA_PATH) ? 1 : 0);
 }
 
 void FT02_DrawMapSearchScreen(FT02Display& display)
@@ -658,11 +628,10 @@ void FT02_DrawMapSearchScreen(FT02Display& display)
     }
     while(display.nextPage());
     display.setFullWindow();
-    FT02_EpdInteractivePowerOffNow(display, "map-search-full");
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
     g_dirty = false;
 }
-
 
 static size_t FT02_MapSearchVisibleFirst(size_t selected)
 {
@@ -679,11 +648,9 @@ static void FT02_MapSearchCommitPartial(
     int x,
     int y,
     int w,
-    int h,
-    const char* source
+    int h
 )
 {
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(x, y, w, h);
     display.firstPage();
@@ -695,13 +662,13 @@ static void FT02_MapSearchCommitPartial(
     }
     while(display.nextPage());
     FT02_EpdInteractiveEndBusyCapture(display);
-    FT02_EpdInteractiveFinishPartial(display, source, startedMs);
+    FT02_EpdInteractiveFinishPartial(display);
 }
 
 void FT02_DrawMapSearchInputPartial(FT02Display& display)
 {
     // Query editor, candidates and notice. Status bar and footer stay untouched.
-    FT02_MapSearchCommitPartial(display, 16, 88, 768, 346, "map-search-input-partial");
+    FT02_MapSearchCommitPartial(display, 16, 88, 768, 346);
     g_dirty = false;
 }
 
@@ -709,7 +676,7 @@ void FT02_DrawMapSearchSelectionPartial(FT02Display& display)
 {
     if(g_mode != SEARCH_RESULTS || g_resultCount == 0)
     {
-        FT02_MapSearchCommitPartial(display, 16, 88, 768, 346, "map-search-results-partial");
+        FT02_MapSearchCommitPartial(display, 16, 88, 768, 346);
         return;
     }
 
@@ -717,7 +684,7 @@ void FT02_DrawMapSearchSelectionPartial(FT02Display& display)
     const size_t newFirst = FT02_MapSearchVisibleFirst(g_selected);
     if(oldFirst != newFirst)
     {
-        FT02_MapSearchCommitPartial(display, 16, 88, 768, 346, "map-search-results-scroll-partial");
+        FT02_MapSearchCommitPartial(display, 16, 88, 768, 346);
         return;
     }
 
@@ -728,9 +695,7 @@ void FT02_DrawMapSearchSelectionPartial(FT02Display& display)
     const int y = 150 + firstRow * 88 - 29;
     const int bottom = 150 + lastRow * 88 + 49;
     FT02_MapSearchCommitPartial(
-        display, 16, y, 768, bottom - y,
-        "map-search-selection-micro"
-    );
+        display, 16, y, 768, bottom - y);
 }
 
 FT02MapSearchAction FT02_MapSearchHandleInput(const FT02InputEvent& event)

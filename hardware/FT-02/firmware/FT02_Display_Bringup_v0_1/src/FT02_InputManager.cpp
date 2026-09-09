@@ -8,11 +8,7 @@ static uint8_t g_ft02CardKbAddress = 0x5F;
 static char g_ft02LastRawKey = 0;
 static uint32_t g_ft02LastRawKeyMillis = 0;
 
-// Discrete one-shot keys (ENTER/BACK/HELP) must not auto-repeat while the
-// same physical press is held across a long e-paper transaction.  CardKB2 can
-// occasionally expose a very short zero between repeat reports, so release is
-// only accepted after several consecutive zero samples spanning a stable
-// interval.  Direction/character keys retain the existing repeat behavior.
+// ENTER/BACK/HELP re-arm only after a stable key release; direction keys may repeat.
 static uint8_t g_ft02OneShotLatchedRaw = 0;
 static uint8_t g_ft02OneShotReleaseZeroSamples = 0;
 static uint32_t g_ft02OneShotReleaseZeroSinceMs = 0;
@@ -75,19 +71,9 @@ static void FT02_UpdateCardKbAvailability(
     if(available != g_ft02CardKbAvailable)
     {
         g_ft02CardKbAvailable = available;
-
-        if(g_ft02CardKbAvailable)
+        if(!available)
         {
-            Serial.print("FT02 InputManager: CardKB2 detected at 0x");
-            Serial.print(g_ft02CardKbAddress, HEX);
-            Serial.print(" SDA=");
-            Serial.print(g_ft02InputSdaPin);
-            Serial.print(" SCL=");
-            Serial.println(g_ft02InputSclPin);
-        }
-        else
-        {
-            Serial.println("FT02 InputManager: CardKB2 not detected, keyboard polling paused");
+            Serial.println("[INPUT] CardKB2 unavailable; polling paused");
         }
     }
 }
@@ -262,13 +248,6 @@ void FT02_InputBegin(
     );
     FT02_I2CBusInit();
 
-    Serial.print("FT02 InputManager: fixed CardKB2 pins SDA=");
-    Serial.print(g_ft02InputSdaPin);
-    Serial.print(" SCL=");
-    Serial.print(g_ft02InputSclPin);
-    Serial.print(" addr=0x");
-    Serial.println(g_ft02CardKbAddress, HEX);
-
     FT02_UpdateCardKbAvailability(true);
 }
 
@@ -282,11 +261,6 @@ void FT02_InputSetLowNoiseMode(bool enabled)
     if(g_ft02LowNoiseMode == enabled) return;
     g_ft02LowNoiseMode = enabled;
     g_ft02LastPhysicalPollMs = 0;
-    Serial.printf(
-        "[INPUT-I2C] low-noise polling=%s interval=%lums\n",
-        enabled ? "ON" : "OFF",
-        static_cast<unsigned long>(enabled ? FT02_INPUT_LOW_NOISE_POLL_MS : 0u)
-    );
 }
 
 FT02InputEvent FT02_InputPoll()
@@ -331,12 +305,6 @@ FT02InputEvent FT02_InputPoll()
                static_cast<uint32_t>(now - g_ft02OneShotReleaseZeroSinceMs) >=
                    FT02_INPUT_ONE_SHOT_RELEASE_STABLE_MS)
             {
-                Serial.printf(
-                    "[INPUT-ONE-SHOT-A16] release stable raw=0x%02X samples=%u ms=%lu\n",
-                    static_cast<unsigned>(g_ft02OneShotLatchedRaw),
-                    static_cast<unsigned>(g_ft02OneShotReleaseZeroSamples),
-                    static_cast<unsigned long>(now - g_ft02OneShotReleaseZeroSinceMs)
-                );
                 g_ft02OneShotLatchedRaw = 0;
                 g_ft02OneShotReleaseZeroSamples = 0;
                 g_ft02OneShotReleaseZeroSinceMs = 0;

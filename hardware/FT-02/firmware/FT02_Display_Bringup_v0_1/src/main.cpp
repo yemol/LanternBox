@@ -35,6 +35,8 @@
 #include "FT02_LoRaCommunicationRuntime.h"
 #include "FT02_CommunicationNodeUI.h"
 #include "FT02_CompassCalibrationUI.h"
+#include "FT02_CompassUI.h"
+#include "FT02_GnssPowerControl.h"
 #include "FT02_SystemSelfTest.h"
 #include "FT02_WirelessManager.h"
 #include "FT02_PinyinLearning.h"
@@ -72,7 +74,6 @@ FT02Display display(
     )
 );
 
-
 struct FT02DateTime
 {
     int year;
@@ -88,7 +89,6 @@ static int g_ft02LastShownMinute = -1;
 static int g_ft02HomeSelectedCard = 0;
 static FT02PageState g_ft02PageState = FT02_PAGE_HOME;
 static FT02PageState g_ft02PageBeforeHelp = FT02_PAGE_HOME;
-static bool g_ft02RuntimeBannerPrinted = false;
 static char g_ft02LastBatteryStatusLine1[16] = "";
 static char g_ft02LastBatteryStatusLine2[16] = "";
 static bool g_ft02CommunicationReadyPresented = false;
@@ -153,8 +153,8 @@ constexpr uint32_t FT02_MAP_ZOOM_SETTLE_MS = 450UL;
 constexpr uint32_t FT02_MAP_PAN_SETTLE_MS = 300UL;
 
 static void FT02_RedrawCurrentPage();
-static void FT02_ReinitializeEpdFullMode(const char* source);
-static void FT02_DrawKnowledgeAfterCleanTransition(const char* source);
+static void FT02_ReinitializeEpdFullMode();
+static void FT02_DrawKnowledgeAfterCleanTransition();
 static void FT02_SyncGnssStatusBar(bool allowPartialRefresh);
 static void FT02_SyncBatteryStatusBar(bool allowPartialRefresh);
 static void FT02_UpdateMapGnssFollow();
@@ -162,12 +162,13 @@ static void FT02_RunDirectPbfMap(bool resetDefault, bool showLoading);
 static void FT02_ScheduleMapZoomRefresh(int originalZoom);
 static void FT02_ScheduleMapPanRefresh();
 static void FT02_ProcessPendingMapRefresh();
-static void FT02_CancelPendingMapRefresh(const char* source);
-static void FT02_ArmMapNavReleaseGate(const char* source);
+static void FT02_CancelPendingMapRefresh();
+static void FT02_ArmMapNavReleaseGate();
 static void FT02_OpenAudioLogListPage(bool reload);
 static void FT02_ClampAudioLogSelection();
 static bool FT02_ArmAudioCommandAfterRelease(const FT02InputEvent& event);
 static void FT02_OpenDeviceStatusPage();
+static void FT02_OpenCompassPage();
 static void FT02_OpenFieldLibraryPage();
 static void FT02_OpenMapSearchPage();
 static void FT02_OpenWirelessWiFiPage();
@@ -322,10 +323,6 @@ static void FT02_UpdateClockCacheOnly()
     FT02_SetStatusBarClockCache(hhmm, mmdd);
     g_ft02LastShownMinute = FT02_DateTimeMinuteKey(now);
 
-    Serial.print("Clock cache: ");
-    Serial.print(hhmm);
-    Serial.print(" ");
-    Serial.println(mmdd);
 }
 
 static void FT02_UpdateClockIfNeeded(bool force)
@@ -343,7 +340,6 @@ static void FT02_UpdateClockIfNeeded(bool force)
     if(FT02_IsMapStatusPartialSuppressed())
     {
         FT02_UpdateClockCacheOnly();
-        Serial.println("[MAP] clock cache updated; background status partial suppressed");
         return;
     }
 
@@ -355,7 +351,6 @@ static void FT02_UpdateClockIfNeeded(bool force)
     if(g_ft02PageState == FT02_PAGE_KNOWLEDGE || g_ft02PageState == FT02_PAGE_LIBRARY)
     {
         FT02_UpdateClockCacheOnly();
-        Serial.println("[EPD] static/reader-page clock cache updated; background status partial suppressed");
         return;
     }
 
@@ -380,19 +375,12 @@ static void FT02_UpdateClockIfNeeded(bool force)
         now.day
     );
 
-    Serial.print("Clock update: ");
-    Serial.print(hhmm);
-    Serial.print(" ");
-    Serial.println(mmdd);
-
     FT02_DrawStatusBarClock(
         display,
         hhmm,
         mmdd
     );
 }
-
-
 
 static void FT02_SyncBatteryStatusBar(bool allowPartialRefresh)
 {
@@ -428,7 +416,15 @@ static void FT02_SyncGnssStatusBar(bool allowPartialRefresh)
     const char* line1 = "GPS";
     const char* line2 = "连接中";
 
-    if(snapshot.communicationActive)
+    if(!FT02_GnssPowerDesiredEnabled())
+    {
+        line2 = "已关闭";
+    }
+    else if(FT02_GnssPowerActualKnown() && !FT02_GnssPowerActualEnabled())
+    {
+        line2 = "唤醒中";
+    }
+    else if(snapshot.communicationActive)
     {
         if(snapshot.fixValid)
         {
@@ -456,11 +452,6 @@ static void FT02_SyncGnssStatusBar(bool allowPartialRefresh)
 
     snprintf(g_ft02LastGnssStatusLine1, sizeof(g_ft02LastGnssStatusLine1), "%s", line1);
     snprintf(g_ft02LastGnssStatusLine2, sizeof(g_ft02LastGnssStatusLine2), "%s", line2);
-
-    Serial.print("GNSS status cache: ");
-    Serial.print(line1);
-    Serial.print(" / ");
-    Serial.println(line2);
 
     // Knowledge pages must not receive status-bar partial updates because that
     // can reintroduce the pale-band controller state. The GNSS page already
@@ -514,42 +505,11 @@ static void FT02_RefreshStorageStatusCache()
     }
 
     FT02_SetStatusBarStorageCache(line1, line2);
-    Serial.print("Storage status cache: ");
-    Serial.print(line1);
-    Serial.print(" / ");
-    Serial.println(line2);
 }
 
-static void FT02_PrintRuntimeBannerIfNeeded()
+static void FT02_ReinitializeEpdFullMode()
 {
-    if(g_ft02RuntimeBannerPrinted)
-    {
-        return;
-    }
-
-    if(millis() < 5000)
-    {
-        return;
-    }
-
-    g_ft02RuntimeBannerPrinted = true;
-
-    Serial.print("FT-02 runtime alive: ");
-    Serial.print(FT02_FIRMWARE_BUILD_LABEL);
-    Serial.print(" + Location Recorder A3 + FieldManualRuntime + PBF Map UI A3.14 SPI40, ");
-    Serial.print(FT02_StorageProfileText());
-    Serial.println(", LR01 single-authority navigation/radio, Help restored, CardKB2 SDA=47 SCL=21");
-    Serial.flush();
-}
-
-static void FT02_ReinitializeEpdFullMode(const char* source)
-{
-    Serial.print("[EPD] clean full-mode reinit begin source=");
-    Serial.println(source != nullptr ? source : "unknown");
-
-    // End any previous display lifecycle, then hard-cycle only the e-paper
-    // power rail. This is the sequence proven by v2.44 to clear the stale
-    // partial-update/LUT state that caused one horizontal Card band to fade.
+    // Hard-cycle the e-paper rail to clear stale partial-update state.
     display.epd2.powerOff();
     delay(30);
 
@@ -573,29 +533,20 @@ static void FT02_ReinitializeEpdFullMode(const char* source)
     );
     display.setRotation(2);
 
-    Serial.println("[EPD] clean full-mode reinit complete");
 }
 
-static void FT02_DrawKnowledgeAfterCleanTransition(const char* source)
+static void FT02_DrawKnowledgeAfterCleanTransition()
 {
-    // v2.48: keep the controller power-cycle/full-mode reinitialization that
-    // eliminated the pale-band issue, but do not submit a separate visible
-    // white frame. The final knowledge page is the first and only refresh.
-    FT02_ReinitializeEpdFullMode(source);
+    // Reinitialize the panel before the final knowledge-page commit.
+    FT02_ReinitializeEpdFullMode();
     FT02_UpdateClockCacheOnly();
     FT02_SyncGnssStatusBar(false);
-    Serial.println("[EPD] single-refresh entry: drawing final knowledge frame");
     FT02_DrawKnowledgeScreen(display);
 }
 
 static void FT02_RedrawCurrentPage()
 {
-    // Map UX A4: while a pan/zoom target is still settling, the scheduler is
-    // the sole owner of the next map-page commit.  Any unrelated redraw
-    // request is intentionally ignored here so the old map cannot be
-    // refreshed once immediately before the final target frame.  The
-    // scheduler clears g_ft02MapRefreshPending before calling the normal
-    // build/redraw path, so the final target still commits exactly once.
+    // While map pan/zoom is settling, the scheduler owns the next commit.
     if(g_ft02PageState == FT02_PAGE_MAP && g_ft02MapRefreshPending)
     {
         return;
@@ -614,22 +565,8 @@ static void FT02_RedrawCurrentPage()
 
     if(g_ft02PageState == FT02_PAGE_MAP)
     {
-        const FT02PbfMapReport& mapReport = FT02_PbfMapReportCurrent();
-        if(mapReport.state == FT02_PBF_MAP_READY)
-        {
-            // Production navigation is intentionally 1-bit black/white.
-            // Road hierarchy is encoded by line width/style and buildings
-            // remain outline-only so the page stays compatible with fast
-            // navigation redraws.
-            Serial.println("[MAP-BW-A1] production BW navigation commit");
-            FT02_PbfMapSetFollowGnss(g_ft02MapFollowGnss);
-            FT02_DrawPbfMapScreen(display);
-        }
-        else
-        {
-            FT02_PbfMapSetFollowGnss(g_ft02MapFollowGnss);
-            FT02_DrawPbfMapScreen(display);
-        }
+        FT02_PbfMapSetFollowGnss(g_ft02MapFollowGnss);
+        FT02_DrawPbfMapScreen(display);
         return;
     }
 
@@ -687,6 +624,10 @@ static void FT02_RedrawCurrentPage()
     {
         FT02_DrawSystemSelfTestScreen(display);
     }
+    else if(g_ft02PageState == FT02_PAGE_COMPASS)
+    {
+        FT02_DrawCompassScreen(display);
+    }
     else if(g_ft02PageState == FT02_PAGE_COMPASS_CALIBRATION)
     {
         FT02_DrawCompassCalibrationScreen(display);
@@ -724,13 +665,9 @@ static void FT02_OpenHelpPage()
     g_ft02PageBeforeHelp = g_ft02PageState;
     if(g_ft02PageBeforeHelp == FT02_PAGE_MAP)
     {
-        FT02_CancelPendingMapRefresh("map-to-help");
+        FT02_CancelPendingMapRefresh();
     }
     g_ft02PageState = FT02_PAGE_HELP;
-
-    Serial.print("Page: ");
-    Serial.print((int)g_ft02PageBeforeHelp);
-    Serial.println(" -> HELP");
 
     FT02_RedrawCurrentPage();
 }
@@ -747,7 +684,7 @@ static void FT02_ReturnHomePage()
 
     if(g_ft02PageState == FT02_PAGE_MAP)
     {
-        FT02_CancelPendingMapRefresh("map-to-home");
+        FT02_CancelPendingMapRefresh();
         FT02_PbfMapUnload();
     }
     if(g_ft02PageState == FT02_PAGE_WIRELESS_WIFI)
@@ -757,17 +694,16 @@ static void FT02_ReturnHomePage()
 
     FT02_RefreshStorageStatusCache();
     g_ft02PageState = FT02_PAGE_HOME;
-    Serial.println("Page: current -> HOME");
 
     if(returningFromKnowledge)
     {
         // v2.48: use the same proven clean-controller transition as knowledge
         // entry, but submit the final home page as the first and only frame.
         // This preserves the pale-band fix without a separate white refresh.
-        FT02_ReinitializeEpdFullMode("knowledge-exit-home");
+        FT02_ReinitializeEpdFullMode();
         FT02_UpdateClockCacheOnly();
         FT02_SyncGnssStatusBar(false);
-        Serial.println("[EPD] single-refresh exit: drawing final home frame");
+
         FT02_DrawHomeScreen(display, g_ft02HomeSelectedCard);
         return;
     }
@@ -784,12 +720,9 @@ static void FT02_ReturnFromHelpPage()
 
     g_ft02PageState = g_ft02PageBeforeHelp;
 
-    Serial.print("Page: HELP -> ");
-    Serial.println((int)g_ft02PageState);
-
     if(g_ft02PageState == FT02_PAGE_KNOWLEDGE)
     {
-        FT02_DrawKnowledgeAfterCleanTransition("help-return-knowledge");
+        FT02_DrawKnowledgeAfterCleanTransition();
         return;
     }
 
@@ -833,34 +766,17 @@ static bool FT02_MapCenterOnCurrentGnss()
     return true;
 }
 
-static const char* FT02_MapRefreshKindText(FT02MapRefreshKind kind)
-{
-    switch(kind)
-    {
-        case FT02_MAP_REFRESH_ZOOM: return "zoom";
-        case FT02_MAP_REFRESH_PAN: return "pan";
-        default: return "none";
-    }
-}
-
-static void FT02_ArmMapNavReleaseGate(const char* source)
+static void FT02_ArmMapNavReleaseGate()
 {
     g_ft02MapRequireNavRelease = true;
     g_ft02MapReleaseZeroSinceMs = 0;
-    Serial.printf("[MAP-INPUT-A5] release gate armed source=%s stable=%lums\n",
-                  source != nullptr ? source : "unknown",
-                  static_cast<unsigned long>(FT02_MAP_NAV_RELEASE_STABLE_MS));
+
 }
 
-static void FT02_CancelPendingMapRefresh(const char* source)
+static void FT02_CancelPendingMapRefresh()
 {
     if(!g_ft02MapRefreshPending) return;
 
-    Serial.printf(
-        "[MAP-UX-A3] pending %s refresh cancelled source=%s\n",
-        FT02_MapRefreshKindText(g_ft02MapRefreshKind),
-        source != nullptr ? source : "unknown"
-    );
     g_ft02MapRefreshPending = false;
     g_ft02MapRefreshDeadlineMs = 0;
     g_ft02MapPendingZoomFrom = 0;
@@ -877,12 +793,7 @@ static void FT02_ScheduleMapZoomRefresh(int originalZoom)
     g_ft02MapRefreshPending = true;
     g_ft02MapRefreshKind = FT02_MAP_REFRESH_ZOOM;
     g_ft02MapRefreshDeadlineMs = millis() + FT02_MAP_ZOOM_SETTLE_MS;
-    Serial.printf(
-        "[MAP-UX-A3] zoom refresh queued from=Z%d target=Z%d settle=%lums\n",
-        g_ft02MapPendingZoomFrom,
-        FT02_PbfMapZoomCurrent(),
-        static_cast<unsigned long>(FT02_MAP_ZOOM_SETTLE_MS)
-    );
+
 }
 
 static void FT02_ScheduleMapPanRefresh()
@@ -891,11 +802,7 @@ static void FT02_ScheduleMapPanRefresh()
     g_ft02MapRefreshKind = FT02_MAP_REFRESH_PAN;
     g_ft02MapPendingZoomFrom = 0;
     g_ft02MapRefreshDeadlineMs = millis() + FT02_MAP_PAN_SETTLE_MS;
-    Serial.printf(
-        "[MAP-UX-A3] pan refresh queued zoom=Z%d settle=%lums\n",
-        FT02_PbfMapZoomCurrent(),
-        static_cast<unsigned long>(FT02_MAP_PAN_SETTLE_MS)
-    );
+
 }
 
 static void FT02_ProcessPendingMapRefresh()
@@ -904,7 +811,7 @@ static void FT02_ProcessPendingMapRefresh()
 
     if(g_ft02PageState != FT02_PAGE_MAP)
     {
-        FT02_CancelPendingMapRefresh("page-changed");
+        FT02_CancelPendingMapRefresh();
         return;
     }
 
@@ -915,41 +822,20 @@ static void FT02_ProcessPendingMapRefresh()
     }
 
     const FT02MapRefreshKind commitKind = g_ft02MapRefreshKind;
-    const int fromZoom = g_ft02MapPendingZoomFrom;
-    const int targetZoom = FT02_PbfMapZoomCurrent();
     g_ft02MapRefreshPending = false;
     g_ft02MapRefreshDeadlineMs = 0;
     g_ft02MapPendingZoomFrom = 0;
     g_ft02MapRefreshKind = FT02_MAP_REFRESH_NONE;
 
-    if(commitKind == FT02_MAP_REFRESH_ZOOM)
-    {
-        Serial.printf(
-            "[MAP-UX-A3] queued zoom commit from=Z%d target=Z%d one-render=yes\n",
-            fromZoom,
-            targetZoom
-        );
-    }
-    else
-    {
-        const FT02PbfMapReport& report = FT02_PbfMapReportCurrent();
-        Serial.printf(
-            "[MAP-UX-A3] queued pan commit center=%.7f,%.7f zoom=Z%d one-render=yes\n",
-            report.centerLon,
-            report.centerLat,
-            targetZoom
-        );
-    }
     // The following build + display commit is blocking. Disarm map navigation
     // before entering it so a held key cannot leak through as a new pan batch
     // when the loop resumes. The gate is released only after a zero raw key is
     // observed in loop().
-    FT02_ArmMapNavReleaseGate("pan-zoom-commit");
+    FT02_ArmMapNavReleaseGate();
     FT02_PbfMapSetLoadingReason(
         commitKind == FT02_MAP_REFRESH_ZOOM ? FT02_MAP_LOADING_ZOOM : FT02_MAP_LOADING_PAN
     );
-    Serial.printf("[MAP-LOAD-A2] operation=%s visible acknowledgement before blocking build\n",
-                  commitKind == FT02_MAP_REFRESH_ZOOM ? "zoom" : "pan");
+
     FT02_RunDirectPbfMap(false, true);
 }
 
@@ -964,9 +850,9 @@ static void FT02_RunDirectPbfMap(bool resetDefault, bool showLoading)
     FT02_PbfMapPrepare();
     if(showLoading)
     {
-        Serial.println("[MAP-LOAD-A1] visible loading acknowledgement commit begin");
+
         FT02_RedrawCurrentPage();
-        Serial.println("[MAP-LOAD-A1] loading acknowledgement visible; blocking map build may begin");
+
     }
 
     FT02_PbfMapBuild();
@@ -998,7 +884,7 @@ static void FT02_UpdateMapGnssFollow()
 
     if(!g_ft02MapHasTrackedFix)
     {
-        Serial.println("[MAP-NAV-A1] first GNSS fix acquired; centering map");
+
         FT02_MapCenterOnCurrentGnss();
         FT02_PbfMapSetLoadingReason(FT02_MAP_LOADING_NAVIGATION);
         FT02_RunDirectPbfMap(false, true);
@@ -1029,15 +915,6 @@ static void FT02_UpdateMapGnssFollow()
     const bool headingChanged = headingValidityChanged ||
         (gnss.courseValid && g_ft02MapLastHeadingValid &&
          headingDelta >= FT02_MAP_HEADING_REFRESH_DEGREES);
-
-    Serial.printf(
-        "[MAP-NAV-A2] 10s check moved=%.1fm heading_delta=%.1fdeg heading_valid=%u threshold=%.1fdeg partial_count=%u\n",
-        movedMeters,
-        static_cast<double>(headingDelta),
-        gnss.courseValid ? 1u : 0u,
-        static_cast<double>(FT02_MAP_HEADING_REFRESH_DEGREES),
-        static_cast<unsigned>(g_ft02MapPartialNavRefreshCount)
-    );
 
     if(movedMeters < FT02_MAP_FOLLOW_DISTANCE_METERS)
     {
@@ -1075,9 +952,7 @@ static void FT02_UpdateMapGnssFollow()
         g_ft02MapLastHeadingValid = gnss.courseValid;
         g_ft02MapLastHeadingDeg = gnss.courseDegrees;
         g_ft02MapLastFollowRefreshMs = now;
-        Serial.printf("[MAP-NAV-A2] heading marker refresh heading=%.1f delta=%.1f\n",
-                      static_cast<double>(gnss.courseDegrees),
-                      static_cast<double>(headingDelta));
+
         return;
     }
 
@@ -1108,24 +983,12 @@ static void FT02_UpdateMapGnssFollow()
 
         if(g_ft02MapPartialNavRefreshCount + 1 >= FT02_MAP_PARTIAL_CLEANUP_COUNT)
         {
-            Serial.printf(
-                "[MAP-NAV-A1] partial cleanup threshold reached (%u); BW full refresh without PBF rebuild\n",
-                static_cast<unsigned>(FT02_MAP_PARTIAL_CLEANUP_COUNT)
-            );
+
             FT02_RedrawCurrentPage();
             g_ft02MapPartialNavRefreshCount = 0;
             return;
         }
 
-        Serial.printf(
-            "[MAP-NAV-A1] marker partial old=%.6f,%.6f new=%.6f,%.6f screen=%d,%d\n",
-            oldLat,
-            oldLon,
-            gnss.latitude,
-            gnss.longitude,
-            static_cast<int>(localX),
-            static_cast<int>(localY)
-        );
         if(FT02_RefreshPbfMapNavigationPartial(
             display,
             oldLon,
@@ -1138,20 +1001,13 @@ static void FT02_UpdateMapGnssFollow()
         }
         else
         {
-            Serial.println("[MAP-NAV-A1] partial refresh unavailable; using BW full refresh without PBF rebuild");
+
             FT02_RedrawCurrentPage();
             g_ft02MapPartialNavRefreshCount = 0;
         }
         return;
     }
 
-    Serial.printf(
-        "[MAP-NAV-A1] safe-box exit screen=%d,%d; recentering map at %.6f,%.6f\n",
-        static_cast<int>(localX),
-        static_cast<int>(localY),
-        gnss.latitude,
-        gnss.longitude
-    );
     FT02_MapCenterOnCurrentGnss();
     FT02_PbfMapSetLoadingReason(FT02_MAP_LOADING_NAVIGATION);
     FT02_RunDirectPbfMap(false, true);
@@ -1180,10 +1036,9 @@ static void FT02_OpenMapPage()
     if(!FT02_MapCenterOnCurrentGnss())
     {
         FT02_PbfMapResetView();
-        Serial.println("[MAP-A3.14] no live GNSS fix; opening at default center");
+
     }
 
-    Serial.println("Page: HOME -> DIRECT PBF MAP A3.14 GNSS FOLLOW");
     FT02_RunDirectPbfMap(false, true);
 }
 
@@ -1205,7 +1060,7 @@ static void FT02_OpenLocationRecorderPage()
     g_ft02RecorderLastGnssGeneration = gnss.uiGeneration;
     g_ft02RecorderLastUiGeneration = recorder.uiGeneration;
     g_ft02GnssFieldTestLastGeneration = fieldTest.uiGeneration;
-    Serial.println("Page: HOME -> LOCATION RECORDER A4 source=LR01 NAV_STATE");
+
     FT02_RedrawCurrentPage();
     // Start the live-refresh interval only after the blocking e-paper commit
     // has completed. This prevents a long refresh from consuming the next
@@ -1240,12 +1095,7 @@ static void FT02_OpenLocationLogListPage(bool reload)
     g_ft02LocationLogLastGeneration = FT02_LocationLogStatusCurrent().generation;
 
     const FT02LocationLogStatus status = FT02_LocationLogStatusCurrent();
-    Serial.printf(
-        "Page: LOCATION RECORDER -> LOCATION LOG LIST loading=%d count=%u selected=%u\n",
-        status.loading ? 1 : 0,
-        static_cast<unsigned int>(status.count),
-        static_cast<unsigned int>(g_ft02LocationLogSelectedIndex)
-    );
+
     FT02_RedrawCurrentPage();
 }
 
@@ -1259,10 +1109,7 @@ static bool FT02_OpenLocationLogDetailPage()
 
     FT02_PrepareLocationLogDetailMap(g_ft02LocationLogSelectedIndex);
     g_ft02PageState = FT02_PAGE_LOCATION_LOG_DETAIL;
-    Serial.printf(
-        "Page: LOCATION LOG LIST -> DETAIL session=%s\n",
-        entry.sessionId
-    );
+
     FT02_RedrawCurrentPage();
     return true;
 }
@@ -1276,10 +1123,7 @@ static bool FT02_OpenLocationLogDeleteConfirmPage(FT02PageState returnPage)
     }
     if(entry.active)
     {
-        Serial.printf(
-            "[LOCATION-LOG] delete blocked for active session=%s\n",
-            entry.sessionId
-        );
+
         return false;
     }
 
@@ -1288,7 +1132,6 @@ static bool FT02_OpenLocationLogDeleteConfirmPage(FT02PageState returnPage)
     FT02_RedrawCurrentPage();
     return true;
 }
-
 
 static bool FT02_ArmAudioCommandAfterRelease(const FT02InputEvent& event)
 {
@@ -1305,7 +1148,7 @@ static bool FT02_ArmAudioCommandAfterRelease(const FT02InputEvent& event)
     }
     if(g_ft02AudioCommandReleaseRequired)
     {
-        Serial.println("[AUDIO-UI] command ignored until key release");
+
         return false;
     }
     g_ft02AudioCommandReleaseRequired = true;
@@ -1336,11 +1179,7 @@ static void FT02_OpenAudioLogListPage(bool reload)
     g_ft02AudioLastShownRecordBucket = 0xFFFFFFFFu;
     g_ft02AudioLastShownVolume = 0xFFu;
     g_ft02PageState = FT02_PAGE_AUDIO_LOG_LIST;
-    Serial.printf(
-        "Page: HOME -> AUDIO LOG LIST count=%u selected=%u\n",
-        static_cast<unsigned int>(FT02_AudioLogStatusCurrent().count),
-        static_cast<unsigned int>(g_ft02AudioLogSelectedIndex)
-    );
+
     FT02_RedrawCurrentPage();
 }
 
@@ -1354,7 +1193,6 @@ static bool FT02_OpenAudioLogDeleteConfirmPage()
     return true;
 }
 
-
 static void FT02_OpenFieldLibraryPage()
 {
     if(g_ft02PageState == FT02_PAGE_LIBRARY) return;
@@ -1362,9 +1200,7 @@ static void FT02_OpenFieldLibraryPage()
     FT02_FieldLibraryBegin(false);
     FT02_FieldLibraryReset();
     g_ft02PageState = FT02_PAGE_LIBRARY;
-    Serial.printf("Page: HOME -> FIELD LIBRARY Alpha books=%d ready=%d\n",
-                  FT02_FieldLibraryBookCount(),
-                  FT02_FieldLibraryReady() ? 1 : 0);
+
     FT02_RedrawCurrentPage();
 }
 
@@ -1377,13 +1213,11 @@ static void FT02_OpenKnowledgePage()
 
     FT02_KnowledgeReset();
     g_ft02PageState = FT02_PAGE_KNOWLEDGE;
-    Serial.print("Page: HOME -> FIELD MANUAL RUNTIME A1 ");
-    Serial.println(FT02_FIRMWARE_VERSION);
 
     // v2.48 optimization: preserve the proven controller power-cycle and
     // full-mode reinitialization, then submit the final knowledge page as the
     // first frame. This removes the separate visible white refresh.
-    FT02_DrawKnowledgeAfterCleanTransition("home-enter-knowledge");
+    FT02_DrawKnowledgeAfterCleanTransition();
 }
 
 static void FT02_OpenCompassCalibrationPage();
@@ -1427,7 +1261,7 @@ static void FT02_OpenDeviceStatusPage()
     if(g_ft02PageState == FT02_PAGE_DEVICE_STATUS) return;
     g_ft02PageState = FT02_PAGE_DEVICE_STATUS;
     FT02_SystemSelfTestRun();
-    Serial.println("Page: HOME -> DEVICE STATUS / SYSTEM SELF-TEST A1");
+
     FT02_RedrawCurrentPage();
 }
 
@@ -1441,11 +1275,6 @@ static bool FT02_HandleDeviceStatusInput(const FT02InputEvent& event)
     if(event.key == FT02_KEY_HELP)
     {
         FT02_OpenHelpPage();
-        return true;
-    }
-    if(event.key == FT02_KEY_CHAR && event.command == 'k')
-    {
-        FT02_OpenCompassCalibrationPage();
         return true;
     }
     if(event.key == FT02_KEY_LEFT || event.key == FT02_KEY_UP)
@@ -1470,8 +1299,52 @@ static bool FT02_HandleDeviceStatusInput(const FT02InputEvent& event)
     }
     if(event.key == FT02_KEY_SELECT)
     {
-        FT02_SystemSelfTestRun();
+        if(FT02_SystemSelfTestPage() == 1u)
+        {
+            const bool nextEnabled = !FT02_GnssPowerDesiredEnabled();
+            (void)FT02_GnssPowerSetEnabled(nextEnabled);
+            FT02_SystemSelfTestRun();
+            // Re-running self-test resets the report page to page 1. Keep the
+            // user on the GNSS control page after a toggle so ON/OFF can be
+            // verified immediately without navigating back.
+            FT02_SystemSelfTestSetPage(1u);
+            FT02_SyncGnssStatusBar(false);
+
+        }
+        else
+        {
+            FT02_SystemSelfTestRun();
+        }
         FT02_RedrawCurrentPage();
+        return true;
+    }
+    return false;
+}
+
+static void FT02_OpenCompassPage()
+{
+    if(g_ft02PageState == FT02_PAGE_COMPASS) return;
+    g_ft02PageState = FT02_PAGE_COMPASS;
+    FT02_CompassUIOpen();
+
+    FT02_RedrawCurrentPage();
+}
+
+static bool FT02_HandleCompassInput(const FT02InputEvent& event)
+{
+    if(event.key == FT02_KEY_BACK)
+    {
+        FT02_ReturnHomePage();
+        return true;
+    }
+    if(event.key == FT02_KEY_HELP)
+    {
+        FT02_OpenHelpPage();
+        return true;
+    }
+    if(event.key == FT02_KEY_SELECT)
+    {
+        FT02_OpenCompassCalibrationPage();
         return true;
     }
     return false;
@@ -1483,7 +1356,7 @@ static void FT02_OpenCompassCalibrationPage()
     FT02_CompassCalibrationUIOpen();
     g_ft02LastCompassCalRevision = FT02_CompassCalibrationUIRevision();
     g_ft02LastCompassCalRedrawMs = millis();
-    Serial.println("Page: DEVICE STATUS -> COMPASS CALIBRATION A1");
+
     FT02_RedrawCurrentPage();
 }
 
@@ -1494,7 +1367,8 @@ static bool FT02_HandleCompassCalibrationInput(const FT02InputEvent& event)
 
     if(action == FT02_COMPASS_CAL_UI_EXIT)
     {
-        g_ft02PageState = FT02_PAGE_DEVICE_STATUS;
+        g_ft02PageState = FT02_PAGE_COMPASS;
+        FT02_CompassUIOpen();
         FT02_RedrawCurrentPage();
         return true;
     }
@@ -1518,11 +1392,7 @@ static void FT02_OpenCommunicationPage()
     g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
     g_ft02LastLR01NodeListMs = FT02_LR01HostState().lastNodeListMs;
     g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
-    Serial.printf(
-        "Page: HOME -> COMMUNICATION Complete Runtime A1 ready=%d nodes=%u\n",
-        g_ft02CommunicationReadyPresented ? 1 : 0,
-        static_cast<unsigned>(FT02_LoRaNodeRuntimeNodeCount())
-    );
+
     FT02_RedrawCurrentPage();
 }
 
@@ -1602,8 +1472,6 @@ static bool FT02_HandleHomeInput(
     }
     else if(event.key == FT02_KEY_SELECT)
     {
-        Serial.print("Home card select: ");
-        Serial.println(g_ft02HomeSelectedCard);
 
         if(g_ft02HomeSelectedCard == 0)
         {
@@ -1653,6 +1521,12 @@ static bool FT02_HandleHomeInput(
             return true;
         }
 
+        if(g_ft02HomeSelectedCard == 8)
+        {
+            FT02_OpenCompassPage();
+            return true;
+        }
+
         return false;
     }
     else if(event.key == FT02_KEY_HELP)
@@ -1662,7 +1536,7 @@ static bool FT02_HandleHomeInput(
     }
     else if(event.key == FT02_KEY_BACK)
     {
-        Serial.println("Home back requested");
+
         return false;
     }
     else
@@ -1707,7 +1581,7 @@ static bool FT02_HandleHelpInput(
 
     if(event.key == FT02_KEY_HELP)
     {
-        Serial.println("Help page already open");
+
         return false;
     }
 
@@ -1725,29 +1599,27 @@ static bool FT02_HandleMapInput(
     // the map page and caused repeated full map refreshes.
     if(g_ft02MapRequireNavRelease)
     {
-        Serial.printf("[MAP-UX-A4] stale map key suppressed key=%s raw=0x%02X; waiting release\n",
-                      FT02_InputKeyName(event.key),
-                      static_cast<unsigned>(static_cast<uint8_t>(event.raw)));
+
         return true;
     }
 
     if(event.key == FT02_KEY_BACK)
     {
-        FT02_CancelPendingMapRefresh("back");
+        FT02_CancelPendingMapRefresh();
         FT02_ReturnHomePage();
         return true;
     }
 
     if(event.key == FT02_KEY_HELP)
     {
-        FT02_CancelPendingMapRefresh("help");
+        FT02_CancelPendingMapRefresh();
         FT02_OpenHelpPage();
         return true;
     }
 
     if(event.key == FT02_KEY_SELECT)
     {
-        FT02_CancelPendingMapRefresh("manual-refresh");
+        FT02_CancelPendingMapRefresh();
         FT02_RunDirectPbfMap(false, false);
         return true;
     }
@@ -1755,11 +1627,9 @@ static bool FT02_HandleMapInput(
     const int currentZoom = FT02_PbfMapZoomCurrent();
     const int panStep = currentZoom <= 16 ? 16 : (currentZoom == 17 ? 32 : 64);
 
-    // Map UX A5: an e-paper map commit blocks the main loop for a noticeable
-    // seconds. A direction key that remains held across that commit would be
-    // seen as a fresh repeat immediately afterwards and schedule a second
-    // screen refresh. After every committed map move/zoom, navigation input
-    // stays disarmed until CardKB2 has reported a real key release once.
+    // A map commit blocks the main loop long enough for a held direction key
+    // to look like a new press afterward. Require a real key release before
+    // accepting another map move or zoom.
     if(event.key == FT02_KEY_LEFT)
     {
         g_ft02MapFollowGnss = false;
@@ -1798,7 +1668,7 @@ static bool FT02_HandleMapInput(
         if(raw == 'q' || raw == 'Q' || raw == '+' || raw == '=')
         {
             const int before = FT02_PbfMapZoomCurrent();
-            Serial.printf("[MAP-A3.14] zoom-in key raw=0x%02X before=%d\n", (unsigned char)raw, before);
+
             if(FT02_PbfMapChangeZoom(1))
             {
                 FT02_ScheduleMapZoomRefresh(before);
@@ -1808,7 +1678,7 @@ static bool FT02_HandleMapInput(
         if(raw == 'e' || raw == 'E' || raw == '-' || raw == '_')
         {
             const int before = FT02_PbfMapZoomCurrent();
-            Serial.printf("[MAP-A3.14] zoom-out key raw=0x%02X before=%d\n", (unsigned char)raw, before);
+
             if(FT02_PbfMapChangeZoom(-1))
             {
                 FT02_ScheduleMapZoomRefresh(before);
@@ -1817,26 +1687,21 @@ static bool FT02_HandleMapInput(
         }
         if(event.command == 'r')
         {
-            FT02_CancelPendingMapRefresh("recenter");
+            FT02_CancelPendingMapRefresh();
             // R means "return to my position". Without a live fix, never
             // destroy the user's current center/zoom by falling back to the
             // default map center.
             g_ft02MapFollowGnss = true;
             if(FT02_MapCenterOnCurrentGnss())
             {
-                Serial.println("[MAP-NAV-A1] R recenter to live GNSS position");
                 FT02_PbfMapSetLoadingReason(FT02_MAP_LOADING_NAVIGATION);
                 FT02_RunDirectPbfMap(false, true);
-            }
-            else
-            {
-                Serial.println("[MAP-NAV-A1] R ignored: no valid GNSS fix; center/zoom preserved");
             }
             return true;
         }
         if(event.command == 'f')
         {
-            FT02_CancelPendingMapRefresh("force-cache-rebuild");
+            FT02_CancelPendingMapRefresh();
             FT02_PbfMapInvalidateCache();
             FT02_RunDirectPbfMap(false, true);
             return true;
@@ -1853,12 +1718,12 @@ static bool FT02_HandleMapInput(
 
 static void FT02_OpenMapSearchPage()
 {
-    FT02_CancelPendingMapRefresh("search-open");
+    FT02_CancelPendingMapRefresh();
     g_ft02MapRequireNavRelease = false;
     g_ft02MapReleaseZeroSinceMs = 0;
     FT02_MapSearchOpen();
     g_ft02PageState = FT02_PAGE_MAP_SEARCH;
-    Serial.println("Page: MAP -> MAP SEARCH A2");
+
     FT02_RedrawCurrentPage();
 }
 
@@ -1868,7 +1733,7 @@ static bool FT02_HandleMapSearchInput(const FT02InputEvent& event)
     if(action == FT02_MAP_SEARCH_ACTION_EXIT_MAP)
     {
         g_ft02PageState = FT02_PAGE_MAP;
-        Serial.println("Page: MAP SEARCH -> MAP");
+
         FT02_RedrawCurrentPage();
         return true;
     }
@@ -1880,20 +1745,17 @@ static bool FT02_HandleMapSearchInput(const FT02InputEvent& event)
         if(FT02_MapSearchTakeJump(lon, lat, name, sizeof(name)))
         {
             g_ft02MapFollowGnss = false;
-            FT02_CancelPendingMapRefresh("search-jump");
+            FT02_CancelPendingMapRefresh();
             // ENTER selected the result. The map build/display commit can block for
             // seconds (or ~1 minute on a cold regional-cache build), so arm the
             // release gate before changing page state. Any buffered/repeated
             // ENTER is then discarded when the loop resumes instead of being
             // reinterpreted as the map-page manual-refresh command.
-            FT02_ArmMapNavReleaseGate("search-jump");
+            FT02_ArmMapNavReleaseGate();
             FT02_PbfMapSetCenter(lon, lat);
             g_ft02PageState = FT02_PAGE_MAP;
-            Serial.printf("[MAP-SEARCH-A4] jump name=\"%s\" center=%.7f,%.7f page=MAP one-commit=yes\n", name, lon, lat);
-            Serial.println("Page: MAP SEARCH -> MAP (search jump)");
-            // Map Load UX A2: acknowledge the selection with a contextual
-            // loading-state partial refresh before the potentially blocking PBF
-            // build. The final destination map remains the only final map commit.
+
+            // Show a loading state before the potentially blocking PBF build.
             FT02_PbfMapSetLoadingReason(FT02_MAP_LOADING_SEARCH);
             FT02_RunDirectPbfMap(false, true);
         }
@@ -1916,14 +1778,6 @@ static bool FT02_HandleLocationRecorderInput(
     const FT02InputEvent& event
 )
 {
-    // Event-only trace: no periodic spam, but every deliberate recorder-page
-    // key gives us a hard checkpoint if a future real-device stall reappears.
-    Serial.printf(
-        "[RECORDER-INPUT] key=%s raw=0x%02X cmd=%c\n",
-        FT02_InputKeyName(event.key),
-        static_cast<unsigned int>(static_cast<uint8_t>(event.raw)),
-        event.command >= 0x20 && event.command <= 0x7E ? event.command : '-'
-    );
     if(event.key == FT02_KEY_BACK)
     {
         // Leaving the recorder page must not terminate an active journey.
@@ -1932,13 +1786,7 @@ static bool FT02_HandleLocationRecorderInput(
         // background while the user visits Home, Map or Knowledge pages.
         const FT02LocationRecorderSnapshot recorder =
             FT02_LocationRecorderSnapshotCurrent();
-        Serial.printf(
-            "[RECORDER] leave page; session=%s background=%s auto=%s points=%lu\n",
-            recorder.sessionActive ? recorder.sessionId : "--",
-            recorder.sessionActive ? "continue" : "idle",
-            recorder.autoTrackEnabled ? "on" : "off",
-            (unsigned long)recorder.pointCount
-        );
+
         FT02_ReturnHomePage();
         return true;
     }
@@ -2003,7 +1851,6 @@ static bool FT02_HandleLocationRecorderInput(
 
     return false;
 }
-
 
 static bool FT02_HandleLocationLogListInput(
     const FT02InputEvent& event
@@ -2174,7 +2021,6 @@ static bool FT02_HandleLocationLogDeleteConfirmInput(
     return true;
 }
 
-
 static bool FT02_HandleAudioLogListInput(
     const FT02InputEvent& event
 )
@@ -2195,11 +2041,7 @@ static bool FT02_HandleAudioLogListInput(
                 g_ft02AudioVolumeRefreshPending = true;
                 g_ft02AudioVolumeRefreshDueMs = millis() +
                     FT02_AUDIO_VOLUME_REFRESH_COALESCE_MS;
-                Serial.printf(
-                    "[AUDIO-EPD] volume refresh pending level=%u/10 coalesce=%lums\n",
-                    static_cast<unsigned int>(updated.playbackVolumeLevel),
-                    static_cast<unsigned long>(FT02_AUDIO_VOLUME_REFRESH_COALESCE_MS)
-                );
+
                 return true;
             }
             return false;
@@ -2221,12 +2063,11 @@ static bool FT02_HandleAudioLogListInput(
                 // Do not energize the EPD while the PA is still active. The
                 // audio task shuts down the speaker path first, then the list
                 // refresh occurs from the normal generation update.
-                Serial.println("[AUDIO-EPD] stop refresh deferred until PA shutdown");
+
             }
             return requested;
         }
 
-        Serial.println("[AUDIO-UI] input ignored while playing; UP/DOWN volume, B/ENTER/P stop");
         return false;
     }
 
@@ -2245,7 +2086,7 @@ static bool FT02_HandleAudioLogListInput(
             }
             return requested;
         }
-        Serial.println("[AUDIO-UI] input ignored while recording; press R to stop");
+
         return false;
     }
 
@@ -2264,7 +2105,7 @@ static bool FT02_HandleAudioLogListInput(
     {
         if(static_cast<int32_t>(millis() - g_ft02AudioRecordRestartGuardUntilMs) < 0)
         {
-            Serial.println("[AUDIO-UI] stale R ignored during post-record guard");
+
             return true;
         }
         if(!FT02_ArmAudioCommandAfterRelease(event)) return false;
@@ -2285,7 +2126,7 @@ static bool FT02_HandleAudioLogListInput(
         if(started)
         {
             g_ft02AudioLastShownRecordBucket = 0;
-            Serial.println("[AUDIO-UI] cue committed; capture started; 5 s timer partials retained");
+
         }
         else
         {
@@ -2478,6 +2319,11 @@ static bool FT02_HandleInput(
         return FT02_HandleDeviceStatusInput(event);
     }
 
+    if(g_ft02PageState == FT02_PAGE_COMPASS)
+    {
+        return FT02_HandleCompassInput(event);
+    }
+
     if(g_ft02PageState == FT02_PAGE_COMPASS_CALIBRATION)
     {
         return FT02_HandleCompassCalibrationInput(event);
@@ -2525,52 +2371,7 @@ void setup()
 {
     Serial.begin(115200);
     delay(2000);
-
-    Serial.print("FT-02 ");
-    Serial.print(FT02_FIRMWARE_BUILD_LABEL);
-    Serial.print(" WiFi Module A2 + Production BW Fast Navigation A2 Arrow + Voice Log A1 + Location Recorder A4 + FieldManualRuntime + PBF Map UI A3.14 + Map UX A5 + Map Search A5 SPI40 ");
-    Serial.print(FT02_StorageProfileText());
-    Serial.println(" Start");
-
-    Serial.print("[BOOT] flash_bytes=");
-    Serial.print(ESP.getFlashChipSize());
-    Serial.print(" heap_free=");
-    Serial.print(ESP.getFreeHeap());
-    Serial.print(" psram_bytes=");
-    Serial.print(ESP.getPsramSize());
-    Serial.print(" psram_free=");
-    Serial.println(ESP.getFreePsram());
-
-    const bool fontSelfTest =
-        FT02_HasGlyphPack(ft02_cjk_24r, 0x58F3) && // 壳
-        FT02_HasGlyphPack(ft02_cjk_24r, 0x77E5) && // 知
-        FT02_HasGlyphPack(ft02_cjk_24r, 0x8BC6) && // 识
-        FT02_HasGlyphPack(ft02_cjk_24r, 0x5E93);   // 库
-    Serial.print("[FONT] global_cjk_24r glyphs=");
-    Serial.print(FT02_CJK_24R_GLYPH_COUNT);
-    Serial.print(" self_test=");
-    Serial.println(fontSelfTest ? "PASS" : "FAIL");
-
-    const bool smallFontSelfTest =
-        FT02_HasGlyphPack(ft02_cjk_20r, 0x8BF4) && // 说
-        FT02_HasGlyphPack(ft02_cjk_20r, 0x660E) && // 明
-        FT02_HasGlyphPack(ft02_cjk_20r, 0x6458) && // 摘
-        FT02_HasGlyphPack(ft02_cjk_20r, 0x8981);   // 要
-    Serial.print("[FONT] global_cjk_20r glyphs=");
-    Serial.print(FT02_CJK_20R_GLYPH_COUNT);
-    Serial.print(" self_test=");
-    Serial.println(smallFontSelfTest ? "PASS" : "FAIL");
-
-
-    const bool boldFontSelfTest =
-        FT02_HasGlyphPack(ft02_cjk_24b, 0x58F3) && // 壳
-        FT02_HasGlyphPack(ft02_cjk_24b, 0x77E5) && // 知
-        FT02_HasGlyphPack(ft02_cjk_24b, 0x8BC6) && // 识
-        FT02_HasGlyphPack(ft02_cjk_24b, 0x5E93);   // 库
-    Serial.print("[FONT] global_cjk_24b glyphs=");
-    Serial.print(FT02_CJK_24B_GLYPH_COUNT);
-    Serial.print(" self_test=");
-    Serial.println(boldFontSelfTest ? "PASS" : "FAIL");
+    Serial.printf("[FT02] boot %s\n", FT02_FIRMWARE_BUILD_LABEL);
 
     FT02_InputBegin(
         CARDKB_SDA,
@@ -2579,13 +2380,12 @@ void setup()
     );
     FT02_EpdInteractiveReset();
 
-    Serial.println("FT02 InputManager ready: fixed pins SDA=47 SCL=21, D=UP, Z=LEFT, X=DOWN, C=RIGHT");
-
     FT02_BatteryMonitorBegin();
     FT02_SyncBatteryStatusBar(false);
 
     FT02_GnssBegin();
     FT02_LR01HostBegin();
+    FT02_GnssPowerControlBegin();
     FT02_SyncGnssStatusBar(false);
 
     FT02_StorageBegin();
@@ -2635,31 +2435,17 @@ void setup()
         g_ft02HomeSelectedCard
     );
 
-    Serial.print("FT-02 ");
-    Serial.print(FT02_FIRMWARE_BUILD_LABEL);
-    Serial.print(" WiFi Module A2 + Production BW Fast Navigation A2 Arrow + Voice Log A1 + Location Recorder A4 + FieldManualRuntime + PBF Map UI A3.14 + Map UX A5 + Map Search A5 SPI40 ");
-    Serial.print(FT02_StorageProfileText());
-    Serial.println(" ready");
+    Serial.println("[FT02] ready");
+
     Serial.flush();
 }
 
 void loop()
 {
-    FT02_PrintRuntimeBannerIfNeeded();
-
-    // Recording/post-roll needs only low-latency R/stop, not unrestricted I2C
-    // polling. 10 Hz keeps the key responsive while reducing mic-side EMI.
+    // Reduce keyboard polling during capture to limit mic-side EMI.
     FT02_InputSetLowNoiseMode(FT02_AudioLogIsCapturing());
 
-    // Input is a top-priority service. In particular, never place a blocking
-    // e-paper refresh ahead of CardKB polling: a long display commit can make
-    // the recorder page appear frozen and can starve short key presses.
-    // Strict input ordering:
-    //
-    // Every key captured while e-paper BUSY lives in the shared FIFO. When
-    // FieldManual is active, let it consume/coalesce the oldest queued events
-    // before polling a newer live key. This prevents rapid search typing from
-    // being reordered around a deferred partial refresh.
+    // Service queued input before live polling to preserve key order across EPD commits.
     bool queuedInputHandledByKnowledge = false;
     if(g_ft02PageState == FT02_PAGE_KNOWLEDGE &&
        FT02_EpdInteractiveQueuedInputCount() > 0)
@@ -2679,16 +2465,6 @@ void loop()
         {
             inputEvent = FT02_InputPoll();
         }
-        else
-        {
-            Serial.printf(
-                "[EPD-INTERACTIVE-A2] replay key=%s raw=0x%02X page=%u pending=%u\n",
-                FT02_InputKeyName(inputEvent.key),
-                static_cast<unsigned>(static_cast<uint8_t>(inputEvent.raw)),
-                static_cast<unsigned>(g_ft02PageState),
-                static_cast<unsigned>(FT02_EpdInteractiveQueuedInputCount())
-            );
-        }
     }
     const uint8_t currentRawKey = FT02_InputCurrentRawKey();
     if(currentRawKey == 0)
@@ -2706,8 +2482,7 @@ void loop()
             {
                 g_ft02MapRequireNavRelease = false;
                 g_ft02MapReleaseZeroSinceMs = 0;
-                Serial.printf("[MAP-INPUT-A5] navigation re-armed after stable release %lums\n",
-                              static_cast<unsigned long>(FT02_MAP_NAV_RELEASE_STABLE_MS));
+
             }
         }
     }
@@ -2744,6 +2519,11 @@ void loop()
     }
 
     FT02_LR01HostPoll();
+    FT02_GnssPowerControlPoll();
+    if(g_ft02PageState == FT02_PAGE_COMPASS)
+    {
+        FT02_CompassUIService(display, millis());
+    }
     if(FT02_WirelessManagerPoll(millis()) && g_ft02PageState == FT02_PAGE_WIRELESS_WIFI)
     {
         FT02_RedrawCurrentPage();
@@ -2759,8 +2539,7 @@ void loop()
             g_ft02LastCompassCalRevision = calRevision;
             g_ft02LastCompassCalRedrawMs = nowCal;
             FT02_RedrawCurrentPage();
-            Serial.printf("[COMPASS-CAL-UI-A1] redraw revision=%lu\n",
-                          static_cast<unsigned long>(calRevision));
+
         }
     }
 
@@ -2839,8 +2618,7 @@ void loop()
             g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
             FT02_RedrawCurrentPage();
             communicationPageRedrawn = true;
-            Serial.printf("[LR01-NODE-UI-A1] node list commit redraw count=%u\n",
-                          static_cast<unsigned>(FT02_LR01HostState().listedNodeCount));
+
         }
         else if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
                 !FT02_CommunicationUIIsCompose() &&
@@ -2931,16 +2709,9 @@ void loop()
             if(bucket != g_ft02AudioLastShownRecordBucket)
             {
                 g_ft02AudioLastShownRecordBucket = bucket;
-                Serial.printf(
-                    "[AUDIO-EPD] timer refresh begin rec=%lums bucket=%lu\n",
-                    static_cast<unsigned long>(audioStatus.recordingElapsedMs),
-                    static_cast<unsigned long>(bucket)
-                );
+
                 FT02_DrawAudioLogRecordingTimerPartial(display, audioStatus);
-                Serial.printf(
-                    "[AUDIO-EPD] timer refresh end rec=%lums\n",
-                    static_cast<unsigned long>(FT02_AudioLogStatusCurrent().recordingElapsedMs)
-                );
+
             }
         }
         else if(audioState == FT02_AUDIO_LOG_PLAYING)
@@ -2959,19 +2730,12 @@ void loop()
                 }
                 else if(FT02_AudioLogSetPlaybackEpdGuard(true))
                 {
-                    Serial.printf(
-                        "[AUDIO-EPD] volume refresh begin level=%u/10\n",
-                        static_cast<unsigned int>(latest.playbackVolumeLevel)
-                    );
+
                     FT02_DrawAudioLogPlayingVolumePartial(display, latest);
                     g_ft02AudioLastShownVolume = latest.playbackVolumeLevel;
                     g_ft02AudioVolumeRefreshPending = false;
                     const bool resumed = FT02_AudioLogSetPlaybackEpdGuard(false);
-                    Serial.printf(
-                        "[AUDIO-EPD] volume refresh end level=%u/10 resumed=%s\n",
-                        static_cast<unsigned int>(latest.playbackVolumeLevel),
-                        resumed ? "yes" : "no"
-                    );
+
                 }
                 else
                 {
@@ -2979,7 +2743,7 @@ void loop()
                     // energize the EPD in that transition; the list redraw
                     // after PA shutdown will show the persisted final volume.
                     g_ft02AudioVolumeRefreshPending = false;
-                    Serial.println("[AUDIO-EPD] volume refresh skipped: audio guard unavailable");
+
                 }
             }
         }
@@ -3026,6 +2790,7 @@ void loop()
         g_ft02PageState == FT02_PAGE_LIBRARY ||
         g_ft02PageState == FT02_PAGE_MAP_SEARCH ||
         g_ft02PageState == FT02_PAGE_COMMUNICATION ||
+        g_ft02PageState == FT02_PAGE_COMPASS ||
         g_ft02PageState == FT02_PAGE_WIRELESS_WIFI ||
         g_ft02PageState == FT02_PAGE_LOCATION_LOG_LIST ||
         g_ft02PageState == FT02_PAGE_LOCATION_LOG_DETAIL ||

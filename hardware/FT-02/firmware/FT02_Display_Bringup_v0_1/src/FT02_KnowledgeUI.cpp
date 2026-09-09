@@ -34,7 +34,6 @@ enum FT02KnowledgeScreen
     FT02_KNOWLEDGE_SCREEN_ERROR
 };
 
-
 enum FT02KnowledgeListSource
 {
     FT02_KNOWLEDGE_LIST_QUICK = 0,
@@ -120,15 +119,9 @@ static char g_searchNotice[72] = {};
 static char g_readerFeedback[32] = {};
 static const uint32_t FT02_KNOWLEDGE_SEARCH_REDRAW_IDLE_MS = 320u;
 
-// A3.13 FieldManual now uses the single global interactive e-paper runtime.
-//
-// Earlier A3.9 builds kept a second private BUSY-time keyboard queue here.
-// That could reorder rapid text entry: an older key captured during an e-paper
-// refresh remained in the private queue while the main loop accepted a newer
-// live key first. All FieldManual display commits now feed the same global FIFO
-// used by the rest of FT-02, so queued and live input have one ordering source.
-// Navigation bursts are still coalesced from that FIFO before any newer live
-// key is polled.
+// FieldManual uses the global e-paper input FIFO so keys captured during BUSY
+// and live keys share one ordering source. Navigation bursts are coalesced
+// before newer live input is polled.
 static char g_errorTitle[48] = "手册不可用";
 static char g_errorDetail[120] = "请检查 SD 卡数据包。";
 
@@ -182,7 +175,6 @@ static int FT02_KnowledgeHomeCount()
 {
     return sizeof(FT02_KNOWLEDGE_HOME_CARDS) / sizeof(FT02_KNOWLEDGE_HOME_CARDS[0]);
 }
-
 
 static void FT02_KnowledgeSearchSetNotice(const char* text)
 {
@@ -431,7 +423,7 @@ static void FT02_KnowledgeDrawReaderHeader(
     bool favorite
 )
 {
-    // A3.12: keep page/card indicator permanently on the far right. Favorite
+    // Keep the page/card indicator on the far right. Favorite
     // state is rendered as a compact black/white badge immediately after the
     // visible title, so it cannot cover or compete with pagination.
     const char* badgeText = nullptr;
@@ -1131,7 +1123,7 @@ static void FT02_KnowledgeDrawBitmapFit1bpp(
         return;
     }
 
-    // Normal A3.3 media stays 1:1 when it already fits. Split Visual pages
+    // Media stays 1:1 when it already fits. Split visual pages
     // may opt in to upscaling so tightly-cropped action art can use the full
     // pane instead of floating in a large empty rectangle.
     if(!allowUpscale && sourceWidth <= areaWidth && sourceHeight <= areaHeight)
@@ -1142,7 +1134,7 @@ static void FT02_KnowledgeDrawBitmapFit1bpp(
         return;
     }
 
-    // Compatibility guard for older A3/A3.2 packs. Scale down with nearest
+    // Compatibility guard for older media packs. Scale down with nearest
     // neighbour so media can never escape the reader rectangle.
     int destWidth = areaWidth;
     int destHeight = static_cast<int>(
@@ -1207,7 +1199,7 @@ static bool FT02_KnowledgeDrawReaderMediaPage(
 
     if(splitLeft)
     {
-        // A3.14 preview: large, fully-fitted illustration on the left and the
+        // Use a large fitted illustration on the left and the
         // step caption on the right. This layout is intended for concrete
         // posture / structure / placement diagrams where the old 130px-high
         // banner made the useful subject too small. The bitmap is always fit
@@ -1221,7 +1213,7 @@ static bool FT02_KnowledgeDrawReaderMediaPage(
         const int rightEdge = FT02_KNOWLEDGE_READER_X + FT02_KNOWLEDGE_READER_W - 16;
         const int minTextW = 188;
 
-        // A3.15: the split ratio follows the actual media aspect ratio.
+        // The split ratio follows the actual media aspect ratio.
         // Narrow action art no longer floats inside a fixed 432 px pane,
         // while wide structure diagrams may grow up to 500 px. Text keeps
         // a readable minimum width.
@@ -1347,7 +1339,7 @@ static bool FT02_KnowledgeDrawReaderMediaPage(
             GxEPD_BLACK
         );
 
-        // A3.2 step pages intentionally use a shorter image so the
+        // Step pages intentionally use a shorter image so the
         // instruction can sit directly below it. This is much easier to
         // follow on the 800x480 EPD than a dense all-steps overview.
         const int imageAreaX = FT02_KNOWLEDGE_READER_X + FT02_KNOWLEDGE_READER_INSET_X;
@@ -1574,7 +1566,7 @@ static void FT02_KnowledgeRedraw(FT02Display& display)
     FT02_DrawKnowledgeScreen(display);
 }
 
-// FieldManual A3.9 navigation refresh policy:
+// FieldManual navigation refresh policy:
 //
 // A CardKB press is available to InputManager immediately, but GxEPD2's
 // full-window e-paper transaction is blocking. Redrawing the complete
@@ -1611,12 +1603,8 @@ static bool FT02_KnowledgeDirectional(const FT02InputEvent& event)
            event.key == FT02_KEY_UP || event.key == FT02_KEY_DOWN;
 }
 
-static void FT02_KnowledgeRedrawContentPartial(
-    FT02Display& display,
-    const char* source
-)
+static void FT02_KnowledgeRedrawContentPartial(FT02Display& display)
 {
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(
         FT02_KNOWLEDGE_PARTIAL_X,
@@ -1641,7 +1629,7 @@ static void FT02_KnowledgeRedrawContentPartial(
     }
     while(display.nextPage());
     FT02_EpdInteractiveEndBusyCapture(display);
-    FT02_EpdInteractiveFinishPartial(display, source, startedMs);
+    FT02_EpdInteractiveFinishPartial(display);
 }
 
 static void FT02_KnowledgeRedrawGridSelectionPartial(
@@ -1651,7 +1639,6 @@ static void FT02_KnowledgeRedrawGridSelectionPartial(
     bool categoryMode
 )
 {
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     int oldX, oldY, oldW, oldH;
     int newX, newY, newW, newH;
@@ -1713,11 +1700,7 @@ static void FT02_KnowledgeRedrawGridSelectionPartial(
     }
     while(display.nextPage());
     FT02_EpdInteractiveEndBusyCapture(display);
-    FT02_EpdInteractiveFinishPartial(
-        display,
-        categoryMode ? "knowledge-category-selection-partial" : "knowledge-home-selection-partial",
-        startedMs
-    );
+    FT02_EpdInteractiveFinishPartial(display);
 }
 
 static void FT02_KnowledgeRedrawListSelectionPartial(
@@ -1731,7 +1714,7 @@ static void FT02_KnowledgeRedrawListSelectionPartial(
     const int newPage = newSelected / FT02_KNOWLEDGE_LIST_PAGE_SIZE;
     if(oldPage != newPage)
     {
-        FT02_KnowledgeRedrawContentPartial(display, "knowledge-list-page-partial");
+        FT02_KnowledgeRedrawContentPartial(display);
         return;
     }
 
@@ -1756,7 +1739,6 @@ static void FT02_KnowledgeRedrawListSelectionPartial(
         count
     );
 
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(partialX, partialY, partialW, partialH);
     display.firstPage();
@@ -1790,13 +1772,12 @@ static void FT02_KnowledgeRedrawListSelectionPartial(
     }
     while(display.nextPage());
     FT02_EpdInteractiveEndBusyCapture(display);
-    FT02_EpdInteractiveFinishPartial(display, "knowledge-list-row-partial", startedMs);
+    FT02_EpdInteractiveFinishPartial(display);
 }
 
 static void FT02_KnowledgeApplyListSelection(
     FT02Display& display,
-    int next,
-    const char* pageSource
+    int next
 )
 {
     const int count = FT02_KnowledgeListCount();
@@ -1814,10 +1795,7 @@ static void FT02_KnowledgeApplyListSelection(
     }
     else
     {
-        FT02_KnowledgeRedrawContentPartial(
-            display,
-            pageSource != nullptr ? pageSource : "knowledge-list-page-partial"
-        );
+        FT02_KnowledgeRedrawContentPartial(display);
     }
 }
 
@@ -1940,7 +1918,7 @@ static FT02KnowledgeAction FT02_KnowledgeHandleCategories(FT02Display& display, 
         }
         else
         {
-            FT02_KnowledgeRedrawContentPartial(display, "knowledge-category-page-partial");
+            FT02_KnowledgeRedrawContentPartial(display);
         }
     }
     return FT02_KNOWLEDGE_ACTION_NONE;
@@ -2015,7 +1993,7 @@ static FT02KnowledgeAction FT02_KnowledgeHandleSearch(FT02Display& display, cons
         if(g_searchQueryLength == 0)
         {
             FT02_KnowledgeSearchSetNotice("请先输入搜索词");
-            FT02_KnowledgeRedrawContentPartial(display, "knowledge-search-empty-query-partial");
+            FT02_KnowledgeRedrawContentPartial(display);
             g_searchDirty = false;
             return FT02_KNOWLEDGE_ACTION_NONE;
         }
@@ -2024,7 +2002,7 @@ static FT02KnowledgeAction FT02_KnowledgeHandleSearch(FT02Display& display, cons
         if(!FT02_FieldManualSearchExecute(g_searchQuery))
         {
             FT02_KnowledgeSearchSetNotice("搜索失败，请检查行动手册数据");
-            FT02_KnowledgeRedrawContentPartial(display, "knowledge-search-failed-partial");
+            FT02_KnowledgeRedrawContentPartial(display);
             g_searchDirty = false;
             return FT02_KNOWLEDGE_ACTION_NONE;
         }
@@ -2032,7 +2010,7 @@ static FT02KnowledgeAction FT02_KnowledgeHandleSearch(FT02Display& display, cons
         if(count < 1)
         {
             FT02_KnowledgeSearchSetNotice("没有找到匹配的行动卡，可缩短搜索词后重试");
-            FT02_KnowledgeRedrawContentPartial(display, "knowledge-search-no-results-partial");
+            FT02_KnowledgeRedrawContentPartial(display);
             g_searchDirty = false;
             return FT02_KNOWLEDGE_ACTION_NONE;
         }
@@ -2140,7 +2118,7 @@ static FT02KnowledgeAction FT02_KnowledgeHandleList(FT02Display& display, const 
     }
 
     int next = g_listSelected;
-    // A3.11 list navigation follows spatial reading logic:
+    // List navigation follows spatial reading logic:
     // LEFT/RIGHT change page; UP/DOWN move one card inside/across pages.
     if(event.key == FT02_KEY_LEFT) next -= FT02_KNOWLEDGE_LIST_PAGE_SIZE;
     else if(event.key == FT02_KEY_RIGHT) next += FT02_KNOWLEDGE_LIST_PAGE_SIZE;
@@ -2148,9 +2126,7 @@ static FT02KnowledgeAction FT02_KnowledgeHandleList(FT02Display& display, const 
     else if(event.key == FT02_KEY_DOWN) next++;
     FT02_KnowledgeApplyListSelection(
         display,
-        next,
-        "knowledge-list-page-partial"
-    );
+        next);
     return FT02_KNOWLEDGE_ACTION_NONE;
 }
 
@@ -2181,21 +2157,17 @@ static FT02KnowledgeAction FT02_KnowledgeHandleReader(FT02Display& display, cons
             // `已收藏` badge appears for favorite cards and disappears after
             // removing the favorite. No transient banner is needed.
             g_readerFeedback[0] = '\0';
-            Serial.printf("[KNOWLEDGE-FAVORITES-A1] %s card=%s index=%d\n",
-                          favorite ? "added" : "removed",
-                          card->index->id,
-                          globalIndex);
         }
         else
         {
             // Exceptional persistence failure uses the same title-adjacent
             // badge slot so pagination on the right is never obscured.
             snprintf(g_readerFeedback, sizeof(g_readerFeedback), "%s", "保存失败");
-            Serial.printf("[KNOWLEDGE-FAVORITES-A1] toggle FAILED card=%s index=%d\n",
+            Serial.printf("[KNOWLEDGE-FAVORITES] toggle FAILED card=%s index=%d\n",
                           card->index->id,
                           globalIndex);
         }
-        FT02_KnowledgeRedrawContentPartial(display, "knowledge-reader-favorite-state-partial");
+        FT02_KnowledgeRedrawContentPartial(display);
         return FT02_KNOWLEDGE_ACTION_NONE;
     }
 
@@ -2209,7 +2181,7 @@ static FT02KnowledgeAction FT02_KnowledgeHandleReader(FT02Display& display, cons
             g_readerFeedback[0] = '\0';
             g_readerPage = 0;
             FT02_FieldManualRecentUpdatePage(FT02_FieldManualLoadedCardGlobalIndex(), g_readerPage);
-            FT02_KnowledgeRedrawContentPartial(display, "knowledge-reader-first-page-partial");
+            FT02_KnowledgeRedrawContentPartial(display);
         }
         return FT02_KNOWLEDGE_ACTION_NONE;
     }
@@ -2223,7 +2195,7 @@ static FT02KnowledgeAction FT02_KnowledgeHandleReader(FT02Display& display, cons
         g_readerFeedback[0] = '\0';
         g_readerPage = next;
         FT02_FieldManualRecentUpdatePage(FT02_FieldManualLoadedCardGlobalIndex(), g_readerPage);
-        FT02_KnowledgeRedrawContentPartial(display, "knowledge-reader-page-partial");
+        FT02_KnowledgeRedrawContentPartial(display);
     }
     return FT02_KNOWLEDGE_ACTION_NONE;
 }
@@ -2315,8 +2287,7 @@ static FT02KnowledgeAction FT02_KnowledgeProcessQueuedInputInternal(
                 g_homeSelected = next;
                 FT02_KnowledgeRedrawGridSelectionPartial(display, old, next, false);
             }
-            Serial.printf("[KNOWLEDGE-INPUT-A3.13] coalesced home old=%d new=%d pending=%u\n",
-                          old, next, static_cast<unsigned>(FT02_EpdInteractiveQueuedInputCount()));
+
             return FT02_KNOWLEDGE_ACTION_NONE;
         }
 
@@ -2342,10 +2313,9 @@ static FT02KnowledgeAction FT02_KnowledgeProcessQueuedInputInternal(
                 if(oldPage == newPage)
                     FT02_KnowledgeRedrawGridSelectionPartial(display, old, next, true);
                 else
-                    FT02_KnowledgeRedrawContentPartial(display, "knowledge-category-queued-page-partial");
+                    FT02_KnowledgeRedrawContentPartial(display);
             }
-            Serial.printf("[KNOWLEDGE-INPUT-A3.13] coalesced category old=%d new=%d pending=%u\n",
-                          old, next, static_cast<unsigned>(FT02_EpdInteractiveQueuedInputCount()));
+
             return FT02_KNOWLEDGE_ACTION_NONE;
         }
 
@@ -2364,9 +2334,8 @@ static FT02KnowledgeAction FT02_KnowledgeProcessQueuedInputInternal(
                 else if(event.key == FT02_KEY_DOWN) next++;
                 next = FT02_KnowledgeClamp(next, 0, count - 1);
             }
-            FT02_KnowledgeApplyListSelection(display, next, "knowledge-list-queued-page-partial");
-            Serial.printf("[KNOWLEDGE-INPUT-A3.13] coalesced list old=%d new=%d pending=%u\n",
-                          old, next, static_cast<unsigned>(FT02_EpdInteractiveQueuedInputCount()));
+            FT02_KnowledgeApplyListSelection(display, next);
+
             return FT02_KNOWLEDGE_ACTION_NONE;
         }
 
@@ -2395,10 +2364,9 @@ static FT02KnowledgeAction FT02_KnowledgeProcessQueuedInputInternal(
                 g_readerFeedback[0] = '\0';
                 g_readerPage = next;
                 FT02_FieldManualRecentUpdatePage(FT02_FieldManualLoadedCardGlobalIndex(), g_readerPage);
-                FT02_KnowledgeRedrawContentPartial(display, "knowledge-reader-queued-page-partial");
+                FT02_KnowledgeRedrawContentPartial(display);
             }
-            Serial.printf("[KNOWLEDGE-INPUT-A3.13] coalesced reader old=%d new=%d pending=%u\n",
-                          old, next, static_cast<unsigned>(FT02_EpdInteractiveQueuedInputCount()));
+
             return FT02_KNOWLEDGE_ACTION_NONE;
         }
     }
@@ -2431,10 +2399,6 @@ void FT02_KnowledgeReset()
 
 void FT02_DrawKnowledgeScreen(FT02Display& display)
 {
-    Serial.print("[KNOWLEDGE] ");
-    Serial.print(FT02_FIRMWARE_VERSION);
-    Serial.print(" SD runtime state=");
-    Serial.println(FT02_FieldManualStateText());
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setFullWindow();
     display.firstPage();
@@ -2445,7 +2409,7 @@ void FT02_DrawKnowledgeScreen(FT02Display& display)
         FT02_KnowledgeDrawCurrentContent(display);
     }
     while(display.nextPage());
-    FT02_EpdInteractivePowerOffNow(display, "knowledge-full");
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
 }
 
@@ -2464,13 +2428,13 @@ FT02KnowledgeAction FT02_KnowledgeService(FT02Display& display, uint32_t nowMs)
     // E-paper text entry is intentionally deferred until the user pauses.
     // Keystrokes are accepted immediately in RAM; a 320 ms idle gap coalesces
     // a burst of typing into one partial waveform instead of one ~0.5 s panel
-    // transaction per character. A3.13 keeps the 320 ms settle gap while all
+    // transaction per character. Keep the 320 ms settle gap while all
     // BUSY-captured keys now share the global strict-FIFO ordering path.
     if(g_screen == FT02_KNOWLEDGE_SCREEN_SEARCH && g_searchDirty &&
        static_cast<uint32_t>(nowMs - g_searchLastEditMs) >= FT02_KNOWLEDGE_SEARCH_REDRAW_IDLE_MS)
     {
         g_searchDirty = false;
-        FT02_KnowledgeRedrawContentPartial(display, "knowledge-search-input-deferred-partial");
+        FT02_KnowledgeRedrawContentPartial(display);
         return FT02_KNOWLEDGE_ACTION_NONE;
     }
 

@@ -4,17 +4,13 @@ namespace
 {
 constexpr uint8_t QUEUE_CAPACITY = 24;
 constexpr uint32_t BUSY_POLL_INTERVAL_MS = 8u;
-// A19: keep the generic post-partial hot tail short.  The previous 2500 ms
-// lifecycle tail made real-device interaction feel as if the keyboard stayed
-// unavailable long after the visible refresh completed.  350 ms plus the
-// measured ~140 ms SSD1677 power-off tail remains below the requested 0.5 s
-// post-refresh budget, while BUSY-time key capture remains active.
+// Keep the panel powered briefly after partial refreshes so rapid navigation
+// avoids repeated shutdown/startup cycles while BUSY-time input remains active.
 constexpr uint32_t PARTIAL_HOT_IDLE_MS = 350u;
 
 FT02InputEvent g_queue[QUEUE_CAPACITY] = {};
 uint8_t g_head = 0;
 uint8_t g_count = 0;
-uint32_t g_dropped = 0;
 uint32_t g_lastPollMs = 0;
 bool g_captureActive = false;
 bool g_waitForInitialRelease = false;
@@ -24,11 +20,7 @@ uint32_t g_lastPartialCommitMs = 0;
 bool pushEvent(const FT02InputEvent& event)
 {
     if(event.key == FT02_KEY_NONE) return true;
-    if(g_count >= QUEUE_CAPACITY)
-    {
-        ++g_dropped;
-        return false;
-    }
+    if(g_count >= QUEUE_CAPACITY) return false;
     const uint8_t tail = static_cast<uint8_t>((g_head + g_count) % QUEUE_CAPACITY);
     g_queue[tail] = event;
     ++g_count;
@@ -72,7 +64,6 @@ void FT02_EpdInteractiveReset()
 {
     g_head = 0;
     g_count = 0;
-    g_dropped = 0;
     g_lastPollMs = 0;
     g_captureActive = false;
     g_waitForInitialRelease = false;
@@ -93,45 +84,20 @@ void FT02_EpdInteractiveEndBusyCapture(FT02Display& display)
     g_captureActive = false;
     g_waitForInitialRelease = false;
     display.epd2.setBusyCallback(nullptr);
-    if(g_dropped > 0)
-    {
-        Serial.printf(
-            "[EPD-INTERACTIVE-A2] queue overflow dropped=%lu pending=%u\n",
-            static_cast<unsigned long>(g_dropped),
-            static_cast<unsigned>(g_count)
-        );
-        g_dropped = 0;
-    }
 }
 
-void FT02_EpdInteractiveFinishPartial(
-    FT02Display& display,
-    const char* source,
-    uint32_t startedMs
-)
+void FT02_EpdInteractiveFinishPartial(FT02Display& display)
 {
     display.setFullWindow();
     g_hotPowerOffPending = true;
     g_lastPartialCommitMs = millis();
-    Serial.printf(
-        "[EPD-INTERACTIVE-A2] partial source=%s elapsed=%lums panel=hot hotIdle=%lums queued=%u\n",
-        source != nullptr ? source : "unknown",
-        static_cast<unsigned long>(g_lastPartialCommitMs - startedMs),
-        static_cast<unsigned long>(PARTIAL_HOT_IDLE_MS),
-        static_cast<unsigned>(g_count)
-    );
 }
 
-void FT02_EpdInteractivePowerOffNow(
-    FT02Display& display,
-    const char* source
-)
+void FT02_EpdInteractivePowerOffNow(FT02Display& display)
 {
     display.epd2.powerOff();
     g_hotPowerOffPending = false;
     g_lastPartialCommitMs = 0;
-    Serial.print("[EPD-INTERACTIVE-A2] commit complete; powerOff source=");
-    Serial.println(source != nullptr ? source : "unknown");
 }
 
 bool FT02_EpdInteractivePeekQueuedInput(FT02InputEvent& event)
@@ -159,17 +125,10 @@ void FT02_EpdInteractiveService(FT02Display& display, uint32_t nowMs)
     if(!g_hotPowerOffPending) return;
     if(static_cast<uint32_t>(nowMs - g_lastPartialCommitMs) < PARTIAL_HOT_IDLE_MS) return;
 
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.epd2.powerOff();
     FT02_EpdInteractiveEndBusyCapture(display);
-    const uint32_t endedMs = millis();
     g_hotPowerOffPending = false;
     g_lastPartialCommitMs = 0;
-    Serial.printf(
-        "[EPD-INTERACTIVE-A2] idle powerOff elapsed=%lums queued=%u\n",
-        static_cast<unsigned long>(endedMs - startedMs),
-        static_cast<unsigned>(g_count)
-    );
 }
 

@@ -95,7 +95,7 @@ bool loadSnapshot()
     if(!FT02_StorageFileExists(FT02_FIELD_MANUAL_FAVORITES_PATH))
     {
         g_loaded = true;
-        Serial.println("[FIELD-FAVORITES-A1] favorites absent; starting fresh");
+
         return true;
     }
 
@@ -115,8 +115,6 @@ bool loadSnapshot()
         if(line[0] == '\0') continue;
         if(line[0] == '#')
         {
-            if(!headerSeen && strcmp(line, FILE_HEADER) != 0)
-                Serial.printf("[FIELD-FAVORITES-A1] header differs: %s\n", line);
             headerSeen = true;
             continue;
         }
@@ -137,12 +135,6 @@ bool loadSnapshot()
     fclose(file);
 
     g_loaded = true;
-    Serial.printf(
-        "[FIELD-FAVORITES-A1] loaded entries=%d stale=%d duplicate=%d\n",
-        g_count,
-        staleEntries,
-        duplicateEntries
-    );
 
     // If a knowledge-pack upgrade removed/renamed cards, clean the snapshot so
     // stale IDs do not accumulate forever. Failure here is non-fatal because
@@ -150,7 +142,7 @@ bool loadSnapshot()
     if(staleEntries > 0 || duplicateEntries > 0)
     {
         if(!writeSnapshot())
-            Serial.println("[FIELD-FAVORITES-A1] cleanup snapshot FAILED");
+            Serial.println("[FIELD-FAVORITES] cleanup snapshot FAILED");
     }
     return true;
 }
@@ -166,7 +158,6 @@ void FT02_FieldManualFavoritesBegin()
 {
     ensureLoaded();
 }
-
 
 int FT02_FieldManualFavoritesCount()
 {
@@ -207,7 +198,7 @@ bool FT02_FieldManualFavoritesSet(int globalCardIndex, bool favorite)
 
         if(writeSnapshot())
         {
-            Serial.printf("[FIELD-FAVORITES-A1] add index=%d count=%d\n", globalCardIndex, g_count);
+
             return true;
         }
 
@@ -215,7 +206,7 @@ bool FT02_FieldManualFavoritesSet(int globalCardIndex, bool favorite)
         --g_count;
         if(g_count > 0)
             memmove(&g_order[0], &g_order[1], sizeof(g_order[0]) * g_count);
-        Serial.printf("[FIELD-FAVORITES-A1] add FAILED index=%d\n", globalCardIndex);
+        Serial.printf("[FIELD-FAVORITES] add FAILED index=%d\n", globalCardIndex);
         return false;
     }
 
@@ -234,7 +225,7 @@ bool FT02_FieldManualFavoritesSet(int globalCardIndex, bool favorite)
 
     if(writeSnapshot())
     {
-        Serial.printf("[FIELD-FAVORITES-A1] remove index=%d count=%d\n", globalCardIndex, g_count);
+
         return true;
     }
 
@@ -249,7 +240,7 @@ bool FT02_FieldManualFavoritesSet(int globalCardIndex, bool favorite)
     }
     g_order[existing] = removed;
     g_count = oldCount;
-    Serial.printf("[FIELD-FAVORITES-A1] remove FAILED index=%d\n", globalCardIndex);
+    Serial.printf("[FIELD-FAVORITES] remove FAILED index=%d\n", globalCardIndex);
     return false;
 }
 

@@ -61,7 +61,7 @@ const char* qualityCn(uint8_t q)
 void drawHeader(FT02Display& display)
 {
     FT02_DrawStatusBar(display);
-    FT02_DrawTextPack(display, ft02_cjk_24b, "设备状态  罗盘校准", 32, 116);
+    FT02_DrawTextPack(display, ft02_cjk_24b, "指南针  罗盘校准", 32, 116);
     display.drawLine(32, 132, 768, 132, GxEPD_BLACK);
 }
 
@@ -180,7 +180,7 @@ void FT02_DrawCompassCalibrationScreen(FT02Display& display)
     while(display.nextPage());
 
     display.setFullWindow();
-    FT02_EpdPowerOffAfterCommit(display, "compass-calibration-full");
+    FT02_EpdPowerOffAfterCommit(display);
 }
 
 FT02CompassCalibrationUIAction FT02_CompassCalibrationUIHandleInput(const FT02InputEvent& event)

@@ -203,3 +203,18 @@ The Core-supplied `id=<uint32>` is the host-side lifecycle correlation key. Mesh
 ```text
 LR01_ERR code=8 message="line_too_long"
 ```
+
+
+## GNSS software power control (LR01 A4.3 / FT-02 k65)
+
+FT-02 k65 uses the LR01 A4.3 software standby/wake protocol:
+
+- `GNSS_POWER?` -> `GNSS_POWER_STATE enabled=<0|1> mode=<ACTIVE|SOFTWARE_STANDBY> stream=<0|1> fix=<0|1> changed_ms=<ms>`
+- `GNSS_SOFT_OFF` -> `GNSS_POWER_SET enabled=0 mode=SOFTWARE_STANDBY ok=1`
+- `GNSS_SOFT_ON` -> `GNSS_POWER_SET enabled=1 mode=ACTIVE ok=1`
+
+The FT-02 persists the user's desired ON/OFF state in NVS and reapplies it after LR01 reconnect/reboot. Software standby does not power down the LR01 QMC compass.
+
+## Compass module ownership (k65)
+
+Compass calibration UI is entered from the standalone home-screen `指南针` module. LR01 remains the only owner of compass calibration offset/scale and the A4.3 +180 degree installation yaw correction. FT-02 displays the already-corrected heading and must not add another installation offset.

@@ -93,7 +93,7 @@ size_t singleCandidateCount(const FT02PinyinImeEntry* entry)
 {
     if(entry == nullptr || entry->candidates == nullptr) return 0;
     const char* bytes = reinterpret_cast<const char*>(entry->candidates);
-    // A1 dictionary intentionally stores BMP CJK candidates only, each encoded
+    // The dictionary stores BMP CJK candidates only, each encoded
     // as exactly three UTF-8 bytes.
     return strlen(bytes) / 3u;
 }

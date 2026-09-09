@@ -78,7 +78,6 @@ static uint8_t* g_mediaBuffer = nullptr;
 static size_t g_mediaBufferAllocatedBytes = 0;
 static FT02FieldManualLoadedMedia g_loadedMedia = {};
 
-
 static void* FT02_FmPsramAlloc(size_t bytes)
 {
     if(bytes == 0) return nullptr;
@@ -290,7 +289,6 @@ static bool FT02_FmValidateCatalog()
     return true;
 }
 
-
 static bool FT02_FmLoadOptionalMediaCatalog()
 {
     g_mediaReady = false;
@@ -413,10 +411,6 @@ static bool FT02_FmLoadOptionalMediaCatalog()
     g_mediaCount = header.mediaCount;
     g_mediaDataFileSize = dataFileSize;
     g_mediaReady = true;
-    Serial.print("[FIELD-MANUAL] media ready count=");
-    Serial.print(g_mediaCount);
-    Serial.print(" psram=");
-    Serial.println(g_mediaAllocatedBytes);
     return true;
 }
 
@@ -550,9 +544,6 @@ bool FT02_FieldManualBegin(bool forceReload)
         return false;
     }
 
-    Serial.print("[FIELD-MANUAL] card index PSRAM bytes=");
-    Serial.println(g_cardsAllocatedBytes);
-
     if(!FT02_FmValidateCatalog())
     {
         g_state = FT02_FIELD_MANUAL_BAD_FORMAT;
@@ -567,14 +558,6 @@ bool FT02_FieldManualBegin(bool forceReload)
     FT02_FmLoadOptionalMediaCatalog();
 
     g_state = FT02_FIELD_MANUAL_READY;
-    Serial.print("[FIELD-MANUAL] ready version=");
-    Serial.print(g_manifest.contentVersion);
-    Serial.print(" categories=");
-    Serial.print(g_manifest.categoryCount);
-    Serial.print(" cards=");
-    Serial.print(g_manifest.cardCount);
-    Serial.print(" quick=");
-    Serial.println(g_manifest.quickCount);
     return true;
 }
 

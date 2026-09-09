@@ -417,7 +417,6 @@ void drawHeader(FT02Display& display, const char* section)
     display.drawLine(32, 128, 768, 128, GxEPD_BLACK);
 }
 
-
 void formatMessageTime(const FT02LoRaMessageView& msg, char* out, size_t outSize)
 {
     if(outSize == 0) return;
@@ -577,7 +576,6 @@ void drawOutbox(FT02Display& display)
     }
     FT02_DrawBottomBarWithFont(display, BOTTOM_OUTBOX, ft02_cjk_20r);
 }
-
 
 void drawOutboxCancelConfirm(FT02Display& display)
 {
@@ -849,9 +847,7 @@ bool handleComposeRaw(const FT02InputEvent& event)
     if(g_pinyinLength == 0 && (raw == CARDKB_MODE_LEFT || raw == CARDKB_MODE_RIGHT))
     {
         cycleComposeDeliveryMode(raw == CARDKB_MODE_LEFT ? -1 : +1);
-        Serial.printf("[COMM] delivery mode key raw='%c' mode=%s\n",
-                      static_cast<char>(raw),
-                      deliveryModeDetail(g_composeDeliveryMode));
+
         return true;
     }
 
@@ -954,7 +950,7 @@ bool handleComposeRaw(const FT02InputEvent& event)
         return false;
     }
 
-    // Chinese mode keeps the A3 candidate workflow. 1..5 select visible
+    // Chinese mode keeps the candidate workflow. 1..5 select visible
     // candidates, 6/7 are paging shortcuts above, and 0 commits active Pinyin
     // as literal English/ASCII without changing the persistent input mode.
     if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0 && raw >= '1' && raw <= '5')
@@ -1027,22 +1023,19 @@ void FT02_DrawCommunicationNodeScreen(FT02Display& display)
     }
     while(display.nextPage());
     display.setFullWindow();
-    FT02_EpdInteractivePowerOffNow(display, "communication-full");
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
     g_composeDirty = false;
 }
-
 
 static void FT02_CommunicationCommitPartial(
     FT02Display& display,
     int x,
     int y,
     int w,
-    int h,
-    const char* source
+    int h
 )
 {
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(x, y, w, h);
     display.firstPage();
@@ -1059,19 +1052,19 @@ static void FT02_CommunicationCommitPartial(
     }
     while(display.nextPage());
     FT02_EpdInteractiveEndBusyCapture(display);
-    FT02_EpdInteractiveFinishPartial(display, source, startedMs);
+    FT02_EpdInteractiveFinishPartial(display);
 }
 
 void FT02_DrawCommunicationBrowsePartial(FT02Display& display)
 {
     // Inbox/outbox/node browsing only changes the content below the page header.
-    FT02_CommunicationCommitPartial(display, 16, 174, 768, 266, "communication-browse-partial");
+    FT02_CommunicationCommitPartial(display, 16, 174, 768, 266);
 }
 
 void FT02_DrawCommunicationComposePartial(FT02Display& display)
 {
     // Text editor, Pinyin candidates, mode and notice. Keep status/header/footer.
-    FT02_CommunicationCommitPartial(display, 24, 140, 752, 300, "communication-compose-partial");
+    FT02_CommunicationCommitPartial(display, 24, 140, 752, 300);
     g_composeDirty = false;
 }
 
@@ -1192,7 +1185,7 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
                 setNotice("当前消息没有可回复的发送者");
                 return FT02_COMM_INPUT_REDRAW;
             }
-            // A2: Core no longer gates replies on its legacy NodeDB. LR01 owns
+            // Core no longer gates replies on its legacy NodeDB. LR01 owns
             // peer discovery and PKI state and returns node_not_found / pki_not_ready
             // if this target is not currently eligible for a private send.
             beginCompose(true, msg.from, COMM_INBOX, true, msg.packetId);
@@ -1303,7 +1296,6 @@ bool FT02_CommunicationUIIsInbox()
 {
     return g_mode == COMM_INBOX;
 }
-
 
 bool FT02_CommunicationUIIsCompose()
 {

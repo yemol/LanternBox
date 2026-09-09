@@ -96,6 +96,11 @@ static const FT02HomeCard FT02_HOME_CARDS[] = {
         "WiFi网络",
         &ICON_HOME_CARD_WIFI,
         &ft02_menu_28m
+    },
+    {
+        "指南针",
+        &ICON_HOME_CARD_COMPASS,
+        &ft02_cjk_24b
     }
 };
 
@@ -453,7 +458,6 @@ static void FT02_RedrawHomeCardSelectionPartial(
     int partialW = partialRight - partialX;
     int partialH = unionBottom - partialY;
 
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(
         partialX,
@@ -513,7 +517,7 @@ static void FT02_RedrawHomeCardSelectionPartial(
     }
     while(display.nextPage());
     FT02_EpdInteractiveEndBusyCapture(display);
-    FT02_EpdInteractiveFinishPartial(display, "home-selection-partial", startedMs);
+    FT02_EpdInteractiveFinishPartial(display);
 }
 
 int FT02_HomeCardCount()

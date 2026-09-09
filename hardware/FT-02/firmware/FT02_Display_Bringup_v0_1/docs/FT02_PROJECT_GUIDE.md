@@ -71,7 +71,7 @@ v2.75k20 基于 v2.75k19，修复 FieldManual 搜索连续输入时在电子纸 
 - CardKB2 离线拼音输入与本地词频学习
 - 语音日志、定位记录、轨迹查看
 - Meshtastic 广播、私信、节点列表和可靠投递状态
-- 三页系统自检与 LR01 罗盘校准 UI
+- 三页系统自检、GNSS 软件开关与独立指南针 / LR01 罗盘校准 UI
 - FieldManual A3 图文行动卡
 - FieldManual 分类、搜索、最近阅读、我的收藏
 - Global EPD Interactive Runtime A2：BUSY 期间继续收键、单一严格 FIFO、Hot Partial、日志/搜索/通讯/FieldManual 快速局刷
@@ -97,7 +97,7 @@ C = RIGHT
 - `B / ESC`：返回（文本输入页可能有例外）
 - `H`：帮助；文本输入态中的 `h` 优先作为字符
 - `DEL`：删除 / 取消（取决于页面）
-- `K`：设备状态页进入罗盘校准
+- 首页 `指南针`：ENTER 进入罗盘校准；设备状态第 2 页 ENTER 切换 GNSS 软件开/关
 
 ---
 
@@ -314,7 +314,7 @@ Meshtastic 由 LR01 运行，Core 只消费 Host Protocol 状态并提供 UI。
 
 ---
 
-## 9. 设备状态与罗盘校准
+## 9. 设备状态、GNSS 开关与独立指南针
 
 设备状态页可检查：
 
@@ -327,7 +327,7 @@ Meshtastic 由 LR01 运行，Core 只消费 Host Protocol 状态并提供 UI。
 
 左右方向键翻自检页，`ENTER` 重跑自检。
 
-设备状态页按 `K` 进入罗盘校准：
+罗盘校准已从设备状态迁入首页独立 `指南针` 模块，指南针页按 `ENTER` 进入校准：
 
 ```text
 COMPASS_CAL_START

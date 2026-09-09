@@ -368,7 +368,7 @@ void FT02_DrawStatusBarLoRa(
     while(display.nextPage());
 
     display.setFullWindow();
-    FT02_EpdInteractivePowerOffNow(display, "status-lora-partial");
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
 }
 
@@ -448,7 +448,7 @@ void FT02_DrawStatusBarGnss(
     while(display.nextPage());
 
     display.setFullWindow();
-    FT02_EpdInteractivePowerOffNow(display, "status-gnss-partial");
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
 }
 
@@ -543,7 +543,7 @@ void FT02_DrawStatusBarStorage(
     while(display.nextPage());
 
     display.setFullWindow();
-    FT02_EpdInteractivePowerOffNow(display, "status-storage-partial");
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
 }
 
@@ -584,7 +584,7 @@ void FT02_DrawStatusBarClock(
     while(display.nextPage());
 
     display.setFullWindow();
-    FT02_EpdInteractivePowerOffNow(display, "status-clock-partial");
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
 }
 
@@ -654,6 +654,6 @@ void FT02_DrawStatusBarBattery(
     while(display.nextPage());
 
     display.setFullWindow();
-    FT02_EpdInteractivePowerOffNow(display, "status-battery-partial");
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
 }

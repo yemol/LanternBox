@@ -10,3 +10,5 @@
 - `FT02_FieldManual_v1.3.*`：当前 FieldManual 内容审计与质量修订资料。
 
 历史阶段测试与审计文件已从生产提交包中移除；版本演进只保留在根目录 `CHANGELOG.md`。
+- `FT02_FieldLibrary_v0.8.2_RELEASE_NOTE.txt`：Field Library v0.8.2 发布说明。
+- `P0_CONTENT_TOOLCHAIN.txt`：P0 内容工具链说明。

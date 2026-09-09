@@ -4,7 +4,7 @@
 #include "FT02_FontPackRenderer.h"
 #include "FT02_InputManager.h"
 
-// FT-02 Map Search A4 - Disk Index
+// FT-02 disk-indexed map search.
 //
 // Search data is split into a tiny bucket directory (.search.idx) and a
 // fixed-record data file (.search.dat). The directory stays in normal RAM;

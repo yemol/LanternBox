@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-// FT-02 Offline Pinyin IME A4
+// FT-02 offline Pinyin IME.
 // - tone-less Pinyin
 // - continuous Pinyin segmentation
 // - phrase candidates

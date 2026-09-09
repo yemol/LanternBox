@@ -6,6 +6,7 @@
 
 #include "FT02_Storage.h"
 #include "FT02_BuildInfo.h"
+#include "FT02_GnssPowerControl.h"
 
 namespace
 {
@@ -232,14 +233,6 @@ static bool FT02_RecorderWriteEvent(
         return false;
     }
 
-    Serial.printf(
-        "[RECORDER] wrote type=%s session=%s fix=%d sats=%u note=%s\n",
-        type,
-        g_ft02Recorder.sessionId,
-        gnss.fixValid ? 1 : 0,
-        (unsigned int)gnss.satellites,
-        note != nullptr ? note : ""
-    );
     return true;
 }
 
@@ -272,6 +265,11 @@ static bool FT02_RecorderRecordPoint(const char* note, bool recordFailureEvent)
     if(!FT02_RecorderRequireActive()) return false;
 
     const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+    if(!FT02_GnssPowerDesiredEnabled())
+    {
+        FT02_RecorderSetAction("记点失败：GNSS已关闭");
+        return false;
+    }
     if(!gnss.fixValid)
     {
         g_ft02Recorder.failedPointCount++;
@@ -317,7 +315,7 @@ void FT02_LocationRecorderBegin()
     g_ft02AutoLastAttemptMs = 0;
     g_ft02AutoWaitingForFix = false;
     FT02_RecorderChanged();
-    Serial.println("[RECORDER] location recorder A2 ready path=/lanternbox/tracks/path_points.jsonl");
+
 }
 
 void FT02_LocationRecorderPoll()
@@ -333,6 +331,16 @@ void FT02_LocationRecorderPoll()
 
     const uint32_t now = millis();
     const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+
+    if(!FT02_GnssPowerDesiredEnabled())
+    {
+        if(g_ft02Recorder.autoTrackEnabled)
+        {
+            g_ft02AutoWaitingForFix = true;
+            FT02_RecorderSetAction("自动记录暂停：GNSS已关闭");
+        }
+        return;
+    }
 
     if(!g_ft02Recorder.originRecorded && gnss.fixValid)
     {
@@ -372,6 +380,12 @@ bool FT02_LocationRecorderStartSession()
     if(!FT02_StorageIsReady())
     {
         FT02_RecorderSetAction("无法开始：SD未就绪");
+        return false;
+    }
+
+    if(!FT02_GnssPowerDesiredEnabled())
+    {
+        FT02_RecorderSetAction("无法开始：GNSS已关闭，请先在设备状态开启");
         return false;
     }
 
@@ -466,6 +480,12 @@ bool FT02_LocationRecorderToggleAutoTrack()
         g_ft02AutoWaitingForFix = false;
         FT02_RecorderSetAction("自动记录已关闭");
         return true;
+    }
+
+    if(!FT02_GnssPowerDesiredEnabled())
+    {
+        FT02_RecorderSetAction("无法开启自动：GNSS已关闭");
+        return false;
     }
 
     if(!FT02_RecorderWriteEvent("auto_track_on", "toggle", gnss)) return false;

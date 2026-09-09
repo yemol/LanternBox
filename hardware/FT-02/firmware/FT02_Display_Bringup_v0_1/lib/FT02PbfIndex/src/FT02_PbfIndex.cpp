@@ -1220,14 +1220,6 @@ static FT02PbfIndexLoadResult FT02_TryLoadIndex(
         millis() - startedAt
     );
 
-    Serial.println("[PBF-A1] persistent index loaded");
-    Serial.print("[PBF-A1] index_bytes=");
-    Serial.print((unsigned long long)indexFileBytes);
-    Serial.print(" entries=");
-    Serial.print(header.entryCount);
-    Serial.print(" open_ms=");
-    Serial.println(g_report.operationElapsedMs);
-
     return FT02_PBF_LOAD_VALID;
 }
 
@@ -1290,16 +1282,6 @@ static bool FT02_BuildIndex(
     g_report.state = FT02_PBF_INDEX_BUILDING;
     g_report.sourceFileBytes = sourceFileBytes;
     g_report.sourceSignature = sourceSignature;
-
-    Serial.println("[PBF-A1] persistent index build begin");
-    Serial.print("[PBF-A1] source=");
-    Serial.println(sourcePath);
-    Serial.print("[PBF-A1] index=");
-    Serial.println(indexPath);
-    Serial.print("[PBF-A1] source_bytes=");
-    Serial.print((unsigned long long)sourceFileBytes);
-    Serial.print(" signature=0x");
-    Serial.println(sourceSignature, HEX);
 
     uint32_t entryCrc = 0xFFFFFFFFU;
     uint32_t blockIndex = 0;
@@ -1606,26 +1588,6 @@ static bool FT02_BuildIndex(
         if(ownedRawBytes != nullptr) FT02_PbfFree(ownedRawBytes);
         FT02_PbfFree(blobBytes);
 
-        if((blockIndex % 16U) == 0U)
-        {
-            unsigned long percent = sourceFileBytes > 0
-                ? (unsigned long)((g_report.bytesRead * 100ULL) / sourceFileBytes)
-                : 0;
-
-            Serial.print("[PBF-A1] block=");
-            Serial.print(blockIndex);
-            Serial.print(" type=");
-            Serial.print(blobHeader.type);
-            Serial.print(" progress=");
-            Serial.print(percent);
-            Serial.print("% nodes=");
-            Serial.print((unsigned long long)g_report.nodes);
-            Serial.print(" ways=");
-            Serial.print((unsigned long long)g_report.ways);
-            Serial.print(" rels=");
-            Serial.println((unsigned long long)g_report.relations);
-        }
-
         blockIndex++;
         delay(1);
     }
@@ -1710,27 +1672,6 @@ static bool FT02_BuildIndex(
     );
     g_report.minimumFreeHeap = ESP.getMinFreeHeap();
 
-    Serial.println("[PBF-A1] INDEX BUILT");
-    Serial.print("[PBF-A1] entries=");
-    Serial.print(g_report.indexEntries);
-    Serial.print(" index_bytes=");
-    Serial.print((unsigned long long)g_report.indexFileBytes);
-    Serial.print(" build_ms=");
-    Serial.println(g_report.originalBuildElapsedMs);
-    Serial.print("[PBF-A1] blocks=");
-    Serial.print(g_report.fileBlocks);
-    Serial.print(" header=");
-    Serial.print(g_report.headerBlocks);
-    Serial.print(" data=");
-    Serial.println(g_report.dataBlocks);
-    Serial.print("[PBF-A1] nodes=");
-    Serial.print((unsigned long long)g_report.nodes);
-    Serial.print(" ways=");
-    Serial.print((unsigned long long)g_report.ways);
-    Serial.print(" relations=");
-    Serial.println((unsigned long long)g_report.relations);
-    Serial.flush();
-
     return true;
 }
 
@@ -1811,12 +1752,6 @@ bool FT02_PbfIndexEnsure(
     fclose(source);
     g_report.sourceFileBytes = sourceFileBytes;
     g_report.sourceSignature = sourceSignature;
-
-    Serial.println("[PBF-A1] source check");
-    Serial.print("[PBF-A1] source_bytes=");
-    Serial.print((unsigned long long)sourceFileBytes);
-    Serial.print(" signature=0x");
-    Serial.println(sourceSignature, HEX);
 
     if(!forceRebuild)
     {

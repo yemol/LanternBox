@@ -76,7 +76,7 @@ bool loadSnapshot()
     {
         g_loaded = true;
         g_dirty = false;
-        Serial.println("[FIELD-RECENT-A1] history absent; starting fresh");
+
         return true;
     }
 
@@ -92,8 +92,6 @@ bool loadSnapshot()
         if(line[0] == '\0') continue;
         if(line[0] == '#')
         {
-            if(!headerSeen && strcmp(line, FILE_HEADER) != 0)
-                Serial.printf("[FIELD-RECENT-A1] header differs: %s\n", line);
             headerSeen = true;
             continue;
         }
@@ -128,7 +126,7 @@ bool loadSnapshot()
 
     g_loaded = true;
     g_dirty = false;
-    Serial.printf("[FIELD-RECENT-A1] loaded entries=%d\n", g_count);
+
     return true;
 }
 
@@ -207,7 +205,6 @@ void FT02_FieldManualRecentPoll(uint32_t nowMs)
     if(g_dirty && nowMs - g_lastDirtyMs >= FLUSH_IDLE_MS) (void)FT02_FieldManualRecentFlush();
 }
 
-
 int FT02_FieldManualRecentCount()
 {
     ensureLoaded();
@@ -276,16 +273,15 @@ void FT02_FieldManualRecentUpdatePage(int globalCardIndex, int page)
     markDirty();
 }
 
-
 bool FT02_FieldManualRecentFlush()
 {
     if(!g_loaded || !g_dirty) return true;
     if(!writeSnapshot())
     {
-        Serial.println("[FIELD-RECENT-A1] flush FAILED");
+        Serial.println("[FIELD-RECENT] flush FAILED");
         return false;
     }
     g_dirty = false;
-    Serial.printf("[FIELD-RECENT-A1] flush OK entries=%d\n", g_count);
+
     return true;
 }

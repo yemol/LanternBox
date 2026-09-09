@@ -16,18 +16,11 @@ void FT02_EpdInteractiveEndBusyCapture(FT02Display& display);
 
 // Call after a completed partial update. Restores the default full window and
 // keeps the panel hot until the idle service powers it off.
-void FT02_EpdInteractiveFinishPartial(
-    FT02Display& display,
-    const char* source,
-    uint32_t startedMs
-);
+void FT02_EpdInteractiveFinishPartial(FT02Display& display);
 
 // Full-screen commits still power off immediately, but keep BUSY-time input
 // capture active through the shutdown transaction.
-void FT02_EpdInteractivePowerOffNow(
-    FT02Display& display,
-    const char* source
-);
+void FT02_EpdInteractivePowerOffNow(FT02Display& display);
 
 // Inspect or consume keys captured while another display transaction was
 // blocking. The queue is strict FIFO and is the single ordering authority for

@@ -726,7 +726,6 @@ static bool mountFat() {
     return true;
 }
 
-
 static FT02StorageState g_storageState = FT02_STORAGE_STATE_NOT_STARTED;
 static FT02StorageError g_storageError = FT02_STORAGE_ERROR_NONE;
 static uint8_t g_cardType = 0;
@@ -825,22 +824,6 @@ void FT02_StorageBegin()
     digitalWrite(FT02StorageConfig::SD_CS, HIGH);
     delay(10);
 
-    Serial.println("FT02 Storage v2.0 begin");
-    Serial.print("Profile: ");
-    Serial.println(FT02StorageConfig::PROFILE_NAME);
-    Serial.printf(
-        "Pins: SCK=%d MOSI=%d MISO=%d CS=%d\n",
-        FT02StorageConfig::SD_SCK,
-        FT02StorageConfig::SD_MOSI,
-        FT02StorageConfig::SD_MISO,
-        FT02StorageConfig::SD_CS
-    );
-    Serial.printf(
-        "SD FSPI Mode3 @ %lu kHz, multi-block chunk=%lu KiB\n",
-        static_cast<unsigned long>(FT02StorageConfig::FREQUENCY_KHZ),
-        static_cast<unsigned long>(FT02StorageConfig::TRANSFER_CHUNK_BLOCKS / 2U)
-    );
-
     configureDiskTransfer(
         DiskTransferMode::MultiBlock,
         FT02StorageConfig::TRANSFER_CHUNK_BLOCKS
@@ -871,12 +854,6 @@ void FT02_StorageBegin()
     g_storageState = FT02_STORAGE_STATE_READY;
     g_storageError = FT02_STORAGE_ERROR_NONE;
 
-    Serial.print("SD ready: type=");
-    Serial.print(FT02_CardTypeName(g_cardType));
-    Serial.print(" cardMB=");
-    Serial.print(g_cardSizeMB);
-    Serial.print(" freeMB=");
-    Serial.println(FT02_StorageFreeMB());
 }
 
 FT02StorageState FT02_StorageStateCurrent() { return g_storageState; }

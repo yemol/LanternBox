@@ -70,7 +70,7 @@ for name, value in expected_clock_registers.items():
 require("{0x18, 0x19}" in codec, "both legal ES8311 I2C addresses are not probed")
 require("digitalMic ? 0x5A : 0x1A" in codec, "ES8311 microphone selector table changed")
 require(codec.count("0x0C") >= 3, "16-bit Philips I2S register value is missing")
-require("ES8311 configuration verified OK" in codec, "codec readback completion marker is missing")
+require("if(readRegister(reg, actual) && actual == value) return true;" in codec, "codec register readback verification missing")
 
 begin_match = re.search(r"bool FT02_AudioLogBegin\(\).*?\n}\n", audio, re.DOTALL)
 require(begin_match is not None, "FT02_AudioLogBegin not found")
@@ -84,7 +84,9 @@ require("WM8960" not in audio, "WM8960 remains in audio runtime")
 require("WM8960" not in platformio, "WM8960 dependency remains")
 require("ES8311与I2S正常" in self_test, "self-test success text was not migrated")
 require("ES8311无响应" in self_test, "self-test codec failure text was not migrated")
-require('FT02_FIRMWARE_VERSION "v2.75k57"' in build_info, "firmware version mismatch")
+version_text = (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip()
+require(version_text.startswith("FT-02 v2.75k67"), "firmware version mismatch")
+require('FT02_FIRMWARE_VERSION "v2.75k67"' in build_info, "BuildInfo/version mismatch")
 
 require("DAC idle mute" in codec, "codec does not finish initialization muted")
 require("DAC idle power down" in codec, "codec does not power DAC down while idle")
@@ -94,7 +96,6 @@ require("FT02_AUDIO_PLAYBACK_PRIME_BLOCKS = 2" in audio, "playback zero-prime mi
 require("g_ft02AudioCodec.setDacMuted(false)" in audio, "playback has no explicit DAC unmute")
 require(audio.count("g_ft02AudioCodec.setDacMuted(true)") >= 2, "idle/record mute guards missing")
 require("prepareDacForPaShutdown" in codec and "powerDownDac" in codec, "split pop-safe DAC shutdown API missing")
-require("mic=AMIC DAC=IDLE_POWERDOWN" in audio, "runtime audio identity is not analog/idle-powered-down")
 
 bclk = 44100 * 16 * 2
 require(bclk == 1_411_200, "BCLK calculation failed")
@@ -102,8 +103,6 @@ require(bclk == 1_411_200, "BCLK calculation failed")
 
 # Clean capture regression gates
 require('FT02_AUDIO_PSRAM_STAGE_TARGET_BYTES = 4u * 1024u * 1024u' in audio, "4 MiB PSRAM staging missing")
-require('PSRAM_STAGE' in audio, "PSRAM capture-mode log marker missing")
-require('post-EPD+SD settle=' in audio, "post-SD settle marker missing")
 require('FT02_InputSetLowNoiseMode' in input_cpp, "low-noise CardKB mode missing")
 require('FT02_INPUT_LOW_NOISE_POLL_MS = 100' in input_cpp, "CardKB low-noise interval mismatch")
 require('FT02_InputSetLowNoiseMode(FT02_AudioLogIsCapturing())' in main_cpp, "audio capture does not activate low-noise input mode")
@@ -112,7 +111,6 @@ require('FT02_AUDIO_BURST_TRIGGER = 30000' in audio, "saturated burst threshold 
 require('FT02_AUDIO_BURST_MAX_RUN = 128' in audio, "saturated burst window missing")
 require('secondBurstRepairSamples' in audio, "saturated burst diagnostics missing")
 require('config.clk_cfg.mclk_multiple = I2S_MCLK_MULTIPLE_512' in audio, "S3 512x internal MCLK resolution missing")
-require('burstfix=%lu' in audio, "burst repair log marker missing")
 require('g_ft02AudioRecordRestartGuardUntilMs' in main_cpp, "post-record R guard missing")
 require('physicalKeyStillDown' in main_cpp, "queued-command release handling missing")
 require('2500u' in audio, "AudioLog post-record restart guard missing")
@@ -121,15 +119,13 @@ require('2500u' in audio, "AudioLog post-record restart guard missing")
 require('FT02_AUDIO_PLAYBACK_PSRAM_MAX_BYTES = 4u * 1024u * 1024u' in audio, "playback PSRAM staging missing")
 require('FT02_AudioWriteAll' in audio and 'portMAX_DELAY' in audio, "full blocking TX writer missing")
 require('Rewind this block and retry' not in audio, "unsafe full-block rewind remains")
-require('RX DMA suspended; TX-only clean playback' in audio, "RX suspend clean playback missing")
-require('source=%s partialWrites=%lu' in audio, "playback continuity diagnostics missing")
+require('i2s_channel_disable(g_ft02AudioRx)' in audio and 'g_ft02AudioPlayback.rxSuspended = true' in audio, "RX suspend clean playback missing")
 play_refresh = main_cpp[main_cpp.index('else if(audioState == FT02_AUDIO_LOG_PLAYING)'):main_cpp.index('    }\n    if(g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST', main_cpp.index('else if(audioState == FT02_AUDIO_LOG_PLAYING)'))]
 require('FT02_DrawAudioLogPlayingStatusPartial' not in play_refresh, "playback EPD timer refresh must remain disabled")
 require('playbackElapsedMs /' not in play_refresh, "playback elapsed bucket calculation must remain disabled")
 require('FT02_AUDIO_PLAYBACK_FADE_BLOCKS = 4' in audio, "manual-stop fade length missing")
-require('manual stop fade started' in audio and 'manual stop fade reached zero' in audio, "manual-stop PCM fade diagnostics missing")
-require('DAC soft-mute+volume-ramp ready for PA shutdown' in codec, "DAC shutdown gain ramp missing")
-require('pop-safe shutdown complete: fade->DAC mute->PA off->DAC powerdown' in audio, "pop-safe shutdown ordering marker missing")
+require('FT02_AudioWriteFadeToZero()' in audio, "manual-stop PCM fade path missing")
+require('static const uint8_t kRamp[]' in codec and 'prepareDacForPaShutdown' in codec, "DAC shutdown gain ramp missing")
 require(audio.find('prepareDacForPaShutdown()') < audio.find('FT02_AudioPaSet(false)', audio.find('prepareDacForPaShutdown()')), "PA is shut down before DAC soft-mute preparation")
 
 
@@ -148,9 +144,10 @@ require('FT02_AudioLogFindPlaybackEpdQuietWindow' not in audio, "abandoned quiet
 require('FT02_AudioLogSetPlaybackEpdGuard(true)' in main_cpp, "user volume EPD guard missing")
 require('FT02_DrawAudioLogPlayingVolumePartial' in main_cpp, "user volume partial refresh missing")
 require('FT02_AUDIO_VOLUME_REFRESH_COALESCE_MS = 220u' in main_cpp, "volume refresh coalescing missing")
-require('FT02_EpdPowerOffAfterCommit(display, "audio-log-playing-cue")' in ui_cpp, "playback cue does not return to EPD-off clean-audio policy")
+require('FT02_EpdPowerOffAfterCommit(display)' in ui_cpp, "playback cue does not return to EPD-off clean-audio policy")
 require('FT02_DrawAudioLogPlayingVolumePartial' in ui_cpp, "volume-only partial renderer missing")
-require('audio-log-playing-volume-safe' in ui_cpp, "safe volume EPD power-off marker missing")
+volume_fn = ui_cpp[ui_cpp.index('void FT02_DrawAudioLogPlayingVolumePartial'):]
+require('FT02_EpdInteractivePowerOffNow(display)' in volume_fn, "safe volume EPD power-off path missing")
 require('FT02_DrawAudioLogPlayingStatusPartial' not in ui_cpp, "elapsed/status playback partial renderer returned")
 
 print(

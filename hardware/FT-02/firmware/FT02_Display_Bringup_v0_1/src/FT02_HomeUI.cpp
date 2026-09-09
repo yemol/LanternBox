@@ -49,6 +49,6 @@ void FT02_DrawHomeScreen(
     }
     while(display.nextPage());
 
-    FT02_EpdInteractivePowerOffNow(display, "home-full");
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
 }

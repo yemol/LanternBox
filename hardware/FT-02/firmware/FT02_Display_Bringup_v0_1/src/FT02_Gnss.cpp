@@ -69,7 +69,7 @@ void FT02_GnssBegin()
     g_lastFixMs = 0;
     g_lastTimeSyncMs = 0;
     markChanged();
-    Serial.println("[NAV] source=LR01 only; Core GNSS UART/parser absent");
+
 }
 
 void FT02_GnssPoll()

@@ -2,7 +2,7 @@
 
 #include <stddef.h>
 
-// Compact offline phrase dictionary for FT-02 Pinyin IME A2.
+// Compact offline phrase dictionary for the FT-02 Pinyin IME.
 // Keys are continuous tone-less Pinyin. Multiple candidates are separated by |.
 struct FT02PinyinPhraseEntry { const char* pinyin; const char8_t* candidates; };
 

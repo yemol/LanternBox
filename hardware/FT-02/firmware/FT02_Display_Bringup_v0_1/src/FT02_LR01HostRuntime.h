@@ -89,6 +89,15 @@ struct FT02LR01State
     uint16_t listedNodeCount = 0;
     uint32_t lastNodeListMs = 0;
 
+    // LR01 A4.3 GNSS software power state. This is independent from
+    // SYSTEM_STATE gnss=, which reports whether a live GNSS stream exists.
+    bool gnssPowerKnown = false;
+    bool gnssPowerEnabled = true;
+    bool gnssPowerStream = false;
+    bool gnssPowerFix = false;
+    uint32_t gnssPowerChangedMs = 0;
+    uint32_t gnssPowerRevision = 0;
+
     FT02CompassCalibrationState compassCalibration;
 };
 
@@ -120,3 +129,8 @@ bool FT02_LR01HostCompassCalSave();
 bool FT02_LR01HostCompassCalCancel();
 bool FT02_LR01HostCompassCalReset();
 const char* FT02_LR01HostCompassCalStateText(FT02CompassCalState state);
+
+// LR01 A4.3 GNSS software standby/wake control.
+bool FT02_LR01HostGnssPowerRequestStatus();
+bool FT02_LR01HostGnssSoftwareOn();
+bool FT02_LR01HostGnssSoftwareOff();

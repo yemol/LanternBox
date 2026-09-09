@@ -305,9 +305,7 @@ static bool FT02_LibraryEnsurePsramBuffers()
                        + FT02_LIBRARY_MAX_CHAPTERS * sizeof(FT02LibraryChapter)
                        + FT02_LIBRARY_MAX_SEARCH_RESULTS * sizeof(FT02LibrarySearchResult)
                        + FT02_LIBRARY_MAX_MEDIA * sizeof(FT02LibraryMedia);
-    Serial.printf("[FIELD-LIBRARY] PSRAM buffers=%u bytes, free_psram=%u\n",
-                  static_cast<unsigned>(bytes),
-                  static_cast<unsigned>(heap_caps_get_free_size(MALLOC_CAP_SPIRAM)));
+
     return true;
 }
 
@@ -1088,8 +1086,6 @@ static void FT02_LibraryCoalesceQueuedReaderTurns()
         }
         break;
     }
-    if(folded > 0)
-        Serial.printf("[FIELD-LIBRARY-V0.6] coalesced %d queued reader turns into one refresh\n", folded);
 }
 
 static void FT02_LibraryCoalesceQueuedMediaNavigation()
@@ -1121,8 +1117,6 @@ static void FT02_LibraryCoalesceQueuedMediaNavigation()
         else break;
         ++folded;
     }
-    if(folded > 0)
-        Serial.printf("[FIELD-LIBRARY-V0.6] coalesced %d queued media moves into one refresh\n", folded);
 }
 
 static bool FT02_LibraryOpenMostRecent()
@@ -1799,7 +1793,7 @@ static bool FT02_LibraryReadingScreen()
            g_screen == FT02_LIBRARY_SCREEN_MEDIA_READER;
 }
 
-static void FT02_LibraryRedrawFull(FT02Display& display, const char* source)
+static void FT02_LibraryRedrawFull(FT02Display& display)
 {
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setFullWindow();
@@ -1810,7 +1804,7 @@ static void FT02_LibraryRedrawFull(FT02Display& display, const char* source)
         FT02_DrawStatusBar(display);
         FT02_LibraryDrawCurrentContent(display);
     } while(display.nextPage());
-    FT02_EpdInteractivePowerOffNow(display, source);
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
     g_readingPartialCount = 0;
 }
@@ -1819,23 +1813,18 @@ static void FT02_LibraryRedrawReadingPartial(FT02Display& display)
 {
     if(g_readingPartialCount >= FT02_LIBRARY_READING_PARTIAL_LIMIT)
     {
-        Serial.println("[FIELD-LIBRARY-V0.8.2] long-session cleanup full refresh");
-        FT02_LibraryRedrawFull(display, "field-library-reading-clean-full");
+
+        FT02_LibraryRedrawFull(display);
         return;
     }
 
-    // A16 real-device clean-slate reader refresh.  The previous fast reader
-    // updated only x=16..783 and sometimes started at y=92/145.  That left
-    // stale menu/selection pixels in the 16 px side margins and the strip
-    // directly below the global status bar.  Every book/media page now clears
-    // and redraws the complete reading surface below the status bar.  The
-    // status bar itself (0..85) remains untouched.
+    // Redraw the complete reading surface below the status bar so stale menu
+    // or selection pixels cannot survive partial reader refreshes.
     const int px = FT02_LIBRARY_READING_PARTIAL_X;
     const int py = FT02_LIBRARY_READING_PARTIAL_Y;
     const int pw = FT02_LIBRARY_READING_PARTIAL_W;
     const int ph = FT02_LIBRARY_READING_PARTIAL_H;
 
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(px, py, pw, ph);
     display.firstPage();
@@ -1849,25 +1838,16 @@ static void FT02_LibraryRedrawReadingPartial(FT02Display& display)
     // Keep the panel hot through the reading session; only the reader refresh
     // window is widened so stale pixels below the global status bar are cleared.
     display.setFullWindow();
-    Serial.printf(
-        "[FIELD-LIBRARY-A16] reader-clean-slate x=%d y=%d w=%d h=%d screen=%u elapsed=%lums\n",
-        px, py, pw, ph, static_cast<unsigned>(g_screen),
-        static_cast<unsigned long>(millis() - startedMs)
-    );
+
     g_readingHeaderDirty = false;
     ++g_readingPartialCount;
 }
 
-// v0.8.2: Library menus used to route every key press through setFullWindow(),
-// producing a slow black/white full-panel flash even when only the selection
-// rectangle changed.  Keep the global 0..85 status area untouched and update
-// only the actual library UI below it.  The shared interactive runtime keeps
-// the controller hot for a short navigation burst and still captures CardKB
-// input while BUSY.
+// Library navigation updates only the UI region below the global status bar.
+// The shared interactive runtime keeps input capture active while the panel is BUSY.
 static void FT02_LibraryRedrawUiPartialRect(
     FT02Display& display,
-    int px, int py, int pw, int ph,
-    const char* source
+    int px, int py, int pw, int ph
 )
 {
     px = FT02_LibraryClamp(px, 0, 799);
@@ -1876,7 +1856,6 @@ static void FT02_LibraryRedrawUiPartialRect(
     if(px + pw > 800) pw = 800 - px;
     if(py + ph > 480) ph = 480 - py;
 
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(px, py, pw, ph);
     display.firstPage();
@@ -1886,24 +1865,21 @@ static void FT02_LibraryRedrawUiPartialRect(
         FT02_LibraryDrawCurrentContent(display);
     } while(display.nextPage());
     FT02_EpdInteractiveEndBusyCapture(display);
-    FT02_EpdInteractiveFinishPartial(display, source, startedMs);
+    FT02_EpdInteractiveFinishPartial(display);
 
-    Serial.printf("[FIELD-LIBRARY-V0.8.2] ui-partial source=%s x=%d y=%d w=%d h=%d elapsed=%lums\n",
-        source ? source : "unknown", px, py, pw, ph,
-        static_cast<unsigned long>(millis() - startedMs));
 }
 
-static void FT02_LibraryRedrawUiPartial(FT02Display& display, const char* source)
+static void FT02_LibraryRedrawUiPartial(FT02Display& display)
 {
     // Header, menu/list body and bottom hints. The global status bar stays put.
-    FT02_LibraryRedrawUiPartialRect(display, 0, 86, 800, 394, source);
+    FT02_LibraryRedrawUiPartialRect(display, 0, 86, 800, 394);
 }
 
-static void FT02_LibraryRedrawSearchBody(FT02Display& display, const char* source)
+static void FT02_LibraryRedrawSearchBody(FT02Display& display)
 {
     // Query box, pinyin/candidates and notice area. Header and bottom hints are
     // stable while typing, so do not refresh them on every keystroke.
-    FT02_LibraryRedrawUiPartialRect(display, 28, 140, 744, 252, source);
+    FT02_LibraryRedrawUiPartialRect(display, 28, 140, 744, 252);
 }
 
 static void FT02_LibraryRedrawSelectionRows(
@@ -1913,14 +1889,13 @@ static void FT02_LibraryRedrawSelectionRows(
     int total,
     int baseY,
     int rowStep,
-    int rowHeight,
-    const char* source
+    int rowHeight
 )
 {
     if(oldSelected == newSelected) return;
     if(total <= 0)
     {
-        FT02_LibraryRedrawUiPartial(display, source);
+        FT02_LibraryRedrawUiPartial(display);
         return;
     }
 
@@ -1931,7 +1906,7 @@ static void FT02_LibraryRedrawSelectionRows(
         // A page turn replaces all four list rows, but the header and status bar
         // are unchanged. Clear only the list body.
         FT02_LibraryRedrawUiPartialRect(display, 28, baseY - 6, 744,
-            FT02_LIBRARY_LIST_PAGE_SIZE * rowStep + 2, source);
+            FT02_LIBRARY_LIST_PAGE_SIZE * rowStep + 2);
         return;
     }
 
@@ -1941,7 +1916,7 @@ static void FT02_LibraryRedrawSelectionRows(
     const int lastRow = oldRow > newRow ? oldRow : newRow;
     const int py = baseY + firstRow * rowStep - 3;
     const int ph = (lastRow - firstRow) * rowStep + rowHeight + 6;
-    FT02_LibraryRedrawUiPartialRect(display, 28, py, 744, ph, source);
+    FT02_LibraryRedrawUiPartialRect(display, 28, py, 744, ph);
 }
 
 static void FT02_LibraryRedraw(FT02Display& display)
@@ -1951,7 +1926,7 @@ static void FT02_LibraryRedraw(FT02Display& display)
         FT02_LibraryRedrawReadingPartial(display);
         return;
     }
-    FT02_LibraryRedrawUiPartial(display, "field-library-ui-partial");
+    FT02_LibraryRedrawUiPartial(display);
 }
 
 static FT02FieldLibraryAction FT02_LibraryHandleSearchInput(FT02Display& display, const FT02InputEvent& event)
@@ -1975,19 +1950,19 @@ static FT02FieldLibraryAction FT02_LibraryHandleSearchInput(FT02Display& display
             g_searchPinyinPage = 0;
         }
         else FT02_LibrarySearchBackspace();
-        FT02_LibraryRedrawSearchBody(display, "field-library-search-edit");
+        FT02_LibraryRedrawSearchBody(display);
         return FT02_LIBRARY_ACTION_NONE;
     }
     if(FT02_TextInputModeIsChinese() && g_searchPinyinLength > 0 && (raw == '6' || raw == '<'))
-    { FT02_LibrarySearchMovePinyinPage(-1); FT02_LibraryRedrawSearchBody(display, "field-library-search-candidates"); return FT02_LIBRARY_ACTION_NONE; }
+    { FT02_LibrarySearchMovePinyinPage(-1); FT02_LibraryRedrawSearchBody(display); return FT02_LIBRARY_ACTION_NONE; }
     if(FT02_TextInputModeIsChinese() && g_searchPinyinLength > 0 && (raw == '7' || raw == '>'))
-    { FT02_LibrarySearchMovePinyinPage(+1); FT02_LibraryRedrawSearchBody(display, "field-library-search-candidates"); return FT02_LIBRARY_ACTION_NONE; }
+    { FT02_LibrarySearchMovePinyinPage(+1); FT02_LibraryRedrawSearchBody(display); return FT02_LIBRARY_ACTION_NONE; }
     if(raw == '\r' || raw == '\n')
     {
         if(FT02_TextInputModeIsChinese() && g_searchPinyinLength > 0)
         {
             FT02_LibrarySearchCommitDefault();
-            FT02_LibraryRedrawSearchBody(display, "field-library-search-commit");
+            FT02_LibraryRedrawSearchBody(display);
             return FT02_LIBRARY_ACTION_NONE;
         }
         FT02_LibrarySearchExecute();
@@ -1998,20 +1973,20 @@ static FT02FieldLibraryAction FT02_LibraryHandleSearchInput(FT02Display& display
     {
         if(FT02_TextInputModeIsChinese() && g_searchPinyinLength > 0) FT02_LibrarySearchCommitDefault();
         else FT02_LibrarySearchAppend(" ", 1);
-        FT02_LibraryRedrawSearchBody(display, "field-library-search-edit");
+        FT02_LibraryRedrawSearchBody(display);
         return FT02_LIBRARY_ACTION_NONE;
     }
     if(FT02_TextInputModeIsChinese() && g_searchPinyinLength > 0 && raw >= '1' && raw <= '5')
     {
         FT02_LibrarySearchCommitCandidate(static_cast<size_t>(raw - '1'));
-        FT02_LibraryRedrawSearchBody(display, "field-library-search-candidate");
+        FT02_LibraryRedrawSearchBody(display);
         return FT02_LIBRARY_ACTION_NONE;
     }
     if((raw >= 'a' && raw <= 'z') || (raw >= 'A' && raw <= 'Z'))
     {
         if(FT02_TextInputModeIsChinese()) FT02_LibrarySearchAppendPinyin(static_cast<char>(raw));
         else { const char c = static_cast<char>(raw); FT02_LibrarySearchAppend(&c, 1); }
-        FT02_LibraryRedrawSearchBody(display, "field-library-search-type");
+        FT02_LibraryRedrawSearchBody(display);
         return FT02_LIBRARY_ACTION_NONE;
     }
     if(raw >= 0x20 && raw < 0x7F)
@@ -2019,7 +1994,7 @@ static FT02FieldLibraryAction FT02_LibraryHandleSearchInput(FT02Display& display
         if(FT02_TextInputModeIsChinese() && g_searchPinyinLength > 0) FT02_LibrarySearchCommitDefault();
         const char c = static_cast<char>(raw);
         FT02_LibrarySearchAppend(&c, 1);
-        FT02_LibraryRedrawSearchBody(display, "field-library-search-type");
+        FT02_LibraryRedrawSearchBody(display);
     }
     return FT02_LIBRARY_ACTION_NONE;
 }
@@ -2048,8 +2023,7 @@ void FT02_FieldLibraryBegin(bool forceReload)
     FT02_LibraryLoadCatalog();
     if(g_ready) FT02_LibraryMigrateLegacyProgress();
     if(g_ready) g_screen = FT02_LIBRARY_SCREEN_HOME;
-    Serial.printf("[FIELD-LIBRARY-V0.8.2-BW] ready=%d P0-books=%d categories=%d\n",
-                  g_ready ? 1 : 0, g_bookCount, g_categoryCount);
+
 }
 
 void FT02_FieldLibraryReset()
@@ -2074,7 +2048,7 @@ void FT02_DrawFieldLibraryScreen(FT02Display& display)
     // The top status bar is shared with the surrounding FT-02 UI. Clear and
     // replace only the module surface below it, so entering the library no
     // longer pays a full-screen waveform.
-    FT02_LibraryRedrawUiPartial(display, "field-library-entry-partial");
+    FT02_LibraryRedrawUiPartial(display);
 }
 
 FT02FieldLibraryAction FT02_HandleFieldLibraryInput(FT02Display& display, const FT02InputEvent& event)
@@ -2110,8 +2084,7 @@ FT02FieldLibraryAction FT02_HandleFieldLibraryInput(FT02Display& display, const 
             return FT02_LIBRARY_ACTION_NONE;
         }
         else return FT02_LIBRARY_ACTION_NONE;
-        FT02_LibraryRedrawSelectionRows(display, oldSelected, g_homeSelected, 4, 138, 66, 58,
-                                        "field-library-home-select");
+        FT02_LibraryRedrawSelectionRows(display, oldSelected, g_homeSelected, 4, 138, 66, 58);
         return FT02_LIBRARY_ACTION_NONE;
     }
 
@@ -2135,8 +2108,7 @@ FT02FieldLibraryAction FT02_HandleFieldLibraryInput(FT02Display& display, const 
             return FT02_LIBRARY_ACTION_NONE;
         }
         else return FT02_LIBRARY_ACTION_NONE;
-        FT02_LibraryRedrawSelectionRows(display, oldSelected, g_categorySelected, g_categoryCount, 142, 68, 62,
-                                        "field-library-category-select");
+        FT02_LibraryRedrawSelectionRows(display, oldSelected, g_categorySelected, g_categoryCount, 142, 68, 62);
         return FT02_LIBRARY_ACTION_NONE;
     }
 
@@ -2161,8 +2133,7 @@ FT02FieldLibraryAction FT02_HandleFieldLibraryInput(FT02Display& display, const 
             return FT02_LIBRARY_ACTION_NONE;
         }
         else return FT02_LIBRARY_ACTION_NONE;
-        FT02_LibraryRedrawSelectionRows(display, oldSelected, g_bookSelected, total, 142, 68, 62,
-                                        "field-library-book-select");
+        FT02_LibraryRedrawSelectionRows(display, oldSelected, g_bookSelected, total, 142, 68, 62);
         return FT02_LIBRARY_ACTION_NONE;
     }
 
@@ -2201,8 +2172,7 @@ FT02FieldLibraryAction FT02_HandleFieldLibraryInput(FT02Display& display, const 
         }
         else return FT02_LIBRARY_ACTION_NONE;
         if(g_screen == FT02_LIBRARY_SCREEN_TOC)
-            FT02_LibraryRedrawSelectionRows(display, oldSelected, g_tocSelected, g_chapterCount, 142, 68, 62,
-                                            "field-library-toc-select");
+            FT02_LibraryRedrawSelectionRows(display, oldSelected, g_tocSelected, g_chapterCount, 142, 68, 62);
         else
             FT02_LibraryRedraw(display);
         return FT02_LIBRARY_ACTION_NONE;
@@ -2229,8 +2199,7 @@ FT02FieldLibraryAction FT02_HandleFieldLibraryInput(FT02Display& display, const 
         }
         else return FT02_LIBRARY_ACTION_NONE;
         if(g_screen == FT02_LIBRARY_SCREEN_SEARCH_RESULTS)
-            FT02_LibraryRedrawSelectionRows(display, oldSelected, g_searchSelected, g_searchResultCount, 142, 68, 62,
-                                            "field-library-search-select");
+            FT02_LibraryRedrawSelectionRows(display, oldSelected, g_searchSelected, g_searchResultCount, 142, 68, 62);
         else
             FT02_LibraryRedraw(display);
         return FT02_LIBRARY_ACTION_NONE;

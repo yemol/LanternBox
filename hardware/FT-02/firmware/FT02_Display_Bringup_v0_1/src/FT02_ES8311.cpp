@@ -133,13 +133,15 @@ bool FT02ES8311::writeRegister(uint8_t reg, uint8_t value, bool verify)
 bool FT02ES8311::writeStep(const char* label, uint8_t reg, uint8_t value, bool verify)
 {
     const bool ok = writeRegister(reg, value, verify);
-    Serial.printf(
-        "[AUDIO-CODEC] %-27s reg=0x%02X value=0x%02X %s\n",
-        label,
-        static_cast<unsigned int>(reg),
-        static_cast<unsigned int>(value),
-        ok ? "OK" : "FAIL"
-    );
+    if(!ok)
+    {
+        Serial.printf(
+            "[AUDIO-CODEC] write failed step=%s reg=0x%02X value=0x%02X\n",
+            label,
+            static_cast<unsigned int>(reg),
+            static_cast<unsigned int>(value)
+        );
+    }
     return ok;
 }
 
@@ -167,14 +169,6 @@ bool FT02ES8311::begin(TwoWire& wire, bool digitalMic)
     (void)readRegister(ES8311_CHIP_ID1_REGFD, chipId1_);
     (void)readRegister(ES8311_CHIP_ID2_REGFE, chipId2_);
     (void)readRegister(ES8311_CHIP_VERSION_REGFF, chipVersion_);
-    Serial.printf(
-        "[AUDIO-CODEC] ES8311 addr=0x%02X id=%02X:%02X version=%02X mic=%s clock=SCLK/no-MCLK\n",
-        static_cast<unsigned int>(address_),
-        static_cast<unsigned int>(chipId1_),
-        static_cast<unsigned int>(chipId2_),
-        static_cast<unsigned int>(chipVersion_),
-        digitalMic ? "digital" : "analog"
-    );
 
     bool ok = true;
     auto step = [&ok, this](const char* label, uint8_t reg, uint8_t value, bool verify = true)
@@ -256,7 +250,6 @@ bool FT02ES8311::begin(TwoWire& wire, bool digitalMic)
     dacPowered_ = false;
     if(!ok) return false;
 
-    Serial.println("[AUDIO-CODEC] ES8311 configuration verified OK; DAC=IDLE_POWERDOWN");
     return true;
 }
 
@@ -286,7 +279,6 @@ bool FT02ES8311::prepareDacForPaShutdown()
         dacReg31_ = mutedReg31;
         dacMuted_ = true;
         dacPowered_ = true;
-        Serial.println("[AUDIO-CODEC] DAC soft-mute+volume-ramp ready for PA shutdown");
     }
     return ok;
 }
@@ -301,7 +293,6 @@ bool FT02ES8311::powerDownDac()
     {
         dacPowered_ = false;
         dacMuted_ = true;
-        Serial.println("[AUDIO-CODEC] DAC powered down after PA shutdown");
     }
     return ok;
 }
@@ -321,10 +312,6 @@ bool FT02ES8311::setDacMuted(bool muted)
         if(dacMuted_ && !dacPowered_) return true;
         ok = prepareDacForPaShutdown();
         if(ok) ok = powerDownDac();
-        if(ok)
-        {
-            Serial.println("[AUDIO-CODEC] DAC mute+volume0+powerdown OK");
-        }
     }
     else
     {
@@ -339,7 +326,6 @@ bool FT02ES8311::setDacMuted(bool muted)
             dacReg31_ = unmutedReg31;
             dacMuted_ = false;
             dacPowered_ = true;
-            Serial.println("[AUDIO-CODEC] DAC powerup+volume+unmute OK");
         }
     }
 

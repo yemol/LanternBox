@@ -8,24 +8,28 @@
 #include "FT02_LoRaCommunicationRuntime.h"
 #include "FT02_LoRaNodeRuntime.h"
 
-// v2.75c LR01 Compact Logging A1
+// 0=silent, 1=errors/warnings, 2=state changes, 3=protocol trace.
 #ifndef FT02_LR01_LOG_LEVEL
 #define FT02_LR01_LOG_LEVEL 1
 #endif
 
-#define LR01_LOG_NORMAL(...) do { if (FT02_LR01_LOG_LEVEL >= 1) Serial.printf(__VA_ARGS__); } while (0)
-#define LR01_LOG_VERBOSE(...) do { if (FT02_LR01_LOG_LEVEL >= 2) Serial.printf(__VA_ARGS__); } while (0)
+#if FT02_LR01_LOG_LEVEL >= 1
+#define LR01_LOG_ERROR(...) Serial.printf(__VA_ARGS__)
+#else
+#define LR01_LOG_ERROR(...) do {} while (0)
+#endif
 
-static uint32_t s_lr01LastPongSeqPrinted = 0;
-static int s_lr01LastNavFix = -1;
-static int s_lr01LastNavCompass = -1;
-static int s_lr01LastRadioReady = -1;
-static int s_lr01LastRadioNodes = -1;
-static int s_lr01LastRadioPki = -1;
-static uint32_t s_lr01LastRadioResets = 0xFFFFFFFFu;
-static int s_lr01LastSystemGnss = -1;
-static int s_lr01LastSystemCompass = -1;
-static int s_lr01LastSystemLora = -1;
+#if FT02_LR01_LOG_LEVEL >= 2
+#define LR01_LOG_INFO(...) Serial.printf(__VA_ARGS__)
+#else
+#define LR01_LOG_INFO(...) do {} while (0)
+#endif
+
+#if FT02_LR01_LOG_LEVEL >= 3
+#define LR01_LOG_VERBOSE(...) Serial.printf(__VA_ARGS__)
+#else
+#define LR01_LOG_VERBOSE(...) do {} while (0)
+#endif
 
 namespace
 {
@@ -61,8 +65,6 @@ bool sendLine(const char* text)
     if(text == nullptr || text[0] == '\0') return false;
     g_lr01Serial.print(text);
     g_lr01Serial.print('\n');
-    if(strncmp(text, "CORE_PING_", 10) != 0)
-        Serial.printf("[LR01-TX] %s\n", text);
     return true;
 }
 
@@ -157,6 +159,15 @@ void markRx()
     ++g_state.lineCount;
 }
 
+void markProtocolA2Feature()
+{
+    // FT-02 can start after LR01 has already emitted LR01_BOOT/LR01_READY.
+    // GNSS power control and compass calibration state are A2+ extensions, so
+    // receiving either is sufficient to identify the live peer as protocol A2
+    // even when the startup banner was missed.
+    if(g_state.protocolVersion == 0u) g_state.protocolVersion = 2u;
+}
+
 void applyNavigationToCore()
 {
     FT02_GnssApplyLR01State(g_state.gnssReady,
@@ -190,7 +201,7 @@ void parseBoot(const char* line)
     FT02_LoRaNodeRuntimeHostBegin(local != 0 ? local : FT02_LR01_LOCAL_NODE,
                                   "LanternBox FT-02",
                                   node[0] ? node : "FT02");
-    Serial.printf("[LR01] BOOT %s\n", line);
+    LR01_LOG_INFO("[LR01] BOOT %s\n", line);
 }
 
 void parseNav(const char* line)
@@ -293,6 +304,35 @@ void parseRadio(const char* line)
                   static_cast<unsigned>(g_state.txQueue));
 }
 
+void parseGnssPower(const char* line)
+{
+    markProtocolA2Feature();
+    int32_t enabled = 1;
+    int32_t stream = 0;
+    int32_t fix = 0;
+    uint32_t changedMs = 0;
+
+    const bool hasEnabled = parseInt32(line, "enabled", enabled);
+    const bool hasStream = parseInt32(line, "stream", stream);
+    const bool hasFix = parseInt32(line, "fix", fix);
+    const bool hasChangedMs = parseUInt32(line, "changed_ms", changedMs);
+
+    if(hasEnabled)
+    {
+        g_state.gnssPowerKnown = true;
+        g_state.gnssPowerEnabled = enabled != 0;
+    }
+    if(hasStream) g_state.gnssPowerStream = stream != 0;
+    if(hasFix) g_state.gnssPowerFix = fix != 0;
+    if(hasChangedMs) g_state.gnssPowerChangedMs = changedMs;
+    ++g_state.gnssPowerRevision;
+
+    LR01_LOG_INFO("[LR01] GNSS power=%s stream=%u fix=%u\n",
+                    g_state.gnssPowerEnabled ? "ON" : "OFF",
+                    g_state.gnssPowerStream ? 1u : 0u,
+                    g_state.gnssPowerFix ? 1u : 0u);
+}
+
 void parseSystem(const char* line)
 {
     int32_t gnss = 0, compass = 0, lora = 0;
@@ -367,7 +407,7 @@ void parseMeshRx(const char* line)
     if(userText && text[0] != '\0')
         FT02_LoRaCommunicationHostReceive(airId, from, to, name, pkiText, rssi, snr, text);
 
-    Serial.printf("[LR01] MESH_RX id=0x%08lX from=!%08lX to=!%08lX name=%s kind=%s rssi=%.1f snr=%.1f text=%s\n",
+    LR01_LOG_VERBOSE("[LR01] MESH_RX id=0x%08lX from=!%08lX to=!%08lX name=%s kind=%s rssi=%.1f snr=%.1f text=%s\n",
                   static_cast<unsigned long>(airId),
                   static_cast<unsigned long>(from),
                   static_cast<unsigned long>(to),
@@ -407,13 +447,13 @@ void parseTxLifecycle(const char* line)
     if(strncmp(line, "MESH_TX_ACCEPTED ", 17) == 0)
     {
         FT02_LoRaCommunicationHostTxAccepted(id);
-        Serial.printf("[LR01] TX_ACCEPTED id=0x%08lX\n", static_cast<unsigned long>(id));
+        LR01_LOG_VERBOSE("[LR01] TX_ACCEPTED id=0x%08lX\n", static_cast<unsigned long>(id));
         return;
     }
     if(strncmp(line, "MESH_TX_SENT ", 13) == 0)
     {
         FT02_LoRaCommunicationHostTxSent(id);
-        Serial.printf("[LR01] TX_SENT id=0x%08lX\n", static_cast<unsigned long>(id));
+        LR01_LOG_VERBOSE("[LR01] TX_SENT id=0x%08lX\n", static_cast<unsigned long>(id));
         return;
     }
     if(strncmp(line, "MESH_TX_FAILED ", 15) == 0)
@@ -421,7 +461,7 @@ void parseTxLifecycle(const char* line)
         char reason[40] = {};
         (void)parseToken(line, "reason", reason, sizeof(reason));
         FT02_LoRaCommunicationHostTxFailed(id, reason);
-        Serial.printf("[LR01] TX_FAILED id=0x%08lX reason=%s\n", static_cast<unsigned long>(id), reason);
+        LR01_LOG_ERROR("[LR01] TX_FAILED id=0x%08lX reason=%s\n", static_cast<unsigned long>(id), reason);
         return;
     }
 }
@@ -440,7 +480,7 @@ void parseTxResult(const char* line)
         FT02_LoRaCommunicationHostTxResult(id, type, ok != 0, reason);
     else
         FT02_LoRaCommunicationHostTxResult(type, ok != 0); // A1 fallback
-    Serial.printf("[LR01] TX_RESULT id=0x%08lX type=%s ok=%u reason=%s\n",
+    LR01_LOG_VERBOSE("[LR01] TX_RESULT id=0x%08lX type=%s ok=%u reason=%s\n",
                   static_cast<unsigned long>(id), type, ok != 0 ? 1u : 0u, reason);
 }
 
@@ -457,10 +497,9 @@ void parseDelivery(const char* line)
     const bool timeout = strcmp(status, "TIMEOUT") == 0;
     if(ack || timeout)
         FT02_LoRaCommunicationHostDelivery(id, node, ack);
-    Serial.printf("[LR01] DELIVERY id=0x%08lX node=!%08lX status=%s\n",
+    LR01_LOG_VERBOSE("[LR01] DELIVERY id=0x%08lX node=!%08lX status=%s\n",
                   static_cast<unsigned long>(id), static_cast<unsigned long>(node), status);
 }
-
 
 FT02CompassCalState compassCalStateFromToken(const char* token)
 {
@@ -476,6 +515,7 @@ FT02CompassCalState compassCalStateFromToken(const char* token)
 
 void parseCompassCalState(const char* line)
 {
+    markProtocolA2Feature();
     char stateToken[16] = {};
     int32_t progress = 0;
     int32_t quality = 0;
@@ -512,7 +552,7 @@ void parseCompassCalState(const char* line)
     cal.lastErrorMessage[0] = '\0';
     ++cal.revision;
 
-    Serial.printf("[LR01-CAL] state=%s progress=%u quality=%u samples=%lu calibrated=%u\\n",
+    LR01_LOG_INFO("[LR01-CAL] state=%s progress=%u quality=%u samples=%lu calibrated=%u\n",
                   stateToken,
                   static_cast<unsigned>(cal.progress),
                   static_cast<unsigned>(cal.quality),
@@ -535,7 +575,7 @@ void parseLine(char* line)
         if(protocol > 0 && protocol <= 255) g_state.protocolVersion = static_cast<uint8_t>(protocol);
         g_state.readySeen = true;
         g_state.online = true;
-        Serial.printf("[LR01] READY protocol=%u\n", static_cast<unsigned>(g_state.protocolVersion));
+        LR01_LOG_INFO("[LR01] READY protocol=%u\n", static_cast<unsigned>(g_state.protocolVersion));
         FT02_LoRaNodeRuntimeHostBegin(FT02_LR01_LOCAL_NODE, "LanternBox FT-02", "FT02");
         ++g_state.statusRequestSequence;
         (void)FT02_LR01HostRequestStatus(g_state.statusRequestSequence);
@@ -551,7 +591,7 @@ void parseLine(char* line)
         }
         if(seq != g_state.pingSequence)
         {
-            LR01_LOG_NORMAL("[LR01] PONG mismatch seq=%lu expected=%lu\n",
+            LR01_LOG_INFO("[LR01] PONG mismatch seq=%lu expected=%lu\n",
                             static_cast<unsigned long>(seq),
                             static_cast<unsigned long>(g_state.pingSequence));
         }
@@ -564,6 +604,8 @@ void parseLine(char* line)
     else if(strncmp(line, "NAV_STATE ", 10) == 0) parseNav(line);
     else if(strncmp(line, "RADIO_STATE ", 12) == 0) parseRadio(line);
     else if(strncmp(line, "SYSTEM_STATE ", 13) == 0) parseSystem(line);
+    else if(strncmp(line, "GNSS_POWER_STATE ", 17) == 0) parseGnssPower(line);
+    else if(strncmp(line, "GNSS_POWER_SET ", 15) == 0) parseGnssPower(line);
     else if(strncmp(line, "COMPASS_CAL_STATE ", 18) == 0) parseCompassCalState(line);
     else if(strncmp(line, "MESH_RX ", 8) == 0) parseMeshRx(line);
     else if(strncmp(line, "MESH_NODE ", 10) == 0) parseMeshNode(line);
@@ -573,7 +615,7 @@ void parseLine(char* line)
         (void)parseInt32(line, "count", count);
         g_state.listedNodeCount = static_cast<uint16_t>(count < 0 ? 0 : (count > 65535 ? 65535 : count));
         g_state.lastNodeListMs = millis();
-        Serial.printf("[LR01] NODE_LIST complete count=%u\n", static_cast<unsigned>(g_state.listedNodeCount));
+        LR01_LOG_VERBOSE("[LR01] NODE_LIST complete count=%u\n", static_cast<unsigned>(g_state.listedNodeCount));
     }
     else if(strncmp(line, "MESH_TX_ACCEPTED ", 17) == 0 ||
             strncmp(line, "MESH_TX_SENT ", 13) == 0 ||
@@ -586,7 +628,7 @@ void parseLine(char* line)
         (void)parseUInt32(line, "id", id);
         g_state.lastStatusEndId = id;
         g_state.lastStatusCompleteMs = millis();
-        Serial.printf("[LR01] STATUS_END id=%lu\n", static_cast<unsigned long>(id));
+        LR01_LOG_VERBOSE("[LR01] STATUS_END id=%lu\n", static_cast<unsigned long>(id));
     }
     else if(strncmp(line, "LR01_ERR ", 9) == 0)
     {
@@ -602,11 +644,11 @@ void parseLine(char* line)
             cal.lastUpdateMs = millis();
             ++cal.revision;
         }
-        Serial.printf("[LR01] ERROR code=%ld message=%s\n", static_cast<long>(code), message);
+        LR01_LOG_ERROR("[LR01] ERROR code=%ld message=%s\n", static_cast<long>(code), message);
     }
     else
     {
-        Serial.printf("[LR01] RX unhandled: %s\n", line);
+        LR01_LOG_VERBOSE("[LR01] RX unhandled: %s\n", line);
     }
 }
 }
@@ -618,18 +660,17 @@ void FT02_LR01HostBegin()
     g_state.hdopX100 = 9999;
     if(!g_lr01Serial.setRxBufferSize(FT02_LR01_RX_BUFFER_BYTES))
     {
-        Serial.printf("[LR01-HOST-A2] WARN RX buffer request failed bytes=%u\n",
-                      static_cast<unsigned>(FT02_LR01_RX_BUFFER_BYTES));
+        LR01_LOG_ERROR("[LR01-HOST] RX buffer request failed bytes=%u\n",
+                       static_cast<unsigned>(FT02_LR01_RX_BUFFER_BYTES));
     }
     g_lr01Serial.begin(FT02_LR01_BAUD, SERIAL_8N1, FT02_LR01_RX_PIN, FT02_LR01_TX_PIN);
     g_lineLength = 0;
     g_dropUntilLf = false;
     g_lastPingMs = millis();
-    Serial.printf("[LR01-HOST-A2] ready RX=%d TX=%d baud=%lu rxbuf=%u log=%d protocol=ASCII/UTF8-LF\n",
+    LR01_LOG_INFO("[LR01-HOST] ready RX=%d TX=%d baud=%lu rxbuf=%u\n",
                   FT02_LR01_RX_PIN, FT02_LR01_TX_PIN,
                   static_cast<unsigned long>(FT02_LR01_BAUD),
-                  static_cast<unsigned>(FT02_LR01_RX_BUFFER_BYTES),
-                  FT02_LR01_LOG_LEVEL);
+                  static_cast<unsigned>(FT02_LR01_RX_BUFFER_BYTES));
 }
 
 void FT02_LR01HostPoll()
@@ -653,7 +694,7 @@ void FT02_LR01HostPoll()
             if(g_lineLength + 1 < sizeof(g_line)) g_line[g_lineLength++] = c;
             else
             {
-                Serial.println("[LR01] RX line overflow; dropping until LF");
+                LR01_LOG_ERROR("[LR01] RX line overflow; dropping until LF\n");
                 g_lineLength = 0;
                 g_dropUntilLf = true;
             }
@@ -676,7 +717,7 @@ void FT02_LR01HostPoll()
         g_state.online = false;
         g_state.loraReady = false;
         FT02_LoRaNodeRuntimeHostSetStatus(false, g_state.nodeCount, g_state.pkiPeerCount);
-        Serial.println("[LR01] offline: host UART silent >3500ms");
+        LR01_LOG_ERROR("[LR01] offline: host UART silent >3500ms\n");
     }
 }
 
@@ -774,3 +815,7 @@ bool FT02_LR01HostCompassCalStart() { return sendLine("COMPASS_CAL_START"); }
 bool FT02_LR01HostCompassCalSave() { return sendLine("COMPASS_CAL_SAVE"); }
 bool FT02_LR01HostCompassCalCancel() { return sendLine("COMPASS_CAL_CANCEL"); }
 bool FT02_LR01HostCompassCalReset() { return sendLine("COMPASS_CAL_RESET"); }
+
+bool FT02_LR01HostGnssPowerRequestStatus() { return sendLine("GNSS_POWER?"); }
+bool FT02_LR01HostGnssSoftwareOn() { return sendLine("GNSS_SOFT_ON"); }
+bool FT02_LR01HostGnssSoftwareOff() { return sendLine("GNSS_SOFT_OFF"); }

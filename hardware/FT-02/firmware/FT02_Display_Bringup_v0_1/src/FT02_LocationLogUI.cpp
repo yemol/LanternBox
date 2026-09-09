@@ -119,7 +119,6 @@ static void FT02_DrawLocationLogHeader(
     }
 }
 
-
 static void FT02_DrawLocationLogRow(
     FT02Display& display,
     uint16_t newestIndex,
@@ -260,7 +259,6 @@ static void FT02_LocationLogDrawLabelValue(
         29
     );
 }
-
 
 static uint8_t FT02_LocationDetailLineCode(int x, int y)
 {
@@ -717,19 +715,18 @@ static void FT02_LocationLogCommitBodyPartial(
     FT02Display& display,
     void (*drawContent)(FT02Display&, uint16_t),
     uint16_t selectedNewestIndex,
-    const char* tag
+    bool listMode
 )
 {
     if(g_ft02LocationLogPartialCount >= FT02_LOG_PARTIAL_LIMIT)
     {
-        if(strcmp(tag, "location-log-list-partial") == 0)
+        if(listMode)
             FT02_DrawLocationLogListScreen(display, selectedNewestIndex);
         else
             FT02_DrawLocationLogDetailScreen(display, selectedNewestIndex);
         return;
     }
 
-    const uint32_t startedMs = millis();
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(FT02_LOG_BODY_X, FT02_LOG_BODY_Y, FT02_LOG_BODY_W, FT02_LOG_BODY_H);
     display.firstPage();
@@ -741,7 +738,7 @@ static void FT02_LocationLogCommitBodyPartial(
     while(display.nextPage());
     FT02_EpdInteractiveEndBusyCapture(display);
     g_ft02LocationLogPartialCount++;
-    FT02_EpdInteractiveFinishPartial(display, tag, startedMs);
+    FT02_EpdInteractiveFinishPartial(display);
 }
 }
 
@@ -781,14 +778,6 @@ bool FT02_PrepareLocationLogDetailMap(uint16_t selectedNewestIndex)
     FT02_PbfMapPrepare();
     g_ft02LocationDetailMapBaseReady = FT02_PbfMapBuild();
 
-    Serial.printf(
-        "[LOCATION-LOG] detail map session=%s points=%lu fit=%d zoom=%d base=%d\n",
-        entry.sessionId,
-        static_cast<unsigned long>(route.count),
-        g_ft02LocationDetailMapProjectionFits ? 1 : 0,
-        FT02_PbfMapReportCurrent().zoom,
-        g_ft02LocationDetailMapBaseReady ? 1 : 0
-    );
     return true;
 }
 
@@ -818,7 +807,7 @@ void FT02_DrawLocationLogListScreen(
         FT02_DrawBottomBarWithFont(display, FT02_LOG_LIST_BOTTOM_ITEMS, ft02_cjk_20r);
     }
     while(display.nextPage());
-    FT02_EpdInteractivePowerOffNow(display, "location-log-list-full");
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
 }
 
@@ -831,10 +820,9 @@ void FT02_DrawLocationLogListBodyPartial(
         display,
         FT02_DrawLocationLogListContent,
         selectedNewestIndex,
-        "location-log-list-partial"
+        true
     );
 }
-
 
 void FT02_DrawLocationLogListSelectionPartial(
     FT02Display& display,
@@ -857,7 +845,6 @@ void FT02_DrawLocationLogListSelectionPartial(
     const int y = FT02_LOG_ROW_Y + firstRow * (FT02_LOG_ROW_H + FT02_LOG_ROW_GAP);
     const int bottom = FT02_LOG_ROW_Y + lastRow * (FT02_LOG_ROW_H + FT02_LOG_ROW_GAP) + FT02_LOG_ROW_H;
     const int h = bottom - y;
-    const uint32_t startedMs = millis();
 
     FT02_EpdInteractiveBeginBusyCapture(display);
     display.setPartialWindow(FT02_LOG_ROW_X, y, FT02_LOG_ROW_W, h);
@@ -871,7 +858,7 @@ void FT02_DrawLocationLogListSelectionPartial(
     while(display.nextPage());
     FT02_EpdInteractiveEndBusyCapture(display);
     ++g_ft02LocationLogPartialCount;
-    FT02_EpdInteractiveFinishPartial(display, "location-log-list-selection-micro", startedMs);
+    FT02_EpdInteractiveFinishPartial(display);
 }
 
 void FT02_DrawLocationLogDetailScreen(
@@ -891,7 +878,7 @@ void FT02_DrawLocationLogDetailScreen(
         FT02_DrawBottomBarWithFont(display, FT02_LOG_DETAIL_BOTTOM_ITEMS, ft02_cjk_20r);
     }
     while(display.nextPage());
-    FT02_EpdInteractivePowerOffNow(display, "location-log-detail-full");
+    FT02_EpdInteractivePowerOffNow(display);
     FT02_EpdInteractiveEndBusyCapture(display);
 }
 
@@ -904,7 +891,7 @@ void FT02_DrawLocationLogDetailBodyPartial(
         display,
         FT02_DrawLocationLogDetailContent,
         selectedNewestIndex,
-        "location-log-detail-partial"
+        false
     );
 }
 
@@ -967,5 +954,5 @@ void FT02_DrawLocationLogDeleteConfirmScreen(
         FT02_DrawBottomBarWithFont(display, FT02_LOG_DELETE_BOTTOM_ITEMS, ft02_cjk_20r);
     }
     while(display.nextPage());
-    FT02_EpdPowerOffAfterCommit(display, "location-log-delete-confirm");
+    FT02_EpdPowerOffAfterCommit(display);
 }

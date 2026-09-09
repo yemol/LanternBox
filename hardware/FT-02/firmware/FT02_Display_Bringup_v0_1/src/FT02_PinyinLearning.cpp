@@ -130,7 +130,6 @@ bool loadSnapshot()
             g_dirty = false;
             g_dirtySelections = 0;
         }
-        Serial.println("[PINYIN-A3] learning file absent; starting fresh");
         return true;
     }
 
@@ -146,8 +145,6 @@ bool loadSnapshot()
         if(line[0] == '\0') continue;
         if(line[0] == '#')
         {
-            if(firstMeaningful && strcmp(line, FILE_HEADER) != 0)
-                Serial.printf("[PINYIN-A3] learning header differs: %s\n", line);
             firstMeaningful = false;
             continue;
         }
@@ -179,9 +176,6 @@ bool loadSnapshot()
         g_dirty = false;
         g_dirtySelections = 0;
     }
-    Serial.printf("[PINYIN-A3] learning loaded entries=%u%s\n",
-                  static_cast<unsigned>(g_entryCount),
-                  hadPendingLearning ? " + pending RAM learning" : "");
     return true;
 }
 
@@ -236,7 +230,6 @@ void FT02_PinyinLearningBegin()
     if(!loadSnapshot())
     {
         g_lastLoadRetryMs = millis();
-        Serial.println("[PINYIN-A3] learning load deferred: storage unavailable");
     }
 }
 
@@ -320,11 +313,10 @@ bool FT02_PinyinLearningFlush()
     if(!g_dirty) return true;
     if(!writeSnapshot())
     {
-        Serial.println("[PINYIN-A3] learning flush FAILED");
+        Serial.println("[PINYIN] learning flush FAILED");
         return false;
     }
     g_dirty = false;
     g_dirtySelections = 0;
-    Serial.printf("[PINYIN-A3] learning saved entries=%u\n", static_cast<unsigned>(g_entryCount));
     return true;
 }

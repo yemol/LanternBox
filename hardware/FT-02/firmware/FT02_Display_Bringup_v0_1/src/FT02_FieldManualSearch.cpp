@@ -235,8 +235,7 @@ bool FT02_FieldManualSearchExecute(const char* queryUtf8)
     }
 
     FT02_FieldManualUnloadCard();
-    Serial.printf("[FIELD-SEARCH-A2] query='%s' results=%d cards=%d\n",
-                  g_lastQuery, g_resultCount, cardCount);
+
     return true;
 }
 
@@ -250,8 +249,6 @@ int FT02_FieldManualSearchGlobalIndexAt(int resultIndex)
     if(resultIndex < 0 || resultIndex >= g_resultCount) return -1;
     return g_results[resultIndex].globalIndex;
 }
-
-
 
 void FT02_FieldManualSearchClear()
 {
