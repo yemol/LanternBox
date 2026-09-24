@@ -1,0 +1,293 @@
+{
+  "captured_utc": "2026-09-24T17:02:41.769643+00:00",
+  "repository": "/Volumes/yemol_HDDisk/LanternBox",
+  "head": "9b2b18d5c1fc886b769d72a9dbecfce2d816d4c9",
+  "branch": "main",
+  "pre_existing_status": [
+    {
+      "status": " M",
+      "path": ".gitignore",
+      "sha256": "581ebd917bec64787c23c699a6af53877071dc9b18e105d0d8f92b2b97fc376f"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/.gitignore",
+      "sha256": "ffc3a61aeb5d6c42fbf1362101298afd684f61b855e96bf24831250d847ab0d4"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/CHANGELOG.md",
+      "sha256": "c0592da39a1187c66dac124daee633f0aad6db15406bbffd888f0853070f34ff"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/README.md",
+      "sha256": "708f777fb5233f74b4d943f380b686425a4b39a337e493c06ca944fdd0fc97be"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/VERSION.txt",
+      "sha256": "899c205ea90f321a7a49054ae8d0274bbba50f82446f98a846ee6ac8b26109f9"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/lib/FT02PbfIndex/src/FT02_PbfIndex.h",
+      "sha256": "a1d35ce9b54dd36d53c6510cb25aacd66c332697f3ed59cf091eff21cbb45595"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/lib/FT02PbfMapRuntime/src/FT02_PbfMapRuntime.cpp",
+      "sha256": "57e21c3e77776cd624e2c9fdae3ee0484aba79433f980f08168137c5a3250d08"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/src/FT02_AudioLog.cpp",
+      "sha256": "f9206adddb72d0646e717826e5fed76688d1cd99cdb43a74bbbb92bcc10e7216"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/src/FT02_AudioLog.h",
+      "sha256": "e1f6dd3c150de394fe9e95dfaa97e806f618fe1798929039f1bc9b2e4abe98a2"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/src/FT02_BatteryMonitor.cpp",
+      "sha256": "b4318572b59a56671ff755040b62f29154953c6d264943bb97060fc7d47c1b23"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/src/FT02_BatteryMonitor.h",
+      "sha256": "dd45d3aee128c40fc3d55d51e4e5b83ae40996a9c67cb8a123e010132770a14c"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/src/FT02_CompassUI.cpp",
+      "sha256": "b854d123a5c9fe421b53f51e465dd9e455701311ef98bc2351805cb46e93b2e8"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/src/FT02_ES8311.cpp",
+      "sha256": "fd25df342ab2397da32c164662a1eb349128104066373a1567dc90c9717dff3c"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/src/FT02_ES8311.h",
+      "sha256": "0a497973514a07a104e40fb8dbe8d9429faea60fb8ded0ed2d6822fa3f8ce1ac"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/src/FT02_MapSearch.h",
+      "sha256": "a87f5932e23a8edba2c1f99f8b5c0054fb527632cd3b943696a7b1938372e359"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/src/main.cpp",
+      "sha256": "137f7f04b5ad1ce213b7b02a7fc2e8df720cefde9b34438baf71fb65b9930576"
+    },
+    {
+      "status": " M",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/tools/test_battery_monitor.py",
+      "sha256": "6a06e507e5a5de91bd21165acecd95207eae05040083e3e1aa0e2e1501c7deea"
+    },
+    {
+      "status": " M",
+      "path": "hardware/LR-01/CHANGELOG.md",
+      "sha256": "8e1ef8fed3a705e538544c0aec32abea86902863d2bc8698a2a78c7b80988518"
+    },
+    {
+      "status": " M",
+      "path": "hardware/LR-01/README.md",
+      "sha256": "c8b52101c8d0393e20cec294225c4f2e1e8e8430198715378a1155bd05e53564"
+    },
+    {
+      "status": " M",
+      "path": "hardware/LR-01/docs/ACCEPTANCE_TESTS.md",
+      "sha256": "caadcf6376f9a3e529ed7ded92ea05c2a90f9b11e76c7f73ab0bc6152d75230d"
+    },
+    {
+      "status": " M",
+      "path": "hardware/LR-01/docs/COMPASS_CALIBRATION.md",
+      "sha256": "4c9b4a4b329ce7f830388cb9d757809ede868c0736a868bca27d55e372b938ce"
+    },
+    {
+      "status": " M",
+      "path": "hardware/LR-01/docs/TROUBLESHOOTING.md",
+      "sha256": "6e8705347799f1486d7480ca33293109afa615c93c258047ce31430094af815a"
+    },
+    {
+      "status": " M",
+      "path": "hardware/LR-01/include/CompassCalibration.h",
+      "sha256": "85d1cbaa9521ae5e74bca13b2877fb3864abaebd5fae28edf13508b03b3c84f9"
+    },
+    {
+      "status": " M",
+      "path": "hardware/LR-01/include/FtConfig.h",
+      "sha256": "c02a498a5cf96dc75a9ec8e7b461674b21c3fd9a58bbbffd13aeb21a05fecfb4"
+    },
+    {
+      "status": " M",
+      "path": "hardware/LR-01/src/CompassCalibration.cpp",
+      "sha256": "7d9191204b3152bcd41bc6b19b8499e243268eefb74dc72ea677ee47e15912b3"
+    },
+    {
+      "status": " M",
+      "path": "hardware/LR-01/src/main.cpp",
+      "sha256": "07def2bdb94fb395106c2eb91709e33b9d9a29cfe0eb73d99e39d628f4f03567"
+    },
+    {
+      "status": "??",
+      "path": "hardware/CardKB2_FT02_LOW_POWER_A1_BASELINE_OFFICIAL_IDF61/",
+      "sha256": null
+    },
+    {
+      "status": "??",
+      "path": "hardware/CardKB2_FT02_LOW_POWER_A2_DFS20_IDF61/",
+      "sha256": null
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/AUDIO_ON_DEMAND_A1.md",
+      "sha256": "bf37d3c5cd8730e359b2c6b58b7bd3d79712039dbd0e0c798aafd0cbb5c10b2b"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/CODEX_VERIFY_BUILD.md",
+      "sha256": "c1c7145e6a1139b772d0a2552e1addcda6a4e60531d9ed1906857df686b16504"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/COMPASS_DIAL_CHINESE_LABELS_A2.md",
+      "sha256": "e591c460644cdc41426cc89ccf90cfc3ad6b75d8a8d628834da684c06de5ce35"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/COMPASS_DIAL_MIRROR_RESTORE_A1.md",
+      "sha256": "0744d0572229fcac113adcba49444ed876d7881b598155e6b0030d48a78a1504"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/COMPASS_UI_A3_APPROVED_MOCKUP.md",
+      "sha256": "4015aea2aefa8606f21ed445ae4312d92270121c5d9d0dd383c1b1ee49dc9a3f"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/COMPASS_UI_A4_LEFT_RIGHT_LAYOUT.md",
+      "sha256": "bdeb09801cdf5728c6cd154ad2c1c12cf36c2b9505ec98fb98a5c5b292af1403"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/LOW_POWER_A2.md",
+      "sha256": "5d106ee0ad72a1e98103eb71b15ab8506e538d0a00f2d2110c4aa69466764587"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/LOW_POWER_A2_CHANGE_SUMMARY.md",
+      "sha256": "206adda9705d2f26573d761238ee1d0d4ce7b2fc549ea62e550041c7a76f2161"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/LOW_POWER_A2_PATCH.diff",
+      "sha256": "557b8b0cdc275f6241ceae34dd5574564e32d401f81bcabf3cbe142d35b14a24"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/LOW_POWER_A2_STATIC_TEST_RESULTS.txt",
+      "sha256": "cdd770fa90463267b5d709c5e3378e1c3179aa61cf30eee2a0afc6180276f96e"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/MAP_260918_A1_VALIDATION.md",
+      "sha256": "016a6a844d2cfbd55ea47f6af1936590c8aac225392b9a0efc144ffcfa9df445"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/SD_ROOT/maps/",
+      "sha256": null
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/docs/COMPASS_UI_A3_APPROVED_REFERENCE.png",
+      "sha256": "87c6f61fa14e2a949c38148658fceccccbddcf49af7277a2a5e607a690b2ca9c"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/tools/test_audio_power_lifecycle.py",
+      "sha256": "fcb342590c05bcda8ae67750738f342c6381bf3498ace76c459b50b562894951"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/tools/test_low_power_a2.py",
+      "sha256": "7e2f67fefa2023963caaccc64ce50eedb26e45a46bf0972c2fcd6a0bb573c4f8"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_v2.75k68_AUDIO_ON_DEMAND_A1_RC1.zip",
+      "sha256": "baafe02aeded311d840bd94efa691dd744c937a29ade9151eb855211277d3243"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_v2.75k68_COMPASS_CARDINAL_BASELINE_SYNC_A1_Source_RC1.zip",
+      "sha256": "95cd009abe010ff5a30472bb6c88078ac272679b0b396c171027250816599e88"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_v2.75k68_COMPASS_DIAL_MIRROR_RESTORE_CHINESE_A2_Source_RC1.zip",
+      "sha256": "c878de9cd3892fe991e5429deb0a0fd91bd283016fa1bd05d6fe19f5c31127bd"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_v2.75k68_COMPASS_UI_A3_APPROVED_INSTRUMENT_LAYOUT_Source_RC1.zip",
+      "sha256": "fb781d52d9e57aefe767c029840fdbae391a9ff57302eb52c43c8709e21af1aa"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_v2.75k68_COMPASS_UI_A4_LEFT_RIGHT_INSTRUMENT_LAYOUT_Source_RC1.zip",
+      "sha256": "53f672d80f4ded6c9a79fb2738ef5e4aa566ef440b38a5db5c68f831da6ed772"
+    },
+    {
+      "status": "??",
+      "path": "hardware/FT-02/firmware/FT02_v2.75k68_SHANGHAI_260918_RESIDENTIAL_LABELS_A1_Source_RC1.zip",
+      "sha256": "8adfda3b3682ac8eeb9e6d7a335e27a064114311b189425dd77bb40fe23bc1c1"
+    },
+    {
+      "status": "??",
+      "path": "hardware/LR-01/COMPASS_2D_CAL_FIX_A4_5_RC1.md",
+      "sha256": "3167f2937df6e24474861d6af4d6924353f2da94ab52046d963c0d338a5437bc"
+    },
+    {
+      "status": "??",
+      "path": "hardware/LR-01/COMPASS_2D_MATRIX_CAL_A4_6_RC1.md",
+      "sha256": "d91359e4dcdb351ecc0505e651368aa47ca674fa8ed42c727884b0e18164297f"
+    },
+    {
+      "status": "??",
+      "path": "hardware/LR-01/COMPASS_AXIS_FIX_A4_4_RC2.md",
+      "sha256": "0c7a878992913e7a6249c78f2aca465295a8dcf1afeda708097ea27cc36f3ffa"
+    },
+    {
+      "status": "??",
+      "path": "hardware/LR-01/COMPASS_GEOMETRIC_CAL_A4_7_RC1.md",
+      "sha256": "27a4eafdcb0fd081477ae04387c2dad5379b9f1768d1b7ec20b88fdef305f651"
+    },
+    {
+      "status": "??",
+      "path": "hardware/LR-01/tools/test_compass_geometric_cal.py",
+      "sha256": "df33f56799e09b2dfea62786e5c8db154cb9eb3a9f9b30ef8090d8ceac10798e"
+    },
+    {
+      "status": "??",
+      "path": "hardware/LR-01/tools/test_compass_matrix_cal.py",
+      "sha256": "72645d9921c21d8739945568ac5d6a8c46669b048d1369d5da464f2f776fc65a"
+    }
+  ],
+  "source_hashes": {
+    "AGENTS.md ": "ab9de18892a210ed25f98a681ab97e8d7d208781650c3e16d4d369456e021e6a",
+    "CODEX_NOTES.md": "01926d7ad77a243fa527d121eb758ea557f5c337918c00a635914bcdfeedf77d",
+    "hardware/FT-02/docs/FT02_hardware_pin_map_v1_1.md": "44a0a064e16d1ba103e4683041eb86096b1bc2130565e830682397ffe0bc94db",
+    "hardware/FT-02/docs/FT02_hardware_research_new_chat_brief_v1_1.md": "a17d0ee0ddb1d384d5b31b38cd78da1d2fcf5f213bc6e850772499bbe7f48b4f",
+    "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/docs/FT02_MAX17048_BATTERY_MONITOR.md": "ab345f278e5622d8ba1bfca0c3d9eb77ad21c16137b4d959f7a3da8bb40474e1",
+    "hardware/FT-02/firmware/FT02_Display_Bringup_v0_1/AUDIO_ON_DEMAND_A1.md": "bf37d3c5cd8730e359b2c6b58b7bd3d79712039dbd0e0c798aafd0cbb5c10b2b",
+    "hardware/CardKB2_FT02_LOW_POWER_A2_DFS20_IDF61/POWER_TEST.md": "3e2fe636ec480ddd53640baa435511fa3f8b6c7c5d12b7d0c11d0eca98cb2767"
+  },
+  "scope": "Existing user changes are not included in PowerBoard commits."
+}
