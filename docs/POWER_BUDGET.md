@@ -1,0 +1,77 @@
+# Power Budget - Parameterized, Not Rated
+
+Load identities and several policies are known from the actual repository, but measured currents, concurrency, battery limits and efficiency corners remain incomplete. These are calculation inputs and bounds, not approved FT02 ratings.
+
+## Project and manufacturer load evidence
+
+| Load | Evidence | Budget treatment |
+| --- | --- | --- |
+| ESP32-S3 | Official table: 340mA, 802.11b TX at21dBm, 3.3V/25C | Condition-specific peak reference, not future MainBoard guaranteed maximum |
+| MAX-F10S | Official 3.0V default multi-GNSS: VCC tracking16mA/acquisition21mA, V_IO3mA; startup capability up to100mA | Include startup and actual antenna/breakout load; verify at chosen supply voltage |
+| EPD | Actual Waveshare4.26 black/white GDEQ0426T82 HAT; official typical refresh <35mW | Not a peak-current bound; measure HAT/charge-pump startup |
+| Audio | WeAct ES8311+NS4150B; PA shutdown GPIO4 | Recording PA off; playback depends on actual speaker, level and efficiency |
+| CardKB2 | A2 POWER_TEST says not measured | Do not infer savings from CPU clock or choose supply from contradictory notes |
+| SEN0695 | Module includes local BMM350 1.8V regulation | Do not double-count module and bare IC load |
+
+Sources: [ESP32-S3](https://documentation.espressif.com/esp32_s3_datasheet_en.pdf), [MAX-F10S](https://content.u-blox.com/sites/default/files/documents/MAX-F10S_DataSheet_UBXDOC-963802114-12732.pdf), [EPD](https://www.waveshare.com/wiki/4.26inch_e-Paper_HAT_Manual). Typical figures are not guaranteed maxima.
+
+## Common power balance
+
+```text
+Prails = 3.3*I3 + 5*I5
+Praw = 3.3*I3/eta3 + 5*I5/eta5
+Pcharge_input = VBAT*ICHARGE/eta_charger
+Psource >= Praw + Pcharge_input + path_losses + housekeeping + keepalive
+ICHARGE <= min(battery_limit, charger_limit, thermal_limit, configured_limit,
+               max(0, eta_charger*(Pavailable - Praw - other_losses)/VBAT))
+```
+
+Voltages are in V, currents in A, powers in W. Compare currents at a common voltage node or convert to power first; subtracting battery charging amperes directly from USB amperes is incorrect.
+
+| Mode | Nominal source power | Maximum continuous system output | Maximum charge power |
+| --- | --- | --- | --- |
+| USB 5V/2A, actually authorized | 10W | Less than 10W; solve cable/protection/conversion/thermal losses and reserve | Residual source power times charger efficiency, limited by pack |
+| USB 5V/3A, actually authorized | 15W | Less than 15W under the same constraints | Same residual rule |
+| EXT 5V/3A, qualified DC/DC/cable | 15W | Less than 15W under the same constraints | Same residual rule |
+| Battery | UNKNOWN | Limited by loaded pack voltage, frozen discharge rating, protection, shunt, UPS, connectors and converters | Zero external charging |
+
+3.3V/2A plus 5V/2A equals 16.6W at the loads. Neither 10W nor 15W nominal input can supply that continuously, even before losses. Rail converter capability is not a simultaneous board power rating.
+
+Illustrative stress calculation only: with 3.0V at the supply node and assumed 90% combined conversion efficiency, 16.6W needs 6.15A before additional losses. These assumptions are NOT a battery minimum, battery rating or efficiency guarantee. This exposes why the candidate UPS and battery path need a combined-load limit.
+
+## Workload matrix to populate from the real project
+
+| Scenario | Typical workload | Expected peak event | Electrical worst-case corner |
+| --- | --- | --- | --- |
+| Normal | Core/UI and required sensors | Key wake/UI update | Clock/temperature/rail tolerance |
+| Navigation | Core + M10S, or separately F10S + sensor fusion | GNSS acquisition + processing | Module startup and active antenna if present |
+| LoRa TX | Single-Core workload + SX1262 | 22dBm TX with allowed concurrent tasks | Burst duration, supply droop, module loss |
+| Wi-Fi | Actual RF traffic duty cycle | TX burst | Core variant and RF setting |
+| SD write | Selected card sustained write | Internal flash programming pulse | Card vendor/temperature/fullness |
+| EPD refresh | Actual panel waveform/update | Charge-pump startup/refresh | Panel size, cold waveform and driver |
+| Audio playback | Codec + selected PA + actual speaker | Audio crest/startup | Load impedance, clipping and volume limit |
+| Audio recording | Codec/microphone + Core | SD write overlap | Microphone supply and codec configuration |
+| Combined | Explicit allowed concurrency set | Worst credible simultaneous event | Hardware-enforced or documented load limits |
+
+For each row record 3V3/5V currents, pulse duration, repetition, boot inrush, source, temperature and evidence (measurement or exact manufacturer condition). Typical, expected peak and electrical worst case are separate columns in the final budget; they are presently UNKNOWN, not zero. Do not invent workload concurrency to fit available power.
+
+## Housekeeping scenarios
+
+| State | Terms that must be accounted for | Current conclusion |
+| --- | --- | --- |
+| Battery connected, rails off | UPS bias, gauge, charger battery leakage, protection, dividers, wake logic | Hundreds of uA plausible with retained UPS; total not closed |
+| 3V3 on, no system load | Above plus buck-boost no-load input and bus/control bias | Not measured/calculated fully |
+| 5V on, no load | Above plus LT3120 actual no-load input, output divider and PG | Do not equate headline Iq to board input current |
+| External present, battery full | Both muxes as powered, PD, charger idle, converters, input guards | External and battery currents reported separately |
+| Charging | Above plus converter losses; battery current is not overhead | Depends on pack, voltage, current and temperature |
+| Keep-alive | Pulse energy/duty plus gate/control losses | See USB_PD_POLICY.md |
+
+5V disable savings must be measured as the before/after battery or source input power with the same other loads, including output discharge and phantom-power paths. No numerical saving is claimed.
+
+## Implemented 3V3 Reference Boundary
+
+TPS63802 reference values511k/91k give3.307692V nominal and about5.495uA divider current. With1% resistors and the datasheet1% PWM feedback accuracy, resistor/reference-only bounds are3.21957V to3.39806V. The100nA feedback-bias limit times maximum upper resistance contributes another51.611mV magnitude term. These are NOT complete rail bounds: MODE is tied low, so light-load PFM ripple, temperature drift, routing drop and load transients still require analysis. Reference values therefore do not establish a qualified3.3V rail tolerance.
+
+Nominal10uF input/22uF output must meet the manufacturer's effective capacitance requirement after DC bias, tolerance and temperature. The reference22uF does not prove acceptable ESP32 load-step response. The derived example `Ceff >= 2Pt/(Vstart^2-Vend^2)` gives88.89uF for an explicitly assumed5W/100us/4.5V-to3.0V event, excluding ESR and all other margins; none of those values is a frozen system limit.
+
+Reproduce examples with `python3 hardware/FT02_PowerBoard_V1/tools/calculate_examples.py`. The resulting `review/calculation_examples.json` is labelled ILLUSTRATIVE_NOT_A_RATING. [TPS63802 sections8.5/10.2.2 and Table10-6](https://www.ti.com/lit/ds/symlink/tps63802.pdf).
