@@ -1,22 +1,142 @@
 {
   "status": "INCOMPLETE_NOT_FOR_FABRICATION",
   "implemented_sheets": [
+    "06_FUEL_GAUGE",
     "08_3V3_BUCKBOOST",
     "12_TEST_POINTS"
   ],
+  "implementation_scope": "Two partial reference circuits and logical test points, not qualified sheets.",
   "unimplemented_sheets": [
     "01_USB_C_PD",
     "02_EXT_INPUT",
     "03_EXTERNAL_POWER_MUX",
     "04_BATTERY_CHARGER",
     "05_BATTERY_PROTECTION",
-    "06_FUEL_GAUGE",
     "07_UPS_POWER_MUX",
     "09_5V_BUCKBOOST",
     "10_SENSOR_POWER",
     "11_MAINBOARD_INTERFACE"
   ],
   "components": {
+    "R601": {
+      "kind": "K4",
+      "nets": {
+        "I1": "BAT_GUARDED",
+        "I2": "BAT_PROTECTED",
+        "E1": "SENSE_P",
+        "E2": "SENSE_N"
+      },
+      "value": "10m 1% 1W",
+      "mpn": "WSK2512R0100FEA",
+      "sheet": "06_FUEL_GAUGE",
+      "dnp": false
+    },
+    "U601": {
+      "kind": "BQ27220",
+      "nets": {
+        "C3": "BAT_GUARDED",
+        "C1": "SENSE_P",
+        "C2": "SENSE_N",
+        "B1": "FG_BIN",
+        "B2": "GND",
+        "B3": "FG_VDD_1V8",
+        "A3": "SCL",
+        "A2": "SDA",
+        "A1": "FG_GPOUT"
+      },
+      "value": "BQ27220YZFR",
+      "mpn": "BQ27220YZFR",
+      "sheet": "06_FUEL_GAUGE",
+      "dnp": false
+    },
+    "C601": {
+      "kind": "C",
+      "nets": {
+        "1": "BAT_GUARDED",
+        "2": "GND"
+      },
+      "value": "1uF REF",
+      "mpn": "",
+      "sheet": "06_FUEL_GAUGE",
+      "dnp": false
+    },
+    "C602": {
+      "kind": "C",
+      "nets": {
+        "1": "FG_VDD_1V8",
+        "2": "GND"
+      },
+      "value": "2.2uF REF",
+      "mpn": "",
+      "sheet": "06_FUEL_GAUGE",
+      "dnp": false
+    },
+    "R602": {
+      "kind": "R",
+      "nets": {
+        "1": "FG_BIN",
+        "2": "GND"
+      },
+      "value": "10k 1%",
+      "mpn": "",
+      "sheet": "06_FUEL_GAUGE",
+      "dnp": false
+    },
+    "R603": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "FG_GPOUT"
+      },
+      "value": "10k 1%",
+      "mpn": "",
+      "sheet": "06_FUEL_GAUGE",
+      "dnp": false
+    },
+    "R604": {
+      "kind": "R",
+      "nets": {
+        "1": "SDA",
+        "2": "GND"
+      },
+      "value": "1M 1%",
+      "mpn": "",
+      "sheet": "06_FUEL_GAUGE",
+      "dnp": false
+    },
+    "R605": {
+      "kind": "R",
+      "nets": {
+        "1": "SCL",
+        "2": "GND"
+      },
+      "value": "1M 1%",
+      "mpn": "",
+      "sheet": "06_FUEL_GAUGE",
+      "dnp": false
+    },
+    "R606": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "SDA"
+      },
+      "value": "5.1k 1%",
+      "mpn": "",
+      "sheet": "06_FUEL_GAUGE",
+      "dnp": true
+    },
+    "R607": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "SCL"
+      },
+      "value": "5.1k 1%",
+      "mpn": "",
+      "sheet": "06_FUEL_GAUGE",
+      "dnp": true
+    },
     "U801": {
       "kind": "TPS63802",
       "nets": {
@@ -33,7 +153,8 @@
       },
       "value": "TPS63802DLAR",
       "mpn": "TPS63802DLAR",
-      "sheet": "08_3V3_BUCKBOOST"
+      "sheet": "08_3V3_BUCKBOOST",
+      "dnp": false
     },
     "L801": {
       "kind": "L",
@@ -43,7 +164,8 @@
       },
       "value": "0.47uH",
       "mpn": "XFL4015-471ME",
-      "sheet": "08_3V3_BUCKBOOST"
+      "sheet": "08_3V3_BUCKBOOST",
+      "dnp": false
     },
     "C801": {
       "kind": "C",
@@ -53,7 +175,8 @@
       },
       "value": "10uF 6.3V",
       "mpn": "GRM188R60J106ME84",
-      "sheet": "08_3V3_BUCKBOOST"
+      "sheet": "08_3V3_BUCKBOOST",
+      "dnp": false
     },
     "C802": {
       "kind": "C",
@@ -63,7 +186,8 @@
       },
       "value": "22uF 6.3V",
       "mpn": "GRM188R60J226MEA0",
-      "sheet": "08_3V3_BUCKBOOST"
+      "sheet": "08_3V3_BUCKBOOST",
+      "dnp": false
     },
     "R801": {
       "kind": "R",
@@ -73,7 +197,8 @@
       },
       "value": "511k 1%",
       "mpn": "",
-      "sheet": "08_3V3_BUCKBOOST"
+      "sheet": "08_3V3_BUCKBOOST",
+      "dnp": false
     },
     "R802": {
       "kind": "R",
@@ -83,7 +208,8 @@
       },
       "value": "91k 1%",
       "mpn": "",
-      "sheet": "08_3V3_BUCKBOOST"
+      "sheet": "08_3V3_BUCKBOOST",
+      "dnp": false
     },
     "R803": {
       "kind": "R",
@@ -93,7 +219,8 @@
       },
       "value": "100k 1%",
       "mpn": "",
-      "sheet": "08_3V3_BUCKBOOST"
+      "sheet": "08_3V3_BUCKBOOST",
+      "dnp": false
     },
     "TP1201": {
       "kind": "TP",
@@ -102,7 +229,8 @@
       },
       "value": "TP_USB_VBUS",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1202": {
       "kind": "TP",
@@ -111,7 +239,8 @@
       },
       "value": "TP_USB_5V",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1203": {
       "kind": "TP",
@@ -120,7 +249,8 @@
       },
       "value": "TP_EXT_5V",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1204": {
       "kind": "TP",
@@ -129,7 +259,8 @@
       },
       "value": "TP_EXT_BUS_5V",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1205": {
       "kind": "TP",
@@ -138,7 +269,8 @@
       },
       "value": "TP_BAT_PLUS",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1206": {
       "kind": "TP",
@@ -147,7 +279,8 @@
       },
       "value": "TP_BAT_MINUS",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1207": {
       "kind": "TP",
@@ -156,7 +289,8 @@
       },
       "value": "TP_SYS_RAW",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1208": {
       "kind": "TP",
@@ -165,7 +299,8 @@
       },
       "value": "TP_3V3_MAIN",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1209": {
       "kind": "TP",
@@ -174,7 +309,8 @@
       },
       "value": "TP_5V_MAIN",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1210": {
       "kind": "TP",
@@ -183,7 +319,8 @@
       },
       "value": "TP_GND",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1211": {
       "kind": "TP",
@@ -192,7 +329,8 @@
       },
       "value": "TP_SDA",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1212": {
       "kind": "TP",
@@ -201,7 +339,8 @@
       },
       "value": "TP_SCL",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1213": {
       "kind": "TP",
@@ -210,7 +349,8 @@
       },
       "value": "TP_SENSE_P",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1214": {
       "kind": "TP",
@@ -219,7 +359,8 @@
       },
       "value": "TP_SENSE_N",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1215": {
       "kind": "TP",
@@ -228,7 +369,8 @@
       },
       "value": "TP_KEEPALIVE",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1216": {
       "kind": "TP",
@@ -237,7 +379,8 @@
       },
       "value": "TP_PG_3V3",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1217": {
       "kind": "TP",
@@ -246,7 +389,8 @@
       },
       "value": "TP_PG_5V",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1218": {
       "kind": "TP",
@@ -255,7 +399,8 @@
       },
       "value": "TP_EXT_VALID",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     },
     "TP1219": {
       "kind": "TP",
@@ -264,7 +409,8 @@
       },
       "value": "TP_PWR_INT",
       "mpn": "",
-      "sheet": "12_TEST_POINTS"
+      "sheet": "12_TEST_POINTS",
+      "dnp": false
     }
   }
 }

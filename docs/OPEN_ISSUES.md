@@ -1,19 +1,19 @@
 # Open Issues
 
-Status: OI-001 CLOSED by corrected repository path and baseline 808b603. All remaining issues OPEN. A blocker is an unmet release condition, not proof of a defective manufactured board.
+Status: OI-001 CLOSED; OI-002 PARTIALLY RESOLVED by the2026-09-25 supplied battery source, with explicit child decisions below. Other top-level issues remain OPEN. A blocker is an unmet release condition, not proof of a defective manufactured board.
 
 | ID | Issue | Required closure evidence | Gate |
 | --- | --- | --- | --- |
 | OI-001 CLOSED | Corrected project /Volumes/yemol_HDDisk/LanternBox is accessible | Local rules and hardware records read; original HEAD and dirty state captured in 808b603 | Closed |
-| OI-002 | Current 5000mAh electrical/thermal/PCM limits not found in inspected project records | Current frozen pack document with model and revision; see BATTERY_SPEC.md | Battery path, charge settings, sample release |
+| OI-002 PARTIAL | Source now supports identity/current/discharge limits and protection presence; charging/safety details incomplete | Only close child fields with direct source evidence; see below and BATTERY_SPEC.md | Safe charging/battery path/sample release still blocked |
 | OI-003 | Load variants and concurrency not frozen | EPD, SD, PA/speaker, GNSS and Core variants; measured workloads and peak durations | Power/thermal envelope |
-| OI-004 | TPS2121 battery operating margin and current limit unproved | Lowest loaded IN2 >=2.8V in guaranteed conditions; limit tolerance, hot resistance and thermal calculation | UPS choice |
+| OI-004 | TPS2121 cannot be assumed to cover source2.75V cutoff or5A ceiling | Loaded input>=2.8V plus margin,4.5A limiter ceiling/tolerance, path drops/hot resistance; approve lower system envelope/earlier cutoff or alternative | UPS choice remains OPEN |
 | OI-005 | Separate charger cannot measure total board input through its own ILIM | Source-wide limiter and hardware charge shedding; transient timing and reset-safe defaults | Architecture |
 | OI-006 | EXT_VALID requires more than unloaded voltage | Defined comparator, hysteresis, qualification, failed-source inhibit/retry, load test and battery-free behavior | Architecture |
 | OI-007 | BQ25628E charger-only application not fully qualified | Official support for local unloaded SYS with required LC/caps; reverse/sleep/fault proof; defaults and watchdog audit | Charger freeze |
 | OI-008 | HUSB238A I2C cold-start 5V-only behavior unproved | Correct A-variant register documentation, ordering/fuse configuration and reset/attach traces | PD freeze |
 | OI-009 | Input OVP must protect low-voltage downstream stages | Threshold tolerances, cutoff delay, overshoot, FET/TVS energy coordination | Protection |
-| OI-010 | Common battery shunt and all auxiliary returns unproved | Complete connectivity audit including gauge supply/sense, protection bias, NTC, debug and connector paths | Fuel gauge |
+| OI-010 | Sheet06 common-shunt reference implemented, but all-current requirement unproved | U601 BAT supply is explicitly upstream of R601; resolve auxiliary bypass and complete charger/UPS/guard/NTC/debug return audit. Partial netlist PASS does not close this | Fuel gauge |
 | OI-011 | NTC shared sensing cannot be assumed | Actual thermistor and reference circuits; independent sensing or validated noninterfering scheme | Battery safety |
 | OI-012 | Complete I2C address/pullup/off-state map missing | Exact board variants and official maps; bus scan, capacitance, phantom-power analysis | Interface |
 | OI-013 | Low-GPIO telemetry/control not fully implemented | Concrete I2C GPIO/monitor solution or verified existing outputs for mux ST, rail PG, charging permit and keep-alive | Interface |
@@ -27,3 +27,23 @@ Status: OI-001 CLOSED by corrected repository path and baseline 808b603. All rem
 | OI-021 | CardKB2 supply rail records conflict | Older wiring says 3.3V; newer power-test plan says 5V; confirm actual module supply node | Power budget |
 
 Proceed with independent research and parameterized calculations. Do not replace unresolved battery or source limits with guessed ratings, generate fabrication outputs, or declare Phase 1 passed.
+
+## OI-002 Source-Level Decisions
+
+Evidence: [unchanged supplied source record](FT02_BATTERY_SPEC_955565_955465.md) and user's explicit adoption. CLOSED means this parameter is supported, not that the circuit is qualified.
+
+| Child | Status | Field / evidence boundary |
+| --- | --- | --- |
+| OI-002A | CLOSED | 955565/955465 Polymer Li-ion,5000mAh,3.8V(3.7V compatible),9.5x55x65mm,76g |
+| OI-002B | CLOSED | Standard2.5A,fast5A,maximum charge5A; no requirement to build5A charger |
+| OI-002C | CLOSED | Maximum discharge5A,cutoff2.75V,discharge-20C to+60C; not a guaranteed board/loaded-voltage rating |
+| OI-002D | CLOSED | Presence of pack overcharge/overdischarge/overcurrent/short-circuit/overtemperature protection |
+| OI-002E | OPEN | CC-to4.25V then CV4.2V ambiguity; charge setpoint/tolerance not approved |
+| OI-002F | OPEN | Charge-temperature range; discharge range is not transferable |
+| OI-002G | OPEN | Exact protection thresholds,tolerance,delay,recovery |
+| OI-002H | OPEN | NTC presence/value/Beta/tolerance/wiring |
+| OI-002I | OPEN | Connector/polarity/wire gauge/length |
+| OI-002J | OPEN | Minimum loaded pack-output voltage/impedance;2.75V cutoff is not this quantity |
+| OI-002K | OPEN | Peak discharge above1C and allowed duration/repetition |
+
+No parent architecture,thermal,NTC,protection or full battery-path issue closes merely because5A is now known.

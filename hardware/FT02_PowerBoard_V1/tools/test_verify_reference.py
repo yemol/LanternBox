@@ -18,7 +18,33 @@ class ReferenceTests(unittest.TestCase):
                 validate_netlist(path)
 
     def test_actual_export(self):
-        self.assertEqual(validate_netlist(BASE / "review/reference.net.xml")["pins_checked"], 41)
+        self.assertEqual(validate_netlist(BASE / "review/reference.net.xml")["pins_checked"], 70)
+
+    def test_swapped_sense_inputs(self):
+        def edit(root):
+            root.find("./nets/net[@name='SENSE_P']/node[@ref='U601']").set("pin", "C2")
+            root.find("./nets/net[@name='SENSE_N']/node[@ref='U601']").set("pin", "C1")
+        self.check_mutation(edit)
+
+    def test_shunt_bypass(self):
+        self.check_mutation(lambda r: r.find("./nets/net[@name='BAT_PROTECTED']").set("name", "BAT_GUARDED"))
+
+    def test_unapproved_shared_interrupt(self):
+        self.check_mutation(lambda r: r.find("./nets/net[@name='FG_GPOUT']").set("name", "PWR_INT"))
+
+    def test_accidental_populated_pullup(self):
+        def edit(root):
+            part = root.find("./components/comp[@ref='R606']")
+            part.remove(part.find("property[@name='dnp']"))
+        self.check_mutation(edit)
+
+    def test_wrong_shunt(self):
+        self.check_mutation(lambda r: r.find("./components/comp[@ref='R601']/property[@name='MPN']").set("value", "OTHER"))
+
+    def test_unreviewed_footprint(self):
+        def edit(root):
+            ET.SubElement(root.find("./components/comp[@ref='R601']"), "footprint").text = "Generic:R_2512"
+        self.check_mutation(edit)
 
     def test_missing_pin(self):
         def edit(root):

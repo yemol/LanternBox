@@ -2,6 +2,16 @@
 
 Load identities and several policies are known from the actual repository, but measured currents, concurrency, battery limits and efficiency corners remain incomplete. These are calculation inputs and bounds, not approved FT02 ratings.
 
+## Adopted Battery Limits
+
+[Current pack source](BATTERY_SPEC.md):955565/955465,5000mAh,3.8V nominal(3.7V compatible); standard charge2.5A, maximum charge/discharge5A. These supplied ratings replace the former UNKNOWN current ceiling. Charge voltage, charge-temperature/NTC, protection thresholds and minimum loaded pack voltage remain OPEN. Discharge cutoff2.75V and discharge temperature-20C to+60C do not resolve those items.
+
+`Ibat_total <=5A`; lower board/source/thermal/connector/UPS limits also apply. Use `Prails <= eta_effective * (Vpack_loaded * Ibat_allowed - upstream_losses)` with actual loaded voltage, not nominal3.8V or cutoff2.75V as a guaranteed minimum. At nominal3.8V,5A gives19W arithmetically, not a deliverable-board rating. At assumed3.0V and90% efficiency,5A allows at most13.5W before other losses. The16.6W dual-rail example needs6.15A there, exceeding the known pack ceiling; no >5A burst allowance exists.
+
+TPS2121's recommended2.8V minimum already exceeds the source2.75V cutoff before wiring/shunt loss. Its adjustable limit ceiling4.5A is also below the pack5A maximum. This requires an approved lower system envelope/earlier cutoff or a reviewed alternative UPS; neither option is silently frozen here. Full current/voltage compatibility remains OI-004.
+
+The2A charger candidate stays below the source5A charge maximum. This closes current-capability mismatch concerns only, not safe charge voltage/temperature or source-wide priority. Initial1A remains a proposed board policy, disabled pending those gates.
+
 ## Project and manufacturer load evidence
 
 | Load | Evidence | Budget treatment |
@@ -33,7 +43,7 @@ Voltages are in V, currents in A, powers in W. Compare currents at a common volt
 | USB 5V/2A, actually authorized | 10W | Less than 10W; solve cable/protection/conversion/thermal losses and reserve | Residual source power times charger efficiency, limited by pack |
 | USB 5V/3A, actually authorized | 15W | Less than 15W under the same constraints | Same residual rule |
 | EXT 5V/3A, qualified DC/DC/cable | 15W | Less than 15W under the same constraints | Same residual rule |
-| Battery | UNKNOWN | Limited by loaded pack voltage, frozen discharge rating, protection, shunt, UPS, connectors and converters | Zero external charging |
+| Battery | 3.8V nominal; maximum5A source ceiling, usable power not rated | Limited by unknown loaded minimum and lower protection/shunt/UPS/connector/converter/thermal limits | Zero external charging |
 
 3.3V/2A plus 5V/2A equals 16.6W at the loads. Neither 10W nor 15W nominal input can supply that continuously, even before losses. Rail converter capability is not a simultaneous board power rating.
 

@@ -1,4 +1,14 @@
 Reference,Value,Candidate_MPN,Footprint,Status,Open_Item
+R601,10m 1% 1W,WSK2512R0100FEA,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+U601,BQ27220YZFR,BQ27220YZFR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C601,1uF REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C602,2.2uF REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R602,10k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R603,10k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R604,1M 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R605,1M 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R606,5.1k 1%,,,DNP_REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R607,5.1k 1%,,,DNP_REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 U801,TPS63802DLAR,TPS63802DLAR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 L801,0.47uH,XFL4015-471ME,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 C801,10uF 6.3V,GRM188R60J106ME84,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending

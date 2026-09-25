@@ -1,6 +1,6 @@
 """Build the partial Phase 1 hierarchy. Does not build a release or PCB.
 
-Only the TPS63802 reference circuit and test-point inventory are instantiated.
+Only BQ27220/TPS63802 reference circuits and test points are instantiated.
 Unresolved sheets explicitly say NOT IMPLEMENTED; ERC is never suppressed.
 """
 
@@ -51,6 +51,21 @@ def line(x1, y1, x2, y2):
 
 
 PINS = {
+    "BQ27220": [
+        ("C3", "BAT", "power_in", -17.78, 12.7, 0),
+        ("C1", "SRP", "input", -17.78, 7.62, 0),
+        ("C2", "SRN", "input", -17.78, 2.54, 0),
+        ("B1", "BIN", "input", -17.78, -2.54, 0),
+        ("B2", "VSS", "power_in", -17.78, -12.7, 0),
+        ("B3", "VDD", "power_out", 17.78, 12.7, 180),
+        ("A3", "SCL", "bidirectional", 17.78, 7.62, 180),
+        ("A2", "SDA", "bidirectional", 17.78, 2.54, 180),
+        ("A1", "GPOUT", "open_collector", 17.78, -2.54, 180),
+    ],
+    "K4": [("I1", "I1", "passive", -17.78, 0, 0),
+           ("I2", "I2", "passive", 17.78, 0, 180),
+           ("E1", "E1", "passive", -7.62, -10.16, 90),
+           ("E2", "E2", "passive", 7.62, -10.16, 90)],
     "TPS63802": [
         ("1", "EN", "input", -15.24, 2.54, 0),
         ("2", "MODE", "input", -15.24, -2.54, 0),
@@ -73,10 +88,17 @@ PINS = {
 def library_symbol(kind, embedded=False):
     name = "FT02_Reference:" + kind if embedded else kind
     graphic = []
-    if kind == "TPS63802":
-        graphic.append(node("rectangle", node("start", -10.16, 15.24), node("end", 10.16, -15.24),
+    if kind in ("TPS63802", "BQ27220"):
+        width = 12.7 if kind == "BQ27220" else 10.16
+        graphic.append(node("rectangle", node("start", -width, 15.24), node("end", width, -15.24),
                             node("stroke", node("width", 0), node("type", Atom("default"))),
                             node("fill", node("type", Atom("background")))))
+    elif kind == "K4":
+        graphic.append(node("rectangle", node("start", -5.08, 2.54), node("end", 5.08, -2.54),
+                            node("stroke", node("width", 0), node("type", Atom("default"))),
+                            node("fill", node("type", Atom("none")))))
+        graphic += [line(-12.7, 0, -5.08, 0), line(5.08, 0, 12.7, 0),
+                    line(-7.62, 0, -7.62, -5.08), line(7.62, 0, 7.62, -5.08)]
     elif kind == "C":
         graphic += [line(-2.54, 0.635, 2.54, 0.635), line(-2.54, -0.635, 2.54, -0.635)]
     elif kind == "TP":
@@ -89,12 +111,12 @@ def library_symbol(kind, embedded=False):
                             node("fill", node("type", Atom("none")))))
     pins = []
     for number, label, electrical, x, y, angle in PINS[kind]:
-        length = 5.08 if kind == "TPS63802" else (4.445 if kind == "C" else 2.54)
+        length = 5.08 if kind in ("TPS63802", "BQ27220", "K4") else (4.445 if kind == "C" else 2.54)
         if kind == "TP":
             length = 3.81
         pins.append(node("pin", Atom(electrical), Atom("line"), node("at", x, y, angle),
                          node("length", length), node("name", label, effects()), node("number", number, effects())))
-    prefix = "U" if kind == "TPS63802" else kind
+    prefix = "U" if kind in ("TPS63802", "BQ27220") else ("R" if kind == "K4" else kind)
     return node("symbol", name, node("pin_names", node("offset", 1.016)),
                 node("in_bom", Atom("yes")), node("on_board", Atom("yes")),
                 prop("Reference", prefix, 0, 18), prop("Value", kind, 0, 16),
@@ -107,8 +129,8 @@ SHEETS = [
     ("02_EXT_INPUT", "NOT IMPLEMENTED: regulated EXT_5V ONLY. NO RAW SOLAR INPUT. Protection MPNs pending."),
     ("03_EXTERNAL_POWER_MUX", "NOT IMPLEMENTED: TPS2121 candidate; total input-current control and weak-USB fallback unresolved."),
     ("04_BATTERY_CHARGER", "NOT IMPLEMENTED: charger-only qualification, NTC, input charge-shedding and safe defaults pending."),
-    ("05_BATTERY_PROTECTION", "NOT IMPLEMENTED: current 5000mAh pack electrical/PCM/NTC/connector limits missing. OI-002."),
-    ("06_FUEL_GAUGE", "NOT IMPLEMENTED: BQ27220 candidate; common shunt, auxiliary current and profile not closed."),
+    ("05_BATTERY_PROTECTION", "NOT IMPLEMENTED: 5A pack limit and PCM presence known; thresholds/NTC/connector OPEN. OI-002."),
+    ("06_FUEL_GAUGE", "REFERENCE ONLY: BQ27220 system-side high-side shunt. Auxiliary bypass/profile remain OPEN (OI-010)."),
     ("07_UPS_POWER_MUX", "NOT IMPLEMENTED: valid-source qualification, low-battery margin and hold-up not closed."),
     ("08_3V3_BUCKBOOST", "REFERENCE CIRCUIT ONLY: TPS63802 Fig10-1/Table10-6. NOT a qualified FT02 rail."),
     ("09_5V_BUCKBOOST", "NOT IMPLEMENTED: LT3120 candidate; minimum-input capability and compensation pending."),
@@ -119,8 +141,9 @@ SHEETS = [
 
 ROOT_ID = uid("root")
 BOM = []
-MANIFEST = {"status": "INCOMPLETE_NOT_FOR_FABRICATION", "implemented_sheets": ["08_3V3_BUCKBOOST", "12_TEST_POINTS"],
-            "unimplemented_sheets": [name for name, _ in SHEETS if not name.startswith(("08_", "12_"))],
+MANIFEST = {"status": "INCOMPLETE_NOT_FOR_FABRICATION", "implemented_sheets": ["06_FUEL_GAUGE", "08_3V3_BUCKBOOST", "12_TEST_POINTS"],
+            "implementation_scope": "Two partial reference circuits and logical test points, not qualified sheets.",
+            "unimplemented_sheets": [name for name, _ in SHEETS if not name.startswith(("06_", "08_", "12_"))],
             "components": {}}
 
 
@@ -128,15 +151,20 @@ def text_item(value, x, y, key, size=1.27):
     return node("text", value, node("at", x, y, 0), effects(size, node("justify", Atom("left"))), node("uuid", uid(key)))
 
 
-def component(sheet, kind, ref, value, x, y, nets, mpn=""):
+def component(sheet, kind, ref, value, x, y, nets, mpn="", dnp=False, datasheet=""):
     ident = uid(ref)
-    ref_x, ref_y = (x, y + 20.32) if kind == "TPS63802" else (x + 10.16, y - 2.54)
-    val_x, val_y = (x, y + 25.4) if kind == "TPS63802" else (x + 10.16, y + 2.54)
+    ic = kind in ("TPS63802", "BQ27220")
+    ref_x, ref_y = (x, y + 20.32) if ic else (x + 10.16, y - 2.54)
+    val_x, val_y = (x, y + 25.4) if ic else (x + 10.16, y + 2.54)
+    if kind == "K4":
+        ref_x, ref_y, val_x, val_y = x, y - 10.16, x, y - 5.08
+    if not datasheet and ic:
+        datasheet = "https://www.ti.com/lit/ds/symlink/" + kind.lower() + ".pdf"
     part = node("symbol", node("lib_id", "FT02_Reference:" + kind), node("at", x, y, 0), node("unit", 1),
-                node("in_bom", Atom("yes")), node("on_board", Atom("yes")), node("dnp", Atom("no")),
+                node("in_bom", Atom("yes")), node("on_board", Atom("yes")), node("dnp", Atom("yes" if dnp else "no")),
                 node("uuid", ident), prop("Reference", ref, ref_x, ref_y),
                 prop("Value", value, val_x, val_y), prop("Footprint", "", hidden=True),
-                prop("Datasheet", "https://www.ti.com/lit/ds/symlink/tps63802.pdf" if kind != "TP" else "", hidden=True),
+                prop("Datasheet", datasheet, hidden=True),
                 prop("MPN", mpn, hidden=True), prop("DesignStatus", "REFERENCE_NOT_RELEASED", hidden=True),
                 *[node("pin", p[0], node("uuid", uid(ref + "/pin/" + p[0]))) for p in PINS[kind]],
                 node("instances", node("project", PROJECT,
@@ -152,8 +180,8 @@ def component(sheet, kind, ref, value, x, y, nets, mpn=""):
             node("at", ex, ey, 180 if angle == 0 else 0),
             effects(1.016, node("justify", Atom("right" if angle == 0 else "left"))),
             node("uuid", uid(ref + "/label/" + number)), prop("Intersheetrefs", "${INTERSHEET_REFS}", ex, ey, True)))
-    MANIFEST["components"][ref] = {"kind": kind, "nets": nets, "value": value, "mpn": mpn, "sheet": sheet}
-    BOM.append([ref, value, mpn, "", "REFERENCE_NOT_RELEASED", "OI-015: footprint/procurement/derating pending"])
+    MANIFEST["components"][ref] = {"kind": kind, "nets": nets, "value": value, "mpn": mpn, "sheet": sheet, "dnp": dnp}
+    BOM.append([ref, value, mpn, "", "DNP_REFERENCE_NOT_RELEASED" if dnp else "REFERENCE_NOT_RELEASED", "OI-015: footprint/procurement/derating pending"])
     return sheet_nodes
 
 
@@ -175,7 +203,7 @@ def main():
         node("type", "KiCad"), node("uri", "${KIPRJMOD}/libraries/FT02_Reference.kicad_sym"),
         node("options", ""), node("descr", "Local reference symbols; no production footprints")))
     (BASE / "sym-lib-table").write_text(emit(table) + "\n")
-    top = [text_item("PHASE 1 WIP - 10 sheets unimplemented. Battery specification and architecture blockers remain.", 15.24, 15.24, "rootnote")]
+    top = [text_item("PHASE 1 WIP - 9 sheets unimplemented. Charge voltage/temperature and architecture blockers remain.", 15.24, 15.24, "rootnote")]
     for i, (name, note) in enumerate(SHEETS):
         x, y = 20.32 + (i % 3) * 86.36, 35.56 + (i // 3) * 30.48
         top.append(node("sheet", node("at", x, y), node("size", 76.2, 20.32), node("fields_autoplaced"),
@@ -186,7 +214,34 @@ def main():
         items = [text_item(note, 12.7, 15.24, name + "/note"),
                  text_item("No PWR_FLAG, no ERC exclusions, no production footprint claims.", 12.7, 22.86, name + "/status")]
         kinds = []
-        if name.startswith("08_"):
+        if name.startswith("06_"):
+            kinds = ["BQ27220", "K4", "R", "C"]
+            items += component(name, "K4", "R601", "10m 1% 1W", 100.33, 43.18,
+                {"I1": "BAT_GUARDED", "I2": "BAT_PROTECTED", "E1": "SENSE_P", "E2": "SENSE_N"},
+                "WSK2512R0100FEA", datasheet="https://www.vishay.com/docs/30108/wsk2512.pdf")
+            items += component(name, "BQ27220", "U601", "BQ27220YZFR", 100.33, 85.09,
+                {"C3": "BAT_GUARDED", "C1": "SENSE_P", "C2": "SENSE_N", "B1": "FG_BIN", "B2": "GND",
+                 "B3": "FG_VDD_1V8", "A3": "SCL", "A2": "SDA", "A1": "FG_GPOUT"}, "BQ27220YZFR")
+            items += component(name, "C", "C601", "1uF REF", 30.48, 73.66, {"1": "BAT_GUARDED", "2": "GND"})
+            items += component(name, "C", "C602", "2.2uF REF", 30.48, 119.38, {"1": "FG_VDD_1V8", "2": "GND"})
+            for ref, value, x, y, hi, lo, dnp in [
+                ("R602", "10k 1%", 170.18, 50.8, "FG_BIN", "GND", False),
+                ("R603", "10k 1%", 231.14, 50.8, "3V3_MAIN", "FG_GPOUT", False),
+                ("R604", "1M 1%", 170.18, 91.44, "SDA", "GND", False),
+                ("R605", "1M 1%", 231.14, 91.44, "SCL", "GND", False),
+                ("R606", "5.1k 1%", 170.18, 124.46, "3V3_MAIN", "SDA", True),
+                ("R607", "5.1k 1%", 231.14, 124.46, "3V3_MAIN", "SCL", True),
+            ]:
+                items += component(name, "R", ref, value, x, y, {"1": hi, "2": lo}, dnp=dnp)
+            for j, note in enumerate([
+                "I1/I2/E1/E2 are logical Kelvin terminals, NOT footprint pad numbers. Main charger/UPS attach to BAT_PROTECTED.",
+                "BAT_GUARDED: future protected-pack + board guard output. U601 BAT bias BYPASSES shunt; no full-current claim.",
+                "R602 is fixed BIN insertion bias, NOT an NTC. R606/R607 DNP; actual I2C pullups require MainBoard audit.",
+                "FG_GPOUT is private, NOT PWR_INT. VDD is decoupling only. Charge voltage/temperature remain OPEN.",
+                "5A pack ceiling: nominal shunt 50mV / 0.25W. No >5A pulse approval, no profile/thermal/hardware qualification.",
+            ]):
+                items.append(text_item(note, 12.7, 147.32 + j * 6.35, name + "/limit/" + str(j), 1.016))
+        elif name.startswith("08_"):
             kinds = ["TPS63802", "R", "C", "L"]
             items += component(name, "TPS63802", "U801", "TPS63802DLAR", 100.33, 77.47,
                 {"1": "SYS_RAW", "2": "GND", "3": "GND", "4": "FB_3V3", "5": "PG_3V3",
@@ -220,7 +275,7 @@ def main():
         writer = csv.writer(f, lineterminator="\n")
         writer.writerow(["Reference", "Value", "Candidate_MPN", "Footprint", "Status", "Open_Item"])
         writer.writerows(BOM)
-    print("Generated WIP hierarchy: one regulator reference, logical test points, ten explicit unimplemented sheets")
+    print("Generated WIP hierarchy: two partial references, logical test points, nine unimplemented sheets")
 
 
 if __name__ == "__main__":

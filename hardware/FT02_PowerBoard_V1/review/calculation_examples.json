@@ -32,15 +32,43 @@
       "assumed_a": 5,
       "candidate_ohm": 0.01,
       "drop_mv": 50,
-      "loss_w": 0.25
+      "loss_w": 0.25,
+      "pack_boundary": "At source maximum, not a board rating"
     },
     {
       "assumed_a": 8,
       "candidate_ohm": 0.01,
       "drop_mv": 80,
-      "loss_w": 0.64
+      "loss_w": 0.64,
+      "pack_boundary": "FORBIDDEN: exceeds source5A; no pulse allowance"
     }
   ],
+  "source_backed_pack": {
+    "model": "955565 / 955465",
+    "nominal_v": 3.8,
+    "capacity_mah": 5000,
+    "standard_charge_a": 2.5,
+    "maximum_charge_a": 5,
+    "maximum_discharge_a": 5,
+    "discharge_cutoff_v": 2.75,
+    "charge_voltage_status": "OPEN: source CC to4.25V then CV4.2V",
+    "loaded_minimum_v": null,
+    "charge_temperature_c": null,
+    "above_1c_peak_a": null,
+    "above_1c_duration_s": null
+  },
+  "shunt_reference_corner": {
+    "mpn": "WSK2512R0100FEA",
+    "nominal_ohm": 0.01,
+    "tolerance_fraction": 0.01,
+    "full_resistor_tcr_ppm_per_c": 35,
+    "assumed_resistor_delta_c": 45,
+    "pack_ceiling_a": 5,
+    "additive_upper_ohm": 0.010115750000000001,
+    "drop_mv": 50.57875000000001,
+    "loss_w": 0.25289375000000003,
+    "caveat": "45C element delta is an example, not bounded by pack ambient. No offset/ageing/fault/pulse/PCB thermal qualification."
+  },
   "keepalive_examples": [
     {
       "assumed_ma": 100,

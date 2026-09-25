@@ -13,7 +13,9 @@ No PCB routing, Gerbers, drill files, placement files, assembly release or Rev A
 
 ## Current Implementation
 
-One TPS63802 reference circuit,19 logical test points, and10 explicitly unimplemented child sheets. The partial BOM has no approved footprints and must not be used for procurement/assembly. No board file is created before the architecture gate passes.
+BQ27220/common-shunt and TPS63802 partial reference circuits,19 logical test points, and9 explicitly unimplemented child sheets. The independent checker covers36 symbols/70 pins with12 tests. The partial BOM has no approved footprints and must not be used for procurement/assembly. R601 uses logical Kelvin terminal names, not physical pad assignments. No board file is created before all Phase1 gates pass.
+
+The supplied955565/955465 battery limits are adopted in `docs/BATTERY_SPEC.md`. Charge voltage remains OPEN (CC4.25V then CV4.2V); charge temperature, precise protection, NTC, connector/wire, loaded voltage and >1C pulse data also remain OPEN. Sheet06 makes the gauge's upstream supply-current bypass explicit; it does not close the literal all-current measurement requirement.
 
 ## Reproduce Checks
 
@@ -27,8 +29,9 @@ kicad-cli sch erc --format json --severity-all --exit-code-violations -o hardwar
 python3 hardware/FT02_PowerBoard_V1/tools/verify_reference.py
 python3 -B hardware/FT02_PowerBoard_V1/tools/test_verify_reference.py -v
 python3 hardware/FT02_PowerBoard_V1/tools/calculate_examples.py
+python3 -B hardware/FT02_PowerBoard_V1/tools/test_battery_contract.py -v
 ```
 
-Current ERC command intentionally exits5 because2 errors/15 warnings remain. Run subsequent checks separately, not behind shell success chaining. The topology check passes only the reference connections and explicitly reports the full design gate FAIL. KiCad's default ignored rules are disclosed in the report; no project-specific exclusions were added.
+Current ERC command intentionally exits5 because3 errors/12 warnings remain. Run subsequent checks separately, not behind shell success chaining. The topology check passes only the reference connections and explicitly reports the full design gate FAIL. KiCad's default ignored rules are disclosed in the report; no project-specific exclusions were added.
 
 `build_reference.py` regenerates all schematic/project/library files and the partial BOM. Do not rerun after manual schematic edits without reconciling those edits into the generator. `capture_baseline.py` is a one-time provenance tool, not a reset or backup restoration command.
