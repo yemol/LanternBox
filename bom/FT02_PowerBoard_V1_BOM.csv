@@ -1,0 +1,27 @@
+Reference,Value,Candidate_MPN,Footprint,Status,Open_Item
+U801,TPS63802DLAR,TPS63802DLAR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+L801,0.47uH,XFL4015-471ME,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C801,10uF 6.3V,GRM188R60J106ME84,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C802,22uF 6.3V,GRM188R60J226MEA0,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R801,511k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R802,91k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R803,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1201,TP_USB_VBUS,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1202,TP_USB_5V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1203,TP_EXT_5V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1204,TP_EXT_BUS_5V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1205,TP_BAT_PLUS,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1206,TP_BAT_MINUS,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1207,TP_SYS_RAW,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1208,TP_3V3_MAIN,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1209,TP_5V_MAIN,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1210,TP_GND,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1211,TP_SDA,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1212,TP_SCL,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1213,TP_SENSE_P,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1214,TP_SENSE_N,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1215,TP_KEEPALIVE,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1216,TP_PG_3V3,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1217,TP_PG_5V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1218,TP_EXT_VALID,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+TP1219,TP_PWR_INT,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending

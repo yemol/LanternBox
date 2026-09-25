@@ -1,0 +1,270 @@
+{
+  "status": "INCOMPLETE_NOT_FOR_FABRICATION",
+  "implemented_sheets": [
+    "08_3V3_BUCKBOOST",
+    "12_TEST_POINTS"
+  ],
+  "unimplemented_sheets": [
+    "01_USB_C_PD",
+    "02_EXT_INPUT",
+    "03_EXTERNAL_POWER_MUX",
+    "04_BATTERY_CHARGER",
+    "05_BATTERY_PROTECTION",
+    "06_FUEL_GAUGE",
+    "07_UPS_POWER_MUX",
+    "09_5V_BUCKBOOST",
+    "10_SENSOR_POWER",
+    "11_MAINBOARD_INTERFACE"
+  ],
+  "components": {
+    "U801": {
+      "kind": "TPS63802",
+      "nets": {
+        "1": "SYS_RAW",
+        "2": "GND",
+        "3": "GND",
+        "4": "FB_3V3",
+        "5": "PG_3V3",
+        "6": "3V3_MAIN",
+        "7": "SW3_L2",
+        "8": "GND",
+        "9": "SW3_L1",
+        "10": "SYS_RAW"
+      },
+      "value": "TPS63802DLAR",
+      "mpn": "TPS63802DLAR",
+      "sheet": "08_3V3_BUCKBOOST"
+    },
+    "L801": {
+      "kind": "L",
+      "nets": {
+        "1": "SW3_L1",
+        "2": "SW3_L2"
+      },
+      "value": "0.47uH",
+      "mpn": "XFL4015-471ME",
+      "sheet": "08_3V3_BUCKBOOST"
+    },
+    "C801": {
+      "kind": "C",
+      "nets": {
+        "1": "SYS_RAW",
+        "2": "GND"
+      },
+      "value": "10uF 6.3V",
+      "mpn": "GRM188R60J106ME84",
+      "sheet": "08_3V3_BUCKBOOST"
+    },
+    "C802": {
+      "kind": "C",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "GND"
+      },
+      "value": "22uF 6.3V",
+      "mpn": "GRM188R60J226MEA0",
+      "sheet": "08_3V3_BUCKBOOST"
+    },
+    "R801": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "FB_3V3"
+      },
+      "value": "511k 1%",
+      "mpn": "",
+      "sheet": "08_3V3_BUCKBOOST"
+    },
+    "R802": {
+      "kind": "R",
+      "nets": {
+        "1": "FB_3V3",
+        "2": "GND"
+      },
+      "value": "91k 1%",
+      "mpn": "",
+      "sheet": "08_3V3_BUCKBOOST"
+    },
+    "R803": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "PG_3V3"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "08_3V3_BUCKBOOST"
+    },
+    "TP1201": {
+      "kind": "TP",
+      "nets": {
+        "1": "USB_VBUS"
+      },
+      "value": "TP_USB_VBUS",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1202": {
+      "kind": "TP",
+      "nets": {
+        "1": "USB_5V"
+      },
+      "value": "TP_USB_5V",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1203": {
+      "kind": "TP",
+      "nets": {
+        "1": "EXT_5V"
+      },
+      "value": "TP_EXT_5V",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1204": {
+      "kind": "TP",
+      "nets": {
+        "1": "EXT_BUS_5V"
+      },
+      "value": "TP_EXT_BUS_5V",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1205": {
+      "kind": "TP",
+      "nets": {
+        "1": "BAT_PLUS"
+      },
+      "value": "TP_BAT_PLUS",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1206": {
+      "kind": "TP",
+      "nets": {
+        "1": "BAT_MINUS"
+      },
+      "value": "TP_BAT_MINUS",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1207": {
+      "kind": "TP",
+      "nets": {
+        "1": "SYS_RAW"
+      },
+      "value": "TP_SYS_RAW",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1208": {
+      "kind": "TP",
+      "nets": {
+        "1": "3V3_MAIN"
+      },
+      "value": "TP_3V3_MAIN",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1209": {
+      "kind": "TP",
+      "nets": {
+        "1": "5V_MAIN"
+      },
+      "value": "TP_5V_MAIN",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1210": {
+      "kind": "TP",
+      "nets": {
+        "1": "GND"
+      },
+      "value": "TP_GND",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1211": {
+      "kind": "TP",
+      "nets": {
+        "1": "SDA"
+      },
+      "value": "TP_SDA",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1212": {
+      "kind": "TP",
+      "nets": {
+        "1": "SCL"
+      },
+      "value": "TP_SCL",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1213": {
+      "kind": "TP",
+      "nets": {
+        "1": "SENSE_P"
+      },
+      "value": "TP_SENSE_P",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1214": {
+      "kind": "TP",
+      "nets": {
+        "1": "SENSE_N"
+      },
+      "value": "TP_SENSE_N",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1215": {
+      "kind": "TP",
+      "nets": {
+        "1": "KEEPALIVE"
+      },
+      "value": "TP_KEEPALIVE",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1216": {
+      "kind": "TP",
+      "nets": {
+        "1": "PG_3V3"
+      },
+      "value": "TP_PG_3V3",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1217": {
+      "kind": "TP",
+      "nets": {
+        "1": "PG_5V"
+      },
+      "value": "TP_PG_5V",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1218": {
+      "kind": "TP",
+      "nets": {
+        "1": "EXT_VALID"
+      },
+      "value": "TP_EXT_VALID",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    },
+    "TP1219": {
+      "kind": "TP",
+      "nets": {
+        "1": "PWR_INT"
+      },
+      "value": "TP_PWR_INT",
+      "mpn": "",
+      "sheet": "12_TEST_POINTS"
+    }
+  }
+}

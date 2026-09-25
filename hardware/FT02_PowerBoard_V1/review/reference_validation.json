@@ -1,0 +1,67 @@
+{
+  "checked_utc": "2026-09-25T00:23:52.426221+00:00",
+  "topology": {
+    "status": "PASS_REFERENCE_ONLY",
+    "pins_checked": 41,
+    "components_checked": 26,
+    "sheets_parsed": 13
+  },
+  "erc": {
+    "kicad_version": "10.0.5",
+    "counts": {
+      "warning": 15,
+      "error": 2
+    },
+    "default_ignored_checks": [
+      {
+        "description": "Global label only appears once in the schematic",
+        "key": "single_global_label"
+      },
+      {
+        "description": "Four connection points are joined together",
+        "key": "four_way_junction"
+      },
+      {
+        "description": "SPICE model issue",
+        "key": "simulation_model_issue"
+      },
+      {
+        "description": "Assigned footprint doesn't match footprint filters",
+        "key": "footprint_filter"
+      }
+    ],
+    "note": "Default ignored checks disclosed; no project-specific exclusions added."
+  },
+  "unimplemented_sheets": [
+    "01_USB_C_PD",
+    "02_EXT_INPUT",
+    "03_EXTERNAL_POWER_MUX",
+    "04_BATTERY_CHARGER",
+    "05_BATTERY_PROTECTION",
+    "06_FUEL_GAUGE",
+    "07_UPS_POWER_MUX",
+    "09_5V_BUCKBOOST",
+    "10_SENSOR_POWER",
+    "11_MAINBOARD_INTERFACE"
+  ],
+  "release_gate": "FAIL_INCOMPLETE_DESIGN",
+  "evidence_sha256": {
+    "01_USB_C_PD.kicad_sch": "54f39bbddcc6edba0d398da5a60f408a9b3cf4199aa61f58770ba4f5ad0e2f63",
+    "02_EXT_INPUT.kicad_sch": "2075486496dbc115d76830128e1973c894398228ebd21dbcc833caf9b1ddc3f4",
+    "03_EXTERNAL_POWER_MUX.kicad_sch": "b473eef63e55feca8d05c962f0eff19af64e9ef0cab67e9e30cb54bf8c310aa9",
+    "04_BATTERY_CHARGER.kicad_sch": "13b1de01c052dac3f98bdbef9a30e8129856df78d159b4a65460ae4faa6de070",
+    "05_BATTERY_PROTECTION.kicad_sch": "13d535f5f46f34e3036065b4c9abfa11d38d2f6e992100b76cda22f716cf6b55",
+    "06_FUEL_GAUGE.kicad_sch": "ddd3e22186e2609af52925c907d93145beadd59d68fcb82f65b44bb7ba0e39ca",
+    "07_UPS_POWER_MUX.kicad_sch": "63d4102988ec9bc71c723d46a2b829e7c297c742e338d56bc22a5b3d78d6c51a",
+    "08_3V3_BUCKBOOST.kicad_sch": "5a4124910868498c6046d75ee1a941fe98813fd52a742bfb6ccfab7840e6365d",
+    "09_5V_BUCKBOOST.kicad_sch": "ac58afbb762070d0fecff4857d6c1b4718d8b77d8521f987bb53a3cf85ff2fb5",
+    "10_SENSOR_POWER.kicad_sch": "fd66cc4d5653f8c4a793fc0b5f59f1c263510dabdc2abb4572521f8cee262dc9",
+    "11_MAINBOARD_INTERFACE.kicad_sch": "8bf518bd3bcb0414f0013a07244be934207ad1a34e4b1e73cacc834d4be7a21c",
+    "12_TEST_POINTS.kicad_sch": "a108ad60652223a8cfa1e81bb0f4ad126133c85f6254d1feb33208851c117b93",
+    "FT02_PowerBoard_V1.kicad_sch": "f993e1244c6ebc14424d8a037ff5b08443845dd2f28fcf4abea786548321d80b",
+    "reference.net.xml": "c214486509423d12758ef1da3c362357efb3de91dd89c0a0e37f29d67dcbb99b",
+    "erc.json": "7b4280f5ad8994305032501f7f139e9490d7f3e3d80f2467462e371d5a6d7f9b",
+    "FT02_PowerBoard_V1.kicad_pro": "55426efea6ad0f29e47102254575d4242a5f6a712ef8a948395d7ea380e422d9"
+  },
+  "scope": "Topology only. No circuit simulation, transient proof, shunt audit, footprints or hardware tests."
+}

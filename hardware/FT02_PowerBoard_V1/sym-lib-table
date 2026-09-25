@@ -1,0 +1,1 @@
+(sym_lib_table (version 7) (lib (name "FT02_Reference") (type "KiCad") (uri "${KIPRJMOD}/libraries/FT02_Reference.kicad_sym") (options "") (descr "Local reference symbols; no production footprints")))

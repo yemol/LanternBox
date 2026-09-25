@@ -1,0 +1,58 @@
+{
+  "status": "ILLUSTRATIVE_NOT_A_RATING",
+  "feedback": {
+    "source": "TPS63802 Rev D sections8.5/10.2.2.5 and Table10-6",
+    "nominal_v": 3.3076923076923075,
+    "pwm_reference_and_resistor_only_min_v": 3.2195734958111197,
+    "pwm_reference_and_resistor_only_max_v": 3.398057498057498,
+    "additional_100na_bias_times_max_rtop_v": 0.051611,
+    "divider_current_nominal_ua": 5.4945054945054945,
+    "caveat": "Not full rail bounds. PWM reference accuracy does not qualify PFM ripple; bias, temperature drift, regulation, PCB drop and transients remain."
+  },
+  "dual_rail_example": {
+    "output_w": 16.6,
+    "input_a_at_assumed_3v_90pct": 6.148148148148148
+  },
+  "mux_example": {
+    "ron_typ_ohm": 0.056,
+    "assumed_a": 3,
+    "one_path_w": 0.504,
+    "two_same_current_paths_w": 1.008
+  },
+  "hold_up_example": {
+    "assumed_w": 5,
+    "assumed_gap_us": 100,
+    "assumed_start_v": 4.5,
+    "assumed_end_v": 3.0,
+    "required_effective_uf": 88.8888888888889,
+    "caveat": "Assumed gap/voltages; not guaranteed timing, battery limits or selected capacitance."
+  },
+  "shunt_examples": [
+    {
+      "assumed_a": 5,
+      "candidate_ohm": 0.01,
+      "drop_mv": 50,
+      "loss_w": 0.25
+    },
+    {
+      "assumed_a": 8,
+      "candidate_ohm": 0.01,
+      "drop_mv": 80,
+      "loss_w": 0.64
+    }
+  ],
+  "keepalive_examples": [
+    {
+      "assumed_ma": 100,
+      "r_ohm": 50.0,
+      "pulse_w": 0.5,
+      "average_mw_at_100ms_per_10s": 5.0
+    },
+    {
+      "assumed_ma": 200,
+      "r_ohm": 25.0,
+      "pulse_w": 1.0,
+      "average_mw_at_100ms_per_10s": 10.0
+    }
+  ]
+}

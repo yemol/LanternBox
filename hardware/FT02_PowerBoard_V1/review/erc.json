@@ -1,0 +1,354 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-25T08:15:51",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.5",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735",
+            "violations": [
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'USB_VBUS'",
+                            "pos": {
+                                "x": 0.254,
+                                "y": 0.5588
+                            },
+                            "uuid": "95c66a1c-ea47-5297-a4e9-b8741d6e20f5"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'BAT_MINUS'",
+                            "pos": {
+                                "x": 0.254,
+                                "y": 0.889
+                            },
+                            "uuid": "9a7bc595-cc0a-59e5-ba37-b77170b3108c"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'SDA'",
+                            "pos": {
+                                "x": 0.254,
+                                "y": 1.2192
+                            },
+                            "uuid": "3cc88c59-a732-54b3-973a-1605bec1f19e"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'USB_5V'",
+                            "pos": {
+                                "x": 0.762,
+                                "y": 0.5588
+                            },
+                            "uuid": "e952e83b-7552-5891-a523-4e19984a3a05"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'SCL'",
+                            "pos": {
+                                "x": 0.762,
+                                "y": 1.2192
+                            },
+                            "uuid": "6fb489b6-8c7d-5807-905f-960e210b691b"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'PG_5V'",
+                            "pos": {
+                                "x": 0.762,
+                                "y": 1.5494
+                            },
+                            "uuid": "8b5a8419-0484-50a0-8562-f149d2d9ec37"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'EXT_5V'",
+                            "pos": {
+                                "x": 1.27,
+                                "y": 0.5588
+                            },
+                            "uuid": "dc32d90d-5a49-5deb-ab63-64a7137a6d34"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'SENSE_P'",
+                            "pos": {
+                                "x": 1.27,
+                                "y": 1.2192
+                            },
+                            "uuid": "84d310a0-7f5c-5aeb-b983-081b0591c920"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'EXT_VALID'",
+                            "pos": {
+                                "x": 1.27,
+                                "y": 1.5494
+                            },
+                            "uuid": "7625349c-d2f3-5894-acf3-314f8a643dfa"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'EXT_BUS_5V'",
+                            "pos": {
+                                "x": 1.778,
+                                "y": 0.5588
+                            },
+                            "uuid": "babad94e-7baf-5428-a880-0b581783789a"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 '5V_MAIN'",
+                            "pos": {
+                                "x": 1.778,
+                                "y": 0.889
+                            },
+                            "uuid": "32fc6161-e3c5-5364-9723-18b9825c2a41"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'SENSE_N'",
+                            "pos": {
+                                "x": 1.778,
+                                "y": 1.2192
+                            },
+                            "uuid": "ae204319-b870-57d3-8ae3-6907c114c459"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'PWR_INT'",
+                            "pos": {
+                                "x": 1.778,
+                                "y": 1.5494
+                            },
+                            "uuid": "e69fa385-5460-53d1-a7ab-3347593bd779"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'BAT_PLUS'",
+                            "pos": {
+                                "x": 2.286,
+                                "y": 0.5588
+                            },
+                            "uuid": "3aa6ec3a-541d-5936-8654-30feb62c6180"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                },
+                {
+                    "description": "Label connected to only one pin",
+                    "items": [
+                        {
+                            "description": "全局标签 'KEEPALIVE'",
+                            "pos": {
+                                "x": 2.286,
+                                "y": 1.2192
+                            },
+                            "uuid": "f9ceb33e-b0ce-5228-b682-e5397ee082e3"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "isolated_pin_label"
+                }
+            ]
+        },
+        {
+            "path": "/01_USB_C_PD/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735/f52a844b-901f-5889-9847-3dd381cf5b9e",
+            "violations": []
+        },
+        {
+            "path": "/02_EXT_INPUT/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735/5aa75a9c-4c8d-5889-be50-6deaae9c007a",
+            "violations": []
+        },
+        {
+            "path": "/03_EXTERNAL_POWER_MUX/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735/f65f36c2-4da1-510e-970b-313d27d17a66",
+            "violations": []
+        },
+        {
+            "path": "/04_BATTERY_CHARGER/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735/7af6f2eb-3beb-5c1e-9b5d-368865e2c361",
+            "violations": []
+        },
+        {
+            "path": "/05_BATTERY_PROTECTION/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735/025007ac-c595-52da-bf47-3c87a521f40b",
+            "violations": []
+        },
+        {
+            "path": "/06_FUEL_GAUGE/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735/7c6c09dc-632c-5008-ba6d-b95b9dba1d50",
+            "violations": []
+        },
+        {
+            "path": "/07_UPS_POWER_MUX/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735/dee856fb-8e6c-5819-ab2f-eb21e49f5e84",
+            "violations": []
+        },
+        {
+            "path": "/08_3V3_BUCKBOOST/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735/7ef4c22a-badc-59dd-b31a-19f1c46419b0",
+            "violations": [
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol U801 引脚 10 [VIN, 电源输入, 图线]",
+                            "pos": {
+                                "x": 0.8509,
+                                "y": 0.6985
+                            },
+                            "uuid": "3f4b60a8-a69c-5a0f-b7f7-b7dbc603b506"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                },
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol U801 引脚 3 [AGND, 电源输入, 图线]",
+                            "pos": {
+                                "x": 0.8509,
+                                "y": 0.9017
+                            },
+                            "uuid": "cc8b2ead-f431-5b5a-a0bd-cb3d8cae93ba"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                }
+            ]
+        },
+        {
+            "path": "/09_5V_BUCKBOOST/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735/d74d8af9-a6d3-56ae-91ce-a4867d601d26",
+            "violations": []
+        },
+        {
+            "path": "/10_SENSOR_POWER/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735/83af0c7d-2eee-5618-8699-4f3f399a4211",
+            "violations": []
+        },
+        {
+            "path": "/11_MAINBOARD_INTERFACE/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea",
+            "violations": []
+        },
+        {
+            "path": "/12_TEST_POINTS/",
+            "uuid_path": "/bf57e3b4-9fc0-55ef-8d03-bd930cde3735/20bce507-952d-5909-8720-5320b7cd33c0",
+            "violations": []
+        }
+    ],
+    "source": "FT02_PowerBoard_V1.kicad_sch"
+}

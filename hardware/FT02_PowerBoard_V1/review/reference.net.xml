@@ -1,0 +1,1057 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/Volumes/yemol_HDDisk/LanternBox/hardware/FT02_PowerBoard_V1/FT02_PowerBoard_V1.kicad_sch</source>
+    <date>2026-09-25T08:14:42</date>
+    <tool>Eeschema 10.0.5</tool>
+    <textvar name="DESIGN_STATUS">INCOMPLETE_NOT_FOR_FABRICATION</textvar>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>FT02_PowerBoard_V1</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>FT02_PowerBoard_V1.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="2" name="/01_USB_C_PD/" tstamps="/f52a844b-901f-5889-9847-3dd381cf5b9e/">
+      <title_block>
+        <title>01_USB_C_PD</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>01_USB_C_PD.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="3" name="/02_EXT_INPUT/" tstamps="/5aa75a9c-4c8d-5889-be50-6deaae9c007a/">
+      <title_block>
+        <title>02_EXT_INPUT</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>02_EXT_INPUT.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="4" name="/03_EXTERNAL_POWER_MUX/" tstamps="/f65f36c2-4da1-510e-970b-313d27d17a66/">
+      <title_block>
+        <title>03_EXTERNAL_POWER_MUX</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>03_EXTERNAL_POWER_MUX.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="5" name="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/">
+      <title_block>
+        <title>04_BATTERY_CHARGER</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>04_BATTERY_CHARGER.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="6" name="/05_BATTERY_PROTECTION/" tstamps="/025007ac-c595-52da-bf47-3c87a521f40b/">
+      <title_block>
+        <title>05_BATTERY_PROTECTION</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>05_BATTERY_PROTECTION.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="7" name="/06_FUEL_GAUGE/" tstamps="/7c6c09dc-632c-5008-ba6d-b95b9dba1d50/">
+      <title_block>
+        <title>06_FUEL_GAUGE</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>06_FUEL_GAUGE.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="8" name="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/">
+      <title_block>
+        <title>07_UPS_POWER_MUX</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>07_UPS_POWER_MUX.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="9" name="/08_3V3_BUCKBOOST/" tstamps="/7ef4c22a-badc-59dd-b31a-19f1c46419b0/">
+      <title_block>
+        <title>08_3V3_BUCKBOOST</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>08_3V3_BUCKBOOST.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="10" name="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/">
+      <title_block>
+        <title>09_5V_BUCKBOOST</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>09_5V_BUCKBOOST.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="11" name="/10_SENSOR_POWER/" tstamps="/83af0c7d-2eee-5618-8699-4f3f399a4211/">
+      <title_block>
+        <title>10_SENSOR_POWER</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>10_SENSOR_POWER.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="12" name="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/">
+      <title_block>
+        <title>11_MAINBOARD_INTERFACE</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>11_MAINBOARD_INTERFACE.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="13" name="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/">
+      <title_block>
+        <title>12_TEST_POINTS</title>
+        <company/>
+        <rev>WIP-01</rev>
+        <date/>
+        <source>12_TEST_POINTS.kicad_sch</source>
+        <comment number="1" value="INCOMPLETE - NOT FOR FABRICATION"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C801">
+      <value>10uF 6.3V</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps63802.pdf</datasheet>
+      <fields>
+        <field name="MPN">GRM188R60J106ME84</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps63802.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value="GRM188R60J106ME84"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="08_3V3_BUCKBOOST"/>
+      <property name="Sheetfile" value="08_3V3_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/08_3V3_BUCKBOOST/" tstamps="/7ef4c22a-badc-59dd-b31a-19f1c46419b0/"/>
+      <tstamps>11732893-787f-514c-8d17-c514e9ce584b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C802">
+      <value>22uF 6.3V</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps63802.pdf</datasheet>
+      <fields>
+        <field name="MPN">GRM188R60J226MEA0</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps63802.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value="GRM188R60J226MEA0"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="08_3V3_BUCKBOOST"/>
+      <property name="Sheetfile" value="08_3V3_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/08_3V3_BUCKBOOST/" tstamps="/7ef4c22a-badc-59dd-b31a-19f1c46419b0/"/>
+      <tstamps>1283fb21-794d-5dd2-a3cc-26e80d925609</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="L801">
+      <value>0.47uH</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps63802.pdf</datasheet>
+      <fields>
+        <field name="MPN">XFL4015-471ME</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps63802.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="L" description=""/>
+      <property name="MPN" value="XFL4015-471ME"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="08_3V3_BUCKBOOST"/>
+      <property name="Sheetfile" value="08_3V3_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/08_3V3_BUCKBOOST/" tstamps="/7ef4c22a-badc-59dd-b31a-19f1c46419b0/"/>
+      <tstamps>8d45c1e8-83d0-5b2c-a6ab-6ce1539f51b0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R801">
+      <value>511k 1%</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps63802.pdf</datasheet>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps63802.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="08_3V3_BUCKBOOST"/>
+      <property name="Sheetfile" value="08_3V3_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/08_3V3_BUCKBOOST/" tstamps="/7ef4c22a-badc-59dd-b31a-19f1c46419b0/"/>
+      <tstamps>bd359e03-e960-5ec9-a654-422bfcc32252</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R802">
+      <value>91k 1%</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps63802.pdf</datasheet>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps63802.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="08_3V3_BUCKBOOST"/>
+      <property name="Sheetfile" value="08_3V3_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/08_3V3_BUCKBOOST/" tstamps="/7ef4c22a-badc-59dd-b31a-19f1c46419b0/"/>
+      <tstamps>eb2c4a08-225d-5040-b6f0-61f4ed7c71b4</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R803">
+      <value>100k 1%</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps63802.pdf</datasheet>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps63802.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="08_3V3_BUCKBOOST"/>
+      <property name="Sheetfile" value="08_3V3_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/08_3V3_BUCKBOOST/" tstamps="/7ef4c22a-badc-59dd-b31a-19f1c46419b0/"/>
+      <tstamps>225444f5-524f-51d0-83ea-b1e7ef6e0fd5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U801">
+      <value>TPS63802DLAR</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps63802.pdf</datasheet>
+      <fields>
+        <field name="MPN">TPS63802DLAR</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps63802.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TPS63802" description=""/>
+      <property name="MPN" value="TPS63802DLAR"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="08_3V3_BUCKBOOST"/>
+      <property name="Sheetfile" value="08_3V3_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/08_3V3_BUCKBOOST/" tstamps="/7ef4c22a-badc-59dd-b31a-19f1c46419b0/"/>
+      <tstamps>13813109-bd62-5c80-a134-717a0c368415</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="10"/>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="8"/>
+            <pin num="3"/>
+            <pin num="9"/>
+            <pin num="7"/>
+            <pin num="6"/>
+            <pin num="4"/>
+            <pin num="5"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1201">
+      <value>TP_USB_VBUS</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>c94c95f5-9176-5624-bfc6-99e97825ab77</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1202">
+      <value>TP_USB_5V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>b41e2ed8-1661-56f4-b77a-81f4c0e719bc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1203">
+      <value>TP_EXT_5V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>3038b035-73aa-5cb6-b6be-368bb9be6d17</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1204">
+      <value>TP_EXT_BUS_5V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>b646e690-c577-540f-bd08-4c3dfe163552</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1205">
+      <value>TP_BAT_PLUS</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>4dc19cec-a266-542c-9b29-c77810747fba</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1206">
+      <value>TP_BAT_MINUS</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>0ec4dd65-5b30-5edc-b011-13383a7ce42a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1207">
+      <value>TP_SYS_RAW</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>ea72f984-70c6-5651-a1ad-ea5142a904af</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1208">
+      <value>TP_3V3_MAIN</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>a8f29235-95bb-5836-beeb-ec26194ce791</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1209">
+      <value>TP_5V_MAIN</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>58245aad-f26e-544c-94ca-cb8b3a135799</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1210">
+      <value>TP_GND</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>c66da14a-32f3-5a90-bd65-fa25593c1699</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1211">
+      <value>TP_SDA</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>27450f55-bb6c-5264-89a3-28fef74d8323</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1212">
+      <value>TP_SCL</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>9b76c4cb-54e2-574c-a318-98fcd77947cb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1213">
+      <value>TP_SENSE_P</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>19d6f896-7a7c-5b8b-8511-de12a9b63284</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1214">
+      <value>TP_SENSE_N</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>5bcf24ee-db79-5a43-ac8a-833a8e03d9c7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1215">
+      <value>TP_KEEPALIVE</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>9ba1ac76-3e81-5ace-a23e-2440f5be51ee</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1216">
+      <value>TP_PG_3V3</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>75683701-6e8b-53c9-a78e-8aa8d129946e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1217">
+      <value>TP_PG_5V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>165c4eb3-38e2-5931-b509-90bf67e91a80</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1218">
+      <value>TP_EXT_VALID</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>41fb6edf-30f8-51cd-9f94-90c531d94cef</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="TP1219">
+      <value>TP_PWR_INT</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TP" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="12_TEST_POINTS"/>
+      <property name="Sheetfile" value="12_TEST_POINTS.kicad_sch"/>
+      <sheetpath names="/12_TEST_POINTS/" tstamps="/20bce507-952d-5909-8720-5320b7cd33c0/"/>
+      <tstamps>5d2a0a6b-b81c-556f-9107-fa3cb9238be0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="FT02_Reference" part="C">
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="FT02_Reference" part="L">
+      <fields>
+        <field name="Reference">L</field>
+        <field name="Value">L</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="FT02_Reference" part="R">
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="FT02_Reference" part="TP">
+      <fields>
+        <field name="Reference">TP</field>
+        <field name="Value">TP</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="FT02_Reference" part="TPS63802">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TPS63802</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="EN" type="input"/>
+        <pin num="2" name="MODE" type="input"/>
+        <pin num="3" name="AGND" type="power_in"/>
+        <pin num="4" name="FB" type="input"/>
+        <pin num="5" name="PG" type="open_collector"/>
+        <pin num="6" name="VOUT" type="power_out"/>
+        <pin num="7" name="L2" type="bidirectional"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="L1" type="bidirectional"/>
+        <pin num="10" name="VIN" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="FT02_Reference">
+      <uri>${KIPRJMOD}/libraries/FT02_Reference.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="3V3_MAIN" class="Default">
+      <node ref="C802" pin="1" pintype="passive"/>
+      <node ref="R801" pin="1" pintype="passive"/>
+      <node ref="R803" pin="1" pintype="passive"/>
+      <node ref="TP1208" pin="1" pintype="passive"/>
+      <node ref="U801" pin="6" pinfunction="VOUT_6" pintype="power_out"/>
+    </net>
+    <net code="2" name="5V_MAIN" class="Default">
+      <node ref="TP1209" pin="1" pintype="passive"/>
+    </net>
+    <net code="3" name="BAT_MINUS" class="Default">
+      <node ref="TP1206" pin="1" pintype="passive"/>
+    </net>
+    <net code="4" name="BAT_PLUS" class="Default">
+      <node ref="TP1205" pin="1" pintype="passive"/>
+    </net>
+    <net code="5" name="EXT_5V" class="Default">
+      <node ref="TP1203" pin="1" pintype="passive"/>
+    </net>
+    <net code="6" name="EXT_BUS_5V" class="Default">
+      <node ref="TP1204" pin="1" pintype="passive"/>
+    </net>
+    <net code="7" name="EXT_VALID" class="Default">
+      <node ref="TP1218" pin="1" pintype="passive"/>
+    </net>
+    <net code="8" name="FB_3V3" class="Default">
+      <node ref="R801" pin="2" pintype="passive"/>
+      <node ref="R802" pin="1" pintype="passive"/>
+      <node ref="U801" pin="4" pinfunction="FB_4" pintype="input"/>
+    </net>
+    <net code="9" name="GND" class="Default">
+      <node ref="C801" pin="2" pintype="passive"/>
+      <node ref="C802" pin="2" pintype="passive"/>
+      <node ref="R802" pin="2" pintype="passive"/>
+      <node ref="TP1210" pin="1" pintype="passive"/>
+      <node ref="U801" pin="2" pinfunction="MODE_2" pintype="input"/>
+      <node ref="U801" pin="3" pinfunction="AGND_3" pintype="power_in"/>
+      <node ref="U801" pin="8" pinfunction="GND_8" pintype="power_in"/>
+    </net>
+    <net code="10" name="KEEPALIVE" class="Default">
+      <node ref="TP1215" pin="1" pintype="passive"/>
+    </net>
+    <net code="11" name="PG_3V3" class="Default">
+      <node ref="R803" pin="2" pintype="passive"/>
+      <node ref="TP1216" pin="1" pintype="passive"/>
+      <node ref="U801" pin="5" pinfunction="PG_5" pintype="open_collector"/>
+    </net>
+    <net code="12" name="PG_5V" class="Default">
+      <node ref="TP1217" pin="1" pintype="passive"/>
+    </net>
+    <net code="13" name="PWR_INT" class="Default">
+      <node ref="TP1219" pin="1" pintype="passive"/>
+    </net>
+    <net code="14" name="SCL" class="Default">
+      <node ref="TP1212" pin="1" pintype="passive"/>
+    </net>
+    <net code="15" name="SDA" class="Default">
+      <node ref="TP1211" pin="1" pintype="passive"/>
+    </net>
+    <net code="16" name="SENSE_N" class="Default">
+      <node ref="TP1214" pin="1" pintype="passive"/>
+    </net>
+    <net code="17" name="SENSE_P" class="Default">
+      <node ref="TP1213" pin="1" pintype="passive"/>
+    </net>
+    <net code="18" name="SW3_L1" class="Default">
+      <node ref="L801" pin="1" pintype="passive"/>
+      <node ref="U801" pin="9" pinfunction="L1_9" pintype="bidirectional"/>
+    </net>
+    <net code="19" name="SW3_L2" class="Default">
+      <node ref="L801" pin="2" pintype="passive"/>
+      <node ref="U801" pin="7" pinfunction="L2_7" pintype="bidirectional"/>
+    </net>
+    <net code="20" name="SYS_RAW" class="Default">
+      <node ref="C801" pin="1" pintype="passive"/>
+      <node ref="TP1207" pin="1" pintype="passive"/>
+      <node ref="U801" pin="1" pinfunction="EN_1" pintype="input"/>
+      <node ref="U801" pin="10" pinfunction="VIN_10" pintype="power_in"/>
+    </net>
+    <net code="21" name="USB_5V" class="Default">
+      <node ref="TP1202" pin="1" pintype="passive"/>
+    </net>
+    <net code="22" name="USB_VBUS" class="Default">
+      <node ref="TP1201" pin="1" pintype="passive"/>
+    </net>
+  </nets>
+</export>

@@ -10,3 +10,25 @@ The repository was dirty before this work. A machine-readable baseline is retain
 Design status, evidence and open items are recorded in the repository `docs/` PowerBoard documents and `FT02_PowerBoard_V1_Phase1_Review.md`. A parseable project or a clean ERC alone does not establish an electrically complete or releasable board.
 
 No PCB routing, Gerbers, drill files, placement files, assembly release or Rev A tag is authorized by the current review status.
+
+## Current Implementation
+
+One TPS63802 reference circuit,19 logical test points, and10 explicitly unimplemented child sheets. The partial BOM has no approved footprints and must not be used for procurement/assembly. No board file is created before the architecture gate passes.
+
+## Reproduce Checks
+
+Run from the repository root with Python3 and KiCad10.0.5 (`kicad-cli` on PATH):
+
+```sh
+python3 hardware/FT02_PowerBoard_V1/tools/build_reference.py
+kicad-cli sch export netlist --format kicadxml -o hardware/FT02_PowerBoard_V1/review/reference.net.xml hardware/FT02_PowerBoard_V1/FT02_PowerBoard_V1.kicad_sch
+kicad-cli sch export svg -o hardware/FT02_PowerBoard_V1/review/svg/ hardware/FT02_PowerBoard_V1/FT02_PowerBoard_V1.kicad_sch
+kicad-cli sch erc --format json --severity-all --exit-code-violations -o hardware/FT02_PowerBoard_V1/review/erc.json hardware/FT02_PowerBoard_V1/FT02_PowerBoard_V1.kicad_sch
+python3 hardware/FT02_PowerBoard_V1/tools/verify_reference.py
+python3 -B hardware/FT02_PowerBoard_V1/tools/test_verify_reference.py -v
+python3 hardware/FT02_PowerBoard_V1/tools/calculate_examples.py
+```
+
+Current ERC command intentionally exits5 because2 errors/15 warnings remain. Run subsequent checks separately, not behind shell success chaining. The topology check passes only the reference connections and explicitly reports the full design gate FAIL. KiCad's default ignored rules are disclosed in the report; no project-specific exclusions were added.
+
+`build_reference.py` regenerates all schematic/project/library files and the partial BOM. Do not rerun after manual schematic edits without reconciling those edits into the generator. `capture_baseline.py` is a one-time provenance tool, not a reset or backup restoration command.
