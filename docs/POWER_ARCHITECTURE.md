@@ -13,7 +13,7 @@ EXT_BUS_5V -> charge branch -> charger local LC/SYS -> charger BAT --+
 pack -> pack protection/fuse/reverse guard -> common gauge shunt ---+
 BAT_PROTECTED -----------------------------------------------------> UPS IN2
 
-UPS OUT -> SYS_RAW -> 3.3V buck-boost -> 3V3_MAIN -> filter -> 3V3_SENS
+UPS OUT -> UPS_RAW -> MASTER POWER GATE -> SYS_RAW -> 3.3V buck-boost -> 3V3_MAIN -> filter -> 3V3_SENS
                   -> 5.0V buck-boost -> 5V_MAIN
 
 USB protected branch -> optional pulse resistor/MOS -> GND
@@ -28,6 +28,7 @@ Precise ordering of battery protection, fuse, gauge taps and reverse-polarity el
 3. Both charger BAT and UPS battery input connect to the system side of the same shunt. No charging or system-load branch may leave the pack side.
 4. Source loss, selection and recovery must work with the ESP32 halted, resetting, asleep or absent.
 5. Total USB current includes system, charger, PD/protection bias and keep-alive. Charger branch current regulation is not source-wide regulation.
+6. Mechanical SYSTEM HARD OFF must interrupt upstream system power regardless of MCU, I2C or external insertion, while retaining the charger/gauge path. Sheet13 now wires this boundary; [full off-state review](SYSTEM_HARD_OFF_REVIEW.md) remains OPEN. Charging is still disabled pending battery safety clarification.
 
 ## The input-control gap
 

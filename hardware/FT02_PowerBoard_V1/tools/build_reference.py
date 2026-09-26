@@ -87,7 +87,7 @@ PINS = {
 PINS.update(power_stage_sheets.PINS)
 BOX_KINDS = set(power_stage_sheets.PINS)
 IC_KINDS = {"TPS63802", "BQ27220", "BQ25628E", "LT3120", "TCA9539PW",
-            "TPS2121", "TPS3808G01DBV", "SN74LVC1G08DBV", "TPS259474"}
+            "TPS2121", "TPS3808G01DBV", "SN74LVC1G08DBV", "TPS259474", "TPS22953"}
 
 
 def box_height(kind):
@@ -151,6 +151,7 @@ SHEETS = [
     ("10_SENSOR_POWER", "NOT IMPLEMENTED: load switch, ferrite and damping selection await actual module loads."),
     ("11_MAINBOARD_INTERFACE", "NOT IMPLEMENTED: connector and I2C control/readout unresolved. Do not allocate GPIO4 (audio PA)."),
     ("12_TEST_POINTS", "LOGICAL TEST-POINT INVENTORY: most nets have no implemented source. Footprints NOT assigned."),
+    ("13_MASTER_POWER_GATE", "SYSTEM HARD OFF: mechanical control, charger/gauge retained upstream."),
 ]
 SHEETS = [(name, power_stage_sheets.NOTES.get(name, note)) for name, note in SHEETS]
 

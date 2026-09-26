@@ -11,7 +11,7 @@ Status: OI-001 CLOSED; OI-002 PARTIALLY RESOLVED by the2026-09-25 supplied batte
 | OI-005 | Separate charger cannot measure total board input through its own ILIM | Source-wide limiter and hardware charge shedding; transient timing and reset-safe defaults | Architecture |
 | OI-006 | EXT_VALID requires more than unloaded voltage | Defined comparator, hysteresis, qualification, failed-source inhibit/retry, load test and battery-free behavior | Architecture |
 | OI-007 | BQ25628E charger-only application wired, not fully qualified | U401 LC/local SYS implemented; R407 DNP charge lock, R408 TS fault. Reverse/sleep/fault, defaults/watchdog and source-priority hardware still need proof | Charger freeze |
-| OI-008 | HUSB238A I2C cold-start 5V-only behavior unproved | Correct A-variant register documentation, ordering/fuse configuration and reset/attach traces | PD freeze |
+| OI-008 | HUSB238A GPIO fixed5V now prioritized; exact boot/source authorization unproved | VSET0ohm,HVDCP900kGND,GPIO strap definitions verified; exact order/fuses and safe current-capability/admission path still missing. GATE/FAULT not accepted as universal current authorization | PD freeze |
 | OI-009 | Input OVP must protect low-voltage downstream stages | Threshold tolerances, cutoff delay, overshoot, FET/TVS energy coordination | Protection |
 | OI-010 | Charger BAT/UPS IN2 now physically netlisted on R601 load side; complete all-current requirement unproved | Exact boundary-node checks pass; U601 BAT/C601 upstream bias/dynamic bypass and Kelvin input bias explicit. Guard, missing input sheets and internal reverse/fault states not proven. Remains OPEN | Fuel gauge |
 | OI-011 | NTC shared sensing cannot be assumed | Actual thermistor and reference circuits; independent sensing or validated noninterfering scheme | Battery safety |
@@ -21,14 +21,15 @@ Status: OI-001 CLOSED; OI-002 PARTIALLY RESOLVED by the2026-09-25 supplied batte
 | OI-015 | Passive values, footprints and assembly constraints not frozen | Datasheet-derived BOM, manufacturer footprints, tolerance/derating checks, DSBGA capability | Schematic release |
 | OI-016 | USB-C, board, holes, connectors and EMI spacing not frozen | Enclosure CAD and connector drawings | Mechanical/Phase 2 |
 | OI-017 | Lifecycle and two procurement channels not all checked | Dated evidence for exact orderable MPNs and qualified sources; no stock assumptions | Component release |
-| OI-018 | Complete electrical schematic/ERC closure outstanding | Full connected 12-sheet design and retained ERC; partial reference implementation is not completion | Phase 1 exit |
+| OI-018 | Complete electrical schematic/ERC closure outstanding | Full connected13-child-sheet design and retained ERC; partial reference implementation is not completion | Phase 1 exit |
 | OI-019 | No-brownout assertion unproved | Worst-case hold-up calculation, source/rail simulation and later instrumented tests | Design proof/sample validation |
 | OI-020 | Battery absent/depleted plus low-power source boot unresolved | Boot admission/load gating within authorized input; no negotiation/boot deadlock | Architecture |
 | OI-021 | CardKB2 supply rail records conflict | Older wiring says 3.3V; newer power-test plan says 5V; confirm actual module supply node | Power budget |
+| OI-022 | SYSTEM HARD OFF series gate wired but not fully qualified | Sheet13 U1301 mechanical default-OFF; prove residual/time on all rails, interface/debug injection, input/thermal/inrush margins and future autonomous charging with Core off | Phase1 exit |
 
 Proceed with independent research and parameterized calculations. Do not replace unresolved battery or source limits with guessed ratings, generate fabrication outputs, or declare Phase 1 passed.
 
-Current schematic checkpoint:117 symbols/333 physical or logical pins checked;37 regression tests;ERC4 errors/6 warnings. Sheets01/03/05 remain NOT IMPLEMENTED. Sheet02 TPS259474L candidate is wired but its OVP low corner can reject5.25V and transient protection is unqualified; OI-009 stays OPEN. Other sheets are wired references, not qualified pages. No additional issue is closed by this checkpoint.
+Current schematic checkpoint:127 symbols/363 physical or logical pins checked;49 regression tests across netlist(40),battery(4),load inventory(5);ERC4 errors/6 warnings. Sheet13 series gate is wired and exact boundaries checked. Sheets01/03/05 remain NOT IMPLEMENTED. Sheet02 TPS259474L still cannot guarantee5.25V acceptance; OI-009 remains OPEN. The load inventory is complete as a list, not a qualified current envelope. No additional issue is closed by this checkpoint; electrical implementation work remains, not only missing battery documentation.
 
 ## OI-002 Source-Level Decisions
 

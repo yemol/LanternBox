@@ -11,7 +11,8 @@ import hashlib
 import json
 from pathlib import Path
 import xml.etree.ElementTree as ET
-from stage_contract import MPNS, expectations, audit_current_boundary, candidate_operating_limits
+from load_budget import report as load_budget_report
+from stage_contract import MPNS, expectations, audit_current_boundary, audit_master_gate, candidate_operating_limits
 
 BASE = Path(__file__).resolve().parents[1]
 
@@ -88,7 +89,8 @@ def validate_netlist(path):
         if prop is None or prop.get("value") != mpn:
             raise ValueError(f"Unreviewed stage MPN: {ref}")
     for ref, pin, kind in [("U701", "1", "power_out"), ("U701", "8", "passive"),
-                           ("U901", "2", "power_out"), ("U901", "4", "passive")]:
+                           ("U901", "2", "power_out"), ("U901", "4", "passive"),
+                           ("U1301", "9", "power_out"), ("U1301", "10", "passive")]:
         record = root.find(f"./nets/net/node[@ref='{ref}'][@pin='{pin}']")
         if record is None or record.get("pintype") != kind:
             raise ValueError(f"Unreviewed parallel-output electrical model: {ref}:{pin}")
@@ -96,12 +98,12 @@ def validate_netlist(path):
         raise ValueError("Unreviewed shunt MPN")
     if any(part.findtext("footprint", "") for part in parts.values()):
         raise ValueError("Footprints require a separate review; logical Kelvin terminals are not pad assignments")
-    if len(root.findall("./design/sheet")) != 13:
-        raise ValueError("Expected root plus twelve child sheets")
+    if len(root.findall("./design/sheet")) != 14:
+        raise ValueError("Expected root plus thirteen child sheets")
     boundary = audit_current_boundary(actual)
     return {"status": "PASS_REFERENCE_ONLY", "pins_checked": len(expected),
-            "components_checked": len(parts), "sheets_parsed": 13,
-            "current_path_audit": boundary}
+            "components_checked": len(parts), "sheets_parsed": 14,
+            "current_path_audit": boundary, "master_gate_audit": audit_master_gate(actual)}
 
 
 def main():
@@ -124,6 +126,7 @@ def main():
         "wired_reference_sheets": manifest["wired_reference_sheets"],
         "qualified_sheets": manifest["qualified_sheets"],
         "candidate_operating_limits": candidate_operating_limits(),
+        "load_budget": load_budget_report(),
         "release_gate": "FAIL_INCOMPLETE_DESIGN",
         "evidence_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in evidence},
         "scope": "Pin topology and partial shunt boundary only. No complete pack path, circuit simulation, transient proof, footprints or hardware tests."}

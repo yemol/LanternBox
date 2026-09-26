@@ -4,6 +4,7 @@
     "06_FUEL_GAUGE",
     "08_3V3_BUCKBOOST",
     "12_TEST_POINTS",
+    "13_MASTER_POWER_GATE",
     "02_EXT_INPUT",
     "04_BATTERY_CHARGER",
     "07_UPS_POWER_MUX",
@@ -491,8 +492,8 @@
         "5": "GND",
         "4": "MUX_EXT_SENSE",
         "3": "GND",
-        "1": "SYS_RAW",
-        "8": "SYS_RAW",
+        "1": "UPS_RAW",
+        "8": "UPS_RAW",
         "9": "MUX_BAT_STATUS",
         "10": "MUX_ILIM",
         "11": "MUX_SS",
@@ -543,7 +544,7 @@
     "C703": {
       "kind": "C",
       "nets": {
-        "1": "SYS_RAW",
+        "1": "UPS_RAW",
         "2": "GND"
       },
       "value": "220uF 10V REF",
@@ -1403,6 +1404,126 @@
       "value": "TP_PWR_INT",
       "mpn": "",
       "sheet": "12_TEST_POINTS",
+      "dnp": false
+    },
+    "U1301": {
+      "kind": "TPS22953",
+      "nets": {
+        "1": "UPS_RAW",
+        "2": "UPS_RAW",
+        "3": "UPS_RAW",
+        "4": "MASTER_EN",
+        "5": "GND",
+        "11": "GND",
+        "9": "SYS_RAW",
+        "10": "SYS_RAW",
+        "8": "SYS_RAW",
+        "7": "GND",
+        "6": "MASTER_CT"
+      },
+      "value": "TPS22953DQCR CANDIDATE",
+      "mpn": "TPS22953DQCR",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "J1301": {
+      "kind": "CONN3",
+      "nets": {
+        "1": "PWR_SW_ON",
+        "2": "MASTER_EN",
+        "3": "GND"
+      },
+      "value": "PWR_SW: ON / COMMON / OFF",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "R1301": {
+      "kind": "R",
+      "nets": {
+        "1": "UPS_RAW",
+        "2": "PWR_SW_ON"
+      },
+      "value": "10k 1%",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "R1302": {
+      "kind": "R",
+      "nets": {
+        "1": "MASTER_EN",
+        "2": "GND"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "C1301": {
+      "kind": "C",
+      "nets": {
+        "1": "UPS_RAW",
+        "2": "GND"
+      },
+      "value": "1uF 10V",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "C1302": {
+      "kind": "C",
+      "nets": {
+        "1": "SYS_RAW",
+        "2": "GND"
+      },
+      "value": "1uF 10V",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "C1303": {
+      "kind": "C",
+      "nets": {
+        "1": "MASTER_CT",
+        "2": "GND"
+      },
+      "value": "10nF 50V REF",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "R1303": {
+      "kind": "R",
+      "nets": {
+        "1": "SYS_RAW",
+        "2": "GND"
+      },
+      "value": "4.7k 1%",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "R1304": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "GND"
+      },
+      "value": "4.7k 1%",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "R1305": {
+      "kind": "R",
+      "nets": {
+        "1": "5V_MAIN",
+        "2": "GND"
+      },
+      "value": "4.7k 1%",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
       "dnp": false
     }
   }

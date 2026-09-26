@@ -1,5 +1,9 @@
 # USB / Power Bank Policy - Preliminary
 
+Latest user direction: prioritize **GPIO hardware fixed5V**, not I2C-dependent boot. Candidate straps from HUSB238A Rev0.1 tables6-9: ADDR/ORIENT open at initialization; SNK_VSET0ohm toGND; EN_HVDCP900k toGND for BC1.2-only detection. SNK_ISET0ohm requests1.25A, its minimum setting, NOT a100mA/default-USB safety limit. Exact ordering/fuse behavior remains OPEN; these are verified strap definitions, not implemented sheet01.
+
+Critical source-policy blocker: GATE is a power-path control, while FAULT defaults low and is Hi-Z during initialization with configurable function/polarity. Neither has been proven a universal negotiated-current authorization signal across PD/default-TypeC/SDP/CDP/DCP. Do not drive a fixed1.25/2/3A system limiter from these pins and claim source compliance. Need an evidence-backed hardware capability/admission path or a differently qualified PD implementation. OI-008/009/020 remain OPEN; no invented A-variant register map or generic HUSB238 register substitution.
+
 HUSB238A has official legacy SDP/CDP/DCP detection and I2C mode address selection. It shares SDA/SCL with analog voltage/current straps in GPIO mode. The inspected document also describes fuse-dependent voltage selection. Therefore a GPIO-mode 5V resistor example must not be copied onto the I2C bus. Verify the correct part's boot/reset/fuse behavior before claiming 5V-only operation. Disable HVDCP for this 5V-only design and whitelist only 5V fixed PDO requests. [HUSB238A datasheet, tables 6-9 and legacy detection](https://www.hynetek.com/uploadfiles/site/219/news/24322c00-2276-4d74-98db-c74432318210.pdf)
 
 USB data is not exposed to MainBoard, but D+/D- may still be needed locally for legacy charging detection. USB-C must retain correct CC circuitry, dead-battery attach behavior, connector ESD protection and hardware reverse isolation. Input OVP is required independently of the requested PD voltage.

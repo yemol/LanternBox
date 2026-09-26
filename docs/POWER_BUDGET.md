@@ -2,6 +2,8 @@
 
 Load identities and several policies are known from the actual repository, but measured currents, concurrency, battery limits and efficiency corners remain incomplete. These are calculation inputs and bounds, not approved FT02 ratings.
 
+The per-load inventory is now [LOAD_BUDGET](LOAD_BUDGET.md), with19 entries and machine-readable `review/load_budget.json`. Required3V3/5V continuous/transient and whole-board concurrent bounds remain UNKNOWN, not zero. Early3V3 1.0/1.5A and5V 1.2/1.8A estimates are not frozen requirements. See [SYSTEM HARD OFF review](SYSTEM_HARD_OFF_REVIEW.md) for gate drop/thermal examples,12.96mW nominal bleeder cost and the roughly4s nominal5V discharge counterexample. TPS22953 and TPS2121 remain UNFROZEN.
+
 ## Adopted Battery Limits
 
 [Current pack source](BATTERY_SPEC.md):955565/955465,5000mAh,3.8V nominal(3.7V compatible); standard charge2.5A, maximum charge/discharge5A. These supplied ratings replace the former UNKNOWN current ceiling. Charge voltage, charge-temperature/NTC, protection thresholds and minimum loaded pack voltage remain OPEN. Discharge cutoff2.75V and discharge temperature-20C to+60C do not resolve those items.

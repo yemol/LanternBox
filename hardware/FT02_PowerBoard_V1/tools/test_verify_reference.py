@@ -20,8 +20,8 @@ class ReferenceTests(unittest.TestCase):
 
     def test_actual_export(self):
         report = validate_netlist(BASE / "review/reference.net.xml")
-        self.assertEqual(report["pins_checked"], 333)
-        self.assertEqual(report["components_checked"], 117)
+        self.assertEqual(report["pins_checked"], 363)
+        self.assertEqual(report["components_checked"], 127)
         self.assertEqual(report["current_path_audit"]["status"], "PARTIAL_BOUNDARY_ONLY_OI_010_OPEN")
 
     def move_pin(self, root, ref, pin, source, destination):
@@ -67,7 +67,28 @@ class ReferenceTests(unittest.TestCase):
         self.check_mutation(lambda r: r.find("./components/comp[@ref='U702']/property[@name='MPN']").set("value", "TPS3808G01DRVR"))
 
     def test_power_output_not_hidden_as_passive(self):
-        self.check_mutation(lambda r: r.find("./nets/net[@name='SYS_RAW']/node[@ref='U701'][@pin='1']").set("pintype", "passive"))
+        self.check_mutation(lambda r: r.find("./nets/net[@name='UPS_RAW']/node[@ref='U701'][@pin='1']").set("pintype", "passive"))
+
+    def test_master_gate_bypassed(self):
+        self.check_mutation(lambda r: r.find("./nets/net[@name='UPS_RAW']").set("name", "SYS_RAW"))
+
+    def test_master_gate_wrong_non_reverse_blocking_variant(self):
+        self.check_mutation(lambda r: r.find("./components/comp[@ref='U1301']/property[@name='MPN']").set("value", "TPS22954DQCR"))
+
+    def test_master_default_pulldown_removed(self):
+        self.check_mutation(lambda r: ET.SubElement(r.find("./components/comp[@ref='R1302']"), "property", name="dnp", value=""))
+
+    def test_system_regulator_moved_upstream(self):
+        self.check_mutation(lambda r: self.move_pin(r, "U801", "10", "SYS_RAW", "UPS_RAW"))
+
+    def test_charger_moved_downstream_of_switch(self):
+        self.check_mutation(lambda r: self.move_pin(r, "U401", "18", "EXT_BUS_5V", "SYS_RAW"))
+
+    def test_mcu_allowed_to_override_switch(self):
+        self.check_mutation(lambda r: self.move_pin(r, "U1101", "10", "CHG_REQUEST", "MASTER_EN"))
+
+    def test_master_ct_voltage_rating(self):
+        self.check_mutation(lambda r: r.find("./components/comp[@ref='C1303']/value").__setattr__("text", "10nF 10V"))
 
     def test_unused_io_pulldown_removed(self):
         def edit(root):
@@ -130,6 +151,11 @@ class ReferenceTests(unittest.TestCase):
         low, high = limits["system_uvlo_static_bound_V"]
         self.assertTrue(3.20 < low < 3.23 < 3.38 < high < 3.40)
         self.assertGreater(limits["stress_example_not_requirement"]["raw_current_at_static_uvlo_low_A"], 5)
+        gate = limits["master_gate_candidate"]
+        self.assertFalse(gate["internal_output_discharge"])
+        self.assertFalse(gate["off_all_rails_zero_proven"])
+        self.assertIsNone(gate["board_required_current_A"])
+        self.assertLess(gate["off_EN_open_upper_V_at_100nA_bias"], gate["off_EN_falling_threshold_min_V"])
 
     def test_swapped_sense_inputs(self):
         def edit(root):

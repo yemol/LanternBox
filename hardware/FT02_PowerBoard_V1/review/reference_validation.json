@@ -1,10 +1,10 @@
 {
-  "checked_utc": "2026-09-26T03:19:52.728592+00:00",
+  "checked_utc": "2026-09-26T08:32:43.785748+00:00",
   "topology": {
     "status": "PASS_REFERENCE_ONLY",
-    "pins_checked": 333,
-    "components_checked": 117,
-    "sheets_parsed": 13,
+    "pins_checked": 363,
+    "components_checked": 127,
+    "sheets_parsed": 14,
     "current_path_audit": {
       "status": "PARTIAL_BOUNDARY_ONLY_OI_010_OPEN",
       "boundary_nodes": {
@@ -49,6 +49,63 @@
         "IC internal leakage/reverse paths in all operating and fault states",
         "physical four-terminal footprint and trace connections"
       ]
+    },
+    "master_gate_audit": {
+      "status": "WIRED_BOUNDARY_ONLY_HARD_OFF_NOT_QUALIFIED",
+      "series_path": "U701 -> UPS_RAW -> U1301 -> SYS_RAW -> U801/U901 -> system rails",
+      "switch": "maintained SPDT: J1301 common2 to1 ON, to3 OFF; open defaults OFF",
+      "boundary_nodes": {
+        "UPS_RAW": [
+          "C1301:1",
+          "C703:1",
+          "R1301:1",
+          "U1301:1",
+          "U1301:2",
+          "U1301:3",
+          "U701:1",
+          "U701:8"
+        ],
+        "MASTER_EN": [
+          "J1301:2",
+          "R1302:1",
+          "U1301:4"
+        ],
+        "PWR_SW_ON": [
+          "J1301:1",
+          "R1301:2"
+        ],
+        "SYS_RAW": [
+          "C1302:1",
+          "C705:1",
+          "C801:1",
+          "C901:1",
+          "R1303:1",
+          "R705:1",
+          "R707:1",
+          "TP1207:1",
+          "U1301:10",
+          "U1301:8",
+          "U1301:9",
+          "U702:3",
+          "U702:6",
+          "U801:10",
+          "U901:17",
+          "U901:19",
+          "U901:20",
+          "U901:21"
+        ]
+      },
+      "retained": [
+        "charger input EXT_BUS_5V",
+        "charger BAT_PROTECTED",
+        "gauge BAT_GUARDED"
+      ],
+      "charging": "DISABLED by R407 DNP and TS lock; future OFF-state charging not qualified",
+      "not_proven": [
+        "all analog off-state leakage and discharge times",
+        "MainBoard/debug/interface injection and on-state reverse current",
+        "switch contact bounce/cable ESD, startup and final load/thermal margins"
+      ]
     }
   },
   "erc": {
@@ -86,6 +143,7 @@
     "06_FUEL_GAUGE",
     "08_3V3_BUCKBOOST",
     "12_TEST_POINTS",
+    "13_MASTER_POWER_GATE",
     "02_EXT_INPUT",
     "04_BATTERY_CHARGER",
     "07_UPS_POWER_MUX",
@@ -124,6 +182,47 @@
         "weak-source rebound inhibit and source-wide charge shedding"
       ]
     },
+    "master_gate_candidate": {
+      "decision": "UNFROZEN_LOAD_AND_OFF_STATE_QUALIFICATION_OPEN",
+      "bias_operating_V": [
+        2.5,
+        5.7
+      ],
+      "input_operating_V": "0.7 <= VIN <= VBIAS; IN and BIAS tied UPS_RAW",
+      "datasheet_continuous_switch_ceiling_A_at_70C": 5,
+      "board_required_current_A": null,
+      "ron_max_ohm_at_2V5_bias_input_105C": 0.027,
+      "ron_max_ohm_at_3V3_bias_input_105C": 0.025,
+      "ron_max_ohm_at_5V_bias_input_105C": 0.024,
+      "thermal_example_not_rating": {
+        "assumed_current_A": 3,
+        "selected_ron_ohm": 0.027,
+        "loss_W": 0.243,
+        "drop_V": 0.081,
+        "datasheet_DQC_theta_JA_C_per_W": 65.2,
+        "illustrative_rise_C": 15.8436,
+        "warning": "2.5V table corner/example only; not enclosure thermal proof or an interpolated guarantee"
+      },
+      "off_EN_open_upper_V_at_100nA_bias": 0.0101,
+      "off_EN_falling_threshold_min_V": 0.56,
+      "reverse_blocking": "Disabled only;10us typical response, no maximum;11uA max at105C for OUT5V/IN0V/EN0V",
+      "internal_output_discharge": false,
+      "bleeder_nominal_power_W_at_raw5_3V3_5V": 0.01295531914893617,
+      "five_volt_discharge_example_not_guarantee": {
+        "assumed_C_uF": 220,
+        "R_ohm": 4700,
+        "start_V": 5,
+        "end_V": 0.1,
+        "zero_injection_time_s": 4.045031787612703,
+        "warning": "About4s, not instant OFF; excludes tolerance, extra capacitance and all injection"
+      },
+      "off_all_rails_zero_proven": false,
+      "remaining": [
+        "full-interval leakage, I2C/debug injection and rail decay specification",
+        "mechanical contacts/cable ESD and bounce",
+        "source-startup, CT ramp, effective ceramic capacitance and current headroom"
+      ]
+    },
     "required_continuous_board_power_W": null,
     "required_peak_board_power_W": null,
     "required_peak_duration_ms": null,
@@ -157,6 +256,302 @@
       "conclusion": "1.36V droop before ESR/derating; nominal capacitor does NOT prove no brownout"
     }
   },
+  "load_budget": {
+    "status": "OPEN_NOT_A_BOARD_RATING",
+    "loads": [
+      {
+        "name": "ESP32-S3 Main Core",
+        "rail": "3V3_MAIN",
+        "typical": "Operating mode dependent; no board typical measured",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": 0.34,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "Espressif ESP32-S3 v2.2 table5-7:340mA peak at3.3V/25C,802.11b21dBm,100%TX duty; not a module/temperature maximum",
+        "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+      },
+      {
+        "name": "EPD GDEQ0426T82 HAT",
+        "rail": null,
+        "typical": "Earlier official-source record:<35mW typical refresh, not startup bound",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "hardware/FT-02/docs/FT02_hardware_research_new_chat_brief_v1_1.md; Waveshare4.26 HAT, rail/temperature/waveform need confirmation",
+        "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+      },
+      {
+        "name": "Audio Codec ES8311",
+        "rail": null,
+        "typical": "Manufacturer feature14mW playback+record; supply conditions not a board-current guarantee",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "Everest ES8311 Rev7.0 via Espressif Audio_ES8311.pdf; WeAct carrier supply/losses OPEN",
+        "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+      },
+      {
+        "name": "Audio PA NS4150B",
+        "rail": null,
+        "typical": "UNKNOWN; speaker impedance, level/clipping and carrier rail missing",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "FT02_AUDIO_ES8311_PA_WIRING.md: GPIO4 controls shutdown; no validated electrical current ceiling",
+        "concurrency": "Current firmware playback-only policy is NOT hardware current admission; include fault/default-on case"
+      },
+      {
+        "name": "GNSS MAX-M10S variant",
+        "rail": null,
+        "typical": "At3.0V:9.5mA VCC+2.3mA VIO tracking;11.5+2.3mA acquisition",
+        "continuous_max_A": null,
+        "startup_reference_A": 0.1,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "u-blox UBX-20035208 R08 table15;100mA startup supply recommendation; actual carrier/antenna excluded",
+        "concurrency": "Alternative to F10S, not additive; other peripherals may overlap"
+      },
+      {
+        "name": "GNSS MAX-F10S variant",
+        "rail": null,
+        "typical": "At3.0V:16mA VCC tracking,21mA acquisition,3mA VIO",
+        "continuous_max_A": null,
+        "startup_reference_A": 0.1,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "MAX-F10S UBXDOC-963802114-12732; carrier and antenna overhead OPEN",
+        "concurrency": "Alternative to M10S, not additive; other peripherals may overlap"
+      },
+      {
+        "name": "LoRa SX1262 TX",
+        "rail": "3V3_MAIN",
+        "typical": "UNKNOWN for selected RF front end,frequency and power setting",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "Repository prototype is Heltec WiFi LoRa32V3; bare SX1262 headline is not whole carrier current",
+        "concurrency": "Same radio TX/RX mutually exclusive; Core,SD,audio,EPD overlap not excluded"
+      },
+      {
+        "name": "LoRa SX1262 RX",
+        "rail": "3V3_MAIN",
+        "typical": "Semtech headline4.6mA bare IC, mode dependent; not module maximum",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "Semtech SX1262 official product page; TCXO/RF switch/carrier overhead excluded",
+        "concurrency": "Same radio TX/RX mutually exclusive; other loads may overlap"
+      },
+      {
+        "name": "Sensor BMI323/BMM350 SEN0695",
+        "rail": "3V3_SENS",
+        "typical": "UNKNOWN module current at selected ODR/modes",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "DFRobot SEN0695 official schematic includes local1.8V regulation; do not add bare IC consumption twice",
+        "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+      },
+      {
+        "name": "CardKB2",
+        "rail": null,
+        "typical": "UNKNOWN; A2 POWER_TEST has no measured current",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "Official CardKB2 manual; repo3.3V/5V supply conflict OI-021 remains OPEN",
+        "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+      },
+      {
+        "name": "SD card",
+        "rail": "3V3_MAIN",
+        "typical": "UNKNOWN; exact card manufacturer/model not frozen",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "FT02_hardware_pin_map_v1_1.md:SDMMC1-bit5MHz; bus rate does not bound flash program pulses",
+        "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+      },
+      {
+        "name": "Fuel Gauge BQ27220",
+        "rail": "BAT_GUARDED",
+        "typical": "50uA NORMAL /9uA SLEEP typical",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "TI BQ27220 RevA section6.5; upstream self-bias exception, not system rail consumption",
+        "concurrency": "Always retained including HARD OFF; mode/communication duty affect current"
+      },
+      {
+        "name": "Status circuits and pullups",
+        "rail": "3V3_MAIN",
+        "typical": "UNKNOWN complete active-state sum",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "U1101 TCA9539,U902,and populated PG/IRQ dividers in exported netlist; bus pullups DNP; do not count IC IQ alone",
+        "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+      },
+      {
+        "name": "Other MainBoard peripherals",
+        "rail": null,
+        "typical": "UNKNOWN exact Core module,flash/PSRAM,USB/debug and indicator implementation",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "Single-Core target differs from prototype; inventory and externally powered debug isolation OPEN",
+        "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+      },
+      {
+        "name": "Input/charger/protection/UPS housekeeping",
+        "rail": null,
+        "typical": "UNKNOWN complete sum; multiple upstream supply nodes",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "U201/U401/U701 plus absent01/03/05; include charger battery leakage and all protection bias",
+        "concurrency": "Retained during HARD OFF; report external/battery draw separately"
+      },
+      {
+        "name": "Master switch bias/control",
+        "rail": "UPS_RAW",
+        "typical": "U1301 at5V:34uA enabled,5uA shutdown typical; control divider adds5/110k A when ON",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "TPS22953 RevD sections7.5-7.8; 5A headline is NOT board current rating",
+        "concurrency": "Upstream of gate but downstream of shunt in battery mode"
+      },
+      {
+        "name": "Master raw bleeder R1303",
+        "rail": "SYS_RAW",
+        "typical": "5V/4.7k=1.064mA nominal at5V",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "Actual R1303; final rail tolerances not frozen",
+        "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+      },
+      {
+        "name": "3V3 bleeder R1304",
+        "rail": "3V3_MAIN",
+        "typical": "3.3V/4.7k=0.702mA nominal",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "Actual R1304; sensor branch discharges through ferrite",
+        "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+      },
+      {
+        "name": "5V bleeder R1305",
+        "rail": "5V_MAIN",
+        "typical": "5V/4.7k=1.064mA nominal",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "Actual R1305; low-power tradeoff tracked, not decorative load",
+        "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+      }
+    ],
+    "rails": {
+      "3V3_MAIN": {
+        "continuous_worst_A": null,
+        "transient_worst_A": null,
+        "unresolved_contributors": [
+          "ESP32-S3 Main Core",
+          "EPD GDEQ0426T82 HAT",
+          "Audio Codec ES8311",
+          "Audio PA NS4150B",
+          "GNSS MAX-M10S variant",
+          "GNSS MAX-F10S variant",
+          "LoRa SX1262 TX",
+          "LoRa SX1262 RX",
+          "Sensor BMI323/BMM350 SEN0695",
+          "CardKB2",
+          "SD card",
+          "Status circuits and pullups",
+          "Other MainBoard peripherals",
+          "Input/charger/protection/UPS housekeeping",
+          "3V3 bleeder R1304"
+        ]
+      },
+      "5V_MAIN": {
+        "continuous_worst_A": null,
+        "transient_worst_A": null,
+        "unresolved_contributors": [
+          "EPD GDEQ0426T82 HAT",
+          "Audio Codec ES8311",
+          "Audio PA NS4150B",
+          "GNSS MAX-M10S variant",
+          "GNSS MAX-F10S variant",
+          "CardKB2",
+          "Other MainBoard peripherals",
+          "Input/charger/protection/UPS housekeeping",
+          "5V bleeder R1305"
+        ]
+      }
+    },
+    "whole_board_concurrent_continuous_W": null,
+    "whole_board_concurrent_peak_W": null,
+    "whole_board_peak_duration_ms": null,
+    "variant_policy": "Single-Core target; M10S/F10S alternatives and same-radio TX/RX are not summed together",
+    "deprecated_estimates": "3V3 1.0A/1.5A and5V 1.2A/1.8A are not adopted bounds",
+    "release_gate": "FAIL_LOAD_ENVELOPE_UNKNOWN"
+  },
   "release_gate": "FAIL_INCOMPLETE_DESIGN",
   "evidence_sha256": {
     "01_USB_C_PD.kicad_sch": "54f39bbddcc6edba0d398da5a60f408a9b3cf4199aa61f58770ba4f5ad0e2f63",
@@ -165,26 +560,29 @@
     "04_BATTERY_CHARGER.kicad_sch": "d148d9525c9c13b80f25238a0de3ed59f39433d08edcd7344a784161c21d6532",
     "05_BATTERY_PROTECTION.kicad_sch": "55a1e24133d7b8281e0d956b59122cde217e1b5d60ac637c13a9fca1cd21620d",
     "06_FUEL_GAUGE.kicad_sch": "c82ee4348c95534019c9c5da7133fcec07c2384fee3887e4646e5e2b746d65cc",
-    "07_UPS_POWER_MUX.kicad_sch": "20d7b6cfb3d87d5711370dd7d7373ca5b275cafac5c2a0d0becb06ed07afff72",
+    "07_UPS_POWER_MUX.kicad_sch": "6cf44b2878edba7a50909c57de4946efcce9da6876922ba46d7125fdd844dc4b",
     "08_3V3_BUCKBOOST.kicad_sch": "e6cec11c0feb469937352a5fd3df312163c0f82df377790aef1e7a79224eba2e",
     "09_5V_BUCKBOOST.kicad_sch": "b0a1fabae8e16d0f671511a50d4f19316e7b1d27671ec456b470703a74797585",
     "10_SENSOR_POWER.kicad_sch": "cd4372ae7721b620a0bded30b9b1b5689d8163a54bf93b9f1e73320a37020cb6",
     "11_MAINBOARD_INTERFACE.kicad_sch": "db665024869e2458b46e58d771353d60f66942612492ccc7a70b6ca33a55d1b7",
     "12_TEST_POINTS.kicad_sch": "a108ad60652223a8cfa1e81bb0f4ad126133c85f6254d1feb33208851c117b93",
-    "FT02_PowerBoard_V1.kicad_sch": "1a498dffc1caa0c95a4c91bf0297e36251e9c019941f0481585161f47e1455bc",
-    "reference.net.xml": "5d0576144d39806c96ef9c9935edc1705c4e8fdf827dd6564aebe5301169211c",
-    "erc.json": "068f4e703f517789406844d60eee49dde27a21a97fa646da3744cfcffe4ee695",
+    "13_MASTER_POWER_GATE.kicad_sch": "1f9f2485b2e30b40a0955034b11ad495ca2c31ccf79b53b23358d5ef7c8c95af",
+    "FT02_PowerBoard_V1.kicad_sch": "01e39275d59e890db8a56d7af501b4a1662b44eb09a0a6ce57321ad1e4263320",
+    "reference.net.xml": "9ca5204ca2371a2174342caf88989c653a68677b4bb6ec9d888542cf048156a3",
+    "erc.json": "f87083d3c191931368096e432d6d5f4ac93a9cab42bfd22ae81282aa3bbe19a8",
     "FT02_PowerBoard_V1.kicad_pro": "55426efea6ad0f29e47102254575d4242a5f6a712ef8a948395d7ea380e422d9",
-    "FT02_Reference.kicad_sym": "bc6b32d0fa3788cb6af6cd909e23cb0a84ceb911854cdf4a4ddf7a86fc4503df",
-    "implementation_manifest.json": "2994faaba2d0b3d70354bddc7a76dc9aaa9a28eefa75f5b7aa8ff6e5dbf71db1",
-    "build_reference.py": "467227effc57d4ae7506ac53ab67a2bc491b67b2176d72b61ddea630e71992b9",
+    "FT02_Reference.kicad_sym": "6dc31042e19a59319b8bcc6409dfc4e07c20861e1fc66f788f133de33d05770a",
+    "implementation_manifest.json": "763d021c23c47e771cc63295724f1d84b35760e7c167f14b649872caca333796",
+    "build_reference.py": "745a18fc5e5a3ff2402a27a8eae5a19d4396af67f62cf755df6986a51d4fe2db",
     "calculate_examples.py": "3b67121133e3c3dabc4c3deb187d2746aef29daaac9ddcda6c1521a9a07ab753",
     "capture_baseline.py": "cdce19131fdc2fa376dcc18c1bd2e7ef8efd0f0b78ba5c723f281009155484e7",
-    "power_stage_sheets.py": "4ffea19574007e2ef9311ac189e9bcc2fe25d3554b2735f4544d848a1bebfacb",
-    "stage_contract.py": "9e6344c5432c3d2769d7e681c03330a416e90eeeff696b3f2e383e56c53205ce",
+    "load_budget.py": "37c69931ee48097ff2aed896acf5cb2710a07de3ef85afca8f91bba7a635ba1d",
+    "power_stage_sheets.py": "957fcb8289ddb2be47b4ced6e058a14da0eec691331cf8ac5a91ac16d7024e95",
+    "stage_contract.py": "b80c7c164dd54b542ac395462b6c5115e37d541a4ce4599abd55af05a2765184",
     "test_battery_contract.py": "c882e51670aaacb872634094e59ca351a83a5b76c2adc08c2fb174d60982ebd0",
-    "test_verify_reference.py": "3c4c551b541a4ddcf9f0d7007c19b6f7fceee168f6d8730508997f39b68596ba",
-    "verify_reference.py": "fcd8a0097d62ce2976175faa2ec19f43f18ac5093b752c649e993da411945578"
+    "test_load_budget.py": "6b226e291597903c67c58ccb8680becc71393252755ea3c007801bb44546eb0c",
+    "test_verify_reference.py": "c7443bada2c3207dbc1520b3baa5a44ee3f1e0c8ee6bc5eda48e729907be4927",
+    "verify_reference.py": "249947ead3a7b6c3719d7e7887e6105ec7239ceaa6a9f38f5a3443d6d1926b3f"
   },
   "scope": "Pin topology and partial shunt boundary only. No complete pack path, circuit simulation, transient proof, footprints or hardware tests."
 }

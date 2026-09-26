@@ -15,7 +15,7 @@ IC_NETS = {
              3: "CHG_PG_N", 10: "CHG_STAT_N", 11: "CHG_INT_N", 12: "SDA", 13: "SCL"},
     "Q401": {1: "CHG_REQUEST", 2: "GND", 3: "CHG_CE_DRAIN"},
     "U701": {7: "EXT_BUS_5V", 2: "BAT_PROTECTED", 6: "MUX_EXT_SENSE", 5: "GND",
-             4: "MUX_EXT_SENSE", 3: "GND", 1: "SYS_RAW", 8: "SYS_RAW",
+             4: "MUX_EXT_SENSE", 3: "GND", 1: "UPS_RAW", 8: "UPS_RAW",
              9: "MUX_BAT_STATUS", 10: "MUX_ILIM", 11: "MUX_SS", 12: "GND"},
     "U702": {6: "SYS_RAW", 5: "SYS_UV_SENSE", 3: "SYS_RAW", 1: "RAIL_PERMIT", 4: None, 2: "GND"},
     "U901": {1: "REG5_BST3", 2: "5V_MAIN", 3: "GND", 4: "5V_MAIN", 5: "5V_MAIN",
@@ -34,6 +34,9 @@ IC_NETS = {
     "J1101": {1: "GND", 2: "GND", 3: "3V3_MAIN", 4: "3V3_MAIN", 5: "5V_MAIN", 6: "5V_MAIN",
               7: "SDA", 8: "SCL", 9: "PWR_INT", 10: "5V_EN", 11: "3V3_SENS", 12: "GND"},
     "J1001": {1: "3V3_SENS", 2: "GND"},
+    "U1301": {1: "UPS_RAW", 2: "UPS_RAW", 3: "UPS_RAW", 4: "MASTER_EN", 5: "GND",
+              6: "MASTER_CT", 7: "GND", 8: "SYS_RAW", 9: "SYS_RAW", 10: "SYS_RAW", 11: "GND"},
+    "J1301": {1: "PWR_SW_ON", 2: "MASTER_EN", 3: "GND"},
 }
 
 TWO_TERMINAL = [
@@ -64,7 +67,7 @@ TWO_TERMINAL = [
     ("C408", "100nF 10V", "CHG_TS_BIAS", "GND"),
     ("C701", "1uF 10V", "EXT_BUS_5V", "GND"),
     ("C702", "1uF 10V", "BAT_PROTECTED", "GND"),
-    ("C703", "220uF 10V REF", "SYS_RAW", "GND"),
+    ("C703", "220uF 10V REF", "UPS_RAW", "GND"),
     ("R701", "30.9k 0.1%", "EXT_BUS_5V", "MUX_EXT_SENSE"),
     ("R702", "10k 0.1%", "MUX_EXT_SENSE", "GND"),
     ("R703", "29.8k 1% REF", "MUX_ILIM", "GND"),
@@ -107,11 +110,50 @@ TWO_TERMINAL = [
     ("R1108", "100k 1%", "IO_UNUSED15", "GND"),
     ("R1109", "100k 1%", "IO_UNUSED16", "GND"),
     ("R1110", "100k 1%", "IO_UNUSED17", "GND"),
+    ("R1301", "10k 1%", "UPS_RAW", "PWR_SW_ON"),
+    ("R1302", "100k 1%", "MASTER_EN", "GND"),
+    ("C1301", "1uF 10V", "UPS_RAW", "GND"),
+    ("C1302", "1uF 10V", "SYS_RAW", "GND"),
+    ("C1303", "10nF 50V REF", "MASTER_CT", "GND"),
+    ("R1303", "4.7k 1%", "SYS_RAW", "GND"),
+    ("R1304", "4.7k 1%", "3V3_MAIN", "GND"),
+    ("R1305", "4.7k 1%", "5V_MAIN", "GND"),
 ]
 
 MPNS = {"U201": "TPS259474LRPWR", "U401": "BQ25628ERYKR", "Q401": "2N7002,215", "U701": "TPS2121RUXR",
         "U702": "TPS3808G01DBVR", "U901": "LT3120IUFDM#PBF", "U902": "SN74LVC1G08DBVR",
-        "U1101": "TCA9539PWR", "FB1001": "BLM21PG221SN1D"}
+        "U1101": "TCA9539PWR", "FB1001": "BLM21PG221SN1D", "U1301": "TPS22953DQCR"}
+
+
+def audit_master_gate(actual):
+    """Exact live-terminal boundaries, not an analog/off-state certification."""
+    boundaries = {
+        "UPS_RAW": {("U701", "1"), ("U701", "8"), ("C703", "1"),
+                    ("U1301", "1"), ("U1301", "2"), ("U1301", "3"),
+                    ("C1301", "1"), ("R1301", "1")},
+        "MASTER_EN": {("U1301", "4"), ("J1301", "2"), ("R1302", "1")},
+        "PWR_SW_ON": {("R1301", "2"), ("J1301", "1")},
+        "SYS_RAW": {("U1301", "8"), ("U1301", "9"), ("U1301", "10"), ("C1302", "1"),
+                    ("R1303", "1"), ("U702", "6"), ("U702", "3"), ("C705", "1"),
+                    ("R705", "1"), ("R707", "1"), ("U801", "10"), ("C801", "1"),
+                    ("U901", "17"), ("U901", "19"), ("U901", "20"), ("U901", "21"),
+                    ("C901", "1"), ("TP1207", "1")},
+    }
+    for net, expected in boundaries.items():
+        found = {pin for pin, name in actual.items() if name == net}
+        if found != expected:
+            raise ValueError(f"Unreviewed master-gate boundary at {net}: {found ^ expected}")
+    return {
+        "status": "WIRED_BOUNDARY_ONLY_HARD_OFF_NOT_QUALIFIED",
+        "series_path": "U701 -> UPS_RAW -> U1301 -> SYS_RAW -> U801/U901 -> system rails",
+        "switch": "maintained SPDT: J1301 common2 to1 ON, to3 OFF; open defaults OFF",
+        "boundary_nodes": {n: sorted(':'.join(p) for p in pins) for n, pins in boundaries.items()},
+        "retained": ["charger input EXT_BUS_5V", "charger BAT_PROTECTED", "gauge BAT_GUARDED"],
+        "charging": "DISABLED by R407 DNP and TS lock; future OFF-state charging not qualified",
+        "not_proven": ["all analog off-state leakage and discharge times",
+                       "MainBoard/debug/interface injection and on-state reverse current",
+                       "switch contact bounce/cable ESD, startup and final load/thermal margins"],
+    }
 
 
 def candidate_operating_limits():
@@ -122,6 +164,7 @@ def candidate_operating_limits():
     return {
         "decision": "TPS2121_UNFROZEN_NOT_A_BOARD_RATING",
         "ext_guard_candidate": ext_guard_limits(),
+        "master_gate_candidate": master_gate_limits(),
         "required_continuous_board_power_W": None,
         "required_peak_board_power_W": None,
         "required_peak_duration_ms": None,
@@ -164,6 +207,41 @@ def ext_guard_limits():
                        "hotplug overshoot/inductive negative excursion/TVS energy",
                        "load-current headroom, inrush and thermal limits",
                        "weak-source rebound inhibit and source-wide charge shedding"],
+    }
+
+
+def master_gate_limits():
+    # Selected datasheet corners, NOT interpolation or a full-board leakage bound.
+    return {
+        "decision": "UNFROZEN_LOAD_AND_OFF_STATE_QUALIFICATION_OPEN",
+        "bias_operating_V": [2.5, 5.7],
+        "input_operating_V": "0.7 <= VIN <= VBIAS; IN and BIAS tied UPS_RAW",
+        "datasheet_continuous_switch_ceiling_A_at_70C": 5,
+        "board_required_current_A": None,
+        "ron_max_ohm_at_2V5_bias_input_105C": 0.027,
+        "ron_max_ohm_at_3V3_bias_input_105C": 0.025,
+        "ron_max_ohm_at_5V_bias_input_105C": 0.024,
+        "thermal_example_not_rating": {
+            "assumed_current_A": 3, "selected_ron_ohm": 0.027,
+            "loss_W": 3**2*0.027, "drop_V": 3*0.027,
+            "datasheet_DQC_theta_JA_C_per_W": 65.2,
+            "illustrative_rise_C": 3**2*0.027*65.2,
+            "warning": "2.5V table corner/example only; not enclosure thermal proof or an interpolated guarantee",
+        },
+        "off_EN_open_upper_V_at_100nA_bias": 100e-9*100000*1.01,
+        "off_EN_falling_threshold_min_V": 0.560,
+        "reverse_blocking": "Disabled only;10us typical response, no maximum;11uA max at105C for OUT5V/IN0V/EN0V",
+        "internal_output_discharge": False,
+        "bleeder_nominal_power_W_at_raw5_3V3_5V": (5**2+3.3**2+5**2)/4700,
+        "five_volt_discharge_example_not_guarantee": {
+            "assumed_C_uF": 220, "R_ohm": 4700, "start_V": 5, "end_V": 0.1,
+            "zero_injection_time_s": 4700*220e-6*3.912023005428146,
+            "warning": "About4s, not instant OFF; excludes tolerance, extra capacitance and all injection",
+        },
+        "off_all_rails_zero_proven": False,
+        "remaining": ["full-interval leakage, I2C/debug injection and rail decay specification",
+                      "mechanical contacts/cable ESD and bounce",
+                      "source-startup, CT ramp, effective ceramic capacitance and current headroom"],
     }
 
 

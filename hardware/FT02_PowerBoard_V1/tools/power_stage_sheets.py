@@ -11,6 +11,12 @@ def ic_pins(left, right):
 
 
 PINS = {
+    "TPS22953": ic_pins([
+        (1, "IN", "power_in"), (2, "IN", "power_in"), (3, "BIAS", "power_in"),
+        (4, "EN", "input"), (5, "GND", "power_in"), (11, "EP_GND", "power_in"),
+    ], [(9, "OUT", "power_out"), (10, "OUT", "passive"), (8, "SNS", "input"),
+        (7, "PG", "open_collector"), (6, "CT", "passive")]),
+    "CONN3": ic_pins([(i, str(i), "passive") for i in range(1, 4)], []),
     "TPS259474": ic_pins([
         (5, "IN", "power_in"), (1, "EN_UVLO", "input"), (2, "OVLO", "input"),
         (9, "ILM", "passive"), (8, "GND", "power_in"),
@@ -65,6 +71,7 @@ PINS = {
 }
 
 NOTES = {
+    "13_MASTER_POWER_GATE": "CANDIDATE WIRED: mechanical SYSTEM HARD OFF, upstream of every system rail. Backfeed/leakage qualification OPEN.",
     "02_EXT_INPUT": "CANDIDATE WIRED: regulated EXT_5V ONLY; TPS259474L UV/OV/circuit breaker. Transient/source window OPEN.",
     "04_BATTERY_CHARGER": "WIRED / CHARGE LOCKED OFF: local SYS only. R407 DNP and TS forced fault; source-priority controls OPEN.",
     "07_UPS_POWER_MUX": "CANDIDATE WIRED / UNFROZEN: TPS2121 and rail UVLO. Source qualification and UPS timing NOT proven.",
@@ -157,8 +164,8 @@ def build(name, component, text_item):
     elif name == "07_UPS_POWER_MUX":
         part("TPS2121", "U701", "TPS2121RUXR UNFROZEN", 109.22, 71.12, {
             "7": "EXT_BUS_5V", "2": "BAT_PROTECTED", "6": "MUX_EXT_SENSE",
-            "5": "GND", "4": "MUX_EXT_SENSE", "3": "GND", "1": "SYS_RAW",
-            "8": "SYS_RAW", "9": "MUX_BAT_STATUS", "10": "MUX_ILIM", "11": "MUX_SS", "12": "GND",
+            "5": "GND", "4": "MUX_EXT_SENSE", "3": "GND", "1": "UPS_RAW",
+            "8": "UPS_RAW", "9": "MUX_BAT_STATUS", "10": "MUX_ILIM", "11": "MUX_SS", "12": "GND",
         }, "TPS2121RUXR", datasheet="https://www.ti.com/lit/ds/symlink/tps2121.pdf")
         part("TPS3808G01DBV", "U702", "TPS3808G01DBVR", 109.22, 144.78, {
             "6": "SYS_RAW", "5": "SYS_UV_SENSE", "3": "SYS_RAW", "1": "RAIL_PERMIT",
@@ -167,7 +174,7 @@ def build(name, component, text_item):
         rows = [
             ("C", "C701", "1uF 10V", "EXT_BUS_5V", "GND"),
             ("C", "C702", "1uF 10V", "BAT_PROTECTED", "GND"),
-            ("C", "C703", "220uF 10V REF", "SYS_RAW", "GND"),
+            ("C", "C703", "220uF 10V REF", "UPS_RAW", "GND"),
             ("R", "R701", "30.9k 0.1%", "EXT_BUS_5V", "MUX_EXT_SENSE"),
             ("R", "R702", "10k 0.1%", "MUX_EXT_SENSE", "GND"),
             ("R", "R703", "29.8k 1% REF", "MUX_ILIM", "GND"),
@@ -185,6 +192,32 @@ def build(name, component, text_item):
             "CP2=GND:100us TYP transition, NOT5us and no guaranteed maximum. Voltage-only sense is NOT qualified EXT_VALID.",
             "UVLO nominal SYS_RAW=3.30075V; CT NC=20ms typical recovery. This is NOT the pack cutoff or loaded-voltage spec.",
             "ILIM reference=3/3.5/4A at29.8k (resistor tolerance additional). Load, thermal, rebound and hold-up gates OPEN.",
+        ])
+    elif name == "13_MASTER_POWER_GATE":
+        part("TPS22953", "U1301", "TPS22953DQCR CANDIDATE", 109.22, 81.28, {
+            "1": "UPS_RAW", "2": "UPS_RAW", "3": "UPS_RAW", "4": "MASTER_EN",
+            "5": "GND", "11": "GND", "9": "SYS_RAW", "10": "SYS_RAW",
+            "8": "SYS_RAW", "7": "GND", "6": "MASTER_CT",
+        }, "TPS22953DQCR", datasheet="https://www.ti.com/lit/gpn/TPS22953")
+        part("CONN3", "J1301", "PWR_SW: ON / COMMON / OFF", 109.22, 175.26,
+             {"1": "PWR_SW_ON", "2": "MASTER_EN", "3": "GND"})
+        rows = [
+            ("R", "R1301", "10k 1%", "UPS_RAW", "PWR_SW_ON"),
+            ("R", "R1302", "100k 1%", "MASTER_EN", "GND"),
+            ("C", "C1301", "1uF 10V", "UPS_RAW", "GND"),
+            ("C", "C1302", "1uF 10V", "SYS_RAW", "GND"),
+            ("C", "C1303", "10nF 50V REF", "MASTER_CT", "GND"),
+            ("R", "R1303", "4.7k 1%", "SYS_RAW", "GND"),
+            ("R", "R1304", "4.7k 1%", "3V3_MAIN", "GND"),
+            ("R", "R1305", "4.7k 1%", "5V_MAIN", "GND"),
+        ]
+        for i, (kind, ref, value, hi, lo) in enumerate(rows):
+            passive(kind, ref, value, 210.82+(i%3)*66.04, 50.8+(i//3)*50.8, hi, lo)
+        notes([
+            "External maintained SPDT: COMMON2 to ON1=ON; COMMON2 to OFF3=OFF. Unplugged/open=OFF via R1302.",
+            "IN+BIAS=UPS_RAW; OUT=SYS_RAW. No MCU/I2C control. Charger and gauge remain upstream and powered.",
+            "TPS22953 has disabled-state reverse blocking, NO QOD. Bleeders discharge rails; zero volts/time NOT yet proven.",
+            "SNS tied OUT, unused PG tied GND per TI. CT requires>=25V. Load/inrush/thermal and connector backfeed gates OPEN.",
         ])
     elif name == "09_5V_BUCKBOOST":
         nets = {str(pin): "GND" for pin in (3, 11, 18, 22, 29)}
