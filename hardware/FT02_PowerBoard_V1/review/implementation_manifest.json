@@ -1,23 +1,250 @@
 {
   "status": "INCOMPLETE_NOT_FOR_FABRICATION",
-  "implemented_sheets": [
+  "wired_reference_sheets": [
     "06_FUEL_GAUGE",
     "08_3V3_BUCKBOOST",
-    "12_TEST_POINTS"
-  ],
-  "implementation_scope": "Two partial reference circuits and logical test points, not qualified sheets.",
-  "unimplemented_sheets": [
-    "01_USB_C_PD",
-    "02_EXT_INPUT",
-    "03_EXTERNAL_POWER_MUX",
+    "12_TEST_POINTS",
     "04_BATTERY_CHARGER",
-    "05_BATTERY_PROTECTION",
     "07_UPS_POWER_MUX",
     "09_5V_BUCKBOOST",
     "10_SENSOR_POWER",
     "11_MAINBOARD_INTERFACE"
   ],
+  "qualified_sheets": [],
+  "implementation_scope": "Pin-level stages plus partial control/interface, not a closed or qualified main power chain.",
+  "unimplemented_sheets": [
+    "01_USB_C_PD",
+    "02_EXT_INPUT",
+    "03_EXTERNAL_POWER_MUX",
+    "05_BATTERY_PROTECTION"
+  ],
   "components": {
+    "U401": {
+      "kind": "BQ25628E",
+      "nets": {
+        "18": "EXT_BUS_5V",
+        "17": "CHG_PMID",
+        "2": "CHG_REGN",
+        "4": "CHG_ILIM",
+        "5": "CHG_TS_BIAS",
+        "6": "CHG_TS",
+        "7": null,
+        "14": "CHG_CE_N",
+        "15": "GND",
+        "1": "CHG_BTST",
+        "16": "CHG_SW",
+        "9": "CHG_SYS_LOCAL",
+        "8": "BAT_PROTECTED",
+        "3": "CHG_PG_N",
+        "10": "CHG_STAT_N",
+        "11": "CHG_INT_N",
+        "12": "SDA",
+        "13": "SCL"
+      },
+      "value": "BQ25628ERYKR",
+      "mpn": "BQ25628ERYKR",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "C401": {
+      "kind": "C",
+      "nets": {
+        "1": "EXT_BUS_5V",
+        "2": "GND"
+      },
+      "value": "1uF 10V",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "C402": {
+      "kind": "C",
+      "nets": {
+        "1": "CHG_PMID",
+        "2": "GND"
+      },
+      "value": "10uF 10V",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "C403": {
+      "kind": "C",
+      "nets": {
+        "1": "CHG_PMID",
+        "2": "GND"
+      },
+      "value": "100nF 10V",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "C404": {
+      "kind": "C",
+      "nets": {
+        "1": "CHG_BTST",
+        "2": "CHG_SW"
+      },
+      "value": "47nF 10V",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "C405": {
+      "kind": "C",
+      "nets": {
+        "1": "CHG_REGN",
+        "2": "GND"
+      },
+      "value": "4.7uF 10V",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "L401": {
+      "kind": "L",
+      "nets": {
+        "1": "CHG_SW",
+        "2": "CHG_SYS_LOCAL"
+      },
+      "value": "1uH REF",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "C406": {
+      "kind": "C",
+      "nets": {
+        "1": "CHG_SYS_LOCAL",
+        "2": "GND"
+      },
+      "value": "22uF 10V",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "C407": {
+      "kind": "C",
+      "nets": {
+        "1": "BAT_PROTECTED",
+        "2": "GND"
+      },
+      "value": "10uF 10V",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "R401": {
+      "kind": "R",
+      "nets": {
+        "1": "CHG_ILIM",
+        "2": "GND"
+      },
+      "value": "2.80k 1%",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "R402": {
+      "kind": "R",
+      "nets": {
+        "1": "EXT_BUS_5V",
+        "2": "CHG_CE_N"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "R403": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "CHG_PG_N"
+      },
+      "value": "10k 1%",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "R404": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "CHG_STAT_N"
+      },
+      "value": "10k 1%",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "R405": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "CHG_INT_N"
+      },
+      "value": "10k 1%",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "R406": {
+      "kind": "R",
+      "nets": {
+        "1": "CHG_REQUEST",
+        "2": "GND"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "R407": {
+      "kind": "R",
+      "nets": {
+        "1": "CHG_CE_N",
+        "2": "CHG_CE_DRAIN"
+      },
+      "value": "0 ARM DNP",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": true
+    },
+    "R408": {
+      "kind": "R",
+      "nets": {
+        "1": "CHG_TS",
+        "2": "GND"
+      },
+      "value": "0 TS LOCK",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "C408": {
+      "kind": "C",
+      "nets": {
+        "1": "CHG_TS_BIAS",
+        "2": "GND"
+      },
+      "value": "100nF 10V",
+      "mpn": "",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "Q401": {
+      "kind": "2N7002",
+      "nets": {
+        "1": "CHG_REQUEST",
+        "2": "GND",
+        "3": "CHG_CE_DRAIN"
+      },
+      "value": "2N7002",
+      "mpn": "2N7002,215",
+      "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
     "R601": {
       "kind": "K4",
       "nets": {
@@ -137,10 +364,178 @@
       "sheet": "06_FUEL_GAUGE",
       "dnp": true
     },
+    "U701": {
+      "kind": "TPS2121",
+      "nets": {
+        "7": "EXT_BUS_5V",
+        "2": "BAT_PROTECTED",
+        "6": "MUX_EXT_SENSE",
+        "5": "GND",
+        "4": "MUX_EXT_SENSE",
+        "3": "GND",
+        "1": "SYS_RAW",
+        "8": "SYS_RAW",
+        "9": "MUX_BAT_STATUS",
+        "10": "MUX_ILIM",
+        "11": "MUX_SS",
+        "12": "GND"
+      },
+      "value": "TPS2121RUXR UNFROZEN",
+      "mpn": "TPS2121RUXR",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "U702": {
+      "kind": "TPS3808G01DBV",
+      "nets": {
+        "6": "SYS_RAW",
+        "5": "SYS_UV_SENSE",
+        "3": "SYS_RAW",
+        "1": "RAIL_PERMIT",
+        "4": null,
+        "2": "GND"
+      },
+      "value": "TPS3808G01DBVR",
+      "mpn": "TPS3808G01DBVR",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "C701": {
+      "kind": "C",
+      "nets": {
+        "1": "EXT_BUS_5V",
+        "2": "GND"
+      },
+      "value": "1uF 10V",
+      "mpn": "",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "C702": {
+      "kind": "C",
+      "nets": {
+        "1": "BAT_PROTECTED",
+        "2": "GND"
+      },
+      "value": "1uF 10V",
+      "mpn": "",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "C703": {
+      "kind": "C",
+      "nets": {
+        "1": "SYS_RAW",
+        "2": "GND"
+      },
+      "value": "220uF 10V REF",
+      "mpn": "",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "R701": {
+      "kind": "R",
+      "nets": {
+        "1": "EXT_BUS_5V",
+        "2": "MUX_EXT_SENSE"
+      },
+      "value": "30.9k 0.1%",
+      "mpn": "",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "R702": {
+      "kind": "R",
+      "nets": {
+        "1": "MUX_EXT_SENSE",
+        "2": "GND"
+      },
+      "value": "10k 0.1%",
+      "mpn": "",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "R703": {
+      "kind": "R",
+      "nets": {
+        "1": "MUX_ILIM",
+        "2": "GND"
+      },
+      "value": "29.8k 1% REF",
+      "mpn": "",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "C704": {
+      "kind": "C",
+      "nets": {
+        "1": "MUX_SS",
+        "2": "GND"
+      },
+      "value": "1nF REF",
+      "mpn": "",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "R704": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "MUX_BAT_STATUS"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "C705": {
+      "kind": "C",
+      "nets": {
+        "1": "SYS_RAW",
+        "2": "GND"
+      },
+      "value": "100nF 10V",
+      "mpn": "",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "R705": {
+      "kind": "R",
+      "nets": {
+        "1": "SYS_RAW",
+        "2": "SYS_UV_SENSE"
+      },
+      "value": "715k 0.1%",
+      "mpn": "",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "R706": {
+      "kind": "R",
+      "nets": {
+        "1": "SYS_UV_SENSE",
+        "2": "GND"
+      },
+      "value": "100k 0.1%",
+      "mpn": "",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
+    "R707": {
+      "kind": "R",
+      "nets": {
+        "1": "SYS_RAW",
+        "2": "RAIL_PERMIT"
+      },
+      "value": "10k 1%",
+      "mpn": "",
+      "sheet": "07_UPS_POWER_MUX",
+      "dnp": false
+    },
     "U801": {
       "kind": "TPS63802",
       "nets": {
-        "1": "SYS_RAW",
+        "1": "RAIL_PERMIT",
         "2": "GND",
         "3": "GND",
         "4": "FB_3V3",
@@ -220,6 +615,486 @@
       "value": "100k 1%",
       "mpn": "",
       "sheet": "08_3V3_BUCKBOOST",
+      "dnp": false
+    },
+    "U901": {
+      "kind": "LT3120",
+      "nets": {
+        "3": "GND",
+        "11": "GND",
+        "18": "GND",
+        "22": "GND",
+        "29": "GND",
+        "17": "SYS_RAW",
+        "19": "SYS_RAW",
+        "20": "SYS_RAW",
+        "21": "SYS_RAW",
+        "2": "5V_MAIN",
+        "4": "5V_MAIN",
+        "5": "5V_MAIN",
+        "6": "5V_MAIN",
+        "8": "REG5_VCC",
+        "12": "REG5_VCC",
+        "13": "REG5_VCC",
+        "24": "REG5_SW1",
+        "25": "REG5_SW1",
+        "26": "REG5_SW2",
+        "27": "REG5_SW2",
+        "1": "REG5_BST3",
+        "7": "PG_5V",
+        "9": "FB_5V",
+        "10": "REG5_VC",
+        "14": "REG5_RT",
+        "15": "GND",
+        "16": "REG5_ENABLE",
+        "23": "REG5_BST1",
+        "28": "REG5_BST2"
+      },
+      "value": "LT3120IUFDM",
+      "mpn": "LT3120IUFDM#PBF",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "L901": {
+      "kind": "L",
+      "nets": {
+        "1": "REG5_SW1",
+        "2": "REG5_SW2"
+      },
+      "value": "4.7uH REF",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "C901": {
+      "kind": "C",
+      "nets": {
+        "1": "SYS_RAW",
+        "2": "GND"
+      },
+      "value": "10uF 10V",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "C902": {
+      "kind": "C",
+      "nets": {
+        "1": "5V_MAIN",
+        "2": "GND"
+      },
+      "value": "220uF 10V",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "C903": {
+      "kind": "C",
+      "nets": {
+        "1": "REG5_BST1",
+        "2": "REG5_SW1"
+      },
+      "value": "220nF 10V",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "C904": {
+      "kind": "C",
+      "nets": {
+        "1": "REG5_BST2",
+        "2": "REG5_SW2"
+      },
+      "value": "220nF 10V",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "C905": {
+      "kind": "C",
+      "nets": {
+        "1": "REG5_BST3",
+        "2": "5V_MAIN"
+      },
+      "value": "22nF 10V",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "C906": {
+      "kind": "C",
+      "nets": {
+        "1": "REG5_VCC",
+        "2": "GND"
+      },
+      "value": "4.7uF 10V",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "R901": {
+      "kind": "R",
+      "nets": {
+        "1": "5V_MAIN",
+        "2": "FB_5V"
+      },
+      "value": "536k 1%",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "R902": {
+      "kind": "R",
+      "nets": {
+        "1": "FB_5V",
+        "2": "GND"
+      },
+      "value": "102k 1%",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "R903": {
+      "kind": "R",
+      "nets": {
+        "1": "REG5_RT",
+        "2": "GND"
+      },
+      "value": "158k 1%",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "R904": {
+      "kind": "R",
+      "nets": {
+        "1": "REG5_VC",
+        "2": "REG5_COMP"
+      },
+      "value": "46.4k 1%",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "C907": {
+      "kind": "C",
+      "nets": {
+        "1": "REG5_COMP",
+        "2": "GND"
+      },
+      "value": "1800pF C0G",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "R905": {
+      "kind": "R",
+      "nets": {
+        "1": "5V_EN",
+        "2": "GND"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "R906": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "PG_5V"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "R907": {
+      "kind": "R",
+      "nets": {
+        "1": "REG5_ENABLE",
+        "2": "GND"
+      },
+      "value": "10k 1%",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "C908": {
+      "kind": "C",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "GND"
+      },
+      "value": "100nF 10V",
+      "mpn": "",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "U902": {
+      "kind": "SN74LVC1G08DBV",
+      "nets": {
+        "1": "RAIL_PERMIT",
+        "2": "5V_EN",
+        "5": "3V3_MAIN",
+        "4": "REG5_ENABLE",
+        "3": "GND"
+      },
+      "value": "SN74LVC1G08DBVR",
+      "mpn": "SN74LVC1G08DBVR",
+      "sheet": "09_5V_BUCKBOOST",
+      "dnp": false
+    },
+    "FB1001": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "3V3_SENS"
+      },
+      "value": "220R at100MHz",
+      "mpn": "BLM21PG221SN1D",
+      "sheet": "10_SENSOR_POWER",
+      "dnp": false
+    },
+    "C1001": {
+      "kind": "C",
+      "nets": {
+        "1": "3V3_SENS",
+        "2": "GND"
+      },
+      "value": "100nF 10V",
+      "mpn": "",
+      "sheet": "10_SENSOR_POWER",
+      "dnp": false
+    },
+    "C1002": {
+      "kind": "C",
+      "nets": {
+        "1": "3V3_SENS",
+        "2": "GND"
+      },
+      "value": "1uF 10V",
+      "mpn": "",
+      "sheet": "10_SENSOR_POWER",
+      "dnp": false
+    },
+    "R1001": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_SENS",
+        "2": "SENS_DAMP"
+      },
+      "value": "1R 1%",
+      "mpn": "",
+      "sheet": "10_SENSOR_POWER",
+      "dnp": false
+    },
+    "C1003": {
+      "kind": "C",
+      "nets": {
+        "1": "SENS_DAMP",
+        "2": "GND"
+      },
+      "value": "10uF 10V",
+      "mpn": "",
+      "sheet": "10_SENSOR_POWER",
+      "dnp": false
+    },
+    "J1001": {
+      "kind": "CONN2",
+      "nets": {
+        "1": "3V3_SENS",
+        "2": "GND"
+      },
+      "value": "SENSOR POWER",
+      "mpn": "",
+      "sheet": "10_SENSOR_POWER",
+      "dnp": false
+    },
+    "U1101": {
+      "kind": "TCA9539PW",
+      "nets": {
+        "24": "3V3_MAIN",
+        "12": "GND",
+        "23": "SDA",
+        "22": "SCL",
+        "1": "PWR_INT",
+        "3": "IO_RESET_N",
+        "21": "GND",
+        "2": "GND",
+        "4": "PG_3V3",
+        "5": "PG_5V",
+        "6": "FG_GPOUT",
+        "7": "CHG_PG_N",
+        "8": "CHG_STAT_N",
+        "9": "CHG_INT_N",
+        "10": "CHG_REQUEST",
+        "11": "MUX_BAT_STATUS",
+        "13": "IO_UNUSED10",
+        "14": "IO_UNUSED11",
+        "15": "IO_UNUSED12",
+        "16": "IO_UNUSED13",
+        "17": "IO_UNUSED14",
+        "18": "IO_UNUSED15",
+        "19": "IO_UNUSED16",
+        "20": "IO_UNUSED17"
+      },
+      "value": "TCA9539PWR",
+      "mpn": "TCA9539PWR",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "J1101": {
+      "kind": "CONN12",
+      "nets": {
+        "1": "GND",
+        "2": "GND",
+        "3": "3V3_MAIN",
+        "4": "3V3_MAIN",
+        "5": "5V_MAIN",
+        "6": "5V_MAIN",
+        "7": "SDA",
+        "8": "SCL",
+        "9": "PWR_INT",
+        "10": "5V_EN",
+        "11": "3V3_SENS",
+        "12": "GND"
+      },
+      "value": "MAINBOARD LOGICAL",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "R1101": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "PWR_INT"
+      },
+      "value": "10k 1%",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "R1102": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "IO_RESET_N"
+      },
+      "value": "10k 1%",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "C1101": {
+      "kind": "C",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "GND"
+      },
+      "value": "100nF 10V",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "C1102": {
+      "kind": "C",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "GND"
+      },
+      "value": "1uF 10V",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "R1103": {
+      "kind": "R",
+      "nets": {
+        "1": "IO_UNUSED10",
+        "2": "GND"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "R1104": {
+      "kind": "R",
+      "nets": {
+        "1": "IO_UNUSED11",
+        "2": "GND"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "R1105": {
+      "kind": "R",
+      "nets": {
+        "1": "IO_UNUSED12",
+        "2": "GND"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "R1106": {
+      "kind": "R",
+      "nets": {
+        "1": "IO_UNUSED13",
+        "2": "GND"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "R1107": {
+      "kind": "R",
+      "nets": {
+        "1": "IO_UNUSED14",
+        "2": "GND"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "R1108": {
+      "kind": "R",
+      "nets": {
+        "1": "IO_UNUSED15",
+        "2": "GND"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "R1109": {
+      "kind": "R",
+      "nets": {
+        "1": "IO_UNUSED16",
+        "2": "GND"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
+      "dnp": false
+    },
+    "R1110": {
+      "kind": "R",
+      "nets": {
+        "1": "IO_UNUSED17",
+        "2": "GND"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "11_MAINBOARD_INTERFACE",
       "dnp": false
     },
     "TP1201": {

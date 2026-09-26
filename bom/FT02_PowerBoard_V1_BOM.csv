@@ -1,4 +1,23 @@
 Reference,Value,Candidate_MPN,Footprint,Status,Open_Item
+U401,BQ25628ERYKR,BQ25628ERYKR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C401,1uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C402,10uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C403,100nF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C404,47nF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C405,4.7uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+L401,1uH REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C406,22uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C407,10uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R401,2.80k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R402,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R403,10k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R404,10k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R405,10k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R406,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R407,0 ARM DNP,,,DNP_REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R408,0 TS LOCK,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C408,100nF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+Q401,2N7002,"2N7002,215",,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 R601,10m 1% 1W,WSK2512R0100FEA,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 U601,BQ27220YZFR,BQ27220YZFR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 C601,1uF REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
@@ -9,6 +28,20 @@ R604,1M 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pendi
 R605,1M 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 R606,5.1k 1%,,,DNP_REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 R607,5.1k 1%,,,DNP_REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+U701,TPS2121RUXR UNFROZEN,TPS2121RUXR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+U702,TPS3808G01DBVR,TPS3808G01DBVR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C701,1uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C702,1uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C703,220uF 10V REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R701,30.9k 0.1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R702,10k 0.1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R703,29.8k 1% REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C704,1nF REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R704,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C705,100nF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R705,715k 0.1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R706,100k 0.1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R707,10k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 U801,TPS63802DLAR,TPS63802DLAR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 L801,0.47uH,XFL4015-471ME,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 C801,10uF 6.3V,GRM188R60J106ME84,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
@@ -16,6 +49,44 @@ C802,22uF 6.3V,GRM188R60J226MEA0,,REFERENCE_NOT_RELEASED,OI-015: footprint/procu
 R801,511k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 R802,91k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 R803,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+U901,LT3120IUFDM,LT3120IUFDM#PBF,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+L901,4.7uH REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C901,10uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C902,220uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C903,220nF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C904,220nF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C905,22nF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C906,4.7uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R901,536k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R902,102k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R903,158k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R904,46.4k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C907,1800pF C0G,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R905,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R906,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R907,10k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C908,100nF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+U902,SN74LVC1G08DBVR,SN74LVC1G08DBVR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+FB1001,220R at100MHz,BLM21PG221SN1D,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C1001,100nF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C1002,1uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R1001,1R 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C1003,10uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+J1001,SENSOR POWER,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+U1101,TCA9539PWR,TCA9539PWR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+J1101,MAINBOARD LOGICAL,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R1101,10k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R1102,10k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C1101,100nF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C1102,1uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R1103,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R1104,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R1105,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R1106,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R1107,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R1108,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R1109,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R1110,100k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 TP1201,TP_USB_VBUS,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 TP1202,TP_USB_5V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 TP1203,TP_EXT_5V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending

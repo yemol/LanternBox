@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/Volumes/yemol_HDDisk/LanternBox/hardware/FT02_PowerBoard_V1/FT02_PowerBoard_V1.kicad_sch</source>
-    <date>2026-09-25T08:55:46</date>
+    <date>2026-09-25T23:06:01</date>
     <tool>Eeschema 10.0.5</tool>
     <textvar name="DESIGN_STATUS">INCOMPLETE_NOT_FOR_FABRICATION</textvar>
     <sheet number="1" name="/" tstamps="/">
@@ -241,6 +241,501 @@
     </sheet>
   </design>
   <components>
+    <comp ref="C401">
+      <value>1uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>a4ddd98b-24ae-50cd-afff-1314baba4dcc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C402">
+      <value>10uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>fcb9884f-b9c5-58aa-a457-d4e95e8a91fb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C403">
+      <value>100nF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>9008255e-7a17-5884-affd-b46a2cc214ab</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C404">
+      <value>47nF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>750b2dc0-152b-5b80-b688-48654cd79585</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C405">
+      <value>4.7uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>8e02c467-02b8-51cc-9639-6a41a4fb3af4</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C406">
+      <value>22uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>ff385317-6e8f-5e26-98c8-7b4c0021f95b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C407">
+      <value>10uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>cb48c8fc-81cf-5b73-9286-0f298a690c6e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C408">
+      <value>100nF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>b6da2401-1496-5c1b-baf7-3a2c9d042afc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="L401">
+      <value>1uH REF</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="L" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>691f63b7-13f9-5990-9b49-46b6db5def3d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q401">
+      <value>2N7002</value>
+      <datasheet>https://assets.nexperia.com/documents/data-sheet/2N7002.pdf</datasheet>
+      <fields>
+        <field name="MPN">2N7002,215</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://assets.nexperia.com/documents/data-sheet/2N7002.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="2N7002" description=""/>
+      <property name="MPN" value="2N7002,215"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>06667299-89f0-56d4-9cf1-7bbacff25449</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="3"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R401">
+      <value>2.80k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>14af040c-4f6f-589c-8394-f535ad61af2d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R402">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>2e6a77f4-632f-5cb4-ab3b-59d63ad55f1f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R403">
+      <value>10k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>43d8524c-db36-591b-8948-7805b0ab8cc0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R404">
+      <value>10k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>39062ba0-86fe-5772-8215-5350049c01dd</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R405">
+      <value>10k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>60d19fea-f956-59da-8b11-4e81f9bcbb44</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R406">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>93626c3a-3b95-5bf9-9dcc-b5decca568ae</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R407">
+      <value>0 ARM DNP</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <property name="dnp"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>0a155a94-0aba-5963-9553-906f6d0ce21c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R408">
+      <value>0 TS LOCK</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>2f16a32a-6fa6-5542-99c1-70d3c5bc2627</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U401">
+      <value>BQ25628ERYKR</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/bq25628e.pdf</datasheet>
+      <fields>
+        <field name="MPN">BQ25628ERYKR</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/bq25628e.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="BQ25628E" description=""/>
+      <property name="MPN" value="BQ25628ERYKR"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="04_BATTERY_CHARGER"/>
+      <property name="Sheetfile" value="04_BATTERY_CHARGER.kicad_sch"/>
+      <sheetpath names="/04_BATTERY_CHARGER/" tstamps="/7af6f2eb-3beb-5c1e-9b5d-368865e2c361/"/>
+      <tstamps>81493586-38f7-5443-94ff-b0798e40fe7e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="18"/>
+            <pin num="17"/>
+            <pin num="2"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="14"/>
+            <pin num="15"/>
+            <pin num="1"/>
+            <pin num="16"/>
+            <pin num="9"/>
+            <pin num="8"/>
+            <pin num="3"/>
+            <pin num="10"/>
+            <pin num="11"/>
+            <pin num="12"/>
+            <pin num="13"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
     <comp ref="C601">
       <value>1uF REF</value>
       <fields>
@@ -504,6 +999,372 @@
         </unit>
       </units>
     </comp>
+    <comp ref="C701">
+      <value>1uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>c737615d-28f0-58b6-a503-24da1041922b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C702">
+      <value>1uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>bba66a66-5346-5576-9674-2ac7ca8866e2</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C703">
+      <value>220uF 10V REF</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>ff887e72-bde1-52b5-b408-8d8524d7a053</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C704">
+      <value>1nF REF</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>40033f41-42cd-5d2e-a342-9006c4b8b0fc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C705">
+      <value>100nF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>79bfeda8-f1e4-594a-9a35-e5060f5f30a5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R701">
+      <value>30.9k 0.1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>3a3fc20e-9c96-5327-9900-900dc07cdf3b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R702">
+      <value>10k 0.1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>d2e5a488-ad0e-52a4-ae79-cc58a8d2592d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R703">
+      <value>29.8k 1% REF</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>32ade913-5c79-555b-a041-b7b0638b8e52</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R704">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>fbb1adff-47fc-5841-b112-7c00dfc92af2</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R705">
+      <value>715k 0.1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>aed51d15-375f-57e8-abdc-d843da54b235</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R706">
+      <value>100k 0.1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>f9525ab3-61ac-53be-8831-134031875bc5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R707">
+      <value>10k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>a9e19346-5cac-5336-b02e-1dc8f43c11f1</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U701">
+      <value>TPS2121RUXR UNFROZEN</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps2121.pdf</datasheet>
+      <fields>
+        <field name="MPN">TPS2121RUXR</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps2121.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TPS2121" description=""/>
+      <property name="MPN" value="TPS2121RUXR"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>be10c2e4-2cb7-560b-9781-ab8c87fd828c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="7"/>
+            <pin num="2"/>
+            <pin num="6"/>
+            <pin num="5"/>
+            <pin num="4"/>
+            <pin num="3"/>
+            <pin num="1"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="11"/>
+            <pin num="12"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U702">
+      <value>TPS3808G01DBVR</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tps3808.pdf</datasheet>
+      <fields>
+        <field name="MPN">TPS3808G01DBVR</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tps3808.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TPS3808G01DBV" description=""/>
+      <property name="MPN" value="TPS3808G01DBVR"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="07_UPS_POWER_MUX"/>
+      <property name="Sheetfile" value="07_UPS_POWER_MUX.kicad_sch"/>
+      <sheetpath names="/07_UPS_POWER_MUX/" tstamps="/dee856fb-8e6c-5819-ab2f-eb21e49f5e84/"/>
+      <tstamps>897c3be9-97f2-5d85-b4cf-0a275dc2a401</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="6"/>
+            <pin num="5"/>
+            <pin num="3"/>
+            <pin num="1"/>
+            <pin num="4"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
     <comp ref="C801">
       <value>10uF 6.3V</value>
       <fields>
@@ -684,6 +1545,1021 @@
             <pin num="6"/>
             <pin num="4"/>
             <pin num="5"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C901">
+      <value>10uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>204fd26c-b00b-5795-b189-31da14924f9e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C902">
+      <value>220uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>8073b7bf-80d0-58a8-a260-545b7875abf9</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C903">
+      <value>220nF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>365375ee-de05-5160-ad60-33176338a4cd</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C904">
+      <value>220nF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>481fc069-3ec9-5db9-b113-743aba236705</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C905">
+      <value>22nF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>e69efa7b-1090-5d84-b29f-3905c98c45ba</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C906">
+      <value>4.7uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>7afee5bd-fafd-5421-8eec-30d3bc200808</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C907">
+      <value>1800pF C0G</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>f5857ad9-2de0-5376-92a2-8033186464c0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C908">
+      <value>100nF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>f20eaa03-9cca-51cf-87c5-f4c33d865e9a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="L901">
+      <value>4.7uH REF</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="L" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>024e7a62-058e-52a3-b7cf-00350b23f047</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R901">
+      <value>536k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>d7691e44-6328-532d-8307-82afe25a4058</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R902">
+      <value>102k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>1609e9a5-cd19-5e25-ad84-5c3bafe10f74</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R903">
+      <value>158k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>71c7ac88-64f3-5c04-bba1-e3a33522805b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R904">
+      <value>46.4k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>3f3732c7-9fe3-596b-808b-e3f674e89d39</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R905">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>f365db4b-d6e3-56e0-baf4-ff558af3d9e7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R906">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>934e943a-d999-53a8-afad-a797b0b25477</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R907">
+      <value>10k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>122dcf27-c04f-5549-8dd6-c9fb1e8fd61d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U901">
+      <value>LT3120IUFDM</value>
+      <datasheet>https://www.analog.com/media/en/technical-documentation/data-sheets/lt3120.pdf</datasheet>
+      <fields>
+        <field name="MPN">LT3120IUFDM#PBF</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.analog.com/media/en/technical-documentation/data-sheets/lt3120.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="LT3120" description=""/>
+      <property name="MPN" value="LT3120IUFDM#PBF"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>3627d909-1c61-5750-8877-61193e538c45</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="17"/>
+            <pin num="19"/>
+            <pin num="20"/>
+            <pin num="21"/>
+            <pin num="16"/>
+            <pin num="15"/>
+            <pin num="13"/>
+            <pin num="12"/>
+            <pin num="8"/>
+            <pin num="14"/>
+            <pin num="23"/>
+            <pin num="24"/>
+            <pin num="25"/>
+            <pin num="3"/>
+            <pin num="11"/>
+            <pin num="2"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="1"/>
+            <pin num="7"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="28"/>
+            <pin num="26"/>
+            <pin num="27"/>
+            <pin num="18"/>
+            <pin num="22"/>
+            <pin num="29"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U902">
+      <value>SN74LVC1G08DBVR</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf</datasheet>
+      <fields>
+        <field name="MPN">SN74LVC1G08DBVR</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="SN74LVC1G08DBV" description=""/>
+      <property name="MPN" value="SN74LVC1G08DBVR"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="09_5V_BUCKBOOST"/>
+      <property name="Sheetfile" value="09_5V_BUCKBOOST.kicad_sch"/>
+      <sheetpath names="/09_5V_BUCKBOOST/" tstamps="/d74d8af9-a6d3-56ae-91ce-a4867d601d26/"/>
+      <tstamps>f93d1a21-db2a-5cd9-9d91-9e4431a6ea01</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="5"/>
+            <pin num="4"/>
+            <pin num="3"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C1001">
+      <value>100nF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="10_SENSOR_POWER"/>
+      <property name="Sheetfile" value="10_SENSOR_POWER.kicad_sch"/>
+      <sheetpath names="/10_SENSOR_POWER/" tstamps="/83af0c7d-2eee-5618-8699-4f3f399a4211/"/>
+      <tstamps>c4b397b4-d083-5fdb-b6fb-e8d409c0084e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C1002">
+      <value>1uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="10_SENSOR_POWER"/>
+      <property name="Sheetfile" value="10_SENSOR_POWER.kicad_sch"/>
+      <sheetpath names="/10_SENSOR_POWER/" tstamps="/83af0c7d-2eee-5618-8699-4f3f399a4211/"/>
+      <tstamps>82c61092-dffa-5e28-878f-f9d949eb9fb7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C1003">
+      <value>10uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="10_SENSOR_POWER"/>
+      <property name="Sheetfile" value="10_SENSOR_POWER.kicad_sch"/>
+      <sheetpath names="/10_SENSOR_POWER/" tstamps="/83af0c7d-2eee-5618-8699-4f3f399a4211/"/>
+      <tstamps>3a37b13e-6b6c-5f93-9762-7051f2a65673</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="FB1001">
+      <value>220R at100MHz</value>
+      <fields>
+        <field name="MPN">BLM21PG221SN1D</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value="BLM21PG221SN1D"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="10_SENSOR_POWER"/>
+      <property name="Sheetfile" value="10_SENSOR_POWER.kicad_sch"/>
+      <sheetpath names="/10_SENSOR_POWER/" tstamps="/83af0c7d-2eee-5618-8699-4f3f399a4211/"/>
+      <tstamps>c644aa35-58a9-54ab-82e5-28ad19cb8e6e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J1001">
+      <value>SENSOR POWER</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="CONN2" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="10_SENSOR_POWER"/>
+      <property name="Sheetfile" value="10_SENSOR_POWER.kicad_sch"/>
+      <sheetpath names="/10_SENSOR_POWER/" tstamps="/83af0c7d-2eee-5618-8699-4f3f399a4211/"/>
+      <tstamps>3ca4c2c1-064f-5b39-bbf5-f26afaf24b8a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1001">
+      <value>1R 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="10_SENSOR_POWER"/>
+      <property name="Sheetfile" value="10_SENSOR_POWER.kicad_sch"/>
+      <sheetpath names="/10_SENSOR_POWER/" tstamps="/83af0c7d-2eee-5618-8699-4f3f399a4211/"/>
+      <tstamps>ac57a6dd-2386-572c-9834-4e6c5ff74ef6</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C1101">
+      <value>100nF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>45f68e37-9452-5d5d-bf6f-2361968e163f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C1102">
+      <value>1uF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>e2d7657d-f568-5060-853e-9ac94b2c083f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J1101">
+      <value>MAINBOARD LOGICAL</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="CONN12" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>da8a7ff6-187e-5467-9ec0-deb455e081fa</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="11"/>
+            <pin num="12"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1101">
+      <value>10k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>68dfb444-4016-54ca-8aad-120311d53fa8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1102">
+      <value>10k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>a10ef4cb-fe31-5097-9cea-2037f85693f4</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1103">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>e9567b44-7cbd-5fb0-b05f-ccf176b890b8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1104">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>09f1ba9a-8849-5446-bd21-33bdf16312dc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1105">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>9c784840-b5ad-50ce-9b97-057a97d3a46d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1106">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>037116e5-7837-5256-af11-2f0e6ece2cbf</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1107">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>cb949a39-7aa7-5b8e-a0a0-e4ed775bfa51</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1108">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>a378738f-fd3d-54af-882d-50ae18d9d1b9</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1109">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>db90173e-32e6-5550-9db3-4af856487150</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1110">
+      <value>100k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>e75c2e57-be9e-5c23-966e-4ea9dcdf25cb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U1101">
+      <value>TCA9539PWR</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tca9539.pdf</datasheet>
+      <fields>
+        <field name="MPN">TCA9539PWR</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tca9539.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="TCA9539PW" description=""/>
+      <property name="MPN" value="TCA9539PWR"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="11_MAINBOARD_INTERFACE"/>
+      <property name="Sheetfile" value="11_MAINBOARD_INTERFACE.kicad_sch"/>
+      <sheetpath names="/11_MAINBOARD_INTERFACE/" tstamps="/9bb64c20-9a3b-5cb3-bf65-afefa4dff6ea/"/>
+      <tstamps>182252b4-b3dd-5368-847f-299c49d4031f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="24"/>
+            <pin num="12"/>
+            <pin num="23"/>
+            <pin num="22"/>
+            <pin num="1"/>
+            <pin num="3"/>
+            <pin num="21"/>
+            <pin num="2"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="11"/>
+            <pin num="13"/>
+            <pin num="14"/>
+            <pin num="15"/>
+            <pin num="16"/>
+            <pin num="17"/>
+            <pin num="18"/>
+            <pin num="19"/>
+            <pin num="20"/>
           </pins>
         </unit>
       </units>
@@ -1146,6 +3022,49 @@
     </comp>
   </components>
   <libparts>
+    <libpart lib="FT02_Reference" part="2N7002">
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">2N7002</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="FT02_Reference" part="BQ25628E">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">BQ25628E</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="BTST" type="passive"/>
+        <pin num="2" name="REGN" type="power_out"/>
+        <pin num="3" name="PG_N" type="open_collector"/>
+        <pin num="4" name="ILIM" type="passive"/>
+        <pin num="5" name="TS_BIAS" type="power_out"/>
+        <pin num="6" name="TS" type="input"/>
+        <pin num="7" name="QON" type="input"/>
+        <pin num="8" name="BAT" type="power_out"/>
+        <pin num="9" name="SYS" type="power_out"/>
+        <pin num="10" name="STAT_N" type="open_collector"/>
+        <pin num="11" name="INT_N" type="open_collector"/>
+        <pin num="12" name="SDA" type="bidirectional"/>
+        <pin num="13" name="SCL" type="input"/>
+        <pin num="14" name="CE_N" type="input"/>
+        <pin num="15" name="GND" type="power_in"/>
+        <pin num="16" name="SW" type="power_out"/>
+        <pin num="17" name="PMID" type="power_out"/>
+        <pin num="18" name="VBUS" type="power_in"/>
+      </pins>
+    </libpart>
     <libpart lib="FT02_Reference" part="BQ27220">
       <fields>
         <field name="Reference">U</field>
@@ -1179,6 +3098,42 @@
         <pin num="2" name="" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="FT02_Reference" part="CONN12">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN12</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+        <pin num="4" name="4" type="passive"/>
+        <pin num="5" name="5" type="passive"/>
+        <pin num="6" name="6" type="passive"/>
+        <pin num="7" name="7" type="passive"/>
+        <pin num="8" name="8" type="passive"/>
+        <pin num="9" name="9" type="passive"/>
+        <pin num="10" name="10" type="passive"/>
+        <pin num="11" name="11" type="passive"/>
+        <pin num="12" name="12" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="FT02_Reference" part="CONN2">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">CONN2</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="FT02_Reference" part="K4">
       <fields>
         <field name="Reference">R</field>
@@ -1207,6 +3162,46 @@
         <pin num="2" name="" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="FT02_Reference" part="LT3120">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LT3120</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="BST3" type="passive"/>
+        <pin num="2" name="PVOUT" type="power_out"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="PVOUT" type="passive"/>
+        <pin num="5" name="ISP" type="input"/>
+        <pin num="6" name="ISN" type="input"/>
+        <pin num="7" name="PGOOD" type="open_collector"/>
+        <pin num="8" name="PROG" type="passive"/>
+        <pin num="9" name="FB" type="input"/>
+        <pin num="10" name="VC" type="passive"/>
+        <pin num="11" name="GND" type="power_in"/>
+        <pin num="12" name="MPPC" type="input"/>
+        <pin num="13" name="VCC" type="power_out"/>
+        <pin num="14" name="RT" type="passive"/>
+        <pin num="15" name="SYNC_MODE" type="input"/>
+        <pin num="16" name="EN_UVLO" type="input"/>
+        <pin num="17" name="VIN" type="power_in"/>
+        <pin num="18" name="GND" type="power_in"/>
+        <pin num="19" name="PVIN" type="power_in"/>
+        <pin num="20" name="PVIN" type="power_in"/>
+        <pin num="21" name="PVIN" type="power_in"/>
+        <pin num="22" name="GND" type="power_in"/>
+        <pin num="23" name="BST1" type="passive"/>
+        <pin num="24" name="SW1" type="bidirectional"/>
+        <pin num="25" name="SW1" type="bidirectional"/>
+        <pin num="26" name="SW2" type="bidirectional"/>
+        <pin num="27" name="SW2" type="bidirectional"/>
+        <pin num="28" name="BST2" type="passive"/>
+        <pin num="29" name="EP_GND" type="power_in"/>
+      </pins>
+    </libpart>
     <libpart lib="FT02_Reference" part="R">
       <fields>
         <field name="Reference">R</field>
@@ -1220,6 +3215,57 @@
         <pin num="2" name="" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="FT02_Reference" part="SN74LVC1G08DBV">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">SN74LVC1G08DBV</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="input"/>
+        <pin num="2" name="B" type="input"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="Y" type="output"/>
+        <pin num="5" name="VCC" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="FT02_Reference" part="TCA9539PW">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TCA9539PW</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="INT_N" type="open_collector"/>
+        <pin num="2" name="A1" type="input"/>
+        <pin num="3" name="RESET_N" type="input"/>
+        <pin num="4" name="P00" type="bidirectional"/>
+        <pin num="5" name="P01" type="bidirectional"/>
+        <pin num="6" name="P02" type="bidirectional"/>
+        <pin num="7" name="P03" type="bidirectional"/>
+        <pin num="8" name="P04" type="bidirectional"/>
+        <pin num="9" name="P05" type="bidirectional"/>
+        <pin num="10" name="P06" type="bidirectional"/>
+        <pin num="11" name="P07" type="bidirectional"/>
+        <pin num="12" name="GND" type="power_in"/>
+        <pin num="13" name="P10" type="bidirectional"/>
+        <pin num="14" name="P11" type="bidirectional"/>
+        <pin num="15" name="P12" type="bidirectional"/>
+        <pin num="16" name="P13" type="bidirectional"/>
+        <pin num="17" name="P14" type="bidirectional"/>
+        <pin num="18" name="P15" type="bidirectional"/>
+        <pin num="19" name="P16" type="bidirectional"/>
+        <pin num="20" name="P17" type="bidirectional"/>
+        <pin num="21" name="A0" type="input"/>
+        <pin num="22" name="SCL" type="input"/>
+        <pin num="23" name="SDA" type="bidirectional"/>
+        <pin num="24" name="VCC" type="power_in"/>
+      </pins>
+    </libpart>
     <libpart lib="FT02_Reference" part="TP">
       <fields>
         <field name="Reference">TP</field>
@@ -1230,6 +3276,46 @@
       </fields>
       <pins>
         <pin num="1" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="FT02_Reference" part="TPS2121">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TPS2121</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="power_out"/>
+        <pin num="2" name="IN2" type="power_in"/>
+        <pin num="3" name="CP2" type="input"/>
+        <pin num="4" name="OV2" type="input"/>
+        <pin num="5" name="OV1" type="input"/>
+        <pin num="6" name="PR1" type="input"/>
+        <pin num="7" name="IN1" type="power_in"/>
+        <pin num="8" name="OUT" type="passive"/>
+        <pin num="9" name="ST" type="open_collector"/>
+        <pin num="10" name="ILIM" type="passive"/>
+        <pin num="11" name="SS" type="passive"/>
+        <pin num="12" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="FT02_Reference" part="TPS3808G01DBV">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TPS3808G01DBV</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="RESET_N" type="open_collector"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="MR_N" type="input"/>
+        <pin num="4" name="CT" type="passive"/>
+        <pin num="5" name="SENSE" type="input"/>
+        <pin num="6" name="VDD" type="power_in"/>
       </pins>
     </libpart>
     <libpart lib="FT02_Reference" part="TPS63802">
@@ -1261,128 +3347,453 @@
   </libraries>
   <nets>
     <net code="1" name="3V3_MAIN" class="Default">
+      <node ref="C1101" pin="1" pintype="passive"/>
+      <node ref="C1102" pin="1" pintype="passive"/>
       <node ref="C802" pin="1" pintype="passive"/>
+      <node ref="C908" pin="1" pintype="passive"/>
+      <node ref="FB1001" pin="1" pintype="passive"/>
+      <node ref="J1101" pin="3" pinfunction="3_3" pintype="passive"/>
+      <node ref="J1101" pin="4" pinfunction="4_4" pintype="passive"/>
+      <node ref="R1101" pin="1" pintype="passive"/>
+      <node ref="R1102" pin="1" pintype="passive"/>
+      <node ref="R403" pin="1" pintype="passive"/>
+      <node ref="R404" pin="1" pintype="passive"/>
+      <node ref="R405" pin="1" pintype="passive"/>
       <node ref="R603" pin="1" pintype="passive"/>
       <node ref="R606" pin="1" pintype="passive"/>
       <node ref="R607" pin="1" pintype="passive"/>
+      <node ref="R704" pin="1" pintype="passive"/>
       <node ref="R801" pin="1" pintype="passive"/>
       <node ref="R803" pin="1" pintype="passive"/>
+      <node ref="R906" pin="1" pintype="passive"/>
       <node ref="TP1208" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="24" pinfunction="VCC_24" pintype="power_in"/>
       <node ref="U801" pin="6" pinfunction="VOUT_6" pintype="power_out"/>
+      <node ref="U902" pin="5" pinfunction="VCC_5" pintype="power_in"/>
     </net>
-    <net code="2" name="5V_MAIN" class="Default">
+    <net code="2" name="3V3_SENS" class="Default">
+      <node ref="C1001" pin="1" pintype="passive"/>
+      <node ref="C1002" pin="1" pintype="passive"/>
+      <node ref="FB1001" pin="2" pintype="passive"/>
+      <node ref="J1001" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="J1101" pin="11" pinfunction="11_11" pintype="passive"/>
+      <node ref="R1001" pin="1" pintype="passive"/>
+    </net>
+    <net code="3" name="5V_EN" class="Default">
+      <node ref="J1101" pin="10" pinfunction="10_10" pintype="passive"/>
+      <node ref="R905" pin="1" pintype="passive"/>
+      <node ref="U902" pin="2" pinfunction="B_2" pintype="input"/>
+    </net>
+    <net code="4" name="5V_MAIN" class="Default">
+      <node ref="C902" pin="1" pintype="passive"/>
+      <node ref="C905" pin="2" pintype="passive"/>
+      <node ref="J1101" pin="5" pinfunction="5_5" pintype="passive"/>
+      <node ref="J1101" pin="6" pinfunction="6_6" pintype="passive"/>
+      <node ref="R901" pin="1" pintype="passive"/>
       <node ref="TP1209" pin="1" pintype="passive"/>
+      <node ref="U901" pin="2" pinfunction="PVOUT_2" pintype="power_out"/>
+      <node ref="U901" pin="4" pinfunction="PVOUT_4" pintype="passive"/>
+      <node ref="U901" pin="5" pinfunction="ISP_5" pintype="input"/>
+      <node ref="U901" pin="6" pinfunction="ISN_6" pintype="input"/>
     </net>
-    <net code="3" name="BAT_GUARDED" class="Default">
+    <net code="5" name="BAT_GUARDED" class="Default">
       <node ref="C601" pin="1" pintype="passive"/>
       <node ref="R601" pin="I1" pinfunction="I1_I1" pintype="passive"/>
       <node ref="U601" pin="C3" pinfunction="BAT_C3" pintype="power_in"/>
     </net>
-    <net code="4" name="BAT_MINUS" class="Default">
+    <net code="6" name="BAT_MINUS" class="Default">
       <node ref="TP1206" pin="1" pintype="passive"/>
     </net>
-    <net code="5" name="BAT_PLUS" class="Default">
+    <net code="7" name="BAT_PLUS" class="Default">
       <node ref="TP1205" pin="1" pintype="passive"/>
     </net>
-    <net code="6" name="BAT_PROTECTED" class="Default">
+    <net code="8" name="BAT_PROTECTED" class="Default">
+      <node ref="C407" pin="1" pintype="passive"/>
+      <node ref="C702" pin="1" pintype="passive"/>
       <node ref="R601" pin="I2" pinfunction="I2_I2" pintype="passive"/>
+      <node ref="U401" pin="8" pinfunction="BAT_8" pintype="power_out"/>
+      <node ref="U701" pin="2" pinfunction="IN2_2" pintype="power_in"/>
     </net>
-    <net code="7" name="EXT_5V" class="Default">
+    <net code="9" name="CHG_BTST" class="Default">
+      <node ref="C404" pin="1" pintype="passive"/>
+      <node ref="U401" pin="1" pinfunction="BTST_1" pintype="passive"/>
+    </net>
+    <net code="10" name="CHG_CE_DRAIN" class="Default">
+      <node ref="Q401" pin="3" pinfunction="D_3" pintype="passive"/>
+      <node ref="R407" pin="2" pintype="passive"/>
+    </net>
+    <net code="11" name="CHG_CE_N" class="Default">
+      <node ref="R402" pin="2" pintype="passive"/>
+      <node ref="R407" pin="1" pintype="passive"/>
+      <node ref="U401" pin="14" pinfunction="CE_N_14" pintype="input"/>
+    </net>
+    <net code="12" name="CHG_ILIM" class="Default">
+      <node ref="R401" pin="1" pintype="passive"/>
+      <node ref="U401" pin="4" pinfunction="ILIM_4" pintype="passive"/>
+    </net>
+    <net code="13" name="CHG_INT_N" class="Default">
+      <node ref="R405" pin="2" pintype="passive"/>
+      <node ref="U1101" pin="9" pinfunction="P05_9" pintype="bidirectional"/>
+      <node ref="U401" pin="11" pinfunction="INT_N_11" pintype="open_collector"/>
+    </net>
+    <net code="14" name="CHG_PG_N" class="Default">
+      <node ref="R403" pin="2" pintype="passive"/>
+      <node ref="U1101" pin="7" pinfunction="P03_7" pintype="bidirectional"/>
+      <node ref="U401" pin="3" pinfunction="PG_N_3" pintype="open_collector"/>
+    </net>
+    <net code="15" name="CHG_PMID" class="Default">
+      <node ref="C402" pin="1" pintype="passive"/>
+      <node ref="C403" pin="1" pintype="passive"/>
+      <node ref="U401" pin="17" pinfunction="PMID_17" pintype="power_out"/>
+    </net>
+    <net code="16" name="CHG_REGN" class="Default">
+      <node ref="C405" pin="1" pintype="passive"/>
+      <node ref="U401" pin="2" pinfunction="REGN_2" pintype="power_out"/>
+    </net>
+    <net code="17" name="CHG_REQUEST" class="Default">
+      <node ref="Q401" pin="1" pinfunction="G_1" pintype="input"/>
+      <node ref="R406" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="10" pinfunction="P06_10" pintype="bidirectional"/>
+    </net>
+    <net code="18" name="CHG_STAT_N" class="Default">
+      <node ref="R404" pin="2" pintype="passive"/>
+      <node ref="U1101" pin="8" pinfunction="P04_8" pintype="bidirectional"/>
+      <node ref="U401" pin="10" pinfunction="STAT_N_10" pintype="open_collector"/>
+    </net>
+    <net code="19" name="CHG_SW" class="Default">
+      <node ref="C404" pin="2" pintype="passive"/>
+      <node ref="L401" pin="1" pintype="passive"/>
+      <node ref="U401" pin="16" pinfunction="SW_16" pintype="power_out"/>
+    </net>
+    <net code="20" name="CHG_SYS_LOCAL" class="Default">
+      <node ref="C406" pin="1" pintype="passive"/>
+      <node ref="L401" pin="2" pintype="passive"/>
+      <node ref="U401" pin="9" pinfunction="SYS_9" pintype="power_out"/>
+    </net>
+    <net code="21" name="CHG_TS" class="Default">
+      <node ref="R408" pin="1" pintype="passive"/>
+      <node ref="U401" pin="6" pinfunction="TS_6" pintype="input"/>
+    </net>
+    <net code="22" name="CHG_TS_BIAS" class="Default">
+      <node ref="C408" pin="1" pintype="passive"/>
+      <node ref="U401" pin="5" pinfunction="TS_BIAS_5" pintype="power_out"/>
+    </net>
+    <net code="23" name="EXT_5V" class="Default">
       <node ref="TP1203" pin="1" pintype="passive"/>
     </net>
-    <net code="8" name="EXT_BUS_5V" class="Default">
+    <net code="24" name="EXT_BUS_5V" class="Default">
+      <node ref="C401" pin="1" pintype="passive"/>
+      <node ref="C701" pin="1" pintype="passive"/>
+      <node ref="R402" pin="1" pintype="passive"/>
+      <node ref="R701" pin="1" pintype="passive"/>
       <node ref="TP1204" pin="1" pintype="passive"/>
+      <node ref="U401" pin="18" pinfunction="VBUS_18" pintype="power_in"/>
+      <node ref="U701" pin="7" pinfunction="IN1_7" pintype="power_in"/>
     </net>
-    <net code="9" name="EXT_VALID" class="Default">
+    <net code="25" name="EXT_VALID" class="Default">
       <node ref="TP1218" pin="1" pintype="passive"/>
     </net>
-    <net code="10" name="FB_3V3" class="Default">
+    <net code="26" name="FB_3V3" class="Default">
       <node ref="R801" pin="2" pintype="passive"/>
       <node ref="R802" pin="1" pintype="passive"/>
       <node ref="U801" pin="4" pinfunction="FB_4" pintype="input"/>
     </net>
-    <net code="11" name="FG_BIN" class="Default">
+    <net code="27" name="FB_5V" class="Default">
+      <node ref="R901" pin="2" pintype="passive"/>
+      <node ref="R902" pin="1" pintype="passive"/>
+      <node ref="U901" pin="9" pinfunction="FB_9" pintype="input"/>
+    </net>
+    <net code="28" name="FG_BIN" class="Default">
       <node ref="R602" pin="1" pintype="passive"/>
       <node ref="U601" pin="B1" pinfunction="BIN_B1" pintype="input"/>
     </net>
-    <net code="12" name="FG_GPOUT" class="Default">
+    <net code="29" name="FG_GPOUT" class="Default">
       <node ref="R603" pin="2" pintype="passive"/>
+      <node ref="U1101" pin="6" pinfunction="P02_6" pintype="bidirectional"/>
       <node ref="U601" pin="A1" pinfunction="GPOUT_A1" pintype="open_collector"/>
     </net>
-    <net code="13" name="FG_VDD_1V8" class="Default">
+    <net code="30" name="FG_VDD_1V8" class="Default">
       <node ref="C602" pin="1" pintype="passive"/>
       <node ref="U601" pin="B3" pinfunction="VDD_B3" pintype="power_out"/>
     </net>
-    <net code="14" name="GND" class="Default">
+    <net code="31" name="GND" class="Default">
+      <node ref="C1001" pin="2" pintype="passive"/>
+      <node ref="C1002" pin="2" pintype="passive"/>
+      <node ref="C1003" pin="2" pintype="passive"/>
+      <node ref="C1101" pin="2" pintype="passive"/>
+      <node ref="C1102" pin="2" pintype="passive"/>
+      <node ref="C401" pin="2" pintype="passive"/>
+      <node ref="C402" pin="2" pintype="passive"/>
+      <node ref="C403" pin="2" pintype="passive"/>
+      <node ref="C405" pin="2" pintype="passive"/>
+      <node ref="C406" pin="2" pintype="passive"/>
+      <node ref="C407" pin="2" pintype="passive"/>
+      <node ref="C408" pin="2" pintype="passive"/>
       <node ref="C601" pin="2" pintype="passive"/>
       <node ref="C602" pin="2" pintype="passive"/>
+      <node ref="C701" pin="2" pintype="passive"/>
+      <node ref="C702" pin="2" pintype="passive"/>
+      <node ref="C703" pin="2" pintype="passive"/>
+      <node ref="C704" pin="2" pintype="passive"/>
+      <node ref="C705" pin="2" pintype="passive"/>
       <node ref="C801" pin="2" pintype="passive"/>
       <node ref="C802" pin="2" pintype="passive"/>
+      <node ref="C901" pin="2" pintype="passive"/>
+      <node ref="C902" pin="2" pintype="passive"/>
+      <node ref="C906" pin="2" pintype="passive"/>
+      <node ref="C907" pin="2" pintype="passive"/>
+      <node ref="C908" pin="2" pintype="passive"/>
+      <node ref="J1001" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="J1101" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="J1101" pin="12" pinfunction="12_12" pintype="passive"/>
+      <node ref="J1101" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="Q401" pin="2" pinfunction="S_2" pintype="passive"/>
+      <node ref="R1103" pin="2" pintype="passive"/>
+      <node ref="R1104" pin="2" pintype="passive"/>
+      <node ref="R1105" pin="2" pintype="passive"/>
+      <node ref="R1106" pin="2" pintype="passive"/>
+      <node ref="R1107" pin="2" pintype="passive"/>
+      <node ref="R1108" pin="2" pintype="passive"/>
+      <node ref="R1109" pin="2" pintype="passive"/>
+      <node ref="R1110" pin="2" pintype="passive"/>
+      <node ref="R401" pin="2" pintype="passive"/>
+      <node ref="R406" pin="2" pintype="passive"/>
+      <node ref="R408" pin="2" pintype="passive"/>
       <node ref="R602" pin="2" pintype="passive"/>
       <node ref="R604" pin="2" pintype="passive"/>
       <node ref="R605" pin="2" pintype="passive"/>
+      <node ref="R702" pin="2" pintype="passive"/>
+      <node ref="R703" pin="2" pintype="passive"/>
+      <node ref="R706" pin="2" pintype="passive"/>
       <node ref="R802" pin="2" pintype="passive"/>
+      <node ref="R902" pin="2" pintype="passive"/>
+      <node ref="R903" pin="2" pintype="passive"/>
+      <node ref="R905" pin="2" pintype="passive"/>
+      <node ref="R907" pin="2" pintype="passive"/>
       <node ref="TP1210" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="12" pinfunction="GND_12" pintype="power_in"/>
+      <node ref="U1101" pin="2" pinfunction="A1_2" pintype="input"/>
+      <node ref="U1101" pin="21" pinfunction="A0_21" pintype="input"/>
+      <node ref="U401" pin="15" pinfunction="GND_15" pintype="power_in"/>
       <node ref="U601" pin="B2" pinfunction="VSS_B2" pintype="power_in"/>
+      <node ref="U701" pin="12" pinfunction="GND_12" pintype="power_in"/>
+      <node ref="U701" pin="3" pinfunction="CP2_3" pintype="input"/>
+      <node ref="U701" pin="5" pinfunction="OV1_5" pintype="input"/>
+      <node ref="U702" pin="2" pinfunction="GND_2" pintype="power_in"/>
       <node ref="U801" pin="2" pinfunction="MODE_2" pintype="input"/>
       <node ref="U801" pin="3" pinfunction="AGND_3" pintype="power_in"/>
       <node ref="U801" pin="8" pinfunction="GND_8" pintype="power_in"/>
+      <node ref="U901" pin="11" pinfunction="GND_11" pintype="power_in"/>
+      <node ref="U901" pin="15" pinfunction="SYNC_MODE_15" pintype="input"/>
+      <node ref="U901" pin="18" pinfunction="GND_18" pintype="power_in"/>
+      <node ref="U901" pin="22" pinfunction="GND_22" pintype="power_in"/>
+      <node ref="U901" pin="29" pinfunction="EP_GND_29" pintype="power_in"/>
+      <node ref="U901" pin="3" pinfunction="GND_3" pintype="power_in"/>
+      <node ref="U902" pin="3" pinfunction="GND_3" pintype="power_in"/>
     </net>
-    <net code="15" name="KEEPALIVE" class="Default">
+    <net code="32" name="IO_RESET_N" class="Default">
+      <node ref="R1102" pin="2" pintype="passive"/>
+      <node ref="U1101" pin="3" pinfunction="RESET_N_3" pintype="input"/>
+    </net>
+    <net code="33" name="IO_UNUSED10" class="Default">
+      <node ref="R1103" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="13" pinfunction="P10_13" pintype="bidirectional"/>
+    </net>
+    <net code="34" name="IO_UNUSED11" class="Default">
+      <node ref="R1104" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="14" pinfunction="P11_14" pintype="bidirectional"/>
+    </net>
+    <net code="35" name="IO_UNUSED12" class="Default">
+      <node ref="R1105" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="15" pinfunction="P12_15" pintype="bidirectional"/>
+    </net>
+    <net code="36" name="IO_UNUSED13" class="Default">
+      <node ref="R1106" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="16" pinfunction="P13_16" pintype="bidirectional"/>
+    </net>
+    <net code="37" name="IO_UNUSED14" class="Default">
+      <node ref="R1107" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="17" pinfunction="P14_17" pintype="bidirectional"/>
+    </net>
+    <net code="38" name="IO_UNUSED15" class="Default">
+      <node ref="R1108" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="18" pinfunction="P15_18" pintype="bidirectional"/>
+    </net>
+    <net code="39" name="IO_UNUSED16" class="Default">
+      <node ref="R1109" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="19" pinfunction="P16_19" pintype="bidirectional"/>
+    </net>
+    <net code="40" name="IO_UNUSED17" class="Default">
+      <node ref="R1110" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="20" pinfunction="P17_20" pintype="bidirectional"/>
+    </net>
+    <net code="41" name="KEEPALIVE" class="Default">
       <node ref="TP1215" pin="1" pintype="passive"/>
     </net>
-    <net code="16" name="PG_3V3" class="Default">
+    <net code="42" name="MUX_BAT_STATUS" class="Default">
+      <node ref="R704" pin="2" pintype="passive"/>
+      <node ref="U1101" pin="11" pinfunction="P07_11" pintype="bidirectional"/>
+      <node ref="U701" pin="9" pinfunction="ST_9" pintype="open_collector"/>
+    </net>
+    <net code="43" name="MUX_EXT_SENSE" class="Default">
+      <node ref="R701" pin="2" pintype="passive"/>
+      <node ref="R702" pin="1" pintype="passive"/>
+      <node ref="U701" pin="4" pinfunction="OV2_4" pintype="input"/>
+      <node ref="U701" pin="6" pinfunction="PR1_6" pintype="input"/>
+    </net>
+    <net code="44" name="MUX_ILIM" class="Default">
+      <node ref="R703" pin="1" pintype="passive"/>
+      <node ref="U701" pin="10" pinfunction="ILIM_10" pintype="passive"/>
+    </net>
+    <net code="45" name="MUX_SS" class="Default">
+      <node ref="C704" pin="1" pintype="passive"/>
+      <node ref="U701" pin="11" pinfunction="SS_11" pintype="passive"/>
+    </net>
+    <net code="46" name="PG_3V3" class="Default">
       <node ref="R803" pin="2" pintype="passive"/>
       <node ref="TP1216" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="4" pinfunction="P00_4" pintype="bidirectional"/>
       <node ref="U801" pin="5" pinfunction="PG_5" pintype="open_collector"/>
     </net>
-    <net code="17" name="PG_5V" class="Default">
+    <net code="47" name="PG_5V" class="Default">
+      <node ref="R906" pin="2" pintype="passive"/>
       <node ref="TP1217" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="5" pinfunction="P01_5" pintype="bidirectional"/>
+      <node ref="U901" pin="7" pinfunction="PGOOD_7" pintype="open_collector"/>
     </net>
-    <net code="18" name="PWR_INT" class="Default">
+    <net code="48" name="PWR_INT" class="Default">
+      <node ref="J1101" pin="9" pinfunction="9_9" pintype="passive"/>
+      <node ref="R1101" pin="2" pintype="passive"/>
       <node ref="TP1219" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="1" pinfunction="INT_N_1" pintype="open_collector"/>
     </net>
-    <net code="19" name="SCL" class="Default">
+    <net code="49" name="RAIL_PERMIT" class="Default">
+      <node ref="R707" pin="2" pintype="passive"/>
+      <node ref="U702" pin="1" pinfunction="RESET_N_1" pintype="open_collector"/>
+      <node ref="U801" pin="1" pinfunction="EN_1" pintype="input"/>
+      <node ref="U902" pin="1" pinfunction="A_1" pintype="input"/>
+    </net>
+    <net code="50" name="REG5_BST1" class="Default">
+      <node ref="C903" pin="1" pintype="passive"/>
+      <node ref="U901" pin="23" pinfunction="BST1_23" pintype="passive"/>
+    </net>
+    <net code="51" name="REG5_BST2" class="Default">
+      <node ref="C904" pin="1" pintype="passive"/>
+      <node ref="U901" pin="28" pinfunction="BST2_28" pintype="passive"/>
+    </net>
+    <net code="52" name="REG5_BST3" class="Default">
+      <node ref="C905" pin="1" pintype="passive"/>
+      <node ref="U901" pin="1" pinfunction="BST3_1" pintype="passive"/>
+    </net>
+    <net code="53" name="REG5_COMP" class="Default">
+      <node ref="C907" pin="1" pintype="passive"/>
+      <node ref="R904" pin="2" pintype="passive"/>
+    </net>
+    <net code="54" name="REG5_ENABLE" class="Default">
+      <node ref="R907" pin="1" pintype="passive"/>
+      <node ref="U901" pin="16" pinfunction="EN_UVLO_16" pintype="input"/>
+      <node ref="U902" pin="4" pinfunction="Y_4" pintype="output"/>
+    </net>
+    <net code="55" name="REG5_RT" class="Default">
+      <node ref="R903" pin="1" pintype="passive"/>
+      <node ref="U901" pin="14" pinfunction="RT_14" pintype="passive"/>
+    </net>
+    <net code="56" name="REG5_SW1" class="Default">
+      <node ref="C903" pin="2" pintype="passive"/>
+      <node ref="L901" pin="1" pintype="passive"/>
+      <node ref="U901" pin="24" pinfunction="SW1_24" pintype="bidirectional"/>
+      <node ref="U901" pin="25" pinfunction="SW1_25" pintype="bidirectional"/>
+    </net>
+    <net code="57" name="REG5_SW2" class="Default">
+      <node ref="C904" pin="2" pintype="passive"/>
+      <node ref="L901" pin="2" pintype="passive"/>
+      <node ref="U901" pin="26" pinfunction="SW2_26" pintype="bidirectional"/>
+      <node ref="U901" pin="27" pinfunction="SW2_27" pintype="bidirectional"/>
+    </net>
+    <net code="58" name="REG5_VC" class="Default">
+      <node ref="R904" pin="1" pintype="passive"/>
+      <node ref="U901" pin="10" pinfunction="VC_10" pintype="passive"/>
+    </net>
+    <net code="59" name="REG5_VCC" class="Default">
+      <node ref="C906" pin="1" pintype="passive"/>
+      <node ref="U901" pin="12" pinfunction="MPPC_12" pintype="input"/>
+      <node ref="U901" pin="13" pinfunction="VCC_13" pintype="power_out"/>
+      <node ref="U901" pin="8" pinfunction="PROG_8" pintype="passive"/>
+    </net>
+    <net code="60" name="SCL" class="Default">
+      <node ref="J1101" pin="8" pinfunction="8_8" pintype="passive"/>
       <node ref="R605" pin="1" pintype="passive"/>
       <node ref="R607" pin="2" pintype="passive"/>
       <node ref="TP1212" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="22" pinfunction="SCL_22" pintype="input"/>
+      <node ref="U401" pin="13" pinfunction="SCL_13" pintype="input"/>
       <node ref="U601" pin="A3" pinfunction="SCL_A3" pintype="bidirectional"/>
     </net>
-    <net code="20" name="SDA" class="Default">
+    <net code="61" name="SDA" class="Default">
+      <node ref="J1101" pin="7" pinfunction="7_7" pintype="passive"/>
       <node ref="R604" pin="1" pintype="passive"/>
       <node ref="R606" pin="2" pintype="passive"/>
       <node ref="TP1211" pin="1" pintype="passive"/>
+      <node ref="U1101" pin="23" pinfunction="SDA_23" pintype="bidirectional"/>
+      <node ref="U401" pin="12" pinfunction="SDA_12" pintype="bidirectional"/>
       <node ref="U601" pin="A2" pinfunction="SDA_A2" pintype="bidirectional"/>
     </net>
-    <net code="21" name="SENSE_N" class="Default">
+    <net code="62" name="SENSE_N" class="Default">
       <node ref="R601" pin="E2" pinfunction="E2_E2" pintype="passive"/>
       <node ref="TP1214" pin="1" pintype="passive"/>
       <node ref="U601" pin="C2" pinfunction="SRN_C2" pintype="input"/>
     </net>
-    <net code="22" name="SENSE_P" class="Default">
+    <net code="63" name="SENSE_P" class="Default">
       <node ref="R601" pin="E1" pinfunction="E1_E1" pintype="passive"/>
       <node ref="TP1213" pin="1" pintype="passive"/>
       <node ref="U601" pin="C1" pinfunction="SRP_C1" pintype="input"/>
     </net>
-    <net code="23" name="SW3_L1" class="Default">
+    <net code="64" name="SENS_DAMP" class="Default">
+      <node ref="C1003" pin="1" pintype="passive"/>
+      <node ref="R1001" pin="2" pintype="passive"/>
+    </net>
+    <net code="65" name="SW3_L1" class="Default">
       <node ref="L801" pin="1" pintype="passive"/>
       <node ref="U801" pin="9" pinfunction="L1_9" pintype="bidirectional"/>
     </net>
-    <net code="24" name="SW3_L2" class="Default">
+    <net code="66" name="SW3_L2" class="Default">
       <node ref="L801" pin="2" pintype="passive"/>
       <node ref="U801" pin="7" pinfunction="L2_7" pintype="bidirectional"/>
     </net>
-    <net code="25" name="SYS_RAW" class="Default">
+    <net code="67" name="SYS_RAW" class="Default">
+      <node ref="C703" pin="1" pintype="passive"/>
+      <node ref="C705" pin="1" pintype="passive"/>
       <node ref="C801" pin="1" pintype="passive"/>
+      <node ref="C901" pin="1" pintype="passive"/>
+      <node ref="R705" pin="1" pintype="passive"/>
+      <node ref="R707" pin="1" pintype="passive"/>
       <node ref="TP1207" pin="1" pintype="passive"/>
-      <node ref="U801" pin="1" pinfunction="EN_1" pintype="input"/>
+      <node ref="U701" pin="1" pinfunction="OUT_1" pintype="power_out"/>
+      <node ref="U701" pin="8" pinfunction="OUT_8" pintype="passive"/>
+      <node ref="U702" pin="3" pinfunction="MR_N_3" pintype="input"/>
+      <node ref="U702" pin="6" pinfunction="VDD_6" pintype="power_in"/>
       <node ref="U801" pin="10" pinfunction="VIN_10" pintype="power_in"/>
+      <node ref="U901" pin="17" pinfunction="VIN_17" pintype="power_in"/>
+      <node ref="U901" pin="19" pinfunction="PVIN_19" pintype="power_in"/>
+      <node ref="U901" pin="20" pinfunction="PVIN_20" pintype="power_in"/>
+      <node ref="U901" pin="21" pinfunction="PVIN_21" pintype="power_in"/>
     </net>
-    <net code="26" name="USB_5V" class="Default">
+    <net code="68" name="SYS_UV_SENSE" class="Default">
+      <node ref="R705" pin="2" pintype="passive"/>
+      <node ref="R706" pin="1" pintype="passive"/>
+      <node ref="U702" pin="5" pinfunction="SENSE_5" pintype="input"/>
+    </net>
+    <net code="69" name="USB_5V" class="Default">
       <node ref="TP1202" pin="1" pintype="passive"/>
     </net>
-    <net code="27" name="USB_VBUS" class="Default">
+    <net code="70" name="USB_VBUS" class="Default">
       <node ref="TP1201" pin="1" pintype="passive"/>
+    </net>
+    <net code="71" name="unconnected-(U401-QON-Pad7)" class="Default">
+      <node ref="U401" pin="7" pinfunction="QON_7" pintype="input+no_connect"/>
+    </net>
+    <net code="72" name="unconnected-(U702-CT-Pad4)" class="Default">
+      <node ref="U702" pin="4" pinfunction="CT_4" pintype="passive+no_connect"/>
     </net>
   </nets>
 </export>

@@ -13,9 +13,11 @@ All addresses are 7-bit. GPIO47 SDA / GPIO21 SCL / 100kHz is confirmed by local 
 | ES8311 | 0x18 / 0x19 | Manufacturer datasheet Rev7 section5:001100x where x=CE; actual installed strap still to inspect |
 | Existing MAX17048 | 0x36 | Official slave address bits0110110; wire bytes0x6C/0x6D; removed in future architecture |
 | Future GNSS / other sensors | UNVERIFIED | Identify actual interface use and model |
-| Proposed status/control expansion | NOT SELECTED | Avoid address conflict before part choice |
+| TCA9539PWR U1101 | 0x74 | Sheet11 PW pin21 A0 and pin2 A1 tied GND; POR ports input. Source-policy integration incomplete |
 
 The verified subset has no duplicate address. This is NOT a complete no-conflict verdict. Sources: [gauge](https://www.ti.com/lit/ds/symlink/bq27220.pdf), [charger](https://www.ti.com/lit/ds/symlink/bq25628e.pdf), [PD](https://www.hynetek.com/uploadfiles/site/219/news/24322c00-2276-4d74-98db-c74432318210.pdf), [SEN0695](https://wiki.dfrobot.com/sen0695/docs/24069).
+
+[TCA9539 pin/address tables](https://www.ti.com/lit/ds/symlink/tca9539.pdf): P00/P01=3V3/5V PG, P02=FG_GPOUT, P03/P04/P05=charger PG/STAT/INT, P06=CHG_REQUEST, P07=MUX ST. Its INT_N alone drives PWR_INT. Gauge wake may drive P02 low then release to input, never push high. Short charger interrupt capture and host latency are unqualified; do not claim lossless event capture. P10..P17 each have100k pulldowns R1103..R1110 for defined POR input states; they are not implemented policy controls.
 
 Only one deliberate effective pullup network per bus; calculate parallel module pullups and rise time, not arbitrary extra 10kohm resistors on every chip. Check 3.3V logic compatibility, clock stretching, partial-power-down leakage and ESD-diode phantom powering in every rail state. Do not add an I2C mux before resolving actual address/strap conflicts.
 

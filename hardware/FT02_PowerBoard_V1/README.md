@@ -13,7 +13,9 @@ No PCB routing, Gerbers, drill files, placement files, assembly release or Rev A
 
 ## Current Implementation
 
-BQ27220/common-shunt and TPS63802 partial reference circuits,19 logical test points, and9 explicitly unimplemented child sheets. The independent checker covers36 symbols/70 pins with12 tests. The partial BOM has no approved footprints and must not be used for procurement/assembly. R601 uses logical Kelvin terminal names, not physical pad assignments. No board file is created before all Phase1 gates pass.
+BQ27220/common-shunt,TPS63802,BQ25628E, candidate TPS2121/UVLO,LT3120,sensor filter,TCA9539 interface and19 logical test points are wired references. Four sheets01/02/03/05 remain explicitly unimplemented. The independent checker covers107 symbols/305 pins with29 tests, plus4 battery-contract tests. The partial BOM has no approved footprints and must not be used for procurement/assembly. R601 uses logical Kelvin terminal names, not physical pad assignments. No board file is created before all Phase1 gates pass.
+
+R407 charge-arm link is DNP; TS is locked to fault. The charger local SYS has no system load. Current-path validation proves only the installed boundary, not the missing pack/guard or all internal fault paths. TPS2121 is UNFROZEN; board load/thermal/transition and safe source qualification are not established. `wired_reference_sheets` is deliberately separate from the empty `qualified_sheets` list.
 
 The supplied955565/955465 battery limits are adopted in `docs/BATTERY_SPEC.md`. Charge voltage remains OPEN (CC4.25V then CV4.2V); charge temperature, precise protection, NTC, connector/wire, loaded voltage and >1C pulse data also remain OPEN. Sheet06 makes the gauge's upstream supply-current bypass explicit; it does not close the literal all-current measurement requirement.
 
@@ -32,6 +34,6 @@ python3 hardware/FT02_PowerBoard_V1/tools/calculate_examples.py
 python3 -B hardware/FT02_PowerBoard_V1/tools/test_battery_contract.py -v
 ```
 
-Current ERC command intentionally exits5 because3 errors/12 warnings remain. Run subsequent checks separately, not behind shell success chaining. The topology check passes only the reference connections and explicitly reports the full design gate FAIL. KiCad's default ignored rules are disclosed in the report; no project-specific exclusions were added.
+Current ERC command intentionally exits5 because3 errors/7 warnings remain. Run subsequent checks separately, not behind shell success chaining. The topology check passes only the reference connections and explicitly reports the full design gate FAIL. KiCad's default ignored rules are disclosed in the report; no project-specific exclusions were added.
 
 `build_reference.py` regenerates all schematic/project/library files and the partial BOM. Do not rerun after manual schematic edits without reconciling those edits into the generator. `capture_baseline.py` is a one-time provenance tool, not a reset or backup restoration command.

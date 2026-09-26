@@ -5,6 +5,7 @@ import tempfile
 import unittest
 import xml.etree.ElementTree as ET
 from verify_reference import BASE, validate_netlist
+from stage_contract import audit_current_boundary, candidate_operating_limits
 
 
 class ReferenceTests(unittest.TestCase):
@@ -18,7 +19,95 @@ class ReferenceTests(unittest.TestCase):
                 validate_netlist(path)
 
     def test_actual_export(self):
-        self.assertEqual(validate_netlist(BASE / "review/reference.net.xml")["pins_checked"], 70)
+        report = validate_netlist(BASE / "review/reference.net.xml")
+        self.assertEqual(report["pins_checked"], 305)
+        self.assertEqual(report["components_checked"], 107)
+        self.assertEqual(report["current_path_audit"]["status"], "PARTIAL_BOUNDARY_ONLY_OI_010_OPEN")
+
+    def move_pin(self, root, ref, pin, source, destination):
+        net = root.find(f"./nets/net[@name='{source}']")
+        node = net.find(f"node[@ref='{ref}'][@pin='{pin}']")
+        net.remove(node)
+        root.find(f"./nets/net[@name='{destination}']").append(node)
+
+    def test_charger_moved_before_shunt(self):
+        self.check_mutation(lambda r: self.move_pin(r, "U401", "8", "BAT_PROTECTED", "BAT_GUARDED"))
+
+    def test_ups_moved_before_shunt(self):
+        self.check_mutation(lambda r: self.move_pin(r, "U701", "2", "BAT_PROTECTED", "BAT_GUARDED"))
+
+    def test_charger_sys_powering_main(self):
+        self.check_mutation(lambda r: r.find("./nets/net[@name='CHG_SYS_LOCAL']").set("name", "SYS_RAW"))
+
+    def test_charge_arm_accidentally_populated(self):
+        def edit(root):
+            part = root.find("./components/comp[@ref='R407']")
+            part.remove(part.find("property[@name='dnp']"))
+        self.check_mutation(edit)
+
+    def test_ts_safety_lock_removed(self):
+        self.check_mutation(lambda r: r.find("./components/comp[@ref='R408']/value").__setattr__("text", "100k"))
+
+    def test_3v3_uvlo_bypass(self):
+        self.check_mutation(lambda r: self.move_pin(r, "U801", "1", "RAIL_PERMIT", "SYS_RAW"))
+
+    def test_5v_enable_bypasses_uvlo(self):
+        self.check_mutation(lambda r: self.move_pin(r, "U901", "16", "REG5_ENABLE", "5V_EN"))
+
+    def test_logic_supply_changed_to_5v(self):
+        self.check_mutation(lambda r: self.move_pin(r, "U902", "5", "3V3_MAIN", "SYS_RAW"))
+
+    def test_battery_inhibit_removed(self):
+        self.check_mutation(lambda r: self.move_pin(r, "U701", "4", "MUX_EXT_SENSE", "GND"))
+
+    def test_unreviewed_current_limit(self):
+        self.check_mutation(lambda r: r.find("./components/comp[@ref='R703']/value").__setattr__("text", "18.7k"))
+
+    def test_unreviewed_stage_mpn(self):
+        self.check_mutation(lambda r: r.find("./components/comp[@ref='U702']/property[@name='MPN']").set("value", "TPS3808G01DRVR"))
+
+    def test_power_output_not_hidden_as_passive(self):
+        self.check_mutation(lambda r: r.find("./nets/net[@name='SYS_RAW']/node[@ref='U701'][@pin='1']").set("pintype", "passive"))
+
+    def test_unused_io_pulldown_removed(self):
+        def edit(root):
+            part = root.find("./components/comp[@ref='R1103']")
+            ET.SubElement(part, "property", name="dnp", value="")
+        self.check_mutation(edit)
+
+    def test_no_connect_short_to_live_net(self):
+        def edit(root):
+            net = root.find("./nets/net[@name='unconnected-(U401-QON-Pad7)']")
+            node = net.find("node")
+            net.remove(node)
+            root.find("./nets/net[@name='GND']").append(node)
+        self.check_mutation(edit)
+
+    def test_no_connect_marker_missing(self):
+        self.check_mutation(lambda r: r.find("./nets/net[@name='unconnected-(U702-CT-Pad4)']/node").set("pintype", "passive"))
+
+    def test_boundary_audit_independently_rejects_extra_load(self):
+        actual = {}
+        tree = ET.parse(BASE / "review/reference.net.xml")
+        for net in tree.findall("./nets/net"):
+            for node in net.findall("node"):
+                actual[(node.get("ref"), node.get("pin"))] = net.get("name")
+        audit_current_boundary(actual)
+        actual[("R9999", "1")] = "BAT_GUARDED"
+        with self.assertRaises(ValueError):
+            audit_current_boundary(actual)
+
+    def test_candidate_limits_do_not_invent_loads_or_fast_timing(self):
+        limits = candidate_operating_limits()
+        self.assertIsNone(limits["required_continuous_board_power_W"])
+        self.assertIsNone(limits["required_peak_board_power_W"])
+        self.assertIsNone(limits["required_peak_duration_ms"])
+        self.assertIsNone(limits["mux_transition_guaranteed_max_us"])
+        self.assertIsNone(limits["mux_ron_guaranteed_max_at_battery_input_ohm"])
+        self.assertEqual(limits["mux_transition_typical_us"], 100)
+        low, high = limits["system_uvlo_static_bound_V"]
+        self.assertTrue(3.20 < low < 3.23 < 3.38 < high < 3.40)
+        self.assertGreater(limits["stress_example_not_requirement"]["raw_current_at_static_uvlo_low_A"], 5)
 
     def test_swapped_sense_inputs(self):
         def edit(root):

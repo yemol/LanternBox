@@ -9,10 +9,15 @@ These are official sources inspected during preflight. Reading relevant sections
 | DS-03 | [BQ27220 Rev. A](https://www.ti.com/lit/ds/symlink/bq27220.pdf) | Pin table, sense range, high-side/system application, current modes, address and timing |
 | DS-04 | [BQ27220 TRM Rev. A](https://www.ti.com/lit/ug/sluubd4a/sluubd4a.pdf) | Capacity/profile fields; standard telemetry commands; RAM/OTP configuration |
 | DS-05 | [TPS63802 Rev. D](https://www.ti.com/lit/ds/symlink/tps63802.pdf) | Input range, specified 3.3V capability, PG, no-load current, true shutdown |
-| DS-06 | [LT3120 Rev. 0](https://www.analog.com/media/en/technical-documentation/data-sheets/lt3120.pdf) | Features and 5V application examples; low-input derating; compensation and layout remain to design |
+| DS-06 | [LT3120 Rev. 0](https://www.analog.com/media/en/technical-documentation/data-sheets/lt3120.pdf) | Pin functions and page28 TA07 implemented at500kHz; compensation values are reference-only, load/loop/thermal qualification pending |
 | DS-07 | [HUSB238A official 20-page PDF](https://www.hynetek.com/uploadfiles/site/219/news/24322c00-2276-4d74-98db-c74432318210.pdf) | Tables 6-9; mode/address pins; shared analog/I2C pins; legacy detection; fuse limits |
 | DS-08 | [BQ297xx Rev. I](https://www.ti.com/lit/ds/symlink/bq2970.pdf) | Protection functions and factory-defined thresholds; exact suffix not selected |
 | DS-09 | [Vishay WSK2512,11-Dec-2023](https://www.vishay.com/docs/30108/wsk2512.pdf) | Four-terminal10mohm1% candidate WSK2512R0100FEA;1W at70C;35ppm/C full-resistor TCR; I1/I2/E1/E2 logical terminals, physical pad assignment pending |
+| DS-10 | [TPS3808 Rev N](https://www.ti.com/lit/ds/symlink/tps3808.pdf) | G01 DBV pin table,0.405V threshold2% and25nA sense bias; CT NC12/20/28ms; provisional SYS_RAW UVLO |
+| DS-11 | [SN74LVC1G08 Rev AA](https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf) | DBV pin table,5.5V inputs and Ioff; U902 powered from3V3, not SYS_RAW |
+| DS-12 | [TCA9539 Rev C](https://www.ti.com/lit/ds/symlink/tca9539.pdf) | PW24 pin table,0x74 A1/A0 straps, POR input state and interrupt behavior |
+| DS-13 | [2N7002](https://assets.nexperia.com/documents/data-sheet/2N7002.pdf) | G1/S2/D3, Q401 small CE-pullup sink; charge-arm link remains absent |
+| DS-14 | [Murata BLM21PG221SN1D](https://www.murata.com/en-eu/api/pdfdownloadapi?cate=cgsubChipFerriBead&partno=BLM21PG221SN1D) |220ohm at100MHz,2A,45mohm max DCR; actual sensor filter/EMI still unqualified |
 | PS-01 | [BQ27220 product page](https://www.ti.com/product/BQ27220) | Active; capacity range includes 10000mAh, published maximum 32000mAh |
 | PS-02 | [BQ24157 product page](https://www.ti.com/product/BQ24157) | Alternative screening: 1.55A, I2C; incomplete battery NTC/JEITA fit |
 | PS-03 | [BQ25306 product page](https://www.ti.com/product/BQ25306) | Alternative screening: 3A standalone, no I2C |

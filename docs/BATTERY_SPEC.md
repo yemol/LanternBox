@@ -32,3 +32,5 @@ Charge-temperature range; exact protection thresholds/tolerance/delay/recovery; 
 Future at least10000mAh remains a separate1S compatibility target without PCB redesign, subject to a common qualified current/thermal/connector envelope and correct gauge profile. Do not double5A when capacity doubles. Current5000mAh data are not replaced by future/old pack data.
 
 The prior source-search blocker is resolved only for the fields above. Board current rating, safe charging, UPS low-voltage margin and full battery-path verification remain OPEN.
+
+Schematic implementation boundary: sheet04 now physically locks charge off with R407 DNP and TS fault. Sheet07's provisional3.30V SYS_RAW undervoltage shutdown is a board design choice, not new battery evidence. It does not close minimum loaded pack voltage, exact protection thresholds or the4.25V/4.2V conflict. No additional battery source field was closed.

@@ -1,15 +1,60 @@
 {
-  "checked_utc": "2026-09-25T00:57:54.230626+00:00",
+  "checked_utc": "2026-09-26T03:06:23.931757+00:00",
   "topology": {
     "status": "PASS_REFERENCE_ONLY",
-    "pins_checked": 70,
-    "components_checked": 36,
-    "sheets_parsed": 13
+    "pins_checked": 305,
+    "components_checked": 107,
+    "sheets_parsed": 13,
+    "current_path_audit": {
+      "status": "PARTIAL_BOUNDARY_ONLY_OI_010_OPEN",
+      "boundary_nodes": {
+        "BAT_GUARDED": [
+          "C601:1",
+          "R601:I1",
+          "U601:C3"
+        ],
+        "BAT_PROTECTED": [
+          "C407:1",
+          "C702:1",
+          "R601:I2",
+          "U401:8",
+          "U701:2"
+        ],
+        "SENSE_P": [
+          "R601:E1",
+          "TP1213:1",
+          "U601:C1"
+        ],
+        "SENSE_N": [
+          "R601:E2",
+          "TP1214:1",
+          "U601:C2"
+        ],
+        "CHG_SYS_LOCAL": [
+          "C406:1",
+          "L401:2",
+          "U401:9"
+        ]
+      },
+      "charge_terminal": "U401:8 -> BAT_PROTECTED -> R601:I2/I1 -> BAT_GUARDED",
+      "discharge_terminal": "BAT_GUARDED -> R601:I1/I2 -> BAT_PROTECTED -> U701:2",
+      "upstream_exceptions": [
+        "U601:C3 gauge supply",
+        "C601:1 decoupling charging/discharging current",
+        "U601:C1/C2 sense-input bias and test-probe leakage via Kelvin terminals"
+      ],
+      "not_proven": [
+        "BAT_PLUS/BAT_MINUS to board guard (sheet05 absent)",
+        "final auxiliary paths in absent sheets01/02/03/05",
+        "IC internal leakage/reverse paths in all operating and fault states",
+        "physical four-terminal footprint and trace connections"
+      ]
+    }
   },
   "erc": {
     "kicad_version": "10.0.5",
     "counts": {
-      "warning": 12,
+      "warning": 7,
       "error": 3
     },
     "default_ignored_checks": [
@@ -36,31 +81,82 @@
     "01_USB_C_PD",
     "02_EXT_INPUT",
     "03_EXTERNAL_POWER_MUX",
+    "05_BATTERY_PROTECTION"
+  ],
+  "wired_reference_sheets": [
+    "06_FUEL_GAUGE",
+    "08_3V3_BUCKBOOST",
+    "12_TEST_POINTS",
     "04_BATTERY_CHARGER",
-    "05_BATTERY_PROTECTION",
     "07_UPS_POWER_MUX",
     "09_5V_BUCKBOOST",
     "10_SENSOR_POWER",
     "11_MAINBOARD_INTERFACE"
   ],
+  "qualified_sheets": [],
+  "candidate_operating_limits": {
+    "decision": "TPS2121_UNFROZEN_NOT_A_BOARD_RATING",
+    "required_continuous_board_power_W": null,
+    "required_peak_board_power_W": null,
+    "required_peak_duration_ms": null,
+    "system_uvlo_nominal_V": 3.3007500000000003,
+    "system_uvlo_static_bound_V": [
+      3.2111721250000005,
+      3.390571118243243
+    ],
+    "system_uvlo_boundary": "SYS_RAW only; not loaded pack floor; excludes noise/propagation/rebound",
+    "mux_operating_minimum_input_V": 2.8,
+    "mux_current_limit_table_A": [
+      3,
+      3.5,
+      4
+    ],
+    "mux_current_limit_boundary": "At exact29.8k; resistor tolerance and transient response additional",
+    "mux_transition_typical_us": 100,
+    "mux_transition_guaranteed_max_us": null,
+    "mux_ron_guaranteed_max_at_battery_input_ohm": null,
+    "stress_example_not_requirement": {
+      "rails_W": 16.6,
+      "assumed_efficiency": 0.9,
+      "raw_current_at_static_uvlo_low_A": 5.743835498835007,
+      "conclusion": "Exceeds pack5A and chosen limiter minimum; simultaneous2A+2A NOT approved"
+    },
+    "hold_up_example_not_guarantee": {
+      "assumed_current_A": 3,
+      "nominal_C_uF": 220,
+      "assumed_time_us": 100,
+      "capacitive_droop_V": 1.3636363636363635,
+      "conclusion": "1.36V droop before ESR/derating; nominal capacitor does NOT prove no brownout"
+    }
+  },
   "release_gate": "FAIL_INCOMPLETE_DESIGN",
   "evidence_sha256": {
     "01_USB_C_PD.kicad_sch": "54f39bbddcc6edba0d398da5a60f408a9b3cf4199aa61f58770ba4f5ad0e2f63",
     "02_EXT_INPUT.kicad_sch": "2075486496dbc115d76830128e1973c894398228ebd21dbcc833caf9b1ddc3f4",
     "03_EXTERNAL_POWER_MUX.kicad_sch": "b473eef63e55feca8d05c962f0eff19af64e9ef0cab67e9e30cb54bf8c310aa9",
-    "04_BATTERY_CHARGER.kicad_sch": "13b1de01c052dac3f98bdbef9a30e8129856df78d159b4a65460ae4faa6de070",
+    "04_BATTERY_CHARGER.kicad_sch": "d148d9525c9c13b80f25238a0de3ed59f39433d08edcd7344a784161c21d6532",
     "05_BATTERY_PROTECTION.kicad_sch": "55a1e24133d7b8281e0d956b59122cde217e1b5d60ac637c13a9fca1cd21620d",
     "06_FUEL_GAUGE.kicad_sch": "c82ee4348c95534019c9c5da7133fcec07c2384fee3887e4646e5e2b746d65cc",
-    "07_UPS_POWER_MUX.kicad_sch": "63d4102988ec9bc71c723d46a2b829e7c297c742e338d56bc22a5b3d78d6c51a",
-    "08_3V3_BUCKBOOST.kicad_sch": "04452977562c280ffe0915f740d0da2b5ea03271658be4c5b36b53369cf6c368",
-    "09_5V_BUCKBOOST.kicad_sch": "ac58afbb762070d0fecff4857d6c1b4718d8b77d8521f987bb53a3cf85ff2fb5",
-    "10_SENSOR_POWER.kicad_sch": "fd66cc4d5653f8c4a793fc0b5f59f1c263510dabdc2abb4572521f8cee262dc9",
-    "11_MAINBOARD_INTERFACE.kicad_sch": "8bf518bd3bcb0414f0013a07244be934207ad1a34e4b1e73cacc834d4be7a21c",
+    "07_UPS_POWER_MUX.kicad_sch": "20d7b6cfb3d87d5711370dd7d7373ca5b275cafac5c2a0d0becb06ed07afff72",
+    "08_3V3_BUCKBOOST.kicad_sch": "e6cec11c0feb469937352a5fd3df312163c0f82df377790aef1e7a79224eba2e",
+    "09_5V_BUCKBOOST.kicad_sch": "b0a1fabae8e16d0f671511a50d4f19316e7b1d27671ec456b470703a74797585",
+    "10_SENSOR_POWER.kicad_sch": "cd4372ae7721b620a0bded30b9b1b5689d8163a54bf93b9f1e73320a37020cb6",
+    "11_MAINBOARD_INTERFACE.kicad_sch": "db665024869e2458b46e58d771353d60f66942612492ccc7a70b6ca33a55d1b7",
     "12_TEST_POINTS.kicad_sch": "a108ad60652223a8cfa1e81bb0f4ad126133c85f6254d1feb33208851c117b93",
-    "FT02_PowerBoard_V1.kicad_sch": "2f258c7413a03bfa930613dee33a41e62cd18e2e3772427a602fe570e6f4a1e5",
-    "reference.net.xml": "810ddc57b4654ffa75f3d9a3c64008311c7779c47f5e478e11f18ad6181f93d4",
-    "erc.json": "a98bb7024d4c81a88c6cda203d2fc5c15b605785a7602d303d182f05b2ba4a7a",
-    "FT02_PowerBoard_V1.kicad_pro": "55426efea6ad0f29e47102254575d4242a5f6a712ef8a948395d7ea380e422d9"
+    "FT02_PowerBoard_V1.kicad_sch": "fb4623c68f79452384e4f15b23b8f1073e4de56f35ff39fe7329ee8287d485fb",
+    "reference.net.xml": "c3ac10fda91e5d42cae7df112343fe9ba93ee1e8d2fa2c5ee2003bfe46dc4054",
+    "erc.json": "02fd4bb6facdf411e53180626cf7b105f19aa6e78cee925b5607f9cc42637eaf",
+    "FT02_PowerBoard_V1.kicad_pro": "55426efea6ad0f29e47102254575d4242a5f6a712ef8a948395d7ea380e422d9",
+    "FT02_Reference.kicad_sym": "7cee95219dc3ea64f00df9478c479f6424cdf0be7d3c0ee43ae2df64a4bbbc27",
+    "implementation_manifest.json": "c611d138ea22224148c1e772fbe45a2e1d55c11e35eb47a54ff6c815723deab0",
+    "build_reference.py": "ef01363cb0b1b74f3a6ec3b6838c73c4475a8b497c844964011dda8d51ca4f1b",
+    "calculate_examples.py": "3b67121133e3c3dabc4c3deb187d2746aef29daaac9ddcda6c1521a9a07ab753",
+    "capture_baseline.py": "cdce19131fdc2fa376dcc18c1bd2e7ef8efd0f0b78ba5c723f281009155484e7",
+    "power_stage_sheets.py": "629cbabb9e09892790f4df7cc3414d2bdc3643f2fe06ef1b8a8d930a43447530",
+    "stage_contract.py": "16cf59b14fad2e458b27897c1cc21e49ede506ee3dcdf89444c4c092010e1a13",
+    "test_battery_contract.py": "c882e51670aaacb872634094e59ca351a83a5b76c2adc08c2fb174d60982ebd0",
+    "test_verify_reference.py": "a183028f66c0546a16383938e7cff2a53016c4c38fec8e4bac221d32fdf73d1e",
+    "verify_reference.py": "fcd8a0097d62ce2976175faa2ec19f43f18ac5093b752c649e993da411945578"
   },
-  "scope": "Topology only. No circuit simulation, transient proof, shunt audit, footprints or hardware tests."
+  "scope": "Pin topology and partial shunt boundary only. No complete pack path, circuit simulation, transient proof, footprints or hardware tests."
 }

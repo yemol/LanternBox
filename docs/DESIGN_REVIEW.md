@@ -5,12 +5,12 @@ Review date:2026-09-25. Decision: **FAIL / HOLD PHASE 2**. This is an incomplete
 ## Verification Evidence
 
 - KiCad10.0.5 parses root plus12 child sheets and exports XML/SVG.
-- Sheet06 now contains BQ27220/common-shunt reference circuitry; sheet08 contains the TPS63802 reference; sheet12 contains19 logical test points. Nine other sheets explicitly say NOT IMPLEMENTED. Neither reference circuit is a qualified subsystem.
-- Independent exported-netlist check passes70 pin connections/36 symbols. Twelve checker tests pass, including deliberate sense reversal, shunt bypass, shared interrupt, populated pullup, unreviewed footprint and wrong-value cases.
+- Sheets04/07/09/10/11 now have charger, candidate UPS/UVLO,5V, sensor and interface wiring; sheet08 enable is supervised. Sheets01/02/03/05 remain NOT IMPLEMENTED. None is a qualified subsystem; the main input/pack chain is still incomplete.
+- Independent exported-netlist check passes305 pins/107 symbols.29 connectivity/boundary/candidate-limit tests pass, including deliberate charger/UPS shunt bypass, charge-arm stuffing, UVLO bypass, wrong IC, NC-to-live-net, missing unused-input bias and hidden power-output mutations.
 - Four battery-contract regression tests also pass: adopted limits, unresolved parameters remaining null, over5A examples forbidden and only source-backed issue children closed. Source/electrical evidence hashes match the retained records. These are software/document checks, not electrical qualification.
-- ERC:3 errors,12 warnings. Errors are undriven power inputs on BAT_GUARDED/GND/SYS_RAW; isolated-label warnings identify BAT_PROTECTED and incomplete test-point networks. No project-specific error exclusions or PWR_FLAG workarounds were added. KiCad default ignored checks are retained/disclosed in the JSON report.
+- ERC:3 errors,7 warnings. Undriven EXT_BUS_5V/GND/BAT_GUARDED correspond to missing upstream implementation. Seven isolated test-point labels are individually reviewed in the root Phase1 review, not waived. Duplicate internally common output pins now have one power_out plus one passive pin, with equality enforced by the netlist contract. No PWR_FLAG/exclusions were added; default ignored checks are disclosed.
 - Empty sheets returning zero ERC violations do not prove completeness. No simulation, complete battery-path audit, physical footprint review or hardware test has passed.
-- Full-aspect SVG raster previews of updated root and new sheet06 were visually inspected; earlier sheet08/12 checks remain applicable. U801 text overlap and root-sheet/title-block spacing were corrected at the previous checkpoint.
+- Full-aspect previews of the newly wired pages were inspected; sheet09 label collision was corrected. No schematic rendering is evidence of electrical qualification.
 
 ## Required Thirty Answers
 
@@ -18,8 +18,8 @@ Review date:2026-09-25. Decision: **FAIL / HOLD PHASE 2**. This is an incomplete
 | --- | --- | --- | --- |
 | 1 | EXT_VALID forbids BAT feeding System? | OPEN | Required invariant; no completed UPS/validity circuit,OI-004/006 |
 | 2 | Hidden battery supplement absent? | OPEN | Must inspect every conducting/backfeed path; empty sheets are not proof,OI-005/010 |
-| 3 | Charger SYS incorrectly tied to system? | PASS policy / OPEN circuit | Architecture forbids it; charger sheet not implemented,OI-007 |
-| 4 | All charge/discharge through one shunt? | OPEN | R601/reference pin connections checked; main branches missing and U601 BAT bias bypass explicit,OI-010 |
+| 3 | Charger SYS incorrectly tied to system? | PASS installed net boundary / OPEN device states | CHG_SYS_LOCAL only U401:9,L401:2,C406:1; internal reverse/fault behavior remains OI-007 |
+| 4 | All charge/discharge through one shunt? | OPEN | U401 BAT/U701 IN2 connected on post-shunt side; exact node audit passes. Guard absent; gauge supply/C601/sense-bias exceptions explicit,OI-010 |
 | 5 | Weak USB reduces charging first? | OPEN | Branch ILIM cannot enforce source-wide priority,OI-005 |
 | 6 | Collapsed external invalidates and transfers? | OPEN | Hardware qualification, latch/retry and timing missing,OI-006/019 |
 | 7 | Low-load keep-alive solution? | OPEN | DNP pulse policy/calculation exists; no implemented gating/pulse limiter or bank test |
@@ -29,7 +29,7 @@ Review date:2026-09-25. Decision: **FAIL / HOLD PHASE 2**. This is an incomplete
 | 11 | Current5000mAh frozen spec implemented? | PARTIAL | Source model/3.8V(3.7V compatible)/size/mass/current/discharge/protection-presence adopted;4.25V CC vs4.2V CV, charge temperature and safety/interface details OPEN,OI-002 |
 | 12 | Future10000mAh without PCB change? | OPEN | Gauge capacity range suitable; shared current/connector/thermal envelope not frozen |
 | 13 | 3V3 stable full-to-low battery? | OPEN | Partial reference connectivity passes; loaded battery floor/transient/thermal proof absent |
-| 14 | 5V stable on both sources? | OPEN | LT3120 candidate only, no implemented circuit or lowest-input qualification |
+| 14 | 5V stable on both sources? | OPEN | LT3120 TA07 circuit wired, default-off with UVLO AND gate; lowest-input load/loop/thermal not qualified |
 | 15 | ESP32 avoids transfer brownout? | OPEN | No worst-case timing/hold-up/rail proof or scope traces,OI-019 |
 | 16 | USB5V/2A maximum system load? | OPEN | Nominal source10W, delivered rail power less after losses; no approved numeric rating |
 | 17 | EXT5V/3A maximum system load? | OPEN | Nominal15W, losses/reserve/thermal reduce available rail power |
@@ -39,7 +39,7 @@ Review date:2026-09-25. Decision: **FAIL / HOLD PHASE 2**. This is an incomplete
 | 21 | Signed battery current available? | PASS candidate capability / OPEN implementation | BQ27220 supports shunt current; actual shunt/gain/sign calibration required |
 | 22 | State from measurements not voltage guessing? | PASS protocol policy / OPEN integration | Measured current plus gauge/charger flags, validity/age/deadband required |
 | 23 | I2C conflicts? | OPEN | Named verified address subset has none; expansion/straps/off-state/pullups still unqualified |
-| 24 | Main Core GPIO count? | OPEN implementation | Target4 total: existing SDA47/SCL21 plus PWR_INT/5V_EN; no GPIO4 allocation |
+| 24 | Main Core GPIO count? | PARTIAL implementation | Logical connector and TCA9539 0x74 use existing SDA47/SCL21 plus PWR_INT/5V_EN; no GPIO4/new MCU. Source-policy controls and pulse capture incomplete |
 | 25 | Idle overhead? | OPEN | Six-mode accounting present; UPS alone about300uA typical enabled bias, total not closed |
 | 26 | 5V-off saving? | OPEN | Must compare same-load input power; no numeric saving asserted |
 | 27 | All critical parts active/new-design? | OPEN | TI TPS2121/TPS63802/BQ25628E ACTIVE; ADI LT3120 recommended; full exact-MPN BOM audit absent |
@@ -53,6 +53,6 @@ Review date:2026-09-25. Decision: **FAIL / HOLD PHASE 2**. This is an incomplete
 2. Close source-wide limiting, autonomous charge shedding, external qualification/retry and battery-free boot as a pin-level hardware design. Verify switching timing before selecting hold-up capacitance.
 3. Resolve exact5V-only PD configuration and charger-only application/defaults. Do not silently replace candidates.
 4. Complete protected battery/common-shunt topology and all return/bias paths, NTC, sensing/calibration and low-battery margin.
-5. Finish remaining nine electrical sheets and qualify both references, device footprints/passives, real load/thermal envelope and all ERC violations; independently review before PCB.
+5. Finish remaining four electrical sheets and qualify all wired references, device footprints/passives, real load/thermal envelope and all ERC violations; independently review before PCB. TPS2121 remains UNFROZEN until board-required continuous/transient currents are established, not by comparing the pack5A ceiling alone.
 
 No PCB, production files or `ft02-powerboard-v1-revA` tag. A later zero-error ERC still requires independent electrical and safety review. Engineering-sample authorization is a later decision, never production readiness.

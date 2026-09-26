@@ -7,16 +7,16 @@ Status: OI-001 CLOSED; OI-002 PARTIALLY RESOLVED by the2026-09-25 supplied batte
 | OI-001 CLOSED | Corrected project /Volumes/yemol_HDDisk/LanternBox is accessible | Local rules and hardware records read; original HEAD and dirty state captured in 808b603 | Closed |
 | OI-002 PARTIAL | Source now supports identity/current/discharge limits and protection presence; charging/safety details incomplete | Only close child fields with direct source evidence; see below and BATTERY_SPEC.md | Safe charging/battery path/sample release still blocked |
 | OI-003 | Load variants and concurrency not frozen | EPD, SD, PA/speaker, GNSS and Core variants; measured workloads and peak durations | Power/thermal envelope |
-| OI-004 | TPS2121 cannot be assumed to cover source2.75V cutoff or5A ceiling | Loaded input>=2.8V plus margin,4.5A limiter ceiling/tolerance, path drops/hot resistance; approve lower system envelope/earlier cutoff or alternative | UPS choice remains OPEN |
+| OI-004 | TPS2121 UNFROZEN; board-required continuous/transient load not established | U701 candidate wired with29.8k ILIM; U702 nominal3.30V SYS_RAW cutoff. Prove admitted load, minimum input, current/thermal headroom and transition; pack5A alone neither rejects nor approves it | UPS choice remains OPEN |
 | OI-005 | Separate charger cannot measure total board input through its own ILIM | Source-wide limiter and hardware charge shedding; transient timing and reset-safe defaults | Architecture |
 | OI-006 | EXT_VALID requires more than unloaded voltage | Defined comparator, hysteresis, qualification, failed-source inhibit/retry, load test and battery-free behavior | Architecture |
-| OI-007 | BQ25628E charger-only application not fully qualified | Official support for local unloaded SYS with required LC/caps; reverse/sleep/fault proof; defaults and watchdog audit | Charger freeze |
+| OI-007 | BQ25628E charger-only application wired, not fully qualified | U401 LC/local SYS implemented; R407 DNP charge lock, R408 TS fault. Reverse/sleep/fault, defaults/watchdog and source-priority hardware still need proof | Charger freeze |
 | OI-008 | HUSB238A I2C cold-start 5V-only behavior unproved | Correct A-variant register documentation, ordering/fuse configuration and reset/attach traces | PD freeze |
 | OI-009 | Input OVP must protect low-voltage downstream stages | Threshold tolerances, cutoff delay, overshoot, FET/TVS energy coordination | Protection |
-| OI-010 | Sheet06 common-shunt reference implemented, but all-current requirement unproved | U601 BAT supply is explicitly upstream of R601; resolve auxiliary bypass and complete charger/UPS/guard/NTC/debug return audit. Partial netlist PASS does not close this | Fuel gauge |
+| OI-010 | Charger BAT/UPS IN2 now physically netlisted on R601 load side; complete all-current requirement unproved | Exact boundary-node checks pass; U601 BAT/C601 upstream bias/dynamic bypass and Kelvin input bias explicit. Guard, missing input sheets and internal reverse/fault states not proven. Remains OPEN | Fuel gauge |
 | OI-011 | NTC shared sensing cannot be assumed | Actual thermistor and reference circuits; independent sensing or validated noninterfering scheme | Battery safety |
 | OI-012 | Complete I2C address/pullup/off-state map missing | Exact board variants and official maps; bus scan, capacitance, phantom-power analysis | Interface |
-| OI-013 | Low-GPIO telemetry/control not fully implemented | Concrete I2C GPIO/monitor solution or verified existing outputs for mux ST, rail PG, charging permit and keep-alive | Interface |
+| OI-013 | TCA9539 0x74 telemetry/control wired, source policy incomplete | P00..P07 collect PG/FG/charger/MUX and charge request. Source controls/keep-alive absent; short IRQ capture and off-state behavior not qualified | Interface |
 | OI-014 | Input-loss cause is not always identifiable | UNKNOWN/ambiguous diagnostic state; observed evidence distinct from inferred cause | Firmware semantics |
 | OI-015 | Passive values, footprints and assembly constraints not frozen | Datasheet-derived BOM, manufacturer footprints, tolerance/derating checks, DSBGA capability | Schematic release |
 | OI-016 | USB-C, board, holes, connectors and EMI spacing not frozen | Enclosure CAD and connector drawings | Mechanical/Phase 2 |
@@ -27,6 +27,8 @@ Status: OI-001 CLOSED; OI-002 PARTIALLY RESOLVED by the2026-09-25 supplied batte
 | OI-021 | CardKB2 supply rail records conflict | Older wiring says 3.3V; newer power-test plan says 5V; confirm actual module supply node | Power budget |
 
 Proceed with independent research and parameterized calculations. Do not replace unresolved battery or source limits with guessed ratings, generate fabrication outputs, or declare Phase 1 passed.
+
+Current schematic checkpoint:107 symbols/305 physical or logical pins checked;33 regression tests;ERC3 errors/7 warnings. Sheets01/02/03/05 remain NOT IMPLEMENTED. Other sheets are wired references, not qualified pages. No additional issue is closed by this checkpoint.
 
 ## OI-002 Source-Level Decisions
 
