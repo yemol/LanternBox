@@ -18,6 +18,7 @@ These are official sources inspected during preflight. Reading relevant sections
 | DS-12 | [TCA9539 Rev C](https://www.ti.com/lit/ds/symlink/tca9539.pdf) | PW24 pin table,0x74 A1/A0 straps, POR input state and interrupt behavior |
 | DS-13 | [2N7002](https://assets.nexperia.com/documents/data-sheet/2N7002.pdf) | G1/S2/D3, Q401 small CE-pullup sink; charge-arm link remains absent |
 | DS-14 | [Murata BLM21PG221SN1D](https://www.murata.com/en-eu/api/pdfdownloadapi?cate=cgsubChipFerriBead&partno=BLM21PG221SN1D) |220ohm at100MHz,2A,45mohm max DCR; actual sensor filter/EMI still unqualified |
+| DS-15 | [TPS25947 Rev C,May2026](https://www.ti.com/lit/ds/symlink/tps25947.pdf) | RPW pin table,474L adjustable OVLO/latching breaker, ITIMER NC fastest response; reverse-input pin-current constraint and threshold/bias corners. Candidate02 not qualified for full5V source tolerance or transients |
 | PS-01 | [BQ27220 product page](https://www.ti.com/product/BQ27220) | Active; capacity range includes 10000mAh, published maximum 32000mAh |
 | PS-02 | [BQ24157 product page](https://www.ti.com/product/BQ24157) | Alternative screening: 1.55A, I2C; incomplete battery NTC/JEITA fit |
 | PS-03 | [BQ25306 product page](https://www.ti.com/product/BQ25306) | Alternative screening: 3A standalone, no I2C |

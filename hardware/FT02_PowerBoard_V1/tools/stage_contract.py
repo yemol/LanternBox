@@ -1,11 +1,14 @@
 """Independent physical-pin contracts; deliberately does not import the generator.
 
 Sources: BQ25628E Rev C pin table/application, LT3120 TA07/pin functions,
-TPS2121 Rev F pin table, TPS3808 Rev N DBV pin table, SN74LVC1G08 DBV
-pin table and TCA9539 Rev C PW pin table. Values are WIP review choices.
+TPS2121 Rev F pin table, TPS3808 Rev N DBV pin table, SN74LVC1G08 DBV,
+TPS25947 Rev C RPW and TCA9539 Rev C PW pin tables. Values are WIP review choices.
 """
 
 IC_NETS = {
+    "U201": {5: "EXT_5V", 1: "EXT_UV_SENSE", 2: "EXT_OV_SENSE", 9: "EXT_ILM",
+             8: "GND", 6: "EXT_5V_SAFE", 3: None, 4: "GND", 7: "EXT_DVDT", 10: None},
+    "J201": {1: "EXT_5V", 2: "GND"},
     "U401": {18: "EXT_BUS_5V", 17: "CHG_PMID", 2: "CHG_REGN", 4: "CHG_ILIM",
              5: "CHG_TS_BIAS", 6: "CHG_TS", 7: None, 14: "CHG_CE_N", 15: "GND",
              1: "CHG_BTST", 16: "CHG_SW", 9: "CHG_SYS_LOCAL", 8: "BAT_PROTECTED",
@@ -34,6 +37,14 @@ IC_NETS = {
 }
 
 TWO_TERMINAL = [
+    ("C201", "1uF 50V", "EXT_5V", "GND"),
+    ("C202", "22uF 10V", "EXT_5V_SAFE", "GND"),
+    ("C203", "4.7nF 50V REF", "EXT_DVDT", "GND"),
+    ("R201", "562k 0.1%", "EXT_5V", "EXT_UV_SENSE"),
+    ("R202", "205k 0.1%", "EXT_UV_SENSE", "GND"),
+    ("R203", "562k 0.1%", "EXT_5V", "EXT_OV_SENSE"),
+    ("R204", "165k 0.1%", "EXT_OV_SENSE", "GND"),
+    ("R205", "1.65k 1% REF", "EXT_ILM", "GND"),
     ("C401", "1uF 10V", "EXT_BUS_5V", "GND"),
     ("C402", "10uF 10V", "CHG_PMID", "GND"),
     ("C403", "100nF 10V", "CHG_PMID", "GND"),
@@ -98,7 +109,7 @@ TWO_TERMINAL = [
     ("R1110", "100k 1%", "IO_UNUSED17", "GND"),
 ]
 
-MPNS = {"U401": "BQ25628ERYKR", "Q401": "2N7002,215", "U701": "TPS2121RUXR",
+MPNS = {"U201": "TPS259474LRPWR", "U401": "BQ25628ERYKR", "Q401": "2N7002,215", "U701": "TPS2121RUXR",
         "U702": "TPS3808G01DBVR", "U901": "LT3120IUFDM#PBF", "U902": "SN74LVC1G08DBVR",
         "U1101": "TCA9539PWR", "FB1001": "BLM21PG221SN1D"}
 
@@ -110,6 +121,7 @@ def candidate_operating_limits():
     high = 0.405 * 1.02 * (1 + top*(1+tol)/(bottom*(1-tol))) + 25e-9*top*(1+tol)
     return {
         "decision": "TPS2121_UNFROZEN_NOT_A_BOARD_RATING",
+        "ext_guard_candidate": ext_guard_limits(),
         "required_continuous_board_power_W": None,
         "required_peak_board_power_W": None,
         "required_peak_duration_ms": None,
@@ -132,6 +144,26 @@ def candidate_operating_limits():
             "capacitive_droop_V": 3*100/220,
             "conclusion": "1.36V droop before ESR/derating; nominal capacitor does NOT prove no brownout",
         },
+    }
+
+
+def ext_guard_limits():
+    def bounds(bottom, threshold_min, threshold_max):
+        top, tol, bias = 562000, 0.001, 0.1e-6
+        return [threshold_min*(1+top*(1-tol)/(bottom*(1+tol)))-bias*top*(1+tol),
+                threshold_max*(1+top*(1+tol)/(bottom*(1-tol)))+bias*top*(1+tol)]
+    return {
+        "decision": "UNQUALIFIED_NOT_A_FROZEN_INPUT_SPEC",
+        "ov_trip_static_V": bounds(165000, 1.183, 1.223),
+        "uv_start_static_V": bounds(205000, 1.183, 1.223),
+        "uv_stop_static_V": bounds(205000, 1.076, 1.116),
+        "assumed_reverse_test_V": -5.5,
+        "control_pin_reverse_current_upper_uA": 5.5/(562000*0.999)*1e6,
+        "breaker_table_A_at_exact_1k65": [1.8, 2.028, 2.2],
+        "not_proven": ["full5V+/-5% source window; low OV corner may reject5.25V",
+                       "hotplug overshoot/inductive negative excursion/TVS energy",
+                       "load-current headroom, inrush and thermal limits",
+                       "weak-source rebound inhibit and source-wide charge shedding"],
     }
 
 
@@ -165,7 +197,7 @@ def audit_current_boundary(actual):
         "upstream_exceptions": ["U601:C3 gauge supply", "C601:1 decoupling charging/discharging current",
                                 "U601:C1/C2 sense-input bias and test-probe leakage via Kelvin terminals"],
         "not_proven": ["BAT_PLUS/BAT_MINUS to board guard (sheet05 absent)",
-                       "final auxiliary paths in absent sheets01/02/03/05",
+                       "final auxiliary paths in absent sheets01/03/05 and candidate sheet02 fault states",
                        "IC internal leakage/reverse paths in all operating and fault states",
                        "physical four-terminal footprint and trace connections"],
     }

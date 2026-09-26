@@ -4,6 +4,7 @@
     "06_FUEL_GAUGE",
     "08_3V3_BUCKBOOST",
     "12_TEST_POINTS",
+    "02_EXT_INPUT",
     "04_BATTERY_CHARGER",
     "07_UPS_POWER_MUX",
     "09_5V_BUCKBOOST",
@@ -14,11 +15,128 @@
   "implementation_scope": "Pin-level stages plus partial control/interface, not a closed or qualified main power chain.",
   "unimplemented_sheets": [
     "01_USB_C_PD",
-    "02_EXT_INPUT",
     "03_EXTERNAL_POWER_MUX",
     "05_BATTERY_PROTECTION"
   ],
   "components": {
+    "J201": {
+      "kind": "CONN2",
+      "nets": {
+        "1": "EXT_5V",
+        "2": "GND"
+      },
+      "value": "REGULATED EXT_5V",
+      "mpn": "",
+      "sheet": "02_EXT_INPUT",
+      "dnp": false
+    },
+    "U201": {
+      "kind": "TPS259474",
+      "nets": {
+        "5": "EXT_5V",
+        "1": "EXT_UV_SENSE",
+        "2": "EXT_OV_SENSE",
+        "9": "EXT_ILM",
+        "8": "GND",
+        "6": "EXT_5V_SAFE",
+        "3": null,
+        "4": "GND",
+        "7": "EXT_DVDT",
+        "10": null
+      },
+      "value": "TPS259474LRPWR CANDIDATE",
+      "mpn": "TPS259474LRPWR",
+      "sheet": "02_EXT_INPUT",
+      "dnp": false
+    },
+    "C201": {
+      "kind": "C",
+      "nets": {
+        "1": "EXT_5V",
+        "2": "GND"
+      },
+      "value": "1uF 50V",
+      "mpn": "",
+      "sheet": "02_EXT_INPUT",
+      "dnp": false
+    },
+    "C202": {
+      "kind": "C",
+      "nets": {
+        "1": "EXT_5V_SAFE",
+        "2": "GND"
+      },
+      "value": "22uF 10V",
+      "mpn": "",
+      "sheet": "02_EXT_INPUT",
+      "dnp": false
+    },
+    "C203": {
+      "kind": "C",
+      "nets": {
+        "1": "EXT_DVDT",
+        "2": "GND"
+      },
+      "value": "4.7nF 50V REF",
+      "mpn": "",
+      "sheet": "02_EXT_INPUT",
+      "dnp": false
+    },
+    "R201": {
+      "kind": "R",
+      "nets": {
+        "1": "EXT_5V",
+        "2": "EXT_UV_SENSE"
+      },
+      "value": "562k 0.1%",
+      "mpn": "",
+      "sheet": "02_EXT_INPUT",
+      "dnp": false
+    },
+    "R202": {
+      "kind": "R",
+      "nets": {
+        "1": "EXT_UV_SENSE",
+        "2": "GND"
+      },
+      "value": "205k 0.1%",
+      "mpn": "",
+      "sheet": "02_EXT_INPUT",
+      "dnp": false
+    },
+    "R203": {
+      "kind": "R",
+      "nets": {
+        "1": "EXT_5V",
+        "2": "EXT_OV_SENSE"
+      },
+      "value": "562k 0.1%",
+      "mpn": "",
+      "sheet": "02_EXT_INPUT",
+      "dnp": false
+    },
+    "R204": {
+      "kind": "R",
+      "nets": {
+        "1": "EXT_OV_SENSE",
+        "2": "GND"
+      },
+      "value": "165k 0.1%",
+      "mpn": "",
+      "sheet": "02_EXT_INPUT",
+      "dnp": false
+    },
+    "R205": {
+      "kind": "R",
+      "nets": {
+        "1": "EXT_ILM",
+        "2": "GND"
+      },
+      "value": "1.65k 1% REF",
+      "mpn": "",
+      "sheet": "02_EXT_INPUT",
+      "dnp": false
+    },
     "U401": {
       "kind": "BQ25628E",
       "nets": {

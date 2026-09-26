@@ -11,6 +11,11 @@ def ic_pins(left, right):
 
 
 PINS = {
+    "TPS259474": ic_pins([
+        (5, "IN", "power_in"), (1, "EN_UVLO", "input"), (2, "OVLO", "input"),
+        (9, "ILM", "passive"), (8, "GND", "power_in"),
+    ], [(6, "OUT", "power_out"), (3, "PG", "open_collector"), (4, "PGTH", "input"),
+        (7, "DVDT", "passive"), (10, "ITIMER", "passive")]),
     "TPS2121": ic_pins([
         (7, "IN1", "power_in"), (2, "IN2", "power_in"), (6, "PR1", "input"),
         (5, "OV1", "input"), (4, "OV2", "input"), (3, "CP2", "input"),
@@ -60,6 +65,7 @@ PINS = {
 }
 
 NOTES = {
+    "02_EXT_INPUT": "CANDIDATE WIRED: regulated EXT_5V ONLY; TPS259474L UV/OV/circuit breaker. Transient/source window OPEN.",
     "04_BATTERY_CHARGER": "WIRED / CHARGE LOCKED OFF: local SYS only. R407 DNP and TS forced fault; source-priority controls OPEN.",
     "07_UPS_POWER_MUX": "CANDIDATE WIRED / UNFROZEN: TPS2121 and rail UVLO. Source qualification and UPS timing NOT proven.",
     "09_5V_BUCKBOOST": "WIRED / UNQUALIFIED: LT3120 5V 500kHz application; default OFF, gated by rail UVLO. Load margins OPEN.",
@@ -83,7 +89,31 @@ def build(name, component, text_item):
         for i, text in enumerate(lines):
             items.append(text_item(text, 12.7, 246.38 + 6.35*i, name + "/boundary/" + str(i), 1.016))
 
-    if name == "04_BATTERY_CHARGER":
+    if name == "02_EXT_INPUT":
+        part("CONN2", "J201", "REGULATED EXT_5V", 96.52, 71.12, {"1": "EXT_5V", "2": "GND"})
+        part("TPS259474", "U201", "TPS259474LRPWR CANDIDATE", 109.22, 144.78, {
+            "5": "EXT_5V", "1": "EXT_UV_SENSE", "2": "EXT_OV_SENSE", "9": "EXT_ILM",
+            "8": "GND", "6": "EXT_5V_SAFE", "3": None, "4": "GND", "7": "EXT_DVDT", "10": None,
+        }, "TPS259474LRPWR", datasheet="https://www.ti.com/lit/ds/symlink/tps25947.pdf")
+        rows = [
+            ("C", "C201", "1uF 50V", "EXT_5V", "GND"),
+            ("C", "C202", "22uF 10V", "EXT_5V_SAFE", "GND"),
+            ("C", "C203", "4.7nF 50V REF", "EXT_DVDT", "GND"),
+            ("R", "R201", "562k 0.1%", "EXT_5V", "EXT_UV_SENSE"),
+            ("R", "R202", "205k 0.1%", "EXT_UV_SENSE", "GND"),
+            ("R", "R203", "562k 0.1%", "EXT_5V", "EXT_OV_SENSE"),
+            ("R", "R204", "165k 0.1%", "EXT_OV_SENSE", "GND"),
+            ("R", "R205", "1.65k 1% REF", "EXT_ILM", "GND"),
+        ]
+        for i, (kind, ref, value, hi, lo) in enumerate(rows):
+            passive(kind, ref, value, 210.82+(i%3)*66.04, 50.8+(i//3)*50.8, hi, lo)
+        notes([
+            "IN=regulated external5V; OUT=EXT_5V_SAFE for future03 mux. No raw solar. Connector is logical, not released.",
+            "L variant latches overcurrent; UV recovery remains automatic. ITIMER NC selects fastest response, NOT a hard peak cap.",
+            "PG unused/NC,PGTH grounded. R201/R203 limit control-pin reverse current below10uA for a -5.5V test assumption.",
+            "Static OVP does NOT qualify5V+/-5%, hotplug overshoot or downstream5.5V safety. TVS/negative-clamp/thermal gates OPEN.",
+        ])
+    elif name == "04_BATTERY_CHARGER":
         part("BQ25628E", "U401", "BQ25628ERYKR", 109.22, 93.98, {
             "18": "EXT_BUS_5V", "17": "CHG_PMID", "2": "CHG_REGN", "4": "CHG_ILIM",
             "5": "CHG_TS_BIAS", "6": "CHG_TS", "7": None, "14": "CHG_CE_N", "15": "GND",

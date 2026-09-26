@@ -87,7 +87,7 @@ PINS = {
 PINS.update(power_stage_sheets.PINS)
 BOX_KINDS = set(power_stage_sheets.PINS)
 IC_KINDS = {"TPS63802", "BQ27220", "BQ25628E", "LT3120", "TCA9539PW",
-            "TPS2121", "TPS3808G01DBV", "SN74LVC1G08DBV"}
+            "TPS2121", "TPS3808G01DBV", "SN74LVC1G08DBV", "TPS259474"}
 
 
 def box_height(kind):

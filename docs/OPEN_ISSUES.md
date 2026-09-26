@@ -28,7 +28,7 @@ Status: OI-001 CLOSED; OI-002 PARTIALLY RESOLVED by the2026-09-25 supplied batte
 
 Proceed with independent research and parameterized calculations. Do not replace unresolved battery or source limits with guessed ratings, generate fabrication outputs, or declare Phase 1 passed.
 
-Current schematic checkpoint:107 symbols/305 physical or logical pins checked;33 regression tests;ERC3 errors/7 warnings. Sheets01/02/03/05 remain NOT IMPLEMENTED. Other sheets are wired references, not qualified pages. No additional issue is closed by this checkpoint.
+Current schematic checkpoint:117 symbols/333 physical or logical pins checked;37 regression tests;ERC4 errors/6 warnings. Sheets01/03/05 remain NOT IMPLEMENTED. Sheet02 TPS259474L candidate is wired but its OVP low corner can reject5.25V and transient protection is unqualified; OI-009 stays OPEN. Other sheets are wired references, not qualified pages. No additional issue is closed by this checkpoint.
 
 ## OI-002 Source-Level Decisions
 

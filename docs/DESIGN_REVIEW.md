@@ -1,14 +1,15 @@
 # FT02 PowerBoard V1 Design Review
 
-Review date:2026-09-25. Decision: **FAIL / HOLD PHASE 2**. This is an incomplete Phase1 checkpoint, not the requested completed electrical design. PASS below means only the stated evidence passed, never board release.
+Review date:2026-09-26. Decision: **FAIL / HOLD PHASE 2**. This is an incomplete Phase1 checkpoint, not the requested completed electrical design. PASS below means only the stated evidence passed, never board release.
 
 ## Verification Evidence
 
 - KiCad10.0.5 parses root plus12 child sheets and exports XML/SVG.
-- Sheets04/07/09/10/11 now have charger, candidate UPS/UVLO,5V, sensor and interface wiring; sheet08 enable is supervised. Sheets01/02/03/05 remain NOT IMPLEMENTED. None is a qualified subsystem; the main input/pack chain is still incomplete.
-- Independent exported-netlist check passes305 pins/107 symbols.29 connectivity/boundary/candidate-limit tests pass, including deliberate charger/UPS shunt bypass, charge-arm stuffing, UVLO bypass, wrong IC, NC-to-live-net, missing unused-input bias and hidden power-output mutations.
+- Sheets02/04/07/09/10/11 have EXT guard, charger, candidate UPS/UVLO,5V, sensor and interface wiring; sheet08 enable is supervised. Sheets01/03/05 remain NOT IMPLEMENTED. None is a qualified subsystem; the main input/pack chain is still incomplete.
+- Independent exported-netlist check passes333 pins/117 symbols.33 connectivity/boundary/candidate-limit tests pass, including charger/UPS shunt bypass, charge-arm stuffing, UVLO bypass, wrong IC, NC-to-live-net, missing input bias, hidden power-output and EXT protection faults.
 - Four battery-contract regression tests also pass: adopted limits, unresolved parameters remaining null, over5A examples forbidden and only source-backed issue children closed. Source/electrical evidence hashes match the retained records. These are software/document checks, not electrical qualification.
-- ERC:3 errors,7 warnings. Undriven EXT_BUS_5V/GND/BAT_GUARDED correspond to missing upstream implementation. Seven isolated test-point labels are individually reviewed in the root Phase1 review, not waived. Duplicate internally common output pins now have one power_out plus one passive pin, with equality enforced by the netlist contract. No PWR_FLAG/exclusions were added; default ignored checks are disclosed.
+- ERC:4 errors,6 warnings. EXT_5V/GND external source declarations and EXT_BUS_5V/BAT_GUARDED upstream implementation remain unresolved. Six isolated test-point labels are individually reviewed in the root Phase1 review, not waived. Internally common output pins have one power_out plus one passive pin, with equality enforced by the netlist contract. No PWR_FLAG/exclusions were added; default ignored checks are disclosed.
+- EXT guard static OV trip5.148..5.453V exposes a5.25V acceptance failure; transient/negative-spike/current/thermal qualification also remains OPEN. This is a recorded counterexample, not an approved narrowing of source specifications.
 - Empty sheets returning zero ERC violations do not prove completeness. No simulation, complete battery-path audit, physical footprint review or hardware test has passed.
 - Full-aspect previews of the newly wired pages were inspected; sheet09 label collision was corrected. No schematic rendering is evidence of electrical qualification.
 
@@ -53,6 +54,6 @@ Review date:2026-09-25. Decision: **FAIL / HOLD PHASE 2**. This is an incomplete
 2. Close source-wide limiting, autonomous charge shedding, external qualification/retry and battery-free boot as a pin-level hardware design. Verify switching timing before selecting hold-up capacitance.
 3. Resolve exact5V-only PD configuration and charger-only application/defaults. Do not silently replace candidates.
 4. Complete protected battery/common-shunt topology and all return/bias paths, NTC, sensing/calibration and low-battery margin.
-5. Finish remaining four electrical sheets and qualify all wired references, device footprints/passives, real load/thermal envelope and all ERC violations; independently review before PCB. TPS2121 remains UNFROZEN until board-required continuous/transient currents are established, not by comparing the pack5A ceiling alone.
+5. Finish remaining three electrical sheets and qualify all wired references, device footprints/passives, real load/thermal envelope and all ERC violations; independently review before PCB. TPS2121 remains UNFROZEN until board-required continuous/transient currents are established, not by comparing the pack5A ceiling alone.
 
 No PCB, production files or `ft02-powerboard-v1-revA` tag. A later zero-error ERC still requires independent electrical and safety review. Engineering-sample authorization is a later decision, never production readiness.

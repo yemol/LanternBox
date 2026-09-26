@@ -1,4 +1,14 @@
 Reference,Value,Candidate_MPN,Footprint,Status,Open_Item
+J201,REGULATED EXT_5V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+U201,TPS259474LRPWR CANDIDATE,TPS259474LRPWR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C201,1uF 50V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C202,22uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C203,4.7nF 50V REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R201,562k 0.1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R202,205k 0.1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R203,562k 0.1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R204,165k 0.1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R205,1.65k 1% REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 U401,BQ25628ERYKR,BQ25628ERYKR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 C401,1uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 C402,10uF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending

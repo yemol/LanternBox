@@ -5,7 +5,7 @@ import tempfile
 import unittest
 import xml.etree.ElementTree as ET
 from verify_reference import BASE, validate_netlist
-from stage_contract import audit_current_boundary, candidate_operating_limits
+from stage_contract import audit_current_boundary, candidate_operating_limits, ext_guard_limits
 
 
 class ReferenceTests(unittest.TestCase):
@@ -20,8 +20,8 @@ class ReferenceTests(unittest.TestCase):
 
     def test_actual_export(self):
         report = validate_netlist(BASE / "review/reference.net.xml")
-        self.assertEqual(report["pins_checked"], 305)
-        self.assertEqual(report["components_checked"], 107)
+        self.assertEqual(report["pins_checked"], 333)
+        self.assertEqual(report["components_checked"], 117)
         self.assertEqual(report["current_path_audit"]["status"], "PARTIAL_BOUNDARY_ONLY_OI_010_OPEN")
 
     def move_pin(self, root, ref, pin, source, destination):
@@ -74,6 +74,28 @@ class ReferenceTests(unittest.TestCase):
             part = root.find("./components/comp[@ref='R1103']")
             ET.SubElement(part, "property", name="dnp", value="")
         self.check_mutation(edit)
+
+    def test_ext_protection_bypass(self):
+        self.check_mutation(lambda r: self.move_pin(r, "U201", "6", "EXT_5V_SAFE", "EXT_5V"))
+
+    def test_ext_wrong_clamping_variant(self):
+        self.check_mutation(lambda r: r.find("./components/comp[@ref='U201']/property[@name='MPN']").set("value", "TPS259472LRPWR"))
+
+    def test_ext_timer_must_not_be_grounded(self):
+        def edit(root):
+            net = root.find("./nets/net[@name='unconnected-(U201-ITIMER-Pad10)']")
+            node = net.find("node")
+            net.remove(node)
+            node.set("pintype", "passive")
+            root.find("./nets/net[@name='GND']").append(node)
+        self.check_mutation(edit)
+
+    def test_ext_static_analysis_preserves_rejected_corner(self):
+        limits = ext_guard_limits()
+        low, high = limits["ov_trip_static_V"]
+        self.assertTrue(5.10 < low < 5.25 < high < 5.50)
+        self.assertLess(limits["control_pin_reverse_current_upper_uA"], 10)
+        self.assertEqual(limits["decision"], "UNQUALIFIED_NOT_A_FROZEN_INPUT_SPEC")
 
     def test_no_connect_short_to_live_net(self):
         def edit(root):

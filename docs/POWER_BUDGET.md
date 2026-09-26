@@ -27,6 +27,8 @@ The2A charger candidate stays below the source5A charge maximum. This closes cur
 
 ## Project and manufacturer load evidence
 
+Sheet02 now has TPS259474LRPWR as an **unqualified** EXT-input guard candidate. R2051.65k uses the manufacturer's1.8/2.028/2.2A breaker table (resistor tolerance additional), not a released3A input rating. R201/R202562k/205k0.1% yield UV startup4.363..4.639V and shutdown3.964..4.238V; R203/R204562k/165k yield static OV trip5.148..5.453V including100nA bias. For an explicitly assumed-5.5V reverse test, each upper resistor limits control-pin current below9.80uA. These checks do not prove transient safety. The low OV corner can reject a valid5.25V source: revise the implementation, not silently narrow the requested source range. PG is unused and PGTH grounded; no false EXT_VALID is exported. [TPS25947 Rev C sections6.5/7/8](https://www.ti.com/lit/ds/symlink/tps25947.pdf).
+
 | Load | Evidence | Budget treatment |
 | --- | --- | --- |
 | ESP32-S3 | Official table: 340mA, 802.11b TX at21dBm, 3.3V/25C | Condition-specific peak reference, not future MainBoard guaranteed maximum |
