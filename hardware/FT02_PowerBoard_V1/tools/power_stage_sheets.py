@@ -68,6 +68,7 @@ PINS = {
     "CONN12": ic_pins([(i, str(i), "passive") for i in range(1, 13)], []),
     "CONN2": ic_pins([(1, "1", "passive"), (2, "2", "passive")], []),
     "2N7002": ic_pins([(1, "G", "input")], [(3, "D", "passive"), (2, "S", "passive")]),
+    "DMN2056U": ic_pins([(1, "G", "input")], [(3, "D", "passive"), (2, "S", "passive")]),
 }
 
 NOTES = {
@@ -199,10 +200,10 @@ def build(name, component, text_item):
             "5": "GND", "11": "GND", "9": "SYS_RAW", "10": "SYS_RAW",
             "8": "SYS_RAW", "7": "GND", "6": "MASTER_CT",
         }, "TPS22953DQCR", datasheet="https://www.ti.com/lit/gpn/TPS22953")
-        part("CONN3", "J1301", "PWR_SW: ON / COMMON / OFF", 109.22, 175.26,
-             {"1": "PWR_SW_ON", "2": "MASTER_EN", "3": "GND"})
+        part("CONN3", "J1301", "PWR_SW: ON / COMMON / OFF", 109.22, 152.4,
+             {"1": "MASTER_EN", "2": "PWR_SW_SUPPLY", "3": "DISCHARGE_EN"})
         rows = [
-            ("R", "R1301", "10k 1%", "UPS_RAW", "PWR_SW_ON"),
+            ("R", "R1301", "10k 1%", "UPS_RAW", "PWR_SW_SUPPLY"),
             ("R", "R1302", "100k 1%", "MASTER_EN", "GND"),
             ("C", "C1301", "1uF 10V", "UPS_RAW", "GND"),
             ("C", "C1302", "1uF 10V", "SYS_RAW", "GND"),
@@ -210,14 +211,22 @@ def build(name, component, text_item):
             ("R", "R1303", "4.7k 1%", "SYS_RAW", "GND"),
             ("R", "R1304", "4.7k 1%", "3V3_MAIN", "GND"),
             ("R", "R1305", "4.7k 1%", "5V_MAIN", "GND"),
+            ("R", "R1306", "100k 1%", "DISCHARGE_EN", "GND"),
+            ("R", "R1307", "150R 1% 0.5W", "SYS_RAW", "DISCH_RAW_D"),
+            ("R", "R1308", "150R 1% 0.5W", "3V3_MAIN", "DISCH_3V3_D"),
+            ("R", "R1309", "150R 1% 0.5W", "5V_MAIN", "DISCH_5V_D"),
         ]
         for i, (kind, ref, value, hi, lo) in enumerate(rows):
-            passive(kind, ref, value, 210.82+(i%3)*66.04, 50.8+(i//3)*50.8, hi, lo)
+            passive(kind, ref, value, 210.82+(i%3)*66.04, 45.72+(i//3)*38.1, hi, lo)
+        for i, drain in enumerate(("DISCH_RAW_D", "DISCH_3V3_D", "DISCH_5V_D")):
+            part("DMN2056U", "Q130" + str(i+1), "DMN2056U-7", 78.74+i*119.38, 208.28,
+                 {"1": "DISCHARGE_EN", "2": "GND", "3": drain}, "DMN2056U-7",
+                 datasheet="https://www.diodes.com/assets/Datasheets/DMN2056U.pdf")
         notes([
-            "External maintained SPDT: COMMON2 to ON1=ON; COMMON2 to OFF3=OFF. Unplugged/open=OFF via R1302.",
+            "SPDT COMMON2 to ON1: MASTER_EN high. To OFF3: DISCHARGE_EN high; MASTER_EN pulled low. Open=passive decay.",
             "IN+BIAS=UPS_RAW; OUT=SYS_RAW. No MCU/I2C control. Charger and gauge remain upstream and powered.",
-            "TPS22953 has disabled-state reverse blocking, NO QOD. Bleeders discharge rails; zero volts/time NOT yet proven.",
-            "SNS tied OUT, unused PG tied GND per TI. CT requires>=25V. Load/inrush/thermal and connector backfeed gates OPEN.",
+            "Three separate150R+NMOS discharge branches need upstream bias;4.7k bleeders remain if all sources vanish.",
+            "Overlap is resistor-limited, NOT assumed absent. Contact/ESD, hot leakage, resistor pulse and rail injection gates OPEN.",
         ])
     elif name == "09_5V_BUCKBOOST":
         nets = {str(pin): "GND" for pin in (3, 11, 18, 22, 29)}

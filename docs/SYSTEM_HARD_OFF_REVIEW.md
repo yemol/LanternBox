@@ -12,11 +12,11 @@ Status: **series gate wired; full HARD OFF qualification FAIL / OPEN**. Not TOTA
 
 | Item | Actual result / outstanding proof |
 | --- | --- |
-| Mechanical OFF with valid upstream supply | EN clamped GND; upstream series switch commanded off without MCU/I2C |
+| Mechanical OFF with valid upstream supply | MASTER_EN pulled low by R1302; OFF throw drives DISCHARGE_EN high without MCU/I2C |
 | Switch unplugged |100k pulldown; selected100nA leakage limit gives10.1mV worst resistor corner, below560mV minimum falling threshold |
-| SYS_RAW | Input disconnected by candidate gate;4.7k discharge resistor; complete leakage/residual/time not qualified, NOT claimed exactly0V |
-| 3V3_MAIN | Downstream of gate,4.7k bleeder; regulator reverse paths and decay not qualified |
-| 5V_MAIN | Downstream of gate, default-off EN plus4.7k bleeder;220uF nominal alone can take about4s to0.1V with zero injection |
+| SYS_RAW | Input disconnected by candidate gate; R1307/Q1301 active discharge plus4.7k fallback; complete residual/time not qualified |
+| 3V3_MAIN | R1308/Q1302 active discharge plus4.7k fallback; regulator reverse paths and decay not qualified |
+| 5V_MAIN | R1309/Q1303 active discharge plus4.7k fallback;220uF zero-injection example about125ms after FET conduction, about4s if active bias absent |
 | 3V3_SENS | Discharges through ferrite/3V3 bleeder; attached module/cable injection not bounded |
 | PD / EXT / charger / gauge / protection | Not intentionally downstream of master gate; incomplete input/guard sheets still prevent full-chain proof |
 | Charging while OFF | Architecture retains charger power, but charging remains physically DISABLED by R407 DNP and TS lock. Normal OFF-state charging is NOT demonstrated or authorized |
@@ -32,7 +32,21 @@ Status: **series gate wired; full HARD OFF qualification FAIL / OPEN**. Not TOTA
 
 ## Power And Timing
 
-Three4.7k bleeders consume about12.96mW at RAW5V/3V3/5V, excluding conversions. They are explicit discharge provisions, not a hidden keep-alive load. This is a low-power tradeoff awaiting a shutdown-time requirement; an active discharge alternative must also prove operation when upstream power vanishes. No instant-off claim.
+Three4.7k bleeders consume about12.96mW at RAW5V/3V3/5V, excluding conversions. They remain necessary passive fallback when upstream bias disappears or the switch is unplugged. No instant-off claim.
+
+## Mechanically Selected Active Discharge
+
+J1301 pin2 now receives UPS_RAW through R1301=10k; pin1 is MASTER_EN, pin3 is DISCHARGE_EN. This is a changed switch-harness electrical assignment, not a compatible replacement for the previous grounded OFF throw. R1302 and new R1306 are separate100k pulldowns. A maintained break-before-make SPDT is required; exact switch/connector ratings remain OPEN. No powered logic inverter or new MCU is required.
+
+Q1301/Q1302/Q1303 are DMN2056U-7 candidates, each with gate on DISCHARGE_EN, source at GND, and drain through its own150ohm1% resistor to SYS_RAW/3V3_MAIN/5V_MAIN respectively. Drain nets are separate; body diodes point from GND toward the drain. The symbol uses standard SOT23 G1/S2/D3; actual footprint release is still prohibited. R1307/8/9 carry a0.5W reference requirement, not an approved resistor MPN.
+
+[Diodes DMN2056U DS38480 Rev2-2](https://www.diodes.com/assets/Datasheets/DMN2056U.pdf), pages1-3, supplies the top-view terminal identities, exact orderable and25C electrical limits: RDS maximum85mohm at VGS1.5V, gate leakage100nA magnitude, drain leakage1uA at VGS0/VDS20V. These are selected conditions, not guaranteed hot leakage or a guaranteed ON-state leakage budget at a small nonzero gate voltage.
+
+With UPS_RAW=2.5V, R1301 high/R1306 low1% corners and three100nA gate leakages, calculated gate drive remains above2.26V. This is above the1.5V RDS table condition; it does not use threshold voltage as a full-conduction rating. With no switch drive, three100nA leaks and R1306 high give30.3mV; hot leakage, Miller coupling and gate transitions remain unqualified.
+
+At an assumed rail maximum5.5V and minimum148.5ohm series resistance, each active branch draws at most37.04mA and initially dissipates at most203.7mW in the resistor, ignoring positive FET resistance conservatively. A220uF capacitor at5.5V stores3.3275mJ. Resistor pulse/temperature derating and sustained external injection must still be checked. If both throws momentarily connect, or FET gates retain charge during transition, the series resistors bound rail loading; zero overlap is NOT assumed. All three branches may load simultaneously, so the board budget must include their additional conversion losses and current.
+
+For nominal220uF,150ohm,4.7k and the selected25C85mohm RDS corner, the5V-to0.1V RC example is about125ms after FET conduction. This is not elapsed switch-to-OFF time and excludes extra load capacitance, converter energy transfer, tolerances, hot RDS, bounce and injection. Absent UPS bias, only the approximately4.045s passive example applies. Neither example guarantees Core is electrically unpowered when a debug source backfeeds a rail.
 
 At an illustrative3A and the selected2.5V/105C datasheet27mohm corner, gate drop is81mV and dissipation243mW. Using the DQC datasheet65.2C/W gives15.84C rise as an example, NOT an enclosure or full voltage-range guarantee. Source/regulator losses and steady/pulse loads are still unknown. Input range, transition dip, CT slew/inrush, bounce and effective low-profile capacitor selection must pass before freezing U1301. No large electrolytic is approved.
 

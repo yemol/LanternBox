@@ -1429,9 +1429,9 @@
     "J1301": {
       "kind": "CONN3",
       "nets": {
-        "1": "PWR_SW_ON",
-        "2": "MASTER_EN",
-        "3": "GND"
+        "1": "MASTER_EN",
+        "2": "PWR_SW_SUPPLY",
+        "3": "DISCHARGE_EN"
       },
       "value": "PWR_SW: ON / COMMON / OFF",
       "mpn": "",
@@ -1442,7 +1442,7 @@
       "kind": "R",
       "nets": {
         "1": "UPS_RAW",
-        "2": "PWR_SW_ON"
+        "2": "PWR_SW_SUPPLY"
       },
       "value": "10k 1%",
       "mpn": "",
@@ -1523,6 +1523,86 @@
       },
       "value": "4.7k 1%",
       "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "R1306": {
+      "kind": "R",
+      "nets": {
+        "1": "DISCHARGE_EN",
+        "2": "GND"
+      },
+      "value": "100k 1%",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "R1307": {
+      "kind": "R",
+      "nets": {
+        "1": "SYS_RAW",
+        "2": "DISCH_RAW_D"
+      },
+      "value": "150R 1% 0.5W",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "R1308": {
+      "kind": "R",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "DISCH_3V3_D"
+      },
+      "value": "150R 1% 0.5W",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "R1309": {
+      "kind": "R",
+      "nets": {
+        "1": "5V_MAIN",
+        "2": "DISCH_5V_D"
+      },
+      "value": "150R 1% 0.5W",
+      "mpn": "",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "Q1301": {
+      "kind": "DMN2056U",
+      "nets": {
+        "1": "DISCHARGE_EN",
+        "2": "GND",
+        "3": "DISCH_RAW_D"
+      },
+      "value": "DMN2056U-7",
+      "mpn": "DMN2056U-7",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "Q1302": {
+      "kind": "DMN2056U",
+      "nets": {
+        "1": "DISCHARGE_EN",
+        "2": "GND",
+        "3": "DISCH_3V3_D"
+      },
+      "value": "DMN2056U-7",
+      "mpn": "DMN2056U-7",
+      "sheet": "13_MASTER_POWER_GATE",
+      "dnp": false
+    },
+    "Q1303": {
+      "kind": "DMN2056U",
+      "nets": {
+        "1": "DISCHARGE_EN",
+        "2": "GND",
+        "3": "DISCH_5V_D"
+      },
+      "value": "DMN2056U-7",
+      "mpn": "DMN2056U-7",
       "sheet": "13_MASTER_POWER_GATE",
       "dnp": false
     }

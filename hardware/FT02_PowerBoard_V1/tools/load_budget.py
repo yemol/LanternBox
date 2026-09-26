@@ -55,7 +55,7 @@ def inventory():
         entry("Input/charger/protection/UPS housekeeping", None, "UNKNOWN complete sum; multiple upstream supply nodes",
               "U201/U401/U701 plus absent01/03/05; include charger battery leakage and all protection bias",
               "Retained during HARD OFF; report external/battery draw separately"),
-        entry("Master switch bias/control", "UPS_RAW", "U1301 at5V:34uA enabled,5uA shutdown typical; control divider adds5/110k A when ON",
+        entry("Master switch bias/control", "UPS_RAW", "U1301 at5V:34uA enabled,5uA shutdown typical; selected SPDT throw adds5/110k A in ON or OFF, plus leakage",
               "TPS22953 RevD sections7.5-7.8; 5A headline is NOT board current rating",
               "Upstream of gate but downstream of shunt in battery mode"),
         entry("Master raw bleeder R1303", "SYS_RAW", "5V/4.7k=1.064mA nominal at5V",
@@ -64,6 +64,9 @@ def inventory():
               "Actual R1304; sensor branch discharges through ferrite", overlap),
         entry("5V bleeder R1305", "5V_MAIN", "5V/4.7k=1.064mA nominal",
               "Actual R1305; low-power tradeoff tracked, not decorative load", overlap),
+        entry("Three active discharge branches", None, "OFF-only rail discharge; ON leakage must be counted, not assumed zero",
+              "Q1301/2/3 DMN2056U-7 + R1307/8/9 150R1%; each <=37.04mA at assumed5.5V/minR before hot/voltage qualification",
+              "All three can overlap during switching or backfeed; include sustained injection/fault dissipation and upstream bias"),
     ]
 
 

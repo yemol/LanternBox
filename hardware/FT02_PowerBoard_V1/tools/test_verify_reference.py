@@ -5,7 +5,7 @@ import tempfile
 import unittest
 import xml.etree.ElementTree as ET
 from verify_reference import BASE, validate_netlist
-from stage_contract import audit_current_boundary, candidate_operating_limits, ext_guard_limits
+from stage_contract import audit_current_boundary, candidate_operating_limits, ext_guard_limits, discharge_limits
 
 
 class ReferenceTests(unittest.TestCase):
@@ -20,8 +20,8 @@ class ReferenceTests(unittest.TestCase):
 
     def test_actual_export(self):
         report = validate_netlist(BASE / "review/reference.net.xml")
-        self.assertEqual(report["pins_checked"], 363)
-        self.assertEqual(report["components_checked"], 127)
+        self.assertEqual(report["pins_checked"], 380)
+        self.assertEqual(report["components_checked"], 134)
         self.assertEqual(report["current_path_audit"]["status"], "PARTIAL_BOUNDARY_ONLY_OI_010_OPEN")
 
     def move_pin(self, root, ref, pin, source, destination):
@@ -89,6 +89,49 @@ class ReferenceTests(unittest.TestCase):
 
     def test_master_ct_voltage_rating(self):
         self.check_mutation(lambda r: r.find("./components/comp[@ref='C1303']/value").__setattr__("text", "10nF 10V"))
+
+    def test_discharge_wrong_fet(self):
+        self.check_mutation(lambda r: r.find("./components/comp[@ref='Q1301']/property[@name='MPN']").set("value", "2N7002,215"))
+
+    def test_discharge_body_diode_reversed(self):
+        def edit(root):
+            root.find("./nets/net[@name='DISCH_RAW_D']/node[@ref='Q1301']").set("pin", "2")
+            root.find("./nets/net[@name='GND']/node[@ref='Q1301'][@pin='2']").set("pin", "3")
+        self.check_mutation(edit)
+
+    def test_discharge_limiter_shorted(self):
+        self.check_mutation(lambda r: r.find("./components/comp[@ref='R1309']/value").__setattr__("text", "0"))
+
+    def test_discharge_default_pulldown_removed(self):
+        self.check_mutation(lambda r: ET.SubElement(r.find("./components/comp[@ref='R1306']"), "property", name="dnp", value=""))
+
+    def test_discharge_rail_bridge(self):
+        self.check_mutation(lambda r: r.find("./nets/net[@name='DISCH_3V3_D']").set("name", "DISCH_5V_D"))
+
+    def test_switch_common_must_have_upstream_bias(self):
+        self.check_mutation(lambda r: self.move_pin(r, "J1301", "2", "PWR_SW_SUPPLY", "MASTER_EN"))
+
+    def test_discharge_must_not_follow_on_throw(self):
+        self.check_mutation(lambda r: self.move_pin(r, "Q1301", "1", "DISCHARGE_EN", "MASTER_EN"))
+
+    def test_passive_fallback_must_remain_populated(self):
+        self.check_mutation(lambda r: ET.SubElement(r.find("./components/comp[@ref='R1305']"), "property", name="dnp", value=""))
+
+    def test_discharge_selected_corners_not_release_rating(self):
+        limits = discharge_limits()
+        self.assertGreater(limits["gate_min_V_selected_25C_leakage_resistor_corners"], 1.5)
+        self.assertLess(limits["gate_off_upper_V_at_three_100nA_leaks"], 0.04)
+        self.assertLess(limits["resistor_initial_current_A_at_5V5_min_R"], 0.038)
+        self.assertLess(limits["resistor_initial_power_W_at_5V5_min_R"], 0.21)
+        self.assertTrue(0.12 < limits["five_volt_example"]["zero_injection_decay_s_after_fet_on"] < 0.13)
+        self.assertIn("not guaranteed", limits["all_sources_absent"])
+        self.assertTrue(limits["remaining"])
+
+    def test_ext_resistor_only_window_is_infeasible_under_stated_assumptions(self):
+        limits = ext_guard_limits()["resistor_only_window_feasibility"]
+        self.assertFalse(limits["feasible"])
+        self.assertGreater(limits["ratio_min_to_accept_5V25"], limits["ratio_max_to_trip_by_5V5"])
+        self.assertTrue(550000 < limits["minimum_top_resistor_ohm"] < 551000)
 
     def test_unused_io_pulldown_removed(self):
         def edit(root):

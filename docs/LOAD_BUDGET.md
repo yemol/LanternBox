@@ -21,10 +21,11 @@ Status: **OPEN, not a board rating**. The exact per-load records, units, provena
 | Status / I2C / PG | ? total; resistor draw depends on logic levels | ? | ? | ? / ? | 3V3 | Actual U1101/U902 and pullup nets; DNP bus pullups excluded |
 | Other MainBoard loads | ? module/flash/PSRAM/debug | ? | ? | ? / ? | ? | Single-Core target, not silently adding/removing prototype LR01 controller |
 | Input/charger/protection/UPS overhead | ? incomplete input/protection sheets | ? | ? | ? / ? | Multiple | Retained HARD OFF; separate external and battery current |
-| U1301/control | At5V:0.034 enabled /0.005 shutdown bias; ON divider0.0455 | ? full input/temperature | ? | ? / ? | UPS_RAW | [TPS22953](https://www.ti.com/lit/gpn/TPS22953); post-shunt in battery mode |
+| U1301/control | At5V:0.034 enabled /0.005 shutdown bias; selected ON or OFF divider0.0455 plus leakage | ? full input/temperature | ? | ? / ? | UPS_RAW | [TPS22953](https://www.ti.com/lit/gpn/TPS22953); post-shunt in battery mode |
 | R1303 raw bleeder | 1.064 at5V nominal | ? voltage envelope | None separately | ? / ? | SYS_RAW | Required discharge provision, not keep-alive |
 | R1304 3V3 bleeder | 0.702 nominal | ? voltage envelope | None separately | ? / ? | 3V3 | Includes sensor discharge through ferrite |
 | R1305 5V bleeder | 1.064 nominal | ? voltage envelope | None separately | ? / ? | 5V | Counts while5V enabled |
+| Q1301/2/3 active discharge | OFF discharge; ON leakage not zero | ? hot leakage / sustained injection | ? overlap | <=37.04 each at assumed5.5V/minimum148.5ohm; duration ? | Three system rails | Mechanical OFF; all three can overlap. [Conditional calculations](SYSTEM_HARD_OFF_REVIEW.md); not an approved rail envelope |
 
 ## Aggregate Decision
 

@@ -29,7 +29,7 @@ Status: OI-001 CLOSED; OI-002 PARTIALLY RESOLVED by the2026-09-25 supplied batte
 
 Proceed with independent research and parameterized calculations. Do not replace unresolved battery or source limits with guessed ratings, generate fabrication outputs, or declare Phase 1 passed.
 
-Current schematic checkpoint:127 symbols/363 physical or logical pins checked;49 regression tests across netlist(40),battery(4),load inventory(5);ERC4 errors/6 warnings. Sheet13 series gate is wired and exact boundaries checked. Sheets01/03/05 remain NOT IMPLEMENTED. Sheet02 TPS259474L still cannot guarantee5.25V acceptance; OI-009 remains OPEN. The load inventory is complete as a list, not a qualified current envelope. No additional issue is closed by this checkpoint; electrical implementation work remains, not only missing battery documentation.
+Current schematic checkpoint:134 symbols/380 physical or logical pins checked;59 regression tests across netlist(50),battery(4),load inventory(5);ERC4 errors/6 warnings. Sheet13 now has mechanical OFF-selected resistor/NMOS discharge on three separate rails, with passive fallback; exact boundaries pass but OI-022 remains OPEN for full-temperature residual/time/injection proof. Sheets01/03/05 remain NOT IMPLEMENTED. Sheet02 TPS259474L still cannot guarantee5.25V acceptance; resistor-only tuning is infeasible under the retained reverse-injection assumptions (required ratio>=3.49134 and<=3.44518). Replacement topology remains to be implemented; OI-009 stays OPEN. Twenty load entries remain an inventory, not a qualified envelope. No additional issue is closed; electrical implementation work remains, not only missing battery documentation.
 
 ## OI-002 Source-Level Decisions
 

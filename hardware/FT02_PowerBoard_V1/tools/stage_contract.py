@@ -36,7 +36,10 @@ IC_NETS = {
     "J1001": {1: "3V3_SENS", 2: "GND"},
     "U1301": {1: "UPS_RAW", 2: "UPS_RAW", 3: "UPS_RAW", 4: "MASTER_EN", 5: "GND",
               6: "MASTER_CT", 7: "GND", 8: "SYS_RAW", 9: "SYS_RAW", 10: "SYS_RAW", 11: "GND"},
-    "J1301": {1: "PWR_SW_ON", 2: "MASTER_EN", 3: "GND"},
+    "J1301": {1: "MASTER_EN", 2: "PWR_SW_SUPPLY", 3: "DISCHARGE_EN"},
+    "Q1301": {1: "DISCHARGE_EN", 2: "GND", 3: "DISCH_RAW_D"},
+    "Q1302": {1: "DISCHARGE_EN", 2: "GND", 3: "DISCH_3V3_D"},
+    "Q1303": {1: "DISCHARGE_EN", 2: "GND", 3: "DISCH_5V_D"},
 }
 
 TWO_TERMINAL = [
@@ -110,7 +113,7 @@ TWO_TERMINAL = [
     ("R1108", "100k 1%", "IO_UNUSED15", "GND"),
     ("R1109", "100k 1%", "IO_UNUSED16", "GND"),
     ("R1110", "100k 1%", "IO_UNUSED17", "GND"),
-    ("R1301", "10k 1%", "UPS_RAW", "PWR_SW_ON"),
+    ("R1301", "10k 1%", "UPS_RAW", "PWR_SW_SUPPLY"),
     ("R1302", "100k 1%", "MASTER_EN", "GND"),
     ("C1301", "1uF 10V", "UPS_RAW", "GND"),
     ("C1302", "1uF 10V", "SYS_RAW", "GND"),
@@ -118,11 +121,16 @@ TWO_TERMINAL = [
     ("R1303", "4.7k 1%", "SYS_RAW", "GND"),
     ("R1304", "4.7k 1%", "3V3_MAIN", "GND"),
     ("R1305", "4.7k 1%", "5V_MAIN", "GND"),
+    ("R1306", "100k 1%", "DISCHARGE_EN", "GND"),
+    ("R1307", "150R 1% 0.5W", "SYS_RAW", "DISCH_RAW_D"),
+    ("R1308", "150R 1% 0.5W", "3V3_MAIN", "DISCH_3V3_D"),
+    ("R1309", "150R 1% 0.5W", "5V_MAIN", "DISCH_5V_D"),
 ]
 
 MPNS = {"U201": "TPS259474LRPWR", "U401": "BQ25628ERYKR", "Q401": "2N7002,215", "U701": "TPS2121RUXR",
         "U702": "TPS3808G01DBVR", "U901": "LT3120IUFDM#PBF", "U902": "SN74LVC1G08DBVR",
-        "U1101": "TCA9539PWR", "FB1001": "BLM21PG221SN1D", "U1301": "TPS22953DQCR"}
+        "U1101": "TCA9539PWR", "FB1001": "BLM21PG221SN1D", "U1301": "TPS22953DQCR",
+        "Q1301": "DMN2056U-7", "Q1302": "DMN2056U-7", "Q1303": "DMN2056U-7"}
 
 
 def audit_master_gate(actual):
@@ -131,10 +139,15 @@ def audit_master_gate(actual):
         "UPS_RAW": {("U701", "1"), ("U701", "8"), ("C703", "1"),
                     ("U1301", "1"), ("U1301", "2"), ("U1301", "3"),
                     ("C1301", "1"), ("R1301", "1")},
-        "MASTER_EN": {("U1301", "4"), ("J1301", "2"), ("R1302", "1")},
-        "PWR_SW_ON": {("R1301", "2"), ("J1301", "1")},
+        "MASTER_EN": {("U1301", "4"), ("J1301", "1"), ("R1302", "1")},
+        "PWR_SW_SUPPLY": {("R1301", "2"), ("J1301", "2")},
+        "DISCHARGE_EN": {("J1301", "3"), ("R1306", "1"),
+                         ("Q1301", "1"), ("Q1302", "1"), ("Q1303", "1")},
+        "DISCH_RAW_D": {("R1307", "2"), ("Q1301", "3")},
+        "DISCH_3V3_D": {("R1308", "2"), ("Q1302", "3")},
+        "DISCH_5V_D": {("R1309", "2"), ("Q1303", "3")},
         "SYS_RAW": {("U1301", "8"), ("U1301", "9"), ("U1301", "10"), ("C1302", "1"),
-                    ("R1303", "1"), ("U702", "6"), ("U702", "3"), ("C705", "1"),
+                    ("R1303", "1"), ("R1307", "1"), ("U702", "6"), ("U702", "3"), ("C705", "1"),
                     ("R705", "1"), ("R707", "1"), ("U801", "10"), ("C801", "1"),
                     ("U901", "17"), ("U901", "19"), ("U901", "20"), ("U901", "21"),
                     ("C901", "1"), ("TP1207", "1")},
@@ -147,6 +160,7 @@ def audit_master_gate(actual):
         "status": "WIRED_BOUNDARY_ONLY_HARD_OFF_NOT_QUALIFIED",
         "series_path": "U701 -> UPS_RAW -> U1301 -> SYS_RAW -> U801/U901 -> system rails",
         "switch": "maintained SPDT: J1301 common2 to1 ON, to3 OFF; open defaults OFF",
+        "discharge": "OFF throw powers three resistor-limited NMOS gates from UPS_RAW; no bias/open switch uses passive bleeders",
         "boundary_nodes": {n: sorted(':'.join(p) for p in pins) for n, pins in boundaries.items()},
         "retained": ["charger input EXT_BUS_5V", "charger BAT_PROTECTED", "gauge BAT_GUARDED"],
         "charging": "DISABLED by R407 DNP and TS lock; future OFF-state charging not qualified",
@@ -195,8 +209,23 @@ def ext_guard_limits():
         top, tol, bias = 562000, 0.001, 0.1e-6
         return [threshold_min*(1+top*(1-tol)/(bottom*(1+tol)))-bias*top*(1+tol),
                 threshold_max*(1+top*(1+tol)/(bottom*(1-tol)))+bias*top*(1+tol)]
+    # Best possible upper resistor under the existing reverse-injection assumption.
+    tol = 0.001
+    min_top = 5.5 / (10e-6 * (1-tol))
+    bias_low = 0.1e-6 * min_top * (1-tol)
+    bias_high = 0.1e-6 * min_top * (1+tol)
+    min_ratio = ((5.25+bias_low)/1.183-1) * (1+tol)/(1-tol)
+    max_ratio = ((5.5-bias_high)/1.223-1) * (1-tol)/(1+tol)
     return {
         "decision": "UNQUALIFIED_NOT_A_FROZEN_INPUT_SPEC",
+        "resistor_only_window_feasibility": {
+            "minimum_top_resistor_ohm": min_top,
+            "ratio_min_to_accept_5V25": min_ratio,
+            "ratio_max_to_trip_by_5V5": max_ratio,
+            "feasible": min_ratio <= max_ratio,
+            "scope": "-5.5V reverse test,10uA pin injection,0.1% resistors,100nA bias,1.183..1.223V comparator only",
+            "decision": "Change protection topology/precision or justified reverse-current handling; resistor retuning alone cannot pass",
+        },
         "ov_trip_static_V": bounds(165000, 1.183, 1.223),
         "uv_start_static_V": bounds(205000, 1.183, 1.223),
         "uv_stop_static_V": bounds(205000, 1.076, 1.116),
@@ -232,16 +261,48 @@ def master_gate_limits():
         "off_EN_falling_threshold_min_V": 0.560,
         "reverse_blocking": "Disabled only;10us typical response, no maximum;11uA max at105C for OUT5V/IN0V/EN0V",
         "internal_output_discharge": False,
+        "external_active_discharge": discharge_limits(),
         "bleeder_nominal_power_W_at_raw5_3V3_5V": (5**2+3.3**2+5**2)/4700,
         "five_volt_discharge_example_not_guarantee": {
             "assumed_C_uF": 220, "R_ohm": 4700, "start_V": 5, "end_V": 0.1,
             "zero_injection_time_s": 4700*220e-6*3.912023005428146,
-            "warning": "About4s, not instant OFF; excludes tolerance, extra capacitance and all injection",
+            "warning": "Passive fallback only: about4s when active bias is absent; excludes tolerance, extra capacitance and injection",
         },
         "off_all_rails_zero_proven": False,
         "remaining": ["full-interval leakage, I2C/debug injection and rail decay specification",
                       "mechanical contacts/cable ESD and bounce",
                       "source-startup, CT ramp, effective ceramic capacitance and current headroom"],
+    }
+
+
+def discharge_limits():
+    # DMN2056U DS38480 Rev2-2: 25C pulsed RDS maximum at1.5V, not a hot guarantee.
+    top_max, bottom_min = 10000*1.01, 100000*0.99
+    gate_min = (2.5/top_max - 3*100e-9) / (1/top_max + 1/bottom_min)
+    r_active = 150 + 0.085
+    r_parallel = 1 / (1/r_active + 1/4700)
+    return {
+        "status": "WIRED_CONDITIONAL_EXAMPLES_NOT_FULL_HARD_OFF_PROOF",
+        "part": "DMN2056U-7; G1 S2 D3; body diode GND toward drain",
+        "assumed_upstream_min_V": 2.5,
+        "gate_min_V_selected_25C_leakage_resistor_corners": gate_min,
+        "ron_table_gate_V": 1.5,
+        "ron_max_ohm_at_1V5_25C_pulse": 0.085,
+        "gate_off_upper_V_at_three_100nA_leaks": 3*100e-9*100000*1.01,
+        "on_state_drain_leakage_source_limit_per_FET_A_25C_VDS20": 1e-6,
+        "resistor_initial_current_A_at_5V5_min_R": 5.5/(150*0.99),
+        "resistor_initial_power_W_at_5V5_min_R": 5.5**2/(150*0.99),
+        "capacitor_energy_J_at_220uF_5V5": 0.5*220e-6*5.5**2,
+        "five_volt_example": {
+            "C_uF": 220, "start_V": 5, "end_V": 0.1,
+            "effective_discharge_R_ohm": r_parallel,
+            "zero_injection_decay_s_after_fet_on": r_parallel*220e-6*3.912023005428146,
+            "warning": "25C selected RDS with nominal C/R; excludes switch delay/bounce, hot RDS, extra C, converter transfer and injection",
+        },
+        "overlap": "Each live rail sees150R+FET, not a short; three-rail extra power/current must enter source budget",
+        "all_sources_absent": "Active path not guaranteed; retain all three4.7k passive bleeders",
+        "remaining": ["resistor MPN/derating/pulse curve", "hot leakage/RDS and gate dynamics",
+                      "break-before-make contact/bounce/ESD", "full rail capacitance, decay specification and external injection"],
     }
 
 

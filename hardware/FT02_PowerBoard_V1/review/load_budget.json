@@ -199,7 +199,7 @@
     {
       "name": "Master switch bias/control",
       "rail": "UPS_RAW",
-      "typical": "U1301 at5V:34uA enabled,5uA shutdown typical; control divider adds5/110k A when ON",
+      "typical": "U1301 at5V:34uA enabled,5uA shutdown typical; selected SPDT throw adds5/110k A in ON or OFF, plus leakage",
       "continuous_max_A": null,
       "startup_reference_A": null,
       "startup_max_A": null,
@@ -247,6 +247,19 @@
       "peak_duration_ms": null,
       "evidence": "Actual R1305; low-power tradeoff tracked, not decorative load",
       "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+    },
+    {
+      "name": "Three active discharge branches",
+      "rail": null,
+      "typical": "OFF-only rail discharge; ON leakage must be counted, not assumed zero",
+      "continuous_max_A": null,
+      "startup_reference_A": null,
+      "startup_max_A": null,
+      "transient_reference_A": null,
+      "transient_max_A": null,
+      "peak_duration_ms": null,
+      "evidence": "Q1301/2/3 DMN2056U-7 + R1307/8/9 150R1%; each <=37.04mA at assumed5.5V/minR before hot/voltage qualification",
+      "concurrency": "All three can overlap during switching or backfeed; include sustained injection/fault dissipation and upstream bias"
     }
   ],
   "rails": {
@@ -268,7 +281,8 @@
         "Status circuits and pullups",
         "Other MainBoard peripherals",
         "Input/charger/protection/UPS housekeeping",
-        "3V3 bleeder R1304"
+        "3V3 bleeder R1304",
+        "Three active discharge branches"
       ]
     },
     "5V_MAIN": {
@@ -283,7 +297,8 @@
         "CardKB2",
         "Other MainBoard peripherals",
         "Input/charger/protection/UPS housekeeping",
-        "5V bleeder R1305"
+        "5V bleeder R1305",
+        "Three active discharge branches"
       ]
     }
   },

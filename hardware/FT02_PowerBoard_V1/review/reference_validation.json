@@ -1,9 +1,9 @@
 {
-  "checked_utc": "2026-09-26T08:32:43.785748+00:00",
+  "checked_utc": "2026-09-26T17:59:28.292081+00:00",
   "topology": {
     "status": "PASS_REFERENCE_ONLY",
-    "pins_checked": 363,
-    "components_checked": 127,
+    "pins_checked": 380,
+    "components_checked": 134,
     "sheets_parsed": 14,
     "current_path_audit": {
       "status": "PARTIAL_BOUNDARY_ONLY_OI_010_OPEN",
@@ -54,6 +54,7 @@
       "status": "WIRED_BOUNDARY_ONLY_HARD_OFF_NOT_QUALIFIED",
       "series_path": "U701 -> UPS_RAW -> U1301 -> SYS_RAW -> U801/U901 -> system rails",
       "switch": "maintained SPDT: J1301 common2 to1 ON, to3 OFF; open defaults OFF",
+      "discharge": "OFF throw powers three resistor-limited NMOS gates from UPS_RAW; no bias/open switch uses passive bleeders",
       "boundary_nodes": {
         "UPS_RAW": [
           "C1301:1",
@@ -66,13 +67,32 @@
           "U701:8"
         ],
         "MASTER_EN": [
-          "J1301:2",
+          "J1301:1",
           "R1302:1",
           "U1301:4"
         ],
-        "PWR_SW_ON": [
-          "J1301:1",
+        "PWR_SW_SUPPLY": [
+          "J1301:2",
           "R1301:2"
+        ],
+        "DISCHARGE_EN": [
+          "J1301:3",
+          "Q1301:1",
+          "Q1302:1",
+          "Q1303:1",
+          "R1306:1"
+        ],
+        "DISCH_RAW_D": [
+          "Q1301:3",
+          "R1307:2"
+        ],
+        "DISCH_3V3_D": [
+          "Q1302:3",
+          "R1308:2"
+        ],
+        "DISCH_5V_D": [
+          "Q1303:3",
+          "R1309:2"
         ],
         "SYS_RAW": [
           "C1302:1",
@@ -80,6 +100,7 @@
           "C801:1",
           "C901:1",
           "R1303:1",
+          "R1307:1",
           "R705:1",
           "R707:1",
           "TP1207:1",
@@ -156,6 +177,14 @@
     "decision": "TPS2121_UNFROZEN_NOT_A_BOARD_RATING",
     "ext_guard_candidate": {
       "decision": "UNQUALIFIED_NOT_A_FROZEN_INPUT_SPEC",
+      "resistor_only_window_feasibility": {
+        "minimum_top_resistor_ohm": 550550.5505505505,
+        "ratio_min_to_accept_5V25": 3.491337491337491,
+        "ratio_max_to_trip_by_5V5": 3.4451795138630787,
+        "feasible": false,
+        "scope": "-5.5V reverse test,10uA pin injection,0.1% resistors,100nA bias,1.183..1.223V comparator only",
+        "decision": "Change protection topology/precision or justified reverse-current handling; resistor retuning alone cannot pass"
+      },
       "ov_trip_static_V": [
         5.148062808264464,
         5.453207885018351
@@ -207,6 +236,35 @@
       "off_EN_falling_threshold_min_V": 0.56,
       "reverse_blocking": "Disabled only;10us typical response, no maximum;11uA max at105C for OUT5V/IN0V/EN0V",
       "internal_output_discharge": false,
+      "external_active_discharge": {
+        "status": "WIRED_CONDITIONAL_EXAMPLES_NOT_FULL_HARD_OFF_PROOF",
+        "part": "DMN2056U-7; G1 S2 D3; body diode GND toward drain",
+        "assumed_upstream_min_V": 2.5,
+        "gate_min_V_selected_25C_leakage_resistor_corners": 2.2658114573785517,
+        "ron_table_gate_V": 1.5,
+        "ron_max_ohm_at_1V5_25C_pulse": 0.085,
+        "gate_off_upper_V_at_three_100nA_leaks": 0.0303,
+        "on_state_drain_leakage_source_limit_per_FET_A_25C_VDS20": 1e-06,
+        "resistor_initial_current_A_at_5V5_min_R": 0.037037037037037035,
+        "resistor_initial_power_W_at_5V5_min_R": 0.2037037037037037,
+        "capacitor_energy_J_at_220uF_5V5": 0.0033275,
+        "five_volt_example": {
+          "C_uF": 220,
+          "start_V": 5,
+          "end_V": 0.1,
+          "effective_discharge_R_ohm": 145.44064691649734,
+          "zero_injection_decay_s_after_fet_on": 0.12517277446557176,
+          "warning": "25C selected RDS with nominal C/R; excludes switch delay/bounce, hot RDS, extra C, converter transfer and injection"
+        },
+        "overlap": "Each live rail sees150R+FET, not a short; three-rail extra power/current must enter source budget",
+        "all_sources_absent": "Active path not guaranteed; retain all three4.7k passive bleeders",
+        "remaining": [
+          "resistor MPN/derating/pulse curve",
+          "hot leakage/RDS and gate dynamics",
+          "break-before-make contact/bounce/ESD",
+          "full rail capacitance, decay specification and external injection"
+        ]
+      },
       "bleeder_nominal_power_W_at_raw5_3V3_5V": 0.01295531914893617,
       "five_volt_discharge_example_not_guarantee": {
         "assumed_C_uF": 220,
@@ -214,7 +272,7 @@
         "start_V": 5,
         "end_V": 0.1,
         "zero_injection_time_s": 4.045031787612703,
-        "warning": "About4s, not instant OFF; excludes tolerance, extra capacitance and all injection"
+        "warning": "Passive fallback only: about4s when active bias is absent; excludes tolerance, extra capacitance and injection"
       },
       "off_all_rails_zero_proven": false,
       "remaining": [
@@ -457,7 +515,7 @@
       {
         "name": "Master switch bias/control",
         "rail": "UPS_RAW",
-        "typical": "U1301 at5V:34uA enabled,5uA shutdown typical; control divider adds5/110k A when ON",
+        "typical": "U1301 at5V:34uA enabled,5uA shutdown typical; selected SPDT throw adds5/110k A in ON or OFF, plus leakage",
         "continuous_max_A": null,
         "startup_reference_A": null,
         "startup_max_A": null,
@@ -505,6 +563,19 @@
         "peak_duration_ms": null,
         "evidence": "Actual R1305; low-power tradeoff tracked, not decorative load",
         "concurrency": "No enforced exclusion demonstrated; simultaneous demand must be bounded"
+      },
+      {
+        "name": "Three active discharge branches",
+        "rail": null,
+        "typical": "OFF-only rail discharge; ON leakage must be counted, not assumed zero",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "Q1301/2/3 DMN2056U-7 + R1307/8/9 150R1%; each <=37.04mA at assumed5.5V/minR before hot/voltage qualification",
+        "concurrency": "All three can overlap during switching or backfeed; include sustained injection/fault dissipation and upstream bias"
       }
     ],
     "rails": {
@@ -526,7 +597,8 @@
           "Status circuits and pullups",
           "Other MainBoard peripherals",
           "Input/charger/protection/UPS housekeeping",
-          "3V3 bleeder R1304"
+          "3V3 bleeder R1304",
+          "Three active discharge branches"
         ]
       },
       "5V_MAIN": {
@@ -541,7 +613,8 @@
           "CardKB2",
           "Other MainBoard peripherals",
           "Input/charger/protection/UPS housekeeping",
-          "5V bleeder R1305"
+          "5V bleeder R1305",
+          "Three active discharge branches"
         ]
       }
     },
@@ -566,22 +639,22 @@
     "10_SENSOR_POWER.kicad_sch": "cd4372ae7721b620a0bded30b9b1b5689d8163a54bf93b9f1e73320a37020cb6",
     "11_MAINBOARD_INTERFACE.kicad_sch": "db665024869e2458b46e58d771353d60f66942612492ccc7a70b6ca33a55d1b7",
     "12_TEST_POINTS.kicad_sch": "a108ad60652223a8cfa1e81bb0f4ad126133c85f6254d1feb33208851c117b93",
-    "13_MASTER_POWER_GATE.kicad_sch": "1f9f2485b2e30b40a0955034b11ad495ca2c31ccf79b53b23358d5ef7c8c95af",
+    "13_MASTER_POWER_GATE.kicad_sch": "bf4dd5fc39af12256a03553468405744d968ab7c979f2d26458973e050014608",
     "FT02_PowerBoard_V1.kicad_sch": "01e39275d59e890db8a56d7af501b4a1662b44eb09a0a6ce57321ad1e4263320",
-    "reference.net.xml": "9ca5204ca2371a2174342caf88989c653a68677b4bb6ec9d888542cf048156a3",
-    "erc.json": "f87083d3c191931368096e432d6d5f4ac93a9cab42bfd22ae81282aa3bbe19a8",
+    "reference.net.xml": "a57911f14196f76a93d3a60f987ba9b6c5eda9b6c8e7bea7b2618662aa24a209",
+    "erc.json": "7e72681bd97399a497b7c0e246de9a4aef874c8a4385fe5cb6bfade4df073203",
     "FT02_PowerBoard_V1.kicad_pro": "55426efea6ad0f29e47102254575d4242a5f6a712ef8a948395d7ea380e422d9",
-    "FT02_Reference.kicad_sym": "6dc31042e19a59319b8bcc6409dfc4e07c20861e1fc66f788f133de33d05770a",
-    "implementation_manifest.json": "763d021c23c47e771cc63295724f1d84b35760e7c167f14b649872caca333796",
-    "build_reference.py": "745a18fc5e5a3ff2402a27a8eae5a19d4396af67f62cf755df6986a51d4fe2db",
+    "FT02_Reference.kicad_sym": "195c2dcfc2afd427b12eaf4325dcbeae8142d31e1547b1f8910b10106571c2be",
+    "implementation_manifest.json": "358c80cab6a803d7961f5e386a2309085d51736bfba86f6ac2bd3d037b1c368e",
+    "build_reference.py": "979818f1a5ba0855f1dca58eab3ef5624d540f120562e475cce02dbdf9b75184",
     "calculate_examples.py": "3b67121133e3c3dabc4c3deb187d2746aef29daaac9ddcda6c1521a9a07ab753",
     "capture_baseline.py": "cdce19131fdc2fa376dcc18c1bd2e7ef8efd0f0b78ba5c723f281009155484e7",
-    "load_budget.py": "37c69931ee48097ff2aed896acf5cb2710a07de3ef85afca8f91bba7a635ba1d",
-    "power_stage_sheets.py": "957fcb8289ddb2be47b4ced6e058a14da0eec691331cf8ac5a91ac16d7024e95",
-    "stage_contract.py": "b80c7c164dd54b542ac395462b6c5115e37d541a4ce4599abd55af05a2765184",
+    "load_budget.py": "24d2a99fbf9a5f4b7ecb6fe825912b4dbee51b10586f87e0579b9df387cc2bbb",
+    "power_stage_sheets.py": "d1d0d15f780c96fd1ce9316d6653c02d0dab3184c73ec7fc07b0eb5844505f62",
+    "stage_contract.py": "4456f26c6cc2a22a294cbfc78603af9a0dbaf98b4b8ffcf64996b2a6abfa89a5",
     "test_battery_contract.py": "c882e51670aaacb872634094e59ca351a83a5b76c2adc08c2fb174d60982ebd0",
-    "test_load_budget.py": "6b226e291597903c67c58ccb8680becc71393252755ea3c007801bb44546eb0c",
-    "test_verify_reference.py": "c7443bada2c3207dbc1520b3baa5a44ee3f1e0c8ee6bc5eda48e729907be4927",
+    "test_load_budget.py": "fb6216143513615761d93a2f665e38cc788da38e2c8f0d35a0cc52c9e63c1553",
+    "test_verify_reference.py": "5982d4f5d9568f8f11c81ebfc44b9384228b0ac18ebc9b11d237354e6d312a33",
     "verify_reference.py": "249947ead3a7b6c3719d7e7887e6105ec7239ceaa6a9f38f5a3443d6d1926b3f"
   },
   "scope": "Pin topology and partial shunt boundary only. No complete pack path, circuit simulation, transient proof, footprints or hardware tests."
