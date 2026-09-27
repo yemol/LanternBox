@@ -193,8 +193,21 @@
       "transient_reference_A": null,
       "transient_max_A": null,
       "peak_duration_ms": null,
-      "evidence": "U201/U401/U701 plus absent01/03/05; include charger battery leakage and all protection bias",
+      "evidence": "U201/U401/U701 plus absent01/03; U501 separately inventoried below; include charger battery leakage",
       "concurrency": "Retained during HARD OFF; report external/battery draw separately"
+    },
+    {
+      "name": "Board battery guard",
+      "rail": "BAT_PLUS",
+      "typical": "BQ29700 normal4uA typical/5.5uA max at3.8V and VM=0; not complete stage draw",
+      "continuous_max_A": null,
+      "startup_reference_A": null,
+      "startup_max_A": null,
+      "transient_reference_A": null,
+      "transient_max_A": null,
+      "peak_duration_ms": null,
+      "evidence": "SLUSBU9I section6.5; add R504/R505 gate pulls, C501 transients and VM fault paths; upstream R601 exception",
+      "concurrency": "Always retained. Q501/Q502/R506 series loss is I-squared-R, not an extra parallel load; full-state maximum OPEN"
     },
     {
       "name": "Master switch bias/control",

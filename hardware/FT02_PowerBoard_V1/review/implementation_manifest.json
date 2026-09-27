@@ -4,6 +4,7 @@
     "06_FUEL_GAUGE",
     "08_3V3_BUCKBOOST",
     "12_TEST_POINTS",
+    "05_BATTERY_PROTECTION",
     "13_MASTER_POWER_GATE",
     "02_EXT_INPUT",
     "04_BATTERY_CHARGER",
@@ -16,8 +17,7 @@
   "implementation_scope": "Pin-level stages plus partial control/interface, not a closed or qualified main power chain.",
   "unimplemented_sheets": [
     "01_USB_C_PD",
-    "03_EXTERNAL_POWER_MUX",
-    "05_BATTERY_PROTECTION"
+    "03_EXTERNAL_POWER_MUX"
   ],
   "components": {
     "J201": {
@@ -362,6 +362,143 @@
       "value": "2N7002",
       "mpn": "2N7002,215",
       "sheet": "04_BATTERY_CHARGER",
+      "dnp": false
+    },
+    "J501": {
+      "kind": "CONN2",
+      "nets": {
+        "1": "BAT_PLUS",
+        "2": "BAT_MINUS"
+      },
+      "value": "1S PACK / LOGICAL",
+      "mpn": "",
+      "sheet": "05_BATTERY_PROTECTION",
+      "dnp": false
+    },
+    "U501": {
+      "kind": "BQ29700",
+      "nets": {
+        "1": null,
+        "2": "GUARD_CHG_GATE",
+        "3": "GUARD_DSG_GATE",
+        "4": "BAT_MINUS",
+        "5": "GUARD_BAT_FILTER",
+        "6": "GUARD_VM"
+      },
+      "value": "BQ29700DSER CANDIDATE",
+      "mpn": "BQ29700DSER",
+      "sheet": "05_BATTERY_PROTECTION",
+      "dnp": false
+    },
+    "R501": {
+      "kind": "R",
+      "nets": {
+        "1": "BAT_PLUS",
+        "2": "BAT_GUARDED"
+      },
+      "value": "0R LINK REF",
+      "mpn": "",
+      "sheet": "05_BATTERY_PROTECTION",
+      "dnp": false
+    },
+    "R502": {
+      "kind": "R",
+      "nets": {
+        "1": "BAT_PLUS",
+        "2": "GUARD_BAT_FILTER"
+      },
+      "value": "330R 1%",
+      "mpn": "",
+      "sheet": "05_BATTERY_PROTECTION",
+      "dnp": false
+    },
+    "C501": {
+      "kind": "C",
+      "nets": {
+        "1": "GUARD_BAT_FILTER",
+        "2": "BAT_MINUS"
+      },
+      "value": "100nF 10V",
+      "mpn": "",
+      "sheet": "05_BATTERY_PROTECTION",
+      "dnp": false
+    },
+    "R503": {
+      "kind": "R",
+      "nets": {
+        "1": "GUARD_VM",
+        "2": "GND"
+      },
+      "value": "2.2k 1%",
+      "mpn": "",
+      "sheet": "05_BATTERY_PROTECTION",
+      "dnp": false
+    },
+    "R504": {
+      "kind": "R",
+      "nets": {
+        "1": "GUARD_DSG_GATE",
+        "2": "BAT_MINUS"
+      },
+      "value": "5.1M 1%",
+      "mpn": "",
+      "sheet": "05_BATTERY_PROTECTION",
+      "dnp": false
+    },
+    "R505": {
+      "kind": "R",
+      "nets": {
+        "1": "GUARD_CHG_GATE",
+        "2": "GND"
+      },
+      "value": "5.1M 1%",
+      "mpn": "",
+      "sheet": "05_BATTERY_PROTECTION",
+      "dnp": false
+    },
+    "R506": {
+      "kind": "R",
+      "nets": {
+        "1": "GUARD_DSG_D",
+        "2": "GUARD_CHG_D"
+      },
+      "value": "25m 1% 2W REF",
+      "mpn": "",
+      "sheet": "05_BATTERY_PROTECTION",
+      "dnp": false
+    },
+    "Q501": {
+      "kind": "AON3402",
+      "nets": {
+        "1": "BAT_MINUS",
+        "2": "BAT_MINUS",
+        "3": "BAT_MINUS",
+        "4": "GUARD_DSG_GATE",
+        "5": "GUARD_DSG_D",
+        "6": "GUARD_DSG_D",
+        "7": "GUARD_DSG_D",
+        "8": "GUARD_DSG_D"
+      },
+      "value": "AON3402 CANDIDATE",
+      "mpn": "AON3402",
+      "sheet": "05_BATTERY_PROTECTION",
+      "dnp": false
+    },
+    "Q502": {
+      "kind": "AON3402",
+      "nets": {
+        "1": "GND",
+        "2": "GND",
+        "3": "GND",
+        "4": "GUARD_CHG_GATE",
+        "5": "GUARD_CHG_D",
+        "6": "GUARD_CHG_D",
+        "7": "GUARD_CHG_D",
+        "8": "GUARD_CHG_D"
+      },
+      "value": "AON3402 CANDIDATE",
+      "mpn": "AON3402",
+      "sheet": "05_BATTERY_PROTECTION",
       "dnp": false
     },
     "R601": {

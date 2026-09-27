@@ -1,15 +1,65 @@
 {
-  "checked_utc": "2026-09-26T17:59:28.292081+00:00",
+  "checked_utc": "2026-09-27T02:47:31.799443+00:00",
   "topology": {
     "status": "PASS_REFERENCE_ONLY",
-    "pins_checked": 380,
-    "components_checked": 134,
+    "pins_checked": 418,
+    "components_checked": 145,
     "sheets_parsed": 14,
     "current_path_audit": {
       "status": "PARTIAL_BOUNDARY_ONLY_OI_010_OPEN",
       "boundary_nodes": {
+        "BAT_PLUS": [
+          "J501:1",
+          "R501:1",
+          "R502:1",
+          "TP1205:1"
+        ],
+        "BAT_MINUS": [
+          "C501:2",
+          "J501:2",
+          "Q501:1",
+          "Q501:2",
+          "Q501:3",
+          "R504:2",
+          "TP1206:1",
+          "U501:4"
+        ],
+        "GUARD_BAT_FILTER": [
+          "C501:1",
+          "R502:2",
+          "U501:5"
+        ],
+        "GUARD_VM": [
+          "R503:1",
+          "U501:6"
+        ],
+        "GUARD_DSG_GATE": [
+          "Q501:4",
+          "R504:1",
+          "U501:3"
+        ],
+        "GUARD_CHG_GATE": [
+          "Q502:4",
+          "R505:1",
+          "U501:2"
+        ],
+        "GUARD_DSG_D": [
+          "Q501:5",
+          "Q501:6",
+          "Q501:7",
+          "Q501:8",
+          "R506:1"
+        ],
+        "GUARD_CHG_D": [
+          "Q502:5",
+          "Q502:6",
+          "Q502:7",
+          "Q502:8",
+          "R506:2"
+        ],
         "BAT_GUARDED": [
           "C601:1",
+          "R501:2",
           "R601:I1",
           "U601:C3"
         ],
@@ -38,14 +88,16 @@
       },
       "charge_terminal": "U401:8 -> BAT_PROTECTED -> R601:I2/I1 -> BAT_GUARDED",
       "discharge_terminal": "BAT_GUARDED -> R601:I1/I2 -> BAT_PROTECTED -> U701:2",
+      "guard_return": "GND -> Q502:S/D -> R506 -> Q501:D/S -> BAT_MINUS; low-side isolation only",
       "upstream_exceptions": [
+        "U501 bias and C501 via R502; gate drive/R504/R505 and VM/R503 fault paths",
         "U601:C3 gauge supply",
         "C601:1 decoupling charging/discharging current",
         "U601:C1/C2 sense-input bias and test-probe leakage via Kelvin terminals"
       ],
       "not_proven": [
-        "BAT_PLUS/BAT_MINUS to board guard (sheet05 absent)",
-        "final auxiliary paths in absent sheets01/03/05 and candidate sheet02 fault states",
+        "guard startup, reverse insertion, leakage and fault-state behavior",
+        "final auxiliary paths in absent sheets01/03 and candidate sheet02 fault states",
         "IC internal leakage/reverse paths in all operating and fault states",
         "physical four-terminal footprint and trace connections"
       ]
@@ -132,8 +184,8 @@
   "erc": {
     "kicad_version": "10.0.5",
     "counts": {
-      "warning": 6,
-      "error": 4
+      "warning": 4,
+      "error": 6
     },
     "default_ignored_checks": [
       {
@@ -157,13 +209,13 @@
   },
   "unimplemented_sheets": [
     "01_USB_C_PD",
-    "03_EXTERNAL_POWER_MUX",
-    "05_BATTERY_PROTECTION"
+    "03_EXTERNAL_POWER_MUX"
   ],
   "wired_reference_sheets": [
     "06_FUEL_GAUGE",
     "08_3V3_BUCKBOOST",
     "12_TEST_POINTS",
+    "05_BATTERY_PROTECTION",
     "13_MASTER_POWER_GATE",
     "02_EXT_INPUT",
     "04_BATTERY_CHARGER",
@@ -189,6 +241,16 @@
         5.148062808264464,
         5.453207885018351
       ],
+      "ov_recovery_static_V": [
+        4.677342492216875,
+        4.981029773573573
+      ],
+      "ltc4365_replacement_screen": {
+        "source": "LTC4365 RevB electrical characteristics:492.5..507.5mV,20..32mV hysteresis",
+        "ideal_divider_gain_min_for_5V25_recovery": 11.400651465798045,
+        "ideal_divider_gain_max_for_5V5_trip": 10.837438423645322,
+        "decision": "Insufficient guaranteed window even before resistor/bias errors; NOT a drop-in fix"
+      },
       "uv_start_static_V": [
         4.3634151968957875,
         4.6387782879416
@@ -209,6 +271,39 @@
         "hotplug overshoot/inductive negative excursion/TVS energy",
         "load-current headroom, inrush and thermal limits",
         "weak-source rebound inhibit and source-wide charge shedding"
+      ]
+    },
+    "battery_guard_candidate": {
+      "decision": "CANDIDATE_NOT_QUALIFIED",
+      "source": "BQ2970 SLUSBU9I device table/6.5; AON3402 Rev2.1 page2",
+      "ov_nominal_V": 4.275,
+      "uv_nominal_V": 2.8,
+      "ov_accuracy_V_at_0_to_60C": 0.02,
+      "uv_accuracy_V_at_25C_only": 0.05,
+      "discharge_oc_threshold_V_at_minus40_to85C": [
+        0.085,
+        0.115
+      ],
+      "discharge_oc_delay_ms": [
+        16,
+        24
+      ],
+      "short_circuit_delay_us": [
+        125,
+        375
+      ],
+      "ideal_oc_upper_A_excluding_bias_TCR_dynamics": 4.646464646464646,
+      "early_trip_example_A_at_1V8_gate_25C_max_RDS": 1.1003236245954693,
+      "early_trip_example_A_at_2V5_gate_25C_max_RDS": 1.4345991561181435,
+      "series_resistor_loss_W_at_3A_nominal": 0.225,
+      "hard_5A_peak_clamp": false,
+      "startup": "First pack insertion may require charger or momentary VM-to-VSS service arming; autonomous startup NOT qualified",
+      "remaining": [
+        "actual load compatibility and low-gate/hot RDS",
+        "first-insertion and recovery",
+        "reverse insertion and PCM coordination",
+        "peak fault current, thermal and passive MPNs",
+        "all battery source ambiguities unchanged; charging remains disabled"
       ]
     },
     "master_gate_candidate": {
@@ -509,8 +604,21 @@
         "transient_reference_A": null,
         "transient_max_A": null,
         "peak_duration_ms": null,
-        "evidence": "U201/U401/U701 plus absent01/03/05; include charger battery leakage and all protection bias",
+        "evidence": "U201/U401/U701 plus absent01/03; U501 separately inventoried below; include charger battery leakage",
         "concurrency": "Retained during HARD OFF; report external/battery draw separately"
+      },
+      {
+        "name": "Board battery guard",
+        "rail": "BAT_PLUS",
+        "typical": "BQ29700 normal4uA typical/5.5uA max at3.8V and VM=0; not complete stage draw",
+        "continuous_max_A": null,
+        "startup_reference_A": null,
+        "startup_max_A": null,
+        "transient_reference_A": null,
+        "transient_max_A": null,
+        "peak_duration_ms": null,
+        "evidence": "SLUSBU9I section6.5; add R504/R505 gate pulls, C501 transients and VM fault paths; upstream R601 exception",
+        "concurrency": "Always retained. Q501/Q502/R506 series loss is I-squared-R, not an extra parallel load; full-state maximum OPEN"
       },
       {
         "name": "Master switch bias/control",
@@ -631,7 +739,7 @@
     "02_EXT_INPUT.kicad_sch": "c6d7aeab5db3edc86b4e2d5ea279c449cb6ac8237c8de5cbb86c6257eb6a8a50",
     "03_EXTERNAL_POWER_MUX.kicad_sch": "b473eef63e55feca8d05c962f0eff19af64e9ef0cab67e9e30cb54bf8c310aa9",
     "04_BATTERY_CHARGER.kicad_sch": "d148d9525c9c13b80f25238a0de3ed59f39433d08edcd7344a784161c21d6532",
-    "05_BATTERY_PROTECTION.kicad_sch": "55a1e24133d7b8281e0d956b59122cde217e1b5d60ac637c13a9fca1cd21620d",
+    "05_BATTERY_PROTECTION.kicad_sch": "582daa2f983d7f31c92ea6335ddffb85a5419c16a706425aea2e92bc9ad0c013",
     "06_FUEL_GAUGE.kicad_sch": "c82ee4348c95534019c9c5da7133fcec07c2384fee3887e4646e5e2b746d65cc",
     "07_UPS_POWER_MUX.kicad_sch": "6cf44b2878edba7a50909c57de4946efcce9da6876922ba46d7125fdd844dc4b",
     "08_3V3_BUCKBOOST.kicad_sch": "e6cec11c0feb469937352a5fd3df312163c0f82df377790aef1e7a79224eba2e",
@@ -640,22 +748,23 @@
     "11_MAINBOARD_INTERFACE.kicad_sch": "db665024869e2458b46e58d771353d60f66942612492ccc7a70b6ca33a55d1b7",
     "12_TEST_POINTS.kicad_sch": "a108ad60652223a8cfa1e81bb0f4ad126133c85f6254d1feb33208851c117b93",
     "13_MASTER_POWER_GATE.kicad_sch": "bf4dd5fc39af12256a03553468405744d968ab7c979f2d26458973e050014608",
-    "FT02_PowerBoard_V1.kicad_sch": "01e39275d59e890db8a56d7af501b4a1662b44eb09a0a6ce57321ad1e4263320",
-    "reference.net.xml": "a57911f14196f76a93d3a60f987ba9b6c5eda9b6c8e7bea7b2618662aa24a209",
-    "erc.json": "7e72681bd97399a497b7c0e246de9a4aef874c8a4385fe5cb6bfade4df073203",
+    "FT02_PowerBoard_V1.kicad_sch": "68d08dcbb436b5ea445bc7a3bbc8f966c579d3911f772a89c4c2b97a792d7100",
+    "reference.net.xml": "6a8c703442fc123d8e3f389544962ec0593bfb29ee6b91b7f25402c464d84f38",
+    "erc.json": "8973e29449c93abd3ea5e6a5f385ccd4c761dbf8785ba5713dd252812b1758d4",
     "FT02_PowerBoard_V1.kicad_pro": "55426efea6ad0f29e47102254575d4242a5f6a712ef8a948395d7ea380e422d9",
-    "FT02_Reference.kicad_sym": "195c2dcfc2afd427b12eaf4325dcbeae8142d31e1547b1f8910b10106571c2be",
-    "implementation_manifest.json": "358c80cab6a803d7961f5e386a2309085d51736bfba86f6ac2bd3d037b1c368e",
-    "build_reference.py": "979818f1a5ba0855f1dca58eab3ef5624d540f120562e475cce02dbdf9b75184",
+    "FT02_Reference.kicad_sym": "d152205a4332a8105bd500da57f8b790eb93ea2a2674e4218e374f5626882efe",
+    "implementation_manifest.json": "23c52f6dba0eef2c9257e697289308ca730a40a6a7f4f736a86a8473fdfc9ed4",
+    "build_reference.py": "adf6aaf769c14f5c3858b7050a5258fcf29321c34344f866f333b0d5ca15b01d",
     "calculate_examples.py": "3b67121133e3c3dabc4c3deb187d2746aef29daaac9ddcda6c1521a9a07ab753",
     "capture_baseline.py": "cdce19131fdc2fa376dcc18c1bd2e7ef8efd0f0b78ba5c723f281009155484e7",
-    "load_budget.py": "24d2a99fbf9a5f4b7ecb6fe825912b4dbee51b10586f87e0579b9df387cc2bbb",
-    "power_stage_sheets.py": "d1d0d15f780c96fd1ce9316d6653c02d0dab3184c73ec7fc07b0eb5844505f62",
-    "stage_contract.py": "4456f26c6cc2a22a294cbfc78603af9a0dbaf98b4b8ffcf64996b2a6abfa89a5",
+    "load_budget.py": "732ba3d1a61bdd021794e3e25b1f10534229c1632e62a22cf609925039fbad3e",
+    "power_stage_sheets.py": "de944a1b371a611079d5a89ab1edb6eb520a091d1966d0a984639ee8cd33b73e",
+    "stage_contract.py": "92eb058d5258b8488bf3c674fde9fb149361dbf79dcd3f4e5aed37f3dc07b83f",
     "test_battery_contract.py": "c882e51670aaacb872634094e59ca351a83a5b76c2adc08c2fb174d60982ebd0",
-    "test_load_budget.py": "fb6216143513615761d93a2f665e38cc788da38e2c8f0d35a0cc52c9e63c1553",
-    "test_verify_reference.py": "5982d4f5d9568f8f11c81ebfc44b9384228b0ac18ebc9b11d237354e6d312a33",
-    "verify_reference.py": "249947ead3a7b6c3719d7e7887e6105ec7239ceaa6a9f38f5a3443d6d1926b3f"
+    "test_load_budget.py": "c4db17d5d8c025432b722497951caa8778b7b40be41de643e589a3c9ae5e290d",
+    "test_verify_reference.py": "8fa3ac6c0afc5a1304e7ad722e789fc879eb1709a370f69970e6f3d30ce1d7c1",
+    "verify_reference.py": "a0df8ce2b79b23ab27ab0793403eba18b6359f087521b23f80dd1770f6203a6a",
+    "FT02_PowerBoard_V1_Phase1_WIP.pdf": "f5718c8113bc6a43697cceac2df2b53ec3f0bfc7b34ab805ee0d8fbe52d2feca"
   },
-  "scope": "Pin topology and partial shunt boundary only. No complete pack path, circuit simulation, transient proof, footprints or hardware tests."
+  "scope": "Installed guard/shunt pin boundaries only, not qualified pack/fault behavior. No complete main chain, simulation, transient proof, footprints or hardware tests."
 }

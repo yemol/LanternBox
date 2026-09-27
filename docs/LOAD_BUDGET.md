@@ -21,6 +21,7 @@ Status: **OPEN, not a board rating**. The exact per-load records, units, provena
 | Status / I2C / PG | ? total; resistor draw depends on logic levels | ? | ? | ? / ? | 3V3 | Actual U1101/U902 and pullup nets; DNP bus pullups excluded |
 | Other MainBoard loads | ? module/flash/PSRAM/debug | ? | ? | ? / ? | ? | Single-Core target, not silently adding/removing prototype LR01 controller |
 | Input/charger/protection/UPS overhead | ? incomplete input/protection sheets | ? | ? | ? / ? | Multiple | Retained HARD OFF; separate external and battery current |
+| U501 battery guard | 0.004 typical/0.0055 maximum at3.8V, VM=0; not complete stage draw | ? all states | ? filter/gates | ? / ? | BAT_PLUS | Separate from preceding row; add gate pulls and fault paths. [Guard review](BATTERY_PROTECTION_REVIEW.md); FET/R506 series loss is not an extra parallel current |
 | U1301/control | At5V:0.034 enabled /0.005 shutdown bias; selected ON or OFF divider0.0455 plus leakage | ? full input/temperature | ? | ? / ? | UPS_RAW | [TPS22953](https://www.ti.com/lit/gpn/TPS22953); post-shunt in battery mode |
 | R1303 raw bleeder | 1.064 at5V nominal | ? voltage envelope | None separately | ? / ? | SYS_RAW | Required discharge provision, not keep-alive |
 | R1304 3V3 bleeder | 0.702 nominal | ? voltage envelope | None separately | ? / ? | 3V3 | Includes sensor discharge through ferrite |

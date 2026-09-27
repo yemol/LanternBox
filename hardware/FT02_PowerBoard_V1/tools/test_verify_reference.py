@@ -20,8 +20,8 @@ class ReferenceTests(unittest.TestCase):
 
     def test_actual_export(self):
         report = validate_netlist(BASE / "review/reference.net.xml")
-        self.assertEqual(report["pins_checked"], 380)
-        self.assertEqual(report["components_checked"], 134)
+        self.assertEqual(report["pins_checked"], 418)
+        self.assertEqual(report["components_checked"], 145)
         self.assertEqual(report["current_path_audit"]["status"], "PARTIAL_BOUNDARY_ONLY_OI_010_OPEN")
 
     def move_pin(self, root, ref, pin, source, destination):
@@ -32,6 +32,46 @@ class ReferenceTests(unittest.TestCase):
 
     def test_charger_moved_before_shunt(self):
         self.check_mutation(lambda r: self.move_pin(r, "U401", "8", "BAT_PROTECTED", "BAT_GUARDED"))
+
+    def test_guard_negative_bypass(self):
+        self.check_mutation(lambda r: self.move_pin(r, "J501", "2", "BAT_MINUS", "GND"))
+
+    def test_guard_filter_wrong_return(self):
+        self.check_mutation(lambda r: self.move_pin(r, "C501", "2", "BAT_MINUS", "GND"))
+
+    def test_guard_fet_source_reversed(self):
+        self.check_mutation(lambda r: self.move_pin(r, "Q501", "1", "BAT_MINUS", "GUARD_DSG_D"))
+
+    def test_guard_wrong_fixed_threshold_variant(self):
+        self.check_mutation(lambda r: r.find("./components/comp[@ref='U501']/property[@name='MPN']").set("value", "BQ29701DSER"))
+
+    def test_guard_oc_resistor_short(self):
+        self.check_mutation(lambda r: r.find("./components/comp[@ref='R506']/value").__setattr__("text", "0"))
+
+    def test_guard_low_gate_fet_substitution(self):
+        self.check_mutation(lambda r: r.find("./components/comp[@ref='Q502']/property[@name='MPN']").set("value", "CSD16406Q3"))
+
+    def test_guard_bias_not_moved_after_gauge(self):
+        self.check_mutation(lambda r: self.move_pin(r, "R502", "1", "BAT_PLUS", "BAT_PROTECTED"))
+
+    def test_guard_claims_remain_bounded(self):
+        limits = candidate_operating_limits()["battery_guard_candidate"]
+        self.assertFalse(limits["hard_5A_peak_clamp"])
+        self.assertEqual(limits["decision"], "CANDIDATE_NOT_QUALIFIED")
+        self.assertEqual(limits["discharge_oc_delay_ms"], [16, 24])
+        self.assertLess(limits["ideal_oc_upper_A_excluding_bias_TCR_dynamics"], 5)
+        self.assertLess(limits["early_trip_example_A_at_1V8_gate_25C_max_RDS"], 1.2)
+        self.assertTrue(limits["remaining"])
+
+    def test_guard_erc_power_input_cannot_be_hidden(self):
+        self.check_mutation(lambda r: r.find("./nets/net[@name='GUARD_BAT_FILTER']/node[@ref='U501'][@pin='5']").set("pintype", "passive"))
+
+    def test_ext_recovery_is_a_separate_gate(self):
+        limits = ext_guard_limits()
+        self.assertLess(limits["ov_recovery_static_V"][1], 5.25)
+        screen = limits["ltc4365_replacement_screen"]
+        self.assertGreater(screen["ideal_divider_gain_min_for_5V25_recovery"],
+                           screen["ideal_divider_gain_max_for_5V5_trip"])
 
     def test_ups_moved_before_shunt(self):
         self.check_mutation(lambda r: self.move_pin(r, "U701", "2", "BAT_PROTECTED", "BAT_GUARDED"))

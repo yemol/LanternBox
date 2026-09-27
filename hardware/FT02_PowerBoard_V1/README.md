@@ -13,7 +13,7 @@ No PCB routing, Gerbers, drill files, placement files, assembly release or Rev A
 
 ## Current Implementation
 
-BQ27220/common-shunt,TPS63802,BQ25628E,candidate TPS2121/UVLO,LT3120,TPS259474L EXT guard,sensor filter,TCA9539 interface,19 test points and sheet13 TPS22953 master gate are wired references. Sheet13 now includes three mechanically selected150R/DMN2056U active-discharge branches plus passive fallback. J1301 common2 now takes current-limited UPS_RAW; throw1 drives MASTER_EN, throw3 DISCHARGE_EN. U701 feeds UPS_RAW; only the series gate feeds SYS_RAW. Three sheets01/03/05 remain explicitly unimplemented. The independent checker covers134 symbols/380 pins with50 tests, plus4 battery-contract and5 load-budget tests (59 total). The partial BOM has no approved footprints and must not be used for procurement/assembly. R601 Kelvin names and U1301 EP11 are logical mappings pending physical footprint review. No board file is created before all Phase1 gates pass.
+BQ27220/common-shunt,TPS63802,BQ25628E,candidate TPS2121/UVLO,LT3120,TPS259474L EXT guard,sensor filter,TCA9539 interface,19 test points and sheet13 master gate/discharge are wired references. Sheet05 now adds BQ29700/AON3402 low-side battery protection; startup/load/reverse/thermal qualification remains OPEN. Only sheets01/03 remain empty. The independent checker covers145 symbols/418 pins with60 tests, plus4 battery-contract and5 load-budget tests (69 total). The partial BOM has no approved footprints and is not for procurement/assembly. No PCB before all Phase1 gates pass. [14-page WIP review PDF](review/FT02_PowerBoard_V1_Phase1_WIP.pdf) is explicitly NOT FOR FABRICATION; [guard boundaries](../../docs/BATTERY_PROTECTION_REVIEW.md) explain the new auxiliary-current exceptions.
 
 R407 charge-arm link is DNP; TS is locked to fault. The charger local SYS has no system load. Current-path validation proves only the installed boundary, not the missing pack/guard or all internal fault paths. TPS2121 is UNFROZEN; board load/thermal/transition and safe source qualification are not established. `wired_reference_sheets` is deliberately separate from the empty `qualified_sheets` list.
 
@@ -36,6 +36,6 @@ python3 -B hardware/FT02_PowerBoard_V1/tools/load_budget.py
 python3 -B hardware/FT02_PowerBoard_V1/tools/test_load_budget.py -v
 ```
 
-Current ERC command intentionally exits5 because4 errors/6 warnings remain. Run subsequent checks separately, not behind shell success chaining. The topology check passes only the reference connections and explicitly reports the full design gate FAIL. KiCad's default ignored rules are disclosed in the report; no project-specific exclusions were added.
+Current ERC command exits5 because6 errors/4 warnings remain. Run subsequent checks separately, not behind shell success chaining. The topology check passes only reference connections and reports the full design gate FAIL. KiCad's default ignored rules are disclosed; no project-specific exclusions were added. U501 BAT/VSS retain real power-input checks, not passive substitutions.
 
 `build_reference.py` regenerates all schematic/project/library files and the partial BOM. Do not rerun after manual schematic edits without reconciling those edits into the generator. `capture_baseline.py` is a one-time provenance tool, not a reset or backup restoration command.

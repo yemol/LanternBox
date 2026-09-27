@@ -28,6 +28,17 @@ R407,0 ARM DNP,,,DNP_REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derati
 R408,0 TS LOCK,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 C408,100nF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 Q401,2N7002,"2N7002,215",,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+J501,1S PACK / LOGICAL,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+U501,BQ29700DSER CANDIDATE,BQ29700DSER,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R501,0R LINK REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R502,330R 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+C501,100nF 10V,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R503,2.2k 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R504,5.1M 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R505,5.1M 1%,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+R506,25m 1% 2W REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+Q501,AON3402 CANDIDATE,AON3402,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
+Q502,AON3402 CANDIDATE,AON3402,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 R601,10m 1% 1W,WSK2512R0100FEA,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 U601,BQ27220YZFR,BQ27220YZFR,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending
 C601,1uF REF,,,REFERENCE_NOT_RELEASED,OI-015: footprint/procurement/derating pending

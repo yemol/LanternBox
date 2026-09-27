@@ -11,6 +11,10 @@ def ic_pins(left, right):
 
 
 PINS = {
+    "BQ29700": ic_pins([(5, "BAT", "power_in"), (4, "VSS", "power_in"), (6, "VM", "input")],
+                         [(3, "DOUT", "output"), (2, "COUT", "output"), (1, "NC", "passive")]),
+    "AON3402": ic_pins([(4, "G", "input"), (1, "S", "passive"), (2, "S", "passive"), (3, "S", "passive")],
+                         [(5, "D", "passive"), (6, "D", "passive"), (7, "D", "passive"), (8, "D", "passive")]),
     "TPS22953": ic_pins([
         (1, "IN", "power_in"), (2, "IN", "power_in"), (3, "BIAS", "power_in"),
         (4, "EN", "input"), (5, "GND", "power_in"), (11, "EP_GND", "power_in"),
@@ -72,6 +76,7 @@ PINS = {
 }
 
 NOTES = {
+    "05_BATTERY_PROTECTION": "CANDIDATE WIRED: BQ29700 low-side guard. Startup, load/thermal and PCM coordination OPEN; charging locked OFF.",
     "13_MASTER_POWER_GATE": "CANDIDATE WIRED: mechanical SYSTEM HARD OFF, upstream of every system rail. Backfeed/leakage qualification OPEN.",
     "02_EXT_INPUT": "CANDIDATE WIRED: regulated EXT_5V ONLY; TPS259474L UV/OV/circuit breaker. Transient/source window OPEN.",
     "04_BATTERY_CHARGER": "WIRED / CHARGE LOCKED OFF: local SYS only. R407 DNP and TS forced fault; source-priority controls OPEN.",
@@ -161,6 +166,37 @@ def build(name, component, text_item):
             "CE pullup uses protected external input; R407 MUST remain DNP. TS=GND forces fault; this is NOT an NTC substitute.",
             "R401 sets ~0.893A nominal branch input limit, NOT whole-board current. No charge profile/temperature approval.",
             "Charger input leakage/reverse paths and hardware charge shedding remain review gates before enabling R407.",
+        ])
+    elif name == "05_BATTERY_PROTECTION":
+        part("CONN2", "J501", "1S PACK / LOGICAL", 91.44, 55.88, {"1": "BAT_PLUS", "2": "BAT_MINUS"})
+        part("BQ29700", "U501", "BQ29700DSER CANDIDATE", 91.44, 114.3, {
+            "1": None, "2": "GUARD_CHG_GATE", "3": "GUARD_DSG_GATE", "4": "BAT_MINUS",
+            "5": "GUARD_BAT_FILTER", "6": "GUARD_VM",
+        }, "BQ29700DSER", datasheet="https://www.ti.com/lit/ds/symlink/bq2970.pdf")
+        rows = [
+            ("R", "R501", "0R LINK REF", "BAT_PLUS", "BAT_GUARDED"),
+            ("R", "R502", "330R 1%", "BAT_PLUS", "GUARD_BAT_FILTER"),
+            ("C", "C501", "100nF 10V", "GUARD_BAT_FILTER", "BAT_MINUS"),
+            ("R", "R503", "2.2k 1%", "GUARD_VM", "GND"),
+            ("R", "R504", "5.1M 1%", "GUARD_DSG_GATE", "BAT_MINUS"),
+            ("R", "R505", "5.1M 1%", "GUARD_CHG_GATE", "GND"),
+            ("R", "R506", "25m 1% 2W REF", "GUARD_DSG_D", "GUARD_CHG_D"),
+        ]
+        for i, (kind, ref, value, hi, lo) in enumerate(rows):
+            passive(kind, ref, value, 210.82+(i%3)*66.04, 50.8+(i//3)*43.18, hi, lo)
+        for ref, x, source, gate, drain in [
+            ("Q501", 101.6, "BAT_MINUS", "GUARD_DSG_GATE", "GUARD_DSG_D"),
+            ("Q502", 271.78, "GND", "GUARD_CHG_GATE", "GUARD_CHG_D"),
+        ]:
+            part("AON3402", ref, "AON3402 CANDIDATE", x, 208.28,
+                 {"1": source, "2": source, "3": source, "4": gate,
+                  "5": drain, "6": drain, "7": drain, "8": drain}, "AON3402",
+                 datasheet="https://aosmd.com/pdfs/datasheet/AON3402.pdf")
+        notes([
+            "BAT_MINUS is isolated from system GND by Q501/R506/Q502. NEVER bridge it with a debug, shield or ground connection.",
+            "R501 is a positive power link; R601 is the ONLY gauge shunt. Protector bias/filter/gate drive bypass R601 and are audited.",
+            "R506 contributes to delayed overcurrent detection, NOT a5A clamp. First insertion may require charger/service arming.",
+            "Low-side opening does NOT isolate BAT_PLUS. Reverse insertion, current/thermal margins and fault leakage remain OPEN.",
         ])
     elif name == "07_UPS_POWER_MUX":
         part("TPS2121", "U701", "TPS2121RUXR UNFROZEN", 109.22, 71.12, {

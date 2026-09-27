@@ -90,10 +90,11 @@ def validate_netlist(path):
             raise ValueError(f"Unreviewed stage MPN: {ref}")
     for ref, pin, kind in [("U701", "1", "power_out"), ("U701", "8", "passive"),
                            ("U901", "2", "power_out"), ("U901", "4", "passive"),
-                           ("U1301", "9", "power_out"), ("U1301", "10", "passive")]:
+                           ("U1301", "9", "power_out"), ("U1301", "10", "passive"),
+                           ("U501", "5", "power_in"), ("U501", "4", "power_in")]:
         record = root.find(f"./nets/net/node[@ref='{ref}'][@pin='{pin}']")
         if record is None or record.get("pintype") != kind:
-            raise ValueError(f"Unreviewed parallel-output electrical model: {ref}:{pin}")
+            raise ValueError(f"Unreviewed power-pin electrical model: {ref}:{pin}")
     if parts["R601"].find("property[@name='MPN']").get("value") != "WSK2512R0100FEA":
         raise ValueError("Unreviewed shunt MPN")
     if any(part.findtext("footprint", "") for part in parts.values()):
@@ -117,7 +118,8 @@ def main():
     manifest = json.loads((BASE / "review/implementation_manifest.json").read_text())
     evidence = [*sorted(BASE.glob("*.kicad_sch")), args.netlist, erc_path, BASE / "FT02_PowerBoard_V1.kicad_pro",
                 BASE / "libraries/FT02_Reference.kicad_sym", BASE / "review/implementation_manifest.json",
-                *sorted((BASE / "tools").glob("*.py"))]
+                *sorted((BASE / "tools").glob("*.py")),
+                *sorted((BASE / "review").glob("FT02_PowerBoard_V1_Phase1_WIP.pdf"))]
     report = {"checked_utc": datetime.now(timezone.utc).isoformat(), "topology": topology,
         "erc": {"kicad_version": erc["kicad_version"], "counts": counts,
             "default_ignored_checks": erc.get("ignored_checks", []),
@@ -129,7 +131,7 @@ def main():
         "load_budget": load_budget_report(),
         "release_gate": "FAIL_INCOMPLETE_DESIGN",
         "evidence_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in evidence},
-        "scope": "Pin topology and partial shunt boundary only. No complete pack path, circuit simulation, transient proof, footprints or hardware tests."}
+        "scope": "Installed guard/shunt pin boundaries only, not qualified pack/fault behavior. No complete main chain, simulation, transient proof, footprints or hardware tests."}
     (BASE / "review/reference_validation.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps({"topology": topology, "erc": counts, "release_gate": report["release_gate"]}))
 

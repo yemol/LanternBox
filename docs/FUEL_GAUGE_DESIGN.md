@@ -24,7 +24,7 @@ Gauge BAT supply/sense, protection bias and any pack-side auxiliary load can dra
 
 ## Sheet06 Reference Implemented, Not Qualified
 
-Uses the system-side high-side drawing on BQ27220 datasheet page1 and its pin table, not the pack-side low-side Figure10. `BAT_GUARDED` denotes the future protected-pack/board-guard output; the upstream guard/connector remains NOT implemented. Actual U401 BAT and U701 IN2 now join `BAT_PROTECTED`, R601's load side. Net names alone do not establish protection or prove the missing pack connection.
+Uses the system-side high-side drawing on BQ27220 datasheet page1 and its pin table, not the pack-side low-side Figure10. Sheet05 now connects J501 BAT_PLUS through R501 to BAT_GUARDED and switches BAT_MINUS separately through two MOSFETs and R506 to GND. U401 BAT and U701 IN2 join BAT_PROTECTED, R601's load side. BAT_GUARDED names a candidate guard output, not a qualified safety boundary; low-side opening leaves its positive connection intact. See [guard review](BATTERY_PROTECTION_REVIEW.md).
 
 | Component | Implemented connection / evidence | Remaining boundary |
 | --- | --- | --- |
@@ -40,9 +40,9 @@ At5A,1% high resistance gives50.5mV/0.2525W at reference temperature. With an il
 
 The independent exported-netlist checks enforce reference pin polarity, distinct shunt sides, private GPOUT, DNP pullups and absence of unreviewed footprints. They do NOT prove the eventual whole-board no-bypass requirement. Charge voltage, charge-temperature/NTC, exact protection and minimum loaded pack voltage remain OPEN; fixed BIN bias must never be interpreted as valid pack temperature. No gauge profile or OTP programming is released.
 
-Current XML boundary audit permits only U601:C3, C601:1 and R601:I1 on BAT_GUARDED. BAT_PROTECTED contains only R601:I2, U401:8, U701:2, C407:1 and C702:1. Charging and UPS load terminals therefore meet the correct opposite sides of the common shunt in the installed partial circuit. Kelvin nets permit only E1/E2, SRP/SRN and their test points. Any new attached load fails the checker. CHG_SYS_LOCAL permits only U401:9, L401:2 and C406:1.
+Current XML boundary audit permits only R501:2, U601:C3, C601:1 and R601:I1 on BAT_GUARDED. BAT_PROTECTED contains only R601:I2, U401:8, U701:2, C407:1 and C702:1. Charging and UPS load terminals therefore meet the correct opposite sides of the common shunt in the installed partial circuit. Kelvin nets permit only E1/E2, SRP/SRN and their test points. Any new attached load fails the checker. CHG_SYS_LOCAL permits only U401:9, L401:2 and C406:1. BAT_PLUS/BAT_MINUS and all guard control/drain nets now also have exact terminal-set checks.
 
-Auxiliary inventory: U601 BAT bias and C601 dynamic current bypass R601 explicitly; sense-input bias and an attached probe can use Kelvin terminals. Gauge VDD/BIN loads are fed internally from U601, not independent measured branches. C407/C702, charger battery housekeeping, UPS battery bias, SYS_RAW decoupling/dividers/supervisor and downstream rails are on the measured side; their magnitudes and internal reverse-state behavior are not proven by an XML netlist. Pack PCM consumption is internal to the supplied pack. The missing guard/input/NTC/debug paths prevent an exhaustive board audit. Report status is PARTIAL_BOUNDARY_ONLY_OI_010_OPEN, never full no-bypass PASS.
+Auxiliary inventory: U501/R502 supply, C501 transients, gate drive/R504/R505 and VM/R503 fault paths bypass R601. U601 BAT bias and C601 dynamic current also bypass it; sense bias and a probe can use Kelvin terminals. Gauge VDD/BIN loads are internally supplied, not independent measured branches. C407/C702, charger battery housekeeping, UPS battery bias, SYS_RAW and downstream rails are on the measured side; their magnitudes and internal reverse behavior are not proven by XML. Pack PCM consumption is internal to the pack. Missing input/NTC/debug implementation and unqualified guard fault states prevent an exhaustive audit. Report status remains PARTIAL_BOUNDARY_ONLY_OI_010_OPEN.
 
 ## Readout
 

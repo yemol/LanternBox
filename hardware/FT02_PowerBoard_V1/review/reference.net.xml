@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/Volumes/yemol_HDDisk/LanternBox/hardware/FT02_PowerBoard_V1/FT02_PowerBoard_V1.kicad_sch</source>
-    <date>2026-09-27T01:55:13</date>
+    <date>2026-09-27T10:32:07</date>
     <tool>Eeschema 10.0.5</tool>
     <textvar name="DESIGN_STATUS">INCOMPLETE_NOT_FOR_FABRICATION</textvar>
     <sheet number="1" name="/" tstamps="/">
@@ -1009,6 +1009,300 @@
             <pin num="11"/>
             <pin num="12"/>
             <pin num="13"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C501">
+      <value>100nF 10V</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="C" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="05_BATTERY_PROTECTION"/>
+      <property name="Sheetfile" value="05_BATTERY_PROTECTION.kicad_sch"/>
+      <sheetpath names="/05_BATTERY_PROTECTION/" tstamps="/025007ac-c595-52da-bf47-3c87a521f40b/"/>
+      <tstamps>4d2fb17a-170f-57c0-a54f-df93639291b7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J501">
+      <value>1S PACK / LOGICAL</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="CONN2" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="05_BATTERY_PROTECTION"/>
+      <property name="Sheetfile" value="05_BATTERY_PROTECTION.kicad_sch"/>
+      <sheetpath names="/05_BATTERY_PROTECTION/" tstamps="/025007ac-c595-52da-bf47-3c87a521f40b/"/>
+      <tstamps>0837c08c-4f88-5622-ab53-68d7fdbb5748</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q501">
+      <value>AON3402 CANDIDATE</value>
+      <datasheet>https://aosmd.com/pdfs/datasheet/AON3402.pdf</datasheet>
+      <fields>
+        <field name="MPN">AON3402</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://aosmd.com/pdfs/datasheet/AON3402.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="AON3402" description=""/>
+      <property name="MPN" value="AON3402"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="05_BATTERY_PROTECTION"/>
+      <property name="Sheetfile" value="05_BATTERY_PROTECTION.kicad_sch"/>
+      <sheetpath names="/05_BATTERY_PROTECTION/" tstamps="/025007ac-c595-52da-bf47-3c87a521f40b/"/>
+      <tstamps>79a2464a-d06e-5928-82ba-7fa4d092ffd7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="4"/>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q502">
+      <value>AON3402 CANDIDATE</value>
+      <datasheet>https://aosmd.com/pdfs/datasheet/AON3402.pdf</datasheet>
+      <fields>
+        <field name="MPN">AON3402</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://aosmd.com/pdfs/datasheet/AON3402.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="AON3402" description=""/>
+      <property name="MPN" value="AON3402"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="05_BATTERY_PROTECTION"/>
+      <property name="Sheetfile" value="05_BATTERY_PROTECTION.kicad_sch"/>
+      <sheetpath names="/05_BATTERY_PROTECTION/" tstamps="/025007ac-c595-52da-bf47-3c87a521f40b/"/>
+      <tstamps>3cf8f555-90f1-508d-acaf-c653cefdc406</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="4"/>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R501">
+      <value>0R LINK REF</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="05_BATTERY_PROTECTION"/>
+      <property name="Sheetfile" value="05_BATTERY_PROTECTION.kicad_sch"/>
+      <sheetpath names="/05_BATTERY_PROTECTION/" tstamps="/025007ac-c595-52da-bf47-3c87a521f40b/"/>
+      <tstamps>8c4db1ff-bcc1-5ef6-bc94-55f7b9da5a14</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R502">
+      <value>330R 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="05_BATTERY_PROTECTION"/>
+      <property name="Sheetfile" value="05_BATTERY_PROTECTION.kicad_sch"/>
+      <sheetpath names="/05_BATTERY_PROTECTION/" tstamps="/025007ac-c595-52da-bf47-3c87a521f40b/"/>
+      <tstamps>0c6cbb30-16a4-5558-811a-a77182508942</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R503">
+      <value>2.2k 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="05_BATTERY_PROTECTION"/>
+      <property name="Sheetfile" value="05_BATTERY_PROTECTION.kicad_sch"/>
+      <sheetpath names="/05_BATTERY_PROTECTION/" tstamps="/025007ac-c595-52da-bf47-3c87a521f40b/"/>
+      <tstamps>9fa27022-c54e-54d0-8512-46065b9a167d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R504">
+      <value>5.1M 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="05_BATTERY_PROTECTION"/>
+      <property name="Sheetfile" value="05_BATTERY_PROTECTION.kicad_sch"/>
+      <sheetpath names="/05_BATTERY_PROTECTION/" tstamps="/025007ac-c595-52da-bf47-3c87a521f40b/"/>
+      <tstamps>aff92dc0-dbe8-5782-9977-870c10acf6b0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R505">
+      <value>5.1M 1%</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="05_BATTERY_PROTECTION"/>
+      <property name="Sheetfile" value="05_BATTERY_PROTECTION.kicad_sch"/>
+      <sheetpath names="/05_BATTERY_PROTECTION/" tstamps="/025007ac-c595-52da-bf47-3c87a521f40b/"/>
+      <tstamps>a5246317-deaa-5a2c-ac6f-ca6e5d36e5a3</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R506">
+      <value>25m 1% 2W REF</value>
+      <fields>
+        <field name="MPN"/>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="R" description=""/>
+      <property name="MPN" value=""/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="05_BATTERY_PROTECTION"/>
+      <property name="Sheetfile" value="05_BATTERY_PROTECTION.kicad_sch"/>
+      <sheetpath names="/05_BATTERY_PROTECTION/" tstamps="/025007ac-c595-52da-bf47-3c87a521f40b/"/>
+      <tstamps>87d59770-bffd-5df7-8bdc-9290868de71d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U501">
+      <value>BQ29700DSER CANDIDATE</value>
+      <datasheet>https://www.ti.com/lit/ds/symlink/bq2970.pdf</datasheet>
+      <fields>
+        <field name="MPN">BQ29700DSER</field>
+        <field name="DesignStatus">REFERENCE_NOT_RELEASED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/bq2970.pdf</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="FT02_Reference" part="BQ29700" description=""/>
+      <property name="MPN" value="BQ29700DSER"/>
+      <property name="DesignStatus" value="REFERENCE_NOT_RELEASED"/>
+      <property name="Sheetname" value="05_BATTERY_PROTECTION"/>
+      <property name="Sheetfile" value="05_BATTERY_PROTECTION.kicad_sch"/>
+      <sheetpath names="/05_BATTERY_PROTECTION/" tstamps="/025007ac-c595-52da-bf47-3c87a521f40b/"/>
+      <tstamps>d3a5e9ed-0501-5472-a54e-41e3065647c9</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="5"/>
+            <pin num="4"/>
+            <pin num="6"/>
+            <pin num="3"/>
+            <pin num="2"/>
+            <pin num="1"/>
           </pins>
         </unit>
       </units>
@@ -3755,6 +4049,25 @@
         <pin num="3" name="D" type="passive"/>
       </pins>
     </libpart>
+    <libpart lib="FT02_Reference" part="AON3402">
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">AON3402</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="S" type="passive"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="S" type="passive"/>
+        <pin num="4" name="G" type="input"/>
+        <pin num="5" name="D" type="passive"/>
+        <pin num="6" name="D" type="passive"/>
+        <pin num="7" name="D" type="passive"/>
+        <pin num="8" name="D" type="passive"/>
+      </pins>
+    </libpart>
     <libpart lib="FT02_Reference" part="BQ25628E">
       <fields>
         <field name="Reference">U</field>
@@ -3802,6 +4115,23 @@
         <pin num="C1" name="SRP" type="input"/>
         <pin num="C2" name="SRN" type="input"/>
         <pin num="C3" name="BAT" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="FT02_Reference" part="BQ29700">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">BQ29700</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="NC" type="passive"/>
+        <pin num="2" name="COUT" type="output"/>
+        <pin num="3" name="DOUT" type="output"/>
+        <pin num="4" name="VSS" type="power_in"/>
+        <pin num="5" name="BAT" type="power_in"/>
+        <pin num="6" name="VM" type="input"/>
       </pins>
     </libpart>
     <libpart lib="FT02_Reference" part="C">
@@ -4192,13 +4522,24 @@
     </net>
     <net code="5" name="BAT_GUARDED" class="Default">
       <node ref="C601" pin="1" pintype="passive"/>
+      <node ref="R501" pin="2" pintype="passive"/>
       <node ref="R601" pin="I1" pinfunction="I1_I1" pintype="passive"/>
       <node ref="U601" pin="C3" pinfunction="BAT_C3" pintype="power_in"/>
     </net>
     <net code="6" name="BAT_MINUS" class="Default">
+      <node ref="C501" pin="2" pintype="passive"/>
+      <node ref="J501" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="Q501" pin="1" pinfunction="S_1" pintype="passive"/>
+      <node ref="Q501" pin="2" pinfunction="S_2" pintype="passive"/>
+      <node ref="Q501" pin="3" pinfunction="S_3" pintype="passive"/>
+      <node ref="R504" pin="2" pintype="passive"/>
       <node ref="TP1206" pin="1" pintype="passive"/>
+      <node ref="U501" pin="4" pinfunction="VSS_4" pintype="power_in"/>
     </net>
     <net code="7" name="BAT_PLUS" class="Default">
+      <node ref="J501" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="R501" pin="1" pintype="passive"/>
+      <node ref="R502" pin="1" pintype="passive"/>
       <node ref="TP1205" pin="1" pintype="passive"/>
     </net>
     <net code="8" name="BAT_PROTECTED" class="Default">
@@ -4398,6 +4739,9 @@
       <node ref="Q1302" pin="2" pinfunction="S_2" pintype="passive"/>
       <node ref="Q1303" pin="2" pinfunction="S_2" pintype="passive"/>
       <node ref="Q401" pin="2" pinfunction="S_2" pintype="passive"/>
+      <node ref="Q502" pin="1" pinfunction="S_1" pintype="passive"/>
+      <node ref="Q502" pin="2" pinfunction="S_2" pintype="passive"/>
+      <node ref="Q502" pin="3" pinfunction="S_3" pintype="passive"/>
       <node ref="R1103" pin="2" pintype="passive"/>
       <node ref="R1104" pin="2" pintype="passive"/>
       <node ref="R1105" pin="2" pintype="passive"/>
@@ -4417,6 +4761,8 @@
       <node ref="R401" pin="2" pintype="passive"/>
       <node ref="R406" pin="2" pintype="passive"/>
       <node ref="R408" pin="2" pintype="passive"/>
+      <node ref="R503" pin="2" pintype="passive"/>
+      <node ref="R505" pin="2" pintype="passive"/>
       <node ref="R602" pin="2" pintype="passive"/>
       <node ref="R604" pin="2" pintype="passive"/>
       <node ref="R605" pin="2" pintype="passive"/>
@@ -4454,149 +4800,182 @@
       <node ref="U901" pin="3" pinfunction="GND_3" pintype="power_in"/>
       <node ref="U902" pin="3" pinfunction="GND_3" pintype="power_in"/>
     </net>
-    <net code="41" name="IO_RESET_N" class="Default">
+    <net code="41" name="GUARD_BAT_FILTER" class="Default">
+      <node ref="C501" pin="1" pintype="passive"/>
+      <node ref="R502" pin="2" pintype="passive"/>
+      <node ref="U501" pin="5" pinfunction="BAT_5" pintype="power_in"/>
+    </net>
+    <net code="42" name="GUARD_CHG_D" class="Default">
+      <node ref="Q502" pin="5" pinfunction="D_5" pintype="passive"/>
+      <node ref="Q502" pin="6" pinfunction="D_6" pintype="passive"/>
+      <node ref="Q502" pin="7" pinfunction="D_7" pintype="passive"/>
+      <node ref="Q502" pin="8" pinfunction="D_8" pintype="passive"/>
+      <node ref="R506" pin="2" pintype="passive"/>
+    </net>
+    <net code="43" name="GUARD_CHG_GATE" class="Default">
+      <node ref="Q502" pin="4" pinfunction="G_4" pintype="input"/>
+      <node ref="R505" pin="1" pintype="passive"/>
+      <node ref="U501" pin="2" pinfunction="COUT_2" pintype="output"/>
+    </net>
+    <net code="44" name="GUARD_DSG_D" class="Default">
+      <node ref="Q501" pin="5" pinfunction="D_5" pintype="passive"/>
+      <node ref="Q501" pin="6" pinfunction="D_6" pintype="passive"/>
+      <node ref="Q501" pin="7" pinfunction="D_7" pintype="passive"/>
+      <node ref="Q501" pin="8" pinfunction="D_8" pintype="passive"/>
+      <node ref="R506" pin="1" pintype="passive"/>
+    </net>
+    <net code="45" name="GUARD_DSG_GATE" class="Default">
+      <node ref="Q501" pin="4" pinfunction="G_4" pintype="input"/>
+      <node ref="R504" pin="1" pintype="passive"/>
+      <node ref="U501" pin="3" pinfunction="DOUT_3" pintype="output"/>
+    </net>
+    <net code="46" name="GUARD_VM" class="Default">
+      <node ref="R503" pin="1" pintype="passive"/>
+      <node ref="U501" pin="6" pinfunction="VM_6" pintype="input"/>
+    </net>
+    <net code="47" name="IO_RESET_N" class="Default">
       <node ref="R1102" pin="2" pintype="passive"/>
       <node ref="U1101" pin="3" pinfunction="RESET_N_3" pintype="input"/>
     </net>
-    <net code="42" name="IO_UNUSED10" class="Default">
+    <net code="48" name="IO_UNUSED10" class="Default">
       <node ref="R1103" pin="1" pintype="passive"/>
       <node ref="U1101" pin="13" pinfunction="P10_13" pintype="bidirectional"/>
     </net>
-    <net code="43" name="IO_UNUSED11" class="Default">
+    <net code="49" name="IO_UNUSED11" class="Default">
       <node ref="R1104" pin="1" pintype="passive"/>
       <node ref="U1101" pin="14" pinfunction="P11_14" pintype="bidirectional"/>
     </net>
-    <net code="44" name="IO_UNUSED12" class="Default">
+    <net code="50" name="IO_UNUSED12" class="Default">
       <node ref="R1105" pin="1" pintype="passive"/>
       <node ref="U1101" pin="15" pinfunction="P12_15" pintype="bidirectional"/>
     </net>
-    <net code="45" name="IO_UNUSED13" class="Default">
+    <net code="51" name="IO_UNUSED13" class="Default">
       <node ref="R1106" pin="1" pintype="passive"/>
       <node ref="U1101" pin="16" pinfunction="P13_16" pintype="bidirectional"/>
     </net>
-    <net code="46" name="IO_UNUSED14" class="Default">
+    <net code="52" name="IO_UNUSED14" class="Default">
       <node ref="R1107" pin="1" pintype="passive"/>
       <node ref="U1101" pin="17" pinfunction="P14_17" pintype="bidirectional"/>
     </net>
-    <net code="47" name="IO_UNUSED15" class="Default">
+    <net code="53" name="IO_UNUSED15" class="Default">
       <node ref="R1108" pin="1" pintype="passive"/>
       <node ref="U1101" pin="18" pinfunction="P15_18" pintype="bidirectional"/>
     </net>
-    <net code="48" name="IO_UNUSED16" class="Default">
+    <net code="54" name="IO_UNUSED16" class="Default">
       <node ref="R1109" pin="1" pintype="passive"/>
       <node ref="U1101" pin="19" pinfunction="P16_19" pintype="bidirectional"/>
     </net>
-    <net code="49" name="IO_UNUSED17" class="Default">
+    <net code="55" name="IO_UNUSED17" class="Default">
       <node ref="R1110" pin="1" pintype="passive"/>
       <node ref="U1101" pin="20" pinfunction="P17_20" pintype="bidirectional"/>
     </net>
-    <net code="50" name="KEEPALIVE" class="Default">
+    <net code="56" name="KEEPALIVE" class="Default">
       <node ref="TP1215" pin="1" pintype="passive"/>
     </net>
-    <net code="51" name="MASTER_CT" class="Default">
+    <net code="57" name="MASTER_CT" class="Default">
       <node ref="C1303" pin="1" pintype="passive"/>
       <node ref="U1301" pin="6" pinfunction="CT_6" pintype="passive"/>
     </net>
-    <net code="52" name="MASTER_EN" class="Default">
+    <net code="58" name="MASTER_EN" class="Default">
       <node ref="J1301" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="R1302" pin="1" pintype="passive"/>
       <node ref="U1301" pin="4" pinfunction="EN_4" pintype="input"/>
     </net>
-    <net code="53" name="MUX_BAT_STATUS" class="Default">
+    <net code="59" name="MUX_BAT_STATUS" class="Default">
       <node ref="R704" pin="2" pintype="passive"/>
       <node ref="U1101" pin="11" pinfunction="P07_11" pintype="bidirectional"/>
       <node ref="U701" pin="9" pinfunction="ST_9" pintype="open_collector"/>
     </net>
-    <net code="54" name="MUX_EXT_SENSE" class="Default">
+    <net code="60" name="MUX_EXT_SENSE" class="Default">
       <node ref="R701" pin="2" pintype="passive"/>
       <node ref="R702" pin="1" pintype="passive"/>
       <node ref="U701" pin="4" pinfunction="OV2_4" pintype="input"/>
       <node ref="U701" pin="6" pinfunction="PR1_6" pintype="input"/>
     </net>
-    <net code="55" name="MUX_ILIM" class="Default">
+    <net code="61" name="MUX_ILIM" class="Default">
       <node ref="R703" pin="1" pintype="passive"/>
       <node ref="U701" pin="10" pinfunction="ILIM_10" pintype="passive"/>
     </net>
-    <net code="56" name="MUX_SS" class="Default">
+    <net code="62" name="MUX_SS" class="Default">
       <node ref="C704" pin="1" pintype="passive"/>
       <node ref="U701" pin="11" pinfunction="SS_11" pintype="passive"/>
     </net>
-    <net code="57" name="PG_3V3" class="Default">
+    <net code="63" name="PG_3V3" class="Default">
       <node ref="R803" pin="2" pintype="passive"/>
       <node ref="TP1216" pin="1" pintype="passive"/>
       <node ref="U1101" pin="4" pinfunction="P00_4" pintype="bidirectional"/>
       <node ref="U801" pin="5" pinfunction="PG_5" pintype="open_collector"/>
     </net>
-    <net code="58" name="PG_5V" class="Default">
+    <net code="64" name="PG_5V" class="Default">
       <node ref="R906" pin="2" pintype="passive"/>
       <node ref="TP1217" pin="1" pintype="passive"/>
       <node ref="U1101" pin="5" pinfunction="P01_5" pintype="bidirectional"/>
       <node ref="U901" pin="7" pinfunction="PGOOD_7" pintype="open_collector"/>
     </net>
-    <net code="59" name="PWR_INT" class="Default">
+    <net code="65" name="PWR_INT" class="Default">
       <node ref="J1101" pin="9" pinfunction="9_9" pintype="passive"/>
       <node ref="R1101" pin="2" pintype="passive"/>
       <node ref="TP1219" pin="1" pintype="passive"/>
       <node ref="U1101" pin="1" pinfunction="INT_N_1" pintype="open_collector"/>
     </net>
-    <net code="60" name="PWR_SW_SUPPLY" class="Default">
+    <net code="66" name="PWR_SW_SUPPLY" class="Default">
       <node ref="J1301" pin="2" pinfunction="2_2" pintype="passive"/>
       <node ref="R1301" pin="2" pintype="passive"/>
     </net>
-    <net code="61" name="RAIL_PERMIT" class="Default">
+    <net code="67" name="RAIL_PERMIT" class="Default">
       <node ref="R707" pin="2" pintype="passive"/>
       <node ref="U702" pin="1" pinfunction="RESET_N_1" pintype="open_collector"/>
       <node ref="U801" pin="1" pinfunction="EN_1" pintype="input"/>
       <node ref="U902" pin="1" pinfunction="A_1" pintype="input"/>
     </net>
-    <net code="62" name="REG5_BST1" class="Default">
+    <net code="68" name="REG5_BST1" class="Default">
       <node ref="C903" pin="1" pintype="passive"/>
       <node ref="U901" pin="23" pinfunction="BST1_23" pintype="passive"/>
     </net>
-    <net code="63" name="REG5_BST2" class="Default">
+    <net code="69" name="REG5_BST2" class="Default">
       <node ref="C904" pin="1" pintype="passive"/>
       <node ref="U901" pin="28" pinfunction="BST2_28" pintype="passive"/>
     </net>
-    <net code="64" name="REG5_BST3" class="Default">
+    <net code="70" name="REG5_BST3" class="Default">
       <node ref="C905" pin="1" pintype="passive"/>
       <node ref="U901" pin="1" pinfunction="BST3_1" pintype="passive"/>
     </net>
-    <net code="65" name="REG5_COMP" class="Default">
+    <net code="71" name="REG5_COMP" class="Default">
       <node ref="C907" pin="1" pintype="passive"/>
       <node ref="R904" pin="2" pintype="passive"/>
     </net>
-    <net code="66" name="REG5_ENABLE" class="Default">
+    <net code="72" name="REG5_ENABLE" class="Default">
       <node ref="R907" pin="1" pintype="passive"/>
       <node ref="U901" pin="16" pinfunction="EN_UVLO_16" pintype="input"/>
       <node ref="U902" pin="4" pinfunction="Y_4" pintype="output"/>
     </net>
-    <net code="67" name="REG5_RT" class="Default">
+    <net code="73" name="REG5_RT" class="Default">
       <node ref="R903" pin="1" pintype="passive"/>
       <node ref="U901" pin="14" pinfunction="RT_14" pintype="passive"/>
     </net>
-    <net code="68" name="REG5_SW1" class="Default">
+    <net code="74" name="REG5_SW1" class="Default">
       <node ref="C903" pin="2" pintype="passive"/>
       <node ref="L901" pin="1" pintype="passive"/>
       <node ref="U901" pin="24" pinfunction="SW1_24" pintype="bidirectional"/>
       <node ref="U901" pin="25" pinfunction="SW1_25" pintype="bidirectional"/>
     </net>
-    <net code="69" name="REG5_SW2" class="Default">
+    <net code="75" name="REG5_SW2" class="Default">
       <node ref="C904" pin="2" pintype="passive"/>
       <node ref="L901" pin="2" pintype="passive"/>
       <node ref="U901" pin="26" pinfunction="SW2_26" pintype="bidirectional"/>
       <node ref="U901" pin="27" pinfunction="SW2_27" pintype="bidirectional"/>
     </net>
-    <net code="70" name="REG5_VC" class="Default">
+    <net code="76" name="REG5_VC" class="Default">
       <node ref="R904" pin="1" pintype="passive"/>
       <node ref="U901" pin="10" pinfunction="VC_10" pintype="passive"/>
     </net>
-    <net code="71" name="REG5_VCC" class="Default">
+    <net code="77" name="REG5_VCC" class="Default">
       <node ref="C906" pin="1" pintype="passive"/>
       <node ref="U901" pin="12" pinfunction="MPPC_12" pintype="input"/>
       <node ref="U901" pin="13" pinfunction="VCC_13" pintype="power_out"/>
       <node ref="U901" pin="8" pinfunction="PROG_8" pintype="passive"/>
     </net>
-    <net code="72" name="SCL" class="Default">
+    <net code="78" name="SCL" class="Default">
       <node ref="J1101" pin="8" pinfunction="8_8" pintype="passive"/>
       <node ref="R605" pin="1" pintype="passive"/>
       <node ref="R607" pin="2" pintype="passive"/>
@@ -4605,7 +4984,7 @@
       <node ref="U401" pin="13" pinfunction="SCL_13" pintype="input"/>
       <node ref="U601" pin="A3" pinfunction="SCL_A3" pintype="bidirectional"/>
     </net>
-    <net code="73" name="SDA" class="Default">
+    <net code="79" name="SDA" class="Default">
       <node ref="J1101" pin="7" pinfunction="7_7" pintype="passive"/>
       <node ref="R604" pin="1" pintype="passive"/>
       <node ref="R606" pin="2" pintype="passive"/>
@@ -4614,29 +4993,29 @@
       <node ref="U401" pin="12" pinfunction="SDA_12" pintype="bidirectional"/>
       <node ref="U601" pin="A2" pinfunction="SDA_A2" pintype="bidirectional"/>
     </net>
-    <net code="74" name="SENSE_N" class="Default">
+    <net code="80" name="SENSE_N" class="Default">
       <node ref="R601" pin="E2" pinfunction="E2_E2" pintype="passive"/>
       <node ref="TP1214" pin="1" pintype="passive"/>
       <node ref="U601" pin="C2" pinfunction="SRN_C2" pintype="input"/>
     </net>
-    <net code="75" name="SENSE_P" class="Default">
+    <net code="81" name="SENSE_P" class="Default">
       <node ref="R601" pin="E1" pinfunction="E1_E1" pintype="passive"/>
       <node ref="TP1213" pin="1" pintype="passive"/>
       <node ref="U601" pin="C1" pinfunction="SRP_C1" pintype="input"/>
     </net>
-    <net code="76" name="SENS_DAMP" class="Default">
+    <net code="82" name="SENS_DAMP" class="Default">
       <node ref="C1003" pin="1" pintype="passive"/>
       <node ref="R1001" pin="2" pintype="passive"/>
     </net>
-    <net code="77" name="SW3_L1" class="Default">
+    <net code="83" name="SW3_L1" class="Default">
       <node ref="L801" pin="1" pintype="passive"/>
       <node ref="U801" pin="9" pinfunction="L1_9" pintype="bidirectional"/>
     </net>
-    <net code="78" name="SW3_L2" class="Default">
+    <net code="84" name="SW3_L2" class="Default">
       <node ref="L801" pin="2" pintype="passive"/>
       <node ref="U801" pin="7" pinfunction="L2_7" pintype="bidirectional"/>
     </net>
-    <net code="79" name="SYS_RAW" class="Default">
+    <net code="85" name="SYS_RAW" class="Default">
       <node ref="C1302" pin="1" pintype="passive"/>
       <node ref="C705" pin="1" pintype="passive"/>
       <node ref="C801" pin="1" pintype="passive"/>
@@ -4657,12 +5036,12 @@
       <node ref="U901" pin="20" pinfunction="PVIN_20" pintype="power_in"/>
       <node ref="U901" pin="21" pinfunction="PVIN_21" pintype="power_in"/>
     </net>
-    <net code="80" name="SYS_UV_SENSE" class="Default">
+    <net code="86" name="SYS_UV_SENSE" class="Default">
       <node ref="R705" pin="2" pintype="passive"/>
       <node ref="R706" pin="1" pintype="passive"/>
       <node ref="U702" pin="5" pinfunction="SENSE_5" pintype="input"/>
     </net>
-    <net code="81" name="UPS_RAW" class="Default">
+    <net code="87" name="UPS_RAW" class="Default">
       <node ref="C1301" pin="1" pintype="passive"/>
       <node ref="C703" pin="1" pintype="passive"/>
       <node ref="R1301" pin="1" pintype="passive"/>
@@ -4672,22 +5051,25 @@
       <node ref="U701" pin="1" pinfunction="OUT_1" pintype="power_out"/>
       <node ref="U701" pin="8" pinfunction="OUT_8" pintype="passive"/>
     </net>
-    <net code="82" name="USB_5V" class="Default">
+    <net code="88" name="USB_5V" class="Default">
       <node ref="TP1202" pin="1" pintype="passive"/>
     </net>
-    <net code="83" name="USB_VBUS" class="Default">
+    <net code="89" name="USB_VBUS" class="Default">
       <node ref="TP1201" pin="1" pintype="passive"/>
     </net>
-    <net code="84" name="unconnected-(U201-ITIMER-Pad10)" class="Default">
+    <net code="90" name="unconnected-(U201-ITIMER-Pad10)" class="Default">
       <node ref="U201" pin="10" pinfunction="ITIMER_10" pintype="passive+no_connect"/>
     </net>
-    <net code="85" name="unconnected-(U201-PG-Pad3)" class="Default">
+    <net code="91" name="unconnected-(U201-PG-Pad3)" class="Default">
       <node ref="U201" pin="3" pinfunction="PG_3" pintype="open_collector+no_connect"/>
     </net>
-    <net code="86" name="unconnected-(U401-QON-Pad7)" class="Default">
+    <net code="92" name="unconnected-(U401-QON-Pad7)" class="Default">
       <node ref="U401" pin="7" pinfunction="QON_7" pintype="input+no_connect"/>
     </net>
-    <net code="87" name="unconnected-(U702-CT-Pad4)" class="Default">
+    <net code="93" name="unconnected-(U501-NC-Pad1)" class="Default">
+      <node ref="U501" pin="1" pinfunction="NC_1" pintype="passive+no_connect"/>
+    </net>
+    <net code="94" name="unconnected-(U702-CT-Pad4)" class="Default">
       <node ref="U702" pin="4" pinfunction="CT_4" pintype="passive+no_connect"/>
     </net>
   </nets>

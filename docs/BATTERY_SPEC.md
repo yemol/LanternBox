@@ -34,3 +34,5 @@ Future at least10000mAh remains a separate1S compatibility target without PCB re
 The prior source-search blocker is resolved only for the fields above. Board current rating, safe charging, UPS low-voltage margin and full battery-path verification remain OPEN.
 
 Schematic implementation boundary: sheet04 now physically locks charge off with R407 DNP and TS fault. Sheet07's provisional3.30V SYS_RAW undervoltage shutdown is a board design choice, not new battery evidence. It does not close minimum loaded pack voltage, exact protection thresholds or the4.25V/4.2V conflict. No additional battery source field was closed.
+
+Sheet05 now wires a BQ29700/AON3402 low-side guard candidate. Its4.275V OV/2.8V UV detector settings are NOT battery-source thresholds, a charge setpoint or proof of PCM coordination. Startup, reverse/fault and current/thermal behavior remain unqualified; see [guard review](BATTERY_PROTECTION_REVIEW.md). All source-backed fields and OPEN items above remain unchanged.

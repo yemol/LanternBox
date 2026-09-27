@@ -87,7 +87,7 @@ PINS = {
 PINS.update(power_stage_sheets.PINS)
 BOX_KINDS = set(power_stage_sheets.PINS)
 IC_KINDS = {"TPS63802", "BQ27220", "BQ25628E", "LT3120", "TCA9539PW",
-            "TPS2121", "TPS3808G01DBV", "SN74LVC1G08DBV", "TPS259474", "TPS22953"}
+            "TPS2121", "TPS3808G01DBV", "SN74LVC1G08DBV", "TPS259474", "TPS22953", "BQ29700"}
 
 
 def box_height(kind):
@@ -130,7 +130,7 @@ def library_symbol(kind, embedded=False):
             length = 3.81
         pins.append(node("pin", Atom(electrical), Atom("line"), node("at", x, y, angle),
                          node("length", length), node("name", label, effects()), node("number", number, effects())))
-    prefix = "U" if kind in IC_KINDS else ("J" if kind.startswith("CONN") else ("Q" if kind in {"2N7002", "DMN2056U"} else ("R" if kind == "K4" else kind)))
+    prefix = "U" if kind in IC_KINDS else ("J" if kind.startswith("CONN") else ("Q" if kind in {"2N7002", "DMN2056U", "AON3402"} else ("R" if kind == "K4" else kind)))
     return node("symbol", name, node("pin_names", node("offset", 1.016)),
                 node("in_bom", Atom("yes")), node("on_board", Atom("yes")),
                 prop("Reference", prefix, 0, 18), prop("Value", kind, 0, 16),

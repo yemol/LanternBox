@@ -6,6 +6,13 @@ TPS25947 Rev C RPW and TCA9539 Rev C PW pin tables. Values are WIP review choice
 """
 
 IC_NETS = {
+    "J501": {1: "BAT_PLUS", 2: "BAT_MINUS"},
+    "U501": {1: None, 2: "GUARD_CHG_GATE", 3: "GUARD_DSG_GATE", 4: "BAT_MINUS",
+             5: "GUARD_BAT_FILTER", 6: "GUARD_VM"},
+    "Q501": {1: "BAT_MINUS", 2: "BAT_MINUS", 3: "BAT_MINUS", 4: "GUARD_DSG_GATE",
+             5: "GUARD_DSG_D", 6: "GUARD_DSG_D", 7: "GUARD_DSG_D", 8: "GUARD_DSG_D"},
+    "Q502": {1: "GND", 2: "GND", 3: "GND", 4: "GUARD_CHG_GATE",
+             5: "GUARD_CHG_D", 6: "GUARD_CHG_D", 7: "GUARD_CHG_D", 8: "GUARD_CHG_D"},
     "U201": {5: "EXT_5V", 1: "EXT_UV_SENSE", 2: "EXT_OV_SENSE", 9: "EXT_ILM",
              8: "GND", 6: "EXT_5V_SAFE", 3: None, 4: "GND", 7: "EXT_DVDT", 10: None},
     "J201": {1: "EXT_5V", 2: "GND"},
@@ -43,6 +50,13 @@ IC_NETS = {
 }
 
 TWO_TERMINAL = [
+    ("R501", "0R LINK REF", "BAT_PLUS", "BAT_GUARDED"),
+    ("R502", "330R 1%", "BAT_PLUS", "GUARD_BAT_FILTER"),
+    ("C501", "100nF 10V", "GUARD_BAT_FILTER", "BAT_MINUS"),
+    ("R503", "2.2k 1%", "GUARD_VM", "GND"),
+    ("R504", "5.1M 1%", "GUARD_DSG_GATE", "BAT_MINUS"),
+    ("R505", "5.1M 1%", "GUARD_CHG_GATE", "GND"),
+    ("R506", "25m 1% 2W REF", "GUARD_DSG_D", "GUARD_CHG_D"),
     ("C201", "1uF 50V", "EXT_5V", "GND"),
     ("C202", "22uF 10V", "EXT_5V_SAFE", "GND"),
     ("C203", "4.7nF 50V REF", "EXT_DVDT", "GND"),
@@ -127,7 +141,8 @@ TWO_TERMINAL = [
     ("R1309", "150R 1% 0.5W", "5V_MAIN", "DISCH_5V_D"),
 ]
 
-MPNS = {"U201": "TPS259474LRPWR", "U401": "BQ25628ERYKR", "Q401": "2N7002,215", "U701": "TPS2121RUXR",
+MPNS = {"U501": "BQ29700DSER", "Q501": "AON3402", "Q502": "AON3402",
+        "U201": "TPS259474LRPWR", "U401": "BQ25628ERYKR", "Q401": "2N7002,215", "U701": "TPS2121RUXR",
         "U702": "TPS3808G01DBVR", "U901": "LT3120IUFDM#PBF", "U902": "SN74LVC1G08DBVR",
         "U1101": "TCA9539PWR", "FB1001": "BLM21PG221SN1D", "U1301": "TPS22953DQCR",
         "Q1301": "DMN2056U-7", "Q1302": "DMN2056U-7", "Q1303": "DMN2056U-7"}
@@ -178,6 +193,7 @@ def candidate_operating_limits():
     return {
         "decision": "TPS2121_UNFROZEN_NOT_A_BOARD_RATING",
         "ext_guard_candidate": ext_guard_limits(),
+        "battery_guard_candidate": battery_guard_limits(),
         "master_gate_candidate": master_gate_limits(),
         "required_continuous_board_power_W": None,
         "required_peak_board_power_W": None,
@@ -227,6 +243,13 @@ def ext_guard_limits():
             "decision": "Change protection topology/precision or justified reverse-current handling; resistor retuning alone cannot pass",
         },
         "ov_trip_static_V": bounds(165000, 1.183, 1.223),
+        "ov_recovery_static_V": bounds(165000, 1.076, 1.116),
+        "ltc4365_replacement_screen": {
+            "source": "LTC4365 RevB electrical characteristics:492.5..507.5mV,20..32mV hysteresis",
+            "ideal_divider_gain_min_for_5V25_recovery": 5.25/(0.4925-0.032),
+            "ideal_divider_gain_max_for_5V5_trip": 5.5/0.5075,
+            "decision": "Insufficient guaranteed window even before resistor/bias errors; NOT a drop-in fix",
+        },
         "uv_start_static_V": bounds(205000, 1.183, 1.223),
         "uv_stop_static_V": bounds(205000, 1.076, 1.116),
         "assumed_reverse_test_V": -5.5,
@@ -315,10 +338,41 @@ def expectations():
     return pins, values
 
 
+def battery_guard_limits():
+    return {
+        "decision": "CANDIDATE_NOT_QUALIFIED",
+        "source": "BQ2970 SLUSBU9I device table/6.5; AON3402 Rev2.1 page2",
+        "ov_nominal_V": 4.275, "uv_nominal_V": 2.8,
+        "ov_accuracy_V_at_0_to_60C": 0.020,
+        "uv_accuracy_V_at_25C_only": 0.050,
+        "discharge_oc_threshold_V_at_minus40_to85C": [0.085, 0.115],
+        "discharge_oc_delay_ms": [16, 24],
+        "short_circuit_delay_us": [125, 375],
+        "ideal_oc_upper_A_excluding_bias_TCR_dynamics": 0.115/(0.025*0.99),
+        "early_trip_example_A_at_1V8_gate_25C_max_RDS": 0.085/(0.025*1.01+2*0.026),
+        "early_trip_example_A_at_2V5_gate_25C_max_RDS": 0.085/(0.025*1.01+2*0.017),
+        "series_resistor_loss_W_at_3A_nominal": 3**2*0.025,
+        "hard_5A_peak_clamp": False,
+        "startup": "First pack insertion may require charger or momentary VM-to-VSS service arming; autonomous startup NOT qualified",
+        "remaining": ["actual load compatibility and low-gate/hot RDS", "first-insertion and recovery",
+                      "reverse insertion and PCM coordination", "peak fault current, thermal and passive MPNs",
+                      "all battery source ambiguities unchanged; charging remains disabled"],
+    }
+
+
 def audit_current_boundary(actual):
-    """Prove only the installed sheet-06 boundary, not the absent pack/guard chain."""
+    """Exact installed terminal boundaries; not an IC leakage/fault-state proof."""
     boundaries = {
-        "BAT_GUARDED": {("R601", "I1"), ("U601", "C3"), ("C601", "1")},
+        "BAT_PLUS": {("J501", "1"), ("TP1205", "1"), ("R501", "1"), ("R502", "1")},
+        "BAT_MINUS": {("J501", "2"), ("TP1206", "1"), ("U501", "4"), ("C501", "2"),
+                      ("R504", "2"), ("Q501", "1"), ("Q501", "2"), ("Q501", "3")},
+        "GUARD_BAT_FILTER": {("R502", "2"), ("C501", "1"), ("U501", "5")},
+        "GUARD_VM": {("R503", "1"), ("U501", "6")},
+        "GUARD_DSG_GATE": {("U501", "3"), ("Q501", "4"), ("R504", "1")},
+        "GUARD_CHG_GATE": {("U501", "2"), ("Q502", "4"), ("R505", "1")},
+        "GUARD_DSG_D": {("R506", "1"), ("Q501", "5"), ("Q501", "6"), ("Q501", "7"), ("Q501", "8")},
+        "GUARD_CHG_D": {("R506", "2"), ("Q502", "5"), ("Q502", "6"), ("Q502", "7"), ("Q502", "8")},
+        "BAT_GUARDED": {("R501", "2"), ("R601", "I1"), ("U601", "C3"), ("C601", "1")},
         "BAT_PROTECTED": {("R601", "I2"), ("U401", "8"), ("U701", "2"), ("C407", "1"), ("C702", "1")},
         "SENSE_P": {("R601", "E1"), ("U601", "C1"), ("TP1213", "1")},
         "SENSE_N": {("R601", "E2"), ("U601", "C2"), ("TP1214", "1")},
@@ -333,10 +387,12 @@ def audit_current_boundary(actual):
         "boundary_nodes": {net: sorted(':'.join(p) for p in pins) for net, pins in boundaries.items()},
         "charge_terminal": "U401:8 -> BAT_PROTECTED -> R601:I2/I1 -> BAT_GUARDED",
         "discharge_terminal": "BAT_GUARDED -> R601:I1/I2 -> BAT_PROTECTED -> U701:2",
-        "upstream_exceptions": ["U601:C3 gauge supply", "C601:1 decoupling charging/discharging current",
+        "guard_return": "GND -> Q502:S/D -> R506 -> Q501:D/S -> BAT_MINUS; low-side isolation only",
+        "upstream_exceptions": ["U501 bias and C501 via R502; gate drive/R504/R505 and VM/R503 fault paths",
+                                "U601:C3 gauge supply", "C601:1 decoupling charging/discharging current",
                                 "U601:C1/C2 sense-input bias and test-probe leakage via Kelvin terminals"],
-        "not_proven": ["BAT_PLUS/BAT_MINUS to board guard (sheet05 absent)",
-                       "final auxiliary paths in absent sheets01/03/05 and candidate sheet02 fault states",
+        "not_proven": ["guard startup, reverse insertion, leakage and fault-state behavior",
+                       "final auxiliary paths in absent sheets01/03 and candidate sheet02 fault states",
                        "IC internal leakage/reverse paths in all operating and fault states",
                        "physical four-terminal footprint and trace connections"],
     }

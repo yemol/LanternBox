@@ -15,7 +15,7 @@ class LoadBudgetTests(unittest.TestCase):
 
     def test_required_fields_and_unique_loads(self):
         rows = inventory()
-        self.assertEqual(len(rows), 20)
+        self.assertEqual(len(rows), 21)
         self.assertEqual(len({r["name"] for r in rows}), len(rows))
         for row in rows:
             for key in ("typical", "continuous_max_A", "startup_max_A", "transient_max_A",
