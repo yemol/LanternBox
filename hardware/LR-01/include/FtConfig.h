@@ -9,10 +9,11 @@ static constexpr bool FT_VERBOSE_DIAGNOSTICS = false;
 // Shared firmware timing constants.
 static constexpr unsigned long FT_AUTO_TRACK_INTERVAL_MS = 30000UL;
 
-// Compass installation yaw correction. The combined GNSS/QMC board is mounted
-// flat and rotated 180 degrees in the FT-02 enclosure. Apply the correction after
-// calibration so published heading keeps 0 degrees at the device front.
-static constexpr float FT_COMPASS_INSTALL_YAW_OFFSET_DEG = 180.0f;
+// Compass body-frame transform. Four-point bench measurements on the installed
+// FT-02 show the raw calibrated horizontal frame rotates opposite to the device
+// heading. Correct handedness first in qmcComputeHeading(), then apply the
+// measured device-front yaw offset.
+static constexpr float FT_COMPASS_INSTALL_YAW_OFFSET_DEG = 90.0f;
 
 // A GNSS fix is only attached to an outgoing message while it is fresh.
 // This prevents a stale position from being silently sent after signal loss.

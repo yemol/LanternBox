@@ -1,0 +1,77 @@
+{
+  "status": "CONDITIONAL_ARITHMETIC_NOT_HARDWARE_PASS",
+  "phase1_pass": false,
+  "assumptions": {
+    "rail_and_gate_efficiency_min": 0.85,
+    "charger_efficiency_min": 0.9,
+    "usb_loaded_sys_floor_v": 3.4,
+    "usb_charger_input_floor_v": 8.3,
+    "usb_input_max_v": 9.45,
+    "nm_os_on_resistance_max_ohm": 10,
+    "sys_auxiliary_w": 0.1,
+    "input_auxiliary_a": 0.02,
+    "full_temperature_limits_qualified": false
+  },
+  "charger_input_a": {
+    "min": 1.2805820561904595,
+    "nominal": 1.4425198318886263,
+    "max": 1.6026686619279213
+  },
+  "fallback_estimated_a": {
+    "min": 0.06319780914261638,
+    "max": 0.07878787878787878,
+    "qualified": false,
+    "note": "KILIM specified near 1.5A; sub-100mA operation/startup not established."
+  },
+  "output_envelope_w": 8,
+  "sys_demand_w": 9.511764705882353,
+  "low_corner_sys_available_w": 9.565947959742735,
+  "low_corner_margin_w": 0.0541832538603817,
+  "nominal_charge_headroom_a_at_4v2": 0.5172966505751238,
+  "sw_current_power_upper_bound_a": 4.454476133887899,
+  "sw_limit_a": 5,
+  "sw_margin_fraction": 0.10910477322242029,
+  "usb_2a_contract_margin_a": 0.37733133807207864,
+  "system_uv_v": {
+    "nominal": 3.296417910447761,
+    "min": 3.153006284651916,
+    "max": 3.440072415590963
+  },
+  "sys_current_at_uv_min_a": 3.0167287493790798,
+  "gate_enable_min_estimate_v": 2.6712347770901896,
+  "battery_limit_a": 5,
+  "battery_path_resistance_max_ohm_assumed": 0.1,
+  "shunt_dissipation_at_5a_w": 0.12625,
+  "off_budget_ua": {
+    "charger": 3,
+    "gauge_hibernate": 12,
+    "gate_bias_and_input": 11,
+    "supervisor_allocation": 6,
+    "divider_and_control_allocation": 2,
+    "pcm_unknown_allocation": 10,
+    "reverse_and_io_unknown_allocation": 5,
+    "normal_total": 49,
+    "uv_asserted_additional_max_estimate": 7.3932353655511776,
+    "active_gauge_extra": 18,
+    "guaranteed": false,
+    "note": "Table-point bounds and allocations mixed. Gauge >50C and actual PCM leakage remain OPEN."
+  },
+  "checks": {
+    "low_corner_8w_arithmetic": true,
+    "steady_sw_below_5a": true,
+    "input_below_2a_contract": true,
+    "steady_sys_below_pack_5a": true,
+    "shunt_below_half_w": true,
+    "enable_above_1v3_design_guard": true
+  },
+  "unproven": [
+    "5V fallback current accuracy and dead-battery startup",
+    "PD hard-reset/downgrade",
+    "thermal and component temperature limits",
+    "8W actual terminal concurrency",
+    "surge clamp coordination and current trip overshoot",
+    "inrush/ripple/short circuit below pack ceiling",
+    "charge profile/TS/10000mAh timeout",
+    "battery-only OFF at low battery and full temperature"
+  ]
+}

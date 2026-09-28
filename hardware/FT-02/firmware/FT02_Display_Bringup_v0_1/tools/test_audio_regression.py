@@ -72,11 +72,11 @@ require("digitalMic ? 0x5A : 0x1A" in codec, "ES8311 microphone selector table c
 require(codec.count("0x0C") >= 3, "16-bit Philips I2S register value is missing")
 require("if(readRegister(reg, actual) && actual == value) return true;" in codec, "codec register readback verification missing")
 
-begin_match = re.search(r"bool FT02_AudioLogBegin\(\).*?\n}\n", audio, re.DOTALL)
-require(begin_match is not None, "FT02_AudioLogBegin not found")
-begin = begin_match.group(0)
+hardware_start_match = re.search(r"static bool FT02_AudioHardwareStart\(\).*?\n}\n", audio, re.DOTALL)
+require(hardware_start_match is not None, "FT02_AudioHardwareStart not found")
+hardware_start = hardware_start_match.group(0)
 require(
-    begin.find("FT02_AudioInitI2s()") < begin.find("FT02_AudioInitCodec()"),
+    hardware_start.find("FT02_AudioInitI2s()") < hardware_start.find("FT02_AudioInitCodec()"),
     "ES8311 is configured before SCLK is started",
 )
 
@@ -85,8 +85,8 @@ require("WM8960" not in platformio, "WM8960 dependency remains")
 require("ES8311与I2S正常" in self_test, "self-test success text was not migrated")
 require("ES8311无响应" in self_test, "self-test codec failure text was not migrated")
 version_text = (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip()
-require(version_text.startswith("FT-02 v2.75k67"), "firmware version mismatch")
-require('FT02_FIRMWARE_VERSION "v2.75k67"' in build_info, "BuildInfo/version mismatch")
+require(version_text == "v2.75k91", "firmware version mismatch")
+require('FT02_FIRMWARE_VERSION "v2.75k91"' in build_info, "BuildInfo/version mismatch")
 
 require("DAC idle mute" in codec, "codec does not finish initialization muted")
 require("DAC idle power down" in codec, "codec does not power DAC down while idle")

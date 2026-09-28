@@ -105,21 +105,24 @@ COMPASS_CAL_START
 COMPASS_CAL_STATE state=RUNNING progress=0 quality=0 samples=0 calibrated=<old> ...
 ```
 
-### 3. 多姿态运动
+### 3. 水平旋转
 
-缓慢执行：
+整机保持水平，缓慢执行：
 
 - 水平 360° 旋转
-- 俯仰翻转
-- 左右滚转
-- 8 字运动
+- 重复 2~3 圈
+- 不做俯仰翻转
+- 不做左右滚转
+- 不做 8 字运动
 
 观察：
 
 - `samples` 持续增长
-- X/Y/Z min/max 范围持续扩大
+- X/Y min/max 范围持续扩大
+- 四象限覆盖逐渐完整
 - `progress` 根据覆盖增加
 - `quality` 逐渐从 0 -> 1 -> 2/3
+- Z min/max 仅作为诊断显示，不参与质量判断
 - LoRa、GNSS、PING、STATUS 同时继续运行
 
 ### 4. 保存

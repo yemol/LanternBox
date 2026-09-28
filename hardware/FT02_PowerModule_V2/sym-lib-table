@@ -1,0 +1,1 @@
+(sym_lib_table (version 7) (lib (name "FT02_V2") (type "KiCad") (uri "${KIPRJMOD}/libraries/FT02_V2.kicad_sym") (options "") (descr "Datasheet-pinned V2 review symbols; physical footprints pending")))

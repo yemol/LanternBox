@@ -268,13 +268,14 @@ static bool qmcComputeHeading(int16_t rawX, int16_t rawY, int16_t rawZ,
   // All three axes are calibrated. This hardware has no accelerometer for tilt
   // compensation, so magnetic azimuth is calculated from corrected X/Y while
   // corrected Z participates in calibration quality and future tilt support.
-  float h = atan2f(y, x) * 180.0f / PI;
+  float h = atan2f(-y, x) * 180.0f / PI;
   if (h < 0.0f) h += 360.0f;
 
-  // Installation transform is intentionally applied AFTER magnetic calibration.
-  // The QMC/GNSS board is mounted flat but yawed 180 degrees in the enclosure.
-  // Keep FT-02's public heading convention unchanged without changing raw-axis
-  // calibration or any host protocol fields.
+  // Body-frame transform is intentionally applied AFTER magnetic calibration.
+  // Bench validation showed the installed horizontal frame has opposite yaw
+  // handedness, so corrected Y is inverted in atan2 above. The remaining fixed
+  // device-front alignment is applied as a yaw offset here. Host protocol fields
+  // and saved hard/soft-iron calibration semantics remain unchanged.
   h += FT_COMPASS_INSTALL_YAW_OFFSET_DEG;
   while (h >= 360.0f) h -= 360.0f;
   while (h < 0.0f) h += 360.0f;
@@ -1211,6 +1212,14 @@ static void sendCompassCalState() {
   s += " max_y=" + String(compassCal.maxY());
   s += " min_z=" + String(compassCal.minZ());
   s += " max_z=" + String(compassCal.maxZ());
+  if (compassCal.isCalibrated()) {
+    const CompassCalibration::Params &cp = compassCal.params();
+    s += " off_x=" + String(cp.offsetX, 2);
+    s += " off_y=" + String(cp.offsetY, 2);
+    s += " m_xx=" + String(cp.matrixXX, 6);
+    s += " m_xy=" + String(cp.matrixXY, 6);
+    s += " m_yy=" + String(cp.matrixYY, 6);
+  }
   hostSend(s);
 }
 
@@ -1947,7 +1956,7 @@ void setup() {
   delay(800);
 
   Serial.println();
-  Serial.println("[LR01] A4.3 Production Mainline / Host Protocol 2");
+  Serial.println("[LR01] A4.4 Compass Axis Fix RC2 / Host Protocol 2");
 
   HostSerial.begin(FtHardware::HOST_BAUD, SERIAL_8N1,
                    FtHardware::HOST_RX_PIN, FtHardware::HOST_TX_PIN);
@@ -1987,7 +1996,7 @@ void setup() {
   Serial.print(" cal_nvs=");
   Serial.println(compassCalStoreOk ? 1 : 0);
 
-  hostSend("LR01_BOOT version=MESH_NATIVE_A2_GNSS_A4_3_PRODUCTION protocol=2 node=FT02 id=!4c423002");
+  hostSend("LR01_BOOT version=MESH_NATIVE_A2_GNSS_A4_4_COMPASS_AXIS_RC2 protocol=2 node=FT02 id=!4c423002");
   hostSend("LR01_READY protocol=2");
   sendCompassCalState();
 

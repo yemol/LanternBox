@@ -17,6 +17,16 @@ enum FT02AudioLogState : uint8_t
     FT02_AUDIO_LOG_ERROR
 };
 
+// Audio hardware is powered only while a real consumer owns it.
+// Keep the owner set explicit so future modules cannot accidentally leave
+// ES8311/I2S running after their page has closed.
+enum FT02AudioOwner : uint8_t
+{
+    FT02_AUDIO_OWNER_NONE = 0,
+    FT02_AUDIO_OWNER_JOURNAL = 1u << 0,
+    FT02_AUDIO_OWNER_SYSTEM_TEST = 1u << 1
+};
+
 struct FT02AudioLogEntry
 {
     bool valid;
@@ -66,6 +76,12 @@ struct FT02AudioLogStatus
 };
 
 bool FT02_AudioLogBegin();
+// Acquire/release the physical audio hardware. Begin() only initializes the
+// journal data model and leaves ES8311/I2S asleep.
+bool FT02_AudioLogAcquire(FT02AudioOwner owner);
+void FT02_AudioLogRelease(FT02AudioOwner owner);
+bool FT02_AudioLogHardwareActive();
+uint8_t FT02_AudioLogOwnerMask();
 void FT02_AudioLogPoll();
 void FT02_AudioLogNotifyKeyRelease();
 

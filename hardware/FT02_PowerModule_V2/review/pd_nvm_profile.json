@@ -1,0 +1,33 @@
+{
+  "status": "LOGICAL_NVM_SPEC_NOT_A_PROGRAMMED_DEVICE",
+  "device": "STUSB4500QTR",
+  "POWER_OK_CFG": 2,
+  "POWER_ONLY_ABOVE_5V": 0,
+  "REQ_SRC_CURRENT": 0,
+  "PDO_NUMBER": 3,
+  "pdo": [
+    {
+      "index": 1,
+      "voltage_v": 5,
+      "current_a": 0.1
+    },
+    {
+      "index": 2,
+      "voltage_v": 9,
+      "current_a": 2
+    },
+    {
+      "index": 3,
+      "voltage_v": 9,
+      "current_a": 3
+    }
+  ],
+  "required_before_power_test": [
+    "Program NVM with official tooling",
+    "Read back and compare all fields",
+    "Cold start with battery absent and main switch OFF",
+    "Confirm no 12V/15V/20V request",
+    "Confirm POWER_OK2/3 only follows matching PDO after PS_RDY",
+    "Test detach, hard-reset and downgrade"
+  ]
+}

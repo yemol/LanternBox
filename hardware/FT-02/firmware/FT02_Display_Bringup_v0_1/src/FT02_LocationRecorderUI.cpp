@@ -103,7 +103,7 @@ static void FT02_DrawRecorderContent(
     else
     {
         if(!FT02_GnssPowerDesiredEnabled())
-            hint = "GNSS已关闭·请在设备状态中开启";
+            hint = "GNSS已关闭·请切换户外模式";
         else
             hint = recorder.sessionActive
                 ? (recorder.autoTrackEnabled ? "路径与自动轨迹记录中" : "路径记录中")

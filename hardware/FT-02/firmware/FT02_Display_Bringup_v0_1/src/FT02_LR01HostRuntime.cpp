@@ -49,6 +49,8 @@ char g_line[FT02_LR01_LINE_CAPACITY] = {};
 size_t g_lineLength = 0;
 bool g_dropUntilLf = false;
 uint32_t g_lastPingMs = 0;
+char g_lastNonPingTx[96] = {};
+uint32_t g_lastNonPingTxMs = 0u;
 
 size_t safeUtf8Prefix(const char* text, size_t maxBytes)
 {
@@ -63,6 +65,11 @@ size_t safeUtf8Prefix(const char* text, size_t maxBytes)
 bool sendLine(const char* text)
 {
     if(text == nullptr || text[0] == '\0') return false;
+    if(strncmp(text, "CORE_PING_", 10) != 0)
+    {
+        snprintf(g_lastNonPingTx, sizeof(g_lastNonPingTx), "%s", text);
+        g_lastNonPingTxMs = millis();
+    }
     g_lr01Serial.print(text);
     g_lr01Serial.print('\n');
     return true;
@@ -644,7 +651,16 @@ void parseLine(char* line)
             cal.lastUpdateMs = millis();
             ++cal.revision;
         }
-        LR01_LOG_ERROR("[LR01] ERROR code=%ld message=%s\n", static_cast<long>(code), message);
+        if(code == 1 && g_lastNonPingTx[0] != '\0')
+        {
+            LR01_LOG_ERROR("[LR01] ERROR code=%ld message=%s last_non_ping_tx=\"%s\" age_ms=%lu\n",
+                           static_cast<long>(code), message, g_lastNonPingTx,
+                           static_cast<unsigned long>(millis() - g_lastNonPingTxMs));
+        }
+        else
+        {
+            LR01_LOG_ERROR("[LR01] ERROR code=%ld message=%s\n", static_cast<long>(code), message);
+        }
     }
     else
     {
@@ -816,6 +832,31 @@ bool FT02_LR01HostCompassCalSave() { return sendLine("COMPASS_CAL_SAVE"); }
 bool FT02_LR01HostCompassCalCancel() { return sendLine("COMPASS_CAL_CANCEL"); }
 bool FT02_LR01HostCompassCalReset() { return sendLine("COMPASS_CAL_RESET"); }
 
-bool FT02_LR01HostGnssPowerRequestStatus() { return sendLine("GNSS_POWER?"); }
 bool FT02_LR01HostGnssSoftwareOn() { return sendLine("GNSS_SOFT_ON"); }
 bool FT02_LR01HostGnssSoftwareOff() { return sendLine("GNSS_SOFT_OFF"); }
+
+void FT02_LR01HostSleepPause()
+{
+    g_lr01Serial.flush();
+    while(g_lr01Serial.available()) (void)g_lr01Serial.read();
+    g_lineLength = 0;
+    g_dropUntilLf = false;
+    Serial.println("[LR01] sleep pause rx cleared");
+}
+
+void FT02_LR01HostSleepResume()
+{
+    // Data accumulated while Core was intentionally not polling LR01 belongs
+    // to the sleep interval and must not be accepted as post-wake evidence.
+    // Drain it before ModeWake() sends the fresh outdoor/indoor policy.
+    uint32_t dropped = 0u;
+    while(g_lr01Serial.available() > 0)
+    {
+        (void)g_lr01Serial.read();
+        ++dropped;
+    }
+    g_lineLength = 0;
+    g_dropUntilLf = false;
+    g_lastPingMs = 0;
+    Serial.printf("[LR01] resume rx_dropped=%lu\n", static_cast<unsigned long>(dropped));
+}

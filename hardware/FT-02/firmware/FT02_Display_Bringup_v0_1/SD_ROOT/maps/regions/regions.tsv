@@ -1,0 +1,3 @@
+# FT-02 Map Source Tiles A2
+# 2026-09-18 dataset test: regional tiles intentionally disabled.
+# Runtime uses /maps/raw/shanghai-260918.osm.pbf as the single source of truth.

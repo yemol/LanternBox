@@ -45,65 +45,71 @@ COMPASS_CAL_RESET
 
 ## 3. 校准数学
 
+当前 LR01 没有加速度计，运行时 heading 是严格的二维磁航向。因此校准也必须与运行模型一致，只使用设备**保持水平时**的 X/Y 数据。
+
+校准动作：
+
+```text
+整机保持水平
+-> 缓慢旋转 360°
+-> 重复 2~3 圈
+-> 不做 8 字
+-> 不前后/左右倾斜
+```
+
 硬铁偏置：
 
 ```text
 offsetX = (maxX + minX) / 2
 offsetY = (maxY + minY) / 2
-offsetZ = (maxZ + minZ) / 2
 ```
 
-基础轴向软铁比例：
+二维轴向比例：
 
 ```text
 rangeX = (maxX - minX) / 2
 rangeY = (maxY - minY) / 2
-rangeZ = (maxZ - minZ) / 2
 
-avgRange = (rangeX + rangeY + rangeZ) / 3
-
-scaleX = avgRange / rangeX
-scaleY = avgRange / rangeY
-scaleZ = avgRange / rangeZ
+A4.6 no longer uses independent scaleX/scaleY as the final correction. It retains the X/Y hard-iron center, computes the full X/Y covariance including the cross term, and derives a symmetric 2x2 inverse-square-root correction matrix.
 ```
 
 运行时：
 
 ```text
-correctedX = (rawX - offsetX) * scaleX
-correctedY = (rawY - offsetY) * scaleY
-correctedZ = (rawZ - offsetZ) * scaleZ
+correctedX = matrixXX*(rawX-offsetX) + matrixXY*(rawY-offsetY)
+correctedY = matrixXY*(rawX-offsetX) + matrixYY*(rawY-offsetY)
+correctedZ = rawZ
 ```
 
-当前 LR01 没有加速度计用于姿态倾斜补偿，因此航向仍使用：
+航向使用：
 
 ```text
-atan2(correctedY, correctedX)
+atan2(-correctedY, correctedX)
 ```
 
-Z 轴继续参与校准覆盖、质量判断与软铁修正，并为未来倾斜补偿保留。
+随后应用 FT-02 机身 +90° yaw 安装修正。
+
+Z 轴仍在 `COMPASS_CAL_STATE` 中上报，便于诊断传感器和现场磁环境，但不再参与 heading 校准质量、X/Y scale 或保存参数。旧版把 3D 倾斜采样的 Z 范围纳入 X/Y scale，会在没有倾斜补偿的前提下扭曲水平航向。
 
 ## 4. 进度与质量
 
-进度不是时间进度，而是综合：
+进度综合：
 
 - 有效样本数量
-- X / Y / Z 三轴跨度
-- 最小轴 / 最大轴跨度平衡度
-- 围绕运行中硬铁中心的 3D octant 覆盖
+- X / Y 两轴跨度
+- X / Y 跨度平衡度
+- 围绕运行中硬铁中心的四象限覆盖
 
 当前门槛：
 
 | Quality | 条件 |
 |---|---|
 | 0 | 数据不足 / 无效 |
-| 1 | ≥100 samples，最小轴跨度 ≥200 counts |
-| 2 | ≥400 samples，最小轴跨度 ≥600，balance ≥0.25，≥3 octants |
-| 3 | ≥800 samples，最小轴跨度 ≥900，balance ≥0.50，≥6 octants |
+| 1 | 基础样本和 X/Y 跨度已建立 |
+| 2 | ≥400 samples，X/Y 最小跨度 ≥600，balance ≥0.25，≥3 quadrants |
+| 3 | ≥800 samples，X/Y 最小跨度 ≥900，balance ≥0.50，4 quadrants |
 
-只有 `quality >= 2` 才会进入 `READY`，并报告 `progress=100`。
-
-这些阈值属于实现参数，可以根据后续 K25+/QMC5883L 实机采样微调，但不改变 Host 协议。
+只有 `quality >= 2` 才会进入 `READY` 并允许保存。
 
 ## 5. 持久化
 
@@ -120,7 +126,8 @@ keys: cal0, cal1
 - version
 - generation
 - offsetX/Y/Z
-- scaleX/Y/Z
+- matrixXX/matrixXY/matrixYY
+- scaleZ
 - quality
 - valid
 - CRC32
@@ -176,8 +183,15 @@ CRC / generation 验证
 ```
 
 
-## A4.3 installation yaw correction
+## A4.4 installed body-frame correction
 
-The combined GNSS/QMC board is mounted flat (not flipped) but rotated 180 degrees in yaw. A4.3 therefore applies a fixed +180 degree installation correction **after** the existing calibration math and before publishing `heading`.
+Four-point bench measurements on the final FT-02 assembly showed that the published heading rotated in the opposite direction to the physical device heading. This cannot be corrected by a yaw offset alone. A4.4 RC1 therefore applies the body-frame transform **after** hard/soft-iron calibration:
 
-This does not replace calibration. Because the sensor is being relocated inside the FT-02 enclosure, run the normal compass calibration again after the final physical installation to account for the new local magnetic environment.
+```text
+bodyX = correctedX
+bodyY = -correctedY
+heading = atan2(bodyY, bodyX)
+heading += 97 degrees
+```
+
+The 97-degree yaw term is the fitted device-front alignment from the four measured pairs 0->278, 90->178, 180->99, 270->12. It should be rechecked after flashing using another four-direction test. Saved calibration offset/scale data remains mathematically valid because the sign transform is applied after calibration. Recalibration is still recommended after final mechanical assembly if residual error varies by direction.

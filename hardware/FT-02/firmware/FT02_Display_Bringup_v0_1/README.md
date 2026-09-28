@@ -1,28 +1,23 @@
-# FT-02 v2.75k67
+# FT-02 Firmware
 
-FT-02 production firmware for ESP32-S3. This baseline integrates the validated battery, compass, GNSS, Wi-Fi, reader, audio, map, Field Library, FieldManual and LR01 host functions.
+Current production baseline: **v2.75k91 / Mode Sleep System A1.6**.
 
-## Current hardware/runtime functions
+FT-02 is the field terminal firmware for the LanternBox platform, targeting ESP32-S3 N16R8 with e-paper UI, CardKB2 input, MAX17048 battery telemetry, LR01-hosted LoRa/GNSS, offline map/field manual content, Wi-Fi sync, audio journal and local utility pages.
 
-- MAX17048 battery SOC / voltage / charge-rate monitoring
-- LR01 Host Protocol A2
-- GNSS software standby / wake control with persistent user preference
-- Standalone compass UI and calibration
-- LoRa communication and node status
-- Wi-Fi module with explicit lifecycle ownership
-- Offline map, map search, location recording and location logs
-- Reader / PDF / EPUB flow
-- ES8311 recording and playback
-- Field Library v0.8.2 and FieldManual runtime
-- CardKB2 input and offline Pinyin IME
+## Current sleep baseline
 
-## v2.75k67 fixes
+- Indoor mode supports 5 / 15 / 30 minute / Never automatic sleep.
+- Outdoor mode is manual-sleep only.
+- Manual long-P sleep remains available in both awake modes.
+- Sleep uses 1000 ms ESP32-S3 Light Sleep slices because the current four-wire CardKB2 I2C design has no dedicated wake GPIO.
+- Normal background services do not run during sleep; the periodic wake path only polls CardKB2 and re-enters Light Sleep when no valid key is present.
+- E-paper power is removed while preserving the retained sleep image; display signals are isolated and restored on wake.
+- Native USB CDC is recreated during wake so repeated Sleep → Wake → Sleep cycles remain usable from the serial monitor.
+- LR01 host ingestion and MAX17048 background sampling are paused before sleep and resumed on wake.
+- Wi-Fi is shut down before sleep and is not implicitly re-enabled after wake.
+- A lightweight NVS breadcrumb is retained for Device Status so a reset that occurs during sleep can still be identified later.
 
-- System Self-Test no longer duplicates a single historical UART error into two persistent warnings.
-- Host UART health is based on current link/protocol state; communication warnings use new error deltas and high cumulative thresholds.
-- LR01 A2 can be identified from A2-only responses even when the startup banner was missed.
-- GNSS OFF is treated as an intentional user state in Self-Test, map and location recorder flows.
-- Low and critical battery warnings remain at 20% and 10%.
+The sleep stability issue that previously caused autonomous exit/reset has been closed on this baseline. Deep power optimization of LoRa/GNSS is intentionally deferred until those functions migrate from LR01 back to the Core. See `docs/FT02_SLEEP_SYSTEM_A1_6.md`.
 
 ## Build
 
@@ -34,26 +29,33 @@ platformio run
 Upload example:
 
 ```bash
-platformio run --target upload --upload-port /dev/cu.usbmodem2201
+platformio run --target upload --upload-port /dev/cu.usbmodemXXXX
 ```
 
 Use the serial port currently assigned by the host OS.
 
-## Regression checks
+## Validation
+
+Run the maintained static/regression checks:
 
 ```bash
 python3 tools/test_system_health_a2.py
 python3 tools/test_function_surface_audit.py
 python3 tools/test_battery_monitor.py
 python3 tools/test_compass_gnss_control.py
+python3 tools/test_audio_power_lifecycle.py
 python3 tools/test_audio_regression.py
 python3 tools/test_input_epd_regression.py
+python3 tools/test_mode_sleep_a1_6.py
 python3 tools/test_field_library_v082.py
+python3 tools/test_low_power_a2.py
 python3 tools/test_pdf_recovery.py --builder tools/build_ft02_field_library.py
 ```
 
-## LR01 compatibility
+## Documentation
 
-GNSS software power control and the 180-degree compass installation correction require the matching LR01 A4.3 firmware.
+Project and hardware documentation lives under `docs/`. Start with `docs/README.md` and `docs/FT02_PROJECT_GUIDE.md`.
 
-Hardware pin and protocol details are documented under `docs/`.
+## Known boundary
+
+LoRa and GNSS are still mediated by LR01 in this baseline. LR01 deep-sleep/GNSS power-control protocol work is not part of Sleep A1.6 closeout and will be revisited when LoRa/GNSS return to Core ownership.

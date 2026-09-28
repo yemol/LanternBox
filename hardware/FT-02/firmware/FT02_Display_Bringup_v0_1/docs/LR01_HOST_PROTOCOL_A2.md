@@ -205,15 +205,11 @@ LR01_ERR code=8 message="line_too_long"
 ```
 
 
-## GNSS software power control (LR01 A4.3 / FT-02 k65)
+## GNSS software power control compatibility
 
-FT-02 k65 uses the LR01 A4.3 software standby/wake protocol:
+The host parser still understands the historical LR01 A4.3 `GNSS_POWER_STATE` / `GNSS_POWER_SET` responses and the FT-02 retains the desired GNSS state in NVS. The current deployed LR01 firmware, however, does not expose the legacy `GNSS_POWER?` status query, so the production host no longer sends that query.
 
-- `GNSS_POWER?` -> `GNSS_POWER_STATE enabled=<0|1> mode=<ACTIVE|SOFTWARE_STANDBY> stream=<0|1> fix=<0|1> changed_ms=<ms>`
-- `GNSS_SOFT_OFF` -> `GNSS_POWER_SET enabled=0 mode=SOFTWARE_STANDBY ok=1`
-- `GNSS_SOFT_ON` -> `GNSS_POWER_SET enabled=1 mode=ACTIVE ok=1`
-
-The FT-02 persists the user's desired ON/OFF state in NVS and reapplies it after LR01 reconnect/reboot. Software standby does not power down the LR01 QMC compass.
+`GNSS_SOFT_ON` / `GNSS_SOFT_OFF` remain in the compatibility layer because current mode ownership still calls them, but final GNSS/LoRa low-power ownership is deferred until those functions migrate back to the Core. Do not treat these commands as proof that the present LR01 hardware has actually entered GNSS standby.
 
 ## Compass module ownership (k65)
 

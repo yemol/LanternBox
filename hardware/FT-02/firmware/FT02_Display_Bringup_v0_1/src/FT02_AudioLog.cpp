@@ -95,6 +95,9 @@ FT02AudioLogEntry g_ft02AudioEntries[FT02_AUDIO_LOG_MAX_ENTRIES] = {};
 FT02AudioLogStatus g_ft02AudioStatus = {};
 volatile FT02AudioLogState g_ft02AudioState = FT02_AUDIO_LOG_IDLE;
 TaskHandle_t g_ft02AudioServiceTaskHandle = nullptr;
+uint8_t g_ft02AudioOwnerMask = FT02_AUDIO_OWNER_NONE;
+bool g_ft02AudioHardwareActive = false;
+bool g_ft02AudioServiceTaskSuspended = false;
 
 struct FT02AudioRecordingSession
 {
@@ -486,6 +489,31 @@ static bool FT02_AudioInitI2s()
     );
 
     return true;
+}
+
+static void FT02_AudioDeinitI2s()
+{
+    // The audio task is suspended before this function is called, so no one
+    // can touch the channel handles while they are being removed.
+    if(g_ft02AudioRx != nullptr)
+    {
+        (void)i2s_channel_disable(g_ft02AudioRx);
+        (void)i2s_del_channel(g_ft02AudioRx);
+        g_ft02AudioRx = nullptr;
+    }
+    if(g_ft02AudioTx != nullptr)
+    {
+        (void)i2s_channel_disable(g_ft02AudioTx);
+        (void)i2s_del_channel(g_ft02AudioTx);
+        g_ft02AudioTx = nullptr;
+    }
+
+    // Do not leave clocks/data actively driving a powered-down codec. This
+    // also prevents accidental IO back-power through the ES8311 pins.
+    pinMode(FT02_AUDIO_BCLK_PIN, INPUT);
+    pinMode(FT02_AUDIO_WS_PIN, INPUT);
+    pinMode(FT02_AUDIO_DOUT_PIN, INPUT);
+    pinMode(FT02_AUDIO_DIN_PIN, INPUT);
 }
 
 static void FT02_AudioQueueSilence(uint32_t timeoutMs = 0)
@@ -2031,6 +2059,136 @@ static void FT02_AudioServicePlayback()
     }
 }
 
+static void FT02_AudioServiceTask(void*);
+
+static bool FT02_AudioEnsureServiceTask()
+{
+    if(g_ft02AudioServiceTaskHandle == nullptr)
+    {
+        const BaseType_t taskCreated = xTaskCreatePinnedToCore(
+            FT02_AudioServiceTask,
+            "ft02-audio",
+            8192,
+            nullptr,
+            4,
+            &g_ft02AudioServiceTaskHandle,
+            0
+        );
+        if(taskCreated != pdPASS)
+        {
+            g_ft02AudioServiceTaskHandle = nullptr;
+            g_ft02AudioServiceTaskSuspended = false;
+            return false;
+        }
+        g_ft02AudioServiceTaskSuspended = false;
+        return true;
+    }
+
+    if(g_ft02AudioServiceTaskSuspended)
+    {
+        vTaskResume(g_ft02AudioServiceTaskHandle);
+        g_ft02AudioServiceTaskSuspended = false;
+    }
+    return true;
+}
+
+static void FT02_AudioSuspendServiceTask()
+{
+    if(g_ft02AudioServiceTaskHandle == nullptr ||
+       g_ft02AudioServiceTaskSuspended)
+    {
+        return;
+    }
+    vTaskSuspend(g_ft02AudioServiceTaskHandle);
+    g_ft02AudioServiceTaskSuspended = true;
+}
+
+static bool FT02_AudioHardwareStart()
+{
+    if(g_ft02AudioHardwareActive) return true;
+
+    FT02_AudioPaSet(false);
+    g_ft02AudioStatus.i2sReady = false;
+    g_ft02AudioStatus.codecReady = false;
+
+    // ES8311 derives its internal master clock from BCLK/SCLK, therefore I2S
+    // must be alive before codec setup. This is the same proven ordering used
+    // by the previous always-on implementation.
+    g_ft02AudioStatus.i2sReady = FT02_AudioInitI2s();
+    if(!g_ft02AudioStatus.i2sReady)
+    {
+        FT02_AudioDeinitI2s();
+        FT02_AudioSetMessage("I2S初始化失败", false);
+        return false;
+    }
+
+    g_ft02AudioStatus.codecReady = FT02_AudioInitCodec();
+    if(!g_ft02AudioStatus.codecReady)
+    {
+        // begin() may have reached the codec before a later register step
+        // failed. Attempt a best-effort suspend while BCLK is still present so
+        // a failed page entry cannot leave the analogue blocks half powered.
+        (void)g_ft02AudioCodec.suspend();
+        FT02_AudioDeinitI2s();
+        FT02_AudioSetMessage("ES8311未响应或配置失败", false);
+        return false;
+    }
+
+    if(!FT02_AudioEnsureServiceTask())
+    {
+        (void)g_ft02AudioCodec.suspend();
+        g_ft02AudioStatus.codecReady = false;
+        FT02_AudioDeinitI2s();
+        g_ft02AudioStatus.i2sReady = false;
+        FT02_AudioSetMessage("音频后台任务启动失败", false);
+        return false;
+    }
+
+    g_ft02AudioHardwareActive = true;
+    FT02_AudioSetMessage("语音日志就绪", true);
+    FT02_AudioChanged();
+    Serial.printf("[AUDIO-PWR] ON owners=0x%02X\n", g_ft02AudioOwnerMask);
+    return true;
+}
+
+static void FT02_AudioHardwareStop()
+{
+    if(!g_ft02AudioHardwareActive)
+    {
+        g_ft02AudioStatus.codecReady = false;
+        g_ft02AudioStatus.i2sReady = false;
+        return;
+    }
+
+    // A normal page transition must never tear down active recording/playback.
+    // The page handlers already stop those operations first, but keep this
+    // guard here as a final safety barrier.
+    if(g_ft02AudioState != FT02_AUDIO_LOG_IDLE)
+    {
+        Serial.println("[AUDIO-PWR] release deferred: audio busy");
+        return;
+    }
+
+    FT02_AudioSuspendServiceTask();
+    FT02_AudioPaSet(false);
+
+    // Codec suspend needs BCLK present, so shut the codec down before deleting
+    // the I2S channels.
+    const bool codecSuspendOk = g_ft02AudioCodec.suspend();
+    FT02_AudioDeinitI2s();
+
+    g_ft02AudioStatus.codecReady = false;
+    g_ft02AudioStatus.i2sReady = false;
+    g_ft02AudioHardwareActive = false;
+    FT02_AudioSetMessage(
+        codecSuspendOk ? "语音硬件休眠" : "语音硬件休眠（Codec返回异常）",
+        codecSuspendOk
+    );
+    FT02_AudioChanged();
+    Serial.printf("[AUDIO-PWR] OFF owners=0x%02X codec=%s\n",
+                  g_ft02AudioOwnerMask, codecSuspendOk ? "OK" : "WARN");
+}
+
 static void FT02_AudioServiceTask(void*)
 {
     for(;;)
@@ -2058,69 +2216,77 @@ bool FT02_AudioLogBegin()
     memset(&g_ft02AudioStatus, 0, sizeof(g_ft02AudioStatus));
     memset(g_ft02AudioEntries, 0, sizeof(g_ft02AudioEntries));
     g_ft02AudioState = FT02_AUDIO_LOG_IDLE;
+    g_ft02AudioOwnerMask = FT02_AUDIO_OWNER_NONE;
+    g_ft02AudioHardwareActive = false;
     g_ft02AudioStatus.started = true;
     g_ft02AudioStatus.storageReady = FT02_StorageIsReady();
     g_ft02AudioStatus.playbackVolumeLevel = FT02_AudioLoadVolumeLevel();
 
-    // The board-level NS4150B PA has its own SD/CTRL pin. Keep the class-D
-    // stage physically shut down for boot, idle and recording. Digital DAC
-    // mute alone cannot isolate a powered/floating external amplifier.
+    // Boot policy: audio hardware sleeps by default. The external NS4150B PA
+    // is held in shutdown immediately; ES8311 and I2S are not initialized until
+    // the voice-log or system-test page explicitly acquires them.
     FT02_AudioPaInit();
+    FT02_AudioDeinitI2s();
 
-    // ES8311 derives its internal master clock from BCLK/SCLK. Start I2S first
-    // so BCLK and LRCK are stable before the codec is configured. MCLK remains
-    // unconnected.
-    g_ft02AudioStatus.i2sReady = FT02_AudioInitI2s();
-    if(g_ft02AudioStatus.i2sReady)
-    {
-        g_ft02AudioStatus.codecReady = FT02_AudioInitCodec();
-    }
     const bool logStoreReady = FT02_AudioLogReload();
-
-    bool ready = g_ft02AudioStatus.codecReady &&
-                 g_ft02AudioStatus.i2sReady &&
-                 g_ft02AudioStatus.storageReady &&
-                 logStoreReady;
     FT02_AudioSetMessage(
-        ready
-            ? "语音日志就绪"
-            : (logStoreReady ? "语音模块未就绪" : "录音编号状态异常"),
-        ready
+        logStoreReady ? "语音硬件休眠" : "录音编号状态异常",
+        logStoreReady
     );
-    if(g_ft02AudioStatus.codecReady &&
-       g_ft02AudioStatus.i2sReady &&
-       g_ft02AudioServiceTaskHandle == nullptr)
-    {
-        const BaseType_t taskCreated = xTaskCreatePinnedToCore(
-            FT02_AudioServiceTask,
-            "ft02-audio",
-            8192,
-            nullptr,
-            4,
-            &g_ft02AudioServiceTaskHandle,
-            0
-        );
-        if(taskCreated != pdPASS)
-        {
-            g_ft02AudioServiceTaskHandle = nullptr;
-            g_ft02AudioStatus.i2sReady = false;
-            FT02_AudioSetMessage("音频后台任务启动失败", false);
-        }
-    }
-    ready = g_ft02AudioStatus.codecReady &&
-            g_ft02AudioStatus.i2sReady &&
-            g_ft02AudioStatus.storageReady &&
-            logStoreReady &&
-            g_ft02AudioServiceTaskHandle != nullptr;
+    return g_ft02AudioStatus.storageReady && logStoreReady;
+}
 
-    return ready;
+bool FT02_AudioLogAcquire(FT02AudioOwner owner)
+{
+    const uint8_t ownerBit = static_cast<uint8_t>(owner);
+    if(ownerBit == FT02_AUDIO_OWNER_NONE) return false;
+
+    const uint8_t previousMask = g_ft02AudioOwnerMask;
+    g_ft02AudioOwnerMask = static_cast<uint8_t>(g_ft02AudioOwnerMask | ownerBit);
+    if(g_ft02AudioHardwareActive) return true;
+
+    if(FT02_AudioHardwareStart()) return true;
+
+    // Do not leave a phantom owner after failed hardware initialization. This
+    // allows the next page entry / self-test rerun to make a clean retry.
+    g_ft02AudioOwnerMask = previousMask;
+    return false;
+}
+
+void FT02_AudioLogRelease(FT02AudioOwner owner)
+{
+    const uint8_t ownerBit = static_cast<uint8_t>(owner);
+    if(ownerBit == FT02_AUDIO_OWNER_NONE) return;
+
+    g_ft02AudioOwnerMask = static_cast<uint8_t>(g_ft02AudioOwnerMask & ~ownerBit);
+    if(g_ft02AudioOwnerMask == FT02_AUDIO_OWNER_NONE)
+    {
+        FT02_AudioHardwareStop();
+    }
+}
+
+bool FT02_AudioLogHardwareActive()
+{
+    return g_ft02AudioHardwareActive;
+}
+
+uint8_t FT02_AudioLogOwnerMask()
+{
+    return g_ft02AudioOwnerMask;
 }
 
 void FT02_AudioLogPoll()
 {
     // I2S/SD streaming runs in the dedicated audio task so e-paper updates do
-    // not cut recording or starve playback. The main loop keeps this hook for
-    // API compatibility and future non-streaming maintenance.
+    // not cut recording or starve playback. The main-loop hook also closes a
+    // deferred power-down if an unusual navigation path released the final
+    // owner while recording/playback was still finishing.
+    if(g_ft02AudioHardwareActive &&
+       g_ft02AudioOwnerMask == FT02_AUDIO_OWNER_NONE &&
+       g_ft02AudioState == FT02_AUDIO_LOG_IDLE)
+    {
+        FT02_AudioHardwareStop();
+    }
 }
 
 void FT02_AudioLogNotifyKeyRelease()

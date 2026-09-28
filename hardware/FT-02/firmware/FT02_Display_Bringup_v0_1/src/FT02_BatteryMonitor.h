@@ -31,12 +31,20 @@ enum FT02BatteryBand : uint8_t
 // automatic hibernation policy is preserved.
 void FT02_BatteryMonitorBegin();
 
-// Poll only when the sample interval is due. Returns true when the
-// published snapshot generation changed.
+// Poll only when the 10 s background sample interval is due. VERSION/CHIPID
+// are cached after first validation; forced refresh still updates live values.
+// Returns true when the published snapshot generation changed.
 bool FT02_BatteryMonitorPoll();
 
 // Force one immediate measurement transaction. Intended for self-test/UI.
 bool FT02_BatteryMonitorRefreshNow();
+
+// Sleep lifecycle: pause only host-side background sampling. The MAX17048 is
+// deliberately not reset or forced into a new gauge mode. WakeResume performs
+// one immediate sample so wake recovery verifies the shared I2C path before
+// normal UI scheduling resumes.
+void FT02_BatteryMonitorSleepPause();
+bool FT02_BatteryMonitorWakeResume();
 
 FT02BatterySnapshot FT02_BatterySnapshotCurrent();
 FT02BatteryBand FT02_BatteryBandCurrent();

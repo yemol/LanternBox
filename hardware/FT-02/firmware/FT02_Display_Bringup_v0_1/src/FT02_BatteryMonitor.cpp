@@ -16,11 +16,16 @@ constexpr uint8_t REG_MODE = 0x06;
 constexpr uint8_t REG_VERSION = 0x08;
 constexpr uint8_t REG_CRATE = 0x16;
 constexpr uint8_t REG_CHIPID = 0x19;
-constexpr uint32_t SAMPLE_INTERVAL_MS = 1000UL;
+constexpr uint32_t SAMPLE_INTERVAL_MS = 10000UL;
+constexpr uint8_t IDENTITY_INVALIDATE_FAILURES = 3;
 constexpr float RATE_ACTIVE_THRESHOLD = 0.5f;
 
 FT02BatterySnapshot g_snapshot = {};
 uint32_t g_lastAttemptMs = 0;
+bool g_identityValid = false;
+uint16_t g_cachedVersion = 0;
+uint8_t g_cachedChipId = 0;
+bool g_sleepPaused = false;
 
 bool readWordLocked(uint8_t reg, uint16_t& value)
 {
@@ -53,34 +58,76 @@ bool readByteLocked(uint8_t reg, uint8_t& value)
 
 bool publishMeasurement()
 {
-    uint16_t version = 0;
     uint16_t rawVcell = 0;
     uint16_t rawSoc = 0;
     uint16_t rawCrate = 0;
     uint16_t rawMode = 0;
-    uint8_t chipId = 0;
+
+    bool identityIoOk = true;
+    bool identityReady = g_identityValid;
 
     if(!FT02_I2CBusLock(80)) return false;
-    const bool ok =
-        readWordLocked(REG_VERSION, version) &&
+
+    // VERSION and CHIPID are static identity registers. Read them on first
+    // contact (or after repeated I2C failures), then cache them instead of
+    // paying two extra transactions on every background battery sample.
+    if(!g_identityValid)
+    {
+        uint16_t version = 0;
+        uint8_t chipId = 0;
+        identityIoOk =
+            readWordLocked(REG_VERSION, version) &&
+            readByteLocked(REG_CHIPID, chipId);
+
+        identityReady =
+            identityIoOk && ((version & 0xFFF0u) == 0x0010u);
+
+        if(identityReady)
+        {
+            g_cachedVersion = version;
+            g_cachedChipId = chipId;
+            g_identityValid = true;
+        }
+    }
+
+    const bool measurementOk = identityReady &&
         readWordLocked(REG_VCELL, rawVcell) &&
         readWordLocked(REG_SOC, rawSoc) &&
         readWordLocked(REG_CRATE, rawCrate) &&
-        readWordLocked(REG_MODE, rawMode) &&
-        readByteLocked(REG_CHIPID, chipId);
+        readWordLocked(REG_MODE, rawMode);
+
     FT02_I2CBusUnlock();
 
     const uint32_t now = millis();
     g_snapshot.lastReadMs = now;
 
-    // Adafruit's current MAX17048 driver treats VERSION 0x001x as ready.
-    const bool versionReady = ok && ((version & 0xFFF0u) == 0x0010u);
-    if(!versionReady)
+    if(!identityReady)
     {
-        g_snapshot.monitorPresent = ok;
+        // Preserve the previous behavior: a responding MAX17048 with an
+        // unexpected VERSION is "present" but not a valid gauge sample.
+        g_snapshot.monitorPresent = identityIoOk;
         g_snapshot.valid = false;
         g_snapshot.consecutiveFailures =
             g_snapshot.consecutiveFailures < 255 ? static_cast<uint8_t>(g_snapshot.consecutiveFailures + 1U) : 255U;
+        g_snapshot.generation++;
+        return false;
+    }
+
+    if(!measurementOk)
+    {
+        g_snapshot.monitorPresent = false;
+        g_snapshot.valid = false;
+        g_snapshot.consecutiveFailures =
+            g_snapshot.consecutiveFailures < 255 ? static_cast<uint8_t>(g_snapshot.consecutiveFailures + 1U) : 255U;
+
+        // If the device/bus has really gone away, drop the cached identity so
+        // the next recovery attempt re-validates VERSION/CHIPID instead of
+        // trusting stale metadata forever.
+        if(g_snapshot.consecutiveFailures >= IDENTITY_INVALIDATE_FAILURES)
+        {
+            g_identityValid = false;
+        }
+
         g_snapshot.generation++;
         return false;
     }
@@ -96,8 +143,8 @@ bool publishMeasurement()
     g_snapshot.voltage = voltage;
     g_snapshot.percent = percent;
     g_snapshot.ratePercentPerHour = rate;
-    g_snapshot.version = version;
-    g_snapshot.chipId = chipId;
+    g_snapshot.version = g_cachedVersion;
+    g_snapshot.chipId = g_cachedChipId;
     g_snapshot.hibernating = (rawMode & 0x1000u) != 0u; // MODE.HibStat is bit 12 (MSB bit 4).
     g_snapshot.consecutiveFailures = 0;
     g_snapshot.generation++;
@@ -110,6 +157,10 @@ void FT02_BatteryMonitorBegin()
 {
     memset(&g_snapshot, 0, sizeof(g_snapshot));
     g_lastAttemptMs = 0;
+    g_identityValid = false;
+    g_cachedVersion = 0;
+    g_cachedChipId = 0;
+    g_sleepPaused = false;
     FT02_BatteryMonitorRefreshNow();
 }
 
@@ -123,9 +174,31 @@ bool FT02_BatteryMonitorRefreshNow()
 
 bool FT02_BatteryMonitorPoll()
 {
+    if(g_sleepPaused) return false;
+
     const uint32_t now = millis();
     if(g_lastAttemptMs != 0 && (now - g_lastAttemptMs) < SAMPLE_INTERVAL_MS) return false;
     return FT02_BatteryMonitorRefreshNow();
+}
+
+
+void FT02_BatteryMonitorSleepPause()
+{
+    // The MAX17048 itself remains powered and keeps its ModelGauge state.
+    // Sleep only pauses host-side background I2C polling so the shared bus is
+    // owned exclusively by the wake-input path until a real system wake.
+    g_sleepPaused = true;
+}
+
+bool FT02_BatteryMonitorWakeResume()
+{
+    // Re-enable host-side polling and take one immediate sample. This is both
+    // the lifecycle handoff and the wake-integrity check for the shared I2C
+    // bus/MAX17048 path. A failed read is reported to the caller but never
+    // blocks the rest of wake recovery.
+    g_sleepPaused = false;
+    const bool published = FT02_BatteryMonitorRefreshNow();
+    return published && g_snapshot.valid;
 }
 
 FT02BatterySnapshot FT02_BatterySnapshotCurrent()

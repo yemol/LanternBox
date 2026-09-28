@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "version": 1
+  },
+  "text_variables": {
+    "DESIGN_STATUS": "REVIEW_ONLY_CHARGE_INHIBITED"
+  }
+}

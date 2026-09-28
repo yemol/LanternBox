@@ -9,6 +9,9 @@ class FT02ES8311
 {
 public:
     bool begin(TwoWire& wire, bool digitalMic);
+    // Full codec suspend sequence based on Espressif's maintained ES8311
+    // driver. I2S clocks must still be running while this is called.
+    bool suspend();
     bool setDacMuted(bool muted);
     bool prepareDacForPaShutdown();
     bool powerDownDac();

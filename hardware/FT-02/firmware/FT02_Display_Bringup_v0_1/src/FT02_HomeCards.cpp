@@ -83,13 +83,13 @@ static const FT02HomeCard FT02_HOME_CARDS[] = {
         &ft02_menu_28m
     },
     {
-        "设备状态",
-        &ICON_HOME_CARD_SYSTEM,
+        "随身书库",
+        &ICON_HOME_CARD_LIBRARY,
         &ft02_menu_28m
     },
     {
-        "随身书库",
-        &ICON_HOME_CARD_LIBRARY,
+        "设备状态",
+        &ICON_HOME_CARD_SYSTEM,
         &ft02_menu_28m
     },
     {
@@ -100,6 +100,11 @@ static const FT02HomeCard FT02_HOME_CARDS[] = {
     {
         "指南针",
         &ICON_HOME_CARD_COMPASS,
+        &ft02_cjk_24b
+    },
+    {
+        "系统设置",
+        &ICON_HOME_CARD_SETTINGS,
         &ft02_cjk_24b
     }
 };

@@ -12,7 +12,7 @@ The monitor board is a fuel gauge, not a load switch or charger controller. The 
 
 ## Firmware behavior
 
-- Poll every 1 second when audio is idle so charge/battery-power transitions reach the status bar promptly.
+- Poll every 10 seconds when audio is idle; identity registers are cached and revalidated after repeated I2C failures.
 - Uses the existing `FT02_I2CBus` mutex so CardKB2 / ES8311 / MAX17048 cannot collide on `Wire`.
 - Reads VCELL, SOC, CRATE, VERSION, CHIPID and hibernate state.
 - Status bar shows real rounded SOC instead of the old fixed `86%`.

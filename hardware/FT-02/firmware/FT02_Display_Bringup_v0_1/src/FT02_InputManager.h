@@ -46,6 +46,10 @@ FT02InputEvent FT02_InputPoll();
 // activity to 10 Hz, cutting digital-edge coupling into the analogue mic path.
 void FT02_InputSetLowNoiseMode(bool enabled);
 
+// Sleep-safe diagnostic gate. Disable before entering light sleep so the input
+// driver never touches native USB CDC while the S3 USB clock is gated.
+void FT02_InputSetDiagnosticsEnabled(bool enabled);
+
 // Passive availability state maintained by the existing periodic CardKB2 probe.
 bool FT02_InputCardKbAvailable();
 

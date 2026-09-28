@@ -16,14 +16,22 @@
 
 namespace
 {
+// Compass UI A4: approved left/right layout.
+// Left: instrument-style rotating compass dial. Right: detailed heading/status data.
+// Presentation only. LR01 heading semantics, GNSS and map navigation remain untouched.
 constexpr int BODY_X = 32;
 constexpr int BODY_Y = 136;
 constexpr int BODY_W = 736;
 constexpr int BODY_H = 286;
-constexpr int CX = 250;
+
+constexpr int CX = 230;
 constexpr int CY = 278;
-constexpr int R_OUT = 126;
-constexpr int R_IN = 118;
+constexpr int R_OUT = 106;
+constexpr int R_DEG = 130;
+constexpr int R_CARDINAL = 68;
+constexpr int R_DIAGONAL = 62;
+constexpr int DIVIDER_X = 430;
+
 constexpr uint32_t REFRESH_MIN_MS = 900u;
 constexpr float HEADING_STEP_DEG = 3.0f;
 constexpr uint16_t PARTIAL_CLEAN_LIMIT = 60u;
@@ -31,7 +39,7 @@ constexpr float RAD_PER_DEG = 0.01745329251994329577f;
 
 static const FT02BottomBarItem BOTTOM_ITEMS[3] = {
     {nullptr, "ENTER 校准"},
-    {nullptr, "磁北航向"},
+    {nullptr, "磁航向"},
     {nullptr, "H帮助  B返回"}
 };
 
@@ -85,90 +93,118 @@ void drawCentered(FT02Display& display, const FT02FontPack& font, const char* te
     FT02_DrawTextPack(display, font, text, centerX - w / 2, baselineY);
 }
 
-void drawDialLabel(FT02Display& display, const char* text, float bearingDeg, int radius, float heading)
+void drawRotatingText(FT02Display& display,
+                      const FT02FontPack& font,
+                      const char* text,
+                      float worldBearingDeg,
+                      int radius,
+                      float heading,
+                      int baselineAdjust = 7)
 {
     int x, y;
-    polarPoint(heading - bearingDeg, radius, x, y);
-    drawCentered(display, ft02_status_22r, text, x, y + 8);
+    // Standard rotating-compass relationship. This is the mirror-fix baseline and must not be reversed.
+    polarPoint(worldBearingDeg - heading, radius, x, y);
+    drawCentered(display, font, text, x, y + baselineAdjust);
 }
 
-void drawCompassFace(FT02Display& display, float heading)
+void drawDegreeScale(FT02Display& display, float heading)
 {
     const float h = normalizeHeading(heading);
 
-    display.drawCircle(CX, CY, R_OUT, GxEPD_BLACK);
-    display.drawCircle(CX, CY, R_OUT - 1, GxEPD_BLACK);
-    display.drawCircle(CX, CY, R_IN, GxEPD_BLACK);
-
-    // The device-forward pointer stays fixed at 12 o'clock. Rotate the dial
-    // in the display direction verified on FT-02 so the current heading stays under the fixed pointer.
+    // Dense 5-degree ring, with longer marks every 30 degrees and strongest marks at N/E/S/W.
     for(int bearing = 0; bearing < 360; bearing += 5)
     {
         const bool cardinal = (bearing % 90) == 0;
         const bool major = (bearing % 30) == 0;
-        const int r0 = cardinal ? R_OUT - 18 : (major ? R_OUT - 13 : R_OUT - 7);
-        const float screenAngle = h - static_cast<float>(bearing);
+        const int r0 = cardinal ? R_OUT - 19 : (major ? R_OUT - 14 : R_OUT - 7);
+        const float screenAngle = static_cast<float>(bearing) - h;
         int x0, y0, x1, y1;
         polarPoint(screenAngle, r0, x0, y0);
-        polarPoint(screenAngle, R_OUT - 3, x1, y1);
+        polarPoint(screenAngle, R_OUT, x1, y1);
         display.drawLine(x0, y0, x1, y1, GxEPD_BLACK);
+        if(cardinal)
+        {
+            display.drawLine(x0 + 1, y0, x1 + 1, y1, GxEPD_BLACK);
+        }
     }
 
-    // Labels follow the corrected rotating dial while remaining upright for readability.
-    drawDialLabel(display, "N",   0.0f, 96, h);
-    drawDialLabel(display, "NE", 45.0f, 90, h);
-    drawDialLabel(display, "E",  90.0f, 96, h);
-    drawDialLabel(display, "SE",135.0f, 90, h);
-    drawDialLabel(display, "S", 180.0f, 96, h);
-    drawDialLabel(display, "SW",225.0f, 90, h);
-    drawDialLabel(display, "W", 270.0f, 96, h);
-    drawDialLabel(display, "NW",315.0f, 90, h);
-}
-
-void drawFixedHeadingPointer(FT02Display& display)
-{
-    constexpr float FORWARD_DEG = 0.0f;
-    int tipX, tipY, tailX, tailY;
-    polarPoint(FORWARD_DEG, 75, tipX, tipY);
-    polarPoint(FORWARD_DEG + 180.0f, 42, tailX, tailY);
-
-    display.drawLine(CX, CY, tipX, tipY, GxEPD_BLACK);
-    display.drawLine(CX + 1, CY, tipX + 1, tipY, GxEPD_BLACK);
-    display.drawLine(CX, CY + 1, tipX, tipY + 1, GxEPD_BLACK);
-    display.drawLine(CX, CY, tailX, tailY, GxEPD_BLACK);
-
-    int leftX, leftY, rightX, rightY;
-    polarPoint(FORWARD_DEG - 7.0f, 60, leftX, leftY);
-    polarPoint(FORWARD_DEG + 7.0f, 60, rightX, rightY);
-    display.fillTriangle(tipX, tipY, leftX, leftY, rightX, rightY, GxEPD_BLACK);
-    display.fillCircle(CX, CY, 5, GxEPD_BLACK);
-    display.drawCircle(CX, CY, 8, GxEPD_BLACK);
-}
-
-void drawBody(FT02Display& display)
-{
-    const FT02LR01State& lr01 = FT02_LR01HostState();
-    const bool valid = FT02_LR01HostOnline() && lr01.compassReady && lr01.compassValid;
-    const float heading = normalizeHeading(static_cast<float>(lr01.headingX10) / 10.0f);
-
-    drawCompassFace(display, valid ? heading : 0.0f);
-    if(valid) drawFixedHeadingPointer(display);
-    else
+    // Degree labels remain upright while their positions rotate with the dial.
+    for(int bearing = 0; bearing < 360; bearing += 30)
     {
-        display.drawLine(CX - 28, CY - 28, CX + 28, CY + 28, GxEPD_BLACK);
-        display.drawLine(CX + 28, CY - 28, CX - 28, CY + 28, GxEPD_BLACK);
+        char label[8];
+        snprintf(label, sizeof(label), "%d", bearing);
+        drawRotatingText(display, ft02_ui_22r, label,
+                         static_cast<float>(bearing), R_DEG, h, 7);
     }
+}
 
-    display.drawLine(430, 155, 430, 411, GxEPD_BLACK);
+void drawDirectionLabels(FT02Display& display, float heading)
+{
+    const float h = normalizeHeading(heading);
+
+    drawRotatingText(display, ft02_cjk_24b, "北",    0.0f, R_CARDINAL, h, 8);
+    drawRotatingText(display, ft02_cjk_20r, "东北", 45.0f, R_DIAGONAL, h, 7);
+    drawRotatingText(display, ft02_cjk_24b, "东",   90.0f, R_CARDINAL, h, 8);
+    drawRotatingText(display, ft02_cjk_20r, "东南",135.0f, R_DIAGONAL, h, 7);
+    drawRotatingText(display, ft02_cjk_24b, "南",  180.0f, R_CARDINAL, h, 8);
+    drawRotatingText(display, ft02_cjk_20r, "西南",225.0f, R_DIAGONAL, h, 7);
+    drawRotatingText(display, ft02_cjk_24b, "西",  270.0f, R_CARDINAL, h, 8);
+    drawRotatingText(display, ft02_cjk_20r, "西北",315.0f, R_DIAGONAL, h, 7);
+}
+
+void drawCenterReticle(FT02Display& display)
+{
+    constexpr int HALF_W = 45;
+    constexpr int HALF_H = 43;
+    display.drawLine(CX - HALF_W, CY, CX + HALF_W, CY, GxEPD_BLACK);
+    display.drawLine(CX, CY - HALF_H, CX, CY + HALF_H, GxEPD_BLACK);
+    display.drawCircle(CX, CY, 6, GxEPD_BLACK);
+}
+
+void drawFixedTopPointer(FT02Display& display)
+{
+    // Fixed top pointer. The compass dial rotates underneath it.
+    const int ringTopY = CY - R_OUT;
+    display.fillTriangle(CX, ringTopY + 8,
+                         CX - 8, ringTopY - 8,
+                         CX + 8, ringTopY - 8,
+                         GxEPD_BLACK);
+    display.fillRect(CX - 2, ringTopY + 10, 5, 10, GxEPD_BLACK);
+}
+
+void drawCompassFace(FT02Display& display, bool valid, float heading)
+{
+    const float faceHeading = valid ? normalizeHeading(heading) : 0.0f;
+    drawDegreeScale(display, faceHeading);
+    drawDirectionLabels(display, faceHeading);
+    drawCenterReticle(display);
+    drawFixedTopPointer(display);
+
+    if(!valid)
+    {
+        display.drawLine(CX - 22, CY - 22, CX + 22, CY + 22, GxEPD_BLACK);
+        display.drawLine(CX + 22, CY - 22, CX - 22, CY + 22, GxEPD_BLACK);
+    }
+}
+
+void drawRightPanel(FT02Display& display, const FT02LR01State& lr01, bool valid, float heading)
+{
+    display.drawLine(DIVIDER_X, 155, DIVIDER_X, 411, GxEPD_BLACK);
 
     FT02_DrawTextPack(display, ft02_cjk_24b, "航向", 474, 184);
     if(valid)
     {
         char angle[16];
-        snprintf(angle, sizeof(angle), "%03u", static_cast<unsigned>(lroundf(heading)) % 360u);
+        snprintf(angle, sizeof(angle), "%03u", static_cast<unsigned>(lroundf(normalizeHeading(heading))) % 360u);
         FT02_DrawTextPack(display, ft02_title_32b, angle, 474, 230);
+
+        // Manual degree symbol avoids relying on font coverage.
         const int angleW = FT02_TextWidthPack(ft02_title_32b, angle);
-        FT02_DrawTextPack(display, ft02_cjk_20r, "°", 474 + angleW + 4, 220);
+        const int degCx = 474 + angleW + 7;
+        const int degCy = 202;
+        display.drawCircle(degCx, degCy, 4, GxEPD_BLACK);
+        display.drawCircle(degCx, degCy, 5, GxEPD_BLACK);
+
         FT02_DrawTextPack(display, ft02_cjk_24b, directionCn(heading), 628, 226);
     }
     else
@@ -192,6 +228,16 @@ void drawBody(FT02Display& display)
         ? "ENTER 可重新校准"
         : "建议先完成校准";
     FT02_DrawTextPack(display, ft02_cjk_20r, hint, 474, 401);
+}
+
+void drawBody(FT02Display& display)
+{
+    const FT02LR01State& lr01 = FT02_LR01HostState();
+    const bool valid = FT02_LR01HostOnline() && lr01.compassReady && lr01.compassValid;
+    const float heading = normalizeHeading(static_cast<float>(lr01.headingX10) / 10.0f);
+
+    drawCompassFace(display, valid, heading);
+    drawRightPanel(display, lr01, valid, heading);
 }
 
 void snapshotDrawState()

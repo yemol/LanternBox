@@ -13,9 +13,9 @@
 // PSRAM, so map regional-cache memory remains available.
 
 static constexpr const char* FT02_MAP_SEARCH_INDEX_PATH =
-    "/maps/raw/shanghai-260726.osm.search.idx";
+    "/maps/raw/shanghai-260918.osm.search.idx";
 static constexpr const char* FT02_MAP_SEARCH_DATA_PATH =
-    "/maps/raw/shanghai-260726.osm.search.dat";
+    "/maps/raw/shanghai-260918.osm.search.dat";
 
 static constexpr size_t FT02_MAP_SEARCH_QUERY_BYTES = 72;
 static constexpr size_t FT02_MAP_SEARCH_RESULT_COUNT = 8;

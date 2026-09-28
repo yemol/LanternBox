@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1060" viewBox="0 0 1600 1060" role="img" aria-labelledby="title desc">
+  <title id="title">FT-02 Power Module V2 architecture proposal</title>
+  <desc id="desc">USB-C input protection feeds a single NVDC charger with an integrated battery path. A hardware system gate feeds 3.3 volt buck-boost and 5 volt boost converters. A MAX17055 gauge and Kelvin shunt monitor a protected single cell pack. Charging settings, input policy and current limits are not yet released.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#225e80"/></marker>
+    <marker id="signal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#596570"/></marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #202b32; letter-spacing: 0; }
+      .heading { font-size: 32px; font-weight: 700; }
+      .sub { font-size: 20px; fill: #52616a; }
+      .label { font-size: 22px; font-weight: 700; }
+      .body { font-size: 19px; }
+      .small { font-size: 17px; }
+      .box { fill: #fff; stroke: #87969e; stroke-width: 2; rx: 4; }
+      .power { fill: none; stroke: #225e80; stroke-width: 4; marker-end: url(#arrow); }
+      .sense { fill: none; stroke: #596570; stroke-width: 2; stroke-dasharray: 7 5; marker-end: url(#signal); }
+      .note { font-size: 19px; fill: #852f30; }
+    </style>
+  </defs>
+  <rect width="1600" height="1060" fill="#fff"/>
+  <text x="50" y="58" class="heading">FT-02 Power Module V2</text>
+  <text x="50" y="92" class="sub">Single NVDC path / shared output power / hardware system OFF</text>
+  <text x="1550" y="55" text-anchor="end" class="note">ARCHITECTURE PROPOSAL</text>
+  <text x="1550" y="85" text-anchor="end" class="small">2026-09-27 | NOT A RELEASED SCHEMATIC</text>
+
+  <rect x="35" y="120" width="875" height="665" fill="#f0f4f6"/>
+  <rect x="935" y="120" width="630" height="665" fill="#edf5ef"/>
+  <text x="55" y="156" class="label">CHARGER + BATTERY DOMAIN</text>
+  <text x="955" y="156" class="label">SWITCHED TERMINAL DOMAIN</text>
+
+  <rect x="60" y="210" width="190" height="125" class="box"/>
+  <text x="155" y="251" text-anchor="middle" class="label">USB-C</text>
+  <text x="155" y="281" text-anchor="middle" class="body">5V / 3A source</text>
+  <text x="155" y="309" text-anchor="middle" class="small">No PD, no EXT_5V</text>
+  <rect x="300" y="210" width="240" height="125" class="box"/>
+  <text x="420" y="249" text-anchor="middle" class="label">Input Protection</text>
+  <text x="420" y="280" text-anchor="middle" class="body">ESD / OVP / OCP</text>
+  <text x="420" y="309" text-anchor="middle" class="small">Inrush + source admission</text>
+  <rect x="600" y="210" width="270" height="125" class="box"/>
+  <text x="735" y="249" text-anchor="middle" class="label">Single NVDC Charger</text>
+  <text x="735" y="280" text-anchor="middle" class="body">BQ25616 candidate</text>
+  <text x="735" y="309" text-anchor="middle" class="small">Joint current gate OPEN</text>
+  <path d="M250 270H300" class="power"/>
+  <path d="M540 270H600" class="power"/>
+  <path d="M870 270H970" class="power"/>
+  <text x="880" y="243" class="small">SYS</text>
+
+  <rect x="970" y="210" width="215" height="125" class="box"/>
+  <text x="1077" y="249" text-anchor="middle" class="label">Hardware Gate</text>
+  <text x="1077" y="280" text-anchor="middle" class="body">TPS22953</text>
+  <text x="1077" y="309" text-anchor="middle" class="small">Physical OFF + UV inhibit</text>
+  <path d="M1185 270H1215V240H1250" class="power"/>
+  <path d="M1215 270V410H1250" class="power"/>
+  <rect x="1250" y="185" width="280" height="110" class="box"/>
+  <text x="1390" y="220" text-anchor="middle" class="label">3V3 / 2A Target</text>
+  <text x="1390" y="250" text-anchor="middle" class="body">TPS63802 buck-boost</text>
+  <text x="1390" y="277" text-anchor="middle" class="small">Core + filtered sensor branch</text>
+  <rect x="1250" y="355" width="280" height="110" class="box"/>
+  <text x="1390" y="390" text-anchor="middle" class="label">5V / 1.5A Target</text>
+  <text x="1390" y="420" text-anchor="middle" class="body">TPS61022 BOOST</text>
+  <text x="1390" y="447" text-anchor="middle" class="small">Audio + expansion</text>
+
+  <rect x="300" y="405" width="240" height="125" class="box"/>
+  <text x="420" y="443" text-anchor="middle" class="label">CC Current Detect</text>
+  <text x="420" y="474" text-anchor="middle" class="body">TUSB320LAI candidate</text>
+  <text x="420" y="502" text-anchor="middle" class="small">USB-only 3V3 supply</text>
+  <path d="M155 335V467H300" class="sense"/>
+  <text x="171" y="445" class="small">CC / USB supply</text>
+  <path d="M420 405V335" class="sense"/>
+  <text x="443" y="375" class="small">Authorize</text>
+
+  <rect x="600" y="455" width="270" height="125" class="box"/>
+  <text x="735" y="492" text-anchor="middle" class="label">Protected 1S Pack</text>
+  <text x="735" y="522" text-anchor="middle" class="body">5000 / 10000mAh target</text>
+  <text x="735" y="552" text-anchor="middle" class="small">Same qualified path envelope</text>
+  <path d="M735 335V455" class="power" marker-start="url(#arrow)"/>
+  <text x="750" y="388" class="body">BAT / PACK_POS</text>
+  <text x="750" y="416" class="small">Charge / discharge</text>
+  <rect x="600" y="665" width="270" height="85" class="box"/>
+  <text x="735" y="700" text-anchor="middle" class="label">5mohm Kelvin Shunt</text>
+  <text x="735" y="730" text-anchor="middle" class="small">PACK_NEG to system GND</text>
+  <path d="M735 580V665" class="power" marker-start="url(#arrow)"/>
+  <text x="752" y="626" class="small">PACK_NEG</text>
+  <rect x="300" y="625" width="240" height="125" class="box"/>
+  <text x="420" y="663" text-anchor="middle" class="label">MAX17055 Gauge</text>
+  <text x="420" y="694" text-anchor="middle" class="body">SOC / V / signed I</text>
+  <text x="420" y="723" text-anchor="middle" class="small">Alive during HARD OFF</text>
+  <path d="M600 707H540" class="sense"/>
+  <path d="M600 500H570V605H420V625" class="sense"/>
+  <text x="305" y="589" class="small">Pack-referenced self supply</text>
+
+  <text x="970" y="535" class="label">Shared Power, System First</text>
+  <text x="970" y="570" class="body">8W starting validation envelope, not a rating.</text>
+  <text x="970" y="601" class="body">Full 3V3 and full 5V are NOT simultaneous.</text>
+  <text x="970" y="650" class="label">HARD OFF</text>
+  <text x="970" y="685" class="body">All terminal rails and pullups downstream.</text>
+  <text x="970" y="716" class="body">USB charging and pack gauge remain alive.</text>
+  <text x="970" y="749" class="small">I2C / status to host: switched 3V3 pullups only.</text>
+
+  <path d="M50 817H1550" stroke="#a7b2b8"/>
+  <text x="50" y="855" class="label">Review Boundaries</text>
+  <text x="50" y="891" class="body">No external MUX. No UPS MUX. No PD controller. No always-on MCU. No PCB / production output.</text>
+  <text x="50" y="928" class="note">Charging stays inhibited: CC4.25V / CV4.2V conflict, temperature and NTC remain unresolved.</text>
+  <text x="50" y="965" class="body">OI-010 remains OPEN until netlist proof. Gauge self-supply and pack PCM are intentional unmeasured currents.</text>
+  <text x="50" y="1002" class="body">OFF allocations: 57uA hibernate / 75uA active. These are budgets, not measured or guaranteed limits.</text>
+</svg>

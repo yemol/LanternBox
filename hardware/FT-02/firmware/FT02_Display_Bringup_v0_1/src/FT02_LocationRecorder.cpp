@@ -385,7 +385,7 @@ bool FT02_LocationRecorderStartSession()
 
     if(!FT02_GnssPowerDesiredEnabled())
     {
-        FT02_RecorderSetAction("无法开始：GNSS已关闭，请先在设备状态开启");
+        FT02_RecorderSetAction("无法开始：GNSS已关闭，请切换户外模式");
         return false;
     }
 

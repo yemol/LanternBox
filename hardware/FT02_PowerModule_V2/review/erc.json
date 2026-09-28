@@ -1,0 +1,76 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-27T17:42:21",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "10.0.5",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/5ed1d367-355f-5ce6-b888-c866a4d86705",
+            "violations": []
+        },
+        {
+            "path": "/01_USB_PD/",
+            "uuid_path": "/5ed1d367-355f-5ce6-b888-c866a4d86705/75d31df3-3fe8-58f6-8487-d3738432e0b4",
+            "violations": []
+        },
+        {
+            "path": "/02_INPUT_PROTECTION/",
+            "uuid_path": "/5ed1d367-355f-5ce6-b888-c866a4d86705/f680f722-f8e6-5326-9209-38790ebe1671",
+            "violations": []
+        },
+        {
+            "path": "/03_CHARGER_NVDC/",
+            "uuid_path": "/5ed1d367-355f-5ce6-b888-c866a4d86705/12951e63-dd05-5a50-8be1-f8aa71a0bb75",
+            "violations": []
+        },
+        {
+            "path": "/04_BATTERY_GAUGE/",
+            "uuid_path": "/5ed1d367-355f-5ce6-b888-c866a4d86705/26317d41-b50e-5d21-838c-d7a911b0c63e",
+            "violations": []
+        },
+        {
+            "path": "/05_HARD_OFF/",
+            "uuid_path": "/5ed1d367-355f-5ce6-b888-c866a4d86705/52f2eb4d-ef01-552c-aaf5-ad73bf53a756",
+            "violations": []
+        },
+        {
+            "path": "/06_3V3_RAIL/",
+            "uuid_path": "/5ed1d367-355f-5ce6-b888-c866a4d86705/0949cbf6-716b-5909-bb45-40e18eff6732",
+            "violations": []
+        },
+        {
+            "path": "/07_5V_RAIL/",
+            "uuid_path": "/5ed1d367-355f-5ce6-b888-c866a4d86705/3ec08d0a-a457-52a5-9b06-65f0b7c251bc",
+            "violations": []
+        },
+        {
+            "path": "/08_HOST_INTERFACE/",
+            "uuid_path": "/5ed1d367-355f-5ce6-b888-c866a4d86705/f93eb36e-f9e5-5b4d-9814-4c92a3200925",
+            "violations": []
+        }
+    ],
+    "source": "FT02_PowerModule_V2.kicad_sch"
+}

@@ -40,6 +40,16 @@
 #include "FT02_SystemSelfTest.h"
 #include "FT02_WirelessManager.h"
 #include "FT02_PinyinLearning.h"
+#include "FT02_ModeManager.h"
+#include "FT02_IdleManager.h"
+#include "FT02_SleepUI.h"
+#include "FT02_SleepDiagnostics.h"
+#include "FT02_SystemSettings.h"
+#include "FT02_SystemSettingsUI.h"
+#include "wifi/FT02_WifiManager.h"
+#include <esp32-hal-cpu.h>
+#include <esp_sleep.h>
+
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
@@ -89,8 +99,31 @@ static int g_ft02LastShownMinute = -1;
 static int g_ft02HomeSelectedCard = 0;
 static FT02PageState g_ft02PageState = FT02_PAGE_HOME;
 static FT02PageState g_ft02PageBeforeHelp = FT02_PAGE_HOME;
+static FT02PageState g_ft02SleepReturnPage = FT02_PAGE_HOME;
+static bool g_ft02SleepWakeArmed = false;
+static bool g_ft02WakeReleaseRequired = false;
+static uint32_t g_ft02PreSleepCpuMhz = 240u;
+static bool g_ft02HomePPressActive = false;
+static bool g_ft02HomePLongTriggered = false;
+static uint32_t g_ft02HomePPressStartMs = 0;
+static uint32_t g_ft02HomePLastEventMs = 0;
+static uint8_t g_ft02HomePEventCount = 0;
+static uint32_t g_ft02SleepLastKeyEventMs = 0;
+static uint32_t g_ft02WakeLastConsumedKeyMs = 0;
+static uint32_t g_ft02SleepEnteredMs = 0;
+static uint32_t g_ft02SleepSliceCount = 0;
+
+static uint8_t g_ft02SleepQuietPollCount = 0;
+constexpr uint32_t FT02_HOME_P_LONG_PRESS_MS = 900u;
+constexpr uint32_t FT02_HOME_P_SHORT_SETTLE_MS = 320u;
+constexpr uint8_t FT02_HOME_P_LONG_MIN_EVENTS = 3u;
+constexpr uint32_t FT02_SLEEP_WAKE_QUIET_MS = 550u;
+constexpr uint8_t FT02_SLEEP_WAKE_ARM_EMPTY_POLLS = 2u;
+constexpr uint32_t FT02_WAKE_CONSUME_QUIET_MS = 450u;
+constexpr uint32_t FT02_SLEEP_LIGHT_SLICE_MS = 1000u;
 static char g_ft02LastBatteryStatusLine1[16] = "";
 static char g_ft02LastBatteryStatusLine2[16] = "";
+
 static bool g_ft02CommunicationReadyPresented = false;
 static bool g_ft02LastLoRaLinkState = false;
 static bool g_ft02LastLoRaReadyState = false;
@@ -172,6 +205,17 @@ static void FT02_OpenCompassPage();
 static void FT02_OpenFieldLibraryPage();
 static void FT02_OpenMapSearchPage();
 static void FT02_OpenWirelessWiFiPage();
+static void FT02_OpenSystemSettingsPage();
+static bool FT02_HandleSystemSettingsInput(const FT02InputEvent& event);
+static void FT02_EnterSleepMode(bool automatic);
+static void FT02_WakeFromSleep();
+static bool FT02_ServiceSleepMode();
+static bool FT02_AutoSleepBlocked();
+static void FT02_EpdSignalsEnterHighImpedance();
+static void FT02_EpdSignalsRestoreForWake();
+static void FT02_SleepIdleSlice();
+static bool FT02_IsPlausibleSleepWakeRaw(char raw);
+static bool FT02_ServiceHomeModeShortcut(const FT02InputEvent& event);
 
 static int FT02_MonthFromBuildString(const char* mon)
 {
@@ -418,9 +462,12 @@ static void FT02_SyncGnssStatusBar(bool allowPartialRefresh)
 
     if(!FT02_GnssPowerDesiredEnabled())
     {
+        // Indoor mode silently powers GNSS down. Do not expose the mode policy
+        // as a warning-style status message; just report the device as off.
         line2 = "已关闭";
     }
-    else if(FT02_GnssPowerActualKnown() && !FT02_GnssPowerActualEnabled())
+    else if(FT02_GnssPowerWakeTransitionActive() ||
+            (FT02_GnssPowerActualKnown() && !FT02_GnssPowerActualEnabled()))
     {
         line2 = "唤醒中";
     }
@@ -636,6 +683,10 @@ static void FT02_RedrawCurrentPage()
     {
         FT02_DrawWirelessWiFiScreen(display);
     }
+    else if(g_ft02PageState == FT02_PAGE_SYSTEM_SETTINGS)
+    {
+        FT02_DrawSystemSettingsScreen(display);
+    }
     else if(g_ft02PageState == FT02_PAGE_HELP)
     {
         FT02_DrawHelpScreen(display);
@@ -667,6 +718,15 @@ static void FT02_OpenHelpPage()
     {
         FT02_CancelPendingMapRefresh();
     }
+    if(g_ft02PageBeforeHelp == FT02_PAGE_AUDIO_LOG_LIST ||
+       g_ft02PageBeforeHelp == FT02_PAGE_AUDIO_LOG_DELETE_CONFIRM)
+    {
+        FT02_AudioLogRelease(FT02_AUDIO_OWNER_JOURNAL);
+    }
+    else if(g_ft02PageBeforeHelp == FT02_PAGE_DEVICE_STATUS)
+    {
+        FT02_AudioLogRelease(FT02_AUDIO_OWNER_SYSTEM_TEST);
+    }
     g_ft02PageState = FT02_PAGE_HELP;
 
     FT02_RedrawCurrentPage();
@@ -691,6 +751,11 @@ static void FT02_ReturnHomePage()
     {
         FT02_WirelessManagerCloseWiFi();
     }
+
+    // Audio owners are idempotent. Releasing both here guarantees that no
+    // unusual navigation path can carry ES8311/I2S back to the home page.
+    FT02_AudioLogRelease(FT02_AUDIO_OWNER_JOURNAL);
+    FT02_AudioLogRelease(FT02_AUDIO_OWNER_SYSTEM_TEST);
 
     FT02_RefreshStorageStatusCache();
     g_ft02PageState = FT02_PAGE_HOME;
@@ -719,6 +784,15 @@ static void FT02_ReturnFromHelpPage()
     }
 
     g_ft02PageState = g_ft02PageBeforeHelp;
+    if(g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST ||
+       g_ft02PageState == FT02_PAGE_AUDIO_LOG_DELETE_CONFIRM)
+    {
+        (void)FT02_AudioLogAcquire(FT02_AUDIO_OWNER_JOURNAL);
+    }
+    else if(g_ft02PageState == FT02_PAGE_DEVICE_STATUS)
+    {
+        (void)FT02_AudioLogAcquire(FT02_AUDIO_OWNER_SYSTEM_TEST);
+    }
 
     if(g_ft02PageState == FT02_PAGE_KNOWLEDGE)
     {
@@ -1170,6 +1244,9 @@ static void FT02_ClampAudioLogSelection()
 
 static void FT02_OpenAudioLogListPage(bool reload)
 {
+    // Voice logs are the primary audio owner. Bring ES8311/I2S up once on page
+    // entry and keep them ready while the user records or listens.
+    (void)FT02_AudioLogAcquire(FT02_AUDIO_OWNER_JOURNAL);
     if(reload)
     {
         FT02_AudioLogReload();
@@ -1256,10 +1333,42 @@ static bool FT02_HandleWirelessWiFiInput(const FT02InputEvent& event)
     return action != FT02_WIRELESS_ACTION_NONE;
 }
 
+static void FT02_OpenSystemSettingsPage()
+{
+    if(g_ft02PageState == FT02_PAGE_SYSTEM_SETTINGS) return;
+    g_ft02PageState = FT02_PAGE_SYSTEM_SETTINGS;
+    FT02_SystemSettingsUIOpen();
+    FT02_RedrawCurrentPage();
+}
+
+static bool FT02_HandleSystemSettingsInput(const FT02InputEvent& event)
+{
+    const FT02SystemSettingsAction action = FT02_SystemSettingsUIHandleInput(event);
+    if(action == FT02_SETTINGS_ACTION_EXIT_HOME)
+    {
+        FT02_ReturnHomePage();
+        return true;
+    }
+    if(action == FT02_SETTINGS_ACTION_OPEN_HELP)
+    {
+        FT02_OpenHelpPage();
+        return true;
+    }
+    if(action == FT02_SETTINGS_ACTION_REDRAW)
+    {
+        FT02_RedrawCurrentPage();
+        return true;
+    }
+    return false;
+}
+
 static void FT02_OpenDeviceStatusPage()
 {
     if(g_ft02PageState == FT02_PAGE_DEVICE_STATUS) return;
     g_ft02PageState = FT02_PAGE_DEVICE_STATUS;
+    // System self-test must validate the real codec/I2S path, so it owns audio
+    // for the lifetime of this page.
+    (void)FT02_AudioLogAcquire(FT02_AUDIO_OWNER_SYSTEM_TEST);
     FT02_SystemSelfTestRun();
 
     FT02_RedrawCurrentPage();
@@ -1299,22 +1408,10 @@ static bool FT02_HandleDeviceStatusInput(const FT02InputEvent& event)
     }
     if(event.key == FT02_KEY_SELECT)
     {
-        if(FT02_SystemSelfTestPage() == 1u)
-        {
-            const bool nextEnabled = !FT02_GnssPowerDesiredEnabled();
-            (void)FT02_GnssPowerSetEnabled(nextEnabled);
-            FT02_SystemSelfTestRun();
-            // Re-running self-test resets the report page to page 1. Keep the
-            // user on the GNSS control page after a toggle so ON/OFF can be
-            // verified immediately without navigating back.
-            FT02_SystemSelfTestSetPage(1u);
-            FT02_SyncGnssStatusBar(false);
-
-        }
-        else
-        {
-            FT02_SystemSelfTestRun();
-        }
+        const uint8_t page = FT02_SystemSelfTestPage();
+        (void)FT02_AudioLogAcquire(FT02_AUDIO_OWNER_SYSTEM_TEST);
+        FT02_SystemSelfTestRun();
+        FT02_SystemSelfTestSetPage(page);
         FT02_RedrawCurrentPage();
         return true;
     }
@@ -1505,13 +1602,13 @@ static bool FT02_HandleHomeInput(
 
         if(g_ft02HomeSelectedCard == 5)
         {
-            FT02_OpenDeviceStatusPage();
+            FT02_OpenFieldLibraryPage();
             return true;
         }
 
         if(g_ft02HomeSelectedCard == 6)
         {
-            FT02_OpenFieldLibraryPage();
+            FT02_OpenDeviceStatusPage();
             return true;
         }
 
@@ -1524,6 +1621,12 @@ static bool FT02_HandleHomeInput(
         if(g_ft02HomeSelectedCard == 8)
         {
             FT02_OpenCompassPage();
+            return true;
+        }
+
+        if(g_ft02HomeSelectedCard == 9)
+        {
+            FT02_OpenSystemSettingsPage();
             return true;
         }
 
@@ -2334,6 +2437,11 @@ static bool FT02_HandleInput(
         return FT02_HandleWirelessWiFiInput(event);
     }
 
+    if(g_ft02PageState == FT02_PAGE_SYSTEM_SETTINGS)
+    {
+        return FT02_HandleSystemSettingsInput(event);
+    }
+
     if(g_ft02PageState == FT02_PAGE_LOCATION_RECORDER)
     {
         return FT02_HandleLocationRecorderInput(event);
@@ -2367,12 +2475,375 @@ static bool FT02_HandleInput(
     return FT02_HandleHomeInput(event);
 }
 
+static void FT02_EpdSignalsEnterHighImpedance()
+{
+    // Stop the SPI peripheral first. SPI.end() releases MOSI/SCK from the SPI
+    // matrix, so never digitalWrite() those pins before reconfiguring them.
+    g_ft02EpdSpi.end();
+
+    // Charging/source transitions can momentarily disturb the EPD rail. The
+    // old A1.4 path left RST floating after power-off; if the panel/controller
+    // received even partial power again, floating control lines could make the
+    // display visibly leave the retained sleep frame while the FT-02 firmware
+    // was still asleep. Keep RESET actively LOW for the entire sleep state.
+    pinMode(EPD_RST, OUTPUT);
+    digitalWrite(EPD_RST, LOW);
+
+    // The remaining host-driven lines are released to high impedance to avoid
+    // phantom-powering an unpowered panel. RESET LOW is sufficient to prevent
+    // accidental controller activity if the panel rail is disturbed.
+    pinMode(EPD_CS, INPUT);
+    pinMode(EPD_DC, INPUT);
+    pinMode(EPD_MOSI, INPUT);
+    pinMode(EPD_SCK, INPUT);
+}
+
+static void FT02_EpdSignalsRestoreForWake()
+{
+    // Restore deterministic idle levels before the panel is reinitialized.
+    pinMode(EPD_CS, OUTPUT);
+    pinMode(EPD_DC, OUTPUT);
+    pinMode(EPD_RST, OUTPUT);
+    pinMode(EPD_MOSI, OUTPUT);
+    pinMode(EPD_SCK, OUTPUT);
+
+    digitalWrite(EPD_CS, HIGH);
+    digitalWrite(EPD_DC, LOW);
+    digitalWrite(EPD_RST, LOW);
+    digitalWrite(EPD_MOSI, LOW);
+    digitalWrite(EPD_SCK, LOW);
+}
+
+static bool FT02_IsPlausibleSleepWakeRaw(char raw)
+{
+    const uint8_t code = static_cast<uint8_t>(raw);
+
+    // CardKB2 returns 0 when no key is queued. A transient 0xFF or an
+    // unrelated control byte after an I2C/light-sleep boundary must never be
+    // interpreted as a user wake request. Keep only bytes that the current
+    // CardKB2 mappings can actually emit to the FT-02 host.
+    if(code == 0x08 || code == 0x0A || code == 0x0D || code == 0x1B) return true;
+    if(code >= 0x20 && code <= 0x7E) return true;
+
+    // Native / Fn-layer navigation codes used by the current keyboard image.
+    if(code == 0x98 || code == 0xA5) return true;
+    if(code >= 0xB4 && code <= 0xB7) return true;
+
+    return false;
+}
+
+static void FT02_SleepIdleSlice()
+{
+    // Native USB Serial/JTAG is clock-gated by ESP32-S3 light sleep, so this
+    // scheduler must never touch Serial/USB while the Core is sleeping.
+    const esp_err_t timerErr =
+        esp_sleep_enable_timer_wakeup(static_cast<uint64_t>(FT02_SLEEP_LIGHT_SLICE_MS) * 1000ULL);
+    if(timerErr != ESP_OK)
+    {
+        delay(FT02_SLEEP_LIGHT_SLICE_MS);
+        return;
+    }
+
+    ++g_ft02SleepSliceCount;
+    const esp_err_t sleepErr = esp_light_sleep_start();
+    if(sleepErr != ESP_OK) delay(FT02_SLEEP_LIGHT_SLICE_MS);
+}
+
+static bool FT02_AutoSleepBlocked()
+{
+    if(FT02_AudioLogIsBusy()) return true;
+    if(FT02_LocationRecorderSnapshotCurrent().sessionActive) return true;
+    if(FT02_GnssFieldTestSnapshotCurrent().active) return true;
+    if(g_ft02PageState == FT02_PAGE_COMPASS_CALIBRATION) return true;
+    if(g_ft02MapRefreshPending) return true;
+    if(g_ft02HomePPressActive) return true;
+    if(FT02_EpdInteractiveQueuedInputCount() > 0u) return true;
+    return false;
+}
+
+static void FT02_EnterSleepMode(bool automatic)
+{
+    if(FT02_ModeIsSleeping()) return;
+    if(automatic && !FT02_ModeAutoSleepAllowed()) return;
+    if(automatic && FT02_AutoSleepBlocked()) return;
+
+    g_ft02SleepReturnPage = g_ft02PageState;
+    g_ft02HomePPressActive = false;
+    g_ft02HomePLongTriggered = false;
+    g_ft02HomePEventCount = 0u;
+    g_ft02HomePLastEventMs = 0u;
+
+    if(g_ft02PageState == FT02_PAGE_MAP) FT02_CancelPendingMapRefresh();
+
+    // Sleep owns the low-power policy. Active audio work is blocked above;
+    // idle page owners can be released safely and are reacquired on wake.
+    FT02_AudioLogRelease(FT02_AUDIO_OWNER_JOURNAL);
+    FT02_AudioLogRelease(FT02_AUDIO_OWNER_SYSTEM_TEST);
+
+    const FT02WifiOwner wifiOwner = FT02_WifiManagerOwner();
+    if(wifiOwner != FT02_WIFI_OWNER_NONE) FT02_WifiManagerShutdown(wifiOwner);
+
+    // Indoor/outdoor mode is preserved; sleep applies the existing GNSS policy.
+    FT02_ModeEnterSleep();
+
+    // Commit one static sleep frame, then remove the e-paper power rail. The
+    // bistable panel keeps the image without refresh power.
+    FT02_DrawSleepScreen(display);
+    delay(30);
+
+    // Cut the panel rail, then clamp EPD RESET low before the Core starts its
+    // periodic light-sleep slices. This makes the retained image immune to the
+    // charger/source-switch disturbance seen in A1.4.3.
+    digitalWrite(EPD_PWR, LOW);
+    FT02_EpdSignalsEnterHighImpedance();
+
+    g_ft02PreSleepCpuMhz = getCpuFrequencyMhz();
+    if(g_ft02PreSleepCpuMhz > 80u) (void)setCpuFrequencyMhz(80u);
+
+    // A manual long-P sleep is entered while P is still physically held.
+    // Wake is armed only after a stable release, preventing instant bounce-back.
+    g_ft02SleepWakeArmed = false;
+    g_ft02SleepLastKeyEventMs = millis();
+    g_ft02WakeReleaseRequired = false;
+    g_ft02WakeLastConsumedKeyMs = 0u;
+    g_ft02SleepEnteredMs = millis();
+    g_ft02SleepSliceCount = 0u;
+    g_ft02SleepQuietPollCount = 0u;
+    FT02_EpdInteractiveReset();
+    FT02_InputSetLowNoiseMode(true);
+    FT02_LR01HostSleepPause(); // Physical polling is paced by light-sleep slices.
+    FT02_BatteryMonitorSleepPause();
+
+
+    // Native USB CDC is not a valid dependency while light sleep gates the USB
+    // clock. Input polling remains active, but its internal diagnostics are
+    // silenced until a real wake has fully completed.
+    FT02_InputSetDiagnosticsEnabled(false);
+
+    FT02_SleepDiagnosticsMarkEnter(automatic);
+
+    Serial.printf("[MODE] sleep entered source=%s return_page=%u slice_ms=%lu\n",
+                  automatic ? "idle" : "manual",
+                  static_cast<unsigned>(g_ft02SleepReturnPage),
+                  static_cast<unsigned long>(FT02_SLEEP_LIGHT_SLICE_MS));
+    // Drain debug output once before sleeping. Never flush on each periodic wake.
+    Serial.flush();
+}
+
+static void FT02_WakeFromSleep()
+{
+    if(!FT02_ModeIsSleeping()) return;
+
+    // The periodic timer is only the sleep-service scheduler. Remove it before
+    // returning to the normal UI runtime.
+    (void)esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
+
+    if(g_ft02PreSleepCpuMhz >= 80u) (void)setCpuFrequencyMhz(g_ft02PreSleepCpuMhz);
+
+    // Native USB CDC disconnects while the S3 is in light sleep. Recreate the
+    // serial endpoint before normal runtime logging resumes.
+    Serial.end();
+    delay(100);
+    Serial.begin(115200);
+    delay(300);
+
+    FT02_InputSetLowNoiseMode(false);
+    FT02_LR01HostSleepResume();
+    (void)FT02_BatteryMonitorWakeResume();
+
+    FT02_EpdSignalsRestoreForWake();
+    digitalWrite(EPD_PWR, HIGH);
+    delay(120);
+    digitalWrite(EPD_RST, HIGH);
+
+    const bool epdSpiBeginOk = g_ft02EpdSpi.begin(EPD_SCK, -1, EPD_MOSI, EPD_CS);
+
+    FT02_ReinitializeEpdFullMode();
+    FT02_EpdInteractiveReset();
+
+    FT02_ModeWake();
+    FT02_SyncGnssStatusBar(false);
+    FT02_SyncBatteryStatusBar(false);
+
+    if(FT02_SystemSettingsWakeReturnPolicy() == FT02_WAKE_RETURN_HOME)
+        g_ft02PageState = FT02_PAGE_HOME;
+    else
+        g_ft02PageState = g_ft02SleepReturnPage;
+
+    if(g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST ||
+       g_ft02PageState == FT02_PAGE_AUDIO_LOG_DELETE_CONFIRM)
+    {
+        (void)FT02_AudioLogAcquire(FT02_AUDIO_OWNER_JOURNAL);
+    }
+    else if(g_ft02PageState == FT02_PAGE_DEVICE_STATUS)
+    {
+        (void)FT02_AudioLogAcquire(FT02_AUDIO_OWNER_SYSTEM_TEST);
+        FT02_SystemSelfTestRun();
+    }
+    else if(g_ft02PageState == FT02_PAGE_WIRELESS_WIFI)
+    {
+        // Wi-Fi remains OFF after sleep. Re-open only the UI state; the user
+        // explicitly enables/scans from the page when needed.
+        FT02_WirelessManagerOpenWiFi();
+    }
+
+    FT02_IdleManagerNoteActivity(millis());
+    g_ft02WakeReleaseRequired = true;
+    g_ft02WakeLastConsumedKeyMs = millis();
+    g_ft02SleepWakeArmed = false;
+    g_ft02SleepLastKeyEventMs = 0u;
+
+    FT02_RedrawCurrentPage();
+
+    const uint32_t sleepDurationMs = static_cast<uint32_t>(millis() - g_ft02SleepEnteredMs);
+    FT02_InputSetDiagnosticsEnabled(true);
+
+    Serial.printf(
+        "[MODE] sleep exited source=keyboard slept_ms=%lu slices=%lu\n",
+        static_cast<unsigned long>(sleepDurationMs),
+        static_cast<unsigned long>(g_ft02SleepSliceCount));
+    if(!epdSpiBeginOk) Serial.println("[EPD] SPI begin failed during wake");
+    Serial.flush();
+
+    g_ft02SleepEnteredMs = 0u;
+    g_ft02SleepSliceCount = 0u;
+    g_ft02SleepQuietPollCount = 0u;
+}
+
+static bool FT02_ServiceSleepMode()
+{
+    if(!FT02_ModeIsSleeping()) return false;
+
+    // Keep the panel physically asleep during every timer-maintenance wake.
+    digitalWrite(EPD_PWR, LOW);
+    digitalWrite(EPD_RST, LOW);
+
+    // CardKB2 has no dedicated wake GPIO in the current four-wire I2C design,
+    // so the Core wakes briefly once per second only to poll the keyboard.
+    FT02_InputSetLowNoiseMode(true);
+    const FT02InputEvent event = FT02_InputPoll();
+    const uint32_t now = millis();
+
+    if(event.key != FT02_KEY_NONE)
+    {
+        const uint8_t raw = static_cast<uint8_t>(event.raw);
+        if(FT02_IsPlausibleSleepWakeRaw(event.raw))
+        {
+            g_ft02SleepLastKeyEventMs = now;
+            g_ft02SleepQuietPollCount = 0u;
+            if(g_ft02SleepWakeArmed)
+            {
+                const uint32_t sleepDurationMs =
+                    static_cast<uint32_t>(millis() - g_ft02SleepEnteredMs);
+                FT02_SleepDiagnosticsMarkKeyboardWake(
+                    raw,
+                    g_ft02SleepSliceCount,
+                    sleepDurationMs
+                );
+                FT02_WakeFromSleep();
+                return true;
+            }
+        }
+    }
+    else if(!g_ft02SleepWakeArmed &&
+            static_cast<uint32_t>(now - g_ft02SleepLastKeyEventMs) >= FT02_SLEEP_WAKE_QUIET_MS)
+    {
+        if(g_ft02SleepQuietPollCount < 0xFFu) ++g_ft02SleepQuietPollCount;
+        if(g_ft02SleepQuietPollCount >= FT02_SLEEP_WAKE_ARM_EMPTY_POLLS)
+            g_ft02SleepWakeArmed = true;
+    }
+
+    FT02_SleepIdleSlice();
+    return true;
+}
+
+static bool FT02_ServiceHomeModeShortcut(const FT02InputEvent& event)
+{
+    if(g_ft02PageState != FT02_PAGE_HOME)
+    {
+        g_ft02HomePPressActive = false;
+        g_ft02HomePLongTriggered = false;
+        g_ft02HomePEventCount = 0u;
+        g_ft02HomePLastEventMs = 0u;
+        return false;
+    }
+
+    const uint32_t now = millis();
+    const bool pEvent =
+        event.key == FT02_KEY_CHAR &&
+        (event.raw == 'p' || event.raw == 'P');
+
+    if(pEvent)
+    {
+        if(!g_ft02HomePPressActive)
+        {
+            g_ft02HomePPressActive = true;
+            g_ft02HomePLongTriggered = false;
+            g_ft02HomePPressStartMs = now;
+            g_ft02HomePEventCount = 1u;
+        }
+        else if(g_ft02HomePEventCount < 0xFFu)
+        {
+            ++g_ft02HomePEventCount;
+        }
+        g_ft02HomePLastEventMs = now;
+        FT02_IdleManagerNoteActivity(now);
+
+        // A long press is recognized from the repeated P event stream instead
+        // of using zero samples as a physical release indication.
+        if(!g_ft02HomePLongTriggered &&
+           g_ft02HomePEventCount >= FT02_HOME_P_LONG_MIN_EVENTS &&
+           static_cast<uint32_t>(now - g_ft02HomePPressStartMs) >= FT02_HOME_P_LONG_PRESS_MS)
+        {
+            g_ft02HomePLongTriggered = true;
+            FT02_EnterSleepMode(false);
+        }
+        return true;
+    }
+
+    if(!g_ft02HomePPressActive) return false;
+
+    // A different key resolves the pending P as a short press, then the new
+    // key is allowed to continue through the normal page dispatcher.
+    if(event.key != FT02_KEY_NONE)
+    {
+        if(!g_ft02HomePLongTriggered)
+        {
+            FT02_ModeToggleIndoorOutdoor();
+            FT02_IdleManagerNoteActivity(now);
+            FT02_SyncGnssStatusBar(false);
+            FT02_DrawHomeScreen(display, g_ft02HomeSelectedCard);
+        }
+        g_ft02HomePPressActive = false;
+        g_ft02HomePLongTriggered = false;
+        g_ft02HomePEventCount = 0u;
+        g_ft02HomePLastEventMs = 0u;
+        return false;
+    }
+
+    // A short press is confirmed only after no more P events arrive for a
+    // window longer than CardKB2's repeat cadence.
+    if(!g_ft02HomePLongTriggered &&
+       static_cast<uint32_t>(now - g_ft02HomePLastEventMs) >= FT02_HOME_P_SHORT_SETTLE_MS)
+    {
+        FT02_ModeToggleIndoorOutdoor();
+        FT02_IdleManagerNoteActivity(now);
+        FT02_SyncGnssStatusBar(false);
+        FT02_DrawHomeScreen(display, g_ft02HomeSelectedCard);
+        g_ft02HomePPressActive = false;
+        g_ft02HomePEventCount = 0u;
+        g_ft02HomePLastEventMs = 0u;
+        return true;
+    }
+
+    return true;
+}
+
 void setup()
 {
     Serial.begin(115200);
     delay(2000);
     Serial.printf("[FT02] boot %s\n", FT02_FIRMWARE_BUILD_LABEL);
-
     FT02_InputBegin(
         CARDKB_SDA,
         CARDKB_SCL,
@@ -2385,7 +2856,10 @@ void setup()
 
     FT02_GnssBegin();
     FT02_LR01HostBegin();
+    FT02_SystemSettingsBegin();
     FT02_GnssPowerControlBegin();
+    FT02_SleepDiagnosticsBegin();
+    FT02_ModeManagerBegin();
     FT02_SyncGnssStatusBar(false);
 
     FT02_StorageBegin();
@@ -2428,6 +2902,7 @@ void setup()
 
     g_ft02BootDateTime = FT02_ReadBuildDateTime();
     g_ft02BootMillis = millis();
+    FT02_IdleManagerBegin(g_ft02BootMillis);
     FT02_UpdateClockCacheOnly();
 
     FT02_DrawHomeScreen(
@@ -2442,6 +2917,8 @@ void setup()
 
 void loop()
 {
+    if(FT02_ServiceSleepMode()) return;
+
     // Reduce keyboard polling during capture to limit mic-side EMI.
     FT02_InputSetLowNoiseMode(FT02_AudioLogIsCapturing());
 
@@ -2452,6 +2929,7 @@ void loop()
     {
         const FT02KnowledgeAction queuedKnowledgeAction =
             FT02_KnowledgeProcessQueuedInput(display, &queuedInputHandledByKnowledge);
+        if(queuedInputHandledByKnowledge) FT02_IdleManagerNoteActivity(millis());
         if(queuedKnowledgeAction == FT02_KNOWLEDGE_ACTION_EXIT_HOME)
         {
             FT02_ReturnHomePage();
@@ -2494,8 +2972,28 @@ void loop()
         g_ft02MapReleaseZeroSinceMs = 0;
     }
 
-    if(inputEvent.key != FT02_KEY_NONE)
+    if(g_ft02WakeReleaseRequired)
     {
+        // CardKB2 can emit zero samples between repeat events. Consume the wake
+        // key stream until it has been quiet long enough to count as released.
+        const uint32_t wakeNow = millis();
+        if(inputEvent.key != FT02_KEY_NONE)
+            g_ft02WakeLastConsumedKeyMs = wakeNow;
+
+        if(static_cast<uint32_t>(wakeNow - g_ft02WakeLastConsumedKeyMs) >= FT02_WAKE_CONSUME_QUIET_MS)
+            g_ft02WakeReleaseRequired = false;
+
+        inputEvent.key = FT02_KEY_NONE;
+        inputEvent.raw = 0;
+        inputEvent.command = 0;
+    }
+
+    const bool modeShortcutConsumed =
+        FT02_ServiceHomeModeShortcut(inputEvent);
+
+    if(!modeShortcutConsumed && inputEvent.key != FT02_KEY_NONE)
+    {
+        FT02_IdleManagerNoteActivity(millis());
         FT02_HandleInput(inputEvent);
     }
 
@@ -2781,21 +3279,19 @@ void loop()
         FT02_UpdateClockIfNeeded(false);
     }
 
-    // Interactive e-paper pages now keep CardKB polling alive while BUSY and
-    // use a tighter idle cadence. Static/diagnostic pages keep the conservative
-    // 20 ms scheduler cadence.
-    const bool fastInteractivePage =
-        g_ft02PageState == FT02_PAGE_HOME ||
-        g_ft02PageState == FT02_PAGE_KNOWLEDGE ||
-        g_ft02PageState == FT02_PAGE_LIBRARY ||
-        g_ft02PageState == FT02_PAGE_MAP_SEARCH ||
-        g_ft02PageState == FT02_PAGE_COMMUNICATION ||
-        g_ft02PageState == FT02_PAGE_COMPASS ||
-        g_ft02PageState == FT02_PAGE_WIRELESS_WIFI ||
-        g_ft02PageState == FT02_PAGE_LOCATION_LOG_LIST ||
-        g_ft02PageState == FT02_PAGE_LOCATION_LOG_DETAIL ||
-        g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST;
-    const uint32_t loopDelayMs = FT02_AudioLogIsPlaying() ? 5u :
-        (fastInteractivePage ? 5u : 20u);
+    if(FT02_ModeAutoSleepAllowed() &&
+       FT02_IdleManagerShouldSleep(millis()) &&
+       !FT02_AutoSleepBlocked())
+    {
+        FT02_EnterSleepMode(true);
+        return;
+    }
+
+    // Low Power A2: keep the normal UI scheduler at 50 Hz. CardKB2 firmware
+    // queues key bytes internally, so ordinary FT-02 pages do not need to poll
+    // the shared I2C bus every 5 ms. Playback retains the proven 5 ms cadence
+    // because its guard/volume path is time-sensitive and audio power is already
+    // intentionally active in that state.
+    const uint32_t loopDelayMs = FT02_AudioLogIsPlaying() ? 5u : 20u;
     delay(loopDelayMs);
 }

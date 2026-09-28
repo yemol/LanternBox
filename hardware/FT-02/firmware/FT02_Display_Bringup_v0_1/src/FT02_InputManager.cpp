@@ -18,6 +18,7 @@ static uint32_t g_ft02LastProbeMillis = 0;
 static uint32_t g_ft02LastReadFailLogMillis = 0;
 static uint8_t g_ft02ReadFailCount = 0;
 static bool g_ft02LowNoiseMode = false;
+static bool g_ft02DiagnosticsEnabled = true;
 static uint32_t g_ft02LastPhysicalPollMs = 0;
 
 static int g_ft02InputSdaPin = -1;
@@ -73,7 +74,8 @@ static void FT02_UpdateCardKbAvailability(
         g_ft02CardKbAvailable = available;
         if(!available)
         {
-            Serial.println("[INPUT] CardKB2 unavailable; polling paused");
+            if(g_ft02DiagnosticsEnabled)
+                Serial.println("[INPUT] CardKB2 unavailable; polling paused");
         }
     }
 }
@@ -106,14 +108,16 @@ static char FT02_ReadCardKbRawKey()
         if(now - g_ft02LastReadFailLogMillis >= FT02_INPUT_FAIL_LOG_INTERVAL_MS)
         {
             g_ft02LastReadFailLogMillis = now;
-            Serial.println("FT02 InputManager: CardKB2 read failed");
+            if(g_ft02DiagnosticsEnabled)
+                Serial.println("FT02 InputManager: CardKB2 read failed");
         }
 
         if(g_ft02ReadFailCount >= FT02_INPUT_MAX_READ_FAILS)
         {
             g_ft02CardKbAvailable = false;
             g_ft02ReadFailCount = 0;
-            Serial.println("FT02 InputManager: CardKB2 polling paused, will re-probe fixed pins");
+            if(g_ft02DiagnosticsEnabled)
+                Serial.println("FT02 InputManager: CardKB2 polling paused, will re-probe fixed pins");
         }
 
         return 0;
@@ -261,6 +265,11 @@ void FT02_InputSetLowNoiseMode(bool enabled)
     if(g_ft02LowNoiseMode == enabled) return;
     g_ft02LowNoiseMode = enabled;
     g_ft02LastPhysicalPollMs = 0;
+}
+
+void FT02_InputSetDiagnosticsEnabled(bool enabled)
+{
+    g_ft02DiagnosticsEnabled = enabled;
 }
 
 FT02InputEvent FT02_InputPoll()

@@ -1,0 +1,1439 @@
+{
+  "project": "FT02_PowerModule_V2",
+  "sheets": {
+    "01_USB_PD": "STUSB4500: program and VERIFY PDO1=5V/0.1A, PDO2=9V/2A, PDO3=9V/3A before use.",
+    "02_INPUT_PROTECTION": "One input eFuse, not a source MUX. Independent OV cutoff also blocks factory-default 15V/20V PDOs.",
+    "03_CHARGER_NVDC": "BQ25638 SYS is the main source. CE arm DNP + TS forced fault: CHARGING IS PHYSICALLY INHIBITED.",
+    "04_BATTERY_GAUGE": "Protected pack only. PACK_NEG is isolated from board GND except the four-terminal shunt.",
+    "05_HARD_OFF": "Physical switch OFF grounds gate EN. Charger and gauge are upstream. UV restart/thermal tests remain OPEN.",
+    "06_3V3_RAIL": "TPS63802 3V3/2A individual target; aggregate output budget 8W, not both rails at maximum.",
+    "07_5V_RAIL": "TPS61022 BOOST, not buck; 5V/1.5A individual target. No rail derives directly from USB VBUS.",
+    "08_HOST_INTERFACE": "All host pullups use switched 3V3. Private PD service bus must NOT join the host bus."
+  },
+  "parts": [
+    {
+      "sheet": "01_USB_PD",
+      "kind": "USB_C",
+      "ref": "J101",
+      "value": "USB-C POWER ONLY",
+      "nets": {
+        "A1": "GND",
+        "A12": "GND",
+        "B1": "GND",
+        "B12": "GND",
+        "A4": "USB_VBUS_RAW",
+        "A9": "USB_VBUS_RAW",
+        "B4": "USB_VBUS_RAW",
+        "B9": "USB_VBUS_RAW",
+        "A5": "CC1",
+        "B5": "CC2",
+        "A6": null,
+        "B6": null,
+        "A7": null,
+        "B7": null,
+        "A8": null,
+        "B8": null,
+        "SH": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": "Connector MPN/pad map pending; D+/D-/SBU unused."
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "STUSB4500",
+      "ref": "U101",
+      "value": "STUSB4500QTR",
+      "nets": {
+        "24": "USB_FUSED",
+        "22": "GND",
+        "1": "CC1",
+        "2": "CC1",
+        "4": "CC2",
+        "5": "CC2",
+        "6": "GND",
+        "12": "GND",
+        "13": "GND",
+        "10": "GND",
+        "25": "GND",
+        "18": "PD_VBUS_SENSE",
+        "23": "PD_2V7",
+        "21": "PD_1V2",
+        "16": "PD_SINK_N",
+        "20": "PD_9V_N",
+        "14": "PD_9V_N",
+        "9": "PD_DISCH",
+        "7": "PD_SCL",
+        "8": "PD_SDA",
+        "19": null,
+        "11": null,
+        "15": null,
+        "17": null,
+        "3": null
+      },
+      "mpn": "STUSB4500QTR",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "FUSE",
+      "ref": "F101",
+      "value": "2A 32V FAST / REVIEW",
+      "nets": {
+        "1": "USB_VBUS_RAW",
+        "2": "USB_FUSED"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "TVS",
+      "ref": "D101",
+      "value": "VBUS TVS 12V / REVIEW",
+      "nets": {
+        "1": "USB_FUSED",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "TVS",
+      "ref": "D102",
+      "value": "CC ESD 5V / REVIEW",
+      "nets": {
+        "1": "CC1",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "TVS",
+      "ref": "D103",
+      "value": "CC ESD 5V / REVIEW",
+      "nets": {
+        "1": "CC2",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "C",
+      "ref": "C101",
+      "value": "1uF 35V",
+      "nets": {
+        "1": "USB_FUSED",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "C",
+      "ref": "C102",
+      "value": "1uF 10V",
+      "nets": {
+        "1": "PD_2V7",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "C",
+      "ref": "C103",
+      "value": "1uF 10V",
+      "nets": {
+        "1": "PD_1V2",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "R",
+      "ref": "R101",
+      "value": "1k 1%",
+      "nets": {
+        "1": "USB_FUSED",
+        "2": "PD_VBUS_SENSE"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "R",
+      "ref": "R102",
+      "value": "1k 0.5W pulse",
+      "nets": {
+        "1": "USB_SAFE",
+        "2": "PD_DISCH"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "CONN4",
+      "ref": "J102",
+      "value": "PD NVM SERVICE",
+      "nets": {
+        "1": "PD_SCL",
+        "2": "PD_SDA",
+        "3": "GND",
+        "4": "USB_FUSED"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": "Pin4 is USB 5/9V, NOT logic supply. Fixture provides separate 3.3V pullups; USB must be present."
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "PWR_FLAG",
+      "ref": "#FLG101",
+      "value": "USB_VBUS_RAW",
+      "nets": {
+        "1": "USB_VBUS_RAW"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": "External USB source"
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "PWR_FLAG",
+      "ref": "#FLG102",
+      "value": "USB_FUSED",
+      "nets": {
+        "1": "USB_FUSED"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": "USB source through populated F101"
+    },
+    {
+      "sheet": "01_USB_PD",
+      "kind": "PWR_FLAG",
+      "ref": "#FLG103",
+      "value": "GND",
+      "nets": {
+        "1": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": "External return connected to USB and shunt"
+    },
+    {
+      "sheet": "02_INPUT_PROTECTION",
+      "kind": "TPS259474",
+      "ref": "U201",
+      "value": "TPS259474LRPWR",
+      "nets": {
+        "5": "USB_FUSED",
+        "1": "USB_EN",
+        "2": "USB_OV",
+        "9": "USB_ILM",
+        "8": "GND",
+        "6": "USB_SAFE",
+        "3": null,
+        "4": "GND",
+        "7": "USB_DVDT",
+        "10": null
+      },
+      "mpn": "TPS259474LRPWR",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "02_INPUT_PROTECTION",
+      "kind": "PMOS",
+      "ref": "Q201",
+      "value": "BSS84 signal only",
+      "nets": {
+        "1": "USB_EN_GATE",
+        "2": "USB_FUSED",
+        "3": "USB_ENABLE_TOP"
+      },
+      "mpn": "BSS84",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "02_INPUT_PROTECTION",
+      "kind": "R",
+      "ref": "R201",
+      "value": "100k 1%",
+      "nets": {
+        "1": "USB_FUSED",
+        "2": "USB_EN_GATE"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "02_INPUT_PROTECTION",
+      "kind": "R",
+      "ref": "R202",
+      "value": "100k 1%",
+      "nets": {
+        "1": "USB_EN_GATE",
+        "2": "PD_SINK_N"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "02_INPUT_PROTECTION",
+      "kind": "R",
+      "ref": "R203",
+      "value": "562k 0.1%",
+      "nets": {
+        "1": "USB_ENABLE_TOP",
+        "2": "USB_EN"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "02_INPUT_PROTECTION",
+      "kind": "R",
+      "ref": "R204",
+      "value": "205k 0.1%",
+      "nets": {
+        "1": "USB_EN",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "02_INPUT_PROTECTION",
+      "kind": "R",
+      "ref": "R205",
+      "value": "768k 0.1%",
+      "nets": {
+        "1": "USB_FUSED",
+        "2": "USB_OV"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "02_INPUT_PROTECTION",
+      "kind": "R",
+      "ref": "R206",
+      "value": "100k 0.1%",
+      "nets": {
+        "1": "USB_OV",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "02_INPUT_PROTECTION",
+      "kind": "R",
+      "ref": "R207",
+      "value": "1.65k 1%",
+      "nets": {
+        "1": "USB_ILM",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "02_INPUT_PROTECTION",
+      "kind": "C",
+      "ref": "C201",
+      "value": "4.7nF 50V",
+      "nets": {
+        "1": "USB_DVDT",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "02_INPUT_PROTECTION",
+      "kind": "C",
+      "ref": "C202",
+      "value": "10uF 25V",
+      "nets": {
+        "1": "USB_SAFE",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "BQ25638",
+      "ref": "U301",
+      "value": "BQ25638YBGR",
+      "nets": {
+        "A1": "USB_SAFE",
+        "B1": "USB_SAFE",
+        "A2": "CHG_PMID",
+        "B2": "CHG_PMID",
+        "A5": "CHG_REGN",
+        "F3": "CHG_ILIM",
+        "F2": "CHG_CE_N",
+        "F4": "CHG_TS_BIAS",
+        "E4": "CHG_TS",
+        "C5": "GND",
+        "D4": null,
+        "A4": "GND",
+        "B4": "GND",
+        "C4": "GND",
+        "F1": "BAT_SENSE",
+        "A3": "CHG_SW",
+        "B3": "CHG_SW",
+        "C3": "CHG_SW",
+        "B5": "CHG_BTST",
+        "D1": "SYS_AON",
+        "D2": "SYS_AON",
+        "D3": "SYS_AON",
+        "E1": "PACK_POS",
+        "E2": "PACK_POS",
+        "E3": "PACK_POS",
+        "C1": "CHG_STAT_N",
+        "C2": "CHG_PG_N",
+        "F5": "CHG_INT_N",
+        "D5": "HOST_SCL",
+        "E5": "HOST_SDA"
+      },
+      "mpn": "BQ25638YBGR",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "PNP",
+      "ref": "Q301",
+      "value": "MMBT3906",
+      "nets": {
+        "1": "PD_ENABLE_B",
+        "2": "CHG_REGN",
+        "3": "ILIM_HIGH_EN"
+      },
+      "mpn": "MMBT3906",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "NMOS",
+      "ref": "Q302",
+      "value": "2N7002",
+      "nets": {
+        "1": "ILIM_HIGH_EN",
+        "2": "GND",
+        "3": "ILIM_HIGH_RETURN"
+      },
+      "mpn": "2N7002",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "C",
+      "ref": "C301",
+      "value": "1uF 25V",
+      "nets": {
+        "1": "USB_SAFE",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "C",
+      "ref": "C302",
+      "value": "10uF 25V",
+      "nets": {
+        "1": "CHG_PMID",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "C",
+      "ref": "C303",
+      "value": "100nF 25V",
+      "nets": {
+        "1": "CHG_PMID",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "C",
+      "ref": "C304",
+      "value": "47nF 16V",
+      "nets": {
+        "1": "CHG_BTST",
+        "2": "CHG_SW"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "C",
+      "ref": "C305",
+      "value": "4.7uF 10V",
+      "nets": {
+        "1": "CHG_REGN",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "L",
+      "ref": "L301",
+      "value": "1uH Isat>=8A",
+      "nets": {
+        "1": "CHG_SW",
+        "2": "SYS_AON"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "C",
+      "ref": "C306",
+      "value": "22uF 10V",
+      "nets": {
+        "1": "SYS_AON",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "C",
+      "ref": "C307",
+      "value": "22uF 10V",
+      "nets": {
+        "1": "SYS_AON",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "C",
+      "ref": "C308",
+      "value": "10uF 10V",
+      "nets": {
+        "1": "PACK_POS",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "R",
+      "ref": "R301",
+      "value": "100k 1%",
+      "nets": {
+        "1": "CHG_REGN",
+        "2": "CHG_CE_N"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "R",
+      "ref": "R303",
+      "value": "0R TS SAFETY LOCK",
+      "nets": {
+        "1": "CHG_TS",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "R",
+      "ref": "R304",
+      "value": "100R 1%",
+      "nets": {
+        "1": "PACK_POS",
+        "2": "BAT_SENSE"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "R",
+      "ref": "R305",
+      "value": "47k 1%",
+      "nets": {
+        "1": "CHG_ILIM",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "R",
+      "ref": "R306",
+      "value": "2.43k 1%",
+      "nets": {
+        "1": "CHG_ILIM",
+        "2": "ILIM_HIGH_RETURN"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "R",
+      "ref": "R307",
+      "value": "100k 1%",
+      "nets": {
+        "1": "CHG_REGN",
+        "2": "PD_ENABLE_B"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "R",
+      "ref": "R308",
+      "value": "100k 1%",
+      "nets": {
+        "1": "PD_ENABLE_B",
+        "2": "PD_9V_N"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "R",
+      "ref": "R309",
+      "value": "100k 1%",
+      "nets": {
+        "1": "ILIM_HIGH_EN",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "R",
+      "ref": "R310",
+      "value": "1.2k 1%",
+      "nets": {
+        "1": "CHG_ILIM",
+        "2": "ILIM_FILTER"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "C",
+      "ref": "C309",
+      "value": "330nF 10V",
+      "nets": {
+        "1": "ILIM_FILTER",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "C",
+      "ref": "C310",
+      "value": "100nF 10V",
+      "nets": {
+        "1": "CHG_TS_BIAS",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "03_CHARGER_NVDC",
+      "kind": "R",
+      "ref": "R302",
+      "value": "0R CHARGE ARM DNP",
+      "nets": {
+        "1": "CHG_CE_N",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": true,
+      "note": "Do not populate until cell voltage/temperature/NTC/timer approved and R303 replaced by real TS network."
+    },
+    {
+      "sheet": "04_BATTERY_GAUGE",
+      "kind": "CONN2",
+      "ref": "J401",
+      "value": "PROTECTED 1S PACK",
+      "nets": {
+        "1": "PACK_POS",
+        "2": "PACK_NEG"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": "Actual connector/wire polarity and current rating OPEN."
+    },
+    {
+      "sheet": "04_BATTERY_GAUGE",
+      "kind": "KELVIN",
+      "ref": "R401",
+      "value": "5m 1% >=0.5W 4T",
+      "nets": {
+        "1": "PACK_NEG",
+        "3": "PACK_NEG",
+        "2": "GND",
+        "4": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": "Logical Kelvin pads; physical part/pad mapping not released. Exactly one main return shunt."
+    },
+    {
+      "sheet": "04_BATTERY_GAUGE",
+      "kind": "MAX17055",
+      "ref": "U401",
+      "value": "MAX17055ETB+T",
+      "nets": {
+        "10": "PACK_POS",
+        "6": "PACK_NEG",
+        "5": "GND",
+        "2": "PACK_NEG",
+        "11": "PACK_NEG",
+        "7": "FG_REG",
+        "3": "HOST_SCL",
+        "4": "HOST_SDA",
+        "8": "FG_ALRT_N",
+        "9": null,
+        "1": null
+      },
+      "mpn": "MAX17055ETB+T",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "04_BATTERY_GAUGE",
+      "kind": "C",
+      "ref": "C401",
+      "value": "100nF 10V",
+      "nets": {
+        "1": "PACK_POS",
+        "2": "PACK_NEG"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "04_BATTERY_GAUGE",
+      "kind": "C",
+      "ref": "C402",
+      "value": "470nF 10V",
+      "nets": {
+        "1": "FG_REG",
+        "2": "PACK_NEG"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "04_BATTERY_GAUGE",
+      "kind": "PWR_FLAG",
+      "ref": "#FLG401",
+      "value": "PACK_POS",
+      "nets": {
+        "1": "PACK_POS"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": "External protected pack positive; USB charger also drives it."
+    },
+    {
+      "sheet": "04_BATTERY_GAUGE",
+      "kind": "PWR_FLAG",
+      "ref": "#FLG402",
+      "value": "PACK_NEG",
+      "nets": {
+        "1": "PACK_NEG"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": "External protected pack return; no bypass conductor added by flag."
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "TPS22953",
+      "ref": "U501",
+      "value": "TPS22953DQCR",
+      "nets": {
+        "1": "SYS_AON",
+        "2": "SYS_AON",
+        "3": "SYS_AON",
+        "4": "SYSTEM_EN",
+        "5": "GND",
+        "11": "GND",
+        "9": "SYS_SW",
+        "10": "SYS_SW",
+        "8": "SYS_SW",
+        "7": "GATE_PG_N",
+        "6": "GATE_CT"
+      },
+      "mpn": "TPS22953DQCR",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "TPS3808",
+      "ref": "U502",
+      "value": "TPS3808G01DBVR",
+      "nets": {
+        "6": "SYS_AON",
+        "5": "UV_SENSE",
+        "3": "SYS_AON",
+        "1": "UV_PERMIT",
+        "4": null,
+        "2": "GND"
+      },
+      "mpn": "TPS3808G01DBVR",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "SW_SPDT",
+      "ref": "SW501",
+      "value": "SYSTEM ON / OFF",
+      "nets": {
+        "1": "SYSTEM_EN",
+        "2": "UV_PERMIT",
+        "3": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": "OFF physically grounds EN. Switch carries control current only."
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "R",
+      "ref": "R501",
+      "value": "2.87M 0.1%",
+      "nets": {
+        "1": "SYS_AON",
+        "2": "UV_SENSE"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "R",
+      "ref": "R502",
+      "value": "402k 0.1%",
+      "nets": {
+        "1": "UV_SENSE",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "R",
+      "ref": "R503",
+      "value": "470k 1%",
+      "nets": {
+        "1": "SYS_AON",
+        "2": "UV_PERMIT"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "R",
+      "ref": "R504",
+      "value": "4.7M 1%",
+      "nets": {
+        "1": "SYSTEM_EN",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "C",
+      "ref": "C501",
+      "value": "1uF 10V",
+      "nets": {
+        "1": "SYS_AON",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "C",
+      "ref": "C502",
+      "value": "100nF 10V",
+      "nets": {
+        "1": "SYS_AON",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "C",
+      "ref": "C503",
+      "value": "10nF 50V",
+      "nets": {
+        "1": "GATE_CT",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "C",
+      "ref": "C504",
+      "value": "22uF 10V",
+      "nets": {
+        "1": "SYS_SW",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "R",
+      "ref": "R505",
+      "value": "10k bleed",
+      "nets": {
+        "1": "SYS_SW",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "05_HARD_OFF",
+      "kind": "R",
+      "ref": "R506",
+      "value": "100k PG probe",
+      "nets": {
+        "1": "SYS_SW",
+        "2": "GATE_PG_N"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "06_3V3_RAIL",
+      "kind": "TPS63802",
+      "ref": "U601",
+      "value": "TPS63802DLAR",
+      "nets": {
+        "10": "SYS_SW",
+        "1": "SYS_SW",
+        "2": "GND",
+        "3": "GND",
+        "8": "GND",
+        "9": "SW3_A",
+        "7": "SW3_B",
+        "6": "3V3_MAIN",
+        "4": "FB3",
+        "5": "PG3_N"
+      },
+      "mpn": "TPS63802DLAR",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "06_3V3_RAIL",
+      "kind": "L",
+      "ref": "L601",
+      "value": "0.47uH Isat>=5A",
+      "nets": {
+        "1": "SW3_A",
+        "2": "SW3_B"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "06_3V3_RAIL",
+      "kind": "C",
+      "ref": "C601",
+      "value": "10uF 10V",
+      "nets": {
+        "1": "SYS_SW",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "06_3V3_RAIL",
+      "kind": "C",
+      "ref": "C602",
+      "value": "22uF 10V",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "06_3V3_RAIL",
+      "kind": "C",
+      "ref": "C603",
+      "value": "22uF 10V",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "06_3V3_RAIL",
+      "kind": "R",
+      "ref": "R601",
+      "value": "511k 0.1%",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "FB3"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "06_3V3_RAIL",
+      "kind": "R",
+      "ref": "R602",
+      "value": "91k 0.1%",
+      "nets": {
+        "1": "FB3",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "06_3V3_RAIL",
+      "kind": "R",
+      "ref": "R603",
+      "value": "100k 1%",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "PG3_N"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "06_3V3_RAIL",
+      "kind": "L",
+      "ref": "FB601",
+      "value": "600R@100MHz / >=0.5A",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "3V3_SENS"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "06_3V3_RAIL",
+      "kind": "C",
+      "ref": "C604",
+      "value": "4.7uF 10V",
+      "nets": {
+        "1": "3V3_SENS",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "06_3V3_RAIL",
+      "kind": "C",
+      "ref": "C605",
+      "value": "100nF 10V",
+      "nets": {
+        "1": "3V3_SENS",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "06_3V3_RAIL",
+      "kind": "R",
+      "ref": "R604",
+      "value": "10k bleed",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "07_5V_RAIL",
+      "kind": "TPS61022",
+      "ref": "U701",
+      "value": "TPS61022RWUR",
+      "nets": {
+        "7": "SYS_SW",
+        "5": "SYS_SW",
+        "6": "GND",
+        "1": "GND",
+        "2": "SW5",
+        "3": "5V_MAIN",
+        "4": "FB5"
+      },
+      "mpn": "TPS61022RWUR",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "07_5V_RAIL",
+      "kind": "L",
+      "ref": "L701",
+      "value": "1uH Isat>=10A",
+      "nets": {
+        "1": "SYS_SW",
+        "2": "SW5"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "07_5V_RAIL",
+      "kind": "C",
+      "ref": "C701",
+      "value": "10uF 10V",
+      "nets": {
+        "1": "SYS_SW",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "07_5V_RAIL",
+      "kind": "C",
+      "ref": "C702",
+      "value": "22uF 10V",
+      "nets": {
+        "1": "5V_MAIN",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "07_5V_RAIL",
+      "kind": "C",
+      "ref": "C703",
+      "value": "22uF 10V",
+      "nets": {
+        "1": "5V_MAIN",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "07_5V_RAIL",
+      "kind": "C",
+      "ref": "C704",
+      "value": "22uF 10V",
+      "nets": {
+        "1": "5V_MAIN",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "07_5V_RAIL",
+      "kind": "R",
+      "ref": "R701",
+      "value": "732k 0.1%",
+      "nets": {
+        "1": "5V_MAIN",
+        "2": "FB5"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "07_5V_RAIL",
+      "kind": "R",
+      "ref": "R702",
+      "value": "100k 0.1%",
+      "nets": {
+        "1": "FB5",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "07_5V_RAIL",
+      "kind": "C",
+      "ref": "C705",
+      "value": "110pF C0G",
+      "nets": {
+        "1": "5V_MAIN",
+        "2": "FB5"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "07_5V_RAIL",
+      "kind": "R",
+      "ref": "R703",
+      "value": "10k bleed",
+      "nets": {
+        "1": "5V_MAIN",
+        "2": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "08_HOST_INTERFACE",
+      "kind": "CONN12",
+      "ref": "J801",
+      "value": "TERMINAL / LOGICAL",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "GND",
+        "3": "5V_MAIN",
+        "4": "GND",
+        "5": "3V3_SENS",
+        "6": "GND",
+        "7": "HOST_SCL",
+        "8": "HOST_SDA",
+        "9": "FG_ALRT_N",
+        "10": "CHG_PG_N",
+        "11": "CHG_STAT_N",
+        "12": "CHG_INT_N"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": "No external drive when OFF; connector/current ratings and mainboard GPIO assignment OPEN."
+    },
+    {
+      "sheet": "08_HOST_INTERFACE",
+      "kind": "R",
+      "ref": "R801",
+      "value": "10k 1%",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "HOST_SCL"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "08_HOST_INTERFACE",
+      "kind": "R",
+      "ref": "R802",
+      "value": "10k 1%",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "HOST_SDA"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "08_HOST_INTERFACE",
+      "kind": "R",
+      "ref": "R803",
+      "value": "10k 1%",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "FG_ALRT_N"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "08_HOST_INTERFACE",
+      "kind": "R",
+      "ref": "R804",
+      "value": "10k 1%",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "CHG_PG_N"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "08_HOST_INTERFACE",
+      "kind": "R",
+      "ref": "R805",
+      "value": "10k 1%",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "CHG_STAT_N"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "08_HOST_INTERFACE",
+      "kind": "R",
+      "ref": "R806",
+      "value": "10k 1%",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "CHG_INT_N"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    },
+    {
+      "sheet": "08_HOST_INTERFACE",
+      "kind": "CONN4",
+      "ref": "J802",
+      "value": "RAIL TEST / LOGICAL",
+      "nets": {
+        "1": "3V3_MAIN",
+        "2": "5V_MAIN",
+        "3": "SYS_SW",
+        "4": "GND"
+      },
+      "mpn": "",
+      "dnp": false,
+      "note": ""
+    }
+  ]
+}

@@ -8,15 +8,15 @@ namespace
 {
 constexpr const char* PREF_NAMESPACE = "ft02sys";
 constexpr const char* PREF_KEY = "gnss_on";
-constexpr uint32_t QUERY_RETRY_MS = 2500u;
 constexpr uint32_t COMMAND_RETRY_MS = 3000u;
+constexpr uint32_t WAKE_GRACE_MS = 12000u;
 
 bool g_started = false;
 bool g_desiredEnabled = true;
 bool g_prevOnline = false;
 uint32_t g_lastSeenPowerRevision = 0;
-uint32_t g_lastQueryMs = 0;
 uint32_t g_lastCommandMs = 0;
+uint32_t g_lastEnableRequestMs = 0;
 
 void persistDesired()
 {
@@ -53,9 +53,8 @@ void FT02_GnssPowerControlBegin()
     g_started = true;
     g_prevOnline = false;
     g_lastSeenPowerRevision = 0;
-    g_lastQueryMs = 0;
     g_lastCommandMs = 0;
-
+    g_lastEnableRequestMs = 0;
 }
 
 void FT02_GnssPowerControlPoll()
@@ -75,14 +74,14 @@ void FT02_GnssPowerControlPoll()
     if(!g_prevOnline)
     {
         g_prevOnline = true;
-        g_lastQueryMs = 0;
         g_lastCommandMs = 0;
-        (void)FT02_LR01HostGnssPowerRequestStatus();
-        g_lastQueryMs = now;
+        if(g_desiredEnabled) g_lastEnableRequestMs = now;
 
-        // OFF must be actively restored after every LR01 reboot because the
-        // receiver itself powers up active. ON can wait for the status reply.
-        if(!g_desiredEnabled) (void)sendDesired();
+        // The deployed LR01 does not support the legacy GNSS status query.
+        // Reapply the desired state on reconnect and rely on any available
+        // GNSS_POWER_SET / SYSTEM / NAV telemetry from the current firmware.
+        (void)sendDesired();
+        return;
     }
 
     if(lr01.gnssPowerRevision != g_lastSeenPowerRevision)
@@ -98,11 +97,10 @@ void FT02_GnssPowerControlPoll()
 
     if(!lr01.gnssPowerKnown)
     {
-        if(g_lastQueryMs == 0u || static_cast<uint32_t>(now - g_lastQueryMs) >= QUERY_RETRY_MS)
-        {
-            (void)FT02_LR01HostGnssPowerRequestStatus();
-            g_lastQueryMs = now;
-        }
+        // Command-only compatibility fallback. Keep applying the idempotent
+        // desired state until LR01 acknowledges with GNSS_POWER_SET.
+        if(g_lastCommandMs == 0u || static_cast<uint32_t>(now - g_lastCommandMs) >= COMMAND_RETRY_MS)
+            (void)sendDesired();
         return;
     }
 
@@ -132,16 +130,23 @@ bool FT02_GnssPowerActualEnabled()
 bool FT02_GnssPowerSetEnabled(bool enabled)
 {
     if(!g_started) FT02_GnssPowerControlBegin();
-    if(g_desiredEnabled != enabled)
+    const bool changed = g_desiredEnabled != enabled;
+    if(changed)
     {
         g_desiredEnabled = enabled;
         persistDesired();
     }
 
+    // A stale GNSS snapshot is expected immediately after indoor -> outdoor.
+    // Track a bounded hardware wake interval so the status bar reports
+    // "唤醒中" instead of briefly claiming the receiver is offline.
+    if(enabled && (changed || !FT02_LR01HostState().gnssPowerStream))
+        g_lastEnableRequestMs = millis();
+    else if(!enabled)
+        g_lastEnableRequestMs = 0u;
+
     if(!FT02_LR01HostOnline()) return false;
-    const bool ok = sendDesired();
-    if(ok) (void)FT02_LR01HostGnssPowerRequestStatus();
-    return ok;
+    return sendDesired();
 }
 
 bool FT02_GnssPowerToggle()
@@ -149,10 +154,25 @@ bool FT02_GnssPowerToggle()
     return FT02_GnssPowerSetEnabled(!g_desiredEnabled);
 }
 
+bool FT02_GnssPowerWakeTransitionActive()
+{
+    if(!g_desiredEnabled || g_lastEnableRequestMs == 0u) return false;
+
+    const FT02LR01State& lr01 = FT02_LR01HostState();
+    if(lr01.gnssPowerKnown && lr01.gnssPowerEnabled && lr01.gnssPowerStream)
+    {
+        g_lastEnableRequestMs = 0u;
+        return false;
+    }
+
+    return static_cast<uint32_t>(millis() - g_lastEnableRequestMs) < WAKE_GRACE_MS;
+}
+
 const char* FT02_GnssPowerDisplayText()
 {
     if(!g_desiredEnabled) return "已关闭";
     if(!FT02_LR01HostOnline()) return "等待LR01";
+    if(FT02_GnssPowerWakeTransitionActive()) return "唤醒中";
     const FT02LR01State& lr01 = FT02_LR01HostState();
     if(lr01.gnssPowerKnown && !lr01.gnssPowerEnabled) return "唤醒中";
     return "已开启";

@@ -4,11 +4,11 @@
 #include <stdint.h>
 
 static const char* const FT02_PBF_SOURCE_PATH =
-    "/maps/raw/shanghai-260726.osm.pbf";
+    "/maps/raw/shanghai-260918.osm.pbf";
 static const char* const FT02_PBF_INDEX_PATH =
-    "/maps/raw/shanghai-260726.osm.pbi";
+    "/maps/raw/shanghai-260918.osm.pbi";
 static const char* const FT02_PBF_INDEX_TEMP_PATH =
-    "/maps/raw/shanghai-260726.osm.pbi.tmp";
+    "/maps/raw/shanghai-260918.osm.pbi.tmp";
 
 enum FT02PbfIndexState
 {

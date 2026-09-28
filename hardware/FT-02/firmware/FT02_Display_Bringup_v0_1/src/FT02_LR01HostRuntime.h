@@ -104,6 +104,11 @@ struct FT02LR01State
 void FT02_LR01HostBegin();
 void FT02_LR01HostPoll();
 
+// A1.5.6 sleep lifecycle helpers. Pause UART ingestion before light sleep and
+// resume cleanly after wake to avoid RX backlog across sleep cycles.
+void FT02_LR01HostSleepPause();
+void FT02_LR01HostSleepResume();
+
 const FT02LR01State& FT02_LR01HostState();
 bool FT02_LR01HostOnline();
 bool FT02_LR01HostRadioReady();
@@ -131,6 +136,5 @@ bool FT02_LR01HostCompassCalReset();
 const char* FT02_LR01HostCompassCalStateText(FT02CompassCalState state);
 
 // LR01 A4.3 GNSS software standby/wake control.
-bool FT02_LR01HostGnssPowerRequestStatus();
 bool FT02_LR01HostGnssSoftwareOn();
 bool FT02_LR01HostGnssSoftwareOff();

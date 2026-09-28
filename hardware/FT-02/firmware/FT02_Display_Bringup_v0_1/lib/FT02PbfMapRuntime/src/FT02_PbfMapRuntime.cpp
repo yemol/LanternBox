@@ -32,11 +32,17 @@ static const uint32_t FT02_PBF_CACHE_GEO_SEGMENT_CAPACITY = 90000U;
 static const uint32_t FT02_PBF_CACHE_GEO_LABEL_CAPACITY = 1024U;
 static const uint32_t FT02_PBF_CACHE_REGION_PIXELS_Z18 = 3072U;
 static const uint32_t FT02_PBF_CACHE_REGION_MARGIN_PIXELS_Z18 = 192U;
-static const uint32_t FT02_PBF_CACHE_VERSION = 6U;
-static const char* FT02_PBF_LEGACY_CACHE_PATH = "/maps/raw/shanghai-260726.osm.pbc5";
+static const uint32_t FT02_PBF_CACHE_VERSION = 7U;
+static const char* FT02_PBF_LEGACY_CACHE_PATH = "/maps/raw/shanghai-260918.osm.pbc5";
 static const char* FT02_MAP_REGION_MANIFEST_PATH = "/maps/regions/regions.tsv";
 static const uint8_t FT02_MAP_SOURCE_MAX_REGIONS = 8U;
 static const uint8_t FT02_MAP_SOURCE_DEFAULT_ZOOM = 11U;
+
+// A3.19 label kinds are stored in FT02PbfGeoLabelDisk::reserved[0].
+// This keeps the on-disk record size stable while allowing zoom policy to
+// distinguish residential/community names from ordinary POI/road labels.
+static const uint8_t FT02_PBF_LABEL_KIND_DEFAULT = 0U;
+static const uint8_t FT02_PBF_LABEL_KIND_RESIDENTIAL = 1U;
 
 struct FT02MapRegionSource
 {
@@ -835,7 +841,7 @@ static void FT02_SelectRegionalCacheSlot(double lon, double lat)
     snprintf(
         g_activeCachePath,
         sizeof(g_activeCachePath),
-        "/maps/raw/shanghai-260726.osm.pbc5.%lu.%lu",
+        "/maps/raw/shanghai-260918.osm.pbc5.%lu.%lu",
         (unsigned long)cellX,
         (unsigned long)cellY
     );
@@ -1367,6 +1373,34 @@ static int FT02_FindTagValueIndex(
     return -1;
 }
 
+static int FT02_PreferredNameIndex(
+    const FT02StringTable& table,
+    const uint32_t* keys,
+    const uint32_t* values,
+    size_t count
+)
+{
+    int index = FT02_FindTagValueIndex(table, keys, values, count, "name:zh-Hans");
+    if(index < 0) index = FT02_FindTagValueIndex(table, keys, values, count, "name:zh");
+    if(index < 0) index = FT02_FindTagValueIndex(table, keys, values, count, "name");
+    if(index < 0) index = FT02_FindTagValueIndex(table, keys, values, count, "name:en");
+    return index;
+}
+
+static bool FT02_IsResidentialLabelWay(
+    const FT02StringTable& table,
+    const uint32_t* keys,
+    const uint32_t* values,
+    size_t count
+)
+{
+    if(FT02_TagEquals(table, keys, values, count, "landuse", "residential")) return true;
+    if(FT02_TagEquals(table, keys, values, count, "place", "neighbourhood")) return true;
+    if(FT02_TagEquals(table, keys, values, count, "place", "quarter")) return true;
+    if(FT02_TagEquals(table, keys, values, count, "place", "suburb")) return true;
+    return false;
+}
+
 static uint8_t FT02_LabelPriorityForTags(
     const FT02StringTable& table,
     const uint32_t* keys,
@@ -1448,7 +1482,8 @@ static void FT02_AddGeoLabel(
     int32_t lonE7,
     uint8_t priority,
     const uint8_t* text,
-    size_t textBytes
+    size_t textBytes,
+    uint8_t kind = FT02_PBF_LABEL_KIND_DEFAULT
 )
 {
     if(priority == 0 || text == nullptr || textBytes == 0 || g_geoLabels == nullptr) return;
@@ -1471,6 +1506,7 @@ static void FT02_AddGeoLabel(
     label.priority = priority;
     label.textBytes = (uint8_t)safeBytes;
     memcpy(label.text, text, safeBytes);
+    label.reserved[0] = kind;
 }
 
 static void FT02_AddNamedPoiLabel(
@@ -1482,8 +1518,7 @@ static void FT02_AddNamedPoiLabel(
     int32_t lonE7
 )
 {
-    int nameIndex = FT02_FindTagValueIndex(strings, keys, values, tagCount, "name:zh");
-    if(nameIndex < 0) nameIndex = FT02_FindTagValueIndex(strings, keys, values, tagCount, "name");
+    int nameIndex = FT02_PreferredNameIndex(strings, keys, values, tagCount);
     if(nameIndex < 0 || (uint32_t)nameIndex >= strings.count) return;
     uint8_t priority = FT02_LabelPriorityForTags(strings, keys, values, tagCount, 0);
     if(priority == 0) return;
@@ -1641,10 +1676,11 @@ static bool FT02_ParseWay(
     if(!FT02_ReadPackedToArray(valueSlices, valueSliceCount, values, MAX_TAGS, valueCount)) return false;
     size_t tagCount = keyCount < valueCount ? keyCount : valueCount;
     uint8_t style = FT02_ClassifyWay(strings, keys, values, tagCount);
-    int nameIndex = FT02_FindTagValueIndex(strings, keys, values, tagCount, "name:zh");
-    if(nameIndex < 0) nameIndex = FT02_FindTagValueIndex(strings, keys, values, tagCount, "name");
-    uint8_t labelPriority = FT02_LabelPriorityForTags(strings, keys, values, tagCount, style);
-    if(style == 0) return true;
+    int nameIndex = FT02_PreferredNameIndex(strings, keys, values, tagCount);
+    const bool residentialLabelOnly =
+        style == 0 && nameIndex >= 0 && FT02_IsResidentialLabelWay(strings, keys, values, tagCount);
+    uint8_t labelPriority = residentialLabelOnly ? 2U : FT02_LabelPriorityForTags(strings, keys, values, tagCount, style);
+    if(style == 0 && !residentialLabelOnly) return true;
 
     FT02PackedIterator refs;
     FT02_PackedBegin(refs, refSlices, refSliceCount);
@@ -1655,6 +1691,8 @@ static bool FT02_ParseWay(
     int32_t firstLat = 0, firstLon = 0;
     int32_t previousLat = 0, previousLon = 0;
     bool accepted = false;
+    uint32_t resolvedCount = 0;
+    int64_t sumLat = 0, sumLon = 0;
     int64_t longestScore = -1;
     int32_t labelLat = 0, labelLon = 0;
     while(true)
@@ -1665,13 +1703,19 @@ static bool FT02_ParseWay(
         nodeId += FT02_ZigZag64(encoded);
         int32_t lat = 0, lon = 0;
         bool resolved = FT02_NodeFind(nodeId, lat, lon);
+        if(resolved)
+        {
+            resolvedCount++;
+            sumLat += lat;
+            sumLon += lon;
+        }
         if(resolved && !firstResolved)
         {
             firstResolved = true;
             firstLat = lat;
             firstLon = lon;
         }
-        if(resolved && previousResolved)
+        if(resolved && previousResolved && style != 0)
         {
             size_t before = g_buildingCache ? g_geoSegmentCount : g_segmentCount;
             FT02_AddSegment(previousLat, previousLon, lat, lon, style);
@@ -1694,6 +1738,23 @@ static bool FT02_ParseWay(
         previousResolved = resolved;
         if(resolved) { previousLat = lat; previousLon = lon; }
     }
+    if(residentialLabelOnly && g_buildingCache && resolvedCount > 0 &&
+       nameIndex >= 0 && (uint32_t)nameIndex < strings.count)
+    {
+        labelLat = (int32_t)(sumLat / (int64_t)resolvedCount);
+        labelLon = (int32_t)(sumLon / (int64_t)resolvedCount);
+        FT02_AddGeoLabel(
+            labelLat,
+            labelLon,
+            labelPriority,
+            strings.data[nameIndex],
+            strings.lengths[nameIndex],
+            FT02_PBF_LABEL_KIND_RESIDENTIAL
+        );
+        g_report.waysAccepted++;
+        return true;
+    }
+
     if(accepted)
     {
         const size_t waySegmentEnd = g_buildingCache ? g_geoSegmentCount : g_segmentCount;
@@ -2138,13 +2199,17 @@ static bool FT02_LoadCacheFromSd(const char* cachePath)
     return true;
 }
 
-static bool FT02_LabelVisibleAtZoom(uint8_t priority)
+static bool FT02_LabelVisibleAtZoom(const FT02PbfGeoLabelDisk& label)
 {
+    // Residential/community labels are useful as close-range orientation,
+    // but would overwhelm the monochrome display at overview zooms.
+    if(label.reserved[0] == FT02_PBF_LABEL_KIND_RESIDENTIAL) return g_zoom >= 18;
+
     // Z16 keeps only the highest-priority labels. Z17 is the intermediate
     // overview/street layer and admits the next priority tier before Z18.
-    if(priority >= 4) return g_zoom >= 16;
-    if(priority >= 3) return g_zoom >= 17;
-    if(priority == 2) return g_zoom >= 19;
+    if(label.priority >= 4) return g_zoom >= 16;
+    if(label.priority >= 3) return g_zoom >= 17;
+    if(label.priority == 2) return g_zoom >= 19;
     return g_zoom >= 20;
 }
 
@@ -2276,7 +2341,7 @@ static bool FT02_ProjectCache()
         for(size_t i = 0; i < g_geoLabelCount; i++)
         {
             const FT02PbfGeoLabelDisk& source = g_geoLabels[i];
-            if(source.priority != priority || !FT02_LabelVisibleAtZoom(source.priority)) continue;
+            if(source.priority != priority || !FT02_LabelVisibleAtZoom(source)) continue;
             int16_t x = FT02_ProjectX(source.lonE7);
             int16_t y = FT02_ProjectY(source.latE7);
             if(x < 18 || x > FT02_PBF_MAP_WIDTH - 18 || y < 12 || y > FT02_PBF_MAP_HEIGHT - 12) continue;

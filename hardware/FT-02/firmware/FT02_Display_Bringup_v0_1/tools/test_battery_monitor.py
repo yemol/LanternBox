@@ -10,16 +10,18 @@ main = (root / 'src/main.cpp').read_text(encoding='utf-8')
 build = (root / 'src/FT02_BuildInfo.h').read_text(encoding='utf-8')
 
 checks = {
-    'version': 'v2.75k67' in build,
+    'version': 'v2.75k91' in build,
     'i2c_addr_0x36': 'MAX17048_ADDR = 0x36' in mon,
     'shared_i2c_lock': 'FT02_I2CBusLock' in mon and 'FT02_I2CBusUnlock' in mon,
     'vcell_reg': 'REG_VCELL = 0x02' in mon,
     'soc_reg': 'REG_SOC = 0x04' in mon,
     'crate_reg': 'REG_CRATE = 0x16' in mon,
+    'identity_cached': 'g_identityValid' in mon and 'g_cachedVersion' in mon and 'g_cachedChipId' in mon,
+    'identity_recovery': 'IDENTITY_INVALIDATE_FAILURES = 3' in mon,
     'voltage_formula': '* 78.125f / 1000000.0f' in mon,
     'soc_formula': '/ 256.0f' in mon,
     'rate_formula': '* 0.208f' in mon,
-    'fast_transition_poll': 'SAMPLE_INTERVAL_MS = 1000UL' in mon,
+    'low_power_poll_10s': 'SAMPLE_INTERVAL_MS = 10000UL' in mon,
     'battery_power_text': '供电中' in mon,
     'charging_text': '充电中' in mon,
     'no_stable_status_text': '稳定' not in mon,

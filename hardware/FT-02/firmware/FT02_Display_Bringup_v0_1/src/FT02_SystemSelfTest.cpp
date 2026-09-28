@@ -21,9 +21,11 @@
 #include "FT02_InputManager.h"
 #include "FT02_LoRaNodeRuntime.h"
 #include "FT02_LR01HostRuntime.h"
+#include "FT02_ModeManager.h"
 #include "FT02_PbfIndex.h"
 #include "FT02_PinyinLearning.h"
 #include "FT02_StatusBar.h"
+#include "FT02_SleepDiagnostics.h"
 #include "FT02_Storage.h"
 
 namespace
@@ -42,22 +44,12 @@ struct FT02CommErrorBaseline
 FT02CommErrorBaseline g_commBaseline = {};
 
 static constexpr uint8_t FT02_EXPECTED_LR01_PROTOCOL = 2;
-static constexpr uint32_t FT02_COMM_RX_WARN_TOTAL = 10u;
-static constexpr uint32_t FT02_COMM_UART_WARN_TOTAL = 10u;
-static constexpr uint32_t FT02_COMM_RADIO_RESET_WARN_TOTAL = 3u;
-
 static constexpr uint8_t FT02_SELFTEST_PAGE_COUNT = 3;
 static constexpr uint8_t FT02_SELFTEST_ITEMS_PER_PAGE = 7;
 
 static const FT02BottomBarItem FT02_SELFTEST_BOTTOM_DEFAULT[3] = {
     {nullptr, "←/→ 翻页"},
     {nullptr, "ENTER 重新自检"},
-    {nullptr, "B 返回"}
-};
-
-static const FT02BottomBarItem FT02_SELFTEST_BOTTOM_GNSS[3] = {
-    {nullptr, "←/→ 翻页"},
-    {nullptr, "ENTER GNSS开/关"},
     {nullptr, "B 返回"}
 };
 
@@ -292,7 +284,10 @@ void runGnss()
 
     if(!userEnabled)
     {
-        addItem("GNSS", FT02_SELFTEST_NA, "用户已关闭·软件待机");
+        if(FT02_ModeAwakeMode() == FT02_MODE_INDOOR)
+            addItem("GNSS", FT02_SELFTEST_NA, "室内模式·GNSS关闭");
+        else
+            addItem("GNSS", FT02_SELFTEST_NA, "模式策略·GNSS关闭");
         addItem("GNSS定位", FT02_SELFTEST_NA, "GNSS关闭，未进行定位");
     }
     else if(FT02_GnssPowerActualKnown() && !FT02_GnssPowerActualEnabled())
@@ -564,10 +559,6 @@ void runCommunicationErrors()
         : 0u;
 
     const bool newErrors = deltaRx > 0u || deltaUart > 0u || deltaResets > 0u;
-    const bool totalsHigh =
-        lr01.rxErrors >= FT02_COMM_RX_WARN_TOTAL ||
-        lr01.uartErrors >= FT02_COMM_UART_WARN_TOTAL ||
-        lr01.radioResets >= FT02_COMM_RADIO_RESET_WARN_TOTAL;
 
     char text[96];
     FT02SelfTestState state = FT02_SELFTEST_PASS;
@@ -580,16 +571,12 @@ void runCommunicationErrors()
                  static_cast<unsigned long>(deltaResets));
         state = FT02_SELFTEST_WARN;
     }
-    else if(totalsHigh)
-    {
-        snprintf(text, sizeof(text), "累计偏高 RX%lu UART%lu 复位%lu",
-                 static_cast<unsigned long>(lr01.rxErrors),
-                 static_cast<unsigned long>(lr01.uartErrors),
-                 static_cast<unsigned long>(lr01.radioResets));
-        state = FT02_SELFTEST_WARN;
-    }
     else if(lr01.rxErrors > 0u || lr01.uartErrors > 0u || lr01.radioResets > 0u)
     {
+        // LR01 counters are lifetime counters for the current LR01 boot. A
+        // historical total must not keep Device Status permanently in WARN.
+        // Only counters that increased since the previous self-test are a
+        // current warning; stable totals remain visible as diagnostics.
         snprintf(text, sizeof(text), "当前正常·累计 RX%lu UART%lu 复位%lu",
                  static_cast<unsigned long>(lr01.rxErrors),
                  static_cast<unsigned long>(lr01.uartErrors),
@@ -628,12 +615,42 @@ const char* resetReasonText(esp_reset_reason_t reason)
 void runStartupState()
 {
     const esp_reset_reason_t reason = esp_reset_reason();
-    const char* detail = resetReasonText(reason);
+    const char* resetDetail = resetReasonText(reason);
+    const FT02SleepDiagnosticsSnapshot sleepDiag =
+        FT02_SleepDiagnosticsSnapshotCurrent();
+
+    char detail[96];
+    if(sleepDiag.reason == FT02_SLEEP_EXIT_KEYBOARD)
+    {
+        snprintf(
+            detail,
+            sizeof(detail),
+            "%s | 休眠键0x%02X #%lu",
+            resetDetail,
+            static_cast<unsigned>(sleepDiag.lastRaw),
+            static_cast<unsigned long>(sleepDiag.keyboardWakeCount)
+        );
+    }
+    else if(sleepDiag.reason == FT02_SLEEP_EXIT_RESET)
+    {
+        snprintf(
+            detail,
+            sizeof(detail),
+            "%s | 休眠中复位:%s",
+            resetDetail,
+            resetReasonText(static_cast<esp_reset_reason_t>(sleepDiag.lastResetReason))
+        );
+    }
+    else
+    {
+        snprintf(detail, sizeof(detail), "%s | 无休眠退出记录", resetDetail);
+    }
 
     FT02SelfTestState state = FT02_SELFTEST_PASS;
     if(reason == ESP_RST_PANIC || reason == ESP_RST_INT_WDT ||
        reason == ESP_RST_TASK_WDT || reason == ESP_RST_WDT ||
-       reason == ESP_RST_BROWNOUT)
+       reason == ESP_RST_BROWNOUT ||
+       sleepDiag.reason == FT02_SLEEP_EXIT_RESET)
         state = FT02_SELFTEST_WARN;
 
     addItem("启动状态", state, detail);
@@ -800,10 +817,7 @@ void FT02_DrawSystemSelfTestScreen(FT02Display& display)
             drawItem(display, report.items[i], 48, baselineY);
         }
 
-        const FT02BottomBarItem* bottom = g_pageIndex == 1u
-            ? FT02_SELFTEST_BOTTOM_GNSS
-            : FT02_SELFTEST_BOTTOM_DEFAULT;
-        FT02_DrawBottomBarWithFont(display, bottom, ft02_cjk_20r);
+        FT02_DrawBottomBarWithFont(display, FT02_SELFTEST_BOTTOM_DEFAULT, ft02_cjk_20r);
     }
     while(display.nextPage());
 

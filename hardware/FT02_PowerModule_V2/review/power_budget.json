@@ -1,0 +1,92 @@
+{
+  "status": "ARCHITECTURE_PROPOSAL_NOT_RELEASED",
+  "assumptions_not_guarantees": {
+    "aggregate_output_w": 8,
+    "rail_efficiency": 0.85,
+    "usb_mode_loaded_sys_floor_v": 3.4,
+    "loaded_pack_example_v": 3,
+    "path_resistance_ohm": 0.1,
+    "auxiliary_sys_w": 0.1,
+    "sw_current_reserve_fraction": 0.1
+  },
+  "individual_rail_sum_w": 14.1,
+  "simultaneous_full_rails_admitted": false,
+  "usb_nominal_input_w": 15,
+  "usb_low_voltage_input_w": 14.25,
+  "eight_w_example": {
+    "system_input_w": 9.511764705882353,
+    "system_current_a": 2.7975778546712804,
+    "battery_current_a": 3.6034060815883913,
+    "converter_input_v": 2.639659391841161,
+    "below_current_pack_5a_ceiling_in_model": true,
+    "fixed_charge_plus_system_a": 4.61747032778956,
+    "fixed_charge_plus_system_pass": false,
+    "with_3v3_2a_remaining_5v_a": 0.2800000000000001,
+    "with_5v_1p5a_remaining_3v3_a": 0.15151515151515152,
+    "charge_headroom": {
+      "source_can_sustain_system": true,
+      "system_fits_sw_budget": true,
+      "allowed_charge_a": 0.08242214532871994,
+      "input_power_margin_w": 0.7482352941176469,
+      "sw_current_margin_a": 0.08242214532871994,
+      "implemented_current_policy": false
+    }
+  },
+  "charge_setting_a": {
+    "min": 1.7007345895879908,
+    "typ": 1.8198924731182795,
+    "max": 1.941457586618877
+  },
+  "capacities": [
+    {
+      "capacity_mah": 5000,
+      "path_design_target_a": 5,
+      "future_pack_rating_inferred": false,
+      "bq25628_por_ideal_cc_hours": 15.625,
+      "bq25616_ideal_cc_hours_at_min_setting": 2.9399061032863854,
+      "bq25616_min_timer_remaining_hours": 5.060093896713615,
+      "real_full_charge_timer_pass": null
+    },
+    {
+      "capacity_mah": 10000,
+      "path_design_target_a": 5,
+      "future_pack_rating_inferred": false,
+      "bq25628_por_ideal_cc_hours": 31.25,
+      "bq25616_ideal_cc_hours_at_min_setting": 5.879812206572771,
+      "bq25616_min_timer_remaining_hours": 2.1201877934272293,
+      "real_full_charge_timer_pass": null
+    }
+  ],
+  "shunt": {
+    "ohm": 0.005,
+    "tolerance": 0.01,
+    "sense_at_5a_max_v": 0.02525,
+    "dissipation_at_5a_max_w": 0.12625,
+    "gauge_full_scale_v": 0.0512,
+    "current_lsb_a": 0.0003125,
+    "capacity_lsb_mah": 1,
+    "netlist_bypass_proven": false
+  },
+  "standby": {
+    "condition": "Battery only, physical OFF, no external IO backfeed",
+    "allocations_ua": {
+      "charger": 15,
+      "gauge_hibernate": 12,
+      "gate": 11,
+      "uv": 2,
+      "pack_pcm": 10,
+      "reverse_and_io": 5,
+      "controls": 2
+    },
+    "allocated_hibernate_ua": 57,
+    "allocated_active_ua": 75,
+    "qualified_maximum_ua": null,
+    "requirement_pass": null,
+    "annual_mah_at_50ua": 438.00000000000006,
+    "annual_mah_at_100ua": 876.0000000000001
+  },
+  "v2_schematic_implemented": false,
+  "v2_erc_errors": null,
+  "phase1_pass": false,
+  "pcb_authorized": false
+}

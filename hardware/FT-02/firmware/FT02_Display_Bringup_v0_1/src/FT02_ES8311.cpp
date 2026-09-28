@@ -253,6 +253,37 @@ bool FT02ES8311::begin(TwoWire& wire, bool digitalMic)
     return true;
 }
 
+bool FT02ES8311::suspend()
+{
+    if(wire_ == nullptr || address_ == 0) return true;
+
+    // Keep this sequence aligned with Espressif's current ES8311 suspend
+    // implementation. It powers down ADC/DAC analogue blocks and finally the
+    // clock tree. Verification is intentionally disabled because some powered
+    // down registers are no longer reliably readable during the transition.
+    bool ok = true;
+    ok = writeRegister(ES8311_DAC_REG32, 0x00, false) && ok;
+    ok = writeRegister(ES8311_ADC_REG17, 0x00, false) && ok;
+    ok = writeRegister(ES8311_SYSTEM_REG0E, 0xFF, false) && ok;
+    ok = writeRegister(ES8311_SYSTEM_REG12, 0x02, false) && ok;
+    ok = writeRegister(ES8311_SYSTEM_REG14, 0x00, false) && ok;
+    ok = writeRegister(ES8311_SYSTEM_REG0D, 0xFA, false) && ok;
+    ok = writeRegister(ES8311_ADC_REG15, 0x00, false) && ok;
+    ok = writeRegister(ES8311_CLK_MANAGER_REG02, 0x10, false) && ok;
+    ok = writeRegister(ES8311_RESET_REG00, 0x00, false) && ok;
+    ok = writeRegister(ES8311_RESET_REG00, 0x1F, false) && ok;
+    ok = writeRegister(ES8311_CLK_MANAGER_REG01, 0x30, false) && ok;
+    ok = writeRegister(ES8311_CLK_MANAGER_REG01, 0x00, false) && ok;
+    ok = writeRegister(ES8311_GP_REG45, 0x00, false) && ok;
+    ok = writeRegister(ES8311_SYSTEM_REG0D, 0xFC, false) && ok;
+    ok = writeRegister(ES8311_CLK_MANAGER_REG02, 0x00, false) && ok;
+
+    dacReg31_ = 0x60;
+    dacMuted_ = true;
+    dacPowered_ = false;
+    return ok;
+}
+
 bool FT02ES8311::prepareDacForPaShutdown()
 {
     if(wire_ == nullptr || address_ == 0) return false;

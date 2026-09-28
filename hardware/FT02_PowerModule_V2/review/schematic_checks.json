@@ -1,0 +1,3476 @@
+{
+  "static_connectivity": "PASS",
+  "errors": [],
+  "check_count": 865,
+  "checks": [
+    {
+      "name": "unique pin ('C602', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R801', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R803', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R603', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R802', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J802', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J801', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R604', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R806', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R601', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R804', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U601', '6')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R805', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('FB601', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C603', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('FB601', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C605', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C604', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J801', '5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C703', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C702', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C705', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R703', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J802', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U701', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C704', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R701', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J801', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R304', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'F1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('D102', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'A5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('D103', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'B5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'B5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C304', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R302', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R301', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'F2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'F3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R305', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R310', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R306', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'F5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J801', '12')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R806', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'C2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J801', '10')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R804', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'A2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C302', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C303', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'B2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C305', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R307', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R301', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'A5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('Q301', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R805', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J801', '11')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'C1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('L301', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'C3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C304', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'B3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'A3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R303', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'E4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C310', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'F4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R601', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R602', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U601', '4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U701', '4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C705', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R701', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R702', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U401', '8')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R803', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J801', '9')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C402', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U401', '7')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U501', '6')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C503', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U501', '7')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R506', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R502', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U601', '8')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C605', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R305', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U501', '11')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C501', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '22')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'B1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C309', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C601', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R504', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C503', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '10')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('D103', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C201', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U201', '4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R302', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('D102', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R309', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'A12')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('SW501', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C504', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'C5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U502', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C502', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C603', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'A4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '6')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'SH')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U501', '5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R204', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R602', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R206', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C103', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R207', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C310', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C202', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R702', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C102', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C303', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('D101', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C701', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C702', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R401', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J801', '6')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R703', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U201', '8')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U701', '6')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C305', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R303', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C302', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '12')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'A1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'B4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C602', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R401', '4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J802', '4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'C4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('Q302', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C301', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R604', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U701', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U601', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C604', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C307', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C306', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C308', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J801', '4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '13')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U401', '5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J102', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U601', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C101', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J801', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '25')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C704', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'B12')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C703', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R505', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'D5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U401', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J801', '7')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R801', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U401', '4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R802', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J801', '8')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'E5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R310', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C309', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('Q301', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R309', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('Q302', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R306', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('Q302', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R401', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R401', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U401', '11')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C402', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C401', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J401', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U401', '6')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U401', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'E3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U401', '10')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'E2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'E1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R304', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C308', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C401', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J401', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C103', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '21')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C102', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '23')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '14')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R308', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '20')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '9')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R102', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R307', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('Q301', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R308', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '7')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J102', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J102', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '8')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R202', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '16')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '18')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R101', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R603', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U601', '5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U601', '9')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('L601', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('L601', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U601', '7')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('L701', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U701', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U501', '4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R504', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('SW501', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U501', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C307', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U501', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'D3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'D2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('L301', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U502', '6')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C306', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'D1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C501', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C502', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R503', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U502', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U501', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R501', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C701', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R505', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C504', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R506', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U501', '8')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U701', '7')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U701', '5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C601', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U501', '10')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J802', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U501', '9')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U601', '10')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('L701', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U601', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C201', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U201', '7')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R204', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R203', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U201', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('Q201', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R203', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('Q201', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R202', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R201', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('D101', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('F101', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R205', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '24')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R201', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C101', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R101', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J102', '4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('Q201', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U201', '5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R207', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U201', '9')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R206', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U201', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R205', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C202', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('C301', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U201', '6')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R102', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'B1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'A1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'B4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('F101', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'A4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'B9')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'A9')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R503', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U502', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('SW501', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R502', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('R501', '2')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U502', '5')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'A6')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'A7')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'A8')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'B6')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'B7')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('J101', 'B8')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '19')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '11')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '17')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '15')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U101', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U201', '10')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U201', '3')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U301', 'D4')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U401', '1')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U401', '9')",
+      "pass": true
+    },
+    {
+      "name": "unique pin ('U502', '4')",
+      "pass": true
+    },
+    {
+      "name": "component inventory",
+      "pass": true
+    },
+    {
+      "name": "J101 value",
+      "pass": true
+    },
+    {
+      "name": "J101 population",
+      "pass": true
+    },
+    {
+      "name": "J101.A1 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.A12 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.B1 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.B12 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.A4 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.A9 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.B4 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.B9 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.A5 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.B5 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.A6 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.B6 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.A7 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.B7 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.A8 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.B8 connection",
+      "pass": true
+    },
+    {
+      "name": "J101.SH connection",
+      "pass": true
+    },
+    {
+      "name": "U101 value",
+      "pass": true
+    },
+    {
+      "name": "U101 population",
+      "pass": true
+    },
+    {
+      "name": "U101.24 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.22 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.1 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.2 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.4 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.5 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.6 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.12 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.13 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.10 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.25 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.18 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.23 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.21 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.16 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.20 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.14 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.9 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.7 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.8 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.19 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.11 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.15 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.17 connection",
+      "pass": true
+    },
+    {
+      "name": "U101.3 connection",
+      "pass": true
+    },
+    {
+      "name": "F101 value",
+      "pass": true
+    },
+    {
+      "name": "F101 population",
+      "pass": true
+    },
+    {
+      "name": "F101.1 connection",
+      "pass": true
+    },
+    {
+      "name": "F101.2 connection",
+      "pass": true
+    },
+    {
+      "name": "D101 value",
+      "pass": true
+    },
+    {
+      "name": "D101 population",
+      "pass": true
+    },
+    {
+      "name": "D101.1 connection",
+      "pass": true
+    },
+    {
+      "name": "D101.2 connection",
+      "pass": true
+    },
+    {
+      "name": "D102 value",
+      "pass": true
+    },
+    {
+      "name": "D102 population",
+      "pass": true
+    },
+    {
+      "name": "D102.1 connection",
+      "pass": true
+    },
+    {
+      "name": "D102.2 connection",
+      "pass": true
+    },
+    {
+      "name": "D103 value",
+      "pass": true
+    },
+    {
+      "name": "D103 population",
+      "pass": true
+    },
+    {
+      "name": "D103.1 connection",
+      "pass": true
+    },
+    {
+      "name": "D103.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C101 value",
+      "pass": true
+    },
+    {
+      "name": "C101 population",
+      "pass": true
+    },
+    {
+      "name": "C101.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C101.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C102 value",
+      "pass": true
+    },
+    {
+      "name": "C102 population",
+      "pass": true
+    },
+    {
+      "name": "C102.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C102.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C103 value",
+      "pass": true
+    },
+    {
+      "name": "C103 population",
+      "pass": true
+    },
+    {
+      "name": "C103.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C103.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R101 value",
+      "pass": true
+    },
+    {
+      "name": "R101 population",
+      "pass": true
+    },
+    {
+      "name": "R101.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R101.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R102 value",
+      "pass": true
+    },
+    {
+      "name": "R102 population",
+      "pass": true
+    },
+    {
+      "name": "R102.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R102.2 connection",
+      "pass": true
+    },
+    {
+      "name": "J102 value",
+      "pass": true
+    },
+    {
+      "name": "J102 population",
+      "pass": true
+    },
+    {
+      "name": "J102.1 connection",
+      "pass": true
+    },
+    {
+      "name": "J102.2 connection",
+      "pass": true
+    },
+    {
+      "name": "J102.3 connection",
+      "pass": true
+    },
+    {
+      "name": "J102.4 connection",
+      "pass": true
+    },
+    {
+      "name": "U201 value",
+      "pass": true
+    },
+    {
+      "name": "U201 population",
+      "pass": true
+    },
+    {
+      "name": "U201.5 connection",
+      "pass": true
+    },
+    {
+      "name": "U201.1 connection",
+      "pass": true
+    },
+    {
+      "name": "U201.2 connection",
+      "pass": true
+    },
+    {
+      "name": "U201.9 connection",
+      "pass": true
+    },
+    {
+      "name": "U201.8 connection",
+      "pass": true
+    },
+    {
+      "name": "U201.6 connection",
+      "pass": true
+    },
+    {
+      "name": "U201.3 connection",
+      "pass": true
+    },
+    {
+      "name": "U201.4 connection",
+      "pass": true
+    },
+    {
+      "name": "U201.7 connection",
+      "pass": true
+    },
+    {
+      "name": "U201.10 connection",
+      "pass": true
+    },
+    {
+      "name": "Q201 value",
+      "pass": true
+    },
+    {
+      "name": "Q201 population",
+      "pass": true
+    },
+    {
+      "name": "Q201.1 connection",
+      "pass": true
+    },
+    {
+      "name": "Q201.2 connection",
+      "pass": true
+    },
+    {
+      "name": "Q201.3 connection",
+      "pass": true
+    },
+    {
+      "name": "R201 value",
+      "pass": true
+    },
+    {
+      "name": "R201 population",
+      "pass": true
+    },
+    {
+      "name": "R201.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R201.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R202 value",
+      "pass": true
+    },
+    {
+      "name": "R202 population",
+      "pass": true
+    },
+    {
+      "name": "R202.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R202.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R203 value",
+      "pass": true
+    },
+    {
+      "name": "R203 population",
+      "pass": true
+    },
+    {
+      "name": "R203.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R203.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R204 value",
+      "pass": true
+    },
+    {
+      "name": "R204 population",
+      "pass": true
+    },
+    {
+      "name": "R204.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R204.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R205 value",
+      "pass": true
+    },
+    {
+      "name": "R205 population",
+      "pass": true
+    },
+    {
+      "name": "R205.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R205.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R206 value",
+      "pass": true
+    },
+    {
+      "name": "R206 population",
+      "pass": true
+    },
+    {
+      "name": "R206.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R206.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R207 value",
+      "pass": true
+    },
+    {
+      "name": "R207 population",
+      "pass": true
+    },
+    {
+      "name": "R207.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R207.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C201 value",
+      "pass": true
+    },
+    {
+      "name": "C201 population",
+      "pass": true
+    },
+    {
+      "name": "C201.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C201.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C202 value",
+      "pass": true
+    },
+    {
+      "name": "C202 population",
+      "pass": true
+    },
+    {
+      "name": "C202.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C202.2 connection",
+      "pass": true
+    },
+    {
+      "name": "U301 value",
+      "pass": true
+    },
+    {
+      "name": "U301 population",
+      "pass": true
+    },
+    {
+      "name": "U301.A1 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.B1 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.A2 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.B2 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.A5 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.F3 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.F2 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.F4 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.E4 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.C5 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.D4 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.A4 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.B4 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.C4 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.F1 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.A3 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.B3 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.C3 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.B5 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.D1 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.D2 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.D3 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.E1 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.E2 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.E3 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.C1 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.C2 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.F5 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.D5 connection",
+      "pass": true
+    },
+    {
+      "name": "U301.E5 connection",
+      "pass": true
+    },
+    {
+      "name": "Q301 value",
+      "pass": true
+    },
+    {
+      "name": "Q301 population",
+      "pass": true
+    },
+    {
+      "name": "Q301.1 connection",
+      "pass": true
+    },
+    {
+      "name": "Q301.2 connection",
+      "pass": true
+    },
+    {
+      "name": "Q301.3 connection",
+      "pass": true
+    },
+    {
+      "name": "Q302 value",
+      "pass": true
+    },
+    {
+      "name": "Q302 population",
+      "pass": true
+    },
+    {
+      "name": "Q302.1 connection",
+      "pass": true
+    },
+    {
+      "name": "Q302.2 connection",
+      "pass": true
+    },
+    {
+      "name": "Q302.3 connection",
+      "pass": true
+    },
+    {
+      "name": "C301 value",
+      "pass": true
+    },
+    {
+      "name": "C301 population",
+      "pass": true
+    },
+    {
+      "name": "C301.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C301.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C302 value",
+      "pass": true
+    },
+    {
+      "name": "C302 population",
+      "pass": true
+    },
+    {
+      "name": "C302.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C302.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C303 value",
+      "pass": true
+    },
+    {
+      "name": "C303 population",
+      "pass": true
+    },
+    {
+      "name": "C303.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C303.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C304 value",
+      "pass": true
+    },
+    {
+      "name": "C304 population",
+      "pass": true
+    },
+    {
+      "name": "C304.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C304.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C305 value",
+      "pass": true
+    },
+    {
+      "name": "C305 population",
+      "pass": true
+    },
+    {
+      "name": "C305.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C305.2 connection",
+      "pass": true
+    },
+    {
+      "name": "L301 value",
+      "pass": true
+    },
+    {
+      "name": "L301 population",
+      "pass": true
+    },
+    {
+      "name": "L301.1 connection",
+      "pass": true
+    },
+    {
+      "name": "L301.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C306 value",
+      "pass": true
+    },
+    {
+      "name": "C306 population",
+      "pass": true
+    },
+    {
+      "name": "C306.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C306.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C307 value",
+      "pass": true
+    },
+    {
+      "name": "C307 population",
+      "pass": true
+    },
+    {
+      "name": "C307.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C307.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C308 value",
+      "pass": true
+    },
+    {
+      "name": "C308 population",
+      "pass": true
+    },
+    {
+      "name": "C308.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C308.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R301 value",
+      "pass": true
+    },
+    {
+      "name": "R301 population",
+      "pass": true
+    },
+    {
+      "name": "R301.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R301.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R303 value",
+      "pass": true
+    },
+    {
+      "name": "R303 population",
+      "pass": true
+    },
+    {
+      "name": "R303.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R303.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R304 value",
+      "pass": true
+    },
+    {
+      "name": "R304 population",
+      "pass": true
+    },
+    {
+      "name": "R304.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R304.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R305 value",
+      "pass": true
+    },
+    {
+      "name": "R305 population",
+      "pass": true
+    },
+    {
+      "name": "R305.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R305.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R306 value",
+      "pass": true
+    },
+    {
+      "name": "R306 population",
+      "pass": true
+    },
+    {
+      "name": "R306.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R306.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R307 value",
+      "pass": true
+    },
+    {
+      "name": "R307 population",
+      "pass": true
+    },
+    {
+      "name": "R307.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R307.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R308 value",
+      "pass": true
+    },
+    {
+      "name": "R308 population",
+      "pass": true
+    },
+    {
+      "name": "R308.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R308.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R309 value",
+      "pass": true
+    },
+    {
+      "name": "R309 population",
+      "pass": true
+    },
+    {
+      "name": "R309.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R309.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R310 value",
+      "pass": true
+    },
+    {
+      "name": "R310 population",
+      "pass": true
+    },
+    {
+      "name": "R310.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R310.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C309 value",
+      "pass": true
+    },
+    {
+      "name": "C309 population",
+      "pass": true
+    },
+    {
+      "name": "C309.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C309.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C310 value",
+      "pass": true
+    },
+    {
+      "name": "C310 population",
+      "pass": true
+    },
+    {
+      "name": "C310.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C310.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R302 value",
+      "pass": true
+    },
+    {
+      "name": "R302 population",
+      "pass": true
+    },
+    {
+      "name": "R302.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R302.2 connection",
+      "pass": true
+    },
+    {
+      "name": "J401 value",
+      "pass": true
+    },
+    {
+      "name": "J401 population",
+      "pass": true
+    },
+    {
+      "name": "J401.1 connection",
+      "pass": true
+    },
+    {
+      "name": "J401.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R401 value",
+      "pass": true
+    },
+    {
+      "name": "R401 population",
+      "pass": true
+    },
+    {
+      "name": "R401.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R401.3 connection",
+      "pass": true
+    },
+    {
+      "name": "R401.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R401.4 connection",
+      "pass": true
+    },
+    {
+      "name": "U401 value",
+      "pass": true
+    },
+    {
+      "name": "U401 population",
+      "pass": true
+    },
+    {
+      "name": "U401.10 connection",
+      "pass": true
+    },
+    {
+      "name": "U401.6 connection",
+      "pass": true
+    },
+    {
+      "name": "U401.5 connection",
+      "pass": true
+    },
+    {
+      "name": "U401.2 connection",
+      "pass": true
+    },
+    {
+      "name": "U401.11 connection",
+      "pass": true
+    },
+    {
+      "name": "U401.7 connection",
+      "pass": true
+    },
+    {
+      "name": "U401.3 connection",
+      "pass": true
+    },
+    {
+      "name": "U401.4 connection",
+      "pass": true
+    },
+    {
+      "name": "U401.8 connection",
+      "pass": true
+    },
+    {
+      "name": "U401.9 connection",
+      "pass": true
+    },
+    {
+      "name": "U401.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C401 value",
+      "pass": true
+    },
+    {
+      "name": "C401 population",
+      "pass": true
+    },
+    {
+      "name": "C401.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C401.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C402 value",
+      "pass": true
+    },
+    {
+      "name": "C402 population",
+      "pass": true
+    },
+    {
+      "name": "C402.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C402.2 connection",
+      "pass": true
+    },
+    {
+      "name": "U501 value",
+      "pass": true
+    },
+    {
+      "name": "U501 population",
+      "pass": true
+    },
+    {
+      "name": "U501.1 connection",
+      "pass": true
+    },
+    {
+      "name": "U501.2 connection",
+      "pass": true
+    },
+    {
+      "name": "U501.3 connection",
+      "pass": true
+    },
+    {
+      "name": "U501.4 connection",
+      "pass": true
+    },
+    {
+      "name": "U501.5 connection",
+      "pass": true
+    },
+    {
+      "name": "U501.11 connection",
+      "pass": true
+    },
+    {
+      "name": "U501.9 connection",
+      "pass": true
+    },
+    {
+      "name": "U501.10 connection",
+      "pass": true
+    },
+    {
+      "name": "U501.8 connection",
+      "pass": true
+    },
+    {
+      "name": "U501.7 connection",
+      "pass": true
+    },
+    {
+      "name": "U501.6 connection",
+      "pass": true
+    },
+    {
+      "name": "U502 value",
+      "pass": true
+    },
+    {
+      "name": "U502 population",
+      "pass": true
+    },
+    {
+      "name": "U502.6 connection",
+      "pass": true
+    },
+    {
+      "name": "U502.5 connection",
+      "pass": true
+    },
+    {
+      "name": "U502.3 connection",
+      "pass": true
+    },
+    {
+      "name": "U502.1 connection",
+      "pass": true
+    },
+    {
+      "name": "U502.4 connection",
+      "pass": true
+    },
+    {
+      "name": "U502.2 connection",
+      "pass": true
+    },
+    {
+      "name": "SW501 value",
+      "pass": true
+    },
+    {
+      "name": "SW501 population",
+      "pass": true
+    },
+    {
+      "name": "SW501.1 connection",
+      "pass": true
+    },
+    {
+      "name": "SW501.2 connection",
+      "pass": true
+    },
+    {
+      "name": "SW501.3 connection",
+      "pass": true
+    },
+    {
+      "name": "R501 value",
+      "pass": true
+    },
+    {
+      "name": "R501 population",
+      "pass": true
+    },
+    {
+      "name": "R501.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R501.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R502 value",
+      "pass": true
+    },
+    {
+      "name": "R502 population",
+      "pass": true
+    },
+    {
+      "name": "R502.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R502.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R503 value",
+      "pass": true
+    },
+    {
+      "name": "R503 population",
+      "pass": true
+    },
+    {
+      "name": "R503.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R503.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R504 value",
+      "pass": true
+    },
+    {
+      "name": "R504 population",
+      "pass": true
+    },
+    {
+      "name": "R504.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R504.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C501 value",
+      "pass": true
+    },
+    {
+      "name": "C501 population",
+      "pass": true
+    },
+    {
+      "name": "C501.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C501.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C502 value",
+      "pass": true
+    },
+    {
+      "name": "C502 population",
+      "pass": true
+    },
+    {
+      "name": "C502.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C502.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C503 value",
+      "pass": true
+    },
+    {
+      "name": "C503 population",
+      "pass": true
+    },
+    {
+      "name": "C503.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C503.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C504 value",
+      "pass": true
+    },
+    {
+      "name": "C504 population",
+      "pass": true
+    },
+    {
+      "name": "C504.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C504.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R505 value",
+      "pass": true
+    },
+    {
+      "name": "R505 population",
+      "pass": true
+    },
+    {
+      "name": "R505.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R505.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R506 value",
+      "pass": true
+    },
+    {
+      "name": "R506 population",
+      "pass": true
+    },
+    {
+      "name": "R506.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R506.2 connection",
+      "pass": true
+    },
+    {
+      "name": "U601 value",
+      "pass": true
+    },
+    {
+      "name": "U601 population",
+      "pass": true
+    },
+    {
+      "name": "U601.10 connection",
+      "pass": true
+    },
+    {
+      "name": "U601.1 connection",
+      "pass": true
+    },
+    {
+      "name": "U601.2 connection",
+      "pass": true
+    },
+    {
+      "name": "U601.3 connection",
+      "pass": true
+    },
+    {
+      "name": "U601.8 connection",
+      "pass": true
+    },
+    {
+      "name": "U601.9 connection",
+      "pass": true
+    },
+    {
+      "name": "U601.7 connection",
+      "pass": true
+    },
+    {
+      "name": "U601.6 connection",
+      "pass": true
+    },
+    {
+      "name": "U601.4 connection",
+      "pass": true
+    },
+    {
+      "name": "U601.5 connection",
+      "pass": true
+    },
+    {
+      "name": "L601 value",
+      "pass": true
+    },
+    {
+      "name": "L601 population",
+      "pass": true
+    },
+    {
+      "name": "L601.1 connection",
+      "pass": true
+    },
+    {
+      "name": "L601.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C601 value",
+      "pass": true
+    },
+    {
+      "name": "C601 population",
+      "pass": true
+    },
+    {
+      "name": "C601.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C601.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C602 value",
+      "pass": true
+    },
+    {
+      "name": "C602 population",
+      "pass": true
+    },
+    {
+      "name": "C602.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C602.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C603 value",
+      "pass": true
+    },
+    {
+      "name": "C603 population",
+      "pass": true
+    },
+    {
+      "name": "C603.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C603.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R601 value",
+      "pass": true
+    },
+    {
+      "name": "R601 population",
+      "pass": true
+    },
+    {
+      "name": "R601.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R601.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R602 value",
+      "pass": true
+    },
+    {
+      "name": "R602 population",
+      "pass": true
+    },
+    {
+      "name": "R602.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R602.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R603 value",
+      "pass": true
+    },
+    {
+      "name": "R603 population",
+      "pass": true
+    },
+    {
+      "name": "R603.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R603.2 connection",
+      "pass": true
+    },
+    {
+      "name": "FB601 value",
+      "pass": true
+    },
+    {
+      "name": "FB601 population",
+      "pass": true
+    },
+    {
+      "name": "FB601.1 connection",
+      "pass": true
+    },
+    {
+      "name": "FB601.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C604 value",
+      "pass": true
+    },
+    {
+      "name": "C604 population",
+      "pass": true
+    },
+    {
+      "name": "C604.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C604.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C605 value",
+      "pass": true
+    },
+    {
+      "name": "C605 population",
+      "pass": true
+    },
+    {
+      "name": "C605.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C605.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R604 value",
+      "pass": true
+    },
+    {
+      "name": "R604 population",
+      "pass": true
+    },
+    {
+      "name": "R604.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R604.2 connection",
+      "pass": true
+    },
+    {
+      "name": "U701 value",
+      "pass": true
+    },
+    {
+      "name": "U701 population",
+      "pass": true
+    },
+    {
+      "name": "U701.7 connection",
+      "pass": true
+    },
+    {
+      "name": "U701.5 connection",
+      "pass": true
+    },
+    {
+      "name": "U701.6 connection",
+      "pass": true
+    },
+    {
+      "name": "U701.1 connection",
+      "pass": true
+    },
+    {
+      "name": "U701.2 connection",
+      "pass": true
+    },
+    {
+      "name": "U701.3 connection",
+      "pass": true
+    },
+    {
+      "name": "U701.4 connection",
+      "pass": true
+    },
+    {
+      "name": "L701 value",
+      "pass": true
+    },
+    {
+      "name": "L701 population",
+      "pass": true
+    },
+    {
+      "name": "L701.1 connection",
+      "pass": true
+    },
+    {
+      "name": "L701.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C701 value",
+      "pass": true
+    },
+    {
+      "name": "C701 population",
+      "pass": true
+    },
+    {
+      "name": "C701.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C701.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C702 value",
+      "pass": true
+    },
+    {
+      "name": "C702 population",
+      "pass": true
+    },
+    {
+      "name": "C702.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C702.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C703 value",
+      "pass": true
+    },
+    {
+      "name": "C703 population",
+      "pass": true
+    },
+    {
+      "name": "C703.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C703.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C704 value",
+      "pass": true
+    },
+    {
+      "name": "C704 population",
+      "pass": true
+    },
+    {
+      "name": "C704.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C704.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R701 value",
+      "pass": true
+    },
+    {
+      "name": "R701 population",
+      "pass": true
+    },
+    {
+      "name": "R701.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R701.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R702 value",
+      "pass": true
+    },
+    {
+      "name": "R702 population",
+      "pass": true
+    },
+    {
+      "name": "R702.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R702.2 connection",
+      "pass": true
+    },
+    {
+      "name": "C705 value",
+      "pass": true
+    },
+    {
+      "name": "C705 population",
+      "pass": true
+    },
+    {
+      "name": "C705.1 connection",
+      "pass": true
+    },
+    {
+      "name": "C705.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R703 value",
+      "pass": true
+    },
+    {
+      "name": "R703 population",
+      "pass": true
+    },
+    {
+      "name": "R703.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R703.2 connection",
+      "pass": true
+    },
+    {
+      "name": "J801 value",
+      "pass": true
+    },
+    {
+      "name": "J801 population",
+      "pass": true
+    },
+    {
+      "name": "J801.1 connection",
+      "pass": true
+    },
+    {
+      "name": "J801.2 connection",
+      "pass": true
+    },
+    {
+      "name": "J801.3 connection",
+      "pass": true
+    },
+    {
+      "name": "J801.4 connection",
+      "pass": true
+    },
+    {
+      "name": "J801.5 connection",
+      "pass": true
+    },
+    {
+      "name": "J801.6 connection",
+      "pass": true
+    },
+    {
+      "name": "J801.7 connection",
+      "pass": true
+    },
+    {
+      "name": "J801.8 connection",
+      "pass": true
+    },
+    {
+      "name": "J801.9 connection",
+      "pass": true
+    },
+    {
+      "name": "J801.10 connection",
+      "pass": true
+    },
+    {
+      "name": "J801.11 connection",
+      "pass": true
+    },
+    {
+      "name": "J801.12 connection",
+      "pass": true
+    },
+    {
+      "name": "R801 value",
+      "pass": true
+    },
+    {
+      "name": "R801 population",
+      "pass": true
+    },
+    {
+      "name": "R801.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R801.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R802 value",
+      "pass": true
+    },
+    {
+      "name": "R802 population",
+      "pass": true
+    },
+    {
+      "name": "R802.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R802.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R803 value",
+      "pass": true
+    },
+    {
+      "name": "R803 population",
+      "pass": true
+    },
+    {
+      "name": "R803.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R803.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R804 value",
+      "pass": true
+    },
+    {
+      "name": "R804 population",
+      "pass": true
+    },
+    {
+      "name": "R804.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R804.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R805 value",
+      "pass": true
+    },
+    {
+      "name": "R805 population",
+      "pass": true
+    },
+    {
+      "name": "R805.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R805.2 connection",
+      "pass": true
+    },
+    {
+      "name": "R806 value",
+      "pass": true
+    },
+    {
+      "name": "R806 population",
+      "pass": true
+    },
+    {
+      "name": "R806.1 connection",
+      "pass": true
+    },
+    {
+      "name": "R806.2 connection",
+      "pass": true
+    },
+    {
+      "name": "J802 value",
+      "pass": true
+    },
+    {
+      "name": "J802 population",
+      "pass": true
+    },
+    {
+      "name": "J802.1 connection",
+      "pass": true
+    },
+    {
+      "name": "J802.2 connection",
+      "pass": true
+    },
+    {
+      "name": "J802.3 connection",
+      "pass": true
+    },
+    {
+      "name": "J802.4 connection",
+      "pass": true
+    },
+    {
+      "name": "root plus eight populated pages",
+      "pass": true
+    },
+    {
+      "name": "invariant J101.A4",
+      "pass": true
+    },
+    {
+      "name": "invariant F101.1",
+      "pass": true
+    },
+    {
+      "name": "invariant F101.2",
+      "pass": true
+    },
+    {
+      "name": "invariant U201.5",
+      "pass": true
+    },
+    {
+      "name": "invariant U201.6",
+      "pass": true
+    },
+    {
+      "name": "invariant U301.A1",
+      "pass": true
+    },
+    {
+      "name": "invariant U301.D1",
+      "pass": true
+    },
+    {
+      "name": "invariant U301.E1",
+      "pass": true
+    },
+    {
+      "name": "invariant U501.1",
+      "pass": true
+    },
+    {
+      "name": "invariant U501.9",
+      "pass": true
+    },
+    {
+      "name": "invariant U601.10",
+      "pass": true
+    },
+    {
+      "name": "invariant U701.7",
+      "pass": true
+    },
+    {
+      "name": "invariant SW501.1",
+      "pass": true
+    },
+    {
+      "name": "invariant SW501.3",
+      "pass": true
+    },
+    {
+      "name": "invariant U501.4",
+      "pass": true
+    },
+    {
+      "name": "invariant U401.6",
+      "pass": true
+    },
+    {
+      "name": "invariant U401.5",
+      "pass": true
+    },
+    {
+      "name": "invariant U101.20",
+      "pass": true
+    },
+    {
+      "name": "invariant U101.14",
+      "pass": true
+    },
+    {
+      "name": "invariant U101.16",
+      "pass": true
+    },
+    {
+      "name": "invariant R308.2",
+      "pass": true
+    },
+    {
+      "name": "invariant R303.1",
+      "pass": true
+    },
+    {
+      "name": "invariant R303.2",
+      "pass": true
+    },
+    {
+      "name": "PACK_NEG exact whitelist: no extra bypass",
+      "pass": true
+    },
+    {
+      "name": "only shunt and gauge reference span return domains",
+      "pass": true
+    },
+    {
+      "name": "shunt force and sense mapping",
+      "pass": true
+    },
+    {
+      "name": "J801 no always-on power",
+      "pass": true
+    },
+    {
+      "name": "J802 no always-on power",
+      "pass": true
+    },
+    {
+      "name": "host pullups switched",
+      "pass": true
+    },
+    {
+      "name": "private PD bus isolation",
+      "pass": true
+    },
+    {
+      "name": "9V only high power profile",
+      "pass": true
+    },
+    {
+      "name": "no legacy source mux or EXT net",
+      "pass": true
+    },
+    {
+      "name": "ERC zero errors and warnings",
+      "pass": true
+    },
+    {
+      "name": "ERC includes errors and warnings",
+      "pass": true
+    },
+    {
+      "name": "five external-source flags only",
+      "pass": true
+    }
+  ],
+  "sheets": 9,
+  "components": 95,
+  "erc_errors": 0,
+  "erc_warnings": 0,
+  "phase1_release": "FAIL_OPEN_GATES",
+  "pcb_authorized": false,
+  "scope": "Logical connectivity only. No transient, firmware, footprint, thermal or hardware certification.",
+  "gauge_self_supply": "MAX17055 BATT-to-CSP bias and local decoupling bypass shunt intentionally; pack PCM internal current unknown.",
+  "netlist_sha256": "9c75ef51312f43d4b1475b7eba5f40cdf49cf6041aeadfec7d9781444be9141b"
+}
