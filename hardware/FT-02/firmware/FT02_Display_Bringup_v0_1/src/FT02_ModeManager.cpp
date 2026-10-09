@@ -3,6 +3,7 @@
 #include <Preferences.h>
 
 #include "FT02_GnssPowerControl.h"
+#include "FT02_Log.h"
 #include "FT02_SystemSettings.h"
 
 namespace
@@ -64,6 +65,7 @@ void FT02_ModeManagerBegin()
     g_currentMode = selected;
     persistAwakeMode();
     applyGnssPolicy();
+    FT02_LOGI("[MODE] %s\n", selected == FT02_MODE_INDOOR ? "indoor" : "outdoor");
 }
 
 FT02SystemMode FT02_ModeCurrent()
@@ -84,6 +86,7 @@ bool FT02_ModeSetAwake(FT02SystemMode mode)
     g_currentMode = mode;
     persistAwakeMode();
     applyGnssPolicy();
+    if(changed) FT02_LOGI("[MODE] %s\n", mode == FT02_MODE_INDOOR ? "indoor" : "outdoor");
     return changed;
 }
 

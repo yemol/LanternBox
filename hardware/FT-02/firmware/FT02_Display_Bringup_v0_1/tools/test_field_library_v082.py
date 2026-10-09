@@ -12,8 +12,8 @@ def fail(msg):
 build=(ROOT/"src/FT02_BuildInfo.h").read_text(encoding="utf-8")
 cpp=(ROOT/"src/FT02_FieldLibrary.cpp").read_text(encoding="utf-8")
 version=(ROOT/"VERSION.txt").read_text(encoding="utf-8").strip()
-if not version == "v2.75k91": fail(f"unexpected firmware version: {version}")
-if '"v2.75k91"' not in build: fail("BuildInfo/version mismatch")
+if not version == "v2.84-sleep-power-a5c-stable-r1.1": fail(f"unexpected firmware version: {version}")
+if '"v2.84-sleep-power-a5c-stable-r1.1"' not in build: fail("BuildInfo/version mismatch")
 if 'FT02_LibraryRedrawSelectionRows' not in cpp: fail("row-level partial selection refresh missing")
 if 'FT02_LibraryRedrawFull(display, "field-library-full")' in cpp: fail("legacy full redraw route still present")
 if cpp.count("setPartialWindow") < 2: fail("partial redraw paths missing")
@@ -67,4 +67,4 @@ for i in range(count):
     if off+length > len(md): fail(f"media entry range {i}")
     if (zlib.crc32(md[off:off+length]) & 0xffffffff) != crc: fail(f"media CRC {i}")
 
-print(f"PASS firmware=v2.75k91 catalog=4 ELE_toc={len(toc)} ELE_media={len(media)} FieldManual_manifest_crc=OK media_crc={count}/{count}")
+print(f"PASS firmware=v2.84-sleep-power-a5c-stable-r1.1 catalog=4 ELE_toc={len(toc)} ELE_media={len(media)} FieldManual_manifest_crc=OK media_crc={count}/{count}")

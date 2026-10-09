@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include "FT02_I2CBus.h"
+#include "FT02_Log.h"
 
 namespace
 {
@@ -26,6 +27,8 @@ bool g_identityValid = false;
 uint16_t g_cachedVersion = 0;
 uint8_t g_cachedChipId = 0;
 bool g_sleepPaused = false;
+FT02BatteryBand g_lastLoggedBand = FT02_BATTERY_UNKNOWN;
+bool g_failureReported = false;
 
 bool readWordLocked(uint8_t reg, uint16_t& value)
 {
@@ -109,6 +112,12 @@ bool publishMeasurement()
         g_snapshot.valid = false;
         g_snapshot.consecutiveFailures =
             g_snapshot.consecutiveFailures < 255 ? static_cast<uint8_t>(g_snapshot.consecutiveFailures + 1U) : 255U;
+        if(g_snapshot.consecutiveFailures >= IDENTITY_INVALIDATE_FAILURES && !g_failureReported)
+        {
+            FT02_LOGW("[WARN][BAT] monitor identity failure count=%u\n",
+                      static_cast<unsigned>(g_snapshot.consecutiveFailures));
+            g_failureReported = true;
+        }
         g_snapshot.generation++;
         return false;
     }
@@ -126,6 +135,12 @@ bool publishMeasurement()
         if(g_snapshot.consecutiveFailures >= IDENTITY_INVALIDATE_FAILURES)
         {
             g_identityValid = false;
+            if(!g_failureReported)
+            {
+                FT02_LOGW("[WARN][BAT] monitor read failure count=%u\n",
+                          static_cast<unsigned>(g_snapshot.consecutiveFailures));
+                g_failureReported = true;
+            }
         }
 
         g_snapshot.generation++;
@@ -147,7 +162,25 @@ bool publishMeasurement()
     g_snapshot.chipId = g_cachedChipId;
     g_snapshot.hibernating = (rawMode & 0x1000u) != 0u; // MODE.HibStat is bit 12 (MSB bit 4).
     g_snapshot.consecutiveFailures = 0;
+    g_failureReported = false;
     g_snapshot.generation++;
+
+    if(g_snapshot.valid)
+    {
+        FT02BatteryBand band = FT02_BATTERY_NORMAL;
+        if(g_snapshot.percent <= static_cast<float>(FT02_BATTERY_CRITICAL_PERCENT)) band = FT02_BATTERY_CRITICAL;
+        else if(g_snapshot.percent <= static_cast<float>(FT02_BATTERY_LOW_PERCENT)) band = FT02_BATTERY_LOW;
+        if(band != g_lastLoggedBand)
+        {
+            if(band == FT02_BATTERY_CRITICAL)
+                FT02_LOGW("[WARN][BAT] critical %.1f%% %.3fV\n", static_cast<double>(g_snapshot.percent), static_cast<double>(g_snapshot.voltage));
+            else if(band == FT02_BATTERY_LOW)
+                FT02_LOGW("[WARN][BAT] low %.1f%% %.3fV\n", static_cast<double>(g_snapshot.percent), static_cast<double>(g_snapshot.voltage));
+            else
+                FT02_LOGD("[BAT] normal %.1f%% %.3fV\n", static_cast<double>(g_snapshot.percent), static_cast<double>(g_snapshot.voltage));
+            g_lastLoggedBand = band;
+        }
+    }
 
     return g_snapshot.valid;
 }
@@ -161,6 +194,8 @@ void FT02_BatteryMonitorBegin()
     g_cachedVersion = 0;
     g_cachedChipId = 0;
     g_sleepPaused = false;
+    g_lastLoggedBand = FT02_BATTERY_UNKNOWN;
+    g_failureReported = false;
     FT02_BatteryMonitorRefreshNow();
 }
 

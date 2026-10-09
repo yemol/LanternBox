@@ -1,0 +1,10 @@
+{
+  "name": "FT02Log",
+  "version": "1.0.0",
+  "description": "Header-only shared logging policy for FT-02 main firmware and local libraries",
+  "frameworks": "arduino",
+  "platforms": "espressif32",
+  "build": {
+    "includeDir": "src"
+  }
+}

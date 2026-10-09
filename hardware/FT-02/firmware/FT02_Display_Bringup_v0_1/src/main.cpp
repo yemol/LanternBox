@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "FT02_Log.h"
 #include <SPI.h>
 #include <GxEPD2_BW.h>
 
@@ -31,10 +32,12 @@
 #include "FT02_Storage.h"
 #include "FT02_MapSearch.h"
 #include "FT02_LoRaNodeRuntime.h"
-#include "FT02_LR01HostRuntime.h"
+#include "FT02_LoRaHwProbe.h"
+#include "FT02_MeshService.h"
 #include "FT02_LoRaCommunicationRuntime.h"
 #include "FT02_CommunicationNodeUI.h"
 #include "FT02_CompassCalibrationUI.h"
+#include "FT02_CompassCore.h"
 #include "FT02_CompassUI.h"
 #include "FT02_GnssPowerControl.h"
 #include "FT02_SystemSelfTest.h"
@@ -49,7 +52,12 @@
 #include "wifi/FT02_WifiManager.h"
 #include <esp32-hal-cpu.h>
 #include <esp_sleep.h>
+#include <driver/gpio.h>
 
+// A1.5.3 isolation test: disable application services during sleep to isolate reset source.
+#define FT02_SLEEP_ISOLATION_TEST 0
+#include <esp_system.h>
+#include <esp_rom_sys.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
@@ -67,10 +75,6 @@ constexpr int EPD_DC   = 9;
 constexpr int EPD_CS   = 10;
 constexpr int EPD_MOSI = 11;
 constexpr int EPD_SCK  = 12;
-constexpr uint32_t EPD_SPI_HZ = 4000000UL;
-
-SPIClass g_ft02EpdSpi(HSPI);
-
 constexpr int CARDKB_SDA = 47;
 constexpr int CARDKB_SCL = 21;
 constexpr uint8_t CARDKB_ADDR = 0x5F;
@@ -100,7 +104,6 @@ static int g_ft02HomeSelectedCard = 0;
 static FT02PageState g_ft02PageState = FT02_PAGE_HOME;
 static FT02PageState g_ft02PageBeforeHelp = FT02_PAGE_HOME;
 static FT02PageState g_ft02SleepReturnPage = FT02_PAGE_HOME;
-static bool g_ft02SleepWakeArmed = false;
 static bool g_ft02WakeReleaseRequired = false;
 static uint32_t g_ft02PreSleepCpuMhz = 240u;
 static bool g_ft02HomePPressActive = false;
@@ -108,29 +111,56 @@ static bool g_ft02HomePLongTriggered = false;
 static uint32_t g_ft02HomePPressStartMs = 0;
 static uint32_t g_ft02HomePLastEventMs = 0;
 static uint8_t g_ft02HomePEventCount = 0;
-static uint32_t g_ft02SleepLastKeyEventMs = 0;
 static uint32_t g_ft02WakeLastConsumedKeyMs = 0;
 static uint32_t g_ft02SleepEnteredMs = 0;
 static uint32_t g_ft02SleepSliceCount = 0;
+static FT02BatterySnapshot g_ft02PreSleepBattery = {};
+static bool g_ft02PreSleepBatteryValid = false;
 
-static uint8_t g_ft02SleepQuietPollCount = 0;
+// A1.5 crash-safe Sleep Exit RCA. RTC_NOINIT_ATTR survives watchdog/software
+// resets and lets the next boot report the last exact checkpoint without
+// touching USB while the S3 is in the light-sleep maintenance loop.
+struct FT02SleepNoInitTrace
+{
+    uint32_t magic;
+    uint32_t version;
+    uint32_t phase;
+    uint32_t sessionActive;
+    uint32_t exitReason;      // 0=none, 1=keyboard accepted, 2=unexpected mode loss
+    uint32_t sleepCount;
+    uint32_t wakeCount;
+    int32_t lastSleepErr;
+    int32_t lastWakeCause;
+    uint32_t wakeArmed;
+    uint32_t inputEventCount;
+    uint32_t invalidInputCount;
+    uint32_t lastInputRaw;
+    uint32_t lastInputKey;
+    uint32_t lastInputCommand;
+    uint32_t acceptedRaw;
+    uint32_t acceptedKey;
+    uint32_t acceptedCommand;
+    uint32_t acceptedSlice;
+    uint32_t wakeCompleted;
+};
+
+constexpr uint32_t FT02_SLEEP_NOINIT_MAGIC = 0x46543253u; // "FT2S"
+constexpr uint32_t FT02_SLEEP_NOINIT_VERSION = 0x00010500u;
+RTC_NOINIT_ATTR FT02SleepNoInitTrace g_ft02SleepNoInitTrace;
 constexpr uint32_t FT02_HOME_P_LONG_PRESS_MS = 900u;
 constexpr uint32_t FT02_HOME_P_SHORT_SETTLE_MS = 320u;
 constexpr uint8_t FT02_HOME_P_LONG_MIN_EVENTS = 3u;
-constexpr uint32_t FT02_SLEEP_WAKE_QUIET_MS = 550u;
-constexpr uint8_t FT02_SLEEP_WAKE_ARM_EMPTY_POLLS = 2u;
 constexpr uint32_t FT02_WAKE_CONSUME_QUIET_MS = 450u;
-constexpr uint32_t FT02_SLEEP_LIGHT_SLICE_MS = 1000u;
+constexpr uint32_t FT02_KEYBOARD_WAKE_SCL_RELEASE_TIMEOUT_MS = 500u;
 static char g_ft02LastBatteryStatusLine1[16] = "";
 static char g_ft02LastBatteryStatusLine2[16] = "";
-
 static bool g_ft02CommunicationReadyPresented = false;
 static bool g_ft02LastLoRaLinkState = false;
 static bool g_ft02LastLoRaReadyState = false;
 static uint32_t g_ft02LastCommunicationRevision = 0;
 static uint32_t g_ft02LastCompassCalRevision = 0;
 static uint32_t g_ft02LastCompassCalRedrawMs = 0;
-static uint32_t g_ft02LastLR01NodeListMs = 0;
+static uint32_t g_ft02LastLoRaNodeRevision = 0;
 static uint16_t g_ft02LastLoRaUnread = 0;
 static uint32_t g_ft02RecorderLastUiGeneration = 0;
 static uint32_t g_ft02RecorderLastGnssGeneration = 0;
@@ -159,6 +189,7 @@ static double g_ft02MapLastFollowLat = 0.0;
 static double g_ft02MapLastFollowLon = 0.0;
 static bool g_ft02MapLastHeadingValid = false;
 static float g_ft02MapLastHeadingDeg = 0.0f;
+static uint8_t g_ft02MapLastHeadingSource = 0; // 0 none, 1 Core compass, 2 GNSS course
 static uint32_t g_ft02MapLastFollowRefreshMs = 0;
 static uint32_t g_ft02MapLastFollowCheckMs = 0;
 static uint8_t g_ft02MapPartialNavRefreshCount = 0;
@@ -210,11 +241,11 @@ static bool FT02_HandleSystemSettingsInput(const FT02InputEvent& event);
 static void FT02_EnterSleepMode(bool automatic);
 static void FT02_WakeFromSleep();
 static bool FT02_ServiceSleepMode();
-static bool FT02_AutoSleepBlocked();
+static bool FT02_SleepBlocked(bool automatic, const char** reason = nullptr);
 static void FT02_EpdSignalsEnterHighImpedance();
 static void FT02_EpdSignalsRestoreForWake();
-static void FT02_SleepIdleSlice();
-static bool FT02_IsPlausibleSleepWakeRaw(char raw);
+static bool FT02_SleepWaitForKeyboardSignal();
+static void FT02_DisarmKeyboardSclWake();
 static bool FT02_ServiceHomeModeShortcut(const FT02InputEvent& event);
 
 static int FT02_MonthFromBuildString(const char* mon)
@@ -484,9 +515,9 @@ static void FT02_SyncGnssStatusBar(bool allowPartialRefresh)
             line2 = "搜索中";
         }
     }
-    else if(snapshot.startAgeMs >= 3000)
+    else if(snapshot.startAgeMs >= 60000)
     {
-        line2 = FT02_LR01HostOnline() ? "GNSS离线" : "LR01离线";
+        line2 = "GNSS离线";
     }
 
     const bool changed =
@@ -570,14 +601,8 @@ static void FT02_ReinitializeEpdFullMode()
     digitalWrite(EPD_CS, HIGH);
     delay(30);
 
-    display.init(
-        115200,
-        true,
-        10,
-        false,
-        g_ft02EpdSpi,
-        SPISettings(EPD_SPI_HZ, MSBFIRST, SPI_MODE0)
-    );
+    display.epd2.enableWrite(EPD_SCK, EPD_MOSI);
+    display.init(FT02_EPD_SERIAL_DIAG_BAUD, true, 10, false);
     display.setRotation(2);
 
 }
@@ -822,6 +847,29 @@ static double FT02_MapDistanceMeters(
     return earthRadiusMeters * c;
 }
 
+static bool FT02_MapNavigationHeading(float& headingDeg, uint8_t& source)
+{
+    const FT02CoreCompassSnapshot compass = FT02_CompassCoreSnapshotCurrent();
+    if(compass.ready && compass.valid)
+    {
+        headingDeg = static_cast<float>(compass.headingX10) / 10.0f;
+        source = 1;
+        return true;
+    }
+
+    const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+    if(gnss.fixValid && gnss.courseValid)
+    {
+        headingDeg = gnss.courseDegrees;
+        source = 2;
+        return true;
+    }
+
+    headingDeg = 0.0f;
+    source = 0;
+    return false;
+}
+
 static bool FT02_MapCenterOnCurrentGnss()
 {
     const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
@@ -832,8 +880,11 @@ static bool FT02_MapCenterOnCurrentGnss()
     g_ft02MapLastFixValid = true;
     g_ft02MapLastFollowLat = gnss.latitude;
     g_ft02MapLastFollowLon = gnss.longitude;
-    g_ft02MapLastHeadingValid = gnss.courseValid;
-    g_ft02MapLastHeadingDeg = gnss.courseDegrees;
+    uint8_t headingSource = 0;
+    float headingDeg = 0.0f;
+    g_ft02MapLastHeadingValid = FT02_MapNavigationHeading(headingDeg, headingSource);
+    g_ft02MapLastHeadingDeg = headingDeg;
+    g_ft02MapLastHeadingSource = headingSource;
     const uint32_t now = millis();
     g_ft02MapLastFollowRefreshMs = now;
     g_ft02MapLastFollowCheckMs = now;
@@ -979,15 +1030,20 @@ static void FT02_UpdateMapGnssFollow()
         gnss.longitude
     );
 
-    const bool headingValidityChanged = gnss.courseValid != g_ft02MapLastHeadingValid;
+    uint8_t headingSource = 0;
+    float headingDeg = 0.0f;
+    const bool headingValid = FT02_MapNavigationHeading(headingDeg, headingSource);
+    const bool headingValidityChanged = headingValid != g_ft02MapLastHeadingValid;
+    const bool headingSourceChanged = headingValid && g_ft02MapLastHeadingValid &&
+        headingSource != g_ft02MapLastHeadingSource;
     float headingDelta = 0.0f;
-    if(gnss.courseValid && g_ft02MapLastHeadingValid)
+    if(headingValid && g_ft02MapLastHeadingValid)
     {
-        headingDelta = fabsf(gnss.courseDegrees - g_ft02MapLastHeadingDeg);
+        headingDelta = fabsf(headingDeg - g_ft02MapLastHeadingDeg);
         if(headingDelta > 180.0f) headingDelta = 360.0f - headingDelta;
     }
-    const bool headingChanged = headingValidityChanged ||
-        (gnss.courseValid && g_ft02MapLastHeadingValid &&
+    const bool headingChanged = headingValidityChanged || headingSourceChanged ||
+        (headingValid && g_ft02MapLastHeadingValid &&
          headingDelta >= FT02_MAP_HEADING_REFRESH_DEGREES);
 
     if(movedMeters < FT02_MAP_FOLLOW_DISTANCE_METERS)
@@ -997,7 +1053,7 @@ static void FT02_UpdateMapGnssFollow()
             return;
         }
 
-        // Position is effectively unchanged, but LR01 compass heading moved enough
+        // Position is effectively unchanged, but GNSS course heading moved enough
         // to matter. Refresh only the marker patch so the arrow rotates without
         // rebuilding/recentering the map.
         const double stableLat = g_ft02MapLastFollowLat;
@@ -1023,8 +1079,9 @@ static void FT02_UpdateMapGnssFollow()
             g_ft02MapPartialNavRefreshCount = 0;
         }
 
-        g_ft02MapLastHeadingValid = gnss.courseValid;
-        g_ft02MapLastHeadingDeg = gnss.courseDegrees;
+        g_ft02MapLastHeadingValid = headingValid;
+        g_ft02MapLastHeadingDeg = headingDeg;
+        g_ft02MapLastHeadingSource = headingSource;
         g_ft02MapLastFollowRefreshMs = now;
 
         return;
@@ -1051,8 +1108,9 @@ static void FT02_UpdateMapGnssFollow()
         const double oldLon = g_ft02MapLastFollowLon;
         g_ft02MapLastFollowLat = gnss.latitude;
         g_ft02MapLastFollowLon = gnss.longitude;
-        g_ft02MapLastHeadingValid = gnss.courseValid;
-        g_ft02MapLastHeadingDeg = gnss.courseDegrees;
+        g_ft02MapLastHeadingValid = headingValid;
+        g_ft02MapLastHeadingDeg = headingDeg;
+        g_ft02MapLastHeadingSource = headingSource;
         g_ft02MapLastFollowRefreshMs = now;
 
         if(g_ft02MapPartialNavRefreshCount + 1 >= FT02_MAP_PARTIAL_CLEANUP_COUNT)
@@ -1106,6 +1164,9 @@ static void FT02_OpenMapPage()
     g_ft02MapFollowGnss = true;
     g_ft02MapHasTrackedFix = false;
     g_ft02MapLastFixValid = false;
+    g_ft02MapLastHeadingValid = false;
+    g_ft02MapLastHeadingDeg = 0.0f;
+    g_ft02MapLastHeadingSource = 0;
 
     if(!FT02_MapCenterOnCurrentGnss())
     {
@@ -1487,7 +1548,7 @@ static void FT02_OpenCommunicationPage()
     FT02_CommunicationUIOpen();
     g_ft02CommunicationReadyPresented = FT02_LoRaNodeRuntimeReady();
     g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
-    g_ft02LastLR01NodeListMs = FT02_LR01HostState().lastNodeListMs;
+    g_ft02LastLoRaNodeRevision = FT02_LoRaNodeRuntimeRevision();
     g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
 
     FT02_RedrawCurrentPage();
@@ -1521,7 +1582,7 @@ static bool FT02_HandleCommunicationInput(
         // visually stuck at “同步中” even after NodeDB had recovered to READY.
         g_ft02CommunicationReadyPresented = FT02_LoRaNodeRuntimeReady();
         g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
-        g_ft02LastLR01NodeListMs = FT02_LR01HostState().lastNodeListMs;
+        g_ft02LastLoRaNodeRevision = FT02_LoRaNodeRuntimeRevision();
         g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
         FT02_RedrawCurrentPage();
         return true;
@@ -1922,7 +1983,6 @@ static bool FT02_HandleLocationRecorderInput(
         }
         else if(command == 'r')
         {
-            (void)FT02_LR01HostRequestStatus();
             handled = true;
         }
         else if(command == 't')
@@ -2477,10 +2537,8 @@ static bool FT02_HandleInput(
 
 static void FT02_EpdSignalsEnterHighImpedance()
 {
-    // Stop the SPI peripheral first. SPI.end() releases MOSI/SCK from the SPI
-    // matrix, so never digitalWrite() those pins before reconfiguring them.
-    g_ft02EpdSpi.end();
-
+    // EPD uses software SPI in this validation build, so there is no hardware
+    // SPI peripheral to stop. Release SCK/MOSI directly before cutting power.
     // Charging/source transitions can momentarily disturb the EPD rail. The
     // old A1.4 path left RST floating after power-off; if the panel/controller
     // received even partial power again, floating control lines could make the
@@ -2514,58 +2572,121 @@ static void FT02_EpdSignalsRestoreForWake()
     digitalWrite(EPD_SCK, LOW);
 }
 
-static bool FT02_IsPlausibleSleepWakeRaw(char raw)
+static bool g_ft02KeyboardSclWakeArmed = false;
+static_assert(CARDKB_SCL >= 0 && CARDKB_SCL <= 21, "CardKB2 SCL must remain RTC/EXT1 capable on ESP32-S3");
+static constexpr uint64_t FT02_CARDKB_SCL_EXT1_MASK = (uint64_t{1} << CARDKB_SCL);
+
+static void FT02_DisarmKeyboardSclWake()
 {
-    const uint8_t code = static_cast<uint8_t>(raw);
+    if(!g_ft02KeyboardSclWakeArmed) return;
 
-    // CardKB2 returns 0 when no key is queued. A transient 0xFF or an
-    // unrelated control byte after an I2C/light-sleep boundary must never be
-    // interpreted as a user wake request. Keep only bytes that the current
-    // CardKB2 mappings can actually emit to the FT-02 host.
-    if(code == 0x08 || code == 0x0A || code == 0x0D || code == 0x1B) return true;
-    if(code >= 0x20 && code <= 0x7E) return true;
-
-    // Native / Fn-layer navigation codes used by the current keyboard image.
-    if(code == 0x98 || code == 0xA5) return true;
-    if(code >= 0xB4 && code <= 0xB7) return true;
-
-    return false;
+    // Remove only CardKB2/SCL from EXT1. Do not touch unrelated GPIO wake users
+    // such as the optional LoRa light-sleep bridge.
+    (void)esp_sleep_disable_ext1_wakeup_io(FT02_CARDKB_SCL_EXT1_MASK);
+    g_ft02KeyboardSclWakeArmed = false;
 }
 
-static void FT02_SleepIdleSlice()
+static bool FT02_SleepWaitForKeyboardSignal()
 {
-    // Native USB Serial/JTAG is clock-gated by ESP32-S3 light sleep, so this
-    // scheduler must never touch Serial/USB while the Core is sleeping.
-    const esp_err_t timerErr =
-        esp_sleep_enable_timer_wakeup(static_cast<uint64_t>(FT02_SLEEP_LIGHT_SLICE_MS) * 1000ULL);
-    if(timerErr != ESP_OK)
+    // GPIO21/SCL is already an RTC input here. EXT1 ANY_LOW is the only
+    // CardKB2 wake source; no digital GPIO interrupt is installed for SCL.
+    g_ft02SleepNoInitTrace.phase = 20u; // BEFORE_EXT1_WAKE_CONFIG
+    ++g_ft02SleepNoInitTrace.sleepCount;
+    ++g_ft02SleepSliceCount;
+
+    FT02_DisarmKeyboardSclWake();
+
+    if(!FT02_InputSleepSclRtcReady())
     {
-        delay(FT02_SLEEP_LIGHT_SLICE_MS);
-        return;
+        g_ft02SleepNoInitTrace.lastSleepErr = static_cast<int32_t>(ESP_ERR_INVALID_STATE);
+        g_ft02SleepNoInitTrace.phase = 22u; // RTC_SCL_OWNERSHIP_LOST
+        return false;
     }
 
-    ++g_ft02SleepSliceCount;
-    const esp_err_t sleepErr = esp_light_sleep_start();
-    if(sleepErr != ESP_OK) delay(FT02_SLEEP_LIGHT_SLICE_MS);
+    // Close the pre-arm race. CardKB2 may already be pulling SCL LOW.
+    if(FT02_InputSleepSclIsLow())
+    {
+        g_ft02SleepNoInitTrace.phase = 35u; // EARLY_SCL_LOW
+        g_ft02SleepNoInitTrace.lastWakeCause = static_cast<int32_t>(ESP_SLEEP_WAKEUP_EXT1);
+        return true;
+    }
+
+    const esp_err_t wakeErr = esp_sleep_enable_ext1_wakeup_io(
+        FT02_CARDKB_SCL_EXT1_MASK,
+        ESP_EXT1_WAKEUP_ANY_LOW
+    );
+    if(wakeErr != ESP_OK)
+    {
+        g_ft02SleepNoInitTrace.lastSleepErr = static_cast<int32_t>(wakeErr);
+        g_ft02SleepNoInitTrace.phase = 21u; // EXT1_WAKE_CONFIG_FAILED
+        return false;
+    }
+
+    g_ft02KeyboardSclWakeArmed = true;
+
+    // Close the final arm race once more before entering Light Sleep.
+    if(FT02_InputSleepSclIsLow())
+    {
+        g_ft02SleepNoInitTrace.phase = 36u; // ARMED_SCL_LOW
+        FT02_DisarmKeyboardSclWake();
+        g_ft02SleepNoInitTrace.lastWakeCause = static_cast<int32_t>(ESP_SLEEP_WAKEUP_EXT1);
+        return true;
+    }
+
+    g_ft02SleepNoInitTrace.phase = 30u; // BEFORE_LIGHT_SLEEP
+    FT02_SleepTruthBeforeLightSleep();
+    const esp_err_t err = esp_light_sleep_start();
+
+    g_ft02SleepNoInitTrace.phase = 40u; // AFTER_LIGHT_SLEEP
+    ++g_ft02SleepNoInitTrace.wakeCount;
+    g_ft02SleepNoInitTrace.lastSleepErr = static_cast<int32_t>(err);
+    const esp_sleep_wakeup_cause_t cause = esp_sleep_get_wakeup_cause();
+    g_ft02SleepNoInitTrace.lastWakeCause = static_cast<int32_t>(cause);
+    g_ft02SleepNoInitTrace.phase = 50u; // WAKE_CAUSE_RECORDED
+
+    const uint64_t ext1Status =
+        cause == ESP_SLEEP_WAKEUP_EXT1 ? esp_sleep_get_ext1_wakeup_status() : 0u;
+
+    FT02_SleepTruthAfterLightSleep(
+        static_cast<int32_t>(err),
+        static_cast<int32_t>(cause),
+        ext1Status
+    );
+
+    FT02_DisarmKeyboardSclWake();
+
+    return err == ESP_OK &&
+           cause == ESP_SLEEP_WAKEUP_EXT1 &&
+           (ext1Status & FT02_CARDKB_SCL_EXT1_MASK) != 0u;
 }
 
-static bool FT02_AutoSleepBlocked()
+static bool FT02_SleepBlocked(bool automatic, const char** reason)
 {
-    if(FT02_AudioLogIsBusy()) return true;
-    if(FT02_LocationRecorderSnapshotCurrent().sessionActive) return true;
-    if(FT02_GnssFieldTestSnapshotCurrent().active) return true;
-    if(g_ft02PageState == FT02_PAGE_COMPASS_CALIBRATION) return true;
-    if(g_ft02MapRefreshPending) return true;
-    if(g_ft02HomePPressActive) return true;
-    if(FT02_EpdInteractiveQueuedInputCount() > 0u) return true;
-    return false;
+    const char* why = nullptr;
+    if(FT02_AudioLogIsBusy()) why = "audio_busy";
+    else if(FT02_LocationRecorderSnapshotCurrent().sessionActive) why = "track_active";
+    else if(FT02_GnssFieldTestSnapshotCurrent().active) why = "gnss_test_active";
+    else if(g_ft02PageState == FT02_PAGE_COMPASS_CALIBRATION) why = "compass_calibration";
+    else if(g_ft02MapRefreshPending) why = "map_refresh";
+    else if(FT02_MeshServiceReady() && !FT02_MeshServiceSleepAvailable()) why = "mesh_busy";
+    else if(!FT02_InputCardKbAvailable()) why = "keyboard_unavailable";
+    else if(automatic && g_ft02HomePPressActive) why = "home_p_active";
+    else if(automatic && FT02_EpdInteractiveQueuedInputCount() > 0u) why = "input_pending";
+    if(reason) *reason = why;
+    return why != nullptr;
 }
 
 static void FT02_EnterSleepMode(bool automatic)
 {
     if(FT02_ModeIsSleeping()) return;
     if(automatic && !FT02_ModeAutoSleepAllowed()) return;
-    if(automatic && FT02_AutoSleepBlocked()) return;
+    const char* sleepBlockReason = nullptr;
+    if(FT02_SleepBlocked(automatic, &sleepBlockReason))
+    {
+        if(!automatic)
+            FT02_LOGW("[WARN][SLEEP] blocked reason=%s\n", sleepBlockReason ? sleepBlockReason : "busy");
+        return;
+    }
 
     g_ft02SleepReturnPage = g_ft02PageState;
     g_ft02HomePPressActive = false;
@@ -2583,8 +2704,16 @@ static void FT02_EnterSleepMode(bool automatic)
     const FT02WifiOwner wifiOwner = FT02_WifiManagerOwner();
     if(wifiOwner != FT02_WIFI_OWNER_NONE) FT02_WifiManagerShutdown(wifiOwner);
 
-    // Indoor/outdoor mode is preserved; sleep applies the existing GNSS policy.
+    // Indoor/outdoor policy is remembered, but sleep always forces GNSS off.
+    // Sleep Power A3 also closes the Core UART transport through that policy.
     FT02_ModeEnterSleep();
+
+    const bool compassSleepOk = FT02_CompassCoreSleepEnter();
+    FT02_MeshServiceSleepEnter();
+    FT02_LOGD("[SLEEP-PWR] enter compass=%d mesh_available=%d gnss_runtime=%d\n",
+                  compassSleepOk ? 1 : 0,
+                  FT02_MeshServiceSleepAvailable() ? 1 : 0,
+                  FT02_GnssRuntimeEnabled() ? 1 : 0);
 
     // Commit one static sleep frame, then remove the e-paper power rail. The
     // bistable panel keeps the image without refresh power.
@@ -2602,30 +2731,70 @@ static void FT02_EnterSleepMode(bool automatic)
 
     // A manual long-P sleep is entered while P is still physically held.
     // Wake is armed only after a stable release, preventing instant bounce-back.
-    g_ft02SleepWakeArmed = false;
-    g_ft02SleepLastKeyEventMs = millis();
     g_ft02WakeReleaseRequired = false;
     g_ft02WakeLastConsumedKeyMs = 0u;
     g_ft02SleepEnteredMs = millis();
     g_ft02SleepSliceCount = 0u;
-    g_ft02SleepQuietPollCount = 0u;
     FT02_EpdInteractiveReset();
     FT02_InputSetLowNoiseMode(true);
-    FT02_LR01HostSleepPause(); // Physical polling is paced by light-sleep slices.
-    FT02_BatteryMonitorSleepPause();
 
+    // A5B diagnostics use only the already-cached sample here. Do not insert
+    // a new shared-I2C battery transaction into the sleep-entry path.
+    g_ft02PreSleepBattery = FT02_BatterySnapshotCurrent();
+    g_ft02PreSleepBatteryValid = g_ft02PreSleepBattery.valid;
+    FT02_BatteryMonitorSleepPause();
+    FT02_LOGD_PRINTLN("[BAT] sleep pause");
+
+    // The SD card has no controllable power gate on the current FT-02. A5B
+    // therefore removes host SPI clocks only: sync, CS HIGH, FSPI end, pins
+    // high-impedance. FAT remains mounted and protocol state is retained.
+    if(!FT02_StorageSleepEnter())
+    {
+        FT02_LOGW_PRINTLN("[WARN][SLEEP-A5B] SD FSPI quiesce failed");
+        FT02_WakeFromSleep();
+        return;
+    }
+
+    // Start a fresh crash-safe RCA session before the first sleep entry.
+    memset(&g_ft02SleepNoInitTrace, 0, sizeof(g_ft02SleepNoInitTrace));
+    g_ft02SleepNoInitTrace.magic = FT02_SLEEP_NOINIT_MAGIC;
+    g_ft02SleepNoInitTrace.version = FT02_SLEEP_NOINIT_VERSION;
+    g_ft02SleepNoInitTrace.phase = 10u; // SLEEP_SESSION_ENTER
+    g_ft02SleepNoInitTrace.sessionActive = 1u;
+
+    // Arm CardKB2 only after all other sleep-entry work is complete. From this
+    // command onward FT02 performs no shared-I2C peripheral work before Wire is
+    // released, minimizing the handoff race between the two MCUs.
+    if(!FT02_InputRequestHostSleep())
+    {
+        FT02_LOGW_PRINTLN("[WARN][SLEEP-A4] CardKB2 two-phase sleep handshake failed");
+        FT02_WakeFromSleep();
+        return;
+    }
 
     // Native USB CDC is not a valid dependency while light sleep gates the USB
-    // clock. Input polling remains active, but its internal diagnostics are
-    // silenced until a real wake has fully completed.
+    // clock. Disable input diagnostics before releasing the shared Wire bus.
     FT02_InputSetDiagnosticsEnabled(false);
 
-    FT02_SleepDiagnosticsMarkEnter(automatic);
+    // No shared-I2C transaction is allowed after this point until wake.
+    // COMMIT transfers GPIO21/SCL to RTC input ownership for EXT1 ANY_LOW wake.
+    if(!FT02_InputSuspendBusForSleep())
+    {
+        FT02_InputSetDiagnosticsEnabled(true);
+        FT02_LOGW_PRINTLN("[WARN][SLEEP-A4] failed to suspend shared I2C bus");
+        FT02_WakeFromSleep();
+        return;
+    }
 
-    Serial.printf("[MODE] sleep entered source=%s return_page=%u slice_ms=%lu\n",
-                  automatic ? "idle" : "manual",
-                  static_cast<unsigned>(g_ft02SleepReturnPage),
-                  static_cast<unsigned long>(FT02_SLEEP_LIGHT_SLICE_MS));
+    FT02_SleepDiagnosticsMarkEnter(automatic);
+    FT02_SleepTruthSessionEnter(automatic);
+    FT02_SleepTruthSetBatteryStart(
+        g_ft02PreSleepBatteryValid,
+        g_ft02PreSleepBattery.percent,
+        g_ft02PreSleepBattery.voltage
+    );
+
+    FT02_LOGI("[SLEEP] enter source=%s\n", automatic ? "idle" : "manual");
     // Drain debug output once before sleeping. Never flush on each periodic wake.
     Serial.flush();
 }
@@ -2634,36 +2803,77 @@ static void FT02_WakeFromSleep()
 {
     if(!FT02_ModeIsSleeping()) return;
 
-    // The periodic timer is only the sleep-service scheduler. Remove it before
-    // returning to the normal UI runtime.
-    (void)esp_sleep_disable_wakeup_source(ESP_SLEEP_WAKEUP_TIMER);
+    FT02_LOGD_PRINTLN("[WAKE] begin");
+    g_ft02SleepNoInitTrace.phase = 80u; // WAKE_FUNCTION_ENTER
+
+    FT02_DisarmKeyboardSclWake();
+    g_ft02SleepNoInitTrace.phase = 81u; // EXT1_WAKE_DISABLED
 
     if(g_ft02PreSleepCpuMhz >= 80u) (void)setCpuFrequencyMhz(g_ft02PreSleepCpuMhz);
 
-    // Native USB CDC disconnects while the S3 is in light sleep. Recreate the
-    // serial endpoint before normal runtime logging resumes.
+    // CardKB2 has released its open-drain SCL wake pulse before restoring its
+    // I2C slave. Bring Wire back before compass/battery resume touches the bus.
+    const bool keyboardBusWakeOk =
+        FT02_InputResumeBusAfterSleep(FT02_KEYBOARD_WAKE_SCL_RELEASE_TIMEOUT_MS);
+    g_ft02SleepNoInitTrace.phase = 811u; // SHARED_I2C_RESTORED
+    FT02_LOGD_PRINTLN("[WAKE] usb restore begin");
     Serial.end();
     delay(100);
     Serial.begin(115200);
     delay(300);
+    FT02_LOGI_PRINTLN("[SLEEP-A4] wake source=CardKB2 SCL/EXT1");
+    FT02_LOGD("[SLEEP-A4] shared-i2c restore keyboard=%d\n", keyboardBusWakeOk ? 1 : 0);
+    FT02_LOGD_PRINTLN("[WAKE] usb restore done");
+
+    const bool storageWakeOk = FT02_StorageSleepExit();
+    FT02_LOGD("[SD-SLEEP] wake restore=%d\n", storageWakeOk ? 1 : 0);
+
+    // Restore radio and compass before the normal application loop resumes.
+    // GNSS transport is restored later by FT02_ModeWake() only for Outdoor mode.
+    FT02_MeshServiceSleepExit();
+    const bool compassWakeOk = FT02_CompassCoreSleepExit();
+    FT02_LOGD("[SLEEP-PWR] wake compass=%d mesh_ready=%d\n",
+                  compassWakeOk ? 1 : 0, FT02_MeshServiceReady() ? 1 : 0);
 
     FT02_InputSetLowNoiseMode(false);
-    FT02_LR01HostSleepResume();
-    (void)FT02_BatteryMonitorWakeResume();
+    const bool batteryWakeOk = FT02_BatteryMonitorWakeResume();
+    const FT02BatterySnapshot batteryWake = FT02_BatterySnapshotCurrent();
+    FT02_LOGD(
+        "[BAT] wake resume ok=%u valid=%u soc=%.1f voltage=%.3f failures=%u\n",
+        batteryWakeOk ? 1u : 0u,
+        batteryWake.valid ? 1u : 0u,
+        static_cast<double>(batteryWake.percent),
+        static_cast<double>(batteryWake.voltage),
+        static_cast<unsigned>(batteryWake.consecutiveFailures));
+
+    FT02_SleepTruthSetBatteryWake(
+        batteryWake.valid,
+        batteryWake.percent,
+        batteryWake.voltage
+    );
+    g_ft02PreSleepBatteryValid = false;
+    g_ft02SleepNoInitTrace.phase = 82u; // CPU_INPUT_BATTERY_RESTORED
 
     FT02_EpdSignalsRestoreForWake();
     digitalWrite(EPD_PWR, HIGH);
     delay(120);
     digitalWrite(EPD_RST, HIGH);
+    g_ft02SleepNoInitTrace.phase = 83u; // EPD_POWER_RESTORED
 
-    const bool epdSpiBeginOk = g_ft02EpdSpi.begin(EPD_SCK, -1, EPD_MOSI, EPD_CS);
+    display.epd2.enableWrite(EPD_SCK, EPD_MOSI);
+    const bool epdSpiBeginOk = true;
+    g_ft02SleepNoInitTrace.phase = 84u; // EPD_SW_SPI_RESTORED
 
     FT02_ReinitializeEpdFullMode();
     FT02_EpdInteractiveReset();
+    g_ft02SleepNoInitTrace.phase = 85u; // EPD_REINIT_DONE
 
     FT02_ModeWake();
+    g_ft02SleepNoInitTrace.phase = 86u; // MODE_WAKE_DONE
+
     FT02_SyncGnssStatusBar(false);
     FT02_SyncBatteryStatusBar(false);
+    g_ft02SleepNoInitTrace.phase = 87u; // STATUS_SYNC_DONE
 
     if(FT02_SystemSettingsWakeReturnPolicy() == FT02_WAKE_RETURN_HOME)
         g_ft02PageState = FT02_PAGE_HOME;
@@ -2690,70 +2900,78 @@ static void FT02_WakeFromSleep()
     FT02_IdleManagerNoteActivity(millis());
     g_ft02WakeReleaseRequired = true;
     g_ft02WakeLastConsumedKeyMs = millis();
-    g_ft02SleepWakeArmed = false;
-    g_ft02SleepLastKeyEventMs = 0u;
 
     FT02_RedrawCurrentPage();
+    g_ft02SleepNoInitTrace.phase = 88u; // PAGE_REDRAW_DONE
 
     const uint32_t sleepDurationMs = static_cast<uint32_t>(millis() - g_ft02SleepEnteredMs);
+    g_ft02SleepNoInitTrace.wakeCompleted = 1u;
+    g_ft02SleepNoInitTrace.sessionActive = 0u;
+    g_ft02SleepNoInitTrace.phase = 90u; // WAKE_COMPLETE
+
     FT02_InputSetDiagnosticsEnabled(true);
 
-    Serial.printf(
-        "[MODE] sleep exited source=keyboard slept_ms=%lu slices=%lu\n",
+    FT02_LOGD(
+        "[SLEEP-EXIT-RCA] exit=keyboard raw=0x%02lX key=%lu cmd=0x%02lX slept_ms=%lu slices=%lu input_events=%lu invalid=%lu\n",
+        static_cast<unsigned long>(g_ft02SleepNoInitTrace.acceptedRaw),
+        static_cast<unsigned long>(g_ft02SleepNoInitTrace.acceptedKey),
+        static_cast<unsigned long>(g_ft02SleepNoInitTrace.acceptedCommand),
         static_cast<unsigned long>(sleepDurationMs),
-        static_cast<unsigned long>(g_ft02SleepSliceCount));
-    if(!epdSpiBeginOk) Serial.println("[EPD] SPI begin failed during wake");
+        static_cast<unsigned long>(g_ft02SleepNoInitTrace.acceptedSlice),
+        static_cast<unsigned long>(g_ft02SleepNoInitTrace.inputEventCount),
+        static_cast<unsigned long>(g_ft02SleepNoInitTrace.invalidInputCount));
+    if(!epdSpiBeginOk)
+        FT02_LOGE_PRINTLN("[ERROR][EPD] FAST SW-SPI restore failed during wake");
     Serial.flush();
 
     g_ft02SleepEnteredMs = 0u;
     g_ft02SleepSliceCount = 0u;
-    g_ft02SleepQuietPollCount = 0u;
 }
 
 static bool FT02_ServiceSleepMode()
 {
     if(!FT02_ModeIsSleeping()) return false;
 
-    // Keep the panel physically asleep during every timer-maintenance wake.
+    // Keep the panel physically asleep for the entire low-power interval.
     digitalWrite(EPD_PWR, LOW);
     digitalWrite(EPD_RST, LOW);
-
-    // CardKB2 has no dedicated wake GPIO in the current four-wire I2C design,
-    // so the Core wakes briefly once per second only to poll the keyboard.
     FT02_InputSetLowNoiseMode(true);
-    const FT02InputEvent event = FT02_InputPoll();
+
+    g_ft02SleepNoInitTrace.phase = 60u; // BEFORE_GPIO_SLEEP_WAIT
+    const bool keyboardSignal = FT02_SleepWaitForKeyboardSignal();
     const uint32_t now = millis();
 
-    if(event.key != FT02_KEY_NONE)
+    if(keyboardSignal)
     {
-        const uint8_t raw = static_cast<uint8_t>(event.raw);
-        if(FT02_IsPlausibleSleepWakeRaw(event.raw))
-        {
-            g_ft02SleepLastKeyEventMs = now;
-            g_ft02SleepQuietPollCount = 0u;
-            if(g_ft02SleepWakeArmed)
-            {
-                const uint32_t sleepDurationMs =
-                    static_cast<uint32_t>(millis() - g_ft02SleepEnteredMs);
-                FT02_SleepDiagnosticsMarkKeyboardWake(
-                    raw,
-                    g_ft02SleepSliceCount,
-                    sleepDurationMs
-                );
-                FT02_WakeFromSleep();
-                return true;
-            }
-        }
-    }
-    else if(!g_ft02SleepWakeArmed &&
-            static_cast<uint32_t>(now - g_ft02SleepLastKeyEventMs) >= FT02_SLEEP_WAKE_QUIET_MS)
-    {
-        if(g_ft02SleepQuietPollCount < 0xFFu) ++g_ft02SleepQuietPollCount;
-        if(g_ft02SleepQuietPollCount >= FT02_SLEEP_WAKE_ARM_EMPTY_POLLS)
-            g_ft02SleepWakeArmed = true;
+        // SCL is an explicit CardKB2 host-wake pulse. The first physical key is
+        // already queued inside CardKB2; normal post-wake input suppression
+        // consumes it as the wake gesture instead of executing a UI action.
+        g_ft02SleepNoInitTrace.exitReason = 1u;
+        g_ft02SleepNoInitTrace.acceptedRaw = 0u;
+        g_ft02SleepNoInitTrace.acceptedKey = static_cast<uint32_t>(FT02_KEY_NONE);
+        g_ft02SleepNoInitTrace.acceptedCommand = 0u;
+        g_ft02SleepNoInitTrace.acceptedSlice = g_ft02SleepSliceCount;
+        g_ft02SleepNoInitTrace.phase = 70u; // CARDKB_SCL_WAKE_ACCEPTED
+
+        const uint32_t acceptedSleepDurationMs =
+            static_cast<uint32_t>(now - g_ft02SleepEnteredMs);
+        FT02_SleepTruthMarkKeyboardWake();
+        FT02_SleepDiagnosticsMarkKeyboardWake(
+            0u,
+            g_ft02SleepSliceCount,
+            acceptedSleepDurationMs
+        );
+        g_ft02SleepNoInitTrace.phase = 71u; // NVS_WAKE_MARKED
+        FT02_WakeFromSleep();
+        return true;
     }
 
-    FT02_SleepIdleSlice();
+    // Fail safe: an unexpected Light-Sleep return or wake-config failure must
+    // restore the terminal rather than leaving the shared I2C bus suspended.
+    g_ft02SleepNoInitTrace.exitReason = 2u;
+    g_ft02SleepNoInitTrace.phase = 72u; // UNEXPECTED_SLEEP_RETURN
+    FT02_SleepTruthMarkUnexpectedReturn();
+    FT02_WakeFromSleep();
     return true;
 }
 
@@ -2843,7 +3061,50 @@ void setup()
 {
     Serial.begin(115200);
     delay(2000);
-    Serial.printf("[FT02] boot %s\n", FT02_FIRMWARE_BUILD_LABEL);
+    FT02_LOGI("[FT02] boot %s\n", FT02_FIRMWARE_BUILD_LABEL);
+    const int resetHigh = (int)esp_reset_reason();
+    const unsigned resetRom0 = (unsigned)esp_rom_get_reset_reason(0);
+    const unsigned resetRom1 = (unsigned)esp_rom_get_reset_reason(1);
+    FT02_LOGD("[FT02] reset reason=%d\n", resetHigh);
+    FT02_LOGD("[RESET-TRACE] esp=%d rom0=0x%02X rom1=0x%02X\n",
+                  resetHigh, resetRom0, resetRom1);
+
+    const bool noInitValid =
+        g_ft02SleepNoInitTrace.magic == FT02_SLEEP_NOINIT_MAGIC &&
+        g_ft02SleepNoInitTrace.version == FT02_SLEEP_NOINIT_VERSION;
+    if(noInitValid)
+    {
+        FT02_LOGD(
+            "[SLEEP-RCA-BOOT] active=%lu phase=%lu exit=%lu sleep=%lu wake=%lu armed=%lu events=%lu invalid=%lu "
+            "last_raw=0x%02lX last_key=%lu last_cmd=0x%02lX accepted_raw=0x%02lX accepted_key=%lu accepted_cmd=0x%02lX "
+            "accepted_slice=%lu completed=%lu err=%ld cause=%ld\n",
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.sessionActive),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.phase),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.exitReason),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.sleepCount),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.wakeCount),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.wakeArmed),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.inputEventCount),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.invalidInputCount),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.lastInputRaw),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.lastInputKey),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.lastInputCommand),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.acceptedRaw),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.acceptedKey),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.acceptedCommand),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.acceptedSlice),
+            static_cast<unsigned long>(g_ft02SleepNoInitTrace.wakeCompleted),
+            static_cast<long>(g_ft02SleepNoInitTrace.lastSleepErr),
+            static_cast<long>(g_ft02SleepNoInitTrace.lastWakeCause));
+    }
+    else
+    {
+        memset(&g_ft02SleepNoInitTrace, 0, sizeof(g_ft02SleepNoInitTrace));
+        g_ft02SleepNoInitTrace.magic = FT02_SLEEP_NOINIT_MAGIC;
+        g_ft02SleepNoInitTrace.version = FT02_SLEEP_NOINIT_VERSION;
+        FT02_LOGD_PRINTLN("[SLEEP-RCA-BOOT] initialized");
+    }
+
     FT02_InputBegin(
         CARDKB_SDA,
         CARDKB_SCL,
@@ -2855,7 +3116,9 @@ void setup()
     FT02_SyncBatteryStatusBar(false);
 
     FT02_GnssBegin();
-    FT02_LR01HostBegin();
+    FT02_CompassCoreBegin();
+    FT02_LoRaHwProbeBegin(); // AW9523 + SX1262: read-only RF hardware probe
+    FT02_MeshServiceBegin(); // A2: RadioLib SX1262 backend owns the active RX path
     FT02_SystemSettingsBegin();
     FT02_GnssPowerControlBegin();
     FT02_SleepDiagnosticsBegin();
@@ -2885,19 +3148,9 @@ void setup()
     digitalWrite(EPD_CS, HIGH);
     delay(50);
 
-    if(!g_ft02EpdSpi.begin(EPD_SCK, -1, EPD_MOSI, EPD_CS))
-    {
-        Serial.println("[EPD] HSPI begin failed");
-    }
-
-    display.init(
-        115200,
-        true,
-        10,
-        false,
-        g_ft02EpdSpi,
-        SPISettings(EPD_SPI_HZ, MSBFIRST, SPI_MODE0)
-    );
+    display.epd2.enableWrite(EPD_SCK, EPD_MOSI);
+    FT02_LOGD("[EPD] backend=FAST-GPIO-SW-SPI sck=%d mosi=%d cs=%d hspi=RADIO\n", EPD_SCK, EPD_MOSI, EPD_CS);
+    display.init(FT02_EPD_SERIAL_DIAG_BAUD, true, 10, false);
     display.setRotation(2);
 
     g_ft02BootDateTime = FT02_ReadBuildDateTime();
@@ -2910,7 +3163,7 @@ void setup()
         g_ft02HomeSelectedCard
     );
 
-    Serial.println("[FT02] ready");
+    FT02_LOGI_PRINTLN("[FT02] ready");
 
     Serial.flush();
 }
@@ -2977,10 +3230,11 @@ void loop()
         // CardKB2 can emit zero samples between repeat events. Consume the wake
         // key stream until it has been quiet long enough to count as released.
         const uint32_t wakeNow = millis();
-        if(inputEvent.key != FT02_KEY_NONE)
+        if(inputEvent.key != FT02_KEY_NONE || FT02_InputCurrentRawKey() != 0)
             g_ft02WakeLastConsumedKeyMs = wakeNow;
 
-        if(static_cast<uint32_t>(wakeNow - g_ft02WakeLastConsumedKeyMs) >= FT02_WAKE_CONSUME_QUIET_MS)
+        if(FT02_InputCurrentRawKey() == 0 &&
+           static_cast<uint32_t>(wakeNow - g_ft02WakeLastConsumedKeyMs) >= FT02_WAKE_CONSUME_QUIET_MS)
             g_ft02WakeReleaseRequired = false;
 
         inputEvent.key = FT02_KEY_NONE;
@@ -3016,7 +3270,9 @@ void loop()
         FT02_DrawMapSearchInputPartial(display);
     }
 
-    FT02_LR01HostPoll();
+    FT02_LoRaHwProbePoll();
+    FT02_MeshServicePoll();
+    FT02_CompassCorePoll();
     FT02_GnssPowerControlPoll();
     if(g_ft02PageState == FT02_PAGE_COMPASS)
     {
@@ -3031,13 +3287,20 @@ void loop()
     {
         const uint32_t calRevision = FT02_CompassCalibrationUIRevision();
         const uint32_t nowCal = millis();
+        // Compass sampling runs in the main loop at 100 ms. A full e-paper
+        // redraw takes well over a second, so measuring the refresh interval
+        // from before the redraw can starve calibration sampling: by the time
+        // the redraw finishes the old 1.5 s interval has already expired and
+        // the next loop immediately redraws again. Keep the proven
+        // calibration thresholds, but guarantee a real sampling window after
+        // each display commit.
         if(calRevision != g_ft02LastCompassCalRevision &&
-           static_cast<uint32_t>(nowCal - g_ft02LastCompassCalRedrawMs) >= 1500u)
+           static_cast<uint32_t>(nowCal - g_ft02LastCompassCalRedrawMs) >= 3000u)
         {
             g_ft02LastCompassCalRevision = calRevision;
-            g_ft02LastCompassCalRedrawMs = nowCal;
             FT02_RedrawCurrentPage();
-
+            // Start the throttle after the blocking e-paper refresh completes.
+            g_ft02LastCompassCalRedrawMs = millis();
         }
     }
 
@@ -3063,7 +3326,7 @@ void loop()
         FT02_PinyinLearningPoll();
         FT02_LoRaMessageDeliveryPoll();
 
-        const bool loraLink = FT02_LR01HostOnline();
+        const bool loraLink = FT02_MeshServiceReady();
         const bool loraReady = FT02_LoRaNodeRuntimeReady();
         const uint32_t commRevision = FT02_LoRaCommunicationRevision();
         const uint16_t loraUnread = FT02_LoRaCommunicationUnreadCount();
@@ -3072,10 +3335,9 @@ void loop()
         if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
            !loraReady && g_ft02CommunicationReadyPresented)
         {
-            // LR01 reported a readiness transition. Present it once without
-            // invoking any Core-side radio recovery.
+            // MeshService reported a readiness transition. Present it once.
             g_ft02CommunicationReadyPresented = false;
-            FT02_CommunicationUIOnSyncStarted("LR01 正在重新同步状态...");
+            FT02_CommunicationUIOnSyncStarted("Mesh 正在重新同步状态...");
             g_ft02LastLoRaLinkState = loraLink;
             g_ft02LastLoRaReadyState = loraReady;
             g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
@@ -3089,8 +3351,7 @@ void loop()
         else if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
                 loraReady && !g_ft02CommunicationReadyPresented)
         {
-            // Redraw after LR01 reports radio readiness and clear only the
-            // transient status-sync notice. Node discovery remains LR01-owned.
+            // Redraw after MeshService reports radio readiness and clear the transient sync notice.
             g_ft02CommunicationReadyPresented = true;
             FT02_CommunicationUIOnSyncReady();
             g_ft02LastLoRaLinkState = loraLink;
@@ -3103,20 +3364,15 @@ void loop()
         }
         else if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
                 FT02_CommunicationUIIsNodes() &&
-                FT02_LR01HostState().lastNodeListMs != 0 &&
-                FT02_LR01HostState().lastNodeListMs != g_ft02LastLR01NodeListMs)
+                FT02_LoRaNodeRuntimeRevision() != g_ft02LastLoRaNodeRevision)
         {
-            // MESH_NODES? is asynchronous. The first draw happens immediately
-            // after the request, while the LR01 node list is still in flight.
-            // Redraw exactly once when MESH_NODE_END arrives so the first page
-            // entry shows the completed list without requiring exit/re-entry.
-            g_ft02LastLR01NodeListMs = FT02_LR01HostState().lastNodeListMs;
-            FT02_CommunicationUIOnNodeListUpdated(FT02_LR01HostState().listedNodeCount);
+            // MeshService learns names and public keys asynchronously from NODEINFO_APP.
+            g_ft02LastLoRaNodeRevision = FT02_LoRaNodeRuntimeRevision();
+            FT02_CommunicationUIOnNodeListUpdated(static_cast<uint16_t>(FT02_LoRaNodeRuntimeNodeCount()));
             g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
             g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
             FT02_RedrawCurrentPage();
             communicationPageRedrawn = true;
-
         }
         else if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
                 !FT02_CommunicationUIIsCompose() &&
@@ -3200,7 +3456,7 @@ void loop()
         {
             // Recording duration remains visible. Only the small timer window
             // is refreshed every 5 s; the audio task continues independently.
-            // NS4150B PA is now physically shut down throughout recording, so
+            // speaker playback remains logically gated throughout recording, so
             // the display update no longer shares an active class-D load.
             const uint32_t bucket = audioStatus.recordingElapsedMs /
                 FT02_AUDIO_TIMER_REFRESH_MS;
@@ -3239,7 +3495,7 @@ void loop()
                 {
                     // Playback may be entering its pop-safe drain. Do not
                     // energize the EPD in that transition; the list redraw
-                    // after PA shutdown will show the persisted final volume.
+                    // after playback shutdown will show the persisted final volume.
                     g_ft02AudioVolumeRefreshPending = false;
 
                 }
@@ -3281,7 +3537,7 @@ void loop()
 
     if(FT02_ModeAutoSleepAllowed() &&
        FT02_IdleManagerShouldSleep(millis()) &&
-       !FT02_AutoSleepBlocked())
+       !FT02_SleepBlocked(true))
     {
         FT02_EnterSleepMode(true);
         return;

@@ -15,7 +15,8 @@ checks = {
     'battery_identity_revalidates': 'IDENTITY_INVALIDATE_FAILURES = 3' in battery,
     'battery_live_regs_remain': all(x in battery for x in ('REG_VCELL', 'REG_SOC', 'REG_CRATE', 'REG_MODE')),
     'cardkb_low_noise_unchanged': 'FT02_INPUT_LOW_NOISE_POLL_MS = 100' in input_cpp,
-    'cardkb_repeat_unchanged': 'FT02_INPUT_SAME_KEY_REPEAT_MS = 180' in input_cpp,
+    'cardkb_char_repeat_guard_unchanged': 'FT02_INPUT_SAME_KEY_REPEAT_MS = 180' in input_cpp,
+    'cardkb_adaptive_repeat_filter': all(x in input_cpp for x in ('FT02_INPUT_DISCRETE_FAST_REPRESS_MS = 270', 'FT02_INPUT_REPEAT_START_MIN_MS = 270', 'FT02_INPUT_REPEAT_BURST_GAP_MS = 125')),
 }
 
 failed = [name for name, ok in checks.items() if not ok]

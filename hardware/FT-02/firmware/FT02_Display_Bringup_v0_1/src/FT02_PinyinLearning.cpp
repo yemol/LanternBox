@@ -1,4 +1,5 @@
 #include "FT02_PinyinLearning.h"
+#include "FT02_Log.h"
 
 #include <Arduino.h>
 #include <stdio.h>
@@ -313,7 +314,7 @@ bool FT02_PinyinLearningFlush()
     if(!g_dirty) return true;
     if(!writeSnapshot())
     {
-        Serial.println("[PINYIN] learning flush FAILED");
+        FT02_LOGE_PRINTLN("[ERROR][PINYIN] learning flush FAILED");
         return false;
     }
     g_dirty = false;

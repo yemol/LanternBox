@@ -1,4 +1,5 @@
 #include "FT02_FieldLibrary.h"
+#include "FT02_Log.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -296,7 +297,7 @@ static bool FT02_LibraryEnsurePsramBuffers()
         if(g_searchResults != nullptr) { heap_caps_free(g_searchResults); g_searchResults = nullptr; }
         if(g_media != nullptr) { heap_caps_free(g_media); g_media = nullptr; }
         FT02_LibrarySetError("书库内存不足", "PSRAM 分配失败，请检查 N16R8/PSRAM 配置。");
-        Serial.printf("[FIELD-LIBRARY] PSRAM alloc failed, free_psram=%u\n",
+        FT02_LOGE("[ERROR][FIELD-LIBRARY] PSRAM alloc failed, free_psram=%u\n",
                       static_cast<unsigned>(heap_caps_get_free_size(MALLOC_CAP_SPIRAM)));
         return false;
     }

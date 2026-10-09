@@ -1,4 +1,5 @@
 #include "FT02_FieldManual.h"
+#include "FT02_Log.h"
 
 #include <stdio.h>
 #include <stddef.h>
@@ -225,18 +226,18 @@ static bool FT02_FmVerifyFile(const char* path, uint32_t expectedCrc)
     uint32_t actual = 0;
     if(!FT02_FmFileCrc32(path, actual))
     {
-        Serial.print("[FIELD-MANUAL] unable to CRC file: ");
-        Serial.println(path);
+        FT02_LOGE_PRINT("[ERROR][FIELD-MANUAL] unable to CRC file: ");
+        FT02_LOGE_PRINTLN(path);
         return false;
     }
     if(actual != expectedCrc)
     {
-        Serial.print("[FIELD-MANUAL] CRC mismatch path=");
-        Serial.print(path);
-        Serial.print(" expected=0x");
-        Serial.print(expectedCrc, HEX);
-        Serial.print(" actual=0x");
-        Serial.println(actual, HEX);
+        FT02_LOGE_PRINT("[ERROR][FIELD-MANUAL] CRC mismatch path=");
+        FT02_LOGE_PRINT(path);
+        FT02_LOGE_PRINT(" expected=0x");
+        FT02_LOGE_PRINT(expectedCrc, HEX);
+        FT02_LOGE_PRINT(" actual=0x");
+        FT02_LOGE_PRINTLN(actual, HEX);
         return false;
     }
     return true;
@@ -254,8 +255,8 @@ static bool FT02_FmValidateCatalog()
         const uint32_t end = static_cast<uint32_t>(category.firstCard) + category.cardCount;
         if(end > g_manifest.cardCount)
         {
-            Serial.print("[FIELD-MANUAL] category card range invalid: ");
-            Serial.println(category.id);
+            FT02_LOGE_PRINT("[ERROR][FIELD-MANUAL] category card range invalid: ");
+            FT02_LOGE_PRINTLN(category.id);
             return false;
         }
     }
@@ -271,8 +272,8 @@ static bool FT02_FmValidateCatalog()
         const uint64_t end = static_cast<uint64_t>(card.dataOffset) + card.dataLength;
         if(card.dataLength < 1 || card.dataLength > FT02_FM_CARD_BUFFER_SIZE || end > g_cardsDataFileSize)
         {
-            Serial.print("[FIELD-MANUAL] card data range invalid: ");
-            Serial.println(card.id);
+            FT02_LOGE_PRINT("[ERROR][FIELD-MANUAL] card data range invalid: ");
+            FT02_LOGE_PRINTLN(card.id);
             return false;
         }
     }
@@ -281,7 +282,7 @@ static bool FT02_FmValidateCatalog()
     {
         if(g_quickIndices[quickIndex] >= g_manifest.cardCount)
         {
-            Serial.println("[FIELD-MANUAL] quick index out of range");
+            FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] quick index out of range");
             return false;
         }
     }
@@ -312,12 +313,12 @@ static bool FT02_FmLoadOptionalMediaCatalog()
     const bool hasData = FT02_StorageFileExists(FT02_FM_MEDIA_DATA_PATH);
     if(!hasIndex && !hasData)
     {
-        Serial.println("[FIELD-MANUAL] optional media pack not present; text-only mode");
+        FT02_LOGI_PRINTLN("[FIELD-MANUAL] optional media pack not present; text-only mode");
         return true;
     }
     if(!hasIndex || !hasData)
     {
-        Serial.println("[FIELD-MANUAL] media pack incomplete; media disabled");
+        FT02_LOGW_PRINTLN("[WARN][FIELD-MANUAL] media pack incomplete; media disabled");
         return true;
     }
 
@@ -326,14 +327,14 @@ static bool FT02_FmLoadOptionalMediaCatalog()
     if(!FT02_StorageFileSize(FT02_FM_MEDIA_INDEX_PATH, indexFileSize) ||
        !FT02_StorageFileSize(FT02_FM_MEDIA_DATA_PATH, dataFileSize))
     {
-        Serial.println("[FIELD-MANUAL] media file size read failed; media disabled");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] media file size read failed; media disabled");
         return true;
     }
 
     FILE* file = FT02_StorageOpenReadFile(FT02_FM_MEDIA_INDEX_PATH);
     if(file == nullptr)
     {
-        Serial.println("[FIELD-MANUAL] media index open failed; media disabled");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] media index open failed; media disabled");
         return true;
     }
 
@@ -345,7 +346,7 @@ static bool FT02_FmLoadOptionalMediaCatalog()
        header.dataFileSize != dataFileSize)
     {
         fclose(file);
-        Serial.println("[FIELD-MANUAL] media header invalid; media disabled");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] media header invalid; media disabled");
         return true;
     }
 
@@ -354,7 +355,7 @@ static bool FT02_FmLoadOptionalMediaCatalog()
     if(indexFileSize != expectedIndexSize)
     {
         fclose(file);
-        Serial.println("[FIELD-MANUAL] media index size mismatch; media disabled");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] media index size mismatch; media disabled");
         return true;
     }
 
@@ -366,7 +367,7 @@ static bool FT02_FmLoadOptionalMediaCatalog()
         g_media = static_cast<FT02FieldManualMediaIndex*>(FT02_FmPsramAlloc(mediaBytes));
         if(g_media == nullptr)
         {
-            Serial.println("[FIELD-MANUAL] media PSRAM catalog allocation failed; media disabled");
+            FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] media PSRAM catalog allocation failed; media disabled");
             return true;
         }
         g_mediaAllocatedBytes = mediaBytes;
@@ -378,7 +379,7 @@ static bool FT02_FmLoadOptionalMediaCatalog()
             mediaBytes
         ))
         {
-            Serial.println("[FIELD-MANUAL] media index staged read failed; media disabled");
+            FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] media index staged read failed; media disabled");
             FT02_FmPsramFree(g_media);
             g_media = nullptr;
             g_mediaAllocatedBytes = 0;
@@ -399,8 +400,8 @@ static bool FT02_FmLoadOptionalMediaCatalog()
            item.dataLength < 1 || item.dataLength > FT02_FIELD_MANUAL_MEDIA_BUFFER_SIZE ||
            item.dataLength != expectedLength || end > dataFileSize)
         {
-            Serial.print("[FIELD-MANUAL] media entry invalid index=");
-            Serial.println(mediaIndex);
+            FT02_LOGE_PRINT("[ERROR][FIELD-MANUAL] media entry invalid index=");
+            FT02_LOGE_PRINTLN(mediaIndex);
             FT02_FmPsramFree(g_media);
             g_media = nullptr;
             g_mediaAllocatedBytes = 0;
@@ -461,7 +462,7 @@ bool FT02_FieldManualBegin(bool forceReload)
     if(!FT02_StorageIsReady())
     {
         g_state = FT02_FIELD_MANUAL_STORAGE_NOT_READY;
-        Serial.println("[FIELD-MANUAL] SD storage is not ready");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] SD storage is not ready");
         return false;
     }
 
@@ -472,14 +473,14 @@ bool FT02_FieldManualBegin(bool forceReload)
        !FT02_StorageFileExists(FT02_FM_QUICK_PATH))
     {
         g_state = FT02_FIELD_MANUAL_PACK_NOT_FOUND;
-        Serial.println("[FIELD-MANUAL] runtime pack not found at /knowledge/field_manual");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] runtime pack not found at /knowledge/field_manual");
         return false;
     }
 
     if(!FT02_FmReadExact(FT02_FM_MANIFEST_PATH, &g_manifest, sizeof(g_manifest)))
     {
         g_state = FT02_FIELD_MANUAL_IO_ERROR;
-        Serial.println("[FIELD-MANUAL] manifest read failed");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] manifest read failed");
         return false;
     }
 
@@ -494,7 +495,7 @@ bool FT02_FieldManualBegin(bool forceReload)
        g_manifest.quickCount > FT02_FIELD_MANUAL_MAX_QUICK)
     {
         g_state = FT02_FIELD_MANUAL_BAD_FORMAT;
-        Serial.println("[FIELD-MANUAL] manifest format/count check failed");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] manifest format/count check failed");
         return false;
     }
 
@@ -509,7 +510,7 @@ bool FT02_FieldManualBegin(bool forceReload)
        !FT02_StorageFileSize(FT02_FM_DATA_PATH, g_cardsDataFileSize))
     {
         g_state = FT02_FIELD_MANUAL_BAD_FORMAT;
-        Serial.println("[FIELD-MANUAL] runtime file size check failed");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] runtime file size check failed");
         return false;
     }
 
@@ -526,7 +527,7 @@ bool FT02_FieldManualBegin(bool forceReload)
     if(g_cards == nullptr)
     {
         g_state = FT02_FIELD_MANUAL_IO_ERROR;
-        Serial.println("[FIELD-MANUAL] card index PSRAM allocation failed");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] card index PSRAM allocation failed");
         return false;
     }
     g_cardsAllocatedBytes = cardIndexBytes;
@@ -537,7 +538,7 @@ bool FT02_FieldManualBegin(bool forceReload)
        !FT02_FmReadExact(FT02_FM_QUICK_PATH, g_quickIndices, quickBytes))
     {
         g_state = FT02_FIELD_MANUAL_IO_ERROR;
-        Serial.println("[FIELD-MANUAL] catalog read failed");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] catalog read failed");
         FT02_FmPsramFree(g_cards);
         g_cards = nullptr;
         g_cardsAllocatedBytes = 0;
@@ -788,7 +789,7 @@ bool FT02_FieldManualLoadMediaForCard(int globalCardIndex, int mediaOrdinal)
     g_mediaBuffer = static_cast<uint8_t*>(FT02_FmPsramAlloc(selected->dataLength));
     if(g_mediaBuffer == nullptr)
     {
-        Serial.println("[FIELD-MANUAL] media PSRAM image allocation failed");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-MANUAL] media PSRAM image allocation failed");
         return false;
     }
     g_mediaBufferAllocatedBytes = selected->dataLength;
@@ -806,10 +807,10 @@ bool FT02_FieldManualLoadMediaForCard(int globalCardIndex, int mediaOrdinal)
     const uint32_t crc = FT02_FmCrc32Update(0, g_mediaBuffer, selected->dataLength);
     if(crc != selected->crc32)
     {
-        Serial.print("[FIELD-MANUAL] media CRC mismatch card=");
-        Serial.print(globalCardIndex);
-        Serial.print(" ordinal=");
-        Serial.println(mediaOrdinal);
+        FT02_LOGE_PRINT("[ERROR][FIELD-MANUAL] media CRC mismatch card=");
+        FT02_LOGE_PRINT(globalCardIndex);
+        FT02_LOGE_PRINT(" ordinal=");
+        FT02_LOGE_PRINTLN(mediaOrdinal);
         FT02_FieldManualUnloadMedia();
         return false;
     }

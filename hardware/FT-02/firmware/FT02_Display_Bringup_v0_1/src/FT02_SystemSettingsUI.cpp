@@ -128,7 +128,7 @@ void FT02_DrawSystemSettingsScreen(FT02Display& display)
         FT02_DrawTextPack(display, ft02_cjk_20r, wakeInfo, 48, 414);
 
         char versionLine[64];
-        snprintf(versionLine, sizeof(versionLine), "设备 FT-02A   固件 %s", FT02_FIRMWARE_VERSION);
+        snprintf(versionLine, sizeof(versionLine), "FT-02A  %s", FT02_FIRMWARE_UI_VERSION);
         const int versionWidth = FT02_TextWidthPack(ft02_cjk_20r, versionLine);
         FT02_DrawTextPack(display, ft02_cjk_20r, versionLine, display.width() - 48 - versionWidth, 414);
 

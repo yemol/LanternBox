@@ -18,19 +18,17 @@ build = text("src/FT02_BuildInfo.h")
 sleep_diag = text("src/FT02_SleepDiagnostics.cpp")
 readme = text("README.md")
 
-req('FT02_FIRMWARE_VERSION "v2.75k91"' in build, "firmware identity is not v2.75k91")
-req('FT02_FIRMWARE_FEATURE_LABEL "Mode Sleep System A1.6"' in build, "feature label is not A1.6")
-req("FT02_SLEEP_LIGHT_SLICE_MS = 1000u" in main, "sleep slice is not 1000 ms")
+req('FT02_FIRMWARE_VERSION "v2.84-sleep-power-a5c-stable-r1.1"' in build, "firmware identity mismatch")
+req('FT02_FIRMWARE_FEATURE_LABEL "SLEEP POWER A5C STABLE R1 / SLEEP HEALTH / SD QUIESCE / GNSS STANDBY / SCL2PHASE RC3 EXT1"' in build, "feature label mismatch")
 
-helper = main[main.index("static void FT02_SleepIdleSlice()"):
-              main.index("static bool FT02_AutoSleepBlocked()", main.index("static void FT02_SleepIdleSlice()"))]
-req("esp_sleep_enable_timer_wakeup" in helper and "esp_light_sleep_start()" in helper, "timer light sleep missing")
-req("Serial." not in helper, "sleep slice touches native USB/Serial")
+helper = main[main.index("static bool FT02_SleepWaitForKeyboardSignal()"):
+              main.index("static bool FT02_SleepBlocked(", main.index("static bool FT02_SleepWaitForKeyboardSignal()"))]
+req("Serial." not in helper, "sleep wait touches native USB/Serial")
 
 req("FT02_EpdSignalsEnterHighImpedance" in main, "EPD sleep isolation missing")
 req("FT02_EpdSignalsRestoreForWake" in main, "EPD wake restore missing")
 req("digitalWrite(EPD_PWR, LOW)" in main, "EPD rail is not cut for sleep")
-req("FT02_LR01HostSleepPause()" in main and "FT02_LR01HostSleepResume()" in main, "LR01 lifecycle incomplete")
+req("FT02_LR01Host" not in main, "retired LR01 lifecycle hook remains")
 req("FT02_BatteryMonitorSleepPause()" in main and "FT02_BatteryMonitorWakeResume()" in main, "battery lifecycle incomplete")
 req("Serial.end()" in main and "Serial.begin(115200)" in main, "USB CDC wake recovery missing")
 req("FT02_SleepDiagnosticsMarkEnter" in main and "FT02_SleepDiagnosticsMarkKeyboardWake" in main, "persistent sleep breadcrumb missing")
@@ -39,22 +37,27 @@ req("bool FT02_ModeAutoSleepAllowed();" in mode_h, "mode auto-sleep API missing"
 req("return g_currentMode == FT02_MODE_INDOOR;" in mode, "outdoor mode must remain manual-sleep only")
 req("if(automatic && !FT02_ModeAutoSleepAllowed()) return;" in main, "automatic sleep lacks mode guard")
 req("FT02_EnterSleepMode(false);" in main, "manual sleep path missing")
-req("FT02_IsPlausibleSleepWakeRaw" in main, "CardKB2 wake filtering missing")
-req("FT02_SLEEP_WAKE_ARM_EMPTY_POLLS = 2u" in main, "wake release gate changed")
+req("FT02_InputRequestHostSleep()" in main, "CardKB2 host-sleep command missing")
+req("FT02_SleepWaitForKeyboardSignal" in main, "CardKB2 SCL wake wait missing")
 
+# k92 deliberately retains the RTC_NOINIT sleep RCA trace because it was
+# present in the last user-validated stable k89 runtime. Only later GNSS/Battery
+# blackbox experiments must be absent.
+req("g_ft02SleepNoInitTrace" in main and "SLEEP-RCA" in main and "RESET-TRACE" in main,
+    "validated sleep RCA trace was removed")
 for forbidden in [
-    "FT02_SLEEP_ISOLATION_TEST",
-    "g_ft02SleepNoInitTrace",
-    "SLEEP-RCA",
-    "RESET-TRACE",
     "GNSS-BB",
     "GNSS-WAKE",
     "BAT-WAKE",
-    "FT02_BLACKBOX_MAGIC",
 ]:
-    req(forbidden not in main and forbidden not in sleep_diag, f"temporary diagnostic residue remains: {forbidden}")
+    req(forbidden not in main and forbidden not in sleep_diag, f"temporary wake diagnostic residue remains: {forbidden}")
 
-req("ft02slpdbg" in sleep_diag and "ESP_RST" not in sleep_diag, "production sleep breadcrumb unexpectedly changed")
-req("Deep power optimization" in readme, "deferred low-power boundary is undocumented")
+req("ft02slpdbg" in sleep_diag and "ESP_RST_POWERON" in sleep_diag, "A5C sleep truth reset boundary missing")
+req("Sleep Power A4" in readme, "Sleep Power A4 is undocumented")
 
-print("PASS Mode/Sleep A1.6: stable lifecycle retained; temporary diagnostic scaffolding removed")
+req("FT02_InputRequestHostSleep()" in main, "CardKB2 host-sleep command missing")
+req("esp_sleep_enable_ext1_wakeup_io" in main and "ESP_EXT1_WAKEUP_ANY_LOW" in main, "SCL EXT1 wake missing")
+req("gpio_wakeup_enable" not in main and "GPIO_INTR_LOW_LEVEL" not in main, "legacy digital SCL wake remains in main")
+req("FT02_InputSuspendBusForSleep()" in main and "FT02_InputResumeBusAfterSleep" in main, "I2C sleep bridge missing")
+req("esp_sleep_enable_timer_wakeup" not in main, "periodic timer wake must be removed")
+print("PASS Mode/Sleep A1.6 + Sleep Power A4 keyboard-wake lifecycle")

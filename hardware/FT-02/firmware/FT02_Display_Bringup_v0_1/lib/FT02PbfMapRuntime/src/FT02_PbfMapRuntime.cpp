@@ -1,4 +1,5 @@
 #include "FT02_PbfMapRuntime.h"
+#include "FT02_Log.h"
 
 #include "FT02_PbfIndex.h"
 #include "FT02_Storage.h"
@@ -192,7 +193,7 @@ static bool FT02_LoadRegionManifest()
     FILE* f = FT02_StorageOpenReadFile(FT02_MAP_REGION_MANIFEST_PATH);
     if(f == nullptr)
     {
-        Serial.printf("[MAP-SOURCE-A2] manifest missing path=%s; legacy fallback remains available\n", FT02_MAP_REGION_MANIFEST_PATH);
+        FT02_LOGW("[WARN][MAP-SOURCE-A2] manifest missing path=%s; legacy fallback remains available\n", FT02_MAP_REGION_MANIFEST_PATH);
         return false;
     }
 
@@ -251,7 +252,7 @@ static bool FT02_SelectMapSource(double lon, double lat)
         }
         else
         {
-            Serial.printf("[MAP-SOURCE-A2] tile missing region=%s z=%u x=%lu y=%lu; fallback monolithic\n", r.id, (unsigned)r.tileZoom, (unsigned long)x, (unsigned long)y);
+            FT02_LOGW("[WARN][MAP-SOURCE-A2] tile missing region=%s z=%u x=%lu y=%lu; fallback monolithic\n", r.id, (unsigned)r.tileZoom, (unsigned long)x, (unsigned long)y);
         }
         break;
     }
@@ -566,8 +567,8 @@ static bool FT02_WriteDmaStaged(
     );
     if(stage == nullptr)
     {
-        Serial.printf(
-            "[PBF-A3.18] cache writer DMA buffer allocation failed heap=%lu\n",
+        FT02_LOGE(
+            "[ERROR][PBF-A3.18] cache writer DMA buffer allocation failed heap=%lu\n",
             (unsigned long)ESP.getFreeHeap()
         );
         return false;
@@ -588,8 +589,8 @@ static bool FT02_WriteDmaStaged(
         const size_t written = fwrite(stage, 1, chunk, file);
         if(written != chunk)
         {
-            Serial.printf(
-                "[PBF-A3.18] cache write failed section=%s offset=%lu requested=%lu written=%lu errno=%d ferror=%d\n",
+            FT02_LOGE(
+                "[ERROR][PBF-A3.18] cache write failed section=%s offset=%lu requested=%lu written=%lu errno=%d ferror=%d\n",
                 section != nullptr ? section : "?",
                 (unsigned long)offset,
                 (unsigned long)chunk,
@@ -1846,14 +1847,14 @@ static bool FT02_LoadIndex()
     FILE* file = FT02_StorageOpenReadFile(g_activeIndexPath);
     if(file == nullptr)
     {
-        Serial.println("[PBF-A3.18] index open failed");
+        FT02_LOGD_PRINTLN("[PBF-A3.18] index open failed");
         return false;
     }
 
     FT02PbfIndexHeaderDisk header;
     if(!FT02_ReadExact(file, &header, sizeof(header)))
     {
-        Serial.println("[PBF-A3.18] index header read failed");
+        FT02_LOGD_PRINTLN("[PBF-A3.18] index header read failed");
         fclose(file);
         return false;
     }
@@ -1865,7 +1866,7 @@ static bool FT02_LoadIndex()
        header.entryCount == 0 ||
        header.entryCount > 4096U)
     {
-        Serial.printf(
+        FT02_LOGD(
             "[PBF-A3.18] index header invalid version=%u header=%u entry=%u count=%lu\n",
             (unsigned)header.version,
             (unsigned)header.headerBytes,
@@ -1883,7 +1884,7 @@ static bool FT02_LoadIndex()
         (FT02PbfIndexEntryDisk*)FT02_MapAlloc(entryBytes);
     if(g_indexEntries == nullptr)
     {
-        Serial.printf(
+        FT02_LOGD(
             "[PBF-A3.18] index allocation failed bytes=%lu heap=%lu psram=%lu\n",
             (unsigned long)entryBytes,
             (unsigned long)ESP.getFreeHeap(),
@@ -1898,7 +1899,7 @@ static bool FT02_LoadIndex()
 
     if(!readOk)
     {
-        Serial.println("[PBF-A3.18] index entries read failed");
+        FT02_LOGD_PRINTLN("[PBF-A3.18] index entries read failed");
         FT02_MapFree(g_indexEntries);
         g_indexEntries = nullptr;
         return false;
@@ -1915,7 +1916,7 @@ static bool FT02_LoadIndex()
 
     if(actualCrc != header.entryCrc32)
     {
-        Serial.printf(
+        FT02_LOGD(
             "[PBF-A3.18] index CRC mismatch expected=0x%08lX actual=0x%08lX\n",
             (unsigned long)header.entryCrc32,
             (unsigned long)actualCrc
@@ -1950,7 +1951,7 @@ static bool FT02_EnsureIndexForCacheBuild()
     // One deterministic recovery attempt. This path is reached only when a
     // new regional cache must be built. Normal open, pan, zoom and R recenter
     // never touch the index when a valid regional cache is available.
-    Serial.printf(
+    FT02_LOGD(
         "[PBF-A3.18] normal ensure failed: %s; forcing one rebuild\n",
         FT02_PbfIndexErrorText()
     );
@@ -1964,7 +1965,7 @@ static bool FT02_EnsureIndexForCacheBuild()
             g_activeIndexPath
         ))
     {
-        Serial.printf(
+        FT02_LOGD(
             "[PBF-A3.18] forced index rebuild failed: %s\n",
             FT02_PbfIndexErrorText()
         );
@@ -1973,7 +1974,7 @@ static bool FT02_EnsureIndexForCacheBuild()
 
     if(!FT02_LoadIndex())
     {
-        Serial.println("[PBF-A3.18] rebuilt index could not be loaded");
+        FT02_LOGD_PRINTLN("[PBF-A3.18] rebuilt index could not be loaded");
         return false;
     }
 
@@ -2068,7 +2069,7 @@ static bool FT02_SaveCache(uint32_t buildElapsedMs)
     FILE* file = FT02_StorageOpenWriteFile(tempPath, true);
     if(file == nullptr)
     {
-        Serial.printf("[PBF-A3.18] cache temp open failed path=%s errno=%d\n", tempPath, errno);
+        FT02_LOGE("[ERROR][PBF-A3.18] cache temp open failed path=%s errno=%d\n", tempPath, errno);
         return false;
     }
 
@@ -2099,8 +2100,8 @@ static bool FT02_SaveCache(uint32_t buildElapsedMs)
 
     if(!ok)
     {
-        Serial.printf(
-            "[PBF-A3.18] cache temp write/sync failed total=%lu expected=%lu close=%d errno=%d\n",
+        FT02_LOGE(
+            "[ERROR][PBF-A3.18] cache temp write/sync failed total=%lu expected=%lu close=%d errno=%d\n",
             (unsigned long)totalWritten,
             (unsigned long)header.fileBytes,
             closeResult,
@@ -2113,8 +2114,8 @@ static bool FT02_SaveCache(uint32_t buildElapsedMs)
     uint64_t writtenBytes = 0;
     if(!FT02_StorageFileSize(tempPath, writtenBytes) || writtenBytes != header.fileBytes)
     {
-        Serial.printf(
-            "[PBF-A3.18] cache temp size mismatch actual=%llu expected=%lu\n",
+        FT02_LOGE(
+            "[ERROR][PBF-A3.18] cache temp size mismatch actual=%llu expected=%lu\n",
             (unsigned long long)writtenBytes,
             (unsigned long)header.fileBytes
         );
@@ -2459,7 +2460,7 @@ static bool FT02_Fail(FT02PbfMapError error)
     g_report.error = error;
     g_report.minimumFreeHeap = ESP.getMinFreeHeap();
     g_report.freePsramAfter = ESP.getFreePsram();
-    Serial.printf("[PBF] build failed error=%d\n", static_cast<int>(error));
+    FT02_LOGE("[ERROR][PBF] build failed error=%d\n", static_cast<int>(error));
 
     FT02_ReleaseAllBuffers();
     return false;
@@ -2499,7 +2500,7 @@ void FT02_PbfMapSetCenter(double longitude, double latitude)
        longitude < -180.0 || longitude > 180.0 ||
        latitude < -85.0 || latitude > 85.0)
     {
-        Serial.printf(
+        FT02_LOGD(
             "[PBF-A3.18] rejected invalid center %.7f,%.7f\n",
             longitude,
             latitude
@@ -2766,7 +2767,7 @@ bool FT02_PbfMapBuild()
                 g_sourceSignature
             ))
         {
-            Serial.println("[PBF-A3.18] source identity check failed before cache load");
+            FT02_LOGE_PRINTLN("[ERROR][PBF-A3.18] source identity check failed before cache load");
             return FT02_Fail(FT02_PBF_MAP_ERROR_SOURCE_OPEN);
         }
 
@@ -2834,7 +2835,7 @@ bool FT02_PbfMapBuild()
             }
             else
             {
-                Serial.printf("[PBF-A3.18] SD cache invalid path=%s\n", candidatePath);
+                FT02_LOGW("[WARN][PBF-A3.18] SD cache invalid path=%s\n", candidatePath);
                 if(!legacyCandidate) FT02_StorageDeleteFile(candidatePath);
                 FT02_ReleaseCacheBuffers();
             }

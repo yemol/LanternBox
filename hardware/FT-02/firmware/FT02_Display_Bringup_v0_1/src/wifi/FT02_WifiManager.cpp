@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "FT02_Storage.h"
+#include "FT02_Log.h"
 
 namespace
 {
@@ -91,6 +92,7 @@ static void beginAsyncScan()
     {
         setStatus("扫描启动失败");
         g_state = FT02_WIFI_STATE_ERROR;
+        FT02_LOGW_PRINTLN("[WARN][WIFI] scan start failed");
     }
 }
 
@@ -100,6 +102,7 @@ static bool finishScan(int found)
     {
         setStatus(found == 0 ? "未发现网络" : "扫描失败");
         g_state = FT02_WIFI_STATE_ERROR;
+        if(found < 0) FT02_LOGW("[WARN][WIFI] scan failed state=%d\n", found);
         WiFi.scanDelete();
         return true;
     }
@@ -126,6 +129,7 @@ static bool finishConnect(bool success)
         (void)FT02_WifiProfileStoreUpsert(g_pendingSsid, g_pendingPassword, true);
         setStatus("CONNECTED");
         g_state = FT02_WIFI_STATE_CONNECTED;
+        FT02_LOGI("[WIFI] connected ssid=%s ip=%s\n", g_connectedSsid, g_ipText);
         return true;
     }
 
@@ -140,6 +144,7 @@ static bool finishConnect(bool success)
 
     snprintf(g_statusText, sizeof(g_statusText), "%s 连接失败", g_pendingSsid);
     g_state = g_networkCount > 0 ? FT02_WIFI_STATE_SELECTING : FT02_WIFI_STATE_ERROR;
+    FT02_LOGW("[WARN][WIFI] connect failed ssid=%s\n", g_pendingSsid);
     return true;
 }
 }
@@ -148,24 +153,28 @@ void FT02_WifiManagerBegin()
 {
     FT02_WifiProfileStoreBegin();
     WiFi.persistent(false);
-    WiFi.disconnect(false, false);
-    WiFi.scanDelete();
+    // Boot begins with Wi-Fi uninitialized. Calling disconnect() here emits
+    // ESP_ERR_WIFI_NOT_INIT on ESP32-S3; mode(WIFI_OFF) is sufficient.
     WiFi.mode(WIFI_OFF);
+    WiFi.scanDelete();
     g_owner = FT02_WIFI_OWNER_NONE;
     g_state = FT02_WIFI_STATE_OFF;
     clearRuntime();
     setStatus("WiFi OFF");
+    FT02_LOGD_PRINTLN("[WIFI] OFF");
 }
 
 bool FT02_WifiManagerRequest(FT02WifiOwner owner)
 {
     if(owner != FT02_WIFI_OWNER_WIFI_UI && owner != FT02_WIFI_OWNER_SYNC) return false;
     if(g_owner != FT02_WIFI_OWNER_NONE && g_owner != owner) return false;
+    const bool wasOff = g_owner == FT02_WIFI_OWNER_NONE;
     g_owner = owner;
     WiFi.persistent(false);
     WiFi.mode(WIFI_STA);
     WiFi.setSleep(true);
     if(g_state == FT02_WIFI_STATE_OFF) g_state = FT02_WIFI_STATE_STARTING;
+    if(wasOff) FT02_LOGI("[WIFI] ON owner=%s\n", owner == FT02_WIFI_OWNER_SYNC ? "sync" : "ui");
     return true;
 }
 
@@ -177,6 +186,7 @@ void FT02_WifiManagerRelease(FT02WifiOwner owner)
 void FT02_WifiManagerShutdown(FT02WifiOwner owner)
 {
     if(g_owner != FT02_WIFI_OWNER_NONE && g_owner != owner) return;
+    const bool wasOn = g_owner != FT02_WIFI_OWNER_NONE || g_state != FT02_WIFI_STATE_OFF;
     g_state = FT02_WIFI_STATE_SHUTDOWN;
     WiFi.disconnect(false, false);
     WiFi.scanDelete();
@@ -185,6 +195,7 @@ void FT02_WifiManagerShutdown(FT02WifiOwner owner)
     clearRuntime();
     g_state = FT02_WIFI_STATE_OFF;
     setStatus("WiFi OFF");
+    if(wasOn) FT02_LOGD_PRINTLN("[WIFI] OFF");
 }
 
 void FT02_WifiManagerStartUiSession()
@@ -254,6 +265,7 @@ bool FT02_WifiManagerPoll(uint32_t nowMs)
         g_connectedSsid[0] = '\0';
         snprintf(g_ipText, sizeof(g_ipText), "--");
         g_state = g_networkCount > 0 ? FT02_WIFI_STATE_SELECTING : FT02_WIFI_STATE_ERROR;
+        FT02_LOGW_PRINTLN("[WARN][WIFI] connection lost");
         changed = true;
     }
 

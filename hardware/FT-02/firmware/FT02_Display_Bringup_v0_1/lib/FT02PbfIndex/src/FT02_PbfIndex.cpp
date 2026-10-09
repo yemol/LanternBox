@@ -1,4 +1,5 @@
 #include "FT02_PbfIndex.h"
+#include "FT02_Log.h"
 
 #include "FT02_Storage.h"
 
@@ -1769,22 +1770,22 @@ bool FT02_PbfIndexEnsure(
 
         if(loadResult == FT02_PBF_LOAD_INVALID)
         {
-            Serial.println("[PBF-A1] existing index invalid; rebuilding");
+            FT02_LOGD_PRINTLN("[PBF-A1] existing index invalid; rebuilding");
             FT02_StorageDeleteFile(indexPath);
         }
         else if(loadResult == FT02_PBF_LOAD_IO_ERROR)
         {
-            Serial.println("[PBF-A1] existing index unreadable; rebuilding");
+            FT02_LOGD_PRINTLN("[PBF-A1] existing index unreadable; rebuilding");
             FT02_StorageDeleteFile(indexPath);
         }
         else
         {
-            Serial.println("[PBF-A1] index missing; first build required");
+            FT02_LOGD_PRINTLN("[PBF-A1] index missing; first build required");
         }
     }
     else
     {
-        Serial.println("[PBF-A1] force rebuild requested");
+        FT02_LOGD_PRINTLN("[PBF-A1] force rebuild requested");
     }
 
     g_report.state = FT02_PBF_INDEX_BUILDING;

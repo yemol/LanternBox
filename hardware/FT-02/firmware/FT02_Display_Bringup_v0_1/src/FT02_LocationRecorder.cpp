@@ -1,4 +1,5 @@
 #include "FT02_LocationRecorder.h"
+#include "FT02_Log.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -229,7 +230,7 @@ static bool FT02_RecorderWriteEvent(
     {
         g_ft02Recorder.writeFailureCount++;
         FT02_RecorderSetAction("记录失败：SD不可写");
-        Serial.printf("[RECORDER] append failed type=%s path=%s\n", type, FT02_TRACK_PATH);
+        FT02_LOGE("[ERROR][RECORDER] append failed type=%s path=%s\n", type, FT02_TRACK_PATH);
         return false;
     }
 

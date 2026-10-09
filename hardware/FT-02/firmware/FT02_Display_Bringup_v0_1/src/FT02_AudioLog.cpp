@@ -1,4 +1,5 @@
 #include "FT02_AudioLog.h"
+#include "FT02_Log.h"
 
 #include <Arduino.h>
 #include <Wire.h>
@@ -25,9 +26,9 @@ constexpr int FT02_AUDIO_BCLK_PIN = 14;
 constexpr int FT02_AUDIO_WS_PIN = 15;
 constexpr int FT02_AUDIO_DOUT_PIN = 16;
 constexpr int FT02_AUDIO_DIN_PIN = 17;
-// WeAct ES8311+NS4150B module: SD/CTRL is the hardware power-amplifier shutdown.
-// GPIO4 is free in the current FT-02 production pin map (CardKB2 is SDA47/SCL21).
-constexpr int FT02_AUDIO_PA_SD_PIN = 4;
+// Current FT-02 hardware does not wire the NS4150B SD/CTRL pin to ESP32-S3.
+// Keep the logical PA state machine/timing for playback sequencing, but do not
+// claim or drive any GPIO for amplifier shutdown. GPIO4 remains reserved/free.
 constexpr uint32_t FT02_AUDIO_PA_STARTUP_MS = 125;
 
 constexpr uint32_t FT02_AUDIO_SAMPLE_RATE = 44100;
@@ -199,23 +200,16 @@ static bool g_ft02AudioPaEnabled = false;
 
 static void FT02_AudioPaInit()
 {
-    // Drive shutdown LOW as early as the audio subsystem starts. For completely
-    // silent reset/boot before setup() reaches this point, add a 10 kOhm
-    // pulldown from the module SD pin to GND.
-    pinMode(FT02_AUDIO_PA_SD_PIN, OUTPUT);
-    digitalWrite(FT02_AUDIO_PA_SD_PIN, LOW);
+    // SD/CTRL is not wired on the current hardware. Retain only the logical
+    // state used by the playback sequence; no ESP32-S3 GPIO is owned here.
     g_ft02AudioPaInitialized = true;
     g_ft02AudioPaEnabled = false;
-
 }
 
 static void FT02_AudioPaSet(bool enabled)
 {
     if(!g_ft02AudioPaInitialized) FT02_AudioPaInit();
-    if(g_ft02AudioPaEnabled == enabled) return;
-    digitalWrite(FT02_AUDIO_PA_SD_PIN, enabled ? HIGH : LOW);
     g_ft02AudioPaEnabled = enabled;
-
 }
 
 static uint8_t FT02_AudioLoadVolumeLevel()
@@ -399,11 +393,11 @@ static int16_t FT02_AudioApplyPlaybackGain(int16_t sample, float gain)
 
 static void FT02_AudioLogEspError(const char* label, esp_err_t error)
 {
-    Serial.print(label);
-    Serial.print(" error=");
-    Serial.print(static_cast<int>(error));
-    Serial.print(" ");
-    Serial.println(esp_err_to_name(error));
+    FT02_LOGE_PRINT(label);
+    FT02_LOGE_PRINT(" error=");
+    FT02_LOGE_PRINT(static_cast<int>(error));
+    FT02_LOGE_PRINT(" ");
+    FT02_LOGE_PRINTLN(esp_err_to_name(error));
 }
 
 static bool FT02_AudioInitCodec()
@@ -851,7 +845,7 @@ static bool FT02_AudioInitializeSequence()
     {
         if(!FT02_AudioWriteSequenceState(candidate))
         {
-            Serial.println("[AUDIO-ID] failed to initialize sequence state");
+            FT02_LOGE_PRINTLN("[ERROR][AUDIO-ID] failed to initialize sequence state");
             return false;
         }
     }
@@ -874,7 +868,7 @@ static bool FT02_AudioReserveSequence(uint32_t& sequence)
     const uint32_t nextSequence = sequence + 1u;
     if(!FT02_AudioWriteSequenceState(nextSequence))
     {
-        Serial.println("[AUDIO-ID] sequence reservation failed");
+        FT02_LOGE_PRINTLN("[ERROR][AUDIO-ID] sequence reservation failed");
         return false;
     }
 
@@ -1277,7 +1271,7 @@ static bool FT02_AudioAllocateRecordingStage()
             return true;
         }
     }
-    Serial.println("[AUDIO-REC] WARN PSRAM stage unavailable; SD streaming active during capture");
+    FT02_LOGW_PRINTLN("[WARN][AUDIO-REC] PSRAM stage unavailable; SD streaming active during capture");
     return false;
 }
 
@@ -1299,8 +1293,8 @@ static bool FT02_AudioFlushRecordingStage()
     );
     if(written != bytes)
     {
-        Serial.printf(
-            "[AUDIO-REC] SD stage flush failed written=%u expected=%u\n",
+        FT02_LOGE(
+            "[ERROR][AUDIO-REC] SD stage flush failed written=%u expected=%u\n",
             static_cast<unsigned>(written),
             static_cast<unsigned>(bytes)
         );
@@ -1344,7 +1338,7 @@ static bool FT02_AudioAppendRecordingSamples(const int16_t* samples, size_t fram
             g_ft02AudioRecording.sdStreamingFallback = true;
             if(fwrite(samples, 1, bytes, g_ft02AudioRecording.file) != bytes)
             {
-                Serial.println("[AUDIO-REC] SD write failed");
+                FT02_LOGE_PRINTLN("[ERROR][AUDIO-REC] SD write failed");
                 g_ft02AudioRecording.success = false;
                 return false;
             }
@@ -1354,7 +1348,7 @@ static bool FT02_AudioAppendRecordingSamples(const int16_t* samples, size_t fram
     {
         if(fwrite(samples, 1, bytes, g_ft02AudioRecording.file) != bytes)
         {
-            Serial.println("[AUDIO-REC] SD write failed");
+            FT02_LOGE_PRINTLN("[ERROR][AUDIO-REC] SD write failed");
             g_ft02AudioRecording.success = false;
             return false;
         }
@@ -1687,10 +1681,10 @@ static void FT02_AudioFinishPlayback()
     // stable centred input, allow the soft-mute/volume ramp to settle, then
     // shut down the BTL amplifier. Power the DAC down only after the speaker
     // bridge is disconnected. This avoids both the former hard PCM step and
-    // the NS4150B shutdown transient being amplified by the speaker.
+    // the DAC shutdown transient reaching the speaker path.
     if(!g_ft02AudioCodec.prepareDacForPaShutdown())
     {
-        Serial.println("[AUDIO-PLAY] FAIL: unable to prepare DAC shutdown");
+        FT02_LOGE_PRINTLN("[ERROR][AUDIO-PLAY] unable to prepare DAC shutdown");
         success = false;
     }
     FT02_AudioQueueSilence(20);
@@ -1701,7 +1695,7 @@ static void FT02_AudioFinishPlayback()
 
     if(!g_ft02AudioCodec.powerDownDac())
     {
-        Serial.println("[AUDIO-PLAY] FAIL: unable to power down DAC");
+        FT02_LOGE_PRINTLN("[ERROR][AUDIO-PLAY] unable to power down DAC");
         success = false;
     }
 
@@ -1807,14 +1801,14 @@ static void FT02_AudioServicePlayback()
         }
 
         // Prepare a stable zero-level DAC output while the external PA is
-        // still physically shut down. Then enable NS4150B and keep streaming
+        // still logically gated. Then release the playback gate and keep streaming
         // zeros across its ~120 ms startup time. Real PCM starts only after
         // both analogue stages are settled.
         if(!g_ft02AudioPlayback.paEnabled)
         {
             if(!g_ft02AudioCodec.setDacMuted(false))
             {
-                Serial.println("[AUDIO-PLAY] FAIL: unable to prepare DAC");
+                FT02_LOGE_PRINTLN("[ERROR][AUDIO-PLAY] unable to prepare DAC");
                 FT02_AudioPaSet(false);
                 g_ft02AudioPlayback.success = false;
                 FT02_AudioBeginPlaybackDrain();
@@ -2147,7 +2141,7 @@ static bool FT02_AudioHardwareStart()
     g_ft02AudioHardwareActive = true;
     FT02_AudioSetMessage("语音日志就绪", true);
     FT02_AudioChanged();
-    Serial.printf("[AUDIO-PWR] ON owners=0x%02X\n", g_ft02AudioOwnerMask);
+    FT02_LOGD("[AUDIO-PWR] ON owners=0x%02X\n", g_ft02AudioOwnerMask);
     return true;
 }
 
@@ -2165,7 +2159,7 @@ static void FT02_AudioHardwareStop()
     // guard here as a final safety barrier.
     if(g_ft02AudioState != FT02_AUDIO_LOG_IDLE)
     {
-        Serial.println("[AUDIO-PWR] release deferred: audio busy");
+        FT02_LOGD_PRINTLN("[AUDIO-PWR] release deferred: audio busy");
         return;
     }
 
@@ -2185,7 +2179,7 @@ static void FT02_AudioHardwareStop()
         codecSuspendOk
     );
     FT02_AudioChanged();
-    Serial.printf("[AUDIO-PWR] OFF owners=0x%02X codec=%s\n",
+    FT02_LOGD("[AUDIO-PWR] OFF owners=0x%02X codec=%s\n",
                   g_ft02AudioOwnerMask, codecSuspendOk ? "OK" : "WARN");
 }
 
@@ -2350,7 +2344,7 @@ bool FT02_AudioLogSetPlaybackEpdGuard(bool enabled)
         if(!g_ft02AudioPlayback.epdGuardReady)
         {
             g_ft02AudioPlayback.epdGuardActive = false;
-            Serial.println("[AUDIO-EPD] FAIL: guard could not reach zero before timeout");
+            FT02_LOGE_PRINTLN("[ERROR][AUDIO-EPD] guard could not reach zero before timeout");
             return false;
         }
 

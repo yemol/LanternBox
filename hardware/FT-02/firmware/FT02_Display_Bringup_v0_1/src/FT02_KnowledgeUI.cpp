@@ -1,4 +1,5 @@
 #include "FT02_KnowledgeUI.h"
+#include "FT02_Log.h"
 #include "FT02_EpdInteractiveRuntime.h"
 
 #include <Arduino.h>
@@ -2163,7 +2164,7 @@ static FT02KnowledgeAction FT02_KnowledgeHandleReader(FT02Display& display, cons
             // Exceptional persistence failure uses the same title-adjacent
             // badge slot so pagination on the right is never obscured.
             snprintf(g_readerFeedback, sizeof(g_readerFeedback), "%s", "保存失败");
-            Serial.printf("[KNOWLEDGE-FAVORITES] toggle FAILED card=%s index=%d\n",
+            FT02_LOGE("[ERROR][KNOWLEDGE-FAVORITES] toggle FAILED card=%s index=%d\n",
                           card->index->id,
                           globalIndex);
         }

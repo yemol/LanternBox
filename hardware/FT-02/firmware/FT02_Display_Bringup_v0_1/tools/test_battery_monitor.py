@@ -10,7 +10,7 @@ main = (root / 'src/main.cpp').read_text(encoding='utf-8')
 build = (root / 'src/FT02_BuildInfo.h').read_text(encoding='utf-8')
 
 checks = {
-    'version': 'v2.75k91' in build,
+    'version': 'v2.84-sleep-power-a5c-stable-r1.1' in build,
     'i2c_addr_0x36': 'MAX17048_ADDR = 0x36' in mon,
     'shared_i2c_lock': 'FT02_I2CBusLock' in mon and 'FT02_I2CBusUnlock' in mon,
     'vcell_reg': 'REG_VCELL = 0x02' in mon,

@@ -1,4 +1,5 @@
 #include "FT02_FieldManualRecent.h"
+#include "FT02_Log.h"
 
 #include <Arduino.h>
 #include <stdio.h>
@@ -278,7 +279,7 @@ bool FT02_FieldManualRecentFlush()
     if(!g_loaded || !g_dirty) return true;
     if(!writeSnapshot())
     {
-        Serial.println("[FIELD-RECENT] flush FAILED");
+        FT02_LOGE_PRINTLN("[ERROR][FIELD-RECENT] flush FAILED");
         return false;
     }
     g_dirty = false;

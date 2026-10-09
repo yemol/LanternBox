@@ -30,7 +30,9 @@ require("I2S_SLOT_MODE_STEREO" in audio, "I2S does not use two slots")
 require("config.gpio_cfg.mclk = I2S_GPIO_UNUSED" in audio, "MCLK GPIO was allocated")
 require("channelConfig.auto_clear_after_cb = true" in audio, "idle TX does not guarantee zero data")
 require("FT02_AUDIO_ES8311_DIGITAL_MIC = false" in audio, "analog microphone path is not selected")
-require("FT02_AUDIO_PA_SD_PIN = 4" in audio, "NS4150B SD/CTRL is not on GPIO4")
+require("FT02_AUDIO_PA_SD_PIN" not in audio, "audio still claims a PA shutdown GPIO")
+require("pinMode(4" not in audio and "digitalWrite(4" not in audio, "audio still drives reserved GPIO4")
+require("GPIO4 remains reserved/free" in audio, "GPIO4 free/reserved hardware truth is not documented")
 require("FT02_AUDIO_PLAYBACK_MAX_GAIN = 2.0f" in audio, "playback normalization is allowed above 2x")
 require(re.search(r"FT02_ES8311_DAC_VOLUME\s*=\s*0xB8\s*;", codec) is not None, "DAC baseline is not -3.5dB / ~2/3 amplitude")
 
@@ -85,8 +87,8 @@ require("WM8960" not in platformio, "WM8960 dependency remains")
 require("ES8311与I2S正常" in self_test, "self-test success text was not migrated")
 require("ES8311无响应" in self_test, "self-test codec failure text was not migrated")
 version_text = (ROOT / "VERSION.txt").read_text(encoding="utf-8").strip()
-require(version_text == "v2.75k91", "firmware version mismatch")
-require('FT02_FIRMWARE_VERSION "v2.75k91"' in build_info, "BuildInfo/version mismatch")
+require(version_text == "v2.84-sleep-power-a5c-stable-r1.1", "firmware version mismatch")
+require('FT02_FIRMWARE_VERSION "v2.84-sleep-power-a5c-stable-r1.1"' in build_info, "BuildInfo/version mismatch")
 
 require("DAC idle mute" in codec, "codec does not finish initialization muted")
 require("DAC idle power down" in codec, "codec does not power DAC down while idle")
@@ -151,7 +153,7 @@ require('FT02_EpdInteractivePowerOffNow(display)' in volume_fn, "safe volume EPD
 require('FT02_DrawAudioLogPlayingStatusPartial' not in ui_cpp, "elapsed/status playback partial renderer returned")
 
 print(
-    "PASS ES8311 I2C=47/21 I2S=14/15/16/17 PA_SD=GPIO4 MCLK=NC "
+    "PASS ES8311 I2C=47/21 I2S=14/15/16/17 PA_SD=NC GPIO4=FREE MCLK=NC "
     "I2S=44100Hz/16-bit/2-slot BCLK=1411200Hz AMIC=ON "
     "DAC=IDLE_POWERDOWN PA=IDLE_SHUTDOWN S3-CLOCK=DEFAULT/512x I2C-GUARD=ON "
     "EPD-REC-TIMER=ON PSRAM-REC=4MiB(~47.5s) PSRAM-PLAY=4MiB FULL-TX=ON STOP-FADE=46.4ms POP-SAFE=ON RX-SUSPEND=ON EPD-PLAY-TIMER=OFF STATIC-TOTAL-DURATION=ON VOLUME-SAFE-REFRESH=ON CARDKB=10Hz EPD+SD-SETTLE=900ms BURSTFIX<=2.9ms playback-zero-prime=2 normalize<=2x DAC_BASE=-3.5dB(~0.668x)"

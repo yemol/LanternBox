@@ -1,4 +1,5 @@
 #include "FT02_LoRaCommunicationRuntime.h"
+#include "FT02_Log.h"
 
 #include <esp_system.h>
 #include <math.h>
@@ -11,7 +12,7 @@
 
 #include "FT02_Gnss.h"
 #include "FT02_LoRaNodeRuntime.h"
-#include "FT02_LR01HostRuntime.h"
+#include "FT02_MeshService.h"
 
 namespace
 {
@@ -26,6 +27,7 @@ constexpr uint32_t FT02_RELIABLE_TTL_SEC = 2u * 60u * 60u;
 constexpr uint32_t FT02_RELIABLE_RETRY_MS = 180000u;
 constexpr uint32_t FT02_PERSISTENT_RETRY_MS = 300000u;
 constexpr uint32_t FT02_OUTBOX_FLUSH_IDLE_MS = 1500u;
+constexpr uint32_t FT02_MESH_ACK_TIMEOUT_MS = 45000u;
 constexpr const char* FT02_OUTBOX_PATH = "/lanternbox/messages/outbox_v1.tsv";
 constexpr const char* FT02_OUTBOX_TEMP = "/lanternbox/messages/outbox_v1.tmp";
 constexpr const char* FT02_OUTBOX_BACKUP = "/lanternbox/messages/outbox_v1.bak";
@@ -181,14 +183,16 @@ void resolveAck(uint32_t requestId, uint32_t error)
     {
         pending->view.state = FT02_LORA_TX_ACKED;
         ++g_ackCount;
-
+        FT02_LOGD("[LORA-MSG] ACK packet=0x%08lX to=0x%08lX\n",
+                      static_cast<unsigned long>(requestId),
+                      static_cast<unsigned long>(pending->view.destination));
     }
     else
     {
         pending->view.state = FT02_LORA_TX_NAKED;
         ++g_nakCount;
-        Serial.printf(
-            "[LORA-MSG] NAK packet=0x%08lX error=%lu (%s)\n",
+        FT02_LOGW(
+            "[WARN][LORA-MSG] NAK packet=0x%08lX error=%lu (%s)\n",
             static_cast<unsigned long>(requestId),
             static_cast<unsigned long>(error),
             FT02_LoRaCommunicationRoutingErrorText(error)
@@ -226,26 +230,47 @@ bool makeTextPayload(const char* userText, bool attachFreshGnss, char* out, size
 
 bool sendText(uint32_t destination, bool direct, const uint8_t* publicKey, const char* userText, bool attachFreshGnss, uint32_t* outPacketId = nullptr)
 {
-    (void)publicKey; // LR01 owns PKI/public-key material in the new architecture.
-    if(!FT02_LR01HostRadioReady()) return false;
+    (void)publicKey;
+    const bool meshBroadcast = !direct && FT02_MeshServiceReady();
+    const bool meshPrivate = direct && FT02_MeshServiceCanSendPrivate(destination);
+    // MeshService is now the sole production Meshtastic transport.  Do not
+    // silently fall back to any retired transport path, because that produces
+    // a misleading "sent" UI state while bypassing NodeDB/PKI.
+    if(!meshBroadcast && !meshPrivate)
+    {
+        if(direct && FT02_MeshServiceReady()) (void)FT02_MeshServiceRequestNodeInfo();
+        return false;
+    }
 
     char text[FT02_LORA_MESSAGE_TEXT_BYTES];
     if(!makeTextPayload(userText, attachFreshGnss, text, sizeof(text))) return false;
 
-    // LR01 Host A2 accepts the frozen protocol payload limit, while Core intentionally limits user
-    // traffic to 120 UTF-8 bytes. Truncate at a valid UTF-8 boundary after any
-    // optional GPS suffix has been appended.
+    // Keep the existing Core UI limit and FT01's proven Meshtastic text cap.
     const size_t limited = safeUtf8Prefix(text, FT02_LORA_USER_TEXT_MAX_BYTES);
     text[limited] = '\0';
     if(limited == 0) return false;
 
     const uint32_t packetId = generatePacketId();
-    const bool submitted = direct
-        ? FT02_LR01HostSendPrivate(packetId, destination, text)
-        : FT02_LR01HostSendBroadcast(packetId, text);
+    const bool submitted = meshBroadcast
+        ? FT02_MeshServiceSendBroadcastText(text, packetId)
+        : FT02_MeshServiceSendPrivateText(destination, text, packetId);
     if(!submitted) return false;
 
     registerTx(packetId, destination, !direct, direct, text);
+    if(meshBroadcast || meshPrivate)
+    {
+        PendingTx* pending = findPending(packetId);
+        if(pending != nullptr)
+        {
+            pending->view.state = FT02_LORA_TX_SENT;
+            if(meshBroadcast) pending->view.completedAtMs = millis();
+        }
+        FT02_LOGD(meshPrivate
+                          ? "[LORA-MSG] mesh_private_sent packet=0x%08lX to=0x%08lX bytes=%u\n"
+                          : "[LORA-MSG] mesh_broadcast_sent packet=0x%08lX to=0x%08lX bytes=%u\n",
+                      static_cast<unsigned long>(packetId), static_cast<unsigned long>(destination),
+                      static_cast<unsigned>(limited));
+    }
     if(outPacketId != nullptr) *outPacketId = packetId;
     ++g_txCount;
     ++g_revision;
@@ -312,7 +337,7 @@ void resolveOutboxPacket(uint32_t packetId, uint32_t error)
     else if(slot.view.mode == FT02_MESSAGE_IMMEDIATE)
     {
         // Immediate messages are never application-layer retried after the
-        // LR01 accepted the Host transmission. A later routing NAK is simply
+        // the Mesh transport accepted the transmission. A later routing NAK is simply
         // surfaced as a failed terminal state.
         slot.view.state = FT02_DELIVERY_FAILED;
     }
@@ -539,7 +564,7 @@ bool loadOutboxSnapshot()
     }
     fclose(file);
     g_outboxLoaded = true;
-    if(!headerSeen) Serial.println("[LORA-DELIVERY] outbox header missing/different; valid rows recovered");
+    if(!headerSeen) FT02_LOGW_PRINTLN("[WARN][LORA-DELIVERY] outbox header missing/different; valid rows recovered");
     if(normalized) markOutboxDirty();
 
     return true;
@@ -599,14 +624,20 @@ uint32_t g_lastDeliverySubmitMs = 0;
 bool trySubmitOutbox(OutboxSlot& slot, uint32_t nowMs)
 {
     if(!slot.view.valid || !deliveryStateActive(slot.view.state)) return false;
-    if(!FT02_LR01HostRadioReady()) return false;
+    const bool meshBroadcastReady = slot.view.broadcast && FT02_MeshServiceReady();
+    const bool meshPrivateReady = !slot.view.broadcast && FT02_MeshServiceCanSendPrivate(slot.view.destination);
+    if(!meshBroadcastReady && !meshPrivateReady)
+    {
+        if(!slot.view.broadcast && FT02_MeshServiceReady()) (void)FT02_MeshServiceRequestNodeInfo();
+        return false;
+    }
     if(g_lastDeliverySubmitMs != 0 && static_cast<uint32_t>(nowMs - g_lastDeliverySubmitMs) < 2500u) return false;
 
     if(slot.view.state == FT02_DELIVERY_WAITING_ACK)
     {
-        // A2 keeps exactly one Core outbox attempt waiting for the correlated
-        // LR01 delivery ACK/TIMEOUT. Do not submit another attempt until that
-        // lifecycle completes.
+        // Keep exactly one direct-message attempt waiting for the correlated
+        // Meshtastic ROUTING_APP ACK/TIMEOUT. Do not submit another attempt
+        // until that lifecycle completes.
         return false;
     }
     else if(slot.view.attemptCount > 0)
@@ -624,10 +655,9 @@ bool trySubmitOutbox(OutboxSlot& slot, uint32_t nowMs)
     slot.view.lastAttemptMs = nowMs;
     if(slot.view.attemptCount < 0xFFFFu) ++slot.view.attemptCount;
     g_lastDeliverySubmitMs = nowMs;
-    // LR01 Host A2 correlates this packetId as the Core lifecycle id. Private
-    // reliable/persistent items remain WAITING_ACK until MESH_DELIVERY ACK or
-    // TIMEOUT; TIMEOUT returns retryable modes to QUEUED.
-    slot.view.state = FT02_DELIVERY_WAITING_ACK;
+    // Broadcast is terminal at TX_DONE. Meshtastic PKI direct messages request
+    // a routing ACK and stay WAITING_ACK until MeshService receives it.
+    slot.view.state = meshBroadcastReady ? FT02_DELIVERY_SENT : FT02_DELIVERY_WAITING_ACK;
     markOutboxDirty();
 
     return true;
@@ -642,6 +672,16 @@ void pollOutboxDelivery()
     {
         OutboxSlot& slot = g_outbox[i];
         if(!slot.view.valid || !deliveryStateActive(slot.view.state)) continue;
+        if(slot.view.state == FT02_DELIVERY_WAITING_ACK && !slot.view.broadcast &&
+           FT02_MeshServiceReady() && slot.view.lastPacketId != 0u && slot.view.lastAttemptMs != 0u &&
+           static_cast<uint32_t>(nowMs - slot.view.lastAttemptMs) >= FT02_MESH_ACK_TIMEOUT_MS)
+        {
+            FT02_LOGW("[WARN][LORA-MSG] mesh_ack_timeout packet=0x%08lX to=0x%08lX\n",
+                          static_cast<unsigned long>(slot.view.lastPacketId),
+                          static_cast<unsigned long>(slot.view.destination));
+            FT02_LoRaCommunicationHostDelivery(slot.view.lastPacketId, slot.view.destination, false);
+            continue;
+        }
         if(outboxExpired(slot, nowMs, nowEpoch))
         {
             slot.view.state = FT02_DELIVERY_EXPIRED;
@@ -934,7 +974,7 @@ void FT02_LoRaCommunicationHostTxAccepted(uint32_t hostId)
 {
     PendingTx* pending = findPending(hostId);
     if(pending == nullptr) return;
-    // ACCEPTED confirms LR01 ownership of the request but not RF transmission.
+    // ACCEPTED confirms transport ownership of the request but not RF transmission.
     ++g_revision;
 }
 
@@ -957,7 +997,7 @@ void FT02_LoRaCommunicationHostTxSent(uint32_t hostId)
             markOutboxDirty();
         }
         // Private reliable/persistent messages intentionally remain WAITING_ACK
-        // until LR01 reports MESH_DELIVERY ACK/TIMEOUT.
+        // until Mesh routing reports ACK/TIMEOUT.
     }
     ++g_revision;
 }
@@ -974,7 +1014,7 @@ void FT02_LoRaCommunicationHostTxFailed(uint32_t hostId, const char* reason)
     resolveOutboxPacket(hostId, 8);
     ++g_nakCount;
     ++g_revision;
-    Serial.printf("[LORA-MSG] LR01 TX failed id=0x%08lX reason=%s\n",
+    FT02_LOGE("[ERROR][LORA-MSG] Mesh TX failed id=0x%08lX reason=%s\n",
                   static_cast<unsigned long>(hostId), reason != nullptr ? reason : "");
 }
 

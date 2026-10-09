@@ -1,8 +1,8 @@
 #pragma once
 #include <Arduino.h>
 
-// Historical API name retained for UI compatibility. This is now an LR01
-// navigation-state logger; it never receives raw GNSS bytes or sentences.
+// Historical API name retained for UI compatibility. v2.75k92 logs the
+// Core-owned UART GNSS snapshot with Core I2C compass health.
 struct FT02GnssFieldTestSnapshot
 {
     bool active;

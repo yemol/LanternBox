@@ -8,7 +8,7 @@
 #include "FT02_GlobalCJK20FontData.h"
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
-#include "FT02_LR01HostRuntime.h"
+#include "FT02_CompassCore.h"
 #include "FT02_StatusBar.h"
 
 namespace
@@ -33,16 +33,16 @@ void setNotice(const char* text)
     snprintf(g_notice, sizeof(g_notice), "%s", text != nullptr ? text : "");
 }
 
-const char* stateCn(FT02CompassCalState state)
+const char* stateCn(FT02CoreCompassCalState state)
 {
     switch(state)
     {
-        case FT02_COMPASS_CAL_IDLE: return "空闲";
-        case FT02_COMPASS_CAL_RUNNING: return "校准中";
-        case FT02_COMPASS_CAL_READY: return "可保存";
-        case FT02_COMPASS_CAL_SAVED: return "已保存";
-        case FT02_COMPASS_CAL_CANCELED: return "已取消";
-        case FT02_COMPASS_CAL_FAILED: return "失败";
+        case FT02_CORE_COMPASS_CAL_IDLE: return "空闲";
+        case FT02_CORE_COMPASS_CAL_RUNNING: return "校准中";
+        case FT02_CORE_COMPASS_CAL_READY: return "可保存";
+        case FT02_CORE_COMPASS_CAL_SAVED: return "已保存";
+        case FT02_CORE_COMPASS_CAL_CANCELED: return "已取消";
+        case FT02_CORE_COMPASS_CAL_FAILED: return "失败";
         default: return "等待状态";
     }
 }
@@ -84,7 +84,7 @@ void drawResetConfirm(FT02Display& display)
 {
     drawHeader(display);
     FT02_DrawTextPack(display, ft02_cjk_24b, "确认删除已保存的罗盘校准？", 200, 210);
-    FT02_DrawTextPack(display, ft02_cjk_20r, "这会删除 LR01 NVS 中当前有效校准参数。", 178, 258);
+    FT02_DrawTextPack(display, ft02_cjk_20r, "这会删除 Core NVS 中当前有效校准参数。", 178, 258);
     FT02_DrawTextPack(display, ft02_cjk_20r, "删除后 compass_q 将回到未校准状态，直到重新校准并保存。", 106, 296);
     FT02_DrawTextPack(display, ft02_cjk_20r, "ENTER 确认重置     B 取消", 244, 362);
     FT02_DrawBottomBarWithFont(display, BOTTOM_RESET, ft02_cjk_20r);
@@ -95,13 +95,13 @@ void FT02_CompassCalibrationUIOpen()
 {
     g_resetConfirm = false;
     setNotice("");
-    if(!FT02_LR01HostCompassCalRequestStatus())
-        setNotice("通讯模块离线，无法读取罗盘校准状态");
+    const FT02CoreCompassSnapshot compass = FT02_CompassCoreSnapshotCurrent();
+    if(!compass.ready) setNotice("Core I2C罗盘未就绪");
 }
 
 uint32_t FT02_CompassCalibrationUIRevision()
 {
-    return FT02_LR01HostState().compassCalibration.revision;
+    return FT02_CompassCoreSnapshotCurrent().calibration.revision;
 }
 
 void FT02_DrawCompassCalibrationScreen(FT02Display& display)
@@ -120,14 +120,14 @@ void FT02_DrawCompassCalibrationScreen(FT02Display& display)
 
         drawHeader(display);
 
-        const FT02LR01State& lr01 = FT02_LR01HostState();
-        const FT02CompassCalibrationState& cal = lr01.compassCalibration;
+        const FT02CoreCompassSnapshot compass = FT02_CompassCoreSnapshotCurrent();
+        const FT02CoreCompassCalibrationState& cal = compass.calibration;
 
         char line[220];
 
-        snprintf(line, sizeof(line), "通讯模块：%s    罗盘：%s    当前校准：%s",
-                 FT02_LR01HostOnline() ? "在线" : "离线",
-                 lr01.compassReady ? "正常" : "不可用",
+        snprintf(line, sizeof(line), "Core I2C：%s    罗盘：%s    当前校准：%s",
+                 compass.hardwareKnown ? "已初始化" : "未初始化",
+                 compass.ready ? "正常" : "不可用",
                  cal.calibrated ? "已保存" : "未保存");
         FT02_DrawTextPack(display, ft02_cjk_20r, line, 48, 165);
 
@@ -137,12 +137,12 @@ void FT02_DrawCompassCalibrationScreen(FT02Display& display)
                  static_cast<unsigned long>(cal.samples));
         FT02_DrawTextPack(display, ft02_cjk_20r, line, 48, 201);
 
-        if(cal.state == FT02_COMPASS_CAL_RUNNING)
-            FT02_DrawTextPack(display, ft02_cjk_20r, "请缓慢旋转设备，并在空间中做完整“8”字运动。", 148, 238);
-        else if(cal.state == FT02_COMPASS_CAL_READY)
-            FT02_DrawTextPack(display, ft02_cjk_20r, "覆盖范围已达到可保存条件。按 ENTER 保存新校准。", 130, 238);
+        if(cal.state == FT02_CORE_COMPASS_CAL_RUNNING)
+            FT02_DrawTextPack(display, ft02_cjk_20r, "保持设备水平，缓慢旋转360°两到三圈；不要做8字、俯仰或滚转。", 148, 238);
+        else if(cal.state == FT02_CORE_COMPASS_CAL_READY)
+            FT02_DrawTextPack(display, ft02_cjk_20r, "覆盖已达标，按 ENTER 保存；若质量偏低，保持水平再补一圈360°。", 130, 238);
         else if(cal.calibrated)
-            FT02_DrawTextPack(display, ft02_cjk_20r, "当前 heading 正在使用 LR01 中已保存的校准参数。", 130, 238);
+            FT02_DrawTextPack(display, ft02_cjk_20r, "当前 heading 正在使用 Core 中已保存的校准参数。", 130, 238);
         else
             FT02_DrawTextPack(display, ft02_cjk_20r, "尚无已保存校准。按 ENTER 开始新的罗盘校准。", 138, 238);
 
@@ -167,9 +167,9 @@ void FT02_DrawCompassCalibrationScreen(FT02Display& display)
         }
         else
         {
-            const char* action = cal.state == FT02_COMPASS_CAL_READY
+            const char* action = cal.state == FT02_CORE_COMPASS_CAL_READY
                 ? "ENTER 保存   DEL 取消   R 删除旧校准"
-                : (cal.state == FT02_COMPASS_CAL_RUNNING
+                : (cal.state == FT02_CORE_COMPASS_CAL_RUNNING
                     ? "校准进行中   DEL 取消   B可返回后台继续"
                     : "ENTER 开始   R 删除已保存校准");
             FT02_DrawTextPack(display, ft02_cjk_20r, action, 48, 405);
@@ -186,15 +186,16 @@ void FT02_DrawCompassCalibrationScreen(FT02Display& display)
 FT02CompassCalibrationUIAction FT02_CompassCalibrationUIHandleInput(const FT02InputEvent& event)
 {
     const uint8_t raw = static_cast<uint8_t>(event.raw);
-    const FT02CompassCalibrationState& cal = FT02_LR01HostState().compassCalibration;
+    const FT02CoreCompassSnapshot compassNow = FT02_CompassCoreSnapshotCurrent();
+    const FT02CoreCompassCalibrationState& cal = compassNow.calibration;
 
     if(g_resetConfirm)
     {
         if(event.key == FT02_KEY_SELECT)
         {
-            const bool ok = FT02_LR01HostCompassCalReset();
+            const bool ok = FT02_CompassCoreCalReset();
             g_resetConfirm = false;
-            setNotice(ok ? "已发送重置请求，等待通讯模块确认" : "重置请求发送失败");
+            setNotice(ok ? "已重置 Core 罗盘校准" : "重置失败");
             return FT02_COMPASS_CAL_UI_REDRAW;
         }
         if(event.key == FT02_KEY_BACK || event.command == 'b')
@@ -210,10 +211,10 @@ FT02CompassCalibrationUIAction FT02_CompassCalibrationUIHandleInput(const FT02In
     // the active calibration session, while B/ESC remains page-back.
     if(raw == 0x08u || raw == 0x7Fu)
     {
-        if(cal.state == FT02_COMPASS_CAL_RUNNING || cal.state == FT02_COMPASS_CAL_READY)
+        if(cal.state == FT02_CORE_COMPASS_CAL_RUNNING || cal.state == FT02_CORE_COMPASS_CAL_READY)
         {
-            const bool ok = FT02_LR01HostCompassCalCancel();
-            setNotice(ok ? "已发送取消请求" : "取消请求发送失败");
+            const bool ok = FT02_CompassCoreCalCancel();
+            setNotice(ok ? "已取消校准" : "取消失败");
             return FT02_COMPASS_CAL_UI_REDRAW;
         }
         setNotice("当前没有进行中的校准");
@@ -232,33 +233,33 @@ FT02CompassCalibrationUIAction FT02_CompassCalibrationUIHandleInput(const FT02In
     if(event.key == FT02_KEY_SELECT)
     {
         bool ok = false;
-        if(cal.state == FT02_COMPASS_CAL_READY)
+        if(cal.state == FT02_CORE_COMPASS_CAL_READY)
         {
-            ok = FT02_LR01HostCompassCalSave();
-            setNotice(ok ? "已发送保存请求" : "保存请求发送失败");
+            ok = FT02_CompassCoreCalSave();
+            setNotice(ok ? "已保存 Core 罗盘校准" : "保存失败");
         }
-        else if(cal.state == FT02_COMPASS_CAL_RUNNING)
+        else if(cal.state == FT02_CORE_COMPASS_CAL_RUNNING)
         {
             setNotice("校准仍在进行，请继续转动设备");
             ok = true;
         }
         else
         {
-            ok = FT02_LR01HostCompassCalStart();
-            setNotice(ok ? "已发送开始校准请求" : "开始校准请求发送失败");
+            ok = FT02_CompassCoreCalStart();
+            setNotice(ok ? "已开始 Core 罗盘校准" : "开始校准失败");
         }
         return FT02_COMPASS_CAL_UI_REDRAW;
     }
 
     if(event.command == 's')
     {
-        if(cal.state != FT02_COMPASS_CAL_READY)
+        if(cal.state != FT02_CORE_COMPASS_CAL_READY)
         {
             setNotice("当前质量尚未达到可保存条件");
             return FT02_COMPASS_CAL_UI_REDRAW;
         }
-        const bool ok = FT02_LR01HostCompassCalSave();
-        setNotice(ok ? "已发送保存请求" : "保存请求发送失败");
+        const bool ok = FT02_CompassCoreCalSave();
+        setNotice(ok ? "已保存 Core 罗盘校准" : "保存失败");
         return FT02_COMPASS_CAL_UI_REDRAW;
     }
 

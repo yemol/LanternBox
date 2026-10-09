@@ -1,7 +1,6 @@
 
 #include "FT02_StatusBar.h"
 #include "FT02_LoRaNodeRuntime.h"
-#include "FT02_LR01HostRuntime.h"
 #include "FT02_LoRaCommunicationRuntime.h"
 #include "FT02_BatteryIcon.h"
 #include "FT02_EpdLifecycle.h"
@@ -59,8 +58,9 @@ void FT02_SetStatusBarBatteryCache(const char* line1, const char* line2)
 static void FT02_FormatLoRaLine1(char* out, size_t outSize)
 {
     // Keep line 1 fixed-width. Unread count belongs on line 2 so the
-    // compact LoRa block never grows past its right boundary.
-    snprintf(out, outSize, "LoRa");
+    // compact Mesh block never grows past its right boundary.
+    // The active transport is Meshtastic over the Core SX1262 HW-SPI backend.
+    snprintf(out, outSize, "Mesh");
 }
 
 static void FT02_FormatLoRaLine2(char* out, size_t outSize, const char* connectionStatus)
@@ -68,7 +68,7 @@ static void FT02_FormatLoRaLine2(char* out, size_t outSize, const char* connecti
     const uint16_t unread = FT02_LoRaCommunicationUnreadCount();
 
     // Unread messages own line 2 whenever present. This keeps line 1 fixed as
-    // "LoRa" and prevents the notification badge from overflowing the block.
+    // "Mesh" and prevents the notification badge from overflowing the block.
     // Cap presentation at 9+ so the width remains deterministic.
     if(unread > 0)
     {
@@ -190,9 +190,7 @@ void FT02_DrawStatusBar(
         FT02_STATUS_TEXT_LINE1_Y
     );
 
-    const char* loraStatus = FT02_LoRaNodeRuntimeReady()
-        ? "已连接"
-        : (FT02_LR01HostOnline() ? "同步中" : "连接中");
+    const char* loraStatus = FT02_LoRaNodeRuntimeReady() ? "已连接" : "连接中";
     char loraLine2[20];
     FT02_FormatLoRaLine2(loraLine2, sizeof(loraLine2), loraStatus);
 

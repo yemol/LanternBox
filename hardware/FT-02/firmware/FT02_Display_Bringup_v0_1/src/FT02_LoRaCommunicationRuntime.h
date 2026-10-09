@@ -122,7 +122,7 @@ const char* FT02_LoRaMessageDeliveryStateText(FT02MessageDeliveryState state);
 const char* FT02_LoRaCommunicationTxStateText(FT02LoRaTxState state);
 const char* FT02_LoRaCommunicationRoutingErrorText(uint32_t error);
 
-// LR01 Host Protocol A2 application adapter entry points. Core lifecycle IDs are
+// Meshtastic transport adapter entry points. Core lifecycle IDs are
 // preserved end-to-end so the existing inbox/outbox/reliable-message UI can
 // correlate ACCEPTED/SENT/ACK/TIMEOUT without guessing by message class.
 void FT02_LoRaCommunicationHostReceive(uint32_t airPacketId,
@@ -138,5 +138,5 @@ void FT02_LoRaCommunicationHostTxSent(uint32_t hostId);
 void FT02_LoRaCommunicationHostTxFailed(uint32_t hostId, const char* reason);
 void FT02_LoRaCommunicationHostTxResult(uint32_t hostId, const char* type, bool ok, const char* reason);
 void FT02_LoRaCommunicationHostDelivery(uint32_t hostId, uint32_t node, bool ack);
-// A1 fallback for legacy result lines without host id.
+// Compatibility fallback for result lines without host id.
 void FT02_LoRaCommunicationHostTxResult(const char* type, bool ok);

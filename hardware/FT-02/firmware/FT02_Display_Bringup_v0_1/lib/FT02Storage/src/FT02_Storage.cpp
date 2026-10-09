@@ -1,4 +1,5 @@
 #include "FT02_Storage.h"
+#include "FT02_Log.h"
 #include "FT02_StorageConfig.h"
 
 #include <SPI.h>
@@ -38,7 +39,7 @@ public:
         if (!busStarted_) {
             if (!g_ft02SdSpi.begin(FT02StorageConfig::SD_SCK, FT02StorageConfig::SD_MISO,
                              FT02StorageConfig::SD_MOSI, FT02StorageConfig::SD_CS)) {
-                Serial.println("[SDM3] g_ft02SdSpi.begin failed");
+                FT02_LOGE_PRINTLN("[SDM3] g_ft02SdSpi.begin failed");
                 return false;
             }
             busStarted_ = true;
@@ -59,7 +60,7 @@ public:
             delay(20);
         }
         if (!idle) {
-            Serial.printf("[SDM3] CMD0 failed, last R1=0x%02X\n", r1);
+            FT02_LOGE("[SDM3] CMD0 failed, last R1=0x%02X\n", r1);
             return false;
         }
 
@@ -69,7 +70,7 @@ public:
         const bool isV2 = cmd8Transport && r1 == 0x01 &&
                           r7[2] == 0x01 && r7[3] == 0xAA;
         if (!isV2 && r1 != 0x05 && r1 != 0x01) {
-            Serial.printf("[SDM3] CMD8 unexpected R1=0x%02X\n", r1);
+            FT02_LOGE("[SDM3] CMD8 unexpected R1=0x%02X\n", r1);
             return false;
         }
 
@@ -81,7 +82,7 @@ public:
                 return false;
             }
             if (appR1 > 0x01) {
-                Serial.printf("[SDM3] CMD55 failed R1=0x%02X\n", appR1);
+                FT02_LOGE("[SDM3] CMD55 failed R1=0x%02X\n", appR1);
                 return false;
             }
             if (!command(41, acmd41Arg, 0x01, r1, nullptr, 0, false)) {
@@ -94,20 +95,20 @@ public:
         } while (millis() - start < FT02StorageConfig::INIT_TIMEOUT_MS);
 
         if (r1 != 0x00) {
-            Serial.printf("[SDM3] ACMD41 timeout, R1=0x%02X\n", r1);
+            FT02_LOGE("[SDM3] ACMD41 timeout, R1=0x%02X\n", r1);
             return false;
         }
 
         uint8_t ocr[4] = {0};
         if (!command(58, 0, 0x01, r1, ocr, sizeof(ocr), false) || r1 != 0x00) {
-            Serial.printf("[SDM3] CMD58 failed R1=0x%02X\n", r1);
+            FT02_LOGE("[SDM3] CMD58 failed R1=0x%02X\n", r1);
             return false;
         }
         highCapacity_ = isV2 && ((ocr[0] & 0x40U) != 0U);
 
         if (!highCapacity_) {
             if (!command(16, 512, 0x01, r1, nullptr, 0, false) || r1 != 0x00) {
-                Serial.printf("[SDM3] CMD16 failed R1=0x%02X\n", r1);
+                FT02_LOGE("[SDM3] CMD16 failed R1=0x%02X\n", r1);
                 return false;
             }
         }
@@ -118,12 +119,12 @@ public:
 
         uint8_t csd[16] = {0};
         if (!readRegister(9, csd, sizeof(csd))) {
-            Serial.println("[SDM3] CSD read failed");
+            FT02_LOGE_PRINTLN("[SDM3] CSD read failed");
             return false;
         }
         sectorCount_ = parseSectorCount(csd);
         if (sectorCount_ == 0) {
-            Serial.println("[SDM3] Invalid CSD capacity");
+            FT02_LOGE_PRINTLN("[SDM3] Invalid CSD capacity");
             return false;
         }
 
@@ -303,6 +304,47 @@ public:
     uint32_t operatingHz() const { return operatingHz_; }
     bool highCapacity() const { return highCapacity_; }
     bool initialized() const { return initialized_; }
+
+    bool suspendBus() {
+        if (!initialized_) return false;
+        if (!busStarted_) return true;
+
+        // Ensure any card-internal write/program operation is complete before
+        // the host clock is removed. The FAT/VFS mount remains untouched.
+        if (!sync()) return false;
+
+        digitalWrite(FT02StorageConfig::SD_CS, HIGH);
+        delayMicroseconds(20);
+        g_ft02SdSpi.end();
+        busStarted_ = false;
+
+        // Stop driving clock/data during Light Sleep. CS deliberately remains
+        // a driven HIGH so the powered card stays deselected.
+        pinMode(FT02StorageConfig::SD_SCK, INPUT);
+        pinMode(FT02StorageConfig::SD_MOSI, INPUT);
+        pinMode(FT02StorageConfig::SD_MISO, INPUT);
+        pinMode(FT02StorageConfig::SD_CS, OUTPUT);
+        digitalWrite(FT02StorageConfig::SD_CS, HIGH);
+        return true;
+    }
+
+    bool resumeBus() {
+        if (!initialized_) return false;
+        if (busStarted_) return true;
+
+        if (!g_ft02SdSpi.begin(FT02StorageConfig::SD_SCK, FT02StorageConfig::SD_MISO,
+                               FT02StorageConfig::SD_MOSI, FT02StorageConfig::SD_CS)) {
+            return false;
+        }
+        busStarted_ = true;
+        pinMode(FT02StorageConfig::SD_CS, OUTPUT);
+        digitalWrite(FT02StorageConfig::SD_CS, HIGH);
+        delay(2);
+
+        // A powered SPI-mode card retains protocol state while CS is HIGH and
+        // clocks are stopped. Verify that state without remounting FatFs.
+        return sync();
+    }
 
 private:
     bool busStarted_ = false;
@@ -682,7 +724,7 @@ static bool mountFat() {
     unmountFat();
 
     if (ff_diskio_get_drive(&fatDrive) != ESP_OK || fatDrive == 0xFF) {
-        Serial.println("[FAT] No free FatFs drive");
+        FT02_LOGE_PRINTLN("[FAT] No free FatFs drive");
         return false;
     }
 
@@ -707,7 +749,7 @@ static bool mountFat() {
 #endif
 
     if (registerResult != ESP_OK) {
-        Serial.printf("[FAT] esp_vfs_fat_register failed: 0x%X\n",
+        FT02_LOGE("[FAT] esp_vfs_fat_register failed: 0x%X\n",
                       static_cast<unsigned>(registerResult));
         unmountFat();
         return false;
@@ -716,7 +758,7 @@ static bool mountFat() {
 
     const FRESULT mountResult = f_mount(fatFs, drive, 1);
     if (mountResult != FR_OK) {
-        Serial.printf("[FAT] f_mount failed: %u\n",
+        FT02_LOGE("[FAT] f_mount failed: %u\n",
                       static_cast<unsigned>(mountResult));
         unmountFat();
         return false;
@@ -727,6 +769,7 @@ static bool mountFat() {
 }
 
 static FT02StorageState g_storageState = FT02_STORAGE_STATE_NOT_STARTED;
+static bool g_storageSleepSuspended = false;
 static FT02StorageError g_storageError = FT02_STORAGE_ERROR_NONE;
 static uint8_t g_cardType = 0;
 static unsigned long g_cardSizeMB = 0;
@@ -817,6 +860,7 @@ static void FT02_ResetStorageRuntime()
 
 void FT02_StorageBegin()
 {
+    g_storageSleepSuspended = false;
     FT02_ResetStorageRuntime();
     unmountFat();
 
@@ -833,7 +877,7 @@ void FT02_StorageBegin()
     {
         g_storageState = FT02_STORAGE_STATE_ERROR;
         g_storageError = FT02_STORAGE_ERROR_MOUNT_FAILED;
-        Serial.println("SD raw Mode3 initialization failed");
+        FT02_LOGE_PRINTLN("SD raw Mode3 initialization failed");
         return;
     }
 
@@ -841,7 +885,7 @@ void FT02_StorageBegin()
     {
         g_storageState = FT02_STORAGE_STATE_ERROR;
         g_storageError = FT02_STORAGE_ERROR_MOUNT_FAILED;
-        Serial.println("SD FAT mount failed");
+        FT02_LOGE_PRINTLN("SD FAT mount failed");
         return;
     }
 
@@ -853,8 +897,39 @@ void FT02_StorageBegin()
 
     g_storageState = FT02_STORAGE_STATE_READY;
     g_storageError = FT02_STORAGE_ERROR_NONE;
+    FT02_LOGD("[SD] mounted type=%s size=%luMB free=%luMB\n",
+              FT02_CardTypeName(g_cardType), g_cardSizeMB,
+              g_totalMB > g_usedMB ? g_totalMB - g_usedMB : 0UL);
 
 }
+
+bool FT02_StorageSleepEnter()
+{
+    if(g_storageSleepSuspended) return true;
+    if(g_storageState != FT02_STORAGE_STATE_READY) return false;
+    if(!sdCard.suspendBus()) return false;
+    g_storageSleepSuspended = true;
+    FT02_LOGD_PRINTLN("[SD-SLEEP] FSPI quiesced; card powered, CS=HIGH, FAT mounted");
+    return true;
+}
+
+bool FT02_StorageSleepExit()
+{
+    if(!g_storageSleepSuspended) return true;
+    const bool ok = sdCard.resumeBus();
+    if(ok)
+    {
+        g_storageSleepSuspended = false;
+        FT02_LOGD_PRINTLN("[SD-SLEEP] FSPI restored without remount");
+    }
+    else
+    {
+        FT02_LOGE_PRINTLN("[ERROR][SD-SLEEP] FSPI restore/sync failed");
+    }
+    return ok;
+}
+
+bool FT02_StorageSleepSuspended() { return g_storageSleepSuspended; }
 
 FT02StorageState FT02_StorageStateCurrent() { return g_storageState; }
 FT02StorageError FT02_StorageLastError() { return g_storageError; }

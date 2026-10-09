@@ -53,7 +53,21 @@ void FT02_InputSetDiagnosticsEnabled(bool enabled);
 // Passive availability state maintained by the existing periodic CardKB2 probe.
 bool FT02_InputCardKbAvailable();
 
-// Current raw CardKB byte observed by the last poll. Zero means released.
+
+// Sleep Power A4 / CardKB2 SCL2PHASE coordination.
+// Normal key data remains the frozen A1.8 RAMREG protocol. Sleep coordination
+// is out-of-band: SCL REQUEST -> RAMREG SLEEP_ARMED status -> SCL COMMIT.
+bool FT02_InputRequestHostSleep();
+bool FT02_InputSuspendBusForSleep();
+bool FT02_InputSleepSclRtcReady();
+bool FT02_InputSleepSclIsLow();
+bool FT02_InputResumeBusAfterSleep(uint32_t timeoutMs = 500);
+bool FT02_InputBusSuspended();
+
+// Stabilized current CardKB activity byte. Because CardKB2 I2C mode does not
+// expose physical key-up frames, short zero gaps between repeat events are
+// ignored. Zero means the input stream has been quiet long enough to count as
+// released for UI/sleep gates.
 char FT02_InputCurrentRawKey();
 
 const char* FT02_InputKeyName(

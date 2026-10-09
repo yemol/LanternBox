@@ -10,7 +10,7 @@
 #include "FT02_GlobalCJK20FontData.h"
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
-#include "FT02_LR01HostRuntime.h"
+#include "FT02_CompassCore.h"
 #include "FT02_StatusBar.h"
 #include "FT02_StatusFontData.h"
 
@@ -18,7 +18,7 @@ namespace
 {
 // Compass UI A4: approved left/right layout.
 // Left: instrument-style rotating compass dial. Right: detailed heading/status data.
-// Presentation only. LR01 heading semantics, GNSS and map navigation remain untouched.
+// Presentation only. Heading now comes directly from the Core-owned K12+ QMC5883L path.
 constexpr int BODY_X = 32;
 constexpr int BODY_Y = 136;
 constexpr int BODY_W = 736;
@@ -71,12 +71,12 @@ const char* directionCn(float heading)
     return DIRS[sector];
 }
 
-const char* qualityCn(const FT02LR01State& lr01)
+const char* qualityCn(const FT02CoreCompassSnapshot& compass)
 {
-    if(!lr01.compassReady || !lr01.compassValid) return "不可用";
-    if(lr01.compassQuality >= 3) return "良好";
-    if(lr01.compassQuality == 2) return "可用";
-    if(lr01.compassCalibration.calibrated) return "较差";
+    if(!compass.ready || !compass.valid) return "不可用";
+    if(compass.quality >= 3) return "良好";
+    if(compass.quality == 2) return "可用";
+    if(compass.calibration.calibrated) return "较差";
     return "需校准";
 }
 
@@ -187,7 +187,7 @@ void drawCompassFace(FT02Display& display, bool valid, float heading)
     }
 }
 
-void drawRightPanel(FT02Display& display, const FT02LR01State& lr01, bool valid, float heading)
+void drawRightPanel(FT02Display& display, const FT02CoreCompassSnapshot& compass, bool valid, float heading)
 {
     display.drawLine(DIVIDER_X, 155, DIVIDER_X, 411, GxEPD_BLACK);
 
@@ -218,13 +218,13 @@ void drawRightPanel(FT02Display& display, const FT02LR01State& lr01, bool valid,
 
     FT02_DrawTextPack(display, ft02_cjk_20r, "状态", 474, 316);
     FT02_DrawTextPack(display, ft02_cjk_20r,
-                      FT02_LR01HostOnline() ? (lr01.compassReady ? "正常" : "不可用") : "LR01离线",
+                      compass.ready ? "正常" : "不可用",
                       594, 316);
 
     FT02_DrawTextPack(display, ft02_cjk_20r, "校准", 474, 354);
-    FT02_DrawTextPack(display, ft02_cjk_20r, qualityCn(lr01), 594, 354);
+    FT02_DrawTextPack(display, ft02_cjk_20r, qualityCn(compass), 594, 354);
 
-    const char* hint = lr01.compassCalibration.calibrated
+    const char* hint = compass.calibration.calibrated
         ? "ENTER 可重新校准"
         : "建议先完成校准";
     FT02_DrawTextPack(display, ft02_cjk_20r, hint, 474, 401);
@@ -232,20 +232,20 @@ void drawRightPanel(FT02Display& display, const FT02LR01State& lr01, bool valid,
 
 void drawBody(FT02Display& display)
 {
-    const FT02LR01State& lr01 = FT02_LR01HostState();
-    const bool valid = FT02_LR01HostOnline() && lr01.compassReady && lr01.compassValid;
-    const float heading = normalizeHeading(static_cast<float>(lr01.headingX10) / 10.0f);
+    const FT02CoreCompassSnapshot compass = FT02_CompassCoreSnapshotCurrent();
+    const bool valid = compass.ready && compass.valid;
+    const float heading = normalizeHeading(static_cast<float>(compass.headingX10) / 10.0f);
 
     drawCompassFace(display, valid, heading);
-    drawRightPanel(display, lr01, valid, heading);
+    drawRightPanel(display, compass, valid, heading);
 }
 
 void snapshotDrawState()
 {
-    const FT02LR01State& lr01 = FT02_LR01HostState();
-    g_lastValid = FT02_LR01HostOnline() && lr01.compassReady && lr01.compassValid;
-    g_lastHeading = static_cast<float>(lr01.headingX10) / 10.0f;
-    g_lastQuality = lr01.compassQuality;
+    const FT02CoreCompassSnapshot compass = FT02_CompassCoreSnapshotCurrent();
+    g_lastValid = compass.ready && compass.valid;
+    g_lastHeading = static_cast<float>(compass.headingX10) / 10.0f;
+    g_lastQuality = compass.quality;
     g_lastRefreshMs = millis();
 }
 }
@@ -257,7 +257,6 @@ void FT02_CompassUIOpen()
     g_lastValid = false;
     g_lastQuality = 0xFFu;
     g_partialCount = 0;
-    (void)FT02_LR01HostCompassCalRequestStatus();
 }
 
 void FT02_DrawCompassScreen(FT02Display& display)
@@ -286,11 +285,11 @@ void FT02_DrawCompassScreen(FT02Display& display)
 
 void FT02_CompassUIService(FT02Display& display, uint32_t nowMs)
 {
-    const FT02LR01State& lr01 = FT02_LR01HostState();
-    const bool valid = FT02_LR01HostOnline() && lr01.compassReady && lr01.compassValid;
-    const float heading = static_cast<float>(lr01.headingX10) / 10.0f;
+    const FT02CoreCompassSnapshot compass = FT02_CompassCoreSnapshotCurrent();
+    const bool valid = compass.ready && compass.valid;
+    const float heading = static_cast<float>(compass.headingX10) / 10.0f;
 
-    const bool stateChanged = valid != g_lastValid || lr01.compassQuality != g_lastQuality;
+    const bool stateChanged = valid != g_lastValid || compass.quality != g_lastQuality;
     const bool headingChanged = valid && (g_lastHeading < -999.0f || headingDelta(heading, g_lastHeading) >= HEADING_STEP_DEG);
     if(!stateChanged && !headingChanged) return;
     if(g_lastRefreshMs != 0u && static_cast<uint32_t>(nowMs - g_lastRefreshMs) < REFRESH_MIN_MS) return;

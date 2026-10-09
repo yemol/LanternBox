@@ -2,9 +2,10 @@
 
 #include <Arduino.h>
 
-// Application-facing navigation snapshot. Despite the historical filename,
-// this is NOT a GNSS hardware driver. In production all navigation data comes
-// exclusively from FT02_LR01HostRuntime NAV_STATE/SYSTEM_STATE.
+// Core-owned GNSS snapshot: ESP32-S3 UART1 RX=GPIO5, TX=GPIO6, fixed 115200 baud,
+// 4096-byte RX buffer, TinyGPSPlus NMEA parsing. Sleep Power A5A does not
+// rewrite navigation/output configuration; runtime OFF only requests the
+// u-blox M10 software standby state and uses UART-RX edge wake.
 struct FT02GnssSnapshot
 {
     bool started;
@@ -17,23 +18,24 @@ struct FT02GnssSnapshot
     bool courseValid;
     bool timeValid;
     bool systemTimeSynchronized;
-    uint32_t bytesReceived;       // LR01 SYSTEM_STATE gnss_bytes
+    uint32_t bytesReceived;
     uint32_t startAgeMs;
     uint32_t lastFixAgeMs;
     uint32_t lastTimeSyncAgeMs;
     uint32_t timeSyncCount;
+    uint32_t unixTime;
     uint8_t fixType;
-    uint8_t fixQuality;           // compatibility: mirrors fixType
+    uint8_t fixQuality;
     uint8_t satellites;
     uint8_t satellitesVisible;
     double latitude;
     double longitude;
-    float rawAltitudeMeters;      // compatibility: equals altitudeMeters
+    float rawAltitudeMeters;
     float altitudeMeters;
     float hdop;
-    float rawSpeedKmh;            // compatibility: equals speedKmh
+    float rawSpeedKmh;
     float speedKmh;
-    float courseDegrees;          // LR01 heading/compass value
+    float courseDegrees;
     char utcTime[12];
     char utcDate[12];
     char localTime[12];
@@ -41,25 +43,14 @@ struct FT02GnssSnapshot
     uint32_t uiGeneration;
 };
 
-// Compatibility lifecycle. These functions never open/configure a GNSS UART.
 void FT02_GnssBegin();
 void FT02_GnssPoll();
 FT02GnssSnapshot FT02_GnssSnapshotCurrent();
 
-// Sole production ingress for navigation state: called by LR01 Host Runtime.
-void FT02_GnssApplyLR01State(bool gnssReady,
-                             bool fix,
-                             uint8_t fixType,
-                             int32_t latitudeE7,
-                             int32_t longitudeE7,
-                             int16_t altitudeDm,
-                             uint8_t satellitesUsed,
-                             uint8_t satellitesVisible,
-                             uint16_t hdopX100,
-                             uint16_t speedCms,
-                             uint16_t headingX10,
-                             bool compassValid,
-                             uint8_t compassQuality,
-                             uint32_t gnssBytes,
-                             uint32_t unixTime,
-                             bool timeValid);
+// Indoor / Outdoor / Sleep policy controls the Core UART transport and GNSS data publication.
+// The GNSS rail remains powered. Runtime OFF sends UBX-RXM-PMREQ software
+// standby before UART close; host TX is then held HIGH to prevent false wake.
+bool FT02_GnssSetRuntimeEnabled(bool enabled);
+bool FT02_GnssRuntimeEnabled();
+bool FT02_GnssHardwareKnown();
+bool FT02_GnssHardwareReady();

@@ -26,6 +26,13 @@ FT02StorageState FT02_StorageStateCurrent();
 FT02StorageError FT02_StorageLastError();
 bool FT02_StorageIsReady();
 
+// Sleep Power A5B: quiesce only the ESP32 FSPI host while leaving the SD card
+// powered, selected (CS HIGH) and filesystem mounted. No SD protocol state or
+// mount state is rebuilt across sleep.
+bool FT02_StorageSleepEnter();
+bool FT02_StorageSleepExit();
+bool FT02_StorageSleepSuspended();
+
 unsigned long FT02_StorageCardSizeMB();
 unsigned long FT02_StorageTotalMB();
 unsigned long FT02_StorageUsedMB();

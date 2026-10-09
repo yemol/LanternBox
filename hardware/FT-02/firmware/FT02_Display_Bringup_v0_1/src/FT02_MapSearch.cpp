@@ -1,4 +1,5 @@
 #include "FT02_MapSearch.h"
+#include "FT02_Log.h"
 
 #include <ctype.h>
 #include <stdio.h>
@@ -139,7 +140,7 @@ bool ensureDiskIndexReady()
     if(f == nullptr)
     {
         setNotice("缺少搜索目录 .search.idx");
-        Serial.printf("[MAP-SEARCH] index missing path=%s\n", FT02_MAP_SEARCH_INDEX_PATH);
+        FT02_LOGW("[WARN][MAP-SEARCH] index missing path=%s\n", FT02_MAP_SEARCH_INDEX_PATH);
         return false;
     }
 
@@ -157,7 +158,7 @@ bool ensureDiskIndexReady()
         fclose(f);
         resetIndexState();
         setNotice("搜索目录版本不匹配，请重新生成");
-        Serial.println("[MAP-SEARCH] invalid .search.idx header/directory");
+        FT02_LOGE_PRINTLN("[ERROR][MAP-SEARCH] invalid .search.idx header/directory");
         return false;
     }
     fclose(f);
@@ -166,7 +167,7 @@ bool ensureDiskIndexReady()
     {
         resetIndexState();
         setNotice("缺少搜索数据 .search.dat");
-        Serial.printf("[MAP-SEARCH] data missing path=%s\n", FT02_MAP_SEARCH_DATA_PATH);
+        FT02_LOGW("[WARN][MAP-SEARCH] data missing path=%s\n", FT02_MAP_SEARCH_DATA_PATH);
         return false;
     }
 
@@ -430,7 +431,7 @@ void runSearch()
     {
         g_mode = SEARCH_RESULTS;
         setNotice("搜索数据文件无法打开");
-        Serial.printf("[MAP-SEARCH] data open failed path=%s\n", FT02_MAP_SEARCH_DATA_PATH);
+        FT02_LOGE("[ERROR][MAP-SEARCH] data open failed path=%s\n", FT02_MAP_SEARCH_DATA_PATH);
         return;
     }
 
@@ -439,7 +440,7 @@ void runSearch()
         fclose(f);
         g_mode = SEARCH_RESULTS;
         setNotice("搜索数据定位失败");
-        Serial.printf("[MAP-SEARCH] seek failed bucket=%u offset=%lu\n",
+        FT02_LOGE("[ERROR][MAP-SEARCH] seek failed bucket=%u offset=%lu\n",
                       static_cast<unsigned>(bucketId), static_cast<unsigned long>(bucket.offsetBytes));
         return;
     }

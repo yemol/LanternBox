@@ -1,4 +1,5 @@
 #include "FT02_FieldManualFavorites.h"
+#include "FT02_Log.h"
 
 #include <Arduino.h>
 #include <stdio.h>
@@ -142,7 +143,7 @@ bool loadSnapshot()
     if(staleEntries > 0 || duplicateEntries > 0)
     {
         if(!writeSnapshot())
-            Serial.println("[FIELD-FAVORITES] cleanup snapshot FAILED");
+            FT02_LOGE_PRINTLN("[ERROR][FIELD-FAVORITES] cleanup snapshot FAILED");
     }
     return true;
 }
@@ -206,7 +207,7 @@ bool FT02_FieldManualFavoritesSet(int globalCardIndex, bool favorite)
         --g_count;
         if(g_count > 0)
             memmove(&g_order[0], &g_order[1], sizeof(g_order[0]) * g_count);
-        Serial.printf("[FIELD-FAVORITES] add FAILED index=%d\n", globalCardIndex);
+        FT02_LOGE("[ERROR][FIELD-FAVORITES] add FAILED index=%d\n", globalCardIndex);
         return false;
     }
 
@@ -240,7 +241,7 @@ bool FT02_FieldManualFavoritesSet(int globalCardIndex, bool favorite)
     }
     g_order[existing] = removed;
     g_count = oldCount;
-    Serial.printf("[FIELD-FAVORITES] remove FAILED index=%d\n", globalCardIndex);
+    FT02_LOGE("[ERROR][FIELD-FAVORITES] remove FAILED index=%d\n", globalCardIndex);
     return false;
 }
 

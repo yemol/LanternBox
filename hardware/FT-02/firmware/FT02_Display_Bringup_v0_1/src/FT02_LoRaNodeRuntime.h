@@ -1,7 +1,7 @@
 #pragma once
 #include <Arduino.h>
 
-// Core-side presentation cache populated exclusively by LR01 MESH_NODE / MESH_RX.
+// Core-side Meshtastic node cache populated by MeshService NodeInfo / RX observations.
 struct FT02LoRaNodeView
 {
     bool valid;
@@ -9,8 +9,8 @@ struct FT02LoRaNodeView
     char longName[25];
     char shortName[13];
     bool pkiAvailable;
-    bool publicKeyValid; // compatibility alias of pkiAvailable; Core stores no key bytes
-    uint8_t publicKey[32]; // always zero; compatibility only
+    bool publicKeyValid; // true when NODEINFO_APP supplied a usable 32-byte public key
+    uint8_t publicKey[32]; // learned from NODEINFO_APP User.public_key
     bool favorite;
     bool hasHops;
     uint8_t hops;
@@ -30,3 +30,11 @@ void FT02_LoRaNodeRuntimeHostBegin(uint32_t localNode,const char* longName,const
 void FT02_LoRaNodeRuntimeHostSetStatus(bool ready,uint16_t peerCount,uint16_t pkiPeerCount);
 void FT02_LoRaNodeRuntimeHostObservePeer(uint32_t node,const char* name,float snr,bool pkiObserved);
 void FT02_LoRaNodeRuntimeHostUpsertPeer(uint32_t node,const char* longName,const char* shortName,bool online,int32_t hops,float rssi,float snr,bool pkiObserved,uint32_t lastSeconds);
+
+void FT02_LoRaNodeRuntimeHostLearnIdentity(uint32_t node,
+                                           const char* longName,
+                                           const char* shortName,
+                                           const uint8_t* publicKey,
+                                           bool publicKeyValid,
+                                           float rssi,
+                                           float snr);

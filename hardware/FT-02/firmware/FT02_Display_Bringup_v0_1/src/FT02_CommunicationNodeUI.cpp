@@ -12,8 +12,8 @@
 #include "FT02_GlobalCJKBoldFontData.h"
 #include "FT02_Gnss.h"
 #include "FT02_LoRaCommunicationRuntime.h"
-#include "FT02_LR01HostRuntime.h"
 #include "FT02_LoRaNodeRuntime.h"
+#include "FT02_MeshService.h"
 #include "FT02_PinyinIme.h"
 #include "FT02_PinyinLearning.h"
 #include "FT02_StatusBar.h"
@@ -641,12 +641,12 @@ void drawNodes(FT02Display& display)
 {
     drawHeader(display, "网络终端");
     const size_t count = FT02_LoRaNodeRuntimeNodeCount();
-    const FT02LR01State& lr01 = FT02_LR01HostState();
     char summary[180];
-    snprintf(summary, sizeof(summary), "通讯模块：%s   节点缓存：%u/%u   R=刷新节点",
-             FT02_LR01HostOnline() ? "在线" : "离线",
+    snprintf(summary, sizeof(summary), "Mesh：%s   节点：%u/%lu   PKI：%u   R=刷新NodeInfo",
+             FT02_MeshServiceReady() ? "在线" : "离线",
              static_cast<unsigned>(count),
-             static_cast<unsigned>(lr01.listedNodeCount));
+             static_cast<unsigned long>(FT02_LoRaNodeRuntimeExpectedNodeCount()),
+             static_cast<unsigned>(FT02_MeshServicePkiPeerCount()));
     FT02_DrawTextPack(display, ft02_cjk_20r, summary, 32, 156);
     if(g_notice[0]) FT02_DrawTextPack(display, ft02_cjk_20r, g_notice, 32, 181);
 
@@ -773,17 +773,17 @@ void drawDiag(FT02Display& display)
 {
     drawHeader(display, "通讯诊断");
     char line[220];
-    const FT02LR01State& lr01 = FT02_LR01HostState();
-    snprintf(line, sizeof(line), "通讯模块：%s   协议：A%u   节点：%u/%u",
-             FT02_LR01HostOnline() ? "在线" : "离线",
-             static_cast<unsigned>(lr01.protocolVersion),
+    snprintf(line, sizeof(line), "Mesh：%s   PKI：%s   节点：%u   公钥：%u",
+             FT02_MeshServiceReady() ? "在线" : "离线",
+             FT02_MeshServicePkiReady() ? "就绪" : "异常",
              static_cast<unsigned>(FT02_LoRaNodeRuntimeNodeCount()),
-             static_cast<unsigned>(lr01.listedNodeCount));
+             static_cast<unsigned>(FT02_MeshServicePkiPeerCount()));
     FT02_DrawTextPack(display, ft02_cjk_20r, line, 32, 158);
 
-    snprintf(line, sizeof(line), "Host RX行：%lu   LR01 Radio复位：%lu",
-             static_cast<unsigned long>(FT02_LR01HostRxLineCount()),
-             static_cast<unsigned long>(lr01.radioResets));
+    snprintf(line, sizeof(line), "Mesh Raw：%lu   已解码：%lu   本机：!%08lX",
+             static_cast<unsigned long>(FT02_MeshServiceRawFrameCount()),
+             static_cast<unsigned long>(FT02_MeshServiceDecodedFrameCount()),
+             static_cast<unsigned long>(FT02_LoRaNodeRuntimeLocalNode()));
     FT02_DrawTextPack(display, ft02_cjk_20r, line, 32, 196);
 
     snprintf(line, sizeof(line), "消息 RX：%lu   TX：%lu   重复丢弃：%lu   未读：%u",
@@ -1143,8 +1143,8 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
     {
         g_mode = COMM_NODES;
         g_nodeSelection = 0;
-        if(FT02_LR01HostRequestNodes()) setNotice("已请求通讯模块节点列表");
-        else setNotice("通讯模块节点请求发送失败");
+        if(FT02_MeshServiceRequestNodeInfo()) setNotice("已广播NodeInfo请求，等待节点回复");
+        else setNotice("Mesh NodeInfo请求发送失败");
         return FT02_COMM_INPUT_REDRAW;
     }
     if(cmd == 'o')
@@ -1185,9 +1185,7 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
                 setNotice("当前消息没有可回复的发送者");
                 return FT02_COMM_INPUT_REDRAW;
             }
-            // Core no longer gates replies on its legacy NodeDB. LR01 owns
-            // peer discovery and PKI state and returns node_not_found / pki_not_ready
-            // if this target is not currently eligible for a private send.
+            // MeshService owns peer discovery and PKI state; replies use the learned Meshtastic public key.
             beginCompose(true, msg.from, COMM_INBOX, true, msg.packetId);
             return FT02_COMM_INPUT_REDRAW;
         }
@@ -1259,25 +1257,21 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
                 setNotice("本机节点不能作为私信目标");
                 return FT02_COMM_INPUT_REDRAW;
             }
-            // PKI ownership moved to LR01. Let LR01 validate whether this peer
-            // currently has a learned public key.
+            // MeshService validates whether this peer currently has a learned public key.
             beginCompose(true, node.node, COMM_NODES);
             return FT02_COMM_INPUT_REDRAW;
         }
         if(cmd == 'r')
         {
-            setSyncNotice("正在刷新通讯模块节点列表...");
-            (void)FT02_LR01HostRequestStatus();
-            (void)FT02_LR01HostRequestNodes();
+            setSyncNotice("正在刷新Mesh节点身份...");
+            (void)FT02_MeshServiceRequestNodeInfo();
             return FT02_COMM_INPUT_REDRAW;
         }
     }
     else if(g_mode == COMM_DIAG && cmd == 'r')
     {
-        setSyncNotice("正在请求通讯模块刷新状态...");
-        (void)FT02_LR01HostRequestStatus();
-        (void)FT02_LR01HostRequestNodeInfo();
-        (void)FT02_LR01HostRequestNodes();
+        setSyncNotice("正在请求Mesh NodeInfo刷新...");
+        (void)FT02_MeshServiceRequestNodeInfo();
         return FT02_COMM_INPUT_REDRAW;
     }
 
@@ -1310,11 +1304,11 @@ bool FT02_CommunicationUIIsNodes()
 void FT02_CommunicationUIOnNodeListUpdated(uint16_t count)
 {
     if(g_mode != COMM_NODES) return;
-    if(count == 0) setNotice("通讯模块当前未发现其他节点");
+    if(count == 0) setNotice("当前尚未学习到其他Mesh节点");
     else
     {
         char notice[64];
-        snprintf(notice, sizeof(notice), "通讯模块节点列表已更新：%u", static_cast<unsigned>(count));
+        snprintf(notice, sizeof(notice), "Mesh节点列表已更新：%u", static_cast<unsigned>(count));
         setNotice(notice);
     }
 }
@@ -1324,7 +1318,7 @@ void FT02_CommunicationUIOnSyncStarted(const char* noticeText)
     setSyncNotice(
         (noticeText != nullptr && noticeText[0] != '\0')
             ? noticeText
-            : "通讯模块正在同步状态..."
+            : "Mesh正在同步状态..."
     );
 }
 

@@ -1,4 +1,5 @@
 #include "FT02_LocationLog.h"
+#include "FT02_Log.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -689,7 +690,7 @@ bool FT02_LocationLogStartReload()
             FT02_LocationLogChanged();
             FT02_LocationLogUnlock();
         }
-        Serial.println("[LOCATION-LOG] background reload task create failed");
+        FT02_LOGE_PRINTLN("[ERROR][LOCATION-LOG] background reload task create failed");
         return false;
     }
 

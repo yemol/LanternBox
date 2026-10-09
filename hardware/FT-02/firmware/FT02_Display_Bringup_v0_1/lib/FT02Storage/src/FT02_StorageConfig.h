@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 // FT-02 frozen SD SPI production profile, validated by the v0.9 baseline test.
-// SD card uses a dedicated FSPI host and the display uses a dedicated HSPI host.
+// SD card uses dedicated FSPI. SX1262 owns HSPI; the display uses FAST software SPI.
 //
 // SD SPI wiring:
 //   D3 / CS    -> GPIO41

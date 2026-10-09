@@ -17,6 +17,7 @@ void FT02_PbfMapSetLoadingReason(FT02MapLoadingReason reason)
 #include "FT02_PbfMapRuntime.h"
 #include "FT02_Gnss.h"
 #include "FT02_GnssPowerControl.h"
+#include "FT02_CompassCore.h"
 #include "FT02_RoadNameFont.h"
 #include "FT02_FooterFont20.h"
 #include "FT02_GlobalCJKFontData.h"
@@ -35,6 +36,32 @@ static const int MAP_TOP = 76;
 static const int MAP_HEIGHT = 364;
 static const int MAP_BOTTOM = 440;
 static const int MAP_WIDTH = 800;
+
+static bool FT02_MapHeading(float& headingDeg, bool& fromCompass)
+{
+    const FT02CoreCompassSnapshot compass = FT02_CompassCoreSnapshotCurrent();
+    // Navigation must not trust a magnetic heading which the compass driver
+    // itself has classified as unusable. quality>=2 means a saved calibration
+    // is active and the live magnetic magnitude is within the accepted range.
+    if(compass.ready && compass.valid && compass.quality >= 2u)
+    {
+        headingDeg = static_cast<float>(compass.headingX10) / 10.0f;
+        fromCompass = true;
+        return true;
+    }
+
+    const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
+    if(gnss.fixValid && gnss.courseValid)
+    {
+        headingDeg = gnss.courseDegrees;
+        fromCompass = false;
+        return true;
+    }
+
+    headingDeg = 0.0f;
+    fromCompass = false;
+    return false;
+}
 
 struct FT02LabelRect
 {
@@ -423,11 +450,14 @@ static void FT02_DrawGnssPositionMarker(FT02Display& display)
     if(gnss.fixValid)
     {
         display.drawCircle(x, y, 10, GxEPD_BLACK);
-        if(gnss.courseValid)
+        float headingDeg = 0.0f;
+        bool headingFromCompass = false;
+        if(FT02_MapHeading(headingDeg, headingFromCompass))
         {
-            // Direction arrow driven by LR01 compass heading.
-            // 0 deg points to map north (screen up), clockwise positive.
-            const double radians = gnss.courseDegrees * M_PI / 180.0;
+            // Prefer the Core compass so the marker shows device orientation
+            // even while stationary. Fall back to GNSS course-over-ground if
+            // the compass is unavailable. 0 deg is map north / screen up.
+            const double radians = headingDeg * M_PI / 180.0;
             const double sx = sin(radians);
             const double cy = cos(radians);
 
@@ -599,7 +629,12 @@ static void FT02_DrawReadyBottom(FT02Display& display)
     if(!FT02_GnssPowerDesiredEnabled())
     {
         snprintf(speedText, sizeof(speedText), "GNSS关闭");
-        snprintf(courseText, sizeof(courseText), "方向 --");
+        float headingDeg = 0.0f;
+        bool headingFromCompass = false;
+        if(FT02_MapHeading(headingDeg, headingFromCompass) && headingFromCompass)
+            snprintf(courseText, sizeof(courseText), "罗盘 %03d", (int)lroundf(headingDeg) % 360);
+        else
+            snprintf(courseText, sizeof(courseText), "方向 --");
         snprintf(altitudeText, sizeof(altitudeText), "海拔 --");
     }
     else
@@ -609,10 +644,21 @@ static void FT02_DrawReadyBottom(FT02Display& display)
         else
             snprintf(speedText, sizeof(speedText), "速度 --");
 
-        if(gnss.fixValid && gnss.courseValid)
-            snprintf(courseText, sizeof(courseText), "方向 %d", (int)lroundf(gnss.courseDegrees));
+        float headingDeg = 0.0f;
+        bool headingFromCompass = false;
+        if(FT02_MapHeading(headingDeg, headingFromCompass))
+        {
+            snprintf(
+                courseText,
+                sizeof(courseText),
+                headingFromCompass ? "罗盘 %03d" : "航迹 %03d",
+                (int)lroundf(headingDeg) % 360
+            );
+        }
         else
+        {
             snprintf(courseText, sizeof(courseText), "方向 --");
+        }
 
         if(gnss.fixValid && gnss.altitudeValid)
             snprintf(altitudeText, sizeof(altitudeText), "海拔 %d", (int)lroundf(gnss.altitudeMeters));

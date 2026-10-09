@@ -1,4 +1,5 @@
 #include "FT02_ES8311.h"
+#include "FT02_Log.h"
 #include "FT02_I2CBus.h"
 
 namespace
@@ -135,8 +136,8 @@ bool FT02ES8311::writeStep(const char* label, uint8_t reg, uint8_t value, bool v
     const bool ok = writeRegister(reg, value, verify);
     if(!ok)
     {
-        Serial.printf(
-            "[AUDIO-CODEC] write failed step=%s reg=0x%02X value=0x%02X\n",
+        FT02_LOGE(
+            "[ERROR][AUDIO-CODEC] write failed step=%s reg=0x%02X value=0x%02X\n",
             label,
             static_cast<unsigned int>(reg),
             static_cast<unsigned int>(value)
@@ -162,7 +163,7 @@ bool FT02ES8311::begin(TwoWire& wire, bool digitalMic)
     }
     if(address_ == 0)
     {
-        Serial.println("[AUDIO-CODEC] ES8311 not found at 0x18/0x19");
+        FT02_LOGE_PRINTLN("[ERROR][AUDIO-CODEC] ES8311 not found at 0x18/0x19");
         return false;
     }
 
@@ -295,7 +296,7 @@ bool FT02ES8311::prepareDacForPaShutdown()
     // Keep the analogue DAC powered while the external BTL PA is still on.
     // First engage codec soft mute, then walk the DAC gain down in coarse
     // steps. The PCM stream is already zero, so this only removes register/
-    // bias discontinuities from the subsequent PA shutdown edge.
+    // bias discontinuities from the subsequent playback shutdown sequence.
     ok = writeRegister(ES8311_DAC_REG31, mutedReg31, false) && ok;
     delay(4);
     static const uint8_t kRamp[] = {0xA8, 0x98, 0x78, 0x58, 0x38, 0x18, 0x00};
@@ -347,7 +348,7 @@ bool FT02ES8311::setDacMuted(bool muted)
     else
     {
         if(!dacMuted_ && dacPowered_) return true;
-        // Restore DAC power/level while external PA is still in shutdown.
+        // Restore DAC power/level while logical PA gate is still closed.
         ok = writeRegister(ES8311_SYSTEM_REG12, 0x00, false) && ok;
         delay(8);
         ok = writeRegister(ES8311_DAC_REG32, FT02_ES8311_DAC_VOLUME, false) && ok;
@@ -362,8 +363,8 @@ bool FT02ES8311::setDacMuted(bool muted)
 
     if(!ok)
     {
-        Serial.printf(
-            "[AUDIO-CODEC] DAC %s transition FAIL\n",
+        FT02_LOGE(
+            "[ERROR][AUDIO-CODEC] DAC %s transition FAIL\n",
             muted ? "idle-powerdown" : "playback-powerup"
         );
     }

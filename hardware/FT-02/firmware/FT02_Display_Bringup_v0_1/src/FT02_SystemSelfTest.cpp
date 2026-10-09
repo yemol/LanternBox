@@ -6,6 +6,7 @@
 
 #include <Arduino.h>
 #include <esp_system.h>
+#include <esp_sleep.h>
 
 #include "FT02_AudioLog.h"
 #include "FT02_BatteryMonitor.h"
@@ -17,10 +18,11 @@
 #include "FT02_GlobalCJKFontData.h"
 #include "FT02_GlobalCJKBoldFontData.h"
 #include "FT02_Gnss.h"
+#include "FT02_CompassCore.h"
 #include "FT02_GnssPowerControl.h"
 #include "FT02_InputManager.h"
 #include "FT02_LoRaNodeRuntime.h"
-#include "FT02_LR01HostRuntime.h"
+#include "FT02_MeshService.h"
 #include "FT02_ModeManager.h"
 #include "FT02_PbfIndex.h"
 #include "FT02_PinyinLearning.h"
@@ -33,17 +35,6 @@ namespace
 FT02SelfTestReport g_report = {};
 uint8_t g_pageIndex = 0;
 
-struct FT02CommErrorBaseline
-{
-    bool valid = false;
-    uint32_t rxErrors = 0;
-    uint32_t uartErrors = 0;
-    uint32_t radioResets = 0;
-};
-
-FT02CommErrorBaseline g_commBaseline = {};
-
-static constexpr uint8_t FT02_EXPECTED_LR01_PROTOCOL = 2;
 static constexpr uint8_t FT02_SELFTEST_PAGE_COUNT = 3;
 static constexpr uint8_t FT02_SELFTEST_ITEMS_PER_PAGE = 7;
 
@@ -220,11 +211,10 @@ void runBattery()
         snprintf(
             detail,
             sizeof(detail),
-            "严重低电量 %.0f%% %.3fV %s %+.1f%%/h",
+            "严重低电量 %.0f%% %.3fV %s",
             static_cast<double>(battery.percent),
             static_cast<double>(battery.voltage),
-            flow,
-            static_cast<double>(battery.ratePercentPerHour)
+            flow
         );
         addItem("电池", FT02_SELFTEST_WARN, detail);
         return;
@@ -235,11 +225,10 @@ void runBattery()
         snprintf(
             detail,
             sizeof(detail),
-            "低电量 %.0f%% %.3fV %s %+.1f%%/h",
+            "低电量 %.0f%% %.3fV %s",
             static_cast<double>(battery.percent),
             static_cast<double>(battery.voltage),
-            flow,
-            static_cast<double>(battery.ratePercentPerHour)
+            flow
         );
         addItem("电池", FT02_SELFTEST_WARN, detail);
         return;
@@ -248,39 +237,18 @@ void runBattery()
     snprintf(
         detail,
         sizeof(detail),
-        "%.0f%% %.3fV %s %+.1f%%/h",
+        "%.0f%% %.3fV %s",
         static_cast<double>(battery.percent),
         static_cast<double>(battery.voltage),
-        flow,
-        static_cast<double>(battery.ratePercentPerHour)
+        flow
     );
     addItem("电池", FT02_SELFTEST_PASS, detail);
 }
 
 void runGnss()
 {
-    const FT02LR01State& lr01 = FT02_LR01HostState();
     const FT02GnssSnapshot nav = FT02_GnssSnapshotCurrent();
     const bool userEnabled = FT02_GnssPowerDesiredEnabled();
-
-    if(!FT02_LR01HostOnline())
-    {
-        addItem("通讯模块", FT02_SELFTEST_FAIL, "Host UART无有效状态");
-    }
-    else if(lr01.protocolVersion == 0u)
-    {
-        addItem("通讯模块", FT02_SELFTEST_PASS, "Host UART在线·启动协议帧未捕获");
-    }
-    else if(lr01.protocolVersion == FT02_EXPECTED_LR01_PROTOCOL)
-    {
-        addItem("通讯模块", FT02_SELFTEST_PASS, "Host UART协议A2在线");
-    }
-    else
-    {
-        char text[96];
-        snprintf(text, sizeof(text), "Host UART协议A%u，期望A2", static_cast<unsigned>(lr01.protocolVersion));
-        addItem("通讯模块", FT02_SELFTEST_WARN, text);
-    }
 
     if(!userEnabled)
     {
@@ -290,70 +258,61 @@ void runGnss()
             addItem("GNSS", FT02_SELFTEST_NA, "模式策略·GNSS关闭");
         addItem("GNSS定位", FT02_SELFTEST_NA, "GNSS关闭，未进行定位");
     }
-    else if(FT02_GnssPowerActualKnown() && !FT02_GnssPowerActualEnabled())
-    {
-        addItem("GNSS", FT02_SELFTEST_WARN, "已请求开启，正在唤醒");
-        addItem("GNSS定位", FT02_SELFTEST_WARN, "等待GNSS恢复数据流");
-    }
     else
     {
-        if(lr01.gnssReady)
-            addItem("GNSS", FT02_SELFTEST_PASS, "已开启·GNSS数据流正常");
+        if(FT02_GnssHardwareReady())
+            addItem("GNSS", nav.communicationActive ? FT02_SELFTEST_PASS : FT02_SELFTEST_WARN,
+                    nav.communicationActive ? "Core UART5/6 115200·数据流正常" : "Core UART5/6 115200·等待NMEA");
+        else if(FT02_GnssHardwareKnown())
+            addItem("GNSS", nav.startAgeMs < 60000u ? FT02_SELFTEST_WARN : FT02_SELFTEST_FAIL,
+                    nav.startAgeMs < 60000u ? "Core UART5/6 115200·接收启动中" : "Core UART5/6 115200无有效NMEA");
         else
-            addItem("GNSS", FT02_SELFTEST_WARN, "已开启·等待GNSS数据流");
+            addItem("GNSS", FT02_SELFTEST_WARN, "Core UART尚未探测");
 
         if(nav.fixValid)
         {
             char text[96];
-            snprintf(text,sizeof(text),"%u/%u星 %s HDOP %.2f",(unsigned)nav.satellites,(unsigned)nav.satellitesVisible,nav.fixType>=3?"3D定位":"2D定位",nav.hdop);
+            snprintf(text,sizeof(text),"%u星 %s PDOP %.2f",(unsigned)nav.satellites,nav.fixType>=3?"3D定位":"2D定位",nav.hdop);
             addItem("GNSS定位",FT02_SELFTEST_PASS,text);
         }
-        else if(lr01.gnssReady)
-            addItem("GNSS定位",FT02_SELFTEST_WARN,"数据流正常，当前未定位");
+        else if(nav.communicationActive)
+            addItem("GNSS定位",FT02_SELFTEST_WARN,"NMEA正常，当前未定位");
         else
-            addItem("GNSS定位",FT02_SELFTEST_WARN,"等待导航模块GNSS恢复");
+            addItem("GNSS定位",FT02_SELFTEST_WARN,"等待Core UART GNSS数据");
     }
 
-    // The QMC compass is intentionally independent from GNSS software standby.
-    if(lr01.compassReady && lr01.compassValid)
+    const FT02CoreCompassSnapshot compass = FT02_CompassCoreSnapshotCurrent();
+    if(compass.ready && compass.valid)
     {
         char text[96];
-        if(lr01.compassQuality >= 3)
-            snprintf(text,sizeof(text),"航向 %.1f° 已校准·高质量",(double)lr01.headingX10/10.0);
-        else if(lr01.compassQuality == 2)
-            snprintf(text,sizeof(text),"航向 %.1f° 已校准·可用",(double)lr01.headingX10/10.0);
+        if(compass.quality >= 3)
+            snprintf(text,sizeof(text),"Core I2C 0x0D 航向 %.1f° 已校准·高质量",(double)compass.headingX10/10.0);
+        else if(compass.quality == 2)
+            snprintf(text,sizeof(text),"Core I2C 0x0D 航向 %.1f° 已校准·可用",(double)compass.headingX10/10.0);
         else
-            snprintf(text,sizeof(text),"航向 %.1f° 建议校准",(double)lr01.headingX10/10.0);
-        addItem("罗盘",lr01.compassQuality>=2?FT02_SELFTEST_PASS:FT02_SELFTEST_WARN,text);
+            snprintf(text,sizeof(text),"Core I2C 0x0D 航向 %.1f° 建议校准",(double)compass.headingX10/10.0);
+        addItem("罗盘",compass.quality>=2?FT02_SELFTEST_PASS:FT02_SELFTEST_WARN,text);
     }
+    else if(compass.hardwareKnown)
+        addItem("罗盘",FT02_SELFTEST_FAIL,"Core I2C 0x0D QMC5883L无有效数据");
     else
-        addItem("罗盘",FT02_SELFTEST_FAIL,"导航模块罗盘不可用");
+        addItem("罗盘",FT02_SELFTEST_WARN,"Core I2C罗盘尚未初始化");
 }
 
-void runLoRa()
+void runMeshRadio()
 {
-    const FT02LR01State& lr01 = FT02_LR01HostState();
-    if(FT02_LR01HostOnline() && lr01.loraReady)
-    {
-        char text[96];
-        snprintf(text,sizeof(text),"%s %.3fMHz RX%lu",lr01.radioProfile,(double)lr01.frequencyMHz,(unsigned long)lr01.rxCount);
-        addItem("LoRa通讯",FT02_SELFTEST_PASS,text);
-    }
-    else if(FT02_LR01HostOnline())
-        addItem("LoRa通讯",FT02_SELFTEST_WARN,"通讯模块在线，Radio未就绪");
-    else
-        addItem("LoRa通讯",FT02_SELFTEST_FAIL,"通讯模块Host UART离线");
+    const bool meshReady = FT02_MeshServiceReady();
+    addItem("Mesh无线",
+            meshReady ? FT02_SELFTEST_PASS : FT02_SELFTEST_FAIL,
+            meshReady ? "SX1262 · HW-SPI · LongFast" : "SX1262 MeshService未就绪");
 
-    if(lr01.loraReady && lr01.nodeCount>0)
-    {
-        char text[96];
-        snprintf(text,sizeof(text),"发现%u节点 PKI%u",(unsigned)lr01.nodeCount,(unsigned)lr01.pkiPeerCount);
-        addItem("LoRa网络",FT02_SELFTEST_PASS,text);
-    }
-    else if(lr01.loraReady)
-        addItem("LoRa网络",FT02_SELFTEST_WARN,"尚未发现其他节点");
-    else
-        addItem("LoRa网络",FT02_SELFTEST_WARN,"等待通讯模块Radio就绪");
+    char networkText[96];
+    snprintf(networkText, sizeof(networkText), "Meshtastic · 节点%u · PKI%u",
+             static_cast<unsigned>(FT02_LoRaNodeRuntimeNodeCount()),
+             static_cast<unsigned>(FT02_MeshServicePkiPeerCount()));
+    addItem("Mesh网络",
+            FT02_LoRaNodeRuntimeReady() ? FT02_SELFTEST_PASS : FT02_SELFTEST_WARN,
+            FT02_LoRaNodeRuntimeReady() ? networkText : "Meshtastic节点表初始化中");
 }
 
 void runAudio()
@@ -428,9 +387,8 @@ void runPinyin()
 void runTime()
 {
     const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
-    const FT02LR01State& lr01 = FT02_LR01HostState();
 
-    if(!gnss.timeValid || !lr01.timeValid || lr01.unixTime == 0u)
+    if(!gnss.timeValid || gnss.unixTime == 0u)
     {
         if(!FT02_GnssPowerDesiredEnabled())
             addItem("系统时间", FT02_SELFTEST_NA, "GNSS已关闭，未执行卫星校时");
@@ -439,7 +397,7 @@ void runTime()
         return;
     }
 
-    const time_t utc = static_cast<time_t>(lr01.unixTime);
+    const time_t utc = static_cast<time_t>(gnss.unixTime);
     struct tm tmUtc = {};
     if(gmtime_r(&utc, &tmUtc) == nullptr)
     {
@@ -470,33 +428,14 @@ void runTime()
             text);
 }
 
-void runHostUart()
+void runMeshPki()
 {
-    const FT02LR01State& lr01 = FT02_LR01HostState();
-    if(!FT02_LR01HostOnline())
-    {
-        addItem("Host UART", FT02_SELFTEST_FAIL, "通讯模块离线");
-        return;
-    }
-
+    const bool ready = FT02_MeshServicePkiReady();
     char text[96];
-    if(lr01.protocolVersion == 0u)
-    {
-        snprintf(text, sizeof(text), "在线 RX%lu·协议启动帧未捕获",
-                 static_cast<unsigned long>(FT02_LR01HostRxLineCount()));
-        addItem("Host UART", FT02_SELFTEST_PASS, text);
-        return;
-    }
-
-    snprintf(text, sizeof(text), "A%u RX%lu 当前链路正常",
-             static_cast<unsigned>(lr01.protocolVersion),
-             static_cast<unsigned long>(FT02_LR01HostRxLineCount()));
-
-    addItem("Host UART",
-            lr01.protocolVersion == FT02_EXPECTED_LR01_PROTOCOL
-                ? FT02_SELFTEST_PASS
-                : FT02_SELFTEST_WARN,
-            text);
+    snprintf(text, sizeof(text), "本机密钥 %s · 已学习对端 %u",
+             ready ? "正常" : "未就绪",
+             static_cast<unsigned>(FT02_MeshServicePkiPeerCount()));
+    addItem("Mesh PKI", ready ? FT02_SELFTEST_PASS : FT02_SELFTEST_WARN, text);
 }
 
 void runStorageSpace()
@@ -537,62 +476,13 @@ void runMemoryHealth()
     addItem("内存状态", state, text);
 }
 
-void runCommunicationErrors()
+void runMeshCounters()
 {
-    const FT02LR01State& lr01 = FT02_LR01HostState();
-
-    const auto deltaCounter = [](uint32_t current, uint32_t previous) -> uint32_t
-    {
-        // LR01 counters reset when LR01 reboots. Treat the post-reboot value as
-        // the new delta instead of allowing unsigned wrap to create a false alarm.
-        return current >= previous ? current - previous : current;
-    };
-
-    const uint32_t deltaRx = g_commBaseline.valid
-        ? deltaCounter(lr01.rxErrors, g_commBaseline.rxErrors)
-        : 0u;
-    const uint32_t deltaUart = g_commBaseline.valid
-        ? deltaCounter(lr01.uartErrors, g_commBaseline.uartErrors)
-        : 0u;
-    const uint32_t deltaResets = g_commBaseline.valid
-        ? deltaCounter(lr01.radioResets, g_commBaseline.radioResets)
-        : 0u;
-
-    const bool newErrors = deltaRx > 0u || deltaUart > 0u || deltaResets > 0u;
-
     char text[96];
-    FT02SelfTestState state = FT02_SELFTEST_PASS;
-
-    if(newErrors)
-    {
-        snprintf(text, sizeof(text), "本次新增 RX+%lu UART+%lu 复位+%lu",
-                 static_cast<unsigned long>(deltaRx),
-                 static_cast<unsigned long>(deltaUart),
-                 static_cast<unsigned long>(deltaResets));
-        state = FT02_SELFTEST_WARN;
-    }
-    else if(lr01.rxErrors > 0u || lr01.uartErrors > 0u || lr01.radioResets > 0u)
-    {
-        // LR01 counters are lifetime counters for the current LR01 boot. A
-        // historical total must not keep Device Status permanently in WARN.
-        // Only counters that increased since the previous self-test are a
-        // current warning; stable totals remain visible as diagnostics.
-        snprintf(text, sizeof(text), "当前正常·累计 RX%lu UART%lu 复位%lu",
-                 static_cast<unsigned long>(lr01.rxErrors),
-                 static_cast<unsigned long>(lr01.uartErrors),
-                 static_cast<unsigned long>(lr01.radioResets));
-    }
-    else
-    {
-        snprintf(text, sizeof(text), "当前正常·无通讯错误");
-    }
-
-    g_commBaseline.valid = true;
-    g_commBaseline.rxErrors = lr01.rxErrors;
-    g_commBaseline.uartErrors = lr01.uartErrors;
-    g_commBaseline.radioResets = lr01.radioResets;
-
-    addItem("通讯错误", state, text);
+    snprintf(text, sizeof(text), "RF %lu · 解码 %lu",
+             static_cast<unsigned long>(FT02_MeshServiceRawFrameCount()),
+             static_cast<unsigned long>(FT02_MeshServiceDecodedFrameCount()));
+    addItem("Mesh接收", FT02_MeshServiceReady() ? FT02_SELFTEST_PASS : FT02_SELFTEST_WARN, text);
 }
 
 const char* resetReasonText(esp_reset_reason_t reason)
@@ -610,6 +500,82 @@ const char* resetReasonText(esp_reset_reason_t reason)
         case ESP_RST_EXT: return "外部复位";
         default: return "其他复位";
     }
+}
+
+void runSleepBattery()
+{
+    const FT02SleepTruthSnapshot truth = FT02_SleepTruthSnapshotCurrent();
+    if(!truth.valid || !truth.batterySampleValid || truth.elapsedUs == 0u)
+    {
+        addItem("休眠耗电", FT02_SELFTEST_NA, "暂无完整休眠电量样本");
+        return;
+    }
+
+    const double hours = static_cast<double>(truth.elapsedUs) / 3600000000.0;
+    const double drop =
+        static_cast<double>(truth.batteryStartPercent - truth.batteryWakePercent);
+    const double rate = hours > 0.0 ? drop / hours : 0.0;
+
+    char detail[96];
+    snprintf(
+        detail,
+        sizeof(detail),
+        "%.0f→%.0f%% %.3f→%.3fV %.2fh %.2f%%/h",
+        static_cast<double>(truth.batteryStartPercent),
+        static_cast<double>(truth.batteryWakePercent),
+        static_cast<double>(truth.batteryStartVoltage),
+        static_cast<double>(truth.batteryWakeVoltage),
+        hours,
+        rate
+    );
+
+    // A short sample is useful as raw evidence but too quantized to judge the
+    // power target. Once >=1 h, >1%%/h is a warning against the FT-02 target.
+    FT02SelfTestState state = FT02_SELFTEST_NA;
+    if(hours >= 1.0) state = rate <= 1.0 ? FT02_SELFTEST_PASS : FT02_SELFTEST_WARN;
+    addItem("休眠耗电", state, detail);
+}
+
+void runSleepTruth()
+{
+    const FT02SleepTruthSnapshot truth = FT02_SleepTruthSnapshotCurrent();
+    if(!truth.valid)
+    {
+        addItem("休眠统计", FT02_SELFTEST_NA, "暂无完整休眠结果");
+        return;
+    }
+
+    const double elapsedHours = static_cast<double>(truth.elapsedUs) / 3600000000.0;
+    const double sleepHours = static_cast<double>(truth.lightSleepUs) / 3600000000.0;
+    const double awakeMinutes = static_cast<double>(truth.awakeUs) / 60000000.0;
+    const double sleepRatio = truth.elapsedUs > 0u
+        ? (100.0 * static_cast<double>(truth.lightSleepUs) / static_cast<double>(truth.elapsedUs))
+        : 0.0;
+
+    char detail[96];
+    snprintf(
+        detail,
+        sizeof(detail),
+        "窗%.2fh 睡%.2fh %.1f%% 醒%.1fmin 会话%lu LS%lu 异常%lu",
+        elapsedHours,
+        sleepHours,
+        sleepRatio,
+        awakeMinutes,
+        static_cast<unsigned long>(truth.sessionCount),
+        static_cast<unsigned long>(truth.lightSleepReturnCount),
+        static_cast<unsigned long>(truth.unexpectedReturnCount)
+    );
+
+    FT02SelfTestState state = FT02_SELFTEST_PASS;
+    if(truth.resetDuringWindowCount > 0u || truth.lastSleepErr != ESP_OK)
+        state = FT02_SELFTEST_FAIL;
+    else if(truth.unexpectedReturnCount > 0u || truth.sessionCount > 1u ||
+            truth.lightSleepEntryCount != truth.lightSleepReturnCount ||
+            truth.lastWakeCause != static_cast<int32_t>(ESP_SLEEP_WAKEUP_EXT1) ||
+            sleepRatio < 95.0)
+        state = FT02_SELFTEST_WARN;
+
+    addItem("休眠统计", state, detail);
 }
 
 void runStartupState()
@@ -723,9 +689,9 @@ void FT02_SystemSelfTestRun()
     runBattery();
 
     // Page 2/3: Navigation and communications
-    runGnss();       // 通讯模块 / GNSS / GNSS定位 / 罗盘
-    runLoRa();       // LoRa通讯 / LoRa网络
-    runHostUart();   // Host UART
+    runGnss();       // GNSS / GNSS定位 / 罗盘
+    runMeshRadio();  // Mesh无线 / Mesh网络
+    runMeshPki();    // Mesh PKI
 
     // Page 3/3: Data and system health
     runMap();
@@ -733,17 +699,13 @@ void FT02_SystemSelfTestRun()
     runPinyin();
     runStorageSpace();
     runMemoryHealth();
-    runCommunicationErrors();
+    runMeshCounters();
+    runSleepBattery();
+    runSleepTruth();
     runStartupState();
 
     g_report.elapsedMs = millis() - started;
     saveReportLog();
-
-    for(uint8_t i = 0; i < g_report.count; ++i)
-    {
-        const FT02SelfTestItem& item = g_report.items[i];
-
-    }
 }
 
 const FT02SelfTestReport& FT02_SystemSelfTestReportCurrent()

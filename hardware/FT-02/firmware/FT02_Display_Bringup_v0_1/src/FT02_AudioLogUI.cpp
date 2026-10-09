@@ -625,7 +625,7 @@ void FT02_DrawAudioLogPlayingVolumePartial(
 )
 {
     // Called only while the audio task has frozen the source pointer at zero
-    // and physically shut down NS4150B. Power the EPD
+    // and mute the playback path. Power the EPD
     // off before releasing the audio guard so neither the partial waveform nor
     // its rail shutdown can couple into the active speaker path.
     FT02_EpdInteractiveBeginBusyCapture(display);

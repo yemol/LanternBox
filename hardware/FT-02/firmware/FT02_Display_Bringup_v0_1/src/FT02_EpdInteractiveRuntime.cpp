@@ -13,7 +13,6 @@ uint8_t g_head = 0;
 uint8_t g_count = 0;
 uint32_t g_lastPollMs = 0;
 bool g_captureActive = false;
-bool g_waitForInitialRelease = false;
 bool g_hotPowerOffPending = false;
 uint32_t g_lastPartialCommitMs = 0;
 
@@ -43,18 +42,11 @@ void busyCallback(const void*)
     }
     g_lastPollMs = now;
 
+    // InputManager A2 owns held-repeat suppression. Do not add a second
+    // synthetic "wait for release" gate here, because CardKB2 I2C has no
+    // release frames and that gate used to swallow legitimate rapid re-presses
+    // while the EPD was BUSY.
     const FT02InputEvent event = FT02_InputPoll();
-    const char currentRaw = FT02_InputCurrentRawKey();
-
-    // The key that initiated this refresh can remain held while BUSY. Wait for
-    // one real release before accepting subsequent presses into the queue.
-    if(g_waitForInitialRelease)
-    {
-        if(currentRaw == 0) g_waitForInitialRelease = false;
-        delay(1);
-        return;
-    }
-
     if(event.key != FT02_KEY_NONE) (void)pushEvent(event);
     delay(1);
 }
@@ -66,7 +58,6 @@ void FT02_EpdInteractiveReset()
     g_count = 0;
     g_lastPollMs = 0;
     g_captureActive = false;
-    g_waitForInitialRelease = false;
     g_hotPowerOffPending = false;
     g_lastPartialCommitMs = 0;
 }
@@ -74,7 +65,6 @@ void FT02_EpdInteractiveReset()
 void FT02_EpdInteractiveBeginBusyCapture(FT02Display& display)
 {
     g_lastPollMs = 0;
-    g_waitForInitialRelease = FT02_InputCurrentRawKey() != 0;
     g_captureActive = true;
     display.epd2.setBusyCallback(busyCallback);
 }
@@ -82,7 +72,6 @@ void FT02_EpdInteractiveBeginBusyCapture(FT02Display& display)
 void FT02_EpdInteractiveEndBusyCapture(FT02Display& display)
 {
     g_captureActive = false;
-    g_waitForInitialRelease = false;
     display.epd2.setBusyCallback(nullptr);
 }
 

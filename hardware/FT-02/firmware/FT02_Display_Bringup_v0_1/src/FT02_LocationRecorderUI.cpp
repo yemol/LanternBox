@@ -107,7 +107,7 @@ static void FT02_DrawRecorderContent(
         else
             hint = recorder.sessionActive
                 ? (recorder.autoTrackEnabled ? "路径与自动轨迹记录中" : "路径记录中")
-                : (gnss.communicationActive ? "导航模块在线" : "等待导航模块");
+                : (gnss.communicationActive ? "GNSS在线" : "等待GNSS");
     }
     const int hintWidth = FT02_TextWidthPack(ft02_cjk_20r, hint);
     FT02_DrawTextPack(display, ft02_cjk_20r, hint, display.width() - 32 - hintWidth, 117);
@@ -201,7 +201,7 @@ static void FT02_DrawRecorderContent(
 
     if(gnss.hdop > 0.0f) snprintf(value, sizeof(value), "%.1f", gnss.hdop);
     else snprintf(value, sizeof(value), "--");
-    FT02_RecorderDrawLabelValue(display, "HDOP", value, 418, 270, 500);
+    FT02_RecorderDrawLabelValue(display, "PDOP", value, 418, 270, 500);
 
     if(gnss.fixValid) snprintf(value, sizeof(value), "%.6f", gnss.latitude);
     else snprintf(value, sizeof(value), "--");
