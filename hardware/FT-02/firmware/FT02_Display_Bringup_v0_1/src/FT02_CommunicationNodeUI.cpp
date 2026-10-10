@@ -304,9 +304,8 @@ void movePinyinPage(int delta)
 
 bool toggleComposeInputMode()
 {
-    // Sym+W is a backtick (`) in CardKB2 I2C symbol mode. It is reserved as
-    // the compose-mode switch so normal digits remain available for messages.
-    // If a Chinese composition is active, commit its default candidate first
+    // CardKB2 emits a dedicated IME_TOGGLE event on long Sym hold. If a
+    // Chinese composition is active, commit its default candidate first
     // instead of silently discarding what the user already typed.
     if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0)
     {
@@ -743,13 +742,13 @@ void drawCompose(FT02Display& display)
         else
         {
             FT02_DrawTextPack(display, ft02_cjk_20r, "[中] 拼音输入：连续拼音 / 词组 / 词频学习", 48, 312);
-            FT02_DrawTextPack(display, ft02_cjk_20r, "Sym标点自动中文化；`切英文", 48, 338);
+            FT02_DrawTextPack(display, ft02_cjk_20r, "Sym标点自动中文化；长按Sym切英文", 48, 338);
         }
     }
     else
     {
         FT02_DrawTextPack(display, ft02_cjk_20r, "[EN] 英文输入：字母 / 数字 / 符号直接上屏", 48, 312);
-        FT02_DrawTextPack(display, ft02_cjk_20r, "`切中文；标点保持英文", 48, 338);
+        FT02_DrawTextPack(display, ft02_cjk_20r, "长按Sym切中文；标点保持英文", 48, 338);
     }
 
     const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
@@ -831,10 +830,9 @@ bool handleComposeRaw(const FT02InputEvent& event)
 {
     const uint8_t raw = static_cast<uint8_t>(event.raw);
 
-    // CardKB2 I2C symbol map: Sym+W emits '`'. Reserve it as a mode switch.
-    // This avoids consuming any number key, which remains important for IDs,
-    // coordinates and field messages.
-    if(raw == static_cast<uint8_t>('`'))
+    // Dedicated CardKB2 function event from a long Sym hold. Backtick is now
+    // ordinary text again and is never consumed as a hidden mode switch.
+    if(event.key == FT02_KEY_IME_TOGGLE)
     {
         (void)toggleComposeInputMode();
         return true;

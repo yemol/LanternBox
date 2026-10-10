@@ -15,8 +15,14 @@ enum FT02InputKey
     FT02_KEY_BACK,
     FT02_KEY_HELP,
 
+    // Dedicated CardKB2 function event (raw 0xF1). It is not text and must
+    // never be inserted into an editor buffer.
+    FT02_KEY_IME_TOGGLE,
+
     FT02_KEY_CHAR
 };
+
+constexpr uint8_t FT02_INPUT_RAW_IME_TOGGLE = 0xF1u;
 
 struct FT02InputEvent
 {
