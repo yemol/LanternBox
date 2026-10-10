@@ -151,8 +151,7 @@ static bool FT02_IsOneShotKey(FT02InputKey key)
 {
     return key == FT02_KEY_UP || key == FT02_KEY_DOWN ||
            key == FT02_KEY_LEFT || key == FT02_KEY_RIGHT ||
-           key == FT02_KEY_SELECT || key == FT02_KEY_BACK || key == FT02_KEY_HELP ||
-           key == FT02_KEY_IME_TOGGLE;
+           key == FT02_KEY_SELECT || key == FT02_KEY_BACK || key == FT02_KEY_HELP;
 }
 
 static uint8_t FT02_KbRamXor(const uint8_t* data, size_t len)
@@ -468,8 +467,6 @@ static FT02InputKey FT02_MapRawKey(
 )
 {
     const uint8_t code = static_cast<uint8_t>(raw);
-
-    if(code == FT02_INPUT_RAW_IME_TOGGLE) return FT02_KEY_IME_TOGGLE;
 
     // Native CardKB v1.1 physical direction bytes (normal layer).
     // Official firmware maps LEFT/UP/DOWN/RIGHT to 180..183 (0xB4..0xB7).
@@ -1116,7 +1113,6 @@ const char* FT02_InputKeyName(
         case FT02_KEY_SELECT: return "SELECT";
         case FT02_KEY_BACK: return "BACK";
         case FT02_KEY_HELP: return "HELP";
-        case FT02_KEY_IME_TOGGLE: return "IME_TOGGLE";
         case FT02_KEY_CHAR: return "CHAR";
         case FT02_KEY_NONE:
         default:

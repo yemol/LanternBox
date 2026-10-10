@@ -856,7 +856,7 @@ static void FT02_KnowledgeDrawSearchContent(FT02Display& display)
     else
     {
         FT02_DrawTextPack(display, ft02_cjk_20r, "标题不用完全一致：输入其中一部分也能搜索。", 44, 260);
-        FT02_DrawTextPack(display, ft02_cjk_20r, "同时搜索摘要、分类、正文和常用说法；长按Sym切换中英文。", 44, 302);
+        FT02_DrawTextPack(display, ft02_cjk_20r, "同时搜索摘要、分类、正文和常用说法；` 切换中英文。", 44, 302);
     }
 
     if(g_searchNotice[0] != '\0')
@@ -1932,7 +1932,7 @@ static FT02KnowledgeAction FT02_KnowledgeHandleSearch(FT02Display& display, cons
     // Text-entry surfaces must inspect event.raw before event.key because the
     // global InputManager intentionally maps D/Z/X/C/B to navigation hotkeys.
     // Search still needs those letters for Pinyin/English queries.
-    if(event.key == FT02_KEY_IME_TOGGLE)
+    if(raw == static_cast<uint8_t>('`'))
     {
         FT02_KnowledgeSearchToggleInputMode();
         return FT02_KNOWLEDGE_ACTION_NONE;

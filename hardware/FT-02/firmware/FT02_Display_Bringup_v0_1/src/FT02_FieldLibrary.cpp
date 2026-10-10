@@ -1933,7 +1933,7 @@ static void FT02_LibraryRedraw(FT02Display& display)
 static FT02FieldLibraryAction FT02_LibraryHandleSearchInput(FT02Display& display, const FT02InputEvent& event)
 {
     const uint8_t raw = static_cast<uint8_t>(event.raw);
-    if(event.key == FT02_KEY_IME_TOGGLE) { FT02_TextInputModeToggle(); FT02_LibraryRedraw(display); return FT02_LIBRARY_ACTION_NONE; }
+    if(raw == '`') { FT02_TextInputModeToggle(); FT02_LibraryRedraw(display); return FT02_LIBRARY_ACTION_NONE; }
     // Text input must inspect raw bytes before normalized navigation keys.
     // CardKB maps the literal letter B to BACK globally, but B still needs to
     // be typeable in English/Pinyin queries. ESC is the unambiguous exit key.

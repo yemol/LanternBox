@@ -5,6 +5,7 @@
 #include "FT02_PinyinImeData.h"
 #include "FT02_PinyinPhraseData.h"
 #include "FT02_PinyinLearning.h"
+#include "FT02_PinyinEngineAdapter.h"
 
 namespace
 {
@@ -222,6 +223,93 @@ bool rankedPhraseCandidate(const char* key, const FT02PinyinPhraseEntry* entry, 
     return false;
 }
 
+bool smartCandidateBase(const char* key, size_t index, char* outUtf8, size_t outSize)
+{
+    return FT02_PinyinEngineAdapterCandidate(key, index, outUtf8, outSize, nullptr);
+}
+
+bool rankedSmartCandidate(const char* key, size_t rankedIndex, char* outUtf8, size_t outSize)
+{
+    const size_t count = FT02_PinyinEngineAdapterCandidateCount(key);
+    if(rankedIndex >= count || count > FT02_PINYIN_A5_MAX_CANDIDATES) return false;
+    if(!FT02_PinyinLearningHasData()) return smartCandidateBase(key, rankedIndex, outUtf8, outSize);
+
+    bool used[FT02_PINYIN_A5_MAX_CANDIDATES] = {};
+    for(size_t rank = 0; rank <= rankedIndex; ++rank)
+    {
+        size_t best = count;
+        uint64_t bestScore = 0;
+        for(size_t base = 0; base < count; ++base)
+        {
+            if(used[base]) continue;
+            char candidate[FT02_PINYIN_MAX_CANDIDATE_BYTES + 1] = {};
+            if(!smartCandidateBase(key, base, candidate, sizeof(candidate))) continue;
+            const uint64_t score = learningRankScore(key, candidate, base);
+            if(best == count || score > bestScore || (score == bestScore && base < best))
+            {
+                best = base;
+                bestScore = score;
+            }
+        }
+        if(best == count) return false;
+        used[best] = true;
+        if(rank == rankedIndex) return smartCandidateBase(key, best, outUtf8, outSize);
+    }
+    return false;
+}
+
+// Resolve the longest multi-syllable prefix that exists in the SD smart
+// dictionary. Single-syllable input intentionally stays on the compact built-in
+// character table: it is faster, complete for the current device, and preserves
+// the familiar single-character candidate order.
+size_t smartPrefixCandidateCount(
+    const char* pinyin,
+    char* resolvedKey,
+    size_t resolvedKeySize,
+    size_t* consumedInputBytes
+)
+{
+    if(resolvedKey != nullptr && resolvedKeySize > 0u) resolvedKey[0] = '\0';
+    if(consumedInputBytes != nullptr) *consumedInputBytes = 0u;
+    if(pinyin == nullptr || pinyin[0] == '\0') return 0u;
+
+    const size_t totalLen = strlen(pinyin);
+    uint8_t nextLen[FT02_PINYIN_MAX_INPUT + 1] = {};
+    if(!segment(pinyin, nextLen, sizeof(nextLen))) return 0u;
+
+    size_t boundaries[FT02_PINYIN_MAX_INPUT + 1] = {};
+    size_t syllableCount = 0u;
+    size_t pos = 0u;
+    while(pos < totalLen && syllableCount < FT02_PINYIN_MAX_INPUT)
+    {
+        const size_t n = nextLen[pos];
+        if(n == 0u || pos + n > totalLen) return 0u;
+        pos += n;
+        boundaries[++syllableCount] = pos;
+    }
+    if(pos != totalLen || syllableCount < 2u) return 0u;
+
+    // Try the whole composition first, then successively shorter complete
+    // syllable prefixes. Never fall back to one syllable here.
+    for(size_t syllables = syllableCount; syllables >= 2u; --syllables)
+    {
+        const size_t bytes = boundaries[syllables];
+        if(bytes + 1u > resolvedKeySize) continue;
+        memcpy(resolvedKey, pinyin, bytes);
+        resolvedKey[bytes] = '\0';
+        const size_t count = FT02_PinyinEngineAdapterCandidateCount(resolvedKey);
+        if(count > 0u)
+        {
+            if(consumedInputBytes != nullptr) *consumedInputBytes = bytes;
+            return count;
+        }
+        if(syllables == 2u) break; // size_t underflow guard
+    }
+
+    if(resolvedKey != nullptr && resolvedKeySize > 0u) resolvedKey[0] = '\0';
+    return 0u;
+}
+
 bool copySlice(const char* src, size_t start, size_t length, char* out, size_t outSize)
 {
     if(src == nullptr || out == nullptr || outSize == 0 || length + 1u > outSize) return false;
@@ -238,12 +326,27 @@ bool FT02_PinyinImeHasExact(const char* pinyin)
 
 bool FT02_PinyinImeHasPhrase(const char* pinyin)
 {
+    if(pinyin == nullptr || pinyin[0] == '\0') return false;
+    char smartKey[FT02_PINYIN_MAX_INPUT + 1] = {};
+    size_t consumed = 0u;
+    const size_t smartCount = smartPrefixCandidateCount(pinyin, smartKey, sizeof(smartKey), &consumed);
+    if(smartCount > 0u && consumed == strlen(pinyin)) return true;
     return findPhrase(pinyin) != nullptr;
 }
 
 size_t FT02_PinyinImeCandidateCount(const char* pinyin)
 {
     if(pinyin == nullptr || pinyin[0] == '\0') return 0;
+
+    // A5: prefer the SD smart dictionary for multi-syllable words/phrases.
+    // The builder injects FT-02's domain phrases at high priority, so this does
+    // not lose the existing emergency/field vocabulary when the A5 dictionary
+    // is installed.
+    char smartKey[FT02_PINYIN_MAX_INPUT + 1] = {};
+    size_t smartConsumed = 0u;
+    const size_t smartCount = smartPrefixCandidateCount(
+        pinyin, smartKey, sizeof(smartKey), &smartConsumed);
+    if(smartCount > 0u) return smartCount;
 
     if(const FT02PinyinPhraseEntry* phrase = findPhrase(pinyin))
         return phraseCandidateCount(phrase);
@@ -271,6 +374,17 @@ bool FT02_PinyinImeCandidate(
     outUtf8[0] = '\0';
     if(consumedInputBytes != nullptr) *consumedInputBytes = 0;
     if(pinyin == nullptr || pinyin[0] == '\0') return false;
+
+    char smartKey[FT02_PINYIN_MAX_INPUT + 1] = {};
+    size_t smartConsumed = 0u;
+    const size_t smartCount = smartPrefixCandidateCount(
+        pinyin, smartKey, sizeof(smartKey), &smartConsumed);
+    if(smartCount > 0u)
+    {
+        if(index >= smartCount || !rankedSmartCandidate(smartKey, index, outUtf8, outSize)) return false;
+        if(consumedInputBytes != nullptr) *consumedInputBytes = smartConsumed;
+        return true;
+    }
 
     if(const FT02PinyinPhraseEntry* phrase = findPhrase(pinyin))
     {

@@ -6,8 +6,9 @@
 // FT-02 offline Pinyin IME.
 // - tone-less Pinyin
 // - continuous Pinyin segmentation
-// - phrase candidates
-// - single-character fallback when no phrase exists
+// - optional SD-backed A5 smart phrase dictionary
+// - longest complete multi-syllable prefix conversion
+// - built-in phrase/single-character fail-safe fallback
 // - bounded offline user-frequency candidate learning
 
 constexpr size_t FT02_PINYIN_MAX_INPUT = 24;
@@ -19,9 +20,10 @@ bool FT02_PinyinImeHasPhrase(const char* pinyin);
 
 // Returns the candidate count for the current composition.
 // Resolution order:
-// 1) exact phrase candidate(s),
-// 2) exact single-syllable Han candidates,
-// 3) first syllable Han candidates after automatic segmentation.
+// 1) longest multi-syllable prefix from the optional A5 SD smart dictionary,
+// 2) built-in exact phrase candidate(s),
+// 3) exact single-syllable Han candidates,
+// 4) first syllable Han candidates after automatic segmentation.
 size_t FT02_PinyinImeCandidateCount(const char* pinyin);
 
 // Copies one UTF-8 candidate into outUtf8. consumedInputBytes tells the caller

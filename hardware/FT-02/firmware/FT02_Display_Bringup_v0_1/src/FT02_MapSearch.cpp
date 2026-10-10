@@ -494,7 +494,7 @@ void drawQuery(FT02Display& display)
 {
     FT02_DrawTextPack(display, ft02_cjk_24b, "地图搜索", 28, 112);
     FT02_DrawTextPack(display, ft02_cjk_20r,
-        FT02_TextInputModeIsChinese() ? "输入模式：中文   长按Sym切英文" : "输入模式：英文   长按Sym切中文",
+        FT02_TextInputModeIsChinese() ? "输入模式：中文   ` 切换英文" : "输入模式：英文   ` 切换中文",
         28, 146);
 
     display.drawRect(26, 164, 748, 58, GxEPD_BLACK);
@@ -751,7 +751,7 @@ FT02MapSearchAction FT02_MapSearchHandleInput(const FT02InputEvent& event)
         return FT02_MAP_SEARCH_ACTION_EXIT_MAP;
     }
 
-    if(event.key == FT02_KEY_IME_TOGGLE)
+    if(raw == static_cast<uint8_t>('`'))
     {
         if(g_pinyinLength > 0) (void)commitDefaultPinyin();
         const FT02TextInputMode mode = FT02_TextInputModeToggle();
