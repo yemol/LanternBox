@@ -4,6 +4,7 @@
 #include "FT02_MeshSecrets.h"
 #include "FT02_MeshRadioBackend.h"
 #include "FT02_MeshPki.h"
+#include "FT02_MeshVoiceTransport.h"
 #include "FT02_LoRaCommunicationRuntime.h"
 #include "FT02_LoRaNodeRuntime.h"
 
@@ -16,9 +17,16 @@
 namespace {
 
 constexpr uint32_t NODEINFO_BOOT_DELAY_MS = 3500u;
+constexpr uint32_t NODEINFO_BOOT_REANNOUNCE_MS = 30000u;
+constexpr uint32_t NODEINFO_PERIODIC_MS = 15u * 60u * 1000u;
 constexpr uint32_t NODEINFO_REPLY_MIN_MS = 15000u;
 constexpr size_t PENDING_PKI_MAX = 4u;
 constexpr size_t MESH_MAX_PAYLOAD = 239u;
+// Radio backend accepts at most 240 bytes including the 16-byte Mesh header.
+// Private app data then adds 12 bytes of PKI overhead.  For port 256 and an
+// app payload >=128 bytes, the Data protobuf envelope is 6 bytes, leaving a
+// conservative application payload ceiling of 206 bytes.
+constexpr size_t MESH_PRIVATE_APP_MAX_PAYLOAD = 206u;
 
 struct PendingPkiFrame {
     bool valid;
@@ -48,6 +56,7 @@ bool g_pkiReady = false;
 PendingPkiFrame g_pendingPki[PENDING_PKI_MAX] = {};
 size_t g_pendingReplace = 0;
 bool g_nodeInfoBootPending = false;
+bool g_nodeInfoBootReannouncePending = false;
 bool g_nodeInfoReplyPending = false;
 uint32_t g_bootMs = 0;
 uint32_t g_lastNodeInfoTxMs = 0;
@@ -173,7 +182,7 @@ bool transmitPrepared(uint32_t toNode,
 }
 
 bool sendChannelData(uint32_t toNode,
-                     uint8_t portnum,
+                     uint32_t portnum,
                      const uint8_t *appPayload,
                      size_t appLen,
                      bool wantResponse,
@@ -181,7 +190,7 @@ bool sendChannelData(uint32_t toNode,
                      uint32_t requestId,
                      uint32_t packetId,
                      const char *typeName) {
-    uint8_t dataProto[190] = {};
+    uint8_t dataProto[MESH_MAX_PAYLOAD] = {};
     size_t dataLen = 0;
     if (!FT02_MeshBuildDataProto(portnum, appPayload, appLen, wantResponse, requestId,
                                  dataProto, sizeof(dataProto), dataLen)) return false;
@@ -190,20 +199,27 @@ bool sendChannelData(uint32_t toNode,
 }
 
 bool sendNodeInfo(bool requestReplies) {
-    if (!g_serviceReady || !g_pkiReady) return false;
+    if (!g_serviceReady) return false;
     uint8_t userProto[128] = {};
     size_t userLen = 0;
-    if (!FT02_MeshBuildUserProto(g_pki.publicKey(), userProto, sizeof(userProto), userLen)) return false;
+    const uint8_t* publicKey = g_pkiReady ? g_pki.publicKey() : nullptr;
+    if (!FT02_MeshBuildUserProto(publicKey, userProto, sizeof(userProto), userLen)) return false;
     const uint32_t packetId = newPacketId();
     if (!sendChannelData(FT02_MESH_BROADCAST_NODE, FT02_MESH_PORT_NODEINFO_APP,
                          userProto, userLen, requestReplies, false, 0u, packetId,
                          requestReplies ? "NODEINFO_REQUEST" : "NODEINFO")) return false;
     ++g_nodeInfoTx;
     g_lastNodeInfoTxMs = millis();
-    FT02_LOGD("[MESH-NODE] TX n=%lu request_replies=%d id=0x%08lX name=LanternBox FT02 short=FT02 pki=1\n",
+    FT02_LOGI("[MESH-NODE] TX n=%lu request_replies=%d id=0x%08lX node=!4c423002 name=LanternBox FT02 short=FT02 pki=%d\n",
                   static_cast<unsigned long>(g_nodeInfoTx), requestReplies ? 1 : 0,
-                  static_cast<unsigned long>(packetId));
+                  static_cast<unsigned long>(packetId), g_pkiReady ? 1 : 0);
     return true;
+}
+
+void announceIdentityBeforeFirstTraffic() {
+    if (!g_serviceReady || g_nodeInfoTx != 0u) return;
+    FT02_LOGI_PRINTLN("[MESH-NODE] pre-traffic identity announce");
+    (void)sendNodeInfo(false);
 }
 
 bool sendRoutingAck(uint32_t toNode, uint32_t requestId) {
@@ -370,6 +386,9 @@ void processDecoded(const FT02MeshHeader &header,
             ++g_privateRx;
             if ((header.flags & FT02_MESH_FLAG_WANT_ACK) != 0u) (void)sendRoutingAck(header.from, header.id);
         }
+    } else if (data.portnum == FT02_MESH_PORT_LANTERNBOX_VOICE && data.payload && data.payloadLen) {
+        FT02_MeshVoiceTransportOnPayload(header.id, header.from, header.to, pkiEncrypted,
+                                         rssi, snr, data.payload, data.payloadLen);
     } else if (data.portnum == FT02_MESH_PORT_ROUTING_APP) {
         uint32_t error = 0xFFFFFFFFu;
         const bool parsed = data.payload && FT02_MeshParseRoutingError(data.payload, data.payloadLen, error);
@@ -403,7 +422,9 @@ bool FT02_MeshServiceBegin() {
     g_pendingReplace = 0;
     g_nodeInfoReplyPending = false;
     g_nodeInfoBootPending = false;
+    g_nodeInfoBootReannouncePending = false;
     g_lastNodeInfoTxMs = 0;
+    FT02_MeshVoiceTransportBegin();
 
     g_pkiReady = g_pki.begin();
     g_serviceReady = FT02_MeshRadioBackendBegin();
@@ -411,7 +432,10 @@ bool FT02_MeshServiceBegin() {
         FT02_LoRaNodeRuntimeHostBegin(FT02_MESH_LOCAL_NODE, "LanternBox FT02", "FT02");
         FT02_LoRaNodeRuntimeHostSetStatus(true, 0, g_pki.peerCount());
         g_bootMs = millis();
-        g_nodeInfoBootPending = g_pkiReady;
+        // Identity announcement must not depend on PKI availability.  Names are
+        // still valid NODEINFO_APP data, and a later announcement carries the
+        // public key when PKI is available.
+        g_nodeInfoBootPending = true;
     }
     if (g_serviceReady) {
         FT02_LOGI("[MESH] ready SX1262/HW-SPI LongFast node=!%08lX pki=%d peers=%u\n",
@@ -431,9 +455,25 @@ void FT02_MeshServicePoll() {
         FT02_MeshServiceOnRadioFrame(frame.data, frame.len, frame.rssi, frame.snr, frame.crcOk, true);
     }
 
+    FT02_MeshVoiceTransportPoll();
+
     const uint32_t now = millis();
     if (g_nodeInfoBootPending && static_cast<uint32_t>(now - g_bootMs) >= NODEINFO_BOOT_DELAY_MS) {
-        if (sendNodeInfo(true)) g_nodeInfoBootPending = false;
+        if (sendNodeInfo(true)) {
+            g_nodeInfoBootPending = false;
+            g_nodeInfoBootReannouncePending = true;
+        }
+    }
+    // A second boot announcement makes identity discovery robust to one lost RF
+    // frame.  After that, mirror Meshtastic's periodic NodeInfo behavior so a
+    // gateway that restarts can relearn our names without waiting for manual UI action.
+    if (g_nodeInfoBootReannouncePending && g_lastNodeInfoTxMs != 0u &&
+        static_cast<uint32_t>(now - g_lastNodeInfoTxMs) >= NODEINFO_BOOT_REANNOUNCE_MS) {
+        if (sendNodeInfo(false)) g_nodeInfoBootReannouncePending = false;
+    } else if (!g_nodeInfoBootPending && !g_nodeInfoBootReannouncePending &&
+               g_lastNodeInfoTxMs != 0u &&
+               static_cast<uint32_t>(now - g_lastNodeInfoTxMs) >= NODEINFO_PERIODIC_MS) {
+        (void)sendNodeInfo(false);
     }
     if (g_nodeInfoReplyPending && (g_lastNodeInfoTxMs == 0u || static_cast<uint32_t>(now - g_lastNodeInfoTxMs) >= NODEINFO_REPLY_MIN_MS)) {
         if (sendNodeInfo(false)) g_nodeInfoReplyPending = false;
@@ -504,6 +544,7 @@ void FT02_MeshServiceOnRadioFrame(const uint8_t *frame,
 
 bool FT02_MeshServiceSendBroadcastText(const char* text, uint32_t packetId) {
     if (!FT02_MeshServiceReady() || !text || !text[0] || packetId == 0u) return false;
+    announceIdentityBeforeFirstTraffic();
     size_t textLen = strlen(text);
     if (textLen > 120u) textLen = 120u;
     while (textLen > 0u && (static_cast<uint8_t>(text[textLen]) & 0xC0u) == 0x80u) --textLen;
@@ -530,6 +571,7 @@ bool FT02_MeshServiceSendPrivateText(uint32_t destination, const char* text, uin
                       g_pki.peerPublicKey(destination) ? 1 : 0, FT02_MeshServiceReady() ? 1 : 0);
         return false;
     }
+    announceIdentityBeforeFirstTraffic();
     size_t textLen = strlen(text);
     if (textLen > 120u) textLen = 120u;
     while (textLen > 0u && (static_cast<uint8_t>(text[textLen]) & 0xC0u) == 0x80u) --textLen;
@@ -560,8 +602,64 @@ bool FT02_MeshServiceSendPrivateText(uint32_t destination, const char* text, uin
     return ok;
 }
 
+uint32_t FT02_MeshServiceAllocatePacketId() {
+    return newPacketId();
+}
+
+size_t FT02_MeshServiceMaxPrivateAppPayload() {
+    return MESH_PRIVATE_APP_MAX_PAYLOAD;
+}
+
+bool FT02_MeshServiceSendBroadcastApp(uint32_t portnum,
+                                       const uint8_t* payload,
+                                       size_t payloadLen,
+                                       uint32_t packetId) {
+    if (!FT02_MeshServiceReady() || portnum == 0u || !payload || payloadLen == 0u || packetId == 0u) return false;
+    announceIdentityBeforeFirstTraffic();
+    return sendChannelData(FT02_MESH_BROADCAST_NODE, portnum,
+                           payload, payloadLen, false, false, 0u, packetId, "APP_BCAST");
+}
+
+bool FT02_MeshServiceSendPrivateApp(uint32_t destination,
+                                     uint32_t portnum,
+                                     const uint8_t* payload,
+                                     size_t payloadLen,
+                                     uint32_t packetId,
+                                     bool wantAck) {
+    if (!FT02_MeshServiceCanSendPrivate(destination) || portnum == 0u || !payload || payloadLen == 0u || packetId == 0u)
+        return false;
+    announceIdentityBeforeFirstTraffic();
+    if (payloadLen > MESH_PRIVATE_APP_MAX_PAYLOAD) {
+        ++g_txFailures;
+        FT02_LOGE("[ERROR][MESH-PKI] app payload too large to=0x%08lX port=%lu id=0x%08lX len=%u max=%u\n",
+                  static_cast<unsigned long>(destination), static_cast<unsigned long>(portnum),
+                  static_cast<unsigned long>(packetId), static_cast<unsigned>(payloadLen),
+                  static_cast<unsigned>(MESH_PRIVATE_APP_MAX_PAYLOAD));
+        return false;
+    }
+
+    uint8_t dataProto[MESH_MAX_PAYLOAD] = {};
+    size_t dataLen = 0u;
+    if (!FT02_MeshBuildDataProto(portnum, payload, payloadLen,
+                                 false, 0u, dataProto, sizeof(dataProto), dataLen)) return false;
+    uint8_t encrypted[MESH_MAX_PAYLOAD] = {};
+    size_t encryptedLen = 0u;
+    const uint8_t* peerKey = g_pki.peerPublicKey(destination);
+    if (!g_pki.encryptForPeer(peerKey, packetId, FT02_MESH_LOCAL_NODE,
+                              dataProto, dataLen, encrypted, sizeof(encrypted), encryptedLen)) {
+        ++g_txFailures;
+        FT02_LOGE("[ERROR][MESH-PKI] app encrypt failed to=0x%08lX port=%lu id=0x%08lX len=%u\n",
+                  static_cast<unsigned long>(destination), static_cast<unsigned long>(portnum),
+                  static_cast<unsigned long>(packetId), static_cast<unsigned>(payloadLen));
+        return false;
+    }
+    const bool ok = transmitPrepared(destination, 0u, encrypted, encryptedLen, wantAck, packetId, "PKI_APP");
+    if (ok) ++g_privateTx;
+    return ok;
+}
+
 bool FT02_MeshServiceRequestNodeInfo() {
-    if (!FT02_MeshServiceReady() || !g_pkiReady) return false;
+    if (!FT02_MeshServiceReady()) return false;
     const uint32_t now = millis();
     // Node list refresh can be requested from the UI and from queued private
     // delivery. Rate-limit it so a missing peer key cannot create a TX storm.
@@ -575,8 +673,9 @@ bool FT02_MeshServicePkiReady() { return g_pkiReady; }
 uint8_t FT02_MeshServicePkiPeerCount() { return g_pki.peerCount(); }
 uint32_t FT02_MeshServiceRawFrameCount() { return g_rawFrames; }
 uint32_t FT02_MeshServiceDecodedFrameCount() { return g_decodedFrames; }
+uint32_t FT02_MeshServiceNodeInfoRxCount() { return g_nodeInfoRx; }
 bool FT02_MeshServiceReady() { return g_serviceReady && FT02_MeshRadioBackendReady(); }
 bool FT02_MeshServiceSleepAvailable() { return FT02_MeshRadioBackendSleepAvailable(); }
-void FT02_MeshServiceSleepEnter() { FT02_MeshRadioBackendSleepEnter(); }
+bool FT02_MeshServiceSleepEnter() { return FT02_MeshRadioBackendSleepEnter(); }
 void FT02_MeshServiceSleepService() { FT02_MeshRadioBackendSleepService(); }
 void FT02_MeshServiceSleepExit() { FT02_MeshRadioBackendSleepExit(); }

@@ -1,5 +1,6 @@
 #include "FT02_SystemSelfTest.h"
 
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -35,8 +36,10 @@ namespace
 FT02SelfTestReport g_report = {};
 uint8_t g_pageIndex = 0;
 
-static constexpr uint8_t FT02_SELFTEST_PAGE_COUNT = 3;
-static constexpr uint8_t FT02_SELFTEST_ITEMS_PER_PAGE = 7;
+static constexpr uint8_t FT02_SELFTEST_PAGE_COUNT = 4;
+static constexpr uint8_t FT02_SELFTEST_PAGE_STARTS[FT02_SELFTEST_PAGE_COUNT] = {0, 6, 12, 19};
+static constexpr uint8_t FT02_SELFTEST_PAGE_LENGTHS[FT02_SELFTEST_PAGE_COUNT] = {6, 6, 7, 3};
+static constexpr uint8_t FT02_SELFTEST_POWER_PAGE = 3;
 
 static const FT02BottomBarItem FT02_SELFTEST_BOTTOM_DEFAULT[3] = {
     {nullptr, "←/→ 翻页"},
@@ -150,6 +153,22 @@ void runPsram()
         addItem("PSRAM", FT02_SELFTEST_PASS, text);
 }
 
+void runStoragePassive()
+{
+    if(!FT02_StorageIsReady())
+    {
+        const FT02StorageError error = FT02_StorageLastError();
+        addItem("SD卡", FT02_SELFTEST_FAIL,
+                error == FT02_STORAGE_ERROR_CARD_NONE ? "未检测到SD卡" : "当前未就绪");
+        return;
+    }
+
+    char detail[96];
+    snprintf(detail, sizeof(detail), "已挂载 空闲%luMB · ENTER主动读写自检",
+             FT02_StorageFreeMB());
+    addItem("SD卡", FT02_SELFTEST_PASS, detail);
+}
+
 void runStorage()
 {
     if(!FT02_StorageIsReady())
@@ -191,6 +210,34 @@ void runKeyboard()
         addItem("键盘", FT02_SELFTEST_FAIL, "I2C设备无响应");
 }
 
+void runBatteryCached()
+{
+    const FT02BatterySnapshot battery = FT02_BatterySnapshotCurrent();
+
+    if(!battery.monitorPresent || !battery.valid)
+    {
+        addItem("电池", FT02_SELFTEST_WARN, "SOC估算暂无有效缓存 · ENTER主动自检");
+        return;
+    }
+
+    char detail[96];
+    const char* flow = FT02_BatteryIsCharging() ? "充电" : "供电";
+    snprintf(
+        detail,
+        sizeof(detail),
+        "SOC估算 %.0f%% | %.3fV | %s",
+        static_cast<double>(battery.percent),
+        static_cast<double>(battery.voltage),
+        flow
+    );
+
+    const FT02BatteryBand band = FT02_BatteryBandCurrent();
+    addItem("电池",
+            (band == FT02_BATTERY_CRITICAL || band == FT02_BATTERY_LOW)
+                ? FT02_SELFTEST_WARN : FT02_SELFTEST_PASS,
+            detail);
+}
+
 void runBattery()
 {
     FT02_BatteryMonitorRefreshNow();
@@ -211,7 +258,7 @@ void runBattery()
         snprintf(
             detail,
             sizeof(detail),
-            "严重低电量 %.0f%% %.3fV %s",
+            "严重低电量 SOC估算 %.0f%% %.3fV %s",
             static_cast<double>(battery.percent),
             static_cast<double>(battery.voltage),
             flow
@@ -225,7 +272,7 @@ void runBattery()
         snprintf(
             detail,
             sizeof(detail),
-            "低电量 %.0f%% %.3fV %s",
+            "低电量 SOC估算 %.0f%% %.3fV %s",
             static_cast<double>(battery.percent),
             static_cast<double>(battery.voltage),
             flow
@@ -237,7 +284,7 @@ void runBattery()
     snprintf(
         detail,
         sizeof(detail),
-        "%.0f%% %.3fV %s",
+        "SOC估算 %.0f%% %.3fV %s",
         static_cast<double>(battery.percent),
         static_cast<double>(battery.voltage),
         flow
@@ -318,12 +365,28 @@ void runMeshRadio()
 void runAudio()
 {
     const FT02AudioLogStatus audio = FT02_AudioLogStatusCurrent();
+    if(!FT02_AudioLogHardwareActive())
+    {
+        addItem("音频", FT02_SELFTEST_PASS, "休眠中 · ENTER主动自检");
+        return;
+    }
     if(audio.codecReady && audio.i2sReady)
         addItem("音频", FT02_SELFTEST_PASS, "ES8311与I2S正常");
     else if(!audio.i2sReady)
         addItem("音频", FT02_SELFTEST_FAIL, "I2S初始化失败");
     else
         addItem("音频", FT02_SELFTEST_FAIL, "ES8311无响应");
+}
+
+void runMapPassive()
+{
+    if(!FT02_StorageIsReady())
+    {
+        addItem("地图数据", FT02_SELFTEST_FAIL, "SD未就绪");
+        return;
+    }
+    // Do not touch map files from the observational Device Status page.
+    addItem("地图数据", FT02_SELFTEST_NA, "未主动访问 · ENTER重新自检");
 }
 
 void runMap()
@@ -505,9 +568,34 @@ const char* resetReasonText(esp_reset_reason_t reason)
 void runSleepBattery()
 {
     const FT02SleepTruthSnapshot truth = FT02_SleepTruthSnapshotCurrent();
-    if(!truth.valid || !truth.batterySampleValid || truth.elapsedUs == 0u)
+    if(!truth.valid || truth.elapsedUs == 0u)
     {
-        addItem("休眠耗电", FT02_SELFTEST_NA, "暂无完整休眠电量样本");
+        addItem("休眠耗电", FT02_SELFTEST_NA, "暂无完整休眠结果");
+        return;
+    }
+
+    if(!truth.batteryStartSampleValid)
+    {
+        addItem("休眠耗电", FT02_SELFTEST_NA, "起点无效：睡前电量缓存过旧");
+        return;
+    }
+
+    if(truth.batteryWakeSettling)
+    {
+        char pending[64];
+        snprintf(
+            pending,
+            sizeof(pending),
+            "终点稳定采样 %u/3",
+            static_cast<unsigned>(truth.batteryWakeSampleCount)
+        );
+        addItem("休眠耗电", FT02_SELFTEST_NA, pending);
+        return;
+    }
+
+    if(!truth.batterySampleValid)
+    {
+        addItem("休眠耗电", FT02_SELFTEST_NA, "上次终点样本未完成");
         return;
     }
 
@@ -515,25 +603,44 @@ void runSleepBattery()
     const double drop =
         static_cast<double>(truth.batteryStartPercent - truth.batteryWakePercent);
     const double rate = hours > 0.0 ? drop / hours : 0.0;
+    const long deltaMv = lround(
+        static_cast<double>(truth.batteryWakeVoltage - truth.batteryStartVoltage) * 1000.0);
 
-    char detail[96];
-    snprintf(
-        detail,
-        sizeof(detail),
-        "%.0f→%.0f%% %.3f→%.3fV %.2fh %.2f%%/h",
-        static_cast<double>(truth.batteryStartPercent),
-        static_cast<double>(truth.batteryWakePercent),
-        static_cast<double>(truth.batteryStartVoltage),
-        static_cast<double>(truth.batteryWakeVoltage),
-        hours,
-        rate
-    );
+    char detail[128];
+    if(hours < 2.0)
+    {
+        snprintf(
+            detail,
+            sizeof(detail),
+            "%.3f→%.3fV Δ%+ldmV | SOC估算 %.0f→%.0f%% | %.2fh 短时参考",
+            static_cast<double>(truth.batteryStartVoltage),
+            static_cast<double>(truth.batteryWakeVoltage),
+            deltaMv,
+            static_cast<double>(truth.batteryStartPercent),
+            static_cast<double>(truth.batteryWakePercent),
+            hours
+        );
+    }
+    else
+    {
+        snprintf(
+            detail,
+            sizeof(detail),
+            "%.3f→%.3fV Δ%+ldmV | SOC估算 %.0f→%.0f%% | %.2fh %.2f%%/h",
+            static_cast<double>(truth.batteryStartVoltage),
+            static_cast<double>(truth.batteryWakeVoltage),
+            deltaMv,
+            static_cast<double>(truth.batteryStartPercent),
+            static_cast<double>(truth.batteryWakePercent),
+            hours,
+            rate
+        );
+    }
 
-    // A short sample is useful as raw evidence but too quantized to judge the
-    // power target. Once >=1 h, >1%%/h is a warning against the FT-02 target.
-    FT02SelfTestState state = FT02_SELFTEST_NA;
-    if(hours >= 1.0) state = rate <= 1.0 ? FT02_SELFTEST_PASS : FT02_SELFTEST_WARN;
-    addItem("休眠耗电", state, detail);
+    // This row is measurement evidence, not a system-health verdict. In the
+    // current prototype power architecture, SOC-derived drain must not turn
+    // the overall Device Status into WARN/FAIL by itself.
+    addItem("休眠耗电", FT02_SELFTEST_NA, detail);
 }
 
 void runSleepTruth()
@@ -569,7 +676,7 @@ void runSleepTruth()
     FT02SelfTestState state = FT02_SELFTEST_PASS;
     if(truth.resetDuringWindowCount > 0u || truth.lastSleepErr != ESP_OK)
         state = FT02_SELFTEST_FAIL;
-    else if(truth.unexpectedReturnCount > 0u || truth.sessionCount > 1u ||
+    else if(truth.unexpectedReturnCount > 0u ||
             truth.lightSleepEntryCount != truth.lightSleepReturnCount ||
             truth.lastWakeCause != static_cast<int32_t>(ESP_SLEEP_WAKEUP_EXT1) ||
             sleepRatio < 95.0)
@@ -669,6 +776,154 @@ void drawItem(
     FT02_DrawTextPack(display, ft02_cjk_20r, stateText(item.state), x + 150, baselineY);
     FT02_DrawTextPack(display, ft02_cjk_20r, item.detail, x + 258, baselineY);
 }
+
+
+void drawPowerSleepPage(FT02Display& display)
+{
+    const FT02BatterySnapshot battery = FT02_BatterySnapshotCurrent();
+    const FT02SleepTruthSnapshot truth = FT02_SleepTruthSnapshotCurrent();
+
+    const int left = 48;
+    const int right = 752;
+
+    // Section 1: current battery. This page is observational and uses only
+    // already-published BatteryMonitor cache; drawing it never forces I2C.
+    FT02_DrawTextPack(display, ft02_cjk_24b, "当前电池", left, 187);
+    char line[128];
+    if(battery.monitorPresent && battery.valid)
+    {
+        snprintf(line, sizeof(line), "SOC估算 %.0f%%    电压 %.3fV    %s",
+                 static_cast<double>(battery.percent),
+                 static_cast<double>(battery.voltage),
+                 FT02_BatteryIsCharging() ? "充电中" : "供电中");
+    }
+    else
+    {
+        snprintf(line, sizeof(line), "SOC估算暂无有效缓存    ENTER可重新自检");
+    }
+    FT02_DrawTextPack(display, ft02_cjk_20r, line, left, 216);
+    display.drawLine(left, 229, right, 229, GxEPD_BLACK);
+
+    // Section 2: last independent sleep energy session. Split the former
+    // single long row into multiple lines so voltage/SOC/time evidence is never
+    // clipped off-screen.
+    FT02_DrawTextPack(display, ft02_cjk_24b, "上次休眠耗电", left, 259);
+    if(!truth.valid || truth.elapsedUs == 0u)
+    {
+        FT02_DrawTextPack(display, ft02_cjk_20r, "暂无完整休眠结果", left, 288);
+    }
+    else if(!truth.batteryStartSampleValid)
+    {
+        FT02_DrawTextPack(display, ft02_cjk_20r, "起点无效：睡前电量缓存过旧", left, 288);
+    }
+    else if(truth.batteryWakeSettling)
+    {
+        snprintf(line, sizeof(line), "终点稳定采样 %u/3",
+                 static_cast<unsigned>(truth.batteryWakeSampleCount));
+        FT02_DrawTextPack(display, ft02_cjk_20r, line, left, 288);
+    }
+    else if(!truth.batterySampleValid)
+    {
+        FT02_DrawTextPack(display, ft02_cjk_20r, "上次终点样本未完成", left, 288);
+    }
+    else
+    {
+        const double hours = static_cast<double>(truth.elapsedUs) / 3600000000.0;
+        const double drop = static_cast<double>(truth.batteryStartPercent - truth.batteryWakePercent);
+        const double rate = hours > 0.0 ? drop / hours : 0.0;
+        const long deltaMv = lround(
+            static_cast<double>(truth.batteryWakeVoltage - truth.batteryStartVoltage) * 1000.0);
+
+        snprintf(line, sizeof(line), "电压 %.3f → %.3fV    Δ%+ldmV",
+                 static_cast<double>(truth.batteryStartVoltage),
+                 static_cast<double>(truth.batteryWakeVoltage),
+                 deltaMv);
+        FT02_DrawTextPack(display, ft02_cjk_20r, line, left, 288);
+
+        snprintf(line, sizeof(line), "SOC估算 %.0f → %.0f%%    时长 %.2fh",
+                 static_cast<double>(truth.batteryStartPercent),
+                 static_cast<double>(truth.batteryWakePercent),
+                 hours);
+        FT02_DrawTextPack(display, ft02_cjk_20r, line, left, 315);
+
+        if(hours < 2.0)
+            snprintf(line, sizeof(line), "趋势：短时参考，不外推 %%/h");
+        else
+            snprintf(line, sizeof(line), "SOC长时趋势 %.2f%%/h（分析参考）", rate);
+        FT02_DrawTextPack(display, ft02_cjk_20r, line, left, 342);
+    }
+    display.drawLine(left, 353, right, 353, GxEPD_BLACK);
+
+    // Section 3: Light-Sleep truth. Keep each diagnostic dimension visible on
+    // its own line instead of packing the whole session into a clipped row.
+    FT02_DrawTextPack(display, ft02_cjk_24b, "休眠统计", left, 377);
+    if(!truth.valid)
+    {
+        FT02_DrawTextPack(display, ft02_cjk_20r, "暂无完整休眠结果", left, 405);
+    }
+    else
+    {
+        const double elapsedHours = static_cast<double>(truth.elapsedUs) / 3600000000.0;
+        const double sleepHours = static_cast<double>(truth.lightSleepUs) / 3600000000.0;
+        const double awakeMinutes = static_cast<double>(truth.awakeUs) / 60000000.0;
+        const double sleepRatio = truth.elapsedUs > 0u
+            ? (100.0 * static_cast<double>(truth.lightSleepUs) / static_cast<double>(truth.elapsedUs))
+            : 0.0;
+
+        snprintf(line, sizeof(line), "窗口 %.2fh    实睡 %.2fh    占比 %.1f%%",
+                 elapsedHours, sleepHours, sleepRatio);
+        FT02_DrawTextPack(display, ft02_cjk_20r, line, left, 405);
+
+        snprintf(line, sizeof(line), "清醒 %.1fmin    会话%lu    LS%lu    异常%lu",
+                 awakeMinutes,
+                 static_cast<unsigned long>(truth.sessionCount),
+                 static_cast<unsigned long>(truth.lightSleepReturnCount),
+                 static_cast<unsigned long>(truth.unexpectedReturnCount));
+        FT02_DrawTextPack(display, ft02_cjk_20r, line, left, 430);
+    }
+}
+}
+
+void FT02_SystemSelfTestRefreshPassive()
+{
+    const uint32_t started = millis();
+    const uint32_t nextGeneration = g_report.generation + 1U;
+    memset(&g_report, 0, sizeof(g_report));
+    g_report.generation = nextGeneration;
+    g_pageIndex = 0;
+
+    // Observational Device Status: cached/in-memory state only. No SD writes,
+    // no file probes, no forced MAX17048 read, no audio acquisition.
+    // Page 1/4: core hardware (6 items)
+    runMainControl();
+    runPsram();
+    runStoragePassive();
+    runKeyboard();
+    runAudio();
+    runTime();
+
+    // Page 2/4: navigation and communications (6 items)
+    runGnss();
+    runMeshRadio();
+    runMeshPki();
+
+    // Page 3/4: data and system health (7 items)
+    runMapPassive();
+    runManual();
+    runPinyin();
+    runStorageSpace();
+    runMemoryHealth();
+    runMeshCounters();
+    runStartupState();
+
+    // Page 4/4: power and sleep diagnostics (3 items)
+    runBatteryCached();
+    runSleepBattery();
+    runSleepTruth();
+
+    g_report.elapsedMs = millis() - started;
+    // Deliberately no saveReportLog(): merely opening Device Status must not
+    // mutate SD state or change the next sleep's hardware starting condition.
 }
 
 void FT02_SystemSelfTestRun()
@@ -679,30 +934,32 @@ void FT02_SystemSelfTestRun()
     g_report.generation = nextGeneration;
     g_pageIndex = 0;
 
-    // Page 1/3: Core hardware
+    // Page 1/4: Core hardware
     runMainControl();
     runPsram();
     runStorage();
     runKeyboard();
     runAudio();
     runTime();
-    runBattery();
 
-    // Page 2/3: Navigation and communications
+    // Page 2/4: Navigation and communications
     runGnss();       // GNSS / GNSS定位 / 罗盘
     runMeshRadio();  // Mesh无线 / Mesh网络
     runMeshPki();    // Mesh PKI
 
-    // Page 3/3: Data and system health
+    // Page 3/4: Data and system health
     runMap();
     runManual();
     runPinyin();
     runStorageSpace();
     runMemoryHealth();
     runMeshCounters();
+    runStartupState();
+
+    // Page 4/4: Power and sleep diagnostics
+    runBattery();
     runSleepBattery();
     runSleepTruth();
-    runStartupState();
 
     g_report.elapsedMs = millis() - started;
     saveReportLog();
@@ -738,7 +995,13 @@ void FT02_DrawSystemSelfTestScreen(FT02Display& display)
     {
         display.fillScreen(GxEPD_WHITE);
         FT02_DrawStatusBar(display);
-        FT02_DrawTextPack(display, ft02_cjk_24b, "设备状态  系统自检", 32, 116);
+        FT02_DrawTextPack(
+            display,
+            ft02_cjk_24b,
+            g_pageIndex == FT02_SELFTEST_POWER_PAGE ? "设备状态  电源与休眠" : "设备状态  系统自检",
+            32,
+            116
+        );
 
         char pageText[24];
         snprintf(pageText, sizeof(pageText), "%u/%u", (unsigned)(g_pageIndex + 1U), (unsigned)FT02_SELFTEST_PAGE_COUNT);
@@ -765,18 +1028,23 @@ void FT02_DrawSystemSelfTestScreen(FT02Display& display)
 
         display.drawLine(32, 157, 768, 157, GxEPD_BLACK);
 
-        const uint8_t startIndex =
-            static_cast<uint8_t>(g_pageIndex * FT02_SELFTEST_ITEMS_PER_PAGE);
-        const uint8_t pageEnd =
-            static_cast<uint8_t>(startIndex + FT02_SELFTEST_ITEMS_PER_PAGE);
-        const uint8_t endIndex =
-            report.count < pageEnd ? report.count : pageEnd;
-
-        uint8_t row = 0;
-        for(uint8_t i = startIndex; i < endIndex; ++i, ++row)
+        if(g_pageIndex == FT02_SELFTEST_POWER_PAGE)
         {
-            const int baselineY = 184 + static_cast<int>(row) * 41;
-            drawItem(display, report.items[i], 48, baselineY);
+            drawPowerSleepPage(display);
+        }
+        else
+        {
+            const uint8_t startIndex = FT02_SELFTEST_PAGE_STARTS[g_pageIndex];
+            const uint8_t requestedEnd = static_cast<uint8_t>(
+                startIndex + FT02_SELFTEST_PAGE_LENGTHS[g_pageIndex]);
+            const uint8_t endIndex = report.count < requestedEnd ? report.count : requestedEnd;
+
+            uint8_t row = 0;
+            for(uint8_t i = startIndex; i < endIndex; ++i, ++row)
+            {
+                const int baselineY = 184 + static_cast<int>(row) * 41;
+                drawItem(display, report.items[i], 48, baselineY);
+            }
         }
 
         FT02_DrawBottomBarWithFont(display, FT02_SELFTEST_BOTTOM_DEFAULT, ft02_cjk_20r);

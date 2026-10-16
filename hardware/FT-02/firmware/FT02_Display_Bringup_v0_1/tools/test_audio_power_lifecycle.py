@@ -27,7 +27,7 @@ req(start is not None, "hardware start helper missing")
 req(start.group(0).find("FT02_AudioInitI2s()") < start.group(0).find("FT02_AudioInitCodec()"), "I2S must precede codec")
 req("FT02_AudioEnsureServiceTask()" in start.group(0), "audio task not lifecycle managed")
 
-stop = re.search(r"static void FT02_AudioHardwareStop\(\).*?\n}\n", audio, re.S)
+stop = re.search(r"static bool FT02_AudioHardwareStop\(\).*?\n}\n", audio, re.S)
 req(stop is not None, "hardware stop helper missing")
 req(stop.group(0).find("g_ft02AudioCodec.suspend()") < stop.group(0).find("FT02_AudioDeinitI2s()"), "codec must suspend while BCLK still exists")
 req("FT02_AudioPaSet(false)" in stop.group(0), "PA is not shut down")
@@ -49,7 +49,9 @@ for token in [
     req(token in codec, f"codec suspend step missing: {token}")
 
 req("FT02_AudioLogAcquire(FT02_AUDIO_OWNER_JOURNAL)" in main, "journal page does not acquire audio")
-req("FT02_AudioLogAcquire(FT02_AUDIO_OWNER_SYSTEM_TEST)" in main, "system test does not acquire audio")
+req("FT02_AudioLogAcquire(FT02_AUDIO_OWNER_SYSTEM_TEST)" in main, "explicit system test does not acquire audio")
+req("FT02_AudioLogPrepareForSleep" in header, "verified audio sleep preflight missing")
+req("Device Status is read-only by default" in main, "device status still has side-effectful open policy")
 req("FT02_AudioLogRelease(FT02_AUDIO_OWNER_JOURNAL)" in main, "journal audio is never released")
 req("FT02_AudioLogRelease(FT02_AUDIO_OWNER_SYSTEM_TEST)" in main, "system-test audio is never released")
 

@@ -4,7 +4,7 @@
 
 // Shared FT-02 text input mode.
 // All text-entry surfaces use the same Chinese/English state and the same
-// CardKB2 Sym+W (`) toggle. This prevents each page from inventing its own
+// CardKB2 long-SYM IME direct toggle (0xF1). This prevents each page from inventing its own
 // mode state or resetting the user's choice when moving between pages.
 enum FT02TextInputMode : uint8_t
 {

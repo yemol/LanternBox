@@ -416,12 +416,12 @@ bool FT02_MeshRadioBackendSleepAvailable() {
     return g_ready && g_radio && !g_txInProgress && !g_frameReady;
 }
 
-void FT02_MeshRadioBackendSleepEnter() {
+bool FT02_MeshRadioBackendSleepEnter() {
     if (!FT02_MeshRadioBackendSleepAvailable()) {
         g_sleepSession = false;
         FT02_LOGD("[MESH-SLEEP] enter skipped ready=%d tx=%d frame_pending=%d\n",
                       g_ready ? 1 : 0, g_txInProgress ? 1 : 0, g_frameReady ? 1 : 0);
-        return;
+        return false;
     }
 
     // Quarantine the backend before touching DIO1. Poll/TX paths now refuse
@@ -453,13 +453,26 @@ void FT02_MeshRadioBackendSleepEnter() {
                       rxPathOk ? 1 : 0);
         }
         g_sleepSession = false;
-        return;
+        return false;
     }
 
     const bool rfIdle = FT02_LoRaHwProbeSetRfIdle();
-    if(!rfIdle) FT02_LOGW_PRINTLN("[WARN][MESH] sleep RF idle path failed");
-    FT02_LOGD("[MESH-SLEEP] enter radio=warm-sleep rf_idle=%d dio1_irq=detached\n",
-              rfIdle ? 1 : 0);
+    if(!rfIdle)
+    {
+        // A sleeping SX1262 with the external RF path still enabled is not a
+        // valid system low-power state. Wake/restore RX and fail preflight.
+        (void)g_radio->standby();
+        (void)g_radio->clearIrqFlags(0x03FFu);
+        const bool rxPathOk = FT02_LoRaHwProbeSetRfReceive();
+        const bool rxRestartOk = rxPathOk && startListening();
+        if(rxRestartOk) attachPacketReceivedActionAfterWake();
+        else g_ready = false;
+        g_sleepSession = false;
+        FT02_LOGE("[ERROR][MESH] sleep enter failed stage=rf_idle rollback_rx=%d\n", rxRestartOk ? 1 : 0);
+        return false;
+    }
+    FT02_LOGD_PRINTLN("[MESH-SLEEP] enter radio=warm-sleep rf_idle=1 dio1_irq=detached");
+    return true;
 }
 
 void FT02_MeshRadioBackendSleepService() {

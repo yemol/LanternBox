@@ -98,13 +98,13 @@ bool FT02_ModeToggleIndoorOutdoor()
     );
 }
 
-void FT02_ModeEnterSleep()
+bool FT02_ModeEnterSleep()
 {
-    if(g_currentMode == FT02_MODE_SLEEP) return;
+    if(g_currentMode == FT02_MODE_SLEEP) return true;
     if(g_currentMode == FT02_MODE_INDOOR || g_currentMode == FT02_MODE_OUTDOOR)
         g_lastAwakeMode = g_currentMode;
     g_currentMode = FT02_MODE_SLEEP;
-    applyGnssPolicy();
+    return FT02_GnssPowerSetEnabled(false);
 }
 
 void FT02_ModeWake()

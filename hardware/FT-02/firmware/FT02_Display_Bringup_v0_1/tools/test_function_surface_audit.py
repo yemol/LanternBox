@@ -66,9 +66,10 @@ req(not (ROOT/'src/FT02_LR01HostRuntime.cpp').exists(), 'retired LR01 runtime st
 req('FT02_MeshServiceBegin' in mesh and 'FT02_MeshServiceSendPrivateText' in mesh, 'Core MeshService surface missing')
 req('FT02_MeshServicePoll();' in main, 'Core MeshService poll missing')
 
-# Self-test remains exactly 3 x 7 visible slots.
-req('FT02_SELFTEST_PAGE_COUNT = 3' in selftest, 'self-test page count')
-req('FT02_SELFTEST_ITEMS_PER_PAGE = 7' in selftest, 'self-test items/page')
-req('MAX_ITEMS = 21' in t('src/FT02_SystemSelfTest.h'), 'self-test report capacity')
+# Self-test is 4 pages: 6 core + 6 nav/comms + 7 data/system + 3 power/sleep.
+req('FT02_SELFTEST_PAGE_COUNT = 4' in selftest, 'self-test page count')
+req('FT02_SELFTEST_PAGE_STARTS[FT02_SELFTEST_PAGE_COUNT] = {0, 6, 12, 19}' in selftest, 'self-test page starts')
+req('FT02_SELFTEST_PAGE_LENGTHS[FT02_SELFTEST_PAGE_COUNT] = {6, 6, 7, 3}' in selftest, 'self-test page lengths')
+req('MAX_ITEMS = 24' in t('src/FT02_SystemSelfTest.h'), 'self-test report capacity')
 
-print('PASS Stable R1 surface home=10 battery=MAX17048 compass=Core-QMC GNSS=Core-UART Mesh=Core-SX1262 WiFi=owner-gated selftest=3x7')
+print('PASS Stable R1 surface home=10 battery=MAX17048 compass=Core-QMC GNSS=Core-UART Mesh=Core-SX1262 WiFi=owner-gated selftest=4pages')

@@ -6,7 +6,7 @@ def req(ok,msg):
 req('bool g_packetActionAttached = false;' in s,'IRQ ownership flag missing')
 req('g_radio->clearPacketReceivedAction();' in s,'DIO1 detach missing')
 req('g_radio->setPacketReceivedAction(onPacketReceived);' in s,'DIO1 attach missing')
-enter=s[s.index('void FT02_MeshRadioBackendSleepEnter()'):s.index('void FT02_MeshRadioBackendSleepService()')]
+enter=s[s.index('bool FT02_MeshRadioBackendSleepEnter()'):s.index('void FT02_MeshRadioBackendSleepService()')]
 exit=s[s.index('void FT02_MeshRadioBackendSleepExit()'):]
 req(enter.index('g_sleepSession = true;') < enter.index('detachPacketReceivedActionForSleep()'),'sleep quarantine must precede detach')
 req(enter.index('detachPacketReceivedActionForSleep()') < enter.index('g_radio->sleep(true)'),'DIO1 must detach before radio sleep')

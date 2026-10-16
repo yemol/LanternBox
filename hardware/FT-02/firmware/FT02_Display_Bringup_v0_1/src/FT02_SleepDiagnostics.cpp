@@ -12,7 +12,7 @@ namespace
 {
 constexpr const char* FT02_SLEEP_DIAG_NS = "ft02slpdbg";
 constexpr uint32_t FT02_SLEEP_TRUTH_MAGIC = 0x46543254u; // "FT2T"
-constexpr uint32_t FT02_SLEEP_TRUTH_VERSION = 0x00020000u;
+constexpr uint32_t FT02_SLEEP_TRUTH_VERSION = 0x00040000u;
 
 struct FT02SleepTruthRtc
 {
@@ -65,6 +65,32 @@ struct FT02SleepTruthRtc
 
 RTC_NOINIT_ATTR FT02SleepTruthRtc g_truth;
 
+constexpr uint8_t FT02_WAKE_BATTERY_SAMPLE_TARGET = 3u;
+
+struct FT02WakeBatteryCollector
+{
+    bool active = false;
+    uint8_t count = 0;
+    int32_t permille[FT02_WAKE_BATTERY_SAMPLE_TARGET] = {};
+    uint32_t mv[FT02_WAKE_BATTERY_SAMPLE_TARGET] = {};
+};
+
+FT02WakeBatteryCollector g_wakeBatteryCollector;
+
+void clearWakeBatteryCollector()
+{
+    g_wakeBatteryCollector = FT02WakeBatteryCollector{};
+}
+
+template<typename T>
+T median3(T a, T b, T c)
+{
+    if(a > b) { const T t = a; a = b; b = t; }
+    if(b > c) { const T t = b; b = c; c = t; }
+    if(a > b) { const T t = a; a = b; b = t; }
+    return b;
+}
+
 uint64_t nowUs()
 {
     const int64_t value = esp_timer_get_time();
@@ -87,6 +113,7 @@ uint32_t voltageToMv(float voltage)
 
 void resetTruth(bool active, uint64_t startUs)
 {
+    clearWakeBatteryCollector();
     memset(&g_truth, 0, sizeof(g_truth));
     g_truth.magic = FT02_SLEEP_TRUTH_MAGIC;
     g_truth.version = FT02_SLEEP_TRUTH_VERSION;
@@ -243,18 +270,14 @@ FT02SleepDiagnosticsSnapshot FT02_SleepDiagnosticsSnapshotCurrent()
 
 void FT02_SleepTruthSessionEnter(bool automatic)
 {
+    (void)automatic;
     const uint64_t now = nowUs();
-    if(!truthValid()) resetTruth(false, 0u);
 
-    // A manual sleep explicitly starts a fresh measurement window. Automatic
-    // re-sleep continues an existing window so any awake gap after a spurious
-    // wake is counted instead of being hidden by a new session.
-    if(!automatic || !g_truth.windowActive || g_truth.windowStartUs == 0u)
-    {
-        resetTruth(true, now);
-    }
-
-    ++g_truth.sessionCount;
+    // R1.4: every physical sleep entry is an independent measurement session.
+    // Never carry a previous wake's awake gap into the next sleep result. This
+    // keeps first/second/third sleep comparisons apples-to-apples.
+    resetTruth(true, now);
+    g_truth.sessionCount = 1u;
     g_truth.lightSleepStartUs = 0u;
 }
 
@@ -299,23 +322,48 @@ void FT02_SleepTruthSetBatteryStart(bool valid, float percent, float voltage)
     }
 }
 
-void FT02_SleepTruthSetBatteryWake(bool valid, float percent, float voltage)
+void FT02_SleepTruthBeginWakeBatterySettle()
 {
-    if(!truthValid() || !valid || !isfinite(percent) || !isfinite(voltage)) return;
+    clearWakeBatteryCollector();
+    if(!truthValid() || !g_truth.resultValid || g_truth.resultBatteryStartValid == 0u) return;
+
+    // The immediate MAX17048 wake-resume read verifies I2C recovery only. It is
+    // deliberately excluded from energy accounting because ModelGauge/SOC can
+    // settle after the system load changes at wake. The normal 10 s background
+    // poll supplies three later samples without increasing I2C traffic.
+    g_wakeBatteryCollector.active = true;
+}
+
+void FT02_SleepTruthFeedWakeBatterySample(bool valid, float percent, float voltage)
+{
+    if(!g_wakeBatteryCollector.active || !truthValid() || !g_truth.resultValid ||
+       !valid || !isfinite(percent) || !isfinite(voltage)) return;
+
+    const uint8_t index = g_wakeBatteryCollector.count;
+    if(index >= FT02_WAKE_BATTERY_SAMPLE_TARGET) return;
+
+    g_wakeBatteryCollector.permille[index] = percentToPermille(percent);
+    g_wakeBatteryCollector.mv[index] = voltageToMv(voltage);
+    ++g_wakeBatteryCollector.count;
+
+    if(g_wakeBatteryCollector.count < FT02_WAKE_BATTERY_SAMPLE_TARGET) return;
+
+    const int32_t stablePermille = median3(
+        g_wakeBatteryCollector.permille[0],
+        g_wakeBatteryCollector.permille[1],
+        g_wakeBatteryCollector.permille[2]);
+    const uint32_t stableMv = median3(
+        g_wakeBatteryCollector.mv[0],
+        g_wakeBatteryCollector.mv[1],
+        g_wakeBatteryCollector.mv[2]);
 
     g_truth.batteryWakeValid = 1u;
-    g_truth.batteryWakePermille = percentToPermille(percent);
-    g_truth.batteryWakeMv = voltageToMv(voltage);
-
-    // Keyboard wake captures the timing result before normal I2C is restored.
-    // The wake battery sample arrives later from the existing BatteryMonitor
-    // wake-resume transaction, so attach it to the already captured result.
-    if(g_truth.resultValid)
-    {
-        g_truth.resultBatteryWakeValid = 1u;
-        g_truth.resultBatteryWakePermille = g_truth.batteryWakePermille;
-        g_truth.resultBatteryWakeMv = g_truth.batteryWakeMv;
-    }
+    g_truth.batteryWakePermille = stablePermille;
+    g_truth.batteryWakeMv = stableMv;
+    g_truth.resultBatteryWakeValid = 1u;
+    g_truth.resultBatteryWakePermille = stablePermille;
+    g_truth.resultBatteryWakeMv = stableMv;
+    g_wakeBatteryCollector.active = false;
 }
 
 void FT02_SleepTruthMarkKeyboardWake()
@@ -323,6 +371,11 @@ void FT02_SleepTruthMarkKeyboardWake()
     if(!truthValid() || !g_truth.windowActive) return;
     ++g_truth.keyboardWakeCount;
     captureTruthResult();
+    // Close this physical sleep session immediately at the accepted wake. The
+    // post-wake UI time is deliberately excluded from sleep efficiency/drain.
+    g_truth.windowActive = 0u;
+    g_truth.windowStartUs = 0u;
+    g_truth.lightSleepStartUs = 0u;
 }
 
 void FT02_SleepTruthMarkUnexpectedReturn()
@@ -330,6 +383,9 @@ void FT02_SleepTruthMarkUnexpectedReturn()
     if(!truthValid() || !g_truth.windowActive) return;
     ++g_truth.unexpectedReturnCount;
     captureTruthResult();
+    g_truth.windowActive = 0u;
+    g_truth.windowStartUs = 0u;
+    g_truth.lightSleepStartUs = 0u;
 }
 
 FT02SleepTruthSnapshot FT02_SleepTruthSnapshotCurrent()
@@ -354,8 +410,11 @@ FT02SleepTruthSnapshot FT02_SleepTruthSnapshotCurrent()
         s.elapsedUs = g_truth.resultElapsedUs;
         s.lightSleepUs = g_truth.resultLightSleepUs;
         s.awakeUs = g_truth.resultAwakeUs;
+        s.batteryStartSampleValid = g_truth.resultBatteryStartValid != 0u;
+        s.batteryWakeSettling = g_wakeBatteryCollector.active;
+        s.batteryWakeSampleCount = g_wakeBatteryCollector.count;
         s.batterySampleValid =
-            g_truth.resultBatteryStartValid != 0u && g_truth.resultBatteryWakeValid != 0u;
+            s.batteryStartSampleValid && g_truth.resultBatteryWakeValid != 0u;
         if(s.batterySampleValid)
         {
             s.batteryStartPercent = static_cast<float>(g_truth.resultBatteryStartPermille) / 10.0f;

@@ -176,7 +176,7 @@ bool FT02_MeshParseDataProto(const uint8_t *data, size_t len, FT02MeshDataView &
     return out.portnum != 0u;
 }
 
-bool FT02_MeshBuildDataProto(uint8_t portnum,
+bool FT02_MeshBuildDataProto(uint32_t portnum,
                              const uint8_t *payload,
                              size_t payloadLen,
                              bool wantResponse,
@@ -238,11 +238,13 @@ bool FT02_MeshParseUserProto(const uint8_t *data, size_t len, FT02MeshUserView &
 bool FT02_MeshBuildUserProto(const uint8_t publicKey[32],
                              uint8_t *out, size_t maxLen, size_t &outLen) {
     outLen = 0;
-    if (!publicKey || !out || maxLen == 0u) return false;
+    if (!out || maxLen == 0u) return false;
     if (!appendStringField(out, outLen, maxLen, 1u, "!4c423002")) return false;
     if (!appendStringField(out, outLen, maxLen, 2u, "LanternBox FT02")) return false;
     if (!appendStringField(out, outLen, maxLen, 3u, "FT02")) return false;
-    if (!appendBytesField(out, outLen, maxLen, 8u, publicKey, 32u)) return false;
+    // Names are valid NodeInfo even if PKI initialization is temporarily unavailable.
+    // When PKI is ready, field 8 carries the current 32-byte Curve25519 public key.
+    if (publicKey && !appendBytesField(out, outLen, maxLen, 8u, publicKey, 32u)) return false;
     // Meshtastic User field 9: is_unmessagable=false.
     if (!appendVarintField(out, outLen, maxLen, 9u, 0u)) return false;
     return true;
@@ -270,6 +272,7 @@ const char *FT02_MeshPortName(uint32_t portnum) {
         case FT02_MESH_PORT_TEXT_MESSAGE_APP: return "TEXT_MESSAGE_APP";
         case FT02_MESH_PORT_NODEINFO_APP: return "NODEINFO_APP";
         case FT02_MESH_PORT_ROUTING_APP: return "ROUTING_APP";
+        case FT02_MESH_PORT_LANTERNBOX_VOICE: return "LANTERNBOX_VOICE";
         default: return "OTHER";
     }
 }

@@ -8,6 +8,8 @@ static constexpr uint8_t FT02_MESH_CHANNEL_HASH = 0xA4;
 static constexpr uint8_t FT02_MESH_PORT_TEXT_MESSAGE_APP = 1;
 static constexpr uint8_t FT02_MESH_PORT_NODEINFO_APP = 4;
 static constexpr uint8_t FT02_MESH_PORT_ROUTING_APP = 5;
+// LanternBox private application range (Meshtastic reserves 256-511 for private apps).
+static constexpr uint32_t FT02_MESH_PORT_LANTERNBOX_VOICE = 256u;
 static constexpr uint32_t FT02_MESH_BROADCAST_NODE = 0xFFFFFFFFu;
 static constexpr uint32_t FT02_MESH_LOCAL_NODE = 0x4C423002u; // !4c423002 / LanternBox FT02
 static constexpr uint8_t FT02_MESH_HOP_LIMIT = 3;
@@ -51,7 +53,7 @@ struct FT02MeshDataView {
 
 bool FT02_MeshParseHeader(const uint8_t *data, size_t len, FT02MeshHeader &out);
 bool FT02_MeshParseDataProto(const uint8_t *data, size_t len, FT02MeshDataView &out);
-bool FT02_MeshBuildDataProto(uint8_t portnum,
+bool FT02_MeshBuildDataProto(uint32_t portnum,
                              const uint8_t *payload,
                              size_t payloadLen,
                              bool wantResponse,

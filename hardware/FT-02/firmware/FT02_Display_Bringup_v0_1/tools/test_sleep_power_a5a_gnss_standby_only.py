@@ -10,7 +10,7 @@ main=t('src/main.cpp')
 inp=t('src/FT02_InputManager.cpp')
 mesh=t('src/FT02_MeshRadioBackend.cpp')
 batt=t('src/FT02_BatteryMonitor.cpp')
-req(ver=='v2.84-sleep-power-a5c-stable-r1.1','version mismatch')
+req(ver=='v2.84-sleep-power-a5c-stable-r1.5','version mismatch')
 req('FT02_GNSS_UBX_PMREQ_STANDBY' in g,'PMREQ frame missing')
 for tok in ['0x02, 0x41, 0x10, 0x00','0x04, 0x00, 0x00, 0x00','0x08, 0x00, 0x00, 0x00','0x5F, 0x5B']:
     req(tok in g,'PMREQ token missing '+tok)

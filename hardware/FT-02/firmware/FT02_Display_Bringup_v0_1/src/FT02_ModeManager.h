@@ -16,7 +16,7 @@ FT02SystemMode FT02_ModeAwakeMode();
 
 bool FT02_ModeSetAwake(FT02SystemMode mode);
 bool FT02_ModeToggleIndoorOutdoor();
-void FT02_ModeEnterSleep();
+bool FT02_ModeEnterSleep();
 void FT02_ModeWake();
 
 bool FT02_ModeIsSleeping();

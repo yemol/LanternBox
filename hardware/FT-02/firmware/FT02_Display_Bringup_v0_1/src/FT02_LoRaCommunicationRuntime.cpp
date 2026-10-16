@@ -13,6 +13,7 @@
 #include "FT02_Gnss.h"
 #include "FT02_LoRaNodeRuntime.h"
 #include "FT02_MeshService.h"
+#include "FT02_MeshMessageStore.h"
 
 namespace
 {
@@ -298,6 +299,21 @@ uint32_t deliveryTtlSeconds(FT02MessageDeliveryMode mode)
     return 0;
 }
 
+FT02MeshMessageStatus historyStatusForDelivery(FT02MessageDeliveryState state)
+{
+    switch(state)
+    {
+        case FT02_DELIVERY_QUEUED: return FT02_MESH_STATUS_QUEUED;
+        case FT02_DELIVERY_WAITING_ACK: return FT02_MESH_STATUS_WAITING_ACK;
+        case FT02_DELIVERY_SENT: return FT02_MESH_STATUS_SENT;
+        case FT02_DELIVERY_DELIVERED: return FT02_MESH_STATUS_DELIVERED;
+        case FT02_DELIVERY_EXPIRED: return FT02_MESH_STATUS_EXPIRED;
+        case FT02_DELIVERY_FAILED: return FT02_MESH_STATUS_FAILED;
+        case FT02_DELIVERY_CANCELED: return FT02_MESH_STATUS_CANCELED;
+        default: return FT02_MESH_STATUS_QUEUED;
+    }
+}
+
 void markOutboxDirty()
 {
     g_outboxDirty = true;
@@ -348,6 +364,8 @@ void resolveOutboxPacket(uint32_t packetId, uint32_t error)
         slot.view.state = FT02_DELIVERY_QUEUED;
     }
     markOutboxDirty();
+    (void)FT02_MeshMessageStoreUpdateTx(
+        slot.view.logicalId, slot.view.lastPacketId, historyStatusForDelivery(slot.view.state));
 }
 
 void outboxOnSessionReset()
@@ -361,6 +379,8 @@ void outboxOnSessionReset()
             slot.view.state = FT02_DELIVERY_SENT;
         else
             slot.view.state = FT02_DELIVERY_QUEUED;
+        (void)FT02_MeshMessageStoreUpdateTx(
+            slot.view.logicalId, slot.view.lastPacketId, historyStatusForDelivery(slot.view.state));
         changed = true;
     }
     if(changed) markOutboxDirty();
@@ -560,7 +580,19 @@ bool loadOutboxSnapshot()
                 normalized = true;
             }
         }
-        (void)appendLoadedOutbox(v);
+        if(appendLoadedOutbox(v))
+        {
+            (void)FT02_MeshMessageStoreEnsureTxText(
+                v.logicalId,
+                FT02_LoRaNodeRuntimeLocalNode(),
+                v.broadcast ? FT02_BROADCAST_NODE : v.destination,
+                !v.broadcast,
+                v.text,
+                historyStatusForDelivery(v.state),
+                v.createdEpoch
+            );
+            (void)FT02_MeshMessageStoreUpdateTx(v.logicalId, v.lastPacketId, historyStatusForDelivery(v.state));
+        }
     }
     fclose(file);
     g_outboxLoaded = true;
@@ -616,6 +648,16 @@ bool queuePreparedMessage(uint32_t destination, bool broadcast, const char* prep
     snprintf(slot.view.text, sizeof(slot.view.text), "%s", preparedText);
     markOutboxDirty();
 
+    (void)FT02_MeshMessageStoreAppendTxText(
+        slot.view.logicalId,
+        FT02_LoRaNodeRuntimeLocalNode(),
+        slot.view.broadcast ? FT02_BROADCAST_NODE : slot.view.destination,
+        !slot.view.broadcast,
+        slot.view.text,
+        FT02_MESH_STATUS_QUEUED,
+        slot.view.createdEpoch
+    );
+
     return true;
 }
 
@@ -659,6 +701,11 @@ bool trySubmitOutbox(OutboxSlot& slot, uint32_t nowMs)
     // a routing ACK and stay WAITING_ACK until MeshService receives it.
     slot.view.state = meshBroadcastReady ? FT02_DELIVERY_SENT : FT02_DELIVERY_WAITING_ACK;
     markOutboxDirty();
+    (void)FT02_MeshMessageStoreUpdateTx(
+        slot.view.logicalId,
+        packetId,
+        meshBroadcastReady ? FT02_MESH_STATUS_SENT : FT02_MESH_STATUS_WAITING_ACK
+    );
 
     return true;
 }
@@ -685,6 +732,8 @@ void pollOutboxDelivery()
         if(outboxExpired(slot, nowMs, nowEpoch))
         {
             slot.view.state = FT02_DELIVERY_EXPIRED;
+            (void)FT02_MeshMessageStoreUpdateTx(
+                slot.view.logicalId, slot.view.lastPacketId, FT02_MESH_STATUS_EXPIRED);
             expiryChanged = true;
             continue;
         }
@@ -723,6 +772,7 @@ bool FT02_LoRaCommunicationSendPrivate(uint32_t destination, const char* userTex
 
 void FT02_LoRaMessageDeliveryBegin()
 {
+    FT02_MeshMessageStoreBegin();
     if(g_outboxLoaded) return;
     if(!loadOutboxSnapshot())
     {
@@ -732,6 +782,7 @@ void FT02_LoRaMessageDeliveryBegin()
 
 void FT02_LoRaMessageDeliveryPoll()
 {
+    FT02_MeshMessageStorePoll();
     const uint32_t now = millis();
     if(!g_outboxLoaded)
     {
@@ -796,6 +847,8 @@ bool FT02_LoRaMessageCancel(uint32_t logicalId)
     if(!deliveryStateActive(slot.view.state)) return false;
     slot.view.state = FT02_DELIVERY_CANCELED;
     markOutboxDirty();
+    (void)FT02_MeshMessageStoreUpdateTx(
+        slot.view.logicalId, slot.view.lastPacketId, FT02_MESH_STATUS_CANCELED);
 
     return true;
 }
@@ -845,31 +898,55 @@ const char* FT02_LoRaMessageDeliveryStateText(FT02MessageDeliveryState state)
 
 size_t FT02_LoRaCommunicationMessageCount()
 {
-    return g_inboxCount;
+    return FT02_MeshMessageStoreCount();
 }
 
 bool FT02_LoRaCommunicationGetMessageNewest(size_t newestIndex, FT02LoRaMessageView& out)
 {
     memset(&out, 0, sizeof(out));
-    if(newestIndex >= g_inboxCount) return false;
-    const size_t index = (g_inboxHead + FT02_INBOX_MAX - 1 - newestIndex) % FT02_INBOX_MAX;
-    out = g_inbox[index].message;
+    FT02MeshMessageView stored{};
+    if(!FT02_MeshMessageStoreGetNewest(newestIndex, stored)) return false;
+    out.valid = stored.valid;
+    out.from = stored.from;
+    out.to = stored.to;
+    out.packetId = stored.packetId;
+    out.logicalId = stored.logicalId;
+    out.broadcast = stored.scope == FT02_MESH_SCOPE_BROADCAST;
+    out.pkiEncrypted = stored.pkiEncrypted;
+    out.outgoing = stored.direction == FT02_MESH_MESSAGE_TX;
+    out.messageType = stored.type;
+    out.historyStatus = stored.status;
+    out.unread = stored.unread;
+    memcpy(out.text, stored.text, sizeof(out.text));
+    out.voiceDurationMs = stored.voiceDurationMs;
+    memcpy(out.voicePath, stored.voicePath, sizeof(out.voicePath));
+    out.hasRxTime = stored.hasTime;
+    out.rxTimeEpoch = stored.timeEpoch;
+    out.hasRssi = stored.hasRssi;
+    out.rssi = stored.rssi;
+    out.hasSnr = stored.hasSnr;
+    out.snr = stored.snr;
+    out.hasHops = stored.hasHops;
+    out.hops = stored.hops;
     return out.valid;
 }
 
 uint16_t FT02_LoRaCommunicationUnreadCount()
 {
-    return g_unread;
+    return FT02_MeshMessageStoreUnreadCount();
 }
 
 void FT02_LoRaCommunicationMarkAllRead()
 {
-    if(g_unread == 0) return;
-    g_unread = 0;
-    ++g_revision;
+    FT02_MeshMessageStoreMarkAllRead();
 }
 
-uint32_t FT02_LoRaCommunicationRevision() { return g_revision; }
+uint32_t FT02_LoRaCommunicationRevision()
+{
+    // MessageStore is now the canonical mixed text/voice timeline. Voice RX/TX
+    // can change history without touching the legacy text runtime counter.
+    return g_revision + FT02_MeshMessageStoreRevision();
+}
 uint32_t FT02_LoRaCommunicationRxTextCount() { return g_rxTextCount; }
 uint32_t FT02_LoRaCommunicationTxCount() { return g_txCount; }
 uint32_t FT02_LoRaCommunicationDuplicateCount() { return g_duplicateCount; }
@@ -966,6 +1043,19 @@ void FT02_LoRaCommunicationHostReceive(uint32_t airPacketId,
     message.snr = snr;
     message.hasHops = false;
     pushInbox(message);
+    (void)FT02_MeshMessageStoreAppendRxText(
+        message.packetId,
+        message.from,
+        message.to,
+        message.pkiEncrypted,
+        message.text,
+        message.hasRssi,
+        static_cast<int16_t>(message.rssi),
+        message.hasSnr,
+        message.snr,
+        message.hasHops,
+        message.hops
+    );
     g_lastRxPacketId = message.packetId;
 
 }

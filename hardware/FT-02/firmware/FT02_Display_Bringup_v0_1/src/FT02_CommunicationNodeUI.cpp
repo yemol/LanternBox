@@ -13,7 +13,12 @@
 #include "FT02_Gnss.h"
 #include "FT02_LoRaCommunicationRuntime.h"
 #include "FT02_LoRaNodeRuntime.h"
+#include "FT02_Log.h"
 #include "FT02_MeshService.h"
+#include "FT02_MeshProtocol.h"
+#include "FT02_MeshVoiceAudio.h"
+#include "FT02_MeshVoiceProtocol.h"
+#include "FT02_MeshVoiceTransport.h"
 #include "FT02_PinyinIme.h"
 #include "FT02_PinyinLearning.h"
 #include "FT02_StatusBar.h"
@@ -24,19 +29,41 @@ namespace
 enum CommMode : uint8_t
 {
     COMM_INBOX = 0,
+    COMM_FILTER,
+    COMM_SEND_MENU,
     COMM_NODES,
     COMM_COMPOSE,
     COMM_OUTBOX,
     COMM_OUTBOX_CANCEL_CONFIRM,
     COMM_OUTBOX_CLEAR_CONFIRM,
-    COMM_DIAG
+    COMM_DIAG,
+    COMM_VOICE
+};
+
+enum NodeAction : uint8_t
+{
+    NODE_ACTION_BROWSE = 0,
+    NODE_ACTION_PRIVATE_TEXT,
+    NODE_ACTION_PRIVATE_VOICE
+};
+
+enum HistoryFilter : uint8_t
+{
+    HISTORY_ALL = 0,
+    HISTORY_BROADCAST,
+    HISTORY_DIRECT
 };
 
 constexpr size_t VISIBLE_NODE_ROWS = 4;
 constexpr uint32_t COMPOSE_REDRAW_IDLE_MS = 320u;
+constexpr uint32_t MESH_SYNC_NOTICE_TIMEOUT_MS = 6000u;
 constexpr size_t PINYIN_VISIBLE_CANDIDATES = FT02_PINYIN_PAGE_SIZE;
 
 CommMode g_mode = COMM_INBOX;
+HistoryFilter g_historyFilter = HISTORY_ALL;
+uint8_t g_filterSelection = 0u;
+NodeAction g_nodeAction = NODE_ACTION_BROWSE;
+uint8_t g_sendSelection = 0u;
 
 // Unit CardKB2 (U215) I2C factory firmware consumes Fn+D/Z/X/C internally
 // and does not emit those arrow combinations to the I2C host. Use translated
@@ -45,6 +72,12 @@ CommMode g_mode = COMM_INBOX;
 static constexpr uint8_t CARDKB_MODE_LEFT  = static_cast<uint8_t>('<');
 static constexpr uint8_t CARDKB_MODE_RIGHT = static_cast<uint8_t>('>');
 CommMode g_composeReturnMode = COMM_INBOX;
+CommMode g_nodesReturnMode = COMM_INBOX;
+CommMode g_voiceReturnMode = COMM_INBOX;
+bool g_voiceStartPending = false;
+bool g_voiceCaptureCueReady = false;
+uint32_t g_voicePendingDestination = FT02_MESH_BROADCAST_NODE;
+bool g_voiceTxObserved = false;
 size_t g_messageIndex = 0;
 size_t g_nodeSelection = 0;
 size_t g_outboxIndex = 0;
@@ -63,36 +96,68 @@ bool g_composeDirty = false;
 uint32_t g_composeLastEditMs = 0;
 char g_notice[96] = {};
 bool g_syncNoticeActive = false;
+uint32_t g_syncNoticeStartedMs = 0u;
+uint32_t g_syncNoticeNodeInfoRxBaseline = 0u;
 
 static const FT02BottomBarItem BOTTOM_INBOX[3] = {
-    {nullptr, "确认回复 / T广播"}, {nullptr, "M节点 / O发件"}, {nullptr, "S诊断 / B返回"}
+    {nullptr, "↑↓浏览 · F筛选"}, {nullptr, "ENTER回复/播放 · T新建"}, {nullptr, "S诊断"}
+};
+static const FT02BottomBarItem BOTTOM_FILTER[3] = {
+    {nullptr, "↑↓选择"}, {nullptr, "ENTER应用筛选"}, {nullptr, "B返回消息"}
+};
+static const FT02BottomBarItem BOTTOM_SEND_MENU[3] = {
+    {nullptr, "↑↓选择"}, {nullptr, "ENTER确认"}, {nullptr, "B返回收件箱"}
 };
 static const FT02BottomBarItem BOTTOM_NODES[3] = {
-    {nullptr, "方向键选择"}, {nullptr, "确认 私信"}, {nullptr, "T广播 / B收件箱"}
+    {nullptr, "↑↓浏览节点"}, {nullptr, "R刷新身份"}, {nullptr, "B返回诊断"}
+};
+static const FT02BottomBarItem BOTTOM_NODES_PICK_TEXT[3] = {
+    {nullptr, "↑↓选择收件人"}, {nullptr, "ENTER确认私聊文字"}, {nullptr, "B返回新建"}
+};
+static const FT02BottomBarItem BOTTOM_NODES_PICK_VOICE[3] = {
+    {nullptr, "↑↓选择收件人"}, {nullptr, "ENTER确认私聊语音"}, {nullptr, "B返回新建"}
+};
+static const FT02BottomBarItem BOTTOM_VOICE_RECORD[3] = {
+    {nullptr, "最长15秒"}, {nullptr, "ENTER停止并发送"}, {nullptr, "B取消"}
+};
+static const FT02BottomBarItem BOTTOM_VOICE_PREP[3] = {
+    {nullptr, "准备录音"}, {nullptr, "看到提示后说话"}, {nullptr, "B取消"}
+};
+static const FT02BottomBarItem BOTTOM_VOICE_PROCESS[3] = {
+    {nullptr, "处理中"}, {nullptr, "正在保存/压缩语音"}, {nullptr, "请稍候"}
+};
+static const FT02BottomBarItem BOTTOM_VOICE_TX[3] = {
+    {nullptr, "发送中"}, {nullptr, "等待发送完成"}, {nullptr, "B取消"}
+};
+static const FT02BottomBarItem BOTTOM_VOICE_IDLE[3] = {
+    {nullptr, "语音已结束"}, {nullptr, ""}, {nullptr, "B返回"}
 };
 static const FT02BottomBarItem BOTTOM_COMPOSE_CN[3] = {
-    {nullptr, "空格首选 / 1-5选词"}, {nullptr, "Sym+V/B 模式·候选"}, {nullptr, "` 中英 / ENTER发送"}
+    {nullptr, "空格首选 / 1-5选词"}, {nullptr, "Sym+V/B 模式·候选"}, {nullptr, "长按SYM中英 / ENTER发送"}
 };
 static const FT02BottomBarItem BOTTOM_COMPOSE_EN[3] = {
-    {nullptr, "英文直接输入"}, {nullptr, "Sym+V/B模式 / ` 中英"}, {nullptr, "DEL删除 / ENTER发送"}
+    {nullptr, "英文直接输入"}, {nullptr, "Sym+V/B模式 / 长按SYM中英"}, {nullptr, "DEL删除 / ENTER发送"}
 };
 static const FT02BottomBarItem BOTTOM_OUTBOX[3] = {
     {nullptr, "方向键 浏览"}, {nullptr, "DEL 撤销 / K清空"}, {nullptr, "B 收件箱"}
 };
 static const FT02BottomBarItem BOTTOM_DIAG[3] = {
-    {nullptr, "R 重同步"}, {nullptr, "M 节点"}, {nullptr, "B 收件箱"}
+    {nullptr, "R重同步"}, {nullptr, "M节点列表"}, {nullptr, "B返回消息"}
 };
 
 void setNotice(const char* text)
 {
     snprintf(g_notice, sizeof(g_notice), "%s", text != nullptr ? text : "");
     g_syncNoticeActive = false;
+    g_syncNoticeStartedMs = 0u;
 }
 
 void setSyncNotice(const char* text)
 {
     snprintf(g_notice, sizeof(g_notice), "%s", text != nullptr ? text : "");
     g_syncNoticeActive = g_notice[0] != '\0';
+    g_syncNoticeStartedMs = g_syncNoticeActive ? millis() : 0u;
+    g_syncNoticeNodeInfoRxBaseline = FT02_MeshServiceNodeInfoRxCount();
 }
 
 bool isUtf8Continuation(uint8_t c)
@@ -304,8 +369,8 @@ void movePinyinPage(int delta)
 
 bool toggleComposeInputMode()
 {
-    // Sym+W is a backtick (`) in CardKB2 I2C symbol mode. It is reserved as
-    // the compose-mode switch so normal digits remain available for messages.
+    // CardKB2 IME Direct Toggle A1 uses long-SYM -> 0xF1 for mode switching.
+    // Printable punctuation, including backtick, remains available to messages.
     // If a Chinese composition is active, commit its default candidate first
     // instead of silently discarding what the user already typed.
     if(FT02_TextInputModeIsChinese() && g_pinyinLength > 0)
@@ -367,6 +432,29 @@ void beginCompose(bool isPrivate, uint32_t target, CommMode returnMode, bool isR
     setNotice("");
 }
 
+FT02CommunicationInputResult beginVoice(uint32_t destination, CommMode returnMode)
+{
+    if(FT02_MeshVoiceTransportBusy())
+    {
+        setNotice("上一条语音仍在发送，请先等待或取消");
+        return FT02_COMM_INPUT_REDRAW;
+    }
+    if(destination != FT02_MESH_BROADCAST_NODE && !FT02_MeshServiceCanSendPrivate(destination))
+    {
+        setNotice("该节点尚未建立PKI，暂不能发送私聊语音");
+        return FT02_COMM_INPUT_REDRAW;
+    }
+
+    g_voiceReturnMode = returnMode;
+    g_voicePendingDestination = destination;
+    g_voiceStartPending = true;
+    g_voiceCaptureCueReady = false;
+    g_voiceTxObserved = false;
+    g_mode = COMM_VOICE;
+    setNotice("");
+    return FT02_COMM_INPUT_REDRAW_THEN_START_VOICE;
+}
+
 const char* nodeName(uint32_t node, char* out, size_t outSize)
 {
     FT02LoRaNodeView view;
@@ -417,6 +505,29 @@ void drawHeader(FT02Display& display, const char* section)
     display.drawLine(32, 128, 768, 128, GxEPD_BLACK);
 }
 
+void drawCenteredText(FT02Display& display, const FT02FontPack& font, const char* text, int centerX, int baselineY)
+{
+    const int w = FT02_TextWidthPack(font, text != nullptr ? text : "");
+    FT02_DrawTextPack(display, font, text != nullptr ? text : "", centerX - w / 2, baselineY);
+}
+
+
+void drawCenteredTextScaled(
+    FT02Display& display,
+    const FT02FontPack& font,
+    const char* text,
+    int centerX,
+    int baselineY,
+    uint8_t scaleNum,
+    uint8_t scaleDen
+)
+{
+    const char* safe = text != nullptr ? text : "";
+    const int w = FT02_TextWidthPackScaled(font, safe, scaleNum, scaleDen);
+    FT02_DrawTextPackScaled(display, font, safe, centerX - w / 2, baselineY, scaleNum, scaleDen);
+}
+
+
 void formatMessageTime(const FT02LoRaMessageView& msg, char* out, size_t outSize)
 {
     if(outSize == 0) return;
@@ -451,77 +562,313 @@ void formatNodeAge(uint32_t epoch, char* out, size_t outSize)
     else snprintf(out, outSize, "%ud前", static_cast<unsigned>(age / 86400u));
 }
 
-void drawInbox(FT02Display& display)
+const char* historyFilterText()
 {
-    drawHeader(display, "收件箱");
-    const size_t count = FT02_LoRaCommunicationMessageCount();
-    char summary[160];
-    snprintf(
-        summary, sizeof(summary),
-        "消息：%u   未读：%u   节点：%u/%lu   %s",
-        static_cast<unsigned>(count),
-        static_cast<unsigned>(FT02_LoRaCommunicationUnreadCount()),
-        static_cast<unsigned>(FT02_LoRaNodeRuntimeNodeCount()),
-        static_cast<unsigned long>(FT02_LoRaNodeRuntimeExpectedNodeCount()),
-        FT02_LoRaNodeRuntimeReady() ? "在线" : "同步中"
-    );
-    FT02_DrawTextPack(display, ft02_cjk_20r, summary, 32, 156);
+    if(g_historyFilter == HISTORY_BROADCAST) return "广播";
+    if(g_historyFilter == HISTORY_DIRECT) return "私聊";
+    return "全部";
+}
 
-    if(g_notice[0])
+bool historyMessageMatches(const FT02LoRaMessageView& msg)
+{
+    if(g_historyFilter == HISTORY_BROADCAST) return msg.broadcast;
+    if(g_historyFilter == HISTORY_DIRECT) return !msg.broadcast;
+    return true;
+}
+
+size_t historyFilteredCount()
+{
+    const size_t total = FT02_LoRaCommunicationMessageCount();
+    size_t matched = 0u;
+    FT02LoRaMessageView msg{};
+    for(size_t i = 0; i < total; ++i)
+        if(FT02_LoRaCommunicationGetMessageNewest(i, msg) && historyMessageMatches(msg)) ++matched;
+    return matched;
+}
+
+bool historyGetFiltered(size_t filteredIndex, FT02LoRaMessageView& out)
+{
+    const size_t total = FT02_LoRaCommunicationMessageCount();
+    size_t matched = 0u;
+    for(size_t i = 0; i < total; ++i)
     {
-        FT02_DrawTextPack(display, ft02_cjk_20r, g_notice, 430, 156);
+        FT02LoRaMessageView msg{};
+        if(!FT02_LoRaCommunicationGetMessageNewest(i, msg) || !historyMessageMatches(msg)) continue;
+        if(matched++ == filteredIndex)
+        {
+            out = msg;
+            return true;
+        }
     }
+    memset(&out, 0, sizeof(out));
+    return false;
+}
 
-    if(count == 0)
+void formatHistoryPeer(const FT02LoRaMessageView& msg, char* out, size_t outSize)
+{
+    if(!out || outSize == 0u) return;
+    char name[40] = {};
+    if(msg.outgoing)
     {
-        FT02_DrawTextPack(display, ft02_cjk_24r, "暂无收到的消息", 278, 280);
-        FT02_DrawTextPack(display, ft02_cjk_20r, "按 T 编写广播，按 M 查看网络终端", 226, 318);
+        if(msg.broadcast) snprintf(out, outSize, "我 → 广播");
+        else snprintf(out, outSize, "我 → %s", nodeName(msg.to, name, sizeof(name)));
     }
     else
     {
-        if(g_messageIndex >= count) g_messageIndex = count - 1;
-        FT02LoRaMessageView msg;
-        if(FT02_LoRaCommunicationGetMessageNewest(g_messageIndex, msg))
-        {
-            char fallback[20];
-            const char* sender = nodeName(msg.from, fallback, sizeof(fallback));
-            char meta[220];
-            char msgTime[24];
-            formatMessageTime(msg, msgTime, sizeof(msgTime));
-            snprintf(
-                meta, sizeof(meta),
-                "%s  %s%s  %s   %u/%u",
-                sender,
-                msg.broadcast ? "广播" : "私信",
-                msg.pkiEncrypted ? "·PKI" : "",
-                msgTime,
-                static_cast<unsigned>(g_messageIndex + 1),
-                static_cast<unsigned>(count)
-            );
-            FT02_DrawTextPack(display, ft02_cjk_24b, meta, 32, 196);
-
-            display.drawRect(32, 210, 736, 142, GxEPD_BLACK);
-            drawUtf8Lines(display, msg.text, 48, 240, 54, 27, 4);
-
-            char radio[220];
-            char hops[24];
-            if(msg.hasHops) snprintf(hops, sizeof(hops), "%u跳", static_cast<unsigned>(msg.hops));
-            else snprintf(hops, sizeof(hops), "路由--");
-            snprintf(
-                radio, sizeof(radio),
-                "ID 0x%08lX   %s   RSSI %s%d   SNR %s%.1f dB",
-                static_cast<unsigned long>(msg.packetId),
-                hops,
-                msg.hasRssi ? "" : "--/",
-                msg.hasRssi ? static_cast<int>(msg.rssi) : 0,
-                msg.hasSnr ? "" : "--/",
-                static_cast<double>(msg.hasSnr ? msg.snr : 0.0f)
-            );
-            FT02_DrawTextPack(display, ft02_cjk_20r, radio, 32, 386);
-            FT02_DrawTextPack(display, ft02_cjk_20r, "←/→ 浏览消息   ENTER 直接回复", 32, 420);
-        }
+        if(msg.broadcast) snprintf(out, outSize, "广播 · %s", nodeName(msg.from, name, sizeof(name)));
+        else snprintf(out, outSize, "%s → 我", nodeName(msg.from, name, sizeof(name)));
     }
-    FT02_DrawBottomBarWithFont(display, BOTTOM_INBOX, ft02_cjk_20r);
+}
+
+void drawDashedDivider(FT02Display& display, int y)
+{
+    for(int x = 42; x < 758; x += 18)
+    {
+        display.drawFastHLine(x, y, 10, GxEPD_BLACK);
+    }
+}
+
+void drawHistoryRow(FT02Display& display, const FT02LoRaMessageView& msg, int y, bool selected)
+{
+    // Keep the timeline visually quiet: selection is a narrow rail, while
+    // sender/time/state live in stable columns instead of one variable-width string.
+    if(selected) display.fillRect(30, y + 8, 4, 54, GxEPD_BLACK);
+
+    char peer[84] = {};
+    formatHistoryPeer(msg, peer, sizeof(peer));
+    char when[20] = {};
+    formatMessageTime(msg, when, sizeof(when));
+    const char* state = msg.outgoing
+        ? FT02_MeshMessageStatusText(msg.historyStatus)
+        : (msg.unread ? "新消息" : "");
+
+    FT02_DrawTextPack(display, ft02_cjk_20r, peer, 44, y + 22);
+    FT02_DrawTextPack(display, ft02_cjk_20r, when, 500, y + 22);
+    if(state[0]) FT02_DrawTextPack(display, ft02_cjk_20r, state, 636, y + 22);
+
+    if(msg.messageType == FT02_MESH_MESSAGE_VOICE)
+    {
+        const uint32_t seconds = (msg.voiceDurationMs + 500u) / 1000u;
+        char voice[96] = {};
+        snprintf(voice, sizeof(voice), "%s  语音  %lus%s",
+                 FT02_MeshVoiceAudioIsPlaying() && selected ? "■" : "▶",
+                 static_cast<unsigned long>(seconds),
+                 msg.historyStatus == FT02_MESH_STATUS_INCOMPLETE ? "  · 不完整" : "");
+        FT02_DrawTextPack(display, ft02_cjk_20r, voice, 58, y + 52);
+    }
+    else
+    {
+        drawUtf8Lines(display, msg.text, 58, y + 50, 64, 22, 1);
+    }
+
+    drawDashedDivider(display, y + 72);
+}
+
+void drawInbox(FT02Display& display)
+{
+    drawHeader(display, "消息");
+    const size_t total = FT02_LoRaCommunicationMessageCount();
+    const size_t count = historyFilteredCount();
+    if(count == 0u) g_messageIndex = 0u;
+    else if(g_messageIndex >= count) g_messageIndex = count - 1u;
+
+    char summary[180];
+    snprintf(summary, sizeof(summary),
+             "历史 %u/%u   未读 %u   筛选 %s   Mesh %s",
+             static_cast<unsigned>(total),
+             static_cast<unsigned>(FT02_MESH_HISTORY_LIMIT),
+             static_cast<unsigned>(FT02_LoRaCommunicationUnreadCount()),
+             historyFilterText(),
+             FT02_MeshServiceReady() ? "在线" : "离线");
+    FT02_DrawTextPack(display, ft02_cjk_20r, summary, 32, 156);
+    if(g_notice[0]) FT02_DrawTextPack(display, ft02_cjk_20r, g_notice, 442, 156);
+
+    if(count == 0u)
+    {
+        FT02_DrawTextPack(display, ft02_cjk_24r, total == 0u ? "暂无消息记录" : "当前筛选没有消息", 286, 278);
+        FT02_DrawTextPack(display, ft02_cjk_20r, "T 新建消息   ·   S 通讯诊断", 206, 320);
+    }
+    else
+    {
+        constexpr size_t VISIBLE_ROWS = 3u;
+        size_t pageStart = (g_messageIndex / VISIBLE_ROWS) * VISIBLE_ROWS;
+        for(size_t row = 0; row < VISIBLE_ROWS; ++row)
+        {
+            const size_t filteredIndex = pageStart + row;
+            if(filteredIndex >= count) break;
+            FT02LoRaMessageView msg{};
+            if(!historyGetFiltered(filteredIndex, msg)) continue;
+            drawHistoryRow(display, msg, 176 + static_cast<int>(row) * 80, filteredIndex == g_messageIndex);
+        }
+        char pos[80] = {};
+        snprintf(pos, sizeof(pos), "%u/%u", static_cast<unsigned>(g_messageIndex + 1u), static_cast<unsigned>(count));
+        FT02_DrawTextPack(display, ft02_cjk_20r, pos, 704, 424);
+    }
+    // Inbox has a longer action group in the center; use 25/50/25 so
+    // message actions stay together without crowding browse/diagnostics.
+    FT02_DrawBottomBarWithFontSplits(display, BOTTOM_INBOX, ft02_cjk_20r, 25, 75);
+}
+
+void drawFilter(FT02Display& display)
+{
+    drawHeader(display, "消息筛选");
+    FT02_DrawTextPack(display, ft02_cjk_20r, "选择消息列表中要显示的类型", 48, 166);
+
+    static const char* ITEMS[3] = {"全部消息", "广播消息", "私聊消息"};
+    static const char* DETAILS[3] = {
+        "显示广播与私聊消息",
+        "只显示公共频道广播",
+        "只显示点对点私聊"
+    };
+
+    for(uint8_t i = 0u; i < 3u; ++i)
+    {
+        const int y = 196 + static_cast<int>(i) * 68;
+        if(i == g_filterSelection)
+        {
+            display.fillRect(48, y + 8, 5, 42, GxEPD_BLACK);
+        }
+        FT02_DrawTextPack(display, i == g_filterSelection ? ft02_cjk_24b : ft02_cjk_24r, ITEMS[i], 76, y + 30);
+        FT02_DrawTextPack(display, ft02_cjk_20r, DETAILS[i], 276, y + 30);
+        if(i < 2u) drawDashedDivider(display, y + 58);
+    }
+
+    char current[80] = {};
+    snprintf(current, sizeof(current), "当前：%s", historyFilterText());
+    FT02_DrawTextPack(display, ft02_cjk_20r, current, 48, 414);
+    FT02_DrawBottomBarWithFont(display, BOTTOM_FILTER, ft02_cjk_20r);
+}
+
+void drawSendMenu(FT02Display& display)
+{
+    drawHeader(display, "新建消息");
+    FT02_DrawTextPack(display, ft02_cjk_20r,
+                      "新建发送与历史回复已分离，请明确选择广播或私聊。", 32, 156);
+
+    static const char* ITEMS[4] = {
+        "广播文字",
+        "广播语音",
+        "私聊文字",
+        "私聊语音"
+    };
+    static const char* DETAILS[4] = {
+        "向 Primary 全网发送文字",
+        "直接开始一条新的广播语音",
+        "先选择节点，再编写 PKI 私信",
+        "先选择节点，再录制 PKI 私聊语音"
+    };
+
+    for(uint8_t i = 0u; i < 4u; ++i)
+    {
+        const int y = 190 + static_cast<int>(i) * 58;
+        display.drawRect(48, y, 704, 50, GxEPD_BLACK);
+        if(i == g_sendSelection)
+        {
+            display.drawRect(50, y + 2, 700, 46, GxEPD_BLACK);
+            display.fillRect(58, y + 19, 8, 12, GxEPD_BLACK);
+        }
+        FT02_DrawTextPack(display, ft02_cjk_24b, ITEMS[i], 82, y + 28);
+        FT02_DrawTextPack(display, ft02_cjk_20r, DETAILS[i], 280, y + 28);
+    }
+
+    if(g_notice[0]) FT02_DrawTextPack(display, ft02_cjk_20r, g_notice, 32, 430);
+    FT02_DrawBottomBarWithFont(display, BOTTOM_SEND_MENU, ft02_cjk_20r);
+}
+
+void drawVoice(FT02Display& display)
+{
+    drawHeader(display, "Mesh语音");
+    const FT02MeshVoiceAudioStatus voice = FT02_MeshVoiceAudioStatusCurrent();
+    const uint32_t shownDestination = g_voiceStartPending ? g_voicePendingDestination : voice.destination;
+
+    char targetValue[72] = {};
+    if(shownDestination == FT02_MESH_BROADCAST_NODE)
+    {
+        snprintf(targetValue, sizeof(targetValue), "广播");
+    }
+    else
+    {
+        char name[40] = {};
+        snprintf(targetValue, sizeof(targetValue), "%s", nodeName(shownDestination, name, sizeof(name)));
+    }
+
+    // One quiet metadata row. Keep the target left-aligned and codec details on
+    // the right so the central status/progress area remains visually stable.
+    FT02_DrawTextPack(display, ft02_cjk_24r, "发送对象", 48, 176);
+    FT02_DrawTextPack(display, ft02_cjk_24b, targetValue, 166, 176);
+    const char* codecMeta = "Opus 6k · 最长15秒";
+    const int codecW = FT02_TextWidthPack(ft02_cjk_24r, codecMeta);
+    FT02_DrawTextPack(display, ft02_cjk_24r, codecMeta, 752 - codecW, 176);
+    display.drawFastHLine(48, 196, 704, GxEPD_BLACK);
+
+    const bool txBusy = FT02_MeshVoiceTransportBusy();
+    const uint8_t txPct = txBusy ? FT02_MeshVoiceTransportProgressPercent() : 0u;
+    const uint32_t shownMs = voice.elapsedMs > FT02_VOICE_TX_MAX_DURATION_MS
+        ? FT02_VOICE_TX_MAX_DURATION_MS : voice.elapsedMs;
+
+    const char* state = g_voiceStartPending ? "准备录音" : "待机";
+    if(!g_voiceStartPending && voice.state == FT02_MESH_VOICE_AUDIO_RECORDING)
+        state = g_voiceCaptureCueReady ? "● 开始说话" : "麦克风稳定中";
+    else if(voice.state == FT02_MESH_VOICE_AUDIO_SAVING) state = "正在保存语音";
+    else if(voice.state == FT02_MESH_VOICE_AUDIO_ENCODING) state = "正在压缩语音";
+    else if(voice.state == FT02_MESH_VOICE_AUDIO_ERROR) state = "语音处理失败";
+    else if(txBusy) state = "正在发送语音";
+    drawCenteredTextScaled(display, ft02_cjk_24b, state, 400, 250, 4, 3);
+
+    // Progress is the visual anchor of this page. Its geometry never changes,
+    // which avoids the floating/misaligned appearance of the older layout.
+    constexpr int BAR_X = 80;
+    constexpr int BAR_Y = 276;
+    constexpr int BAR_W = 640;
+    constexpr int BAR_H = 30;
+    display.drawRect(BAR_X, BAR_Y, BAR_W, BAR_H, GxEPD_BLACK);
+    const int innerW = BAR_W - 4;
+    const int fill = txBusy
+        ? static_cast<int>((static_cast<uint32_t>(txPct) * static_cast<uint32_t>(innerW)) / 100u)
+        : static_cast<int>((static_cast<uint64_t>(shownMs) * static_cast<uint64_t>(innerW)) / FT02_VOICE_TX_MAX_DURATION_MS);
+    if(fill > 0) display.fillRect(BAR_X + 2, BAR_Y + 2, fill > innerW ? innerW : fill, BAR_H - 4, GxEPD_BLACK);
+
+    if(txBusy)
+    {
+        char chunks[64] = {};
+        snprintf(chunks, sizeof(chunks), "分片 %03u / %03u",
+                 static_cast<unsigned>(FT02_MeshVoiceTransportChunksSent()),
+                 static_cast<unsigned>(FT02_MeshVoiceTransportTotalChunks()));
+        FT02_DrawTextPack(display, ft02_cjk_24b, chunks, BAR_X, 346);
+
+        char pct[16] = {};
+        snprintf(pct, sizeof(pct), "%03u%%", static_cast<unsigned>(txPct));
+        const int pctW = FT02_TextWidthPack(ft02_cjk_24b, pct);
+        FT02_DrawTextPack(display, ft02_cjk_24b, pct, BAR_X + BAR_W - pctW, 346);
+        drawCenteredText(display, ft02_cjk_24r, "请保持设备开启，发送完成后自动返回", 400, 394);
+    }
+    else
+    {
+        char timer[48] = {};
+        snprintf(timer, sizeof(timer), "%02lu:%02lu / 00:15",
+                 static_cast<unsigned long>((shownMs / 1000u) / 60u),
+                 static_cast<unsigned long>((shownMs / 1000u) % 60u));
+        drawCenteredText(display, ft02_title_32b, timer, 400, 346);
+
+        const char* detail = nullptr;
+        if(g_voiceStartPending) detail = "请等待“开始说话”提示";
+        else if(voice.state == FT02_MESH_VOICE_AUDIO_RECORDING && !g_voiceCaptureCueReady)
+            detail = "正在建立录音前缓冲…";
+        else if(voice.state == FT02_MESH_VOICE_AUDIO_RECORDING && g_voiceCaptureCueReady)
+            detail = "录音已启动，按 ENTER 停止并发送";
+        else if(voice.state == FT02_MESH_VOICE_AUDIO_SAVING || voice.state == FT02_MESH_VOICE_AUDIO_ENCODING)
+            detail = "正在处理，请稍候";
+        else if(voice.message[0]) detail = voice.message;
+        if(detail != nullptr && detail[0]) drawCenteredText(display, ft02_cjk_24r, detail, 400, 394);
+    }
+
+    const FT02BottomBarItem* bottom = BOTTOM_VOICE_IDLE;
+    if(g_voiceStartPending) bottom = BOTTOM_VOICE_PREP;
+    else if(voice.state == FT02_MESH_VOICE_AUDIO_RECORDING) bottom = BOTTOM_VOICE_RECORD;
+    else if(voice.state == FT02_MESH_VOICE_AUDIO_SAVING ||
+            voice.state == FT02_MESH_VOICE_AUDIO_ENCODING) bottom = BOTTOM_VOICE_PROCESS;
+    else if(txBusy) bottom = BOTTOM_VOICE_TX;
+    FT02_DrawBottomBarWithFont(display, bottom, ft02_cjk_20r);
 }
 
 void drawOutbox(FT02Display& display)
@@ -639,10 +986,13 @@ void drawNodeRow(FT02Display& display, size_t nodeIndex, int y, bool selected)
 
 void drawNodes(FT02Display& display)
 {
-    drawHeader(display, "网络终端");
+    const char* header = "Mesh节点诊断";
+    if(g_nodeAction == NODE_ACTION_PRIVATE_TEXT) header = "选择私聊文字收件人";
+    else if(g_nodeAction == NODE_ACTION_PRIVATE_VOICE) header = "选择私聊语音收件人";
+    drawHeader(display, header);
     const size_t count = FT02_LoRaNodeRuntimeNodeCount();
     char summary[180];
-    snprintf(summary, sizeof(summary), "Mesh：%s   节点：%u/%lu   PKI：%u   R=刷新NodeInfo",
+    snprintf(summary, sizeof(summary), "Mesh：%s   节点：%u/%lu   PKI：%u",
              FT02_MeshServiceReady() ? "在线" : "离线",
              static_cast<unsigned>(count),
              static_cast<unsigned long>(FT02_LoRaNodeRuntimeExpectedNodeCount()),
@@ -665,7 +1015,10 @@ void drawNodes(FT02Display& display)
             drawNodeRow(display, idx, 194 + static_cast<int>(row) * 60, idx == g_nodeSelection);
         }
     }
-    FT02_DrawBottomBarWithFont(display, BOTTOM_NODES, ft02_cjk_20r);
+    const FT02BottomBarItem* bottom = BOTTOM_NODES;
+    if(g_nodeAction == NODE_ACTION_PRIVATE_TEXT) bottom = BOTTOM_NODES_PICK_TEXT;
+    else if(g_nodeAction == NODE_ACTION_PRIVATE_VOICE) bottom = BOTTOM_NODES_PICK_VOICE;
+    FT02_DrawBottomBarWithFont(display, bottom, ft02_cjk_20r);
 }
 
 void drawCompose(FT02Display& display)
@@ -743,13 +1096,13 @@ void drawCompose(FT02Display& display)
         else
         {
             FT02_DrawTextPack(display, ft02_cjk_20r, "[中] 拼音输入：连续拼音 / 词组 / 词频学习", 48, 312);
-            FT02_DrawTextPack(display, ft02_cjk_20r, "Sym标点自动中文化；`切英文", 48, 338);
+            FT02_DrawTextPack(display, ft02_cjk_20r, "Sym标点自动中文化；长按SYM切英文", 48, 338);
         }
     }
     else
     {
         FT02_DrawTextPack(display, ft02_cjk_20r, "[EN] 英文输入：字母 / 数字 / 符号直接上屏", 48, 312);
-        FT02_DrawTextPack(display, ft02_cjk_20r, "`切中文；标点保持英文", 48, 338);
+        FT02_DrawTextPack(display, ft02_cjk_20r, "长按SYM切中文；标点保持英文", 48, 338);
     }
 
     const FT02GnssSnapshot gnss = FT02_GnssSnapshotCurrent();
@@ -831,10 +1184,9 @@ bool handleComposeRaw(const FT02InputEvent& event)
 {
     const uint8_t raw = static_cast<uint8_t>(event.raw);
 
-    // CardKB2 I2C symbol map: Sym+W emits '`'. Reserve it as a mode switch.
-    // This avoids consuming any number key, which remains important for IDs,
-    // coordinates and field messages.
-    if(raw == static_cast<uint8_t>('`'))
+    // CardKB2 IME Direct Toggle A1: long-press SYM emits semantic 0xF1.
+    // Backtick is therefore a normal printable character again.
+    if(event.key == FT02_KEY_IME_TOGGLE)
     {
         (void)toggleComposeInputMode();
         return true;
@@ -999,8 +1351,16 @@ bool handleComposeRaw(const FT02InputEvent& event)
 void FT02_CommunicationUIOpen()
 {
     g_mode = COMM_INBOX;
+    g_historyFilter = HISTORY_ALL;
+    g_filterSelection = static_cast<uint8_t>(g_historyFilter);
+    g_nodeAction = NODE_ACTION_BROWSE;
+    g_sendSelection = 0u;
     g_messageIndex = 0;
     g_outboxIndex = 0;
+    g_voiceStartPending = false;
+    g_voiceCaptureCueReady = false;
+    g_voicePendingDestination = FT02_MESH_BROADCAST_NODE;
+    g_voiceTxObserved = false;
     setNotice("");
     FT02_LoRaCommunicationMarkAllRead();
 }
@@ -1014,11 +1374,14 @@ void FT02_DrawCommunicationNodeScreen(FT02Display& display)
     {
         display.fillScreen(GxEPD_WHITE);
         if(g_mode == COMM_INBOX) drawInbox(display);
+        else if(g_mode == COMM_FILTER) drawFilter(display);
+        else if(g_mode == COMM_SEND_MENU) drawSendMenu(display);
         else if(g_mode == COMM_NODES) drawNodes(display);
         else if(g_mode == COMM_COMPOSE) drawCompose(display);
         else if(g_mode == COMM_OUTBOX) drawOutbox(display);
         else if(g_mode == COMM_OUTBOX_CANCEL_CONFIRM) drawOutboxCancelConfirm(display);
         else if(g_mode == COMM_OUTBOX_CLEAR_CONFIRM) drawOutboxClearConfirm(display);
+        else if(g_mode == COMM_VOICE) drawVoice(display);
         else drawDiag(display);
     }
     while(display.nextPage());
@@ -1043,11 +1406,14 @@ static void FT02_CommunicationCommitPartial(
     {
         display.fillRect(x, y, w, h, GxEPD_WHITE);
         if(g_mode == COMM_INBOX) drawInbox(display);
+        else if(g_mode == COMM_FILTER) drawFilter(display);
+        else if(g_mode == COMM_SEND_MENU) drawSendMenu(display);
         else if(g_mode == COMM_NODES) drawNodes(display);
         else if(g_mode == COMM_COMPOSE) drawCompose(display);
         else if(g_mode == COMM_OUTBOX) drawOutbox(display);
         else if(g_mode == COMM_OUTBOX_CANCEL_CONFIRM) drawOutboxCancelConfirm(display);
         else if(g_mode == COMM_OUTBOX_CLEAR_CONFIRM) drawOutboxClearConfirm(display);
+        else if(g_mode == COMM_VOICE) drawVoice(display);
         else drawDiag(display);
     }
     while(display.nextPage());
@@ -1066,6 +1432,29 @@ void FT02_DrawCommunicationComposePartial(FT02Display& display)
     // Text editor, Pinyin candidates, mode and notice. Keep status/header/footer.
     FT02_CommunicationCommitPartial(display, 24, 140, 752, 300);
     g_composeDirty = false;
+}
+
+void FT02_DrawCommunicationVoiceTimerPartial(FT02Display& display)
+{
+    if(g_mode != COMM_VOICE) return;
+    // Keep e-paper activity small while the microphone/I2S path is active.
+    FT02_CommunicationCommitPartial(display, 56, 204, 688, 164);
+}
+
+void FT02_DrawCommunicationVoiceStartCuePartial(FT02Display& display)
+{
+    if(g_mode != COMM_VOICE) return;
+    // Capture is already running. Refresh only the state/message strip so the
+    // user gets an unambiguous go cue without a full EPD transaction.
+    FT02_CommunicationCommitPartial(display, 56, 204, 688, 208);
+}
+
+void FT02_DrawCommunicationVoiceTxPartial(FT02Display& display)
+{
+    if(g_mode != COMM_VOICE) return;
+    // Only refresh state/progress while RF chunks advance. Full-screen refreshes
+    // would needlessly stall the mesh between every packet.
+    FT02_CommunicationCommitPartial(display, 56, 204, 688, 208);
 }
 
 FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEvent& event)
@@ -1122,9 +1511,86 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
         return FT02_COMM_INPUT_NONE;
     }
 
-    if(event.key == FT02_KEY_HELP) return FT02_COMM_INPUT_OPEN_HELP;
+    if(event.key == FT02_KEY_HELP)
+    {
+        if(FT02_MeshVoiceAudioBusy())
+        {
+            setNotice("请先结束当前语音录制或播放");
+            return FT02_COMM_INPUT_REDRAW;
+        }
+        return FT02_COMM_INPUT_OPEN_HELP;
+    }
     if(event.key == FT02_KEY_BACK)
     {
+        if(FT02_MeshVoiceAudioIsPlaying())
+        {
+            (void)FT02_MeshVoiceAudioStopPlayback();
+            setNotice("正在停止语音播放");
+            return FT02_COMM_INPUT_REDRAW;
+        }
+        if(g_mode == COMM_VOICE)
+        {
+            if(g_voiceStartPending)
+            {
+                g_voiceStartPending = false;
+                g_voiceCaptureCueReady = false;
+                g_mode = g_voiceReturnMode;
+                setNotice("已取消语音录制");
+                return FT02_COMM_INPUT_REDRAW;
+            }
+            if(FT02_MeshVoiceAudioIsRecording())
+            {
+                // Never energize the e-paper while capture/post-roll is active.
+                // Audio completion will publish a revision after the owner is released.
+                (void)FT02_MeshVoiceAudioCancelRecording();
+                return FT02_COMM_INPUT_NONE;
+            }
+            if(FT02_MeshVoiceAudioBusy())
+            {
+                // Saving/encoding owns the audio/SD pipeline. Do not let the
+                // page disappear underneath it; the status revision will
+                // redraw automatically when the operation finishes.
+                return FT02_COMM_INPUT_NONE;
+            }
+            if(FT02_MeshVoiceTransportBusy())
+            {
+                FT02_MeshVoiceTransportCancel();
+                g_mode = g_voiceReturnMode;
+                g_voiceTxObserved = false;
+                g_voiceCaptureCueReady = false;
+                setNotice("已取消语音发送");
+                return FT02_COMM_INPUT_REDRAW;
+            }
+            g_mode = g_voiceReturnMode;
+            setNotice(FT02_MeshVoiceAudioStatusCurrent().message);
+            return FT02_COMM_INPUT_REDRAW;
+        }
+        if(g_mode == COMM_FILTER)
+        {
+            g_mode = COMM_INBOX;
+            setNotice("");
+            return FT02_COMM_INPUT_REDRAW;
+        }
+        if(g_mode == COMM_SEND_MENU)
+        {
+            g_mode = COMM_INBOX;
+            setNotice("");
+            return FT02_COMM_INPUT_REDRAW;
+        }
+        if(g_mode == COMM_NODES)
+        {
+            if(g_nodeAction == NODE_ACTION_BROWSE)
+            {
+                g_mode = g_nodesReturnMode;
+            }
+            else
+            {
+                g_mode = COMM_SEND_MENU;
+                g_nodeAction = NODE_ACTION_BROWSE;
+            }
+            setNotice("");
+            return FT02_COMM_INPUT_REDRAW;
+        }
         if(g_mode == COMM_INBOX) return FT02_COMM_INPUT_EXIT_HOME;
         g_mode = COMM_INBOX;
         g_messageIndex = 0;
@@ -1134,27 +1600,108 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
     }
 
     const char cmd = event.command;
-    if(cmd == 't')
+    if(g_mode == COMM_VOICE)
     {
-        beginCompose(false, 0, g_mode);
+        if(g_voiceStartPending) return FT02_COMM_INPUT_NONE;
+        if((event.key == FT02_KEY_SELECT || cmd == 'v') && FT02_MeshVoiceAudioIsRecording())
+        {
+            // Match the proven AudioLog UX: request stop, but do not refresh
+            // e-paper until post-roll/save has released the audio owner.
+            (void)FT02_MeshVoiceAudioStopRecording();
+            return FT02_COMM_INPUT_NONE;
+        }
+        // While a capture is being saved/encoded, keep the UI locked to this
+        // page so navigation cannot orphan the audio owner or temp file.
+        return FT02_COMM_INPUT_NONE;
+    }
+
+    const bool filterShortcut = cmd == 'f' || raw == static_cast<uint8_t>('f') ||
+        raw == static_cast<uint8_t>('F') || raw == static_cast<uint8_t>('[');
+    if(g_mode == COMM_INBOX && filterShortcut)
+    {
+        g_filterSelection = static_cast<uint8_t>(g_historyFilter);
+        g_mode = COMM_FILTER;
+        setNotice("");
+        FT02_LOGI("[COMM-FILTER] open current=%u raw=0x%02X cmd=%c\n",
+                  static_cast<unsigned>(g_filterSelection),
+                  static_cast<unsigned>(raw), cmd ? cmd : '-');
         return FT02_COMM_INPUT_REDRAW;
     }
-    if(cmd == 'm')
+
+    if(g_mode == COMM_FILTER)
     {
-        g_mode = COMM_NODES;
-        g_nodeSelection = 0;
-        if(FT02_MeshServiceRequestNodeInfo()) setNotice("已广播NodeInfo请求，等待节点回复");
-        else setNotice("Mesh NodeInfo请求发送失败");
-        return FT02_COMM_INPUT_REDRAW;
+        if(event.key == FT02_KEY_UP || event.key == FT02_KEY_LEFT)
+        {
+            g_filterSelection = g_filterSelection == 0u ? 2u : static_cast<uint8_t>(g_filterSelection - 1u);
+            return FT02_COMM_INPUT_BROWSE_PARTIAL;
+        }
+        if(event.key == FT02_KEY_DOWN || event.key == FT02_KEY_RIGHT)
+        {
+            g_filterSelection = static_cast<uint8_t>((g_filterSelection + 1u) % 3u);
+            return FT02_COMM_INPUT_BROWSE_PARTIAL;
+        }
+        if(event.key == FT02_KEY_SELECT)
+        {
+            g_historyFilter = static_cast<HistoryFilter>(g_filterSelection);
+            g_messageIndex = 0u;
+            g_mode = COMM_INBOX;
+            setNotice("");
+            FT02_LOGI("[COMM-FILTER] applied=%s\n", historyFilterText());
+            return FT02_COMM_INPUT_REDRAW;
+        }
+        return FT02_COMM_INPUT_NONE;
     }
-    if(cmd == 'o')
+
+    if(g_mode == COMM_SEND_MENU)
     {
-        g_mode = COMM_OUTBOX;
-        g_outboxIndex = 0;
+        if(event.key == FT02_KEY_UP || event.key == FT02_KEY_LEFT)
+        {
+            g_sendSelection = g_sendSelection == 0u ? 3u : static_cast<uint8_t>(g_sendSelection - 1u);
+            return FT02_COMM_INPUT_BROWSE_PARTIAL;
+        }
+        if(event.key == FT02_KEY_DOWN || event.key == FT02_KEY_RIGHT)
+        {
+            g_sendSelection = static_cast<uint8_t>((g_sendSelection + 1u) % 4u);
+            return FT02_COMM_INPUT_BROWSE_PARTIAL;
+        }
+        if(event.key == FT02_KEY_SELECT)
+        {
+            switch(g_sendSelection)
+            {
+                case 0u:
+                    beginCompose(false, 0u, COMM_INBOX);
+                    return FT02_COMM_INPUT_REDRAW;
+                case 1u:
+                    return beginVoice(FT02_MESH_BROADCAST_NODE, COMM_INBOX);
+                case 2u:
+                    g_nodeAction = NODE_ACTION_PRIVATE_TEXT;
+                    g_nodesReturnMode = COMM_SEND_MENU;
+                    g_mode = COMM_NODES;
+                    g_nodeSelection = 0u;
+                    setNotice(FT02_MeshServiceRequestNodeInfo() ? "请选择私聊文字收件人" : "节点刷新失败，使用现有列表");
+                    return FT02_COMM_INPUT_REDRAW;
+                case 3u:
+                    g_nodeAction = NODE_ACTION_PRIVATE_VOICE;
+                    g_nodesReturnMode = COMM_SEND_MENU;
+                    g_mode = COMM_NODES;
+                    g_nodeSelection = 0u;
+                    setNotice(FT02_MeshServiceRequestNodeInfo() ? "请选择私聊语音收件人" : "节点刷新失败，使用现有列表");
+                    return FT02_COMM_INPUT_REDRAW;
+                default:
+                    break;
+            }
+        }
+        return FT02_COMM_INPUT_NONE;
+    }
+
+    if(g_mode == COMM_INBOX && cmd == 't')
+    {
+        g_mode = COMM_SEND_MENU;
+        g_sendSelection = 0u;
         setNotice("");
         return FT02_COMM_INPUT_REDRAW;
     }
-    if(cmd == 's')
+    if(g_mode == COMM_INBOX && cmd == 's')
     {
         g_mode = COMM_DIAG;
         setNotice("");
@@ -1170,43 +1717,57 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
 
     if(g_mode == COMM_INBOX)
     {
-        const size_t count = FT02_LoRaCommunicationMessageCount();
+        const size_t count = historyFilteredCount();
         if(count > 0 && event.key == FT02_KEY_SELECT)
         {
-            if(g_messageIndex >= count) g_messageIndex = count - 1;
-            FT02LoRaMessageView msg;
-            if(!FT02_LoRaCommunicationGetMessageNewest(g_messageIndex, msg))
+            if(g_messageIndex >= count) g_messageIndex = count - 1u;
+            FT02LoRaMessageView msg{};
+            if(!historyGetFiltered(g_messageIndex, msg))
             {
                 setNotice("无法读取当前消息");
                 return FT02_COMM_INPUT_REDRAW;
             }
-            if(msg.from == 0 || msg.from == FT02_LoRaNodeRuntimeLocalNode())
+            if(msg.messageType == FT02_MESH_MESSAGE_VOICE)
             {
-                setNotice("当前消息没有可回复的发送者");
+                if(msg.historyStatus == FT02_MESH_STATUS_INCOMPLETE || msg.voicePath[0] == '\0')
+                {
+                    setNotice("这条语音不完整，无法播放");
+                    return FT02_COMM_INPUT_REDRAW;
+                }
+                if(FT02_MeshVoiceAudioIsPlaying())
+                {
+                    (void)FT02_MeshVoiceAudioStopPlayback();
+                    setNotice("正在停止语音播放");
+                    return FT02_COMM_INPUT_REDRAW;
+                }
+                if(FT02_MeshVoiceAudioStartPlayback(msg.voicePath))
+                    setNotice("语音播放中 · ENTER停止");
+                else
+                    setNotice(FT02_MeshVoiceAudioStatusCurrent().message);
                 return FT02_COMM_INPUT_REDRAW;
             }
-            // MeshService owns peer discovery and PKI state; replies use the learned Meshtastic public key.
-            beginCompose(true, msg.from, COMM_INBOX, true, msg.packetId);
+            const uint32_t replyNode = msg.outgoing ? msg.to : msg.from;
+            if(msg.broadcast && msg.outgoing)
+            {
+                setNotice("自己发送的广播无需回复");
+                return FT02_COMM_INPUT_REDRAW;
+            }
+            if(replyNode == 0 || replyNode == FT02_LoRaNodeRuntimeLocalNode() || replyNode == 0xFFFFFFFFu)
+            {
+                setNotice("当前消息没有可回复的目标");
+                return FT02_COMM_INPUT_REDRAW;
+            }
+            beginCompose(true, replyNode, COMM_INBOX, true, msg.packetId);
             return FT02_COMM_INPUT_REDRAW;
         }
-        if(count > 0 && cmd == 'p')
+        if(count > 0 && (cmd == 'p' || event.key == FT02_KEY_LEFT || event.key == FT02_KEY_UP))
         {
-            g_messageIndex = (g_messageIndex + 1) % count;
+            g_messageIndex = (g_messageIndex + 1u) % count;
             return FT02_COMM_INPUT_BROWSE_PARTIAL;
         }
-        if(count > 0 && cmd == 'n')
+        if(count > 0 && (cmd == 'n' || event.key == FT02_KEY_RIGHT || event.key == FT02_KEY_DOWN))
         {
-            g_messageIndex = g_messageIndex == 0 ? count - 1 : g_messageIndex - 1;
-            return FT02_COMM_INPUT_BROWSE_PARTIAL;
-        }
-        if(count > 0 && (event.key == FT02_KEY_LEFT || event.key == FT02_KEY_UP))
-        {
-            g_messageIndex = (g_messageIndex + 1) % count;
-            return FT02_COMM_INPUT_BROWSE_PARTIAL;
-        }
-        if(count > 0 && (event.key == FT02_KEY_RIGHT || event.key == FT02_KEY_DOWN))
-        {
-            g_messageIndex = g_messageIndex == 0 ? count - 1 : g_messageIndex - 1;
+            g_messageIndex = g_messageIndex == 0u ? count - 1u : g_messageIndex - 1u;
             return FT02_COMM_INPUT_BROWSE_PARTIAL;
         }
     }
@@ -1257,21 +1818,64 @@ FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEven
                 setNotice("本机节点不能作为私信目标");
                 return FT02_COMM_INPUT_REDRAW;
             }
-            // MeshService validates whether this peer currently has a learned public key.
-            beginCompose(true, node.node, COMM_NODES);
+            if(!node.publicKeyValid || !FT02_MeshServiceCanSendPrivate(node.node))
+            {
+                setNotice("该节点尚未学习PKI公钥，暂不能私聊");
+                return FT02_COMM_INPUT_REDRAW;
+            }
+
+            if(g_nodeAction == NODE_ACTION_PRIVATE_VOICE)
+            {
+                g_nodeAction = NODE_ACTION_BROWSE;
+                return beginVoice(node.node, COMM_INBOX);
+            }
+
+            const CommMode returnMode = g_nodeAction == NODE_ACTION_PRIVATE_TEXT
+                ? COMM_SEND_MENU : COMM_NODES;
+            g_nodeAction = NODE_ACTION_BROWSE;
+            beginCompose(true, node.node, returnMode);
             return FT02_COMM_INPUT_REDRAW;
+        }
+        if(count > 0 && cmd == 'v' && g_nodeAction == NODE_ACTION_BROWSE)
+        {
+            FT02LoRaNodeView node{};
+            if(!FT02_LoRaNodeRuntimeGetNode(g_nodeSelection, node)) return FT02_COMM_INPUT_NONE;
+            if(node.node == FT02_LoRaNodeRuntimeLocalNode())
+            {
+                setNotice("本机节点不能作为私聊语音目标");
+                return FT02_COMM_INPUT_REDRAW;
+            }
+            if(!node.publicKeyValid || !FT02_MeshServiceCanSendPrivate(node.node))
+            {
+                setNotice("该节点尚未学习PKI公钥，暂不能私聊语音");
+                return FT02_COMM_INPUT_REDRAW;
+            }
+            return beginVoice(node.node, COMM_INBOX);
         }
         if(cmd == 'r')
         {
             setSyncNotice("正在刷新Mesh节点身份...");
-            (void)FT02_MeshServiceRequestNodeInfo();
+            if(!FT02_MeshServiceRequestNodeInfo())
+                setNotice("Mesh刷新失败，网络未就绪");
             return FT02_COMM_INPUT_REDRAW;
         }
+    }
+    else if(g_mode == COMM_DIAG && cmd == 'm')
+    {
+        g_mode = COMM_NODES;
+        g_nodeAction = NODE_ACTION_BROWSE;
+        g_nodesReturnMode = COMM_DIAG;
+        g_nodeSelection = 0u;
+        setSyncNotice("正在读取Mesh节点列表...");
+        if(!FT02_MeshServiceRequestNodeInfo())
+            setNotice("节点刷新失败，显示现有列表");
+        return FT02_COMM_INPUT_REDRAW;
     }
     else if(g_mode == COMM_DIAG && cmd == 'r')
     {
         setSyncNotice("正在请求Mesh NodeInfo刷新...");
-        (void)FT02_MeshServiceRequestNodeInfo();
+        if(!FT02_MeshServiceRequestNodeInfo())
+            setNotice("Mesh刷新失败，网络未就绪");
         return FT02_COMM_INPUT_REDRAW;
     }
 
@@ -1296,15 +1900,90 @@ bool FT02_CommunicationUIIsCompose()
     return g_mode == COMM_COMPOSE;
 }
 
+bool FT02_CommunicationUIIsVoice()
+{
+    return g_mode == COMM_VOICE;
+}
+
 bool FT02_CommunicationUIIsNodes()
 {
     return g_mode == COMM_NODES;
+}
+
+bool FT02_CommunicationUIVoiceStartPending()
+{
+    return g_mode == COMM_VOICE && g_voiceStartPending;
+}
+
+bool FT02_CommunicationUIStartPendingVoiceCapture()
+{
+    if(g_mode != COMM_VOICE || !g_voiceStartPending) return false;
+    const uint32_t destination = g_voicePendingDestination;
+    g_voiceStartPending = false;
+    g_voiceCaptureCueReady = false;
+    const bool started = FT02_MeshVoiceAudioStartRecording(destination);
+    if(!started) setNotice(FT02_MeshVoiceAudioStatusCurrent().message);
+    return started;
+}
+
+void FT02_CommunicationUIVoiceCaptureCueReady()
+{
+    if(g_mode != COMM_VOICE || !FT02_MeshVoiceAudioIsRecording()) return;
+    g_voiceCaptureCueReady = true;
+}
+
+bool FT02_CommunicationUIServiceVoiceTransport()
+{
+    if(g_mode != COMM_VOICE || g_voiceStartPending || FT02_MeshVoiceAudioBusy()) return false;
+
+    const bool busy = FT02_MeshVoiceTransportBusy();
+    if(busy)
+    {
+        g_voiceTxObserved = true;
+        // Direct voice may remain in the transport ACK hold after every RF frame
+        // has already left the radio. Do not strand the user on the voice page
+        // for that hold window; delivery status remains visible in message history.
+        if(g_voicePendingDestination != FT02_MESH_BROADCAST_NODE &&
+           FT02_MeshVoiceTransportAwaitingAck())
+        {
+            g_mode = g_voiceReturnMode;
+            g_messageIndex = 0u;
+            setNotice("私聊语音已发出，等待对端确认");
+            g_voiceTxObserved = false;
+            g_voiceCaptureCueReady = false;
+            return true;
+        }
+        return false;
+    }
+
+    // Broadcast transport clears its TX session only after BEGIN/CHUNK/END have
+    // all returned success from the blocking RadioLib transmit path. Observe the
+    // busy phase first so an idle voice page cannot be mistaken for completion.
+    if(g_voiceTxObserved)
+    {
+        const bool broadcast = g_voicePendingDestination == FT02_MESH_BROADCAST_NODE;
+        const FT02MeshVoiceTxOutcome outcome = FT02_MeshVoiceTransportLastOutcome();
+        g_mode = g_voiceReturnMode;
+        g_messageIndex = 0u;
+        if(outcome == FT02_MESH_VOICE_TX_FAILED)
+            setNotice(broadcast ? "广播语音发送失败，已停止重试" : "私聊语音发送失败，已停止重试");
+        else if(outcome == FT02_MESH_VOICE_TX_CANCELED)
+            setNotice("语音发送已取消");
+        else
+            setNotice(broadcast ? "广播语音已发送" : "私聊语音发送完成");
+        g_voiceTxObserved = false;
+        g_voiceCaptureCueReady = false;
+        return true;
+    }
+    return false;
 }
 
 void FT02_CommunicationUIOnNodeListUpdated(uint16_t count)
 {
     if(g_mode != COMM_NODES) return;
     if(count == 0) setNotice("当前尚未学习到其他Mesh节点");
+    else if(g_nodeAction == NODE_ACTION_PRIVATE_TEXT) setNotice("请选择私聊文字收件人");
+    else if(g_nodeAction == NODE_ACTION_PRIVATE_VOICE) setNotice("请选择私聊语音收件人");
     else
     {
         char notice[64];
@@ -1329,4 +2008,32 @@ void FT02_CommunicationUIOnSyncReady()
         g_notice[0] = '\0';
         g_syncNoticeActive = false;
     }
+}
+
+bool FT02_CommunicationUIServiceSyncNotice(uint32_t nowMs)
+{
+    if(!g_syncNoticeActive) return false;
+
+    // Manual R refresh keeps MeshService READY the whole time, so the legacy
+    // false->true readiness transition cannot close this notice. A real
+    // NODEINFO_APP response is the authoritative success signal.
+    if(FT02_MeshServiceNodeInfoRxCount() != g_syncNoticeNodeInfoRxBaseline)
+    {
+        FT02_LOGI_PRINTLN("[COMM-SYNC] NodeInfo refresh response received");
+        FT02_CommunicationUIOnSyncReady();
+        return true;
+    }
+
+    if(g_syncNoticeStartedMs != 0u &&
+       static_cast<uint32_t>(nowMs - g_syncNoticeStartedMs) >= MESH_SYNC_NOTICE_TIMEOUT_MS)
+    {
+        if(FT02_MeshServiceReady())
+            setNotice("Mesh刷新完成，暂无新身份响应");
+        else
+            setNotice("Mesh同步超时，请稍后重试");
+        FT02_LOGW_PRINTLN("[COMM-SYNC] refresh timeout closeout");
+        return true;
+    }
+
+    return false;
 }

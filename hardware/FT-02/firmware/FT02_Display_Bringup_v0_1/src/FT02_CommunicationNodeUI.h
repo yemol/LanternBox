@@ -7,6 +7,7 @@ enum FT02CommunicationInputResult : uint8_t
 {
     FT02_COMM_INPUT_NONE = 0,
     FT02_COMM_INPUT_REDRAW,
+    FT02_COMM_INPUT_REDRAW_THEN_START_VOICE,
     FT02_COMM_INPUT_BROWSE_PARTIAL,
     FT02_COMM_INPUT_EXIT_HOME,
     FT02_COMM_INPUT_OPEN_HELP
@@ -16,11 +17,20 @@ void FT02_CommunicationUIOpen();
 void FT02_DrawCommunicationNodeScreen(FT02Display& display);
 void FT02_DrawCommunicationBrowsePartial(FT02Display& display);
 void FT02_DrawCommunicationComposePartial(FT02Display& display);
+void FT02_DrawCommunicationVoiceTimerPartial(FT02Display& display);
+void FT02_DrawCommunicationVoiceStartCuePartial(FT02Display& display);
+void FT02_DrawCommunicationVoiceTxPartial(FT02Display& display);
 FT02CommunicationInputResult FT02_CommunicationUIHandleInput(const FT02InputEvent& event);
 bool FT02_CommunicationUITakeDeferredRedraw(uint32_t nowMs);
 bool FT02_CommunicationUIIsInbox();
 bool FT02_CommunicationUIIsCompose();
+bool FT02_CommunicationUIIsVoice();
 bool FT02_CommunicationUIIsNodes();
+bool FT02_CommunicationUIStartPendingVoiceCapture();
+void FT02_CommunicationUIVoiceCaptureCueReady();
+bool FT02_CommunicationUIVoiceStartPending();
+bool FT02_CommunicationUIServiceVoiceTransport();
 void FT02_CommunicationUIOnNodeListUpdated(uint16_t count);
 void FT02_CommunicationUIOnSyncStarted(const char* noticeText);
 void FT02_CommunicationUIOnSyncReady();
+bool FT02_CommunicationUIServiceSyncNotice(uint32_t nowMs);

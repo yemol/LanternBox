@@ -34,6 +34,9 @@
 #include "FT02_LoRaNodeRuntime.h"
 #include "FT02_LoRaHwProbe.h"
 #include "FT02_MeshService.h"
+#include "FT02_MeshVoiceAudio.h"
+#include "FT02_MeshVoiceProtocol.h"
+#include "FT02_MeshVoiceTransport.h"
 #include "FT02_LoRaCommunicationRuntime.h"
 #include "FT02_CommunicationNodeUI.h"
 #include "FT02_CompassCalibrationUI.h"
@@ -63,6 +66,13 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+
+// Mesh Voice / Codec2 runs from the Arduino loop task. Arduino-ESP32 defaults
+// that task to 8 KiB; Codec2 has a much deeper floating-point call chain than
+// the rest of FT-02. The proven ESP32 Codec2 examples use roughly a 30 KB codec task stack.
+// Keep 30 KiB here because offline Mesh encoding currently runs on loopTask;
+// 16 KiB was insufficient on the real FT-02 during Codec2 compression.
+SET_LOOP_TASK_STACK_SIZE(30 * 1024);
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -158,6 +168,7 @@ static bool g_ft02CommunicationReadyPresented = false;
 static bool g_ft02LastLoRaLinkState = false;
 static bool g_ft02LastLoRaReadyState = false;
 static uint32_t g_ft02LastCommunicationRevision = 0;
+static uint32_t g_ft02LastMeshVoiceAudioRevision = 0;
 static uint32_t g_ft02LastCompassCalRevision = 0;
 static uint32_t g_ft02LastCompassCalRedrawMs = 0;
 static uint32_t g_ft02LastLoRaNodeRevision = 0;
@@ -174,6 +185,9 @@ static uint32_t g_ft02AudioLogLastGeneration = 0;
 static bool g_ft02AudioCommandReleaseRequired = false;
 static uint32_t g_ft02AudioRecordRestartGuardUntilMs = 0;
 static uint32_t g_ft02AudioLastShownRecordBucket = 0xFFFFFFFFu;
+static uint32_t g_ft02MeshVoiceLastShownRecordBucket = 0xFFFFFFFFu;
+static uint8_t g_ft02MeshVoiceLastShownTxBucket = 0xFFu;
+static uint32_t g_ft02MeshVoiceLastTxRevision = 0u;
 static uint8_t g_ft02AudioLastShownVolume = 0xFFu;
 static bool g_ft02AudioVolumeRefreshPending = false;
 static uint32_t g_ft02AudioVolumeRefreshDueMs = 0;
@@ -781,6 +795,7 @@ static void FT02_ReturnHomePage()
     // unusual navigation path can carry ES8311/I2S back to the home page.
     FT02_AudioLogRelease(FT02_AUDIO_OWNER_JOURNAL);
     FT02_AudioLogRelease(FT02_AUDIO_OWNER_SYSTEM_TEST);
+    FT02_AudioLogRelease(FT02_AUDIO_OWNER_MESH_VOICE);
 
     FT02_RefreshStorageStatusCache();
     g_ft02PageState = FT02_PAGE_HOME;
@@ -1427,10 +1442,9 @@ static void FT02_OpenDeviceStatusPage()
 {
     if(g_ft02PageState == FT02_PAGE_DEVICE_STATUS) return;
     g_ft02PageState = FT02_PAGE_DEVICE_STATUS;
-    // System self-test must validate the real codec/I2S path, so it owns audio
-    // for the lifetime of this page.
-    (void)FT02_AudioLogAcquire(FT02_AUDIO_OWNER_SYSTEM_TEST);
-    FT02_SystemSelfTestRun();
+    // Device Status is read-only by default. R1.5 keeps it observational: no SD write,
+    // force battery I2C, touch map files, or wake audio. ENTER runs active self-test.
+    FT02_SystemSelfTestRefreshPassive();
 
     FT02_RedrawCurrentPage();
 }
@@ -1470,8 +1484,9 @@ static bool FT02_HandleDeviceStatusInput(const FT02InputEvent& event)
     if(event.key == FT02_KEY_SELECT)
     {
         const uint8_t page = FT02_SystemSelfTestPage();
-        (void)FT02_AudioLogAcquire(FT02_AUDIO_OWNER_SYSTEM_TEST);
+        const bool audioTestOwned = FT02_AudioLogAcquire(FT02_AUDIO_OWNER_SYSTEM_TEST);
         FT02_SystemSelfTestRun();
+        if(audioTestOwned) FT02_AudioLogRelease(FT02_AUDIO_OWNER_SYSTEM_TEST);
         FT02_SystemSelfTestSetPage(page);
         FT02_RedrawCurrentPage();
         return true;
@@ -1548,8 +1563,10 @@ static void FT02_OpenCommunicationPage()
     FT02_CommunicationUIOpen();
     g_ft02CommunicationReadyPresented = FT02_LoRaNodeRuntimeReady();
     g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
+    g_ft02LastMeshVoiceAudioRevision = FT02_MeshVoiceAudioStatusCurrent().revision;
     g_ft02LastLoRaNodeRevision = FT02_LoRaNodeRuntimeRevision();
     g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
+    g_ft02MeshVoiceLastShownRecordBucket = 0xFFFFFFFFu;
 
     FT02_RedrawCurrentPage();
 }
@@ -1574,17 +1591,53 @@ static bool FT02_HandleCommunicationInput(
         FT02_DrawCommunicationBrowsePartial(display);
         return true;
     }
+    if(result == FT02_COMM_INPUT_REDRAW_THEN_START_VOICE)
+    {
+        // Match the proven AudioLog cue-before-capture sequence. The blocking
+        // full e-paper refresh must finish while ES8311/I2S is still idle; only
+        // then may Mesh voice acquire the audio owner and start ADC capture.
+        FT02_RedrawCurrentPage();
+        delay(40);
+        FT02_LOGI_PRINTLN("[MESH-VOICE-AUDIO] cue committed; starting capture");
+        const bool started = FT02_CommunicationUIStartPendingVoiceCapture();
+        g_ft02LastMeshVoiceAudioRevision = FT02_MeshVoiceAudioStatusCurrent().revision;
+        if(started)
+        {
+            g_ft02MeshVoiceLastShownRecordBucket = 0u;
+            FT02_LOGI_PRINTLN("[MESH-VOICE-AUDIO] capture started; filling preroll");
+            // Capture first, then show the go cue. The encoder later discards this
+            // preroll, so the first spoken syllable after the cue is never lost.
+            delay(FT02_VOICE_CAPTURE_PREROLL_MS);
+            FT02_CommunicationUIVoiceCaptureCueReady();
+            FT02_DrawCommunicationVoiceStartCuePartial(display);
+            // The partial refresh is blocking. Record t=0 only after it returns,
+            // i.e. when the user can actually see START SPEAKING.
+            FT02_MeshVoiceAudioMarkUserStartCue();
+            FT02_LOGI_PRINTLN("[MESH-VOICE-AUDIO] START SPEAKING cue visible; 15s window armed");
+        }
+        else
+        {
+            FT02_LOGW("[WARN][MESH-VOICE-AUDIO] capture start failed: %s\n",
+                      FT02_MeshVoiceAudioStatusCurrent().message);
+            FT02_RedrawCurrentPage();
+            g_ft02LastMeshVoiceAudioRevision = FT02_MeshVoiceAudioStatusCurrent().revision;
+        }
+        return true;
+    }
     if(result == FT02_COMM_INPUT_REDRAW)
     {
-        // Manual R resync resets NodeRuntime immediately. Mirror the real
-        // readiness state here so the later READY transition is observable.
-        // v2.70a left this flag true, which made the communication page remain
-        // visually stuck at “同步中” even after NodeDB had recovered to READY.
+        // Mirror current readiness after an explicit communication action.
+        // Manual NodeInfo refresh itself does not toggle Mesh/NodeRuntime ready;
+        // its finite completion is handled by FT02_CommunicationUIServiceSyncNotice().
         g_ft02CommunicationReadyPresented = FT02_LoRaNodeRuntimeReady();
         g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
         g_ft02LastLoRaNodeRevision = FT02_LoRaNodeRuntimeRevision();
         g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
         FT02_RedrawCurrentPage();
+        // Mesh voice playback uses the same pop-safe start fence as AudioLog:
+        // commit the e-paper frame first, then allow I2S playback to advance.
+        FT02_MeshVoiceAudioReleasePlaybackStart();
+        g_ft02LastMeshVoiceAudioRevision = FT02_MeshVoiceAudioStatusCurrent().revision;
         return true;
     }
     return result != FT02_COMM_INPUT_NONE;
@@ -2697,22 +2750,49 @@ static void FT02_EnterSleepMode(bool automatic)
     if(g_ft02PageState == FT02_PAGE_MAP) FT02_CancelPendingMapRefresh();
 
     // Sleep owns the low-power policy. Active audio work is blocked above;
-    // idle page owners can be released safely and are reacquired on wake.
+    // release idle owners and require the codec/I2S closure to actually pass.
     FT02_AudioLogRelease(FT02_AUDIO_OWNER_JOURNAL);
     FT02_AudioLogRelease(FT02_AUDIO_OWNER_SYSTEM_TEST);
+    FT02_AudioLogRelease(FT02_AUDIO_OWNER_MESH_VOICE);
+    const bool audioSleepOk = FT02_AudioLogPrepareForSleep();
+    if(!audioSleepOk)
+    {
+        FT02_LOGW_PRINTLN("[WARN][SLEEP] closure failed module=audio");
+        return;
+    }
 
     const FT02WifiOwner wifiOwner = FT02_WifiManagerOwner();
     if(wifiOwner != FT02_WIFI_OWNER_NONE) FT02_WifiManagerShutdown(wifiOwner);
 
     // Indoor/outdoor policy is remembered, but sleep always forces GNSS off.
-    // Sleep Power A3 also closes the Core UART transport through that policy.
-    FT02_ModeEnterSleep();
+    // Do not continue into CPU light sleep when the receiver did not accept PMREQ.
+    const bool gnssSleepOk = FT02_ModeEnterSleep();
+    if(!gnssSleepOk)
+    {
+        FT02_LOGW_PRINTLN("[WARN][SLEEP] closure failed module=gnss");
+        FT02_ModeWake();
+        return;
+    }
 
     const bool compassSleepOk = FT02_CompassCoreSleepEnter();
-    FT02_MeshServiceSleepEnter();
-    FT02_LOGD("[SLEEP-PWR] enter compass=%d mesh_available=%d gnss_runtime=%d\n",
-                  compassSleepOk ? 1 : 0,
-                  FT02_MeshServiceSleepAvailable() ? 1 : 0,
+    if(!compassSleepOk)
+    {
+        FT02_LOGW_PRINTLN("[WARN][SLEEP] closure failed module=compass");
+        FT02_ModeWake();
+        return;
+    }
+
+    const bool meshSleepOk = FT02_MeshServiceSleepEnter();
+    if(!meshSleepOk)
+    {
+        FT02_LOGW_PRINTLN("[WARN][SLEEP] closure failed module=mesh");
+        (void)FT02_CompassCoreSleepExit();
+        FT02_ModeWake();
+        return;
+    }
+
+    FT02_LOGD("[SLEEP-PWR] closure audio=%d compass=%d mesh=%d gnss_runtime=%d\n",
+                  audioSleepOk ? 1 : 0, compassSleepOk ? 1 : 0, meshSleepOk ? 1 : 0,
                   FT02_GnssRuntimeEnabled() ? 1 : 0);
 
     // Commit one static sleep frame, then remove the e-paper power rail. The
@@ -2738,10 +2818,17 @@ static void FT02_EnterSleepMode(bool automatic)
     FT02_EpdInteractiveReset();
     FT02_InputSetLowNoiseMode(true);
 
-    // A5B diagnostics use only the already-cached sample here. Do not insert
-    // a new shared-I2C battery transaction into the sleep-entry path.
+    // Energy telemetry uses only the already-cached MAX17048 sample here. Do
+    // not insert a new shared-I2C transaction into the sleep-entry path. A
+    // stale cache is rejected instead of being turned into a false boundary.
     g_ft02PreSleepBattery = FT02_BatterySnapshotCurrent();
-    g_ft02PreSleepBatteryValid = g_ft02PreSleepBattery.valid;
+    const uint32_t batteryBoundaryNowMs = millis();
+    const uint32_t batteryBoundaryAgeMs =
+        batteryBoundaryNowMs - g_ft02PreSleepBattery.lastReadMs;
+    g_ft02PreSleepBatteryValid =
+        g_ft02PreSleepBattery.valid &&
+        g_ft02PreSleepBattery.lastReadMs != 0u &&
+        batteryBoundaryAgeMs <= 15000u;
     FT02_BatteryMonitorSleepPause();
     FT02_LOGD_PRINTLN("[BAT] sleep pause");
 
@@ -2846,11 +2933,10 @@ static void FT02_WakeFromSleep()
         static_cast<double>(batteryWake.voltage),
         static_cast<unsigned>(batteryWake.consecutiveFailures));
 
-    FT02_SleepTruthSetBatteryWake(
-        batteryWake.valid,
-        batteryWake.percent,
-        batteryWake.voltage
-    );
+    // Do not use the immediate wake-resume sample as the energy endpoint. It
+    // verifies shared-I2C/MAX17048 recovery only. Three later samples from the
+    // existing 10 s background poll are median-filtered by SleepDiagnostics.
+    FT02_SleepTruthBeginWakeBatterySettle();
     g_ft02PreSleepBatteryValid = false;
     g_ft02SleepNoInitTrace.phase = 82u; // CPU_INPUT_BATTERY_RESTORED
 
@@ -2887,8 +2973,9 @@ static void FT02_WakeFromSleep()
     }
     else if(g_ft02PageState == FT02_PAGE_DEVICE_STATUS)
     {
-        (void)FT02_AudioLogAcquire(FT02_AUDIO_OWNER_SYSTEM_TEST);
-        FT02_SystemSelfTestRun();
+        // Keep Device Status observational after wake. Do not perturb the
+        // hardware state being measured by the just-finished sleep session.
+        FT02_SystemSelfTestRefreshPassive();
     }
     else if(g_ft02PageState == FT02_PAGE_WIRELESS_WIFI)
     {
@@ -3134,6 +3221,7 @@ void setup()
     FT02_LocationRecorderBegin();
     FT02_LocationLogBegin();
     FT02_AudioLogBegin();
+    FT02_MeshVoiceAudioBegin();
     g_ft02AudioLogLastGeneration = FT02_AudioLogStatusCurrent().generation;
     FT02_FieldManualBegin(true);
 
@@ -3309,6 +3397,7 @@ void loop()
     FT02_LocationRecorderPoll();
     const bool locationLogLoadCompleted = FT02_LocationLogPollReload();
     FT02_AudioLogPoll();
+    FT02_MeshVoiceAudioPoll();
 
     if(locationLogLoadCompleted && g_ft02PageState == FT02_PAGE_LOCATION_LOG_LIST)
     {
@@ -3363,12 +3452,40 @@ void loop()
             communicationPageRedrawn = true;
         }
         else if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
+                FT02_CommunicationUIServiceVoiceTransport())
+        {
+            g_ft02LastMeshVoiceAudioRevision = FT02_MeshVoiceAudioStatusCurrent().revision;
+            g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
+            g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
+            FT02_RedrawCurrentPage();
+            communicationPageRedrawn = true;
+        }
+        else if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
+                FT02_MeshVoiceAudioStatusCurrent().revision != g_ft02LastMeshVoiceAudioRevision)
+        {
+            g_ft02LastMeshVoiceAudioRevision = FT02_MeshVoiceAudioStatusCurrent().revision;
+            g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
+            g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
+            FT02_RedrawCurrentPage();
+            FT02_MeshVoiceAudioReleasePlaybackStart();
+            communicationPageRedrawn = true;
+        }
+        else if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
                 FT02_CommunicationUIIsNodes() &&
                 FT02_LoRaNodeRuntimeRevision() != g_ft02LastLoRaNodeRevision)
         {
             // MeshService learns names and public keys asynchronously from NODEINFO_APP.
             g_ft02LastLoRaNodeRevision = FT02_LoRaNodeRuntimeRevision();
             FT02_CommunicationUIOnNodeListUpdated(static_cast<uint16_t>(FT02_LoRaNodeRuntimeNodeCount()));
+            g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
+            g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
+            FT02_RedrawCurrentPage();
+            communicationPageRedrawn = true;
+        }
+        else if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
+                !FT02_CommunicationUIIsCompose() &&
+                FT02_CommunicationUIServiceSyncNotice(millis()))
+        {
             g_ft02LastCommunicationRevision = FT02_LoRaCommunicationRevision();
             g_ft02LastLoRaUnread = FT02_LoRaCommunicationUnreadCount();
             FT02_RedrawCurrentPage();
@@ -3445,10 +3562,49 @@ void loop()
         }
     }
 
+    // Mesh voice RF progress uses real successful CHUNK count. Refresh only
+    // when the 10% bucket changes so e-paper does not stall every LoRa packet.
+    if(g_ft02PageState == FT02_PAGE_COMMUNICATION &&
+       FT02_CommunicationUIIsVoice() && FT02_MeshVoiceTransportBusy())
+    {
+        const uint32_t txRevision = FT02_MeshVoiceTransportRevision();
+        const uint8_t pct = FT02_MeshVoiceTransportProgressPercent();
+        const uint8_t bucket = static_cast<uint8_t>(pct / 10u);
+        if(txRevision != g_ft02MeshVoiceLastTxRevision && bucket != g_ft02MeshVoiceLastShownTxBucket)
+        {
+            g_ft02MeshVoiceLastTxRevision = txRevision;
+            g_ft02MeshVoiceLastShownTxBucket = bucket;
+            FT02_DrawCommunicationVoiceTxPartial(display);
+        }
+    }
+    else
+    {
+        g_ft02MeshVoiceLastShownTxBucket = 0xFFu;
+        g_ft02MeshVoiceLastTxRevision = FT02_MeshVoiceTransportRevision();
+    }
+
     // Real elapsed clock:
     // refreshes only when the displayed minute changes.
     // The date is refreshed in the same local window and rolls over at midnight.
     const FT02AudioLogStatus audioStatus = FT02_AudioLogStatusCurrent();
+    if(g_ft02PageState == FT02_PAGE_COMMUNICATION && FT02_MeshVoiceAudioIsRecording())
+    {
+        const FT02MeshVoiceAudioStatus voiceStatus = FT02_MeshVoiceAudioStatusCurrent();
+        if(voiceStatus.state == FT02_MESH_VOICE_AUDIO_RECORDING)
+        {
+            const uint32_t bucket = voiceStatus.elapsedMs / 5000u;
+            if(bucket != g_ft02MeshVoiceLastShownRecordBucket)
+            {
+                g_ft02MeshVoiceLastShownRecordBucket = bucket;
+                FT02_DrawCommunicationVoiceTimerPartial(display);
+            }
+        }
+    }
+    else
+    {
+        g_ft02MeshVoiceLastShownRecordBucket = 0xFFFFFFFFu;
+    }
+
     if(g_ft02PageState == FT02_PAGE_AUDIO_LOG_LIST)
     {
         const FT02AudioLogState audioState = FT02_AudioLogStateCurrent();
@@ -3527,7 +3683,15 @@ void loop()
     if(!FT02_AudioLogIsBusy())
     {
         if(FT02_BatteryMonitorPoll())
+        {
+            const FT02BatterySnapshot batterySample = FT02_BatterySnapshotCurrent();
+            FT02_SleepTruthFeedWakeBatterySample(
+                batterySample.valid,
+                batterySample.percent,
+                batterySample.voltage
+            );
             FT02_SyncBatteryStatusBar(true);
+        }
     }
 
     if(!FT02_AudioLogIsBusy())

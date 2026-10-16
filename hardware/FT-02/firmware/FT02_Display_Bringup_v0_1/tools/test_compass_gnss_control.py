@@ -9,7 +9,7 @@ def req(cond, msg):
         raise SystemExit('FAIL: ' + msg)
 
 version=(ROOT/'VERSION.txt').read_text(encoding='utf-8').strip()
-req(version == 'v2.84-sleep-power-a5c-stable-r1.1', 'VERSION is not v2.84-sleep-power-a5c-stable-r1.1')
+req(version == 'v2.84-sleep-power-a5c-stable-r1.5', 'VERSION is not v2.84-sleep-power-a5c-stable-r1.5')
 
 page=(ROOT/'src/FT02_PageState.h').read_text(encoding='utf-8')
 home=(ROOT/'src/FT02_HomeCards.cpp').read_text(encoding='utf-8')

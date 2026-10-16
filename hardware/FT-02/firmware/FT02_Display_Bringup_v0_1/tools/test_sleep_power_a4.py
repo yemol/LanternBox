@@ -8,7 +8,7 @@ main=t('src/main.cpp'); inp=t('src/FT02_InputManager.cpp'); inph=t('src/FT02_Inp
 mesh=t('src/FT02_MeshRadioBackend.cpp'); comp=t('src/FT02_CompassCore.cpp'); gnss=t('src/FT02_Gnss.cpp')
 build=t('src/FT02_BuildInfo.h'); version=t('VERSION.txt').strip()
 
-req(version=='v2.84-sleep-power-a5c-stable-r1.1','version')
+req(version=='v2.84-sleep-power-a5c-stable-r1.5','version')
 req('SLEEP POWER A5C' in build and 'SCL2PHASE RC3 EXT1' in build,'build identity')
 req('FT02_KB_RAM_PROTOCOL = 0x17' in inp and 'FT02_KB_RAM_SIZE = 8' in inp,'A1.8 RAMREG baseline changed')
 req('FT02_KB_STATUS_SLEEP_ARMED = 0x02' in inp,'sleep armed status missing')

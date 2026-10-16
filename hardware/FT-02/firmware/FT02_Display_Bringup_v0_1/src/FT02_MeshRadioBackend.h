@@ -26,6 +26,6 @@ int16_t FT02_MeshRadioBackendLastState();
 
 // Compatibility hooks used only by the separately gated LoRa light-sleep trial.
 bool FT02_MeshRadioBackendSleepAvailable();
-void FT02_MeshRadioBackendSleepEnter();
+bool FT02_MeshRadioBackendSleepEnter();
 void FT02_MeshRadioBackendSleepService();
 void FT02_MeshRadioBackendSleepExit();

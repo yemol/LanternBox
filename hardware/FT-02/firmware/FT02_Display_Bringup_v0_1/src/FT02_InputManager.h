@@ -14,6 +14,7 @@ enum FT02InputKey
     FT02_KEY_SELECT,
     FT02_KEY_BACK,
     FT02_KEY_HELP,
+    FT02_KEY_IME_TOGGLE,
 
     FT02_KEY_CHAR
 };

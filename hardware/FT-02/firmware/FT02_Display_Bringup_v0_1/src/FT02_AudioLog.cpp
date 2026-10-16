@@ -6,6 +6,7 @@
 #include <driver/i2s_std.h>
 #include <esp_err.h>
 #include <esp_heap_caps.h>
+#include <esp_attr.h>
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
@@ -104,6 +105,8 @@ struct FT02AudioRecordingSession
 {
     FILE* file = nullptr;
     bool success = true;
+    bool transient = false;
+    uint32_t maxDurationMs = 0u;
     bool stopArmed = false;
     uint32_t startMs = 0;
     uint32_t stopDeadlineMs = 0;
@@ -143,7 +146,90 @@ struct FT02AudioRecordingSession
 };
 
 FT02AudioRecordingSession g_ft02AudioRecording;
+FT02AudioTransientResult g_ft02AudioTransientResult = {};
+portMUX_TYPE g_ft02AudioTransientMux = portMUX_INITIALIZER_UNLOCKED;
 uint32_t g_ft02AudioRestartNotBeforeMs = 0;
+
+// Mesh voice stop/finalize crash breadcrumbs. RTC_NOINIT survives a software
+// reset, so the next boot can report the last completed phase even when the
+// panic/reset path could not flush UART output.
+constexpr uint32_t FT02_AUDIO_STOP_TRACE_MAGIC = 0x41535450u; // "ASTP"
+enum FT02AudioStopTracePhase : uint32_t
+{
+    FT02_AUDIO_STOP_TRACE_NONE = 0u,
+    FT02_AUDIO_STOP_TRACE_REQUESTED = 1u,
+    FT02_AUDIO_STOP_TRACE_FINISH_ENTER = 2u,
+    FT02_AUDIO_STOP_TRACE_FLUSH_BEGIN = 3u,
+    FT02_AUDIO_STOP_TRACE_FLUSH_WRITE = 4u,
+    FT02_AUDIO_STOP_TRACE_FLUSH_DONE = 5u,
+    FT02_AUDIO_STOP_TRACE_WAV_SYNC_BEGIN = 6u,
+    FT02_AUDIO_STOP_TRACE_WAV_SYNC_DONE = 7u,
+    FT02_AUDIO_STOP_TRACE_FILE_CLOSE = 8u,
+    FT02_AUDIO_STOP_TRACE_FILE_SIZE = 9u,
+    FT02_AUDIO_STOP_TRACE_IDLE_PUBLISHED = 10u,
+    FT02_AUDIO_STOP_TRACE_RESULT_PUBLISHED = 11u
+};
+
+RTC_NOINIT_ATTR uint32_t g_ft02AudioStopTraceMagic;
+RTC_NOINIT_ATTR uint32_t g_ft02AudioStopTracePhase;
+RTC_NOINIT_ATTR uint32_t g_ft02AudioStopTraceDetail;
+
+static const char* FT02_AudioStopTraceText(uint32_t phase)
+{
+    switch(phase)
+    {
+        case FT02_AUDIO_STOP_TRACE_REQUESTED: return "STOP_REQUESTED";
+        case FT02_AUDIO_STOP_TRACE_FINISH_ENTER: return "FINISH_ENTER";
+        case FT02_AUDIO_STOP_TRACE_FLUSH_BEGIN: return "SD_FLUSH_BEGIN";
+        case FT02_AUDIO_STOP_TRACE_FLUSH_WRITE: return "SD_FLUSH_WRITE";
+        case FT02_AUDIO_STOP_TRACE_FLUSH_DONE: return "SD_FLUSH_DONE";
+        case FT02_AUDIO_STOP_TRACE_WAV_SYNC_BEGIN: return "WAV_SYNC_BEGIN";
+        case FT02_AUDIO_STOP_TRACE_WAV_SYNC_DONE: return "WAV_SYNC_DONE";
+        case FT02_AUDIO_STOP_TRACE_FILE_CLOSE: return "FILE_CLOSE";
+        case FT02_AUDIO_STOP_TRACE_FILE_SIZE: return "FILE_SIZE";
+        case FT02_AUDIO_STOP_TRACE_IDLE_PUBLISHED: return "IDLE_PUBLISHED";
+        case FT02_AUDIO_STOP_TRACE_RESULT_PUBLISHED: return "RESULT_PUBLISHED";
+        default: return "UNKNOWN";
+    }
+}
+
+static inline void FT02_AudioStopTrace(uint32_t phase, uint32_t detail = 0u)
+{
+    g_ft02AudioStopTraceMagic = FT02_AUDIO_STOP_TRACE_MAGIC;
+    g_ft02AudioStopTracePhase = phase;
+    g_ft02AudioStopTraceDetail = detail;
+}
+
+static inline void FT02_AudioStopTraceClear()
+{
+    g_ft02AudioStopTraceMagic = FT02_AUDIO_STOP_TRACE_MAGIC;
+    g_ft02AudioStopTracePhase = FT02_AUDIO_STOP_TRACE_NONE;
+    g_ft02AudioStopTraceDetail = 0u;
+}
+
+static void FT02_AudioClearTransientResultLocked()
+{
+    portENTER_CRITICAL(&g_ft02AudioTransientMux);
+    memset(&g_ft02AudioTransientResult, 0, sizeof(g_ft02AudioTransientResult));
+    portEXIT_CRITICAL(&g_ft02AudioTransientMux);
+}
+
+static void FT02_AudioPublishTransientResult(bool success, uint32_t durationMs, const char* filePath)
+{
+    FT02AudioTransientResult completed{};
+    completed.success = success;
+    completed.durationMs = durationMs;
+    snprintf(completed.filePath, sizeof(completed.filePath), "%s", filePath != nullptr ? filePath : "");
+    completed.ready = true;
+
+    // Cross-core handoff: ready must never become visible before every field
+    // and every audio/session cleanup step is complete. Both producer and
+    // consumer use the same spinlock so the main loop cannot tear down I2S
+    // while the audio task is still finalizing the transient recording.
+    portENTER_CRITICAL(&g_ft02AudioTransientMux);
+    g_ft02AudioTransientResult = completed;
+    portEXIT_CRITICAL(&g_ft02AudioTransientMux);
+}
 uint32_t g_ft02AudioNextSequence = FT02_AUDIO_SEQUENCE_MIN;
 uint32_t g_ft02AudioMaxSequenceSeen = 0;
 
@@ -321,7 +407,10 @@ static bool FT02_AudioWriteWavHeader(FILE* file, uint32_t dataBytes)
 static bool FT02_AudioFinalizeWav(FILE* file, uint32_t dataBytes)
 {
     if(file == nullptr || fseek(file, 0, SEEK_SET) != 0) return false;
-    return FT02_AudioWriteWavHeader(file, dataBytes) && FT02_StorageSyncFile(file);
+    FT02_AudioStopTrace(FT02_AUDIO_STOP_TRACE_WAV_SYNC_BEGIN, dataBytes);
+    const bool ok = FT02_AudioWriteWavHeader(file, dataBytes) && FT02_StorageSyncFile(file);
+    if(ok) FT02_AudioStopTrace(FT02_AUDIO_STOP_TRACE_WAV_SYNC_DONE, dataBytes);
+    return ok;
 }
 
 static bool FT02_AudioReadWavInfo(FILE* file, FT02WavInfo& info)
@@ -1284,24 +1373,49 @@ static bool FT02_AudioFlushRecordingStage()
     }
     if(g_ft02AudioRecording.file == nullptr) return false;
 
-    const size_t bytes = g_ft02AudioRecording.psramStageUsed;
-    const size_t written = fwrite(
-        g_ft02AudioRecording.psramStage,
-        1,
-        bytes,
-        g_ft02AudioRecording.file
-    );
-    if(written != bytes)
+    // Never hand a multi-hundred-KB / multi-MB PSRAM range to a single
+    // fwrite(). On ESP32-S3 + SDSPI this can monopolize the storage/interrupt
+    // path long enough to trip a watchdog, and DMA/bounce-buffer handling is
+    // more predictable when the source is internal DRAM. Reuse the existing
+    // mono block as a small internal bounce buffer and yield between chunks.
+    const size_t totalBytes = g_ft02AudioRecording.psramStageUsed;
+    const size_t chunkCapacity = sizeof(g_ft02AudioMonoBuffer);
+    size_t offset = 0u;
+    FT02_AudioStopTrace(FT02_AUDIO_STOP_TRACE_FLUSH_BEGIN,
+                        static_cast<uint32_t>(totalBytes));
+
+    while(offset < totalBytes)
     {
-        FT02_LOGE(
-            "[ERROR][AUDIO-REC] SD stage flush failed written=%u expected=%u\n",
-            static_cast<unsigned>(written),
-            static_cast<unsigned>(bytes)
-        );
-        return false;
+        const size_t chunk = min(chunkCapacity, totalBytes - offset);
+        memcpy(g_ft02AudioMonoBuffer,
+               g_ft02AudioRecording.psramStage + offset,
+               chunk);
+        FT02_AudioStopTrace(FT02_AUDIO_STOP_TRACE_FLUSH_WRITE,
+                            static_cast<uint32_t>(offset));
+        const size_t written = fwrite(g_ft02AudioMonoBuffer,
+                                      1,
+                                      chunk,
+                                      g_ft02AudioRecording.file);
+        if(written != chunk)
+        {
+            FT02_LOGE(
+                "[ERROR][AUDIO-REC] SD stage flush failed offset=%u written=%u expected=%u\n",
+                static_cast<unsigned>(offset),
+                static_cast<unsigned>(written),
+                static_cast<unsigned>(chunk)
+            );
+            return false;
+        }
+        offset += written;
+
+        // Let the idle/tick machinery run between SDSPI transactions. The
+        // final fsync still happens once in FT02_AudioFinalizeWav().
+        vTaskDelay(1);
     }
 
     g_ft02AudioRecording.psramStageUsed = 0;
+    FT02_AudioStopTrace(FT02_AUDIO_STOP_TRACE_FLUSH_DONE,
+                        static_cast<uint32_t>(totalBytes));
     return true;
 }
 
@@ -1382,6 +1496,8 @@ static bool FT02_AudioAppendRecordingSamples(const int16_t* samples, size_t fram
 
 static void FT02_AudioFinishRecording(const char* reason)
 {
+    if(g_ft02AudioRecording.transient)
+        FT02_AudioStopTrace(FT02_AUDIO_STOP_TRACE_FINISH_ENTER, g_ft02AudioRecording.dataBytes);
     if(g_ft02AudioState != FT02_AUDIO_LOG_RECORDING &&
        g_ft02AudioState != FT02_AUDIO_LOG_POST_ROLL)
     {
@@ -1404,6 +1520,8 @@ static void FT02_AudioFinishRecording(const char* reason)
                 g_ft02AudioRecording.dataBytes
             );
         }
+        if(g_ft02AudioRecording.transient)
+            FT02_AudioStopTrace(FT02_AUDIO_STOP_TRACE_FILE_CLOSE, g_ft02AudioRecording.dataBytes);
         fclose(g_ft02AudioRecording.file);
         g_ft02AudioRecording.file = nullptr;
     }
@@ -1416,9 +1534,11 @@ static void FT02_AudioFinishRecording(const char* reason)
     uint64_t fileSize = 0;
     if(success)
     {
+        if(g_ft02AudioRecording.transient)
+            FT02_AudioStopTrace(FT02_AUDIO_STOP_TRACE_FILE_SIZE, g_ft02AudioRecording.dataBytes);
         success = FT02_StorageFileSize(g_ft02AudioRecording.filePath, fileSize);
     }
-    if(success)
+    if(success && !g_ft02AudioRecording.transient)
     {
         success = FT02_AudioAppendIndexRecord(g_ft02AudioRecording, durationMs, fileSize);
     }
@@ -1447,6 +1567,37 @@ static void FT02_AudioFinishRecording(const char* reason)
 
     // Complete all file/index work before publishing IDLE to the UI task.
     FT02_AudioQueueSilence(50);
+    if(g_ft02AudioRecording.transient)
+    {
+        char completedPath[sizeof(g_ft02AudioRecording.filePath)] = {};
+        snprintf(completedPath, sizeof(completedPath), "%s", g_ft02AudioRecording.filePath);
+
+        // Finish every producer-side cleanup operation BEFORE publishing the
+        // completion result to the main loop. The old ordering set ready=true
+        // first, allowing MeshVoiceAudioPoll() on the other core to clear the
+        // result and shut down I2S/ES8311 while this audio task was still
+        // resetting its session/state.
+        g_ft02AudioRecording = FT02AudioRecordingSession{};
+        g_ft02AudioRestartNotBeforeMs = millis() + 500u;
+        FT02_AudioSetMessage(success ? "Mesh语音录音已保存" : "Mesh语音录音失败", success);
+        g_ft02AudioState = FT02_AUDIO_LOG_IDLE;
+        FT02_AudioChanged();
+        FT02_AudioStopTrace(FT02_AUDIO_STOP_TRACE_IDLE_PUBLISHED, durationMs);
+
+        FT02_LOGI("[AUDIO-MESH] finalize complete success=%u duration=%lu path=%s\n",
+                  success ? 1u : 0u,
+                  static_cast<unsigned long>(durationMs),
+                  completedPath);
+        Serial.flush();
+
+        // Atomic publication is deliberately the final operation in this
+        // branch. After this point the service task touches no recording
+        // session or audio hardware before returning to its scheduler loop.
+        FT02_AudioPublishTransientResult(success, durationMs, completedPath);
+        FT02_AudioStopTrace(FT02_AUDIO_STOP_TRACE_RESULT_PUBLISHED, durationMs);
+        return;
+    }
+
     g_ft02AudioRecording = FT02AudioRecordingSession{};
     (void)FT02_AudioLogReload();
     g_ft02AudioRestartNotBeforeMs = millis() + 2500u;
@@ -1464,8 +1615,12 @@ static void FT02_AudioServiceRecording()
     }
 
     const uint32_t beforeRead = millis();
+    const uint32_t recordingLimitMs = g_ft02AudioRecording.transient
+        ? g_ft02AudioRecording.maxDurationMs
+        : FT02_AUDIO_MAX_SECONDS * 1000u;
     if(g_ft02AudioState == FT02_AUDIO_LOG_RECORDING &&
-       beforeRead - g_ft02AudioRecording.startMs >= FT02_AUDIO_MAX_SECONDS * 1000u)
+       recordingLimitMs > 0u &&
+       beforeRead - g_ft02AudioRecording.startMs >= recordingLimitMs)
     {
         g_ft02AudioState = FT02_AUDIO_LOG_POST_ROLL;
         g_ft02AudioRecording.stopDeadlineMs = beforeRead + FT02_AUDIO_POST_ROLL_MS;
@@ -2145,13 +2300,13 @@ static bool FT02_AudioHardwareStart()
     return true;
 }
 
-static void FT02_AudioHardwareStop()
+static bool FT02_AudioHardwareStop()
 {
     if(!g_ft02AudioHardwareActive)
     {
         g_ft02AudioStatus.codecReady = false;
         g_ft02AudioStatus.i2sReady = false;
-        return;
+        return true;
     }
 
     // A normal page transition must never tear down active recording/playback.
@@ -2160,7 +2315,7 @@ static void FT02_AudioHardwareStop()
     if(g_ft02AudioState != FT02_AUDIO_LOG_IDLE)
     {
         FT02_LOGD_PRINTLN("[AUDIO-PWR] release deferred: audio busy");
-        return;
+        return false;
     }
 
     FT02_AudioSuspendServiceTask();
@@ -2169,18 +2324,26 @@ static void FT02_AudioHardwareStop()
     // Codec suspend needs BCLK present, so shut the codec down before deleting
     // the I2S channels.
     const bool codecSuspendOk = g_ft02AudioCodec.suspend();
-    FT02_AudioDeinitI2s();
+    if(!codecSuspendOk)
+    {
+        // Keep BCLK/I2S alive so the next idle poll or sleep preflight can
+        // retry codec suspend. Never report the hardware as OFF when the
+        // codec did not acknowledge its low-power sequence.
+        (void)FT02_AudioEnsureServiceTask();
+        FT02_AudioSetMessage("语音硬件休眠失败", false);
+        FT02_AudioChanged();
+        FT02_LOGW("[WARN][AUDIO-PWR] suspend failed owners=0x%02X\n", g_ft02AudioOwnerMask);
+        return false;
+    }
 
+    FT02_AudioDeinitI2s();
     g_ft02AudioStatus.codecReady = false;
     g_ft02AudioStatus.i2sReady = false;
     g_ft02AudioHardwareActive = false;
-    FT02_AudioSetMessage(
-        codecSuspendOk ? "语音硬件休眠" : "语音硬件休眠（Codec返回异常）",
-        codecSuspendOk
-    );
+    FT02_AudioSetMessage("语音硬件休眠", true);
     FT02_AudioChanged();
-    FT02_LOGD("[AUDIO-PWR] OFF owners=0x%02X codec=%s\n",
-                  g_ft02AudioOwnerMask, codecSuspendOk ? "OK" : "WARN");
+    FT02_LOGD("[AUDIO-PWR] OFF owners=0x%02X codec=OK\n", g_ft02AudioOwnerMask);
+    return true;
 }
 
 static void FT02_AudioServiceTask(void*)
@@ -2190,7 +2353,11 @@ static void FT02_AudioServiceTask(void*)
         const FT02AudioLogState state = g_ft02AudioState;
         if(state == FT02_AUDIO_LOG_IDLE)
         {
-            FT02_AudioDrainIdleRx();
+            // Mesh voice acquires hardware immediately before transient
+            // capture. While that owner is arming, leave RX untouched so the
+            // foreground pre-start drain is the only I2S reader.
+            if((g_ft02AudioOwnerMask & FT02_AUDIO_OWNER_MESH_VOICE) == 0u)
+                FT02_AudioDrainIdleRx();
         }
         else if(state == FT02_AUDIO_LOG_RECORDING || state == FT02_AUDIO_LOG_POST_ROLL)
         {
@@ -2207,9 +2374,20 @@ static void FT02_AudioServiceTask(void*)
 
 bool FT02_AudioLogBegin()
 {
+    if(g_ft02AudioStopTraceMagic == FT02_AUDIO_STOP_TRACE_MAGIC &&
+       g_ft02AudioStopTracePhase != FT02_AUDIO_STOP_TRACE_NONE)
+    {
+        Serial.printf("[AUDIO-RESET-TRACE] previous phase=%lu(%s) detail=%lu\n",
+                      static_cast<unsigned long>(g_ft02AudioStopTracePhase),
+                      FT02_AudioStopTraceText(g_ft02AudioStopTracePhase),
+                      static_cast<unsigned long>(g_ft02AudioStopTraceDetail));
+        Serial.flush();
+    }
+    FT02_AudioStopTraceClear();
     memset(&g_ft02AudioStatus, 0, sizeof(g_ft02AudioStatus));
     memset(g_ft02AudioEntries, 0, sizeof(g_ft02AudioEntries));
     g_ft02AudioState = FT02_AUDIO_LOG_IDLE;
+    FT02_AudioClearTransientResultLocked();
     g_ft02AudioOwnerMask = FT02_AUDIO_OWNER_NONE;
     g_ft02AudioHardwareActive = false;
     g_ft02AudioStatus.started = true;
@@ -2255,8 +2433,14 @@ void FT02_AudioLogRelease(FT02AudioOwner owner)
     g_ft02AudioOwnerMask = static_cast<uint8_t>(g_ft02AudioOwnerMask & ~ownerBit);
     if(g_ft02AudioOwnerMask == FT02_AUDIO_OWNER_NONE)
     {
-        FT02_AudioHardwareStop();
+        (void)FT02_AudioHardwareStop();
     }
+}
+
+bool FT02_AudioLogPrepareForSleep()
+{
+    if(FT02_AudioLogIsBusy() || g_ft02AudioOwnerMask != FT02_AUDIO_OWNER_NONE) return false;
+    return FT02_AudioHardwareStop();
 }
 
 bool FT02_AudioLogHardwareActive()
@@ -2279,7 +2463,7 @@ void FT02_AudioLogPoll()
        g_ft02AudioOwnerMask == FT02_AUDIO_OWNER_NONE &&
        g_ft02AudioState == FT02_AUDIO_LOG_IDLE)
     {
-        FT02_AudioHardwareStop();
+        (void)FT02_AudioHardwareStop();
     }
 }
 
@@ -2566,6 +2750,145 @@ bool FT02_AudioLogStartRecording(const FT02GnssSnapshot& gnss)
     return true;
 }
 
+bool FT02_AudioLogStartTransientRecording(const char* filePath, uint32_t maxDurationMs)
+{
+    if(g_ft02AudioState != FT02_AUDIO_LOG_IDLE || filePath == nullptr || filePath[0] != '/') return false;
+    if(maxDurationMs < FT02_AUDIO_MIN_STOP_MS) maxDurationMs = FT02_AUDIO_MIN_STOP_MS;
+    if(maxDurationMs > 30000u) maxDurationMs = 30000u;
+    if(!g_ft02AudioStatus.codecReady || !g_ft02AudioStatus.i2sReady || !g_ft02AudioStatus.storageReady)
+    {
+        FT02_AudioSetMessage("无法录音：音频或SD未就绪", false);
+        FT02_AudioChanged();
+        return false;
+    }
+    if(!FT02_AudioTimeReached(millis(), g_ft02AudioRestartNotBeforeMs))
+    {
+        FT02_AudioSetMessage("请稍候再开始录音", false);
+        return false;
+    }
+
+    // Mesh voice acquires the audio hardware immediately before capture. The
+    // audio service task recognizes the MESH_VOICE owner and deliberately
+    // skips IDLE RX draining until this function publishes RECORDING. That
+    // keeps i2s_channel_read() single-owner without suspending a task that may
+    // be inside the I2S driver.
+    FT02_LOGI("[AUDIO-MESH] arm begin path=%s heap=%u psram=%u\n",
+              filePath,
+              static_cast<unsigned>(heap_caps_get_free_size(MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT)),
+              static_cast<unsigned>(heap_caps_get_free_size(MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT)));
+
+    FT02_AudioPaSet(false);
+    if(!g_ft02AudioCodec.setDacMuted(true))
+    {
+        FT02_AudioSetMessage("无法静音扬声器，录音未开始", false);
+        FT02_AudioChanged();
+        return false;
+    }
+
+    g_ft02AudioRecording = FT02AudioRecordingSession{};
+    g_ft02AudioRecording.transient = true;
+    g_ft02AudioRecording.maxDurationMs = maxDurationMs;
+    snprintf(g_ft02AudioRecording.filePath, sizeof(g_ft02AudioRecording.filePath), "%s", filePath);
+    const char* slash = strrchr(filePath, '/');
+    snprintf(g_ft02AudioRecording.filename, sizeof(g_ft02AudioRecording.filename), "%s",
+             slash != nullptr ? slash + 1 : filePath);
+    snprintf(g_ft02AudioRecording.audioId, sizeof(g_ft02AudioRecording.audioId), "mesh_voice");
+    snprintf(g_ft02AudioRecording.sessionId, sizeof(g_ft02AudioRecording.sessionId), "mesh_voice");
+    FT02_AudioClearTransientResultLocked();
+
+    FILE* file = FT02_StorageOpenWriteFile(g_ft02AudioRecording.filePath, true);
+    if(file == nullptr || !FT02_AudioWriteWavHeader(file, 0))
+    {
+        if(file != nullptr) fclose(file);
+        FT02_AudioSetMessage("无法创建Mesh语音WAV", false);
+        FT02_AudioChanged();
+        return false;
+    }
+    g_ft02AudioRecording.file = file;
+    (void)FT02_AudioAllocateRecordingStage();
+    FT02_LOGI("[AUDIO-MESH] stage bytes=%u free_psram=%u\n",
+              static_cast<unsigned>(g_ft02AudioRecording.psramStageCapacity),
+              static_cast<unsigned>(heap_caps_get_free_size(MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT)));
+
+    delay(FT02_AUDIO_RECORD_START_SETTLE_MS);
+    for(uint8_t batch = 0; batch < 8; ++batch)
+    {
+        size_t discarded = 0;
+        const esp_err_t error = i2s_channel_read(g_ft02AudioRx,
+                                                  g_ft02AudioStereoBuffer,
+                                                  sizeof(g_ft02AudioStereoBuffer),
+                                                  &discarded, 0);
+        if(error == ESP_ERR_TIMEOUT || discarded == 0) break;
+        if(error != ESP_OK)
+        {
+            FT02_AudioLogEspError("[AUDIO-MESH] pre-start drain", error);
+            break;
+        }
+    }
+
+    g_ft02AudioRecording.startMs = millis();
+    g_ft02AudioRecording.stopArmed = true;
+    g_ft02AudioState = FT02_AUDIO_LOG_RECORDING;
+    g_ft02AudioStatus.recording = true;
+    g_ft02AudioStatus.stopRequested = false;
+    g_ft02AudioStatus.recordingElapsedMs = 0u;
+    g_ft02AudioStatus.recordingSeconds = 0u;
+    g_ft02AudioStatus.activeSequence = 0u;
+    snprintf(g_ft02AudioStatus.activeAudioId, sizeof(g_ft02AudioStatus.activeAudioId), "mesh_voice");
+    snprintf(g_ft02AudioStatus.activeFilePath, sizeof(g_ft02AudioStatus.activeFilePath), "%s", filePath);
+    FT02_AudioSetMessage("Mesh语音录音中", true);
+    FT02_AudioChanged();
+
+    // The service task was already running, but its IDLE path was gated by the
+    // MESH_VOICE owner. Once RECORDING is visible it becomes the sole RX reader.
+    FT02_LOGI("[AUDIO-MESH] capture active task_hwm=%u\n",
+              g_ft02AudioServiceTaskHandle != nullptr
+                  ? static_cast<unsigned>(uxTaskGetStackHighWaterMark(g_ft02AudioServiceTaskHandle))
+                  : 0u);
+    return true;
+}
+
+bool FT02_AudioLogRequestTransientStop()
+{
+    if(g_ft02AudioState != FT02_AUDIO_LOG_RECORDING || !g_ft02AudioRecording.transient) return false;
+    const uint32_t now = millis();
+    const uint32_t elapsedMs = now - g_ft02AudioRecording.startMs;
+    if(elapsedMs < FT02_AUDIO_MIN_STOP_MS) return false;
+
+    FT02_AudioStopTrace(FT02_AUDIO_STOP_TRACE_REQUESTED,
+                        static_cast<uint32_t>(g_ft02AudioRecording.psramStageUsed));
+    FT02_LOGI("[AUDIO-MESH] stop requested elapsed=%lu stage=%u data=%lu\n",
+              static_cast<unsigned long>(elapsedMs),
+              static_cast<unsigned>(g_ft02AudioRecording.psramStageUsed),
+              static_cast<unsigned long>(g_ft02AudioRecording.dataBytes));
+    Serial.flush();
+
+    g_ft02AudioState = FT02_AUDIO_LOG_POST_ROLL;
+    g_ft02AudioRecording.stopDeadlineMs = now + FT02_AUDIO_POST_ROLL_MS;
+    g_ft02AudioStatus.stopRequested = true;
+    FT02_AudioSetMessage("正在保存Mesh语音", true);
+    return true;
+}
+
+FT02AudioTransientResult FT02_AudioLogTransientResultCurrent()
+{
+    FT02AudioTransientResult snapshot{};
+    portENTER_CRITICAL(&g_ft02AudioTransientMux);
+    snapshot = g_ft02AudioTransientResult;
+    portEXIT_CRITICAL(&g_ft02AudioTransientMux);
+    return snapshot;
+}
+
+void FT02_AudioLogClearTransientResult()
+{
+    FT02_AudioClearTransientResultLocked();
+}
+
+void FT02_AudioLogClearTransientStopTrace()
+{
+    FT02_AudioStopTraceClear();
+}
+
 bool FT02_AudioLogRequestStop()
 {
     if(g_ft02AudioState != FT02_AUDIO_LOG_RECORDING) return false;
@@ -2585,11 +2908,10 @@ bool FT02_AudioLogRequestStop()
     return true;
 }
 
-bool FT02_AudioLogPlayNewest(uint16_t newestIndex)
+static bool FT02_AudioPlayEntry(const FT02AudioLogEntry& entry)
 {
     if(g_ft02AudioState != FT02_AUDIO_LOG_IDLE) return false;
-    FT02AudioLogEntry entry;
-    if(!FT02_AudioLogGetNewest(newestIndex, entry) || !entry.fileExists)
+    if(!entry.valid || !entry.fileExists || entry.filePath[0] == '\0')
     {
         FT02_AudioSetMessage("录音文件不存在", false);
         return false;
@@ -2804,6 +3126,31 @@ bool FT02_AudioLogPlayNewest(uint16_t newestIndex)
 
     return true;
 }
+
+bool FT02_AudioLogPlayNewest(uint16_t newestIndex)
+{
+    FT02AudioLogEntry entry{};
+    if(!FT02_AudioLogGetNewest(newestIndex, entry))
+    {
+        FT02_AudioSetMessage("录音文件不存在", false);
+        return false;
+    }
+    return FT02_AudioPlayEntry(entry);
+}
+
+bool FT02_AudioLogPlayWavPath(const char* filePath, const char* audioId)
+{
+    if(filePath == nullptr || filePath[0] == '\0') return false;
+    FT02AudioLogEntry entry{};
+    entry.valid = true;
+    entry.fileExists = FT02_StorageFileExists(filePath);
+    entry.sequence = 0u;
+    snprintf(entry.filePath, sizeof(entry.filePath), "%s", filePath);
+    snprintf(entry.audioId, sizeof(entry.audioId), "%s",
+             (audioId != nullptr && audioId[0] != '\0') ? audioId : "mesh_voice");
+    return FT02_AudioPlayEntry(entry);
+}
+
 
 void FT02_AudioLogReleasePlaybackStart()
 {

@@ -135,6 +135,111 @@ static void FT02_DrawTextPackInternal(
 }
 
 
+static int FT02_ScaleSignedMetric(int value, uint8_t num, uint8_t den)
+{
+    if(den == 0u) return value;
+    if(value >= 0) return (value * static_cast<int>(num)) / static_cast<int>(den);
+    return -(((-value) * static_cast<int>(num) + static_cast<int>(den) - 1) / static_cast<int>(den));
+}
+
+static int FT02_ScaleAdvance(int value, uint8_t num, uint8_t den)
+{
+    if(den == 0u) return value;
+    return (value * static_cast<int>(num) + static_cast<int>(den) - 1) / static_cast<int>(den);
+}
+
+static void FT02_DrawGlyphRecordScaled(
+    FT02Display& display,
+    const uint8_t* rec,
+    int cursorX,
+    int baselineY,
+    uint16_t ink,
+    uint8_t scaleNum,
+    uint8_t scaleDen
+)
+{
+    if(scaleNum == 0u || scaleDen == 0u) return;
+
+    const uint8_t width = rec[0];
+    const uint8_t height = rec[1];
+    const uint8_t bytesPerRow = rec[2];
+    const int8_t xOffset = static_cast<int8_t>(rec[3]);
+    const int8_t yOffset = static_cast<int8_t>(rec[4]);
+    const uint8_t* bitmap = rec + 8;
+
+    const int drawX = cursorX + FT02_ScaleSignedMetric(xOffset, scaleNum, scaleDen);
+    const int drawY = baselineY + FT02_ScaleSignedMetric(yOffset, scaleNum, scaleDen);
+
+    for(int row = 0; row < height; ++row)
+    {
+        const int y0 = (row * static_cast<int>(scaleNum)) / static_cast<int>(scaleDen);
+        int y1 = ((row + 1) * static_cast<int>(scaleNum)) / static_cast<int>(scaleDen);
+        if(y1 <= y0) y1 = y0 + 1;
+
+        for(int col = 0; col < width; ++col)
+        {
+            const int byteIndex = row * bytesPerRow + col / 8;
+            const uint8_t mask = 0x80u >> (col % 8);
+            if((bitmap[byteIndex] & mask) == 0u) continue;
+
+            const int x0 = (col * static_cast<int>(scaleNum)) / static_cast<int>(scaleDen);
+            int x1 = ((col + 1) * static_cast<int>(scaleNum)) / static_cast<int>(scaleDen);
+            if(x1 <= x0) x1 = x0 + 1;
+
+            for(int py = y0; py < y1; ++py)
+            {
+                for(int px = x0; px < x1; ++px)
+                {
+                    display.drawPixel(drawX + px, drawY + py, ink);
+                }
+            }
+        }
+    }
+}
+
+static void FT02_DrawTextPackScaledInternal(
+    FT02Display& display,
+    const FT02FontPack& font,
+    const char* text,
+    int x,
+    int baselineY,
+    uint16_t ink,
+    uint8_t scaleNum,
+    uint8_t scaleDen
+)
+{
+    if(text == nullptr || scaleNum == 0u || scaleDen == 0u) return;
+    int cursorX = x;
+
+    while(*text)
+    {
+        int used = 0;
+        const uint32_t cp = FT02_ReadCodepoint(text, &used);
+        const uint8_t* rec = FT02_FindGlyphRecord(font, cp);
+
+        if(rec)
+        {
+            FT02_DrawGlyphRecordScaled(display, rec, cursorX, baselineY, ink, scaleNum, scaleDen);
+            cursorX += FT02_ScaleAdvance(rec[5] + FT02_GLYPH_TRACKING, scaleNum, scaleDen);
+        }
+        else
+        {
+            // Missing-glyph fallback is deliberately scaled too, so layout remains
+            // predictable if an unexpected symbol slips through.
+            const int w = FT02_ScaleAdvance(15, scaleNum, scaleDen);
+            const int h = FT02_ScaleAdvance(18, scaleNum, scaleDen);
+            const int top = baselineY - h;
+            display.drawRect(cursorX + 1, top, w, h, ink);
+            display.drawLine(cursorX + 3, top + 3, cursorX + w - 3, top + h - 3, ink);
+            display.drawLine(cursorX + w - 3, top + 3, cursorX + 3, top + h - 3, ink);
+            cursorX += FT02_ScaleAdvance(FT02_MISSING_GLYPH_ADVANCE, scaleNum, scaleDen);
+        }
+
+        text += used;
+    }
+}
+
+
 static bool FT02_PointInsideClip(
     int x,
     int y,
@@ -358,6 +463,27 @@ int FT02_TextWidthPack(
     return width;
 }
 
+int FT02_TextWidthPackScaled(
+    const FT02FontPack& font,
+    const char* text,
+    uint8_t scaleNum,
+    uint8_t scaleDen
+)
+{
+    if(text == nullptr || scaleNum == 0u || scaleDen == 0u) return 0;
+    int width = 0;
+    while(*text)
+    {
+        int used = 0;
+        const uint32_t cp = FT02_ReadCodepoint(text, &used);
+        const uint8_t* rec = FT02_FindGlyphRecord(font, cp);
+        const int advance = rec ? rec[5] + FT02_GLYPH_TRACKING : FT02_MISSING_GLYPH_ADVANCE;
+        width += FT02_ScaleAdvance(advance, scaleNum, scaleDen);
+        text += used;
+    }
+    return width;
+}
+
 int FT02_CodepointAdvancePack(
     const FT02FontPack& font,
     uint32_t codepoint
@@ -428,6 +554,28 @@ void FT02_DrawTextPack(
 )
 {
     FT02_DrawTextPackInternal(display, font, text, x, baselineY, GxEPD_BLACK, false);
+}
+
+void FT02_DrawTextPackScaled(
+    FT02Display& display,
+    const FT02FontPack& font,
+    const char* text,
+    int x,
+    int baselineY,
+    uint8_t scaleNum,
+    uint8_t scaleDen
+)
+{
+    FT02_DrawTextPackScaledInternal(
+        display,
+        font,
+        text,
+        x,
+        baselineY,
+        GxEPD_BLACK,
+        scaleNum,
+        scaleDen
+    );
 }
 
 void FT02_DrawTextPackBold(

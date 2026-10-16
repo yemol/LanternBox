@@ -24,7 +24,17 @@ enum FT02AudioOwner : uint8_t
 {
     FT02_AUDIO_OWNER_NONE = 0,
     FT02_AUDIO_OWNER_JOURNAL = 1u << 0,
-    FT02_AUDIO_OWNER_SYSTEM_TEST = 1u << 1
+    FT02_AUDIO_OWNER_SYSTEM_TEST = 1u << 1,
+    FT02_AUDIO_OWNER_MESH_VOICE = 1u << 2
+};
+
+
+struct FT02AudioTransientResult
+{
+    bool ready;
+    bool success;
+    uint32_t durationMs;
+    char filePath[112];
 };
 
 struct FT02AudioLogEntry
@@ -80,6 +90,8 @@ bool FT02_AudioLogBegin();
 // journal data model and leaves ES8311/I2S asleep.
 bool FT02_AudioLogAcquire(FT02AudioOwner owner);
 void FT02_AudioLogRelease(FT02AudioOwner owner);
+// Close idle audio hardware and verify the codec reached suspend before system sleep.
+bool FT02_AudioLogPrepareForSleep();
 bool FT02_AudioLogHardwareActive();
 uint8_t FT02_AudioLogOwnerMask();
 void FT02_AudioLogPoll();
@@ -96,8 +108,16 @@ bool FT02_AudioLogGetNewest(uint16_t newestIndex, FT02AudioLogEntry& output);
 uint16_t FT02_AudioLogWrapIndex(uint16_t current, uint16_t count, int32_t step);
 
 bool FT02_AudioLogStartRecording(const FT02GnssSnapshot& gnss);
+// Mesh voice uses the exact same ES8311/I2S lifecycle as the journal, but
+// records a temporary WAV without creating a journal/index entry.
+bool FT02_AudioLogStartTransientRecording(const char* filePath, uint32_t maxDurationMs);
+bool FT02_AudioLogRequestTransientStop();
+FT02AudioTransientResult FT02_AudioLogTransientResultCurrent();
+void FT02_AudioLogClearTransientResult();
+void FT02_AudioLogClearTransientStopTrace();
 bool FT02_AudioLogRequestStop();
 bool FT02_AudioLogPlayNewest(uint16_t newestIndex);
+bool FT02_AudioLogPlayWavPath(const char* filePath, const char* audioId = "mesh_voice");
 void FT02_AudioLogReleasePlaybackStart();
 bool FT02_AudioLogRequestPlaybackStop();
 bool FT02_AudioLogAdjustPlaybackVolume(int8_t delta);

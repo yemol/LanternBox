@@ -23,3 +23,14 @@ void FT02_DrawBottomBarWithFont(
     const FT02BottomBarItem items[3],
     const FT02FontPack& font
 );
+
+// Same footer geometry, but lets a page choose asymmetric three-column widths.
+// split1Pct and split2Pct are the first/second divider positions in percent
+// of screen width (for example 25/75 gives 25% / 50% / 25%).
+void FT02_DrawBottomBarWithFontSplits(
+    FT02Display& display,
+    const FT02BottomBarItem items[3],
+    const FT02FontPack& font,
+    int split1Pct,
+    int split2Pct
+);

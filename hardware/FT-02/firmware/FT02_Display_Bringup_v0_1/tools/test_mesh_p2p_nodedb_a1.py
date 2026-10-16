@@ -25,7 +25,7 @@ checks={
  'private_rx': 'header.channel == 0u && header.to == FT02_MESH_LOCAL_NODE' in svc and 'decryptFromPeer' in svc,
  'routing_ack_tx': 'sendRoutingAck(header.from, header.id)' in svc,
  'routing_ack_rx': 'FT02_LoRaCommunicationHostDelivery(data.requestId, header.from, error == 0u)' in svc,
- 'nodeinfo_auto_request': 'g_nodeInfoBootPending = g_pkiReady' in svc and 'sendNodeInfo(true)' in svc,
+ 'nodeinfo_auto_request': 'g_nodeInfoBootPending = true' in svc and 'sendNodeInfo(true)' in svc,
  'pki_unknown_pending': 'rememberPendingPki' in svc and 'retryPendingForPeer' in svc,
  'no_unsupported_peer_pollution': 'opaque reason=unsupported_channel_or_target' in svc,
 }

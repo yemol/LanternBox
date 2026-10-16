@@ -5,13 +5,14 @@ diag=(root/'src/FT02_SleepDiagnostics.cpp').read_text()
 hdr=(root/'src/FT02_SleepDiagnostics.h').read_text()
 selftest=(root/'src/FT02_SystemSelfTest.cpp').read_text()
 ver=(root/'VERSION.txt').read_text().strip()
-assert ver=='v2.84-sleep-power-a5c-stable-r1.1'
+assert ver=='v2.84-sleep-power-a5c-stable-r1.5'
 for sym in (
     'FT02_SleepTruthSessionEnter',
     'FT02_SleepTruthBeforeLightSleep',
     'FT02_SleepTruthAfterLightSleep',
     'FT02_SleepTruthSetBatteryStart',
-    'FT02_SleepTruthSetBatteryWake',
+    'FT02_SleepTruthBeginWakeBatterySettle',
+    'FT02_SleepTruthFeedWakeBatterySample',
     'FT02_SleepTruthMarkKeyboardWake',
     'FT02_SleepTruthMarkUnexpectedReturn',
     'FT02_SleepTruthSnapshotCurrent',
@@ -38,10 +39,11 @@ assert 'addItem("休眠统计"' in selftest
 assert 'truth.lightSleepUs' in selftest
 assert 'truth.awakeUs' in selftest
 # Current battery row stays compact; completed sleep gets its own boundary sample.
-assert '"%.0f%% %.3fV %s"' in selftest
+assert 'SOC估算 %.0f%% %.3fV %s' in selftest
 assert 'void runSleepBattery()' in selftest
 assert 'addItem("休眠耗电"' in selftest
 assert 'batteryStartPercent' in hdr and 'batteryWakePercent' in hdr
 assert 'FT02_SleepTruthSetBatteryStart(' in main
-assert 'FT02_SleepTruthSetBatteryWake(' in main
+assert 'FT02_SleepTruthBeginWakeBatterySettle();' in main
+assert 'FT02_SleepTruthFeedWakeBatterySample(' in main
 print('Sleep Power A5C sleep truth diagnostic: PASS')

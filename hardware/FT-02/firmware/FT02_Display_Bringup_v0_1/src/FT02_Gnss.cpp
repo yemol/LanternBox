@@ -545,15 +545,16 @@ bool FT02_GnssSetRuntimeEnabled(bool enabled)
     g_runtimeEnabled = enabled;
     if(!enabled)
     {
+        bool standbySent = true;
         if(g_serialActive)
         {
-            const bool standbySent = requestSoftwareStandby();
+            standbySent = requestSoftwareStandby();
             closeGnssSerialForStandby();
             FT02_LOGD("[GNSS] OFF transport=closed standby=%s\n", standbySent ? "requested" : "not-confirmed");
         }
         g_hardwareReady = false;
         invalidateLiveData(true);
-        return true;
+        return standbySent;
     }
     if(changed || !g_serialActive)
     {

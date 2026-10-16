@@ -18,8 +18,8 @@ build = text("src/FT02_BuildInfo.h")
 sleep_diag = text("src/FT02_SleepDiagnostics.cpp")
 readme = text("README.md")
 
-req('FT02_FIRMWARE_VERSION "v2.84-sleep-power-a5c-stable-r1.1"' in build, "firmware identity mismatch")
-req('FT02_FIRMWARE_FEATURE_LABEL "SLEEP POWER A5C STABLE R1 / SLEEP HEALTH / SD QUIESCE / GNSS STANDBY / SCL2PHASE RC3 EXT1"' in build, "feature label mismatch")
+req('FT02_FIRMWARE_VERSION "v2.84-sleep-power-a5c-stable-r1.5"' in build, "firmware identity mismatch")
+req('FT02_FIRMWARE_FEATURE_LABEL "SLEEP POWER A5C STABLE R1.5 / SLEEP HEALTH / SD QUIESCE / GNSS STANDBY / SCL2PHASE RC3 EXT1"' in build, "feature label mismatch")
 
 helper = main[main.index("static bool FT02_SleepWaitForKeyboardSignal()"):
               main.index("static bool FT02_SleepBlocked(", main.index("static bool FT02_SleepWaitForKeyboardSignal()"))]

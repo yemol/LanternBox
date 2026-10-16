@@ -43,6 +43,9 @@ struct FT02SleepTruthSnapshot
     uint64_t lightSleepUs = 0;
     uint64_t awakeUs = 0;
     bool batterySampleValid = false;
+    bool batteryStartSampleValid = false;
+    bool batteryWakeSettling = false;
+    uint8_t batteryWakeSampleCount = 0;
     float batteryStartPercent = 0.0f;
     float batteryStartVoltage = 0.0f;
     float batteryWakePercent = 0.0f;
@@ -66,7 +69,8 @@ void FT02_SleepTruthAfterLightSleep(
     uint64_t ext1Status
 );
 void FT02_SleepTruthSetBatteryStart(bool valid, float percent, float voltage);
-void FT02_SleepTruthSetBatteryWake(bool valid, float percent, float voltage);
+void FT02_SleepTruthBeginWakeBatterySettle();
+void FT02_SleepTruthFeedWakeBatterySample(bool valid, float percent, float voltage);
 void FT02_SleepTruthMarkKeyboardWake();
 void FT02_SleepTruthMarkUnexpectedReturn();
 FT02SleepTruthSnapshot FT02_SleepTruthSnapshotCurrent();

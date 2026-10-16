@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
+#include "FT02_MeshMessageStore.h"
 
 constexpr size_t FT02_LORA_MESSAGE_TEXT_BYTES = 192;
 constexpr size_t FT02_LORA_USER_TEXT_MAX_BYTES = 120;
@@ -57,9 +58,16 @@ struct FT02LoRaMessageView
     uint32_t from;
     uint32_t to;
     uint32_t packetId;
+    uint32_t logicalId;
     bool broadcast;
     bool pkiEncrypted;
+    bool outgoing;
+    bool unread;
+    FT02MeshMessageType messageType;
+    FT02MeshMessageStatus historyStatus;
     char text[FT02_LORA_MESSAGE_TEXT_BYTES];
+    uint32_t voiceDurationMs;
+    char voicePath[FT02_MESH_HISTORY_VOICE_PATH_BYTES];
     bool hasRxTime;
     uint32_t rxTimeEpoch;
     bool hasRssi;

@@ -18,29 +18,34 @@ static const int FT02_BOTTOM_ICON_TEXT_GAP = 8;
 
 static int FT02_CellStartX(
     int screenWidth,
-    int index
+    int index,
+    int split1X,
+    int split2X
 )
 {
-    return (screenWidth * index) / 3;
+    if(index <= 0) return 0;
+    if(index == 1) return split1X;
+    return split2X;
 }
 
 static int FT02_CellEndX(
     int screenWidth,
-    int index
+    int index,
+    int split1X,
+    int split2X
 )
 {
-    if(index >= 2)
-    {
-        return screenWidth;
-    }
-
-    return (screenWidth * (index + 1)) / 3;
+    if(index <= 0) return split1X;
+    if(index == 1) return split2X;
+    return screenWidth;
 }
 
 static void FT02_DrawBottomBarInternal(
     FT02Display& display,
     const FT02BottomBarItem items[3],
-    const FT02FontPack& font
+    const FT02FontPack& font,
+    int split1X,
+    int split2X
 )
 {
     int W = display.width();
@@ -56,17 +61,17 @@ static void FT02_DrawBottomBarInternal(
 
     // Cell dividers. Keep the same x positions across pages.
     display.drawLine(
-        W / 3,
+        split1X,
         FT02_BOTTOM_DIVIDER_TOP_Y,
-        W / 3,
+        split1X,
         FT02_BOTTOM_DIVIDER_BOTTOM_Y,
         GxEPD_BLACK
     );
 
     display.drawLine(
-        W * 2 / 3,
+        split2X,
         FT02_BOTTOM_DIVIDER_TOP_Y,
-        W * 2 / 3,
+        split2X,
         FT02_BOTTOM_DIVIDER_BOTTOM_Y,
         GxEPD_BLACK
     );
@@ -75,12 +80,16 @@ static void FT02_DrawBottomBarInternal(
     {
         int cellStart = FT02_CellStartX(
             W,
-            i
+            i,
+            split1X,
+            split2X
         );
 
         int cellEnd = FT02_CellEndX(
             W,
-            i
+            i,
+            split1X,
+            split2X
         );
 
         int cellWidth = cellEnd - cellStart;
@@ -133,10 +142,13 @@ void FT02_DrawBottomBar(
     const FT02BottomBarItem items[3]
 )
 {
+    const int W = display.width();
     FT02_DrawBottomBarInternal(
         display,
         items,
-        ft02_bottom_24m
+        ft02_bottom_24m,
+        W / 3,
+        W * 2 / 3
     );
 }
 
@@ -146,9 +158,34 @@ void FT02_DrawBottomBarWithFont(
     const FT02FontPack& font
 )
 {
+    const int W = display.width();
     FT02_DrawBottomBarInternal(
         display,
         items,
-        font
+        font,
+        W / 3,
+        W * 2 / 3
+    );
+}
+
+void FT02_DrawBottomBarWithFontSplits(
+    FT02Display& display,
+    const FT02BottomBarItem items[3],
+    const FT02FontPack& font,
+    int split1Pct,
+    int split2Pct
+)
+{
+    const int W = display.width();
+    if(split1Pct < 1) split1Pct = 1;
+    if(split2Pct > 99) split2Pct = 99;
+    if(split2Pct <= split1Pct) split2Pct = split1Pct + 1;
+
+    FT02_DrawBottomBarInternal(
+        display,
+        items,
+        font,
+        (W * split1Pct) / 100,
+        (W * split2Pct) / 100
     );
 }

@@ -20,6 +20,14 @@ int main(){
   assert(u.hasPublicKey && memcmp(u.publicKey,key,32)==0);
   assert(u.hasIsUnmessagable && !u.isUnmessagable);
 
+  uint8_t namesOnly[96]{}; size_t namesOnlyLen=0;
+  assert(FT02_MeshBuildUserProto(nullptr,namesOnly,sizeof(namesOnly),namesOnlyLen));
+  FT02MeshUserView noKey{}; assert(FT02_MeshParseUserProto(namesOnly,namesOnlyLen,noKey));
+  assert(strcmp(noKey.id,"!4c423002")==0);
+  assert(strcmp(noKey.longName,"LanternBox FT02")==0);
+  assert(strcmp(noKey.shortName,"FT02")==0);
+  assert(!noKey.hasPublicKey);
+
   // Real FT01-style NodeInfo wire payload fields: id=1, long=2, short=3, key=8.
   uint8_t ft01[128]{}; size_t p=0;
   auto put=[&](uint8_t v){ft01[p++]=v;};
@@ -33,6 +41,11 @@ int main(){
   assert(FT02_MeshBuildDataProto(FT02_MESH_PORT_TEXT_MESSAGE_APP,txt,sizeof(txt),false,0,d,sizeof(d),dl));
   FT02MeshDataView dv{}; assert(FT02_MeshParseDataProto(d,dl,dv));
   assert(dv.portnum==1 && dv.payloadLen==3 && memcmp(dv.payload,txt,3)==0);
+
+  uint8_t voiceWire[16]={1,2,3,4,5}; size_t voiceLen=0;
+  assert(FT02_MeshBuildDataProto(FT02_MESH_PORT_LANTERNBOX_VOICE,voiceWire,5,false,0,d,sizeof(d),voiceLen));
+  FT02MeshDataView vv{}; assert(FT02_MeshParseDataProto(d,voiceLen,vv));
+  assert(vv.portnum==256u && vv.payloadLen==5 && memcmp(vv.payload,voiceWire,5)==0);
 
   const uint8_t ack[]={0x18,0x00}; uint32_t err=123; assert(FT02_MeshParseRoutingError(ack,sizeof(ack),err)); assert(err==0);
   puts("PASS Mesh P2P NodeDB protocol host vectors");

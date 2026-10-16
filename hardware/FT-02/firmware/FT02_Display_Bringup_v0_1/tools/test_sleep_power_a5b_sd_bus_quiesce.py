@@ -4,7 +4,7 @@ main=(root/'src/main.cpp').read_text()
 cpp=(root/'lib/FT02Storage/src/FT02_Storage.cpp').read_text()
 hdr=(root/'lib/FT02Storage/src/FT02_Storage.h').read_text()
 ver=(root/'VERSION.txt').read_text().strip()
-assert ver=='v2.84-sleep-power-a5c-stable-r1.1'
+assert ver=='v2.84-sleep-power-a5c-stable-r1.5'
 for sym in ('FT02_StorageSleepEnter','FT02_StorageSleepExit','FT02_StorageSleepSuspended'):
     assert sym in hdr and sym in cpp
 assert 'g_ft02SdSpi.end();' in cpp

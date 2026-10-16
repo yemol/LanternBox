@@ -45,6 +45,26 @@ int FT02_CodepointAdvancePack(
     uint32_t codepoint
 );
 
+// Draw/measure a font pack with rational nearest-neighbor scaling.
+// Intended for occasional large CJK status text where a full native-size
+// font pack would consume too much flash. Example 4/3 scales 24 px to ~32 px.
+void FT02_DrawTextPackScaled(
+    FT02Display& display,
+    const FT02FontPack& font,
+    const char* text,
+    int x,
+    int baselineY,
+    uint8_t scaleNum,
+    uint8_t scaleDen
+);
+
+int FT02_TextWidthPackScaled(
+    const FT02FontPack& font,
+    const char* text,
+    uint8_t scaleNum,
+    uint8_t scaleDen
+);
+
 void FT02_DrawTextPackClipped(
     FT02Display& display,
     const FT02FontPack& font,

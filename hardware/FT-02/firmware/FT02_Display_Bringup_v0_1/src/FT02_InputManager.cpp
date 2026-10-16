@@ -151,7 +151,8 @@ static bool FT02_IsOneShotKey(FT02InputKey key)
 {
     return key == FT02_KEY_UP || key == FT02_KEY_DOWN ||
            key == FT02_KEY_LEFT || key == FT02_KEY_RIGHT ||
-           key == FT02_KEY_SELECT || key == FT02_KEY_BACK || key == FT02_KEY_HELP;
+           key == FT02_KEY_SELECT || key == FT02_KEY_BACK || key == FT02_KEY_HELP ||
+           key == FT02_KEY_IME_TOGGLE;
 }
 
 static uint8_t FT02_KbRamXor(const uint8_t* data, size_t len)
@@ -476,6 +477,11 @@ static FT02InputKey FT02_MapRawKey(
     if(code == 0xB5) return FT02_KEY_UP;
     if(code == 0xB6) return FT02_KEY_DOWN;
     if(code == 0xB7) return FT02_KEY_RIGHT;
+
+    // CardKB2 IME Direct Toggle A1: long-press SYM emits 0xF1.
+    // Keep this as a dedicated semantic key so text surfaces do not need to
+    // steal a printable ASCII character for Chinese/English switching.
+    if(code == 0xF1) return FT02_KEY_IME_TOGGLE;
 
     // Current FT-02 software navigation layout:
     //
@@ -1113,6 +1119,7 @@ const char* FT02_InputKeyName(
         case FT02_KEY_SELECT: return "SELECT";
         case FT02_KEY_BACK: return "BACK";
         case FT02_KEY_HELP: return "HELP";
+        case FT02_KEY_IME_TOGGLE: return "IME_TOGGLE";
         case FT02_KEY_CHAR: return "CHAR";
         case FT02_KEY_NONE:
         default:
